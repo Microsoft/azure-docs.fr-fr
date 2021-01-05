@@ -3,12 +3,12 @@ title: Modèle pour créer des alertes Resource Health
 description: Créez des alertes par programmation qui vous informent de l’indisponibilité de vos ressources Azure.
 ms.topic: conceptual
 ms.date: 9/4/2018
-ms.openlocfilehash: 60ff5bdf2f4f0dab94c18fd7c751869c1893ad65
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 3859bb0ce2497b1c1f547c3750e53745ef6d6f28
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81759019"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91537427"
 ---
 # <a name="configure-resource-health-alerts-using-resource-manager-templates"></a>Configurer les alertes Resource Health à l’aide de modèles Resource Manager
 
@@ -16,60 +16,67 @@ Cet article vous montre comment créer par programmation des alertes de journal 
 
 Azure Resource Health vous tient informé de l’état d’intégrité actuel et précédent de vos ressources Azure. Les alertes Azure Resource Health peuvent vous signaler quasiment en temps réel tout changement de l’état d’intégrité des ressources. La création par programmation d’alertes Resource Health permet aux utilisateurs de créer et personnaliser leurs alertes en bloc.
 
-> [!NOTE]
-> Les alertes Resource Health sont actuellement en préversion.
-
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 
 ## <a name="prerequisites"></a>Prérequis
 
 Pour suivre les instructions de cette page, vous devez effectuer ces étapes préalables :
 
-1. Vous devez installer le [module Azure PowerShell](https://docs.microsoft.com/powershell/azure/install-Az-ps)
+1. Vous devez installer le [module Azure PowerShell](/powershell/azure/install-az-ps)
 2. [Créer ou réutiliser un groupe d’actions](../azure-monitor/platform/action-groups.md) configuré pour la notification
 
 ## <a name="instructions"></a>Instructions
 1. À l’aide de PowerShell, connectez-vous à Azure avec votre compte et sélectionnez l’abonnement à utiliser
 
-        Login-AzAccount
-        Select-AzSubscription -Subscription <subscriptionId>
+    ```azurepowershell
+    Login-AzAccount
+    Select-AzSubscription -Subscription <subscriptionId>
+    ```
 
     > La commande `Get-AzSubscription` vous permet de répertorier les abonnements auxquels vous avez accès.
 
 2. Recherchez l’ID Azure Resource Manager complet associé à votre groupe d’actions, et notez-le
 
-        (Get-AzActionGroup -ResourceGroupName <resourceGroup> -Name <actionGroup>).Id
+    ```azurepowershell
+    (Get-AzActionGroup -ResourceGroupName <resourceGroup> -Name <actionGroup>).Id
+    ```
 
 3. Créez et enregistrez un modèle Resource Manager pour les alertes Resource Health au format `resourcehealthalert.json` ([voir les détails un peu plus loin](#resource-manager-template-options-for-resource-health-alerts))
 
 4. Créez un déploiement Azure Resource Manager à l’aide de ce modèle
 
-        New-AzResourceGroupDeployment -Name ExampleDeployment -ResourceGroupName <resourceGroup> -TemplateFile <path\to\resourcehealthalert.json>
+    ```azurepowershell
+    New-AzResourceGroupDeployment -Name ExampleDeployment -ResourceGroupName <resourceGroup> -TemplateFile <path\to\resourcehealthalert.json>
+    ```
 
 5. Vous êtes invité à taper le nom de l’alerte ainsi que l’ID du groupe d’actions que vous avez noté précédemment :
 
-        Supply values for the following parameters:
-        (Type !? for Help.)
-        activityLogAlertName: <Alert Name>
-        actionGroupResourceId: /subscriptions/<subscriptionId>/resourceGroups/<resourceGroup>/providers/microsoft.insights/actionGroups/<actionGroup>
+    ```azurepowershell
+    Supply values for the following parameters:
+    (Type !? for Help.)
+    activityLogAlertName: <Alert Name>
+    actionGroupResourceId: /subscriptions/<subscriptionId>/resourceGroups/<resourceGroup>/providers/microsoft.insights/actionGroups/<actionGroup>
+    ```
 
 6. Si le processus s’est déroulé correctement, vous recevez une confirmation dans PowerShell
 
-        DeploymentName          : ExampleDeployment
-        ResourceGroupName       : <resourceGroup>
-        ProvisioningState       : Succeeded
-        Timestamp               : 11/8/2017 2:32:00 AM
-        Mode                    : Incremental
-        TemplateLink            :
-        Parameters              :
-                                Name                     Type       Value
-                                ===============          =========  ==========
-                                activityLogAlertName     String     <Alert Name>
-                                activityLogAlertEnabled  Bool       True
-                                actionGroupResourceId    String     /...
-        
-        Outputs                 :
-        DeploymentDebugLogLevel :
+    ```output
+    DeploymentName          : ExampleDeployment
+    ResourceGroupName       : <resourceGroup>
+    ProvisioningState       : Succeeded
+    Timestamp               : 11/8/2017 2:32:00 AM
+    Mode                    : Incremental
+    TemplateLink            :
+    Parameters              :
+                            Name                     Type       Value
+                            ===============          =========  ==========
+                            activityLogAlertName     String     <Alert Name>
+                            activityLogAlertEnabled  Bool       True
+                            actionGroupResourceId    String     /...
+
+    Outputs                 :
+    DeploymentDebugLogLevel :
+    ```
 
 Notez que si vous voulez automatiser entièrement ce processus, modifiez simplement le modèle Resource Manager afin qu’il ne demande pas d’entrer les valeurs à l’étape 5.
 
@@ -444,5 +451,5 @@ En savoir plus sur Resource Health :
 
 
 Créer des alertes Service Health :
--  [Configurer des alertes pour Service Health](../azure-monitor/platform/alerts-activity-log-service-notifications.md) 
+-  [Configurer des alertes pour Service Health](./alerts-activity-log-service-notifications-portal.md) 
 -  [Schéma d’événement du journal d’activité Azure](../azure-monitor/platform/activity-log-schema.md)

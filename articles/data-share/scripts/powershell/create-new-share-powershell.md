@@ -1,20 +1,17 @@
 ---
-title: 'Script PowerShell : créer un nouveau Azure Data Share | Microsoft Docs'
+title: 'Script PowerShell : Créer une nouvelle instance Azure Data Share'
 description: Ce script PowerShell crée un nouveau partage de données dans un compte Data Share existant.
-services: data-share
 author: joannapea
 ms.service: data-share
-ms.workload: data-services
-ms.tgt_pltfrm: na
 ms.topic: article
 ms.date: 07/07/2019
 ms.author: joanpo
-ms.openlocfilehash: 54d5dc35cf230b62cbe5f8c3cb4a1dc81eccf1e3
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 36c1bdfef2afe4c34796a804784317a5e7fe12ff
+ms.sourcegitcommit: 8d8deb9a406165de5050522681b782fb2917762d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "70307257"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92221347"
 ---
 # <a name="use-powershell-to-create-a-data-share-in-azure"></a>Utiliser PowerShell pour créer un partage de données dans Azure
 
@@ -41,11 +38,11 @@ Ce script utilise les commandes suivantes :
 
 | Commande | Notes |
 |---|---|
-| [New-AzDataShare](/powershell/module/az.datashare/new-azdatashare?view=azps-2.6.0) | Crée un partage de données. |
+| [New-AzDataShare](/powershell/module/az.datashare/new-azdatashare) | Crée un partage de données. |
 |||
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour plus d’informations sur Azure PowerShell, consultez la [documentation Azure PowerShell](https://docs.microsoft.com/powershell/).
+Pour plus d’informations sur Azure PowerShell, consultez la [documentation Azure PowerShell](/powershell/).
 
 Des exemples supplémentaires de scripts PowerShell pour Azure Data Share sont à votre disposition dans [Exemples PowerShell pour Azure Data Share](../../samples-powershell.md).

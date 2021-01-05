@@ -1,26 +1,28 @@
 ---
-title: Vues système
+title: Vues système prises en charge dans SQL Synapse
 description: Liens vers la documentation relative aux vues système prises en charge dans SQL Synapse.
 author: filippopovic
 ms.service: synapse-analytics
+ms.subservice: sql
 ms.topic: reference
 ms.date: 04/15/2020
 ms.author: fipopovi
 ms.reviewer: jrasnick
-ms.openlocfilehash: f58c34a46f4eb1bffe4516f2a6f9f17a799fbfb3
-ms.sourcegitcommit: e0330ef620103256d39ca1426f09dd5bb39cd075
+ms.openlocfilehash: 4e4e6a1607fa42f4be07451f9aa0d8ff923d85d6
+ms.sourcegitcommit: 96918333d87f4029d4d6af7ac44635c833abb3da
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82786595"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93317324"
 ---
 # <a name="system-views-supported-in-synapse-sql"></a>Vues système prises en charge dans SQL Synapse
+
 Liens vers la documentation relative aux instructions T-SQL prises en charge dans SQL Synapse.
 
 > [!NOTE]
-> SQL Synapse à la demande prend en charge les affichages catalogue SQL Server.  
+> Le pool SQL Synapse serverless ne prend en charge que les affichages catalogue SQL Server.  
 
-## <a name="sql-pool-catalog-views"></a>Affichages catalogue du pool SQL
+## <a name="dedicated-sql-pool-and-serverless-sql-pool-catalog-views"></a>Affichages catalogue des pools SQL dédié et SQL serverless
 
 * [sys.pdw_column_distribution_properties](/sql/relational-databases/system-catalog-views/sys-pdw-column-distribution-properties-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest)
 * [sys.pdw_distributions](/sql/relational-databases/system-catalog-views/sys-pdw-distributions-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest)
@@ -38,6 +40,7 @@ Liens vers la documentation relative aux instructions T-SQL prises en charge dan
 * [sys.pdw_nodes_partitions](/sql/relational-databases/system-catalog-views/sys-pdw-nodes-partitions-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest)
 * [sys.pdw_nodes_pdw_physical_databases](/sql/relational-databases/system-catalog-views/sys-pdw-nodes-pdw-physical-databases-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest)
 * [sys.pdw_nodes_tables](/sql/relational-databases/system-catalog-views/sys-pdw-nodes-tables-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest)
+* [sys.pdw_permanent_table_mappings](/sql/relational-databases/system-catalog-views/sys-pdw-permanent-table-mappings-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest)
 * [sys.pdw_replicated_table_cache_state](/sql/relational-databases/system-catalog-views/sys-pdw-replicated-table-cache-state-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest)
 * [sys.pdw_table_distribution_properties](/sql/relational-databases/system-catalog-views/sys-pdw-table-distribution-properties-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest)
 * [sys.pdw_table_mappings](/sql/relational-databases/system-catalog-views/sys-pdw-table-mappings-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest)
@@ -45,7 +48,7 @@ Liens vers la documentation relative aux instructions T-SQL prises en charge dan
 * [sys.workload_management_workload_classifier_details](/sql/relational-databases/system-catalog-views/sys-workload-management-workload-classifier-details-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest) (préversion)
 * [sys.workload_management_workload_classifiers](/sql/relational-databases/system-catalog-views/sys-workload-management-workload-classifiers-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest) (préversion)
 
-## <a name="sql-pool-dynamic-management-views-dmvs"></a>Vues de gestion dynamique de pool SQL (DMV)
+## <a name="dedicated-sql-pool-dynamic-management-views-dmvs"></a>Vues de gestion dynamique (DMV) de pool SQL dédié
 
 * [sys.dm_pdw_dms_cores](/sql/relational-databases/system-dynamic-management-views/sys-dm-pdw-dms-cores-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest)
 * [sys.dm_pdw_dms_external_work](/sql/relational-databases/system-dynamic-management-views/sys-dm-pdw-dms-external-work-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest)
@@ -67,9 +70,9 @@ Liens vers la documentation relative aux instructions T-SQL prises en charge dan
 * [sys.dm_pdw_waits](/sql/relational-databases/system-dynamic-management-views/sys-dm-pdw-waits-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest)
 * [sys.dm_pdw_waits](/sql/relational-databases/system-dynamic-management-views/sys-dm-pdw-waits-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest)
 
-## <a name="sql-server-dmvs-applicable-to-sql-pool"></a>Vues de gestion dynamique (DMV) SQL Server applicables au pool SQL
+## <a name="sql-server-dmvs-applicable-to-dedicated-sql-pool"></a>Vues de gestion dynamique (DMV) de SQL Server applicables au pool SQL dédié
 
-Les vues de gestion dynamique (DMV) suivantes s’appliquent au pool SQL, mais doivent être exécutées en se connectant à la base de données **MASTER**.
+Les vues de gestion dynamique (DMV) suivantes s’appliquent au pool SQL dédié, mais doivent être exécutées à l’aide d’une connexion à la base de données **MASTER**.
 
 * [sys.database_service_objectives](/sql/relational-databases/system-catalog-views/sys-database-service-objectives-azure-sql-database?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest)
 * [sys.dm_operation_status](/sql/relational-databases/system-dynamic-management-views/sys-dm-operation-status-azure-sql-database?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest)
@@ -149,7 +152,7 @@ Les vues de gestion dynamique (DMV) suivantes s’appliquent au pool SQL, mais d
 * [sys.types](/sql/relational-databases/system-catalog-views/sys-types-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest)
 * [sys.views](/sql/relational-databases/system-catalog-views/sys-views-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest)
 
-## <a name="sql-server-dmvs-available-in-sql-pool"></a>Vues de gestion dynamique SQL Server disponibles dans le pool SQL
+## <a name="sql-server-dmvs-available-in-dedicated-sql-pool"></a>Vues de gestion dynamique de SQL Server disponibles dans le pool SQL dédié
 
 Le pool SQL expose de nombreuses vues de gestion dynamique (DMV) SQL Server. Ces vues, lorsqu’elles sont interrogées dans le pool SQL, signalent l’état des bases de données SQL en cours d’exécution sur les distributions.
 
@@ -158,7 +161,7 @@ Le pool SQL et l’entrepôt PDW (Parallel Data Warehouse) d’Analytics Platfor
 > [!NOTE]
 > Pour utiliser ces vues, insérez « pdw_nodes_ » dans le nom, comme indiqué dans le tableau suivant :
 
-| Nom DMV dans le pool SQL | Article Transact-SQL SQL Server|
+| Nom de vue de gestion dynamique dans un pool SQL dédié | Article Transact-SQL SQL Server|
 |:--- |:--- |
 | sys.dm_pdw_nodes_db_column_store_row_group_physical_stats | [sys.dm_db_column_store_row_group_physical_stats](/sql/relational-databases/system-dynamic-management-views/sys-dm-db-column-store-row-group-physical-stats-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest)|
 | sys.dm_pdw_nodes_db_column_store_row_group_operational_stats | [sys.dm_db_column_store_row_group_operational_stats](/sql/relational-databases/system-dynamic-management-views/sys-dm-db-column-store-row-group-operational-stats-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest)|
@@ -220,9 +223,9 @@ Le pool SQL et l’entrepôt PDW (Parallel Data Warehouse) d’Analytics Platfor
 | sys.dm_pdw_nodes_tran_session_transactions |[sys.dm_tran_session_transactions](/sql/relational-databases/system-dynamic-management-views/sys-dm-tran-session-transactions-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest) |
 | sys.dm_pdw_nodes_tran_top_version_generators |[sys.dm_tran_top_version_generators](/sql/relational-databases/system-dynamic-management-views/sys-dm-tran-top-version-generators-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest) |
 
-## <a name="sql-server-2016-polybase-dmvs-available-in-sql-pool"></a>Vues de gestion dynamique PolyBase SQL Server 2016 disponibles dans le pool SQL
+## <a name="sql-server-2016-polybase-dmvs-available-in-dedicated-sql-pool"></a>Vues de gestion dynamique de PolyBase SQL Server 2016 disponibles dans le pool SQL dédié
 
-Les vues de gestion dynamique (DMV) suivantes s’appliquent au pool SQL, mais doivent être exécutées en se connectant à la base de données **MASTER**.
+Les vues de gestion dynamique (DMV) suivantes s’appliquent au pool SQL dédié, mais doivent être exécutées à l’aide d’une connexion à la base de données **MASTER**.
 
 * [sys.dm_exec_compute_node_errors](/sql/relational-databases/system-dynamic-management-views/sys-dm-exec-compute-node-errors-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest)
 * [sys.dm_exec_compute_node_status](/sql/relational-databases/system-dynamic-management-views/sys-dm-exec-compute-node-status-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest)

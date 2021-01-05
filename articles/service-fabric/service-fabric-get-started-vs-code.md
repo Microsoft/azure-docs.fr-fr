@@ -5,12 +5,13 @@ author: peterpogorski
 ms.topic: article
 ms.date: 06/29/2018
 ms.author: pepogors
-ms.openlocfilehash: 17bff459a0399d39c6bfdd772ad16d0b5b2f6771
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-js
+ms.openlocfilehash: a655199d854462285ca98a2d8f454c483c061f99
+ms.sourcegitcommit: ce8eecb3e966c08ae368fafb69eaeb00e76da57e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79229317"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92316673"
 ---
 # <a name="service-fabric-for-visual-studio-code"></a>Service Fabric pour Visual Studio Code
 
@@ -28,7 +29,7 @@ Les composants requis suivants doivent être installés sur tous les environneme
 * [Visual Studio Code](https://code.visualstudio.com/)
 * [Node.JS](https://nodejs.org/)
 * [Git](https://git-scm.com/)
-* [SDK Service Fabric](https://docs.microsoft.com/azure/service-fabric/service-fabric-get-started)
+* [SDK Service Fabric](./service-fabric-get-started.md)
 * Générateurs Yeoman : installez les générateurs appropriés pour votre application
 
    ```sh
@@ -41,7 +42,7 @@ Les composants requis suivants doivent être installés sur tous les environneme
 
 Les composants requis suivants doivent être installés pour le développement Java :
 
-* [SDK Java](https://aka.ms/azure-jdks) (version 1.8)
+* [SDK Java](/azure/developer/java/fundamentals/java-jdk-long-term-support) (version 1.8)
 * [Gradle](https://gradle.org/install/)
 * [Débogueur pour l’extension Java VS Code](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-debug) Nécessaire pour déboguer les services Java. Le débogage des services Java n’est pris en charge que sur Linux. Vous pouvez effectuer l’installation en cliquant sur l’icône Extensions dans la **barre d’activités** de VS Code et en recherchant l’extension, ou bien à partir de la place de marché VS Code.
 

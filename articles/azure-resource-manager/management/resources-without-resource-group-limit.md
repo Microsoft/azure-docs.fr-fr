@@ -2,15 +2,13 @@
 title: Ressources sans limite du nombre à 800
 description: Répertorie les types de ressources Azure qui peuvent avoir plus de 800 instances dans un groupe de ressources.
 ms.topic: conceptual
-author: davidsmatlak
-ms.author: v-dasmat
-ms.date: 05/04/2020
-ms.openlocfilehash: 892b59b3d3e980abfcdb9cd692c2598ceb1284ad
-ms.sourcegitcommit: 31236e3de7f1933be246d1bfeb9a517644eacd61
+ms.date: 10/28/2020
+ms.openlocfilehash: c2d5797a7ec354f41d510ec6e884968bf9dbdbcd
+ms.sourcegitcommit: d79513b2589a62c52bddd9c7bd0b4d6498805dbe
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82780927"
+ms.lasthandoff: 12/18/2020
+ms.locfileid: "97672362"
 ---
 # <a name="resources-not-limited-to-800-instances-per-resource-group"></a>Ressources non limitées à 800 instances par groupe de ressources
 
@@ -18,12 +16,15 @@ Par défaut, vous pouvez déployer jusqu’à 800 instances d’un type de resso
 
 Pour certains types de ressources, vous devez contacter le support pour que la limite d’instance de 800 soit supprimée. Ces types de ressources sont mentionnés dans cet article.
 
+
 ## <a name="microsoftautomation"></a>Microsoft.Automation
 
 * automationAccounts
 
 ## <a name="microsoftazurestack"></a>Microsoft.AzureStack
 
+* edgeSubscriptions
+* linkedSubscriptions
 * registrations
 * registrations/customerSubscriptions
 * registrations/products
@@ -40,6 +41,7 @@ Pour certains types de ressources, vous devez contacter le support pour que la l
 * galleries/images/versions
 * images
 * snapshots
+* virtualMachineScaleSets – par défaut, limité à 800 instances. Cette limite peut être augmentée en contactant le support.
 * virtualMachines
 
 ## <a name="microsoftcontainerinstance"></a>Microsoft.ContainerInstance
@@ -57,24 +59,30 @@ Pour certains types de ressources, vous devez contacter le support pour que la l
 * registries/tasks
 * registries/webhooks
 
+## <a name="microsoftd365customerinsights"></a>Microsoft.D365CustomerInsights
+
+* instances
+
 ## <a name="microsoftdbformariadb"></a>Microsoft.DBforMariaDB
 
 * servers
 
 ## <a name="microsoftdbformysql"></a>Microsoft.DBforMySQL
 
+* flexibleServers
 * servers
 
 ## <a name="microsoftdbforpostgresql"></a>Microsoft.DBforPostgreSQL
 
+* flexibleServers
 * serverGroups
 * servers
 * serversv2
-* singleServers
 
 ## <a name="microsoftdevtestlab"></a>Microsoft.DevTestLab
 
-* schedules : par défaut, limité à 800 instances. Cette limite peut être augmentée en contactant le support.
+* labs/virtualMachines – Par défaut, limité à 800 instances. 
+* schedules
 
 ## <a name="microsoftenterpriseknowledgegraph"></a>Microsoft.EnterpriseKnowledgeGraph
 
@@ -106,6 +114,10 @@ Pour certains types de ressources, vous devez contacter le support pour que la l
 
 * integrationAccounts
 * workflows
+
+## <a name="microsoftmedia"></a>Microsoft.Media
+
+* mediaservices/liveEvents
 
 ## <a name="microsoftnetapp"></a>Microsoft.NetApp
 
@@ -162,6 +174,10 @@ Pour certains types de ressources, vous devez contacter le support pour que la l
 
 * publicIPAddresses : par défaut, limité à 800 instances. Cette limite peut être augmentée en contactant le support.
 
+## <a name="microsoftpowerbidedicated"></a>Microsoft.PowerBIDedicated
+
+* capacities – Par défaut, limité à 800 instances. Cette limite peut être augmentée en contactant le support.
+
 ## <a name="microsoftrelay"></a>Microsoft.Relay
 
 * espaces de noms
@@ -174,18 +190,21 @@ Pour certains types de ressources, vous devez contacter le support pour que la l
 
 * espaces de noms
 
-## <a name="microsoftservicefabricmesh"></a>Microsoft.ServiceFabricMesh
+## <a name="microsoftsingularity"></a>Microsoft.Singularity
 
-* applications
-* containerGroups
-* gateways
-* networks
-* secrets
-* volumes
+* accounts
+* accounts/accountQuotaPolicies
+* accounts/groupPolicies
+* accounts/jobs
+* accounts/storageContainers
 
 ## <a name="microsoftstorage"></a>Microsoft.Storage
 
 * storageAccounts
+
+## <a name="microsoftsql"></a>Microsoft.Sql
+
+* servers/databases
 
 ## <a name="microsoftweb"></a>Microsoft.Web
 

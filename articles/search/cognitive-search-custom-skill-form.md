@@ -6,14 +6,14 @@ manager: nitinme
 author: PatrickFarley
 ms.author: pafarley
 ms.service: cognitive-search
-ms.topic: article
+ms.topic: conceptual
 ms.date: 01/21/2020
-ms.openlocfilehash: 050848b0bff65b19e2b17bd170e1d3e9ff0176f1
-ms.sourcegitcommit: e0330ef620103256d39ca1426f09dd5bb39cd075
+ms.openlocfilehash: 58f1c2621165a7074c04752832c6560b2fd3e423
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82792001"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96011963"
 ---
 # <a name="example-create-a-form-recognizer-custom-skill"></a>Exemple : Créer une compétence personnalisée Form Recognizer
 
@@ -30,7 +30,7 @@ Dans cet exemple d’ensemble de compétences de la Recherche cognitive Azure, v
 
 ## <a name="train-your-model"></a>Entraîner votre modèle
 
-Vous devez entraîner un modèle Form Recognizer avec vos formulaires d’entrée avant d’utiliser cette compétence. Suivez le [guide de démarrage rapide cURL](https://docs.microsoft.com/azure/cognitive-services/form-recognizer/quickstarts/curl-train-extract) pour savoir comment entraîner un modèle. Vous pouvez utiliser les exemples de formulaire fournis dans ce guide de démarrage rapide ou utiliser vos propres données. Une fois le modèle entraîné, copiez sa valeur d’ID dans un emplacement sécurisé.
+Vous devez entraîner un modèle Form Recognizer avec vos formulaires d’entrée avant d’utiliser cette compétence. Suivez le [guide de démarrage rapide cURL](../cognitive-services/form-recognizer/quickstarts/curl-train-extract.md) pour savoir comment entraîner un modèle. Vous pouvez utiliser les exemples de formulaire fournis dans ce guide de démarrage rapide ou utiliser vos propres données. Une fois le modèle entraîné, copiez sa valeur d’ID dans un emplacement sécurisé.
 
 ## <a name="set-up-the-custom-skill"></a>Configurer la compétence personnalisée
 
@@ -167,5 +167,5 @@ Dans ce guide, vous avez créé une compétence personnalisée à partir du serv
 * [Super compétences de la Recherche Azure : un dépôt de compétences personnalisées](https://github.com/Azure-Samples/azure-search-power-skills)
 * [Ajouter une qualification personnalisée à un pipeline d’enrichissement par IA](cognitive-search-custom-skill-interface.md)
 * [How to create a skillset in an enrichment pipeline](cognitive-search-defining-skillset.md) (Créer un ensemble de compétences dans un pipeline d’enrichissement)
-* [Créer un ensemble de compétences (REST)](https://docs.microsoft.com/rest/api/searchservice/create-skillset)
+* [Créer un ensemble de compétences (REST)](/rest/api/searchservice/create-skillset)
 * [Mapper des champs enrichis](cognitive-search-output-field-mapping.md)

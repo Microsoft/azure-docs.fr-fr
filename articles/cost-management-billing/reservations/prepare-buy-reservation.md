@@ -4,15 +4,16 @@ description: Découvrez les points importants à prendre en compte avant l’ach
 author: bandersmsft
 ms.reviewer: yashar
 ms.service: cost-management-billing
-ms.topic: conceptual
-ms.date: 05/04/2020
+ms.subservice: reservations
+ms.topic: how-to
+ms.date: 07/24/2020
 ms.author: banders
-ms.openlocfilehash: 6b01253d12b67c327bc67416ca569ccb7ee469ae
-ms.sourcegitcommit: 31236e3de7f1933be246d1bfeb9a517644eacd61
+ms.openlocfilehash: b03db9632f5f47a7600c5b9037d16b1cff6ccf69
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82780638"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96344247"
 ---
 # <a name="buy-a-reservation"></a>Acheter une réservation
 
@@ -20,9 +21,9 @@ Les réservations Azure vous permettent d’économiser en vous engageant sur de
 
 ## <a name="who-can-buy-a-reservation"></a>Qui peut acheter une réservation ?
 
-Pour acheter un plan, vous devez avoir un rôle de propriétaire dans un abonnement Entreprise (MS-AZR-0017P ou MS-AZR-0148P), Paiement à l’utilisation (MS-AZR-0003P ou MS-AZR-0023P) ou Contrat Client Microsoft. Les fournisseurs de solutions cloud peuvent utiliser le portail Azure ou l’ [Espace partenaires](/partner-center/azure-reservations) pour acheter des réservations Azure.
+Pour acheter une réservation, vous devez détenir le rôle de propriétaire ou d’acheteur de réservation sur un abonnement Azure de type Entreprise (MS-AZR-0017P ou MS-AZR-0148P), Paiement à l’utilisation (MS-AZR-0003P ou MS-AZR-0023P) ou Contrat client Microsoft. Les fournisseurs de solutions cloud peuvent utiliser le portail Azure ou l’ [Espace partenaires](/partner-center/azure-reservations) pour acheter des réservations Azure.
 
-Les clients Contrat Entreprise (EA) peuvent limiter les achats aux administrateurs EA en désactivant l'option **Ajouter des instances réservées** dans le portail EA. Les administrateurs EA doivent être propriétaires d'au moins un abonnement EA pour acheter une réservation. Cette option est particulièrement utile pour les entreprises souhaitant qu'une équipe centralisée achète des réservations pour différents centres de coûts. Au terme de l'achat, les équipes centralisées peuvent ajouter des propriétaires de centres de coûts aux réservations. Les propriétaires peuvent ensuite étendre la réservation à leurs abonnements. L’équipe centralisée n'est pas tenue de disposer d'un accès de propriétaire d'abonnement là où la réservation est achetée.
+Les clients Contrat Entreprise (EA) peuvent limiter les achats aux administrateurs EA en désactivant l'option **Ajouter des instances réservées** dans le portail EA. Les administrateurs EA doivent disposer d’un accès propriétaire ou acheteur de réservation sur au moins un abonnement EA pour pouvoir acheter une réservation. Cette option est particulièrement utile pour les entreprises souhaitant qu’une équipe centralisée achète des réservations.
 
 Une remise de réservation s’applique uniquement aux ressources associées aux abonnements qui ont été achetés dans le cadre de plans Entreprise, CSP, Contrat Client Microsoft et individuels avec paiement à l’utilisation.
 
@@ -36,7 +37,10 @@ Vous disposez de trois options pour définir l’étendue d’une réservation, 
 
 - **Étendue de groupe de ressources unique** : applique la remise sur réservation aux ressources correspondantes incluses dans le groupe de ressources sélectionné uniquement.
 - **Étendue d’abonnement unique** : applique la remise sur réservation aux ressources correspondantes incluses dans l’abonnement sélectionné.
-- **Étendue partagée** : applique la remise sur réservation aux ressources correspondantes des abonnements éligibles inclus dans le contexte de facturation. Pour les clients Contrat Entreprise, le contexte de facturation correspond à l’inscription. Pour les clients avec un Contrat Client Microsoft, l’étendue de facturation correspond au profil de facturation. Pour les abonnements individuels utilisant les tarifs du paiement à l’utilisation, l’étendue de facturation correspond à tous les abonnements éligibles créés par l’administrateur de compte.
+- **Étendue partagée** : applique la remise de réservation aux ressources correspondantes dans les abonnements éligibles inclus dans le contexte de facturation.
+    - Pour les clients Contrat Entreprise, le contexte de facturation correspond à l’inscription. L’étendue partagée de réservation inclut plusieurs locataires Active Directory dans une inscription.
+    - Pour les clients avec un Contrat Client Microsoft, l’étendue de facturation correspond au profil de facturation.
+    - Pour les abonnements individuels utilisant les tarifs du paiement à l’utilisation, l’étendue de facturation correspond à tous les abonnements éligibles créés par l’administrateur de compte.
 
 Lors de l’application des remises de réservation sur votre utilisation, Azure traite la réservation dans l’ordre suivant :
 
@@ -68,16 +72,16 @@ Vous pouvez acheter des réservations à partir du portail Azure, d’API, de Po
 - [Cosmos DB](../../cosmos-db/cosmos-db-reserved-capacity.md)
 - [Databricks](prepay-databricks-reserved-capacity.md)
 - [Explorateur de données](/azure/data-explorer/pricing-reserved-capacity)
-- [Stockage sur disque](../../virtual-machines/linux/disks-reserved-capacity.md)
+- [Stockage sur disque](../../virtual-machines/disks-reserved-capacity.md)
 - [Hôte dédié](../../virtual-machines/prepay-dedicated-hosts-reserved-instances.md)
 - [Abonnements logiciels](../../virtual-machines/linux/prepay-suse-software-charges.md)
 - [Stockage](../../storage/blobs/storage-blob-reserved-capacity.md)
-- [Base de données SQL](../../sql-database/sql-database-reserved-capacity.md)
+- [Base de données SQL](../../azure-sql/database/reserved-capacity-overview.md)
 - [Base de données Azure pour PostgreSQL](../../postgresql/concept-reserved-pricing.md)
 - [Azure Database pour MySQL](../../mysql/concept-reserved-pricing.md)
 - [Azure Database for MariaDB](../../mariadb/concept-reserved-pricing.md)
 - [Azure Synapse Analytics](prepay-sql-data-warehouse-charges.md)
-- [Machines virtuelles](../../virtual-machines/windows/prepay-reserved-vm-instances.md)
+- [Machines virtuelles](../../virtual-machines/prepay-reserved-vm-instances.md)
 
 ## <a name="buy-reservations-with-monthly-payments"></a>Acheter des réservations avec paiements mensuels
 
@@ -85,7 +89,7 @@ Vous pouvez payer les réservations en effectuant des paiements mensuels. Contra
 
 Si la réservation est achetée à l’aide d’un Contrat client Microsoft, le montant de votre paiement mensuel peut varier en fonction du taux de change du mois en cours pour votre devise locale.
 
-Les paiements mensuels ne sont disponibles pour ce qui suit : Databricks, réservations SUSE Linux, offres Red Hat et calcul Azure Red Hat OpenShift.
+Les paiements mensuels ne sont disponibles pour ce qui suit : Databricks, réservations SUSE Linux, offres Red Hat et licences Azure Red Hat OpenShift.
 
 ### <a name="view-payments-made"></a>Afficher les paiements effectués
 
@@ -119,7 +123,7 @@ Selon la façon dont vous payez votre abonnement Azure, des notifications de ré
 Pour les clients avec des abonnements EA :
 
 - Les notifications sont envoyées uniquement aux contacts de notification EA.
-- Les utilisateurs ajoutés à une réservation à l’aide de l’autorisation RBAC (IAM) ne reçoivent pas de notifications par e-mail.
+- Les utilisateurs ajoutés à une réservation à l’aide d’une autorisation Azure RBAC (IAM) ne reçoivent pas de notifications par e-mail.
 
 Pour les clients qui ont des abonnements individuels :
 

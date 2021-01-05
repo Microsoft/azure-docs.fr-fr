@@ -7,12 +7,12 @@ ms.topic: tutorial
 ms.date: 10/08/2019
 ms.author: rogarana
 ms.subservice: blobs
-ms.openlocfilehash: dd87e1a9bcff55813dff420976df58351386fb34
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 5dc1f8b8a7c46a3d6ad6f62d93bc91753e42c3ae
+ms.sourcegitcommit: c95e2d89a5a3cf5e2983ffcc206f056a7992df7d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "75371936"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95545038"
 ---
 # <a name="upload-large-amounts-of-random-data-in-parallel-to-azure-storage"></a>Charger en parallèle de grandes quantités de données aléatoires dans le stockage Azure
 
@@ -44,7 +44,7 @@ mstsc /v:<publicIpAddress>
 
 ## <a name="configure-the-connection-string"></a>Configurer la chaîne de connexion
 
-Dans le portail Azure, accédez à votre compte de stockage. Sélectionnez **Clés d’accès** sous **Paramètres** dans votre compte de stockage. Copiez la **chaîne de connexion** de la clé primaire ou secondaire. Connectez-vous à la machine virtuelle créée dans le didacticiel précédent. Ouvrez une **invite de commandes** comme administrateur et exécutez la commande `setx` avec le commutateur `/m`, cette commande enregistre une variable d’environnement de paramètre de machine. La variable d’environnement n’est pas disponible tant que vous n’avez pas rechargé **l’invite de commandes**. Remplacez **\<storageConnectionString\>** dans l’exemple suivant :
+Dans le portail Azure, accédez à votre compte de stockage. Sélectionnez **Clés d’accès** sous **Paramètres** dans votre compte de stockage. Copiez la **chaîne de connexion** de la clé primaire ou secondaire. Connectez-vous à la machine virtuelle créée dans le didacticiel précédent. Ouvrez une **invite de commandes** comme administrateur et exécutez la commande `setx` avec le commutateur `/m`, cette commande enregistre une variable d’environnement de paramètre de machine. La variable d’environnement n’est pas disponible tant que vous n’avez pas rechargé **l’invite de commandes**. Remplacez **\<storageConnectionString\>** dans l’exemple suivant :
 
 ```
 setx storageconnectionstring "<storageConnectionString>" /m
@@ -62,7 +62,7 @@ Saisissez `dotnet run` pour exécuter l’application. La première fois que vou
 dotnet run
 ```
 
-L’application crée cinq conteneurs nommés de façon aléatoire et commence à charger les fichiers dans le répertoire de préproduction du compte de stockage. L’application définit 100 threads minimum et la valeur de [DefaultConnectionLimit](https://msdn.microsoft.com/library/system.net.servicepointmanager.defaultconnectionlimit(v=vs.110).aspx) sur 100 pour garantir l’autorisation d’un grand nombre de connexions simultanées quand l’application est exécutée.
+L’application crée cinq conteneurs nommés de façon aléatoire et commence à charger les fichiers dans le répertoire de préproduction du compte de stockage. L’application définit 100 threads minimum et la valeur de [DefaultConnectionLimit](/dotnet/api/system.net.servicepointmanager.defaultconnectionlimit) sur 100 pour garantir l’autorisation d’un grand nombre de connexions simultanées quand l’application est exécutée.
 
 En plus de définir les paramètres de limite de threads et de connexion, les valeurs [BlobRequestOptions](/dotnet/api/microsoft.azure.storage.blob.blobrequestoptions) pour la méthode [UploadFromStreamAsync](/dotnet/api/microsoft.azure.storage.blob.cloudblockblob.uploadfromstreamasync) sont configurées pour utiliser le parallélisme et désactiver la validation de hachage MD5. Les fichiers sont chargés dans des blocs de 100 Mo, cette configuration offre de meilleures performances, mais peut s’avérer coûteuse si vous utilisez un réseau peu performant, car, en cas d’échec, le bloc entier de 100 Mo est réessayé.
 

@@ -5,11 +5,11 @@ ms.topic: include
 ms.date: 06/25/2019
 ms.author: glenga
 ms.openlocfilehash: 437b4ab62cc8c4903af88ca2f9632e89b953c798
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "68669619"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96010500"
 ---
 Pour activer les journaux de diffusion en continu pour votre Function App dans Azure :
 

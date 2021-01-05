@@ -5,15 +5,15 @@ author: mamccrea
 ms.author: mamccrea
 ms.reviewer: mamccrea
 ms.service: stream-analytics
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 06/21/2018
 ms.custom: seodec18
-ms.openlocfilehash: 54bff88e9650240a3703e18d583f603cafeb3022
-ms.sourcegitcommit: 50ef5c2798da04cf746181fbfa3253fca366feaa
+ms.openlocfilehash: f8e0d49c2a35a1e97c79e6d4b8c867a4a8ab88b3
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82611889"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96006676"
 ---
 # <a name="understand-stream-analytics-job-monitoring-and-how-to-monitor-queries"></a>Présentation de la surveillance des tâches Stream Analytics et des requêtes
 
@@ -39,17 +39,17 @@ Une fenêtre s’affiche comme suit :
 | Octets des événements d’entrée      | Quantité de données reçues par le travail Stream Analytics, en octets. Cela permet de valider que les événements sont envoyés à la source d’entrée. |
 | Événements d’entrée           | Nombre d’enregistrements désérialisé à partir des événements d’entrée. Ce nombre n’inclut pas les événements entrants qui génèrent des erreurs de désérialisation. Les mêmes événements peuvent être ingérés par Stream Analytics plusieurs fois dans des scénarios tels que des récupérations internes et des jointures réflexives. Par conséquent, il est recommandé de ne pas s’attendre à ce que les métriques d’événements d’entrée et de sortie correspondent si votre travail comprend une requête « directe » simple. |
 | Sources d'entrée reçues       | Nombre de messages reçus par le travail. Pour Event Hub, un message est un EventData unique. Pour un objet blob, un message est un objet blob unique. Veuillez noter que les sources d’entrée sont comptabilisées avant la désérialisation. En cas d’erreurs de désérialisation, les sources d’entrée peuvent être supérieures aux événements d’entrée. Sinon, elles peuvent être inférieures ou égales aux événements d’entrée dans la mesure où chaque message peut contenir plusieurs événements. |
-| Événements d’entrée tardifs      | Événements reçus plus tard que la valeur configurée dans la fenêtre de tolérance d’arrivée tardive. En savoir plus sur les [Considérations relatives à l’ordre des événements Azure Stream Analytics](stream-analytics-out-of-order-and-late-events.md). |
+| Événements d’entrée tardifs      | Événements reçus plus tard que la valeur configurée dans la fenêtre de tolérance d’arrivée tardive. En savoir plus sur les [Considérations relatives à l’ordre des événements Azure Stream Analytics](./stream-analytics-time-handling.md). |
 | Événements non ordonnés    | Nombre d’événements reçus dans le désordre qui ont été supprimés ou dont l’horodatage a été réglé, en fonction de la stratégie de classement des événements. Cela peut être affecté par la configuration du paramètre de la plage de tolérance pour les événements en désordre. |
 | Événements de sortie          | Quantité de données envoyées par le travail Stream Analytics à la cible de sortie, en nombre d’événements. |
 | Erreurs d’exécution         | Nombre total d’erreurs liées au traitement des requêtes (à l’exception des erreurs détectées lors de l’ingestion d’événements ou de la génération de résultats) |
-| Utilisation de % d’unités de diffusion       | Utilisation des unités de diffusion affectées à une tâche à partir de l’onglet Mettre à l’échelle de la tâche. Si cet indicateur atteint 80 % ou plus, il est fort probable que le traitement des événements soit retardé ou arrêté. |
+| Utilisation de % d’unités de diffusion       | Si l’utilisation des ressources est régulièrement supérieure à 80 %, le délai en filigrane augmente; tout comme le nombre d’événements retardés. Dans ce cas, vous pouvez d’augmenter les unités de streaming. Une utilisation intensive indique que la tâche atteint une limite proche de la quantité maximale de ressources allouées. |
 | Délai en filigrane       | Le délai en filigrane maximal sur toutes les partitions de toutes les sorties du travail. |
 
-Vous pouvez utiliser ces mesures pour [surveiller les performances de votre travail Stream Analytics](https://docs.microsoft.com/azure/stream-analytics/stream-analytics-set-up-alerts#scenarios-to-monitor). 
+Vous pouvez utiliser ces mesures pour [surveiller les performances de votre travail Stream Analytics](./stream-analytics-set-up-alerts.md#scenarios-to-monitor). 
 
 ## <a name="customizing-monitoring-in-the-azure-portal"></a>Personnalisation de la surveillance dans le portail Azure
-Vous pouvez régler le type de graphique, les mesures affichées et la période dans les paramètres Modifier le graphique. Pour plus d’informations, consultez [Personnalisation de la surveillance](../monitoring-and-diagnostics/insights-how-to-customize-monitoring.md).
+Vous pouvez régler le type de graphique, les mesures affichées et la période dans les paramètres Modifier le graphique. Pour plus d’informations, consultez [Personnalisation de la surveillance](../azure-monitor/platform/data-platform.md).
 
   ![Graphique représentant le temps de surveillance des requêtes Stream Analytics](./media/stream-analytics-monitoring/08-stream-analytics-monitoring.png)  
 
@@ -59,11 +59,11 @@ Un autre point de données intéressant pour surveiller votre travail est l’he
 Cette heure correspond à l’heure d’application (c’est-à-dire l’heure donnée via l’horodatage dans les données d’événement) de la dernière sortie de votre travail.
 
 ## <a name="get-help"></a>Obtenir de l’aide
-Pour obtenir une assistance, essayez notre [forum Azure Stream Analytics](https://social.msdn.microsoft.com/Forums/azure/home?forum=AzureStreamAnalytics)
+Pour obtenir de l’aide supplémentaire, essayez notre [page de questions Microsoft Q&R sur Azure Stream Analytics](/answers/topics/azure-stream-analytics.html).
 
 ## <a name="next-steps"></a>Étapes suivantes
 * [Présentation d’Azure Stream Analytics](stream-analytics-introduction.md)
 * [Prise en main d'Azure Stream Analytics](stream-analytics-real-time-fraud-detection.md)
 * [Mise à l’échelle des travaux Azure Stream Analytics](stream-analytics-scale-jobs.md)
-* [Références sur le langage des requêtes d'Azure Stream Analytics](https://docs.microsoft.com/stream-analytics-query/stream-analytics-query-language-reference)
-* [Références sur l’API REST de gestion d’Azure Stream Analytics](https://msdn.microsoft.com/library/azure/dn835031.aspx)
+* [Références sur le langage des requêtes d'Azure Stream Analytics](/stream-analytics-query/stream-analytics-query-language-reference)
+* [Références sur l’API REST de gestion d’Azure Stream Analytics](/rest/api/streamanalytics/)

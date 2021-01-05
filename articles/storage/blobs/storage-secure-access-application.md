@@ -7,16 +7,16 @@ author: tamram
 ms.service: storage
 ms.subservice: blobs
 ms.topic: tutorial
-ms.date: 03/06/2020
+ms.date: 06/10/2020
 ms.author: tamram
-ms.reviewer: cbrooks
-ms.custom: mvc
-ms.openlocfilehash: 13a2a0bcc362a13b0c42650509d356f613527cfc
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.reviewer: ozgun
+ms.custom: mvc, devx-track-csharp, devx-track-azurecli
+ms.openlocfilehash: f7c5dbaf30965fdd5f438f0351cfa2cd60e05b70
+ms.sourcegitcommit: 8c7f47cc301ca07e7901d95b5fb81f08e6577550
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "80061322"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92746562"
 ---
 # <a name="secure-access-to-application-data"></a>Sécuriser l’accès aux données d’application
 
@@ -39,16 +39,29 @@ Pour suivre ce tutoriel, vous devez avoir terminé le tutoriel précédent sur l
 
 Dans ce volet de la série de didacticiels, les jetons SAS sont utilisés pour accéder aux miniatures. Dans cette étape, vous définissez l’accès public du conteneur de *miniatures* sur `off`.
 
-```azurecli-interactive 
+```bash
 blobStorageAccount="<blob_storage_account>"
 
 blobStorageAccountKey=$(az storage account keys list -g myResourceGroup \
-    --name $blobStorageAccount --query [0].value --output tsv) 
+    --account-name $blobStorageAccount --query [0].value --output tsv) 
 
 az storage container set-permission \
     --account-name $blobStorageAccount \
     --account-key $blobStorageAccountKey \
     --name thumbnails \
+    --public-access off
+```
+
+```powershell
+$blobStorageAccount="<blob_storage_account>"
+
+blobStorageAccountKey=$(az storage account keys list -g myResourceGroup `
+    --account-name $blobStorageAccount --query [0].value --output tsv) 
+
+az storage container set-permission `
+    --account-name $blobStorageAccount `
+    --account-key $blobStorageAccountKey `
+    --name thumbnails `
     --public-access off
 ```
 
@@ -60,11 +73,19 @@ Dans cet exemple, le dépôt de code source utilise la branche `sasTokens`, qui 
 
 Dans la commande suivante, `<web-app>` est le nom de votre application web.
 
-```azurecli-interactive 
+```bash
 az webapp deployment source delete --name <web-app> --resource-group myResourceGroup
 
 az webapp deployment source config --name <web_app> \
     --resource-group myResourceGroup --branch sasTokens --manual-integration \
+    --repo-url https://github.com/Azure-Samples/storage-blob-upload-from-webapp
+```
+
+```powershell
+az webapp deployment source delete --name <web-app> --resource-group myResourceGroup
+
+az webapp deployment source config --name <web_app> `
+    --resource-group myResourceGroup --branch sasTokens --manual-integration `
     --repo-url https://github.com/Azure-Samples/storage-blob-upload-from-webapp
 ```
 
@@ -135,11 +156,13 @@ Les classes, propriétés et méthodes suivantes sont utilisées dans la tâche 
 |[UriBuilder](/dotnet/api/system.uribuilder) | [Requête](/dotnet/api/system.uribuilder.query) |  |
 |[Liste](/dotnet/api/system.collections.generic.list-1) | | [Ajouter](/dotnet/api/system.collections.generic.list-1.add) |
 
-## <a name="server-side-encryption"></a>Chiffrement côté serveur
+## <a name="azure-storage-encryption"></a>Chiffrement du stockage Azure
 
-Le [chiffrement du service de stockage (SSE) Azure](../common/storage-service-encryption.md) vous permet de protéger vos données. SSE chiffre les données au repos et assure le chiffrement, le déchiffrement et la gestion de clés. Toutes les données sont chiffrées à l’aide du [chiffrement AES](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard)256 bits, l’un des algorithmes de chiffrement par blocs les plus puissants disponibles.
+[Le chiffrement du stockage Azure](../common/storage-service-encryption.md) vous permet de protéger et de préserver vos données en chiffrant les données au repos et en gérant le chiffrement et le déchiffrement. Toutes les données sont chiffrées à l’aide du [chiffrement AES](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard)256 bits, l’un des algorithmes de chiffrement par blocs les plus puissants disponibles.
 
-Le chiffrement du service de stockage chiffre automatiquement les données pour tous les niveaux de performance (Standard ou Premium), tous les modèles de déploiement (Azure Resource Manager et Classic) et tous les services de Stockage Azure (blob, file d’attente, table et fichier). 
+Vous pouvez choisir de laisser la gestion des clés de chiffrement à Microsoft, ou vous pouvez apporter vos propres clés, c’est-à-dire les clés gérées par le client qui sont stockées dans Azure Key Vault ou dans Key Vault Managed Hardware Security Model (HSM) (préversion). Pour plus d’informations, consultez [Clés gérées par le client pour le chiffrement Azure Storage](../common/customer-managed-keys-overview.md).
+
+Le chiffrement du stockage Azure chiffre automatiquement les données pour tous les niveaux de performance (Standard ou Premium), tous les modèles de déploiement (Azure Resource Manager et Classic) et tous les services de stockage Azure (blob, file d’attente, table et fichier).
 
 ## <a name="enable-https-only"></a>Activer HTTPS uniquement
 

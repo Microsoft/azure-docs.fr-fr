@@ -9,17 +9,17 @@ editor: ''
 ms.assetid: ''
 ms.service: storsimple
 ms.devlang: NA
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: NA
 ms.workload: TBD
 ms.date: 07/03/2017
 ms.author: alkohli
-ms.openlocfilehash: 7801cdc6573799330e5173db82dead8d4f2cd83f
-ms.sourcegitcommit: 632e7ed5449f85ca502ad216be8ec5dd7cd093cb
+ms.openlocfilehash: 34bbf4d723e46663efe77560245db74d9dea1fc4
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/30/2020
-ms.locfileid: "80398247"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96017149"
 ---
 # <a name="use-the-device-summary-in-storsimple-device-manager-service"></a>Utiliser le panneau de synthèse de l’appareil dans le service StorSimple Device Manager
 
@@ -81,12 +81,12 @@ La zone des éléments principaux comporte quelques-unes des propriétés import
      Dans ce contexte, le *stockage principal* fait référence à la quantité totale de données écrites par l’hôte, et peut être détaillé par type de volume : le *stockage hiérarchisé principal* inclut à la fois les données stockées localement et les données stockées dans le cloud. Le *stockage principal attaché localement* inclut uniquement les données stockées localement. Le *stockage cloud*, quant à lui, est une mesure de la quantité totale de données stockées dans le cloud. Ce stockage inclut les données hiérarchisées et les sauvegardes. Les données stockées dans le cloud sont dédupliquées et compressées, tandis que le stockage principal indique la quantité de stockage utilisée avant que les données ne soient dédupliquées et compressées. Vous pouvez comparer ces deux nombres pour avoir une idée du taux de compression. Qu’il s’agisse du stockage principal ou du stockage cloud, les quantités indiquées dépendent de la fréquence de suivi que vous configurez. Par exemple, si vous optez pour une fréquence hebdomadaire, le graphique affiche des données pour chaque jour de la semaine précédente.
 
      Pour afficher la quantité de stockage cloud consommée au fil du temps, sélectionnez l’option **STOCKAGE CLOUD UTILISÉ**. Pour afficher le stockage total des données écrites par l’hôte, sélectionnez les options **STOCKAGE HIÉRARCHISÉ PRINCIPAL UTILISÉ** et **STOCKAGE PRINCIPAL ÉPINGLÉ LOCALEMENT UTILISÉ**. 
-     Pour plus d’informations, consultez [Utilisation du service StorSimple Device Manager pour surveiller votre appareil StorSimple](storsimple-monitor-device.md).
+     Pour plus d’informations, consultez [Utilisation du service StorSimple Device Manager pour surveiller votre appareil StorSimple](./storsimple-8000-monitor-device.md).
 
 
 * La vignette **Capacité** affiche le stockage primaire configuré et restant sur l’appareil, relativement au stockage total disponible pour ce dernier. **Configuré** fait référence au volume de stockage préparé et alloué pour l’utilisation, **Restant** fait référence à la capacité restante pouvant être configurée sur cet appareil. 
 
-    ![Mosaïque Utilisation](./media/storsimple-8000-device-dashboard/device-summary8.png)
+    ![Mosaïque Utilisation 2](./media/storsimple-8000-device-dashboard/device-summary8.png)
 
     Cliquez sur cette vignette pour voir comment la capacité est approvisionnée sur les volumes attachés localement et hiérarchisés. La **capacité hiérarchisée restante** est la capacité disponible, notamment dans le cloud, pouvant être approvisionnée, tandis que la **capacité locale restante** correspond à la capacité restant sur les disques attachés à cet appareil.
 
@@ -96,4 +96,3 @@ La zone des éléments principaux comporte quelques-unes des propriétés import
 ## <a name="next-steps"></a>Étapes suivantes
 * Accédez à des informations supplémentaires sur le [panneau de synthèse du service StorSimple](storsimple-8000-service-dashboard.md).
 * En savoir plus sur l’[utilisation du service StorSimple Device Manager pour gérer votre appareil StorSimple](storsimple-8000-manager-service-administration.md).
-

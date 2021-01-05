@@ -14,12 +14,12 @@ ms.date: 04/29/2020
 ms.author: sethm
 ms.reviewer: thsomasu
 ms.lastreviewed: 01/28/2020
-ms.openlocfilehash: a87f3563b995081de8e7cbb4b4499718f77b02ff
-ms.sourcegitcommit: b9d4b8ace55818fcb8e3aa58d193c03c7f6aa4f1
+ms.openlocfilehash: 87a3627d7820f9f456ac08e2f20b70af961f817e
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82583252"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87084243"
 ---
 # <a name="transport-layer-security-tls"></a>TLS (Transport Layer Security)
 
@@ -35,7 +35,7 @@ Pour les applications Android qui utilisent des instances de SSLSocket, définis
 
 Le tableau de la page de support [Compatibilité du protocole TLS](https://support.globalsign.com/customer/portal/articles/2934392-tls-protocol-compatibility) permet de mapper les systèmes d'exploitation avec les versions compatibles de TLS.
 
-Pour plus d'informations, consultez la vue d'ensemble de la [prise en charge des protocoles TLS sous Windows](https://docs.microsoft.com/archive/blogs/kaushal/support-for-ssltls-protocols-on-windows).
+Pour plus d'informations, consultez la vue d'ensemble de la [prise en charge des protocoles TLS sous Windows](/archive/blogs/kaushal/support-for-ssltls-protocols-on-windows).
 
 ## <a name="next-steps"></a>Étapes suivantes
 

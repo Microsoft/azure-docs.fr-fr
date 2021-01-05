@@ -5,15 +5,15 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
+ms.topic: how-to
 ms.custom: hdinsightactive
 ms.date: 12/23/2019
-ms.openlocfilehash: e4e15d1c6554fc567f668b2033bff5b5664db918
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 82e3374491aa119d9985ea7ef31e180c920511d3
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75972788"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86087739"
 ---
 # <a name="create-apache-hbase-clusters-on-hdinsight-in-azure-virtual-network"></a>Créer des clusters Apache HBase sur HDInsight dans un réseau virtuel Azure
 
@@ -134,10 +134,12 @@ Pour vérifier que la machine virtuelle peut communiquer avec le cluster HBase, 
 
 Pour utiliser ces informations dans une application Java, vous pouvez suivre la procédure décrite dans la rubrique [Utilisation d’Apache Maven pour créer des applications Java utilisant Apache HBase avec HDInsight (Hadoop)](./apache-hbase-build-java-maven-linux.md) pour créer une application. Pour que l’application soit connectée à un serveur HBase distant, modifiez le fichier **hbase-site.xml** dans cet exemple afin d’utiliser le nom de domaine complet pour Zookeeper. Par exemple :
 
-    <property>
-        <name>hbase.zookeeper.quorum</name>
-        <value>zookeeper0.<dns suffix>,zookeeper1.<dns suffix>,zookeeper2.<dns suffix></value>
-    </property>
+```xml
+<property>
+    <name>hbase.zookeeper.quorum</name>
+    <value>zookeeper0.<dns suffix>,zookeeper1.<dns suffix>,zookeeper2.<dns suffix></value>
+</property>
+```
 
 > [!NOTE]  
 > Pour plus d’informations sur la résolution de noms dans des réseaux virtuels Azure, y compris sur la façon d’utiliser votre propre serveur DNS, consultez [Résolution de noms pour les machines virtuelles et les instances de rôle](../../virtual-network/virtual-networks-name-resolution-for-vms-and-role-instances.md).

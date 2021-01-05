@@ -1,18 +1,16 @@
 ---
 title: Appliquer la licence Windows pour machines virtuelles hôtes de session – Azure
 description: Décrit comment appliquer la licence Windows pour des machines virtuelles Windows Virtual Desktop.
-services: virtual-desktop
 author: ChristianMontoya
-ms.service: virtual-desktop
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 08/14/2019
 ms.author: chrimo
-ms.openlocfilehash: 994edf26e43c7ad67d4f8822d4ed0d18d53b510b
-ms.sourcegitcommit: 50ef5c2798da04cf746181fbfa3253fca366feaa
+ms.openlocfilehash: 5f3749be36f5f035e49fcb862f92180e4902101f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82612450"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88010138"
 ---
 # <a name="apply-windows-license-to-session-host-virtual-machines"></a>Appliquer la licence Windows pour machines virtuelles hôtes de session
 
@@ -27,7 +25,7 @@ Il existe plusieurs façons d’utiliser la licence Windows Virtual Desktop :
 - Vous pouvez appliquer une licence à une machine virtuelle hôte de session existante. Pour ce faire, suivez d’abord les instructions fournies dans [Créer un pool d’hôtes avec PowerShell](./create-host-pools-powershell.md) afin de créer un pool d’hôtes et les machines virtuelles associées, puis revenez à cet article pour découvrir comment appliquer la licence.
 
 ## <a name="apply-a-windows-license-to-a-session-host-vm"></a>Appliquer une licence Windows à une machine virtuelle hôte de session
-Vérifiez que vous avez [installé et configuré la dernière version d’Azure PowerShell](/powershell/azure/overview). Exécutez la cmdlet PowerShell suivante pour appliquer la licence Windows :
+Vérifiez que vous avez [installé et configuré la dernière version d’Azure PowerShell](/powershell/azure/). Exécutez la cmdlet PowerShell suivante pour appliquer la licence Windows :
 
 ```powershell
 $vm = Get-AzVM -ResourceGroup <resourceGroupName> -Name <vmName>

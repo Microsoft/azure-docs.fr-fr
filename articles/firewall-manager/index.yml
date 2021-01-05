@@ -9,13 +9,13 @@ metadata:
   ms.topic: landing-page
   author: vhorne
   ms.author: victorh
-  ms.date: 10/10/2019
-  ms.openlocfilehash: e3b98f3954ee70b5e002bb844147d4d51b1f6d9d
-  ms.sourcegitcommit: 253d4c7ab41e4eb11cd9995190cd5536fcec5a3c
+  ms.date: 12/04/2020
+  ms.openlocfilehash: f25fff23bc371a172a8ddc992d3261705e647f25
+  ms.sourcegitcommit: 4c89d9ea4b834d1963c4818a965eaaaa288194eb
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 03/25/2020
-  ms.locfileid: "73508667"
+  ms.lasthandoff: 12/04/2020
+  ms.locfileid: "96608382"
 landingContent:
 - title: Découvrir des informations sur Azure Firewall Manager
   linkLists:
@@ -31,15 +31,17 @@ landingContent:
     links:
     - text: Qu’est-ce qu’un hub virtuel sécurisé ?
       url: secured-virtual-hub.md
-- title: Partenaires de sécurité de confiance
+- title: Fournisseurs de partenaire de sécurité
   linkLists:
   - linkListType: concept
     links:
-    - text: Que sont les partenaires de sécurité de confiance (préversion) ?
+    - text: Que sont les fournisseurs de partenaire de sécurité ?
       url: trusted-security-partners.md
+    - text: Sécuriser des hubs virtuels avec Check Point CloudGuard Connect
+      url: check-point-overview.md
   - linkListType: how-to-guide
     links:
-    - text: Déployer un partenaire de sécurité de confiance (préversion)
+    - text: Déployer un fournisseur de partenaire de sécurité
       url: deploy-trusted-security-partner.md
 - title: Sécuriser votre réseau cloud Azure
   linkLists:

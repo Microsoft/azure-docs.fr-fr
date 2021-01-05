@@ -3,18 +3,21 @@ title: 'Langage de requête Azure Cosmos DB : StringToBoolean'
 description: Découvrez la fonction système SQL StringToBoolean dans Azure Cosmos DB.
 author: ginamr
 ms.service: cosmos-db
+ms.subservice: cosmosdb-sql
 ms.topic: conceptual
 ms.date: 03/03/2020
 ms.author: girobins
 ms.custom: query-reference
-ms.openlocfilehash: ce11db91eff51e669f0917fbf34b1d560d0e9f07
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 2ad7ca9e2e50395effcc50e776eee3f1740fbb7a
+ms.sourcegitcommit: fa90cd55e341c8201e3789df4cd8bd6fe7c809a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78296539"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93337912"
 ---
 # <a name="stringtoboolean-azure-cosmos-db"></a>StringToBoolean (Azure Cosmos DB)
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
+
  Retourne une expression convertie en booléen. Si l’expression ne peut pas être convertie, le résultat est indéfini.  
   
 ## <a name="syntax"></a>Syntaxe

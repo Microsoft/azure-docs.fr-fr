@@ -4,15 +4,15 @@ description: Cet article propose des liens vers d’autres articles pour vous ai
 services: vpn-gateway
 author: cherylmc
 ms.service: vpn-gateway
-ms.topic: article
+ms.topic: troubleshooting
 ms.date: 01/31/2018
 ms.author: cherylmc
-ms.openlocfilehash: d73bc8e9c39c14a254e8f7bae1d7b1a96a6c3225
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 0718a1b211fe6365af30a330fe6a3742cff2ff63
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75780162"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "84984438"
 ---
 # <a name="troubleshoot-vpn-gateway"></a>Résoudre les problèmes liés à la passerelle VPN
 

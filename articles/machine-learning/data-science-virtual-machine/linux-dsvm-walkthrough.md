@@ -5,22 +5,20 @@ description: Découvrez comment effectuer plusieurs tâches courantes de science
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: data-science-vm
-author: vijetajo
-ms.author: vijetaj
+author: lobrien
+ms.author: laobri
 ms.topic: conceptual
-ms.date: 04/02/2020
-ms.openlocfilehash: dec9d7d6f4676c3550bb6c0be79e25d907e5b3da
-ms.sourcegitcommit: 50673ecc5bf8b443491b763b5f287dde046fdd31
+ms.date: 09/17/2020
+ms.openlocfilehash: b0ee83cdf3ea710974ce6985db3fc8ce8782351c
+ms.sourcegitcommit: 96918333d87f4029d4d6af7ac44635c833abb3da
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83682480"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93315791"
 ---
-# <a name="data-science-with-a-linux-data-science-virtual-machine-in-azure"></a>Science des données avec une image Data Science Virtual Machine Linux sur Azure
+# <a name="data-science-with-an-ubuntu-data-science-virtual-machine-in-azure"></a>Science des données avec une image Data Science Virtual Machine Ubuntu sur Azure
 
-Cette procédure pas à pas vous montre comment effectuer plusieurs tâches courantes de science des données à l’aide de la Data Science Virtual Machine (DSVM) Linux. La Data Science VM Linux est une image de machine virtuelle disponible sur Azure qui est préinstallée avec plusieurs outils couramment utilisés dans le cadre de l’analyse de données et du Machine Learning. Les composants logiciels clés sont détaillés dans [Approvisionnement d’une machine virtuelle de science des données Linux](linux-dsvm-intro.md) . L’image de la Data Science Virtual Machine facilite la prise en main de la science des données en quelques minutes, sans avoir à installer et à configurer individuellement chacun des outils individuellement. Vous pouvez facilement mettre à l’échelle la DSVM si nécessaire, et vous pouvez l’arrêter lorsqu’elle n’est pas utilisée. Cette DSVM est donc flexible et économique.
-
-Les tâches de science des données décrites dans cette procédure pas à pas suivent les étapes décrites dans [Qu’est-ce que le processus Team Data Science Process ?](https://docs.microsoft.com/azure/machine-learning/team-data-science-process/overview) Le processus de science des données fournit une approche systématique de la science des données qui aide les équipes de scientifiques des données à collaborer efficacement tout au long du cycle de vie du développement d’applications intelligentes. Le processus de science des données fournit également une infrastructure itérative pour la science des données, qui peut être suivie par une personne.
+Cette procédure pas à pas vous montre comment effectuer plusieurs tâches courantes de science des données à l’aide de la Data Science Virtual Machine (DSVM) Ubuntu. La Data Science VM Ubuntu est une image de machine virtuelle disponible sur Azure qui est préinstallée avec plusieurs outils couramment utilisés dans le cadre de l’analyse de données et du Machine Learning. Les composants logiciels clés sont détaillés dans [Approvisionnement d’une machine virtuelle de science des données Ubuntu](./dsvm-ubuntu-intro.md). L’image de la Data Science Virtual Machine facilite la prise en main de la science des données en quelques minutes, sans avoir à installer et à configurer individuellement chacun des outils individuellement. Vous pouvez facilement mettre à l’échelle la DSVM si nécessaire, et vous pouvez l’arrêter lorsqu’elle n’est pas utilisée. Cette DSVM est donc flexible et économique.
 
 Au cours de cette procédure pas à pas, nous analysons le jeu de données [spambase](https://archive.ics.uci.edu/ml/datasets/spambase). Spambase est un ensemble d’e-mails marqués comme courrier indésirable ou normal (n’est pas considéré comme courrier indésirable). Spambase contient également des statistiques sur le contenu des e-mails. Nous parlerons des statistiques plus loin dans la procédure pas à pas.
 
@@ -29,10 +27,10 @@ Au cours de cette procédure pas à pas, nous analysons le jeu de données [spam
 Avant de pouvoir utiliser une DSVM Linux, vous devez posséder les composants requis suivants :
 
 * **Abonnement Azure**. pour obtenir un abonnement Azure, consultez [Créer votre compte Azure gratuit aujourd'hui](https://azure.microsoft.com/free/).
-* [**Data Science Virtual Machine Linux**](https://azuremarketplace.microsoft.com/marketplace/apps/microsoft-dsvm.ubuntu-1804). Pour plus d’informations sur l’approvisionnement de cette machine virtuelle, consultez [Approvisionnement d’une machine virtuelle de science des données Linux](linux-dsvm-intro.md).
-* [**X2Go**](https://wiki.x2go.org/doku.php) installé sur votre ordinateur et une session XFCE ouverte. Pour plus d’informations, consultez [Installer et configurer le client X2Go](linux-dsvm-intro.md#x2go).
+
+* [**Instance Ubuntu de Data Science Virtual Machine**](https://azuremarketplace.microsoft.com/marketplace/apps/microsoft-dsvm.ubuntu-1804). Pour plus d’informations sur l’approvisionnement de cette machine virtuelle, consultez [Approvisionnement d’une machine virtuelle de science des données Ubuntu](./release-notes.md).
+* [**X2Go**](https://wiki.x2go.org/doku.php) installé sur votre ordinateur et une session XFCE ouverte. Pour plus d’informations, consultez [Installer et configurer le client X2Go](dsvm-ubuntu-intro.md#x2go).
 * Pour une expérience de défilement plus fluide, dans le navigateur web Firefox de la DSVM, basculez l'indicateur `gfx.xrender.enabled`dans `about:config`. [Plus d’informations](https://www.reddit.com/r/firefox/comments/4nfmvp/ff_47_unbearable_slow_over_remote_x11/) Envisagez également de régler `mousewheel.enable_pixel_scrolling` sur `False`. [Plus d’informations](https://support.mozilla.org/questions/981140)
-* **Compte Azure Machine Learning**. Si vous n’en avez pas déjà un, inscrivez-vous pour obtenir un compte sur la [page d’espace d’Azure Machine Learning](https://azure.microsoft.com/free/services/machine-learning//).
 
 ## <a name="download-the-spambase-dataset"></a>Télécharger le jeu de données spambase
 
@@ -64,7 +62,7 @@ mv headers spambaseHeaders.data
 
 Le jeu de données possède plusieurs types de statistiques pour chaque e-mail :
 
-* Les colonnes comme **word\_freq\__MOT_** indiquent le pourcentage de mots dans l’e-mail correspondant à *MOT*. Par exemple, si la valeur **word\_freq\_make** correspond à **1**, 1 % de tous les mots dans l’e-mail était *make*.
+* Les colonnes comme **word\_freq\__MOT_** indiquent le pourcentage de mots dans l’e-mail correspondant à *MOT*. Par exemple, si la valeur **word\_freq\_make** correspond à **1** , 1 % de tous les mots dans l’e-mail était *make*.
 * Les colonnes comme **char\_freq\__CAR_** indiquent le pourcentage de caractères dans l’e-mail correspondant à *CAR*.
 * **capital\_run\_length\_longest** est la longueur la plus longue d’une séquence de lettres majuscules.
 * **capital\_run\_length\_average** est la longueur moyenne de toutes les séquences de lettres majuscules.
@@ -215,7 +213,7 @@ Outre les exemples basés sur les frameworks, un ensemble de procédures détail
 
 - [Guide pratique pour créer une solution de bout en bout afin de détecter des produits dans des images](https://github.com/Azure/cortana-intelligence-product-detection-from-images) : la détection d’image est une technique qui peut localiser des objets dans les images et les classer. Les retombées concrètes de cette technologie semblent très prometteuses dans de nombreux domaines professionnels. Par exemple, un détaillant peut utiliser cette technique pour déterminer quel produit un client a choisi dans un rayon. Il peut ensuite utiliser ces informations pour gérer le stock des produits. 
 
-- [Deep learning pour l’audio](https://blogs.technet.microsoft.com/machinelearning/2018/01/30/hearing-ai-getting-started-with-deep-learning-for-audio-on-azure/) : ce tutoriel montre comment entraîner un modèle de deep learning pour la détection d’événements audio sur le [jeu de données de sons urbains](https://urbansounddataset.weebly.com/). Ce didacticiel fournit également une vue d’ensemble de l’utilisation des données audio.
+- [Deep learning pour l’audio](/archive/blogs/machinelearning/hearing-ai-getting-started-with-deep-learning-for-audio-on-azure) : ce tutoriel montre comment entraîner un modèle de deep learning pour la détection d’événements audio sur le [jeu de données de sons urbains](https://urbansounddataset.weebly.com/). Ce didacticiel fournit également une vue d’ensemble de l’utilisation des données audio.
 
 - [Classification de documents texte](https://github.com/anargyri/lstm_han) : cette procédure pas à pas montre comment créer et effectuer l'apprentissage de deux architectures de réseau neuronal différentes : Réseau d’attention hiérarchisée à mémoire à long ou court terme. Ces réseaux neuronaux utilisent l’API Keras de l’apprentissage profond pour classer les documents texte. Keras facilite l’utilisation de trois des frameworks d’apprentissage profond les plus populaires, à savoir Microsoft Cognitive Toolkit, TensorFlow et Theano.
 
@@ -228,7 +226,7 @@ Les sections restantes vous montrent comment utiliser certains des outils instal
 * JupyterHub
 * Rattle
 * PostgreSQL et SQuirreL SQL
-* SQL Server Data Warehouse
+* Azure Synapse Analytics (anciennement SQL DW)
 
 ### <a name="xgboost"></a>XGBoost
 
@@ -286,34 +284,9 @@ clf = svm.SVC()
 clf.fit(X, y)
 ```
 
-Pour publier le modèle dans Azure Machine Learning :
-
-```Python
-# Publish the model.
-workspace_id = "<workspace-id>"
-workspace_token = "<workspace-token>"
-from azureml import services
-@services.publish(workspace_id, workspace_token)
-@services.types(char_freq_dollar = float, word_freq_remove = float, word_freq_hp = float)
-@services.returns(int) # 0 or 1
-def predictSpam(char_freq_dollar, word_freq_remove, word_freq_hp):
-    inputArray = [char_freq_dollar, word_freq_remove, word_freq_hp]
-    return clf.predict(inputArray)
-
-# Get some info about the resulting model.
-predictSpam.service.url
-predictSpam.service.api_key
-
-# Call the model
-predictSpam.service(1, 1, 1)
-```
-
-> [!NOTE]
-> Cette option est disponible uniquement pour Python 2.7. Elle n’est pas encore prise en charge sur Python 3.5. Pour exécuter, utilisez **/anaconda/bin/python2.7**.
-
 ### <a name="jupyterhub"></a>JupyterHub
 
-La distribution Anaconda dans la machine virtuelle de science des données est fournie avec un Jupyter Notebook, un environnement multiplateforme pour partager Python, R, ou le code et l’analyse Julia. Le serveur Jupyter Notebook est accessible via JupyterHub. Vous vous connectez en utilisant votre nom d’utilisateur Linux local et votre mot de passe à https://\<nom DNS de DSVM ou adresse IP\>:8000/. Tous les fichiers de configuration pour JupyterHub se trouvent dans /etc/jupyterhub.
+La distribution Anaconda dans la machine virtuelle de science des données est fournie avec un Jupyter Notebook, un environnement multiplateforme pour partager Python, R, ou le code et l’analyse Julia. Le serveur Jupyter Notebook est accessible via JupyterHub. Vous vous connectez à https://\<DSVM DNS name or IP address\>:8000/ en utilisant votre nom d’utilisateur et votre mot de passe Linux locaux. Tous les fichiers de configuration pour JupyterHub se trouvent dans /etc/jupyterhub.
 
 > [!NOTE]
 > Pour utiliser le gestionnaire de package Python (via la commande `pip`) à partir d’un Jupyter Notebook dans le noyau actif, utilisez cette commande dans la cellule de code :
@@ -334,7 +307,6 @@ Plusieurs exemples de notebooks sont déjà installés sur la DSVM :
 
 * Exemples de notebooks Python :
   * [IntroToJupyterPython.ipynb](https://github.com/Azure/Azure-MachineLearning-DataScience/blob/master/Data-Science-Virtual-Machine/Samples/Notebooks/IntroToJupyterPython.ipynb)
-  * [IrisClassifierPyMLWebService](https://github.com/Azure/Azure-MachineLearning-DataScience/blob/master/Data-Science-Virtual-Machine/Samples/Notebooks/IrisClassifierPyMLWebService.ipynb)
 * Exemple de notebook R :
   * [IntroTutorialinR](https://github.com/Azure/Azure-MachineLearning-DataScience/blob/master/Data-Science-Virtual-Machine/Samples/Notebooks/IntroTutorialinR.ipynb) 
 
@@ -343,7 +315,7 @@ Plusieurs exemples de notebooks sont déjà installés sur la DSVM :
 
 ### <a name="rattle"></a>Rattle
 
-[Rattle](https://cran.r-project.org/web/packages/rattle/index.html) (l’*o*util d’*analyse* *R* *p*our *a*pprendre plus *f*acilement) est un outil R graphique pour l’exploration de données. Rattle possède une interface intuitive qui facilite la charge, l’exploration et la transformation des données, ainsi que la création et l’évaluation des modèles. [Rattle : une interface utilisateur graphique pour l’exploration de données pour R](https://journal.r-project.org/archive/2009-2/RJournal_2009-2_Williams.pdf) fournit une procédure pas à pas présentant les fonctionnalités de Rattle.
+[Rattle](https://cran.r-project.org/web/packages/rattle/index.html) (l’ *o* util d’ *analyse* *R* *p* our *a* pprendre plus *f* acilement) est un outil R graphique pour l’exploration de données. Rattle possède une interface intuitive qui facilite la charge, l’exploration et la transformation des données, ainsi que la création et l’évaluation des modèles. [Rattle : une interface utilisateur graphique pour l’exploration de données pour R](https://journal.r-project.org/archive/2009-2/RJournal_2009-2_Williams.pdf) fournit une procédure pas à pas présentant les fonctionnalités de Rattle.
 
 Installez et démarrez Rattle en exécutant les commandes suivantes :
 
@@ -356,14 +328,14 @@ rattle()
 > [!NOTE]
 > Vous n’avez pas besoin d’installer Rattle sur la DSVM. Toutefois, vous pouvez être invité à installer des packages supplémentaires quand Rattle s’ouvre.
 
-Rattle utilise une interface basée sur des onglets. La plupart des onglets correspondent aux étapes du [Processus de science des données de l’équipe](https://docs.microsoft.com/azure/machine-learning/team-data-science-process/), telles que le chargement de données ou leur exploration. Le processus de science des données se déroule de gauche à droite à travers les onglets. Le dernier onglet contient un journal des commandes R exécutées par Rattle.
+Rattle utilise une interface basée sur des onglets. La plupart des onglets correspondent aux étapes du [Processus de science des données de l’équipe](../team-data-science-process/index.yml), telles que le chargement de données ou leur exploration. Le processus de science des données se déroule de gauche à droite à travers les onglets. Le dernier onglet contient un journal des commandes R exécutées par Rattle.
 
 Pour charger et configurer le jeu de données :
 
 1. Pour charger le fichier, sélectionnez l’onglet **Données**.
-1. Choisissez le sélecteur en regard de **Nom de fichier**, puis sélectionnez **spambaseHeaders.data**.
+1. Choisissez le sélecteur en regard de **Nom de fichier** , puis sélectionnez **spambaseHeaders.data**.
 1. Pour charger le fichier, sélectionnez **Exécuter**. Vous devez voir un résumé de chaque colonne, notamment son type de données identifié, qu’il s’agisse d’une entrée, d’une cible ou d’un autre type de variable, ainsi que le nombre de valeurs uniques.
-1. Rattle a correctement identifié la colonne **spam** comme étant la cible. Sélectionnez la colonne **Spam**, puis définissez le **Type de données cible** sur **Par catégorie**.
+1. Rattle a correctement identifié la colonne **spam** comme étant la cible. Sélectionnez la colonne **Spam** , puis définissez le **Type de données cible** sur **Par catégorie**.
 
 Pour explorer les données :
 
@@ -374,22 +346,22 @@ Pour explorer les données :
 Vous pouvez également utiliser l'onglet **Explorer** pour générer des tracés pertinents. Pour tracer un histogramme des données :
 
 1. Sélectionnez **Distributions**.
-1. Pour **word_freq_remove** et **word_freq_you**, sélectionnez **Histogramme**.
+1. Pour **word_freq_remove** et **word_freq_you** , sélectionnez **Histogramme**.
 1. Sélectionnez **Exécuter**. Vous devez voir les deux graphiques de densité dans une seule fenêtre de graphique, où il est clair que le mot _you_ (vous) apparaît beaucoup plus fréquemment dans les e-mails que le mot _remove_ (supprimer).
 
 Les tracés de **Corrélation** sont également intéressants. Pour créer un tracé :
 
-1. Pour **Type**, sélectionnez **Corrélation**.
+1. Pour **Type** , sélectionnez **Corrélation**.
 1. Sélectionnez **Exécuter**.
 1. Rattle vous avertit qu’il recommande un maximum de 40 variables. Sélectionnez **Oui** pour afficher le tracé.
 
-Des corrélations intéressantes existent : le terme _technologie_ est étroitement corrélé avec les termes _HP_ et _laboratoires_, par exemple. Il est également étroitement corrélé avec _650_, car le code de région des donneurs du dataset est 650.
+Des corrélations intéressantes existent : le terme _technologie_ est étroitement corrélé avec les termes _HP_ et _laboratoires_ , par exemple. Il est également étroitement corrélé avec _650_ , car le code de région des donneurs du dataset est 650.
 
 Les valeurs numériques des corrélations entre les mots sont disponibles dans la fenêtre **Explorer**. Il est intéressant de noter, par exemple, que le terme _technologie_ est négativement corrélé avec les termes _votre_ et _argent_.
 
 Rattle peut transformer le jeu de données pour gérer certains problèmes courants. Par exemple, il vous permet de remettre à l’échelle les fonctionnalités, d’imputer les valeurs manquantes, de gérer les valeurs hors-norme et de supprimer des variables ou des observations avec des données manquantes. Rattle peut également identifier des règles d’association entre des observations et des variables. Ces onglets ne sont pas couverts dans cette procédure pas à pas d’introduction.
 
-Rattle peut également exécuter l’analyse du cluster. Nous allons exclure certaines fonctionnalités pour simplifier la lecture de la sortie. Sous l’onglet **Données**, sélectionnez **Ignorer** en regard de chacune des variables à l’exception de ces 10 éléments :
+Rattle peut également exécuter l’analyse du cluster. Nous allons exclure certaines fonctionnalités pour simplifier la lecture de la sortie. Sous l’onglet **Données** , sélectionnez **Ignorer** en regard de chacune des variables à l’exception de ces 10 éléments :
 
 * word_freq_hp
 * word_freq_technology
@@ -402,20 +374,20 @@ Rattle peut également exécuter l’analyse du cluster. Nous allons exclure cer
 * word_freq_business
 * spam
 
-Revenez à l'onglet **Cluster**. Sélectionnez **KMeans**, puis définissez le **Nombre de clusters** sur **4**. Sélectionnez **Exécuter**. Les résultats s’affichent dans la fenêtre de sortie. Un cluster possède une fréquence élevée de _george_ et de _hp_ et est probablement un e-mail professionnel légitime.
+Revenez à l'onglet **Cluster**. Sélectionnez **KMeans** , puis définissez le **Nombre de clusters** sur **4**. Sélectionnez **Exécuter**. Les résultats s’affichent dans la fenêtre de sortie. Un cluster possède une fréquence élevée de _george_ et de _hp_ et est probablement un e-mail professionnel légitime.
 
 Pour créer un modèle Machine Learning d’arbre de décision de base :
 
 1. Sélectionnez l’onglet **Modèle** ,
-1. Pour le **Type**, sélectionnez **Arborescence**.
+1. Pour le **Type** , sélectionnez **Arborescence**.
 1. Sélectionnez **Exécuter** pour afficher l’arbre sous forme de texte dans la fenêtre de sortie.
 1. Sélectionnez le bouton **Dessin** pour afficher une version graphique. L’arbre de décision ressemble à l’arbre obtenu précédemment à l’aide de rpart.
 
 Une des fonctionnalités utiles de Rattle est sa capacité à exécuter plusieurs méthodes Machine Learning et à les évaluer rapidement. Voici la procédure à suivre :
 
-1. Pour **Type**, sélectionnez **Tout**.
+1. Pour **Type** , sélectionnez **Tout**.
 1. Sélectionnez **Exécuter**.
-1. Une fois l’exécution de Rattle terminée, vous pouvez sélectionner n’importe quelle valeur de **Type**, par exemple **SVM**, et afficher les résultats.
+1. Une fois l’exécution de Rattle terminée, vous pouvez sélectionner n’importe quelle valeur de **Type** , par exemple **SVM** , et afficher les résultats.
 1. Vous pouvez également comparer les performances des modèles sur le jeu de validation à l’aide de l’onglet **Évaluer** . Par exemple, la sélection de l’option **Matrice d’erreur** affiche la matrice de confusion, l’erreur globale et l’erreur de classe moyennée pour chaque modèle sur le jeu de validation. Vous pouvez également tracer des courbes ROC, exécuter des analyses de sensibilité et d’autres types d’évaluations de modèle.
 
 Une fois que vous avez terminé la création de modèles, sélectionnez l’onglet **Journal** pour afficher le code R exécuté par Rattle pendant votre session. Vous pouvez sélectionner le bouton **Exporter** pour l’enregistrer.
@@ -444,7 +416,7 @@ host    all             all             127.0.0.1/32            ident
 host    all             all             ::1/128                 ident
 ```
 
-Modifiez la ligne **connexions locales IPv4** pour utiliser **md5** au lieu d’**ident**, afin de permettre la connexion avec un nom d’utilisateur et un mot de passe :
+Modifiez la ligne **connexions locales IPv4** pour utiliser **md5** au lieu d’ **ident** , afin de permettre la connexion avec un nom d’utilisateur et un mot de passe :
 
 ```
 # IPv4 local connections:
@@ -457,7 +429,7 @@ Ensuite, redémarrez le service PostgreSQL :
 sudo systemctl restart postgresql
 ```
 
-Pour lancer *psql*, un terminal interactif pour PostgreSQL, en tant qu’utilisateur postgres intégré, exécutez la commande suivante :
+Pour lancer *psql* , un terminal interactif pour PostgreSQL, en tant qu’utilisateur postgres intégré, exécutez la commande suivante :
 
 ```Bash
 sudo -u postgres psql
@@ -490,30 +462,30 @@ CREATE TABLE data (word_freq_make real, word_freq_address real, word_freq_all re
 
 À présent, nous allons explorer les données et exécuter des requêtes à l’aide de SQuirreL SQL, un outil graphique que vous pouvez utiliser pour interagir avec les bases de données via un pilote JDBC.
 
-Pour commencer, dans le menu **Applications**, ouvrez SQuirreL SQL. Pour configurer le pilote :
+Pour commencer, dans le menu **Applications** , ouvrez SQuirreL SQL. Pour configurer le pilote :
 
 1. Sélectionnez **Windows** > **Afficher les pilotes**.
 1. Cliquez avec le bouton droit sur **PostgreSQL** et sélectionnez **Modifier le pilote**.
 1. Sélectionnez **Chemin d’accès de la classe supplémentaire** > **Ajouter**.
-1. Pour le **Nom de fichier**, entrez **/usr/share/java/jdbcdrivers/postgresql-9.4.1208.jre6.jar**.
+1. Pour le **Nom de fichier** , entrez **/usr/share/java/jdbcdrivers/postgresql-9.4.1208.jre6.jar**.
 1. Sélectionnez **Ouvrir**.
-1. Sélectionnez **Répertorier les pilotes**. Pour **Nom de la classe**, sélectionnez **org.postgresql.Driver**, puis sélectionnez **OK**.
+1. Sélectionnez **Répertorier les pilotes**. Pour **Nom de la classe** , sélectionnez **org.postgresql.Driver** , puis sélectionnez **OK**.
 
 Pour configurer la connexion au serveur local :
 
 1. Sélectionnez **Windows** > **Afficher les alias.**
 1. Sélectionnez le bouton **+** pour créer un nouvel alias. Pour le nouveau nom d’alias, entrez **Base de données de courrier indésirable**. 
-1. Pour **Pilote**, sélectionnez **PostgreSQL**.
+1. Pour **Pilote** , sélectionnez **PostgreSQL**.
 1. Définissez l’URL sur **jdbc:postgresql://localhost/spam**.
 1. Entrez votre nom d'utilisateur et votre mot de passe.
 1. Sélectionnez **OK**.
-1. Pour ouvrir la fenêtre **Connexion**, double-cliquez sur l’alias de la **Base de données de courrier indésirable**.
+1. Pour ouvrir la fenêtre **Connexion** , double-cliquez sur l’alias de la **Base de données de courrier indésirable**.
 1. Sélectionnez **Connecter**.
 
 Pour exécuter des requêtes :
 
 1. Sélectionnez l’onglet **SQL** .
-1. Dans la zone de requête située en haut de l'onglet **SQL**, entrez une requête de base, par exemple `SELECT * from data;`.
+1. Dans la zone de requête située en haut de l'onglet **SQL** , entrez une requête de base, par exemple `SELECT * from data;`.
 1. Appuyez sur Ctrl+Entrée pour exécuter la requête. Par défaut, SQuirreL SQL renvoie les 100 premières lignes de votre requête.
 
 Il existe de nombreuses requêtes supplémentaires, que vous pouvez exécuter pour explorer ces données. Par exemple, en quoi la fréquence du mot *make* diffère-t-elle entre le courrier indésirable et le courrier légitime ?
@@ -532,9 +504,9 @@ La plupart des e-mails qui ont une occurrence élevée de *3d* sont apparemment 
 
 Si vous souhaitiez effectuer du Machine Learning avec des données stockées dans une base de données PostgreSQL, envisagez d’utiliser [MADlib](https://madlib.incubator.apache.org/).
 
-### <a name="sql-data-warehouse"></a>SQL Data Warehouse
+### <a name="azure-synapse-analytics-formerly-sql-dw"></a>Azure Synapse Analytics (anciennement SQL DW)
 
-Azure SQL Data Warehouse est une base de données de mise à l’échelle basée sur le cloud qui prend en charge le traitement de grands volumes de données relationnelles et non relationnelles. Pour plus d’informations, consultez [En quoi consiste Azure SQL Data Warehouse ?](../../synapse-analytics/sql-data-warehouse/sql-data-warehouse-overview-what-is.md)
+Azure Synapse Analytics est une base de données de mise à l’échelle basée sur le cloud qui prend en charge le traitement de grands volumes de données relationnelles et non relationnelles. Pour plus d’informations, consultez l’article [Qu’est-ce qu’Azure Synapse Analytics ?](../../synapse-analytics/sql-data-warehouse/sql-data-warehouse-overview-what-is.md).
 
 Pour vous connecter à l’entrepôt de données et créer la table, exécutez la commande suivante depuis une invite de commandes :
 
@@ -566,9 +538,3 @@ GO
 ```
 
 Vous pouvez également interroger à l’aide de SQuirreL SQL. Suivez des étapes similaires à PostgreSQL avec le pilote JDBC SQL Server. Le pilote JDBC se trouve dans le dossier /usr/share/java/jdbcdrivers/sqljdbc42.jar.
-
-## <a name="next-steps"></a>Étapes suivantes
-
-Pour une vue d’ensemble des articles qui vous guident à travers les tâches qui constituent le processus de science des données dans Azure, consultez [processus de science des données pour les équipes](https://docs.microsoft.com/azure/machine-learning/team-data-science-process/overview).
-
-Pour une description des procédures pas à pas complètes illustrant les étapes du processus TDSP pour des scénarios spécifiques, voir [Procédures pas à pas du processus TDSP (Team Data Science Process)](../team-data-science-process/walkthroughs.md). Les procédures pas à pas montrent également comment combiner les outils et services dans le cloud et sur site dans un flux de travail ou un pipeline pour créer une application intelligente.

@@ -6,26 +6,27 @@ ms.author: robinsh
 ms.date: 04/04/2018
 ms.topic: conceptual
 ms.service: iot-dps
+ms.custom: fasttrack-edit, iot
 services: iot-dps
-ms.openlocfilehash: 5cb0e25ec70956e66f7b867f0d0b9473160fc3ad
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 45a2b7a64006ab6963290be3ac86a3a5d1e4916d
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74975072"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96010977"
 ---
 # <a name="how-to-manage-device-enrollments-with-azure-device-provisioning-service-sdks"></a>Guide pratique pour gérer les inscriptions d’appareil avec les SDK du service de provisionnement des appareils Azure
 Une *inscription d’appareil* crée un enregistrement d’un appareil ou d’un groupe d’appareils susceptibles d’être inscrits au service de provisionnement des appareils à un moment donné. L’enregistrement contient la configuration initiale souhaitée pour le ou les appareils dans le cadre de cette inscription, y compris le hub IoT souhaité. Cet article explique comment gérer les inscriptions d’appareils pour votre service de provisionnement par programmation en utilisant les SDK du service de provisionnement des appareils Azure IoT.  Les SDK sont disponibles sur GitHub dans le même dépôt que les SDK Azure IoT.
 
 ## <a name="prerequisites"></a>Conditions préalables requises
 * Récupérez la chaîne de connexion à partir de votre instance du service Device Provisioning.
-* Récupérez des artefacts de sécurité des appareils pour le [mécanisme d’attestation](concepts-security.md#attestation-mechanism) utilisé :
-    * [**Module de plateforme sécurisée (TPM)** ](/azure/iot-dps/concepts-security#trusted-platform-module) :
+* Récupérez des artefacts de sécurité des appareils pour le [mécanisme d’attestation](concepts-service.md#attestation-mechanism) utilisé :
+    * [**Module de plateforme sécurisée (TPM)**](./concepts-tpm-attestation.md) :
         * Inscription individuelle : ID d’inscription et paire de clés de type EK du module de plateforme sécurisée à partir d’un appareil physique ou du simulateur TPM.
         * Le groupe d’inscriptions ne s’applique pas à l’attestation TPM.
-    * [**X.509**](/azure/iot-dps/concepts-security) :
-        * Inscription individuelle : [certificat feuille](/azure/iot-dps/concepts-security) à partir de l’appareil physique ou de l’émulateur [DICE](https://azure.microsoft.com/blog/azure-iot-supports-new-security-hardware-to-strengthen-iot-security/) du SDK.
-        * Groupe d’inscriptions : [certificat racine/de l’autorité de certification](/azure/iot-dps/concepts-security#root-certificate) ou [certificat intermédiaire](/azure/iot-dps/concepts-security#intermediate-certificate), utilisé pour générer le certificat d’appareil sur un appareil physique.  Il peut également être généré à partir de l’émulateur DICE du SDK.
+    * [**X.509**](./concepts-service.md#attestation-mechanism) :
+        * Inscription individuelle : [certificat feuille](./concepts-service.md#attestation-mechanism) à partir de l’appareil physique ou de l’émulateur [DICE](https://azure.microsoft.com/blog/azure-iot-supports-new-security-hardware-to-strengthen-iot-security/) du SDK.
+        * Groupe d’inscriptions : [certificat racine/de l’autorité de certification](./concepts-x509-attestation.md#root-certificate) ou [certificat intermédiaire](./concepts-x509-attestation.md#intermediate-certificate), utilisé pour générer le certificat d’appareil sur un appareil physique.  Il peut également être généré à partir de l’émulateur DICE du SDK.
 * Les appels d’API peuvent différer d’un langage à l’autre. Pour plus d’informations, consultez les exemples fournis sur GitHub :
    * [Exemples de provisionnement de client de service en Java](https://github.com/Azure/azure-iot-sdk-java/tree/master/provisioning/provisioning-samples)
    * [Exemples de provisionnement de client de service en Node.js](https://github.com/Azure/azure-iot-sdk-node/tree/master/provisioning/service/samples)
@@ -34,12 +35,12 @@ Une *inscription d’appareil* crée un enregistrement d’un appareil ou d’un
 ## <a name="create-a-device-enrollment"></a>Créer une inscription d’appareil
 Il existe deux façons de procéder à l’inscription de vos appareils auprès du service d’approvisionnement :
 
-* Un **groupe d’inscriptions** est une entrée pour un groupe d’appareils partageant un mécanisme commun d’attestation de certificats X.509 signés par le [certificat racine](https://docs.microsoft.com/azure/iot-dps/concepts-security#root-certificate) ou le [certificat intermédiaire](https://docs.microsoft.com/azure/iot-dps/concepts-security#intermediate-certificate). Nous vous recommandons d’utiliser un groupe d’inscription pour un grand nombre d’appareils qui partagent une configuration initiale souhaitée ou pour des appareils destinés au même locataire. Notez que vous pouvez uniquement inscrire les appareils qui utilisent le mécanisme d’attestation X.509 comme *groupe d’inscriptions*. 
+* Un **groupe d’inscriptions** est une entrée pour un groupe d’appareils partageant un mécanisme commun d’attestation de certificats X.509 signés par le [certificat racine](./concepts-x509-attestation.md#root-certificate) ou le [certificat intermédiaire](./concepts-x509-attestation.md#intermediate-certificate). Nous vous recommandons d’utiliser un groupe d’inscription pour un grand nombre d’appareils qui partagent une configuration initiale souhaitée ou pour des appareils destinés au même locataire. Notez que vous pouvez uniquement inscrire les appareils qui utilisent le mécanisme d’attestation X.509 comme *groupe d’inscriptions*. 
 
     Vous pouvez créer un groupe d’inscriptions avec les SDK en suivant ce flux de travail :
 
     1. Pour le groupe d’inscriptions, le mécanisme d’attestation utilise le certificat racine X.509.  Appelez l’API de SDK de service ```X509Attestation.createFromRootCertificate``` avec un certificat racine afin de créer l’attestation pour l’inscription.  Le certificat racine X.509 est fourni dans un fichier PEM ou sous forme de chaîne.
-    1. Créez une variable ```EnrollmentGroup``` à l’aide de l’```attestation``` créée et d’un ```enrollmentGroupId``` unique.  Si vous le souhaitez, vous pouvez définir des paramètres tels que ```Device ID```, ```IoTHubHostName```et ```ProvisioningStatus```.
+    1. Créez une variable ```EnrollmentGroup``` à l’aide de l’```attestation``` créée et d’un ```enrollmentGroupId``` unique.  Si vous le souhaitez, vous pouvez définir des paramètres tels que ```IoTHubHostName``` et ```ProvisioningStatus```.
     2. Appelez l’API de SDK de service ```createOrUpdateEnrollmentGroup``` dans votre application backend avec ```EnrollmentGroup``` pour créer un groupe d’inscriptions.
 
 * L’**inscription individuelle** est une entrée permettant d’enregistrer un seul appareil. Les inscriptions individuelles peuvent utiliser des certificats X.509 ou des jetons SAP (à partir d’un module de plateforme sécurisée réel ou virtuel) comme mécanismes d’attestation. Nous vous recommandons d’utiliser des inscriptions individuelles pour les appareils qui nécessitent une configuration initiale unique ou pour les appareils qui peuvent uniquement utiliser des jetons SAP par le biais du module TPM ou du module TPM virtuel comme mécanisme d’attestation. Dans le cas d’inscriptions individuelles, vous pouvez spécifier l’ID de l’appareil IoT Hub souhaité.

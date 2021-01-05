@@ -8,13 +8,13 @@ ms.devlang: python
 ms.topic: conceptual
 ms.date: 03/31/2020
 ms.author: robinsh
-ms.custom: mqtt
-ms.openlocfilehash: 47fb7c615389e24322450ed1785aa7da9ec50db6
-ms.sourcegitcommit: 31e9f369e5ff4dd4dda6cf05edf71046b33164d3
+ms.custom: mqtt, devx-track-python
+ms.openlocfilehash: 1112df382fb10051ac06c4461a9e4328e1663388
+ms.sourcegitcommit: dbe434f45f9d0f9d298076bf8c08672ceca416c6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81759696"
+ms.lasthandoff: 10/17/2020
+ms.locfileid: "92139321"
 ---
 # <a name="upload-files-from-your-device-to-the-cloud-with-iot-hub-python"></a>Charger des fichiers sur le cloud à partir d’un appareil avec IoT Hub (Python)
 
@@ -33,6 +33,8 @@ Le guide de démarrage rapide [Envoyer des données de télémétrie d’un appa
 * **FileUpload.py**, qui charge un fichier sur le stockage à l’aide du kit Python Device SDK.
 
 [!INCLUDE [iot-hub-include-python-sdk-note](../../includes/iot-hub-include-python-sdk-note.md)]
+
+[!INCLUDE [iot-hub-include-x509-ca-signed-file-upload-support-note](../../includes/iot-hub-include-x509-ca-signed-file-upload-support-note.md)]
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -107,7 +109,7 @@ Dans cette section, créez l’application d’appareil pour charger un fichier 
             return (False, ex)
     ```
 
-    Cette fonction analyse la structure *blob_info* qui lui est transmise pour créer une URL qu’il utilise pour initialiser un [azure.storage.blob.BlobClient](https://docs.microsoft.com/python/api/azure-storage-blob/azure.storage.blob.blobclient?view=azure-python). Ensuite, elle charge votre fichier dans le stockage Blob Azure à l’aide de ce client.
+    Cette fonction analyse la structure *blob_info* qui lui est transmise pour créer une URL qu’il utilise pour initialiser un [azure.storage.blob.BlobClient](/python/api/azure-storage-blob/azure.storage.blob.blobclient?view=azure-python). Ensuite, elle charge votre fichier dans le stockage Blob Azure à l’aide de ce client.
 
 1. Pour connecter le client et charger le fichier, ajoutez le code suivant :
 
@@ -207,6 +209,6 @@ Dans ce didacticiel, vous avez appris à utiliser les fonctionnalités de télé
 
 Suivez les liens suivants pour en savoir plus sur Stockage Blob Azure :
 
-* [Documentation sur Stockage Blob Azure](https://docs.microsoft.com/azure/storage/blobs/)
+* [Documentation sur Stockage Blob Azure](../storage/blobs/index.yml)
 
-* [Documentation sur Stockage Blob Azure pour l’API Python](https://docs.microsoft.com/python/api/overview/azure/storage-blob-readme?view=azure-python)
+* [Documentation sur Stockage Blob Azure pour l’API Python](/python/api/overview/azure/storage-blob-readme?view=azure-python)

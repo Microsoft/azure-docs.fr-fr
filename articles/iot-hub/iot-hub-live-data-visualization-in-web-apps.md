@@ -8,12 +8,16 @@ ms.topic: conceptual
 ms.tgt_pltfrm: arduino
 ms.date: 05/31/2019
 ms.author: robinsh
-ms.openlocfilehash: 5e27cf51d50b3094adca6ce8d3846ef358f78482
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.custom:
+- 'Role: Cloud Development'
+- 'Role: Data Analytics'
+- devx-track-azurecli
+ms.openlocfilehash: 3218df4601ef7a5e1b1e04c20c89eefc367b720b
+ms.sourcegitcommit: ad83be10e9e910fd4853965661c5edc7bb7b1f7c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83201525"
+ms.lasthandoff: 12/06/2020
+ms.locfileid: "96746452"
 ---
 # <a name="visualize-real-time-sensor-data-from-your-azure-iot-hub-in-a-web-application"></a>Visualiser les données de capteur en temps réel depuis votre hub Azure IoT dans une application web
 
@@ -47,17 +51,11 @@ Ce tutoriel explique comment visualiser en temps réel les données de capteur q
 
 * Les étapes de cet article supposent une machine de développement Windows. Vous pouvez, toutefois, effectuer ces étapes facilement sur un système Linux, dans l’interpréteur de commandes de votre choix.
 
-[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
-
-Exécutez la commande suivante afin d’ajouter l’extension Microsoft Azure IoT pour Azure CLI à votre instance Cloud Shell. L’extension IoT ajoute des commandes IoT Hub, IoT Edge et IoT Device Provisioning Service (DPS) à Azure CLI.
-
-```azurecli-interactive
-az extension add --name azure-iot
-```
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../includes/azure-cli-prepare-your-environment-no-header.md)]
 
 ## <a name="add-a-consumer-group-to-your-iot-hub"></a>Ajouter un groupe de consommateurs à votre instance IoT Hub
 
-Les [Groupes de consommateurs](https://docs.microsoft.com/azure/event-hubs/event-hubs-features#event-consumers) fournissent des vues indépendantes dans le flux d’événements qui permettent aux applications et services Azure de consommer indépendamment des données à partir du même point de terminaison Event Hub. Dans cette section, vous ajoutez un groupe de consommateurs au point de terminaison intégré de votre hub IoT, point à partir duquel l’application web lira les données.
+Les [Groupes de consommateurs](../event-hubs/event-hubs-features.md#event-consumers) fournissent des vues indépendantes dans le flux d’événements qui permettent aux applications et services Azure de consommer indépendamment des données à partir du même point de terminaison Event Hub. Dans cette section, vous ajoutez un groupe de consommateurs au point de terminaison intégré de votre hub IoT, point à partir duquel l’application web lira les données.
 
 Exécutez la commande suivante pour ajouter un groupe de consommateurs au point de terminaison intégré de votre hub IoT :
 
@@ -153,11 +151,11 @@ Vous devez également voir la sortie dans la console qui affiche les messages qu
 
 ## <a name="host-the-web-app-in-app-service"></a>Héberger l’application web dans App Service
 
-La [fonctionnalité Web Apps d’Azure App Service](https://docs.microsoft.com/azure/app-service/overview) fournit une plateforme en tant que service (PAAS) pour l’hébergement d’applications web. Les applications web hébergées dans Azure App Service peuvent bénéficier de puissantes fonctionnalités Azure, telles qu’une sécurité supplémentaire, l’équilibrage de charge et la scalabilité, ainsi que des solutions DevOps proposées par Azure et les partenaires, comme le déploiement continu, la gestion des packages, etc. Azure App Service prend en charge les applications web développées dans de nombreux langages connus, et déployées sur une infrastructure Windows ou Linux.
+La [fonctionnalité Web Apps d’Azure App Service](../app-service/overview.md) fournit une plateforme en tant que service (PAAS) pour l’hébergement d’applications web. Les applications web hébergées dans Azure App Service peuvent bénéficier de puissantes fonctionnalités Azure, telles qu’une sécurité supplémentaire, l’équilibrage de charge et la scalabilité, ainsi que des solutions DevOps proposées par Azure et les partenaires, comme le déploiement continu, la gestion des packages, etc. Azure App Service prend en charge les applications web développées dans de nombreux langages connus, et déployées sur une infrastructure Windows ou Linux.
 
-Dans cette section, vous provisionnez une application web dans App Service et y déployez votre code à l’aide de commandes Azure CLI. Les détails des commandes utilisées se trouvent dans la documentation [az webapp](https://docs.microsoft.com/cli/azure/webapp?view=azure-cli-latest). Avant de commencer, assurez-vous que vous avez suivi les étapes pour [ajouter un groupe de ressources à votre hub IoT](#add-a-consumer-group-to-your-iot-hub), [obtenir une chaîne de connexion de service pour votre hub IoT](#get-a-service-connection-string-for-your-iot-hub) et [télécharger l’application web à partir de GitHub](#download-the-web-app-from-github).
+Dans cette section, vous provisionnez une application web dans App Service et y déployez votre code à l’aide de commandes Azure CLI. Les détails des commandes utilisées se trouvent dans la documentation [az webapp](/cli/azure/webapp?view=azure-cli-latest). Avant de commencer, assurez-vous que vous avez suivi les étapes pour [ajouter un groupe de ressources à votre hub IoT](#add-a-consumer-group-to-your-iot-hub), [obtenir une chaîne de connexion de service pour votre hub IoT](#get-a-service-connection-string-for-your-iot-hub) et [télécharger l’application web à partir de GitHub](#download-the-web-app-from-github).
 
-1. Un [plan App Service](https://docs.microsoft.com/azure/app-service/overview-hosting-plans) définit un ensemble de ressources de calcul nécessaires à l’exécution d’une application hébergée dans App Service. Dans ce tutoriel, nous utilisons le niveau Développeur/Gratuit pour héberger l’application web. Avec le niveau Gratuit, votre application web s’exécute sur des ressources Windows partagées avec d’autres applications App Service, y compris les applications d’autres clients. Azure propose également des plans App Service pour déployer des applications web sur des ressources de calcul Linux. Vous pouvez ignorer cette étape si vous disposez déjà d’un plan App Service que vous souhaitez utiliser.
+1. Un [plan App Service](../app-service/overview-hosting-plans.md) définit un ensemble de ressources de calcul nécessaires à l’exécution d’une application hébergée dans App Service. Dans ce tutoriel, nous utilisons le niveau Développeur/Gratuit pour héberger l’application web. Avec le niveau Gratuit, votre application web s’exécute sur des ressources Windows partagées avec d’autres applications App Service, y compris les applications d’autres clients. Azure propose également des plans App Service pour déployer des applications web sur des ressources de calcul Linux. Vous pouvez ignorer cette étape si vous disposez déjà d’un plan App Service que vous souhaitez utiliser.
 
    Pour créer un plan App Service par l’intermédiaire du niveau gratuit de Windows, exécutez la commande suivante. Utilisez le même groupe de ressources que celui dans lequel se trouve votre hub IoT. Le nom de votre plan de service peut contenir des lettres majuscules et minuscules, des chiffres et des traits d’union.
 
@@ -184,9 +182,9 @@ Dans cette section, vous provisionnez une application web dans App Service et y 
    az webapp update -n <your web app name> -g <your resource group name> --https-only true
    ```
 
-5. Pour déployer le code sur App Service, vous allez utiliser vos [informations d’identification de déploiement au niveau utilisateur](https://docs.microsoft.com/azure/app-service/deploy-configure-credentials). Vos informations d’identification de déploiement au niveau de l’utilisateur sont différentes de vos informations d’identification Azure ; elles sont utilisées pour les déploiements FTP et Git local vers une application web. Une fois définies, elles sont valides sur l’ensemble de vos applications App Service, dans tous les abonnements de votre compte Azure. Si vous avez précédemment configuré des informations d’identification de déploiement au niveau utilisateur, vous pouvez les utiliser.
+5. Pour déployer le code sur App Service, vous allez utiliser vos [informations d’identification de déploiement au niveau utilisateur](../app-service/deploy-configure-credentials.md). Vos informations d’identification de déploiement au niveau de l’utilisateur sont différentes de vos informations d’identification Azure ; elles sont utilisées pour les déploiements FTP et Git local vers une application web. Une fois définies, elles sont valides sur l’ensemble de vos applications App Service, dans tous les abonnements de votre compte Azure. Si vous avez précédemment configuré des informations d’identification de déploiement au niveau utilisateur, vous pouvez les utiliser.
 
-   Si vous ne l’avez pas fait, ou si vous avez oublié votre mot de passe, exécutez la commande suivante. Le nom d’utilisateur de déploiement doit être unique dans Azure, et il ne doit pas contenir le symbole « @ » pour les push Git locaux. Lorsque vous y êtes invité, entrez et confirmez votre nouveau mot de passe. Le mot de passe doit comporter au moins huit caractères et inclure deux des trois éléments suivants : lettres, chiffres et symboles.
+   Si vous ne l’avez pas fait, ou si vous avez oublié votre mot de passe, exécutez la commande suivante. Le nom d’utilisateur de déploiement doit être unique dans Azure, et il ne doit pas contenir le symbole « \@ » pour les push Git locaux. Lorsque vous y êtes invité, entrez et confirmez votre nouveau mot de passe. Le mot de passe doit comporter au moins huit caractères et inclure deux des trois éléments suivants : lettres, chiffres et symboles.
 
    ```azurecli-interactive
    az webapp deployment user set --user-name <your deployment user name>
@@ -198,7 +196,7 @@ Dans cette section, vous provisionnez une application web dans App Service et y 
    az webapp deployment source config-local-git -n <your web app name> -g <your resource group name>
    ```
 
-7. Ajoutez une instance distante à votre clone qui référence le dépôt Git pour l’application web dans App Service. Pour \<URL de clone Git\>, utilisez l’URL retournée à l’étape précédente. Exécutez la commande suivante dans votre fenêtre de commande.
+7. Ajoutez une instance distante à votre clone qui référence le dépôt Git pour l’application web dans App Service. Pour \<Git clone URL\>, utilisez l’URL retournée à l’étape précédente. Exécutez la commande suivante dans votre fenêtre de commande.
 
    ```cmd
    git remote add webapp <Git clone URL>

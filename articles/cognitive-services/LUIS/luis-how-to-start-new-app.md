@@ -3,20 +3,18 @@ title: Créer une nouvelle application - LUIS
 titleSuffix: Azure Cognitive Services
 description: Créez et gérez vos applications sur la page web de Language Understanding (LUIS).
 services: cognitive-services
-author: diberry
 manager: nitinme
 ms.custom: seodec18
 ms.service: cognitive-services
 ms.subservice: language-understanding
-ms.topic: conceptual
-ms.date: 05/07/2020
-ms.author: diberry
-ms.openlocfilehash: fc9f44739cd57eb46179ff17eba1d4f73d968799
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.topic: how-to
+ms.date: 05/18/2020
+ms.openlocfilehash: 2dd06a7b4c8e6296cda747d17fd3d5be5db0af6b
+ms.sourcegitcommit: 10d00006fec1f4b69289ce18fdd0452c3458eca5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83585621"
+ms.lasthandoff: 11/21/2020
+ms.locfileid: "95018886"
 ---
 # <a name="create-a-new-luis-app-in-the-luis-portal"></a>Créer une application LUIS dans le portail LUIS
 Il existe deux façons de créer une application LUIS. Vous pouvez créer une application LUIS dans le portail LUIS ou par le biais des [API](developer-reference-resource.md) de création LUIS.
@@ -26,7 +24,7 @@ Il existe deux façons de créer une application LUIS. Vous pouvez créer une ap
 Vous pouvez créer une application dans le portail de plusieurs manières :
 
 * Démarrez avec une application vide et créer des intentions, des énoncés et des entités.
-* Démarrez avec une application vide et ajoutez un [domaine prédéfini](luis-how-to-use-prebuilt-domains.md).
+* Démarrez avec une application vide et ajoutez un [domaine prédéfini](./howto-add-prebuilt-models.md).
 * Importez une application LUIS à partir d’un fichier `.lu` ou `.json` qui contient déjà des intentions, des énoncés et des entités.
 
 ## <a name="using-the-authoring-apis"></a>Utilisation des API de création
@@ -45,10 +43,10 @@ Vous pouvez créer une application avec les API de création de deux manières 
 
 ## <a name="create-new-app-in-luis"></a>Créer une application dans LUIS
 
-1. Dans la page **Mes applications**, sélectionnez votre abonnement et la ressource de création, puis **+ Créer**. Si vous utilisez la clé d’évaluation gratuite, découvrez comment [créer une ressource de création](luis-how-to-azure-subscription.md#create-resources-in-the-azure-portal).
+1. Dans la page **Mes applications**, sélectionnez votre **Abonnement** et **Ressource de création**, puis **+ Créer**. 
 
-    ![Liste des applications LUIS](./media/create-app-in-portal.png)
-
+> [!div class="mx-imgBorder"]
+> ![Liste des applications LUIS](./media/create-app-in-portal.png)
 
 1. Dans la boîte de dialogue, entrez le nom de votre application, par exemple `Pizza Tutorial`.
 
@@ -64,7 +62,7 @@ Vous pouvez créer une application avec les API de création de deux manières 
     > [!div class="mx-imgBorder"]
     > ![Liste des intentions avec l’intention None créée sans aucun exemple d’énoncé.](media/pizza-tutorial-new-app-empty-intent-list.png)
 
-## <a name="other-actions-available"></a>Autres actions disponibles
+## <a name="other-actions-available-on-my-apps-page"></a>Autres actions disponibles sur la page Mes applications
 
 La barre d’outils de contextuelle propose d’autres actions :
 
@@ -77,4 +75,4 @@ La barre d’outils de contextuelle propose d’autres actions :
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Si la conception de votre application comprend la détection des intentions, [créez de nouvelles intentions](luis-how-to-add-intents.md) et ajoutez des exemples d’énoncés. Si la conception de votre application n’a trait qu’à l’extraction de données, ajoutez des exemples d’énoncés à l’intention None, puis [créez des entités](luis-how-to-add-example-utterances.md) et étiquetez les exemples d’énoncés avec ces entités.
+Si la conception de votre application comprend la détection des intentions, [créez de nouvelles intentions](luis-how-to-add-intents.md) et ajoutez des exemples d’énoncés. Si la conception de votre application n’a trait qu’à l’extraction de données, ajoutez des exemples d’énoncés à l’intention None, puis [créez des entités](./luis-how-to-add-entities.md) et étiquetez les exemples d’énoncés avec ces entités.

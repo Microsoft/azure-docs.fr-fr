@@ -8,17 +8,17 @@ ms.subservice: core
 ms.topic: reference
 author: likebupt
 ms.author: keli19
-ms.date: 09/09/2019
-ms.openlocfilehash: 2e44a4861e2522b766aab9c7151d76c471dd2d8c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 11/12/2020
+ms.openlocfilehash: c66fbe59fd5b2660d02bfca285f78666d64569fe
+ms.sourcegitcommit: dc342bef86e822358efe2d363958f6075bcfc22a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76314536"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94555598"
 ---
 # <a name="apply-sql-transformation"></a>Appliquer une transformation SQL
 
-Cet article décrit un module du concepteur Azure Machine Learning (préversion).
+Cet article décrit un module du concepteur Azure Machine Learning.
 
 À l’aide du module Appliquer une transformation SQL, vous pouvez effectuer les opérations suivantes :
   
@@ -29,11 +29,26 @@ Cet article décrit un module du concepteur Azure Machine Learning (préversion)
 -   Exécuter des instructions de requête SQL pour filtrer ou modifier des données, et retourner les résultats de requête dans une table de données.  
 
 > [!IMPORTANT]
-> Le moteur SQL utilisé dans ce module est **SQLite**. Pour plus d’informations sur la syntaxe SQLite, consultez [SQL as Understood by SQLite](https://www.sqlite.org/index.html).  
+> Le moteur SQL utilisé dans ce module est **SQLite**. Pour plus d’informations sur la syntaxe SQLite, consultez [SQL as Understood by SQLite](https://www.sqlite.org/index.html).
+> Ce module transfèrera des données vers SQLite, qui se trouve dans la base de données de mémoire, de sorte que l’exécution du module nécessite beaucoup plus de mémoire et peut aboutir à une erreur `Out of memory`. Assurez-vous que votre ordinateur dispose de suffisamment de RAM.
 
 ## <a name="how-to-configure-apply-sql-transformation"></a>Comment configurer le module Appliquer une transformation SQL  
 
 Le module peut utiliser jusqu’à trois jeux de données comme entrées. Quand vous référencez les jeux de données connectés à chaque port d’entrée, vous devez utiliser les noms `t1`, `t2` et `t3`. Le numéro de table indique l’index du port d’entrée.  
+
+Voici un exemple de code pour illustrer comment joindre deux tables. t1 et t2 sont deux jeux de données connectés aux ports d’entrée de gauche et du milieu d’**Application d’une transformation SQL** :
+
+```sql
+SELECT t1.*
+    , t3.Average_Rating
+FROM t1 join
+    (SELECT placeID
+        , AVG(rating) AS Average_Rating
+    FROM t2
+    GROUP BY placeID
+    ) as t3
+on t1.placeID = t3.placeID
+```
   
 Le paramètre restant est une requête SQL, qui utilise la syntaxe SQLite. Quand vous tapez plusieurs lignes dans la zone de texte **Script SQL**, utilisez un point-virgule pour terminer chaque instruction. Sinon, les sauts de ligne sont convertis en espaces.  
 

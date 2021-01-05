@@ -11,12 +11,12 @@ ms.topic: reference
 ms.date: 09/10/2018
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: 7f734844859d44e66bddbc2ddd999659e52f9668
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 7a2cbca8c02dcbfc0e59d31040d1fca7a790cd35
+ms.sourcegitcommit: dea56e0dd919ad4250dde03c11d5406530c21c28
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78184075"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96936656"
 ---
 # <a name="define-an-oauth1-technical-profile-in-an-azure-active-directory-b2c-custom-policy"></a>Définir un profil technique OAuth1 dans une stratégie personnalisée Azure Active Directory B2C
 
@@ -28,7 +28,7 @@ Azure Active Directory B2C (Azure AD B2C) prend en charge le fournisseur d’id
 
 L’attribut **Name** de l’élément **Protocol** doit être défini sur `OAuth1`. Par exemple, le protocole pour profil technique **Twitter-OAUTH1** est `OAuth1`.
 
-```XML
+```xml
 <TechnicalProfile Id="Twitter-OAUTH1">
   <DisplayName>Twitter</DisplayName>
   <Protocol Name="OAuth1" />
@@ -88,23 +88,8 @@ L’élément **CryptographicKeys** contient l’attribut suivant :
 
 ## <a name="redirect-uri"></a>URI de redirection
 
-Lorsque vous configurez l’URL de redirection de votre fournisseur d’identité, entrez `https://login.microsoftonline.com/te/tenant/policyId/oauth1/authresp`. Veillez à remplacer **{tenant}** par le nom de votre locataire (par exemple, contosob2c.onmicrosoft.com), et **{policyId}** par l’identificateur de votre stratégie (par exemple, b2c_1_policy). L’URI de redirection doit être en minuscules. Ajoutez un URI de redirection pour toutes les stratégies qui utilisent la connexion de fournisseur d’identité.
-
-Si vous utilisez le domaine **b2clogin.com** à la place de **login.microsoftonline.com**, veillez à utiliser b2clogin.com au lieu de login.microsoftonline.com.
+Lorsque vous configurez l’URI de redirection de votre fournisseur d’identité, entrez `https://{tenant-name}.b2clogin.com/{tenant-name}.onmicrosoft.com/{policy-id}/oauth1/authresp`. Veillez à remplacer `{tenant-name}` par le nom de votre locataire (par exemple, contosob2c), et `{policy-id}` par l’identificateur de votre stratégie (par exemple, b2c_1a_policy). L’URI de redirection doit être en minuscules. Ajoutez un URI de redirection pour toutes les stratégies qui utilisent la connexion de fournisseur d’identité.
 
 Exemples :
 
-- [Ajouter Twitter en tant que fournisseur d’identité OAuth1 à l’aide de stratégies personnalisées](identity-provider-twitter-custom.md)
-
-
-
-
-
-
-
-
-
-
-
-
-
+- [Ajouter Twitter en tant que fournisseur d’identité OAuth1 à l’aide de stratégies personnalisées](identity-provider-twitter.md)

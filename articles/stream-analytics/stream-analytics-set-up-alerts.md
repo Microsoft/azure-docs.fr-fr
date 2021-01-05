@@ -5,14 +5,15 @@ author: jseb225
 ms.author: sidram
 ms.reviewer: mamccrea
 ms.service: stream-analytics
-ms.topic: conceptual
+ms.topic: how-to
+ms.custom: contperf-fy21q1
 ms.date: 06/21/2019
-ms.openlocfilehash: 2bd1f59d5cf33ae7f1f2e33e6c3f1312b5a13e61
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 8d591bb9c4b2ef8100946082f19115b99b30dde1
+ms.sourcegitcommit: 3ea45bbda81be0a869274353e7f6a99e4b83afe2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82127593"
+ms.lasthandoff: 12/10/2020
+ms.locfileid: "97027490"
 ---
 # <a name="set-up-alerts-for-azure-stream-analytics-jobs"></a>Configuration d’alertes pour des tâches Azure Stream Analytics
 
@@ -47,11 +48,11 @@ L’exemple suivant montre comment configurer des alertes quand votre travail en
 
 7. Les champs **RESSOURCE**, **CONDITION** et **GROUPES D’ACTIONS** doivent chacun avoir une entrée. Notez que pour que les alertes se déclenchent, les conditions définies doivent être respectées. Par exemple, vous pouvez mesurer la valeur moyenne d’une métrique sur les 15 dernières minutes, toutes les 5 minutes.
 
-   ![Créer une règle d’alerte Stream Analytics](./media/stream-analytics-set-up-alerts/stream-analytics-create-alert-rule-2.png)
+   ![Capture d’écran représentant la boîte de dialogue Créer une règle avec RESOURCE, CONDITION et ACTION GROUP.](./media/stream-analytics-set-up-alerts/stream-analytics-create-alert-rule-2.png)
 
    Ajoutez un **nom de règle d’alerte**, une **description** et votre **groupe de ressources** aux **DÉTAILS DE L’ALERTE** et cliquez sur **Créer une règle d’alerte** pour créer la règle de votre travail Stream Analytics.
 
-   ![Créer une règle d’alerte Stream Analytics](./media/stream-analytics-set-up-alerts/stream-analytics-create-alert-rule.png)
+   ![Capture d’écran représentant la boîte de dialogue Créer une règle avec ALERT DETAILS.](./media/stream-analytics-set-up-alerts/stream-analytics-create-alert-rule.png)
    
 ## <a name="scenarios-to-monitor"></a>Scénarios à superviser
 
@@ -64,16 +65,7 @@ Les alertes suivantes sont recommandées pour superviser les performances de vot
 |Délai en filigrane|Supérieur à|Maximale|Quand la valeur moyenne de cette métrique sur les 15 dernières minutes est supérieure à la tolérance d’arrivée tardive (en secondes). Si vous n’avez pas modifié la tolérance d’arrivée tardive, la valeur par défaut est définie sur 5 secondes.|Essayez d’augmenter le nombre d’unités de streaming ou de paralléliser votre requête. Pour plus d’informations sur les unités de streaming, consultez [Comprendre et ajuster les unités de streaming](stream-analytics-streaming-unit-consumption.md#how-many-sus-are-required-for-a-job). Pour plus d’informations sur la parallélisation de votre requête, consultez [Tirer parti de la parallélisation de requête dans Azure Stream Analytics](stream-analytics-parallelization.md).|
 |Erreurs de désérialisation d’entrée|Supérieur à|Total|0|Examinez les journaux d’activité ou de ressources, puis apportez les modifications appropriées à l’entrée. Pour plus d’informations sur les journaux de ressources, consultez [Résoudre les problèmes liés à Azure Stream Analytics à l’aide des journaux de ressources](stream-analytics-job-diagnostic-logs.md)|
 
-## <a name="get-help"></a>Obtenir de l’aide
-
-Pour plus d’informations sur la configuration d’alertes dans le portail Azure, consultez [Réception de notifications d’alerte](../azure-monitor/platform/alerts-overview.md).  
-
-Pour obtenir une assistance, consultez le [forum Azure Stream Analytics](https://social.msdn.microsoft.com/Forums/azure/home?forum=AzureStreamAnalytics)
-
 ## <a name="next-steps"></a>Étapes suivantes
-* [Présentation d’Azure Stream Analytics](stream-analytics-introduction.md)
-* [Prise en main d'Azure Stream Analytics](stream-analytics-get-started.md)
-* [Mise à l’échelle des travaux Azure Stream Analytics](stream-analytics-scale-jobs.md)
-* [Références sur le langage des requêtes d'Azure Stream Analytics](https://docs.microsoft.com/stream-analytics-query/stream-analytics-query-language-reference)
-* [Références sur l’API REST de gestion d’Azure Stream Analytics](https://msdn.microsoft.com/library/azure/dn835031.aspx)
 
+* [Mise à l’échelle des travaux Azure Stream Analytics](stream-analytics-scale-jobs.md)
+* [Références sur le langage des requêtes d'Azure Stream Analytics](/stream-analytics-query/stream-analytics-query-language-reference)

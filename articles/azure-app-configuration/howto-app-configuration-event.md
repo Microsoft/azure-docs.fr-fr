@@ -2,19 +2,20 @@
 title: Envoyer des événements à un point de terminaison web à l’aide d’Azure App Configuration
 description: Découvrez comment configurer des abonnements à des événements Azure App Configuration afin d’envoyer des événements de modification de paires clé-valeur à un point de terminaison web.
 services: azure-app-configuration
-author: lisaguthrie
+author: AlexandraKemperMS
 ms.assetid: ''
 ms.service: azure-app-configuration
 ms.devlang: csharp
 ms.topic: how-to
-ms.date: 02/25/2020
-ms.author: lcozzens
-ms.openlocfilehash: da64f22981cc33772783093cfe75daa3eac5cef1
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 03/04/2020
+ms.author: alkemper
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: 4e005d2f929fd615080d22e93a102a7cc5c1174a
+ms.sourcegitcommit: b6267bc931ef1a4bd33d67ba76895e14b9d0c661
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78672154"
+ms.lasthandoff: 12/19/2020
+ms.locfileid: "97696107"
 ---
 # <a name="route-azure-app-configuration-events-to-a-web-endpoint-with-azure-cli"></a>Router des événements Azure App Configuration vers un point de terminaison web avec Azure CLI
 
@@ -63,7 +64,7 @@ Remplacez `<your-site-name>` par un nom unique pour votre application web. Le no
 ```azurecli-interactive
 $sitename=<your-site-name>
 
-az group deployment create \
+az deployment group create \
   --resource-group <resource_group_name> \
   --template-uri "https://raw.githubusercontent.com/Azure-Samples/azure-event-grid-viewer/master/azuredeploy.json" \
   --parameters siteName=$sitename hostingPlanName=viewerhost

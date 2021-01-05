@@ -4,21 +4,21 @@ description: Créer un compte Azure Cosmos avec pare-feu IP
 author: markjbrown
 ms.author: mjbrown
 ms.service: cosmos-db
-ms.subservice: cosmosdb-sql
 ms.topic: sample
-ms.date: 9/25/2019
-ms.openlocfilehash: 8b0ab04e2117108566962cc9a473556098e0e51d
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.date: 07/29/2020
+ms.openlocfilehash: da4018948a7e3860d5f6f7e7196b5a2efdf8b61f
+ms.sourcegitcommit: 04fb3a2b272d4bbc43de5b4dbceda9d4c9701310
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "71275166"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94566025"
 ---
 # <a name="create-an-azure-cosmos-account-with-ip-firewall-using-azure-cli"></a>Créer un compte Azure Cosmos avec pare-feu IP à l’aide d’Azure CLI
+[!INCLUDE[appliesto-all-apis](../../../includes/appliesto-all-apis.md)]
 
-[!INCLUDE [cloud-shell-try-it.md](../../../../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../../../../includes/azure-cli-prepare-your-environment.md)]
 
-Si vous choisissez d’installer et d’utiliser localement l’interface de ligne de commande, cette rubrique vous impose d’exécuter Azure CLI version 2.0.73 ou ultérieure. Exécutez `az --version` pour trouver la version. Si vous devez installer ou mettre à niveau, voir [Installer Azure CLI](/cli/azure/install-azure-cli).
+- Cet article nécessite la version 2.9.1 ou ultérieure d’Azure CLI. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée.
 
 ## <a name="sample-script"></a>Exemple de script
 

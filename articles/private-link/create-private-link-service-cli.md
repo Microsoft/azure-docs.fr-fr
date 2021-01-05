@@ -4,22 +4,23 @@ description: Découvrez comment créer un service Azure Private Link à l’aide
 services: private-link
 author: malopMSFT
 ms.service: private-link
-ms.topic: article
+ms.topic: how-to
 ms.date: 09/16/2019
 ms.author: allensu
-ms.openlocfilehash: 6e6148d305af26f7933567ae58023d2ba73263eb
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: cfffafaab2e2d4ef6b165ef03beb827342c94608
+ms.sourcegitcommit: c95e2d89a5a3cf5e2983ffcc206f056a7992df7d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75350241"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "96018050"
 ---
 # <a name="create-a-private-link-service-using-azure-cli"></a>Créer un service Private Link à l’aide d’Azure CLI
 Cet article explique comment créer un service Private Link dans Azure à l’aide d’Azure CLI.
 
-[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../includes/azure-cli-prepare-your-environment.md)]
 
-Si vous décidez d’installer et d’utiliser Azure CLI en local, ce guide de démarrage rapide nécessite que vous utilisiez la dernière version d’Azure CLI. Exécutez `az --version` pour rechercher la version installée. Pour des informations d'installation ou de mise à niveau, consultez [Installer Azure CLI](/cli/azure/install-azure-cli).
+- Cet article nécessite la dernière version de la ligne de commande Azure. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée.
+
 ## <a name="create-a-private-link-service"></a>Créer un service Liaison privée
 ### <a name="create-a-resource-group"></a>Créer un groupe de ressources
 
@@ -49,7 +50,7 @@ az network lb create --resource-group myResourceGroup --name myILB --sku standar
 
 ### <a name="create-a-load-balancer-health-probe"></a>Créer une sonde d’intégrité d’équilibreur de charge
 
-Une sonde d’intégrité vérifie toutes les instances de machine virtuelle pour s’assurer qu’elles peuvent recevoir le trafic réseau. L’instance de machine virtuelle présentant des contrôles de sonde défaillants est supprimée de l’équilibrage de charge jusqu’à ce qu’elle revienne en ligne et que la sonde valide son intégrité. Créez une sonde d’intégrité à l’aide de la commande [az network lb probe create](https://docs.microsoft.com/cli/azure/network/lb/probe?view=azure-cli-latest) pour surveiller l’intégrité des machines virtuelles. 
+Une sonde d’intégrité vérifie toutes les instances de machine virtuelle pour s’assurer qu’elles peuvent recevoir le trafic réseau. L’instance de machine virtuelle présentant des contrôles de sonde défaillants est supprimée de l’équilibrage de charge jusqu’à ce qu’elle revienne en ligne et que la sonde valide son intégrité. Créez une sonde d’intégrité à l’aide de la commande [az network lb probe create](/cli/azure/network/lb/probe?view=azure-cli-latest) pour surveiller l’intégrité des machines virtuelles. 
 
 ```azurecli-interactive
   az network lb probe create \
@@ -62,7 +63,7 @@ Une sonde d’intégrité vérifie toutes les instances de machine virtuelle pou
 
 ### <a name="create-a-load-balancer-rule"></a>Créer une règle d’équilibreur de charge
 
-Une règle d’équilibreur de charge définit la configuration IP frontale pour le trafic entrant et le pool d’IP principal pour recevoir le trafic, ainsi que le port source et le port de destination requis. Créez une règle d’équilibreur de charge *myHTTPRule* à l’aide de la commande [az network lb rule create](https://docs.microsoft.com/cli/azure/network/lb/rule?view=azure-cli-latest) pour écouter le port 80 dans le pool frontal *myFrontEnd* et envoyer le trafic réseau équilibré en charge vers le pool d’adresses principal *myBackEndPool* à l’aide du port 80 également. 
+Une règle d’équilibreur de charge définit la configuration IP frontale pour le trafic entrant et le pool d’IP principal pour recevoir le trafic, ainsi que le port source et le port de destination requis. Créez une règle d’équilibreur de charge *myHTTPRule* à l’aide de la commande [az network lb rule create](/cli/azure/network/lb/rule?view=azure-cli-latest) pour écouter le port 80 dans le pool frontal *myFrontEnd* et envoyer le trafic réseau équilibré en charge vers le pool d’adresses principal *myBackEndPool* à l’aide du port 80 également. 
 
 ```azurecli-interactive
   az network lb rule create \
@@ -78,7 +79,7 @@ Une règle d’équilibreur de charge définit la configuration IP frontale pour
 ```
 ### <a name="create-backend-servers"></a>Créer des serveurs principaux
 
-Dans cet exemple, nous ne couvrons pas la création d’une machine virtuelle. Vous pouvez suivre les étapes décrites dans [Créer un équilibreur de charge interne pour équilibrer la charge de machines virtuelles avec Azure CLI](../load-balancer/load-balancer-get-started-ilb-arm-cli.md#create-servers-for-the-backend-address-pool) pour créer deux machines virtuelles à utiliser en tant que serveurs principaux pour l’équilibreur de charge. 
+Dans cet exemple, nous ne couvrons pas la création d’une machine virtuelle. Vous pouvez suivre les étapes décrites dans [Démarrage rapide : Créer un équilibreur de charge interne pour équilibrer la charge de machines virtuelles avec Azure CLI](../load-balancer/quickstart-load-balancer-standard-internal-cli.md) pour créer deux machines virtuelles à utiliser en tant que serveurs principaux pour l’équilibreur de charge. 
 
 
 ### <a name="disable-private-link-service-network-policies-on-subnet"></a>Désactiver les stratégies réseau du service Private Link sur le sous-réseau 
@@ -88,7 +89,7 @@ Private Link requiert une adresse IP de n’importe quel sous-réseau de votre c
 az network vnet subnet update --resource-group myResourceGroup --vnet-name myVirtualNetwork --name mySubnet --disable-private-link-service-network-policies true 
 ```
  
-## <a name="create-a-private-link-service"></a>Créer un service Liaison privée  
+## <a name="create-a-private-link-service-using-standard-load-balancer"></a>Créer un service Azure Private Link à l’aide de Standard Load Balancer 
  
 Créez un service Private Link à l’aide de la configuration d’adresse IP frontale du Standard Load Balancer avec la commande [az network private-link-service create](/cli/azure/network/private-link-service#az-network-private-link-service-create). Cet exemple crée un service Private Link nommé *myPLS* en utilisant le Standard Load Balancer nommé *myLoadBalancer* dans le groupe de ressources nommé *myResourceGroup*. 
  
@@ -111,7 +112,7 @@ Nous allons ensuite montrer comment mapper ce service à une instance Private En
 ## <a name="private-endpoints"></a>Instances Private Endpoint
 
 ### <a name="create-the-virtual-network"></a>Créer un réseau virtuel 
-Créez un réseau virtuel avec la commande [az network vnet create](/cli/azure/network/vnet#az-network-vnet-create). Cet exemple crée un réseau virtuel nommé *myPEVNet* dans le groupe de ressources nommé *myResourcegroup* : 
+Créez un réseau virtuel avec la commande [az network vnet create](/cli/azure/network/vnet#az-network-vnet-create). Cet exemple crée un réseau virtuel nommé  *myPEVNet* dans le groupe de ressources nommé *myResourcegroup* : 
 ```azurecli-interactive
 az network vnet create \
 --resource-group myResourceGroup \
@@ -119,7 +120,7 @@ az network vnet create \
 --address-prefix 10.0.0.0/16  
 ```
 ### <a name="create-the-subnet"></a>Créer le sous-réseau 
-Ajoutez un sous-réseau au réseau virtuel avec la commande [az network vnet subnet create](/cli/azure/network/vnet/subnet#az-network-vnet-subnet-create). Cet exemple crée un sous-réseau nommé *mySubnet* dans le réseau virtuel nommé *myPEVnet* dans le groupe de ressources nommé *myResourcegroup* : 
+Ajoutez un sous-réseau au réseau virtuel avec la commande [az network vnet subnet create](/cli/azure/network/vnet/subnet#az-network-vnet-subnet-create). Cet exemple crée un sous-réseau nommé  *mySubnet* dans le réseau virtuel nommé *myPEVnet* dans le groupe de ressources nommé *myResourcegroup* : 
 
 ```azurecli-interactive 
 az network vnet subnet create \
@@ -162,4 +163,3 @@ az network private-link-service show --resource-group myResourceGroup --name myP
 ```
 ## <a name="next-steps"></a>Étapes suivantes
 - En savoir plus sur [Azure Private Link](private-link-service-overview.md)
- 

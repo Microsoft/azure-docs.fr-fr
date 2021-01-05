@@ -9,10 +9,10 @@ ms.service: azure-vmware-cloudsimple
 ms.reviewer: cynthn
 manager: dikamath
 ms.openlocfilehash: 28c4dc7831f97d66eb4d47f08e640344d5cca0d1
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "77014944"
 ---
 # <a name="cloudsimple-private-cloud-permission-model-of-vmware-vcenter"></a>Modèle d’autorisation de cloud privé CloudSimple de VMware vCenter

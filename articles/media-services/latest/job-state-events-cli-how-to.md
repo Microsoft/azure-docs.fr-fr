@@ -1,24 +1,27 @@
 ---
 title: Superviser les événements Azure Media Services avec Event Grid à partir de l’interface CLI | Microsoft Docs
-description: Cet article explique comment s’abonner à Event Grid dans le but de superviser les événements Azure Media Services.
+description: Cet article explique comment s’abonner à Event Grid dans le but de superviser les événements Azure Media Services avec Azure CLI.
 services: media-services
 documentationcenter: ''
-author: Juliako
+author: IngridAtMicrosoft
 manager: femila
 editor: ''
 ms.service: media-services
 ms.workload: ''
-ms.topic: article
-ms.date: 11/09/2018
-ms.author: juliako
-ms.openlocfilehash: 619d40ab56715b4444d8e5649c7fb3401b3f57ff
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.topic: how-to
+ms.date: 08/31/2020
+ms.author: inhenkel
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: b646965be03b5d3f57483887e256d33262192375
+ms.sourcegitcommit: 2c586a0fbec6968205f3dc2af20e89e01f1b74b5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "71937282"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92013285"
 ---
 # <a name="create-and-monitor-media-services-events-with-event-grid-using-the-azure-cli"></a>Créer et superviser des événements Azure Media Services avec Event Grid à partir d’Azure CLI
+
+[!INCLUDE [media services api v3 logo](./includes/v3-hr.md)]
 
 Azure Event Grid est un service de gestion d’événements pour le cloud. Ce service utilise les [abonnements aux événements](../../event-grid/concepts.md#event-subscriptions) pour acheminer les messages d’événements vers les abonnés. Les événements Media Services contiennent toutes les informations dont vous avez besoin pour répondre aux modifications de vos données. Vous pouvez identifier un événement Media Services, car la propriété eventType commence par « Microsoft.Media ». Pour plus d’informations, consultez les [schémas d’événement Media Services](media-services-event-schemas.md).
 
@@ -29,9 +32,9 @@ Dans cet article, vous allez utiliser Azure CLI pour vous abonner à des événe
 - Un abonnement Azure actif. Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio) avant de commencer.
 - Installez et utilisez l’interface CLI localement. Vous devez disposer d’Azure CLI 2.0 ou version ultérieure pour cet article. Exécutez `az --version` pour trouver la version qui est à votre disposition. Si vous devez effectuer une installation ou une mise à niveau, consultez [Installer Azure CLI](/cli/azure/install-azure-cli). 
 
-    Actuellement, les commandes [Media Services v3 CLI](https://aka.ms/ams-v3-cli-ref) ne fonctionnent pas toutes dans Azure Cloud Shell. Il est recommandé d’utiliser l’interface CLI localement.
+    Actuellement, les commandes [Media Services v3 CLI](/cli/azure/ams) ne fonctionnent pas toutes dans Azure Cloud Shell. Il est recommandé d’utiliser l’interface CLI localement.
 
-- [Créer un compte Media Services](create-account-cli-how-to.md).
+- [Créer un compte Media Services](./create-account-howto.md).
 
     Veillez à mémoriser les valeurs que vous avez utilisées pour le nom du groupe de ressources et le nom du compte Media Services.
 
@@ -41,7 +44,7 @@ Avant de nous abonner aux événements pour le compte Media Services, créons le
 
 1. Sélectionnez **Déployer sur Azure** pour déployer la solution sur votre abonnement. Dans le portail Azure, indiquez des valeurs pour les paramètres.
 
-   <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure-Samples%2Fazure-event-grid-viewer%2Fmaster%2Fazuredeploy.json" target="_blank"><img src="https://azuredeploy.net/deploybutton.png"/></a>
+   [![Image showing a button labeled "Deploy to Azure".](https://azuredeploy.net/deploybutton.png)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure-Samples%2Fazure-event-grid-viewer%2Fmaster%2Fazuredeploy.json)
 
 1. Le déploiement peut prendre quelques minutes. Une fois le déploiement réussi, affichez votre application web pour vérifier qu’elle s’exécute. Dans un navigateur web, accédez à : `https://<your-site-name>.azurewebsites.net`
 
@@ -109,4 +112,3 @@ Affichez à nouveau votre application web, et notez qu’un événement de valid
 ## <a name="next-steps"></a>Étapes suivantes
 
 [Charger, encoder et diffuser en continu](stream-files-tutorial-with-api.md)
-

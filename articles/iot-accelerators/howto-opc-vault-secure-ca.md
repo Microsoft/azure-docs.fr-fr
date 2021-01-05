@@ -8,14 +8,17 @@ ms.topic: conceptual
 ms.service: industrial-iot
 services: iot-industrialiot
 manager: philmea
-ms.openlocfilehash: 88f8188779c5fb6b3cd07c67e9f35a6b8f9ad97d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f54467c03a67797d52ac499ca9ba455c0f75e240
+ms.sourcegitcommit: a92fbc09b859941ed64128db6ff72b7a7bcec6ab
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79233385"
+ms.lasthandoff: 10/15/2020
+ms.locfileid: "92071453"
 ---
 # <a name="run-the-opc-vault-certificate-management-service-securely"></a>Exécuter le service de gestion de certificats OPC Vault de manière sécurisée
+
+> [!IMPORTANT]
+> Pendant la mise à jour de cet article, consultez [Azure Industrial IoT](https://azure.github.io/Industrial-IoT/) pour obtenir le contenu le plus récent.
 
 Cet article explique comment exécuter le service de gestion de certificats OPC Vault de manière sécurisée dans Azure et passe en revue les autres consignes de sécurité à prendre en considération.
 
@@ -91,10 +94,10 @@ Tous les systèmes doivent être surveillés et mis à jour en permanence avec l
 
 ### <a name="security-monitoring"></a>Surveillance de la sécurité
 
-Abonnez-vous à une solution de supervision de la sécurité ou implémentez-en une. Par exemple, abonnez-vous à une solution de supervision centralisée (comme Azure Security Center ou la solution de supervision Office 365) et configurez-la de sorte que les événements de sécurité lui soient transmis.
+Abonnez-vous à une solution de supervision de la sécurité ou implémentez-en une. Par exemple, abonnez-vous à une solution de supervision centralisée (comme Azure Security Center ou la solution de supervision Microsoft 365) et configurez-la de sorte que les événements de sécurité lui soient transmis.
 
 > [!IMPORTANT]
-> Par défaut, le service OPC Vault est déployé avec [Azure Application Insights](https://docs.microsoft.com/azure/azure-monitor/app/devops) en guise de solution de supervision. L’ajout d’une solution de sécurité telle qu’[Azure Security Center](https://azure.microsoft.com/services/security-center/) est fortement recommandé.
+> Par défaut, le service OPC Vault est déployé avec [Azure Application Insights](../azure-monitor/app/devops.md) en guise de solution de supervision. L’ajout d’une solution de sécurité telle qu’[Azure Security Center](https://azure.microsoft.com/services/security-center/) est fortement recommandé.
 
 ### <a name="assess-the-security-of-open-source-software-components"></a>Évaluer la sécurité des composants logiciels open source
 
@@ -142,7 +145,7 @@ Fournissez un ensemble exhaustif de tous les certificats émis au cours des 12 
 
 ### <a name="document-the-standard-operating-procedure-for-securely-deleting-cryptographic-keys"></a>Documenter la procédure d’exploitation standard pour supprimer les clés de chiffrement de manière sécurisée
 
-Pendant la durée de vie d’une autorité de certification, il peut être très rare que des clés soient supprimées. C’est pourquoi aucun utilisateur ne dispose d’un droit de suppression de certificat Key Vault et qu’aucune API n’est exposée pour supprimer un certificat d’autorité de certification émettrice. La procédure d’exploitation standard manuelle pour la suppression sécurisée de clés de chiffrement d’autorité de certification n’est disponible qu’en accédant directement à Key Vault sur le portail Azure. Vous pouvez aussi supprimer le groupe de certificats dans Key Vault. Pour assurer une suppression immédiate, désactivez la fonctionnalité de [suppression réversible de Key Vault](https://docs.microsoft.com/azure/key-vault/key-vault-ovw-soft-delete).
+Pendant la durée de vie d’une autorité de certification, il peut être très rare que des clés soient supprimées. C’est pourquoi aucun utilisateur ne dispose d’un droit de suppression de certificat Key Vault et qu’aucune API n’est exposée pour supprimer un certificat d’autorité de certification émettrice. La procédure d’exploitation standard manuelle pour la suppression sécurisée de clés de chiffrement d’autorité de certification n’est disponible qu’en accédant directement à Key Vault sur le portail Azure. Vous pouvez aussi supprimer le groupe de certificats dans Key Vault. Pour assurer une suppression immédiate, désactivez la fonctionnalité de [suppression réversible de Key Vault](../key-vault/general/soft-delete-overview.md).
 
 ## <a name="certificates"></a>Certificats
 

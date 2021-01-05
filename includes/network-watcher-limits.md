@@ -1,15 +1,15 @@
 ---
 author: rothja
-ms.service: cost-management-billing
+ms.service: network-watcher
 ms.topic: include
 ms.date: 11/09/2018
 ms.author: jroth
-ms.openlocfilehash: 380842a1b5cdb1ce9dead8bb18f2a748b363289a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 7152e464b80c252cdd4b636b3c4e642f8fb012b9
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80334575"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85839023"
 ---
 | Ressource | Limite | Remarque |
 | --- | --- | --- | --- |

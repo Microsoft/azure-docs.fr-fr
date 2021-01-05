@@ -1,32 +1,32 @@
 ---
 title: Gérer les événements cartographiques | Microsoft Azure Maps
-description: Dans cet article, vous allez apprendre à créer une carte SDK web interactive avec des événements cartographiques à l’aide du Kit de développement logiciel (SDK) web Microsoft Azure Maps.
-author: Philmea
-ms.author: philmea
+description: Découvrez les événements qui sont déclenchés lorsque les utilisateurs interagissent avec des cartes. Affichez une liste de tous les événements cartographiques pris en charge. Découvrez comment utiliser le kit SDK web Azure Maps pour gérer les événements.
+author: anastasia-ms
+ms.author: v-stharr
 ms.date: 09/10/2019
 ms.topic: conceptual
 ms.service: azure-maps
 services: azure-maps
 manager: ''
-ms.custom: codepen
-ms.openlocfilehash: 92108873d4a91c845f4a1f2685cf50942513510e
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.custom: codepen, devx-track-js
+ms.openlocfilehash: 8121ceb68bdea9332316a9508bf6f4731e05b0ba
+ms.sourcegitcommit: 4064234b1b4be79c411ef677569f29ae73e78731
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83124004"
+ms.lasthandoff: 10/28/2020
+ms.locfileid: "92890783"
 ---
 # <a name="interact-with-the-map"></a>Interagir avec la carte
 
-Cet article explique comment utiliser la [classe d’événements cartographiques](https://docs.microsoft.com/javascript/api/azure-maps-control/atlas.map?#events). La propriété met en surbrillance les événements sur la carte et sur les différentes couches de la carte. Vous pouvez également mettre en surbrillance des événements lorsque vous interagissez avec un marqueur HTML.
+Cet article explique comment utiliser la [classe d’événements cartographiques](/javascript/api/azure-maps-control/atlas.map#events). La propriété met en surbrillance les événements sur la carte et sur les différentes couches de la carte. Vous pouvez également mettre en surbrillance des événements lorsque vous interagissez avec un marqueur HTML.
 
 ## <a name="interact-with-the-map"></a>Interagir avec la carte
 
-Manipulez la carte ci-dessous et observez les événements de souris correspondants mis en surbrillance sur la droite. Cliquez sur l’**onglet JS** pour afficher et modifier le code JavaScript. Vous pouvez également cliquer sur **Modifier sur CodePen** afin de modifier le code par ce biais.
+Manipulez la carte ci-dessous et observez les événements de souris correspondants mis en surbrillance sur la droite. Cliquez sur l’ **onglet JS** pour afficher et modifier le code JavaScript. Vous pouvez également cliquer sur **Modifier sur CodePen** afin de modifier le code par ce biais.
 
 <br/>
 
-<iframe height='600' scrolling='no' title='Interaction avec la carte - Événements de souris' src='//codepen.io/azuremaps/embed/bLZEWd/?height=600&theme-id=0&default-tab=js,result&embed-version=2&editable=true' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>Consultez la page <a href='https://codepen.io/azuremaps/pen/bLZEWd/'>Interact with the map – mouse events (Interagir avec la carte - Événements de souris)</a> par Azure Maps (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) sur <a href='https://codepen.io'>CodePen</a>.
+<iframe height='600' scrolling='no' title='Interaction avec la carte - Événements de souris' src='//codepen.io/azuremaps/embed/bLZEWd/?height=600&theme-id=0&default-tab=js,result&embed-version=2&editable=true' frameborder='no' loading="lazy" allowtransparency='true' allowfullscreen='true' style='width: 100%;'>Consultez la page <a href='https://codepen.io/azuremaps/pen/bLZEWd/'>Interact with the map – mouse events (Interagir avec la carte - Événements de souris)</a> par Azure Maps (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) sur <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 
 ## <a name="interact-with-map-layers"></a>Interagir avec les couches de la carte
@@ -35,7 +35,7 @@ Le code suivant met en évidence l’événement déclenché lorsque vous intera
 
 <br/>
 
-<iframe height='600' scrolling='no' title='Interaction avec la carte - Événements de couches' src='//codepen.io/azuremaps/embed/bQRRPE/?height=600&theme-id=0&default-tab=js,result&embed-version=2&editable=true' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>Consultez l’extrait de code <a href='https://codepen.io/azuremaps/pen/bQRRPE/'>Interacting with the map – Layer Events</a> Azure Maps (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) sur <a href='https://codepen.io'>CodePen</a>.
+<iframe height='600' scrolling='no' title='Interaction avec la carte - Événements de couches' src='//codepen.io/azuremaps/embed/bQRRPE/?height=600&theme-id=0&default-tab=js,result&embed-version=2&editable=true' frameborder='no' loading="lazy" allowtransparency='true' allowfullscreen='true' style='width: 100%;'>Consultez l’extrait de code <a href='https://codepen.io/azuremaps/pen/bQRRPE/'>Interacting with the map – Layer Events</a> Azure Maps (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) sur <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 
 ## <a name="interact-with-html-marker"></a>Interagir avec un marqueur HTML
@@ -44,7 +44,7 @@ Le code suivant ajoute des événements de carte JavaScript à un marqueur HTML.
 
 <br/>
 
-<iframe height='500' scrolling='no' title='Interaction avec la carte - Événements de marqueurs HTML' src='//codepen.io/azuremaps/embed/VVzKJY/?height=500&theme-id=0&default-tab=js,result&embed-version=2&editable=true' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>Consultez l’extrait de code <a href='https://codepen.io/azuremaps/pen/VVzKJY/'>Interacting with the map - HTML Marker events</a> Azure Maps (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) sur <a href='https://codepen.io'>CodePen</a>.
+<iframe height='500' scrolling='no' title='Interaction avec la carte - Événements de marqueurs HTML' src='//codepen.io/azuremaps/embed/VVzKJY/?height=500&theme-id=0&default-tab=js,result&embed-version=2&editable=true' frameborder='no' loading="lazy" allowtransparency='true' allowfullscreen='true' style='width: 100%;'>Consultez l’extrait de code <a href='https://codepen.io/azuremaps/pen/VVzKJY/'>Interacting with the map - HTML Marker events</a> Azure Maps (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) sur <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 
 Le tableau suivant répertorie tous les événements de classe Map pris en charge.
@@ -98,11 +98,11 @@ Le tableau suivant répertorie tous les événements de classe Map pris en charg
 | `sourceremoved`     | Déclenché lorsqu’une `DataSource` ou `VectorTileSource` est supprimée de la carte.|
 | `styledata`         | Déclenché lorsque le style de la carte est chargé ou modifié.|
 | `styleimagemissing` | Déclenché lorsqu’une couche essaie de charger une image à partir du sprite d’image qui n’existe pas |
-| `tokenacquired`     | Déclenché lorsqu’un jeton d’accès AAD est obtenu.|
-| `touchcancel`       | Déclenché lorsqu’un événement touchcancel se produit dans la carte.|
-| `touchend`          | Déclenché lorsqu’un événement touchend se produit dans la carte.|
-| `touchmove`         | Déclenché lorsqu’un événement touchmove se produit dans la carte.|
-| `touchstart`        | Déclenché lorsqu’un événement touchstart se produit dans la carte.|
+| `tokenacquired`     | Déclenché lorsqu’un jeton d’accès Azure Active Directory est obtenu.|
+| `touchcancel`       | Déclenché lorsqu’un événement `touchcancel` se produit dans la carte.|
+| `touchend`          | Déclenché lorsqu’un événement `touchend` se produit dans la carte.|
+| `touchmove`         | Déclenché lorsqu’un événement `touchmove` se produit dans la carte.|
+| `touchstart`        | Déclenché lorsqu’un événement `touchstart` se produit dans la carte.|
 | `wheel`             | Déclenché lorsqu’un événement de roulette de souris se produit dans la carte.|
 | `zoom`              | Déclenché à plusieurs reprises pendant une transition animée d’un niveau de zoom à l’autre, en raison de l’interaction de l’utilisateur ou de méthodes.|
 | `zoomend`           | Déclenché dès que la carte termine une transition animée d’un niveau de zoom à l’autre, en raison de l’interaction de l’utilisateur ou de méthodes.|
@@ -117,4 +117,4 @@ Pour voir des exemples de codes complets, consultez les articles suivants :
 > [Utiliser le module de service Azure Maps](./how-to-use-services-module.md)
 
 > [!div class="nextstepaction"]
-> [Exemples de code](https://docs.microsoft.com/samples/browse/?products=azure-maps)
+> [Exemples de code](/samples/browse/?products=azure-maps)

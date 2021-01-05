@@ -2,25 +2,20 @@
 title: 'Tutoriel : Approvisionnement d’utilisateurs pour GitHub - Azure AD'
 description: Découvrez comment configurer Azure Active Directory pour approvisionner et déprovisionner automatiquement des comptes utilisateur sur GitHub.
 services: active-directory
-documentationcenter: ''
-author: ArvindHarinder1
+author: Zhchia
 manager: CelesteDG
-ms.assetid: d4ca2365-6729-48f7-bb7f-c0f5ffe740a3
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: article
-ms.date: 03/27/2019
-ms.author: arvinh
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: 82f7252f2d9cdd2c54fae593d8463bfe84bd6ce2
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.topic: tutorial
+ms.date: 10/21/2020
+ms.author: Zhchia
+ms.openlocfilehash: f1600dfc5705ca97f16e8966a796b54fc556d216
+ms.sourcegitcommit: 0b9fe9e23dfebf60faa9b451498951b970758103
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77057649"
+ms.lasthandoff: 11/07/2020
+ms.locfileid: "94359260"
 ---
 # <a name="tutorial-configure-github-for-automatic-user-provisioning"></a>Tutoriel : Configurer GitHub pour l’approvisionnement automatique d’utilisateurs
 
@@ -33,7 +28,9 @@ Le scénario décrit dans ce didacticiel part du principe que vous disposez des 
 * Un locataire Azure Active Directory
 * Une organisation GitHub créée dans [GitHub Enterprise Cloud](https://help.github.com/articles/github-s-products/#github-enterprise), ce qui nécessite le [plan de facturation GitHub Enterprise](https://help.github.com/articles/github-s-billing-plans/#billing-plans-for-organizations)
 * Un compte d’utilisateur dans GitHub avec des autorisations d’administrateur vers l’organisation
+* [SAML configuré pour l’organisation GitHub Enterprise Cloud](./github-tutorial.md)
 * Assurez-vous que l’accès OAuth a été fourni pour votre organisation, comme décrit [ici](https://help.github.com/en/github/setting-up-and-managing-organizations-and-teams/approving-oauth-apps-for-your-organization)
+* Le provisionnement SCIM pour une seule organisation est pris en charge uniquement lorsque l’authentification unique est activée au niveau de l’organisation
 
 > [!NOTE]
 > L’intégration de l’approvisionnement Azure AD s’appuie sur l’[API GitHub SCIM](https://developer.github.com/v3/scim/) disponible pour les clients [GitHub Enterprise Cloud](https://help.github.com/articles/github-s-products/#github-enterprise) dans le [plan de facturation GitHub Enterprise](https://help.github.com/articles/github-s-billing-plans/#billing-plans-for-organizations).
@@ -56,9 +53,6 @@ Avant de configurer et d’activer le service d’approvisionnement, vous devez 
 
 Cette section explique comment connecter votre Azure AD à l’API d’approvisionnement de comptes d’utilisateur de GitHub pour créer, mettre à jour et désactiver les comptes d’utilisateur attribués dans GitHub en fonction des attributions d’utilisateurs et de groupes dans Azure AD.
 
-> [!TIP]
-> Vous pouvez également choisir d’activer l’authentification unique basée sur SAML pour GitHub en suivant les instructions fournies dans le [portail Azure](https://portal.azure.com). L’authentification unique peut être configurée indépendamment de l’approvisionnement automatique, bien que chacune de ces deux fonctionnalités compléte l’autre.
-
 ### <a name="configure-automatic-user-account-provisioning-to-github-in-azure-ad"></a>Configurer l’approvisionnement automatique de comptes utilisateurs vers GitHub dans Azure AD
 
 1. Dans le [portail Azure](https://portal.azure.com), accédez à la section **Azure Active Directory > Applications d’entreprise > Toutes les applications**.
@@ -71,23 +65,23 @@ Cette section explique comment connecter votre Azure AD à l’API d’approvisi
 
     ![Approvisionnement GitHub](./media/github-provisioning-tutorial/GitHub1.png)
 
-5. Sous la section **informations d’identification de l’administrateur**, cliquez sur **Autoriser**. Cette opération ouvre une boîte de dialogue d’autorisation GitHub dans une nouvelle fenêtre du navigateur. Notez que vous devez vous assurer d’être approuvé pour autoriser l’accès. Suivez les instructions décrites [ici](https://help.github.com/github/setting-up-and-managing-organizations-and-teams/approving-oauth-apps-for-your-organization).
+5. Sous la section **informations d’identification de l’administrateur** , cliquez sur **Autoriser**. Cette opération ouvre une boîte de dialogue d’autorisation GitHub dans une nouvelle fenêtre du navigateur. Notez que vous devez vous assurer d’être approuvé pour autoriser l’accès. Suivez les instructions décrites [ici](https://help.github.com/github/setting-up-and-managing-organizations-and-teams/approving-oauth-apps-for-your-organization).
 
 6. Dans la nouvelle fenêtre, connectez-vous à GitHub à l’aide de votre compte d’administrateur. Dans la boîte de dialogue d’autorisation qui s’affiche, sélectionnez l’équipe GitHub pour laquelle vous souhaitez activer l’approvisionnement, puis sélectionnez **Autoriser**. Une fois cela terminé, revenez au portail Azure pour terminer la configuration de l’approvisionnement.
 
-    ![Boîte de dialogue d’autorisation](./media/github-provisioning-tutorial/GitHub2.png)
+    ![Capture d’écran représentant la page de connexion pour GitHub.](./media/github-provisioning-tutorial/GitHub2.png)
 
-7. Dans le portail Azure, entrez **URL cliente** et cliquez sur **Connexion test** pour vous assurer qu’Azure AD peut se connecter à votre application GitHub. En cas d’échec de connexion, vérifiez que votre compte GitHub dispose des autorisations Administrateur et que **l’URL de locataire** est correctement entrée. Ensuite, recommencez l’étape « Autoriser » (vous pouvez constituer **l’URL de locataire** par règle : `https://api.github.com/scim/v2/organizations/<Organization_name>`, et rechercher vos organisations sous votre compte GitHub : **Paramètres** > **Organisations**).
+7. Dans le portail Azure, entrez **URL cliente** et cliquez sur **Connexion test** pour vous assurer qu’Azure AD peut se connecter à votre application GitHub. En cas d’échec de connexion, vérifiez que votre compte GitHub dispose des autorisations Administrateur et que **l’URL de locataire** est correctement entrée. Ensuite, recommencez l’étape « Autoriser » (vous pouvez constituer **l’URL de locataire** par règle : `https://api.github.com/scim/v2/organizations/<Organization_name>`, et rechercher vos organisations sous votre compte GitHub : **Paramètres** > **Organisations** ).
 
-    ![Boîte de dialogue d’autorisation](./media/github-provisioning-tutorial/GitHub3.png)
+    ![Capture d’écran représentant la page Organisations dans GitHub.](./media/github-provisioning-tutorial/GitHub3.png)
 
-8. Entrez l’adresse de courrier d’une personne ou d’un groupe qui doit recevoir les notifications d’erreur d’approvisionnement dans le champ **E-mail de notification**, puis cochez la case « Envoyer une notification par e-mail en cas de défaillance ».
+8. Entrez l’adresse de courrier d’une personne ou d’un groupe qui doit recevoir les notifications d’erreur d’approvisionnement dans le champ **E-mail de notification** , puis cochez la case « Envoyer une notification par e-mail en cas de défaillance ».
 
 9. Cliquez sur **Enregistrer**.
 
 10. Dans la section Mappages, sélectionnez **Synchroniser les utilisateurs Azure Active Directory avec GitHub**.
 
-11. Dans la section **Mappages des attributs**, passez en revue les attributs d’utilisateur qui sont synchronisés d’Azure AD vers GitHub. Les attributs sélectionnés en tant que propriétés de **Correspondance** sont utilisés pour faire correspondre les comptes d’utilisateur dans GitHub pour les opérations de mise à jour. Cliquez sur le bouton Enregistrer pour valider les modifications.
+11. Dans la section **Mappages des attributs** , passez en revue les attributs d’utilisateur qui sont synchronisés d’Azure AD vers GitHub. Les attributs sélectionnés en tant que propriétés de **Correspondance** sont utilisés pour faire correspondre les comptes d’utilisateur dans GitHub pour les opérations de mise à jour. Cliquez sur le bouton Enregistrer pour valider les modifications.
 
 12. Pour activer le service d’approvisionnement Azure AD pour GitHub, définissez **l’état d’approvisionnement** sur **Activé** dans la section **Paramètres**
 

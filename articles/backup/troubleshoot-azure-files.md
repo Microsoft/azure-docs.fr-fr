@@ -3,12 +3,12 @@ title: Résoudre des problèmes de sauvegarde de partages de fichiers Azure
 description: Cet article contient des informations de dépannage concernant les problèmes qui se produisent lors de la protection de vos partages de fichiers Azure.
 ms.date: 02/10/2020
 ms.topic: troubleshooting
-ms.openlocfilehash: a9b3514b4c1a00cc2f9bb1e1922975bf0bb70d24
-ms.sourcegitcommit: 856db17a4209927812bcbf30a66b14ee7c1ac777
+ms.openlocfilehash: 4908b8ed97bad43d9d24427660a8691ee43d7eaf
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82562081"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89376976"
 ---
 # <a name="troubleshoot-problems-while-backing-up-azure-file-shares"></a>Résoudre des problèmes lors de la sauvegarde de partages de fichiers Azure
 
@@ -25,6 +25,7 @@ Cet article fournit des informations pour vous aider à résoudre des problèmes
   >Tous les partages de fichiers dans un compte de stockage peuvent être protégés sous un seul coffre Recovery Services. [Ce script](scripts/backup-powershell-script-find-recovery-services-vault.md) vous aide à trouver le coffre Recovery Services dans lequel votre compte de stockage est inscrit.
 
 - Assurez-vous que le partage de fichiers ne figure pas dans un des compte de stockage non pris en charge. Pour trouver les comptes de stockage pris en charge, vous pouvez consulter la [Matrice de prise en charge pour la sauvegarde de partage de fichiers Azure](azure-file-share-support-matrix.md).
+- Vérifiez que la longueur combinée du nom du compte de stockage et du nom du groupe de ressources ne dépasse pas 84 caractères en cas de nouveaux comptes de stockage, et 77 caractères dans le cas de comptes de stockage classiques.
 - Vérifiez les paramètres de pare-feu du compte de stockage pour vous assurer que l’option autorisant les services Microsoft approuvés à accéder au compte de stockage est activée.
 
 ### <a name="error-in-portal-states-discovery-of-storage-accounts-failed"></a>Erreur dans le portail indiquant que la découverte des comptes de stockage a échoué
@@ -50,12 +51,15 @@ Réessayez l’inscription. Si le problème persiste, contactez le support techn
 
 ### <a name="unable-to-delete-the-recovery-services-vault-after-unprotecting-a-file-share"></a>Impossible de supprimer le coffre Recovery Services après avoir ôté la protection d’un partage de fichiers
 
-Dans le portail Azure, ouvrez **Coffre** > **Infrastructure de sauvegarde** > **Comptes de stockage**, puis cliquez sur **Annuler l’enregistrement** pour supprimer le compte de stockage du coffre Recovery Services.
+Dans le portail Azure, ouvrez votre **coffre** > **Infrastructure de sauvegarde** > **Comptes de stockage**. Sélectionnez **Désinscrire** pour supprimer les comptes de stockage du coffre Recovery Services.
 
 >[!NOTE]
->Vous ne pouvez supprimer un coffre Recovery Services qu’après avoir annulé l’enregistrement de tous les comptes de stockage inscrits auprès du coffre.
+>Vous ne pouvez supprimer un coffre Recovery Services qu’après avoir annulé l’inscription de tous les comptes de stockage inscrits auprès du coffre.
 
 ## <a name="common-backup-or-restore-errors"></a>Erreurs courantes de sauvegarde ou de restauration
+
+>[!NOTE]
+>Reportez-vous à [ce document](./backup-rbac-rs-vault.md#minimum-role-requirements-for-the-azure-file-share-backup) pour vous assurer que vous disposez des autorisations suffisantes pour effectuer des opérations de sauvegarde ou de restauration.
 
 ### <a name="filesharenotfound--operation-failed-as-the-file-share-is-not-found"></a>FileShareNotFound : échec de l’opération parce que le partage de fichiers est introuvable
 
@@ -82,7 +86,7 @@ Code d’erreur : AFSMaxSnapshotReached
 Message d’erreur : Vous avez atteint la limite maximale d’instantanés pour ce partage de fichiers, vous serez en mesure d’en effectuer davantage une fois que les anciens ont expiré.
 
 - Cette erreur peut se produire lorsque vous créez plusieurs sauvegardes à la demande pour un partage de fichiers.
-- Il existe une limite de 200 instantanés par partage de fichiers, ceux pris par Sauvegarde Azure compris. Les anciennes sauvegardes (ou instantanés) planifiées sont nettoyées automatiquement. Les sauvegardes (ou instantanés) à la demande doivent être supprimées si la limite maximale est atteinte.
+- Il existe une limite de 200 instantanés par partage de fichiers, y compris ceux pris par Sauvegarde Azure. Les anciennes sauvegardes (ou instantanés) planifiées sont nettoyées automatiquement. Les sauvegardes (ou instantanés) à la demande doivent être supprimées si la limite maximale est atteinte.
 
 Supprimez les sauvegardes à la demande (instantanés du partage de fichiers Azure) à partir du portail de fichiers Azure.
 
@@ -159,7 +163,7 @@ Message d’erreur : Échec de la récupération, car le nombre de fichiers ayan
 
 - Causes courantes des échecs de restauration de fichiers :
 
-  - les fichiers dont la récupération a échoué sont en cours d’utilisation
+  - les fichiers dont la restauration a échoué sont en cours d’utilisation
   - un répertoire du même nom que le fichier dont la récupération a échoué existe dans le répertoire parent.
 
 ### <a name="datatransferserviceallfilesfailedtorecover--recovery-failed-as-no-file-could-be-recovered"></a>DataTransferServiceAllFilesFailedToRecover : échec de la récupération, car aucun fichier ne peut être récupéré
@@ -276,6 +280,43 @@ Code d’erreur : BMSUserErrorObjectLocked
 Message d’erreur : Une autre opération est en cours sur l’élément sélectionné.
 
 Attendez que l’autre opération en cours soit terminée, puis réessayez.
+
+## <a name="common-soft-delete-related-errors"></a>Erreurs courantes liées à la suppression réversible
+
+### <a name="usererrorrestoreafsinsoftdeletestate--this-restore-point-is-not-available-as-the-snapshot-associated-with-this-point-is-in-a-file-share-that-is-in-soft-deleted-state"></a>UserErrorRestoreAFSInSoftDeleteState - Ce point de restauration n'est pas disponible, car l'instantané qui lui est associé se trouve dans un partage de fichiers qui est dans un état de suppression réversible.
+
+Code d’erreur : UserErrorRestoreAFSInSoftDeleteState
+
+Message d’erreur : Ce point de restauration n'est pas disponible, car l'instantané qui lui est associé se trouve dans un partage de fichiers qui est dans un état de suppression réversible.
+
+Vous ne pouvez pas effectuer d'opération de restauration lorsque le partage de fichiers est dans un état de suppression réversible. Annulez la suppression du partage de fichiers à partir du portail Files ou à l'aide du [script Annuler la suppression](scripts/backup-powershell-script-undelete-file-share.md), puis essayez de le restaurer.
+
+### <a name="usererrorrestoreafsindeletestate--listed-restore-points-are-not-available-as-the-associated-file-share-containing-the-restore-point-snapshots-has-been-deleted-permanently"></a>Les points de restauration listés ne sont pas disponibles, car le partage de fichiers associé contenant les instantanés de point de restauration a été supprimé définitivement.
+
+Code d’erreur : UserErrorRestoreAFSInDeleteState
+
+Message d’erreur : Les points de restauration listés ne sont pas disponibles, car le partage de fichiers associé contenant les instantanés de point de restauration a été supprimé définitivement.
+
+Déterminez si le partage de fichiers sauvegardés a été supprimé. S'il était dans un état de suppression réversible, déterminez si la période de rétention de la suppression réversible est terminée et vérifiez que celle-ci n'a pas été récupérée. Dans les deux cas, vous perdrez définitivement tous vos instantanés et ne pourrez pas récupérer les données.
+
+>[!NOTE]
+> Nous vous recommandons de ne pas supprimer le partage de fichiers sauvegardé ou, s’il est dans un état de suppression réversible, d’annuler la suppression avant la fin de la période de conservation de la suppression réversible, pour éviter de perdre tous vos points de restauration.
+
+### <a name="usererrorbackupafsinsoftdeletestate---backup-failed-as-the-azure-file-share-is-in-soft-deleted-state"></a>UserErrorBackupAFSInSoftDeleteState - La sauvegarde a échoué car le partage de fichiers Azure est dans un état de suppression réversible
+
+Code d’erreur : UserErrorBackupAFSInSoftDeleteState
+
+Message d’erreur : La sauvegarde a échoué car le partage de fichiers Azure est dans un état de suppression réversible
+
+Annulez la suppression du partage de fichiers à partir du **portail Files** ou à l'aide du [script Annuler la suppression](scripts/backup-powershell-script-undelete-file-share.md) pour poursuivre la sauvegarde et empêcher la suppression définitive des données.
+
+### <a name="usererrorbackupafsindeletestate--backup-failed-as-the-associated-azure-file-share-is-permanently-deleted"></a>UserErrorBackupAFSInDeleteState - La sauvegarde a échoué car le partage de fichiers Azure associé a été définitivement supprimé
+
+Code d’erreur : UserErrorBackupAFSInDeleteState
+
+Message d’erreur : La sauvegarde a échoué car le partage de fichiers Azure associé a été définitivement supprimé
+
+Déterminez si le partage de fichiers sauvegardé a été définitivement supprimé. Si oui, arrêtez la sauvegarde du partage de fichiers pour éviter les échecs de sauvegarde répétés. Pour en savoir plus sur l'arrêt de la protection, consultez [Arrêter la protection du partage de fichiers Azure](./manage-afs-backup.md#stop-protection-on-a-file-share).
 
 ## <a name="next-steps"></a>Étapes suivantes
 

@@ -1,26 +1,26 @@
 ---
-title: Réagir aux événements de carte avec Event Grid | Microsoft Azure Maps
-description: Dans cet article, vous allez apprendre à réagir aux événements Microsoft Azure Maps avec Event Grid.
-author: philmea
-ms.author: philmea
-ms.date: 02/08/2019
+title: Réagir aux événements Azure Maps à l'aide d'Event Grid
+description: Apprenez à réagir aux événements Azure Maps impliquant des limites géographiques. Apprenez à écouter les événements Azure Maps et à utiliser Event Grid pour rediriger ces événements vers des gestionnaires d'événements.
+author: anastasia-ms
+ms.author: v-stharr
+ms.date: 07/16/2020
 ms.topic: conceptual
 ms.service: azure-maps
 services: azure-maps
-manager: timlt
+manager: philmea
 ms.custom: mvc
-ms.openlocfilehash: 9c9483af191e5439af0c0b5e433187d6475c178c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 44b2cab814d4e51c4eb0c3ce3322b898f5b26414
+ms.sourcegitcommit: 4064234b1b4be79c411ef677569f29ae73e78731
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80335715"
+ms.lasthandoff: 10/28/2020
+ms.locfileid: "92889764"
 ---
-# <a name="react-to-azure-maps-events-by-using-event-grid"></a>Réagir aux événements Azure Maps à l'aide d'Event Grid 
+# <a name="react-to-azure-maps-events-by-using-event-grid"></a>Réagir aux événements Azure Maps à l'aide d'Event Grid
 
 Azure Maps s’intègre à Azure Event Grid pour permettre aux utilisateurs d’envoyer des notifications d’événements à d’autres services et de déclencher des processus en aval. L’objectif de cet article est de vous aider à configurer vos applications métier afin de détecter les événements Azure Maps. Ceci permet aux utilisateurs de réagir à des événements critiques de façon fiable, évolutive et sécurisée. Par exemple, les utilisateurs peuvent créer une application pour mettre à jour une base de données, créer un ticket et remettre une notification par e-mail chaque fois qu’un appareil franchit une limite géographique.
 
-Azure Event Grid est un service de routage d’événement complètement managé qui utilise le modèle publication-abonnement. Event Grid offre une prise en charge intégrée des services Azure comme [Azure Functions](https://docs.microsoft.com/azure/azure-functions/functions-overview) et [Azure Logic Apps](https://docs.microsoft.com/azure/azure-functions/functions-overview). Il peut envoyer des alertes d’événement à des services non-Azure à l’aide de webhooks. Pour obtenir une liste complète des gestionnaires d’événements qui prennent en charge Event Grid, consultez [Présentation d’Azure Event Grid](https://docs.microsoft.com/azure/event-grid/overview).
+Azure Event Grid est un service de routage d’événement complètement managé qui utilise le modèle publication-abonnement. Event Grid offre une prise en charge intégrée des services Azure comme [Azure Functions](../azure-functions/functions-overview.md) et [Azure Logic Apps](../azure-functions/functions-overview.md). Il peut envoyer des alertes d’événement à des services non-Azure à l’aide de webhooks. Pour obtenir une liste complète des gestionnaires d’événements qui prennent en charge Event Grid, consultez [Présentation d’Azure Event Grid](../event-grid/overview.md).
 
 
 ![Modèle Azure Event Grid fonctionnel](./media/azure-maps-event-grid-integration/azure-event-grid-functional-model.png)
@@ -28,7 +28,7 @@ Azure Event Grid est un service de routage d’événement complètement managé
 
 ## <a name="azure-maps-events-types"></a>Types d'événements Azure Maps
 
-Event Grid utilise les [abonnements aux événements](https://docs.microsoft.com/azure/event-grid/concepts#event-subscriptions) pour acheminer les messages d’événements vers les abonnés. Un compte Azure Maps émet les types d'événements suivants : 
+Event Grid utilise les [abonnements aux événements](../event-grid/concepts.md#event-subscriptions) pour acheminer les messages d’événements vers les abonnés. Un compte Azure Maps émet les types d'événements suivants : 
 
 | Type d'événement | Description |
 | ---------- | ----------- |
@@ -41,39 +41,32 @@ Event Grid utilise les [abonnements aux événements](https://docs.microsoft.com
 L’exemple suivant présente le schéma de GeofenceResult :
 
 ```JSON
-{   
-   "id":"451675de-a67d-4929-876c-5c2bf0b2c000", 
-   "topic":"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Maps/accounts/{accountName}", 
-   "subject":"/spatial/geofence/udid/{udid}/id/{eventId}", 
-   "data":{   
-      "geometries":[   
-         {   
-            "deviceId":"device_1", 
-            "udId":"1a13b444-4acf-32ab-ce4e-9ca4af20b169", 
-            "geometryId":"1", 
-            "distance":999.0, 
-            "nearestLat":47.609833, 
-            "nearestLon":-122.148274 
-         }, 
-         {   
-            "deviceId":"device_1", 
-            "udId":"1a13b444-4acf-32ab-ce4e-9ca4af20b169", 
-            "geometryId":"2", 
-            "distance":999.0, 
-            "nearestLat":47.621954, 
-            "nearestLon":-122.131841 
-         } 
-      ], 
-      "expiredGeofenceGeometryId":[   
-      ], 
-      "invalidPeriodGeofenceGeometryId":[   
-      ] 
-   }, 
-   "eventType":"Microsoft.Maps.GeofenceResult", 
-   "eventTime":"2018-11-08T00:52:08.0954283Z", 
-   "metadataVersion":"1", 
-   "dataVersion":"1.0" 
+{
+    "id":"451675de-a67d-4929-876c-5c2bf0b2c000",
+    "topic":"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Maps/accounts/{accountName}",
+    "subject":"/spatial/geofence/udid/{udid}/id/{eventId}",
+    "data":{
+        "geometries":[
+            {
+                "deviceId":"device_1",
+                "udId":"1a13b444-4acf-32ab-ce4e-9ca4af20b169",
+                "geometryId":"1",
+                "distance":999.0,
+                "nearestLat":47.609833,
+                "nearestLon":-122.148274
+            }
+        ],
+        "expiredGeofenceGeometryId":[
+        ],
+        "invalidPeriodGeofenceGeometryId":[
+        ]
+    },
+    "eventType":"Microsoft.Maps.GeofenceResult",
+    "eventTime":"2018-11-08T00:52:08.0954283Z",
+    "metadataVersion":"1",
+    "dataVersion":"1.0"
 }
+
 ```
 
 ## <a name="tips-for-consuming-events"></a>Conseils relatifs à la consommation d’événements

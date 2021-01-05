@@ -1,25 +1,25 @@
 ---
-title: Surveiller les services de stockage Azure avec Azure Monitor pour le stockage (préversion) | Microsoft Docs
+title: Analyser les services de stockage Azure avec Azure Monitor pour le stockage | Microsoft Docs
 description: Cet article décrit la fonctionnalité Azure Monitor pour le stockage, qui fournit aux administrateurs du stockage une compréhension rapide des problèmes de performances et d’utilisation avec leurs comptes de stockage Azure.
 ms.subservice: ''
 ms.topic: conceptual
-author: bwren
-ms.author: bwren
-ms.date: 08/15/2019
-ms.openlocfilehash: 497ea5a27a56ed5f8192b694fac1c52c8bf57ca6
-ms.sourcegitcommit: 366e95d58d5311ca4b62e6d0b2b47549e06a0d6d
+author: mrbullwinkle
+ms.author: mbullwin
+ms.date: 05/11/2020
+ms.openlocfilehash: 2538bc91be59ff12b39ee3f5f629e4c016480a97
+ms.sourcegitcommit: 192f9233ba42e3cdda2794f4307e6620adba3ff2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82691113"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96296333"
 ---
-# <a name="monitoring-your-storage-service-with-azure-monitor-for-storage-preview"></a>Analyse de votre service de stockage avec Azure Monitor pour le stockage (préversion)
+# <a name="monitoring-your-storage-service-with-azure-monitor-for-storage"></a>Analyse de votre service de stockage avec Azure Monitor pour le stockage
 
-Azure Monitor pour le stockage (préversion) fournit une surveillance complète de vos comptes de stockage Azure grâce à une vue unifiée des performances, des capacités et de la disponibilité de vos services de stockage Azure. Vous pouvez observer la capacité de stockage et les performances de deux manières, en les affichant directement à partir d’un compte de stockage ou d’une vue dans Azure Monitor pour voir les différents groupes de comptes de stockage. 
+Azure Monitor pour le stockage fournit une analyse complète de vos comptes de stockage Azure grâce à une vue unifiée des performances, des capacités et de la disponibilité de vos services de stockage Azure. Vous pouvez observer la capacité de stockage et les performances de deux manières, en les affichant directement à partir d’un compte de stockage ou d’une vue dans Azure Monitor pour voir les différents groupes de comptes de stockage. 
 
-Cet article vous aidera à comprendre l’expérience Azure Monitor pour le stockage (préversion) pour en tirer des connaissances exploitables sur l’intégrité et les performances des comptes de stockage à l’échelle, avec la possibilité de se concentrer sur les zones réactives et de diagnostiquer les problèmes de latence, de limitation et de disponibilité.
+Cet article vous aidera à comprendre l’expérience Azure Monitor pour le stockage pour en tirer des connaissances exploitables sur l’intégrité et les performances des comptes de stockage à l’échelle, avec la possibilité de se concentrer sur les zones réactives et de diagnostiquer les problèmes de latence, de limitation de bande passante et de disponibilité.
 
-## <a name="introduction-to-azure-monitor-for-storage-preview"></a>Présentation d’Azure Monitor pour le stockage (préversion)
+## <a name="introduction-to-azure-monitor-for-storage"></a>Présentation d’Azure Monitor pour le stockage
 
 Avant d’entrer dans les détails de l’expérience avec la fonctionnalité, vous devez comprendre comment cette fonctionnalité présente et affiche les informations. Que vous désélectionniez la fonctionnalité de stockage directement à partir d’un compte de stockage ou d’Azure Monitor, Azure Monitor pour le stockage offre une expérience cohérente. 
 
@@ -31,14 +31,11 @@ La solution offre les avantages suivants :
 
 * **Personnalisable** vous permet de modifier les métriques que vous souhaitez voir, modifier ou définir des seuils qui s’alignent sur vos limites et les enregistrer comme votre propre classeur. Les graphiques du classeur peuvent être épinglés au tableau de bord Azure.  
 
-Cette fonctionnalité ne vous oblige pas à activer ou à configurer quoi que ce soit : les métriques de stockage de vos comptes de stockage sont collectées par défaut. Si vous n’êtes pas familiarisé avec les métriques disponibles sur le stockage Azure, consultez la description et la définition des métriques de stockage Azure dans [Métriques de stockage Azure](../../storage/common/storage-metrics-in-azure-monitor.md).
+Cette fonctionnalité ne vous oblige pas à activer ou à configurer quoi que ce soit : les métriques de stockage de vos comptes de stockage sont collectées par défaut. Si vous n’êtes pas familiarisé avec les métriques disponibles sur le stockage Azure, consultez la description et la définition des métriques de stockage Azure dans [Métriques de stockage Azure](../../storage/blobs/monitor-blob-storage.md).
 
 >[!NOTE]
 >Il n’y a pas de frais facturés pour accéder à cette fonctionnalité et vous ne paierez que pour les fonctionnalités essentielles d’Azure Monitor que vous configurez ou activez, comme décrit dans la page [Détails de la tarification d’Azure Monitor](https://azure.microsoft.com/pricing/details/monitor/).
 
->[!NOTE]
->Azure Monitor pour le stockage ne prend pas en charge les [comptes v1 à usage général](../../storage/common/storage-account-overview.md#general-purpose-v1-accounts).
->
 
 ## <a name="view-from-azure-monitor"></a>Voir à partir d’Azure Monitor
 
@@ -48,17 +45,17 @@ Pour afficher l’utilisation et la disponibilité de vos comptes de stockage po
 
 1. Connectez-vous au [portail Azure](https://portal.azure.com).
 
-2. Sélectionnez **Surveillance** dans le volet gauche du portail Azure, puis dans la section **Insights**, sélectionnez **Comptes de stockage (préversion)** .
+2. Sélectionnez **Analyse** dans le volet gauche du Portail Azure, puis sous la section **Insights**, sélectionnez **Comptes de stockage**.
 
     ![Vue de comptes de stockage multiples](./media/storage-insights-overview/multiple-storage-accounts-view-01.png)
 
 ### <a name="overview-workbook"></a>Classeur de présentation
 
-Dans le classeur **Vue d’ensemble** de l’abonnement sélectionné, le tableau affiche les métriques de stockage interactives et l’état de disponibilité du service pour jusqu’à 10 comptes de stockage regroupés au sein de l’abonnement. Vous pouvez filtrer les résultats en fonction des options que vous sélectionnez dans les listes déroulantes suivantes :
+Dans le classeur **Vue d’ensemble** de l’abonnement sélectionné, le tableau affiche les métriques de stockage interactives et l’état de disponibilité du service pour jusqu’à 5 comptes de stockage regroupés au sein de l’abonnement. Vous pouvez filtrer les résultats en fonction des options que vous sélectionnez dans les listes déroulantes suivantes :
 
 * **Abonnements** : seuls les abonnements qui ont des comptes de stockage sont répertoriés.  
 
-* **Comptes de stockage** : par défaut, 10 comptes de stockage sont présélectionnés. Si vous sélectionnez plusieurs comptes de stockage ou tous les comptes dans le sélecteur de portée, jusqu’à 200 comptes de stockage sont retournés. Par exemple, si vous avez un total de 573 comptes de stockage sur trois abonnements que vous avez sélectionnés, seuls 200 comptes sont affichés. 
+* **Comptes de stockage** : par défaut, 5 comptes de stockage sont présélectionnés. Si vous sélectionnez plusieurs comptes de stockage ou tous les comptes dans le sélecteur de portée, jusqu’à 200 comptes de stockage sont retournés. Par exemple, si vous avez un total de 573 comptes de stockage sur trois abonnements que vous avez sélectionnés, seuls 200 comptes sont affichés. 
 
 * **Intervalle de temps** : par défaut, affiche les quatre dernières heures d’informations en fonction des sélections correspondantes effectuées.
 
@@ -67,7 +64,7 @@ La vignette de compteur sous les listes déroulantes cumule le total de comptes 
 Sélectionnez une valeur dans les colonnes **Disponibilité**, **Latence E2E**, **Latence du serveur** et **Type d’erreur de transaction/Erreurs** pour aller au rapport adapté au type spécifique de métriques de stockage correspondant à la colonne sélectionnée pour ce compte de stockage. Pour plus d’informations sur les classeurs pour chaque catégorie, consultez la section [Classeurs de stockage détaillés](#detailed-storage-workbooks) ci-dessous. 
 
 >[!NOTE]
->Pour plus d’informations sur les erreurs pouvant être affichées dans le rapport, consultez [Schéma de type de réponse](../../storage/common/monitor-storage-reference.md#metrics-dimensions) et recherchez les types de réponse, comme **ServerOtherError**, **ClientOtherError** et **ClientThrottlingError**. Selon les comptes de stockage sélectionnés, si plus de trois types d’erreurs sont signalés, toutes les autres erreurs sont représentées sous la catégorie **Autres**.
+>Pour plus d’informations sur les erreurs pouvant être affichées dans le rapport, consultez [Schéma de type de réponse](../../storage/blobs/monitor-blob-storage-reference.md#metrics-dimensions) et recherchez les types de réponse, comme **ServerOtherError**, **ClientOtherError** et **ClientThrottlingError**. Selon les comptes de stockage sélectionnés, si plus de trois types d’erreurs sont signalés, toutes les autres erreurs sont représentées sous la catégorie **Autres**.
 
 Le seuil de **Disponibilité** par défaut est le suivant :
 
@@ -92,9 +89,9 @@ Pour accéder à Azure Monitor pour machines virtuelles directement à partir d�
 
 1. Dans le portail Azure, sélectionnez Comptes de stockage.
 
-2. Dans la liste, choisissez un compte de stockage. Dans la section Supervision, choisissez Insights (préversion).
+2. Dans la liste, choisissez un compte de stockage. Dans la section Analyse, choisissez Insights.
 
-    ![Page Vue d’ensemble du compte de stockage sélectionné](./media/storage-insights-overview/storage-account-direct-overview-01.png)
+    ![Capture d’écran montrant la page du classeur Vue d’ensemble pour le compte de stockage.](./media/storage-insights-overview/storage-account-direct-overview-01.png)
 
 Dans le classeur **Vue d’ensemble** du compte de stockage, plusieurs métriques de performances du stockage s’affichent pour vous aider à évaluer rapidement :
 
@@ -138,7 +135,7 @@ Les classeurs **Vue d’ensemble** et **Capacité** du compte de stockage et mul
 
 ![Exemple d’exportation de résultats de grille de classeur](./media/storage-insights-overview/workbook-export-example.png)
 
-## <a name="customize-azure-monitor-for-storage-preview"></a>Personnaliser Azure Monitor pour le stockage (préversion)
+## <a name="customize-azure-monitor-for-storage"></a>Personnaliser Azure Monitor pour le stockage
 
 Cette section présente les scénarios courants de modification du classeur pour le personnaliser en fonction de vos besoins d’analyse de données :
 
@@ -155,7 +152,7 @@ Les personnalisations sont enregistrées dans un classeur personnalisé pour emp
 
 Vous pouvez configurer les classeurs **Vue d’ensemble** et **Capacité** du compte de stockage et multi-abonnement pour les étendre à un ou plusieurs abonnements ou comptes de stockage à chaque exécution. Pour cela, procédez comme suit.
 
-1. Sélectionnez **Surveillance** à partir du portail, puis sélectionnez **Comptes de stockage (préversion)** dans le volet gauche.
+1. Sélectionnez **Analyse** à partir du portail, puis sélectionnez **Comptes de stockage** dans le volet gauche.
 
 2. Dans le classeur **Vue d’ensemble**, dans la barre de commandes, sélectionnez **Modifier**.
 
@@ -176,7 +173,7 @@ Dans notre exemple, nous travaillons avec le classeur de capacité du compte de 
 
 Vous pouvez effectuer les mêmes modifications sur n’importe lequel des classeurs **Défaillances**, **Performances**, **Disponibilité** et **Capacité**.
 
-1. Sélectionnez **Surveillance** à partir du portail, puis sélectionnez **Comptes de stockage (préversion)** dans le volet gauche.
+1. Sélectionnez **Analyse** à partir du portail, puis sélectionnez **Comptes de stockage** dans le volet gauche.
 
 2. Sélectionnez **Capacité** pour basculer vers le classeur Capacité et, à partir de la barre de commandes, sélectionnez **Modifier**.
 
@@ -198,7 +195,7 @@ Vous pouvez effectuer les mêmes modifications sur n’importe lequel des classe
 
 1. Sélectionnez **Paramètres de colonne** dans la grille de métriques.
 
-2. Dans le volet **Modifier les paramètres de colonne**, sous la section **Colonnes**, sélectionnez **microsoft.storage/storageaccounts-Capacity-UsedCapacity$|microsoft.storage/storageaccounts/blobservices-Capacity-BlobCapacity$|microsoft.storage/storageaccounts/fileservices-Capacity-FileCapacity$|microsoft.storage/storageaccounts/queueservices-Capacity-QueueCapacity$|microsoft.storage/storageaccounts/tableservices-Capacity-TableCapacity$** . Dans la liste déroulante **Palette de couleurs**, sélectionnez **Vert**.
+2. Dans le volet **Modifier les paramètres de colonne**, sous la section **Colonnes**, sélectionnez **microsoft.storage/storageaccounts-Capacity-UsedCapacity$`|`microsoft.storage/storageaccounts/blobservices-Capacity-BlobCapacity$`|`microsoft.storage/storageaccounts/fileservices-Capacity-FileCapacity$`|`microsoft.storage/storageaccounts/queueservices-Capacity-QueueCapacity$`|`microsoft.storage/storageaccounts/tableservices-Capacity-TableCapacity$** . Dans la liste déroulante **Palette de couleurs**, sélectionnez **Vert**.
 
 3. Sélectionnez **Enregistrer et fermer** pour valider vos modifications.
 
@@ -210,7 +207,7 @@ Dans cet exemple, nous travaillons avec le classeur Capacité du compte de stock
 
 1. Sélectionnez **Comptes de stockage** dans le portail, puis sélectionnez un compte de stockage dans la liste.
 
-2. Sélectionnez **Insights (préversion)** dans le volet gauche.
+2. Sélectionnez **Insights** dans le volet gauche.
 
 3. Dans le classeur, sélectionnez **Disponibilité** pour basculer vers le classeur de disponibilité , puis sélectionnez **Modifier** dans la barre de commandes. 
 
@@ -228,41 +225,25 @@ Dans cet exemple, nous travaillons avec le classeur Capacité du compte de stock
 
 ## <a name="troubleshooting"></a>Dépannage
 
-Cette section est destinée à vous aider à diagnostiquer et résoudre certains des problèmes communs que votre application est susceptible de rencontrer lors de l’utilisation d’Azure Monitor pour le stockage (préversion). La liste ci-dessous permet d’identifier les informations pertinentes pour un problème spécifique.
+Pour obtenir des conseils généraux sur la résolution des problèmes, reportez-vous à [l’article de résolution des problèmes](troubleshoot-workbooks.md) pour les insights basés sur les workbooks.
+
+Cette section est destinée à vous aider à diagnostiquer et résoudre certains des problèmes communs que vous êtes susceptible de rencontrer lors de l’utilisation d’Azure Monitor pour le stockage. La liste ci-dessous permet d’identifier les informations pertinentes pour un problème spécifique.
 
 ### <a name="resolving-performance-capacity-or-availability-issues"></a>Résolution des problèmes de performances, de capacité et de disponibilité
 
-Pour résoudre les problèmes liés au stockage que vous identifiez avec Azure Monitor pour le stockage (préversion), consultez le [guide de résolution des problèmes](../../storage/common/storage-monitoring-diagnosing-troubleshooting.md#troubleshooting-guidance) pour le stockage Azure.  
+Pour résoudre les problèmes liés au stockage que vous identifiez avec Azure Monitor pour le stockage, consultez le [guide de résolution des problèmes](../../storage/common/storage-monitoring-diagnosing-troubleshooting.md#troubleshooting-guidance) pour le stockage Azure.  
 
 ### <a name="why-can-i-only-see-200-storage-accounts"></a>Pourquoi ne puis-je voir que 200 comptes de stockage ?
 
 Le nombre de comptes de stockage sélectionnés est limité à 200, quel que soit le nombre d’abonnements sélectionnés.
 
-### <a name="what-happens-when-i-click-on-a-recently-pinned-tile-in-the-dashboard"></a>Que se passe-t-il lorsque je clique sur une vignette épinglée récemment dans le tableau de bord ?
-
-* Si vous cliquez n’importe où sur la vignette, vous passez à l’onglet à partir duquel la vignette a été épinglée. Par exemple, si vous épinglez un graphique dans l’onglet « Vue d’ensemble du compte de stockage », quand vous cliquez sur cette vignette dans le tableau de bord, il ouvre cette vue par défaut. Toutefois, si vous épinglez un graphique à partir de votre copie enregistrée, il ouvre la vue de votre copie enregistrée.
-* L’icône de filtre dans le coin supérieur gauche du titre ouvre l’onglet « Configurer les paramètres de vignette ».
-* L’icône représentant une ellipse en haut à droite vous donne les options « Personnaliser les données de titre », « Personnaliser », « Actualiser » et « Supprimer du tableau de bord ».
-
-### <a name="what-happens-when-i-save-a-workbook"></a>Que se passe-t-il lorsque j’enregistre un classeur ?
-
-* Lorsque vous enregistrez un classeur, il vous permet de créer une nouvelle copie du classeur avec vos modifications et de modifier le titre. L’enregistrement ne remplace pas le classeur, le classeur actuel est toujours la vue par défaut.
-* Un **classeur** non enregistré est simplement la vue par défaut.
-
-
-### <a name="why-dont-i-see-all-my-subscriptions-in-the-portal"></a>Pourquoi ne vois-je pas tous mes abonnements sur le portail ?
-
-Le portail affichera uniquement les données des abonnements sélectionnés lors de son lancement. Pour modifier les abonnements sélectionnés, accédez au coin supérieur droit et cliquez sur le bloc-notes avec une icône de filtre. L’onglet Répertoire + abonnements s’affiche alors.
-
-![Répertoire + abonnement](./media/storage-insights-overview/fqa3.png)
-
 ### <a name="how-to-change-the-coloring-and-threshold-for-availability"></a>Comment modifier la couleur et le seuil de disponibilité ?
 
-Reportez-vous à la section [Modifier le seuil de disponibilité](storage-insights-overview.md#modify-the-availability-threshold) pour obtenir des instructions détaillées sur la façon de modifier les couleurs et seuils de disponibilité.
+Reportez-vous à la section [Modifier le seuil de disponibilité](#modify-the-availability-threshold) pour obtenir des instructions détaillées sur la façon de modifier les couleurs et seuils de disponibilité.
 
 ### <a name="how-to-analyze-and-troubleshoot-the-data-shown-in-azure-monitor-for-storage"></a>Comment analyser et dépanner les données affichées dans Azure Monitor pour le stockage ?
 
- Pour plus d’informations sur l’analyse et la résolution des problèmes liés aux données de stockage Azure affichées dans Azure Monitor pour le stockage, consultez l’article [Analyser, diagnostiquer et dépanner Microsoft Azure Storage](https://docs.microsoft.com/azure/storage/common/storage-monitoring-diagnosing-troubleshooting).
+ Pour plus d’informations sur l’analyse et la résolution des problèmes liés aux données de stockage Azure affichées dans Azure Monitor pour le stockage, consultez l’article [Analyser, diagnostiquer et dépanner Microsoft Azure Storage](../../storage/common/storage-monitoring-diagnosing-troubleshooting.md).
 
 ### <a name="why-dont-i-see-all-the-types-of-errors-in-metrics"></a>Pourquoi ne puis-je pas voir tous les types d’erreur dans les métriques ?
 
@@ -273,7 +254,7 @@ Actuellement, jusqu’à trois types d’erreurs différents sont affichés et l
 
     ![Accédez aux métriques, puis cliquez sur Modifier, puis sur Transactions, sommes](./media/storage-insights-overview/fqa7.png)
 
-1. Modifiez ensuite le nombre de fractionnements.
+3. Modifiez ensuite le nombre de fractionnements.
 
     ![Sélectionner Paramètres de métrique](./media/storage-insights-overview/fqa7-2.png)
 
@@ -283,41 +264,10 @@ Si vous souhaitez afficher n types d’erreur différents, spécifiez une valeur
 
 Chaque classeur est enregistré dans le compte de stockage dans lequel vous l’avez enregistré. Essayez de trouver le compte de stockage spécifique dans lequel l’utilisateur a enregistré le classeur. Sans cela, il n’existe aucun moyen de rechercher un classeur spécifique sans connaître la ressource (le compte de stockage).
 
-### <a name="what-is-time-range"></a>Qu’est-ce que l’intervalle de temps ?
-
-L’intervalle de temps affiche des données pour un intervalle de temps donné. Par exemple, si l’intervalle de temps est de 24 heures, il indique les données des dernières 24 heures.
-
-### <a name="what-is-time-granularity-time-grain"></a>Qu’est-ce que la granularité temporelle (fragment de temps) ?
-
-La granularité temporelle est la différence de temps entre deux points de données. Par exemple, si le fragment de temps est défini sur 1 seconde, cela signifie que les métriques sont collectées chaque seconde.
-
-### <a name="what-is-the-time-granularity-once-we-pin-any-part-of-the-workbooks-to-a-dashboard"></a>Quelle est la granularité temporelle après avoir épinglé une partie d’un classeur à un tableau de bord ?
-
-La granularité temporelle par défaut est définie sur Automatique, et ne peut pas être modifiée pour l’instant.
-
-### <a name="how-do-i-change-the-timespan-time-range-of-the-workbook-step-on-my-dashboard"></a>Comment modifier la plage d’intervalle de temps de l’étape de classeur sur mon tableau de bord ?
-
-Par défaut, l’intervalle de temps de la vignette de votre tableau de bord est défini sur 24 heures. Pour modifier cette valeur, cliquez sur l’ellipse en haut à droite, sélectionnez **Personnaliser les données de vignette**, cochez la case « Remplacer les paramètres de temps du tableau de bord au niveau du titre », puis choisissez un intervalle de temps à l’aide du menu déroulant.  
-
-![Sélectionnez l’ellipse dans le coin droit de la vignette et choisissez Personnaliser ces données](./media/storage-insights-overview/fqa-data-settings.png)
-
-![Dans Configurer les paramètres de vignette, sélectionnez la liste déroulante Intervalle de temps pour modifier la plage](./media/storage-insights-overview/fqa-timespan.png)
-
-### <a name="how-do-i-change-the-title-of-the-workbook-or-a-workbook-step-i-pinned-to-a-dashboard"></a>Comment modifier le titre pour une étape de classeur ou un classeur que j’ai épinglé à un tableau de bord ?
-
-Le titre de l’étape de classeur ou du classeur qui est épinglé à un tableau de bord conserve le même nom que celui qu’il avait dans le classeur. Pour modifier le titre, vous devez enregistrer votre propre copie du classeur. Vous pourrez alors renommer le classeur avant d’appuyer sur Enregistrer.
-
-![Sélectionnez Enregistrer en haut pour enregistrer une copie du classeur et modifier son nom](./media/storage-insights-overview/fqa-change-workbook-name.png)
-
-Pour modifier le nom d’une étape dans votre classeur enregistré, sélectionnez Modifier sous l’étape, puis sélectionnez l’engrenage tout en bas de Paramètres.
-
-![Sélectionnez Modifier en bas de l’étape d’un classeur pour ouvrir les Paramètres](./media/storage-insights-overview/fqa-edit.png)
-![Dans Paramètres, sélectionnez l’engrenage en bas pour pouvoir modifier le nom de l’étape](./media/storage-insights-overview/fqa-change-name.png)
-
 ## <a name="next-steps"></a>Étapes suivantes
 
-* Configurez les [alertes de métriques](../platform/alerts-metric.md) et les [notifications d’intégrité du service](../../service-health/alerts-activity-log-service-notifications.md) pour configurer l’alerte automatisée afin de faciliter la détection des problèmes.
+* Configurez les [alertes de métriques](../platform/alerts-metric.md) et les [notifications d’intégrité du service](../../service-health/alerts-activity-log-service-notifications-portal.md) pour configurer l’alerte automatisée afin de faciliter la détection des problèmes.
 
-* Découvrez les scénarios que les classeurs sont conçus pour prendre en charge, comment créer et personnaliser des rapports existants, et bien plus encore en consultant la rubrique [Créer des rapports interactifs avec les classeurs Azure Monitor](../app/usage-workbooks.md).
+* Découvrez les scénarios que les classeurs sont conçus pour prendre en charge, comment créer et personnaliser des rapports existants, et bien plus encore en consultant la rubrique [Créer des rapports interactifs avec les classeurs Azure Monitor](../platform/workbooks-overview.md).
 
 * Pour obtenir un guide détaillé concernant l'utilisation de Storage Analytics et d'autres outils permettant d'analyser, de diagnostiquer et de résoudre les problèmes d'Azure Storage, consultez [Analyse, diagnostic et résolution des problèmes rencontrés sur Microsoft Azure Storage](../../storage/common/storage-monitoring-diagnosing-troubleshooting.md).

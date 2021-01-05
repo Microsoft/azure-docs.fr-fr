@@ -1,32 +1,23 @@
 ---
 title: Meilleures pratiques pour améliorer les performances à l’aide de Azure Service Bus
 description: Explique comment utiliser Service Bus pour optimiser les performances lors de l’échange de messages répartis.
-services: service-bus-messaging
-documentationcenter: na
-author: axisc
-manager: timlt
-editor: spelluru
-ms.service: service-bus-messaging
 ms.topic: article
-ms.date: 03/12/2020
-ms.author: aschhab
-ms.openlocfilehash: 267965ee41280a677050d1676285dda8734bc044
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.date: 11/11/2020
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 12de7edd5dec42b01c46307febbef7d739d0495d
+ms.sourcegitcommit: 6a770fc07237f02bea8cc463f3d8cc5c246d7c65
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81606054"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95811668"
 ---
 # <a name="best-practices-for-performance-improvements-using-service-bus-messaging"></a>Meilleures pratiques relatives aux améliorations de performances à l’aide de la messagerie Service Bus
 
-Cet article décrit comment utiliser Azure Service Bus pour optimiser les performances lors de l’échange de messages répartis. La première partie de cet article décrit les différents mécanismes proposés afin d’améliorer les performances. La deuxième partie fournit des conseils sur l’utilisation de Service Bus des services visant à offrir des performances optimales dans un scénario donné.
+Cet article décrit comment utiliser Azure Service Bus pour optimiser les performances lors de l’échange de messages répartis. La première partie de cet article décrit les différents mécanismes pour améliorer les performances. La deuxième partie fournit des conseils sur l’utilisation de Service Bus des services visant à offrir des performances optimales dans un scénario donné.
 
-Dans cet article, le terme « client » fait référence à une entité qui accède à Service Bus. Un client peut jouer le rôle d’un expéditeur ou d’un destinataire. Le terme « expéditeur » est utilisé pour un client de file d’attente ou de rubrique Service Bus qui envoie des messages à une file d’attente ou un abonnement à une rubrique Service Bus. Le terme « destinataire » fait référence à un client de file d’attente ou d’abonnement de Bus de Service qui reçoit des messages de la part d’une file d’attente ou d’un abonnement Service Bus.
-
-Les sections suivantes présentent plusieurs concepts Service Bus utiles pour améliorer les performances.
+Dans cet article, le terme « client » fait référence à une entité qui accède à Service Bus. Un client peut jouer le rôle d’un expéditeur ou d’un destinataire. Le terme « expéditeur » est utilisé pour un client de file d’attente ou de rubrique Service Bus qui envoie des messages à une file d’attente ou une rubrique Service Bus. Le terme « destinataire » fait référence à un client de file d’attente ou d’abonnement de Bus de Service qui reçoit des messages de la part d’une file d’attente ou d’un abonnement Service Bus.
 
 ## <a name="protocols"></a>Protocoles
-
 Service Bus permet aux clients d’envoyer et de recevoir des messages par le biais de l’un des trois protocoles suivants :
 
 1. Advanced Message Queuing Protocol (AMQP)
@@ -39,33 +30,31 @@ AMQP est le plus efficace, car il maintient la connexion à Service Bus. Il perm
 > Le protocole SBMP est disponible uniquement pour .NET Framework. AMQP est le protocole par défaut pour .NET Standard.
 
 ## <a name="choosing-the-appropriate-service-bus-net-sdk"></a>Choix du Kit de développement logiciel (SDK) .NET Service Bus approprié
-
-Il existe deux Kits de développement logiciel (SDK) .NET Azure Service Bus pris en charge. Leurs API sont très similaires, et il peut être difficile de choisir entre les deux. Reportez-vous au tableau suivant pour vous aider à prendre votre décision. Nous suggérons le Kit de développement logiciel (SDK) Microsoft.Azure.ServiceBus, car il est plus moderne et performant, et il est compatible avec toutes les plateformes. En outre, il prend en charge AMQP sur WebSocket et fait partie de la collection du Kit de développement logiciel (SDK) .NET Azure de projets open source.
+Il existe deux Kits de développement logiciel (SDK) .NET Azure Service Bus pris en charge. Leurs API sont similaires, et il peut être difficile de choisir entre les deux. Reportez-vous au tableau suivant pour vous aider à prendre votre décision. Nous suggérons d’utiliser le Kit de développement logiciel (SDK) Microsoft.Azure.ServiceBus, car il est plus moderne et performant, et il est compatible avec toutes les plateformes. En outre, il prend en charge AMQP sur WebSocket et fait partie de la collection du Kit de développement logiciel (SDK) .NET Azure de projets open source.
 
 | Package NuGet | Espace(s) de noms principal(-aux) | Plateforme(s) minimale(s) | Protocole(s) |
 |---------------|----------------------|---------------------|-------------|
 | <a href="https://www.nuget.org/packages/Microsoft.Azure.ServiceBus" target="_blank">Microsoft.Azure.ServiceBus <span class="docon docon-navigate-external x-hidden-focus"></span></a> | `Microsoft.Azure.ServiceBus`<br>`Microsoft.Azure.ServiceBus.Management` | .NET Core 2.0<br>.NET Framework 4.6.1<br>Mono 5.4<br>Xamarin.iOS 10.14<br>Xamarin.Mac 3.8<br>Xamarin.Android 8.0<br>Plateforme Windows universelle 10.0.16299 | AMQP<br>HTTP |
 | <a href="https://www.nuget.org/packages/WindowsAzure.ServiceBus" target="_blank">WindowsAzure.ServiceBus <span class="docon docon-navigate-external x-hidden-focus"></span></a> | `Microsoft.ServiceBus`<br>`Microsoft.ServiceBus.Messaging` | .NET Framework 4.6.1 | AMQP<br>SBMP<br>HTTP |
 
-Pour plus d’informations sur la prise en charge minimale de la plateforme .NET Standard, consultez [Prise en charge de l’implémentation .NET](https://docs.microsoft.com/dotnet/standard/net-standard#net-implementation-support).
+Pour plus d’informations sur la prise en charge minimale de la plateforme .NET Standard, consultez [Prise en charge de l’implémentation .NET](/dotnet/standard/net-standard#net-implementation-support).
 
 ## <a name="reusing-factories-and-clients"></a>Réutilisation de structures et de clients
 
 # <a name="microsoftazureservicebus-sdk"></a>[Kit de développement logiciel (SDK) Microsoft.Azure.ServiceBus](#tab/net-standard-sdk)
 
-Des objets clients Service Bus, tels que les implémentations de [`IQueueClient`][QueueClient] ou [`IMessageSender`][MessageSender], doivent être inscrits pour l’injection de dépendances en tant que singletons (ou instanciés une fois et partagés). Il est déconseillé de fermer les structures de messagerie ou les files d’attente, les rubriques et les clients d’abonnement après avoir envoyé un message, et de les recréer lorsque vous envoyez le message suivant. La fermeture d’une structure de messagerie supprime la connexion à Service Bus et une nouvelle connexion est établie au moment de la recréation de la structure. L’établissement d’une connexion est une opération coûteuse, que vous pouvez éviter en réutilisant les objets de structure et client dans plusieurs opérations. Vous pouvez utiliser en toute sécurité ces objets clients pour envoyer des messages à partir de plusieurs threads et d’opérations asynchrones simultanées.
+Des objets clients Service Bus, tels que les implémentations de [`IQueueClient`][QueueClient] ou [`IMessageSender`][MessageSender], doivent être inscrits pour l’injection de dépendances en tant que singletons (ou instanciés une fois et partagés). Nous déconseillons de fermer les structures de messagerie ou les files d’attente, les rubriques ou les clients d’abonnement après avoir envoyé un message, et de les recréer lorsque vous envoyez le message suivant. La fermeture d’une fabrique de messagerie supprime la connexion au service Service Bus. Une nouvelle connexion est établie lors de la recréation de la fabrique. L’établissement d’une connexion est une opération coûteuse, que vous pouvez éviter en réutilisant les objets de structure et client dans plusieurs opérations. Vous pouvez utiliser en toute sécurité ces objets clients pour envoyer des messages à partir de plusieurs threads et d’opérations asynchrones simultanées.
 
 # <a name="windowsazureservicebus-sdk"></a>[Kit de développement logiciel (SDK) WindowsAzure.ServiceBus](#tab/net-framework-sdk)
 
-Des objets clients Service Bus, tels que `QueueClient` ou `MessageSender`, sont créés via un objet [MessagingFactory][MessagingFactory], qui assure également la gestion interne des connexions. Il est déconseillé de fermer les structures de messagerie ou les files d’attente, les rubriques et les clients d’abonnement après avoir envoyé un message, et de les recréer lorsque vous envoyez le message suivant. La fermeture d’une structure de messagerie supprime la connexion à Service Bus et une nouvelle connexion est établie au moment de la recréation de la structure. L’établissement d’une connexion est une opération coûteuse, que vous pouvez éviter en réutilisant les objets de structure et client dans plusieurs opérations. Vous pouvez utiliser en toute sécurité ces objets clients pour envoyer des messages à partir de plusieurs threads et d’opérations asynchrones simultanées.
+Des objets clients Service Bus, tels que `QueueClient` ou `MessageSender`, sont créés via un objet [MessagingFactory][MessagingFactory], qui assure également la gestion interne des connexions. Nous déconseillons de fermer les structures de messagerie ou les files d’attente, les rubriques ou les clients d’abonnement après avoir envoyé un message, et de les recréer lorsque vous envoyez le message suivant. La fermeture d’une structure de messagerie supprime la connexion à Service Bus et une nouvelle connexion est établie au moment de la recréation de la structure. L’établissement d’une connexion est une opération coûteuse, que vous pouvez éviter en réutilisant les objets de structure et client dans plusieurs opérations. Vous pouvez utiliser en toute sécurité ces objets clients pour envoyer des messages à partir de plusieurs threads et d’opérations asynchrones simultanées.
 
 ---
 
 ## <a name="concurrent-operations"></a>Opérations simultanées
+Les opérations telles qu’envoyer, recevoir, supprimer, etc., prennent un certain temps. Ce temps comprend le traitement de l’opération par le service Service Bus et la latence de la requête et de la réponse. Pour augmenter le nombre d’opérations par période, les opérations doivent s’exécuter simultanément.
 
-L’exécution d’une opération (envoi, réception, suppression, etc.) prend un certain temps. Ce temps comprend le traitement de l’opération par le service Service Bus en plus de la latence de la requête et de la réponse. Pour augmenter le nombre d’opérations par période, les opérations doivent s’exécuter simultanément.
-
-Le client planifie les opérations parallèles en effectuant des opérations asynchrones. La requête suivante démarre avant la fin de la demande précédente. Voici un exemple d’opération d’envoi asynchrone présenté sous forme d’extrait de code :
+Le client planifie les opérations parallèles en effectuant des opérations **asynchrones**. La requête suivante démarre avant la fin de la demande précédente. Voici un exemple d’opération d’envoi asynchrone présenté sous forme d’extrait de code :
 
 # <a name="microsoftazureservicebus-sdk"></a>[Kit de développement logiciel (SDK) Microsoft.Azure.ServiceBus](#tab/net-standard-sdk)
 
@@ -203,7 +192,7 @@ var factory = MessagingFactory.Create(namespaceUri, settings);
 Le traitement par lot n’affecte pas le nombre d’opérations de messagerie facturables et est disponible uniquement pour le protocole client Service Bus utilisant la bibliothèque [Microsoft.ServiceBus.Messaging](https://www.nuget.org/packages/WindowsAzure.ServiceBus/). Le protocole HTTP ne prend pas en charge le traitement par lot.
 
 > [!NOTE]
-> La définition de `BatchFlushInterval` garantit que le traitement par lot est implicite du point de vue de l’application. Autrement dit, l’application effectue des appels `SendAsync` et `CompleteAsync` et n’effectue pas d’appels Batch spécifiques.
+> La définition de `BatchFlushInterval` garantit que le traitement par lot est implicite du point de vue de l’application. Autrement dit, l’application effectue des appels `SendAsync` et `CompleteAsync` n’effectue pas d’appels Batch spécifiques.
 >
 > Le traitement par lot explicite du côté client peut être implémenté en utilisant l’appel de méthode ci-dessous :
 > ```csharp
@@ -215,7 +204,12 @@ Le traitement par lot n’affecte pas le nombre d’opérations de messagerie fa
 
 ## <a name="batching-store-access"></a>Accès au dispositif de stockage de traitement par lot
 
-Pour augmenter le débit d’une file d’attente, d’une rubrique ou d’un abonnement, Service Bus regroupe plusieurs messages lorsqu’il écrit à son dispositif de stockage en interne. S’il est activé sur une file d’attente ou une rubrique, l’écriture de messages dans le dispositif de stockage est traitée par lot. S’il est activé sur une file d’attente ou un abonnement, l’écriture de messages depuis le dispositif de stockage est traitée par lot. Si l’accès au magasin par lot est activé pour une entité, Service Bus retarde l’opération d’écriture de dispositif de stockage concernant cette entité de 20 ms au maximum.
+Pour augmenter le débit d’une file d’attente, d’une rubrique ou d’un abonnement, Service Bus regroupe plusieurs messages lorsqu’il écrit à son dispositif de stockage en interne. 
+
+- Lorsque vous activez le traitement par lot sur une file d’attente, l’écriture des messages dans le magasin et la suppression des messages du magasin sont traitées par lot. 
+- Lorsque vous activez le traitement par lot sur une rubrique, l’écriture de messages dans le magasin est regroupée. 
+- Lorsque vous activez le traitement par lot sur un abonnement, l’écriture et la suppression de messages dans le magasin sont traitées par lot. 
+- Lorsque l’accès au magasin par lot est activé pour une entité, Service Bus retarde l’opération d’écriture de dispositif de stockage pour cette entité de 20 ms au maximum.
 
 > [!NOTE]
 > Il n’existe aucun risque de perdre des messages avec le traitement par lot, même en cas de défaillance de Service Bus à la fin d’un intervalle de traitement par lot de 20 ms.
@@ -236,7 +230,7 @@ var queueDescription = new QueueDescription(path)
 var queue = await managementClient.CreateQueueAsync(queueDescription);
 ```
 
-Pour plus d’informations, consultez les rubriques suivantes :
+Pour plus d’informations, consultez les articles suivants :
 * <a href="https://docs.microsoft.com/dotnet/api/microsoft.azure.servicebus.management.queuedescription.enablebatchedoperations?view=azure-dotnet" target="_blank">`Microsoft.Azure.ServiceBus.Management.QueueDescription.EnableBatchedOperations` <span class="docon docon-navigate-external x-hidden-focus"></span></a>.
 * <a href="https://docs.microsoft.com/dotnet/api/microsoft.azure.servicebus.management.subscriptiondescription.enablebatchedoperations?view=azure-dotnet" target="_blank">`Microsoft.Azure.ServiceBus.Management.SubscriptionDescription.EnableBatchedOperations` <span class="docon docon-navigate-external x-hidden-focus"></span></a>.
 * <a href="https://docs.microsoft.com/dotnet/api/microsoft.azure.servicebus.management.topicdescription.enablebatchedoperations?view=azure-dotnet" target="_blank">`Microsoft.Azure.ServiceBus.Management.TopicDescription.EnableBatchedOperations` <span class="docon docon-navigate-external x-hidden-focus"></span></a>.
@@ -253,24 +247,24 @@ var queueDescription = new QueueDescription(path)
 var queue = namespaceManager.CreateQueue(queueDescription);
 ```
 
-Pour plus d’informations, consultez les rubriques suivantes :
+Pour plus d’informations, consultez les articles suivants :
 * <a href="https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.queuedescription.enablebatchedoperations?view=azure-dotnet" target="_blank">`Microsoft.ServiceBus.Messaging.QueueDescription.EnableBatchedOperations` <span class="docon docon-navigate-external x-hidden-focus"></span></a>.
 * <a href="https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.subscriptiondescription.enablebatchedoperations?view=azure-dotnet" target="_blank">`Microsoft.ServiceBus.Messaging.SubscriptionDescription.EnableBatchedOperations` <span class="docon docon-navigate-external x-hidden-focus"></span></a>.
 * <a href="https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.topicdescription.enablebatchedoperations?view=azure-dotnet" target="_blank">`Microsoft.ServiceBus.Messaging.TopicDescription.EnableBatchedOperations` <span class="docon docon-navigate-external x-hidden-focus"></span></a>.
 
 ---
 
-L’accès au stockage par lot n’affecte pas le nombre d’opérations de messagerie facturables et constitue une propriété de file d’attente, de rubrique ou d’abonnement. Il est indépendant du mode de réception et du protocole utilisé entre un client et le service Service Bus.
+L’accès au magasin par lot n’affecte pas le nombre d’opérations de messagerie facturables. Il s’agit d’une propriété d’une file d’attente, d’une rubrique ou d’un abonnement. Il est indépendant du mode de réception et du protocole utilisé entre un client et le service Service Bus.
 
 ## <a name="prefetching"></a>Lecture anticipée
 
-La [lecture anticipée](service-bus-prefetch.md) permet au client de la file d’attente ou de l’abonnement de charger des messages supplémentaires à partir du service quand il effectue une opération de réception. Le client stocke ces messages en mémoire cache. La taille du cache est déterminée par les propriétés `QueueClient.PrefetchCount` ou `SubscriptionClient.PrefetchCount`. Chaque client qui permet la lecture anticipée gère son propre cache. Un cache n’est pas partagé par plusieurs clients. Si le client initie une opération de réception et que sa mémoire cache est vide, le service transmet un lot de messages. La taille du lot est égale à la taille du cache ou à 256 Ko, la plus faible l’emportant. Si le client initie une opération de réception et que le cache contient un message, ce dernier est extrait de la mémoire cache.
+La [lecture anticipée](service-bus-prefetch.md) permet au client de la file d’attente ou de l’abonnement de charger des messages supplémentaires à partir du service quand il reçoit des messages. Le client stocke ces messages en mémoire cache. La taille du cache est déterminée par les propriétés `QueueClient.PrefetchCount` ou `SubscriptionClient.PrefetchCount`. Chaque client qui permet la lecture anticipée gère son propre cache. Un cache n’est pas partagé par plusieurs clients. Si le client initie une opération de réception et que sa mémoire cache est vide, le service transmet un lot de messages. La taille du lot est égale à la taille du cache ou à 256 Ko, la plus faible l’emportant. Si le client initie une opération de réception et que le cache contient un message, ce dernier est extrait de la mémoire cache.
 
-Lorsqu’un message est lu par anticipation, le service le verrouille. Ainsi, le message lu par anticipation ne peut pas être reçu par un autre destinataire. Si le destinataire ne peut pas terminer le message avant expiration du verrouillage, le message devient disponible pour les autres destinataires. La copie lue par anticipation du message reste dans le cache. Le destinataire qui consomme la copie mise en cache expirée reçoit une exception lorsqu’il essaie de terminer le message. Par défaut, le verrouillage du message expire au bout de 60 secondes. Cette valeur peut être étendue à 5 minutes. Pour empêcher la consommation des messages arrivés à expiration, la taille du cache doit toujours être inférieure au nombre de messages qui peuvent être utilisés par un client au sein de l’intervalle de délai d’expiration de verrouillage.
+Lorsqu’un message est lu par anticipation, le service le verrouille. Ainsi, le message lu par anticipation ne peut pas être reçu par un autre destinataire. Si le destinataire ne peut pas terminer le message avant expiration du verrouillage, le message devient disponible pour les autres destinataires. La copie lue par anticipation du message reste dans le cache. Le destinataire qui consomme la copie mise en cache expirée reçoit une exception lorsqu’il essaie de terminer le message. Par défaut, le verrouillage du message expire au bout de 60 secondes. Cette valeur peut être étendue à 5 minutes. Pour empêcher la consommation des messages arrivés à expiration, définissez la taille du cache pour qu’elle soit inférieure au nombre de messages qu’un client peut utiliser au sein de l’intervalle de délai d’expiration de verrouillage.
 
 Si vous utilisez la durée par défaut d’expiration de verrouillage, qui est de 60 secondes, une bonne valeur pour `PrefetchCount` est 20 fois les vitesses de traitement maximales de l’ensemble des récepteurs de la fabrique. Par exemple, une structure crée 10 destinataires, et chaque destinataire peut traiter jusqu’à 10 messages par seconde. Le nombre de lectures anticipées ne doit pas dépasser 20 X 3 X 10 = 600. Par défaut, `PrefetchCount` est défini sur 0, ce qui signifie qu’aucun message supplémentaire n’est récupéré à partir du service.
 
-La lecture anticipée de messages augmente le débit global d’un abonnement ou une file d’attente, car elle permet de réduire le nombre total d’opérations de messagerie, ou les allers-retours. La lecture anticipée du premier message, cependant, prend plus de temps (en raison de la taille du message accrue). La réception de message avec lecture anticipée sera plus rapide, car ces messages ont déjà été téléchargés par le client.
+La lecture anticipée de messages augmente le débit global d’un abonnement ou une file d’attente, car elle permet de réduire le nombre total d’opérations de messagerie, ou les allers-retours. La lecture anticipée du premier message, cependant, prend plus de temps (en raison de la taille du message accrue). La réception de messages avec lecture anticipée depuis le cache sera plus rapide, car ces messages ont déjà été téléchargés par le client.
 
 La propriété (TTL) de durée de vie d’un message est vérifiée par le serveur au moment où le serveur envoie le message au client. Le client ne vérifie pas la propriété TTL du message à la réception de ce dernier. Toutefois, le message peut être reçu même si la durée de vie du message a été dépassée pendant la mise en cache par le client.
 
@@ -280,15 +274,15 @@ La lecture anticipée n’affecte pas le nombre d’opérations de messagerie fa
 
 Pour plus d’informations, consultez les propriétés `PrefetchCount` suivantes :
 
-* <a href="https://docs.microsoft.com/en-us/dotnet/api/microsoft.azure.servicebus.queueclient.prefetchcount?view=azure-dotnet" target="_blank">`Microsoft.Azure.ServiceBus.QueueClient.PrefetchCount` <span class="docon docon-navigate-external x-hidden-focus"></span></a>.
-* <a href="https://docs.microsoft.com/en-us/dotnet/api/microsoft.azure.servicebus.subscriptionclient.prefetchcount?view=azure-dotnet" target="_blank">`Microsoft.Azure.ServiceBus.SubscriptionClient.PrefetchCount` <span class="docon docon-navigate-external x-hidden-focus"></span></a>.
+* <a href="https://docs.microsoft.com/dotnet/api/microsoft.azure.servicebus.queueclient.prefetchcount?view=azure-dotnet" target="_blank">`Microsoft.Azure.ServiceBus.QueueClient.PrefetchCount` <span class="docon docon-navigate-external x-hidden-focus"></span></a>.
+* <a href="https://docs.microsoft.com/dotnet/api/microsoft.azure.servicebus.subscriptionclient.prefetchcount?view=azure-dotnet" target="_blank">`Microsoft.Azure.ServiceBus.SubscriptionClient.PrefetchCount` <span class="docon docon-navigate-external x-hidden-focus"></span></a>.
 
 # <a name="windowsazureservicebus-sdk"></a>[Kit de développement logiciel (SDK) WindowsAzure.ServiceBus](#tab/net-framework-sdk)
 
 Pour plus d’informations, consultez les propriétés `PrefetchCount` suivantes :
 
-* <a href="https://docs.microsoft.com/en-us/dotnet/api/microsoft.servicebus.messaging.queueclient.prefetchcount?view=azure-dotnet" target="_blank">`Microsoft.ServiceBus.Messaging.QueueClient.PrefetchCount` <span class="docon docon-navigate-external x-hidden-focus"></span></a>.
-* <a href="https://docs.microsoft.com/en-us/dotnet/api/microsoft.servicebus.messaging.subscriptionclient.prefetchcount?view=azure-dotnet" target="_blank">`Microsoft.ServiceBus.Messaging.SubscriptionClient.PrefetchCount` <span class="docon docon-navigate-external x-hidden-focus"></span></a>.
+* <a href="https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.queueclient.prefetchcount?view=azure-dotnet" target="_blank">`Microsoft.ServiceBus.Messaging.QueueClient.PrefetchCount` <span class="docon docon-navigate-external x-hidden-focus"></span></a>.
+* <a href="https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.subscriptionclient.prefetchcount?view=azure-dotnet" target="_blank">`Microsoft.ServiceBus.Messaging.SubscriptionClient.PrefetchCount` <span class="docon docon-navigate-external x-hidden-focus"></span></a>.
 
 ---
 
@@ -297,20 +291,20 @@ Pour plus d’informations, consultez les propriétés `PrefetchCount` suivantes
 > [!NOTE]
 > Cette section s’applique uniquement au Kit de développement logiciel (SDK) WindowsAzure.ServiceBus, car le Kit de développement logiciel (SDK) Microsoft.Azure.ServiceBus n’expose pas les fonctions de traitement par lot.
 
-Même si les concepts liés à la prérécupération de plusieurs messages ensemble présentent une sémantique similaire au traitement des messages dans un lot (`ReceiveBatch`), il existe quelques différences mineures que vous devez garder à l’esprit lorsque vous tirez parti de ces éléments simultanément.
+Même si les concepts liés à la prérécupération de plusieurs messages ensemble présentent une sémantique similaire au traitement des messages dans un lot (`ReceiveBatch`), il existe quelques différences mineures que vous devez garder à l’esprit lorsque vous optez pour ces approches simultanément.
 
 La prérécupération est une configuration (ou un mode) sur le client (`QueueClient`et `SubscriptionClient`) tandis que `ReceiveBatch` est une opération (qui possède une sémantique requête-réponse).
 
-Lors de l’utilisation conjointe de ces éléments, envisagez les cas suivants :
+Lorsque vous optez pour ces approches en même temps, envisagez les cas suivants :
 
 * Le nombre de prérécupérations doit être supérieur ou égal au nombre de messages que vous vous attendez à recevoir de `ReceiveBatch`.
 * Le nombre de prérécupérations peut aller jusqu’à n/3 fois le nombre de messages traités par seconde, sachant que n est la durée de verrouillage par défaut.
 
-Quelques difficultés surviennent lors d’une approche gourmande (par exemple, en conservant le nombre de prérécupérations très élevé), car cela implique le verrouillage du message sur un récepteur particulier. La recommandation à suivre est d’essayer des valeurs de prérécupération entre les seuils mentionnés ci-dessus et d’identifier empiriquement ce qui convient.
+Quelques difficultés surviennent lors d’une approche gourmande (par exemple, en conservant le nombre de prérécupérations élevé), car cela implique le verrouillage du message sur un récepteur particulier. La recommandation à suivre est d’essayer des valeurs de prérécupération entre les seuils mentionnés ci-dessus et d’identifier empiriquement ce qui convient.
 
 ## <a name="multiple-queues"></a>Files d’attente multiples
 
-Si la charge prévue ne peut pas être gérée par une seule file d’attente ou rubrique, vous devez utiliser plusieurs entités de messagerie. Lorsque vous utilisez plusieurs entités, créez un client dédié pour chacune d’elles au lieu d’utiliser le même client pour toutes les entités.
+Si une file d’attente ou une rubrique ne peut pas gérer le volume attendu, utilisez plusieurs entités de messagerie. Lorsque vous utilisez plusieurs entités, créez un client dédié pour chacune d’elles au lieu d’utiliser le même client pour toutes les entités.
 
 ## <a name="development-and-testing-features"></a>Fonctionnalités de développement et de test
 
@@ -344,7 +338,7 @@ Pour obtenir un débit maximal sur plusieurs files d’attente, utiliser les par
 
 ### <a name="low-latency-queue"></a>File d’attente à latence faible
 
-Objectif : Réduire la latence de bout en bout d’une file d’attente ou d’une rubrique. Le nombre d’expéditeurs et de destinataires est faible. Le débit de la file d’attente est faible ou modéré.
+Objectif : Réduisez la latence d’une file d’attente ou d’une rubrique. Le nombre d’expéditeurs et de destinataires est faible. Le débit de la file d’attente est faible ou modéré.
 
 * Désactiver le traitement par lots côté client. Le client envoie immédiatement un message.
 * Désactiver l’accès au magasin par lot. Le service écrit immédiatement le message pour le magasin.
@@ -355,11 +349,11 @@ Objectif : Réduire la latence de bout en bout d’une file d’attente ou d’u
 
 Objectif : Maximiser le débit d’une file d’attente ou d’une rubrique comportant un grand nombre d’expéditeurs. Chaque expéditeur envoie des messages à une vitesse modérée. Le nombre de destinataires est faible.
 
-Service Bus permet jusqu’à 1 000 connexions simultanées vers une entité de messagerie (ou 5 000 avec AMQP). Cette limite s’applique au niveau de l’espace de noms et les rubriques/files d’attente/abonnements sont limités par la limite de connexions simultanées par espace de noms. Pour les files d’attente, ce nombre est partagé entre les expéditeurs et les destinataires. Si les 1 000 connexions sont requises pour les expéditeurs, remplacez la file d’attente par une rubrique et un seul abonnement. Une rubrique accepte jusqu’à 1 000 connexions simultanées provenant d’expéditeurs, alors que l’abonnement accepte un 1 000 connexions simultanées destinataires. Si plus de 1 000 expéditeurs simultanés sont requis, les expéditeurs doivent envoyer leurs messages vers le protocole de Service Bus via HTTP.
+Service Bus permet jusqu’à 1000 connexions simultanées vers une entité de messagerie. Cette limite s’applique au niveau de l’espace de noms et les rubriques, files d’attente ou abonnements sont limités par la limite de connexions simultanées par espace de noms. Pour les files d’attente, ce nombre est partagé entre les expéditeurs et les destinataires. Si les 1 000 connexions sont requises pour les expéditeurs, remplacez la file d’attente par une rubrique et un seul abonnement. Une rubrique accepte jusqu’à 1000 connexions simultanées des expéditeurs. L’abonnement accepte 1000 connexions simultanées supplémentaires de la part des destinataires. Si plus de 1 000 expéditeurs simultanés sont requis, les expéditeurs doivent envoyer leurs messages vers le protocole de Service Bus via HTTP.
 
 Pour maximiser le débit, procédez comme suit :
 
-* Si chaque expéditeur réside dans un processus différent, utilisez uniquement une structure par processus.
+* Si chaque expéditeur se trouve dans un processus différent, utilisez uniquement une structure par processus.
 * Utilisez des opérations asynchrones pour tirer parti du traitement par lot côté client.
 * Utilisez la valeur par défaut de l’intervalle de 20 ms pour réduire le nombre de transmissions de protocole client Service Bus.
 * Désactivez l’accès au magasin par lot. Cet accès augmente la cadence à laquelle les messages peuvent être écrits dans la file d’attente ou la rubrique.
@@ -373,8 +367,8 @@ Service Bus permet jusqu’à 1 000 connexions simultanées vers une entité. 
 
 Pour maximiser le débit, procédez comme suit :
 
-* Si chaque destinataire réside dans un processus différent, utilisez uniquement une structure par processus.
-* Les récepteurs peuvent utiliser des opérations synchronisées ou asynchrones. Étant donné la vitesse de réception modérée d’un destinataire individuel, le traitement côté client de la demande complète n’affecte pas le débit du destinataire.
+* Si chaque destinataire se trouve dans un processus différent, utilisez uniquement une structure par processus.
+* Les récepteurs peuvent utiliser des opérations synchronisées ou asynchrones. Étant donné la vitesse de réception modérée d’un destinataire individuel, le traitement côté client de la requête complète n’affecte pas le débit du destinataire.
 * Désactivez l’accès au magasin par lot. Cet accès réduit la charge globale de l’entité. Cette opération réduit également la cadence générale à laquelle les messages peuvent être écrits dans la file d’attente ou la rubrique.
 * Définir le nombre de lectures anticipées sur une valeur faible (par exemple, PrefetchCount = 10). Cela empêche les destinataires de rester oisifs pendant que d’autres mettent en cache un grand nombre de messages.
 
@@ -395,7 +389,7 @@ Pour maximiser le débit, procédez comme suit :
 
 Objectif : Maximiser le débit d’une rubrique comportant un grand nombre d’abonnements. Un message est reçu par un grand nombre d’abonnements, ce qui signifie que la vitesse de réception associée à l’ensemble des abonnements est supérieure à la vitesse d’envoi. Le nombre d’expéditeurs est faible. Le nombre de récepteurs par abonnement est faible.
 
-Les rubriques comportant un grand nombre d’abonnements affichent généralement un faible débit global si tous les messages sont acheminés vers tous les abonnements. Ce faible débit est dû au fait que chaque message est reçu plusieurs fois, et que tous les messages contenus dans une rubrique et tous les abonnements associés sont stockés dans le même magasin. Il est supposé que le nombre d’expéditeurs et nombre de récepteurs par abonnement est faible. Service Bus prend en charge jusqu’à 2 000 abonnements par rubrique.
+Les rubriques comportant un grand nombre d’abonnements affichent généralement un faible débit global si tous les messages sont acheminés vers tous les abonnements. Cela est dû au fait que chaque message est reçu plusieurs fois et tous les messages d’une rubrique et tous les abonnements associés sont stockés dans le même magasin. Il est supposé ici que le nombre d’expéditeurs et le nombre de récepteurs par abonnement est faible. Service Bus prend en charge jusqu’à 2 000 abonnements par rubrique.
 
 Pour maximiser le débit, procédez comme suit :
 

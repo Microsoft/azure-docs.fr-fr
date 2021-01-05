@@ -2,21 +2,21 @@
 title: Résoudre les alertes du protocole LDAP sécurisé dans Azure Active Directory Domain Services | Microsoft Docs
 description: Découvrez comment détecter et résoudre les alertes courantes du protocole LDAP sécurisé pour Azure Active Directory Domain Services.
 services: active-directory-ds
-author: iainfoulds
+author: justinha
 manager: daveba
 ms.assetid: 81208c0b-8d41-4f65-be15-42119b1b5957
 ms.service: active-directory
 ms.subservice: domain-services
 ms.workload: identity
 ms.topic: troubleshooting
-ms.date: 09/18/2019
-ms.author: iainfou
-ms.openlocfilehash: 06b0fa1979f18981ec5cf78dc9a9dbad8b196394
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 07/09/2020
+ms.author: justinha
+ms.openlocfilehash: 15c1f3a1731edf7b45061646d43688b4aacc6104
+ms.sourcegitcommit: 8192034867ee1fd3925c4a48d890f140ca3918ce
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "71258051"
+ms.lasthandoff: 12/05/2020
+ms.locfileid: "96620305"
 ---
 # <a name="known-issues-secure-ldap-alerts-in-azure-active-directory-domain-services"></a>Problèmes connus : Alertes du protocole LDAP sécurisé dans Azure Active Directory Domain Services
 
@@ -32,18 +32,18 @@ Cet article vous aide à comprendre et à résoudre les alertes courantes avec u
 
 ### <a name="resolution"></a>Résolution
 
-Lorsque vous activez le protocole LDAP sécurisé, il est recommandé de créer des règles supplémentaires qui restreignent l’accès LDAPS entrant à des adresses IP spécifiques. Ces règles protègent le domaine Azure AD DS managé contre les attaques par force brute. Pour mettre à jour le groupe de sécurité réseau afin de restreindre l’accès au port TCP 636 pour le protocole LDAP sécurisé, procédez comme suit :
+Lorsque vous activez le protocole LDAP sécurisé, il est recommandé de créer des règles supplémentaires qui restreignent l’accès LDAPS entrant à des adresses IP spécifiques. Ces règles protègent le domaine managé contre les attaques par force brute. Pour mettre à jour le groupe de sécurité réseau afin de restreindre l’accès au port TCP 636 pour le protocole LDAP sécurisé, procédez comme suit :
 
 1. Dans le Portail Azure, recherchez et sélectionnez **Groupes de sécurité réseau**.
 1. Sélectionnez le groupe de sécurité réseau associé à votre domaine managé, par exemple *AADDS-contoso.com-NSG*, puis sélectionnez **Règles de sécurité de trafic entrant**
-1. **+ Ajouter** une règle applicable au port TCP 636. Si nécessaire, sélectionnez **Avancé** dans la fenêtre pour créer une règle.
+1. Sélectionnez **+ Ajouter** afin de créer une règle pour le port TCP 636. Si nécessaire, sélectionnez **Avancé** dans la fenêtre pour créer une règle.
 1. Pour la **Source**, sélectionnez *Adresses IP* dans le menu déroulant. Entrez les adresses IP sources auxquelles vous souhaitez accorder l’accès pour le trafic LDAP sécurisé.
 1. Choisissez *Toutes* en tant que **Destination**, puis entrez *636* dans **Plages de ports de destination**.
 1. Définissez **Protocole** sur *TCP* et **Action** sur *Autoriser*.
 1. Spécifiez la priorité de la règle, puis saisissez un nom tel que *RestrictLDAPS*.
 1. Lorsque vous êtes prêt, sélectionnez **Ajouter** pour créer la règle.
 
-L’intégrité du domaine managé Azure AD DS se met automatiquement à jour dans les deux heures, et l’alerte est supprimée.
+L’intégrité du domaine managé se met automatiquement à jour dans les deux heures, et l’alerte est supprimée.
 
 > [!TIP]
 > Le port TCP 636 n’est pas la seule règle nécessaire au bon fonctionnement d’Azure AD DS. Pour en savoir plus, consultez [Groupes de sécurité réseau et ports Azure AD DS requis](network-considerations.md#network-security-groups-and-required-ports).

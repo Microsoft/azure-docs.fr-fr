@@ -1,18 +1,18 @@
 ---
 title: Limites - Azure Database pour PostgreSQL - Serveur unique
 description: Cet article décrit les limites dans Azure Database pour PostgreSQL - Serveur unique, telles que le nombre de connexions et les options du moteur de stockage.
-author: rachel-msft
-ms.author: raagyema
+author: lfittl-msft
+ms.author: lufittl
 ms.service: postgresql
 ms.topic: conceptual
 ms.date: 01/28/2020
 ms.custom: fasttrack-edit
-ms.openlocfilehash: 047e722a0e0ade60d1eb93a48e37333fffafd674
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 6f48245983898c542197deb7e0b3cd53bd39be33
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "76836454"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91707521"
 ---
 # <a name="limits-in-azure-database-for-postgresql---single-server"></a>Limites dans Azure Database pour PostgreSQL - Serveur unique
 Les sections suivantes décrivent les limites fonctionnelles et les limites de capacités du service de base de données. Si vous souhaitez en savoir plus sur les niveaux de ressources (calcul, mémoire, stockage), consultez l'article [Niveaux de tarification](concepts-pricing-tiers.md).
@@ -66,6 +66,11 @@ Une connexion PostgreSQL, même inactive, peut utiliser environ 10 Mo de mémoi
 
 ### <a name="utf-8-characters-on-windows"></a>Caractères UTF-8 sur Windows
 - Dans certains scénarios, les caractères UTF-8 ne sont pas entièrement pris en charge dans PostgreSQL open source sur Windows, ce qui affecte la base de données Azure pour PostgreSQL. Veuillez consulter la conversation sur [le bogue 15476 # dans l’archive postgresql](https://www.postgresql-archive.org/BUG-15476-Problem-on-show-trgm-with-4-byte-UTF-8-characters-td6056677.html) pour plus d’informations.
+
+### <a name="gss-error"></a>Erreur GSS
+Si vous voyez une erreur relative à **GSS**, vous utilisez probablement une version plus récente du client/pilote qui n’est pas encore entièrement prise en charge par Azure Postgres Single Server. Cette erreur est connue pour affecter les [versions 42.2.15 et 42.2.16 du pilote JDBC](https://github.com/pgjdbc/pgjdbc/issues/1868).
+   - Nous prévoyons de déployer la mise à jour d’ici la fin novembre. En attendant, utilisez une version de pilote opérationnelle.
+   - Ou désactivez la demande de GSS.  Utilisez un paramètre de connexion comme `gssEncMode=disable`.
 
 ## <a name="next-steps"></a>Étapes suivantes
 - Comprendre [les éléments disponibles dans chaque niveau tarifaire](concepts-pricing-tiers.md)

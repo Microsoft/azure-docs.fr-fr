@@ -2,16 +2,15 @@
 title: Meilleures pratiques du développeur - Sécurité des pods dans Azure Kubernetes Service (AKS)
 description: Découvrez les meilleures pratiques du développeur pour apprendre à sécuriser des pods dans Azure Kubernetes Service (AKS)
 services: container-service
-author: zr-msft
 ms.topic: conceptual
-ms.date: 12/06/2018
+ms.date: 07/28/2020
 ms.author: zarhoads
-ms.openlocfilehash: 1d97ae5692a4cdc328833ce4c01a8114506a960a
-ms.sourcegitcommit: 31236e3de7f1933be246d1bfeb9a517644eacd61
+ms.openlocfilehash: 1c7143b6d3479cf3083cfc730301c68dcf4eb705
+ms.sourcegitcommit: 693df7d78dfd5393a28bf1508e3e7487e2132293
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82779063"
+ms.lasthandoff: 10/28/2020
+ms.locfileid: "92900822"
 ---
 # <a name="best-practices-for-pod-security-in-azure-kubernetes-service-aks"></a>Meilleures pratiques pour la sécurité des pods dans Azure Kubernetes Service (AKS)
 
@@ -30,13 +29,13 @@ Vous pouvez également consulter les bonnes pratiques pour la [sécurité des cl
 
 **Meilleures pratiques** : pour changer d’utilisateur ou de groupe et limiter l’accès aux services et processus de nœud sous-jacents, définissez les paramètres du contexte de sécurité des pods. Affectez le nombre minimal de privilèges requis.
 
-Pour que vos applications s’exécutent correctement, les pods doivent s’exécuter en tant qu’utilisateur ou groupe défini, et non en tant que *racine*. Le `securityContext` pour un pod ou un conteneur vous permet de définir des paramètres tels que *runAsUser* ou *fsGroup* pour assumer les autorisations appropriées. Affectez uniquement les autorisations requises pour l’utilisateur ou le groupe et n’utilisez pas le contexte de sécurité pour assumer des autorisations supplémentaires. Le *runAsUser*, élévation des privilèges, et d’autres paramètres de fonctionnalités Linux sont uniquement disponibles sur les pods et nœuds Linux.
+Pour que vos applications s’exécutent correctement, les pods doivent s’exécuter en tant qu’utilisateur ou groupe défini, et non en tant que *racine* . Le `securityContext` pour un pod ou un conteneur vous permet de définir des paramètres tels que *runAsUser* ou *fsGroup* pour assumer les autorisations appropriées. Affectez uniquement les autorisations requises pour l’utilisateur ou le groupe et n’utilisez pas le contexte de sécurité pour assumer des autorisations supplémentaires. Le *runAsUser* , élévation des privilèges, et d’autres paramètres de fonctionnalités Linux sont uniquement disponibles sur les pods et nœuds Linux.
 
 Lorsque vous vous connectez en tant qu’utilisateur non root, les conteneurs ne peuvent pas établir de liaison avec les ports privilégiés inférieurs à 1024. Dans ce scénario, Kubernetes Services peut être utilisé pour masquer le fait qu’une application s’exécute sur un port particulier.
 
 Un contexte de sécurité de pod peut également permettre de définir des fonctionnalités ou autorisations supplémentaires pour accéder à des processus et services. Vous pouvez utiliser les définitions de contexte de sécurité courantes ci-dessous :
 
-* **allowPrivilegeEscalation** définit si le pod peut assumer les privilèges *racine*. Concevez vos applications afin que ce paramètre soit toujours défini sur *false*.
+* **allowPrivilegeEscalation** définit si le pod peut assumer les privilèges *racine* . Concevez vos applications afin que ce paramètre soit toujours défini sur *false* .
 * **Les fonctionnalités Linux** permettent au pod d’accéder aux processus de nœud sous-jacents. Soyez vigilant lorsque vous affectez ces fonctionnalités. Affectez le nombre minimal de privilèges nécessaire. Pour plus d’informations, consultez [Fonctionnalités de Linux][linux-capabilities].
 * **SELinux Labels** est un module de sécurité du noyau Linux qui vous permet de définir des stratégies d’accès pour l’accès aux services, aux processus et au système de fichiers. Là encore, affectez le nombre minimal de privilèges nécessaire. Pour plus d’informations, consultez [Options de SELinux dans Kubernetes][selinux-labels]
 
@@ -52,15 +51,16 @@ kind: Pod
 metadata:
   name: security-context-demo
 spec:
+  securityContext:
+    fsGroup: 2000
   containers:
     - name: security-context-demo
-      image: nginx:1.15.5
-    securityContext:
-      runAsUser: 1000
-      fsGroup: 2000
-      allowPrivilegeEscalation: false
-      capabilities:
-        add: ["NET_ADMIN", "SYS_TIME"]
+      image: mcr.microsoft.com/oss/nginx/nginx:1.15.5-alpine
+      securityContext:
+        runAsUser: 1000
+        allowPrivilegeEscalation: false
+        capabilities:
+          add: ["NET_ADMIN", "SYS_TIME"]
 ```
 
 Consultez votre opérateur de cluster pour déterminer les paramètres de contexte de sécurité dont vous avez besoin. Essayez de concevoir vos applications de manière à réduire les autorisations et accès supplémentaires dont le pod a besoin. Il existe d’autres fonctionnalités de sécurité qui permettent de limiter l’accès en utilisant les paramètres AppArmor et seccomp (environnement informatique sécurisé) qui peuvent être implémentés par les opérateurs du cluster. Pour plus d’informations, consultez [Sécuriser l’accès du conteneur aux ressources][apparmor-seccomp].
@@ -71,30 +71,33 @@ Consultez votre opérateur de cluster pour déterminer les paramètres de contex
 
 Pour limiter le risque d’exposition d’informations d’identification dans le code de votre application, évitez d’utiliser des informations d’identification fixes ou partagées. Vous ne devez inclure aucune information d’identification ou clé directement dans votre code. Si ces informations d’identification sont exposées, l’application doit être mise à jour et redéployée. Une meilleure approche consiste à attribuer aux pods leur propre identité ainsi qu’un moyen de s’authentifier d’eux-mêmes, ou de récupérer automatiquement les informations d’identification à partir d’un coffre numérique.
 
-Les [projets open source AKS associés][aks-associated-projects] suivants vous permettent d’authentifier automatiquement les pods, ou de demander des informations d’identification et des clés auprès d’un coffre numérique :
+### <a name="use-azure-container-compute-upstream-projects"></a>Utiliser des projets Azure Container Compute Upstream
 
-* Identités managées pour les ressources Azure
-* [Fournisseur Azure Key Vault pour le pilote Secrets Store CSI](https://github.com/Azure/secrets-store-csi-driver-provider-azure#usage)
+> [!IMPORTANT]
+> Les projets open source AKS associés ne sont pas pris en charge par le support technique Azure. Ils sont fournis pour permettre aux utilisateurs une installation automatique dans les clusters, et une collecte de commentaires à partir de notre communauté.
 
-Les projets open source AKS associés ne sont pas pris en charge par le support technique Azure. Ils sont fournis pour que notre communauté puisse faire part de ses commentaires et des bogues éventuels. Ces projets ne sont pas recommandés pour une utilisation en production.
+Les [projets open source AKS associés][aks-associated-projects] suivants vous permettent d’authentifier automatiquement les pods, ou de demander des informations d’identification et des clés auprès d’un coffre numérique. Ces projets sont gérés par l’équipe Azure Container Compute Upstream et font partie d’une [plus large liste de projets disponibles](https://github.com/Azure/container-compute-upstream/blob/master/README.md#support).
 
-### <a name="use-pod-managed-identities"></a>Utiliser des identités de pod managées
+ * [Identité de pod Azure Active Directory][aad-pod-identity]
+ * [Fournisseur Azure Key Vault pour le pilote Secrets Store CSI](https://github.com/Azure/secrets-store-csi-driver-provider-azure#usage)
+
+#### <a name="use-pod-managed-identities"></a>Utiliser des identités de pod managées
 
 Une identité managée pour les ressources Azure permet à un pod de s’authentifier lui-même auprès de services Azure qui le prennent en charge, comme le service Stockage ou SQL. Le pod se voit attribuer une identité Azure qui lui permet de s’authentifier auprès d’Azure Active Directory et de recevoir un jeton numérique. Ce jeton numérique peut être présenté à d’autres services Azure qui vérifient si le pod est autorisé à accéder au service et à effectuer les actions requises. Cette approche signifie par exemple qu’aucun secret n’est nécessaire pour les chaînes de connexion à la base de données. Le worflow simplifié du système d’identités de pod managées est représenté dans le schéma suivant :
 
-![Workflow simplifié du système d’identités de pod managées dans Azure](media/developer-best-practices-pod-security/basic-pod-identity.png)
+:::image type="content" source="media/developer-best-practices-pod-security/basic-pod-identity.svg" alt-text="Workflow simplifié du système d’identités de pod managées dans Azure":::
 
 Avec une identité managée, il n’est pas nécessaire d’inclure des informations d’identification dans le code de votre application pour accéder à un service, tel que Stockage Azure. Puisque chaque pod s’authentifie avec sa propre identité, vous pouvez contrôler et réviser les accès. Si votre application se connecte auprès d’autres services Azure, utilisez des identités managées pour limiter la réutilisation d’informations d’identification et le risque d’exposition.
 
 Pour plus d’informations sur les identités de pod, consultez [Configurer un cluster AKS pour utiliser des identités de pod managées et avec vos applications][aad-pod-identity]
 
-### <a name="use-azure-key-vault-with-secrets-store-csi-driver"></a>Utiliser Azure Key Vault avec le pilote Secrets Store CSI
+#### <a name="use-azure-key-vault-with-secrets-store-csi-driver"></a>Utiliser Azure Key Vault avec le pilote Secrets Store CSI
 
 L’utilisation du projet d’identités de pod vous permet de vous authentifier auprès des services Azure qui le prennent en charge. Si vos propres services ou applications n’ont pas d’identités managées pour les ressources Azure, vous pouvez toujours utiliser des informations d’identification ou des clés pour vous authentifier. Vous pouvez utiliser un coffre numérique pour stocker le contenu de ces secrets.
 
 Lorsque les applications ont besoin d’informations d’identification, elles communiquent avec le coffre numérique, récupèrent le dernier contenu des secrets, puis se connectent au service nécessaire. Azure Key Vault peut être utilisé comme coffre numérique. Le schéma suivant illustre de façon simplifiée le workflow utilisé pour récupérer des informations d’identification à partir d’Azure Key Vault à l’aide d’identités de pod managées :
 
-![Workflow simplifié pour récupérer des informations d’identification dans Key Vault à l’aide d’une identité de pod managée](media/developer-best-practices-pod-security/basic-key-vault.png)
+:::image type="content" source="media/developer-best-practices-pod-security/basic-key-vault.svg" alt-text="Workflow simplifié du système d’identités de pod managées dans Azure":::
 
 Key Vault vous permet de stocker et faire tourner régulièrement les secrets, tels que les informations d’identification, les clés de compte de stockage ou les certificats. Vous pouvez intégrer Azure Key Vault à un cluster AKS à l’aide du [fournisseur Azure Key Vault pour le pilote Secrets Store CSI](https://github.com/Azure/secrets-store-csi-driver-provider-azure#usage). Le pilote Secrets Store CSI permet au cluster AKS de récupérer en mode natif le contenu des secrets à partir de Key Vault, et fournit celui-ci uniquement au pod demandeur. Collaborez avec votre opérateur de cluster pour déployer le pilote Secrets Store CSI sur les nœuds Worker AKS. Vous pouvez utiliser une identité managée par un pod pour demander l’accès à Key Vault et récupérer le contenu des secrets par le biais du pilote Secrets Store CSI.
 
@@ -111,8 +114,8 @@ Cet article était dédié à la sécurisation de vos pods. Pour implémenter qu
 [aad-pod-identity]: https://github.com/Azure/aad-pod-identity#demo
 [aks-keyvault-csi-driver]: https://github.com/Azure/secrets-store-csi-driver-provider-azure#usage
 [linux-capabilities]: http://man7.org/linux/man-pages/man7/capabilities.7.html
-[selinux-labels]: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.12/#selinuxoptions-v1-core
-[aks-associated-projects]: https://github.com/Azure/AKS/blob/master/previews.md#associated-projects
+[selinux-labels]: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#selinuxoptions-v1-core
+[aks-associated-projects]: https://awesomeopensource.com/projects/aks?categoryPage=11
 
 <!-- INTERNAL LINKS -->
 [best-practices-cluster-security]: operator-best-practices-cluster-security.md

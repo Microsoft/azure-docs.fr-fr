@@ -5,11 +5,11 @@ ms.topic: include
 ms.date: 11/09/2018
 ms.author: jingwang
 ms.openlocfilehash: 37917e0ed663675677f1d0452b5796120ca2694e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "75467668"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96001724"
 ---
 ### <a name="azure-storage-linked-service"></a>Service lié Stockage Azure
 Le **service lié Stockage Azure** vous permet de lier un compte de stockage Azure à une fabrique de données Azure à l’aide de la **clé de compte**, qui permet à la fabrique de données d’avoir un accès global au Stockage Azure. Le tableau suivant fournit la description des éléments JSON spécifiques au service lié Azure Storage.

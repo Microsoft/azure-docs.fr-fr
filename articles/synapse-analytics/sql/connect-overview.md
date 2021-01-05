@@ -7,34 +7,38 @@ ms.service: synapse-analytics
 ms.topic: overview
 ms.subservice: ''
 ms.date: 04/15/2020
-ms.author: v-stazar
+ms.author: stefanazaric
 ms.reviewer: jrasnick
-ms.openlocfilehash: 9748b0354ce09752296fb7d736e09af716f19351
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 2ff2d9708642c347a829de290d45849d8629807f
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81420873"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96462353"
 ---
 # <a name="connect-to-synapse-sql"></a>Se connecter à Synapse SQL
 Connectez-vous à la capacité Synapse SQL dans Azure Synapse Analytics.
 
-## <a name="supported-tools-for-sql-on-demand-preview"></a>Outils pris en charge pour SQL à la demande (préversion)
+## <a name="supported-tools-for-serverless-sql-pool"></a>Outils pris en charge pour le pool SQL serverless
 
-L’outil entièrement pris en charge est Azure Data Studio (préversion).
+[Azure Data Studio](/sql/azure-data-studio/download-azure-data-studio) est entièrement pris en charge à compter de la version 1.18.0. SSMS est partiellement pris en charge à partir de la version 18.5 ; vous pouvez l’utiliser pour vous connecter et interroger uniquement.
 
-SQL Server Management Studio est pris en charge partiellement à partir de la version 18.4. Il y a des fonctionnalités limitées, telles que la connexion et l’interrogation.
+> [!NOTE]
+> Si une connexion AAD a une connexion ouverte pendant plus d’une heure au moment de l’exécution de la requête, toute requête qui s’appuie sur AAD échoue. Cela comprend l’interrogation du stockage à l’aide du transfert AAD et d’instructions qui interagissent avec AAD (par exemple, CREATE EXTERNAL PROVIDER). Cela affecte tous les outils qui maintiennent les connexions ouvertes, comme dans l’éditeur de requête de SSMS et ADS. Les outils qui ouvrent de nouvelles connexions pour exécuter une requête, comme Synapse Studio, ne sont pas affectés.
+
+> Vous pouvez redémarrer SSMS ou vous connecter et vous déconnecter dans ADS pour atténuer ce problème. 
 
 ## <a name="find-your-server-name"></a>Recherche du nom de serveur
 
-Dans l’exemple suivant, le nom du serveur pour le pool SQL est : showdemoweu.sql.azuresynapse.net.
-Dans l’exemple suivant, le nom du serveur pour SQL à la demande est : showdemoweu-ondemand.sql.azuresynapse.net.
+Dans l’exemple suivant, le nom du serveur pour le pool SQL dédié est : showdemoweu.sql.azuresynapse.net.
+Dans l’exemple suivant, le nom du serveur pour le pool SQL serverless est : showdemoweu-ondemand.sql.azuresynapse.net.
 
 Pour rechercher le nom complet du serveur :
 
 1. Accédez au [portail Azure](https://portal.azure.com).
-2. Cliquez sur **Espaces de travail Azure Synapse**.
-3. Cliquez sur l’espace de travail auquel vous souhaitez vous connecter.
+2. Sélectionnez **Espaces de travail Synapse**.
+3. Sélectionnez l’espace de travail auquel vous souhaitez vous connecter.
 4. Accédez à la vue d’ensemble.
 5. Recherchez le nom complet du serveur.
 
@@ -42,12 +46,12 @@ Pour rechercher le nom complet du serveur :
 
 ![Nom complet du serveur](./media/connect-overview/server-connect-example.png)
 
-## <a name="sql-on-demand"></a>**SQL à la demande**
+## <a name="serverless-sql-pool"></a>**Pool SQL serverless**
 
-![Nom complet du serveur SQL à la demande](./media/connect-overview/server-connect-example-sqlod.png)
+![Nom du serveur complet - pool SQL serverless](./media/connect-overview/server-connect-example-sqlod.png)
 
 ## <a name="supported-drivers-and-connection-strings"></a>Chaînes de connexion et pilotes pris en charge
-Synapse SQL prend en charge [ADO.NET](https://msdn.microsoft.com/library/e80y5yhx(v=vs.110).aspx), [ODBC](https://msdn.microsoft.com/library/jj730314.aspx), [PHP](https://msdn.microsoft.com/library/cc296172.aspx?f=255&MSPPError=-2147217396) et [JDBC](https://msdn.microsoft.com/library/mt484311(v=sql.110).aspx). Pour rechercher la dernière version et accéder à la documentation connexe, cliquez sur l’un des pilotes ci-dessus. Pour générer automatiquement la chaîne de connexion pour le pilote que vous utilisez à partir du portail Azure, cliquez sur l’option **Afficher les chaînes de connexion de la base de données** dans l’exemple précédent. Voici également quelques exemples montrant à quoi ressemble une chaîne de connexion pour chaque pilote.
+Synapse SQL prend en charge [ADO.NET](https://msdn.microsoft.com/library/e80y5yhx(v=vs.110).aspx), [ODBC](https://msdn.microsoft.com/library/jj730314.aspx), [PHP](https://msdn.microsoft.com/library/cc296172.aspx?f=255&MSPPError=-2147217396) et [JDBC](https://msdn.microsoft.com/library/mt484311(v=sql.110).aspx). Pour rechercher la dernière version et accéder à la documentation connexe, sélectionnez l’un des pilotes ci-dessus. Pour générer automatiquement la chaîne de connexion pour le pilote que vous utilisez à partir du portail Azure,sélectionnez l’option **Afficher les chaînes de connexion de la base de données** dans l’exemple précédent. Voici également quelques exemples montrant à quoi ressemble une chaîne de connexion pour chaque pilote.
 
 > [!NOTE]
 > Vous pouvez définir le délai de connexion à 300 secondes pour permettre à votre connexion de résister à des courtes périodes d’indisponibilité.
@@ -81,14 +85,14 @@ Synapse SQL standardise certains paramètres pendant la connexion et la créatio
 
 | Paramètre de base de données | Valeur |
 |:--- |:--- |
-| [ANSI_NULLS](/sql/t-sql/statements/set-ansi-nulls-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest) |ACTIVÉ |
-| [QUOTED_IDENTIFIERS](/sql/t-sql/statements/set-quoted-identifier-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest) |ACTIVÉ |
-| [DATEFORMAT](/sql/t-sql/statements/set-dateformat-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest) |mja |
-| [DATEFIRST](/sql/t-sql/statements/set-datefirst-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest) |7 |
+| [ANSI_NULLS](/sql/t-sql/statements/set-ansi-nulls-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest&preserve-view=true) |ACTIVÉ |
+| [QUOTED_IDENTIFIERS](/sql/t-sql/statements/set-quoted-identifier-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest&preserve-view=true) |ACTIVÉ |
+| [DATEFORMAT](/sql/t-sql/statements/set-dateformat-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest&preserve-view=true) |mja |
+| [DATEFIRST](/sql/t-sql/statements/set-datefirst-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest&preserve-view=true) |7 |
 
 ## <a name="recommendations"></a>Recommandations
 
-Pour exécuter des requêtes **SQL à la demande**, les outils recommandés sont [Azure Data Studio](get-started-azure-data-studio.md) et Azure Synapse Studio.
+Pour exécuter des requêtes de **pool SQL serverless**, les outils recommandés sont [Azure Data Studio](get-started-azure-data-studio.md) et Azure Synapse Studio.
 
 ## <a name="next-steps"></a>Étapes suivantes
 Pour vous connecter et interroger avec Visual Studio, consultez la page [Interroger Azure SQL Data Warehouse (sqlcmd) (Visual Studio)](../sql-data-warehouse/sql-data-warehouse-query-visual-studio.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json). Pour en savoir plus sur les options d’authentification, consultez [Authentification sur Synapse SQL](../sql-data-warehouse/sql-data-warehouse-authentication.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json).

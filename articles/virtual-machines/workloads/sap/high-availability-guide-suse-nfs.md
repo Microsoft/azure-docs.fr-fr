@@ -9,17 +9,18 @@ editor: ''
 tags: azure-resource-manager
 keywords: ''
 ms.service: virtual-machines-windows
+ms.subservice: workloads
 ms.topic: article
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure-services
-ms.date: 03/26/2020
+ms.date: 10/16/2020
 ms.author: radeltch
-ms.openlocfilehash: 4dce0a675f5841591da00a322b72718964d382ac
-ms.sourcegitcommit: 8a9c54c82ab8f922be54fb2fcfd880815f25de77
+ms.openlocfilehash: 6b0504f5e4199ee3cd8e86660b866fddf2568485
+ms.sourcegitcommit: 4c89d9ea4b834d1963c4818a965eaaaa288194eb
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "80348876"
+ms.lasthandoff: 12/04/2020
+ms.locfileid: "96608569"
 ---
 # <a name="high-availability-for-nfs-on-azure-vms-on-suse-linux-enterprise-server"></a>Haute disponibilité pour NFS sur les machines virtuelles Azure sur SUSE Linux Enterprise Server
 
@@ -52,6 +53,10 @@ ms.locfileid: "80348876"
 
 Cet article décrit comment déployer les machines virtuelles, les configurer, installer l’infrastructure du cluster et installer un serveur NFS hautement disponible pouvant être utilisé pour stocker les données partagées d’un système SAP hautement disponible.
 Ce guide décrit comment configurer un serveur NFS à haute disponibilité qui est utilisé par deux systèmes SAP, NW1 et NW2. Les noms des ressources (par exemple les machines virtuelles, les réseaux virtuels) de l’exemple partent du principe que vous avez utilisé le [modèle de serveur de fichiers SAP][template-file-server] avec le préfixe de ressource **prod**.
+
+
+> [!NOTE]
+> Cet article contient des références aux termes *esclave* et *maître*, termes que Microsoft n’utilise plus. Lorsque ces termes seront supprimés du logiciel, nous les supprimerons de cet article.
 
 Commencez par lire les notes et publications SAP suivantes
 
@@ -136,7 +141,7 @@ Vous devez tout d’abord créer les machines virtuelles pour ce cluster NFS. Pa
    SLES For SAP Applications 12 SP3 (BYOS) est utilisé  
    Sélectionner le groupe à haute disponibilité créé précédemment  
 1. Ajouter un disque de données pour chaque système SAP sur les deux machines virtuelles
-1. Créez un équilibreur de charge (interne). Nous vous recommandons [Standard Load Balancer](https://docs.microsoft.com/azure/load-balancer/load-balancer-standard-overview).  
+1. Créez un équilibreur de charge (interne). Nous vous recommandons [Standard Load Balancer](../../../load-balancer/load-balancer-overview.md).  
    1. Suivez ces instructions pour créer un équilibreur Standard Load Balancer :
       1. Créer les adresses IP de serveurs frontaux
          1. Adresse IP 10.0.0.4 pour NW1
@@ -158,7 +163,7 @@ Vous devez tout d’abord créer les machines virtuelles pour ce cluster NFS. Pa
          1. Port 61000 pour NW1
             1. Ouvrir l’équilibrage de charge, sélectionner les sondes d’intégrité et cliquer sur Ajouter
             1. Entrer le nom de la nouvelle sonde d’intégrité (par exemple **nw1-hp**)
-            1. Sélectionner le protocole TCP et le port 610**00**, et conserver un intervalle de 5 et un seuil de défaillance de 2
+            1. Sélectionner le protocole TCP et le port 610 **00**, et conserver un intervalle de 5 et un seuil de défaillance de 2
             1. Cliquez sur OK
          1. Port 61001 pour NW2
             * Répéter les étapes ci-dessus pour créer une sonde d’intégrité pour NW2
@@ -192,7 +197,7 @@ Vous devez tout d’abord créer les machines virtuelles pour ce cluster NFS. Pa
          1. Port 61000 pour NW1
             1. Ouvrir l’équilibrage de charge, sélectionner les sondes d’intégrité et cliquer sur Ajouter
             1. Entrer le nom de la nouvelle sonde d’intégrité (par exemple **nw1-hp**)
-            1. Sélectionner le protocole TCP et le port 610**00**, et conserver un intervalle de 5 et un seuil de défaillance de 2
+            1. Sélectionner le protocole TCP et le port 610 **00**, et conserver un intervalle de 5 et un seuil de défaillance de 2
             1. Cliquez sur OK
          1. Port 61001 pour NW2
             * Répéter les étapes ci-dessus pour créer une sonde d’intégrité pour NW2
@@ -212,11 +217,14 @@ Vous devez tout d’abord créer les machines virtuelles pour ce cluster NFS. Pa
          1. UDP 2049 pour NW2
             * Répéter les étapes ci-dessus pour les ports 2049 et UDP pour NW2
 
+> [!IMPORTANT]
+> Une adresse IP flottante n’est pas prise en charge sur une configuration IP secondaire de carte réseau pour des scénarios d’équilibrage de charge. Pour plus d'informations, consultez [Limitations relatives à Azure Load Balancer](../../../load-balancer/load-balancer-multivip-overview.md#limitations). Si vous avez besoin d’une adresse IP supplémentaire pour la machine virtuelle, déployez une deuxième carte réseau.  
+
 > [!Note]
-> Lorsque des machines virtuelles sans adresse IP publique sont placées dans le pool principal d’Azure Standard Load Balancer interne (aucune adresse IP publique), il n’y a pas de connectivité Internet sortante, sauf si une configuration supplémentaire est effectuée pour autoriser le routage vers des points de terminaison publics. Pour savoir plus en détails comment bénéficier d’une connectivité sortante, voir [Connectivité des points de terminaison publics pour les machines virtuelles avec Azure Standard Load Balancer dans les scénarios de haute disponibilité SAP](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/high-availability-guide-standard-load-balancer-outbound-connections).  
+> Lorsque des machines virtuelles sans adresse IP publique sont placées dans le pool principal d’Azure Standard Load Balancer interne (aucune adresse IP publique), il n’y a pas de connectivité Internet sortante, sauf si une configuration supplémentaire est effectuée pour autoriser le routage vers des points de terminaison publics. Pour savoir plus en détails comment bénéficier d’une connectivité sortante, voir [Connectivité des points de terminaison publics pour les machines virtuelles avec Azure Standard Load Balancer dans les scénarios de haute disponibilité SAP](./high-availability-guide-standard-load-balancer-outbound-connections.md).  
 
 > [!IMPORTANT]
-> N’activez pas les timestamps TCP sur des machines virtuelles Azure placées derrière Azure Load Balancer. L’activation des timestamps TCP entraîne l’échec des sondes d’intégrité. Définissez le paramètre **net.ipv4.tcp_timestamps** sur **0**. Pour plus d’informations, consultez [Load Balancer health probes](https://docs.microsoft.com/azure/load-balancer/load-balancer-custom-probe-overview) (Sondes d’intégrité Load Balancer).
+> N’activez pas les timestamps TCP sur des machines virtuelles Azure placées derrière Azure Load Balancer. L’activation des timestamps TCP entraîne l’échec des sondes d’intégrité. Définissez le paramètre **net.ipv4.tcp_timestamps** sur **0**. Pour plus d’informations, consultez [Load Balancer health probes](../../../load-balancer/load-balancer-custom-probe-overview.md) (Sondes d’intégrité Load Balancer).
 
 ### <a name="create-pacemaker-cluster"></a>Créer le cluster Pacemaker
 

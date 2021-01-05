@@ -1,6 +1,6 @@
 ---
 title: Modèles de conception de table de stockage Azure | Microsoft Docs
-description: Utilisez des modèles pour les solutions de service de Table Azure.
+description: Passez en revue les modèles de conception qui conviennent à une utilisation avec des solutions Stockage Table dans Azure. Traitez des questions et des compromis qui sont abordés dans d’autres articles.
 services: storage
 author: tamram
 ms.service: storage
@@ -8,12 +8,13 @@ ms.topic: article
 ms.date: 04/08/2019
 ms.author: tamram
 ms.subservice: tables
-ms.openlocfilehash: 5478163a6103bcc84b4f3608d7513c6e7cb11c01
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 20e776e649d13e435a7bc9215802fcd89efe0867
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79529337"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96019223"
 ---
 # <a name="table-design-patterns"></a>Modèles de conception de table
 Cet article décrit certains modèles adaptés aux solutions de service de Table. Par ailleurs, il explique comment traiter certains problèmes et compromis abordés dans les autres articles de conception de stockage de table. Le diagramme suivant récapitule les relations entre les différents modèles :  
@@ -21,7 +22,7 @@ Cet article décrit certains modèles adaptés aux solutions de service de Table
 ![Pour rechercher des données connexes](media/storage-table-design-guide/storage-table-design-IMAGE05.png)
 
 
-Le plan des modèles ci-dessus met en évidence les relations entre les modèles (bleus) et les anti-modèles (orange) qui sont décrits dans ce guide. Il existe bien d’autres modèles qui méritent votre attention. Par exemple, l’un des principaux scénarios pour un service de Table consiste à utiliser des [modèles d’affichages matérialisés](https://msdn.microsoft.com/library/azure/dn589782.aspx) à partir du modèle [Répartition de la responsabilité de requête de commande](https://msdn.microsoft.com/library/azure/jj554200.aspx) (CQRS).  
+Le plan des modèles ci-dessus met en évidence les relations entre les modèles (bleus) et les anti-modèles (orange) qui sont décrits dans ce guide. Il existe bien d’autres modèles qui méritent votre attention. Par exemple, l’un des principaux scénarios pour un service de Table consiste à utiliser des [modèles d’affichages matérialisés](/previous-versions/msp-n-p/dn589782(v=pandp.10)) à partir du modèle [Répartition de la responsabilité de requête de commande](/previous-versions/msp-n-p/jj554200(v=pandp.10)) (CQRS).  
 
 ## <a name="intra-partition-secondary-index-pattern"></a>Modèle d’index secondaire intra-partition
 Stockez plusieurs copies de chaque entité en utilisant différentes valeurs de **RowKey** (dans la même partition) pour pouvoir mener des recherches rapides et efficaces et alterner des commandes de tri à l’aide de différentes valeurs de **RowKey**. La cohérence des mises à jour entre les copies peut être assurée à l’aide d’EGT.  
@@ -48,7 +49,7 @@ Si vous interrogez un ensemble d’entités d’employé, vous pouvez spécifier
 * Pour rechercher tous les employés du service des ventes avec un ID d’employé compris entre 000100 et 000199, utilisez : $filter=(PartitionKey eq ’Sales’) and (RowKey ge ’empid_000100’) and (RowKey le ’empid_000199’)  
 * Pour rechercher tous les employés du service des ventes dont l’adresse de messagerie commence par la lettre « a », utilisez : $filter=(PartitionKey eq ’Sales’) and (RowKey ge ’email_a’) and (RowKey lt ’email_b’)  
   
-  La syntaxe de filtre utilisée dans les exemples ci-dessus provient de l’API REST Service de Table. Pour en savoir plus, consultez [Interrogation d’entités](https://msdn.microsoft.com/library/azure/dd179421.aspx).  
+  La syntaxe de filtre utilisée dans les exemples ci-dessus provient de l’API REST Service de Table. Pour en savoir plus, consultez [Interrogation d’entités](/rest/api/storageservices/Query-Entities).  
 
 ### <a name="issues-and-considerations"></a>Problèmes et considérations
 Prenez en compte les points suivants lorsque vous choisissez comment implémenter ce modèle :  
@@ -104,7 +105,7 @@ Si vous interrogez un ensemble d’entités d’employé, vous pouvez spécifier
 * Pour rechercher tous les employés du service des ventes avec un ID d’employé compris entre **000100** et **000199**, utilisez : $filter=(PartitionKey eq ’empid_Sales’) and (RowKey ge ’000100’) and (RowKey le ’000199’)  
 * Pour rechercher tous les employés du service des ventes ayant une adresse de messagerie qui commence par « a » triés dans l’ordre des adresses de messagerie, utilisez : $filter=(PartitionKey eq ’email_Sales’) and (RowKey ge ’a’) and (RowKey lt ’b’)  
 
-La syntaxe de filtre utilisée dans les exemples ci-dessus provient de l’API REST Service de Table. Pour en savoir plus, consultez [Interrogation d’entités](https://msdn.microsoft.com/library/azure/dd179421.aspx).  
+La syntaxe de filtre utilisée dans les exemples ci-dessus provient de l’API REST Service de Table. Pour en savoir plus, consultez [Interrogation d’entités](/rest/api/storageservices/Query-Entities).  
 
 ### <a name="issues-and-considerations"></a>Problèmes et considérations
 Prenez en compte les points suivants lorsque vous choisissez comment implémenter ce modèle :  
@@ -155,7 +156,7 @@ Dans cet exemple, l’étape 4 permet d’insérer l’employé dans la table *
 ### <a name="recovering-from-failures"></a>Récupération après échec
 Il est important que les opérations des étapes **4** et **5** soient *idempotentes* au cas où le rôle de travail nécessite un redémarrage de l’opération d’archivage. Si vous utilisez le service de Table, à l’étape **4**, vous devez utiliser une opération « insérer ou remplacer » (insert or replace) ; à l’étape **5**, vous devez faire appel à une opération « supprimer si existe » (delete if exists) dans la bibliothèque cliente que vous utilisez. Si vous utilisez un autre système de stockage, vous devez utiliser une opération idempotent appropriée.  
 
-Si le rôle de travail ne termine jamais l’étape **6**, après un délai d’attente, le message réapparaît dans la file d’attente, prêt pour le rôle de travail qui tentera de le retraiter. Le rôle de travail peut vérifier le nombre de fois où un message de file d'attente a été lu et, si nécessaire, l'indiquer comme message « incohérent » en vue d'une investigation en l'envoyant vers une file d'attente distincte. Pour plus d’informations sur la lecture des messages de la file d’attente et la vérification du nombre de retraits, consultez [Obtention des messages](https://msdn.microsoft.com/library/azure/dd179474.aspx).  
+Si le rôle de travail ne termine jamais l’étape **6**, après un délai d’attente, le message réapparaît dans la file d’attente, prêt pour le rôle de travail qui tentera de le retraiter. Le rôle de travail peut vérifier le nombre de fois où un message de file d'attente a été lu et, si nécessaire, l'indiquer comme message « incohérent » en vue d'une investigation en l'envoyant vers une file d'attente distincte. Pour plus d’informations sur la lecture des messages de la file d’attente et la vérification du nombre de retraits, consultez [Obtention des messages](/rest/api/storageservices/Get-Messages).  
 
 Certaines erreurs provenant des services de Table et de File d'attente sont des erreurs temporaires et votre application cliente doit inclure une logique de nouvelle tentative appropriée pour les gérer.  
 
@@ -197,11 +198,11 @@ Pour permettre la recherche par nom de famille en utilisant la structure d’ent
 * La création d'entités d'index dans la même partition que les entités des employés.  
 * La création d'entités d'index dans une table ou une partition séparée.  
 
-<u>Méthode nº 1 : stockage d’objets blob</u>  
+<u>Option 1 : Utiliser le Stockage Blob</u>  
 
 Pour la première option, vous créez un objet blob pour chaque nom unique et dans chaque magasin d’objets blob vous stockez une liste des valeurs de **PartitionKey** (service) et **RowKey** (ID d’employé) pour les employés de ce nom. Lorsque vous ajoutez ou supprimez un employé, vous devez vous assurer que le contenu de l’objet blob adéquat est cohérent avec les entités de l’employé.  
 
-<u>Méthode nº 2 :</u> création d’entités d’index dans la même partition  
+<u>Option 2 :</u> Créer des entités d’index dans la même partition  
 
 Pour la seconde méthode, utilisez les entités d'index stockant les données suivantes :  
 
@@ -223,7 +224,7 @@ Les étapes suivantes décrivent le processus à suivre lorsque vous devez reche
 2. Analysez la liste des identificateurs dans le champ EmployeeIDs des employés.  
 3. Si vous avez besoin de plus d’informations sur chacun de ces employés (par exemple leurs adresses de messagerie), récupérez chacune des entités d’employé à l’aide de la valeur de **PartitionKey** « Sales » et des valeurs de **RowKey** de la liste des employés obtenue à l’étape 2.  
 
-<u>Méthode nº 3 :</u> création d’entités d’index dans une table ou une partition séparée  
+<u>Option 3 :</u> Créer des entités d’index dans une table ou une partition séparée  
 
 Pour cette troisième méthode, utilisez les entités d'index qui stockent les données suivantes :  
 
@@ -293,7 +294,7 @@ Dans une base de données relationnelle, il est naturel d’utiliser des jointur
 
 Supposons que vous stockiez des entités relatives aux employés dans le service de Table à l'aide de la structure suivante :  
 
-![Structure des entités d’employé](media/storage-table-design-guide/storage-table-design-IMAGE18.png)
+![Capture d’écran montrant comment vous pouvez stocker des entités d’employés dans le service de Table.](media/storage-table-design-guide/storage-table-design-IMAGE18.png)
 
 Vous devez également stocker les données historiques relatives aux évaluations et aux performances de chaque année durant laquelle l'employé a travaillé pour votre organisation, et vous devez être en mesure d'accéder à ces informations par année. Une option consiste à créer une autre table qui stocke les entités avec la structure suivante :  
 
@@ -310,7 +311,7 @@ Notez que **RowKey** est à présent une clé composée, basée sur l’ID d’e
 
 L'exemple suivant indique comment vous pouvez récupérer toutes les données d'évaluation d'un employé donné (par exemple, l'employé 000123 du service des ventes) :  
 
-$filter=(PartitionKey eq 'Sales') and (RowKey ge 'empid_000123') and (RowKey lt 'empid_000124')&$select=RowKey,Manager Rating,Peer Rating,Comments  
+$filter=(PartitionKey eq 'Sales') and (RowKey ge 'empid_000123') and (RowKey lt '000123_2012')&$select=RowKey,Manager Rating,Peer Rating,Comments  
 
 ### <a name="issues-and-considerations"></a>Problèmes et considérations
 Prenez en compte les points suivants lorsque vous choisissez comment implémenter ce modèle :  
@@ -633,7 +634,7 @@ Une requête optimale renvoie une entité individuelle basée sur une valeur de 
 
 Vous devez toujours tester entièrement les performances de votre application dans de tels scénarios.  
 
-Une requête sur le service de Table peut renvoyer un maximum de 1 000 entités à la fois et peut s'exécuter pendant un maximum de 5 secondes. Si l'ensemble des résultats contient plus de 1 000 entités, si la requête ne s'est pas terminée dans les 5 secondes ou si la requête dépasse la limite de la partition, le service de Table renvoie un jeton de liaison pour permettre à l'application cliente de demander l'ensemble d'entités suivant. Pour plus d’informations sur la façon dont fonctionnent les jetons de continuation, consultez [Délai de requête et pagination](https://msdn.microsoft.com/library/azure/dd135718.aspx).  
+Une requête sur le service de Table peut renvoyer un maximum de 1 000 entités à la fois et peut s'exécuter pendant un maximum de 5 secondes. Si l'ensemble des résultats contient plus de 1 000 entités, si la requête ne s'est pas terminée dans les 5 secondes ou si la requête dépasse la limite de la partition, le service de Table renvoie un jeton de liaison pour permettre à l'application cliente de demander l'ensemble d'entités suivant. Pour plus d’informations sur la façon dont fonctionnent les jetons de continuation, consultez [Délai de requête et pagination](/rest/api/storageservices/Query-Timeout-and-Pagination).  
 
 Si vous utilisez la bibliothèque cliente de stockage, celle-ci peut gérer automatiquement les jetons de continuation pour vous en renvoyant des entités à partir du service de Table. L'exemple de code C# suivant utilise la bibliothèque cliente de stockage pour gérer automatiquement les jetons de continuation si le service de Table les renvoie dans une réponse :  
 
@@ -742,7 +743,7 @@ Le service de Table est un magasin de tables *sans schéma* , ce qui signifie qu
 <th>FirstName</th>
 <th>LastName</th>
 <th>Age</th>
-<th>Email</th>
+<th>E-mail</th>
 </tr>
 <tr>
 <td></td>
@@ -762,7 +763,7 @@ Le service de Table est un magasin de tables *sans schéma* , ce qui signifie qu
 <th>FirstName</th>
 <th>LastName</th>
 <th>Age</th>
-<th>Email</th>
+<th>E-mail</th>
 </tr>
 <tr>
 <td></td>
@@ -799,7 +800,7 @@ Le service de Table est un magasin de tables *sans schéma* , ce qui signifie qu
 <th>FirstName</th>
 <th>LastName</th>
 <th>Age</th>
-<th>Email</th>
+<th>E-mail</th>
 </tr>
 <tr>
 <td></td>
@@ -835,7 +836,7 @@ Chaque entité doit toujours avoir les valeurs **PartitionKey**, **RowKey** et *
 <th>FirstName</th>
 <th>LastName</th>
 <th>Age</th>
-<th>Email</th>
+<th>E-mail</th>
 </tr>
 <tr>
 <td>Employee</td>
@@ -857,7 +858,7 @@ Chaque entité doit toujours avoir les valeurs **PartitionKey**, **RowKey** et *
 <th>FirstName</th>
 <th>LastName</th>
 <th>Age</th>
-<th>Email</th>
+<th>E-mail</th>
 </tr>
 <tr>
 <td>Employee</td>
@@ -898,7 +899,7 @@ Chaque entité doit toujours avoir les valeurs **PartitionKey**, **RowKey** et *
 <th>FirstName</th>
 <th>LastName</th>
 <th>Age</th>
-<th>Email</th>
+<th>E-mail</th>
 </tr>
 <tr>
 <td>Employee</td>
@@ -926,7 +927,7 @@ Le reste de cette section décrit certaines des fonctionnalités de la biblioth�
 ### <a name="retrieving-heterogeneous-entity-types"></a>Récupération de types d'entités hétérogènes
 Si vous utilisez la bibliothèque cliente de stockage, vous avez trois options pour travailler avec plusieurs types d'entité.  
 
-Si vous connaissez le type de l’entité stockée avec des valeurs de **RowKey** et de **PartitionKey** spécifiques, vous pouvez spécifier le type d’entité quand vous récupérez l’entité, comme indiqué dans les deux exemples précédents qui récupèrent des entités de type **EmployeeEntity** : [Exécution d’une requête de pointage à l’aide de la bibliothèque cliente de stockage](#executing-a-point-query-using-the-storage-client-library) et [Récupération de plusieurs entités à l’aide de LINQ](#retrieving-multiple-entities-using-linq).  
+Si vous connaissez le type de l’entité stockée avec des valeurs **RowKey** et **PartitionKey** spécifiques, vous pouvez spécifier le type d’entité quand vous récupérez l’entité, comme le montrent les deux exemples précédents qui récupèrent des entités de type **EmployeeEntity** : [Exécuter une requête de pointage avec la bibliothèque cliente de stockage](#executing-a-point-query-using-the-storage-client-library) et [Récupérer plusieurs entités avec LINQ](#retrieving-multiple-entities-using-linq).  
 
 La deuxième option consiste à utiliser le type **DynamicTableEntity** (un conteneur de propriétés) plutôt qu’un type d’entité POCO concret (cette option peut également améliorer les performances, car il n’est pas nécessaire de sérialiser et désérialiser l’entité en types .NET). Le code C# suivant récupère plusieurs entités de types différents à partir de la table, mais renvoie toutes les entités en tant qu’instances de **DynamicTableEntity** . Il utilise ensuite la propriété **EventType** pour déterminer le type de chaque entité :  
 

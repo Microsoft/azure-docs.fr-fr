@@ -3,12 +3,12 @@ title: Monter le volume gitRepo pour le groupe de conteneurs
 description: Découvrez comment monter un volume GitRepo pour cloner un référentiel Git dans vos instances de conteneurs
 ms.topic: article
 ms.date: 06/15/2018
-ms.openlocfilehash: 405cacd7a1649f95640a8dabf476729e101d03f8
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 5f361b0bbd4a02f754e47c8321a664af05036601
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78252081"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86260716"
 ---
 # <a name="mount-a-gitrepo-volume-in-azure-container-instances"></a>Monter un volume GitRepo dans Azure Container Instances
 
@@ -112,7 +112,7 @@ Découvrez comment monter d’autres types de volumes dans Azure Container Insta
 <!-- LINKS - External -->
 [aci-helloworld]: https://github.com/Azure-Samples/aci-helloworld
 [pat-github]: https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/
-[pat-repos]: https://docs.microsoft.com/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate
+[pat-repos]: /azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate
 
 <!-- LINKS - Internal -->
 [az-container-create]: /cli/azure/container#az-container-create

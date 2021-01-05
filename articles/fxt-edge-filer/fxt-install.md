@@ -6,39 +6,40 @@ ms.author: rohogue
 ms.service: fxt-edge-filer
 ms.topic: tutorial
 ms.date: 07/01/2019
-ms.openlocfilehash: 7c77e25d0dcabc49f2e6672645c6bc41e8662ec8
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 48ee6de28bcd76d4c484b77c981062bad1a3754d
+ms.sourcegitcommit: 8d8deb9a406165de5050522681b782fb2917762d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "75551027"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92219749"
 ---
-# <a name="tutorial-install-azure-fxt-edge-filer"></a>Tutoriel : Installer Azure FXT Edge Filer 
+# <a name="tutorial-install-azure-fxt-edge-filer"></a>Tutoriel : Installer Azure FXT Edge Filer
 
 Ce tutoriel montre comment installer un nœud matériel pour le cache de stockage hybride Azure FXT Edge Filer. Vous devez installer au moins trois nœuds matériels pour créer un cluster Azure FXT Edge Filer.
 
-La procédure d’installation implique le déballage et le montage en rack de l’appareil, ainsi que l’attachement du bras de gestion des câbles (CMA) et du panneau avant. Un autre tutoriel explique comment attacher les câbles réseau et raccorder l’alimentation. 
+La procédure d’installation implique le déballage et le montage en rack de l’appareil, ainsi que l’attachement du bras de gestion des câbles (CMA) et du panneau avant. Un autre tutoriel explique comment attacher les câbles réseau et raccorder l’alimentation.
 
-L’installation d’un nœud Azure FXT Edge Filer prend environ une heure. 
+L’installation d’un nœud Azure FXT Edge Filer prend environ une heure.
 
-Ce tutoriel comprend les étapes d’installation suivantes : 
+Ce tutoriel comprend les étapes d’installation suivantes :
 
 > [!div class="checklist"]
+>
 > * Déballez l’appareil
 > * Monter l’appareil dans un rack
 > * Installer le panneau avant (facultatif)
 
-## <a name="installation-prerequisites"></a>Prérequis pour l’installation 
+## <a name="installation-prerequisites"></a>Prérequis pour l’installation
 
 Avant de commencer, vérifiez que le centre de données et le rack que vous utiliserez disposent des éléments suivants :
 
 * Un emplacement 1U disponible sur le rack où vous avez l’intention de monter l’appareil
 * Bloc d’alimentation AC et systèmes de refroidissement qui répondent aux besoins de l’Azure FXT Edge Filer. (Pour obtenir de l’aide lors de la planification et du dimensionnement de l’installation, consultez [Caractéristiques du module d’alimentation et thermiques](fxt-specs.md#power-and-thermal-specifications).)  
 
-  > [!NOTE] 
+  > [!NOTE]
   > Pour tirer pleinement parti des deux unités alimentation redondantes, utilisez des unités de distribution d’alimentation sur deux circuits différents lors de l’attachement de l’alimentation secteur. Pour plus d’informations, consultez [Raccorder les câbles d’alimentation](fxt-network-power.md#connect-power-cables).  
 
-## <a name="unpack-the-hardware-node"></a>Déballer le nœud matériel 
+## <a name="unpack-the-hardware-node"></a>Déballer le nœud matériel
 
 Chaque nœud Azure FXT Edge Filer est livré dans une seule boîte. Effectuez ces étapes pour déballer un appareil.
 
@@ -56,7 +57,7 @@ Chaque nœud Azure FXT Edge Filer est livré dans une seule boîte. Effectuez ce
    * Livret d’instructions d’installation en rack
    * Livret relatif à la sécurité, à l’environnement et aux réglementations
 
-Si vous n’avez pas reçu tous les éléments énumérés ici, contactez le revendeur de l’appareil afin d’obtenir une assistance technique. 
+Si vous n’avez pas reçu tous les éléments énumérés ici, contactez le revendeur de l’appareil afin d’obtenir une assistance technique.
 
 Assurez-vous que l’appareil a eu suffisamment de temps pour atteindre la température ambiante avant de l’installer ou de le mettre sous tension. Si vous remarquez de la condensation sur une partie quelconque de l’appareil, attendez au moins 24 heures avant de l’installer.
 
@@ -64,20 +65,20 @@ L’étape suivante consiste à monter votre appareil en rack.
 
 ## <a name="rack-the-device"></a>Montage de l’appareil en rack
 
-L’appareil Azure FXT Edge Filer doit être installé dans un rack standard de 19 pouces. 
+L’appareil Azure FXT Edge Filer doit être installé dans un rack standard de 19 pouces.
 
-Le cache de stockage hybride Azure FXT Edge Filer est constitué d’au moins trois appareils Azure FXT Edge Filer. Répétez les étapes d’installation en rack pour chaque appareil qui fait partie de votre système. 
+Le cache de stockage hybride Azure FXT Edge Filer est constitué d’au moins trois appareils Azure FXT Edge Filer. Répétez les étapes d’installation en rack pour chaque appareil qui fait partie de votre système.
 
 ### <a name="rack-install-prerequisites"></a>Prérequis pour l’installation en rack
 
 * Avant de commencer, lisez les instructions du livret relatif à la sécurité, à l’environnement et aux réglementations fourni avec votre appareil.
 
   > [!NOTE]
-  > Veillez à toujours être deux pour soulever le nœud, y compris quand vous l’installez en rack ou quand vous le retirez du rack. 
+  > Veillez à toujours être deux pour soulever le nœud, y compris quand vous l’installez en rack ou quand vous le retirez du rack.
 
-* Identifiez le type d’installation sur rail utilisé avec le rack. 
+* Identifiez le type d’installation sur rail utilisé avec le rack.
   * Pour les racks enfichables à trous carrés ou ronds, suivez les instructions relatives aux rails sans outil.
-  * Pour les racks à trous filetés, suivez les instructions relatives aux rails avec outils. 
+  * Pour les racks à trous filetés, suivez les instructions relatives aux rails avec outils.
   
     Pour l’installation avec outils, vous devez fournir huit vis : type 10-32, 12-24, M5 ou M6. Le diamètre des têtes de vis doit être inférieur à 10 mm (0,4 po).
 
@@ -92,7 +93,7 @@ Identifiez les éléments d’installation de l’assemblage du kit de rails :
 
 ### <a name="rail-assembly---tool-less-rails-square-hole-or-round-hole-racks"></a>Assemblages de rails : rails sans outil (racks à trous ronds ou carrés)
 
-Pour les racks avec trous ronds ou carrés enfichables, appliquez cette procédure pour assembler et installer les rails. 
+Pour les racks avec trous ronds ou carrés enfichables, appliquez cette procédure pour assembler et installer les rails.
 
 1. Positionnez les extrémités des rails gauche et droit étiquetés **FRONT** face à l’intérieur. Positionnez chaque extrémité afin qu’elle siège dans les trous sur la face avant des brides verticales. (1)
 
@@ -121,7 +122,7 @@ Pour les racks avec trous filetés, appliquez cette procédure pour assembler et
 Suivez ces étapes pour monter l’appareil Azure FXT Edge Filer dans le rack.
 
 1. Dégagez les rails coulissants internes en les faisant glisser jusqu’à ce qu’ils s’enclenchent. (1)
-1. Repérez les picots du rail arrière de chaque côté de l’appareil et abaissez-les pour les emboîter dans les fentes en J des rails coulissants. (2) 
+1. Repérez les picots du rail arrière de chaque côté de l’appareil et abaissez-les pour les emboîter dans les fentes en J des rails coulissants. (2)
 1. Faites pivoter l’appareil vers le bas jusqu’à ce que tous les picots du rail se trouvent dans les fentes en J. (3)
 1. Repoussez l’appareil vers l’intérieur jusqu’à ce que les leviers de verrouillage s’enclenchent.
 1. Appuyez sur les deux boutons de dégagement des deux rails (4) et poussez l’appareil dans le rack.
@@ -130,7 +131,7 @@ Suivez ces étapes pour monter l’appareil Azure FXT Edge Filer dans le rack.
 
 ### <a name="remove-the-system-from-the-rack"></a>Retirer le système installé dans le rack
 
-Pour retirer l’appareil du rack, appliquez la procédure suivante. 
+Pour retirer l’appareil du rack, appliquez la procédure suivante.
 
 1. Localisez les leviers de verrouillage situés sur les côtés des rails internes (1).
 2. Déverrouillez chaque levier en le faisant pivoter jusqu’à ce qu’il soit en position de dégagement (2).
@@ -141,7 +142,7 @@ Pour retirer l’appareil du rack, appliquez la procédure suivante.
 ### <a name="engage-the-slam-latch"></a>Engager le rabat
 
 1. À partir de l’avant, identifiez le rabat de chaque côté du système (1).
-2. Les rabats s’enclenchent automatiquement quand vous poussez le système dans le rack. 
+2. Les rabats s’enclenchent automatiquement quand vous poussez le système dans le rack.
 
 Pour libérer les rabats lors de l’enlèvement du système, tirez-les vers le haut (2).
 
@@ -149,50 +150,50 @@ Des vis de montage facultatives sont fournies pour fixer le système au rack lor
 
 ![Illustration avec numéros de l’engagement et de la libération du rabat](media/fxt-install/engaging-releasing-slam-latch-400.png)
 
-### <a name="install-the-cable-management-arm"></a>Installer le bras de gestion des câbles 
+### <a name="install-the-cable-management-arm"></a>Installer le bras de gestion des câbles
 
-Un bras de gestion des câbles (CMA) facultatif est fourni avec le FXT Edge Filer. Vous trouverez des instructions imprimées pour son installation dans l’emballage. 
+Un bras de gestion des câbles (CMA) facultatif est fourni avec le FXT Edge Filer. Vous trouverez des instructions imprimées pour son installation dans l’emballage.
 
 1. Déballez et identifiez les composants du kit de gestion des câbles :
    * Bac de CMA (1)
    * CMA (2)
    * Colliers de serrage de câbles en nylon (3)
    * Crochets d’attachement de CMA (4)
-   * Câble du voyant d’état (5) 
+   * Câble du voyant d’état (5)
 
-   > [!TIP] 
+   > [!TIP]
    > Pour sécuriser le CMA lors de l’expédition dans le rack, enroulez les colliers autour du panier et du bac, et serrez-les fermement. Le fait de fixer le CMA de cette manière aidera également à sécuriser votre système dans les environnements instables.
 
    ![Illustration des composants du CMA](media/fxt-install/cma-kit-400.png)
 
 2. Installez le bac du CMA.
 
-   Le bac du CMA offre un support et agit comme un dispositif de retenue pour le CMA. 
+   Le bac du CMA offre un support et agit comme un dispositif de retenue pour le CMA.
 
-   1. Alignez et engagez chaque côté du bac avec les crochets sur les bords intérieurs des rails. 
+   1. Alignez et engagez chaque côté du bac avec les crochets sur les bords intérieurs des rails.
    1. Poussez le bac vers l’avant jusqu’à ce qu’il s’enclenche. (1)
    1. Pour retirer le bac, appuyez sur les boutons de la libération du loquet vers le centre et retirez le bac des crochets (2).
 
    ![Illustration de l’installation du bac de CMA](media/fxt-install/cma-tray-install-400.png)
 
-3. Installez les crochets d’attachement de CMA. 
+3. Installez les crochets d’attachement de CMA.
 
    > [!NOTE]
    >
-   > * Vous pouvez attacher le CMA au rail de montage gauche ou droit, selon la façon dont vous prévoyez de router les câbles à partir du système. 
-   > * Pour plus de commodité, montez le CMA du côté opposé à l’alimentation électrique (côté A). En cas de montage du côté B, le CMA doit être déconnecté afin de pouvoir retirer le bloc d’alimentation externe. 
-   > * Veillez à toujours retirer le bac avant de retirer les blocs d’alimentation. 
+   > * Vous pouvez attacher le CMA au rail de montage gauche ou droit, selon la façon dont vous prévoyez de router les câbles à partir du système.
+   > * Pour plus de commodité, montez le CMA du côté opposé à l’alimentation électrique (côté A). En cas de montage du côté B, le CMA doit être déconnecté afin de pouvoir retirer le bloc d’alimentation externe.
+   > * Veillez à toujours retirer le bac avant de retirer les blocs d’alimentation.
 
    ![Illustration de l’installation des crochets de CMA](media/fxt-install/cma-bracket-l-r-install-400.png)
 
    1. Sélectionnez le crochet d’attachement de CMA correspondant au côté où vous voulez monter le CMA (côté B ou côté A).
    1. Installez le crochet d’attachement de CMA avec le marquage côté A ou côté B correspondant à l’arrière du rail coulissant.
-   1. Alignez les trous sur le crochet avec les broches du rail coulissant. Poussez le crochet jusqu’à ce qu’il se mette en place. 
+   1. Alignez les trous sur le crochet avec les broches du rail coulissant. Poussez le crochet jusqu’à ce qu’il se mette en place.
 
 4. Installez le CMA.
 
-   1. À l’arrière du système, fixez le loquet situé à l’avant du CMA sur le crochet intérieur de l’assemblage coulissant jusqu’à ce que le loquet s’engage (1). 
-   1. Fixez l’autre loquet à l’extrémité du crochet extérieur jusqu’à ce que le loquet s’engage (2). 
+   1. À l’arrière du système, fixez le loquet situé à l’avant du CMA sur le crochet intérieur de l’assemblage coulissant jusqu’à ce que le loquet s’engage (1).
+   1. Fixez l’autre loquet à l’extrémité du crochet extérieur jusqu’à ce que le loquet s’engage (2).
    1. Pour retirer le CMA, désengagez les deux loquets en appuyant sur les boutons de retrait du CMA en haut des logements de loquets interne et externe (3).
 
    ![Illustration de l’installation principale de CMA](media/fxt-install/cma-install-400.png)
@@ -203,20 +204,21 @@ Un bras de gestion des câbles (CMA) facultatif est fourni avec le FXT Edge File
 
 ## <a name="install-the-front-bezel-optional"></a>Installer le panneau avant (facultatif)
 
-Cette section explique comment installer et retirer le panneau avant (façade) pour le matériel Azure FXT Edge Filer. 
+Cette section explique comment installer et retirer le panneau avant (façade) pour le matériel Azure FXT Edge Filer.
 
-Pour installer le panneau avant 
+Pour installer le panneau avant
 
-1. Recherchez et retirez la clé du panneau, qui se trouve dans l’emballage du panneau. 
-1. Alignez le panneau avec l’avant du châssis, et insérez les broches situées du côté droit du panneau dans les trous situés dans la bride de montage du rack de droite du nœud. 
+1. Recherchez et retirez la clé du panneau, qui se trouve dans l’emballage du panneau.
+1. Alignez le panneau avec l’avant du châssis, et insérez les broches situées du côté droit du panneau dans les trous situés dans la bride de montage du rack de droite du nœud.
 1. Fixez l’extrémité gauche du panneau sur le châssis. Appuyez sur le panneau jusqu’à ce que le bouton situé à gauche s’enclenche.
 1. Verrouillez le panneau avec la clé.
 
-Pour retirer le panneau avant 
+Pour retirer le panneau avant
+
 1. Déverrouillez le panneau à l’aide de la clé.
 1. Appuyez sur le bouton de libération du côté gauche et retirez l’extrémité gauche du panneau du châssis.
 1. Dégagez la partie droite et retirez le panneau.
-   
+
    ![Image montrant le bouton de libération à gauche du panneau, et comment l’enlever en tirant vers l’extérieur à partir du côté gauche](media/fxt-install/remove-bezel-edited-600.png)
 
 ## <a name="next-steps"></a>Étapes suivantes

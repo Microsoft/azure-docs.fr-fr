@@ -1,25 +1,18 @@
 ---
 title: Utilisation d’Akka Streams pour Apache Kafka - Azure Event Hubs | Microsoft Docs
 description: Cet article fournit des informations sur la connexion d’Akka Streams à un hub d’événements Azure
-services: event-hubs
-documentationcenter: ''
-author: ShubhaVijayasarathy
-editor: ''
-ms.assetid: ''
-ms.service: event-hubs
-ms.devlang: na
 ms.topic: how-to
-ms.date: 04/02/2020
-ms.author: shvija
-ms.openlocfilehash: 0b96f1448fd223aae2dde77c5c05a8c9bd74ee9b
-ms.sourcegitcommit: d597800237783fc384875123ba47aab5671ceb88
+ms.date: 06/23/2020
+ms.openlocfilehash: 92ab927189329493696c70b61ffc7f11cad22a66
+ms.sourcegitcommit: 28c5fdc3828316f45f7c20fc4de4b2c05a1c5548
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/03/2020
-ms.locfileid: "80632854"
+ms.lasthandoff: 10/22/2020
+ms.locfileid: "92369571"
 ---
 # <a name="using-akka-streams-with-event-hubs-for-apache-kafka"></a>Utilisation d’Akka Streams avec Event Hubs pour Apache Kafka
-Ce tutoriel vous montre comment connecter Akka Streams à un Event Hub sans modifier vos protocoles clients ni exécuter vos propres clusters. Azure Event Hubs pour Kafka prend en charge [Apache Kafka version 1.0.](https://kafka.apache.org/10/documentation.html)
+
+Ce tutoriel vous montre comment connecter Akka Streams grâce à la prise en charge d’Event Hubs pour Apache Kafka sans modifier vos protocoles clients ni exécuter vos propres clusters. 
 
 Dans ce tutoriel, vous allez apprendre à :
 > [!div class="checklist"]
@@ -37,7 +30,7 @@ Pour suivre ce tutoriel, vérifiez que les conditions préalables ci-dessous son
 
 * Lisez l’article [Event Hubs pour Apache Kafka](event-hubs-for-kafka-ecosystem-overview.md). 
 * Un abonnement Azure. Si vous n’en avez pas, créez un [compte gratuit](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio) avant de commencer.
-* [Java Development Kit (JDK) 1.8+](https://aka.ms/azure-jdks)
+* [Java Development Kit (JDK) 1.8+](/azure/developer/java/fundamentals/java-jdk-long-term-support)
     * Sur Ubuntu, exécutez `apt-get install default-jdk` pour installer le JDK.
     * Veillez à définir la variable d’environnement JAVA_HOME pour qu’elle pointe vers le dossier dans lequel le JDK est installé.
 * [Téléchargé](https://maven.apache.org/download.cgi) et [installé](https://maven.apache.org/install.html) une archive binaire Maven.
@@ -84,6 +77,10 @@ akka.kafka.producer {
 }
 ```
 
+> [!IMPORTANT]
+> Remplacez `{YOUR.EVENTHUBS.CONNECTION.STRING}` par la chaîne de connexion de votre espace de noms Event Hubs. Pour savoir comment obtenir la chaîne de connexion, consultez [Obtenir une chaîne de connexion Event Hubs](event-hubs-get-connection-string.md). Voici un exemple de configuration : `sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required username="$ConnectionString" password="Endpoint=sb://mynamespace.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=XXXXXXXXXXXXXXXX";`
+
+
 ### <a name="run-producer-from-the-command-line"></a>Exécuter le producteur depuis la ligne de commande
 
 Pour exécuter le producteur depuis la ligne de commande, générez le fichier JAR, puis exécutez depuis Maven (ou générez le fichier JAR avec Maven, puis exécutez dans Java en ajoutant le ou les fichiers JAR Kafka au paramètre classpath) :
@@ -124,6 +121,10 @@ akka.kafka.consumer {
 }
 ```
 
+> [!IMPORTANT]
+> Remplacez `{YOUR.EVENTHUBS.CONNECTION.STRING}` par la chaîne de connexion de votre espace de noms Event Hubs. Pour savoir comment obtenir la chaîne de connexion, consultez [Obtenir une chaîne de connexion Event Hubs](event-hubs-get-connection-string.md). Voici un exemple de configuration : `sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required username="$ConnectionString" password="Endpoint=sb://mynamespace.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=XXXXXXXXXXXXXXXX";`
+
+
 ### <a name="run-consumer-from-the-command-line"></a>Exécuter le contrôle serveur consommateur depuis la ligne de commande
 
 Pour exécuter le contrôle serveur consommateur depuis la ligne de commande, générez le fichier JAR, puis exécutez depuis Maven (ou générez le fichier JAR avec Maven, puis exécutez dans Java en ajoutant le ou les fichiers JAR Kafka au paramètre classpath) :
@@ -138,11 +139,11 @@ Si l’Event Hub contient des événements (par exemple, si votre producteur est
 Consultez le [Guide Kafka de flux Akka](https://doc.akka.io/docs/akka-stream-kafka/current/home.html) pour plus d’informations sur les flux Akka.
 
 ## <a name="next-steps"></a>Étapes suivantes
-Pour plus d’informations sur Event Hubs pour Kafka, consultez les articles suivants :  
+Pour plus d'informations sur Event Hubs pour Kafka, consultez les articles suivants :  
 
 - [Mettre en miroir un broker Kafka dans un hub d’événements](event-hubs-kafka-mirror-maker-tutorial.md)
 - [Connecter Apache Spark à un hub d’événements](event-hubs-kafka-spark-tutorial.md)
 - [Connecter Apache Flink à un hub d’événements](event-hubs-kafka-flink-tutorial.md)
-- [Integrate Kafka Connect à un Event Hub](event-hubs-kafka-connect-tutorial.md)
+- [Intégrer Kafka Connect à un hub d’événements](event-hubs-kafka-connect-tutorial.md)
 - [Explorer des exemples sur GitHub](https://github.com/Azure/azure-event-hubs-for-kafka)
 - [Guide du développeur Apache Kafka pour Azure Event Hubs](apache-kafka-developer-guide.md)

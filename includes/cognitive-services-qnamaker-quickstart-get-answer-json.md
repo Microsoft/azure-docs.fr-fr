@@ -2,20 +2,20 @@
 title: Fichier Include
 description: Fichier Include
 services: cognitive-services
-author: diberry
-manager: cgronlun
+author: mrbullwinkle
+manager: nitinme
 ms.service: cognitive-services
 ms.subservice: qna-maker
 ms.topic: include
 ms.custom: include file
-ms.date: 11/12/2018
-ms.author: diberry
-ms.openlocfilehash: fd6a4a4e2d779047d252fdc5e3eae8e3fba8b507
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 12/29/2020
+ms.author: mrbullwin
+ms.openlocfilehash: 8269cd3905ec7ea3ad0ff2ab6bfa31cc95da5b4f
+ms.sourcegitcommit: 1140ff2b0424633e6e10797f6654359947038b8d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "67177363"
+ms.lasthandoff: 12/30/2020
+ms.locfileid: "97820771"
 ---
 ## <a name="request-and-response-json"></a>Requêtes et des réponses JSON
 

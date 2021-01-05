@@ -1,5 +1,5 @@
 ---
-title: Utiliser Azure Policy pour restreindre l’installation d’extensions de machines virtuelles
+title: Utiliser Azure Policy pour restreindre l’installation d’extensions de machines virtuelles (Linux)
 description: Découvrez comment utiliser Azure Policy pour restreindre les déploiements d’extensions de machines virtuelles.
 services: virtual-machines-linux
 documentationcenter: ''
@@ -7,18 +7,19 @@ author: axayjo
 manager: gwallace
 editor: ''
 ms.service: virtual-machines-linux
+ms.subservice: extensions
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure-services
 ms.date: 03/23/2018
 ms.author: akjosh
 ms.reviewer: cynthn
-ms.openlocfilehash: 52a08661ffa25bf2105791c1217cfc460034502a
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 26874c33c496b57bf6317a7b837b3afddc2f5e37
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82188567"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94955648"
 ---
 # <a name="use-azure-policy-to-restrict-extensions-installation-on-linux-vms"></a>Utiliser Azure Policy pour restreindre l’installation d’extensions sur les machines virtuelles Linux
 
@@ -87,7 +88,6 @@ Copiez et collez le code .json suivant dans le fichier.
         "type": "Array",
         "metadata": {
             "description": "The list of extensions that will be denied. Example: CustomScriptForLinux, VMAccessForLinux etc.",
-            "strongType": "type",
             "displayName": "Denied extension"
         }
     }

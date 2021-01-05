@@ -5,15 +5,15 @@ author: sidram
 ms.author: sidram
 ms.reviewer: mamccrea
 ms.service: stream-analytics
-ms.topic: conceptual
+ms.topic: troubleshooting
 ms.date: 03/31/2020
 ms.custom: seodec18
-ms.openlocfilehash: a55515be478781a2f2448924c209a3348ae462c5
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: ef03560cff704255d2779a747d124e0b39a1c657
+ms.sourcegitcommit: b4880683d23f5c91e9901eac22ea31f50a0f116f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82133307"
+ms.lasthandoff: 11/11/2020
+ms.locfileid: "94491305"
 ---
 # <a name="troubleshoot-azure-stream-analytics-queries"></a>Résoudre les problèmes liés aux requêtes Azure Stream Analytics
 
@@ -28,28 +28,30 @@ Cet article décrit les problèmes courants liés au développement de requêtes
     - Sur le Portail Azure, sous l’onglet **Requête**, sélectionnez **Test**. Utilisez les exemples de données téléchargés pour [tester la requête](stream-analytics-test-query.md). Examinez les éventuelles erreurs et tentez de les corriger.   
     - Vous pouvez également [tester votre requête localement](stream-analytics-live-data-local-testing.md) à l’aide des outils Azure Stream Analytics pour Visual Studio ou [Visual Studio Code](visual-studio-code-local-run-live-input.md). 
 
-2.  [Déboguer des requêtes étape par étape localement à l’aide du diagramme de travail](debug-locally-using-job-diagram.md) dans les outils Azure Stream Analytics pour Visual Studio. Le diagramme de travail montre la façon dont les données circulent des sources d’entrée (Event Hub, IoT Hub, etc.), via plusieurs étapes de requête et, enfin, jusqu’aux récepteurs de sortie. Chaque étape de la requête est mappée à un jeu de résultats temporaire défini dans le script à l’aide de l’instruction WITH. Vous pouvez afficher les données et les métriques dans chaque jeu de résultats intermédiaire pour trouver la source du problème.
+2.  [Déboguer des requêtes étape par étape localement à l’aide du diagramme de travail](debug-locally-using-job-diagram-vs-code.md) dans les outils Azure Stream Analytics pour Visual Studio Code. Le diagramme de travail montre la façon dont les données circulent des sources d’entrée (Event Hub, IoT Hub, etc.), via plusieurs étapes de requête et, enfin, jusqu’aux récepteurs de sortie. Chaque étape de la requête est mappée à un jeu de résultats temporaire défini dans le script à l’aide de l’instruction WITH. Vous pouvez afficher les données et les métriques dans chaque jeu de résultats intermédiaire pour trouver la source du problème.
 
-    ![Aperçu des résultats dans le diagramme de travail](./media/debug-locally-using-job-diagram/preview-result.png)
+    ![Aperçu des résultats dans le diagramme de travail](./media/debug-locally-using-job-diagram-vs-code/preview-result.png)
 
-3.  Si vous utilisez l’objet [**Timestamp By**](https://docs.microsoft.com/stream-analytics-query/timestamp-by-azure-stream-analytics), assurez-vous que les événements présentent des horodatages postérieurs à [l’heure de début du travail](stream-analytics-out-of-order-and-late-events.md).
+3.  Si vous utilisez l’objet [**Timestamp By**](/stream-analytics-query/timestamp-by-azure-stream-analytics), assurez-vous que les événements présentent des horodatages postérieurs à [l’heure de début du travail](./stream-analytics-time-handling.md).
 
 4.  Éliminez les pièges les plus courants, comme par exemple :
-    - Une clause [**WHERE**](https://docs.microsoft.com/stream-analytics-query/where-azure-stream-analytics) dans la requête a filtré l’ensemble des événements, ce qui empêche la génération des sorties.
-    - Une fonction [**CAST**](https://docs.microsoft.com/stream-analytics-query/cast-azure-stream-analytics) échoue, ce qui provoque l’échec du travail. Pour éviter les échecs de conversion de type, utilisez plutôt [**TRY_CAST**](https://docs.microsoft.com/stream-analytics-query/try-cast-azure-stream-analytics).
+    - Une clause [**WHERE**](/stream-analytics-query/where-azure-stream-analytics) dans la requête a filtré l’ensemble des événements, ce qui empêche la génération des sorties.
+    - Une fonction [**CAST**](/stream-analytics-query/cast-azure-stream-analytics) échoue, ce qui provoque l’échec du travail. Pour éviter les échecs de conversion de type, utilisez plutôt [**TRY_CAST**](/stream-analytics-query/try-cast-azure-stream-analytics).
     - Lorsque vous utilisez des fonctions de fenêtre, attendez la durée totale de la fenêtre pour obtenir une sortie.
     - L’horodatage des événements est antérieur à l’heure de début du travail, provoquant l’abandon des événements.
-    - Les conditions [**JOIN**](https://docs.microsoft.com/stream-analytics-query/join-azure-stream-analytics) ne correspondent pas. S’il n’y a aucune correspondance, aucune sortie ne pourra être produite.
+    - Les conditions [**JOIN**](/stream-analytics-query/join-azure-stream-analytics) ne correspondent pas. S’il n’y a aucune correspondance, aucune sortie ne pourra être produite.
 
-5.  Vérifiez que les stratégies d’ordre des événements sont configurées comme prévu. Accédez à **Paramètres** et sélectionnez [**Ordre des événements**](stream-analytics-out-of-order-and-late-events.md). La stratégie n’est *pas* appliquée lorsque vous utilisez le bouton **Test** pour tester la requête. C’est une des différences entre le test en navigateur et l’exécution réelle du travail. 
+5.  Vérifiez que les stratégies d’ordre des événements sont configurées comme prévu. Accédez à **Paramètres** et sélectionnez [**Ordre des événements**](./stream-analytics-time-handling.md). La stratégie n’est *pas* appliquée lorsque vous utilisez le bouton **Test** pour tester la requête. C’est une des différences entre le test en navigateur et l’exécution réelle du travail. 
 
 6. Déboguez à l’aide des journaux d’activité et de ressources :
-    - Utilisez les [journaux d’activité](../azure-resource-manager/resource-group-audit.md) pour identifier et déboguer les erreurs.
+    - Utilisez les [journaux d’activité](../azure-resource-manager/management/view-activity-logs.md) pour identifier et déboguer les erreurs.
     - Utilisez les [journaux de ressources](stream-analytics-job-diagnostic-logs.md) pour identifier et déboguer les erreurs.
 
 ## <a name="resource-utilization-is-high"></a>L’utilisation des ressources est élevée
 
 Veillez à tirer parti de la parallélisation dans Azure Stream Analytics. Vous pouvez apprendre à [mettre à l’échelle des travaux Stream Analytics avec parallélisation des requêtes](stream-analytics-parallelization.md) en configurant des partitions d’entrée et en réglant la définition des requêtes Analytics.
+
+Si l’utilisation des ressources est régulièrement supérieure à 80 %, le délai en filigrane augmente; tout comme le nombre d’événements retardés. Dans ce cas, vous pouvez d’augmenter les unités de streaming. Une utilisation intensive indique que la tâche atteint une limite proche de la quantité maximale de ressources allouées.
 
 ## <a name="debug-queries-progressively"></a>Déboguer les requêtes progressivement
 
@@ -103,12 +105,12 @@ Cette fois, les données dans la sortie sont mises en forme et remplies comme pr
 
 ## <a name="get-help"></a>Obtenir de l’aide
 
-Pour obtenir une assistance, consultez le [forum Azure Stream Analytics](https://social.msdn.microsoft.com/Forums/azure/home?forum=AzureStreamAnalytics)
+Pour obtenir de l’aide supplémentaire, essayez notre [page de questions Microsoft Q&A pour Azure Stream Analytics](/answers/topics/azure-stream-analytics.html).
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 * [Présentation d’Azure Stream Analytics](stream-analytics-introduction.md)
 * [Prise en main d'Azure Stream Analytics](stream-analytics-real-time-fraud-detection.md)
 * [Mise à l’échelle des travaux Azure Stream Analytics](stream-analytics-scale-jobs.md)
-* [Références sur le langage des requêtes d'Azure Stream Analytics](https://docs.microsoft.com/stream-analytics-query/stream-analytics-query-language-reference)
-* [Références sur l’API REST de gestion d’Azure Stream Analytics](https://msdn.microsoft.com/library/azure/dn835031.aspx)
+* [Références sur le langage des requêtes d'Azure Stream Analytics](/stream-analytics-query/stream-analytics-query-language-reference)
+* [Références sur l’API REST de gestion d’Azure Stream Analytics](/rest/api/streamanalytics/)

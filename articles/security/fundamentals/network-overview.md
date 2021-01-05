@@ -15,12 +15,12 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 10/29/2018
 ms.author: terrylan
-ms.openlocfilehash: 496ee1bc97f6b72e09a62ae3491af7ccc7328583
-ms.sourcegitcommit: 98e79b359c4c6df2d8f9a47e0dbe93f3158be629
+ms.openlocfilehash: 8a82fd6e6dc1bea0804c429f3af46884f004de69
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "80811082"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96489766"
 ---
 # <a name="azure-network-security-overview"></a>Vue d’ensemble de la sécurité du réseau Azure
 
@@ -63,7 +63,7 @@ Azure prend en charge plusieurs types de contrôle d’accès réseau, tels que 
 Tout déploiement sécurisé requiert certaines mesures de contrôle d’accès réseau. L’objectif du contrôle d’accès réseau est de restreindre les communications des machines virtuelles aux systèmes nécessaires. Les autres tentatives de communication sont bloquées.
 
 > [!NOTE]
-> Les pare-feux de stockage sont détaillés dans l’article [Vue d’ensemble des fonctionnalités de sécurité du stockage Azure](storage-overview.md)
+> Les pare-feux de stockage sont détaillés dans l’article [Vue d’ensemble des fonctionnalités de sécurité du stockage Azure](../../storage/blobs/security-recommendations.md)
 
 #### <a name="network-security-rules-nsgs"></a>Règles de sécurité réseau (NSG)
 
@@ -77,11 +77,11 @@ Les groupes de sécurité réseau n’effectuent pas d’inspection de la couche
 
 En savoir plus :
 
-* [Groupes de sécurité réseau](../../virtual-network/security-overview.md)
+* [Groupes de sécurité réseau](../../virtual-network/network-security-groups-overview.md)
 
 #### <a name="asc-just-in-time-vm-access"></a>Accès juste-à-temps aux machines virtuelles pour ASC
 
-Le [Centre de sécurité Azure](../../security-center/security-center-intro.md) gère les NSG sur les machines virtuelles et verrouillent l’accès à la machine virtuelle jusqu’à ce qu’un utilisateur avec les permissions de contrôle d’accès en fonction du rôle [(RBAC)](/azure/role-based-access-control/overview) appropriées demande l’accès. Quand l’utilisateur est autorisé avec succès, ASC modifie les NSG pour autoriser l’accès aux ports sélectionnés pendant la durée spécifiée. Passé ce délai, les NSG sont restaurés à leur état sécurisé précédent.
+Le [centre de sécurité Azure](../../security-center/security-center-introduction.md) gère les NSG sur les machines virtuelles et verrouille l’accès à la machine virtuelle jusqu’à ce qu’un utilisateur avec les autorisations de contrôle d’accès en fonction du rôle Azure [(Azure RBAC)](../../role-based-access-control/overview.md) appropriées demande l’accès. Quand l’utilisateur est autorisé avec succès, ASC modifie les NSG pour autoriser l’accès aux ports sélectionnés pendant la durée spécifiée. Passé ce délai, les NSG sont restaurés à leur état sécurisé précédent.
 
 En savoir plus :
 
@@ -141,7 +141,7 @@ Pare-feu Azure est un service de sécurité réseau informatique géré qui prot
 
 En savoir plus :
 
-* [Présentation du Pare-feu Azure](/azure/firewall/overview)
+* [Présentation du Pare-feu Azure](../../firewall/overview.md)
 
 ## <a name="secure-remote-access-and-cross-premises-connectivity"></a>Accès à distance sécurisé et connectivité intersite
 
@@ -202,7 +202,7 @@ Il est possible d’utiliser plusieurs réseaux virtuels dans vos déploiements.
 
 Une option est de connecter les services d’un réseau virtuel aux services d’un autre réseau virtuel en effectuant un « retour de boucle » via Internet. La connexion part d’un réseau virtuel, passe par Internet, puis revient au réseau virtuel de destination. Cette option expose la connexion aux risques de sécurité inhérents à toute communication Internet.
 
-Une meilleure option consiste à créer un VPN de site à site qui se connecte entre deux réseaux virtuels. Cette méthode utilise le même protocole de [mode de tunneling IPsec](https://technet.microsoft.com/library/cc786385.aspx) que la connexion VPN de site à site mentionnée ci-dessus.
+Une meilleure option consiste à créer un VPN de site à site qui se connecte entre deux réseaux virtuels. Cette méthode utilise le même protocole de [mode de tunneling IPsec](/previous-versions/windows/it-pro/windows-server-2003/cc786385(v=ws.10)) que la connexion VPN de site à site mentionnée ci-dessus.
 
 L’avantage d’utiliser cette approche est que la connexion VPN est établie via l’infrastructure réseau Azure et non via Internet. Vous bénéficiez ainsi d’un meilleur niveau de sécurité par rapport à une connexion VPN de site à site basée sur Internet.
 
@@ -237,7 +237,7 @@ La passerelle Azure Application Gateway vous permet de mettre en place un équil
 
 En savoir plus :
 
-* [Vue d’ensemble d’Application Gateway](/azure/application-gateway/application-gateway-introduction)
+* [Vue d’ensemble d’Application Gateway](../../application-gateway/overview.md)
 
 ### <a name="network-level-load-balancing"></a>Équilibrage de charge au niveau du réseau
 
@@ -252,8 +252,8 @@ Pour bénéficier des avantages de l’équilibrage de charge au niveau du rése
 
 En savoir plus :
 
-* [Équilibrage de charge accessible sur Internet entre plusieurs services ou machines virtuelles](/azure/load-balancer/load-balancer-internet-overview)
-* [Présentation de l’équilibrage de charge interne](/azure/load-balancer/load-balancer-internal-overview)
+* [Équilibrage de charge accessible sur Internet entre plusieurs services ou machines virtuelles](../../load-balancer/load-balancer-overview.md)
+* [Présentation de l’équilibrage de charge interne](../../load-balancer/load-balancer-overview.md)
 
 ### <a name="global-load-balancing"></a>Équilibrage de charge global
 
@@ -332,7 +332,7 @@ Microsoft offre une protection DDoS **De base** dans le cadre de la plateforme A
 
 En savoir plus :
 
-* [Présentation de la Protection DDoS](../../virtual-network/ddos-protection-overview.md)
+* [Présentation de la Protection DDoS](../../ddos-protection/ddos-protection-overview.md)
 
 ## <a name="azure-front-door"></a>Azure Front Door
 
@@ -381,7 +381,7 @@ Security Center vous permet d’optimiser et de surveiller la sécurité réseau
 
 En savoir plus :
 
-* [Présentation d’Azure Security Center](../../security-center/security-center-intro.md)
+* [Présentation d’Azure Security Center](../../security-center/security-center-introduction.md)
 
 ### <a name="virtual-network-tap"></a>TAP de réseau virtuel
 

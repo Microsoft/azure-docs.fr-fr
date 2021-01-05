@@ -2,17 +2,18 @@
 title: 'Azure ExpressRoute : Déplacer les circuits classiques vers Resource Manager'
 description: Cette page décrit comment déplacer un circuit classique vers le modèle de déploiement Resource Manager à l’aide de PowerShell.
 services: expressroute
-author: charwen
+author: duongau
 ms.service: expressroute
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 02/25/2019
-ms.author: charwen
-ms.openlocfilehash: d3014aae44b8d63be67cd0d31f996470aeda40df
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.author: duau
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: 460ea446fc6dfc43e81a1a57bbba032a61f3a72d
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80616276"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90532543"
 ---
 # <a name="move-expressroute-circuits-from-classic-to-resource-manager-deployment-model-using-powershell"></a>Déplacer des circuits ExpressRoute du modèle de déploiement classique vers le modèle de déploiement Resource Manager à l’aide de PowerShell
 
@@ -22,7 +23,7 @@ Pour utiliser un circuit ExpressRoute pour les modèles de déploiement classiqu
 
 [!INCLUDE [updated-for-az](../../includes/hybrid-az-ps.md)]
 
-* Vérifiez que vous avez installé les modules Azure PowerShell classique et 	Az localement sur votre ordinateur. Pour plus d’informations, consultez [Installer et configurer Azure PowerShell](/powershell/azure/overview).
+* Vérifiez que vous avez installé les modules Azure PowerShell classique et 	Az localement sur votre ordinateur. Pour plus d’informations, consultez [Installer et configurer Azure PowerShell](/powershell/azure/).
 * Veillez à consulter les [conditions préalables](expressroute-prerequisites.md), la [configuration requise pour le routage](expressroute-routing.md) et les [flux de travail](expressroute-workflows.md) avant de commencer la configuration.
 * Examinez les informations fournies sous [Transfert des circuits ExpressRoute du modèle de déploiement classique vers le modèle de déploiement Resource Manager](expressroute-move.md). Vous devez avoir bien compris les limites et les limitations.
 * Vérifiez que le circuit est totalement opérationnel dans le modèle de déploiement classique.
@@ -94,14 +95,14 @@ Move-AzExpressRouteCircuit -Name "MyCircuit" -ResourceGroupName "DemoRG" -Locati
 En mode classique, un circuit ExpressRoute n’est pas par essence lié à une région. Toutefois, dans Resource Manager, chaque ressource doit être mappée à une région Azure. La région spécifiée dans l’applet de commande Move-AzExpressRouteCircuit peut techniquement correspondre à n’importe quelle région. Pour des besoins d’organisation, vous pouvez souhaiter choisir une région qui représente votre emplacement d’appairage (peering).
 
 > [!NOTE]
-> Une fois le déplacement terminé, le nouveau nom répertorié dans l’applet de commande précédente sera utilisé pour traiter la ressource. Le circuit sera essentiellement renommé.
-> 
+> * Après avoir déplacé votre circuit ExpressRoute classique vers le modèle de déploiement Resource Manager, votre circuit aura accès aux modèles de déploiement classique et Resource Manager par défaut.
+> * Le nouveau nom répertorié dans la cmdlet précédente sera utilisé pour traiter la ressource. Le circuit sera essentiellement renommé.
 
 ## <a name="modify-circuit-access"></a>Modifier l’accès d’un circuit
 
 ### <a name="to-enable-expressroute-circuit-access-for-both-deployment-models"></a>Pour activer l’accès du circuit ExpressRoute pour les deux modèles de déploiement
 
-Après avoir déplacé votre circuit ExpressRoute classique vers le modèle de déploiement Resource Manager, vous pouvez activer l’accès aux deux modèles de déploiement. Exécutez les applets de commande suivantes pour activer l’accès aux deux modèles de déploiement :
+Vous pouvez activer l’accès au modèle de déploiement classique pour les circuits ExpressRoute créés dans le modèle de déploiement Resource Manager. Exécutez les applets de commande suivantes pour activer l’accès aux deux modèles de déploiement :
 
 1. Obtenez les informations sur le circuit.
 

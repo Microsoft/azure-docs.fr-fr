@@ -6,14 +6,14 @@ manager: nitinme
 author: careyjmac
 ms.service: cognitive-search
 ms.topic: conceptual
-ms.date: 11/04/2019
+ms.date: 06/17/2020
 ms.author: chalton
-ms.openlocfilehash: 0f67caad03c4ebd1cf8f3721f377d8362219016a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 5098d897d84ff6af31d430c0ddd2e26d8d6b08a7
+ms.sourcegitcommit: 1140ff2b0424633e6e10797f6654359947038b8d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76837729"
+ms.lasthandoff: 12/30/2020
+ms.locfileid: "97814293"
 ---
 # <a name="document-extraction-cognitive-skill"></a>Compétence cognitive Extraction de document
 
@@ -25,7 +25,8 @@ La compétence **Extraction de document** extrait le contenu d’un fichier dans
 > [!NOTE]
 > Si vous élargissez le champ en augmentant la fréquence des traitements, en ajoutant des documents supplémentaires ou en ajoutant plusieurs algorithmes d’IA, vous devez [attacher une ressource Cognitive Services facturable](cognitive-search-attach-cognitive-services.md). Des frais sont applicables durant l’appel des API dans Cognitive Services ainsi que pour l’extraction d’images durant la phase d’extraction du contenu des documents dans l’indexation. L’extraction de texte à partir des documents est gratuite.
 >
-> L'exécution des compétences intégrées est facturée au prix actuel du [paiement à l'utilisation de Cognitive Services](https://azure.microsoft.com/pricing/details/cognitive-services/). Les prix appliqués pour l'extraction d'images sont présentés sur la [page de tarification](https://go.microsoft.com/fwlink/?linkid=2042400).
+> L'exécution des compétences intégrées est facturée au prix actuel du [paiement à l'utilisation de Cognitive Services](https://azure.microsoft.com/pricing/details/cognitive-services/). Les prix appliqués pour l'extraction d'images sont présentés sur la [page de tarification](https://azure.microsoft.com/pricing/details/search/).
+
 ## <a name="odatatype"></a>@odata.type  
 Microsoft.Skills.Util.DocumentExtractionSkill
 
@@ -33,7 +34,7 @@ Microsoft.Skills.Util.DocumentExtractionSkill
 
 Les paramètres respectent la casse.
 
-| Entrées            | Valeurs autorisées | Description |
+| Entrées | Valeurs autorisées | Description |
 |-----------------|----------------|-------------|
 | `parsingMode`   | `default` <br/> `text` <br/> `json`  | Définissez ce paramètre sur `default` pour l’extraction de documents à partir de fichiers qui ne sont pas en mode texte pur ou JSON. Définissez ce paramètre sur `text` pour améliorer les performances des fichiers en texte brut. Définissez ce paramètre sur `json` pour extraire le contenu structuré des fichiers JSON. Si `parsingMode` n’est pas défini explicitement, il sera défini sur `default`. |
 | `dataToExtract` | `contentAndMetadata` <br/> `allMetadata` | Définissez ce paramètre sur `contentAndMetadata` pour extraire toutes les métadonnées et le contenu textuel de chaque fichier. Définissez ce paramètre sur `allMetadata` pour extraire uniquement les [métadonnées spécifiques au type de contenu](search-howto-indexing-azure-blob-storage.md#ContentSpecificMetadata) (par exemple, seules les métadonnées propres aux fichiers .png). Si `dataToExtract` n’est pas défini explicitement, il sera défini sur `contentAndMetadata`. |
@@ -51,7 +52,7 @@ Les paramètres respectent la casse.
 
 | Nom d’entrée     | Description |
 |--------------------|-------------|
-| file_data | Fichier à partir duquel le contenu doit être extrait. |
+| `file_data` | Fichier à partir duquel le contenu doit être extrait. |
 
 L’entrée « file_data » doit être un objet défini comme suit :
 
@@ -74,8 +75,8 @@ Cet objet de référence de fichier peut être généré de 3 manières :
 
 | Nom de sortie    | Description |
 |--------------|-------------|
-| content | Contenu textuel du document. |
-| normalized_images | Si la propriété `imageAction` est définie sur une autre valeur que `none`, le nouveau champ *normalized_images* contiendra un tableau d’images. Si vous souhaitez en savoir plus sur le format de sortie de chaque image, veuillez consulter la [documentation relative à l’extraction d’images](cognitive-search-concept-image-scenarios.md). |
+| `content` | Contenu textuel du document. |
+| `normalized_images`   | Si la propriété `imageAction` est définie sur une autre valeur que `none`, le nouveau champ *normalized_images* contiendra un tableau d’images. Si vous souhaitez en savoir plus sur le format de sortie de chaque image, veuillez consulter la [documentation relative à l’extraction d’images](cognitive-search-concept-image-scenarios.md). |
 
 ##  <a name="sample-definition"></a>Exemple de définition
 
@@ -99,11 +100,11 @@ Cet objet de référence de fichier peut être généré de 3 manières :
     "outputs": [
       {
         "name": "content",
-        "targetName": "content"
+        "targetName": "extracted_content"
       },
       {
         "name": "normalized_images",
-        "targetName": "normalized_images"
+        "targetName": "extracted_normalized_images"
       }
     ]
   }

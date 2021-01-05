@@ -1,16 +1,16 @@
 ---
 title: 'Démarrage rapide : Déployer Hello World sur Azure Service Fabric Mesh'
 description: Ce démarrage rapide montre comment déployer une application Service Fabric Mesh vers Azure Service Fabric Mesh.
-author: dkkapur
-ms.author: dekapur
+author: georgewallace
+ms.author: gwallace
 ms.date: 11/27/2018
 ms.topic: quickstart
-ms.openlocfilehash: ce897b6e0e9d6a0b9b672907a64f4683f907b677
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: c81b53b68c689f4b890d2ff628f38b734aea63dc
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "75458961"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96499881"
 ---
 # <a name="quickstart-deploy-hello-world-to-service-fabric-mesh"></a>Démarrage rapide : Déployer Hello World vers Service Fabric Mesh
 
@@ -41,6 +41,12 @@ az group create --name myResourceGroup --location eastus
 ```
 
 ## <a name="deploy-the-application"></a>Déployer l’application
+
+>[!NOTE]
+> Depuis le 2 novembre 2020, des [limites de taux de téléchargement s’appliquent](https://docs.docker.com/docker-hub/download-rate-limit/) aux requêtes anonymes et authentifiées qui sont envoyées à Docker Hub à partir de comptes de plan Docker Gratuit. Ces limites sont appliquées par adresse IP. 
+> 
+> Ces modèles utilisent des images publiques issues de Docker Hub. Notez que votre taux de téléchargement peut être limité. Pour plus d’informations, consultez [S’authentifier auprès de Docker Hub](../container-registry/buffer-gate-public-content.md#authenticate-with-docker-hub).
+
 Créez votre application dans le groupe de ressources à l’aide de la commande `az mesh deployment create`.  Exécutez la commande suivante :
 
 ```azurecli-interactive
@@ -110,4 +116,4 @@ Pour en savoir plus sur la création et le déploiement d’applications Service
 
 <!-- Links / Internal -->
 [az-group-delete]: /cli/azure/group
-[azure-cli-install]: https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest
+[azure-cli-install]: /cli/azure/install-azure-cli?view=azure-cli-latest

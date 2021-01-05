@@ -11,12 +11,12 @@ metadata:
   ms.topic: landing-page
   ms.date: 03/10/2020
   ms.author: trbye
-  ms.openlocfilehash: 65b3f2322c4683eedef8cdfbc328664d4597df58
-  ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+  ms.openlocfilehash: 6bc467ad0120c8e251eee39be2bcef001a497cad
+  ms.sourcegitcommit: 28c5fdc3828316f45f7c20fc4de4b2c05a1c5548
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 04/29/2020
-  ms.locfileid: "81401487"
+  ms.lasthandoff: 10/22/2020
+  ms.locfileid: "92756853"
 landingContent:
 - title: À propos de la reconnaissance de l’intention
   linkLists:
@@ -42,3 +42,9 @@ landingContent:
       url: ../luis/luis-language-support.md#languages-supported
     - text: Tarification de la reconnaissance de l’intention
       url: https://azure.microsoft.com/pricing/details/cognitive-services/language-understanding-intelligent-services
+- title: Aide et commentaires
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: Options d’aide et de support
+      url: ../cognitive-services-support-options.md?context=/azure/cognitive-services/speech-service/context/context

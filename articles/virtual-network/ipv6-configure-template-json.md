@@ -5,19 +5,19 @@ description: Cet article montre comment déployer une application double pile IP
 services: virtual-network
 documentationcenter: na
 author: KumudD
-manager: twooley
+manager: mtillman
 ms.service: virtual-network
 ms.devlang: NA
-ms.topic: article
+ms.topic: how-to
 ms.workload: infrastructure-services
 ms.date: 03/31/2020
 ms.author: kumud
-ms.openlocfilehash: 7c2f66d92597801aa7c6b0b32f86f594d3effb05
-ms.sourcegitcommit: 7581df526837b1484de136cf6ae1560c21bf7e73
+ms.openlocfilehash: 548b416ed0f21df83dafdb1c2d7015c625c36e4c
+ms.sourcegitcommit: 30906a33111621bc7b9b245a9a2ab2e33310f33f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/31/2020
-ms.locfileid: "80420600"
+ms.lasthandoff: 11/22/2020
+ms.locfileid: "95244291"
 ---
 # <a name="deploy-an-ipv6-dual-stack-application-with-basic-load-balancer-in-azure---template"></a>Déployer une application double pile IPv6 avec un équilibreur de charge de base dans Azure - Modèle
 
@@ -80,8 +80,8 @@ Section de modèle à ajouter :
               "protocol": "Tcp",
               "sourcePortRange": "33819-33829",
               "destinationPortRange": "5000-6000",
-              "sourceAddressPrefix": "ace:cab:deca:deed::/64",
-              "destinationAddressPrefix": "cab:ace:deca:deed::/64",
+              "sourceAddressPrefix": "fd00:db8:deca:deed::/64",
+              "destinationAddressPrefix": "fd00:db8:deca:deed::/64",
               "access": "Allow",
               "priority": 1003,
               "direction": "Inbound"
@@ -103,9 +103,9 @@ Si vous utilisez une appliance virtuelle réseau, ajoutez des itinéraires IPv6 
           {
             "name": "v6route",
             "properties": {
-              "addressPrefix": "ace:cab:deca:deed::/64",
+              "addressPrefix": "fd00:db8:deca:deed::/64",
               "nextHopType": "VirtualAppliance",
-              "nextHopIpAddress": "deca:cab:ace:f00d::1"
+              "nextHopIpAddress": "fd00:db8:ace:f00d::1"
             }
 ```
 

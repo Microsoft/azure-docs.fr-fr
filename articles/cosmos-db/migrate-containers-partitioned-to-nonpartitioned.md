@@ -3,17 +3,20 @@ title: Migrer des conteneurs Azure Cosmos non partitionnés vers des conteneurs 
 description: Apprenez à migrer tous les conteneurs non partitionnés existants vers des conteneurs partitionnés.
 author: markjbrown
 ms.service: cosmos-db
-ms.topic: conceptual
+ms.subservice: cosmosdb-sql
+ms.topic: how-to
 ms.date: 09/25/2019
 ms.author: mjbrown
-ms.openlocfilehash: 742ef62895f3ef64e8fa22ab21d2947bee57776b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: edb6114406922d55c439ae7426a2be933bba4aee
+ms.sourcegitcommit: fa90cd55e341c8201e3789df4cd8bd6fe7c809a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77623347"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93334087"
 ---
 # <a name="migrate-non-partitioned-containers-to-partitioned-containers"></a>Migrer des conteneurs non partitionnés vers des conteneurs partitionnés
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
 
 Azure Cosmos DB prend en charge la création de conteneurs sans clé de partition. Actuellement, vous pouvez créer des conteneurs non partitionnés à l’aide d’Azure CLI et de kits SDK Azure Cosmos DB (.Net, Java, NodeJs) de version inférieure ou égale à 2.x. Vous ne pouvez pas créer de conteneurs non partitionnés à l’aide du Portail Azure. Toutefois, ces conteneurs non partitionnés ne sont pas élastiques et disposent d’une capacité de stockage fixe de 20 Go et d’un débit maximal de 10 000 RU/s.
 
@@ -131,6 +134,6 @@ Si de nouveaux éléments sont insérés avec des valeurs différentes pour la c
 * [Partitioning in Azure Cosmos DB](partitioning-overview.md) (Partitionnement dans Azure Cosmos DB)
 * [Unités de requête dans Azure Cosmos DB](request-units.md)
 * [Provisionner le débit sur les conteneurs et les bases de données](set-throughput.md)
-* [Utiliser un compte Azure Cosmos](account-overview.md)
+* [Utiliser un compte Azure Cosmos](./account-databases-containers-items.md)
 
 [1]: https://github.com/Azure/azure-cosmos-dotnet-v3/tree/master/Microsoft.Azure.Cosmos.Samples/Usage/NonPartitionContainerMigration

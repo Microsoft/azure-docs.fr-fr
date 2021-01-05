@@ -1,27 +1,27 @@
 ---
 title: Peering de réseaux virtuels Azure
 titlesuffix: Azure Virtual Network
-description: En savoir plus sur le peering de réseaux virtuels dans Azure.
+description: Découvrez l’appairage de réseaux virtuels dans Azure, notamment la façon dont il vous permet de connecter des réseaux dans Réseau virtuel Microsoft Azure.
 services: virtual-network
 documentationcenter: na
-author: anavinahar
+author: altambaw
 ms.service: virtual-network
 ms.devlang: na
 ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 11/15/2019
-ms.author: anavin
-ms.openlocfilehash: 5fb54e812e72b9393ffdf632085d0f32ab8b1988
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: kumud
+ms.openlocfilehash: 61617777efa8241c93b2b5ffe42fc1d914b6ebcf
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79235797"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96004974"
 ---
 # <a name="virtual-network-peering"></a>Peering de réseau virtuel
 
-L’appairage de réseaux virtuels vous permet de connecter en toute transparence des réseaux dans [Réseau virtuel Microsoft Azure](virtual-networks-overview.md). Les réseaux virtuels apparaissent comme un seul réseau à des fins de connectivité. Le trafic entre les machines virtuelles utilise l’infrastructure principale de Microsoft. À l’instar du trafic entre les machines virtuelles du même réseau, le trafic est acheminé via le réseau *privé* de Microsoft uniquement.
+L'appairage de réseaux virtuels vous permet de connecter en toute transparence deux ou plusieurs [réseaux virtuels](virtual-networks-overview.md) dans Azure. Les réseaux virtuels apparaissent comme un seul réseau à des fins de connectivité. Le trafic entre les machines virtuelles des réseaux virtuels appairés utilise l'infrastructure principale de Microsoft. À l’instar du trafic entre les machines virtuelles du même réseau, le trafic est acheminé via le réseau *privé* de Microsoft uniquement.
 
 Azure prend en charge les types de Peering suivants :
 

@@ -6,12 +6,12 @@ ms.author: aul
 ms.subservice: ''
 ms.topic: conceptual
 ms.date: 02/07/2020
-ms.openlocfilehash: fb53a966b0dc4959253ac0786ef09ef3c497e809
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 7614dd1d60bad5c124269ae2af02d30a5aacfe3e
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77658844"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90564030"
 ---
 # <a name="view-designer-to-workbooks-conversion-summary-and-access"></a>Récapitulatif et accès pour la conversion du Concepteur de vues en classeurs
 Le [concepteur de vues](view-designer.md) est une fonctionnalité d'Azure Monitor qui vous permet de créer des vues personnalisées pour vous aider à visualiser les données de votre espace de travail Log Analytics, avec des graphiques, des listes et des chronologies. Celles-ci sont progressivement supprimées et remplacées par des classeurs, qui offrent des fonctionnalités supplémentaires. Cet article explique en détail comment vous pouvez créer un récapitulatif de la vue d’ensemble et les autorisations nécessaires pour accéder aux classeurs.
@@ -21,7 +21,7 @@ Les utilisateurs du Concepteur de vues peuvent avoir l’habitude d’une vignet
 
 Vous pouvez tirer parti du haut niveau des fonctionnalités de personnalisation fournies avec les tableaux de bord Azure, qui permet l’actualisation automatique, le déplacement, le dimensionnement et un filtrage supplémentaire pour vos visualisations et vos éléments épinglés. 
 
-![tableau de bord](media/view-designer-conversion-access/dashboard.png)
+![La capture d’écran présente un tableau de bord Azure personnalisé intitulé Résumé de l’espace de travail.](media/view-designer-conversion-access/dashboard.png)
 
 Créez un tableau de bord Azure ou sélectionnez un tableau de bord existant pour commencer à épingler des éléments de classeur.
 

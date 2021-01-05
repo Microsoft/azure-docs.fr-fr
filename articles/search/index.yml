@@ -11,12 +11,12 @@ metadata:
   author: HeidiSteen
   ms.author: heidist
   ms.date: 02/25/2020
-  ms.openlocfilehash: ab3352dbd6631c0c86656764dac748eac10fa79b
-  ms.sourcegitcommit: b396c674aa8f66597fa2dd6d6ed200dd7f409915
+  ms.openlocfilehash: af7bb5fe7709d0a15254e8660600e284103fa668
+  ms.sourcegitcommit: 1bdcaca5978c3a4929cccbc8dc42fc0c93ca7b30
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 05/07/2020
-  ms.locfileid: "82890087"
+  ms.lasthandoff: 12/13/2020
+  ms.locfileid: "97368781"
 landingContent:
 - title: À propos de la recherche cognitive
   linkLists:
@@ -54,7 +54,7 @@ landingContent:
       url: search-create-service-portal.md
     - text: Création d'un index
       url: search-get-started-portal.md
-    - text: Créer une application
+    - text: Créer une application de démonstration
       url: search-create-app-portal.md
     - text: Extraire du texte à partir d’images et de fichiers d’application
       url: cognitive-search-quickstart-blob.md
@@ -69,9 +69,9 @@ landingContent:
   - linkListType: reference
     links:
     - text: Créer un index (REST)
-      url: https://docs.microsoft.com/rest/api/searchservice/create-index
+      url: /rest/api/searchservice/create-index
     - text: Créer un indexeur (REST)
-      url: https://docs.microsoft.com/rest/api/searchservice/create-indexer
+      url: /rest/api/searchservice/create-indexer
 - title: Enrichir avec l’intelligence artificielle
   linkLists:
   - linkListType: concept
@@ -107,7 +107,7 @@ landingContent:
   - linkListType: how-to-guide
     links:
     - text: Créer une requête simple
-      url: search-query-simple-examples.md
+      url: search-query-create.md
     - text: Utiliser la syntaxe complète
       url: search-query-lucene-examples.md
   - linkListType: reference
@@ -115,7 +115,7 @@ landingContent:
     - text: Informations de référence sur le langage OData
       url: query-odata-filter-orderby-syntax.md
     - text: Rechercher dans des documents (REST)
-      url: https://docs.microsoft.com/rest/api/searchservice/search-documents
+      url: /rest/api/searchservice/search-documents
 - title: Aide et commentaires
   linkLists:
   - linkListType: reference

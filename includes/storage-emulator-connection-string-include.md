@@ -2,16 +2,16 @@
 author: tamram
 ms.service: storage
 ms.topic: include
-ms.date: 10/26/2018
+ms.date: 07/17/2020
 ms.author: tamram
-ms.openlocfilehash: 8c577db3e9f2bff9e86c3a7c37274630f90dd680
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 85e7cb86217340e77a6f597a357c3de1f91fb8d0
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "67177267"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87070566"
 ---
-L’émulateur de stockage prend en charge uniquement un compte fixe et une clé d’authentification connue pour l’authentification par clé partagée. Ce compte et cette clé sont les seules informations d’identification par clé partagée autorisées pour une utilisation avec l’émulateur de stockage. Il s'agit de :
+Azurite prend en charge uniquement un compte fixe et une clé d’authentification connue pour l’authentification par clé partagée. Ce compte et cette clé sont les seules informations d’identification par clé partagée autorisées pour une utilisation avec Azurite. Il s'agit de :
 
 ```
 Account name: devstoreaccount1
@@ -19,13 +19,13 @@ Account key: Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZ
 ```
 
 > [!NOTE]
-> La clé d'authentification prise en charge par l'émulateur de stockage est destinée uniquement au test de la fonctionnalité de votre code d'authentification du client. Elle n'offre aucune fonction de sécurité. Vous ne pouvez pas utiliser votre compte et votre clé de stockage de production avec l'émulateur de stockage. Vous ne devez pas utiliser le compte de développement avec des données de production.
+> La clé d’authentification prise en charge par Azurite est destinée uniquement au test de la fonctionnalité de votre code d’authentification du client. Elle n'offre aucune fonction de sécurité. Vous ne pouvez pas utiliser votre compte et votre clé de stockage de production avec Azurite. Vous ne devez pas utiliser le compte de développement avec des données de production.
 > 
-> L’émulateur de stockage prend uniquement en charge la connexion via le protocole HTTP. Toutefois, HTTPS est le protocole recommandé pour l’accès aux ressources dans un compte de Stockage Azure de production.
+> Azurite prend uniquement en charge la connexion via le protocole HTTP. Toutefois, HTTPS est le protocole recommandé pour l’accès aux ressources dans un compte de Stockage Azure de production.
 > 
 
 #### <a name="connect-to-the-emulator-account-using-a-shortcut"></a>Se connecter au compte de l’émulateur à l’aide d’un raccourci
-Le moyen le plus simple de vous connecter à l’émulateur de stockage à partir de votre application est de configurer une chaîne de connexion dans le fichier de configuration de votre application qui référence le raccourci `UseDevelopmentStorage=true`. Voici un exemple de chaîne de connexion à l’émulateur de stockage dans un fichier *app.config* : 
+La méthode la plus simple pour vous connecter à Azurite à partir de votre application consiste à configurer une chaîne de connexion dans le fichier config de votre application, qui référence le raccourci `UseDevelopmentStorage=true`. Voici un exemple de chaîne de connexion à Azurite dans un fichier *app.config* : 
 
 ```xml
 <appSettings>
@@ -40,16 +40,7 @@ Pour créer une chaîne de connexion qui référence le nom et la clé du compte
 DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;
 AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;
 BlobEndpoint=http://127.0.0.1:10000/devstoreaccount1;
-TableEndpoint=http://127.0.0.1:10002/devstoreaccount1;
 QueueEndpoint=http://127.0.0.1:10001/devstoreaccount1;
 ```
 
 Cette valeur est identique au raccourci présenté plus haut, `UseDevelopmentStorage=true`.
-
-#### <a name="specify-an-http-proxy"></a>Spécifier un proxy HTTP
-Vous pouvez aussi spécifier un proxy HTTP à utiliser lorsque vous testez votre service sur l’émulateur de stockage. Cela peut être utile pour observer les demandes et les réponses HTTP pendant que vous déboguez des opérations sur les services de stockage. Pour spécifier un proxy, ajoutez l’option `DevelopmentStorageProxyUri` à la chaîne de connexion, puis définissez sa valeur sur l’URI du proxy. Voici par exemple une chaîne de connexion qui pointe vers l’émulateur de stockage et configure un proxy HTTP :
-
-```
-UseDevelopmentStorage=true;DevelopmentStorageProxyUri=http://myProxyUri
-```
-

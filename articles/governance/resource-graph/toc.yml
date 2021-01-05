@@ -4,25 +4,43 @@
   items:
     - name: "Qu’est-ce qu’Azure Resource Graph\_?"
       displayName: 'Resource Manager, query language, rbac, permissions'
-      href: overview.md
+      href: ./overview.md
 - name: Démarrages rapides
   expanded: true
   items:
-    - name: Exécuter votre première requête - Portail Azure
+    - name: Exécuter votre première requête – Portail
       displayName: 'portal, resource, graph, explorer'
-      href: first-query-portal.md
+      href: ./first-query-portal.md
     - name: Exécuter votre première requête - Azure CLI
       displayName: 'extension, docker'
-      href: first-query-azurecli.md
-    - name: Exécuter votre première requête - PowerShell
+      href: ./first-query-azurecli.md
+    - name: Exécuter votre première requête - Azure PowerShell
       displayName: 'module, docker, Az.ResourceGraph'
-      href: first-query-powershell.md
+      href: ./first-query-powershell.md
+    - name: Exécuter votre première requête - .NET
+      displayName: 'core, auth, dotnet'
+      href: ./first-query-dotnet.md
+    - name: Exécuter votre première requête - Go
+      displayName: 'package, sdk, golang'
+      href: ./first-query-go.md
+    - name: Exécuter votre première requête - JavaScript
+      displayName: 'library, node, arm-resourcegraph'
+      href: ./first-query-javascript.md
     - name: Exécuter votre première requête – Python
       displayName: 'library, azure-mgmt, cli'
-      href: first-query-python.md
+      href: ./first-query-python.md
+    - name: Exécuter votre première requête - Ruby
+      displayName: 'gem, azure-mgmt'
+      href: ./first-query-ruby.md
+    - name: Exécuter votre première requête - REST
+      displayName: 'armclient, postman'
+      href: ./first-query-rest-api.md
+    - name: Créer une requête partagée - Azure CLI
+      displayName: 'extension, docker, queries'
+      href: ./shared-query-azure-cli.md
     - name: Déployer une requête partagée - Modèle ARM
       displayName: 'resource manager, queries'
-      href: shared-query-template.md
+      href: ./shared-query-template.md
 - name: Tutoriels
   items:
     - name: Créer et partager une requête dans le portail Azure
@@ -50,6 +68,10 @@
     - name: Instructions pour les requêtes limitées
       displayName: 'pagination, batching, throttling, parallel'
       href: ./concepts/guidance-for-throttled-requests.md
+    - name: Sécurité
+      items:
+        - name: Base de référence de la sécurité pour Azure Security Benchmark
+          href: ./concepts/azure-security-benchmark-baseline.md
 - name: Guides pratiques
   items:
     - name: Obtenir les changements des ressources
@@ -60,30 +82,34 @@
   href: ./troubleshoot/general.md
 - name: Informations de référence
   items:
-    - name: Azure CLI
-      href: /cli/azure/ext/resource-graph/graph
-    - name: Azure PowerShell
-      href: /powershell/module/az.resourcegraph/
-    - name: Kit SDK Azure pour .NET
-      href: /dotnet/api/Microsoft.Azure.Management.ResourceGraph
-    - name: Kit SDK Azure pour .NET (NuGet)
-      href: 'https://www.nuget.org/packages/Microsoft.Azure.Management.ResourceGraph/'
-    - name: Kit de développement logiciel Microsoft Azure SDK pour Go
-      href: 'https://godoc.org/github.com/Azure/azure-sdk-for-go/services/resourcegraph/mgmt/2019-04-01/resourcegraph'
-    - name: Kit SDK Azure pour Java
-      href: /java/api/overview/azure/resourcegraph/management?view=azure-java-stable
-    - name: Kit SDK Azure pour Java (Maven)
-      href: 'https://search.maven.org/artifact/com.microsoft.azure.resourcegraph.v2019_04_01/azure-mgmt-resourcegraph/1.0.0-beta/jar'
-    - name: SDK Azure pour Node
-      href: /javascript/api/@azure/arm-resourcegraph
-    - name: Kit SDK Azure pour Python
-      href: /python/api/azure-mgmt-resourcegraph/azure.mgmt.resourcegraph
-    - name: Kit SDK Azure pour Ruby (Gem)
-      href: 'https://rubygems.org/gems/azure_mgmt_resourcegraph'
-    - name: REST
-      href: /rest/api/azure-resourcegraph/
-    - name: OpenAPI
-      href: 'https://github.com/Azure/azure-rest-api-specs/tree/master/specification/resourcegraph/resource-manager/Microsoft.ResourceGraph/stable/2019-04-01'
+    - name: Raccourcis clavier
+      href: ./reference/keyboard-shortcuts.md
+    - name: CLI et SDK
+      items:
+        - name: Azure CLI
+          href: /cli/azure/ext/resource-graph/graph
+        - name: Azure PowerShell
+          href: /powershell/module/az.resourcegraph/
+        - name: Kit SDK Azure pour .NET
+          href: /dotnet/api/Microsoft.Azure.Management.ResourceGraph
+        - name: Kit SDK Azure pour .NET (NuGet)
+          href: 'https://www.nuget.org/packages/Microsoft.Azure.Management.ResourceGraph/'
+        - name: Kit de développement logiciel Microsoft Azure SDK pour Go
+          href: 'https://godoc.org/github.com/Azure/azure-sdk-for-go/services/resourcegraph/mgmt/2019-04-01/resourcegraph'
+        - name: Kit SDK Azure pour Java
+          href: /java/api/overview/azure/resourcegraph/management
+        - name: Kit SDK Azure pour Java (Maven)
+          href: 'https://search.maven.org/artifact/com.microsoft.azure.resourcegraph.v2019_04_01/azure-mgmt-resourcegraph/1.0.0-beta/jar'
+        - name: Kit SDK Azure pour JavaScript
+          href: /javascript/api/@azure/arm-resourcegraph
+        - name: Kit SDK Azure pour Python
+          href: /python/api/azure-mgmt-resourcegraph/azure.mgmt.resourcegraph
+        - name: Kit SDK Azure pour Ruby (Gem)
+          href: 'https://rubygems.org/gems/azure_mgmt_resourcegraph'
+        - name: REST
+          href: /rest/api/azure-resourcegraph/
+        - name: OpenAPI
+          href: 'https://github.com/Azure/azure-rest-api-specs/tree/master/specification/resourcegraph/resource-manager/Microsoft.ResourceGraph/stable/2019-04-01'
     - name: Modèles Resource Manager
       href: /azure/templates/microsoft.resourcegraph/allversions
     - name: Tables et types de ressources Resource Graph

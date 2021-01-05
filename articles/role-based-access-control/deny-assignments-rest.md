@@ -11,16 +11,16 @@ ms.service: role-based-access-control
 ms.workload: multiple
 ms.tgt_pltfrm: rest-api
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 03/19/2020
 ms.author: rolyon
 ms.reviewer: bagovind
-ms.openlocfilehash: dae0352566e6cb4f8ed1384ca12213e2aaa07f9d
-ms.sourcegitcommit: 4499035f03e7a8fb40f5cff616eb01753b986278
+ms.openlocfilehash: 2f835c270930734bf9963a7c7c3168b873eddaf6
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/03/2020
-ms.locfileid: "82733868"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "84791909"
 ---
 # <a name="list-azure-deny-assignments-using-the-rest-api"></a>Lister les affectations de refus Azure avec l’API REST
 

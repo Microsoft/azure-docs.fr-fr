@@ -8,20 +8,27 @@ manager: nitinme
 ms.service: cognitive-services
 ms.subservice: bing-web-search
 ms.topic: quickstart
-ms.date: 12/09/2019
+ms.date: 05/22/2020
 ms.author: aahi
 ms.reviewer: nhoyadx@gmail.com, v-gedod, erhopf
 ms.custom: seodec2018
-ms.openlocfilehash: 589f7884f390ae57df4e946bcd34ca3bda629ed8
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.openlocfilehash: a4f13f7b01ffac1aa481f6b3d56b7ecd1cce3011
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "74978796"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96350583"
 ---
 # <a name="quickstart-search-the-web-using-the-bing-web-search-rest-api-and-go"></a>Démarrage rapide : Effectuer des recherches sur le web à l’aide de l’API REST Recherche Web Bing et de Go
 
-Utilisez ce guide de démarrage rapide pour effectuer votre premier appel à l’API Recherche Web Bing et recevoir la réponse JSON. Cette application Go envoie une requête de recherche à l’API et affiche la réponse. Bien que cette application soit écrite en Go, l’API est un service web RESTful compatible avec la plupart des langages de programmation.
+> [!WARNING]
+> Les API Recherche Bing passent de Cognitive Services aux services de recherche Bing. À compter du **30 octobre 2020**, toutes les nouvelles instances de Recherche Bing doivent être provisionnées en suivant le processus documenté [ici](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Les API Recherche Bing provisionnées à l’aide de Cognitive Services seront prises en charge les trois prochaines années ou jusqu’à la fin de votre Contrat Entreprise, selon la première éventualité.
+> Pour obtenir des instructions de migration, consultez [Services de recherche Bing](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+
+Utilisez ce guide de démarrage rapide pour effectuer votre premier appel à l’API Recherche Web Bing. Cette application Go envoie une requête de recherche à l’API et affiche la réponse JSON. Bien que cette application soit écrite en Go, l’API est un service web RESTful compatible avec la plupart des langages de programmation.
+
+ Les exemples de code de ce guide de démarrage rapide nécessitent uniquement des bibliothèques principales ; il n’existe aucune dépendance externe.  
 
 ## <a name="prerequisites"></a>Prérequis
 Voici quelques points dont vous aurez besoin avant d’exécuter ce démarrage rapide :
@@ -29,13 +36,11 @@ Voici quelques points dont vous aurez besoin avant d’exécuter ce démarrage r
 * [Binaires Go](https://golang.org/dl/)
 * Une clé d’abonnement
 
-Ce démarrage rapide nécessite uniquement des bibliothèques **principales**, il n’existe aucune dépendance externe.  
-
 [!INCLUDE [bing-web-search-quickstart-signup](../../../../includes/bing-web-search-quickstart-signup.md)]  
 
 ## <a name="create-a-project-and-import-core-libraries"></a>Créer un projet et importer les bibliothèques principales
 
-Créez un projet Go dans votre éditeur ou IDE favori. Puis importez `net/http` pour les requêtes, `ioutil` pour lire la réponse, `time` et `encoding/json` pour gérer le JSON, et `fmt` pour imprimer la sortie.
+Créez un projet Go dans votre éditeur ou IDE favori. Ensuite, importez `net/http` pour les requêtes, `ioutil` pour lire la réponse, `time` et `encoding/json` pour gérer le JSON, et `fmt` pour afficher la sortie.
 
 ```go
 package main
@@ -111,7 +116,13 @@ type BingAnswer struct {
 
 ## <a name="declare-the-main-function-and-define-variables"></a>Déclarer la fonction principale et définir des variables  
 
-Ce code déclare la fonction principale et définit les variables obligatoires. `endpoint` peut être le point de terminaison global ci-dessous, ou le point de terminaison de [sous-domaine personnalisé](../../../cognitive-services/cognitive-services-custom-subdomains.md) affiché dans le portail Azure pour votre ressource. Vérifiez que le point de terminaison est correct et remplacez la valeur `token` par une clé d’abonnement valide à partir de votre compte Azure. N’hésitez pas à personnaliser la requête de recherche en remplaçant la valeur de `searchTerm`.
+Ce code déclare la fonction principale et définit les variables obligatoires : 
+
+1. Pour la valeur `endpoint`, vous pouvez utiliser le point de terminaison global ci-dessous, ou le point de terminaison de [sous-domaine personnalisé](../../../cognitive-services/cognitive-services-custom-subdomains.md) affiché dans le portail Azure pour votre ressource. 
+
+2. Vérifiez que le point de terminaison est correct et remplacez la valeur `token` par une clé d’abonnement valide à partir de votre compte Azure. 
+ 
+3. Si vous le souhaitez, vous pouvez personnaliser la requête de recherche en remplaçant la valeur de `searchTerm`.
 
 ```go
 // Declare the main function. This is required for all Go programs.
@@ -170,7 +181,7 @@ if err != nil {
 
 ## <a name="handle-the-response"></a>Gérer la réponse
 
-Vous souvenez-vous de la structure que nous avons créée précédemment ? Nous allons l’utiliser pour mettre en forme la réponse et imprimer les résultats de la recherche.
+Utilisez le struct que nous avons créé pour mettre en forme la réponse et afficher les résultats de la recherche.
 
 ```go
 // Create a new answer.  
@@ -187,7 +198,7 @@ for _, result := range ans.WebPages.Value {
 
 ## <a name="put-it-all-together"></a>Assemblage
 
-La dernière étape consiste à valider votre code et à l’exécuter ! Si vous souhaitez comparer votre code avec le nôtre, voici le programme complet :
+La dernière étape consiste à valider votre code et à l’exécuter. Si vous souhaitez comparer votre code avec le nôtre, voici le programme complet :
 
 ```go
 package main
@@ -305,14 +316,13 @@ func main() {
 }
 ```
 
-## <a name="sample-response"></a>Exemple de réponse  
+## <a name="example-json-response"></a>Exemple de réponse JSON
 
-Les réponses à partir de l’API Recherche Web Bing sont retournées au format JSON. Cet exemple de réponse a été formaté à l’aide de la structure `BingAnswer` et affiche le `result.Name` et `result.URL`.
+Les réponses à partir de l’API Recherche Web Bing sont retournées au format JSON. Cet exemple de réponse a été mis en forme à l’aide du struct `BingAnswer` et affiche le `result.Name` et `result.URL`.
 
 ```go
 Microsoft Cognitive Services || https://www.microsoft.com/cognitive-services
 Cognitive Services | Microsoft Azure || https://azure.microsoft.com/services/cognitive-services/
-Cognitive Service Try experience | Microsoft Azure || https://azure.microsoft.com/try/cognitive-services/
 What is Microsoft Cognitive Services? | Microsoft Docs || https://docs.microsoft.com/azure/cognitive-services/Welcome
 Microsoft Cognitive Toolkit || https://www.microsoft.com/en-us/cognitive-toolkit/
 Microsoft Customers || https://customers.microsoft.com/en-us/search?sq=%22Microsoft%20Cognitive%20Services%22&ff=&p=0&so=story_publish_date%20desc
@@ -324,6 +334,6 @@ Cognitive Services - msdn.microsoft.com || https://msdn.microsoft.com/magazine/m
 ## <a name="next-steps"></a>Étapes suivantes
 
 > [!div class="nextstepaction"]
-> [Didacticiel sur l’application à page unique Recherche Web Bing](../tutorial-bing-web-search-single-page-app.md)
+> [Tutoriel sur l’application d’API Recherche Web Bing monopage](../tutorial-bing-web-search-single-page-app.md)
 
 [!INCLUDE [bing-web-search-quickstart-see-also](../../../../includes/bing-web-search-quickstart-see-also.md)]

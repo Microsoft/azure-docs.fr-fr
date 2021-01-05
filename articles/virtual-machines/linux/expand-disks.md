@@ -3,16 +3,16 @@ title: Développer des disques durs virtuels sur une machine virtuelle Linux
 description: Découvrez comment développer des disques durs virtuels sur une machine virtuelle Linux avec Azure CLI.
 author: roygara
 ms.service: virtual-machines-linux
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 10/15/2018
 ms.author: rogarana
 ms.subservice: disks
-ms.openlocfilehash: 1295c5276f0f342323acf8d86eaaf9f785af3e9f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: bbb959b6b1d71c81f7b920b3962f693716041e16
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78945181"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96016231"
 ---
 # <a name="expand-virtual-hard-disks-on-a-linux-vm-with-the-azure-cli"></a>Étendre des disques durs virtuels sur une machine virtuelle Linux avec Azure CLI
 
@@ -56,7 +56,7 @@ Dans les exemples ci-après, remplacez les exemples de nom de paramètre, tels q
     ```
 
     > [!NOTE]
-    > Lorsque vous étendez un disque managé, la taille mise à jour est arrondie à la taille de disque managé la plus proche. Pour obtenir un tableau des tailles et des niveaux de disques managés disponibles, consultez [Vue d’ensemble d’Azure Disques managés - Tarification et facturation](../windows/managed-disks-overview.md).
+    > Lorsque vous étendez un disque managé, la taille mise à jour est arrondie à la taille de disque managé la plus proche. Pour obtenir un tableau des tailles et des niveaux de disques managés disponibles, consultez [Vue d’ensemble d’Azure Disques managés - Tarification et facturation](../managed-disks-overview.md).
 
 1. Démarrez votre machine virtuelle avec [az vm start](/cli/azure/vm#az-vm-start). L’exemple suivant démarre la machine virtuelle nommée *myVM* dans le groupe de ressources nommé *myResourceGroup* :
 
@@ -71,7 +71,7 @@ Pour utiliser un disque étendu, étendez la partition et le système de fichier
 1. Établissez une connexion SSH à votre machine virtuelle à l’aide des informations d’identification appropriées. Vous pouvez visualiser l’adresse IP publique de votre machine virtuelle avec la commande [az vm show](/cli/azure/vm#az-vm-show) :
 
     ```azurecli
-    az vm show --resource-group myResourceGroup --name myVM -d --query [publicIps] --o tsv
+    az vm show --resource-group myResourceGroup --name myVM -d --query [publicIps] --output tsv
     ```
 
 1. Étendez la partition et le système de fichiers sous-jacents.

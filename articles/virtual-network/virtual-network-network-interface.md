@@ -5,20 +5,20 @@ description: Découvrez les interfaces réseau et apprenez à les créer, en mod
 services: virtual-network
 documentationcenter: na
 author: KumudD
-manager: twooley
+manager: mtillman
 ms.service: virtual-network
 ms.devlang: NA
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 1/22/2020
 ms.author: kumud
-ms.openlocfilehash: 69dc34c3989adee3af69613617368c29072a7650
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 99905e58cbcd9d0a5c5397aee125675a70e799fe
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82186099"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89657967"
 ---
 # <a name="create-change-or-delete-a-network-interface"></a>Créer, modifier ou supprimer une interface réseau
 
@@ -83,7 +83,7 @@ Vous pouvez afficher et modifier la plupart des paramètres d’une interface r�
 3. Les éléments suivants sont répertoriés pour l’interface réseau sélectionnée :
    - **Vue d’ensemble :** fournit des informations sur l’interface réseau, comme les adresses IP assignées, le réseau virtuel/sous-réseau auquel l’interface réseau est assignée, et la machine virtuelle à laquelle l’interface réseau est attachée (le cas échéant). L’illustration suivante montre les paramètres de vue d’ensemble d’une interface réseau nommée **mywebserver256** : ![Vue d’ensemble de l’interface réseau](./media/virtual-network-network-interface/nic-overview.png)
 
-     Vous pouvez déplacer une interface réseau vers un autre groupe de ressources ou abonnement en cliquant sur (**changer**) en regard du **Groupe de ressources** ou du **Nom d’abonnement**. Si vous déplacez l’interface réseau, vous devez également déplacer toutes les ressources liées à cette interface réseau. Par exemple, si l’interface réseau est attachée à une machine virtuelle, vous devez également déplacer la machine virtuelle et les autres ressources relatives à la machine virtuelle. Pour déplacer une interface réseau, consultez l’article [Déplacer des ressources vers un nouveau groupe de ressources ou un nouvel abonnement](../azure-resource-manager/management/move-resource-group-and-subscription.md?toc=%2fazure%2fvirtual-network%2ftoc.json#use-the-portal). Cet article répertorie les conditions préalables et explique comment déplacer des ressources à l’aide du portail Azure, de PowerShell ou d’Azure CLI.
+     Vous pouvez déplacer une interface réseau vers un autre groupe de ressources ou abonnement en cliquant sur (**changer**) en regard du **Groupe de ressources** ou du **Nom d’abonnement**. Si vous déplacez l’interface réseau vers un nouvel abonnement, vous devez également déplacer toutes les ressources liées à cette interface réseau. Par exemple, si l’interface réseau est attachée à une machine virtuelle, vous devez également déplacer la machine virtuelle et les autres ressources relatives à la machine virtuelle. Pour déplacer une interface réseau, consultez l’article [Déplacer des ressources vers un nouveau groupe de ressources ou un nouvel abonnement](../azure-resource-manager/management/move-resource-group-and-subscription.md?toc=%2fazure%2fvirtual-network%2ftoc.json#use-the-portal). Cet article répertorie les conditions préalables et explique comment déplacer des ressources à l’aide du portail Azure, de PowerShell ou d’Azure CLI.
    - **Configurations IP :** les adresses IPv4 et IPv6 publiques et privées, assignées à des configurations IP, sont listées ici. Si une adresse IPv6 est assignée à une configuration IP, l’adresse n’est pas affichée. Pour en savoir plus sur les configurations IP et pour apprendre à ajouter et supprimer des adresses IP, consultez l’article [Configurer des adresses IP pour une interface réseau Azure](virtual-network-network-interface-addresses.md). Le transfert IP et l’affectation de sous-réseau sont également configurés dans cette section. Pour en savoir plus sur ces paramètres, lisez les sections [Activer et désactiver le transfert IP](#enable-or-disable-ip-forwarding) et [Modifier l’affectation de sous-réseau](#change-subnet-assignment) de cet article.
    - **Serveurs DNS :** vous pouvez spécifier à quel serveur DNS une interface réseau est assignée par le biais des serveurs DHCP Azure. L’interface réseau peut hériter du paramètre provenant du réseau virtuel auquel l’interface réseau est assignée, ou présenter un paramètre personnalisé pour remplacer le paramètre du réseau virtuel auquel elle est assignée. Pour modifier le contenu affiché, consultez la section [Modifier les serveurs DNS](#change-dns-servers).
    - **Groupe de sécurité réseau :** indique le groupe de sécurité réseau (éventuel) associé à l’interface réseau. Un groupe de sécurité réseau contient des règles entrantes et sortantes pour filtrer le trafic réseau transitant par l’interface réseau. Si un groupe de sécurité réseau est associé à l’interface réseau, le nom du groupe de sécurité réseau associé s’affiche. Pour modifier ce qui est affiché, consultez [Associer ou dissocier un groupe de sécurité réseau](#associate-or-dissociate-a-network-security-group).

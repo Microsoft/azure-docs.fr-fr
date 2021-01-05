@@ -4,71 +4,75 @@ description: Découvrez comment utiliser la condition d’emplacement pour contr
 services: active-directory
 ms.service: active-directory
 ms.subservice: conditional-access
-ms.topic: article
-ms.workload: identity
-ms.date: 11/21/2019
+ms.topic: conceptual
+ms.date: 11/24/2020
 ms.author: joflore
 author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: calebb
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 915675af1e646f2cb77e36c0018ed372ff9496fc
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: contperf-fy20q4
+ms.openlocfilehash: b647b5ee9dbd7a0447bbb69a47db76685daa1102
+ms.sourcegitcommit: 3ea45bbda81be0a869274353e7f6a99e4b83afe2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79230777"
+ms.lasthandoff: 12/10/2020
+ms.locfileid: "97030193"
 ---
-# <a name="what-is-the-location-condition-in-azure-active-directory-conditional-access"></a>Qu’est-ce que la condition d’emplacement dans l’accès conditionnel Azure Active Directory ? 
+# <a name="using-the-location-condition-in-a-conditional-access-policy"></a>Utilisation de la condition d’emplacement dans une stratégie d’accès conditionnel 
 
-Avec l’[accès conditionnel Azure Active Directory (Azure AD)](../active-directory-conditional-access-azure-portal.md), vous pouvez contrôler la façon dont les utilisateurs autorisés peuvent accéder à vos applications cloud. La condition d’emplacement d’une stratégie d’accès conditionnel vous permet de lier des paramètres de contrôle d’accès aux emplacements réseau de vos utilisateurs.
+Comme expliqué dans [l’article de vue d’ensemble](overview.md), une stratégie d’accès conditionnel est à la base constituée d’une instruction de type « if-then » combinant des signaux, qui permet de prendre des décisions et d’appliquer les stratégies de l’organisation. L’un des signaux pouvant être inclus dans le processus de prise de décision est l’emplacement réseau.
 
-Cet article vous fournit les informations dont vous avez besoin pour configurer la condition d’emplacement.
+![Signal conditionnel conceptuel + Décision = Application](./media/location-condition/conditional-access-signal-decision-enforcement.png)
 
-## <a name="locations"></a>Emplacements
-
-Azure AD active l’authentification unique aux appareils, applications et des services depuis n’importe quel endroit sur l’Internet public. Avec la condition d’emplacement, vous pouvez contrôler l’accès à vos applications cloud basées sur l’emplacement réseau d’un utilisateur. Les cas d’utilisation courants de la condition d’emplacement sont :
+Les organisations peuvent utiliser cet emplacement réseau pour les tâches courantes, telles que : 
 
 - Exiger l’authentification multifacteur pour les utilisateurs accédant à un service lorsqu’ils sont en dehors du réseau d’entreprise.
 - Bloquer l’accès pour les utilisateurs accédant à un service à partir de pays ou régions spécifiques.
 
-Un emplacement correspond à une étiquette pour un emplacement réseau qui représente un emplacement nommé ou des adresses IP approuvées par une authentification multifacteur.
+L’emplacement réseau est déterminé par l’adresse IP publique fournie par le client à Azure Active Directory. Par défaut, les stratégies d’accès conditionnel s’appliquent à toutes les adresses IPv4 et IPv6. 
+
+> [!TIP]
+> Les plages d’adresses IPv6 sont uniquement prises en charge dans l’interface **[Emplacement nommé (préversion)](#preview-features)** . 
 
 ## <a name="named-locations"></a>Emplacements nommés
 
-Avec les emplacements nommés, vous pouvez créer des regroupements logiques de plages d’adresses IP ou de pays et régions.
+Les emplacements sont désignés dans le Portail Azure sous **Azure Active Directory** > **Sécurité** > **Accès conditionnel** > **Emplacements nommés**. Ces emplacements réseau nommés peuvent inclure les plages réseau du siège de l’organisation ou du VPN, ou les plages que vous souhaitez bloquer. 
 
-Vous pouvez accéder à vos emplacements nommés dans la section **Gérer** de la page d’accès conditionnel.
+![Emplacements nommés dans le Portail Azure](./media/location-condition/new-named-location.png)
 
-![Emplacements nommés dans l’accès conditionnel](./media/location-condition/02.png)
-
-Un emplacement nommé se compose des éléments suivants :
-
-![Créer un nouvel emplacement nommé](./media/location-condition/42.png)
-
-- **Nom** : nom complet d’un emplacement nommé.
-- **Plages d’adresses IP** : une ou plusieurs plages d’adresses IPv4 au format CIDR. La définition d’une plage d’adresses IPv6 n’est pas prise en charge.
-
-   > [!NOTE]
-   > Les plages d’adresses IPv6 ne peuvent actuellement pas être incluses dans un emplacement nommé. Elles ne peuvent donc pas non plus être exclues d’une stratégie d’accès conditionnel.
-
-- **Marquer comme emplacement approuvé** : indicateur que vous pouvez définir pour un emplacement nommé afin d’indiquer un emplacement approuvé. Les emplacements approuvés sont généralement des zones de réseau qui sont contrôlées par votre service informatique. En plus de l’accès conditionnel, les emplacements nommés approuvés sont également utilisés par les rapports de sécurité Azure Identity Protection et Azure AD afin de réduire les [faux positifs](../reports-monitoring/concept-risk-events.md#impossible-travel-to-atypical-locations-1).
-- **Pays/régions** : cette option vous permet de sélectionner un ou plusieurs pays ou régions pour définir un emplacement nommé.
-- **Inclure les zones inconnues** : certaines adresses IP ne sont pas mappées à un pays ou une région spécifique. Cette option vous permet de choisir si ces adresses IP doivent être incluses dans l’emplacement nommé. Utilisez ce paramètre lorsque la stratégie utilisant l’emplacement nommé doit s’appliquer à des emplacements inconnus.
+Pour configurer un emplacement, vous devez fournir au moins un **nom** et la plage d’adresses IP. 
 
 Le nombre d’emplacements nommés que vous pouvez configurer est limité par la taille de l’objet associé dans Azure AD. Vous pouvez configurer des emplacements selon les limitations suivantes :
 
-- Un emplacement nommé avec 1200 plages d’adresses IP maximum.
+- Un emplacement nommé avec 1 200 plages d’adresses IPv4 maximum.
 - Un maximum de 90 emplacements nommés avec une plage d’adresses IP assignée à chacun d’eux.
 
-La stratégie d’accès conditionnel s’applique au trafic IPv4 et IPv6. Actuellement, les emplacements nommés ne permettent pas la configuration des plages IPv6. Cette limitation entraîne les situations suivantes :
+> [!TIP]
+> Les plages d’adresses IPv6 sont uniquement prises en charge dans l’interface **[Emplacement nommé (préversion)](#preview-features)** . 
 
-- La stratégie d’accès conditionnel ne peut pas cibler des plages IPv6 spécifiques.
-- La stratégie d’accès conditionnel ne peut pas exclure des plages IPv6 spécifiques.
+### <a name="trusted-locations"></a>Emplacements approuvés
 
-Si une stratégie est configurée pour être appliquée à « N’importe quel emplacement », elle s’applique au trafic IPv4 et IPv6. Les emplacements nommés configurés pour des régions et des pays spécifiés prennent uniquement en charge les adresses IPv4. Le trafic IPv6 est uniquement inclus si l’option « Inclure les zones inconnues » est sélectionnée.
+Lors de la création d’un emplacement réseau, un administrateur a la possibilité de marquer un emplacement comme approuvé. 
 
-## <a name="trusted-ips"></a>Adresses IP approuvées
+![Emplacements approuvés dans le Portail Azure](./media/location-condition/new-trusted-location.png)
+
+Cette option peut être prise en compte dans les stratégies d’accès conditionnel dans lesquelles vous pouvez, par exemple, exiger l’inscription à des fins d’authentification multifacteur à partir d’un emplacement réseau approuvé. Elle est également incluse le calcul des risques liés à Azure AD Identity Protection, qui réduit le risque que présente la connexion d’un utilisateur lorsqu’elle provient d’un emplacement signalé comme approuvé.
+
+### <a name="countries-and-regions"></a>Pays et régions
+
+Certaines organisations peuvent choisir de définir les limites IP de régions ou pays entiers sous la forme d’emplacements nommés pour les stratégies d’accès conditionnel. Elles peuvent utiliser ces emplacements lors du blocage du trafic inutile, si elles sont certaines que les utilisateurs acceptés ne seront jamais issus d’un lieu tel que la Corée du Nord. Ces mappages d’adresses IP à des pays sont régulièrement mis à jour. 
+
+> [!NOTE]
+> Les plages d’adresses IPv6 ne peuvent pas être mappées à des pays. Seules les adresses IPv4 sont mappées à des pays.
+
+![Créer un emplacement basé sur le pays ou la région dans le Portail Azure](./media/location-condition/new-named-location-country-region.png)
+
+#### <a name="include-unknown-areas"></a>Inclure les zones inconnues
+
+Certaines adresses IP ne sont pas mappées à un pays ou une région spécifique, notamment toutes les adresses IPv6. Pour capturer ces emplacements d’adresses IP, cochez la case **Inclure les zones inconnues** lors de la définition d’un emplacement. Cette option vous permet de choisir si ces adresses IP doivent être incluses dans l’emplacement nommé. Utilisez ce paramètre lorsque la stratégie utilisant l’emplacement nommé doit s’appliquer à des emplacements inconnus.
+
+### <a name="configure-mfa-trusted-ips"></a>Configurer des adresses IP approuvées MFA
 
 Vous pouvez également configurer des plages d’adresses IP représentant l’intranet local de votre organisation dans les [paramètres du service d’authentification multifacteur](https://account.activedirectory.windowsazure.com/usermanagement/mfasettings.aspx). Cette fonctionnalité vous permet de configurer jusqu’à 50 plages d’adresses IP. Les plages d’adresses IP sont au format CIDR. Pour plus d’informations, consultez [Adresses IP approuvées](../authentication/howto-mfa-mfasettings.md#trusted-ips).  
 
@@ -83,19 +87,44 @@ Après avoir activé cette option, qui inclut l’emplacement nommé, les **Adre
 Pour les applications mobiles et de bureau avec des durées de session active longues, l’accès conditionnel est réévalué régulièrement. La valeur par défaut est une fois une heure. Lorsque la revendication de réseau d’entreprise interne n’est émise qu’au moment de l’authentification initiale, Azure AD peut ne pas contenir de liste de plages d’adresses IP approuvées. Dans ce cas, il est plus difficile de déterminer si l’utilisateur est toujours sur le réseau d’entreprise :
 
 1. Vérifiez si l’adresse IP de l’utilisateur se trouve dans l’une des plages d’adresses IP approuvées.
-2. Vérifiez si les trois premiers octets de l’adresse IP de l’utilisateur correspondent aux trois premiers octets de l’adresse IP de l’authentification initiale. L’adresse IP est comparée à l’authentification initiale lorsque la revendication de réseau d’entreprise interne a été émise à l’origine et que l’emplacement de l’utilisateur a été validé.
+1. Vérifiez si les trois premiers octets de l’adresse IP de l’utilisateur correspondent aux trois premiers octets de l’adresse IP de l’authentification initiale. L’adresse IP est comparée à l’authentification initiale lorsque la revendication de réseau d’entreprise interne a été émise à l’origine et que l’emplacement de l’utilisateur a été validé.
 
 Si les deux étapes échouent, un utilisateur est considéré comme n’étant plus sur une adresse IP approuvée.
 
-## <a name="location-condition-configuration"></a>Configuration de la condition d’emplacement
+## <a name="preview-features"></a>Fonctionnalités de préversion
+
+En plus de la fonctionnalité d’emplacement nommé généralement disponible, il existe également un emplacement nommé en préversion. Vous pouvez accéder à la préversion de l’emplacement nommé à l’aide de la bannière située en haut du panneau de l’emplacement nommé actuel.
+
+![Essayer la préversion de l’emplacement nommé](./media/location-condition/preview-features.png)
+
+Avec la préversion de l’emplacement nommé, vous pouvez :
+
+- Configurer jusqu’à 195 emplacements nommés
+- Configurer jusqu’à 2 000 plages d’adresses IP par emplacement nommé
+- Configurer des adresses IPv6 avec des adresses IPv4
+
+Nous avons également ajouté des vérifications supplémentaires pour aider à limiter les changements suite à une configuration incorrecte.
+
+- Les plages d’adresses IP privées ne peuvent plus être configurées.
+- Le nombre d’adresses IP pouvant être incluses dans une plage est limité. Seuls les masques CIDR supérieurs à /8 sont autorisés lors de la configuration d’une plage d’adresses IP.
+
+Avec la préversion, il existe désormais deux options de création : 
+
+- **Emplacement des pays**
+- **Emplacement des plages d’adresses IP**
+
+> [!NOTE]
+> Les plages d’adresses IPv6 ne peuvent pas être mappées à des pays. Seules les adresses IPv4 sont mappées à des pays.
+
+![Interface d’emplacement nommé en préversion](./media/location-condition/named-location-preview.png)
+
+## <a name="location-condition-in-policy"></a>Condition d’emplacement dans une stratégie
 
 Lorsque vous configurez la condition d’emplacement, vous avez la possibilité de faire la distinction entre :
 
 - N’importe quel emplacement
 - Tous les emplacements approuvés
 - Des emplacements sélectionnés
-
-![Configuration de la condition d’emplacement](./media/location-condition/01.png)
 
 ### <a name="any-location"></a>N’importe quel emplacement
 
@@ -111,6 +140,30 @@ Cette option s’applique à :
 ### <a name="selected-locations"></a>Des emplacements sélectionnés
 
 Avec cette option, vous pouvez sélectionner un ou plusieurs emplacements nommés. Pour une stratégie avec ce paramètre à appliquer, un utilisateur doit se connecter à partir de l’un des emplacements sélectionnés. Lorsque vous cliquez sur **Sélectionner**, le contrôle de sélection du réseau nommé qui affiche la liste des réseaux nommés s’ouvre. La liste indique également si l’emplacement réseau a été marqué comme approuvé. L’emplacement nommé appelé **Adresses IP approuvées MFA** est utilisé pour inclure les paramètres IP pouvant être configurés dans la page des paramètres du service d’authentification multifacteur.
+
+## <a name="ipv6-traffic"></a>Trafic IPv6
+
+Par défaut, les stratégies d’accès conditionnel s’appliquent à tout le trafic IPv6. Avec la [préversion d’emplacement nommé](#preview-features), vous pouvez exclure des plages d’adresses IPv6 spécifiques d’une stratégie d’accès conditionnel. Cette option est utile dans les cas où vous ne souhaitez pas que la stratégie soit appliquée pour des plages IPv6 spécifiques. Par exemple, si vous ne souhaitez pas appliquer une stratégie pour les utilisations sur votre réseau d’entreprise et que votre réseau d’entreprise est hébergé sur des plages IPv6 publiques.  
+
+### <a name="when-will-my-tenant-have-ipv6-traffic"></a>Quand mon locataire aura-t-il un trafic IPv6 ?
+
+Actuellement, Azure Active Directory (Azure AD) ne prend pas en charge les connexions réseau directes qui utilisent IPv6. Toutefois, dans certains cas, le trafic d’authentification est transféré par proxy via un autre service. Dans ces cas, l’adresse IPv6 est utilisée lors de l’évaluation de la stratégie.
+
+La majeure partie du trafic IPv6 qui est transférée par proxy à Azure AD provient de Microsoft Exchange Online. Lorsqu’elles sont disponibles, Exchange privilégie les connexions IPv6. **Par conséquent, si vous avez des stratégies d’accès conditionnel pour Exchange, qui ont été configurées pour des plages IPv4 spécifiques, vous devez vous assurer que vous avez également ajouté les plages IPv6 de votre organisation.** Si vous n’incluez pas de plages IPv6, vous risquez de provoquer un comportement inattendu pour les deux cas suivants :
+
+- Lorsqu’un client de messagerie est utilisé pour se connecter à Exchange Online avec l’authentification héritée, Azure AD peut recevoir une adresse IPv6. La demande d’authentification initiale est envoyée à Exchange et est ensuite transmise par proxy à Azure AD.
+- Quand Outlook Web Access (OWA) est utilisé dans le navigateur, il vérifie périodiquement que toutes les stratégies d’accès conditionnel sont toujours respectées. Cette vérification permet d’intercepter les cas où un utilisateur est passé d’une adresse IP autorisée à un nouvel emplacement, comme un café en ville. Dans ce cas, si une adresse IPv6 est utilisée et si l’adresse IPv6 n’est pas dans une plage configurée, il se peut que la session de l’utilisateur soit interrompue et redirigée vers Azure AD pour une nouvelle authentification. 
+
+Il s’agit des raisons les plus courantes pour lesquelles vous devrez peut-être configurer des plages IPv6 dans vos emplacements nommés. En outre, si vous utilisez des réseaux virtuels Azure, vous recevrez du trafic provenant d’une adresse IPv6. Si le trafic du réseau virtuel est bloqué par une stratégie d’accès conditionnel, vérifiez votre journal des connexions Azure AD. Une fois que vous avez identifié le trafic, vous pouvez obtenir l’adresse IPv6 utilisée et l’exclure de votre stratégie. 
+
+> [!NOTE]
+> Si vous souhaitez spécifier une plage CIDR IP pour une seule adresse, appliquez le masque de bits /128. Si vous indiquez que l’adresse IPv6 est 2607:fb90:b27a:6f69:f8d5:dea0:fb39:74a et si vous souhaitez exclure cette adresse unique en tant que plage, utilisez 2607:fb90:b27a:6f69:f8d5:dea0:fb39:74a/128.
+
+### <a name="identifying-ipv6-traffic-in-the-azure-ad-sign-in-activity-reports"></a>Identification du trafic IPv6 dans les rapports d’activité de connexion Azure AD
+
+Vous pouvez découvrir le trafic IPv6 dans votre locataire en accédant aux [rapports d’activité de connexion Azure AD](../reports-monitoring/concept-sign-ins.md). Une fois le rapport d’activité ouvert, ajoutez la colonne « Adresse IP ». Cette colonne vous permettra d’identifier le trafic IPv6.
+
+Vous pouvez également trouver l’adresse IP du client en cliquant sur une ligne du rapport, puis en accédant à l’onglet « Emplacement » dans les détails de l’activité de connexion. 
 
 ## <a name="what-you-should-know"></a>Ce que vous devez savoir
 
@@ -129,24 +182,21 @@ Par défaut, Azure AD émet un jeton toutes les heures. Après une sortie du ré
 
 L’adresse IP qui est utilisée dans l’évaluation de la stratégie correspond à l’adresse IP publique de l’utilisateur. Pour les appareils sur un réseau privé, il ne s’agit pas de l’adresse IP cliente de l’appareil de l’utilisateur sur l’intranet ; il s’agit de l’adresse utilisée par le réseau pour se connecter à l’Internet public.
 
-> [!WARNING]
-> Si votre appareil ne dispose que d’une adresse IPv6, la configuration de la condition de l’emplacement n’est pas prise en charge.
-
 ### <a name="bulk-uploading-and-downloading-of-named-locations"></a>Chargement et téléchargement en bloc d’emplacements nommés
 
-Lorsque vous créez ou mettez à jour des emplacements nommés, pour effectuer des mises à jour en bloc, vous pouvez charger ou télécharger un fichier CSV contenant les plages d’adresses IP. Un chargement remplace les plages d’adresses IP de la liste par celles du fichier. Chaque ligne du fichier contient une plage d’adresses IP au format CIDR.
+Lorsque vous créez ou mettez à jour des emplacements nommés, pour effectuer des mises à jour en bloc, vous pouvez charger ou télécharger un fichier CSV contenant les plages d’adresses IP. Un chargement permet de remplacer les plages d’adresses IP de la liste par celles du fichier. Chaque ligne du fichier contient une plage d’adresses IP au format CIDR.
 
 ### <a name="cloud-proxies-and-vpns"></a>Proxies cloud et réseaux privés virtuels
 
 Lorsque vous utilisez un proxy hébergé dans le cloud ou une solution VPN, l’adresse IP Azure AD utilisée pendant l’évaluation d’une stratégie correspond à l’adresse IP du proxy. L’en-tête X-Forwarded-For (XFF) qui contient l’adresse IP publique de l’utilisateur n’est pas utilisé car il n’existe aucune validation provenant d’une source approuvée, il pourrait donc permettre de falsifier une adresse IP.
 
-Lorsqu’un proxy cloud est disponible, une stratégie utilisée pour exiger un appareil joint à un domaine peut être utilisée, ou la revendication de réseau d’entreprise interne à partir d’AD FS.
+Lorsqu’un proxy cloud est disponible, une stratégie utilisée pour exiger un appareil joint Azure AD hybride peut être utilisée, ou la revendication de réseau d’entreprise interne à partir d’AD FS.
 
 ### <a name="api-support-and-powershell"></a>Prise en charge des API et PowerShell
 
-Les API et PowerShell ne sont pas encore pris en charge pour les emplacements nommés, ou pour les stratégies d’accès conditionnel.
+Une version préliminaire de l’API Graph pour les emplacements nommés est disponible. pour plus d’informations, consultez [API namedLocation](/graph/api/resources/namedlocation?view=graph-rest-beta).
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- Pour savoir comment configurer une stratégie d’accès conditionnel, voir [Exiger une authentification multifacteur (MFA) pour des applications spécifiques disposant d’un accès conditionnel Azure Active Directory](app-based-mfa.md).
-- Si vous êtes prêt à configurer des stratégies d’accès conditionnel pour votre environnement, consultez les [meilleures pratiques pour l’accès conditionnel dans Azure Active Directory](best-practices.md).
+- Pour savoir comment configurer une stratégie d’accès conditionnel, consultez l’article [Création d’une stratégie d’accès conditionnel](concept-conditional-access-policies.md).
+- Vous recherchez un exemple de stratégie utilisant la condition d’emplacement ? Consultez l’article [Accès conditionnel : Bloquer l’accès par emplacement](howto-conditional-access-policy-location.md).

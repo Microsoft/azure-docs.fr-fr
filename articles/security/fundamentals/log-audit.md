@@ -15,12 +15,12 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 10/31/2019
 ms.author: terrylan
-ms.openlocfilehash: bd0f42507e22559690e2682a391c53b9c090aa6c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 79c15f2df82125f20dcfaf9992d9047b632c253d
+ms.sourcegitcommit: 17b36b13857f573639d19d2afb6f2aca74ae56c1
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75750791"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94412797"
 ---
 # <a name="azure-security-logging-and-auditing"></a>Journal de sécurité et audit Azure
 
@@ -42,7 +42,7 @@ Les journaux d’activité Azure sont classés par type :
 
 * Les **journaux de plan de données** fournissent des informations sur les événements déclenchés lors de l’utilisation des ressources Azure. Il s’agit par exemple des journaux d’activité du système d’événements, de la sécurité et des applications Windows dans une machine virtuelle, et des [journaux de diagnostic](../../azure-monitor/platform/platform-logs-overview.md) qui sont configurés via Azure Monitor.
 
-* Les **événements traités** fournissent des informations sur les événements/alertes analysés en votre nom. Les alertes [Azure Security Center](../../security-center/security-center-managing-and-responding-alerts.md) en sont un exemple, où [Azure Security Center](../../security-center/security-center-intro.md) a traité et analysé votre abonnement et fournit des alertes de sécurité très concises.
+* Les **événements traités** fournissent des informations sur les événements/alertes analysés en votre nom. Les alertes [Azure Security Center](../../security-center/security-center-managing-and-responding-alerts.md) en sont un exemple, où [Azure Security Center](../../security-center/security-center-introduction.md) a traité et analysé votre abonnement et fournit des alertes de sécurité très concises.
 
 Le tableau suivant liste les principaux types de journaux d’activité disponibles dans Azure :
 
@@ -50,15 +50,15 @@ Le tableau suivant liste les principaux types de journaux d’activité disponib
 | ------------ | -------- | ------ | ----------- |
 |[Journaux d’activité](../../azure-monitor/platform/platform-logs-overview.md)|Événements de plan de contrôle sur les ressources d’Azure Resource Manager|  Fournissent des informations sur les opérations qui ont été effectuées sur les ressources de votre abonnement.|    API Rest, [Azure Monitor](../../azure-monitor/platform/platform-logs-overview.md)|
 |[Journaux de ressources Azure](../../azure-monitor/platform/platform-logs-overview.md)|Données fréquentes sur les opérations des ressources Azure Resource Manager de l’abonnement|   Fournissent des insights sur les opérations que votre ressource réalise elle-même.| Azure Monitor|
-|[Compte-rendu Azure Active Directory](../../active-directory/reports-monitoring/overview-reports.md)|Journaux d’activité et rapports | Signalent les activités de connexion des utilisateurs et fournissent des informations sur l’activité système relative à la gestion des utilisateurs et des groupes.|[API Graph](../../active-directory/develop/active-directory-graph-api-quickstart.md)|
-|[Machines virtuelles et services cloud](../../azure-monitor/learn/quick-collect-azurevm.md)|Service du journal des événements Windows et Syslog Linux|  Capture les données système et les données de journalisation sur les machines virtuelles, puis les transfère vers un compte de stockage de votre choix.|   Windows (avec le stockage Diagnostics Azure pour Windows [[WAD](../../monitoring-and-diagnostics/azure-diagnostics.md)]) et Linux dans Azure Monitor|
-|[Azure Storage Analytics](https://docs.microsoft.com/rest/api/storageservices/fileservices/storage-analytics)|Journalisation du stockage, fournit les données de métriques d’un compte de stockage|Fournit des informations sur les demandes de trace, analyse les tendances d’utilisation et diagnostique les problèmes de votre compte de stockage.|   API REST ou [bibliothèque cliente](https://msdn.microsoft.com/library/azure/mt347887.aspx)|
+|[Compte-rendu Azure Active Directory](../../active-directory/reports-monitoring/overview-reports.md)|Journaux d’activité et rapports | Signalent les activités de connexion des utilisateurs et fournissent des informations sur l’activité système relative à la gestion des utilisateurs et des groupes.|[API Graph](../../active-directory/develop/microsoft-graph-intro.md)|
+|[Machines virtuelles et services cloud](../../azure-monitor/learn/quick-collect-azurevm.md)|Service du journal des événements Windows et Syslog Linux|  Capture les données système et les données de journalisation sur les machines virtuelles, puis les transfère vers un compte de stockage de votre choix.|   Windows (avec le stockage Diagnostics Azure pour Windows [[WAD](../../azure-monitor/platform/diagnostics-extension-overview.md)]) et Linux dans Azure Monitor|
+|[Azure Storage Analytics](/rest/api/storageservices/fileservices/storage-analytics)|Journalisation du stockage, fournit les données de métriques d’un compte de stockage|Fournit des informations sur les demandes de trace, analyse les tendances d’utilisation et diagnostique les problèmes de votre compte de stockage.| API REST ou [bibliothèque cliente](/dotnet/api/overview/azure/storage)|
 |[Journaux de flux du groupe de sécurité réseau (NSG)](../../network-watcher/network-watcher-nsg-flow-logging-overview.md)|Format JSON, affiche les flux entrants et sortants, par règle|Affiche des informations sur le trafic IP entrant et sortant via un groupe de sécurité réseau.|[Azure Network Watcher](../../network-watcher/network-watcher-monitoring-overview.md)|
 |[Application Insights](../../azure-monitor/app/app-insights-overview.md)|Journaux d’activité, exceptions et diagnostics personnalisés|  Fournit un service de monitoring des performances de l’application (APM) aux développeurs web sur de nombreuses plateformes.| API REST, [Power BI](https://powerbi.microsoft.com/documentation/powerbi-azure-and-power-bi/)|
-|[Traitement des données/alertes de sécurité](../../security-center/security-center-intro.md)|  Alertes Azure Security Center, alertes de journaux Azure Monitor|    Fournit des alertes et des informations sur la sécurité.|  API REST, JSON|
+|[Traitement des données/alertes de sécurité](../../security-center/security-center-introduction.md)|   Alertes Azure Security Center, alertes de journaux Azure Monitor|    Fournit des alertes et des informations sur la sécurité.|  API REST, JSON|
 
 ## <a name="log-integration-with-on-premises-siem-systems"></a>Intégration des journaux avec les systèmes SIEM locaux
-[Intégration des alertes Security Center](../../security-center/security-center-export-data-to-siem.md) indique comment synchroniser des alertes Security Center, les événements de sécurité des machines virtuelles collectés par les journaux de diagnostic Azure et les journaux d’audit Azure avec votre solution SIEM ou vos journaux d’activité Azure Monitor.
+[Intégration des alertes Security Center](../../security-center/security-center-partner-integration.md) indique comment synchroniser des alertes Security Center, les événements de sécurité des machines virtuelles collectés par les journaux de diagnostic Azure et les journaux d’audit Azure avec votre solution SIEM ou vos journaux d’activité Azure Monitor.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
@@ -68,4 +68,4 @@ Le tableau suivant liste les principaux types de journaux d’activité disponib
 
 - [Configurer les paramètres d’audit pour une collection de sites](https://support.office.com/article/Configure-audit-settings-for-a-site-collection-A9920C97-38C0-44F2-8BCB-4CF1E2AE22D2?ui=&rs=&ad=US) : si vous administrez une collection de sites, récupérez l’historique des actions de chaque utilisateur et l’historique des actions réalisées pendant une période donnée.
 
-- [Effectuer des recherches dans le journal d’audit dans le Centre de sécurité et de conformité Office 365](https://support.office.com/article/Search-the-audit-log-in-the-Office-365-Security-Compliance-Center-0d4d0f35-390b-4518-800e-0c7ec95e946c?ui=&rs=&ad=US) : utilisez le Centre de sécurité et de conformité Office 365 pour effectuer des recherches dans le journal d’audit unifié et afficher les activités utilisateur et administrateur effectuées dans votre organisation Office 365.
+- [Recherchez le journal d’audit dans le Centre de sécurité Microsoft 365](/microsoft-365/compliance/search-the-audit-log-in-security-and-compliance) : utilisez le Centre de sécurité Microsoft 365 pour effectuer des recherches dans le journal d’audit unifié et afficher les activités utilisateur et administrateur effectuées dans votre organisation.

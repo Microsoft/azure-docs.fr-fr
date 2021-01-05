@@ -17,12 +17,12 @@ ms.date: 05/13/2019
 ms.author: markvi
 ms.reviewer: dhanyahk
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 6d031546bb4f1f05e9ea2abb5b74fe911b0b507f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 0498ee1c57cfa661884fe3209d4e089b54996fae
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74007703"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89231059"
 ---
 # <a name="azure-active-directory-reporting-latencies"></a>Latences de création de rapports Azure Active Directory
 
@@ -54,8 +54,8 @@ Si vous avez déjà des données d'activités avec votre licence gratuite, vous 
 
 Il existe deux types de rapports de sécurité :
 
-- [Connexions risquées](concept-risky-sign-ins.md) : une connexion risquée est une tentative de connexion susceptible de provenir d’un utilisateur autre que le propriétaire légitime d’un compte d’utilisateur. 
-- [Utilisateurs avec indicateur de risque](concept-user-at-risk.md) : il s’agit d’un compte d’utilisateur susceptible d’être compromis. 
+- [Connexions risquées](../identity-protection/overview-identity-protection.md) : une connexion risquée est une tentative de connexion susceptible de provenir d’un utilisateur autre que le propriétaire légitime d’un compte d’utilisateur. 
+- [Utilisateurs avec indicateur de risque](../identity-protection/overview-identity-protection.md) : il s’agit d’un compte d’utilisateur susceptible d’être compromis. 
 
 Le tableau suivant répertorie les informations de latence pour les rapports de sécurité.
 
@@ -84,4 +84,4 @@ Le tableau suivant répertorie les informations de latence pour les détections 
 
 * [Vue d’ensemble des rapports Azure AD](overview-reports.md)
 * [Accès par programmation aux rapports Azure AD](concept-reporting-api.md)
-* [Détections de risques dans Azure Active Directory](concept-risk-events.md)
+* [Détections de risques dans Azure Active Directory](../identity-protection/overview-identity-protection.md)

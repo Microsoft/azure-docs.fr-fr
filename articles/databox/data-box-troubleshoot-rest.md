@@ -5,15 +5,15 @@ services: databox
 author: alkohli
 ms.service: databox
 ms.subservice: disk
-ms.topic: article
+ms.topic: troubleshooting
 ms.date: 04/19/2019
 ms.author: alkohli
-ms.openlocfilehash: 7fe5afbc4984c430cbf393e4e2b44122bdd43983
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: b950f80ba8c2bdbaf7a515dc1ce127b934723177
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80297126"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85558565"
 ---
 # <a name="troubleshoot-issues-related-to-azure-data-box-blob-storage"></a>Résoudre les problèmes liés au Stockage Blob Azure Data Box
 
@@ -35,8 +35,8 @@ Cette section détaille certains des problèmes rencontrés lors de l’utilisat
 
 |Message d’erreur  |Action recommandée |
 |---------|---------|
-|La commande AzCopy semble bloquée pendant une minute avant d’afficher cette erreur : <br>Failed to enumerate directory https://… (Échec de l’énumération du répertoire https://...) Impossible de résoudre le nom distant `<accountname>.blob.<serialnumber>.microsoftdatabox.com`|Vérifiez que le nom de point de terminaison `<accountname>.blob.<serialnumber>.microsoftdatabox.com` est ajouté au fichier hosts sur : `C:\Windows\System32\drivers\etc\hosts`.|
-|La commande AzCopy semble bloquée pendant une minute avant d’afficher cette erreur : <br>Error parsing source location. (Erreur d’analyse de l’emplacement source.) Le serveur a clos la connexion sous-jacente : Impossible d’établir une relation de confiance pour le canal sécurisé SSL/TLS.|Importez le certificat TLS/SSL pour votre appareil dans le magasin de certificats du système. Pour plus d’informations, consultez [Télécharger le certificat](data-box-deploy-copy-data-via-rest.md#download-certificate).|
+|La commande AzCopy semble ne plus répondre pendant une minute avant d’afficher cette erreur : <br>Failed to enumerate directory https://… (Échec de l’énumération du répertoire https://...) Impossible de résoudre le nom distant `<accountname>.blob.<serialnumber>.microsoftdatabox.com`|Vérifiez que le nom de point de terminaison `<accountname>.blob.<serialnumber>.microsoftdatabox.com` est ajouté au fichier hosts sur : `C:\Windows\System32\drivers\etc\hosts`.|
+|La commande AzCopy semble ne plus répondre pendant une minute avant d’afficher cette erreur : <br>Error parsing source location. (Erreur d’analyse de l’emplacement source.) Le serveur a clos la connexion sous-jacente : Impossible d’établir une relation de confiance pour le canal sécurisé SSL/TLS.|Importez le certificat TLS/SSL pour votre appareil dans le magasin de certificats du système. Pour plus d’informations, consultez [Télécharger le certificat](data-box-deploy-copy-data-via-rest.md#download-certificate).|
 
 
 ## <a name="errors-seen-in-azcopy-for-linux"></a>Erreurs rencontrées dans AzCopy pour Linux
@@ -45,8 +45,8 @@ Cette section détaille certains des problèmes rencontrés lors de l’utilisat
 
 |Message d’erreur  |Action recommandée |
 |---------|---------|
-|La commande AzCopy semble bloquée pendant 20 minutes avant d’afficher cette erreur : <br>Error parsing source location `https://<accountname>.blob.<serialnumber>.microsoftdatabox.com/<cntnr>`. (Erreur d’analyse de l’emplacement source.) Aucun périphérique ou adresse correspondant|Vérifiez que le nom de point de terminaison `<accountname>.blob.<serialnumber>.microsoftdatabox.com` est ajouté au fichier hosts sur : `/etc/hosts`.|
-|La commande AzCopy semble bloquée pendant 20 minutes avant d’afficher cette erreur : <br>Error parsing source location... (Erreur d’analyse de l’emplacement source...) The SSL connection could not be established (La connexion SSL n’a pas pu être établie.)|Importez le certificat TLS/SSL pour votre appareil dans le magasin de certificats du système. Pour plus d’informations, consultez [Télécharger le certificat](data-box-deploy-copy-data-via-rest.md#download-certificate).|
+|La commande AzCopy semble ne plus répondre pendant 20 minutes avant d’afficher cette erreur : <br>Error parsing source location `https://<accountname>.blob.<serialnumber>.microsoftdatabox.com/<cntnr>`. (Erreur d’analyse de l’emplacement source.) Aucun périphérique ou adresse correspondant|Vérifiez que le nom de point de terminaison `<accountname>.blob.<serialnumber>.microsoftdatabox.com` est ajouté au fichier hosts sur : `/etc/hosts`.|
+|La commande AzCopy semble ne plus répondre pendant 20 minutes avant d’afficher cette erreur : <br>Error parsing source location... (Erreur d’analyse de l’emplacement source...) The SSL connection could not be established (La connexion SSL n’a pas pu être établie.)|Importez le certificat TLS/SSL pour votre appareil dans le magasin de certificats du système. Pour plus d’informations, consultez [Télécharger le certificat](data-box-deploy-copy-data-via-rest.md#download-certificate).|
 
 ## <a name="errors-seen-in-azure-storage-library-for-python"></a>Erreurs rencontrées dans la bibliothèque de Stockage Azure pour Python
 

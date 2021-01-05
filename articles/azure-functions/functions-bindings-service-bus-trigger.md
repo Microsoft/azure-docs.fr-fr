@@ -1,23 +1,24 @@
 ---
-title: Liaisons Azure Service Bus pour Azure Functions
+title: Déclencheur Azure Service Bus pour Azure Functions
 description: Apprenez à exécuter une fonction Azure lorsque des messages Azure Service Bus sont créés.
 author: craigshoemaker
 ms.assetid: daedacf0-6546-4355-a65c-50873e74f66b
 ms.topic: reference
 ms.date: 02/19/2020
 ms.author: cshoe
-ms.openlocfilehash: b5e7f1b70aca50b4e42d056beb0b17795430091c
-ms.sourcegitcommit: 366e95d58d5311ca4b62e6d0b2b47549e06a0d6d
+ms.custom: devx-track-csharp, devx-track-python
+ms.openlocfilehash: cd0b73dd22e5e2cab720bb1a33e58e25e517b1f6
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82690703"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90605013"
 ---
 # <a name="azure-service-bus-trigger-for-azure-functions"></a>Déclencheur Azure Service Bus pour Azure Functions
 
 Utilisez le déclencheur Service Bus pour répondre aux messages provenant d'une file d’attente ou d'une rubrique Service Bus. À partir de la version d’extension 3.1.0, vous pouvez déclencher une file d’attente ou une rubrique activée par une session.
 
-Pour plus d’informations sur les détails d’installation et de configuration, consultez la [vue d’ensemble](functions-bindings-service-bus-output.md).
+Pour plus d’informations sur les détails d’installation et de configuration, consultez la [vue d’ensemble](functions-bindings-service-bus.md).
 
 ## <a name="example"></a>Exemple
 
@@ -161,6 +162,7 @@ def main(msg: func.ServiceBusMessage):
         'time_to_live': msg.time_to_live,
         'to': msg.to,
         'user_properties': msg.user_properties,
+        'metadata' : msg.metadata
     })
 
     logging.info(result)
@@ -311,9 +313,10 @@ Les types de paramètres suivants sont disponibles pour le message de la file d�
 * `string` -Si le message est un texte.
 * `byte[]` - Utile pour les données binaires.
 * Un type personnalisé - Si le message contient JSON, Azure Functions essaie de désérialiser les données JSON.
-* `BrokeredMessage` - Vous donne le message désérialisé avec la méthode [BrokeredMessage.GetBody\<](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.brokeredmessage.getbody?view=azure-dotnet#Microsoft_ServiceBus_Messaging_BrokeredMessage_GetBody__1).
+* `BrokeredMessage` - Vous donne le message désérialisé avec la méthode [BrokeredMessage.GetBody\<T>()](/dotnet/api/microsoft.servicebus.messaging.brokeredmessage.getbody?view=azure-dotnet#Microsoft_ServiceBus_Messaging_BrokeredMessage_GetBody__1).
+* [`MessageReceiver`](/dotnet/api/microsoft.azure.servicebus.core.messagereceiver?view=azure-dotnet) - Utilisé pour recevoir et accuser réception des messages du conteneur de messages (requis lorsque [`autoComplete`](functions-bindings-service-bus-output.md#hostjson-settings) est défini sur `false`)
 
-Ces types de paramètres concernent Azure Functions version 1.x. Pour les versions 2.x et ultérieures, utilisez [`Message`](https://docs.microsoft.com/dotnet/api/microsoft.azure.servicebus.message) au lieu de `BrokeredMessage`.
+Ces types de paramètres concernent Azure Functions version 1.x. Pour les versions 2.x et ultérieures, utilisez [`Message`](/dotnet/api/microsoft.azure.servicebus.message) au lieu de `BrokeredMessage`.
 
 # <a name="c-script"></a>[Script C#](#tab/csharp-script)
 
@@ -322,9 +325,9 @@ Les types de paramètres suivants sont disponibles pour le message de la file d�
 * `string` -Si le message est un texte.
 * `byte[]` - Utile pour les données binaires.
 * Un type personnalisé - Si le message contient JSON, Azure Functions essaie de désérialiser les données JSON.
-* `BrokeredMessage` - Vous donne le message désérialisé avec la méthode [BrokeredMessage.GetBody\<](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.brokeredmessage.getbody?view=azure-dotnet#Microsoft_ServiceBus_Messaging_BrokeredMessage_GetBody__1).
+* `BrokeredMessage` - Vous donne le message désérialisé avec la méthode [BrokeredMessage.GetBody\<T>()](/dotnet/api/microsoft.servicebus.messaging.brokeredmessage.getbody?view=azure-dotnet#Microsoft_ServiceBus_Messaging_BrokeredMessage_GetBody__1).
 
-Ces paramètres concernent Azure Functions version 1.x ; pour 2.x et ultérieur, utilisez [`Message`](https://docs.microsoft.com/dotnet/api/microsoft.azure.servicebus.message) au lieu de `BrokeredMessage`.
+Ces paramètres concernent Azure Functions version 1.x ; pour 2.x et ultérieur, utilisez [`Message`](/dotnet/api/microsoft.azure.servicebus.message) au lieu de `BrokeredMessage`.
 
 # <a name="javascript"></a>[JavaScript](#tab/javascript)
 
@@ -350,7 +353,7 @@ La gestion des messages incohérents ne peut pas être contrôlée ou configuré
 
 Le runtime Functions reçoit un message en [mode PeekLock](../service-bus-messaging/service-bus-performance-improvements.md#receive-mode). Il appelle l’élément `Complete` sur le message si la fonction se termine correctement. Si la fonction échoue, il appelle l’élément `Abandon`. Si la fonction s’exécute au-delà du délai imparti `PeekLock`, le verrou est automatiquement renouvelé tant que la fonction s’exécute. 
 
-Le paramètre `maxAutoRenewDuration` peut être configuré dans *host.json*, qui mappe à [OnMessageOptions.MaxAutoRenewDuration](https://docs.microsoft.com/dotnet/api/microsoft.azure.servicebus.messagehandleroptions.maxautorenewduration?view=azure-dotnet). La valeur maximale autorisée pour ce paramètre est de 5 minutes, conformément à la documentation de Service Bus, tandis que vous pouvez augmenter la limite de temps de Functions jusqu’à 10 minutes (5 minutes par défaut). Pour les fonctions de Service Bus, vous ne voudrez pas le faire, car vous dépasseriez la limite de renouvellement de Service Bus.
+Le paramètre `maxAutoRenewDuration` peut être configuré dans *host.json*, qui mappe à [OnMessageOptions.MaxAutoRenewDuration](/dotnet/api/microsoft.azure.servicebus.messagehandleroptions.maxautorenewduration?view=azure-dotnet). La valeur maximale autorisée pour ce paramètre est de 5 minutes, conformément à la documentation de Service Bus, tandis que vous pouvez augmenter la limite de temps de Functions jusqu’à 10 minutes (5 minutes par défaut). Pour les fonctions de Service Bus, vous ne voudrez pas le faire, car vous dépasseriez la limite de renouvellement de Service Bus.
 
 ## <a name="message-metadata"></a>Métadonnées de message
 

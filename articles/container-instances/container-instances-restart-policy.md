@@ -2,13 +2,13 @@
 title: Redémarrer la stratégie pour des tâches à exécution unique
 description: Découvrez comment utiliser Azure Container Instances pour exécuter des tâches jusqu’à complétion, telles que des tâches de génération, de test ou de rendu d’image.
 ms.topic: article
-ms.date: 04/15/2019
-ms.openlocfilehash: 8ef4ef228038242f53abc8041470f7f596ab1157
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 08/11/2020
+ms.openlocfilehash: 336a31a03cdc9dfdfebe79ef47b59ef90053f523
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80131492"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88798939"
 ---
 # <a name="run-containerized-tasks-with-restart-policies"></a>Exécuter des tâches conteneurisées avec des stratégies de redémarrage
 
@@ -27,6 +27,8 @@ Lorsque vous créez un [groupe de conteneurs](container-instances-container-grou
 | `Always` | Les conteneurs du groupe de conteneurs sont toujours redémarrés. Il s’agit du paramètre appliqué **par défaut** lorsqu’aucune stratégie de redémarrage n’est spécifiée au moment de la création du conteneur. |
 | `Never` | Les conteneurs du groupe de conteneurs ne sont jamais redémarrés. Les conteneurs sont exécutés au maximum une fois. |
 | `OnFailure` | Les conteneurs du groupe de conteneurs sont redémarrés uniquement en cas d’échec des processus qui y sont exécutés (lorsque ceux-ci se terminent par un code de sortie différent de zéro). Les conteneurs sont exécutés au moins une fois. |
+
+[!INCLUDE [container-instances-restart-ip](../../includes/container-instances-restart-ip.md)]
 
 ## <a name="specify-a-restart-policy"></a>Spécifier une stratégie de redémarrage
 
@@ -90,13 +92,13 @@ Sortie :
  ('HAMLET', 386)]
 ```
 
-Cet exemple montre la sortie du script envoyé à STDOUT. Toutefois, il est possible que vos tâches en conteneur écrivent leur sortie dans un stockage persistant, en vue d’une récupération ultérieure. Par exemple, vers un [partage de fichiers Azure](container-instances-mounting-azure-files-volume.md).
+Cet exemple montre la sortie du script envoyé à STDOUT. Toutefois, il est possible que vos tâches en conteneur écrivent leur sortie dans un stockage persistant, en vue d’une récupération ultérieure. Par exemple, vers un [partage de fichiers Azure](./container-instances-volume-azure-files.md).
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 Les scénarios basés sur des tâches, telles que le traitement par lots d’un jeu de données volumineux avec plusieurs conteneurs, peuvent tirer parti de l’utilisation de [lignes de commande](container-instances-start-command.md) ou de [variables d’environnement](container-instances-environment-variables.md) personnalisées au moment de l’exécution.
 
-Pour plus d’informations sur la conservation de la sortie de vos conteneurs qui s’exécutent jusqu’à achèvement, consultez [Montage d’un partage de fichiers Azure avec Azure Container Instances](container-instances-mounting-azure-files-volume.md).
+Pour plus d’informations sur la conservation de la sortie de vos conteneurs qui s’exécutent jusqu’à achèvement, consultez [Montage d’un partage de fichiers Azure avec Azure Container Instances](./container-instances-volume-azure-files.md).
 
 <!-- LINKS - External -->
 [aci-wordcount-image]: https://hub.docker.com/_/microsoft-azuredocs-aci-wordcount

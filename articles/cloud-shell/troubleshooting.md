@@ -14,12 +14,12 @@ ms.devlang: na
 ms.topic: article
 ms.date: 07/24/2018
 ms.author: damaerte
-ms.openlocfilehash: b06deadae15a8176a49bed88a53884df2b71e473
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: eea64520dd5440467c911b6de42d8c8c31fc1bde
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82189460"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87543450"
 ---
 # <a name="troubleshooting--limitations-of-azure-cloud-shell"></a>Résolution des problèmes et limitations d’Azure Cloud Shell
 
@@ -142,26 +142,6 @@ Faites attention lorsque vous modifiez .bashrc : cela peut entraîner des erreur
 
 `AzureAD.Standard.Preview`, une préversion du module basé sur .NET Standard, est actuellement disponible. Ce module fournit les mêmes fonctionnalités que `AzureAD`.
 
-### <a name="sqlserver-module-functionality"></a>Fonctionnalités du module `SqlServer`
-
-Le module `SqlServer` inclus dans Cloud Shell n’offre qu’une prise en charge préliminaire pour PowerShell Core. En particulier, `Invoke-SqlCmd` n’est pas encore disponible.
-
-### <a name="default-file-location-when-created-from-azure-drive"></a>Emplacement du fichier par défaut lors de sa création à partir du lecteur Azure
-
-Les utilisateurs ne peuvent pas créer de fichiers sous le lecteur Azure à l’aide des cmdlets PowerShell. Si les utilisateurs créent des fichiers à l’aide d’autres outils, tels que vim ou nano, les fichiers sont enregistrés dans le dossier `$HOME` par défaut.
-
-### <a name="tab-completion-can-throw-psreadline-exception"></a>La saisie semi-automatique via la touche Tab peut lever une exception PSReadline.
-
-Si le mode EditMode de l’utilisateur dans PSReadline est défini sur Emacs, que l’utilisateur tente d’afficher toutes les possibilités par le biais de la saisie semi-automatique via la touche Tab et que la taille de la fenêtre est trop petite pour afficher toutes les possibilités, PSReadline lève une exception non prise en charge.
-
-### <a name="large-gap-after-displaying-progress-bar"></a>Écart important après avoir affiché la barre de progression
-
-Si une commande ou une action de l’utilisateur affiche une barre de progression (par exemple, le renseignement d’un onglet sur le lecteur `Azure:`), il est possible que le curseur ne soit pas défini correctement et qu’un écart apparaisse là où la barre de progression se situait précédemment.
-
-### <a name="random-characters-appear-inline"></a>Des caractères aléatoires apparaissent en ligne
-
-Les codes de la séquence de position du curseur, par exemple `5;13R`, peuvent apparaître dans l’entrée utilisateur. Les caractères peuvent être supprimés manuellement.
-
 ## <a name="personal-data-in-cloud-shell"></a>Données personnelles dans Cloud Shell
 
 Azure Cloud Shell prend très au sérieux vos données personnelles ; les données capturées et stockées par le service Azure Cloud Shell sont utilisées pour vous fournir un environnement par défaut, tel que l’interpréteur de commandes le plus récemment utilisé, les taille et type de police par défaut, ainsi que les détails des partages de fichiers pour le lecteur cloud. Si vous souhaitez exporter ou supprimer ces données, reportez-vous aux instructions suivantes.
@@ -171,7 +151,8 @@ Azure Cloud Shell prend très au sérieux vos données personnelles ; les donné
 ### <a name="export"></a>Exporter
 Pour **exporter** les paramètres utilisateur que Cloud Shell enregistre pour vous, tels que l’interpréteur de commandes, la taille de police et le type de police par défaut, exécutez les commandes suivantes.
 
-1. [![](https://shell.azure.com/images/launchcloudshell.png "Launch Azure Cloud Shell")](https://shell.azure.com)
+1. [![Image représentant un bouton libellé Launch Azure Cloud Shell.](https://shell.azure.com/images/launchcloudshell.png)](https://shell.azure.com)
+
 2. Exécutez les commandes suivantes dans Bash ou PowerShell :
 
 Bash :
@@ -194,7 +175,8 @@ Pour **supprimer** vos paramètres utilisateur que Cloud Shell enregistre pour v
 >[!Note]
 > Si vous supprimez vos paramètres utilisateur, le partage Azure Files proprement dit n’est pas supprimé. Accédez à Azure Files pour effectuer cette action.
 
-1. [![](https://shell.azure.com/images/launchcloudshell.png "Launch Azure Cloud Shell")](https://shell.azure.com)
+1. [![Image représentant un bouton libellé Launch Azure Cloud Shell.](https://shell.azure.com/images/launchcloudshell.png)](https://shell.azure.com)
+
 2. Exécutez les commandes suivantes dans Bash ou PowerShell :
 
 Bash :

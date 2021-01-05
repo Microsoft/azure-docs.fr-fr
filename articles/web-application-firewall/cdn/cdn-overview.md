@@ -4,15 +4,15 @@ description: Découvrez comment le pare-feu d’applications web Azure sur le se
 services: web-application-firewall
 author: vhorne
 ms.service: web-application-firewall
-ms.topic: overview
-ms.date: 03/18/2020
+ms.topic: conceptual
+ms.date: 08/31/2020
 ms.author: victorh
-ms.openlocfilehash: 28cf8d9fd60cc6fc158812aa0a1dff3a4b0dced1
-ms.sourcegitcommit: 441db70765ff9042db87c60f4aa3c51df2afae2d
+ms.openlocfilehash: 6949c1e8f83ebf47878a3d449796ccc03920756a
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80754286"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89225150"
 ---
 # <a name="azure-web-application-firewall-on-azure-content-delivery-network"></a>Pare-feu d’applications web Azure sur Azure Content Delivery Network
 
@@ -45,7 +45,7 @@ Une application web hébergée sur Azure CDN peut être associée à une seule s
 
 Une stratégie WAF peut être configurée pour s’exécuter dans les deux modes suivants :
 
-- *Mode de détection* : Quand il est exécuté en mode Détection, le pare-feu d’applications web n’entreprend pas d’autre action que la supervision et la journalisation de la requête et de la règle WAF correspondante dans les journaux WAF. Vous pouvez activer la journalisation des diagnostics pour Front Door. Quand vous utilisez le portail, accédez à la section **Diagnostics**.
+- *Mode de détection* : Quand il est exécuté en mode Détection, le pare-feu d’applications web n’entreprend pas d’autre action que la supervision et la journalisation de la requête et de la règle WAF correspondante dans les journaux WAF. Vous pouvez activer la journalisation des diagnostics pour CDN. Quand vous utilisez le portail, accédez à la section **Diagnostics**.
 
 - *Mode de prévention* : En mode Prévention, le pare-feu d’applications web entreprend l’action spécifiée si une demande correspond à une règle. Si une correspondance est trouvée, aucune autre règle avec une priorité inférieure n’est évaluée. Toutes les requêtes mises en correspondance sont également enregistrées dans les journaux WAF.
 

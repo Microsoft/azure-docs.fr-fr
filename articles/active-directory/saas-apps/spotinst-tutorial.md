@@ -2,25 +2,21 @@
 title: 'Tutoriel : Intégration de l’authentification unique Azure Active Directory à Spotinst | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et Spotinst.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: 2f6dbd70-c2db-4ae9-99ee-976c3090d214
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
 ms.topic: tutorial
 ms.date: 01/03/2020
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: 5490ff6c6143dff258d74e013bb9d4c821aab625
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: d9c9ac87e655cf9178d58f04b502f7e781d1fef7
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "76263283"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96181405"
 ---
 # <a name="tutorial-azure-active-directory-single-sign-on-sso-integration-with-spotinst"></a>Tutoriel : Intégration de l’authentification unique Azure Active Directory à Spotinst
 
@@ -30,7 +26,7 @@ Dans ce tutoriel, vous allez apprendre à intégrer Spotinst à Azure Active Dir
 * Permettre à vos utilisateurs de se connecter automatiquement à Spotinst avec leur compte Azure AD.
 * Gérer vos comptes à un emplacement central : le Portail Azure.
 
-Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -79,18 +75,11 @@ Effectuez les étapes suivantes pour activer l’authentification unique Azure A
 
    ![Modifier la configuration SAML de base](common/edit-urls.png)
 
-1. Dans la section **Configuration SAML de base**, si vous souhaitez configurer l’application en mode lancé par le **fournisseur d’identité**, effectuez les étapes suivantes :
+1. Dans la section **Configuration SAML de base**, si vous souhaitez configurer l’application en mode Lancé par le fournisseur d’identité, effectuez les étapes suivantes :
 
-    a. Vérifiez **Définir des URL supplémentaires**.
-
-    b. Dans la zone de texte **État de relais**, tapez une valeur : `<ID>`
-
-1. Cliquez sur **Définir des URL supplémentaires**, puis effectuez les étapes suivantes si vous souhaitez configurer l’application en mode lancé par le **fournisseur de services** :
-
-    Dans la zone de texte **URL de connexion**, tapez l’URL : `https://console.spotinst.com/auth/saml`
-
-    > [!NOTE]
-    > La valeur État de relais n’est pas la valeur réelle. Vous mettrez à jour la valeur de l’état de relais avec la valeur réelle en suivant les explications données plus loin dans le tutoriel.
+   1. Vérifiez que l’**URL de réponse** est définie sur : https://console.spotinst.com/auth/saml.
+   1. Dans **État de relais**, entrez votre ID d’organisation Spotinst, que vous pouvez également vérifier sous l’onglet **SSO**.
+   1. L’**URL de connexion** doit être vide.
 
 1. Cliquez sur **Enregistrer**.
 
@@ -150,7 +139,7 @@ Dans cette section, vous allez autoriser B.Simon à utiliser l’authentificatio
 
 2. Cliquez sur **l’icône de l’utilisateur** dans le coin supérieur droit de l’écran et cliquez sur **Settings** (Paramètres).
 
-    ![Paramètres de Spotinst](./media/spotinst-tutorial/tutorial_spotinst_settings.png)
+    ![Capture d’écran montrant l’élément Settings sélectionné à partir de l’icône User.](./media/spotinst-tutorial/tutorial_spotinst_settings.png)
 
 3. Cliquez sur l’onglet **SECURITY** (SÉCURITÉ) en haut, puis sélectionnez **Identity Providers** (Fournisseurs d’identité) et suivez ces étapes :
 
@@ -160,7 +149,7 @@ Dans cette section, vous allez autoriser B.Simon à utiliser l’authentificatio
 
     b. Cliquez sur **BROWSE** (PARCOURIR) pour charger le fichier xml de métadonnées que vous avez téléchargé du portail Azure.
 
-    c. Cliquez sur **ENREGISTRER**.
+    c. Cliquez sur **ENREGISTRER**.
 
 ### <a name="create-spotinst-test-user"></a>Créer un utilisateur de test Spotinst
 
@@ -172,21 +161,21 @@ L’objectif de cette section est de créer un utilisateur appelé Britta Simon 
 
    b. Cliquez sur **l’icône de l’utilisateur** dans le coin supérieur droit de l’écran et cliquez sur **Settings** (Paramètres).
 
-    ![Paramètres de Spotinst](./media/spotinst-tutorial/tutorial_spotinst_settings.png)
+    ![Capture d’écran montrant l’élément Settings sélectionné à partir de l’icône User.](./media/spotinst-tutorial/tutorial_spotinst_settings.png)
 
     c. Cliquez sur **Users** (Utilisateurs) et sélectionnez **ADD USER** (AJOUTER UN UTILISATEUR).
 
-    ![Paramètres de Spotinst](./media/spotinst-tutorial/adduser1.png)
+    ![Capture d’écran montrant l’élément ADD USER sélectionné à partir de Users.](./media/spotinst-tutorial/adduser1.png)
 
     d. Dans la section d’ajout d’un utilisateur, procédez comme suit :
 
-    ![Paramètres de Spotinst](./media/spotinst-tutorial/adduser2.png)
+    ![Capture d’écran affichant la section Add user dans laquelle vous pouvez indiquer les valeurs décrites.](./media/spotinst-tutorial/adduser2.png)
 
     * Dans la zone de texte **Full Name** (Nom complet), entrez le nom entier d’un utilisateur, par exemple **Britta Simon**.
 
     * Dans la zone de texte **Email** (E-mail), entrez l’adresse e-mail de l’utilisateur, par exemple `brittasimon\@contoso.com`.
 
-    * Sélectionnez les détails propres à votre organisation pour **Organization Role (Rôle de l’organisation), Account Role (Rôle de compte) et Accounts (Comptes)** .
+    * Sélectionnez les détails propres à votre organisation pour **Organization Role (Rôle de l’organisation), Account Role (Rôle de compte) et Accounts (Comptes)**.
 
 2. Si vous avez configuré l’application en mode initié par le **fournisseur d’identité**, vous n’avez aucune opération à effectuer dans cette section. Spotinst prend en charge le provisionnement juste-à-temps, option qui est activée par défaut. S’il n’existe pas déjà, un utilisateur est créé lors d’une tentative d’accès à Spotinst.
 
@@ -194,15 +183,14 @@ L’objectif de cette section est de créer un utilisateur appelé Britta Simon 
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Le fait de cliquer sur la vignette Workpath dans le panneau d’accès doit vous connecter automatiquement à l’application Workpath pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Le fait de cliquer sur la vignette Workpath dans le panneau d’accès doit vous connecter automatiquement à l’application Workpath pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de tutoriels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de tutoriels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)
 
 - [Essayer Spotinst avec Azure AD](https://aad.portal.azure.com/)
-

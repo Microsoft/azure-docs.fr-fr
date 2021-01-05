@@ -6,26 +6,26 @@ ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
 ms.topic: conceptual
-ms.custom: hdinsightactive,hdiseo17may2017
+ms.custom: hdinsightactive,hdiseo17may2017, devx-track-azurecli
 ms.date: 02/26/2020
-ms.openlocfilehash: 2c6495454e5ba2449d4b3c74a096681f74610813
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: d47c741bdf0d056a75a86cdb8aa14333320bb52a
+ms.sourcegitcommit: 8c7f47cc301ca07e7901d95b5fb81f08e6577550
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79233713"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92742143"
 ---
 # <a name="manage-azure-hdinsight-clusters-using-azure-cli"></a>Gérer des clusters Azure HDInsight avec Azure CLI
 
 [!INCLUDE [selector](../../includes/hdinsight-portal-management-selector.md)]
 
-Découvrez comment utiliser [Azure CLI](https://docs.microsoft.com/cli/azure/?view=azure-cli-latest) pour gérer des clusters Azure HDInsight. L’interface de ligne de commande Azure (CLI) est l’interface de ligne de commande multiplateforme de Microsoft pour la gestion de ressources Azure.
+Découvrez comment utiliser [Azure CLI](/cli/azure/) pour gérer des clusters Azure HDInsight. L’interface de ligne de commande Azure (CLI) est l’interface de ligne de commande multiplateforme de Microsoft pour la gestion de ressources Azure.
 
 Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
 
 ## <a name="prerequisites"></a>Conditions préalables requises
 
-* Azure CLI. Si vous n'avez pas installé Azure CLI, consultez [Installer l'interface de ligne de commande Azure](https://docs.microsoft.com/cli/azure/install-azure-cli) pour connaître les étapes à suivre.
+* Azure CLI. Si vous n'avez pas installé Azure CLI, consultez [Installer l'interface de ligne de commande Azure](/cli/azure/install-azure-cli) pour connaître les étapes à suivre.
 
 * Un cluster Apache Hadoop sur HDInsight. Consultez [Bien démarrer avec HDInsight sur Linux](hadoop/apache-hadoop-linux-tutorial-get-started.md).
 
@@ -42,7 +42,7 @@ az login
 
 ## <a name="list-clusters"></a>Lister les clusters
 
-Utilisez [az hdinsight list](https://docs.microsoft.com/cli/azure/hdinsight?view=azure-cli-latest#az-hdinsight-list) pour lister les clusters. Modifiez les commandes ci-dessous en remplaçant `RESOURCE_GROUP_NAME` par le nom de votre groupe de ressources, puis entrez ces commandes :
+Utilisez [az hdinsight list](/cli/azure/hdinsight#az-hdinsight-list) pour lister les clusters. Modifiez les commandes ci-dessous en remplaçant `RESOURCE_GROUP_NAME` par le nom de votre groupe de ressources, puis entrez ces commandes :
 
 ```azurecli-interactive
 # List all clusters in the current subscription
@@ -60,7 +60,7 @@ az hdinsight list --resource-group RESOURCE_GROUP_NAME --query "[].{clusterName:
 
 ## <a name="show-cluster"></a>Afficher le cluster
 
-Utilisez [az hdinsight show](https://docs.microsoft.com/cli/azure/hdinsight?view=azure-cli-latest#az-hdinsight-show) pour afficher les informations d’un cluster spécifié. Modifiez la commande ci-dessous en remplaçant `RESOURCE_GROUP_NAME` et `CLUSTER_NAME` par les informations appropriées, puis entrez cette commande :
+Utilisez [az hdinsight show](/cli/azure/hdinsight#az-hdinsight-show) pour afficher les informations d’un cluster spécifié. Modifiez la commande ci-dessous en remplaçant `RESOURCE_GROUP_NAME` et `CLUSTER_NAME` par les informations appropriées, puis entrez cette commande :
 
 ```azurecli-interactive
 az hdinsight show --resource-group RESOURCE_GROUP_NAME --name CLUSTER_NAME
@@ -68,7 +68,7 @@ az hdinsight show --resource-group RESOURCE_GROUP_NAME --name CLUSTER_NAME
 
 ## <a name="delete-clusters"></a>Suppression des clusters
 
-Utilisez [az hdinsight delete](https://docs.microsoft.com/cli/azure/hdinsight?view=azure-cli-latest#az-hdinsight-delete) pour supprimer un cluster spécifié. Modifiez la commande ci-dessous en remplaçant `RESOURCE_GROUP_NAME` et `CLUSTER_NAME` par les informations appropriées, puis entrez cette commande :
+Utilisez [az hdinsight delete](/cli/azure/hdinsight#az-hdinsight-delete) pour supprimer un cluster spécifié. Modifiez la commande ci-dessous en remplaçant `RESOURCE_GROUP_NAME` et `CLUSTER_NAME` par les informations appropriées, puis entrez cette commande :
 
 ```azurecli-interactive
 az hdinsight delete --resource-group RESOURCE_GROUP_NAME --name CLUSTER_NAME
@@ -82,7 +82,7 @@ az group delete --name RESOURCE_GROUP_NAME
 
 ## <a name="scale-clusters"></a>Mise à l’échelle des clusters
 
-Utilisez [az hdinsight resize](https://docs.microsoft.com/cli/azure/hdinsight?view=azure-cli-latest#az-hdinsight-resize) pour redimensionner le cluster HDInsight spécifié à la taille voulue. Modifiez la commande ci-dessous en remplaçant `RESOURCE_GROUP_NAME` et `CLUSTER_NAME` par les informations appropriées. Remplacez `WORKERNODE_COUNT` par le nombre de nœuds Worker souhaités pour votre cluster. Pour plus d’informations sur la mise à l’échelle des clusters, consultez [Mettre à l’échelle les clusters HDInsight](./hdinsight-scaling-best-practices.md). Entrez la commande :
+Utilisez [az hdinsight resize](/cli/azure/hdinsight#az-hdinsight-resize) pour redimensionner le cluster HDInsight spécifié à la taille voulue. Modifiez la commande ci-dessous en remplaçant `RESOURCE_GROUP_NAME` et `CLUSTER_NAME` par les informations appropriées. Remplacez `WORKERNODE_COUNT` par le nombre de nœuds Worker souhaités pour votre cluster. Pour plus d’informations sur la mise à l’échelle des clusters, consultez [Mettre à l’échelle les clusters HDInsight](./hdinsight-scaling-best-practices.md). Entrez la commande :
 
 ```azurecli-interactive
 az hdinsight resize --resource-group RESOURCE_GROUP_NAME --name CLUSTER_NAME --workernode-count WORKERNODE_COUNT
@@ -95,4 +95,4 @@ Dans cet article, vous avez appris comment effectuer différentes tâches d’ad
 * [Gérer des clusters Apache Hadoop dans HDInsight avec le portail Azure](hdinsight-administer-use-portal-linux.md)
 * [Administrer HDInsight à l’aide d’Azure PowerShell](hdinsight-administer-use-powershell.md)
 * [Prise en main d’Azure HDInsight](hadoop/apache-hadoop-linux-tutorial-get-started.md)
-* [Bien démarrer avec Azure CLI](https://docs.microsoft.com/cli/azure/get-started-with-azure-cli?view=azure-cli-latest)
+* [Bien démarrer avec Azure CLI](/cli/azure/get-started-with-azure-cli)

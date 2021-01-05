@@ -4,12 +4,12 @@ ms.service: storsimple
 ms.topic: include
 ms.date: 10/26/2018
 ms.author: alkohli
-ms.openlocfilehash: 02274bacb66a33ef54e07bc8113d7db46d4d5296
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: e3bff61cfbf89aee3566d677ccf593b102cff36d
+ms.sourcegitcommit: 6a902230296a78da21fbc68c365698709c579093
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "67177253"
+ms.lasthandoff: 11/05/2020
+ms.locfileid: "93376246"
 ---
 #### <a name="to-add-a-storsimple-backup-policy"></a>Pour ajouter une stratégie de sauvegarde StorSimple
 
@@ -27,11 +27,11 @@ ms.locfileid: "67177253"
        
    3. Pour affecter des volumes à cette stratégie de sauvegarde, sélectionnez **Ajouter des volumes** puis, dans la liste tabulaire des volumes, cliquez sur les cases à cocher pour affecter un ou plusieurs volumes à cette stratégie de sauvegarde.
 
-       ![Ajout d’une stratégie de sauvegarde](./media/storsimple-8000-add-backup-policy-u2/addbupol2.png)
+       ![Ajouter une stratégie de sauvegarde 2](./media/storsimple-8000-add-backup-policy-u2/addbupol2.png)
 
    4. Pour définir une planification pour cette stratégie de sauvegarde, cliquez sur **Première planification**, puis modifiez les paramètres suivants :
 
-       ![Ajout d’une stratégie de sauvegarde](./media/storsimple-8000-add-backup-policy-u2/addbupol3.png)
+       ![Ajout d’une stratégie de sauvegarde 3](./media/storsimple-8000-add-backup-policy-u2/addbupol3.png)
 
        1. Pour **Type d’instantané**, sélectionnez **Cloud** ou **Local**.
 
@@ -45,9 +45,9 @@ ms.locfileid: "67177253"
 
    5. Cliquez sur **Créer** pour créer une stratégie de sauvegarde.
 
-       ![Ajout d’une stratégie de sauvegarde](./media/storsimple-8000-add-backup-policy-u2/addbupol4.png)
+       ![Ajout d’une stratégie de sauvegarde 4](./media/storsimple-8000-add-backup-policy-u2/addbupol4.png)
    
    6. Un message s’affiche une fois la stratégie de sauvegarde créée. La stratégie ajoutée s’affiche dans le tableau du panneau **Stratégies de sauvegarde**.
 
-       ![Ajout d’une stratégie de sauvegarde](./media/storsimple-8000-add-backup-policy-u2/addbupol7.png)
+       ![Ajout d’une stratégie de sauvegarde 5](./media/storsimple-8000-add-backup-policy-u2/addbupol7.png)
 

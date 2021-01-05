@@ -14,12 +14,12 @@ ms.tgt_pltfrm: NA
 ms.workload: TBD
 ms.date: 09/21/2016
 ms.author: alkohli
-ms.openlocfilehash: 7fafe177ea0c6c618dc4ab0727ba14c83cbb0102
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: fd30c7ec15eadd3d7945349a8aae4ac824bfdc7f
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "68965012"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94954084"
 ---
 # <a name="supported-hardware-for-the-10-gbe-network-interfaces-on-your-storsimple-device"></a>Matériel pris en charge pour les interfaces réseau 10 GbE sur votre appareil StorSimple
 
@@ -125,5 +125,4 @@ Le tableau suivant répertorie les commutateurs pris en charge par Mellanox. Ils
 | 7. |1 GbE |6120G |Lame de commutateur HP ProCurve 6120G/XG 1 GbE |HP |
 
 ## <a name="next-steps"></a>Étapes suivantes
-[En savoir plus sur les composants matériels StorSimple et leur état](storsimple-monitor-hardware-status.md).
-
+[En savoir plus sur les composants matériels StorSimple et leur état](./storsimple-8000-monitor-hardware-status.md).

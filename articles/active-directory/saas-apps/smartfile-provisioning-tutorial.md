@@ -2,25 +2,21 @@
 title: "Tutoriel : Configurer SmartFile pour l'approvisionnement automatique d'utilisateurs avec Azure Active Directory | Microsoft Docs"
 description: Apprenez à configurer Azure Active Directory pour approvisionner et retirer automatiquement des comptes d'utilisateur sur SmartFile.
 services: active-directory
-documentationcenter: ''
 author: zchia
 writer: zchia
-manager: beatrizd
-ms.assetid: 5eeff992-a84f-4f88-a360-9accbd077538
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: article
+ms.topic: tutorial
 ms.date: 07/26/2019
 ms.author: zhchia
-ms.openlocfilehash: b113cc27195b2ce954d677ab0f1ec83e394946be
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 03c7efd390d4714680ed2ccd54d297b8137aaafc
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77060216"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96348668"
 ---
 # <a name="tutorial-configure-smartfile-for-automatic-user-provisioning"></a>Tutoriel : Configurer SmartFile pour l'approvisionnement automatique d'utilisateurs
 
@@ -62,9 +58,9 @@ Avant de configurer SmartFile pour l'approvisionnement automatique d'utilisateur
 
 2. Pour générer un jeton de porteur, copiez la **Clé du produit** et le **Mot de passe du produit**. Collez-les dans un bloc-notes en entrant deux-points entre eux.
     
-     ![SmartFile - Ajouter SCIM](media/smartfile-provisioning-tutorial/auth.png)
+     ![Capture d’écran de la section Clé du produit avec les zones de texte Clé du produit et Mot de passe du produit en évidence.](media/smartfile-provisioning-tutorial/auth.png)
 
-    ![SmartFile - Ajouter SCIM](media/smartfile-provisioning-tutorial/key.png)
+    ![Capture d’écran d’un texte en clair montrant la clé de produit et le mot de passe du produit séparés par un deux-points.](media/smartfile-provisioning-tutorial/key.png)
 
 ## <a name="add-smartfile-from-the-gallery"></a>Ajouter SmartFile à partir de la galerie
 
@@ -93,7 +89,7 @@ Avant de configurer SmartFile pour l'approvisionnement automatique d'utilisateur
 Cette section vous guide tout au long des étapes de configuration du service d'approvisionnement d'Azure AD pour créer, mettre à jour et désactiver des utilisateurs et/ou des groupes dans SmartFile en fonction des attributions d'utilisateurs et/ou de groupes dans Azure AD.
 
 > [!TIP]
-> Vous pouvez également choisir d'activer l'authentification unique basée sur SAML pour SmartFile en suivant les instructions fournies dans le [didacticiel consacré à l'authentification unique SmartFile](SmartFile-tutorial.md). L’authentification unique peut être configurée indépendamment de l’attribution automatique d’utilisateurs, bien que ces deux fonctionnalités se complètent
+> Vous pouvez aussi choisir d’activer l’authentification unique basée sur SAML pour SmartFile en suivant les instructions fournies dans le [tutoriel sur l’authentification unique pour SmartFile](SmartFile-tutorial.md). L’authentification unique peut être configurée indépendamment de l’attribution automatique d’utilisateurs, bien que ces deux fonctionnalités se complètent
 
 ### <a name="to-configure-automatic-user-provisioning-for-smartfile-in-azure-ad"></a>Pour configurer l'approvisionnement automatique d'utilisateurs pour SmartFile dans Azure AD :
 
@@ -107,11 +103,11 @@ Cette section vous guide tout au long des étapes de configuration du service d'
 
 3. Sélectionnez l’onglet **Approvisionnement**.
 
-    ![Onglet Approvisionnement](common/provisioning.png)
+    ![Capture d’écran des options Gérer avec l’option Provisionnement en évidence.](common/provisioning.png)
 
 4. Définissez le **Mode d’approvisionnement** sur **Automatique**.
 
-    ![Onglet Approvisionnement](common/provisioning-automatic.png)
+    ![Capture d’écran de la liste déroulante Mode de provisionnement avec l’option Automatique en évidence.](common/provisioning-automatic.png)
 
 5.  Dans la section **Informations d’identification de l’administrateur**, entrez `https://<SmartFile sitename>.smartfile.com/ftp/scim` dans **URL de locataire**. Par exemple, `https://demo1test.smartfile.com/ftp/scim`. Entrez la valeur du **Jeton du porteur** (ProductKey: ProductPassword) précédemment récupérée dans le champ **Jeton secret**. Cliquez sur **Tester la connexion** pour vérifier qu'Azure AD peut se connecter à SmartFile. Si la connexion échoue, vérifiez que votre compte SmartFile dispose d'autorisations d'administrateur et réessayez.
 

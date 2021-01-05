@@ -10,12 +10,12 @@ ms.topic: article
 ms.workload: infrastructure-services
 ms.date: 10/18/2018
 ms.author: rambala
-ms.openlocfilehash: fe7b74b0d4d065d4f222fefbbdc4a1d434d1163b
-ms.sourcegitcommit: b0ff9c9d760a0426fd1226b909ab943e13ade330
+ms.openlocfilehash: 635a8fc5409e18da9529763b06e4a531a36d0156
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/01/2020
-ms.locfileid: "80518267"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86169202"
 ---
 # <a name="interoperability-in-azure--data-plane-analysis"></a>Interopérabilité dans Azure : Analyse du plan de données
 
@@ -29,13 +29,15 @@ L’analyse du plan de données examine le chemin emprunté par les paquets qui 
 
 Le peering de réseau virtuel émule les fonctionnalités de pont réseau entre les deux réseaux virtuels qui sont appairés. La sortie de détermination d’itinéraire d’un réseau virtuel hub vers une machine virtuelle dans le réseau virtuel spoke est illustrée ici :
 
-    C:\Users\rb>tracert 10.11.30.4
+```console
+C:\Users\rb>tracert 10.11.30.4
 
-    Tracing route to 10.11.30.4 over a maximum of 30 hops
+Tracing route to 10.11.30.4 over a maximum of 30 hops
 
-      1     2 ms     1 ms     1 ms  10.11.30.4
+  1     2 ms     1 ms     1 ms  10.11.30.4
 
-    Trace complete.
+Trace complete.
+```
 
 La figure suivante présente la vue graphique de la connexion entre le réseau virtuel hub et le réseau virtuel spoke du point de vue d’Azure Network Watcher :
 
@@ -46,15 +48,17 @@ La figure suivante présente la vue graphique de la connexion entre le réseau v
 
 La sortie de détermination d’itinéraire d’un réseau virtuel hub vers une machine virtuelle dans le réseau virtuel branch est illustrée ici :
 
-    C:\Users\rb>tracert 10.11.30.68
+```console
+C:\Users\rb>tracert 10.11.30.68
 
-    Tracing route to 10.11.30.68 over a maximum of 30 hops
+Tracing route to 10.11.30.68 over a maximum of 30 hops
 
-      1     1 ms     1 ms     1 ms  10.10.30.142
-      2     *        *        *     Request timed out.
-      3     2 ms     2 ms     2 ms  10.11.30.68
+  1     1 ms     1 ms     1 ms  10.10.30.142
+  2     *        *        *     Request timed out.
+  3     2 ms     2 ms     2 ms  10.11.30.68
 
-    Trace complete.
+Trace complete.
+```
 
 Dans cette détermination d’itinéraire, le premier tronçon est la passerelle VPN de la passerelle VPN Azure du réseau virtuel hub. Le deuxième tronçon est la passerelle VPN du réseau virtuel branch. L’adresse IP de la passerelle VPN du réseau virtuel branch n’est pas publiée dans le réseau virtuel hub. Le troisième tronçon est la machine virtuelle dans le réseau virtuel branch.
 
@@ -70,16 +74,18 @@ Pour la même connexion, la figure suivante montre le mode Grille dans Network W
 
 La sortie de détermination d’itinéraire d’un réseau virtuel hub vers une machine virtuelle dans l’emplacement Location 1 local est illustrée ici :
 
-    C:\Users\rb>tracert 10.2.30.10
+```console
+C:\Users\rb>tracert 10.2.30.10
 
-    Tracing route to 10.2.30.10 over a maximum of 30 hops
+Tracing route to 10.2.30.10 over a maximum of 30 hops
 
-      1     2 ms     2 ms     2 ms  10.10.30.132
-      2     *        *        *     Request timed out.
-      3     *        *        *     Request timed out.
-      4     2 ms     2 ms     2 ms  10.2.30.10
+  1     2 ms     2 ms     2 ms  10.10.30.132
+  2     *        *        *     Request timed out.
+  3     *        *        *     Request timed out.
+  4     2 ms     2 ms     2 ms  10.2.30.10
 
-    Trace complete.
+Trace complete.
+```
 
 Dans cette détermination d’itinéraire, le premier tronçon est le point de terminaison du tunnel de la passerelle Azure ExpressRoute pour un routeur de périphérie d’entreprise (MSEE, Microsoft Enterprise Edge). Le deuxième et le troisième tronçons sont le routeur de périphérie du client (CE) et les adresses IP du réseau local Location 1 local. Ces adresses IP ne sont pas publiées dans le réseau virtuel hub. Le quatrième tronçon est la machine virtuelle dans l’emplacement Location 1 local.
 
@@ -88,16 +94,18 @@ Dans cette détermination d’itinéraire, le premier tronçon est le point de t
 
 La sortie de détermination d’itinéraire d’un réseau virtuel hub vers une machine virtuelle dans l’emplacement Location 2 local est illustrée ici :
 
-    C:\Users\rb>tracert 10.1.31.10
+```console
+C:\Users\rb>tracert 10.1.31.10
 
-    Tracing route to 10.1.31.10 over a maximum of 30 hops
+Tracing route to 10.1.31.10 over a maximum of 30 hops
 
-      1    76 ms    75 ms    75 ms  10.10.30.134
-      2     *        *        *     Request timed out.
-      3     *        *        *     Request timed out.
-      4    75 ms    75 ms    75 ms  10.1.31.10
+  1    76 ms    75 ms    75 ms  10.10.30.134
+  2     *        *        *     Request timed out.
+  3     *        *        *     Request timed out.
+  4    75 ms    75 ms    75 ms  10.1.31.10
 
-    Trace complete.
+Trace complete.
+```
 
 Dans cette détermination d’itinéraire, le premier tronçon est le point de terminaison du tunnel de la passerelle ExpressRoute vers un routeur MSEE. Le deuxième et le troisième tronçons sont le routeur CE et les adresses IP du réseau local Location 2 local. Ces adresses IP ne sont pas publiées dans le réseau virtuel hub. Le quatrième tronçon est la machine virtuelle sur l’emplacement Location 2 local.
 
@@ -105,15 +113,17 @@ Dans cette détermination d’itinéraire, le premier tronçon est le point de t
 
 La sortie de détermination d’itinéraire d’un réseau virtuel hub vers une machine virtuelle dans le réseau virtuel distant est illustrée ici :
 
-    C:\Users\rb>tracert 10.17.30.4
+```console
+C:\Users\rb>tracert 10.17.30.4
 
-    Tracing route to 10.17.30.4 over a maximum of 30 hops
+Tracing route to 10.17.30.4 over a maximum of 30 hops
 
-      1     2 ms     2 ms     2 ms  10.10.30.132
-      2     *        *        *     Request timed out.
-      3    69 ms    68 ms    69 ms  10.17.30.4
+  1     2 ms     2 ms     2 ms  10.10.30.132
+  2     *        *        *     Request timed out.
+  3    69 ms    68 ms    69 ms  10.17.30.4
 
-    Trace complete.
+Trace complete.
+```
 
 Dans cette détermination d’itinéraire, le premier tronçon est le point de terminaison du tunnel de la passerelle ExpressRoute vers un routeur MSEE. Le deuxième tronçon est l’adresse IP de la passerelle du réseau virtuel distant. La plage d’adresses IP du deuxième tronçon n’est pas publiée dans le réseau virtuel hub. Le troisième tronçon est la machine virtuelle sur le réseau virtuel distant.
 
@@ -125,27 +135,31 @@ Le réseau virtuel spoke partage la vue du réseau virtuel hub. Par le biais du 
 
 La sortie de détermination d’itinéraire du réseau virtuel spoke vers une machine virtuelle dans le réseau virtuel hub est illustrée ici :
 
-    C:\Users\rb>tracert 10.10.30.4
+```console
+C:\Users\rb>tracert 10.10.30.4
 
-    Tracing route to 10.10.30.4 over a maximum of 30 hops
+Tracing route to 10.10.30.4 over a maximum of 30 hops
 
-      1    <1 ms    <1 ms    <1 ms  10.10.30.4
+  1    <1 ms    <1 ms    <1 ms  10.10.30.4
 
-    Trace complete.
+Trace complete.
+```
 
 ### <a name="path-to-the-branch-vnet"></a>Chemin vers le réseau virtuel branch
 
 La sortie de détermination d’itinéraire du réseau virtuel spoke vers une machine virtuelle dans le réseau virtuel branch est illustrée ici :
 
-    C:\Users\rb>tracert 10.11.30.68
+```console
+C:\Users\rb>tracert 10.11.30.68
 
-    Tracing route to 10.11.30.68 over a maximum of 30 hops
+Tracing route to 10.11.30.68 over a maximum of 30 hops
 
-      1     1 ms    <1 ms    <1 ms  10.10.30.142
-      2     *        *        *     Request timed out.
-      3     3 ms     2 ms     2 ms  10.11.30.68
+  1     1 ms    <1 ms    <1 ms  10.10.30.142
+  2     *        *        *     Request timed out.
+  3     3 ms     2 ms     2 ms  10.11.30.68
 
-    Trace complete.
+Trace complete.
+```
 
 Dans cette détermination d’itinéraire, le premier tronçon est la passerelle VPN du réseau virtuel hub. Le deuxième tronçon est la passerelle VPN du réseau virtuel branch. L’adresse IP de la passerelle VPN du réseau virtuel branch n’est pas publiée dans le réseau virtuel hub/spoke. Le troisième tronçon est la machine virtuelle dans le réseau virtuel branch.
 
@@ -153,16 +167,18 @@ Dans cette détermination d’itinéraire, le premier tronçon est la passerelle
 
 La sortie de détermination d’itinéraire du réseau virtuel spoke vers une machine virtuelle dans l’emplacement Location 1 local est illustrée ici :
 
-    C:\Users\rb>tracert 10.2.30.10
+```console
+C:\Users\rb>tracert 10.2.30.10
 
-    Tracing route to 10.2.30.10 over a maximum of 30 hops
+Tracing route to 10.2.30.10 over a maximum of 30 hops
 
-      1    24 ms     2 ms     3 ms  10.10.30.132
-      2     *        *        *     Request timed out.
-      3     *        *        *     Request timed out.
-      4     3 ms     2 ms     2 ms  10.2.30.10
+  1    24 ms     2 ms     3 ms  10.10.30.132
+  2     *        *        *     Request timed out.
+  3     *        *        *     Request timed out.
+  4     3 ms     2 ms     2 ms  10.2.30.10
 
-    Trace complete.
+Trace complete.
+```
 
 Dans cette détermination d’itinéraire, le premier tronçon est le point de terminaison du tunnel de la passerelle ExpressRoute du réseau virtuel hub à un routeur MSEE. Le deuxième et le troisième tronçons sont le routeur CE et les adresses IP du réseau local Location 1 local. Ces adresses IP ne sont pas publiées dans le réseau virtuel hub/spoke. Le quatrième tronçon est la machine virtuelle dans l’emplacement Location 1 local.
 
@@ -170,17 +186,18 @@ Dans cette détermination d’itinéraire, le premier tronçon est le point de t
 
 La sortie de détermination d’itinéraire du réseau virtuel spoke vers une machine virtuelle dans l’emplacement Location 2 local est illustrée ici :
 
+```console
+C:\Users\rb>tracert 10.1.31.10
 
-    C:\Users\rb>tracert 10.1.31.10
+Tracing route to 10.1.31.10 over a maximum of 30 hops
 
-    Tracing route to 10.1.31.10 over a maximum of 30 hops
+  1    76 ms    75 ms    76 ms  10.10.30.134
+  2     *        *        *     Request timed out.
+  3     *        *        *     Request timed out.
+  4    75 ms    75 ms    75 ms  10.1.31.10
 
-      1    76 ms    75 ms    76 ms  10.10.30.134
-      2     *        *        *     Request timed out.
-      3     *        *        *     Request timed out.
-      4    75 ms    75 ms    75 ms  10.1.31.10
-
-    Trace complete.
+Trace complete.
+```
 
 Dans cette détermination d’itinéraire, le premier tronçon est le point de terminaison du tunnel de la passerelle ExpressRoute du réseau virtuel hub à un routeur MSEE. Le deuxième et le troisième tronçons sont le routeur CE et les adresses IP du réseau local Location 2 local. Ces adresses IP ne sont pas publiées sur les réseaux virtuels hub/spoke. Le quatrième tronçon est la machine virtuelle dans l’emplacement Location 2 local.
 
@@ -188,15 +205,17 @@ Dans cette détermination d’itinéraire, le premier tronçon est le point de t
 
 La sortie de détermination d’itinéraire du réseau virtuel spoke vers une machine virtuelle dans le réseau virtuel distant est illustrée ici :
 
-    C:\Users\rb>tracert 10.17.30.4
+```console
+C:\Users\rb>tracert 10.17.30.4
 
-    Tracing route to 10.17.30.4 over a maximum of 30 hops
+Tracing route to 10.17.30.4 over a maximum of 30 hops
 
-      1     2 ms     1 ms     1 ms  10.10.30.133
-      2     *        *        *     Request timed out.
-      3    71 ms    70 ms    70 ms  10.17.30.4
+  1     2 ms     1 ms     1 ms  10.10.30.133
+  2     *        *        *     Request timed out.
+  3    71 ms    70 ms    70 ms  10.17.30.4
 
-    Trace complete.
+Trace complete.
+```
 
 Dans cette détermination d’itinéraire, le premier tronçon est le point de terminaison du tunnel de la passerelle ExpressRoute du réseau virtuel hub à un routeur MSEE. Le deuxième tronçon est l’adresse IP de la passerelle du réseau virtuel distant. La plage d’adresses IP du deuxième tronçon n’est pas publiée dans le réseau virtuel hub/spoke. Le troisième tronçon est la machine virtuelle sur le réseau virtuel distant.
 
@@ -206,15 +225,17 @@ Dans cette détermination d’itinéraire, le premier tronçon est le point de t
 
 La sortie de détermination d’itinéraire du réseau virtuel branch vers une machine virtuelle dans le réseau virtuel hub est illustrée ici :
 
-    C:\Windows\system32>tracert 10.10.30.4
+```console
+C:\Windows\system32>tracert 10.10.30.4
 
-    Tracing route to 10.10.30.4 over a maximum of 30 hops
+Tracing route to 10.10.30.4 over a maximum of 30 hops
 
-      1    <1 ms    <1 ms    <1 ms  10.11.30.100
-      2     *        *        *     Request timed out.
-      3     4 ms     3 ms     3 ms  10.10.30.4
+  1    <1 ms    <1 ms    <1 ms  10.11.30.100
+  2     *        *        *     Request timed out.
+  3     4 ms     3 ms     3 ms  10.10.30.4
 
-    Trace complete.
+Trace complete.
+```
 
 Dans cette détermination d’itinéraire, le premier tronçon est la passerelle VPN du réseau virtuel branch. Le deuxième tronçon est la passerelle VPN du réseau virtuel hub. L’adresse IP de la passerelle VPN du réseau virtuel hub n’est pas publiée dans le réseau virtuel distant. Le troisième tronçon est la machine virtuelle sur le réseau virtuel hub.
 
@@ -222,15 +243,17 @@ Dans cette détermination d’itinéraire, le premier tronçon est la passerelle
 
 La sortie de détermination d’itinéraire du réseau virtuel branch vers une machine virtuelle dans le réseau virtuel spoke est illustrée ici :
 
-    C:\Users\rb>tracert 10.11.30.4
+```console
+C:\Users\rb>tracert 10.11.30.4
 
-    Tracing route to 10.11.30.4 over a maximum of 30 hops
+Tracing route to 10.11.30.4 over a maximum of 30 hops
 
-      1     1 ms    <1 ms     1 ms  10.11.30.100
-      2     *        *        *     Request timed out.
-      3     4 ms     3 ms     2 ms  10.11.30.4
+  1     1 ms    <1 ms     1 ms  10.11.30.100
+  2     *        *        *     Request timed out.
+  3     4 ms     3 ms     2 ms  10.11.30.4
 
-    Trace complete.
+Trace complete.
+```
 
 Dans cette détermination d’itinéraire, le premier tronçon est la passerelle VPN du réseau virtuel branch. Le deuxième tronçon est la passerelle VPN du réseau virtuel hub. L’adresse IP de la passerelle VPN du réseau virtuel hub n’est pas publiée dans le réseau virtuel distant. Le troisième tronçon est la machine virtuelle sur le réseau virtuel spoke.
 
@@ -238,17 +261,19 @@ Dans cette détermination d’itinéraire, le premier tronçon est la passerelle
 
 La sortie de détermination d’itinéraire du réseau virtuel branch vers une machine virtuelle dans l’emplacement Location 1 local est illustrée ici :
 
-    C:\Users\rb>tracert 10.2.30.10
+```console
+C:\Users\rb>tracert 10.2.30.10
 
-    Tracing route to 10.2.30.10 over a maximum of 30 hops
+Tracing route to 10.2.30.10 over a maximum of 30 hops
 
-      1     1 ms    <1 ms    <1 ms  10.11.30.100
-      2     *        *        *     Request timed out.
-      3     3 ms     2 ms     2 ms  10.2.30.125
-      4     *        *        *     Request timed out.
-      5     3 ms     3 ms     3 ms  10.2.30.10
+  1     1 ms    <1 ms    <1 ms  10.11.30.100
+  2     *        *        *     Request timed out.
+  3     3 ms     2 ms     2 ms  10.2.30.125
+  4     *        *        *     Request timed out.
+  5     3 ms     3 ms     3 ms  10.2.30.10
 
-    Trace complete.
+Trace complete.
+```
 
 Dans cette détermination d’itinéraire, le premier tronçon est la passerelle VPN du réseau virtuel branch. Le deuxième tronçon est la passerelle VPN du réseau virtuel hub. L’adresse IP de la passerelle VPN du réseau virtuel hub n’est pas publiée dans le réseau virtuel distant. Le troisième tronçon est le point de terminaison du tunnel VPN sur le routeur CE principal. Le quatrième tronçon est une adresse IP interne de l’emplacement Location 1 local. Cette adresse IP de réseau local n’est pas publiée en dehors du routeur CE. Le cinquième tronçon est la machine virtuelle de destination dans l’emplacement Location 1 local.
 
@@ -256,27 +281,29 @@ Dans cette détermination d’itinéraire, le premier tronçon est la passerelle
 
 Comme nous l’avons indiqué dans l’analyse du plan de contrôle, le réseau virtuel branch n’a aucune visibilité sur l’emplacement Location 2 local ou sur le réseau virtuel distant selon la configuration réseau. Les résultats de test ping suivants le confirment : 
 
-    C:\Users\rb>ping 10.1.31.10
+```console
+C:\Users\rb>ping 10.1.31.10
 
-    Pinging 10.1.31.10 with 32 bytes of data:
+Pinging 10.1.31.10 with 32 bytes of data:
 
-    Request timed out.
-    ...
-    Request timed out.
+Request timed out.
+...
+Request timed out.
 
-    Ping statistics for 10.1.31.10:
-        Packets: Sent = 4, Received = 0, Lost = 4 (100% loss),
+Ping statistics for 10.1.31.10:
+    Packets: Sent = 4, Received = 0, Lost = 4 (100% loss),
 
-    C:\Users\rb>ping 10.17.30.4
+C:\Users\rb>ping 10.17.30.4
 
-    Pinging 10.17.30.4 with 32 bytes of data:
+Pinging 10.17.30.4 with 32 bytes of data:
 
-    Request timed out.
-    ...
-    Request timed out.
+Request timed out.
+...
+Request timed out.
 
-    Ping statistics for 10.17.30.4:
-        Packets: Sent = 4, Received = 0, Lost = 4 (100% loss),
+Ping statistics for 10.17.30.4:
+    Packets: Sent = 4, Received = 0, Lost = 4 (100% loss),
+```
 
 ## <a name="data-path-from-on-premises-location-1"></a>Chemin des données à partir de l’emplacement Location 1 local
 
@@ -284,17 +311,19 @@ Comme nous l’avons indiqué dans l’analyse du plan de contrôle, le réseau 
 
 La sortie de détermination d’itinéraire d’un emplacement Location 1 local vers une machine virtuelle dans le réseau virtuel hub est illustrée ici :
 
-    C:\Users\rb>tracert 10.10.30.4
+```console
+C:\Users\rb>tracert 10.10.30.4
 
-    Tracing route to 10.10.30.4 over a maximum of 30 hops
+Tracing route to 10.10.30.4 over a maximum of 30 hops
 
-      1    <1 ms    <1 ms    <1 ms  10.2.30.3
-      2    <1 ms    <1 ms    <1 ms  192.168.30.0
-      3    <1 ms    <1 ms    <1 ms  192.168.30.18
-      4     *        *        *     Request timed out.
-      5     2 ms     2 ms     2 ms  10.10.30.4
+  1    <1 ms    <1 ms    <1 ms  10.2.30.3
+  2    <1 ms    <1 ms    <1 ms  192.168.30.0
+  3    <1 ms    <1 ms    <1 ms  192.168.30.18
+  4     *        *        *     Request timed out.
+  5     2 ms     2 ms     2 ms  10.10.30.4
 
-    Trace complete.
+Trace complete.
+```
 
 Dans cette détermination d’itinéraire, les deux premiers tronçons font partie du réseau local. Le troisième tronçon est l’interface MSEE principale qui est accessible sur le routeur CE. Le quatrième tronçon est la passerelle ExpressRoute du réseau virtuel hub. La plage d’adresses IP de la passerelle ExpressRoute du réseau virtuel hub n’est pas publiée sur le réseau local. Le cinquième tronçon est la machine virtuelle de destination.
 
@@ -306,15 +335,17 @@ La figure suivante présente la vue de la topologie de la connectivité de la ma
 
 Comme indiqué précédemment, l’initialisation (tearDown) de test utilise un VPN de site à site comme connectivité de secours pour ExpressRoute entre l’emplacement Location 1 local et le réseau virtuel hub. Pour tester le chemin des données de sauvegarde, nous allons provoquer un échec de la liaison ExpressRoute entre le routeur CE principal de l’emplacement Location 1 local et le composant MSEE correspondant. Pour provoquer l’échec d’une liaison ExpressRoute, arrêtez l’interface CE qui est accessible sur le composant MSEE :
 
-    C:\Users\rb>tracert 10.10.30.4
+```console
+C:\Users\rb>tracert 10.10.30.4
 
-    Tracing route to 10.10.30.4 over a maximum of 30 hops
+Tracing route to 10.10.30.4 over a maximum of 30 hops
 
-      1    <1 ms    <1 ms    <1 ms  10.2.30.3
-      2    <1 ms    <1 ms    <1 ms  192.168.30.0
-      3     3 ms     2 ms     3 ms  10.10.30.4
+  1    <1 ms    <1 ms    <1 ms  10.2.30.3
+  2    <1 ms    <1 ms    <1 ms  192.168.30.0
+  3     3 ms     2 ms     3 ms  10.10.30.4
 
-    Trace complete.
+Trace complete.
+```
 
 La figure suivante présente la vue de la topologie de la connectivité de la machine virtuelle Location 1 locale à la machine virtuelle sur le réseau virtuel hub via la connectivité VPN de site à site quand la connectivité ExpressRoute est à l’arrêt :
 
@@ -326,17 +357,19 @@ La sortie de détermination d’itinéraire d’un emplacement Location 1 local
 
 Rétablissons la connectivité principale ExpressRoute pour effectuer l’analyse du chemin des données vers le réseau virtuel spoke :
 
-    C:\Users\rb>tracert 10.11.30.4
+```console
+C:\Users\rb>tracert 10.11.30.4
 
-    Tracing route to 10.11.30.4 over a maximum of 30 hops
+Tracing route to 10.11.30.4 over a maximum of 30 hops
 
-      1    <1 ms    <1 ms    <1 ms  10.2.30.3
-      2    <1 ms    <1 ms    <1 ms  192.168.30.0
-      3    <1 ms    <1 ms    <1 ms  192.168.30.18
-      4     *        *        *     Request timed out.
-      5     3 ms     2 ms     2 ms  10.11.30.4
+  1    <1 ms    <1 ms    <1 ms  10.2.30.3
+  2    <1 ms    <1 ms    <1 ms  192.168.30.0
+  3    <1 ms    <1 ms    <1 ms  192.168.30.18
+  4     *        *        *     Request timed out.
+  5     3 ms     2 ms     2 ms  10.11.30.4
 
-    Trace complete.
+Trace complete.
+```
 
 Établissons la connectivité ExpressRoute 1 principale pour le reste de l’analyse du chemin des données.
 
@@ -344,46 +377,52 @@ Rétablissons la connectivité principale ExpressRoute pour effectuer l’analys
 
 La sortie de détermination d’itinéraire d’un emplacement Location 1 local vers une machine virtuelle dans le réseau virtuel branch est illustrée ici :
 
-    C:\Users\rb>tracert 10.11.30.68
+```console
+C:\Users\rb>tracert 10.11.30.68
 
-    Tracing route to 10.11.30.68 over a maximum of 30 hops
+Tracing route to 10.11.30.68 over a maximum of 30 hops
 
-      1    <1 ms    <1 ms    <1 ms  10.2.30.3
-      2    <1 ms    <1 ms    <1 ms  192.168.30.0
-      3     3 ms     2 ms     2 ms  10.11.30.68
+  1    <1 ms    <1 ms    <1 ms  10.2.30.3
+  2    <1 ms    <1 ms    <1 ms  192.168.30.0
+  3     3 ms     2 ms     2 ms  10.11.30.68
 
-    Trace complete.
+Trace complete.
+```
 
 ### <a name="path-to-on-premises-location-2"></a>Chemin vers l’emplacement Location 2 local
 
 Comme nous l’avons indiqué dans l’[analyse du plan de contrôle][Control-Analysis], l’emplacement Location 1 local n’a aucune visibilité sur l’emplacement Location 2 local selon la configuration réseau. Les résultats de test ping suivants le confirment : 
 
-    C:\Users\rb>ping 10.1.31.10
-    
-    Pinging 10.1.31.10 with 32 bytes of data:
+```console
+C:\Users\rb>ping 10.1.31.10
 
-    Request timed out.
-    ...
-    Request timed out.
+Pinging 10.1.31.10 with 32 bytes of data:
 
-    Ping statistics for 10.1.31.10:
-        Packets: Sent = 4, Received = 0, Lost = 4 (100% loss),
+Request timed out.
+...
+Request timed out.
+
+Ping statistics for 10.1.31.10:
+    Packets: Sent = 4, Received = 0, Lost = 4 (100% loss),
+```
 
 ### <a name="path-to-the-remote-vnet"></a>Chemin vers le réseau virtuel distant
 
 La sortie de détermination d’itinéraire d’un emplacement Location 1 local vers une machine virtuelle dans le réseau virtuel distant est illustrée ici :
 
-    C:\Users\rb>tracert 10.17.30.4
+```console
+C:\Users\rb>tracert 10.17.30.4
 
-    Tracing route to 10.17.30.4 over a maximum of 30 hops
+Tracing route to 10.17.30.4 over a maximum of 30 hops
 
-      1    <1 ms    <1 ms    <1 ms  10.2.30.3
-      2     2 ms     5 ms     7 ms  192.168.30.0
-      3    <1 ms    <1 ms    <1 ms  192.168.30.18
-      4     *        *        *     Request timed out.
-      5    69 ms    70 ms    69 ms  10.17.30.4
+  1    <1 ms    <1 ms    <1 ms  10.2.30.3
+  2     2 ms     5 ms     7 ms  192.168.30.0
+  3    <1 ms    <1 ms    <1 ms  192.168.30.18
+  4     *        *        *     Request timed out.
+  5    69 ms    70 ms    69 ms  10.17.30.4
 
-    Trace complete.
+Trace complete.
+```
 
 ## <a name="data-path-from-on-premises-location-2"></a>Chemin des données à partir de l’emplacement Location 2 local
 
@@ -391,32 +430,36 @@ La sortie de détermination d’itinéraire d’un emplacement Location 1 local
 
 La sortie de détermination d’itinéraire d’un emplacement Location 2 local vers une machine virtuelle dans le réseau virtuel hub est illustrée ici :
 
-    C:\Windows\system32>tracert 10.10.30.4
+```console
+C:\Windows\system32>tracert 10.10.30.4
 
-    Tracing route to 10.10.30.4 over a maximum of 30 hops
+Tracing route to 10.10.30.4 over a maximum of 30 hops
 
-      1    <1 ms    <1 ms    <1 ms  10.1.31.3
-      2    <1 ms    <1 ms    <1 ms  192.168.31.4
-      3    <1 ms    <1 ms    <1 ms  192.168.31.22
-      4     *        *        *     Request timed out.
-      5    75 ms    74 ms    74 ms  10.10.30.4
+  1    <1 ms    <1 ms    <1 ms  10.1.31.3
+  2    <1 ms    <1 ms    <1 ms  192.168.31.4
+  3    <1 ms    <1 ms    <1 ms  192.168.31.22
+  4     *        *        *     Request timed out.
+  5    75 ms    74 ms    74 ms  10.10.30.4
 
-    Trace complete.
+Trace complete.
+```
 
 ### <a name="path-to-the-spoke-vnet"></a>Chemin vers le réseau virtuel spoke
 
 La sortie de détermination d’itinéraire d’un emplacement Location 2 local vers une machine virtuelle dans le réseau virtuel spoke est illustrée ici :
 
-    C:\Windows\system32>tracert 10.11.30.4
+```console
+C:\Windows\system32>tracert 10.11.30.4
 
-    Tracing route to 10.11.30.4 over a maximum of 30 hops
-      1    <1 ms    <1 ms     1 ms  10.1.31.3
-      2    <1 ms    <1 ms    <1 ms  192.168.31.0
-      3    <1 ms    <1 ms    <1 ms  192.168.31.18
-      4     *        *        *     Request timed out.
-      5    75 ms    74 ms    74 ms  10.11.30.4
+Tracing route to 10.11.30.4 over a maximum of 30 hops
+  1    <1 ms    <1 ms     1 ms  10.1.31.3
+  2    <1 ms    <1 ms    <1 ms  192.168.31.0
+  3    <1 ms    <1 ms    <1 ms  192.168.31.18
+  4     *        *        *     Request timed out.
+  5    75 ms    74 ms    74 ms  10.11.30.4
 
-    Trace complete.
+Trace complete.
+```
 
 ### <a name="path-to-the-branch-vnet-on-premises-location-1-and-the-remote-vnet"></a>Chemin du réseau virtuel branch, de l’emplacement Location 1 local et du réseau virtuel distant
 
@@ -428,29 +471,33 @@ Comme nous l’avons indiqué dans l’[analyse du plan de contrôle][Control-An
 
 La sortie de détermination d’itinéraire d’un réseau virtuel distant vers une machine virtuelle dans le réseau virtuel hub est illustrée ici :
 
-    C:\Users\rb>tracert 10.10.30.4
+```console
+C:\Users\rb>tracert 10.10.30.4
 
-    Tracing route to 10.10.30.4 over a maximum of 30 hops
+Tracing route to 10.10.30.4 over a maximum of 30 hops
 
-      1    65 ms    65 ms    65 ms  10.17.30.36
-      2     *        *        *     Request timed out.
-      3    69 ms    68 ms    68 ms  10.10.30.4
+  1    65 ms    65 ms    65 ms  10.17.30.36
+  2     *        *        *     Request timed out.
+  3    69 ms    68 ms    68 ms  10.10.30.4
 
-    Trace complete.
+Trace complete.
+```
 
 ### <a name="path-to-the-spoke-vnet"></a>Chemin vers le réseau virtuel spoke
 
 La sortie de détermination d’itinéraire du réseau virtuel distant vers une machine virtuelle dans le réseau virtuel spoke est illustrée ici :
 
-    C:\Users\rb>tracert 10.11.30.4
+```console
+C:\Users\rb>tracert 10.11.30.4
 
-    Tracing route to 10.11.30.4 over a maximum of 30 hops
+Tracing route to 10.11.30.4 over a maximum of 30 hops
 
-      1    67 ms    67 ms    67 ms  10.17.30.36
-      2     *        *        *     Request timed out.
-      3    71 ms    69 ms    69 ms  10.11.30.4
+  1    67 ms    67 ms    67 ms  10.17.30.36
+  2     *        *        *     Request timed out.
+  3    71 ms    69 ms    69 ms  10.11.30.4
 
-    Trace complete.
+Trace complete.
+```
 
 ### <a name="path-to-the-branch-vnet-and-on-premises-location-2"></a>Chemin du réseau virtuel branch et de l’emplacement Location 2 local
 
@@ -460,17 +507,18 @@ Comme nous l’avons indiqué dans l’[analyse du plan de contrôle][Control-An
 
 La sortie de détermination d’itinéraire du réseau virtuel distant vers une machine virtuelle dans l’emplacement Location 1 local est illustrée ici :
 
-    C:\Users\rb>tracert 10.2.30.10
+```console
+C:\Users\rb>tracert 10.2.30.10
 
-    Tracing route to 10.2.30.10 over a maximum of 30 hops
+Tracing route to 10.2.30.10 over a maximum of 30 hops
 
-      1    67 ms    67 ms    67 ms  10.17.30.36
-      2     *        *        *     Request timed out.
-      3     *        *        *     Request timed out.
-      4    69 ms    69 ms    69 ms  10.2.30.10
+  1    67 ms    67 ms    67 ms  10.17.30.36
+  2     *        *        *     Request timed out.
+  3     *        *        *     Request timed out.
+  4    69 ms    69 ms    69 ms  10.2.30.10
 
-    Trace complete.
-
+Trace complete.
+```
 
 ## <a name="expressroute-and-site-to-site-vpn-connectivity-in-tandem"></a>Connectivité ExpressRoute et VPN de site à site en tandem
 

@@ -1,14 +1,14 @@
 ---
 title: 'Démarrage rapide : Nouvelle affectation de stratégie à l’aide de PowerShell'
 description: Dans ce guide de démarrage rapide, vous allez utiliser Azure PowerShell pour créer une attribution de stratégie Azure afin d’identifier les ressources non conformes.
-ms.date: 05/20/2020
+ms.date: 08/17/2020
 ms.topic: quickstart
-ms.openlocfilehash: 1fe1c7ee50c1e93f94d387440a22b011d392ffca
-ms.sourcegitcommit: 50673ecc5bf8b443491b763b5f287dde046fdd31
+ms.openlocfilehash: e941b74101308af703f243197fb4043f8f32d233
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83684512"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "88548410"
 ---
 # <a name="quickstart-create-a-policy-assignment-to-identify-non-compliant-resources-using-azure-powershell"></a>Démarrage rapide : Créer une affectation de stratégie pour identifier les ressources non conformes à l’aide d’Azure PowerShell
 

@@ -1,22 +1,22 @@
 ---
 title: Créer, modifier ou supprimer un groupe de sécurité réseau Azure
 titlesuffix: Azure Virtual Network
-description: Découvrez comment créer, changer ou supprimer un groupe de sécurité réseau.
+description: Découvrez où trouver des informations sur les règles de sécurité et sur la création, la modification ou la suppression d’un groupe de sécurité réseau.
 services: virtual-network
 documentationcenter: na
 author: KumudD
 ms.service: virtual-network
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 03/13/2020
 ms.author: kumud
-ms.openlocfilehash: 62972be5b363c0a22a24a9056b6f3f8b11829566
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 42efc2bee88f073f2a628b1d2041afcc310cb871
+ms.sourcegitcommit: d2222681e14700bdd65baef97de223fa91c22c55
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82182903"
+ms.lasthandoff: 10/07/2020
+ms.locfileid: "91822977"
 ---
 # <a name="create-change-or-delete-a-network-security-group"></a>Créer, changer ou supprimer un groupe de sécurité réseau
 
@@ -176,7 +176,7 @@ Le nombre de règles par groupe de sécurité réseau que vous pouvez créer par
     | **Action** | **Autoriser** ou **Refuser** | Ce paramètre spécifie si cette règle autorise ou refuse l’accès pour la configuration source et de destination fournie. |
     | **Priorité** | Entrez une valeur comprise entre 100 et 4096 qui est unique pour toutes les règles de sécurité au sein du groupe de sécurité réseau. | Azure traite les règles de sécurité par ordre de priorité. Plus le numéro est faible, plus la priorité est élevée. Nous vous recommandons de laisser un écart entre les numéros de priorité quand vous créez des règles, par exemple, 100, 200, 300. Cela permet par la suite d’intercaler de nouvelles règles et de leur donner une priorité plus ou moins élevée que les règles existantes. |
     | **Nom** | Nom unique de la règle au sein du groupe de sécurité réseau | Le nom peut comprendre jusqu’à 80 caractères. Il doit commencer par une lettre ou un chiffre et se terminer par une lettre, un chiffre ou un trait de soulignement. Le nom peut contenir uniquement des lettres, des chiffres, des traits d’union, des traits de soulignement et des points. |
-    | **Description** | Description texte | Vous pouvez éventuellement spécifier une description texte de la règle de sécurité. |
+    | **Description** | Description texte | Vous pouvez éventuellement spécifier une description texte de la règle de sécurité. La description ne doit pas avoir plus de 140 caractères. |
 
 #### <a name="commands"></a>Commandes
 
@@ -366,9 +366,9 @@ Pour effectuer des tâches sur des groupes de sécurité réseau, des règles de
 
 | Action                                                        |   Nom                                                                |
 |-------------------------------------------------------------- |   -------------------------------------------                         |
-| Microsoft.Network/networkSecurityGroups/rules/read            |   Obtenir une règle                                                            |
-| Microsoft.Network/networkSecurityGroups/rules/write           |   Créer ou mettre à jour une règle                                               |
-| Microsoft.Network/networkSecurityGroups/rules/delete          |   Supprimer une règle                                                         |
+| Microsoft.Network/networkSecurityGroups/securityRules/read            |   Obtenir une règle                                                            |
+| Microsoft.Network/networkSecurityGroups/securityRules/write           |   Créer ou mettre à jour une règle                                               |
+| Microsoft.Network/networkSecurityGroups/securityRules/delete          |   Supprimer une règle                                                         |
 
 ### <a name="application-security-group"></a>Groupe de sécurité d’application
 

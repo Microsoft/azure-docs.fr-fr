@@ -10,12 +10,12 @@ ms.subservice: content-moderator
 ms.topic: conceptual
 ms.date: 03/15/2019
 ms.author: pafarley
-ms.openlocfilehash: b02324923e3f004395105b8e04165390cb950fe7
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 77d7b8a0bf4d7fe9a94a61ea3f2f4279246ffb69
+ms.sourcegitcommit: 80c1056113a9d65b6db69c06ca79fa531b9e3a00
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "73044129"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96903885"
 ---
 # <a name="create-human-reviews"></a>Créer des révisions humaines
 
@@ -56,4 +56,4 @@ Les révisions de texte fonctionnent de la même manière que les révisions d'i
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Dans ce guide, vous avez appris à configurer et à utiliser des révisions fournies par l'[outil de révision](https://contentmoderator.cognitive.microsoft.com) Content Moderator. Consultez maintenant le [Guide de l’API REST](../try-review-api-review.md) ou le [Démarrage rapide du kit SDK .NET](../dotnet-sdk-quickstart.md) pour apprendre à créer des révisions programmatiquement.
+Dans ce guide, vous avez appris à configurer et à utiliser des révisions fournies par l'[outil de révision](https://contentmoderator.cognitive.microsoft.com) Content Moderator. Consultez maintenant le [Guide sur la console d’API](../try-review-api-review.md) ou le [Démarrage rapide du SDK .NET](../client-libraries.md?pivots=programming-language-csharp%253fpivots%253dprogramming-language-csharp) pour apprendre à créer des révisions par programmation.

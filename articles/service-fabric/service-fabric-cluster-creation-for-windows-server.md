@@ -1,16 +1,14 @@
 ---
 title: Créer un cluster Azure Service Fabric autonome
 description: Créez un cluster Azure Service Fabric sur n’importe quel ordinateur (physique ou virtuel) exécutant Windows Server, qu’il soit local ou dans un cloud.
-author: dkkapur
 ms.topic: conceptual
 ms.date: 2/21/2019
-ms.author: dekapur
-ms.openlocfilehash: 9133a7087285aa6e01a2431bf1a65dfa3c6f8857
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 36883f2c8b09fa3f8f013e0267dafa2a8220e5d2
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82189094"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91843190"
 ---
 # <a name="create-a-standalone-cluster-running-on-windows-server"></a>Créer un cluster autonome s’exécutant sur Windows Server
 Vous pouvez utiliser Azure Service Fabric pour créer des clusters Service Fabric sur toute machine virtuelle ou tout ordinateur exécutant Windows Server. Cela signifie que vous pouvez déployer et exécuter des applications Service Fabric dans n’importe quel environnement contenant un ensemble d’ordinateurs Windows Server interconnectés, que ce soit en local ou avec un fournisseur cloud. Service Fabric fournit un package d’installation pour créer des clusters Service Fabric, appelé package Windows Server autonome. Les clusters Service Fabric traditionnels sur Azure sont disponibles en tant que service managé, tandis que les clusters Service Fabric autonomes sont en libre-service. Pour en savoir plus sur les différences, consultez [Comparaison entre Azure et des clusters Service Fabric autonomes](./service-fabric-deploy-anywhere.md).
@@ -25,10 +23,10 @@ Cet article vous guide tout au long du processus de création d’un cluster Ser
 <a id="getsupport"></a>
 
 ## <a name="get-support-for-the-service-fabric-for-windows-server-package"></a>Obtenir de l’aide pour le package Service Fabric pour Windows Server
-* Interrogez la Communauté sur le package autonome Service Fabric pour Windows Server dans le [forum Azure Service Fabric](https://social.msdn.microsoft.com/Forums/azure/en-US/home?forum=AzureServiceFabric?).
+* Interrogez la communauté sur le package autonome Service Fabric pour Windows Server via la [page de questions Microsoft Q&A pour Azure Service Fabric](/answers/topics/azure-service-fabric.html).
 * Ouvrez un ticket pour obtenir le [support professionnel Service Fabric](https://support.microsoft.com/oas/default.aspx?prid=16146).  En savoir plus sur le support professionnel Microsoft [ici](https://support.microsoft.com/en-us/gp/offerprophone?wa=wsignin1.0).
 * Vous pouvez également bénéficier du support pour ce package dans le cadre du [Support Premier Microsoft](https://support.microsoft.com/en-us/premier).
-* Pour plus d’informations, consultez [Options de support d’Azure Service Fabric](https://docs.microsoft.com/azure/service-fabric/service-fabric-support).
+* Pour plus d’informations, consultez [Options de support d’Azure Service Fabric](./service-fabric-support.md).
 * Pour collecter des journaux d’activité à des fins de support, exécutez le [collecteur de journaux d’activité de Service Fabric autonome](service-fabric-cluster-standalone-package-contents.md).
 
 <a id="downloadpackage"></a>
@@ -128,7 +126,7 @@ Connect-ServiceFabricCluster -ConnectionEndpoint <*IPAddressofaMachine*>:<Client
 
 Par exemple :
 ```powershell
-Connect-ServiceFabricCluster -ConnectionEndpoint 192.13.123.2345:19000
+Connect-ServiceFabricCluster -ConnectionEndpoint 192.13.123.234:19000
 ```
 
 Pour obtenir des exemples de connexion à un cluster, consultez [Se connecter à un cluster sécurisé](service-fabric-connect-to-secure-cluster.md) . Une fois connecté au cluster, utilisez l’applet de commande [Get-ServiceFabricNode](/powershell/module/servicefabric/get-servicefabricnode?view=azureservicefabricps) pour afficher une liste des nœuds du cluster et les informations d’état pour chaque nœud. **HealthState** doit être à l’état *OK* pour chaque nœud.
@@ -216,7 +214,7 @@ Aucun.
 * [Paramètres de configuration pour un cluster Windows autonome](service-fabric-cluster-manifest.md)
 * [Ajouter ou supprimer des nœuds à/d’un cluster Service Fabric autonome](service-fabric-cluster-windows-server-add-remove-nodes.md)
 * [Mettre à niveau une version autonome du cluster Service Fabric](service-fabric-cluster-upgrade-windows-server.md)
-* [Créer un cluster Service Fabric autonome avec des machines virtuelles Azure sous Windows](service-fabric-cluster-creation-with-windows-azure-vms.md)
+* [Créer un cluster Service Fabric autonome avec des machines virtuelles Azure sous Windows](./service-fabric-cluster-creation-via-arm.md)
 * [Sécuriser un cluster autonome sur Windows à l’aide de la sécurité Windows](service-fabric-windows-cluster-windows-security.md)
 * [Sécuriser un cluster autonome sur Windows à l’aide de certificats X509](service-fabric-windows-cluster-x509-security.md)
 

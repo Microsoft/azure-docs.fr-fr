@@ -1,33 +1,23 @@
 ---
-title: Informations de référence sur la syntaxe de SQLFilter dans Azure Service Bus | Microsoft Docs
-description: Cet article fournit des détails sur la grammaire SQLFilter. L’instance SqlFilter prend en charge un sous-ensemble de la norme SQL-92.
-services: service-bus-messaging
-documentationcenter: na
-author: spelluru
-manager: timlt
-editor: ''
-ms.assetid: ''
-ms.service: service-bus-messaging
-ms.devlang: na
+title: Syntaxe de filtre SQL pour les règles d’abonnement Azure Service Bus | Microsoft Docs
+description: Cet article fournit des détails sur la grammaire du filtre SQL. Un filtre SQL prend en charge un sous-ensemble de la norme SQL-92.
 ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: na
-ms.date: 09/05/2018
-ms.author: spelluru
-ms.openlocfilehash: d5a8e165fcee23c5feecd5935983dd77d3ec6c30
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 11/24/2020
+ms.openlocfilehash: 9bff18b2161e419d728c360c9ed950ac2867fea8
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76759661"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96498674"
 ---
-# <a name="sqlfilter-syntax"></a>Syntaxe SQLFilter
+# <a name="subscription-rule-sql-filter-syntax"></a>Syntaxe de filtre SQL pour les règles d’abonnement
 
-Un objet *SqlFilter* est une instance de la [classe SqlFilter](/dotnet/api/microsoft.servicebus.messaging.sqlfilter) ; il représente une expression de filtre basée sur le langage SQL évaluée par rapport à un [BrokeredMessage](/dotnet/api/microsoft.servicebus.messaging.brokeredmessage). L’instance SqlFilter prend en charge un sous-ensemble de la norme SQL-92.  
+Un *filtre SQL* est l’un des types de filtres disponibles pour les abonnements aux rubriques Service Bus. Il s’agit d’une expression textuelle qui s’appuie sur un sous-ensemble de la norme SQL-92. Les expressions de filtre sont utilisées avec l’élément `sqlExpression` de la propriété « sqlFilter » d’un objet `Rule` Service Bus dans un [modèle Azure Resource Manager](service-bus-resource-manager-namespace-topic-with-rule.md), avec l’argument [`--filter-sql-expression`](/cli/azure/servicebus/topic/subscription/rule?preserve-view=true&view=azure-cli-latest#az_servicebus_topic_subscription_rule_create) de la commande Azure CLI `az servicebus topic subscription rule create` et avec plusieurs fonctions de Kit de développement logiciel (SDK) qui autorisent la gestion des règles d’abonnement.
+
+Service Bus Premium prend également en charge la [syntaxe du sélecteur de messages SQL JMS](https://docs.oracle.com/javaee/7/api/javax/jms/Message.html) via l’API JMS 2.0.
+
   
- Cette rubrique répertorie les informations relatives à la syntaxe SQLFilter.  
-  
-```  
+``` 
 <predicate ::=  
       { NOT <predicate> }  
       | <predicate> AND <predicate>  
@@ -60,11 +50,11 @@ Un objet *SqlFilter* est une instance de la [classe SqlFilter](/dotnet/api/micro
   
 ## <a name="arguments"></a>Arguments  
   
--   `<scope>` est une chaîne facultative qui indique la portée de `<property_name>`. Les valeurs valides sont `sys` ou `user`. La valeur `sys` indique la portée du système où `<property_name>` est un nom de propriété publique de la [classe BrokeredMessage](/dotnet/api/microsoft.servicebus.messaging.brokeredmessage). `user` indique la portée de l’utilisateur où `<property_name>` est une clé du dictionnaire de la [classe BrokeredMessage](/dotnet/api/microsoft.servicebus.messaging.brokeredmessage). La portée de l’`user` est l’étendue par défaut si `<scope>` n’est pas défini.  
+-   `<scope>` est une chaîne facultative qui indique la portée de `<property_name>`. Les valeurs valides sont `sys` ou `user`. La valeur `sys` indique la portée du système où `<property_name>` est un nom de propriété publique de la [classe BrokeredMessage](/dotnet/api/microsoft.servicebus.messaging.brokeredmessage). `user` indique la portée de l’utilisateur où `<property_name>` est une clé du dictionnaire de la [classe BrokeredMessage](/dotnet/api/microsoft.servicebus.messaging.brokeredmessage). L’étendue de l’objet `user` est l’étendue par défaut si `<scope>` n’est pas défini.  
   
-## <a name="remarks"></a>Notes
+## <a name="remarks"></a>Remarques
 
-Une tentative d’accès à une propriété inexistante du système est une erreur, tandis qu’une tentative d’accès à une propriété d’utilisateur inexistante n’est pas une erreur. Au lieu de cela, une propriété d’utilisateur inexistante est évaluée en interne en tant que valeur inconnue. Une valeur inconnue est traitée spécialement lors de l’évaluation de l’opérateur.  
+Une tentative d’accès à une propriété système inexistante est une erreur, tandis qu’une tentative d’accès à une propriété utilisateur inexistante n’en est pas une. Au lieu de cela, une propriété d’utilisateur inexistante est évaluée en interne en tant que valeur inconnue. Une valeur inconnue est traitée spécialement lors de l’évaluation de l’opérateur.  
   
 ## <a name="property_name"></a>property_name  
   
@@ -92,7 +82,7 @@ Cela signifie toute chaîne commençant par une lettre et suivie par un(e) ou pl
   
 `[:IsDigit:]` signifie tout caractère Unicode classé en tant que chiffre décimal. `System.Char.IsDigit(c)` renvoie `true` si `c` est un chiffre Unicode.  
   
-Un `<regular_identifier>` ne peut pas être un mot-clé réservé.  
+Un `<regular_identifier>` ne peut pas être un mot clé réservé.  
   
 `<delimited_identifier>` correspond à toute chaîne placée entre crochets ([]). Un crochet droit est représenté par deux crochets droits. Voici quelques exemples de `<delimited_identifier>` :  
   
@@ -102,7 +92,7 @@ Un `<regular_identifier>` ne peut pas être un mot-clé réservé.
   
 ```  
   
-`<quoted_identifier>` correspond à toute chaîne placée entre guillemets doubles. Un guillemet double dans l’identificateur est représenté par deux guillemets doubles. Il est déconseillé d’utiliser des identificateurs entre guillemets, qui peuvent être facilement confondus avec une constante de chaîne. Utilisez si possible un identificateur délimité. Vous trouverez ci-dessous un exemple de `<quoted_identifier>` :  
+`<quoted_identifier>` correspond à toute chaîne placée entre guillemets doubles. Un guillemet double dans l’identificateur est représenté par deux guillemets doubles. Il est déconseillé d’utiliser des identificateurs entre guillemets, qui peuvent être facilement confondus avec une constante de chaîne. Utilisez si possible un identificateur délimité. Voici un exemple de `<quoted_identifier>` :  
   
 ```  
 "Contoso & Northwind"  
@@ -115,7 +105,7 @@ Un `<regular_identifier>` ne peut pas être un mot-clé réservé.
       <expression>  
 ```  
   
-### <a name="remarks"></a>Notes
+### <a name="remarks"></a>Remarques
   
 `<pattern>` doit être une expression évaluée comme chaîne. Il est utilisé comme modèle pour l’opérateur LIKE.      Il peut contenir les caractères génériques suivants :  
   
@@ -130,7 +120,7 @@ Un `<regular_identifier>` ne peut pas être un mot-clé réservé.
       <expression>  
 ```  
   
-### <a name="remarks"></a>Notes  
+### <a name="remarks"></a>Remarques  
 
 `<escape_char>` doit être une expression évaluée comme chaîne dont la longueur est 1. Il est utilisé comme caractère d’échappement pour l’opérateur LIKE.  
   
@@ -156,7 +146,7 @@ Un `<regular_identifier>` ne peut pas être un mot-clé réservé.
   
 -   `<decimal_constant>` est une chaîne de nombres qui n’est pas entourée de guillemets et qui contient une décimale. Les valeurs sont stockées en tant que `System.Double` en interne et suivent la même plage/précision.  
   
-     Dans une version ultérieure, ce nombre pourrait être stocké dans un autre type de données pour prendre en charge la sémantique de nombre exacte. Vous n’aurez donc pas à compter sur le fait que le type de données sous-jacent soit `System.Double` pour `<decimal_constant>`.  
+     Dans une version ultérieure, ce nombre pourrait être stocké dans un autre type de données pour prendre en charge la sémantique exacte des nombres. Vous n’aurez donc pas à compter sur le fait que le type de données sous-jacent soit `System.Double` pour `<decimal_constant>`.  
   
      Voici quelques exemples de constantes décimales :  
   
@@ -179,7 +169,7 @@ Un `<regular_identifier>` ne peut pas être un mot-clé réservé.
       TRUE | FALSE  
 ```  
   
-### <a name="remarks"></a>Notes  
+### <a name="remarks"></a>Remarques  
 
 Les constantes booléennes sont représentées par les mots-clés **TRUE** ou **FALSE**. Les valeurs sont stockées en tant que `System.Boolean`.  
   
@@ -189,7 +179,7 @@ Les constantes booléennes sont représentées par les mots-clés **TRUE** ou **
 <string_constant>  
 ```  
   
-### <a name="remarks"></a>Notes  
+### <a name="remarks"></a>Remarques  
 
 Les constantes de chaîne sont placées entre guillemets simples et incluent tout caractère Unicode valide. Un guillemet simple intégré à une constante de chaîne est représenté par deux guillemets simples.  
   
@@ -201,9 +191,9 @@ Les constantes de chaîne sont placées entre guillemets simples et incluent tou
       property(name) | p(name)  
 ```  
   
-### <a name="remarks"></a>Notes
+### <a name="remarks"></a>Remarques
   
-La fonction `newid()` renvoie un **System.Guid** généré par la méthode `System.Guid.NewGuid()`.  
+La fonction `newid()` renvoie un `System.Guid` généré par la méthode `System.Guid.NewGuid()`.  
   
 La fonction `property(name)` renvoie la valeur de la propriété référencée par `name`. La valeur `name` peut être toute expression valide renvoyant une valeur de chaîne.  
   
@@ -229,13 +219,13 @@ Tenez compte de la sémantique [SqlFilter](/dotnet/api/microsoft.servicebus.mess
   
   Évaluation « inconnue » dans les opérateurs arithmétiques :  
   
-- Pour les opérateurs binaires, si le côté gauche et/ou droit des opérandes est évalué comme **inconnu**, le résultat est **inconnu**.  
+- Pour les opérateurs binaires, si le côté gauche ou droit des opérandes est évalué comme **inconnu**, le résultat est **inconnu**.  
   
 - Pour les opérateurs unaires, si un opérande est évalué comme **inconnu**, le résultat est **inconnu**.  
   
   Évaluation « inconnue » dans les opérateurs de comparaison binaires :  
   
-- Si l’opérande de gauche ou de droite est évalué comme **inconnu**, le résultat est **inconnu**.  
+- Si le côté gauche ou droit des opérandes est évalué comme **inconnu**, le résultat est **inconnu**.  
   
   Évaluation « inconnue » dans `[NOT] LIKE` :  
   
@@ -279,8 +269,63 @@ Tenez compte de la sémantique [SqlFilter](/dotnet/api/microsoft.servicebus.mess
   
 -   Les opérateurs arithmétiques, tels que `+`, `-`, `*`, `/`, et `%` suivent la même sémantique que la liaison d’opérateur C# dans les promotions de type de données et les conversions implicites.
 
+
+## <a name="examples"></a>Exemples
+
+### <a name="set-rule-action-for-a-sql-filter"></a>Définir l’action de la règle pour un filtre SQL
+
+```csharp
+// instantiate the ManagementClient
+this.mgmtClient = new ManagementClient(connectionString);
+
+// create the SQL filter
+var sqlFilter = new SqlFilter("source = @stringParam");
+
+// assign value for the parameter
+sqlFilter.Parameters.Add("@stringParam", "orders");
+
+// instantiate the Rule = Filter + Action
+var filterActionRule = new RuleDescription
+{
+    Name = "filterActionRule",
+    Filter = sqlFilter,
+    Action = new SqlRuleAction("SET source='routedOrders'")
+};
+
+// create the rule on Service Bus
+await this.mgmtClient.CreateRuleAsync(topicName, subscriptionName, filterActionRule);
+```
+
+### <a name="sql-filter-on-a-system-property"></a>Filtre SQL sur une propriété système
+
+```csharp
+sys.Label LIKE '%bus%'`
+```
+
+### <a name="using-or"></a>Utilisation de la clause OR 
+
+```csharp
+ sys.Label LIKE '%bus%'` OR `user.tag IN ('queue', 'topic', 'subscription')
+```
+
+### <a name="using-in-and-not-in"></a>Utilisation des clauses IN et NOT IN
+
+```csharp
+StoreId IN('Store1', 'Store2', 'Store3')"
+
+sys.To IN ('Store5','Store6','Store7') OR StoreId = 'Store8'
+
+sys.To NOT IN ('Store1','Store2','Store3','Store4','Store5','Store6','Store7','Store8') OR StoreId NOT IN ('Store1','Store2','Store3','Store4','Store5','Store6','Store7','Store8')
+```
+
+Pour un exemple C#, consultez [Exemple de filtres de rubrique sur GitHub](https://github.com/Azure/azure-service-bus/tree/master/samples/DotNet/Azure.Messaging.ServiceBus/BasicSendReceiveTutorialwithFilters).
+
+
 ## <a name="next-steps"></a>Étapes suivantes
 
 - [Classe SQLFilter (.NET Framework)](/dotnet/api/microsoft.servicebus.messaging.sqlfilter)
 - [Classe SQLFilter (.NET Standard)](/dotnet/api/microsoft.azure.servicebus.sqlfilter)
-- [Classe SQLRuleAction](/dotnet/api/microsoft.servicebus.messaging.sqlruleaction)
+- [Classe SqlFilter (Java)](/java/api/com.microsoft.azure.servicebus.rules.SqlFilter)
+- [SqlRuleFilter (JavaScript)](/javascript/api/@azure/service-bus/sqlrulefilter)
+- [az servicebus topic subscription rule](/cli/azure/servicebus/topic/subscription/rule)
+- [New-AzServiceBusRule](/powershell/module/az.servicebus/new-azservicebusrule)

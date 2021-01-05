@@ -8,18 +8,18 @@ ms.topic: include
 ms.date: 01/28/2019
 ms.author: juliako
 ms.custom: include file
-ms.openlocfilehash: 5ebbac39c8850737ea6f9ef333e45d305a520655
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 1327ac49920af353d6adbbe592ab4189417e60e8
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79461212"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95996891"
 ---
 ## <a name="use-cli-shell"></a>Utiliser l’interpréteur de commandes CLI
 
-Il est recommandé d’utiliser [Azure Cloud Shell](https://docs.microsoft.com/azure/cloud-shell/overview?view=azure-cli-latest) pour exécuter des commandes CLI. **Cloud Shell** est un interpréteur de commandes interactif et gratuit que vous pouvez utiliser pour effectuer les étapes mentionnées dans cet article. Il contient des outils Azure courants préinstallés et configurés pour être utilisés avec votre compte. Il vous donne la possibilité de choisir l’expérience d’interpréteur de commandes la plus adaptée à votre façon de travailler. Les utilisateurs Linux peuvent choisir une expérience Bash, et les utilisateurs Windows l’option PowerShell.
+Il est recommandé d’utiliser [Azure Cloud Shell](../articles/cloud-shell/overview.md?view=azure-cli-latest) pour exécuter des commandes CLI. **Cloud Shell** est un interpréteur de commandes interactif et gratuit que vous pouvez utiliser pour effectuer les étapes mentionnées dans cet article. Il contient des outils Azure courants préinstallés et configurés pour être utilisés avec votre compte. Il vous donne la possibilité de choisir l’expérience d’interpréteur de commandes la plus adaptée à votre façon de travailler. Les utilisateurs Linux peuvent choisir une expérience Bash, et les utilisateurs Windows l’option PowerShell.
 
-Vous pouvez également installer l’interface CLI localement. Consultez [Installer Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli) pour obtenir des instructions pour votre plateforme.
+Vous pouvez également installer l’interface CLI localement. Consultez [Installer Azure CLI](/cli/azure/install-azure-cli) pour obtenir des instructions pour votre plateforme.
 
 ### <a name="sign-in"></a>Se connecter
 

@@ -1,21 +1,21 @@
 ---
 title: Utiliser Azure Key Vault dans les modèles
-description: Découvrez comment utiliser Azure Key Vault pour transmettre des valeurs de paramètre sécurisées lors d’un déploiement de modèle Resource Manager.
+description: Découvrez comment utiliser Azure Key Vault pour transmettre des valeurs de paramètre sécurisées lors d’un déploiement de modèle Azure Resource Manager (modèle ARM).
 author: mumian
 ms.date: 04/23/2020
 ms.topic: tutorial
 ms.author: jgao
 ms.custom: seodec18
-ms.openlocfilehash: 7fd84fc2e98578772c806f358cb8d6c400e0d994
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: ae2361d12dfe18cadd80dd3b84405b2b17751e59
+ms.sourcegitcommit: d2d1c90ec5218b93abb80b8f3ed49dcf4327f7f4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82185011"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97584083"
 ---
 # <a name="tutorial-integrate-azure-key-vault-in-your-arm-template-deployment"></a>Tutoriel : Intégrer Azure Key Vault à votre déploiement de modèle ARM
 
-Découvrez comment récupérer les secrets d’un coffre de clés Azure et les passer en tant que paramètres quand vous déployez un modèle Azure Resource Manager (ARM). La valeur du paramètre n’est jamais exposée, car vous référencez uniquement son ID de coffre de clés. Vous pouvez référencer le secret du coffre de clés à l’aide d’un ID statique ou d’un ID dynamique. Ce tutoriel utilise un ID statique. Avec l’approche d’ID statique, vous référencez le coffre de clés dans le fichier de paramètres de modèle, et non dans le fichier de modèle. Pour plus d’informations sur les deux approches, consultez [Utiliser Azure Key Vault pour transmettre une valeur de paramètre sécurisée pendant le déploiement](./key-vault-parameter.md).
+Découvrez comment récupérer les secrets d’un coffre de clés Azure et les passer en tant que paramètres quand vous déployez un modèle Azure Resource Manager (modèle ARM). La valeur du paramètre n’est jamais exposée, car vous référencez uniquement son ID de coffre de clés. Vous pouvez référencer le secret du coffre de clés à l’aide d’un ID statique ou d’un ID dynamique. Ce tutoriel utilise un ID statique. Avec l’approche d’ID statique, vous référencez le coffre de clés dans le fichier de paramètres de modèle, et non dans le fichier de modèle. Pour plus d’informations sur les deux approches, consultez [Utiliser Azure Key Vault pour transmettre une valeur de paramètre sécurisée pendant le déploiement](./key-vault-parameter.md).
 
 Dans le tutoriel [Définir l’ordre de déploiement des ressources](./template-tutorial-create-templates-with-dependent-resources.md), vous créez une machine virtuelle. Vous devez fournir le nom d’utilisateur et le mot de passe de l’administrateur de la machine virtuelle. Au lieu de fournir le mot de passe, vous pouvez le stocker au préalable dans le coffre de clés Azure Key Vault. Il vous suffit ensuite de personnaliser le modèle pour récupérer le mot de passe à partir du coffre de clés au cours du déploiement.
 
@@ -37,12 +37,13 @@ Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https:/
 
 Pour effectuer ce qui est décrit dans cet article, vous avez besoin des éléments suivants :
 
-* Visual Studio Code avec l’extension Outils Resource Manager. Consultez [Utiliser Visual Studio Code pour créer des modèles ARM](use-vs-code-to-create-template.md).
+* Visual Studio Code avec l’extension Outils Resource Manager. Consultez [Démarrage rapide : Créer des modèles ARM avec Visual Studio Code](quickstart-create-templates-use-visual-studio-code.md).
 * Pour une sécurité optimale, utilisez un mot de passe généré pour le compte administrateur de la machine virtuelle. Voici un exemple de génération de mot de passe :
 
     ```console
     openssl rand -base64 32
     ```
+
     Vérifiez que le mot de passe généré répond aux exigences relatives aux mots de passe de machine virtuelle. Chaque service Azure présente des exigences de mot de passe spécifiques. Pour connaître les exigences relatives aux mots de passe de machine virtuelle, consultez [Quelles sont les exigences en matière de mot de passe lors de la création d’une machine virtuelle ?](../../virtual-machines/windows/faq.md#what-are-the-password-requirements-when-creating-a-vm).
 
 ## <a name="prepare-a-key-vault"></a>Préparer un coffre de clés
@@ -53,7 +54,7 @@ Dans cette section, vous créez un coffre de clés auquel vous ajoutez un secret
 * Ajoute un secret au coffre de clés. Le secret stocke le mot de passe d’administrateur de la machine virtuelle.
 
 > [!NOTE]
-> Si, en tant qu’utilisateur déployant le modèle de machine virtuelle, vous n’êtes ni le propriétaire ni un contributeur du coffre de clés, son propriétaire ou un contributeur doit vous accorder l’accès à l’autorisation *Microsoft.KeyVault/vaults/deploy/action* pour le coffre de clés. Pour plus d’informations, consultez l’article [Utiliser Azure Key Vault pour transmettre une valeur de paramètre sécurisée pendant le déploiement](./key-vault-parameter.md).
+> Si, en tant qu’utilisateur déployant le modèle de machine virtuelle, vous n’êtes ni le propriétaire ni un contributeur du coffre de clés, son propriétaire ou un contributeur doit vous accorder l’accès à l’autorisation `Microsoft.KeyVault/vaults/deploy/action` pour le coffre de clés. Pour plus d’informations, consultez l’article [Utiliser Azure Key Vault pour transmettre une valeur de paramètre sécurisée pendant le déploiement](./key-vault-parameter.md).
 
 Pour exécuter le script Azure PowerShell suivant, sélectionnez **Essayer** afin d’ouvrir Azure Cloud Shell. Pour coller le script, cliquez avec le bouton droit dans volet de l’interpréteur de commandes, puis sélectionnez **Coller**.
 
@@ -79,7 +80,7 @@ Write-Host "Press [ENTER] to continue ..."
 > * Le nom par défaut du secret est **vmAdminPassword**. Il est codé en dur dans le modèle.
 > * Pour permettre au modèle de récupérer le secret, vous devez activer une stratégie d’accès appelée **Activer l’accès à Azure Resource Manager pour le déploiement de modèles** pour le coffre de clés. Cette stratégie est activée dans le modèle. Pour plus d’informations sur la stratégie d’accès, consultez [Déployer des coffres de clés et des secrets](./key-vault-parameter.md#deploy-key-vaults-and-secrets).
 
-Le modèle contient une seule valeur de sortie appelée *keyVaultId*. Vous utiliserez cet ID avec le nom du secret pour récupérer la valeur du secret plus loin dans le tutoriel. Le format d’ID de ressource est le suivant :
+Le modèle contient une seule valeur de sortie appelée `keyVaultId`. Vous utiliserez cet ID avec le nom du secret pour récupérer la valeur du secret plus loin dans le tutoriel. Le format d’ID de ressource est le suivant :
 
 ```json
 /subscriptions/<SubscriptionID>/resourceGroups/mykeyvaultdeploymentrg/providers/Microsoft.KeyVault/vaults/<KeyVaultName>
@@ -87,7 +88,7 @@ Le modèle contient une seule valeur de sortie appelée *keyVaultId*. Vous utili
 
 Quand vous copiez et collez l’ID, il peut figurer sur plusieurs lignes. Fusionnez les lignes et supprimez les espaces supplémentaires.
 
-Pour valider le déploiement, exécutez la commande PowerShell suivante dans le même volet de l’interpréteur de commandes afin de récupérer le secret en texte clair. La commande fonctionne uniquement dans la même session d’interpréteur de commandes, car elle utilise la variable *$keyVaultName* définie dans le script PowerShell précédent.
+Pour valider le déploiement, exécutez la commande PowerShell suivante dans le même volet de l’interpréteur de commandes afin de récupérer le secret en texte clair. La commande fonctionne uniquement dans la même session d’interpréteur de commandes, car elle utilise la variable `$keyVaultName` définie dans le script PowerShell précédent.
 
 ```azurepowershell
 (Get-AzKeyVaultSecret -vaultName $keyVaultName  -name "vmAdminPassword").SecretValueText
@@ -146,14 +147,14 @@ En utilisant la méthode d’ID statique, aucune modification du fichier de mod�
     ```
 
     > [!IMPORTANT]
-    > Remplacez la valeur de **id** par l’ID de ressource du coffre de clés que vous avez créé au cours de la procédure précédente. Le secretName est codé en dur en tant que **vmAdminPassword**.  Consultez [Préparer un coffre de clés](#prepare-a-key-vault).
+    > Remplacez la valeur de `id` par l’ID de ressource du coffre de clés que vous avez créé au cours de la procédure précédente. Le `secretName` est codé en dur en tant que **vmAdminPassword**.  Consultez [Préparer un coffre de clés](#prepare-a-key-vault).
 
     ![Fichier de paramètres de déploiement de machine virtuelle pour l’intégration d’un coffre de clés à un modèle Resource Manager](./media/template-tutorial-use-key-vault/resource-manager-tutorial-create-vm-parameters-file.png)
 
 1. Utilisez les valeurs suivantes :
 
-    * **adminUsername** : nom du compte administrateur de la machine virtuelle.
-    * **dnsLabelPrefix** : nom de la valeur de dnsLabelPrefix.
+    * `adminUsername` : nom du compte administrateur de la machine virtuelle.
+    * `dnsLabelPrefix` : Nommez la valeur `dnsLabelPrefix`.
 
     Pour des exemples de noms, consultez l’image précédente.
 
@@ -167,7 +168,7 @@ En utilisant la méthode d’ID statique, aucune modification du fichier de mod�
 
     ![Fichier de chargement du Cloud Shell du portail Azure](./media/template-tutorial-use-template-reference/azure-portal-cloud-shell-upload-file.png)
 
-1. Sélectionnez **Charger/Télécharger des fichiers**, puis **Charger**. Chargez *azuredeploy.json* et *azuredeploy.parameters.json* dans Cloud Shell. Après avoir chargé le fichier, vous pouvez utiliser la commande **ls** et la commande **cat** pour vérifier que le chargement a été correctement effectué.
+1. Sélectionnez **Charger/Télécharger des fichiers**, puis **Charger**. Chargez *azuredeploy.json* et *azuredeploy.parameters.json* dans Cloud Shell. Après avoir chargé le fichier, vous pouvez utiliser la commande `ls` et la commande `cat` pour vérifier que le chargement a été correctement effectué.
 
 1. Exécutez le script PowerShell suivant pour déployer le modèle.
 
@@ -192,7 +193,7 @@ Une fois que vous avez réussi le déploiement de la machine virtuelle, testez l
 
 1. Ouvrez le [portail Azure](https://portal.azure.com).
 
-1. Sélectionnez **Groupes de ressources** >  **\<*NomDeVotreGroupeDeRessources*>**  > **MachineVirtuelleWindowsSimple**.
+1. Sélectionnez **Groupes de ressources** >  **\<*YourResourceGroupName*>**  > **simpleWinVM**.
 1. Sélectionnez **Se connecter** tout en haut.
 1. Sélectionnez **Télécharger le fichier RDP**, puis suivez les instructions pour vous connecter à la machine virtuelle à l’aide du mot de passe stocké dans le coffre de clés.
 

@@ -7,14 +7,14 @@ ms.service: databox
 ms.subservice: disk
 ms.topic: tutorial
 ms.localizationpriority: high
-ms.date: 09/04/2019
+ms.date: 09/17/2019
 ms.author: alkohli
-ms.openlocfilehash: 3f89d713003f1f4265a7ab7c467454af750fab48
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: abe09cf10e241ec95ceed767e7038cde07667fc9
+ms.sourcegitcommit: 32c521a2ef396d121e71ba682e098092ac673b30
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "79214290"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91322731"
 ---
 ::: zone target="docs"
 
@@ -68,7 +68,12 @@ Vérifiez que vos données se trouvent dans les comptes de stockage avant de les
 
       ![Groupe de ressources pour les disques managés](media/data-box-disk-deploy-picked-up/resource-group-attached-managed-disk.png)
 
-  - Si vous avez copié un VHDX ou un VHD dynamique ou de différenciation, le VHDX/VHD est chargé dans le compte de stockage de préproduction comme objet blob de blocs. Accédez à votre compte de stockage de préproduction (**Compte de stockage > Objets blob**), puis sélectionnez le conteneur approprié (StandardSSD, StandardHDD ou PremiumSSD). Les disques VHDX/VHD doivent s’afficher en tant qu’objets blob de blocs dans votre compte de stockage de préproduction.
+    > [!NOTE]
+    > Si un objet blob de pages n’est pas correctement converti en disque managé pendant une copie de données, il reste dans le compte de stockage et des frais de stockage vous sont facturés.
+
+  -  Si vous avez copié un VHDX ou un VHD dynamique ou de différenciation, le VHDX/VHD est chargé dans le compte de stockage de préproduction comme objet blob de blocs. Accédez à votre compte de stockage de préproduction (**Compte de stockage > Objets blob**), puis sélectionnez le conteneur approprié (StandardSSD, StandardHDD ou PremiumSSD). Les disques VHDX/VHD doivent s’afficher en tant qu’objets blob de blocs dans votre compte de stockage de préproduction.
+  
+
   
 ::: zone-end
 

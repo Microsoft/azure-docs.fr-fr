@@ -3,7 +3,7 @@ title: Vue d’ensemble d’Azure Media Services | Microsoft Docs
 description: Microsoft Azure Media Services est une plateforme extensible basée sur le cloud qui permet aux développeurs de créer des applications évolutives de gestion et de diffusion de médias. Cet article fournit une vue d’ensemble d’Azure Media Services.
 services: media-services
 documentationcenter: ''
-author: Juliako
+author: IngridAtMicrosoft
 manager: femila
 editor: ''
 ms.service: media-services
@@ -11,23 +11,25 @@ ms.workload: media
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: conceptual
-ms.date: 04/19/2019
-ms.author: juliako
-ms.openlocfilehash: 1c2d6287a89c7816c30cf26978859c07dba0251d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 11/03/2020
+ms.author: inhenkel
+ms.openlocfilehash: c6f889963e87d900040d1fe77031f943ab368837
+ms.sourcegitcommit: 99955130348f9d2db7d4fb5032fad89dad3185e7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78197502"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93348744"
 ---
-# <a name="azure-media-services-overview"></a>Vue d’ensemble d’Azure Media Services 
+# <a name="azure-media-services-overview"></a>Vue d’ensemble d’Azure Media Services
+
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
 
 > [!div class="op_single_selector" title1="Sélectionnez la version de Media Services que vous utilisez :"]
 > * [Version 3](../latest/media-services-overview.md)
 > * [Version 2](media-services-overview.md)
 
 > [!NOTE]
-> Aucune nouvelle fonctionnalité n’est ajoutée à Media Services v2. <br/>Découvrez la dernière version, [Media Services v3](https://docs.microsoft.com/azure/media-services/latest/). Consultez aussi [Conseils de migration de v2 vers v3](../latest/migrate-from-v2-to-v3.md).
+> Aucune nouvelle fonctionnalité n’est ajoutée à Media Services v2. <br/>Découvrez la dernière version, [Media Services v3](../latest/index.yml). Consultez aussi [Conseils de migration de v2 vers v3](../latest/migrate-from-v2-to-v3.md).
 
 Microsoft Azure Media Services (AMS) est une plateforme extensible basée sur le cloud qui permet aux développeurs de créer des applications évolutives de gestion et de diffusion de médias. Media Services est basé sur les API REST qui permettent de télécharger, stocker, encoder et empaqueter en toute sécurité du contenu vidéo ou audio destiné à être diffusé à la demande ou en direct sur différents clients (par exemple, téléviseurs, PC et appareils mobiles).
 
@@ -38,11 +40,11 @@ Vous pouvez créer des flux de travail de bout en bout en utilisant uniquement M
 
 Pour rappel, vous devez respecter toutes les lois applicables dans le cadre de votre utilisation d’Azure Media Services et vous n’êtes pas autorisé à utiliser Media Services ou d’autres services Azure d’une manière qui porterait atteinte aux droits des tiers ou qui leur serait préjudiciable.
 
-Avant de charger une vidéo ou une image vers Media Services, Vous devez disposer de tous les droits appropriés pour utiliser la vidéo ou l’image, y compris, lorsque cela est requis par la Loi, avoir obtenu tous les consentements nécessaires de chaque personne (le cas échéant) apparaissant dans la vidéo ou l’image, pour autoriser l’utilisation, le traitement et le stockage de leurs données dans Media Services et Azure. Certaines juridictions peuvent imposer des obligations légales spéciales pour la collecte, le traitement en ligne et le stockage de catégories de données particulières, comme des données biométriques. Avant d’utiliser Media Services et Azure pour le traitement et le stockage de données soumises à des conditions légales spéciales, vous devez veiller à vous conformer à toutes les conditions légales qui s’appliquent.
+Avant de charger une vidéo ou une image vers Media Services, Vous devez disposer de tous les droits appropriés pour utiliser la vidéo ou l’image, y compris, lorsque cela est requis par la Loi, avoir obtenu tous les consentements nécessaires de chaque personne (le cas échéant) apparaissant dans la vidéo ou l’image, pour autoriser l’utilisation, le traitement et le stockage de leurs données dans Media Services et Azure. Certaines juridictions peuvent imposer des obligations légales spéciales pour la collecte, le traitement en ligne et le stockage de catégories de données particulières, comme les données biométriques. Avant d’utiliser Media Services et Azure pour le traitement et le stockage de données soumises à des conditions légales spéciales, vous devez veiller à vous conformer à toutes les conditions légales qui s’appliquent.
 
-Pour en savoir plus sur la conformité, la confidentialité et la sécurité dans Media Services, consultez le [Centre de confidentialité](https://www.microsoft.com/trust-center/?rtc=1) Microsoft. Pour connaître les obligations de Microsoft en matière de confidentialité et les bonnes pratiques de gestion et de conservation de vos données, consultez la [Déclaration de confidentialité](https://privacy.microsoft.com/PrivacyStatement), les [Conditions d’utilisation des services en ligne](https://www.microsoft.com/licensing/product-licensing/products?rtc=1) (« OST ») et l’[Addenda au traitement des données](https://www.microsoftvolumelicensing.com/DocumentSearch.aspx?Mode=3&DocumentTypeId=67) (« DPA ») de Microsoft. En utilisant Media Services, vous consentez à être lié par les dispositions de l’OST, du DPA et de la Déclaration de confidentialité.
+Pour en savoir plus sur la conformité, la confidentialité et la sécurité dans Media Services, consultez le [Centre de confidentialité](https://www.microsoft.com/trust-center/?rtc=1) Microsoft. Pour connaître les obligations de Microsoft en matière de confidentialité et les bonnes pratiques de gestion et de conservation de vos données, consultez la [Déclaration de confidentialité](https://privacy.microsoft.com/PrivacyStatement), les [Conditions d’utilisation des services en ligne](https://www.microsoft.com/licensing/product-licensing/products?rtc=1) (« OST ») et l’[Avenant au traitement des données](https://www.microsoftvolumelicensing.com/DocumentSearch.aspx?Mode=3&DocumentTypeId=67) (« DPA ») de Microsoft. En utilisant Media Services, vous consentez à être lié par les dispositions de l’OST, du DPA et de la Déclaration de confidentialité.
  
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 Pour commencer à utiliser Azure Media Services, vous devez disposer des éléments suivants :
 
@@ -57,7 +59,7 @@ Pour commencer à utiliser Azure Media Services, vous devez disposer des éléme
 
 Pour créer des solutions Media Services, vous pouvez utiliser les composants suivants :
 
-* [API REST Media Services](https://docs.microsoft.com/rest/api/media/operations/azure-media-services-rest-api-reference)
+* [API REST Media Services](/rest/api/media/operations/azure-media-services-rest-api-reference)
 * Un des Kits de développement logiciel (SDK) de client disponibles :
     * Kit de développement logiciel (SDK) Azure Media Services pour .NET
     
@@ -71,12 +73,12 @@ Pour créer des solutions Media Services, vous pouvez utiliser les composants su
     * [Azure-Media-Services-Explorer](https://github.com/Azure/Azure-Media-Services-Explorer) (Azure Media Services Explorer (AMSE) est une application Winforms/C# pour Windows)
 
 > [!NOTE]
-> Pour obtenir la dernière version du kit SDK Java et développer des applications avec Java, consultez [Prise en main du Kit de développement logiciel du client Java pour Azure Media Services](https://docs.microsoft.com/azure/media-services/media-services-java-how-to-use). <br/>
+> Pour obtenir la dernière version du kit SDK Java et développer des applications avec Java, consultez [Prise en main du Kit de développement logiciel du client Java pour Azure Media Services](./media-services-java-how-to-use.md). <br/>
 > Pour télécharger le dernier kit SDK PHP pour Media Services, recherchez la version 0.5.7 du package Microsoft/WindowAzure dans le [référentiel Packagist](https://packagist.org/packages/microsoft/windowsazure#v0.5.7).  
 
 ## <a name="code-samples"></a>Exemples de code
 
-Vous trouverez plusieurs exemples de code dans la galerie **Azure Code Samples** : [exemples de code Azure Media Services](https://azure.microsoft.com/resources/samples/?service=media-services&sort=0).
+Découvrez plusieurs exemples de code dans la galerie **Exemples de code Azure**  : [Exemples de code Azure Media Services](https://azure.microsoft.com/resources/samples/?service=media-services&sort=0).
 
 ## <a name="concepts"></a>Concepts
 
@@ -84,13 +86,12 @@ Pour les concepts Azure Media Services, consultez [Concepts](media-services-conc
 
 ## <a name="supported-scenarios-and-availability-of-media-services-across-data-centers"></a>Scénarios pris en charge et disponibilité de Media Services dans les centres de données
 
-Pour plus d’informations, consultez [Scénarios AMS et disponibilité des fonctionnalités et services dans les centres de données](scenarios-and-availability.md).
+Pour plus d’informations sur les scénarios courants d’Azure, consultez [Scénarios AMS](scenarios-and-availability.md).
+Pour des informations sur la disponibilité régionale, consultez [Disponibilité de Media Services](availability-regions-v-2.md).
 
 ## <a name="service-level-agreement-sla"></a>Contrat de Niveau de Service (SLA)
 
 Pour plus d’informations, consultez le [contrat SLA Microsoft Azure](https://azure.microsoft.com/support/legal/sla/).
-
-Pour plus d’informations sur la disponibilité dans les centres de données, consultez la section [Disponibilité](scenarios-and-availability.md#availability).
 
 ## <a name="support"></a>Support
 

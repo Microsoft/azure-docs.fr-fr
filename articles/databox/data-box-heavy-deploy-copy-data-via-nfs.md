@@ -1,6 +1,6 @@
 ---
 title: Tutoriel pour copier des données sur Azure Data Box Heavy par le biais de NFS | Microsoft Docs
-description: Découvrir comment copier des données sur votre Azure Data Box Heavy par le biais de NFS
+description: Dans ce tutoriel, découvrez comment établir une connexion entre votre ordinateur hôte et Azure Data Box Heavy par le biais de NFS avec l’interface utilisateur web locale.
 services: databox
 author: alkohli
 ms.service: databox
@@ -8,12 +8,12 @@ ms.subservice: heavy
 ms.topic: tutorial
 ms.date: 07/03/2019
 ms.author: alkohli
-ms.openlocfilehash: 4361cee3d07408c3abb5031d2ab18c15c92c5e0a
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: a8199039ea803d5919e168edccaaa03c18985725
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "79222806"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87921025"
 ---
 # <a name="tutorial-copy-data-to-azure-data-box-heavy-via-nfs"></a>Tutoriel : Copier des données sur Azure Data Box Heavy par le biais de NFS
 
@@ -55,7 +55,7 @@ Sous les partages Azure Files :
 
 Le tableau suivant montre le chemin UNC des partages sur votre Data Box Heavy et l’URL du chemin du Stockage Azure où les données sont chargées. La dernière URL de chemin de Stockage Azure peut être dérivée à partir du chemin de partage UNC.
  
-|                   |                                                            |
+| Stockage           | Chemin UNC                                                                       |
 |-------------------|--------------------------------------------------------------------------------|
 | Objets blob de blocs Azure | <li>Chemin UNC aux partages : `//<DeviceIPAddress>/<StorageAccountName_BlockBlob>/<ContainerName>/files/a.txt`</li><li>URL de Stockage Azure : `https://<StorageAccountName>.blob.core.windows.net/<ContainerName>/files/a.txt`</li> |  
 | Objets blob de pages Azure  | <li>Chemin UNC aux partages : `//<DeviceIPAddres>/<StorageAccountName_PageBlob>/<ContainerName>/files/a.txt`</li><li>URL de Stockage Azure : `https://<StorageAccountName>.blob.core.windows.net/<ContainerName>/files/a.txt`</li>   |  

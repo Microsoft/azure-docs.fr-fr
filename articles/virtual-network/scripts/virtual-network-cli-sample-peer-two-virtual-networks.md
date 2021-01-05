@@ -1,6 +1,6 @@
 ---
 title: Appairer deux réseaux virtuels - Exemple de script Azure CLI
-description: Exemple de script Azure CLI - Homologuer deux réseaux virtuels.
+description: Créez et connectez deux réseaux virtuels situés dans la même région via le réseau Azure à l’aide d’un exemple de script Azure CLI.
 services: virtual-network
 documentationcenter: virtual-network
 author: KumudD
@@ -12,14 +12,15 @@ ms.tgt_pltfrm: ''
 ms.workload: infrastructure
 ms.date: 03/20/2018
 ms.author: kumud
-ms.openlocfilehash: 2dd5336d66872cc8c56fd372e89b67ce9c892f3a
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: 6cd6d61ba1404ca6b6de63a0151ec414b2df54e7
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "74083838"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87492460"
 ---
-# <a name="peer-two-virtual-networks-script-sample"></a>Exemple de script : Homologuer deux réseaux virtuels
+# <a name="peer-two-virtual-networks-with-an-azure-cli-script-sample"></a>Appairer deux réseaux virtuels avec un exemple de script Azure CLI
 
 Cet exemple de script crée et connecte deux réseaux virtuels situés dans la même région via le réseau Azure. Après exécution du script, vous obtenez un peering entre deux réseaux virtuels.
 

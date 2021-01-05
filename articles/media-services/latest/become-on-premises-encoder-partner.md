@@ -5,17 +5,19 @@ services: media-services
 author: johndeu
 manager: johndeu
 ms.author: johndeu
-ms.date: 03/02/2020
-ms.topic: article
+ms.date: 08/31/2020
+ms.topic: how-to
 ms.service: media-services
-ms.openlocfilehash: f98d9942f8c30f06b0144503b056c1e8a393ae52
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 1383b6afac9ad2332169328ef71981e23e86bdcc
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79298629"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89297448"
 ---
 # <a name="how-to-verify-your-on-premises-live-streaming-encoder"></a>Guide pratique pour vérifier votre encodeur de streaming en direct local
+
+[!INCLUDE [media services api v3 logo](./includes/v3-hr.md)]
 
 En tant que partenaire d’encodeur local d’Azure Media Services, Media Services promeut votre produit en recommandant votre encodeur aux clients d’entreprise. Pour devenir un partenaire d’encodeur local, vous devez vérifier la compatibilité de votre encodeur local avec Media Services. Pour ce faire, effectuez les vérifications suivantes.
 

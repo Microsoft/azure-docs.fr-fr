@@ -3,12 +3,12 @@ title: Répliquer des machines virtuelles Azure Stack à Azure en utilisant Azur
 description: Découvrez comment configurer la reprise d’activité sur Azure de machines virtuelles Azure Stack avec le service Azure Site Recovery.
 ms.topic: conceptual
 ms.date: 08/05/2019
-ms.openlocfilehash: ab35463ca8c3b29e6b4ae8abc781a7081091b214
-ms.sourcegitcommit: efefce53f1b75e5d90e27d3fd3719e146983a780
+ms.openlocfilehash: 36e11bfe5354644f9ef6603ffe20cb2e86074323
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/01/2020
-ms.locfileid: "80478514"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96016900"
 ---
 # <a name="replicate-azure-stack-vms-to-azure"></a>Répliquer des machines virtuelles Azure Stack dans Azure
 
@@ -36,7 +36,7 @@ Une fois ces étapes terminées, vous pouvez exécuter un basculement complet ve
 
 ## <a name="architecture"></a>Architecture
 
-![Architecture](./media/azure-stack-site-recovery/architecture.png)
+![Le diagramme montre des coffres Recovery Services pour deux locataires dans des clouds associés à des abonnements de locataire sur une infrastructure Azure Stack commune.](./media/azure-stack-site-recovery/architecture.png)
 
 **Lieu** | **Composant** |**Détails**
 --- | --- | ---
@@ -164,13 +164,13 @@ Configurez la machine serveur de configuration, inscrivez-la dans le coffre, pui
 1. Cliquez sur **Préparer l’infrastructure** > **Source**.
 2. Dans **Préparer la source**, cliquez sur **+ Serveur de configuration**.
 
-    ![Configurer la source](./media/azure-stack-site-recovery/plus-config-srv.png)
+    ![Capture d’écran de la boîte de dialogue +Serveur de configuration avec le message « Cliquez sur +Serveur de configuration dans la barre de commandes ci-dessus pour configurer un... ».](./media/azure-stack-site-recovery/plus-config-srv.png)
 
 3. Dans **Ajouter un serveur**, vérifiez que **Serveur de configuration** s’affiche dans **Type de serveur**.
 5. Téléchargez le fichier d’installation unifiée de Site Recovery.
 6. Téléchargez la clé d’inscription du coffre. Vous avez besoin de la clé d’inscription lorsque vous exécutez le programme d’installation unifiée. Une fois générée, la clé reste valide pendant 5 jours.
 
-    ![Configurer la source](./media/azure-stack-site-recovery/set-source2.png)
+    ![Capture d’écran de la boîte de dialogue Ajouter un serveur, avec le type de serveur défini sur Serveur de configuration, et le bouton Télécharger la clé d’inscription du coffre mis en évidence.](./media/azure-stack-site-recovery/set-source2.png)
 
 
 ### <a name="run-azure-site-recovery-unified-setup"></a>Exécuter le programme d’installation unifiée Azure Site Recovery
@@ -186,7 +186,7 @@ Installez à présent le serveur de configuration :
 > [!NOTE]
 > Vous pouvez également installer le serveur de configuration à partir de la ligne de commande. [Plus d’informations](physical-manage-configuration-server.md#install-from-the-command-line)
 >
-> L’affichage du nom de compte dans le portail peut prendre plus de 15 minutes. Pour procéder à une mise à jour immédiate, sélectionnez **Serveurs de configuration** > ***nom du serveur*** > **Actualiser le serveur**.
+> L’affichage du nom de compte dans le portail peut prendre plus de 15 minutes. Pour procéder à une mise à jour immédiate, sélectionnez **Serveurs de configuration** > **_nom du serveur_ *_ > _* Actualiser le serveur**.
 
 ## <a name="step-4-set-up-the-target-environment"></a>Étape 4 : Configurer l’environnement cible
 
@@ -262,7 +262,7 @@ Avant d’exécuter un test de basculement, vérifiez les propriétés de la mac
 2. Dans le volet **Élément répliqué**, vous voyez un récapitulatif des informations de la machine virtuelle, son état d’intégrité et ses derniers points de récupération disponibles. Cliquez sur **Propriétés** pour obtenir plus de détails.
 3. Dans **Calcul et réseau**, modifiez les paramètres selon vos besoins.
 
-    - Vous pouvez modifier les paramètres de nom de machine virtuelle Azure, de groupe de ressources, de taille cible, de [groupe à haute disponibilité](/azure/virtual-machines/windows/tutorial-availability-sets) et de disque managé.
+    - Vous pouvez modifier les paramètres de nom de machine virtuelle Azure, de groupe de ressources, de taille cible, de [groupe à haute disponibilité](../virtual-machines/windows/tutorial-availability-sets.md) et de disque managé.
     - Vous pouvez également afficher et modifier les paramètres réseau. Ceux-ci incluent le réseau/sous-réseau auquel la machine virtuelle Azure sera jointe après le basculement, ainsi que l’adresse IP qui sera affectée à la machine virtuelle.
 1. Dans **Disques**, vous pouvez voir les informations relatives au système d’exploitation aux disques de données de la machine virtuelle.
 
@@ -314,26 +314,7 @@ Ensuite, exécutez un basculement comme suit :
 
 ### <a name="fail-back-to-azure-stack"></a>Restaurer automatiquement sur Azure Stack
 
-Lorsque votre site principal est à nouveau opérationnel, vous pouvez opérer une restauration automatique d’Azure vers Azure Stack. Pour ce faire, vous devez télécharger le disque dur virtuel de la machine virtuelle Azure, puis le charger sur Azure Stack.
-
-1. Arrêtez la machine virtuelle Azure pour permettre le téléchargement du disque dur virtuel.
-2. Pour commencer à télécharger le disque dur virtuel, installez l’[Explorateur Stockage Azure](https://azure.microsoft.com/features/storage-explorer/).
-3. Accédez à la machine virtuelle dans le portail Azure (en utilisant le nom de la machine virtuelle).
-4. Dans **Disques**, cliquez sur le nom du disque, puis recueillez les paramètres.
-
-    - Par exemple, l’URI de disque dur virtuel utilisé dans notre test, `https://502055westcentralus.blob.core.windows.net/wahv9b8d2ceb284fb59287/copied-3676553984.vhd`, peut être décomposé pour obtenir les paramètres d’entrée suivants qui sont utilisés pour télécharger le disque dur virtuel.
-        - Compte de stockage : 502055westcentralus
-        - Conteneur : wahv9b8d2ceb284fb59287
-        - Nom du disque dur virtuel : copied-3676553984.vhd
-
-5. À présent, utilisez l’Explorateur Stockage Azure pour télécharger le disque dur virtuel.
-6. Chargez le disque dur virtuel sur Azure Stack en procédant de la manière décrite [ici](/azure-stack/user/azure-stack-manage-vm-disks#use-powershell-to-add-multiple-disks-to-a-vm).
-7. Dans la machine virtuelle existante ou une nouvelle machine virtuelle, attachez les disques durs virtuels chargés.
-8. Vérifiez que le disque du système d’exploitation est correct, puis démarrez la machine virtuelle.
-
-
-À ce stade, la restauration automatique est terminée.
-
+Lorsque votre site principal est à nouveau opérationnel, vous pouvez opérer une restauration automatique d’Azure vers Azure Stack. Pour ce faire, effectuez les étapes [listées ici](/azure-stack/operator/site-recovery-failback?view=azs-2005).
 
 ## <a name="conclusion"></a>Conclusion
 
@@ -342,4 +323,3 @@ Dans le cadre de cet article, nous avons répliqué des machines virtuelles Azur
 ## <a name="next-steps"></a>Étapes suivantes
 
 Après une restauration automatique, vous pouvez reprotéger la machine virtuelle et recommencer à la répliquer sur Azure. Pour ce faire, répétez les étapes décrites dans cet article.
-

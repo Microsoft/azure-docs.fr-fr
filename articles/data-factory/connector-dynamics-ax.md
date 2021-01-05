@@ -11,13 +11,13 @@ ms.service: data-factory
 ms.workload: data-services
 ms.topic: conceptual
 ms.custom: seo-lt-2019
-ms.date: 08/01/2019
-ms.openlocfilehash: 4dd82eea0a80ef81a0f972d1964a62e6c17a80c0
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.date: 06/12/2020
+ms.openlocfilehash: b4dbedc0a30c80748ffc27bb7e17c86067ca0238
+ms.sourcegitcommit: fb3c846de147cc2e3515cd8219d8c84790e3a442
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81417367"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92638157"
 ---
 # <a name="copy-data-from-dynamics-ax-by-using-azure-data-factory"></a>Copier des données de Dynamics AX en utilisant Azure Data Factory
 
@@ -34,10 +34,10 @@ Ce connecteur Dynamics AX est pris en charge pour les activités suivantes :
 
 Vous pouvez copier des données de Dynamics AX vers un magasin de données récepteur pris en charge. Pour obtenir la liste des magasins de données pris en charge en tant que sources et récepteurs pour l’activité de copie, consultez [Magasins de données et formats pris en charge](copy-activity-overview.md#supported-data-stores-and-formats).
 
-Plus précisément, ce connecteur Dynamics AX prend en charge la copie de données à partir de Dynamics AX en utilisant le **protocole OData** avec l’**authentification du principal du service**.
+Plus précisément, ce connecteur Dynamics AX prend en charge la copie de données à partir de Dynamics AX en utilisant le **protocole OData** avec l’ **authentification du principal du service** .
 
 >[!TIP]
->Vous pouvez aussi utiliser ce connecteur pour copier des données à partir de **Dynamics 365 for Finance and Operations**. Reportez-vous à [Prise en charge d’OData](https://docs.microsoft.com/dynamics365/unified-operations/dev-itpro/data-entities/odata) et [Méthode d’authentification](https://docs.microsoft.com/dynamics365/unified-operations/dev-itpro/data-entities/services-home-page#authentication) pour Dynamics 365.
+>Vous pouvez aussi utiliser ce connecteur pour copier des données à partir de **Dynamics 365 for Finance and Operations** . Reportez-vous à [Prise en charge d’OData](/dynamics365/unified-operations/dev-itpro/data-entities/odata) et [Méthode d’authentification](/dynamics365/unified-operations/dev-itpro/data-entities/services-home-page#authentication) pour Dynamics 365.
 
 ## <a name="get-started"></a>Bien démarrer
 
@@ -45,7 +45,7 @@ Plus précisément, ce connecteur Dynamics AX prend en charge la copie de donné
 
 Les sections suivantes fournissent des informations sur les propriétés que vous pouvez utiliser pour définir des entités Data Factory propres au connecteur Dynamics AX.
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 Pour l’authentification de principal de service, effectuez les étapes suivantes :
 
@@ -63,7 +63,7 @@ Les propriétés prises en charge pour le service lié Dynamics AX sont les suiv
 
 | Propriété | Description | Obligatoire |
 |:--- |:--- |:--- |
-| type | La propriété **type** doit être définie sur **DynamicsAX**. |Oui |
+| type | La propriété **type** doit être définie sur **DynamicsAX** . |Oui |
 | url | Point de terminaison OData de l’instance Dynamics AX (ou Dynamics 365 for Finances and Operations). |Oui |
 | servicePrincipalId | Spécifiez l’ID client de l’application. | Oui |
 | servicePrincipalKey | Spécifiez la clé de l’application. Marquez ce champ en tant que **SecureString** afin de le stocker en toute sécurité dans Data Factory, ou [référencez un secret stocké dans Azure Key Vault](store-credentials-in-key-vault.md). | Oui |
@@ -103,11 +103,11 @@ Cette section contient la liste des propriétés prises en charge par le jeu de 
 
 Pour obtenir la liste complète des sections et propriétés disponibles pour la définition de jeux de données, consultez [Jeux de données et services liés](concepts-datasets-linked-services.md). 
 
-Pour copier des données de Dynamics AX, définissez la propriété **type** du jeu de données sur **DynamicsAXResource**. Les propriétés prises en charge sont les suivantes :
+Pour copier des données de Dynamics AX, définissez la propriété **type** du jeu de données sur **DynamicsAXResource** . Les propriétés prises en charge sont les suivantes :
 
 | Propriété | Description | Obligatoire |
 |:--- |:--- |:--- |
-| type | La propriété **type** du jeu de données doit être définie sur **DynamicsAXResource**. | Oui |
+| type | La propriété **type** du jeu de données doit être définie sur **DynamicsAXResource** . | Oui |
 | path | Chemin de l’entité OData Dynamics AX. | Oui |
 
 **Exemple**
@@ -137,12 +137,13 @@ Pour obtenir la liste complète des sections et des propriétés permettant de d
 
 ### <a name="dynamics-ax-as-source"></a>Dynamics AX comme source
 
-Pour copier des données de Dynamics AX, définissez le type **source** de l’activité de copie sur **DynamicsSource**. Les propriétés prises en charge dans la section **source** de l’activité de copie sont les suivantes :
+Pour copier des données de Dynamics AX, définissez le type **source** de l’activité de copie sur **DynamicsSource** . Les propriétés prises en charge dans la section **source** de l’activité de copie sont les suivantes :
 
 | Propriété | Description | Obligatoire |
 |:--- |:--- |:--- |
-| type | La propriété **type** de la source de l’activité de copie doit être définie sur **DynamicsAXSource**. | Oui |
-| query | Options de requête OData pour filtrer les données. Exemple : `"?$select=Name,Description&$top=5"`.<br/><br/>**Remarque** : le connecteur copie les données à partir de l’URL combinée `[URL specified in linked service]/[path specified in dataset][query specified in copy activity source]`. Pour plus d’informations, consultez [OData URL components](https://www.odata.org/documentation/odata-version-3-0/url-conventions/). | Non |
+| type | La propriété **type** de la source de l’activité de copie doit être définie sur **DynamicsAXSource** . | Oui |
+| query | Options de requête OData pour filtrer les données. Exemple : `"?$select=Name,Description&$top=5"`.<br/><br/>**Remarque**  : Le connecteur copie les données à partir de l’URL combinée : `[URL specified in linked service]/[path specified in dataset][query specified in copy activity source]`. Pour plus d’informations, consultez [OData URL components](https://www.odata.org/documentation/odata-version-3-0/url-conventions/). | Non |
+| httpRequestTimeout | Délai d’expiration (valeur **TimeSpan** ) pour l’obtention d’une réponse par la requête HTTP. Cette valeur correspond au délai d’expiration pour l’obtention d’une réponse, et non au délai d’expiration pour la lecture des données de la réponse. Si elle n’est pas spécifiée, la valeur par défaut est **00:30:00** (30 minutes). | Non |
 
 **Exemple**
 

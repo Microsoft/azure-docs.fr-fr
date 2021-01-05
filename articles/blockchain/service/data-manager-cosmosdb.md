@@ -4,18 +4,18 @@ description: Utiliser Blockchain Data Manager pour Azure Blockchain Service pour
 ms.date: 03/08/2020
 ms.topic: tutorial
 ms.reviewer: chroyal
-ms.openlocfilehash: 483a5246274f63549dfb2914361ede6aa001e02e
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 69790787bc888448f2f40178bd12ee7058cc5892
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "79533179"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91283449"
 ---
 # <a name="tutorial-use-blockchain-data-manager-to-send-data-to-azure-cosmos-db"></a>Tutoriel : Utiliser Blockchain Data Manager pour envoyer des données à Azure Cosmos DB
 
 Dans ce didacticiel, vous utilisez Blockchain Data Manager pour Azure Blockchain Service afin d’enregistrer des données de transaction blockchain dans Azure Cosmos DB. Blockchain Data Manager capture, transforme et fournit des données de registre blockchain à des rubriques Azure Event Grid. Depuis Azure Event Grid, utilisez un connecteur d’application logique Azure pour créer des documents dans une base de données Azure Cosmos DB. Lorsque vous aurez terminé ce didacticiel, vous pourrez parcourir les données de transaction blockchain dans l’Explorateur de données Azure Cosmos DB.
 
-[![Détail de la transaction blockchain](./media/data-manager-cosmosdb/raw-msg.png)](./media/data-manager-cosmosdb/raw-msg.png#lightbox)
+[![Capture d’écran montrant les détails de la transaction blockchain.](./media/data-manager-cosmosdb/raw-msg.png)](./media/data-manager-cosmosdb/raw-msg.png#lightbox)
 
 Dans ce tutoriel, vous allez :
 
@@ -271,7 +271,7 @@ Maintenant que vous avez connecté votre instance de Blockchain Data Manager à 
 
 1. Parcourez les messages en sélectionnant leurs ID d’élément et recherchez le message doté du code de hachage de transaction correspondant.
 
-    [![Détail de la transaction blockchain](./media/data-manager-cosmosdb/raw-msg.png)](./media/data-manager-cosmosdb/raw-msg.png#lightbox)
+    [![Capture d’écran montrant les détails de la transaction blockchain d’un élément sélectionné.](./media/data-manager-cosmosdb/raw-msg.png)](./media/data-manager-cosmosdb/raw-msg.png#lightbox)
 
     Le message de transaction brut contient des détails sur la transaction. Toutefois, ses informations de propriété sont chiffrées.
 

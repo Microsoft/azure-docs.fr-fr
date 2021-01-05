@@ -3,18 +3,21 @@ title: 'Langage de requête Azure Cosmos DB : ARRAY_CONCAT'
 description: Découvrir la fonction système SQL de concaténation de tableaux dans Azure Cosmos DB, qui retourne un tableau issu de la concaténation de deux valeurs de tableau ou plus
 author: ginamr
 ms.service: cosmos-db
+ms.subservice: cosmosdb-sql
 ms.topic: conceptual
 ms.date: 03/03/2020
 ms.author: girobins
 ms.custom: query-reference
-ms.openlocfilehash: 8f2b37181e5d743809bb1f60be4056cb4442a8d2
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 8b6424a161b5fc4d0c075ade6f852b33dff20a09
+ms.sourcegitcommit: fa90cd55e341c8201e3789df4cd8bd6fe7c809a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78295876"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93332761"
 ---
 # <a name="array_concat-azure-cosmos-db"></a>ARRAY_CONCAT (Azure Cosmos DB)
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
+
  Retourne un tableau qui est le résultat de la concaténation d’au moins deux valeurs de tableau.  
   
 ## <a name="syntax"></a>Syntaxe

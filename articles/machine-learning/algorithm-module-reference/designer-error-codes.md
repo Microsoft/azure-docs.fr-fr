@@ -1,24 +1,25 @@
 ---
-title: Résolution des erreurs de module
+title: Résoudre des erreurs de module concepteur
 titleSuffix: Azure Machine Learning
-description: Résoudre les exceptions des modules dans le concepteur Azure Machine Learning en utilisant les codes d’erreur
+description: Découvrez comment lire et dépanner les codes d’erreur de module automatisé dans le concepteur Azure Machine Learning.
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: core
 ms.topic: reference
+ms.custom: troubleshooting
 author: likebupt
 ms.author: keli19
-ms.date: 04/16/2020
-ms.openlocfilehash: 38e728de22d49de760e998ddc97c5067beb3ecd1
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.date: 11/25/2020
+ms.openlocfilehash: 846c5519dced06ed16f5a0d12b0bb25443961f93
+ms.sourcegitcommit: ea551dad8d870ddcc0fee4423026f51bf4532e19
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81684695"
+ms.lasthandoff: 12/07/2020
+ms.locfileid: "96753907"
 ---
-# <a name="exceptions-and-error-codes-for-the-designer-preview"></a>Exceptions et codes d’erreur du concepteur (préversion)
+# <a name="exceptions-and-error-codes-for-the-designer"></a>Exceptions et codes d’erreur pour le concepteur
 
-Cet article décrit les messages d’erreur et codes d’exception dans le concepteur Azure Machine Learning (préversion) pour vous aider à résoudre les problèmes liés à vos pipelines Machine Learning.
+Cet article décrit les messages d’erreur et les codes d’exception dans le concepteur Azure Machine Learning afin de vous aider à résoudre les problèmes liés à vos pipelines d’apprentissage automatique.
 
 Vous pouvez trouver le message d’erreur dans le concepteur en procédant comme suit :  
 
@@ -278,13 +279,22 @@ Si le modèle a été formé à l’aide de l’un des modules de formation spé
 ## <a name="error-0014"></a>Erreur 0014  
  Une exception se produit si le nombre de valeurs uniques de colonne est supérieur au nombre autorisé.  
 
- Cette erreur se produit lorsqu’une colonne contient trop de valeurs uniques.  Par exemple, cette erreur peut s’afficher si vous spécifiez qu’une colonne doit être gérée comme données catégorielles, mais qu’il existe trop de valeurs uniques dans la colonne pour permettre la fin du traitement. Vous pouvez également voir cette erreur s’il existe une incompatibilité entre le nombre de valeurs uniques dans les deux entrées.   
+ Cette erreur se produit lorsqu’une colonne contient trop de valeurs uniques, telles qu’une colonne d’ID ou une colonne de texte. Cette erreur peut s’afficher si vous spécifiez qu’une colonne doit être gérée comme données catégorielles, mais qu’il existe trop de valeurs uniques dans la colonne pour permettre la fin du traitement. Vous pouvez également voir cette erreur s’il existe une incompatibilité entre le nombre de valeurs uniques dans les deux entrées.   
+
+L’erreur du nombre de valeurs uniques supérieur au nombre autorisé se produit si les **deux** conditions suivantes sont réunies :
+
+- Plus de 97 % des instances d’une colonne sont des valeurs uniques, ce qui signifie que presque toutes les catégories sont différentes les unes des autres.
+- Une colonne a plus de 1 000 valeurs uniques.
 
 **Résolution :**
 
 Ouvrez le module qui a généré l’erreur et identifiez les colonnes utilisées comme entrées. Pour certains modules, vous pouvez cliquer sur le jeu de données d’entrée et sélectionnez **Visualiser** pour obtenir des statistiques sur des colonnes individuelles, y compris le nombre de valeurs uniques et leur distribution.
 
 Pour les colonnes que vous souhaitez utiliser pour le regroupement ou la catégorisation, prenez les mesures nécessaires pour réduire le nombre de valeurs uniques dans les colonnes. Vous pouvez réduire de différentes manières, selon le type de données de la colonne. 
+
+Pour les colonnes d’ID qui ne sont pas des caractéristiques significatives pendant l’entraînement d’un modèle, vous pouvez donc utiliser [Modifier les métadonnées](../algorithm-module-reference/edit-metadata.md) pour marquer cette colonne comme **Effacer la caractéristique** afin qu’elle ne soit pas utilisée durant l’entraînement d’un modèle. 
+
+Pour les colonnes de texte, vous pouvez utiliser le [Hachage des caractéristiques](../algorithm-module-reference/feature-hashing.md) ou le [module d’extraction des caractéristiques de N-grammes du texte](../algorithm-module-reference/extract-n-gram-features-from-text.md) pour prétraiter les colonnes de texte.
 <!--
 + For text data, you might be able to use [Preprocess Text](preprocess-text.md) to collapse similar entries. 
 + For numeric data, you can create a smaller number of bins using [Group Data into Bins](group-data-into-bins.md), remove or truncate values using [Clip Values](clip-values.md), or use machine learning methods such as [Principal Component Analysis](principal-component-analysis.md) or [Learning with Counts](data-transformation-learning-with-counts.md) to reduce the dimensionality of the data.  
@@ -712,7 +722,7 @@ For general information about how the Matchbox recommendation algorithm works, a
 **Résolution :** Cette erreur est due à de nombreuses conditions différentes : c’est pourquoi il n’existe pas une seule solution au problème.  
  Le tableau suivant contient des messages génériques pour cette erreur, qui sont suivis d’une description spécifique de la condition. 
 
- Si aucun détail n’est disponible, [envoyez des commentaires](https://social.msdn.microsoft.com/forums/azure/home?forum=MachineLearning) dans lesquelles vous fournirez des informations sur les modules qui ont généré l’erreur et sur les conditions associées.
+ Si aucun détail n’est disponible, [référez-vous à la Page de questions Microsoft Q&A pour envoyer des commentaires](/answers/topics/azure-machine-learning-studio-classic.html) dans lesquels vous fournirez des informations sur les modules qui ont généré l’erreur et sur les conditions associées.
 
 |Messages d’exception|
 |------------------------|
@@ -861,7 +871,7 @@ Cette erreur peut également se produire si vous essayez d’utiliser une colonn
 
  Cette erreur se produit dans Azure Machine Learning si la clé utilisée pour accéder au compte de stockage Azure est incorrecte. Par exemple, vous pouvez voir cette erreur si la clé de stockage Azure a été tronquée lors de l’opération de copier-coller ou si la clé incorrecte a été utilisée.  
 
- Pour plus d’informations sur la façon d’obtenir la clé d’un compte de stockage Azure, consultez la section consacrée à [l’affichage, la copie et la régénération des clés d’accès au stockage](https://azure.microsoft.com/documentation/articles/storage-create-storage-account-classic-portal/).  
+ Pour plus d’informations sur la façon d’obtenir la clé d’un compte de stockage Azure, consultez la section consacrée à [l’affichage, la copie et la régénération des clés d’accès au stockage](../../storage/common/storage-account-create.md).  
 
 **Résolution :** Réexaminez le module et vérifiez que la clé de stockage Azure est correcte pour le compte ; copiez à nouveau la clé du Portail Azure classique si nécessaire.  
 
@@ -1082,9 +1092,9 @@ Le message d’erreur Hive est normalement rapporté dans le journal des erreurs
 
 Consultez les articles suivants pour obtenir de l’aide sur les requêtes Hive dans le cadre de l’apprentissage automatique :
 
-+ [Créer des tables Hive et charger des données à partir de Stockage Blob Azure](https://docs.microsoft.com/azure/machine-learning/machine-learning-data-science-move-hive-tables)
-+ [Explorer les données dans des tables avec des requêtes Hive](https://docs.microsoft.com/azure/machine-learning/machine-learning-data-science-explore-data-hive-tables)
-+ [Créer des fonctionnalités pour les données dans un cluster Hadoop à l’aide de requêtes Hive](https://docs.microsoft.com/azure/machine-learning/machine-learning-data-science-create-features-hive)
++ [Créer des tables Hive et charger des données à partir de Stockage Blob Azure](../team-data-science-process/move-hive-tables.md)
++ [Explorer les données dans des tables avec des requêtes Hive](../team-data-science-process/explore-data-hive-tables.md)
++ [Créer des fonctionnalités pour les données dans un cluster Hadoop à l’aide de requêtes Hive](../team-data-science-process/create-features-hive.md)
 + [Aide-mémoire pour les utilisateurs Hive pour SQL (PDF)](http://hortonworks.com/wp-content/uploads/2013/05/hql_cheat_sheet.pdf) (en anglais)
 
   
@@ -1106,7 +1116,7 @@ Consultez les articles suivants pour obtenir de l’aide sur les requêtes Hive 
 
  Si un message SQL est généré par l’exception du module, prenez les mesures en fonction de l’erreur signalée. Par exemple, les messages d’erreur contiennent parfois des indications spécifiques sur l’erreur probable :
 + *Aucune colonne ou base de données manquante*, indiquant que vous avez peut-être tapé un nom de colonne incorrect. Si vous êtes sûr que le nom de la colonne est correct, essayez d’utiliser des crochets ou des guillemets pour inclure l’identificateur de colonne.
-+ *Erreur logique SQL près de \<mot-clé SQL\>* , indiquant une erreur de syntaxe probable avant le mot-clé spécifié
++ *Erreur logique SQL près de \<SQL keyword\>* , indiquant une erreur de syntaxe possible avant le mot-clé spécifié
 
   
 |Messages d’exception|
@@ -1163,7 +1173,7 @@ Cette erreur se produit dans Azure Machine Learning lorsque vous essayez de lier
 
 La gestion des erreurs pour cet événement a été introduite dans une version antérieure d’Azure Machine Learning qui permettait une plus grande personnalisation des méthodes de compartimentage. Actuellement, toutes les méthodes de compartimentage sont basées sur une sélection dans une liste déroulante, donc techniquement cette erreur ne devrait plus se produire.
 
- <!--If you get this error when using the [Group Data into Bins](group-data-into-bins.md) module, consider reporting the issue in the [Azure Machine Learning forum](https://social.msdn.microsoft.com/Forums/en-US/home?forum=MachineLearning), providing the data types, parameter settings, and the exact error message.  -->
+ <!--If you get this error when using the [Group Data into Bins](group-data-into-bins.md) module, consider reporting the issue in the [Microsoft Q&A question page for Azure Machine Learning](/answers/topics/azure-machine-learning-studio-classic.html), providing the data types, parameter settings, and the exact error message.  -->
 
 |Messages d’exception|
 |------------------------|
@@ -1500,7 +1510,7 @@ Résolution :
 
 
 ## <a name="error-0159"></a>Erreur 0159
- Une exception se produit si la transmission au répertoire du modèle du module n’est pas valide. 
+ Une exception se produit si le répertoire du modèle du module n’est pas valide. 
 
 |Messages d’exception|
 |------------------------------------------------------------|
@@ -1515,11 +1525,10 @@ Exception de la bibliothèque interne.
 
 Cette erreur est fournie pour capturer les erreurs internes du moteur qui n’auraient pas été gérées autrement. Par conséquent, la cause de cette erreur peut être différente selon le module qui a généré l’erreur.  
 
-Pour obtenir plus d’aide, nous vous recommandons de publier le message détaillé qui accompagne l’erreur sur le forum Azure Machine Learning, en indiquant une description du scénario, y compris les données utilisées comme entrées. Ces commentaires nous aideront à hiérarchiser les erreurs et à identifier les problèmes les plus importants qui feront l’objet de travaux ultérieurs.  
+Pour obtenir plus d’aide, nous vous recommandons de publier le message détaillé qui accompagne l’erreur sur le [forum Azure Machine Learning](/answers/topics/azure-machine-learning.html), en indiquant une description du scénario, y compris les données utilisées comme entrées. Ces commentaires nous aideront à hiérarchiser les erreurs et à identifier les problèmes les plus importants qui feront l’objet de travaux ultérieurs.  
 
 |Messages d’exception|
 |------------------------|
 |Exception de la bibliothèque.|
 |Exception de bibliothèque : {exception}.|
 |Exception de bibliothèque inconnue : {exception}. {customer_support_guidance}.|
-

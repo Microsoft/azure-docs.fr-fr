@@ -1,6 +1,6 @@
 ---
 title: Migrer les données d’un appareil StorSimple 5000-7000 vers un appareil StorSimple 8000 | Microsoft Docs
-description: Fournit une vue d’ensemble de la fonctionnalité de migration et présente les prérequis.
+description: Découvrez comment migrer des données sur un appareil de la série StorSimple 5000-7000 vers un appareil de la série 8000, et quelles sont les conditions préalables au processus de migration.
 services: storsimple
 documentationcenter: NA
 author: alkohli
@@ -8,17 +8,17 @@ manager: twooley
 ms.assetid: ''
 ms.service: storsimple
 ms.devlang: NA
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: NA
 ms.workload: NA
-ms.date: 08/23/2018
+ms.date: 09/25/2020
 ms.author: alkohli
-ms.openlocfilehash: 967c03f3c4201bdcf1529fdda93717b6eb74e771
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f6fffadd3c53f67af2e4c833a6a1d442c18efa0b
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "60631657"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91398184"
 ---
 # <a name="migrate-data-from-storsimple-5000-7000-series-to-8000-series-device"></a>Migrer les données d’un appareil StorSimple 5000-7000 vers un appareil StorSimple 8000
 
@@ -41,21 +41,21 @@ Vous pouvez déplacer vos données à l’aide de la fonctionnalité de migratio
 
 La fonctionnalité de migration simule un processus de récupération d’urgence d’un appareil 5000/7000 sur un appareil 8000. Cette fonctionnalité vous permet de migrer les données d’un appareil 5000/7000 vers un appareil 8000 sur Azure. Le processus de migration est lancé à l’aide de l’outil de migration StorSimple. L’outil démarre le téléchargement et la conversion de métadonnées de sauvegarde sur l’appareil 8000, puis utilise la dernière sauvegarde pour exposer les volumes sur l’appareil.
 
-|      | Avantages                                                                                                                                     |Inconvénients                                                                                                                                                              |
-|------|-------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 1.   | Le processus de migration conserve l’historique des sauvegardes qui ont été effectuées sur les appareils 5000/7000.                                               | Quand les utilisateurs tentent d’accéder aux données, la fonctionnalité de migration télécharge les données à partir d’Azure, ce qui implique des frais de téléchargement de données.                                     |
-| 2.   | Aucune donnée n’est migrée côté hôte.                                                                                                     | Le processus nécessite un temps d’arrêt entre le début de la sauvegarde et la dernière sauvegarde surfacée sur l’appareil 8000 (il est possible de l’estimer à l’aide de l’outil de migration). |
-| 3.   | Ce processus conserve toutes les stratégies, les modèles de bande passante, le chiffrement et autres paramètres sur les appareils 8000.                      | L’accès utilisateur renvoie uniquement aux données accessibles par les utilisateurs, sans rafraîchir l’ensemble du jeu de données.                                                  |
-| 4.   | Ce processus nécessite plus de temps pour convertir toutes les anciennes sauvegardes dans Azure de manière asynchrone sans affecter la production. | La migration peut uniquement être effectuée à un niveau de configuration cloud.  Les volumes individuels dans une configuration cloud ne peuvent pas être migrés séparément.                       |
+| Avantages                                                                                                                                     |Inconvénients                                                                                                                                                              |
+|-------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Le processus de migration conserve l’historique des sauvegardes qui ont été effectuées sur les appareils 5000/7000.                                               | Quand les utilisateurs tentent d’accéder aux données, la fonctionnalité de migration télécharge les données à partir d’Azure, ce qui implique des frais de téléchargement de données.                                     |
+| Aucune donnée n’est migrée côté hôte.                                                                                                     | Le processus nécessite un temps d’arrêt entre le début de la sauvegarde et la dernière sauvegarde surfacée sur l’appareil 8000 (il est possible de l’estimer à l’aide de l’outil de migration). |
+| Ce processus conserve toutes les stratégies, les modèles de bande passante, le chiffrement et autres paramètres sur les appareils 8000.                      | L’accès utilisateur renvoie uniquement aux données accessibles par les utilisateurs, sans rafraîchir l’ensemble du jeu de données.                                                  |
+| Ce processus nécessite plus de temps pour convertir toutes les anciennes sauvegardes dans Azure de manière asynchrone sans affecter la production. | La migration peut uniquement être effectuée à un niveau de configuration cloud.  Les volumes individuels dans une configuration cloud ne peuvent pas être migrés séparément.                       |
 
 Une migration côté hôte permet de configurer indépendamment les appareils 8000 et de copier les données d’un appareil 5000/7000 sur un appareil 8000. Cela équivaut à migrer des données d’un appareil de stockage vers un autre. Différents outils, tels que Diskboss ou robocopy, sont utilisés pour copier les données.
 
-|      | Avantages                                                                                                                      |Inconvénients                                                                                                                                                                                                      |
-|------|---------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 1.   | La migration peut être réalisée en plusieurs phases, volume-par-volume.                                               | Les sauvegardes précédentes (effectuées sur des appareils 5000/7000) ne seront pas disponibles sur les appareils 8000.                                                                                                       |
-| 2.   | Permet de consolider les données dans un même compte de stockage dans Azure.                                                       | La première sauvegarde sur le cloud d’un appareil 8000 prend plus de temps, car toutes les données de l’appareil 8000 doivent être sauvegardées dans Azure.                                                                     |
-| 3.   | Après une migration réussie, toutes les données sont locales sur l’appliance. Il n’existe pas de latence durant l’accès aux données. | La consommation du stockage Azure augmente jusqu'à ce que les données soient supprimées de l’appareil 5000/7000.                                                                                                        |
-| 4.   |                                                                                                                           | Si l’appareil 5000/7000 héberge une grande quantité de données, durant la migration, ces données doivent être téléchargées à partir d’Azure, ce qui implique des frais et des latences liés au téléchargement de données à partir d’Azure. |
+| Avantages                                                                                                                      |Inconvénients                                                                                                                                                                                                      |
+|---------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| La migration peut être réalisée en plusieurs phases, volume-par-volume.                                               | Les sauvegardes précédentes (effectuées sur des appareils 5000/7000) ne seront pas disponibles sur les appareils 8000.                                                                                                       |
+| Permet de consolider les données dans un même compte de stockage dans Azure.                                                       | La première sauvegarde sur le cloud d’un appareil 8000 prend plus de temps, car toutes les données de l’appareil 8000 doivent être sauvegardées dans Azure.                                                                     |
+| Après une migration réussie, toutes les données sont locales sur l’appliance. Il n’existe pas de latence durant l’accès aux données. | La consommation du stockage Azure augmente jusqu'à ce que les données soient supprimées de l’appareil 5000/7000.                                                                                                        |
+|                                                                                                                           | Si l’appareil 5000/7000 héberge une grande quantité de données, durant la migration, ces données doivent être téléchargées à partir d’Azure, ce qui implique des frais et des latences liés au téléchargement de données à partir d’Azure. |
 
 Cet article aborde uniquement la fonctionnalité de migration d’un appareil 5000/7000 vers un appareil 8000. Pour plus d’informations sur la migration côté hôte, consultez [Migration à partir d’autres appareils de stockage](https://download.microsoft.com/download/9/4/A/94AB8165-CCC4-430B-801B-9FD40C8DA340/Migrating%20Data%20to%20StorSimple%20Volumes_09-02-15.pdf).
 
@@ -80,8 +80,8 @@ Avant d’effectuer la migration, assurez-vous de satisfaire les exigences suiva
 
     ![Vérification de la version logicielle sur les appareils d’ancienne génération](media/storsimple-8000-migrate-from-5000-7000/check-version-legacy-device1.png)
 
-    * Si votre appareil actif n’exécute pas la version v2.1.1.518 ou une version ultérieure, mettez à niveau votre système vers la version minimale requise. Pour des instructions détaillées, consultez le [guide de mise à niveau du système vers v2.1.1.518](http://onlinehelp.storsimple.com/111_Appliance/6_System_Upgrade_Guides/Current_(v2.1.1)/000_Software_Patch_Upgrade_Guide_v2.1.1.518).
-    * Si vous exécutez la version v2.1.1.518, accédez à l’interface utilisateur Web pour vérifier s’il existe des notifications relatives à des échecs de restauration du Registre. Si la restauration du Registre a échoué, exécutez d’abord celle-ci. Pour plus d’informations, consultez [Exécuter la restauration du Registre](http://onlinehelp.storsimple.com/111_Appliance/2_User_Guides/1_Current_(v2.1.1)/1_Web_UI_User_Guide_WIP/2_Configuration/4_Cloud_Accounts/1_Cloud_Credentials#Restoring_Backup_Registry).
+    * Si votre appareil actif n’exécute pas la version v2.1.1.518 ou une version ultérieure, mettez à niveau votre système vers la version minimale requise. Vous devrez peut-être contacter le Support Microsoft afin de solliciter son assistance pour la mise à niveau.
+    * Si vous exécutez la version v2.1.1.518, accédez à l’interface utilisateur Web pour vérifier s’il existe des notifications relatives à des échecs de restauration du Registre. Si la restauration du Registre a échoué, exécutez d’abord celle-ci. Vous devrez peut-être contacter le Support Microsoft afin de solliciter son assistance pour la restauration de votre registre.
     * Si vous disposez d’un appareil inactif qui n’exécutait pas la version v2.1.1.518, effectuez un basculement vers un appareil de remplacement exécutant la version v2.1.1.518. Pour plus d’informations, reportez-vous aux instructions détaillées de récupération d’urgence de votre appareil StorSimple 5000/7000.
     * Sauvegardez les données de votre appareil en prenant un instantané cloud.
     * Vérifiez s’il existe d’autres tâches de sauvegarde actives en cours d’exécution sur l’appareil source. Cela inclut notamment les tâches sur l’hôte de la console de protection des données StorSimple. Patientez jusqu’à ce que les tâches en cours soient entièrement terminées.

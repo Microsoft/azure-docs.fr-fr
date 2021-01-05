@@ -5,15 +5,16 @@ author: bandersmsft
 ms.reviewer: yashar
 tags: billing
 ms.service: cost-management-billing
+ms.subservice: reservations
 ms.topic: conceptual
 ms.date: 02/13/2020
 ms.author: banders
-ms.openlocfilehash: 5867c4ba7fa1447cbd5d40e15237ae50c24c7168
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 522b67e62e7ad8560bb48e8d056ca6daeeb45251
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "77199260"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96350906"
 ---
 # <a name="understand-azure-reservation-usage-for-your-individual-subscription-with-pay-as-you-go-rates-subscription"></a>Comprendre l’utilisation d’une réservation Azure pour votre abonnement individuel avec tarifs de paiement à l’utilisation
 
@@ -71,9 +72,9 @@ Supposez que vous exécutez une machine virtuelle SQL Database de 4e génératio
 
 ### <a name="statement-section-of-csv-file"></a>Section des relevés du fichier CSV
 
-Filtrez sur le nom de compteur **Utilisation des instances réservées** et choisissez la **catégorie du compteur** requise : Azure SQL Database ou Azure Cosmos DB. Vous devez voir quelque chose de similaire à la capture d’écran suivante :
+Filtrez sur le nom de compteur **Utilisation des instances réservées** et choisissez la **catégorie du compteur** voulue : Azure SQL Database ou Azure Cosmos DB. Vous devez voir quelque chose de similaire à la capture d’écran suivante :
 
-![Fichier CSV pour la capacité réservée SQL Database](./media/understand-reserved-instance-usage/billing-payg-sql-db-reserved-capacity-csv-statements.png)
+![Capture d’écran montrant une entrée Catégorie du compteur.](./media/understand-reserved-instance-usage/billing-payg-sql-db-reserved-capacity-csv-statements.png)
 
 La ligne **Utilisation des instances réservées** indique le nombre total d’heures/cœur couvertes par la réservation. Le tarif est de 0 dollar US pour cette ligne puisque la réservation couvre le coût.
 
@@ -81,7 +82,7 @@ La ligne **Utilisation des instances réservées** indique le nombre total d’h
 
 Filtrez les données sur **Informations supplémentaires**, puis tapez votre **ID de réservation**. La capture d’écran suivante montre les champs associés à la réservation de capacité réservée SQL Database.
 
-![Fichier CSV pour la capacité réservée SQL Database](./media/understand-reserved-instance-usage/billing-payg-sql-db-reserved-capacity-csv-details.png)
+![Capture d’écran montrant les détails d’un fichier C S V pour une capacité de réserve.](./media/understand-reserved-instance-usage/billing-payg-sql-db-reserved-capacity-csv-details.png)
 
 1. **L’ID de réservation** dans le champ **Infos supplémentaires** représente la réservation de capacité réservée SQL Database appliquée à la ressource SQL Database.
 2. Le **compteur de consommation** représente l’ID du compteur de la ressource SQL Database.
@@ -96,8 +97,8 @@ Si vous avez des questions ou besoin d’aide, [créez une demande de support](h
 Pour plus d’informations sur les réservations Azure, consultez les articles suivants :
 
 - [Qu’est-ce qu’une réservation Azure ?](save-compute-costs-reservations.md)
-- [Prépayer des machines virtuelles avec des instances de machines virtuelles réservées Azure](../../virtual-machines/windows/prepay-reserved-vm-instances.md)
-- [Prépayer des ressources de calcul SQL Database avec une capacité réservée Azure SQL Database](../../sql-database/sql-database-reserved-capacity.md)
+- [Prépayer des machines virtuelles avec des instances de machines virtuelles réservées Azure](../../virtual-machines/prepay-reserved-vm-instances.md)
+- [Prépayer des ressources de calcul SQL Database avec une capacité réservée Azure SQL Database](../../azure-sql/database/reserved-capacity-overview.md)
 - [Gérer les réservations Azure](manage-reserved-vm-instance.md)
 - [Comprendre comment la remise de réservation est appliquée](../manage/understand-vm-reservation-charges.md)
 - [Comprendre l’utilisation d’une réservation pour votre Accord de Mise en Œuvre Entreprise](understand-reserved-instance-usage-ea.md)

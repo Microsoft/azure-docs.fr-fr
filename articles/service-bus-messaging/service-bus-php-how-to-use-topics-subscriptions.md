@@ -1,25 +1,15 @@
 ---
 title: Guide pratique pour utiliser les rubriques Azure Service Bus avec PHP
 description: Dans ce tutoriel, vous allez apprendre à utiliser les rubriques et abonnements Azure Service Bus à partir d’une application PHP.
-services: service-bus-messaging
-documentationcenter: php
-author: axisc
-manager: timlt
-editor: spelluru
-ms.assetid: faaa4bbd-f6ef-42ff-aca7-fc4353976449
-ms.service: service-bus-messaging
-ms.workload: na
-ms.tgt_pltfrm: na
 ms.devlang: PHP
 ms.topic: quickstart
-ms.date: 01/24/2020
-ms.author: aschhab
-ms.openlocfilehash: 92f25f4bdac4942478c93f717c81eadd2c2f5b4a
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.date: 06/23/2020
+ms.openlocfilehash: 706f523fdfb3c710bb16b048cfc68ce98875adb1
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "76760672"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "88066200"
 ---
 # <a name="quickstart-how-to-use-service-bus-topics-and-subscriptions-with-php"></a>Démarrage rapide : Utilisation des rubriques et abonnements Service Bus avec PHP
 
@@ -271,13 +261,13 @@ for($i = 0; $i < 5; $i++){
 Les rubriques Service Bus prennent en charge une taille de message maximale de 256 Ko dans le [niveau Standard](service-bus-premium-messaging.md) et de 1 Mo dans le [niveau Premium](service-bus-premium-messaging.md). L’en-tête, qui comprend les propriétés d’application standard et personnalisées, peut avoir une taille maximale de 64 Ko. Si une rubrique n'est pas limitée par le nombre de messages qu'elle peut contenir, elle l'est en revanche par la taille totale des messages qu'elle contient. La taille maximale de la rubrique est de 5 Go. Pour plus d’informations sur les quotas, consultez [Quotas Service Bus][Service Bus quotas].
 
 ## <a name="receive-messages-from-a-subscription"></a>Réception des messages d’un abonnement
-Le meilleur moyen pour recevoir les messages d’un abonnement est d’utiliser une méthode `ServiceBusRestProxy->receiveSubscriptionMessage`. Les messages peuvent être reçus dans deux modes différents : [*ReceiveAndDelete* et *PeekLock*](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.receivemode). **PeekLock** est la valeur par défaut.
+Le meilleur moyen pour recevoir les messages d’un abonnement est d’utiliser une méthode `ServiceBusRestProxy->receiveSubscriptionMessage`. Les messages peuvent être reçus dans deux modes différents : [*ReceiveAndDelete* et *PeekLock*](/dotnet/api/microsoft.servicebus.messaging.receivemode). **PeekLock** est la valeur par défaut.
 
-Lorsque le mode [ReceiveAndDelete](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.receivemode) est utilisé, la réception est une opération unique : lorsque Service Bus reçoit une demande de lecture pour un message figurant dans un abonnement, il marque le message comme étant consommé et le renvoie à l’application. Le mode [ReceiveAndDelete](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.receivemode) * est le modèle le plus simple et le mieux adapté aux scénarios dans lesquels une application peut tolérer le non-traitement d’un message après un échec. Pour mieux comprendre, imaginez un scénario dans lequel le consommateur émet la demande de réception et subit un incident avant de la traiter. Étant donné que Service Bus a marqué le message comme étant consommé, quand l’application redémarre et recommence à consommer des messages, elle a manqué le message consommé avant l’incident.
+Lorsque le mode [ReceiveAndDelete](/dotnet/api/microsoft.servicebus.messaging.receivemode) est utilisé, la réception est une opération unique : lorsque Service Bus reçoit une demande de lecture pour un message figurant dans un abonnement, il marque le message comme étant consommé et le renvoie à l’application. Le mode [ReceiveAndDelete](/dotnet/api/microsoft.servicebus.messaging.receivemode) * est le modèle le plus simple et le mieux adapté aux scénarios dans lesquels une application peut tolérer le non-traitement d’un message après un échec. Pour mieux comprendre, imaginez un scénario dans lequel le consommateur émet la demande de réception et subit un incident avant de la traiter. Étant donné que Service Bus a marqué le message comme étant consommé, quand l’application redémarre et recommence à consommer des messages, elle a manqué le message consommé avant l’incident.
 
-En mode [PeekLock](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.receivemode) par défaut), la réception d’un message devient une opération en deux étapes, ce qui permet de prendre en charge les applications qui ne tolèrent pas les messages manquants. Lorsque Service Bus reçoit une demande, il recherche le prochain message à consommer, le verrouille pour empêcher d'autres consommateurs de le recevoir, puis le renvoie à l'application. Dès que l’application a terminé de traiter le message (ou qu’elle l’a stocké de manière sûre en vue d’un traitement ultérieur), elle effectue la deuxième étape du processus de réception en transmettant le message reçu à `ServiceBusRestProxy->deleteMessage`. Lorsque Service Bus voit l’appel `deleteMessage`, il marque le message comme consommé et le supprime de la file d’attente.
+En mode [PeekLock](/dotnet/api/microsoft.servicebus.messaging.receivemode) par défaut), la réception d’un message devient une opération en deux étapes, ce qui permet de prendre en charge les applications qui ne tolèrent pas les messages manquants. Lorsque Service Bus reçoit une demande, il recherche le prochain message à consommer, le verrouille pour empêcher d'autres consommateurs de le recevoir, puis le renvoie à l'application. Dès que l’application a terminé de traiter le message (ou qu’elle l’a stocké de manière sûre en vue d’un traitement ultérieur), elle effectue la deuxième étape du processus de réception en transmettant le message reçu à `ServiceBusRestProxy->deleteMessage`. Lorsque Service Bus voit l’appel `deleteMessage`, il marque le message comme consommé et le supprime de la file d’attente.
 
-L’exemple ci-dessous montre comment recevoir et traiter un message avec le mode [PeekLock](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.receivemode) (mode par défaut). 
+L’exemple ci-dessous montre comment recevoir et traiter un message avec le mode [PeekLock](/dotnet/api/microsoft.servicebus.messaging.receivemode) (mode par défaut). 
 
 ```php
 require_once 'vendor/autoload.php';

@@ -14,104 +14,36 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 12/03/2018
 ms.author: memildin
-ms.openlocfilehash: 0b28de7af16053093cd0108224188cdd615fce55
-ms.sourcegitcommit: ced98c83ed25ad2062cc95bab3a666b99b92db58
+ms.openlocfilehash: 89d04588d07407be5dbd7ddbafd6543ed461462e
+ms.sourcegitcommit: ba7fafe5b3f84b053ecbeeddfb0d3ff07e509e40
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/31/2020
-ms.locfileid: "80435519"
+ms.lasthandoff: 10/12/2020
+ms.locfileid: "91945717"
 ---
 # <a name="tutorial-protect-your-resources-with-azure-security-center"></a>Tutoriel : Protéger vos ressources avec Azure Security Center
-Security Center limite votre exposition aux menaces en utilisant des contrôles d’accès et d’applications pour bloquer les activités malveillantes. L’accès juste-à-temps (JIT) aux machines virtuelles réduit votre exposition aux attaques en vous permettant de refuser l’accès persistant aux machines virtuelles. À la place, vous fournissez un accès contrôlé et audité aux machines virtuelles uniquement en cas de besoin. Les contrôles d’applications adaptatifs permettent de renforcer la protection contre les logiciels malveillants en contrôlant les applications qui peuvent s’exécuter sur les machines virtuelles. Security Center utilise le machine learning pour analyser les processus en cours d’exécution sur la machine virtuelle et exploite ces informations pour vous aider à appliquer les règles de mise en liste verte.
+Security Center limite votre exposition aux menaces en utilisant des contrôles d’accès et d’applications pour bloquer les activités malveillantes. L’accès juste-à-temps (JIT) aux machines virtuelles réduit votre exposition aux attaques en vous permettant de refuser l’accès persistant aux machines virtuelles. À la place, vous fournissez un accès contrôlé et audité aux machines virtuelles uniquement en cas de besoin. Les contrôles d’applications adaptatifs permettent de renforcer la protection contre les logiciels malveillants en contrôlant les applications qui peuvent s’exécuter sur les machines virtuelles. Security Center utilise le machine learning pour analyser les processus en cours d’exécution sur la machine virtuelle et exploite ces informations pour vous aider à appliquer les règles de mise en liste d’autorisation.
 
-Ce didacticiel vous montre comment effectuer les opérations suivantes :
+Ce didacticiel vous montre comment effectuer les opérations suivantes :
 
 > [!div class="checklist"]
 > * Configurer une stratégie d’accès juste-à-temps aux machines virtuelles
 > * Configurer une stratégie de contrôle d’applications
 
 ## <a name="prerequisites"></a>Prérequis
-Pour parcourir les fonctionnalités traitées dans ce didacticiel, vous devez avoir accès au niveau tarifaire Standard de Security Center. Vous pouvez essayer Security Center Standard gratuitement. Pour en savoir plus, consultez la [page de tarification](https://azure.microsoft.com/pricing/details/security-center/). Le démarrage rapide [Intégrer votre abonnement Azure à Security Center Standard](security-center-get-started.md) vous guide dans la mise à niveau vers le plan Standard.
+Pour parcourir les fonctionnalités couvertes dans ce tutoriel, vous devez avoir activé Azure Defender. Vous pouvez essayer gratuitement Azure Defender. Pour plus d’informations, consultez [Essayer Azure Defender](security-center-pricing.md).
 
 ## <a name="manage-vm-access"></a>Gérer l’accès aux machines virtuelles
 L’accès JIT aux machines virtuelles peut être utilisé pour verrouiller le trafic entrant vers vos machines virtuelles Azure, réduire l’exposition aux attaques et faciliter la connexion aux machines virtuelles si nécessaire.
 
 Les ports de gestion n’ont pas besoin d’être toujours ouverts. Ils doivent uniquement être ouverts lorsque vous êtes connecté à la machine virtuelle, par exemple pour effectuer des tâches de maintenance ou de gestion. Quand la fonctionnalité juste-à-temps est activée, Security Center utilise des règles de groupe de sécurité réseau (NSG) qui limitent l’accès aux ports de gestion pour qu’ils ne soient pas la cible d’attaquants.
 
-1. Dans le menu principal de Security Center, sélectionnez **Accès juste-à-temps à la machine virtuelle** sous **DÉFENSE DE CLOUD AVANCÉE**.
-
-   ![Accès juste-à-temps aux machines virtuelles][1]
-
-   La section **Accès juste-à-temps à la machine virtuelle** fournit des informations sur l’état de vos machines virtuelles :
-
-   - **Configuré** : machines virtuelles configurées pour prendre en charge l’accès juste-à-temps à la machine virtuelle.
-   - **Recommandé** : machines virtuelles qui peuvent prendre en charge l’accès juste-à-temps à la machine virtuelle, mais qui n’ont pas été configurées dans cette optique.
-   - **Aucune recommandation** : voici les raisons pour lesquelles une machine virtuelle peut ne pas être recommandée :
-
-     - Groupe de sécurité réseau manquant : la solution juste-à-temps nécessite la présence d’un groupe de sécurité réseau.
-     - Machine virtuelle classique : l’accès juste-à-temps à la machine virtuelle Security Center prend en charge uniquement les machines virtuelles déployées par le biais d’Azure Resource Manager.
-     - Autre : catégorie d’une machine virtuelle si la solution juste-à-temps est désactivée dans la stratégie de sécurité de l’abonnement ou du groupe de ressources, ou si la machine virtuelle ne dispose pas d’une adresse IP publique ni d’un groupe de sécurité réseau.
-
-2. Sélectionnez une machine virtuelle recommandée et cliquez sur **Activer juste-à-temps sur 1 machine virtuelle** pour configurer une stratégie juste-à-temps pour cette machine virtuelle :
-
-   Vous pouvez enregistrer les ports par défaut que vous recommande Security Center ou ajouter et configurer un nouveau port sur lequel activer la solution juste-à-temps. Dans ce didacticiel, nous ajoutons un port en sélectionnant **Ajouter**.
-
-   ![Ajouter la configuration du port][2]
-
-3. Sous **Ajouter la configuration du port**, vous identifiez :
-
-   - Le port
-   - Le type de protocole
-   - Les adresses IP sources autorisées : plages d’adresses IP autorisées à accéder par le biais d’une demande approuvée
-   - La durée maximale de la demande : fenêtre de temps maximale pendant laquelle un port spécifique peut être ouvert
-
-4. Sélectionnez **OK** pour enregistrer.
+Suivez les instructions fournies dans [Sécuriser vos ports de gestion avec un accès juste-à-temps](security-center-just-in-time.md).
 
 ## <a name="harden-vms-against-malware"></a>Renforcer la protection des machines virtuelles contre les logiciels malveillants
-Les contrôles d’applications adaptatifs vous aident à définir un ensemble d’applications autorisées à s’exécuter sur des groupes de ressources configurés, ce qui permet, entre autres, de renforcer la protection de vos machines virtuelles contre les logiciels malveillants. Security Center utilise le machine learning pour analyser les processus en cours d’exécution sur la machine virtuelle et exploite ces informations pour vous aider à appliquer les règles de mise en liste verte.
+Les contrôles d’applications adaptatifs vous aident à définir un ensemble d’applications autorisées à s’exécuter sur des groupes de ressources configurés, ce qui permet, entre autres, de renforcer la protection de vos machines virtuelles contre les logiciels malveillants. Security Center utilise le machine learning pour analyser les processus en cours d’exécution sur la machine virtuelle et exploite ces informations pour vous aider à appliquer les règles de mise en liste d’autorisation.
 
-1. Revenez au menu principal de Security Center. Sous **DÉFENSE DE CLOUD AVANCÉ**, sélectionnez **Contrôles d’applications adaptatifs**.
-
-   ![Contrôles d’application adaptative][3]
-
-   La section **Groupes de ressources** contient trois onglets :
-
-   - **Configuré** : liste des groupes de ressources contenant les machines virtuelles qui ont été configurées avec le contrôle d’application.
-   - **Recommandé** : liste des groupes de ressources pour lesquels le contrôle d’application est recommandé.
-   - **Aucune recommandation** : liste des groupes de ressources contenant des machines virtuelles sans recommandations de contrôle d’application. Par exemple, les machines virtuelles dont les applications sont toujours en cours de modification et qui n’ont pas atteint un état stable.
-
-2. Sélectionnez l’onglet **Recommandé** pour obtenir la liste des groupes de ressources avec des recommandations de contrôle d’applications.
-
-   ![Recommandations de contrôle d’applications][4]
-
-3. Sélectionnez un groupe de ressources pour ouvrir l’option **Créer des règles de contrôle d’applications**. Dans **Sélectionner les machines virtuelles**, examinez la liste des machines virtuelles recommandées et décochez celles pour lesquelles vous ne souhaitez pas appliquer le contrôle d’application. Dans **Sélectionner les processus des règles de mise en liste verte**, examinez la liste des applications recommandées et décochez celles que vous ne souhaitez pas appliquer. Cette liste comprend les éléments suivants :
-
-   - **NOM** : chemin complet de l’application
-   - **PROCESSUS** : nombre d’applications dans chaque chemin
-   - **COMMUN** : la valeur « Oui » indique que ces processus ont été exécutés sur la plupart des machines virtuelles de ce groupe de ressources
-   - **EXPLOITABLE** : une icône d’avertissement indique si les applications peuvent être utilisées par un attaquant pour ignorer la liste verte d’applications. Nous vous recommandons de vérifier ces applications avant de les valider.
-
-4. Une fois que vous avez terminé vos sélections, sélectionnez **Créer**.
-
-## <a name="clean-up-resources"></a>Nettoyer les ressources
-D’autres guides de démarrage rapide et didacticiels de cette collection reposent sur ce guide. Si vous envisagez de suivre les didacticiels et guides de démarrage rapide suivants, conservez le niveau Standard et maintenez l'approvisionnement automatique activé. Dans le cas contraire, ou si vous voulez revenir au niveau Gratuit :
-
-1. Revenez au menu principal de Security Center et sélectionnez **Stratégie de sécurité**.
-2. Sélectionnez la stratégie ou l’abonnement pour lequel vous voulez revenir au niveau Gratuit. La fenêtre **Stratégie de sécurité** s’ouvre.
-3. Dans **COMPOSANTS DE LA STRATÉGIE**, sélectionnez **Niveau tarifaire**.
-4. Sélectionnez **Gratuit** pour modifier l’abonnement et passer du niveau Standard au niveau Gratuit.
-5. Sélectionnez **Enregistrer**.
-
-Si vous voulez désactiver l’approvisionnement automatique :
-
-1. Revenez au menu principal de Security Center et sélectionnez **Stratégie de sécurité**.
-2. Sélectionnez l’abonnement pour lequel vous souhaitez désactiver l’approvisionnement automatique.
-3. Dans **Stratégie de sécurité : collecte de données**, sélectionnez **Désactivé** sous **Intégration** pour désactiver l’approvisionnement automatique.
-4. Sélectionnez **Enregistrer**.
-
->[!NOTE]
-> La désactivation du provisionnement automatique ne supprime pas l’agent Log Analytics des machines virtuelles Azure sur lesquelles l’agent a été provisionné. La désactivation de l’approvisionnement automatique limite la surveillance de la sécurité pour vos ressources.
->
+Suivez les instructions fournies dans [Utiliser des contrôles d’application adaptatifs pour réduire les surfaces d’attaque de vos machines](security-center-adaptive-application.md).
 
 ## <a name="next-steps"></a>Étapes suivantes
 Dans ce didacticiel, vous avez appris à limiter votre exposition aux menaces en effectuant les tâches suivantes :

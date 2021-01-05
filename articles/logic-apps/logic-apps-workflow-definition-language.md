@@ -6,12 +6,12 @@ ms.suite: integration
 ms.reviewer: klam, logicappspm
 ms.topic: conceptual
 ms.date: 05/13/2019
-ms.openlocfilehash: f9eefc40f7bca3f0bc21510a2d8a3d3fe76711b0
-ms.sourcegitcommit: 50ef5c2798da04cf746181fbfa3253fca366feaa
+ms.openlocfilehash: 71929cd449f4a00b91cc6c8620b33b0e0c6d506c
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82611413"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87078139"
 ---
 # <a name="schema-reference-guide-for-the-workflow-definition-language-in-azure-logic-apps"></a>Guide de référence du schéma du langage de définition de workflow dans Azure Logic Apps
 
@@ -178,7 +178,7 @@ Avec JSON, vous pouvez avoir des valeurs littérales qui existent au moment du d
 "rainbowColorsCount": 7
 ```
 
-Vous pouvez également avoir des valeurs qui n’existent pas avant l’exécution. Pour représenter ces valeurs, vous pouvez utiliser des *expressions*, qui sont évaluées au moment de l’exécution. Une expression est une séquence qui peut contenir un ou plusieurs [opérateurs](#functions), [fonctions](#operators), [variables](https://docs.microsoft.com/azure/logic-apps/logic-apps-create-variables-store-values), valeurs explicites ou constantes. Dans votre définition de flux de travail, vous pouvez utiliser une expression n’importe où dans une valeur de chaîne JSON en faisant précéder l’expression d’une arobase (\@). Quand une expression qui représente une valeur JSON est évaluée, le corps de l’expression est extrait en supprimant le caractère \@, et une autre valeur JSON est systématiquement générée.
+Vous pouvez également avoir des valeurs qui n’existent pas avant l’exécution. Pour représenter ces valeurs, vous pouvez utiliser des *expressions*, qui sont évaluées au moment de l’exécution. Une expression est une séquence qui peut contenir un ou plusieurs [opérateurs](#functions), [fonctions](#operators), [variables](./logic-apps-create-variables-store-values.md), valeurs explicites ou constantes. Dans votre définition de flux de travail, vous pouvez utiliser une expression n’importe où dans une valeur de chaîne JSON en faisant précéder l’expression d’une arobase (\@). Quand une expression qui représente une valeur JSON est évaluée, le corps de l’expression est extrait en supprimant le caractère \@, et une autre valeur JSON est systématiquement générée.
 
 Par exemple, pour la propriété `customerName` définie précédemment, vous pouvez obtenir la valeur de la propriété en utilisant la fonction [parameters()](../logic-apps/workflow-definition-language-functions-reference.md#parameters) dans une expression de fonction et en assignant cette valeur à la propriété `accountName` :
 
@@ -282,7 +282,7 @@ Voici la structure générale d’une définition de sortie :
 | <*key-value*> | Oui | Identique à <*key-type*> | Valeur renvoyée pour la sortie |
 |||||
 
-Pour obtenir la sortie d’une exécution de flux de travail, examinez l’historique et les détails des exécutions de votre application logique dans le portail Azure ou utilisez l’[API REST de flux de travail](https://docs.microsoft.com/rest/api/logic/workflows). Vous pouvez également transmettre la sortie à des systèmes externes, par exemple Power BI, afin de créer des tableaux de bord.
+Pour obtenir la sortie d’une exécution de flux de travail, examinez l’historique et les détails des exécutions de votre application logique dans le portail Azure ou utilisez l’[API REST de flux de travail](/rest/api/logic/workflows). Vous pouvez également transmettre la sortie à des systèmes externes, par exemple Power BI, afin de créer des tableaux de bord.
 
 <a name="operators"></a>
 
@@ -307,4 +307,4 @@ Certaines expressions obtiennent leurs valeurs à partir d’actions runtime qui
 ## <a name="next-steps"></a>Étapes suivantes
 
 * En savoir plus sur les [actions et déclencheurs du langage de définition de flux de travail](../logic-apps/logic-apps-workflow-actions-triggers.md)
-* En savoir plus sur la création et la gestion par programmation des applications logiques avec l’[API REST de flux de travail](https://docs.microsoft.com/rest/api/logic/workflows)
+* En savoir plus sur la création et la gestion par programmation des applications logiques avec l’[API REST de flux de travail](/rest/api/logic/workflows)

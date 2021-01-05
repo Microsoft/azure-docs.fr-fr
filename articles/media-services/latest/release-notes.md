@@ -3,24 +3,26 @@ title: Notes de publication Azure Media Services v3 | Microsoft Docs
 description: Pour vous informer des développements les plus récents, cet article détaille les toutes dernières mises à jour concernant Azure Media Services v3.
 services: media-services
 documentationcenter: ''
-author: Juliako
+author: IngridAtMicrosoft
 manager: femila
 editor: ''
 ms.service: media-services
 ms.workload: na
 ms.topic: article
-ms.date: 04/20/2020
-ms.author: juliako
-ms.openlocfilehash: b4849b4fbfdbaece46f5669f4c242e864b1ca533
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.date: 10/21/2020
+ms.author: inhenkel
+ms.openlocfilehash: 4ddb02bbcf284566550517f8fa343a728e2275a9
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81769748"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96483625"
 ---
 # <a name="azure-media-services-v3-release-notes"></a>Notes de publication Azure Media Services v3
 
->Soyez notifié de la disponibilité des mises à jour sur cette page en faisant un copier-coller de cette URL : `https://docs.microsoft.com/api/search/rss?search=%22Azure+Media+Services+v3+release+notes%22&locale=en-us` dans votre lecteur de flux RSS.
+[!INCLUDE [media services api v3 logo](./includes/v3-hr.md)]
+
+>Soyez notifié de la disponibilité des mises à jour sur cette page en faisant un copier-coller de cette URL : `https://docs.microsoft.com/api/search/rss?search=%22Azure+Media+Services+v3+release+notes%22&locale=en-us` dans votre lecteur de flux RSS.
 
 Pour vous informer des développements les plus récents, cet article détaille les thèmes suivants :
 
@@ -32,9 +34,70 @@ Pour vous informer des développements les plus récents, cet article détaille 
 ## <a name="known-issues"></a>Problèmes connus
 
 > [!NOTE]
-> Vous pouvez utiliser le [portail Azure](https://portal.azure.com/) pour gérer les [événements en direct](live-events-outputs-concept.md) v3, voir des [actifs multimédias](assets-concept.md) v3 et obtenir des informations sur l’accès aux API. Pour toutes les autres tâches de gestion (par exemple les transformations et travaux), utilisez l’[API REST](https://aka.ms/ams-v3-rest-ref), l’[interface de ligne de commande](https://aka.ms/ams-v3-cli-ref) ou l’un des [SDK](media-services-apis-overview.md#sdks) pris en charge.
+> Vous pouvez utiliser le [portail Azure](https://portal.azure.com/) pour gérer les [événements en direct](live-events-outputs-concept.md) v3, voir des [actifs multimédias](assets-concept.md) et des travaux v3, obtenir des informations sur l’accès aux API, et chiffrer du contenu. Pour toutes les autres tâches de gestion (par exemple gérer les transformations et les travaux), utilisez l’[API REST](/rest/api/media/accountfilters), l’[interface CLI](/cli/azure/ams) ou l’un des [kits SDK](media-services-apis-overview.md#sdks) pris en charge.
+>
+> Pour plus d’informations, consultez [les limitations du portail Azure pour Media Services v3](frequently-asked-questions.md#what-are-the-azure-portal-limitations-for-media-services-v3).
 
-Pour plus d’informations, consultez [Conseils de migration pour le passage de Media Services v2 à Media Services v3](migrate-from-v2-to-v3.md#known-issues).
+## <a name="october-2020"></a>Octobre 2020
+
+### <a name="basic-audio-analysis"></a>Analyse audio De base
+La présélection de l’analyse audio comprend désormais un niveau de tarification en mode De base. Le nouveau mode De base de l’analyseur audio offre une option plus économique pour extraire la transcription vocale et mettre en forme les légendes et les sous-titres de sortie. Ce mode effectue une transcription de la parole en texte et la génération d’un fichier de sous-titres/CC au format VTT. La sortie de ce mode comprend un fichier JSON Insights incluant uniquement les mots clés, la transcription et les informations relatives au minutage. La détection automatique de la langue et la diarisation de l’orateur ne sont pas incluses dans ce mode. Consultez la [liste des langues prises en charge](analyzing-video-audio-files-concept.md#built-in-presets).
+
+Les clients utilisant Indexer v1 et Indexer v2 doivent migrer vers la présélection de l’analyse audio De base.
+
+Pour plus d’informations sur le mode De base de l’analyseur audio, consultez [Analyse des fichiers vidéo et audio](analyzing-video-audio-files-concept.md).  Pour savoir comment utiliser le mode De base de l’analyseur audio avec l’API REST, consultez [Créer une transformation audio De base](how-to-create-basic-audio-transform.md).
+
+## <a name="live-events"></a>Événements en direct
+
+Les mises à jour de la plupart des propriétés sont désormais autorisées lorsque les événements en direct sont arrêtés. En outre, les utilisateurs sont autorisés à spécifier un préfixe pour le nom d’hôte statique des URL d’entrée et d’aperçu de l’événement en direct. VanityUrl est désormais appelé `useStaticHostName` pour mieux refléter l’objectif de la propriété.
+
+Les événements en direct disposent désormais d’un état En attente.  Consultez [Événements en direct et sorties en direct dans Media Services](./live-events-outputs-concept.md).
+
+Un événement en direct prend en charge la réception de différentes proportions d’entrée. Le mode Extension permet aux clients de spécifier le comportement d’extension de la sortie.
+
+L’encodage en direct permet désormais de générer des fragments de fréquence d’images clés fixes entre 0,5 à 20 secondes.
+
+## <a name="accounts"></a>Comptes
+
+> [!WARNING]
+> Si vous créez un compte Media Services avec la version d’API du 5 janvier 2020, il ne fonctionnera pas avec RESTv2. 
+
+## <a name="august-2020"></a>Août 2020
+
+### <a name="dynamic-encryption"></a>Chiffrement dynamique
+La prise en charge du chiffrement PIFF 1.1 (PlayReady Protected Interoperable File Format) hérité est désormais disponible dans le Packager dynamique. Cela offre la prise en charge des jeux Smart TV hérités de Samsung et LG qui implémentaient les premières ébauches de la norme CENC (Common Encryption) publiées par Microsoft.  Le format PIFF 1.1 est également connu comme le format de chiffrement précédemment pris en charge par la bibliothèque de client Silverlight. Aujourd’hui, le seul scénario de cas d’usage pour ce format de chiffrement est le ciblage du marché Smart TV hérité où il reste un nombre non négligeable de Smart TV dans certaines régions qui prennent uniquement en charge Smooth Streaming avec le chiffrement PIFF 1.1. 
+
+Pour utiliser la nouvelle prise en charge du chiffrement PIFF 1.1, remplacez la valeur de chiffrement par « piff » dans le chemin d’URL du localisateur de streaming. Pour plus d’informations, consultez la [vue d’ensemble de protection du contenu](content-protection-overview.md).
+Par exemple : `https://amsv3account-usw22.streaming.media.azure.net/00000000-0000-0000-0000-000000000000/ignite.ism/manifest(encryption=piff)`|
+
+> [!NOTE]
+> La prise en charge de PIFF 1.1 est fournie en tant que solution de compatibilité descendante pour les Smart TV (Samsung, LG) qui implémentaient la version « Silverlight » précoce de la norme CENC. Nous vous recommandons d’utiliser le format PIFF uniquement là où il est nécessaire pour la prise en charge des Smart TV Samsung ou LG livrés entre 2009 et 2015 qui prenaient en charge la version PIFF 1.1 du chiffrement PlayReady. 
+
+## <a name="july-2020"></a>Juillet 2020
+
+### <a name="live-transcriptions"></a>Transcriptions en direct
+
+Les transcriptions en direct prennent désormais en charge 19 langues et 8 régions.
+
+### <a name="protecting-your-content-with-media-services-and-azure-ad"></a>Protection de votre contenu avec Media Services et Azure AD
+
+Nous avons publié un tutoriel intitulé [Protection de contenu de bout en bout avec Azure AD](./azure-ad-content-protection.md).
+
+### <a name="high-availability"></a>Haute disponibilité
+
+Nous avons publié une [vue d’ensemble](./media-services-high-availability-encoding.md) et un [exemple](https://github.com/Azure-Samples/media-services-v3-dotnet/tree/master/HighAvailabilityEncodingStreaming) pour la Haute disponibilité avec Media Services et VOD (vidéo à la demande).
+
+## <a name="june-2020"></a>Juin 2020
+
+### <a name="live-video-analytics-on-iot-edge-preview-release"></a>Publication en préversion de Live Video Analytics sur IoT Edge
+
+La préversion de Live Video Analytics sur IoT Edge est devenue publique. Pour plus d’informations, consultez les [notes de publication](../live-video-analytics-edge/release-notes.md).
+
+Live Video Analytics sur IoT Edge est une extension de la famille Media Services. Elle vous permet d’analyser la vidéo en direct avec des modèles AI de votre choix sur vos propres appareils périphériques, et éventuellement de capturer et d’enregistrer cette vidéo. Vous pouvez désormais créer des applications avec une analytique vidéo en temps réel à la périphérie, sans vous soucier de la complexité liée à la création et à l’exploitation d’un pipeline vidéo en direct.
+
+## <a name="may-2020"></a>Mai 2020
+
+Azure Media Services est généralement disponible dans les régions suivantes : « Allemagne Nord », « Allemagne Centre-Ouest », « Suisse Nord » et « Suisse Ouest ». Les clients peuvent déployer Azure Media Services dans ces régions à l’aide du Portail Azure.
 
 ## <a name="april-2020"></a>Avril 2020
 
@@ -96,12 +159,12 @@ Ajout de la prise en charge des nouveaux encodeurs partenaires recommandés ci-d
 
 - Un nouvel encodage prédéfini sensible au contenu est maintenant disponible. Il produit un ensemble de fichiers MP4 alignés sur le groupe d’images à l’aide de l’encodage sensible au contenu. Lorsque du contenu est entré, le service effectue une analyse initiale légère du contenu d’entrée. Il utilise ces résultats pour déterminer le nombre optimal de couches, le débit approprié et les paramètres de résolution pour la remise par diffusion en continu adaptative. Ce préréglage est particulièrement efficace pour les vidéos de faible complexité et de complexité moyenne, où les fichiers de sortie sont à des vitesses de transmission inférieures, mais à une qualité qui offre toujours une bonne expérience aux utilisateurs. La sortie contiendra des fichiers MP4 avec vidéo et audio entrelacées. Pour plus d’informations, consultez les [spécifications d’API ouverte](https://github.com/Azure/azure-rest-api-specs/blob/master/specification/mediaservices/resource-manager/Microsoft.Media/stable/2018-07-01/Encoding.json).
 - Amélioration des performances et du multithreading pour le redimensionnement dans Standard Encoder. Dans des conditions spécifiques, le client doit voir une augmentation des performances du codage VOD de 5 à 40 %. Le contenu à faible complexité encodé en plusieurs vitesses de transmission dispose des meilleures améliorations de performances. 
-- L’encodage standard gère maintenant une cadence GOP régulière pour les contenus à fréquence d’images variable (VFR) lors d’un encodage VOD en cas d’utilisation du paramètre GOP basé sur le temps.  Cela signifie qu’un client soumettant un contenu de fréquence d’images mixte variant entre 15 et 30 images par seconde par exemple doit maintenant voir les distances GOP normales calculées sur la sortie vers des fichiers MP4 de streaming à débit adaptatif. Cela permet d’améliorer la possibilité de basculer entre les pistes en cas de diffusion sur TLS ou DASH. 
+- L’encodage standard gère maintenant une cadence GOP régulière pour les contenus à fréquence d’images variable (VFR) lors d’un encodage VOD en cas d’utilisation du paramètre GOP basé sur le temps.  Cela signifie qu’un client soumettant un contenu de fréquence d’images mixte variant entre 15 et 30 images par seconde, par exemple, doit maintenant voir les distances GOP normales calculées sur la sortie vers des fichiers MP4 de streaming à débit adaptatif. Cela permet d’améliorer la possibilité de basculer entre les pistes en cas de diffusion sur TLS ou DASH. 
 -  Amélioration de la synchronisation AV pour un contenu source avec une fréquence d’images variable (VFR)
 
 ### <a name="video-indexer-video-analytics"></a>Video Indexer, analyse vidéo
 
-- Les images clés extraites à l’aide de la présélection VideoAnalyzer sont désormais dans la résolution d’origine de la vidéo au lieu d’être redimensionnées. L’extraction d’images clés en haute résolution vous donne des images avec la qualité d’origine et vous permet d’utiliser les Modèles d’intelligence artificielle basés sur une image fournis par les services Computer Vision et Custom Vision de Microsoft pour obtenir encore plus d’informations à partir de votre vidéo.
+- Les images clés extraites à l’aide de la présélection VideoAnalyzer sont désormais dans la résolution d’origine de la vidéo au lieu d’être redimensionnées. L’extraction d’images clés en haute résolution vous donne des images avec la qualité d’origine et vous permet d’utiliser les modèles d’intelligence artificielle basés sur une image fournis par les services Vision par ordinateur et Custom Vision de Microsoft pour obtenir encore plus d’informations à partir de votre vidéo.
 
 ## <a name="september-2019"></a>Septembre 2019
 
@@ -115,7 +178,7 @@ Media Services v3 annonce la préversion de 24 heures x 365 jours d’encodage
 
 #### <a name="deprecation-of-media-processors"></a>Dépréciation des processeurs multimédias
 
-Nous annonçons la dépréciation d’*Azure Media Indexer* et d’*Azure Media Indexer 2 Preview*. Pour connaître les dates de mise hors service, consultez la rubrique [Composants hérités](../previous/legacy-components.md). [Azure Media Services Video Indexer](https://docs.microsoft.com/azure/media-services/video-indexer/) remplace ces processeurs multimédias hérités.
+Nous annonçons la dépréciation d’*Azure Media Indexer* et d’*Azure Media Indexer 2 Preview*. Pour connaître les dates de mise hors service, consultez l’article consacré aux [composants hérités](../previous/legacy-components.md). [Azure Media Services Video Indexer](../video-indexer/index.yml) remplace ces processeurs multimédias hérités.
 
 Pour plus d’informations, consultez [Effectuer une migration depuis Azure Media Indexer et Azure Media Indexer 2 vers Azure Media Services Video Indexer](../previous/migrate-indexer-v1-v2.md).
 
@@ -133,9 +196,9 @@ Pour plus d’informations, consultez [Clouds et régions dans lesquels Media Se
 
 #### <a name="deprecation-of-media-processors"></a>Dépréciation des processeurs multimédias
 
-Nous annonçons la dépréciation des processeurs multimédias *Windows Azure Media Encoder* (WAME) et *Azure Media Encoder* (AME), qui sont en phase de mise hors service. Pour connaître les dates de mise hors service, consultez la rubrique [Composants hérités](../previous/legacy-components.md).
+Nous annonçons la dépréciation des processeurs multimédias *Windows Azure Media Encoder* (WAME) et *Azure Media Encoder* (AME), qui sont en phase de mise hors service. Pour connaître les dates de mise hors service, consultez l’article consacré aux [composants hérités](../previous/legacy-components.md).
 
-Pour plus d'informations, consultez [Migration de WAME vers Media Encoder Standard](https://go.microsoft.com/fwlink/?LinkId=2101334) et [Migration d'AME vers Media Encoder Standard](https://go.microsoft.com/fwlink/?LinkId=2101335).
+Pour plus d'informations, consultez [Migration de WAME vers Media Encoder Standard](../previous/migrate-windows-azure-media-encoder.md) et [Migration d'AME vers Media Encoder Standard](../previous/migrate-azure-media-encoder.md).
  
 ## <a name="july-2019"></a>Juillet 2019
 
@@ -149,9 +212,9 @@ Depuis juillet, la fonctionnalité d’évaluation était uniquement disponible 
 
 ### <a name="video-subclipping"></a>Sous-découpage de vidéos
 
-Vous pouvez désormais découper ou sous-découper une vidéo lors de son encodage à l’aide d’un [travail](https://docs.microsoft.com/rest/api/media/jobs). 
+Vous pouvez désormais découper ou sous-découper une vidéo lors de son encodage à l’aide d’un [travail](/rest/api/media/jobs). 
 
-Cette fonctionnalité peut être utilisée avec n’importe quelle [transformation](https://docs.microsoft.com/rest/api/media/transforms) qui est générée en utilisant les présélections [BuiltInStandardEncoderPreset](https://docs.microsoft.com/rest/api/media/transforms/createorupdate#builtinstandardencoderpreset) ou [StandardEncoderPreset](https://docs.microsoft.com/rest/api/media/transforms/createorupdate#standardencoderpreset). 
+Cette fonctionnalité peut être utilisée avec n’importe quelle [transformation](/rest/api/media/transforms) qui est générée en utilisant les présélections [BuiltInStandardEncoderPreset](/rest/api/media/transforms/createorupdate#builtinstandardencoderpreset) ou [StandardEncoderPreset](/rest/api/media/transforms/createorupdate#standardencoderpreset). 
 
 Consultez les exemples :
 
@@ -184,18 +247,18 @@ Pour plus d’informations, consultez [Clouds et régions dans lesquels Media Se
 Ajout de mises à jour incluant l’amélioration des performances Media Services.
 
 * La taille maximale du fichier pris en charge pour le traitement a été mise à jour. Consultez [Quotas et limites](limits-quotas-constraints.md).
-* [Améliorations des vitesses d’encodage](media-reserved-units-cli-how-to.md#choosing-between-different-reserved-unit-types).
+* [Améliorations des vitesses d’encodage](concept-media-reserved-units.md).
 
 ## <a name="april-2019"></a>Avril 2019
 
 ### <a name="new-presets"></a>Nouvelles présélections
 
-* [FaceDetectorPreset](https://docs.microsoft.com/rest/api/media/transforms/createorupdate#facedetectorpreset) a été ajouté aux présélections d’analyseur intégrées.
-* [ContentAwareEncodingExperimental](https://docs.microsoft.com/rest/api/media/transforms/createorupdate#encodernamedpreset) a été ajouté aux présélections d’encodeur intégrées. Pour plus d’informations, consultez [Encodage sensible au contenu](content-aware-encoding.md). 
+* [FaceDetectorPreset](/rest/api/media/transforms/createorupdate#facedetectorpreset) a été ajouté aux présélections d’analyseur intégrées.
+* [ContentAwareEncodingExperimental](/rest/api/media/transforms/createorupdate#encodernamedpreset) a été ajouté aux présélections d’encodeur intégrées. Pour plus d’informations, consultez [Encodage sensible au contenu](content-aware-encoding.md). 
 
 ## <a name="march-2019"></a>Mars 2019
 
-L’empaquetage dynamique prend désormais en charge Dolby Atmos. Pour plus d’informations, consultez [Codecs audio pris en charge par l’empaquetage dynamique](dynamic-packaging-overview.md#audio-codecs).
+L’empaquetage dynamique prend désormais en charge Dolby Atmos. Pour plus d’informations, consultez [Codecs audio pris en charge par l’empaquetage dynamique](dynamic-packaging-overview.md#audio-codecs-supported-by-dynamic-packaging).
 
 Vous pouvez désormais spécifier une liste de filtres de comptes ou d’actifs, qui s’applique à votre localisateur de streaming. Pour plus d’informations, consultez [Associer des filtres avec le localisateur de streaming](filters-concept.md#associating-filters-with-streaming-locator).
 
@@ -224,21 +287,21 @@ Les mises à jour de la version mise à la disposition générale de l'API V3 i
 
 ## <a name="november-2018"></a>Novembre 2018
 
-Le module CLI 2.0 est désormais disponible pour [Azure Media Services v3 GA](https://docs.microsoft.com/cli/azure/ams?view=azure-cli-latest) – v 2.0.50.
+Le module CLI 2.0 est désormais disponible pour [Azure Media Services v3 GA](/cli/azure/ams?view=azure-cli-latest&preserve-view=true) – v 2.0.50.
 
 ### <a name="new-commands"></a>Nouvelles commandes
 
-- [az ams account](https://docs.microsoft.com/cli/azure/ams/account?view=azure-cli-latest)
-- [az ams account-filter](https://docs.microsoft.com/cli/azure/ams/account-filter?view=azure-cli-latest)
-- [az ams asset](https://docs.microsoft.com/cli/azure/ams/asset?view=azure-cli-latest)
-- [az ams asset-filter](https://docs.microsoft.com/cli/azure/ams/asset-filter?view=azure-cli-latest)
-- [az ams content-key-policy](https://docs.microsoft.com/cli/azure/ams/content-key-policy?view=azure-cli-latest)
-- [az ams job](https://docs.microsoft.com/cli/azure/ams/job?view=azure-cli-latest)
-- [az ams live-event](https://docs.microsoft.com/cli/azure/ams/live-event?view=azure-cli-latest)
-- [az ams live-output](https://docs.microsoft.com/cli/azure/ams/live-output?view=azure-cli-latest)
-- [az ams streaming-endpoint](https://docs.microsoft.com/cli/azure/ams/streaming-endpoint?view=azure-cli-latest)
-- [az ams streaming-locator](https://docs.microsoft.com/cli/azure/ams/streaming-locator?view=azure-cli-latest)
-- [az ams account mru](https://docs.microsoft.com/cli/azure/ams/account/mru?view=azure-cli-latest) : permet de gérer les unités réservées Multimédia. Pour plus d’informations, consultez [Mise à l’échelle des unités réservées Multimédia](media-reserved-units-cli-how-to.md).
+- [az ams account](/cli/azure/ams/account?view=azure-cli-latest&preserve-view=true)
+- [az ams account-filter](/cli/azure/ams/account-filter?view=azure-cli-latest&preserve-view=true)
+- [az ams asset](/cli/azure/ams/asset?view=azure-cli-latest&preserve-view=true)
+- [az ams asset-filter](/cli/azure/ams/asset-filter?view=azure-cli-latest&preserve-view=true)
+- [az ams content-key-policy](/cli/azure/ams/content-key-policy?view=azure-cli-latest&preserve-view=true)
+- [az ams job](/cli/azure/ams/job?view=azure-cli-latest&preserve-view=true)
+- [az ams live-event](/cli/azure/ams/live-event?view=azure-cli-latest&preserve-view=true)
+- [az ams live-output](/cli/azure/ams/live-output?view=azure-cli-latest&preserve-view=true)
+- [az ams streaming-endpoint](/cli/azure/ams/streaming-endpoint?view=azure-cli-latest&preserve-view=true)
+- [az ams streaming-locator](/cli/azure/ams/streaming-locator?view=azure-cli-latest&preserve-view=true)
+- [az ams account mru](/cli/azure/ams/account/mru?view=azure-cli-latest&preserve-view=true) : permet de gérer les unités réservées Multimédia. Pour plus d’informations, consultez [Mise à l’échelle des unités réservées Multimédia](media-reserved-units-cli-how-to.md).
 
 ### <a name="new-features-and-breaking-changes"></a>Nouvelles fonctionnalités et dernières modifications
 
@@ -296,9 +359,9 @@ Voici les améliorations qui ont été apportées :
 
 Le nouvel objet **Transform** simplifie le modèle d’encodage. Le nouvel objet facilite la création et le partage de modèles et de préréglages Resource Manager d’encodage. 
 
-#### <a name="azure-active-directory-authentication-and-rbac"></a>Authentification et RBAC Azure Active Directory
+#### <a name="azure-active-directory-authentication-and-azure-rbac"></a>Authentification Azure Active Directory et Azure RBAC
 
-L’authentification et le contrôle d’accès en fonction du rôle (RBAC) Azure AD autorise les transformations sécurisées, les événements en direct, les stratégies de clé de contenu ou les éléments multimédias par rôle ou utilisateurs dans Azure AD.
+Azure AD Authentication et le contrôle d’accès en fonction du rôle (Azure RBAC) permettent les transformations sécurisées, les événements en direct, les stratégies de clé de contenu ou les éléments multimédias par rôle ou utilisateurs dans Azure AD.
 
 #### <a name="client-sdks"></a>Kits de développement logiciel (SDK) client  
 
@@ -329,7 +392,7 @@ Prise en charge du chiffrement CMAF et « cbcs » pour les lecteurs Apple HLS 
 
 ### <a name="video-indexer"></a>Video Indexer
 
-La version en disponibilité générale de l’indexeur vidéo a été annoncée en août. Pour être au fait des dernières informations concernant les fonctionnalités actuellement prises en charge, consultez [Qu’est-ce que Video Indexer](../../cognitive-services/video-indexer/video-indexer-overview.md?toc=/azure/media-services/video-indexer/toc.json&bc=/azure/media-services/video-indexer/breadcrumb/toc.json). 
+La version en disponibilité générale de l’indexeur vidéo a été annoncée en août. Pour être au fait des dernières informations concernant les fonctionnalités actuellement prises en charge, consultez [Qu’est-ce que Video Indexer](../video-indexer/video-indexer-overview.md?bc=/azure/media-services/video-indexer/breadcrumb/toc.json&toc=/azure/media-services/video-indexer/toc.json). 
 
 ### <a name="plans-for-changes"></a>Modifications planifiées
 
@@ -358,11 +421,15 @@ Les fonctionnalités suivantes sont présentes dans le Kit de développement log
 
 ### <a name="known-issues"></a>Problèmes connus
 
-* Quand vous soumettez un travail, vous pouvez spécifier l’ingestion de votre vidéo source à l’aide d’URL HTTPS, d’URL SAP ou de chemins de fichiers situés dans le stockage Blob Azure. AMS v3 ne prend pas en charge l’encodage de transfert mémorisé en bloc sur les URL HTTPS.
+* Quand vous soumettez un travail, vous pouvez spécifier l’ingestion de votre vidéo source à l’aide d’URL HTTPS, d’URL SAP ou de chemins de fichiers situés dans le stockage Blob Azure. Actuellement, Media Services v3 ne prend pas en charge l’encodage de transfert mémorisé en bloc sur les URL HTTPS.
 
 ## <a name="ask-questions-give-feedback-get-updates"></a>Poser des questions, envoyer des commentaires, obtenir des mises à jour
 
 Découvrez l’article [Communauté Azure Media Services](media-services-community.md) pour découvrir les différentes façons dont vous pouvez poser des questions, faire des commentaires et obtenir des mises à jour sur Media Services.
+
+## <a name="see-also"></a>Voir aussi
+
+[Conseils de migration pour le passage de Media Services v2 à Media Services v3](migrate-from-v2-to-v3.md#known-issues)
 
 ## <a name="next-steps"></a>Étapes suivantes
 

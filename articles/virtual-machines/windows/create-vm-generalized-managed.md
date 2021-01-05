@@ -4,15 +4,15 @@ description: Créez une machine virtuelle Windows à partir d’une image manag�
 author: cynthn
 ms.service: virtual-machines-windows
 ms.workload: infrastructure-services
-ms.topic: article
+ms.topic: how-to
 ms.date: 09/17/2018
 ms.author: cynthn
-ms.openlocfilehash: b0c6689b66037067a4c5174738945b7c6fabd5b5
-ms.sourcegitcommit: 09a124d851fbbab7bc0b14efd6ef4e0275c7ee88
+ms.openlocfilehash: 2be48025bcf2be8cec63e2a251f034e72c803e88
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/23/2020
-ms.locfileid: "82086315"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87289652"
 ---
 # <a name="create-a-vm-from-a-managed-image"></a>Créer une machine virtuelle à partir d’une image gérée
 
@@ -20,6 +20,7 @@ Vous pouvez créer plusieurs machines virtuelles à partir d’une image de mach
 
 Avant de créer une machine virtuelle, vous devez [créer une image de machine virtuelle managée](capture-image-resource.md) à utiliser comme image source et accorder un accès en lecture sur l’image aux utilisateurs qui doivent avoir accès à l’image. 
 
+Une image managée prend en charge jusqu’à 20 déploiements simultanés. Une tentative de création simultanée de plus de 20 machines virtuelles à partir de la même image managée peut entraîner l’expiration des délais d’approvisionnement en raison des limites de performances de stockage d’un disque dur virtuel unique. Pour créer plus de 20 machines virtuelles simultanément, utilisez une [galerie d’images partagées](shared-image-galleries.md) configurée avec 1 réplica tous les 20 déploiements simultanés de machines virtuelles.
 
 ## <a name="use-the-portal"></a>Utiliser le portail
 
@@ -34,11 +35,11 @@ Avant de créer une machine virtuelle, vous devez [créer une image de machine v
 
 ## <a name="use-powershell"></a>Utiliser PowerShell
 
-Vous pouvez utiliser PowerShell pour créer une machine virtuelle à partir d’une image à l’aide du paramètre simplifié défini pour la cmdlet [New-AzVm](https://docs.microsoft.com/powershell/module/az.compute/new-azvm). L’image doit se trouver dans le même groupe de ressources que celui dans lequel vous allez créer la machine virtuelle.
+Vous pouvez utiliser PowerShell pour créer une machine virtuelle à partir d’une image à l’aide du paramètre simplifié défini pour la cmdlet [New-AzVm](/powershell/module/az.compute/new-azvm). L’image doit se trouver dans le même groupe de ressources que celui dans lequel vous allez créer la machine virtuelle.
 
  
 
-Le paramètre simplifié défini pour [New-AzVm](https://docs.microsoft.com/powershell/module/az.compute/new-azvm) nécessite uniquement un nom, un groupe de ressources et un nom d’image pour créer une machine virtuelle à partir d’une image. New-AzVm utilise la valeur du paramètre **-Name** comme nom de toutes les ressources qu’il crée automatiquement. Dans cet exemple, nous fournissons des noms plus détaillés pour chaque ressource, mais laissons l’applet de commande les créer automatiquement. Vous pouvez également créer des ressources en avance, comme le réseau virtuel, et passer le nom de ressource dans l’applet de commande. New-AzVm utilisera les ressources existantes s’il peut les trouver par leur nom.
+Le paramètre simplifié défini pour [New-AzVm](/powershell/module/az.compute/new-azvm) nécessite uniquement un nom, un groupe de ressources et un nom d’image pour créer une machine virtuelle à partir d’une image. New-AzVm utilise la valeur du paramètre **-Name** comme nom de toutes les ressources qu’il crée automatiquement. Dans cet exemple, nous fournissons des noms plus détaillés pour chaque ressource, mais laissons l’applet de commande les créer automatiquement. Vous pouvez également créer des ressources en avance, comme le réseau virtuel, et passer le nom de ressource dans l’applet de commande. New-AzVm utilisera les ressources existantes s’il peut les trouver par leur nom.
 
 L’exemple suivant crée une machine virtuelle nommée *myVMfromImage* dans le groupe de ressources *myResourceGroup*, à partir de l’image nommée *myImage*. 
 
@@ -60,4 +61,3 @@ New-AzVm `
 
 ## <a name="next-steps"></a>Étapes suivantes
 [Créer et gérer des machines virtuelles Windows avec le module Azure PowerShell](tutorial-manage-vm.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)
-

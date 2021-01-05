@@ -8,18 +8,18 @@ ms.service: hdinsight
 ms.topic: conceptual
 ms.custom: hdinsightactive
 ms.date: 02/13/2020
-ms.openlocfilehash: 104975e6424ed96d43434a588997957033c31d93
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 0b4a31b88c9a6fa8c2c6170fce38760c1a361f2e
+ms.sourcegitcommit: d767156543e16e816fc8a0c3777f033d649ffd3c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77560352"
+ms.lasthandoff: 10/26/2020
+ms.locfileid: "92533425"
 ---
 # <a name="manage-apache-hadoop-clusters-in-hdinsight-by-using-azure-powershell"></a>Gestion des clusters Apache Hadoop dans HDInsight au moyen d’Azure PowerShell
 
 [!INCLUDE [selector](../../includes/hdinsight-portal-management-selector.md)]
 
-Azure PowerShell permet de contrôler et d’automatiser le déploiement et la gestion de vos charges de travail dans Azure. Dans cet article, vous allez découvrir comment gérer des clusters [Apache Hadoop](https://hadoop.apache.org/) dans Azure HDInsight à l’aide de module Az de Azure PowerShell. Pour obtenir la liste des cmdlets PowerShell HDInsight, consultez la rubrique [Référence Az.HDInsight](https://docs.microsoft.com/powershell/module/az.hdinsight).
+Azure PowerShell permet de contrôler et d’automatiser le déploiement et la gestion de vos charges de travail dans Azure. Dans cet article, vous allez découvrir comment gérer des clusters [Apache Hadoop](https://hadoop.apache.org/) dans Azure HDInsight à l’aide de module Az de Azure PowerShell. Pour obtenir la liste des cmdlets PowerShell HDInsight, consultez la rubrique [Référence Az.HDInsight](/powershell/module/az.hdinsight).
 
 Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
 
@@ -27,7 +27,7 @@ Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://az
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 
-Le [module Az](https://docs.microsoft.com/powershell/azure/overview) PowerShell installé.
+Le [module Az](/powershell/azure/) PowerShell installé.
 
 ## <a name="create-clusters"></a>Créer des clusters
 
@@ -75,7 +75,7 @@ Set-AzHDInsightClusterSize -ClusterName <Cluster Name> -TargetInstanceCount <New
 
 ## <a name="update-http-user-credentials"></a>Mettre à jour les informations d’identification de l’utilisateur HTTP
 
-[Set-AzHDInsightGatewayCredential](https://docs.microsoft.com/powershell/module/az.hdinsight/set-azhdinsightgatewaycredential) définit les informations d'identification HTTP de passerelle d'un cluster Azure HDInsight.
+[Set-AzHDInsightGatewayCredential](/powershell/module/az.hdinsight/set-azhdinsightgatewaycredential) définit les informations d'identification HTTP de passerelle d'un cluster Azure HDInsight.
 
 ```powershell
 $clusterName = "CLUSTERNAME"
@@ -146,7 +146,7 @@ Consultez [Charger les données vers HDInsight](hdinsight-upload-data.md).
 
 ## <a name="see-also"></a>Voir aussi
 
-* [Cmdlets Az.HDInsight](https://docs.microsoft.com/powershell/module/az.hdinsight/?view=azps-3.1.0#hdinsight)
+* [Cmdlets Az.HDInsight](/powershell/module/az.hdinsight/#hdinsight)
 * [Gérer des clusters Apache Hadoop dans HDInsight avec le portail Azure](hdinsight-administer-use-portal-linux.md)
 * [Administrer HDInsight à l’aide d’une interface de ligne de commande](hdinsight-administer-use-command-line.md)
 * [Création de clusters HDInsight](hdinsight-hadoop-provision-linux-clusters.md)

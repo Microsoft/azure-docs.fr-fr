@@ -1,18 +1,18 @@
 ---
 title: Migrer des comptes du Portail Cloud Partner vers la Place de marché commerciale Microsoft
 description: Découvrez comment migrer votre compte du Portail Cloud Partner vers l’Espace partenaires dans la Place de marché commerciale Microsoft pour Azure
-author: dsindona
-ms.author: dsindona
 ms.service: marketplace
 ms.subservice: partnercenter-marketplace-publisher
 ms.topic: conceptual
+author: parthpandyaMSFT
+ms.author: parthp
 ms.date: 09/23/2019
-ms.openlocfilehash: fb6fe624248a9098f37b94773b7162052b94b5ae
-ms.sourcegitcommit: cf7caaf1e42f1420e1491e3616cc989d504f0902
+ms.openlocfilehash: 9e9f3b7ea3d99de51b9398bda82b690d2c249a1d
+ms.sourcegitcommit: 59f506857abb1ed3328fda34d37800b55159c91d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/22/2020
-ms.locfileid: "83800401"
+ms.lasthandoff: 10/24/2020
+ms.locfileid: "92520963"
 ---
 # <a name="how-to-migrate-your-account-from-cloud-partner-portal-to-partner-center"></a>Comment migrer votre compte du Portail Cloud Partner vers l’Espace partenaires
 
@@ -27,7 +27,7 @@ Si vous disposez du rôle Propriétaire dans le portail Cloud Partner pour un co
 
 ### <a name="your-account-has-been-migrated-to-partner-center"></a>Votre compte a été migré vers l’Espace partenaires
 
-Pour tous les comptes qui ont effectué la migration de CPP vers l’Espace partenaires, la gestion des comptes se produit dans l’Espace partenaires. Les modifications telles que l’ajout/la suppression d’utilisateurs seront synchronisées avec CPP.
+Vous gérez maintenant votre compte dans l’Espace partenaires. Les modifications telles que l’ajout/la suppression d’utilisateurs seront synchronisées avec CPP.
 
 ### <a name="you-have-not-yet-migrated-your-account-to-partner-center"></a>Vous n’avez pas encore migré votre compte vers l’Espace partenaires
 
@@ -45,7 +45,7 @@ Cliquez sur la bannière pour démarrer le processus de migration de votre compt
 
 ## <a name="publishers-moving-from-cpp"></a>Éditeurs migrant à partir du portail CPP
 
-Si votre compte a été migré depuis le [portail Cloud Partner (CPP)](https://cloudpartner.azure.com), vous n’avez pas besoin de créer un nouveau compte Espace partenaires. Vous devez avoir reçu un lien personnalisé vers votre nouveau compte Espace partenaires dans votre messagerie électronique et dans une bannière de notification après vous être connecté à votre compte CPP existant.
+Si votre compte a été migré depuis le CPP, vous n’avez pas besoin de créer un nouveau compte Espace partenaires. Vous devez avoir reçu un lien personnalisé vers votre nouveau compte Espace partenaires dans votre messagerie électronique et dans une bannière de notification après vous être connecté à votre compte CPP existant.
 
 Une fois que vous avez activé votre nouveau compte Espace partenaires en cliquant sur ce lien personnalisé, vous pouvez revenir à votre compte en vous rendant sur le [Tableau de bord de la Place de marché commerciale](https://partner.microsoft.com/dashboard/commercial-marketplace/overview) dans l’Espace partenaires.
 
@@ -59,7 +59,7 @@ Les entreprises qui souhaitent s’associer à Microsoft doivent rejoindre le Mi
 
 Si vous n’êtes pas membre du Microsoft Partner Network, vous pouvez [vous inscrire ici](https://signup.microsoft.com/signup?sku=StoreForBusinessIW&origin=partnerdashboard&culture=en-us&ru=https://partner.microsoft.com/dashboard/account/v3/xpu/onboard?ru=/dashboard/account/v3/enrollment/companyprofile/basicpartnernetwork/new) pour obtenir un ID MPN. Prenez note de votre ID MPN, car vous devrez l’entrer pendant le processus d’activation du compte.
 
-Pour en savoir plus sur le Microsoft Partner Network, consultez [Rejoindre le Microsoft Partner Network](https://partner.microsoft.com/en-US/membership) sur le site web des partenaires. Pour en savoir plus sur les avantages dont bénéficient les éditeurs de logiciels indépendants membres du Microsoft Partner Network, consultez le [hub de ressources pour éditeurs de logiciels indépendants](https://partner.microsoft.com/isv-resource-hub).  
+Pour en savoir plus sur le Microsoft Partner Network, consultez [Rejoindre le Microsoft Partner Network](https://partner.microsoft.com/membership) sur le site web des partenaires. Pour en savoir plus sur les avantages dont bénéficient les éditeurs de logiciels indépendants membres du Microsoft Partner Network, consultez le [hub de ressources pour éditeurs de logiciels indépendants](https://partner.microsoft.com/isv-resource-hub).  
 
 ## <a name="move-dynamics-365-and-powerapps-offers-to-partner-center"></a>Déplacer des offres Dynamics 365 et PowerApps vers l’Espace partenaires
 
@@ -73,10 +73,10 @@ Pour obtenir des informations spécifiques sur ce qui doit être fait d’ici le
 1. Si votre compte d’appartenance MPN a été initialement créé dans Partner Membership Center (PMC), connectez-vous à l’[Espace partenaires](https://partner.microsoft.com/pcv/accountsettings/connectedpartnerprofile) pour vérifier que ce compte a été migré. Si vous voyez un écran de profil avec votre ID MPN, vous pouvez continuer. Sinon, vous devez démarrer la migration de votre compte en suivant les invites affichées dans [Partner Membership Center](https://partners.microsoft.com/partnerprogram/Welcome.aspx). Si vous avez besoin d’aide, consultez la page de [support](https://partner.microsoft.com/support?issueid=100-0077).
 2. Accédez à la [page Vue d’ensemble de la Place de marché commerciale dans l’Espace partenaires](https://partner.microsoft.com/dashboard/commercial-marketplace/overview). Si vous voyez la mention « Place de marché commerciale » dans le volet de navigation de gauche, vous êtes inscrit et vous pouvez passer à l’étape suivante. Sinon, [inscrivez-vous dès maintenant sur la Place de marché commerciale](https://partner.microsoft.com/dashboard/account/v3/enrollment/introduction/partnership).
 3. Vérifiez que vos offres sont proposées dans AppSource [en recherchant vos offres](https://appsource.microsoft.com/). Si vos offres se trouvent déjà dans AppSource, passez à l’étape suivante. Si l’une de vos offres n’est pas dans AppSource, créez une [offre Dynamics 365 Customer Engagement](create-new-customer-engagement-offer.md) ou une [offre Dynamics 365 Operations](create-new-operations-offer.md).
-4. Sur la [page Contrats](https://partner.microsoft.com/dashboard/account/agreements) de l’Espace partenaires, consultez et acceptez **l’addendum Business Applications ISV**.
+4. Sur la [page Contrats](https://partner.microsoft.com/dashboard/account/agreements) de l’Espace partenaires, consultez et acceptez **l’addendum Business Applications ISV** .
 5. Dans les [Paramètres du compte](https://partner.microsoft.com/dashboard/account/v3/accountsettings/billingprofile) de l’Espace partenaires, vérifiez que vos informations de facturation sont complètes.
 6. Soumettez toutes vos offres nouvelles ou existantes pour certification et publication, même si elles ont déjà été certifiées.
-    * Complétez les écrans d’informations, notamment en fournissant votre application à des fins de certification, ainsi que des informations de marketing. Sélectionnez **Soumettre** (dans le coin supérieur droit de l’écran) au plus tard le **15 octobre 2019**. Ces étapes doivent être effectuées afin que la disponibilité de l’offre ne soit pas affectée.
+    * Complétez les écrans d’informations, notamment en fournissant votre application à des fins de certification, ainsi que des informations de marketing. Sélectionnez **Soumettre** (dans le coin supérieur droit de l’écran) au plus tard le **15 octobre 2019** . Ces étapes doivent être effectuées afin que la disponibilité de l’offre ne soit pas affectée.
     * Si vous êtes éligible, vous pouvez demander à participer au niveau Premium au cours de ce processus.
     * La certification ou la recertification nécessite que votre application prenne en charge la version la plus récente de notre plateforme Business Applications.
     * Une fois votre application approuvée, vous recevrez un e-mail pour revenir à l’offre et sélectionner « Mettre en ligne » afin que l’offre soit mise en ligne sur Microsoft AppSource.

@@ -2,22 +2,25 @@
 title: Spécification de points de terminaison du service Service Fabric
 description: Comment décrire les ressources du point de terminaison dans un manifeste de service, y compris comment configurer des points de terminaison HTTPS
 ms.topic: conceptual
-ms.date: 2/23/2018
-ms.openlocfilehash: 88e71d15829e68bde635f5b4d40224b8fa914f40
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.date: 09/16/2020
+ms.custom: contperf-fy21q1
+ms.openlocfilehash: 0ed5a4aa8993f52d42b97288cd143e6114ff36ff
+ms.sourcegitcommit: 3ea45bbda81be0a869274353e7f6a99e4b83afe2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81417592"
+ms.lasthandoff: 12/10/2020
+ms.locfileid: "97033304"
 ---
 # <a name="specify-resources-in-a-service-manifest"></a>Spécifier des ressources dans un manifeste de service
 ## <a name="overview"></a>Vue d’ensemble
-Le manifeste de service met les ressources à la disposition du service à déclarer, ou à modifier, sans changer le code compilé. Service Fabric prend en charge la configuration des ressources des points de terminaison du service. L’accès aux ressources spécifiées dans le manifeste de service peut être contrôlé par le biais de la valeur SecurityGroup dans le manifeste de l’application. La déclaration des ressources permet de les modifier au moment du déploiement. Ainsi, le service n’a pas besoin d’introduire un nouveau mécanisme de configuration. La définition de schéma pour le fichier ServiceManifest.xml est installée avec le Kit de développement logiciel (SDK) Service Fabric et les outils sous *C:\Program Files\Microsoft SDKs\Service Fabric\schemas\ServiceFabricServiceModel.xsd*.
+Les applications et services Service Fabric sont définis et créés dans différentes versions à l’aide à l’aide de fichiers manifeste. Pour obtenir une vue d’ensemble plus général de ServiceManifest.xml et d’ApplicationManifest.xml, consultez [Manifestes des services et applications Service Fabric](service-fabric-application-and-service-manifests.md).
+
+Le manifeste de service met les ressources à la disposition du service à déclarer, ou à modifier, sans changer le code compilé. Service Fabric prend en charge la configuration des ressources des points de terminaison du service. L’accès aux ressources spécifiées dans le manifeste de service peut être contrôlé par le biais de la valeur SecurityGroup dans le manifeste de l’application. La déclaration des ressources permet de les modifier au moment du déploiement. Ainsi, le service n’a pas besoin d’introduire un nouveau mécanisme de configuration. La définition de schéma pour le fichier ServiceManifest.xml est installée avec le SDK et les outils Service Fabric sous *C:\Program Files\Microsoft SDKs\Service Fabric\schemas\ServiceFabricServiceModel.xsd*, et est présentée dans la [documentation sur le schéma ServiceFabricServiceModel.xsd](service-fabric-service-model-schema.md).
 
 ## <a name="endpoints"></a>Points de terminaison
 Lorsqu’une ressource de point de terminaison est définie dans le manifeste de service, Service Fabric alloue les ports de la plage de ports d’application réservés lorsqu’un port n’est pas spécifié de manière explicite. Examinez, par exemple, le point de terminaison *ServiceEndpoint1* spécifié dans l’extrait de code du manifeste fourni après ce paragraphe. En outre, les services peuvent également demander un port spécifique d’une ressource. Les réplicas de service exécutés sur des nœuds de cluster différents peuvent être alloués à des numéros de ports différents, tandis que les réplicas d’un service exécutés sur le même nœud partagent le port. Les réplicas de service peuvent alors utiliser ces ports pour la réplication et pour écouter les demandes du client.
 
-Lors de l’activation d’un service qui spécifie un point de terminaison https, Service Fabric définit l’entrée de contrôle d’accès pour le port, lie le certificat de serveur spécifié au port et accorde également à l’identité que le service exécute en tant qu’autorisations sur la clé privée du certificat. Le flux d’activation est appelé chaque fois que Service Fabric démarre, ou lorsque la déclaration de certificat de l’application est modifiée via une mise à niveau. Les modifications/renouvellements sont également surveillés dans le certificat de point de terminaison, et les autorisations sont réappliquées régulièrement si nécessaire.
+Lors de l’activation d’un service qui spécifie un point de terminaison HTTPS, Service Fabric définit l’entrée de contrôle d’accès pour le port, lie le certificat de serveur spécifié au port et accorde également à l’identité que le service exécute sous la forme d’autorisations sur la clé privée du certificat. Le flux d’activation est appelé chaque fois que Service Fabric démarre, ou lorsque la déclaration de certificat de l’application est modifiée via une mise à niveau. Les changements/renouvellements sont également supervisés dans le certificat de point de terminaison, et les autorisations sont réappliquées régulièrement si nécessaire.
 
 À l’arrêt du service, Service Fabric nettoie l’entrée de contrôle d’accès du point de terminaison et supprime la liaison de certificat. Toutefois, les autorisations appliquées à la clé privée du certificat ne sont pas nettoyées.
 
@@ -52,8 +55,6 @@ Reportez-vous à [Configuration de services Reliable Services avec état](servic
 
 ## <a name="example-specifying-an-http-endpoint-for-your-service"></a>Exemple : spécification d’un point de terminaison HTTP pour votre service
 Le manifeste de service suivant définit une seule ressource de point de terminaison TCP et deux ressources de point de terminaison HTTP dans l’élément &lt;Ressources&gt;.
-
-Les points de terminaison HTTP sont automatiquement répertoriés dans la liste de contrôle d’accès par Service Fabric.
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -157,12 +158,16 @@ Voici un exemple de fichier ApplicationManifest illustrant la configuration requ
 
 Pour les clusters Linux, le **MY** stocke par défaut dans le dossier **/var/lib/sfcerts**.
 
+Pour obtenir un exemple d’application complète qui utilise un point de terminaison HTTPS, consultez [Ajouter un point de terminaison HTTPS à un service front-end d’API web ASP.NET Core à l’aide de Kestrel](./service-fabric-tutorial-dotnet-app-enable-https-endpoint.md#define-an-https-endpoint-in-the-service-manifest).
+
+## <a name="port-acling-for-http-endpoints"></a>Port liste ACL pour les points de terminaison HTTP
+Service Fabric effectue automatiquement des points de terminaison HTTP(S) ACL spécifiés par défaut. Il n’effectue **pas** de mise en liste ACL automatique si un point de terminaison n’a aucun élément [SecurityAccessPolicy](service-fabric-assign-policy-to-endpoint.md) qui lui est associé et que Service Fabric est configuré pour s’exécuter à l’aide d’un compte disposant de privilèges d’administrateur.
 
 ## <a name="overriding-endpoints-in-servicemanifestxml"></a>Écraser des points de terminaison dans ServiceManifest.xml
 
-Dans ApplicationManifest, ajoutez une section ResourceOverrides qui sera la sœur de la section ConfigOverrides. Vous pouvez y spécifier le remplacement de la section Endpoints dans la section des ressources spécifiée dans le manifeste de service. Le remplacement des points de terminaison est pris en charge dans le runtime 5.7.217/SDK 2.7.217 et versions supérieures.
+Dans ApplicationManifest, ajoutez une section ResourceOverrides qui sera une section sœur de la section ConfigOverrides. Vous pouvez y spécifier le remplacement de la section Endpoints dans la section des ressources spécifiée dans le manifeste de service. Le remplacement des points de terminaison est pris en charge dans le runtime 5.7.217/SDK 2.7.217 et versions supérieures.
 
-Pour pouvoir remplacer EndPoint dans ServiceManifest à l’aide d’ApplicationParameters, modifiez ainsi ApplicationManifest :
+Pour pouvoir remplacer EndPoint dans ServiceManifest à l’aide d’ApplicationParameters, changez ApplicationManifest comme suit :
 
 Dans la section ServiceManifestImport, ajoutez une nouvelle section « ResourceOverrides ».
 
@@ -194,13 +199,13 @@ Dans Parameters, ajoutez le code ci-dessous :
   </Parameters>
 ```
 
-Lors du déploiement de l’application, vous pouvez passer ces valeurs en tant que ApplicationParameters.  Par exemple :
+Lors du déploiement de l’application, vous pouvez passer ces valeurs comme ApplicationParameters.  Par exemple :
 
 ```powershell
 PS C:\> New-ServiceFabricApplication -ApplicationName fabric:/myapp -ApplicationTypeName "AppType" -ApplicationTypeVersion "1.0.0" -ApplicationParameter @{Port='1001'; Protocol='https'; Type='Input'; Port1='2001'; Protocol='http'}
 ```
 
-Remarque : Si les valeurs fournies pour ApplicationParameters sont vides, on revient à la valeur par défaut fournie dans ServiceManifest pour le EndPointName correspondant.
+Remarque : Si les valeurs fournies pour un élément ApplicationParameter sont vides, la valeur par défaut fournie dans ServiceManifest pour le EndPointName correspondant est réactivée.
 
 Par exemple :
 
@@ -214,6 +219,18 @@ Si, dans ServiceManifest, vous avez spécifié :
   </Resources>
 ```
 
-Et que la valeur Port1 et Protocol1 des paramètres d’application est Null ou vide. Le port est toujours déterminé par ServiceFabric. Et Protocol a la valeur tcp.
+Supposons que la valeur Port1 et Protocol1 des paramètres d’application est Null ou vide. Le port est déterminé par ServiceFabric et Protocol (protocole) a la valeur TCP.
 
-Supposons que vous spécifiez une valeur incorrecte. Par exemple, pour Port, vous avez spécifié la valeur de chaîne « Foo » au lieu d’un entier.  La commande New-ServiceFabricApplication échoue avec l’erreur suivante : « The override parameter with name 'ServiceEndpoint1' attribute 'Port1' in section 'ResourceOverrides' is invalid. The value specified is ’Foo’ and required is ’int’. » (Le paramètre de remplacement portant le nom « ServiceEndpoint1 » pour l’attribut « Port1 » dans la section « ResourceOverrides » n’est pas valide. La valeur spécifiée est « Foo » alors que le type « int » est requis.)
+Supposons que vous spécifiez une valeur incorrecte. Par exemple, pour Port, vous avez spécifié la valeur de chaîne « Foo » au lieu d’un entier.  La commande New-ServiceFabricApplication échoue avec l’erreur suivante : `The override parameter with name 'ServiceEndpoint1' attribute 'Port1' in section 'ResourceOverrides' is invalid. The value specified is 'Foo' and required is 'int'.`
+
+## <a name="next-steps"></a>Étapes suivantes
+
+Cet article a expliqué comment définir des points de terminaison dans le manifeste de service de Service Fabric. Pour obtenir des exemples plus détaillés, consultez :
+
+> [!div class="nextstepaction"]
+> [Exemples de manifestes d’application et de service](service-fabric-manifest-examples.md)
+
+Pour obtenir une procédure pas à pas de l’empaquetage et du déploiement d’une application existante sur un cluster Service Fabric, consultez :
+
+> [!div class="nextstepaction"]
+> [Empaqueter et déployer un fichier exécutable existant sur Service Fabric](service-fabric-deploy-existing-app.md)

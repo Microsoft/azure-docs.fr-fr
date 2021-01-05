@@ -1,6 +1,6 @@
 ---
-title: Accessibilité de l’Explorateur de stockage Azure (préversion) | Microsoft Docs
-description: Accessibilité de l’Explorateur de stockage Azure (préversion)
+title: Accessibilité d’Explorateur Stockage Azure | Microsoft Docs
+description: Comprendre l’accessibilité dans Explorateur Stockage Azure. Passez en revue les lecteurs d’écran disponibles, la capacité de zoom, les thèmes à contraste élevé et les touches de raccourci.
 services: storage
 documentationcenter: na
 author: MrayermannMSFT
@@ -14,12 +14,12 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 02/20/2018
 ms.author: marayerm
-ms.openlocfilehash: aa42d6b898a3cc474575f6c8dae65ff420fc8e30
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: ca4a8d719277eaa1d853d53d282649f839256be9
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "60457248"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88035483"
 ---
 # <a name="storage-explorer-accessibility"></a>Accessibilité de l’Explorateur Stockage Azure
 

@@ -5,12 +5,13 @@ author: jakrams
 ms.author: jakras
 ms.date: 02/11/2020
 ms.topic: conceptual
-ms.openlocfilehash: 8551e17ddd71e76aca0c85b9768f564ae0e5f049
-ms.sourcegitcommit: 642a297b1c279454df792ca21fdaa9513b5c2f8b
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 8dca22303edc3b75625df88dac98557c6a2e6162
+ms.sourcegitcommit: 957c916118f87ea3d67a60e1d72a30f48bad0db6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80679399"
+ms.lasthandoff: 10/19/2020
+ms.locfileid: "92202850"
 ---
 # <a name="materials"></a>Matériaux
 
@@ -35,11 +36,15 @@ Les [maillages](meshes.md) comportent un ou plusieurs sous-maillages. Chaque sou
 
 Quand vous modifiez un matériau directement sur la ressource de maillage, toutes les instances de ce maillage sont affectées. Toutefois, sa modification sur le MeshComponent affecte uniquement cette instance de maillage. La méthode la plus appropriée dépend du comportement souhaité, mais l’approche la plus courante consiste à modifier un MeshComponent.
 
+## <a name="material-de-duplication"></a>Déduplication de matériaux
+
+Lors de la conversion, plusieurs matériaux ayant les mêmes propriétés et textures sont automatiquement dédupliqués en un seul matériau. Vous pouvez désactiver cette fonctionnalité dans les [paramètres de conversion](../how-tos/conversion/configure-model-conversion.md), mais nous vous recommandons de la laisser activée pour des performances optimales.
+
 ## <a name="material-classes"></a>Classes de matériaux
 
 Tous les matériaux fournis par l’API sont dérivés de la classe de base `Material`. Vous pouvez demander leur type avec `Material.MaterialSubType` ou en les castant directement :
 
-``` cs
+```cs
 void SetMaterialColorToGreen(Material material)
 {
     if (material.MaterialSubType == MaterialType.Color)
@@ -50,14 +55,43 @@ void SetMaterialColorToGreen(Material material)
     }
 
     PbrMaterial pbrMat = material as PbrMaterial;
-    if( pbrMat!= null )
+    if (pbrMat != null)
     {
-        PbrMaterial pbrMaterial = material.PbrMaterial.Value;
-        pbrMaterial.AlbedoColor = new Color4(0, 1, 0, 1);
+        pbrMat.AlbedoColor = new Color4(0, 1, 0, 1);
         return;
     }
 }
 ```
+
+```cpp
+void SetMaterialColorToGreen(ApiHandle<Material> material)
+{
+    if (material->GetMaterialSubType() == MaterialType::Color)
+    {
+        ApiHandle<ColorMaterial> colorMaterial = material.as<ColorMaterial>();
+        colorMaterial->SetAlbedoColor({ 0, 1, 0, 1 });
+        return;
+    }
+
+    if (material->GetMaterialSubType() == MaterialType::Pbr)
+    {
+        ApiHandle<PbrMaterial> pbrMat = material.as<PbrMaterial>();
+        pbrMat->SetAlbedoColor({ 0, 1, 0, 1 });
+        return;
+    }
+}
+```
+
+## <a name="api-documentation"></a>Documentation de l’API
+
+* [Material, classe C#](/dotnet/api/microsoft.azure.remoterendering.material)
+* [ColorMaterial, classe C#](/dotnet/api/microsoft.azure.remoterendering.colormaterial)
+* [PbrMaterial, classe C#](/dotnet/api/microsoft.azure.remoterendering.pbrmaterial)
+* [RemoteManager.CreateMaterial(), C#](/dotnet/api/microsoft.azure.remoterendering.remotemanager.creatematerial)
+* [Material, classe C++](/cpp/api/remote-rendering/material)
+* [ColorMaterial, classe C++](/cpp/api/remote-rendering/colormaterial)
+* [PbrMaterial, classe C++](/cpp/api/remote-rendering/pbrmaterial)
+* [RemoteManager::CreateMaterial(), C++](/cpp/api/remote-rendering/remotemanager#creatematerial)
 
 ## <a name="next-steps"></a>Étapes suivantes
 

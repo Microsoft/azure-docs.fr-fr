@@ -1,19 +1,19 @@
 ---
 title: Performances de Phoenix dans Azure HDInsight
 description: Bonnes pratiques pour optimiser les performances d’Apache Phoenix sur les clusters Azure HDInsight
-author: ashishthaps
-ms.author: ashishth
+author: hrasheed-msft
+ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
+ms.topic: how-to
 ms.custom: hdinsightactive
 ms.date: 12/27/2019
-ms.openlocfilehash: 7f8f20be81e815414c283f7ec48aa6503e3b60ed
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 0dfb93db1af807459c37653189a90b754c933aa4
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75552642"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89504789"
 ---
 # <a name="apache-phoenix-performance-best-practices"></a>Bonnes pratiques pour les performances d’Apache Phoenix
 
@@ -82,13 +82,17 @@ Phoenix vous permet de contrôler le nombre de régions où vos données sont di
 
 Pour utiliser la chaîne salt sur une table lors de la création, spécifiez le nombre de salt buckets :
 
-    CREATE TABLE CONTACTS (...) SALT_BUCKETS = 16
+```sql
+CREATE TABLE CONTACTS (...) SALT_BUCKETS = 16
+```
 
 La chaîne salt fractionne la table sur les valeurs de clés primaires, en choisissant les valeurs automatiquement. 
 
 Pour contrôler où les divisions de la table se produisent, vous pouvez préalablement fractionner la table en fournissant la plage de valeurs pour le fractionnement. Par exemple, pour créer une table fractionnée selon trois régions :
 
-    CREATE TABLE CONTACTS (...) SPLIT ON ('CS','EU','NA')
+```sql
+CREATE TABLE CONTACTS (...) SPLIT ON ('CS','EU','NA')
+```
 
 ## <a name="index-design"></a>Conception d’index
 
@@ -120,11 +124,15 @@ Dans l’exemple de table de contacts, vous pouvez créer un index secondaire un
 
 Toutefois, si vous souhaitez généralement rechercher les valeurs firstName et lastName en fonction de la valeur socialSecurityNum, vous pouvez créer un index couvert qui inclut les valeurs firstName et lastName en tant que données réelles dans la table d’index :
 
-    CREATE INDEX ssn_idx ON CONTACTS (socialSecurityNum) INCLUDE(firstName, lastName);
+```sql
+CREATE INDEX ssn_idx ON CONTACTS (socialSecurityNum) INCLUDE(firstName, lastName);
+```
 
 Cet index couvert permet à la requête suivante d’acquérir toutes les données simplement à l’aide d’une lecture de la table contenant l’index secondaire :
 
-    SELECT socialSecurityNum, firstName, lastName FROM CONTACTS WHERE socialSecurityNum > 100;
+```sql
+SELECT socialSecurityNum, firstName, lastName FROM CONTACTS WHERE socialSecurityNum > 100;
+```
 
 ### <a name="use-functional-indexes"></a>Utiliser des index fonctionnels
 
@@ -132,7 +140,9 @@ Les index fonctionnels permettent de créer un index sur une expression arbitrai
 
 Par exemple, vous pouvez créer un index pour vous permettent d’effectuer des recherches qui ne respectent pas la casse sur le prénom et le nom d’une personne :
 
-     CREATE INDEX FULLNAME_UPPER_IDX ON "Contacts" (UPPER("firstName"||' '||"lastName"));
+```sql
+CREATE INDEX FULLNAME_UPPER_IDX ON "Contacts" (UPPER("firstName"||' '||"lastName"));
+```
 
 ## <a name="query-design"></a>Conception de requête
 
@@ -155,44 +165,62 @@ Par exemple, supposons que vous avez une table appelée FLIGHTS qui stocke les i
 
 Pour sélectionner tous les vols avec un airlineid `19805`, où airlineid est un champ qui n’est pas dans la clé primaire, ni dans un index :
 
-    select * from "FLIGHTS" where airlineid = '19805';
+```sql
+select * from "FLIGHTS" where airlineid = '19805';
+```
 
 Exécutez la commande explain comme suit :
 
-    explain select * from "FLIGHTS" where airlineid = '19805';
+```sql
+explain select * from "FLIGHTS" where airlineid = '19805';
+```
 
 Le plan de la requête ressemble à ceci :
 
-    CLIENT 1-CHUNK PARALLEL 1-WAY ROUND ROBIN FULL SCAN OVER FLIGHTS
-        SERVER FILTER BY AIRLINEID = '19805'
+```sql
+CLIENT 1-CHUNK PARALLEL 1-WAY ROUND ROBIN FULL SCAN OVER FLIGHTS
+   SERVER FILTER BY AIRLINEID = '19805'
+```
 
 Dans ce plan, notez la phrase FULL SCAN OVER FLIGHTS. Cette phrase indique l’exécution de TABLE SCAN sur toutes les lignes de la table, plutôt que d’utiliser l’option RANGE SCAN ou SKIP SCAN plus efficace.
 
 Maintenant, supposons que vous souhaitiez interroger la table concernant les vols du 2 janvier 2014 pour le transporteur `AA` avec un flightnum supérieur à 1. Supposons que les colonnes year, month, dayofmonth, carrier et flightnum existent dans l’exemple de table, et qu’elles font toutes partie de la clé primaire composite. La requête devrait se présenter comme suit :
 
-    select * from "FLIGHTS" where year = 2014 and month = 1 and dayofmonth = 2 and carrier = 'AA' and flightnum > 1;
+```sql
+select * from "FLIGHTS" where year = 2014 and month = 1 and dayofmonth = 2 and carrier = 'AA' and flightnum > 1;
+```
 
 Examinons le plan de cette requête avec :
 
-    explain select * from "FLIGHTS" where year = 2014 and month = 1 and dayofmonth = 2 and carrier = 'AA' and flightnum > 1;
+```sql
+explain select * from "FLIGHTS" where year = 2014 and month = 1 and dayofmonth = 2 and carrier = 'AA' and flightnum > 1;
+```
 
 Le plan obtenu est le suivant :
 
-    CLIENT 1-CHUNK PARALLEL 1-WAY ROUND ROBIN RANGE SCAN OVER FLIGHTS [2014,1,2,'AA',2] - [2014,1,2,'AA',*]
+```sql
+CLIENT 1-CHUNK PARALLEL 1-WAY ROUND ROBIN RANGE SCAN OVER FLIGHTS [2014,1,2,'AA',2] - [2014,1,2,'AA',*]
+```
 
 Les valeurs dans les crochets correspondent à la plage de valeurs pour les clés primaires. Dans ce cas, les valeurs de la plage sont fixées sur year 2014, month 1 et dayofmonth 2, mais autorisent les valeurs pour flightnum à partir de 2 et valeurs supérieures (`*`). Ce plan de requête confirme que la clé primaire est utilisée comme prévu.
 
 Ensuite, créez un index sur la table FLIGHTS nommé `carrier2_idx` sur le champ carrier uniquement. Cet index inclut également flightdate, tailnum, origin et flightnum en tant que colonnes couvertes dont les données sont aussi stockées dans l’index.
 
-    CREATE INDEX carrier2_idx ON FLIGHTS (carrier) INCLUDE(FLIGHTDATE,TAILNUM,ORIGIN,FLIGHTNUM);
+```sql
+CREATE INDEX carrier2_idx ON FLIGHTS (carrier) INCLUDE(FLIGHTDATE,TAILNUM,ORIGIN,FLIGHTNUM);
+```
 
 Supposons que vous souhaitiez obtenir le transporteur (carrier), ainsi que les valeurs flightdate et tailnum, comme dans la requête suivante :
 
-    explain select carrier,flightdate,tailnum from "FLIGHTS" where carrier = 'AA';
+```sql
+explain select carrier,flightdate,tailnum from "FLIGHTS" where carrier = 'AA';
+```
 
 L’index suivant devrait être utilisé :
 
-    CLIENT 1-CHUNK PARALLEL 1-WAY ROUND ROBIN RANGE SCAN OVER CARRIER2_IDX ['AA']
+```sql
+CLIENT 1-CHUNK PARALLEL 1-WAY ROUND ROBIN RANGE SCAN OVER CARRIER2_IDX ['AA']
+```
 
 Pour une liste complète des éléments qui peuvent apparaître dans les résultats du plan explain, consultez la section Plans Explain dans le [Guide d’optimisation de Phoenix Apache](https://phoenix.apache.org/tuning_guide.html).
 
@@ -222,7 +250,9 @@ Lorsque vous supprimez un jeu de données volumineux, activez autoCommit avant d
 
 Si votre scénario priorise la vitesse d’écriture par rapport à l’intégrité des données, pensez à désactiver le journal à écriture anticipée lors de la création de vos tables :
 
-    CREATE TABLE CONTACTS (...) DISABLE_WAL=true;
+```sql
+CREATE TABLE CONTACTS (...) DISABLE_WAL=true;
+```
 
 Pour en savoir plus sur le sujet et sur d’autres options, consultez [Apache Phoenix Grammar](https://phoenix.apache.org/language/index.html#options).
 

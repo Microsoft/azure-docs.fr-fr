@@ -7,18 +7,18 @@ manager: jillfra
 ms.assetid: da587aac-5e64-4e9a-8405-44cc1924881d
 ms.prod: visual-studio-dev15
 ms.technology: vs-azure
-ms.custom: vs-azure
+ms.custom: vs-azure, devx-track-csharp
 ms.workload: azure-vs
 ms.topic: conceptual
 ms.date: 12/02/2016
 ms.author: ghogen
 ROBOTS: NOINDEX,NOFOLLOW
-ms.openlocfilehash: 603bb2b9a862ad4ed2cbde63e2d82b9a82fbeaa1
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 94f248edfebd6c6fedb78a54eee220c0ef38b4ab
+ms.sourcegitcommit: c95e2d89a5a3cf5e2983ffcc206f056a7992df7d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "72298778"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95545860"
 ---
 # <a name="getting-started-with-azure-queue-storage-and-visual-studio-connected-services-cloud-services-projects"></a>Prise en main du stockage de files d'attente Azure et des services connectés Visual Studio (projets services cloud)
 [!INCLUDE [storage-try-azure-tools-queues](../../includes/storage-try-azure-tools-queues.md)]
@@ -26,7 +26,7 @@ ms.locfileid: "72298778"
 ## <a name="overview"></a>Vue d’ensemble
 Cet article décrit comment prendre en main Stockage File d’attente Azure dans Visual Studio après avoir créé ou référencé un compte de stockage Azure dans un projet de services cloud via la boîte de dialogue **Ajouter des services connectés** de Visual Studio.
 
-Nous allons vous montrer comment créer une file d’attente dans le code. Nous vous indiquerons aussi comment effectuer des opérations de base sur les files d’attente, comme l’ajout, la modification, la lecture et la suppression des messages des files d’attente. Les exemples sont écrits en code C# et utilisent la [bibliothèque cliente Microsoft Azure Storage pour .NET](https://msdn.microsoft.com/library/azure/dn261237.aspx).
+Nous allons vous montrer comment créer une file d’attente dans le code. Nous vous indiquerons aussi comment effectuer des opérations de base sur les files d’attente, comme l’ajout, la modification, la lecture et la suppression des messages des files d’attente. Les exemples sont écrits en code C# et utilisent la [bibliothèque cliente Microsoft Azure Storage pour .NET](/previous-versions/azure/dn261237(v=azure.100)).
 
 L’opération **Ajouter des services connectés** installe les packages NuGet appropriés pour accéder au stockage Azure de votre projet et ajoute la chaîne de connexion pour le compte de stockage aux fichiers de configuration de votre projet.
 
@@ -42,29 +42,39 @@ Pour accéder à des files d’attente dans les projets Visual Studio Cloud Se
 
 1. Vérifiez que les déclarations d’espace de noms figurant au début du fichier C# incluent ces instructions **using** .
    
-        using Microsoft.Framework.Configuration;
-        using Microsoft.WindowsAzure.Storage;
-        using Microsoft.WindowsAzure.Storage.Queue;
+    ```csharp
+    using Microsoft.Framework.Configuration;
+    using Microsoft.WindowsAzure.Storage;
+    using Microsoft.WindowsAzure.Storage.Queue;
+    ```
 2. Obtenez un objet **CloudStorageAccount** qui représente les informations de votre compte de stockage. Le code suivant permet d'obtenir la chaîne de connexion de stockage et les informations de compte de stockage à partir de la configuration du service Azure.
    
-         CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
-           CloudConfigurationManager.GetSetting("<storage-account-name>_AzureStorageConnectionString"));
+    ```csharp
+    CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
+    CloudConfigurationManager.GetSetting("<storage-account-name>_AzureStorageConnectionString"));
+    ```
 3. Obtenez un objet **CloudQueueClient** pour référencer les objets de file d’attente de votre compte de stockage.  
    
-        // Create the queue client.
-        CloudQueueClient queueClient = storageAccount.CreateCloudQueueClient();
+    ```csharp
+    // Create the queue client.
+    CloudQueueClient queueClient = storageAccount.CreateCloudQueueClient();
+    ```
 4. Obtenez un objet **CloudQueue** pour référencer une file d’attente spécifique.
    
-        // Get a reference to a queue named "messageQueue"
-        CloudQueue messageQueue = queueClient.GetQueueReference("messageQueue");
+    ```csharp
+    // Get a reference to a queue named "messageQueue"
+    CloudQueue messageQueue = queueClient.GetQueueReference("messageQueue");
+    ```
 
 **REMARQUE :** Placez tout le code ci-dessus avant celui des exemples suivants.
 
 ## <a name="create-a-queue-in-code"></a>Créer une file d’attente dans le code
 Pour créer la file d’attente dans le code, ajoutez simplement un appel à **CreateIfNotExists**.
 
-    // Create the CloudQueue if it does not exist
-    messageQueue.CreateIfNotExists();
+```csharp
+// Create the CloudQueue if it does not exist
+messageQueue.CreateIfNotExists();
+```
 
 ## <a name="add-a-message-to-a-queue"></a>Ajout d'un message à une file d'attente
 Pour insérer un message dans une file d’attente existante, créez un objet **CloudQueueMessage**, puis appelez la méthode **AddMessage**.
@@ -73,15 +83,19 @@ Un objet **CloudQueueMessage** peut être créé à partir d'une chaîne (au for
 
 Voici un exemple qui insère le message « Hello, World ».
 
-    // Create a message and add it to the queue.
-    CloudQueueMessage message = new CloudQueueMessage("Hello, World");
-    messageQueue.AddMessage(message);
+```csharp
+// Create a message and add it to the queue.
+CloudQueueMessage message = new CloudQueueMessage("Hello, World");
+messageQueue.AddMessage(message);
+```
 
 ## <a name="read-a-message-in-a-queue"></a>Lire un message dans une file d’attente
 Vous pouvez lire furtivement le message au début de la file d'attente sans l'enlever de la file d'attente en appelant la méthode **PeekMessage** .
 
-    // Peek at the next message
-    CloudQueueMessage peekedMessage = messageQueue.PeekMessage();
+```csharp
+// Peek at the next message
+CloudQueueMessage peekedMessage = messageQueue.PeekMessage();
+```
 
 ## <a name="read-and-remove-a-message-in-a-queue"></a>Lire et supprimer un message dans une file d’attente
 Votre code permet de supprimer (retirer) un message d'une file d'attente en deux étapes.
@@ -91,13 +105,15 @@ Votre code permet de supprimer (retirer) un message d'une file d'attente en deux
 
 Ce processus de suppression d'un message en deux étapes garantit que, si votre code ne parvient pas à traiter un message à cause d'une défaillance matérielle ou logicielle, une autre instance de votre code peut obtenir le même message et réessayer. Le code suivant appelle **DeleteMessage** juste après le traitement du message.
 
-    // Get the next message in the queue.
-    CloudQueueMessage retrievedMessage = messageQueue.GetMessage();
+```csharp
+// Get the next message in the queue.
+CloudQueueMessage retrievedMessage = messageQueue.GetMessage();
 
-    // Process the message in less than 30 seconds
+// Process the message in less than 30 seconds
 
-    // Then delete the message.
-    await messageQueue.DeleteMessage(retrievedMessage);
+// Then delete the message.
+await messageQueue.DeleteMessage(retrievedMessage);
+```
 
 
 ## <a name="use-additional-options-to-process-and-remove-queue-messages"></a>Utiliser des options supplémentaires pour traiter et supprimer des messages de la file d’attente
@@ -108,51 +124,58 @@ Il existe deux façons de personnaliser la récupération des messages à partir
 
 Voici un exemple :
 
-    foreach (CloudQueueMessage message in messageQueue.GetMessages(20, TimeSpan.FromMinutes(5)))
-    {
-        // Process all messages in less than 5 minutes, deleting each message after processing.
+```csharp
+foreach (CloudQueueMessage message in messageQueue.GetMessages(20, TimeSpan.FromMinutes(5)))
+{
+    // Process all messages in less than 5 minutes, deleting each message after processing.
 
-        // Then delete the message after processing
-        messageQueue.DeleteMessage(message);
+    // Then delete the message after processing
+    messageQueue.DeleteMessage(message);
 
-    }
+}
+```
 
 ## <a name="get-the-queue-length"></a>Obtention de la longueur de la file d'attente
 Vous pouvez obtenir une estimation du nombre de messages dans une file d'attente. La méthode **FetchAttributes** demande au service de files d'attente d'extraire les attributs de la file d'attente, y compris le nombre de messages. La propriété **ApproximateMethodCount** renvoie la dernière valeur extraite par la méthode **FetchAttributes**, sans appeler le service de File d’attente.
 
-    // Fetch the queue attributes.
-    messageQueue.FetchAttributes();
+```csharp
+// Fetch the queue attributes.
+messageQueue.FetchAttributes();
 
-    // Retrieve the cached approximate message count.
-    int? cachedMessageCount = messageQueue.ApproximateMessageCount;
+// Retrieve the cached approximate message count.
+int? cachedMessageCount = messageQueue.ApproximateMessageCount;
 
-    // Display number of messages.
-    Console.WriteLine("Number of messages in queue: " + cachedMessageCount);
+// Display number of messages.
+Console.WriteLine("Number of messages in queue: " + cachedMessageCount);
+```
 
 ## <a name="use-the-async-await-pattern-with-common-azure-queue-apis"></a>Utiliser le modèle Async-Await avec les API de file d’attente commune Azure
-Cet exemple décrit comment utiliser le modèle Async-Await avec les API de file d’attente commune Azure. L’exemple appelle la version asynchrone de chacune des méthodes spécifiées, comme indiqué par le suffixe **Async** de chaque méthode. Quand une méthode asynchrone est utilisée, le modèle Async-Await suspend l’exécution locale jusqu’à la fin de l’appel. Ce comportement permet au thread actuel d’effectuer d'autres tâches afin d’éviter les goulots d’étranglement au niveau des performances et d’améliorer la réactivité globale de votre application. Pour plus d’informations sur l’utilisation du modèle Async-Await dans .NET, consultez l’article [Programmation asynchrone avec Async et Await (C# et Visual Basic)](https://msdn.microsoft.com/library/hh191443.aspx)
+Cet exemple décrit comment utiliser le modèle Async-Await avec les API de file d’attente commune Azure. L’exemple appelle la version asynchrone de chacune des méthodes spécifiées, comme indiqué par le suffixe **Async** de chaque méthode. Quand une méthode asynchrone est utilisée, le modèle Async-Await suspend l’exécution locale jusqu’à la fin de l’appel. Ce comportement permet au thread actuel d’effectuer d'autres tâches afin d’éviter les goulots d’étranglement au niveau des performances et d’améliorer la réactivité globale de votre application. Pour plus d’informations sur l’utilisation du modèle Async-Await dans .NET, consultez l’article [Programmation asynchrone avec Async et Await (C# et Visual Basic)](/previous-versions/hh191443(v=vs.140))
 
-    // Create a message to put in the queue
-    CloudQueueMessage cloudQueueMessage = new CloudQueueMessage("My message");
+```csharp
+// Create a message to put in the queue
+CloudQueueMessage cloudQueueMessage = new CloudQueueMessage("My message");
 
-    // Add the message asynchronously
-    await messageQueue.AddMessageAsync(cloudQueueMessage);
-    Console.WriteLine("Message added");
+// Add the message asynchronously
+await messageQueue.AddMessageAsync(cloudQueueMessage);
+Console.WriteLine("Message added");
 
-    // Async dequeue the message
-    CloudQueueMessage retrievedMessage = await messageQueue.GetMessageAsync();
-    Console.WriteLine("Retrieved message with content '{0}'", retrievedMessage.AsString);
+// Async dequeue the message
+CloudQueueMessage retrievedMessage = await messageQueue.GetMessageAsync();
+Console.WriteLine("Retrieved message with content '{0}'", retrievedMessage.AsString);
 
-    // Delete the message asynchronously
-    await messageQueue.DeleteMessageAsync(retrievedMessage);
-    Console.WriteLine("Deleted message");
+// Delete the message asynchronously
+await messageQueue.DeleteMessageAsync(retrievedMessage);
+Console.WriteLine("Deleted message");
+```
 
 ## <a name="delete-a-queue"></a>Suppression d'une file d'attente
 Pour supprimer une file d'attente et tous les messages qu'elle contient, appelez la méthode **Delete** sur l'objet file d'attente.
 
-    // Delete the queue.
-    messageQueue.Delete();
+```csharp
+// Delete the queue.
+messageQueue.Delete();
+```
 
 ## <a name="next-steps"></a>Étapes suivantes
 [!INCLUDE [vs-storage-dotnet-queues-next-steps](../../includes/vs-storage-dotnet-queues-next-steps.md)]
-

@@ -1,17 +1,17 @@
 ---
 title: Gérer les règles de pare-feu - Portail Azure - Azure Database for MariaDB
 description: Découvrez comment créer et gérer des règles de pare-feu Azure Database for MariaDB à l’aide du Portail Azure.
-author: ajlam
-ms.author: andrela
+author: savjani
+ms.author: pariks
 ms.service: mariadb
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 3/18/2020
-ms.openlocfilehash: 8be8e948595cfb93049c0d6c93f421e4902e771d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 895c8e51e16cb0b82ebf3edcf954dabe62b08ff4
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79530663"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96021773"
 ---
 # <a name="create-and-manage-azure-database-for-mariadb-firewall-rules-by-using-the-azure-portal"></a>Créer et gérer des règles de pare-feu Azure Database for MariaDB à l’aide du Portail Azure
 Les règles de pare-feu au niveau du serveur sont utiles pour gérer l’accès à un serveur Azure Database for MariaDB à partir d’une adresse IP spécifique ou d’une plage d’adresses IP.

@@ -7,12 +7,12 @@ ms.date: 04/04/2019
 ms.topic: conceptual
 ms.service: iot-dps
 services: iot-dps
-ms.openlocfilehash: 2bf369b784cddf307abc59d2b8766fc8a87e0985
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 9653a584382584d982c55008a6e8547de28691b7
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74975344"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91842850"
 ---
 # <a name="iot-hub-device-reprovisioning-concepts"></a>Concepts du reprovisionnement d’appareils IoT Hub
 
@@ -32,7 +32,7 @@ La prise en charge du reprovisionnement dans le service Device Provisioning perm
 
 Les données d’état de l’appareil englobent les fonctionnalités de l’appareil et du [jumeau d’appareil](../iot-hub/iot-hub-devguide-device-twins.md). Ces données sont stockées dans l’instance du service Device Provisioning et dans le hub IoT auquel l’appareil est assigné.
 
-![Provisionnement avec le service Device Provisioning](./media/concepts-device-reprovisioning/dps-provisioning.png)
+![Diagramme illustrant le fonctionnement de l'approvisionnement avec le service Device Provisioning.](./media/concepts-device-reprovisioning/dps-provisioning.png)
 
 Quand un appareil est initialement provisionné avec une instance du service Device Provisioning, les étapes suivantes sont effectuées :
 
@@ -52,13 +52,13 @@ Selon le scénario, un appareil envoie généralement une demande à une instanc
 
 * **Reprovisionner et migrer les données** : il s’agit de la stratégie par défaut pour les nouvelles entrées d’inscription. Cette stratégie est appliquée quand des appareils associés à l’entrée d’inscription envoient une nouvelle demande (1). Selon la configuration de l’entrée d’inscription, l’appareil peut être réassigné à un autre hub IoT. Si l’appareil est déplacé vers un autre hub IoT, il est désinscrit du hub IoT initial. Les données d’état de l’appareil qui ont été mises à jour dans ce hub IoT initial sont alors migrées vers le nouveau hub IoT (2). Durant la migration, l’état de l’appareil indique **Affectation**.
 
-    ![Provisionnement avec le service Device Provisioning](./media/concepts-device-reprovisioning/dps-reprovisioning-migrate.png)
+    ![Diagramme montrant qu'une stratégie est appliquée lorsque des appareils associés à l'entrée d'inscription envoient une nouvelle demande.](./media/concepts-device-reprovisioning/dps-reprovisioning-migrate.png)
 
 * **Reprovisionner et rétablir la configuration initiale** : cette stratégie est appliquée quand des appareils associés à l’entrée d’inscription envoient une nouvelle demande de provisionnement (1). Selon la configuration de l’entrée d’inscription, l’appareil peut être réassigné à un autre hub IoT. Si l’appareil est déplacé vers un autre hub IoT, il est désinscrit du hub IoT initial. Les données de configuration initiale que l’instance du service Device Provisioning a reçues au moment du provisionnement de l’appareil sont transmises au nouveau hub IoT (2). Durant la migration, l’état de l’appareil indique **Affectation**.
 
     Cette stratégie est souvent utilisée dans le cadre d’une réinitialisation aux paramètres d’usine sans changer les hubs IoT.
 
-    ![Provisionnement avec le service Device Provisioning](./media/concepts-device-reprovisioning/dps-reprovisioning-reset.png)
+    ![Diagramme montrant qu'une stratégie est appliquée lorsque des appareils associés à l'entrée d'inscription envoient une nouvelle demande d'approvisionnement.](./media/concepts-device-reprovisioning/dps-reprovisioning-reset.png)
 
 * **Ne jamais reprovisionner** : l’appareil n’est jamais réassigné à un autre hub. Cette stratégie est fournie pour gérer la compatibilité descendante.
 

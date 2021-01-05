@@ -4,16 +4,16 @@ description: Configurez des tests web dans Application Insights. Recevez des ale
 ms.topic: conceptual
 ms.date: 09/16/2019
 ms.reviewer: sdash
-ms.openlocfilehash: 61358051a8ddc32bc01ec5e231f4c28ebfa18ee0
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 82b433407906c09d38a46c842334153525fb3c17
+ms.sourcegitcommit: 273c04022b0145aeab68eb6695b99944ac923465
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77670030"
+ms.lasthandoff: 12/10/2020
+ms.locfileid: "97007923"
 ---
 # <a name="monitor-the-availability-of-any-website"></a>Superviser la disponibilité d’un site web
 
-Après avoir déployé votre application web ou votre site web, vous pouvez configurer des tests réguliers pour superviser sa disponibilité et sa réactivité. [Azure Application Insights](../../azure-monitor/app/app-insights-overview.md) envoie des requêtes web à votre application à intervalles réguliers à partir de différents points du monde, et vous alerte si votre application ne répond pas ou si elle répond trop lentement.
+Après avoir déployé votre application web ou votre site web, vous pouvez configurer des tests réguliers pour superviser sa disponibilité et sa réactivité. [Azure Application Insights](./app-insights-overview.md) envoie des requêtes web à votre application à intervalles réguliers à partir de différents points du monde, et vous alerte si votre application ne répond pas ou si elle répond trop lentement.
 
 Vous pouvez configurer des tests de disponibilité pour n’importe quel point de terminaison HTTP ou HTTPS accessible à partir du réseau Internet public. Vous n’avez pas besoin d’apporter de modifications au site web que vous testez. En fait, vous n’êtes même pas tenu d’en être le propriétaire. Vous pouvez tester la disponibilité d’une API REST dont dépend votre service.
 
@@ -23,7 +23,7 @@ Il existe trois types de tests de disponibilité :
 
 * [Test ping d’URL](#create-a-url-ping-test): un test simple que vous pouvez créer dans le portail Azure.
 * [Tests web multiétapes](availability-multistep.md) : enregistrement d’une séquence de requêtes web, qui peuvent être répétées pour tester des scénarios plus complexes. Les tests web multiétapes sont créés dans Visual Studio Enterprise et chargés sur le portail pour y être exécutés.
-* [Tests personnalisés de suivi de la disponibilité](https://docs.microsoft.com/dotnet/api/microsoft.applicationinsights.telemetryclient.trackavailability?view=azure-dotnet) : Si vous décidez de créer une application personnalisée pour exécuter des tests de disponibilité, la méthode `TrackAvailability()` peut être utilisée pour envoyer les résultats à Application Insights.
+* [Tests personnalisés de suivi de la disponibilité](/dotnet/api/microsoft.applicationinsights.telemetryclient.trackavailability?view=azure-dotnet) : Si vous décidez de créer une application personnalisée pour exécuter des tests de disponibilité, la méthode `TrackAvailability()` peut être utilisée pour envoyer les résultats à Application Insights.
 
 **Vous pouvez créer jusqu’à 100 tests de disponibilité par ressource Application Insights.**
 
@@ -51,7 +51,7 @@ Pour créer votre première demande de disponibilité, ouvrez le volet Disponibi
 |**Fréquence de test**| définit la fréquence selon laquelle le test est exécuté à partir de chaque emplacement de test. Avec, par défaut, une fréquence de cinq minutes et cinq emplacements de test, votre site sera testé en moyenne une fois par minute.|
 |**Emplacements du test**| Ce sont les lieux d’où nos serveurs envoient des requêtes web à votre URL. **Nous recommandons d’utiliser au moins cinq emplacements de test**, afin de pouvoir faire la distinction entre les problèmes propres à votre site web et les problèmes de réseau. Vous pouvez sélectionner jusqu’à 16 emplacements.
 
-**Si votre URL n’est pas visible à partir de l’Internet public, vous pouvez choisir une ouverture sélective de votre pare-feu pour autoriser uniquement les transactions entrantes à des fins de test**. Pour en savoir plus sur les exceptions de pare-feu applicables à nos agents de test de disponibilité, consultez le [guide des adresses IP](https://docs.microsoft.com/azure/azure-monitor/app/ip-addresses#availability-tests).
+**Si votre URL n’est pas visible à partir de l’Internet public, vous pouvez choisir une ouverture sélective de votre pare-feu pour autoriser uniquement les transactions entrantes à des fins de test**. Pour en savoir plus sur les exceptions de pare-feu applicables à nos agents de test de disponibilité, consultez le [guide des adresses IP](./ip-addresses.md#availability-tests).
 
 > [!NOTE]
 > Nous vous recommandons vivement de faire vos tests à partir de **cinq emplacements différents au minimum**. Cela vise à éviter les fausses alarmes qui peuvent provenir de problèmes temporaires rencontrés avec un emplacement spécifique. En outre, nous avons observé que la configuration optimale est d’avoir un **nombre d’emplacements de test égal au seuil d’emplacement de l’alerte + 2**.
@@ -72,13 +72,48 @@ Pour créer votre première demande de disponibilité, ouvrez le volet Disponibi
 |**Classique** | Nous déconseillons d’utiliser les alertes classiques pour les nouveaux tests de disponibilité.|
 |**Seuil d’emplacement de l’alerte**|nous recommandons un minimum de 3 à 5 emplacements. La relation optimale entre le seuil d’emplacement de l’alerte et le nombre d’emplacements de test est **seuil d’emplacement de l’alerte** = **nombre d’emplacements de test - 2, avec un minimum de cinq emplacements de test.**|
 
+### <a name="location-population-tags"></a>Étiquettes de remplissage d’emplacement
+
+Les étiquettes de remplissage suivantes peuvent être utilisées pour l’attribut de géolocalisation lors du déploiement d’un test Ping d’URL de disponibilité à l’aide d’Azure Resource Manager.
+
+#### <a name="azure-gov"></a>Azure Gov
+
+| Nom d’affichage   | Nom du remplissage     |
+|----------------|---------------------|
+| USGov Virginia | usgov-va-azr        |
+| Gouvernement des États-Unis - Arizona  | usgov-phx-azr       |
+| Gouvernement des États-Unis - Texas    | usgov-tx-azr        |
+| USDoD Est     | usgov-ddeast-azr    |
+| US DoD - Centre  | usgov-ddcentral-azr |
+
+#### <a name="azure"></a>Azure
+
+| Nom d’affichage                           | Nom du remplissage   |
+|----------------------------------------|-------------------|
+| Australie Est                         | emea-au-syd-edge  |
+| Brésil Sud                           | latam-br-gru-edge |
+| USA Centre                             | us-fl-mia-edge    |
+| Asie Est                              | apac-hk-hkn-azr   |
+| USA Est                                | us-va-ash-azr     |
+| France Sud (anciennement France Centre) | emea-ch-zrh-edge  |
+| France Centre                         | emea-fr-pra-edge  |
+| Japon Est                             | apac-jp-kaw-edge  |
+| Europe Nord                           | emea-gb-db3-azr   |
+| Centre-Nord des États-Unis                       | us-il-ch1-azr     |
+| États-Unis - partie centrale méridionale                       | us-tx-sn1-azr     |
+| Asie Sud-Est                         | apac-sg-sin-azr   |
+| Ouest du Royaume-Uni                                | emea-se-sto-edge  |
+| Europe Ouest                            | emea-nl-ams-azr   |
+| USA Ouest                                | us-ca-sjc-azr     |
+| Sud du Royaume-Uni                               | emea-ru-msa-edge  |
+
 ## <a name="see-your-availability-test-results"></a>Consulter les résultats des tests de disponibilité
 
 Vous pouvez afficher les résultats des tests de disponibilité sous forme de vues linéaires et en nuage de points.
 
 Au bout de quelques minutes, cliquez sur **Actualiser** pour voir les résultats de vos tests.
 
-![Vue linéaire](./media/monitor-web-app-availability/availability-refresh-002.png)
+![Capture d’écran montrant la page de disponibilité avec le bouton Actualiser mis en surbrillance.](./media/monitor-web-app-availability/availability-refresh-002.png)
 
 La vue en nuage de points montre des exemples de résultats de test contenant des détails de l’étape de test de diagnostic. Le moteur de test stocke les détails de diagnostic pour les tests qui présentent des erreurs. Pour les tests réussis, les détails de diagnostic sont stockés pour un sous-ensemble des exécutions. Pointez sur les points verts/rouges pour voir le test, son nom et son emplacement.
 
@@ -107,21 +142,21 @@ Cliquez sur un point rouge.
 * Enregistrer un problème ou un élément de travail dans Git ou Azure Boards pour suivre le problème. Le bogue contient un lien vers cet événement.
 * Ouvrir le résultat du test web dans Visual Studio.
 
-Vous pouvez en découvrir plus sur l’expérience de diagnostic des transactions de bout en bout [ici](../../azure-monitor/app/transaction-diagnostics.md).
+Vous pouvez en découvrir plus sur l’expérience de diagnostic des transactions de bout en bout [ici](./transaction-diagnostics.md).
 
-Cliquez sur la ligne d'une exception pour afficher les détails de l'exception côté serveur qui a provoqué l'échec du test de disponibilité synthétique. Vous pouvez également obtenir la [capture instantanée de débogage](../../azure-monitor/app/snapshot-debugger.md) pour des diagnostics de niveau code plus riches.
+Cliquez sur la ligne d'une exception pour afficher les détails de l'exception côté serveur qui a provoqué l'échec du test de disponibilité synthétique. Vous pouvez également obtenir la [capture instantanée de débogage](./snapshot-debugger.md) pour des diagnostics de niveau code plus riches.
 
 ![Diagnostics côté serveur](./media/monitor-web-app-availability/open-instance-4.png)
 
-Outre les résultats bruts, vous pouvez examiner deux mesures essentielles de la disponibilité dans [Metrics Explorer](https://docs.microsoft.com/azure/azure-monitor/platform/metrics-getting-started) :
+Outre les résultats bruts, vous pouvez examiner deux mesures essentielles de la disponibilité dans [Metrics Explorer](../platform/metrics-getting-started.md) :
 
 1. Disponibilité : pourcentage des tests qui ont réussi, sur l’ensemble des exécutions de test.
 2. Durée du test : durée moyenne du test sur toutes les exécutions de test.
 
 ## <a name="automation"></a>Automatisation
 
-* [Utilisez des scripts PowerShell pour configurer un test de disponibilité](../../azure-monitor/app/powershell.md#add-an-availability-test) automatiquement.
-* Configurez un [webhook](../../azure-monitor/platform/alerts-webhooks.md) qui est appelé lorsqu’une alerte est déclenchée.
+* [Utilisez des scripts PowerShell pour configurer un test de disponibilité](./powershell.md#add-an-availability-test) automatiquement.
+* Configurez un [webhook](../platform/alerts-webhooks.md) qui est appelé lorsqu’une alerte est déclenchée.
 
 ## <a name="troubleshooting"></a>Dépannage
 
@@ -131,5 +166,4 @@ Consultez l’[article dédié au dépannage](troubleshoot-availability.md).
 
 * [Availability alerts](availability-alerts.md) (Alertes de disponibilité)
 * [Tests web à plusieurs étapes](availability-multistep.md)
-
 

@@ -4,12 +4,12 @@ ms.service: dns
 ms.topic: include
 ms.date: 11/25/2018
 ms.author: victorh
-ms.openlocfilehash: 261ae22348cd82b129727261c619727917e19c96
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 8ca054b3a3d5147b7d98a021ce1e26d02d5581b0
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "73832047"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96011560"
 ---
 ### <a name="record-names"></a>Noms d’enregistrement
 
@@ -27,8 +27,10 @@ Azure DNS prend en charge tous les types d’enregistrement DNS courants, à sav
 
 Vous devez parfois créer plusieurs enregistrements DNS avec un nom et un type donnés. Par exemple, supposons que le site web « www.contoso.com » est hébergé sur deux adresses IP différentes. Ce site web requiert deux enregistrements A différents, à savoir un pour chaque adresse IP. Voici un exemple de jeu d’enregistrements :
 
-    www.contoso.com.        3600    IN    A    134.170.185.46
-    www.contoso.com.        3600    IN    A    134.170.188.221
+```dns
+www.contoso.com.        3600    IN    A    134.170.185.46
+www.contoso.com.        3600    IN    A    134.170.188.221
+```
 
 Le DNS Azure gère l’ensemble des enregistrements DNS à l’aide de *jeux d’enregistrements*. Un jeu d’enregistrements (également appelé *jeu d’enregistrements de ressource*) est la collection d’enregistrements DNS dans une zone qui portent le même nom et sont du même type. La plupart des jeux d’enregistrements contiennent un seul enregistrement. Toutefois, les exemples comme celui ci-dessus, dans lequel un jeu d’enregistrements contient plusieurs enregistrements, sont relativement courants.
 

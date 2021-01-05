@@ -1,0 +1,458 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff>
+  <File>
+    <header>
+      <skl>
+        <internal_file><![CDATA[{"TextCulture":"en-US","Sections":[{"Id":"2338599a-7205-4f37-a66b-97a5bdd61a92","Text":"1019-0 Logs","Box":"66, 13, 213, 36","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":36.0,"FontStyle":"Regular"},"Color":"136, 134, 136"},{"Id":"29be2b17-dfa6-4855-99e7-e7fd7385d565","Text":"Azure Spring Cloud .","Box":"66, 52, 209, 23","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":23.0,"FontStyle":"Regular"},"Color":"164, 174, 191"},{"Id":"ebdb3d1d-55c8-4757-9e4a-03666902628b","Text":"Directory: Microsoft","Box":"289, 52, 161, 23","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":23.0,"FontStyle":"Regular"},"Color":"181, 179, 183"},{"Id":"7ca46aff-4dfb-4fbf-ae96-034d75751e5a","Text":"Search (Ctri+/)","Box":"47, 105, 128, 24","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":24.0,"FontStyle":"Regular"},"Color":"179, 181, 185"},{"Id":"05d53970-c9bb-4e6e-8862-7bb85cf92dcf","Text":"New Query 1*","Box":"462, 109, 135, 25","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":25.0,"FontStyle":"Regular"},"Color":"140, 140, 139"},{"Id":"6d162fcf-2a7f-4433-abfa-4d33766d9769","Text":"Overview","Box":"47, 160, 79, 22","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":22.0,"FontStyle":"Regular"},"Color":"171, 169, 173"},{"Id":"ab61baee-6c3f-471d-9e97-647966c47179","Text":"panli-1019-0","Box":"468, 162, 119, 25","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":25.0,"FontStyle":"Regular"},"Color":"171, 171, 171"},{"Id":"53fdbe60-dbd6-40fb-89a0-c3be3df88ea8","Text":"Select scope","Box":"683, 164, 105, 22","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":22.0,"FontStyle":"Regular"},"Color":"138, 193, 235"},{"Id":"9f51c448-926d-44f1-a956-aa09aecf8df9","Text":"Run","Box":"904, 162, 37, 21","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":21.0,"FontStyle":"Regular"},"Color":"223, 238, 249"},{"Id":"4437990d-8cd0-472b-9d09-28f4569c3930","Text":"Time range :","Box":"1008, 164, 121, 25","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":25.0,"FontStyle":"Regular"},"Color":"169, 169, 168"},{"Id":"5fcc9244-e170-4627-8a3d-0c7811014586","Text":"Set in query","Box":"1133, 163, 119, 29","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":29.0,"FontStyle":"Regular"},"Color":"160, 159, 159"},{"Id":"93ad4ca2-47e7-4829-b4c1-f20ed9bc8692","Text":"Save V","Box":"1344, 165, 70, 26","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":26.0,"FontStyle":"Regular"},"Color":"194, 194, 194"},{"Id":"6b0689f4-33e4-434b-89bb-21f2a61724b8","Text":"Copy link V","Box":"1480, 164, 111, 27","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":27.0,"FontStyle":"Regular"},"Color":"176, 176, 175"},{"Id":"1a5ce6d9-f12b-4d99-ac17-841747908084","Text":"New alert rule","Box":"1654, 163, 120, 27","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":27.0,"FontStyle":"Regular"},"Color":"193, 193, 192"},{"Id":"1346501d-da12-43a1-aaaa-33fdbc150f59","Text":"Activity log","Box":"48, 207, 98, 25","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":25.0,"FontStyle":"Regular"},"Color":"171, 169, 172"},{"Id":"7f688127-c6ca-4bea-9bb0-5847f987774d","Text":"Tables","Box":"425, 219, 58, 22","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":22.0,"FontStyle":"Regular"},"Color":"170, 169, 169"},{"Id":"b9b29182-7a70-47a7-a40d-2b0a1e85d659","Text":"Filter","Box":"650, 220, 45, 21","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":21.0,"FontStyle":"Regular"},"Color":"174, 173, 173"},{"Id":"66fe4846-3aa6-497b-9c0e-6468380ed291","Text":"// Show the application logs which contain the \"error\" or \"exception\" terms","Box":"914, 208, 860, 26","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":26.0,"FontStyle":"Regular"},"Color":"171, 187, 152"},{"Id":"38ffb48a-77ff-4e53-92c6-103fab74b2a8","Text":"Queries","Box":"530, 222, 76, 21","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":21.0,"FontStyle":"Regular"},"Color":"159, 158, 158"},{"Id":"11ad81b0-343f-41b9-b136-14ba0e21489f","Text":"// Show the application logs which contain the \"error\" or \"exception\" terms","Box":"915, 233, 863, 26","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":26.0,"FontStyle":"Regular"},"Color":"171, 187, 152"},{"Id":"e9ecaaac-ca7d-41a6-81fb-93559ce33357","Text":"Access control (IAM)","Box":"48, 254, 179, 24","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":24.0,"FontStyle":"Regular"},"Color":"171, 168, 170"},{"Id":"acc31171-1e2f-4164-9dd4-ae712f0bcc79","Text":"3","Box":"880, 259, 14, 21","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":21.0,"FontStyle":"Regular"},"Color":"153, 188, 201"},{"Id":"ccb5f9e5-f205-4a5b-92b4-0fbf472d03eb","Text":"AppPlatformLogsforSpring","Box":"914, 258, 279, 24","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":24.0,"FontStyle":"Regular"},"Color":"165, 165, 165"},{"Id":"ad23f7de-4f78-4e6b-8ea8-487f7c4b746d","Text":"Search","Box":"467, 288, 56, 22","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":22.0,"FontStyle":"Regular"},"Color":"189, 189, 189"},{"Id":"368e30e6-f715-4177-8f4b-dda1fd985916","Text":"4","Box":"879, 279, 16, 22","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":22.0,"FontStyle":"Regular"},"Color":"149, 181, 196"},{"Id":"ed0bc16a-3ba9-4fd7-93e9-2f6f128eb4c8","Text":"where TimeGenerated >","Box":"935, 279, 251, 26","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":26.0,"FontStyle":"Regular"},"Color":"163, 161, 186"},{"Id":"2583628f-6ce3-4f5e-bc68-75e849c5e174","Text":"ago(1h)","Box":"1193, 275, 82, 30","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":30.0,"FontStyle":"Regular"},"Color":"166, 169, 168"},{"Id":"7201dbb6-198b-44e9-82d4-9c89a3cc1010","Text":"Tags","Box":"48, 303, 38, 23","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":23.0,"FontStyle":"Regular"},"Color":"163, 160, 168"},{"Id":"08695bf1-f4c3-487b-85e2-1460c1744599","Text":"5","Box":"879, 304, 15, 21","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":21.0,"FontStyle":"Regular"},"Color":"150, 185, 198"},{"Id":"deca5f0d-68e3-42f2-a47b-6be12656172a","Text":"where Log contains \"error\" or Log contains \"exception\"","Box":"935, 304, 626, 26","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":26.0,"FontStyle":"Regular"},"Color":"173, 156, 203"},{"Id":"b36c2833-c263-4900-933a-3098d32fa2d7","Text":"6","Box":"879, 328, 12, 17","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":17.0,"FontStyle":"Regular"},"Color":"156, 187, 200"},{"Id":"fd47aa46-1c6a-4231-b957-470261c60769","Text":"1 Filter","Box":"467, 335, 56, 21","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":21.0,"FontStyle":"Regular"},"Color":"180, 179, 179"},{"Id":"146e93b6-6162-4d99-8921-1c70cbcbc496","Text":"Group by: Resource ...","Box":"586, 333, 198, 25","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":25.0,"FontStyle":"Regular"},"Color":"175, 174, 174"},{"Id":"a0ec1f07-2bf4-4316-a79d-24b5bdc959e6","Text":"project TimeGenerated ,","Box":"936, 330, 273, 25","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":25.0,"FontStyle":"Regular"},"Color":"160, 159, 191"},{"Id":"ad46343a-4127-477e-95d5-5a66fc5f6afa","Text":"ServiceName ,","Box":"1215, 330, 155, 25","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":25.0,"FontStyle":"Regular"},"Color":"166, 165, 166"},{"Id":"2e49385c-9700-45d0-9a9e-485c36aec64f","Text":"AppName ,","Box":"1375, 331, 111, 24","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":24.0,"FontStyle":"Regular"},"Color":"166, 165, 166"},{"Id":"74a7f2a2-4798-4dcd-8340-9cde57fdda5c","Text":"InstanceName ,","Box":"1492, 331, 167, 25","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":25.0,"FontStyle":"Regular"},"Color":"166, 166, 165"},{"Id":"9933fd6c-5190-4ff1-b392-cf1ba07b3d46","Text":"Log ,","Box":"1665, 331, 63, 25","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":25.0,"FontStyle":"Regular"},"Color":"164, 163, 162"},{"Id":"a3b30f10-3162-424c-ba49-9ba51f0bd0ff","Text":"_Reso","Box":"1733, 331, 58, 25","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":25.0,"FontStyle":"Regular"},"Color":"159, 158, 157"},{"Id":"4811de47-dd95-407d-a096-c342757cbe81","Text":"Diagnose and solve problems","Box":"46, 349, 258, 26","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":26.0,"FontStyle":"Regular"},"Color":"169, 164, 170"},{"Id":"a5e2ef78-ab5c-45ca-8008-7f888d0306e8","Text":"Favorites","Box":"453, 398, 94, 22","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":22.0,"FontStyle":"Regular"},"Color":"137, 136, 136"},{"Id":"911468a5-569e-49ce-8354-319082883f1f","Text":"Settings","Box":"10, 412, 74, 20","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":20.0,"FontStyle":"Regular"},"Color":"158, 155, 158"},{"Id":"24f0cd8e-2045-4714-95cf-f639124cb3af","Text":"You can add favorites by clicking on","Box":"452, 441, 305, 23","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":23.0,"FontStyle":"Regular"},"Color":"175, 175, 175"},{"Id":"57052859-0bc0-411c-85b4-a2b8f66c9287","Text":"Apps","Box":"48, 461, 45, 23","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":23.0,"FontStyle":"Regular"},"Color":"165, 164, 168"},{"Id":"e8bccec9-4373-4c96-bf2f-384adaa2d826","Text":"the *icon","Box":"452, 469, 99, 21","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":21.0,"FontStyle":"Regular"},"Color":"178, 178, 178"},{"Id":"14cdc79f-35f3-4bc6-b042-c8d457c4f4e3","Text":"Results","Box":"891, 498, 73, 21","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":21.0,"FontStyle":"Regular"},"Color":"158, 158, 157"},{"Id":"50cdd955-9aaa-4cbe-acbf-17a59ccc7880","Text":"Config Server","Box":"46, 508, 115, 24","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":24.0,"FontStyle":"Regular"},"Color":"170, 166, 170"},{"Id":"1f1fb807-f86b-4aa1-b338-538e1c170723","Text":"Chart","Box":"994, 498, 59, 23","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":23.0,"FontStyle":"Regular"},"Color":"171, 170, 170"},{"Id":"ce7ef49f-aea0-4669-9be3-226ae2cc80df","Text":"00 Columns Display time (UTC+00:00) Group col","Box":"1110, 495, 677, 30","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":30.0,"FontStyle":"Regular"},"Color":"168, 176, 182"},{"Id":"4d4a5061-7daf-4d43-9e0c-7c1e17f6189f","Text":"Azure Spring Cloud","Box":"447, 512, 195, 24","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":24.0,"FontStyle":"Regular"},"Color":"158, 157, 157"},{"Id":"0b95f2c3-37c6-43d6-abae-aefdc2aab0d8","Text":"Networking (Preview)","Box":"46, 556, 185, 25","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":25.0,"FontStyle":"Regular"},"Color":"171, 169, 174"},{"Id":"d43be01c-5382-4b64-a716-19a22a8e8289","Text":"Show the application logs","Box":"509, 562, 215, 23","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":23.0,"FontStyle":"Regular"},"Color":"175, 175, 174"},{"Id":"97d61c35-ac8d-41f3-97cf-048007229204","Text":"Completed","Box":"880, 553, 107, 22","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":22.0,"FontStyle":"Regular"},"Color":"158, 158, 157"},{"Id":"8fae9712-6483-47f9-b513-8b0e9b53a5da","Text":"which contain the \"error\" or..","Box":"509, 587, 246, 20","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":20.0,"FontStyle":"Regular"},"Color":"177, 177, 177"},{"Id":"bf1089c1-9d70-41e7-b287-83d45a20e736","Text":"Deployments","Box":"47, 604, 114, 24","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":24.0,"FontStyle":"Regular"},"Color":"169, 167, 171"},{"Id":"9b27439d-1a1c-48ba-b968-3e3ecefa2973","Text":"TimeGenerated [UTC]","Box":"917, 627, 170, 21","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":21.0,"FontStyle":"Regular"},"Color":"189, 191, 191"},{"Id":"d54d4695-5ab7-4507-bee2-a8c6611f411a","Text":"Y","Box":"1146, 623, 17, 24","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":24.0,"FontStyle":"Regular"},"Color":"201, 202, 203"},{"Id":"1ac44317-a76c-4e79-9cd7-fb361c589d32","Text":"Show the error and exception","Box":"509, 635, 250, 23","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":23.0,"FontStyle":"Regular"},"Color":"175, 175, 175"},{"Id":"6be1b876-3f73-4858-a8f2-d2e0679a9f87","Text":"ServiceName","Box":"1188, 625, 108, 22","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":22.0,"FontStyle":"Regular"},"Color":"190, 191, 192"},{"Id":"62f66bb3-e1aa-42f8-96d5-51b649149912","Text":"AppName","Box":"1379, 624, 85, 25","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":25.0,"FontStyle":"Regular"},"Color":"191, 192, 193"},{"Id":"16d1bf2d-9986-4bdc-8bd8-acc62677987c","Text":"InstanceName","Box":"1543, 626, 117, 22","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":22.0,"FontStyle":"Regular"},"Color":"190, 191, 192"},{"Id":"00a6b614-209f-4678-b028-6aa422c38296","Text":"$Pricing Tier","Box":"16, 650, 127, 26","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":26.0,"FontStyle":"Regular"},"Color":"173, 176, 165"},{"Id":"969951f5-dd75-49cb-88da-e4ce0e072a9f","Text":"number of each application","Box":"509, 661, 232, 20","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":20.0,"FontStyle":"Regular"},"Color":"175, 175, 174"},{"Id":"dbd52bde-b45f-4046-a01a-6979c8a58f18","Text":"10/19/2020, 11:20:04.469 AM","Box":"916, 672, 227, 20","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":20.0,"FontStyle":"Regular"},"Color":"168, 167, 167"},{"Id":"42fed21e-7c6f-48f7-9b81-9f016707eb30","Text":"panli-1019-0","Box":"1187, 673, 100, 20","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":20.0,"FontStyle":"Regular"},"Color":"167, 167, 166"},{"Id":"7fe30e5b-e706-4373-881d-368e673569a3","Text":"gateway","Box":"1380, 675, 65, 18","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":18.0,"FontStyle":"Regular"},"Color":"165, 164, 164"},{"Id":"1c995a66-f029-4250-9434-3cbbe41195b1","Text":"gateway-default-7-7bbbb9f66","Box":"1545, 670, 246, 25","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":25.0,"FontStyle":"Regular"},"Color":"165, 165, 164"},{"Id":"d4241504-b193-4805-b9f7-a411d39c616a","Text":"TLS/SSL settings","Box":"48, 700, 139, 24","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":24.0,"FontStyle":"Regular"},"Color":"168, 165, 170"},{"Id":"64600fca-ec80-42fa-8999-da3f9b37d144","Text":"Show the config server logs","Box":"511, 708, 232, 25","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":25.0,"FontStyle":"Regular"},"Color":"174, 174, 174"},{"Id":"261ac883-d3b8-40f9-8775-f2a13274e4d1","Text":"10/19/2020, 11:20:04.469 AM","Box":"916, 714, 226, 20","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":20.0,"FontStyle":"Regular"},"Color":"168, 167, 167"},{"Id":"7876b1a8-67c6-49c3-80c4-7eb3e256e3a0","Text":"panli-1019-0","Box":"1187, 714, 100, 21","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":21.0,"FontStyle":"Regular"},"Color":"167, 167, 166"},{"Id":"98422885-21f1-41cd-acaa-2193e7919e76","Text":"gateway","Box":"1378, 717, 69, 18","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":18.0,"FontStyle":"Regular"},"Color":"166, 165, 165"},{"Id":"b34a0227-f977-48cf-83de-2f66e32e70b3","Text":"gateway-default-7-7bbbb9f66","Box":"1545, 711, 243, 26","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":26.0,"FontStyle":"Regular"},"Color":"165, 164, 164"},{"Id":"e12ec570-2a0f-4d34-8808-ceb16d6c1b2b","Text":"Test endpoint keys","Box":"47, 747, 163, 26","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":26.0,"FontStyle":"Regular"},"Color":"168, 165, 171"},{"Id":"fd8ea117-1cf8-4d59-98c1-8611e5ec60d1","Text":"TimeGenerated [UTC] 2020-10-19711:20:04.469Z","Box":"988, 763, 408, 21","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":21.0,"FontStyle":"Regular"},"Color":"166, 166, 166"},{"Id":"17a1574f-8cfc-439b-93d2-1469b116e7c4","Text":"Properties","Box":"46, 797, 91, 23","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":23.0,"FontStyle":"Regular"},"Color":"166, 163, 167"},{"Id":"45b97ec5-b293-4bcd-b066-3afc5540a472","Text":"ServiceName","Box":"989, 806, 109, 19","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":19.0,"FontStyle":"Regular"},"Color":"165, 164, 164"},{"Id":"df8ef3f1-0735-4d4a-ba4a-03581343a7e7","Text":"panli-1019-0","Box":"1186, 805, 100, 21","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":21.0,"FontStyle":"Regular"},"Color":"168, 167, 167"},{"Id":"fd12e634-f74d-4306-8122-cdadd61250f6","Text":"Locks","Box":"47, 844, 53, 23","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":23.0,"FontStyle":"Regular"},"Color":"171, 165, 171"},{"Id":"638fe41f-f77a-42e9-b762-2217cfbfa9e9","Text":"AppName","Box":"989, 846, 83, 23","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":23.0,"FontStyle":"Regular"},"Color":"164, 163, 163"},{"Id":"9a421ee4-d18d-4126-bc1d-0abee7cbb7c9","Text":"gateway","Box":"1186, 852, 68, 18","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":18.0,"FontStyle":"Regular"},"Color":"164, 164, 163"},{"Id":"81932030-ef40-47db-b74d-82cd6735b6c9","Text":"InstanceName","Box":"987, 889, 119, 20","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":20.0,"FontStyle":"Regular"},"Color":"165, 164, 164"},{"Id":"3d34c4e4-5764-4ea8-9cce-4a5f35112092","Text":"gateway-default-7-7bbbb9f66-69gmc","Box":"1186, 889, 312, 23","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":23.0,"FontStyle":"Regular"},"Color":"165, 165, 164"},{"Id":"c5e9d785-6141-49a2-99f9-a87da6d766be","Text":"Monitoring","Box":"9, 906, 103, 20","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":20.0,"FontStyle":"Regular"},"Color":"157, 156, 156"},{"Id":"2a2e3bf5-2ec7-4646-a0c6-ccc991393c99","Text":"Log","Box":"987, 930, 30, 19","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":19.0,"FontStyle":"Regular"},"Color":"163, 163, 162"},{"Id":"66c4a090-d4ee-4fa3-871e-244f983dd7da","Text":"java.lang.IllegalStateException","Box":"1187, 932, 248, 21","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":21.0,"FontStyle":"Regular"},"Color":"166, 164, 164"},{"Id":"d572aac0-eed6-40fd-b1ec-981bd26c2374","Text":"Could not locate PropertySource and the f","Box":"1443, 929, 341, 27","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":27.0,"FontStyle":"Regular"},"Color":"165, 165, 164"},{"Id":"755900ac-0d0d-4f5d-94b4-60f475fe2abd","Text":"Alerts","Box":"48, 955, 50, 21","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":21.0,"FontStyle":"Regular"},"Color":"166, 167, 167"},{"Id":"d7f8cf7e-c2da-48ff-ab95-94a98f52b800","Text":"Resourceld","Box":"995, 972, 91, 22","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":22.0,"FontStyle":"Regular"},"Color":"164, 164, 163"},{"Id":"14d47ce9-480d-45fb-bf2d-04853b34ca1a","Text":"/subscriptions/6c933f90-8115-4392-90f2-7077c9fa5dbd/resourcegroups/p","Box":"1187, 972, 599, 26","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":26.0,"FontStyle":"Regular"},"Color":"167, 166, 166"},{"Id":"85d35f05-4c10-4440-936a-f80fc2434a5c","Text":"mi Metrics","Box":"12, 1002, 99, 22","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":22.0,"FontStyle":"Regular"},"Color":"161, 167, 191"},{"Id":"b0608812-b845-4706-9dc5-75f4413df3a9","Text":"..","Box":"825, 1030, 9, 11","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":11.0,"FontStyle":"Regular"},"Color":"194, 196, 199"},{"Id":"629adb11-48b7-40ab-ba32-557963931d00","Text":"10/19/2020, 11:20:04.473 AM","Box":"916, 1031, 225, 19","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":19.0,"FontStyle":"Regular"},"Color":"168, 167, 167"},{"Id":"1a787843-9c60-4b78-9d40-6e45d308a65c","Text":"panli-1019-0","Box":"1187, 1030, 99, 21","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":21.0,"FontStyle":"Regular"},"Color":"166, 166, 166"},{"Id":"b748658f-7dc5-4463-89bf-fb1978cadc7d","Text":"gateway","Box":"1378, 1033, 68, 19","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":19.0,"FontStyle":"Regular"},"Color":"165, 164, 164"},{"Id":"0fc59e53-cc93-4e25-9fa3-658f1be5b06f","Text":"gateway-default-7-7bbbb9f66","Box":"1544, 1028, 247, 26","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":26.0,"FontStyle":"Regular"},"Color":"165, 165, 164"},{"Id":"3b88290b-1764-470b-8da8-2da6117c8436","Text":"Diagnostic settings","Box":"47, 1050, 165, 24","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":24.0,"FontStyle":"Regular"},"Color":"169, 165, 169"},{"Id":"907d3384-b1c3-4859-a9a6-2d835da3896f","Text":"10/19/2020, 10:42:39.893 AM","Box":"917, 1074, 227, 18","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":18.0,"FontStyle":"Regular"},"Color":"168, 167, 167"},{"Id":"352f2c1a-2bf3-4e38-88b5-38f1660e61fe","Text":"panli-1019-0","Box":"1187, 1073, 100, 20","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":20.0,"FontStyle":"Regular"},"Color":"166, 166, 166"},{"Id":"e5904f5a-87e1-4d0d-afff-5022c230212a","Text":"gateway","Box":"1378, 1075, 67, 19","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":19.0,"FontStyle":"Regular"},"Color":"165, 164, 164"},{"Id":"b8fa63db-34c5-4368-8b7f-fc01790c5492","Text":"gateway-default-7-7bbbb9f66","Box":"1544, 1070, 247, 25","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":25.0,"FontStyle":"Regular"},"Color":"165, 165, 164"},{"Id":"f67a61c5-8f3d-4d81-9187-ac945c6d9ae1","Text":"P Logs","Box":"15, 1099, 72, 22","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":22.0,"FontStyle":"Regular"},"Color":"146, 179, 190"},{"Id":"05dbc884-72c4-4f7f-8b23-350d92bffff0","Text":"10/19/2020, 10:42:39.893 AM","Box":"917, 1115, 227, 20","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":20.0,"FontStyle":"Regular"},"Color":"168, 167, 167"},{"Id":"fbce516b-e693-48a1-a9f0-1d58437df4ae","Text":"panli-1019-0","Box":"1187, 1115, 98, 20","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":20.0,"FontStyle":"Regular"},"Color":"166, 166, 165"},{"Id":"5ad6752e-154e-4563-ba24-eb3a56a4e2ec","Text":"gateway","Box":"1378, 1119, 67, 17","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":17.0,"FontStyle":"Regular"},"Color":"165, 164, 164"},{"Id":"c8f4898d-bdd5-48ce-b5e7-1188b406d95d","Text":"gateway-default-7-7bbbb9f66","Box":"1545, 1114, 243, 23","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":23.0,"FontStyle":"Regular"},"Color":"165, 164, 164"},{"Id":"290634db-affc-432f-88f3-419da9897b7a","Text":"Q Distributed tracing","Box":"16, 1144, 190, 27","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":27.0,"FontStyle":"Regular"},"Color":"165, 164, 169"},{"Id":"a6b99544-3354-4a5c-a839-375a77589787","Text":"10/19/2020, 10:42:39.897 AM","Box":"916, 1156, 229, 20","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":20.0,"FontStyle":"Regular"},"Color":"168, 167, 167"},{"Id":"f975127f-df39-4be6-a750-995467c3e3eb","Text":"panli-1019-0","Box":"1186, 1155, 100, 23","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":23.0,"FontStyle":"Regular"},"Color":"169, 168, 168"},{"Id":"5b0a8370-b21a-4273-9fad-35a28f75d224","Text":"gateway","Box":"1378, 1159, 66, 18","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":18.0,"FontStyle":"Regular"},"Color":"164, 164, 163"},{"Id":"497ea963-53a4-4f9f-bb35-959189810d77","Text":"gateway-default-7-7bbbb9f66","Box":"1545, 1155, 241, 23","Type":"Unspecified","Angle":0.0,"Font":{"FontFamilyName":"Arial","Size":23.0,"FontStyle":"Regular"},"Color":"Black"}],"SourceImage":"https://artlocprod.blob.core.windows.net/source-image/source_image.bfb4958a-7be5-4b7e-b485-26b885ed60bd?sv=2018-03-28&sr=b&sig=5cf%2BT73QfBlvG85Y7nVki7AbW%2BBiF5RPyaE7C1O9le4%3D&se=2021-05-11T20%3A28%3A17Z&sp=rl"}]]></internal_file>
+      </skl>
+    </header>
+    <body>
+      <group>
+        <trans-unit xmlns="" id="2338599a-7205-4f37-a66b-97a5bdd61a92" coord="66;13;213;36" font="Arial">
+          <source>1019-0 Logs</source>
+          <target state="translated">1019-0 Journaux d’activité</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="29be2b17-dfa6-4855-99e7-e7fd7385d565" coord="66;52;209;23" font="Arial">
+          <source>Azure Spring Cloud .</source>
+          <target state="translated">Azure Spring Cloud.</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="ebdb3d1d-55c8-4757-9e4a-03666902628b" coord="289;52;161;23" font="Arial">
+          <source>Directory: Microsoft</source>
+          <target state="translated">Répertoire : Microsoft</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="7ca46aff-4dfb-4fbf-ae96-034d75751e5a" coord="47;105;128;24" font="Arial">
+          <source>Search (Ctri+/)</source>
+          <target state="translated">Rechercher (Ctrl+/)</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="05d53970-c9bb-4e6e-8862-7bb85cf92dcf" coord="462;109;135;25" font="Arial">
+          <source>New Query 1*</source>
+          <target state="translated">Nouvelle requête 1*</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="6d162fcf-2a7f-4433-abfa-4d33766d9769" coord="47;160;79;22" font="Arial">
+          <source>Overview</source>
+          <target state="translated">Vue d’ensemble</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="ab61baee-6c3f-471d-9e97-647966c47179" coord="468;162;119;25" font="Arial">
+          <source>panli-1019-0</source>
+          <target state="translated">panli-1019-0</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="53fdbe60-dbd6-40fb-89a0-c3be3df88ea8" coord="683;164;105;22" font="Arial">
+          <source>Select scope</source>
+          <target state="translated">Sélectionner la portée</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="9f51c448-926d-44f1-a956-aa09aecf8df9" coord="904;162;37;21" font="Arial">
+          <source>Run</source>
+          <target state="translated">Exécuter</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="4437990d-8cd0-472b-9d09-28f4569c3930" coord="1008;164;121;25" font="Arial">
+          <source>Time range :</source>
+          <target state="translated">Intervalle de temps :</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="5fcc9244-e170-4627-8a3d-0c7811014586" coord="1133;163;119;29" font="Arial">
+          <source>Set in query</source>
+          <target state="translated">Définir dans la requête</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="93ad4ca2-47e7-4829-b4c1-f20ed9bc8692" coord="1344;165;70;26" font="Arial">
+          <source>Save V</source>
+          <target state="translated">Enregistrer V</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="6b0689f4-33e4-434b-89bb-21f2a61724b8" coord="1480;164;111;27" font="Arial">
+          <source>Copy link V</source>
+          <target state="translated">Copier le lien V</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="1a5ce6d9-f12b-4d99-ac17-841747908084" coord="1654;163;120;27" font="Arial">
+          <source>New alert rule</source>
+          <target state="translated">Nouvelle règle d’alerte</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="1346501d-da12-43a1-aaaa-33fdbc150f59" coord="48;207;98;25" font="Arial">
+          <source>Activity log</source>
+          <target state="translated">Journal d’activité</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="7f688127-c6ca-4bea-9bb0-5847f987774d" coord="425;219;58;22" font="Arial">
+          <source>Tables</source>
+          <target state="translated">Tables</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="b9b29182-7a70-47a7-a40d-2b0a1e85d659" coord="650;220;45;21" font="Arial">
+          <source>Filter</source>
+          <target state="translated">Filtrer</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="66fe4846-3aa6-497b-9c0e-6468380ed291" coord="914;208;860;26" font="Arial">
+          <source>// Show the application logs which contain the "error" or "exception" terms</source>
+          <target state="translated">// Afficher les journaux des applications qui contiennent les termes « erreur » ou « exception »</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="38ffb48a-77ff-4e53-92c6-103fab74b2a8" coord="530;222;76;21" font="Arial">
+          <source>Queries</source>
+          <target state="translated">Requêtes</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="11ad81b0-343f-41b9-b136-14ba0e21489f" coord="915;233;863;26" font="Arial">
+          <source>// Show the application logs which contain the "error" or "exception" terms</source>
+          <target state="translated">// Afficher les journaux des applications qui contiennent les termes « erreur » ou « exception »</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="e9ecaaac-ca7d-41a6-81fb-93559ce33357" coord="48;254;179;24" font="Arial">
+          <source>Access control (IAM)</source>
+          <target state="translated">Contrôle d’accès (IAM)</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="acc31171-1e2f-4164-9dd4-ae712f0bcc79" coord="880;259;14;21" font="Arial">
+          <source>3</source>
+          <target state="translated">3</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="ccb5f9e5-f205-4a5b-92b4-0fbf472d03eb" coord="914;258;279;24" font="Arial">
+          <source>AppPlatformLogsforSpring</source>
+          <target state="translated">AppPlatformLogsforSpring</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="ad23f7de-4f78-4e6b-8ea8-487f7c4b746d" coord="467;288;56;22" font="Arial">
+          <source>Search</source>
+          <target state="translated">Rechercher</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="368e30e6-f715-4177-8f4b-dda1fd985916" coord="879;279;16;22" font="Arial">
+          <source>4</source>
+          <target state="translated">4</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="ed0bc16a-3ba9-4fd7-93e9-2f6f128eb4c8" coord="935;279;251;26" font="Arial">
+          <source>where TimeGenerated &gt;</source>
+          <target state="translated">où TimeGenerated &gt;</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="2583628f-6ce3-4f5e-bc68-75e849c5e174" coord="1193;275;82;30" font="Arial">
+          <source>ago(1h)</source>
+          <target state="translated">il y a 1 h</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="7201dbb6-198b-44e9-82d4-9c89a3cc1010" coord="48;303;38;23" font="Arial">
+          <source>Tags</source>
+          <target state="translated">Balises</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="08695bf1-f4c3-487b-85e2-1460c1744599" coord="879;304;15;21" font="Arial">
+          <source>5</source>
+          <target state="translated">5</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="deca5f0d-68e3-42f2-a47b-6be12656172a" coord="935;304;626;26" font="Arial">
+          <source>where Log contains "error" or Log contains "exception"</source>
+          <target state="translated">où le journal contient « erreur » ou « exception »</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="b36c2833-c263-4900-933a-3098d32fa2d7" coord="879;328;12;17" font="Arial">
+          <source>6</source>
+          <target state="translated">6</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="fd47aa46-1c6a-4231-b957-470261c60769" coord="467;335;56;21" font="Arial">
+          <source>1 Filter</source>
+          <target state="translated">Filtrer</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="146e93b6-6162-4d99-8921-1c70cbcbc496" coord="586;333;198;25" font="Arial">
+          <source>Group by: Resource ...</source>
+          <target state="translated">Regrouper par : Ressource ...</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="a0ec1f07-2bf4-4316-a79d-24b5bdc959e6" coord="936;330;273;25" font="Arial">
+          <source>project TimeGenerated ,</source>
+          <target state="translated">projet TimeGenerated ,</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="ad46343a-4127-477e-95d5-5a66fc5f6afa" coord="1215;330;155;25" font="Arial">
+          <source>ServiceName ,</source>
+          <target state="translated">ServiceName ,</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="2e49385c-9700-45d0-9a9e-485c36aec64f" coord="1375;331;111;24" font="Arial">
+          <source>AppName ,</source>
+          <target state="translated">AppName ,</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="74a7f2a2-4798-4dcd-8340-9cde57fdda5c" coord="1492;331;167;25" font="Arial">
+          <source>InstanceName ,</source>
+          <target state="translated">InstanceName ,</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="9933fd6c-5190-4ff1-b392-cf1ba07b3d46" coord="1665;331;63;25" font="Arial">
+          <source>Log ,</source>
+          <target state="translated">Log,</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="a3b30f10-3162-424c-ba49-9ba51f0bd0ff" coord="1733;331;58;25" font="Arial">
+          <source>_Reso</source>
+          <target state="translated">_Reso</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="4811de47-dd95-407d-a096-c342757cbe81" coord="46;349;258;26" font="Arial">
+          <source>Diagnose and solve problems</source>
+          <target state="translated">Diagnostiquer et résoudre les problèmes</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="a5e2ef78-ab5c-45ca-8008-7f888d0306e8" coord="453;398;94;22" font="Arial">
+          <source>Favorites</source>
+          <target state="translated">Favoris</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="911468a5-569e-49ce-8354-319082883f1f" coord="10;412;74;20" font="Arial">
+          <source>Settings</source>
+          <target state="translated">Paramètres</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="24f0cd8e-2045-4714-95cf-f639124cb3af" coord="452;441;305;23" font="Arial">
+          <source>You can add favorites by clicking on</source>
+          <target state="translated">Vous pouvez ajouter des favoris en cliquant sur</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="57052859-0bc0-411c-85b4-a2b8f66c9287" coord="48;461;45;23" font="Arial">
+          <source>Apps</source>
+          <target state="translated">Applications</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="e8bccec9-4373-4c96-bf2f-384adaa2d826" coord="452;469;99;21" font="Arial">
+          <source>the *icon</source>
+          <target state="translated">l’icône *</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="14cdc79f-35f3-4bc6-b042-c8d457c4f4e3" coord="891;498;73;21" font="Arial">
+          <source>Results</source>
+          <target state="translated">Résultats</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="50cdd955-9aaa-4cbe-acbf-17a59ccc7880" coord="46;508;115;24" font="Arial">
+          <source>Config Server</source>
+          <target state="translated">Config Server</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="1f1fb807-f86b-4aa1-b338-538e1c170723" coord="994;498;59;23" font="Arial">
+          <source>Chart</source>
+          <target state="translated">Graphique</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="ce7ef49f-aea0-4669-9be3-226ae2cc80df" coord="1110;495;677;30" font="Arial">
+          <source>00 Columns Display time (UTC+00:00) Group col</source>
+          <target state="translated">Colonnes Temps d’affichage (UTC + 00:00) Colonnes de groupe</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="4d4a5061-7daf-4d43-9e0c-7c1e17f6189f" coord="447;512;195;24" font="Arial">
+          <source>Azure Spring Cloud</source>
+          <target state="translated">Azure Spring Cloud</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="0b95f2c3-37c6-43d6-abae-aefdc2aab0d8" coord="46;556;185;25" font="Arial">
+          <source>Networking (Preview)</source>
+          <target state="translated">Mise en réseau (Préversion)</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="d43be01c-5382-4b64-a716-19a22a8e8289" coord="509;562;215;23" font="Arial">
+          <source>Show the application logs</source>
+          <target state="translated">Afficher les journaux des applications</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="97d61c35-ac8d-41f3-97cf-048007229204" coord="880;553;107;22" font="Arial">
+          <source>Completed</source>
+          <target state="translated">Terminé</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="8fae9712-6483-47f9-b513-8b0e9b53a5da" coord="509;587;246;20" font="Arial">
+          <source>which contain the "error" or..</source>
+          <target state="translated">qui contiennent « erreur » ou...</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="bf1089c1-9d70-41e7-b287-83d45a20e736" coord="47;604;114;24" font="Arial">
+          <source>Deployments</source>
+          <target state="translated">Déploiements</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="9b27439d-1a1c-48ba-b968-3e3ecefa2973" coord="917;627;170;21" font="Arial">
+          <source>TimeGenerated [UTC]</source>
+          <target state="translated">TimeGenerated [UTC]</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="d54d4695-5ab7-4507-bee2-a8c6611f411a" coord="1146;623;17;24" font="Arial">
+          <source>Y</source>
+          <target state="translated">Y</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="1ac44317-a76c-4e79-9cd7-fb361c589d32" coord="509;635;250;23" font="Arial">
+          <source>Show the error and exception</source>
+          <target state="translated">Afficher le nombre d’erreurs et d’exceptions</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="6be1b876-3f73-4858-a8f2-d2e0679a9f87" coord="1188;625;108;22" font="Arial">
+          <source>ServiceName</source>
+          <target state="translated">ServiceName</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="62f66bb3-e1aa-42f8-96d5-51b649149912" coord="1379;624;85;25" font="Arial">
+          <source>AppName</source>
+          <target state="translated">AppName</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="16d1bf2d-9986-4bdc-8bd8-acc62677987c" coord="1543;626;117;22" font="Arial">
+          <source>InstanceName</source>
+          <target state="translated">InstanceName</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="00a6b614-209f-4678-b028-6aa422c38296" coord="16;650;127;26" font="Arial">
+          <source>$Pricing Tier</source>
+          <target state="translated">Niveau tarifaire</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="969951f5-dd75-49cb-88da-e4ce0e072a9f" coord="509;661;232;20" font="Arial">
+          <source>number of each application</source>
+          <target state="translated">numéro de chaque application</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="dbd52bde-b45f-4046-a01a-6979c8a58f18" coord="916;672;227;20" font="Arial">
+          <source>10/19/2020, 11:20:04.469 AM</source>
+          <target state="translated">19/10/2020 11:20:04.469</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="42fed21e-7c6f-48f7-9b81-9f016707eb30" coord="1187;673;100;20" font="Arial">
+          <source>panli-1019-0</source>
+          <target state="translated">panli-1019-0</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="7fe30e5b-e706-4373-881d-368e673569a3" coord="1380;675;65;18" font="Arial">
+          <source>gateway</source>
+          <target state="translated">passerelle</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="1c995a66-f029-4250-9434-3cbbe41195b1" coord="1545;670;246;25" font="Arial">
+          <source>gateway-default-7-7bbbb9f66</source>
+          <target state="translated">gateway-default-7-7bbbb9f66</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="d4241504-b193-4805-b9f7-a411d39c616a" coord="48;700;139;24" font="Arial">
+          <source>TLS/SSL settings</source>
+          <target state="translated">Paramètres TLS/SSL</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="64600fca-ec80-42fa-8999-da3f9b37d144" coord="511;708;232;25" font="Arial">
+          <source>Show the config server logs</source>
+          <target state="translated">Afficher les journaux du serveur de configuration</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="261ac883-d3b8-40f9-8775-f2a13274e4d1" coord="916;714;226;20" font="Arial">
+          <source>10/19/2020, 11:20:04.469 AM</source>
+          <target state="translated">19/10/2020 11:20:04.469</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="7876b1a8-67c6-49c3-80c4-7eb3e256e3a0" coord="1187;714;100;21" font="Arial">
+          <source>panli-1019-0</source>
+          <target state="translated">panli-1019-0</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="98422885-21f1-41cd-acaa-2193e7919e76" coord="1378;717;69;18" font="Arial">
+          <source>gateway</source>
+          <target state="translated">passerelle</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="b34a0227-f977-48cf-83de-2f66e32e70b3" coord="1545;711;243;26" font="Arial">
+          <source>gateway-default-7-7bbbb9f66</source>
+          <target state="translated">gateway-default-7-7bbbb9f66</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="e12ec570-2a0f-4d34-8808-ceb16d6c1b2b" coord="47;747;163;26" font="Arial">
+          <source>Test endpoint keys</source>
+          <target state="translated">Tester les clés de point de terminaison</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="fd8ea117-1cf8-4d59-98c1-8611e5ec60d1" coord="988;763;408;21" font="Arial">
+          <source>TimeGenerated [UTC] 2020-10-19711:20:04.469Z</source>
+          <target state="translated">TimeGenerated [UTC] 2020-10-19711:20:04.469Z</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="17a1574f-8cfc-439b-93d2-1469b116e7c4" coord="46;797;91;23" font="Arial">
+          <source>Properties</source>
+          <target state="translated">Propriétés</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="45b97ec5-b293-4bcd-b066-3afc5540a472" coord="989;806;109;19" font="Arial">
+          <source>ServiceName</source>
+          <target state="translated">ServiceName</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="df8ef3f1-0735-4d4a-ba4a-03581343a7e7" coord="1186;805;100;21" font="Arial">
+          <source>panli-1019-0</source>
+          <target state="translated">panli-1019-0</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="fd12e634-f74d-4306-8122-cdadd61250f6" coord="47;844;53;23" font="Arial">
+          <source>Locks</source>
+          <target state="translated">Verrous</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="638fe41f-f77a-42e9-b762-2217cfbfa9e9" coord="989;846;83;23" font="Arial">
+          <source>AppName</source>
+          <target state="translated">AppName</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="9a421ee4-d18d-4126-bc1d-0abee7cbb7c9" coord="1186;852;68;18" font="Arial">
+          <source>gateway</source>
+          <target state="translated">passerelle</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="81932030-ef40-47db-b74d-82cd6735b6c9" coord="987;889;119;20" font="Arial">
+          <source>InstanceName</source>
+          <target state="translated">InstanceName</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="3d34c4e4-5764-4ea8-9cce-4a5f35112092" coord="1186;889;312;23" font="Arial">
+          <source>gateway-default-7-7bbbb9f66-69gmc</source>
+          <target state="translated">gateway-default-7-7bbbb9f66-69gmc</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="c5e9d785-6141-49a2-99f9-a87da6d766be" coord="9;906;103;20" font="Arial">
+          <source>Monitoring</source>
+          <target state="translated">Supervision</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="2a2e3bf5-2ec7-4646-a0c6-ccc991393c99" coord="987;930;30;19" font="Arial">
+          <source>Log</source>
+          <target state="translated">Journal</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="66c4a090-d4ee-4fa3-871e-244f983dd7da" coord="1187;932;248;21" font="Arial">
+          <source>java.lang.IllegalStateException</source>
+          <target state="translated">java.lang.IllegalStateException</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="d572aac0-eed6-40fd-b1ec-981bd26c2374" coord="1443;929;341;27" font="Arial">
+          <source>Could not locate PropertySource and the f</source>
+          <target state="translated">Impossible de trouver PropertySource et f</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="755900ac-0d0d-4f5d-94b4-60f475fe2abd" coord="48;955;50;21" font="Arial">
+          <source>Alerts</source>
+          <target state="translated">Alertes</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="d7f8cf7e-c2da-48ff-ab95-94a98f52b800" coord="995;972;91;22" font="Arial">
+          <source>Resourceld</source>
+          <target state="translated">Resourceld</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="14d47ce9-480d-45fb-bf2d-04853b34ca1a" coord="1187;972;599;26" font="Arial">
+          <source>/subscriptions/6c933f90-8115-4392-90f2-7077c9fa5dbd/resourcegroups/p</source>
+          <target state="translated">/subscriptions/6c933f90-8115-4392-90f2-7077c9fa5dbd/resourcegroups/p</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="85d35f05-4c10-4440-936a-f80fc2434a5c" coord="12;1002;99;22" font="Arial">
+          <source>mi Metrics</source>
+          <target state="translated">Métriques</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="b0608812-b845-4706-9dc5-75f4413df3a9" coord="825;1030;9;11" font="Arial">
+          <source>..</source>
+          <target state="translated">..</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="629adb11-48b7-40ab-ba32-557963931d00" coord="916;1031;225;19" font="Arial">
+          <source>10/19/2020, 11:20:04.473 AM</source>
+          <target state="translated">19/10/2020 11:20:04.473</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="1a787843-9c60-4b78-9d40-6e45d308a65c" coord="1187;1030;99;21" font="Arial">
+          <source>panli-1019-0</source>
+          <target state="translated">panli-1019-0</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="b748658f-7dc5-4463-89bf-fb1978cadc7d" coord="1378;1033;68;19" font="Arial">
+          <source>gateway</source>
+          <target state="translated">passerelle</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="0fc59e53-cc93-4e25-9fa3-658f1be5b06f" coord="1544;1028;247;26" font="Arial">
+          <source>gateway-default-7-7bbbb9f66</source>
+          <target state="translated">gateway-default-7-7bbbb9f66</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="3b88290b-1764-470b-8da8-2da6117c8436" coord="47;1050;165;24" font="Arial">
+          <source>Diagnostic settings</source>
+          <target state="translated">Paramètres de diagnostic</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="907d3384-b1c3-4859-a9a6-2d835da3896f" coord="917;1074;227;18" font="Arial">
+          <source>10/19/2020, 10:42:39.893 AM</source>
+          <target state="translated">19/10/2020 10:42:39.893</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="352f2c1a-2bf3-4e38-88b5-38f1660e61fe" coord="1187;1073;100;20" font="Arial">
+          <source>panli-1019-0</source>
+          <target state="translated">panli-1019-0</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="e5904f5a-87e1-4d0d-afff-5022c230212a" coord="1378;1075;67;19" font="Arial">
+          <source>gateway</source>
+          <target state="translated">passerelle</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="b8fa63db-34c5-4368-8b7f-fc01790c5492" coord="1544;1070;247;25" font="Arial">
+          <source>gateway-default-7-7bbbb9f66</source>
+          <target state="translated">gateway-default-7-7bbbb9f66</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="f67a61c5-8f3d-4d81-9187-ac945c6d9ae1" coord="15;1099;72;22" font="Arial">
+          <source>P Logs</source>
+          <target state="translated">Journaux d’activité</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="05dbc884-72c4-4f7f-8b23-350d92bffff0" coord="917;1115;227;20" font="Arial">
+          <source>10/19/2020, 10:42:39.893 AM</source>
+          <target state="translated">19/10/2020 10:42:39.893</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="fbce516b-e693-48a1-a9f0-1d58437df4ae" coord="1187;1115;98;20" font="Arial">
+          <source>panli-1019-0</source>
+          <target state="translated">panli-1019-0</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="5ad6752e-154e-4563-ba24-eb3a56a4e2ec" coord="1378;1119;67;17" font="Arial">
+          <source>gateway</source>
+          <target state="translated">passerelle</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="c8f4898d-bdd5-48ce-b5e7-1188b406d95d" coord="1545;1114;243;23" font="Arial">
+          <source>gateway-default-7-7bbbb9f66</source>
+          <target state="translated">gateway-default-7-7bbbb9f66</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="290634db-affc-432f-88f3-419da9897b7a" coord="16;1144;190;27" font="Arial">
+          <source>Q Distributed tracing</source>
+          <target state="translated">Suivi distribué</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="a6b99544-3354-4a5c-a839-375a77589787" coord="916;1156;229;20" font="Arial">
+          <source>10/19/2020, 10:42:39.897 AM</source>
+          <target state="translated">19/10/2020 10:42:39.897</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="f975127f-df39-4be6-a750-995467c3e3eb" coord="1186;1155;100;23" font="Arial">
+          <source>panli-1019-0</source>
+          <target state="translated">panli-1019-0</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="5b0a8370-b21a-4273-9fad-35a28f75d224" coord="1378;1159;66;18" font="Arial">
+          <source>gateway</source>
+          <target state="translated">passerelle</target>
+        </trans-unit>
+        <trans-unit xmlns="" id="497ea963-53a4-4f9f-bb35-959189810d77" coord="1545;1155;241;23" font="Arial">
+          <source>gateway-default-7-7bbbb9f66</source>
+          <target state="translated">gateway-default-7-7bbbb9f66</target>
+        </trans-unit>
+      </group>
+    </body>
+  </File>
+</xliff>

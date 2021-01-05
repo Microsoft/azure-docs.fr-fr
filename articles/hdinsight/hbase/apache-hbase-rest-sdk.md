@@ -1,19 +1,19 @@
 ---
 title: Utiliser le SDK .NET HBase - Azure HDInsight
 description: Utilisez le SDK .NET HBase pour créer et supprimer des tables et pour lire et écrire des données.
-author: ashishthaps
-ms.author: ashishth
+author: hrasheed-msft
+ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
-ms.custom: hdinsightactive
+ms.topic: how-to
+ms.custom: hdinsightactive, devx-track-csharp
 ms.date: 12/02/2019
-ms.openlocfilehash: eba7d7ad009b2ef0442a916983489489eb5cceb8
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 9b5693ddef5e512b0a95c87a700fd12acd4b5fae
+ms.sourcegitcommit: ad677fdb81f1a2a83ce72fa4f8a3a871f712599f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74806658"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97654640"
 ---
 # <a name="use-the-net-sdk-for-apache-hbase"></a>Utiliser le SDK .NET pour Apache HBase
 
@@ -25,7 +25,9 @@ Pour les applications C# et .NET, la [bibliothèque de client Microsoft HBase RE
 
 Le SDK HBase .NET est fourni sous la forme d’un package NuGet qui peut être installé à partir de la **Console du gestionnaire de package NuGet** de Visual Studio avec la commande suivante :
 
-    Install-Package Microsoft.HBase.Client
+```console
+Install-Package Microsoft.HBase.Client
+```
 
 ## <a name="instantiate-a-new-hbaseclient-object"></a>Instancier un nouvel objet HBaseClient
 
@@ -188,4 +190,4 @@ finally
 ## <a name="next-steps"></a>Étapes suivantes
 
 * [Prise en main d’un exemple Apache HBase dans HDInsight](apache-hbase-tutorial-get-started-linux.md)
-* Créer une application de bout en bout avec l’[analyse des sentiments Twitter en temps réel avec Apache HBase](../hdinsight-hbase-analyze-twitter-sentiment.md)
+* Créer une application de bout en bout avec l’[analyse des sentiments Twitter en temps réel avec Apache HBase](./apache-hbase-tutorial-get-started-linux.md)

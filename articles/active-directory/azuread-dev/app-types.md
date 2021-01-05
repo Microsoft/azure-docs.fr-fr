@@ -13,12 +13,12 @@ ms.author: ryanwi
 ms.reviewer: saeeda, jmprieur, andret
 ms.custom: aaddev
 ROBOTS: NOINDEX
-ms.openlocfilehash: c290cbf36fd53d5afb5fd805cda896fb6879bb4b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 5ff2858dd8b91ba036c517cbff07be96a729ef8c
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80154948"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88116442"
 ---
 # <a name="application-types-in-v10"></a>Types d’applications dans v1.0
 
@@ -41,7 +41,7 @@ Voici les cinq principaux scénarios d’application pris en charge par Azure A
 Cliquez sur les liens pour en savoir plus sur chaque type d’application et comprendre les lignes directrices des scénarios avant de commencer à travailler avec le code. Vous pouvez également obtenir des informations sur les différences à prendre en compte lorsque vous écrivez une application spécifique qui fonctionne avec le point de terminaison v1.0 ou le point de terminaison v2.0.
 
 > [!NOTE]
-> Le point de terminaison v2.0 ne prend pas en charge tous les scénarios et fonctionnalités d’Azure AD. Pour déterminer si vous devez utiliser le point de terminaison v2.0, consultez les [limitations de v2.0](../develop/active-directory-v2-limitations.md?toc=/azure/active-directory/azuread-dev/toc.json&bc=/azure/active-directory/azuread-dev/breadcrumb/toc.json).
+> Le point de terminaison v2.0 ne prend pas en charge tous les scénarios et fonctionnalités d’Azure AD. Pour déterminer si vous devez utiliser le point de terminaison v2.0, consultez les [limitations de v2.0](./azure-ad-endpoint-comparison.md?bc=%2fazure%2factive-directory%2fazuread-dev%2fbreadcrumb%2ftoc.json&toc=%2fazure%2factive-directory%2fazuread-dev%2ftoc.json).
 
 Vous pouvez développer tous les scénarios et applications décrits ici à l’aide de différents langages et plateformes. Ils sont tous appuyés par des exemples de code complets disponibles dans le guide des exemples de code : [Exemples de code par scénario (v1.0)](sample-v1-code.md) et [Exemples de code par scénario (v2.0)](../develop/sample-v2-code.md?toc=/azure/active-directory/azuread-dev/toc.json&bc=/azure/active-directory/azuread-dev/breadcrumb/toc.json). Vous pouvez également télécharger les exemples de code directement à partir des [référentiels d’exemples GitHub](https://github.com/Azure-Samples?q=active-directory) correspondants.
 

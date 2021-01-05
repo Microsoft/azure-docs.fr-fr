@@ -7,12 +7,12 @@ ms.date: 11/22/2019
 ms.topic: conceptual
 ms.service: iot-edge
 services: iot-edge
-ms.openlocfilehash: ef6ed74149f106b801049da429dfe7b79b984a70
-ms.sourcegitcommit: 6fd8dbeee587fd7633571dfea46424f3c7e65169
+ms.openlocfilehash: bf8b8554aa2ea1d6d06f58f726ca65f77499ec5f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83725242"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91440049"
 ---
 # <a name="understand-extended-offline-capabilities-for-iot-edge-devices-modules-and-child-devices"></a>Comprendre les fonctionnalités hors connexion étendues pour les appareils, modules et appareils enfants IoT Edge
 
@@ -68,7 +68,7 @@ Vous pouvez déclarer les relations parent-enfant au moment où vous créez un a
 
 #### <a name="option-2-use-the-az-command-line-tool"></a>Option n°2 : Utiliser l’outil de ligne de commande `az`
 
-À l’aide de l’interface de ligne de commande [Azure](https://docs.microsoft.com/cli/azure/?view=azure-cli-latest) avec l’[extension IoT](https://github.com/azure/azure-iot-cli-extension) (v0.7.0 ou version ultérieure), vous pouvez gérer les relations parent-enfant avec les sous-commandes [device-identity](https://docs.microsoft.com/cli/azure/ext/azure-iot/iot/hub/device-identity?view=azure-cli-latest). L’exemple ci-dessous utilise une requête pour affecter tous les appareils non IoT Edge dans le hub à des appareils enfants d’un appareil IoT Edge.
+À l’aide de l’interface de ligne de commande [Azure](/cli/azure/) avec l’[extension IoT](https://github.com/azure/azure-iot-cli-extension) (v0.7.0 ou version ultérieure), vous pouvez gérer les relations parent-enfant avec les sous-commandes [device-identity](/cli/azure/ext/azure-iot/iot/hub/device-identity). L’exemple ci-dessous utilise une requête pour affecter tous les appareils non IoT Edge dans le hub à des appareils enfants d’un appareil IoT Edge.
 
 ```azurecli
 # Set IoT Edge parent device
@@ -95,7 +95,7 @@ Vous pouvez modifier la [requête](../iot-hub/iot-hub-devguide-query-language.md
 
 #### <a name="option-3-use-iot-hub-service-sdk"></a>Option 3 : Utiliser le SDK IoT Hub Service
 
-Enfin, vous pouvez gérer les relations parent-enfants par programme en utilisant le SDK IoT Hub Service C#, Java ou Node.js. Voici un [exemple d’affectation d’un appareil enfant](https://aka.ms/set-child-iot-device-c-sharp) avec le SDK C#.
+Enfin, vous pouvez gérer les relations parent-enfants par programme en utilisant le SDK IoT Hub Service C#, Java ou Node.js. Voici un [exemple d’affectation d’un appareil enfant](https://github.com/Azure/azure-iot-sdk-csharp/blob/master/e2e/test/iothub/service/RegistryManagerE2ETests.cs) avec le SDK C#.
 
 ### <a name="set-up-the-parent-device-as-a-gateway"></a>Définir un appareil parent en tant que passerelle
 

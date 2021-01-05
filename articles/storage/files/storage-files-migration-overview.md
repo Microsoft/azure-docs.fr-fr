@@ -7,12 +7,12 @@ ms.topic: conceptual
 ms.date: 3/18/2020
 ms.author: fauhse
 ms.subservice: files
-ms.openlocfilehash: d6141d48d67dd44c348961c6e09acf4e2531a61e
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 995ae176a8eec58f8dc9522e6fac6fd78170014d
+ms.sourcegitcommit: 9826fb9575dcc1d49f16dd8c7794c7b471bd3109
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81685985"
+ms.lasthandoff: 11/14/2020
+ms.locfileid: "94628915"
 ---
 # <a name="migrate-to-azure-file-shares"></a>Migrer vers des partages de fichiers Azure
 
@@ -26,7 +26,7 @@ Azure dispose de plusieurs types de stockage cloud disponibles. Un aspect fondam
 
 Les [partages de fichiers Azure](storage-files-introduction.md) sont bien adaptés aux données de fichiers à usage général. Ces données incluent tout ce que vous utilisez avec un partage SMB ou NFS local. Avec [Azure File Sync](storage-sync-files-planning.md), vous pouvez mettre en cache le contenu de plusieurs partages de fichiers Azure sur des serveurs exécutant Windows en local.
 
-Pour une application qui s’exécute actuellement sur un serveur local, le stockage de fichiers dans un partage de fichiers Azure peut être un bon choix. Vous pouvez déplacer l’application vers Azure et utiliser des partages de fichiers Azure comme stockage partagé. Vous pouvez également envisager d’utiliser des [disques Azure](../../virtual-machines/windows/managed-disks-overview.md) dans ce scénario.
+Pour une application qui s’exécute actuellement sur un serveur local, le stockage de fichiers dans un partage de fichiers Azure peut être un bon choix. Vous pouvez déplacer l’application vers Azure et utiliser des partages de fichiers Azure comme stockage partagé. Vous pouvez également envisager d’utiliser des [disques Azure](../../virtual-machines/managed-disks-overview.md) dans ce scénario.
 
 Certaines applications cloud ne dépendent pas de SMB, de l’accès local aux données de l’ordinateur ou de l’accès partagé. Pour ces applications, le stockage d’objets tels que les [objets blob Azure](../blobs/storage-blobs-overview.md) est souvent le meilleur choix.
 
@@ -81,7 +81,7 @@ Les scénarios sans lien n’ont pas encore de guide de migration. Consultez ré
 | Source | Cible : </br>Déploiement hybride | Cible : </br>Déploiement cloud uniquement |
 |:---|:--|:--|
 | | Combinaison d’outils :| Combinaison d’outils : |
-| Windows Server 2012 R2 et versions ultérieures | <ul><li>[Azure File Sync](storage-sync-files-deployment-guide.md)</li><li>[Azure File Sync et Azure Data Box](storage-sync-offline-data-transfer.md)</li><li>Azure File Sync et service de migration de stockage</li></ul> | <ul><li>Azure File Sync</li><li>Azure File Sync et Data Box</li><li>Azure File Sync et service de migration de stockage</li><li>Robocopy</li></ul> |
+| Windows Server 2012 R2 et versions ultérieures | <ul><li>[Azure File Sync](storage-sync-files-deployment-guide.md)</li><li>[Azure File Sync et Azure Data Box](storage-sync-offline-data-transfer.md)</li><li>[Azure File Sync et les fichiers pré-amorcés dans le cloud](storage-sync-offline-data-transfer.md#azure-file-sync-and-pre-seeded-files-in-the-cloud)</li><li>Azure File Sync et service de migration de stockage</li></ul> | <ul><li>Azure File Sync</li><li>Azure File Sync et Data Box</li><li>Azure File Sync et service de migration de stockage</li><li>Robocopy</li></ul> |
 | Windows Server 2012 et versions antérieures | <ul><li>Azure File Sync et Data Box</li><li>Azure File Sync et service de migration de stockage</li></ul> | <ul><li>Azure File Sync et service de migration de stockage</li><li>Robocopy</li></ul> |
 | NAS (Network-attached storage) | <ul><li>[Azure File Sync et RoboCopy](storage-files-migration-nas-hybrid.md)</li></ul> | <ul><li>Robocopy</li></ul> |
 | Linux ou Samba | <ul><li>[Azure File Sync et RoboCopy](storage-files-migration-linux-hybrid.md)</li></ul> | <ul><li>Robocopy</li></ul> |
@@ -120,9 +120,9 @@ Le tableau suivant classe les outils Microsoft et leurs aptitudes actuelles pour
 |![Oui, recommandé](media/storage-files-migration-overview/circle-green-checkmark.png)| Robocopy | Pris en charge. Les partages de fichiers Azure peuvent être montés comme lecteurs réseau. | Fidélité totale.* |
 |![Oui, recommandé](media/storage-files-migration-overview/circle-green-checkmark.png)| Azure File Sync | Intégré en natif dans les partages de fichiers Azure. | Fidélité totale.* |
 |![Oui, recommandé](media/storage-files-migration-overview/circle-green-checkmark.png)| Service de migration de stockage | Pris en charge de façon indirecte. Les partages de fichiers Azure peuvent être montés comme lecteurs réseau sur des serveurs cibles SMS. | Fidélité totale.* |
-|![Pas vraiment recommandé](media/storage-files-migration-overview/triangle-yellow-exclamation.png)| Data Box | Pris en charge. | Ne copie pas les métadonnées. [Data Box peut être utilisé avec Azure File Sync](storage-sync-offline-data-transfer.md). |
-|![Non recommandé](media/storage-files-migration-overview/circle-red-x.png)| AzCopy | Pris en charge. | Ne copie pas les métadonnées. |
-|![Non recommandé](media/storage-files-migration-overview/circle-red-x.png)| Explorateur de stockage Azure | Pris en charge. | Ne copie pas les métadonnées. |
+|![Oui, recommandé](media/storage-files-migration-overview/circle-green-checkmark.png)| AzCopy, version 10.4 ou ultérieure| Pris en charge. | Fidélité totale.* |
+|![Oui, recommandé](media/storage-files-migration-overview/circle-green-checkmark.png)| Data Box | Pris en charge. | Le service Data Box prend désormais entièrement en charge les métadonnées. [Le service Data Box peut être utilisé en association avec Azure File Sync](storage-sync-offline-data-transfer.md). |
+|![Pas vraiment recommandé](media/storage-files-migration-overview/triangle-yellow-exclamation.png)| Explorateur Stockage Azure, version 1.14 | Pris en charge. | Ne copie pas les ACL. Prend en charge les timestamps.  |
 |![Non recommandé](media/storage-files-migration-overview/circle-red-x.png)| Azure Data Factory | Pris en charge. | Ne copie pas les métadonnées. |
 |||||
 
@@ -134,7 +134,7 @@ Cette section décrit les outils qui vous aident à planifier et à exécuter de
 
 #### <a name="robocopy-from-microsoft-corporation"></a>RoboCopy, de Microsoft Corporation
 
-RoboCopy est l’un des outils les mieux applicables aux migrations de fichiers. Il est intégré à Windows. La [documentation RoboCopy](https://docs.microsoft.com/windows-server/administration/windows-commands/robocopy) principale est une ressource utile pour les nombreuses options de cet outil.
+RoboCopy est l’un des outils les mieux applicables aux migrations de fichiers. Il est intégré à Windows. La [documentation RoboCopy](/windows-server/administration/windows-commands/robocopy) principale est une ressource utile pour les nombreuses options de cet outil.
 
 #### <a name="treesize-from-jam-software-gmbh"></a>TreeSize, de JAM Software GmbH
 

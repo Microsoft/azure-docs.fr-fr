@@ -2,17 +2,17 @@
 title: Erreurs de connectivité temporaires - Azure Database for MariaDB
 description: Découvrez comment gérer les erreurs de connectivité temporaires pour la base de données Azure Database pour MariaDB.
 keywords: connexion mysql,chaîne de connexion,problèmes de connectivité,erreur temporaire,erreur de connexion
-author: ajlam
-ms.author: andrela
+author: savjani
+ms.author: pariks
 ms.service: mariadb
 ms.topic: conceptual
 ms.date: 3/18/2020
-ms.openlocfilehash: 3e6c5c8b6c3f118f1b19c5e2b3455f1f66f7e70e
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 2a651d87411654f1a52c4a097f115ba848ce569c
+ms.sourcegitcommit: 6ab718e1be2767db2605eeebe974ee9e2c07022b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82100802"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94541672"
 ---
 # <a name="handling-of-transient-connectivity-errors-for-azure-database-for-mariadb"></a>Gestion des erreurs de connectivité temporaires pour la base de données Azure Database pour MariaDB
 

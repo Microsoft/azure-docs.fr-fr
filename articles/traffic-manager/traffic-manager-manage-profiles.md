@@ -3,21 +3,21 @@ title: Gérer des profils Azure Traffic Manager | Microsoft Docs
 description: Cet article vous aide à créer, désactiver, activer et supprimer un profil Azure Traffic Manager.
 services: traffic-manager
 documentationcenter: ''
-author: rohinkoul
+author: duongau
 ms.service: traffic-manager
 manager: twooley
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 05/10/2017
-ms.author: rohink
-ms.openlocfilehash: adfe7d117d2329832a5b5e9e782a9029a682ff3b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: duau
+ms.openlocfilehash: 7bb5559f21289a40b6c75a3481680ab5b2c1c269
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76938607"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89392882"
 ---
 # <a name="manage-an-azure-traffic-manager-profile"></a>Gestion d’un profil Azure Traffic Manager
 

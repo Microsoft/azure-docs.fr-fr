@@ -9,15 +9,15 @@ editor: cgronlun
 ms.assetid: f6e75eb1-d0ae-47cf-bdb8-06684b7c0a94
 ms.service: data-lake-store
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 03/26/2018
 ms.author: twooley
-ms.openlocfilehash: d200f72b3c0e5634c3dca8f60a4754a14351110a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 434917c1cee26a4a8eeb7f27808e3fcb487f3f55
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "60878718"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96350039"
 ---
 # <a name="accessing-diagnostic-logs-for-azure-data-lake-storage-gen1"></a>Accès aux journaux de diagnostic d’Azure Data Lake Storage Gen1
 Découvrez comment activer la journalisation des diagnostics pour votre compte Azure Data Lake Storage Gen1 et comment afficher les journaux d’activité collectés pour votre compte.
@@ -33,11 +33,11 @@ Les organisations peuvent activer la journalisation de diagnostic pour leur comp
 2. Ouvrez votre compte Azure Data Lake Storage Gen1 et dans le panneau de votre compte Azure Data Lake Storage Gen1, cliquez sur **Paramètres de diagnostic**.
 3. Dans le panneau **Paramètres de diagnostic**, cliquez sur **Activer les diagnostics**.
 
-    ![Activer la journalisation des diagnostics](./media/data-lake-store-diagnostic-logs/turn-on-diagnostics.png "Activer les journaux de diagnostic")
+    ![Capture d’écran du compte Data Lake Storage Gen1, avec l’option Paramètres de diagnostic et l’option Activer les diagnostics mises en évidence.](./media/data-lake-store-diagnostic-logs/turn-on-diagnostics.png "Activer les journaux de diagnostic")
 
 3. Dans le panneau **Paramètres de diagnostic**, apportez les modifications suivantes pour configurer la journalisation des diagnostics.
    
-    ![Activer la journalisation des diagnostics](./media/data-lake-store-diagnostic-logs/enable-diagnostic-logs.png "Activer les journaux de diagnostic")
+    ![Capture d’écran de la section Paramètres de diagnostic avec la zone de texte Nom et l’option Enregistrer mises en évidence.](./media/data-lake-store-diagnostic-logs/enable-diagnostic-logs.png "Activer les journaux de diagnostic")
    
    * Dans le champ **Nom**, entrez une valeur pour la configuration du journal de diagnostic.
    * Vous pouvez choisir de stocker/traiter les données de manières différentes.
@@ -46,7 +46,7 @@ Les organisations peuvent activer la journalisation de diagnostic pour leur comp
         
         * Sélectionnez l’option **Stream to an event hub (Transmettre à un Event Hub)** pour transmettre les données journalisées à un Event Hub Azure. Vous allez probablement utiliser cette option si vous disposez d’un pipeline de traitement en aval pour analyser les journaux d’activité entrants en temps réel. Si vous sélectionnez cette option, vous devez fournir les informations relatives au Event Hub Azure que vous souhaitez utiliser.
 
-        * Sélectionnez l’option **Envoyer à Log Analytics** pour analyser les données de journal générées à l’aide du service Azure Monitor. Si vous sélectionnez cette option, vous devez fournir des informations détaillées concernant l’espace de travail Log Analytics que vous allez utiliser pour analyser le journal d’activité. Pour plus d’informations sur l’utilisation des journaux Azure Monitor, consultez [Consulter ou analyser les données collectées avec la recherche dans les journaux Azure Monitor](../azure-monitor/learn/tutorial-viewdata.md).
+        * Sélectionnez l’option **Envoyer à Log Analytics** pour analyser les données de journal générées à l’aide du service Azure Monitor. Si vous sélectionnez cette option, vous devez fournir des informations détaillées concernant l’espace de travail Log Analytics que vous allez utiliser pour analyser le journal d’activité. Pour plus d’informations sur l’utilisation des journaux Azure Monitor, consultez [Consulter ou analyser les données collectées avec la recherche dans les journaux Azure Monitor](../azure-monitor/log-query/log-analytics-tutorial.md).
      
    * Spécifiez si vous souhaitez obtenir des journaux d’audit ou des journaux d’activité de demande ou les deux.
    * Spécifiez le nombre de jours pendant lesquels les données doivent être conservées. La rétention ne s’applique que si vous utilisez un compte de stockage Azure pour archiver les données du journal.
@@ -73,13 +73,13 @@ Il existe deux manières d’afficher les données de journal de votre compte Da
 ### <a name="from-the-azure-storage-account-that-contains-log-data"></a>À partir du compte de Stockage Azure qui contient des données de journal
 1. Ouvrez le panneau du compte de Stockage Azure associé au Data Lake Storage Gen1 pour la journalisation, puis cliquez sur Objets blob. Le panneau **Service Blob** répertorie deux conteneurs.
    
-    ![Afficher la journalisation de diagnostic](./media/data-lake-store-diagnostic-logs/view-diagnostic-logs-storage-account.png "Afficher les journaux de diagnostic")
+    ![Capture d’écran du panneau Data Lake Storage Gen1, avec l’option Objets blob sélectionnée et le panneau Service Blob où sont mis en évidence les noms des deux services Blob.](./media/data-lake-store-diagnostic-logs/view-diagnostic-logs-storage-account.png "Afficher les journaux de diagnostic")
    
    * Le conteneur **insights-logs-audit** contient les journaux d’audit.
    * Le conteneur **insights-logs-requests** contient les journaux d’activité de demande.
 2. Les journaux d’activité sont stockés dans ces conteneurs selon la structure suivante.
    
-    ![Afficher la journalisation de diagnostic](./media/data-lake-store-diagnostic-logs/view-diagnostic-logs-storage-account-structure.png "Afficher les journaux de diagnostic")
+    ![Capture d’écran de la structure du journal telle qu’elle est stockée dans le conteneur.](./media/data-lake-store-diagnostic-logs/view-diagnostic-logs-storage-account-structure.png "Afficher les journaux de diagnostic")
    
     Par exemple, le chemin d’accès complet à un journal d’audit peut être `https://adllogs.blob.core.windows.net/insights-logs-audit/resourceId=/SUBSCRIPTIONS/<sub-id>/RESOURCEGROUPS/myresourcegroup/PROVIDERS/MICROSOFT.DATALAKESTORE/ACCOUNTS/mydatalakestorage/y=2016/m=07/d=18/h=04/m=00/PT1H.json`
    
@@ -91,26 +91,28 @@ Les journaux d’activité d’audit et de demande sont au format JSON. Dans cet
 ### <a name="request-logs"></a>journaux d’activité de demande
 Voici un exemple d’entrée dans le journal de demande au format JSON. Chaque objet blob a un objet racine appelé **enregistrements** qui contient un tableau d’objets du journal.
 
+```json
+{
+"records": 
+  [        
+    . . . .
+    ,
     {
-    "records": 
-      [        
-        . . . .
-        ,
-        {
-             "time": "2016-07-07T21:02:53.456Z",
-             "resourceId": "/SUBSCRIPTIONS/<subscription_id>/RESOURCEGROUPS/<resource_group_name>/PROVIDERS/MICROSOFT.DATALAKESTORE/ACCOUNTS/<data_lake_storage_gen1_account_name>",
-             "category": "Requests",
-             "operationName": "GETCustomerIngressEgress",
-             "resultType": "200",
-             "callerIpAddress": "::ffff:1.1.1.1",
-             "correlationId": "4a11c709-05f5-417c-a98d-6e81b3e29c58",
-             "identity": "1808bd5f-62af-45f4-89d8-03c5e81bac30",
-             "properties": {"HttpMethod":"GET","Path":"/webhdfs/v1/Samples/Outputs/Drivers.csv","RequestContentLength":0,"ClientRequestId":"3b7adbd9-3519-4f28-a61c-bd89506163b8","StartTime":"2016-07-07T21:02:52.472Z","EndTime":"2016-07-07T21:02:53.456Z"}
-        }
-        ,
-        . . . .
-      ]
+        "time": "2016-07-07T21:02:53.456Z",
+        "resourceId": "/SUBSCRIPTIONS/<subscription_id>/RESOURCEGROUPS/<resource_group_name>/PROVIDERS/MICROSOFT.DATALAKESTORE/ACCOUNTS/<data_lake_storage_gen1_account_name>",
+        "category": "Requests",
+        "operationName": "GETCustomerIngressEgress",
+        "resultType": "200",
+        "callerIpAddress": "::ffff:1.1.1.1",
+        "correlationId": "4a11c709-05f5-417c-a98d-6e81b3e29c58",
+        "identity": "1808bd5f-62af-45f4-89d8-03c5e81bac30",
+        "properties": {"HttpMethod":"GET","Path":"/webhdfs/v1/Samples/Outputs/Drivers.csv","RequestContentLength":0,"ClientRequestId":"3b7adbd9-3519-4f28-a61c-bd89506163b8","StartTime":"2016-07-07T21:02:52.472Z","EndTime":"2016-07-07T21:02:53.456Z"}
     }
+    ,
+    . . . .
+  ]
+}
+```
 
 #### <a name="request-log-schema"></a>Schéma du journal de requête
 | Nom | Type | Description |
@@ -138,26 +140,28 @@ Voici un exemple d’entrée dans le journal de demande au format JSON. Chaque o
 ### <a name="audit-logs"></a>Journaux d’audit
 Voici un exemple d’entrée dans le journal d’audit au format JSON. Chaque objet blob a un objet racine appelé **records** qui contient un tableau d’objets du journal
 
+```json
+{
+"records": 
+  [        
+    . . . .
+    ,
     {
-    "records": 
-      [        
-        . . . .
-        ,
-        {
-             "time": "2016-07-08T19:08:59.359Z",
-             "resourceId": "/SUBSCRIPTIONS/<subscription_id>/RESOURCEGROUPS/<resource_group_name>/PROVIDERS/MICROSOFT.DATALAKESTORE/ACCOUNTS/<data_lake_storage_gen1_account_name>",
-             "category": "Audit",
-             "operationName": "SeOpenStream",
-             "resultType": "0",
-             "resultSignature": "0",
-             "correlationId": "381110fc03534e1cb99ec52376ceebdf;Append_BrEKAmg;25.66.9.145",
-             "identity": "A9DAFFAF-FFEE-4BB5-A4A0-1B6CBBF24355",
-             "properties": {"StreamName":"adl://<data_lake_storage_gen1_account_name>.azuredatalakestore.net/logs.csv"}
-        }
-        ,
-        . . . .
-      ]
+        "time": "2016-07-08T19:08:59.359Z",
+        "resourceId": "/SUBSCRIPTIONS/<subscription_id>/RESOURCEGROUPS/<resource_group_name>/PROVIDERS/MICROSOFT.DATALAKESTORE/ACCOUNTS/<data_lake_storage_gen1_account_name>",
+        "category": "Audit",
+        "operationName": "SeOpenStream",
+        "resultType": "0",
+        "resultSignature": "0",
+        "correlationId": "381110fc03534e1cb99ec52376ceebdf;Append_BrEKAmg;25.66.9.145",
+        "identity": "A9DAFFAF-FFEE-4BB5-A4A0-1B6CBBF24355",
+        "properties": {"StreamName":"adl://<data_lake_storage_gen1_account_name>.azuredatalakestore.net/logs.csv"}
     }
+    ,
+    . . . .
+  ]
+}
+```
 
 #### <a name="audit-log-schema"></a>Schéma du journal d’audit
 | Nom | Type | Description |
@@ -178,7 +182,7 @@ Voici un exemple d’entrée dans le journal d’audit au format JSON. Chaque ob
 | StreamName |String |Le chemin d’accès vers l’emplacement où l’opération a eu lieu. |
 
 ## <a name="samples-to-process-the-log-data"></a>Exemples de traitement des données de journal
-Quand vous envoyez des journaux d’Azure Data Lake Storage Gen1 vers Journaux Azure Monitor (voir [Consulter ou analyser les données collectées avec la recherche dans les journaux Azure Monitor](../azure-monitor/learn/tutorial-viewdata.md) pour plus d’informations sur l’utilisation de Journaux Azure Monitor), la requête suivante retourne une table contenant une liste de noms d’affichage d’utilisateurs, l’heure des événements et le nombre d’événements par heure d’événement, ainsi qu’un graphique. Vous pouvez facilement la modifier pour afficher le GUID de l’utilisateur ou d’autres attributs :
+Quand vous envoyez des journaux d’Azure Data Lake Storage Gen1 vers Journaux Azure Monitor (voir [Consulter ou analyser les données collectées avec la recherche dans les journaux Azure Monitor](../azure-monitor/log-query/log-analytics-tutorial.md) pour plus d’informations sur l’utilisation de Journaux Azure Monitor), la requête suivante retourne une table contenant une liste de noms d’affichage d’utilisateurs, l’heure des événements et le nombre d’événements par heure d’événement, ainsi qu’un graphique. Vous pouvez facilement la modifier pour afficher le GUID de l’utilisateur ou d’autres attributs :
 
 ```
 search *
@@ -192,4 +196,3 @@ Azure Data Lake Storage Gen1 fournit un exemple de traitement et d’analyse des
 ## <a name="see-also"></a>Voir aussi
 * [Vue d’ensemble d’Azure Data Lake Storage Gen1](data-lake-store-overview.md)
 * [Sécuriser les données dans Data Lake Storage Gen1](data-lake-store-secure-data.md)
-

@@ -3,17 +3,19 @@ title: Documentation Azure Database Migration Service
 summary: Azure Database Migration Service permet des migrations fluides à partir de plusieurs sources de base de données vers des plateformes de données Azure, avec un temps d’arrêt minimal. Le service utilise l’Assistant Migration de données pour générer des rapports d’évaluation qui fournissent des suggestions concernant les modifications requises avant d’effectuer une migration. Quand vous êtes prêt à commencer le processus de migration, Azure Database Migration Service effectue toutes les étapes nécessaires.
 metadata:
   description: Découvrez comment utiliser Azure Database Migration Service pour permettre des migrations fluides de plusieurs sources de base de données vers des plateformes de données Azure, avec un temps d’arrêt minimal.
+  keywords: azure database migration services, dms service, azure data migration, data migration service, database migration service
   author: HJToland3
   ms.author: jtoland
   ms.date: 12/19/2019
   ms.service: dms
   ms.topic: landing-page
-  ms.openlocfilehash: 9a37c850426cab0d940ab546084c1c64811ccb64
-  ms.sourcegitcommit: 253d4c7ab41e4eb11cd9995190cd5536fcec5a3c
+  ms.custom: seo-azure-migrate
+  ms.openlocfilehash: c2461fa9eb2c326141d244fbc576355226f891dd
+  ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 03/25/2020
-  ms.locfileid: "78164557"
+  ms.lasthandoff: 11/20/2020
+  ms.locfileid: "94962703"
 landingContent:
 - title: Présentation d’Azure Database Migration Service
   linkLists:
@@ -89,6 +91,8 @@ landingContent:
       url: tutorial-postgresql-azure-postgresql-online.md
     - text: Migrer RDS PostgreSQL vers Azure DB pour PostgreSQL
       url: tutorial-rds-postgresql-server-azure-db-for-postgresql-online.md
+    - text: Migrer entre instances d’Azure DB pour PostgreSQL en ligne par le biais du portail
+      url: tutorial-azure-postgresql-to-azure-postgresql-online-portal.md
     - text: Migrer vers Azure DB pour MySQL - En ligne
       url: tutorial-mysql-azure-mysql-online.md
     - text: Migrer RDS MySQL vers Azure DB pour MySQL - en ligne
@@ -120,11 +124,11 @@ landingContent:
     - text: Guide pour la migration de base de données
       url: https://datamigration.microsoft.com/
     - text: Assistant Migration de données
-      url: https://docs.microsoft.com/sql/dma/dma-overview?view=sql-server-2017
+      url: /sql/dma/dma-overview?view=sql-server-2017
     - text: Assistant Migration SQL Server
-      url: https://docs.microsoft.com/sql/ssma/sql-server-migration-assistant?view=sql-server-2017
+      url: /sql/ssma/sql-server-migration-assistant?view=sql-server-2017
     - text: Assistant Expérimentation de base de données
-      url: https://docs.microsoft.com/sql/dea/database-experimentation-assistant-overview?view=sql-server-2017
+      url: /sql/dea/database-experimentation-assistant-overview?view=sql-server-2017
     - text: Boîte à outils de migration de l’accès aux données
       url: https://marketplace.visualstudio.com/items?itemName=ms-databasemigration.data-access-migration-toolkit
 - title: Migrer Oracle vers Azure

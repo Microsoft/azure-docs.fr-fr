@@ -14,12 +14,12 @@ ms.tgt_pltfrm: NA
 ms.workload: NA
 ms.date: 06/16/2016
 ms.author: alkohli
-ms.openlocfilehash: 95386f36340aca470769c920e40bbb70e09d34fc
-ms.sourcegitcommit: 632e7ed5449f85ca502ad216be8ec5dd7cd093cb
+ms.openlocfilehash: 67d3fafb9b4b93ae52bdb09d673bf65cad30b816
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/30/2020
-ms.locfileid: "80397877"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94966154"
 ---
 # <a name="storsimple-virtual-array-update-02-and-01-release-notes"></a>Notes de publication de StorSimple Virtual Array Update 0.2 et 0.1
 ## <a name="overview"></a>Vue d’ensemble
@@ -83,5 +83,4 @@ Le tableau suivant récapitule les problèmes connus pour StorSimple Virtual Arr
 | **14.** |Serveur de fichiers* |Si un fichier d’un dossier est associé à un flux de données alternatif (ADS), l’ADS n’est pas sauvegardé ou restauré lors des opérations de récupération d’urgence, de clonage ou de récupération au niveau de l’élément. | |
 
 ## <a name="next-step"></a>Étape suivante
-[Installation de mises à jour](storsimple-ova-install-update-01.md) sur votre instance StorSimple Virtual Array.
-
+[Installation de mises à jour](./storsimple-virtual-array-install-update-06.md) sur votre instance StorSimple Virtual Array.

@@ -9,12 +9,13 @@ ms.subservice: general
 ms.topic: tutorial
 ms.date: 08/12/2019
 ms.author: mbaldwin
-ms.openlocfilehash: 127f0cdfc8cecf9789a68210f4b7ce1927333cc8
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: cb7e047d998342125a52af5ea3ae1e88fe88d313
+ms.sourcegitcommit: 7863fcea618b0342b7c91ae345aa099114205b03
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81425358"
+ms.lasthandoff: 11/03/2020
+ms.locfileid: "93289892"
 ---
 # <a name="manage-key-vault-using-the-azure-cli"></a>Gérer Key Vault à l’aide de l’interface de ligne de commande Azure 
 
@@ -119,7 +120,7 @@ az provider register -n Microsoft.KeyVault
 
 Utilisez la commande `az keyvault create` pour créer un coffre de clés. Ce script a trois paramètres obligatoires : un nom de groupe de ressources, un nom de coffre de clés et l’emplacement géographique.
 
-Pour créer un coffre avec le nom **ContosoKeyVault**, dans le groupe de ressources **ContosoResourceGroup** résidant à l’emplacement **Asie Est**, tapez : 
+Pour créer un coffre avec le nom **ContosoKeyVault** , dans le groupe de ressources **ContosoResourceGroup** résidant à l’emplacement **Asie Est** , tapez : 
 
 ```azurecli
 az keyvault create --name "ContosoKeyVault" --resource-group "ContosoResourceGroup" --location "East Asia"
@@ -127,8 +128,8 @@ az keyvault create --name "ContosoKeyVault" --resource-group "ContosoResourceGro
 
 La sortie de cette commande affiche les propriétés du coffre de clés que vous avez créé. Les deux propriétés les plus importantes sont :
 
-* **nom** : dans l’exemple, le nom est ContosoKeyVault. Vous allez utiliser ce nom pour d’autres commandes Key Vault.
-* **vaultUri** : dans l’exemple, l’URI est https://contosokeyvault.vault.azure.net. Les applications qui utilisent votre coffre via son API REST doivent utiliser cet URI.
+* **nom**  : dans l’exemple, le nom est ContosoKeyVault. Vous allez utiliser ce nom pour d’autres commandes Key Vault.
+* **vaultUri**  : dans l’exemple, l’URI est https://contosokeyvault.vault.azure.net. Les applications qui utilisent votre coffre via son API REST doivent utiliser cet URI.
 
 Votre compte Azure est pour l’instant le seul autorisé à effectuer des opérations sur ce À l’heure actuelle, personne d’autre n’y est autorisé.
 
@@ -193,7 +194,7 @@ Les applications qui utilisent un coffre de clés doivent s’authentifier à l�
 
 L’application doit présenter ces deux valeurs à Azure Active Directory afin d’obtenir un jeton. La configuration d’une application pour obtenir un jeton dépend de l’application. Pour [l’exemple d’application Key Vault](https://www.microsoft.com/download/details.aspx?id=45343), le propriétaire de l’application définit ces valeurs dans le fichier app.config.
 
-Pour obtenir des instructions détaillées sur l’inscription d’une application auprès d’Azure Active Directory, consultez les articles [Intégration d’applications dans Azure Active Directory](../../active-directory/develop/active-directory-integrating-applications.md), [Utiliser le portail pour créer une application et un principal du service Azure Active Directory pouvant accéder aux ressources](../../active-directory/develop/howto-create-service-principal-portal.md) et [Créez un principal du service avec Azure CLI](/cli/azure/create-an-azure-service-principal-azure-cli).
+Pour obtenir des instructions détaillées sur l’inscription d’une application auprès d’Azure Active Directory, consultez les articles [Intégration d’applications dans Azure Active Directory](../../active-directory/develop/quickstart-register-app.md), [Utiliser le portail pour créer une application et un principal du service Azure Active Directory pouvant accéder aux ressources](../../active-directory/develop/howto-create-service-principal-portal.md) et [Créez un principal du service avec Azure CLI](/cli/azure/create-an-azure-service-principal-azure-cli).
 
 Pour inscrire une application à Azure Active Directory :
 

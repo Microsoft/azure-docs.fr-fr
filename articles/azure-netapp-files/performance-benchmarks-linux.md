@@ -15,10 +15,10 @@ ms.topic: conceptual
 ms.date: 04/29/2020
 ms.author: b-juche
 ms.openlocfilehash: b763a734866dd5fed5bf0500d4d52b9324c92a79
-ms.sourcegitcommit: 50ef5c2798da04cf746181fbfa3253fca366feaa
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "82614010"
 ---
 # <a name="azure-netapp-files-performance-benchmarks-for-linux"></a>Benchmarks de performances Azure NetApp Files pour Linux

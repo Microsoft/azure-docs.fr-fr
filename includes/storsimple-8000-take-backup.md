@@ -4,12 +4,12 @@ ms.service: storsimple
 ms.topic: include
 ms.date: 10/26/2018
 ms.author: alkohli
-ms.openlocfilehash: 48a3326dbe0e9eed4a5490e720248555586d189c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 5e923fdf560692c645c8a69e7e26d13f69d6920c
+ms.sourcegitcommit: 6a902230296a78da21fbc68c365698709c579093
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "67177115"
+ms.lasthandoff: 11/05/2020
+ms.locfileid: "93376042"
 ---
 ### <a name="to-take-a-backup"></a>Pour effectuer une sauvegarde
 
@@ -19,13 +19,13 @@ ms.locfileid: "67177115"
 
 2. Dans le panneau **Stratégie de sauvegarde**, cliquez sur **+ Ajouter une stratégie**.
 
-    ![Add-backup-policy](./media/storsimple-8000-take-backup/step8takebu2.png)
+    ![Add-backup-policy 2](./media/storsimple-8000-take-backup/step8takebu2.png)
 
 3. Spécifiez un nom comprenant entre 3 et 150 caractères pour votre stratégie de sauvegarde dans le panneau **Créer une stratégie de sauvegarde**.
 
 4. Sélectionnez les volumes à sauvegarder. Si vous sélectionnez plusieurs volumes, ceux-ci sont regroupés pour créer une sauvegarde afin d’assurer la cohérence des données.
 
-    ![Add-backup-policy](./media/storsimple-8000-take-backup/step8takebu4.png)
+    ![Add-backup-policy 3](./media/storsimple-8000-take-backup/step8takebu4.png)
 
 5. Dans le panneau **Ajouter la première planification** :
 
@@ -35,11 +35,11 @@ ms.locfileid: "67177115"
     4. Sélectionnez l’heure et la date de début de la stratégie de sauvegarde.
     5. Cliquez sur **OK** pour créer la stratégie de sauvegarde.
 
-        ![Add-backup-policy](./media/storsimple-8000-take-backup/step8takebu5.png) 
+        ![Add-backup-policy 4](./media/storsimple-8000-take-backup/step8takebu5.png) 
 
 6. Cliquez sur **Créer** pour démarrer la création de la stratégie de sauvegarde. Un message s’affiche une fois la stratégie de sauvegarde créée. La liste des stratégies de sauvegarde est également mise à jour.
       
-      ![Add-backup-policy](./media/storsimple-8000-take-backup/step8takebu9.png)
+      ![Add-backup-policy 5](./media/storsimple-8000-take-backup/step8takebu9.png)
       
       Vous disposez maintenant d’une stratégie de sauvegarde, qui crée des sauvegardes planifiées des données de volume.
 

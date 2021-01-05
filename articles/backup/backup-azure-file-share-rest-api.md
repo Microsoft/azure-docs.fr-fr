@@ -3,18 +3,18 @@ title: Sauvegarder des partages de fichiers Azure avec l’API REST
 description: Apprenez à utiliser l’API REST pour sauvegarder des partages de fichiers Azure dans le coffre Recovery Services
 ms.topic: conceptual
 ms.date: 02/16/2020
-ms.openlocfilehash: 2cf385830ec1be17cb62432e6ef9cba7d82a9db1
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 8d2d8ed88da133986540a293185c8e37000ab87b
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79226121"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88824863"
 ---
 # <a name="backup-azure-file-share-using-azure-backup-via-rest-api"></a>Sauvegarder un partage de fichiers Azure à l’aide de Sauvegarde Azure via l’API REST
 
 Cet article explique comment sauvegarder un partage de fichiers Azure à l’aide de Sauvegarde Azure via l’API REST.
 
-Cet article suppose que vous avez déjà créé un coffre Recovery Services et une stratégie de configuration de la sauvegarde pour votre partage de fichiers. Si ce n’est pas le cas, reportez-vous aux tutoriels relatifs à l’API REST [Créer un coffre](https://docs.microsoft.com/azure/backup/backup-azure-arm-userestapi-createorupdatevault) et [Créer une stratégie](https://docs.microsoft.com/azure/backup/backup-azure-arm-userestapi-createorupdatepolicy) sur la création de coffres et de stratégies.
+Cet article suppose que vous avez déjà créé un coffre Recovery Services et une stratégie de configuration de la sauvegarde pour votre partage de fichiers. Si ce n’est pas le cas, reportez-vous aux tutoriels relatifs à l’API REST [Créer un coffre](./backup-azure-arm-userestapi-createorupdatevault.md) et [Créer une stratégie](./backup-azure-arm-userestapi-createorupdatepolicy.md) sur la création de coffres et de stratégies.
 
 Pour cet article, nous allons utiliser les ressources suivantes :
 
@@ -32,7 +32,7 @@ Pour cet article, nous allons utiliser les ressources suivantes :
 
 ### <a name="discover-storage-accounts-with-unprotected-azure-file-shares"></a>Découvrir des comptes de stockage avec des partages de fichiers Azure non protégés
 
-Le coffre doit découvrir tous les comptes de stockage Azure dans l’abonnement avec des partages de fichiers qui peuvent être sauvegardés dans le coffre Recovery Services. Cette action est déclenchée à l’aide de l’[opération d’actualisation](https://docs.microsoft.com/rest/api/backup/protectioncontainers/refresh). Il s’agit d’une opération *POST* asynchrone qui garantit que le coffre obtient la liste la plus récente de tous les partages de fichiers Azure non protégés dans l’abonnement actuel et les « met en cache ». Une fois que le partage de fichiers est mis en cache, Recovery Services peut accéder au partage de fichiers et le protéger.
+Le coffre doit découvrir tous les comptes de stockage Azure dans l’abonnement avec des partages de fichiers qui peuvent être sauvegardés dans le coffre Recovery Services. Cette action est déclenchée à l’aide de l’[opération d’actualisation](/rest/api/backup/protectioncontainers/refresh). Il s’agit d’une opération *POST* asynchrone qui garantit que le coffre obtient la liste la plus récente de tous les partages de fichiers Azure non protégés dans l’abonnement actuel et les « met en cache ». Une fois que le partage de fichiers est mis en cache, Recovery Services peut accéder au partage de fichiers et le protéger.
 
 ```http
 POST https://management.azure.com/Subscriptions/{subscriptionId}/resourceGroups/{vaultresourceGroupname}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/refreshContainers?api-version=2016-12-01&$filter={$filter}
@@ -54,13 +54,13 @@ L’URI POST contient les paramètres `{subscriptionId}`, `{vaultName}`, `{vault
 POST https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/azurefiles/providers/Microsoft.RecoveryServices/vaults/azurefilesvault/backupFabrics/Azure/refreshContainers?api-version=2016-12-01&$filter=backupManagementType eq 'AzureStorage'
 ```
 
-#### <a name="responses"></a>Réponses
+#### <a name="responses-to-the-refresh-operation"></a>Réponses à l’opération d’actualisation
 
-L’opération « Actualiser » est une [opération asynchrone](https://docs.microsoft.com/azure/azure-resource-manager/resource-manager-async-operations). ce qui signifie qu’elle crée une autre opération qui doit faire l’objet d’un suivi distinct.
+L’opération « Actualiser » est une [opération asynchrone](../azure-resource-manager/management/async-operations.md). ce qui signifie qu’elle crée une autre opération qui doit faire l’objet d’un suivi distinct.
 
 Elle retourne deux réponses : 202 (Accepté) lors de la création d’une autre opération, et 200 (OK) quand cette opération est terminée.
 
-##### <a name="example-responses"></a>Exemples de réponses
+##### <a name="example-responses-to-the-refresh-operation"></a>Exemples de réponses à l’opération d’actualisation
 
 Une fois la demande *POST* envoyée, une réponse 202 (Accepté) est retournée.
 
@@ -106,9 +106,9 @@ x-ms-routing-request-id  : CENTRALUSEUAP:20200127T105304Z:d9bdb266-8349-4dbd-968
 Date   : Mon, 27 Jan 2020 10:53:04 GMT
 ```
 
-### <a name="get-list-of-storage-accounts-that-can-be-protected-with-recovery-services-vault"></a>Obtenir la liste des comptes de stockage qui peuvent être protégés à l’aide du coffre Recovery Services
+### <a name="get-list-of-storage-accounts-with-file-shares-that-can-be-backed-up-with-recovery-services-vault"></a>Obtenir la liste des comptes de stockage avec des partages de fichiers qui peuvent être sauvegardés l’aide du coffre Recovery Services
 
-Pour confirmer que la « mise en cache » est terminée, répertoriez tous les comptes de stockage pouvant être protégés dans le cadre de l’abonnement. Recherchez ensuite le compte de stockage souhaité dans la réponse. Pour ce faire, utilisez l’opération [GET ProtectableContainers](https://docs.microsoft.com/rest/api/backup/protectablecontainers/list).
+Pour confirmer qu’une « mise en cache » a bien été réalisée, répertoriez tous les comptes de stockage Azure dans l’abonnement avec des partages de fichiers qui peuvent être sauvegardés à l’aide du coffre Recovery Services. Recherchez ensuite le compte de stockage souhaité dans la réponse. Pour ce faire, utilisez l’opération [GET ProtectableContainers](/rest/api/backup/protectablecontainers/list).
 
 ```http
 GET https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/azurefiles/providers/Microsoft.RecoveryServices/vaults/azurefilesvault/backupFabrics/Azure/protectableContainers?api-version=2016-12-01&$filter=backupManagementType eq 'AzureStorage'
@@ -160,7 +160,7 @@ protectableContainers/StorageContainer;Storage;AzureFiles;testvault2",
 
 ### <a name="register-storage-account-with-recovery-services-vault"></a>Inscrire un compte de stockage auprès du coffre Recovery Services
 
-Cette étape est nécessaire uniquement si vous n’avez pas inscrit le compte de stockage dans le coffre précédemment. Vous pouvez inscrire le coffre à l’aide de l’opération [ProtectionContainers-Register](https://docs.microsoft.com/rest/api/backup/protectioncontainers/register).
+Cette étape est nécessaire uniquement si vous n’avez pas inscrit le compte de stockage dans le coffre précédemment. Vous pouvez inscrire le coffre à l’aide de l’opération [ProtectionContainers-Register](/rest/api/backup/protectioncontainers/register).
 
 ```http
 PUT https://management.azure.com/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}?api-version=2016-12-01
@@ -175,7 +175,7 @@ Définissez les variables pour l’URI comme suit :
    Dans notre exemple, il s’agit de *StorageContainer;Storage;AzureFiles;testvault2*
 
 >[!NOTE]
-> Prenez toujours l’attribut de nom dans la réponse et renseignez-le dans cette requête. Ne codez PAS en dur ni ne créez le format container-name. Si vous le créez ou le codez en dur, l’appel d’API échoue si le format container-name change à l’avenir.
+> Prenez toujours l’attribut de nom dans la réponse et renseignez-le dans cette requête. Ne codez pas en dur ni ne créez le format container-name. Si vous le créez ou le codez en dur, l’appel d’API échoue si le format container-name change à l’avenir.
 
 <br>
 
@@ -209,7 +209,7 @@ Le corps de demande de création est le suivant :
  }
 ```
 
-Pour obtenir la liste complète des définitions du corps de la demande et d’autres détails, reportez-vous à [ProtectionContainers-Register](https://docs.microsoft.com/rest/api/backup/protectioncontainers/register#azurestoragecontainer).
+Pour obtenir la liste complète des définitions du corps de la demande et d’autres détails, reportez-vous à [ProtectionContainers-Register](/rest/api/backup/protectioncontainers/register#azurestoragecontainer).
 
 Il s’agit d’une opération asynchrone qui retourne deux réponses : « 202 Accepté » lorsque l’opération est acceptée et « 200 OK » lorsque l’opération est terminée.  Pour suivre l’état de l’opération, utilisez l’en-tête d’emplacement pour récupérer l’état le plus récent de l’opération.
 
@@ -241,7 +241,7 @@ Vous pouvez vérifier si l’inscription a réussi à partir de la valeur du par
 
 ### <a name="inquire-all-unprotected-files-shares-under-a-storage-account"></a>Rechercher tous les partages de fichiers non protégés sous un compte de stockage
 
-Vous pouvez vous renseigner sur les éléments protégeables dans un compte de stockage à l’aide de l’opération [Protection Containers-Inquire](https://docs.microsoft.com/rest/api/backup/protectioncontainers/inquire). Il s’agit d’une opération asynchrone et les résultats doivent être suivis à l’aide de l’en-tête d’emplacement.
+Vous pouvez vous renseigner sur les éléments protégeables dans un compte de stockage à l’aide de l’opération [Protection Containers-Inquire](/rest/api/backup/protectioncontainers/inquire). Il s’agit d’une opération asynchrone et les résultats doivent être suivis à l’aide de l’en-tête d’emplacement.
 
 ```http
 POST https://management.azure.com/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/inquire?api-version=2016-12-01
@@ -276,7 +276,7 @@ Date  : Mon, 27 Jan 2020 10:53:05 GMT
 
 ### <a name="select-the-file-share-you-want-to-back-up"></a>Sélectionner le partage de fichiers à sauvegarder
 
-Vous pouvez répertorier tous les éléments protégeables sous l’abonnement et rechercher le partage de fichiers à sauvegarder à l’aide de l’opération [GET backupprotectableItems](https://docs.microsoft.com/rest/api/backup/backupprotectableitems/list).
+Vous pouvez répertorier tous les éléments protégeables sous l’abonnement et rechercher le partage de fichiers à sauvegarder à l’aide de l’opération [GET backupprotectableItems](/rest/api/backup/backupprotectableitems/list).
 
 ```http
 GET https://management.azure.com/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupProtectableItems?api-version=2016-12-01&$filter={$filter}
@@ -351,7 +351,7 @@ La réponse contient la liste de tous les partages de fichiers non protégés et
 
 ### <a name="enable-backup-for-the-file-share"></a>Activer la sauvegarde pour le partage de fichiers
 
-Une fois que le partage de fichiers approprié est identifié par le nom convivial, sélectionnez la stratégie pour le protéger. Pour en savoir plus sur les stratégies existantes dans le coffre, reportez-vous à l’[API de liste des stratégies](https://docs.microsoft.com/rest/api/backup/backuppolicies/list). Sélectionnez ensuite la [stratégie appropriée](https://docs.microsoft.com/rest/api/backup/protectionpolicies/get) en faisant référence au nom de la stratégie. Pour créer des stratégies, reportez-vous au [tutoriel de création de stratégies](https://docs.microsoft.com/azure/backup/backup-azure-arm-userestapi-createorupdatepolicy).
+Une fois que le partage de fichiers approprié est identifié par le nom convivial, sélectionnez la stratégie pour le protéger. Pour en savoir plus sur les stratégies existantes dans le coffre, reportez-vous à l’[API de liste des stratégies](/rest/api/backup/backuppolicies/list). Sélectionnez ensuite la [stratégie appropriée](/rest/api/backup/protectionpolicies/get) en faisant référence au nom de la stratégie. Pour créer des stratégies, reportez-vous au [tutoriel de création de stratégies](./backup-azure-arm-userestapi-createorupdatepolicy.md).
 
 L’activation de la protection est une opération *PUT* asynchrone qui crée un « élément protégé ».
 
@@ -373,7 +373,7 @@ Dans notre exemple, l’ID du partage de fichiers que vous souhaitez protéger e
 Ou bien, vous pouvez faire référence à l’attribut **name** du conteneur de protection et aux réponses d’éléments protégeables.
 
 >[!NOTE]
->Prenez toujours l’attribut de nom dans la réponse et renseignez-le dans cette requête. Ne codez PAS en dur ni ne créez le format container-name ou celui du nom de l’élément protégé. Si vous le créez ou le codez en dur, l’appel d’API échoue si le format container-name ou celui du nom de l’élément protégé change à l’avenir.
+>Prenez toujours l’attribut de nom dans la réponse et renseignez-le dans cette requête. Ne codez pas en dur ni ne créez le format container-name ou celui du nom de l’élément protégé. Si vous le créez ou le codez en dur, l’appel d’API échoue si le format container-name ou celui du nom de l’élément protégé change à l’avenir.
 
 <br>
 
@@ -471,7 +471,7 @@ Pour déclencher une sauvegarde à la demande, voici les composants du corps de 
 | ---------- | -------------------------- | --------------------------------- |
 | Propriétés | AzurefilesharebackupReques | Propriétés BackupRequestResource |
 
-Pour obtenir la liste complète des définitions du corps de la demande et d’autres détails, reportez-vous au [document sur l’API REST déclencher des sauvegardes pour les éléments protégés](https://docs.microsoft.com/rest/api/backup/backups/trigger#request-body).
+Pour obtenir la liste complète des définitions du corps de la demande et d’autres détails, reportez-vous au [document sur l’API REST déclencher des sauvegardes pour les éléments protégés](/rest/api/backup/backups/trigger#request-body).
 
 Exemple de corps de la demande
 
@@ -487,13 +487,13 @@ Exemple de corps de la demande
 }
 ```
 
-### <a name="responses"></a>Réponses
+### <a name="responses-to-the-on-demand-backup-operation"></a>Réponses à l’opération de sauvegarde à la demande
 
-Le déclenchement d’une sauvegarde à la demande est une [opération asynchrone](https://docs.microsoft.com/azure/azure-resource-manager/resource-manager-async-operations). ce qui signifie qu’elle crée une autre opération qui doit faire l’objet d’un suivi distinct.
+Le déclenchement d’une sauvegarde à la demande est une [opération asynchrone](../azure-resource-manager/management/async-operations.md). ce qui signifie qu’elle crée une autre opération qui doit faire l’objet d’un suivi distinct.
 
 Elle retourne deux réponses : 202 (Accepté) lors de la création d’une autre opération, et 200 (OK) quand cette opération est terminée.
 
-### <a name="example-responses"></a>Exemples de réponses
+### <a name="example-responses-to-the-on-demand-backup-operation"></a>Exemples de réponses à l’opération de sauvegarde à la demande
 
 Une fois que vous envoyez la demande *POST* pour une sauvegarde à la demande, la réponse initiale est 202 (Accepté) avec un en-tête d’emplacement ou Azure-async-header.
 
@@ -540,7 +540,7 @@ Une fois l’opération terminée, elle retourne 200 (OK) avec l’ID du travail
 }
 ```
 
-Comme le travail de sauvegarde est une opération longue, il doit être suivi comme expliqué dans le [document surveiller les travaux avec une API REST](https://docs.microsoft.com/azure/backup/backup-azure-arm-userestapi-managejobs#tracking-the-job).
+Comme le travail de sauvegarde est une opération longue, il doit être suivi comme expliqué dans le [document surveiller les travaux avec une API REST](./backup-azure-arm-userestapi-managejobs.md#tracking-the-job).
 
 ## <a name="next-steps"></a>Étapes suivantes
 

@@ -1,17 +1,18 @@
 ---
 title: Guide de démarrage rapide pour l’ajout d’indicateurs de fonctionnalités à Spring Boot avec Azure App Configuration
 description: Ajouter des indicateurs de fonctionnalités aux applications Spring Boot et les gérer à l’aide d’Azure App Configuration
-author: lisaguthrie
+author: AlexandraKemperMS
 ms.service: azure-app-configuration
 ms.topic: quickstart
-ms.date: 04/18/2020
-ms.author: lcozzens
-ms.openlocfilehash: a0d3c23f8f53b8ddfbd3fbd1cb1744a47664ce08
-ms.sourcegitcommit: 318d1bafa70510ea6cdcfa1c3d698b843385c0f6
+ms.date: 08/06/2020
+ms.author: alkemper
+ms.custom: devx-track-java
+ms.openlocfilehash: e931b974fc48d07237b2698e7782c48be20745d9
+ms.sourcegitcommit: 1756a8a1485c290c46cc40bc869702b8c8454016
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83774019"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96930708"
 ---
 # <a name="quickstart-add-feature-flags-to-a-spring-boot-app"></a>Démarrage rapide : Ajouter des indicateurs de fonctionnalité à une application Spring Boot
 
@@ -22,14 +23,14 @@ Les bibliothèques de gestion des fonctionnalités Spring Boot étendent le fram
 ## <a name="prerequisites"></a>Prérequis
 
 * Abonnement Azure : [créez-en un gratuitement](https://azure.microsoft.com/free/)
-* Un [kit SDK de développement Java](https://docs.microsoft.com/java/azure/jdk) pris en charge avec version 8
+* Un [kit SDK de développement Java](/java/azure/jdk) pris en charge avec version 8
 * [Apache Maven](https://maven.apache.org/download.cgi) version 3.0 ou ultérieure
 
 ## <a name="create-an-app-configuration-instance"></a>Créer une instance d’App Configuration
 
 [!INCLUDE [azure-app-configuration-create](../../includes/azure-app-configuration-create.md)]
 
-6. Sélectionnez **Gestionnaire de fonctionnalités** >  **+Ajouter** pour ajouter un indicateur de fonctionnalité appelé `Beta`.
+7. Sélectionnez **Gestionnaire de fonctionnalités** >  **+Ajouter** pour ajouter un indicateur de fonctionnalité appelé `Beta`.
 
     > [!div class="mx-imgBorder"]
     > ![Activer l’indicateur de fonctionnalité nommé Beta](media/add-beta-feature-flag.png)
@@ -63,12 +64,12 @@ Utilisez [Spring Initializr](https://start.spring.io/) pour créer un projet Spr
     <dependency>
         <groupId>com.microsoft.azure</groupId>
         <artifactId>spring-cloud-azure-appconfiguration-config-web</artifactId>
-        <version>1.1.2</version>
+        <version>1.1.5</version>
     </dependency>
     <dependency>
         <groupId>com.microsoft.azure</groupId>
         <artifactId>spring-cloud-azure-feature-management-web</artifactId>
-        <version>1.1.2</version>
+        <version>1.1.5</version>
     </dependency>
     <dependency>
         <groupId>org.springframework.boot</groupId>
@@ -82,12 +83,12 @@ Utilisez [Spring Initializr](https://start.spring.io/) pour créer un projet Spr
     <dependency>
         <groupId>com.microsoft.azure</groupId>
         <artifactId>spring-cloud-azure-appconfiguration-config-web</artifactId>
-        <version>1.2.2</version>
+        <version>1.2.7</version>
     </dependency>
     <dependency>
         <groupId>com.microsoft.azure</groupId>
         <artifactId>spring-cloud-azure-feature-management-web</artifactId>
-        <version>1.2.2</version>
+        <version>1.2.7</version>
     </dependency>
     <dependency>
         <groupId>org.springframework.boot</groupId>
@@ -96,7 +97,7 @@ Utilisez [Spring Initializr](https://start.spring.io/) pour créer un projet Spr
     ```
 
 > [!Note]
-> Il existe une bibliothèque de gestion des fonctionnalités non web qui n’a pas de dépendance envers spring-web. Consultez la [documentation](https://github.com/microsoft/spring-cloud-azure/tree/master/spring-cloud-azure-feature-management) de GitHub pour connaître les différences.
+> Il existe une bibliothèque de gestion des fonctionnalités non web qui n’a pas de dépendance envers spring-web. Consultez la [documentation](https://github.com/microsoft/spring-cloud-azure) de GitHub pour connaître les différences.
 
 ## <a name="connect-to-an-app-configuration-store"></a>Se connecter à un magasin App Configuration
 
@@ -227,7 +228,7 @@ Utilisez [Spring Initializr](https://start.spring.io/) pour créer un projet Spr
         </header>
         <div class="container body-content">
             <h1 class="mt-5">Welcome</h1>
-            <p>Learn more about <a href="https://github.com/microsoft/spring-cloud-azure/blob/master/spring-cloud-azure-feature-management/README.md">Feature Management with Spring Cloud Azure</a></p>
+            <p>Learn more about <a href="https://github.com/Azure/azure-sdk-for-java/blob/master/sdk/appconfiguration/azure-spring-cloud-feature-management/README.md">Feature Management with Spring Cloud Azure</a></p>
 
         </div>
         <footer class="footer">
@@ -285,7 +286,7 @@ Utilisez [Spring Initializr](https://start.spring.io/) pour créer un projet Spr
 
 1. Ouvrez une fenêtre de navigateur, puis accédez à l’URL : `http://localhost:8080/welcome`.
 
-    ![Démarrage rapide du lancement d’application local](./media/quickstarts/spring-boot-feature-flag-local-before.png)
+    ![Capture d’écran montrant une fenêtre de navigateur avec un message d’accueil.](./media/quickstarts/spring-boot-feature-flag-local-before.png)
 
 1. Dans le portail App Configuration, sélectionnez **Gestionnaire de fonctionnalités**, puis changez la valeur de la clé **Bêta** en **On** :
 
@@ -295,7 +296,7 @@ Utilisez [Spring Initializr](https://start.spring.io/) pour créer un projet Spr
 
 1. Actualisez la page de navigateur pour afficher les nouveaux paramètres de configuration.
 
-    ![Démarrage rapide du lancement d’application local](./media/quickstarts/spring-boot-feature-flag-local-after.png)
+    ![Capture d’écran montrant une fenêtre de navigateur avec un message de bienvenue et un lien bêta activé.](./media/quickstarts/spring-boot-feature-flag-local-after.png)
 
 ## <a name="clean-up-resources"></a>Nettoyer les ressources
 
@@ -303,7 +304,7 @@ Utilisez [Spring Initializr](https://start.spring.io/) pour créer un projet Spr
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Dans ce guide de démarrage rapide, vous avez créé un magasin App Configuration et vous l’avez utilisé pour gérer les fonctionnalités dans une application web Spring Boot via les [bibliothèques de gestion des fonctionnalités](https://go.microsoft.com/fwlink/?linkid=2074664).
+Dans ce guide de démarrage rapide, vous avez créé un magasin App Configuration et vous l’avez utilisé pour gérer les fonctionnalités dans une application web Spring Boot via les [bibliothèques de gestion des fonctionnalités](/dotnet/api/Microsoft.Extensions.Configuration.AzureAppConfiguration).
 
 * Découvrez plus d’informations sur la [gestion des fonctionnalités](./concept-feature-management.md).
 * [Gérer les indicateurs de fonctionnalité](./manage-feature-flags.md).

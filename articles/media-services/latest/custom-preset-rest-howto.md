@@ -3,23 +3,25 @@ title: Encoder une transformation personnalisée avec Media Services v3 REST - A
 description: Cette rubrique explique comment utiliser Azure Media Services v3 pour encoder une transformation personnalisée à l’aide de REST.
 services: media-services
 documentationcenter: ''
-author: Juliako
+author: IngridAtMicrosoft
 manager: femila
 editor: ''
 ms.service: media-services
 ms.workload: ''
-ms.topic: article
+ms.topic: how-to
 ms.custom: ''
-ms.date: 05/14/2019
-ms.author: juliako
-ms.openlocfilehash: 30e22cb786e5dc2a667fe41ca8edf398cf0b7613
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 08/31/2020
+ms.author: inhenkel
+ms.openlocfilehash: 2656bf93cb9c29ded4b9dde49f0caba91c1654b7
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "65761791"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89295629"
 ---
 # <a name="how-to-encode-with-a-custom-transform---rest"></a>Comment encoder avec une transformation personnalisée - REST
+
+[!INCLUDE [media services api v3 logo](./includes/v3-hr.md)]
 
 Lors de l’encodage avec Azure Media Services, vous pouvez commencer rapidement avec l’un des préréglages intégrés recommandés et basés sur les bonnes pratiques, comme illustré dans le didacticiel [Streaming de fichiers](stream-files-tutorial-with-rest.md#create-a-transform). Vous pouvez également créer un préréglage personnalisé pour les besoins de votre scénario ou votre appareil.
 
@@ -32,7 +34,7 @@ Lorsque vous créez des préréglages personnalisés, les considérations suivan
 
 ## <a name="prerequisites"></a>Prérequis 
 
-- [Créer un compte Media Services](create-account-cli-how-to.md). <br/>Veillez à mémoriser le nom du groupe de ressources et le nom du compte Media Services. 
+- [Créer un compte Media Services](./create-account-howto.md). <br/>Veillez à mémoriser le nom du groupe de ressources et le nom du compte Media Services. 
 - [Configurer Postman pour les appels d’API REST Azure Media Services](media-rest-apis-with-postman.md).<br/>Suivez la dernière étape de la rubrique [Obtenir un jeton Azure AD](media-rest-apis-with-postman.md#get-azure-ad-token). 
 
 ## <a name="define-a-custom-preset"></a>Définir un préréglage personnalisé
@@ -133,7 +135,7 @@ Dans cet exemple, nous ajoutons tout d’abord une couche AacAudio pour l’enco
 
 ## <a name="create-a-new-transform"></a>Créer une transformation  
 
-Dans cet exemple, nous créons une **transformation** qui repose sur le préréglage personnalisé que nous avons défini précédemment. Lorsque vous créez une transformation, vous devez tout d’abord vérifier s’il en existe déjà une à l’aide de la méthode [Get](https://docs.microsoft.com/rest/api/media/transforms/get). Si la transformation existe, réutilisez-la. 
+Dans cet exemple, nous créons une **transformation** qui repose sur le préréglage personnalisé que nous avons défini précédemment. Lorsque vous créez une transformation, vous devez tout d’abord vérifier s’il en existe déjà une à l’aide de la méthode [Get](/rest/api/media/transforms/get). Si la transformation existe, réutilisez-la. 
 
 Dans la collection de Postman que vous avez téléchargée, sélectionnez **Transformations et travaux**->**Create or Update Transform** (Créer ou mettre à jour une transformation).
 
@@ -151,4 +153,4 @@ Pour que la plateforme Media Services applique la transformation au fichier vid�
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Consultez les [autres opérations REST](https://docs.microsoft.com/rest/api/media/).
+Consultez les [autres opérations REST](/rest/api/media/).

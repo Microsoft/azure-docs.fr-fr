@@ -10,16 +10,31 @@
   items:
     - name: Attribuer une stratégie - Portail
       displayName: 'assign, compliance'
-      href: assign-policy-portal.md
-    - name: "Attribuer une stratégie\_- Azure PowerShell"
-      displayName: 'assign, compliance'
-      href: assign-policy-powershell.md
+      href: ./assign-policy-portal.md
     - name: Attribuer une stratégie - Azure CLI
       displayName: 'assign, compliance'
-      href: assign-policy-azurecli.md
+      href: ./assign-policy-azurecli.md
+    - name: "Attribuer une stratégie\_- Azure PowerShell"
+      displayName: 'assign, compliance'
+      href: ./assign-policy-powershell.md
+    - name: Attribuer une stratégie - .NET
+      displayName: 'assign, compliance'
+      href: ./assign-policy-dotnet.md
+    - name: Attribuer une stratégie - JavaScript
+      displayName: 'assign, compliance'
+      href: ./assign-policy-javascript.md
+    - name: Attribuer une stratégie - Python
+      displayName: 'assign, compliance'
+      href: ./assign-policy-python.md
+    - name: Attribuer une stratégie - REST
+      displayName: 'armclient, postman'
+      href: ./assign-policy-rest-api.md
     - name: "Attribuer une stratégie\_- Modèle ARM"
       displayName: 'assign, compliance, resource manager'
-      href: assign-policy-template.md
+      href: ./assign-policy-template.md
+    - name: Attribuer une stratégie - Terraform
+      displayName: 'assign, compliance, hcl, provider'
+      href: ./assign-policy-terraform.md
 - name: Tutoriels
   items:
     - name: Créer et gérer une stratégie Azure
@@ -31,6 +46,12 @@
     - name: Gérer la gouvernance des balises
       displayName: 'modify, append, effects'
       href: ./tutorials/govern-tags.md
+    - name: Implémenter Azure Policy en tant que code avec GitHub
+      displayName: 'devops, infrastructure as code, iac, release, continuous, delivery, deploy'
+      href: ./tutorials/policy-as-code-github.md
+    - name: 'Découvrez : Contrôler et auditer vos ressources en utilisant Azure Policy'
+      displayName: 'governance, module'
+      href: /learn/modules/build-cloud-governance-strategy-azure/8-control-audit-resources-azure-policy
 - name: Exemples
   items:
     - name: Index
@@ -60,29 +81,65 @@
           href: ./samples/pattern-group-with-initiative.md
         - name: Déployer des ressources
           href: ./samples/pattern-deploy-resources.md
+    - name: Éléments intégrés de la conformité réglementaire
+      items:
+        - name: Benchmark de sécurité Azure
+          href: ./samples/azure-security-benchmark.md
+        - name: "CIS Microsoft Azure Foundations Benchmark\_1.1.0"
+          href: ./samples/cis-azure-1-1-0.md
+        - name: HIPAA HITRUST 9.2
+          href: ./samples/hipaa-hitrust-9-2.md
+        - name: "NIST SP\_800-53 R4"
+          href: ./samples/nist-sp-800-53-r4.md
+        - name: NIST SP 800-171 R2
+          href: ./samples/nist-sp-800-171-r2.md
 - name: Concepts
   items:
-    - name: Structure de définition Azure Policy
+    - name: Structure de définition
       displayName: 'parameters, location, rule, alias, initiatives'
       href: ./concepts/definition-structure.md
-    - name: Comprendre les effets de Policy
+    - name: Comprendre les effets
       displayName: 'order, evaluation'
       href: ./concepts/effects.md
-    - name: Structure d’attribution Azure Policy
+    - name: Étendue
+      displayName: 'location, notScope, exemption, waiver, save'
+      href: ./concepts/scope.md
+    - name: Structure d’initiative
+      displayName: 'parameters, groups, domains, policies'
+      href: ./concepts/initiative-definition-structure.md
+    - name: Structure d’attribution
       displayName: 'parameters, enforcementmode, policyDefinitionId'
       href: ./concepts/assignment-structure.md
+    - name: Structure d’exemption
+      displayName: 'waiver, mitigated, compliance'
+      href: ./concepts/exemption-structure.md
     - name: Évaluer l’impact d’une nouvelle stratégie
       displayName: 'audit, enforcementmode, compliance'
       href: ./concepts/evaluate-impact.md
-    - name: Concevoir des workflows de type Policy as Code
+    - name: Stratégies recommandées
+      displayName: 'VMs, virtual machines'
+      href: ./concepts/recommended-policies.md
+    - name: Conformité réglementaire
+      displayName: 'standards, domains, controls'
+      href: ./concepts/regulatory-compliance.md
+    - name: Concevoir des workflows Azure Policy en tant que code
       displayName: 'devops, infrastructure as code, iac, release, continuous, delivery, deploy'
       href: ./concepts/policy-as-code.md
-    - name: Azure Policy pour Kubernetes (préversion)
-      displayName: 'aks, engine, k8s, rego, opa, open policy agent, gatekeeper, v3, crd, constraints, arc'
-      href: ./concepts/policy-for-kubernetes.md
+    - name: Intégration à Kubernetes
+      items:
+        - name: Azure Policy pour Kubernetes
+          displayName: 'aks, engine, k8s, rego, opa, open policy agent, gatekeeper, v3, crd, constraints, arc'
+          href: ./concepts/policy-for-kubernetes.md
+        - name: Sécuriser les pods avec Azure Policy
+          displayName: 'aks, psp, rego, opa'
+          href: ../../aks/use-pod-security-on-azure-policy.md?toc=/azure/governance/policy/toc.json&bc=/azure/governance/policy/breadcrumb/toc.json
     - name: Auditer les machines virtuelles avec la configuration invité
       displayName: 'provider, tools, definition'
       href: ./concepts/guest-configuration.md
+    - name: Sécurité
+      items:
+        - name: Base de référence de la sécurité pour Azure Security Benchmark
+          href: ./concepts/azure-security-benchmark-baseline.md
 - name: Guides pratiques
   items:
     - name: Extension Azure Policy pour VS Code
@@ -94,12 +151,20 @@
     - name: Créer des stratégies pour les propriétés de tableau
       displayName: 'array property, alias, aliases, in, notIn, type, defaultValue'
       href: ./how-to/author-policies-for-arrays.md
-    - name: Créer une stratégie Guest Configuration sur Windows
-      displayName: 'powershell, dsc, chef, windows'
-      href: ./how-to/guest-configuration-create.md
-    - name: Créer une stratégie Guest Configuration sur Linux
-      displayName: 'powershell, dsc, chef, linux'
-      href: ./how-to/guest-configuration-create-linux.md
+    - name: Exporter les ressources Azure Policy
+      displayName: 'github, json, definition'
+      href: ./how-to/export-resources.md
+    - name: Guest Configuration
+      items:
+        - name: Créer une stratégie Guest Configuration sur Windows
+          displayName: 'powershell, dsc, chef, windows'
+          href: ./how-to/guest-configuration-create.md
+        - name: Créer une stratégie Guest Configuration sur Linux
+          displayName: 'powershell, dsc, chef, linux'
+          href: ./how-to/guest-configuration-create-linux.md
+        - name: Créer une stratégie Guest Configuration à partir d’une stratégie de groupe
+          displayName: 'powershell, dsc, grouppolicy, windows'
+          href: ./how-to/guest-configuration-create-group-policy.md
     - name: Obtenir des données de conformité
       displayName: 'evaluation, scan, summarize, query, events, log analytics'
       href: ./how-to/get-compliance-data.md
@@ -113,7 +178,7 @@
       items:
         - name: Intégrer Key Vault à Azure Policy
           displayName: 'key vault, certificate, key'
-          href: ../../key-vault/azure-policy.md?toc=/azure/governance/policy/toc.json&bc=/azure/governance/policy/breadcrumb/toc.json
+          href: ../../key-vault/general/azure-policy.md?bc=/azure/governance/policy/breadcrumb/toc.json&toc=/azure/governance/policy/toc.json
     - name: Intégration d’Azure Lighthouse
       items:
         - name: Déployer une stratégie à grande échelle
@@ -124,9 +189,26 @@
           href: ../../lighthouse/how-to/deploy-policy-remediation.md?toc=/azure/governance/policy/toc.json&bc=/azure/governance/policy/breadcrumb/toc.json
     - name: Intégration d’Azure Monitor
       items:
+        - name: Déployer Azure Monitor à grande échelle
+          displayName: 'monitor, diagnostic settings, dependency agent'
+          href: ../../azure-monitor/deploy-scale.md?toc=/azure/governance/policy/toc.json&bc=/azure/governance/policy/breadcrumb/toc.json
         - name: Activer Azure Monitor pour machines virtuelles (préversion)
           displayName: 'monitor, insights, log analytics, builtin'
-          href: ../../azure-monitor/insights/vminsights-enable-at-scale-policy.md?toc=/azure/governance/policy/toc.json&bc=/azure/governance/policy/breadcrumb/toc.json
+          href: ../../azure-monitor/insights/vminsights-enable-policy.md?toc=/azure/governance/policy/toc.json&bc=/azure/governance/policy/breadcrumb/toc.json
+    - name: Intégration du Stockage Azure
+      items:
+        - name: Auditer TLS avec Azure Policy
+          href: ../../storage/common/transport-layer-security-configure-minimum-version.md?toc=/azure/governance/policy/toc.json&bc=/azure/governance/policy/breadcrumb/toc.json#use-azure-policy-to-enforce-the-minimum-tls-version
+    - name: Intégration d’Azure Web Application Firewall
+      items:
+        - name: Intégrer WAF à Azure Policy
+          href: ../../web-application-firewall/shared/waf-azure-policy.md?toc=/azure/governance/policy/toc.json&bc=/azure/governance/policy/breadcrumb/toc.json
+- name: Dépanner
+  items:
+    - name: Problèmes courants
+      href: ./troubleshoot/general.md
+    - name: Problèmes connus
+      href: 'https://github.com/azure/azure-policy#known-issues'
 - name: Informations de référence
   items:
     - name: Azure CLI
@@ -134,9 +216,9 @@
     - name: Azure PowerShell
       items:
         - name: Policy
-          href: '/powershell/module/az.resources/#policies'
+          href: /powershell/module/az.resources#policy
         - name: Policy Insights
-          href: '/powershell/module/az.policyinsights#policy_insights'
+          href: /powershell/module/az.policyinsights
         - name: Guest Configuration
           href: 'https://www.powershellgallery.com/packages/Az.GuestConfiguration'
     - name: Kit SDK Azure pour .NET
@@ -148,10 +230,10 @@
     - name: Kit SDK Azure pour Java
       items:
         - name: Attributions
-          href: /java/api/com.microsoft.azure.management.resources.policyassignment?view=azure-java-stable
+          href: /java/api/com.microsoft.azure.management.resources.policyassignment
         - name: Définitions de stratégies
-          href: /java/api/com.microsoft.azure.management.resources.PolicyDefinitions?view=azure-java-stable
-    - name: SDK Azure pour Node
+          href: /java/api/com.microsoft.azure.management.resources.PolicyDefinitions
+    - name: Kit SDK Azure pour JavaScript
       items:
         - name: Policy
           href: /javascript/api/@azure/arm-policy
@@ -175,6 +257,8 @@
           href: /rest/api/resources/policyassignments
         - name: Définitions de stratégies
           href: /rest/api/resources/policydefinitions
+        - name: Exemptions de stratégies
+          href: /rest/api/resources/policyexemptions
         - name: Définitions d’initiatives
           href: /rest/api/resources/policysetdefinitions
         - name: Ressources suivies par les stratégies
@@ -191,31 +275,59 @@
           href: /azure/templates/microsoft.authorization/policydefinitions
         - name: Définitions d’initiatives
           href: /azure/templates/microsoft.authorization/policysetdefinitions
+    - name: Ressources Terraform
+      items:
+        - name: Affectation
+          href: 'https://www.terraform.io/docs/providers/azurerm/r/policy_assignment.html'
+        - name: Définition
+          href: 'https://www.terraform.io/docs/providers/azurerm/r/policy_definition.html'
+        - name: Initiative (créer une définition)
+          href: 'https://www.terraform.io/docs/providers/azurerm/r/policy_set_definition.html'
+        - name: Correction
+          href: 'https://www.terraform.io/docs/providers/azurerm/r/policy_remediation.html'
 - name: Ressources
   items:
     - name: GitHub - Exemples Azure Policy
       href: 'https://github.com/Azure/azure-policy'
-    - name: GitHub - Dépôt Community Policy
-      href: 'https://github.com/Azure/Community-Policy'
-    - name: Microsoft Q&A pour Azure Policy
-      href: /answers/topics/azure-policy.html.html
-    - name: Chaîne YouTube Governance
-      href: 'https://www.youtube.com/channel/UCZZ3-oMrVI5ssheMzaWC4uQ'
-    - name: Vidéos de configuration invité
+    - name: Outils de la communauté
       items:
-        - name: Mise en route
-          href: 'https://www.youtube.com/watch?v=mjJw9_EIyHo'
-        - name: Compréhension des initiatives
-          href: 'https://www.youtube.com/watch?v=4JZH3kuG8bI'
-        - name: Attribuer la stratégie
-          href: 'https://www.youtube.com/watch?v=fbZBaxcjA-Y'
-        - name: Tâche de correction
-          href: 'https://www.youtube.com/watch?v=URE4DUYMgmg'
-    - name: "Vidéo - Version\_2018"
-      href: 'https://channel9.msdn.com/events/Build/2018/THR2030'
+        - name: GitHub - Dépôt Community Policy
+          href: 'https://github.com/Azure/Community-Policy'
+        - name: Action GitHub pour l’analyse de conformité Azure Policy
+          href: 'https://github.com/marketplace/actions/azure-policy-compliance-scan'
+        - name: Tableau de bord de gouvernance Azure CCO
+          href: 'https://github.com/Azure/ccodashboard/blob/master/README.md#cco-azure-governance-dashboard-report-pages'
+        - name: AzAdvertizer
+          href: 'https://www.azadvertizer.net/'
+        - name: Visualiseur de gouvernance Azure
+          href: 'https://github.com/julianhayward/azure-mg-sub-governance-reporting'
+        - name: Scripts Azure Policy pour Azure Monitor
+          href: 'https://github.com/JimGBritt/AzurePolicy/tree/master/AzureMonitor/Scripts'
+    - name: Commentaires et support
+      items:
+        - name: Microsoft Q&A pour Azure Policy
+          href: /answers/topics/azure-policy.html
+        - name: Ticket de support Azure
+          href: 'https://azure.microsoft.com/support/create-ticket/'
+        - name: UserVoice
+          href: 'https://feedback.azure.com/forums/915958-azure-governance?category_id=345055'
+    - name: Vidéos
+      items:
+        - name: Chaîne YouTube Governance
+          href: 'https://www.youtube.com/channel/UCZZ3-oMrVI5ssheMzaWC4uQ'
+        - name: "Vidéo - Ignite\_2019"
+          href: 'https://myignite.techcommunity.microsoft.com/sessions/81584?source=sessions'
+        - name: Vidéos de configuration invité
+          items:
+            - name: Mise en route
+              href: 'https://www.youtube.com/watch?v=mjJw9_EIyHo'
+            - name: Compréhension des initiatives
+              href: 'https://www.youtube.com/watch?v=4JZH3kuG8bI'
+            - name: Attribuer la stratégie
+              href: 'https://www.youtube.com/watch?v=fbZBaxcjA-Y'
+            - name: Tâche de correction
+              href: 'https://www.youtube.com/watch?v=URE4DUYMgmg'
     - name: Feuille de route Azure
       href: 'https://azure.microsoft.com/roadmap/'
     - name: Calculatrice de prix
       href: 'https://azure.microsoft.com/pricing/calculator/'
-    - name: UserVoice
-      href: 'https://feedback.azure.com/forums/915958-azure-governance?category_id=345055'

@@ -1,22 +1,15 @@
 ---
 title: Azure PowerShell - S’abonner à un abonnement Azure
 description: Cet article fournit un exemple de script Azure PowerShell qui montre comment s’abonner à des événements Event Grid pour un abonnement Azure.
-services: event-grid
-documentationcenter: na
-author: spelluru
-ms.service: event-grid
 ms.devlang: powershell
 ms.topic: sample
-ms.tgt_pltfrm: na
-ms.workload: na
-ms.date: 01/23/2020
-ms.author: spelluru
-ms.openlocfilehash: 4a6539966ff2e907c4f6f942dd0c238ee35b6836
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.date: 07/08/2020
+ms.openlocfilehash: 0aae1d64b789cedab6420ac1f323a2379bff17be
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "76721453"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87460811"
 ---
 # <a name="subscribe-to-events-for-an-azure-subscription-with-powershell"></a>S’abonner aux événements d’un abonnement Azure avec PowerShell
 
@@ -44,9 +37,9 @@ Ce script utilise la commande suivante pour créer l’abonnement aux événemen
 
 | Commande | Notes |
 |---|---|
-| [New-AzEventGridSubscription](https://docs.microsoft.com/powershell/module/az.eventgrid/new-azeventgridsubscription) | Créer un abonnement Event Grid. |
+| [New-AzEventGridSubscription](/powershell/module/az.eventgrid/new-azeventgridsubscription) | Créer un abonnement Event Grid. |
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 * Pour voir une présentation des applications gérées, consultez [Vue d’ensemble des applications gérées Azure](../overview.md).
-* Pour plus d’informations sur PowerShell, consultez la [documentation Azure PowerShell](https://docs.microsoft.com/powershell/azure/get-started-azureps).
+* Pour plus d’informations sur PowerShell, consultez la [documentation Azure PowerShell](/powershell/azure/get-started-azureps).

@@ -8,12 +8,12 @@ ms.service: hdinsight
 ms.custom: mvc
 ms.topic: quickstart
 ms.date: 06/12/2019
-ms.openlocfilehash: d14d8f38ff8a2bed01584d5c5fec56d254cede05
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: 57cbfa356961aca778032b6e3552cffb88b6ab3d
+ms.sourcegitcommit: d767156543e16e816fc8a0c3777f033d649ffd3c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "73494756"
+ms.lasthandoff: 10/26/2020
+ms.locfileid: "92533000"
 ---
 # <a name="quickstart-create-apache-kafka-cluster-in-azure-hdinsight-using-powershell"></a>Démarrage rapide : Créer un cluster Apache Kafka dans Azure HDInsight à l’aide de PowerShell
 
@@ -31,7 +31,7 @@ Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://az
 
 [!INCLUDE [updated-for-az](../../../includes/updated-for-az.md)]
 
-* Le [module Az](https://docs.microsoft.com/powershell/azure/overview) PowerShell installé.
+* Le [module Az](/powershell/azure/) PowerShell installé.
 
 * Un client SSH. Pour plus d’informations, consultez [Se connecter à HDInsight (Apache Hadoop) à l’aide de SSH](../hdinsight-hadoop-linux-use-ssh-unix.md).
 
@@ -133,7 +133,7 @@ New-AzHDInsightCluster `
 
 La création du cluster HDInsight peut prendre jusqu’à 20 minutes.
 
-Le paramètre `-DisksPerWorkerNode` configure l’évolutivité de Kafka sur HDInsight. Kafka sur HDInsight utilise le disque local des machines virtuelles du cluster pour stocker les données. En raison de son utilisation intensive des E/S, Kafka utilise [Azure Disques managés](../../virtual-machines/windows/managed-disks-overview.md) pour obtenir un débit élevé et davantage de stockage à chaque nœud.
+Le paramètre `-DisksPerWorkerNode` configure l’évolutivité de Kafka sur HDInsight. Kafka sur HDInsight utilise le disque local des machines virtuelles du cluster pour stocker les données. En raison de son utilisation intensive des E/S, Kafka utilise [Azure Disques managés](../../virtual-machines/managed-disks-overview.md) pour obtenir un débit élevé et davantage de stockage à chaque nœud.
 
 Le type de disque managé peut être soit __Standard__ (HDD), soit __Premium__ (SSD). Le type de disque dépend de la taille de la machine virtuelle utilisée par les nœuds de travail (brokers Kafka). Les disques Premium sont utilisés automatiquement avec les machines virtuelles des séries DS et GS. Tous les autres types de machines virtuelles utilisent des disques Standard. Vous pouvez définir le type de machine virtuelle à l’aide du paramètre `-WorkerNodeSize`. Pour plus d’informations sur les paramètres, consultez la documentation de [New-AzHDInsightCluster](/powershell/module/az.HDInsight/New-azHDInsightCluster).
 
@@ -147,7 +147,7 @@ Si vous envisagez d’utiliser plus de 32 nœuds de travail lors de la création
     ssh sshuser@mykafka-ssh.azurehdinsight.net
     ```
 
-2. Lors de votre première connexion au cluster, il est possible que votre client SSH affiche un message d’avertissement, indiquant que l’authenticité de l’hôte n’a pas pu être établie. À l’invite, tapez __yes__, puis appuyez sur __Entrée__ pour ajouter l’hôte à la liste de serveurs approuvés de votre client SSH.
+2. Lors de votre première connexion au cluster, il est possible que votre client SSH affiche un message d’avertissement, indiquant que l’authenticité de l’hôte n’a pas pu être établie. À l’invite, tapez __yes__ , puis appuyez sur __Entrée__ pour ajouter l’hôte à la liste de serveurs approuvés de votre client SSH.
 
 3. Lorsque vous y êtes invité, entrez le mot de passe de l’utilisateur SSH.
 
@@ -176,7 +176,7 @@ Last login: Thu Mar 29 13:25:27 2018 from 108.252.109.241
 
 ## <a name="get-the-apache-zookeeper-and-broker-host-information"></a><a id="getkafkainfo"></a>Obtenir des informations sur les hôtes Apache Zookeeper et Broker
 
-Si vous utilisez Kafka, vous devez connaître les hôtes *Apache ZooKeeper* et *Broker*. Ces hôtes sont utilisés avec l’API Kafka et la plupart des utilitaires fournis avec Kafka.
+Si vous utilisez Kafka, vous devez connaître les hôtes *Apache ZooKeeper* et *Broker* . Ces hôtes sont utilisés avec l’API Kafka et la plupart des utilitaires fournis avec Kafka.
 
 Dans cette section, vous allez obtenir les informations sur l’hôte grâce à l’API REST Apache Ambari sur le cluster.
 
@@ -232,15 +232,15 @@ Dans cette section, vous allez obtenir les informations sur l’hôte grâce à 
 
 ## <a name="manage-apache-kafka-topics"></a>Gérer les rubriques Apache Kafka
 
-Kafka stocke les flux de données dans des *rubriques*. Vous pouvez utiliser l’utilitaire `kafka-topics.sh` pour gérer les rubriques.
+Kafka stocke les flux de données dans des *rubriques* . Vous pouvez utiliser l’utilitaire `kafka-topics.sh` pour gérer les rubriques.
 
-* **Pour créer une rubrique**, utilisez la commande suivante dans la connexion SSH :
+* **Pour créer une rubrique** , utilisez la commande suivante dans la connexion SSH :
 
     ```bash
     /usr/hdp/current/kafka-broker/bin/kafka-topics.sh --create --replication-factor 3 --partitions 8 --topic test --zookeeper $KAFKAZKHOSTS
     ```
 
-    Cette commande se connecte à Zookeeper par le biais des informations d’hôte stockées dans `$KAFKAZKHOSTS`. Elle crée ensuite une rubrique Kafka nommée **test**. 
+    Cette commande se connecte à Zookeeper par le biais des informations d’hôte stockées dans `$KAFKAZKHOSTS`. Elle crée ensuite une rubrique Kafka nommée **test** . 
 
     * Les données stockées dans cette rubrique sont partitionnées sur huit partitions.
 
@@ -250,7 +250,7 @@ Kafka stocke les flux de données dans des *rubriques*. Vous pouvez utiliser l�
         
         Dans les régions comportant trois domaines d’erreur, un facteur de réplication de trois permet de répartir les réplicas entre les domaines d’erreur. Dans celles qui comptent deux domaines d’erreur, un facteur de réplication de quatre répartit uniformément les réplicas entre les domaines.
         
-        Pour plus d’informations sur le nombre de domaines d’erreur dans une région, consultez le document [Disponibilité des machines virtuelles Linux](../../virtual-machines/windows/manage-availability.md#use-managed-disks-for-vms-in-an-availability-set).
+        Pour plus d’informations sur le nombre de domaines d’erreur dans une région, consultez le document [Disponibilité des machines virtuelles Linux](../../virtual-machines/manage-availability.md#use-managed-disks-for-vms-in-an-availability-set).
 
         Kafka n’est pas informé des domaines d’erreur Azure. Lors de la création de réplicas de partitions pour les rubriques, il ne peut pas distribuer les réplicas correctement pour la haute disponibilité.
 
@@ -262,7 +262,7 @@ Kafka stocke les flux de données dans des *rubriques*. Vous pouvez utiliser l�
 
         * Vous mettez à l’échelle un cluster
 
-* **Pour lister les rubriques**, utilisez la commande suivante :
+* **Pour lister les rubriques** , utilisez la commande suivante :
 
     ```bash
     /usr/hdp/current/kafka-broker/bin/kafka-topics.sh --list --zookeeper $KAFKAZKHOSTS
@@ -270,7 +270,7 @@ Kafka stocke les flux de données dans des *rubriques*. Vous pouvez utiliser l�
 
     Cette commande liste les rubriques disponibles sur le cluster Kafka.
 
-* **Pour supprimer une rubrique**, utilisez la commande suivante :
+* **Pour supprimer une rubrique** , utilisez la commande suivante :
 
     ```bash
     /usr/hdp/current/kafka-broker/bin/kafka-topics.sh --delete --topic topicname --zookeeper $KAFKAZKHOSTS
@@ -289,7 +289,7 @@ Pour plus d’informations sur les commandes disponibles avec l’utilitaire `ka
 
 ## <a name="produce-and-consume-records"></a>Produire et consommer des enregistrements
 
-Kafka stocke les *enregistrements* dans des rubriques. Les enregistrements sont produits par des *producteurs* et utilisés par des *consommateurs*. Les producteurs et les consommateurs communiquent avec le service *broker Kafka*. Chacun des nœuds de travail de votre cluster HDInsight est un hôte broker Kafka.
+Kafka stocke les *enregistrements* dans des rubriques. Les enregistrements sont produits par des *producteurs* et utilisés par des *consommateurs* . Les producteurs et les consommateurs communiquent avec le service *broker Kafka* . Chacun des nœuds de travail de votre cluster HDInsight est un hôte broker Kafka.
 
 Pour stocker les enregistrements dans la rubrique test créée précédemment, puis les lire à l’aide d’un consommateur, procédez comme suit :
 

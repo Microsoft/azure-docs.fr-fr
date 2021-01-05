@@ -11,17 +11,17 @@ ms.topic: article
 ms.date: 01/10/2020
 ms.author: tdsp
 ms.custom: seodec18, previous-author=deguhath, previous-ms.author=deguhath
-ms.openlocfilehash: 58fa98005d7d89e84404d99cf4f55e456fd91f21
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 3c20bf1c5856276c4c7ee0e37ed4ef2120d1d93d
+ms.sourcegitcommit: 96918333d87f4029d4d6af7ac44635c833abb3da
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76721742"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93322045"
 ---
 # <a name="create-features-for-data-in-sql-server-using-sql-and-python"></a>Créer des fonctionnalités pour les données dans SQL Server à l’aide de SQL et Python
 Ce document montre comment générer des fonctionnalités pour des données stockées dans une machine virtuelle SQL Server sur Azure qui aident les algorithmes à apprendre efficacement à partir des données. Vous pouvez utiliser SQL ou un langage de programmation comme Python pour accomplir cette tâche. Les deux approches sont décrites ici.
 
-Cette tâche est une étape du [processus TDSP (Team Data Science Process)](https://docs.microsoft.com/azure/machine-learning/team-data-science-process/).
+Cette tâche est une étape du [processus TDSP (Team Data Science Process)](./index.yml).
 
 > [!NOTE]
 > Pour découvrir un exemple pratique, vous pouvez consulter le [jeu de données NYC Taxi](https://www.andresmh.com/nyctaxitrips/) et vous reporter au bloc-notes IPython intitulé [NYC Data wrangling using IPython Notebook and SQL Server](https://github.com/Azure/Azure-MachineLearning-DataScience/blob/master/Misc/DataScienceProcess/iPythonNotebooks/machine-Learning-data-science-process-sql-walkthrough.ipynb) (Retraitement des données de New-York City à l’aide de Notebook IPython et de SQL Server) pour connaître la procédure pas à pas.
@@ -49,15 +49,19 @@ Dans cette section, nous décrivons plusieurs manières de générer des fonctio
 ### <a name="count-based-feature-generation"></a><a name="sql-countfeature"></a>Génération de fonctionnalités utilisant des décomptes
 Ce document décrit deux manières de générer des fonctionnalités utilisant des décomptes. La première méthode a recours à une somme conditionnelle, tandis que la seconde méthode utilise la clause « where ». Vous pouvez ensuite associer ces nouvelles fonctionnalités à la table d’origine (à l’aide des colonnes de clé primaire) pour disposer de fonctionnalités de décompte parallèlement aux données d’origine.
 
-    select <column_name1>,<column_name2>,<column_name3>, COUNT(*) as Count_Features from <tablename> group by <column_name1>,<column_name2>,<column_name3>
+```sql
+select <column_name1>,<column_name2>,<column_name3>, COUNT(*) as Count_Features from <tablename> group by <column_name1>,<column_name2>,<column_name3>
 
-    select <column_name1>,<column_name2> , sum(1) as Count_Features from <tablename>
-    where <column_name3> = '<some_value>' group by <column_name1>,<column_name2>
+select <column_name1>,<column_name2> , sum(1) as Count_Features from <tablename>
+where <column_name3> = '<some_value>' group by <column_name1>,<column_name2>
+```
 
 ### <a name="binning-feature-generation"></a><a name="sql-binningfeature"></a>Génération de caractéristiques de compartimentage
 L’exemple ci-dessous illustre comment générer des fonctionnalités compartimentées en divisant (à l’aide de cinq emplacements) une colonne numérique qui peut être plutôt utilisée sous la forme d’une fonctionnalité :
 
-    `SELECT <column_name>, NTILE(5) OVER (ORDER BY <column_name>) AS BinNumber from <tablename>`
+```sql
+SELECT <column_name>, NTILE(5) OVER (ORDER BY <column_name>) AS BinNumber from <tablename>
+```
 
 
 ### <a name="rolling-out-the-features-from-a-single-column"></a><a name="sql-featurerollout"></a>Déploiement des caractéristiques à partir d’une seule colonne
@@ -78,27 +82,29 @@ Voici une brève introduction relative aux données de latitude/longitude (repos
 
 Vous pouvez implémenter les informations de localisation en les répartissant par région, par emplacement et par ville. Il est également possible d’appeler un point de terminaison REST, tel que l’API Bing Cartes (consultez `https://msdn.microsoft.com/library/ff701710.aspx` pour obtenir les informations de région/secteur).
 
-    select
-        <location_columnname>
-        ,round(<location_columnname>,0) as l1        
-        ,l2=case when LEN (PARSENAME(round(ABS(<location_columnname>) - FLOOR(ABS(<location_columnname>)),6),1)) >= 1 then substring(PARSENAME(round(ABS(<location_columnname>) - FLOOR(ABS(<location_columnname>)),6),1),1,1) else '0' end     
-        ,l3=case when LEN (PARSENAME(round(ABS(<location_columnname>) - FLOOR(ABS(<location_columnname>)),6),1)) >= 2 then substring(PARSENAME(round(ABS(<location_columnname>) - FLOOR(ABS(<location_columnname>)),6),1),2,1) else '0' end     
-        ,l4=case when LEN (PARSENAME(round(ABS(<location_columnname>) - FLOOR(ABS(<location_columnname>)),6),1)) >= 3 then substring(PARSENAME(round(ABS(<location_columnname>) - FLOOR(ABS(<location_columnname>)),6),1),3,1) else '0' end     
-        ,l5=case when LEN (PARSENAME(round(ABS(<location_columnname>) - FLOOR(ABS(<location_columnname>)),6),1)) >= 4 then substring(PARSENAME(round(ABS(<location_columnname>) - FLOOR(ABS(<location_columnname>)),6),1),4,1) else '0' end     
-        ,l6=case when LEN (PARSENAME(round(ABS(<location_columnname>) - FLOOR(ABS(<location_columnname>)),6),1)) >= 5 then substring(PARSENAME(round(ABS(<location_columnname>) - FLOOR(ABS(<location_columnname>)),6),1),5,1) else '0' end     
-        ,l7=case when LEN (PARSENAME(round(ABS(<location_columnname>) - FLOOR(ABS(<location_columnname>)),6),1)) >= 6 then substring(PARSENAME(round(ABS(<location_columnname>) - FLOOR(ABS(<location_columnname>)),6),1),6,1) else '0' end     
-    from <tablename>
+```sql
+select
+    <location_columnname>
+    ,round(<location_columnname>,0) as l1        
+    ,l2=case when LEN (PARSENAME(round(ABS(<location_columnname>) - FLOOR(ABS(<location_columnname>)),6),1)) >= 1 then substring(PARSENAME(round(ABS(<location_columnname>) - FLOOR(ABS(<location_columnname>)),6),1),1,1) else '0' end     
+    ,l3=case when LEN (PARSENAME(round(ABS(<location_columnname>) - FLOOR(ABS(<location_columnname>)),6),1)) >= 2 then substring(PARSENAME(round(ABS(<location_columnname>) - FLOOR(ABS(<location_columnname>)),6),1),2,1) else '0' end     
+    ,l4=case when LEN (PARSENAME(round(ABS(<location_columnname>) - FLOOR(ABS(<location_columnname>)),6),1)) >= 3 then substring(PARSENAME(round(ABS(<location_columnname>) - FLOOR(ABS(<location_columnname>)),6),1),3,1) else '0' end     
+    ,l5=case when LEN (PARSENAME(round(ABS(<location_columnname>) - FLOOR(ABS(<location_columnname>)),6),1)) >= 4 then substring(PARSENAME(round(ABS(<location_columnname>) - FLOOR(ABS(<location_columnname>)),6),1),4,1) else '0' end     
+    ,l6=case when LEN (PARSENAME(round(ABS(<location_columnname>) - FLOOR(ABS(<location_columnname>)),6),1)) >= 5 then substring(PARSENAME(round(ABS(<location_columnname>) - FLOOR(ABS(<location_columnname>)),6),1),5,1) else '0' end     
+    ,l7=case when LEN (PARSENAME(round(ABS(<location_columnname>) - FLOOR(ABS(<location_columnname>)),6),1)) >= 6 then substring(PARSENAME(round(ABS(<location_columnname>) - FLOOR(ABS(<location_columnname>)),6),1),6,1) else '0' end     
+from <tablename>
+```
 
 Vous pouvez en outre exploiter ces fonctionnalités de localisation pour générer d’autres fonctionnalités utilisant des décomptes comme décrit précédemment.
 
 > [!TIP]
 > Vous pouvez insérer les enregistrements par programmation en utilisant le langage de votre choix. Vous devrez peut-être insérer les données en blocs pour améliorer l'efficacité de l'écriture. [Voici un exemple montrant comment faire à l’aide de la commande pyodbc](https://code.google.com/p/pypyodbc/wiki/A_HelloWorld_sample_to_access_mssql_with_python).
-> Une autre solution consiste à insérer les données dans la base de données à l’aide de l’ [utilitaire BCP](https://msdn.microsoft.com/library/ms162802.aspx)
+> Une autre solution consiste à insérer les données dans la base de données à l’aide de l’ [utilitaire BCP](/sql/tools/bcp-utility)
 > 
 > 
 
 ### <a name="connecting-to-azure-machine-learning"></a><a name="sql-aml"></a>Connexion à Azure Machine Learning
-La fonctionnalité que vous venez de générer peut être ajoutée sous la forme d’une colonne à une table existante ou stockée dans une nouvelle table et associée à la table d’origine pour l’apprentissage automatique. Vous pouvez générer des fonctionnalités ou y accéder si elles sont déjà créées à l’aide du module [Importer des données](https://msdn.microsoft.com/library/azure/4e1b0fe6-aded-4b3f-a36f-39b8862b9004/) dans Azure Machine Learning comme expliqué ci-dessous :
+La fonctionnalité que vous venez de générer peut être ajoutée sous la forme d’une colonne à une table existante ou stockée dans une nouvelle table et associée à la table d’origine pour l’apprentissage automatique. Vous pouvez générer des fonctionnalités ou y accéder si elles sont déjà créées à l’aide du module [Importer des données](/azure/machine-learning/studio-module-reference/import-data) dans Azure Machine Learning comme expliqué ci-dessous :
 
 ![Lecteurs Azure ML](./media/sql-server-virtual-machine/reader_db_featurizedinput.png)
 
@@ -107,14 +113,17 @@ L’utilisation de Python pour générer des fonctionnalités quand les données
 
 Le format de chaîne de connexion ci-après vous permet de vous connecter à une base de données SQL Server à partir de Python à l’aide de pyodbc (en remplaçant les variables servername, dbname, username et password par les valeurs qui vous correspondent) :
 
-    #Set up the SQL Azure connection
-    import pyodbc
-    conn = pyodbc.connect('DRIVER={SQL Server};SERVER=<servername>;DATABASE=<dbname>;UID=<username>;PWD=<password>')
+```python
+#Set up the SQL Azure connection
+import pyodbc
+conn = pyodbc.connect('DRIVER={SQL Server};SERVER=<servername>;DATABASE=<dbname>;UID=<username>;PWD=<password>')
+```
 
 La [bibliothèque Pandas](https://pandas.pydata.org/) de Python offre un ensemble élaboré de structures de données et d’outils d’analyse des données pour la manipulation des données dans le cadre d’une programmation en Python. Le code suivant lit les résultats renvoyés par une base de données SQL Server dans une trame de données Pandas :
 
-    # Query database and load the returned results in pandas data frame
-    data_frame = pd.read_sql('''select <columnname1>, <columnname2>... from <tablename>''', conn)
+```python
+# Query database and load the returned results in pandas data frame
+data_frame = pd.read_sql('''select <columnname1>, <columnname2>... from <tablename>''', conn)
+```
 
-Vous pouvez à présent utiliser la trame de données Pandas comme décrit dans la rubrique [Créer des fonctionnalités pour les données de stockage d’objets blob Azure à l’aide de Pandas](create-features-blob.md).
-
+Vous pouvez à présent utiliser la trame de données Pandas comme décrit dans la rubrique [Créer des fonctionnalités pour les données de stockage d’objets blob Azure à l’aide de Pandas](./explore-data-blob.md).

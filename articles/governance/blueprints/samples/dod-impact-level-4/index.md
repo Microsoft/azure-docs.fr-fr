@@ -1,18 +1,21 @@
 ---
 title: Vue d’ensemble de l’exemple de blueprint DoD Impact Level 4
 description: Vue d’ensemble de l’exemple DoD Impact Level 4. Cet exemple de blueprint permet aux clients d’évaluer des contrôles DoD Impact Level 4 spécifiques.
-ms.date: 03/12/2020
+ms.date: 10/26/2020
 ms.topic: sample
-ms.openlocfilehash: a67dae5399d3e2e24c226c53f915b91e2524e735
-ms.sourcegitcommit: 253d4c7ab41e4eb11cd9995190cd5536fcec5a3c
+ms.openlocfilehash: faea02bc63b1c05526652b7a27b2339f00106ad7
+ms.sourcegitcommit: 4cb89d880be26a2a4531fedcc59317471fe729cd
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/25/2020
-ms.locfileid: "79415374"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92669417"
 ---
 # <a name="overview-of-the-dod-impact-level-4-blueprint-sample"></a>Vue d’ensemble de l’exemple de blueprint DoD Impact Level 4
 
 L’exemple de blueprint Department of Defense Impact Level 4 (DoD IL4) fournit des garde-fous de gouvernance avec [Azure Policy](../../../policy/overview.md), qui vous permettent d’évaluer des contrôles DoD Impact Level 4 spécifiques. Avec ce blueprint, les clients peuvent déployer un ensemble de stratégies pour toute architecture déployée par Azure devant implémenter des contrôles DoD Impact Level 4. Pour obtenir les dernières informations sur les clouds et services Azure qui satisfont l’autorisation DoD Impact Level 4, consultez [Services Azure par étendue d’audit du FedRAMP et du DoD CC SRG](../../../../azure-government/compliance/azure-services-in-fedramp-auditscope.md).
+
+> [!NOTE]
+> Cet exemple de blueprint est disponible dans Azure Government.
 
 ## <a name="control-mapping"></a>Correspondance des contrôles
 

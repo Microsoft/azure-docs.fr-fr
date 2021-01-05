@@ -8,13 +8,13 @@ ms.devlang: python
 ms.topic: conceptual
 ms.date: 03/11/2020
 ms.author: robinsh
-ms.custom: mqtt
-ms.openlocfilehash: 0bb1371de827fbb68afd5d114f49afa4acec0deb
-ms.sourcegitcommit: 31e9f369e5ff4dd4dda6cf05edf71046b33164d3
+ms.custom: mqtt, devx-track-python
+ms.openlocfilehash: 12b1d083ae1481f7c8b5fe60cac9156a56aeaa0a
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81759720"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87875470"
 ---
 # <a name="get-started-with-device-twins-python"></a>Bien démarrer avec les jumeaux d’appareils (Python)
 

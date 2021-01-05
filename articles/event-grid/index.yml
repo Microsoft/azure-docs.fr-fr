@@ -12,12 +12,12 @@ metadata:
   author: spelluru
   ms.author: spelluru
   ms.date: 09/06/2019
-  ms.openlocfilehash: 095d94b09ad7cfd6e47e7322401db0bbf6ff8a03
-  ms.sourcegitcommit: d6e4eebf663df8adf8efe07deabdc3586616d1e4
+  ms.openlocfilehash: 5edd80414035591ede06ae1595ec562be0cd92be
+  ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 04/15/2020
-  ms.locfileid: "81393199"
+  ms.lasthandoff: 10/09/2020
+  ms.locfileid: "87831955"
 landingContent:
 - title: À propos d’Event Grid
   linkLists:
@@ -84,7 +84,7 @@ landingContent:
   - linkListType: architecture
     links:
     - text: Architecture de référence pour les files d’attente et les événements
-      url: https://docs.microsoft.com/azure/architecture/reference-architectures/enterprise-integration/queues-events
+      url: /azure/architecture/reference-architectures/enterprise-integration/queues-events
 - title: Personnalisations
   linkLists:
   - linkListType: quickstart

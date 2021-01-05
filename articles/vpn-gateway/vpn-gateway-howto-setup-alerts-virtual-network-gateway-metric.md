@@ -1,18 +1,18 @@
 ---
 title: Configurer des alertes sur les métriques de passerelle VPN Azure
-description: Étapes pour configurer des alertes sur les métriques de passerelle VPN
+description: Découvrez comment utiliser la Portail Azure pour configurer des alertes Azure Monitor en fonction des mesures pour les passerelles VPN de réseau virtuel.
 services: vpn-gateway
-author: anzaman
+author: cherylmc
 ms.service: vpn-gateway
-ms.topic: conceptual
-ms.date: 04/22/2019
+ms.topic: how-to
+ms.date: 09/03/2020
 ms.author: alzam
-ms.openlocfilehash: 01704030ee3142cac9a328e1a3edc024651919a0
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 05fbc5675d6ee3b6720d9db9e07e7010cf1d9172
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82127910"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89435655"
 ---
 # <a name="set-up-alerts-on-vpn-gateway-metrics"></a>Configurer des alertes sur les métriques de passerelle VPN
 

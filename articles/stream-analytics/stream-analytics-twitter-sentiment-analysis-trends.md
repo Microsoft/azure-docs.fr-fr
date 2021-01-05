@@ -6,14 +6,14 @@ author: mamccrea
 ms.author: mamccrea
 ms.reviewer: jasonh
 ms.service: stream-analytics
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 02/10/2020
-ms.openlocfilehash: 4b265bb574895e4728ad93ee25c9dad0da226ea4
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 0941e3d5141b5b8841f5d37e3db0d0b1b1474547
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80240298"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96019818"
 ---
 # <a name="real-time-twitter-sentiment-analysis-in-azure-stream-analytics"></a>Analyse de sentiments Twitter en temps réel dans Azure Stream Analytics
 
@@ -39,11 +39,11 @@ Dans ce guide pratique, vous utilisez une application cliente qui se connecte à
 
 * L’application TwitterClientCore, qui lit le flux Twitter. Pour obtenir à cette application, téléchargez [TwitterClientCore](https://github.com/Azure/azure-stream-analytics/tree/master/DataGenerators/TwitterClientCore).
 
-* Installez le [CLI .NET Core](https://docs.microsoft.com/dotnet/core/tools/?tabs=netcore2x) version 2.1.0.
+* Installez le [CLI .NET Core](/dotnet/core/tools/?tabs=netcore2x) version 2.1.0.
 
 ## <a name="create-an-event-hub-for-streaming-input"></a>Créer un Event Hub pour l’entrée de diffusion en continu
 
-L’exemple d’application génère des événements et les transmet à un concentrateur Azure Event Hub. Azure Event Hubs est la méthode privilégiée d’ingestion des événements dans Stream Analytics. Pour plus d’informations, voir la [Documentation relative aux concentrateurs Azure Event Hubs](../event-hubs/event-hubs-what-is-event-hubs.md).
+L’exemple d’application génère des événements et les transmet à un concentrateur Azure Event Hub. Azure Event Hubs est la méthode privilégiée d’ingestion des événements dans Stream Analytics. Pour plus d’informations, voir la [Documentation relative aux concentrateurs Azure Event Hubs](../event-hubs/event-hubs-about.md).
 
 ### <a name="create-an-event-hub-namespace-and-event-hub"></a>Créer un espace de noms Event Hub et un concentrateur Event Hub
 Dans cette section, vous allez créer un espace de noms Event Hub et y ajouter un Event Hub. Les espaces de noms Event Hub sont utilisés pour regrouper logiquement des instances Event Hub associées. 
@@ -106,11 +106,11 @@ Si vous ne possédez pas encore une application Twitter que vous pouvez utiliser
 
 1. Dans un navigateur web, accédez à [Twitter For Developers](https://developer.twitter.com/en/apps), créez un compte de développeur, puis sélectionnez **Create an app** (Créer une application). Vous voyez normalement un message indiquant que vous devez demander un compte de développeur Twitter. N’hésitez pas à le faire et, une fois votre application approuvée, vous devriez voir un e-mail de confirmation. L’approbation d’un compte de développeur peut prendre plusieurs jours.
 
-   ![Détails de l’application Twitter](./media/stream-analytics-twitter-sentiment-analysis-trends/provide-twitter-app-details.png "Détails de l’application Twitter")
+   ![Capture d’écran montrant le bouton Créer une application.](./media/stream-analytics-twitter-sentiment-analysis-trends/provide-twitter-app-details.png "Détails de l’application Twitter")
 
 2. Sur la page **Créer une application**, renseignez les informations de la nouvelle application, puis sélectionnez **Créer votre application Twitter**.
 
-   ![Détails de l’application Twitter](./media/stream-analytics-twitter-sentiment-analysis-trends/provide-twitter-app-details-create.png "Détails de l’application Twitter")
+   ![Capture d’écran montrant le volet Détails de l’application dans lequel vous pouvez entrer des valeurs pour votre application.](./media/stream-analytics-twitter-sentiment-analysis-trends/provide-twitter-app-details-create.png "Détails de l’application Twitter")
 
 3. Dans la page de l’application, sélectionnez l’onglet **Keys and Tokens** (Clés et jetons), et copiez les valeurs de **Consumer API Key** (Clé d’API du consommateur) et **Consumer API Secret Key** (Clé secrète d’API du consommateur). Sélectionnez aussi **Create** (Créer) sous **Access Token and Access Token Secret** (Jeton d’accès et secret du jeton d’accès) pour générer les jetons d’accès. Copiez les valeurs de **Jeton d’accès** et **Secret du jeton d’accès**.
 
@@ -159,7 +159,7 @@ Maintenant que nous avons un flux d’événements de tweet diffusé en temps r�
    |**Paramètre**  |**Valeur suggérée**  |**Description**  |
    |---------|---------|---------|
    |Alias d’entrée| *TwitterStream* | Spécifiez un alias pour l’entrée. |
-   |Abonnement  | \<Votre abonnement\> |  Sélectionnez l’abonnement Azure que vous souhaitez utiliser. |
+   |Abonnement  | \<Your subscription\> |  Sélectionnez l’abonnement Azure que vous souhaitez utiliser. |
    |Espace de noms Event Hub | *asa-twitter-eventhub* |
    |Nom de l’Event Hub | *socialtwitter-eh* | Choisissez *Utiliser l’existant*. Ensuite, sélectionnez l’Event Hub que vous avez créé.|
    |Type de compression d’événement| GZip | Type de compression des données.|
@@ -168,9 +168,9 @@ Maintenant que nous avons un flux d’événements de tweet diffusé en temps r�
 
 ## <a name="specify-the-job-query"></a>Spécification de la requête de travail
 
-Stream Analytics prend en charge un modèle de requête simple et déclaratif pour la description des transformations. Pour plus d’informations sur ce langage, consultez la page [Références sur le langage des requêtes d’Azure Stream Analytics](https://docs.microsoft.com/stream-analytics-query/stream-analytics-query-language-reference). Ce guide pratique aborde la création et le test de plusieurs requêtes sur des données Twitter.
+Stream Analytics prend en charge un modèle de requête simple et déclaratif pour la description des transformations. Pour plus d’informations sur ce langage, consultez la page [Références sur le langage des requêtes d’Azure Stream Analytics](/stream-analytics-query/stream-analytics-query-language-reference). Ce guide pratique aborde la création et le test de plusieurs requêtes sur des données Twitter.
 
-Pour comparer le nombre de mentions entre les sujets, vous pouvez utiliser une [fenêtre bascule](https://docs.microsoft.com/stream-analytics-query/tumbling-window-azure-stream-analytics) pour obtenir le nombre de mentions par sujet toutes les cinq secondes.
+Pour comparer le nombre de mentions entre les sujets, vous pouvez utiliser une [fenêtre bascule](/stream-analytics-query/tumbling-window-azure-stream-analytics) pour obtenir le nombre de mentions par sujet toutes les cinq secondes.
 
 1. Dans votre tâche **Vue d’ensemble**, sélectionnez **Modifier la requête** dans la partie supérieure droite de la zone de requête. Azure répertorie les entrées et sorties qui sont configurées pour le travail. Vous pouvez également utiliser Azure pour créer une requête visant à transformer le flux d’entrée lorsqu’il est envoyé vers la sortie.
 
@@ -225,11 +225,11 @@ Une entrée de travail, une requête et une sortie sont spécifiées. Vous êtes
 3. Dans la page **Démarrer le travail**, sélectionnez **Maintenant** pour l’option **Heure de début de la sortie de la tâche**, puis sélectionnez **Démarrer**.
 
 ## <a name="get-support"></a>Obtenir de l’aide
-Pour obtenir une assistance, consultez le [forum Azure Stream Analytics](https://social.msdn.microsoft.com/Forums/azure/home?forum=AzureStreamAnalytics)
+Pour obtenir de l’aide supplémentaire, consultez notre [page de questions Microsoft Q&A pour Azure Stream Analytics](/answers/topics/azure-stream-analytics.html).
 
 ## <a name="next-steps"></a>Étapes suivantes
 * [Présentation d’Azure Stream Analytics](stream-analytics-introduction.md)
 * [Prise en main d'Azure Stream Analytics](stream-analytics-real-time-fraud-detection.md)
 * [Mise à l’échelle des travaux Azure Stream Analytics](stream-analytics-scale-jobs.md)
-* [Références sur le langage des requêtes d'Azure Stream Analytics](https://docs.microsoft.com/stream-analytics-query/stream-analytics-query-language-reference)
-* [Références sur l’API REST de gestion d’Azure Stream Analytics](https://msdn.microsoft.com/library/azure/dn835031.aspx)
+* [Références sur le langage des requêtes d'Azure Stream Analytics](/stream-analytics-query/stream-analytics-query-language-reference)
+* [Références sur l’API REST de gestion d’Azure Stream Analytics](/rest/api/streamanalytics/)

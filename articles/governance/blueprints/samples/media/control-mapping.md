@@ -1,14 +1,14 @@
 ---
 title: Contrôles de l’exemple de blueprint Media
-description: Correspondance des contrôles des exemples de blueprint Media. Chaque contrôle est mis en correspondance avec une ou plusieurs stratégies Azure qui simplifient l’évaluation.
-ms.date: 02/24/2020
+description: Correspondance des contrôles des exemples de blueprint Media. Chaque contrôle est mis en correspondance avec une ou plusieurs définitions Azure Policy qui simplifient l’évaluation.
+ms.date: 08/13/2020
 ms.topic: sample
-ms.openlocfilehash: bdc4ef65c6d61a9d4217d7873bb29bd787842e71
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: ec4850b4e3061d267610bfd9c2c0e33c670472b4
+ms.sourcegitcommit: 50802bffd56155f3b01bfb4ed009b70045131750
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "78201736"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91931867"
 ---
 # <a name="control-mapping-of-the-media-blueprint-sample"></a>Correspondance des contrôles de l’exemple de blueprint Media
 
@@ -17,7 +17,7 @@ L’article suivant explique en détails comment l’exemple de blueprint Media 
 Les correspondances suivantes concernent les contrôles **Media**. Utilisez le volet de navigation de droite pour accéder directement à la correspondance d’un contrôle spécifique. De nombreux contrôles mappés sont implémentés avec une initiative [Azure Policy](../../../policy/overview.md). Pour examiner l’initiative complète, ouvrez **Stratégie** dans le portail Azure et sélectionnez la page **Définitions**. Ensuite, recherchez et sélectionnez l’initiative de stratégie intégrée **\[Préversion\] : Auditer les contrôles Media**.
 
 > [!IMPORTANT]
-> Chaque contrôle ci-dessous est associé à une ou plusieurs définitions [Azure Policy](../../../policy/overview.md). Ces stratégies peuvent vous aider à [évaluer la conformité](../../../policy/how-to/get-compliance-data.md) avec le contrôle ; toutefois, il n’existe pas souvent de correspondance de 1:1 ou parfaite entre un contrôle et une ou plusieurs stratégies. Ainsi, la **conformité** dans Azure Policy fait uniquement référence aux stratégies elles-mêmes ; cela ne garantit pas que vous êtes entièrement conforme à toutes les exigences d’un contrôle. En outre, la norme de conformité comprend des contrôles qui ne sont traités par aucune définition Azure Policy pour l’instant. Par conséquent, la conformité dans Azure Policy n’est qu’une vue partielle de l’état de conformité global. Les associations entre les contrôles et les définitions Azure Policy pour cet exemple de blueprint de conformité peuvent changer au fil du temps. Pour afficher l’historique des changements, consultez l’[historique des validations GitHub](https://github.com/MicrosoftDocs/azure-docs/commits/master/articles/governance/blueprints/samples/media/control-mapping.md).
+> Chaque contrôle ci-dessous est associé à une ou plusieurs définitions [Azure Policy](../../../policy/overview.md). Ces stratégies peuvent vous aider à [évaluer la conformité](../../../policy/how-to/get-compliance-data.md) avec le contrôle ; toutefois, il n’existe pas souvent de correspondance un-à-un ou parfaite entre un contrôle et une ou plusieurs stratégies. Ainsi, la **conformité** dans Azure Policy fait uniquement référence aux stratégies elles-mêmes ; cela ne garantit pas que vous êtes entièrement conforme à toutes les exigences d’un contrôle. En outre, la norme de conformité comprend des contrôles qui ne sont traités par aucune définition Azure Policy pour l’instant. Par conséquent, la conformité dans Azure Policy n’est qu’une vue partielle de l’état de conformité global. Les associations entre les contrôles et les définitions Azure Policy pour cet exemple de blueprint de conformité peuvent changer au fil du temps. Pour afficher l’historique des changements, consultez l’[historique des validations GitHub](https://github.com/MicrosoftDocs/azure-docs/commits/master/articles/governance/blueprints/samples/media/control-mapping.md).
 
 ## <a name="access-control"></a>Contrôle d’accès
 
@@ -137,7 +137,7 @@ Les correspondances suivantes concernent les contrôles **Media**. Utilisez le v
 
 ### <a name="cm-514--identify-and-disable-unnecessary-andor-non-secure-functions-ports-protocols-and-services"></a>CM-5.14 - Identifier et désactiver les fonctions, ports, protocoles et services non nécessaires et/ou non sécurisés.
 
-- Les interfaces réseau doivent désactiver le transfert IP.
+- Les interfaces réseau doivent désactiver le transfert IP
 - \[Préversion\] : Le transfert IP doit être désactivé sur votre machine virtuelle.
 
 ### <a name="cm-519--monitor-changes-to-the-security-configuration-settings"></a>CM-5.19 - Surveiller les modifications apportées aux paramètres de configuration de la sécurité.
@@ -236,7 +236,7 @@ Les correspondances suivantes concernent les contrôles **Media**. Utilisez le v
 Vous avez pris connaissance de la correspondance des contrôles de l’exemple de blueprint Media. Continuez avec les articles suivants pour découvrir une vue d’ensemble de cet exemple et pour savoir comment le déployer :
 
 > [!div class="next step action"]
-> [Blueprint Media - Vue d’ensemble](./control-mapping.md)
+> [Blueprint Media - Correspondance des contrôles](./control-mapping.md)
 > [Blueprint Media - Étapes de déploiement](./deploy.md)
 
 Autres articles sur les blueprints et la manière de les utiliser :

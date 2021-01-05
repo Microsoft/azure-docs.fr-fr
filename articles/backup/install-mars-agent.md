@@ -3,12 +3,12 @@ title: Installer l’agent Microsoft Azure Recovery Services (MARS)
 description: Découvrez comment installer l’agent Microsoft Azure Recovery Services (MARS) pour sauvegarder des machines Windows.
 ms.topic: conceptual
 ms.date: 03/03/2020
-ms.openlocfilehash: d3932b66dbc41ff2631e2cccbe716c0877a509d3
-ms.sourcegitcommit: 7581df526837b1484de136cf6ae1560c21bf7e73
+ms.openlocfilehash: fb59c245c469791233ce973b00426a127b116535
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/31/2020
-ms.locfileid: "80422935"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90975304"
 ---
 # <a name="install-the-azure-backup-mars-agent"></a>Installer l’agent MARS de sauvegarde Azure
 
@@ -42,10 +42,10 @@ Les données qui sont disponibles pour la sauvegarde dépendent de là où est i
 
 ## <a name="modify-storage-replication"></a>Modifier la réplication du stockage
 
-Par défaut, les coffres utilisent le [stockage géoredondant (GRS)](https://docs.microsoft.com/azure/storage/common/storage-redundancy-grs).
+Par défaut, les coffres utilisent le [stockage géoredondant (GRS)](../storage/common/storage-redundancy.md#geo-redundant-storage).
 
 * Si le coffre est votre principal mécanisme de sauvegarde, nous vous suggérons d’utiliser l’option GRS.
-* Vous pouvez utiliser le [stockage localement redondant (LRS)](https://docs.microsoft.com/azure/storage/common/storage-redundancy-lrs?toc=%2fazure%2fstorage%2fblobs%2ftoc.json) pour réduire les coûts de stockage Azure.
+* Vous pouvez utiliser le [stockage localement redondant (LRS)](../storage/common/storage-redundancy.md#locally-redundant-storage) pour réduire les coûts de stockage Azure.
 
 Modifiez le type de réplication de stockage :
 
@@ -66,11 +66,12 @@ Modifiez le type de réplication de stockage :
 Si votre machine a un accès limité à Internet, vérifiez que les paramètres de pare-feu sur la machine ou le proxy autorisent les URL et adresses IP suivantes :
 
 * URLs
-  * `www\.msftncsi.com`
+  * `www.msftncsi.com`
   * `*.Microsoft.com`
   * `*.WindowsAzure.com`
   * `*.microsoftonline.com`
   * `*.windows.net`
+  * `www.msftconnecttest.com`
 * Adresses IP
   * 20.190.128.0/18
   * 40.126.0.0/18
@@ -82,6 +83,7 @@ Vous pouvez sauvegarder vos données sur Azure ExpressRoute avec le peering publ
 Pour utiliser le peering public, commencez par vérifier l’accès aux domaines et adresses suivants :
 
 * `http://www.msftncsi.com/ncsi.txt`
+* `http://www.msftconnecttest.com/connecttest.txt`
 * `microsoft.com`
 * `.WindowsAzure.com`
 * `.microsoftonline.com`
@@ -93,7 +95,7 @@ Pour utiliser le peering Microsoft, sélectionnez les services, les régions et 
 * Région Azure, en fonction de la localisation de votre coffre Recovery Services
 * Stockage Azure, en fonction de la localisation de votre coffre Recovery Services
 
-Pour plus d’informations, consultez [Exigences du routage ExpressRoute](https://docs.microsoft.com/azure/expressroute/expressroute-routing).
+Pour plus d’informations, consultez [Exigences du routage ExpressRoute](../expressroute/expressroute-routing.md).
 
 > [!NOTE]
 > Le peering public est déprécié pour les nouveaux circuits.
@@ -153,7 +155,7 @@ Si vous avez déjà installé l’agent sur des machines, veillez à exécuter l
 
     ![Ajouter des informations d’identification de coffre à l’aide de l’Assistant Inscription de serveur](./media/backup-configure-vault/register1.png)
 
-1. Dans la page **Paramètre de chiffrement**, spécifiez une phrase secrète pour chiffrer et déchiffrer les sauvegardes de la machine.
+1. Dans la page **Paramètre de chiffrement**, spécifiez une phrase secrète pour chiffrer et déchiffrer les sauvegardes de la machine. Pour plus d’informations sur les caractères de phrase secrète autorisés, [voyez ici](backup-azure-file-folder-backup-faq.md#what-characters-are-allowed-for-the-passphrase).
 
     * Enregistrez la phrase secrète dans un emplacement sécurisé. Il vous sera nécessaire pour restaurer une sauvegarde.
     * En cas de perte ou d’oubli de la phrase secrète, Microsoft ne peut pas vous aider à récupérer les données de sauvegarde.

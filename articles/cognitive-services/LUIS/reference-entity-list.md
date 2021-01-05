@@ -1,14 +1,16 @@
 ---
 title: Type d’entité de liste - LUIS
 description: Les entités de liste représentent un ensemble fixe, fermé de mots associés, ainsi que leurs synonymes. LUIS ne détecte pas les valeurs supplémentaires pour les entités de liste. Utilisez la fonctionnalité Recommander pour trouver des suggestions de nouveaux mots à partir de la liste actuelle.
+ms.service: cognitive-services
+ms.subservice: language-understanding
 ms.topic: reference
 ms.date: 04/14/2020
-ms.openlocfilehash: 339fb832ef4af069b6f040c5264426002189f93f
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.openlocfilehash: 410b33b5c6078d096fa4b2acaa7b49bc14c95e31
+ms.sourcegitcommit: e15c0bc8c63ab3b696e9e32999ef0abc694c7c41
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83588885"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97608270"
 ---
 # <a name="list-entity"></a>Entité de liste
 
@@ -83,7 +85,6 @@ Dans l’énoncé précédent, le mot `paris` est mappé à l’élément paris 
 
 #### <a name="v3-prediction-endpoint-response"></a>[Réponse de point de terminaison de prédiction V3](#tab/V3)
 
-
 Il s’agit du JSON si `verbose=false` est défini dans la chaîne de requête :
 
 ```json
@@ -128,7 +129,6 @@ Il s’agit du JSON si `verbose=true` est défini dans la chaîne de requête :
 |Objet de données|Nom de l’entité|Valeur|
 |--|--|--|
 |Entité de liste|`Cities`|`paris`|
-
 
 ## <a name="next-steps"></a>Étapes suivantes
 

@@ -3,17 +3,20 @@ title: Créer des conteneurs Azure Cosmos avec une grande clé de partition
 description: Découvrez comment créer un conteneur dans Azure Cosmos DB avec une grande clé de partition à l’aide du portail Azure et de différents kits de développement logiciel (SDK).
 author: markjbrown
 ms.service: cosmos-db
-ms.topic: conceptual
+ms.subservice: cosmosdb-sql
+ms.topic: how-to
 ms.date: 09/28/2019
 ms.author: mjbrown
-ms.openlocfilehash: 7184a6b85e93c41dfe914813301a4b1a0c88f2cd
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 4ad26d63ca06f5a46a4a1f77d329d04896e96c52
+ms.sourcegitcommit: fa90cd55e341c8201e3789df4cd8bd6fe7c809a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75887680"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93339291"
 ---
 # <a name="create-containers-with-large-partition-key"></a>Créer des conteneurs avec une grande clé de partition
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
 
 Azure Cosmos DB utilise le partitionnement basé sur le hachage pour mettre à l'échelle horizontale les données. Tous les conteneurs Azure Cosmos créés avant le 3 mai 2019 utilisent une fonction de hachage calculant le hachage en fonction des 100 premiers octets de la clé de partition. Si les 100 premiers octets de plusieurs clés de partition sont identiques, ces partitions logiques sont considérées comme identiques par le service. Cela peut entraîner des problèmes tels qu'un quota erroné ou l'application d'index uniques aux clés de partition. Les grandes clés de partition permettent d'y remédier. Azure Cosmos DB prend désormais en charge les grandes clés de partition avec des valeurs jusqu'à 2 Ko.
 
@@ -23,7 +26,7 @@ Les grandes clés de partition sont prises en charge moyennant une version amél
 
 Pour créer une grande clé de partition, quand vous créez un conteneur à l’aide du portail Azure, activez l’option **Ma clé de partition est supérieure à 100 octets**. Désactivez la case à cocher si vous n’avez pas besoin de grandes clés de partition ou si vos applications s’exécutent sur des kits de développement logiciel (SDK) antérieurs à la version 1.18.
 
-![Créer de grandes clés de partition à l’aide du portail Azure](./media/large-partition-keys/large-partition-key-with-portal.png)
+:::image type="content" source="./media/large-partition-keys/large-partition-key-with-portal.png" alt-text="Créer de grandes clés de partition à l’aide du portail Azure":::
 
 ## <a name="create-a-large-partition-key-powershell"></a>Créer une grande clé de partition (PowerShell)
 
@@ -35,7 +38,7 @@ Pour créer un conteneur avec prise en charge d'une grande clé de partition, co
 
 Pour créer un conteneur avec une grande clé de partition à l’aide du kit de développement logiciel (SDK) .NET, vous devez spécifier la propriété `PartitionKeyDefinitionVersion.V2`. L’exemple suivant montre comment spécifier la propriété Version de l’objet PartitionKeyDefinition et la définir sur PartitionKeyDefinitionVersion.V2.
 
-### <a name="v3-net-sdk"></a>Kit SDK .NET v3
+# <a name="net-sdk-v3"></a>[Kit de développement logiciel (SDK) .NET V3](#tab/dotnetv3)
 
 ```csharp
 await database.CreateContainerAsync(
@@ -45,7 +48,7 @@ await database.CreateContainerAsync(
     })
 ```
 
-### <a name="v2-net-sdk"></a>Kit SDK .NET v2
+# <a name="net-sdk-v2"></a>[Kit de développement logiciel (SDK) .NET V2](#tab/dotnetv2)
 
 ```csharp
 DocumentCollection collection = await newClient.CreateDocumentCollectionAsync(
@@ -61,6 +64,7 @@ database,
          },
       new RequestOptions { OfferThroughput = 400 });
 ```
+---
 
 ## <a name="supported-sdk-versions"></a>Versions prises en charge du kit de développement logiciel (SDK)
 
@@ -81,4 +85,4 @@ Actuellement, vous ne pouvez pas utiliser de conteneurs avec de grandes clés de
 * [Partitioning in Azure Cosmos DB](partitioning-overview.md) (Partitionnement dans Azure Cosmos DB)
 * [Unités de requête dans Azure Cosmos DB](request-units.md)
 * [Provisionner le débit sur les conteneurs et les bases de données](set-throughput.md)
-* [Utiliser un compte Azure Cosmos](account-overview.md)
+* [Utiliser un compte Azure Cosmos](./account-databases-containers-items.md)

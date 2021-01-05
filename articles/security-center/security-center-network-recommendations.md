@@ -13,42 +13,44 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 04/05/2019
 ms.author: memildin
-ms.openlocfilehash: 792b95b120f67afcd360730acbd783a3071388b2
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 28d0d7b14c18a1d98be1872b1555930b2e1650c3
+ms.sourcegitcommit: f88074c00f13bcb52eaa5416c61adc1259826ce7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77431483"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92342448"
 ---
 # <a name="protect-your-network-resources"></a>Protéger vos ressources réseau
 Azure Security Center analyse continuellement l’état de sécurité de vos ressources Azure pour les meilleures pratiques de sécurité réseau. Lorsque Security Center identifie des failles de sécurité potentielles, il crée des suggestions qui vous guident tout au long du processus de configuration des contrôles nécessaires afin de renforcer et protéger vos ressources.
-
-Cet article décrit la page **Mise en réseau** de la section sur la sécurité des ressources dans Security Center.
 
 Pour obtenir la liste complète des recommandations relatives à la mise en réseau, consultez [Recommandations relatives à la mise en réseau](recommendations-reference.md#recs-network).
 
 Cet article traite des suggestions relatives à la sécurité réseau qui s’appliquent à vos ressources Azure. Les suggestions relatives aux réseaux concernent les pare-feux nouvelle génération, les groupes de sécurité réseau, les règles de trafic entrant trop permissives concernant l’accès juste-à-temps aux machines virtuelles et plus encore. Pour obtenir la liste des suggestions relatives à la mise en réseau et des actions de correction, consultez [Gestion des suggestions de sécurité dans Azure Security Center.](security-center-recommendations.md)
 
-> [!NOTE]
-> La page **Mise en réseau** vous permet d’en apprendre davantage sur l’intégrité de vos ressources Azure relative au réseau. Le mappage réseau et les contrôles réseau adaptatifs sont disponibles pour le niveau standard d’Azure Security Center uniquement. [Si vous utilisez le niveau gratuit, vous pouvez cliquer sur le bouton pour **Afficher la mise en réseau héritée** et recevoir des suggestions de ressources de mise en réseau](#legacy-networking).
->
+Les fonctionnalités de **mise en réseau** de Security Center sont les suivantes : 
 
-La page **Mise en réseau** page fournit une vue d’ensemble des sections que vous pouvez approfondir. Pour obtenir plus d’informations sur l’intégrité de vos ressources réseau :
-
-- Mappage réseau (niveau standard d’Azure Security Center uniquement)
-- Durcissement réseau adaptatif
-- Suggestions en matière de sécurité réseau.
-- Panneau **Mise en réseau** héritée (panneau de mise en réseau précédent) 
+- Carte réseau (nécessite Azure Defender)
+- [Renforcement réseau adaptatif](security-center-adaptive-network-hardening.md) (nécessite Azure Defender)
+- Suggestions en matière de sécurité réseau
  
-[![Volet Mise en réseau](./media/security-center-network-recommendations/networking-pane.png)](./media/security-center-network-recommendations/networking-pane.png#lightbox)
+## <a name="view-your-networking-resources-and-their-recommendations"></a>Afficher vos ressources de mise en réseau et leurs recommandations
+
+Dans la page [Inventaire des ressources](asset-inventory.md), utilisez le filtre de type de ressource pour sélectionner les ressources de mise en réseau que vous souhaitez examiner :
+
+:::image type="content" source="./media/security-center-network-recommendations/network-filters-inventory.png" alt-text="Types de ressources du réseau dans l’inventaire des ressources" lightbox="./media/security-center-network-recommendations/network-filters-inventory.png":::
+
 
 ## <a name="network-map"></a>Mappage réseau
+
 Le mappage réseau interactif fournit un affichage graphique avec des superpositions de sécurité qui vous proposent des suggestions et des aperçus pour renforcer vos ressources réseau. À l’aide du mappage, vous pouvez voir la topologie du réseau de vos charges de travail Azure et des connexions entre vos machines virtuelles et sous-réseaux. Vous pouvez voir la capacité à examiner au niveau du détail certaines ressources ainsi que leurs suggestions à partir du mappage.
 
 Pour ouvrir le mappage réseau :
 
-1. Dans Security Center, sous Hygiène de sécurité de la ressource, sélectionnez **Mise en réseau**.
-2. Sous **Mappage réseau** cliquez sur **Voir topologie**.
+1. Dans le menu de Security Center, ouvrez le tableau de bord Azure Defender et sélectionnez **Carte réseau**.
+
+    :::image type="content" source="./media/security-center-network-recommendations/opening-network-map.png" alt-text="Types de ressources du réseau dans l’inventaire des ressources" lightbox="./media/security-center-network-recommendations/opening-network-map.png":::
+
+1. Sélectionnez le menu **Couches**, puis **Topologie**.
  
 La valeur par défaut du mappage de la topologie affiche :
 
@@ -114,31 +116,8 @@ Pour explorer une ressource au niveau du détail :
 [![Mappage de trafic réseau](./media/security-center-network-recommendations/network-map-traffic.png)](./media/security-center-network-recommendations/network-map-traffic.png#lightbox)
 
 
-## <a name="legacy-networking"></a>Mise en réseau héritée <a name ="legacy-networking"></a>
-
-Si vous n’avez pas le niveau Standard de Security Center, cette section explique comment afficher les suggestions de mise en réseau gratuites.
-
-Pour accéder à ces informations, dans le panneau Mise en réseau, cliquez sur **Afficher la mise en réseau héritée**. 
-
-[![Mise en réseau héritée](./media/security-center-network-recommendations/legacy-networking.png)](./media/security-center-network-recommendations/legacy-networking.png#lightbox)
-
-### <a name="internet-facing-endpoints-section"></a>Section des points de terminaison accessibles sur Internet
-La section **Points de terminaison accessibles sur Internet** présente les machines virtuelles qui sont actuellement configurées avec un point de terminaison accessible sur Internet, ainsi que leur état actuel.
-
-Ce tableau indique le nom du point de terminaison, l’adresse IP Internet ainsi que l’état de gravité actuel du groupe de sécurité réseau et des suggestions de pare-feu nouvelle génération. Le tableau est trié par niveau de gravité.
-
-### <a name="networking-topology-section"></a>Section de topologie de mise en réseau
-La section **Topologie de mise en réseau** contient un affichage hiérarchique des ressources.
-
-Ce tableau est trié (machines virtuelles et sous-réseaux) par niveau de gravité.
-
-Dans cet affichage topologique, le premier niveau affiche les réseaux virtuels. Le deuxième niveau affiche les sous-réseaux et le troisième niveau affiche les machines virtuelles appartenant à ces sous-réseaux. La colonne de droite indique l’état actuel des suggestions du groupe de sécurité réseau pour ces ressources.
-
-Le troisième niveau affiche les machines virtuelles, ce qui est similaire à ce qui est décrit précédemment. Vous pouvez cliquer sur une ressource pour en savoir plus ou appliquer la configuration ou le contrôle de sécurité nécessaire.
-
 ## <a name="next-steps"></a>Étapes suivantes
 
 Pour en savoir plus sur les recommandations qui s’appliquent à d’autres types de ressources Azure, consultez les rubriques suivantes :
 
-* [Protection de vos machines et de vos applications dans Azure Security Center](security-center-virtual-machine-protection.md)
-* [Protection de votre service SQL Azure dans Azure Security Center](security-center-sql-service-recommendations.md)
+- [Protection de vos machines et de vos applications dans Azure Security Center](./asset-inventory.md)

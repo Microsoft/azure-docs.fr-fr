@@ -5,14 +5,14 @@ services: vpn-gateway
 author: cherylmc
 ms.service: vpn-gateway
 ms.topic: conceptual
-ms.date: 02/19/2020
+ms.date: 09/02/2020
 ms.author: cherylmc
-ms.openlocfilehash: 381aad5d0a56362d9966ed54b931a8478f2f6bf2
-ms.sourcegitcommit: 27bbda320225c2c2a43ac370b604432679a6a7c0
+ms.openlocfilehash: 795b6f13913590041b463115c0be65a6201fedab
+ms.sourcegitcommit: ad677fdb81f1a2a83ce72fa4f8a3a871f712599f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/31/2020
-ms.locfileid: "80410497"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97654062"
 ---
 # <a name="about-point-to-site-vpn"></a>À propos du VPN de point à site
 
@@ -61,14 +61,14 @@ De façon générale, vous devez effectuer les étapes suivantes pour configurer
 ### <a name="authenticate-using-active-directory-ad-domain-server"></a>S’authentifier à l’aide du serveur de domaine Active Directory (AD)
 
 L’authentification de domaine AD permet aux utilisateurs de se connecter à Azure à l’aide des informations d’identification du domaine de l’organisation. Un serveur RADIUS qui s’intègre avec le serveur AD est requis. Les organisations peuvent aussi exploiter un déploiement RADIUS existant.
-  
-Le serveur RADIUS peut être déployé localement ou sur votre réseau virtuel Azure. Lors de l’authentification, la passerelle VPN Azure permet le transfert direct et transfère les messages d’authentification entre le serveur RADIUS et l’appareil de connexion. Par conséquent, l’accessibilité de la passerelle au serveur RADIUS est importante. Si le serveur RADIUS est situé en local, une connexion VPN S2S au site local à partir d’Azure est requise pour établir l’accessibilité.  
-  
+  
+Le serveur RADIUS peut être déployé localement ou sur votre réseau virtuel Azure. Lors de l’authentification, la passerelle VPN Azure permet le transfert direct et transfère les messages d’authentification entre le serveur RADIUS et l’appareil de connexion. Par conséquent, l’accessibilité de la passerelle au serveur RADIUS est importante. Si le serveur RADIUS est situé en local, une connexion VPN S2S au site local à partir d’Azure est requise pour établir l’accessibilité.  
+  
 Le serveur RADIUS peut aussi être intégré aux services de certificat AD. Cela vous permet d’utiliser le serveur RADIUS et le déploiement de certificat d’entreprise pour votre authentification par certificat P2S comme alternative à l’authentification par certificat Azure. L’avantage est que vous n’avez pas besoin de charger les certificats racine et les certificats révoqués sur Azure.
 
 Un serveur RADIUS permet également l’intégration avec d’autres systèmes d’identité externe. Cette opération ouvre de nombreuses options d’authentification pour les VPN P2S, notamment les options de multifacteur.
 
-![point à site](./media/point-to-site-about/p2s.png "De point à site")
+![Diagramme montrant un VPN point à site avec un site local.](./media/point-to-site-about/p2s.png)
 
 ## <a name="what-are-the-client-configuration-requirements"></a>Quelle est la configuration requise pour les clients ?
 
@@ -102,41 +102,41 @@ Le fichier zip fournit également les valeurs de certains paramètres importants
 
 **IKEv2**
 
-|**Cipher** | **Intégrité** | **PRF** | **Groupe DH** |
-|---        | ---           | ---       | ---   |
-|GCM_AES256 |   GCM_AES256  | SHA384    | GROUP_24 |
-|GCM_AES256 |   GCM_AES256  | SHA384    | GROUP_14 |
-|GCM_AES256 |   GCM_AES256  | SHA384    | GROUP_ECP384 |
-|GCM_AES256 |   GCM_AES256  | SHA384    | GROUP_ECP256 |
-|GCM_AES256 |   GCM_AES256  | SHA256    | GROUP_24 |
-|GCM_AES256 |   GCM_AES256  | SHA256    | GROUP_14 |
-|GCM_AES256 |   GCM_AES256  | SHA256    | GROUP_ECP384 |
-|GCM_AES256 |   GCM_AES256  | SHA256    | GROUP_ECP256 |
-|AES256     |   SHA384      | SHA384    | GROUP_24 |
-|AES256     |   SHA384      | SHA384    | GROUP_14 |
-|AES256     |   SHA384      | SHA384    | GROUP_ECP384 |
-|AES256     |   SHA384      | SHA384    | GROUP_ECP256 |
-|AES256     |   SHA256      | SHA256    | GROUP_24 |
-|AES256     |   SHA256      | SHA256    | GROUP_14 |
-|AES256     |   SHA256      | SHA256    | GROUP_ECP384 |
-|AES256     |   SHA256      | SHA256    | GROUP_ECP256 |
-|AES256     |   SHA256      | SHA256    | GROUP_2 |
+| **Cipher** | **Intégrité** | **PRF** | **Groupe DH** |
+|--|--|--|--|
+| GCM_AES256 | GCM_AES256 | SHA384 | GROUP_24 |
+| GCM_AES256 | GCM_AES256 | SHA384 | GROUP_14 |
+| GCM_AES256 | GCM_AES256 | SHA384 | GROUP_ECP384 |
+| GCM_AES256 | GCM_AES256 | SHA384 | GROUP_ECP256 |
+| GCM_AES256 | GCM_AES256 | SHA256 | GROUP_24 |
+| GCM_AES256 | GCM_AES256 | SHA256 | GROUP_14 |
+| GCM_AES256 | GCM_AES256 | SHA256 | GROUP_ECP384 |
+| GCM_AES256 | GCM_AES256 | SHA256 | GROUP_ECP256 |
+| AES256 | SHA384 | SHA384 | GROUP_24 |
+| AES256 | SHA384 | SHA384 | GROUP_14 |
+| AES256 | SHA384 | SHA384 | GROUP_ECP384 |
+| AES256 | SHA384 | SHA384 | GROUP_ECP256 |
+| AES256 | SHA256 | SHA256 | GROUP_24 |
+| AES256 | SHA256 | SHA256 | GROUP_14 |
+| AES256 | SHA256 | SHA256 | GROUP_ECP384 |
+| AES256 | SHA256 | SHA256 | GROUP_ECP256 |
+| AES256 | SHA256 | SHA256 | GROUP_2 |
 
 **IPsec**
 
-|**Cipher** | **Intégrité** | **Groupe PFS** |
-|---        | ---           | ---       |
-|GCM_AES256 | GCM_AES256 | GROUP_NONE |
-|GCM_AES256 | GCM_AES256 | GROUP_24 |
-|GCM_AES256 | GCM_AES256 | GROUP_14 |
-|GCM_AES256 | GCM_AES256 | GROUP_ECP384 |
-|GCM_AES256 | GCM_AES256 | GROUP_ECP256 |
-| AES256    | SHA256 | GROUP_NONE |
-| AES256    | SHA256 | GROUP_24 |
-| AES256    | SHA256 | GROUP_14 |
-| AES256    | SHA256 | GROUP_ECP384 |
-| AES256    | SHA256 | GROUP_ECP256 |
-| AES256    | SHA1 | GROUP_NONE |
+| **Cipher** | **Intégrité** | **Groupe PFS** |
+|--|--|--|
+| GCM_AES256 | GCM_AES256 | GROUP_NONE |
+| GCM_AES256 | GCM_AES256 | GROUP_24 |
+| GCM_AES256 | GCM_AES256 | GROUP_14 |
+| GCM_AES256 | GCM_AES256 | GROUP_ECP384 |
+| GCM_AES256 | GCM_AES256 | GROUP_ECP256 |
+| AES256 | SHA256 | GROUP_NONE |
+| AES256 | SHA256 | GROUP_24 |
+| AES256 | SHA256 | GROUP_14 |
+| AES256 | SHA256 | GROUP_ECP384 |
+| AES256 | SHA256 | GROUP_ECP256 |
+| AES256 | SHA1 | GROUP_NONE |
 
 ## <a name="what-tls-policies-are-configured-on-vpn-gateways-for-p2s"></a><a name="TLS policies"></a>Quelles stratégies TLS sont configurées sur les passerelles VPN pour P2S ?
 **TLS**

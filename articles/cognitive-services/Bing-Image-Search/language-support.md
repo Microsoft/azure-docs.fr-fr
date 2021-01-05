@@ -10,14 +10,19 @@ ms.subservice: bing-image-search
 ms.topic: conceptual
 ms.date: 03/04/2019
 ms.author: aahi
-ms.openlocfilehash: ca3821b6088e45730334d1b0971e270b1d86dfce
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 14dacc4351af444c75517df4d4e02ecca3bbf40a
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "68881920"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96350073"
 ---
 # <a name="language-and-region-support-for-the-bing-image-search-api"></a>Langues et régions prises en charge par l’API Recherche d’images Bing
+
+> [!WARNING]
+> Les API Recherche Bing passent de Cognitive Services aux services de recherche Bing. À compter du **30 octobre 2020**, toutes les nouvelles instances de Recherche Bing doivent être provisionnées en suivant le processus documenté [ici](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Les API Recherche Bing provisionnées à l’aide de Cognitive Services seront prises en charge les trois prochaines années ou jusqu’à la fin de votre Contrat Entreprise, selon la première éventualité.
+> Pour obtenir des instructions de migration, consultez [Services de recherche Bing](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
 
 L’API Recherche d’images Bing prend en charge plus d’une trentaine de pays/régions, dont beaucoup possèdent plusieurs langues. Spécifier un pays/une région avec une requête sert principalement à affiner les résultats de la recherche en fonction des centres d’intérêt dans ce pays/cette région. En outre, les résultats peuvent contenir des liens vers Bing, servant à localiser l’expérience utilisateur de Bing en fonction du pays/de la région ou de la langue spécifiée.
 
@@ -55,7 +60,7 @@ De même, vous pouvez spécifier le pays/la région à l’aide du paramètre de
 |Corée du Sud|KR|
 |Malaisie|MY|
 |Mexique|MX|
-|Pays-bas|NL|
+|Pays-Bas|NL|
 |Nouvelle-Zélande|NZ|
 |Norvège|Non|
 |Chine|CN|
@@ -70,7 +75,7 @@ De même, vous pouvez spécifier le pays/la région à l’aide du paramètre de
 |Suisse|CH|
 |Taïwan|TW|
 |Turquie|TR|
-|United Kingdom|Go|
+|Royaume-Uni|Go|
 |États-Unis|US|
 
 
@@ -99,7 +104,7 @@ De même, vous pouvez spécifier le pays/la région à l’aide du paramètre de
 |Corée du Sud|Coréen|ko-KR|
 |Malaisie|Anglais|en-MY|
 |Mexique|Espagnol|es-MX|
-|Pays-bas|Néerlandais|nl-NL|
+|Pays-Bas|Néerlandais|nl-NL|
 |Nouvelle-Zélande|Anglais|en-NZ|
 |Chine|Chinois|zh-CN|
 |Pologne|Polonais|pl-PL|
@@ -114,9 +119,9 @@ De même, vous pouvez spécifier le pays/la région à l’aide du paramètre de
 |Suisse|Allemand|de-CH|
 |Taïwan|Chinois traditionnel|zh-TW|
 |Turquie|Turc|tr-TR|
-|United Kingdom|Anglais|en-GB|
+|Royaume-Uni|Anglais|en-GB|
 |États-Unis|Anglais|fr-FR|
 |États-Unis|Espagnol|es-US|
 
 ## <a name="next-steps"></a>Étapes suivantes
-Pour plus d’informations sur les points de terminaison de Recherche d’actualités Bing, consultez [Référence de l’API Recherche d’images v7](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference).
+Pour plus d’informations sur les points de terminaison de Recherche d’actualités Bing, consultez [Référence de l’API Recherche d’images v7](/rest/api/cognitiveservices-bingsearch/bing-images-api-v7-reference).

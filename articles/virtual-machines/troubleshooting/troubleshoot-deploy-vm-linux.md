@@ -15,11 +15,11 @@ ms.topic: troubleshooting
 ms.date: 11/01/2018
 ms.author: genli
 ms.openlocfilehash: cf8fb383625ec2752264d6e5a70d8625f06689fc
-ms.sourcegitcommit: 1895459d1c8a592f03326fcb037007b86e2fd22f
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82628297"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96022806"
 ---
 # <a name="troubleshoot-deploying-linux-virtual-machine-issues-in-azure"></a>Résolution des problèmes de déploiement de la machine virtuelle Linux dans Azure
 
@@ -31,7 +31,11 @@ Si vous avez besoin d’une aide supplémentaire à quelque étape que ce soit d
 [!INCLUDE [virtual-machines-linux-troubleshoot-deploy-vm-top](../../../includes/virtual-machines-linux-troubleshoot-deploy-vm-top.md)]
 
 ## <a name="the-cluster-cannot-support-the-requested-vm-size"></a>Le cluster ne peut pas prendre en charge la taille de machine virtuelle demandée
-\<properties supportTopicIds="123456789" resourceTags="windows" productPesIds="1234, 5678" />
+\<properties
+supportTopicIds="123456789"
+resourceTags="windows"
+productPesIds="1234, 5678"
+/>
 - Relancez la requête en utilisant une taille inférieure pour la machine virtuelle.
 - Si la taille de la machine virtuelle requise ne peut pas être modifiée :
     - Arrêtez toutes les machines virtuelles dans le groupe à haute disponibilité. Cliquez sur **Groupes de ressources** > votre groupe de ressources > **Ressources** > votre groupe à haute disponibilité > **Machines virtuelles** > votre machine virtuelle > **Arrêter**.
@@ -40,7 +44,11 @@ Si vous avez besoin d’une aide supplémentaire à quelque étape que ce soit d
 
 
 ## <a name="the-cluster-does-not-have-free-resources"></a>Le cluster n’a pas de ressources libres
-\<properties supportTopicIds="123456789" resourceTags="windows" productPesIds="1234, 5678" />
+\<properties
+supportTopicIds="123456789"
+resourceTags="windows"
+productPesIds="1234, 5678"
+/>
 - Relancez la requête ultérieurement.
 - Si la nouvelle machine virtuelle peut faire partie d’un autre groupe à haute disponibilité
     - Créez une machine virtuelle dans un autre groupe à haute disponibilité (dans la même région).

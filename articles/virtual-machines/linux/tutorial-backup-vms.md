@@ -14,12 +14,12 @@ ms.workload: infrastructure
 ms.date: 07/27/2017
 ms.author: cynthn
 ms.custom: mvc
-ms.openlocfilehash: d233cba65d190178c500f78d4817e233ab46d780
-ms.sourcegitcommit: b55d7c87dc645d8e5eb1e8f05f5afa38d7574846
+ms.openlocfilehash: 08e6491e1d8d94e8e6e9112e5a19682018103325
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81460068"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91400347"
 ---
 # <a name="tutorial-back-up-and-restore-files-for-linux-virtual-machines-in-azure"></a>Tutoriel : Sauvegarder et restaurer des fichiers pour des machines virtuelles Linux dans Azure
 
@@ -34,7 +34,7 @@ Vous pouvez protéger vos données en effectuant des sauvegardes à intervalles 
 
 Lorsque le service Azure Backup lance une sauvegarde, il déclenche l’extension de sauvegarde pour prendre un instantané à un moment donné. Le service Azure Backup utilise l’extension _VMSnapshotLinux_ dans Linux. L’extension est installée lors de la première sauvegarde de machine virtuelle si cette machine virtuelle est exécutée. Si la machine virtuelle n’est pas en cours d’exécution, le service Sauvegarde prend un instantané du stockage sous-jacent (car aucune écriture de l’application n’a lieu pendant l’arrêt de la machine virtuelle).
 
-Par défaut, le service Azure Backup effectue une sauvegarde cohérente avec le système de fichiers pour la machine virtuelle Linux, bien qu’il puisse être configuré pour effectuer une [sauvegarde cohérente avec les applications en utilisant des infrastructures pré-script et post-script](https://docs.microsoft.com/azure/backup/backup-azure-linux-app-consistent). Après que le service Sauvegarde Azure a pris l’instantané, les données sont transférées vers le coffre de sauvegarde. Pour optimiser l’efficacité, le service identifie et transfère uniquement les blocs de données qui ont été modifiés depuis la sauvegarde précédente.
+Par défaut, le service Azure Backup effectue une sauvegarde cohérente avec le système de fichiers pour la machine virtuelle Linux, bien qu’il puisse être configuré pour effectuer une [sauvegarde cohérente avec les applications en utilisant des infrastructures pré-script et post-script](../../backup/backup-azure-linux-app-consistent.md). Après que le service Sauvegarde Azure a pris l’instantané, les données sont transférées vers le coffre de sauvegarde. Pour optimiser l’efficacité, le service identifie et transfère uniquement les blocs de données qui ont été modifiés depuis la sauvegarde précédente.
 
 Une fois le transfert de données terminé, l’instantané est supprimé et un point de récupération est créé.
 
@@ -45,7 +45,7 @@ Créez une sauvegarde quotidienne planifiée dans un coffre Recovery Services :
 1. Connectez-vous au [portail Azure](https://portal.azure.com/).
 2. Dans le menu de gauche, sélectionnez **Machines virtuelles**. 
 3. Dans la liste, sélectionnez la machine virtuelle que vous souhaitez sauvegarder.
-4. Dans le panneau de la machine virtuelle, au niveau de la section **Paramètres**, cliquez sur **Sauvegarde**. Le panneau **Activer la sauvegarde** s’ouvre.
+4. Dans le panneau de la machine virtuelle, dans la section **Opérations**, cliquez sur **Sauvegarde**. Le panneau **Activer la sauvegarde** s’ouvre.
 5. Dans **Coffre Recovery Services**, cliquez sur **Créer** et fournissez le nom du nouveau coffre. Un coffre est créé dans le même groupe de ressources et au même emplacement que la machine virtuelle.
 6. Cliquez sur **Stratégie de sauvegarde**. Pour cet exemple, conservez les valeurs par défaut et cliquez sur **OK**.
 7. Dans le panneau **Activer la sauvegarde**, cliquez sur **Activer la sauvegarde**. Cette opération crée une sauvegarde quotidienne selon la planification par défaut.
@@ -70,7 +70,7 @@ Dans cet exemple, nous allons vous montrer comment récupérer la page web nginx
  
 1. Sur votre ordinateur local, ouvrez un navigateur et tapez l’adresse IP publique de votre machine virtuelle pour afficher la page web nginx par défaut.
 
-    ![Page web nginx par défaut](./media/tutorial-backup-vms/nginx-working.png)
+    ![Capture d’écran montrant la page web nginx par défaut.](./media/tutorial-backup-vms/nginx-working.png)
 
 1. Connectez-vous avec SSH à votre machine virtuelle.
 
@@ -86,7 +86,7 @@ Dans cet exemple, nous allons vous montrer comment récupérer la page web nginx
     
 4. Sur votre ordinateur local, actualisez le navigateur en appuyant sur CTRL + F5 pour confirmer que cette page nginx par défaut a disparu.
 
-    ![Page web nginx par défaut](./media/tutorial-backup-vms/nginx-broken.png)
+    ![Capture d’écran montrant que la page nginx par défaut a disparu.](./media/tutorial-backup-vms/nginx-broken.png)
     
 1. Sur votre ordinateur local, connectez-vous au [portail Azure](https://portal.azure.com/).
 6. Dans le menu de gauche, sélectionnez **Machines virtuelles**. 
@@ -171,4 +171,3 @@ Passez au didacticiel suivant pour en savoir plus sur la surveillance des machin
 
 > [!div class="nextstepaction"]
 > [Gouverner les machines virtuelles](tutorial-govern-resources.md)
-

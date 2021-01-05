@@ -1,26 +1,26 @@
 ---
 title: 'Tutoriel sur la classification d’images : Entraîner des modèles'
 titleSuffix: Azure Machine Learning
-description: Utilisez Azure Machine Learning pour entraîner un modèle de classification d’images avec scikit-learn dans un notebook Python Jupyter. Ce tutoriel est la première partie d’une série de deux.
+description: Utilisez Azure Machine Learning pour entraîner un modèle de classification d’images avec scikit-learn dans un notebook Jupyter Notebook en Python. Ce tutoriel est la première partie d’une série de deux.
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: core
 ms.topic: tutorial
 author: sdgilley
 ms.author: sgilley
-ms.date: 03/18/2020
-ms.custom: seodec18
-ms.openlocfilehash: bcc9e748cb5f88084b9cd3254654f9dc0fbc8aa1
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.date: 09/28/2020
+ms.custom: seodec18, devx-track-python
+ms.openlocfilehash: d1dbe51dd095290c296699bbb4bc6bd3a8caf7bf
+ms.sourcegitcommit: 21c3363797fb4d008fbd54f25ea0d6b24f88af9c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82115565"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96862426"
 ---
 # <a name="tutorial-train-image-classification-models-with-mnist-data-and-scikit-learn"></a>Tutoriel : Entraîner des modèles de classification d’images avec des données MNIST et scikit-learn 
-[!INCLUDE [applies-to-skus](../../includes/aml-applies-to-basic-enterprise-sku.md)]
 
-Dans ce tutoriel, vous allez entraîner un modèle Machine Learning sur des ressources de calcul distantes. Vous allez utiliser le workflow d’entraînement et de déploiement pour Azure Machine Learning dans un notebook Jupyter Python.  Vous pourrez ensuite utiliser le bloc-notes en tant que modèle pour entraîner votre propre modèle Machine Learning avec vos propres données. Ce tutoriel est le **premier d’une série de deux**.  
+
+Dans ce tutoriel, vous allez entraîner un modèle Machine Learning sur des ressources de calcul distantes. Vous allez utiliser le workflow d’entraînement et de déploiement pour Azure Machine Learning dans un notebook Jupyter Notebook en Python.  Vous pourrez ensuite utiliser le bloc-notes en tant que modèle pour entraîner votre propre modèle Machine Learning avec vos propres données. Ce tutoriel est le **premier d’une série de deux**.  
 
 Ce tutoriel montre comment effectuer l’entraînement d’une régression logistique simple à l’aide du jeu de données [MNIST](http://yann.lecun.com/exdb/mnist/) et de [scikit-learn](https://scikit-learn.org) avec Azure Machine Learning. MNIST est un jeu de données populaire composé de 70 000 images en nuances de gris. Chaque image est un chiffre manuscrit de 28 x 28 pixels, représentant un nombre de zéro à neuf. L’objectif est de créer un classifieur multiclasse pour identifier le chiffre représenté par une image donnée.
 
@@ -37,7 +37,7 @@ Vous découvrirez comment sélectionner un modèle et le déployer dans la [deux
 Si vous n’avez pas d’abonnement Azure, créez un compte gratuit avant de commencer. Essayez la [version gratuite ou payante d’Azure Machine Learning](https://aka.ms/AMLFree) dès aujourd’hui.
 
 >[!NOTE]
-> Le code présenté dans cet article a été testé avec le kit [SDK Azure Machine Learning](https://docs.microsoft.com/python/api/overview/azure/ml/intro?view=azure-ml-py) version 1.0.83.
+> Le code présenté dans cet article a été testé avec le kit [SDK Azure Machine Learning](/python/api/overview/azure/ml/intro?preserve-view=true&view=azure-ml-py) version 1.13.0.
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -54,7 +54,7 @@ Vous trouverez également le tutoriel et le fichier **utils.py** correspondant s
 > [!Important]
 > Le reste de cet article contient le même contenu que ce que vous voyez dans le notebook.  
 >
-> Basculez maintenant vers le notebook Jupyter si vous voulez lire le code à mesure que vous l’exécutez. 
+> Basculez maintenant vers le notebook Jupyter Notebook si vous voulez lire le code à mesure que vous l’exécutez. 
 > Pour exécuter une seule cellule de code dans un notebook, cliquez sur celle-ci et appuyez sur **Maj + Entrée**. Sinon, exécutez l’intégralité du notebook en choisissant **Run all** (Tout exécuter) dans la barre d’outils supérieure.
 
 ## <a name="set-up-your-development-environment"></a><a name="start"></a>Configurer votre environnement de développement
@@ -107,7 +107,7 @@ exp = Experiment(workspace=ws, name=experiment_name)
 
 En utilisant le service managé Capacité de calcul Azure Machine Learning, les scientifiques des données peuvent entraîner des modèles Machine Learning sur des clusters de machines virtuelles Azure. Il peut s’agir notamment de machines virtuelles prenant en charge les GPU. Dans ce tutoriel, vous allez créer la Capacité de calcul Azure Machine Learning qui vous servira d’environnement d’entraînement. Vous soumettrez du code Python à exécuter sur cette machine virtuelle plus loin dans ce tutoriel. 
 
-Le code ci-dessous crée automatiquement les clusters de calcul s’ils n’existent pas encore dans votre espace de travail.
+Le code ci-dessous crée automatiquement les clusters de calcul s’ils n’existent pas encore dans votre espace de travail. Il configure un cluster qui effectue un scale-down à 0 lorsqu’il n’est pas utilisé et peut effectuer un scale-up jusqu’à un maximum de 4 nœuds. 
 
  **La création de la cible de calcul prend environ cinq minutes.** Si la ressource de calcul se trouve déjà dans l’espace de travail, le code l’utilise et ignore le processus de création.
 
@@ -117,7 +117,7 @@ from azureml.core.compute import ComputeTarget
 import os
 
 # choose a name for your cluster
-compute_name = os.environ.get("AML_COMPUTE_CLUSTER_NAME", "cpucluster")
+compute_name = os.environ.get("AML_COMPUTE_CLUSTER_NAME", "cpu-cluster")
 compute_min_nodes = os.environ.get("AML_COMPUTE_CLUSTER_MIN_NODES", 0)
 compute_max_nodes = os.environ.get("AML_COMPUTE_CLUSTER_MAX_NODES", 4)
 
@@ -159,7 +159,7 @@ Avant d’entraîner un modèle, vous devez comprendre les données que vous uti
 
 ### <a name="download-the-mnist-dataset"></a>Télécharger le jeu de données MNIST
 
-Utilisez Azure Open Datasets pour récupérer les fichiers de données MNIST bruts. Les jeux de données [Azure Open Datasets](https://docs.microsoft.com/azure/open-datasets/overview-what-are-open-datasets) sont des jeux de données publics organisés que vous pouvez utiliser pour ajouter des fonctionnalités spécifiques à des scénarios à des solutions de Machine Learning afin d'obtenir des modèles plus précis. Chaque jeu de données a une classe correspondante, `MNIST` dans ce cas, pour récupérer les données de différentes façons.
+Utilisez Azure Open Datasets pour récupérer les fichiers de données MNIST bruts. Les jeux de données [Azure Open Datasets](../open-datasets/overview-what-are-open-datasets.md) sont des jeux de données publics organisés que vous pouvez utiliser pour ajouter des fonctionnalités spécifiques à des scénarios à des solutions de Machine Learning afin d'obtenir des modèles plus précis. Chaque jeu de données a une classe correspondante, `MNIST` dans ce cas, pour récupérer les données de différentes façons.
 
 Ce code récupère les données sous la forme d’un objet `FileDataset`, qui est une sous-classe de `Dataset`. Un `FileDataset` fait référence à des fichiers uniques ou multiples de différents formats dans vos magasins de fichiers ou vos URL publiques. La classe vous permet de télécharger ou de monter les fichiers dans votre calcul en créant une référence à l’emplacement de la source de données. En outre, vous inscrivez le jeu de données dans votre espace de travail pour faciliter la récupération pendant la formation.
 
@@ -183,7 +183,7 @@ mnist_file_dataset = mnist_file_dataset.register(workspace=ws,
 
 ### <a name="display-some-sample-images"></a>Afficher des exemples d’images
 
-Chargez les fichiers compressés dans des tableaux `numpy`. Utilisez ensuite `matplotlib` pour tracer 30 images aléatoires du jeu de données avec leurs étiquettes au-dessus. Cette étape nécessite une fonction `load_data` qui est incluse dans un fichier `util.py`. Ce fichier est inclus dans l’exemple de dossier. Vérifiez qu’il se trouve dans le même dossier que ce bloc-notes. La fonction `load_data` analyse les fichiers compressés dans des tableaux Numpy.
+Chargez les fichiers compressés dans des tableaux `numpy`. Utilisez ensuite `matplotlib` pour tracer 30 images aléatoires du jeu de données avec leurs étiquettes au-dessus. Cette étape nécessite une fonction `load_data` qui est incluse dans un fichier `utils.py`. Ce fichier est inclus dans l’exemple de dossier. Vérifiez qu’il se trouve dans le même dossier que ce bloc-notes. La fonction `load_data` analyse les fichiers compressés dans des tableaux Numpy.
 
 ```python
 # make sure utils.py is in the same directory as this code
@@ -223,7 +223,7 @@ Vous avez maintenant une idée de l’aspect de ces images et du résultat de pr
 Pour cette tâche, vous envoyez le travail pour l’exécuter sur le cluster d’entraînement distant défini plus tôt.  Pour envoyer un travail, vous devez :
 * Créer un répertoire
 * Créer un script d’entraînement
-* Créer un objet Estimator
+* Créer une configuration d’exécution de script
 * Envoi du travail
 
 ### <a name="create-a-directory"></a>Créer un répertoire
@@ -307,19 +307,19 @@ Notez comment le script obtient les données et enregistre les modèles :
   shutil.copy('utils.py', script_folder)
   ```
 
-### <a name="create-an-estimator"></a>Créer un estimateur
+### <a name="configure-the-training-job"></a>Configurer le travail d’entraînement
 
-Un objet estimateur est utilisé pour soumettre l’exécution. Azure Machine Learning propose des estimateurs préconfigurés pour les frameworks de Machine Learning courants ainsi qu’un estimateur générique. Pour créer un estimateur, spécifiez :
+Créez un objet [ScriptRunConfig](/python/api/azureml-core/azureml.core.scriptrunconfig?preserve-view=true&view=azure-ml-py) pour spécifier les détails de configuration de votre travail d’entraînement, y compris votre script d’entraînement, l’environnement à utiliser et la cible de calcul sur laquelle effectuer l’exécution. Configurez le ScriptRunConfig en spécifiant :
 
-
-* Le nom de l’objet estimateur, `est`.
 * Le répertoire qui contient vos scripts. Tous les fichiers dans ce répertoire sont chargés dans les nœuds de cluster pour l’exécution.
 * La cible de calcul. Dans le cas présent, vous utilisez le cluster de calcul Azure Machine Learning que vous avez créé.
 * Le nom du script d’entraînement, **train.py**.
 * Un environnement qui contient les bibliothèques nécessaires à l’exécution du script.
-* Les paramètres requis à partir du script d’entraînement.
+* Arguments nécessaires pour le script d’entraînement.
 
-Dans ce tutoriel, cette cible est AmlCompute. Tous les fichiers du dossier de scripts sont chargés dans les nœuds de cluster pour l’exécution. **data_folder** est configuré pour utiliser le jeu de données. Pour commencer, créez l’environnement qui contient la bibliothèque scikit-learn, le package azureml-dataprep nécessaire pour accéder au jeu de données et azureml-defaults, qui contient les dépendances pour les métriques de journalisation. Par ailleurs, azureml-defaults contient les dépendances nécessaires au déploiement du modèle en tant que service web dans la deuxième partie de ce tutoriel.
+Dans ce tutoriel, cette cible est AmlCompute. Tous les fichiers du dossier de scripts sont chargés dans les nœuds de cluster pour l’exécution. **--data_folder** est configuré pour utiliser le jeu de données.
+
+Pour commencer, créez l’environnement qui contient la bibliothèque scikit-learn, le package azureml-dataset-runtime nécessaire pour accéder au jeu de données et azureml-defaults, qui contient les dépendances pour les métriques de journalisation. Par ailleurs, azureml-defaults contient les dépendances nécessaires au déploiement du modèle en tant que service web dans la deuxième partie de ce tutoriel.
 
 Une fois l’environnement défini, inscrivez-le dans de l’espace de travail pour le réutiliser dans la deuxième partie du tutoriel.
 
@@ -329,38 +329,34 @@ from azureml.core.conda_dependencies import CondaDependencies
 
 # to install required packages
 env = Environment('tutorial-env')
-cd = CondaDependencies.create(pip_packages=['azureml-dataprep[pandas,fuse]>=1.1.14', 'azureml-defaults'], conda_packages = ['scikit-learn==0.22.1'])
+cd = CondaDependencies.create(pip_packages=['azureml-dataset-runtime[pandas,fuse]', 'azureml-defaults'], conda_packages=['scikit-learn==0.22.1'])
 
 env.python.conda_dependencies = cd
 
 # Register environment to re-use later
-env.register(workspace = ws)
+env.register(workspace=ws)
 ```
 
-Créez ensuite l’estimateur avec le code suivant.
+Ensuite, créez le ScriptRunConfig en spécifiant le script d’entraînement, la cible de calcul et l’environnement.
 
 ```python
-from azureml.train.estimator import Estimator
+from azureml.core import ScriptRunConfig
 
-script_params = {
-    # to mount files referenced by mnist dataset
-    '--data-folder': mnist_file_dataset.as_named_input('mnist_opendataset').as_mount(),
-    '--regularization': 0.5
-}
+args = ['--data-folder', mnist_file_dataset.as_mount(), '--regularization', 0.5]
 
-est = Estimator(source_directory=script_folder,
-              script_params=script_params,
-              compute_target=compute_target,
-              environment_definition=env,
-              entry_script='train.py')
+src = ScriptRunConfig(source_directory=script_folder,
+                      script='train.py', 
+                      arguments=args,
+                      compute_target=compute_target,
+                      environment=env)
 ```
 
 ### <a name="submit-the-job-to-the-cluster"></a>Envoyer le travail au cluster
 
-Exécutez l’expérience en soumettant l’objet estimateur :
+Exécutez l’expérience en soumettant l’objet ScriptRunConfig :
 
 ```python
-run = exp.submit(config=est)
+run = exp.submit(config=src)
 run
 ```
 
@@ -372,7 +368,7 @@ Au total, la première exécution prend **environ 10 minutes**. Mais pour les e
 
 Ce qui se passe pendant que vous attendez :
 
-- **Création d’images** : une image Docker qui correspond à l’environnement Python spécifié par l’estimateur est créée. L’image est chargée dans l’espace de travail. La création et le chargement de l’image prennent **environ cinq minutes**.
+- **Création d’images** : Une image Docker qui correspond à l’environnement Python spécifié par l’environnement Azure ML est créée. L’image est chargée dans l’espace de travail. La création et le chargement de l’image prennent **environ cinq minutes**.
 
   Cette étape se produit une fois pour chaque environnement Python, puisque le conteneur est mis en cache pour les exécutions suivantes. Lors de la création d’image, les journaux d’activité sont diffusés en continu vers l’historique d’exécutions. Vous pouvez superviser la progression de la création d’image à l’aide de ces journaux d’activité.
 
@@ -386,7 +382,7 @@ Vous pouvez vérifier la progression d’un travail en cours d’exécution de p
 
 ### <a name="jupyter-widget"></a>Widget Jupyter
 
-Surveillez la progression de l’exécution avec un [widget Jupyter](https://docs.microsoft.com/python/api/azureml-widgets/azureml.widgets?view=azure-ml-py). Comme l’envoi de l’exécution, le widget est asynchrone et fournit des mises à jour automatiques toutes les 10 à 15 secondes jusqu’à ce que la tâche soit terminée :
+Surveillez la progression de l’exécution avec un [widget Jupyter](/python/api/azureml-widgets/azureml.widgets?preserve-view=true&view=azure-ml-py). Comme l’envoi de l’exécution, le widget est asynchrone et fournit des mises à jour automatiques toutes les 10 à 15 secondes jusqu’à ce que la tâche soit terminée :
 
 ```python
 from azureml.widgets import RunDetails
@@ -397,7 +393,7 @@ RunDetails(run).show()
 
 ![Widget de bloc-notes](./media/tutorial-train-models-with-aml/widget.png)
 
-Si vous devez annuler une exécution, vous pouvez suivre [ces instructions](https://aka.ms/aml-docs-cancel-run).
+Si vous devez annuler une exécution, vous pouvez suivre [ces instructions](./how-to-manage-runs.md).
 
 ### <a name="get-log-results-upon-completion"></a>Obtenir des résultats du journal lors de l’achèvement
 

@@ -11,22 +11,22 @@ ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 07/13/2017
 ms.subservice: hybrid
 ms.author: billmath
 ms.custom: H1Hack27Feb2017
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: ae932191c7b76590ea217386dfd729add5566f87
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: d215c2e200308664f24daa28a0054c8f1bcfc09c
+ms.sourcegitcommit: 32c521a2ef396d121e71ba682e098092ac673b30
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79230105"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91319875"
 ---
 # <a name="using-connectors-with-the-azure-ad-connect-sync-service-manager"></a>Utilisation de connecteurs avec Azure AD Connect Sync Service Manager
 
-![Sync Service Manager](./media/how-to-connect-sync-service-manager-ui-connectors/connectors.png)
+![Capture d’écran montrant Sync Service Manager.](./media/how-to-connect-sync-service-manager-ui-connectors/connectors.png)
 
 L’onglet Connecteurs permet de gérer tous les systèmes auquel le moteur de synchronisation est connecté.
 
@@ -47,7 +47,7 @@ L’onglet Connecteurs permet de gérer tous les systèmes auquel le moteur de s
 
 ### <a name="delete"></a>DELETE
 L’action de suppression est utilisée dans deux cas.  
-![Sync Service Manager](./media/how-to-connect-sync-service-manager-ui-connectors/connectordelete.png)
+![Capture d’écran montrant la fenêtre « Supprimer le connecteur » avec l’option « Supprimer l’espace connecteur uniquement » activée.](./media/how-to-connect-sync-service-manager-ui-connectors/connectordelete.png)
 
 L’option **Supprimer l’espace connecteur uniquement** supprime toutes les données en conservant la configuration.
 
@@ -58,17 +58,17 @@ Les deux options synchronisent tous les objets et mettent à jour les objets du 
 ### <a name="configure-run-profiles"></a>Configurer les profils d’exécution
 Cette option vous permet de voir les profils d'exécution configurées pour un connecteur.
 
-![Sync Service Manager](./media/how-to-connect-sync-service-manager-ui-connectors/configurerunprofiles.png)
+![Capture d’écran montrant la fenêtre « Configurer les profils d’exécution » avec l’option « Importation d’écart » activée.](./media/how-to-connect-sync-service-manager-ui-connectors/configurerunprofiles.png)
 
 ### <a name="search-connector-space"></a>Espace de connecteur de recherche
 L’action de recherche dans l’espace connecteur permet de rechercher des objets et de résoudre les problèmes relatifs aux données.
 
-![Sync Service Manager](./media/how-to-connect-sync-service-manager-ui-connectors/cssearch.png)
+![Capture d’écran montrant la fenêtre « Espace de connecteur de recherche ».](./media/how-to-connect-sync-service-manager-ui-connectors/cssearch.png)
 
 Commencez par sélectionner une **portée**. Vous pouvez rechercher des données (nom unique relatif, nom de domaine, ancre, sous-arborescence) ou l’état de l’objet (toutes les autres options).  
-![Sync Service Manager](./media/how-to-connect-sync-service-manager-ui-connectors/cssearchscope.png)  
+![Capture d’écran montrant le menu déroulant « Étendue ».](./media/how-to-connect-sync-service-manager-ui-connectors/cssearchscope.png)  
 Par exemple, si vous effectuez une recherche dans la sous-arborescence, vous obtenez tous les objets d’une unité d’organisation.  
-![Sync Service Manager](./media/how-to-connect-sync-service-manager-ui-connectors/cssearchsubtree.png)  
+![Capture d’écran montrant un exemple de recherche d’une « sous-arborescence ».](./media/how-to-connect-sync-service-manager-ui-connectors/cssearchsubtree.png)  
 À partir de cette grille, vous pouvez sélectionner un objet, sélectionner des **propriétés** et [les suivre](tshoot-connect-object-not-syncing.md) par le biais du métaverse, de l’espace connecteur source vers l’espace connecteur cible.
 
 ### <a name="changing-the-ad-ds-account-password"></a>Modifier le mot de passe du compte AD DS

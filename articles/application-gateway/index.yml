@@ -10,12 +10,12 @@ metadata:
   author: vhorne
   ms.author: victorh
   ms.date: 03/24/2020
-  ms.openlocfilehash: aaa1774b7680f87e9c3dab13dbe53a627f3890bf
-  ms.sourcegitcommit: 940e16ff194d5163f277f98d038833b1055a1a3e
+  ms.openlocfilehash: 708050cad9cf7e27243b9af21f28dbc6b93b09e6
+  ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 03/25/2020
-  ms.locfileid: "80245733"
+  ms.lasthandoff: 10/09/2020
+  ms.locfileid: "91397145"
 landingContent:
 - title: En savoir plus sur Application Gateway
   linkLists:
@@ -27,6 +27,10 @@ landingContent:
     links:
     - text: Forum aux questions
       url: application-gateway-faq.md
+  - linkListType: whats-new
+    links:
+    - text: Nouveautés
+      url: https://azure.microsoft.com/updates/?category=networking&query=Application%20Gateway
 - title: Prendre en charge les volumes de trafic élevés
   linkLists:
   - linkListType: concept
@@ -71,6 +75,18 @@ landingContent:
     links:
     - text: Créer un contrôleur d’entrée pour AKS
       url: ingress-controller-install-new.md
+- title: Réécrire les en-têtes HTTP et l’URL à l’aide d’Application Gateway
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Réécrire les en-têtes HTTP et l’URL à l’aide d’Application Gateway
+      url: rewrite-http-headers-url.md
+  - linkListType: how-to-guide
+    links:
+    - text: Réécrire les en-têtes HTTP à l’aide du portail Azure
+      url: rewrite-http-headers-portal.md
+    - text: Réécrire l’URL et la chaîne de requête à l’aide du portail Azure
+      url: rewrite-url-portal.md
 - title: Résoudre les problèmes d’Application Gateway
   linkLists:
   - linkListType: overview

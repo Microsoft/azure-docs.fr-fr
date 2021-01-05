@@ -11,12 +11,12 @@ ms.topic: article
 ms.date: 01/10/2020
 ms.author: tdsp
 ms.custom: seodec18, previous-author=garyericson, previous-ms.author=garye
-ms.openlocfilehash: d09f13a65a72c6c856a7fcd3d943ec116f3da43f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f60b62faa36352ab1221b23332fca695f32a3d74
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76721861"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91250638"
 ---
 # <a name="cheat-sheet-for-an-automated-data-pipeline-for-azure-machine-learning-predictions"></a>Aide-mémoire relatif au pipeline de données automatisé pour les prévisions Azure Machine Learning
 L’ **aide-mémoire relatif au pipeline de données automatisé pour les prévisions Microsoft Azure Machine Learning** vous permet d’accéder aux technologies que vous pouvez utiliser pour transférer vos données au service web Machine Learning où celles-ci peuvent être évaluées par votre modèle d’analyse prédictive.
@@ -35,7 +35,6 @@ Téléchargez l’aide-mémoire ici : **[Aide-mémoire sur le pipeline de donné
 
 
 ## <a name="more-help-with-machine-learning-studio"></a>Aide supplémentaire sur Machine Learning Studio
-* Pour une vue d’ensemble de Microsoft Azure Machine Learning, consultez [Présentation de l’apprentissage automatique sur Microsoft Azure](../studio/what-is-machine-learning.md)
-* Pour plus d’informations sur le déploiement d’un service web d’évaluation, consultez [Déploiement d’un service web Azure Machine Learning](../studio/deploy-a-machine-learning-web-service.md).
-* Pour plus d’informations sur l’utilisation d’un service web d’évaluation, consultez [Utilisation d’un service web Azure Machine Learning](../studio/consume-web-services.md).
-
+* Pour une vue d’ensemble de Microsoft Azure Machine Learning, consultez [Présentation de l’apprentissage automatique sur Microsoft Azure](../classic/index.yml)
+* Pour plus d’informations sur le déploiement d’un service web d’évaluation, consultez [Déploiement d’un service web Azure Machine Learning](../classic/deploy-a-machine-learning-web-service.md).
+* Pour plus d’informations sur l’utilisation d’un service web d’évaluation, consultez [Utilisation d’un service web Azure Machine Learning](../classic/consume-web-services.md).

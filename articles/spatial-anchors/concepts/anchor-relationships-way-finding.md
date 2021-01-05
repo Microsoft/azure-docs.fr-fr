@@ -1,19 +1,19 @@
 ---
 title: Relations d’ancrage et orientation
 description: En savoir plus sur le modèle conceptuel sous-jacent des relations entre les ancres. Apprenez à connecter des ancres dans un espace et à utiliser l’API À proximité pour un scénario de guidage.
-author: ramonarguelles
-manager: vriveras
+author: msftradford
+manager: MehranAzimi-msft
 services: azure-spatial-anchors
-ms.author: rgarcia
-ms.date: 02/24/2019
+ms.author: parkerra
+ms.date: 11/20/2020
 ms.topic: conceptual
 ms.service: azure-spatial-anchors
-ms.openlocfilehash: f2fd8f4b7d03be8822c3ec12e2be589054942ce3
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 8c321eae9451715077aa50d163b62b51ec88ce1a
+ms.sourcegitcommit: b8eba4e733ace4eb6d33cc2c59456f550218b234
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74270596"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "95496883"
 ---
 # <a name="anchor-relationships-and-way-finding-in-azure-spatial-anchors"></a>Relations entre les ancres et guidage dans Azure Spatial Anchors
 
@@ -73,7 +73,7 @@ Vous pouvez continuer cette procédure pour d’autres ancres et sessions au fil
 
 ### <a name="verify-anchor-connections"></a>Vérifier les connexions d’ancres
 
-L’application peut vérifier que deux ancres sont connectées en émettant une requête d’ancre à proximité. Lorsque le résultat de la requête contient l’ancre cible, la connexion d’ancre est vérifiée. Si les ancres ne sont pas connectées, l’application peut essayer de les reconnecter.
+L’application peut vérifier que deux ancres sont connectées en émettant une requête pour les ancres avoisinantes, ce que vous faites en définissant le `NearAnchorCriteria` sur un `CloudSpatialAnchorWatcher`. Lorsque le résultat de la requête contient l’ancre cible, la connexion d’ancre est vérifiée. Si les ancres ne sont pas connectées, l’application peut essayer de les reconnecter.
 
 Voici quelques raisons pour lesquelles la connexion d’ancres peut échouer :
 

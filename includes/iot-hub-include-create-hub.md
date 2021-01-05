@@ -8,12 +8,12 @@ ms.topic: include
 ms.date: 02/14/2020
 ms.author: robinsh
 ms.custom: include file
-ms.openlocfilehash: cc53f7ae6eb6254eaa05bf643ecfa0188650df95
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: 2144945647dc6b2e31e5593de3b6c8c0bf99a606
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "77461857"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95993294"
 ---
 Cette section décrit comment créer un hub IoT à l’aide du [portail Azure](https://portal.azure.com).
 
@@ -50,13 +50,13 @@ Cette section décrit comment créer un hub IoT à l’aide du [portail Azure](h
     - **Unités IoT Hub** : Le nombre de messages autorisés par unité par jour dépend du niveau de tarification de votre concentrateur. Par exemple, si vous souhaitez que le hub prenne en charge l’arrivée de 700 000 messages, vous choisissez deux unités de niveau S1.
     Pour plus d’informations sur les autres options de niveau, consultez [Choix du bon niveau IoT Hub](../articles/iot-hub/iot-hub-scaling.md).
 
-    - **Azure Security Center** : Activez cette fonction pour ajouter une couche de protection supplémentaire contre les menaces à IoT et à vos appareils. Cette option n’est pas disponible pour les hubs au niveau gratuit. Pour plus d’informations sur cette fonctionnalité, consultez [Azure Security Center pour IoT](https://docs.microsoft.com/azure/asc-for-iot/).
+    - **Azure Security Center** : Activez cette fonction pour ajouter une couche de protection supplémentaire contre les menaces à IoT et à vos appareils. Cette option n’est pas disponible pour les hubs au niveau gratuit. Pour plus d’informations sur cette fonctionnalité, consultez [Azure Security Center pour IoT](/azure/asc-for-iot/).
 
     - **Paramètres avancés** > **Partitions appareil-à-cloud** : cette propriété associe les messages appareil-à-cloud au nombre de lecteurs simultanés des messages. La plupart des hubs n’ont besoin que de 4 partitions.
 
 1.  Sélectionnez **Suivant : Étiquettes** pour continuer à l’écran suivant.
 
-    Les étiquettes sont des paires nom/valeur. Vous pouvez affecter la même étiquette à plusieurs ressources et groupes de ressources pour catégoriser les ressources et regrouper la facturation. Pour plus d’informations, consultez [Utiliser des étiquettes pour organiser vos ressources Azure](../articles/azure-resource-manager/management/tag-resources.md).
+    Les étiquettes sont des paires nom/valeur. Vous pouvez affecter la même étiquette à plusieurs ressources et groupes de ressources pour catégoriser les ressources et regrouper la facturation. Pour plus d’informations, consultez [Organisation des ressources Azure à l’aide de balises](../articles/azure-resource-manager/management/tag-resources.md).
 
     ![Affecter des étiquettes pour le hub à l’aide du portail Azure](./media/iot-hub-include-create-hub/iot-hub-create-tabs.png)
 

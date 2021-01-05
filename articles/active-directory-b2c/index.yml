@@ -12,122 +12,134 @@ metadata:
   author: msmimart
   ms.author: mimart
   ms.date: 01/28/2020
-  ms.openlocfilehash: fe0fc7f20a81d9b887a61ca382dafcb69fc420d2
-  ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+  ms.openlocfilehash: 1f7eac5adc9099f4c00b5a12528a74a50965675c
+  ms.sourcegitcommit: 63d0621404375d4ac64055f1df4177dfad3d6de6
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 03/24/2020
-  ms.locfileid: "78187710"
+  ms.lasthandoff: 12/15/2020
+  ms.locfileid: "97507997"
 landingContent:
-- title: Apprendre les bases
+- title: Azure AD B2C
   linkLists:
   - linkListType: overview
     links:
     - text: Qu’est-ce qu’Azure AD B2C ?
       url: overview.md
+    - text: Comparer les solutions pour les identités externes
+      url: ../active-directory/external-identities/compare-with-b2c.md?bc=%2fazure%2factive-directory-b2c%2fbread%2ftoc.json&toc=%2fazure%2factive-directory-b2c%2fTOC.json
+    - text: Prise en main d’Azure Active Directory B2C
+      url: tutorial-create-tenant.md
     - text: Vue d’ensemble technique et des fonctionnalités
       url: technical-overview.md
-  - linkListType: get-started
-    links:
-    - text: Créer un client Azure AD B2C
-      url: tutorial-create-tenant.md
-    - text: Inscrire une application
-      url: tutorial-register-applications.md
-    - text: Configurer des flux utilisateur
-      url: tutorial-create-user-flows.md
-  - linkListType: video
-    links:
-    - text: Qu’est-ce qu’Azure AD B2C ? (9:35)
-      url: https://www.youtube.com/watch?v=GmBKlXED9Ug
-- title: Ajouter une identité aux applications ASP.NET
+    - text: Tarifs
+      url: https://azure.microsoft.com/pricing/details/active-directory-b2c/
+- title: Concepts de base
   linkLists:
-  - linkListType: quickstart
+  - linkListType: learn
     links:
-    - text: Configurer la connexion
-      url: quickstart-web-app-dotnet.md
-  - linkListType: tutorial
-    links:
-    - text: Authentifier les utilisateurs auprès d’une application web .NET
-      url: tutorial-web-app-dotnet.md
-    - text: Accorder l’accès d’API à une application web .NET
-      url: tutorial-web-api-dotnet.md
-    - text: Activer une connexion d’entreprise et de réseaux sociaux
-      url: tutorial-add-identity-providers.md
-  - linkListType: download
-    links:
-    - text: Exemples de code pour les applications web et les API
-      url: code-samples.md#web-apps-and-apis
-- title: Ajouter une identité à des applications monopages
+    - text: Authentification et autorisation
+      url: ../active-directory/develop/authentication-vs-authorization.md?bc=%2fazure%2factive-directory-b2c%2fbread%2ftoc.json&toc=%2fazure%2factive-directory-b2c%2fTOC.json
+    - text: Jetons
+      url: ../active-directory/develop/security-tokens.md?bc=%2fazure%2factive-directory-b2c%2fbread%2ftoc.json&toc=%2fazure%2factive-directory-b2c%2fTOC.json
+    - text: Protocoles
+      url: ../active-directory/develop/v2-app-types.md?bc=%2fazure%2factive-directory-b2c%2fbread%2ftoc.json&toc=%2fazure%2factive-directory-b2c%2fTOC.json
+    - text: Bibliothèque d’authentification
+      url: ../active-directory/develop/msal-overview.md?bc=%2fazure%2factive-directory-b2c%2fbread%2ftoc.json&toc=%2fazure%2factive-directory-b2c%2fTOC.json
+    - text: 'Créer un site web : HTML, CSS, JavaScript'
+      url: /learn/modules/build-simple-website/
+- title: Cas d’utilisation courants
   linkLists:
-  - linkListType: quickstart
+  - linkListType: how-to-guide
     links:
-    - text: Configurer la connexion
-      url: quickstart-single-page-app.md
-  - linkListType: tutorial
-    links:
-    - text: Authentifier les utilisateurs dans une application monopage
-      url: tutorial-single-page-app.md
-    - text: Accorder l’accès d’API à une application monopage
-      url: tutorial-single-page-app-webapi.md
-    - text: Activer une connexion d’entreprise et de réseaux sociaux
-      url: tutorial-add-identity-providers.md
-  - linkListType: download
-    links:
-    - text: Exemples de code pour les applications monopages
-      url: code-samples.md#single-page-apps
-- title: Ajouter une identité à des applications de bureau
-  linkLists:
-  - linkListType: quickstart
-    links:
-    - text: Configurer la connexion
-      url: quickstart-native-app-desktop.md
-  - linkListType: tutorial
-    links:
-    - text: Authentifier des utilisateurs dans des clients natifs
-      url: tutorial-desktop-app.md
-    - text: Accorder l’accès d’API à des clients natifs
-      url: tutorial-desktop-app-webapi.md
-    - text: Activer une connexion d’entreprise et de réseaux sociaux
-      url: tutorial-add-identity-providers.md
-  - linkListType: download
-    links:
-    - text: Exemples de code pour les applications mobiles et de bureau
-      url: code-samples.md
-- title: Configurer des scénarios d’identité courants
-  linkLists:
-  - linkListType: concept
-    links:
-    - text: Introduction aux flux utilisateur
+    - text: Activer une connexion en libre-service
       url: user-flow-overview.md
+    - text: 'Ajouter des identités sociales et professionnelles : OIDC/OAuth2/SAML'
+      url: tutorial-add-identity-providers.md
+    - text: Activer l’authentification unique (SSO)
+      url: session-behavior.md
+    - text: Personnaliser votre interface/expérience utilisateur
+      url: customize-ui-with-html.md
+    - text: Migration d’utilisateurs et d’applications
+      url: user-migration.md
+- title: Ajouter une connexion à vos applications
+  linkLists:
+  - linkListType: sample
+    links:
+    - text: 'Démarrage rapide : Application web'
+      url: quickstart-web-app-dotnet.md
+    - text: Application mobile/native
+      url: code-samples.md#mobile-and-desktop-apps
+    - text: Application monopage
+      url: code-samples.md#single-page-apps
+    - text: Application web
+      url: code-samples.md#web-apps-and-apis
+- title: 'Autorisation : Appeler et sécuriser vos API'
+  linkLists:
   - linkListType: how-to-guide
     links:
-    - text: Inscrire et connecter des utilisateurs
-      url: tutorial-create-user-flows.md
-    - text: Personnaliser l’interface utilisateur
-      url: customize-ui-overview.md
-    - text: Activer la connexion avec Facebook
-      url: identity-provider-facebook.md
-  - linkListType: video
-    links:
-    - text: Guide pratique pour configurer des stratégies de base (9:41)
-      url: https://www.youtube.com/watch?v=nWJ3m82536A
-- title: Créer des scénarios d’identité avancés
+    - text: Demander un jeton d’accès
+      url: access-tokens.md
+    - text: Inscrire et sécuriser votre API
+      url: tutorial-web-api-dotnet.md
+    - text: 'Exemples : API et applications web'
+      url: code-samples.md#web-apps-and-apis
+    - text: Intégrer à la passerelle API
+      url: secure-api-management.md?tabs=app-reg-ga
+- title: Sécurité, confidentialité et conformité
   linkLists:
   - linkListType: concept
     links:
-    - text: Introduction aux stratégies personnalisées
-      url: custom-policy-overview.md
+    - text: Gérer les menaces
+      url: threat-management.md
+    - text: Apprendre où les données utilisateur sont stockées
+      url: data-residency.md
+    - text: Réglementations
+      url: ../compliance/index.yml
+    - text: Accès utilisateur et conditions d’utilisation
+      url: manage-user-access.md
+- title: Opérations
+  linkLists:
   - linkListType: how-to-guide
     links:
-    - text: Inscrire et connecter des utilisateurs
-      url: custom-policy-get-started.md
-    - text: Personnaliser l’interface utilisateur
-      url: custom-policy-ui-customization.md
-    - text: Activer la connexion avec Azure AD multilocataire
-      url: identity-provider-azure-ad-multi-tenant-custom.md
-    - text: Ajouter votre propre logique métier avec des API REST
-      url: custom-policy-rest-api-claims-validation.md
-  - linkListType: video
+    - text: Pipeline CI/CD
+      url: deploy-custom-policies-devops.md
+    - text: Surveillance
+      url: azure-monitor.md
+    - text: Contrôle d’accès en fonction du rôle pour les administrateurs
+      url: ../active-directory/roles/permissions-reference.md
+    - text: User Management
+      url: manage-user-accounts-graph-api.md
+    - text: Dépannage
+      url: troubleshoot-custom-policies.md?tabs-app-reg-ga
+    - text: Meilleures pratiques
+      url: best-practices.md
+- title: Ressources
+  linkLists:
+  - linkListType: overview
     links:
-    - text: Cas d’usage avancés avec Azure AD B2C (4:54)
-      url: https://www.youtube.com/watch?v=-ZmPBuMZY-Y
+    - text: Stack Overflow
+      url: https://stackoverflow.com/questions/tagged/azure-ad-b2c+identity-experience-framework
+    - text: GitHub
+      url: https://github.com/azure-ad-b2c/samples
+    - text: YouTube
+      url: https://www.youtube.com/results?search_query=azure+ad+b2c
+    - text: Formation
+      url: solution-articles.md
+    - text: Mises à jour de service
+      url: https://azure.microsoft.com/updates/?product=active-directory-b2c
+    - text: Forum aux questions
+      url: faq.md
+    - text: Support Microsoft
+      url: support-options.md
+- title: Intégrations courantes
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: 'Azure Monitor : conserver et analyser vos journaux'
+      url: azure-monitor.md
+    - text: 'Azure DevOps Services : créer votre pipeline CI/CD'
+      url: deploy-custom-policies-devops.md
+    - text: 'Application Insights : Dépanner et obtenir vos insights utilisateur'
+      url: troubleshoot-with-application-insights.md
+    - text: Intégrer avec nos partenaires technologiques
+      url: partner-gallery.md

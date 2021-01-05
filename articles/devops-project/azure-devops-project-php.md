@@ -13,12 +13,12 @@ ms.topic: quickstart
 ms.date: 03/24/2020
 ms.author: mlearned
 ms.custom: mvc
-ms.openlocfilehash: 3e4913c4be0d59bc37e3da2358c4f8ec302a26e5
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 5727a08159f750a69920f66f4b743c187aa00885
+ms.sourcegitcommit: d2d1c90ec5218b93abb80b8f3ed49dcf4327f7f4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82233786"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97588962"
 ---
 # <a name="create-a-cicd-pipeline-for-php-with-azure-devops-starter"></a>Créer un pipeline CI/CD pour PHP avec Azure DevOps Starter
 
@@ -64,9 +64,9 @@ Si vous ne disposez pas d’un abonnement Azure, vous pouvez en obtenir un gratu
 
  DevOps Starter crée un dépôt Git dans Azure Repos ou dans GitHub. Pour voir le dépôt et modifier le code de votre application, effectuez les étapes ci-dessous :
 
-1. À gauche du tableau de bord DevOps Starter, sélectionnez le lien correspondant à votre branche master. Ce lien ouvre une vue sur le référentiel Git récemment créé.
+1. À gauche du tableau de bord DevOps Starter, sélectionnez le lien correspondant à votre branche principale. Ce lien ouvre une vue sur le référentiel Git récemment créé.
 
-1. Pour afficher l’URL du clone du référentiel, sélectionnez **Clone** en haut à droite du navigateur. Vous pouvez cloner votre référentiel Git dans votre environnement de développement intégré favori. Dans les prochaines étapes, utilisez le navigateur web pour effectuer et valider des modifications de code directement dans la branche master.
+1. Pour afficher l’URL du clone du référentiel, sélectionnez **Clone** en haut à droite du navigateur. Vous pouvez cloner votre référentiel Git dans votre environnement de développement intégré favori. Dans les prochaines étapes, utilisez le navigateur web pour effectuer et valider des modifications de code directement dans la branche principale.
 
 1. Sur la gauche, accédez au fichier **resources/views/welcome.blade.php**.
 
@@ -125,4 +125,4 @@ Quand vous n’en avez plus besoin, vous pouvez supprimer Azure App Service et l
 Quand vous avez configuré votre processus CI/CD, les pipelines de build et de mise en production ont été créés automatiquement. Vous pouvez le modifier afin qu’il réponde aux besoins de votre équipe. Pour en savoir plus sur le pipeline CI/CD Azure, consultez ce tutoriel :
 
 > [!div class="nextstepaction"]
-> [Personnaliser le processus CD](https://docs.microsoft.com/azure/devops/pipelines/release/define-multistage-release-process?view=vsts)
+> [Personnaliser le processus CD](/azure/devops/pipelines/release/define-multistage-release-process?view=vsts)

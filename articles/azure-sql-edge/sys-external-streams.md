@@ -1,20 +1,20 @@
 ---
-title: sys.external_streams (Transact-SQL) - Azure SQL Edge (préversion)
-description: En savoir plus sur l’utilisation de sys.external_streams dans Azure SQL Edge (préversion)
+title: sys.external_streams (Transact-SQL) - Azure SQL Edge
+description: En savoir plus sur l’utilisation de sys.external_streams dans Azure SQL Edge
 keywords: sys.external_streams, SQL Edge
-services: sql-database-edge
-ms.service: sql-database-edge
+services: sql-edge
+ms.service: sql-edge
 ms.topic: reference
 author: SQLSourabh
 ms.author: sourabha
 ms.reviewer: sstein
 ms.date: 05/19/2019
-ms.openlocfilehash: d47139b0b2a20ecfcf92bfc55a8b47c8e3cf7dab
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.openlocfilehash: 04950f01c06bc3c8ed3bb11a790310c2319a0579
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83594468"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90900309"
 ---
 # <a name="sysexternal_streams-transact-sql"></a>sys.external_streams (Transact-SQL)
 

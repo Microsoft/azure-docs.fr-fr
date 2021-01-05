@@ -9,12 +9,13 @@ ms.author: flborn
 ms.date: 12/11/2019
 ms.topic: conceptual
 ms.service: azure-remote-rendering
-ms.openlocfilehash: 4854d5ff9d697a2bf082a788c0e761a2152b0294
-ms.sourcegitcommit: 0690ef3bee0b97d4e2d6f237833e6373127707a7
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 853c71ed4803f717188568ec051c40c4f73afe95
+ms.sourcegitcommit: 957c916118f87ea3d67a60e1d72a30f48bad0db6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83758705"
+ms.lasthandoff: 10/19/2020
+ms.locfileid: "92202869"
 ---
 # <a name="graphics-binding"></a>Liaison graphique
 
@@ -27,7 +28,7 @@ Une fois configurée, la liaison graphique donne accès à différentes fonction
 Dans Unity, la liaison entière est gérée par le struct `RemoteUnityClientInit` passé dans `RemoteManagerUnity.InitializeManager`. Pour définir le mode graphique, le champ `GraphicsApiType` doit être défini sur la liaison choisie. Le champ est renseigné automatiquement selon qu’un XRDevice est présent ou non. Le comportement peut être substitué manuellement par les comportements suivants :
 
 * **HoloLens 2** : la liaison graphique [Windows Mixed Reality](#windows-mixed-reality) est toujours utilisée.
-* **Application de bureau UWP plate** : la [simulation](#simulation) est toujours utilisée. Pour utiliser ce mode, veillez à suivre les étapes décrites dans [Didacticiel : Configuration d’un projet Unity en partant de zéro](../tutorials/unity/project-setup.md).
+* **Application de bureau UWP plate** : la [simulation](#simulation) est toujours utilisée.
 * **Éditeur Unity** : la [simulation](#simulation) est toujours utilisée à moins qu’un casque de réalité virtuelle WMR soit connecté, auquel cas ARR est désactivé pour permettre le débogage des parties non-ARR de l’application. Voir aussi la [communication à distance holographique](../how-tos/unity/holographic-remoting.md).
 
 La seule autre partie pertinente pour Unity est l’accès à la [liaison de base](#access), toutes les autres sections ci-dessous peuvent être ignorées.
@@ -115,12 +116,14 @@ if (*wmrBinding->UpdateUserCoordinateSystem(ptr) == Result::Success)
 }
 ```
 
-
 Où le `ptr` ci-dessus doit être un pointeur vers un objet `ABI::Windows::Perception::Spatial::ISpatialCoordinateSystem` natif qui définit le système de coordonnées de l’espace universel dans lequel les coordonnées de l’API sont exprimées.
 
 #### <a name="render-remote-image"></a>Afficher l’image distante
 
-Au début de chaque image, l’image distante doit être affichée dans la mémoire tampon d’arrière-plan. Pour ce faire, appelez `BlitRemoteFrame`, qui remplit à la fois les informations de couleur et de profondeur dans la cible de rendu actuellement liée. Par conséquent, il est important de le faire après avoir lié la mémoire tampon d’arrière-plan en tant que cible de rendu.
+Au début de chaque image, l’image distante doit être affichée dans la mémoire tampon d’arrière-plan. Pour ce faire, appelez `BlitRemoteFrame`, qui remplit à la fois les informations de couleur et de profondeur des yeux dans la cible de rendu actuellement liée. Par conséquent, il est important de le faire après avoir lié la mémoire tampon d’arrière-plan complète en tant que cible de rendu.
+
+> [!WARNING]
+> Après que l’image distante a été intégrée dans la mémoire tampon d’entrée, le contenu local doit être rendu à l’aide d’une technique de rendu stéréo simple passe, par exemple à l’aide de **SV_RenderTargetArrayIndex**. L’utilisation d’autres techniques de rendu stéréo, telles que le rendu de chaque œil dans une passe distincte, doit être évitée car elle peut entraîner une dégradation importante des performances ou des artefacts graphiques.
 
 ```cs
 AzureSession currentSession = ...;
@@ -137,11 +140,23 @@ wmrBinding->BlitRemoteFrame();
 ### <a name="simulation"></a>Simulation
 
 `GraphicsApiType.SimD3D11` est la liaison de simulation et, si elle est sélectionnée, elle crée la liaison graphique `GraphicsBindingSimD3d11`. Cette interface est utilisée pour simuler le mouvement de la tête, par exemple dans une application de bureau, et affiche une image monoscopique.
+
+Pour implémenter la liaison de simulation, il est important de comprendre la différence entre la caméra locale et l'image distante, comme décrit sur la page [caméra](../overview/features/camera.md).
+
+Deux caméras sont nécessaires :
+
+* **Caméra locale** : cette caméra correspond à la position actuelle de la caméra pilotée par la logique d'application.
+* **Caméra proxy** : cette caméra correspond à l'*image distante* actuelle qui a été envoyée par le serveur. Comme il y a un délai entre la demande de l'image par le client et l'arrivée de celle-ci, l'*image distante* est toujours un peu en retard par rapport au déplacement de la caméra locale.
+
+L'approche de base est la suivante : l'image distante et le contenu local sont rendus dans une cible hors écran à l'aide de la caméra proxy. L'image proxy est ensuite reprojetée dans l'espace de la caméra locale. Pour plus d'informations, consultez [Reprojection en phase tardive](../overview/features/late-stage-reprojection.md).
+
 La configuration est un peu plus complexe et fonctionne comme suit :
 
 #### <a name="create-proxy-render-target"></a>Créer un proxy de cible de rendu
 
-Le contenu local et distant doit être affiché sur une cible de rendu des couleurs et de la profondeur hors écran appelée « proxy » à l’aide des données de la caméra proxy fournies par la fonction `GraphicsBindingSimD3d11.Update`. Le proxy doit correspondre à la résolution de la mémoire tampon d’arrière-plan. Une fois qu’une session est prête, `GraphicsBindingSimD3d11.InitSimulation` doit être appelée avant de l’y connecter :
+Le contenu local et distant doit être affiché sur une cible de rendu des couleurs et de la profondeur hors écran appelée « proxy » à l’aide des données de la caméra proxy fournies par la fonction `GraphicsBindingSimD3d11.Update`.
+
+Le proxy doit correspondre à la résolution de la mémoire tampon d'arrière-plan, et doit être au format *DXGI_FORMAT_R8G8B8A8_UNORM* ou *DXGI_FORMAT_B8G8R8A8_UNORM*. Une fois qu’une session est prête, `GraphicsBindingSimD3d11.InitSimulation` doit être appelée avant de l’y connecter :
 
 ```cs
 AzureSession currentSession = ...;
@@ -231,6 +246,19 @@ else
 }
 ```
 
+## <a name="api-documentation"></a>Documentation de l’API
+
+* [RemoteManagerStatic.StartupRemoteRendering() C#](/dotnet/api/microsoft.azure.remoterendering.remotemanagerstatic.startupremoterendering)
+* [Classe GraphicsBinding C#](/dotnet/api/microsoft.azure.remoterendering.graphicsbinding)
+* [Classe GraphicsBindingWmrD3d11 C#](/dotnet/api/microsoft.azure.remoterendering.graphicsbindingwmrd3d11)
+* [Classe GraphicsBindingSimD3d11 C#](/dotnet/api/microsoft.azure.remoterendering.graphicsbindingsimd3d11)
+* [Struct RemoteRenderingInitialization C++](/cpp/api/remote-rendering/remoterenderinginitialization)
+* [Classe GraphicsBinding C++](/cpp/api/remote-rendering/graphicsbinding)
+* [Classe GraphicsBindingWmrD3d11 C++](/cpp/api/remote-rendering/graphicsbindingwmrd3d11)
+* [Classe GraphicsBindingSimD3d11 C++](/cpp/api/remote-rendering/graphicsbindingsimd3d11)
+
 ## <a name="next-steps"></a>Étapes suivantes
 
-* [Tutoriel : Configuration d’un projet Unity en partant de zéro](../tutorials/unity/project-setup.md)
+* [Appareil photo](../overview/features/camera.md)
+* [Reprojection en phase tardive](../overview/features/late-stage-reprojection.md)
+* [Tutoriel : Affichage de modèles rendus à distance](../tutorials/unity/view-remote-models/view-remote-models.md)

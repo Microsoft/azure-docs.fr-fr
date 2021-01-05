@@ -3,21 +3,21 @@ title: Configurer un environnement de développement Windows
 description: Installez le runtime, le kit de développement logiciel et créez un cluster de développement local. Une fois la configuration terminée, vous serez prêt à générer des applications sur Windows.
 author: peterpogorski
 ms.topic: conceptual
-ms.date: 04/20/2020
-ms.custom: sfrev
-ms.openlocfilehash: 1b43c838537e46ffbaf6c4adcfb117f6718bd046
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.date: 06/16/2020
+ms.custom: sfrev, devx-track-azurepowershell
+ms.openlocfilehash: c252a1dc86c50327e32816abd99bc206f3b74608
+ms.sourcegitcommit: 80c1056113a9d65b6db69c06ca79fa531b9e3a00
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81731751"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96902882"
 ---
 # <a name="prepare-your-development-environment-on-windows"></a>Préparer votre environnement de développement sur Windows
 
 > [!div class="op_single_selector"]
 > * [Windows](service-fabric-get-started.md) 
 > * [Linux](service-fabric-get-started-linux.md)
-> * [OSX](service-fabric-get-started-mac.md)
+> * [Mac OS X](service-fabric-get-started-mac.md)
 >
 >
 
@@ -42,7 +42,7 @@ Les versions de système d’exploitation prises en charge pour le développemen
 
 ## <a name="install-the-sdk-and-tools"></a>Installer le Kit de développement logiciel (SDK) et les outils
 
-Web Platform Installer (WebPI) est la méthode recommandée pour installer le Kit de développement logiciel (SDK) et les outils. Si vous recevez des erreurs de runtime utilisant WebPI, vous trouverez également des liens directs vers les programmes d’installation dans les notes de publication pour une version spécifique de Service Fabric. Les notes de publication figurent dans les diverses annonces de version sur le [blog de l’équipe Service Fabric](https://blogs.msdn.microsoft.com/azureservicefabric/).
+Web Platform Installer (WebPI) est la méthode recommandée pour installer le Kit de développement logiciel (SDK) et les outils. Si vous recevez des erreurs de runtime utilisant WebPI, vous trouverez également des liens directs vers les programmes d’installation dans les notes de publication pour une version spécifique de Service Fabric. Les notes de publication figurent dans les diverses annonces de version sur le [blog de l’équipe Service Fabric](https://techcommunity.microsoft.com/t5/azure-service-fabric/bg-p/Service-Fabric).
 
 > [!NOTE]
 > Les mises à niveau du cluster de développement Service Fabric local ne sont pas prises en charge.
@@ -54,12 +54,6 @@ En outre, vous devez installer le Kit de développement logiciel (SDK) et le run
 
 * [Installez le Kit de développement logiciel (SDK) Microsoft Azure Service Fabric][core-sdk]
 
-### <a name="to-use-visual-studio-2015-requires-visual-studio-2015-update-2-or-later"></a>Pour utiliser Visual Studio 2015 (requiert Visual Studio 2015 Update 2 ou une version ultérieure)
-
-Pour Visual Studio 2015, les outils Service Fabric sont installés avec le Kit de développement logiciel (SDK) et le runtime, à l’aide de Web Platform Installer :
-
-* [Installer le Kit de développement logiciel (SDK) et les outils de Microsoft Azure Service Fabric][full-bundle-vs2015]
-
 ### <a name="sdk-installation-only"></a>Installation du Kit de développement logiciel (SDK) uniquement
 
 Si vous avez uniquement besoin du SDK, vous pouvez installer ce package :
@@ -68,8 +62,8 @@ Si vous avez uniquement besoin du SDK, vous pouvez installer ce package :
 
 Les versions actuelles sont les suivantes :
 
-* SDK et outils Service Fabric 4.1.409
-* Runtime Service Fabric 7.1.409
+* SDK et outils Service Fabric 4.2.445
+* Runtime Service Fabric 7.2.445
 
 Pour obtenir la liste des versions prises en charge, consultez [Versions de Service Fabric](service-fabric-versions.md).
 
@@ -94,8 +88,9 @@ Maintenant que vous avez fini de configurer votre environnement de développemen
 
 * [Découvrez comment créer, déployer et gérer des applications](service-fabric-tutorial-create-dotnet-app.md)
 * [Découvrir les modèles de programmation : Reliable Services et Reliable Actors](service-fabric-choose-framework.md)
-* [Consulter les exemples de code Service Fabric sur GitHub](https://aka.ms/servicefabricsamples)
+* [Consulter les exemples de code Service Fabric sur GitHub](/samples/browse/?products=azure)
 * [Visualiser votre cluster à l’aide de l’outil Service Fabric Explorer](service-fabric-visualizing-your-cluster.md)
+* [Préparer un environnement de développement Linux sur Windows](service-fabric-local-linux-cluster-windows.md)
 * En savoir plus sur les [options de prise en charge de Service Fabric](service-fabric-support.md)
 
 [1]: https://azure.microsoft.com/campaigns/service-fabric/ "Page de campagne Service Fabric"

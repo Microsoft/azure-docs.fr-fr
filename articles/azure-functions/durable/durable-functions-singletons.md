@@ -3,14 +3,14 @@ title: Singletons pour l’extension Fonctions durables - Azure
 description: Découvrez comment utiliser des singletons dans l’extension Durable Functions pour Azure Functions.
 author: cgillum
 ms.topic: conceptual
-ms.date: 11/03/2019
+ms.date: 09/10/2020
 ms.author: azfuncdf
-ms.openlocfilehash: 4eff7c4c91ed664fcf1f4fc7a8be2d43d24e5c6b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 50ed473d61dff19f41f77a79513c0ddab521e56f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76262807"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91325740"
 ---
 # <a name="singleton-orchestrators-in-durable-functions-azure-functions"></a>Orchestrateurs de singleton dans l’extension Fonctions durables (Azure Functions)
 
@@ -31,11 +31,14 @@ public static async Task<HttpResponseMessage> RunSingle(
     string instanceId,
     ILogger log)
 {
-    // Check if an instance with the specified ID already exists.
+    // Check if an instance with the specified ID already exists or an existing one stopped running(completed/failed/terminated).
     var existingInstance = await starter.GetStatusAsync(instanceId);
-    if (existingInstance == null)
+    if (existingInstance == null 
+    || existingInstance.RuntimeStatus == OrchestrationRuntimeStatus.Completed 
+    || existingInstance.RuntimeStatus == OrchestrationRuntimeStatus.Failed 
+    || existingInstance.RuntimeStatus == OrchestrationRuntimeStatus.Terminated)
     {
-        // An instance with the specified ID doesn't exist, create one.
+        // An instance with the specified ID doesn't exist or an existing one stopped running, create one.
         dynamic eventData = await req.Content.ReadAsAsync<object>();
         await starter.StartNewAsync(functionName, instanceId, eventData);
         log.LogInformation($"Started orchestration with ID = '{instanceId}'.");
@@ -43,10 +46,11 @@ public static async Task<HttpResponseMessage> RunSingle(
     }
     else
     {
-        // An instance with the specified ID exists, don't create one.
-        return req.CreateErrorResponse(
-            HttpStatusCode.Conflict,
-            $"An instance with ID '{instanceId}' already exists.");
+        // An instance with the specified ID exists or an existing one still running, don't create one.
+        return new HttpResponseMessage(HttpStatusCode.Conflict)
+        {
+            Content = new StringContent($"An instance with ID '{instanceId}' already exists."),
+        };
     }
 }
 ```
@@ -94,16 +98,19 @@ module.exports = async function(context, req) {
     const instanceId = req.params.instanceId;
     const functionName = req.params.functionName;
 
-    // Check if an instance with the specified ID already exists.
+    // Check if an instance with the specified ID already exists or an existing one stopped running(completed/failed/terminated).
     const existingInstance = await client.getStatus(instanceId);
-    if (!existingInstance) {
-        // An instance with the specified ID doesn't exist, create one.
+    if (!existingInstance 
+        || existingInstance.runtimeStatus == "Completed" 
+        || existingInstance.runtimeStatus == "Failed" 
+        || existingInstance.runtimeStatus == "Terminated") {
+        // An instance with the specified ID doesn't exist or an existing one stopped running, create one.
         const eventData = req.body;
         await client.startNew(functionName, instanceId, eventData);
         context.log(`Started orchestration with ID = '${instanceId}'.`);
         return client.createCheckStatusResponse(req, instanceId);
     } else {
-        // An instance with the specified ID exists, don't create one.
+        // An instance with the specified ID exists or an existing one still running, don't create one.
         return {
             status: 409,
             body: `An instance with ID '${instanceId}' already exists.`,
@@ -112,9 +119,65 @@ module.exports = async function(context, req) {
 };
 ```
 
+# <a name="python"></a>[Python](#tab/python)
+
+**function.json**
+
+```json
+{
+  "bindings": [
+    {
+      "authLevel": "function",
+      "name": "req",
+      "type": "httpTrigger",
+      "direction": "in",
+      "route": "orchestrators/{functionName}/{instanceId}",
+      "methods": ["post"]
+    },
+    {
+      "name": "starter",
+      "type": "orchestrationClient",
+      "direction": "in"
+    },
+    {
+      "name": "$return",
+      "type": "http",
+      "direction": "out"
+    }
+  ]
+}
+```
+
+**__init__.py**
+
+```python
+import logging
+import azure.functions as func
+import azure.durable_functions as df
+
+async def main(req: func.HttpRequest, starter: str) -> func.HttpResponse:
+    client = df.DurableOrchestrationClient(starter)
+    instance_id = req.route_params['instanceId']
+    function_name = req.route_params['functionName']
+
+    existing_instance = await client.get_status(instance_id)
+
+    if existing_instance != None or existing_instance.runtime_status in ["Completed", "Failed", "Terminated"]:
+        event_data = req.get_body()
+        instance_id = await client.start_new(function_name, instance_id, event_data)
+        logging.info(f"Started orchestration with ID = '{instance_id}'.")
+        return client.create_check_status_response(req, instance_id)
+    else:
+        return {
+            'status': 409,
+            'body': f"An instance with ID '${instance_id}' already exists"
+        }
+
+```
+
 ---
 
-Par défaut, les ID d’instance sont des identificateurs globaux uniques générés de manière aléatoire. Cependant, dans l’exemple précédent, l’ID d’instance est passé dans les données d’itinéraire à partir de l’URL. Le code appelle `GetStatusAsync` (C#) ou `getStatus` (JavaScript) pour vérifier si une instance ayant l’ID spécifié est déjà en cours d’exécution. Si aucune instance de ce type n’est en cours d’exécution, une nouvelle instance est créée avec cet ID.
+Par défaut, les ID d’instance sont des identificateurs globaux uniques générés de manière aléatoire. Cependant, dans l’exemple précédent, l’ID d’instance est passé dans les données d’itinéraire à partir de l’URL. Le code appelle `GetStatusAsync` (C#), `getStatus` (JavaScript) ou `get_status` (Python) pour vérifier si une instance ayant l’ID spécifié est déjà en cours d’exécution. Si aucune instance de ce type n’est en cours d’exécution, une nouvelle instance est créée avec cet ID.
 
 > [!NOTE]
 > Il existe une condition de concurrence potentielle dans cet exemple. Si deux instances de **HttpStartSingle** s’exécutent simultanément, les deux appels de fonction signalent la réussite de l’opération, mais en réalité une seule instance d’orchestration démarre. Selon vos besoins, cela peut avoir des effets secondaires indésirables. Pour cette raison, il est important de s’assurer l’impossibilité que deux demandes puissent exécuter cette fonction de déclencheur simultanément.

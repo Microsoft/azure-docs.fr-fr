@@ -8,12 +8,12 @@ ms.topic: article
 ms.service: azure-vmware-cloudsimple
 ms.reviewer: cynthn
 manager: dikamath
-ms.openlocfilehash: 44a0b8fe56477620c0ac47d5c5de8830dac46214
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 82aa1ba6ec20e8242568a2725899ddc515a4dc0f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77014995"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87082067"
 ---
 # <a name="manage-your-cloudsimple-private-cloud-virtual-machines-in-azure"></a>Gérer vos machines virtuelles de cloud privé CloudSimple dans Azure
 
@@ -29,7 +29,7 @@ Les contrôles suivants sont disponibles à partir de la page **Vue d’ensemble
 | Démarrer | Démarre la machine virtuelle spécifiée.  |
 | Redémarrer | Arrête puis met hors tension la machine virtuelle spécifiée.  |
 | Arrêter | Arrête la machine virtuelle spécifiée.  |
-| Capture | Capture une image de la machine virtuelle spécifiée afin de pouvoir l’utiliser en tant qu’image pour créer d’autres machines virtuelles. Consultez [Créer une image managée d’une machine virtuelle généralisée dans Azure](../virtual-machines/windows/classic/capture-image.md).   |
+| Capture | Capture une image de la machine virtuelle spécifiée afin de pouvoir l’utiliser en tant qu’image pour créer d’autres machines virtuelles. Consultez [Créer une image managée d’une machine virtuelle généralisée dans Azure](../virtual-machines/windows/capture-image-resource.md).   |
 | Déplacer | Déplacez vers la machine virtuelle spécifiée.  |
 | DELETE | Supprime la machine virtuelle spécifiée.  |
 | Actualiser | Actualise les données dans l’affichage.  |

@@ -6,17 +6,17 @@ author: ronortloff
 manager: craigg
 ms.service: synapse-analytics
 ms.topic: conceptual
-ms.subservice: ''
+ms.subservice: sql-dw
 ms.date: 02/04/2020
 ms.author: rortloff
 ms.reviewer: jrasnick
 ms.custom: azure-synapse
-ms.openlocfilehash: 31533eefbfae63e0eb4049d2eabaf6b853340636
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.openlocfilehash: 13b0dc3af524b16430408f8a920c7477c412414d
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83590245"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91362727"
 ---
 # <a name="azure-synapse-analytics--workload-management-portal-monitoring"></a>Azure Synapse Analytics – Supervision du portail de gestion des charges de travail
 
@@ -59,7 +59,8 @@ Le graphique ci-dessous est configuré comme suit :<br>
 Métrique 1 : *Pourcentage minimal de ressources réelles* (agrégation Moy, `blue line`)<br>
 Métrique 2 : *Allocation du groupe de charge de travail par pourcentage système* (agrégation Moy, `purple line`)<br>
 Filtre : [Workload Group] = `wgPriority`<br>
-![underutilized-wg.png](./media/sql-data-warehouse-workload-management-portal-monitor/underutilized-wg.png) Le graphique montre qu’avec l’isolation de la charge de travail à 25 %, seul 10 % est utilisé en moyenne.  Dans ce cas, la valeur du paramètre `MIN_PERCENTAGE_RESOURCE` peut être diminuée de 10 ou 15 points et ainsi permettre à d’autres charges de travail sur le système d’utiliser les ressources.
+![Capture d’écran montrant un graphique avec deux métriques et un filtre.](./media/sql-data-warehouse-workload-management-portal-monitor/underutilized-wg.png)
+Le graphique montre qu’avec une isolation de la charge de travail à 25 %, seul 10 % sont utilisés en moyenne.  Dans ce cas, la valeur du paramètre `MIN_PERCENTAGE_RESOURCE` peut être diminuée de 10 ou 15 points et ainsi permettre à d’autres charges de travail sur le système d’utiliser les ressources.
 
 ### <a name="workload-group-bottleneck"></a>Goulot d’étranglement du groupe de charge de travail
 
@@ -81,7 +82,8 @@ Métrique 1 : *Pourcentage de ressources limitées réelles* (agrégation Moy,
 Métrique 2 : *Allocation du groupe de charge de travail par pourcentage maximal de ressources* (agrégation Moy, `purple line`)<br>
 Métrique 3 : *Requêtes en file d’attente du groupe de charge de travail* (agrégation Somme, `turquoise line`)<br>
 Filtre : [Workload Group] = `wgDataAnalyst`<br>
-![bottle-necked-wg](./media/sql-data-warehouse-workload-management-portal-monitor/bottle-necked-wg.png) Le graphique montre qu’avec une limite de 9 % sur les ressources, le groupe de charge de travail est utilisé à plus de 90 % (d’après la *métrique Allocation du groupe de charge de travail par pourcentage maximal de ressources*).  Il existe une mise en file d’attente stable des requêtes, comme indiqué dans la *métrique Requêtes en file d’attente du groupe de charge de travail*.  Dans ce cas, l’augmentation de `CAP_PERCENTAGE_RESOURCE` à une valeur supérieure à 9 % permettra à plus de requêtes de s’exécuter simultanément.  L’augmentation de `CAP_PERCENTAGE_RESOURCE` suppose que suffisamment de ressources sont disponibles et non isolées par d’autres groupes de charge de travail.  Vérifiez l’augmentation de la limite en vérifiant la *métrique Pourcentage de ressources limitées réelles*.  Si vous souhaitez obtenir un débit plus élevé, envisagez également d’augmenter `REQUEST_MIN_RESOURCE_GRANT_PERCENT` à une valeur supérieure à 3.  L’augmentation de `REQUEST_MIN_RESOURCE_GRANT_PERCENT` peut permettre l’exécution plus rapide des requêtes.
+![Capture d’écran montrant un graphique avec les trois métriques et un filtre.](./media/sql-data-warehouse-workload-management-portal-monitor/bottle-necked-wg.png)
+Le graphique montre qu’avec une limite de 9 % sur les ressources, le groupe de charge de travail est utilisé à plus de 90 % (d’après la *métrique Allocation du groupe de charge de travail par pourcentage maximal de ressources*).  Il existe une mise en file d’attente stable des requêtes, comme indiqué dans la *métrique Requêtes en file d’attente du groupe de charge de travail*.  Dans ce cas, l’augmentation de `CAP_PERCENTAGE_RESOURCE` à une valeur supérieure à 9 % permettra à plus de requêtes de s’exécuter simultanément.  L’augmentation de `CAP_PERCENTAGE_RESOURCE` suppose que suffisamment de ressources sont disponibles et non isolées par d’autres groupes de charge de travail.  Vérifiez l’augmentation de la limite en vérifiant la *métrique Pourcentage de ressources limitées réelles*.  Si vous souhaitez obtenir un débit plus élevé, envisagez également d’augmenter `REQUEST_MIN_RESOURCE_GRANT_PERCENT` à une valeur supérieure à 3.  L’augmentation de `REQUEST_MIN_RESOURCE_GRANT_PERCENT` peut permettre l’exécution plus rapide des requêtes.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

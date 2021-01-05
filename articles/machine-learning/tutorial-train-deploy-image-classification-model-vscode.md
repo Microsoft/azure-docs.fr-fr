@@ -1,5 +1,5 @@
 ---
-title: 'Tutoriel : Entraîner et déployer des modèles : Visual Studio Code'
+title: 'Tutoriel : Entraîner et déployer des modèles : VS Code (préversion)'
 titleSuffix: Azure Machine Learning
 description: Découvrez comment entraîner et déployer un modèle de classification d’images à l’aide de TensorFlow et de l’extension Azure Machine Learning de Visual Studio Code.
 services: machine-learning
@@ -8,16 +8,16 @@ ms.subservice: core
 ms.topic: tutorial
 author: luisquintanilla
 ms.author: luquinta
-ms.date: 04/13/2020
-ms.custom: contperfq4
-ms.openlocfilehash: 05857641df22e03362eeee1590fef62fa3a45530
-ms.sourcegitcommit: c535228f0b77eb7592697556b23c4e436ec29f96
+ms.date: 07/09/2020
+ms.custom: contperf-fy20q4
+ms.openlocfilehash: 9ad96bdb632e134cf3e3a0f82bb97f88c87e72e9
+ms.sourcegitcommit: 3ea45bbda81be0a869274353e7f6a99e4b83afe2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/06/2020
-ms.locfileid: "82857716"
+ms.lasthandoff: 12/10/2020
+ms.locfileid: "97033440"
 ---
-# <a name="train-and-deploy-an-image-classification-tensorflow-model-using-the-azure-machine-learning-visual-studio-code-extension"></a>Entraîner et déployer un modèle de classification d’images TensorFlow à l’aide de l’extension Azure Machine Learning de Visual Studio Code
+# <a name="train-and-deploy-an-image-classification-tensorflow-model-using-the-azure-machine-learning-visual-studio-code-extension-preview"></a>Entraîner et déployer un modèle de classification d’images TensorFlow à l’aide de l’extension Azure Machine Learning de Visual Studio Code (préversion)
 
 Découvrez comment entraîner et déployer un modèle de classification d’images pour reconnaître des chiffres manuscrits à l’aide de TensorFlow et de l’extension Azure Machine Learning de Visual Studio Code.
 
@@ -61,7 +61,7 @@ La première chose à faire pour générer une application dans Azure Machine Le
 1. Sélectionnez **Créer un groupe de ressources**. 
 1. Nommez votre groupe de ressources « TeamWorkspace-rg » et appuyez sur **Entrée**. 
 1. Choisissez un emplacement pour votre espace de travail. Nous vous recommandons de choisir un emplacement le plus proche possible de celui où vous comptez déployer votre modèle. Par exemple, « USA Ouest 2 ».
-1. Quand vous êtes invité à sélectionner le type d’espace de travail, sélectionnez **De base** pour créer un espace de travail De base. Pour plus d’informations sur les différentes offres d’espace de travail, consultez [Vue d’ensemble d’Azure Machine Learning](./overview-what-is-azure-ml.md#sku).
+1. Lorsque vous êtes invité à sélectionner le type d’espace de travail, choisissez **De base**.
 
 À ce stade, une demande est envoyée à Azure afin de créer un nouvel espace de travail dans votre compte. Après quelques minutes, le nouvel espace de travail apparaît dans votre nœud d’abonnement. 
 
@@ -91,13 +91,13 @@ Pour créer une cible de calcul :
 1. Dans la barre d’activités Visual Studio Code, sélectionnez l’icône **Azure**. La vue Azure Machine Learning apparaît. 
 1. Développez votre nœud d’abonnement. 
 1. Développez le nœud **TeamWorkspace**. 
-1. Sous le nœud de l’espace de travail, cliquez avec le bouton droit sur le nœud **Calcul**, puis choisissez **Create Compute** (Créer un calcul). 
+1. Sous le nœud de l’espace de travail, cliquez avec le bouton droit sur le nœud **Clusters de calcul**, puis choisissez **Créer un calcul**. 
 
     > [!div class="mx-imgBorder"]
     > ![Créer une cible de calcul](./media/tutorial-train-deploy-image-classification-model-vscode/create-compute.png)
 
 1. Sélectionnez **Capacité de calcul Azure Machine Learning (AmlCompute)** . Capacité de calcul Azure Machine Learning est une infrastructure de capacité de calcul managée qui permet à l’utilisateur de créer facilement une capacité de calcul à un ou plusieurs nœuds pouvant être utilisée par d’autres utilisateurs dans votre espace de travail.
-1. Choisissez une taille de machine virtuelle. Sélectionnez **Standard_F2s_v2** dans la liste d’options. La taille de votre machine virtuelle a un impact sur la durée nécessaire à l’entraînement de vos modèles. Pour plus d’informations sur les tailles de machine virtuelle, consultez [Tailles des machines virtuelles Linux dans Azure](https://docs.microsoft.com/azure/virtual-machines/linux/sizes).
+1. Choisissez une taille de machine virtuelle. Sélectionnez **Standard_F2s_v2** dans la liste d’options. La taille de votre machine virtuelle a un impact sur la durée nécessaire à l’entraînement de vos modèles. Pour plus d’informations sur les tailles de machine virtuelle, consultez [Tailles des machines virtuelles Linux dans Azure](../virtual-machines/sizes.md).
 1. Nommez votre calcul « TeamWkspc-com » et appuyez sur **Entrée** pour le créer.
 
     Un fichier s’affiche dans VS Code avec un contenu similaire à celui ci-dessous :
@@ -115,17 +115,8 @@ Pour créer une cible de calcul :
                 "scaleSettings": {
                     "maxNodeCount": 4,
                     "minNodeCount": 0,
-                    "nodeIdleTimeBeforeScaleDown": 120
-                },
-                "userAccountCredentials": {
-                    "adminUserName": "",
-                    "adminUserPassword": "",
-                    "adminUserSshPublicKey": ""
-                },
-                "subnetName": "",
-                "vnetName": "",
-                "vnetResourceGroupName": "",
-                "remoteLoginPortPublicAccess": ""
+                    "nodeIdleTimeBeforeScaleDown": "PT120S"
+                }
             }
         }
     }
@@ -138,7 +129,7 @@ Pour créer une cible de calcul :
     Azure ML: Save and Continue
     ```
 
-Après quelques minutes, la nouvelle cible de calcul apparaît dans le nœud *Compute* de votre espace de travail.
+Après quelques minutes, la nouvelle cible de calcul s’affiche dans le nœud *Clusters de calcul* de votre espace de travail.
 
 ## <a name="create-a-run-configuration"></a>Créer une configuration de série de tests
 
@@ -148,7 +139,7 @@ Pour créer une configuration de série de tests
 
 1. Dans la barre d’activités Visual Studio Code, sélectionnez l’icône **Azure**. La vue Azure Machine Learning apparaît. 
 1. Développez votre nœud d’abonnement. 
-1. Développez le nœud **TeamWorkspace > Calcul**. 
+1. Développez le nœud **TeamWorkspace > Clusters de calcul**. 
 1. Sous le nœud Calcul, cliquez avec le bouton droit sur le nœud de calcul **TeamWkspc-com** et choisissez **Créer une configuration d’exécution**.
 
     > [!div class="mx-imgBorder"]
@@ -214,6 +205,7 @@ Pour créer une configuration de série de tests
     Azure ML: Save and Continue
     ```
 
+1. Cet exemple n’utilise pas un jeu de données inscrit dans Azure Machine Learning. En effet, le jeu de données est chargé lors de l’exécution de *train.py*. Lorsque vous êtes invité à créer une référence de données pour votre exécution d’entraînement, entrez « n » dans l’invite et appuyez sur **Entrée**.
 1. Appuyez sur **Entrée** pour naviguer jusqu’au fichier de script à exécuter sur le calcul. En l’occurrence, le script pour l’entraînement du modèle est le fichier `train.py` dans le répertoire `vscode-tools-for-ai/mnist-vscode-docs-sample`.
 
     Un fichier nommé `MNIST-rc.runconfig` s’affiche dans VS Code avec un contenu similaire à celui ci-dessous :
@@ -221,6 +213,7 @@ Pour créer une configuration de série de tests
     ```json
     {
         "script": "train.py",
+        "arguments": [],
         "framework": "Python",
         "communicator": "None",
         "target": "TeamWkspc-com",
@@ -420,5 +413,4 @@ Pour déployer un service web en tant qu’ACI :
 ## <a name="next-steps"></a>Étapes suivantes
 
 * Pour une procédure détaillée sur l’apprentissage automatique avec Azure Machine Learning en dehors de Visual Studio Code, consultez le [tutoriel : Former des modèles avec Azure Machine Learning](tutorial-train-models-with-aml.md).
-* Pour une procédure détaillée sur la modification, l’exécution et le débogage de code localement, consultez le [didacticiel Python Hello World](https://code.visualstudio.com/docs/Python/Python-tutorial).
-
+* Pour une procédure détaillée sur la modification, l’exécution et le débogage de code localement, consultez le [tutoriel Python Hello World](https://code.visualstudio.com/docs/Python/Python-tutorial).

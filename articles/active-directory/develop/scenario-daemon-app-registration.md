@@ -11,12 +11,12 @@ ms.workload: identity
 ms.date: 09/15/2019
 ms.author: jmprieur
 ms.custom: aaddev
-ms.openlocfilehash: 508101ad615dd96559b1c68a61be7c08772545db
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 3b77cc93385efb0bbb8a9b87d29de9bad5cd4ceb
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80885478"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95996001"
 ---
 # <a name="daemon-app-that-calls-web-apis---app-registration"></a>Application démon qui appelle des API web - inscription d'application
 
@@ -50,5 +50,4 @@ Si vous êtes un éditeur de logiciels indépendant qui génère une application
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-> [!div class="nextstepaction"]
-> [Application démon - configuration du code de l'application](./scenario-daemon-app-configuration.md)
+Passez à l’article suivant de ce scénario, [Configuration du code de l’application](./scenario-daemon-app-configuration.md).

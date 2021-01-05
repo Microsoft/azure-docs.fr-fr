@@ -1,7 +1,7 @@
 ---
 title: Azure AD Connect - Gestion et personnalisation d’AD FS | Microsoft Docs
 description: Gestion d’AD FS avec Azure AD Connect et personnalisation de la connexion de l’utilisateur à AD FS avec Azure AD Connect et PowerShell.
-keywords: AD FS, ADFS, gestion AD FS, AAD Connect, Connect, connexion, personnalisation d’AD FS, réparer l’approbation, O365, fédération, partie de confiance
+keywords: AD FS, ADFS, AD FS management, AAD Connect, Connect, sign-in, AD FS customization, repair trust, M365, federation, relying party
 services: active-directory
 documentationcenter: ''
 author: billmath
@@ -12,18 +12,18 @@ ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 07/18/2017
 ms.subservice: hybrid
 ms.author: billmath
 ms.custom: seohack1
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: fcbeedddc65a916f869a778616779917a9571181
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: cc0c8c40e370579100c562e0289c97e3f5ce4236
+ms.sourcegitcommit: 32c521a2ef396d121e71ba682e098092ac673b30
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80331983"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91274110"
 ---
 # <a name="manage-and-customize-active-directory-federation-services-by-using-azure-ad-connect"></a>Gérer et personnaliser Active Directory Federation Services à l’aide d’Azure AD Connect
 Cet article décrit comment gérer et personnaliser Active Directory Federation Services (ADFS) à l’aide d’Azure Active Directory (Azure AD) Connect. Il indique également d’autres tâches courantes liées à AD FS que vous devrez peut-être effectuer pour terminer la configuration d’une batterie de serveurs AD FS.
@@ -31,7 +31,7 @@ Cet article décrit comment gérer et personnaliser Active Directory Federation 
 | Rubrique | Sujet traité |
 |:--- |:--- |
 | **Gérer AD FS** | |
-| [Réparation de l’approbation](#repairthetrust) |Réparation de l’approbation de fédération avec Office 365. |
+| [Réparation de l’approbation](#repairthetrust) |Réparation de l’approbation de fédération avec Microsoft 365. |
 | [Fédérer avec Azure AD à l’aide d’un ID de connexion de substitution](#alternateid) | Configurer la fédération à l’aide d’un ID de connexion de substitution  |
 | [Ajout d’un serveur AD FS](#addadfsserver) |Extension d’une batterie de serveurs AD FS à l’aide d’un serveur AD FS supplémentaire. |
 | [Ajouter un serveur de proxy d’application web AD FS](#addwapserver) |Extension d’une batterie de serveurs AD FS à l’aide d’un serveur de proxy d’application web. |
@@ -52,11 +52,11 @@ Vous pouvez utiliser Azure AD Connect pour vérifier l’état actuel des servic
    ![Réparer la confiance AAD et ADFS](./media/how-to-connect-fed-management/RepairADTrust1.PNG)
 
 2. Dans la page **Connexion à Azure AD**, saisissez vos informations d’identification d’administrateur global d’Azure AD, puis cliquez sur **Suivant**.
-   ![Connexion à Azure AD](./media/how-to-connect-fed-management/RepairADTrust2.PNG)
+   ![Screenshot that shows the "Connect to Azure AD" page with example credentials entered.](./media/how-to-connect-fed-management/RepairADTrust2.PNG)
 
 3. Dans la page **Informations d’identification d’accès à distance** , indiquez les informations d’identification de l’administrateur de domaine.
 
-   ![Informations d’identification d’accès à distance](./media/how-to-connect-fed-management/RepairADTrust3.PNG)
+   ![Capture d’écran montrant la page « Informations d’identification d’accès à distance » avec des exemples d’informations d’identification entrées.](./media/how-to-connect-fed-management/RepairADTrust3.PNG)
 
     Lorsque vous cliquez sur **Suivant**, Azure AD Connect vérifie l’intégrité du certificat et affiche les éventuels problèmes.
 
@@ -64,7 +64,7 @@ Vous pouvez utiliser Azure AD Connect pour vérifier l’état actuel des servic
 
     La page **Prêt à configurer** affiche la liste des actions qui seront effectuées afin de réparer l’approbation.
 
-    ![Prêt à configurer](./media/how-to-connect-fed-management/RepairADTrust5.PNG)
+    ![Capture d’écran montrant la page « Prêt à configurer » avec une liste d’actions.](./media/how-to-connect-fed-management/RepairADTrust5.PNG)
 
 4. Cliquez sur **Installer** pour réparer l’approbation.
 
@@ -85,7 +85,7 @@ La configuration d’un ID de connexion de substitution pour AD FS comprend deux
     Pour corriger la configuration en cas de bases de connaissances manquantes, installez la mise à jour [KB2919355](https://go.microsoft.com/fwlink/?LinkID=396590) requise, puis réparez l’approbation à l’aide de [Réparer l’approbation AAD et AD FS](#repairthetrust).
 
 > [!NOTE]
-> Pour plus d’informations sur ID de substitution et les étapes de configuration manuelle, lisez [Configuration d’un ID de connexion de substitution](https://technet.microsoft.com/windows-server-docs/identity/ad-fs/operations/configuring-alternate-login-id)
+> Pour plus d’informations sur ID de substitution et les étapes de configuration manuelle, lisez [Configuration d’un ID de connexion de substitution](/windows-server/identity/ad-fs/operations/configuring-alternate-login-id)
 
 ## <a name="add-an-ad-fs-server"></a><a name="addadfsserver"></a>Ajout d’un serveur AD FS 
 
@@ -98,7 +98,7 @@ La configuration d’un ID de connexion de substitution pour AD FS comprend deux
 
 2. Dans la page **Connexion à Azure AD**, saisissez vos informations d’identification d’administrateur global d’Azure AD, puis cliquez sur **Suivant**.
 
-   ![Se connecter à Azure AD](./media/how-to-connect-fed-management/AddNewADFSServer2.PNG)
+   ![Capture d’écran montrant la page « Connexion à Azure AD » avec des exemples d’informations d’identification entrées.](./media/how-to-connect-fed-management/AddNewADFSServer2.PNG)
 
 3. Indiquez les informations d’identification de l’administrateur de domaine.
 
@@ -106,9 +106,9 @@ La configuration d’un ID de connexion de substitution pour AD FS comprend deux
 
 4. Azure AD Connect vous demande le mot de passe du fichier PFX que vous avez fourni lors de la configuration de votre nouvelle batterie de serveurs AD FS avec Azure AD Connect. Cliquez sur **Saisie du mot de passe** pour fournir le mot de passe du fichier PFX.
 
-   ![Mot de passe du certificat](./media/how-to-connect-fed-management/AddNewADFSServer4.PNG)
+   ![Capture d’écran montrant la page « Spécifier le certificat SSL » avec la fenêtre « Mot de passe du certificat » ouverte.](./media/how-to-connect-fed-management/AddNewADFSServer4.PNG)
 
-    ![Spécifier le certificat TLS/SSL](./media/how-to-connect-fed-management/AddNewADFSServer5.PNG)
+    ![Capture d’écran montrant la page « Spécifier le certificat SSL » après l’entrée d’un mot de passe pour le fichier PFX.](./media/how-to-connect-fed-management/AddNewADFSServer5.PNG)
 
 5. Dans la page **Serveurs AD FS** , entrez le nom ou l’adresse IP du serveur à ajouter à la batterie de serveurs AD FS.
 
@@ -116,9 +116,9 @@ La configuration d’un ID de connexion de substitution pour AD FS comprend deux
 
 6. Cliquez sur **Suivant** et parcourez la page **Configurer** finale. Une fois qu’Azure AD Connect a fini d’ajouter les serveurs à la batterie de serveurs AD FS, vous avez la possibilité de vérifier la connectivité.
 
-   ![Prêt à configurer](./media/how-to-connect-fed-management/AddNewADFSServer7.PNG)
+   ![Capture d’écran montrant la page « Prêt à configurer » avec une liste d’actions à effectuer après avoir cliqué sur « Installer ».](./media/how-to-connect-fed-management/AddNewADFSServer7.PNG)
 
-    ![Installation terminée](./media/how-to-connect-fed-management/AddNewADFSServer8.PNG)
+    ![Capture d’écran montrant la page « Installation terminée » avec le message « La configuration de l’intranet a été vérifiée avec succès ». ](./media/how-to-connect-fed-management/AddNewADFSServer8.PNG)
 
 ## <a name="add-an-ad-fs-wap-server"></a><a name="addwapserver"></a>Ajout d’un serveur WAP AD FS 
 
@@ -131,7 +131,7 @@ La configuration d’un ID de connexion de substitution pour AD FS comprend deux
 
 2. Indiquez les informations d’identification de l’administrateur global Azure.
 
-   ![Se connecter à Azure AD](./media/how-to-connect-fed-management/wapserver2.PNG)
+   ![Capture d’écran montrant la page « Connexion à Azure AD » avec un exemple de nom d’utilisateur et de mot de passe entré.](./media/how-to-connect-fed-management/wapserver2.PNG)
 
 3. Dans la page **Spécifiez le certificat SSL** , indiquez le mot de passe du fichier PFX que vous avez fourni lors de la configuration de la batterie de serveurs AD FS avec Azure AD Connect.
    ![Mot de passe du certificat](./media/how-to-connect-fed-management/WapServer3.PNG)
@@ -148,7 +148,7 @@ La configuration d’un ID de connexion de substitution pour AD FS comprend deux
 
 6. Dans la page **Prêt à configurer** , l’Assistant affiche la liste des actions qui seront effectuées.
 
-   ![Prêt à configurer](./media/how-to-connect-fed-management/WapServer7.PNG)
+   ![Capture d’écran montrant la page « Prêt à configurer » avec une liste d’actions à effectuer.](./media/how-to-connect-fed-management/WapServer7.PNG)
 
 7. Cliquez sur **Installer** pour terminer la configuration. Une fois la configuration terminée, l’Assistant vous permet de vérifier la connectivité aux serveurs. Cliquez sur **Vérifier** pour vérifier la connectivité.
 
@@ -174,7 +174,7 @@ Il est facile d’ajouter un domaine à fédérer avec Azure AD à l’aide d’
 
    ![Domaine Azure AD](./media/how-to-connect-fed-management/AdditionalDomain4.PNG)
 
-    Après avoir choisi le domaine, l’Assistant présente des informations utiles concernant les autres actions qu’il va effectuer et l’impact de la configuration. Dans certains cas, si vous sélectionnez un domaine qui n’est pas encore vérifié dans Azure AD, l’Assistant affiche des informations pour vous aider à vérifier le domaine. Pour plus d’informations, consultez [Ajouter un nom de domaine personnalisé à Azure Active Directory](../active-directory-domains-add-azure-portal.md) .
+    Après avoir choisi le domaine, l’Assistant présente des informations utiles concernant les autres actions qu’il va effectuer et l’impact de la configuration. Dans certains cas, si vous sélectionnez un domaine qui n’est pas encore vérifié dans Azure AD, l’Assistant affiche des informations pour vous aider à vérifier le domaine. Pour plus d’informations, consultez [Ajouter un nom de domaine personnalisé à Azure Active Directory](../fundamentals/add-custom-domain.md) .
 
 5. Cliquez sur **Suivant**. La page **Prêt à configurer** affiche la liste des actions qui seront effectuées par Azure AD Connect. Cliquez sur **Installer** pour terminer la configuration.
 
@@ -192,7 +192,9 @@ Pour changer le logo de la société affiché sur la page **Connexion**, utilise
 > [!NOTE]
 > Les dimensions recommandées pour le logo sont 260 x 35 \@ 96 PPP, avec une taille de fichier maximale de 10 Ko.
 
-    Set-AdfsWebTheme -TargetName default -Logo @{path="c:\Contoso\logo.PNG"}
+```azurepowershell-interactive
+Set-AdfsWebTheme -TargetName default -Logo @{path="c:\Contoso\logo.PNG"}
+```
 
 > [!NOTE]
 > Le paramètre *TargetName* est obligatoire. Le thème par défaut publié avec AD FS est nommé Par défaut.
@@ -200,10 +202,12 @@ Pour changer le logo de la société affiché sur la page **Connexion**, utilise
 ## <a name="add-a-sign-in-description"></a><a name="addsignindescription"></a>Ajout d’une description de connexion 
 Pour ajouter une description de la **page de connexion**, utilisez l’applet de commande et la syntaxe Windows PowerShell suivantes.
 
-    Set-AdfsGlobalWebContent -SignInPageDescriptionText "<p>Sign-in to Contoso requires device registration. Click <A href='http://fs1.contoso.com/deviceregistration/'>here</A> for more information.</p>"
+```azurepowershell-interactive
+Set-AdfsGlobalWebContent -SignInPageDescriptionText "<p>Sign-in to Contoso requires device registration. Click <A href='http://fs1.contoso.com/deviceregistration/'>here</A> for more information.</p>"
+```
 
 ## <a name="modify-ad-fs-claim-rules"></a><a name="modclaims"></a>Modification des règles de revendication AD FS 
-AD FS prend en charge un langage complet, qui permet de créer des règles de revendication personnalisées. Pour plus d’informations, consultez [Rôle du langage de règle de revendication](https://technet.microsoft.com/library/dd807118.aspx).
+AD FS prend en charge un langage complet, qui permet de créer des règles de revendication personnalisées. Pour plus d’informations, consultez [Rôle du langage de règle de revendication](/previous-versions/windows/it-pro/windows-server-2012-R2-and-2012/dd807118(v=ws.11)).
 
 Les sections suivantes décrivent comment écrire des règles personnalisées pour certains scénarios se rapportant à la fédération des services Azure AD et AD FS.
 
@@ -214,8 +218,10 @@ Par exemple, vous pouvez sélectionner **ms-ds-consistencyguid** comme attribut 
 
 **Règle 1 : attributs de la requête**
 
-    c:[Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/windowsaccountname"]
-    => add(store = "Active Directory", types = ("http://contoso.com/ws/2016/02/identity/claims/objectguid", "http://contoso.com/ws/2016/02/identity/claims/msdsconsistencyguid"), query = "; objectGuid,ms-ds-consistencyguid;{0}", param = c.Value);
+```claim-rule-language
+c:[Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/windowsaccountname"]
+=> add(store = "Active Directory", types = ("http://contoso.com/ws/2016/02/identity/claims/objectguid", "http://contoso.com/ws/2016/02/identity/claims/msdsconsistencyguid"), query = "; objectGuid,ms-ds-consistencyguid;{0}", param = c.Value);
+```
 
 Dans cette règle, vous interrogez les valeurs de **ms-ds-consistencyguid** et **objectGuid** de l’utilisateur à partir d’Active Directory. Remplacez le nom du magasin par un nom de magasin approprié dans votre déploiement AD FS. Remplacez également le type de revendication par un type approprié à votre fédération, comme défini pour **objectGuid** et **ms-ds-consistencyguid**.
 
@@ -223,23 +229,29 @@ Par ailleurs, utiliser **add** à la place de **issue** évite d’ajouter un pr
 
 **Règle 2 : s'assurer que l'ID ms-ds-consistencyguid existe pour l'utilisateur**
 
-    NOT EXISTS([Type == "http://contoso.com/ws/2016/02/identity/claims/msdsconsistencyguid"])
-    => add(Type = "urn:anandmsft:tmp/idflag", Value = "useguid");
+```claim-rule-language
+NOT EXISTS([Type == "http://contoso.com/ws/2016/02/identity/claims/msdsconsistencyguid"])
+=> add(Type = "urn:anandmsft:tmp/idflag", Value = "useguid");
+```
 
 Cette règle définit un indicateur temporaire **idflag** dont la valeur est **useguid** si aucun ID **ms-ds-concistencyguid** n’est renseigné pour l’utilisateur. Il y a une logique à cela : AD FS n’autorise pas les revendications vides. De ce fait, lorsque vous ajoutez des revendications `http://contoso.com/ws/2016/02/identity/claims/objectguid` et `http://contoso.com/ws/2016/02/identity/claims/msdsconsistencyguid` dans la règle 1, vous vous retrouvez avec une revendication **msdsconsistencyguid** uniquement si la valeur est renseignée pour l’utilisateur. Si elle n’est pas indiquée, AD FS voit que sa valeur sera vide et le supprime immédiatement. Tous les objets auront un **objectGuid**. Donc, cette revendication sera toujours là après l’exécution de la règle 1.
 
 **Règle 3 : émettre ms-ds-consistencyguid comme ID non modifiable s'il est présent**
 
-    c:[Type == "http://contoso.com/ws/2016/02/identity/claims/msdsconsistencyguid"]
-    => issue(Type = "http://schemas.microsoft.com/LiveID/Federation/2008/05/ImmutableID", Value = c.Value);
+```claim-rule-language
+c:[Type == "http://contoso.com/ws/2016/02/identity/claims/msdsconsistencyguid"]
+=> issue(Type = "http://schemas.microsoft.com/LiveID/Federation/2008/05/ImmutableID", Value = c.Value);
+```
 
 Il s’agit d’un contrôle **Exist** implicite. Si la valeur de la revendication existe, alors émettez-la en tant qu’ID non modifiable. L’exemple précédent utilise le **nameidentifier** de revendication. Vous devez le remplacer par un type de revendication approprié pour l’ID non modifiable dans votre environnement.
 
 **Règle 4 : émettre objectGuid comme ID non modifiable si ms-ds-consistencyGuid n'est pas présent**
 
-    c1:[Type == "urn:anandmsft:tmp/idflag", Value =~ "useguid"]
-    && c2:[Type == "http://contoso.com/ws/2016/02/identity/claims/objectguid"]
-    => issue(Type = "http://schemas.microsoft.com/LiveID/Federation/2008/05/ImmutableID", Value = c2.Value);
+```claim-rule-language
+c1:[Type == "urn:anandmsft:tmp/idflag", Value =~ "useguid"]
+&& c2:[Type == "http://contoso.com/ws/2016/02/identity/claims/objectguid"]
+=> issue(Type = "http://schemas.microsoft.com/LiveID/Federation/2008/05/ImmutableID", Value = c2.Value);
+```
 
 Dans cette règle, vous vérifiez simplement l’indicateur temporaire **idflag**. Vous décidez s’il faut émettre la revendication en fonction de sa valeur.
 

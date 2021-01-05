@@ -1,31 +1,37 @@
 ---
 title: 'Démarrage rapide : Appeler votre point de terminaison Recherche personnalisée Bing avec Node.js | Microsoft Docs'
 titleSuffix: Azure Cognitive Services
-description: Utiliser ce guide de démarrage rapide pour commencer à demander des résultats de recherche à partir de votre instance Recherche personnalisée Bing, avec Node.js
+description: Utiliser ce guide de démarrage rapide pour commencer à demander des résultats de recherche à partir de votre instance Recherche personnalisée Bing, avec Node.js.
 services: cognitive-services
 author: aahill
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: bing-custom-search
 ms.topic: quickstart
-ms.date: 03/24/2020
+ms.date: 05/08/2020
 ms.author: aahi
-ms.openlocfilehash: 1c7bd97de4e46e1c8da467840006fe2520851caf
-ms.sourcegitcommit: 9ee0cbaf3a67f9c7442b79f5ae2e97a4dfc8227b
+ms.custom: devx-track-js
+ms.openlocfilehash: 5a5f020b313029e84eae388bec3bb626a0331cb0
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "80238863"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96352046"
 ---
 # <a name="quickstart-call-your-bing-custom-search-endpoint-using-nodejs"></a>Démarrage rapide : Appeler votre point de terminaison Recherche personnalisée Bing avec Node.js
 
-Utilisez ce guide de démarrage rapide pour commencer à demander des résultats de recherche à partir de votre instance Recherche personnalisée Bing. Si d’un côté cette application est écrite en JavaScript, de l’autre, l’API Recherche personnalisée Bing constitue un service web RESTful compatible avec la plupart des langages de programmation. Le code source de cet exemple est disponible sur [GitHub](https://github.com/Azure-Samples/cognitive-services-REST-api-samples/blob/master/nodejs/Search/BingCustomSearchv7.js).
+> [!WARNING]
+> Les API Recherche Bing passent de Cognitive Services aux services de recherche Bing. À compter du **30 octobre 2020**, toutes les nouvelles instances de Recherche Bing doivent être provisionnées en suivant le processus documenté [ici](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Les API Recherche Bing provisionnées à l’aide de Cognitive Services seront prises en charge les trois prochaines années ou jusqu’à la fin de votre Contrat Entreprise, selon la première éventualité.
+> Pour obtenir des instructions de migration, consultez [Services de recherche Bing](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+
+Utilisez ce guide de démarrage rapide pour découvrir comment demander des résultats de recherche à partir de votre instance Recherche personnalisée Bing. Bien que cette application est écrite en JavaScript, l’API Recherche personnalisée Bing constitue un service web RESTful compatible avec la plupart des langages de programmation. Le code source de cet exemple est disponible sur [GitHub](https://github.com/Azure-Samples/cognitive-services-REST-api-samples/blob/master/nodejs/Search/BingCustomSearchv7.js).
 
 ## <a name="prerequisites"></a>Prérequis
 
-- Une instance Recherche personnalisée Bing. Consultez [Démarrage rapide : Créer votre première instance Recherche personnalisée Bing](quick-start.md) pour plus amples informations.
+- Une instance Recherche personnalisée Bing. Pour plus d’informations, consultez [Démarrage rapide : Créer votre première instance de Recherche personnalisée Bing](quick-start.md).
 
-- [Node.JS](https://www.nodejs.org/)
+- [Le runtime JavaScript Node.js](https://www.nodejs.org/).
 
 - La [bibliothèque de requêtes JavaScript](https://github.com/request/request).
 
@@ -33,7 +39,7 @@ Utilisez ce guide de démarrage rapide pour commencer à demander des résultats
 
 ## <a name="create-and-initialize-the-application"></a>Créer et initialiser l’application
 
-1. Créez un fichier JavaScript dans votre éditeur ou IDE favori, puis ajoutez une instruction `require()` pour la bibliothèque de requêtes. Créez des variables pour votre clé d’abonnement, votre ID de configuration personnalisée et un terme de recherche. 
+- Créez un fichier JavaScript dans votre éditeur ou IDE favori, puis ajoutez une instruction `require()` pour la bibliothèque de requêtes. Créez des variables pour votre clé d’abonnement, votre ID de configuration personnalisée et un terme de recherche.
 
     ```javascript
     var request = require("request");
@@ -45,7 +51,7 @@ Utilisez ce guide de démarrage rapide pour commencer à demander des résultats
 
 ## <a name="send-and-receive-a-search-request"></a>Envoyer et recevoir une requête de recherche 
 
-1. Créez une variable pour stocker les informations qui sont envoyées dans votre requête. Construisez l’URL de requête en ajoutant votre terme de recherche au paramètre de requête `q=`, et l’ID de configuration personnalisée de votre instance de recherche à `customconfig=`. Séparez les paramètres par un caractère `&`. Vous pouvez utiliser le point de terminaison global ci-dessous, ou le point de terminaison de [sous-domaine personnalisé](../../cognitive-services/cognitive-services-custom-subdomains.md) affiché dans le portail Azure pour votre ressource.
+1. Créez une variable pour stocker les informations qui sont envoyées dans votre requête. Construisez l’URL de requête en ajoutant votre terme de recherche au paramètre de requête `q=`, et l’ID de configuration personnalisée de votre instance de recherche au paramètre `customconfig=`. Séparez les paramètres par une esperluette (`&`). Vous pouvez utiliser le point de terminaison global dans le code suivant, ou le point de terminaison de [sous-domaine personnalisé](../../cognitive-services/cognitive-services-custom-subdomains.md) affiché dans le portail Azure pour votre ressource.
 
     ```javascript
     var info = {

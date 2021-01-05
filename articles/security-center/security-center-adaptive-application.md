@@ -1,6 +1,6 @@
 ---
 title: Contrôles d’application adaptative dans Azure Security Center
-description: Ce document vous aide à utiliser les contrôles d’application adaptatifs dans Azure Security Center afin de mettre dans une liste verte des applications s’exécutant sur les machines Azure.
+description: Ce document vous aide à utiliser les contrôles d’application adaptatifs dans Azure Security Center pour permettre l’exécution d’applications de liste sur les machines Azure.
 services: security-center
 documentationcenter: na
 author: memildin
@@ -8,176 +8,242 @@ manager: rkarlin
 ms.assetid: 9268b8dd-a327-4e36-918e-0c0b711e99d2
 ms.service: security-center
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 12/23/2019
+ms.date: 08/06/2020
 ms.author: memildin
-ms.openlocfilehash: 1dc94c5ec08cc27fb1819ccc16fd766c62aad796
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 95c3ad6f689893195e0e5c17c59ab31143cf238d
+ms.sourcegitcommit: 99955130348f9d2db7d4fb5032fad89dad3185e7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77604671"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93346517"
 ---
-# <a name="adaptive-application-controls"></a>Contrôles d’application adaptative
-Découvrez comment configurer le contrôle d’application dans Azure Security Center à l’aide de cette procédure pas à pas.
+# <a name="use-adaptive-application-controls-to-reduce-your-machines-attack-surfaces"></a>Utiliser des contrôles d’application adaptatifs pour réduire les surfaces d’attaque de vos machines
 
-## <a name="what-are-adaptive-application-controls-in-security-center"></a>Que sont les contrôles d’application adaptative dans Azure Security Center ?
-Le contrôle d’application adaptatif est une solution de bout en bout intelligente et automatisée d’Azure Security Center qui vous permet de contrôler les applications qui peuvent s’exécuter sur vos machines Azure et non-Azure (Windows et Linux). Parmi d’autres avantages, cela permet de renforcer la protection de vos machines contre les logiciels malveillants. Security Center utilise le Machine Learning pour analyser les applications en cours d’exécution sur vos machines et tire parti de ces informations pour créer une liste verte. Cette fonctionnalité simplifie considérablement le processus de configuration et de gestion des stratégies de mise en liste verte des applications, ce qui vous permet d’effectuer les applications suivantes :
+Découvrez les avantages des contrôles d’application adaptatifs d’Azure Security Center et comment vous pouvez améliorer votre sécurité grâce à cette fonctionnalité intelligente et pilotée par les données.
 
-- Bloquer ou vous alerter si une application malveillante tente de s’exécuter, y compris celles pouvant être omises par les solutions de logiciels anti-programme malveillant.
-- Respecter la stratégie de sécurité de votre organisation qui autorise uniquement l’utilisation de certains logiciels licenciés.
-- Empêcher l’utilisation de logiciels indésirables sur votre environnement.
-- Empêcher l’exécution des applications obsolètes et non prises en charge.
-- Bloquer des outils logiciels spécifiques qui ne sont pas autorisés dans votre organisation.
-- Autoriser le service informatique à contrôler l’accès aux données sensibles en utilisant l’application.
 
-> [!NOTE]
-> Pour les machines Linux et non-Azure, les contrôles d’application adaptatifs sont pris en charge en mode audit uniquement.
+## <a name="what-are-security-centers-adaptive-application-controls"></a>Que sont les contrôles d’application adaptatifs d’Azure Security Center ?
 
-## <a name="how-to-enable-adaptive-application-controls"></a>Comment activer les contrôles d’application adaptative ?
+Les contrôles d’application adaptatifs sont une solution intelligente et automatisée permettant la définition de listes vertes d’applications réputées sécurisées pour vos ordinateurs. 
 
-Les contrôles d’application adaptatifs vous aident à définir un ensemble d’applications autorisées à s’exécuter sur des groupes configurés de machines. Cette fonctionnalité est disponible pour les machines et les serveurs Azure et non-Azure Windows (toutes versions, classique ou Azure Resource Manager), mais aussi Linux. Effectuez les étapes suivantes pour configurer vos listes vertes d’applications :
+Souvent, les organisations ont des collections d’ordinateurs qui exécutent régulièrement les mêmes processus. Security Center utilise le Machine Learning pour analyser les applications en cours d’exécution sur vos machines et créer une liste des logiciels réputés sécurisés. Les listes vertes sont basées sur vos charges de travail Azure spécifiques, et vous pouvez personnaliser davantage les recommandations à l’aide des instructions ci-dessous.
 
-1. Ouvrez le tableau de bord **Security Center**.
+Lorsque vous avez activé et configuré des contrôles d’application adaptatifs, vous obtenez des alertes de sécurité si une autre application que celles que vous avez définies comme sécurisées s’exécute.
 
-1. Dans le volet de gauche, sélectionnez **Adaptive application controls** (Contrôles d’application adaptatifs) situé sous **Advanced cloud defense** (Défense de cloud avancée).
 
-    [![Défense](./media/security-center-adaptive-application/security-center-adaptive-application-fig1-new.png)](./media/security-center-adaptive-application/security-center-adaptive-application-fig1-new.png#lightbox)
+## <a name="what-are-the-benefits-of-adaptive-application-controls"></a>Quels sont les avantages des contrôles d’application adaptatifs ?
 
-La page **Adaptive application controls** (Contrôles d’application adaptatifs) apparaît.
+En définissant des listes d’applications réputées sécurisées, et en générant des alertes lorsque d’autres applications sont exécutées, vous pouvez atteindre plusieurs objectifs de renforcement de la sécurité :
 
-![controls](./media/security-center-adaptive-application/security-center-adaptive-application-fig2.png)
+- Identifier les programmes malveillants potentiels, y compris ceux qui peuvent être ratés par les logiciels anti-programme malveillant
+- Améliorer la conformité avec les stratégies de sécurité locales qui dictent l’utilisation de logiciels sous licence uniquement
+- Éviter d’exécuter des applications anciennes ou non prises en charge
+- Empêcher les logiciels spécifiques qui sont interdits par votre organisation
+- Améliorer la supervision des applications qui accèdent aux données sensibles
 
-La section **Groupes de machines virtuelles** contient trois onglets :
 
-* **Configuré** : liste des groupes contenant les machines virtuelles qui ont été configurées avec le contrôle d’applications.
-* **Recommandé** : liste des groupes pour lesquels le contrôle d’applications est recommandé. Security Center utilise le machine learning pour identifier les machines virtuelles potentiellement concernées par le contrôle d’application en fonction de leur capacité à exécuter les mêmes applications en continu.
-* **Aucune recommandation** : liste des groupes contenant des machines virtuelles sans recommandation de contrôle d’applications. Par exemple, les machines virtuelles dont les applications sont toujours en cours de modification et qui n’ont pas atteint un état stable.
 
-> [!NOTE]
-> Security Center utilise un algorithme de clustering propriétaire pour créer des groupes de machines virtuelles s’assurant que les machines virtuelles similaires reçoivent la meilleure stratégie de contrôle d’application optimale recommandée.
->
->
+## <a name="availability"></a>Disponibilité
 
-### <a name="configure-a-new-application-control-policy"></a>Configurer une nouvelle stratégie de contrôle des applications
+|Aspect|Détails|
+|----|:----|
+|État de sortie :|Disponibilité générale (GA)|
+|Prix :|Nécessite [Azure Defender pour les serveurs](defender-for-servers-introduction.md)|
+|Machines prises en charge :|![Oui](./media/icons/yes-icon.png) Machines Azure et non-Azure exécutant Windows et Linux<br>![Oui](./media/icons/yes-icon.png) [Machines Azure Arc](../azure-arc/index.yml)|
+|Rôles et autorisations obligatoires :|Les rôles **Lecteur de sécurité** et **Lecteur** permettent d’afficher les groupes et les listes d’applications réputées sécurisées<br>Les rôles **Contributeur** et **Administrateur de la sécurité** permettent de modifier les groupes et les listes d’applications réputées sécurisées|
+|Clouds :|![Oui](./media/icons/yes-icon.png) Clouds commerciaux<br>![Oui](./media/icons/yes-icon.png) National/souverain (US Gov, Chine Gov, autres Gov)|
+|||
 
-1. Sélectionnez l’onglet **Recommandé** pour obtenir une liste des groupes disposant de recommandations de contrôle d’applications :
 
-   ![Recommandé](./media/security-center-adaptive-application/security-center-adaptive-application-fig3.png)
 
-   Cette liste comprend les éléments suivants :
+## <a name="enable-application-controls-on-a-group-of-machines"></a>Activer les contrôles d’application sur un groupe d’ordinateurs
 
-   - **Nom du groupe** : nom de l’abonnement et du groupe
-   - **Machines virtuelles et ordinateurs** : nombre de machines virtuelles dans le groupe
-   - **État** : état des recommandations
-   - **Gravité** : niveau de gravité des recommandations
+Si Security Center a identifié des groupes d’ordinateurs dans vos abonnements qui exécutent systématiquement un ensemble similaire d’applications, la recommandation suivante s’affiche : **Les contrôles d’application adaptatifs permettant de définir les applications sécurisées doivent être activés sur vos machines**.
 
-2. Cliquez sur un groupe pour ouvrir l’option **Créer des règles de contrôle d’applications**.
+Sélectionnez la recommandation ou ouvrez la page des contrôles d’application adaptatifs pour afficher la liste des applications et des groupes d’ordinateurs à sécurité reconnue recommandés.
 
-   [![Règles de contrôle d’application](./media/security-center-adaptive-application/security-center-adaptive-application-fig4.png)](./media/security-center-adaptive-application/security-center-adaptive-application-fig4.png#lightbox)
+1. Ouvrez le tableau de bord Azure Defender et, dans la zone de protection avancée, sélectionnez **Contrôles d’application adaptatifs**.
 
-3. Dans **Sélectionner les machines virtuelles**, examinez la liste des machines virtuelles recommandées et décochez celles pour lesquelles vous ne souhaitez pas appliquer de stratégie de mise en liste verte d’application. Ensuite, deux listes sont affichées :
+    :::image type="content" source="./media/security-center-adaptive-application/opening-adaptive-application-control.png" alt-text="Ouverture de contrôles d’application adaptatifs à partir du tableau de bord Azure" lightbox="./media/security-center-adaptive-application/opening-adaptive-application-control.png":::
 
-   - **Applications recommandées** : liste des applications fréquentes sur les machines virtuelles de ce groupe et donc recommandées pour recevoir l’autorisation d’exécution.
-   - **Plus d’applications** : liste des applications qui sont moins fréquentes sur les machines virtuelles de ce groupe, ou qui sont appelées Exploitables (voir ci-dessous) et recommandées pour un examen.
+    La page **Contrôles d’application adaptatifs** s’ouvre avec vos machines virtuelles regroupées dans les onglets suivants :
 
-4. Examinez les applications dans chacune des listes, et décochez celles auxquelles vous ne souhaitez pas appliquer les règles. Chaque liste comprend les éléments suivants :
+    - **Configurés**  : groupes d’ordinateurs qui disposent déjà d’une liste verte d’applications définie. Pour chaque groupe, l’onglet Configurés affiche :
+        - le nombre de machines dans le groupe ;
+        - les alertes récentes.
 
-   - **NOM** : informations de certificat ou chemin d’accès complet de l’application
-   - **TYPES DE FICHIERS** : type du fichier d’application. Cela peut être EXE, Script, MSI, ou toute autre permutation de ces types.
-   - **EXPLOITABLE** : une icône d’avertissement indique si une application spécifique peut être utilisée par un attaquant pour ignorer une liste verte d’applications. Nous vous recommandons de vérifier ces applications avant de les valider.
-   - **UTILISATEURS** : utilisateurs recommandés pour recevoir l’autorisation d’exécution d’une application
+    - **Recommandés**  : groupes d’ordinateurs qui exécutent régulièrement les mêmes applications et qui n’ont pas de liste verte configurée. Nous vous recommandons d’activer les contrôles d’application adaptatifs pour ces groupes.
+    
+      > [!TIP]
+      > Si vous voyez un nom de groupe avec le préfixe « REVIEWGROUP », il contient des ordinateurs avec une liste d’applications partiellement cohérente. Security Center ne voit pas de modèle, mais recommande d’examiner ce groupe pour voir si _vous_ pouvez définir manuellement certaines règles de contrôles d’application adaptatifs, comme décrit dans [Modification de la règle de contrôle d’application adaptative d’un groupe](#edit-a-groups-adaptive-application-controls-rule).
+      >
+      > Vous pouvez également déplacer des machines de ce groupe vers d’autres groupes, comme décrit dans [Déplacer une machine d’un groupe vers un autre](#move-a-machine-from-one-group-to-another).
 
-5. Une fois que vous avez terminé vos sélections, sélectionnez **Créer**. <br>
-   Une fois que vous avez sélectionné Créer, Azure Security Center crée automatiquement les règles appropriées sur la solution de liste verte d’applications intégrée disponible sur les serveurs Windows (AppLocker).
+    - **Aucune recommandation**  : les machines sans liste verte d’applications définie et qui ne prennent pas en charge la fonctionnalité. Votre machine peut se trouver dans cet onglet pour les raisons suivantes :
+      - Il manque un agent Log Analytics
+      - L’agent Log Analytics n’envoie pas d’événements
+      - Il s’agit d’un ordinateur Windows avec une stratégie [AppLocker](/windows/security/threat-protection/windows-defender-application-control/applocker/applocker-overview) préexistante activée par un GPO ou une stratégie de sécurité locale
 
-> [!NOTE]
-> - Security Center se base sur l’équivalent de deux semaines de données au minimum pour établir une ligne de base et remplir les recommandations uniques par groupe de machines virtuelles. Les nouveaux clients du niveau Standard de Security Center peuvent s’attendre à un comportement dans lequel leurs groupes de machines virtuelles apparaîtront d’abord sous l’onglet *Aucune recommandation*.
-> - Les contrôles d’application adaptative du Security Center ne prennent pas en charge les machines virtuelles pour lesquelles une stratégie AppLocker est déjà activée par un objet de stratégie de groupe (GPO) ou une stratégie de sécurité locale.
-> -  Afin d’assurer les meilleures pratiques de sécurité, Security Center essaie toujours de créer une règle d’éditeur pour les applications sélectionnées à autoriser. Si une application ne possède pas d’informations d’éditeur (l’application n’est pas signée), une règle de chemin d’accès est créée pour le chemin d’accès complet d’un fichier EXE spécifique.
->   
+      > [!TIP]
+      > Security Center a besoin d’au moins deux semaines de données pour définir les recommandations uniques par groupe d’ordinateurs. Les machines qui ont été créées récemment, ou qui appartiennent à des abonnements qui ont été récemment activés avec Azure Defender, s’affichent sous l’onglet **Aucune recommandation**.
 
-### <a name="editing-and-monitoring-a-group-configured-with-application-control"></a>Modifier et surveiller un groupe configuré avec le contrôle d’application
 
-1. Pour modifier et superviser un groupe configuré avec une stratégie de liste verte d’applications, retournez à la page **Contrôles d’applications adaptatifs**, puis sélectionnez **CONFIGURÉ** sous **Groupes de machines virtuelles** :
+1. Ouvrez l’onglet **Recommandés**. Les groupes de machines avec les listes vertes recommandées s’affichent.
 
-   ![Groupes](./media/security-center-adaptive-application/security-center-adaptive-application-fig5.png)
+   ![Onglet Recommandés](./media/security-center-adaptive-application/adaptive-application-recommended-tab.png)
 
-   Cette liste comprend les éléments suivants :
+1. Sélectionnez un groupe. 
 
-   - **Nom du groupe** : nom de l’abonnement et du groupe
-   - **Machines virtuelles et ordinateurs** : nombre de machines virtuelles dans le groupe
-   - **Mode** : Le mode Audit journalise les tentatives d’exécution d’applications qui ne figurent pas dans la liste verte. Appliquer autorise l’exécution des applications seulement si elles figurent dans la liste verte
-   - **Alertes** : toutes les violations en cours
+1. Pour configurer votre nouvelle règle, passez en revue les différentes sections de cette page **Configurer des règles de contrôle d’applications** et le contenu, qui sera propre à ce groupe spécifique de machines :
 
-2. Cliquez sur un groupe pour apporter des modifications à la page **Modifier la stratégie de contrôle d’application**.
+   ![Configurer une nouvelle règle](./media/security-center-adaptive-application/adaptive-application-create-rule.png)
 
-   ![Protection](./media/security-center-adaptive-application/security-center-adaptive-application-fig6.png)
+   1. **Sélectionner les machines**  : par défaut, toutes les machines du groupe identifié sont sélectionnées. Désélectionnez tout pour les supprimer de cette règle.
+   
+   1. **Applications recommandées**  : passez en revue cette liste d’applications qui sont communes aux ordinateurs au sein de ce groupe et dont l’autorisation d’exécution est recommandée.
+   
+   1. **Plus d’applications**  : passez en revue cette liste d’applications qui sont vues moins fréquemment sur les ordinateurs de ce groupe ou qui sont susceptibles d’être exploitées. Une icône d’avertissement indique qu’une application spécifique peut être utilisée par un attaquant pour ignorer une liste verte d’applications. Nous vous recommandons de passer attentivement en revue ces applications.
 
-3. Dans **Mode de Protection**, vous pouvez sélectionner une des options suivantes :
+      > [!TIP]
+      > Les deux listes d’applications incluent l’option permettant de limiter une application spécifique à certains utilisateurs. Adoptez le principe du moindre privilège dans la mesure du possible.
+      > 
+      > Les applications sont définies par leur éditeur, si une application ne possède pas d’informations d’éditeur (elle n’est pas signée), une règle de chemin d’accès est créée pour le chemin d’accès complet de l’application spécifique.
 
-   - **Audit** : dans ce mode, la solution de contrôle d’application n’applique pas les règles et effectue uniquement les audits de l’activité des machines virtuelles protégées. Ce mode est recommandé pour les scénarios dont vous souhaitez tout d’abord observer le comportement global avant de bloquer l’exécution d’une application dans la machine virtuelle cible.
-   - **Appliquer** : dans ce mode, la solution de contrôle d’application applique les règles, puis s’assure que les applications n’ayant pas d’autorisation soient bloquées.
+   1. Pour appliquer la règle, sélectionnez **Audit**. 
 
-   > [!NOTE]
-   > -  Le mode de protection **Appliquer** est désactivé jusqu’à nouvel ordre.
-   > - Comme nous l’avons indiqué précédemment, une nouvelle stratégie de contrôle d’application est toujours configurée par défaut dans le mode *Audit*. 
+
+
+
+## <a name="edit-a-groups-adaptive-application-controls-rule"></a>Modifier la règle de contrôles d’application adaptatifs d’un groupe
+
+Vous pouvez décider de modifier la liste verte pour un groupe d’ordinateurs en raison des modifications connues dans votre organisation. 
+
+Pour modifier les règles d’un groupe d’ordinateurs :
+
+1. Ouvrez le tableau de bord Azure Defender et, dans la zone de protection avancée, sélectionnez **Contrôles d’application adaptatifs**.
+
+1. Dans l’onglet **Configurés** , sélectionnez le groupe dont vous souhaitez modifier la règle.
+
+1. Passez en revue les différentes sections de la page **Configurer les règles de contrôle d’applications** , comme décrit dans [Activer les contrôles d’application adaptatifs sur un groupe d’ordinateurs](#enable-application-controls-on-a-group-of-machines).
+
+1. Si vous le souhaitez, ajoutez une ou plusieurs règles personnalisées :
+
+   1. Sélectionnez **Ajouter une règle**.
+
+      ![Ajouter une règle personnalisée](./media/security-center-adaptive-application/adaptive-application-add-custom-rule.png)
+
+   1. Si vous définissez un chemin d’accès réputé sécurisé, changez le **Type de règle** en « Path » et entrez un chemin d’accès unique. Vous pouvez inclure des caractères génériques dans le chemin d’accès.
+   
+      > [!TIP]
+      > Voici quelques scénarios pour lesquels les caractères génériques dans un chemin d’accès peuvent être utiles :
+      > 
+      > * Utilisation d’un caractère générique à la fin d’un chemin d’accès pour autoriser tous les exécutables dans ce dossier et ses sous-dossiers.
+      > * Utilisation d’un caractère générique au milieu d’un chemin d’accès pour activer un nom d’exécutable connu avec un nom de dossier variable (par exemple, des dossiers utilisateur personnels contenant un exécutable connu, des noms de dossiers générés automatiquement, etc.).
+  
+   1. Définissez les utilisateurs autorisés et les types de fichiers protégés.
+
+   1. Une fois que vous avez fini de définir la règle, sélectionnez **Ajouter**.
+
+1. Pour appliquer les modifications, sélectionnez **Enregistrer**.
+
+
+## <a name="review-and-edit-a-groups-settings"></a>Examiner et modifier les paramètres d’un groupe
+
+1. Pour afficher les détails et les paramètres de votre groupe, sélectionnez **Paramètres du groupe**
+
+    Ce volet affiche le nom du groupe (qui peut être modifié), le type de système d’exploitation, l’emplacement et d’autres détails pertinents.
+
+    :::image type="content" source="./media/security-center-adaptive-application/adaptive-application-group-settings.png" alt-text="Page des paramètres de groupe pour les commandes d’applications adaptatives" lightbox="./media/security-center-adaptive-application/adaptive-application-group-settings.png":::
+
+    > [!IMPORTANT]
+    > L’option **Appliquer** , dans les paramètres du mode de protection du type de fichier, est grisée dans **tous** les scénarios. Aucune option de mise en application n’est disponible pour l’instant. 
+    >
+    > :::image type="content" source="./media/security-center-adaptive-application/adaptive-application-modes.png" alt-text="Le mode d’application de la protection des fichiers est définitivement grisé. Aucune option de mise en application n’est disponible.":::
+
+1. Si vous le souhaitez, modifiez le nom du groupe ou les modes de protection du type de fichier.
+
+1. Sélectionnez **Appliquer** et **Enregistrer**.
+
+
+
+## <a name="respond-to-the-allowlist-rules-in-your-adaptive-application-control-policy-should-be-updated-recommendation"></a>Répondre à la recommandation « Les règles de liste verte de la stratégie de contrôles d’application adaptatifs doivent être mises à jour »
+
+Cette recommandation s’affiche lorsque l’apprentissage automatique de Security Center identifie un comportement potentiellement légitime qui n’a pas été autorisé précédemment. La recommandation suggère de nouvelles règles pour vos définitions existantes afin de réduire le nombre d’alertes de faux positifs.
+
+Pour corriger les problèmes :
+
+1. Dans la page des recommandations, sélectionnez la recommandation **Les règles de liste verte de la stratégie de contrôles d’application adaptatifs doivent être mises à jour** pour afficher les groupes avec un comportement récemment identifié et potentiellement légitime.
+
+1. Sélectionnez le groupe dont vous souhaitez modifier la règle.
+
+1. Passez en revue les différentes sections de la page **Configurer les règles de contrôle d’applications** , comme décrit dans [Activer les contrôles d’application adaptatifs sur un groupe d’ordinateurs](#enable-application-controls-on-a-group-of-machines).
+
+1. Pour appliquer les modifications, sélectionnez **Audit**.
+
+
+
+
+## <a name="audit-alerts-and-violations"></a>Auditer les alertes et les violations
+
+1. Ouvrez le tableau de bord Azure Defender et, dans la zone de protection avancée, sélectionnez **Contrôles d’application adaptatifs**.
+
+1. Pour afficher les groupes avec des ordinateurs qui ont des alertes récentes, passez en revue les groupes listés dans l’onglet **Configurés**.
+
+1. Pour approfondir vos recherches, sélectionnez un groupe.
+
+   ![Alertes récentes](./media/security-center-adaptive-application/recent-alerts.png)
+
+1. Pour plus d’informations et pour obtenir la liste des machines affectées, sélectionnez une alerte.
+
+
+
+## <a name="move-a-machine-from-one-group-to-another"></a>Déplacer une machine d’un groupe à un autre
+
+Lorsque vous déplacez une machine d’un groupe à un autre, la stratégie de contrôle des applications qui lui est appliquée change en fonction des paramètres du groupe de destination. Vous pouvez également déplacer une machine d’un groupe configuré vers un groupe non configuré, ce qui supprime toutes les règles de contrôle d’application qui ont été appliquées à la machine.
+
+1. Ouvrez le tableau de bord Azure Defender et, dans la zone de protection avancée, sélectionnez **Contrôles d’application adaptatifs**.
+
+1. Sur la page **Contrôles d’application adaptatifs** , sous l’onglet **Configurés** , sélectionnez le groupe contenant l’ordinateur à déplacer.
+
+1. Ouvrez la liste des **Machines configurées**.
+
+1. Ouvrez le menu de l’ordinateur à partir de trois points à la fin de la ligne, puis sélectionnez **Déplacer**. Le volet **Déplacer l’ordinateur vers un autre groupe** s’ouvre.
+
+1. Sélectionnez le groupe de destination, puis sélectionnez **Déplacer l’ordinateur**.
+
+1. Pour enregistrer vos modifications, sélectionnez **Enregistrer**.
+
+
+
+
+
+## <a name="manage-application-controls-via-the-rest-api"></a>Gérer les contrôles d’application via l’API REST 
+
+Pour gérer vos contrôles d’application adaptatifs par programmation, utilisez notre API REST. 
+
+La documentation complète de l’API se trouve [ici](/rest/api/securitycenter/adaptiveapplicationcontrols).
+
+Voici certaines des fonctions disponibles à partir de l’API REST :
+
+* **List** récupère toutes vos recommandations de groupe et fournit un JSON avec un objet pour chaque groupe.
+
+* **Get** récupère le JSON avec les données de recommandation complètes (c’est-à-dire la liste des machines, les règles d’éditeur/de chemin d’accès, etc.).
+
+* **Put** configure votre règle (utilisez le JSON que vous avez récupéré avec **Get** comme corps pour cette demande).
+ 
+   > [!IMPORTANT]
+   > La fonction **Put** attend moins de paramètres que le JSON retourné par la commande Get.
    >
+   > Supprimez les propriétés suivantes avant d’utiliser le JSON dans la requête Put : recommendationStatus, configurationStatus, issues, location et sourceSystem.
 
-4. Dans **Extension de stratégie**, ajoutez tout chemin d’application que vous souhaitez autoriser. Une fois que vous ajoutez ces chemins, Security Center met à jour la stratégie de liste verte d’applications sur les machines virtuelles au sein du groupe de machines virtuelles sélectionné et crée les règles appropriées pour ces applications, en plus des règles déjà en place.
 
-5. Passez en revue les violations en cours répertoriées dans la section **Alertes récentes**. Cliquez sur chaque ligne pour être redirigé vers la page **Alertes** dans Azure Security Center et afficher toutes les alertes qui ont été détectées par Azure Security Center sur les machines virtuelles associées.
-   - **Alertes** : toutes les violations enregistrées.
-   - **Nombre de machines virtuelles** : le nombre de machines virtuelles avec ce type d’alerte.
 
-6. Sous **Règles de mise en liste verte de l’éditeur**, **Règles de mise en liste verte des chemins d’accès**, et **Règles de mise en liste verte de hachage**, vous pouvez voir les règles de mise en liste verte des applications actuellement configurées sur les machines virtuelles au sein d’un groupe, en fonction du type de regroupement de règles. Pour chaque règle, vous pouvez découvrir :
-
-   - **Règle** : paramètres spécifiques en fonction desquels une application est examinée par AppLocker pour déterminer si une application est autorisée à s’exécuter.
-   - **Type de fichier** : types de fichiers couverts par une règle spécifique. Il peut s’agir d’un des éléments suivants : EXE, Script, MSI ou toute autre permutation de ces types de fichiers.
-   - **Utilisateurs** : nom ou nombre d’utilisateurs autorisés à exécuter une application couverte par une règle de mise en liste verte des applications.
-
-   ![Règles de mise en liste verte](./media/security-center-adaptive-application/security-center-adaptive-application-fig9.png)
-
-7. Cliquez sur les trois points à la fin de chaque ligne si vous souhaitez supprimer une règle spécifique ou modifier les utilisateurs autorisés.
-
-8. Après avoir apporté des modifications à une stratégie de **contrôles d’application adaptatifs**, cliquez sur **Enregistrer**.
-
-### <a name="not-recommended-list"></a>Liste non recommandée
-
-Security Center ne recommande des stratégies de mise en liste verte des applications que pour les machines virtuelles exécutant un ensemble stable d’applications. Les recommandations ne sont pas créées si les applications sur les machines virtuelles associées sont en cours de modification.
-
-![Recommandation](./media/security-center-adaptive-application/security-center-adaptive-application-fig11.png)
-
-La liste contient :
-- **Nom du groupe** : nom de l’abonnement et du groupe
-- **Machines virtuelles et ordinateurs** : nombre de machines virtuelles dans le groupe
-
-Azure Security Center vous permet également de définir une stratégie de mise en liste verte des applications sur des groupes non recommandés de machines virtuelles. Suivez les mêmes principes que ceux indiqués précédemment, pour configurer une stratégie de mise en liste verte des applications sur ces groupes.
-
-## <a name="move-a-vm-from-one-group-to-another"></a>Déplacer une machine virtuelle d’un groupe à un autre
-
- Lorsque vous déplacez une machine virtuelle d’un groupe à un autre, la stratégie de contrôle des applications qui lui est appliquée change en fonction des paramètres du groupe de destination. Vous pouvez aussi déplacer une machine virtuelle d’un groupe configuré vers un groupe non configuré, ce qui supprime toute stratégie de contrôle d’application précédemment appliquée à une machine virtuelle.
-
- 1. Sur la page **Contrôles d’application adaptatifs**, dans l’onglet **CONFIGURÉS**, cliquez sur le groupe auquel appartient la machine virtuelle à déplacer.
-1. Cliquez sur **Machines virtuelles et ordinateurs configurés**.
-1. Cliquez sur les points de suspension de la ligne de la machine virtuelle à déplacer, puis cliquez sur **Déplacer**. La fenêtre **Déplacer l’ordinateur vers un autre groupe** s’ouvre.
-
-    ![Protection](./media/security-center-adaptive-application/adaptive-application-move-group.png)
-
- 1. Sélectionnez le groupe vers lequel déplacer la machine virtuelle, puis cliquez sur **Déplacer l’ordinateur**, et enfin sur **Enregistrer**.
-
-    ![Protection](./media/security-center-adaptive-application/adaptive-application-move-group2.png)
-
- > [!NOTE]
-> Veillez à cliquer sur **Enregistrer** après avoir cliqué sur **Déplacer l’ordinateur**. Si vous ne cliquez pas sur **Enregistrer**, l’ordinateur ne sera pas déplacé.
 
 ## <a name="next-steps"></a>Étapes suivantes
-Dans ce document, vous avez découvert comment utiliser les contrôles d’application adaptatifs dans Azure Security Center afin d’inclure dans une liste verte des applications s’exécutant sur les machines virtuelles Azure et non Azure. Pour plus d’informations sur le Centre de sécurité Azure, consultez les rubriques suivantes :
+Dans ce document, vous avez découvert comment utiliser les contrôles d’application adaptatifs dans Azure Security Center pour définir des listes vertes des applications s’exécutant sur vos les machines Azure et non Azure. Pour en savoir plus sur certaines des autres fonctionnalités de protection de la charge de travail cloud de Security Center, consultez :
 
-* [Gestion et résolution des alertes de sécurité dans Azure Security Center](https://docs.microsoft.com/azure/security-center/security-center-managing-and-responding-alerts). Apprenez à gérer les alertes et à répondre aux incidents de sécurité dans Security Center.
-* [Surveillance de l’intégrité de la sécurité dans Azure Security Center](security-center-monitoring.md). découvrez comment surveiller l’intégrité de vos ressources Azure.
-* [Présentation des alertes de sécurité dans Azure Security Center](https://docs.microsoft.com/azure/security-center/security-center-alerts-type). En savoir plus sur les différents types d’alertes de sécurité.
-* [Guide de résolution des problèmes d’Azure Security Center](https://docs.microsoft.com/azure/security-center/security-center-troubleshooting-guide). Apprenez à résoudre les problèmes fréquents dans Azure Security Center.
-* [Blog sur la sécurité Azure](https://blogs.msdn.com/b/azuresecurity/). accédez à des billets de blog sur la sécurité et la conformité Azure.
+* [Fonctionnement de l’accès aux machines virtuelles juste-à-temps (JAT)](just-in-time-explained.md)
+* [Sécurisation de vos clusters Azure Kubernetes](defender-for-kubernetes-introduction.md)

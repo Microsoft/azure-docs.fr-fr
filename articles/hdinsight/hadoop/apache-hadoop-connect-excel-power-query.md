@@ -5,15 +5,15 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
+ms.topic: how-to
 ms.custom: hdinsightactive
 ms.date: 12/17/2019
-ms.openlocfilehash: e643c7fe7b18eed30843e7cab3977036435d2112
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 8664efd40bb5392f56803515f09cccc800fdf21c
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75435801"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91397111"
 ---
 # <a name="connect-excel-to-apache-hadoop-by-using-power-query"></a>Connecter Excel à Apache Hadoop à l’aide de Power Query
 
@@ -23,7 +23,7 @@ Une fonctionnalité clé de la solution de données volumineuses (« big data 
 
 * Un cluster Apache Hadoop sur HDInsight. Consultez [Bien démarrer avec HDInsight sur Linux](./apache-hadoop-linux-tutorial-get-started.md).
 * Une station de travail fonctionnant sous Windows 10, 7, Windows Server 2008 R2 ou une version ultérieure.
-* Office 2016, Office 2013 Professionnel Plus, Office 365 ProPlus, Excel 2013 autonome ou Office 2010 Professionnel Plus.
+* Microsoft 365 Apps for enterprise, Office 2016, Office Professionnel Plus 2013, l’édition autonome d’Excel 2013 ou Office Professionnel Plus 2010.
 
 ## <a name="install-microsoft-power-query"></a>Installez Microsoft Power Query
 

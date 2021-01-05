@@ -4,15 +4,16 @@ description: Cet article vous permet de comprendre comment les remises sur insta
 author: bandersmsft
 ms.reviewer: yashar
 ms.service: cost-management-billing
+ms.subservice: reservations
 ms.topic: conceptual
 ms.date: 03/22/2020
 ms.author: banders
-ms.openlocfilehash: cd09bb7bde759c543b066070c5d2450404949610
-ms.sourcegitcommit: 1895459d1c8a592f03326fcb037007b86e2fd22f
+ms.openlocfilehash: 1c038e896a9f9fc65c3b2201b3e763e966285c56
+ms.sourcegitcommit: 56cbd6d97cb52e61ceb6d3894abe1977713354d9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82627107"
+ms.lasthandoff: 08/20/2020
+ms.locfileid: "88684675"
 ---
 # <a name="how-a-reservation-discount-is-applied"></a>Comment une remise sur réservation est-elle appliquée ?
 
@@ -38,7 +39,7 @@ Quand vous achetez une réservation, la remise peut être appliquée à d’autr
 
 Plans de service :
 
-- Instances de machines virtuelles réservées : Lorsque vous achetez la réservation et sélectionnez **Optimisé pour flexibilité de la taille d’instance**, la couverture de remise dépend de la taille de machine virtuelle que vous sélectionnez. La réservation peut s’appliquer aux tailles des machines virtuelles dans le même groupe de gammes de tailles. Pour plus d’informations, consultez [Flexibilité en termes de taille de machine virtuelle avec des instances de machines virtuelles réservées](../../virtual-machines/windows/reserved-vm-instance-size-flexibility.md).
+- Instances de machines virtuelles réservées : Lorsque vous achetez la réservation et sélectionnez **Optimisé pour flexibilité de la taille d’instance**, la couverture de remise dépend de la taille de machine virtuelle que vous sélectionnez. La réservation peut s’appliquer aux tailles des machines virtuelles dans le même groupe de gammes de tailles. Pour plus d’informations, consultez [Flexibilité en termes de taille de machine virtuelle avec des instances de machines virtuelles réservées](../../virtual-machines/reserved-vm-instance-size-flexibility.md).
 - Capacité réservée de stockage Azure : Vous pouvez acheter une capacité réservée pour les comptes de stockage Azure standard, en unités de 100 Tio ou 1 PiB par mois. Pour plus d’informations sur les régions qui prennent en charge la capacité de réserve de Stockage Azure, consultez [Tarification des objets blob de blocs](https://azure.microsoft.com/pricing/details/storage/blobs/). La capacité de réserve de Stockage Azure est disponible pour tous les niveaux d’accès (chaud, froid ou archive) et pour toute configuration de réplication (LRS, GRS ou ZRS).
 - Capacité réservée SQL Database : la couverture de remise dépend du niveau de performance que vous choisissez. Pour plus d’informations, consultez [Comprendre comment une remise de réservation Azure est appliquée aux bases de données SQL](understand-reservation-charges.md).
 - Capacité réservée Azure Cosmos DB : la couverture de remise dépend du débit provisionné. Pour plus d’informations, consultez [Comprendre comment une remise de réservation Azure Cosmos DB est appliquée](understand-cosmosdb-reservation-charges.md).

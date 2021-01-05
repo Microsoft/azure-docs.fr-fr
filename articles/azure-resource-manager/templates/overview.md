@@ -1,14 +1,14 @@
 ---
 title: Vue d’ensemble des modèles
-description: Décrit les avantages apportés par l’utilisation de modèles Azure Resource Manager pour le déploiement de ressources.
+description: Décrit les avantages apportés par l’utilisation de modèles Azure Resource Manager (modèles ARM) pour le déploiement de ressources.
 ms.topic: conceptual
-ms.date: 04/06/2020
-ms.openlocfilehash: b3b5fb383ac89d0968a437f35aab656afa1913f0
-ms.sourcegitcommit: 09a124d851fbbab7bc0b14efd6ef4e0275c7ee88
+ms.date: 12/01/2020
+ms.openlocfilehash: da091d09f6d242d4b98903a8dcd76fe305e578b8
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/23/2020
-ms.locfileid: "82086332"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96497994"
 ---
 # <a name="what-are-arm-templates"></a>Que sont les modèles ARM ?
 
@@ -16,7 +16,7 @@ Avec la migration vers le cloud, de nombreuses équipes ont adopté des méthode
 
 Pour relever ces défis, vous pouvez automatiser les déploiements et utiliser la pratique de l’infrastructure en tant que code. Dans le code, vous définissez l’infrastructure qui doit être déployée. Le code d’infrastructure devient partie intégrante de votre projet. Tout comme le code d’application, vous stockez le code d’infrastructure dans un dépôt source et vous gérez ses versions. Toute personne de votre équipe peut exécuter le code et déployer des environnements similaires.
 
-Pour implémenter une infrastructure en tant que code pour vos solutions Azure, utilisez des modèles Azure Resource Manager (ARM). Le modèle est un fichier JSON (JavaScript Object Notation) qui définit l’infrastructure et la configuration de votre projet. Le modèle utilise la syntaxe déclarative, qui vous permet d’indiquer ce que vous envisagez de déployer sans avoir à écrire la séquence de commandes de programmation pour le créer. Dans le modèle, vous spécifiez les ressources à déployer et les propriétés de ces ressources.
+Pour implémenter une infrastructure en tant que code pour vos solutions Azure, utilisez des modèles Azure Resource Manager (modèles ARM). Le modèle est un fichier JSON (JavaScript Object Notation) qui définit l’infrastructure et la configuration de votre projet. Le modèle utilise la syntaxe déclarative, qui vous permet d’indiquer ce que vous envisagez de déployer sans avoir à écrire la séquence de commandes de programmation pour le créer. Dans le modèle, vous spécifiez les ressources à déployer et les propriétés de ces ressources.
 
 ## <a name="why-choose-arm-templates"></a>Pourquoi choisir les modèles ARM ?
 
@@ -54,7 +54,7 @@ Si vous essayez de choisir entre utiliser des modèles Resource Manager et l’u
 
 * **Code exportable** : Vous pouvez obtenir un modèle pour un groupe de ressources existant en exportant l’état actuel du groupe de ressources ou en consultant le modèle utilisé pour un déploiement particulier. L’affichage du [modèle exporté](export-template-portal.md) est un moyen utile pour en découvrir plus sur sa syntaxe.
 
-* **Outils de création** : Vous pouvez créer des modèles avec [Visual Studio Code](use-vs-code-to-create-template.md) et l’extension d’outil de modèle. Vous bénéficiez d’IntelliSense, de la mise en surbrillance de la syntaxe, de l’aide en ligne et de nombreuses autres fonctions de langage. Outre Visual Studio code, vous pouvez également utiliser [Visual Studio](create-visual-studio-deployment-project.md).
+* **Outils de création** : Vous pouvez créer des modèles avec [Visual Studio Code](quickstart-create-templates-use-visual-studio-code.md) et l’extension d’outil de modèle. Vous bénéficiez d’IntelliSense, de la mise en surbrillance de la syntaxe, de l’aide en ligne et de nombreuses autres fonctions de langage. Outre Visual Studio Code, vous pouvez également utiliser [Visual Studio](create-visual-studio-deployment-project.md).
 
 ## <a name="template-file"></a>Fichier de modèle
 
@@ -80,13 +80,13 @@ Quand vous déployez un modèle, Resource Manager le convertit en opérations d�
 "resources": [
   {
     "type": "Microsoft.Storage/storageAccounts",
-    "apiVersion": "2016-01-01",
+    "apiVersion": "2019-04-01",
     "name": "mystorageaccount",
     "location": "westus",
     "sku": {
       "name": "Standard_LRS"
     },
-    "kind": "Storage",
+    "kind": "StorageV2",
     "properties": {}
   }
 ]
@@ -96,17 +96,19 @@ Il convertit la définition en opération API REST suivante, qui est envoyée au
 
 ```HTTP
 PUT
-https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/mystorageaccount?api-version=2016-01-01
+https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/mystorageaccount?api-version=2019-04-01
 REQUEST BODY
 {
   "location": "westus",
   "sku": {
     "name": "Standard_LRS"
   },
-  "kind": "Storage",
+  "kind": "StorageV2",
   "properties": {}
 }
 ```
+
+Notez que la **apiVersion** que vous définissez dans le modèle pour la ressource est utilisée comme version d’API pour l’opération REST. Vous pouvez déployer le modèle à plusieurs reprises et être sûr qu’il continuera à fonctionner. En utilisant la même version d’API, vous n’avez pas à vous soucier des changements cassants qui peuvent être introduits dans les versions ultérieures.
 
 ## <a name="template-design"></a>Conception de modèle
 
@@ -114,7 +116,7 @@ La manière dont vous définissez les modèles et les groupes de ressources dép
 
 ![modèle à trois niveaux](./media/overview/3-tier-template.png)
 
-Cependant, il est inutile de définir toute votre infrastructure dans un seul modèle. Il peut être judicieux de diviser les exigences de votre déploiement dans un ensemble de modèles ciblés destinés à un usage particulier. Vous pouvez facilement réutiliser ces modèles pour différentes solutions. Pour déployer une solution particulière, créez un modèle de référence qui relie tous les modèles requis. L’illustration suivante montre comment déployer une solution à trois niveaux via un modèle parent qui inclut trois modèles imbriqués.
+Cependant, il est inutile de définir toute votre infrastructure dans un seul modèle. Il peut être judicieux de diviser les exigences de votre déploiement dans un ensemble de modèles ciblés destinés à un usage particulier. Vous pouvez facilement réutiliser ces modèles pour différentes solutions. Pour déployer une solution particulière, créez un modèle principal qui relie tous les modèles requis. L’illustration suivante montre comment déployer une solution à trois niveaux via un modèle parent qui inclut trois modèles imbriqués.
 
 ![modèle à niveaux imbriqués](./media/overview/nested-tiers-template.png)
 
@@ -129,3 +131,4 @@ Pour plus d’informations sur les modèles imbriqués, consultez [Utilisation d
 * Pour obtenir un didacticiel pas à pas vous guidant tout au long du processus de création d’un modèle, consultez :[Totoriel : Créer et déployer votre premier modèle ARM](template-tutorial-create-first-template.md).
 * Pour plus d’informations sur les propriétés de fichiers de modèle, consultez [Comprendre la structure et la syntaxe des modèles Azure Resource Manager](template-syntax.md).
 * Pour en savoir plus sur l’exportation de modèles, consultez [Démarrage rapide : Créer et déployer des modèles Resource Manager à l’aide du portail Azure](quickstart-create-templates-use-the-portal.md).
+* Pour obtenir des réponses aux questions les plus fréquentes, consultez [Foire aux questions sur les modèles ARM](frequently-asked-questions.md).

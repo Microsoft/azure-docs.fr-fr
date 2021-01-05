@@ -5,15 +5,16 @@ author: bandersmsft
 ms.reviewer: matrive
 tags: billing
 ms.service: cost-management-billing
+ms.subservice: billing
 ms.topic: conceptual
-ms.date: 02/12/2020
+ms.date: 08/20/2020
 ms.author: banders
-ms.openlocfilehash: 87135b309f0406528bcada1cd906dd2f8535d1ae
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: b3b2e9b501f2ae103900a085e9b7a4b412efb78e
+ms.sourcegitcommit: 56cbd6d97cb52e61ceb6d3894abe1977713354d9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "79202894"
+ms.lasthandoff: 08/20/2020
+ms.locfileid: "88686834"
 ---
 # <a name="export-and-view-your-top-level-subscription-information"></a>Exporter et visualiser les informations générales de vos abonnements
 Si vous avez besoin de visualiser l’ensemble des ID d’abonnement associés à vos informations d’identification utilisateur, [téléchargez un fichier .json avec les informations de vos abonnements à partir du Centre des comptes Azure](https://account.azure.com/subscriptions/download).

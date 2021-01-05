@@ -3,13 +3,13 @@ title: Envoyer (push) et tirer (pull) une image Docker
 description: Transmission et extraction des images Docker à un Registre de conteneur privé dans Azure à l’aide de l’interface de ligne de commande (CLI) Docker
 ms.topic: article
 ms.date: 01/23/2019
-ms.custom: seodec18, H1Hack27Feb2017
-ms.openlocfilehash: 6751a04c3c1bfe826334161704c20c1ba2e5a6d2
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: seodec18, H1Hack27Feb2017, devx-track-azurecli
+ms.openlocfilehash: 067b5749332c2c41b86d22e7de60083d5f61a442
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74456361"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96020056"
 ---
 # <a name="push-your-first-image-to-a-private-docker-container-registry-using-the-docker-cli"></a>Transmission de votre première image vers un Registre de conteneur Docker privé à l’aide de l’interface de ligne de commande (CLI) Docker
 

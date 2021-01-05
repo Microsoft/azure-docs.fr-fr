@@ -5,19 +5,19 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
+ms.topic: how-to
 ms.custom: seoapr2020
 ms.date: 04/27/2020
-ms.openlocfilehash: d5dde8c45331cf8c443aba86c96ba12c8277472c
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 51977c00dc8c9932def89d54ec1b6ec34afad652
+ms.sourcegitcommit: d767156543e16e816fc8a0c3777f033d649ffd3c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82192482"
+ms.lasthandoff: 10/26/2020
+ms.locfileid: "92541993"
 ---
 # <a name="add-additional-storage-accounts-to-hdinsight"></a>Ajouter des comptes de stockage supplémentaires à HDInsight
 
-Découvrez comment utiliser des actions de script pour ajouter des *comptes* Stockage Azure supplémentaires à HDInsight. Les étapes décrites dans ce document permettent d’ajouter un *compte* de stockage à un cluster HDInsight existant. Cet article s’applique aux *comptes* de stockage (différents du compte de stockage en cluster par défaut) et pas à un stockage supplémentaire comme [`Azure Data Lake Storage Gen1`](hdinsight-hadoop-use-data-lake-store.md) et [`Azure Data Lake Storage Gen2`](hdinsight-hadoop-use-data-lake-storage-gen2.md).
+Découvrez comment utiliser des actions de script pour ajouter des *comptes* Stockage Azure supplémentaires à HDInsight. Les étapes décrites dans ce document permettent d’ajouter un *compte* de stockage à un cluster HDInsight existant. Cet article s’applique aux *comptes* de stockage (différents du compte de stockage en cluster par défaut) et pas à un stockage supplémentaire comme [`Azure Data Lake Storage Gen1`](hdinsight-hadoop-use-data-lake-storage-gen1.md) et [`Azure Data Lake Storage Gen2`](hdinsight-hadoop-use-data-lake-storage-gen2.md).
 
 > [!IMPORTANT]  
 > Les informations contenues dans ce document portent sur l’ajout d’un ou de plusieurs comptes de stockage supplémentaires à un cluster après sa création. Pour plus d’informations sur l’ajout de comptes de stockage lors de la création du cluster, consultez [Configurer des clusters dans HDInsight avec Apache Hadoop, Apache Spark, Apache Kafka, etc](hdinsight-hadoop-provision-linux-clusters.md).
@@ -26,7 +26,7 @@ Découvrez comment utiliser des actions de script pour ajouter des *comptes* Sto
 
 * Un cluster Hadoop sur HDInsight. Consultez [Bien démarrer avec HDInsight sur Linux](./hadoop/apache-hadoop-linux-tutorial-get-started.md).
 * Nom et clé du compte de stockage. Consultez [Gérer les clés d’accès au compte de stockage](../storage/common/storage-account-keys-manage.md).
-* Si vous utilisez PowerShell, vous avez besoin du module AZ.  Consultez [Vue d’ensemble d’Azure PowerShell](https://docs.microsoft.com/powershell/azure/overview).
+* Si vous utilisez PowerShell, vous avez besoin du module AZ.  Consultez [Vue d’ensemble d’Azure PowerShell](/powershell/azure/).
 
 ## <a name="how-it-works"></a>Fonctionnement
 
@@ -61,7 +61,7 @@ Utilisez une [action de script](hdinsight-hadoop-customize-cluster-linux.md#scri
 
 ## <a name="verification"></a>Vérification
 
-Lorsque vous affichez le cluster HDInsight sur le Portail Azure, les comptes de stockage ajoutés par cette action de script ne s’affichent pas quand vous sélectionnez l’entrée __Comptes de stockage__ sous __Propriétés__. Azure PowerShell et Azure CLI n’affichent pas non plus les comptes de stockage supplémentaires. Les informations de stockage n’apparaissent pas, car le script modifie uniquement la configuration `core-site.xml` du cluster. Ces informations ne sont pas utilisées pour récupérer les informations du cluster avec les API de gestion Azure.
+Lorsque vous affichez le cluster HDInsight sur le Portail Azure, les comptes de stockage ajoutés par cette action de script ne s’affichent pas quand vous sélectionnez l’entrée __Comptes de stockage__ sous __Propriétés__ . Azure PowerShell et Azure CLI n’affichent pas non plus les comptes de stockage supplémentaires. Les informations de stockage n’apparaissent pas, car le script modifie uniquement la configuration `core-site.xml` du cluster. Ces informations ne sont pas utilisées pour récupérer les informations du cluster avec les API de gestion Azure.
 
 Pour vérifier le stockage supplémentaire, appliquez l’une des méthodes indiquées ci-dessous :
 
@@ -97,7 +97,7 @@ foreach ($name in $value ) { $name.Name.Split(".")[4]}
 
 1. Dans un navigateur web, accédez à `https://CLUSTERNAME.azurehdinsight.net`, où `CLUSTERNAME` est le nom de votre cluster.
 
-1. Accédez à **HDFS** > **Configurations** > **Avancé** > **Configuration core-site personnalisée**.
+1. Accédez à **HDFS** > **Configurations** > **Avancé** > **Configuration core-site personnalisée** .
 
 1. Observez les clés qui commencent par `fs.azure.account.key`. Le nom du compte fera partie de la clé, comme illustré dans cet exemple :
 
@@ -107,7 +107,7 @@ foreach ($name in $value ) { $name.Name.Split(".")[4]}
 
 1. Dans un navigateur web, accédez à `https://CLUSTERNAME.azurehdinsight.net`, où `CLUSTERNAME` est le nom de votre cluster.
 
-1. Accédez à **HDFS** > **Configurations** > **Avancé** > **Configuration core-site personnalisée**.
+1. Accédez à **HDFS** > **Configurations** > **Avancé** > **Configuration core-site personnalisée** .
 
 1. Supprimez les clés suivantes :
     * `fs.azure.account.key.<STORAGE_ACCOUNT_NAME>.blob.core.windows.net`
@@ -119,7 +119,7 @@ Après avoir supprimé ces clés et enregistré la configuration, vous devez red
 
 ### <a name="storage-firewall"></a>Pare-feu de stockage
 
-Si vous choisissez de sécuriser votre compte de stockage à l’aide des restrictions de **pare-feu et réseaux virtuels** sur des **réseaux sélectionnés**, veillez à activer l’exception **Autoriser les services approuvés de Microsoft...** afin que HDInsight puisse accéder à votre compte de stockage`.`
+Si vous choisissez de sécuriser votre compte de stockage à l’aide des restrictions de **pare-feu et réseaux virtuels** sur des **réseaux sélectionnés** , veillez à activer l’exception **Autoriser les services approuvés de Microsoft...** afin que HDInsight puisse accéder à votre compte de stockage`.`
 
 ### <a name="unable-to-access-storage-after-changing-key"></a>Impossible d’accéder au stockage après avoir modifié la clé
 
@@ -133,14 +133,6 @@ Pour contourner ce problème :
 
 > [!IMPORTANT]  
 > La rotation de la clé de stockage pour le compte de stockage principal attaché à un cluster n’est pas prise en charge.
-
-### <a name="poor-performance"></a>Problèmes de performances
-
-Si le compte de stockage se trouve dans une région différente de celle du cluster HDInsight, il se peut que vous rencontriez des problèmes de performances. Quand vous accédez à des données stockées dans une autre région, le trafic réseau sort du centre de données Azure régional. Il emprunte ensuite l’Internet public, ce qui peut entraîner de la latence.
-
-### <a name="additional-charges"></a>Frais supplémentaires
-
-Si le compte de stockage se trouve dans une région différente de celle du cluster HDInsight, vous remarquerez peut-être des frais de sortie supplémentaires sur votre facture Azure. Des frais de sortie sont appliqués lorsque des données quittent un centre de données régional. Ces frais sont appliqués même si le trafic est destiné à un autre centre de données Azure situé dans une autre région.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

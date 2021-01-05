@@ -1,6 +1,6 @@
 ---
-title: Résolution des problèmes de l’agent de mise à jour Linux dans Azure Automation Update Management
-description: Découvrez comment détecter et résoudre les problèmes liés à l’agent de mise à jour Linux Windows à l’aide de la solution Update Management.
+title: Résolution des problèmes de l’agent de mise à jour Linux dans Azure Automation
+description: Cet article explique comment détecter et résoudre les problèmes liés à l’agent Linux Windows Update dans Update Management.
 services: automation
 author: mgoedtel
 ms.author: magoedte
@@ -9,40 +9,43 @@ ms.topic: conceptual
 ms.service: automation
 ms.subservice: update-management
 manager: carmonm
-ms.openlocfilehash: bba1c7e89a9c3bb1c9aa1567e36dd71a40f14636
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: f1351b29a0102a374b75d832687d66c3b5572c75
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81679074"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "83680859"
 ---
 # <a name="troubleshoot-linux-update-agent-issues"></a>Résoudre les problèmes de l’agent de mise à jour Linux
 
-De nombreuses raisons peuvent expliquer pourquoi votre machine n’apparaît pas comme étant prête (saine) dans Update Management. Dans Update Management, vous pouvez vérifier l’intégrité d’un agent Runbook Worker hybride pour déterminer le problème sous-jacent. Cet article explique comment exécuter l’utilitaire de résolution des problèmes pour les machines Azure à partir du portail Azure et les machines non-Azure dans le [scénario hors connexion](#troubleshoot-offline). 
+De nombreuses raisons peuvent expliquer pourquoi votre machine n’apparaît pas comme étant prête (saine) dans Update Management. V²ous pouvez vérifier l’intégrité d’un agent Runbook Worker hybride pour déterminer le problème sous-jacent. Voici les trois états de préparation possibles d’une machine :
 
-Voici les trois états de préparation possibles d’une machine :
-
-* Prêt : le Runbook Worker hybride est déployé et a été vu pour la dernière fois il y a moins d’une heure.
-* Déconnecté : le Runbook Worker hybride est déployé et a été vu pour la dernière fois il y a plus d’une heure.
-* Non configuré : le Runbook Worker hybride est introuvable ou n’a pas terminé son intégration.
+* Prêt : le runbook Worker hybride est déployé et a été affiché pour la dernière fois il y a moins d’une heure.
+* Déconnecté : le runbook Worker hybride est déployé et a été affiché pour la dernière fois il y a plus d’une heure.
+* Non configuré : le Runbook Worker hybride est introuvable, ou son déploiement n’est pas terminé.
 
 > [!NOTE]
 > L’état actuel d’une machine peut s’afficher avec un léger retard sur le Portail Azure.
 
-## <a name="start-the-troubleshooter"></a>Démarrer l’utilitaire de résolution des problèmes
-
-Pour les machines Azure, cliquez sur le lien **Résolution des problèmes** sous la colonne **Préparation de l’agent de mise à jour** dans le portail pour ouvrir la page Résoudre les problèmes de l’agent de mise à jour. Pour les machines non-Azure, le lien vous dirige vers cet article. Consultez les instructions hors connexion pour résoudre les problèmes d’une machine non-Azure.
-
-![vm list page](../media/update-agent-issues-linux/vm-list.png)
+Cet article explique comment exécuter l’utilitaire de résolution des problèmes pour les machines Azure à partir du portail Azure et les machines non-Azure dans le [scénario hors connexion](#troubleshoot-offline). 
 
 > [!NOTE]
-> Les vérifications nécessitent que la machine virtuelle soit en cours d’exécution. Si la machine virtuelle n’est pas en cours d’exécution, vous voyez un bouton **Démarrer la machine virtuelle**.
+> Actuellement, le script de résolution des problèmes n’achemine pas le trafic via un serveur proxy s’il y en a un de configuré.
 
-Dans la page Résoudre les problèmes de l’agent de mise à jour, cliquez sur **Exécuter les vérifications** pour démarrer l’utilitaire de résolution des problèmes. L’utilitaire de résolution des problèmes utilise la [commande Run](../../virtual-machines/linux/run-command.md) pour exécuter un script sur la machine afin de vérifier les dépendances. Lorsque l’utilitaire de résolution des problèmes a terminé, il retourne le résultat des vérifications.
+## <a name="start-the-troubleshooter"></a>Démarrer l’utilitaire de résolution des problèmes
+
+Pour les machines Azure, sélectionnez le lien **Dépanner** sous la colonne **Disponibilité de l’agent de mise à jour** dans le portail pour ouvrir la page Résoudre les problèmes de l’agent de mise à jour. Pour les machines non-Azure, le lien vous dirige vers cet article. Pour résoudre les problèmes d’une machine non-Azure, reportez-vous aux instructions de la section « Résolution des problèmes hors connexion ».
+
+![Page affichant la liste des machines virtuelles](../media/update-agent-issues-linux/vm-list.png)
+
+> [!NOTE]
+> Les vérifications nécessitent que la machine virtuelle soit en cours d’exécution. Si la machine virtuelle n’est pas en cours d’exécution, **Démarrer la machine virtuelle** s’affiche.
+
+Dans la page Résoudre les problèmes de l’agent de mise à jour, sélectionnez **Exécuter les vérifications** pour démarrer l’utilitaire de résolution des problèmes. L’utilitaire de résolution des problèmes utilise la [commande Run](../../virtual-machines/linux/run-command.md) pour exécuter un script sur la machine afin de vérifier les dépendances. Quand l’utilitaire de résolution des problèmes a terminé, il retourne le résultat des vérifications.
 
 ![Page de résolution des problèmes](../media/update-agent-issues-linux/troubleshoot-page.png)
 
-Lorsque l’inspection est terminée, les résultats sont renvoyés. Les sections de vérification fournissent des informations sur ce que chaque vérification recherche.
+Une fois les vérifications terminées, les résultats sont retournés dans la fenêtre. Les sections de vérification fournissent des informations sur ce que chaque vérification recherche.
 
 ![Page de vérifications de l’agent de mise à jour](../media/update-agent-issues-linux/update-agent-checks.png)
 
@@ -50,11 +53,11 @@ Lorsque l’inspection est terminée, les résultats sont renvoyés. Les section
 
 ### <a name="operating-system"></a>Système d’exploitation
 
-Le contrôle du système d’exploitation permet de vérifier si le Runbook Worker hybride exécute l’un des systèmes d’exploitation suivants :
+Le contrôle du système d’exploitation permet de vérifier si le runbook Worker hybride exécute l’un des systèmes d’exploitation suivants.
 
 |Système d’exploitation  |Notes  |
 |---------|---------|
-|CentOS 6 (x86/x64) et 7 (x64)      | Les agents Linux doivent avoir accès à un référentiel de mise à jour. La mise à jour corrective basée sur la classification nécessite que 'yum' retourne les données de sécurité que CentOS n’a pas directement.         |
+|CentOS 6 (x86/x64) et 7 (x64)      | Les agents Linux doivent avoir accès à un référentiel de mise à jour. La mise à jour corrective basée sur la classification a besoin que « yum » retourne les données de sécurité dont CentOS ne dispose pas par défaut.         |
 |Red Hat Enterprise 6 (x86/x64) et 7 (x64)     | Les agents Linux doivent avoir accès à un référentiel de mise à jour.        |
 |SUSE Linux Enterprise Server 11 (x86/x64) et 12 (x64)     | Les agents Linux doivent avoir accès à un référentiel de mise à jour.        |
 |Ubuntu 14.04 LTS, 16.04 LTS et 18.04 LTS (x86/x64)      |Les agents Linux doivent avoir accès à un référentiel de mise à jour.         |
@@ -63,12 +66,11 @@ Le contrôle du système d’exploitation permet de vérifier si le Runbook Work
 
 ### <a name="log-analytics-agent"></a>Agent Log Analytics
 
-Cette vérification garantit que l’agent Log Analytics pour Linux est installé. Pour obtenir des instructions sur son installation, consultez [Installer l’agent pour Linux](../../azure-monitor/learn/quick-collect-linux-computer.md#install-the-agent-for-linux
-).
+Cette vérification garantit que l’agent Log Analytics pour Linux est installé. Pour obtenir des instructions sur son installation, consultez [Installer l’agent pour Linux](../../azure-monitor/learn/quick-collect-linux-computer.md#install-the-agent-for-linux).
 
 ### <a name="log-analytics-agent-status"></a>État de l’agent Log Analytics
 
-Cette vérification garantit que l’agent Log Analytics pour Linux est en cours d’exécution. Si l’agent n’est pas en cours d’exécution, vous pouvez exécuter la commande suivante pour tenter de le redémarrer. Pour plus d’informations sur la résolution des problèmes de l’agent, consultez [Résolution des problèmes de Runbook Worker hybride Linux](hybrid-runbook-worker.md#linux).
+Cette vérification garantit que l’agent Log Analytics pour Linux est en cours d’exécution. Si l’agent n’est pas en cours d’exécution, vous pouvez exécuter la commande suivante pour tenter de le redémarrer. Pour plus d’informations sur la résolution des problèmes de l’agent, consultez [Linux – Résoudre les problèmes liés à la fonctionnalité Runbook Worker](hybrid-runbook-worker.md#linux).
 
 ```bash
 sudo /opt/microsoft/omsagent/bin/service_control restart
@@ -76,15 +78,18 @@ sudo /opt/microsoft/omsagent/bin/service_control restart
 
 ### <a name="multihoming"></a>Multirésidence
 
-Cette vérification détermine si l’agent envoie des rapports à plusieurs espaces de travail. La multirésidence n’est pas prise en charge par Update Management.
+Cette vérification détermine si l’agent envoie des rapports à plusieurs espaces de travail. Update Management ne prend pas en charge la multirésidence.
 
 ### <a name="hybrid-runbook-worker"></a>Runbook Worker hybride
 
-Ce contrôle permet de vérifier que l’agent Log Analytics pour Linux a le package Runbook Worker hybride. Ce package est nécessaire pour le fonctionnement de Update Management.
+Ce contrôle permet de vérifier que l’agent Log Analytics pour Linux a le package Runbook Worker hybride. Ce package est nécessaire pour le fonctionnement de Update Management. Pour en savoir plus, consultez [L’agent Log Analytics pour Linux n’est pas en cours d’exécution](hybrid-runbook-worker.md#oms-agent-not-running).
+
+Update Management télécharge les packages Runbook Worker hybrides à partir du point de terminaison des opérations. Par conséquent, si le Runbook Worker hybride n’est pas en cours d’exécution et si le contrôle du [point de terminaison des opérations](#operations-endpoint) échoue, la mise à jour peut échouer.
 
 ### <a name="hybrid-runbook-worker-status"></a>État du Runbook Worker hybride
 
-Cette vérification garantit que le Runbook Worker hybride est en cours d’exécution sur l’ordinateur. Les processus suivants doivent être présents si le Runbook Worker hybride s’exécute correctement. Pour plus d’informations, consultez [Résolution des problèmes de l’Agent Log Analytics pour Linux](hybrid-runbook-worker.md#oms-agent-not-running).
+Cette vérification garantit que le Runbook Worker hybride est en cours d’exécution sur l’ordinateur. Si le Runbook Worker hybride s’exécute correctement, les processus présentés dans l’exemple ci-dessous doivent être présents.
+
 
 ```bash
 nxautom+   8567      1  0 14:45 ?        00:00:00 python /opt/microsoft/omsconfig/modules/nxOMSAutomationWorker/DSCResources/MSFT_nxOMSAutomationWorkerResource/automationworker/worker/main.py /var/opt/microsoft/omsagent/state/automationworker/oms.conf rworkspace:<workspaceId> <Linux hybrid worker version>
@@ -100,15 +105,15 @@ Cette vérification garantit que l’ordinateur a accès à internet.
 
 ### <a name="registration-endpoint"></a>Point de terminaison d’inscription
 
-Cette vérification détermine si le Runbook Worker hybride peut communiquer correctement avec Azure Automation et l’espace de travail Log Analytics.
+Cette vérification détermine si le runbook Worker hybride peut communiquer correctement avec Azure Automation dans l’espace de travail Log Analytics.
 
-Les configurations du pare-feu et du proxy doivent permettre à l’agent Runbook Worker hybride de communiquer avec le point de terminaison d’inscription. Pour obtenir la liste des adresses et des ports à ouvrir, consultez [Planification réseau de workers hybrides](../automation-hybrid-runbook-worker.md#network-planning)
+Les configurations du pare-feu et du proxy doivent permettre à l’agent Runbook Worker hybride de communiquer avec le point de terminaison d’inscription. Pour obtenir la liste des adresses et des ports à ouvrir, consultez [Planification réseau](../automation-hybrid-runbook-worker.md#network-planning).
 
 ### <a name="operations-endpoint"></a>Point de terminaison des opérations
 
-Cette vérification détermine si l’agent peut correctement communiquer avec Job Runtime Data Service.
+Cette vérification détermine si l’agent Log Analytics peut correctement communiquer avec le service de données d’exécution du travail.
 
-Les configurations du pare-feu et du proxy doivent permettre à l’agent Runbook Worker hybride de communiquer avec Job Runtime Data Service. Pour obtenir la liste des adresses et des ports à ouvrir, consultez [Planification réseau de workers hybrides](../automation-hybrid-runbook-worker.md#network-planning)
+Les configurations du pare-feu et du proxy doivent permettre à l’agent Runbook Worker hybride de communiquer avec Job Runtime Data Service. Pour obtenir la liste des adresses et des ports à ouvrir, consultez [Planification réseau](../automation-hybrid-runbook-worker.md#network-planning).
 
 ### <a name="log-analytics-endpoint-1"></a>Point de terminaison Log Analytics 1
 
@@ -124,7 +129,7 @@ Cette vérification contrôle que votre machine a accès aux points de terminais
 
 ## <a name="troubleshoot-offline"></a><a name="troubleshoot-offline"></a>Résolution des problèmes hors connexion
 
-Vous pouvez utiliser l’utilitaire de résolution des problèmes en mode hors connexion sur un Runbook Worker hybride en exécutant le script localement. Le script python [update_mgmt_health_check.py](https://gallery.technet.microsoft.com/scriptcenter/Troubleshooting-utility-3bcbefe6) se trouve dans le centre de scripts. L’exemple suivant illustre la sortie de ce script :
+Vous pouvez utiliser l’utilitaire de résolution des problèmes en mode hors connexion sur un Runbook Worker hybride en exécutant le script localement. Le script Python [update_mgmt_health_check.py](https://gallery.technet.microsoft.com/scriptcenter/Troubleshooting-utility-3bcbefe6) se trouve dans le centre de scripts. L’exemple suivant illustre la sortie de ce script :
 
 ```output
 Debug: Machine Information:   Static hostname: LinuxVM2
@@ -179,4 +184,4 @@ Passed: TCP test for {ods.systemcenteradvisor.com} (port 443) succeeded
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour résoudre les autres problèmes de vos Runbooks Workers hybrides, consultez [Résolution des problèmes relatifs aux Runbooks Workers hybrides](hybrid-runbook-worker.md).
+[Résoudre les problèmes liés au Runbook Worker hybride](hybrid-runbook-worker.md).

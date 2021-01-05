@@ -1,18 +1,18 @@
 ---
 title: Configurer la protection bot pour le pare-feu d’applications web avec Azure Front Door (préversion)
-description: Découvrez le pare-feu d’applications web (WAF).
+description: Découvrez comment configurer une règle de protection bot dans Azure Web Application Firewall (WAF) pour Front Door à l’aide du portail Azure.
 author: vhorne
 ms.service: web-application-firewall
 ms.topic: article
 services: web-application-firewall
 ms.date: 08/21/2019
 ms.author: victorh
-ms.openlocfilehash: f48b683044bc727cda461fb64a743c055188962a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 2357c51f47bcb9bd8bbc6c408cb6d8edbab4d10e
+ms.sourcegitcommit: 32c521a2ef396d121e71ba682e098092ac673b30
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76934646"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91267004"
 ---
 # <a name="configure-bot-protection-for-web-application-firewall-preview"></a>Configurer la protection bot pour le pare-feu d’applications web (préversion)
 Cet article explique comment configurer une règle de protection bot dans le pare-feu d’applications web (WAF) Azure pour Front Door à l’aide du Portail Azure. Une règle de protection bot peut également être configurée à l’aide de CLI, d'Azure PowerShell ou du modèle Azure Resource Manager.

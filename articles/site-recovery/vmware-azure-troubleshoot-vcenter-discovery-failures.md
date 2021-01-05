@@ -7,12 +7,12 @@ ms.service: site-recovery
 ms.topic: conceptual
 ms.date: 10/29/2019
 ms.author: mayg
-ms.openlocfilehash: f00c7b12accde9df9a5708a2b8b378d70428318d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 1a8471305af93194ccae7b0928685e10d4d64726
+ms.sourcegitcommit: 28c5fdc3828316f45f7c20fc4de4b2c05a1c5548
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74091250"
+ms.lasthandoff: 10/22/2020
+ms.locfileid: "92366652"
 ---
 # <a name="troubleshoot-vcenter-server-discovery-failures"></a>Résoudre les problèmes d’échec de découverte de vCenter Server
 
@@ -24,12 +24,14 @@ Dans les versions antérieures à 9.20, vCenter se déconnecte lorsqu’il réc
 
 Ce problème est identifié par l’ID d’erreur 95126.
 
-    ERROR :: Hit an exception while fetching the required informationfrom vCenter/vSphere.Exception details:
-    System.FormatException: Input string was not in a correct format.
-       at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
-       at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
-       at VMware.VSphere.Management.InfraContracts.VirtualMachineInfo.get_MaxSnapshots()
-    
+```output
+ERROR :: Hit an exception while fetching the required informationfrom vCenter/vSphere.Exception details:
+System.FormatException: Input string was not in a correct format.
+    at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+    at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+    at VMware.VSphere.Management.InfraContracts.VirtualMachineInfo.get_MaxSnapshots()
+```
+
 Pour résoudre le problème :
 
 - Identifiez la machine virtuelle et définissez la valeur sur une valeur numérique (dans vCenter, Machine virtuelle, Modifier les paramètres).
@@ -52,7 +54,7 @@ Les situations suivantes se produisent lorsque vous rencontrez ce problème :
 
 Pour résoudre le problème :
 
-Téléchargez l’[outil PsExec](https://aka.ms/PsExec). 
+Téléchargez l’[outil PsExec](/sysinternals/downloads/psexec). 
 
 Utilisez l’outil PsExec pour accéder au contexte d’utilisateur système et déterminez si l’adresse proxy est configurée. Vous pouvez ensuite ajouter vCenter à la liste de contournement en utilisant les procédures suivantes.
 
@@ -79,4 +81,4 @@ Pour la configuration du proxy de DRA :
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-[Gérer le serveur de configuration pour la récupération d’urgence de machines virtuelles VMware](https://docs.microsoft.com/azure/site-recovery/vmware-azure-manage-configuration-server#refresh-configuration-server) 
+[Gérer le serveur de configuration pour la récupération d’urgence de machines virtuelles VMware](./vmware-azure-manage-configuration-server.md#refresh-configuration-server)

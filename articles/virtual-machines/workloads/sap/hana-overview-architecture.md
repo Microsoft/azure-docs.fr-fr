@@ -7,18 +7,19 @@ author: msjuergent
 manager: bburns
 editor: ''
 ms.service: virtual-machines-linux
+ms.subservice: workloads
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
 ms.date: 07/12/2019
 ms.author: juergent
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: 39fcf5d0fe2273c4debd3ae5ebe5fd1190ddc959
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 0144c57549e374404d3dde0fe997ba41adc8606b
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77616950"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94967582"
 ---
 #  <a name="what-is-sap-hana-on-azure-large-instances"></a>Qu’est-ce que SAP HANA sur Azure (grandes instances) ?
 
@@ -54,8 +55,9 @@ Les différents documents de grande instance HANA couvrent les domaines suivants
 - [Installer et configurer SAP HANA (grandes instances) sur Azure](hana-installation.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
 - [Haute disponibilité et récupération d’urgence de SAP HANA (grandes instances) sur Azure](hana-overview-high-availability-disaster-recovery.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
 - [Résolution des problèmes et analyse de SAP HANA (grandes instances) sur Azure](troubleshooting-monitoring.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
-- [Configuration de la haute disponibilité dans SUSE à l’aide de STONITH](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/ha-setup-with-stonith)
-- [Sauvegarde et restauration du système d’exploitation pour les SKU Type II des tampons Révision 3](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/os-backup-type-ii-skus)
+- [Configuration de la haute disponibilité dans SUSE à l’aide de STONITH](./ha-setup-with-stonith.md)
+- [Sauvegarde et restauration du système d’exploitation pour les SKU Type II des tampons Révision 3](./os-backup-type-ii-skus.md)
+- [Enregistrer sur de grandes instances SAP HANA avec une réservation Azure](../../../cost-management-billing/reservations/prepay-hana-large-instances-reserved-capacity.md)
 
 **Étapes suivantes**
 - Voir [Maîtriser la terminologie](hana-know-terms.md)

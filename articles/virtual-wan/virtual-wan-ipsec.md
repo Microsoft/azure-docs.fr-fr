@@ -1,18 +1,18 @@
 ---
 title: Stratégies IPsec par défaut Azure Virtual WAN | Microsoft Docs
-description: Cet article fournit des informations sur les stratégies IPsec pour Virtual WAN.
+description: En savoir plus sur les stratégies de connectivité IPsec d’Azure Virtual WAN, notamment les stratégies par défaut de l’initiateur et du répondeur et les combinaisons de stratégies personnalisées.
 services: virtual-wan
 author: cherylmc
 ms.service: virtual-wan
 ms.topic: conceptual
-ms.date: 10/07/2019
+ms.date: 09/22/2020
 ms.author: cherylmc
-ms.openlocfilehash: 877a17327f13e407f86cb3a1a21f051572f74343
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 30c58a26a326370a2566bc9ebbec33bfbd4b3173
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "73499718"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91267361"
 ---
 # <a name="virtual-wan-default-policies-for-ipsec-connectivity"></a>Stratégies par défaut Virtual WAN pour la connectivité IPsec
 

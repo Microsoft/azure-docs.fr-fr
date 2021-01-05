@@ -1,6 +1,6 @@
 ---
 title: Exemple de script Azure PowerShell - Homologuer deux réseaux virtuels | Microsoft Docs
-description: Exemple de script Azure PowerShell - Homologuer deux réseaux virtuels
+description: Créez et connectez deux réseaux virtuels situés dans la même région. Utilisez le script Azure pour deux réseaux virtuels homologues afin d’interconnecter ceux-ci via Azure.
 services: virtual-network
 documentationcenter: virtual-network
 author: KumudD
@@ -12,18 +12,19 @@ ms.tgt_pltfrm: ''
 ms.workload: infrastructure
 ms.date: 05/16/2017
 ms.author: kumud
-ms.openlocfilehash: 53af283813500fc93d3e5fb9d4b00a9c3034af2d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: 55d034776c77b3e0156669ba8838dbff6b2869be
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "73890187"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89074676"
 ---
 # <a name="peer-two-virtual-networks"></a>Homologuer deux réseaux virtuels
 
 Ce script crée et connecte deux réseaux virtuels situés dans la même région via le réseau Azure. Après l’exécution du script, vous créerez un peering entre deux réseaux virtuels.
 
-Si nécessaire, installez Azure PowerShell à l’aide des instructions figurant dans le [Guide Azure PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs/), puis exécutez `Connect-AzAccount` pour créer une connexion avec Azure.
+Si nécessaire, installez Azure PowerShell à l’aide des instructions figurant dans le [Guide Azure PowerShell](https://docs.microsoft.com/powershell/azure/), puis exécutez `Connect-AzAccount` pour créer une connexion avec Azure.
 
 [!INCLUDE [quickstarts-free-trial-note](../../../includes/quickstarts-free-trial-note.md)]
 
@@ -54,6 +55,6 @@ Ce script utilise les commandes suivantes pour créer un groupe de ressources, u
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour plus d’informations sur Azure PowerShell, consultez la [documentation Azure PowerShell](https://docs.microsoft.com/powershell/azure/overview).
+Pour plus d’informations sur Azure PowerShell, consultez la [documentation Azure PowerShell](https://docs.microsoft.com/powershell/azure/).
 
 Vous pouvez trouver des exemples supplémentaires de scripts PowerShell de mise en réseau dans la [documentation Vue d’ensemble de la mise en réseau Azure](../powershell-samples.md?toc=%2fazure%2fnetworking%2ftoc.json).

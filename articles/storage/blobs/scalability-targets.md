@@ -6,15 +6,15 @@ services: storage
 author: tamram
 ms.service: storage
 ms.topic: conceptual
-ms.date: 12/18/2019
+ms.date: 07/14/2020
 ms.author: tamram
 ms.subservice: common
-ms.openlocfilehash: 3d0dd4683c990e2bd5b2f6f1990f1b379f76fc75
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 753469ca2792be23bbe0ef21083d7ff01b362613
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "75748815"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86528718"
 ---
 # <a name="scalability-and-performance-targets-for-blob-storage"></a>Objectifs d’extensibilité et de performances du Stockage Blob
 
@@ -26,8 +26,8 @@ ms.locfileid: "75748815"
 
 ## <a name="see-also"></a>Voir aussi
 
-- [Check-list des performances et de la scalabilité pour Stockage Blob](storage-performance-checklist.md)
-- [Objectifs d’extensibilité pour les comptes de stockage standard](../common/scalability-targets-standard-account.md)
+- [Liste de contrôle des performances et de l’extensibilité pour Stockage Blob](storage-performance-checklist.md)
+- [Objectifs d'extensibilité pour les comptes de stockage standard](../common/scalability-targets-standard-account.md)
 - [Objectifs d’extensibilité pour les comptes de stockage d’objets blob de blocs Premium](scalability-targets-premium-block-blobs.md)
 - [Objectifs d’extensibilité pour le fournisseur de ressources de stockage Azure](../common/scalability-targets-resource-provider.md)
 - [Quotas et limites d’abonnement Azure](../../azure-resource-manager/management/azure-subscription-service-limits.md)

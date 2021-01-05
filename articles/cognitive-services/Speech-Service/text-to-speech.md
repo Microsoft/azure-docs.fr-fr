@@ -1,27 +1,29 @@
 ---
-title: Synthèse vocale – Service Speech
+title: Vue d’ensemble de la synthèse vocale – service Speech
 titleSuffix: Azure Cognitive Services
-description: La synthèse vocale du service Speech est une fonctionnalité qui permet à vos applications, outils ou appareils de convertir du texte en parole naturelle synthétisée quasi humaine. Choisissez des voix prédéfinies ou créez votre propre voix personnalisée.
+description: La synthèse vocale du service Speech est une fonctionnalité qui permet à vos applications, outils ou appareils de convertir du texte en parole naturelle synthétisée quasi humaine. Cet article est une vue d’ensemble des avantages et des capacités du service de conversion de texte par synthèse vocale.
 services: cognitive-services
 author: trevorbye
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: speech-service
 ms.topic: conceptual
-ms.date: 03/23/2020
+ms.date: 09/01/2020
 ms.author: trbye
-ms.openlocfilehash: 1a8b458eb004b44d0045f36b18d88e11e019c4d2
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.custom: cog-serv-seo-aug-2020
+keywords: conversion de texte par synthèse vocale
+ms.openlocfilehash: af0c9338cb9661402c3a76bab55f34b01304c7b6
+ms.sourcegitcommit: 10d00006fec1f4b69289ce18fdd0452c3458eca5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "81399503"
+ms.lasthandoff: 11/21/2020
+ms.locfileid: "95024515"
 ---
 # <a name="what-is-text-to-speech"></a>Qu’est-ce que la synthèse vocale ?
 
 [!INCLUDE [TLS 1.2 enforcement](../../../includes/cognitive-services-tls-announcement.md)]
 
-La synthèse vocale du service Speech permet à vos applications, outils ou appareils de convertir du texte en parole naturelle synthétisée humaine. Choisissez parmi les voix standard et neuronales, ou créez une voix personnalisée propre à votre produit ou à votre marque. Plus de 75 voix standard sont disponibles dans plus de 45 langues et paramètres régionaux, et 5 voix neuronales sont disponibles dans un nombre limité de langues et de paramètres régionaux. Pour obtenir la liste complète des voix, langues et paramètres régionaux pris en charge, consultez [Langues prises en charge](language-support.md#text-to-speech).
+Dans cette vue d’ensemble, vous allez découvrir les avantages et les capacités du service de conversion de texte par synthèse vocale, qui permet à vos applications, outils ou appareils de convertir du texte en voix synthétisée quasi humaine. Choisissez parmi les voix standard et neuronales, ou créez une voix personnalisée propre à votre produit ou à votre marque. Plus de 75 voix standard sont disponibles dans plus de 45 langues et paramètres régionaux, et 5 voix neuronales sont disponibles dans un nombre limité de langues et de paramètres régionaux. Pour obtenir la liste complète des voix, langues et paramètres régionaux pris en charge, consultez [Langues prises en charge](language-support.md#text-to-speech).
 
 > [!NOTE]
 > La reconnaissance vocale Bing a été mise hors service le 15 octobre 2019. Si vos applications, outils ou produits utilisent les API Reconnaissance vocale Bing ou Custom Speech, nous avons créé des guides pour vous aider à effectuer leur migration vers le service Speech.
@@ -29,7 +31,7 @@ La synthèse vocale du service Speech permet à vos applications, outils ou appa
 
 ## <a name="core-features"></a>Fonctionnalités de base
 
-* Synthèse vocale : utilisez le [SDK Speech](quickstarts/text-to-speech-audio-file.md) ou l’[API REST](rest-text-to-speech.md) pour convertir du texte en voix avec des voix standard, neuronales ou personnalisées.
+* Synthèse vocale : utilisez le [SDK Speech](./get-started-text-to-speech.md) ou l’[API REST](rest-text-to-speech.md) pour convertir du texte en voix avec des voix standard, neuronales ou personnalisées.
 
 * Synthèse asynchrone d’audio long : utilisez l’[API Audio long](long-audio-api.md) pour synthétiser de texte en voix en mode asynchrone des fichiers de plus de 10 minutes (par exemple des livres audio ou des conférences). Contrairement à la synthèse effectuée avec le SDK Speech ou l’API REST de reconnaissance vocale, les réponses ne sont pas retournées en temps réel. Il est prévu que les demandes soient envoyées de façon asynchrone, que les réponses fassent l’objet d’une interrogation et que l’audio synthétisé soit téléchargé quand il est disponible auprès du service. Seules les voix neuronales personnalisées sont prises en charge.
 
@@ -39,15 +41,9 @@ La synthèse vocale du service Speech permet à vos applications, outils ou appa
 
 * SSML (Speech Synthesis Markup Language) : langage de balisage basé sur XML, utilisé pour personnaliser les résultats de la reconnaissance vocale. Avec SSML, vous pouvez ajuster la tonalité, ajouter des pauses, améliorer la prononciation, accélérer ou ralentir le débit des paroles, augmenter ou réduire le volume, et attribuer plusieurs voix à un même document. Consultez [SSML](speech-synthesis-markup.md).
 
-## <a name="get-started"></a>Bien démarrer
+## <a name="get-started"></a>Prise en main
 
-Le service de synthèse vocale est disponible via le [SDK Speech](speech-sdk.md). Plusieurs scénarios courants sont disponibles sous forme de démarrages rapides, dans différentes langues et plateformes :
-
-* [Synthétiser la parole vers un fichier audio](quickstarts/text-to-speech-audio-file.md)
-* [Synthétiser la parole vers un haut-parleur](quickstarts/text-to-speech.md)
-* [Synthétiser de façon asynchrone de l’audio long](quickstarts/text-to-speech/async-synthesis-long-form-audio.md)
-
-Si vous préférez, le service de synthèse vocale est accessible via [REST](rest-text-to-speech.md).
+Consultez le [démarrage rapide](get-started-text-to-speech.md) pour découvrir la conversion de texte par synthèse vocale. Le service de synthèse vocale est disponible via le [SDK Speech](speech-sdk.md), l’[API REST](rest-text-to-speech.md) et l’interface [CLI Speech](spx-overview.md)
 
 ## <a name="sample-code"></a>Exemple de code
 
@@ -81,5 +77,5 @@ Pour plus d’informations, consultez la section [Tarification](https://azure.mi
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- [Obtenir un abonnement gratuit au service Speech](get-started.md)
+- [Obtenir un abonnement gratuit au service Speech](overview.md#try-the-speech-service-for-free)
 - [Obtenir le kit SDK Speech](speech-sdk.md)

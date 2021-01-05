@@ -8,10 +8,10 @@ ms.custom:
 - seodec18
 - fasttrack-edit
 ms.openlocfilehash: 11c913b12b4dcb7d2a5ffa532064b347b82904ef
-ms.sourcegitcommit: b0ff9c9d760a0426fd1226b909ab943e13ade330
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/01/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "80519907"
 ---
 # <a name="configure-your-app-service-or-azure-functions-app-to-use-twitter-login"></a>Configurer votre application App Service ou Azure Functions pour utiliser une connexion Twitter

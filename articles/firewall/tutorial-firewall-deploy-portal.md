@@ -5,15 +5,15 @@ services: firewall
 author: vhorne
 ms.service: firewall
 ms.topic: tutorial
-ms.date: 02/21/2020
+ms.date: 07/15/2020
 ms.author: victorh
 ms.custom: mvc
-ms.openlocfilehash: 064fcf618914bca31ad9e7e60c76df8f599cd8bf
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: e73f11ec178c067941ee33e02f37c96605460ee0
+ms.sourcegitcommit: 8e7316bd4c4991de62ea485adca30065e5b86c67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "79223646"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94658585"
 ---
 # <a name="tutorial-deploy-and-configure-azure-firewall-using-the-azure-portal"></a>Tutoriel : Déployer et configurer un pare-feu Azure à l’aide du portail Azure
 
@@ -26,13 +26,14 @@ Vous pouvez contrôler l’accès réseau sortant à partir d’un sous-réseau 
 
 Le trafic réseau est soumis aux règles de pare-feu configurées lorsque vous routez votre trafic réseau vers le pare-feu en tant que sous-réseau de passerelle par défaut.
 
-Pour ce didacticiel, vous devez créer un seul réseau virtuel simplifié avec trois sous-réseaux pour un déploiement facile. Pour les déploiements de production, l’utilisation d’un [modèle Hub and Spoke](https://docs.microsoft.com/azure/architecture/reference-architectures/hybrid-networking/hub-spoke) est recommandée. Le pare-feu se trouve dans son propre réseau virtuel. Les serveurs de la charge de travail se trouvent dans des réseaux virtuels appairés dans la même région avec un ou plusieurs sous-réseaux.
+Pour ce tutoriel, vous devez créer un seul réseau virtuel simplifié avec deux sous-réseaux pour un déploiement facile.
+
+Pour les déploiements de production, un [modèle Hub and Spoke](/azure/architecture/reference-architectures/hybrid-networking/hub-spoke), dans lequel le pare-feu est dans son propre réseau virtuel, est recommandé. Les serveurs de la charge de travail se trouvent dans des réseaux virtuels appairés dans la même région avec un ou plusieurs sous-réseaux.
 
 * **AzureFirewallSubnet** : le pare-feu est dans ce sous-réseau.
 * **Workload-SN** : le serveur de la charge de travail est dans ce sous-réseau. Le trafic réseau de ce sous-réseau traverse le pare-feu.
-* **Jump-SN** : le serveur « jump » est dans ce sous-réseau. Le serveur de rebond possède une adresse IP publique à laquelle vous pouvez vous connecter à l’aide du Bureau à distance. De là, vous pouvez alors vous connecter (à l’aide d’un autre Bureau à distance) au serveur de la charge de travail.
 
-![Tutoriel relatif à l’infrastructure réseau](media/tutorial-firewall-rules-portal/Tutorial_network.png)
+![Tutoriel relatif à l’infrastructure réseau](media/tutorial-firewall-deploy-portal/tutorial-network.png)
 
 Dans ce tutoriel, vous allez apprendre à :
 
@@ -42,15 +43,18 @@ Dans ce tutoriel, vous allez apprendre à :
 > * Créer un itinéraire par défaut
 > * Configurer une règle d’application pour autoriser l’accès à www.google.com
 > * Configurer une règle de réseau pour autoriser l’accès aux serveurs DNS externes
+> * Configurer une règle NAT pour autoriser la connexion d’un Bureau à distance au serveur de test
 > * Tester le pare-feu
 
 Si vous préférez, vous pouvez effectuer ce didacticiel en utilisant [Azure PowerShell](deploy-ps.md).
+
+## <a name="prerequisites"></a>Prérequis
 
 Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
 
 ## <a name="set-up-the-network"></a>Configurer le réseau
 
-Tout d’abord, créez un groupe de ressources qui contiendra les ressources nécessaires pour déployer le pare-feu. Ensuite, créez un réseau virtuel, des sous-réseaux et des serveurs de test.
+Tout d’abord, créez un groupe de ressources qui contiendra les ressources nécessaires pour déployer le pare-feu. Ensuite, créez un réseau virtuel, des sous-réseaux et un serveur de test.
 
 ### <a name="create-a-resource-group"></a>Créer un groupe de ressources
 
@@ -72,62 +76,52 @@ Ce réseau virtuel contient trois sous-réseaux.
 
 1. Dans le menu du Portail Azure ou dans la page **Accueil**, sélectionnez **Créer une ressource**.
 1. Sélectionnez **Mise en réseau** > **Réseau virtuel**.
-1. Pour **Nom**, entrez **Test-FW-VN**.
-1. Pour **Espace d’adressage**, entrez **10.0.0.0/16**.
-1. Pour **Abonnement**, sélectionnez votre abonnement.
-1. Pour **Groupe de ressources**, sélectionnez **Test-FW-RG**.
-1. Pour **Emplacement**, sélectionnez le même emplacement que celui utilisé précédemment.
-1. Sous **Sous-réseau**, pour **Nom**, entrez **AzureFirewallSubnet**. Le pare-feu se trouvera dans ce sous-réseau et le nom du sous-réseau **doit** être AzureFirewallSubnet.
-1. Pour **Plage d’adresses**, tapez **10.0.1.0/26**.
-1. Acceptez les autres paramètres par défaut, puis sélectionnez **Créer**.
+2. Pour **Abonnement**, sélectionnez votre abonnement.
+3. Pour **Groupe de ressources**, sélectionnez **Test-FW-RG**.
+4. Pour **Nom**, entrez **Test-FW-VN**.
+5. Pour **Région**, sélectionnez le même emplacement que celui utilisé précédemment.
+6. Sélectionnez **Suivant : adresses IP**.
+7. Pour **Espace d’adressage IPv4**, entrez **10.0.0.0/16**.
+8. Sous **Sous-réseau**, sélectionnez **Par défaut**.
+9. Sous **Nom du sous-réseau**, entrez **AzureFirewallSubnet**. Le pare-feu se trouvera dans ce sous-réseau et le nom du sous-réseau **doit** être AzureFirewallSubnet.
+10. Pour **Plage d’adresses**, tapez **10.0.1.0/26**.
+11. Sélectionnez **Enregistrer**.
 
-### <a name="create-additional-subnets"></a>Créer des sous-réseaux supplémentaires
+   Créez ensuite un sous-réseau pour le serveur de la charge de travail.
 
-Ensuite, créez des sous-réseaux pour le serveur de rebond et un sous-réseau pour les serveurs de la charge de travail.
+1. Sélectionnez **Ajouter un sous-réseau**.
+4. Pour **Nom du sous-réseau**, entrez **Workload-SN**.
+5. Pour **Plage d’adresses du sous-réseau**, entrez **10.0.2.0/24**.
+6. Sélectionnez **Ajouter**.
+7. Sélectionnez **Vérifier + créer**.
+8. Sélectionnez **Create** (Créer).
 
-1. Dans le menu du Portail Azure, sélectionnez **Groupes de ressources** ou recherchez et sélectionnez *Groupes de ressources* dans n’importe quelle page. Sélectionnez ensuite **test-FW-RG**.
-2. Sélectionnez le réseau virtuel **Test-FW-VN**.
-3. Sélectionnez **Sous-réseaux** >  **+Sous-réseau**.
-4. Pour **Nom**, entrez **Workload-SN**.
-5. Pour **Plage d’adresses**, entrez **10.0.2.0/24**.
-6. Sélectionnez **OK**.
+### <a name="create-a-virtual-machine"></a>Création d'une machine virtuelle
 
-Créez un autre sous-réseau nommé **Jump-SN**, avec la plage d’adresses **10.0.3.0/24**.
-
-### <a name="create-virtual-machines"></a>Créer des machines virtuelles
-
-Maintenant créez les machines virtuelles de rebond et de charge de travail, et placez-les dans les sous-réseaux appropriés.
+À présent, créez la machine virtuelle de charge de travail et placez-la dans le sous-réseau **Workload-SN**.
 
 1. Dans le menu du Portail Azure ou dans la page **Accueil**, sélectionnez **Créer une ressource**.
-2. Cliquez sur **Compute**, puis sélectionnez **Windows Server 2016 Datacenter** dans la liste de suggestions.
-3. Entrez ces valeurs pour la machine virtuelle :
+2. Sélectionnez **Compute**, puis **Machine virtuelle**.
+3. Sélectionnez **Windows Server 2016 Datacenter** dans la liste Proposé.
+4. Entrez ces valeurs pour la machine virtuelle :
 
    |Paramètre  |Valeur  |
    |---------|---------|
    |Resource group     |**Test-FW-RG**|
-   |Nom de la machine virtuelle     |**Srv-Jump**|
+   |Nom de la machine virtuelle     |**Srv-Work**|
    |Région     |Identique au précédent|
-   |Nom d’utilisateur de l’administrateur     |**azureuser**|
-   |Mot de passe     |**Azure123456!**|
+   |Image|Windows Server 2019 Datacenter|
+   |Nom d’utilisateur de l’administrateur     |Entrez un nom d’utilisateur.|
+   |Mot de passe     |Entrez un mot de passe.|
 
-4. Sous **Règles des ports d’entrée**, pour **Ports d’entrée publics**, sélectionnez **Autoriser les ports sélectionnés**.
-5. Pour **Sélectionner des ports d’entrée**, sélectionnez **RDP (3389)** .
-
+4. Sous **Règles des ports d’entrée**, pour **Ports d’entrée publics**, sélectionnez **Aucune**.
 6. Acceptez les autres valeurs par défaut, puis sélectionnez **Suivant : Disques**.
 7. Acceptez les disques par défaut, puis sélectionnez **Suivant : Mise en réseau**.
-8. Assurez-vous que **Test-FW-VN** est sélectionné pour le réseau virtuel et que le sous-réseau est **Jump-SN**.
-9. Pour **IP publique**, acceptez le nom de la nouvelle adresse IP publique par défaut (Srv-Jump-ip).
+8. Assurez-vous que **Test-FW-VN** est sélectionné pour le réseau virtuel et que le sous-réseau est **Workload-SN**.
+9. Pour **Adresse IP publique**, sélectionnez **Aucune**.
 11. Acceptez les autres valeurs par défaut, puis sélectionnez **Suivant : Gestion**.
 12. Sélectionnez **Désactivé** pour désactiver les diagnostics de démarrage. Acceptez les autres valeurs par défaut, puis sélectionnez **Vérifier + créer**.
 13. Vérifiez les paramètres sur la page de récapitulatif, puis sélectionnez **Créer**.
-
-Utilisez les informations du tableau suivant pour configurer une autre machine virtuelle nommée **Srv-Work**. Le reste de la configuration est identique à celle de la machine virtuelle Srv-Jump.
-
-|Paramètre  |Valeur  |
-|---------|---------|
-|Subnet|**Workload-SN**|
-|Adresse IP publique|**Aucun**|
-|Aucun port d’entrée public|**Aucun**|
 
 ## <a name="deploy-the-firewall"></a>Déployer le pare-feu
 
@@ -140,19 +134,19 @@ Déployez le pare-feu dans le réseau virtuel.
 
    |Paramètre  |Valeur  |
    |---------|---------|
-   |Abonnement     |\<votre abonnement\>|
+   |Abonnement     |\<your subscription\>|
    |Resource group     |**Test-FW-RG** |
    |Nom     |**Test-FW01**|
    |Emplacement     |Sélectionnez le même emplacement que celui utilisé précédemment|
    |Choisir un réseau virtuel     |**Utiliser l’existant** : **Test-FW-VN**|
-   |Adresse IP publique     |**Ajouter nouveau** L’adresse IP publique doit être le type de référence (SKU) Standard.|
+   |Adresse IP publique     |**Ajouter nouveau**<br>**Nom** : **fw-pip**|
 
 5. Sélectionnez **Revoir + créer**.
 6. Passez en revue le récapitulatif, puis sélectionnez **Créer** pour créer le pare-feu.
 
    Le déploiement nécessite quelques minutes.
 7. Une fois le déploiement terminé, accédez au groupe de ressources **Test-FW-RG**, puis sélectionnez le pare-feu **Test-FW01**.
-8. Notez l’adresse IP privée. Vous l’utiliserez plus tard lors de la création de l’itinéraire par défaut.
+8. Notez les adresses IP privée et publique du pare-feu. Vous les utiliserez plus tard.
 
 ## <a name="create-a-default-route"></a>Créer un itinéraire par défaut
 
@@ -183,7 +177,7 @@ Pour le sous-réseau **Workload-SN**, configurez l’itinéraire sortant par dé
 
 ## <a name="configure-an-application-rule"></a>Configurer une règle d’application
 
-Il s’agit de la règle d’application qui autorise un accès sortant vers www.google.com.
+Il s’agit de la règle d’application qui autorise un accès sortant à `www.google.com`.
 
 1. Ouvrez **Test-FW-RG**, puis sélectionnez le pare-feu **Test-FW01**.
 2. Sur la page **Test-FW01**, sous **Paramètres**, sélectionnez **Règles**.
@@ -196,7 +190,7 @@ Il s’agit de la règle d’application qui autorise un accès sortant vers www
 9. Pour **Type de source**, sélectionnez **Adresse IP**.
 10. Pour **Source**, tapez **10.0.2.0/24**.
 11. Pour **Protocol:port**, entrez **http, https**.
-12. Pour **Noms de domaine complets cibles**, tapez **www.google.com**
+12. Pour **Noms de domaine complets cibles**, entrez **`www.google.com`** .
 13. Sélectionnez **Ajouter**.
 
 Le Pare-feu Azure comprend un regroupement de règles intégré pour les noms de domaine complets d’infrastructure qui sont autorisés par défaut. Ces noms de domaine complets sont spécifiques à la plateforme et ne peuvent pas être utilisés à d’autres fins. Pour plus d’informations, consultez [Noms de domaine complets d’infrastructure](infrastructure-fqdns.md).
@@ -214,11 +208,31 @@ Il s’agit de la règle de réseau qui autorise un accès sortant à deux adres
 7. Pour **Protocole**, sélectionnez **UDP**.
 9. Pour **Type de source**, sélectionnez **Adresse IP**.
 1. Pour **Source**, tapez **10.0.2.0/24**.
-2. Pour **Adresse de destination**, tapez **209.244.0.3,209.244.0.4**
+2. Pour **Type de destination**, sélectionnez **Adresse IP**.
+3. Pour **Adresse de destination**, tapez **209.244.0.3,209.244.0.4**
 
    Il s’agit de serveurs DNS publics gérés par CenturyLink.
 1. Pour **Ports de destination**, entrez **53**.
 2. Sélectionnez **Ajouter**.
+
+## <a name="configure-a-dnat-rule"></a>Configurer une règle DNAT
+
+Cette règle vous permet de connecter un Bureau à distance à la machine virtuelle Srv-Work par le biais du pare-feu.
+
+1. Sélectionnez l’onglet **Collection de règles NAT**.
+2. Sélectionnez **Ajouter une collection de règles NAT**.
+3. Pour **Nom**, entrez **rdp**.
+4. Pour **Priorité**, entrez **200**.
+5. Sous **Règles**, pour **Nom**, entrez **rdp-nat**.
+6. Pour **Protocole**, sélectionnez **TCP**.
+7. Pour **Type de source**, sélectionnez **Adresse IP**.
+8. Pour **Source**, tapez * *\** _.
+9. Pour _*Adresse de destination**, tapez l’adresse IP publique du pare-feu.
+10. Pour **Ports de destination**, tapez **3389**.
+11. Pou **Adresse traduite**, saisissez l’adresse IP privée de **Srv-work**.
+12. Dans le champ **Port traduit**, tapez **3389**.
+13. Sélectionnez **Ajouter**.
+
 
 ### <a name="change-the-primary-and-secondary-dns-address-for-the-srv-work-network-interface"></a>Modifier les adresses DNS principales et secondaires de l’interface réseau **Srv-Work**
 
@@ -226,7 +240,7 @@ Il s’agit de la règle de réseau qui autorise un accès sortant à deux adres
 
 1. Dans le menu du Portail Azure, sélectionnez **Groupes de ressources** ou recherchez et sélectionnez *Groupes de ressources* dans n’importe quelle page. Sélectionnez le groupe de ressources **Test-FW-RG**.
 2. Sélectionnez l’interface réseau de la machine virtuelle **Srv-Work**.
-3. Sous**Paramètres**, sélectionnez **Serveurs DNS**.
+3. Sous **Paramètres**, sélectionnez **Serveurs DNS**.
 4. Sous **Serveurs DNS**, sélectionnez **Personnalisé**.
 5. Entrez **209.244.0.3** dans la zone de texte **Ajouter un serveur DNS**, et **209.244.0.4** dans la zone de texte suivante.
 6. Sélectionnez **Enregistrer**.
@@ -236,14 +250,13 @@ Il s’agit de la règle de réseau qui autorise un accès sortant à deux adres
 
 Testez maintenant le pare-feu pour vérifier qu’il fonctionne comme prévu.
 
-1. À partir du portail Azure, passez en revue les paramètres réseau de la machine virtuelle **Srv-Work** et notez l’adresse IP privée.
-2. Connectez un bureau à distance à la machine virtuelle **Srv-Jump**, puis connectez-vous. De là, ouvrez une connexion Bureau à distance à l’adresse IP privée **Srv-Work**.
-3. Ouvrez Internet Explorer et accédez à https://www.google.com.
+1. Connectez un Bureau à distance à l’adresse IP publique du pare-feu et connectez-vous à la machine virtuelle **Srv-Work**. 
+3. Ouvrez Internet Explorer et accédez à `https://www.google.com`.
 4. Sélectionnez **OK** > **Fermer** sur les alertes de sécurité d’Internet Explorer.
 
    La page d’accueil Google doit s’afficher.
 
-5. Accédez à https://www.microsoft.com.
+5. Accédez à `https://www.microsoft.com`.
 
    Vous devriez être bloqué par le pare-feu.
 
@@ -259,4 +272,4 @@ Vous pouvez garder vos ressources de pare-feu pour le prochain didacticiel, ou, 
 ## <a name="next-steps"></a>Étapes suivantes
 
 > [!div class="nextstepaction"]
-> [Tutoriel : Superviser les journaux d’activité de Pare-feu Azure](./tutorial-diagnostics.md)
+> [Tutoriel : Superviser les journaux d’activité de Pare-feu Azure](./firewall-diagnostics.md)

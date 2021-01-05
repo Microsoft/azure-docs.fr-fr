@@ -1,32 +1,37 @@
 ---
-title: Activation d’Azure Multi-Factor Authentication
-description: Dans ce tutoriel, vous allez apprendre à activer Azure Multi-Factor Authentication pour un groupe d’utilisateurs, et à tester l’invite du facteur secondaire pendant un événement de connexion.
+title: Activer Azure AD Multi-Factor Authentication
+description: Dans ce tutoriel, vous allez apprendre à activer Azure AD Multi-Factor Authentication pour un groupe d’utilisateurs, et à tester l’invite du facteur secondaire pendant un événement de connexion.
 services: active-directory
 ms.service: active-directory
 ms.subservice: authentication
 ms.topic: tutorial
-ms.date: 02/11/2020
-ms.author: iainfou
-author: iainfoulds
+ms.date: 07/13/2020
+ms.author: justinha
+author: justinha
 ms.reviewer: michmcla
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 253eb23be03c1cc0f2abf4ad1fed734426dc287d
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 32228e90e3cfc064cd5be9cd0655f321ab3e2809
+ms.sourcegitcommit: ad83be10e9e910fd4853965661c5edc7bb7b1f7c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "77154677"
+ms.lasthandoff: 12/06/2020
+ms.locfileid: "96741148"
 ---
-# <a name="tutorial-secure-user-sign-in-events-with-azure-multi-factor-authentication"></a>Tutoriel : Événements de connexion utilisateur sécurisée avec Azure Multi-Factor Authentication
+# <a name="tutorial-secure-user-sign-in-events-with-azure-ad-multi-factor-authentication"></a>Tutoriel : Événements de connexion utilisateur sécurisée avec Azure AD Multi-Factor Authentication
 
 L’authentification MFA (Azure Multi-Factor Authentication) est un processus dans lequel un utilisateur est invité, au cours d’un événement de connexion, à utiliser des formes d’identification supplémentaires. Il peut s’agir en ce qui le concerne d’entrer un code sur son téléphone portable ou de scanner son empreinte digitale. Quand vous exigez une deuxième forme d’authentification, la sécurité est accrue, car ce facteur supplémentaire n’est pas un élément facile à obtenir ou à dupliquer par un attaquant.
 
-Azure Multi-Factor Authentication et les stratégies d’accès conditionnel offrent la flexibilité nécessaire qui permet l’authentification MFA des utilisateurs pendant des événements de connexion spécifiques.
+Azure AD Multi-Factor Authentication et les stratégies d’accès conditionnel offrent la flexibilité nécessaire qui permet l’authentification MFA des utilisateurs pendant des événements de connexion spécifiques.
+
+> [!IMPORTANT]
+> Ce tutoriel montre aux administrateurs comment activer Azure AD Multi-Factor Authentication.
+>
+> Si votre équipe informatique n’a pas activé la possibilité d’utiliser Azure AD Multi-Factor Authentication, ou si vous rencontrez des problèmes lors de la connexion, contactez votre support technique pour obtenir de l’aide.
 
 Ce didacticiel vous montre comment effectuer les opérations suivantes :
 
 > [!div class="checklist"]
-> * Créer une stratégie d’accès conditionnel afin d’activer Azure Multi-Factor Authentication pour un groupe d’utilisateurs
+> * Créer une stratégie d’accès conditionnel permettant d’activer AD Azure Multi-Factor Authentication pour un groupe d’utilisateurs
 > * Configurer les conditions de stratégie qui demandent l’authentification MFA
 > * Tester le processus MFA en tant qu’utilisateur
 
@@ -34,21 +39,21 @@ Ce didacticiel vous montre comment effectuer les opérations suivantes :
 
 Pour effectuer ce tutoriel, vous avez besoin des ressources et des privilèges suivants :
 
-* Un locataire Azure AD actif avec une licence Azure AD Premium activée ou une licence d’évaluation activée.
+* Un locataire Azure AD actif avec au moins un abonnement Azure AD Premium P1 ou une licence d’évaluation activée.
     * Si nécessaire, [créez-en un gratuitement](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
 * Un compte avec des privilèges d’*administrateur général*.
-* Un utilisateur non-administrateur avec un mot de passe que vous connaissez, par exemple *testuser*. Vous testez l’expérience Azure Multi-Factor Authentication de l’utilisateur final à l’aide de ce compte dans ce tutoriel.
-    * Si vous devez créer un utilisateur, consultez [Démarrage rapide : Ajouter de nouveaux utilisateurs à Azure Active Directory](../add-users-azure-active-directory.md).
-* Un groupe dont l’utilisateur non-administrateur est membre, par exemple *MFA-Test-Group*. Vous activez Azure Multi-Factor Authentication pour ce groupe dans ce tutoriel.
-    * Si vous devez créer un groupe, consultez la procédure à suivre dans [Créer un groupe et ajouter des membres dans Azure Active Directory](../active-directory-groups-create-azure-portal.md).
+* Un utilisateur non-administrateur avec un mot de passe que vous connaissez, par exemple *testuser*. Vous testez l’expérience Azure AD Multi-Factor Authentication de l’utilisateur final à l’aide de ce compte dans ce tutoriel.
+    * Si vous devez créer un utilisateur, consultez [Démarrage rapide : Ajouter de nouveaux utilisateurs à Azure Active Directory](../fundamentals/add-users-azure-active-directory.md).
+* Un groupe dont l’utilisateur non-administrateur est membre, par exemple *MFA-Test-Group*. Vous activez Azure AD Multi-Factor Authentication pour ce groupe dans ce tutoriel.
+    * Si vous devez créer un groupe, consultez la procédure à suivre dans [Créer un groupe et ajouter des membres dans Azure Active Directory](../fundamentals/active-directory-groups-create-azure-portal.md).
 
 ## <a name="create-a-conditional-access-policy"></a>Créer une stratégie d’accès conditionnel
 
-Il est recommandé de se servir des stratégies d’accès conditionnel pour activer et utiliser Microsoft Azure Multi-Factor Authentication. L’accès conditionnel vous permet de créer et de définir des stratégies qui réagissent aux événements de connexion en demandant des actions supplémentaires avant d’autoriser un utilisateur à accéder à une application ou à un service.
+Il est recommandé de se servir des stratégies d’accès conditionnel pour activer et utiliser Microsoft Azure AD Multi-Factor Authentication. L’accès conditionnel vous permet de créer et de définir des stratégies qui réagissent aux événements de connexion en demandant des actions supplémentaires avant d’autoriser un utilisateur à accéder à une application ou à un service.
 
 ![Diagramme de vue d’ensemble du fonctionnement de l’accès conditionnel pour sécuriser le processus de connexion](media/tutorial-enable-azure-mfa/conditional-access-overview.png)
 
-Les stratégies d’accès conditionnel peuvent être granulaires et spécifiques, avec pour objectif de permettre aux utilisateurs d’être productifs partout et à tout moment, tout en protégeant votre organisation. Dans ce tutoriel, nous allons créer une stratégie d’accès conditionnel de base pour demander l’authentification MFA lorsqu’un utilisateur se connecte au portail Azure. Dans un prochain tutoriel de cette série, vous configurerez Azure Multi-Factor Authentication à l’aide d’une stratégie d’accès conditionnel basée sur le risque.
+Les stratégies d’accès conditionnel peuvent être granulaires et spécifiques, avec pour objectif de permettre aux utilisateurs d’être productifs partout et à tout moment, tout en protégeant votre organisation. Dans ce tutoriel, nous allons créer une stratégie d’accès conditionnel de base pour demander l’authentification MFA lorsqu’un utilisateur se connecte au portail Azure. Dans un prochain tutoriel de cette série, vous configurerez Azure AD Multi-Factor Authentication à l’aide d’une stratégie d’accès conditionnel basée sur le risque.
 
 Tout d’abord, créez une stratégie d’accès conditionnel et affectez votre groupe test d’utilisateurs comme suit :
 
@@ -60,7 +65,7 @@ Tout d’abord, créez une stratégie d’accès conditionnel et affectez votre 
 1. Cochez la case **Utilisateurs et groupes**, puis choisissez **Sélectionner** pour parcourir les utilisateurs et les groupes Azure AD disponibles.
 1. Recherchez et sélectionnez votre groupe Azure AD, par exemple *MFA-Test-Group*, puis choisissez **Sélectionner**.
 
-    [![](media/tutorial-enable-azure-mfa/select-group-for-conditional-access-cropped.png "Select your Azure AD group to use with the Conditional Access policy")](media/tutorial-enable-azure-mfa/select-group-for-conditional-access.png#lightbox)
+    [ ![Sélectionner votre groupe Azure AD à utiliser avec la stratégie d’accès conditionnel](media/tutorial-enable-azure-mfa/select-group-for-conditional-access-cropped.png) ](media/tutorial-enable-azure-mfa/select-group-for-conditional-access.png#lightbox)
 
 1. Pour appliquer la stratégie d’accès conditionnel au groupe, sélectionnez **Terminé**.
 
@@ -87,23 +92,23 @@ Les contrôles d’accès vous permettent de définir les conditions à remplir 
 1. Sous *Contrôle d’accès*, choisissez **Accorder**, puis assurez-vous que la case d’option **Accorder l’accès** est sélectionnée.
 1. Cochez la case **Exiger une authentification multifacteur**, puis choisissez **Sélectionner**.
 
-Les stratégies d’accès conditionnel peuvent être définies sur *Rapport seul* si vous souhaitez voir comment la configuration affecte les utilisateurs, ou sur *Désactivée* si vous ne voulez pas utiliser la stratégie pour le moment. Étant donné qu’un groupe test d’utilisateurs était ciblé pour ce tutoriel, activez la stratégie, puis testez Azure Multi-Factor Authentication.
+Les stratégies d’accès conditionnel peuvent être définies sur *Rapport seul* si vous souhaitez voir comment la configuration affecte les utilisateurs, ou sur *Désactivée* si vous ne voulez pas utiliser la stratégie pour le moment. Étant donné qu’un groupe test d’utilisateurs était ciblé pour ce tutoriel, activez la stratégie, puis testez Azure AD Multi-Factor Authentication.
 
 1. Basculez *Activer la stratégie* sur **Activé**.
 1. Pour appliquer la stratégie d’accès conditionnel, sélectionnez **Créer**.
 
-## <a name="test-azure-multi-factor-authentication"></a>Tester Azure Multi-Factor Authentication
+## <a name="test-azure-ad-multi-factor-authentication"></a>Tester Azure AD Multi-Factor Authentication
 
-Nous allons voir à présent votre stratégie d’accès conditionnel et Azure Multi-Factor Authentication en action. Tout d’abord, connectez-vous de la façon suivante à une ressource qui ne nécessite pas d’authentification MFA :
+Nous allons voir à présent votre stratégie d’accès conditionnel et Azure AD Multi-Factor Authentication en action. Tout d’abord, connectez-vous de la façon suivante à une ressource qui ne nécessite pas d’authentification MFA :
 
 1. Ouvrez une nouvelle fenêtre de navigateur en mode de navigation privée ou InPrivate, et accédez à [https://account.activedirectory.windowsazure.com](https://account.activedirectory.windowsazure.com).
 1. Connectez-vous avec votre utilisateur test non-administrateur, par exemple *testuser*. Il n’y a aucune invite vous demandant de procéder à l’authentification MFA.
 1. Fermez la fenêtre du navigateur.
 
-À présent, connectez-vous au portail Azure. Étant donné que le portail Azure était configuré dans la stratégie d’accès conditionnel pour exiger une vérification supplémentaire, vous obtenez une invite Azure Multi-Factor Authentication.
+À présent, connectez-vous au portail Azure. Étant donné que le portail Azure était configuré dans la stratégie d’accès conditionnel pour exiger une vérification supplémentaire, vous obtenez une invite Azure AD Multi-Factor Authentication.
 
 1. Ouvrez une nouvelle fenêtre de navigateur dans InPrivate ou en mode de navigation privée, et accédez à [https://portal.azure.com](https://portal.azure.com).
-1. Connectez-vous avec votre utilisateur test non-administrateur, par exemple *testuser*. Il vous est demandé de vous inscrire et d’utiliser Azure Multi-Factor Authentication. Suivez les invites pour aller au bout du processus et vérifiez que vous vous connectez correctement au portail Azure.
+1. Connectez-vous avec votre utilisateur test non-administrateur, par exemple *testuser*. Il vous est demandé de vous inscrire et d’utiliser Azure AD Multi-Factor Authentication. Suivez les invites pour aller au bout du processus et vérifiez que vous vous connectez correctement au portail Azure.
 
     ![Suivre les invites du navigateur, puis l’invite de votre authentification multifacteur inscrite pour vous connecter](media/tutorial-enable-azure-mfa/azure-multi-factor-authentication-browser-prompt.png)
 
@@ -111,7 +116,7 @@ Nous allons voir à présent votre stratégie d’accès conditionnel et Azure M
 
 ## <a name="clean-up-resources"></a>Nettoyer les ressources
 
-Si vous ne souhaitez plus utiliser la stratégie d’accès conditionnel pour activer Azure Multi-Factor Authentication qui est configuré dans le cadre de ce tutoriel, supprimez la stratégie en suivant ces étapes :
+Si vous ne souhaitez plus utiliser la stratégie d’accès conditionnel pour activer le service Azure AD Multi-Factor Authentication configuré dans le cadre de ce tutoriel, supprimez la stratégie en suivant ces étapes :
 
 1. Connectez-vous au [portail Azure](https://portal.azure.com).
 1. Recherchez et sélectionnez **Azure Active Directory**, puis choisissez **Sécurité** dans le menu de gauche.
@@ -120,12 +125,12 @@ Si vous ne souhaitez plus utiliser la stratégie d’accès conditionnel pour ac
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Dans ce tutoriel, vous avez activé Azure Multi-Factor Authentication au moyen de stratégies d’accès conditionnel pour un groupe sélectionné d’utilisateurs. Vous avez appris à :
+Dans ce tutoriel, vous avez activé Azure AD Multi-Factor Authentication au moyen de stratégies d’accès conditionnel pour un groupe sélectionné d’utilisateurs. Vous avez appris à :
 
 > [!div class="checklist"]
-> * Créer une stratégie d’accès conditionnel afin d’activer Azure Multi-Factor Authentication pour un groupe d’utilisateurs Azure AD
+> * Créer une stratégie d’accès conditionnel permettant d’activer Azure AD Multi-Factor Authentication pour un groupe d’utilisateurs Azure AD
 > * Configurer les conditions de stratégie qui demandent l’authentification MFA
 > * Tester le processus MFA en tant qu’utilisateur
 
 > [!div class="nextstepaction"]
-> [Activer la réécriture du mot de passe pour la réinitialisation de mot de passe en libre-service (SSPR)](tutorial-enable-writeback.md)
+> [Activer la réécriture du mot de passe pour la réinitialisation de mot de passe en libre-service (SSPR)](./tutorial-enable-sspr-writeback.md)

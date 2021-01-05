@@ -1,19 +1,15 @@
 ---
 title: Autoriser l’accès à Azure Event Hubs
 description: Cet article fournit des informations sur les différentes options qui permettent d'autoriser l'accès aux ressources Azure Event Hubs.
-services: event-hubs
-ms.service: event-hubs
-documentationcenter: ''
-author: spelluru
 ms.topic: conceptual
-ms.date: 02/12/2020
+ms.date: 06/23/2020
 ms.author: spelluru
-ms.openlocfilehash: f44be4e1d3d1186f0122bd4669ae800ab42e31d6
-ms.sourcegitcommit: b0ff9c9d760a0426fd1226b909ab943e13ade330
+ms.openlocfilehash: 5fc35387f4ac28ad4dd28bea0013bcdf1e1e9f02
+ms.sourcegitcommit: 03713bf705301e7f567010714beb236e7c8cee6f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/01/2020
-ms.locfileid: "80521305"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92332380"
 ---
 # <a name="authorize-access-to-azure-event-hubs"></a>Autoriser l’accès à Azure Event Hubs
 Chaque fois que vous publiez ou utilisez des événements/données à partir d'un hub d'événements, votre client tente d'accéder aux ressources Event Hubs. Chaque demande adressée à une ressource sécurisée doit être autorisée afin que le service puisse vérifier que le client dispose des autorisations requises pour publier/utiliser les données. 
@@ -27,7 +23,7 @@ Pour autoriser l'accès aux ressources sécurisées, Azure Event Hubs propose le
 > Cet article s’applique à la fois aux scénarios Event Hubs et [Apache Kafka](event-hubs-for-kafka-ecosystem-overview.md). 
 
 ## <a name="azure-active-directory"></a>Azure Active Directory
-L’intégration Azure Active Directory (Azure AD) pour les ressources Event Hubs fournit un contrôle d’accès en fonction du rôle (RBAC) pour un contrôle affiné de l’accès d’un client aux ressources. Vous pouvez utiliser le contrôle d’accès en fonction du rôle (RBAC) pour accorder des autorisations à un principal de sécurité, qui peut être un utilisateur, un groupe ou un principal de service d’application. Le principal de sécurité est authentifié par Azure AD pour retourner un jeton OAuth 2.0. Le jeton peut être utilisé pour autoriser une demande d'accès à une ressource Event Hubs.
+L’intégration Azure Active Directory (Azure AD) pour les ressources Event Hubs fournit un contrôle d’accès en fonction du rôle Azure (Azure RBAC) pour un contrôle affiné de l’accès d’un client aux ressources. Vous pouvez utiliser Azure RBAC pour accorder des autorisations à un principal de sécurité, qui peut être un utilisateur, un groupe ou un principal du service d’application. Le principal de sécurité est authentifié par Azure AD pour retourner un jeton OAuth 2.0. Le jeton peut être utilisé pour autoriser une demande d'accès à une ressource Event Hubs.
 
 Pour plus d’informations sur l’authentification avec Azure AD, consultez les articles suivants :
 
@@ -44,7 +40,7 @@ Par défaut, toutes les ressources Event Hubs sont sécurisées, et le propriét
 Pour plus d'informations sur l'autorisation à l'aide de SAS, consultez [Autoriser l'accès aux ressources Event Hubs à l'aide de signatures d'accès partagé](authorize-access-shared-access-signature.md).
 
 ## <a name="next-steps"></a>Étapes suivantes
-- Consultez les [Exemples de RBAC](https://github.com/Azure/azure-event-hubs/tree/master/samples/DotNet/Microsoft.Azure.EventHubs/Rbac) publiés dans notre référentiel GitHub. 
+- Consultez les [Exemples d’Azure RBAC](https://github.com/Azure/azure-event-hubs/tree/master/samples/DotNet/Microsoft.Azure.EventHubs/Rbac) publiés dans notre référentiel GitHub. 
 - Voir les articles suivants :
     - [Authentifier les requêtes adressées à Azure Event Hubs à partir d’une application à l’aide d’Azure Active Directory](authenticate-application.md)
     - [Authentifier une identité managée avec Azure Active Directory pour accéder aux ressources Event Hubs](authenticate-managed-identity.md)

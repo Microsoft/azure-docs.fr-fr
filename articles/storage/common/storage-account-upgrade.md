@@ -1,19 +1,20 @@
 ---
 title: Mettre à niveau vers un compte de stockage v2 à usage général
 titleSuffix: Azure Storage
-description: Mettez à niveau vers des comptes de stockage v2 à usage général.
+description: Effectuez une mise à niveau vers des comptes de stockage v2 universels à l’aide du portail Azure, de PowerShell ou de l’interface de ligne de commande Azure. Spécifiez un niveau d’accès pour les données blob.
 services: storage
 author: tamram
 ms.service: storage
 ms.topic: how-to
-ms.date: 02/25/2019
+ms.date: 12/11/2020
 ms.author: tamram
-ms.openlocfilehash: 9afbade408d6f95fcd3a61aa1ba65bc09c7a875b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: 50a0894898dcdc817ee253ad326b88a9bb61b9d6
+ms.sourcegitcommit: dfc4e6b57b2cb87dbcce5562945678e76d3ac7b6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80067231"
+ms.lasthandoff: 12/12/2020
+ms.locfileid: "97357362"
 ---
 # <a name="upgrade-to-a-general-purpose-v2-storage-account"></a>Mettre à niveau vers un compte de stockage v2 à usage général
 
@@ -39,16 +40,16 @@ La mise à niveau vers un compte de stockage v2 à usage général à partir d�
 
 [!INCLUDE [updated-for-az](../../../includes/updated-for-az.md)]
 
-Pour mettre à niveau un compte v1 à usage général vers un compte v2 à usage général à l’aide de PowerShell, commencez par mettre à jour PowerShell afin d’utiliser la dernière version du module **Az.Storage**. Pour plus d’informations sur l’installation de PowerShell, consultez l’article [Installation et configuration d’Azure PowerShell](https://docs.microsoft.com/powershell/azure/install-Az-ps).
+Pour mettre à niveau un compte v1 à usage général vers un compte v2 à usage général à l’aide de PowerShell, commencez par mettre à jour PowerShell afin d’utiliser la dernière version du module **Az.Storage**. Pour plus d’informations sur l’installation de PowerShell, consultez l’article [Installation et configuration d’Azure PowerShell](/powershell/azure/install-Az-ps).
 
 Ensuite, appelez la commande suivante pour mettre à niveau le compte, en remplaçant le nom de votre groupe de ressources, le nom de votre compte de stockage et le niveau d’accès de compte souhaité.
 
 ```powershell
-Set-AzStorageAccount -ResourceGroupName <resource-group> -AccountName <storage-account> -UpgradeToStorageV2 -AccessTier <Hot/Cool>
+Set-AzStorageAccount -ResourceGroupName <resource-group> -Name <storage-account> -UpgradeToStorageV2 -AccessTier <Hot/Cool>
 ```
 # <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
 
-Pour mettre à niveau un compte v1 à usage général vers un compte v2 à usage général à l’aide d’Azure CLI, commencez par installer la dernière version d’Azure CLI. Pour plus d’informations sur l’installation de l’interface de ligne de commande, consultez l’article [Installer Azure CLI 2.0](https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest).
+Pour mettre à niveau un compte v1 à usage général vers un compte v2 à usage général à l’aide d’Azure CLI, commencez par installer la dernière version d’Azure CLI. Pour plus d’informations sur l’installation de l’interface de ligne de commande, consultez l’article [Installer Azure CLI 2.0](/cli/azure/install-azure-cli).
 
 Ensuite, appelez la commande suivante pour mettre à niveau le compte, en remplaçant le nom de votre groupe de ressources, le nom de votre compte de stockage et le niveau d’accès de compte souhaité.
 
@@ -110,7 +111,7 @@ Pour choisir le niveau d’accès le plus adapté à vos besoins, vous devez dé
 
 Pour analyser vos comptes de stockage existants et rassembler ces informations, vous pouvez utiliser Azure Storage Analytics qui assure la journalisation et fournit les données de mesure d’un compte de stockage. Storage Analytics peut stocker des métriques qui comprennent les statistiques de transactions agrégées et les données de capacité relatives aux demandes adressées à un service de stockage GPv1, GPv2 et de stockage d’objet blob. Ces données sont stockées dans des tables connues dans le même compte de stockage.
 
-Pour plus d’informations, consultez les articles [À propos des métriques de Storage Analytics](https://msdn.microsoft.com/library/azure/hh343258.aspx) et [Schéma de table de métriques Storage Analytics](https://msdn.microsoft.com/library/azure/hh343264.aspx)
+Pour plus d’informations, consultez les articles [À propos des métriques de Storage Analytics](../blobs/monitor-blob-storage.md) et [Schéma de table de métriques Storage Analytics](/rest/api/storageservices/Storage-Analytics-Metrics-Table-Schema)
 
 > [!NOTE]
 > Les comptes de stockage d’objets blob exposent le point de terminaison du service de table uniquement pour le stockage et l’accès aux métriques associées à ce compte.
@@ -167,4 +168,7 @@ Le coût de transfert de données de géoréplication des comptes de stockage d�
 
 ## <a name="next-steps"></a>Étapes suivantes
 
+* [Vue d’ensemble du compte de stockage](storage-account-overview.md)
 * [Créez un compte de stockage](storage-account-create.md)
+* [Déplacer un compte Stockage Azure vers une autre région](storage-account-move.md)
+* [récupérer un compte de stockage supprimé](storage-account-recover.md)

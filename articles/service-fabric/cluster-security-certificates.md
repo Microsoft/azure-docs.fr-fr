@@ -3,13 +3,12 @@ title: Authentification basée sur un certificat X.509 dans un cluster Service F
 description: Découvrez-en davantage sur l’authentification basée sur les certificats dans les clusters Service Fabric et sur la façon de détecter, atténuer et résoudre les problèmes liés aux certificats.
 ms.topic: conceptual
 ms.date: 03/16/2020
-ms.custom: sfrev
-ms.openlocfilehash: 699015e322c599dea996b3a8b9dbc0a4589440ab
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: 4d81cb9d224bdc2e3002c621c86729df235e0d81
+ms.sourcegitcommit: 16c7fd8fe944ece07b6cf42a9c0e82b057900662
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81426965"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96574766"
 ---
 # <a name="x509-certificate-based-authentication-in-service-fabric-clusters"></a>Authentification basée sur un certificat X.509 dans des clusters Service Fabric
 
@@ -180,7 +179,7 @@ Il a été mentionné précédemment que les paramètres de sécurité d’un cl
 
 Comme indiqué précédemment, la validation de certificat implique toujours la génération et l’évaluation de la chaîne du certificat. Pour les certificats émis par une autorité de certification, cet appel d’API de système d’exploitation apparemment simple implique généralement plusieurs appels sortants à différents points de terminaison de l’infrastructure à clé publique (PKI) émettrice, la mise en cache des réponses, etc. Compte tenu de la prévalence des appels de validation de certificat dans un cluster Service Fabric, tout problème dans les points de terminaison de l’infrastructure à clé publique peut entraîner une réduction de la disponibilité du cluster, voire un effondrement direct. Si les appels sortants ne peuvent pas être supprimés (voir ci-dessous dans la section FAQ pour plus d’informations sur ce point), vous pouvez utiliser les paramètres suivants pour masquer les erreurs de validation provoquées par les appels infructueux à la liste de révocation de certificats.
 
-  * CrlCheckingFlag : sous la section 'Security', une chaîne convertie en UINT. La valeur de ce paramètre est utilisée par Service Fabric pour masquer les erreurs d’état de la chaîne de certificats en modifiant le comportement de la création de chaînes. Elle est transmise à l’appel Win32 CryptoAPI [CertGetCertificateChain](https://docs.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-certgetcertificatechain) en tant que paramètre 'dwFlags' et peut être définie sur n’importe quelle combinaison valide d’indicateurs acceptés par la fonction. La valeur 0 force le runtime Service Fabric à ignorer toutes les erreurs d’état de confiance, ce qui n’est pas recommandé, car son utilisation représente une exposition significative de sécurité. La valeur par défaut est 0x40000000 (CERT_CHAIN_REVOCATION_CHECK_CHAIN_EXCLUDE_ROOT).
+  * CrlCheckingFlag : sous la section 'Security', une chaîne convertie en UINT. La valeur de ce paramètre est utilisée par Service Fabric pour masquer les erreurs d’état de la chaîne de certificats en modifiant le comportement de la création de chaînes. Elle est transmise à l’appel Win32 CryptoAPI [CertGetCertificateChain](/windows/win32/api/wincrypt/nf-wincrypt-certgetcertificatechain) en tant que paramètre 'dwFlags' et peut être définie sur n’importe quelle combinaison valide d’indicateurs acceptés par la fonction. La valeur 0 force le runtime Service Fabric à ignorer toutes les erreurs d’état de confiance, ce qui n’est pas recommandé, car son utilisation représente une exposition significative de sécurité. La valeur par défaut est 0x40000000 (CERT_CHAIN_REVOCATION_CHECK_CHAIN_EXCLUDE_ROOT).
 
   Quand l’utiliser : pour les tests locaux, avec des certificats autosignés ou des certificats de développeur qui ne sont pas entièrement formés/ne disposent pas d’une infrastructure de clé publique appropriée pour prendre en charge les certificats. Peut également être utilisé comme atténuation dans les environnements en « air gap » pendant la transition entre les infrastructures à clé publique.
 
@@ -257,7 +256,7 @@ L’achèvement de la phase 2 marque également la conversion du cluster vers de
 Dans un autre article, nous traiterons du sujet de la gestion et de l’approvisionnement des certificats dans un cluster Service Fabric.
 
 ## <a name="troubleshooting-and-frequently-asked-questions"></a>Résolution des problèmes et forum aux questions
-Bien qu’il ne soit pas facile de déboguer les problèmes liés à l’authentification dans les clusters Service Fabric, nous espérons que les conseils suivants peuvent vous aider. Le moyen le plus simple de commencer des enquêtes consiste à examiner les journaux des événements Service Fabric sur les nœuds du cluster, pas nécessairement uniquement ceux qui présentent des symptômes, mais également les nœuds qui sont opérationnels mais ne peuvent pas se connecter à l’un de leurs voisins. Sur Windows, les événements notables sont généralement enregistrés sous les canaux 'Applications and Services Logs\Microsoft-ServiceFabric\Admin' ou 'Operational', respectivement. Parfois, il peut être utile [d’activer la journalisation CAPI2](https://docs.microsoft.com/archive/blogs/benjaminperkins/enable-capi2-event-logging-to-troubleshoot-pki-and-ssl-certificate-issues), afin de capturer plus de détails sur la validation du certificat, la récupération des listes CRL/CTL, etc. (N’oubliez pas de la désactiver une fois la reproduction terminée, ce journal peut être très détaillé.)
+Bien qu’il ne soit pas facile de déboguer les problèmes liés à l’authentification dans les clusters Service Fabric, nous espérons que les conseils suivants peuvent vous aider. Le moyen le plus simple de commencer des enquêtes consiste à examiner les journaux des événements Service Fabric sur les nœuds du cluster, pas nécessairement uniquement ceux qui présentent des symptômes, mais également les nœuds qui sont opérationnels mais ne peuvent pas se connecter à l’un de leurs voisins. Sur Windows, les événements notables sont généralement enregistrés sous les canaux 'Applications and Services Logs\Microsoft-ServiceFabric\Admin' ou 'Operational', respectivement. Parfois, il peut être utile [d’activer la journalisation CAPI2](/archive/blogs/benjaminperkins/enable-capi2-event-logging-to-troubleshoot-pki-and-ssl-certificate-issues), afin de capturer plus de détails sur la validation du certificat, la récupération des listes CRL/CTL, etc. (N’oubliez pas de la désactiver une fois la reproduction terminée, ce journal peut être très détaillé.)
 
 Les symptômes typiques qui se manifestent dans un cluster rencontrant des problèmes d’authentification sont les suivants : 
   - les nœuds sont arrêtés/en boucle 
@@ -300,5 +299,4 @@ Chacun des symptômes peut être dû à différents problèmes, et la même caus
     ```C++
     0x80090014  -2146893804 NTE_BAD_PROV_TYPE
     ```
-    Pour y remédier, recréez le certificat de cluster avec un CAPI1 (par ex. le fournisseur « Microsoft Enhanced RSA and AES Cryptographic Provider »). Pour plus d’informations sur les fournisseurs de chiffrement, consultez [Comprendre les fournisseurs de chiffrement](https://docs.microsoft.com/windows/win32/seccertenroll/understanding-cryptographic-providers)
-
+    Pour y remédier, recréez le certificat de cluster avec un CAPI1 (par ex. le fournisseur « Microsoft Enhanced RSA and AES Cryptographic Provider »). Pour plus d’informations sur les fournisseurs de chiffrement, consultez [Comprendre les fournisseurs de chiffrement](/windows/win32/seccertenroll/understanding-cryptographic-providers)

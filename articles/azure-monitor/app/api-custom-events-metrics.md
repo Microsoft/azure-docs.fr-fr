@@ -2,17 +2,18 @@
 title: API Application Insights pour les événements et les métriques personnalisés | Microsoft Docs
 description: Insérez quelques lignes de code dans votre application de périphérique ou de bureau, votre page web ou votre service pour suivre l'utilisation et diagnostiquer les problèmes.
 ms.topic: conceptual
-ms.date: 03/27/2019
-ms.openlocfilehash: 152bd117ec0ae76c2c85ead26ba5278aa71d582f
-ms.sourcegitcommit: eaec2e7482fc05f0cac8597665bfceb94f7e390f
+ms.date: 05/11/2020
+ms.custom: devx-track-js, devx-track-csharp
+ms.openlocfilehash: ae64888669fb9a3c053802ee4f7ad7db6316265d
+ms.sourcegitcommit: 8b4b4e060c109a97d58e8f8df6f5d759f1ef12cf
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82509285"
+ms.lasthandoff: 12/07/2020
+ms.locfileid: "96780499"
 ---
 # <a name="application-insights-api-for-custom-events-and-metrics"></a>API Application Insights pour les événements et les mesures personnalisés
 
-Insérez quelques lignes de code dans votre application pour découvrir ce qu’en font les utilisateurs ou pour faciliter le diagnostic des problèmes. Vous pouvez envoyer la télémétrie depuis des applications de périphérique et de bureau, des clients web et des serveurs web. Utilisez l’API des données de télémétrie principales [Azure Application Insights](../../azure-monitor/app/app-insights-overview.md) pour envoyer des événements et métriques personnalisés, ainsi que vos propres versions de la télémétrie standard. Cette API est la même que celle utilisée par les collecteurs de données standard d’Application Insights.
+Insérez quelques lignes de code dans votre application pour découvrir ce qu’en font les utilisateurs ou pour faciliter le diagnostic des problèmes. Vous pouvez envoyer la télémétrie depuis des applications de périphérique et de bureau, des clients web et des serveurs web. Utilisez l’API des données de télémétrie principales [Azure Application Insights](./app-insights-overview.md) pour envoyer des événements et métriques personnalisés, ainsi que vos propres versions de la télémétrie standard. Cette API est la même que celle utilisée par les collecteurs de données standard d’Application Insights.
 
 ## <a name="api-summary"></a>Résumé des API
 
@@ -37,11 +38,11 @@ Si vous n’avez pas encore de référence sur le kit SDK Application Insights :
 
 * Ajoutez le Kit de développement logiciel (SDK) Application Insights à votre projet :
 
-  * [Projet ASP.NET](../../azure-monitor/app/asp-net.md)
-  * [ASP.NET Core project](../../azure-monitor/app/asp-net-core.md)
-  * [Projet Java](../../azure-monitor/app/java-get-started.md)
-  * [Projet Node.js](../../azure-monitor/app/nodejs.md)
-  * [JavaScript dans chaque page web](../../azure-monitor/app/javascript.md) 
+  * [Projet ASP.NET](./asp-net.md)
+  * [ASP.NET Core project](./asp-net-core.md)
+  * [Projet Java](./java-get-started.md)
+  * [Projet Node.js](./nodejs.md)
+  * [JavaScript dans chaque page web](./javascript.md) 
 * Ajoutez au code de votre périphérique ou de votre serveur web :
 
     *C#:* `using Microsoft.ApplicationInsights;`
@@ -107,7 +108,7 @@ Dans les projets Node.js, vous pouvez utiliser `new applicationInsights.Telemetr
 
 ## <a name="trackevent"></a>TrackEvent
 
-Dans Application Insights, un *événement personnalisé* est un point de données que vous pouvez afficher dans [Metrics Explorer](../../azure-monitor/platform/metrics-charts.md) en tant que nombre agrégé et dans [Recherche de diagnostic](../../azure-monitor/app/diagnostic-search.md) en tant qu’occurrences individuelles. (Il n’est pas lié à des « événements » de type MVC ou autres.)
+Dans Application Insights, un *événement personnalisé* est un point de données que vous pouvez afficher dans [Metrics Explorer](../platform/metrics-charts.md) en tant que nombre agrégé et dans [Recherche de diagnostic](./diagnostic-search.md) en tant qu’occurrences individuelles. (Il n’est pas lié à des « événements » de type MVC ou autres.)
 
 Insérez des appels `TrackEvent` dans votre code pour compter les différents événements. Par exemple, la fréquence à laquelle les utilisateurs choisissent une fonctionnalité particulière, la fréquence à laquelle ils atteignent des objectifs particuliers ou à laquelle ils commettent éventuellement des types d’erreurs particuliers.
 
@@ -145,13 +146,13 @@ telemetry.trackEvent({name: "WinGame"});
 
 ### <a name="custom-events-in-analytics"></a>Événements personnalisés dans l’analytique
 
-La télémétrie est disponible dans la table `customEvents` dans [Application Insights - Analytique](analytics.md). Chaque ligne représente un appel à `trackEvent(..)` dans votre application.
+La télémétrie est disponible dans la table `customEvents` dans [Application Insights - Analytique](../log-query/log-query-overview.md). Chaque ligne représente un appel à `trackEvent(..)` dans votre application.
 
-Si un [échantillonnage](../../azure-monitor/app/sampling.md) est en cours, la propriété itemCount affiche une valeur supérieure à 1. Par exemple, itemCount==10 signifie que sur 10 appels à trackEvent(), le processus d’échantillonnage n’en a transmis qu’un seul. Pour obtenir un nombre correct d’événements personnalisés, vous devez donc utiliser un code similaire à `customEvents | summarize sum(itemCount)`.
+Si un [échantillonnage](./sampling.md) est en cours, la propriété itemCount affiche une valeur supérieure à 1. Par exemple, itemCount==10 signifie que sur 10 appels à trackEvent(), le processus d’échantillonnage n’en a transmis qu’un seul. Pour obtenir un nombre correct d’événements personnalisés, vous devez donc utiliser un code similaire à `customEvents | summarize sum(itemCount)`.
 
 ## <a name="getmetric"></a>GetMetric
 
-Pour découvrir comment utiliser efficacement l’appel GetMetric() afin de capturer des métriques pré-agrégées localement pour les applications .NET et .NET Core, consultez la documentation de [GetMetric](../../azure-monitor/app/get-metric.md).
+Pour découvrir comment utiliser efficacement l’appel GetMetric() afin de capturer des métriques pré-agrégées localement pour les applications .NET et .NET Core, consultez la documentation de [GetMetric](./get-metric.md).
 
 ## <a name="trackmetric"></a>TrackMetric
 
@@ -201,7 +202,7 @@ telemetry.trackMetric({name: "queueLength", value: 42.0});
 
 ### <a name="custom-metrics-in-analytics"></a>Métriques personnalisées dans Analytics
 
-La télémétrie est disponible dans la table `customMetrics` dans [Application Insights - Analytique](analytics.md). Chaque ligne représente un appel à `trackMetric(..)` dans votre application.
+La télémétrie est disponible dans la table `customMetrics` dans [Application Insights - Analytique](../log-query/log-query-overview.md). Chaque ligne représente un appel à `trackMetric(..)` dans votre application.
 
 * `valueSum` - Il s’agit de la somme des mesures. Pour obtenir la valeur moyenne, divisez par `valueCount`.
 * `valueCount` : le nombre de mesures qui ont été agrégées dans cet appel de `trackMetric(..)`.
@@ -271,7 +272,7 @@ Les durées de chargement de la page résultantes affichées dans Metrics Explor
 
 ### <a name="page-telemetry-in-analytics"></a>Télémétrie des pages dans Analytique
 
-Dans [Analytique](analytics.md), deux tables affichent les données des opérations du navigateur :
+Dans [Analytique](../log-query/log-query-overview.md), deux tables affichent les données des opérations du navigateur :
 
 * La table `pageViews` contient des données sur l’URL et le titre de la page.
 * La table `browserTimings` contient des données sur les performances du client, comme le temps nécessaire pour traiter les données entrantes.
@@ -307,9 +308,9 @@ Toutefois, le moyen recommandé d’envoyer la télémétrie de la demande est l
 
 ## <a name="operation-context"></a>Contexte de l’opération
 
-Vous pouvez associer des éléments de télémétrie en les associant à un contexte d’opération. Le module de suivi de requête standard effectue cette opération pour les exceptions et les autres événements envoyés lors du traitement d’une requête HTTP. Dans [Recherche](../../azure-monitor/app/diagnostic-search.md) et [Analytique](analytics.md), vous pouvez trouver facilement tous les événements associés à la requête avec son ID d’opération.
+Vous pouvez associer des éléments de télémétrie en les associant à un contexte d’opération. Le module de suivi de requête standard effectue cette opération pour les exceptions et les autres événements envoyés lors du traitement d’une requête HTTP. Dans [Recherche](./diagnostic-search.md) et [Analytique](../log-query/log-query-overview.md), vous pouvez trouver facilement tous les événements associés à la requête avec son ID d’opération.
 
-Consultez [Corrélation de télémétrie dans Application Insights](../../azure-monitor/app/correlation.md) pour plus d’informations sur la corrélation.
+Consultez [Corrélation de télémétrie dans Application Insights](./correlation.md) pour plus d’informations sur la corrélation.
 
 Lors du suivi manuel des données de télémétrie, le moyen le plus simple pour vous assurer de la corrélation des données de télémétrie en utilisant ce modèle :
 
@@ -341,13 +342,13 @@ Dans Recherche, le contexte d’opération est utilisé pour créer la liste **�
 
 ![Éléments connexes](./media/api-custom-events-metrics/21.png)
 
-Consultez [Suivi des opérations personnalisées avec le kit SDK .NET d’Application Insights](../../azure-monitor/app/custom-operations-tracking.md) pour plus d’informations sur le suivi des opérations personnalisées.
+Consultez [Suivi des opérations personnalisées avec le kit SDK .NET d’Application Insights](./custom-operations-tracking.md) pour plus d’informations sur le suivi des opérations personnalisées.
 
 ### <a name="requests-in-analytics"></a>Requêtes dans Analytique
 
-Dans [Application Insights - Analytique](analytics.md), les demandes s’affichent dans la table `requests`.
+Dans [Application Insights - Analytique](../log-query/log-query-overview.md), les demandes s’affichent dans la table `requests`.
 
-Si [l’échantillonnage](../../azure-monitor/app/sampling.md) est en cours, la propriété itemCount affiche une valeur supérieure à 1. Par exemple, itemCount==10 signifie que sur 10 appels à trackRequest(), le processus d’échantillonnage n’en a transmis qu’un seul. Pour obtenir un nombre correct de demandes et une durée moyenne segmentée par nom des demandes, utilisez un code similaire à celui-ci :
+Si [l’échantillonnage](./sampling.md) est en cours, la propriété itemCount affiche une valeur supérieure à 1. Par exemple, itemCount==10 signifie que sur 10 appels à trackRequest(), le processus d’échantillonnage n’en a transmis qu’un seul. Pour obtenir un nombre correct de demandes et une durée moyenne segmentée par nom des demandes, utilisez un code similaire à celui-ci :
 
 ```kusto
 requests
@@ -358,8 +359,8 @@ requests
 
 Envoi d’exceptions à Application Insights :
 
-* Pour [les compter](../../azure-monitor/platform/metrics-charts.md), comme une indication de la fréquence d’un problème.
-* Pour [inspecter les occurrences individuelles](../../azure-monitor/app/diagnostic-search.md).
+* Pour [les compter](../platform/metrics-charts.md), comme une indication de la fréquence d’un problème.
+* Pour [inspecter les occurrences individuelles](./diagnostic-search.md).
 
 Les rapports incluent des arborescences des appels de procédure.
 
@@ -414,8 +415,8 @@ catch (ex)
 
 Les Kits de développement logiciel (SDK) interceptent de nombreuses exceptions automatiquement, ce qui vous évite ainsi d’avoir toujours à appeler TrackException explicitement.
 
-* ASP.NET : [écriture d’un code pour intercepter les exceptions](../../azure-monitor/app/asp-net-exceptions.md).
-* Java EE : [les exceptions sont interceptées automatiquement](../../azure-monitor/app/java-get-started.md#exceptions-and-request-failures).
+* ASP.NET : [écriture d’un code pour intercepter les exceptions](./asp-net-exceptions.md).
+* Java EE : [les exceptions sont interceptées automatiquement](./java-get-started.md#exceptions-and-request-failures).
 * JavaScript : les exceptions sont interceptées automatiquement. Si vous souhaitez désactiver la collecte automatique, ajoutez une ligne dans l'extrait de code que vous insérez dans vos pages web :
 
 ```javascript
@@ -427,9 +428,9 @@ Les Kits de développement logiciel (SDK) interceptent de nombreuses exceptions 
 
 ### <a name="exceptions-in-analytics"></a>Exceptions dans Analytique
 
-Dans [Application Insights - Analytique](analytics.md), les exceptions s’affichent dans la table `exceptions`.
+Dans [Application Insights - Analytique](../log-query/log-query-overview.md), les exceptions s’affichent dans la table `exceptions`.
 
-Si un [échantillonnage](../../azure-monitor/app/sampling.md) est en cours, la propriété `itemCount` affiche une valeur supérieure à 1. Par exemple, itemCount==10 signifie que sur 10 appels à trackException(), le processus d’échantillonnage n’en a transmis qu’un seul. Pour obtenir un nombre correct d’exceptions segmentées par type d’exception, utilisez un code similaire à celui-ci :
+Si un [échantillonnage](./sampling.md) est en cours, la propriété `itemCount` affiche une valeur supérieure à 1. Par exemple, itemCount==10 signifie que sur 10 appels à trackException(), le processus d’échantillonnage n’en a transmis qu’un seul. Pour obtenir un nombre correct d’exceptions segmentées par type d’exception, utilisez un code similaire à celui-ci :
 
 ```kusto
 exceptions
@@ -452,11 +453,11 @@ exceptions
 
 ## <a name="tracktrace"></a>TrackTrace
 
-Utilisez TrackTrace pour diagnostiquer des problèmes en envoyant une « piste de navigation » à Application Insights. Vous pouvez envoyer des blocs de données de diagnostic et les examiner dans la [Recherche de diagnostic](../../azure-monitor/app/diagnostic-search.md).
+Utilisez TrackTrace pour diagnostiquer des problèmes en envoyant une « piste de navigation » à Application Insights. Vous pouvez envoyer des blocs de données de diagnostic et les examiner dans la [Recherche de diagnostic](./diagnostic-search.md).
 
-Dans .NET, les [Adaptateurs de journaux d’activité](../../azure-monitor/app/asp-net-trace-logs.md) utilisent cette API pour envoyer des journaux d’activité tiers au portail.
+Dans .NET, les [Adaptateurs de journaux d’activité](./asp-net-trace-logs.md) utilisent cette API pour envoyer des journaux d’activité tiers au portail.
 
-En Java, pour les [Enregistreurs d’événements standard, comme Log4J ou Logback](../../azure-monitor/app/java-trace-logs.md), utilisez les appenders Application Insights Log4j ou Logback afin d’envoyer des journaux d’activité tiers au portail.
+En Java, pour les [Enregistreurs d’événements standard, comme Log4J ou Logback](./java-trace-logs.md), utilisez les appenders Application Insights Log4j ou Logback afin d’envoyer des journaux d’activité tiers au portail.
 
 *C#*
 
@@ -491,7 +492,7 @@ Enregistrer un événement de diagnostic comme l'utilisation ou la non-utilisati
  Paramètre | Description
 ---|---
 `message` | Données de diagnostic. Peut être plus longue qu'un nom.
-`properties` | Mappage de chaîne à chaîne : Données supplémentaires utilisées pour [filtrer les exceptions](https://azure.microsoft.com/documentation/articles/app-insights-api-custom-events-metrics/#properties) dans le portail. Vide par défaut.
+`properties` | Mappage de chaîne à chaîne : Données supplémentaires utilisées pour [filtrer les exceptions](#properties) dans le portail. Vide par défaut.
 `severityLevel` | Valeurs prises en charge : [SeverityLevel.ts](https://github.com/microsoft/ApplicationInsights-JS/blob/17ef50442f73fd02a758fbd74134933d92607ecf/shared/AppInsightsCommon/src/Interfaces/Contracts/Generated/SeverityLevel.ts)
 
 Vous pouvez effectuer une recherche dans le contenu du message, mais (contrairement aux valeurs de propriété), vous ne pouvez pas les filtrer.
@@ -518,17 +519,20 @@ properties.put("Database", db.ID);
 telemetry.trackTrace("Slow Database response", SeverityLevel.Warning, properties);
 ```
 
-Dans [Recherche](../../azure-monitor/app/diagnostic-search.md), vous pouvez filtrer facilement tous les messages d’un niveau de gravité particulier portant sur une certaine base de données.
+Dans [Recherche](./diagnostic-search.md), vous pouvez filtrer facilement tous les messages d’un niveau de gravité particulier portant sur une certaine base de données.
 
 ### <a name="traces-in-analytics"></a>Traces dans Analytique
 
-Dans [Application Insights - Analytique](analytics.md), les appels à TrackTrace s’affichent dans la table `traces`.
+Dans [Application Insights - Analytique](../log-query/log-query-overview.md), les appels à TrackTrace s’affichent dans la table `traces`.
 
-Si un [échantillonnage](../../azure-monitor/app/sampling.md) est en cours, la propriété itemCount affiche une valeur supérieure à 1. Par exemple, itemCount==10 signifie que sur 10 appels à `trackTrace()`, le processus d’échantillonnage n’en a transmis qu’un seul. Pour obtenir un nombre correct d’appels de trace, vous devez utiliser un code similaire à `traces | summarize sum(itemCount)`.
+Si un [échantillonnage](./sampling.md) est en cours, la propriété itemCount affiche une valeur supérieure à 1. Par exemple, itemCount==10 signifie que sur 10 appels à `trackTrace()`, le processus d’échantillonnage n’en a transmis qu’un seul. Pour obtenir un nombre correct d’appels de trace, vous devez utiliser un code similaire à `traces | summarize sum(itemCount)`.
 
 ## <a name="trackdependency"></a>TrackDependency
 
 Utilisez l’appel à TrackDependency pour suivre les temps de réponse et les taux de réussite des appels vers un bloc de code externe. Les résultats s'affichent dans les graphiques de dépendance sur le portail. L’extrait de code ci-dessous doit être ajouté chaque fois qu’un appel de dépendance est effectué.
+
+> [!NOTE]
+> Pour .NET et .NET Core, vous pouvez également utiliser la méthode `TelemetryClient.StartOperation` (extension) qui remplit les propriétés `DependencyTelemetry` nécessaires pour la corrélation et d’autres propriétés telles que l’heure de début et la durée. Vous n’avez donc pas besoin de créer un minuteur personnalisé comme dans les exemples ci-dessous. Pour plus d’informations, consultez la [section relative au suivi des dépendances sortantes](https://docs.microsoft.com/azure/azure-monitor/app/custom-operations-tracking#outgoing-dependencies-tracking) de cet article.
 
 *C#*
 
@@ -565,8 +569,8 @@ finally {
     Instant endTime = Instant.now();
     Duration delta = Duration.between(startTime, endTime);
     RemoteDependencyTelemetry dependencyTelemetry = new RemoteDependencyTelemetry("My Dependency", "myCall", delta, success);
-    RemoteDependencyTelemetry.setTimeStamp(startTime);
-    RemoteDependencyTelemetry.trackDependency(dependencyTelemetry);
+    dependencyTelemetry.setTimeStamp(startTime);
+    telemetry.trackDependency(dependencyTelemetry);
 }
 ```
 
@@ -591,19 +595,19 @@ finally
 }
 ```
 
-N’oubliez pas que les kits SDK de serveur incluent un [module de dépendance](../../azure-monitor/app/asp-net-dependencies.md) qui détecte certains appels de dépendance et en effectue le suivi automatiquement. C’est notamment le cas des bases de données et des API REST. Vous devez installer un agent sur votre serveur pour que le module fonctionne. 
+N’oubliez pas que les kits SDK de serveur incluent un [module de dépendance](./asp-net-dependencies.md) qui détecte certains appels de dépendance et en effectue le suivi automatiquement. C’est notamment le cas des bases de données et des API REST. Vous devez installer un agent sur votre serveur pour que le module fonctionne. 
 
-En Java, [l’Agent Java](../../azure-monitor/app/java-agent.md) permet de suivre automatiquement certains appels de dépendance.
+En Java, [l’Agent Java](./java-agent.md) permet de suivre automatiquement certains appels de dépendance.
 
 Vous utiliserez cet appel si vous souhaitez effectuer le suivi des appels qui ne sont pas interceptés par le système de suivi automatisé, ou si vous ne souhaitez pas installer l'agent.
 
-Pour désactiver le module de suivi des dépendances standard en C#, modifiez [ApplicationInsights.config](../../azure-monitor/app/configuration-with-applicationinsights-config.md) et supprimez la référence à `DependencyCollector.DependencyTrackingTelemetryModule`. En Java, n’installez pas l’agent Java si vous ne souhaitez pas collecter automatiquement les dépendances standards.
+Pour désactiver le module de suivi des dépendances standard en C#, modifiez [ApplicationInsights.config](./configuration-with-applicationinsights-config.md) et supprimez la référence à `DependencyCollector.DependencyTrackingTelemetryModule`. En Java, n’installez pas l’agent Java si vous ne souhaitez pas collecter automatiquement les dépendances standards.
 
 ### <a name="dependencies-in-analytics"></a>Dépendances dans Analytique
 
-Dans [Application Insights - Analytique](analytics.md), les appels de trackDependency s’affichent dans la table `dependencies`.
+Dans [Application Insights - Analytique](../log-query/log-query-overview.md), les appels de trackDependency s’affichent dans la table `dependencies`.
 
-Si un [échantillonnage](../../azure-monitor/app/sampling.md) est en cours, la propriété itemCount affiche une valeur supérieure à 1. Par exemple, itemCount==10 signifie que sur 10 appels à trackDependency(), le processus d’échantillonnage n’en a transmis qu’un seul. Pour obtenir un nombre correct de dépendances segmentées par composant cible, utilisez un code similaire à celui-ci :
+Si un [échantillonnage](./sampling.md) est en cours, la propriété itemCount affiche une valeur supérieure à 1. Par exemple, itemCount==10 signifie que sur 10 appels à trackDependency(), le processus d’échantillonnage n’en a transmis qu’un seul. Pour obtenir un nombre correct de dépendances segmentées par composant cible, utilisez un code similaire à celui-ci :
 
 ```kusto
 dependencies
@@ -649,7 +653,7 @@ Dans l’idéal, il est recommandé d’utiliser la méthode flush() dans l’ac
 
 ## <a name="authenticated-users"></a>Utilisateurs authentifiés
 
-Dans une application web, les utilisateurs sont identifiés par des cookies par défaut. Un utilisateur peut être compté plusieurs fois s’il accède à votre application à partir d’un autre ordinateur ou navigateur, ou s’il supprime des cookies.
+Dans une application web, les utilisateurs sont [identifiés par des cookies](./usage-segmentation.md#the-users-sessions-and-events-segmentation-tool) (par défaut). Un utilisateur peut être compté plusieurs fois s’il accède à votre application à partir d’un autre ordinateur ou navigateur, ou s’il supprime des cookies.
 
 Mais si les utilisateurs se connectent à votre application, vous pouvez obtenir un nombre plus précis en définissant l’ID de l’utilisateur authentifié dans le code du navigateur :
 
@@ -689,9 +693,9 @@ Si votre application regroupe les utilisateurs par comptes, vous pouvez égaleme
 appInsights.setAuthenticatedUserContext(validatedId, accountId);
 ```
 
-Dans [Metrics Explorer](../../azure-monitor/platform/metrics-charts.md), vous pouvez créer un graphique qui compte les **Utilisateurs authentifiés** et les **Comptes d’utilisateur**.
+Dans [Metrics Explorer](../platform/metrics-charts.md), vous pouvez créer un graphique qui compte les **Utilisateurs authentifiés** et les **Comptes d’utilisateur**.
 
-Vous pouvez également [rechercher](../../azure-monitor/app/diagnostic-search.md) les points de données client avec des comptes et des noms d'utilisateur spécifiques.
+Vous pouvez également [rechercher](./diagnostic-search.md) les points de données client avec des comptes et des noms d’utilisateur spécifiques.
 
 ## <a name="filtering-searching-and-segmenting-your-data-by-using-properties"></a><a name="properties"></a>Filtrage, recherche et segmentation de vos données à l’aide des propriétés
 
@@ -810,7 +814,7 @@ telemetry.TrackEvent(event);
 
 ### <a name="custom-measurements-and-properties-in-analytics"></a>Mesures et propriétés personnalisées dans Analytique
 
-Dans [Analytique](analytics.md), les mesures et les propriétés personnalisées s’affichent dans les attributs `customMeasurements` et `customDimensions` de chaque enregistrement de télémétrie.
+Dans [Analytique](../log-query/log-query-overview.md), les mesures et les propriétés personnalisées s’affichent dans les attributs `customMeasurements` et `customDimensions` de chaque enregistrement de télémétrie.
 
 Par exemple, si vous avez ajouté une propriété nommée « game » à votre télémétrie des demandes, cette requête compte les occurrences des différentes valeurs de « game » et affiche la moyenne de la métrique personnalisée « score » :
 
@@ -822,7 +826,7 @@ requests
 Notez que :
 
 * Quand vous extrayez une valeur du JSON la customDimensions ou customMeasurements, elle est de type dynamique et par conséquent, vous devez la transtyper en `tostring` ou `todouble`.
-* Pour tenir compte de la possibilité [d’échantillonnage](../../azure-monitor/app/sampling.md), vous devez utiliser `sum(itemCount)`, et non pas `count()`.
+* Pour tenir compte de la possibilité [d’échantillonnage](./sampling.md), vous devez utiliser `sum(itemCount)`, et non pas `count()`.
 
 ## <a name="timing-events"></a><a name="timed"></a> Événements de durée
 
@@ -919,19 +923,19 @@ Les appels de télémétrie individuels peuvent remplacer les valeurs par défau
 
 *Pour les clients Web JavaScript*, utilisez des initialiseurs de télémétrie JavaScript.
 
-*Pour ajouter des propriétés à toutes les données de télémétrie*, notamment les données des modules de collecte standard, [implémentez `ITelemetryInitializer`](../../azure-monitor/app/api-filtering-sampling.md#add-properties).
+*Pour ajouter des propriétés à toutes les données de télémétrie*, notamment les données des modules de collecte standard, [implémentez `ITelemetryInitializer`](./api-filtering-sampling.md#add-properties).
 
 ## <a name="sampling-filtering-and-processing-telemetry"></a>Échantillonnage, filtrage et traitement de la télémétrie
 
 Vous pouvez écrire du code pour traiter votre télémétrie avant de l’envoyer à partir du Kit de développement logiciel (SDK). Le traitement inclut les données envoyées par les modules de télémétrie standard, telles que la collection de requêtes HTTP et la collection de dépendances.
 
-[Ajoutez des propriétés](../../azure-monitor/app/api-filtering-sampling.md#add-properties) à la télémétrie en implémentant `ITelemetryInitializer`. Par exemple, vous pouvez ajouter des numéros de version ou des valeurs calculées à partir d'autres propriétés.
+[Ajoutez des propriétés](./api-filtering-sampling.md#add-properties) à la télémétrie en implémentant `ITelemetryInitializer`. Par exemple, vous pouvez ajouter des numéros de version ou des valeurs calculées à partir d'autres propriétés.
 
-[Le filtrage](../../azure-monitor/app/api-filtering-sampling.md#filtering) peut modifier ou abandonner des données de télémétrie avant leur envoi depuis le SDK en implémentant `ITelemetryProcessor`. Vous contrôlez ce qui est envoyé ou rejeté, mais vous devez prendre en compte l’impact sur vos mesures. Suivant la façon dont vous ignorez les éléments, vous risquez de ne plus pouvoir naviguer entre des éléments connexes.
+[Le filtrage](./api-filtering-sampling.md#filtering) peut modifier ou abandonner des données de télémétrie avant leur envoi depuis le SDK en implémentant `ITelemetryProcessor`. Vous contrôlez ce qui est envoyé ou rejeté, mais vous devez prendre en compte l’impact sur vos mesures. Suivant la façon dont vous ignorez les éléments, vous risquez de ne plus pouvoir naviguer entre des éléments connexes.
 
-[L’échantillonnage](../../azure-monitor/app/api-filtering-sampling.md) est une solution intégrée pour réduire le volume des données envoyées à partir de votre application vers le portail. Cela n’affecte pas les mesures affichées. Et il n’affecte pas votre capacité à diagnostiquer les problèmes en navigant entre des éléments connexes, tels que les exceptions, les requêtes et les affichages de page.
+[L’échantillonnage](./api-filtering-sampling.md) est une solution intégrée pour réduire le volume des données envoyées à partir de votre application vers le portail. Cela n’affecte pas les mesures affichées. Et il n’affecte pas votre capacité à diagnostiquer les problèmes en navigant entre des éléments connexes, tels que les exceptions, les requêtes et les affichages de page.
 
-[Plus d’informations](../../azure-monitor/app/api-filtering-sampling.md)
+[Plus d’informations](./api-filtering-sampling.md)
 
 ## <a name="disabling-telemetry"></a>Désactivation de la télémétrie
 
@@ -951,7 +955,7 @@ TelemetryConfiguration.Active.DisableTelemetry = true;
 telemetry.getConfiguration().setTrackingDisabled(true);
 ```
 
-Pour *désactiver les collecteurs standard sélectionnés* (par exemple, les compteurs de performances, les requêtes HTTP ou les dépendances), supprimez ou commentez les lignes correspondantes dans [ApplicationInsights.config](../../azure-monitor/app/configuration-with-applicationinsights-config.md). Par exemple, vous pouvez faire cela si vous souhaitez envoyer vos propres données TrackRequest.
+Pour *désactiver les collecteurs standard sélectionnés* (par exemple, les compteurs de performances, les requêtes HTTP ou les dépendances), supprimez ou commentez les lignes correspondantes dans [ApplicationInsights.config](./configuration-with-applicationinsights-config.md). Par exemple, vous pouvez faire cela si vous souhaitez envoyer vos propres données TrackRequest.
 
 *Node.JS*
 
@@ -1012,7 +1016,7 @@ telemetry.InstrumentationKey = "---my key---";
 
 ## <a name="dynamic-instrumentation-key"></a><a name="dynamic-ikey"></a> Clé d'instrumentation dynamique
 
-Pour éviter de mélanger la télémétrie fournie par les environnements de développement, de test et de production, vous pouvez [créer des ressources Application Insights distinctes](../../azure-monitor/app/create-new-resource.md ) et modifier leurs clés en fonction de l’environnement.
+Pour éviter de mélanger la télémétrie fournie par les environnements de développement, de test et de production, vous pouvez [créer des ressources Application Insights distinctes](./create-new-resource.md) et modifier leurs clés en fonction de l’environnement.
 
 Au lieu de récupérer la clé d'instrumentation à partir du fichier de configuration, vous pouvez la définir dans votre code. Définissez la clé dans une méthode d'initialisation, par exemple global.aspx.cs dans un service ASP.NET :
 
@@ -1068,7 +1072,7 @@ TelemetryClient a une propriété de contexte contenant les valeurs qui sont env
 telemetry.Context.Operation.Name = "MyOperationName";
 ```
 
-Si vous définissez une de ces valeurs vous-même, supprimez la ligne appropriée dans [ApplicationInsights.config](../../azure-monitor/app/configuration-with-applicationinsights-config.md), pour ne pas mélanger vos valeurs et les valeurs standard.
+Si vous définissez une de ces valeurs vous-même, supprimez la ligne appropriée dans [ApplicationInsights.config](./configuration-with-applicationinsights-config.md), pour ne pas mélanger vos valeurs et les valeurs standard.
 
 * **Composant** : l’application et sa version.
 * **Appareil** : données concernant l’appareil sur lequel l’application s’exécute. (dans les applications web, il s’agit du serveur ou de l’appareil client depuis lequel la télémétrie est envoyée.)
@@ -1086,26 +1090,24 @@ Si vous définissez une de ces valeurs vous-même, supprimez la ligne approprié
 
 [!INCLUDE [application-insights-limits](../../../includes/application-insights-limits.md)]
 
-Pour éviter d'atteindre la limite de débit de données, utilisez [l’échantillonnage](../../azure-monitor/app/sampling.md).
+Pour éviter d'atteindre la limite de débit de données, utilisez [l’échantillonnage](./sampling.md).
 
-Pour déterminer la durée de conservation des données, consultez [Rétention des données et confidentialité](../../azure-monitor/app/data-retention-privacy.md).
+Pour déterminer la durée de conservation des données, consultez [Rétention des données et confidentialité](./data-retention-privacy.md).
 
 ## <a name="reference-docs"></a>Documents de référence
 
-* [Référence ASP.NET](https://docs.microsoft.com/dotnet/api/overview/azure/insights?view=azure-dotnet)
-* [Référence Java](https://docs.microsoft.com/java/api/overview/azure/appinsights?view=azure-java-stable/)
+* [Référence ASP.NET](/dotnet/api/overview/azure/insights?view=azure-dotnet)
+* [Référence Java](/java/api/overview/azure/appinsights?view=azure-java-stable/)
 * [Référence JavaScript](https://github.com/Microsoft/ApplicationInsights-JS/blob/master/API-reference.md)
-
 
 ## <a name="sdk-code"></a>Code de Kit de développement logiciel (SDK)
 
-* [Kit de développement logiciel (SDK) principal ASP.NET](https://github.com/Microsoft/ApplicationInsights-aspnetcore)
+* [Kit de développement logiciel (SDK) principal ASP.NET](https://github.com/Microsoft/ApplicationInsights-dotnet)
 * [ASP.NET](https://github.com/Microsoft/ApplicationInsights-dotnet)
-* [Packages Windows Server](https://github.com/Microsoft/applicationInsights-dotnet-server)
+* [Packages Windows Server](https://github.com/Microsoft/ApplicationInsights-dotnet)
 * [Kit SDK Java](https://github.com/Microsoft/ApplicationInsights-Java)
 * [Kit de développement logiciel (SDK) Node.js](https://github.com/Microsoft/ApplicationInsights-Node.js)
 * [Kit de développement logiciel (SDK) JavaScript](https://github.com/Microsoft/ApplicationInsights-JS)
-
 
 ## <a name="questions"></a>Questions
 
@@ -1114,9 +1116,10 @@ Pour déterminer la durée de conservation des données, consultez [Rétention d
     Aucun. Vous n’avez pas besoin de les inclure dans des clauses try-catch. Si le Kit de développement logiciel (SDK) rencontre des problèmes, il enregistrera des messages dans la sortie de la console de débogage et, si les messages aboutissent, dans la recherche de diagnostic.
 * *Existe-t-il une API REST pour obtenir des données à partir du portail ?*
 
-    Oui, [l’API d’accès aux données](https://dev.applicationinsights.io/). Les autres méthodes d’extraction des données sont [l’exportation d’Analytics vers Power BI](../../azure-monitor/app/export-power-bi.md ) et [l’exportation continue](../../azure-monitor/app/export-telemetry.md).
+    Oui, [l’API d’accès aux données](https://dev.applicationinsights.io/). Les autres méthodes d’extraction des données sont [l’exportation d’Analytics vers Power BI](./export-power-bi.md) et [l’exportation continue](./export-telemetry.md).
 
 ## <a name="next-steps"></a><a name="next"></a>Étapes suivantes
 
-* [Recherche d’événements et de journaux d’activité](../../azure-monitor/app/diagnostic-search.md)
-* [Dépannage](../../azure-monitor/app/troubleshoot-faq.md)
+* [Recherche d’événements et de journaux d’activité](./diagnostic-search.md)
+* [Dépannage](../faq.md)
+

@@ -13,12 +13,12 @@ ms.topic: quickstart
 ms.date: 03/24/2020
 ms.author: mlearned
 ms.custom: mvc
-ms.openlocfilehash: cde959d8e075b55cb6cbb37479ca49cdd8a8c0c1
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 9e2f7115560148a1d3b9d2671be54c1ba4d61946
+ms.sourcegitcommit: d2d1c90ec5218b93abb80b8f3ed49dcf4327f7f4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82233735"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97588911"
 ---
 # <a name="create-a-cicd-pipeline-for-ruby-on-rails-by-using-azure-devops-starter"></a>Créer un pipeline CI/CD pour Ruby on Rails à l’aide d’Azure DevOps Starter
 
@@ -63,9 +63,9 @@ Azure DevOps Starter crée un pipeline CI/CD dans Azure Repos. Vous pouvez crée
 
 Azure DevOps Starter crée un référentiel Git dans Azure Pipelines ou dans GitHub. Pour voir le dépôt et modifier le code dans votre application, effectuez les étapes suivantes :
 
-1. Dans le tableau de bord DevOps Starter, sur la gauche, sélectionnez le lien correspondant à votre branche maîtresse. Le lien ouvre une vue sur le dépôt Git récemment créé.
+1. Dans le tableau de bord DevOps Starter, sur la gauche, sélectionnez le lien correspondant à votre branche principale. Le lien ouvre une vue sur le dépôt Git récemment créé.
 
-1. Pour voir l’URL du clone du dépôt, sélectionnez **Cloner** en haut à droite. Vous pouvez cloner votre dépôt Git dans votre IDE favori. Dans les prochaines étapes, vous allez utiliser le navigateur web pour effectuer des modifications de code directement dans la branche maîtresse et les valider.
+1. Pour voir l’URL du clone du dépôt, sélectionnez **Cloner** en haut à droite. Vous pouvez cloner votre dépôt Git dans votre IDE favori. Dans les prochaines étapes, vous allez utiliser le navigateur web pour effectuer des modifications de code directement dans la branche principale et les valider.
 
 1. Sur la gauche, accédez au fichier *app/views/pages/home.html.erb*, puis sélectionnez **Modifier**.
 
@@ -126,4 +126,4 @@ Quand ils ne sont plus nécessaires, vous pouvez supprimer l’instance Azure Ap
 Pour plus d’informations sur la modification des pipelines de build et de mise en production afin de répondre aux besoins de votre équipe, consultez :
 
 > [!div class="nextstepaction"]
-> [Définir votre pipeline de déploiement continu (CD) multiétape](https://docs.microsoft.com/azure/devops/pipelines/release/define-multistage-release-process?view=vsts)
+> [Définir votre pipeline de déploiement continu (CD) multiétape](/azure/devops/pipelines/release/define-multistage-release-process?view=vsts)

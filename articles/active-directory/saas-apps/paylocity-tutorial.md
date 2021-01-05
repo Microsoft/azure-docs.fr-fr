@@ -2,25 +2,21 @@
 title: 'Tutoriel : Intégration de l’authentification unique Azure Active Directory à Paylocity | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et Paylocity.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: f5e5a71f-ea04-4533-ba58-0ec85fdf0982
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
 ms.topic: tutorial
 ms.date: 01/21/2020
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: d2324343a31c3f3930975eea47659d023b9bbb94
-ms.sourcegitcommit: 67addb783644bafce5713e3ed10b7599a1d5c151
+ms.openlocfilehash: 59c01d5d8589b61ff0aaacb81d12fed8fba4f842
+ms.sourcegitcommit: 2ba6303e1ac24287762caea9cd1603848331dd7a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/05/2020
-ms.locfileid: "80667598"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97505509"
 ---
 # <a name="tutorial-azure-active-directory-single-sign-on-sso-integration-with-paylocity"></a>Tutoriel : Intégration de l’authentification unique Azure Active Directory à Paylocity
 
@@ -30,7 +26,7 @@ Dans ce tutoriel, vous allez apprendre à intégrer Paylocity à Azure Active Di
 * Permettre à vos utilisateurs de se connecter automatiquement à Paylocity avec leur compte Azure AD.
 * Gérer vos comptes à un emplacement central : le Portail Azure.
 
-Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -45,7 +41,7 @@ Dans ce tutoriel, vous allez configurer et tester l’authentification unique Az
 
 * Paylocity prend en charge l’authentification unique lancée par **le fournisseur de services et le fournisseur d’identité**
 
-* Après avoir configuré Paylocity, vous pouvez appliquer des contrôles de session qui protègent contre l’exfiltration et l’infiltration des données sensibles de votre organisation en temps réel. Les contrôles de session sont étendus à partir de l’accès conditionnel. [Découvrez comment appliquer un contrôle de session avec Microsoft Cloud App Security](https://docs.microsoft.com/cloud-app-security/proxy-deployment-aad).
+* Après avoir configuré Paylocity, vous pouvez appliquer des contrôles de session qui protègent contre l’exfiltration et l’infiltration des données sensibles de votre organisation en temps réel. Les contrôles de session sont étendus à partir de l’accès conditionnel. [Découvrez comment appliquer un contrôle de session avec Microsoft Cloud App Security](/cloud-app-security/proxy-deployment-aad).
 
 ## <a name="adding-paylocity-from-the-gallery"></a>Ajout de Paylocity à partir de la galerie
 
@@ -110,7 +106,7 @@ Effectuez les étapes suivantes pour activer l’authentification unique Azure A
 
 1. Dans la page **Configurer l’authentification unique avec SAML**, dans la section **Certificat de signature SAML**, cliquez sur l’**icône Modifier**.
 
-    ![Modifier le certificat de signature SAML](./media/paylocity-tutorial/edit-samlassertion.png)
+    ![Capture d’écran montrant le « Certificat de signature SAML », avec l’action « Télécharger » sélectionnée pour « XML de métadonnées de fédération ».](./media/paylocity-tutorial/edit-samlassertion.png)
 
 1. Sélectionnez **Option de signature** pour **Signer la réponse et l’assertion SAML**, puis cliquez sur **Enregistrer**.
 
@@ -152,28 +148,36 @@ Dans cette section, vous allez autoriser B.Simon à utiliser l’authentificatio
 
 ## <a name="configure-paylocity-sso"></a>Configurer l’authentification unique Paylocity
 
-Pour configurer l’authentification unique côté **Paylocity**, vous devez envoyer le **XML des métadonnées de fédération** téléchargé et les URL copiées dans le portail Azure à l’[équipe du support technique Paylocity](mailto:service@paylocity.com). Celles-ci configurent ensuite ce paramètre pour que la connexion SSO SAML soit définie correctement des deux côtés.
+Pour configurer l’authentification unique côté **Paylocity** :
+
+1. Téléchargez le **fichier XML des métadonnées de fédération**.
+1. Dans Paylocity, accédez à **HR & Payroll** > **User Access** > **SSO Configuration**.
+1. Sélectionnez **Add SSO Integration** sous **SSO Integrations**. Un nouveau tiroir s’ouvre.
+1. Sélectionnez **Microsoft Azure** comme fournisseur d’authentification unique dans la liste déroulante.
+1. Sélectionnez **Status** dans la liste déroulante.
+1. Glissez-déplacez le fichier de métadonnées dans la zone de dépôt. Paylocity tente d’analyser l’émetteur, la redirection POST, les URL de liaison et le ou les certificats de sécurité.
+1. Sélectionnez **Enregistrer** pour confirmer les modifications. L’intégration doit apparaître sous **SSO Integrations**.
 
 ### <a name="create-paylocity-test-user"></a>Créer un utilisateur de test Paylocity
 
-Dans cette section, vous créez un utilisateur appelé B.Simon dans Paylocity. Collaborez avec l’ [équipe du support technique Paylocity](mailto:service@paylocity.com) pour ajouter des utilisateurs dans la plateforme Paylocity. Les utilisateurs doivent être créés et activés avant que vous utilisiez l’authentification unique.
+Dans cette section, vous créez un utilisateur appelé B.Simon dans Paylocity. Collaborez avec l’[équipe du support technique Paylocity](mailto:service@paylocity.com) pour ajouter des utilisateurs dans la plateforme Paylocity. Les utilisateurs doivent être créés et activés avant que vous utilisiez l’authentification unique.
 
 ## <a name="test-sso"></a>Tester l’authentification unique (SSO)
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Quand vous cliquez sur la vignette Paylocity dans le volet d’accès, vous devez être connecté automatiquement à l’application Paylocity pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Quand vous cliquez sur la vignette Paylocity dans le volet d’accès, vous devez être connecté automatiquement à l’application Paylocity pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de tutoriels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de tutoriels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)
 
 - [Essayer Paylocity avec Azure AD](https://aad.portal.azure.com/)
 
-* [Qu’est-ce que le contrôle de session dans Microsoft Cloud App Security ?](https://docs.microsoft.com/cloud-app-security/proxy-intro-aad)
+* [Qu’est-ce que le contrôle de session dans Microsoft Cloud App Security ?](/cloud-app-security/proxy-intro-aad)
 
-* [Guide pratique pour protéger Paylocity avec une visibilité et des contrôles avancés](https://docs.microsoft.com/cloud-app-security/proxy-intro-aad)
+* [Guide pratique pour protéger Paylocity avec une visibilité et des contrôles avancés](/cloud-app-security/proxy-intro-aad)

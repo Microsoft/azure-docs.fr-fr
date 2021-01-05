@@ -3,12 +3,13 @@ title: Déployer rapidement une application existante sur un cluster
 description: Utilisez un cluster Microsoft Azure Service Fabric pour héberger une application Node.js existante avec Visual Studio.
 ms.topic: conceptual
 ms.date: 12/06/2017
-ms.openlocfilehash: 9153fc4cd60cb892532db49bf4339b517320b1a6
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-js
+ms.openlocfilehash: dfd1fe9db54925bc17a53a7686fa34d5ea53cd5a
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75614840"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96013596"
 ---
 # <a name="host-a-nodejs-application-on-azure-service-fabric"></a>Héberger une application Node.js sur Microsoft Azure Service Fabric
 
@@ -30,7 +31,7 @@ Créer un projet avec `CTRL`+`SHIFT`+`N`
 
 Dans la boîte de dialogue **Nouveau projet**, sélectionnez **Cloud > Application Service Fabric**.
 
-Nommez l’application **MyGuestApp**, puis cliquez sur **OK**.
+Nommez l’application **MyGuestApp**, puis appuyez sur **Créer**.
 
 >[!IMPORTANT]
 >Node.js peut facilement dépasser la limite de 260 caractères pour les chemins d’accès de Windows. Utilisez un chemin d’accès court pour le projet en lui-même, par exemple **c:\code\svc1**. Vous pouvez éventuellement suivre **[ces instructions](https://stackoverflow.com/a/41687101/1664231)** pour activer les chemins d’accès longs des fichiers dans Windows 10.

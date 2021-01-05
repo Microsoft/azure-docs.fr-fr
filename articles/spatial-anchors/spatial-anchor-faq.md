@@ -1,19 +1,19 @@
 ---
 title: Forum aux questions
 description: Questions fréquentes (FAQ) sur le service Azure Spatial Anchors
-author: ramonarguelles
-manager: vriveras
+author: msftradford
+manager: MehranAzimi-msft
 services: azure-spatial-anchors
-ms.author: rgarcia
-ms.date: 02/24/2019
+ms.author: parkerra
+ms.date: 11/20/2020
 ms.topic: overview
 ms.service: azure-spatial-anchors
-ms.openlocfilehash: 563e2da8eba228636b05db2112739fdead4a4aa3
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: 01eb0ce83efa54366e027d35d9c3c3bbf86eff7b
+ms.sourcegitcommit: b8eba4e733ace4eb6d33cc2c59456f550218b234
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "76844885"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "95487365"
 ---
 # <a name="frequently-asked-questions-about-azure-spatial-anchors"></a>Questions fréquentes (FAQ) sur Azure Spatial Anchors
 
@@ -49,6 +49,10 @@ Pour plus d’informations, consultez [Vue d’ensemble d’Azure Spatial Anchor
 
 **R :** Les ancres sont isolées par le compte Azure. Seules les applications qui ont accès à votre compte peuvent accéder aux ancres qui en dépendent.
 
+**Q : Comment le service Azure Spatial Anchors stocke-t-il les données ?**
+
+**R :** Toutes les données sont stockées chiffrées à l’aide d’une clé de chiffrement de données gérée par Microsoft et sont toutes stockées au niveau régional pour chacune des ressources.
+
 **Q : Quelles informations d’environnement sont transmises et stockées dans le service quand Azure Spatial Anchors est utilisé ? Les images de l’environnement sont-elles transmises et stockées ?**
 
 **R** : Quand des ancres sont créées ou localisées, les images de l’environnement sont traitées sur l’appareil dans un format dérivé. Ce format dérivé est transmis et stocké dans le service.
@@ -60,7 +64,6 @@ Azure Spatial Anchors respecte les [conditions du contrat de service Azure](http
 ![Un environnement et son nuage de points disséminés qui en est dérivé](./media/sparse-point-cloud.png)
 *Figure 1 : Un environnement et son nuage de points disséminés qui en est dérivé*
 
-
 **Q : Est-il possible d’envoyer des informations de diagnostic à Microsoft ?**
 
 **R** : Oui. Azure Spatial Anchors propose un mode diagnostics auquel les développeurs peuvent souscrire via l’API Azure Spatial Anchors. Ce mode s’avère utile si, par exemple, vous ne parvenez pas à créer et à localiser des ancres dans un environnement de manière prévisible. Nous pouvons dans ce cas vous demander un rapport de diagnostics contenant des informations utiles au débogage. Pour plus d’informations, consultez [Journalisation et diagnostics dans Azure Spatial Anchors](./concepts/logging-diagnostics.md).
@@ -69,25 +72,25 @@ Azure Spatial Anchors respecte les [conditions du contrat de service Azure](http
 
 **Q : Fournissez-vous un contrat SLA ?**
 
-**R :** Comme pour tous les services Azure, nous visons un taux de disponibilité supérieur à 99,9 %. Sachez toutefois qu’Azure Spatial Anchors est actuellement en préversion et qu’à ce titre, les [conditions d’utilisation supplémentaires de préversion](https://azure.microsoft.com/support/legal/preview-supplemental-terms/) s’appliquent.
+**R :** Comme pour tous les services Azure, nous visons un taux de disponibilité supérieur à 99,9 %. 
 
 **Q : Puis-je publier mes applications dans des app stores en utilisant Azure Spatial Anchors ? Puis-je utiliser Azure Spatial Anchors pour des scénarios de production critiques ?**
 
-**R :** Azure Spatial Anchors est actuellement en préversion et tant que c’est le cas, nous vous invitons à développer des applications, à [fournir des commentaires](https://feedback.azure.com/forums/919252-azure-spatial-anchors) sur le produit et à planifier pour vos déploiements de production.
-
-Les dates de disponibilité générale (GA) seront bientôt annoncées.
+**R :** Oui, Azure Spatial Anchors est en disponibilité générale et est assorti d’un contrat de niveau de service Azure standard. Nous vous invitons à développer des applications pour vos déploiements de production et à [nous faire part de vos commentaires](https://feedback.azure.com/forums/919252-azure-spatial-anchors) à propos du produit.
 
 **Q : Existe-t-il des limites ?**
 
-**R** : Oui, il existe des limites.  Cependant, vous ne devriez pas les atteindre dans le cadre du développement et du test d’une application normale. Pour les déploiements de production, nous sommes prêts à répondre aux exigences élevées de nos clients. [Contactez-nous](mailto:azuremrs@microsoft.com) pour en discuter. Durant cette phase de préversion, nous n’avons pas encore publié de structure de hiérarchisation et de prix, mais cela devrait venir prochainement.
+**R** : Oui, il existe des limites.  Cependant, vous ne devriez pas les atteindre dans le cadre du développement et du test d’une application normale. Pour les déploiements de production, nous sommes prêts à répondre aux exigences élevées de nos clients. [Contactez-nous](mailto:azuremrs@microsoft.com) pour en discuter. 
 
 **Q : Dans quelles régions Azure Spatial Anchors est disponible ?**
 
-**R :** Aujourd’hui, vous pouvez créer un compte Azure Spatial Anchors dans la région Azure USA Est 2. Cela signifie que les ressources de calcul et de stockage exploitées par ce service résident dans cette région. Ceci dit, il n’existe aucune restriction quant à la situation géographique de vos clients. À l’avenir, nous étendrons la disponibilité du service à toutes les régions Azure principales.
+**R :** Azure Spatial Anchors est actuellement disponible dans les régions USA Ouest 2, USA Est, USA Est 2, USA Centre Sud, Europe Ouest, Europe Nord, Royaume-Uni Sud et Australie Est. Des régions supplémentaires seront également disponibles par la suite.
 
-**Q : Le service Azure Spatial Anchors est-il payant ? Si ce n’est pas encore le cas, est-ce prévu ?**
+Cela signifie que les ressources de calcul et de stockage exploitées par ce service résident dans ces régions. Ceci dit, il n’existe aucune restriction quant à la situation géographique de vos clients. 
 
-**R :** Vous trouverez des informations sur les tarifs en phase de préversion sur notre [page des tarifs](https://azure.microsoft.com/pricing/details/spatial-anchors/).
+**Q : Le service Azure Spatial Anchors est-il payant ?**
+
+**R :** Vous trouverez le détail des prix dans notre [page de tarification](https://azure.microsoft.com/pricing/details/spatial-anchors/).
 
 ## <a name="technical-faqs"></a>Questions fréquentes d’ordre technique
 
@@ -125,4 +128,4 @@ Lancez-vous dans le [développement ici](index.yml).
 
 **Q : Quels ports et protocoles Azure Spatial Anchors utilise-t-il ?**
 
-**R :** Azure Spatial Anchors communique via le port TCP 443 à l’aide d’un protocole chiffré. Pour l’authentification, il utilise [Azure Active Directory](https://docs.microsoft.com/azure/active-directory/), qui communique à l’aide de HTTPS sur le port 443.
+**R :** Azure Spatial Anchors communique via le port TCP 443 à l’aide d’un protocole chiffré. Pour l’authentification, il utilise [Azure Active Directory](../active-directory/index.yml), qui communique à l’aide de HTTPS sur le port 443.

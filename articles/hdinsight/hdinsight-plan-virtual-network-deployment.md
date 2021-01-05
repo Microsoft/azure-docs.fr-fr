@@ -8,12 +8,12 @@ ms.service: hdinsight
 ms.topic: conceptual
 ms.custom: hdinsightactive,seoapr2020
 ms.date: 05/04/2020
-ms.openlocfilehash: e2db6d1d60026a00fa8e766fbaa1c72975fa2e99
-ms.sourcegitcommit: e0330ef620103256d39ca1426f09dd5bb39cd075
+ms.openlocfilehash: 2d6d18cc73c02d3139074555fdd22a40c797ce40
+ms.sourcegitcommit: e7179fa4708c3af01f9246b5c99ab87a6f0df11c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82786612"
+ms.lasthandoff: 12/30/2020
+ms.locfileid: "97825145"
 ---
 # <a name="plan-a-virtual-network-for-azure-hdinsight"></a>Planifier un réseau virtuel pour Azure HDInsight
 
@@ -84,7 +84,7 @@ Suivez les étapes de cette section pour découvrir comment ajouter un nouveau c
         Pour plus d’informations, voir le document [Résoudre les problèmes relatifs aux groupes de sécurité réseau](../virtual-network/diagnose-network-traffic-filter-problem.md).
 
         > [!IMPORTANT]  
-        > Les règles de groupe de sécurité réseau sont appliquées dans un ordre basé sur leur priorité. La première règle correspondant au modèle de trafic est appliquée, et aucune autre n’est appliquée à ce trafic. Règles d’ordre de la plus permissive à la moins permissive. Pour plus d’informations, voir le document [Filtrer le trafic réseau avec les groupes de sécurité réseau](../virtual-network/security-overview.md).
+        > Les règles de groupe de sécurité réseau sont appliquées dans un ordre basé sur leur priorité. La première règle correspondant au modèle de trafic est appliquée, et aucune autre n’est appliquée à ce trafic. Règles d’ordre de la plus permissive à la moins permissive. Pour plus d’informations, voir le document [Filtrer le trafic réseau avec les groupes de sécurité réseau](../virtual-network/network-security-groups-overview.md).
 
     * Itinéraires définis par l’utilisateur
 
@@ -210,6 +210,6 @@ Lorsque vous créez un cluster HDInsight, un équilibreur de charge est égaleme
 * Pour obtenir des exemples de code et des exemples de création de réseaux virtuels Azure, consultez [Créer des réseaux virtuels pour les clusters Azure HDInsight](hdinsight-create-virtual-network.md).
 * Pour un exemple de bout en bout de configuration de HDInsight pour se connecter à un réseau local, voir [Connecter HDInsight à un réseau local](./connect-on-premises-network.md).
 * Pour plus d’informations sur les réseaux virtuels Azure, voir [Vue d'ensemble de Réseau virtuel Azure](../virtual-network/virtual-networks-overview.md).
-* Pour plus d’informations sur les groupes de sécurité réseau, consultez [Groupes de sécurité réseau](../virtual-network/security-overview.md).
+* Pour plus d’informations sur les groupes de sécurité réseau, consultez [Groupes de sécurité réseau](../virtual-network/network-security-groups-overview.md).
 * Pour plus d’informations sur les routages par l’utilisateur, consultez [Routage définis par l’utilisateur et transfert IP](../virtual-network/virtual-networks-udr-overview.md).
-* Pour plus d’informations sur le trafic de contrôle, consultez [Contrôler le trafic réseau](./control-network-traffic.md).
+* Pour plus d’informations sur le contrôle du trafic, y compris l’intégration du pare-feu, consultez [Contrôler le trafic réseau](./control-network-traffic.md).

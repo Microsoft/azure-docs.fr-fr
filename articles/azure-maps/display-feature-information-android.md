@@ -1,6 +1,6 @@
 ---
 title: Afficher des informations sur les caractéristiques dans le kit Android SDK Azure Maps | Microsoft Azure Maps
-description: Dans cet article, vous allez apprendre à afficher des informations sur les caractéristiques sur une carte avec le kit Android SDK Microsoft Azure Maps.
+description: Découvrez comment afficher des informations lorsque les utilisateurs interagissent avec les fonctionnalités de la carte. Utilisez Android SDK Azure Maps pour afficher des messages Toast et d’autres types de messages.
 author: rbrundritt
 ms.author: richbrun
 ms.date: 08/08/2019
@@ -8,12 +8,12 @@ ms.topic: conceptual
 ms.service: azure-maps
 services: azure-maps
 manager: ''
-ms.openlocfilehash: 26f41a7fd88a3c2018592e89ae95e3b962c1a9e9
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: fabb4cd1e555a7a67a53bf2f5a99d93c87df436c
+ms.sourcegitcommit: 5b93010b69895f146b5afd637a42f17d780c165b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75911693"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96532803"
 ---
 # <a name="display-feature-information"></a>Afficher des informations sur les fonctionnalités
 
@@ -63,9 +63,7 @@ map.events.add((OnFeatureClick) (features) -> {
 }, symbolLayer.getId());    //Limit this event to the symbol layer.
 ```
 
-<center>
-
-![Animation d’une caractéristique faisant l’objet d’un appui et de l’affichage d’un message Toast](./media/display-feature-information-android/symbol-layer-click-toast-message.gif)</center>
+![Animation d’une caractéristique faisant l’objet d’un appui et de l’affichage d’un message Toast](./media/display-feature-information-android/symbol-layer-click-toast-message.gif)
 
 Outre les messages Toast, il existe de nombreuses autres façons de présenter les propriétés de métadonnées d’une caractéristique, par exemple :
 

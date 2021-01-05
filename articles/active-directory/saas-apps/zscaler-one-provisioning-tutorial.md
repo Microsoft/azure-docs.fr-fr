@@ -2,32 +2,28 @@
 title: "Tutoriel : Configurer Zscaler One pour l'approvisionnement automatique d’utilisateurs avec Azure Active Directory | Microsoft Docs"
 description: Découvrez comment configurer Azure Active Directory pour approvisionner et déprovisionner automatiquement des comptes d’utilisateur sur Zscaler One.
 services: active-directory
-documentationcenter: ''
 author: zchia
 writer: zchia
-manager: beatrizd-msft
-ms.assetid: 72f6ba2b-73ed-420a-863a-aff672f26fa3
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: article
+ms.topic: tutorial
 ms.date: 03/27/2019
 ms.author: jeedes
-ms.openlocfilehash: 87413932acee576934ee50b59546371b03ceaf7e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: b8b6383c7808fd6c298d7776fc10572631bc6ddc
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77064170"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96006215"
 ---
 # <a name="tutorial-configure-zscaler-one-for-automatic-user-provisioning"></a>Tutoriel : Configurer Zscaler One pour l'approvisionnement automatique d’utilisateurs
 
 Ce tutoriel présente les étapes à effectuer dans Zscaler One et Azure Active Directory (Azure AD) afin de configurer Azure AD pour provisionner et déprovisionner automatiquement des utilisateurs et des groupes sur Zscaler One.
 
 > [!NOTE]
-> Ce didacticiel décrit un connecteur reposant sur le service d’approvisionnement d’utilisateurs Azure AD. Pour plus d’informations sur l’objet et le fonctionnement de ce service et pour accéder au forum aux questions, consultez [Automatisation de l’approvisionnement et de l’annulation de l’approvisionnement des utilisateurs pour les applications SaaS avec Azure Active Directory](../active-directory-saas-app-provisioning.md).
+> Ce didacticiel décrit un connecteur reposant sur le service d’approvisionnement d’utilisateurs Azure AD. Pour plus d’informations sur l’objet et le fonctionnement de ce service et pour accéder au forum aux questions, consultez [Automatisation de l’approvisionnement et de l’annulation de l’approvisionnement des utilisateurs pour les applications SaaS avec Azure Active Directory](../app-provisioning/user-provisioning.md).
 
 
 ## <a name="prerequisites"></a>Prérequis
@@ -67,7 +63,7 @@ Pour ajouter Zscaler One à partir de la Place de marché, procédez comme suit.
 
 Azure Active Directory utilise un concept appelé *affectations* pour déterminer les utilisateurs devant recevoir l’accès aux applications sélectionnées. Dans le cadre de l’approvisionnement automatique d’utilisateurs, seuls les utilisateurs ou groupes affectés à une application dans Azure AD sont synchronisés.
 
-Avant de configurer et d’activer l'approvisionnement automatique d’utilisateurs, identifiez les utilisateurs ou groupes dans Azure AD qui doivent accéder à Zscaler One. Pour affecter ces utilisateurs ou groupes à Zscaler One, suivez les instructions dans [Affecter un utilisateur ou un groupe à une application d’entreprise](https://docs.microsoft.com/azure/active-directory/active-directory-coreapps-assign-user-azure-portal).
+Avant de configurer et d’activer l'approvisionnement automatique d’utilisateurs, identifiez les utilisateurs ou groupes dans Azure AD qui doivent accéder à Zscaler One. Pour affecter ces utilisateurs ou groupes à Zscaler One, suivez les instructions dans [Affecter un utilisateur ou un groupe à une application d’entreprise](../manage-apps/assign-user-or-group-access-portal.md).
 
 ### <a name="important-tips-for-assigning-users-to-zscaler-one"></a>Conseils importants pour l’attribution d’utilisateurs à Zscaler One
 
@@ -138,7 +134,7 @@ Cette section vous guide dans la procédure de configuration du service d’appr
 
     ![Zscaler One : mise en correspondance des attributs de groupes](./media/zscaler-one-provisioning-tutorial/group-attribute-mappings.png)
 
-14. Pour configurer des filtres d’étendue, suivez les instructions fournies dans le [didacticiel sur les filtres d’étendue](./../active-directory-saas-scoping-filters.md).
+14. Pour configurer des filtres d’étendue, suivez les instructions fournies dans le [didacticiel sur les filtres d’étendue](../app-provisioning/define-conditional-rules-for-provisioning-user-accounts.md).
 
 15. Pour activer le service d’approvisionnement Azure AD pour Zscaler One, définissez **État de l'approvisionnement** sur **Activé** dans la section **Paramètres**.
 
@@ -156,7 +152,7 @@ Cette opération démarre la synchronisation initiale de tous les utilisateurs o
 
 Vous pouvez utiliser la section **Détails de la synchronisation** pour surveiller la progression et suivre les liens vers le rapport d’activité d’approvisionnement. Ce rapport décrit toutes les actions effectuées par le service d’approvisionnement Azure AD sur Zscaler One.
 
-Pour avoir des informations sur la lecture des journaux d’activité d’approvisionnement Azure AD, consultez [Création de rapports sur l’approvisionnement automatique de comptes d’utilisateur](../active-directory-saas-provisioning-reporting.md).
+Pour avoir des informations sur la lecture des journaux d’activité d’approvisionnement Azure AD, consultez [Création de rapports sur l’approvisionnement automatique de comptes d’utilisateur](../app-provisioning/check-status-user-account-provisioning.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
@@ -165,7 +161,7 @@ Pour avoir des informations sur la lecture des journaux d’activité d’approv
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* [Découvrez comment consulter les journaux d’activité et obtenir des rapports sur l’activité d’approvisionnement](../active-directory-saas-provisioning-reporting.md)
+* [Découvrez comment consulter les journaux d’activité et obtenir des rapports sur l’activité d’approvisionnement](../app-provisioning/check-status-user-account-provisioning.md)
 
 <!--Image references-->
 [1]: ./media/zscaler-one-provisioning-tutorial/tutorial-general-01.png

@@ -10,11 +10,11 @@
   items:
     - name: API REST
       items:
-        - name: 'C#'
+        - name: C#
           href: quickstarts/csharp.md
         - name: Java
           href: quickstarts/java.md
-        - name: Javascript
+        - name: JavaScript
           href: quickstarts/javascript.md
 - name: Concepts
   items:
@@ -22,9 +22,9 @@
       href: concepts/send-ink-data.md
 - name: Exemples
   items:
-    - name: 'C# et UWP (Plateforme Windows universelle)'
+    - name: C# et UWP (Plateforme Windows universelle)
       href: 'https://go.microsoft.com/fwlink/?linkid=2089803'
-    - name: 'C# et WPF (Windows Presentation Foundation)'
+    - name: C# et WPF (Windows Presentation Foundation)
       href: 'https://go.microsoft.com/fwlink/?linkid=2089804'
     - name: Application de navigateur web JavaScript
       href: 'https://go.microsoft.com/fwlink/?linkid=2089908'
@@ -32,14 +32,14 @@
       href: 'https://go.microsoft.com/fwlink/?linkid=2089906'
     - name: Application mobile Swift et iOS
       href: 'https://go.microsoft.com/fwlink/?linkid=2089805'
-- name: Informations de référence
+- name: Référence
   items:
     - name: Référence d’API REST
-      href: 'https://go.microsoft.com/fwlink/?linkid=2089907'
+      href: /rest/api/cognitiveservices/inkrecognizer/inkrecognizer
     - name: PowerShell
-      href: 'https://aka.ms/azure-powershell-cognitiveservices'
+      href: /powershell/module/azurerm.cognitiveservices/
     - name: Azure CLI
-      href: 'https://docs.microsoft.com/cli/azure/cognitiveservices?view=azure-cli-latest#az_cognitiveservices_list'
+      href: /cli/azure/cognitiveservices?view=azure-cli-latest#az_cognitiveservices_list
     - name: Support multilingue
       href: language-support.md
     - name: Régions

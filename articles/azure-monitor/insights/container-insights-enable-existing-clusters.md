@@ -3,16 +3,17 @@ title: Surveiller un cluster Azure Kubernetes Service (AKS) déployé | Microsof
 description: Découvrez comment activer la surveillance d’un cluster Azure Kubernetes Service (AKS) avec Azure Monitor pour les conteneurs déjà déployés dans votre abonnement.
 ms.topic: conceptual
 ms.date: 09/12/2019
-ms.openlocfilehash: 8589ea71b5c7affadc61d5e4543f734a660ab543
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-terraform, devx-track-azurecli
+ms.openlocfilehash: 547c22e4d82aa728009a2fdb42f2c3b481b7a625
+ms.sourcegitcommit: b6267bc931ef1a4bd33d67ba76895e14b9d0c661
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79234537"
+ms.lasthandoff: 12/19/2020
+ms.locfileid: "97695653"
 ---
 # <a name="enable-monitoring-of-azure-kubernetes-service-aks-cluster-already-deployed"></a>Activer la surveillance d’un cluster Azure Kubernetes Service (AKS) déjà déployé
 
-Cet article explique comment configurer Azure Monitor pour les conteneurs afin de surveiller un cluster Kubernetes managé hébergé sur [Azure Kubernetes Service](https://docs.microsoft.com/azure/aks/) et déjà déployé dans votre abonnement.
+Cet article explique comment configurer Azure Monitor pour les conteneurs afin de surveiller un cluster Kubernetes managé hébergé sur [Azure Kubernetes Service](../../aks/index.yml) et déjà déployé dans votre abonnement.
 
 Vous pouvez activer la surveillance d’un cluster AKS déjà déployé à l’aide d’une des méthodes prises en charge :
 
@@ -27,10 +28,10 @@ Connectez-vous au [portail Azure](https://portal.azure.com).
 
 ## <a name="enable-using-azure-cli"></a>Activer à l’aide d’Azure CLI
 
-L’étape suivante permet la supervision de votre cluster AKS à l’aide d’Azure CLI. Dans cet exemple, vous n'êtes pas obligé de créer ou de spécifier un espace de travail existant. Cette commande simplifie le processus en créant un espace de travail par défaut dans le groupe de ressources par défaut de l’abonnement cluster AKS s’il n’existe pas dans la région.  L’espace de travail créé par défaut est semblable au format de *DefaultWorkspace-\<GUID>-\<Région>* .  
+L’étape suivante permet la supervision de votre cluster AKS à l’aide d’Azure CLI. Dans cet exemple, vous n’êtes pas obligé de créer au préalable ou de spécifier un espace de travail existant. Cette commande simplifie le processus en créant un espace de travail par défaut dans le groupe de ressources par défaut de l’abonnement cluster AKS s’il n’existe pas dans la région.  L’espace de travail créé par défaut est semblable au format de *DefaultWorkspace-\<GUID>-\<Region>* .
 
 ```azurecli
-az aks enable-addons -a monitoring -n MyExistingManagedCluster -g MyExistingManagedClusterRG  
+az aks enable-addons -a monitoring -n MyExistingManagedCluster -g MyExistingManagedClusterRG
 ```
 
 La sortie doit ressembler à ce qui suit :
@@ -41,7 +42,7 @@ provisioningState       : Succeeded
 
 ### <a name="integrate-with-an-existing-workspace"></a>Intégrer avec un espace de travail existant
 
-Si vous préférez effectuer une intégration avec un espace de travail existant, effectuez les étapes suivantes pour identifier tout d’abord l’ID de ressource complet de votre espace de travail Log Analytics requis pour le paramètre `--workspace-resource-id`, puis exécutez la commande pour activer l’extension de supervision par rapport à l’espace de travail spécifié.  
+Si vous préférez effectuer une intégration avec un espace de travail existant, effectuez les étapes suivantes pour identifier tout d’abord l’ID de ressource complet de votre espace de travail Log Analytics requis pour le paramètre `--workspace-resource-id`, puis exécutez la commande pour activer l’extension de supervision par rapport à l’espace de travail spécifié.
 
 1. Affichez la liste de tous les abonnements auxquels vous avez accès à l’aide de la commande suivante :
 
@@ -108,17 +109,17 @@ Pour activer la supervision de votre cluster AKS dans le portail Azure à partir
 
 2. Sélectionnez **Conteneurs** dans la liste.
 
-3. Dans la page **Monitor - Conteneurs**, sélectionnez **Clusters non analysés**.
+3. Dans la page **Surveiller – Conteneurs**, sélectionnez **Clusters non surveillés**.
 
-4. Dans la liste des clusters non surveillés, recherchez le conteneur dans la liste et cliquez sur **Activer**.   
+4. Dans la liste des clusters non surveillés, recherchez le conteneur et cliquez sur **Activer**.
 
-5. Dans la page **Onboarding to Container Health and Logs** (Intégration de l’intégrité des conteneurs et aux journaux), si vous disposez d’un espace de travail Log Analytics dans le même abonnement que le cluster, sélectionnez-le dans la liste déroulante.  
+5. Dans la page **Onboarding to Container Health and Logs** (Intégration de l’intégrité des conteneurs et aux journaux), si vous disposez d’un espace de travail Log Analytics dans le même abonnement que le cluster, sélectionnez-le dans la liste déroulante.
     La liste présélectionne l’espace de travail par défaut et l’emplacement où le conteneur AKS est déployé dans l’abonnement.
 
     ![Activer la supervision des conteneurs Insights AKS](./media/container-insights-onboard/kubernetes-onboard-brownfield-01.png)
 
     >[!NOTE]
-    >Si vous souhaitez créer un espace de travail Log Analytics pour stocker les données de supervision du cluster, suivez les instructions de [Créer un espace de travail Log Analytics](../../azure-monitor/learn/quick-create-workspace.md). Veillez à créer l’espace de travail dans le même abonnement que le conteneur AKS.
+    >Si vous souhaitez créer un espace de travail Log Analytics pour stocker les données de supervision du cluster, suivez les instructions de [Créer un espace de travail Log Analytics](../learn/quick-create-workspace.md). Veillez à créer l’espace de travail dans le même abonnement que le conteneur AKS.
 
 Une fois que vous avez activé la surveillance, 15 minutes peuvent s’écouler avant que vous puissiez voir les métriques d’intégrité du cluster.
 
@@ -130,21 +131,19 @@ Pour activer la surveillance directement depuis votre cluster AKS dans le porta
 
 2. Dans la liste des ressources, commencez à taper **Conteneurs**.  Au fur et à mesure de votre saisie, la liste est filtrée.
 
-3. Sélectionnez **Services Kubernetes**.  
+3. Sélectionnez **Services Kubernetes**.
+    
+4. Dans la liste des services Kubernetes, sélectionnez un service.
 
-    ![Lien vers les services Kubernetes](./media/container-insights-onboard/portal-search-containers-01.png)
+5. Sur la page Vue d’ensemble du service Kubernetes, sélectionnez **Surveillance - Insights**.
 
-4. Dans la liste des conteneurs, sélectionnez un conteneur.
-
-5. Dans la vue d’ensemble du conteneur, sélectionnez **Conteneurs Monitor**.  
-
-6. Dans la page **Intégration à Azure Monitor pour conteneurs**, si vous disposez d’un espace de travail Log Analytics dans le même abonnement que le cluster, sélectionnez-le dans la liste déroulante.  
+6. Dans la page **Intégration à Azure Monitor pour conteneurs**, si vous disposez d’un espace de travail Log Analytics dans le même abonnement que le cluster, sélectionnez-le dans la liste déroulante.
     La liste présélectionne l’espace de travail par défaut et l’emplacement où le conteneur AKS est déployé dans l’abonnement.
 
     ![Activer le contrôle d’intégrité des conteneurs AKS](./media/container-insights-onboard/kubernetes-onboard-brownfield-02.png)
 
     >[!NOTE]
-    >Si vous souhaitez créer un espace de travail Log Analytics pour stocker les données de supervision du cluster, suivez les instructions de [Créer un espace de travail Log Analytics](../../azure-monitor/learn/quick-create-workspace.md). Veillez à créer l’espace de travail dans le même abonnement que le conteneur AKS.
+    >Si vous souhaitez créer un espace de travail Log Analytics pour stocker les données de supervision du cluster, suivez les instructions de [Créer un espace de travail Log Analytics](../learn/quick-create-workspace.md). Veillez à créer l’espace de travail dans le même abonnement que le conteneur AKS.
 
 Une fois que vous avez activé la surveillance, 15 minutes peuvent s’écouler avant que vous ne puissiez voir les données opérationnelles du cluster.
 
@@ -159,7 +158,7 @@ Cette méthode inclut deux modèles JSON. Le premier modèle spécifie la config
 >Le modèle doit être déployé dans le même groupe de ressources que le cluster.
 >
 
-L’espace de travail Log Analytics doit être créé avant d’activer la surveillance à l’aide d’Azure PowerShell ou CLI. Pour créer l’espace de travail, vous pouvez en configurer un via [Azure Resource Manager](../../azure-monitor/platform/template-workspace-configuration.md), [PowerShell](../scripts/powershell-sample-create-workspace.md?toc=%2fpowershell%2fmodule%2ftoc.json) ou le [portail Azure](../../azure-monitor/learn/quick-create-workspace.md).
+L’espace de travail Log Analytics doit être créé avant d’activer la surveillance à l’aide d’Azure PowerShell ou CLI. Pour créer l’espace de travail, vous pouvez en configurer un via [Azure Resource Manager](../samples/resource-manager-workspace.md), [PowerShell](../scripts/powershell-sample-create-workspace.md?toc=%2fpowershell%2fmodule%2ftoc.json) ou le [portail Azure](../learn/quick-create-workspace.md).
 
 Si vous n’êtes pas familiarisé avec le déploiement de ressources à l’aide d’un modèle, consultez les rubriques suivantes :
 
@@ -167,7 +166,7 @@ Si vous n’êtes pas familiarisé avec le déploiement de ressources à l’aid
 
 * [Déployer des ressources à l’aide de modèles Resource Manager et de l’interface de ligne de commande Azure](../../azure-resource-manager/templates/deploy-cli.md)
 
-Si vous avez choisi d’utiliser Azure CLI, vous devez d’abord l’installer et l’utiliser localement. Vous devez exécuter Azure CLI version 2.0.59 ou une version ultérieure. Pour identifier votre version, exécutez `az --version`. Si vous devez installer ou mettre à niveau Azure CLI, consultez [Installer Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli).
+Si vous avez choisi d’utiliser Azure CLI, vous devez d’abord l’installer et l’utiliser localement. Vous devez exécuter Azure CLI version 2.0.59 ou une version ultérieure. Pour identifier votre version, exécutez `az --version`. Si vous devez installer ou mettre à niveau Azure CLI, consultez [Installer Azure CLI](/cli/azure/install-azure-cli).
 
 ### <a name="create-and-execute-a-template"></a>Créer et exécuter un modèle
 
@@ -281,7 +280,7 @@ Si vous avez choisi d’utiliser Azure CLI, vous devez d’abord l’installer e
        ```azurecli
        az login
        az account set --subscription "Subscription Name"
-       az group deployment create --resource-group <ResourceGroupName> --template-file ./existingClusterOnboarding.json --parameters @./existingClusterParam.json
+       az deployment group create --resource-group <ResourceGroupName> --template-file ./existingClusterOnboarding.json --parameters @./existingClusterParam.json
        ```
 
        Le changement de configuration peut prendre quelques minutes. Lorsqu’il est terminé, un message similaire à celui-ci s’affiche avec les résultats :
@@ -310,7 +309,21 @@ La sortie doit ressembler à la suivante, qui indique que l’agent a été corr
 User@aksuser:~$ kubectl get ds omsagent --namespace=kube-system
 NAME       DESIRED   CURRENT   READY     UP-TO-DATE   AVAILABLE   NODE SELECTOR                 AGE
 omsagent   2         2         2         2            2           beta.kubernetes.io/os=linux   1d
-```  
+```
+
+S’il existe des nœuds Windows Server sur le cluster, vous pouvez exécuter la commande suivante pour vérifier que l’agent est correctement déployé.
+
+```
+kubectl get ds omsagent-win --namespace=kube-system
+```
+
+La sortie doit ressembler à la suivante, qui indique que l’agent a été correctement déployé :
+
+```output
+User@aksuser:~$ kubectl get ds omsagent-win --namespace=kube-system
+NAME                   DESIRED   CURRENT   READY     UP-TO-DATE   AVAILABLE   NODE SELECTOR                   AGE
+omsagent-win           2         2         2         2            2           beta.kubernetes.io/os=windows   1d
+```
 
 Pour vérifier le déploiement de la solution, exécutez la commande suivante :
 
@@ -328,23 +341,23 @@ omsagent   1         1         1            1            3h
 
 ### <a name="agent-version-earlier-than-06072018"></a>Versions de l’agent antérieures à la version 06072018
 
-Pour vérifier que la version de l’agent Log Analytics antérieure à la version *06072018* a été correctement déployée, exécutez la commande suivante :  
+Pour vérifier que la version de l’agent Log Analytics antérieure à la version *06072018* a été correctement déployée, exécutez la commande suivante :
 
 ```
 kubectl get ds omsagent --namespace=kube-system
 ```
 
-La sortie doit ressembler à la suivante, qui indique que l’agent a été correctement déployé :  
+La sortie doit ressembler à la suivante, qui indique que l’agent a été correctement déployé :
 
 ```output
 User@aksuser:~$ kubectl get ds omsagent --namespace=kube-system
 NAME       DESIRED   CURRENT   READY     UP-TO-DATE   AVAILABLE   NODE SELECTOR                 AGE
 omsagent   2         2         2         2            2           beta.kubernetes.io/os=linux   1d
-```  
+```
 
 ## <a name="view-configuration-with-cli"></a>Afficher la configuration avec l’interface de ligne de commande
 
-Utilisez la commande `aks show` pour obtenir des détails comme l’activation ou non de la solution, le resourceID de l’espace de travail Log Analytics, et un résumé détaillé du cluster.  
+Utilisez la commande `aks show` pour obtenir des détails comme l’activation ou non de la solution, le resourceID de l’espace de travail Log Analytics, et un résumé détaillé du cluster.
 
 ```azurecli
 az aks show -g <resourceGroupofAKSCluster> -n <nameofAksCluster>

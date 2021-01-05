@@ -1,0 +1,116 @@
+### YamlMime:Landing
+title: Documentation Azure Purview
+summary: Découvrez comment utiliser Azure Purview pour permettre à votre organisation de rechercher, comprendre et consommer des sources de données.
+metadata:
+  title: Documentation Azure Purview
+  description: Découvrez comment utiliser Azure Purview pour permettre à votre organisation de rechercher, comprendre et consommer des sources de données. Des tutoriels, des informations de référence sur les API REST et autre documentation vous montrent comment planifier et configurer un référentiel de données dans lequel les consommateurs de données peuvent découvrir les sources de données disponibles et accéder aux connaissances fournies par des experts en la matière.
+  ms.service: purview
+  ms.topic: landing-page
+  author: hrasheed-msft
+  ms.author: hrasheed
+  ms.date: 11/29/2020
+  ms.openlocfilehash: 378a335653acf31275c312bcf4fa53b36bfa614e
+  ms.sourcegitcommit: 65db02799b1f685e7eaa7e0ecf38f03866c33ad1
+  ms.translationtype: HT
+  ms.contentlocale: fr-FR
+  ms.lasthandoff: 12/03/2020
+  ms.locfileid: "96549434"
+landingContent:
+- title: À propos d’Azure Purview
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Qu’est-ce qu’Azure Purview ?
+      url: overview.md
+  - linkListType: concept
+    links:
+    - text: Bonnes pratiques de déploiement
+      url: deployment-best-practices.md
+    - text: Autorisations de catalogue de données
+      url: catalog-permissions.md
+    - text: Sources de données et types de fichiers pris en charge
+      url: sources-and-scans.md
+- title: Bien démarrer
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: Créer un compte Purview - Portail
+      url: create-catalog-portal.md
+    - text: Créer un compte Purview - PowerShell/CLI
+      url: create-catalog-powershell.md
+  - linkListType: tutorial
+    links:
+    - text: Télécharger le starter kit
+      url: https://download.microsoft.com/download/9/7/9/979db3b1-0916-4997-a7fb-24e3d8f83174/PurviewStarterKitV4.zip
+    - text: Exécuter le starter kit et analyser les données
+      url: tutorial-scan-data.md
+    - text: Parcourir la page d’accueil Purview et rechercher
+      url: tutorial-asset-search.md
+    - text: Parcourir les éléments et afficher la traçabilité
+      url: tutorial-browse-and-view-lineage.md
+    - text: Explorer les jeux de ressources, les éléments, les schémas, les classifications
+      url: tutorial-schemas-and-classifications.md
+    - text: Créer des termes de glossaire
+      url: tutorial-import-create-glossary-terms.md
+- title: Analyser les sources de données Azure
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: Exécuter le starter kit et analyser les données
+      url: tutorial-scan-data.md
+  - linkListType: how-to-guide
+    links:
+    - text: Analyser Azure SQL Database
+      url: register-scan-azure-sql-database.md
+    - text: Analyser Azure Data Lake Storage Gen 2
+      url: register-scan-adls-gen2.md
+    - text: Analyser Azure Cosmos DB
+      url: register-scan-azure-cosmos-database.md
+    - text: Locataire Power BI
+      url: register-scan-power-bi-tenant.md
+    - text: Inscrire et analyser Stockage Blob Azure
+      url: register-scan-azure-blob-storage-source.md
+- title: Analyser les sources de données non-Azure
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Analyser un serveur SQL local
+      url: register-scan-on-premises-sql-server.md
+- title: Comprendre votre patrimoine de données
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Afficher des insights sur les éléments
+      url: asset-insights.md
+    - text: Afficher des insights sur les glossaires
+      url: glossary-insights.md
+    - text: Afficher des insights sur les analyses
+      url: scan-insights.md
+    - text: Afficher des insights sur les classifications
+      url: classification-insights.md
+- title: Organiser les données
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: Jeux de ressources, éléments, schémas, classifications
+      url: tutorial-schemas-and-classifications.md
+    - text: Termes de glossaire
+      url: tutorial-import-create-glossary-terms.md
+  - linkListType: how-to-guide
+    links:
+    - text: Créer, modifier et supprimer des classifications et des règles personnalisées
+      url: create-a-custom-classification-and-classification-rule.md
+    - text: Créer, importer et exporter un glossaire
+      url: how-to-create-import-export-glossary.md
+- title: Découvrir des données
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: Parcourir et tracer
+      url: tutorial-browse-and-view-lineage.md
+  - linkListType: how-to-guide
+    links:
+    - text: Parcourir par type d’élément
+      url: how-to-browse-catalog.md
+    - text: Rechercher des éléments, des termes, des annotations et des contacts
+      url: how-to-search-catalog.md

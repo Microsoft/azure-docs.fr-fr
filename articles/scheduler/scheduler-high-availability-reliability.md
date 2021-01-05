@@ -8,12 +8,12 @@ ms.author: deli
 ms.reviewer: klam, estfan
 ms.topic: article
 ms.date: 08/16/2016
-ms.openlocfilehash: 20c2054e168a9b17d9b4ab159cfefbf607ab6d11
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 98a6672af7e74fdd0732f3ba03264d2f674eb44f
+ms.sourcegitcommit: 28c5fdc3828316f45f7c20fc4de4b2c05a1c5548
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78898557"
+ms.lasthandoff: 10/22/2020
+ms.locfileid: "92368143"
 ---
 # <a name="high-availability-and-reliability-for-azure-scheduler"></a>Haute disponibilité et fiabilité pour Azure Scheluler
 
@@ -22,7 +22,7 @@ ms.locfileid: "78898557"
 >
 > Scheduler n’est plus disponible dans le portail Azure, mais l’[API REST](/rest/api/scheduler) et les [applets de commande Azure Scheduler PowerShell](scheduler-powershell-reference.md) restent disponibles pour vous permettre de gérer vos travaux et collections de travaux.
 
-Azure Scheduler assure à la fois la [haute disponibilité](https://docs.microsoft.com/azure/architecture/framework/#resiliency) et la fiabilité pour vos travaux. Pour plus d’informations, consultez [Contrat SLA pour Scheduler](https://azure.microsoft.com/support/legal/sla/scheduler).
+Azure Scheduler assure à la fois la [haute disponibilité](/azure/architecture/framework/#resiliency) et la fiabilité pour vos travaux. Pour plus d’informations, consultez [Contrat SLA pour Scheduler](https://azure.microsoft.com/support/legal/sla/scheduler).
 
 ## <a name="high-availability"></a>Haute disponibilité
 

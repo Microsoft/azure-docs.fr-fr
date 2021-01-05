@@ -12,6 +12,8 @@
       href: quick-create-powershell.md
     - name: Créer un réseau virtuel - Azure CLI
       href: quick-create-cli.md
+    - name: Créer un réseau virtuel - Modèle ARM
+      href: quick-create-template.md
   expanded: true
 - name: Tutoriels
   items:
@@ -35,11 +37,10 @@
       href: powershell-samples.md
     - name: Modèles Resource Manager
       href: template-samples.md
-    - name: Éléments intégrés Azure Policy
-      displayName: 'samples, policies, definitions'
-      href: ./policy-samples.md
 - name: Concepts
   items:
+    - name: Concepts et bonnes pratiques
+      href: concepts-and-best-practices.md
     - name: Continuité de l’activité
       href: virtual-network-disaster-recovery-guidance.md
     - name: Connectivité
@@ -72,16 +73,24 @@
           href: ../expressroute/cross-network-connectivity.md?toc=%2fazure%2fvirtual-network%2ftoc.json
         - name: Peering
           href: virtual-network-peering-overview.md
-    - name: Intégration aux services Azure
+    - name: Intégrer les services Azure
       items:
-        - name: Points de terminaison de service
-          href: virtual-network-service-endpoints-overview.md
+        - name: Vue d’ensemble
+          href: vnet-integration-for-azure-services.md
         - name: Déployer un service dédié
           href: virtual-network-for-azure-services.md
+        - name: Liaison privée
+          href: ../private-link/private-link-overview.md?toc=%2fazure%2fvirtual-network%2ftoc.json
+        - name: Points de terminaison de service
+          href: virtual-network-service-endpoints-overview.md
+        - name: Balises de service
+          href: service-tags-overview.md
     - name: Services IP
       items:
-        - name: Adressage IP
-          href: virtual-network-ip-addresses-overview-arm.md
+        - name: Adresses IP publiques
+          href: public-ip-addresses.md
+        - name: Adresses IP privées
+          href: private-ip-addresses.md
         - name: Préfixe d’adresse IP publique
           href: public-ip-address-prefix.md
         - name: IPv6 pour les réseaux virtuels Azure
@@ -90,10 +99,22 @@
           href: ipv6-public-ip-address-prefix.md
         - name: Préférence de routage
           href: routing-preference-overview.md
+        - name: Base de référence de sécurité pour les adresses IP publiques
+          href: public-ip-security-baseline.md
     - name: Sécurité
       items:
+        - name: Base de référence de la sécurité des réseaux virtuels
+          href: security-baseline.md
+        - name: Base de référence de la sécurité des réseaux virtuels NAT
+          href: nat-security-baseline.md
+        - name: Isolement réseau des services Azure
+          href: vnet-integration-for-azure-services.md
         - name: Groupes de sécurité réseau
-          href: security-overview.md
+          items:
+            - name: Vue d’ensemble
+              href: network-security-groups-overview.md
+            - name: Fonctionnement
+              href: network-security-group-how-it-works.md
         - name: Groupes de sécurité d’application
           href: application-security-groups.md
         - name: Balises de service
@@ -103,9 +124,12 @@
         - name: Stratégies de réseau Kubernetes
           href: kubernetes-network-policies.md
         - name: Protection DDoS
-          href: ddos-protection-overview.md
+          href: 'https://docs.microsoft.com/azure/ddos-protection/ddos-protection-overview'
         - name: TAP de réseau virtuel
           href: virtual-network-tap-overview.md
+        - name: Contrôles de sécurité par Azure Policy
+          displayName: 'regulatory, compliance, standards, domains'
+          href: ./security-controls-policy.md
     - name: Sous-réseaux
       items:
         - name: Extension de sous-réseau
@@ -218,10 +242,18 @@
               href: ipv6-reserve-public-ip-address-prefix.md
         - name: Adressage IP
           items:
+            - name: Créer des adresses IP publiques - portail
+              href: create-public-ip-portal.md
+            - name: Créer des adresses IP publiques - PowerShell
+              href: create-public-ip-powershell.md
+            - name: Créer des adresses IP publiques - Azure CLI
+              href: create-public-ip-cli.md
             - name: Gérer des adresses IP publiques
               href: virtual-network-public-ip-address.md
             - name: Gérer un préfixe IP public
               href: manage-public-ip-address-prefix.md
+            - name: Mettre à niveau des adresses IP publiques
+              href: virtual-network-public-ip-address-upgrade.md
             - name: Ajouter ou supprimer une adresse IP dans des cartes réseau
               href: virtual-network-network-interface-addresses.md
             - name: Préférence de routage
@@ -279,9 +311,9 @@
                 - name: Azure CLI
                   href: virtual-network-service-endpoint-policies-cli.md
         - name: Gérer la protection DDoS
-          href: manage-ddos-protection.md
+          href: 'https://docs.microsoft.com/azure/ddos-protection/manage-ddos-protection'
         - name: Intégrer des partenaires à DDoS Protection Standard
-          href: ddos-protection-partner-onboarding.md
+          href: 'https://docs.microsoft.com/azure/ddos-protection/ddos-protection-partner-onboarding'
         - name: Gérer des groupes de sécurité réseau
           href: manage-network-security-group.md
         - name: Scénarios de sécurité
@@ -424,6 +456,9 @@
       href: /azure/templates/microsoft.network/allversions
     - name: Exemples de code
       href: 'https://azure.microsoft.com/resources/samples/?service=virtual-network'
+    - name: Éléments intégrés Azure Policy
+      displayName: 'samples, policies, definitions'
+      href: ./policy-reference.md
 - name: Ressources
   items:
     - name: Développer vos compétences avec Microsoft Learn

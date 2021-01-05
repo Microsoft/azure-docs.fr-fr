@@ -1,16 +1,20 @@
 ---
 title: Points de terminaison et régions de publication – LUIS
 description: La région spécifiée sur le portail Azure est la même que celle dans laquelle vous allez publier l'application LUIS, et une URL de point de terminaison est générée pour cette même région.
+ms.service: cognitive-services
+ms.subservice: language-understanding
 ms.topic: reference
-ms.date: 11/19/2019
-ms.openlocfilehash: 680887ecda0843bf770c62a4b9a4d88305ea9e73
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.date: 11/09/2020
+ms.openlocfilehash: 5f65c5e1e1c8d306a70be3fdd7a07f18f8ebbd9f
+ms.sourcegitcommit: 1bdcaca5978c3a4929cccbc8dc42fc0c93ca7b30
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83590908"
+ms.lasthandoff: 12/13/2020
+ms.locfileid: "97368645"
 ---
 # <a name="authoring-and-publishing-regions-and-the-associated-keys"></a>Création et la publication de régions et des clés associées
+
+[!INCLUDE [LUIS Free account](includes/luis-portal-note.md)]
 
 Trois régions création sont prises en charge par les portails LUIS correspondants. Pour publier une application LUIS dans plusieurs régions, vous avez besoin d’au moins une clé par région.
 
@@ -21,11 +25,11 @@ Il existe trois portails de création LUIS, en fonction de la région. Vous deve
 
 |LUIS|Région de création|Nom de la région Azure|
 |--|--|--|
-|[www.luis.ai][www.luis.ai] <br>[previous.luis.ai](https://previous.luis.ai)|États-Unis<br>pas l’Europe<br>pas l’Australie| `westus`|
-|[au.luis.ai][au.luis.ai] <br>[previous.au.luis.ai](https://previous.au.luis.ai)|Australie| `australiaeast`|
-|[eu.luis.ai][eu.luis.ai] <br>[previous.eu.luis.ai](https://previous.eu.luis.ai)|Europe|`westeurope`|
+|[www.luis.ai][www.luis.ai] |États-Unis<br>pas l’Europe<br>pas l’Australie| `westus`|
+|[au.luis.ai][au.luis.ai] |Australie| `australiaeast`|
+|[eu.luis.ai][eu.luis.ai] |Europe|`westeurope`|
 
-Les régions de création ont [des régions de basculement jumelées](https://docs.microsoft.com/azure/best-practices-availability-paired-regions).
+Les régions de création ont [des régions de basculement jumelées](../../best-practices-availability-paired-regions.md).
 
 <a name="regions-and-azure-resources"></a>
 
@@ -100,7 +104,7 @@ Découvrez-en plus sur les [points de terminaison de création et de prédiction
 
 Chaque région a une région secondaire vers laquelle basculer. L’Europe bascule à l’intérieur de l’Europe et l’Australie à l’intérieur de l’Australie.
 
-Les régions de création ont [des régions de basculement jumelées](https://docs.microsoft.com/azure/best-practices-availability-paired-regions).
+Les régions de création ont [des régions de basculement jumelées](../../best-practices-availability-paired-regions.md).
 
 ## <a name="next-steps"></a>Étapes suivantes
 

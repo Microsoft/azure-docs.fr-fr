@@ -5,15 +5,15 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
+ms.topic: how-to
 ms.custom: hdinsightactive,hdiseo17may2017
 ms.date: 12/12/2019
-ms.openlocfilehash: 58f7d99af638c8d03bbce46b7fcf8204aaca11d9
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: cc0918f3d9739a214e682d7faa460b6cc519cb0b
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75435747"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86207840"
 ---
 # <a name="run-the-mapreduce-examples-included-in-hdinsight"></a>Exécuter les exemples MapReduce inclus dans HDInsight
 
@@ -107,10 +107,12 @@ Les exemples suivants sont contenus dans cette archive :
 
     Cette commande concatène tous les fichiers de sortie générés par le travail. Elle affiche la sortie dans la console. Le résultat ressemble au texte suivant :
 
-        zum     1
-        zur     1
-        zwanzig 1
-        zweite  1
+    ```output
+    zum     1
+    zur     1
+    zwanzig 1
+    zweite  1
+    ```
 
     Chaque ligne représente un mot et le nombre d’occurrences dans les données d’entrée.
 
@@ -124,15 +126,17 @@ Les exemples suivants sont contenus dans cette archive :
 
 La façon de construire des puzzles Sudoku est particulière dans la mesure où vous ne pouvez pas répéter un nombre dans une colonne ou une ligne. Il existe un exemple sur le cluster HDInsight qui est construit correctement. Il se trouve dans `/usr/hdp/*/hadoop/src/hadoop-mapreduce-project/hadoop-mapreduce-examples/src/main/java/org/apache/hadoop/examples/dancing/puzzle1.dta` et contient le texte suivant :
 
-    8 5 ? 3 9 ? ? ? ?
-    ? ? 2 ? ? ? ? ? ?
-    ? ? 6 ? 1 ? ? ? 2
-    ? ? 4 ? ? 3 ? 5 9
-    ? ? 8 9 ? 1 4 ? ?
-    3 2 ? 4 ? ? 8 ? ?
-    9 ? ? ? 8 ? 5 ? ?
-    ? ? ? ? ? ? 2 ? ?
-    ? ? ? ? 4 5 ? 7 8
+```output
+8 5 ? 3 9 ? ? ? ?
+? ? 2 ? ? ? ? ? ?
+? ? 6 ? 1 ? ? ? 2
+? ? 4 ? ? 3 ? 5 9
+? ? 8 9 ? 1 4 ? ?
+3 2 ? 4 ? ? 8 ? ?
+9 ? ? ? 8 ? 5 ? ?
+? ? ? ? ? ? 2 ? ?
+? ? ? ? 4 5 ? 7 8
+```
 
 Pour exécuter cet exemple de problème dans l’exemple de Sudoku, utilisez la commande suivante :
 
@@ -142,15 +146,17 @@ yarn jar /usr/hdp/current/hadoop-mapreduce-client/hadoop-mapreduce-examples.jar 
 
 Les résultats sont les suivants :
 
-    8 5 1 3 9 2 6 4 7
-    4 3 2 6 7 8 1 9 5
-    7 9 6 5 1 4 3 8 2
-    6 1 4 8 2 3 7 5 9
-    5 7 8 9 6 1 4 2 3
-    3 2 9 4 5 7 8 1 6
-    9 4 7 2 8 6 5 3 1
-    1 8 5 7 3 9 2 6 4
-    2 6 3 1 4 5 9 7 8
+```output
+8 5 1 3 9 2 6 4 7
+4 3 2 6 7 8 1 9 5
+7 9 6 5 1 4 3 8 2
+6 1 4 8 2 3 7 5 9
+5 7 8 9 6 1 4 2 3
+3 2 9 4 5 7 8 1 6
+9 4 7 2 8 6 5 3 1
+1 8 5 7 3 9 2 6 4
+2 6 3 1 4 5 9 7 8
+```
 
 ## <a name="pi--example"></a>Exemple de Pi (π)
 

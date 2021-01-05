@@ -1,23 +1,23 @@
 ---
 title: Créer une machine virtuelle avec une adresse IP publique statique - PowerShell | Microsoft Docs
-description: Découvrez comment créer une machine virtuelle avec une adresse IP publique statique à l’aide de PowerShell.
+description: Créer une machine virtuelle avec une adresse IP publique statique à l’aide de PowerShell Les adresses IP publiques statiques sont des adresses qui ne changent jamais.
 services: virtual-network
 documentationcenter: na
 author: asudbring
 manager: KumudD
 ms.service: virtual-network
 ms.subservice: ip-services
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 08/08/2018
 ms.author: allensu
-ms.openlocfilehash: a7b1e7471f7850f71596317c7e2c38db367bfd3a
-ms.sourcegitcommit: e0330ef620103256d39ca1426f09dd5bb39cd075
+ms.openlocfilehash: 3ca83836771af8448f6510ab27d0ac5f2973b35c
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82790097"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87287706"
 ---
 # <a name="create-a-virtual-machine-with-a-static-public-ip-address-using-powershell"></a>Créer une machine virtuelle avec une adresse IP publique statique à l’aide de PowerShell
 

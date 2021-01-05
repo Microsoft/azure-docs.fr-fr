@@ -4,12 +4,12 @@ ms.service: azure-functions
 ms.topic: include
 ms.date: 09/23/2019
 ms.author: glenga
-ms.openlocfilehash: 8530f4469a0c25f3c32e652e2b0752c51c28ff3f
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: 9b3859d854b3900cc30eda6a95b8425da6763e59
+ms.sourcegitcommit: 2a8a53e5438596f99537f7279619258e9ecb357a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "78191022"
+ms.lasthandoff: 11/06/2020
+ms.locfileid: "94341096"
 ---
 Les attributs de liaison sont définis directement dans le fichier function.json. Selon le type de liaison, des propriétés supplémentaires peuvent être requises. La [configuration de la sortie de la file d’attente](../articles/azure-functions/functions-bindings-storage-queue-output.md#configuration) décrit les champs requis pour une liaison de file d’attente Stockage Azure. L’extension vous permet d’ajouter facilement des liaisons au fichier function.json. 
 
@@ -25,4 +25,4 @@ Pour créer une liaison, cliquez avec le bouton droit (Ctrl+Clic sur macOS) sur 
 
 Une liaison est ajoutée au tableau `bindings` dans votre fichier function.json, qui doit ressembler à ce qui suit :
 
-:::code language="son" source="~/functions-docs-javascript/functions-add-output-binding-storage-queue-cli/HttpExample/function.json" range="18-24":::
+:::code language="json" source="~/functions-docs-javascript/functions-add-output-binding-storage-queue-cli/HttpExample/function.json" range="18-24":::

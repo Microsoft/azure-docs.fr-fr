@@ -6,12 +6,12 @@ ms.suite: integration
 ms.reviewer: klam, logicappspm
 ms.topic: article
 ms.date: 06/20/2019
-ms.openlocfilehash: 2e27958dd9379a26ca7e7f4d7e427e5afa216e29
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 1758cca902eb77ffc66824cb56b8add9446fabf9
+ms.sourcegitcommit: 003ac3b45abcdb05dc4406661aca067ece84389f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75981162"
+ms.lasthandoff: 12/07/2020
+ms.locfileid: "96749145"
 ---
 # <a name="build-your-first-serverless-app-by-using-azure-logic-apps-and-azure-functions-in-visual-studio"></a>Créer votre première application serverless (sans serveur) avec Azure Logic Apps et Azure Functions dans Visual Studio
 
@@ -32,7 +32,7 @@ Pour créer une application serverless dans Visual Studio, vous avez besoin des 
     > Quand vous installez Visual Studio 2019 ou 2017, veillez à sélectionner la charge de travail **Développement Azure**.
 
   * [Kit de développement logiciel Microsoft Azure SDK pour .NET (version 2.9.1 ou ultérieure)](https://azure.microsoft.com/downloads/). 
-  En savoir plus sur [Azure SDK pour .NET](https://docs.microsoft.com/dotnet/azure/dotnet-tools?view=azure-dotnet).
+  En savoir plus sur [Azure SDK pour .NET](/dotnet/azure/intro).
 
   * [Azure PowerShell](https://github.com/Azure/azure-powershell#installation).
 
@@ -44,7 +44,7 @@ Pour créer une application serverless dans Visual Studio, vous avez besoin des 
 
     * [Visual Studio 2015](https://aka.ms/download-azure-logic-apps-tools-visual-studio-2015)
   
-    Vous pouvez télécharger et installer les outils Azure Logic Apps directement à partir de Visual Studio Marketplace ou en apprendre davantage sur [l’installation de cette extension dans Visual Studio](https://docs.microsoft.com/visualstudio/ide/finding-and-using-visual-studio-extensions). 
+    Vous pouvez télécharger et installer les outils Azure Logic Apps directement à partir de Visual Studio Marketplace ou en apprendre davantage sur [l’installation de cette extension dans Visual Studio](/visualstudio/ide/finding-and-using-visual-studio-extensions). 
     Veillez à redémarrer Visual Studio après l’installation.
 
   * [Azure Functions Core Tools](https://www.npmjs.com/package/azure-functions-core-tools) pour déboguer Functions localement.
@@ -136,7 +136,7 @@ Pour modifier votre application logique après le déploiement, ouvrez-la à l�
 
 ## <a name="create-your-azure-functions-project"></a>Créer votre projet Azure Functions
 
-Si vous voulez créer votre projet et fonction Functions avec JavaScript, Python, F#, PowerShell, Batch ou Bash, suivez les étapes décrites dans [Utiliser Azure Functions Core Tools](../azure-functions/functions-run-local.md). Pour développer votre fonction Azure avec C# à l’intérieur de votre solution, utilisez une bibliothèque de classes C# en suivant les étapes décrites dans [Publier une bibliothèque de classes .NET comme application de fonction](https://blogs.msdn.microsoft.com/appserviceteam/2017/03/16/publishing-a-net-class-library-as-a-function-app/).
+Si vous voulez créer votre projet et fonction Functions avec JavaScript, Python, F#, PowerShell, Batch ou Bash, suivez les étapes décrites dans [Utiliser Azure Functions Core Tools](../azure-functions/functions-run-local.md). Pour développer votre fonction Azure avec C# à l’intérieur de votre solution, utilisez une bibliothèque de classes C# en suivant les étapes décrites dans [Publier une bibliothèque de classes .NET comme application de fonction](https://azure.microsoft.com/blog/).
 
 ## <a name="deploy-functions-from-visual-studio"></a>Déployer des fonctions depuis Visual Studio
 

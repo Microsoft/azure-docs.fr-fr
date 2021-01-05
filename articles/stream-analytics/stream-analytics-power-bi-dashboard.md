@@ -5,18 +5,18 @@ author: jseb225
 ms.author: jeanb
 ms.reviewer: mamccrea
 ms.service: stream-analytics
-ms.topic: conceptual
-ms.date: 03/05/2019
-ms.openlocfilehash: 8466fbcb4325dc244551a3b84fc20581366b7071
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.topic: how-to
+ms.date: 11/16/2020
+ms.openlocfilehash: 4e3f31442c5fa645e27a640d8facf86aed20aa75
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78851152"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96006693"
 ---
 # <a name="stream-analytics-and-power-bi-a-real-time-analytics-dashboard-for-streaming-data"></a>Stream Analytics et Power BI : Tableau de bord d’analytique en temps réel des données de streaming
 
-Azure Stream Analytics vous permet de tirer parti de [Microsoft Power BI](https://powerbi.com/), l’un des principaux outils d’analyse décisionnelle. Dans cet article, vous allez découvrir comment créer des outils d’analyse décisionnelle en utilisant Power BI comme sortie pour vos travaux Azure Stream Analytics. Vous allez également découvrir comment créer et utiliser un tableau de bord en temps réel.
+Azure Stream Analytics vous permet de tirer parti de [Microsoft Power BI](https://powerbi.com/), l’un des principaux outils d’analyse décisionnelle. Dans cet article, vous allez découvrir comment créer des outils d’analyse décisionnelle en utilisant Power BI comme sortie pour vos travaux Azure Stream Analytics. Vous découvrez aussi comment créer et utiliser un tableau de bord temps réel mis à jour en continu par le travail Stream Analytics.
 
 Cet article est la suite du didacticiel [Détection des fraudes en temps réel](stream-analytics-real-time-fraud-detection.md) de Stream Analytics. Il s’appuie sur le flux de travail créé dans ce didacticiel et ajoute une sortie Power BI afin que vous puissiez visualiser les appels téléphoniques frauduleux qui sont détectés par un travail Stream Analytics. 
 
@@ -39,7 +39,10 @@ Dans le didacticiel de détection des fraudes en temps réel, la sortie est envo
 
 2. Dans le menu de gauche, sélectionnez **Sorties** sous **Topologie de la tâche**. Ensuite, sélectionnez **+ Ajouter** et choisissez **Power BI** dans le menu déroulant.
 
-3. Sélectionnez **+ Ajouter** > **Power BI**. Remplissez ensuite le formulaire avec les détails suivants, puis sélectionnez **Autoriser** :
+3. Sélectionnez **+ Ajouter** > **Power BI**. Remplissez ensuite le formulaire avec les informations suivantes et sélectionnez **Autoriser** pour utiliser votre propre identité d’utilisateur pour vous connecter à Power BI (le jeton est valide pendant 90 jours). 
+
+>[!NOTE]
+>En ce qui concerne les travaux de production, nous vous recommandons de vous connecter pour [utiliser l’identité managée pour authentifier votre travail Azure Stream Analytics vers Power BI](./powerbi-output-managed-identity.md).
 
    |**Paramètre**  |**Valeur suggérée**  |
    |---------|---------|
@@ -61,11 +64,11 @@ Dans le didacticiel de détection des fraudes en temps réel, la sortie est envo
 Le jeu de données est créé avec les paramètres suivants :
 
 * **defaultRetentionPolicy : BasicFIFO** : Les données sont de type « premier entré, premier sorti » (FIFO), avec un maximum de 200 000 lignes.
-* **defaultMode : pushStreaming** : Le jeu de données prend en charge les vignettes de streaming et les visuels basés sur des rapports standard, également appelés « envoi (push) ».
+* **defaultMode : hybrid** : le jeu de données prend en charge les vignettes de streaming, également appelées « push », et les visuels basés sur des rapports traditionnels. Pour le contenu de type push, les données sont mises à jour en continu, dans le cas présent à partir du travail Stream Analytics, sans qu’il soit nécessaire de planifier l’actualisation du côté Power BI.
 
 Pour le moment, vous ne pouvez pas créer de jeux de données avec d’autres indicateurs.
 
-Pour plus d’informations sur les jeux de données Power BI, consultez la référence [API REST Power BI](https://msdn.microsoft.com/library/mt203562.aspx).
+Pour plus d’informations sur les jeux de données Power BI, consultez la référence [API REST Power BI](/rest/api/power-bi/).
 
 
 ## <a name="write-the-query"></a>Écrire la requête
@@ -184,16 +187,6 @@ Le travail Stream Analytics commence par rechercher les appels frauduleux dans 
 
      ![Tableau de bord Power BI complété affichant deux vignettes pour les appels frauduleux](./media/stream-analytics-power-bi-dashboard/pbi-dashboard-fraudulent-calls-finished.png)
 
-
-## <a name="learn-more-about-power-bi"></a>En savoir plus sur Power BI
-
-Ce didacticiel montre comment créer quelques types de visualisations d’un jeu de données. Power BI peut vous aider à créer d’autres outils d’analyse décisionnelle clients pour votre organisation. Pour plus d’idées, consultez les ressources suivantes :
-
-* Pour un autre exemple de tableau de bord Power BI, visionnez la vidéo de [prise en main de Power BI](https://youtu.be/L-Z_6P56aas?t=1m58s) .
-* Pour plus d’informations sur la configuration d’une sortie de travail Stream Analytics vers Power BI ainsi que sur l’utilisation des groupes Power BI, passez en revue la section [Power BI](stream-analytics-define-outputs.md#power-bi) de l’article sur les [sorties Stream Analytics](stream-analytics-define-outputs.md). 
-* Pour plus d’informations sur l’utilisation de Power BI en général, consultez [Tableaux de bord dans Power BI](https://powerbi.microsoft.com/documentation/powerbi-service-dashboards/).
-
-
 ## <a name="learn-about-limitations-and-best-practices"></a>En savoir plus sur les limites et les meilleures pratiques
 Actuellement, Power BI peut être appelé environ une fois par seconde. Les éléments visuels de streaming prennent en charge des paquets de 15 Ko. Au-delà de cette taille, ils échouent (mais les transmissions de type push continuent de fonctionner). En raison de cette limite, Power BI s’applique naturellement dans les cas où Azure Stream Analytics débouche sur une réduction significative de la charge des données. Nous vous recommandons d’utiliser une fenêtre bascule ou une fenêtre récurrente pour vous assurer que la transmission de type push des données est effectuée au plus une fois par seconde et que votre requête respecte les exigences de débit.
 
@@ -228,18 +221,16 @@ L’équation est donc la suivante :
 ```
 
 ### <a name="renew-authorization"></a>Renouveler une autorisation
-Si le mot de passe a été modifié depuis la création ou la dernière authentification de votre travail, vous devez réauthentifier votre compte Power BI. Si Azure Multi-Factor Authentication est configuré sur votre client Azure Active Directory (Azure AD), vous devez également renouveler l’autorisation Power BI toutes les deux semaines. Si vous ne la renouvelez pas, vous pouvez observer des symptômes comme un manque de sortie du travail ou une `Authenticate user error` dans les journaux d’activité des opérations.
+Si le mot de passe a été modifié depuis la création ou la dernière authentification de votre travail, vous devez réauthentifier votre compte Power BI. Si Azure AD Multi-Factor Authentication est configuré sur votre locataire Azure Active Directory (Azure AD), vous devez également renouveler l’autorisation Power BI toutes les deux semaines. Si vous ne la renouvelez pas, vous pouvez observer des symptômes comme un manque de sortie du travail ou une `Authenticate user error` dans les journaux d’activité des opérations.
 
 De même, si un travail démarre après l’expiration du jeton, une erreur se produit et le travail échoue. Pour résoudre ce problème, arrêtez le travail en cours d’exécution et accédez à votre sortie Power BI. Pour éviter toute perte de données, sélectionnez le lien **Renouveler l’autorisation**, puis redémarrez votre travail depuis l’**heure du dernier arrêt**.
 
 Une fois que l’autorisation a été actualisée avec Power BI, une alerte verte apparaît dans la zone d’autorisation pour indiquer que le problème a été résolu.
 
-## <a name="get-help"></a>Obtenir de l’aide
-Pour obtenir une assistance, consultez le [forum Azure Stream Analytics](https://social.msdn.microsoft.com/Forums/azure/home?forum=AzureStreamAnalytics)
-
 ## <a name="next-steps"></a>Étapes suivantes
 * [Présentation d’Azure Stream Analytics](stream-analytics-introduction.md)
 * [Prise en main d'Azure Stream Analytics](stream-analytics-real-time-fraud-detection.md)
-* [Mise à l’échelle des travaux Azure Stream Analytics](stream-analytics-scale-jobs.md)
-* [Références sur le langage des requêtes Azure Stream Analytics](https://docs.microsoft.com/stream-analytics-query/stream-analytics-query-language-reference)
-* [Références sur l’API REST de gestion d’Azure Stream Analytics](https://msdn.microsoft.com/library/azure/dn835031.aspx)
+* [Sorties Stream Analytics](stream-analytics-define-outputs.md)
+* [Références sur le langage des requêtes Azure Stream Analytics](/stream-analytics-query/stream-analytics-query-language-reference)
+* [Références sur l’API REST de gestion d’Azure Stream Analytics](/rest/api/streamanalytics/)
+* [Utiliser des identités managées pour authentifier votre travail Azure Stream Analytics dans Power BI](./powerbi-output-managed-identity.md)

@@ -14,14 +14,17 @@ ms.devlang: na
 ms.topic: article
 ms.date: 03/18/2019
 ms.author: juliako
-ms.openlocfilehash: 6bc29c098bcf7ef1d1a2e2532a00c95f0ec7e927
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: c4b17fb5547c1522ec81369f2e362868a3f216a1
+ms.sourcegitcommit: ad677fdb81f1a2a83ce72fa4f8a3a871f712599f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "61244227"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97652991"
 ---
-# <a name="how-to-generate-thumbnails-using-media-encoder-standard-with-net"></a>Génération de miniatures à l’aide de Media Encoder Standard avec .NET 
+# <a name="how-to-generate-thumbnails-using-media-encoder-standard-with-net"></a>Génération de miniatures à l’aide de Media Encoder Standard avec .NET
+
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
 
 Vous pouvez utiliser Media Encoder Standard pour générer une ou plusieurs miniatures à partir de votre vidéo d’entrée au format de fichier d’image [JPEG](https://en.wikipedia.org/wiki/JPEG), [PNG](https://en.wikipedia.org/wiki/Portable_Network_Graphics) ou [BMP](https://en.wikipedia.org/wiki/BMP_file_format). Vous pouvez soumettre des tâches produisant uniquement des images ou vous pouvez combiner la génération de miniatures avec l’encodage. Cet article fournit quelques exemples de présélections de miniatures XML et JSON pour de tels scénarios. À la fin de l’article, vous trouverez un [exemple de code](#code_sample) qui montre comment utiliser le Kit de développement logiciel (SDK) Media Services pour .NET pour accomplir la tâche d’encodage.
 
@@ -282,7 +285,7 @@ Notez l’utilisation de la macro {Resolution} dans le nom de fichier. Elle donn
 Bien que tous les exemples précédents illustrent la façon de soumettre une tâche d’encodage qui génère uniquement des images, vous pouvez également combiner l’encodage audio/vidéo avec la génération de miniatures. La présélection JSON et XML suivante donne à **Media Encoder Standard** l’instruction de générer une miniature durant l’encodage.
 
 ### <a name="json-preset"></a><a id="json"></a>Présélection JSON
-Pour plus d’informations sur le schéma, consultez [cet](https://msdn.microsoft.com/library/mt269962.aspx) article.
+Pour plus d’informations sur le schéma, consultez [cet](./media-services-mes-schema.md) article.
 
 ```json
     {
@@ -347,9 +350,9 @@ Pour plus d’informations sur le schéma, consultez [cet](https://msdn.microsof
 ```
 
 ### <a name="xml-preset"></a><a id="xml"></a>Présélection XML
-Pour plus d’informations sur le schéma, consultez [cet](https://msdn.microsoft.com/library/mt269962.aspx) article.
+Pour plus d’informations sur le schéma, consultez [cet](./media-services-mes-schema.md) article.
 
-```csharp
+```xml
     <?xml version="1.0" encoding="utf-16"?>
     <Preset xmlns:xsd="https://www.w3.org/2001/XMLSchema" xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance" Version="1.0" xmlns="https://www.windowsazure.com/media/encoding/Preset/2014/03">
       <Encoding>
@@ -408,9 +411,12 @@ Le code suivant utilise le Kit de développement logiciel (SDK) .NET de Media Se
 * Création d’une tâche d’encodage.
 * Obtention d’une référence à l’encodeur Media Encoder Standard.
 * Chargez le contenu [XML](media-services-dotnet-generate-thumbnail-with-mes.md#xml) ou [JSON](media-services-dotnet-generate-thumbnail-with-mes.md#json) comprenant l’encodage prédéfini, ainsi que les informations nécessaires pour générer des miniatures. Vous pouvez enregistrer le contenu [XML](media-services-dotnet-generate-thumbnail-with-mes.md#xml) ou [JSON](media-services-dotnet-generate-thumbnail-with-mes.md#json) dans un fichier, et utiliser le code suivant pour charger le fichier.
-  
-        // Load the XML (or JSON) from the local file.
-        string configuration = File.ReadAllText(fileName);  
+
+    ```csharp
+    // Load the XML (or JSON) from the local file.
+    string configuration = File.ReadAllText(fileName);  
+    ```
+
 * Ajout d’une tâche d’encodage unique. 
 * Spécification de l’élément multimédia d’entrée à encoder.
 * Création d’un élément multimédia de sortie qui contient l’élément multimédia encodé.
@@ -573,4 +579,3 @@ Vous pouvez vérifier la [progression du travail](media-services-check-job-progr
 
 ## <a name="see-also"></a>Voir aussi
 [Vue d’ensemble de l’encodage de Media Services](media-services-encode-asset.md)
-

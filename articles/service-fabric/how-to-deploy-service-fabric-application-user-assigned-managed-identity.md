@@ -3,12 +3,12 @@ title: Déployer une application avec une identité managée affectée par l’u
 description: Cet article explique comment déployer une application Service Fabric avec une identité managée attribuée par l’utilisateur
 ms.topic: article
 ms.date: 12/09/2019
-ms.openlocfilehash: 9aef81db7a455b72c83cf96898a0c228f1c382fd
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: 79d8654733b580be96d59e78f31105077929ac78
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81415642"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86260083"
 ---
 # <a name="deploy-service-fabric-application-with-a-user-assigned-managed-identity"></a>Déployer une application Service Fabric avec une identité managée attribuée par l’utilisateur
 
@@ -23,40 +23,42 @@ Pour déployer une application Service Fabric avec une identité managée, l’a
 
 ## <a name="user-assigned-identity"></a>Identité attribuée par l’utilisateur
 
-Pour activer l’application avec une identité attribuée par l’utilisateur, ajoutez tout d’abord la propriété **identity** à la ressource d’application avec le type **userAssigned** et les identités attribuées par l’utilisateur référencées. Ajoutez ensuite une section **managedIdentities** dans la section **properties** de la ressource **application** qui contient une liste de noms conviviaux pour le mappage de principalId de chacune des identités attribuées par l’utilisateur. Pour plus d’informations sur les identités attribuées par l’utilisateur, consultez [Créer, lister ou supprimer une identité managée attribuée par l’utilisateur](https://docs.microsoft.com/azure/active-directory/managed-identities-azure-resources/how-to-manage-ua-identity-powershell).
+Pour activer l’application avec une identité attribuée par l’utilisateur, ajoutez tout d’abord la propriété **identity** à la ressource d’application avec le type **userAssigned** et les identités attribuées par l’utilisateur référencées. Ajoutez ensuite une section **managedIdentities** dans la section **properties** de la ressource **application** qui contient une liste de noms conviviaux pour le mappage de principalId de chacune des identités attribuées par l’utilisateur. Pour plus d’informations sur les identités attribuées par l’utilisateur, consultez [Créer, lister ou supprimer une identité managée attribuée par l’utilisateur](../active-directory/managed-identities-azure-resources/how-to-manage-ua-identity-powershell.md).
 
 ### <a name="application-template"></a>Modèle d’application
 
 Pour activer l’application avec l’identité attribuée par l’utilisateur, ajoutez tout d’abord la propriété **identity** à la ressource d’application avec le type **userAssigned** et les identités attribuées par l’utilisateur référencées, puis ajoutez un objet **managedIdentities** dans la section **properties** qui contient une liste de noms conviviaux pour le mappage de principalId de chacune des identités attribuées par l’utilisateur.
 
-    {
-      "apiVersion": "2019-06-01-preview",
-      "type": "Microsoft.ServiceFabric/clusters/applications",
-      "name": "[concat(parameters('clusterName'), '/', parameters('applicationName'))]",
-      "location": "[resourceGroup().location]",
-      "dependsOn": [
-        "[concat('Microsoft.ServiceFabric/clusters/', parameters('clusterName'), '/applicationTypes/', parameters('applicationTypeName'), '/versions/', parameters('applicationTypeVersion'))]",
-        "[resourceId('Microsoft.ManagedIdentity/userAssignedIdentities/', parameters('userAssignedIdentityName'))]"
-      ],
-      "identity": {
-        "type" : "userAssigned",
-        "userAssignedIdentities": {
-            "[resourceId('Microsoft.ManagedIdentity/userAssignedIdentities/', parameters('userAssignedIdentityName'))]": {}
-        }
-      },
-      "properties": {
-        "typeName": "[parameters('applicationTypeName')]",
-        "typeVersion": "[parameters('applicationTypeVersion')]",
-        "parameters": {
-        },
-        "managedIdentities": [
-          {
-            "name" : "[parameters('userAssignedIdentityName')]",
-            "principalId" : "[reference(resourceId('Microsoft.ManagedIdentity/userAssignedIdentities/', parameters('userAssignedIdentityName')), '2018-11-30').principalId]"
-          }
-        ]
-      }
+```json
+{
+  "apiVersion": "2019-06-01-preview",
+  "type": "Microsoft.ServiceFabric/clusters/applications",
+  "name": "[concat(parameters('clusterName'), '/', parameters('applicationName'))]",
+  "location": "[resourceGroup().location]",
+  "dependsOn": [
+    "[concat('Microsoft.ServiceFabric/clusters/', parameters('clusterName'), '/applicationTypes/', parameters('applicationTypeName'), '/versions/', parameters('applicationTypeVersion'))]",
+    "[resourceId('Microsoft.ManagedIdentity/userAssignedIdentities/', parameters('userAssignedIdentityName'))]"
+  ],
+  "identity": {
+    "type" : "userAssigned",
+    "userAssignedIdentities": {
+        "[resourceId('Microsoft.ManagedIdentity/userAssignedIdentities/', parameters('userAssignedIdentityName'))]": {}
     }
+  },
+  "properties": {
+    "typeName": "[parameters('applicationTypeName')]",
+    "typeVersion": "[parameters('applicationTypeVersion')]",
+    "parameters": {
+    },
+    "managedIdentities": [
+      {
+        "name" : "[parameters('userAssignedIdentityName')]",
+        "principalId" : "[reference(resourceId('Microsoft.ManagedIdentity/userAssignedIdentities/', parameters('userAssignedIdentityName')), '2018-11-30').principalId]"
+      }
+    ]
+  }
+}
+```
 
 Dans l’exemple ci-dessus, le nom de ressource de l’identité attribuée par l’utilisateur est utilisé comme nom convivial de l’identité managée pour l’application. Les exemples suivants supposent que le nom convivial réel est « AdminUser ».
 

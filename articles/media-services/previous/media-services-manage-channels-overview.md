@@ -14,17 +14,19 @@ ms.devlang: ne
 ms.topic: article
 ms.date: 03/18/2019
 ms.author: juliako
-ms.openlocfilehash: f875b4a5c4f1322f4a992dc3738ab1ce6431149d
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: f2e899a9d98d43f826bfa63e62458adf1601f071
+ms.sourcegitcommit: 4f4a2b16ff3a76e5d39e3fcf295bca19cff43540
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81641125"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93042983"
 ---
 # <a name="overview-of-live-streaming-using-media-services"></a>Vue d’ensemble du streaming en direct à l’aide d’Azure Media Services
 
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
+
 > [!NOTE]
-> Aucune nouvelle fonctionnalité ni fonction n’est ajoutée à Media Services v2. <br/>Découvrez la dernière version, [Media Services v3](https://docs.microsoft.com/azure/media-services/latest/). Consultez aussi [Conseils de migration de v2 vers v3](../latest/migrate-from-v2-to-v3.md).
+> Aucune nouvelle fonctionnalité ni fonction n’est ajoutée à Media Services v2. <br/>Découvrez la dernière version, [Media Services v3](../latest/index.yml). Consultez aussi [Conseils de migration de v2 vers v3](../latest/migrate-from-v2-to-v3.md).
 
 ## <a name="overview"></a>Vue d’ensemble
 
@@ -51,7 +53,7 @@ Avec Media Services, vous pouvez utiliser [l’empaquetage dynamique](media-serv
 
 ## <a name="streaming-endpoints-channels-programs"></a>Programmes, chaînes et points de terminaison de streaming
 
-Dans Azure Media Sercices, les **canaux**, les **programmes** et le **point de terminaison de diffusion en continu** gèrent toutes les fonctionnalités vidéo en flux continu, notamment la réception, le formatage, le DVR, la sécurité, l’extensibilité et la redondance.
+Dans Azure Media Sercices, les **canaux** , les **programmes** et le **point de terminaison de diffusion en continu** gèrent toutes les fonctionnalités vidéo en flux continu, notamment la réception, le formatage, le DVR, la sécurité, l’extensibilité et la redondance.
 
 Un **canal** représente un pipeline de traitement du contenu vidéo en flux continu. Un canal peut recevoir des flux d’entrée live de l’une des manières suivantes :
 
@@ -90,7 +92,7 @@ Le tableau suivant fournit un guide de comparaison des deux types de canaux pris
 
 Le diagramme suivant présente les principaux composants de la plateforme AMS impliqués dans ce flux de travail de **méthode directe** .
 
-![Flux de travail live](./media/media-services-live-streaming-workflow/media-services-live-streaming-current.png)
+![Diagramme montrant les principales parties de la plateforme A M S pour le flux de travail « Pass-through ».](./media/media-services-live-streaming-workflow/media-services-live-streaming-current.png)
 
 Pour plus d’informations, consultez [Utilisation des canaux recevant un flux dynamique à débit binaire multiple provenant d’encodeurs locaux](media-services-live-streaming-with-onprem-encoders.md).
 
@@ -106,7 +108,7 @@ Pour plus d’informations, consultez [Utilisation de canaux activés pour effec
 
 ### <a name="channel"></a>Channel
 
-Dans Media Services, les [canaux](https://docs.microsoft.com/rest/api/media/operations/channel)sont responsables du traitement du contenu de vidéo en flux continu. Un canal fournit un point de terminaison d’entrée (URL de réception) que vous fournissez ensuite à un transcodeur live. Le canal reçoit des flux d’entrée live en provenance du transcodeur et les met à disposition pour la diffusion en continu via un ou plusieurs StreamingEndpoints. Les canaux fournissent également un point de terminaison d’aperçu (URL d’aperçu) que vous utilisez pour obtenir un aperçu et valider votre flux avant tout traitement et remise supplémentaires.
+Dans Media Services, les [canaux](/rest/api/media/operations/channel)sont responsables du traitement du contenu de vidéo en flux continu. Un canal fournit un point de terminaison d’entrée (URL de réception) que vous fournissez ensuite à un transcodeur live. Le canal reçoit des flux d’entrée live en provenance du transcodeur et les met à disposition pour la diffusion en continu via un ou plusieurs StreamingEndpoints. Les canaux fournissent également un point de terminaison d’aperçu (URL d’aperçu) que vous utilisez pour obtenir un aperçu et valider votre flux avant tout traitement et remise supplémentaires.
 
 Vous pouvez obtenir l’URL de réception et l’URL d’aperçu lors de la création du canal. Pour obtenir ces URL, il n’est pas obligatoire que le canal soit à l’état démarré. Lorsque vous êtes prêt à commencer l’envoi de données à partir d’un transcodeur live dans le canal, celui-ci doit être démarré. Une fois que le transcodeur live a commencé l’ingestion des données, vous pouvez prévisualiser votre flux.
 
@@ -115,7 +117,7 @@ Chaque compte Media Services peut contenir plusieurs canaux, plusieurs programme
 Quand vous créez un canal, vous pouvez spécifier des adresses IP autorisées dans un des formats suivants : adresses IPv4 à quatre chiffres, plage d’adresses CIDR.
 
 ### <a name="program"></a>Programme
-Un [programme](https://docs.microsoft.com/rest/api/media/operations/program) vous permet de contrôler la publication et le stockage des segments dans un flux live. Les canaux gèrent des programmes. La relation entre canal et programme est très similaire au contenu multimédia traditionnel où un canal a un flux de contenu constant et un programme est limité à un événement minuté sur ce canal.
+Un [programme](/rest/api/media/operations/program) vous permet de contrôler la publication et le stockage des segments dans un flux live. Les canaux gèrent des programmes. La relation entre canal et programme est très similaire au contenu multimédia traditionnel où un canal a un flux de contenu constant et un programme est limité à un événement minuté sur ce canal.
 Vous pouvez spécifier le nombre d’heures pendant lesquelles vous souhaitez conserver le contenu enregistré pour le programme en définissant la propriété **ArchiveWindowLength** . Cette valeur peut être comprise entre 5 minutes et 25 heures.
 
 ArchiveWindowLength détermine également la durée maximale que les clients peuvent rechercher en arrière à partir de la position dynamique actuelle. Les programmes peuvent durer davantage que le laps de temps spécifié, mais le contenu qui se situe en dehors de la longueur de fenêtre est ignoré en permanence. La valeur de cette propriété détermine également la longueur maximale que les manifestes de client peuvent atteindre.

@@ -4,46 +4,63 @@
   items:
     - name: Présentation d’Azure Advisor
       href: advisor-overview.md
+- name: Démarrages rapides
+  items:
+    - name: Configurer des alertes pour les nouvelles recommandations
+      items:
+        - name: Portail Azure
+          href: advisor-alerts-portal.md
+        - name: Modèle ARM
+          displayName: Resource Manager
+          href: advisor-alerts-arm.md
+- name: Concepts
+  items:
+    - name: Base de référence de la sécurité
+      href: security-baseline.md
 - name: Tutoriels
   items:
     - name: Bien démarrer avec Advisor
       href: advisor-get-started.md
 - name: Guides pratiques
   items:
-    - name: Améliorer la disponibilité d’une application Azure
+    - name: Fiabilité
       href: advisor-high-availability-recommendations.md
-    - name: Sécuriser davantage les ressources
+    - name: Sécurité
       href: advisor-security-recommendations.md
-    - name: Améliorer les performances des applications Azure
+    - name: Efficacité des performances
       href: advisor-performance-recommendations.md
-    - name: Réduire les coûts de service
+    - name: Optimisation des coûts
       href: advisor-cost-recommendations.md
-    - name: Atteindre l’excellence opérationnelle
+    - name: Excellence opérationnelle
       href: advisor-operational-excellence-recommendations.md
     - name: Configurer des recommandations
       href: view-recommendations.md
     - name: Autorisations et actions bloquées
       href: permissions.md
     - name: Configurer des alertes pour les recommandations
-      href: advisor-alerts.md
+      href: advisor-alerts-portal.md
+    - name: Configurer un résumé des recommandations
+      href: advisor-recommendations-digest.md
     - name: Correction en bloc pour les recommandations
       href: advisor-quick-fix.md
     - name: Données Advisor dans Azure Resource Graph
       href: advisor-azure-resource-graph.md
+    - name: Consommer le score d’Advisor
+      href: azure-advisor-score.md
 - name: Informations de référence
   items:
     - name: Security Center
       href: 'https://azure.microsoft.com/services/security-center/'
     - name: SQL Database Advisor
-      href: 'https://azure.microsoft.com/documentation/articles/sql-database-advisor/'
+      href: ../azure-sql/database/database-advisor-implement-performance-recommendations.md
     - name: App Service
-      href: 'https://docs.microsoft.com/azure/app-service/app-service-best-practices'
+      href: ../app-service/app-service-best-practices.md
     - name: API REST
-      href: 'https://docs.microsoft.com/rest/api/advisor/'
-    - name: Interface de ligne de commande
-      href: 'https://docs.microsoft.com/cli/azure/advisor?view=azure-cli-latest'
+      href: /rest/api/advisor/
+    - name: Azure CLI
+      href: /cli/azure/advisor?view=azure-cli-latest
     - name: PowerShell
-      href: 'https://docs.microsoft.com/powershell/module/az.advisor/?view=azps-1.2.0'
+      href: /powershell/module/az.advisor/?view=azps-1.2.0
 - name: Ressources
   items:
     - name: Feuille de route Azure

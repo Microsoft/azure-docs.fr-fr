@@ -3,15 +3,16 @@ title: Comment utiliser le kit SDK WebJobs
 description: Découvrez comment écrire du code pour le Kit de développement logiciel (SDK) WebJobs. Créez des travaux de traitement en arrière-plan basé sur les événements, qui accèdent aux données dans Azure et des services tiers.
 author: ggailey777
 ms.devlang: dotnet
+ms.custom: devx-track-csharp
 ms.topic: article
 ms.date: 02/18/2019
 ms.author: glenga
-ms.openlocfilehash: a046791b8c50577c1921764b06bac5d88780194d
-ms.sourcegitcommit: 4499035f03e7a8fb40f5cff616eb01753b986278
+ms.openlocfilehash: f941c394c3dab0e5e6997898a48a248f6a0cfe42
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/03/2020
-ms.locfileid: "82734992"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96352437"
 ---
 # <a name="how-to-use-the-azure-webjobs-sdk-for-event-driven-background-processing"></a>Comment utiliser le Kit de développement logiciel (SDK) Azure WebJobs pour le traitement en arrière-plan basé sur les événements
 
@@ -65,7 +66,8 @@ static void Main(string[] args)
 }
 ```
 
-Dans la mesure où la version 3.*x* utilise les API de configuration .NET Core par défaut, aucune API ne permet de changer les noms de chaînes de connexion.
+> [!NOTE]
+> Dans la mesure où la version 3.*x* utilise les API de configuration .NET Core par défaut, aucune API ne permet de changer les noms de chaînes de connexion. Consultez [Développement et déploiement de WebJobs avec Visual Studio](webjobs-dotnet-deploy-vs.md).
 
 ### <a name="host-development-settings"></a>Paramètres de développement de l’hôte
 
@@ -749,6 +751,9 @@ Certains déclencheurs intègrent la prise en charge de la gestion de l’accès
 
 Vous pouvez utiliser ces paramètres pour vous assurer que votre fonction s’exécute en tant que singleton sur une instance unique. Pour vérifier qu’une seule instance de la fonction s’exécute quand l’application web est étendue à plusieurs instances, appliquez un verrou singleton au niveau de l’écouteur sur la fonction (`[Singleton(Mode = SingletonMode.Listener)]`). Les verrous d’écouteurs sont acquis au démarrage du JobHost. Si trois instances scale-out démarrent en même temps, une seule de ces instances acquiert le verrou et un seul écouteur démarre.
 
+> [!NOTE]
+> Pour en savoir plus sur le fonctionnement de SingletonMode.Function, consultez ce [dépôt GitHub](https://github.com/Azure/azure-webjobs-sdk/blob/master/src/Microsoft.Azure.WebJobs/SingletonMode.cs).
+
 ### <a name="scope-values"></a>Valeurs d’étendue
 
 Vous pouvez spécifier une *expression/valeur d’étendue* sur un singleton. L’expression/La valeur permet de vérifier que toutes les exécutions de la fonction dans une étendue spécifique sont sérialisées. L’implémentation d’un verrouillage plus granulaire peut ainsi permettre un certain niveau de parallélisme pour votre fonction, tout en sérialisant d’autres appels conformément à vos besoins. Par exemple, dans le code suivant, l’expression d’étendue est liée à la valeur `Region` du message entrant. Quand la file d’attente contient trois messages dans les régions Est, Est et Ouest respectivement, les messages pour la région Est sont exécutés en série pendant que le message pour la région Ouest est exécuté en parallèle à ceux de la région Est.
@@ -811,7 +816,7 @@ Si vous souhaitez vérifier qu’une seule instance d’une fonction s’exécut
 
 ## <a name="filters"></a>Filtres
 
-Les filtres de fonctions (préversion) vous offrent un moyen de personnaliser le pipeline d’exécution de tâches web avec votre propre logique. Ces filtres sont similaires aux [filtres ASP.NET Core](https://docs.microsoft.com/aspnet/core/mvc/controllers/filters). Vous pouvez les implémenter en tant qu’attributs déclaratifs appliqués à vos fonctions ou classes. Pour plus d’informations, consultez [Function Filters](https://github.com/Azure/azure-webjobs-sdk/wiki/Function-Filters) (Filtres de fonctions).
+Les filtres de fonctions (préversion) vous offrent un moyen de personnaliser le pipeline d’exécution de tâches web avec votre propre logique. Ces filtres sont similaires aux [filtres ASP.NET Core](/aspnet/core/mvc/controllers/filters). Vous pouvez les implémenter en tant qu’attributs déclaratifs appliqués à vos fonctions ou classes. Pour plus d’informations, consultez [Function Filters](https://github.com/Azure/azure-webjobs-sdk/wiki/Function-Filters) (Filtres de fonctions).
 
 ## <a name="logging-and-monitoring"></a>Enregistrement et surveillance
 
@@ -956,7 +961,7 @@ Dans la version 3.*x*, vous n’avez plus besoin de vider [`TelemetryClient`] q
 
 #### <a name="version-2x"></a>Version 2.*x*
 
-Dans la version 2.*x*, le [`TelemetryClient`] créé de façon interne par le fournisseur Application Insights pour le kit SDK WebJobs utilise [`ServerTelemetryChannel`](https://github.com/microsoft/ApplicationInsights-dotnet/tree/develop/.publicApi/Microsoft.AI.ServerTelemetryChannel.dll). Quand le point de terminaison d’Application Insights est non disponible ou limite les requêtes entrantes, ce canal [enregistre les requêtes dans le système de fichiers de l’application web et les soumet à nouveau ultérieurement](https://apmtips.com/blog/2015/09/03/more-telemetry-channels).
+Dans la version 2.*x*, le [`TelemetryClient`] créé de façon interne par le fournisseur Application Insights pour le kit SDK WebJobs utilise [`ServerTelemetryChannel`](https://github.com/microsoft/ApplicationInsights-dotnet/tree/develop/.publicApi/Microsoft.AI.ServerTelemetryChannel.dll). Quand le point de terminaison d’Application Insights est non disponible ou limite les requêtes entrantes, ce canal [enregistre les requêtes dans le système de fichiers de l’application web et les soumet à nouveau ultérieurement](https://apmtips.com/posts/2015-09-03-more-telemetry-channels/).
 
 [`TelemetryClient`] est créé par une classe qui implémente `ITelemetryClientFactory`. Par défaut, il s’agit de [`DefaultTelemetryClientFactory`](https://github.com/Azure/azure-webjobs-sdk/blob/dev/src/Microsoft.Azure.WebJobs.Logging.ApplicationInsights/).
 
@@ -982,7 +987,7 @@ private class CustomTelemetryClientFactory : DefaultTelemetryClientFactory
 }
 ```
 
-L’objet `SamplingPercentageEstimatorSettings` configure l’[échantillonnage adaptatif](https://docs.microsoft.com/azure/application-insights/app-insights-sampling). Cela signifie que dans certains scénarios impliquant de grands volumes, Applications Insights envoie un sous-ensemble spécifique de données de télémétrie au serveur.
+L’objet `SamplingPercentageEstimatorSettings` configure l’[échantillonnage adaptatif](../azure-monitor/app/sampling.md). Cela signifie que dans certains scénarios impliquant de grands volumes, Applications Insights envoie un sous-ensemble spécifique de données de télémétrie au serveur.
 
 Une fois que vous avez créé la fabrique de télémétrie, vous devez la passer au fournisseur de journalisation Application Insights :
 

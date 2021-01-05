@@ -1,6 +1,6 @@
 ---
 title: Exemple de script PowerShell - Ajouter un utilisateur | Microsoft Docs
-description: Exemple de script Azure PowerShell - Ajouter un utilisateur
+description: Découvrez comment ajouter un utilisateur dans le service Gestion des API et obtenir une clé d’abonnement. Découvrez un exemple de script et affichez des ressources disponibles supplémentaires.
 services: api-management
 documentationcenter: ''
 author: vladvino
@@ -12,12 +12,12 @@ ms.topic: sample
 ms.date: 11/16/2017
 ms.author: apimpm
 ms.custom: mvc
-ms.openlocfilehash: 1aab18df0e102b1b67ac40cf1345e463a467829a
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 0573097d9821b8cf14573f2e5c5291461c2c7ed7
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "70074275"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87843849"
 ---
 # <a name="add-a-user"></a>Ajouter un utilisateur
 
@@ -43,6 +43,6 @@ Remove-AzResourceGroup -Name myResourceGroup
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour plus d’informations sur le module Azure PowerShell, consultez [Documentation Azure PowerShell](https://docs.microsoft.com/powershell/azure/overview).
+Pour plus d’informations sur le module Azure PowerShell, consultez [Documentation Azure PowerShell](/powershell/azure/).
 
 Vous trouverez des exemples supplémentaires de scripts Azure PowerShell pour la Gestion des API Azure sur la page [Exemples PowerShell](../powershell-samples.md).

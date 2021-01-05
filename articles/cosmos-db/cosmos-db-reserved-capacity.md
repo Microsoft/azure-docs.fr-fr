@@ -7,14 +7,15 @@ ms.topic: conceptual
 ms.date: 02/18/2020
 ms.author: tisande
 ms.reviewer: sngun
-ms.openlocfilehash: 16e8f770445218e10ab7e7645a81325d11be55da
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 27725b1a3dd6059010ce67977c39891a012c037e
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77505973"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95995781"
 ---
 # <a name="optimize-cost-with-reserved-capacity-in-azure-cosmos-db"></a>Optimiser les coûts avec une capacité réservée dans Azure Cosmos DB
+[!INCLUDE[appliesto-all-apis](includes/appliesto-all-apis.md)]
 
 La capacité réservée Azure Cosmos DB vous permet de faire des économies en vous engageant à réserver des ressources Azure Cosmos DB sur un an ou trois ans. Avec la capacité réservée Azure Cosmos DB, vous pouvez obtenir une remise sur le débit provisionné pour les ressources Cosmos DB. Les bases de données et les conteneurs (tables, collections et graphes) sont des exemples de ressources.
 
@@ -22,7 +23,7 @@ La capacité réservée Azure Cosmos DB peut réduire sensiblement vos coûts Co
 
 La capacité réservée Azure Cosmos DB couvre le débit provisionné pour vos ressources. Elle ne couvre pas les frais de stockage et de réseau. Dès que vous achetez une réservation, les frais de débit qui correspondent aux attributs de la réservation ne sont plus facturés au tarif du paiement à l’utilisation. Pour plus d’informations sur les réservations, consultez l’article [Réservations Azure](../cost-management-billing/reservations/save-compute-costs-reservations.md).
 
-Vous pouvez acheter de la capacité réservée Azure Cosmos DB sur le [portail Azure](https://portal.azure.com). Payez la réservation [à l’avance ou par paiements mensuels](../cost-management-billing/reservations/monthly-payments-reservations.md). Pour acheter une capacité réservée :
+Vous pouvez acheter de la capacité réservée Azure Cosmos DB sur le [portail Azure](https://portal.azure.com). Payez la réservation [à l’avance ou par paiements mensuels](../cost-management-billing/reservations/prepare-buy-reservation.md). Pour acheter une capacité réservée :
 
 * Vous devez disposer du rôle Propriétaire sur au moins un abonnement Entreprise ou individuel avec des tarifs de paiement à l’utilisation.  
 * Pour les abonnements Entreprise, **Add Reserved Instances** (Ajouter des instances réservées) doit être activé dans le [portal EA](https://ea.azure.com). Si ce paramètre est désactivé, vous devez être administrateur EA de l’abonnement.
@@ -46,13 +47,13 @@ Vous pouvez filtrer les recommandations selon les attributs suivants :
 
 - **Durée** (1 an ou 3 ans)
 - **Périodicité de facturation** (mensuelle ou comptant)
-- **Type de débit** (RU vs RU multimaître)
+- **Type de débit** (RU/s par rapport à RU/s en écriture multi-région)
 
 En outre, vous pouvez choisir l’étendue des recommandations pour qu’elles se trouvent dans un seul groupe de ressources, dans un seul abonnement ou dans l’intégralité de votre inscription Azure. 
 
 Voici un exemple de recommandation :
 
-![Recommandations sur la capacité de réserve](./media/cosmos-db-reserved-capacity/reserved-capacity-recommendation.png)
+:::image type="content" source="./media/cosmos-db-reserved-capacity/reserved-capacity-recommendation.png" alt-text="Recommandations sur la capacité de réserve":::
 
 Cette recommandation d’achat indique que, parmi les réservations d’une durée de 3 ans, une taille de réservation de 30 000 RU/s maximisera les économies. Dans ce cas, la recommandation est calculée sur la base des 30 derniers jours d’utilisation d’Azure Cosmos DB. Si ce client s’attend à ce que les 30 derniers jours d’utilisation d’Azure Cosmos DB soient représentatifs de son utilisation future, il maximisera ses économies en achetant une réservation de 30 000 RU/s.
 
@@ -66,7 +67,7 @@ Cette recommandation d’achat indique que, parmi les réservations d’une dur�
 
 4. Renseignez les champs obligatoires, comme décrit dans le tableau suivant :
 
-   ![Remplir le formulaire de réservation de capacité](./media/cosmos-db-reserved-capacity/fill-reserved-capacity-form.png)
+   :::image type="content" source="./media/cosmos-db-reserved-capacity/fill-reserved-capacity-form.png" alt-text="Remplir le formulaire de réservation de capacité":::
 
    |Champ  |Description  |
    |---------|---------|
@@ -74,7 +75,7 @@ Cette recommandation d’achat indique que, parmi les réservations d’une dur�
    |Abonnement  |   Abonnement utilisé pour payer la capacité réservée Azure Cosmos DB. Les coûts sont facturés selon le mode de paiement défini sur l’abonnement sélectionné. L’abonnement doit être de l’un des types suivants : <br/><br/>  Contrat Entreprise (références de l’offre : MS-AZR-0017P ou MS-AZR-0148P) : Pour un abonnement Entreprise, les frais sont déduits du solde de l’engagement financier de l’inscription, ou facturés comme un dépassement. <br/><br/> Abonnement individuel avec tarifs de paiement à l’utilisation (références de l’offre : MS-AZR-0003P ou MS-AZR-0023P) : Pour un abonnement individuel avec tarifs de paiement à l’utilisation, les frais sont facturés sur le mode de paiement par carte de crédit ou par facture, défini sur l’abonnement.    |
    | Groupe de ressources | Groupe de ressources auquel la remise de capacité réservée est appliquée. |
    |Terme  |   Une année ou trois ans.   |
-   |Type de débit   |  Le débit est provisionné en unités de requête. Vous pouvez acheter une réservation pour le débit approvisionné pour les deux configurations (écritures dans une seule région et écritures dans plusieurs régions). Le type de débit propose deux valeurs à sélectionner : 100 RU/s par heure et 100 RU multimaîtres/s par heure.|
+   |Type de débit   |  Le débit est provisionné en unités de requête. Vous pouvez acheter une réservation pour le débit approvisionné pour les deux configurations (écritures dans une seule région et écritures dans plusieurs régions). Le type de débit propose deux valeurs à sélectionner : 100 écritures de RU/s par heure et 100 écritures multi-régions de RU/s par heure.|
    | Unités de capacité réservée| Quantité de débit que vous souhaitez réserver. Pour calculer cette valeur, déterminez d’abord le débit nécessaire pour toutes vos ressources Cosmos DB (par exemple, les bases de données ou les conteneurs) par région. Ensuite, multipliez cette quantité par le nombre de régions à associer à votre base de données Cosmos. Par exemple : Si vous avez cinq régions avec chacune 1 million d’unités de requête par seconde (RU/s), sélectionnez 5 millions de RU/s comme capacité réservée à acheter. |
 
 
@@ -82,7 +83,7 @@ Cette recommandation d’achat indique que, parmi les réservations d’une dur�
 
 6. Vérifiez la remise et le prix de la réservation dans le volet **Acheter des réservations**. Ce prix de réservation s’applique aux ressources Azure Cosmos DB avec débit provisionné dans toutes les régions.  
 
-   ![Résumé de la capacité réservée](./media/cosmos-db-reserved-capacity/reserved-capacity-summary.png)
+   :::image type="content" source="./media/cosmos-db-reserved-capacity/reserved-capacity-summary.png" alt-text="Résumé de la capacité réservée":::
 
 7. Sélectionnez **Évaluer et acheter**, puis **Acheter maintenant**. Vous voyez la page suivante une fois l’achat correctement effectué :
 
@@ -106,7 +107,7 @@ La remise de réservation est appliquée automatiquement aux ressources Azure Co
    * [Gérer les réservations Azure](../cost-management-billing/reservations/manage-reserved-vm-instance.md)  
    * [Comprendre l’utilisation d’une réservation pour votre Accord de Mise en Œuvre Entreprise](../cost-management-billing/reservations/understand-reserved-instance-usage-ea.md)  
    * [Comprendre l’utilisation d’une réservation pour votre abonnement avec paiement à l’utilisation](../cost-management-billing/reservations/understand-reserved-instance-usage.md)
-   * [Réservations Azure dans le cadre du programme Fournisseur de solutions cloud de l’Espace Partenaires](https://docs.microsoft.com/partner-center/azure-reservations)
+   * [Réservations Azure dans le cadre du programme Fournisseur de solutions cloud de l’Espace Partenaires](/partner-center/azure-reservations)
 
 ## <a name="need-help-contact-us"></a>Vous avez besoin d’aide ? Contactez-nous.
 

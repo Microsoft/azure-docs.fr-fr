@@ -1,15 +1,14 @@
 ---
 title: Sauvegarder des bases de données SQL Server sur des machines virtuelles Azure
 description: Dans cet article, découvrez comment sauvegarder des bases de données SQL Server sur des machines virtuelles Azure avec la Sauvegarde Azure.
-ms.reviewer: vijayts
 ms.topic: conceptual
 ms.date: 09/11/2019
-ms.openlocfilehash: 887f15deed74330cf132e0574d166c074d2c7cad
-ms.sourcegitcommit: acb82fc770128234f2e9222939826e3ade3a2a28
+ms.openlocfilehash: 4cfd8233b9a696b5b4b1981eefa81aa9723f6431
+ms.sourcegitcommit: 3543d3b4f6c6f496d22ea5f97d8cd2700ac9a481
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81685709"
+ms.lasthandoff: 07/20/2020
+ms.locfileid: "86538950"
 ---
 # <a name="back-up-sql-server-databases-in-azure-vms"></a>Sauvegarder des bases de données SQL Server sur des machines virtuelles Azure
 
@@ -34,73 +33,69 @@ Dans cet article, vous allez apprendre à :
 Pour pouvoir sauvegarder une base de données SQL Server, vérifiez les critères suivants :
 
 1. Identifiez ou créez un [coffre Recovery Services](backup-sql-server-database-azure-vms.md#create-a-recovery-services-vault) dans la même région et avec le même abonnement que la machine virtuelle qui héberge l’instance SQL Server.
-2. Vérifiez que la machine virtuelle dispose d’une [connectivité réseau](backup-sql-server-database-azure-vms.md#establish-network-connectivity).
-3. Assurez-vous que les bases de données SQL Server respectent les [instructions de nommage pour Sauvegarde Azure](#database-naming-guidelines-for-azure-backup).
-4. Vérifiez que vous n’avez aucune autre solution de sauvegarde activée pour la base de données. Désactivez tous les autres sauvegardes SQL Server avant de sauvegarder la base de données.
+1. Vérifiez que la machine virtuelle dispose d’une [connectivité réseau](backup-sql-server-database-azure-vms.md#establish-network-connectivity).
+1. Assurez-vous que les bases de données SQL Server respectent les [instructions de nommage pour Sauvegarde Azure](#database-naming-guidelines-for-azure-backup).
+1. Vérifiez que la longueur combinée du nom de la machine virtuelle SQL Server et du nom du groupe de ressources ne dépasse pas 84 caractères pour les machines virtuelles Azure Resource Manager (ARM) (et 77 caractères pour les machines virtuelles classiques). Cette limitation est due au fait que certains caractères sont réservés par le service.
+1. Vérifiez que vous n’avez aucune autre solution de sauvegarde activée pour la base de données. Désactivez tous les autres sauvegardes SQL Server avant de sauvegarder la base de données.
 
 > [!NOTE]
 > Vous pouvez activer Sauvegarde Azure pour une machine virtuelle Azure et une base de données SQL Server s’exécutant sur la machine virtuelle sans conflit.
 
 ### <a name="establish-network-connectivity"></a>Établir la connectivité réseau
 
-Pour toute opération, une machine virtuelle SQL Server requiert une connectivité pour accéder aux adresses IP publiques Azure. Les opérations de machine virtuelle (détection de bases de données, configuration de sauvegardes, sauvegardes planifiées, restauration des points de récupération, etc.) échouent en cas d’absence de connexion aux adresses IP publiques Azure.
+Pour toutes les opérations, une machine virtuelle SQL Server nécessite une connectivité avec le service Sauvegarde Azure, Stockage Azure et Azure Active Directory. Pour ce faire, vous pouvez utiliser des points de terminaison privés ou autoriser l’accès aux IP publiques ou aux noms de domaine complets (FQDN) requis. Le fait de ne pas permettre une connectivité appropriée aux services Azure requis peut entraîner l’échec d’opérations telles que la détection de base de données, la configuration de la sauvegarde, l’exécution de sauvegardes et la restauration de données.
 
-Établissez la connectivité en utilisant l’une des options suivantes :
+Le tableau suivant répertorie les différentes alternatives que vous pouvez utiliser pour établir la connectivité :
 
-#### <a name="allow-the-azure-datacenter-ip-ranges"></a>Autoriser les plages d’adresses IP du centre de données Azure
+| **Option**                        | **Avantages**                                               | **Inconvénients**                                            |
+| --------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| Instances Private Endpoint                 | Autorisent les sauvegardes sur des adresses IP privées au sein du réseau virtuel  <br><br>   Fournissent un contrôle approfondi du côté du réseau et du coffre | Engendre des [coûts](https://azure.microsoft.com/pricing/details/private-link/) de point de terminaison privé standard |
+| Balises de service NSG                  | Plus faciles à gérer car les modifications apportées à la plage sont fusionnées automatiquement   <br><br>   Aucun coût supplémentaire | Peut être utilisé uniquement avec les groupes de sécurité réseau  <br><br>    Fournit l’accès à l’ensemble du service |
+| Balises FQDN de Pare-feu Azure          | Plus faciles à gérer, car les FQDN requis sont gérés automatiquement | Utilisabes avec Pare-feu Azure uniquement                         |
+| Autoriser l’accès aux FQDN/adresses IP du service | Aucun coût supplémentaire   <br><br>  Fonctionne avec toutes les appliances de sécurité réseau et tous les pare-feu | Il peut être nécessaire d’accéder à un large éventail d’adresses IP ou de FQDN   |
+| Utiliser un proxy HTTP                 | Un seul point d’accès Internet aux machines virtuelles                       | Frais supplémentaires d’exécution de machine virtuelle avec le logiciel de serveur proxy         |
 
-Cette option autorise les [plages d’adresses IP](https://www.microsoft.com/download/details.aspx?id=41653) dans le fichier téléchargé. Pour accéder à un groupe de sécurité réseau, utilisez l’applet de commande Set-AzureNetworkSecurityRule. Si votre liste de destinataires sûrs ne comporte que des adresses IP spécifiques à une région, vous devez également mettre à jour la liste des destinataires sûrs avec la balise du service Azure Active Directory (Azure AD) pour activer l’authentification.
+De plus amples informations sur l’utilisation de ces options sont disponibles ci-dessous :
 
-#### <a name="allow-access-using-nsg-tags"></a>Autoriser l’accès à l’aide de balises de groupe de sécurité réseau
+#### <a name="private-endpoints"></a>Instances Private Endpoint
 
-Si vous utilisez NSG pour limiter la connectivité, vous devez utiliser la balise de service Sauvegarde Azure pour autoriser l’accès sortant à la Sauvegarde Azure. Vous devez également utiliser des [règles](https://docs.microsoft.com/azure/virtual-network/security-overview#service-tags) pour Azure AD et Stockage Azure afin de permettre la connectivité pour l’authentification et le transfert de données. Cette opération peut être effectuée à partir du portail Azure ou via PowerShell.
+Les points de terminaison privés vous permettent de vous connecter en toute sécurité à votre coffre Recovery Services à partir de serveurs situés dans un réseau virtuel. Le point de terminaison privé utilise une adresse IP de l’espace d’adressage du réseau virtuel pour votre coffre. Le trafic réseau entre vos ressources dans le réseau virtuel et le coffre transite via votre réseau virtuel et une liaison privée sur le réseau principal de Microsoft. Cela élimine l’exposition de l’Internet public. Pour en savoir plus sur les points de terminaison privés pour Sauvegarde Azure, cliquez [ici](./private-endpoints.md).
 
-Pour créer une règle avec le portail :
+#### <a name="nsg-tags"></a>Balises NSG
 
-  1. Dans **Tous les services**, accédez à**Groupes de sécurité réseau** et sélectionnez le groupe de sécurité réseau.
-  2. Sous **PARAMÈTRES**, sélectionnez **Règles de sécurité de trafic sortant**.
-  3. Sélectionnez **Ajouter**. Entrez toutes les informations nécessaires à la création d’une nouvelle règle, comme décrit dans [paramètres de règle de sécurité](https://docs.microsoft.com/azure/virtual-network/manage-network-security-group#security-rule-settings). Vérifiez que l'option **Destination** est définie sur **Balise de service** et **Balise de service de destination** sur **AzureBackup**.
-  4. Cliquez sur **Ajouter**  pour enregistrer la règle de sécurité de trafic sortant que vous venez de créer.
+Si vous utilisez des groupes de sécurité réseau (NSG), utilisez la balise de service *AzureBackup* pour autoriser l’accès sortant vers Sauvegarde Azure. En plus de la balise pour Sauvegarde Azure, vous devez également autoriser la connectivité pour l’authentification et le transfert de données en créant des [règles NSG](../virtual-network/security-overview.md#service-tags) similaires pour *Azure AD* et *Stockage Azure*.  Les étapes suivantes décrivent le processus de création d’une règle pour la balise de Sauvegarde Azure :
 
-Pour créer une règle à l’aide de Powershell :
+1. Dans **Tous les services**, accédez à**Groupes de sécurité réseau** et sélectionnez le groupe de sécurité réseau.
 
- 1. Ajoutez les identifiants de compte Azure et mettez à jour les clouds nationaux<br/>
-      `Add-AzureRmAccount`<br/>
+1. Sous **PARAMÈTRES**, sélectionnez **Règles de sécurité de trafic sortant**.
 
- 2. Sélectionnez l’abonnement au groupe de sécurité réseau<br/>
-      `Select-AzureRmSubscription "<Subscription Id>"`
+1. Sélectionnez **Ajouter**. Entrez toutes les informations nécessaires à la création d’une nouvelle règle, comme décrit dans [paramètres de règle de sécurité](../virtual-network/manage-network-security-group.md#security-rule-settings). Vérifiez que l’option **Destination** est définie sur *Balise de service* et l’option **Balise de service de destination** sur *AzureBackup*.
 
- 3. Sélectionnez le groupe de sécurité réseau<br/>
-    `$nsg = Get-AzureRmNetworkSecurityGroup -Name "<NSG name>" -ResourceGroupName "<NSG resource group name>"`
+1. Cliquez sur **Ajouter**  pour enregistrer la règle de sécurité de trafic sortant que vous venez de créer.
 
- 4. Ajoutez la règle de trafic sortant autorisée pour la balise du service Sauvegarde Azure<br/>
-    `Add-AzureRmNetworkSecurityRuleConfig -NetworkSecurityGroup $nsg -Name "AzureBackupAllowOutbound" -Access Allow -Protocol * -Direction Outbound -Priority <priority> -SourceAddressPrefix * -SourcePortRange * -DestinationAddressPrefix "AzureBackup" -DestinationPortRange 443 -Description "Allow outbound traffic to Azure Backup service"`
+De même, vous pouvez créer des règles de sécurité de trafic sortant NSG pour Stockage Azure et Azure AD.
 
- 5. Ajoutez la règle de trafic sortant autorisée pour la balise du service Stockage<br/>
-    `Add-AzureRmNetworkSecurityRuleConfig -NetworkSecurityGroup $nsg -Name "StorageAllowOutbound" -Access Allow -Protocol * -Direction Outbound -Priority <priority> -SourceAddressPrefix * -SourcePortRange * -DestinationAddressPrefix "Storage" -DestinationPortRange 443 -Description "Allow outbound traffic to Azure Backup service"`
+#### <a name="azure-firewall-tags"></a>Balises Pare-feu Azure
 
- 6. Ajoutez la règle de trafic sortant autorisée pour la balise du service AzureActiveDirectory<br/>
-    `Add-AzureRmNetworkSecurityRuleConfig -NetworkSecurityGroup $nsg -Name "AzureActiveDirectoryAllowOutbound" -Access Allow -Protocol * -Direction Outbound -Priority <priority> -SourceAddressPrefix * -SourcePortRange * -DestinationAddressPrefix "AzureActiveDirectory" -DestinationPortRange 443 -Description "Allow outbound traffic to AzureActiveDirectory service"`
+Si vous utilisez Pare-feu Azure, créez une règle d’application en utilisant la [balise FQDN de Pare-feu Azure](../firewall/fqdn-tags.md) *AzureBackup*. Cela autorise tout accès sortant vers Sauvegarde Azure.
 
- 7. Enregistrez le groupe de sécurité réseau<br/>
-    `Set-AzureRmNetworkSecurityGroup -NetworkSecurityGroup $nsg`
+#### <a name="allow-access-to-service-ip-ranges"></a>Autoriser l’accès aux plages d’adresses IP du service
 
-**Autorisez l’accès à l’aide de balises de Pare-feu Azure**. Si vous utilisez Pare-feu Azure, créez une règle d’application en utilisant la balise [FQDN](https://docs.microsoft.com/azure/firewall/fqdn-tags) d’AzureBackup. Cela autorise l’accès sortant à Sauvegarde Azure.
+Si vous choisissez d’autoriser l’accès aux adresses IP du service, reportez-vous aux plages d’adresses IP répertoriées dans le fichier JSON accessible [ici](https://www.microsoft.com/download/confirmation.aspx?id=56519). Vous devez autoriser l’accès aux adresses IP correspondant à Sauvegarde Azure, Stockage Azure et Azure Active Directory.
 
-**Déployez un serveur proxy HTTP pour le routage du trafic**. Lorsque vous sauvegardez une base de données SQL Server sur une machine virtuelle Azure, l’extension de sauvegarde sur la machine virtuelle utilise les API HTTPS pour envoyer des commandes de gestion à Sauvegarde Azure, et des données à Stockage Azure. L’extension de sauvegarde utilise également Azure AD pour l’authentification. Acheminez le trafic de l’extension de sauvegarde pour ces trois services via le proxy HTTP. Il n’existe aucun domaine à caractère générique utilisé avec Sauvegarde Azure à ajouter à la liste verte pour vos règles de proxy. Vous devrez utiliser les plages d’adresses IP publiques pour ces services fournis par Azure. Les extensions sont le seul composant configuré pour l’accès à l’internet public.
+#### <a name="allow-access-to-service-fqdns"></a>Autoriser l’accès aux FQDN du service
 
-Les options de connectivité présentent les avantages et inconvénients suivants :
+Vous pouvez également utiliser les FQDN suivants pour autoriser l’accès aux services requis à partir de vos serveurs :
 
-**Option** | **Avantages** | **Inconvénients**
---- | --- | ---
-Autoriser les plages d’adresses IP | Aucun coût supplémentaire | Difficile à gérer, car les plages d’adresses IP changent au fil du temps <br/><br/> Fournit un accès à l’ensemble d’Azure et pas seulement à Stockage Azure
-Utiliser les balises du service NSG | Plus faciles à gérer car les modifications apportées à la plage sont fusionnées automatiquement <br/><br/> Aucun coût supplémentaire <br/><br/> | Peut être utilisé uniquement avec les groupes de sécurité réseau <br/><br/> Fournit l’accès à l’ensemble du service
-Utiliser les balises FQDN du Pare-feu Azure | Plus faciles à gérer car les noms de domaine complet sont managés automatiquement | Utilisabes avec Pare-feu Azure uniquement
-Utiliser un proxy HTTP | Un seul point d’accès Internet aux machines virtuelles <br/> | Frais supplémentaires d’exécution de machine virtuelle avec le logiciel de serveur proxy <br/> Aucune adresse de nom de domaine complet publiée, les règles d’autorisation sont soumises aux modifications d’adresse IP Azure
+| Service    | Noms de domaine auxquels accéder                             |
+| -------------- | ------------------------------------------------------------ |
+| Sauvegarde Azure  | `*.backup.windowsazure.com`                             |
+| Stockage Azure | `*.blob.core.windows.net` <br><br> `*.queue.core.windows.net` |
+| Azure AD      | Autoriser l’accès aux FQDN en vertu des sections 56 et 59 conformément à [cet article](/office365/enterprise/urls-and-ip-address-ranges#microsoft-365-common-and-office-online) |
 
-#### <a name="private-endpoints"></a>Points de terminaison privés
+#### <a name="use-an-http-proxy-server-to-route-traffic"></a>Utiliser un serveur proxy HTTP pour acheminer le trafic
 
-[!INCLUDE [Private Endpoints](../../includes/backup-private-endpoints.md)]
+Lorsque vous sauvegardez une base de données SQL Server sur une machine virtuelle Azure, l’extension de sauvegarde sur la machine virtuelle utilise les API HTTPS pour envoyer des commandes de gestion à Sauvegarde Azure, et des données à Stockage Azure. L’extension de sauvegarde utilise également Azure AD pour l’authentification. Acheminez le trafic de l’extension de sauvegarde pour ces trois services via le proxy HTTP. Utilisez la liste des adresses IP et des FQDN ci-dessus pour autoriser l’accès aux services requis. Les serveurs proxy authentifiés ne sont pas pris en charge.
 
 ### <a name="database-naming-guidelines-for-azure-backup"></a>Instructions de dénomination des bases de données pour Sauvegarde Azure
 
@@ -112,7 +107,7 @@ Utiliser un proxy HTTP | Un seul point d’accès Internet aux machines virtuell
 * Point-virgule « ; »
 * Barre oblique « / »
 
-L’utilisation d’alias est possible, bien que déconseillée, pour les caractères non pris en charge. Pour plus d'informations, consultez la rubrique [Présentation du modèle de données du service de Table](https://docs.microsoft.com/rest/api/storageservices/Understanding-the-Table-Service-Data-Model).
+L’utilisation d’alias est possible, bien que déconseillée, pour les caractères non pris en charge. Pour plus d'informations, consultez la rubrique [Présentation du modèle de données du service de Table](/rest/api/storageservices/understanding-the-table-service-data-model).
 
 >[!NOTE]
 >L’opération **Configurer la protection** n’est pas prise en charge pour les bases de données dont le nom comporte des caractères spéciaux tels que « + » ou « & ». Vous pouvez modifier le nom de la base de données ou bien activer la **protection automatique**, ce qui permet de protéger correctement ces bases de données.
@@ -166,11 +161,15 @@ Comment détecter les bases de données en cours d’exécution sur une machine 
 
    ![Sélectionner Configurer la sauvegarde](./media/backup-azure-sql-database/backup-goal-configure-backup.png)
 
-2. **Sélectionner les éléments à sauvegarder** répertorie tous les groupes de disponibilité inscrits et les instances SQL Server autonomes. Sélectionnez la flèche vers la gauche pour développer la liste de toutes les bases de données non protégées dans cette instance ou ce groupe de disponibilité Always On.  
+1. Cliquez sur **Ajouter des ressources** pour consulter tous les groupes de disponibilité inscrits et les instances SQL Server autonomes.
 
-    ![Affichage de toutes les instances SQL Server avec des bases de données autonomes](./media/backup-azure-sql-database/list-of-sql-databases.png)
+    ![Sélectionner Ajouter des ressources](./media/backup-azure-sql-database/add-resources.png)
 
-3. Choisissez toutes les bases de données que vous souhaitez protéger, puis sélectionnez **OK**.
+1. Dans l’écran **Sélectionner les éléments à sauvegarder**,sélectionnez la flèche vers la gauche pour développer la liste de toutes les bases de données non protégées dans cette instance ou ce groupe de disponibilité Always On.
+
+    ![Sélectionner les éléments à sauvegarder](./media/backup-azure-sql-database/select-items-to-backup.png)
+
+1. Choisissez toutes les bases de données que vous souhaitez protéger, puis sélectionnez **OK**.
 
    ![Protection de la base de données](./media/backup-azure-sql-database/select-database-to-protect.png)
 
@@ -179,28 +178,20 @@ Comment détecter les bases de données en cours d’exécution sur une machine 
      * Pour protéger plus de 50 bases de données, configurez plusieurs sauvegardes.
      * Pour [activer](#enable-auto-protection) l’ensemble de l’instance ou le groupe de disponibilité Always On dans la liste déroulante **PROTECTION AUTOMATIQUE**, sélectionnez **ACTIVER** puis **OK**.
 
-    > [!NOTE]
-    > La fonctionnalité de [protection automatique](#enable-auto-protection) permet non seulement de protéger toutes les bases de données existantes en une seule étape, mais aussi de protéger automatiquement toutes les nouvelles bases de données ajoutées à cette instance ou ce groupe de disponibilité.  
+         > [!NOTE]
+         > La fonctionnalité de [protection automatique](#enable-auto-protection) permet non seulement de protéger toutes les bases de données existantes en une seule étape, mais aussi de protéger automatiquement toutes les nouvelles bases de données ajoutées à cette instance ou ce groupe de disponibilité.  
 
-4. Cliquez sur **OK** pour ouvrir **Stratégie de sauvegarde**.
+1. Définir la **stratégie de sauvegarde**. Vous pouvez effectuer l’une des actions suivantes :
 
-    ![Activer la protection automatique pour le groupe de disponibilité Always On](./media/backup-azure-sql-database/enable-auto-protection.png)
-
-5. Dans **Stratégie de sauvegarde**, choisissez une stratégie, puis sélectionnez **OK**.
-
-   * Sélectionner la stratégie par défaut HourlyLogBackup.
+   * Sélectionner la stratégie par défaut *HourlyLogBackup*.
    * Choisir une stratégie de sauvegarde existante créée précédemment pour SQL.
    * Définir une nouvelle stratégie selon votre RPO et la durée de rétention.
 
      ![Sélectionner la stratégie de sauvegarde](./media/backup-azure-sql-database/select-backup-policy.png)
 
-6. Dans **Sauvegarde**, sélectionnez **Activer la sauvegarde**.
+1. Cliquez sur **Activer la sauvegarde** pour soumettre l’opération **Configurer la protection** et suivre l’avancement de la configuration dans la zone **Notifications** du portail.
 
-    ![Activer la stratégie de sauvegarde choisie](./media/backup-azure-sql-database/enable-backup-button.png)
-
-7. Vous pouvez suivre la progression de la configuration dans la zone **Notifications** du portail.
-
-    ![Zone Notifications](./media/backup-azure-sql-database/notifications-area.png)
+   ![Suivre l’avancement de la configuration](./media/backup-azure-sql-database/track-configuration-progress.png)
 
 ### <a name="create-a-backup-policy"></a>Créer une stratégie de sauvegarde
 
@@ -215,22 +206,22 @@ Une stratégie de sauvegarde définit le moment auquel les sauvegardes sont effe
 Pour créer une stratégie de sauvegarde :
 
 1. Dans le coffre, sélectionnez **Stratégies de sauvegarde** > **Ajouter**.
-2. Dans **Ajouter**, sélectionnez **SQL Server dans une machine virtuelle Azure** pour définir le type de stratégie.
+1. Dans **Ajouter**, sélectionnez **SQL Server dans une machine virtuelle Azure** pour définir le type de stratégie.
 
    ![Choisissez un type de stratégie pour la nouvelle stratégie de sauvegarde](./media/backup-azure-sql-database/policy-type-details.png)
 
-3. Dans **Nom de la stratégie**, entrez le nom de la nouvelle stratégie.
-4. Dans **Stratégie de sauvegarde complète**, sélectionnez une **Fréquence de sauvegarde**. Choisissez **Quotidienne** ou **Hebdomadaire**.
+1. Dans **Nom de la stratégie**, entrez le nom de la nouvelle stratégie.
 
-   * Si vous sélectionnez **quotidienne**, sélectionnez l’heure et le fuseau horaire de début du travail de sauvegarde.
-   * Si vous choisissez la fréquence **hebdomadaire**, sélectionnez le jour de la semaine, l’heure et le fuseau horaire indiquant le début du travail de sauvegarde.
-   * Exécutez une sauvegarde complète, car vous ne pouvez pas désactiver l’option **Sauvegarde complète**.
-   * Sélectionnez **Sauvegarde complète** pour afficher la stratégie.
-   * Si vous choisissez des sauvegardes complètes quotidiennes, vous ne pouvez pas créer de sauvegardes différentielles.
+    ![Saisir un nom de stratégie](./media/backup-azure-sql-database/policy-name.png)
+
+1. Cliquez sur le lien **Modifier** correspondant à **Sauvegarde complète** pour modifier les paramètres par défaut.
+
+   * Sélectionner une **fréquence de sauvegarde**. Choisissez **Quotidienne** ou **Hebdomadaire**.
+   * Si vous sélectionnez **quotidienne**, sélectionnez l’heure et le fuseau horaire de début du travail de sauvegarde. Si vous choisissez des sauvegardes complètes quotidiennes, vous ne pouvez pas créer de sauvegardes différentielles.
 
      ![Champs de la nouvelle stratégie de sauvegarde](./media/backup-azure-sql-database/full-backup-policy.png)  
 
-5. Dans **DURÉE DE RÉTENTION**, toutes les options sont sélectionnées par défaut. Désactivez les limites des plages de rétention dont vous ne souhaitez pas, puis définissez les intervalles à utiliser.
+1. Dans **DURÉE DE RÉTENTION**, toutes les options sont sélectionnées par défaut. Désactivez les limites des plages de rétention dont vous ne souhaitez pas, puis définissez les intervalles à utiliser.
 
     * La période de rétention minimale est de sept jours pour tous les types de sauvegardes (complète, différentielle et fichier journal).
     * Des points de récupération sont marqués pour la rétention et varient selon la durée de rétention. Par exemple, si vous sélectionnez une sauvegarde complète quotidienne, seule une sauvegarde complète est déclenchée chaque jour.
@@ -239,37 +230,37 @@ Pour créer une stratégie de sauvegarde :
 
        ![Paramètres d’intervalle de la durée de rétention](./media/backup-azure-sql-database/retention-range-interval.png)
 
-6. Dans le menu de **stratégie Sauvegarde complète**, cliquez sur **OK** pour accepter les paramètres.
-7. Pour ajouter une stratégie de sauvegarde différentielle, sélectionnez **Sauvegarde différentielle**.
+1. Sélectionnez **OK** pour accepter le paramètre pour les sauvegardes complètes.
+1. Cliquez sur le lien **Modifier** correspondant à **Sauvegarde différentielle** pour modifier les paramètres par défaut.
 
-   ![Paramètres d’intervalle des durées de rétention](./media/backup-azure-sql-database/retention-range-interval.png)
-   ![Ouvrir le menu de la stratégie de sauvegarde différentielle](./media/backup-azure-sql-database/backup-policy-menu-choices.png)
+    * Dans la stratégie **Sauvegarde différentielle**, sélectionnez **Activer** pour ouvrir les contrôles de fréquence et de rétention.
+    * Vous pouvez déclencher une sauvegarde différentielle une fois par jour uniquement. Une sauvegarde différentielle ne peut pas être déclenchée le même jour en tant que sauvegarde complète.
+    * Les sauvegardes différentielles peuvent être conservées jusqu’à 180 jours.
+    * La sauvegarde différentielle n’est pas prise en charge pour la base de données MASTER.
 
-8. Dans la stratégie **Sauvegarde différentielle**, sélectionnez **Activer** pour ouvrir les contrôles de fréquence et de rétention.
+      ![Stratégie de sauvegarde différentielle](./media/backup-azure-sql-database/differential-backup-policy.png)
 
-    * Vous pouvez déclencher une sauvegarde différentielle une fois par jour uniquement.
-    * Les sauvegardes différentielles peuvent être conservées jusqu’à 180 jours. Pour une durée de rétention supérieure, utilisez des sauvegardes complètes.
+1. Cliquez sur le lien **Modifier** correspondant à **Sauvegarde de fichier journal** pour modifier les paramètres par défaut
 
-9. Sélectionnez **OK** pour enregistrer la stratégie et revenir au menu principal **Stratégie de sauvegarde**.
+    * Dans **Sauvegarde de fichier journal**, sélectionnez **Activer** et définissez les contrôles de fréquence et de rétention.
+    * Les sauvegardes de fichiers journaux peuvent se produire toutes les 15 minutes et être conservées jusqu’à 35 jours.
+    * Si la base de données est en [mode de récupération simple](/sql/relational-databases/backup-restore/recovery-models-sql-server?view=sql-server-ver15), la planification des sauvegardes de fichiers journaux de cette base de données est suspendue et aucune sauvegarde de journal n’est déclenchée.
+    * Si le mode de récupération de la base de données passe **de Complète** à **Simple**, les sauvegardes de fichiers journaux sont suspendues dans les 24 heures suivant le changement de mode de récupération. De même, si le mode de récupération sur **Simple**évolue, les sauvegardes de fichiers journaux peuvent être prises en charge pour la base de données. Les planifications de sauvegardes de journaux sont activées dans les 24 heures suivant la modification du mode de récupération.
 
-10. Pour ajouter une stratégie de sauvegarde de fichier journal, cliquez sur **Sauvegarde de fichier journal**.
-11. Dans **Sauvegarde de fichier journal**, sélectionnez **Activer** et définissez les contrôles de fréquence et de rétention. Les sauvegardes de fichiers journaux peuvent se produire toutes les 15 minutes et être conservées jusqu’à 35 jours.
-12. Sélectionnez **OK** pour enregistrer la stratégie et revenir au menu principal **Stratégie de sauvegarde**.
+      ![Stratégie de sauvegarde de fichier journal](./media/backup-azure-sql-database/log-backup-policy.png)
 
-    ![Modifier la stratégie de sauvegarde de fichier journal](./media/backup-azure-sql-database/log-backup-policy-editor.png)
+1. Dans le menu **Stratégie de sauvegarde**, choisissez s’il convient d’activer l’option **Compression de la sauvegarde SQL**, qui est désactivée par défaut. Si elle est activée, SQL Server envoie un flux de sauvegarde compressé à VDI. Sauvegarde Azure remplace les valeurs par défaut au niveau de l’instance par la clause COMPRESSION / NO_COMPRESSION en fonction de la valeur de ce contrôle.
 
-13. Dans le menu **Stratégie de sauvegarde**, choisissez s’il convient d’activer l’option **Compression de la sauvegarde SQL**, qui est désactivée par défaut. Si elle est activée, SQL Server envoie un flux de sauvegarde compressé à VDI.  Notez que Sauvegarde Azure remplace les valeurs par défaut au niveau de l’instance par la clause COMPRESSION / NO_COMPRESSION en fonction de la valeur de ce contrôle.
-
-14. Après avoir terminé les modifications apportées à la stratégie de sauvegarde, sélectionnez **OK**.
+1. Après avoir terminé les modifications apportées à la stratégie de sauvegarde, sélectionnez **OK**.
 
 > [!NOTE]
-> Chaque sauvegarde de fichier journal est chaînée à la sauvegarde complète précédente pour former une chaîne de récupération. Cette sauvegarde complète est conservée jusqu’à la fin de la durée de conservation de la dernière sauvegarde de fichier journal. Il est donc possible que la sauvegarde complète soit conservée pour une durée supplémentaire afin que tous les journaux puissent être récupérés. Supposons que l’utilisateur effectue une sauvegarde complète hebdomadaire, une sauvegarde différentielle par jour et des journaux d’activité toutes les 2 heures. Tous sont conservés 30 jours. Cependant, la sauvegarde complète hebdomadaire ne peut être réellement nettoyée/supprimée que lorsque la sauvegarde complète suivante est disponible, à savoir après 30 + 7 jours. Par exemple, la sauvegarde complète hebdomadaire a lieu le 16 novembre. Conformément à la stratégie de rétention, elle doit être conservée jusqu’au 16 décembre. La dernière sauvegarde de fichier journal de cette sauvegarde complète a lieu avant la prochaine sauvegarde complète planifiée, le 22 novembre. Tant que ce journal n’est pas disponible, jusqu’au 22 décembre, la sauvegarde complète du 16 novembre ne peut pas être supprimée. La sauvegarde complète du 16 novembre est donc conservée jusqu’au 22 décembre.
+> Chaque sauvegarde de fichier journal est chaînée à la sauvegarde complète précédente pour former une chaîne de récupération. Cette sauvegarde complète est conservée jusqu’à la fin de la durée de conservation de la dernière sauvegarde de fichier journal. Il est donc possible que la sauvegarde complète soit conservée pour une durée supplémentaire afin que tous les journaux puissent être récupérés. Supposons que l’utilisateur effectue une sauvegarde complète hebdomadaire, une sauvegarde différentielle par jour et des journaux d’activité toutes les 2 heures. Tous sont conservés 30 jours. Cependant, la sauvegarde complète hebdomadaire ne peut être réellement nettoyée/supprimée que lorsque la sauvegarde complète suivante est disponible, à savoir après 30 + 7 jours. Par exemple, la sauvegarde complète hebdomadaire a lieu le 16 novembre. Conformément à la stratégie de conservation, elle doit être conservée jusqu’au 16 décembre. La dernière sauvegarde de fichier journal de cette sauvegarde complète a lieu avant la prochaine sauvegarde complète planifiée, le 22 novembre. Tant que ce journal n’est pas disponible, jusqu’au 22 décembre, la sauvegarde complète du 16 novembre ne peut pas être supprimée. La sauvegarde complète du 16 novembre est donc conservée jusqu’au 22 décembre.
 
 ## <a name="enable-auto-protection"></a>Activer la protection automatique  
 
 Vous pouvez activer la protection automatique pour sauvegarder automatiquement toutes les bases de données existantes et futures sur une instance SQL Server autonome ou à un groupe de disponibilité Always On.
 
-* Il n’existe aucune limite sur le nombre de bases de données que vous pouvez sélectionner en une fois pour la protection automatique.
+* Il n’existe aucune limite sur le nombre de bases de données que vous pouvez sélectionner à la fois pour la protection automatique. La détection s’exécute généralement toutes les huit heures. Cela étant, pour détecter et protéger les nouvelles bases de données immédiatement, vous pouvez exécuter manuellement une détection en sélectionnant l’option **Redétecter les bases de données**.
 * Vous ne pouvez pas protéger ou exclure sélectivement des bases de données de la protection dans une instance lorsque vous activez la protection automatique.
 * Si votre instance inclut déjà des bases de données protégées, elles restent protégées par leurs stratégies respectives même après que vous avez activé la protection automatique. Toutes les bases de données non protégées que vous ajoutez par la suite ont une seule stratégie que vous définissez au moment de l’activation de la protection automatique et qui est affichée sous **Configurer la sauvegarde**. Toutefois, vous pouvez modifier ultérieurement la stratégie associée à une base de données protégée automatiquement.  
 

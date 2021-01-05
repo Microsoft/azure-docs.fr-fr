@@ -6,14 +6,15 @@ services: dns
 author: rohinkoul
 ms.service: dns
 ms.topic: quickstart
-ms.date: 3/11/2019
+ms.date: 10/20/2020
 ms.author: rohink
-ms.openlocfilehash: e6904c013cf2ed897bdc7c8b32f04fe500fc31d9
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: 1929cd512d18d7fd234aff1f55814c423455e63b
+ms.sourcegitcommit: 04fb3a2b272d4bbc43de5b4dbceda9d4c9701310
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "76937195"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94561367"
 ---
 # <a name="quickstart-create-an-azure-dns-zone-and-record-using-azure-cli"></a>Démarrage rapide : Créer un enregistrement et une zone Azure DNS avec Azure CLI
 
@@ -23,9 +24,11 @@ Une zone DNS permet d’héberger les enregistrements DNS d’un domaine particu
 
 Azure DNS prend également en charge les zones DNS privées. Pour en savoir plus sur les zones DNS privées, consultez la session relative à [l’utilisation d’Azure DNS pour les domaines privés](private-dns-overview.md). Vous pouvez trouver un exemple de création d’une zone DNS privée sur la page [Créer une zone privée Azure DNS avec Azure CLI](./private-dns-getstarted-cli.md).
 
-[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
 
-Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../includes/azure-cli-prepare-your-environment.md)]
+
+- Cet article nécessite la version 2.0.4 ou ultérieure de l’interface Azure CLI. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée.
 
 ## <a name="create-the-resource-group"></a>Créer le groupe de ressources
 
@@ -91,11 +94,11 @@ Maintenant que vous disposez d’une zone DNS test avec un enregistrement « A
 
    Un écran similaire à celui-ci doit s’afficher :
 
-   ![nslookup](media/dns-getstarted-portal/nslookup.PNG)
+   ![Capture d’écran montrant une fenêtre d’invite de commandes avec une commande nslookup et des valeurs pour Serveur, Adresse, Nom et Adresse.](media/dns-getstarted-portal/nslookup.PNG)
 
 Le nom d’hôte **www\.contoso.xyz** se résout en **10.10.10.10**, tel que vous l’avez configuré. Ce résultat confirme que la résolution de noms fonctionne correctement.
 
-## <a name="delete-all-resources"></a>Supprimer toutes les ressources
+## <a name="clean-up-resources"></a>Nettoyer les ressources
 
 Lorsque vous n’en avez plus besoin, vous pouvez supprimer toutes les ressources créées dans ce démarrage rapide en supprimant le groupe de ressources :
 

@@ -5,16 +5,17 @@ author: florianborn71
 ms.author: flborn
 ms.date: 02/05/2020
 ms.topic: conceptual
-ms.openlocfilehash: de3f127d97803ea920d61d748a1af0c80a1a1afc
-ms.sourcegitcommit: 0690ef3bee0b97d4e2d6f237833e6373127707a7
+ms.custom: devx-track-csharp
+ms.openlocfilehash: b951dab1ad01187c7612fad047bc52eb6aa9700e
+ms.sourcegitcommit: e2dc549424fb2c10fcbb92b499b960677d67a8dd
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83759130"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94701872"
 ---
 # <a name="textures"></a>Textures
 
-Les textures sont une [ressource partagée](../concepts/lifetime.md) immuable. Les textures peuvent être chargées à partir d’une [stockage Blob](../how-tos/conversion/blob-storage.md) et appliquées directement aux modèles comme illustré dans le [Tutoriel : Changement d’environnement et de matériaux](../tutorials/unity/changing-environment-and-materials.md). Cependant, le plus souvent, les textures font partie d’un [modèle converti](../how-tos/conversion/model-conversion.md), dans lequel elles sont référencées par ses [matériaux](materials.md).
+Les textures sont une [ressource partagée](../concepts/lifetime.md) immuable. Les textures peuvent être chargées à partir d’une [stockage Blob](../how-tos/conversion/blob-storage.md) et appliquées directement aux modèles comme illustré dans le [Tutoriel : Changement d’environnement et de matériaux](../tutorials/unity/materials-lighting-effects/materials-lighting-effects.md). Cependant, le plus souvent, les textures font partie d’un [modèle converti](../how-tos/conversion/model-conversion.md), dans lequel elles sont référencées par ses [matériaux](materials.md).
 
 ## <a name="texture-types"></a>Types de texture
 
@@ -25,7 +26,7 @@ Les textures sont une [ressource partagée](../concepts/lifetime.md) immuable. L
 
 ## <a name="supported-texture-formats"></a>Formats de texture pris en charge
 
-Toutes les textures fournies à ARR doivent être au [format DDS](https://en.wikipedia.org/wiki/DirectDraw_Surface), de préférence avec des mipmaps et la compression de texture. Consultez l’article sur l’[outil en ligne de commande TexConv](../resources/tools/tex-conv.md) si vous souhaitez automatiser le processus de conversion.
+Toutes les textures fournies à ARR doivent être au [format DDS](https://en.wikipedia.org/wiki/DirectDraw_Surface), de préférence avec des mipmaps et la compression de texture.
 
 ## <a name="loading-textures"></a>Chargement des textures
 
@@ -69,7 +70,7 @@ void LoadMyTexture(ApiHandle<AzureSession> session, std::string textureUri)
     ApiHandle<LoadTextureAsync> textureLoad = *session->Actions()->LoadTextureFromSASAsync(params);
     textureLoad->Completed([](ApiHandle<LoadTextureAsync> res)
     {
-        if (res->IsRanToCompletion())
+        if (res->GetIsRanToCompletion())
         {
             //use res->Result()
         }
@@ -81,13 +82,21 @@ void LoadMyTexture(ApiHandle<AzureSession> session, std::string textureUri)
 }
 ```
 
-
 Selon la façon dont vous envisagez d’utiliser la texture, son contenu et son type peuvent être soumis à des restrictions. Par exemple, la carte de rugosité d’un [matériau PBR](../overview/features/pbr-materials.md) doit être en nuances de gris.
 
 > [!CAUTION]
 > Toutes les fonctions *Async* dans ARR retournent des objets d’opérations asynchrones. Vous devez stocker une référence à ces objets jusqu’à ce que l’opération soit terminée. Sinon, le récupérateur de mémoire C# peut supprimer l’opération de façon précoce et ne jamais se terminer. Dans l’exemple de code ci-dessus, la variable membre « _textureLoad » est utilisée pour stocker une référence jusqu’à ce que l’événement *Completed* se produise.
 
+## <a name="api-documentation"></a>Documentation de l’API
+
+* [Texture, classe C#](/dotnet/api/microsoft.azure.remoterendering.texture)
+* [RemoteManager.LoadTextureAsync(), C#](/dotnet/api/microsoft.azure.remoterendering.remotemanager.loadtextureasync)
+* [RemoteManager.LoadTextureFromSASAsync(), C#](/dotnet/api/microsoft.azure.remoterendering.remotemanager.loadtexturefromsasasync)
+* [Texture, classe C++](/cpp/api/remote-rendering/texture)
+* [RemoteManager::LoadTextureAsync(), C++](/cpp/api/remote-rendering/remotemanager#loadtextureasync)
+* [RemoteManager::LoadTextureFromSASAsync(), C++](/cpp/api/remote-rendering/remotemanager#loadtexturefromsasasync)
+
 ## <a name="next-steps"></a>Étapes suivantes
 
 * [Matériaux](materials.md)
-* [Ciel](../overview/features/sky.md)
+* [Lumière ambiante](../overview/features/sky.md)

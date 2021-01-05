@@ -18,10 +18,10 @@ ms.author: billmath
 ms.custom: seohack1
 ms.collection: M365-identity-device-management
 ms.openlocfilehash: 84b786a1701892823554a83fa2015ac88d6eff4d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "60295141"
 ---
 # <a name="determine-access-control-requirements-for-your-hybrid-identity-solution"></a>Déterminer les besoins de contrôle d'accès pour votre solution d'identité hybride

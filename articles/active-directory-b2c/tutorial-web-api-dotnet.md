@@ -7,16 +7,16 @@ author: msmimart
 manager: celestedg
 ms.author: mimart
 ms.date: 10/14/2019
-ms.custom: mvc
+ms.custom: devx-track-csharp, mvc
 ms.topic: tutorial
 ms.service: active-directory
 ms.subservice: B2C
-ms.openlocfilehash: 23531bd4c53dc2fc4851a1e4718fca0e9c3bfc1c
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: ada4226500437e7733605a29988ee7cacae40761
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "78187421"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95994308"
 ---
 # <a name="tutorial-grant-access-to-an-aspnet-web-api-using-azure-active-directory-b2c"></a>Tutoriel : Accorder l’accès à une API web ASP.NET à l’aide d’Azure Active Directory B2C
 
@@ -40,31 +40,31 @@ Effectuez les étapes et les prérequis du [Tutoriel : Activer l’authentifica
 
 Les ressources des API web doivent être inscrites auprès de votre locataire avant de pouvoir accepter et répondre aux demandes de ressources protégées émanant des applications clientes qui présentent un jeton d'accès.
 
-Pour inscrire une application dans votre locataire Azure AD B2C, vous pouvez utiliser l’expérience **Applications** actuelle ou notre nouvelle expérience unifiée **Inscriptions d’applications (préversion)** . [En savoir plus sur la nouvelle expérience](https://aka.ms/b2cappregintro).
+Pour inscrire une application dans votre locataire Azure AD B2C, vous pouvez utiliser notre nouvelle expérience unifiée **Inscriptions d’applications** ou notre expérience héritée **Applications (héritées)** . [En savoir plus sur la nouvelle expérience](./app-registrations-training-guide.md).
 
-#### <a name="applications"></a>[Applications](#tab/applications/)
+#### <a name="app-registrations"></a>[Inscriptions des applications](#tab/app-reg-ga/)
+
+1. Connectez-vous au [portail Azure](https://portal.azure.com).
+1. Sélectionnez le filtre **Annuaire et abonnement** dans le menu supérieur, puis l’annuaire qui contient votre locataire Azure AD B2C.
+1. Dans le menu de gauche, sélectionnez **Azure AD B2C**. Ou sélectionnez **Tous les services**, puis recherchez et sélectionnez **Azure AD B2C**.
+1. Sélectionnez **Inscriptions d’applications**, puis **Nouvelle inscription**.
+1. Entrez un **Nom** pour l’application. Par exemple, *webapi1*.
+1. Sous **URI de redirection**, sélectionnez **Web**, puis entrez un point de terminaison où Azure AD B2C doit retourner les jetons demandés par votre application. Dans ce tutoriel, l'exemple s'exécute localement et écoute `https://localhost:44332`.
+1. Sélectionnez **Inscription**.
+1. Enregistrez l’**ID d’application (client)** pour l’utiliser dans une étape ultérieure.
+
+#### <a name="applications-legacy"></a>[Applications (héritées)](#tab/applications-legacy/)
 
 1. Connectez-vous au [portail Azure](https://portal.azure.com).
 2. Veillez à utiliser l’annuaire qui contient votre locataire Azure AD B2C en sélectionnant le filtre **Annuaire + abonnement** dans le menu du haut et en choisissant l’annuaire qui contient votre locataire.
 3. Choisissez **Tous les services** dans le coin supérieur gauche du portail Azure, puis recherchez et sélectionnez **Azure AD B2C**.
-4. Sélectionnez **Applications**, puis **Ajouter**.
+4. Sélectionnez **Applications (héritées)** , puis **Ajouter**.
 5. Entrez un nom pour l’application. Par exemple, *webapi1*.
 6. Pour **Inclure une application/API web**, sélectionnez **Oui**.
 7. Pour l’**URL de réponse**, entrez un point de terminaison où Azure AD B2C doit retourner les jetons demandés par votre application. Dans ce tutoriel, l'exemple s'exécute localement et écoute `https://localhost:44332`.
 8. Pour l’**L’URI de l’ID d’application**, entrez l’identificateur utilisé pour votre API web. L’identificateur complet URI, y compris le domaine, est généré pour vous. Par exemple : `https://contosotenant.onmicrosoft.com/api`.
 9. Cliquez sur **Créer**.
 10. Sur la page des propriétés, enregistrez l'ID d'application que vous utiliserez pour configurer l'application web.
-
-#### <a name="app-registrations-preview"></a>[Inscriptions d’applications (préversion)](#tab/app-reg-preview/)
-
-1. Connectez-vous au [portail Azure](https://portal.azure.com).
-1. Sélectionnez le filtre **Annuaire et abonnement** dans le menu supérieur, puis l’annuaire qui contient votre locataire Azure AD B2C.
-1. Dans le menu de gauche, sélectionnez **Azure AD B2C**. Ou sélectionnez **Tous les services**, puis recherchez et sélectionnez **Azure AD B2C**.
-1. Sélectionnez **Inscriptions d’applications (préversion)** , puis **Nouvelle inscription**.
-1. Entrez un **Nom** pour l’application. Par exemple, *webapi1*.
-1. Sous **URI de redirection**, sélectionnez **Web**, puis entrez un point de terminaison où Azure AD B2C doit retourner les jetons demandés par votre application. Dans ce tutoriel, l'exemple s'exécute localement et écoute `https://localhost:44332`.
-1. Sélectionnez **Inscription**.
-1. Enregistrez l’**ID d’application (client)** pour l’utiliser dans une étape ultérieure.
 
 * * *
 

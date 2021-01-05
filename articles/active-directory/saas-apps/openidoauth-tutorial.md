@@ -2,35 +2,30 @@
 title: Configurer une application OpenID/OAuth à partir de la galerie d’applications Azure AD | Microsoft Docs
 description: Étapes pour configurer une application OpenID/OAuth à partir de la galerie d’applications Azure AD
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: daveba
-ms.reviewer: barbkess
-ms.assetid: eedebb76-e78c-428f-9cf0-5891852e79fb
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 05/30/2019
 ms.author: jeedes
-ms.collection: M365-identity-device-management
 ms.custom: has-adal-ref
-ms.openlocfilehash: 13c3a7f8376d4c852a74be75e323c6bb042b5407
-ms.sourcegitcommit: 50ef5c2798da04cf746181fbfa3253fca366feaa
+ms.openlocfilehash: 17d78b4d6db9e65868995d8ea7835a0d911e8589
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82610987"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96348690"
 ---
 # <a name="configure-an-openidoauth-application-from-the-azure-ad-app-gallery"></a>Configurer une application OpenID/OAuth à partir de la galerie d’applications Azure AD
 
 ## <a name="process-of-adding-an-openid-application-from-the-gallery"></a>Processus d’ajout d’une application OpenID à partir de la galerie
 
-1. Dans le volet gauche du [portail Azure](https://portal.azure.com), sélectionnez **Azure Active Directory**.
+1. Dans le [portail Azure](https://portal.azure.com), sélectionnez **Azure Active Directory**.
 
-    ![Bouton Azure Active Directory](common/select-azuread.png))
+    ![Bouton Azure Active Directory](common/select-azuread.png)
 
 2. Accédez à **Applications d’entreprise** > **Toutes les applications**.
 
@@ -44,17 +39,23 @@ ms.locfileid: "82610987"
 
     ![Openid dans la liste des résultats](common/search-new-app.png)
 
-    > [!NOTE]
-    > Pour les applications OpenID Connect et OAuth, le bouton **Ajouter** est désactivé par défaut. L’administrateur des locataires doit sélectionner le bouton S’inscrire et donner son consentement pour l’application. L’application est alors ajoutée au locataire du client, où vous pouvez effectuer les configurations. Il est inutile d’ajouter l’application explicitement.
+
+1. Dans la page Nom de l’application, cliquez sur le bouton **S’inscrire**.
 
     ![Bouton Ajouter](./media/openidoauth-tutorial/addbutton.png)
 
-5. Lorsque vous sélectionnez le lien d’inscription, vous êtes redirigé vers la page Azure Active Directory (Azure AD) pour entrer les informations d’identification de connexion.
+    > [!NOTE]
+    > L’administrateur des locataires doit sélectionner le bouton S’inscrire et donner son consentement pour l’application. L’application est alors ajoutée au locataire du client, où vous pouvez effectuer les configurations. Il est inutile d’ajouter l’application explicitement.
+
+5. Vous êtes redirigé vers la page Connexion de l’application ou Azure Active Directory (Azure AD) pour entrer les informations d’identification de connexion.
 
 6. Une fois que l’authentification a été effectuée, vous acceptez le consentement dans la page de consentement. La page d’accueil de l’application s’affiche.
 
     > [!NOTE]
     > Vous ne pouvez ajouter qu’une instance de l’application. Si vous en avez déjà ajouté une et que vous avez tenté de fournir une nouvelle fois le consentement, l’application n’est pas ajoutée à nouveau dans le locataire. Vous ne pouvez donc utiliser en toute logique qu’une seule instance de l’application dans le locataire.
+
+1. Suivez la vidéo ci-dessous pour ajouter une application OpenID à partir de la galerie.
+    >[!VIDEO https://www.microsoft.com/videoplayer/embed/RE4HoNI]
 
 ## <a name="authentication-flow-using-openid-connect"></a>Flux d’authentification à l’aide d’OpenID Connect
 
@@ -81,13 +82,13 @@ Par défaut, Azure AD promeut les applications mutualisées. Elles sont facileme
 ## <a name="consent-framework"></a>Framework de consentement
 
 Vous pouvez utiliser l’infrastructure de consentement d’Azure AD pour développer des applications clientes natives et web mutualisées. Ces applications autorisent la connexion au moyen de comptes d’utilisateurs d’un locataire Azure AD différent de celui où l’application a été inscrite. Elles peuvent également avoir besoin d’accéder à des API web, par exemple :
-- API Microsoft Graph pour accéder à Azure AD, à Intune et aux services d’Office 365
+- API Microsoft Graph pour accéder à Azure AD, à Intune et aux services de Microsoft 365.
 - API des autres services Microsoft
 - Vos propres API web
 
 L’infrastructure est basée sur le consentement d’un utilisateur ou d’un administrateur à l’inscription d’une application dans son répertoire. Cette inscription peut impliquer l’accès aux données de répertoire. Une fois le consentement donné, l’application cliente peut appeler l’API Microsoft Graph au nom de l’utilisateur et utiliser les informations en fonction des besoins.
 
-[L’API Microsoft Graph](https://developer.microsoft.com/graph/) permet d’accéder aux données d’Office 365, par exemple :
+L’[API Microsoft Graph](https://developer.microsoft.com/graph/) permet d’accéder aux données de Microsoft 365, par exemple :
 
 - Calendriers et messages d’Exchange
 - Sites et listes de SharePoint
@@ -104,19 +105,19 @@ Les étapes suivantes vous montrent comment l’expérience de consentement fonc
 
     a. Cliquez sur **Inscriptions d’applications** à gauche du menu et ouvrez votre application en tapant son nom dans la zone de recherche.
 
-    ![API Graph](./media/openidoauth-tutorial/application.png)
+    ![Capture d’écran montrant l’élément « Inscriptions d’applications » sélectionné dans le menu de gauche, et la zone de recherche d’« ID d’application » mise en évidence.](./media/openidoauth-tutorial/application.png)
 
     b. Cliquez sur **Afficher les autorisations de l’API**.
 
-    ![API Graph](./media/openidoauth-tutorial/api-permission.png)
+    ![Capture d’écran montrant la page « Appeler une API » avec le bouton « Afficher les autorisations de l’API » sélectionné.](./media/openidoauth-tutorial/api-permission.png)
 
     c. Cliquez sur **Ajouter une autorisation**.
 
-    ![API Graph](./media/openidoauth-tutorial/add-permission.png)
+    ![Capture d’écran montrant la page « Autorisations de l’API » avec le bouton « Ajouter une autorisation » sélectionné.](./media/openidoauth-tutorial/add-permission.png)
 
     d. Cliquez sur **Microsoft Graph**.
 
-    ![API Graph](./media/openidoauth-tutorial/microsoft-graph.png)
+    ![Capture d’écran montrant la page « Demander des autorisations d’API » avec la sélection de l’onglet « API Microsoft » et de la vignette « Microsoft Graph ».](./media/openidoauth-tutorial/microsoft-graph.png)
 
     e. Sélectionnez les options appropriées dans **Autorisations déléguées** et **Autorisations d’application**.
 
@@ -126,7 +127,7 @@ Les étapes suivantes vous montrent comment l’expérience de consentement fonc
 
 3. Si l’utilisateur n’est pas déjà authentifié, le point de terminaison /authorize d’Azure AD l’invite à se connecter.
 
-    ![Authentification](./media/openidoauth-tutorial/authentication.png)
+    ![Capture d’écran de l’invite de connexion pour le compte](./media/openidoauth-tutorial/authentication.png)
 
 4. Une fois l’utilisateur connecté, Azure AD détermine s’il est nécessaire d’afficher une page de consentement pour l’utilisateur. La détermination est différente selon que l’utilisateur (ou l’administrateur de son organisation) a déjà accordé ou non son consentement à l’application.
 
@@ -156,3 +157,7 @@ L’administrateur d’un client peut empêcher les utilisateurs standard de don
 Le paramètre *prompt=admin_consent* peut également être utilisé par les applications qui demandent des autorisations ne nécessitant pas le consentement de l’administrateur. Exemple d’application qui requiert une expérience : l’administrateur des locataires « s’inscrit » une fois et aucun autre utilisateur n’est invité à donner son consentement à compter de ce moment.
 
 Imaginez qu’une application nécessite un consentement administrateur, et qu’un administrateur se connecte sans envoyer le paramètre *prompt=admin_consent*. Si l’administrateur donne son consentement pour l’application, celui-ci s’applique uniquement pour son compte d’utilisateur. Les utilisateurs standard ne peuvent toujours pas se connecter ni donner leur consentement pour l’application. Cette fonctionnalité s’avère particulièrement utile si vous souhaitez donner à l’administrateur des locataires la possibilité d’explorer votre application avant d’autoriser l’accès à d’autres utilisateurs.
+
+## <a name="next-steps"></a>Étapes suivantes
+
+[Configurer l’authentification unique (SSO) basée sur OIDC pour une application de votre locataire Azure Active Directory (Azure AD)](https://docs.microsoft.com/azure/active-directory/manage-apps/add-application-portal-setup-oidc-sso)

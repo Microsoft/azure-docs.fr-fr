@@ -11,12 +11,12 @@ ms.topic: article
 ms.date: 01/10/2020
 ms.author: tdsp
 ms.custom: seodec18, previous-author=deguhath, previous-ms.author=deguhath
-ms.openlocfilehash: a47f30cf00624faf098c8b605534cf355eacadee
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 580181aaaea975ee07bcec8108297079c5373b92
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79227193"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96007407"
 ---
 # <a name="the-team-data-science-process-in-action-using-sql-server"></a>Processus TDSP (Team Data Science Process) en action : utilisation de SQL Server
 Dans ce didacticiel, vous allez explorer le processus de création et de déploiement d’un modèle d’apprentissage automatique à l’aide de SQL Server et d’un jeu de données disponible publiquement, le jeu de données [NYC Taxi Trips](https://www.andresmh.com/nyctaxitrips/). La procédure suit un flux de travail de science des données standard : ingérer et explorer les données, concevoir des fonctionnalités pour faciliter l’apprentissage, puis générer et déployer un modèle.
@@ -26,20 +26,31 @@ Les données NYC Taxi Trip se présentent sous la forme de fichiers CSV compress
 
 1. Le fichier CSV trip_data contient les détails de chaque course, comme le nombre de passagers, les points d’embarquement et de débarquement, la durée du trajet et la distance parcourue. Voici quelques exemples d’enregistrements :
    
-        medallion,hack_license,vendor_id,rate_code,store_and_fwd_flag,pickup_datetime,dropoff_datetime,passenger_count,trip_time_in_secs,trip_distance,pickup_longitude,pickup_latitude,dropoff_longitude,dropoff_latitude
-        89D227B655E5C82AECF13C3F540D4CF4,BA96DE419E711691B9445D6A6307C170,CMT,1,N,2013-01-01 15:11:48,2013-01-01 15:18:10,4,382,1.00,-73.978165,40.757977,-73.989838,40.751171
-        0BD7C8F5BA12B88E0B67BED28BEA73D8,9FD8F69F0804BDB5549F40E9DA1BE472,CMT,1,N,2013-01-06 00:18:35,2013-01-06 00:22:54,1,259,1.50,-74.006683,40.731781,-73.994499,40.75066
-        0BD7C8F5BA12B88E0B67BED28BEA73D8,9FD8F69F0804BDB5549F40E9DA1BE472,CMT,1,N,2013-01-05 18:49:41,2013-01-05 18:54:23,1,282,1.10,-74.004707,40.73777,-74.009834,40.726002
-        DFD2202EE08F7A8DC9A57B02ACB81FE2,51EE87E3205C985EF8431D850C786310,CMT,1,N,2013-01-07 23:54:15,2013-01-07 23:58:20,2,244,.70,-73.974602,40.759945,-73.984734,40.759388
-        DFD2202EE08F7A8DC9A57B02ACB81FE2,51EE87E3205C985EF8431D850C786310,CMT,1,N,2013-01-07 23:25:03,2013-01-07 23:34:24,1,560,2.10,-73.97625,40.748528,-74.002586,40.747868
+    `medallion,hack_license,vendor_id,rate_code,store_and_fwd_flag,pickup_datetime,dropoff_datetime,passenger_count,trip_time_in_secs,trip_distance,pickup_longitude,pickup_latitude,dropoff_longitude,dropoff_latitude`
+
+    `89D227B655E5C82AECF13C3F540D4CF4,BA96DE419E711691B9445D6A6307C170,CMT,1,N,2013-01-01 15:11:48,2013-01-01 15:18:10,4,382,1.00,-73.978165,40.757977,-73.989838,40.751171`
+
+    `0BD7C8F5BA12B88E0B67BED28BEA73D8,9FD8F69F0804BDB5549F40E9DA1BE472,CMT,1,N,2013-01-06 00:18:35,2013-01-06 00:22:54,1,259,1.50,-74.006683,40.731781,-73.994499,40.75066`
+
+    `0BD7C8F5BA12B88E0B67BED28BEA73D8,9FD8F69F0804BDB5549F40E9DA1BE472,CMT,1,N,2013-01-05 18:49:41,2013-01-05 18:54:23,1,282,1.10,-74.004707,40.73777,-74.009834,40.726002`
+
+    `DFD2202EE08F7A8DC9A57B02ACB81FE2,51EE87E3205C985EF8431D850C786310,CMT,1,N,2013-01-07 23:54:15,2013-01-07 23:58:20,2,244,.70,-73.974602,40.759945,-73.984734,40.759388`
+
+    `DFD2202EE08F7A8DC9A57B02ACB81FE2,51EE87E3205C985EF8431D850C786310,CMT,1,N,2013-01-07 23:25:03,2013-01-07 23:34:24,1,560,2.10,-73.97625,40.748528,-74.002586,40.747868`
+
 2. Le fichier CSV trip_fare contient les détails du prix de chaque course, comme le type de paiement, le prix de la course, les suppléments et les taxes, les pourboires et les péages, ainsi que le montant total réglé. Voici quelques exemples d’enregistrements :
    
-        medallion, hack_license, vendor_id, pickup_datetime, payment_type, fare_amount, surcharge, mta_tax, tip_amount, tolls_amount, total_amount
-        89D227B655E5C82AECF13C3F540D4CF4,BA96DE419E711691B9445D6A6307C170,CMT,2013-01-01 15:11:48,CSH,6.5,0,0.5,0,0,7
-        0BD7C8F5BA12B88E0B67BED28BEA73D8,9FD8F69F0804BDB5549F40E9DA1BE472,CMT,2013-01-06 00:18:35,CSH,6,0.5,0.5,0,0,7
-        0BD7C8F5BA12B88E0B67BED28BEA73D8,9FD8F69F0804BDB5549F40E9DA1BE472,CMT,2013-01-05 18:49:41,CSH,5.5,1,0.5,0,0,7
-        DFD2202EE08F7A8DC9A57B02ACB81FE2,51EE87E3205C985EF8431D850C786310,CMT,2013-01-07 23:54:15,CSH,5,0.5,0.5,0,0,6
-        DFD2202EE08F7A8DC9A57B02ACB81FE2,51EE87E3205C985EF8431D850C786310,CMT,2013-01-07 23:25:03,CSH,9.5,0.5,0.5,0,0,10.5
+    `medallion, hack_license, vendor_id, pickup_datetime, payment_type, fare_amount, surcharge, mta_tax, tip_amount, tolls_amount, total_amount`
+
+    `89D227B655E5C82AECF13C3F540D4CF4,BA96DE419E711691B9445D6A6307C170,CMT,2013-01-01 15:11:48,CSH,6.5,0,0.5,0,0,7`
+
+    `0BD7C8F5BA12B88E0B67BED28BEA73D8,9FD8F69F0804BDB5549F40E9DA1BE472,CMT,2013-01-06 00:18:35,CSH,6,0.5,0.5,0,0,7`
+
+    `0BD7C8F5BA12B88E0B67BED28BEA73D8,9FD8F69F0804BDB5549F40E9DA1BE472,CMT,2013-01-05 18:49:41,CSH,5.5,1,0.5,0,0,7`
+
+    `DFD2202EE08F7A8DC9A57B02ACB81FE2,51EE87E3205C985EF8431D850C786310,CMT,2013-01-07 23:54:15,CSH,5,0.5,0.5,0,0,6`
+
+    `DFD2202EE08F7A8DC9A57B02ACB81FE2,51EE87E3205C985EF8431D850C786310,CMT,2013-01-07 23:25:03,CSH,9.5,0.5,0.5,0,0,10.5`
 
 La clé unique permettant de joindre trip\_data et trip\_fare se compose des champs suivants : medallion (médaillon), hack\_licence (licence de taxi) et pickup\_datetime (date et heure d’embarquement).
 
@@ -48,12 +59,17 @@ Nous allons formuler trois problèmes de prédiction reposant sur le champ *tip\
 
 * Classification binaire : Prédire si un pourboire a ou non été versé pour une course ; autrement dit, une valeur *tip\_amount* supérieure à 0 $ constitue un exemple positif, alors qu’une valeur *tip\_amount* de 0 $ est un exemple négatif.
 * Classification multiclasse : Prédire la fourchette des pourboires versés pour une course. Nous divisons la valeur *tip\_amount* en cinq compartiments ou classes :
-   
-        Class 0 : tip_amount = $0
-        Class 1 : tip_amount > $0 and tip_amount <= $5
-        Class 2 : tip_amount > $5 and tip_amount <= $10
-        Class 3 : tip_amount > $10 and tip_amount <= $20
-        Class 4 : tip_amount > $20
+
+   `Class 0 : tip_amount = $0`
+
+   `Class 1 : tip_amount > $0 and tip_amount <= $5`
+
+   `Class 2 : tip_amount > $5 and tip_amount <= $10`
+
+   `Class 3 : tip_amount > $10 and tip_amount <= $20`
+
+   `Class 4 : tip_amount > $20`
+
 * Tâche de régression : Prédire le montant du pourboire versé pour une course.  
 
 ## <a name="setting-up-the-azure-data-science-environment-for-advanced-analytics"></a><a name="setup"></a>Configuration de l’environnement de science des données Azure pour l’analyse avancée
@@ -67,8 +83,8 @@ Dans ce tutoriel, nous allons décrire l’importation en parallèle de données
 Pour configurer votre environnement de science des données Azure :
 
 1. [Créez un compte de stockage](../../storage/common/storage-account-create.md)
-2. [Création d’un espace de travail Microsoft Azure Machine Learning](../studio/create-workspace.md)
-3. [Approvisionnez une machine virtuelle de science des données](../data-science-virtual-machine/setup-sql-server-virtual-machine.md), qui fournit un serveur SQL Server et un serveur Notebook IPython.
+2. [Création d’un espace de travail Microsoft Azure Machine Learning](../classic/create-workspace.md)
+3. [Approvisionnez une machine virtuelle de science des données](../data-science-virtual-machine/overview.md), qui fournit un serveur SQL Server et un serveur Notebook IPython.
    
    > [!NOTE]
    > Les exemples de scripts et de notebooks IPython seront téléchargés sur votre machine virtuelle de science des données lors du processus de configuration. À l’issue du script de post-installation de la machine virtuelle, les exemples figureront dans la bibliothèque Documents de votre machine virtuelle :  
@@ -89,9 +105,11 @@ Pour copier les données à l’aide d’AzCopy :
 1. Connectez-vous à votre machine virtuelle.
 2. Créez un répertoire dans le disque de données de la machine virtuelle (remarque : n’utilisez pas le disque temporaire fourni avec la machine virtuelle comme disque de données).
 3. Dans une fenêtre d’invite de commandes, exécutez la ligne de commande Azcopy ci-après en remplaçant la chaîne <chemin_dossier_de_données> par votre dossier de données créé à l’étape 2 :
-   
-        "C:\Program Files (x86)\Microsoft SDKs\Azure\AzCopy\azcopy" /Source:https://nyctaxitrips.blob.core.windows.net/data /Dest:<path_to_data_folder> /S
-   
+
+    ```console
+    "C:\Program Files (x86)\Microsoft SDKs\Azure\AzCopy\azcopy" /Source:https://nyctaxitrips.blob.core.windows.net/data /Dest:<path_to_data_folder> /S
+    ```
+
     Une fois AzCopy exécuté, le dossier de données doit contenir 24 fichiers CSV compressés (12 pour trip\_data et 12 pour trip\_fare).
 4. Décompressez les fichiers téléchargés. Notez le dossier dans lequel résident les fichiers décompressés. Ce dossier sera désigné par la chaîne <chemin\_des\_fichiers\_de_données\>.
 
@@ -157,77 +175,87 @@ Dans cette section, nous allons enregistrer la requête finale d’extraction et
 
 Pour vérifier rapidement le nombre de lignes et de colonnes des tables précédemment remplies à l’aide des importations en bloc en parallèle, procédez comme suit :
 
-    -- Report number of rows in table nyctaxi_trip without table scan
-    SELECT SUM(rows) FROM sys.partitions WHERE object_id = OBJECT_ID('nyctaxi_trip')
-
-    -- Report number of columns in table nyctaxi_trip
-    SELECT COUNT(*) FROM information_schema.columns WHERE table_name = 'nyctaxi_trip'
+- Afficher le nombre de lignes dans la table <nyctaxi_trip> sans analyse de table : `SELECT SUM(rows) FROM sys.partitions WHERE object_id = OBJECT_ID('nyctaxi_trip')`
+- Afficher le nombre de colonnes de la table <nyctaxi_trip> : `SELECT COUNT(*) FROM information_schema.columns WHERE table_name = 'nyctaxi_trip'`
 
 #### <a name="exploration-trip-distribution-by-medallion"></a>Exploration : Distribution des courses par médaillon
 Cet exemple identifie le médaillon (numéro de taxi) sur plus de 100 courses au cours d’une période donnée. Cette requête tire avantage de l’accès aux tables partitionnées, car elle est conditionnée par le schéma de partition de **pickup\_datetime**. L’exécution d’une requête portant sur le jeu de données complet tire également profit de l’analyse d’index et/ou de table partitionnée.
 
-    SELECT medallion, COUNT(*)
-    FROM nyctaxi_fare
-    WHERE pickup_datetime BETWEEN '20130101' AND '20130331'
-    GROUP BY medallion
-    HAVING COUNT(*) > 100
+```sql
+SELECT medallion, COUNT(*)
+FROM nyctaxi_fare
+WHERE pickup_datetime BETWEEN '20130101' AND '20130331'
+GROUP BY medallion
+HAVING COUNT(*) > 100
+```
 
 #### <a name="exploration-trip-distribution-by-medallion-and-hack_license"></a>Exploration : Distribution des courses par médaillon et par licence de taxi
-    SELECT medallion, hack_license, COUNT(*)
-    FROM nyctaxi_fare
-    WHERE pickup_datetime BETWEEN '20130101' AND '20130131'
-    GROUP BY medallion, hack_license
-    HAVING COUNT(*) > 100
+
+```sql
+SELECT medallion, hack_license, COUNT(*)
+FROM nyctaxi_fare
+WHERE pickup_datetime BETWEEN '20130101' AND '20130131'
+GROUP BY medallion, hack_license
+HAVING COUNT(*) > 100
+```
 
 #### <a name="data-quality-assessment-verify-records-with-incorrect-longitude-andor-latitude"></a>Évaluation de la qualité des données : Vérifier les enregistrements indiquant une longitude et/ou une latitude incorrectes
 Cet exemple vérifie si l’un des champs de longitude et/ou de latitude contient une valeur incorrecte (le nombre de degrés doit être compris entre -90 et 90) ou présente des coordonnées (0, 0).
 
-    SELECT COUNT(*) FROM nyctaxi_trip
-    WHERE pickup_datetime BETWEEN '20130101' AND '20130331'
-    AND  (CAST(pickup_longitude AS float) NOT BETWEEN -90 AND 90
-    OR    CAST(pickup_latitude AS float) NOT BETWEEN -90 AND 90
-    OR    CAST(dropoff_longitude AS float) NOT BETWEEN -90 AND 90
-    OR    CAST(dropoff_latitude AS float) NOT BETWEEN -90 AND 90
-    OR    (pickup_longitude = '0' AND pickup_latitude = '0')
-    OR    (dropoff_longitude = '0' AND dropoff_latitude = '0'))
+```sql
+SELECT COUNT(*) FROM nyctaxi_trip
+WHERE pickup_datetime BETWEEN '20130101' AND '20130331'
+AND  (CAST(pickup_longitude AS float) NOT BETWEEN -90 AND 90
+OR    CAST(pickup_latitude AS float) NOT BETWEEN -90 AND 90
+OR    CAST(dropoff_longitude AS float) NOT BETWEEN -90 AND 90
+OR    CAST(dropoff_latitude AS float) NOT BETWEEN -90 AND 90
+OR    (pickup_longitude = '0' AND pickup_latitude = '0')
+OR    (dropoff_longitude = '0' AND dropoff_latitude = '0'))
+```
 
 #### <a name="exploration-tipped-vs-not-tipped-trips-distribution"></a>Exploration : Pourboire payé et avec et sans pourboire
 Cet exemple recherche le nombre de courses avec et sans pourboire sur une période donnée (ou dans le jeu de données complet si la requête porte sur l’année entière). Cette distribution reflète la distribution des étiquettes binaires à utiliser par la suite pour la modélisation de classification binaire.
 
-    SELECT tipped, COUNT(*) AS tip_freq FROM (
-      SELECT CASE WHEN (tip_amount > 0) THEN 1 ELSE 0 END AS tipped, tip_amount
-      FROM nyctaxi_fare
-      WHERE pickup_datetime BETWEEN '20130101' AND '20131231') tc
-    GROUP BY tipped
+```sql
+SELECT tipped, COUNT(*) AS tip_freq FROM (
+  SELECT CASE WHEN (tip_amount > 0) THEN 1 ELSE 0 END AS tipped, tip_amount
+  FROM nyctaxi_fare
+  WHERE pickup_datetime BETWEEN '20130101' AND '20131231') tc
+GROUP BY tipped
+```
 
 #### <a name="exploration-tip-classrange-distribution"></a>Exploration : Distribution des classes/fourchettes de pourboires
 Cet exemple calcule la distribution des fourchettes de pourboires sur une période donnée (ou dans le jeu de données complet si la requête porte sur l’année entière). Cette distribution des classes d’étiquette sera utilisée par la suite pour la modélisation de classification multiclasse.
 
-    SELECT tip_class, COUNT(*) AS tip_freq FROM (
-        SELECT CASE
-            WHEN (tip_amount = 0) THEN 0
-            WHEN (tip_amount > 0 AND tip_amount <= 5) THEN 1
-            WHEN (tip_amount > 5 AND tip_amount <= 10) THEN 2
-            WHEN (tip_amount > 10 AND tip_amount <= 20) THEN 3
-            ELSE 4
-        END AS tip_class
-    FROM nyctaxi_fare
-    WHERE pickup_datetime BETWEEN '20130101' AND '20131231') tc
-    GROUP BY tip_class
+```sql
+SELECT tip_class, COUNT(*) AS tip_freq FROM (
+    SELECT CASE
+        WHEN (tip_amount = 0) THEN 0
+        WHEN (tip_amount > 0 AND tip_amount <= 5) THEN 1
+        WHEN (tip_amount > 5 AND tip_amount <= 10) THEN 2
+        WHEN (tip_amount > 10 AND tip_amount <= 20) THEN 3
+        ELSE 4
+    END AS tip_class
+FROM nyctaxi_fare
+WHERE pickup_datetime BETWEEN '20130101' AND '20131231') tc
+GROUP BY tip_class
+```
 
 #### <a name="exploration-compute-and-compare-trip-distance"></a>Exploration : Calculer et comparer les distances des courses
 Cet exemple convertit la longitude et la latitude des points d’embarquement et de débarquement en points géographiques SQL, calcule la distance des trajets en se basant sur la différence entre ces points géographiques et renvoie un échantillon aléatoire des résultats pour comparaison. Cet exemple limite les résultats aux coordonnées valides en utilisant la requête d’évaluation de la qualité des données précédemment décrite.
 
-    SELECT
-    pickup_location=geography::STPointFromText('POINT(' + pickup_longitude + ' ' + pickup_latitude + ')', 4326)
-    ,dropoff_location=geography::STPointFromText('POINT(' + dropoff_longitude + ' ' + dropoff_latitude + ')', 4326)
-    ,trip_distance
-    ,computedist=round(geography::STPointFromText('POINT(' + pickup_longitude + ' ' + pickup_latitude + ')', 4326).STDistance(geography::STPointFromText('POINT(' + dropoff_longitude + ' ' + dropoff_latitude + ')', 4326))/1000, 2)
-    FROM nyctaxi_trip
-    tablesample(0.01 percent)
-    WHERE CAST(pickup_latitude AS float) BETWEEN -90 AND 90
-    AND   CAST(dropoff_latitude AS float) BETWEEN -90 AND 90
-    AND   pickup_longitude != '0' AND dropoff_longitude != '0'
+```sql
+SELECT
+pickup_location=geography::STPointFromText('POINT(' + pickup_longitude + ' ' + pickup_latitude + ')', 4326)
+,dropoff_location=geography::STPointFromText('POINT(' + dropoff_longitude + ' ' + dropoff_latitude + ')', 4326)
+,trip_distance
+,computedist=round(geography::STPointFromText('POINT(' + pickup_longitude + ' ' + pickup_latitude + ')', 4326).STDistance(geography::STPointFromText('POINT(' + dropoff_longitude + ' ' + dropoff_latitude + ')', 4326))/1000, 2)
+FROM nyctaxi_trip
+tablesample(0.01 percent)
+WHERE CAST(pickup_latitude AS float) BETWEEN -90 AND 90
+AND   CAST(dropoff_latitude AS float) BETWEEN -90 AND 90
+AND   pickup_longitude != '0' AND dropoff_longitude != '0'
+```
 
 #### <a name="feature-engineering-in-sql-queries"></a>Conception de fonctionnalités dans des requêtes SQL
 Vous pouvez également utiliser les requêtes de génération d’étiquettes et de conversion de données géographiques pour générer des étiquettes/fonctionnalités en supprimant la partie décompte. D’autres exemples SQL de conception de fonctionnalités sont fournis à la section [Exploration des données et conception de fonctionnalités dans Notebook IPython](#ipnb) . L’exécution des requêtes de génération de fonctionnalités se révèle plus efficace sur la totalité du jeu de données ou sur un large sous-échantillon de ce jeu par le biais de requêtes SQL qui s’exécutent directement sur l’instance de base de données SQL Server. Les requêtes sont exécutables dans **SQL Server Management Studio**, dans IPython Notebook ou dans tout autre outil/environnement de développement pouvant accéder à la base de données localement ou à distance.
@@ -235,21 +263,22 @@ Vous pouvez également utiliser les requêtes de génération d’étiquettes et
 #### <a name="preparing-data-for-model-building"></a>Préparation des données pour la création de modèles
 La requête ci-après joint les tables **nyctaxi\_trip** et **nyctaxi\_fare**, génère une étiquette de classification binaire **tipped** et une étiquette de classification multiclasse **tip\_class**, puis extrait un échantillon aléatoire de 1 % des données de l’intégralité du jeu de données joint. Vous pouvez ensuite copier cette requête et la coller directement dans le module [Importer les données][import-data] d’[Azure Machine Learning Studio](https://studio.azureml.net) pour permettre l’ingestion directe des données de l’instance de base de données SQL Server dans Azure. La requête exclut les enregistrements qui présentent des coordonnées (0, 0) incorrectes.
 
-    SELECT t.*, f.payment_type, f.fare_amount, f.surcharge, f.mta_tax, f.tolls_amount,     f.total_amount, f.tip_amount,
-        CASE WHEN (tip_amount > 0) THEN 1 ELSE 0 END AS tipped,
-        CASE WHEN (tip_amount = 0) THEN 0
-            WHEN (tip_amount > 0 AND tip_amount <= 5) THEN 1
-            WHEN (tip_amount > 5 AND tip_amount <= 10) THEN 2
-            WHEN (tip_amount > 10 AND tip_amount <= 20) THEN 3
-            ELSE 4
-        END AS tip_class
-    FROM nyctaxi_trip t, nyctaxi_fare f
-    TABLESAMPLE (1 percent)
-    WHERE t.medallion = f.medallion
-    AND   t.hack_license = f.hack_license
-    AND   t.pickup_datetime = f.pickup_datetime
-    AND   pickup_longitude != '0' AND dropoff_longitude != '0'
-
+```sql
+SELECT t.*, f.payment_type, f.fare_amount, f.surcharge, f.mta_tax, f.tolls_amount,     f.total_amount, f.tip_amount,
+    CASE WHEN (tip_amount > 0) THEN 1 ELSE 0 END AS tipped,
+    CASE WHEN (tip_amount = 0) THEN 0
+        WHEN (tip_amount > 0 AND tip_amount <= 5) THEN 1
+        WHEN (tip_amount > 5 AND tip_amount <= 10) THEN 2
+        WHEN (tip_amount > 10 AND tip_amount <= 20) THEN 3
+        ELSE 4
+    END AS tip_class
+FROM nyctaxi_trip t, nyctaxi_fare f
+TABLESAMPLE (1 percent)
+WHERE t.medallion = f.medallion
+AND   t.hack_license = f.hack_license
+AND   t.pickup_datetime = f.pickup_datetime
+AND   pickup_longitude != '0' AND dropoff_longitude != '0'
+```
 
 ## <a name="data-exploration-and-feature-engineering-in-ipython-notebook"></a><a name="ipnb"></a>Exploration des données et conception de fonctionnalités dans Notebook IPython
 Dans cette section, nous allons effectuer des tâches d’exploration des données et de génération de fonctionnalités en exécutant des requêtes Python et SQL dans la base de données SQL Server créée précédemment. Le dossier **Exemples de notebooks IPython** comporte un exemple de notebook IPython nommé **machine-Learning-data-science-process-sql-story.ipynb**. Ce notebook est également disponible sur [GitHub](https://github.com/Azure/Azure-MachineLearning-DataScience/tree/master/Misc/DataScienceProcess/iPythonNotebooks).
@@ -272,53 +301,64 @@ Vous trouverez ci-dessous quelques exemples d’exploration des données, de vis
 #### <a name="initialize-database-credentials"></a>Initialiser les informations d’identification de la base de données
 Initialisez vos paramètres de connexion à la base de données dans les variables suivantes :
 
-    SERVER_NAME=<server name>
-    DATABASE_NAME=<database name>
-    USERID=<user name>
-    PASSWORD=<password>
-    DB_DRIVER = <database server>
+```sql
+SERVER_NAME=<server name>
+DATABASE_NAME=<database name>
+USERID=<user name>
+PASSWORD=<password>
+DB_DRIVER = <database server>
+```
 
 #### <a name="create-database-connection"></a>Créer une connexion à la base de données
-    CONNECTION_STRING = 'DRIVER={'+DRIVER+'};SERVER='+SERVER_NAME+';DATABASE='+DATABASE_NAME+';UID='+USERID+';PWD='+PASSWORD
-    conn = pyodbc.connect(CONNECTION_STRING)
+
+```sql
+CONNECTION_STRING = 'DRIVER={'+DRIVER+'};SERVER='+SERVER_NAME+';DATABASE='+DATABASE_NAME+';UID='+USERID+';PWD='+PASSWORD
+conn = pyodbc.connect(CONNECTION_STRING)
+```
 
 #### <a name="report-number-of-rows-and-columns-in-table-nyctaxi_trip"></a>Afficher le nombre de lignes et de colonnes de la table nyctaxi_trip
-    nrows = pd.read_sql('''
-        SELECT SUM(rows) FROM sys.partitions
-        WHERE object_id = OBJECT_ID('nyctaxi_trip')
-    ''', conn)
 
-    print 'Total number of rows = %d' % nrows.iloc[0,0]
+```sql
+nrows = pd.read_sql('''
+    SELECT SUM(rows) FROM sys.partitions
+    WHERE object_id = OBJECT_ID('nyctaxi_trip')
+''', conn)
 
-    ncols = pd.read_sql('''
-        SELECT COUNT(*) FROM information_schema.columns
-        WHERE table_name = ('nyctaxi_trip')
-    ''', conn)
+print 'Total number of rows = %d' % nrows.iloc[0,0]
 
-    print 'Total number of columns = %d' % ncols.iloc[0,0]
+ncols = pd.read_sql('''
+    SELECT COUNT(*) FROM information_schema.columns
+    WHERE table_name = ('nyctaxi_trip')
+''', conn)
+
+print 'Total number of columns = %d' % ncols.iloc[0,0]
+```
 
 * Nombre total de lignes = 173 179 759  
 * Nombre total de colonnes = 14
 
 #### <a name="read-in-a-small-data-sample-from-the-sql-server-database"></a>Lire un petit échantillon de données depuis la base de données SQL Server
-    t0 = time.time()
 
-    query = '''
-        SELECT t.*, f.payment_type, f.fare_amount, f.surcharge, f.mta_tax,
-            f.tolls_amount, f.total_amount, f.tip_amount
-        FROM nyctaxi_trip t, nyctaxi_fare f
-        TABLESAMPLE (0.05 PERCENT)
-        WHERE t.medallion = f.medallion
-        AND   t.hack_license = f.hack_license
-        AND   t.pickup_datetime = f.pickup_datetime
-    '''
+```sql
+t0 = time.time()
 
-    df1 = pd.read_sql(query, conn)
+query = '''
+    SELECT t.*, f.payment_type, f.fare_amount, f.surcharge, f.mta_tax,
+        f.tolls_amount, f.total_amount, f.tip_amount
+    FROM nyctaxi_trip t, nyctaxi_fare f
+    TABLESAMPLE (0.05 PERCENT)
+    WHERE t.medallion = f.medallion
+    AND   t.hack_license = f.hack_license
+    AND   t.pickup_datetime = f.pickup_datetime
+'''
 
-    t1 = time.time()
-    print 'Time to read the sample table is %f seconds' % (t1-t0)
+df1 = pd.read_sql(query, conn)
 
-    print 'Number of rows and columns retrieved = (%d, %d)' % (df1.shape[0], df1.shape[1])
+t1 = time.time()
+print 'Time to read the sample table is %f seconds' % (t1-t0)
+
+print 'Number of rows and columns retrieved = (%d, %d)' % (df1.shape[0], df1.shape[1])
+```
 
 Temps de lecture de la table d’échantillon = 6,492000 secondes  
 Nombre de lignes et de colonnes récupérées = (84 952, 21)
@@ -326,52 +366,68 @@ Nombre de lignes et de colonnes récupérées = (84 952, 21)
 #### <a name="descriptive-statistics"></a>Statistiques descriptives
 Nous sommes désormais prêts à explorer les données échantillonnées. Nous sommes prêts à examiner les statistiques descriptives relatives au champ **trip\_distance** (ou à tout autre champ) :
 
-    df1['trip_distance'].describe()
+```sql
+df1['trip_distance'].describe()
+```
 
 #### <a name="visualization-box-plot-example"></a>Visualisation : Exemple de diagramme à surfaces
 Nous examinons ensuite le diagramme à surfaces concernant la distance des trajets afin de visualiser les quantiles.
 
-    df1.boxplot(column='trip_distance',return_type='dict')
+```sql
+df1.boxplot(column='trip_distance',return_type='dict')
+```
 
 ![Diagramme #1][1]
 
 #### <a name="visualization-distribution-plot-example"></a>Visualisation : Exemple de diagramme de distribution
-    fig = plt.figure()
-    ax1 = fig.add_subplot(1,2,1)
-    ax2 = fig.add_subplot(1,2,2)
-    df1['trip_distance'].plot(ax=ax1,kind='kde', style='b-')
-    df1['trip_distance'].hist(ax=ax2, bins=100, color='k')
+
+```sql
+fig = plt.figure()
+ax1 = fig.add_subplot(1,2,1)
+ax2 = fig.add_subplot(1,2,2)
+df1['trip_distance'].plot(ax=ax1,kind='kde', style='b-')
+df1['trip_distance'].hist(ax=ax2, bins=100, color='k')
+```
 
 ![Diagramme #2][2]
 
 #### <a name="visualization-bar-and-line-plots"></a>Visualisation : Diagrammes en bâtons et linéaires
 Dans cet exemple, nous compartimentons la distance des trajets en cinq zones et nous visualisons les résultats de cette opération.
 
-    trip_dist_bins = [0, 1, 2, 4, 10, 1000]
-    df1['trip_distance']
-    trip_dist_bin_id = pd.cut(df1['trip_distance'], trip_dist_bins)
-    trip_dist_bin_id
+```sql
+trip_dist_bins = [0, 1, 2, 4, 10, 1000]
+df1['trip_distance']
+trip_dist_bin_id = pd.cut(df1['trip_distance'], trip_dist_bins)
+trip_dist_bin_id
+```
 
 Nous pouvons représenter la distribution des compartiments ci-dessus dans un diagramme en bâtons ou dans un diagramme linéaire en procédant comme ci-dessous.
 
-    pd.Series(trip_dist_bin_id).value_counts().plot(kind='bar')
+```sql
+pd.Series(trip_dist_bin_id).value_counts().plot(kind='bar')
+```
 
 ![Diagramme #3][3]
 
-    pd.Series(trip_dist_bin_id).value_counts().plot(kind='line')
-
+```sql
+pd.Series(trip_dist_bin_id).value_counts().plot(kind='line')
+```
 ![Diagramme #4][4]
 
 #### <a name="visualization-scatterplot-example"></a>Visualisation : Exemple de diagramme de dispersion
 Nous représentons le diagramme de dispersion entre **trip\_time\_in\_secs** et **trip\_distance** pour déterminer s’il existe une corrélation.
 
-    plt.scatter(df1['trip_time_in_secs'], df1['trip_distance'])
+```sql
+plt.scatter(df1['trip_time_in_secs'], df1['trip_distance'])
+```
 
 ![Diagramme #6][6]
 
 De la même façon, nous pouvons vérifier la relation entre **rate\_code** et **trip\_distance**.
 
-    plt.scatter(df1['passenger_count'], df1['trip_distance'])
+```sql
+plt.scatter(df1['passenger_count'], df1['trip_distance'])
+```
 
 ![Diagramme #8][8]
 
@@ -383,47 +439,55 @@ Dans cette section, nous allons créer une table destinée à contenir les donn�
 #### <a name="create-a-sample-table-and-populate-with-1-of-the-joined-tables-drop-table-first-if-it-exists"></a>Créer une table d’échantillon et la remplir avec 1 % des données des tables jointes en commençant par supprimer la table si elle existe
 Dans cette section, nous allons joindre les tables **nyctaxi\_trip** et **nyctaxi\_fare**, extraire un échantillon aléatoire de 1 % des données et stocker les données échantillonnées dans une nouvelle table nommée **nyctaxi\_one\_percent** :
 
-    cursor = conn.cursor()
+```sql
+cursor = conn.cursor()
 
-    drop_table_if_exists = '''
-        IF OBJECT_ID('nyctaxi_one_percent', 'U') IS NOT NULL DROP TABLE nyctaxi_one_percent
-    '''
+drop_table_if_exists = '''
+    IF OBJECT_ID('nyctaxi_one_percent', 'U') IS NOT NULL DROP TABLE nyctaxi_one_percent
+'''
 
-    nyctaxi_one_percent_insert = '''
-        SELECT t.*, f.payment_type, f.fare_amount, f.surcharge, f.mta_tax, f.tolls_amount, f.total_amount, f.tip_amount
-        INTO nyctaxi_one_percent
-        FROM nyctaxi_trip t, nyctaxi_fare f
-        TABLESAMPLE (1 PERCENT)
-        WHERE t.medallion = f.medallion
-        AND   t.hack_license = f.hack_license
-        AND   t.pickup_datetime = f.pickup_datetime
-        AND   pickup_longitude <> '0' AND dropoff_longitude <> '0'
-    '''
+nyctaxi_one_percent_insert = '''
+    SELECT t.*, f.payment_type, f.fare_amount, f.surcharge, f.mta_tax, f.tolls_amount, f.total_amount, f.tip_amount
+    INTO nyctaxi_one_percent
+    FROM nyctaxi_trip t, nyctaxi_fare f
+    TABLESAMPLE (1 PERCENT)
+    WHERE t.medallion = f.medallion
+    AND   t.hack_license = f.hack_license
+    AND   t.pickup_datetime = f.pickup_datetime
+    AND   pickup_longitude <> '0' AND dropoff_longitude <> '0'
+'''
 
-    cursor.execute(drop_table_if_exists)
-    cursor.execute(nyctaxi_one_percent_insert)
-    cursor.commit()
+cursor.execute(drop_table_if_exists)
+cursor.execute(nyctaxi_one_percent_insert)
+cursor.commit()
+```
 
 ### <a name="data-exploration-using-sql-queries-in-ipython-notebook"></a>Exploration des données à l’aide de requêtes SQL dans Notebook IPython
 Dans cette section, nous allons explorer les distributions de données à l’aide de l’échantillon de 1 % des données que nous avons stocké dans la table créée ci-dessus. Vous pouvez effectuer des explorations similaires à l’aide des tables d’origine, le cas échéant en utilisant **TABLESAMPLE** pour limiter l’échantillon d’exploration ou en restreignant les résultats à une période spécifique au moyen des partitions **pickup\_datetime**, comme décrit à la section [Exploration des données et conception de fonctionnalités dans SQL Server](#dbexplore).
 
 #### <a name="exploration-daily-distribution-of-trips"></a>Exploration : Distribution quotidienne des courses
-    query = '''
-        SELECT CONVERT(date, dropoff_datetime) AS date, COUNT(*) AS c
-        FROM nyctaxi_one_percent
-        GROUP BY CONVERT(date, dropoff_datetime)
-    '''
 
-    pd.read_sql(query,conn)
+```sql
+query = '''
+    SELECT CONVERT(date, dropoff_datetime) AS date, COUNT(*) AS c
+    FROM nyctaxi_one_percent
+    GROUP BY CONVERT(date, dropoff_datetime)
+'''
+
+pd.read_sql(query,conn)
+```
 
 #### <a name="exploration-trip-distribution-per-medallion"></a>Exploration : Distribution des courses par médaillon
-    query = '''
-        SELECT medallion,count(*) AS c
-        FROM nyctaxi_one_percent
-        GROUP BY medallion
-    '''
 
-    pd.read_sql(query,conn)
+```sql
+query = '''
+    SELECT medallion,count(*) AS c
+    FROM nyctaxi_one_percent
+    GROUP BY medallion
+'''
+
+pd.read_sql(query,conn)
+```
 
 ### <a name="feature-generation-using-sql-queries-in-ipython-notebook"></a>Génération de fonctionnalités à l’aide de requêtes SQL dans Notebook IPython
 Dans cette section, nous allons générer de nouvelles étiquettes et fonctionnalités directement par le biais de requêtes SQL, en utilisant la table d’échantillon de 1 % des données que nous avons créée à la section précédente.
@@ -433,116 +497,127 @@ Dans l’exemple suivant, nous générons deux jeux d’étiquettes à utiliser 
 
 1. Étiquettes de classe binaires **tipped** (prédisant si un pourboire va être versé)
 2. Étiquettes multiclasses **tip\_class** (prédisant le compartiment ou la fourchette du pourboire).
+
+```sql   
+    nyctaxi_one_percent_add_col = '''
+        ALTER TABLE nyctaxi_one_percent ADD tipped bit, tip_class int
+    '''
    
-        nyctaxi_one_percent_add_col = '''
-            ALTER TABLE nyctaxi_one_percent ADD tipped bit, tip_class int
-        '''
+    cursor.execute(nyctaxi_one_percent_add_col)
+    cursor.commit()
    
-        cursor.execute(nyctaxi_one_percent_add_col)
-        cursor.commit()
+    nyctaxi_one_percent_update_col = '''
+        UPDATE nyctaxi_one_percent
+        SET
+           tipped = CASE WHEN (tip_amount > 0) THEN 1 ELSE 0 END,
+           tip_class = CASE WHEN (tip_amount = 0) THEN 0
+                            WHEN (tip_amount > 0 AND tip_amount <= 5) THEN 1
+                            WHEN (tip_amount > 5 AND tip_amount <= 10) THEN 2
+                            WHEN (tip_amount > 10 AND tip_amount <= 20) THEN 3
+                            ELSE 4
+                        END
+    '''
    
-        nyctaxi_one_percent_update_col = '''
-            UPDATE nyctaxi_one_percent
-            SET
-               tipped = CASE WHEN (tip_amount > 0) THEN 1 ELSE 0 END,
-               tip_class = CASE WHEN (tip_amount = 0) THEN 0
-                                WHEN (tip_amount > 0 AND tip_amount <= 5) THEN 1
-                                WHEN (tip_amount > 5 AND tip_amount <= 10) THEN 2
-                                WHEN (tip_amount > 10 AND tip_amount <= 20) THEN 3
-                                ELSE 4
-                            END
-        '''
-   
-        cursor.execute(nyctaxi_one_percent_update_col)
-        cursor.commit()
+    cursor.execute(nyctaxi_one_percent_update_col)
+    cursor.commit()
+```
 
 #### <a name="feature-engineering-count-features-for-categorical-columns"></a>Conception de fonctionnalités : Fonctionnalités de décompte pour les colonnes catégorielles
 Cet exemple transforme un champ catégoriel en champ numérique en remplaçant chaque catégorie par le nombre de ses occurrences dans les données.
 
-    nyctaxi_one_percent_insert_col = '''
-        ALTER TABLE nyctaxi_one_percent ADD cmt_count int, vts_count int
-    '''
+```sql
+nyctaxi_one_percent_insert_col = '''
+    ALTER TABLE nyctaxi_one_percent ADD cmt_count int, vts_count int
+'''
 
-    cursor.execute(nyctaxi_one_percent_insert_col)
-    cursor.commit()
+cursor.execute(nyctaxi_one_percent_insert_col)
+cursor.commit()
 
-    nyctaxi_one_percent_update_col = '''
-        WITH B AS
-        (
-            SELECT medallion, hack_license,
-                SUM(CASE WHEN vendor_id = 'cmt' THEN 1 ELSE 0 END) AS cmt_count,
-                SUM(CASE WHEN vendor_id = 'vts' THEN 1 ELSE 0 END) AS vts_count
-            FROM nyctaxi_one_percent
-            GROUP BY medallion, hack_license
-        )
+nyctaxi_one_percent_update_col = '''
+    WITH B AS
+    (
+        SELECT medallion, hack_license,
+            SUM(CASE WHEN vendor_id = 'cmt' THEN 1 ELSE 0 END) AS cmt_count,
+            SUM(CASE WHEN vendor_id = 'vts' THEN 1 ELSE 0 END) AS vts_count
+        FROM nyctaxi_one_percent
+        GROUP BY medallion, hack_license
+    )
 
-        UPDATE nyctaxi_one_percent
-        SET nyctaxi_one_percent.cmt_count = B.cmt_count,
-            nyctaxi_one_percent.vts_count = B.vts_count
-        FROM nyctaxi_one_percent A INNER JOIN B
-        ON A.medallion = B.medallion AND A.hack_license = B.hack_license
-    '''
+    UPDATE nyctaxi_one_percent
+    SET nyctaxi_one_percent.cmt_count = B.cmt_count,
+        nyctaxi_one_percent.vts_count = B.vts_count
+    FROM nyctaxi_one_percent A INNER JOIN B
+    ON A.medallion = B.medallion AND A.hack_license = B.hack_license
+'''
 
-    cursor.execute(nyctaxi_one_percent_update_col)
-    cursor.commit()
+cursor.execute(nyctaxi_one_percent_update_col)
+cursor.commit()
+```
 
 #### <a name="feature-engineering-bin-features-for-numerical-columns"></a>Conception de fonctionnalités : Fonctionnalités de compartimentage pour les colonnes numériques
 Cet exemple transforme un champ numérique continu en plages de catégories prédéfinies ; autrement dit, il transforme un champ numérique en champ catégoriel.
 
-    nyctaxi_one_percent_insert_col = '''
-        ALTER TABLE nyctaxi_one_percent ADD trip_time_bin int
-    '''
+```sql
+nyctaxi_one_percent_insert_col = '''
+    ALTER TABLE nyctaxi_one_percent ADD trip_time_bin int
+'''
 
-    cursor.execute(nyctaxi_one_percent_insert_col)
-    cursor.commit()
+cursor.execute(nyctaxi_one_percent_insert_col)
+cursor.commit()
 
-    nyctaxi_one_percent_update_col = '''
-        WITH B(medallion,hack_license,pickup_datetime,trip_time_in_secs, BinNumber ) AS
-        (
-            SELECT medallion,hack_license,pickup_datetime,trip_time_in_secs,
-            NTILE(5) OVER (ORDER BY trip_time_in_secs) AS BinNumber from nyctaxi_one_percent
-        )
+nyctaxi_one_percent_update_col = '''
+    WITH B(medallion,hack_license,pickup_datetime,trip_time_in_secs, BinNumber ) AS
+    (
+        SELECT medallion,hack_license,pickup_datetime,trip_time_in_secs,
+        NTILE(5) OVER (ORDER BY trip_time_in_secs) AS BinNumber from nyctaxi_one_percent
+    )
 
-        UPDATE nyctaxi_one_percent
-        SET trip_time_bin = B.BinNumber
-        FROM nyctaxi_one_percent A INNER JOIN B
-        ON A.medallion = B.medallion
-        AND A.hack_license = B.hack_license
-        AND A.pickup_datetime = B.pickup_datetime
-    '''
+    UPDATE nyctaxi_one_percent
+    SET trip_time_bin = B.BinNumber
+    FROM nyctaxi_one_percent A INNER JOIN B
+    ON A.medallion = B.medallion
+    AND A.hack_license = B.hack_license
+    AND A.pickup_datetime = B.pickup_datetime
+'''
 
-    cursor.execute(nyctaxi_one_percent_update_col)
-    cursor.commit()
+cursor.execute(nyctaxi_one_percent_update_col)
+cursor.commit()
+```
 
 #### <a name="feature-engineering-extract-location-features-from-decimal-latitudelongitude"></a>Conception de fonctionnalités : Extraire des fonctionnalités d’emplacement des valeurs décimales de latitude/longitude
-Cet exemple décompose la représentation décimale d’un champ de latitude ou de longitude en plusieurs champs d’emplacement de différentes granularités, tels que pays/région, ville, bloc, etc. Les nouveaux champs géographiques ne sont pas mappés sur des emplacements réels. Pour plus d’informations sur le mappage des emplacements associés à un géocode, consultez l’article consacré aux [Services REST de Bing Cartes](https://msdn.microsoft.com/library/ff701710.aspx).
+Cet exemple décompose la représentation décimale d’un champ de latitude ou de longitude en plusieurs champs d’emplacement de différentes granularités, tels que pays/région, ville, bloc, etc. Les nouveaux champs géographiques ne sont pas mappés sur des emplacements réels. Pour plus d’informations sur le mappage des emplacements associés à un géocode, consultez l’article consacré aux [Services REST de Bing Cartes](/bingmaps/rest-services/locations/find-a-location-by-point).
 
-    nyctaxi_one_percent_insert_col = '''
-        ALTER TABLE nyctaxi_one_percent
-        ADD l1 varchar(6), l2 varchar(3), l3 varchar(3), l4 varchar(3),
-            l5 varchar(3), l6 varchar(3), l7 varchar(3)
-    '''
+```sql
+nyctaxi_one_percent_insert_col = '''
+    ALTER TABLE nyctaxi_one_percent
+    ADD l1 varchar(6), l2 varchar(3), l3 varchar(3), l4 varchar(3),
+        l5 varchar(3), l6 varchar(3), l7 varchar(3)
+'''
 
-    cursor.execute(nyctaxi_one_percent_insert_col)
-    cursor.commit()
+cursor.execute(nyctaxi_one_percent_insert_col)
+cursor.commit()
 
-    nyctaxi_one_percent_update_col = '''
-        UPDATE nyctaxi_one_percent
-        SET l1=round(pickup_longitude,0)
-            , l2 = CASE WHEN LEN (PARSENAME(ROUND(ABS(pickup_longitude) - FLOOR(ABS(pickup_longitude)),6),1)) >= 1 THEN SUBSTRING(PARSENAME(ROUND(ABS(pickup_longitude) - FLOOR(ABS(pickup_longitude)),6),1),1,1) ELSE '0' END     
-            , l3 = CASE WHEN LEN (PARSENAME(ROUND(ABS(pickup_longitude) - FLOOR(ABS(pickup_longitude)),6),1)) >= 2 THEN SUBSTRING(PARSENAME(ROUND(ABS(pickup_longitude) - FLOOR(ABS(pickup_longitude)),6),1),2,1) ELSE '0' END     
-            , l4 = CASE WHEN LEN (PARSENAME(ROUND(ABS(pickup_longitude) - FLOOR(ABS(pickup_longitude)),6),1)) >= 3 THEN SUBSTRING(PARSENAME(ROUND(ABS(pickup_longitude) - FLOOR(ABS(pickup_longitude)),6),1),3,1) ELSE '0' END     
-            , l5 = CASE WHEN LEN (PARSENAME(ROUND(ABS(pickup_longitude) - FLOOR(ABS(pickup_longitude)),6),1)) >= 4 THEN SUBSTRING(PARSENAME(ROUND(ABS(pickup_longitude) - FLOOR(ABS(pickup_longitude)),6),1),4,1) ELSE '0' END     
-            , l6 = CASE WHEN LEN (PARSENAME(ROUND(ABS(pickup_longitude) - FLOOR(ABS(pickup_longitude)),6),1)) >= 5 THEN SUBSTRING(PARSENAME(ROUND(ABS(pickup_longitude) - FLOOR(ABS(pickup_longitude)),6),1),5,1) ELSE '0' END     
-            , l7 = CASE WHEN LEN (PARSENAME(ROUND(ABS(pickup_longitude) - FLOOR(ABS(pickup_longitude)),6),1)) >= 6 THEN SUBSTRING(PARSENAME(ROUND(ABS(pickup_longitude) - FLOOR(ABS(pickup_longitude)),6),1),6,1) ELSE '0' END
-    '''
+nyctaxi_one_percent_update_col = '''
+    UPDATE nyctaxi_one_percent
+    SET l1=round(pickup_longitude,0)
+        , l2 = CASE WHEN LEN (PARSENAME(ROUND(ABS(pickup_longitude) - FLOOR(ABS(pickup_longitude)),6),1)) >= 1 THEN SUBSTRING(PARSENAME(ROUND(ABS(pickup_longitude) - FLOOR(ABS(pickup_longitude)),6),1),1,1) ELSE '0' END     
+        , l3 = CASE WHEN LEN (PARSENAME(ROUND(ABS(pickup_longitude) - FLOOR(ABS(pickup_longitude)),6),1)) >= 2 THEN SUBSTRING(PARSENAME(ROUND(ABS(pickup_longitude) - FLOOR(ABS(pickup_longitude)),6),1),2,1) ELSE '0' END     
+        , l4 = CASE WHEN LEN (PARSENAME(ROUND(ABS(pickup_longitude) - FLOOR(ABS(pickup_longitude)),6),1)) >= 3 THEN SUBSTRING(PARSENAME(ROUND(ABS(pickup_longitude) - FLOOR(ABS(pickup_longitude)),6),1),3,1) ELSE '0' END     
+        , l5 = CASE WHEN LEN (PARSENAME(ROUND(ABS(pickup_longitude) - FLOOR(ABS(pickup_longitude)),6),1)) >= 4 THEN SUBSTRING(PARSENAME(ROUND(ABS(pickup_longitude) - FLOOR(ABS(pickup_longitude)),6),1),4,1) ELSE '0' END     
+        , l6 = CASE WHEN LEN (PARSENAME(ROUND(ABS(pickup_longitude) - FLOOR(ABS(pickup_longitude)),6),1)) >= 5 THEN SUBSTRING(PARSENAME(ROUND(ABS(pickup_longitude) - FLOOR(ABS(pickup_longitude)),6),1),5,1) ELSE '0' END     
+        , l7 = CASE WHEN LEN (PARSENAME(ROUND(ABS(pickup_longitude) - FLOOR(ABS(pickup_longitude)),6),1)) >= 6 THEN SUBSTRING(PARSENAME(ROUND(ABS(pickup_longitude) - FLOOR(ABS(pickup_longitude)),6),1),6,1) ELSE '0' END
+'''
 
-    cursor.execute(nyctaxi_one_percent_update_col)
-    cursor.commit()
+cursor.execute(nyctaxi_one_percent_update_col)
+cursor.commit()
+```
 
 #### <a name="verify-the-final-form-of-the-featurized-table"></a>Vérifiez le format final de la table affichée
-    query = '''SELECT TOP 100 * FROM nyctaxi_one_percent'''
-    pd.read_sql(query,conn)
+
+```sql
+query = '''SELECT TOP 100 * FROM nyctaxi_one_percent'''
+pd.read_sql(query,conn)
+```
 
 Nous pouvons à présent passer aux phases de création et de déploiement de modèles dans [Azure Machine Learning](https://studio.azureml.net). Les données sont prêtes pour tous les problèmes de prédiction identifiés précédemment, à savoir :
 
@@ -551,9 +626,9 @@ Nous pouvons à présent passer aux phases de création et de déploiement de mo
 3. Tâche de régression : Prédire le montant du pourboire versé pour une course.  
 
 ## <a name="building-models-in-azure-machine-learning"></a><a name="mlmodel"></a>Création de modèles dans Azure Machine Learning
-Pour démarrer l’exercice de modélisation, connectez-vous à votre espace de travail Azure Machine Learning. Si vous n’avez pas encore créé d’espace de travail d’apprentissage automatique, consultez l’article [Créer un espace de travail Azure Machine Learning](../studio/create-workspace.md).
+Pour démarrer l’exercice de modélisation, connectez-vous à votre espace de travail Azure Machine Learning. Si vous n’avez pas encore créé d’espace de travail d’apprentissage automatique, consultez l’article [Créer un espace de travail Azure Machine Learning](../classic/create-workspace.md).
 
-1. Pour plus d’informations sur la prise en main d’Azure Machine Learning, consultez la page [Azure Machine Learning Studio - De quoi s’agit-il ?](../studio/what-is-ml-studio.md)
+1. Pour plus d’informations sur la prise en main d’Azure Machine Learning, consultez la page [Azure Machine Learning Studio - De quoi s’agit-il ?](../overview-what-is-machine-learning-studio.md#ml-studio-classic-vs-azure-machine-learning-studio)
 2. Connectez-vous à [Azure Machine Learning Studio](https://studio.azureml.net).
 3. La page d’accueil de Studio permet d’accéder à une multitude d’informations, de vidéos, de didacticiels, de liens vers la documentation de référence des modules et d’autres ressources. Pour plus d’informations sur Azure Machine Learning, consultez le [Centre de documentation Azure Machine Learning](https://azure.microsoft.com/documentation/services/machine-learning/).
 
@@ -593,7 +668,7 @@ La figure ci-après illustre un exemple d’expérience de classification binair
 > 
 
 ## <a name="deploying-models-in-azure-machine-learning"></a><a name="mldeploy"></a>Déploiement de modèles dans Azure Machine Learning
-Lorsque votre modèle est prêt, vous pouvez facilement le déployer sous la forme d’un service web directement à partir de l’expérience. Pour plus d’informations sur le déploiement de services web Azure Machine Learning, consultez [Déployer un service web Azure Machine Learning](../studio/deploy-a-machine-learning-web-service.md).
+Lorsque votre modèle est prêt, vous pouvez facilement le déployer sous la forme d’un service web directement à partir de l’expérience. Pour plus d’informations sur le déploiement de services web Azure Machine Learning, consultez [Déployer un service web Azure Machine Learning](../classic/deploy-a-machine-learning-web-service.md).
 
 Pour déployer un nouveau service web, vous devez :
 
@@ -647,6 +722,6 @@ Cet exemple de procédure pas à pas et les scripts et notebooks IPython qui lui
 
 
 <!-- Module References -->
-[edit-metadata]: https://msdn.microsoft.com/library/azure/370b6676-c11c-486f-bf73-35349f842a66/
-[select-columns]: https://msdn.microsoft.com/library/azure/1ec722fa-b623-4e26-a44e-a50c6d726223/
-[import-data]: https://msdn.microsoft.com/library/azure/4e1b0fe6-aded-4b3f-a36f-39b8862b9004/
+[edit-metadata]: /azure/machine-learning/studio-module-reference/edit-metadata
+[select-columns]: /azure/machine-learning/studio-module-reference/select-columns-in-dataset
+[import-data]: /azure/machine-learning/studio-module-reference/import-data

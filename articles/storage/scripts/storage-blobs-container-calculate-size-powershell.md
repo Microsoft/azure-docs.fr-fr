@@ -10,12 +10,13 @@ ms.devlang: powershell
 ms.topic: sample
 ms.date: 12/04/2019
 ms.author: tamram
-ms.openlocfilehash: de51ed7d91ba1102f5a9cd376ab95f49dd54d9f3
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: de275bcca1644750532809b35ae85d954d3cac6d
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "80067068"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89076903"
 ---
 # <a name="calculate-the-size-of-a-blob-container-with-powershell"></a>Calculer la taille d’un conteneur d’objets blob avec PowerShell
 
@@ -53,6 +54,6 @@ Ce script utilise les commandes suivantes pour calculer la taille du conteneur d
 
 Pour un script qui calcule la taille du conteneur pour la facturation, consultez [Calculer la taille totale d’un conteneur de stockage d’objets blob](../scripts/storage-blobs-container-calculate-billing-size-powershell.md).
 
-Pour plus d’informations sur le module Azure PowerShell, consultez [Documentation Azure PowerShell](/powershell/azure/overview).
+Pour plus d’informations sur le module Azure PowerShell, consultez [Documentation Azure PowerShell](/powershell/azure/).
 
 Vous trouverez des exemples de scripts PowerShell de stockage supplémentaires dans les [exemples PowerShell pour Stockage Azure](../blobs/storage-samples-blobs-powershell.md).

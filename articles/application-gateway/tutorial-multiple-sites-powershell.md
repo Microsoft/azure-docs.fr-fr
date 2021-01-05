@@ -5,16 +5,16 @@ description: Découvrez comment créer une passerelle d’application qui héber
 services: application-gateway
 author: vhorne
 ms.service: application-gateway
-ms.topic: article
-ms.date: 11/14/2019
+ms.topic: how-to
+ms.date: 07/20/2020
 ms.author: victorh
 ms.custom: mvc
-ms.openlocfilehash: e05d84e8e06dbe63a1bc8e8ae1d401f186baac77
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 30c5c5be89f8a318de8690430d4d248817961fc2
+ms.sourcegitcommit: 6a902230296a78da21fbc68c365698709c579093
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80133062"
+ms.lasthandoff: 11/05/2020
+ms.locfileid: "93360307"
 ---
 # <a name="create-an-application-gateway-that-hosts-multiple-web-sites-using-azure-powershell"></a>Créer une passerelle d’application qui héberge plusieurs sites web à l’aide d’Azure PowerShell
 
@@ -22,15 +22,14 @@ Vous pouvez utiliser Azure PowerShell pour [configurer l’hébergement de plusi
 
 Dans cet article, vous apprendrez comment :
 
-> [!div class="checklist"]
-> * Configurer le réseau
-> * Créer une passerelle Application Gateway
-> * Créer des écouteurs principaux
-> * Créer des règles d’acheminement
-> * Créer des groupes de machines virtuelles identiques avec les pools principaux
-> * Créer un enregistrement CNAME dans votre domaine
+* Configurer le réseau
+* Créer une passerelle Application Gateway
+* Créer des écouteurs principaux
+* Créer des règles d’acheminement
+* Créer des groupes de machines virtuelles identiques avec les pools principaux
+* Créer un enregistrement CNAME dans votre domaine
 
-![Exemple de routage multisite](./media/tutorial-multiple-sites-powershell/scenario.png)
+:::image type="content" source="./media/tutorial-multiple-sites-powershell/scenario.png" alt-text="Passerelle d’application multisite":::
 
 Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
 
@@ -125,6 +124,10 @@ $poolSettings = New-AzApplicationGatewayBackendHttpSettings `
 Des écouteurs sont requis pour permettre à la passerelle d’application d’acheminer le trafic de manière appropriée vers les pools d’adresses principaux. Cet article vous montre comment créer deux écouteurs pour vos deux domaines. Les écouteurs sont créés pour les domaines *contoso.com* et *fabrikam.com*.
 
 Créez le premier écouteur à l’aide de [New-AzApplicationGatewayHttpListener](/powershell/module/az.network/new-azapplicationgatewayhttplistener) avec la configuration et le port du serveur frontal que vous avez créé précédemment. Une règle est requise pour que l’écouteur sache quel pool principal utiliser pour le trafic entrant. Créez une règle de base nommée *contosoRule* à l’aide de la cmdlet [New-AzApplicationGatewayRequestRoutingRule](/powershell/module/az.network/new-azapplicationgatewayrequestroutingrule).
+
+>[!NOTE]
+> À l’aide du niveau tarifaire Application Gateway ou WAF v2, vous pouvez également configurer jusqu’à 5 noms d’hôte par écouteur et utiliser des caractères génériques dans le nom d’hôte. Pour plus d’informations, consultez les informations relatives aux [noms d’hôtes comportant des caractères génériques dans l’écouteur](multiple-site-overview.md#wildcard-host-names-in-listener-preview).
+>Pour utiliser plusieurs noms d’hôte et caractères génériques dans un écouteur à l’aide d’Azure PowerShell, vous devez utiliser `-HostNames` au lieu de `-HostName`. Grâce au préfixe « HostNames », vous pouvez spécifier jusqu’à cinq noms d’hôte comme valeurs séparées par des virgules. Par exemple : `-HostNames "*.contoso.com","*.fabrikam.com"`
 
 ```azurepowershell-interactive
 $contosolistener = New-AzApplicationGatewayHttpListener `

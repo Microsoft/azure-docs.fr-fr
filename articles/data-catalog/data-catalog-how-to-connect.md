@@ -4,14 +4,14 @@ description: Article de procédure relatif à la connexion aux sources de donné
 author: JasonWHowell
 ms.author: jasonh
 ms.service: data-catalog
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 08/01/2019
-ms.openlocfilehash: 1190a0f34206004b72730a6af85bbe5db7d9961a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 5c8c545f01eb0df53ce9677b7db6f931b4d21af9
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "68976786"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96021926"
 ---
 # <a name="how-to-connect-to-data-sources"></a>Connexion aux sources de données
 ## <a name="introduction"></a>Introduction
@@ -40,7 +40,7 @@ Lorsque vous utilisez le menu « Ouvrir dans... » pour les sources de données 
 | Power Query |.xlsx |Excel 2016 ou Excel 2010 ou Excel 2013 avec la macro complémentaire Power Query pour Excel installée |
 | Power BI Desktop |.pbix |Power BI Desktop juillet 2016 ou version ultérieure |
 | SQL Server Data Tools |vsweb:// |Visual Studio 2013 Update 4 ou version ultérieure avec les outils SQL Server installés |
-| Gestionnaire de rapports |http:// |Voir la [configuration de navigateur requise pour SQL Server Reporting Services](https://technet.microsoft.com/library/ms156511.aspx) |
+| Gestionnaire de rapports |http:// |Voir la [configuration de navigateur requise pour SQL Server Reporting Services](/sql/reporting-services/browser-support-for-reporting-services-and-power-view) |
 
 ## <a name="your-data-your-tools"></a>Vos données, vos outils
 Les options disponibles dans le menu dépendent du type de ressource de données actuellement sélectionné. Bien entendu, tous les outils possibles ne sont pas inclus dans le menu Ouvrir dans..., mais il est toujours simple de se connecter à la source de données à l’aide de n’importe quel outil client. Lorsqu’une ressource de données est sélectionnée dans le portail **Azure Data Catalog**, l’emplacement complet s’affiche dans le volet des propriétés.

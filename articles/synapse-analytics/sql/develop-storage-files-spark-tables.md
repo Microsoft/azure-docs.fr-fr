@@ -1,41 +1,48 @@
 ---
-title: Interroger des tables Spark avec SQL à la demande (préversion)
-description: Vue d’ensemble de l’interrogation des tables Spark avec SQL à la demande (préversion).
+title: Synchroniser Apache Spark pour les définitions de tables externes dans le pool SQL serverless
+description: Vue d’ensemble de l’interrogation des tables Spark en utilisant le pool SQL serverless
 services: synapse-analytics
 author: julieMSFT
 ms.service: synapse-analytics
 ms.topic: overview
-ms.subservice: ''
+ms.subservice: sql
 ms.date: 04/15/2020
 ms.author: jrasnick
 ms.reviewer: jrasnick
-ms.openlocfilehash: 41e31a322a3d771557474fdf5c318960822bcfe1
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: 057a69881b8b407e5d75fa3510ca1c3eb1830bc7
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81420073"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96446485"
 ---
-# <a name="query-spark-tables-with-azure-synapse-analytics-using-sql-on-demand-preview"></a>Interroger des tables Spark avec Azure Synapse Analytics avec SQL à la demande (préversion)
+# <a name="synchronize-apache-spark-for-azure-synapse-external-table-definitions-in-serverless-sql-pool"></a>Synchroniser Apache Spark pour les définitions de tables externes d’Azure Synapse dans le pool SQL serverless
 
-SQL à la demande (préversion) peut synchroniser automatiquement les métadonnées à partir des pools Spark dans l’espace de travail Synapse (préversion). Une base de données SQL à la demande sera créée pour chaque base de données existante dans les pools Spark (préversion). Pour chaque table Spark basée sur Parquet ou CSV, une table externe est créée dans la base de données SQL à la demande. Par conséquent, vous pouvez arrêter vos pools Spark et quand même interroger les tables Spark à partir de SQL à la demande.
+Le pool SQL serverless peut synchroniser automatiquement les métadonnées depuis Apache Spark. Une base de données de pool SQL serverless sera créée pour chaque base de données existante dans les pools Apache Spark. 
 
-Quand une table est partitionnée dans Spark, les fichiers dans le stockage sont organisés par dossiers. SQL à la demande utilise les métadonnées de partition et cible uniquement les dossiers et fichiers pertinents pour votre requête.
+Pour chaque table externe Spark de type Parquet et située dans Stockage Azure, une table externe est créée dans la base de données du pool SQL serverless. Par conséquent, vous pouvez arrêter vos pools Spark et interroger quand même les tables externes Spark à partir du pool SQL serverless.
 
-La synchronisation des métadonnées est configurée automatiquement pour chaque pool Spark provisionné dans l’espace de travail Azure Synapse. Vous pouvez commencer à interroger des tables Spark immédiatement.
+Quand une table est partitionnée dans Spark, les fichiers dans le stockage sont organisés par dossiers. Le pool SQL serverless utilise les métadonnées des partitions et cible seulement les dossiers et fichiers pertinents pour votre requête.
 
-Chaque table Spark est représentée par une table externe dans un schéma dbo qui correspond à une base de données SQL à la demande. Pour les requêtes de table Spark, exécutez une requête qui cible un [spark_table] externe. Avant d’exécuter l’exemple ci-dessous, assurez-vous de disposer d’un [accès correct au compte de stockage](develop-storage-files-storage-access-control.md) où se trouvent les fichiers.
+La synchronisation des métadonnées est configurée automatiquement pour chaque pool Apache Spark serverless provisionné dans l’espace de travail Azure Synapse. Vous pouvez tout de suite commencer à interroger des tables externes Spark.
+
+Chaque table externe Parquet Spark qui se trouve dans Stockage Azure est représentée par une table externe dans un schéma dbo qui correspond à une base de données de pool SQL serverless. 
+
+Pour les requêtes de table externe Spark, exécutez une requête qui cible une [spark_table] externe. Avant d’exécuter l’exemple ci-dessous, veillez à disposer d’un [accès correct au compte de stockage](develop-storage-files-storage-access-control.md) où se trouvent les fichiers.
 
 ```sql
 SELECT * FROM [db].dbo.[spark_table]
 ```
 
-## <a name="spark-data-types-to-sql-data-types-mapping"></a>Mappage des types de données Spark aux types de données SQL
+> [!NOTE]
+> L’ajout, la suppression et la modification des commandes de tables externes Spark pour une colonne ne sont pas reflétés dans la table externe du pool SQL serverless.
+
+## <a name="apache-spark-data-types-to-sql-data-types-mapping"></a>Mappage des types de données Apache Spark aux types de données SQL
 
 | Type de données Spark | Type de données SQL               |
 | --------------- | --------------------------- |
 | ByteType        | SMALLINT                    |
-| ShortType       | SMALLINT                    |
+| Type court      | SMALLINT                    |
 | IntegerType     | int                         |
 | LongType        | bigint                      |
 | FloatType       | real                        |
@@ -43,16 +50,16 @@ SELECT * FROM [db].dbo.[spark_table]
 | DecimalType     | Décimal                     |
 | TimestampType   | datetime2                   |
 | DateType        | Date                        |
-| StringType      | varchar(max)*               |
+| StringType      | varchar(max)\*               |
 | BinaryType      | varbinary                   |
 | BooleanType     | bit                         |
-| ArrayType       | varchar(max)* (au format JSON)** |
-| MapType         | varchar(max)* (au format JSON)** |
-| StructType      | varchar(max)* (au format JSON)** |
+| ArrayType       | varchar(max)\* (dans JSON)\** |
+| MapType         | varchar(max)\* (dans JSON)\** |
+| StructType      | varchar(max)\* (dans JSON)\** |
 
 \* Le classement utilisé est Latin1_General_100_BIN2_UTF8.
 
-** ArrayType, MapType et StructType sont représentés au format JSON.
+\** ArrayType, MapType et StructType sont représentés au format JSON.
 
 
 

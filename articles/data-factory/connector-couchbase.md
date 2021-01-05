@@ -12,10 +12,10 @@ ms.topic: conceptual
 ms.date: 08/12/2019
 ms.author: jingwang
 ms.openlocfilehash: d78d533bc4a863a0a70b1dbb47bdfa85d539884f
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "81417435"
 ---
 # <a name="copy-data-from-couchbase-using-azure-data-factory-preview"></a>Copier des données de Couchbase avec Azure Data Factory (préversion)

@@ -1,6 +1,6 @@
 ---
 title: Points de terminaison de service de réseau virtuel pour Azure Key Vault - Azure Key Vault | Microsoft Docs
-description: Vue d’ensemble des points de terminaison de service de réseau virtuel pour Key Vault
+description: Découvrez comment les points de terminaison de service de réseau virtuel pour Azure Key Vault permettent de restreindre l’accès à un réseau virtuel spécifié, avec des scénarios d'usage.
 services: key-vault
 author: amitbapat
 ms.author: ambapat
@@ -9,12 +9,12 @@ ms.date: 01/02/2019
 ms.service: key-vault
 ms.subservice: general
 ms.topic: conceptual
-ms.openlocfilehash: 2a68a50a5d15b9f38407c19494a39a14abfa0a5a
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: 9cbce00e2c2743aec57cd857b6f38d20bce33698
+ms.sourcegitcommit: 5b93010b69895f146b5afd637a42f17d780c165b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81427705"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96532905"
 ---
 # <a name="virtual-network-service-endpoints-for-azure-key-vault"></a>Points de terminaison de service de réseau virtuel pour Azure Key Vault
 
@@ -63,27 +63,29 @@ Voici une liste de services approuvés qui sont autorisés à accéder à un cof
 
 |Service approuvé|Scénarios d’utilisation pris en charge|
 | --- | --- |
-|Service de déploiement de machines virtuelles Azure|[Déployer des certificats sur des machines virtuelles à partir d’un coffre de clés géré par le client](https://blogs.technet.microsoft.com/kv/2016/09/14/updated-deploy-certificates-to-vms-from-customer-managed-key-vault/)|
+|Service de déploiement de machines virtuelles Azure|[Déployer des certificats sur des machines virtuelles à partir d’un coffre de clés géré par le client](/archive/blogs/kv/updated-deploy-certificates-to-vms-from-customer-managed-key-vault)|
 |Service de déploiement modèle Azure Resource Manager|[Passage de valeurs sécurisées lors du déploiement](../../azure-resource-manager/templates/key-vault-parameter.md)|
+|Référence SKU Azure Application Gateway v2|[Arrêt TLS avec certificats Key Vault](../../application-gateway/key-vault-certs.md)|
 |Service de chiffrement de volume Azure Disk Encryption|Autoriser l’accès à la clé BitLocker (machine virtuelle Windows) ou à la phrase secrète DM (machine virtuelle Linux), et à la clé de chiffrement lors du déploiement de machines virtuelles. Ceci active [Azure Disk Encryption](../../security/fundamentals/encryption-overview.md).|
-|Sauvegarde Azure|Autoriser la sauvegarde et restauration des clés et des secrets pertinents lors de la sauvegarde de Machines virtuelles Azure avec [Sauvegarde Azure](../../backup/backup-introduction-to-azure-backup.md).|
+|Sauvegarde Azure|Autoriser la sauvegarde et restauration des clés et des secrets pertinents lors de la sauvegarde de Machines virtuelles Azure avec [Sauvegarde Azure](../../backup/backup-overview.md).|
 |Exchange Online et SharePoint Online|Autoriser l’accès à la clé du client pour Azure Storage Service Encryption avec une [clé de client](/microsoft-365/compliance/customer-key-overview).|
-|Azure Information Protection|Autoriser l’accès à la clé de locataire pour [Azure Information Protection](https://docs.microsoft.com/azure/information-protection/what-is-information-protection)|
+|Azure Information Protection|Autoriser l’accès à la clé de locataire pour [Azure Information Protection](/azure/information-protection/what-is-information-protection)|
 |Azure App Service|[Déploiement d’un certificat Azure Web App via Key Vault](https://azure.github.io/AppService/2016/05/24/Deploying-Azure-Web-App-Certificate-through-Key-Vault.html).|
-|Azure SQL Database|[Transparent Data Encryption avec prise en charge de BYOK pour Azure SQL Database et Data Warehouse](../../sql-database/transparent-data-encryption-byok-azure-sql.md?view=sql-server-2017&viewFallbackFrom=azuresqldb-current).|
-|Stockage Azure|[Chiffrement du service de stockage à l’aide de clés gérées par le client dans Azure Key Vault](../../storage/common/storage-service-encryption-customer-managed-keys.md).|
+|Azure SQL Database|[Transparent Data Encryption avec prise en charge Bring Your Own Key pour Azure SQL Database et Azure Synapse Analytics](../../azure-sql/database/transparent-data-encryption-byok-overview.md?view=sql-server-2017&viewFallbackFrom=azuresqldb-current).|
+|Stockage Azure|[Chiffrement du service de stockage à l’aide de clés gérées par le client dans Azure Key Vault](../../storage/common/customer-managed-keys-configure-key-vault.md).|
 |Azure Data Lake Store|[Chiffrement de données dans Azure Data Lake Store](../../data-lake-store/data-lake-store-encryption.md) avec une clé gérée par le client.|
-|Azure Databricks|[Service d'analyse rapide, simple et collaboratif basé sur Apache Spark](../../azure-databricks/what-is-azure-databricks.md)|
-|Gestion des API Azure|[Déployer des certificats pour un domaine personnalisé à partir de Key Vault à l’aide de MSI](../../api-management/api-management-howto-use-managed-service-identity.md#use-the-managed-service-identity-to-access-other-resources)|
+|Azure Databricks|[Service d'analyse rapide, simple et collaboratif basé sur Apache Spark](/azure/databricks/scenarios/what-is-azure-databricks)|
+|Gestion des API Azure|[Déployer des certificats pour un domaine personnalisé à partir de Key Vault à l’aide de MSI](../../api-management/api-management-howto-use-managed-service-identity.md#use-ssl-tls-certificate-from-azure-key-vault)|
 |Azure Data Factory|[Récupérer les informations d’identification du magasin de données dans Key Vault à partir de Data Factory](https://go.microsoft.com/fwlink/?linkid=2109491)|
-|Hubs d'événements Azure|[Autoriser l'accès à un coffre de clés pour le scénario de clés gérées par le client](https://docs.microsoft.com/azure/event-hubs/configure-customer-managed-key)|
-|Azure Service Bus|[Autoriser l'accès à un coffre de clés pour le scénario de clés gérées par le client](https://docs.microsoft.com/azure/service-bus-messaging/configure-customer-managed-key)|
-|Azure Import/Export| [Utiliser des clés gérées par le client dans Azure Key Vault pour le service Import/Export](https://docs.microsoft.com/azure/storage/common/storage-import-export-encryption-key-portal)
+|Hubs d'événements Azure|[Autoriser l'accès à un coffre de clés pour le scénario de clés gérées par le client](../../event-hubs/configure-customer-managed-key.md)|
+|Azure Service Bus|[Autoriser l'accès à un coffre de clés pour le scénario de clés gérées par le client](../../service-bus-messaging/configure-customer-managed-key.md)|
+|Azure Import/Export| [Utiliser des clés gérées par le client dans Azure Key Vault pour le service Import/Export](../../storage/common/storage-import-export-encryption-key-portal.md)
+|Azure Container Registry|[Chiffrement du registre à l’aide de clés gérées par le client](../../container-registry/container-registry-customer-managed-keys.md)
 
 > [!NOTE]
 > Vous devez configurer les stratégies Key Vault appropriées pour autoriser les services correspondants à accéder à Key Vault.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* [Sécuriser votre coffre de clés](secure-your-key-vault.md)
+* [Sécurisez votre coffre de clés](secure-your-key-vault.md)
 * [Configurer les pare-feux et réseaux virtuels d’Azure Key Vault](network-security.md)

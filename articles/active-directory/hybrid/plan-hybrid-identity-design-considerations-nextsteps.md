@@ -16,12 +16,12 @@ ms.date: 07/18/2017
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 9f834924a564f92fe7050a1236701701af7f5229
-ms.sourcegitcommit: fdec8e8bdbddcce5b7a0c4ffc6842154220c8b90
+ms.openlocfilehash: ab425d0232310bd80d41c4028229c9da324a2bc9
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83647274"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96168234"
 ---
 # <a name="azure-active-directory-hybrid-identity-design-considerations--next-steps"></a>Considérations relatives à la conception d'identités hybrides Azure Active Directory - Suite
 Maintenant que vous avez défini vos exigences et examiné toutes les options pour votre solution de gestion des périphériques mobiles, vous êtes prêt à passer aux étapes suivantes et à déployer l'infrastructure sous-jacente qui vous est adaptée ainsi qu'à votre organisation.
@@ -29,9 +29,9 @@ Maintenant que vous avez défini vos exigences et examiné toutes les options po
 ## <a name="hybrid-identity-documentation"></a>Documentation des identités hybrides
 Les contenus relatifs à la planification conceptuelle et procédurale, au déploiement et à l'administration sont utiles lors de l'implémentation de votre solution de gestion des périphériques mobiles :
 
-* [Microsoft System Center](https://technet.microsoft.com/library/cc507089.aspx) peuvent vous aider à recueillir et à agréger des informations sur votre infrastructure, les stratégies, les processus et les meilleures pratiques afin que votre personnel informatique puisse créer des systèmes gérables et automatiser les opérations.
-* [Microsoft Intune](https://technet.microsoft.com/library/jj676587.aspx) est un service cloud de gestion des périphériques qui vous aide à gérer vos ordinateurs et périphériques mobiles et à sécuriser les informations de votre société.
-* [GPM pour Office 365](https://technet.microsoft.com/library/ms.o365.cc.devicepolicy.aspx) vous permet de gérer et de sécuriser les périphériques mobiles lorsqu'ils sont connectés à votre organisation Office 365. Vous pouvez utiliser la GPM pour Office 365 afin de définir des règles d'accès et des stratégies de sécurité des périphériques et de réinitialiser les périphériques mobiles s'ils sont perdus ou volés.
+* [Microsoft System Center](/previous-versions/system-center/developer/cc817313(v=msdn.10)) peuvent vous aider à recueillir et à agréger des informations sur votre infrastructure, les stratégies, les processus et les meilleures pratiques afin que votre personnel informatique puisse créer des systèmes gérables et automatiser les opérations.
+* [Microsoft Intune](/mem/intune/) est un service cloud de gestion des périphériques qui vous aide à gérer vos ordinateurs et périphériques mobiles et à sécuriser les informations de votre société.
+* [GPM pour Microsoft 365](/microsoft-365/admin/basic-mobility-security/overview) vous permet de gérer et de sécuriser les périphériques mobiles lorsqu’ils sont connectés à votre organisation Microsoft 365. Vous pouvez utiliser la GPM pour Microsoft 365 afin de définir des règles d’accès et des stratégies de sécurité des périphériques et de réinitialiser les périphériques mobiles s’ils sont perdus ou volés.
 
 ## <a name="hybrid-identity-resources"></a>Ressources sur les identités hybrides
 L'analyse des ressources suivantes fournit souvent les dernières actualités et mises à jour des solutions de gestion des périphériques mobiles :
@@ -43,4 +43,3 @@ L'analyse des ressources suivantes fournit souvent les dernières actualités et
 
 ## <a name="see-also"></a>Voir aussi
 [Présentation des considérations relatives à la conception](plan-hybrid-identity-design-considerations-overview.md)
-

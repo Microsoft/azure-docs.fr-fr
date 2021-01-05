@@ -2,20 +2,20 @@
 title: Fichier Include
 description: Fichier Include
 services: cognitive-services
-author: diberry
-manager: cgronlun
+author: mrbullwinkle
+manager: nitinme
 ms.service: cognitive-services
 ms.subservice: qna-maker
 ms.topic: include
 ms.custom: include file
-ms.date: 11/05/2018
-ms.author: diberry
-ms.openlocfilehash: 560d4232e98b656c3ca7023cf8bdfa63e0a413da
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 12/29/2020
+ms.author: mbullwin
+ms.openlocfilehash: 2e46887fab21a6d49eee02542be88d312fe13afe
+ms.sourcegitcommit: 1140ff2b0424633e6e10797f6654359947038b8d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "67177360"
+ms.lasthandoff: 12/30/2020
+ms.locfileid: "97820508"
 ---
 ## <a name="clean-up-resources"></a>Nettoyer les ressources
 

@@ -1,20 +1,21 @@
 ---
 title: Tutoriel - Ajouter des paramètres au modèle
-description: Ajoutez des paramètres à votre modèle Azure Resource Manager pour le rendre réutilisable.
+description: Ajoutez des paramètres à votre modèle Azure Resource Manager (modèle ARM) pour le rendre réutilisable.
 author: mumian
 ms.date: 03/31/2020
 ms.topic: tutorial
 ms.author: jgao
-ms.openlocfilehash: de7ec961672db2f3120e00f1a42b33f71e7ab092
-ms.sourcegitcommit: ced98c83ed25ad2062cc95bab3a666b99b92db58
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: e983f8499cbeaf400a8da6f48d7f6c8b75c4795a
+ms.sourcegitcommit: 6172a6ae13d7062a0a5e00ff411fd363b5c38597
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/31/2020
-ms.locfileid: "80437835"
+ms.lasthandoff: 12/11/2020
+ms.locfileid: "97107060"
 ---
 # <a name="tutorial-add-parameters-to-your-arm-template"></a>Tutoriel : Ajouter des paramètres à votre modèle ARM
 
-Dans le [tutoriel précédent](template-tutorial-add-resource.md) vous avez appris à ajouter un compte de stockage au modèle, et à le déployer. Dans ce tutoriel, vous allez apprendre à améliorer le modèle Azure Resource Manager (ARM) en ajoutant des paramètres. Ce tutoriel dure environ **14 minutes**.
+Dans le [tutoriel précédent](template-tutorial-add-resource.md) vous avez appris à ajouter un compte de stockage au modèle, et à le déployer. Dans ce tutoriel, vous allez apprendre à améliorer le modèle Azure Resource Manager (modèle ARM) en lui ajoutant des paramètres. Ce tutoriel dure environ **14 minutes**.
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -32,7 +33,7 @@ Vous avez peut-être remarqué d’ailleurs que ce modèle a un problème. Le no
 
 ## <a name="make-template-reusable"></a>Rendre le modèle réutilisable
 
-Vous pouvez réutiliser votre modèle en ajoutant un paramètre que vous définissez pour transmettre un nom de compte de stockage. Le code JSON mis en évidence dans l’exemple suivant montre ce qui a changé dans votre modèle. Le paramètre **storageName** est identifié en tant que chaîne. La longueur maximale est définie sur 24 caractères pour empêcher les noms trop longs.
+Vous pouvez réutiliser votre modèle en ajoutant un paramètre que vous définissez pour transmettre un nom de compte de stockage. Le code JSON mis en évidence dans l’exemple suivant montre ce qui a changé dans votre modèle. Le paramètre `storageName` est identifié en tant que chaîne. La longueur maximale est définie sur 24 caractères pour empêcher les noms trop longs.
 
 Copiez l’intégralité du fichier et remplacez votre modèle par son contenu.
 
@@ -42,7 +43,7 @@ Copiez l’intégralité du fichier et remplacez votre modèle par son contenu.
 
 Déployons le modèle. L’exemple suivant déploie le modèle avec Azure CLI ou PowerShell. Notez que vous fournissez le nom du compte de stockage en tant que valeur dans la commande de déploiement. En guise de nom de compte de stockage, indiquez le nom que vous avez utilisé dans le tutoriel précédent.
 
-Si vous n’avez pas créé le groupe de ressources, consultez [Créer un groupe de ressources](template-tutorial-create-first-template.md#create-resource-group). L’exemple suppose que vous avez défini la variable **templateFile** sur le chemin du fichier de modèle, comme indiqué dans le [premier tutoriel](template-tutorial-create-first-template.md#deploy-template).
+Si vous n’avez pas créé le groupe de ressources, consultez [Créer un groupe de ressources](template-tutorial-create-first-template.md#create-resource-group). L’exemple suppose que vous avez défini la variable `templateFile` sur le chemin du fichier de modèle, comme indiqué dans le [premier tutoriel](template-tutorial-create-first-template.md#deploy-template).
 
 # <a name="powershell"></a>[PowerShell](#tab/azure-powershell)
 
@@ -80,11 +81,11 @@ Cette façon de gérer les mises à jour signifie que votre modèle peut inclure
 
 Les paramètres vous permettent de personnaliser le déploiement grâce à des valeurs adaptées à un environnement particulier. Par exemple, vous pouvez passer des valeurs différentes selon que vous effectuez un déploiement dans un environnement de développement, de test et de production.
 
-Le modèle précédent a toujours déployé un compte de stockage Standard_LRS. Vous pouvez souhaiter avoir le choix de déployer différentes références SKU en fonction de l’environnement. L’exemple suivant montre les modifications apportées pour ajouter un paramètre de référence (SKU). Copiez l’intégralité du fichier et collez-le à la place de votre modèle.
+Le modèle précédent a toujours déployé un compte de stockage **Standard_LRS**. Vous pouvez souhaiter avoir le choix de déployer différentes références SKU en fonction de l’environnement. L’exemple suivant montre les modifications apportées pour ajouter un paramètre de référence (SKU). Copiez l’intégralité du fichier et collez-le à la place de votre modèle.
 
 :::code language="json" source="~/resourcemanager-templates/get-started-with-templates/add-sku/azuredeploy.json" range="1-40" highlight="10-23,32":::
 
-Le paramètre **storageSKU** possède une valeur par défaut. Cette valeur est utilisée quand aucune valeur n’est spécifiée pendant le déploiement. Il présente également une liste de valeurs autorisées. Ces valeurs correspondent aux valeurs nécessaires à la création d’un compte de stockage. Vous ne souhaitez pas que les utilisateurs de votre modèle transmettent des références SKU qui ne fonctionnent pas.
+Le paramètre `storageSKU` possède une valeur par défaut. Cette valeur est utilisée quand aucune valeur n’est spécifiée pendant le déploiement. Il présente également une liste de valeurs autorisées. Ces valeurs correspondent aux valeurs nécessaires à la création d’un compte de stockage. Vous ne souhaitez pas que les utilisateurs de votre modèle transmettent des références SKU qui ne fonctionnent pas.
 
 ## <a name="redeploy-template"></a>Redéployer le modèle
 
@@ -113,7 +114,7 @@ az deployment group create \
 ---
 
 > [!NOTE]
-> En cas d’échec du déploiement, utilisez le commutateur **debug** avec la commande de déploiement pour afficher les journaux de débogage.  Vous pouvez également utiliser le commutateur **verbose** pour afficher les journaux de débogage complets.
+> Si le déploiement a échoué, utilisez le commutateur `verbose` pour obtenir des informations sur les ressources en cours de création. Utilisez le commutateur `debug` pour obtenir des informations supplémentaires sur le débogage.
 
 Pour voir la flexibilité de votre modèle, procédez de nouveau au redéploiement. Cette fois-ci, définissez le paramètre SKU sur **Standard_GRS**. Vous pouvez soit passer un nouveau nom pour créer un compte de stockage différent, soit utiliser le même nom pour mettre à jour votre compte de stockage existant. Les deux options fonctionnent.
 

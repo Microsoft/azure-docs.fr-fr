@@ -1,27 +1,28 @@
 ---
 title: Apache Spark et Hive - Hive Warehouse Connector - Azure HDInsight
 description: Découvrez comment intégrer Apache Spark et Apache Hive au connecteur d’entrepôt Hive sur Azure HDInsight.
-author: hrasheed-msft
-ms.author: hrasheed
-ms.reviewer: hrasheed
+author: nis-goel
+ms.author: nisgoel
+ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
-ms.custom: seoapr2020
-ms.date: 04/28/2020
-ms.openlocfilehash: 77623a89e52a5e15fbb4159ff49d9377e53e7d4c
-ms.sourcegitcommit: eaec2e7482fc05f0cac8597665bfceb94f7e390f
+ms.topic: how-to
+ms.date: 05/28/2020
+ms.openlocfilehash: 24968511d038b2cea41a59187c0a361684c6720e
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82509531"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86511889"
 ---
-# <a name="integrate-apache-spark-and-apache-hive-with-the-hive-warehouse-connector"></a>Intégrer Apache Spark et Apache Hive au le connecteur d’entrepôt Hive
+# <a name="integrate-apache-spark-and-apache-hive-with-hive-warehouse-connector-in-azure-hdinsight"></a>Intégrer Apache Spark et Apache Hive à Hive Warehouse Connector dans Azure HDInsight
 
-Apache Hive Warehouse Connector (HWC) est une bibliothèque qui vous permet de travailler plus facilement avec Apache Spark et Apache Hive, car elle prend en charge des tâches telles que le déplacement de données entre les DataFrames Spark et les tables Hive et achemine des données Spark transmises en continu dans des tables Hive. Le connecteur d’entrepôt Hive fonctionne comme un pont entre Spark et Hive. Il prend en charge le développement avec Scala, Java et Python.
+Apache Hive Warehouse Connector (HWC) est une bibliothèque qui vous permet de travailler plus facilement avec Apache Spark et Apache Hive, Elle prend en charge certaines tâches comme le déplacement de données entre les DataFrames Spark et les tables Hive. De même, elle achemine les données de streaming Spark vers les tables Hive. Le connecteur d’entrepôt Hive fonctionne comme un pont entre Spark et Hive. Cette bibliothèque prend aussi en charge l’utilisation des langages de programmation Scala, Java et Python à des fins de développement.
 
-HWC vous permet de tirer parti des fonctionnalités uniques de Hive et Spark. Fonctionnalités utilisées pour créer de puissantes applications Big Data. Apache Hive prend en charge les transactions de base de données ACID (Atomiques, Cohérentes, Isolées et Durables). Pour plus d'informations sur ACID et les transactions dans Hive, voir [Transactions Hive](https://cwiki.apache.org/confluence/display/Hive/Hive+Transactions). Hive offre également des contrôles de sécurité détaillés via Apache Ranger et Low Latency Analytical Processing, des options non disponibles dans Apache Spark.
+Le connecteur d’entrepôt Hive vous permet de profiter des fonctionnalités uniques de Hive et de Spark afin de créer de puissantes applications Big Data.
 
-Apache Spark dispose d'une API de flux structuré qui offre des capacités de diffusion en continu non disponibles dans Apache Hive. À partir de HDInsight 4.0, Apache Spark 2.3.1 et Apache Hive 3.1.0 ont des metastores distincts. Cette distinction des metastores peut nuire à l’interopérabilité. Le connecteur d'entrepôt Hive facilite l'utilisation simultanée de Spark et de Hive. La bibliothèque HWC charge des données à partir de démons Low Latency Analytical Processing (traitement analytique à faible latence, LLAP) vers des Exécuteurs Spark en parallèle. Cette action la rend plus efficace et plus adaptable que l’utilisation d’une connexion JDBC standard de Spark à Hive.
+Apache Hive prend en charge les transactions de base de données ACID (Atomiques, Cohérentes, Isolées et Durables). Pour plus d'informations sur ACID et les transactions dans Hive, voir [Transactions Hive](https://cwiki.apache.org/confluence/display/Hive/Hive+Transactions). Hive offre également des contrôles de sécurité détaillés via Apache Ranger et Low Latency Analytical Processing (LLAP), des options non disponibles dans Apache Spark.
+
+Apache Spark dispose d'une API de flux structuré qui offre des capacités de diffusion en continu non disponibles dans Apache Hive. À partir de HDInsight 4.0, Apache Spark 2.3.1 et Apache Hive 3.1.0 ont des metastores distincts. Cette disparité de metastores peut nuire à l’interopérabilité. Le connecteur d'entrepôt Hive facilite l'utilisation simultanée de Spark et de Hive. La bibliothèque HWC charge les données de démons LLAP dans des exécuteurs Spark en parallèle. Ce processus la rend plus efficace et plus adaptable qu’une connexion JDBC standard de Spark à Hive.
 
 ![Architecture du connecteur d’entrepôt Hive](./media/apache-hive-warehouse-connector/hive-warehouse-connector-architecture.png)
 
@@ -37,7 +38,10 @@ Voici quelques-unes des opérations prises en charge par le connecteur d'entrep�
 
 ## <a name="hive-warehouse-connector-setup"></a>Configuration du connecteur d’entrepôt Hive
 
-Suivez ces étapes pour configurer le connecteur d'entrepôt Hive entre un cluster Spark et un cluster Interactive Query dans Azure HDInsight :
+> [!IMPORTANT]
+> L’instance HiveServer2 Interactive installée sur les clusters Pack Sécurité Entreprise Spark 2.4 n’est pas prise en charge pour une utilisation avec Hive Warehouse Connector. Vous devez configurer un cluster HiveServer2 Interactive distinct pour héberger vos charges de travail HiveServer2 Interactive. Une configuration Hive Warehouse Connector utilisant un cluster Spark 2.4 unique n’est pas prise en charge.
+
+Hive Warehouse Connector a besoin de clusters distincts pour les charges de travail Spark et Interactive Query. Suivez les étapes ci-dessous pour configurer ces clusters dans Azure HDInsight.
 
 ### <a name="create-clusters"></a>Créer des clusters
 
@@ -45,187 +49,147 @@ Suivez ces étapes pour configurer le connecteur d'entrepôt Hive entre un clust
 
 1. Créez un cluster HDInsight Interactive Query (LLAP) **4.0** avec le même compte de stockage et le même réseau virtuel Azure que pour le cluster Spark.
 
-### <a name="modify-hosts-file"></a>Modifier le fichier hosts
+### <a name="configure-hwc-settings"></a>Configurer les paramètres HWC
 
-Copiez les informations sur le nœud à partir du fichier `/etc/hosts` sur le nœud principal (headnode0) de votre cluster Interactive Query et concaténez les informations vers le fichier `/etc/hosts` du nœud principal (headnode0) de votre cluster Spark. Cette étape permettra à votre cluster Spark de résoudre les adresses IP des nœuds dans le cluster Interactive Query. Affichez le contenu du fichier mis à jour avec `cat /etc/hosts`. Le résultat final devrait ressembler à la capture d'écran ci-dessous.
+#### <a name="gather-preliminary-information"></a>Recueillir des informations préliminaires
 
-![Fichier d’hôte du connecteur d’entrepôt Hive](./media/apache-hive-warehouse-connector/hive-warehouse-connector-hosts-file.png)
+1. À partir d’un navigateur web, accédez à `https://LLAPCLUSTERNAME.azurehdinsight.net/#/main/services/HIVE`, où LLAPCLUSTERNAME est le nom de votre cluster Interactive Query.
 
-### <a name="gather-preliminary-information"></a>Recueillir des informations préliminaires
+1. Accédez à **Summary** > **HiveServer2 Interactive JDBC URL** et notez la valeur. La valeur peut être similaire à : `jdbc:hive2://zk0-iqgiro.rekufuk2y2ce.bx.internal.cloudapp.net:2181,zk1-iqgiro.rekufuk2y2ce.bx.internal.cloudapp.net:2181,zk4-iqgiro.rekufuk2y2ce.bx.internal.cloudapp.net:2181/;serviceDiscoveryMode=zooKeeper;zooKeeperNamespace=hiveserver2-interactive`.
 
-#### <a name="from-your-interactive-query-cluster"></a>À partir de votre cluster Interactive Query
+1. Accédez à **Configs** > **Advanced** > **Advanced hive-site** > **hive.zookeeper.quorum** et notez la valeur. La valeur peut être similaire à : `zk0-iqgiro.rekufuk2y2cezcbowjkbwfnyvd.bx.internal.cloudapp.net:2181,zk1-iqgiro.rekufuk2y2cezcbowjkbwfnyvd.bx.internal.cloudapp.net:2181,zk4-iqgiro.rekufuk2y2cezcbowjkbwfnyvd.bx.internal.cloudapp.net:2181`.
 
-1. Accédez à la page Hive Apache Ambari du cluster à l’aide de `https://LLAPCLUSTERNAME.azurehdinsight.net/#/main/services/HIVE/configs` où `LLAPCLUSTERNAME` est le nom de votre cluster Interactive Query.
+1. Accédez à **Configs** > **Advanced** > **General** > **hive.metastore.uris** et notez la valeur. La valeur peut être similaire à : `thrift://iqgiro.rekufuk2y2cezcbowjkbwfnyvd.bx.internal.cloudapp.net:9083,thrift://hn1-iqgiro.rekufuk2y2cezcbowjkbwfnyvd.bx.internal.cloudapp.net:9083`.
 
-1. Accédez à **Advanced** > **General** > **hive.metastore.uris** et notez la valeur. La valeur peut être similaire à : `thrift://iqgiro.rekufuk2y2cezcbowjkbwfnyvd.bx.internal.cloudapp.net:9083,thrift://hn1-iqgiro.rekufuk2y2cezcbowjkbwfnyvd.bx.internal.cloudapp.net:9083`.
+1. Accédez à **Configs** > **Advanced** > **Advanced hive-interactive-site** > **hive.llap.daemon.service.hosts** et notez la valeur. La valeur peut être similaire à : `@llap0`.
 
-1. Accédez à **Advanced** > **Advanced hive-site** > **hive.zookeeper.quorum** et notez la valeur. La valeur peut être similaire à : `zk0-iqgiro.rekufuk2y2cezcbowjkbwfnyvd.bx.internal.cloudapp.net:2181,zk1-iqgiro.rekufuk2y2cezcbowjkbwfnyvd.bx.internal.cloudapp.net:2181,zk4-iqgiro.rekufuk2y2cezcbowjkbwfnyvd.bx.internal.cloudapp.net:2181`.
+#### <a name="configure-spark-cluster-settings"></a>Configurer les paramètres du cluster Spark
 
-#### <a name="from-your-apache-spark-cluster"></a>À partir de votre cluster Apache Spark
+1. À partir d’un navigateur web, accédez à `https://CLUSTERNAME.azurehdinsight.net/#/main/services/SPARK2/configs`, où CLUSTERNAME est le nom de votre cluster Apache Spark.
 
-1. Accédez à la page Hive Apache Ambari du cluster à l’aide de `https://SPARKCLUSTERNAME.azurehdinsight.net/#/main/services/HIVE/configs` où `SPARKCLUSTERNAME` est le nom de votre cluster Apache Spark.
+1. Développez **Custom spark2-defaults**.
 
-1. Accédez à **Advanced** > **Advanced hive-interactive-site** > **hive.llap.daemon.service.hosts** et notez la valeur. La valeur peut être similaire à : `@llap0`.
+    ![Apache Ambari - Configuration Spark2](./media/apache-hive-warehouse-connector/hive-warehouse-connector-spark2-ambari.png)
 
-### <a name="configure-spark-cluster-settings"></a>Configurer les paramètres du cluster Spark
+1. Sélectionnez **Add Property...** (Ajouter une propriété...) pour ajouter les configurations suivantes :
 
-À partir de l’IU web de votre Spark Ambari, accédez à **Spark2** > **CONFIGS** > **Custom spark2-defaults**.
+    | Configuration | Valeur |
+    |----|----|
+    |`spark.datasource.hive.warehouse.load.staging.dir`|`wasbs://STORAGE_CONTAINER_NAME@STORAGE_ACCOUNT_NAME.blob.core.windows.net/tmp`. <br> Définir sur un répertoire de préproduction compatible HDFS approprié. Si vous utilisez deux clusters différents, ce répertoire doit être un dossier dans le répertoire de préproduction du compte de stockage du cluster LLAP afin que HiveServer2 puisse y accéder.  Remplacez `STORAGE_ACCOUNT_NAME` par le nom du compte de stockage utilisé par le cluster et `STORAGE_CONTAINER_NAME` par le nom du conteneur de stockage. |
+    |`spark.sql.hive.hiveserver2.jdbc.url`| Valeur que vous avez obtenue précédemment à partir de **HiveServer2 Interactive JDBC URL** |
+    |`spark.datasource.hive.warehouse.metastoreUri`| La valeur que vous avez obtenue précédemment à partir de **hive.metastore.uris**. |
+    |`spark.security.credentials.hiveserver2.enabled`|`true` pour le mode de cluster YARN et `false` pour le mode client YARN. |
+    |`spark.hadoop.hive.zookeeper.quorum`| La valeur que vous avez obtenue précédemment à partir de **hive.zookeeper.quorum**. |
+    |`spark.hadoop.hive.llap.daemon.service.hosts`| La valeur que vous avez obtenue précédemment à partir de **hive.llap.daemon.service.hosts**. |
 
-![Apache Ambari - Configuration Spark2](./media/apache-hive-warehouse-connector/hive-warehouse-connector-spark2-ambari.png)
+1. Enregistrez les modifications, puis redémarrez tous les composants concernés.
 
-Sélectionnez **Add Property…** (Ajouter une propriété) pour ajouter ou mettre à jour la valeur suivante :
+### <a name="configure-hwc-for-enterprise-security-package-esp-clusters"></a>Configurer HWC pour des clusters Pack Sécurité Entreprise (ESP)
 
-| Clé | Valeur |
-|----|----|
-|`spark.hadoop.hive.llap.daemon.service.hosts`|La valeur que vous avez obtenue précédemment à partir de **hive.llap.daemon.service.hosts**.|
-|`spark.sql.hive.hiveserver2.jdbc.url`|`jdbc:hive2://LLAPCLUSTERNAME.azurehdinsight.net:443/;user=admin;password=PWD;ssl=true;transportMode=http;httpPath=/hive2`. Définir sur la chaîne de connexion JDBC, qui se connecte à Hiveserver2 sur le cluster Interactive Query. REMPLACEZ `LLAPCLUSTERNAME` par le nom de votre cluster Interactive Query. Remplacez `PWD` par le mot de passe réel.|
-|`spark.datasource.hive.warehouse.load.staging.dir`|`wasbs://STORAGE_CONTAINER_NAME@STORAGE_ACCOUNT_NAME.blob.core.windows.net/tmp`. Définir sur un répertoire de préproduction compatible HDFS approprié. Si vous utilisez deux clusters différents, ce répertoire doit être un dossier dans le répertoire de préproduction du compte de stockage du cluster LLAP afin que HiveServer2 puisse y accéder.  Remplacez `STORAGE_ACCOUNT_NAME` par le nom du compte de stockage utilisé par le cluster et `STORAGE_CONTAINER_NAME` par le nom du conteneur de stockage.|
-|`spark.datasource.hive.warehouse.metastoreUri`|La valeur que vous avez obtenue précédemment à partir de **hive.metastore.uris**.|
-|`spark.security.credentials.hiveserver2.enabled`|`false` pour le mode de déploiement du client YARN.|
-|`spark.hadoop.hive.zookeeper.quorum`|La valeur que vous avez obtenue précédemment à partir de **hive.zookeeper.quorum**.|
+Le Pack Sécurité Entreprise (ESP) vous fournit des fonctionnalités de qualité professionnelle, notamment l’authentification basée sur Active Directory, la prise en charge multi-utilisateur et le contrôle d’accès en fonction du rôle pour les clusters Apache Hadoop dans Azure HDInsight. Pour plus d’informations sur le pack ESP, consultez [Utiliser le Pack Sécurité Entreprise dans HDInsight](../domain-joined/apache-domain-joined-architecture.md).
 
-Enregistrez les modifications et redémarrez les composants si nécessaire.
+En dehors des configurations mentionnées dans la section précédente, ajoutez la configuration suivante pour utiliser HWC sur les clusters ESP.
 
-## <a name="using-the-hive-warehouse-connector"></a>Utilisation du connecteur d'entrepôt Hive
+1. À partir de l’interface utilisateur web Ambari du cluster Spark, accédez à **Spark2** > **CONFIGS** > **Custom spark2-defaults**.
 
-### <a name="connecting-and-running-queries"></a>Connexion et exécution des requêtes
+1. Mettez à jour la propriété suivante.
+
+    | Configuration | Valeur |
+    |----|----|
+    | `spark.sql.hive.hiveserver2.jdbc.url.principal`    | `hive/<llap-headnode>@<AAD-Domain>` |
+    
+    * À partir d’un navigateur web, accédez à `https://CLUSTERNAME.azurehdinsight.net/#/main/services/HIVE/summary`, où CLUSTERNAME est le nom de votre cluster Interactive Query. Cliquez sur **HiveServer2 Interactive**. Vous verrez le nom de domaine complet (FQDN) du nœud principal sur lequel LLAP s’exécute, comme indiqué dans la capture d’écran. Remplacez `<llap-headnode>` par cette valeur.
+
+        ![Nœud principal du connecteur d’entrepôt Hive](./media/apache-hive-warehouse-connector/head-node-hive-server-interactive.png)
+
+    * Utilisez la [commande ssh](../hdinsight-hadoop-linux-use-ssh-unix.md) pour vous connecter à votre cluster Interactive Query. Recherchez le paramètre `default_realm` dans le fichier `/etc/krb5.conf`. Remplacez `<AAD-DOMAIN>` par cette valeur sous forme de chaîne en majuscules, sinon les informations d’identification ne seront pas trouvées.
+
+        ![Domaine AAD du connecteur d’entrepôt Hive](./media/apache-hive-warehouse-connector/aad-domain.png)
+
+    * Par exemple, `hive/hn0-ng36ll.mjry42ikpruuxgs2qy2kpg4q5e.cx.internal.cloudapp.net@PKRSRVUQVMAE6J85.D2.INTERNAL.CLOUDAPP.NET`.
+    
+1. Enregistrez les modifications et redémarrez les composants si nécessaire.
+
+## <a name="hive-warehouse-connector-usage"></a>Utilisation de Hive Warehouse Connector
 
 Vous pouvez choisir entre différentes méthodes pour vous connecter à votre cluster Interactive Query et exécuter des requêtes à l'aide du connecteur d’entrepôt Hive. Les méthodes prises en charge incluent les outils suivants :
 
-* [spark-shell](../spark/apache-spark-shell.md)
-* PySpark
-* spark-submit
-* [Zeppelin](../spark/apache-spark-zeppelin-notebook.md)
-* [Livy](../spark/apache-spark-livy-rest-interface.md)
+* [Spark-shell / PySpark](../spark/apache-spark-shell.md)
+* [Spark-submit](#spark-submit)
+* [Zeppelin](./apache-hive-warehouse-connector-zeppelin.md)
 
-Tous les exemples fournis dans cet article seront exécutés via spark-shell.
 
-Pour démarrer une session spark-shell, procédez comme suit :
+Vous trouverez ci-dessous des exemples de connexion à HWC à partir de Spark.
 
-1. Connectez-vous avec SSH au nœud principal de votre cluster Apache Spark. Pour plus d’informations sur la connexion à votre cluster via SSH, consultez [Se connecter à HDInsight (Apache Hadoop) avec SSH](../../hdinsight/hdinsight-hadoop-linux-use-ssh-unix.md).
+### <a name="spark-shell"></a>Spark-shell
 
-1. Entrez la commande suivante pour démarrer l’interpréteur de commandes Spark :
+1. Utilisez une [commande ssh](../hdinsight-hadoop-linux-use-ssh-unix.md) pour vous connecter à votre cluster Apache Spark. Modifiez la commande ci-dessous en remplaçant CLUSTERNAME par le nom de votre cluster, puis entrez la commande :
+
+    ```cmd
+    ssh sshuser@CLUSTERNAME-ssh.azurehdinsight.net
+    ```
+
+1. À partir de votre session ssh, exécutez la commande suivante pour noter la version de `hive-warehouse-connector-assembly` :
+
+    ```bash
+    ls /usr/hdp/current/hive_warehouse_connector
+    ```
+
+1. Modifiez le code ci-dessous avec la version de `hive-warehouse-connector-assembly` identifiée ci-dessus. Exécutez ensuite la commande pour démarrer l’interpréteur de commandes Spark :
 
     ```bash
     spark-shell --master yarn \
-    --jars /usr/hdp/current/hive_warehouse_connector/hive-warehouse-connector-assembly-<STACK_VERSION>.jar \
+    --jars /usr/hdp/current/hive_warehouse_connector/hive-warehouse-connector-assembly-<VERSION>.jar \
     --conf spark.security.credentials.hiveserver2.enabled=false
     ```
 
-    Vous verrez un message de bienvenue et une invite `scala>` dans laquelle vous pourrez entrer des commandes.
-
-1. Après avoir démarré l’interpréteur de commandes de Spark, une instance du connecteur d'entrepôt Hive peut être lancée en utilisant les commandes suivantes :
+1. Après avoir démarré l’interpréteur de commandes Spark, une instance de Hive Warehouse Connector peut être démarrée à l’aide des commandes suivantes :
 
     ```scala
     import com.hortonworks.hwc.HiveWarehouseSession
     val hive = HiveWarehouseSession.session(spark).build()
     ```
 
-### <a name="connecting-and-running-queries-on-enterprise-security-package-esp-clusters"></a>Connexion et exécution de requêtes sur des clusters du Pack Sécurité Entreprise (ESP, Enterprise Security Package)
+### <a name="spark-submit"></a>Spark-submit
 
-Pack Sécurité Entreprise (ESP) offre des capacités d’entreprise, telles que l’authentification par le biais d’Azure Active Directory, la prise en charge multi-utilisateur et le contrôle d’accès en fonction du rôle pour les clusters Apache Hadoop dans Azure HDInsight. Pour plus d’informations sur le pack ESP, consultez [Utiliser le Pack Sécurité Entreprise dans HDInsight](../domain-joined/apache-domain-joined-architecture.md).
+Une fois que vous avez créé le code scala/java avec les dépendances dans un fichier jar d’assembly, utilisez la commande ci-dessous pour lancer une application Spark. Remplacez `<VERSION>` et `<APP_JAR_PATH>` par les valeurs réelles.
 
-1. Connectez-vous avec SSH au nœud principal de votre cluster Apache Spark.
-
-1. Tapez `kinit` et connectez-vous avec un utilisateur du domaine.
-
-1. Démarrez spark-shell avec la liste complète des paramètres de configuration, comme indiqué ci-dessous. Toutes les valeurs en majuscules et entre crochets doivent être spécifiées en fonction de votre cluster. Si vous devez connaître les valeurs à saisir pour l’un des paramètres ci-dessous, reportez-vous à la section [Configuration de Hive Warehouse Connector](#hive-warehouse-connector-setup).
-
-    ```bash
-    spark-shell --master yarn \
-    --jars /usr/hdp/current/hive_warehouse_connector/hive-warehouse-connector-assembly-<STACK_VERSION>.jar \
+* Mode client YARN
+    
+    ```scala
+    spark-submit \
+    --class myHwcApp \
+    --master yarn \
+    --deploy-mode client \
+    --jars /usr/hdp/current/hive_warehouse_connector/hive-warehouse-connector-assembly-<VERSION>.jar \
     --conf spark.security.credentials.hiveserver2.enabled=false
-    --conf spark.hadoop.hive.llap.daemon.service.hosts='<LLAP_APP_NAME>'
-    --conf spark.sql.hive.hiveserver2.jdbc.url='jdbc:hive2://<ZOOKEEPER_QUORUM>;serviceDiscoveryMode=zookeeper;zookeeperNamespace=hiveserver2-interactive'
-    --conf spark.datasource.hive.warehouse.load.staging.dir='<STAGING_DIR>'
-    --conf spark.datasource.hive.warehouse.metastoreUri='<METASTORE_URI>'
-    --conf spark.hadoop.hive.zookeeper.quorum='<ZOOKEEPER_QUORUM>'
-   ```
+    /<APP_JAR_PATH>/myHwcAppProject.jar
+    ```
 
-### <a name="creating-spark-dataframes-from-hive-queries"></a>Création de DataFrames Spark à partir de requêtes Hive
+* Mode de cluster YARN
+    ```scala
+    spark-submit \
+    --class myHwcApp \
+    --master yarn \
+    --deploy-mode cluster \
+    --jars /usr/hdp/current/hive_warehouse_connector/hive-warehouse-connector-assembly-<VERSION>.jar \
+    --conf spark.security.credentials.hiveserver2.enabled=true
+    /<APP_JAR_PATH>/myHwcAppProject.jar
+    ```
 
-Les résultats de toutes les requêtes utilisant la bibliothèque HWC sont renvoyés sous forme de DataFrame. Les exemples suivants montrent comment créer une requête de base.
+Pour Python, ajoutez également la configuration suivante. 
 
-```scala
-hive.setDatabase("default")
-val df = hive.executeQuery("select * from hivesampletable")
-df.filter("state = 'Colorado'").show()
+```python
+--py-files /usr/hdp/current/hive_warehouse_connector/pyspark_hwc-<VERSION>.zip
 ```
+    
+## <a name="run-queries-on-enterprise-security-package-esp-clusters"></a>Exécuter des requêtes sur des clusters Pack Sécurité Entreprise (ESP)
 
-Les résultats de la requête sont des DataFrames Spark, qui peuvent être utilisés avec les bibliothèques Spark comme MLIB et SparkSQL.
+Utilisez `kinit` avant de lancer spark-shell ou spark-submit. Remplacez USERNAME par le nom d’un compte de domaine doté d’autorisations d’accès au cluster, puis exécutez la commande suivante :
 
-### <a name="writing-out-spark-dataframes-to-hive-tables"></a>Écriture de DataFrames Spark dans des tables Hive
-
-Spark ne prend pas en charge nativement l'écriture dans des tables ACID gérées par Hive. En utilisant HWC, cependant, vous pouvez écrire n'importe quel DataFrame dans une table Hive. Vous pouvez voir cette fonctionnalité en action dans l'exemple suivant :
-
-1. Créez une table appelée `sampletable_colorado` et spécifiez ses colonnes en utilisant la commande suivante :
-
-    ```scala
-    hive.createTable("sampletable_colorado").column("clientid","string").column("querytime","string").column("market","string").column("deviceplatform","string").column("devicemake","string").column("devicemodel","string").column("state","string").column("country","string").column("querydwelltime","double").column("sessionid","bigint").column("sessionpagevieworder","bigint").create()
-    ```
-
-1. Filtrez la table `hivesampletable`, où la colonne `state` est égale à `Colorado`. Cette requête de la table Hive est retournée sous la forme d'un DataFrame Spark. Le DataFrame est ensuite enregistré dans la table Hive `sampletable_colorado` à l'aide de la fonction `write`.
-
-    ```scala
-    hive.table("hivesampletable").filter("state = 'Colorado'").write.format(HiveWarehouseSession.HIVE_WAREHOUSE_CONNECTOR).option("table","sampletable_colorado").save()
-    ```
-
-1. Visualisez les résultats avec la commande suivante :
-
-    ```scala
-    hive.table("sampletable_colorado").show()
-    ```
-
-    ![Connecteur d’entrepôt Hive - Affichage de la table Hive](./media/apache-hive-warehouse-connector/hive-warehouse-connector-show-hive-table.png)
-
-### <a name="structured-streaming-writes"></a>Écritures à l’aide du streaming structuré
-
-Le connecteur d’entrepôt Hive vous permet d’utiliser le streaming Spark pour écrire des données dans des tables Hive.
-
-Suivez les étapes ci-dessous pour créer une bibliothèque Hive Warehouse Connector. L’exemple ingère les données d’un flux Spark sur le port localhost 9999 dans une table Hive.
-
-1. Suivez les étapes de la section [Connexion et exécution des requêtes](#connecting-and-running-queries).
-
-1. Démarrez le flux Spark à l’aide de la commande suivante :
-
-    ```scala
-    val lines = spark.readStream.format("socket").option("host", "localhost").option("port",9999).load()
-    ```
-
-1. Procédez comme suit pour générer les données du flux Spark que vous avez créé :
-    1. Ouvrez une deuxième session SSH sur le même cluster Spark.
-    1. À l’invite de commandes, tapez `nc -lk 9999`. Cette commande utilise l’utilitaire `netcat` pour envoyer des données de la ligne de commande au port spécifié.
-
-1. Revenez à la première session SSH et créez une nouvelle table Hive pour contenir les données de streaming. Dans l’interpréteur de commandes de Spark, entrez la commande suivante :
-
-    ```scala
-    hive.createTable("stream_table").column("value","string").create()
-    ```
-
-1. Puis, écrivez les données de streaming dans la table nouvellement créée à l’aide de la commande suivante :
-
-    ```scala
-    lines.filter("value = 'HiveSpark'").writeStream.format(HiveWarehouseSession.STREAM_TO_STREAM).option("database", "default").option("table","stream_table").option("metastoreUri",spark.conf.get("spark.datasource.hive.warehouse.metastoreUri")).option("checkpointLocation","/tmp/checkpoint1").start()
-    ```
-
-    >[!Important]
-    > Les options `metastoreUri` et `database` doivent actuellement être définies manuellement en raison d'un problème connu dans Apache Spark. Pour plus d'informations sur ce problème, voir [SPARK-25460](https://issues.apache.org/jira/browse/SPARK-25460).
-
-1. Revenez à la deuxième session SSH et entrez les valeurs suivantes :
-
-    ```bash
-    foo
-    HiveSpark
-    bar
-    ```
-
-1. Revenez à la première session SSH et notez la brève activité. Pour afficher les données, utilisez la commande suivante :
-
-    ```scala
-    hive.table("stream_table").show()
-    ```
-
-Utilisez **Ctrl + C** pour arrêter `netcat` sur la deuxième session SSH. Utilisez `:q` pour quitter l’interpréteur de commandes de Spark sur la première session SSH.
+```bash
+kinit USERNAME
+```
 
 ### <a name="securing-data-on-spark-esp-clusters"></a>Sécurisation des données sur les clusters ESP Spark
 
@@ -247,14 +211,14 @@ Utilisez **Ctrl + C** pour arrêter `netcat` sur la deuxième session SSH. Util
     ![table de démonstration avant application d’une stratégie Ranger](./media/apache-hive-warehouse-connector/hive-warehouse-connector-table-before-ranger-policy.png)
 
 1. Appliquez une stratégie de masquage des colonnes qui n'affiche que les quatre derniers caractères de la colonne.  
-    1. Accédez à l’interface utilisateur de l’administrateur Ranger à l’adresse `https://CLUSTERNAME.azurehdinsight.net/ranger/`.
+    1. Accédez à l’interface utilisateur de l’administrateur Ranger à l’adresse `https://LLAPCLUSTERNAME.azurehdinsight.net/ranger/`.
     1. Cliquez sur le service Hive pour votre cluster sous **Hive**.
         ![Gestionnaire de service Ranger](./media/apache-hive-warehouse-connector/hive-warehouse-connector-ranger-service-manager.png)
     1. Cliquez sur l’onglet **Masquage**, puis sur **Ajouter une nouvelle stratégie**
 
         ![Connecteur de l’entrepôt Hive - Liste des stratégies Ranger Hive](./media/apache-hive-warehouse-connector/hive-warehouse-connector-ranger-hive-policy-list.png)
 
-    a. Fournissez un nom de stratégie. Sélectionnez la base de données : **Default**, Table Hive : **demo**, Colonne Hive : **name**, Utilisateur : **rsadmin2**, Types d’accès : **select**, et **Partial mask: show last 4** dans le menu **Select Masking Option** (Sélectionner l’option de masquage). Cliquez sur **Add**.
+    1. Nommez la stratégie. Sélectionnez la base de données : **Default**, Table Hive : **demo**, Colonne Hive : **name**, Utilisateur : **rsadmin2**, Types d’accès : **select**, et **Partial mask: show last 4** dans le menu **Select Masking Option** (Sélectionner l’option de masquage). Cliquez sur **Add**.
                 ![Créer une stratégie](./media/apache-hive-warehouse-connector/hive-warehouse-connector-ranger-create-policy.png)
 1. Affichez à nouveau le contenu de la table. Après avoir appliqué la stratégie Ranger, nous ne voyons que les quatre derniers caractères de la colonne.
 
@@ -262,5 +226,7 @@ Utilisez **Ctrl + C** pour arrêter `netcat` sur la deuxième session SSH. Util
 
 ## <a name="next-steps"></a>Étapes suivantes
 
+* [Opérations HWC et Apache Spark](./apache-hive-warehouse-connector-operations.md)
 * [Utiliser Interactive Query avec HDInsight](./apache-interactive-query-get-started.md)
+* [Intégration de HWC à Apache Zeppelin](./apache-hive-warehouse-connector-zeppelin.md)
 * [Exemples d'interaction avec le connecteur d'entrepôt Hive en utilisant Zeppelin, Livy, spark-submit et pyspark](https://community.hortonworks.com/articles/223626/integrating-apache-hive-with-apache-spark-hive-war.html)

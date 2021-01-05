@@ -8,15 +8,15 @@ manager: celestedg
 ms.service: active-directory
 ms.workload: identity
 ms.topic: reference
-ms.date: 04/01/2020
+ms.date: 06/06/2020
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: 007d613a1f170a0ee278a838c92ade2fce9c6dec
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 7c292f939339add06168c55236f8666651e4aace
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80529200"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85201274"
 ---
 # <a name="boolean-claims-transformations"></a>Transformations de revendications booléennes
 
@@ -36,7 +36,7 @@ Effectue une opération And de deux inputClaims booléennes et définit outputCl
 
 La transformation de revendication suivante montre comment exécuter une opération And sur deux ClaimTypes booléens : `isEmailNotExist`, et `isSocialAccount`. La revendication de sortie `presentEmailSelfAsserted` prend la valeur `true` si la valeur de ces deux revendications d’entrée est `true`. Dans une étape d’orchestration, vous pouvez utiliser une condition préalable pour prédéfinir une page autodéclarée, uniquement si un e-mail de compte social est vide.
 
-```XML
+```xml
 <ClaimsTransformation Id="CheckWhetherEmailBePresented" TransformationMethod="AndClaims">
   <InputClaims>
     <InputClaim ClaimTypeReferenceId="isEmailNotExist" TransformationClaimType="inputClaim1" />
@@ -48,7 +48,7 @@ La transformation de revendication suivante montre comment exécuter une opérat
 </ClaimsTransformation>
 ```
 
-### <a name="example"></a>Exemple
+### <a name="example-of-andclaims"></a>Exemple d’AndClaims
 
 - Revendications d’entrée :
     - **inputClaim1** : true
@@ -72,7 +72,7 @@ La transformation de revendication **AssertBooleanClaimIsEqualToValue** est touj
 
 La transformation de revendication suivante montre comment vérifier la valeur d’un ClaimType booléen avec une valeur `true`. Si la valeur du ClaimType `accountEnabled` est false, un message d’erreur est levé.
 
-```XML
+```xml
 <ClaimsTransformation Id="AssertAccountEnabledIsTrue" TransformationMethod="AssertBooleanClaimIsEqualToValue">
   <InputClaims>
     <InputClaim ClaimTypeReferenceId="accountEnabled" TransformationClaimType="inputClaim" />
@@ -85,7 +85,8 @@ La transformation de revendication suivante montre comment vérifier la valeur d
 
 
 Le profil technique de validation `login-NonInteractive` appelle la transformation de revendication `AssertAccountEnabledIsTrue`.
-```XML
+
+```xml
 <TechnicalProfile Id="login-NonInteractive">
   ...
   <OutputClaimsTransformations>
@@ -96,7 +97,7 @@ Le profil technique de validation `login-NonInteractive` appelle la transformati
 
 Le profil technique autodéclaré appelle le profil technique de validation **login-NonInteractive**.
 
-```XML
+```xml
 <TechnicalProfile Id="SelfAsserted-LocalAccountSignin-Email">
   <Metadata>
     <Item Key="UserMessageIfClaimsTransformationBooleanValueIsNotEqual">Custom error message if account is disabled.</Item>
@@ -107,12 +108,12 @@ Le profil technique autodéclaré appelle le profil technique de validation **lo
 </TechnicalProfile>
 ```
 
-### <a name="example"></a>Exemple
+### <a name="example-of-assertbooleanclaimisequaltovalue"></a>Exemple d’AssertBooleanClaimIsEqualToValue
 
 - Revendications d’entrée :
     - **inputClaim** : false
     - **valueToCompareTo** : true
-- Résultat : Erreur levée
+- Résultat : Erreur levée
 
 ## <a name="comparebooleanclaimtovalue"></a>CompareBooleanClaimToValue
 
@@ -124,10 +125,9 @@ Vérifie que la valeur booléenne d’une revendication est égale à `true` ou 
 | InputParameter |valueToCompareTo | boolean | Valeur à comparer (true ou false). |
 | OutputClaim | compareResult | boolean | ClaimType généré après l’appel de cette ClaimsTransformation. |
 
-
 La transformation de revendication suivante montre comment vérifier la valeur d’un ClaimType booléen avec une valeur `true`. Si la valeur du ClaimType `IsAgeOver21Years` est égale à `true`, la transformation de revendication retourne la valeur `true`, sinon `false`.
 
-```XML
+```xml
 <ClaimsTransformation Id="AssertAccountEnabled" TransformationMethod="CompareBooleanClaimToValue">
   <InputClaims>
     <InputClaim ClaimTypeReferenceId="IsAgeOver21Years" TransformationClaimType="inputClaim" />
@@ -141,7 +141,7 @@ La transformation de revendication suivante montre comment vérifier la valeur d
 </ClaimsTransformation>
 ```
 
-### <a name="example"></a>Exemple
+### <a name="example-of-comparebooleanclaimtovalue"></a>Exemple de CompareBooleanClaimToValue
 
 - Revendications d’entrée :
     - **inputClaim** : false
@@ -149,8 +149,6 @@ La transformation de revendication suivante montre comment vérifier la valeur d
     - **valueToCompareTo** : true
 - Revendications de sortie :
     - **compareResult** : false
-
-
 
 ## <a name="notclaims"></a>NotClaims
 
@@ -163,7 +161,7 @@ Effectue une opération Not de l’inputClaim booléen et définit outputClaim a
 
 Utilisez cette transformation de revendication pour effectuer une négation logique sur une revendication.
 
-```XML
+```xml
 <ClaimsTransformation Id="CheckWhetherEmailBePresented" TransformationMethod="NotClaims">
   <InputClaims>
     <InputClaim ClaimTypeReferenceId="userExists" TransformationClaimType="inputClaim" />
@@ -174,7 +172,7 @@ Utilisez cette transformation de revendication pour effectuer une négation logi
 </ClaimsTransformation>
 ```
 
-### <a name="example"></a>Exemple
+### <a name="example-of-notclaims"></a>Exemple de NotClaims
 
 - Revendications d’entrée :
     - **inputClaim** : false
@@ -193,7 +191,7 @@ Calcule une opération Or de deux inputClaims booléennes et définit outputClai
 
 La transformation de revendication suivante montre comment effectuer une opération `Or` sur deux ClaimTypes booléens. Dans l’étape d’orchestration, vous pouvez utiliser une condition préalable pour prédéfinir une page autodéclarée, si la valeur de l’une des revendications est `true`.
 
-```XML
+```xml
 <ClaimsTransformation Id="CheckWhetherEmailBePresented" TransformationMethod="OrClaims">
   <InputClaims>
     <InputClaim ClaimTypeReferenceId="isLastTOSAcceptedNotExists" TransformationClaimType="inputClaim1" />
@@ -205,7 +203,7 @@ La transformation de revendication suivante montre comment effectuer une opérat
 </ClaimsTransformation>
 ```
 
-### <a name="example"></a>Exemple
+### <a name="example-of-orclaims"></a>Exemple d’OrClaims
 
 - Revendications d’entrée :
     - **inputClaim1** : true

@@ -4,10 +4,12 @@
   items:
     - name: À propos de AKS
       href: intro-kubernetes.md
+    - name: Architectures de solution
+      href: /azure/architecture/reference-architectures/containers/aks-start-here?bc=%2fazure%2faks%2fbreadcrumb%2ftoc.json&toc=%2fazure%2faks%2ftoc.json
 - name: Démarrages rapides
   expanded: true
   items:
-    - name: "Créer un cluster\_AKS"
+    - name: Déployer un cluster AKS
       expanded: true
       items:
         - name: "Utilisation de l’interface de ligne de commande Microsoft\_Azure"
@@ -24,27 +26,6 @@
       items:
         - name: Développer avec Helm
           href: quickstart-helm.md
-        - name: Azure Dev Spaces
-          expanded: true
-          items:
-            - name: Utiliser Azure Dev Spaces pour le développement en équipe
-              href: ../dev-spaces/quickstart-team-development.md
-              maintainContext: true
-            - name: Utiliser Visual Studio Code
-              href: ../dev-spaces/quickstart-netcore.md
-              maintainContext: true
-            - name: Utiliser Visual Studio
-              href: ../dev-spaces/quickstart-netcore-visualstudio.md
-              maintainContext: true
-            - name: Utiliser l’interface CLI
-              href: ../dev-spaces/quickstart-cli.md
-              maintainContext: true
-            - name: Utiliser Azure Dev Spaces avec Java
-              href: ../dev-spaces/quickstart-java.md
-              maintainContext: true
-            - name: Utiliser Azure Dev Spaces avec Node.js
-              href: ../dev-spaces/quickstart-nodejs.md
-              maintainContext: true
 - name: Tutoriels
   items:
     - name: 1 - Préparer l’application pour AKS
@@ -61,11 +42,6 @@
       href: tutorial-kubernetes-app-update.md
     - name: 7 - Mettre à niveau un cluster
       href: tutorial-kubernetes-upgrade-cluster.md
-- name: Exemples
-  items:
-    - name: Éléments intégrés Azure Policy
-      displayName: 'samples, policies, definitions'
-      href: ./policy-samples.md
 - name: Concepts
   items:
     - name: Clusters et charges de travail
@@ -73,8 +49,14 @@
     - name: Accès et identité
       href: concepts-identity.md
     - name: Sécurité
-      href: concepts-security.md
-      items: null
+      items:
+        - name: Base de référence de la sécurité
+          href: security-baseline.md
+        - name: Sécurité pour les applications et les clusters
+          href: concepts-security.md
+        - name: Contrôles de sécurité par Azure Policy
+          displayName: 'regulatory, compliance, standards, domains'
+          href: ./security-controls-policy.md
     - name: Mise en réseau
       href: concepts-network.md
     - name: Stockage
@@ -87,6 +69,9 @@
       items:
         - name: Vue d’ensemble
           href: best-practices.md
+        - name: Architecture de référence pour un cluster AKS
+          href: /azure/architecture/reference-architectures/containers/aks/secure-baseline-aks/
+          maintainContext: true
         - name: Pour les opérateurs du cluster
           items:
             - name: Multilocation et isolation de cluster
@@ -116,31 +101,65 @@
     - name: Quotas et limites régionales
       href: quotas-skus-regions.md
     - name: Migrer vers AKS
-      href: aks-migration.md
+      items:
+        - name: Planifier et exécuter une migration
+          href: aks-migration.md
+        - name: Spring Boot
+          href: /azure/developer/java/migration/migrate-spring-boot-to-azure-kubernetes-service
+          maintainContext: false
+        - name: Tomcat
+          href: /azure/developer/java/migration/migrate-tomcat-to-containers-on-azure-kubernetes-service
+          maintainContext: false
+        - name: Wildfly
+          href: /azure/developer/java/migration/migrate-wildfly-to-wildfly-on-azure-kubernetes-service
+          maintainContext: false
+        - name: WebLogic
+          href: /azure/developer/java/migration/migrate-weblogic-to-wildfly-on-azure-kubernetes-service
+          maintainContext: false
+        - name: WebSphere
+          href: /azure/developer/java/migration/migrate-websphere-to-wildfly-on-azure-kubernetes-service
+          maintainContext: false
+        - name: JBoss EAP
+          href: /azure/developer/java/migration/migrate-jboss-eap-to-wildfly-on-azure-kubernetes-service
+          maintainContext: false
     - name: Version de Kubernetes prise en charge
       href: supported-kubernetes-versions.md
     - name: Durcissement de la sécurité dans le système d’exploitation hôte
       href: security-hardened-vm-host-image.md
     - name: Vue d’ensemble des diagnostics d’Azure Kubernetes Service
       href: concepts-diagnostics.md
+    - name: Génie logiciel durable
+      href: concepts-sustainable-software-engineering.md
 - name: Guides pratiques
   items:
     - name: Opérations de cluster
       items:
         - name: Mettre à l’échelle un cluster AKS
           href: scale-cluster.md
+        - name: Arrêter un cluster AKS (préversion)
+          href: start-stop-cluster.md
         - name: Mettre à niveau un cluster AKS
           href: upgrade-cluster.md
         - name: Utiliser un SLA avec une durée de bon fonctionnement
           href: uptime-sla.md
+        - name: Utiliser des groupes de placements de proximité
+          href: reduce-latency-ppg.md
+        - name: Mettre à niveau l’image de nœud
+          href: node-image-upgrade.md
+        - name: Mettre à niveau l’image de nœud automatiquement avec GitHub Actions
+          href: node-upgrade-github-actions.md
         - name: Traiter les mises à jour de système d’exploitation des nœuds
           href: node-updates-kured.md
         - name: Configurer un cluster AKS
           href: cluster-configuration.md
+        - name: Configuration de nœuds personnalisés (préversion)
+          href: custom-node-configuration.md
         - name: Intégrer ACR à un cluster AKS
           href: cluster-container-registry-integration.md
         - name: Créer des nœuds virtuels
           items:
+            - name: Utiliser des nœuds virtuels
+              href: virtual-nodes.md
             - name: "Utilisation de l’interface de ligne de commande Microsoft\_Azure"
               href: virtual-nodes-cli.md
             - name: Utilisation du portail Azure
@@ -153,13 +172,15 @@
           items:
             - name: Utiliser des pools multinœuds
               href: use-multiple-node-pools.md
-            - name: Utiliser des pools de nœuds Spot (préversion)
+            - name: Utiliser des pools de nœuds Spot
               href: spot-node-pool.md
             - name: Utiliser des pools de nœuds système
               href: use-system-pools.md
         - name: Déployer AKS avec Terraform
-          href: ../terraform/terraform-create-k8s-cluster-with-tf-and-aks.md
+          href: /azure/developer/terraform/create-k8s-cluster-with-tf-and-aks
           maintainContext: true
+        - name: Vue des ressources Kubernetes dans le portail Azure
+          href: kubernetes-portal.md
         - name: Utiliser le tableau de bord Kubernetes
           href: kubernetes-dashboard.md
     - name: Configurer des volumes de données
@@ -176,6 +197,16 @@
           href: azure-nfs-volume.md
         - name: Azure NetApp Files
           href: azure-netapp-files.md
+        - name: Utiliser des disques Azure Ultra (préversion)
+          href: use-ultra-disks.md
+        - name: Pilotes de stockage CSI
+          items:
+            - name: Activer les pilotes de stockage CSI (préversion)
+              href: csi-storage-drivers.md
+            - name: Pilotes Azure Disk CSI (préversion)
+              href: azure-disk-csi.md
+            - name: Pilotes Azure Files CSI (préversion)
+              href: azure-files-csi.md
     - name: Configurer la mise en réseau
       items:
         - name: Créer ou utiliser un réseau virtuel existant
@@ -188,8 +219,6 @@
           href: internal-lb.md
         - name: Utiliser un équilibreur de charge standard
           href: load-balancer-standard.md
-        - name: Utiliser une route définie par l’utilisateur pour la sortie
-          href: egress-outboundtype.md
         - name: Utiliser une adresse IP statique
           href: static-ip.md
         - name: Entrée
@@ -200,6 +229,9 @@
               href: http-application-routing.md
             - name: Utiliser un réseau interne
               href: ingress-internal-ip.md
+            - name: Activer l’extension AGIC pour un cluster AKS existant
+              href: ../application-gateway/tutorial-ingress-controller-add-on-existing.md
+              maintainContext: true
             - name: Utiliser TLS avec vos certificats
               href: ingress-own-tls.md
             - name: Utiliser TLS avec Let’s Encrypt
@@ -208,8 +240,14 @@
                   href: ingress-tls.md
                 - name: Utiliser une adresse IP publique statique
                   href: ingress-static-ip.md
-        - name: Trafic de sortie
-          href: egress.md
+        - name: Sortie
+          items:
+            - name: Limiter et contrôler le trafic sortant du cluster
+              href: limit-egress-traffic.md
+            - name: Utiliser une route définie par l’utilisateur pour la sortie
+              href: egress-outboundtype.md
+            - name: Utiliser une adresse IP statique et un équilibreur de charge de base
+              href: egress.md
         - name: Personnaliser CoreDNS
           href: coredns-custom.md
     - name: Sécurité et authentification
@@ -218,10 +256,14 @@
           href: kubernetes-service-principal.md
         - name: Utiliser des identités managées
           href: use-managed-identity.md
+        - name: Utiliser une identité de pod AAD (préversion)
+          href: use-azure-ad-pod-identity.md
         - name: Limiter l’accès au fichier de configuration de cluster
           href: control-kubeconfig-access.md
         - name: Sécuriser le trafic de pods avec des stratégies réseau
           href: use-network-policies.md
+        - name: Sécuriser les pods avec Azure Policy
+          href: use-pod-security-on-azure-policy.md
         - name: Utiliser des stratégies de sécurité des pods (préversion)
           href: use-pod-security-policies.md
         - name: Définir des plages d’adresses IP autorisées du serveur d’API
@@ -230,16 +272,14 @@
           href: ../governance/policy/concepts/policy-for-kubernetes.md?toc=/azure/aks/toc.json
         - name: Mettre à jour les informations d’identification du cluster
           href: update-credentials.md
-        - name: Limiter et contrôler le trafic sortant du cluster
-          href: limit-egress-traffic.md
         - name: Activer l’intégration d’Azure Active Directory
           items:
-            - name: Intégrer Azure AD (préversion)
+            - name: Azure AD managé par AKS
               href: managed-aad.md
-            - name: "Utilisation de l’interface de ligne de commande Microsoft\_Azure"
+            - name: "Intégration Azure\_AD (hérité)"
               href: azure-ad-integration-cli.md
-            - name: Utilisation du portail Azure
-              href: azure-ad-integration.md
+        - name: Utiliser Azure RBAC pour l’autorisation Kubernetes (préversion)
+          href: manage-azure-rbac.md
         - name: Utiliser le contrôle d’accès en fonction du rôle (RBAC) Kubernetes avec l’intégration d’Azure AD
           href: azure-ad-rbac.md
           maintainContext: true
@@ -249,6 +289,8 @@
           href: private-clusters.md
         - name: BYOK pour les disques
           href: azure-disk-customer-managed-keys.md
+        - name: Activer le chiffrement basé sur l’hôte
+          href: enable-host-encryption.md
     - name: Surveillance et journalisation
       items:
         - name: Azure Monitor pour des conteneurs
@@ -269,64 +311,20 @@
           href: windows-container-powershell.md
         - name: Se connecter à distance
           href: rdp.md
-        - name: Limitations connues
-          href: windows-node-limitations.md
+        - name: FAQ sur les conteneurs Windows Server
+          href: windows-faq.md
         - name: Utiliser le tableau de bord Kubernetes
           href: kubernetes-dashboard.md
         - name: Créer des fichiers Dockerfile pour les conteneurs Windows Server
-          href: 'https://docs.microsoft.com/virtualization/windowscontainers/manage-docker/manage-windows-dockerfile?context=/azure/aks/context/aks-context'
+          href: /virtualization/windowscontainers/manage-docker/manage-windows-dockerfile?context=/azure/aks/context/aks-context
         - name: Optimiser les fichiers Dockerfile pour les conteneurs Windows Server
-          href: 'https://docs.microsoft.com/virtualization/windowscontainers/manage-docker/optimize-windows-dockerfile?context=/azure/aks/context/aks-context'
+          href: /virtualization/windowscontainers/manage-docker/optimize-windows-dockerfile?context=/azure/aks/context/aks-context
     - name: Développer et exécuter des applications
       items:
-        - name: Développer avec Dev Spaces
-          href: ../dev-spaces/azure-dev-spaces.md
-          maintainContext: true
-          items:
-            - name: Java (VS Code & CLI)
-              items:
-                - name: 1 - Prise en main
-                  href: ../dev-spaces/get-started-java.md
-                  maintainContext: true
-                - name: 2 - Développement multiservice
-                  href: ../dev-spaces/multi-service-java.md
-                  maintainContext: true
-                - name: 3 - Développement en équipe
-                  href: ../dev-spaces/team-development-java.md
-                  maintainContext: true
-            - name: .NET Core (VS Code et CLI)
-              items:
-                - name: 1 - Prise en main
-                  href: ../dev-spaces/get-started-netcore.md
-                  maintainContext: true
-                - name: 2 - Développement multiservice
-                  href: ../dev-spaces/multi-service-netcore.md
-                  maintainContext: true
-                - name: 3 - Développement en équipe
-                  href: ../dev-spaces/team-development-netcore.md
-                  maintainContext: true
-            - name: .NET Core (Visual Studio 2017)
-              items:
-                - name: 1 - Prise en main
-                  href: ../dev-spaces/get-started-netcore-visualstudio.md
-                  maintainContext: true
-                - name: 2 - Développement multiservice
-                  href: ../dev-spaces/multi-service-netcore-visualstudio.md
-                  maintainContext: true
-                - name: 3 - Développement en équipe
-                  href: ../dev-spaces/team-development-netcore-visualstudio.md
-                  maintainContext: true
-            - name: Node.js (VS Code et CLI)
-              items:
-                - name: 1 - Prise en main
-                  href: ../dev-spaces/get-started-nodejs.md
-                  maintainContext: true
-                - name: 2 - Développement multiservice
-                  href: ../dev-spaces/multi-service-nodejs.md
-                  maintainContext: true
-                - name: 3 - Développement en équipe
-                  href: ../dev-spaces/team-development-nodejs.md
-                  maintainContext: true
+        - name: Utiliser Bridge to Kubernetes avec Visual Studio Code
+          href: 'https://code.visualstudio.com/docs/containers/bridge-to-kubernetes'
+        - name: Utiliser Bridge to Kubernetes avec Visual Studio
+          href: /visualstudio/containers/bridge-to-kubernetes
         - name: Installer des applications existantes avec Helm
           href: kubernetes-helm.md
         - name: Utiliser OpenFaaS
@@ -335,8 +333,10 @@
           href: spark-job.md
         - name: Utiliser des GPU
           href: gpu-cluster.md
-        - name: Utiliser Azure Database pour PostgreSQL
-          href: ../postgresql/concepts-aks.md
+        - name: Créer une application avec PostgreSQL
+          href: ../postgresql/flexible-server/tutorial-django-aks-database.md
+        - name: Créer une application avec MySQL
+          href: ../mysql/flexible-server/tutorial-deploy-wordpress-on-aks.md
           maintainContext: true
         - name: Utiliser Gestion des API Azure
           href: ../api-management/api-management-kubernetes.md
@@ -368,10 +368,10 @@
     - name: DevOps
       items:
         - name: Utiliser Ansible pour créer des clusters AKS
-          href: /azure/ansible/ansible-create-configure-aks
+          href: /azure/developer/ansible/aks-configure-clusters
           maintainContext: true
         - name: Déploiement continu Jenkins
-          href: jenkins-continuous-deployment.md
+          href: /azure/developer/jenkins/deploy-from-github-to-aks
         - name: Azure DevOps Project
           href: ../devops-project/azure-devops-project-aks.md
           maintainContext: true
@@ -389,6 +389,8 @@
           href: ssh.md
         - name: Outils de performance Linux
           href: troubleshoot-linux.md
+        - name: Rechercher les événements Resource Health (préversion)
+          href: aks-resource-health.md
 - name: Informations de référence
   items:
     - name: Azure CLI
@@ -396,7 +398,7 @@
     - name: REST
       href: /rest/api/aks
     - name: PowerShell
-      href: '/powershell/module/az.aks#aks'
+      href: /powershell/module/az.aks#aks
     - name: .NET
       href: /dotnet/api/overview/azure/containerservice
     - name: Python
@@ -407,6 +409,9 @@
       href: /javascript/api/overview/azure/container-service
     - name: Modèle Resource Manager
       href: /azure/templates/microsoft.containerservice/managedclusters
+    - name: Éléments intégrés Azure Policy
+      displayName: 'samples, policies, definitions'
+      href: ./policy-reference.md
 - name: Ressources
   items:
     - name: Développer vos compétences avec Microsoft Learn
@@ -417,13 +422,13 @@
       href: 'https://azure.microsoft.com/pricing/details/container-service/'
     - name: Politiques de support
       href: support-policies.md
-    - name: Feuille de route
+    - name: Feuille de route Azure
       href: 'https://azure.microsoft.com/roadmap/'
-    - name: Indiquer des commentaires sur le produit
-      href: 'https://feedback.azure.com/forums/914020-azure-kubernetes-service-aks'
+    - name: Feuille de route AKS
+      href: 'https://github.com/Azure/AKS/projects/1'
     - name: Stack Overflow
       href: 'https://stackoverflow.com/questions/tagged/azure-container-service'
-    - name: Videos
+    - name: Vidéos
       href: 'https://azure.microsoft.com/resources/videos/index/?services=container-service&sort=newest'
     - name: Questions fréquentes (FAQ)
       href: faq.md

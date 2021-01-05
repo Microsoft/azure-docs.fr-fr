@@ -11,17 +11,17 @@ ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 07/12/2017
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 90a624a6b3b4696899af0d8606f653df260cc201
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 7275d115210100bdd4a3a2eb683c867a6a4a4f4a
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "60348278"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95996608"
 ---
 # <a name="select-which-installation-type-to-use-for-azure-ad-connect"></a>Sélectionner le type d’installation à utiliser pour Azure AD Connect
 Pour toute nouvelle installation, Azure AD Connect propose deux options : l'installation Express ou l'installation personnalisée. Cette rubrique vous aide à choisir l’option à utiliser lors de l’installation.

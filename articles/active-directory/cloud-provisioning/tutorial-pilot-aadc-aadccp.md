@@ -1,22 +1,22 @@
 ---
 title: Tutoriel – Piloter le provisionnement cloud Azure AD Connect pour une forêt AD synchronisée
-description: tutoriel.
+description: Découvrez comment piloter un provisionnement cloud pour une forêt Active Directory test déjà synchronisée à l’aide de la synchronisation Azure Active Directory (Azure AD) Connect.
 services: active-directory
 author: billmath
 manager: daveba
 ms.service: active-directory
 ms.workload: identity
-ms.topic: overview
-ms.date: 03/04/2020
+ms.topic: tutorial
+ms.date: 05/19/2020
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: aba42e6bd9b11e47d793219c0ff06b9177d609f5
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: 6b510464145f434f761cc28ba4e1c1361f983f8b
+ms.sourcegitcommit: 30906a33111621bc7b9b245a9a2ab2e33310f33f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "78298817"
+ms.lasthandoff: 11/22/2020
+ms.locfileid: "95237389"
 ---
 # <a name="pilot-cloud-provisioning-for-an-existing-synced-ad-forest"></a>Provisionnement cloud pilote pour une forêt AD synchronisée existante 
 
@@ -40,7 +40,7 @@ Voici les conditions préalables requises pour suivre ce didacticiel.
 - Un environnement de test avec la synchronisation Azure AD Connect version 1.4.32.0 ou ultérieure
 - Une unité d’organisation ou un groupe figurant dans l’étendue de la synchronisation et pouvant servir de pilote. Nous vous recommandons de commencer avec un ensemble réduit d’objets.
 - Un serveur exécutant Windows Server 2012 R2 ou ultérieur, qui hébergera l’agent de provisionnement.  Ce serveur ne peut pas être identique au serveur Azure AD Connect.
-- L’ancre source pour la synchronisation AAD Connect doit être *objectGuid* ou *ms-ds-consistencyGUID*
+- L’ancre source pour la synchronisation Azure AD Connect doit être *objectGuid* ou *ms-ds-consistencyGUID*
 
 ## <a name="update-azure-ad-connect"></a>Mettre à jour Azure AD Connect
 
@@ -54,7 +54,7 @@ La synchronisation Azure AD Connect synchronise les modifications intervenant da
 3.  Exécutez `Set-ADSyncScheduler -SyncCycleEnabled $false`.
 
 >[!NOTE] 
->Si vous exécutez votre propre planificateur personnalisé pour la synchronisation AAD Connect, désactivez le planificateur. 
+>Si vous exécutez votre propre planificateur personnalisé pour la synchronisation Azure AD Connect, désactivez le planificateur. 
 
 ## <a name="create-custom-user-inbound-rule"></a>Créer une règle personnalisée de trafic entrant utilisateur
 
@@ -62,7 +62,7 @@ La synchronisation Azure AD Connect synchronise les modifications intervenant da
  ![Menu de l’Éditeur de règles de synchronisation](media/how-to-cloud-custom-user-rule/user8.png)</br>
  
  2. Sélectionnez **Inbound** (Entrant) dans la liste déroulante Direction, puis cliquez sur **Add new rule** (Ajouter une nouvelle règle).
- ![Règle personnalisée](media/how-to-cloud-custom-user-rule/user1.png)</br>
+ ![Capture d’écran montrant la fenêtre « View and manage your synchronization rules » (Afficher et gérer vos règles de synchronisation) avec « Inbound » (Entrant) et le bouton « Add new rule » (Ajouter une nouvelle règle) sélectionnés.](media/how-to-cloud-custom-user-rule/user1.png)</br>
  
  3. Dans la page **Description**, entrez les informations ci-dessous et cliquez sur **Suivant** :
 
@@ -74,7 +74,7 @@ La synchronisation Azure AD Connect synchronise les modifications intervenant da
     **Link Type** (Type de lien) : Join<br>
     **Precedence** (Précédence) : indiquez une valeur unique dans le système.<br>
     **Tag** (Balise) : laissez ce champ vide.<br>
-    ![Règle personnalisée](media/how-to-cloud-custom-user-rule/user2.png)</br>
+    ![Capture d’écran montrant la page « Create inbound synchronization rule - Description » (Créer une règle de synchronisation de trafic entrant - Description) avec des valeurs entrées.](media/how-to-cloud-custom-user-rule/user2.png)</br>
  
  4. Dans la page **Scoping filter** (Filtre d’étendue), entrez l’unité d’organisation ou le groupe de sécurité sur lesquels vous souhaitez que le pilote s’appuie.  Pour filtrer sur l’unité d’organisation, ajoutez la partie UO du nom unique. Cette règle s’appliquera à tous les utilisateurs qui se trouvent dans cette unité d’organisation.  Par conséquent, si DN se termine par « OU=CPUsers,DC=contoso,DC=com », vous devez ajouter ce filtre.  Cliquez ensuite sur **Suivant**. 
 
@@ -83,31 +83,31 @@ La synchronisation Azure AD Connect synchronise les modifications intervenant da
     |Étendue d’unité d’organisation|DN|ENDSWITH|Nom unique de l’unité d’organisation.|
     |Étendue de groupe||ISMEMBEROF|Nom unique du groupe de sécurité.|
 
-    ![Règle personnalisée](media/how-to-cloud-custom-user-rule/user3.png)</br>
+    ![Capture d’écran montrant la page « Create inbound synchronization rule - Scoping filter » (Créer une règle de synchronisation de trafic - Filtre d’étendue) avec une valeur de filtre d’étendue entrée.](media/how-to-cloud-custom-user-rule/user3.png)</br>
  
  5. Dans la page **Join rules** (Règles de jointure), cliquez sur **Suivant**.
  6. Dans la page **Transformations**, ajoutez une transformation constante : spécifiez True pour l’attribut cloudNoFlow. Cliquez sur **Add**.
- ![Règle personnalisée](media/how-to-cloud-custom-user-rule/user4.png)</br>
+ ![Capture d’écran montrant la page « Create inbound synchronization rule - Transformations » (Créer une règle de synchronisation de trafic entrant - Transformations) avec un flux « Constant transformation » (Transformation constante) ajouté.](media/how-to-cloud-custom-user-rule/user4.png)</br>
 
 Les mêmes étapes doivent être suivies pour tous les types d’objets (utilisateur, groupe et contact). Répétez les étapes par connecteur AD configuré/par forêt AD. 
 
 ## <a name="create-custom-user-outbound-rule"></a>Créer une règle personnalisée de trafic sortant utilisateur
 
  1. Sélectionnez **Outbound** (Sortant) dans la liste déroulante Direction, puis cliquez sur **Add new rule** (Ajouter une nouvelle règle).
- ![Règle personnalisée](media/how-to-cloud-custom-user-rule/user5.png)</br>
+ ![Capture d’écran montrant la direction « Outbound » (Sortant) sélectionnée et le bouton « Add new rule » (Ajouter une nouvelle règle) mis en évidence.](media/how-to-cloud-custom-user-rule/user5.png)</br>
  
  2. Dans la page **Description**, entrez les informations ci-dessous et cliquez sur **Suivant** :
 
     **Nom :** attribuez un nom explicite à la règle.<br>
     **Description :** ajoutez une description explicite.<br>
-    **Connected System** (Système connecté) : Choisissez le connecteur AAD pour lequel vous écrivez la règle de synchronisation personnalisée.<br>
+    **Connected System** (Système connecté) : Choisissez le connecteur Azure AD pour lequel vous écrivez la règle de synchronisation personnalisée.<br>
     **Connected System Object Type** (Type d’objet système connecté) : Utilisateur<br>
     **Metaverse Object Type** (Type d’objet métaverse) : Personne<br>
     **Link Type** (Type de lien) : JoinNoFlow<br>
     **Precedence** (Précédence) : indiquez une valeur unique dans le système.<br>
     **Tag** (Balise) : laissez ce champ vide.<br>
     
-    ![Règle personnalisée](media/how-to-cloud-custom-user-rule/user6.png)</br>
+    ![Capture d’écran montrant la page « Description » avec des propriétés entrées.](media/how-to-cloud-custom-user-rule/user6.png)</br>
  
  3. Dans la page **Scoping filter** (Filtre d’étendue), choisissez **cloudNoFlow** EQUAL **True**. Cliquez ensuite sur **Suivant**.
  ![Règle personnalisée](media/how-to-cloud-custom-user-rule/user7.png)</br>
@@ -122,17 +122,17 @@ Les mêmes étapes doivent être suivies pour tous les types d’objets (utilisa
 2. Téléchargez l’agent de provisionnement cloud Azure AD Connect en utilisant la procédure décrite [ici](how-to-install.md#install-the-agent).
 3. Exécuter le provisionnement cloud Azure AD Connect (AADConnectProvisioningAgent.Installer)
 3. Dans l’écran de démarrage, **acceptez** les termes du contrat de licence et cliquez sur **Installer**.</br>
-![Écran d’accueil](media/how-to-install/install1.png)</br>
+![Capture de l’écran de démarrage « Agent de provisionnement Microsoft Azure AD Connect ».](media/how-to-install/install-1.png)</br>
 
 4. Une fois cette opération terminée, l’Assistant de configuration démarre.  Connectez-vous avec votre compte d’administrateur général Azure AD.
 5. Dans l’écran **Connexion à Active Directory**, cliquez sur **Ajout d’un annuaire**, puis connectez-vous avec votre compte d’administrateur Active Directory.  Cette opération ajoute votre annuaire local.  Cliquez sur **Suivant**.</br>
-![Écran d’accueil](media/how-to-install/install3.png)</br>
+![Capture de l’écran « Connexion à Active Directory » avec une valeur d’annuaire entrée.](media/how-to-install/install-3a.png)</br>
 
 6. Dans l’écran **Configuration terminée**, cliquez sur **Confirmer**.  Cette opération inscrit et redémarre l’agent.</br>
-![Écran d’accueil](media/how-to-install/install4.png)</br>
+![Capture d’écran montrant le volet « Configuration terminée » avec le bouton « Confirmer » sélectionné.](media/how-to-install/install-4a.png)</br>
 
 7. Une fois cette opération terminée, vous devriez voir une notification : **La configuration de votre agent a été vérifiée avec succès.**  Vous pouvez cliquer sur **Quitter**.</br>
-![Écran d’accueil](media/how-to-install/install5.png)</br>
+![Écran d’accueil](media/how-to-install/install-5.png)</br>
 8. Si vous voyez encore l’écran de démarrage initial, cliquez sur **Fermer**.
 
 ## <a name="verify-agent-installation"></a>Vérifier l’installation de l’agent
@@ -143,12 +143,12 @@ Pour vérifier que l’agent est visible par Azure, procédez comme suit :
 
 1. Connectez-vous au portail Azure.
 2. Sur la gauche, sélectionnez **Azure Active Directory**, cliquez sur **Azure AD Connect** et, au centre, sélectionnez **Gérer le provisionnement (préversion)** .</br>
-![Azure portal](media/how-to-install/install6.png)</br>
+![Azure portal](media/how-to-install/install-6.png)</br>
 
 3.  Dans l’écran **Provisionnement Azure AD (préversion)** , cliquez sur **Passer en revue tous les agents**.
-![Provisionnement Azure AD](media/how-to-install/install7.png)</br>
+![Provisionnement Azure AD](media/how-to-install/install-7.png)</br>
  
-4. Dans l’écran **Agents de provisionnement locaux**, vous voyez les agents que vous avez installés.  Vérifiez que l’agent en question est présent et qu’il est marqué comme étant **désactivé**.  L’agent est désactivé par défaut par défaut parmi les ![agents de provisionnement](media/how-to-install/verify1.png)</br>
+4. Dans l’écran **Agents de provisionnement locaux**, vous voyez les agents que vous avez installés.  Vérifiez que l’agent en question est présent et qu’il est marqué comme étant **désactivé**.  L’agent est désactivé par défaut par défaut parmi les ![agents de provisionnement](media/how-to-install/verify-1.png)</br>
 
 ### <a name="on-the-local-server"></a>Sur le serveur local
 Pour vérifier que l’agent est en cours d’exécution, effectuez les étapes suivantes :
@@ -156,7 +156,7 @@ Pour vérifier que l’agent est en cours d’exécution, effectuez les étapes 
 1.  Connectez-vous au serveur avec un compte administrateur.
 2.  Ouvrez **Services** en y accédant ou en accédant à Démarrer/Exécuter/Services.msc.
 3.  Sous **Services**, assurez-vous que le **Programme de mise à jour de l’agent Microsoft Azure AD Connect** et l’**Agent de provisionnement Microsoft Azure AD Connect** sont présents, et que leur état est **En cours d’exécution**.
-![Services](media/how-to-troubleshoot/troubleshoot1.png)
+![Services](media/how-to-install/troubleshoot-1.png)
 
 ## <a name="configure-azure-ad-connect-cloud-provisioning"></a>Configurer le provisionnement cloud Azure AD Connect
 Pour configurer le provisionnement, procédez comme suit :
@@ -165,18 +165,18 @@ Pour configurer le provisionnement, procédez comme suit :
  2. Cliquez sur **Azure Active Directory**.
  3. Cliquez sur **Azure AD Connect**.
  4. Sélectionnez **Gérer le provisionnement (préversion)** 
- ![](media/how-to-configure/manage1.png).</br>
+ ![Capture d’écran montrant le lien « Gérer le provisionnement (préversion) ».](media/how-to-configure/manage1.png)</br>
  5.  Cliquez sur **Nouvelle configuration**
- ![](media/tutorial-single-forest/configure1.png).</br>
+ ![Capture d’écran de l’écran Provisionnement Azure AD (préversion) avec le lien « Nouvelle configuration » mis en surbrillance.](media/tutorial-single-forest/configure1.png)</br>
  6.  Dans l’écran de configuration, entrez une adresse **e-mail de notification**, déplacez le sélecteur sur **Activer** et cliquez sur **Enregistrer**.
- ![](media/tutorial-single-forest/configure2.png)</br>
+ ![Capture d’écran de l’écran de configuration avec l’e-mail de notification rempli et l’option Activer sélectionnée.](media/tutorial-single-forest/configure2.png)</br>
  7. Sous **Configurer**, sélectionnez **Tous les utilisateurs** pour modifier l’étendue de la règle de configuration.
- ![](media/how-to-configure/scope2.png)</br>
+ ![Capture d’écran de l’écran Configurer avec « Tous les utilisateurs » mis en évidence en regard de « Utilisateurs de l’étendue ».](media/how-to-configure/scope2.png)</br>
  8. Sur la droite, modifiez l’étendue pour inclure l’unité d’organisation spécifique que vous venez de créer : « OU=CPUsers,DC=contoso,DC=com ».
- ![](media/tutorial-existing-forest/scope2.png)</br>
+ ![Capture d’écran de l’écran Utilisateurs de l’étendue mettant en évidence l’étendue remplacée par l’unité d’organisation que vous avez créée.](media/tutorial-existing-forest/scope2.png)</br>
  9.  Cliquez sur **Terminé**, puis sur **Enregistrer**.
  10. L’étendue doit maintenant être définie sur une unité d’organisation. 
- ![](media/tutorial-existing-forest/scope3.png)</br>
+ ![Capture d’écran de l’écran Configurer avec « 1 unité d’organisation » mis en évidence en regard de « Utilisateurs de l’étendue ».](media/tutorial-existing-forest/scope3.png)</br>
  
 
 ## <a name="verify-users-are-provisioned-by-cloud-provisioning"></a>Vérifier que les utilisateurs sont provisionnés par provisionnement cloud
@@ -199,7 +199,9 @@ La synchronisation Azure AD Connect synchronise les modifications intervenant da
 3.  Exécutez `Start-ADSyncSyncCycle`.  Appuyez sur Entrée.  
 
 >[!NOTE] 
->Si vous exécutez votre propre planificateur personnalisé pour la synchronisation AAD Connect, activez le planificateur. 
+>Si vous exécutez votre propre planificateur personnalisé pour la synchronisation Azure AD Connect, activez le planificateur. 
+
+Une fois le planificateur activé, Azure AD Connect arrêtera d’exporter les modifications apportées aux objets avec `cloudNoFlow=true` dans le métaverse, à moins qu’un attribut de référence (par exemple, un gestionnaire) ne soit en cours de mise à jour. En cas de mise à jour d’un attribut de référence sur l’objet, Azure AD Connect ignorera le signal `cloudNoFlow` et exportera toutes les mises à jour sur l’objet.
 
 ## <a name="something-went-wrong"></a>Survenue d’un problème
 Si le pilote ne fonctionne pas comme prévu, vous pouvez revenir à la configuration de la synchronisation Azure AD Connect en suivant les étapes ci-dessous :

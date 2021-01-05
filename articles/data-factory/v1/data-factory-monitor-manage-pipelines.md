@@ -3,20 +3,20 @@ title: Monitorage et gestion de pipelines avec le Portail Azure et PowerShell
 description: Découvrez comment utiliser le portail Azure et Azure PowerShell pour surveiller et gérer les fabriques de données et les pipelines Azure que vous avez créés.
 services: data-factory
 documentationcenter: ''
-author: djpmsft
-ms.author: daperlov
+author: dcstwh
+ms.author: weetok
 manager: jroth
 ms.reviewer: maghan
 ms.service: data-factory
 ms.workload: data-services
 ms.topic: conceptual
 ms.date: 04/30/2018
-ms.openlocfilehash: 44aadecfa80524345932c03abb51e8ebd040a902
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 2a30c755bc19849ad3a821cbbc75b787a3b0bb98
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "73666978"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96495852"
 ---
 # <a name="monitor-and-manage-azure-data-factory-pipelines-by-using-the-azure-portal-and-powershell"></a>Surveiller et gérer les pipelines Azure Data Factory à l’aide du portail Azure et de PowerShell
 > [!div class="op_single_selector"]
@@ -32,7 +32,7 @@ Cet article décrit comment surveiller, gérer et déboguer vos pipelines à l�
 > L’application de surveillance et gestion favorise la surveillance et la gestion de vos pipelines de données, ainsi que la résolution des problèmes. Pour en savoir plus sur l’utilisation de l’application, consultez [Surveiller et gérer les pipelines Azure Data Factory à l’aide de l’application de surveillance et gestion](data-factory-monitor-manage-app.md). 
 
 > [!IMPORTANT]
-> Azure Data Factory version 1 utilise maintenant la nouvelle [infrastructure d’alertes Azure Monitor](../../monitoring-and-diagnostics/monitor-alerts-unified-usage.md). L’ancienne infrastructure d’alertes est déconseillée. Par conséquent, vos alertes existantes configurées pour les fabriques de données version 1 ne fonctionnent plus. Vos alertes existantes pour les fabriques de données v1 ne sont pas migrées automatiquement. Vous devez recréer ces alertes sur la nouvelle infrastructure d’alertes. Connectez-vous au portail et sélectionnez **Surveiller** pour créer des alertes sur les métriques (par exemple les exécutions qui ont échoué ou réussi) pour vos fabriques de données version 1.
+> Azure Data Factory version 1 utilise maintenant la nouvelle [infrastructure d’alertes Azure Monitor](../../azure-monitor/platform/alerts-metric.md). L’ancienne infrastructure d’alertes est déconseillée. Par conséquent, vos alertes existantes configurées pour les fabriques de données version 1 ne fonctionnent plus. Vos alertes existantes pour les fabriques de données v1 ne sont pas migrées automatiquement. Vous devez recréer ces alertes sur la nouvelle infrastructure d’alertes. Connectez-vous au portail et sélectionnez **Surveiller** pour créer des alertes sur les métriques (par exemple les exécutions qui ont échoué ou réussi) pour vos fabriques de données version 1.
 
 [!INCLUDE [updated-for-az](../../../includes/updated-for-az.md)]
 
@@ -217,7 +217,7 @@ En cas d’échec d’exécution de l’activité dans un pipeline, le jeu de do
 
 #### <a name="use-powershell-to-debug-an-error"></a>Utiliser PowerShell pour déboguer une erreur
 1. Lancez **PowerShell**.
-2. Exécutez la commande **Get-AzDataFactorySlice** pour voir les tranches et leur état. Une tranche dont l’état est **Échec**devrait apparaître.        
+2. Exécutez la commande **Get-AzDataFactorySlice** pour voir les tranches et leur état. Une tranche dont l’état est **Échec** devrait apparaître.        
 
     ```powershell   
     Get-AzDataFactorySlice [-ResourceGroupName] <String> [-DataFactoryName] <String> [-DatasetName] <String> [-StartDateTime] <DateTime> [[-EndDateTime] <DateTime> ] [-Profile <AzureProfile> ] [ <CommonParameters>]
@@ -288,7 +288,7 @@ En cas d’échec de validation de la tranche à cause d’une erreur de straté
 ![Corriger les erreurs et valider](./media/data-factory-monitor-manage-pipelines/fix-error-and-validate.png)
 
 ### <a name="use-azure-powershell"></a>Utilisation d'Azure PowerShell
-Vous pouvez exécuter à nouveau des problèmes à l’aide de la cmdlet **Set-AzDataFactorySliceStatus**. Consultez la rubrique [Set-AzDataFactorySliceStatus](https://docs.microsoft.com/powershell/module/az.datafactory/set-azdatafactoryslicestatus) pour en savoir plus sur la syntaxe et la cmdlet.
+Vous pouvez exécuter à nouveau des problèmes à l’aide de la cmdlet **Set-AzDataFactorySliceStatus**. Consultez la rubrique [Set-AzDataFactorySliceStatus](/powershell/module/az.datafactory/set-azdatafactoryslicestatus) pour en savoir plus sur la syntaxe et la cmdlet.
 
 **Exemple :**
 

@@ -1,6 +1,6 @@
 ---
 title: Résolution des problèmes d’allocation de service cloud | Microsoft Docs
-description: Résolution des problèmes d'échec d'allocation lors du déploiement de services cloud dans Azure
+description: Découvrez comment résoudre des problèmes d’échec d’allocation lorsque vous déployez Azure Cloud Services. Découvrez le fonctionnement de l’allocation et la raison pour laquelle l’allocation peut échouer.
 services: azure-service-management, cloud-services
 documentationcenter: ''
 author: simonxjx
@@ -14,12 +14,12 @@ ms.tgt_pltfrm: ibiza
 ms.topic: troubleshooting
 ms.date: 06/15/2018
 ms.author: v-six
-ms.openlocfilehash: 470778e5c441bb05ffc7c5e1c5ef97a6c30d3359
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 1d82b7223c2b392e6b9aebffdc545dc38b38ca2f
+ms.sourcegitcommit: a92fbc09b859941ed64128db6ff72b7a7bcec6ab
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79225949"
+ms.lasthandoff: 10/15/2020
+ms.locfileid: "92074224"
 ---
 # <a name="troubleshooting-allocation-failure-when-you-deploy-cloud-services-in-azure"></a>Résolution des problèmes d'échec d'allocation lors du déploiement de services cloud dans Azure
 ## <a name="summary"></a>Résumé
@@ -41,7 +41,7 @@ Lorsqu'une demande d'allocation est épinglée à un cluster, il y a plus de ris
 ### <a name="error-message"></a>Message d’erreur
 Il peut vous arriver de voir le message d'erreur suivant :
 
-    "Azure operation '{operation id}' failed with code Compute.ConstrainedAllocationFailed. Details: Allocation failed; unable to satisfy constraints in request. The requested new service deployment is bound to an Affinity Group, or it targets a Virtual Network, or there is an existing deployment under this hosted service. Any of these conditions constrains the new deployment to specific Azure resources. Please retry later or try reducing the VM size or number of role instances. Alternatively, if possible, remove the aforementioned constraints or try deploying to a different region."
+> « L’opération Azure » {ID d’opération} a échoué. Code : Compute.ConstrainedAllocationFailed. Détails : L’allocation a échoué. Impossible de satisfaire aux contraintes spécifiées dans la demande. Le nouveau déploiement de service demandé est lié à un groupe d’affinités ou cible un réseau virtuel, ou un déploiement existant se trouve sous ce service hébergé. Toutes ces conditions réduisent le nouveau déploiement à certaines ressources Azure spécifiques. Veuillez réessayer ultérieurement, ou bien essayez de réduire la taille de la machine virtuelle ou le nombre d’instances de rôle. Vous pouvez aussi éventuellement supprimer les contraintes mentionnées précédemment ou essayer de déployer dans une autre région. »
 
 ### <a name="common-issues"></a>Problèmes courants
 Voici les scénarios d'allocation courants qui entraînent l'épinglage d'une demande d'allocation à un seul cluster.
@@ -70,4 +70,4 @@ Voici les scénarios d'allocation courants qui entraînent l'épinglage d'une de
      ```
    * Suivez la solution 2 mentionnée plus haut, en veillant à spécifier la nouvelle IP réservée dans le .cscfg du service.
 4. Supprimer le groupe d'affinités pour les nouveaux déploiements : les groupes d'affinités ne sont plus recommandés. Suivez les étapes de la solution 1 ci-dessus pour déployer un nouveau service cloud. Vérifiez que le service cloud n'est pas dans un groupe d'affinités.
-5. Convertir en réseau virtuel régional : consultez [Comment migrer des groupes d'affinités vers un réseau virtuel régional (VNet)](../virtual-network/virtual-networks-migrate-to-regional-vnet.md).
+5. Convertir en réseau virtuel régional : consultez [Comment migrer des groupes d'affinités vers un réseau virtuel régional (VNet)](/previous-versions/azure/virtual-network/virtual-networks-migrate-to-regional-vnet).

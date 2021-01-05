@@ -5,12 +5,13 @@ author: florianborn71
 ms.author: flborn
 ms.date: 02/11/2020
 ms.topic: how-to
-ms.openlocfilehash: fd510f90887353d7486908ee076d5308db72c59d
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: 7e8e2f3f9dd49693faa26eaaab309fcad58f6f9f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81687083"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89076155"
 ---
 # <a name="get-service-access-tokens"></a>Obtenir des jetons d’accès au service
 

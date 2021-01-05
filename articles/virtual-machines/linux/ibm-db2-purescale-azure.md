@@ -7,15 +7,15 @@ editor: edprice
 ms.service: virtual-machines-linux
 ms.subservice: workloads
 ms.workload: infrastructure-services
-ms.topic: article
+ms.topic: how-to
 ms.date: 11/09/2018
 ms.author: edprice
-ms.openlocfilehash: d8309a69c9c38610fa7bea3fee202a60d836980c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 0297c8674cc47a1d5f59fef196a60175244eaae2
+ms.sourcegitcommit: d103a93e7ef2dde1298f04e307920378a87e982a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78945051"
+ms.lasthandoff: 10/13/2020
+ms.locfileid: "91978320"
 ---
 # <a name="ibm-db2-purescale-on-azure"></a>IBM DB2 pureScale sur Azure
 
@@ -67,7 +67,7 @@ Cette architecture exécute les couches application, stockage et données sur de
 
 -   Un cluster DB2 pureScale. Le type de ressources de calcul dont vous avez besoin sur Azure dépend de votre installation. En règle générale, vous pouvez utiliser deux approches :
 
-    -   Utiliser un réseau de type calcul haute performance (HPC) à plusieurs nœuds, où des instances de petite à moyenne taille accèdent au stockage partagé. Pour ce type de configuration HPC, les [machines virtuelles](https://docs.microsoft.com/azure/virtual-machines/windows/sizes) de série E à mémoire optimisée Azure ou de série L à stockage optimisé fournissent les ressources de calcul nécessaires.
+    -   Utiliser un réseau de type calcul haute performance (HPC) à plusieurs nœuds, où des instances de petite à moyenne taille accèdent au stockage partagé. Pour ce type de configuration HPC, les [machines virtuelles](../sizes.md) de série E à mémoire optimisée Azure ou de série L à stockage optimisé fournissent les ressources de calcul nécessaires.
 
     -   Utiliser moins de grandes instances de machines virtuelles pour les moteurs de données. Pour les grandes instances, les plus grandes machines virtuelles de [série M](https://azure.microsoft.com/pricing/details/virtual-machines/series/) à mémoire optimisée sont idéales pour les lourdes charges de travail en mémoire. Vous aurez peut-être besoin d’une instance dédiée, selon la taille de la partition logique qui est utilisée pour exécuter DB2.
 
@@ -86,7 +86,7 @@ Cette architecture exécute les couches application, stockage et données sur de
 
 ### <a name="storage-considerations"></a>Considérations relatives au stockage
 
-Comme Oracle RAC, DB2 pureScale est une base de données scale-out d’E/S de bloc hautes performances. Nous vous recommandons d’utiliser l’option [Stockage SSD Azure](disks-types.md) la plus élevée répondant à vos besoins. Les options de stockage plus petites peuvent convenir aux environnements de développement et de test, tandis que les environnements de production nécessitent souvent de plus grandes capacités de stockage. L’exemple d’architecture utilise [P30](https://azure.microsoft.com/pricing/details/managed-disks/) en raison de son rapport entre IOPS et taille/prix. Quelle que soit la taille, utilisez le Stockage Premium pour de meilleures performances.
+Comme Oracle RAC, DB2 pureScale est une base de données scale-out d’E/S de bloc hautes performances. Nous vous recommandons d’utiliser l’option [Stockage SSD Azure](../disks-types.md) la plus élevée répondant à vos besoins. Les options de stockage plus petites peuvent convenir aux environnements de développement et de test, tandis que les environnements de production nécessitent souvent de plus grandes capacités de stockage. L’exemple d’architecture utilise [P30](https://azure.microsoft.com/pricing/details/managed-disks/) en raison de son rapport entre IOPS et taille/prix. Quelle que soit la taille, utilisez le Stockage Premium pour de meilleures performances.
 
 DB2 pureScale utilise une architecture de partage intégral, où toutes les données sont accessibles à partir de tous les nœuds de cluster. Stockage Premium doit être partagé entre plusieurs instances, que ce soit à la demande ou sur des instances dédiées.
 
@@ -96,11 +96,11 @@ Un grand cluster DB2 pureScale peut nécessiter 200 téraoctets (To) ou plus de
 
 IBM recommande une mise en réseau InfiniBand pour tous les membres d’un cluster DB2 pureScale. DB2 pureScale utilise également l’accès direct à la mémoire à distance (RDMA), le cas échéant, pour les installations de mise en cache.
 
-Pendant l’installation, vous créez un [groupe de ressources](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-overview) Azure pour contenir toutes les machines virtuelles. En règle générale, vous regroupez les ressources en fonction de leur durée de vie et de qui va les gérer. Les machines virtuelles dans cette architecture nécessitent une [mise en réseau accélérée](https://azure.microsoft.com/blog/maximize-your-vm-s-performance-with-accelerated-networking-now-generally-available-for-both-windows-and-linux/). Il s’agit d’une fonctionnalité Azure qui fournit une latence du réseau cohérente et très faible par le biais d’une virtualisation des E/S sur une racine unique (SR-IOV) à une machine virtuelle.
+Pendant l’installation, vous créez un [groupe de ressources](../../azure-resource-manager/management/overview.md) Azure pour contenir toutes les machines virtuelles. En règle générale, vous regroupez les ressources en fonction de leur durée de vie et de qui va les gérer. Les machines virtuelles dans cette architecture nécessitent une [mise en réseau accélérée](https://azure.microsoft.com/blog/maximize-your-vm-s-performance-with-accelerated-networking-now-generally-available-for-both-windows-and-linux/). Il s’agit d’une fonctionnalité Azure qui fournit une latence du réseau cohérente et très faible par le biais d’une virtualisation des E/S sur une racine unique (SR-IOV) à une machine virtuelle.
 
-Chaque machine virtuelle est déployée dans un réseau virtuel qui comporte des sous-réseaux : principal, frontal Gluster FS (gfsfe), back-end Gluster FS (bfsbe), DB2 pureScale (db2be) et frontal DB2 pureScale (db2fe). Le script d’installation crée également les [cartes réseau](https://docs.microsoft.com/azure/virtual-machines/linux/multiple-nics) principales sur les machines virtuelles dans le sous-réseau principal.
+Chaque machine virtuelle est déployée dans un réseau virtuel qui comporte des sous-réseaux : principal, frontal Gluster FS (gfsfe), back-end Gluster FS (bfsbe), DB2 pureScale (db2be) et frontal DB2 pureScale (db2fe). Le script d’installation crée également les [cartes réseau](./multiple-nics.md) principales sur les machines virtuelles dans le sous-réseau principal.
 
-Utilisez des [groupes de sécurité réseau](https://docs.microsoft.com/azure/virtual-network/virtual-networks-nsg) pour limiter le trafic réseau au sein du réseau virtuel et pour isoler les sous-réseaux.
+Utilisez des [groupes de sécurité réseau](../../virtual-network/virtual-network-vnet-plan-design-arm.md) pour limiter le trafic réseau au sein du réseau virtuel et pour isoler les sous-réseaux.
 
 Sur Azure, DB2 pureScale doit utiliser la connexion réseau TCP/IP pour le stockage.
 

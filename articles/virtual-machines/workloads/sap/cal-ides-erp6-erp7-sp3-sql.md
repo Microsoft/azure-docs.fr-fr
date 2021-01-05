@@ -1,26 +1,19 @@
 ---
 title: Déploiement de SAP IDES EHP7 SP3 pour SAP ERP 6.0 sur Azure | Microsoft Docs
 description: Déploiement de SAP IDES EHP7 SP3 pour SAP ERP 6.0 sur Azure
-services: virtual-machines-windows
-documentationcenter: ''
 author: hermanndms
-manager: juergent
-editor: ''
-tags: azure-resource-manager
-keywords: ''
-ms.assetid: 626c1523-1026-478f-bd8a-22c83b869231
-ms.service: virtual-machines-windows
+ms.service: virtual-machines
+ms.subservice: workloads
 ms.topic: article
-ms.tgt_pltfrm: vm-windows
-ms.workload: infrastructure-services
 ms.date: 09/16/2016
 ms.author: hermannd
-ms.openlocfilehash: 3efd92226b7c69590f3960458ffec49b63b8364f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.reviewer: cynthn
+ms.openlocfilehash: dc0c1744c2943d33d516de4ed9d28893541773ad
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77616706"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94957875"
 ---
 # <a name="deploy-sap-ides-ehp7-sp3-for-sap-erp-60-on-azure"></a>Déploiement de SAP IDES EHP7 SP3 pour SAP ERP 6.0 sur Azure
 Cet article explique comment déployer un système SAP IDES exécuté avec SQL Server et le système d’exploitation Windows sur Azure via SAP Cloud Appliance Library (SAP CAL) 3.0. Les captures d’écran montrent la procédure étape par étape. Pour déployer une autre solution, suivez la même procédure.
@@ -54,11 +47,11 @@ Après vous être connecté à SAP CAL, la première page vous conduit général
 
     b. **Microsoft Azure** est le nouveau modèle de déploiement Resource Manager.
 
-    ![Comptes SAP CAL](./media/cal-ides-erp6-ehp7-sp3-sql/s4h-pic-2a.PNG)
+    ![Capture d’écran montrant les comptes SAP CAL avec Microsoft Azure en évidence.](./media/cal-ides-erp6-ehp7-sp3-sql/s4h-pic-2a.PNG)
 
     Pour effectuer un déploiement dans le modèle Resource Manager, sélectionnez **Microsoft Azure**.
 
-    ![Comptes SAP CAL](./media/cal-ides-erp6-ehp7-sp3-sql/s4h-pic3c.PNG)
+    ![Capture d’écran montrant les comptes SAP CAL.](./media/cal-ides-erp6-ehp7-sp3-sql/s4h-pic3c.PNG)
 
 1. Dans le champ **Subscription ID** (ID d’abonnement), entrez l’ID d’abonnement Azure indiqué dans le Portail Azure. 
 

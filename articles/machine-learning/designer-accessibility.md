@@ -1,5 +1,5 @@
 ---
-title: Utiliser les fonctionnalités d’accessibilité dans le concepteur (préversion)
+title: Utiliser les fonctionnalités d’accessibilité dans le concepteur
 titleSuffix: Azure Machine Learning
 description: Découvrez les raccourcis clavier et les fonctionnalités d’accessibilité du lecteur d’écran disponibles dans le concepteur.
 services: machine-learning
@@ -10,14 +10,14 @@ ms.author: peterlu
 author: peterclu
 ms.date: 01/09/2020
 ms.custom: designer
-ms.openlocfilehash: af676f128796c762b330d986836ea825a36cb246
-ms.sourcegitcommit: fdec8e8bdbddcce5b7a0c4ffc6842154220c8b90
+ms.openlocfilehash: 86cb5260a59f864658fbb7ac1c1da2d943c6253e
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83646294"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90893432"
 ---
-# <a name="use-a-keyboard-to-use-azure-machine-learning-designer-preview"></a>Employer un clavier pour utiliser le concepteur Azure Machine Learning (préversion)
+# <a name="use-a-keyboard-to-use-azure-machine-learning-designer"></a>Employer un clavier pour utiliser le concepteur Azure Machine Learning
 
 Découvrez comment employer un clavier et un lecteur d’écran pour utiliser le concepteur Azure Machine Learning. Pour obtenir une liste des raccourcis clavier qui fonctionnent partout dans le portail Azure, consultez [Raccourcis clavier du portail Azure](../azure-portal/azure-portal-keyboard-shortcuts.md)
 
@@ -79,5 +79,5 @@ Utilisez les raccourcis suivants avec la touche d’accès rapide. Pour plus d�
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- [Activer le contraste élevé ou modifier le thème](../azure-portal/azure-portal-change-theme-high-contrast.md)
+- [Activer le contraste élevé ou modifier le thème](../azure-portal/set-preferences.md#choose-a-theme-or-enable-high-contrast)
 - [Outils liés à l’accessibilité chez Microsoft](https://www.microsoft.com/accessibility)

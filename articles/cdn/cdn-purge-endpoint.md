@@ -1,6 +1,6 @@
 ---
 title: Purger un point de terminaison CDN Azure | Microsoft Docs
-description: Découvrez comment vider tout le contenu mis en cache à partir d’un point de terminaison CDN Azure.
+description: Découvrez comment vider tout le contenu mis en cache à partir d’un point de terminaison Content Delivery Network (CDN) Azure. Les nœuds de périphérie mettent en cache les ressources jusqu’à expiration de leur durée de vie.
 services: cdn
 documentationcenter: ''
 author: asudbring
@@ -11,15 +11,15 @@ ms.service: azure-cdn
 ms.workload: tbd
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.date: 05/17/2019
 ms.author: allensu
-ms.openlocfilehash: ebbb0dd059ce2bcf4a3bc260ed6d426d5be09dfe
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: e90086be18e344e3061b9e683780f4427b3c15a1
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81260256"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96018628"
 ---
 # <a name="purge-an-azure-cdn-endpoint"></a>Purger un point de terminaison CDN Azure
 ## <a name="overview"></a>Vue d’ensemble
@@ -53,7 +53,7 @@ Ce didacticiel vous guide dans le processus de vidage des éléments multimédia
    > 
 4. Sélectionnez les éléments multimédias que vous souhaitez vider sur les nœuds de périmètre.  Si vous souhaitez effacer tous les éléments multimédias, cochez la case **Vider tout** .  Sinon, tapez le chemin de chaque élément multimédia que vous souhaitez vider dans la zone de texte **Chemin d’accès**. Les formats suivants sont pris en charge dans le chemin d’accès.
     1. **Vidage d’URL unique** : vidage d’un élément multimédia individuel en spécifiant l’URL complète, avec ou sans l’extension de fichier, par exemple,`/pictures/strasbourg.png` ; `/pictures/strasbourg`
-    2. **Vidage de caractères génériques** : l’astérisque (\*) peut être utilisé comme caractère générique. Videz tous les dossiers, sous-dossiers et fichiers dans un point de terminaison avec `/*` dans le chemin d’accès ou videz tous les sous-dossiers et fichiers dans un dossier spécifique en spécifiant le dossier suivi de `/*`, par exemple,`/pictures/*`.  Notez que le vidage de caractère générique n’est pas compatible avec Azure CDN par Akamai. 
+    2. **Vidage de caractère générique** : l’astérisque (\*) peut être utilisé comme caractère générique. Videz tous les dossiers, sous-dossiers et fichiers dans un point de terminaison avec `/*` dans le chemin d’accès ou videz tous les sous-dossiers et fichiers dans un dossier spécifique en spécifiant le dossier suivi de `/*`, par exemple,`/pictures/*`.  Notez que le vidage de caractère générique n’est pas compatible avec Azure CDN par Akamai. 
     3. **Vidage du domaine racine** : videz la racine du point de terminaison avec « / » dans le chemin d’accès.
    
    > [!TIP]
@@ -69,7 +69,7 @@ Ce didacticiel vous guide dans le processus de vidage des éléments multimédia
     ![Bouton Vider](./media/cdn-purge-endpoint/cdn-purge-button.png)
 
 > [!IMPORTANT]
-> Le traitement des demandes de vidage prend environ 10 minutes avec le service **Azure CDN de Microsoft**, environ 2 minutes avec le service **Azure CDN de Verizon** (Standard et Premium) et environ 10 secondes avec le service **Azure CDN d’Akamai**.  Le CDN Azure impose une limite de 50 demandes de vidage simultanées à un moment donné au niveau du profil. 
+> Le traitement des demandes de vidage prend environ 10 minutes avec le service **Azure CDN de Microsoft**, environ 2 minutes avec le service **Azure CDN de Verizon** (Standard et Premium) et environ 10 secondes avec le service **Azure CDN d’Akamai**.  Le CDN Azure impose une limite de 100 demandes de vidage simultanées à un moment donné au niveau du profil. 
 > 
 > 
 

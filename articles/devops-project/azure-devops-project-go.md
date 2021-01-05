@@ -13,12 +13,12 @@ ms.topic: quickstart
 ms.date: 07/09/2018
 ms.author: mlearned
 ms.custom: mvc
-ms.openlocfilehash: 02304758ef89ff7c94d1c3d8f98f6931ab7fd8dc
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 2f968bfd0c3d2884c123b82ccf132d77b117ac9a
+ms.sourcegitcommit: d2d1c90ec5218b93abb80b8f3ed49dcf4327f7f4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82233123"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97589030"
 ---
 # <a name="create-a-cicd-pipeline-for-go-using-azure-devops-starter"></a>Créer un pipeline CI/CD pour Go avec Azure DevOps Starter
 
@@ -60,9 +60,9 @@ DevOps Starter crée un pipeline CI/CD dans Azure Pipelines. Vous pouvez créer 
 
 DevOps Starter crée un dépôt Git dans Azure Repos ou dans GitHub. Pour voir le dépôt et modifier le code dans votre application, effectuez les étapes suivantes :
 
-1. Dans le tableau de bord DevOps Starter, sur la gauche, sélectionnez le lien correspondant à votre branche master. Le lien ouvre une vue sur le dépôt Git récemment créé.
+1. Dans le tableau de bord DevOps Starter, sur la gauche, sélectionnez le lien correspondant à votre branche principale. Le lien ouvre une vue sur le dépôt Git récemment créé.
 
-1. Pour voir l’URL du clone du dépôt, sélectionnez **Cloner** en haut à droite. Vous pouvez cloner votre dépôt Git dans votre IDE favori. Dans les prochaines étapes, vous allez utiliser le navigateur web pour effectuer des modifications de code directement dans la branche maîtresse et les valider.
+1. Pour voir l’URL du clone du dépôt, sélectionnez **Cloner** en haut à droite. Vous pouvez cloner votre dépôt Git dans votre IDE favori. Dans les prochaines étapes, vous allez utiliser le navigateur web pour effectuer des modifications de code directement dans la branche principale et les valider.
 
 1. Sur la gauche, accédez au fichier *views/index.html*, puis sélectionnez **Modifier**.
 
@@ -123,4 +123,4 @@ Quand ils ne sont plus nécessaires, vous pouvez supprimer l’instance Azure Ap
 Pour plus d’informations sur la modification des pipelines de build et de mise en production afin de répondre aux besoins de votre équipe, consultez :
 
 > [!div class="nextstepaction"]
-> [Définir votre pipeline de déploiement continu (CD) multiétape](https://docs.microsoft.com/azure/devops/pipelines/release/define-multistage-release-process?view=vsts)
+> [Définir votre pipeline de déploiement continu (CD) multiétape](/azure/devops/pipelines/release/define-multistage-release-process?view=vsts)

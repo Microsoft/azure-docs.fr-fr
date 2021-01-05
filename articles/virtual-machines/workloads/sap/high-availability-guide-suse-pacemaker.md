@@ -9,17 +9,18 @@ editor: ''
 tags: azure-resource-manager
 keywords: ''
 ms.service: virtual-machines-windows
+ms.subservice: workloads
 ms.topic: article
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure-services
-ms.date: 04/07/2020
+ms.date: 08/04/2020
 ms.author: radeltch
-ms.openlocfilehash: 06ee1b6184e69ace68adcbfa36ad2384dc9fdd99
-ms.sourcegitcommit: 98e79b359c4c6df2d8f9a47e0dbe93f3158be629
+ms.openlocfilehash: 57c6caea2de9063b133d4d5d643629184e412dad
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "80811579"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94957688"
 ---
 # <a name="setting-up-pacemaker-on-suse-linux-enterprise-server-in-azure"></a>Configuration de Pacemaker sur SUSE Linux Enterprise Server dans Azure
 
@@ -34,14 +35,14 @@ ms.locfileid: "80811579"
 
 Pour configurer un cluster Pacemaker dans Azure, deux options s’offrent à vous : vous pouvez soit utiliser un agent d’isolation, qui s’occupe de redémarrer les nœuds défaillants via les API Azure, soit utiliser un appareil SBD.
 
-L’appareil SBD nécessite au moins une machine virtuelle supplémentaire pour jouer le rôle de serveur cible iSCSI et fournir un appareil SBD. Ces serveurs cibles iSCSI peuvent toutefois être partagés avec d’autres clusters Pacemaker. L’utilisation d’un appareil SBD présente l’avantage de garantir un temps de basculement plus rapide et, si vous faites appel à des appareils SBD en local, de ne pas vous obliger à revoir la façon dont vous exploitez le cluster Pacemaker. Vous pouvez utiliser jusqu’à trois appareils SBD pour qu’un cluster Pacemaker autorise l’indisponibilité d’un appareil SBD, par exemple lors de la mise à jour corrective du système d’exploitation du serveur cible iSCSI. Si vous souhaitez utiliser plusieurs appareil SBD par Pacemaker, veillez à déployer plusieurs serveurs cibles iSCSI et à connecter un SBD depuis chaque serveur cible iSCSI. Nous vous recommandons d’utiliser soit un appareil SBD, soit trois appareils SBD. Pacemaker n’est pas en mesure d’isoler automatiquement un nœud de cluster si vous ne configurez que deux appareils SBD et que l’un d’eux n’est pas disponible. Si vous souhaitez pouvoir procéder à une isolation lorsqu’un serveur cible iSCSI est inactif, vous devez utiliser trois appareils SBD, et donc trois serveurs cibles iSCSI.
+L’appareil SBD nécessite au moins une machine virtuelle supplémentaire pour jouer le rôle de serveur cible iSCSI et fournir un appareil SBD. Ces serveurs cibles iSCSI peuvent toutefois être partagés avec d’autres clusters Pacemaker. L’utilisation d’un appareil SBD présente l’avantage que, si vous faites déjà appel à des appareils SBD en local, vous n’êtes pas obligé de revoir la façon dont vous exploitez le cluster Pacemaker. Vous pouvez utiliser jusqu’à trois appareils SBD pour qu’un cluster Pacemaker autorise l’indisponibilité d’un appareil SBD, par exemple lors de la mise à jour corrective du système d’exploitation du serveur cible iSCSI. Si vous souhaitez utiliser plusieurs appareil SBD par Pacemaker, veillez à déployer plusieurs serveurs cibles iSCSI et à connecter un SBD depuis chaque serveur cible iSCSI. Nous vous recommandons d’utiliser soit un appareil SBD, soit trois appareils SBD. Pacemaker n’est pas en mesure d’isoler automatiquement un nœud de cluster si vous ne configurez que deux appareils SBD et que l’un d’eux n’est pas disponible. Si vous souhaitez pouvoir procéder à une isolation lorsqu’un serveur cible iSCSI est inactif, vous devez utiliser trois appareils SBD, et donc trois serveurs cibles iSCSI, soit la configuration la plus résiliente avec des appareils SBD.
 
-Si vous ne voulez pas investir dans une machine virtuelle supplémentaire, vous pouvez également utiliser l’agent Azure Fence. L’inconvénient, c’est qu’un basculement peut prendre entre 10 et 15 minutes si une ressource échoue ou si les nœuds de cluster ne peuvent plus communiquer entre eux.
+Azure Fence Agent ne nécessite pas le déploiement de machines virtuelles supplémentaires.   
 
 ![Vue d’ensemble de Pacemaker sur SLES](./media/high-availability-guide-suse-pacemaker/pacemaker.png)
 
 >[!IMPORTANT]
-> Lors de la planification et du déploiement des nœuds de cluster Linux Pacemaker et des périphériques SBD, il est essentiel pour la fiabilité globale de la configuration complète du cluster que le routage entre les machines virtuelles impliquées et les machines virtuelles hébergeant le ou les périphériques SBD ne passent pas par d’autres appareils comme les [NVA](https://azure.microsoft.com/solutions/network-appliances/). Sinon, les problèmes et les événements de maintenance avec l’appliance virtuelle réseau peuvent avoir un impact négatif sur la stabilité et la fiabilité de la configuration générale du cluster. Afin d’éviter de tels obstacles, ne définissez pas de règles d’acheminement d’appliances virtuelles réseau ou de [règles d’acheminement définies par l’utilisateur](https://docs.microsoft.com/azure/virtual-network/virtual-networks-udr-overview) qui acheminent le trafic entre les nœuds de cluster et des appareils SBD via les appliances virtuelles réseau et des périphériques similaires lors de la planification et du déploiement des nœuds de cluster Linux Pacemaker et des périphériques SBD. 
+> Lors de la planification et du déploiement des nœuds de cluster Linux Pacemaker et des périphériques SBD, il est essentiel pour la fiabilité globale de la configuration complète du cluster que le routage entre les machines virtuelles impliquées et les machines virtuelles hébergeant le ou les périphériques SBD ne passent pas par d’autres appareils comme les [NVA](https://azure.microsoft.com/solutions/network-appliances/). Sinon, les problèmes et les événements de maintenance avec l’appliance virtuelle réseau peuvent avoir un impact négatif sur la stabilité et la fiabilité de la configuration générale du cluster. Afin d’éviter de tels obstacles, ne définissez pas de règles d’acheminement d’appliances virtuelles réseau ou de [règles d’acheminement définies par l’utilisateur](../../../virtual-network/virtual-networks-udr-overview.md) qui acheminent le trafic entre les nœuds de cluster et des appareils SBD via les appliances virtuelles réseau et des périphériques similaires lors de la planification et du déploiement des nœuds de cluster Linux Pacemaker et des périphériques SBD. 
 >
 
 ## <a name="sbd-fencing"></a>Isolation SBD
@@ -221,17 +222,17 @@ Les éléments suivants sont précédés de **[A]** (applicable à tous les nœu
 
    <pre><code>sudo iscsiadm -m discovery --type=st --portal=<b>10.0.0.17:3260</b>   
    sudo iscsiadm -m node -T <b>iqn.2006-04.nfs.local:nfs</b> --login --portal=<b>10.0.0.17:3260</b>
-   sudo iscsiadm -m node -p <b>10.0.0.17:3260</b> --op=update --name=node.startup --value=automatic
+   sudo iscsiadm -m node -p <b>10.0.0.17:3260</b> -T <b>iqn.2006-04.nfs.local:nfs</b> --op=update --name=node.startup --value=automatic
    
    # If you want to use multiple SBD devices, also connect to the second iSCSI target server
    sudo iscsiadm -m discovery --type=st --portal=<b>10.0.0.18:3260</b>   
    sudo iscsiadm -m node -T <b>iqn.2006-04.nfs.local:nfs</b> --login --portal=<b>10.0.0.18:3260</b>
-   sudo iscsiadm -m node -p <b>10.0.0.18:3260</b> --op=update --name=node.startup --value=automatic
+   sudo iscsiadm -m node -p <b>10.0.0.18:3260</b> -T <b>iqn.2006-04.nfs.local:nfs</b> --op=update --name=node.startup --value=automatic
    
    # If you want to use multiple SBD devices, also connect to the third iSCSI target server
    sudo iscsiadm -m discovery --type=st --portal=<b>10.0.0.19:3260</b>   
    sudo iscsiadm -m node -T <b>iqn.2006-04.nfs.local:nfs</b> --login --portal=<b>10.0.0.19:3260</b>
-   sudo iscsiadm -m node -p <b>10.0.0.19:3260</b> --op=update --name=node.startup --value=automatic
+   sudo iscsiadm -m node -p <b>10.0.0.19:3260</b> -T <b>iqn.2006-04.nfs.local:nfs</b> --op=update --name=node.startup --value=automatic
    </code></pre>
 
    Assurez-vous que les appareils iSCSI sont disponibles et notez leur nom (« /dev/sde » dans l’exemple suivant).
@@ -413,39 +414,48 @@ Les éléments suivants sont précédés de **[A]** (applicable à tous les nœu
    sudo vi /root/.ssh/authorized_keys
    </code></pre>
 
-1. **[A]**  Installer des agents Fence
+1. **[A]** Installer le package Fence Agents si vous utilisez un appareil STONITH, basé sur Azure Fence Agent.  
    
    <pre><code>sudo zypper install fence-agents
    </code></pre>
 
    >[!IMPORTANT]
-   > Si vous utilisez Suse Linux Enterprise Server pour SAP 15, sachez que vous devez activer le module supplémentaire et installer un composant supplémentaire, ce qui est la condition préalable à l’utilisation de l’agent Azure Fence. Pour en savoir plus sur les extensions et les modules SUSE, consultez [Modules et extensions expliqués](https://www.suse.com/documentation/sles-15/singlehtml/art_modules/art_modules.html). Suivez les instructions pour installer le kit de développement logiciel (SDK) Azure Python. 
+   > Vous devez installer au minimum la version **4.4.0** du package **fence-agents** pour pouvoir tirer parti des délais de basculement plus rapides avec Azure Fence Agent, si des nœuds de cluster doivent être délimités. Nous vous recommandons de mettre à jour le package, si vous exécutez une version antérieure.  
 
-   Les instructions suivantes sur l’installation du kit de développement logiciel (SDK) Azure Python s’appliquent **uniquement**à Suse Enterprise Server pour SAP 15.  
 
-    - Si vous utilisez un abonnement Apportez votre propre licence, suivez ces instructions.  
+1. **[A]** Installer le kit de développement logiciel (SDK) Azure Python 
+   - Sur SLES 12 SP4 ou SLES 12 SP5
+   <pre><code>
+    # You may need to activate the Public cloud extention first
+    SUSEConnect -p sle-module-public-cloud/12/x86_64
+    sudo zypper install python-azure-mgmt-compute
+   </code></pre> 
 
-    <pre><code>
-    #Activate module PackageHub/15/x86_64
-    sudo SUSEConnect -p PackageHub/15/x86_64
-    #Install Azure Python SDK
-    sudo zypper in python3-azure-sdk
-    </code></pre>
-
-     - Si vous utilisez un abonnement Paiement à l’utilisation, suivez ces instructions.  
-
-    <pre><code>#Activate module PackageHub/15/x86_64
-    zypper ar https://download.opensuse.org/repositories/openSUSE:/Backports:/SLE-15/standard/ SLE15-PackageHub
-    #Install Azure Python SDK
-    sudo zypper in python3-azure-sdk
-    </code></pre>
+   - Sur SLES 15 et versions ultérieures 
+   <pre><code>
+    # You may need to activate the Public cloud extention first. In this example the SUSEConnect command is for SLES 15 SP1
+    SUSEConnect -p sle-module-public-cloud/15.1/x86_64
+    sudo zypper install python3-azure-mgmt-compute
+   </code></pre> 
+ 
+   >[!IMPORTANT]
+   >Selon votre version et le type d’image, vous devrez peut-être activer l’extension cloud Public pour votre version de système d’exploitation, avant de pouvoir installer le kit de développement logiciel (SDK) Azure Python.
+   >Vous pouvez vérifier l’extension en exécutant la commande SUSEConnect---list-extensions.  
+   >Pour obtenir des délais de basculement plus rapides avec Azure Fence Agent :
+   > - sur SLES 12 SP4 ou SLES 12 SP5, installez la version **4.6.2** ou une version ultérieure du package python-azure-mgmt-compute  
+   > - sur SLES 15, installez la version **4.6.2** ou une version ultérieure du package python **3**-azure-mgmt-compute 
 
 1. **[A]** Configurer la résolution de nom d’hôte
 
    Vous pouvez utiliser un serveur DNS ou modifier le fichier /etc/hosts sur tous les nœuds. Cet exemple montre comment utiliser le fichier /etc/hosts.
-   Remplacez l’adresse IP et le nom d’hôte dans les commandes suivantes. L’avantage d’utiliser/etc/hosts réside dans le fait que votre cluster devient indépendant du serveur DNS, ce qui peut aussi être un point de défaillance unique.
+   Remplacez l’adresse IP et le nom d’hôte dans les commandes suivantes.
 
+   >[!IMPORTANT]
+   > Si vous utilisez des noms d’hôte dans la configuration du cluster, il est essentiel de disposer d’une résolution de nom d’hôte fiable. Les communications de cluster échouent, si les noms ne sont pas disponibles et peuvent entraîner des retards de basculement de cluster.
+   > L’avantage d’utiliser/etc/hosts réside dans le fait que votre cluster devient indépendant du serveur DNS, ce qui peut aussi être un point de défaillance unique.  
+     
    <pre><code>sudo vi /etc/hosts
+
    </code></pre>
 
    Insérez les lignes suivantes dans le fichier /etc/hosts. Modifiez l’adresse IP et le nom d’hôte en fonction de votre environnement   
@@ -457,7 +467,7 @@ Les éléments suivants sont précédés de **[A]** (applicable à tous les nœu
    </code></pre>
 
 1. **[1]** Installer le cluster
-
+- Si vous utilisez des appareils SBD pour la clôture
    <pre><code>sudo ha-cluster-init -u
    
    # ! NTP is not configured to start at system boot.
@@ -466,6 +476,19 @@ Les éléments suivants sont précédés de **[A]** (applicable à tous les nœu
    # Address for ring0 [10.0.0.6] <b>Press ENTER</b>
    # Port for ring0 [5405] <b>Press ENTER</b>
    # SBD is already configured to use /dev/disk/by-id/scsi-36001405639245768818458b930abdf69;/dev/disk/by-id/scsi-36001405afb0ba8d3a3c413b8cc2cca03;/dev/disk/by-id/scsi-36001405f88f30e7c9684678bc87fe7bf - overwrite (y/n)? <b>n</b>
+   # Do you wish to configure an administration IP (y/n)? <b>n</b>
+   </code></pre>
+
+- Si vous *n’utilisez pas* d’appareils SBD pour la clôture
+   <pre><code>sudo ha-cluster-init -u
+   
+   # ! NTP is not configured to start at system boot.
+   # Do you want to continue anyway (y/n)? <b>y</b>
+   # /root/.ssh/id_rsa already exists - overwrite (y/n)? <b>n</b>
+   # Address for ring0 [10.0.0.6] <b>Press ENTER</b>
+   # Port for ring0 [5405] <b>Press ENTER</b>
+   # Do you wish to use SBD (y/n)? <b>n</b>
+   #WARNING: Not configuring SBD - STONITH will be disabled.
    # Do you wish to configure an administration IP (y/n)? <b>n</b>
    </code></pre>
 
@@ -528,8 +551,27 @@ Les éléments suivants sont précédés de **[A]** (applicable à tous les nœu
    <pre><code>sudo service corosync restart
    </code></pre>
 
+## <a name="default-pacemaker-configuration-for-sbd"></a>Configuration Pacemaker par défaut pour SBD
+
+La configuration de cette section n’est applicable que si vous utilisez SBD STONITH.  
+
+1. **[1]** Activer l’utilisation d’un appareil STONITH et définir le délai d’isolation
+
+<pre><code>sudo crm configure property stonith-timeout=144
+sudo crm configure property stonith-enabled=true
+
+# List the resources to find the name of the SBD device
+sudo crm resource list
+sudo crm resource stop stonith-sbd
+sudo crm configure delete <b>stonith-sbd</b>
+sudo crm configure primitive <b>stonith-sbd</b> stonith:external/sbd \
+   params pcmk_delay_max="15" \
+   op monitor interval="15" timeout="15"
+</code></pre>
+
 ## <a name="create-azure-fence-agent-stonith-device"></a>Créer un appareil STONITH agent d’isolation Azure
 
+Cette section de la documentation n’est applicable que si vous utilisez STONITH, basé sur Azure Fence Agent.
 L’appareil STONITH utilise un principal de service pour l’autorisation sur Microsoft Azure. Pour créer un principal de service, effectuez les étapes suivantes.
 
 1. Accédez à <https://portal.azure.com>
@@ -547,28 +589,32 @@ L’appareil STONITH utilise un principal de service pour l’autorisation sur M
 
 ### <a name="1-create-a-custom-role-for-the-fence-agent"></a>**[1]**  Créer un rôle personnalisé pour l’agent d’isolation
 
-Par défaut, le principal de service ne possède pas les autorisations d’accéder à vos ressources Azure. Vous devez accorder au principal de service les autorisations de démarrer et arrêter (libérer) toutes les machines virtuelles du cluster. Si vous n’avez pas encore créé le rôle personnalisé, vous pouvez le créer à l’aide de [PowerShell](https://docs.microsoft.com/azure/role-based-access-control/custom-roles-powershell#create-a-custom-role) ou de l’[interface de ligne de commande Azure](https://docs.microsoft.com/azure/role-based-access-control/custom-roles-cli).
+Par défaut, le principal de service ne possède pas les autorisations d’accéder à vos ressources Azure. Vous devez accorder au principal de service les autorisations de démarrer et arrêter (libérer) toutes les machines virtuelles du cluster. Si vous n’avez pas encore créé le rôle personnalisé, vous pouvez le créer à l’aide de [PowerShell](../../../role-based-access-control/custom-roles-powershell.md#create-a-custom-role) ou de l’[interface de ligne de commande Azure](../../../role-based-access-control/custom-roles-cli.md).
 
 Utilisez le contenu suivant pour le fichier d’entrée. Vous devez adapter le contenu à vos abonnements, c’est-à-dire remplacer c276fc76-9cd4-44c9-99a7-4fd71546436e et e91d47c4-76f3-4271-a796-21b4ecfe3624 par les ID de vos abonnements. Si vous n’avez qu’un seul abonnement, supprimez la deuxième entrée dans AssignableScopes.
 
 ```json
 {
-  "Name": "Linux Fence Agent Role",
-  "Id": null,
-  "IsCustom": true,
-  "Description": "Allows to deallocate and start virtual machines",
-  "Actions": [
-    "Microsoft.Compute/*/read",
-    "Microsoft.Compute/virtualMachines/deallocate/action",
-    "Microsoft.Compute/virtualMachines/start/action", 
-    "Microsoft.Compute/virtualMachines/powerOff/action" 
-  ],
-  "NotActions": [
-  ],
-  "AssignableScopes": [
-    "/subscriptions/c276fc76-9cd4-44c9-99a7-4fd71546436e",
-    "/subscriptions/e91d47c4-76f3-4271-a796-21b4ecfe3624"
-  ]
+    "properties": {
+        "roleName": "Linux Fence Agent Role",
+        "description": "Allows to power-off and start virtual machines",
+        "assignableScopes": [
+            "/subscriptions/c276fc76-9cd4-44c9-99a7-4fd71546436e",
+            "/subscriptions/e91d47c4-76f3-4271-a796-21b4ecfe3624"
+        ],
+        "permissions": [
+            {
+                "actions": [
+                    "Microsoft.Compute/*/read",
+                    "Microsoft.Compute/virtualMachines/powerOff/action",
+                    "Microsoft.Compute/virtualMachines/start/action"
+                ],
+                "notActions": [],
+                "dataActions": [],
+                "notDataActions": []
+            }
+        ]
+    }
 }
 ```
 
@@ -591,33 +637,27 @@ Répétez les étapes ci-dessus pour le deuxième nœud de cluster.
 
 Une fois que vous avez modifié les autorisations pour les machines virtuelles, vous pouvez configurer les appareils STONITH dans le cluster.
 
-<pre><code># replace the bold string with your subscription ID, resource group, tenant ID, service principal ID and password
+<pre><code>sudo crm configure property stonith-enabled=true
+crm configure property concurrent-fencing=true
+# replace the bold string with your subscription ID, resource group, tenant ID, service principal ID and password
 sudo crm configure primitive rsc_st_azure stonith:fence_azure_arm \
-   params subscriptionId="<b>subscription ID</b>" resourceGroup="<b>resource group</b>" tenantId="<b>tenant ID</b>" login="<b>login ID</b>" passwd="<b>password</b>"
+  params subscriptionId="<b>subscription ID</b>" resourceGroup="<b>resource group</b>" tenantId="<b>tenant ID</b>" login="<b>login ID</b>" passwd="<b>password</b>" \
+  pcmk_monitor_retries=4 pcmk_action_limit=3 power_timeout=240 pcmk_reboot_timeout=900 \ 
+  op monitor interval=3600 timeout=120
 
 sudo crm configure property stonith-timeout=900
-sudo crm configure property stonith-enabled=true
+
 </code></pre>
 
-## <a name="default-pacemaker-configuration-for-sbd"></a>Configuration Pacemaker par défaut pour SBD
+> [!IMPORTANT]
+> Les opérations de surveillance et de clôture sont désérialisées. Par conséquent, si une opération de surveillance est plus longue et si un événement de clôture se produit en même temps, il n’y a aucun délai pour le basculement du cluster en raison de l’opération de surveillance en cours d’exécution.
 
-1. **[1]** Activer l’utilisation d’un appareil STONITH et définir le délai d’isolation
-
-<pre><code>sudo crm configure property stonith-timeout=144
-sudo crm configure property stonith-enabled=true
-
-# List the resources to find the name of the SBD device
-sudo crm resource list
-sudo crm resource stop stonith-sbd
-sudo crm configure delete <b>stonith-sbd</b>
-sudo crm configure primitive <b>stonith-sbd</b> stonith:external/sbd \
-   params pcmk_delay_max="15" \
-   op monitor interval="15" timeout="15"
-</code></pre>
+> [!TIP]
+>L’agent d’isolation Azure requiert une connectivité sortante vers les points de terminaison publics comme indiqué, ainsi que des solutions possibles évoquées dans [Connectivité de point de terminaison public pour les machines virtuelles utilisant un équilibreur de charge interne standard](./high-availability-guide-standard-load-balancer-outbound-connections.md).  
 
 ## <a name="pacemaker-configuration-for-azure-scheduled-events"></a>Configuration Pacemaker pour les événements planifiés Azure
 
-Azure propose des [événements planifiés](https://docs.microsoft.com/azure/virtual-machines/linux/scheduled-events). Les événements planifiés sont fournis via le service de métadonnées et permettent à l'application de préparer des événements tels que l'arrêt d'une machine virtuelle, le redéploiement d'une machine virtuelle, etc. L'agent de ressource **[azure-events](https://github.com/ClusterLabs/resource-agents/pull/1161)** supervise les événements planifiés Azure. Si des événements sont détectés, l’agent tente d'arrêter toutes les ressources sur la machine virtuelle concernée et de les déplacer vers un autre nœud du cluster. Pour y parvenir, des ressources Pacemaker supplémentaires doivent être configurées. 
+Azure propose des [événements planifiés](../../linux/scheduled-events.md). Les événements planifiés sont fournis via le service de métadonnées et permettent à l'application de préparer des événements tels que l'arrêt d'une machine virtuelle, le redéploiement d'une machine virtuelle, etc. L'agent de ressource **[azure-events](https://github.com/ClusterLabs/resource-agents/pull/1161)** supervise les événements planifiés Azure. Si des événements sont détectés, l’agent tente d'arrêter toutes les ressources sur la machine virtuelle concernée et de les déplacer vers un autre nœud du cluster. Pour y parvenir, des ressources Pacemaker supplémentaires doivent être configurées. 
 
 1. **[A]** Vérifiez que le package de l’agent **azure-events** est déjà installé et à jour. 
 

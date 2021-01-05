@@ -1,25 +1,15 @@
 ---
 title: Transfert automatique d’entités de messagerie Azure Service Bus
 description: Cet article explique comment chaîner une file d’attente ou un abonnement Service Bus à une autre file d’attente ou rubrique.
-services: service-bus-messaging
-documentationcenter: na
-author: axisc
-manager: timlt
-editor: spelluru
-ms.assetid: f7060778-3421-402c-97c7-735dbf6a61e8
-ms.service: service-bus-messaging
-ms.devlang: na
 ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: na
-ms.date: 01/24/2020
-ms.author: aschhab
-ms.openlocfilehash: 8b8883b579233962de61e7247e6ac1cbcb2a6d80
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 06/23/2020
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 8f5f93f65871c0b9658a75264ab959dbae7fefe7
+ms.sourcegitcommit: d2222681e14700bdd65baef97de223fa91c22c55
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76761047"
+ms.lasthandoff: 10/07/2020
+ms.locfileid: "91819578"
 ---
 # <a name="chaining-service-bus-entities-with-autoforwarding"></a>Chaînage des entités Service Bus avec transfert automatique
 
@@ -39,11 +29,11 @@ L'entité de destination doit exister au moment de la création de l'entité sou
 
 Vous pouvez utiliser le transfert automatique pour effectuer un scale-out d’une rubrique particulière. Service Bus limite le [nombre d’abonnements à une rubrique donnée](service-bus-quotas.md) à 2 000. Vous pouvez créer des abonnements supplémentaires en créant des rubriques de second niveau. Même si vous n’êtes pas lié par la limitation de Service Bus sur le nombre d’abonnements, l’ajout d’un deuxième niveau de rubriques peut améliorer le débit global de votre rubrique.
 
-![Scénario de transfert automatique][0]
+![Diagramme d’un scénario de transfert automatique qui affiche un message traité via une rubrique Commandes qui peut créer une branche vers l’une des trois rubriques Commandes de second niveau.][0]
 
 Vous pouvez également utiliser le transfert automatique pour découpler les expéditeurs de messages des récepteurs. Par exemple, considérez un système ERP qui se compose de trois modules : Traitement des commandes, Gestion des stocks et Gestion des relations client. Chacun de ces modules génère des messages qui sont placés en file d’attente dans une rubrique correspondante. Alice et Bob sont des représentants commerciaux qui s'intéressent à tous les messages liés à leurs clients. Pour recevoir ces messages, Alice et Bob créent chacun une file d’attente personnelle et un abonnement sur chacune des rubriques ERP qui transfèrent automatiquement tous les messages à leur file d’attente.
 
-![Scénario de transfert automatique][1]
+![Diagramme d’un scénario de transfert automatique qui montre trois modules de traitement envoyant des messages via trois rubriques correspondantes à deux files d’attente distinctes.][1]
 
 Si Alice part en vacances, sa file d’attente personnelle, et non la rubrique ERP, se remplit. Dans ce scénario, étant donné qu’un représentant commercial n’a pas reçu les messages, aucun des rubriques ERP n’atteint jamais son quota.
 
@@ -62,6 +52,8 @@ Lors du chaînage de rubriques individuelles pour obtenir une rubrique composite
 Service Bus facture une opération pour chaque message transféré. Par exemple, l’envoi d’un message à une rubrique possédant 20 abonnements, chacun d’eux étant configuré pour transférer automatiquement les messages vers une autre file d’attente ou rubrique, est facturé en tant que 21 opérations si tous les abonnements de premier niveau reçoivent une copie du message.
 
 Pour créer un abonnement qui est chaîné à une autre file d’attente ou rubrique, le créateur de l’abonnement doit disposer des autorisations de **gestion** de l’entité source et l’entité de destination. L’envoi de messages à la rubrique source ne nécessite que des autorisations **d’envoi** sur la rubrique source.
+
+Ne créez pas de chaîne qui dépasse 4 tronçons. Les messages qui dépassent 4 tronçons sont mis en file d’attente de lettres mortes.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

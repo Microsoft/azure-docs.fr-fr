@@ -2,25 +2,21 @@
 title: 'Tutoriel : Configurer un répertoire fédéré pour l’approvisionnement automatique d’utilisateurs avec Azure Active Directory | Microsoft Docs'
 description: Découvrez comment configurer Azure Active Directory pour approvisionner et déprovisionner des comptes d’utilisateur dans le répertoire fédéré.
 services: active-directory
-documentationcenter: ''
 author: zchia
 writer: zchia
-manager: beatrizd
-ms.assetid: na
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: article
+ms.topic: tutorial
 ms.date: 07/12/2019
 ms.author: zhchia
-ms.openlocfilehash: 910aaac84dacb75cd76772a0bc2960d9bfa8bb70
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 8ca7654d930247f70d85cbc20fbbeb961223f05f
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77057915"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95998360"
 ---
 # <a name="tutorial-configure-federated-directory-for-automatic-user-provisioning"></a>Tutoriel : Configurer un répertoire fédéré pour l’attribution automatique d’utilisateurs
 
@@ -57,24 +53,24 @@ Avant de configurer un répertoire fédéré pour l’attribution automatique d�
 
 1. Connectez-vous à la [console d’administration de votre répertoire fédéré](https://federated.directory/of)
 
-    ![Didacticiel de répertoire fédéré](media/federated-directory-provisioning-tutorial/companyname.png)
+    :::image type="content" source="media/federated-directory-provisioning-tutorial/companyname.png" alt-text="Capture d’écran de la console d’administration Répertoire fédéré montrant un champ permettant d’entrer un nom de société. Les boutons de connexion sont également visibles." border="false":::
 
 2. Accédez à **Répertoires > Répertoires utilisateur** et sélectionnez votre locataire. 
 
-    ![répertoire fédéré](media/federated-directory-provisioning-tutorial/ad-user-directories.png)
+    :::image type="content" source="media/federated-directory-provisioning-tutorial/ad-user-directories.png" alt-text="Capture d’écran de la console d’administration Répertoire fédéré, avec Répertoires et le Test du répertoire fédéré Azure AD mis en évidence." border="false":::
 
 3.  Pour générer un jeton du porteur permanent, accédez à **Clés de répertoire > Créer une nouvelle clé.** 
 
-    ![répertoire fédéré](media/federated-directory-provisioning-tutorial/federated01.png)
+    :::image type="content" source="media/federated-directory-provisioning-tutorial/federated01.png" alt-text="Capture d’écran de la page Clés de répertoire de la console d’administration Répertoire fédéré. Le bouton Créer une nouvelle clé est mis en évidence." border="false":::
 
 4. Créez une clé de répertoire. 
 
-    ![répertoire fédéré](media/federated-directory-provisioning-tutorial/federated02.png)
+    :::image type="content" source="media/federated-directory-provisioning-tutorial/federated02.png" alt-text="Capture d’écran de la page Créer une clé de répertoire de la console d’administration Répertoire fédéré, avec les champs Nom et Description et un bouton Créer une clé." border="false":::
     
 
 5. Copiez la valeur **Jeton d’accès**. Cette valeur devra être entrée dans le champ **Jeton secret** dans l’onglet Approvisionnement de votre application de répertoire fédéré dans le portail Azure. 
 
-    ![répertoire fédéré](media/federated-directory-provisioning-tutorial/federated03.png)
+    :::image type="content" source="media/federated-directory-provisioning-tutorial/federated03.png" alt-text="Capture d’écran d’une page dans la console d’administration Répertoire fédéré. Un espace réservé de jeton d’accès et un nom de clé, une description et un émetteur sont visibles." border="false":::
     
 ## <a name="add-federated-directory-from-the-gallery"></a>Ajouter un répertoire fédéré à partir de la galerie
 
@@ -100,15 +96,15 @@ Avant de configurer un répertoire fédéré pour l’attribution automatique d�
 
 5. Accédez à l’**URL** mise en évidence ci-dessous dans un autre navigateur. 
 
-    ![répertoire fédéré](media/federated-directory-provisioning-tutorial/loginpage1.png)
+    :::image type="content" source="media/federated-directory-provisioning-tutorial/loginpage1.png" alt-text="Capture d’écran d’une page du portail Azure qui affiche des informations relatives au répertoire fédéré. La valeur URL est mise en évidence." border="false":::
 
 6. Cliquez sur **Ouvrir une session**.
 
-    ![répertoire fédéré](media/federated-directory-provisioning-tutorial/federated04.png)
+    :::image type="content" source="media/federated-directory-provisioning-tutorial/federated04.png" alt-text="Capture d’écran du menu principal sur le site Répertoire fédéré. Le bouton Connexion est en évidence." border="false":::
 
 7.  Comme Répertoire fédéré est une application OpenIDConnect, choisissez de vous connecter au répertoire fédéré à l’aide de votre compte professionnel Microsoft.
     
-    ![répertoire fédéré](media/federated-directory-provisioning-tutorial/loginpage3.png)
+    :::image type="content" source="media/federated-directory-provisioning-tutorial/loginpage3.png" alt-text="Capture d’écran de la page du test SCIM AD sur le site Répertoire fédéré. Connectez-vous avec votre compte Microsoft est mis en évidence." border="false":::
  
 8. Une fois l’authentification réussie, acceptez l’invite de consentement pour la page de consentement. L’application est alors automatiquement ajoutée à votre client et vous serez redirigé vers votre compte de répertoire fédéré.
 
@@ -132,11 +128,11 @@ Cette section vous guide tout au long des étapes de configuration du service d�
 
 3. Sélectionnez l’onglet **Approvisionnement**.
 
-    ![Onglet Approvisionnement](common/provisioning.png)
+    ![Capture d’écran des options Gérer avec l’option Provisionnement en évidence.](common/provisioning.png)
 
 4. Définissez le **Mode d’approvisionnement** sur **Automatique**.
 
-    ![Onglet Approvisionnement](common/provisioning-automatic.png)
+    ![Capture d’écran de la liste déroulante Mode de provisionnement avec l’option Automatique en évidence.](common/provisioning-automatic.png)
 
 5. Sous la section **Informations d’identification de l’administrateur**, entrez `https://api.federated.directory/v2/` dans URL de locataire. Entrez la valeur que vous avez récupérée et enregistrée précédemment à partir du répertoire fédéré dans **Jeton secret**. Cliquez sur **Tester la connexion** pour vérifier qu’Azure AD peut se connecter au répertoire fédéré. Si la connexion échoue, vérifiez que votre compte de répertoire fédéré dispose des autorisations d’administrateur, puis réessayez.
 
@@ -150,12 +146,12 @@ Cette section vous guide tout au long des étapes de configuration du service d�
 
 10. Dans la section **Mappages**, sélectionnez **Synchroniser les utilisateurs Azure Active Directory avec un répertoire fédéré**.
 
-    ![Didacticiel de répertoire fédéré](media/federated-directory-provisioning-tutorial/user-mappings.png)
+    :::image type="content" source="media/federated-directory-provisioning-tutorial/user-mappings.png" alt-text="Capture d’écran de la section Mappages. Sous Nom, Synchroniser les utilisateurs Azure Active Directory avec Répertoire fédéré est mis en évidence." border="false":::
     
     
 11. Dans la section **Mappages des attributs**, passez en revue les attributs utilisateur qui sont synchronisés entre Azure AD et le répertoire fédéré. Les attributs sélectionnés en tant que propriétés de **Correspondance** sont utilisés pour faire correspondre les comptes d’utilisateur dans le répertoire fédéré à des opérations de mise à jour. Cliquez sur le bouton **Enregistrer** pour valider les modifications.
 
-    ![Didacticiel de répertoire fédéré](media/federated-directory-provisioning-tutorial/user-attributes.png)
+    :::image type="content" source="media/federated-directory-provisioning-tutorial/user-attributes.png" alt-text="Capture d’écran de la page Mappages d’attributs. Un tableau répertorie les attributs Azure Active Directory et Répertoire fédéré et l’état de correspondance." border="false":::
     
 
 12. Pour configurer des filtres d’étendue, reportez-vous aux instructions suivantes fournies dans [Approvisionnement d’applications basé sur les attributs avec filtres d’étendue](../app-provisioning/define-conditional-rules-for-provisioning-user-accounts.md).

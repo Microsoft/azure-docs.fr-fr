@@ -6,18 +6,18 @@ ms.service: dns
 ms.topic: overview
 ms.date: 3/21/2019
 ms.author: rohink
-ms.openlocfilehash: 1543c0daae7d637730a5f8f9da2305423ba7f84e
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: 7c3aa5505ca15238b2f9e84069de58ab6b700521
+ms.sourcegitcommit: 4c89d9ea4b834d1963c4818a965eaaaa288194eb
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "76932401"
+ms.lasthandoff: 12/04/2020
+ms.locfileid: "96608485"
 ---
 # <a name="what-is-azure-dns"></a>Présentation d’Azure DNS
 
 Azure DNS est un service d’hébergement pour les domaines DNS qui offre une résolution de noms à l’aide de l’infrastructure Microsoft Azure. En hébergeant vos domaines dans Azure, vous pouvez gérer vos enregistrements DNS à l’aide des mêmes informations d’identification, les mêmes API, les mêmes outils et la même facturation que vos autres services Azure.
 
-Vous ne pouvez pas utiliser Azure DNS pour acheter un nom de domaine. Moyennant un abonnement annuel, vous pouvez acheter un nom de domaine à l’aide des [domaines App Service](https://docs.microsoft.com/azure/app-service/manage-custom-dns-buy-domain#buy-the-domain) ou d’un bureau d’enregistrement de nom de domaine tiers. Vos domaines peuvent alors être hébergés dans Azure DNS pour la gestion des enregistrements. Pour plus d’informations, voir [Délégation de domaine à Azure DNS](dns-domain-delegation.md).
+Vous ne pouvez pas utiliser Azure DNS pour acheter un nom de domaine. Moyennant un abonnement annuel, vous pouvez acheter un nom de domaine à l’aide des [domaines App Service](../app-service/manage-custom-dns-buy-domain.md#buy-an-app-service-domain) ou d’un bureau d’enregistrement de nom de domaine tiers. Vos domaines peuvent alors être hébergés dans Azure DNS pour la gestion des enregistrements. Pour plus d’informations, voir [Délégation de domaine à Azure DNS](dns-domain-delegation.md).
 
 Les fonctionnalités suivantes sont incluses dans Azure DNS.
 
@@ -29,11 +29,11 @@ Les domaines DNS dans Azure DNS sont hébergés sur un réseau global de serveur
 
  Azure DNS est basé sur Azure Resource Manager, vous donnant l’accès à des fonctionnalités telles que :
 
-* [Contrôle d’accès en fonction de rôles](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-overview) : pour déterminer les utilisateurs qui sont autorisés à accéder à des actions spécifiques pour votre organisation.
+* [Contrôle d’accès en fonction de rôles (Azure RBAC)](../azure-resource-manager/management/overview.md) : pour déterminer les utilisateurs qui sont autorisés à accéder à des actions spécifiques pour votre organisation.
 
-* [Journaux d’activité](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-overview) : pour rechercher une erreur lors de la résolution de problèmes ou pour surveiller la manière dont un utilisateur de votre organisation a modifié une ressource.
+* [Journaux d’activité](../azure-resource-manager/management/overview.md) : pour rechercher une erreur lors de la résolution de problèmes ou pour surveiller la manière dont un utilisateur de votre organisation a modifié une ressource.
 
-* [Verrouillage de ressource](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-lock-resources) : pour verrouiller un abonnement, un groupe de ressources ou une ressource. Le verrouillage empêche les utilisateurs de votre organisation de supprimer ou de modifier accidentellement des ressources critiques.
+* [Verrouillage de ressource](../azure-resource-manager/management/lock-resources.md) : pour verrouiller un abonnement, un groupe de ressources ou une ressource. Le verrouillage empêche les utilisateurs de votre organisation de supprimer ou de modifier accidentellement des ressources critiques.
 
 Pour plus d’informations, consultez [Comment protéger les enregistrements et zones DNS](dns-protect-zones-recordsets.md). 
 
@@ -67,7 +67,6 @@ Pour plus d’informations, consultez [Vue d’ensemble des enregistrements d’
 
 * Pour en savoir plus sur les enregistrements et zones DNS, consultez [Vue d’ensemble des enregistrements et zones DNS](dns-zones-records.md).
 
-* Pour en savoir plus sur la création d’une zone dans Azure DNS, consultez [Créer une zone DNS](./dns-getstarted-create-dnszone-portal.md).
+* Pour en savoir plus sur la création d’une zone dans Azure DNS, consultez [Créer une zone DNS](./dns-getstarted-portal.md).
 
 * Pour les questions fréquemment posées sur Azure DNS, consultez le [FAQ sur Azure DNS](dns-faq.md).
-

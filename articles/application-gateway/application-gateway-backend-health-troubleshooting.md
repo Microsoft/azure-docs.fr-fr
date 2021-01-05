@@ -4,15 +4,15 @@ description: Décrit comment résoudre les problèmes d’intégrité des back-e
 services: application-gateway
 author: surajmb
 ms.service: application-gateway
-ms.topic: article
-ms.date: 08/30/2019
+ms.topic: troubleshooting
+ms.date: 06/09/2020
 ms.author: surmb
-ms.openlocfilehash: a16120194b1b8015466005f42336828c2b4ace6c
-ms.sourcegitcommit: 7d8158fcdcc25107dfda98a355bf4ee6343c0f5c
+ms.openlocfilehash: b8acf1b025a5943773821c8ab78de6288eb6bec2
+ms.sourcegitcommit: 0ce1ccdb34ad60321a647c691b0cff3b9d7a39c8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/09/2020
-ms.locfileid: "80983838"
+ms.lasthandoff: 11/05/2020
+ms.locfileid: "93397896"
 ---
 <a name="troubleshoot-backend-health-issues-in-application-gateway"></a>Résoudre les problèmes d’intégrité des back-ends dans Application Gateway
 ==================================================
@@ -24,7 +24,7 @@ Par défaut, Azure Application Gateway sonde les serveurs back-end afin de véri
 
 ### <a name="how-to-check-backend-health"></a>Comment vérifier l’intégrité des back-ends
 
-Vous pouvez vérifier l’intégrité de votre pool de back-ends par le biais de la page **Intégrité principale** du portail Azure. Vous pouvez également utiliser [Azure PowerShell](https://docs.microsoft.com/powershell/module/az.network/get-azapplicationgatewaybackendhealth?view=azps-2.6.0), l’[interface CLI](https://docs.microsoft.com/cli/azure/network/application-gateway?view=azure-cli-latest#az-network-application-gateway-show-backend-health) ou l’[API REST](https://docs.microsoft.com/rest/api/application-gateway/applicationgateways/backendhealth).
+Vous pouvez vérifier l’intégrité de votre pool de back-ends par le biais de la page **Intégrité principale** du portail Azure. Vous pouvez également utiliser [Azure PowerShell](/powershell/module/az.network/get-azapplicationgatewaybackendhealth?view=azps-2.6.0), l’[interface CLI](/cli/azure/network/application-gateway?view=azure-cli-latest#az-network-application-gateway-show-backend-health) ou l’[API REST](/rest/api/application-gateway/applicationgateways/backendhealth).
 
 Toutes ces méthodes font apparaître l’un des états suivants :
 
@@ -81,7 +81,7 @@ Quand vous recevez un état d’intégrité Non sain pour tous les serveurs back
 Le message affiché dans la colonne **Détails** fournit des insights plus détaillés, qui vous aident à entreprendre la résolution du problème.
 
 > [!NOTE]
-> La demande de sondage par défaut est envoyée au format \<protocole\>://127.0.0.1:\<port\>/. Par exemple, http://127.0.0.1:80 pour une sonde HTTP sur le port 80. Seuls les codes d’état HTTP de 200 à 399 sont considérés comme sains. Le protocole et le port de destination sont hérités des paramètres HTTP. Si vous souhaitez qu’Application Gateway sonde sur un autre protocole, nom d’hôte ou chemin et reconnaisse un autre code d’état comme sain, configurez une sonde personnalisée et associez-la aux paramètres HTTP.
+> La demande de sonde par défaut est envoyée au format \<protocol\>://127.0.0.1:\<port\>/. Par exemple, http://127.0.0.1:80 pour une sonde HTTP sur le port 80. Seuls les codes d’état HTTP de 200 à 399 sont considérés comme sains. Le protocole et le port de destination sont hérités des paramètres HTTP. Si vous souhaitez qu’Application Gateway sonde sur un autre protocole, nom d’hôte ou chemin et reconnaisse un autre code d’état comme sain, configurez une sonde personnalisée et associez-la aux paramètres HTTP.
 
 <a name="error-messages"></a>Messages d’erreur
 ------------------------
@@ -91,13 +91,13 @@ Le message affiché dans la colonne **Détails** fournit des insights plus déta
 
 **Cause :** Après avoir envoyé une demande de sondage HTTP(S) au serveur back-end, Application Gateway attend la réponse de ce serveur pendant une période définie. Si le serveur back-end ne répond pas au cours de la période configurée (valeur de délai), il est marqué comme Non sain jusqu’à ce qu’il recommence à répondre (dans le délai imparti).
 
-**Résolution :** Vérifiez la raison pour laquelle l’application ou le serveur back-end ne répond pas dans le délai configuré, et vérifiez les dépendances de l’application. Par exemple, vérifiez si la base de données présente des problèmes susceptibles d’entraîner un retard dans la réponse. Si l’application a le comportement attendu et qu’elle doit répondre seulement après le délai défini, augmentez la valeur du délai dans les paramètres de la sonde personnalisée. Vous devez disposer d’une sonde personnalisée pour modifier la valeur du délai. Pour plus d’informations sur la configuration d’une sonde personnalisée, consultez la [page de documentation](https://docs.microsoft.com/azure/application-gateway/application-gateway-create-probe-portal).
+**Résolution :** Vérifiez la raison pour laquelle l’application ou le serveur back-end ne répond pas dans le délai configuré, et vérifiez les dépendances de l’application. Par exemple, vérifiez si la base de données présente des problèmes susceptibles d’entraîner un retard dans la réponse. Si l’application a le comportement attendu et qu’elle doit répondre seulement après le délai défini, augmentez la valeur du délai dans les paramètres de la sonde personnalisée. Vous devez disposer d’une sonde personnalisée pour modifier la valeur du délai. Pour plus d’informations sur la configuration d’une sonde personnalisée, consultez la [page de documentation](./application-gateway-create-probe-portal.md).
 
 Pour augmenter la valeur du délai, effectuez les étapes suivantes :
 
 1.  Accédez directement au serveur back-end et regardez le temps que le serveur a pris pour répondre sur cette page. Vous pouvez pour cela utiliser n’importe quel outil, y compris les outils de développement d’un navigateur.
 
-1.  Après avoir déterminé le temps de réponse de l’application, sélectionnez l’onglet **Sondes d’intégrité**, puis sélectionnez la sonde associée à vos paramètres HTTP.
+1.  Après avoir déterminé le temps de réponse de l’application, sélectionnez l’onglet **Sondes d’intégrité** , puis sélectionnez la sonde associée à vos paramètres HTTP.
 
 1.  Entrez une valeur de délai supérieure au délai de réponse de l’application, en secondes.
 
@@ -105,7 +105,7 @@ Pour augmenter la valeur du délai, effectuez les étapes suivantes :
 
 #### <a name="dns-resolution-error"></a>Erreur de résolution du DNS
 
-**Message :** Application Gateway n’a pas pu créer de sonde pour ce back-end. Cela se produit généralement quand le nom de domaine complet du back-end n’a pas été entré correctement. 
+**Message :** Application Gateway n’a pas pu créer de sonde pour ce back-end. Cela se produit généralement quand le nom de domaine complet du back-end n’a pas été entré correctement. 
 
 **Cause :** Si le pool de back-ends est de type Adresse IP/Nom de domaine complet ou App Service, Application Gateway résout l’adresse IP du nom de domaine complet entré à l’aide du système DNS (Domain Name System) (personnalisé ou Azure par défaut) et tente de se connecter au serveur sur le port TCP indiqué dans les paramètres HTTP. Toutefois, si ce message s’affiche, cela peut indiquer qu’Application Gateway n’a pas pu résoudre correctement l’adresse IP du nom de domaine complet entré.
 
@@ -119,7 +119,7 @@ Pour augmenter la valeur du délai, effectuez les étapes suivantes :
 
 1.  Si vous utilisez le DNS par défaut d’Azure, vérifiez dans votre registre d’inscription des noms de domaine que le mappage approprié avec un enregistrement A ou un enregistrement CNAME a été effectué.
 
-1.  Si le domaine est privé ou interne, essayez de le résoudre à partir d’une machine virtuelle dans le même réseau virtuel. Si vous pouvez le résoudre, redémarrez Application Gateway et vérifiez de nouveau. Pour redémarrer Application Gateway, vous devez l’[arrêter](https://docs.microsoft.com/powershell/module/azurerm.network/stop-azurermapplicationgateway?view=azurermps-6.13.0) et le [démarrer](https://docs.microsoft.com/powershell/module/azurerm.network/start-azurermapplicationgateway?view=azurermps-6.13.0) à l’aide des commandes PowerShell correspondantes (cliquez sur les liens fournis ici pour plus d’informations).
+1.  Si le domaine est privé ou interne, essayez de le résoudre à partir d’une machine virtuelle dans le même réseau virtuel. Si vous pouvez le résoudre, redémarrez Application Gateway et vérifiez de nouveau. Pour redémarrer Application Gateway, vous devez l’[arrêter](/powershell/module/azurerm.network/stop-azurermapplicationgateway?view=azurermps-6.13.0) et le [démarrer](/powershell/module/azurerm.network/start-azurermapplicationgateway?view=azurermps-6.13.0) à l’aide des commandes PowerShell correspondantes (cliquez sur les liens fournis ici pour plus d’informations).
 
 #### <a name="tcp-connect-error"></a>Erreur de connexion TCP
 
@@ -138,7 +138,7 @@ Vérifiez également qu’aucun NSG, UDR ou pare-feu ne bloque l’accès à l�
 
 1.  Si vous ne réussissez pas non plus à vous connecter sur le port à partir de votre machine locale :
 
-    a.  Vérifiez les paramètres de groupe de sécurité réseau (NSG, network security group) de la carte réseau et du sous-réseau du serveur back-end, et vérifiez si les connexions entrantes sont autorisées sur le port configuré. Si ces connexions ne sont pas autorisées, créez une règle pour les autoriser. Pour savoir comment créer des règles NSG, consultez cette [page de documentation](https://docs.microsoft.com/azure/virtual-network/tutorial-filter-network-traffic#create-security-rules).
+    a.  Vérifiez les paramètres de groupe de sécurité réseau (NSG, network security group) de la carte réseau et du sous-réseau du serveur back-end, et vérifiez si les connexions entrantes sont autorisées sur le port configuré. Si ces connexions ne sont pas autorisées, créez une règle pour les autoriser. Pour savoir comment créer des règles NSG, consultez cette [page de documentation](../virtual-network/tutorial-filter-network-traffic.md#create-security-rules).
 
     b.  Vérifiez si les paramètres NSG du sous-réseau d’Application Gateway autorisent le trafic public et privé sortant, pour que la connexion puisse être établie. Consultez la page de documentation indiquée à l’étape 3a pour en savoir plus sur la création de règles NSG.
     ```azurepowershell
@@ -170,13 +170,13 @@ Vérifiez également qu’aucun NSG, UDR ou pare-feu ne bloque l’accès à l�
 
 **Message :** Le code d\'état de la réponse HTTP du back-end ne correspond pas au paramètre de la sonde. Attendu :{HTTPStatusCode0} Reçu :{HTTPStatusCode1}.
 
-**Cause :** Une fois que la connexion TCP a été établie et que la négociation TLS est terminée (si TLS est activé), Application Gateway envoie la sonde sous forme de requête HTTP GET au serveur back-end. Comme décrit plus haut, la sonde par défaut est envoyée au format \<protocole\>://127.0.0.1:\<port\>/ et considère comme sains les codes d’état de réponse compris entre 200 et 399. Si le serveur retourne un autre code d’état, il est marqué comme Non sain, avec ce message.
+**Cause :** Une fois que la connexion TCP a été établie et que la négociation TLS est terminée (si TLS est activé), Application Gateway envoie la sonde sous forme de requête HTTP GET au serveur back-end. Comme décrit plus haut, la sonde par défaut est envoyée à \<protocol\>://127.0.0.1:\<port\>/ et considère comme intègre les codes d’état de la réponse compris entre 200 et 399. Si le serveur retourne un autre code d’état, il est marqué comme Non sain, avec ce message.
 
 **Solution :** Selon le code de réponse du serveur back-end, effectuez les étapes appropriées parmi les suivantes. Quelques codes d’état courants sont décrits ici :
 
 | **Error** | **Actions** |
 | --- | --- |
-| Non-correspondance du code d’état de la sonde : Réponse 401 reçue | Vérifiez si le serveur back-end nécessite une authentification. Les sondes d’Application Gateway ne peuvent pas passer ici les informations d’identification pour l’authentification. Autorisez la réponse \"HTTP 401\" dans une correspondance de code d’état de la sonde ou configurez la sonde sur un chemin où le serveur ne nécessite pas d’authentification. | |
+| Non-correspondance du code d’état de la sonde : Réponse 401 reçue | Vérifiez si le serveur back-end nécessite une authentification. Les sondes Application Gateway ne peuvent pas transmettre d’informations d’identification pour l’authentification. Autorisez la réponse \"HTTP 401\" dans une correspondance de code d’état de la sonde ou configurez la sonde sur un chemin où le serveur ne nécessite pas d’authentification. | |
 | Non-correspondance du code d’état de la sonde : Réponse 403 reçue | Accès interdit. Vérifiez que l’accès au chemin est autorisé sur le serveur back-end. | |
 | Non-correspondance du code d’état de la sonde : Réponse 404 reçue | Page introuvable. Vérifiez si le chemin du nom d’hôte est accessible sur le serveur back-end. Affectez au paramètre du chemin ou du nom d’hôte une valeur accessible. | |
 | Non-correspondance du code d’état de la sonde : Réponse 405 reçue | Les demandes de sondage d’Application Gateway utilisent la méthode HTTP GET. Vérifiez que votre serveur autorise cette méthode. | |
@@ -185,13 +185,13 @@ Vérifiez également qu’aucun NSG, UDR ou pare-feu ne bloque l’accès à l�
 
 Si vous pensez que la réponse est légitime et que vous souhaitez qu’Application Gateway considère d’autres codes d’état comme sains, vous pouvez créer une sonde personnalisée. Cette approche est utile dans les situations où le site web back-end nécessite une authentification. Les demandes de sondage échouent, car elles ne contiennent pas d’informations d’identification d’utilisateur. Un code d’état HTTP 401 est alors retourné par le serveur back-end.
 
-Pour créer une sonde personnalisée, effectuez les étapes décrites [ici](https://docs.microsoft.com/azure/application-gateway/application-gateway-create-probe-portal).
+Pour créer une sonde personnalisée, effectuez les étapes décrites [ici](./application-gateway-create-probe-portal.md).
 
 #### <a name="http-response-body-mismatch"></a>Non-correspondance du corps de la réponse HTTP
 
 **Message :** Le corps de la réponse HTTP du back-end ne correspond pas au paramètre de la sonde. Le corps de la réponse reçue ne contient pas l’élément {string}.
 
-**Cause :** Quand vous créez une sonde personnalisée, vous pouvez marquer un serveur back-end comme Sain en mettant en correspondance une chaîne du corps de la réponse. Par exemple, configurez Application Gateway pour accepter la mise en correspondance de la chaîne « non autorisé ». Si la réponse du serveur back-end à la demande de sondage contient la chaîne **non autorisé**, le serveur est marqué comme Sain. Sinon, il est marqué comme Non sain, avec ce message.
+**Cause :** Quand vous créez une sonde personnalisée, vous pouvez marquer un serveur back-end comme Sain en mettant en correspondance une chaîne du corps de la réponse. Par exemple, configurez Application Gateway pour accepter la mise en correspondance de la chaîne « non autorisé ». Si la réponse du serveur back-end à la demande de sondage contient la chaîne **non autorisé** , le serveur est marqué comme Sain. Sinon, il est marqué comme Non sain, avec ce message.
 
 **Solution :** Pour résoudre ce problème, effectuez les étapes suivantes :
 
@@ -201,11 +201,15 @@ Pour créer une sonde personnalisée, effectuez les étapes décrites [ici](http
 
 1.  Si ce n’est pas le cas, modifiez la configuration de la sonde en indiquant la valeur de chaîne correcte à accepter.
 
-Pour en savoir plus sur la correspondance des sondes d’Application Gateway, [consultez cette section](https://docs.microsoft.com/azure/application-gateway/application-gateway-probe-overview#probe-matching).
+Pour en savoir plus sur la correspondance des sondes d’Application Gateway, [consultez cette section](./application-gateway-probe-overview.md#probe-matching).
+
+>[!NOTE]
+> Pour tous les messages d’erreur liés au protocole TLS, consultez la page de [présentation de TLS](ssl-overview.md) afin d’en savoir plus sur le comportement SNI et les différences entre les références SKU v1 et v2.
+
 
 #### <a name="backend-server-certificate-invalid-ca"></a>Autorité de certification non valide pour le certificat du serveur back-end
 
-**Message :** Le certificat de serveur utilisé par le serveur back-end n’est pas signé par une autorité de certification reconnue. Ajoutez le serveur back-end à la liste approuvée d’Application Gateway en chargeant le certificat racine du certificat de serveur qui est utilisé par le serveur back-end.
+**Message :** Le certificat de serveur utilisé par le serveur back-end n’est pas signé par une autorité de certification reconnue. Autorisez le back-end sur l’instance Application Gateway en chargeant le certificat racine du certificat de serveur utilisé par le back-end.
 
 **Cause :** Le chiffrement SSL de bout en bout avec Application Gateway v2 implique la vérification du certificat du serveur back-end pour garantir que le serveur est sain.
 Pour qu’un certificat TLS/SSL soit approuvé, ce certificat utilisé par le serveur back-end doit être émis par l’une des autorités de certification figurant dans le magasin de certificats approuvés d’Application Gateway. Si le certificat n’a pas été émis par une autorité de certification approuvée (ce qui est le cas des certificats auto-signés, par exemple), les utilisateurs doivent charger le certificat de l’émetteur dans Application Gateway.
@@ -214,7 +218,7 @@ Pour qu’un certificat TLS/SSL soit approuvé, ce certificat utilisé par le se
 
 1.  Connectez-vous à la machine qui héberge votre application.
 
-1.  Appuyez sur les touches Win+R ou cliquez avec le bouton droit sur le bouton **Démarrer**, puis sélectionnez **Exécuter**.
+1.  Appuyez sur les touches Win+R ou cliquez avec le bouton droit sur le bouton **Démarrer** , puis sélectionnez **Exécuter**.
 
 1.  Entrez `certmgr.msc`, puis appuyez sur Entrée. Vous pouvez également ouvrir le gestionnaire de certificats à partir du menu **Démarrer**.
 
@@ -224,7 +228,7 @@ Pour qu’un certificat TLS/SSL soit approuvé, ce certificat utilisé par le se
 
 1.  Dans les propriétés du certificat, sélectionnez l’onglet **Détails**.
 
-1.  Dans l’onglet **Détails**, sélectionnez l’option **Copier dans un fichier**, puis enregistrez le fichier au format X.509 encodé en base 64 (.CER).
+1.  Dans l’onglet **Détails** , sélectionnez l’option **Copier dans un fichier** , puis enregistrez le fichier au format X.509 encodé en base 64 (.CER).
 
 1.  Ouvrez la page des **paramètres** HTTP d’Application Gateway dans le portail Azure.
 
@@ -234,7 +238,7 @@ Pour qu’un certificat TLS/SSL soit approuvé, ce certificat utilisé par le se
 
 Vous pouvez aussi exporter le certificat racine à partir d’une machine cliente en accédant directement au serveur (sans passer par Application Gateway) à l’aide d’un navigateur et en exportant le certificat racine à partir du navigateur.
 
-Pour plus d’informations sur l’extraction et le chargement de certificats racines approuvés dans Application Gateway, consultez [Exporter le certificat racine approuvé (pour le SKU v2)](https://docs.microsoft.com/azure/application-gateway/certificates-for-backend-authentication#export-trusted-root-certificate-for-v2-sku).
+Pour plus d’informations sur l’extraction et le chargement de certificats racines approuvés dans Application Gateway, consultez [Exporter le certificat racine approuvé (pour le SKU v2)](./certificates-for-backend-authentication.md#export-trusted-root-certificate-for-v2-sku).
 
 #### <a name="trusted-root-certificate-mismatch"></a>Non-correspondance du certificat racine approuvé
 
@@ -249,7 +253,7 @@ Le certificat qui a été chargé dans les paramètres HTTP d’Application Gate
 
 Effectuez les étapes 1-11 de la méthode précédente pour charger le certificat racine approuvé correct dans Application Gateway.
 
-Pour plus d’informations sur l’extraction et le chargement de certificats racines approuvés dans Application Gateway, consultez [Exporter le certificat racine approuvé (pour le SKU v2)](https://docs.microsoft.com/azure/application-gateway/certificates-for-backend-authentication#export-trusted-root-certificate-for-v2-sku).
+Pour plus d’informations sur l’extraction et le chargement de certificats racines approuvés dans Application Gateway, consultez [Exporter le certificat racine approuvé (pour le SKU v2)](./certificates-for-backend-authentication.md#export-trusted-root-certificate-for-v2-sku).
 > [!NOTE]
 > Cette erreur peut également se produire si le serveur back-end ne passe pas la chaîne complète du certificat, y compris les éléments Root > Intermediate (le cas échéant) > Leaf pendant la négociation TLS. Pour vérifier ce point, utilisez les commandes OpenSSL à partir de n’importe quel client et connectez-vous au serveur back-end avec les paramètres configurés dans la sonde d’Application Gateway.
 
@@ -280,7 +284,7 @@ Si la sortie n’affiche pas la chaîne complète du certificat retourné, réex
 
 **Message :** Le nom commun (CN) du certificat du back-end ne correspond pas à l’en-tête d’hôte de la sonde.
 
-**Cause :** Application Gateway vérifie si le nom d’hôte spécifié dans les paramètres HTTP du back-end correspond au nom commun (CN) présenté par le certificat TLS/SSL du serveur back-end. Ce comportement s’applique aux références SKU Standard_v2 et WAF_v2. L’indication du nom du serveur (SNI, Server Name Indication) des références SKU Standard et WAF est définie comme nom de domaine complet dans l’adresse du pool de back-ends.
+**Cause :** Application Gateway vérifie si le nom d’hôte spécifié dans les paramètres HTTP du back-end correspond au nom commun (CN) présenté par le certificat TLS/SSL du serveur back-end. Ce comportement (v2) s’applique aux références SKU Standard_v2 et WAF_v2. L’indication du nom du serveur (SNI, Server Name Indication) (v1) des références SKU Standard et WAF est définie comme le nom de domaine complet dans le pool d’adresses back-end. Pour plus d’informations sur le comportement SNI et les différences entre les références SKU v1 et v2, consultez [Présentation de la terminaison TLS et du chiffrement TLS de bout en bout avec Application Gateway](ssl-overview.md).
 
 Dans la référence SKU v2, en présence d’une sonde par défaut (aucune sonde personnalisée n’a été configurée et associée), le SNI est défini à partir du nom d’hôte mentionné dans les paramètres HTTP. Si l’option « Choisir un nom d’hôte à partir d’une adresse back-end » est activée dans les paramètres HTTP et que le pool d’adresses back-end contient un nom de domaine complet valide, ce paramètre est appliqué.
 
@@ -298,13 +302,13 @@ Pour Windows :
 
 1.  Connectez-vous à la machine qui héberge votre application.
 
-1.  Appuyez sur les touches Win+R ou cliquez avec le bouton droit sur le bouton **Démarrer**, puis sélectionnez **Exécuter**.
+1.  Appuyez sur les touches Win+R ou cliquez avec le bouton droit sur le bouton **Démarrer** , puis sélectionnez **Exécuter**.
 
 1.  Entrez **certmgr.msc** et appuyez sur Entrée. Vous pouvez également ouvrir le gestionnaire de certificats à partir du menu **Démarrer**.
 
 1.  Localisez le certificat (généralement sous `\Certificates - Current User\\Personal\\Certificates`), et ouvrez-le.
 
-1.  Dans l’onglet **Détails**, vérifiez l’objet du certificat sous **Objet**.
+1.  Dans l’onglet **Détails** , vérifiez l’objet du certificat sous **Objet**.
 
 1.  Vérifiez le nom commun du certificat indiqué dans les détails et entrez le même nom dans le champ du nom d’hôte de la sonde personnalisée ou des paramètres HTTP (quand l’option **Choisir le nom d’hôte dans les paramètres HTTP de back-end** est activée). Si ce n’est pas le nom d’hôte souhaité pour votre site web, vous devez obtenir un certificat pour ce domaine ou entrer le nom d’hôte correct dans la configuration de la sonde personnalisée ou des paramètres HTTP.
 
@@ -355,9 +359,9 @@ Ce comportement peut être dû à différentes raisons :
 
 **Solution :**
 
-1.  Vérifiez si votre NSG bloque l’accès aux ports 65503-65534 (SKU v1) ou 65200-65535 (SKU v2) à partir d’**Internet** :
+1.  Vérifiez si votre NSG bloque l’accès aux ports 65503-65534 (SKU v1) ou 65200-65535 (SKU v2) à partir d’ **Internet**  :
 
-    a.  Dans Application Gateway, sous l’onglet **Vue d’ensemble**, sélectionnez le lien **Réseau/sous-réseau virtuel**.
+    a.  Dans Application Gateway, sous l’onglet **Vue d’ensemble** , sélectionnez le lien **Réseau/sous-réseau virtuel**.
 
     b.  Dans l’onglet **Sous-réseaux** de votre réseau virtuel, sélectionnez le sous-réseau où Application Gateway a été déployé.
 
@@ -365,19 +369,19 @@ Ce comportement peut être dû à différentes raisons :
 
     d.  Si un NSG est configuré, recherchez cette ressource NSG dans l’onglet **Recherche** ou sous **Toutes les ressources**.
 
-    e.  Dans la section **Règles de trafic entrant**, ajoutez une règle de trafic entrant pour autoriser la plage de ports de destination 65503-65534 pour la référence SKU v1 ou 65200-65535 pour la référence SKU v2, avec le paramètre **Source** défini sur **N’importe laquelle** ou **Internet**.
+    e.  Dans la section **Règles de trafic entrant** , ajoutez une règle de trafic entrant pour autoriser la plage de ports de destination 65503-65534 pour la référence SKU v1 ou 65200-65535 pour la référence SKU v2, avec le paramètre **Source** défini sur **N’importe laquelle** ou **Internet**.
 
-    f.  Sélectionnez **Enregistrer** et vérifiez que le back-end apparaît comme Sain. Vous pouvez également faire cette vérification à l’aide de [PowerShell/CLI](https://docs.microsoft.com/azure/virtual-network/manage-network-security-group).
+    f.  Sélectionnez **Enregistrer** et vérifiez que le back-end apparaît comme Sain. Vous pouvez également faire cette vérification à l’aide de [PowerShell/CLI](../virtual-network/manage-network-security-group.md).
 
-1.  Vérifiez si votre UDR a une route par défaut (0.0.0.0/0) avec le tronçon suivant non défini comme **Internet** :
+1.  Vérifiez si votre UDR a une route par défaut (0.0.0.0/0) avec le tronçon suivant non défini comme **Internet**  :
     
     a.  Effectuez les étapes 1a et 1b pour identifier votre sous-réseau.
 
     b.  Vérifiez si des UDR sont configurés. Si c’est le cas, recherchez la ressource dans la barre de recherche ou sous **Toutes les ressources**.
 
-    c.  Vérifiez la présence de routes par défaut (0.0.0.0/0) avec le tronçon suivant non défini comme **Internet**. Si le paramètre est **Appliance virtuelle** ou **Passerelle de réseau virtuel**, assurez-vous que l’appliance virtuelle ou l’appareil local est en mesure de rediriger correctement le paquet vers la destination Internet sans le modifier.
+    c.  Vérifiez la présence de routes par défaut (0.0.0.0/0) avec le tronçon suivant non défini comme **Internet**. Si le paramètre est **Appliance virtuelle** ou **Passerelle de réseau virtuel** , assurez-vous que l’appliance virtuelle ou l’appareil local est en mesure de rediriger correctement le paquet vers la destination Internet sans le modifier.
 
-    d.  Si ce n’est pas le cas, définissez le tronçon suivant sur **Internet**, sélectionnez **Enregistrer**, puis vérifiez l’intégrité du serveur back-end.
+    d.  Si ce n’est pas le cas, définissez le tronçon suivant sur **Internet** , sélectionnez **Enregistrer** , puis vérifiez l’intégrité du serveur back-end.
 
 1.  Une route par défaut annoncée par la connexion ExpressRoute/VPN au réseau virtuel avec le protocole BGP :
 
@@ -389,9 +393,9 @@ Ce comportement peut être dû à différentes raisons :
 
 1.  Si un serveur DNS personnalisé est configuré sur le réseau virtuel, vérifiez que le ou les serveurs peuvent résoudre les domaines publics. La résolution des noms de domaines publics peut être nécessaire dans les scénarios où Application Gateway doit accéder à des domaines externes tels que des serveurs OCSP ou pour vérifier l’état de révocation du certificat.
 
-1.  Pour vérifier si Application Gateway est sain et en cours d’exécution, accédez à l’option **Intégrité des ressources** dans le portail et vérifiez que l’état est **Sain**. Si l’état est **Non sain** ou **Dégradé**, [contactez le support](https://azure.microsoft.com/support/options/).
+1.  Pour vérifier si Application Gateway est sain et en cours d’exécution, accédez à l’option **Intégrité des ressources** dans le portail et vérifiez que l’état est **Sain**. Si l’état est **Non sain** ou **Dégradé** , [contactez le support](https://azure.microsoft.com/support/options/).
 
 <a name="next-steps"></a>Étapes suivantes
 ----------
 
-Apprenez-en davantage sur [les diagnostics et la journalisation dans Application Gateway](https://docs.microsoft.com/azure/application-gateway/application-gateway-diagnostics).
+Apprenez-en davantage sur [les diagnostics et la journalisation dans Application Gateway](./application-gateway-diagnostics.md).

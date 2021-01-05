@@ -5,12 +5,13 @@ author: craigshoemaker
 ms.topic: reference
 ms.date: 02/21/2020
 ms.author: cshoe
-ms.openlocfilehash: 045f3ccdc8dc09bf657ab39ce15a0d0524c73fcb
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp, devx-track-python
+ms.openlocfilehash: 6466647056535635b67cd53012d051f11e9b484c
+ms.sourcegitcommit: 32c521a2ef396d121e71ba682e098092ac673b30
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79235197"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91323309"
 ---
 # <a name="azure-functions-http-trigger"></a>Déclencheur HTTP Azure Functions
 
@@ -36,7 +37,7 @@ L’exemple suivant montre une [fonction C#](functions-dotnet-class-library.md) 
 ```cs
 [FunctionName("HttpTriggerCSharp")]
 public static async Task<IActionResult> Run(
-    [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] 
+    [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)]
     HttpRequest req, ILogger log)
 {
     log.LogInformation("C# HTTP trigger function processed a request.");
@@ -127,111 +128,6 @@ public static string Run(Person person, ILogger log)
 public class Person {
      public string Name {get; set;}
 }
-```
-
-# <a name="javascript"></a>[JavaScript](#tab/javascript)
-
-L’exemple suivant montre une liaison de déclencheur dans un fichier *function.json* et une [fonction JavaScript](functions-reference-node.md) qui utilise la liaison. Cette fonction recherche un paramètre `name` dans la chaîne de requête ou dans le corps de la requête HTTP.
-
-Voici le fichier *function.json* :
-
-```json
-{
-    "disabled": false,    
-    "bindings": [
-        {
-            "authLevel": "function",
-            "type": "httpTrigger",
-            "direction": "in",
-            "name": "req"
-        },
-        {
-            "type": "http",
-            "direction": "out",
-            "name": "res"
-        }
-    ]
-}
-```
-
-La section [configuration](#configuration) décrit ces propriétés.
-
-Voici le code JavaScript :
-
-```javascript
-module.exports = function(context, req) {
-    context.log('Node.js HTTP trigger function processed a request. RequestUri=%s', req.originalUrl);
-
-    if (req.query.name || (req.body && req.body.name)) {
-        context.res = {
-            // status defaults to 200 */
-            body: "Hello " + (req.query.name || req.body.name)
-        };
-    }
-    else {
-        context.res = {
-            status: 400,
-            body: "Please pass a name on the query string or in the request body"
-        };
-    }
-    context.done();
-};
-```
-
-# <a name="python"></a>[Python](#tab/python)
-
-L’exemple suivant montre une liaison de déclencheur dans un fichier *function.json* et une [fonction Python](functions-reference-python.md) qui utilise la liaison. Cette fonction recherche un paramètre `name` dans la chaîne de requête ou dans le corps de la requête HTTP.
-
-Voici le fichier *function.json* :
-
-```json
-{
-    "scriptFile": "__init__.py",
-    "disabled": false,    
-    "bindings": [
-        {
-            "authLevel": "function",
-            "type": "httpTrigger",
-            "direction": "in",
-            "name": "req"
-        },
-        {
-            "type": "http",
-            "direction": "out",
-            "name": "res"
-        }
-    ]
-}
-```
-
-La section [configuration](#configuration) décrit ces propriétés.
-
-Voici le code Python :
-
-```python
-import logging
-import azure.functions as func
-
-
-def main(req: func.HttpRequest) -> func.HttpResponse:
-    logging.info('Python HTTP trigger function processed a request.')
-
-    name = req.params.get('name')
-    if not name:
-        try:
-            req_body = req.get_json()
-        except ValueError:
-            pass
-        else:
-            name = req_body.get('name')
-
-    if name:
-        return func.HttpResponse(f"Hello {name}!")
-    else:
-        return func.HttpResponse(
-            "Please pass a name on the query string or in the request body",
-            status_code=400
-        )
 ```
 
 # <a name="java"></a>[Java](#tab/java)
@@ -420,6 +316,166 @@ public HttpResponseMessage run(
 }
 ```
 
+# <a name="javascript"></a>[JavaScript](#tab/javascript)
+
+L’exemple suivant montre une liaison de déclencheur dans un fichier *function.json* et une [fonction JavaScript](functions-reference-node.md) qui utilise la liaison. Cette fonction recherche un paramètre `name` dans la chaîne de requête ou dans le corps de la requête HTTP.
+
+Voici le fichier *function.json* :
+
+```json
+{
+    "disabled": false,    
+    "bindings": [
+        {
+            "authLevel": "function",
+            "type": "httpTrigger",
+            "direction": "in",
+            "name": "req"
+        },
+        {
+            "type": "http",
+            "direction": "out",
+            "name": "res"
+        }
+    ]
+}
+```
+
+La section [configuration](#configuration) décrit ces propriétés.
+
+Voici le code JavaScript :
+
+```javascript
+module.exports = function(context, req) {
+    context.log('Node.js HTTP trigger function processed a request. RequestUri=%s', req.originalUrl);
+
+    if (req.query.name || (req.body && req.body.name)) {
+        context.res = {
+            // status defaults to 200 */
+            body: "Hello " + (req.query.name || req.body.name)
+        };
+    }
+    else {
+        context.res = {
+            status: 400,
+            body: "Please pass a name on the query string or in the request body"
+        };
+    }
+    context.done();
+};
+```
+
+# <a name="powershell"></a>[PowerShell](#tab/powershell)
+
+L’exemple suivant montre une liaison de déclencheur dans un fichier *function.json* et une [fonction PowerShell](functions-reference-node.md). Cette fonction recherche un paramètre `name` dans la chaîne de requête ou dans le corps de la requête HTTP.
+
+```json
+{
+  "bindings": [
+    {
+      "authLevel": "function",
+      "type": "httpTrigger",
+      "direction": "in",
+      "name": "Request",
+      "methods": [
+        "get",
+        "post"
+      ]
+    },
+    {
+      "type": "http",
+      "direction": "out",
+      "name": "Response"
+    }
+  ]
+}
+```
+
+```powershell
+using namespace System.Net
+
+# Input bindings are passed in via param block.
+param($Request, $TriggerMetadata)
+
+# Write to the Azure Functions log stream.
+Write-Host "PowerShell HTTP trigger function processed a request."
+
+# Interact with query parameters or the body of the request.
+$name = $Request.Query.Name
+if (-not $name) {
+    $name = $Request.Body.Name
+}
+
+$body = "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response."
+
+if ($name) {
+    $body = "Hello, $name. This HTTP triggered function executed successfully."
+}
+
+# Associate values to output bindings by calling 'Push-OutputBinding'.
+Push-OutputBinding -Name Response -Value ([HttpResponseContext]@{
+    StatusCode = [HttpStatusCode]::OK
+    Body       = $body
+})
+```
+
+
+# <a name="python"></a>[Python](#tab/python)
+
+L’exemple suivant montre une liaison de déclencheur dans un fichier *function.json* et une [fonction Python](functions-reference-python.md) qui utilise la liaison. Cette fonction recherche un paramètre `name` dans la chaîne de requête ou dans le corps de la requête HTTP.
+
+Voici le fichier *function.json* :
+
+```json
+{
+    "scriptFile": "__init__.py",
+    "disabled": false,    
+    "bindings": [
+        {
+            "authLevel": "function",
+            "type": "httpTrigger",
+            "direction": "in",
+            "name": "req"
+        },
+        {
+            "type": "http",
+            "direction": "out",
+            "name": "res"
+        }
+    ]
+}
+```
+
+La section [configuration](#configuration) décrit ces propriétés.
+
+Voici le code Python :
+
+```python
+import logging
+import azure.functions as func
+
+
+def main(req: func.HttpRequest) -> func.HttpResponse:
+    logging.info('Python HTTP trigger function processed a request.')
+
+    name = req.params.get('name')
+    if not name:
+        try:
+            req_body = req.get_json()
+        except ValueError:
+            pass
+        else:
+            name = req_body.get('name')
+
+    if name:
+        return func.HttpResponse(f"Hello {name}!")
+    else:
+        return func.HttpResponse(
+            "Please pass a name on the query string or in the request body",
+            status_code=400
+        )
+```
+
 ---
 
 ## <a name="attributes-and-annotations"></a>Attributs et annotations
@@ -447,14 +503,6 @@ Pour obtenir un exemple complet, consultez l’[exemple de déclencheur](#exampl
 
 Les attributs ne sont pas pris en charge par le script C#.
 
-# <a name="javascript"></a>[JavaScript](#tab/javascript)
-
-Les attributs ne sont pas pris en charge par JavaScript.
-
-# <a name="python"></a>[Python](#tab/python)
-
-Les attributs ne sont pas pris en charge par Python.
-
 # <a name="java"></a>[Java](#tab/java)
 
 Cet exemple montre comment utiliser l’attribut [HttpTrigger](https://github.com/Azure/azure-functions-java-library/blob/dev/src/main/java/com/microsoft/azure/functions/annotation/HttpTrigger.java).
@@ -472,6 +520,18 @@ public HttpResponseMessage<String> HttpTrigger(
 ```
 
 Pour obtenir un exemple complet, consultez l’[exemple de déclencheur](#example).
+
+# <a name="javascript"></a>[JavaScript](#tab/javascript)
+
+Les attributs ne sont pas pris en charge par JavaScript.
+
+# <a name="powershell"></a>[PowerShell](#tab/powershell)
+
+Les attributs ne sont pas pris en charge par PowerShell.
+
+# <a name="python"></a>[Python](#tab/python)
+
+Les attributs ne sont pas pris en charge par Python.
 
 ---
 
@@ -497,7 +557,9 @@ Le type d’entrée du déclencheur est déclaré comme étant `HttpRequest` ou 
 
 Par défaut, quand vous créez une fonction pour un déclencheur HTTP, la fonction est adressable avec une route de la forme :
 
-    http://<APP_NAME>.azurewebsites.net/api/<FUNCTION_NAME>
+```http
+http://<APP_NAME>.azurewebsites.net/api/<FUNCTION_NAME>
+```
 
 Vous pouvez personnaliser cet itinéraire en utilisant la propriété facultative `route` sur la liaison d’entrée du déclencheur HTTP. Par exemple, le fichier *function.json* suivant définit une propriété `route` pour un déclencheur HTTP :
 
@@ -562,47 +624,6 @@ public static IActionResult Run(HttpRequest req, string category, int? id, ILogg
 }
 ```
 
-# <a name="javascript"></a>[JavaScript](#tab/javascript)
-
-Dans Node, le runtime Functions fournit le corps de la demande à partir de l’objet `context`. Pour plus d’informations, consultez l’[exemple de déclencheur JavaScript](#example).
-
-L’exemple suivant vous indique comment lire les paramètres de routage à partir de `context.bindingData`.
-
-```javascript
-module.exports = function (context, req) {
-
-    var category = context.bindingData.category;
-    var id = context.bindingData.id;
-    var message = `Category: ${category}, ID: ${id}`;
-
-    context.res = {
-        body: message;
-    }
-
-    context.done();
-}
-```
-
-# <a name="python"></a>[Python](#tab/python)
-
-Le contexte d’exécution de la fonction est exposé par le biais d’un paramètre déclaré comme en tant que `func.HttpRequest`. Cette instance permet à une fonction d’accéder à des paramètres d’acheminement des données, des valeurs de chaîne de requête et des méthodes qui vous permettent de retourner des réponses HTTP.
-
-Une fois définis, les paramètres d’acheminement sont disponibles pour la fonction en appelant la méthode `route_params`.
-
-```python
-import logging
-
-import azure.functions as func
-
-def main(req: func.HttpRequest) -> func.HttpResponse:
-
-    category = req.route_params.get('category')
-    id = req.route_params.get('id')
-    message = f"Category: {category}, ID: {id}"
-
-    return func.HttpResponse(message)
-```
-
 # <a name="java"></a>[Java](#tab/java)
 
 Le contexte d’exécution de la fonction correspond à des propriétés déclarées dans l’attribut `HttpTrigger`. L’attribut vous permet de définir des paramètres d’acheminement, des niveaux d’autorisation, des verbes HTTP et l’instance de requête entrante.
@@ -632,14 +653,73 @@ public class HttpTriggerJava {
 }
 ```
 
+# <a name="javascript"></a>[JavaScript](#tab/javascript)
+
+Dans Node, le runtime Functions fournit le corps de la demande à partir de l’objet `context`. Pour plus d’informations, consultez l’[exemple de déclencheur JavaScript](#example).
+
+L’exemple suivant vous indique comment lire les paramètres de routage à partir de `context.bindingData`.
+
+```javascript
+module.exports = function (context, req) {
+
+    var category = context.bindingData.category;
+    var id = context.bindingData.id;
+    var message = `Category: ${category}, ID: ${id}`;
+
+    context.res = {
+        body: message;
+    }
+
+    context.done();
+}
+```
+
+# <a name="powershell"></a>[PowerShell](#tab/powershell)
+
+Les paramètres de routage déclarés dans le fichier *function.json* sont accessibles en tant que propriété de l’objet `$Request.Params`.
+
+```powershell
+$Category = $Request.Params.category
+$Id = $Request.Params.id
+
+$Message = "Category:" + $Category + ", ID: " + $Id
+
+Push-OutputBinding -Name Response -Value ([HttpResponseContext]@{
+    StatusCode = [HttpStatusCode]::OK
+    Body = $Message
+})
+```
+
+# <a name="python"></a>[Python](#tab/python)
+
+Le contexte d’exécution de la fonction est exposé par le biais d’un paramètre déclaré comme en tant que `func.HttpRequest`. Cette instance permet à une fonction d’accéder à des paramètres d’acheminement des données, des valeurs de chaîne de requête et des méthodes qui vous permettent de retourner des réponses HTTP.
+
+Une fois définis, les paramètres d’acheminement sont disponibles pour la fonction en appelant la méthode `route_params`.
+
+```python
+import logging
+
+import azure.functions as func
+
+def main(req: func.HttpRequest) -> func.HttpResponse:
+
+    category = req.route_params.get('category')
+    id = req.route_params.get('id')
+    message = f"Category: {category}, ID: {id}"
+
+    return func.HttpResponse(message)
+```
+
 ---
 
-Par défaut, tous les itinéraires de fonction sont préfixés par *api*. Vous pouvez également personnaliser ou supprimer le préfixe avec la propriété `http.routePrefix` dans votre fichier [host.json](functions-host-json.md). L’exemple suivant supprime le préfixe d’itinéraire *api* en sélectionnant une chaîne vide pour le préfixe dans le fichier *host.json*.
+Par défaut, tous les itinéraires de fonction sont préfixés par *api*. Vous pouvez également personnaliser ou supprimer le préfixe avec la propriété `extensions.http.routePrefix` dans votre fichier [host.json](functions-host-json.md). L’exemple suivant supprime le préfixe d’itinéraire *api* en sélectionnant une chaîne vide pour le préfixe dans le fichier *host.json*.
 
 ```json
 {
-    "http": {
-    "routePrefix": ""
+    "extensions": {
+        "http": {
+            "routePrefix": ""
+        }
     }
 }
 ```
@@ -663,13 +743,13 @@ La configuration suivante montre comment le paramètre `{id}` est passé au `row
 
 ## <a name="working-with-client-identities"></a>Utilisation d’identités de clients
 
-S votre application de fonction utilise [Authentification d’App Service/Autorisation](../app-service/overview-authentication-authorization.md), vous pouvez afficher des informations sur les clients authentifiés à partir de votre code. Ces informations sont disponibles en tant qu’[en-têtes de demande injectées par la plateforme](../app-service/app-service-authentication-how-to.md#access-user-claims). 
+S votre application de fonction utilise [Authentification d’App Service/Autorisation](../app-service/overview-authentication-authorization.md), vous pouvez afficher des informations sur les clients authentifiés à partir de votre code. Ces informations sont disponibles en tant qu’[en-têtes de demande injectées par la plateforme](../app-service/app-service-authentication-how-to.md#access-user-claims).
 
 Vous pouvez également lire ces informations à partir de la liaison de données. Cette fonctionnalité est uniquement disponible pour le runtime Functions dans les versions 2.x et ultérieures. Elle n’est actuellement également disponible que pour les langages .NET.
 
 # <a name="c"></a>[C#](#tab/csharp)
 
-Les informations relatives aux clients authentifiés sont disponibles en tant que [ClaimsPrincipal](https://docs.microsoft.com/dotnet/api/system.security.claims.claimsprincipal). Le ClaimsPrincipal est disponible dans le cadre du contexte de requête, comme le montre l’exemple suivant :
+Les informations relatives aux clients authentifiés sont disponibles en tant que [ClaimsPrincipal](/dotnet/api/system.security.claims.claimsprincipal). Le ClaimsPrincipal est disponible dans le cadre du contexte de requête, comme le montre l’exemple suivant :
 
 ```csharp
 using System.Net;
@@ -701,7 +781,7 @@ public static void Run(JObject input, ClaimsPrincipal principal, ILogger log)
 
 # <a name="c-script"></a>[Script C#](#tab/csharp-script)
 
-Les informations relatives aux clients authentifiés sont disponibles en tant que [ClaimsPrincipal](https://docs.microsoft.com/dotnet/api/system.security.claims.claimsprincipal). Le ClaimsPrincipal est disponible dans le cadre du contexte de requête, comme le montre l’exemple suivant :
+Les informations relatives aux clients authentifiés sont disponibles en tant que [ClaimsPrincipal](/dotnet/api/system.security.claims.claimsprincipal). Le ClaimsPrincipal est disponible dans le cadre du contexte de requête, comme le montre l’exemple suivant :
 
 ```csharp
 using System.Net;
@@ -733,7 +813,15 @@ public static void Run(JObject input, ClaimsPrincipal principal, ILogger log)
 }
 ```
 
+# <a name="java"></a>[Java](#tab/java)
+
+L’utilisateur authentifié est disponible par l’intermédiaire d’[en-têtes HTTP](../app-service/app-service-authentication-how-to.md#access-user-claims).
+
 # <a name="javascript"></a>[JavaScript](#tab/javascript)
+
+L’utilisateur authentifié est disponible par l’intermédiaire d’[en-têtes HTTP](../app-service/app-service-authentication-how-to.md#access-user-claims).
+
+# <a name="powershell"></a>[PowerShell](#tab/powershell)
 
 L’utilisateur authentifié est disponible par l’intermédiaire d’[en-têtes HTTP](../app-service/app-service-authentication-how-to.md#access-user-claims).
 
@@ -741,38 +829,12 @@ L’utilisateur authentifié est disponible par l’intermédiaire d’[en-tête
 
 L’utilisateur authentifié est disponible par l’intermédiaire d’[en-têtes HTTP](../app-service/app-service-authentication-how-to.md#access-user-claims).
 
-# <a name="java"></a>[Java](#tab/java)
-
-L’utilisateur authentifié est disponible par l’intermédiaire d’[en-têtes HTTP](../app-service/app-service-authentication-how-to.md#access-user-claims).
 
 ---
 
-## <a name="authorization-keys"></a>Clés d’autorisation
+## <a name="function-access-keys"></a><a name="authorization-keys"></a>Clé d’accès aux fonctions
 
-Functions vous permet d’utiliser des clés pour rendre plus difficile l’accès à vos points de terminaison de fonctions HTTP pendant le développement.  Si le niveau d’autorisation HTTP sur une fonction déclenchée par HTTP n’est pas défini sur `anonymous`, les demandes doivent contenir une clé API. 
-
-> [!IMPORTANT]
-> Alors que les clés peuvent aider à masquer vos points de terminaison HTTP pendant le développement, elles ne sont pas destinées à sécuriser un déclencheur HTTP en production. Pour plus d’informations, consultez [Sécuriser un point de terminaison HTTP en production](#secure-an-http-endpoint-in-production).
-
-> [!NOTE]
-> Dans le runtime Functions 1.x, les fournisseurs de webhooks peuvent utiliser des clés pour autoriser des requêtes de plusieurs façons, selon ce que le fournisseur prend en charge. Ceci est expliqué dans [Webhooks et clés](#webhooks-and-keys). Le runtime Functions dans les versions 2.x et ultérieures n’inclut pas la prise en charge intégrée pour les fournisseurs de webhooks.
-
-#### <a name="authorization-scopes-function-level"></a>Étendues d’autorisation (au niveau de la fonction)
-
-Il existe deux étendues d’autorisation pour les clés au niveau de la fonction :
-
-* **Fonction** : Ces clés s’appliquent uniquement aux fonctions spécifiques sous lesquelles elles sont définies. Utilisées en tant que clés API, elles permettent d’accéder uniquement à ces fonctions.
-
-* **Hôte** : Des clés avec une étendue d’hôte permettent d’accéder à toutes les fonctions au sein de l’application de fonction. Utilisées en tant que clés API, elles permettent d’accéder à toute fonction au sein de la Function App. 
-
-Chaque clé est nommée pour référence et il existe une clé par défaut (nommée « default ») au niveau fonction et hôte. Les clés de fonction prennent le pas sur les clés d’hôte. Quand deux clés portent le même nom, la clé de fonction est toujours utilisée.
-
-#### <a name="master-key-admin-level"></a>Clé principale (au niveau de l’administrateur) 
-
-Chaque application de fonction a également une clé d’hôte au niveau de l’administrateur nommée `_master`. En plus de fournir un accès au niveau de l’hôte à toutes les fonctions de l’application, la clé principale fournit un accès administratif aux API REST du runtime. Cette clé ne peut pas être révoquée. Quand vous définissez un niveau d’autorisation de `admin`, les requêtes doivent utiliser la clé principale ; toute autre clé provoque l’échec de l’autorisation.
-
-> [!CAUTION]  
-> En raison des autorisations élevées dans votre application de fonction accordées par la clé principale, vous ne devez pas partager celle-ci avec des tiers, ou la distribuer dans des applications clientes natives. Faites preuve de prudence lorsque vous choisissez le niveau d’autorisation administrateur.
+[!INCLUDE [functions-authorization-keys](../../includes/functions-authorization-keys.md)]
 
 ## <a name="obtaining-keys"></a>Obtention de clés
 
@@ -786,7 +848,9 @@ Vous pouvez obtenir des clés de fonction programmatiquement en utilisant des [A
 
 La plupart des modèles de déclencheur HTTP nécessitent une clé d’API dans la requête. Ainsi, votre requête HTTP doit se présenter comme l’URL suivante :
 
-    https://<APP_NAME>.azurewebsites.net/api/<FUNCTION_NAME>?code=<API_KEY>
+```http
+https://<APP_NAME>.azurewebsites.net/api/<FUNCTION_NAME>?code=<API_KEY>
+```
 
 La clé peut être incluse dans une variable de chaîne de requête nommée `code`, comme ci-dessus. Elle peut également être incluse dans un en-tête HTTP `x-functions-key`. La valeur de la clé peut être toute clé de fonction définie pour la fonction, ou toute clé d’hôte.
 
@@ -798,15 +862,13 @@ Vous pouvez autoriser les requêtes anonymes, qui ne nécessitent pas de clés. 
 
 ## <a name="secure-an-http-endpoint-in-production"></a>Sécuriser un point de terminaison HTTP en production
 
-Pour sécuriser complètement vos points de terminaison de fonction en production, vous devez envisager d’implémenter une des options suivantes de sécurité au niveau de l’application de fonction :
+Pour sécuriser complètement vos points de terminaison de fonction en production, vous devez envisager d’implémenter une des options suivantes de sécurité au niveau de l’application de fonction. Quand vous utilisez l’une de ces méthodes de sécurité au niveau de l’application de fonction, vous devez définir le niveau d’autorisation de la fonction déclenchée par HTTP sur `anonymous`.
 
-* Activer l’authentification / autorisation App Service pour votre application de fonction. La plateforme App Service vous permet d’utiliser AAD (Azure Active Directory) et plusieurs fournisseurs d’identité tiers pour authentifier les clients. Vous pouvez utiliser cette stratégie afin d'implémenter des règles d'autorisation personnalisées pour vos fonctions, et vous pouvez utiliser les informations utilisateur dans le code de votre fonction. Pour plus d’informations, consultez [Authentification et autorisation dans Azure App Service](../app-service/overview-authentication-authorization.md) et [Utilisation des identités de clients](#working-with-client-identities).
+[!INCLUDE [functions-enable-auth](../../includes/functions-enable-auth.md)]
 
-* Utilisez Gestion des API Azure pour authentifier les requêtes. Gestion des API Azure offre une variété d’options de sécurité des API pour les requêtes entrantes. Pour plus d’informations, consultez [Stratégies d’authentification dans Gestion des API](../api-management/api-management-authentication-policies.md). Avec Gestion des API Azure en place, vous pouvez configurer votre application de fonction pour qu’elle accepte seulement les requêtes provenant de l’adresse IP de votre instance Gestion des API Azure. Pour plus d’informations, consultez [Restriction des adresses IP](ip-addresses.md#ip-address-restrictions).
+#### <a name="deploy-your-function-app-in-isolation"></a>Déployer votre application de fonction en isolation
 
-* Déployez votre application de fonction sur un environnement Azure App Service. L’environnement App Service fournit un environnement d’hébergement dédié où exécuter vos fonctions. L’environnement App Service vous permet de configurer une passerelle frontend unique que vous pouvez utiliser pour authentifier toutes les requêtes entrantes. Pour plus d’informations, consultez [Configuration d’un pare-feu d’applications Web (WAF) pour un environnement App Service](../app-service/environment/app-service-app-service-environment-web-application-firewall.md).
-
-Quand vous utilisez l’une de ces méthodes de sécurité au niveau de l’application de fonction, vous devez définir le niveau d’autorisation de la fonction déclenchée par HTTP sur `anonymous`.
+[!INCLUDE [functions-deploy-isolation](../../includes/functions-deploy-isolation.md)]
 
 ## <a name="webhooks"></a>webhooks
 
@@ -819,7 +881,7 @@ Dans la version 1.x, les modèles de webhook offrent une validation supplémenta
 
 Pour répondre aux webhooks GitHub, commencez par créer votre fonction avec un déclencheur HTTP, puis définissez la propriété **webHookType** sur `github`. Ensuite, copiez son URL et sa clé API dans la page **Ajouter un Webhook** de votre dépôt GitHub. 
 
-![](./media/functions-bindings-http-webhook/github-add-webhook.png)
+![Capture d’écran montrant comment ajouter un webhook pour votre fonction.](./media/functions-bindings-http-webhook/github-add-webhook.png)
 
 ### <a name="slack-webhooks"></a>Webhooks Slack
 
@@ -832,9 +894,17 @@ Une autorisation de webhook est gérée par le composant récepteur de webhook, 
 * **Chaîne de requête** : Le fournisseur transmet le nom de la clé au paramètre de chaîne de requête `clientid` (par exemple, `https://<APP_NAME>.azurewebsites.net/api/<FUNCTION_NAME>?clientid=<KEY_NAME>`).
 * **En-tête de requête** : Le fournisseur transmet le nom de la clé à l’en-tête `x-functions-clientid`.
 
+## <a name="content-types"></a>Types de contenu
+
+La transmission de données binaires et de formulaire à une fonction non C# requiert l’utilisation de l’en-tête de contenu-type approprié. Les types de contenu pris en charge incluent `octet-stream` pour les données binaires et les types [en plusieurs parties](https://www.iana.org/assignments/media-types/media-types.xhtml#multipart).
+
+### <a name="known-issues"></a>Problèmes connus
+
+Dans les fonctions non C#, les requêtes envoyées avec le type de contenu `image/jpeg` entraînent la transmission d’une valeur `string` à la fonction. Dans ce type de cas, vous pouvez convertir manuellement la valeur `string` en un tableau d’octets pour accéder aux données binaires brutes.
+
 ## <a name="limits"></a>limites
 
-La longueur de la requête HTTP est limitée à 100 Mo (104 857 600 octets) et la longueur de l’URL à 4 Ko (4 096 octets). Ces limites sont spécifiées par l’élément `httpRuntime` du [fichier Web.config](https://github.com/Azure/azure-functions-host/blob/3.x/src/WebJobs.Script.WebHost/web.config) du runtime.
+La longueur de la requête HTTP est limitée à 100 Mo (104 857 600 octets) et la longueur de l’URL à 4 Ko (4 096 octets). Ces limites sont spécifiées par l’élément `httpRuntime` du [fichier Web.config](https://github.com/Azure/azure-functions-host/blob/v3.x/src/WebJobs.Script.WebHost/web.config) du runtime.
 
 Si une fonction utilisant le déclencheur HTTP ne se termine pas au bout de 230 secondes, [Azure Load Balancer](../app-service/faq-availability-performance-application-issues.md#why-does-my-request-time-out-after-230-seconds) arrive à expiration et retourne une erreur HTTP 502. La fonction continuera à s’exécuter, mais ne pourra pas renvoyer de réponse HTTP. Pour les fonctions à exécution longues, nous vous recommandons de suivre des modèles asynchrones et de retourner un emplacement où vous pouvez effectuer un test ping de l’état de la requête. Pour plus d’informations sur la durée d’exécution d’une fonction, consultez [Scale and hosting - Consumption plan](functions-scale.md#timeout) (Mise à l’échelle et hébergement – Plan de consommation).
 

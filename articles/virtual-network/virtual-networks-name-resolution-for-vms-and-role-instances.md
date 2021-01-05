@@ -7,18 +7,18 @@ documentationcenter: na
 author: rohinkoul
 ms.service: virtual-network
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 3/2/2020
 ms.author: rohink
 ms.custom: fasttrack-edit
-ms.openlocfilehash: 9ea63192732184ff7a13ff1465a5b393a282f9d2
-ms.sourcegitcommit: 8dc84e8b04390f39a3c11e9b0eaf3264861fcafc
+ms.openlocfilehash: 340ca07ba605359f71c1dbf23ca38abd75d84416
+ms.sourcegitcommit: dea56e0dd919ad4250dde03c11d5406530c21c28
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/13/2020
-ms.locfileid: "81262194"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96937047"
 ---
 # <a name="name-resolution-for-resources-in-azure-virtual-networks"></a>Résolution de noms des ressources dans les réseaux virtuels Azure
 
@@ -86,7 +86,7 @@ La résolution de noms fournie par Azure présente les avantages suivants :
 Le DNS inversé est pris en charge dans tous les réseaux virtuels basés sur ARM. Vous pouvez émettre des requêtes DNS inverses (requêtes PTR) pour mapper les adresses IP des machines virtuelles aux noms de domaine complets des machines virtuelles.
 * Toutes les requêtes PTR visant à obtenir les adresses IP de machines virtuelles retournent des noms de domaine complets de la forme \[vmname\].internal.cloudapp.net
 * La recherche directe sur des noms de domaine complets de la forme \[vmname\].internal.cloudapp.net est résolue en adresse IP affectée à la machine virtuelle.
-* Si le réseau virtuel est lié à [Azure DNS Private Zones](../dns/private-dns-overview.md) en tant que réseau virtuel d’inscription, les requêtes DNS inverses retournent deux enregistrements. L’un des enregistrements se présente sous la forme \[vmname\].[privatednszonename] et l’autre sous la forme \[vmname\].internal.cloudapp.net
+* Si le réseau virtuel est lié à [Azure DNS Private Zones](../dns/private-dns-overview.md) en tant que réseau virtuel d’inscription, les requêtes DNS inverses retournent deux enregistrements. L’un des enregistrements se présente sous la forme \[vmname\].[privatednszonename], et l’autre sous la forme \[vmname\].internal.cloudapp.net
 * L’étendue de la recherche DNS inverse est limitée à un réseau virtuel donné, même s’il est appairé à d’autres réseaux virtuels. Les requêtes DNS inverses (requêtes PTR) pour les adresses IP des machines virtuelles situées dans des réseaux virtuels appairés retournent NXDOMAIN.
 * Si vous souhaitez désactiver la fonction DNS inverse dans un réseau virtuel, vous pouvez le faire en créant une zone de recherche inversée à l’aide de [zones privées Azure DNS](../dns/private-dns-overview.md) et lier cette zone à votre réseau virtuel. Par exemple, si l’espace d’adressage IP de votre réseau virtuel est 10.20.0.0/16, vous pouvez créer une zone DNS privée vide 20.10.in-addr.arpa et la lier au réseau virtuel. Lors de la liaison de la zone à votre réseau virtuel, vous devez désactiver l’inscription automatique sur le lien. Cette zone remplace les zones de recherche inversée par défaut pour le réseau virtuel et, étant donné que cette zone est vide, vous obtenez NXDOMAIN pour vos requêtes DNS inverses. Pour plus d’informations sur la création d’une zone DNS privée et sa liaison à un réseau virtuel, consultez notre [guide de démarrage rapide](https://docs.microsoft.com/azure/dns/private-dns-getstarted-portal).
 
@@ -177,7 +177,7 @@ Lorsque vous utilisez la résolution de noms fournie par Azure, le protocole DHC
 Si nécessaire, vous pouvez déterminer le suffixe DNS interne à l’aide de PowerShell ou de l’API :
 
 * Pour les réseaux virtuels des modèles de déploiement Azure Resource Manager, le suffixe est disponible via [l’API REST d’interface réseau](https://docs.microsoft.com/rest/api/virtualnetwork/networkinterfaces), la cmdlet PowerShell [Get-AzNetworkInterface](/powershell/module/az.network/get-aznetworkinterface) et la commande [az network nic show](/cli/azure/network/nic#az-network-nic-show) Azure CLI.
-* Dans les modèles de déploiement classiques, le suffixe est disponible via l’appel de [l’API Get Deployment](https://msdn.microsoft.com/library/azure/ee460804.aspx) ou l’applet de commande [Get-AzureVM -Debug](/powershell/module/servicemanagement/azure/get-azurevm).
+* Dans les modèles de déploiement classiques, le suffixe est disponible via l’appel de [l’API Get Deployment](https://msdn.microsoft.com/library/azure/ee460804.aspx) ou l’applet de commande [Get-AzureVM -Debug](/powershell/module/servicemanagement/azure.service/get-azurevm).
 
 Si la redirection des requêtes vers Azure ne suffit pas, vous devez fournir votre propre solution DNS. Votre solution DNS doit :
 
@@ -215,7 +215,7 @@ Quand vous utilisez le modèle de déploiement Azure Resource Manager, vous pouv
 > [!NOTE]
 > Si vous choisissez un serveur DNS personnalisé pour votre réseau virtuel, vous devez spécifier au moins une adresse d’IP de serveur DNS, à défaut de quoi, le réseau virtuel ignorera la configuration et utilisera le DNS fourni par Azure.
 
-Si vous utilisez le modèle de déploiement classique, vous pouvez spécifier des serveurs DNS pour le réseau virtuel dans le portail Azure ou dans le [fichier Configuration réseau](https://msdn.microsoft.com/library/azure/jj157100). Pour les services cloud, vous pouvez spécifier des serveurs DNS via le [fichier Configuration du service](https://msdn.microsoft.com/library/azure/ee758710) ou via PowerShell avec [New-AzureVM](/powershell/module/servicemanagement/azure/new-azurevm).
+Si vous utilisez le modèle de déploiement classique, vous pouvez spécifier des serveurs DNS pour le réseau virtuel dans le portail Azure ou dans le [fichier Configuration réseau](https://msdn.microsoft.com/library/azure/jj157100). Pour les services cloud, vous pouvez spécifier des serveurs DNS via le [fichier Configuration du service](https://msdn.microsoft.com/library/azure/ee758710) ou via PowerShell avec [New-AzureVM](/powershell/module/servicemanagement/azure.service/new-azurevm).
 
 > [!NOTE]
 > Si vous modifiez les paramètres DNS d’un réseau virtuel ou d’une machine virtuelle déjà déployée, pour que les nouveaux paramètres DNS prennent effet, vous devez effectuer un renouvellement de bail DHCP sur toutes les machines virtuelles affectées dans le réseau virtuel. Pour les machines virtuelles exécutant le système d’exploitation Windows, vous pouvez taper `ipconfig /renew` directement sur la machine virtuelle. Les étapes varient selon le système d’exploitation. Consultez la documentation relative à votre type de système d’exploitation.

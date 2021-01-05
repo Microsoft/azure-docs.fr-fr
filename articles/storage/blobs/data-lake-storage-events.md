@@ -8,12 +8,13 @@ ms.topic: tutorial
 ms.date: 08/20/2019
 ms.author: normesta
 ms.reviewer: sumameh
-ms.openlocfilehash: 85fad873b6c176d2278ea48709d2892ab515a025
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 738ed3b819a62760408341184daca8a8ba555029
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "78303305"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95913672"
 ---
 # <a name="tutorial-implement-the-data-lake-capture-pattern-to-update-a-databricks-delta-table"></a>Tutoriel : Implémenter le modèle de capture de lac de données pour mettre à jour une table Delta Databricks
 
@@ -34,20 +35,20 @@ Pour créer cette solution, nous allons procéder dans l’ordre inverse et comm
 
 * Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
 
-* Créez un compte de stockage qui possède un espace de noms hiérarchique (Azure Data Lake Storage Gen2). Ce tutoriel utilise un compte de stockage nommé `contosoorders`. Vérifiez que le [rôle Contributeur aux données Blob du stockage](https://docs.microsoft.com/azure/storage/common/storage-auth-aad-rbac) est attribué à votre compte d’utilisateur.
+* Créez un compte de stockage qui possède un espace de noms hiérarchique (Azure Data Lake Storage Gen2). Ce tutoriel utilise un compte de stockage nommé `contosoorders`. Vérifiez que le [rôle Contributeur aux données Blob du stockage](../common/storage-auth-aad-rbac-portal.md) est attribué à votre compte d’utilisateur.
 
-  Voir [Créer un compte Azure Data Lake Storage Gen2](data-lake-storage-quickstart-create-account.md).
+   Consultez [Créer un compte de stockage à utiliser avec Azure Data Lake Storage Gen2](create-data-lake-storage-account.md).
 
-* Créer un principal de service. Consultez [Procédure : Utilisez le portail pour créer une application Azure AD et un principal du service pouvant accéder aux ressources](https://docs.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal).
+* Créer un principal de service. Consultez [Procédure : Utilisez le portail pour créer une application Azure AD et un principal du service pouvant accéder aux ressources](../../active-directory/develop/howto-create-service-principal-portal.md).
 
   Vous devrez faire certaines choses spécifiques pendant que vous suivrez les étapes décrites dans cet article.
 
-  :heavy_check_mark: Au cours des étapes décrites dans la section [Attribuer un rôle à l’application](https://docs.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal#assign-a-role-to-the-application) de l’article, veillez à affecter le rôle **Contributeur aux données Blob du stockage** au principal de service.
+  :heavy_check_mark: Au cours des étapes décrites dans la section [Attribuer un rôle à l’application](../../active-directory/develop/howto-create-service-principal-portal.md#assign-a-role-to-the-application) de l’article, veillez à affecter le rôle **Contributeur aux données Blob du stockage** au principal de service.
 
   > [!IMPORTANT]
   > Veillez à attribuer le rôle dans l’étendue du compte de stockage Data Lake Storage Gen2. Vous pouvez attribuer un rôle à l’abonnement ou au groupe de ressources parent, mais des erreurs d’autorisation sont générées tant que ces attributions de rôles ne sont pas propagées au compte de stockage.
 
-  :heavy_check_mark: Au cours des étapes indiquées dans la section [Obtenir les valeurs de connexion](https://docs.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal#get-values-for-signing-in) de l’article, collez les valeurs de l’ID de locataire, de l’ID d’application et du mot de passe dans un fichier texte. Vous aurez besoin de ces valeurs ultérieurement.
+  :heavy_check_mark: Au cours des étapes indiquées dans la section [Obtenir les valeurs de connexion](../../active-directory/develop/howto-create-service-principal-portal.md#get-tenant-and-app-id-values-for-signing-in) de l’article, collez les valeurs de l’ID de locataire, de l’ID d’application et du mot de passe dans un fichier texte. Vous aurez besoin de ces valeurs ultérieurement.
 
 ## <a name="create-a-sales-order"></a>Créer une commande client
 
@@ -125,7 +126,7 @@ Pour plus d’informations sur la création de clusters, consultez [Créer un cl
 
 2. Dans la boîte de dialogue **Créer un bloc-notes**, entrez un nom pour le bloc-notes. Sélectionnez **Python** comme langage, puis sélectionnez le cluster Spark que vous avez créé précédemment.
 
-    ![Créer un notebook dans Databricks](./media/data-lake-storage-events/new-databricks-notebook.png "Créer un notebook dans Databricks")
+    ![Capture d’écran qui montre la boîte de dialogue Créer un notebook et où sélectionner Python comme langage.](./media/data-lake-storage-events/new-databricks-notebook.png "Créer un notebook dans Databricks")
 
     Sélectionnez **Create** (Créer).
 
@@ -267,7 +268,7 @@ Créez une fonction Azure qui exécute le travail.
 
 5. Dans la page **Vue d’ensemble** de l’application de fonction, cliquez sur **Configuration**.
 
-   ![Configurer l’application de fonction](./media/data-lake-storage-events/configure-function-app.png "Configurer l’application de fonction")
+   ![Capture d’écran qui met en évidence l’option Configuration sous Fonctionnalités configurées.](./media/data-lake-storage-events/configure-function-app.png "Configurer l’application de fonction")
 
 6. Dans la page **Paramètres de l’application**, cliquez sur le bouton **Nouveau paramètre d’application** pour ajouter chaque paramètre.
 
@@ -344,7 +345,7 @@ Dans cette section, vous allez créer un abonnement Event Grid qui appelle la fo
 
 1. Dans la page de code de la fonction, cliquez sur le bouton **Ajouter un abonnement Event Grid**.
 
-   ![Nouvel abonnement aux événements](./media/data-lake-storage-events/new-event-subscription.png "Nouvel abonnement aux événements")
+   ![Capture d’écran qui met en évidence le bouton Ajouter un abonnement Event Grid.](./media/data-lake-storage-events/new-event-subscription.png "Nouvel abonnement aux événements")
 
 2. Dans la page **Créer un abonnement aux événements**, nommez l’abonnement, puis utilisez les champs de la page pour sélectionner votre compte de stockage.
 

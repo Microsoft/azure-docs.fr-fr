@@ -8,15 +8,15 @@ manager: celestedg
 ms.service: active-directory
 ms.workload: identity
 ms.topic: reference
-ms.date: 03/26/2020
+ms.date: 12/01/2020
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: e259a57a9cd6b24362862ffd6cb738157ca912d5
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 8364e67e71143729e97c5253f0dfd7b30a1e5c2f
+ms.sourcegitcommit: 77ab078e255034bd1a8db499eec6fe9b093a8e4f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80332759"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97559818"
 ---
 # <a name="define-an-openid-connect-technical-profile-in-an-azure-active-directory-b2c-custom-policy"></a>Définir un profil technique OpenID Connect dans une stratégie personnalisée Azure Active Directory B2C
 
@@ -28,7 +28,7 @@ Azure Active Directory B2C (Azure AD B2C) prend en charge le fournisseur d’id
 
 L’attribut **Name** de l’élément **Protocol** doit être défini sur `OpenIdConnect`. Par exemple, le protocole pour le profil technique **MSA-OIDC** est `OpenIdConnect` :
 
-```XML
+```xml
 <TechnicalProfile Id="MSA-OIDC">
   <DisplayName>Microsoft Account</DisplayName>
   <Protocol Name="OpenIdConnect" />
@@ -39,7 +39,7 @@ L’attribut **Name** de l’élément **Protocol** doit être défini sur `Open
 
 Les éléments **InputClaims** et **InputClaimsTransformations** ne sont pas obligatoires. Vous pouvez cependant envoyer des paramètres supplémentaires à votre fournisseur d’identité. L’exemple suivant ajoute le paramètre de chaîne de requête **domain_hint** avec la valeur `contoso.com` à la demande d’autorisation.
 
-```XML
+```xml
 <InputClaims>
   <InputClaim ClaimTypeReferenceId="domain_hint" DefaultValue="contoso.com" />
 </InputClaims>
@@ -80,6 +80,7 @@ Le profil technique retourne également des revendications qui ne sont pas retou
 | IdTokenAudience | Non | Audience du jeton id_token. Si la valeur est spécifiée, Azure AD B2C vérifie si la revendication `aud` dans un jeton retourné par le fournisseur d’identité est identique à celle indiquée dans les métadonnées IdTokenAudience.  |
 | METADATA | Oui | URL qui pointe vers un document de configuration de fournisseur d’identité OpenID Connect, également appelé point de terminaison de configuration OpenID connu. L’URL peut contenir l’expression `{tenant}`, qui est remplacée par le nom du locataire.  |
 | authorization_endpoint | Non | URL qui pointe vers un point de terminaison d’autorisation de configuration de fournisseur d’identité OpenID Connect. La valeur des métadonnées authorization_endpoint est prioritaire sur celle de `authorization_endpoint` spécifiée dans le point de terminaison de configuration OpenID connu. L’URL peut contenir l’expression `{tenant}`, qui est remplacée par le nom du locataire. |
+| end_session_endpoint | Non | URL du point de terminaison de la session de fin. La valeur des métadonnées authorization_endpoint est prioritaire sur celle de `end_session_endpoint` spécifiée dans le point de terminaison de configuration OpenID connu. |
 | émetteur | Non | Identificateur unique d’un fournisseur d’identité OpenID Connect. La valeur des métadonnées de l’émetteur est prioritaire sur celle de `issuer` spécifiée dans le point de terminaison de configuration OpenID connu.  Si la valeur est spécifiée, Azure AD B2C vérifie si la revendication `iss` dans un jeton retourné par le fournisseur d’identité est identique à celle indiquée dans les métadonnées de l’émetteur. |
 | ProviderName | Non | Nom du fournisseur d'identité.  |
 | response_types | Non | Type de réponse conformément à la spécification OpenID Connect Core 1.0. Valeurs possibles : `id_token`, `code` ou `token`. |
@@ -90,7 +91,22 @@ Le profil technique retourne également des revendications qui ne sont pas retou
 | UsePolicyInRedirectUri | Non | Indique s’il faut utiliser une stratégie lors de la construction de l’URI de redirection. Lorsque vous configurez votre application dans le fournisseur d’identité, vous devez spécifier l’URI de redirection. L’URI de redirection pointe vers Azure AD B2C, `https://{your-tenant-name}.b2clogin.com/{your-tenant-name}.onmicrosoft.com/oauth2/authresp`.  Si vous spécifiez `false`, vous devez ajouter un URI de redirection pour chaque stratégie que vous utilisez. Par exemple : `https://{your-tenant-name}.b2clogin.com/{your-tenant-name}.onmicrosoft.com/{policy-name}/oauth2/authresp`. |
 | MarkAsFailureOnStatusCode5xx | Non | Indique si une demande adressée à un service externe doit être marquée comme un échec si le code d’état HTTP s’inscrit dans la plage 5xx. Par défaut, il s’agit de `false`. |
 | DiscoverMetadataByTokenIssuer | Non | Indique si les métadonnées OIDC doivent être découvertes à l’aide de l’émetteur dans le jeton JSON Web Token. |
-| IncludeClaimResolvingInClaimsHandling  | Non | Pour les revendications d’entrée et de sortie, spécifie si la [résolution des revendications](claim-resolver-overview.md) est incluse dans le profil technique. Valeurs possibles : `true` ou `false` (par défaut). Si vous souhaitez utiliser un programme de résolution des revendications dans le profil technique, définissez cette valeur sur `true`. |
+| IncludeClaimResolvingInClaimsHandling  | Non | Pour les revendications d’entrée et de sortie, spécifie si la [résolution des revendications](claim-resolver-overview.md) est incluse dans le profil technique. Valeurs possibles : `true` ou `false` (par défaut). Si vous souhaitez utiliser un programme de résolution des revendications dans le profil technique, définissez cette valeur sur `true`. |
+|token_endpoint_auth_method| Non| Indique comment Azure AD B2C envoie l’en-tête d’authentification au point de terminaison du jeton. Valeurs possibles : `client_secret_post` (par défaut), `private_key_jwt` (préversion publique) et `client_secret_basic` (préversion publique). Pour plus d’informations, consultez [Section d’authentification du client OpenID Connect](https://openid.net/specs/openid-connect-core-1_0.html#ClientAuthentication). |
+|SingleLogoutEnabled| Non| Indique si, lors de la connexion, le profil technique tente de se déconnecter des fournisseurs d’identité fédérés. Pour plus d’informations, consultez [Déconnexion d’une session Azure AD B2C](session-behavior.md#sign-out).  Valeurs possibles : `true` (par défaut) ou `false`.|
+
+```xml
+<Metadata>
+  <Item Key="ProviderName">https://login.live.com</Item>
+  <Item Key="METADATA">https://login.live.com/.well-known/openid-configuration</Item>
+  <Item Key="response_types">code</Item>
+  <Item Key="response_mode">form_post</Item>
+  <Item Key="scope">openid profile email</Item>
+  <Item Key="HttpBinding">POST</Item>
+  <Item Key="UsePolicyInRedirectUri">false</Item>
+  <Item Key="client_id">Your Microsoft application client ID</Item>
+</Metadata>
+```
 
 ### <a name="ui-elements"></a>Éléments d’interface utilisateur
  
@@ -116,6 +132,6 @@ Lorsque vous configurez l’URI de redirection de votre fournisseur d’identit�
 
 Exemples :
 
-- [Ajouter Compte Microsoft (MSA) comme fournisseur d’identité utilisant des stratégies personnalisées](identity-provider-microsoft-account-custom.md)
-- [Se connecter à l’aide de comptes Azure AD](identity-provider-azure-ad-single-tenant-custom.md)
-- [Autoriser la connexion d’utilisateurs à un fournisseur d’identité Azure AD mutualisé à l’aide de stratégies personnalisées](identity-provider-azure-ad-multi-tenant-custom.md)
+- [Ajouter Compte Microsoft (MSA) comme fournisseur d’identité utilisant des stratégies personnalisées](identity-provider-microsoft-account.md)
+- [Se connecter à l’aide de comptes Azure AD](identity-provider-azure-ad-single-tenant.md)
+- [Autoriser la connexion d’utilisateurs à un fournisseur d’identité Azure AD mutualisé à l’aide de stratégies personnalisées](identity-provider-azure-ad-multi-tenant.md)

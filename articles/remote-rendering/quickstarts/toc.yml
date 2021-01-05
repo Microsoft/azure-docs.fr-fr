@@ -1,8 +1,14 @@
-- name: Afficher un modèle avec Unity
-  href: render-model.md
-- name: Déployer l’exemple Unity sur HoloLens
-  href: deploy-to-hololens.md
-- name: Déployer l’exemple Unity sur un Bureau
-  href: deploy-to-desktop.md
+- name: Unity
+  items:
+    - name: Afficher un modèle avec Unity
+      href: render-model.md
+    - name: Déployer l’exemple Unity sur HoloLens
+      href: deploy-to-hololens.md
+    - name: Déployer l’exemple Unity sur un Bureau
+      href: deploy-to-desktop.md
+- name: C++ natif
+  items:
+    - name: Déployer l’exemple C++ natif sur HoloLens
+      href: native-cpp/hololens/deploy-native-cpp-tutorial.md
 - name: Convertir un modèle pour le rendu
   href: convert-model.md

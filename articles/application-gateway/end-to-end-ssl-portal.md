@@ -5,16 +5,16 @@ description: Découvrez comment utiliser le portail Azure pour créer une passer
 services: application-gateway
 author: vhorne
 ms.service: application-gateway
-ms.topic: article
+ms.topic: how-to
 ms.date: 11/14/2019
 ms.author: absha
 ms.custom: mvc
-ms.openlocfilehash: 6f86f32e64bbbe79ea5a403d04f7d6c29ee6b980
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 6e2d1828acefacb03cc2f42193b8cd8897578b6f
+ms.sourcegitcommit: 0ce1ccdb34ad60321a647c691b0cff3b9d7a39c8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80133011"
+ms.lasthandoff: 11/05/2020
+ms.locfileid: "93397499"
 ---
 # <a name="configure-end-to-end-tls-by-using-application-gateway-with-the-portal"></a>Configurer le chiffrement TLS de bout en bout avec Application Gateway et le portail
 
@@ -31,7 +31,7 @@ Pour configurer le protocole TLS de bout en bout avec une passerelle d’applica
 
 Pour le chiffrement TLS de bout en bout, les serveurs back-end appropriés doivent être autorisés dans la passerelle d’application. Pour autoriser cet accès, chargez le certificat public des serveurs back-end, aussi appelés certificats d’authentification (v1) ou certificats racines approuvés (v2), sur la passerelle d’application. L’ajout du certificat permet à la passerelle d’application de communiquer uniquement avec des instances de serveur back-end connues. Cette configuration renforce la sécurité de la communication de bout en bout.
 
-Pour plus d’informations, consultez [Présentation de la terminaison TLS et du chiffrement TLS de bout en bout avec Application Gateway](https://docs.microsoft.com/azure/application-gateway/ssl-overview).
+Pour plus d’informations, consultez [Présentation de la terminaison TLS et du chiffrement TLS de bout en bout avec Application Gateway](./ssl-overview.md).
 
 ## <a name="create-a-new-application-gateway-with-end-to-end-tls"></a>Créer une passerelle d’application avec TLS de bout en bout
 
@@ -39,21 +39,21 @@ Pour créer une passerelle d’application avec chiffrement TLS de bout en bout,
 
 ### <a name="enable-tls-termination-while-creating-a-new-application-gateway"></a>Activer l’arrêt TLS lors de la création d’une passerelle d’application
 
-Pour en savoir plus, consultez [Activer l’arrêt TLS lors de la création d’une passerelle d’application](https://docs.microsoft.com/azure/application-gateway/create-ssl-portal).
+Pour en savoir plus, consultez [Activer l’arrêt TLS lors de la création d’une passerelle d’application](./create-ssl-portal.md).
 
 ### <a name="add-authenticationroot-certificates-of-back-end-servers"></a>Ajouter des certificats d’authentification/racines des serveurs back-end
 
-1. Sélectionnez **Toutes les ressources**, puis **myAppGateway**.
+1. Sélectionnez **Toutes les ressources** , puis **myAppGateway**.
 
-2. Sélectionnez **Paramètres HTTP** dans le menu de gauche. Azure a automatiquement créé un paramètre HTTP par défaut, appelé **appGatewayBackendHttpSettings**, quand vous avez créé la passerelle d’application. 
+2. Sélectionnez **Paramètres HTTP** dans le menu de gauche. Azure a automatiquement créé un paramètre HTTP par défaut, appelé **appGatewayBackendHttpSettings** , quand vous avez créé la passerelle d’application. 
 
 3. Sélectionnez **appGatewayBackendHttpSettings**.
 
-4. Sous **Protocole**, sélectionnez **HTTPS**. Un volet relatif aux **certificats d’authentification back-end ou certificats racines approuvés** s’affiche.
+4. Sous **Protocole** , sélectionnez **HTTPS**. Un volet relatif aux **certificats d’authentification back-end ou certificats racines approuvés** s’affiche.
 
 5. Sélectionnez **Créer nouveau**.
 
-6. Dans le champ **Nom**, entrez un nom approprié.
+6. Dans le champ **Nom** , entrez un nom approprié.
 
 7. Sélectionnez le fichier de certificat dans la zone **Charger le certificat CER**.
 
@@ -78,36 +78,36 @@ Vous devez utiliser un écouteur avec le protocole HTTPS et un certificat pour a
 Si vous choisissez la seconde option, appliquez les étapes de la procédure suivante.
 ### <a name="enable-tls-termination-in-an-existing-application-gateway"></a>Activer l’arrêt TLS dans une passerelle d’application existante
 
-1. Sélectionnez **Toutes les ressources**, puis **myAppGateway**.
+1. Sélectionnez **Toutes les ressources** , puis **myAppGateway**.
 
 2. Dans le menu de gauche, sélectionnez **Écouteurs**.
 
 3. Sélectionnez un écouteur **de base** ou **multisite** en fonction de vos besoins.
 
-4. Sous **Protocole**, sélectionnez **HTTPS**. Un volet de **certificat** s’affiche.
+4. Sous **Protocole** , sélectionnez **HTTPS**. Un volet de **certificat** s’affiche.
 
 5. Chargez le certificat PFX que vous souhaitez utiliser pour l’arrêt TLS entre le client et la passerelle d’application.
 
    > [!NOTE]
-   > Dans le cadre d’un test, vous pouvez utiliser un certificat auto-signé. Toutefois, ces derniers ne sont pas recommandés pour les charges de travail de production, car elles sont plus difficiles à gérer et ne sont pas entièrement sécurisées. Pour plus d’informations, consultez [Créer un certificat auto-signé](https://docs.microsoft.com/azure/application-gateway/create-ssl-portal#create-a-self-signed-certificate).
+   > Dans le cadre d’un test, vous pouvez utiliser un certificat auto-signé. Toutefois, ces derniers ne sont pas recommandés pour les charges de travail de production, car elles sont plus difficiles à gérer et ne sont pas entièrement sécurisées. Pour plus d’informations, consultez [Créer un certificat auto-signé](./create-ssl-portal.md#create-a-self-signed-certificate).
 
-6. Ajoutez les autres paramètres exigés pour l’**écouteur** en fonction de vos besoins.
+6. Ajoutez les autres paramètres exigés pour l’ **écouteur** en fonction de vos besoins.
 
 7. Sélectionnez **OK** pour enregistrer.
 
 ### <a name="add-authenticationtrusted-root-certificates-of-back-end-servers"></a>Ajouter des certificats racines d’authentification/approuvés pour les serveurs back-end
 
-1. Sélectionnez **Toutes les ressources**, puis **myAppGateway**.
+1. Sélectionnez **Toutes les ressources** , puis **myAppGateway**.
 
-2. Sélectionnez **Paramètres HTTP** dans le menu de gauche. Vous pouvez soit placer des certificats dans un paramètre HTTP de back-end existant dans la liste des destinataires approuvés, soit créer un paramètre HTTP. (À l’étape suivante, le certificat du paramètre HTTP par défaut, **appGatewayBackendHttpSettings**, est ajouté à la liste des destinataires approuvés.)
+2. Sélectionnez **Paramètres HTTP** dans le menu de gauche. Vous pouvez soit placer des certificats dans un paramètre HTTP de back-end existant dans la liste des destinataires approuvés, soit créer un paramètre HTTP. (À l’étape suivante, le certificat du paramètre HTTP par défaut, **appGatewayBackendHttpSettings** , est ajouté à la liste des destinataires approuvés.)
 
 3. Sélectionnez **appGatewayBackendHttpSettings**.
 
-4. Sous **Protocole**, sélectionnez **HTTPS**. Un volet relatif aux **certificats d’authentification back-end ou certificats racines approuvés** s’affiche. 
+4. Sous **Protocole** , sélectionnez **HTTPS**. Un volet relatif aux **certificats d’authentification back-end ou certificats racines approuvés** s’affiche. 
 
 5. Sélectionnez **Créer nouveau**.
 
-6. Dans le champ **Nom**, entrez un nom approprié.
+6. Dans le champ **Nom** , entrez un nom approprié.
 
 7. Sélectionnez le fichier de certificat dans la zone **Charger le certificat CER**.
 

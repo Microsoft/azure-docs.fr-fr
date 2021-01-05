@@ -1,46 +1,57 @@
 ---
 title: Qu’est-ce qu’Azure Monitor pour machines virtuelles ?
-description: Vue d’ensemble d’Azure Monitor pour machines virtuelles qui supervise l’intégrité et les performances des machines virtuelles Azure, en plus de découvrir et de mapper automatiquement les composants d’application et leurs dépendances.
+description: Vue d’ensemble d’Azure Monitor pour machines virtuelles, qui supervise l’intégrité et les performances des machines virtuelles Azure, et découvre et mappe automatiquement les composants d’application et leurs dépendances.
 ms.subservice: ''
 ms.topic: conceptual
 author: bwren
 ms.author: bwren
-ms.date: 03/11/2020
-ms.openlocfilehash: 6f65ba96f768a4b88aa13c073cc66920b8c5e049
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 07/22/2020
+ms.openlocfilehash: e5eaf2d7075ca09aeb3cfaa2dfea81fd0f8d65ad
+ms.sourcegitcommit: c157b830430f9937a7fa7a3a6666dcb66caa338b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79480485"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94685305"
 ---
-# <a name="what-is-azure-monitor-for-vms"></a>Qu’est-ce qu’Azure Monitor pour machines virtuelles ?
+# <a name="overview-of-azure-monitor-for-vms"></a>Vue d’ensemble d’Azure Monitor pour machines virtuelles
 
-Azure Monitor pour machines virtuelles surveille les machines virtuelles et groupes de machines virtuelles identiques à grande échelle. Il analyse les performances et l’intégrité des machines virtuelles Windows et Linux, et supervise leurs processus et dépendances vis-à-vis d’autres ressources et des processus externes. Il prend en charge la supervision des performances et des dépendances d’applications des machines virtuelles qui sont hébergées localement ou auprès d’un autre fournisseur de cloud. Les fonctionnalités clés suivantes offrent des insights approfondis :
+Azure Monitor pour machines virtuelles supervise les performances et l’intégrité des machines virtuelles et des groupes de machines virtuelles identiques, y compris leurs processus en cours d’exécution et leurs dépendances vis-à-vis d’autres ressources. Il contribue à offrir des performances prévisibles et à assurer la disponibilité des applications vitales en identifiant les goulots d’étranglement des performances et les problèmes réseau. Par ailleurs, il permet de comprendre si un problème est lié à d’autres dépendances.
 
-- **Graphiques prédéfinis de tendances des performances** : affichent les mesures de performances principales du système d’exploitation de la machine virtuelle invitée.
+Azure Monitor pour machines virtuelles prend en charge les systèmes d’exploitation Windows et Linux sur les supports suivants :
 
-- **Carte des dépendances** : affiche les composants interconnectés avec la machine virtuelle de différents groupes de ressources et abonnements.  
+- Machines virtuelles Azure
+- Groupes de machines virtuelles identiques Azure
+- Machines virtuelles hybrides connectées avec Azure Arc
+- Machines virtuelles locales
+- Machines virtuelles hébergées dans un autre environnement cloud
+  
 
->[!NOTE]
->Nous avons récemment fait l’[annonce des changements](https://azure.microsoft.com/updates/updates-to-azure-monitor-for-virtual-machines-preview-before-general-availability-release/
-) que nous apportons à la fonctionnalité Intégrité suite aux commentaires que nous avons reçus de la part de nos clients ayant utilisé la préversion publique. En raison des multiples changements prévus, nous avons choisi de ne plus fournir la fonctionnalité Intégrité aux nouveaux clients. Les clients existants pourront continuer à utiliser la fonctionnalité Intégrité. Pour plus d’informations, consultez [Questions fréquentes (FAQ) sur la disponibilité générale](vminsights-ga-release-faq.md).  
-
-Grâce à l’intégration avec les journaux Azure Monitor et aux puissantes fonctionnalités d’agrégation et de filtrage qu’elle offre, Azure Monitor pour machines virtuelles peut analyser les tendances des données dans le temps. Vous pouvez afficher directement ces données sur une seule machine virtuelle, ou bien utiliser Azure Monitor pour avoir une vue d’ensemble de vos machines virtuelles dans laquelle la vue prend en charge les modes Azure de contexte de la ressource ou de contexte de l’espace de travail. Pour plus d’informations, consultez [Vue d’ensemble des modes d’accès](../platform/design-logs-deployment.md#access-mode).
+Azure Monitor pour machines virtuelles stocke ses données dans les journaux Azure Monitor, ce qui lui permet d’offrir de puissantes fonctions d’agrégation et de filtrage et d’analyser l’évolution des tendances des données. Vous pouvez afficher directement ces données sur une seule machine virtuelle, ou bien utiliser Azure Monitor pour bénéficier d’une vue agrégée de plusieurs machines virtuelles.
 
 ![Perspective des insights sur les machines virtuelles sur le Portail Azure](media/vminsights-overview/vminsights-azmon-directvm.png)
 
-Azure Monitor pour machines virtuelles peut offrir des performances prévisibles et assurer la disponibilité des applications vitales. Il identifie les goulots d’étranglement de performances et les problèmes réseau et peut aussi vous aider à déterminer si un problème est lié à d’autres dépendances.  
 
-## <a name="data-usage"></a>Utilisation des données
+## <a name="pricing"></a>Tarifs
+Azure Monitor pour machines virtuelles n’engendre aucun coût direct ; en revanche, son activité dans l’espace de travail Log Analytics vous est facturée. Selon la tarification publiée sur la [page des tarifs d’Azure Monitor](https://azure.microsoft.com/pricing/details/monitor/), Azure Monitor pour machines virtuelles engendre des frais pour :
 
-Lorsque Azure Monitor pour machines virtuelles est déployé, les données recueillies par les machines virtuelles sont ingérées et stockées dans Azure Monitor. Les données de performances et de dépendance collectées sont stockées dans un espace de travail Log Analytics. Selon la tarification publiée sur la [page des tarifs d’Azure Monitor](https://azure.microsoft.com/pricing/details/monitor/), Azure Monitor pour machines virtuelles engendre des frais pour :
+- les données ingérées à partir des agents et stockées dans l’espace de travail ;
+- Données d’état d’intégrité collectées à partir de l’intégrité des invités (préversion)
+- les règles d’alerte basées sur les données des journaux et les données relatives à l’intégrité ;
+- les notifications envoyées par les règles d’alerte.
 
-- les données ingérées et stockées ;
-- les règles d’alerte créées ;
-- les notifications envoyées. 
+La taille du journal, qui varie en fonction de la longueur des chaînes des compteurs de performances, peut augmenter avec le nombre de disques logiques et de cartes réseau alloué à la machine virtuelle. Si vous utilisez déjà Service Map, la seule différence notable concerne les données de performances supplémentaires qui sont envoyées au type de données `InsightsMetrics` Azure Monitor.
 
-La taille du journal, qui varie en fonction de la longueur des chaînes des compteurs de performances, peut augmenter avec le nombre de disques logiques et de cartes réseau alloué à la machine virtuelle. Si vous disposez déjà d’un espace de travail et que vous collectez ces compteurs, ces frais ne seront pas facturés une deuxième fois. Si vous utilisez déjà Service Map, la seule différence notable concerne les données de connexion supplémentaires qui sont envoyées à Azure Monitor.
+
+## <a name="configuring-azure-monitor-for-vms"></a>Configuration d’Azure Monitor pour machines virtuelles
+Les étapes de configuration d’Azure Monitor pour machines virtuelles sont les suivantes. Pour obtenir des instructions détaillées sur chaque étape, suivez les liens ci-dessous :
+
+- [Création d’un espace de travail Log Analytics](vminsights-configure-workspace.md#create-log-analytics-workspace)
+- [Ajout de la solution VMInsights à l’espace de travail](vminsights-configure-workspace.md#add-vminsights-solution-to-workspace)
+- [Installation des agents sur la machine virtuelle et le groupe de machines virtuelles identiques à superviser](vminsights-enable-overview.md)
+
+
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour comprendre les exigences et les méthodes de monitoring des machines virtuelles, voir [Déployer Azure Monitor pour machines virtuelles](vminsights-enable-overview.md).
+- Pour connaître les exigences et les méthodes permettant la supervision des machines virtuelles, consultez [Déploiement d’Azure Monitor pour machines virtuelles](vminsights-enable-overview.md).
+

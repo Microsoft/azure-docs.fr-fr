@@ -1,24 +1,24 @@
 ---
 title: Sauvegarde et restauration - Portail Azure - Azure Database pour MySQL
 description: Cet article décrit comment restaurer un serveur Azure Database pour MySQL à l’aide du portail.
-author: ajlam
-ms.author: andrela
+author: savjani
+ms.author: pariks
 ms.service: mysql
-ms.topic: conceptual
-ms.date: 3/27/2020
-ms.openlocfilehash: 619dc05d709f41941d16764bf32b49a0d2a11958
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.topic: how-to
+ms.date: 6/30/2020
+ms.openlocfilehash: 9bc31cf8fee2669634ff366caac77cb090baf075
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80372985"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96000298"
 ---
 # <a name="how-to-backup-and-restore-a-server-in-azure-database-for-mysql-using-the-azure-portal"></a>Comment sauvegarder et restaurer un serveur dans Azure Database pour MySQL à l’aide du Portail Azure
 
 ## <a name="backup-happens-automatically"></a>La sauvegarde s’effectue automatiquement
 Les serveurs Azure Database pour MySQL sont sauvegardés régulièrement pour activer les fonctionnalités de restauration. À l’aide de cette fonctionnalité, vous pouvez restaurer le serveur et toutes ses bases de données à un point dans le temps antérieur, sur un nouveau serveur.
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 Pour utiliser ce guide pratique, il vous faut :
 - Un [serveur et une base de données Azure Database pour MySQL](quickstart-create-mysql-server-database-using-azure-portal.md)
 
@@ -32,7 +32,7 @@ Vous choisissez entre la configuration de votre serveur pour des sauvegardes red
 
 Lors de la création d’un serveur via le portail Azure, la fenêtre **Niveau tarifaire** vous permet de sélectionner **Localement redondant** ou **Géographiquement redondant** pour les sauvegardes de votre serveur. Cette fenêtre vous permet également de sélectionner la **période de rétention de la sauvegarde**, c’est-à-dire la durée (en nombre de jours) pendant laquelle vous souhaitez conserver les sauvegardes de serveur.
 
-   ![Niveau tarifaire - Choisir la redondance de sauvegarde](./media/howto-restore-server-portal/pricing-tier.png)
+   :::image type="content" source="./media/howto-restore-server-portal/pricing-tier.png" alt-text="Niveau tarifaire - Choisir la redondance de sauvegarde":::
 
 Pour plus d’informations sur la définition de ces valeurs lors de la création, consultez [Démarrage rapide du serveur Azure Database pour MySQL](quickstart-create-mysql-server-database-using-azure-portal.md).
 
@@ -41,7 +41,7 @@ La période de rétention de sauvegarde peut être modifiée sur un serveur en s
 2. Sélectionnez votre serveur Azure Database pour MySQL. Cette action ouvre la page **Vue d’ensemble**.
 3. Sélectionnez **Niveau tarifaire** dans le menu, sous **PARAMÈTRES**. Le curseur vous permet de modifier la **période de rétention de sauvegarde** selon vos préférences entre 7 et 35 jours.
 Dans la capture d’écran ci-dessous, elle a été augmentée à 34 jours.
-![Période de rétention de sauvegarde augmentée](./media/howto-restore-server-portal/3-increase-backup-days.png)
+:::image type="content" source="./media/howto-restore-server-portal/3-increase-backup-days.png" alt-text="Période de rétention de sauvegarde augmentée":::
 
 4. Cliquez sur **OK** pour confirmer la modification.
 
@@ -57,21 +57,27 @@ Les étapes suivantes restaurent l’exemple de serveur à un point dans le temp
 
 2. Dans la barre d’outils de la page **Vue d’ensemble** du serveur, sélectionnez **Restaurer**.
 
-   ![Azure Database pour MySQL - Vue d’ensemble - Bouton Restaurer](./media/howto-restore-server-portal/2-server.png)
+   :::image type="content" source="./media/howto-restore-server-portal/2-server.png" alt-text="Azure Database pour MySQL - Vue d’ensemble - Bouton Restaurer":::
 
 3. Remplissez le formulaire Restaurer avec les informations requises :
 
-   ![Azure Database pour MySQL - Informations de restauration](./media/howto-restore-server-portal/3-restore.png)
+   :::image type="content" source="./media/howto-restore-server-portal/3-restore.png" alt-text="Azure Database pour MySQL - Informations de restauration":::
    - **Point de restauration** : sélectionnez le point dans le temps vers lequel vous souhaitez restaurer.
-   - **Serveur cible** : fournissez un nom pour le nouveau serveur.
-   - **Emplacement :** vous ne pouvez pas sélectionner la région. Par défaut, elle est identique à celle du serveur source.
-   - **Niveau tarifaire** : vous ne pouvez pas modifier ces paramètres lorsque vous effectuez une restauration à un point dans le temps. Elle est identique à celle du serveur source. 
+   - **Serveur cible** : Entrez un nom pour le nouveau serveur.
+   - **Emplacement** : vous ne pouvez pas sélectionner la région. Par défaut, elle est identique à celle du serveur source.
+   - **Niveau tarifaire** : vous ne pouvez pas modifier ces paramètres lorsque vous effectuez une restauration à un point dans le temps. Elle est identique à celle du serveur source. 
 
 4. Cliquez sur **OK** pour restaurer le serveur à un point dans le temps. 
 
 5. Une fois la restauration terminée, recherchez le nouveau serveur créé pour vérifier que les données ont été restaurées correctement.
 
 Le serveur créé par la restauration à un point dans le temps a les mêmes nom de connexion administrateur de serveur et mot de passe qui étaient valides pour le serveur existant au point dans le temps choisi. Vous pouvez modifier le mot de passe sur la page **Vue d’ensemble** du nouveau serveur.
+
+En outre, une fois l’opération de restauration terminée, deux paramètres de serveur sont réinitialisés aux valeurs par défaut (et ne sont pas copiés à partir du serveur principal) après l’opération de restauration
+*   time_zone : valeur à affecter à la valeur par défaut **SYSTEM**
+*   event_scheduler : valeur définie sur **OFF** sur le serveur restauré
+
+Vous devrez copier la valeur à partir du serveur principal et la définir sur le serveur restauré en reconfigurant le [paramètre de serveur](howto-server-parameters.md)
 
 Le nouveau serveur créé lors d’une restauration ne dispose pas des points de terminaison de service de réseau virtuel qui se trouvaient sur le serveur d’origine. Ces règles doivent être définies séparément pour ce nouveau serveur. Les règles de pare-feu du serveur d’origine sont restaurées.
 
@@ -80,16 +86,39 @@ Si vous avez configuré votre serveur pour les sauvegardes redondantes géograph
 
 1. Cliquez sur le bouton **Créer une ressource** (+) dans le coin supérieur gauche du portail. Sélectionnez **Bases de données** > **Azure Database pour MySQL**.
 
-   ![L’option « Azure Database pour MySQL »](./media/howto-restore-server-portal/2_navigate-to-mysql.png)
+   :::image type="content" source="./media/howto-restore-server-portal/1_navigate-to-mysql.png" alt-text="Accédez à Azure Database pour MySQL.":::
+ 
+2. Indiquez l’abonnement, le groupe de ressources et le nom du nouveau serveur. 
 
-2. Dans la liste déroulante **Sélectionner la source** du formulaire, choisissez **Sauvegarde**. Cette action charge une liste des serveurs pour lesquels les sauvegardes géoredondantes sont activées. Sélectionnez l’une de ces sauvegardes comme source pour votre nouveau serveur.
-   ![Sélectionner la source : sauvegarde et liste des sauvegardes géoredondantes](./media/howto-restore-server-portal/2-georestore.png)
-
+3. Sélectionnez **Sauvegarde** comme **Source de données**. Cette action charge une liste déroulante des serveurs pour lesquels les sauvegardes géoredondantes sont activées.
+   
+   :::image type="content" source="./media/howto-restore-server-portal/3-geo-restore.png" alt-text="Sélectionnez la source de données.":::
+    
    > [!NOTE]
    > Lorsqu’un serveur est créé, il est possible qu’il ne soit pas immédiatement disponible pour la restauration géographique. Le remplissage des métadonnées nécessaires peut prendre quelques heures.
    >
 
-3. Renseignez le reste du formulaire avec vos préférences. Vous pouvez sélectionner n’importe quel **Emplacement**. Une fois l’emplacement sélectionné, vous pouvez sélectionner **Niveau tarifaire**. Par défaut, les paramètres du serveur existant à partir duquel vous effectuez la restauration sont affichés. Vous pouvez cliquer sur **OK** sans apporter de modifications pour hériter de ces paramètres. Sinon, vous pouvez modifier la **génération de calcul** (si disponible dans la région choisie), le nombre de **vCores**, la **période de rétention de sauvegarde** et **l’option de redondance de sauvegarde**. La modification du **niveau tarifaire** (De base, Usage général ou À mémoire optimisée) ou de la taille du**stockage** pendant la restauration n’est pas prise en charge.
+4. Sélectionnez la liste déroulante **Sauvegarde**.
+   
+   :::image type="content" source="./media/howto-restore-server-portal/4-geo-restore-backup.png" alt-text="Sélectionnez la liste déroulante de sauvegarde.":::
+
+5. Sélectionnez le serveur source à partir duquel effectuer la restauration.
+   
+   :::image type="content" source="./media/howto-restore-server-portal/5-select-backup.png" alt-text="Sélectionnez une sauvegarde.":::
+
+6. Le serveur utilisera par défaut les valeurs pour le nombre de **vCores**, la **période de conservation de sauvegarde**, l’**option de redondance de sauvegarde**, la **version du moteur** et les **informations d’identification d’administrateur**. Sélectionnez **Continuer**. 
+   
+   :::image type="content" source="./media/howto-restore-server-portal/6-accept-backup.png" alt-text="Poursuivez la sauvegarde.":::
+
+7. Renseignez le reste du formulaire avec vos préférences. Vous pouvez sélectionner n’importe quel **Emplacement**.
+
+    Après avoir sélectionné l’emplacement, vous pouvez sélectionner **Configurer le serveur** pour mettre à jour la **génération de calcul** (si disponible dans la région choisie), le nombre de **vCores**, la **période de conservation de sauvegarde** et l’**option de redondance de sauvegarde**. La modification du **niveau tarifaire** (De base, Usage général ou À mémoire optimisée) ou de la taille du **stockage** pendant la restauration n’est pas prise en charge.
+
+   :::image type="content" source="./media/howto-restore-server-portal/7-create.png" alt-text="Remplissez le formulaire."::: 
+
+8. Sélectionnez **Vérifier + créer** pour passer en revue vos sélections. 
+
+9. Sélectionnez **Créer** pour approvisionner le serveur. Cette opération peut prendre quelques minutes.
 
 Le serveur créé par la restauration géographique a les mêmes nom de connexion administrateur de serveur et mot de passe qui étaient valides pour le serveur existant au moment où la restauration a été initiée. Le mot de passe peut être modifié sur la page **Vue d’ensemble** du nouveau serveur.
 

@@ -1,5 +1,5 @@
 ---
-title: 'Démarrage rapide : Utiliser le cache Azure pour Redis avec Java'
+title: 'Démarrage rapide : Utiliser Azure Cache pour Redis dans Java'
 description: Dans ce guide de démarrage rapide, vous allez créer une application Java qui utilise le cache Azure pour Redis
 author: yegu-ms
 ms.service: cache
@@ -7,15 +7,15 @@ ms.devlang: java
 ms.topic: quickstart
 ms.date: 05/22/2020
 ms.author: yegu
-ms.custom: mvc, seo-java-august2019, seo-java-september2019
-ms.openlocfilehash: 02430e2dfa68ff0ce4bf116666d72a46e1120746
-ms.sourcegitcommit: 1f25aa993c38b37472cf8a0359bc6f0bf97b6784
+ms.custom: mvc, seo-java-august2019, seo-java-september2019, devx-track-java
+ms.openlocfilehash: edb80ab3107cbd0a5ddd802d56a60ce77affb2f2
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/26/2020
-ms.locfileid: "83848853"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96012916"
 ---
-# <a name="quickstart-use-azure-cache-for-redis-with-java"></a>Démarrage rapide : Utiliser le cache Azure pour Redis avec Java
+# <a name="quickstart-use-azure-cache-for-redis-in-java"></a>Démarrage rapide : Utiliser Azure Cache pour Redis dans Java
 
 Dans ce guide de démarrage rapide, vous allez incorporer le cache Azure pour Redis dans une application Java à l’aide du client Redis [Jedis](https://github.com/xetorthio/jedis) pour avoir accès à un cache sécurisé et dédié accessible à partir de n’importe quelle application dans Azure.
 
@@ -30,12 +30,24 @@ Dans ce guide de démarrage rapide, vous allez incorporer le cache Azure pour Re
 
 [!INCLUDE [redis-cache-access-keys](../../includes/redis-cache-access-keys.md)]
 
-Ajoutez des variables d’environnement pour votre **NOM D’HÔTE** et la clé d’accès **Principale**. Vous allez utiliser ces variables à partir de votre code au lieu d’inclure les informations sensibles directement dedans.
+## <a name="setting-up-the-working-environment"></a>Configurer l’environnement de travail 
+
+Ajoutez des variables d’environnement pour votre **nom d’hôte** et votre **clé d’accès primaire** en fonction de votre système d’exploitation. Ouvrez une invite de commandes ou une fenêtre de terminal et configurez les valeurs suivantes :
 
 ```CMD 
-set REDISCACHEHOSTNAME=contosoCache.redis.cache.windows.net
-set REDISCACHEKEY=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+set REDISCACHEHOSTNAME=<YOUR_HOST_NAME>.redis.cache.windows.net
+set REDISCACHEKEY=<YOUR_PRIMARY_ACCESS_KEY>
 ```
+
+```bash
+export REDISCACHEHOSTNAME=<YOUR_HOST_NAME>.redis.cache.windows.net
+export REDISCACHEKEY=<YOUR_PRIMARY_ACCESS_KEY>
+```
+
+Remplacez les espaces réservés par les valeurs suivantes :
+
+- `<YOUR_HOST_NAME>` : le nom d’hôte DNS obtenu à partir de la section *Propriétés* de votre ressource Azure Cache pour Redis dans le portail Azure.
+- `<YOUR_PRIMARY_ACCESS_KEY>` : la clé d’accès primaire obtenue à partir de la section *Clés d’accès* de votre ressource Azure Cache pour Redis dans le portail Azure.
 
 ## <a name="create-a-new-java-app"></a>Créer une nouvelle application Java
 

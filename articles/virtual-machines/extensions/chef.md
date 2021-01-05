@@ -8,17 +8,18 @@ manager: gwallace
 editor: ''
 tags: azure-resource-manager
 ms.service: virtual-machines-linux
+ms.subservice: extensions
 ms.workload: infrastructure-services
 ms.tgt_pltfrm: vm-linux
 ms.topic: article
 ms.date: 09/21/2018
 ms.author: akjosh
-ms.openlocfilehash: a21b8f2fea7433e9f65fd790321a28ea47a38c79
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 8977563c6b19754eda53686baf85f840a7583e77
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76544716"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94968364"
 ---
 # <a name="chef-vm-extension-for-linux-and-windows"></a>Extension de machine virtuelle Chef pour Linux et Windows
 
@@ -106,7 +107,7 @@ Les extensions de machines virtuelles Azure peuvent être déployées avec des m
 
 Un exemple de modèle Resource Manager qui inclut l’extension de machine virtuelle Chef est disponible dans la [galerie de démarrage rapide Azure](https://github.com/Azure/azure-quickstart-templates/tree/master/chef-json-parameters-linux-vm).
 
-La configuration JSON pour une extension de machine virtuelle peut être imbriquée à l’intérieur de la ressource de machine virtuelle ou placée à la racine ou au niveau supérieur d’un modèle de Resource Manager JSON. Le positionnement de la configuration JSON affecte la valeur du nom de la ressource et son type. Pour plus d’informations, consultez [Définition du nom et du type des ressources enfants](../../azure-resource-manager/resource-manager-template-child-resource.md).
+La configuration JSON pour une extension de machine virtuelle peut être imbriquée à l’intérieur de la ressource de machine virtuelle ou placée à la racine ou au niveau supérieur d’un modèle de Resource Manager JSON. Le positionnement de la configuration JSON affecte la valeur du nom de la ressource et son type. Pour plus d’informations, consultez [Définition du nom et du type des ressources enfants](../../azure-resource-manager/templates/child-resource-name-type.md).
 
 ## <a name="azure-cli-deployment"></a>Déploiement de l’interface de ligne de commande Azure
 

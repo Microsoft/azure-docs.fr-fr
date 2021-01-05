@@ -1,17 +1,17 @@
 ---
 title: Accéder aux journaux des requêtes lentes - Portail Azure - Azure Database pour MySQL
 description: Cet article décrit comment configurer et consulter les journaux des requêtes lentes dans Azure Database pour MySQL à partir du portail Azure.
-author: ajlam
-ms.author: andrela
+author: savjani
+ms.author: pariks
 ms.service: mysql
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 4/13/2020
-ms.openlocfilehash: 59faf63312bd7cc657f8b96ca3110707ea997c02
-ms.sourcegitcommit: 530e2d56fc3b91c520d3714a7fe4e8e0b75480c8
+ms.openlocfilehash: 5ad4ffa99a7af592e3e93e53673d254956807c40
+ms.sourcegitcommit: 6ab718e1be2767db2605eeebe974ee9e2c07022b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/14/2020
-ms.locfileid: "81273600"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94541621"
 ---
 # <a name="configure-and-access-slow-query-logs-from-the-azure-portal"></a>Configurer et consulter les journaux des requêtes lentes à partir du portail Azure
 
@@ -28,7 +28,7 @@ Configurer l’accès au journal des requêtes lentes de MySQL.
 2. Sélectionnez votre serveur Azure Database pour MySQL.
 
 3. Dans la section **Supervision** de la barre latérale, sélectionnez **Journaux du serveur**. 
-   ![Capture d’écran des options Journaux du serveur](./media/howto-configure-server-logs-in-portal/1-select-server-logs-configure.png)
+   :::image type="content" source="./media/howto-configure-server-logs-in-portal/1-select-server-logs-configure.png" alt-text="Capture d’écran des options Journaux du serveur":::
 
 4. Pour afficher les paramètres du serveur, sélectionnez **Cliquez ici pour activer les journaux et configurer les paramètres associés**.
 
@@ -53,7 +53,7 @@ Une fois que la journalisation a commencé, vous pouvez afficher la liste des jo
 
 3. Dans la section **Supervision** de la barre latérale, sélectionnez **Journaux du serveur**. La page présente la liste de vos fichiers journaux.
 
-   ![Capture d’écran de la page Journaux du serveur, avec la liste des journaux mise en évidence](./media/howto-configure-server-logs-in-portal/4-server-logs-list.png)
+   :::image type="content" source="./media/howto-configure-server-logs-in-portal/4-server-logs-list.png" alt-text="Capture d’écran de la page Journaux du serveur, avec la liste des journaux mise en évidence":::
 
    > [!TIP]
    > La convention d’affectation des noms de journaux est **mysql-slow-<nom de votre serveur>-aaaammjjhh.log**. La date et l’heure utilisées dans le nom de fichier correspondent au moment où le journal a été émis. Les fichiers journaux font l’objet d’une rotation toutes les 24 heures ou une fois qu’ils ont atteint la taille de 7,5 Go, selon ce qui se produit en premier. 
@@ -62,23 +62,23 @@ Une fois que la journalisation a commencé, vous pouvez afficher la liste des jo
 
 5. Pour téléchargez un fichier journal en particulier, sélectionnez l’icône de flèche bas à côté du fichier journal dans la ligne du tableau.
 
-   ![Capture d’écran de la page Journaux du serveur, avec l’icône de flèche bas mise en évidence](./media/howto-configure-server-logs-in-portal/5-download.png)
+   :::image type="content" source="./media/howto-configure-server-logs-in-portal/5-download.png" alt-text="Capture d’écran de la page Journaux du serveur, avec l’icône de flèche bas mise en évidence":::
 
 ## <a name="set-up-diagnostic-logs"></a>Configurer les journaux de diagnostic
 
 1. En dessous de la section **Supervision** dans la barre latérale, sélectionnez **Paramètres de diagnostic** > **Ajouter des paramètres de diagnostic**.
 
-   ![Capture d’écran des options Paramètres de diagnostic](./media/howto-configure-server-logs-in-portal/add-diagnostic-setting.png)
+   :::image type="content" source="./media/howto-configure-server-logs-in-portal/add-diagnostic-setting.png" alt-text="Capture d’écran des options Paramètres de diagnostic":::
 
 1. Entrez un nom de paramètre de diagnostic.
 
 1. Spécifiez les récepteurs de données auxquels envoyer les journaux des requêtes lentes (compte de stockage, hub d’événements ou espace de travail Log Analytics).
 
 1. Sélectionnez **MySqlSlowLogs** comme type de journal.
-![Capture d’écran des options de configuration des paramètres de diagnostic](./media/howto-configure-server-logs-in-portal/configure-diagnostic-setting.png)
+:::image type="content" source="./media/howto-configure-server-logs-in-portal/configure-diagnostic-setting.png" alt-text="Capture d’écran des options de configuration des paramètres de diagnostic":::
 
 1. Après avoir configuré les récepteurs de données auxquels envoyer les journaux des requêtes lentes, sélectionnez **Enregistrer**.
-![Capture d’écran des options de configuration des paramètres de diagnostic, avec l’option Enregistrer mise en évidence](./media/howto-configure-server-logs-in-portal/save-diagnostic-setting.png)
+:::image type="content" source="./media/howto-configure-server-logs-in-portal/save-diagnostic-setting.png" alt-text="Capture d’écran des options de configuration des paramètres de diagnostic, avec l’option Enregistrer mise en évidence":::
 
 1. Accédez aux journaux des requêtes lentes en les explorant dans les récepteurs de données que vous avez configurés. L’affichage des journaux peut prendre jusqu’à 10 minutes.
 

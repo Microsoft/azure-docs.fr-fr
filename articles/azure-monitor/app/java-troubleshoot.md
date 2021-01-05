@@ -3,14 +3,21 @@ title: Résolution des problèmes d'Application Insights dans un projet web Jav
 description: 'Guide de dépannage : surveillance des applications Java en direct avec Application Insights.'
 ms.topic: conceptual
 ms.date: 03/14/2019
-ms.openlocfilehash: 04e98938bc5dd17816ae873f122073212275a414
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+author: MS-jgol
+ms.custom: devx-track-java
+ms.author: jgol
+ms.openlocfilehash: 6b578cd03daa6e996a69c03afd327097d6123045
+ms.sourcegitcommit: e15c0bc8c63ab3b696e9e32999ef0abc694c7c41
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77657178"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97607896"
 ---
-# <a name="troubleshooting-and-q-and-a-for-application-insights-for-java"></a>Guide de dépannage et questions-réponses concernant Application Insights pour Java
+# <a name="troubleshooting-and-q-and-a-for-application-insights-for-java-sdk"></a>Guide de dépannage et questions-réponses concernant Application Insights pour le Kit de développement logiciel (SDK) Java
+
+> [!IMPORTANT]
+> L’approche recommandée pour surveiller des applications Java consiste à utiliser l’instrumentation automatique sans modifier le code. Suivez les instructions pour l’[agent Application Insights agent Java 3.0](./java-in-process-agent.md).
+
 Vous avez des questions concernant [Azure Application Insights dans Java][java] ou vous rencontrez des problèmes ? Voici quelques conseils.
 
 ## <a name="build-errors"></a>Erreurs de build
@@ -24,7 +31,7 @@ Vous avez des questions concernant [Azure Application Insights dans Java][java]
 * Attendez une minute, puis cliquez sur Actualiser. Les graphiques s’actualisent à intervalles réguliers, mais vous pouvez également les actualiser manuellement. L’intervalle d’actualisation dépend de l’intervalle de temps sur lequel porte le graphique.
 * Vérifiez que vous disposez d’une clé d’instrumentation définie dans le fichier ApplicationInsights.xml (situé dans le dossier de ressources de votre projet) ou configurée en tant que variable d’environnement.
 * Vérifiez qu’aucun nœud `<DisableTelemetry>true</DisableTelemetry>` ne se trouve dans le fichier .xml.
-* Vous devrez ouvrir les ports TCP 80 et 443 de votre pare-feu pour le trafic sortant vers dc.services.visualstudio.com. Consultez la [liste complète des exceptions de pare-feu](../../azure-monitor/app/ip-addresses.md)
+* Vous devrez ouvrir les ports TCP 80 et 443 de votre pare-feu pour le trafic sortant vers dc.services.visualstudio.com. Consultez la [liste complète des exceptions de pare-feu](./ip-addresses.md)
 * Dans le panneau de démarrage Microsoft Azure, examinez la carte d'état du service. Si des alertes sont indiquées, attendez qu'elles soient corrigées (OK), puis fermez et rouvrez le volet de votre application Application Insights.
 * [Activez la journalisation](#debug-data-from-the-sdk) en ajoutant un élément `<SDKLogger />` sous le nœud racine dans le fichier ApplicationInsights.xml (situé dans le dossier de ressources de votre projet), puis vérifiez les entrées précédées de AI : INFO/WARN/ERROR pour tout journal d’activité suspect. 
 * Assurez-vous que le fichier ApplicationInsights.xml approprié a été correctement chargé par le Kit de développement logiciel (SDK) Java, en vérifiant que le message de sortie de la console « Le fichier de configuration a été trouvé » s’affiche.
@@ -33,13 +40,12 @@ Vous avez des questions concernant [Azure Application Insights dans Java][java]
 * Assurez-vous d’utiliser la même version des appenders principaux, web, d’agent et de journalisation Application Insights afin d’éviter tout problème lié à des conflits entre les versions.
 
 #### <a name="i-used-to-see-data-but-it-has-stopped"></a>Je pouvais voir les données, mais plus maintenant
-* Vérifiez le [blog d'état](https://blogs.msdn.com/b/applicationinsights-status/).
 * Vous souhaitez savoir si vous avez atteint votre quota mensuel de points de données ? Ouvrez Paramètres/Quota et tarification pour le savoir. Le cas échéant, vous pouvez mettre à niveau votre forfait ou payer pour disposer d’une capacité supplémentaire. Consultez le [mécanisme de tarification](https://azure.microsoft.com/pricing/details/application-insights/).
 * Avez-vous récemment mis à niveau votre kit de développement logiciel ? Assurez-vous que seuls les fichiers JAR uniques du SDK sont présents à l’intérieur du répertoire du projet. Une seule version du SDK doit être identifiée.
 * Examinez-vous la ressource AI appropriée ? Mettez en correspondance l’iKey de votre application à la ressource où est attendue la télémétrie. Il doit s’agir du même élément.
 
 #### <a name="i-dont-see-all-the-data-im-expecting"></a>Je ne vois pas toutes les données que j’attends
-* Ouvrez la page Utilisation et estimation des coûts et vérifiez si [l’échantillonnage](../../azure-monitor/app/sampling.md) est en cours. (Une transmission de 100 % signifie que l’échantillonnage n’est pas activé). Le service Application Insights peut être défini pour n’accepter qu’une fraction des données de télémétrie provenant de votre application. Cela vous permet de respecter votre quota mensuel de télémétrie.
+* Ouvrez la page Utilisation et estimation des coûts et vérifiez si [l’échantillonnage](./sampling.md) est en cours. (Une transmission de 100 % signifie que l’échantillonnage n’est pas activé). Le service Application Insights peut être défini pour n’accepter qu’une fraction des données de télémétrie provenant de votre application. Cela vous permet de respecter votre quota mensuel de télémétrie.
 * L’échantillonnage du SDK est-il activé ? Le cas échéant, les données sont échantillonnées à la fréquence spécifiée pour l’ensemble des types applicables.
 * Exécutez-vous une version antérieure du SDK Java ? À partir de la version 2.0.1, nous avons introduit un mécanisme de tolérance de panne destinée à gérer les défaillances intermittentes du réseau et du serveur principal, ainsi que la persistance des données sur les lecteurs locaux.
 * Déplorez-vous une limitation en raison d’une télémétrie excessive ? Si vous activez la journalisation INFO, vous observez un message faisant état de la limitation de l’application. Notre limite actuelle est de 32 000 éléments de télémétrie/seconde.
@@ -57,7 +63,6 @@ Assurez-vous d'avoir configuré correctement votre application de façon à envo
 Si votre client est une application d’un [téléphone ou d’un autre appareil][platforms], vous pouvez également envoyer la télémétrie à partir de ce dernier.
 
 Utilisez la même clé d'instrumentation pour configurer la télémétrie de votre client et de votre serveur. Les données apparaîtront dans la même ressource Application Insights, et vous pourrez mettre en corrélation les événements du serveur et du client.
-
 
 ## <a name="disabling-telemetry"></a>Désactivation de la télémétrie
 **Comment puis-je désactiver la collecte télémétrique ?**
@@ -178,7 +183,6 @@ Application Insights utilise `org.apache.http`. Cet élément a été déplacé 
 >[!NOTE]
 >Si vous activez l’enregistrement au niveau du DÉBOGAGE pour tous les espaces de noms dans l’application, il est respecté par tous les modules en cours d’exécution, y compris `org.apache.http` renommé `com.microsoft.applicationinsights.core.dependencies.http`. Application Insights ne peut pas appliquer de filtrage pour ces appels, car l’appel de journal est effectué par la bibliothèque Apache. L’enregistrement au niveau du débogage produit une quantité considérable de données de journal et n’est pas recommandé pour les instances de production dynamiques.
 
-
 ## <a name="next-steps"></a>Étapes suivantes
 **J’ai configuré Application Insights pour mon application serveur Java. Que puis-je faire d’autre ?**
 
@@ -194,11 +198,11 @@ Application Insights utilise `org.apache.http`. Cet élément a été déplacé 
 
 <!--Link references-->
 
-[availability]: ../../azure-monitor/app/monitor-web-app-availability.md
-[data]: ../../azure-monitor/app/data-retention-privacy.md
+[availability]: ./monitor-web-app-availability.md
+[data]: ./data-retention-privacy.md
 [java]: java-get-started.md
 [javalogs]: java-trace-logs.md
-[platforms]: ../../azure-monitor/app/platforms.md
-[track]: ../../azure-monitor/app/api-custom-events-metrics.md
+[platforms]: ./platforms.md
+[track]: ./api-custom-events-metrics.md
 [usage]: javascript.md
 

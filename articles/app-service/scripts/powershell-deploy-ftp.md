@@ -5,19 +5,19 @@ tags: azure-service-management
 ms.assetid: b7d46d6f-44fd-454c-8008-87dab6eefbc1
 ms.topic: sample
 ms.date: 03/20/2017
-ms.custom: mvc
-ms.openlocfilehash: 1dfcbec9530a66570244e8168faa84bfe0759038
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.custom: mvc, devx-track-azurepowershell
+ms.openlocfilehash: 90c4a30243569c07e1a70ad46c8b2f7e70d493b2
+ms.sourcegitcommit: 273c04022b0145aeab68eb6695b99944ac923465
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "74685088"
+ms.lasthandoff: 12/10/2020
+ms.locfileid: "97005577"
 ---
 # <a name="upload-files-to-a-web-app-using-ftp"></a>Télécharger des fichiers vers une application web via FTP
 
-Cet exemple de script crée une application web dans App Service avec ses ressources associées, puis déploie votre code d’application web au moyen du site FTP (via [WebClient.UploadFile()](https://msdn.microsoft.com/library/ms144229.aspx)).
+Cet exemple de script crée une application web dans App Service avec ses ressources associées, puis déploie votre code d’application web au moyen du site FTP (via [WebClient.UploadFile()](/dotnet/api/system.net.webclient.uploadfile)).
 
-Si nécessaire, installez Azure PowerShell à l’aide des instructions figurant dans le [Guide Azure PowerShell](/powershell/azure/overview), puis exécutez `Connect-AzAccount` pour créer une connexion avec Azure.
+Si nécessaire, installez Azure PowerShell à l’aide des instructions figurant dans le [Guide Azure PowerShell](/powershell/azure/), puis exécutez `Connect-AzAccount` pour créer une connexion avec Azure.
 
 ## <a name="sample-script"></a>Exemple de script
 
@@ -30,7 +30,7 @@ Si nécessaire, installez Azure PowerShell à l’aide des instructions figurant
 Une fois l’exemple de script exécuté, la commande suivante permet de supprimer le groupe de ressources, l’application web et toutes les ressources associées.
 
 ```powershell
-Remove-AzResourceGroup -Name $webappname -Force
+Remove-AzResourceGroup -Name myResourceGroup -Force
 ```
 
 ## <a name="script-explanation"></a>Explication du script
@@ -46,6 +46,6 @@ Ce script utilise les commandes suivantes. Chaque commande du tableau renvoie à
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour plus d’informations sur le module Azure PowerShell, consultez [Documentation Azure PowerShell](/powershell/azure/overview).
+Pour plus d’informations sur le module Azure PowerShell, consultez [Documentation Azure PowerShell](/powershell/azure/).
 
 Vous trouverez des exemples supplémentaires de scripts Azure PowerShell pour Azure App Service Web Apps sur la page [Azure PowerShell Samples](../samples-powershell.md) (Exemples Azure PowerShell).

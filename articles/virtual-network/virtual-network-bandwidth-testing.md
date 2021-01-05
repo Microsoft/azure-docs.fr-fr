@@ -1,23 +1,23 @@
 ---
 title: Test du débit réseau de machine virtuelle Azure
 titlesuffix: Azure Virtual Network
-description: Découvrez comment tester le débit du réseau des machines virtuelles Azure.
+description: Utilisez NTTTCP pour cibler le réseau à des fins de test et réduire l’utilisation d’autres ressources qui pourraient avoir un impact sur les performances.
 services: virtual-network
 documentationcenter: na
 author: steveesp
 ms.service: virtual-network
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 07/21/2017
+ms.date: 10/06/2020
 ms.author: steveesp
-ms.openlocfilehash: 80e8a5e5de1da2098d895e09b36fb209050743a0
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 0b009b7c44084e76194c1447fefdb2ff59f8086a
+ms.sourcegitcommit: 5abc3919a6b99547f8077ce86a168524b2aca350
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "60743073"
+ms.lasthandoff: 10/07/2020
+ms.locfileid: "91812282"
 ---
 # <a name="bandwidththroughput-testing-ntttcp"></a>Test de bande passante/débit (NTTTCP)
 
@@ -26,7 +26,7 @@ Lorsque vous testez les performances du débit réseau dans Azure, il est préf�
 Copiez l’outil sur deux machines virtuelles Azure de la même taille. Une machine virtuelle fonctionne comme expéditeur et l’autre comme récepteur.
 
 #### <a name="deploying-vms-for-testing"></a>Déploiement de machines virtuelles pour le test
-Dans le cadre de ce test, les deux machines virtuelles doivent être dans le même service cloud ou le même groupe à haute disponibilité afin de pouvoir utiliser leurs adresses IP internes et exclure les équilibrages de charge du test. Il est possible de tester avec l’adresse IP virtuelle, mais ce type de test n’est pas couvert par ce document.
+Dans le cadre de ce test, les deux machines virtuelles doivent être dans le même [groupe de placement de proximité](../virtual-machines/windows/co-location.md)ou le même groupe à haute disponibilité afin de pouvoir utiliser leurs adresses IP internes et exclure les équilibrages de charge du test. Il est possible de tester avec l’adresse IP virtuelle, mais ce type de test n’est pas couvert par ce document.
 
 Prenez note de l’adresse IP du récepteur. Appelons cette IP « a.b.c.r »
 
@@ -63,7 +63,7 @@ Sur le RÉCEPTEUR, créez une règle d’autorisation sur le pare-feu Windows po
 
 Autorisez ntttcp via le pare-feu Windows en utilisant ce qui suit :
 
-netsh advfirewall firewall add rule program=\<CHEMIN\>\\ntttcp.exe name="ntttcp" protocol=any dir=in action=allow enable=yes profile=ANY
+netsh advfirewall firewall add rule program=\<PATH\>\\ntttcp.exe name="ntttcp" protocol=any dir=in action=allow enable=yes profile=ANY
 
 Par exemple, si vous avez copié ntttcp.exe dans le dossier « c:\\tools », voici la commande : 
 
@@ -132,13 +132,13 @@ Dans ce scénario, nous devons activer le mode sans synchronisation pour permett
 
 #### <a name="from-linux-to-windows"></a>De Linux vers Windows :
 
-Destinataire \<Windows> :
+Récepteur \<Windows> :
 
 ``` bash
 ntttcp -r -m <2 x nr cores>,*,<Windows server IP>
 ```
 
-Expéditeur \<Linux> :
+Expéditeur \<Linux>:
 
 ``` bash
 ntttcp -s -m <2 x nr cores>,*,<Windows server IP> -N -t 300
@@ -146,7 +146,7 @@ ntttcp -s -m <2 x nr cores>,*,<Windows server IP> -N -t 300
 
 #### <a name="from-windows-to-linux"></a>De Windows vers Linux :
 
-Destinataire \<Linux> :
+Récepteur \<Linux> :
 
 ``` bash
 ntttcp -r -m <2 x nr cores>,*,<Linux server IP>

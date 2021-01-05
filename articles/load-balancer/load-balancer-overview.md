@@ -14,12 +14,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 1/14/2020
 ms.author: allensu
-ms.openlocfilehash: 1bc18788019c3ec97e06e3b01e823a0ba53541b8
-ms.sourcegitcommit: 4499035f03e7a8fb40f5cff616eb01753b986278
+ms.openlocfilehash: 96c0242414c67d97fc324977b1259f63c27c3a26
+ms.sourcegitcommit: e2dc549424fb2c10fcbb92b499b960677d67a8dd
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/03/2020
-ms.locfileid: "82734754"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94696810"
 ---
 # <a name="what-is-azure-load-balancer"></a>Qu’est-ce qu’Azure Load Balancer ?
 
@@ -32,7 +32,7 @@ Un **[équilibreur de charge public](./components.md#frontend-ip-configurations)
 Un **[équilibreur de charge interne (ou privé)](./components.md#frontend-ip-configurations)** est utilisé lorsque des adresses IP privées sont nécessaires uniquement au niveau du serveur front-end. Les équilibreurs de charge internes sont utilisés pour équilibrer la charge du trafic au sein d’un réseau virtuel. Vous pouvez accéder au front-end d’un équilibreur de charge à partir d’un réseau local dans le cadre d’un scénario hybride.
 
 <p align="center">
-  <img src="./media/load-balancer-overview/load-balancer.svg" width="512" title="Azure Load Balancer">
+  <img src="./media/load-balancer-overview/load-balancer.svg" alt="Figure depicts both public and internal load balancers directing traffic to port 80 on multiple servers on a Web tier and port 443 on multiple servers on a business tier." width="512" title="Azure Load Balancer">
 </p>
 
 *Figure : Équilibrage d’applications multiniveaux à l’aide d’un Load Balancer public et d’un Load Balancer interne*
@@ -44,30 +44,30 @@ Standard Load Balancer vous permet de mettre à l’échelle vos applications et
 
 Voici les principaux scénarios que vous pouvez gérer avec Standard Load Balancer :
 
-- Équilibrer la charge du trafic **[interne](https://docs.microsoft.com/azure/load-balancer/tutorial-load-balancer-standard-manage-portal)** et **[externe](https://docs.microsoft.com/azure/load-balancer/tutorial-load-balancer-standard-internal-portal)** sur les machines virtuelles Azure
+- Équilibrer la charge du trafic **[interne](./quickstart-load-balancer-standard-internal-portal.md)** et **[externe](./tutorial-load-balancer-standard-manage-portal.md)** sur les machines virtuelles Azure
 
-- Augmenter la disponibilité en répartissant les ressources **[au sein des zones](https://docs.microsoft.com/azure/load-balancer/tutorial-load-balancer-standard-public-zonal-portal)** et **[entre les zones](https://docs.microsoft.com/azure/load-balancer/tutorial-load-balancer-standard-public-zone-redundant-portal)**
+- Augmenter la disponibilité en répartissant les ressources **[au sein des zones](./tutorial-load-balancer-standard-public-zonal-portal.md)** et **[entre les zones](./tutorial-load-balancer-standard-public-zone-redundant-portal.md)**
 
-- Configurer la **[connectivité sortante](https://docs.microsoft.com/azure/load-balancer/load-balancer-outbound-connections)** pour les machines virtuelles Azure
+- Configurer la **[connectivité sortante](./load-balancer-outbound-connections.md)** pour les machines virtuelles Azure
 
-- Utiliser des **[sondes d’intégrité](https://docs.microsoft.com/azure/load-balancer/load-balancer-custom-probe-overview)** pour superviser les ressources à charge équilibrée
+- Utiliser des **[sondes d’intégrité](./load-balancer-custom-probe-overview.md)** pour superviser les ressources à charge équilibrée
 
-- Utiliser le **[réacheminement de port ](https://docs.microsoft.com/azure/load-balancer/tutorial-load-balancer-port-forwarding-portal)** pour accéder aux machines virtuelles d’un réseau virtuel via une adresse IP publique et un port
+- Utiliser le **[réacheminement de port](./tutorial-load-balancer-port-forwarding-portal.md)** pour accéder aux machines virtuelles d’un réseau virtuel via une adresse IP publique et un port
 
-- Activer la prise en charge de l’ **[équilibrage de charge](https://docs.microsoft.com/azure/virtual-network/virtual-network-ipv4-ipv6-dual-stack-standard-load-balancer-powershell)** de **[IPv6](https://docs.microsoft.com/azure/virtual-network/ipv6-overview)**
+- Activer la prise en charge de l’ **[équilibrage de charge](../virtual-network/virtual-network-ipv4-ipv6-dual-stack-standard-load-balancer-powershell.md)** de **[IPv6](../virtual-network/ipv6-overview.md)**
 
-- Standard Load Balancer fournit des métriques multidimensionnelles via [Azure Monitor](https://docs.microsoft.com/azure/azure-monitor/overview).  Ces métriques peuvent être filtrées, regroupées et réparties pour une dimension donnée.  Elles fournissent des analyses en cours et historiques sur les performances et l’intégrité de votre service.  Resource Health est également pris en charge. Pour plus d’informations, consultez **[Diagnostics de Standard Load Balancer](load-balancer-standard-diagnostics.md)** .
+- Standard Load Balancer fournit des métriques multidimensionnelles via [Azure Monitor](../azure-monitor/overview.md).  Ces métriques peuvent être filtrées, regroupées et réparties pour une dimension donnée.  Elles fournissent des analyses en cours et historiques sur les performances et l’intégrité de votre service.  Resource Health est également pris en charge. Pour plus d’informations, consultez **[Diagnostics de Standard Load Balancer](load-balancer-standard-diagnostics.md)** .
 
-- Équilibrer la charge des services sur **[plusieurs ports, plusieurs adresses IP ou les deux](https://docs.microsoft.com/azure/load-balancer/load-balancer-multivip-overview)**
+- Équilibrer la charge des services sur **[plusieurs ports, plusieurs adresses IP ou les deux](./load-balancer-multivip-overview.md)**
 
-- Déplacer des ressources d’équilibreur de charge **[internes](https://docs.microsoft.com/azure/load-balancer/move-across-regions-internal-load-balancer-portal)** et **[externes](https://docs.microsoft.com/azure/load-balancer/move-across-regions-external-load-balancer-portal)** entre les différentes régions Azure
+- Déplacer des ressources d’équilibreur de charge **[internes](./move-across-regions-internal-load-balancer-portal.md)** et **[externes](./move-across-regions-external-load-balancer-portal.md)** entre les différentes régions Azure
 
-- Équilibrer simultanément la charge du flux TCP et UDP sur tous les ports à l’aide des **[ports haute disponibilité](https://docs.microsoft.com/azure/load-balancer/load-balancer-ha-ports-overview)** .
+- Équilibrer simultanément la charge du flux TCP et UDP sur tous les ports à l’aide des **[ports haute disponibilité](./load-balancer-ha-ports-overview.md)** .
 
 ### <a name="secure-by-default"></a><a name="securebydefault"></a>Sécuriser par défaut
 
-Standard Load Balancer repose sur le modèle de sécurité réseau Confiance Zéro. Standard Load Balancer est sécurisé par défaut et fait partie de votre réseau virtuel. Le réseau virtuel est un réseau privé et isolé.  Cela signifie que les équilibreurs de charge Standard et les adresses IP publiques standard sont fermés aux flux entrants, sauf s’ils sont ouverts par des groupes de sécurité réseau. Les groupes de sécurité réseau sont utilisés pour autoriser explicitement le trafic autorisé.  Si vous n’avez pas de groupe de sécurité réseau sur un sous-réseau ou une carte réseau de votre ressource de machine virtuelle, le trafic n’est pas autorisé à atteindre cette ressource. Pour plus d’informations sur les Groupes de sécurité réseau et la façon de les appliquer à votre scénario, consultez [Filtrer le trafic réseau avec les groupes de sécurité réseau](../virtual-network/security-overview.md).
-Par défaut, Basic Load Balancer est ouvert sur Internet.
+Standard Load Balancer repose sur le modèle de sécurité réseau Confiance Zéro. Standard Load Balancer est sécurisé par défaut et fait partie de votre réseau virtuel. Le réseau virtuel est un réseau privé et isolé.  Cela signifie que les équilibreurs de charge Standard et les adresses IP publiques standard sont fermés aux flux entrants, sauf s’ils sont ouverts par des groupes de sécurité réseau. Les groupes de sécurité réseau sont utilisés pour autoriser explicitement le trafic autorisé.  Si vous n’avez pas de groupe de sécurité réseau sur un sous-réseau ou une carte réseau de votre ressource de machine virtuelle, le trafic n’est pas autorisé à atteindre cette ressource. Pour plus d’informations sur les Groupes de sécurité réseau et la façon de les appliquer à votre scénario, consultez [Filtrer le trafic réseau avec les groupes de sécurité réseau](../virtual-network/network-security-groups-overview.md).
+Par défaut, Basic Load Balancer est ouvert sur Internet. En outre, Load Balancer ne stocke pas les données client.
 
 ## <a name="pricing-and-sla"></a>Tarifs et contrat SLA
 
@@ -75,11 +75,12 @@ Pour plus d’informations sur la tarification de Load Balancer Standard, consul
 La référence SKU De base de Load Balancer est proposée gratuitement.
 Consultez [Contrat SLA pour Load Balancer](https://aka.ms/lbsla). Basic Load Balancer n’a pas de contrat SLA.
 
+## <a name="whats-new"></a>Nouveautés
+
+Abonnez-vous au flux RSS et découvrez les dernières mises à jour des fonctionnalités Azure Load Balancer dans la page [Mises à jour Azure](https://azure.microsoft.com/updates/?category=networking&query=load%20balancer).
+
 ## <a name="next-steps"></a>Étapes suivantes
-Pour passer de la version De base à la version Standard de Load Balancer, consultez [Mettre à niveau la version De base de Load Balancer](upgrade-basic-standard.md).
 
 Pour bien démarrer avec les équilibreurs de charge, consultez [Créer un équilibreur de charge standard public](quickstart-load-balancer-standard-public-portal.md).
 
 Pour plus d’informations sur les limitations et les composants d’Azure Load Balancer, consultez [Composants Azure Load Balancer](./components.md) et [Concepts relatifs à Azure Load Balancer](./concepts.md).
-
-Pour un comparatif des options d’équilibrage de charge Azure, consultez [Vue d’ensemble des options d’équilibrage de charge dans Azure](https://docs.microsoft.com/azure/architecture/guide/technology-choices/load-balancing-overview).

@@ -8,13 +8,14 @@ ms.service: cognitive-services
 ms.subservice: immersive-reader
 ms.topic: conceptual
 ms.date: 01/14/2020
-ms.author: metan
-ms.openlocfilehash: bc7ab46113e1b819fc71a9f6e8a18400f8acfbef
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: metang
+ms.custom: devx-track-js
+ms.openlocfilehash: d028e9ef2087b866b3c168483d55556e38f9a7cd
+ms.sourcegitcommit: fb3c846de147cc2e3515cd8219d8c84790e3a442
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "75946076"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92636559"
 ---
 # <a name="how-to-launch-the-immersive-reader-with-html-content"></a>Guide de lancement du Lecteur immersif avec du contenu HTML
 

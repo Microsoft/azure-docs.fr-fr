@@ -3,20 +3,20 @@ title: Activité web dans Azure Data Factory
 description: Découvrez comment utiliser Activité Web, l’une des activités de flux de contrôle prises en charge par Azure Data Factory, pour appeler un point de terminaison REST à partir d’un pipeline.
 services: data-factory
 documentationcenter: ''
-author: djpmsft
-ms.author: daperlov
+author: dcstwh
+ms.author: weetok
 manager: jroth
 ms.reviewer: douglasl
 ms.service: data-factory
 ms.workload: data-services
 ms.topic: conceptual
 ms.date: 12/19/2018
-ms.openlocfilehash: a5cdb24a80dcbd95e4ccc59dd55f4acb9ae18060
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: fbe37152f4ff1ce24754bc2d7b968c8e1c76ca10
+ms.sourcegitcommit: ea17e3a6219f0f01330cf7610e54f033a394b459
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81417893"
+ms.lasthandoff: 12/14/2020
+ms.locfileid: "97387715"
 ---
 # <a name="web-activity-in-azure-data-factory"></a>Activité Web dans Azure Data Factory
 [!INCLUDE[appliesto-adf-asa-md](includes/appliesto-adf-asa-md.md)]
@@ -25,7 +25,10 @@ ms.locfileid: "81417893"
 Une activité web peut être utilisée pour appeler un point de terminaison REST personnalisé à partir d’un pipeline Data Factory. Vous pouvez transmettre des jeux de données et des services liés que l’activité peut utiliser et auxquels elle peut accéder.
 
 > [!NOTE]
-> L’activité Web peut appeler uniquement des URL exposées publiquement. Elle n’est pas prise en charge pour les URL hébergées sur un réseau virtuel privé.
+> L’activité web est également prise en charge pour appeler des URL hébergées sur un réseau virtuel privé en tirant parti du runtime d’intégration auto-hébergé. Le runtime d’intégration doit pouvoir visualiser le point de terminaison de l’URL. 
+
+> [!NOTE]
+> La taille maximale de la charge utile de la réponse en sortie est de 4 Mo.  
 
 ## <a name="syntax"></a>Syntaxe
 
@@ -36,6 +39,10 @@ Une activité web peut être utilisée pour appeler un point de terminaison REST
    "typeProperties":{
       "method":"Post",
       "url":"<URLEndpoint>",
+      "connectVia": {
+          "referenceName": "<integrationRuntimeName>",
+          "type": "IntegrationRuntimeReference"
+      }
       "headers":{
          "Content-Type":"application/json"
       },
@@ -77,6 +84,7 @@ body | Représente la charge utile envoyée au point de terminaison.  | Chaîne 
 Authentification | Méthode d’authentification utilisée pour appeler le point de terminaison. Les types pris en charge sont « De base » ou « ClientCertificate ». Pour en savoir plus, voir la section [Authentification](#authentication). Si l’authentification n’est pas obligatoire, excluez cette propriété. | Chaîne (ou expression avec resultType de chaîne) | Non
 jeux de données | Liste des jeux de données transmis au point de terminaison. | Tableau de références de jeu de données. Peut être un tableau vide. | Oui
 linkedServices | Liste des services liés transmise au point de terminaison. | Tableau des références de service lié. Peut être un tableau vide. | Oui
+connectVia | Le [runtime d’intégration](./concepts-integration-runtime.md) à utiliser pour se connecter à la banque de données. Vous pouvez utiliser le runtime d’intégration Azure ou un runtime d’intégration auto-hébergé (si votre banque de données se trouve sur un réseau privé). Si cette propriété n’est pas spécifiée, le service utilise le runtime d’intégration Azure par défaut. | Référence du runtime d’intégration. | Non 
 
 > [!NOTE]
 > Les points de terminaison REST que l’activité web appelle doivent retourner une réponse de type JSON. Si elle ne reçoit pas de réponse du point de terminaison, l’activité expire à 1 minute avec une erreur.
@@ -85,13 +93,13 @@ Le tableau suivant affiche la configuration requise pour le contenu JSON :
 
 | Type de valeur | Corps de la demande | Response body |
 |---|---|---|
-|Objet JSON | Prise en charge | Prise en charge |
+|Objet JSON | Pris en charge | Prise en charge |
 |Tableau JSON | Prise en charge <br/>(À l’heure actuelle, les tableaux JSON ne fonctionnent pas en raison d’un bogue. Un correctif est en cours.) | Non pris en charge |
 | Valeur JSON | Prise en charge | Non pris en charge |
 | Type non-JSON | Non pris en charge | Non pris en charge |
 ||||
 
-## <a name="authentication"></a>Authentication
+## <a name="authentication"></a>Authentification
 
 Voici les types d’authentification pris en charge dans l’activité web.
 
@@ -125,7 +133,7 @@ Spécifiez le contenu encodé en Base64 d’un fichier PFX et le mot de passe.
 
 ### <a name="managed-identity"></a>Identité managée
 
-Spécifiez l’uri de ressource pour lequel le jeton d’accès sera demandé à l’aide de l’identité managée pour la fabrique de données. Pour appeler l’API Gestion des ressources Azure, utilisez `https://management.azure.com/`. Pour plus d’informations sur le fonctionnement des identités managées, consultez la [page de vue d'ensemble des identités managées pour les ressources Azure](/azure/active-directory/managed-identities-azure-resources/overview).
+Spécifiez l’uri de ressource pour lequel le jeton d’accès sera demandé à l’aide de l’identité managée pour la fabrique de données. Pour appeler l’API Gestion des ressources Azure, utilisez `https://management.azure.com/`. Pour plus d’informations sur le fonctionnement des identités managées, consultez la [page de vue d'ensemble des identités managées pour les ressources Azure](../active-directory/managed-identities-azure-resources/overview.md).
 
 ```json
 "authentication": {
@@ -161,7 +169,7 @@ Lorsque vous utilisez la méthode POST/PUT, la propriété body représente la c
 ```
 
 ## <a name="example"></a>Exemple
-Dans cet exemple, l’activité web dans le pipeline appelle un point de terminaison REST. Elle transmet un service lié Azure SQL et un jeu de données Azure SQL au point de terminaison. Le point de terminaison REST utilise la chaîne de connexion Azure SQL pour se connecter au serveur Azure SQL et retourne le nom de l’instance du serveur SQL.
+Dans cet exemple, l’activité web dans le pipeline appelle un point de terminaison REST. Elle transmet un service lié Azure SQL et un jeu de données Azure SQL au point de terminaison. Le point de terminaison REST utilise la chaîne de connexion Azure SQL pour se connecter au serveur SQL logique et retourne le nom de l’instance du serveur SQL.
 
 ### <a name="pipeline-definition"></a>Définition de pipeline
 

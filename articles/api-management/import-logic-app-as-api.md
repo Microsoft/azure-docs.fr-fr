@@ -1,6 +1,6 @@
 ---
 title: Importer une application logique en tant qu’API avec le portail Azure | Microsoft Docs
-description: Ce didacticiel vous montre comment utiliser le service Gestion des API (APIM) pour importer une application logique en tant qu’API.
+description: Cet article vous montre comment utiliser le service Gestion des API (APIM) pour importer une application logique en tant qu’API.
 services: api-management
 documentationcenter: ''
 author: vladvino
@@ -9,15 +9,15 @@ editor: ''
 ms.service: api-management
 ms.workload: mobile
 ms.tgt_pltfrm: na
-ms.topic: tutorial
+ms.topic: article
 ms.date: 04/22/2020
 ms.author: apimpm
-ms.openlocfilehash: b6cb0fa3611da44726dabd879c37fec357fc3031
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 0dd460bce01b86c72d0b8fd70351fdcc85c69bd4
+ms.sourcegitcommit: 4b76c284eb3d2b81b103430371a10abb912a83f4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82202772"
+ms.lasthandoff: 11/01/2020
+ms.locfileid: "93146958"
 ---
 # <a name="import-a-logic-app-as-an-api"></a>Importer une application logique en tant qu’API
 
@@ -57,7 +57,7 @@ Dans cet article, vous apprendrez comment :
     - **Starter**
     - **Illimité**
 
-7. Entrez d’autres paramètres d’API. Vous pouvez définir les valeurs lors de la création, ou les configurer ultérieurement en accédant à l’onglet **Paramètres**. Les paramètres sont expliqués dans le tutoriel [Importer et publier votre première API](import-and-publish.md#-import-and-publish-a-backend-api).
+7. Entrez d’autres paramètres d’API. Vous pouvez définir les valeurs lors de la création, ou les configurer ultérieurement en accédant à l’onglet **Paramètres**. Les paramètres sont expliqués dans le tutoriel [Importer et publier votre première API](import-and-publish.md#import-and-publish-a-backend-api).
 8. Sélectionnez **Create** (Créer).
 
 ## <a name="test-the-api-in-the-azure-portal"></a>Tester l’API dans le portail Azure

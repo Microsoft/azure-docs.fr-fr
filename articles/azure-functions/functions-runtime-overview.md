@@ -5,12 +5,12 @@ author: apwestgarth
 ms.topic: conceptual
 ms.date: 11/28/2017
 ms.author: anwestg
-ms.openlocfilehash: ab04aa4ca7f54e8de120d078a313c3096a350aa5
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 61e3b82e497afcdc8239a9f4fda3e4f739166a1f
+ms.sourcegitcommit: ae6e7057a00d95ed7b828fc8846e3a6281859d40
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74226624"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92108437"
 ---
 # <a name="azure-functions-runtime-overview-preview"></a>Vue d’ensemble du runtime d’Azure Functions (préversion)
 
@@ -45,7 +45,7 @@ Pour bien démarrer avec le runtime Azure Functions, vous devez disposer d’une
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Installer la [version préliminaire du runtime d’Azure Functions](https://aka.ms/azafrdoc)
+Installer la [version préliminaire du runtime d’Azure Functions](./functions-runtime-install.md)
 
 <!--Image references-->
 [1]: ./media/functions-runtime-overview/AzureFunctionsRuntime_Portal.png

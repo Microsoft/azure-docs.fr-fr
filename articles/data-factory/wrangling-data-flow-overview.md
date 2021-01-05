@@ -1,30 +1,34 @@
 ---
 title: Flux de données de wrangling dans Azure Data Factory
 description: Vue d’ensemble des flux de données de wrangling dans Azure Data Factory
-author: djpmsft
-ms.author: daperlov
+author: dcstwh
+ms.author: weetok
 ms.reviewer: gamal
 ms.service: data-factory
 ms.topic: conceptual
 ms.date: 11/01/2019
-ms.openlocfilehash: 3b8632eaf7662d705235adaad7cd03d2e7e4904b
-ms.sourcegitcommit: 1895459d1c8a592f03326fcb037007b86e2fd22f
+ms.openlocfilehash: 607ed6167ec761a6bf380a2cc420eb72f808f0a3
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82626869"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96494866"
 ---
 # <a name="what-are-wrangling-data-flows"></a>Que sont les flux de données de wrangling ?
 
 [!INCLUDE[appliesto-adf-xxx-md](includes/appliesto-adf-xxx-md.md)]
 
+
 Les organisations doivent procéder à la préparation et au wrangling des données pour une analyse précise des données complexes qui continuent à croître quotidiennement. La préparation des données est nécessaire pour que les organisations puissent utiliser les données dans différents processus d’entreprise et accélérer la rentabilité.
 
-Les flux de données de wrangling dans Azure Data Factory vous permettent d’effectuer une préparation de données sans code à l’échelle du cloud de manière itérative. Les flux de données de wrangling s’intègrent à [Power Query Online](https://docs.microsoft.com/power-query/) et rendent les fonctions Power Query M disponibles pour les utilisateurs de Data Factory.
+Les flux de données de wrangling dans Azure Data Factory vous permettent d’effectuer une préparation de données sans code à l’échelle du cloud de manière itérative. Les flux de données de wrangling s’intègrent à [Power Query Online](/power-query/) et rendent les fonctions Power Query M disponibles pour les utilisateurs de Data Factory.
 
 Le flux de données de wrangling convertit le M généré par l’éditeur mashup Power Query Online en code Spark pour l’exécution à l’échelle du cloud.
 
 Les flux de données de wrangling sont particulièrement utiles pour les ingénieurs de données ou les « intégrateurs de données citoyen ».
+
+> [!NOTE]
+> Le flux de wrangling data est actuellement disponible en préversion publique.
 
 ## <a name="use-cases"></a>Cas d'utilisation
 

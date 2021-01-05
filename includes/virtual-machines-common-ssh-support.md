@@ -9,11 +9,11 @@ ms.date: 04/17/2018
 ms.author: cynthn
 ms.custom: include file
 ms.openlocfilehash: 2ea82f80396c5254ac4ad47bd2395413682a96bc
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "71168619"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96016360"
 ---
 ## <a name="supported-ssh-key-formats"></a>Formats de clé SSH pris en charge
 

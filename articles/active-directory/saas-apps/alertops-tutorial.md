@@ -2,26 +2,21 @@
 title: 'Tutoriel : Intégration d’Azure Active Directory à AlertOps | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et AlertOps.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
+manager: CelesteDG
 ms.reviewer: celested
-ms.assetid: 3db13ed4-35c2-4b1e-bed8-9b5977061f93
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 05/20/2019
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: 21b8cb06712e370972e0b8fec518c37d078262e0
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 094b1a029c8e10abce3ca282de0cc99be34d313a
+ms.sourcegitcommit: ce8eecb3e966c08ae368fafb69eaeb00e76da57e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "67107056"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92318857"
 ---
 # <a name="tutorial-integrate-alertops-with-azure-active-directory"></a>Tutoriel : Intégrer AlertOps à Azure Active Directory
 
@@ -31,7 +26,7 @@ Dans ce tutoriel, vous allez découvrir comment intégrer AlertOps à Azure Acti
 * Permettre à vos utilisateurs de se connecter automatiquement à AlertOps avec leur compte Azure AD.
 * Gérer vos comptes à un emplacement central : le Portail Azure.
 
-Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -113,11 +108,11 @@ Effectuez les étapes suivantes pour activer l’authentification unique Azure A
 
 4. Sélectionnez **Account Settings** (Paramètres du compte) dans le volet de navigation gauche.
 
-    ![Configuration d’AlertOps](./media/alertops-tutorial/configure1.png)
+    ![Capture d’écran montrant le menu AlertOps avec Account Settings en évidence.](./media/alertops-tutorial/configure1.png)
 
 5. Dans la page **Subscription Settings** (Paramètres d’abonnement) , sélectionnez **SSO** et effectuez les étapes suivantes :
 
-    ![Configuration d’AlertOps](./media/alertops-tutorial/configure2.png)
+    ![Capture d’écran montrant la fenêtre Subscription Settings pour l’authentification unique avec des valeurs entrées comme décrit dans cette étape.](./media/alertops-tutorial/configure2.png)
 
     a. Cochez la case **Use Single Sign-On(SSO)** (Utiliser l’authentification unique).
 
@@ -169,15 +164,15 @@ Dans cette section, vous allez autoriser Britta Simon à utiliser l’authentifi
 
 2. Cliquez sur **Users** (Utilisateurs) dans le panneau de navigation gauche.
 
-    ![Configuration d’AlertOps](./media/alertops-tutorial/user1.png)
+    ![Capture d’écran montrant le menu AlertOps avec Users en évidence.](./media/alertops-tutorial/user1.png)
 
 3. Sélectionnez **Add User** (Ajouter un utilisateur).
 
-    ![Configuration d’AlertOps](./media/alertops-tutorial/user2.png)
+    ![Capture d’écran montrant la fenêtre Users avec le bouton Add User.](./media/alertops-tutorial/user2.png)
 
 4. Dans la boîte de dialogue **Ajouter un utilisateur**, procédez comme suit :
 
-    ![Configuration d’AlertOps](./media/alertops-tutorial/user3.png)
+    ![Capture d’écran montrant le volet Add Users avec les valeurs entrées comme décrit dans cette étape.](./media/alertops-tutorial/user3.png)
 
     a. Dans la zone de texte **Login User Name** (Nom d’utilisateur de connexion), entrez le nom d’un utilisateur, par exemple **Brittasimon**.
 
@@ -195,12 +190,12 @@ Dans cette section, vous allez autoriser Britta Simon à utiliser l’authentifi
 
 ### <a name="test-sso"></a>Tester l’authentification unique (SSO)
 
-Quand vous sélectionnez la vignette AlertOps dans le volet d’accès, vous devez être connecté automatiquement à l’application AlertOps pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Quand vous sélectionnez la vignette AlertOps dans le volet d’accès, vous devez être connecté automatiquement à l’application AlertOps pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

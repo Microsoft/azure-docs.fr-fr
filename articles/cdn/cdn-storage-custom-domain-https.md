@@ -15,12 +15,12 @@ ms.topic: tutorial
 ms.date: 06/15/2018
 ms.author: allensu
 ms.custom: mvc
-ms.openlocfilehash: 5b6fe2b2704f101a7775b7eb700375105b0a9eca
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 6061de0a330518baaa829a9a1c8a05f196d68dcb
+ms.sourcegitcommit: 400f473e8aa6301539179d4b320ffbe7dfae42fe
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "81259882"
+ms.lasthandoff: 10/28/2020
+ms.locfileid: "92777841"
 ---
 # <a name="tutorial-access-storage-blobs-using-an-azure-cdn-custom-domain-over-https"></a>Tutoriel : Accéder aux objets blob de stockage à l’aide d’un domaine personnalisé Azure CDN via HTTPS
 
@@ -37,7 +37,7 @@ Lorsque vous créez un point de terminaison CDN dans votre profil, le nom du poi
 En utilisant le protocole HTTPS sur votre domaine personnalisé, vous vous assurez que vos données sont distribuées sur internet en toute sécurité via le chiffrement TLS/SSL. Lorsque votre navigateur web est connecté à un site web via HTTPS, ce protocole valide le certificat de sécurité du site et vérifie qu’il est fourni par une autorité de certification légitime. Pour configurer le protocole HTTPS sur votre domaine personnalisé, suivez les instructions de ce tutoriel : [Configurer HTTPS sur un domaine personnalisé Azure CDN](cdn-custom-ssl.md).
 
 ## <a name="shared-access-signatures"></a>Les signatures d’accès partagé
-Si le point de terminaison de votre stockage d’objets blob est configuré de sorte que l’accès en lecture anonyme est interdit, vous devez fournir un jeton [Signature d’accès partagé (SAP)](cdn-sas-storage-support.md) pour chaque requête effectuée auprès de votre domaine personnalisé. Par défaut, les points de terminaison de stockage d’objets blob interdisent l’accès en lecture anonyme. Pour en savoir plus sur SAP, consultez la section [Gestion de l’accès en lecture anonyme aux conteneurs et aux objets blob](../storage/blobs/storage-manage-access-to-resources.md).
+Si le point de terminaison de votre stockage d’objets blob est configuré de sorte que l’accès en lecture anonyme est interdit, vous devez fournir un jeton [Signature d’accès partagé (SAP)](cdn-sas-storage-support.md) pour chaque requête effectuée auprès de votre domaine personnalisé. Par défaut, les points de terminaison de stockage d’objets blob interdisent l’accès en lecture anonyme. Pour en savoir plus sur SAP, consultez la section [Gestion de l’accès en lecture anonyme aux conteneurs et aux objets blob](../storage/blobs/anonymous-read-access-configure.md).
 
 Azure CDN ignore les restrictions ajoutées au jeton SAP. Par exemple, tous les jetons SAP disposent d’un délai d’expiration. Ainsi, le contenu reste accessible avec une SAP qui a expiré tant que le contenu n’est pas vidé des serveurs de point de présence (POP) du CDN. Vous pouvez contrôler la durée de mise en cache sur Azure CDN en définissant l’en-tête de réponse du cache. Pour en savoir plus, consultez la rubrique [Gérer l’expiration des objets blob de stockage Azure CDN](cdn-manage-expiration-of-blob-content.md).
 
@@ -61,7 +61,3 @@ Par exemple, si vous disposez d’un compte de stockage aux États-Unis, accessi
 
 ## <a name="next-steps"></a>Étapes suivantes
 [Tutoriel : Définir des règles de mise en cache d’Azure CDN](cdn-caching-rules-tutorial.md)
-
-
-
-

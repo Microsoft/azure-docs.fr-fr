@@ -3,25 +3,25 @@ title: Applications génériques dans le Proxy d’application Azure AD
 description: Découvrez comment utiliser des applications génériques dans le proxy d’application Azure Active Directory.
 services: active-directory
 documentationcenter: ''
-author: msmimart
-manager: CelesteDG
+author: kenwith
+manager: celestedg
 ms.service: active-directory
 ms.subservice: app-mgmt
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.date: 09/06/2018
-ms.author: mimart
+ms.author: kenwith
 ms.reviewer: harshja
 ms.custom: it-pro
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 1e5861e802f39adecb5661bc17c22b432f137d59
-ms.sourcegitcommit: d57d2be09e67d7afed4b7565f9e3effdcc4a55bf
+ms.openlocfilehash: 9b2563b238bae310d662220d2c244e863249c9c4
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81770297"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95997509"
 ---
 # <a name="wildcard-applications-in-the-azure-active-directory-application-proxy"></a>Applications génériques dans le proxy d’application Azure Active Directory
 
@@ -43,7 +43,7 @@ Vous pouvez créer une application générique (*) si vous avez un groupe d’ap
 
 Vous pouvez publier des applications avec des caractères génériques si les URL internes et externes ont le format suivant :
 
-> http(s)://*.\<domaine\>
+> http(s)://*.\<domain\>
 
 Par exemple : `http(s)://*.adventure-works.com`.
 
@@ -62,7 +62,7 @@ Bien que les [domaines personnalisés](application-proxy-configure-custom-domain
 1. Créez un domaine vérifié dans Azure.
 1. Charger un certificat TLS/SSL au format PFX dans votre proxy d’application
 
-Vous devez utiliser un certificat générique correspondant à l’application que vous voulez créer. Sinon, vous pouvez utiliser un certificat qui liste uniquement des applications spécifiques. Dans ce cas, seules les applications listées dans le certificat sont accessibles via cette application générique.
+Vous devez utiliser un certificat générique correspondant à l’application que vous voulez créer. 
 
 Pour des raisons de sécurité, il s’agit d’une règle stricte. Nous ne prenons pas en charge les caractères génériques pour les applications qui ne peuvent pas utiliser de domaine personnalisé pour l’URL externe.
 
@@ -72,7 +72,7 @@ Quand vous utilisez des domaines personnalisés, vous devez créer une entrée D
 
 > `<yourAADTenantId>.tenant.runtime.msappproxy.net`
 
-Pour vérifier que vous avez correctement configuré votre enregistrement CNAME, vous pouvez utiliser [nslookup](https://docs.microsoft.com/windows-server/administration/windows-commands/nslookup) sur l’un des points de terminaison cibles, par exemple, `expenses.adventure-works.com`.  Votre réponse doit inclure l’alias déjà mentionné (`<yourAADTenantId>.tenant.runtime.msappproxy.net`).
+Pour vérifier que vous avez correctement configuré votre enregistrement CNAME, vous pouvez utiliser [nslookup](/windows-server/administration/windows-commands/nslookup) sur l’un des points de terminaison cibles, par exemple, `expenses.adventure-works.com`.  Votre réponse doit inclure l’alias déjà mentionné (`<yourAADTenantId>.tenant.runtime.msappproxy.net`).
 
 ## <a name="considerations"></a>Considérations
 

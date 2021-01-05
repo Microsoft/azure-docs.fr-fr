@@ -5,15 +5,15 @@ services: storage
 author: alkohli
 ms.service: storage
 ms.subservice: blobs
-ms.topic: article
-ms.date: 06/03/2019
+ms.topic: conceptual
+ms.date: 09/25/2020
 ms.author: alkohli
-ms.openlocfilehash: df261dbf8af8ffdb4ccb10626594626150245748
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 11ea9c759bdb4bb2b837028407ce6e83f6e25a8c
+ms.sourcegitcommit: 400f473e8aa6301539179d4b320ffbe7dfae42fe
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/27/2020
-ms.locfileid: "82176394"
+ms.lasthandoff: 10/28/2020
+ms.locfileid: "92784046"
 ---
 # <a name="choose-an-azure-solution-for-data-transfer"></a>Choisir une solution Azure pour le transfert de données
 
@@ -35,7 +35,7 @@ Il existe plusieurs types de déplacement des données :
 
     - **Interface graphique** : si vous transférez occasionnellement quelques fichiers et que vous n’avez pas besoin d’automatiser le transfert de données, vous pouvez choisir un outil d’interface graphique tel que l’Explorateur Stockage Azure ou un outil web d’exploration dans le portail Azure.
     - **Transfert scripté ou programmatique** : vous pouvez utiliser les outils logiciels optimisés que nous fournissons ou appeler directement nos SDK et API REST. Les outils scriptables disponibles sont les suivants : AzCopy, Azure PowerShell et Azure CLI. Pour l’interface de programmation, utilisez l’un des SDK pour .NET, Java, Python, Node/JS, C++, Go, PHP ou Ruby.
-    - **Périphériques locaux** : nous vous fournissons un périphérique physique ou virtuel qui se trouve dans votre centre de données et qui optimise le transfert de données sur le réseau. Ces périphériques offrent également un cache local contenant les fichiers fréquemment utilisés. L’appareil physique correspond à Data Box Edge et l’appareil virtuel correspond à Data Box Gateway. Les deux appareils sont exécutés sur site en permanence et sont connectés à Azure grâce au réseau.
+    - **Périphériques locaux** : nous vous fournissons un périphérique physique ou virtuel qui se trouve dans votre centre de données et qui optimise le transfert de données sur le réseau. Ces périphériques offrent également un cache local contenant les fichiers fréquemment utilisés. L’appareil physique correspond à Azure Stack Edge et l’appareil virtuel correspond à Data Box Gateway. Les deux appareils sont exécutés sur site en permanence et sont connectés à Azure grâce au réseau.
     - **Pipeline de données managées** : vous pouvez configurer un pipeline cloud qui transfère régulièrement des fichiers entre plusieurs services Azure, en local ou les deux. Utilisez Azure Data Factory pour configurer et gérer les pipelines de données et déplacer et transformer des données pour les analyser.
 
 L’image suivante illustre les recommandations permettant de choisir parmi les différents outils de transfert de données Azure en fonction de la bande passante réseau disponible pour le transfert, de la taille des données à transférer et de la fréquence du transfert.
@@ -66,20 +66,20 @@ Répondez aux questions suivantes pour sélectionner une solution de transfert d
 
 ## <a name="data-transfer-feature-in-azure-portal"></a>Fonctionnalité de transfert de données dans le Portail Microsoft Azure
 
-Vous pouvez également vous rendre sur votre compte Stockage Azure dans le Portail Microsoft Azure et sélectionner la fonctionnalité **Transfert de données**. Indiquez la bande passante réseau dans votre environnement, la taille des données que vous souhaitez transférer et la fréquence du transfert de données. Vous verrez les solutions optimales de transfert de données correspondant aux informations que vous avez fournies. 
+Vous pouvez également vous rendre sur votre compte Stockage Azure dans le Portail Microsoft Azure et sélectionner la fonctionnalité **Transfert de données** . Indiquez la bande passante réseau dans votre environnement, la taille des données que vous souhaitez transférer et la fréquence du transfert de données. Vous verrez les solutions optimales de transfert de données correspondant aux informations que vous avez fournies. 
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 - [Présentation de l’Explorateur Stockage Azure](https://azure.microsoft.com/resources/videos/introduction-to-microsoft-azure-storage-explorer/).
-- [Vue d’ensemble d’AzCopy](https://docs.microsoft.com/azure/storage/common/storage-use-azcopy-v10).
+- [Vue d’ensemble d’AzCopy](./storage-use-azcopy-v10.md).
 - [Démarrage rapide : Charger, télécharger et lister des blobs avec PowerShell](../blobs/storage-quickstart-blobs-powershell.md)
 - [Démarrage rapide : Créer, télécharger et lister des objets blob avec Azure CLI](../blobs/storage-quickstart-blobs-cli.md)
 - Vous en saurez plus sur :
 
-    - [Azure Data Box, Azure Data Box Disk et Azure Data Box Heavy pour les transferts hors connexion](https://docs.microsoft.com/azure/databox/).
-    - [Azure Data Box Gateway et Azure Data Box Edge pour les transferts en ligne](https://docs.microsoft.com/azure/databox-online/).
-- [Qu'est-ce qu'Azure Data Factory ?](https://docs.microsoft.com/azure/data-factory/copy-activity-overview)
+    - [Azure Data Box, Azure Data Box Disk et Azure Data Box Heavy pour les transferts hors connexion](../../databox/index.yml).
+    - [Azure Data Box Gateway et Azure Stack Edge pour les transferts en ligne](../../databox-online/index.yml).
+- [Qu'est-ce qu'Azure Data Factory ?](../../data-factory/copy-activity-overview.md)
 - Utiliser les API REST pour transférer des données
 
-    - [Dans .NET](https://docs.microsoft.com/dotnet/api/overview/azure/storage)
-    - [Dans Java](https://docs.microsoft.com/java/api/overview/azure/storage)
+    - [Dans .NET](/dotnet/api/overview/azure/storage)
+    - [Dans Java](/java/api/overview/azure/storage)

@@ -1,20 +1,20 @@
 ---
 title: Fonctions définies par l’utilisateur dans les modèles
-description: Explique comment définir et utiliser des fonctions définies par l’utilisateur dans un modèle Azure Resource Manager.
+description: Explique comment définir et utiliser des fonctions définies par l'utilisateur dans un modèle Azure Resource Manager.
 ms.topic: conceptual
 ms.date: 03/09/2020
-ms.openlocfilehash: 2c09572a460aa028b23987033d2b77e2aad8a0cd
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 12199aca788438e4558ed2c607b866f0dc723e2a
+ms.sourcegitcommit: 5e5a0abe60803704cf8afd407784a1c9469e545f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78943214"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96436961"
 ---
-# <a name="user-defined-functions-in-azure-resource-manager-template"></a>Fonctions définies par l’utilisateur dans un modèle Azure Resource Manager
+# <a name="user-defined-functions-in-arm-template"></a>Fonctions définies par l'utilisateur dans un modèle Azure Resource Manager
 
 Dans votre modèle, vous pouvez créer vos propres fonctions. Ces fonctions peuvent être utilisées dans votre modèle. Les fonctions définies par l’utilisateur sont distinctes des [fonctions de modèles standard](template-functions.md) qui sont automatiquement disponibles dans votre modèle. Créez vos propres fonctions quand vous avez des expressions complexes qui sont utilisées de manière répétitive dans votre modèle.
 
-Cet article explique comment ajouter des fonctions définies par l’utilisateur dans votre modèle Azure Resource Manager.
+Cet article vous explique comment ajouter des fonctions définies par l'utilisateur dans votre modèle Azure Resource Manager.
 
 ## <a name="define-the-function"></a>Définir la fonction
 
@@ -48,7 +48,7 @@ L'exemple suivant illustre un modèle qui comprend une fonction définie par l'u
 
 ```json
 {
- "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+ "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
  "contentVersion": "1.0.0.0",
  "parameters": {
    "storageNamePrefix": {
@@ -103,8 +103,7 @@ La définition d’une fonction utilisateur est soumise à certaines restriction
 * La fonction ne peut pas utiliser la fonction [reference](template-functions-resource.md#reference) ni aucune des fonctions [list](template-functions-resource.md#list).
 * Les paramètres de la fonction ne peuvent pas avoir de valeur par défaut.
 
-
 ## <a name="next-steps"></a>Étapes suivantes
 
-* Pour en savoir plus sur les propriétés disponibles pour les fonctions définies par l’utilisateur, consultez [Comprendre la structure et la syntaxe des modèles Azure Resource Manager](template-syntax.md).
-* Pour obtenir la liste complète des fonctions de modèles disponibles, consultez [Fonctions des modèles Azure Resource Manager](template-functions.md).
+* Pour en savoir plus sur les propriétés disponibles pour les fonctions définies par l'utilisateur, consultez [Comprendre la structure et la syntaxe des modèles Azure Resource Manager](template-syntax.md).
+* Pour obtenir la liste des fonctions de modèle disponibles, consultez [Fonctions de modèle Azure Resource Manager](template-functions.md).

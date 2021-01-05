@@ -13,14 +13,14 @@ ms.devlang: csharp
 ms.topic: tutorial
 ms.date: 11/17/2019
 ms.author: zhenlwa
-ms.custom: azure-functions
+ms.custom: devx-track-csharp, azure-functions
 ms.tgt_pltfrm: Azure Functions
-ms.openlocfilehash: ba70d5f186c1424b2019716ab7a87aeae85f8913
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: e603aa8ba85fdd214c04de515f405bcf9028791e
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "74187293"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88207103"
 ---
 # <a name="tutorial-use-dynamic-configuration-in-an-azure-functions-app"></a>Tutoriel : Utiliser la configuration dynamique dans une application Azure Functions
 
@@ -67,7 +67,7 @@ Dans ce tutoriel, vous allez apprendre à :
     }
     ```
 
-3. Mettez à jour la méthode `Run` et indiquez d’actualiser la configuration à l’aide de la méthode `Refresh` au début de l’appel Functions. Aucune opération n’est effectuée si la fenêtre de délai d’expiration du cache n’est pas atteinte. Supprimez l’opérateur `await` si vous préférez que la configuration soit actualisée sans blocage.
+3. Mettez à jour la méthode `Run` et indiquez d’actualiser la configuration à l’aide de la méthode `TryRefreshAsync` au début de l’appel Functions. Aucune opération n’est effectuée si la fenêtre de délai d’expiration du cache n’est pas atteinte. Supprimez l’opérateur `await` si vous préférez que la configuration soit actualisée sans blocage.
 
     ```csharp
     public static async Task<IActionResult> Run(
@@ -75,7 +75,7 @@ Dans ce tutoriel, vous allez apprendre à :
     {
         log.LogInformation("C# HTTP trigger function processed a request.");
 
-        await ConfigurationRefresher.Refresh();
+        await ConfigurationRefresher.TryRefreshAsync(); 
 
         string keyName = "TestApp:Settings:Message";
         string message = Configuration[keyName];
@@ -90,15 +90,21 @@ Dans ce tutoriel, vous allez apprendre à :
 
 1. Définissez une variable d’environnement nommée **ConnectionString** et affectez-lui la valeur de la clé d’accès à votre magasin de configuration d’application. Si vous utilisez l’invite de commandes Windows, exécutez la commande suivante et redémarrez l’invite pour que la modification soit prise en compte :
 
-        setx ConnectionString "connection-string-of-your-app-configuration-store"
+    ```console
+    setx ConnectionString "connection-string-of-your-app-configuration-store"
+    ```
 
     Si vous utilisez Windows PowerShell, exécutez la commande suivante :
 
-        $Env:ConnectionString = "connection-string-of-your-app-configuration-store"
+    ```powershell
+    $Env:ConnectionString = "connection-string-of-your-app-configuration-store"
+    ```
 
     Si vous utilisez macOS ou Linux, exécutez la commande suivante :
 
-        export ConnectionString='connection-string-of-your-app-configuration-store'
+    ```console
+    export ConnectionString='connection-string-of-your-app-configuration-store'
+    ```
 
 2. Pour tester votre fonction, appuyez sur F5. Si vous y êtes invité, acceptez la requête dans Visual Studio pour télécharger et installer **Azure Functions Core (CLI) Tools**. Vous devrez peut-être aussi activer une exception de pare-feu afin de permettre aux outils de prendre en charge les requêtes HTTP.
 

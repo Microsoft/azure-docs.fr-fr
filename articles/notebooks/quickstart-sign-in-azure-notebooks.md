@@ -3,18 +3,18 @@ title: Connexion à Azure Notebooks (préversion)
 description: Connectez-vous rapidement à Azure Notebooks (préversion) et définissez un ID utilisateur pour pouvoir accéder à des projets enregistrés et partager des notebooks avec d’autres utilisateurs.
 ms.topic: quickstart
 ms.date: 04/15/2019
-ms.openlocfilehash: b6572a7c0b965b2b72916db577b47eff4f1921c0
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: 168da5d4d36cd4cfadb4ef120ddfabbd261cafaf
+ms.sourcegitcommit: 6172a6ae13d7062a0a5e00ff411fd363b5c38597
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "75647014"
+ms.lasthandoff: 12/11/2020
+ms.locfileid: "97109451"
 ---
 # <a name="quickstart-sign-in-and-set-a-user-id-for-azure-notebooks-preview"></a>Démarrage rapide : Se connecter et définir un identifiant utilisateur pour Azure Notebooks (préversion)
 
-Bien que vous puissiez toujours afficher Azure Notebooks sans vous connecter, vous devez vous connecter pour exécuter des notebooks, accéder aux notebooks et projets enregistrés, et partager vos notebooks avec d’autres utilisateurs.
-
 [!INCLUDE [notebooks-status](../../includes/notebooks-status.md)]
+
+Bien que vous puissiez toujours afficher Azure Notebooks sans vous connecter, vous devez vous connecter pour exécuter des notebooks, accéder aux notebooks et projets enregistrés, et partager vos notebooks avec d’autres utilisateurs.
 
 ## <a name="sign-in"></a>Se connecter
 
@@ -59,4 +59,4 @@ Pour vous déconnecter, sélectionnez votre nom d’utilisateur dans le coin sup
 ## <a name="next-steps"></a>Étapes suivantes
 
 > [!div class="nextstepaction"]
-> [Démarrage rapide : Créer et partager un notebook](quickstart-create-share-jupyter-notebook.md)
+> [Démarrage rapide : Exporter un projet Jupyter Notebook](quickstart-export-jupyter-notebook-project.md)

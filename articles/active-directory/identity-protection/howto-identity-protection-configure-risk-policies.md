@@ -4,19 +4,19 @@ description: Activer et configurer les stratégies en matière de risque dans Az
 services: active-directory
 ms.service: active-directory
 ms.subservice: identity-protection
-ms.topic: conceptual
-ms.date: 01/06/2020
+ms.topic: how-to
+ms.date: 06/05/2020
 ms.author: joflore
 author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: sahandle
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 4ffa08f7ebf013d42d6da0589ce0f1ccc97289de
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 366d68be1a7f115980973015e363da6095876754
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75707003"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95997628"
 ---
 # <a name="how-to-configure-and-enable-risk-policies"></a>Procédure : Configurer et activer des stratégies de risque
 
@@ -33,7 +33,7 @@ Ensemble, les deux stratégies automatisent la réponse aux détections de risqu
 
 ## <a name="prerequisites"></a>Prérequis 
 
-Si votre organisation souhaite autoriser les utilisateurs à résoudre eux-mêmes les problèmes quand des risques sont détectés, les utilisateurs doivent être inscrits à la fois pour la réinitialisation du mot de passe en libre-service et Azure Multi-Factor Authentication. Nous vous recommandons [l’activation de l’expérience d’inscription d’informations de sécurité combinée](../authentication/howto-registration-mfa-sspr-combined.md) pour une expérience optimale. Le fait de permettre aux utilisateurs de résoudre eux-mêmes les problèmes les ramène à un état productif plus rapidement, sans nécessiter l’intervention de l’administrateur. Les administrateurs peuvent toujours voir ces événements et les examiner après coup. 
+Si votre organisation souhaite autoriser les utilisateurs à résoudre eux-mêmes les problèmes quand des risques sont détectés, les utilisateurs doivent être inscrits à la fois pour la réinitialisation du mot de passe en libre-service et Azure AD Multi-Factor Authentication. Nous vous recommandons [l’activation de l’expérience d’inscription d’informations de sécurité combinée](../authentication/howto-registration-mfa-sspr-combined.md) pour une expérience optimale. Le fait de permettre aux utilisateurs de résoudre eux-mêmes les problèmes les ramène à un état productif plus rapidement, sans nécessiter l’intervention de l’administrateur. Les administrateurs peuvent toujours voir ces événements et les examiner après coup. 
 
 ## <a name="choosing-acceptable-risk-levels"></a>Choix des niveaux de risque acceptables
 
@@ -45,7 +45,7 @@ La sélection d’un niveau de risque **Élevé** réduit la fréquence de décl
 
 ## <a name="exclusions"></a>Exclusions
 
-Toutes les stratégies permettent d’exclure des utilisateurs, tels que vos [comptes d’administrateur d’accès en urgence ou d’interruption](../users-groups-roles/directory-emergency-access.md). Les organisations peuvent déterminer qu’elles doivent exclure les autres comptes de stratégies spécifiques en fonction de la façon dont les comptes sont utilisés. Toutes les exclusions doivent être examinées régulièrement pour déterminer si elles sont toujours applicables.
+Toutes les stratégies permettent d’exclure des utilisateurs, tels que vos [comptes d’administrateur d’accès en urgence ou d’interruption](../roles/security-emergency-access.md). Les organisations peuvent déterminer qu’elles doivent exclure les autres comptes de stratégies spécifiques en fonction de la façon dont les comptes sont utilisés. Toutes les exclusions doivent être examinées régulièrement pour déterminer si elles sont toujours applicables.
 
 Les [emplacements réseau](../conditional-access/location-condition.md) approuvés qui ont été configurés sont utilisés par Identity Protection dans certaines détections de risques afin de réduire les faux positifs.
 
@@ -55,7 +55,7 @@ Pour activer les stratégies de risque utilisateur et de risque de connexion, pr
 
 1. Accédez au [portail Azure](https://portal.azure.com).
 1. Accédez à **Azure Active Directory** > **Sécurité** > **Identity Protection** > **Vue d’ensemble**.
-1. Sélectionnez **Configurer la stratégie d’utilisateur à risque**.
+1. Sélectionnez **Stratégie de risque utilisateur**.
    1. Sous **Affectations**
       1. **Utilisateurs** : choisissez **Tous les utilisateurs** ou **Sélectionner des personnes et des groupes** si vous limitez votre lancement.
          1. Si vous le souhaitez, vous pouvez exclure des utilisateurs de la stratégie.
@@ -64,7 +64,7 @@ Pour activer les stratégies de risque utilisateur et de risque de connexion, pr
       1. **Accès** : la recommandation de Microsoft consiste à **Autoriser l’accès** et à **Exiger la modification du mot de passe**.
    1. **Appliquer la stratégie** - **Activé**
    1. **Enregistrer** : cette action a pour effet de renvoyer à la page **Vue d’ensemble**.
-1. Sélectionnez **Configurer la stratégie de connexion à risque**.
+1. Sélectionnez **Stratégie de connexion à risque**.
    1. Sous **Affectations**
       1. **Utilisateurs** : choisissez **Tous les utilisateurs** ou **Sélectionner des personnes et des groupes** si vous limitez votre lancement.
          1. Si vous le souhaitez, vous pouvez exclure des utilisateurs de la stratégie.
@@ -76,7 +76,7 @@ Pour activer les stratégies de risque utilisateur et de risque de connexion, pr
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- [Activer une stratégie d’inscription d’authentification multifacteur](howto-identity-protection-configure-mfa-policy.md)
+- [Activer la stratégie d'inscription Azure AD Multi-Factor Authentication](howto-identity-protection-configure-mfa-policy.md)
 
 - [Qu'est-ce qu'un risque ?](concept-identity-protection-risks.md)
 

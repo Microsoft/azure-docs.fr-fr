@@ -4,12 +4,12 @@ description: Les API classiques de métriques et de mise à l’échelle automat
 ms.subservice: ''
 ms.topic: conceptual
 ms.date: 11/19/2018
-ms.openlocfilehash: d9b6118bc165a9b0a78ae9c4da895719249b22b7
-ms.sourcegitcommit: fb23286d4769442631079c7ed5da1ed14afdd5fc
+ms.openlocfilehash: a8900d238e7542864e3dc53f9d192e579e2c96d1
+ms.sourcegitcommit: c95e2d89a5a3cf5e2983ffcc206f056a7992df7d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/10/2020
-ms.locfileid: "81114229"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95536691"
 ---
 # <a name="azure-monitor-retirement-of-classic-deployment-model-apis-for-metrics-and-autoscale"></a>Suppression par Azure Monitor d’API du modèle de déploiement classique pour les métriques et la mise à l’échelle automatique
 
@@ -21,7 +21,7 @@ Les mêmes opérations sont prises en charge via un ensemble d’API Azure Resou
 
 Si vous gérez la mise à l’échelle automatique via le portail Azure, le [nouveau SDK Azure Monitor](https://www.nuget.org/packages/Microsoft.Azure.Management.Monitor/), PowerShell, CLI ou les modèles Resource Manager, aucune action n’est nécessaire.  
 
-Si vous consommez des métriques via le portail Azure ou divers [services partenaires de surveillance](../../azure-monitor/platform/partners.md), aucune action n’est nécessaire. Microsoft collabore avec les partenaires de surveillance pour migrer vers les nouvelles API.
+Si vous consommez des métriques via le portail Azure ou divers [services partenaires de surveillance](./partners.md), aucune action n’est nécessaire. Microsoft collabore avec les partenaires de surveillance pour migrer vers les nouvelles API.
 
 ## <a name="who-is-affected"></a>Qui est affecté
 
@@ -29,9 +29,9 @@ Cet article vous concerne si vous utilisez les composants suivants :
 
 - **SDK Azure Insights classique** - Si vous utilisez le [SDK Azure Insights classique](https://www.nuget.org/packages/Microsoft.WindowsAzure.Management.Monitoring/), passez au nouveau SDK Azure Monitor pour [.NET](https://github.com/azure/azure-libraries-for-net#download) ou [Java](https://github.com/azure/azure-libraries-for-java#download). Téléchargez le [package NuGet de SDK Azure Monitor](https://www.nuget.org/packages/Microsoft.Azure.Management.Monitor/).
 
-- **Mise à l’échelle automatique classique** - Si vous appelez les [API de paramètres de mise à l’échelle automatique classique](https://msdn.microsoft.com/library/azure/mt348562.aspx) à partir de vos outils personnalisés ou à l’aide du [SDK Azure Insights classique](https://www.nuget.org/packages/Microsoft.WindowsAzure.Management.Monitoring/), vous devriez adopter l’utilisation de [l’API REST Azure Monitor Resource Manager](https://docs.microsoft.com/rest/api/monitor/autoscalesettings).
+- **Mise à l’échelle automatique classique** - Si vous appelez les [API de paramètres de mise à l’échelle automatique classique](/previous-versions/azure/reference/mt348562(v=azure.100)) à partir de vos outils personnalisés ou à l’aide du [SDK Azure Insights classique](https://www.nuget.org/packages/Microsoft.WindowsAzure.Management.Monitoring/), vous devriez adopter l’utilisation de [l’API REST Azure Monitor Resource Manager](/rest/api/monitor/autoscalesettings).
 
-- **Métriques classiques** - Si vous consommez des métriques à l’aide des [API REST classiques](https://msdn.microsoft.com/library/azure/dn510374.aspx) ou du [SDK Azure Insights classique ](https://www.nuget.org/packages/Microsoft.WindowsAzure.Management.Monitoring/) à partir d’outils personnalisés, vous devriez adopter l’utilisation de [l’API Azure Monitor Resource Manager](https://docs.microsoft.com/rest/api/monitor/autoscalesettings). 
+- **Métriques classiques** - Si vous consommez des métriques à l’aide des [API REST classiques](/previous-versions/azure/reference/dn510374(v=azure.100)) ou du [SDK Azure Insights classique](https://www.nuget.org/packages/Microsoft.WindowsAzure.Management.Monitoring/) à partir d’outils personnalisés, vous devriez adopter l’utilisation de [l’API Azure Monitor Resource Manager](/rest/api/monitor/autoscalesettings). 
 
 Si vous ne savez pas si votre code ou vos outils personnalisés appellent les API classiques, examinez les éléments suivants :
 
@@ -43,17 +43,17 @@ Si vous ne savez pas si votre code ou vos outils personnalisés appellent les AP
 
 - Si vous utilisez des appels référencés dans la documentation sur les liens suivants, vous utilisez les API classiques plus anciennes.
 
-  - [Bibliothèque de classes Windows.Azure.Management.Monitoring](https://docs.microsoft.com/previous-versions/azure/dn510414(v=azure.100))
+  - [Bibliothèque de classes Windows.Azure.Management.Monitoring](/previous-versions/azure/dn510414(v=azure.100))
 
-  - [Surveillance (classique) .NET](https://docs.microsoft.com/previous-versions/azure/reference/mt348562(v%3dazure.100))
+  - [Surveillance (classique) .NET](/previous-versions/azure/reference/mt348562(v%3dazure.100))
 
-  - [Interface IMetricOperations](https://docs.microsoft.com/previous-versions/azure/reference/dn802395(v%3dazure.100))
+  - [Interface IMetricOperations](/previous-versions/azure/reference/dn802395(v%3dazure.100))
 
 ## <a name="why-you-should-switch"></a>Pourquoi basculer
 
 Toutes les fonctionnalités existantes pour la mise à l’échelle automatique et les métriques continueront de fonctionner via les nouvelles API.  
 
-La migration vers des API plus récentes donne accès à des fonctionnalités Resource Manager, comme la prise en charge du contrôle d'accès en fonction du rôle (RBAC) cohérent sur tous vos services de surveillance. Vous bénéficiez également de fonctionnalités supplémentaires pour les métriques : 
+La migration vers des API plus récentes donne accès à des fonctionnalités Resource Manager, comme la prise en charge du contrôle d’accès en fonction du rôle Azure (Azure RBAC) cohérent sur tous vos services de surveillance. Vous bénéficiez également de fonctionnalités supplémentaires pour les métriques : 
 
 - prise en charge des dimensions
 - granularité métrique 1 minute cohérente sur tous les services 
@@ -87,5 +87,6 @@ Si vous avez des questions, contactez-nous MonitorClassicAPIhelp@microsoft.com.
 
 ## <a name="references"></a>References
 
-- [API REST plus récentes pour Azure Monitor](https://docs.microsoft.com/rest/api/monitor/) 
+- [API REST plus récentes pour Azure Monitor](/rest/api/monitor/) 
 - [SDK Azure Monitor plus récent](https://www.nuget.org/packages/Microsoft.Azure.Management.Monitor/)
+

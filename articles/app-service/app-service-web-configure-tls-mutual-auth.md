@@ -3,14 +3,14 @@ title: Configurer l’authentification mutuelle TLS
 description: Découvrez comment authentifier les certificats clients sur TLS. Azure App Service peut mettre le certificat client à la disposition du code d’application à des fins de vérification.
 ms.assetid: cd1d15d3-2d9e-4502-9f11-a306dac4453a
 ms.topic: article
-ms.date: 10/01/2019
-ms.custom: seodec18
-ms.openlocfilehash: 143317cd424428d7f480f4880d3aab750853890b
-ms.sourcegitcommit: 3abadafcff7f28a83a3462b7630ee3d1e3189a0e
+ms.date: 12/11/2020
+ms.custom: devx-track-csharp, seodec18
+ms.openlocfilehash: 6ceeb3d31652c04eb9a69c1c8bb4b114e6f38d52
+ms.sourcegitcommit: fa807e40d729bf066b9b81c76a0e8c5b1c03b536
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82592364"
+ms.lasthandoff: 12/11/2020
+ms.locfileid: "97347719"
 ---
 # <a name="configure-tls-mutual-authentication-for-azure-app-service"></a>Configurer l’authentification mutuelle TLS pour Azure App Service
 
@@ -24,20 +24,33 @@ Vous pouvez restreindre l’accès à votre application Azure App Service en act
 
 ## <a name="enable-client-certificates"></a>Activer les certificats clients
 
-Si vous souhaitez configurer votre application pour exiger des certificats clients, vous pouvez **Activer** l’option Demander un certificat entrant en sélectionnant **Configuration** > **Paramètres généraux** depuis le portail Azure, ou vous devez définir le paramètre `clientCertEnabled` de votre application sur `true`. Pour définir ce paramètre, exécutez la commande suivante dans [Cloud Shell](https://shell.azure.com).
+Pour configurer votre application afin d’exiger des certificats clients :
+
+1. Dans la barre de navigation gauche de la page de gestion de votre application, sélectionnez **Configuration** > **Paramètres généraux**.
+
+1. Définissez **Mode de certificat client** sur **Exiger**. Cliquez sur **Enregistrer** dans la partie supérieure de la page.
+
+Pour faire de même avec Azure CLI, exécutez la commande suivante dans le [Cloud Shell](https://shell.azure.com) :
 
 ```azurecli-interactive
-az webapp update --set clientCertEnabled=true --name <app_name> --resource-group <group_name>
+az webapp update --set clientCertEnabled=true --name <app-name> --resource-group <group-name>
 ```
 
 ## <a name="exclude-paths-from-requiring-authentication"></a>Exclure les chemins d’accès nécessitant une authentification
 
-Lorsque vous activez l’authentification mutuelle pour votre application, tous les chemins d’accès situés sous la racine de votre application requièrent un certificat client pour y accéder. Pour autoriser certains champs à rester ouvert à des fins d'accès anonyme, vous pouvez définir des chemins d’exclusion dans la configuration de votre application.
+Lorsque vous activez l’authentification mutuelle pour votre application, tous les chemins d’accès situés sous la racine de votre application exigent un certificat client pour y accéder. Pour lever cette exigence pour certains chemins d’accès, définissez des chemins d’exclusion dans le cadre de la configuration de votre application.
 
-Pour ce faire, sélectionnez **Configuration** > **Paramètres généraux** et définissez un chemin d'exclusion. Dans cet exemple, tout ce qui se trouve sous le chemin d’accès `/public` de votre application ne requiert pas de certificat client.
+1. Dans la barre de navigation gauche de la page de gestion de votre application, sélectionnez **Configuration** > **Paramètres généraux**.
+
+1. En regard de **Chemins d’exclusion de client**, cliquez sur l’icône modifier.
+
+1. Cliquez sur **Nouveau chemin d’accès**, spécifiez un chemin d’accès, puis cliquez sur **OK**.
+
+1. Cliquez sur **Enregistrer** dans la partie supérieure de la page.
+
+Dans la capture d’écran suivante, tout ce qui se trouve sous le chemin d’accès `/public` pour votre application ne requiert pas de certificat client.
 
 ![Chemins d'exclusion de certificat][exclusion-paths]
-
 
 ## <a name="access-client-certificate"></a>Accéder au certificat client
 

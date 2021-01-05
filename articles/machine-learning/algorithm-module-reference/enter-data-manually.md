@@ -9,16 +9,16 @@ ms.topic: reference
 author: likebupt
 ms.author: keli19
 ms.date: 02/22/2020
-ms.openlocfilehash: 35e31e5ace53654e8aad794dd3e25fc04bd9a088
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 3bff9a91f06649487560faef3ab554b2a3d56af3
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79367514"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90908072"
 ---
 # <a name="enter-data-manually-module"></a>Module Entrer des données manuellement
 
-Cet article décrit un module dans le concepteur Azure Machine Learning (version préliminaire).
+Cet article décrit un module dans le concepteur Azure Machine Learning.
 
 Utilisez le module **Entrer des données manuellement** pour créer un petit jeu de données en tapant des valeurs. Le jeu de données peut avoir plusieurs colonnes.
   

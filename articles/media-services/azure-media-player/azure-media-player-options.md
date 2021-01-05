@@ -6,12 +6,13 @@ ms.author: inhenkel
 ms.service: media-services
 ms.topic: reference
 ms.date: 04/20/2020
-ms.openlocfilehash: e26215115b4c4484e5e05a2fd94a4d2c6680a4d0
-ms.sourcegitcommit: acb82fc770128234f2e9222939826e3ade3a2a28
+ms.custom: devx-track-js
+ms.openlocfilehash: 67f1f2fe3f6ac1061f1edcd22532bffaf0a1e815
+ms.sourcegitcommit: 28c5fdc3828316f45f7c20fc4de4b2c05a1c5548
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81725874"
+ms.lasthandoff: 10/22/2020
+ms.locfileid: "92366868"
 ---
 # <a name="options"></a>Options #
 
@@ -101,7 +102,7 @@ L'option `playbackSpeed` contrôle la vitesse de lecture (contrôle playbackSpee
 `<video ... data-setup='{"playbackSpeed": {"enabled": true}}'>`
 
 
-Les autres propriétés du paramètre `playbackSpeed` sont fournies par l'objet [PlaybackSpeedOptions](https://docs.microsoft.com/javascript/api/azuremediaplayer/amp.player.playbackspeedoptions).
+Les autres propriétés du paramètre `playbackSpeed` sont fournies par l'objet [PlaybackSpeedOptions](/javascript/api/azuremediaplayer/playbackspeedoptions).
 
 Exemple de configuration des options de vitesse de lecture en JavaScript :
 

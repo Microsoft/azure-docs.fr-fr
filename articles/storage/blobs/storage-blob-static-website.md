@@ -3,26 +3,31 @@ title: Hébergement de sites web statiques dans le service Stockage Azure
 description: L’hébergement de sites web statiques dans Stockage Azure constitue une solution évolutive économique pour l’hébergement d’applications web modernes.
 author: normesta
 ms.service: storage
-ms.topic: conceptual
+ms.topic: how-to
 ms.author: normesta
 ms.reviewer: dineshm
-ms.date: 05/29/2019
+ms.date: 09/04/2020
 ms.subservice: blobs
-ms.openlocfilehash: 57ba59288cbf65c1ef588302965d480ee357ea4d
-ms.sourcegitcommit: 31236e3de7f1933be246d1bfeb9a517644eacd61
+ms.custom: devx-track-js
+ms.openlocfilehash: b9eb65311951706863c3b18c5fc91bae8c41c7dc
+ms.sourcegitcommit: c95e2d89a5a3cf5e2983ffcc206f056a7992df7d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82779975"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "96007339"
 ---
 # <a name="static-website-hosting-in-azure-storage"></a>Hébergement de sites web statiques dans le service Stockage Azure
 
-Vous pouvez servir du contenu statique (fichiers HTML, CSS, JavaScript et images) directement à partir d’un conteneur de stockage nommé *$web*. L’hébergement de votre contenu dans le stockage Azure vous permet d’utiliser des architectures serverless qui incluent [Azure Functions](/azure/azure-functions/functions-overview) et d’autres services Paas (Platform as a service).
+Vous pouvez servir du contenu statique (fichiers HTML, CSS, JavaScript et images) directement à partir d’un conteneur de stockage nommé *$web*. L’hébergement de votre contenu dans le stockage Azure vous permet d’utiliser des architectures serverless qui incluent [Azure Functions](../../azure-functions/functions-overview.md) et d’autres services Paas (Platform as a service). L’hébergement de site web statique dans le stockage Azure est une option intéressante quand vous n’avez pas besoin d’un serveur web pour restituer du contenu.
 
-[!INCLUDE [updated-for-az](../../../includes/storage-data-lake-gen2-support.md)]
+[App Service Static Web Apps](https://azure.microsoft.com/services/app-service/static/) constitue une excellente alternative à l’hébergement de site web statique dans le stockage Azure et sont également appropriées quand vous n’avez pas besoin d’un serveur web pour restituer du contenu. App Service Static Web Apps vous offre un workflow d’intégration continue et de livraison continue (CI/CD) complètement managé, de la source GitHub au déploiement global.
+
+Si vous avez besoin d’un serveur web pour restituer du contenu, vous pouvez utiliser [Azure App Service](https://azure.microsoft.com/services/app-service/).
+
+[!INCLUDE [storage-multi-protocol-access-preview](../../../includes/storage-multi-protocol-access-preview.md)]
 
 > [!NOTE]
-> Si votre site dépend du code côté serveur, utilisez [Azure App Service](/azure/app-service/overview) à la place.
+> Veillez à créer un compte de stockage Standard universel v2. Les sites web statiques ne sont pas disponibles dans les autres types de comptes de stockage.
 
 ## <a name="setting-up-a-static-website"></a>Configuration d’un site web statique
 
@@ -46,28 +51,28 @@ Vous pouvez utiliser un de ces outils pour charger du contenu sur le conteneur *
 > * [AZCopy](../common/storage-use-azcopy-v10.md)
 > * [Azure Storage Explorer](https://azure.microsoft.com/features/storage-explorer/)
 > * [Azure Pipelines](https://azure.microsoft.com/services/devops/pipelines/)
-> * [Extension Visual Studio Code](/azure/javascript/tutorial-vscode-static-website-node-01)
+> * [Extension Visual Studio Code](/azure/developer/javascript/tutorial-vscode-static-website-node-01)
 
 ## <a name="viewing-content"></a>Affichage du contenu
 
-Les utilisateurs peuvent afficher le contenu du site dans un navigateur en utilisant l’URL publique du site web. Vous trouvez cette URL à l’aide du portail Azure, de PowerShell ou d’Azure CLI. Utilisez ce tableau comme guide.
+Les utilisateurs peuvent afficher le contenu du site dans un navigateur en utilisant l’URL publique du site web. Vous trouvez cette URL à l’aide du portail Azure, de PowerShell ou d’Azure CLI. Voir [Trouver l’URL du site web](storage-blob-static-website-how-to.md#portal-find-url).
 
-|Outil| Assistance |
-|----|----|
-|**Azure portal** | [Trouver l’URL du site web avec le portail Azure](storage-blob-static-website-how-to.md#portal-find-url) |
-|**Azure CLI** | [Trouver l’URL du site web avec Azure CLI](storage-blob-static-website-how-to.md#cli-find-url) |
-|**Module Azure PowerShell** | [Trouver l’URL du site web avec PowerShell](storage-blob-static-website-how-to.md#powershell-find-url) |
+Si le serveur retourne une erreur 404, et que vous n’avez spécifié aucun document d’erreur lorsque vous avez activé le site web, une page 404 par défaut est retournée à l’utilisateur.
+
+> [!NOTE]
+> Le [service Partage des ressources cross-origine (CORS) pour Stockage Azure](/rest/api/storageservices/cross-origin-resource-sharing--cors--support-for-the-azure-storage-services) n’est pas pris en charge avec les sites web statiques.
+
+### <a name="regional-codes"></a>Codes régionaux
 
 L’URL de votre site contient un code régional. Par exemple, l’URL `https://contosoblobaccount.z22.web.core.windows.net/` contient le code de région `z22`.
 
 Même si ce code doit demeurer dans l’URL, il n’est destiné qu’à un usage interne, et vous n’aurez pas à l’utiliser de quelque autre manière que ce soit.
 
-Le document d’index, que vous spécifiez lorsque vous activez l’hébergement de site web statique, s’affiche lorsque les utilisateurs ouvrent le site et ne spécifient aucun fichier en particulier (par exemple : `https://contosoblobaccount.z22.web.core.windows.net`).  
+Le document d’index, que vous spécifiez lorsque vous activez l’hébergement de site web statique, s’affiche lorsque les utilisateurs ouvrent le site et ne spécifient aucun fichier en particulier (par exemple : `https://contosoblobaccount.z22.web.core.windows.net`).
 
-Si le serveur retourne une erreur 404, et que vous n’avez spécifié aucun document d’erreur lorsque vous avez activé le site web, une page 404 par défaut est retournée à l’utilisateur.
+### <a name="secondary-endpoints"></a>Points de terminaison secondaires
 
-> [!NOTE]
-> [CORS](https://docs.microsoft.com/rest/api/storageservices/cross-origin-resource-sharing--cors--support-for-the-azure-storage-services) n’est pas pris en charge avec un site web statique.
+Si vous configurez [la redondance dans une région secondaire](../common/storage-redundancy.md#redundancy-in-a-secondary-region), vous pouvez également accéder au contenu du site web à l’aide d’un point de terminaison secondaire. Dans la mesure où les données sont répliquées de façon asynchrone dans des régions secondaires, les fichiers disponibles au niveau du point de terminaison secondaire ne sont pas toujours synchronisés avec ceux qui sont disponibles sur le point de terminaison principal.
 
 ## <a name="impact-of-the-setting-the-public-access-level-of-the-web-container"></a>Impact de la définition du niveau d’accès public du conteneur web
 
@@ -75,7 +80,7 @@ Vous pouvez modifier le niveau d’accès public du conteneur **$web**, mais cel
 
 La capture d’écran suivante montre la définition du niveau d’accès public dans le portail Azure :
 
-![Capture d’écran illustrant la façon de définir le niveau d’accès public dans le portail](./media/storage-manage-access-to-resources/storage-manage-access-to-resources-0.png)
+![Capture d’écran illustrant la façon de définir le niveau d’accès public dans le portail](./media/anonymous-read-access-configure/configure-public-access-container.png)
 
 Si le point de terminaison principal du site web statique n’est pas affecté, en revanche, une modification du niveau d’accès public a bien une incidence sur le point de terminaison principal du service Blob.
 
@@ -83,22 +88,29 @@ Par exemple, si vous modifiez le niveau d’accès public du conteneur **$web** 
 
 Toutefois, l’accès public au point de terminaison principal du service Blob `https://contosoblobaccount.blob.core.windows.net/$web/index.html` passe, lui, de privé à public. Désormais, les utilisateurs peuvent ouvrir ce fichier à l’aide, au choix, d’un de ces deux points de terminaison.
 
+La désactivation de l’accès public sur un compte de stockage n’affecte pas les sites web statiques hébergés dans ce compte de stockage. Pour en savoir plus, consultez la section [Configure anonymous public read access for containers and blobs](anonymous-read-access-configure.md) (Configurer l’accès en lecture publique anonyme pour les conteneurs et les objets blob).
+
 ## <a name="mapping-a-custom-domain-to-a-static-website-url"></a>Mappage d’un domaine personnalisé à une URL de site web statique
 
-Vous pouvez rendre votre site web statique disponible via un domaine personnalisé. 
+Vous pouvez rendre votre site web statique disponible via un domaine personnalisé.
 
 Stockage Azure prenant en charge votre domaine personnalisé en mode natif, l'accès HTTP est plus facile à activer. Pour activer HTTPS, vous devez utiliser Azure CDN car Stockage Azure ne prend pas encore en charge HTTPS avec les domaines personnalisés en mode natif. Pour obtenir des instructions pas à pas, consultez [Mapper un domaine personnalisé à un point de terminaison du Stockage Blob Azure](storage-custom-domain-name.md).
 
-Si le compte de stockage est configuré pour [exiger un transfert sécurisé](../common/storage-require-secure-transfer.md) via HTTPS, les utilisateurs doivent utiliser le point de terminaison HTTPS. 
+Si le compte de stockage est configuré pour [exiger un transfert sécurisé](../common/storage-require-secure-transfer.md) via HTTPS, les utilisateurs doivent utiliser le point de terminaison HTTPS.
 
 > [!TIP]
 > Envisagez l'hébergement de votre domaine sur Azure. Pour plus d’informations, consultez [Héberger votre domaine dans Azure DNS](../../dns/dns-delegate-domain-azure-dns.md).
 
 ## <a name="adding-http-headers"></a>Ajout d’en-têtes HTTP
 
-La fonctionnalité de site web statique n’offre aucun moyen de configurer des en-têtes. Toutefois, vous pouvez utiliser Azure CDN pour ajouter des en-têtes et ajouter (ou remplacer) des valeurs d’en-tête. Consultez [Informations de référence sur le moteur de règles standard pour Azure CDN](https://docs.microsoft.com/azure/cdn/cdn-standard-rules-engine-reference).
+La fonctionnalité de site web statique n’offre aucun moyen de configurer des en-têtes. Toutefois, vous pouvez utiliser Azure CDN pour ajouter des en-têtes et ajouter (ou remplacer) des valeurs d’en-tête. Consultez [Informations de référence sur le moteur de règles standard pour Azure CDN](../../cdn/cdn-standard-rules-engine-reference.md).
 
-Si vous souhaitez utiliser des en-têtes pour contrôler la mise en cache, consultez [Contrôler le comportement de mise en cache d’Azure CDN avec des règles de mise en cache](https://docs.microsoft.com/azure/cdn/cdn-caching-rules).
+Si vous souhaitez utiliser des en-têtes pour contrôler la mise en cache, consultez [Contrôler le comportement de mise en cache d’Azure CDN avec des règles de mise en cache](../../cdn/cdn-caching-rules.md).
+
+## <a name="multi-region-website-hosting"></a>Hébergement de site web multirégion
+
+Si vous envisagez d’héberger un site web dans plusieurs zones géographiques, nous vous recommandons d’utiliser un [réseau de distribution de contenu](../../cdn/index.yml) pour la mise en cache régionale. Utilisez [Azure Front Door](../../frontdoor/index.yml) si vous souhaitez proposer un contenu différent dans chaque région. Il fournit également des fonctionnalités de basculement. [Azure Traffic Manager](../../traffic-manager/index.yml) n’est pas recommandé si vous envisagez d’utiliser un domaine personnalisé. Des problèmes peuvent survenir en raison de la manière dont le stockage Azure vérifie les noms des domaines personnalisés.
+
 
 ## <a name="pricing"></a>Tarifs
 
@@ -114,7 +126,7 @@ Pour activer les métriques sur les pages de votre site web statique, consultez 
 
 * [Héberger un site web statique dans le stockage Azure](storage-blob-static-website-how-to.md)
 * [Mapper un domaine personnalisé à un point de terminaison du Stockage Blob Azure](storage-custom-domain-name.md)
-* [Azure Functions](/azure/azure-functions/functions-overview)
-* [Azure App Service](/azure/app-service/overview)
-* [Générer votre première application web sans serveur](https://docs.microsoft.com/azure/functions/tutorial-static-website-serverless-api-with-database)
-* [Didacticiel : héberger votre domaine dans Azure DNS](../../dns/dns-delegate-domain-azure-dns.md)
+* [Azure Functions](../../azure-functions/functions-overview.md)
+* [Azure App Service](../../app-service/overview.md)
+* [Générer votre première application web sans serveur](/azure/functions/tutorial-static-website-serverless-api-with-database)
+* [Tutoriel : Héberger votre domaine dans Azure DNS](../../dns/dns-delegate-domain-azure-dns.md)

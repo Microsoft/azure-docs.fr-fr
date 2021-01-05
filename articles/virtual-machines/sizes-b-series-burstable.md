@@ -2,32 +2,33 @@
 title: Série B modulable - Machines Virtuelles Azure
 description: Décrit la série B des tailles de machines virtuelles Azure modulables.
 services: virtual-machines
-author: ayshakeen
-manager: gwallace
+ms.subservice: sizes
+author: styli365
 ms.service: virtual-machines
-ms.topic: article
+ms.topic: conceptual
 ms.date: 02/03/2020
-ms.author: ayshak
-ms.openlocfilehash: 5121ef8eb3123d830233e91968c69b331d255bd0
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: sttsinar
+ms.openlocfilehash: 819654ef88584cb91d6032e46256258aaed524fd
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78161078"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96500306"
 ---
 # <a name="b-series-burstable-virtual-machine-sizes"></a>Tailles de machines virtuelles modulables Série B
 
-Les machines virtuelles de la série B sont idéales pour les charges de travail ne nécessitant pas en permanence les performances complètes du processeur, comme les serveurs web, les preuves de concept, les petites bases de données et les environnements de build pour le développement. Ces charges de travail ont généralement des exigences modulables en termes de performances. La série B vous offre la possibilité d’acheter une taille de machine virtuelle aux performances de base. Ainsi, l’instance de machine virtuelle génère des crédits lorsqu’elle n’utilise pas la totalité de ses performances. Dès que la machine virtuelle a cumulé des crédits, elle peut étendre ses performances en utilisant jusqu’à 100 % du processeur virtuel lorsque l’application requiert des performances de processeur plus élevées.
+Les machines virtuelles de la série B sont idéales pour les charges de travail ne nécessitant pas en permanence les performances complètes du processeur, comme les serveurs web, les preuves de concept, les petites bases de données et les environnements de build pour le développement. Ces charges de travail ont généralement des exigences modulables en termes de performances. La série B vous offre la possibilité d’acheter une taille de machine virtuelle aux performances de base qui génère des crédits lorsqu’elle n’utilise pas la totalité de ses performances. Dès qu’elle a cumulé des crédits, la machine virtuelle peut étendre son niveau de performance en utilisant jusqu’à 100 % du processeur virtuel lorsque l’application réclame des performances de processeur plus élevées.
 
 La série B est disponible dans les tailles de machines virtuelles suivantes :
 
-Premium Storage :  Prise en charge
-
-Mise en cache du Stockage Premium :  Non pris en charge
-
-Migration dynamique : Prise en charge
-
-Mises à jour avec préservation de la mémoire : Prise en charge
+[Unité compute Azure (ACU)](./acu.md?bc=%2fazure%2fvirtual-machines%2flinux%2fbreadcrumb%2ftoc.json&toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) : Variable*<br>
+[Stockage Premium](premium-storage-performance.md) : Pris(e) en charge<br>
+[Mise en cache du Stockage Premium](premium-storage-performance.md) : Non pris en charge<br>
+[Migration dynamique](maintenance-and-updates.md) : Pris(e) en charge<br>
+[Mises à jour avec préservation de la mémoire](maintenance-and-updates.md) : Pris(e) en charge<br>
+[Prise en charge de la génération de machine virtuelle](generation-2.md) : Générations 1 et 2<br>
+<br>
+\* Les machines virtuelles de la série B sont Burstables et, par conséquent, les nombres ACU varient en fonction des charges de travail et de l’utilisation des cœurs.
 
 | Taille | Processeurs virtuels | Mémoire : Gio | Stockage temporaire (SSD) en Gio | Perf. du processeur de base de machine virtuelle | Perf. du processeur max. de machine virtuelle | Crédits initiaux | Crédits cumulés/heure | Crédits cumulés max. | Disques de données max. | Débit de stockage temporaire et mis en cache max. : IOPS/MBps | Débit du disque non mis en cache max. : IOPS/Mbits/s | Nombre max de cartes réseau |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
@@ -92,18 +93,20 @@ Pour un D16s_v3 disposant de 16 processeurs virtuels et de 64 Gio de mémoire, l
 
 ## <a name="q--a"></a>Questions et réponses
 
+### <a name="q-what-happens-when-my-credits-run-out"></a>Q : Que se passe-t-il si je n’ai plus de crédits ?
+**R** : Une fois les crédits épuisés, la machine virtuelle revient aux performances de ligne de base.
+
 ### <a name="q-how-do-you-get-135-baseline-performance-from-a-vm"></a>Q : Comment obtenir 135 % des performances de base d’une machine virtuelle ?
 
 **R** : Ce pourcentage est réparti sur les huit processeurs virtuels qui composent la taille de la machine virtuelle. Par exemple, si votre application utilise 4 des 8 cœurs travaillant au traitement par lots et que chacun de ces 4 processeurs virtuels est utilisé à 30 %, la quantité totale des performances du processeur de la machine virtuelle serait égale à 120 %.  Ce qui signifie que votre machine virtuelle générerait un crédit temps basé sur le delta de 15 % à partir de vos performances de base.  Cela signifie également que lorsque vous disposez de crédits, cette même machine virtuelle peut utiliser la totalité des 8 processeurs virtuels pour obtenir une performance de processeur maximale de 800 %.
 
+### <a name="q-how-can-i-monitor-my-credit-balance-and-consumption"></a>Q : Comment puis-je surveiller mon solde créditeur et ma consommation ?
 
-### <a name="q-how-can-i-monitor-my-credit-balance-and-consumption"></a>Q : Comment puis-je surveiller mes soldes de crédit et de consommation ?
-
-**R** : Nous allons présenter deux nouvelles mesures dans les semaines à venir. La mesure **Credit** vous permettra d’afficher les crédits cumulés par votre machine virtuelle et la mesure **ConsumedCredit** d’afficher le nombre de crédits de processeur utilisés par votre machine virtuelle.    Ces mesures figurent sur le volet des mesures du portail ou sont visibles par programme via les API Azure Monitor.
+**R** : La métrique **Credit** vous permet d’afficher le nombre de crédits cumulés par votre machine virtuelle et la métrique **ConsumedCredit** le nombre de crédits de processeur consommés par votre machine virtuelle.    Ces mesures figurent sur le volet des mesures du portail ou sont visibles par programme via les API Azure Monitor.
 
 Pour en savoir plus sur l’accès aux données de mesure pour Azure, consultez [Vue d’ensemble des mesures dans Microsoft Azure](../azure-monitor/platform/data-platform.md).
 
-### <a name="q-how-are-credits-accumulated"></a>Q : Comment les crédits sont-ils cumulés ?
+### <a name="q-how-are-credits-accumulated-and-consumed"></a>Q : Comment les crédits sont-ils accumulés et consommés ?
 
 **R** : Les taux de cumul et d’utilisation de la machine virtuelle sont définis pour qu’une machine virtuelle s’exécutant exactement à son niveau de performances de base ne génère aucun cumul net ou n’utilise aucun crédit.  Une machine virtuelle connaît une augmentation nette de ses crédits chaque fois qu’elle s’exécute sous son niveau de performances de base, et une diminution nette de ses crédits chaque fois qu’elle utilise le processeur à un niveau plus élevé de performances.
 
@@ -129,13 +132,13 @@ Par exemple, dans l’exemple ci-dessus, vos performances de base sont de 20 %. 
 
 ### <a name="q-why-is-my-remaining-credit-set-to-0-after-a-redeploy-or-a-stopstart"></a>Q : Pourquoi mon crédit restant est-il défini sur 0 après un redéploiement ou un arrêt/démarrage ?
 
-**R** : Lorsqu’une machine virtuelle est « REDÉPLOYÉE » et qu’elle est déplacée vers un autre nœud, le crédit cumulé est perdu. Si la machine virtuelle est arrêtée/démarrée, mais reste sur le même nœud, la machine virtuelle conserve le crédit cumulé. Lorsque la machine virtuelle redémarre de zéro sur un nœud, elle obtient un crédit initial, de 240 minutes pour  Standard_B8ms.
+**R** : Lorsqu’une machine virtuelle est « REDÉPLOYÉE » et qu’elle est déplacée vers un autre nœud, le crédit cumulé est perdu. Si la machine virtuelle est arrêtée/démarrée, mais reste sur le même nœud, la machine virtuelle conserve le crédit cumulé. Lorsque la machine virtuelle redémarre à zéro sur un nœud, elle obtient un crédit initial (240 pour Standard_B8ms).
 
 ### <a name="q-what-happens-if-i-deploy-an-unsupported-os-image-on-b1ls"></a>Q : Que se passe-t-il si je déploie une image de système d’exploitation non prise en charge sur B1ls ?
 
 **R** : B1ls prend uniquement en charge les images Linux. Si vous déployez une autre image de système d’exploitation, vous ne bénéficierez peut-être pas de la meilleure expérience utilisateur.
 
-## <a name="other-sizes"></a>Autres tailles
+## <a name="other-sizes-and-information"></a>Autres tailles et informations
 
 - [Usage général](sizes-general.md)
 - [Optimisé pour le calcul](sizes-compute.md)
@@ -143,6 +146,10 @@ Par exemple, dans l’exemple ci-dessus, vos performances de base sont de 20 %. 
 - [Optimisé pour le stockage](sizes-storage.md)
 - [Optimisé pour le GPU](sizes-gpu.md)
 - [Calcul haute performance](sizes-hpc.md)
+
+Calculatrice de prix : [Calculatrice de prix](https://azure.microsoft.com/pricing/calculator/)
+
+Pour plus d’informations sur les types de disques : [Types de disques](./disks-types.md#ultra-disk)
 
 ## <a name="next-steps"></a>Étapes suivantes
 

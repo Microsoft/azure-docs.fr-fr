@@ -4,17 +4,17 @@ description: Dans ce démarrage rapide, découvrez comment sauvegarder vos machi
 ms.devlang: azurecli
 ms.topic: quickstart
 ms.date: 04/16/2019
-ms.custom: mvc
-ms.openlocfilehash: 8021ca553a1434c891bee911e85d351c61938594
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.custom: mvc, devx-track-azurepowershell
+ms.openlocfilehash: 5e83c599ceed76927f2a313f78c83638d708f1bb
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "74171960"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "90985128"
 ---
 # <a name="back-up-a-virtual-machine-in-azure-with-powershell"></a>Sauvegarder une machine virtuelle dans Azure avec PowerShell
 
-Le module [AZ Azure PowerShell](https://docs.microsoft.com/powershell/azure/new-azureps-module-az?view=azps-1.4.0) est utilisé pour créer et gérer des ressources Azure à partir de la ligne de commande ou dans des scripts.
+Le module [AZ Azure PowerShell](/powershell/azure/new-azureps-module-az) est utilisé pour créer et gérer des ressources Azure à partir de la ligne de commande ou dans des scripts.
 
 La [sauvegarde Azure](backup-overview.md) sauvegarde les applications et machines locales, ainsi que les machines virtuelles Azure. Cet article montre comment sauvegarder une machine virtuelle Azure avec le module AZ. Vous pouvez également sauvegarder une machine virtuelle en utilisant l’interface [Azure CLI](quick-backup-vm-cli.md), ou le [portail Azure](quick-backup-vm-portal.md).
 
@@ -46,7 +46,7 @@ Lorsque vous créez le coffre :
 
 - Pour l’emplacement et le groupe de ressources, spécifiez l’emplacement et le groupe de ressources de la machine virtuelle que vous souhaitez sauvegarder.
 - Si vous avez utilisé cet [exemple de script](../virtual-machines/scripts/virtual-machines-windows-powershell-sample-create-vm.md?toc=%2fpowershell%2fmodule%2ftoc.json) pour créer la machine virtuelle, le groupe de ressources est **myResourceGroup**, la machine virtuelle est **myVM** et les ressources se trouvent dans la région **WestEurope**.
-- La Sauvegarde Azure gère automatiquement le stockage des données sauvegardées. Par défaut, le coffre utilise [le stockage géoredondant (GRS)](../storage/common/storage-redundancy-grs.md). La géoredondance garantit que les données sauvegardées sont répliquées dans une région Azure secondaire, à des centaines de kilomètres de la région primaire.
+- La Sauvegarde Azure gère automatiquement le stockage des données sauvegardées. Par défaut, le coffre utilise [le stockage géoredondant (GRS)](../storage/common/storage-redundancy.md#geo-redundant-storage). La géoredondance garantit que les données sauvegardées sont répliquées dans une région Azure secondaire, à des centaines de kilomètres de la région primaire.
 
 À présent, créez un coffre :
 
@@ -66,7 +66,7 @@ Lorsque vous créez le coffre :
         -Name "myRecoveryServicesVault" | Set-AzRecoveryServicesVaultContext
     ```
 
-3. Modifiez la configuration de la redondance de stockage (LRS/GRS) du coffre avec [Set-AzRecoveryServicesBackupProperty](https://docs.microsoft.com/powershell/module/az.recoveryservices/Set-AzRecoveryServicesBackupProperty) comme suit :
+3. Modifiez la configuration de la redondance de stockage (LRS/GRS) du coffre avec [Set-AzRecoveryServicesBackupProperty](/powershell/module/az.recoveryservices/set-azrecoveryservicesbackupproperty) comme suit :
 
     ```powershell
     Get-AzRecoveryServicesVault `

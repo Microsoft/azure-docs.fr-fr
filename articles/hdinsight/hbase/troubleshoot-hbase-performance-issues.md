@@ -7,12 +7,12 @@ ms.reviewer: jasonh
 ms.service: hdinsight
 ms.topic: troubleshooting
 ms.date: 09/24/2019
-ms.openlocfilehash: 93698fadcecf190dd8bbc24a9d03978899d3c5e9
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 5be3f02a80524d9c4b633e1e34d581fc26bfd32d
+ms.sourcegitcommit: d767156543e16e816fc8a0c3777f033d649ffd3c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75887153"
+ms.lasthandoff: 10/26/2020
+ms.locfileid: "92547892"
 ---
 # <a name="troubleshoot-apache-hbase-performance-issues-on-azure-hdinsight"></a>Résoudre des problèmes de performances d’Apache HBase sur Azure HDInsight
 
@@ -73,9 +73,9 @@ Voici quelques-uns des réglages de paramètres que nous avons effectués et qui
 
 - Augmentation de la taille de `memstore` par défaut de 128 Mo à 256 Mo. En règle générale, ce paramètre est recommandé pour les scénarios d’écriture intensive.
 
-- Augmentation du nombre de threads qui sont dédiés au compactage par défaut (de **1** à **4**). Ce paramètre est pertinent si nous observons de fréquents compactages mineurs.
+- Augmentation du nombre de threads qui sont dédiés au compactage par défaut (de **1** à **4** ). Ce paramètre est pertinent si nous observons de fréquents compactages mineurs.
 
-- Évitement du blocage du vidage de `memstore` en raison d’une limite de magasin. Pour fournir cette mémoire tampon, définissez le paramètre `Hbase.hstore.blockingStoreFiles` sur **100**.
+- Évitement du blocage du vidage de `memstore` en raison d’une limite de magasin. Pour fournir cette mémoire tampon, définissez le paramètre `Hbase.hstore.blockingStoreFiles` sur **100** .
 
 - Pour contrôler les vidages, utilisez les paramètres suivants :
 
@@ -104,7 +104,7 @@ Voici quelques-uns des réglages de paramètres que nous avons effectués et qui
 - Délais d’expiration RPC : **3 minutes**
 
    - Les délais d’expiration RPC incluent les délais d’expiration RPC HBase, les délais d’expiration des scanneurs clients HBase et les délais d’expiration des requêtes Phoenix. 
-   - Vérifiez que le paramètre `hbase.client.scanner.caching` est défini sur la même valeur côté serveur et côté client. Si les valeurs ne sont pas les mêmes, ce paramètre provoque des erreurs côté client en lien avec `OutOfOrderScannerException`. Ce paramètre doit être défini sur une valeur basse pour les analyses volumineuses. Nous avons défini cette valeur sur **100**.
+   - Vérifiez que le paramètre `hbase.client.scanner.caching` est défini sur la même valeur côté serveur et côté client. Si les valeurs ne sont pas les mêmes, ce paramètre provoque des erreurs côté client en lien avec `OutOfOrderScannerException`. Ce paramètre doit être défini sur une valeur basse pour les analyses volumineuses. Nous avons défini cette valeur sur **100** .
 
 ## <a name="other-considerations"></a>Autres considérations
 
@@ -124,4 +124,4 @@ Si votre problème persiste, utilisez l’un des canaux suivants pour obtenir de
 
 - Contactez [@AzureSupport](https://twitter.com/azuresupport). Il s’agit du compte Microsoft Azure officiel pour améliorer l’expérience client. Il fournit à la communauté Azure les ressources appropriées : réponses, support technique et experts.
 
-- Si vous avez besoin d’une aide supplémentaire, vous pouvez envoyer une requête de support à partir du [Portail Microsoft Azure](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade/). Sélectionnez **Support** dans la barre de menus, ou ouvrez le hub **Aide + Support**. Pour plus d’informations, consultez [Création d’une demande de support Azure](https://docs.microsoft.com/azure/azure-portal/supportability/how-to-create-azure-support-request). Votre abonnement Microsoft Azure comprend l’accès au support relatif à la gestion et à la facturation des abonnements, et le support technique est fourni avec l’un des [plans de support Azure](https://azure.microsoft.com/support/plans/).
+- Si vous avez besoin d’une aide supplémentaire, vous pouvez envoyer une requête de support à partir du [Portail Microsoft Azure](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade/). Sélectionnez **Support** dans la barre de menus, ou ouvrez le hub **Aide + Support** . Pour plus d’informations, consultez [Création d’une demande de support Azure](../../azure-portal/supportability/how-to-create-azure-support-request.md). Votre abonnement Microsoft Azure comprend l’accès au support relatif à la gestion et à la facturation des abonnements, et le support technique est fourni avec l’un des [plans de support Azure](https://azure.microsoft.com/support/plans/).

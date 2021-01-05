@@ -8,13 +8,13 @@ ms.service: virtual-machine-scale-sets
 ms.subservice: autoscale
 ms.date: 03/27/2018
 ms.reviewer: avverma
-ms.custom: avverma
-ms.openlocfilehash: d2e10c2a02bf14f7a01ce03bc70f6e3f43b96385
-ms.sourcegitcommit: 595cde417684e3672e36f09fd4691fb6aa739733
+ms.custom: avverma, devx-track-azurepowershell
+ms.openlocfilehash: 8ee124f866a5241620671ff84c24f3713f62efe1
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83700828"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89078467"
 ---
 # <a name="tutorial-automatically-scale-a-virtual-machine-scale-set-with-azure-powershell"></a>Tutoriel : Mettre à l’échelle automatiquement un groupe de machines virtuelles identiques avec Azure PowerShell
 
@@ -99,7 +99,7 @@ $myRuleScaleOut = New-AzureRmAutoscaleRule `
 ## <a name="create-a-rule-to-autoscale-in"></a>Créer une règle pour le scale-in automatique
 Au cours d’une soirée ou d’un week-end, la demande de votre application peut diminuer. Si cette charge réduite est constante pendant un certain temps, vous pouvez configurer des règles de mise à l’échelle automatique pour réduire le nombre d’instances de machine virtuelle dans le groupe identique. Cette action de diminution du nombre d’instances a pour effet de réduire le coût d’exécution de votre groupe identique, car vous seul exécutez le nombre d’instances requis pour répondre à la demande en cours.
 
-Utilisez [New-AzureRmAutoscaleRule](/powershell/module/AzureRM.Insights/New-AzureRmAutoscaleRule) pour créer une autre règle qui diminue le nombre d’instances de machine virtuelle dans un groupe identique lorsque la charge d’UC moyenne est inférieure à 30 % pendant 5 minutes. Lorsque la règle se déclenche, le nombre d’instances de machine virtuelle est réduit d’une unité. L’exemple suivant montre la création d’un objet nommé *myRuleScaleDown* qui contient cette règle de montée en puissance. Le paramètre *-MetricResourceId* utilise les variables précédemment définies pour l’ID d’abonnement, le nom du groupe de ressources et le nom du groupe identique :
+Utilisez [New-AzureRmAutoscaleRule](/powershell/module/AzureRM.Insights/New-AzureRmAutoscaleRule) pour créer une autre règle qui diminue le nombre d’instances de machine virtuelle dans un groupe identique lorsque la charge d’UC moyenne est inférieure à 30 % pendant 5 minutes. Lorsque la règle déclenche l’opération, le nombre d’instances de machine virtuelle est réduit d’une unité. L’exemple suivant crée un objet nommé *myRuleScaleDown* qui contient cette règle de scale-down. Le paramètre *-MetricResourceId* utilise les variables précédemment définies pour l’ID d’abonnement, le nom du groupe de ressources et le nom du groupe identique :
 
 ```azurepowershell-interactive
 $myRuleScaleIn = New-AzureRmAutoscaleRule `

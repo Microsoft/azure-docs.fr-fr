@@ -3,17 +3,17 @@ title: 'Configurer la coexistence de connexions à ExpressRoute et S2S VPN : cl
 description: Cet article vous guide tout au long de la configuration d’une connexion ExpressRoute et d’une connexion VPN de site à site pouvant coexister pour le modèle de déploiement classique.
 documentationcenter: na
 services: expressroute
-author: charwen
+author: duongau
 ms.service: expressroute
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 12/06/2019
-ms.author: charwen
-ms.openlocfilehash: aba07e0a1dd8e7b1db8677907672d919ef034057
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: duau
+ms.openlocfilehash: 70407d726b697dd6c4dfb6777cf6c445092d3b73
+ms.sourcegitcommit: 957c916118f87ea3d67a60e1d72a30f48bad0db6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79233761"
+ms.lasthandoff: 10/19/2020
+ms.locfileid: "92206323"
 ---
 # <a name="configure-expressroute-and-site-to-site-coexisting-connections-classic"></a>Configurer la coexistence de connexions de site à site et ExpressRoute (classique)
 > [!div class="op_single_selector"]
@@ -53,7 +53,7 @@ Vous pouvez configurer une connexion VPN de site à site en tant que sauvegarde 
 > 
 > 
 
-![Coexister](media/expressroute-howto-coexist-classic/scenario1.jpg)
+![Diagramme montrant une connexion VPN de site à site en tant que sauvegarde pour ExpressRoute.](media/expressroute-howto-coexist-classic/scenario1.jpg)
 
 ### <a name="configure-a-site-to-site-vpn-to-connect-to-sites-not-connected-through-expressroute"></a>Configurer un réseau VPN de site à site pour se connecter à des sites non connectés via ExpressRoute
 Vous pouvez configurer votre réseau là où certains sites se connectent directement à Azure via des réseaux VPN de site à site ou via ExpressRoute. 
@@ -84,73 +84,85 @@ Vous pouvez choisir entre deux procédures différentes pour configurer vos conn
 ## <a name="to-create-a-new-virtual-network-and-coexisting-connections"></a><a name="new"></a>Créer un réseau virtuel et des connexions qui coexistent
 Cette procédure vous guide dans la création d’un réseau virtuel et dans l’établissement de nouvelles connexions de site à site et ExpressRoute appelées à coexister.
 
-1. Vous aurez besoin d’installer la dernière version des applets de commande PowerShell Azure. Pour plus d’informations sur l’installation des applets de commande PowerShell, consultez [Installation et configuration d’Azure PowerShell](/powershell/azure/overview). Les applets de commande que vous utiliserez pour cette configuration peuvent être légèrement différentes de celles que vous connaissez. Utilisez les applets de commande spécifiées dans ces instructions. 
-2. Créez un schéma pour votre réseau virtuel. Pour plus d’informations sur le schéma de configuration, consultez la page [Schéma de configuration du réseau virtuel Azure](https://msdn.microsoft.com/library/azure/jj157100.aspx).
+1. Vous aurez besoin d’installer la dernière version des applets de commande PowerShell Azure. Pour plus d’informations sur l’installation des applets de commande PowerShell, consultez [Installation et configuration d’Azure PowerShell](/powershell/azure/). Les applets de commande que vous utiliserez pour cette configuration peuvent être légèrement différentes de celles que vous connaissez. Utilisez les applets de commande spécifiées dans ces instructions. 
+2. Créez un schéma pour votre réseau virtuel. Pour plus d’informations sur le schéma de configuration, consultez la page [Schéma de configuration du réseau virtuel Azure](/previous-versions/azure/reference/jj157100(v=azure.100)).
    
     Lorsque vous créez votre schéma, veillez à utiliser les valeurs suivantes :
    
    * Le sous-réseau de la passerelle du réseau virtuel doit être défini sur /27 ou un préfixe plus court (comme /26 ou /25).
    * La connexion à la passerelle est du type « dédié ».
      
-             <VirtualNetworkSite name="MyAzureVNET" Location="Central US">
-               <AddressSpace>
-                 <AddressPrefix>10.17.159.192/26</AddressPrefix>
-               </AddressSpace>
-               <Subnets>
-                 <Subnet name="Subnet-1">
-                   <AddressPrefix>10.17.159.192/27</AddressPrefix>
-                 </Subnet>
-                 <Subnet name="GatewaySubnet">
-                   <AddressPrefix>10.17.159.224/27</AddressPrefix>
-                 </Subnet>
-               </Subnets>
-               <Gateway>
-                 <ConnectionsToLocalNetwork>
-                   <LocalNetworkSiteRef name="MyLocalNetwork">
-                     <Connection type="Dedicated" />
-                   </LocalNetworkSiteRef>
-                 </ConnectionsToLocalNetwork>
-               </Gateway>
-             </VirtualNetworkSite>
+    ```xml
+    <VirtualNetworkSite name="MyAzureVNET" Location="Central US">
+      <AddressSpace>
+        <AddressPrefix>10.17.159.192/26</AddressPrefix>
+      </AddressSpace>
+      <Subnets>
+        <Subnet name="Subnet-1">
+          <AddressPrefix>10.17.159.192/27</AddressPrefix>
+        </Subnet>
+        <Subnet name="GatewaySubnet">
+          <AddressPrefix>10.17.159.224/27</AddressPrefix>
+          /Subnet>
+      </Subnets>
+      <Gateway>
+        <ConnectionsToLocalNetwork>
+          <LocalNetworkSiteRef name="MyLocalNetwork">
+            <Connection type="Dedicated" />
+          </LocalNetworkSiteRef>
+        </ConnectionsToLocalNetwork>
+      </Gateway>
+    </VirtualNetworkSite>
+    ```
 3. Après avoir créé et configuré votre fichier de schéma xml, chargez-le vers le serveur. Cette opération crée votre réseau virtuel.
    
     Utilisez l’applet de commande suivante pour charger votre fichier vers le serveur en remplaçant la valeur par la vôtre.
    
-        Set-AzureVNetConfig -ConfigurationPath 'C:\NetworkConfig.xml'
+    ```azurepowershell
+    Set-AzureVNetConfig -ConfigurationPath 'C:\NetworkConfig.xml'
+    ```
 4. <a name="gw"></a>Créez une passerelle ExpressRoute. Veillez à spécifier la valeur *Standard*, *HighPerformance* ou *UltraPerformance* pour le paramètre GatewaySKU, et la valeur *DynamicRouting* pour le paramètre GatewayType.
    
     Utilisez l’exemple ci-dessous en utilisant vos propres valeurs.
-   
-        New-AzureVNetGateway -VNetName MyAzureVNET -GatewayType DynamicRouting -GatewaySKU HighPerformance
+
+    ```azurepowershell
+    New-AzureVNetGateway -VNetName MyAzureVNET -GatewayType DynamicRouting -GatewaySKU HighPerformance
+    ```
 5. Liez la passerelle ExpressRoute au circuit ExpressRoute. Une fois cette étape terminée, la connexion entre votre réseau local et Azure est établie via ExpressRoute.
    
-        New-AzureDedicatedCircuitLink -ServiceKey <service-key> -VNetName MyAzureVNET
+    ```azurepowershell
+    New-AzureDedicatedCircuitLink -ServiceKey <service-key> -VNetName MyAzureVNET
+    ```
 6. <a name="vpngw"></a>Créez ensuite la passerelle VPN de site à site. Vous devez spécifier la valeur *Standard*, *HighPerformance* ou *UltraPerformance* pour le paramètre GatewaySKU, et la valeur *DynamicRouting* pour le paramètre GatewayType.
    
-        New-AzureVirtualNetworkGateway -VNetName MyAzureVNET -GatewayName S2SVPN -GatewayType DynamicRouting -GatewaySKU  HighPerformance
+    ```azurepowershell
+    New-AzureVirtualNetworkGateway -VNetName MyAzureVNET -GatewayName S2SVPN -GatewayType DynamicRouting -GatewaySKU  HighPerformance
+    ```
    
     Pour récupérer les paramètres de la passerelle de réseau virtuel, y compris l’ID de passerelle et l’adresse IP publique, utilisez l’applet de commande `Get-AzureVirtualNetworkGateway`.
    
-        Get-AzureVirtualNetworkGateway
+    ```azurepowershell
+    Get-AzureVirtualNetworkGateway
    
-        GatewayId            : 348ae011-ffa9-4add-b530-7cb30010565e
-        GatewayName          : S2SVPN
-        LastEventData        :
-        GatewayType          : DynamicRouting
-        LastEventTimeStamp   : 5/29/2015 4:41:41 PM
-        LastEventMessage     : Successfully created a gateway for the following virtual network: GNSDesMoines
-        LastEventID          : 23002
-        State                : Provisioned
-        VIPAddress           : 104.43.x.y
-        DefaultSite          :
-        GatewaySKU           : HighPerformance
-        Location             :
-        VnetId               : 979aabcf-e47f-4136-ab9b-b4780c1e1bd5
-        SubnetId             :
-        EnableBgp            : False
-        OperationDescription : Get-AzureVirtualNetworkGateway
-        OperationId          : 42773656-85e1-a6b6-8705-35473f1e6f6a
-        OperationStatus      : Succeeded
+    GatewayId            : 348ae011-ffa9-4add-b530-7cb30010565e
+    GatewayName          : S2SVPN
+    LastEventData        :
+    GatewayType          : DynamicRouting
+    LastEventTimeStamp   : 5/29/2015 4:41:41 PM
+    LastEventMessage     : Successfully created a gateway for the following virtual network: GNSDesMoines
+    LastEventID          : 23002
+    State                : Provisioned
+    VIPAddress           : 104.43.x.y
+    DefaultSite          :
+    GatewaySKU           : HighPerformance
+    Location             :
+    VnetId               : 979aabcf-e47f-4136-ab9b-b4780c1e1bd5
+    SubnetId             :
+    EnableBgp            : False
+    OperationDescription : Get-AzureVirtualNetworkGateway
+    OperationId          : 42773656-85e1-a6b6-8705-35473f1e6f6a
+    OperationStatus      : Succeeded
+    ```
 7. Créez une entité de passerelle VPN de site local. Cette commande ne configure pas votre passerelle VPN locale. Elle vous permet d’indiquer les paramètres de la passerelle locale, par exemple l’adresse IP publique et l’espace d’adressage local afin que la passerelle VPN Azure puisse s’y connecter.
    
    > [!IMPORTANT]
@@ -160,7 +172,9 @@ Cette procédure vous guide dans la création d’un réseau virtuel et dans l�
    
     Utilisez l’exemple suivant en remplaçant les valeurs par les vôtres.
    
-        New-AzureLocalNetworkGateway -GatewayName MyLocalNetwork -IpAddress <MyLocalGatewayIp> -AddressSpace <MyLocalNetworkAddress>
+    ```azurepowershell
+    New-AzureLocalNetworkGateway -GatewayName MyLocalNetwork -IpAddress <MyLocalGatewayIp> -AddressSpace <MyLocalNetworkAddress>
+    ```
    
    > [!NOTE]
    > Si votre réseau local possède plusieurs itinéraires, vous pouvez tous les transmettre sous la forme d’un tableau.  $MyLocalNetworkAddress = @("10.1.2.0/24","10.1.3.0/24","10.2.1.0/24")  
@@ -169,15 +183,17 @@ Cette procédure vous guide dans la création d’un réseau virtuel et dans l�
 
     Pour récupérer les paramètres de la passerelle de réseau virtuel, y compris l’ID de passerelle et l’adresse IP publique, utilisez l’applet de commande `Get-AzureVirtualNetworkGateway`. Consultez l’exemple qui suit.
 
-        Get-AzureLocalNetworkGateway
+    ```azurepowershell
+    Get-AzureLocalNetworkGateway
 
-        GatewayId            : 532cb428-8c8c-4596-9a4f-7ae3a9fcd01b
-        GatewayName          : MyLocalNetwork
-        IpAddress            : 23.39.x.y
-        AddressSpace         : {10.1.2.0/24}
-        OperationDescription : Get-AzureLocalNetworkGateway
-        OperationId          : ddc4bfae-502c-adc7-bd7d-1efbc00b3fe5
-        OperationStatus      : Succeeded
+    GatewayId            : 532cb428-8c8c-4596-9a4f-7ae3a9fcd01b
+    GatewayName          : MyLocalNetwork
+    IpAddress            : 23.39.x.y
+    AddressSpace         : {10.1.2.0/24}
+    OperationDescription : Get-AzureLocalNetworkGateway
+    OperationId          : ddc4bfae-502c-adc7-bd7d-1efbc00b3fe5
+    OperationStatus      : Succeeded
+    ```
 
 
 1. Configurez votre périphérique VPN local à connecter à la nouvelle passerelle. Utilisez les informations que vous avez récupérées à l’étape 6 lors de la configuration de votre périphérique VPN. Pour plus d’informations sur la configuration du périphérique VPN, consultez la rubrique [Configuration de périphérique VPN](../vpn-gateway/vpn-gateway-about-vpn-devices.md).
@@ -185,7 +201,9 @@ Cette procédure vous guide dans la création d’un réseau virtuel et dans l�
    
     Dans cet exemple, connectedEntityId est l’ID de la passerelle locale que vous pouvez trouver en exécutant `Get-AzureLocalNetworkGateway`. Vous pouvez trouver virtualNetworkGatewayId à l’aide de l’applet de commande `Get-AzureVirtualNetworkGateway` . Après cette étape, la connexion entre votre réseau local et Azure est établie via la connexion VPN de site à site.
 
-        New-AzureVirtualNetworkGatewayConnection -connectedEntityId <local-network-gateway-id> -gatewayConnectionName Azure2Local -gatewayConnectionType IPsec -sharedKey abc123 -virtualNetworkGatewayId <azure-s2s-vpn-gateway-id>
+    ```azurepowershell
+    New-AzureVirtualNetworkGatewayConnection -connectedEntityId <local-network-gateway-id> -gatewayConnectionName Azure2Local -gatewayConnectionType IPsec -sharedKey abc123 -virtualNetworkGatewayId <azure-s2s-vpn-gateway-id>
+    ```
 
 ## <a name="to-configure-coexisting-connections-for-an-already-existing-vnet"></a><a name="add"></a>Pour configurer des connexions coexistantes pour un réseau virtuel existant
 Si vous disposez déjà d’un réseau virtuel, vérifiez la taille du sous-réseau de passerelle. Si le sous-réseau de passerelle est /28 ou /29, vous devez tout d’abord supprimer la passerelle de réseau virtuel et augmenter la taille du sous-réseau de passerelle. Les étapes décrites dans cette section vous indiquent la procédure à suivre.
@@ -197,34 +215,41 @@ Si le sous-réseau de passerelle est défini sur/27 ou plus et si le réseau vir
 > 
 > 
 
-1. Vous aurez besoin d’installer la dernière version des applets de commande PowerShell Azure Resource Manager. Pour plus d’informations sur l’installation des applets de commande PowerShell, consultez [Installation et configuration d’Azure PowerShell](/powershell/azure/overview). Les applets de commande que vous utiliserez pour cette configuration peuvent être légèrement différentes de celles que vous connaissez. Utilisez les applets de commande spécifiées dans ces instructions. 
+1. Vous aurez besoin d’installer la dernière version des applets de commande PowerShell Azure Resource Manager. Pour plus d’informations sur l’installation des applets de commande PowerShell, consultez [Installation et configuration d’Azure PowerShell](/powershell/azure/). Les applets de commande que vous utiliserez pour cette configuration peuvent être légèrement différentes de celles que vous connaissez. Utilisez les applets de commande spécifiées dans ces instructions. 
 2. Supprimez la passerelle VPN ExpressRoute ou de site à site existante. Utilisez l’applet de commande suivante en remplaçant les valeurs par les vôtres.
    
-        Remove-AzureVNetGateway –VnetName MyAzureVNET
+    ```azurepowershell
+    Remove-AzureVNetGateway –VnetName MyAzureVNET
+    ```
 3. Exportez le schéma du réseau virtuel. Utilisez l’applet de commande PowerShell suivante en remplaçant les valeurs par les vôtres.
    
-        Get-AzureVNetConfig –ExportToFile "C:\NetworkConfig.xml"
+    ```azurepowershell
+    Get-AzureVNetConfig –ExportToFile "C:\NetworkConfig.xml"
+    ```
 4. Modifiez le schéma du fichier de configuration réseau pour que le sous-réseau de passerelle soit défini sur /27 ou un préfixe plus court (comme /26 ou /25). Consultez l’exemple qui suit. 
    
    > [!NOTE]
-   > S’il ne vous reste pas suffisamment d’adresses IP dans votre réseau virtuel pour augmenter la taille du sous-réseau de passerelle, vous devez augmenter l’espace d’adresses IP. Pour plus d’informations sur le schéma de configuration, consultez la page [Schéma de configuration du réseau virtuel Azure](https://msdn.microsoft.com/library/azure/jj157100.aspx).
+   > S’il ne vous reste pas suffisamment d’adresses IP dans votre réseau virtuel pour augmenter la taille du sous-réseau de passerelle, vous devez augmenter l’espace d’adresses IP. Pour plus d’informations sur le schéma de configuration, consultez la page [Schéma de configuration du réseau virtuel Azure](/previous-versions/azure/reference/jj157100(v=azure.100)).
    > 
    > 
    
-          <Subnet name="GatewaySubnet">
-            <AddressPrefix>10.17.159.224/27</AddressPrefix>
-          </Subnet>
+    ```xml
+    <Subnet name="GatewaySubnet">
+      <AddressPrefix>10.17.159.224/27</AddressPrefix>
+    </Subnet>
+    ```
 5. Si votre passerelle précédente était une passerelle VPN de site à site, vous devez également modifier le type de connexion et le définir sur **Dédié**.
    
-                 <Gateway>
-                  <ConnectionsToLocalNetwork>
-                    <LocalNetworkSiteRef name="MyLocalNetwork">
-                      <Connection type="Dedicated" />
-                    </LocalNetworkSiteRef>
-                  </ConnectionsToLocalNetwork>
-                </Gateway>
+    ```xml
+    <Gateway>
+      <ConnectionsToLocalNetwork>
+        <LocalNetworkSiteRef name="MyLocalNetwork">
+          <Connection type="Dedicated" />
+        </LocalNetworkSiteRef>
+      </ConnectionsToLocalNetwork>
+    </Gateway>
+    ```
 6. À ce stade, vous disposez d’un réseau virtuel sans passerelles. Pour créer de nouvelles passerelles et finaliser vos connexions, vous pouvez passer à l’ [Étape 4 : Créer une passerelle ExpressRoute](#gw), dans les étapes qui précèdent.
 
 ## <a name="next-steps"></a>Étapes suivantes
 Pour plus d’informations sur ExpressRoute, consultez la [FAQ sur ExpressRoute](expressroute-faqs.md)
-

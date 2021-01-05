@@ -1,18 +1,19 @@
 ---
 title: 'Azure ExpressRoute : Configurer ExpressRoute Global Reach : Interface de ligne de commande'
-description: Cet article vous aide à associer des circuits ExpressRoute afin de constituer un réseau privé entre vos réseaux locaux et d’activer Global Reach.
+description: Découvrez comment associer des circuits ExpressRoute afin de constituer un réseau privé entre vos réseaux locaux et d’activer Global Reach à l’aide d’Azure CLI.
 services: expressroute
-author: jaredr80
+author: duongau
 ms.service: expressroute
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 12/12/2018
-ms.author: jaredro
-ms.openlocfilehash: a39cf4e09a70ca2b1225d699c84abf0e7f1d2eab
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: duau
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: 16a86982813b667ed5c761da27c8e9e5a43ab6cc
+ms.sourcegitcommit: 32c521a2ef396d121e71ba682e098092ac673b30
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79476404"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91322493"
 ---
 # <a name="configure-expressroute-global-reach-by-using-the-azure-cli"></a>Configurer ExpressRoute Global Reach à l’aide d’Azure CLI
 

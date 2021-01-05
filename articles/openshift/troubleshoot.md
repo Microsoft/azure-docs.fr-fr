@@ -6,12 +6,12 @@ ms.author: jzim
 ms.service: container-service
 ms.topic: troubleshooting
 ms.date: 05/08/2019
-ms.openlocfilehash: ee032cdf4a3f72b2cd2e7da0658effe75b6fb1fa
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 55360ef295ff80b700b059d053203458f9f384db
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "76274924"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89469080"
 ---
 # <a name="troubleshooting-for-azure-red-hat-openshift"></a>Résolution des problèmes liés à Azure Red Hat OpenShift
 
@@ -30,7 +30,7 @@ Actuellement, la ressource `Microsoft.ContainerService/openShiftManagedClusters`
 
 ## <a name="creating-a-cluster-results-in-error-that-no-registered-resource-provider-found"></a>La création d’un cluster entraîne une erreur indiquant qu’aucun fournisseur de ressources inscrit n’a été trouvé
 
-Si la création d’un cluster entraîne une erreur indiquant que `No registered resource provider found for location '<location>' and API version '2019-04-30' for type 'openShiftManagedClusters'. The supported api-versions are '2018-09-30-preview`, cela est dû au fait que vous avez utilisé la préversion et vous devez à présent [acheter des instances réservées de machine virtuelle Azure](https://aka.ms/openshift/buy) pour utiliser le produit mis à la disposition générale. Une réservation réduit vos dépenses si vous effectuez un prépaiement pour les services Azure complètement managés. Pour en savoir plus sur les réservations et la façon de réaliser des économies, reportez-vous à la rubrique [*Qu’est-ce qu’une réservation Azure ?* ](https://docs.microsoft.com/azure/billing/billing-save-compute-costs-reservations).
+Si la création d’un cluster entraîne une erreur indiquant que `No registered resource provider found for location '<location>' and API version '2019-04-30' for type 'openShiftManagedClusters'. The supported api-versions are '2018-09-30-preview`, cela est dû au fait que vous avez utilisé la préversion et vous devez à présent [acheter des instances réservées de machine virtuelle Azure](https://aka.ms/openshift/buy) pour utiliser le produit mis à la disposition générale. Une réservation réduit vos dépenses si vous effectuez un prépaiement pour les services Azure complètement managés. Pour en savoir plus sur les réservations et la façon de réaliser des économies, reportez-vous à la rubrique [*Qu’est-ce qu’une réservation Azure ?* ](../cost-management-billing/reservations/save-compute-costs-reservations.md).
 
 ## <a name="next-steps"></a>Étapes suivantes
 

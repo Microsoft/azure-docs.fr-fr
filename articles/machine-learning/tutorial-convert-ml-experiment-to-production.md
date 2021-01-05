@@ -5,14 +5,16 @@ description: Transformez vos notebooks expérimentaux de Machine Learning en cod
 author: bjcmit
 ms.author: brysmith
 ms.service: machine-learning
+ms.subservice: core
 ms.topic: tutorial
 ms.date: 04/30/2020
-ms.openlocfilehash: a0b66f233de9e1bfdc6d011b65489884a1049a12
-ms.sourcegitcommit: 856db17a4209927812bcbf30a66b14ee7c1ac777
+ms.custom: devx-track-python
+ms.openlocfilehash: 2f7746f079e740493348731376d0a5a7b1a9e954
+ms.sourcegitcommit: 96918333d87f4029d4d6af7ac44635c833abb3da
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82559662"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93317848"
 ---
 # <a name="tutorial-convert-ml-experiments-to-production-python-code"></a>Tutoriel : Convertir des expériences ML en code Python de production
 
@@ -65,7 +67,7 @@ args = {
 }
 
 reg_model = Ridge(**args)
-reg.fit(data["train"]["X"], data["train"]["y"])
+reg_model.fit(data["train"]["X"], data["train"]["y"])
 
 preds = reg_model.predict(data["test"]["X"])
 mse = mean_squared_error(preds, y_test)
@@ -525,5 +527,5 @@ def test_train_model():
 Maintenant que vous savez comment convertir une expérience en code de production, consultez les liens suivants pour obtenir plus d’informations et pour connaître les étapes suivantes :
 
 + [MLOpsPython](https://github.com/microsoft/MLOpsPython/blob/master/docs/custom_model.md) : générez un pipeline CI/CD pour entraîner, évaluer et déployer votre propre modèle à l’aide d’Azure Pipelines et d’Azure Machine Learning
-+ [Superviser les exécutions et les métriques des expériences Azure Machine Learning](https://docs.microsoft.com/azure/machine-learning/how-to-track-experiments)
-+ [Superviser et collecter des données à partir des points de terminaison de service web Machine Learning](https://docs.microsoft.com/azure/machine-learning/how-to-enable-app-insights)
++ [Superviser les exécutions et les métriques des expériences Azure Machine Learning](./how-to-track-experiments.md)
++ [Superviser et collecter des données à partir des points de terminaison de service web Machine Learning](./how-to-enable-app-insights.md)

@@ -3,8 +3,8 @@ title: Mise à niveau vers le proxy d’application Azure AD | Microsoft Docs
 description: Choisissez la meilleure solution de proxy si vous effectuez une mise à niveau à partir de Microsoft Forefront ou de Unified Access Gateway.
 services: active-directory
 documentationcenter: ''
-author: msmimart
-manager: CelesteDG
+author: kenwith
+manager: celestedg
 ms.service: active-directory
 ms.subservice: app-mgmt
 ms.workload: identity
@@ -12,16 +12,16 @@ ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: conceptual
 ms.date: 05/17/2019
-ms.author: mimart
+ms.author: kenwith
 ms.reviewer: harshja
 ms.custom: it-pro
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 4790dc7ebeeee3407e89bcf38d7e3f25699ed328
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: cccabaf069a3027e615892e36e218f865a6c983a
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "67108406"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90706666"
 ---
 # <a name="compare-remote-access-solutions"></a>Comparer les solutions d’accès à distance
 
@@ -59,7 +59,7 @@ Le proxy d’application Azure AD offre des avantages uniques par rapport à des
    - Des fonctionnalités telles que l’accès conditionnel et l’authentification multifacteur faciles à activer
 - Aucun composant dans la zone démilitarisée
 - Aucune connexion entrante nécessaire
-- Un panneau d’accès dans lequel vos utilisateurs peuvent se rendre pour toutes leurs applications, y compris les applications SaaS intégrées à Azure AD, les applications O365 et vos applications web locales. 
+- Une page Mes applications à laquelle vos utilisateurs peuvent accéder pour toutes leurs applications, y compris les applications SaaS intégrées à Azure AD, les applications Microsoft 365 et vos applications web locales. 
 
 
 ## <a name="next-steps"></a>Étapes suivantes

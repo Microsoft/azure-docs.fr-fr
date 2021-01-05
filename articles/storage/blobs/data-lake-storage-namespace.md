@@ -8,12 +8,12 @@ ms.date: 02/11/2020
 ms.author: normesta
 ms.reviewer: jamesbak
 ms.subservice: data-lake-storage-gen2
-ms.openlocfilehash: 6ce94590a1d0de6941c27d972bdd1c4194080e95
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 26062d73ae4c61af77b15dd2cac0541f2a988d11
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77153075"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95912992"
 ---
 # <a name="azure-data-lake-storage-gen2-hierarchical-namespace"></a>Espace de noms hiérarchique d’Azure Data Lake Storage Gen2
 
@@ -47,4 +47,4 @@ Pour analyser les différences de prix de stockage des données, de prix des tra
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- [Créer un compte de stockage](./data-lake-storage-quickstart-create-account.md)
+- [Créer un compte de stockage](../common/storage-account-create.md)

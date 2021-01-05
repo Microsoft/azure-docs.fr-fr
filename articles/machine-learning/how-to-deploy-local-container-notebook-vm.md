@@ -1,25 +1,26 @@
 ---
-title: Comment déployer des modèles sur des instances de calcul
+title: Déployer des modèles sur des instances de calcul
 titleSuffix: Azure Machine Learning
 description: Découvrez comment déployer vos modèles Azure Machine Learning en tant que service web en utilisant des instances de calcul.
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: core
 ms.topic: conceptual
+ms.custom: how-to, deploy
 ms.author: mnark
 author: MrudulaN
 ms.reviewer: larryfr
 ms.date: 03/05/2020
-ms.openlocfilehash: 09164580b8bdb249fc12d14e827ad799d51cab34
-ms.sourcegitcommit: 441db70765ff9042db87c60f4aa3c51df2afae2d
+ms.openlocfilehash: 17b2d717ac6f244cb3ddddfdbc2f29581aa1f59f
+ms.sourcegitcommit: c95e2d89a5a3cf5e2983ffcc206f056a7992df7d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80756582"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95527307"
 ---
 # <a name="deploy-a-model-to-azure-machine-learning-compute-instances"></a>Déployer un modèle sur des instances de calcul Azure Machine Learning
 
-[!INCLUDE [applies-to-skus](../../includes/aml-applies-to-basic-enterprise-sku.md)]
+
 
 Découvrez comment utiliser Azure Machine Learning pour déployer un modèle en tant que service web sur l’instance de calcul Azure Machine Learning. Utilisez des instances de calcul si l’une des conditions suivantes est vraie :
 
@@ -39,7 +40,7 @@ Un exemple de notebook illustrant les déploiements locaux est inclus sur votre 
 
 1. Dans [Azure Machine Learning Studio](https://ml.azure.com), sélectionnez vos instances de calcul Azure Machine Learning.
 
-1. Ouvrez le sous-répertoire `samples-*`, puis ouvrez `how-to-use-azureml/deploy-to-local/register-model-deploy-local.ipynb`. Une fois ouvert, exécutez le notebook.
+1. Ouvrez le sous-répertoire `samples-*`, puis ouvrez `how-to-use-azureml/deployment/deploy-to-local/register-model-deploy-local.ipynb`. Une fois ouvert, exécutez le notebook.
 
     ![Capture d’écran du service local en cours d’exécution sur le notebook](./media/how-to-deploy-local-container-notebook-vm/deploy-local-service.png)
 
@@ -62,7 +63,7 @@ Pour soumettre des exemples de données au service en cours d’exécution, util
 > [!NOTE]
 > Lors de l’authentification auprès d’un déploiement sur l’instance de calcul, l’authentification est effectuée à l’aide d’Azure Active Directory. L’appel à `interactive_auth.get_authentication_header()` dans l’exemple de code vous authentifie à l’aide d’AAD et retourne un en-tête qui peut ensuite être utilisé pour s’authentifier auprès du service sur l’instance de calcul. Pour plus d’informations, consultez [Configurer l’authentification pour des ressources et workflows Azure Machine Learning](how-to-setup-authentication.md#interactive-authentication).
 >
-> Lors de l’authentification auprès d’un déploiement sur Azure Kubernetes Service ou Azure Container Instances, une autre méthode d’authentification est utilisée. Pour plus d’informations à ce sujet, consultez [Configurer l’authentification pour des ressources et workflows Azure Machine Learning](how-to-setup-authentication.md#web-service-authentication).
+> Lors de l’authentification auprès d’un déploiement sur Azure Kubernetes Service ou Azure Container Instances, une autre méthode d’authentification est utilisée. Pour plus d’informations sur le sujet, consultez [Configurer l’authentification pour les modèles Machine Learning déployés en tant que services web](how-to-authenticate-web-service.md).
 
 ```python
 import requests

@@ -1,16 +1,17 @@
 ---
 title: Tutoriel - Créer et déployer un modèle
-description: Créez votre premier modèle Azure Resource Manager. Dans ce tutoriel, vous découvrirez la syntaxe des fichiers de modèle et comment déployer un compte de stockage.
+description: Créez votre premier modèle ARM (Azure Resource Manager). Dans ce tutoriel, vous découvrirez la syntaxe des fichiers de modèle et comment déployer un compte de stockage.
 author: mumian
-ms.date: 05/20/2020
+ms.date: 09/28/2020
 ms.topic: tutorial
 ms.author: jgao
-ms.openlocfilehash: 2180ca80d87643eb885d814318e516b4b3c53f37
-ms.sourcegitcommit: 958f086136f10903c44c92463845b9f3a6a5275f
+ms.custom: ''
+ms.openlocfilehash: 191eacbc9cc66ccfb9b378cb5e8a90b4e0fb20e6
+ms.sourcegitcommit: 6172a6ae13d7062a0a5e00ff411fd363b5c38597
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83714795"
+ms.lasthandoff: 12/11/2020
+ms.locfileid: "97107021"
 ---
 # <a name="tutorial-create-and-deploy-your-first-arm-template"></a>Tutoriel : Créer et déployer votre premier modèle ARM
 
@@ -18,17 +19,17 @@ Ce tutoriel vous présente les modèles Azure Resource Manager (ARM). Il vous mo
 
 Ce tutoriel est le premier d’une série. Au fur et à mesure que vous progressez dans la série, vous modifiez petit à petit le modèle de départ jusqu’à ce que vous ayez exploré toutes les parties vitales qui composent un modèle ARM. Il s’agit des éléments constitutifs de modèles bien plus complexes. Nous espérons qu’à la fin de la série, vous vous lancerez dans la création de vos propres modèles et que vous serez prêt à automatiser vos déploiements à l’aide de modèles.
 
-Si vous souhaitez découvrir les avantages qu’offre l’utilisation de modèles et les raisons pour lesquelles vous devriez automatiser le déploiement avec des modèles, consultez [Modèles Azure Resource Manager](overview.md).
+Si vous souhaitez découvrir les avantages qu’offre l’utilisation de modèles et les raisons pour lesquelles vous devriez automatiser le déploiement avec des modèles, consultez la [vue d’ensemble des modèles ARM](overview.md).
 
 Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
 ## <a name="get-tools"></a>Obtenir les outils
 
-Commençons par nous assurer que vous disposez des outils indispensables pour créer et déployer des modèles.
+Commençons par nous assurer que vous disposez des outils indispensables pour créer et déployer des modèles. Installez ces outils sur votre machine locale.
 
 ### <a name="editor"></a>Éditeur
 
-Les modèles sont des fichiers JSON. Pour créer des modèles, vous avez besoin d’un bon éditeur JSON. Nous conseillons Visual Studio Code avec l’extension Outils Resource Manager. Si vous devez installer ces outils, consultez [Utiliser Visual Studio Code pour créer des modèles ARM](use-vs-code-to-create-template.md).
+Les modèles sont des fichiers JSON. Pour créer des modèles, vous avez besoin d’un bon éditeur JSON. Nous conseillons Visual Studio Code avec l’extension Outils Resource Manager. Si vous devez installer ces outils, consultez [Démarrage rapide : Créer des modèles ARM avec Visual Studio Code](quickstart-create-templates-use-visual-studio-code.md).
 
 ### <a name="command-line-deployment"></a>Déploiement en ligne de commande
 
@@ -37,8 +38,12 @@ Vous avez également besoin d’Azure PowerShell ou d’Azure CLI pour déployer
 - [Installation d'Azure PowerShell](/powershell/azure/install-az-ps)
 - [Installer Azure CLI sur Windows](/cli/azure/install-azure-cli-windows)
 - [Installer Azure CLI sur Linux](/cli/azure/install-azure-cli-linux)
+- [Installer Azure CLI sur macOS](/cli/azure/install-azure-cli-macos)
 
 Après avoir installé Azure PowerShell ou Azure CLI, prenez soin de vous connecter une première fois. Pour obtenir de l’aide, consultez [Se connecter - PowerShell](/powershell/azure/install-az-ps#sign-in) ou [Se connecter - Azure CLI](/cli/azure/get-started-with-azure-cli#sign-in).
+
+> [!IMPORTANT]
+> Si vous utilisez Azure CLI, veillez à disposer de la version 2.6 ou ultérieure. Les commandes présentées dans ce tutoriel ne fonctionneront pas si vous utilisez une version antérieure. Pour vérifier la version installée, utilisez : `az --version`.
 
 Bien, vous êtes prêt à découvrir les modèles.
 
@@ -47,7 +52,7 @@ Bien, vous êtes prêt à découvrir les modèles.
 1. Ouvrez Visual Studio Code avec l’extension Outils Resource Manager installée.
 1. À partir du menu **Fichier**, sélectionnez **Nouveau fichier** pour créer un fichier.
 1. Dans le menu **Fichier**, sélectionnez **Enregistrer sous**.
-1. Nommez le fichier **azuredeploy** et sélectionnez l’extension de fichier **JSON**. Le nom complet du fichier est **azuredeploy.json**.
+1. Nommez le fichier _azuredeploy_ et sélectionnez l’extension de fichier _json_. Le nom complet du fichier est _azuredeploy.json_.
 1. Enregistrez le fichier sur votre station de travail. Sélectionnez un chemin facile à mémoriser, car vous devrez fournir ce chemin plus tard, lors du déploiement du modèle.
 1. Copiez et collez le code JSON suivant dans le fichier :
 
@@ -59,17 +64,17 @@ Bien, vous êtes prêt à découvrir les modèles.
     }
     ```
 
-    Voici à quoi ressemble votre environnement VS Code :
+    Voici à quoi ressemble votre environnement Visual Studio Code :
 
-    ![Premier modèle Visual Studio Code avec modèle Resource Manager](./media/template-tutorial-create-first-template/resource-manager-visual-studio-code-first-template.png)
+    ![Premier modèle Visual Studio Code avec modèle ARM](./media/template-tutorial-create-first-template/resource-manager-visual-studio-code-first-template.png)
 
     Ce modèle ne déploie aucune ressource. Nous commençons avec un modèle vide, ce qui vous permet de vous familiariser avec les étapes de déploiement d’un modèle tout en réduisant au minimum le risque de problème.
 
     Le fichier JSON contient les éléments suivants :
 
-    - **$schema** : précise l’emplacement du fichier de schéma JSON. Le fichier de schéma décrit les propriétés qui sont disponibles dans un modèle. Par exemple, le schéma définit **resources** comme faisant partie des propriétés valides d’un modèle. Ne vous inquiétez pas de voir 2019-04-01 comme date du schéma. Cette version de schéma est à jour et comprend toutes les fonctionnalités les plus récentes. La date du schéma n’a pas été modifiée, car il n’y a eu aucun changement cassant depuis sa création.
-    - **contentVersion** : spécifie la version du modèle (par exemple, 1.0.0.0). Vous pouvez fournir n’importe quelle valeur pour cet élément. Utilisez cette valeur pour documenter les modifications importantes dans votre modèle. Quand vous déployez des ressources à l'aide du modèle, cette valeur permet de vous assurer que le bon modèle est utilisé.
-    - **Ressources** : contient les ressources que vous souhaitez déployer ou mettre à jour. Actuellement, il est vide, mais vous ajouterez des ressources ultérieurement.
+    - `$schema` : précise l’emplacement du fichier de schéma JSON. Le fichier de schéma décrit les propriétés qui sont disponibles dans un modèle. Par exemple, le schéma définit `resources` comme faisant partie des propriétés valides d’un modèle. Ne vous inquiétez pas de voir 2019-04-01 comme date du schéma. Cette version de schéma est à jour et comprend toutes les fonctionnalités les plus récentes. La date du schéma n’a pas été modifiée, car il n’y a eu aucun changement cassant depuis sa création.
+    - `contentVersion` : spécifie la version du modèle (par exemple, 1.0.0.0). Vous pouvez fournir n’importe quelle valeur pour cet élément. Utilisez cette valeur pour documenter les modifications importantes dans votre modèle. Quand vous déployez des ressources à l'aide du modèle, cette valeur permet de vous assurer que le bon modèle est utilisé.
+    - `resources` : contient les ressources que vous souhaitez déployer ou mettre à jour. Actuellement, il est vide, mais vous ajouterez des ressources ultérieurement.
 
 1. Enregistrez le fichier .
 
@@ -78,6 +83,8 @@ Félicitations, vous avez créé votre premier modèle.
 ## <a name="sign-in-to-azure"></a>Connexion à Azure
 
 Pour commencer à utiliser Azure PowerShell/Azure CLI, connectez-vous à l’aide de vos informations d’identification Azure.
+
+Sélectionnez les onglets dans les sections de code suivantes pour choisir entre Azure PowerShell et Azure CLI. Les exemples CLI de cet article sont écrits pour l’interpréteur de commandes Bash.
 
 # <a name="powershell"></a>[PowerShell](#tab/azure-powershell)
 
@@ -93,7 +100,7 @@ az login
 
 ---
 
-Si vous avez plusieurs abonnements Azure, sélectionnez celui que vous souhaitez utiliser :
+Si vous avez plusieurs abonnements Azure, sélectionnez celui que vous souhaitez utiliser. Remplacez `[SubscriptionID/SubscriptionName]` et les crochets `[]` par vos informations d’abonnement :
 
 # <a name="powershell"></a>[PowerShell](#tab/azure-powershell)
 
@@ -109,10 +116,9 @@ az account set --subscription [SubscriptionID/SubscriptionName]
 
 ---
 
-
 ## <a name="create-resource-group"></a>Créer un groupe de ressources
 
-Lorsque vous déployez un modèle, vous indiquez un groupe de ressources pour contenir les ressources. Avant d’exécuter la commande de déploiement, créez le groupe de ressources avec Azure CLI ou Azure PowerShell. Sélectionnez les onglets dans la section de code suivante pour choisir entre Azure PowerShell et Azure CLI. Les exemples CLI de cet article sont écrits pour l’interpréteur de commandes Bash.
+Lorsque vous déployez un modèle, vous indiquez un groupe de ressources pour contenir les ressources. Avant d’exécuter la commande de déploiement, créez le groupe de ressources avec Azure CLI ou Azure PowerShell.
 
 # <a name="powershell"></a>[PowerShell](#tab/azure-powershell)
 
@@ -134,7 +140,7 @@ az group create \
 
 ## <a name="deploy-template"></a>Déployer un modèle
 
-Pour déployer le modèle, utilisez au choix Azure CLI ou Azure PowerShell. Utilisez le groupe de ressources que vous avez créé. Donnez un nom au déploiement pour pouvoir l’identifier facilement dans l’historique des déploiements. Par souci pratique, créez également une variable qui stocke le chemin du fichier de modèle. Cette variable vous permet d’exécuter plus facilement les commandes de déploiement, car vous n’êtes pas obligé de retaper le chemin chaque fois que vous déployez.
+Pour déployer le modèle, utilisez au choix Azure CLI ou Azure PowerShell. Utilisez le groupe de ressources que vous avez créé. Donnez un nom au déploiement pour pouvoir l’identifier facilement dans l’historique des déploiements. Par souci pratique, créez également une variable qui stocke le chemin du fichier de modèle. Cette variable vous permet d’exécuter plus facilement les commandes de déploiement, car vous n’êtes pas obligé de retaper le chemin chaque fois que vous déployez. Remplacez `{provide-the-path-to-the-template-file}` et les accolades `{}` par le chemin à votre fichier de modèle.
 
 # <a name="powershell"></a>[PowerShell](#tab/azure-powershell)
 
@@ -173,7 +179,7 @@ La commande de déploiement retourne des résultats. Recherchez `ProvisioningSta
 ---
 
 > [!NOTE]
-> En cas d’échec du déploiement, utilisez le commutateur **debug** avec la commande de déploiement pour afficher les journaux de débogage.  Vous pouvez également utiliser le commutateur **verbose** pour afficher les journaux de débogage complets.
+> Si le déploiement a échoué, utilisez le commutateur `verbose` pour obtenir des informations sur les ressources en cours de création. Utilisez le commutateur `debug` pour obtenir des informations supplémentaires sur le débogage.
 
 ## <a name="verify-deployment"></a>Vérifier le déploiement
 

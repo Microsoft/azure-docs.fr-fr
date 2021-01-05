@@ -5,16 +5,14 @@ author: VidyaKukke
 manager: rajarv
 ms.author: vkukke
 ms.reviewer: spelluru
-ms.date: 10/29/2019
+ms.date: 07/08/2020
 ms.topic: article
-ms.service: event-grid
-services: event-grid
-ms.openlocfilehash: d0034810ff86de2a40e275ca54a2f0f9cbc856c2
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 36dc7d098892fb2be7c2ba3d75de7c7adef1a4f1
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76844698"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86171548"
 ---
 # <a name="tutorial-forward-events-to-iothub"></a>Tutoriel : Transférer des événements vers IoT Hub
 

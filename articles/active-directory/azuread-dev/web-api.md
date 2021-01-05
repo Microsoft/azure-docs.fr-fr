@@ -15,10 +15,10 @@ ms.reviewer: saeeda, jmprieur
 ms.custom: aaddev
 ROBOTS: NOINDEX
 ms.openlocfilehash: 9cf5a9c81ca1d7a42a5a8e342dee55f335656c3e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "80154421"
 ---
 # <a name="web-api"></a>API Web
@@ -28,7 +28,7 @@ ms.locfileid: "80154421"
 Les applications API web sont des applications web qui doivent obtenir des ressources d’une API web. Dans ce scénario, il existe deux types d’identité que l’application web peut utiliser pour authentifier et appeler l’API web :
 
 - **Identité d’application** : ce scénario utilise l’octroi d’informations d’identification client OAuth 2.0 pour l’authentification en tant qu’application et l’accès à l’API web. Avec une identité d’application, l’API web peut détecter uniquement que l’application web l’appelle, car elle ne reçoit aucune information sur l’utilisateur. Si l’application reçoit des informations sur l’utilisateur, celles-ci sont envoyées via le protocole d’application et ne sont pas signées par Azure AD. L’API web suppose que l’application web a authentifié l’utilisateur. C’est pour cette raison que ce modèle est appelé « sous-système approuvé ».
-- **Identité d’utilisateur délégué**. Ce scénario peut être réalisé de deux manières : OpenID Connect et octroi du code d’autorisation OAuth 2.0 avec un client confidentiel. L’application web obtient un jeton d’accès pour l’utilisateur, ce qui prouve à l’API web que l’utilisateur s’est correctement authentifié auprès de l’application web et que l’application web a pu obtenir une identité d’utilisateur délégué pour appeler l’API web. Ce jeton d’accès est envoyé via la demande à l’API web, qui autorise l’utilisateur et renvoie la ressource souhaitée.
+- **Identité d’utilisateur délégué** : ce scénario peut être obtenu de deux façons : OpenID Connect et octroi de code d’autorisation OAuth 2.0 avec un client confidentiel. L’application web obtient un jeton d’accès pour l’utilisateur, ce qui prouve à l’API web que l’utilisateur s’est correctement authentifié auprès de l’application web et que l’application web a pu obtenir une identité d’utilisateur délégué pour appeler l’API web. Ce jeton d’accès est envoyé via la demande à l’API web, qui autorise l’utilisateur et renvoie la ressource souhaitée.
 
 L’identité d’application et l’identité d’utilisateur délégué sont décrites dans le flux ci-après. La différence principale entre ces deux types d’identité est que l’identité d’utilisateur délégué doit obtenir un code d’autorisation avant que l’utilisateur puisse se connecter et accéder à l’API web.
 
@@ -66,7 +66,7 @@ L’identité d’application et l’identité d’utilisateur délégué sont d
 
 Consultez les exemples de code pour les scénarios du type application web vers API web. Et consultez régulièrement cette page à laquelle nous ajoutons fréquemment de nouveaux exemples. [Application web vers API web](sample-v1-code.md#web-applications-signing-in-users-calling-microsoft-graph-or-a-web-api-with-the-users-identity).
 
-## <a name="app-registration"></a>Inscription d'application
+## <a name="app-registration"></a>Inscriptions des applications
 
 Pour inscrire une application auprès du point de terminaison Azure AD v1.0, consultez [Inscrire une application](../develop/quickstart-register-app.md?toc=/azure/active-directory/azuread-dev/toc.json&bc=/azure/active-directory/azuread-dev/breadcrumb/toc.json).
 

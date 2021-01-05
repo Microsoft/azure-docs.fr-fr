@@ -6,21 +6,28 @@ services: cognitive-services
 author: aahill
 manager: nitinme
 ms.service: cognitive-services
+ms.subservice: text-analytics
 ms.topic: include
 ms.date: 04/29/2020
 ms.author: aahi
-ms.openlocfilehash: 41b926e3c44da85e7cb2c2e62405bd8f14488fbd
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.openlocfilehash: 1ac035e669ae6d5fcec8dfa8faee12d34039004b
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83588379"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91779370"
 ---
-Pour exécuter le conteneur*Détection de langue*, exécutez la commande `docker run` suivante.
+Pour exécuter le conteneur*Détection de langue*, exécutez la commande `docker run` suivante. Remplacez les espaces réservés suivants par vos valeurs :
+
+| Espace réservé | Valeur | Format ou exemple |
+|-------------|-------|---|
+| **{API_KEY}** | Clé de votre ressource Analyse de texte. Cette information est disponible dans le portail Azure, sur la page **Key and endpoint** (Clé et point de terminaison) de votre ressource. |`xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx`|
+| **{ENDPOINT_URI}** | Point de terminaison pour accéder à l’API Analyse de texte. Cette information est disponible dans le portail Azure, sur la page **Key and endpoint** (Clé et point de terminaison) de votre ressource. | `https://<your-custom-subdomain>.cognitiveservices.azure.com` |
+
 
 ```bash
 docker run --rm -it -p 5000:5000 --memory 4g --cpus 1 \
-mcr.microsoft.com/azure-cognitive-services/language \
+mcr.microsoft.com/azure-cognitive-services/textanalytics/language \
 Eula=accept \
 Billing={ENDPOINT_URI} \
 ApiKey={API_KEY}

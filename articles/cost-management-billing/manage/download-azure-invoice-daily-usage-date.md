@@ -6,15 +6,16 @@ author: genlin
 ms.reviewer: dcscontentpm
 tags: billing
 ms.service: cost-management-billing
-ms.topic: conceptual
-ms.date: 02/12/2020
+ms.subservice: billing
+ms.topic: how-to
+ms.date: 10/28/2020
 ms.author: banders
-ms.openlocfilehash: 629ab8a0f2af789501e6365c94f4ce7f3fd3649c
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: e380aa1f4d50e6ced34254ceca9d899022142f6d
+ms.sourcegitcommit: d76108b476259fe3f5f20a91ed2c237c1577df14
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "79237681"
+ms.lasthandoff: 10/29/2020
+ms.locfileid: "92911288"
 ---
 # <a name="download-or-view-your-azure-billing-invoice-and-daily-usage-data"></a>Télécharger ou afficher votre facture Azure et vos données d’utilisation quotidienne
 
@@ -40,7 +41,7 @@ Pour la plupart des abonnements, vous pouvez télécharger votre facture à part
 
     ![Capture d’écran qui montre l’option Facturation et utilisation](./media/download-azure-invoice-daily-usage-date/billingandusage.png)
 
-3. Cliquez sur le bouton Télécharger pour télécharger une copie de votre facture PDF, puis sélectionnez **Télécharger la facture**. Si vous recevez le message **Non disponible**, consultez la section [Pourquoi ne puis-je pas voir de facture pour la dernière période de facturation ?](#noinvoice)
+3. Cliquez sur le bouton Télécharger pour télécharger une copie de votre facture PDF, puis sélectionnez **Télécharger la facture**. Si vous recevez le message **Non disponible** , consultez la section [Pourquoi ne puis-je pas voir de facture pour la dernière période de facturation ?](#noinvoice)
 
     ![Capture d’écran qui montre les périodes de facturation, l’option de téléchargement et le total des frais pour chaque période de facturation](./media/download-azure-invoice-daily-usage-date/downloadinvoice.png)
 
@@ -48,7 +49,7 @@ Pour la plupart des abonnements, vous pouvez télécharger votre facture à part
 
     ![Capture d’écran qui montre la page Télécharger les données sur l’utilisation et la facturation](./media/download-azure-invoice-daily-usage-date/usageandinvoice.png)
 
-Pour plus d’informations sur votre facture, consultez la page [Comprendre votre facture Microsoft Azure](../understand/review-individual-bill.md). Pour obtenir de l’aide sur la gestion des coûts, voir [Éviter les coûts inattendus avec la gestion de la facturation et des coûts Azure](getting-started.md).
+Pour plus d’informations sur votre facture, consultez la page [Comprendre votre facture Microsoft Azure](../understand/review-individual-bill.md). Pour obtenir de l’aide dans la gestion de vos coûts, consultez [Analyser les frais inattendus](../understand/analyze-unexpected-charges.md).
 
 ### <a name="download-invoices-for-a-microsoft-customer-agreement"></a>Télécharger les factures pour un Contrat client Microsoft
 
@@ -106,8 +107,8 @@ Si vous avez un Contrat client Microsoft, vous pouvez adhérer à l’obtention 
 
 1. Recherchez **Gestion des coûts + facturation**.
 1. Sélectionnez un profil de facturation.
-1. Sous **Paramètres**, sélectionnez **Propriétés**.
-1. Sous **Facture par e-mail**, sélectionnez **Mettre à jour la préférence d’envoi par e-mail de la facture**.
+1. Sous **Paramètres** , sélectionnez **Propriétés**.
+1. Sous **Facture par e-mail** , sélectionnez **Mettre à jour la préférence d’envoi par e-mail de la facture**.
 1. Sélectionnez **Activer**.
 1. Cliquez sur **Update**.
 
@@ -135,9 +136,7 @@ Pour voir et télécharger les données d’utilisation en tant que client Contr
 
 1. Connectez-vous au [portail Azure](https://portal.azure.com).
 1. Recherchez *Gestion des coûts + facturation*.
-
-    ![Capture d’écran montrant la recherche dans le portail Azure](./media/download-azure-invoice-daily-usage-date/portal-cm-billing-search.png)
-
+1. Si vous avez accès à plusieurs comptes de facturation, sélectionnez l’étendue de facturation pour votre compte de facturation EA.
 1. Sélectionnez **Utilisation + frais**.
 1. Pour le mois que vous souhaitez télécharger, sélectionnez **Télécharger**.
 
@@ -160,14 +159,10 @@ Vous pouvez également télécharger les informations d’utilisation cumulée p
 
 1. Recherchez **Gestion des coûts + facturation**.
 2. Sélectionnez un profil de facturation.
-3. Dans le panneau **Vue d’ensemble**, cliquez sur **Télécharger l’utilisation et les frais Azure**.
+3. Dans le panneau **Vue d’ensemble** , cliquez sur **Télécharger l’utilisation et les frais Azure**.
 
 ## <a name="check-access-to-a-microsoft-customer-agreement"></a>Vérifier l'accès à un contrat client Microsoft
 [!INCLUDE [billing-check-mca](../../../includes/billing-check-mca.md)]
-
-## <a name="need-help-contact-us"></a>Vous avez besoin d’aide ? Nous contacter
-
-Si vous avez des questions ou besoin d’aide, [créez une demande de support](https://go.microsoft.com/fwlink/?linkid=2083458).
 
 ## <a name="next-steps"></a>Étapes suivantes
 

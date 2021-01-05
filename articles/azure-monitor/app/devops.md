@@ -3,12 +3,12 @@ title: Supervision des performances des applications web - Azure Application Ins
 description: Comment Application Insights s’intègre dans le cycle des opérations de développement
 ms.topic: conceptual
 ms.date: 12/21/2018
-ms.openlocfilehash: 24095aade80022d1e1ebb38357971512bfc873c0
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: d2c3326c3f655d4bdfeaa42ac272658b251b7f82
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "77669690"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87324486"
 ---
 # <a name="deep-diagnostics-for-web-apps-and-services-with-application-insights"></a>Diagnostic approfondi des applications et services web avec Application Insights
 ## <a name="why-do-i-need-application-insights"></a>Pourquoi ai-je besoin d’Application Insights ?
@@ -16,7 +16,7 @@ Application Insights surveille votre application web en cours d’exécution. En
 
 ![Aspects de la complexité liée à la distribution d’applications web](./media/devops/010.png)
 
-Il est essentiel de surveiller une application moderne pendant qu’elle s’exécute. Vous voudrez surtout détecter les erreurs avant la plupart de vos clients. Mais aussi détecter et résoudre les problèmes de performances qui, sans être catastrophiques, ralentissent peut-être le fonctionnement ou pénalisent certains de vos utilisateurs. Et lorsque le système fonctionne comme vous le souhaitez, vous voulez savoir ce que les utilisateurs en font : utilisent-ils la dernière version ? Sont-ils satisfaits par celle-ci ?
+Il est essentiel de surveiller une application moderne pendant qu’elle s’exécute. Vous voudrez surtout détecter les erreurs avant la plupart de vos clients. Mais aussi détecter et résoudre les problèmes de performances qui, sans être catastrophiques, ralentissent peut-être le fonctionnement ou pénalisent certains de vos utilisateurs. Lorsque le système fonctionne comme vous le souhaitez, il peut être intéressant de savoir ce que les utilisateurs en font : utilisent-ils la dernière version ? Sont-ils satisfaits par celle-ci ?
 
 Les applications web modernes sont développées selon un cycle continu : publication d’une nouvelle fonctionnalité ou d’une amélioration ; analyse de son fonctionnement pour les utilisateurs ; planification de la prochaine phase de développement en fonction de ces informations. La phase d’observation de ce cycle est essentielle. Application Insights fournit les outils permettant de surveiller les performances et l’utilisation d’une application web.
 
@@ -69,7 +69,7 @@ Les principales catégories de données sont les suivantes :
 * Événements personnalisés que vous pouvez utiliser pour le suivi d’événements commerciaux
 * Traces de journal utilisées pour le débogage.
 
-## <a name="case-study-real-madrid-fc"></a>Étude de cas : Real Madrid F.C.
+## <a name="case-study-real-madrid-fc"></a>Étude de cas : Real Madrid
 Le service web du [club de football Real Madrid](https://www.realmadrid.com/) est visité par environ 450 millions de supporters dans le monde entier. Ils y accèdent à la fois par les navigateurs web et les applications mobiles du Club. Les supporters n’achètent pas seulement des billets, ils consultent des informations et visionnent des vidéos sur les résultats, les joueurs et les prochains matchs. Ils peuvent effectuer des recherches avec des filtres, comme le nombre de buts marqués. Le site contient également des liens vers les réseaux sociaux. L’expérience utilisateur est extrêmement personnalisée et conçue comme une communication bidirectionnelle pour privilégier l’interaction avec les supporters.
 
 La solution [est un système de services et d’applications sur Microsoft Azure](https://www.microsoft.com/inculture/sports/real-madrid/). L’évolutivité est essentielle : le trafic, variable, peut atteindre des sommets avant, pendant et après les matchs.
@@ -85,7 +85,7 @@ Le Real Madrid utilise le module Power BI pour afficher ses données télémétr
 ![Vue Power BI des données télémétriques d’Application Insights](./media/devops/080.png)
 
 ## <a name="smart-detection"></a>Détection intelligente
-[Diagnostics proactifs](../../azure-monitor/app/proactive-diagnostics.md) est une fonctionnalité récente. Sans aucune configuration particulière, Application Insights détecte automatiquement et signale toute hausse inhabituelle du nombre de défaillances dans votre application. L’application est suffisamment intelligente pour ignorer les défaillances occasionnelles et les augmentations qui sont simplement proportionnelles à une hausse des demandes. Par exemple, si un des services dont vous dépendez est défectueux ou si la nouvelle build que vous venez de déployer ne fonctionne pas bien, vous le saurez dès que vous aurez consulté votre messagerie. (Et les webhooks vous permettent de déclencher d’autres applications.)
+[Diagnostics proactifs](./proactive-diagnostics.md) est une fonctionnalité récente. Sans aucune configuration particulière, Application Insights détecte automatiquement et signale toute hausse inhabituelle du nombre de défaillances dans votre application. L’application est suffisamment intelligente pour ignorer les défaillances occasionnelles et les augmentations qui sont simplement proportionnelles à une hausse des demandes. Par exemple, si un des services dont vous dépendez est défectueux ou si la nouvelle build que vous venez de déployer ne fonctionne pas bien, vous le saurez dès que vous aurez consulté votre messagerie. (Et les webhooks vous permettent de déclencher d’autres applications.)
 
 Par ailleurs, cette fonction effectue quotidiennement une analyse approfondie de vos données télémétriques, en y recherchant des performances inhabituelles difficiles à détecter. Par exemple, elle peut identifier un faible niveau de performance dans une zone géographique ou avec une version particulière d’un navigateur.
 
@@ -93,7 +93,7 @@ Dans les deux cas, l’alerte ne vous signale pas seulement les symptômes déte
 
 ![E-mail issus des diagnostics proactifs](./media/devops/030.png)
 
-Notre client Samtec a déclaré : « Récemment, pendant une interruption du service, nous avons trouvé une base de données sous-dimensionnée qui atteignait la limite de ses ressources, provoquant des attentes. Des alertes de détection proactives nous parvenaient pendant que nous étions en temps de traiter le problème, en quasi temps réel comme annoncé par notre publicité. Ces alertes, couplées à celles de la plateforme Azure, nous ont permis de résoudre le problème presque instantanément. Temps d’arrêt total < 10 minutes. »
+Notre client Samtec a déclaré : « Récemment, pendant une interruption du service, nous avons trouvé une base de données sous-dimensionnée qui atteignait la limite de ses ressources, provoquant ainsi des délais. Des alertes de détection proactives nous parvenaient pendant que nous étions en temps de traiter le problème, en quasi temps réel comme annoncé par notre publicité. Ces alertes, couplées à celles de la plateforme Azure, nous ont permis de résoudre le problème presque instantanément. Temps d’arrêt total < 10 minutes. »
 
 ## <a name="live-metrics-stream"></a>Live Metrics Stream (Flux continu de mesures)
 Le déploiement de la dernière build en date peut être très stressant. S’il y a des problèmes, vous voulez en avoir connaissance immédiatement, afin de corriger la situation si nécessaire. Live Metrics Stream (Flux continu de mesures) fournit des mesures clés avec une latence d’environ une seconde.
@@ -110,7 +110,7 @@ Application Map (Mise en correspondance d’applications) détecte automatiqueme
 ![Mise en correspondance d'applications](./media/devops/0050.png)
 
 ## <a name="application-insights-analytics"></a>Application Insights Analytics
-Avec [Analytics](../../azure-monitor/app/analytics.md), vous pouvez écrire des requêtes arbitraires dans un puissant langage de type SQL.  Diagnostiquer toute la pile de l’application devient facile, car plusieurs perspectives sont mises en relation, et vous pouvez poser les bonnes questions pour mettre en corrélation les performances du service avec les mesures de l’activité et l’expérience client. 
+Avec [Analytics](../log-query/log-query-overview.md), vous pouvez écrire des requêtes arbitraires dans un puissant langage de type SQL.  Diagnostiquer toute la pile de l’application devient facile, car plusieurs perspectives sont mises en relation, et vous pouvez poser les bonnes questions pour mettre en corrélation les performances du service avec les mesures de l’activité et l’expérience client. 
 
 Vous pouvez interroger toutes les données des mesures et de l’instance de télémétrie, stockées dans le portail. Le langage comprend des opérations de filtrage, de jointure, d’agrégation et autres. Vous pouvez calculer des champs et effectuer une analyse statistique. Les visualisations peuvent être tabulaires ou graphiques.
 
@@ -124,7 +124,7 @@ Par exemple, les opérations suivantes sont faciles :
 * Analyser les sessions et les temps de réponse de certains utilisateurs pour permettre aux équipes de support et d’exploitation d’aider les clients instantanément.
 * Déterminer les fonctionnalités d’application fréquemment utilisées pour répondre aux questions sur la hiérarchisation des fonctionnalités.
 
-Le client DNN a déclaré : « Application Insights nous a fourni la pièce manquante du puzzle, permettant de combiner, trier, interroger et filtrer les données selon les besoins. Le fait que notre équipe puisse utiliser sa propre ingéniosité et sa propre expérience pour trouver des données grâce à un puissant langage d’interrogation nous a permis de mettre au jour des informations et de résoudre des problèmes dont nous-même ignorions l’existence. Beaucoup de réponses intéressantes font suite à des questions commençant par *'' Je me demande si...'' .* »
+Notre client DNN a déclaré : « Application Insights a représenté pour nous la pièce manquante du puzzle, en offrant la possibilité de combiner, de trier, d’interroger et de filtrer les données selon les besoins. Le fait que notre équipe puisse utiliser sa propre ingéniosité et sa propre expérience pour trouver des données grâce à un puissant langage d’interrogation nous a permis de mettre au jour des informations et de résoudre des problèmes dont nous-même ignorions l’existence. Beaucoup de réponses intéressantes font suite à des questions commençant par *'' Je me demande si...'' .* »
 
 ## <a name="development-tools-integration"></a>Intégration d’outils de développement
 ### <a name="configuring-application-insights"></a>Configuration d'Application Insights
@@ -145,9 +145,9 @@ Pendant le débogage, vous pouvez conserver les données de télémétrie dans v
 Lorsqu’une alerte est émise, Application Insights peut automatiquement créer un élément de travail dans votre système de suivi du travail.
 
 ## <a name="but-what-about"></a>Mais qu’en est-il de... ?
-* [Confidentialité et stockage](../../azure-monitor/app/data-retention-privacy.md) - Vos données télémétriques sont conservées sur des serveurs Azure sécurisés.
+* [Confidentialité et stockage](./data-retention-privacy.md) - Vos données télémétriques sont conservées sur des serveurs Azure sécurisés.
 * Performances - L’impact est très faible. Les données télémétriques sont traitées par lot.
-* [Tarification](../../azure-monitor/app/pricing.md) - Vous pouvez démarrer gratuitement tant que votre volume reste faible.
+* [Tarification](./pricing.md) - Vous pouvez démarrer gratuitement tant que votre volume reste faible.
 
 
 ## <a name="video"></a>Vidéo
@@ -157,7 +157,7 @@ Lorsqu’une alerte est émise, Application Insights peut automatiquement créer
 ## <a name="next-steps"></a>Étapes suivantes
 La prise en main d’Application Insights est simple. Les principales options sont les suivantes :
 
-* [Serveurs IIS](../../azure-monitor/app/monitor-performance-live-website-now.md) ainsi que pour [Azure App Service](../../azure-monitor/app/app-insights-overview.md).
-* Instrumenter votre projet pendant le développement. Vous pouvez effectuer cette tâche pour des applications [ASP.NET](../../azure-monitor/app/asp-net.md), [Java](../../azure-monitor/app/java-get-started.md) et [Node.js](../../azure-monitor/app/nodejs.md) et une multitude d’[autres types](../../azure-monitor/app/platforms.md). 
-* Instrumenter [n’importe quelle page web](../../azure-monitor/app/javascript.md) en y ajoutant un court extrait de code.
+* [Serveurs IIS](./monitor-performance-live-website-now.md) ainsi que pour [Azure App Service](./app-insights-overview.md).
+* Instrumenter votre projet pendant le développement. Vous pouvez effectuer cette tâche pour des applications [ASP.NET](./asp-net.md), [Java](./java-get-started.md) et [Node.js](./nodejs.md) et une multitude d’[autres types](./platforms.md). 
+* Instrumenter [n’importe quelle page web](./javascript.md) en y ajoutant un court extrait de code.
 

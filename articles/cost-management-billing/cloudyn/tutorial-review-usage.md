@@ -6,15 +6,16 @@ ms.author: banders
 ms.date: 03/12/2020
 ms.topic: tutorial
 ms.service: cost-management-billing
+ms.subservice: cloudyn
 ms.custom: seodec18
 ms.reviewer: benshy
 ROBOTS: NOINDEX
-ms.openlocfilehash: 8a15de717ea960b411d95061b560b64abb94d98f
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: afdcd458dbda282a23b7b8f7f1cd8459bc8ec5c5
+ms.sourcegitcommit: 33368ca1684106cb0e215e3280b828b54f7e73e8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "79474558"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92131273"
 ---
 <!-- Intent: As a cloud-consuming user, I need to view usage and costs for my cloud resources and services.
 -->
@@ -130,4 +131,4 @@ Dans ce didacticiel, vous avez appris à :
 Passez au didacticiel suivant pour apprendre à prévoir les dépenses à partir des données historiques.
 
 > [!div class="nextstepaction"]
-> [Prévoir les dépenses futures](../../cost-management/tutorial-forecast-spending.md)
+> [Prévoir les dépenses futures](./tutorial-forecast-spending.md)

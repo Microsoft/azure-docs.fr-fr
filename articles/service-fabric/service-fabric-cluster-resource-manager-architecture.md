@@ -5,12 +5,12 @@ author: masnider
 ms.topic: conceptual
 ms.date: 08/18/2017
 ms.author: masnider
-ms.openlocfilehash: 94ed906533d108081d620e9b183ecfee249d85ca
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 0aff55810508fedcf354fba3d9fca9f7a402029b
+ms.sourcegitcommit: c157b830430f9937a7fa7a3a6666dcb66caa338b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75551690"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94685832"
 ---
 # <a name="cluster-resource-manager-architecture-overview"></a>Vue d’ensemble de l’architecture Cluster Resource Manager
 Service Fabric Cluster Resource Manager est un service central qui s’exécute dans le cluster. Il gère l’état souhaité des services dans le cluster, notamment au niveau de la consommation des ressources et des règles de placement. 
@@ -43,7 +43,7 @@ Examinons le schéma suivant :
 
 <center>
 
-![Architecture de l'équilibreur de ressources][Image1]
+![Schéma qui montre comment le service Gestionnaire des ressources clusters rassemble toutes les informations auprès des agents locaux et réagit en fonction de sa configuration actuelle.][Image1]
 </center>
 
 Pendant l’exécution, de nombreux changements peuvent se produire. Par exemple, supposons que la quantité de ressources que consomment certains services change, que certains services échouent et que certains nœuds se joignent au cluster ou le quittent. Toutes les modifications sur les nœuds sont agrégées et régulièrement envoyées au service Cluster Resource Manager (1,2) où elles sont agrégées à nouveau, analysées et stockées. À une fréquence de quelques secondes, ce service examine les changements et détermine si des actions sont nécessaires (3). Par exemple, il peut remarquer que des nœuds vides ont été ajoutés au cluster, et décider par conséquent de déplacer certains services vers ces nœuds. Cluster Resource Manager peut également remarquer qu’un nœud particulier est surchargé ou que certains services ont échoué ou ont été supprimés, en libérant des ressources ailleurs.

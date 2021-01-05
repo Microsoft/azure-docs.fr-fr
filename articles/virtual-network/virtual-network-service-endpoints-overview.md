@@ -13,24 +13,24 @@ ms.workload: infrastructure-services
 ms.date: 11/08/2019
 ms.author: sumi
 ms.custom: ''
-ms.openlocfilehash: ae9d219c376aa704be34088a4f7c48c35baa9669
-ms.sourcegitcommit: eaec2e7482fc05f0cac8597665bfceb94f7e390f
+ms.openlocfilehash: 7d937542201792c0d1c0be69df9bd1c2b34edea3
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82509497"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96004940"
 ---
 # <a name="virtual-network-service-endpoints"></a>Points de terminaison de service de réseau virtuel
 
-Les points de terminaison de service Virtual Network (VNet) étendent l’espace d’adressage privé de votre réseau virtuel. Les points de terminaison étendent également l’identité de votre réseau virtuel aux services Azure via une connexion directe. Les points de terminaison permettent de sécuriser vos ressources critiques du service Azure pour vos réseaux virtuels uniquement. Le trafic à partir de votre réseau virtuel vers le service Azure reste toujours sur le réseau principal de Microsoft Azure.
+Le point de terminaison de service de réseau virtuel fournit une connexion sécurisée et directe aux services Azure sur un itinéraire optimisé du réseau principal Azure. Les points de terminaison permettent de sécuriser vos ressources critiques du service Azure pour vos réseaux virtuels uniquement. Les points de terminaison de service permettent aux adresses IP privées du réseau virtuel d'atteindre le point de terminaison d'un service Azure sans qu'une adresse IP publique soit nécessaire sur le réseau virtuel.
 
 Cette fonctionnalité est disponible pour les services et régions Azure suivants. La ressource *Microsoft.\** est entre parenthèses. Activez cette ressource depuis le côté du sous-réseau lors de la configuration des points de terminaison de service pour votre service :
 
 **Mise à la disposition générale**
 
 - **[Stockage Azure](../storage/common/storage-network-security.md?toc=%2fazure%2fvirtual-network%2ftoc.json#grant-access-from-a-virtual-network)** (*Microsoft.Storage*) : mis à la disposition générale dans toutes les régions Azure.
-- **[Azure SQL Database](../sql-database/sql-database-vnet-service-endpoint-rule-overview.md?toc=%2fazure%2fvirtual-network%2ftoc.json)** (*Microsoft.Sql*) : mis à la disposition générale dans toutes les régions Azure.
-- **[Azure SQL Data Warehouse](../sql-database/sql-database-vnet-service-endpoint-rule-overview.md?toc=%2fazure%2fvirtual-network%2ftoc.json)** (*Microsoft.Sql*) : mis à la disposition générale dans toutes les régions Azure.
+- **[Azure SQL Database](../azure-sql/database/vnet-service-endpoint-rule-overview.md?toc=%2fazure%2fvirtual-network%2ftoc.json)** (*Microsoft.Sql*) : mis à la disposition générale dans toutes les régions Azure.
+- **[Azure Synapse Analytics](../azure-sql/database/vnet-service-endpoint-rule-overview.md?toc=%2fazure%2fvirtual-network%2ftoc.json)** (*Microsoft.Sql*) : mis à la disposition générale dans toutes les régions Azure.
 - **[Serveur Azure Database pour PostgreSQL](../postgresql/howto-manage-vnet-using-portal.md?toc=%2fazure%2fvirtual-network%2ftoc.json)** (*Microsoft.Sql*) : mis à la disposition générale dans les régions Azure où le service de base de données est disponible.
 - **[Serveur Azure Database pour MySQL](../mysql/howto-manage-vnet-using-portal.md?toc=%2fazure%2fvirtual-network%2ftoc.json)** (*Microsoft.Sql*) : mis à la disposition générale dans les régions Azure où le service de base de données est disponible.
 - **[Azure Database for MariaDB](https://docs.microsoft.com/azure/mariadb/concepts-data-access-security-vnet)** (*Microsoft.Sql*) : mis à la disposition générale dans les régions Azure où le service de base de données est disponible.
@@ -39,7 +39,8 @@ Cette fonctionnalité est disponible pour les services et régions Azure suivant
 - **[Azure Service Bus](../service-bus-messaging/service-bus-service-endpoints.md?toc=%2fazure%2fvirtual-network%2ftoc.json)** (*Microsoft.ServiceBus*) : mis à la disposition générale dans toutes les régions Azure.
 - **[Azure Event Hubs](../event-hubs/event-hubs-service-endpoints.md?toc=%2fazure%2fvirtual-network%2ftoc.json)** (*Microsoft.EventHub*) : mis à la disposition générale dans toutes les régions Azure.
 - **[Azure Data Lake Store Gen 1](../data-lake-store/data-lake-store-network-security.md?toc=%2fazure%2fvirtual-network%2ftoc.json)** (*Microsoft.AzureActiveDirectory*) : Disponibilité générale dans toutes les régions Azure où ADLS Gen1 est disponible.
-- **[Azure App Service](https://docs.microsoft.com/azure/app-service/app-service-ip-restrictions)** : En disponibilité générale dans toutes les régions Azure où App Service est disponible.
+- **[Azure App Service](https://docs.microsoft.com/azure/app-service/app-service-ip-restrictions)** (*Microsoft.Web*) : En disponibilité générale dans toutes les régions Azure où App Service est disponible.
+- **[Azure Cognitive Services](https://docs.microsoft.com/azure/cognitive-services/cognitive-services-virtual-networks?tabs=portal)** (*Microsoft.CognitiveServices*) : En disponibilité générale dans toutes les régions Azure où Cognitive Services est disponible.
 
 **Préversion publique**
 
@@ -76,7 +77,7 @@ Les points de terminaison de service fournissent les avantages suivants :
 
   Par défaut, les ressources du service Azure sécurisées pour des réseaux virtuels ne sont pas accessibles à partir des réseaux locaux. Si vous souhaitez autoriser le trafic depuis un réseau local, vous devez également autoriser les adresses IP publiques (généralement NAT) à partir de vos circuits locaux ou ExpressRoute. Vous pouvez ajouter ces adresses IP via la configuration du pare-feu IP des ressources du service Azure.
 
-  ExpressRoute : Si vous utilisez [ExpressRoute](../expressroute/expressroute-introduction.md?toc=%2fazure%2fvirtual-network%2ftoc.json) pour le Peering public ou Microsoft en local, vous devez identifier les adresses IP NAT utilisées. Pour le Peering public, chaque circuit ExpressRoute utilise par défaut deux adresses IP NAT qui sont appliquées au trafic du service Azure lorsque le trafic entre dans le réseau principal de Microsoft Azure. Pour le Peering Microsoft, les adresses IP NAT sont fournies par le client ou par le fournisseur du service. Pour autoriser l’accès à vos ressources de votre service, vous devez autoriser ces adresses IP publiques dans le paramètre de pare-feu IP de ressource. Pour obtenir les adresses IP de votre circuit ExpressRoute de peering public, [ouvrez un ticket de support avec ExpressRoute](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade/overview) via le portail Azure. Pour plus d’informations sur le Peering Microsoft et public NAT pour ExpressRoute, consultez [Configuration NAT requise pour ExpressRoute](../expressroute/expressroute-nat.md?toc=%2fazure%2fvirtual-network%2ftoc.json#nat-requirements-for-azure-public-peering).
+  ExpressRoute : Si vous utilisez [ExpressRoute](../expressroute/expressroute-introduction.md?toc=%2fazure%2fvirtual-network%2ftoc.json) pour le Peering public ou Microsoft en local, vous devez identifier les adresses IP NAT utilisées. Pour le Peering public, chaque circuit ExpressRoute utilise par défaut deux adresses IP NAT qui sont appliquées au trafic du service Azure lorsque le trafic entre dans le réseau principal de Microsoft Azure. Pour le Peering Microsoft, les adresses IP NAT sont fournies par le client ou par le fournisseur du service.  Pour autoriser l’accès à vos ressources de votre service, vous devez autoriser ces adresses IP publiques dans le paramètre de pare-feu IP de ressource. Pour trouver les adresses IP de votre circuit ExpressRoute de peering public, [ouvrez un ticket de support avec ExpressRoute](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade/overview) via le portail Azure. Pour plus d’informations sur le Peering Microsoft et public NAT pour ExpressRoute, consultez [Configuration NAT requise pour ExpressRoute](../expressroute/expressroute-nat.md?toc=%2fazure%2fvirtual-network%2ftoc.json#nat-requirements-for-azure-public-peering).
 
 ![Sécurisation des services Azure pour des réseaux virtuels](./media/virtual-network-service-endpoints-overview/VNet_Service_Endpoints_Overview.png)
 
@@ -90,7 +91,7 @@ Les points de terminaison de service fournissent les avantages suivants :
 
 ### <a name="considerations"></a>Considérations
 
-- Après l’activation d’un point de terminaison de service, les adresses IP sources des machines virtuelles dans le sous-réseau basculent. Les adresses IP sources passent de l’utilisation des adresses IPv4 publiques à l’utilisation de leur adresse IPv4 privée lors de la communication avec le service à partir de ce sous-réseau. Toute connexion TCP ouverte existante pour le service sera fermée lors de ce changement. Assurez-vous qu’aucune tâche critique n’est en cours d’exécution lors de l’activation ou de la désactivation d’un point de terminaison de service à un service pour un sous-réseau. En outre, assurez-vous que vos applications peuvent se connecter automatiquement aux services Azure après le changement d’adresse IP.
+- Après l’activation d’un point de terminaison de service, les adresses IP sources basculent de l’utilisation des adresses IPv4 publiques à l’utilisation de leur adresse IPv4 privée lors de la communication avec le service à partir de ce sous-réseau. Toute connexion TCP ouverte existante pour le service sera fermée lors de ce changement. Assurez-vous qu’aucune tâche critique n’est en cours d’exécution lors de l’activation ou de la désactivation d’un point de terminaison de service à un service pour un sous-réseau. En outre, assurez-vous que vos applications peuvent se connecter automatiquement aux services Azure après le changement d’adresse IP.
 
   Le changement d’adresse IP affecte uniquement le trafic de service à partir de votre réseau virtuel. L’impact sur tout autre trafic adressé vers ou depuis des adresses IPv4 publiques attribuées à vos machines virtuelles est inexistant. Si vous possédez des règles de pare-feu existantes à l’aide d’adresses IP publiques Azure pour les services Azure, ces règles cessent de fonctionner avec le changement pour les adresses privées de réseau virtuel.
 - Avec les points de terminaison de service, les entrées DNS pour les services Azure ne sont pas modifiées et continuent de résoudre les adresses IP publiques assignées au service Azure.
@@ -123,7 +124,7 @@ Une fois que vous avez configuré les points de terminaison de service pour un s
 
 Les points de terminaison de service peuvent être configurés indépendamment sur les réseaux virtuels par un utilisateur avec accès en écriture à un réseau virtuel. Pour sécuriser les ressources du service Azure pour un réseau virtuel, l’utilisateur doit disposer des autorisations sur *Microsoft.Network/virtualNetworks/subnets/joinViaServiceEndpoint/action* pour les sous-réseaux ajoutés. Les rôles Administrateur de service fédérés intégrés incluent cette autorisation par défaut. Vous pouvez modifier l’autorisation en créant des rôles personnalisés.
 
-Pour plus d’informations sur les rôles intégrés, consultez [Rôles intégrés pour les ressources Azure](../role-based-access-control/built-in-roles.md?toc=%2fazure%2fvirtual-network%2ftoc.json). Pour plus d’informations sur l’attribution d’autorisations spécifiques à des rôles personnalisés, consultez [Rôles personnalisés pour les ressources Azure](../role-based-access-control/custom-roles.md?toc=%2fazure%2fvirtual-network%2ftoc.json).
+Pour plus d’informations sur les rôles intégrés, consultez [Rôles intégrés Azure](../role-based-access-control/built-in-roles.md?toc=%2fazure%2fvirtual-network%2ftoc.json). Pour plus d’informations sur l’attribution d’autorisations spécifiques à des rôles personnalisés, consultez [Rôles Azure personnalisés](../role-based-access-control/custom-roles.md?toc=%2fazure%2fvirtual-network%2ftoc.json).
 
 Les réseaux virtuels et les ressources du service Azure peuvent être dans des abonnements identiques ou différents. Si le réseau virtuel et les ressources de service Azure se trouvent dans différents abonnements, les ressources doivent être sous le même client Active Directory (AD). 
 
@@ -147,9 +148,8 @@ Pour consulter les Forums aux questions, consultez les [FAQ sur les points de te
 
 - [Configurer des points de terminaison de service de réseau virtuel](tutorial-restrict-network-access-to-resources.md)
 - [Sécuriser un compte de stockage Azure pour un réseau virtuel](../storage/common/storage-network-security.md?toc=%2fazure%2fvirtual-network%2ftoc.json)
-- [Sécuriser une base de données Azure SQL Database pour un réseau virtuel](../sql-database/sql-database-vnet-service-endpoint-rule-overview.md?toc=%2fazure%2fvirtual-network%2ftoc.json)
-- [Sécuriser un entrepôt de données Azure SQL Data Warehouse pour un réseau virtuel](../sql-database/sql-database-vnet-service-endpoint-rule-overview.md?toc=%2fazure%2fsql-data-warehouse%2ftoc.json)
+- [Sécuriser une base de données Azure SQL Database pour un réseau virtuel](../azure-sql/database/vnet-service-endpoint-rule-overview.md?toc=%2fazure%2fvirtual-network%2ftoc.json)
+- [Sécuriser une instance Azure Synapse Analytics dans un réseau virtuel](../azure-sql/database/vnet-service-endpoint-rule-overview.md?toc=%2fazure%2fsql-data-warehouse%2ftoc.json)
 - [Intégration des services Azure aux réseaux virtuels](virtual-network-for-azure-services.md)
 - [Stratégies de points de terminaison de service de réseau virtuel](https://docs.microsoft.com/azure/virtual-network/virtual-network-service-endpoint-policies-overview)
 - [Modèle Azure Resource Manager](https://azure.microsoft.com/resources/templates/201-vnet-2subnets-service-endpoints-storage-integration)
-

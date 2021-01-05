@@ -1,18 +1,18 @@
 ---
 title: Résolution de problèmes Azure Migrate | Microsoft Docs
 description: Présente les problèmes connus du service Azure Migrate, ainsi que des conseils de dépannage pour les erreurs courantes.
-author: musa-57
+author: ms-psharma
+ms.author: panshar
 ms.manager: abhemraj
 ms.service: azure-migrate
 ms.topic: conceptual
 ms.date: 11/21/2019
-ms.author: hamusa
-ms.openlocfilehash: 433f3cc29e334a9034fa073d4ace735fc7e7e3ea
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 00802f53f973ad9b5a80b265006943121a0fa763
+ms.sourcegitcommit: ea551dad8d870ddcc0fee4423026f51bf4532e19
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75722170"
+ms.lasthandoff: 12/07/2020
+ms.locfileid: "96753397"
 ---
 # <a name="troubleshoot-azure-migrate"></a>Résoudre les problèmes d’Azure Migrate
 
@@ -28,7 +28,7 @@ Consultez les [réponses aux problèmes courants](troubleshoot-appliance-discove
 
 ## <a name="machines-arent-discovered"></a>Les ordinateurs ne sont pas détectés.
 
-Consultez les problèmes courants relatifs à la détection.
+Consultez les [problèmes de détection courants](common-questions-discovery-assessment.md).
 
 ## <a name="app-discovery-isnt-working"></a>La découverte d’application ne fonctionne pas.
 

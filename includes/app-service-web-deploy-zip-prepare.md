@@ -1,6 +1,6 @@
 ---
-title: Fichier Include
-description: Fichier Include
+title: Fichier include
+description: Fichier include
 services: app-service
 author: cephalin
 ms.service: app-service
@@ -8,12 +8,12 @@ ms.topic: include
 ms.date: 01/14/2020
 ms.author: cephalin
 ms.custom: include file
-ms.openlocfilehash: 6b5aa4f409b8c2f5a9125ab01e8587f4ac9c4ee5
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 035399924216434de85865102db8838ea3fa15a3
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75945156"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85570158"
 ---
 ## <a name="create-a-project-zip-file"></a>Créer un fichier ZIP de projet
 
@@ -27,7 +27,7 @@ Ce répertoire doit contenir le fichier d’entrée à votre application web, te
 
 Sauf si vous souhaitez qu’App Service exécute l’automatisation du déploiement à votre place, exécutez toutes les tâches de compilation (par exemple, `npm`, `bower`, `gulp`, `composer` et `pip`) et assurez-vous que vous disposez de tous les fichiers nécessaires pour exécuter l'application. Cette étape est requise si vous souhaitez [exécuter votre package directement](../articles/app-service/deploy-run-package.md).
 
-Créez une archive ZIP contenant tous les éléments de votre projet. La commande suivante utilise l’outil par défaut dans votre terminal :
+Créez une archive ZIP contenant tous les éléments de votre projet. Pour les projets `dotnet`, ce dossier est le dossier de sortie de la commande `dotnet publish`. La commande suivante utilise l’outil par défaut dans votre terminal :
 
 ```
 # Bash

@@ -8,12 +8,12 @@ ms.workload: infrastructure-services
 ms.date: 01/27/2020
 ms.author: cynthn
 ms.reviewer: zivr
-ms.openlocfilehash: 2401e8c160fd1c2ee3a734f374f1d4409c52ed16
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 9ea986b338d977102d78e9c12bcbe5b2f2c510e7
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82098524"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87083444"
 ---
 # <a name="deploy-vms-to-proximity-placement-groups-using-powershell"></a>Déployer des machines virtuelles dans des groupes de placements avec PowerShell
 
@@ -24,7 +24,7 @@ Le groupe de placements de proximité est un regroupement logique utilisé pour 
 
 
 ## <a name="create-a-proximity-placement-group"></a>Créer un groupe de placements de proximité
-Créez un groupe de placements de proximité à l’aide de la cmdlet [New-AzProximityPlacementGroup](https://docs.microsoft.com/powershell/module/az.compute/new-azproximityplacementgroup). 
+Créez un groupe de placements de proximité à l’aide de la cmdlet [New-AzProximityPlacementGroup](/powershell/module/az.compute/new-azproximityplacementgroup). 
 
 ```azurepowershell-interactive
 $resourceGroup = "myPPGResourceGroup"
@@ -49,7 +49,7 @@ Get-AzProximityPlacementGroup
 
 ## <a name="create-a-vm"></a>Créer une machine virtuelle
 
-Créez une machine virtuelle dans le groupe de placements de proximité avec `-ProximityPlacementGroup $ppg.Id` pour faire référence à l’ID de groupe de placements de proximité quand vous utilisez [New-AzVM](https://docs.microsoft.com/powershell/module/az.compute/new-azvm) pour créer la machine virtuelle.
+Créez une machine virtuelle dans le groupe de placements de proximité avec `-ProximityPlacementGroup $ppg.Id` pour faire référence à l’ID de groupe de placements de proximité quand vous utilisez [New-AzVM](/powershell/module/az.compute/new-azvm) pour créer la machine virtuelle.
 
 ```azurepowershell-interactive
 $vmName = "myVM"
@@ -146,7 +146,7 @@ foreach ($vmId in $vmIDs){
 
 ## <a name="scale-sets"></a>Groupes identiques
 
-Vous pouvez également créer un groupe identique dans votre groupe de placements de proximité. Utilisez le même paramètre `-ProximityPlacementGroup` avec [New-AzVmss](https://docs.microsoft.com/powershell/module/az.compute/new-azvmss) pour créer un jeu de mise à l’échelle et toutes les instances seront créées dans le même groupe de placements de proximité.
+Vous pouvez également créer un groupe identique dans votre groupe de placements de proximité. Utilisez le même paramètre `-ProximityPlacementGroup` avec [New-AzVmss](/powershell/module/az.compute/new-azvmss) pour créer un jeu de mise à l’échelle et toutes les instances seront créées dans le même groupe de placements de proximité.
 
 
 Pour ajouter un groupe identique existant à un groupe de placements de proximité ou pour l’en retirer, vous devez d’abord arrêter le groupe identique. 

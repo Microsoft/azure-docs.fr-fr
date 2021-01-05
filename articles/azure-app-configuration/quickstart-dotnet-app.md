@@ -1,19 +1,20 @@
 ---
 title: Démarrage rapide pour Azure App Configuration avec .NET Framework | Microsoft Docs
-description: Guide de démarrage rapide pour utiliser Azure App Configuration avec des applications .NET Framework
+description: Dans cet article, créez une application .NET Framework avec Azure App Configuration pour centraliser le stockage et la gestion des paramètres d’application en dehors de votre code.
 services: azure-app-configuration
 documentationcenter: ''
-author: lisaguthrie
+author: AlexandraKemperMS
 ms.service: azure-app-configuration
+ms.custom: devx-track-csharp
 ms.topic: quickstart
-ms.date: 12/17/2019
-ms.author: lcozzens
-ms.openlocfilehash: cfa89a7921751541d1044d697237946cd63cbfd8
-ms.sourcegitcommit: 4499035f03e7a8fb40f5cff616eb01753b986278
+ms.date: 09/28/2020
+ms.author: alkemper
+ms.openlocfilehash: 62516218ed2c0249f829ad8d286e4ad8bbc471f8
+ms.sourcegitcommit: 1756a8a1485c290c46cc40bc869702b8c8454016
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/03/2020
-ms.locfileid: "82732051"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96932088"
 ---
 # <a name="quickstart-create-a-net-framework-app-with-azure-app-configuration"></a>Démarrage rapide : Créer une application .NET Framework avec Azure App Configuration
 
@@ -21,7 +22,7 @@ Dans ce guide de démarrage rapide, vous intégrez Azure App Configuration dans 
 
 ## <a name="prerequisites"></a>Prérequis
 
-- Abonnement Azure : [créez-en un gratuitement](https://azure.microsoft.com/free/)
+- Abonnement Azure : [créez-en un gratuitement](https://azure.microsoft.com/free/dotnet)
 - [Visual Studio 2019](https://visualstudio.microsoft.com/vs)
 - [.NET Framework 4.7.2](https://dotnet.microsoft.com/download)
 
@@ -29,7 +30,7 @@ Dans ce guide de démarrage rapide, vous intégrez Azure App Configuration dans 
 
 [!INCLUDE [azure-app-configuration-create](../../includes/azure-app-configuration-create.md)]
 
-6. Sélectionnez **Explorateur de configurations** > **Créer** > **Clé-valeur** pour ajouter les paires clé-valeur suivantes :
+7. Sélectionnez **Explorateur de configurations** > **Créer** > **Clé-valeur** pour ajouter les paires clé-valeur suivantes :
 
     | Clé | Valeur |
     |---|---|
@@ -37,7 +38,7 @@ Dans ce guide de démarrage rapide, vous intégrez Azure App Configuration dans 
 
     Laissez **Étiquette** et **Type de contenu** vides pour l’instant.
 
-7. Sélectionnez **Appliquer**.
+8. Sélectionnez **Appliquer**.
 
 ## <a name="create-a-net-console-app"></a>Créer une application console .NET
 
@@ -87,23 +88,15 @@ Dans ce guide de démarrage rapide, vous intégrez Azure App Configuration dans 
         string message = System.Configuration.ConfigurationManager.AppSettings["TestApp:Settings:Message"];
 
         Console.WriteLine(message);
+        Console.ReadKey();
     }
     ```
 
 ## <a name="build-and-run-the-app-locally"></a>Générer et exécuter l’application localement
 
-1. Définissez une variable d’environnement nommée **ConnectionString** et affectez-lui la valeur de la chaîne de connexion de votre magasin App Configuration. Si vous utilisez l’invite de commandes Windows, exécutez la commande suivante :
+1. Mettez à jour le fichier **App.config** en remplaçant `${ConnectionString}` par la chaîne de connexion réelle à votre instance Application Configuration. Vous trouverez cette chaîne sous l’onglet **Clés d’accès** de la ressource Application Configuration dans le portail Azure.
 
-    ```cmd
-        setx ConnectionString "connection-string-of-your-app-configuration-store"
-    ```
-
-    Si vous utilisez Windows PowerShell, exécutez la commande suivante :
-
-    ```azurepowershell
-        $Env:ConnectionString = "connection-string-of-your-app-configuration-store"
-    ```
-1. Redémarrez Visual Studio pour que la modification soit prise en compte. Appuyez sur Ctrl + F5 pour générer et exécuter l’application console.
+1. Appuyez sur Ctrl + F5 pour générer et exécuter l’application console.
 
 ## <a name="clean-up-resources"></a>Nettoyer les ressources
 

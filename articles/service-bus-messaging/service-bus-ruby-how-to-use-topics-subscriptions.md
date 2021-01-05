@@ -3,23 +3,15 @@ title: 'Démarrage rapide : Guide pratique pour utiliser les rubriques Service 
 description: 'Démarrage rapide : Découvrez comment utiliser les rubriques et abonnements Service Bus dans Azure. Les exemples de code sont écrits pour les applications Ruby.'
 services: service-bus-messaging
 documentationcenter: ruby
-author: axisc
-manager: timlt
-editor: ''
-ms.assetid: 3ef2295e-7c5f-4c54-a13b-a69c8045d4b6
-ms.service: service-bus-messaging
-ms.workload: na
-ms.tgt_pltfrm: na
 ms.devlang: ruby
 ms.topic: quickstart
-ms.date: 11/05/2019
-ms.author: aschhab
-ms.openlocfilehash: b5401eae844ed2113a9fbc07c8b3ad8601709d43
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.date: 06/23/2020
+ms.openlocfilehash: aba326a63558632bee3bf0c48d34e471bbe30886
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "73718936"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "88067560"
 ---
 # <a name="quickstart-how-to-use-service-bus-topics-and-subscriptions-with-ruby"></a>Démarrage rapide : Utilisation des rubriques et abonnements Service Bus avec Ruby
  
@@ -70,7 +62,7 @@ Les abonnements de rubrique sont également créés à l’aide de l’objet **A
 
 Les abonnements sont persistants par défaut. Ils sont conservés jusqu’à leur suppression ou celle de la rubrique à laquelle ils sont associés. Si votre application contient une logique pour la création d’un abonnement, elle doit d’abord vérifier si l’abonnement existe déjà en utilisant la méthode getSubscription.
 
-Vous pouvez supprimer automatiquement les abonnements en définissant la [propriété AutoDeleteOnIdle](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.subscriptiondescription.autodeleteonidle).
+Vous pouvez supprimer automatiquement les abonnements en définissant la [propriété AutoDeleteOnIdle](/dotnet/api/microsoft.servicebus.messaging.subscriptiondescription.autodeleteonidle).
 
 ### <a name="create-a-subscription-with-the-default-matchall-filter"></a>Création d’un abonnement avec le filtre par défaut (MatchAll)
 Si aucun filtre n’est spécifié lors de la création d’un abonnement, le filtre **MatchAll** (par défaut) est utilisé. Lorsque le filtre **MatchAll** est utilisé, tous les messages publiés dans la rubrique sont placés dans la file d’attente virtuelle de l’abonnement. Dans l’exemple suivant, l’abonnement « all-messages » qui est créé utilise le filtre par défaut **MatchAll**.
@@ -158,7 +150,7 @@ De même, il faut savoir qu’un message verrouillé dans un abonnement est asso
 Si l’application subit un incident après le traitement du message, mais avant l’appel de la méthode `delete_subscription_message()`, le message est à nouveau remis à l’application lorsqu’elle redémarre. Ce traitement est souvent appelé *au moins une fois*. Chaque message est traité au moins une fois, mais dans certaines circonstances, un même message peut être remis une nouvelle fois. Toutefois, dans certaines circonstances, un même message peut être remis une nouvelle fois. Cette logique est généralement obtenue grâce à la propriété `message_id` du message, qui reste constante entre chaque nouvelle tentative de remise.
 
 ## <a name="delete-topics-and-subscriptions"></a>Suppression de rubriques et d'abonnements
-Les rubriques et abonnements sont persistants, sauf si la [propriété AutoDeleteOnIdle](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.subscriptiondescription.autodeleteonidle) est définie. Ils peuvent être supprimés via le [portail Microsoft Azure][Azure portal] ou par programmation. L’exemple suivant montre comment supprimer la rubrique `test-topic`.
+Les rubriques et abonnements sont persistants, sauf si la [propriété AutoDeleteOnIdle](/dotnet/api/microsoft.servicebus.messaging.subscriptiondescription.autodeleteonidle) est définie. Ils peuvent être supprimés via le [portail Microsoft Azure][Azure portal] ou par programmation. L’exemple suivant montre comment supprimer la rubrique `test-topic`.
 
 ```ruby
 azure_service_bus_service.delete_topic("test-topic")

@@ -7,16 +7,16 @@ ms.topic: conceptual
 ms.date: 05/19/2020
 ms.author: owend
 ms.reviewer: minewiskan
-ms.openlocfilehash: 7e1eab20a8e315b977c21de46dd4f6ea2fec9f5d
-ms.sourcegitcommit: 595cde417684e3672e36f09fd4691fb6aa739733
+ms.openlocfilehash: d5537079341823275ba521c9d44139a0e0305286
+ms.sourcegitcommit: 2c586a0fbec6968205f3dc2af20e89e01f1b74b5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83701495"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92014934"
 ---
 # <a name="setup-diagnostic-logging"></a>Configurer la journalisation des diagnostics
 
-Une des fonctions importantes d’une solution Analysis Services est d’analyser les performances de vos serveurs. Azure Analysis Services est intégré à Azure Monitor. Grâce aux [journaux de ressources Azure Monitor](../azure-monitor/platform/platform-logs-overview.md), vous pouvez superviser et envoyer des journaux à [Stockage Azure](https://azure.microsoft.com/services/storage/), les transmettre à [Azure Event Hubs](https://azure.microsoft.com/services/event-hubs/) et les exporter vers les [journaux d’activité Azure Monitor](../azure-monitor/azure-monitor-log-hub.md).
+Une des fonctions importantes d’une solution Analysis Services est d’analyser les performances de vos serveurs. Azure Analysis Services est intégré à Azure Monitor. Grâce aux [journaux de ressources Azure Monitor](../azure-monitor/platform/platform-logs-overview.md), vous pouvez superviser et envoyer des journaux à [Stockage Azure](https://azure.microsoft.com/services/storage/), les transmettre à [Azure Event Hubs](https://azure.microsoft.com/services/event-hubs/) et les exporter vers les [journaux d’activité Azure Monitor](../azure-monitor/overview.md).
 
 ![Journalisation des ressources dans Stockage, Event Hubs ou les journaux d’activité Azure Monitor](./media/analysis-services-logging/aas-logging-overview.png)
 
@@ -28,7 +28,7 @@ Vous pouvez sélectionner les catégories **Moteur**, **Service** et **Métrique
 
 ### <a name="engine"></a>Moteur
 
-L’option **Moteur** enregistre toutes les événements [xEvent](https://docs.microsoft.com/analysis-services/instances/monitor-analysis-services-with-sql-server-extended-events). Vous ne pouvez pas sélectionner des événements individuels. 
+L’option **Moteur** enregistre toutes les événements [xEvent](/analysis-services/instances/monitor-analysis-services-with-sql-server-extended-events). Vous ne pouvez pas sélectionner des événements individuels. 
 
 |Catégories de XEvent |Nom d'événement  |
 |---------|---------|
@@ -80,7 +80,7 @@ La catégorie Métriques consigne les mêmes [métriques de serveur](analysis-se
 
     * **Nom**. Entrez un nom pour les journaux d’activité à créer.
 
-    * **Archive vers un compte de stockage**. Pour utiliser cette option, vous avez besoin d’un compte de stockage existant auquel vous connecter. Voir [Créer un compte de stockage](../storage/common/storage-create-storage-account.md). Suivez les instructions pour créer un compte Resource Manager à usage général, puis sélectionnez votre compte de stockage en retournant sur cette page du portail. L’affichage des comptes de stockage nouvellement créés dans le menu déroulant peut prendre quelques minutes.
+    * **Archive vers un compte de stockage**. Pour utiliser cette option, vous avez besoin d’un compte de stockage existant auquel vous connecter. Voir [Créer un compte de stockage](../storage/common/storage-account-create.md). Suivez les instructions pour créer un compte Resource Manager à usage général, puis sélectionnez votre compte de stockage en retournant sur cette page du portail. L’affichage des comptes de stockage nouvellement créés dans le menu déroulant peut prendre quelques minutes.
     * **Transmettre à un Event Hub**. Pour utiliser cette option, vous avez besoin d’un espace de noms Event Hub existant et d’un Event Hub auquel vous connecter. Pour plus d’informations, consultez [Créer un espace de noms Event Hubs et un concentrateur d’événements avec le portail Azure](../event-hubs/event-hubs-create.md). Puis revenez à cette page dans le portail pour sélectionner l’espace de noms Event Hub et le nom de la stratégie.
     * **Envoyer à Azure Monitor (espace de travail Log Analytics)** . Pour utiliser cette option, servez-vous d’un espace de travail existant ou [créez une ressource d’espace de travail](../azure-monitor/learn/quick-create-workspace.md) sur le portail. Pour savoir comment afficher vos journaux d’activité, voir [Afficher les journaux d’activité dans l’espace de travail Log Analytics](#view-logs-in-log-analytics-workspace) dans cet article.
 
@@ -90,7 +90,7 @@ La catégorie Métriques consigne les mêmes [métriques de serveur](analysis-se
 
 3. Cliquez sur **Enregistrer**.
 
-    Si vous recevez une erreur indiquant « Failed to update diagnostics for \<workspace name>. The subscription \<subscription id> is not registered to use microsoft.insights » (Échec de la mise à jour des diagnostics pour <nom de l’espace de travail>. L’abonnement <id d’abonnement> n’est pas inscrit pour utiliser microsoft.insights), suivez les instructions de la page [Résoudre les problèmes de Diagnostics Azure](https://docs.microsoft.com/azure/log-analytics/log-analytics-azure-storage) pour inscrire le compte, puis recommencez cette procédure.
+    Si vous recevez un message d’erreur du genre « Échec de mise à jour des diagnostics pour \<workspace name>. L’abonnement \<subscription id> n’est pas inscrit pour utiliser microsoft.insights. » suivez les instructions de la page [Résoudre les problèmes de Diagnostics Azure](../azure-monitor/platform/resource-logs.md) pour inscrire le compte, puis recommencez cette procédure.
 
     Si vous souhaitez modifier la façon dont vos journaux de ressources seront enregistrés à l’avenir, vous pouvez revenir à cette page à tout moment et modifier les paramètres.
 
@@ -136,11 +136,11 @@ Vous pouvez combiner ces paramètres pour activer plusieurs options de sortie.
 
 ### <a name="rest-api"></a>API REST
 
-Découvrez comment [modifier les paramètres de diagnostic à l’aide de l’API REST Azure Monitor](https://docs.microsoft.com/rest/api/monitor/). 
+Découvrez comment [modifier les paramètres de diagnostic à l’aide de l’API REST Azure Monitor](/rest/api/monitor/). 
 
 ### <a name="resource-manager-template"></a>Modèle Resource Manager
 
-Découvrez comment [activer les paramètres de diagnostic lors de la création de ressources à l’aide d’un modèle Resource Manager](../azure-monitor/platform/diagnostic-settings-template.md). 
+Découvrez comment [activer les paramètres de diagnostic lors de la création de ressources à l’aide d’un modèle Resource Manager](../azure-monitor/samples/resource-manager-diagnostic-settings.md). 
 
 ## <a name="manage-your-logs"></a>Gérer vos journaux d’activité
 
@@ -328,4 +328,4 @@ Set-AzDiagnosticSetting -ResourceId $account.ResourceId`
 
 En savoir plus sur la [journalisation des ressources Azure Monitor](../azure-monitor/platform/platform-logs-overview.md).
 
-Consultez la section [Set-AzDiagnosticSetting](https://docs.microsoft.com/powershell/module/az.monitor/set-azdiagnosticsetting) dans l’aide de PowerShell.
+Consultez la section [Set-AzDiagnosticSetting](/powershell/module/az.monitor/set-azdiagnosticsetting) dans l’aide de PowerShell.

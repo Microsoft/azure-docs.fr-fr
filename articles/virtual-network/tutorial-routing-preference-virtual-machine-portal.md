@@ -7,17 +7,17 @@ author: KumudD
 manager: mtillman
 ms.service: virtual-network
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 05/18/2020
+ms.date: 12/02/2020
 ms.author: mnayak
-ms.openlocfilehash: 2a501280b817db691fb3b93097669d473443a607
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.openlocfilehash: 35e4b90e9bdd52a20bf892f0784b191384f271ac
+ms.sourcegitcommit: 5b93010b69895f146b5afd637a42f17d780c165b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83595478"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96533704"
 ---
 # <a name="configure-routing-preference-for-a-vm-using-the-azure-portal"></a>Configurer la préférence de routage pour une machine virtuelle à l’aide du portail Azure
 
@@ -28,12 +28,6 @@ Cet article explique comment créer une machine virtuelle avec une adresse IP pu
 > [!IMPORTANT]
 > La préférence de routage est actuellement en préversion publique.
 > Cette préversion est fournie sans contrat de niveau de service et n’est pas recommandée pour les charges de travail de production. Certaines fonctionnalités peuvent être limitées ou non prises en charge. Pour plus d’informations, consultez [Conditions d’Utilisation Supplémentaires relatives aux Évaluations Microsoft Azure](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
-
-## <a name="register-the-feature-for-your-subscription"></a>Inscrire la fonctionnalité pour votre abonnement
-La fonctionnalité de préférence de routage est actuellement en préversion. Vous devez inscrire la fonctionnalité de votre abonnement à l’aide d’Azure PowerShell comme suit :
-```azurepowershell
-Register-AzProviderFeature -FeatureName AllowRoutingPreferenceFeature ProviderNamespace Microsoft.Network
-```
 
 ## <a name="sign-in-to-azure"></a>Connexion à Azure
 
@@ -47,7 +41,7 @@ Connectez-vous au [portail Azure](https://preview.portal.azure.com/).
 
     |Paramètre|Valeur|
     |---|---|
-    |Nom|myVM|
+    |Name|myVM|
     |Nom d'utilisateur| Entrez un nom d’utilisateur de votre choix.|
     |Mot de passe| Entrez un mot de passe de votre choix. Le mot de passe doit contenir au moins 12 caractères et satisfaire aux [exigences de complexité définies](../virtual-machines/windows/faq.md?toc=%2fazure%2fvirtual-network%2ftoc.json#what-are-the-password-requirements-when-creating-a-vm).|
     |Abonnement| Sélectionnez votre abonnement.|
@@ -69,10 +63,11 @@ Connectez-vous au [portail Azure](https://preview.portal.azure.com/).
 9. Une fois la machine virtuelle déployée, entrez *myPublicIpAddress* dans la zone de recherche située dans la partie supérieure du portail. Quand **myPublicIpAddress** apparaît dans les résultats de la recherche, sélectionnez cette entrée.
 10. Vous pouvoir identifier l’adresse IP publique qui est attribuée et constater qu’elle est attribuée à la machine virtuelle **myVM**, comme illustré dans l’image suivante :
 
-    ![Examinez l’adresse IP publique](./media/tutorial-routing-preference-virtual-machine-portal/pip-properties-new.png)
+    ![La capture d’écran montre l’adresse IP publique de la carte réseau pour l’interface réseau mynic.](./media/tutorial-routing-preference-virtual-machine-portal/pip-properties-new.png)
 
 11. Sélectionnez **Mise en réseau**, cliquez sur la carte réseau **mynic**, puis sélectionnez l’adresse IP publique pour confirmer que la préférence de routage est **Internet**.
-    ![Examiner l’adresse IP publique](./media/tutorial-routing-preference-virtual-machine-portal/pip-routing-internet-new.png)
+
+    ![La capture d’écran montre l’adresse IP et la préférence de routage pour une adresse IP publique.](./media/tutorial-routing-preference-virtual-machine-portal/pip-routing-internet-new.png)
 
 ## <a name="clean-up-resources"></a>Nettoyer les ressources
 

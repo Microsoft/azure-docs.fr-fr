@@ -5,12 +5,12 @@ author: mumian
 ms.topic: conceptual
 ms.date: 03/26/2019
 ms.author: jgao
-ms.openlocfilehash: 622c0cb8d58dddcdb13c7dc9412ada3f2e2d93e4
-ms.sourcegitcommit: d597800237783fc384875123ba47aab5671ceb88
+ms.openlocfilehash: 6086dffaefba003461a6edd8177afab05377103d
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/03/2020
-ms.locfileid: "80632987"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91371250"
 ---
 # <a name="manage-azure-resource-manager-resource-groups-by-using-the-azure-portal"></a>Gérer les groupes de ressources Azure Resource Manager à l’aide du Portail Azure
 
@@ -86,7 +86,7 @@ Vous pouvez déplacer les ressources du groupe vers un autre groupe de ressource
 
 Le verrouillage empêche d’autres utilisateurs de votre organisation de supprimer ou de modifier accidentellement des ressources stratégiques, telles qu’une ressource, un groupe de ressources ou un abonnement Azure. 
 
-1. Ouvrez le groupe de ressources à supprimer.  Consultez [Ouvrir des groupes de ressources](#open-resource-groups).
+1. Ouvrez le groupe de ressources à verrouiller.  Consultez [Ouvrir des groupes de ressources](#open-resource-groups).
 2. Dans le volet gauche, sélectionnez **Verrous**.
 3. Pour ajouter un verrou au groupe de ressources, sélectionnez **Ajouter**.
 4. Entrez le **nom du verrou**, le **type de verrou** et des **notes**. Les types de verrous incluent **En lecture seule** et **Supprimer**.
@@ -105,11 +105,11 @@ Pour plus d’informations sur l’exportation de modèles, consultez [Single an
 
 ## <a name="manage-access-to-resource-groups"></a>Gérer l'accès aux groupes de ressources
 
-Le [contrôle d’accès en fonction du rôle (RBAC)](../../role-based-access-control/overview.md) est la façon dont vous gérez l’accès aux ressources dans Azure. Pour plus d’informations, consultez [Gérer l’accès à l’aide de RBAC et du portail Azure](../../role-based-access-control/role-assignments-portal.md).
+Le [contrôle d’accès en fonction du rôle Azure (Azure RBAC)](../../role-based-access-control/overview.md) vous permet de gérer l’accès aux ressources dans Azure. Pour plus d’informations, consultez [Ajouter ou supprimer des attributions de rôles Azure à l’aide du portail Azure](../../role-based-access-control/role-assignments-portal.md).
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 - Pour vous familiariser avec Azure Resource Manager, consultez [Vue d’ensemble d’Azure Resource Manager](overview.md).
 - Pour vous familiariser avec la syntaxe des modèles Resource Manager, consultez [Comprendre la structure et la syntaxe des modèles Azure Resource Manager](../templates/template-syntax.md).
-- Pour apprendre à développer des modèles, consultez les [tutoriels pas à pas](/azure/azure-resource-manager/).
+- Pour apprendre à développer des modèles, consultez les [tutoriels pas à pas](../index.yml).
 - Pour accéder aux schémas liés aux modèles Azure Resource Manager, consultez [Informations de référence sur les modèles](/azure/templates/).

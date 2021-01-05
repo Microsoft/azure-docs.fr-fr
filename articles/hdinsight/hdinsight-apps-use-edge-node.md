@@ -5,15 +5,15 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
+ms.topic: how-to
 ms.custom: hdinsightactive,hdiseo17may2017
 ms.date: 04/16/2020
-ms.openlocfilehash: f6dea00bf3b3e8a58f42da8fd8ad59ccec2dea72
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: ddd1a6fa2fc25add30664da5b739338e87e7e74f
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81537795"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96010110"
 ---
 # <a name="use-empty-edge-nodes-on-apache-hadoop-clusters-in-hdinsight"></a>Utiliser des nœuds de périphérie vides sur des clusters Apache Hadoop dans HDInsight
 
@@ -61,7 +61,7 @@ Après avoir créé un nœud de périphérie, vous pouvez vous connecter au nœu
 > [!WARNING]
 > Les composants personnalisés qui sont installés sur le nœud de périphérie bénéficient du support commercialement raisonnable de Microsoft. Ainsi, cela peut aider à résoudre les problèmes rencontrés. Vous pouvez également consulter les ressources de la communauté pour obtenir de l’aide. Voici quelques-uns des sites communautaires les plus actifs, sur lesquels vous pouvez obtenir de l’aide :
 >
-> * [Forum MSDN pour HDInsight](https://social.msdn.microsoft.com/Forums/azure/home?forum=hdinsight)
+> * [Page de questions Microsoft Q&A pour HDInsight](/answers/topics/azure-hdinsight.html
 > * [https://stackoverflow.com](https://stackoverflow.com).
 >
 > Si vous utilisez une technologie Apache, vous pouvez obtenir de l’aide par l’intermédiaire des sites de projets Apache sur [https://apache.org](https://apache.org), comme le site [Apache Hadoop](https://hadoop.apache.org/).
@@ -142,11 +142,15 @@ Le nœud de périmètre apparaît comme une application sur le portail Azure.  L
 
 2. Après vous être connecté au nœud de périphérie à l’aide de SSH, utilisez la commande suivante pour ouvrir la console Hive :
 
-        hive
+    ```console
+    hive
+    ```
 
 3. Exécutez la commande suivante pour afficher les tables Hive dans le cluster :
 
-        show tables;
+    ```hiveql
+    show tables;
+    ```
 
 ## <a name="delete-an-edge-node"></a>Supprimer un nœud de périmètre
 
@@ -165,6 +169,6 @@ Dans cet article, vous avez appris comment ajouter un nœud de périphérie et c
 * [Installer des applications HDInsight](hdinsight-apps-install-applications.md) : découvrez comment installer une application HDInsight sur vos clusters.
 * [Installer des applications HDInsight personnalisées](hdinsight-apps-install-custom-applications.md): découvrez comment déployer des applications HDInsight inédites vers HDInsight.
 * [Publier des applications HDInsight](hdinsight-apps-publish-applications.md) : découvrez comment publier vos applications HDInsight personnalisées sur la Place de marché Azure.
-* [MSDN : Installer une application HDInsight](https://msdn.microsoft.com/library/mt706515.aspx) : découvrez comment définir les applications HDInsight.
+* [MSDN : Installer une application HDInsight](/rest/api/hdinsight/hdinsight-application) : découvrez comment définir les applications HDInsight.
 * [Personnalisation de clusters HDInsight basés sur Linux à l’aide d’une action de script](hdinsight-hadoop-customize-cluster-linux.md): apprenez à utiliser l’action de script pour installer des applications supplémentaires.
 * [Créer des clusters Apache Hadoop sous Linux dans HDInsight à l’aide de modèles Resource Manager](hdinsight-hadoop-create-linux-clusters-arm-templates.md) : apprenez à appeler des modèles Resource Manager pour la création de clusters HDInsight.

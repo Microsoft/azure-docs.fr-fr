@@ -1,54 +1,53 @@
 ---
 title: Conception de fonctionnalités en science des données - TDSP (Team Data Science Process)
-description: Explique les finalités de la conception de fonctionnalités et fournit des exemples de son rôle dans le processus d'amélioration des données de l'apprentissage automatique.
+description: En savoir plus sur l’ingénierie de caractéristiques et son rôle dans le processus d’amélioration des données d’apprentissage automatique.
 services: machine-learning
 author: marktab
 manager: marktab
 editor: marktab
 ms.service: machine-learning
 ms.subservice: team-data-science-process
-ms.topic: article
-ms.date: 01/10/2020
+ms.topic: conceptual
+ms.date: 05/14/2020
 ms.author: tdsp
-ms.custom: seodec18, previous-author=deguhath, previous-ms.author=deguhath
-ms.openlocfilehash: 02f109f250fa9bcd4c77cecd0b1b3e4514ecd8bc
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: seodec18, previous-author=deguhath, previous-ms.author=deguhath, contperf-fy20q4
+ms.openlocfilehash: 7cf97edcb2f2f7a23d5c899194d497deade1f507
+ms.sourcegitcommit: 3ea45bbda81be0a869274353e7f6a99e4b83afe2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76721130"
+ms.lasthandoff: 12/10/2020
+ms.locfileid: "97031859"
 ---
 # <a name="feature-engineering-in-data-science"></a>Ingénierie des caractéristiques dans la science des données
-Cet article explique les finalités de l’ingénierie de caractéristiques et fournit des exemples de son rôle dans le processus d’amélioration des données de l’apprentissage automatique. Les exemples utilisés pour illustrer ce processus sont tirés d’Azure Machine Learning Studio. 
 
-Cette tâche est une étape du [processus TDSP (Team Data Science Process)](https://docs.microsoft.com/azure/machine-learning/team-data-science-process/).
+Dans cet article, vous allez découvrir l’ingénierie de caractéristiques et son rôle dans l’amélioration des données d’apprentissage automatique. Découvrez à partir des exemples explicatifs tirés d’expériences [Azure Machine Learning Studio (classique)](../overview-what-is-machine-learning-studio.md#ml-studio-classic-vs-azure-machine-learning-studio). 
 
-La conception de fonctionnalités tente d'augmenter la puissance prédictive des algorithmes d'apprentissage en créant des fonctionnalités à partir de données brutes qui facilitent le processus d'apprentissage. L’ingénierie et la sélection de caractéristiques constituent une partie du processus TDSP présenté dans [Qu’est ce que le cycle de vie du processus TDSP (Team Data Science Process) ?](overview.md). La conception et la sélection de fonctionnalités sont des parties de l’étape de **développement de fonctionnalités** du processus TDSP. 
+* **Ingénierie des caractéristiques** : processus de création de nouvelles caractéristiques à partir de données brutes pour augmenter la puissance prédictive de l’algorithme d’apprentissage. Les caractéristiques conçues doivent capturer des informations supplémentaires qui ne sont pas facilement visibles dans l’ensemble de caractéristiques d’origine.
+* **Sélection de caractéristiques** : Processus de sélection du sous-ensemble clé de caractéristiques pour réduire la dimensionnalité du problème d’apprentissage.
 
-* **Ingénierie des caractéristiques** : ce processus tente de créer des caractéristiques supplémentaires pertinentes à partir de caractéristiques brutes existantes dans les données et d’augmenter la performance de prédiction de l’algorithme d’apprentissage.
-* **Sélection de caractéristiques** : ce processus sélectionne le sous-ensemble clé des caractéristiques de données d’origine afin de réduire la dimensionnalité du problème d’apprentissage.
+En général, l’**ingénierie de caractéristiques** s’applique d’abord à la génération de caractéristiques supplémentaires. La **sélection de caractéristiques** est alors effectuée pour éliminer des caractéristiques non pertinentes, redondantes ou fortement corrélées.
 
-En général, l’**ingénierie de caractéristiques** s’applique d’abord à la génération de caractéristiques supplémentaires. L’étape de **sélection de caractéristiques** est alors effectuée pour éliminer les caractéristiques inutiles, redondantes ou fortement corrélées.
+L’ingénierie et la sélection de caractéristiques font partie de la [phase de modélisation](lifecycle-modeling.md) du processus TDSP (Team Data science process). Pour en savoir plus sur le processus TDSP et le cycle de vie de la science des données, consultez [Qu’est-ce que le processus TDSP ?](overview.md)
 
-Les données d'apprentissage utilisées dans l'apprentissage automatique peuvent souvent être améliorées par l'extraction de fonctionnalités à partir des données brutes collectées. Un exemple de conception de fonctionnalité dans le cadre de l'apprentissage de la classification des images de caractères écrits à la main est la création d'une carte de densité de bits construite à partir des données brutes de distribution de bits. Cette carte peut aider à localiser les bords des caractères plus efficacement que l'utilisation de la distribution brute directement.
+## <a name="what-is-feature-engineering"></a>Qu’est-ce que l’ingénierie des caractéristiques ?
 
-Pour créer des fonctionnalités pour les données dans des environnements spécifiques, consultez les articles suivants :
+Les données d’apprentissage consistent en une matrice composée de lignes et de colonnes. Chaque ligne de la matrice est une observation ou un enregistrement. Les colonnes de chaque ligne sont les caractéristiques qui décrivent chaque enregistrement. Les caractéristiques spécifiées dans la conception expérimentale devraient caractériser les modèles dans les données.
 
-* [Créer des fonctionnalités pour les données dans SQL Server](create-features-sql-server.md)
-* [Création de fonctionnalités pour les données dans un cluster Hadoop à l’aide de requêtes Hive](create-features-hive.md)
+Bien que la plupart des champs de données brutes peuvent être utilisés directement pour former un modèle, il est souvent nécessaire de créer des caractéristiques supplémentaires (conçues) pour un jeu de données d’apprentissage amélioré.
 
-## <a name="create-features-from-your-data---feature-engineering"></a>Créer des caractéristiques à partir de vos données : ingénierie de caractéristiques
-Les données d'apprentissage se constituent d'une matrice composée d'exemples (enregistrements ou observations stockées dans les lignes), chaque exemple disposant d'un ensemble de caractéristiques (variables ou champs stockés dans des colonnes). Les caractéristiques spécifiées dans la conception expérimentale sont supposées caractériser les modèles dans les données. Bien que plusieurs champs de données brutes puissent être directement inclus dans l'ensemble des caractéristiques sélectionnées utilisées pour l'apprentissage d'un modèle, il est fréquent que des caractéristiques supplémentaires (conçues) doivent être construites à partir des caractéristiques dans les données brutes pour générer un jeu de données de formation amélioré.
-
-Quelles sont les caractéristiques qui doivent être créées pour améliorer le jeu de données lors de l'apprentissage d'un modèle ? Les caractéristiques conçues améliorant l'apprentissage offrent des informations qui permettent de mieux différencier les modèles dans les données. Les nouvelles caractéristiques devraient fournir des informations supplémentaires qui ne sont pas clairement capturées ou facilement visibles dans l’ensemble des caractéristiques existantes ou d’origine. Mais ce processus est tout un art. Des décisions réfléchies et productives nécessitent souvent une spécialisation dans le domaine.
-
-En débutant avec Azure Machine Learning, il est plus facile de comprendre correctement le processus avec des exemples fournis dans le Studio. Deux exemples sont présentés ici :
-
-* un exemple de régression [Prédiction du nombre de locations de vélo](https://gallery.cortanaintelligence.com/Experiment/Regression-Demand-estimation-4) dans une expérience supervisée, où les valeurs cibles sont connues
-* un exemple de classification d'exploration de texte utilisant le [hachage de caractéristiques](https://msdn.microsoft.com/library/azure/c9a82660-2d9c-411d-8122-4d9e0b3ce92a/)
+Les caractéristiques conçues améliorant l’apprentissage offrent des informations qui permettent de mieux différencier les modèles dans les données. Mais ce processus est tout un art. Des décisions réfléchies et productives nécessitent souvent une expertise.
 
 ## <a name="example-1-add-temporal-features-for-a-regression-model"></a>Exemple 1 : ajouter des caractéristiques temporelles pour un modèle de régression
-Nous allons utiliser l’exemple de « prévision de la demande de vélos » dans Azure Machine Learning Studio (classique) pour démontrer comment concevoir des fonctionnalités pour une tâche de régression. L'objectif de cette expérience est de prédire la demande de vélos, autrement dit le nombre de locations de vélo pour un mois/un jour/une heure spécifique. Le « jeu de données de location de vélo UCI »est utilisé en tant que données brutes d'entrée. Le jeu de données se base sur des données réelles de la société Capital Bikeshare qui gère un réseau de location de vélos à Washington DC aux États-Unis. Ce jeu de données représente le nombre de locations de vélo pour une heure spécifique d'un jour en 2011 et en 2012 et contient 17 379 lignes et 17 colonnes. L'ensemble des caractéristiques brutes contient des conditions météorologiques (température/humidité/vitesse du vent) et le type de jour (vacances/jour de semaine). Le champ à prédire est le nombre « cnt », qui représente les locations de vélo pour une heure spécifique et qui est compris entre 1 et 977.
+
+Nous allons utiliser l’expérience [Demand forecasting of bikes rentals](https://gallery.azure.ai/Experiment/Regression-Demand-estimation-4) dans Azure Machine Learning Studio (classique) pour montrer comment concevoir des caractéristiques pour une tâche de régression. L’objectif de cette expérience est de prédire la demande de vélos en location pour un mois, un jour ou une heure spécifiques.
+
+### <a name="bike-rental-dataset"></a>Jeu de données de location de vélo
+
+Le jeu de données [Bike Rental UCI](http://archive.ics.uci.edu/ml/datasets/Bike+Sharing+Dataset/) est basé sur des données réelles d’une société de partage de vélos basée aux États-Unis. Il représente le nombre de locations de vélos au cours d’une heure spécifique d’une journée pour les années 2011 et 2012. Il contient 17 379 lignes et 17 colonnes.
+
+L'ensemble des caractéristiques brutes contient des conditions météorologiques (température/humidité/vitesse du vent) et le type de jour (vacances/jour de semaine). Le champ pour la prédiction est le champ « count », qui représente le nombre de locations de vélo au cours d’une heure spécifique. Sa valeur comprise entre 1 et 977.
+
+### <a name="create-a-feature-engineering-experiment"></a>Créer une expérience d’ingénierie de caractéristiques
 
 Afin de construire des caractéristiques efficaces dans les données d'apprentissage, quatre modèles de régression sont générés à l'aide du même algorithme, mais avec quatre jeux de données d'apprentissage différents. Les quatre jeux de données représentent les mêmes données d'entrée brutes, mais avec un nombre croissant de jeux de caractéristiques. Ces caractéristiques sont regroupées en quatre catégories :
 
@@ -59,9 +58,15 @@ Afin de construire des caractéristiques efficaces dans les données d'apprentis
 
 Excepté l’ensemble de caractéristiques A, qui existe déjà dans les données brutes d’origine, les trois autres ensembles de caractéristiques sont créés via le processus de conception des caractéristiques. L'ensemble de caractéristiques B capture les toutes dernières demandes de vélos. L'ensemble de caractéristiques C capture la demande de vélos pour une heure en particulier. L'ensemble de caractéristiques D capture la demande de vélos pour une heure particulière et un jour de la semaine particulier. Chacun des quatre jeux de données d'apprentissage inclut respectivement un ensemble de caractéristiques A, A + B, A + B + C et A + B + C + D.
 
-Dans l'expérience d'Azure Machine Learning, ces quatre jeux de données d'apprentissage sont constitués via quatre branches à partir du jeu de données d'entrée traité au préalable. À l’exception de la branche la plus à gauche, chacune de ces branches contient un module [Exécuter le Script R](https://msdn.microsoft.com/library/azure/30806023-392b-42e0-94d6-6b775a6e0fd5/), dans lequel les caractéristiques dérivées (ensemble de caractéristiques B, C et D) sont respectivement construites et ajoutées au jeu de données importé. La figure suivante montre le script R utilisé pour créer un ensemble de caractéristiques B dans la deuxième branche de gauche.
+### <a name="feature-engineering-using-studio-classic"></a>ingénierie de caractéristiques à l’aide de Studio (classique)
+
+Dans l’expérience de Studio (classique), ces quatre jeux de données d’apprentissage sont constitués de quatre branches provenant du jeu de données d’entrée traité au préalable. À l’exception de la branche la plus à gauche, chacune de ces branches contient un module [Exécuter le Script R](/azure/machine-learning/studio-module-reference/execute-r-script), dans lequel les caractéristiques dérivées (ensemble de caractéristiques B, C et D) sont construites et ajoutées au jeu de données importé.
+
+La figure suivante montre le script R utilisé pour créer un ensemble de caractéristiques B dans la deuxième branche de gauche.
 
 ![création de caractéristiques](./media/create-features/addFeature-Rscripts.png)
+
+### <a name="results"></a>Résultats
 
 Une comparaison des résultats de performance des quatre modèles est résumée dans la table suivante : 
 
@@ -69,12 +74,15 @@ Une comparaison des résultats de performance des quatre modèles est résumée 
 
 Les caractéristiques A + B + C affichent les meilleurs résultats. Le taux d'erreur diminue lorsqu'un ensemble de caractéristiques supplémentaires est inclus dans les données d'apprentissage. Cela confirme l’idée présupposée que les ensembles de caractéristiques B et C fournissent des informations supplémentaires pertinentes pour la tâche de régression. Mais l'ajout de la caractéristique D semble ne pas fournir une réduction du taux d'erreur supplémentaire.
 
-## <a name="example-2-creating-features-in-text-mining"></a><a name="example2"></a> Exemple 2 : création de caractéristiques dans l’exploration de texte
-L'ingénierie de caractéristiques s'applique largement aux tâches liées à l'exploration de texte, telles que la classification de document et l'analyse de sentiments. Par exemple, quand vous souhaitez classer des documents en plusieurs catégories, l’hypothèse typique est que les mots ou expressions inclus dans une catégorie de document sont moins susceptibles de se produire dans une autre catégorie de document. Autrement dit, la fréquence de la distribution de mots ou d’expressions est capable d’identifier les différentes catégories de document. Dans les applications d'exploration de texte, étant donné que chaque élément des contenus de textes est généralement utilisé en tant que données d'entrée, le processus de conception de caractéristiques est nécessaire pour créer les caractéristiques impliquant des fréquences de mot ou d'expression.
+## <a name="example-2-create-features-for-text-mining"></a><a name="example2"></a> Exemple 2 : Créer des caractéristiques pour l’exploration de texte
 
-Pour effectuer cette tâche, une technique appelée **hachage de caractéristiques** est appliquée pour transformer efficacement les caractéristiques de texte arbitraires en index. Au lieu d'associer chaque caractéristique de texte (mots ou d'expressions) à un index particulier, cette méthode fonctionne en appliquant une caractéristique de hachage aux caractéristiques et en utilisant directement leurs valeurs de hachage en tant qu'index.
+L’ingénierie de caractéristiques s’applique largement aux tâches liées à l’exploration de texte, telles que la classification de document et l’analyse de sentiments. Comme des éléments individuels de texte brut servent habituellement de données d’entrée, le processus d’ingénierie de caractéristiques est nécessaire pour créer les caractéristiques impliquant des fréquences de mots ou d’expressions.
 
-Dans Azure Machine Learning, il existe un module de [hachage de caractéristiques](https://msdn.microsoft.com/library/azure/c9a82660-2d9c-411d-8122-4d9e0b3ce92a/) qui crée en toute facilité les caractéristiques de mot ou expression. La figure suivante montre un exemple d'utilisation de ce module. Le jeu de données d'entrée contient deux colonnes : l'évaluation du livre allant de 1 à 5 et le contenu même de la critique. L'objectif de ce module de [hachage de caractéristiques](https://msdn.microsoft.com/library/azure/c9a82660-2d9c-411d-8122-4d9e0b3ce92a/) est de récupérer un ensemble de nouvelles caractéristiques qui montrent la fréquence d'occurrence des mots ou expressions correspondants dans cette critique de livre en particulier. Pour utiliser ce module, effectuez les étapes suivantes :
+### <a name="feature-hashing"></a>Hachage des caractéristiques
+
+Pour effectuer cette tâche, une technique appelée [hachage de caractéristiques](/azure/machine-learning/studio-module-reference/feature-hashing) est appliquée pour transformer efficacement les caractéristiques de texte arbitraires en index. Au lieu d’associer chaque caractéristique de texte (mots ou expressions) à un index particulier, cette méthode applique une fonction de hachage aux caractéristiques et utilise directement leurs valeurs de hachage en tant qu’index.
+
+Dans Studio (classique), il existe un module [Hachage des caractéristiques](/azure/machine-learning/studio-module-reference/feature-hashing) qui crée en toute facilité des caractéristiques de mots ou expressions. La figure suivante montre un exemple d'utilisation de ce module. Le jeu de données d'entrée contient deux colonnes : l'évaluation du livre allant de 1 à 5 et le contenu même de la critique. L’objectif de ce module est de récupérer un ensemble de nouvelles caractéristiques qui montrent la fréquence d’occurrence des mots ou expressions correspondants dans cette critique de livre. Pour utiliser ce module, effectuez les étapes suivantes :
 
 * Tout d'abord, sélectionnez la colonne qui contient le texte d'entrée (« Col2 » pour cet exemple).
 * Ensuite, définissez le « nombre de bits de hachage » sur 8, ce qui signifie que 2 ^ 8 = 256 caractéristiques seront créées. Le mot ou l'expression sera haché en 256 index dans tout le texte. Le paramètre « hachage du nombre de bits » est compris entre 1 et 31. Les mots ou les phrases sont moins susceptibles d'être hachés dans le même index s'ils sont définis sur un nombre plus grand.
@@ -87,7 +95,15 @@ La figure suivante montre à quoi ressemblent ces nouvelles caractéristiques.
 ![Exemple « hachage de caractéristiques »](./media/create-features/feature-Hashing2.png)
 
 ## <a name="conclusion"></a>Conclusion
-L’ingénierie et la sélection de caractéristiques augmentent l’efficacité du processus d’apprentissage qui tend à extraire les informations essentielles contenues dans les données. Ces processus améliorent également les performances de ces modèles pour classifier les données d'entrée avec précision et prédire les résultats pertinents de façon plus consistante. L'ingénierie et la sélection de caractéristiques peuvent également être combinées afin de rendre l'apprentissage plus souple d'un point de vue informatique. Cela se fait grâce à l'amélioration puis à la réduction du nombre de caractéristiques nécessaires à l'étalonnage ou l'apprentissage d'un modèle. D'un point de vue mathématique, les caractéristiques sélectionnées pour effectuer l'apprentissage du modèle sont un ensemble minimum de variables indépendantes qui expliquent les modèles des données puis prédisent correctement les résultats.
+L’ingénierie et la sélection de caractéristiques augmentent l’efficacité du processus d’apprentissage qui tend à extraire les informations essentielles contenues dans les données. Ces processus améliorent également les performances de ces modèles pour classifier les données d'entrée avec précision et prédire les résultats pertinents de façon plus consistante.
 
-Il n’est pas toujours nécessaire d’effectuer l’ingénierie de caractéristiques ou la sélection des caractéristiques. Que cela soit nécessaire ou non dépend des données disponibles ou collectées, de l’algorithme sélectionné et des objectifs de l’expérience.
+L'ingénierie et la sélection de caractéristiques peuvent également être combinées afin de rendre l'apprentissage plus souple d'un point de vue informatique. Cela se fait grâce à l'amélioration puis à la réduction du nombre de caractéristiques nécessaires à l'étalonnage ou l'apprentissage d'un modèle. D’un point de vue mathématique, les caractéristiques sélectionnées sont un ensemble minimum de variables indépendantes qui expliquent les modèles des données, et prédisent correctement des résultats.
 
+Il n’est pas toujours nécessaire d’effectuer une ingénierie de caractéristiques ou une sélection de caractéristiques. Cela dépend des données, de l’algorithme sélectionné et de l’objectif de l’expérience.
+
+## <a name="next-steps"></a>Étapes suivantes
+
+Pour créer des fonctionnalités pour les données dans des environnements spécifiques, consultez les articles suivants :
+
+* [Créer des fonctionnalités pour les données dans SQL Server](create-features-sql-server.md)
+* [Création de fonctionnalités pour les données dans un cluster Hadoop à l’aide de requêtes Hive](create-features-hive.md)

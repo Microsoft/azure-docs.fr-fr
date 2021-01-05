@@ -6,12 +6,12 @@ ms.date: 04/04/2020
 ms.topic: include
 ms.author: trbye
 zone_pivot_groups: programming-languages-set-two
-ms.openlocfilehash: d819eaa5c90e304a642efd3a6f2458cab4eefe7f
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.openlocfilehash: 44c4427540e1b94ebcaf00e6875723e0a654e9ef
+ms.sourcegitcommit: 17b36b13857f573639d19d2afb6f2aca74ae56c1
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81422035"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94424977"
 ---
 ## <a name="prerequisites"></a>Prérequis
 
@@ -41,14 +41,14 @@ Pour pouvoir initialiser un objet `IntentRecognizer`, vous devez au préalable c
 Insérez ce code dans `quickstart.py`. Veillez à mettre à jour ces valeurs :
 
 * Remplacez `"YourLanguageUnderstandingSubscriptionKey"` par votre clé de prédiction LUIS.
-* Remplacez `"YourLanguageUnderstandingServiceRegion"` par votre localisation LUIS. Utilisez l’**identificateur Région** de la [région](https://aka.ms/speech/sdkregion).
+* Remplacez `"YourLanguageUnderstandingServiceRegion"` par votre localisation LUIS. Utilisez l’ **identificateur Région** de la [région](../../../../regions.md).
 
 >[!TIP]
 > Si vous avez besoin d’aide pour trouver ces valeurs, consultez [Créer une application LUIS pour la reconnaissance de l’intention](#create-a-luis-app-for-intent-recognition).
 
 [!code-python[](~/samples-cognitive-services-speech-sdk/quickstart/python/intent-recognition/quickstart.py?range=12)]
 
-Cet exemple construit l’objet `SpeechConfig` à l’aide de la clé et de la région LUIS. Pour obtenir la liste complète des méthodes disponibles, consultez la rubrique [Classe SpeechConfig](https://docs.microsoft.com/python/api/azure-cognitiveservices-speech/azure.cognitiveservices.speech.speechconfig).
+Cet exemple construit l’objet `SpeechConfig` à l’aide de la clé et de la région LUIS. Pour obtenir la liste complète des méthodes disponibles, consultez la rubrique [Classe SpeechConfig](/python/api/azure-cognitiveservices-speech/azure.cognitiveservices.speech.speechconfig).
 
 Le SDK Speech reconnaît par défaut l’utilisation de la langue en-US. Consultez [Spécifier la langue source pour la reconnaissance vocale](../../../../how-to-specify-source-language.md) pour plus d’informations sur le choix de la langue source.
 
@@ -68,6 +68,8 @@ Insérez ce code en dessous de votre `IntentRecognizer`. Veillez à remplacer `"
 > Si vous avez besoin d’aide pour trouver cette valeur, consultez [Créer une application LUIS pour la reconnaissance de l’intention](#create-a-luis-app-for-intent-recognition).
 
 [!code-python[](~/samples-cognitive-services-speech-sdk/quickstart/python/intent-recognition/quickstart.py?range=19-27)]
+
+Cet exemple utilise la fonction `add_intents()` pour ajouter une liste d’intentions définies explicitement. Si vous souhaitez ajouter toutes les intentions d’un modèle, utilisez `add_all_intents(model)` et transmettez le modèle.
 
 ## <a name="recognize-an-intent"></a>Reconnaître une intention
 

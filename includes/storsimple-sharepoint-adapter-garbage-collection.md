@@ -4,12 +4,12 @@ ms.service: storsimple
 ms.topic: include
 ms.date: 10/26/2018
 ms.author: alkohli
-ms.openlocfilehash: 00d292b3ba2d1b6c7c425d4c9f89188e660ac80d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 9c734ff03b1cf277c7e0967d8b76b1941434f414
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "73182211"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86050450"
 ---
 Dans cette procédure, vous allez :
 
@@ -31,12 +31,13 @@ Dans cette procédure, vous allez :
 
 #### <a name="to-prepare-the-content-database-and-recycle-bin-to-immediately-delete-orphaned-blobs"></a>Préparation de la base de données de contenu et de la Corbeille pour la suppression immédiate des objets blob orphelins
 1. Sur SQL Server, dans SQL Management Studio, exécutez les requêtes suivantes de mise à jour de la base de données de contenu cible : 
-   
-       `use WSS_Content`
-   
-       `exec mssqlrbs.rbs_sp_set_config_value ‘garbage_collection_time_window’ , ’time 00:00:00’`
-   
-       `exec mssqlrbs.rbs_sp_set_config_value ‘delete_scan_period’ , ’time 00:00:00’`
+
+    `use WSS_Content`
+
+    `exec mssqlrbs.rbs_sp_set_config_value ‘garbage_collection_time_window’ , ’time 00:00:00’`
+
+    `exec mssqlrbs.rbs_sp_set_config_value ‘delete_scan_period’ , ’time 00:00:00’`
+
 2. Sur le serveur Web frontal, sous **Administration centrale**, modifiez les **Paramètres généraux de l’application Web** pour la base de données de contenu souhaitée afin de désactiver temporairement la Corbeille. Cette action vide également la Corbeille de toutes les collections de sites liées. Pour ce faire, cliquez sur **Administration centrale** -> **Gestion des applications** -> **Applications Web (gérer les applications Web)**  -> **SharePoint - 80** -> **Paramètres généraux de l’application**. Réglez **État de la Corbeille** sur **OFF**.
    
     ![Paramètres généraux de l'application Web](./media/storsimple-sharepoint-adapter-garbage-collection/HCS_WebApplicationGeneralSettings-include.png)
@@ -44,7 +45,7 @@ Dans cette procédure, vous allez :
 #### <a name="to-run-the-maintainer"></a>Exécution du chargé de maintenance
 * Sur le serveur Web frontal, dans SharePoint 2013 Management Shell, exécutez le chargé de maintenance comme suit :
   
-      `Microsoft.Data.SqlRemoteBlobs.Maintainer.exe -ConnectionStringName RBSMaintainerConnectionWSSContent -Operation GarbageCollection -GarbageCollectionPhases rdo`
+    `Microsoft.Data.SqlRemoteBlobs.Maintainer.exe -ConnectionStringName RBSMaintainerConnectionWSSContent -Operation GarbageCollection -GarbageCollectionPhases rdo`
   
   > [!NOTE]
   > Seule l’opération `GarbageCollection` est prise en charge par StorSimple pour l'instant. Notez également que les paramètres émis pour Microsoft.Data.SqlRemoteBlobs.Maintainer.exe respectent la casse. 

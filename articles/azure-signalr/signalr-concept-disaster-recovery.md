@@ -4,16 +4,17 @@ description: Présentation de la façon de configurer plusieurs instances du ser
 author: chenkennt
 ms.service: signalr
 ms.topic: conceptual
+ms.custom: devx-track-csharp
 ms.date: 03/01/2019
 ms.author: kenchen
-ms.openlocfilehash: cf0f345b0fbf9fea2512f72c1996c9a1597cc0cd
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: b1cb48d1ae858dbcd0df80780b4c3cee3deac75b
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "73747647"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90976499"
 ---
-# <a name="resiliency-and-disaster-recovery"></a>Résilience et reprise d’activité après sinistre
+# <a name="resiliency-and-disaster-recovery-in-azure-signalr-service"></a>Résilience et reprise d’activité après sinistre dans Azure SignalR Service
 
 La résilience et la reprise d’activité après sinistre sont des besoins communs des systèmes en ligne. Azure SignalR Service garantit déjà une disponibilité de 99,9 %, mais demeure un service régional.
 Votre instance de service s’exécute toujours dans une seule région et ne bascule pas vers une autre région lors d’une panne au niveau régional.
@@ -41,7 +42,7 @@ Mais lorsqu’un client est connecté, il est toujours routé vers le serveur d�
 
 Le diagramme ci-dessous illustre cette topologie :
 
-![Topologie](media/signalr-concept-disaster-recovery/topology.png)
+![Le diagramme montre deux régions, chacune avec un serveur d’applications et un service SignalR, où chaque serveur est associé au service SignalR dans sa région comme principal et avec le service dans l’autre région comme secondaire.](media/signalr-concept-disaster-recovery/topology.png)
 
 ## <a name="configure-app-servers-with-multiple-signalr-service-instances"></a>Configurer les serveurs d’applications avec plusieurs instances du service SignalR
 

@@ -8,14 +8,15 @@ ms.service: storage
 ms.topic: how-to
 ms.date: 12/18/2019
 ms.author: tamram
-ms.reviewer: cbrooks
+ms.reviewer: dineshm
 ms.subservice: blobs
-ms.openlocfilehash: 5250a27e6c5fcf012207f1edb95ad46c0aabfe63
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: 875b2a9f35562dd8f0d5df3c631e5ade1e3fbf75
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79536171"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91714529"
 ---
 # <a name="create-a-user-delegation-sas-for-a-container-or-blob-with-powershell"></a>Créer une SAP de délégation d’utilisateur pour un conteneur ou un objet blob avec PowerShell
 
@@ -74,11 +75,11 @@ Connect-AzAccount
 
 Pour plus d’informations sur la connexion avec PowerShell, consultez [Se connecter avec Azure PowerShell](/powershell/azure/authenticate-azureps).
 
-## <a name="assign-permissions-with-rbac"></a>Assigner des autorisations avec le RBAC
+## <a name="assign-permissions-with-azure-rbac"></a>Attribuer des autorisations avec Azure RBAC
 
-Pour créer une SAP de délégation d’utilisateur à partir d’Azure PowerShell, le compte Azure AD utilisé pour se connecter à PowerShell doit se voir attribuer un rôle incluant l’action **Microsoft.Storage/storageAccounts/blobServices/generateUserDelegationKey**. Cette autorisation permet au compte Azure AD de demander la *clé de délégation d’utilisateur*. La clé de délégation d’utilisateur est utilisée pour signer les SAP de délégation d’utilisateur. Le rôle qui fournit l’action **Microsoft. Storage/storageAccounts/blobServices/generateUserDelegationKey** doit être attribué au niveau du compte de stockage, du groupe de ressources ou de l’abonnement. Pour plus d’informations sur les autorisations RBAC pour la création d’une SAP de délégation d’utilisateur, consultez la section **Affecter des autorisations avec RBAC** dans [Créer une SAP de délégation d’utilisateur](/rest/api/storageservices/create-user-delegation-sas).
+Pour créer une SAP de délégation d’utilisateur à partir d’Azure PowerShell, le compte Azure AD utilisé pour se connecter à PowerShell doit se voir attribuer un rôle incluant l’action **Microsoft.Storage/storageAccounts/blobServices/generateUserDelegationKey**. Cette autorisation permet au compte Azure AD de demander la *clé de délégation d’utilisateur*. La clé de délégation d’utilisateur est utilisée pour signer les SAP de délégation d’utilisateur. Le rôle qui fournit l’action **Microsoft. Storage/storageAccounts/blobServices/generateUserDelegationKey** doit être attribué au niveau du compte de stockage, du groupe de ressources ou de l’abonnement. Pour plus d’informations sur les autorisations Azure RBAC pour la création d’une SAP de délégation d’utilisateur, consultez la section **Attribuer des autorisations avec Azure RBAC** dans [Créer une SAP de délégation d’utilisateur](/rest/api/storageservices/create-user-delegation-sas).
 
-Si vous ne disposez pas des autorisations suffisantes pour attribuer des rôles RBAC au principal de sécurité Azure AD, vous devrez peut-être demander au propriétaire du compte ou à l’administrateur de donner les autorisations nécessaires.
+Si vous ne disposez pas des autorisations suffisantes pour attribuer des rôles Azure au principal de sécurité Azure AD, vous devrez peut-être demander au propriétaire du compte ou à l’administrateur d’octroyer les autorisations nécessaires.
 
 L’exemple suivant attribue le rôle de **Contributeur de données d’objet blob de stockage**, qui inclut l’action **Microsoft. Storage/storageAccounts/blobServices/generateUserDelegationKey**. Le rôle est étendu au niveau du compte de stockage.
 
@@ -90,7 +91,7 @@ New-AzRoleAssignment -SignInName <email> `
     -Scope  "/subscriptions/<subscription>/resourceGroups/<resource-group>/providers/Microsoft.Storage/storageAccounts/<storage-account>"
 ```
 
-Pour plus d’informations sur les rôles intégrés qui incluent l’action **Microsoft. Storage/storageAccounts/blobServices/generateUserDelegationKey** , consultez [Rôles intégrés pour les ressources Azure](../../role-based-access-control/built-in-roles.md).
+Pour plus d’informations sur les rôles intégrés qui incluent l’action **Microsoft. Storage/storageAccounts/blobServices/generateUserDelegationKey**, consultez [Rôles intégrés Azure](../../role-based-access-control/built-in-roles.md).
 
 ## <a name="use-azure-ad-credentials-to-secure-a-sas"></a>Utiliser des informations d’identification Azure AD pour sécuriser une SAP
 
@@ -162,7 +163,7 @@ Revoke-AzStorageAccountUserDelegationKeys -ResourceGroupName <resource-group> `
 ```
 
 > [!IMPORTANT]
-> Les attributions de rôles RBAC et de clés de délégation utilisateur sont mises en cache par le stockage Azure. Il peut donc y avoir un certain délai entre le moment où vous lancez le processus de révocation et celui où la SAP de délégation utilisateur devient non valide.
+> Les attributions de rôles Azure et de clés de délégation utilisateur sont mises en cache par le stockage Azure. Il peut donc y avoir un certain délai entre le moment où vous lancez le processus de révocation et celui où la SAP de délégation utilisateur devient non valide.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

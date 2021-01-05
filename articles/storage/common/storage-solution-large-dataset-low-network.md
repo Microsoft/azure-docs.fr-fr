@@ -5,15 +5,15 @@ services: storage
 author: alkohli
 ms.service: storage
 ms.subservice: blobs
-ms.topic: article
+ms.topic: conceptual
 ms.date: 04/01/2019
 ms.author: alkohli
-ms.openlocfilehash: be1f74dcccc654dbdd0a743d1da2da89071045f1
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 8afedec224fed55f617340af512485726ff44326
+ms.sourcegitcommit: 400f473e8aa6301539179d4b320ffbe7dfae42fe
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81253133"
+ms.lasthandoff: 10/28/2020
+ms.locfileid: "92792937"
 ---
 # <a name="data-transfer-for-large-datasets-with-low-or-no-network-bandwidth"></a>Transférer des jeux de données volumineux avec une bande passante réseau faible ou aucune bande passante réseau
  
@@ -47,25 +47,25 @@ Le tableau suivant résume les différences entre les principales fonctionnalit�
 
 |                                     |    Data Box Disk      |    Data Box                                      |    Data Box Heavy              |    Importer/Exporter                       |
 |-------------------------------------|---------------------------------|--------------------------------------------------|------------------------------------------|----------------------------------------|
-|    Taille des données                        |    Jusqu’à 35 To                 |    Jusqu’à 80 To par appareil                       |    Jusqu’à 800 To par appareil               |    Variable                            |
-|    Type de données                        |    Objets blob Azure                  |    Objets blob Azure<br>Azure Files                    |    Objets blob Azure<br>Azure Files            |    Objets blob Azure<br>Azure Files          |
-|    Facteur de forme                      |    5 disques SSD par commande             |    1 x appareil de 50 lb de taille bureau par commande    |    1 x gros appareil d’environ 500 lb par commande    |    Jusqu’à 10 disques HDD/SSD par commande        |
-|    Temps d’installation initial               |    Faible <br>(15 minutes)            |    Faible à modéré <br> (< 30 minutes)               |    Modéré<br>(1 à 2 heures)               |    Modéré à difficile<br>(variable) |
-|    Envoyer des données vers Azure               |    Oui                          |    Oui                                           |    Oui                                   |    Oui                                 |
-|    Exporter des données à partir d’Azure           |    Non                           |    Non                                            |    Non                                    |    Oui                                 |
-|    Chiffrement                       |    AES 128 bits                  |    AES 256 bits                                   |    AES 256 bits                           |    AES 128 bits                         |
-|    Matériel                         |     Fourni par Microsoft          |    Fourni par Microsoft                            |    Fourni par Microsoft                    |    Fourni par le client                   |
-|    interface réseau                |    USB 3.1/SATA                 |    RJ45, SFP+                                   |    RJ45, QSFP+                           |    SATA II/SATA III                    |
-|    Intégration des partenaires              |    Certains                         |    [Élevée](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/Microsoft.AzureExpressPod)                                          |    [Élevée](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/Microsoft.AzureExpressPod)                                  |    Certains                                |
-|    Expédition                         |    Managée par Microsoft            |    Managée par Microsoft                             |    Managée par Microsoft                     |    Managée par le client                    |
-| Utilisation en cas de déplacement de données         |Dans une zone commerciale|Dans une zone commerciale|Dans une zone commerciale|Au-delà des frontières géographiques, par exemple USA - UE|
-|    Tarifs                          |    [Tarification](https://azure.microsoft.com/pricing/details/databox/disk/)                    |   [Tarification](https://azure.microsoft.com/pricing/details/storage/databox/)                                      |  [Tarification](https://azure.microsoft.com/pricing/details/storage/databox/heavy/)                               |   [Tarification](https://azure.microsoft.com/pricing/details/storage-import-export/)                            |
+|    **Taille des données**                    |    Jusqu’à 35 To                 |    Jusqu’à 80 To par appareil                       |    Jusqu’à 800 To par appareil               |    Variable                            |
+|    **Type de données**                    |    Objets blob Azure                  |    Objets blob Azure<br>Azure Files                    |    Objets blob Azure<br>Azure Files            |    Objets blob Azure<br>Azure Files          |
+|    **Facteur de forme**                  |    5 disques SSD par commande             |    1 x appareil de 50 lb de taille bureau par commande    |    1 x gros appareil d’environ 500 lb par commande    |    Jusqu’à 10 disques HDD/SSD par commande        |
+|    **Temps d’installation initial**           |    Faible <br>(15 minutes)            |    Faible à modéré <br> (< 30 minutes)               |    Modéré<br>(1 à 2 heures)               |    Modéré à difficile<br>(variable) |
+|    **Envoyer des données vers Azure**           |    Oui                          |    Oui                                           |    Oui                                   |    Oui                                 |
+|    **Exporter des données à partir d’Azure**       |    Non                           |    Non                                            |    Non                                    |    Oui                                 |
+|    **Chiffrement**                   |    AES 128 bits                  |    AES 256 bits                                   |    AES 256 bits                           |    AES 128 bits                         |
+|    **Matériel**                     |     Fourni par Microsoft          |    Fourni par Microsoft                            |    Fourni par Microsoft                    |    Fourni par le client                   |
+|    **Interface réseau**            |    USB 3.1/SATA                 |    RJ45, SFP+                                   |    RJ45, QSFP+                           |    SATA II/SATA III                    |
+|    **Intégration des partenaires**          |    Certains                         |    [Élevée](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/Microsoft.AzureExpressPod)                                          |    [Élevée](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/Microsoft.AzureExpressPod)                                  |    Certains                                |
+|    **Expédition**                     |    Managée par Microsoft            |    Managée par Microsoft                             |    Managée par Microsoft                     |    Managée par le client                    |
+| **Utilisation en cas de déplacement de données**     |Dans une zone commerciale|Dans une zone commerciale|Dans une zone commerciale|Au-delà des frontières géographiques, par exemple USA - UE|
+|    **Tarification**                      |    [Tarification](https://azure.microsoft.com/pricing/details/databox/disk/)                    |   [Tarification](https://azure.microsoft.com/pricing/details/storage/databox/)                                      |  [Tarification](https://azure.microsoft.com/pricing/details/storage/databox/heavy/)                               |   [Tarification](https://azure.microsoft.com/pricing/details/storage-import-export/)                            |
 
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 - Comprendre comment
 
-    - [Transférer des données avec Data Box Disk](https://docs.microsoft.com/azure/databox/data-box-disk-quickstart-portal).
-    - [Transférer des données avec Data Box](https://docs.microsoft.com/azure/databox/data-box-quickstart-portal).
-    - [Transférer des données avec Import/Export](/azure/storage/common/storage-import-export-data-to-blobs).
+    - [Transférer des données avec Data Box Disk](../../databox/data-box-disk-quickstart-portal.md).
+    - [Transférer des données avec Data Box](../../databox/data-box-quickstart-portal.md).
+    - [Transférer des données avec Import/Export](./storage-import-export-data-to-blobs.md).

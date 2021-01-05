@@ -5,16 +5,16 @@ author: mscurrell
 ms.author: markscu
 ms.date: 08/02/2018
 ms.topic: how-to
-ms.openlocfilehash: 21ae6e0a190875e3e541eb858ec38658ce191ee6
-ms.sourcegitcommit: 6fd8dbeee587fd7633571dfea46424f3c7e65169
+ms.openlocfilehash: ace3fe7aee6b9ffc7226448b455bcfea1f931458
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83726500"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85964870"
 ---
 # <a name="rendering-applications"></a>Applications de rendu
 
-Vous utilisez des applications de rendu en créant des travaux et tâches Batch. La propriété de ligne de commande de la tâche spécifie la ligne de commande et les paramètres appropriés.  Pour créer les tâches de travail, la méthode la plus simple consiste à utiliser les modèles Batch Explorer comme indiqué dans [cet article](https://docs.microsoft.com/azure/batch/batch-rendering-using#using-batch-explorer).  Les modèles peuvent être affichés et des versions modifiées peuvent être créées si nécessaire.
+Vous utilisez des applications de rendu en créant des travaux et tâches Batch. La propriété de ligne de commande de la tâche spécifie la ligne de commande et les paramètres appropriés.  Pour créer les tâches de travail, la méthode la plus simple consiste à utiliser les modèles Batch Explorer comme indiqué dans [cet article](./batch-rendering-using.md#using-batch-explorer).  Les modèles peuvent être affichés et des versions modifiées peuvent être créées si nécessaire.
 
 Cet article décrit brièvement comment exécuter chaque application de rendu.
 

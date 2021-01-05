@@ -1,6 +1,6 @@
 ### YamlMime:Landing
-title: Documentation sur l’API Ink Recognizer
-summary: Découvrez comment utiliser l’API Ink Recognizer pour intégrer la reconnaissance des entrées manuscrites à vos applications et services. L’API est un service basé sur le cloud qui utilise le Machine Learning pour reconnaître des formes et du texte manuscrits dans n’importe quel contexte.
+title: Documentation sur l’API Ink Recognizer (retirée)
+summary: La préversion de l’API Ink Recognizer a pris fin le 26 août 2020. Si vous avez des ressources Ink Recognizer, vous pouvez continuer à les utiliser jusqu’au retrait total du service le 31 janvier 2021. Découvrez comment utiliser l’API Ink Recognizer pour intégrer la reconnaissance des entrées manuscrites à vos applications et services. L’API est un service basé sur le cloud qui utilise le Machine Learning pour reconnaître des formes et du texte manuscrits dans n’importe quel contexte.
 metadata:
   title: API Ink Recognizer - Tutoriels, guides de démarrage rapide, informations de référence sur l’API
   titleSuffix: Azure Cognitive Services
@@ -13,12 +13,12 @@ metadata:
   ms.topic: landing-page
   ms.date: 09/23/2019
   ms.author: aahi
-  ms.openlocfilehash: f7e273639e5a5efd5e52517d9729bb7ba8908604
-  ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+  ms.openlocfilehash: 94f37aeb4212ed7bd3ea28d74563a943e4a660d7
+  ms.sourcegitcommit: 22da82c32accf97a82919bf50b9901668dc55c97
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 03/24/2020
-  ms.locfileid: "79415686"
+  ms.lasthandoff: 11/08/2020
+  ms.locfileid: "94365310"
 landingContent:
 - title: À propos de l’API Ink Recognizer
   linkLists:
@@ -45,11 +45,11 @@ landingContent:
   - linkListType: reference
     links:
     - text: API REST
-      url: https://go.microsoft.com/fwlink/?linkid=2089907
+      url: /rest/api/cognitiveservices/inkrecognizer/inkrecognizer
     - text: Azure PowerShell
-      url: https://docs.microsoft.com/powershell/module/az.cognitiveservices/#cognitive_services
+      url: /powershell/module/az.cognitiveservices/#cognitive_services
     - text: Azure CLI
-      url: https://docs.microsoft.com/cli/azure/cognitiveservices?view=azure-cli-latest#az-cognitiveservices-list
+      url: /cli/azure/cognitiveservices?view=azure-cli-latest#az-cognitiveservices-list
 - title: Exemples
   linkLists:
   - linkListType: learn

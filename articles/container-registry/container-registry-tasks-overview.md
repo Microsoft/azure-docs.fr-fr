@@ -2,13 +2,13 @@
 title: Vue d’ensemble d’ACR Tasks
 description: Introduction à ACR Tasks, une suite de fonctionnalités d’Azure Container Registry qui permet la création ; la gestion et la mise à jour corrective d’images de conteneur sécurisées et automatisées dans le cloud.
 ms.topic: article
-ms.date: 01/22/2020
-ms.openlocfilehash: 4fda57c1d7c866f2e6f72b04d75e53f91e995baf
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 08/12/2020
+ms.openlocfilehash: b6df415bd55979ef00f6921321dbc254ef7a7e59
+ms.sourcegitcommit: 77ab078e255034bd1a8db499eec6fe9b093a8e4f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79087283"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97562852"
 ---
 # <a name="automate-container-image-builds-and-maintenance-with-acr-tasks"></a>Automatiser la création et la maintenance des images de conteneur avec ACR Tasks
 
@@ -100,17 +100,18 @@ Pour en savoir plus sur les tâches à plusieurs étapes, consultez [Run multi-s
 
 ## <a name="context-locations"></a>Emplacements de contexte
 
-Le tableau suivant présente quelques exemples d’emplacements de contexte pris en charge pour ACR Tasks :
+Le tableau suivant présente des exemples d’emplacements de contexte pris en charge pour ACR Tasks :
 
 | Emplacement du contexte | Description | Exemple |
 | ---------------- | ----------- | ------- |
 | Système de fichiers local | Fichiers dans un répertoire sur le système de fichiers local. | `/home/user/projects/myapp` |
-| Branche principale GitHub | Fichiers dans la branche maître (ou autre branche par défaut) d’un référentiel GitHub public ou privé.  | `https://github.com/gituser/myapp-repo.git` |
+| Branche primaire GitHub | Fichiers dans la branche primaire (ou autre branche par défaut) d’un dépôt GitHub public ou privé.  | `https://github.com/gituser/myapp-repo.git` |
 | Branche GitHub | Branche spécifique d’un référentiel GitHub public ou privé.| `https://github.com/gituser/myapp-repo.git#mybranch` |
 | Sous-dossier de GitHub | Fichiers dans un sous-dossier d’un référentiel GitHub public ou privé. L’exemple affiche la combinaison de spécifications de branche et de sous-dossier. | `https://github.com/gituser/myapp-repo.git#mybranch:myfolder` |
 | Validation GitHub | Validation spécifique d’un référentiel GitHub public ou privé. L’exemple affiche la combinaison de spécifications de hachage de validation (SHA) et de sous-dossier. | `https://github.com/gituser/myapp-repo.git#git-commit-hash:myfolder` |
 | Sous-dossier Azure DevOps | Fichiers dans le sous-dossier d’un référentiel Azure public ou privé. L’exemple montre la combinaison de spécifications de branche et de sous-dossier. | `https://dev.azure.com/user/myproject/_git/myapp-repo#mybranch:myfolder` |
 | Tarball distant | Fichiers dans une archive compressée sur un serveur Web à distance. | `http://remoteserver/myapp.tar.gz` |
+| Artefact dans le registre de conteneurs | Fichiers d’[artefacts OCI](container-registry-oci-artifacts.md) dans un référentiel de registre de conteneurs. | `oci://myregistry.azurecr.io/myartifact:mytag` |
 
 > [!NOTE]
 > Lorsque vous utilisez un référentiel Git privé comme contexte pour une tâche, vous devez fournir un jeton d’accès personnel (PAT).
@@ -137,10 +138,6 @@ Lorsque vous êtes prêt à automatiser les builds et la maintenance des images 
 Si vous le souhaitez, vous pouvez installer l’[extension Docker pour Visual Studio Code](https://code.visualstudio.com/docs/azure/docker) et l’extension [Compte Azure](https://marketplace.visualstudio.com/items?itemName=ms-vscode.azure-account) pour utiliser vos registres de conteneurs Azure. Dans Visual Studio Code, vous pouvez tirer (pull) et envoyer (push) des images vers un registre de conteneurs Azure, et exécuter ACR Tasks.
 
 <!-- LINKS - External -->
-[base-alpine]: https://hub.docker.com/_/alpine/
-[base-dotnet]: https://hub.docker.com/r/microsoft/dotnet/
-[base-node]: https://hub.docker.com/_/node/
-[base-windows]: https://hub.docker.com/r/microsoft/nanoserver/
 [sample-archive]: https://github.com/Azure-Samples/acr-build-helloworld-node/archive/master.zip
 [terms-of-use]: https://azure.microsoft.com/support/legal/preview-supplemental-terms/
 

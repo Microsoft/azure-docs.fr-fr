@@ -1,13 +1,18 @@
 - name: Azure Active Directory pour les développeurs
   href: index.yml
 - name: Vue d’ensemble
-  href: v1-overview.md
+  expanded: true
+  items:
+    - name: Vue d’ensemble
+      href: v1-overview.md
+    - name: Évolution de la plateforme d’identités Microsoft
+      href: about-microsoft-identity-platform.md
+    - name: Pourquoi mettre à jour vers v2.0
+      href: azure-ad-endpoint-comparison.md
 - name: Exemples
   href: sample-v1-code.md
 - name: Concepts
   items:
-    - name: Pourquoi mettre à jour vers v2.0
-      href: azure-ad-endpoint-comparison.md
     - name: Types d’applications
       items:
         - name: Types d’applications
@@ -92,8 +97,6 @@
               href: howto-v1-enable-sso-android.md
             - name: Activer l’authentification unique sur iOS
               href: howto-v1-enable-sso-ios.md
-            - name: Déboguer l’authentification unique SAML
-              href: howto-v1-debug-saml-sso-issues.md
         - name: Configurer des revendications
           items:
             - name: Configurer des revendications de rôle
@@ -144,10 +147,8 @@
       items:
         - name: Publier sur AppSource
           href: howto-get-appsource-certified.md
-        - name: Publier sur la galerie Azure AD App
-          href: howto-app-gallery-listing.md
         - name: "Publier sur le tableau de bord vendeur Office\_365"
-          href: 'https://docs.microsoft.com/office/dev/store/use-the-seller-dashboard-to-submit-to-the-office-store'
+          href: /office/dev/store/use-the-seller-dashboard-to-submit-to-the-office-store
     - name: Azure Access Control Service
       displayName: ACS
       items:
@@ -158,7 +159,7 @@
     - name: Utiliser l’API Microsoft Graph
       href: ../develop/microsoft-graph-intro.md?toc=/azure/active-directory/azuread-dev/toc.json&bc=/azure/active-directory/azuread-dev/breadcrumb/toc.json
     - name: AD FS pour les développeurs
-      href: 'https://docs.microsoft.com/windows-server/identity/ad-fs/ad-fs-overview'
+      href: /windows-server/identity/ad-fs/ad-fs-overview
 - name: References
   items:
     - name: Bibliothèques d’authentification
@@ -176,7 +177,7 @@
   items:
     - name: Glossaire
       href: ../develop/developer-glossary.md?toc=/azure/active-directory/azuread-dev/toc.json&bc=/azure/active-directory/azuread-dev/breadcrumb/toc.json
-    - name: Videos
+    - name: Vidéos
       href: videos.md
     - name: Feuille de route Azure
       href: 'https://azure.microsoft.com/roadmap/?category=security-identity'
@@ -190,4 +191,4 @@
       displayName: 'support, help options'
       href: ../develop/developer-support-help-options.md?toc=/azure/active-directory/azuread-dev/toc.json&bc=/azure/active-directory/azuread-dev/breadcrumb/toc.json
     - name: Identités gérées pour les ressources Azure
-      href: 'https://docs.microsoft.com/azure/active-directory/managed-service-identity/overview'
+      href: ../managed-identities-azure-resources/overview.md

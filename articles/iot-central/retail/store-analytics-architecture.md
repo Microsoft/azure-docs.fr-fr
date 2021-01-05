@@ -9,15 +9,14 @@ ms.service: iot-central
 ms.subservice: iot-central-retail
 services: iot-central
 manager: eliotgra
-ms.openlocfilehash: f1f83fdd73816e6e30c5cac7d193719591bb8dc1
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 3486b636325393f9c8e96669ba3d21e7d489efee
+ms.sourcegitcommit: fa807e40d729bf066b9b81c76a0e8c5b1c03b536
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "80999017"
+ms.lasthandoff: 12/11/2020
+ms.locfileid: "97347980"
 ---
 # <a name="in-store-analytics-architecture"></a>Architecture de l'analytique en magasin
-
 
 
 Les solutions d'analytique en magasin vous permettent de surveiller différentes conditions d'un environnement de magasin de détail. Ces solutions peuvent être générées à l’aide d’un des modèles d’application dans IoT Central et de l’architecture ci-dessous.

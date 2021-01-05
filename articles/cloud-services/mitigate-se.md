@@ -1,7 +1,7 @@
 ---
 title: Conseils pour atténuer l’exécution spéculative dans Azure
 titleSuffix: Azure Cloud Services
-description: Conseils pour atténuer les vulnérabilités par canal latéral de l’exécution spéculative dans Azure.
+description: Dans cet article, apprenez dès maintenant à atténuer les vulnérabilités par canal auxiliaire de l’exécution spéculative dans Azure.
 services: cloud-services
 documentationcenter: ''
 author: cynthn
@@ -14,14 +14,14 @@ ms.tgt_pltfrm: vm-windows
 ms.topic: article
 ms.date: 11/12/2019
 ms.author: cynthn
-ms.openlocfilehash: 67f85bd7b492e9fce6b132c832e83d64e3175716
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: e785e9176ced671d87a2e9008adb09601b3e1b6e
+ms.sourcegitcommit: 32c521a2ef396d121e71ba682e098092ac673b30
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "75385507"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91316713"
 ---
-# <a name="guidance-for-mitigating-speculative-execution-side-channel-vulnerabilities-in-azure"></a>Conseils pour atténuer les vulnérabilités par canal latéral de l’exécution spéculative dans Azure
+# <a name="guidance-to-mitigate-speculative-execution-side-channel-vulnerabilities-in-azure"></a>Conseils pour atténuer les vulnérabilités par canal latéral de l’exécution spéculative dans Azure
 
 [!INCLUDE [virtual-machines-common-mitigate-se](../../includes/virtual-machines-common-mitigate-se.md)]
 

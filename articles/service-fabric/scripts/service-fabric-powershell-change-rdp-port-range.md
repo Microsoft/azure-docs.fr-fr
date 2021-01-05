@@ -9,13 +9,12 @@ ms.service: service-fabric
 ms.workload: multiple
 ms.topic: sample
 ms.date: 03/19/2018
-ms.custom: sfrev
-ms.openlocfilehash: b3d922cb5a7cdf34e63731ab32f21c94d7b6bca0
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 750a2100d34e02cac7c613cc6b95160fc348b535
+ms.sourcegitcommit: 16c7fd8fe944ece07b6cf42a9c0e82b057900662
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "76025005"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96576364"
 ---
 # <a name="update-the-rdp-port-range-values"></a>Mettre à jour les valeurs de la plage de ports RDP
 
@@ -23,7 +22,7 @@ Cet exemple de script change les valeurs de la plage de ports RDP sur les machin
 
 [!INCLUDE [updated-for-az](../../../includes/updated-for-az.md)]
 
-Si nécessaire, installez Azure PowerShell à l’aide des instructions figurant dans le [Guide Azure PowerShell](/powershell/azure/overview).
+Si nécessaire, installez Azure PowerShell à l’aide des instructions figurant dans le [Guide Azure PowerShell](/powershell/azure/).
 
 ## <a name="sample-script"></a>Exemple de script
 
@@ -40,6 +39,6 @@ Ce script utilise les commandes suivantes. Chaque commande du tableau renvoie à
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour plus d’informations sur le module Azure PowerShell, consultez [Documentation Azure PowerShell](/powershell/azure/overview).
+Pour plus d’informations sur le module Azure PowerShell, consultez [Documentation Azure PowerShell](/powershell/azure/).
 
 Vous trouverez des exemples supplémentaires de scripts Azure PowerShell pour Azure Service Fabric sur la page [Azure PowerShell Samples](../service-fabric-powershell-samples.md) (Exemples Azure PowerShell).

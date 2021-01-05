@@ -1,6 +1,6 @@
 ---
 title: Exemple de script Azure CLI - Filtrer le trafic réseau de machine virtuelle | Microsoft Docs
-description: Exemple de script Azure CLI - Filtrer le trafic réseau de machine virtuelle entrant et sortant
+description: Utilisez un script Azure CLI pour filtrer le trafic réseau de machine virtuelle entrant et sortant avec des sous-réseaux frontaux et principaux.
 services: virtual-network
 documentationcenter: virtual-network
 author: KumudD
@@ -11,14 +11,14 @@ ms.tgt_pltfrm: ''
 ms.workload: infrastructure
 ms.date: 07/07/2017
 ms.author: kumud
-ms.openlocfilehash: e91e59e8e8acbf76ed35cff6b2f654103bb763b5
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 61f2441d68954a167b9887a4dfd4b99a53c14166
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "73888571"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88037216"
 ---
-# <a name="filter-inbound-and-outbound-vm-network-traffic"></a>Filtrer le trafic réseau de machine virtuelle entrant et sortant
+# <a name="use-an-azure-cli-script-to-filter-inbound-and-outbound-vm-network-traffic"></a>Utiliser un script Azure CLI pour filtrer le trafic réseau de machine virtuelle entrant et sortant
 
 Cet exemple de script permet de créer un réseau virtuel avec des sous-réseaux frontaux et principaux. Le trafic réseau entrant vers le sous-réseau frontal est limité à HTTP, HTTPS et SSH, tandis que le trafic sortant vers Internet à partir du sous-réseau principal n’est pas autorisé. Après avoir exécuté le script, vous disposerez d’une machine virtuelle avec deux cartes réseau. Chacune est connectée à un sous-réseau différent.
 

@@ -1,22 +1,22 @@
 ---
 title: Exemple de script Azure PowerShell - Configurer un VPN entre des réseaux virtuels | Microsoft Docs
-description: Configurez un VPN de site à site.
+description: Découvrez comment utiliser un script PowerShell pour configurer une connexion de passerelle VPN de réseau virtuel à réseau virtuel site à site.
 services: vpn-gateway
 documentationcenter: vpn-gateway
-author: anzaman
+author: kumudD
 ms.service: vpn-gateway
 ms.devlang: powershell
 ms.topic: sample
 ms.date: 01/09/2020
 ms.author: alzam
-ms.openlocfilehash: a4d23f34553881b6425514572f9122edf693a57a
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 949c2b7810bc6b4f5a80b9932427f4aa3565794e
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "75862218"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88030357"
 ---
-# <a name="configure-a-vnet-to-vnet-vpn-gateway-connection-using-powershell"></a>Configurer une connexion de passerelle VPN de réseau virtuel à réseau virtuel à l’aide de PowerShell
+# <a name="use-powershell-to-configure-a-vnet-to-vnet-vpn-gateway-connection"></a>Utiliser PowerShell pour configurer une connexion de passerelle VPN entre des réseaux virtuels
 
 Ce script permet de connecter deux réseaux virtuels à l’aide d’un type de connexion de réseau virtuel à réseau virtuel.
 
@@ -167,4 +167,4 @@ Ce script a recours aux commandes suivantes pour créer le déploiement. Chaque 
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour plus d’informations sur le module Azure PowerShell, consultez [Documentation Azure PowerShell](/powershell/azure/overview).
+Pour plus d’informations sur le module Azure PowerShell, consultez [Documentation Azure PowerShell](/powershell/azure/).

@@ -7,12 +7,12 @@ ms.topic: conceptual
 ms.date: 10/16/2019
 ms.author: rogarana
 ms.subservice: files
-ms.openlocfilehash: 46c46faf8f7ee52978ae5542ab7ebd72a41b8357
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 43d593a65fd08542eb2829fcebcea81ea0c99986
+ms.sourcegitcommit: 83610f637914f09d2a87b98ae7a6ae92122a02f1
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81536430"
+ms.lasthandoff: 10/13/2020
+ms.locfileid: "91995438"
 ---
 # <a name="azure-files-scalability-and-performance-targets"></a>Objectifs de performance et d’extensibilité d'Azure Files
 
@@ -74,7 +74,7 @@ Pour Azure File Sync, les performances sont essentielles dans deux phases :
 
 Pour vous aider à planifier votre déploiement pour chacune des phases, voici les résultats observés durant le test interne sur un système avec une configuration
 
-| Configuration système |  |
+| Configuration système | Détails |
 |-|-|
 | UC | 64 cœurs virtuels avec cache L3 64 MiB |
 | Mémoire | 128 Go |
@@ -82,17 +82,26 @@ Pour vous aider à planifier votre déploiement pour chacune des phases, voici l
 | Réseau | Réseau 1 Gbit/s |
 | Charge de travail | Serveur de fichiers à usage général|
 
-| Provisionnement initial unique  |  |
+| Provisionnement initial unique  | Détails |
 |-|-|
 | Nombre d’objets | 25 millions d’objets |
 | Taille du jeu de données| ~4,7 Tio |
 | Taille de fichier moyenne | ~200 Kio (plus gros fichier : 100 Gio) |
+| Énumération initiale des modifications cloud | 7 objets par seconde  |
 | Débit de chargement | 20 objets par seconde par groupe de synchronisation |
-| Débit de téléchargement d’espace de noms* | 400 objets par seconde |
+| Débit de téléchargement d’espace de noms | 400 objets par seconde |
 
-*Quand un point de terminaison de serveur est créé, l’agent Azure File Sync ne télécharge pas le contenu du fichier. Il synchronise d’abord l’espace de noms complet, puis déclenche un rappel en arrière-plan pour télécharger les fichiers dans leur intégralité ou, si la hiérarchisation cloud est activée, sur la stratégie de hiérarchisation de cloud définie sur le point de terminaison.
+### <a name="initial-one-time-provisioning"></a>Provisionnement initial unique
 
-| Synchronisation continue  |   |
+**Énumération initiale des modifications cloud** : Lors de la création d’un groupe de synchronisation, l’énumération initiale des modifications cloud est la première étape qui s’exécutera. Dans ce processus, le système énumère tous les éléments du partage de fichiers Azure. Pendant ce processus, il n’y aura aucune activité de synchronisation, c’est-à-dire qu’aucun élément ne sera téléchargé du point de terminaison cloud vers le point de terminaison de serveur et qu’aucun élément ne sera chargé du point de terminaison de serveur vers le point de terminaison cloud. L’activité de synchronisation reprendra une fois l’énumération initiale des modifications cloud terminée.
+Le taux de performances est de sept objets par seconde. Les clients peuvent estimer le temps nécessaire pour effectuer l’énumération initiale des modifications cloud en déterminant le nombre d’éléments dans le partage cloud et en utilisant les formules suivantes pour obtenir la durée en jours. 
+
+   **Durée (en jours) de l’énumération initiale des modifications cloud = (Nombre d’objets dans le point de terminaison cloud)/(7 * 60 * 60 * 24)**
+
+**Débit de téléchargement d’espace de noms** : Lorsqu’un nouveau point de terminaison de serveur est ajouté à un groupe de synchronisation existant, l’agent Azure File Sync ne télécharge aucun contenu de fichier à partir du point de terminaison cloud. Il synchronise d’abord l’espace de noms complet, puis déclenche un rappel en arrière-plan pour télécharger les fichiers dans leur intégralité ou, si la hiérarchisation cloud est activée, sur la stratégie de hiérarchisation de cloud définie sur le point de terminaison.
+
+
+| Synchronisation continue  | Détails  |
 |-|--|
 | Nombre d’objets synchronisés| 125 000 objets (variation ~1 %) |
 | Taille du jeu de données| 50 GiB |

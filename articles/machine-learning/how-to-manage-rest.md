@@ -1,26 +1,27 @@
 ---
 title: Utiliser REST pour gérer des ressources ML
 titleSuffix: Azure Machine Learning
-description: Comment utiliser des API REST pour créer, exécuter et supprimer des ressources Azure ML
+description: Comment utiliser des API REST pour créer, exécuter et supprimer des ressources Azure Machine Learning, telles qu’un espace de travail, ou enregistrer des modèles.
 author: lobrien
 ms.author: laobri
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: core
-ms.topic: conceptual
 ms.date: 01/31/2020
-ms.openlocfilehash: 419dbd998abc5cbd2da64a990e13d46f3fb2efbe
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.topic: conceptual
+ms.custom: how-to, devx-track-python
+ms.openlocfilehash: 09a0580adbe6d51e4de811a57ee17203d65a2435
+ms.sourcegitcommit: 96918333d87f4029d4d6af7ac44635c833abb3da
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77580626"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93316901"
 ---
 # <a name="create-run-and-delete-azure-ml-resources-using-rest"></a>Créer, exécuter et supprimer des ressources Azure ML à l’aide de REST
 
-[!INCLUDE [applies-to-skus](../../includes/aml-applies-to-basic-enterprise-sku.md)]
 
-Il existe plusieurs façons de gérer vos ressources Azure ML. Vous pouvez utiliser le [portail](https://portal.azure.com/), l’[interface de ligne de commande](https://docs.microsoft.com/cli/azure/?view=azure-cli-latest) ou le [Kit de développement logiciel (SDK) Python](https://docs.microsoft.com/python/api/overview/azure/ml/intro?view=azure-ml-py). Ou vous pouvez choisir l’API REST. L’API REST utilise des verbes HTTP de manière standard pour créer, récupérer, mettre à jour et supprimer des ressources. L’API REST fonctionne avec tout langage de programmation ou outil pouvant effectuer des requêtes HTTP. La structure simple de REST en fait souvent un bon choix dans les environnements de script et pour l’automatisation MLOps. 
+
+Il existe plusieurs façons de gérer vos ressources Azure ML. Vous pouvez utiliser le [portail](https://portal.azure.com/), l’[interface de ligne de commande](/cli/azure/?preserve-view=true&view=azure-cli-latest) ou le [Kit de développement logiciel (SDK) Python](/python/api/overview/azure/ml/intro?preserve-view=true&view=azure-ml-py). Ou vous pouvez choisir l’API REST. L’API REST utilise des verbes HTTP de manière standard pour créer, récupérer, mettre à jour et supprimer des ressources. L’API REST fonctionne avec tout langage de programmation ou outil pouvant effectuer des requêtes HTTP. La structure simple de REST en fait souvent un bon choix dans les environnements de script et pour l’automatisation MLOps. 
 
 Dans cet article, vous apprendrez comment :
 
@@ -35,9 +36,9 @@ Dans cet article, vous apprendrez comment :
 ## <a name="prerequisites"></a>Conditions préalables requises
 
 - Un **abonnement Azure** pour lequel vous disposez de droits d’administration. Si vous n’avez pas d’abonnement de ce type, essayez l’[abonnement personnel gratuit ou payant](https://aka.ms/AMLFree)
-- Un [espace de travail Azure Machine Learning](https://docs.microsoft.com/azure/machine-learning/how-to-manage-workspace)
-- Les requêtes REST administratives utilisent l’authentification du principal de service. Suivez les étapes décrites dans [Configurer l’authentification pour des ressources et workflows Azure Machine Learning](https://docs.microsoft.com/azure/machine-learning/how-to-setup-authentication#set-up-service-principal-authentication) pour créer un principal de service dans votre espace de travail.
-- L’utilitaire **curl**. Le programme **curl** est disponible dans le [Sous-système Windows pour Linux](https://aka.ms/wslinstall/) ou dans toute distribution UNIX. Dans PowerShell, **curl** est un alias pour **Invoke-WebRequest** et `curl -d "key=val" -X POST uri` devient `Invoke-WebRequest -Body "key=val" -Method POST -Uri uri`. 
+- Un [espace de travail Azure Machine Learning](./how-to-manage-workspace.md)
+- Les requêtes REST administratives utilisent l’authentification du principal de service. Suivez les étapes décrites dans [Configurer l’authentification pour des ressources et workflows Azure Machine Learning](./how-to-setup-authentication.md#service-principal-authentication) pour créer un principal de service dans votre espace de travail.
+- L’utilitaire **curl**. Le programme **curl** est disponible dans le [Sous-système Windows pour Linux](/windows/wsl/install-win10) ou dans toute distribution UNIX. Dans PowerShell, **curl** est un alias pour **Invoke-WebRequest** et `curl -d "key=val" -X POST uri` devient `Invoke-WebRequest -Body "key=val" -Method POST -Uri uri`. 
 
 ## <a name="retrieve-a-service-principal-authentication-token"></a>Récupérer un jeton d’authentification du principal de service
 
@@ -47,7 +48,7 @@ Les requêtes REST administratives sont authentifiées à l’aide d’un flux i
 - Votre ID client (qui sera associé au jeton créé)
 - Votre clé secrète client (que vous devez protéger)
 
-Vous devez obtenir ces valeurs à partir de la réponse à la création de votre principal de service, comme indiqué dans [Configurer l’authentification pour des ressources et workflows Azure Machine Learning](https://docs.microsoft.com/azure/machine-learning/how-to-setup-authentication#set-up-service-principal-authentication). Si vous utilisez l’abonnement de votre entreprise, vous n’êtes peut-être pas autorisé à créer un principal de service. Dans ce cas, vous devez utiliser une [abonnement personnel gratuit ou payant](https://aka.ms/AMLFree).
+Vous devez avoir obtenu ces valeurs dans la réponse à la création de votre principal de service. L’obtention de ces valeurs est documentée dans [Configurer l’authentification pour des ressources et workflows Azure Machine Learning](./how-to-setup-authentication.md#service-principal-authentication). Si vous utilisez l’abonnement de votre entreprise, vous n’êtes peut-être pas autorisé à créer un principal de service. Dans ce cas, vous devez utiliser une [abonnement personnel gratuit ou payant](https://aka.ms/AMLFree).
 
 Pour récupérer un jeton :
 
@@ -199,15 +200,15 @@ providers/Microsoft.MachineLearningServices/workspaces/{your-workspace-name}/mod
 -H "Authorization:Bearer {your-access-token}"
 ```
 
-Notez que pour répertorier les expériences, le chemin d’accès commence par `history/v1.0`, tandis que pour répertorier les modèles, le chemin d’accès commence par `modelmanagement/v1.0`. L’API REST est divisée en plusieurs groupes opérationnels, chacun doté d’un chemin d’accès distinct. Les documents de référence sur les API accessibles à l’aide des liens ci-dessous répertorient les opérations, les paramètres et les codes de réponse pour les différentes opérations.
+Notez que pour répertorier les expériences, le chemin d’accès commence par `history/v1.0`, tandis que pour répertorier les modèles, le chemin d’accès commence par `modelmanagement/v1.0`. L’API REST est divisée en plusieurs groupes opérationnels, chacun doté d’un chemin d’accès distinct. 
 
-|Domaine|Path|Informations de référence|
-|-|-|-|
-|Artefacts|artifact/v2.0/|[Référence d’API REST](https://docs.microsoft.com/rest/api/azureml/artifacts)|
-|Magasins de données|datastore/v1.0/|[Référence d’API REST](https://docs.microsoft.com/rest/api/azureml/datastores)|
-|Optimisation des hyperparamètres|hyperdrive/v1.0/|[Référence d’API REST](https://docs.microsoft.com/rest/api/azureml/hyperparametertuning)|
-|Modèles|modelmanagement/v1.0/|[Référence d’API REST](https://docs.microsoft.com/rest/api/azureml/modelsanddeployments/mlmodels)|
-|Historique d’exécution|execution/v1.0/ et history/v1.0/|[Référence d’API REST](https://docs.microsoft.com/rest/api/azureml/runs)|
+|Domaine|Path|
+|-|-|
+|Artefacts|/rest/api/azureml|
+|Magasins de données|/azure/machine-learning/how-to-access-data|
+|Optimisation des hyperparamètres|hyperdrive/v1.0/|
+|Modèles|modelmanagement/v1.0/|
+|Historique d’exécution|execution/v1.0/ et history/v1.0/|
 
 Vous pouvez explorer l’API REST à l’aide du modèle général de :
 
@@ -235,7 +236,7 @@ providers/Microsoft.MachineLearningServices/workspaces/{your-workspace-name}/com
 -H "Authorization:Bearer {your-access-token}"
 ```
 
-Pour créer ou remplacer une ressource de calcul nommée, vous utiliserez une requête PUT. Dans ce qui suit, outre les substitutions familières des éléments `your-subscription-id`, `your-resource-group`, `your-workspace-name` et `your-access-token`, remplacez `your-compute-name` ainsi que les valeurs pour `location`, `vmSize`, `vmPriority`, `scaleSettings`, `adminUserName` et `adminUserPassword`. Comme indiqué dans la référence à [Capacité de calcul Machine Learning : créer ou mettre à jour la référence du Kit de développement logiciel (SDK)](https://docs.microsoft.com/rest/api/azureml/workspacesandcomputes/machinelearningcompute/createorupdate), la commande suivante crée une ressource Standard_D1 dédiée à nœud unique (ressource de calcul de base de l’UC) qui descendra en puissance après 30 minutes :
+Pour créer ou remplacer une ressource de calcul nommée, vous utiliserez une requête PUT. Dans ce qui suit, outre les substitutions familières des éléments `your-subscription-id`, `your-resource-group`, `your-workspace-name` et `your-access-token`, remplacez `your-compute-name` ainsi que les valeurs pour `location`, `vmSize`, `vmPriority`, `scaleSettings`, `adminUserName` et `adminUserPassword`. Comme indiqué dans la référence à [Capacité de calcul Machine Learning : créer ou mettre à jour la référence du Kit de développement logiciel (SDK)](/rest/api/azureml/workspacesandcomputes/machinelearningcompute/createorupdate), la commande suivante crée une ressource Standard_D1 dédiée à nœud unique (ressource de calcul de base de l’UC) qui descendra en puissance après 30 minutes :
 
 ```bash
 curl -X PUT \
@@ -348,7 +349,7 @@ curl 'https://{regional-api-server}/history/v1.0/subscriptions/{your-subscriptio
 
 ### <a name="delete-resources-you-no-longer-need"></a>Supprimer les ressources dont vous n’avez plus besoin
 
-Certaines ressources, mais pas toutes, prennent en charge le verbe DELETE. Vérifiez les [informations de référence sur l’API](https://docs.microsoft.com/rest/api/azureml/) avant de valider l’API REST pour les cas d’utilisation en suppression. Par exemple, pour supprimer un modèle, vous pouvez utiliser :
+Certaines ressources, mais pas toutes, prennent en charge le verbe DELETE. Vérifiez les [informations de référence sur l’API](/rest/api/azureml/) avant de valider l’API REST pour les cas d’utilisation en suppression. Par exemple, pour supprimer un modèle, vous pouvez utiliser :
 
 ```bash
 curl
@@ -421,6 +422,6 @@ L'espace de travail Azure Machine Learning utilise Azure Container Registry (ACR
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- Explorez la [documentation complète de l’API REST AzureML](https://docs.microsoft.com/rest/api/azureml/).
-- Découvrez comment utiliser le studio et le concepteur pour [prédire le prix de voitures avec le concepteur (préversion)](https://docs.microsoft.com/azure/machine-learning/tutorial-designer-automobile-price-train-score).
-- Explorez [Azure Machine Learning avec des notebooks Jupyter](https://docs.microsoft.com/azure//machine-learning/samples-notebooks).
+- Explorez la [documentation complète de l’API REST AzureML](/rest/api/azureml/).
+- Découvrez comment utiliser le concepteur pour [prédire le prix de voitures avec le concepteur](./tutorial-designer-automobile-price-train-score.md).
+- Explorez [Azure Machine Learning avec des notebooks Jupyter](..//machine-learning/samples-notebooks.md).

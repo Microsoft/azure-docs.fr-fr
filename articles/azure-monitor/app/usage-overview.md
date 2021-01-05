@@ -3,24 +3,26 @@ title: Analyse de l’usage avec Azure Application Insights | Microsoft Docs
 description: Comprenez vos utilisateurs et ce qu’ils font avec votre application.
 ms.topic: conceptual
 ms.date: 03/25/2019
-ms.openlocfilehash: 7f4f46f183291684fa59e5aa35b65c8ac3352563
-ms.sourcegitcommit: cf7caaf1e42f1420e1491e3616cc989d504f0902
+ms.openlocfilehash: 4f4954451bfa195b07c580ffa451b8cb333eb32c
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/22/2020
-ms.locfileid: "83797790"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90532101"
 ---
 # <a name="usage-analysis-with-application-insights"></a>Analyse de l'utilisation avec Application Insights
 
-Quelles sont les fonctionnalités de votre application web ou mobile les plus populaires ? Vos utilisateurs atteignent-ils leurs objectifs avec votre application ? Disparaissent-ils à des stades spécifiques, et reviennent-ils plus tard ?  [Azure Application Insights](../../azure-monitor/app/app-insights-overview.md) vous permet d’obtenir des insights utiles sur l’utilisation de votre application. Chaque fois que vous mettez à jour votre application, vous pouvez évaluer son bon fonctionnement pour les utilisateurs. Grâce à ces informations, vous pouvez prendre des décisions basées sur des données sur les cycles de développement suivants.
+Quelles sont les fonctionnalités de votre application web ou mobile les plus populaires ? Vos utilisateurs atteignent-ils leurs objectifs avec votre application ? Disparaissent-ils à des stades spécifiques, et reviennent-ils plus tard ?  [Azure Application Insights](./app-insights-overview.md) vous permet d’obtenir des insights utiles sur l’utilisation de votre application. Chaque fois que vous mettez à jour votre application, vous pouvez évaluer son bon fonctionnement pour les utilisateurs. Grâce à ces informations, vous pouvez prendre des décisions basées sur des données sur les cycles de développement suivants.
+
+> [!VIDEO https://www.microsoft.com/en-us/videoplayer/embed/RE4Cijb]
 
 ## <a name="send-telemetry-from-your-app"></a>Envoyer des données de télémétrie à partir de votre application
 
 La meilleure expérience est obtenue en installant Application Insights à la fois dans votre code serveur d’applications et dans vos pages web. Les composants client et serveur de votre application envoient la télémétrie au portail Azure pour analyse.
 
-1. **Code serveur :** installez le module approprié pour votre [ASP.NET](../../azure-monitor/app/asp-net.md), [Azure](../../azure-monitor/app/app-insights-overview.md), [Java](../../azure-monitor/app/java-get-started.md), [Node.js](../../azure-monitor/app/nodejs.md) ou une [autre](../../azure-monitor/app/platforms.md) application.
+1. **Code serveur :** installez le module approprié pour votre [ASP.NET](./asp-net.md), [Azure](./app-insights-overview.md), [Java](./java-get-started.md), [Node.js](./nodejs.md) ou une [autre](./platforms.md) application.
 
-    * *Vous ne voulez pas installer de code serveur ? Vous pouvez simplement [créer une ressource Azure Application Insights](../../azure-monitor/app/create-new-resource.md ).*
+    * *Vous ne voulez pas installer de code serveur ? Vous pouvez simplement [créer une ressource Azure Application Insights](./create-new-resource.md).*
 
 2. **Code de page web :** ajoutez le script suivant à votre page web avant la balise ``</head>`` de fermeture. Remplacez la clé d’instrumentation par la valeur appropriée pour votre ressource Application Insights :
     
@@ -34,9 +36,9 @@ La meilleure expérience est obtenue en installant Application Insights à la fo
     </script>
     ```
 
-    Pour en savoir plus les configurations plus complexes pour la supervision des sites web, consultez l’[article de référence du SDK JavaScript](https://docs.microsoft.com/azure/azure-monitor/app/javascript).
+    Pour en savoir plus les configurations plus complexes pour la supervision des sites web, consultez l’[article de référence du SDK JavaScript](./javascript.md).
 
-3. **Code de l’application mobile :** utilisez le SDK App Center pour collecter les événements à partir de votre application, puis envoyer des copies de ces événements à Application Insights pour analyse en [suivant ce guide](../../azure-monitor/learn/mobile-center-quickstart.md).
+3. **Code de l’application mobile :** utilisez le SDK App Center pour collecter les événements à partir de votre application, puis envoyer des copies de ces événements à Application Insights pour analyse en [suivant ce guide](../learn/mobile-center-quickstart.md).
 
 4. **Obtenir la télémétrie :** exécutez votre projet en mode débogage pendant quelques minutes, puis examinez les résultats dans le panneau Vue d’ensemble dans Application Insights.
 
@@ -45,14 +47,14 @@ La meilleure expérience est obtenue en installant Application Insights à la fo
 ## <a name="include-user-and-session-id-in-your-telemetry"></a>Inclure l’ID d’utilisateur et l’ID de session dans votre télémétrie
 Pour effectuer le suivi des utilisateurs au fil du temps, Application Insights nécessite un moyen de les identifier. L’outil Événements est le seul outil d’utilisation qui ne nécessite pas d’ID d’utilisateur ni d’ID de session.
 
-Démarrer l’envoi des ID d’utilisateur et de session à l’aide de [ce processus](https://docs.microsoft.com/azure/application-insights/app-insights-usage-send-user-context).
+Démarrer l’envoi des ID d’utilisateur et de session à l’aide de [ce processus](./usage-send-user-context.md).
 
 ## <a name="explore-usage-demographics-and-statistics"></a>Explorer des données démographiques et des statistiques de l’utilisation
 Découvrez quand des personnes utilisent votre application, les pages qui les intéressent le plus, où vos utilisateurs se trouvent, les navigateurs et les systèmes d’exploitation qu’ils utilisent. 
 
 Les rapports Utilisateurs et sessions filtrent vos données par pages ou événements personnalisés, et les segmentent par propriétés telles que l’emplacement, l’environnement et la page. Vous pouvez également ajouter vos propres filtres.
 
-![Utilisateurs](./media/usage-overview/users.png)  
+![Capture d’écran montrant la page Vue d’ensemble des utilisateurs pour une société fictive.](./media/usage-overview/users.png)  
 
 Aperçu des modèles intéressants appropriés dans le jeu de données.  
 
@@ -69,7 +71,7 @@ La rétention vous permet de comprendre la fréquence à laquelle vos utilisateu
 - Formuler des hypothèses en fonction des données utilisateur réel 
 - Déterminer si la rétention est un problème dans votre produit 
 
-![Rétention](./media/usage-overview/retention.png) 
+![Capture d’écran montrant la page Vue d’ensemble de la rétention avec des informations sur la fréquence à laquelle les utilisateurs reviennent pour utiliser leur application.](./media/usage-overview/retention.png) 
 
 Les commandes de rétention en haut vous permettent de définir des événements spécifiques et un intervalle de temps pour calculer la rétention. Le graphique au centre fournit une représentation visuelle du pourcentage de rétention globale sur l’intervalle de temps spécifié. Le graphique en bas représente la rétention sur une période de temps donnée. Ce niveau de détail vous permet de comprendre de manière plus approfondie ce que font vos utilisateurs et ce qui les peut amener à revenir.  
 
@@ -103,12 +105,12 @@ Ou du côté serveur :
 
 Vous pouvez joindre des valeurs de propriété à ces événements, afin de pouvoir filtrer ou fractionner les événements lorsque vous les étudiez dans le portail. Un ensemble standard de propriétés est également associé à chaque événement, comme des ID d’utilisateur anonymes, vous permettant ainsi de suivre la séquence d’activités d’un utilisateur.
 
-En savoir plus sur les [événements personnalisés](../../azure-monitor/app/api-custom-events-metrics.md#trackevent) et les [propriétés](../../azure-monitor/app/api-custom-events-metrics.md#properties).
+En savoir plus sur les [événements personnalisés](./api-custom-events-metrics.md#trackevent) et les [propriétés](./api-custom-events-metrics.md#properties).
 
 ### <a name="slice-and-dice-events"></a>Segmenter et traiter les événements
 
 Dans les outils Utilisateurs, Sessions et Événements, vous pouvez segmenter et traiter des événements personnalisés par utilisateur, nom d’événement et propriétés.
-![Utilisateurs](./media/usage-overview/users.png)  
+![Capture d’écran montrant la page Vue d’ensemble des utilisateurs pour une société fictive.](./media/usage-overview/users.png)  
   
 ## <a name="design-the-telemetry-with-the-app"></a>Concevoir la télémétrie avec l’application
 
@@ -121,7 +123,7 @@ Pour cette technique, vous joignez des valeurs de propriétés distinctes à tou
 
 Dans le portail Application Insights, filtrez et segmentez vos données sur les valeurs de propriétés, afin de comparer les différentes versions.
 
-Pour ce faire, [configurez un initialiseur de télémétrie](../../azure-monitor/app/api-filtering-sampling.md#addmodify-properties-itelemetryinitializer) :
+Pour ce faire, [configurez un initialiseur de télémétrie](./api-filtering-sampling.md#addmodify-properties-itelemetryinitializer) :
 
 **Applications ASP.NET**
 
@@ -175,5 +177,6 @@ Tous les nouveaux TelemetryClients ajoutent automatiquement la valeur de propri�
    - [Entonnoirs](usage-funnels.md)
    - [Rétention](usage-retention.md)
    - [Flux d’utilisateurs](usage-flows.md)
-   - [Classeurs](../../azure-monitor/platform/workbooks-overview.md)
+   - [Classeurs](../platform/workbooks-overview.md)
    - [Ajouter du contexte utilisateur](usage-send-user-context.md)
+

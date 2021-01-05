@@ -7,14 +7,20 @@ ms.service: container-service
 ms.topic: conceptual
 ms.date: 12/05/2019
 keywords: aro, openshift, aquasec, twistlock, red hat
-ms.openlocfilehash: e1c1dd9f27a207f78dd22e271f6b070c7f92f622
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 914b29410a0f30e5c3d3a893c2e278ecbb83b648
+ms.sourcegitcommit: 8d8deb9a406165de5050522681b782fb2917762d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78271372"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92218865"
 ---
 # <a name="run-privileged-containers-in-an-azure-red-hat-openshift-cluster"></a>Gérer des conteneurs privilégiés dans un cluster Azure Red Hat OpenShift
+
+> [!IMPORTANT]
+> Azure Red Hat OpenShift 3.11 sera mis hors service le 30 juin 2022. La prise en charge de la création de nouveaux clusters Azure Red Hat OpenShift 3.11 se poursuit jusqu’au 30 novembre 2020. Après la mise hors service, les clusters Azure Red Hat OpenShift 3.11 restants seront arrêtés pour éviter des failles de sécurité.
+> 
+> Suivez ce guide pour [créer un cluster Azure Red Hat OpenShift 4](tutorial-create-cluster.md).
+> Si vous avez des questions spécifiques, n’hésitez pas à [nous contacter](mailto:arofeedback@microsoft.com).
 
 Vous ne pouvez pas exécuter de conteneurs privilégiés sur les clusters Azure Red Hat OpenShift.
 Deux solutions de supervision et de conformité de la sécurité sont autorisées à s’exécuter sur les clusters ARO.
@@ -53,7 +59,7 @@ oc annotate scc hostaccess openshift.io/reconcile-protect=true
 oc annotate scc privileged openshift.io/reconcile-protect=true
 ```
 
-### <a name="step-1-prepare-prerequisites"></a>Étape 1 : Préparer les prérequis
+### <a name="step-1-prepare-prerequisites"></a>Étape 1 : Préparer les prérequis
 N’oubliez pas de vous connecter au cluster en tant qu’administrateur de client ARO, et non à l’aide du rôle administrateur de cluster.
 
 Créez le projet et le compte de service.
@@ -115,7 +121,7 @@ Définissez les champs suivants lors du déploiement des enforcers :
 | -------------- | ------------- |
 | Un orchestrateur   | OpenShift     |
 | ServiceAccount | aqua-account  |
-| Projet        | aqua-security |
+| Project        | aqua-security |
 
 ## <a name="product-specific-steps-for-prisma-cloud--twistlock"></a>Étapes propres au produit pour Prisma Cloud/Twistlock
 
@@ -128,7 +134,7 @@ Créer un projet OpenShift
 oc new-project twistlock
 ```
 
-Ignorez la section facultative « Push the Prisma Cloud images to a private registry ». Elle n’est pas applicable à Azure Red Hat Openshift. Utilisez le registre en ligne à la place.
+Ignorez la section facultative « Push the Prisma Cloud images to a private registry ». Elle n’est pas applicable à Azure Red Hat OpenShift. Utilisez le registre en ligne à la place.
 
 Vous pouvez suivre la documentation officielle tout en appliquant les corrections décrites ci-dessous.
 Commencez par la section « Installer la console ».

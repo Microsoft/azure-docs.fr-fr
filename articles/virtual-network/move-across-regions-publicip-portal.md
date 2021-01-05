@@ -1,24 +1,24 @@
 ---
-title: Déplacer une adresse IP publique Azure vers une autre région Azure à l’aide du Portail Azure
-description: Utilisez un modèle Azure Resource Manager pour déplacer une adresse IP publique d’une région Azure vers une autre à l’aide du Portail Azure.
+title: Déplacer la configuration des adresses IP publiques Azure vers une autre région Azure via Portail Azure
+description: Utilisez un modèle pour déplacer la configuration des adresses IP publiques d’une région Azure vers une autre à l’aide du portail Azure.
 author: asudbring
 ms.service: virtual-network
 ms.subservice: ip-services
-ms.topic: article
+ms.topic: how-to
 ms.date: 08/29/2019
 ms.author: allensu
-ms.openlocfilehash: 6dd4b3279fc0110fff2ee0397a785c87b63644d6
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 23fe515ddfdecb9ef168dd662e3fa2d91ece688f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82147825"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "84711474"
 ---
-# <a name="move-azure-public-ip-to-another-region-using-the-azure-portal"></a>Déplacer une adresse IP publique Azure vers une autre région à l’aide du Portail Azure
+# <a name="move-azure-public-ip-configuration-to-another-region-using-the-azure-portal"></a>Déplacer la configuration des adresses IP publiques Azure vers une autre région à l’aide du portail Azure
 
-Il existe différents scénarios dans lesquels vous pouvez être amené à déplacer vos adresses IP publiques Azure existantes d’une région à une autre. Par exemple, vous pouvez avoir besoin de créer une adresse IP publique avec la même configuration et la même référence SKU à des fins de test. Vous pouvez également déplacer une adresse IP publique vers une autre région dans le cadre de la planification de la reprise d’activité après sinistre.
+Il existe différents scénarios dans lesquels vous pouvez être amené à déplacer les configurations de vos adresses IP publiques Azure existantes d’une région à une autre. Par exemple, vous pouvez avoir besoin de créer une adresse IP publique avec la même configuration et la même référence SKU à des fins de test. Vous pouvez également déplacer une configuration d’adresse IP publique vers une autre région dans le cadre de la planification de la récupération d’urgence.
 
-Les adresses IP publiques Azure sont spécifiques à une région et ne peuvent pas être déplacées d’une région vers une autre. Toutefois, vous pouvez utiliser un modèle Azure Resource Manager pour exporter la configuration existante d’une adresse IP publique.  Vous pouvez ensuite déplacer la ressource dans une autre région en exportant l’adresse IP publique vers un modèle, en modifiant les paramètres pour qu’ils correspondent à la région de destination, puis en déployant le modèle dans la nouvelle région.  Pour plus d’informations sur Resource Manager et les modèles, consultez [Démarrage rapide : Créer et déployer des modèles Azure Resource Manager à l’aide du portail Azure](https://docs.microsoft.com/azure/azure-resource-manager/resource-manager-quickstart-create-templates-use-the-portal).
+**Les adresses IP publiques Azure sont spécifiques à une région et ne peuvent pas être déplacées d’une région à une autre.** Toutefois, vous pouvez utiliser un modèle Azure Resource Manager pour exporter la configuration existante d’une adresse IP publique.  Vous pouvez ensuite déplacer la ressource dans une autre région en exportant l’adresse IP publique vers un modèle, en modifiant les paramètres pour qu’ils correspondent à la région de destination, puis en déployant le modèle dans la nouvelle région.  Pour plus d’informations sur Resource Manager et les modèles, consultez [Démarrage rapide : Créer et déployer des modèles Azure Resource Manager à l’aide du portail Azure](https://docs.microsoft.com/azure/azure-resource-manager/resource-manager-quickstart-create-templates-use-the-portal).
 
 
 ## <a name="prerequisites"></a>Prérequis

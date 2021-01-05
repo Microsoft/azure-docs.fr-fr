@@ -6,17 +6,17 @@ ms.service: active-directory
 ms.subservice: authentication
 ms.topic: how-to
 ms.date: 03/05/2020
-ms.author: iainfou
-author: iainfoulds
+ms.author: justinha
+author: justinha
 manager: daveba
 ms.reviewer: jsimmons
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 4ee0f3d89d48b23db48e3bf4b78203b09fbcbdbd
-ms.sourcegitcommit: 62c5557ff3b2247dafc8bb482256fef58ab41c17
+ms.openlocfilehash: f2e11fa1bb9f1d3a3986a19da8ed44229829ec81
+ms.sourcegitcommit: ad83be10e9e910fd4853965661c5edc7bb7b1f7c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/03/2020
-ms.locfileid: "80652633"
+ms.lasthandoff: 12/06/2020
+ms.locfileid: "96741777"
 ---
 # <a name="enable-on-premises-azure-active-directory-password-protection"></a>Activer la protection par mot de passe Azure Active Directory en local
 
@@ -40,7 +40,7 @@ Cet article explique comment activer la protection par mot de passe Azure AD pou
 1. Il est recommandé de définir initialement le **Mode** sur *Audit*. Une fois que vous êtes familiarisé avec la fonctionnalité et l’impact observé sur les utilisateurs de votre organisation, vous pouvez changer le **Mode** pour *Appliqué*. Pour plus d’informations, consultez la section suivante sur les [modes de fonctionnement](#modes-of-operation).
 1. Quand vous êtes prêt, sélectionnez **Enregistrer**.
 
-    [![](media/howto-password-ban-bad-on-premises-operations/enable-configure-custom-banned-passwords-cropped.png "Enable on-premises password protection under Authentication Methods in the Azure portal")](media/howto-password-ban-bad-on-premises-operations/enable-configure-custom-banned-passwords.png#lightbox)
+    [![Enable on-premises password protection under Authentication Methods in the Azure portal](media/howto-password-ban-bad-on-premises-operations/enable-configure-custom-banned-passwords-cropped.png)](media/howto-password-ban-bad-on-premises-operations/enable-configure-custom-banned-passwords.png#lightbox)
 
 ## <a name="modes-of-operation"></a>Modes de fonctionnement
 

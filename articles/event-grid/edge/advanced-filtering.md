@@ -5,16 +5,14 @@ author: HiteshMadan
 manager: rajarv
 ms.author: himad
 ms.reviewer: spelluru
-ms.date: 10/03/2019
+ms.date: 07/08/2020
 ms.topic: article
-ms.service: event-grid
-services: event-grid
-ms.openlocfilehash: d7fdc5074f3c92eea4f236a9b1f7c823b930f391
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 64b8956c47cbdbf31bb8253dac0c1e1f12833bf7
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "72991854"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96001046"
 ---
 # <a name="advanced-filtering"></a>Filtrage avancé
 Event Grid permet de spécifier des filtres sur n’importe quelle propriété de la charge utile JSON. Ces filtres sont modélisés sous la forme d’un ensemble de conditions `AND`, chaque condition externe comportant des conditions `OR` internes facultatives. Pour chaque condition `AND` sont spécifiées les valeurs suivantes :

@@ -6,17 +6,17 @@ author: billmath
 manager: daveba
 ms.service: active-directory
 ms.workload: identity
-ms.topic: overview
+ms.topic: reference
 ms.date: 12/02/2019
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 51c14fd7f427c29c47521a7355309e62ab2254ca
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: 1a775ce6b7c560783a22697c5dd92288c5d5b7d4
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "78298613"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96343703"
 ---
 # <a name="writing-expressions-for-attribute-mappings-in-azure-active-directory"></a>Écriture d’expressions pour les mappages d’attributs dans Azure Active Directory
 Quand vous configurez le provisionnement cloud, l’un des types de mappages d’attributs que vous pouvez spécifier est un mappage d’expression. 
@@ -253,7 +253,7 @@ Si l’attribut accountName n’est pas présent, renvoie une erreur sur l’obj
    | Nom | Requis / Répétition | Type | Notes |
    | --- | --- | --- | --- |
    | **source** |Obligatoire |String |Généralement le nom de l’attribut de l’objet source. |
-   | **inputFormat** |Obligatoire |String |Format attendu de la valeur source. Pour connaitre les formats pris en charge, consultez [https://msdn.microsoft.com/library/8kb3ddd4%28v=vs.110%29.aspx](https://msdn.microsoft.com/library/8kb3ddd4%28v=vs.110%29.aspx). |
+   | **inputFormat** |Obligatoire |String |Format attendu de la valeur source. Pour les formats pris en charge, consultez [/dotnet/standard/base-types/custom-date-and-time-format-strings](/dotnet/standard/base-types/custom-date-and-time-format-strings). |
    | **outputFormat** |Obligatoire |String |Format de la date de sortie. |
 
 ---
@@ -289,7 +289,7 @@ La fonction InStr recherche la première occurrence d’une sous-chaîne dans un
 
 `num InStr(str stringcheck, str stringmatch)`  
 `num InStr(str stringcheck, str stringmatch, num start)`  
-`num InStr(str stringcheck, str stringmatch, num start , enum compare)`
+`num InStr(str stringcheck, str stringmatch, num start, enum compare)`
 
 * stringcheck : chaîne à rechercher
 * stringmatch : chaîne à trouver
@@ -712,7 +712,7 @@ Split([extensionAttribute5], ",")
 
 **Exemple d’entrée/sortie :** <br>
 
-* **INPUT** (extensionAttribute5): "PermissionSetOne, PermisionSetTwo"
+* **INPUT** (extensionAttribute5): "PermissionSetOne, PermissionSetTwo"
 * **SORTIE** :  ["PermissionSetOne", "PermissionSetTwo"]
 
 ### <a name="output-date-as-a-string-in-a-certain-format"></a>Sortir une date sous la forme d’une chaîne dans un certain format
@@ -769,11 +769,13 @@ En fonction du prénom, du deuxième prénom et du nom de famille de l’utilisa
 
 **Expression :** <br>
 
+```ad-attr-mapping-expr
     SelectUniqueValue( 
         Join("@", NormalizeDiacritics(StripSpaces(Join(".",  [PreferredFirstName], [PreferredLastName]))), "contoso.com"), 
         Join("@", NormalizeDiacritics(StripSpaces(Join(".",  Mid([PreferredFirstName], 1, 1), [PreferredLastName]))), "contoso.com"),
         Join("@", NormalizeDiacritics(StripSpaces(Join(".",  Mid([PreferredFirstName], 1, 2), [PreferredLastName]))), "contoso.com")
     )
+```
 
 **Exemple d’entrée/sortie :**
 

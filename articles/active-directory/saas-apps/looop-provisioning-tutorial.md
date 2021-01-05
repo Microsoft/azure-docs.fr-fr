@@ -2,25 +2,21 @@
 title: 'Tutoriel : Configurer Looop pour le provisionnement automatique d’utilisateurs avec Azure Active Directory | Microsoft Docs'
 description: Découvrez comment configurer Azure Active Directory pour provisionner et déprovisionner automatiquement des comptes d’utilisateur sur Looop.
 services: active-directory
-documentationcenter: ''
 author: zchia
 writer: zchia
-manager: beatrizd
-ms.assetid: 0efe2262-43c3-4e0c-97fa-9344385638e2
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: article
+ms.topic: tutorial
 ms.date: 09/19/2019
 ms.author: Zhchia
-ms.openlocfilehash: e3e25a8c27b9a5c1bc1e7673300ac8aca9377c08
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 528003ac482da6f254bf437321c70c389d23844b
+ms.sourcegitcommit: 0a9df8ec14ab332d939b49f7b72dea217c8b3e1e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77057436"
+ms.lasthandoff: 11/18/2020
+ms.locfileid: "94835014"
 ---
 # <a name="tutorial-configure-looop-for-automatic-user-provisioning"></a>Tutoriel : Configurer Looop pour l’affectation automatique d’utilisateurs
 
@@ -59,11 +55,11 @@ Avant de configurer Looop pour le provisionnement automatique d’utilisateurs a
 
 1. Connectez-vous à votre [Console d’administration Looop](https://app.looop.co/#/login) et sélectionnez **Account** (Compte). Sous **Account Settings**, sélectionnez **Authentication**.
 
-    ![Looop - Ajouter SCIM](media/looop-provisioning-tutorial/admin.png)
+    :::image type="content" source="media/looop-provisioning-tutorial/admin.png" alt-text="Capture d’écran de la console d’administration Looop. L’onglet Account est mis en évidence et ouvert. Sous Account settings, Authentication est mis en évidence." border="false":::
 
 2. Générez un jeton en cliquant sur **Reset Token** (Réinitialiser le jeton) sous **SCIM Integration**.
 
-    ![Looop - Ajouter SCIM](media/looop-provisioning-tutorial/resettoken.png)
+    :::image type="content" source="media/looop-provisioning-tutorial/resettoken.png" alt-text="Capture d’écran de la section SCIM Integration d’une page dans la console d’administration Looop. Le bouton Reset token est mis en évidence." border="false":::
 
 3. Copiez le **Point de terminaison SCIM** et le **Jeton**. Ces valeurs doivent être entrées dans les champs **URL de locataire** et **Jeton secret** de l’onglet Provisionnement, dans votre application Looop sur le portail Azure. 
 
@@ -93,7 +89,7 @@ Pour configurer Looop en vue du provisionnement automatique d’utilisateurs ave
 
     ![Looop - Ajouter OIDC](media/looop-provisioning-tutorial/signup.png)
 
-6. Comme Looop est une application OpenIDConnect, choisissez de vous connecter à Looop à l’aide de votre compte professionnel Microsoft.
+6. Comme Looop est une application OpenIDConnect, choisissez de vous connecter à Looop au moyen de votre compte professionnel Microsoft.
 
     ![Looop - Connexion OIDC](media/looop-provisioning-tutorial/msftlogin.png)
 
@@ -117,13 +113,13 @@ Cette section vous guide tout au long des étapes de configuration du service de
 
 3. Sélectionnez l’onglet **Approvisionnement**.
 
-    ![Onglet Approvisionnement](common/provisioning.png)
+    ![Capture d’écran des options Gérer avec l’option Provisionnement en évidence.](common/provisioning.png)
 
 4. Définissez le **Mode d’approvisionnement** sur **Automatique**.
 
-    ![Onglet Approvisionnement](common/provisioning-automatic.png)
+    ![Capture d’écran de la liste déroulante Mode de provisionnement avec l’option Automatique en évidence.](common/provisioning-automatic.png)
 
-5. Dans la section **Informations d’identification de l’administrateur**, entrez `https://<organisation_domain>.looop.co/scim/v2` dans **URL de locataire**. Par exemple, `https://demo.looop.co/scim/v2`. Entrez la valeur que vous avez récupérée et enregistrée précédemment de Looop, dans **Secret Token** (Jeton secret). Cliquez sur **Tester la connexion** pour vérifier qu’Azure AD peut se connecter à Looop. Si la connexion échoue, vérifiez que votre compte Looop dispose des autorisations d’administrateur et réessayez.
+5. Dans la section **Informations d’identification de l’administrateur**, entrez `https://<organisation_domain>.looop.co/scim/v2` dans **URL de locataire**. Par exemple : `https://demo.looop.co/scim/v2`. Entrez la valeur que vous avez récupérée et enregistrée précédemment de Looop, dans **Secret Token** (Jeton secret). Cliquez sur **Tester la connexion** pour vérifier qu’Azure AD peut se connecter à Looop. Si la connexion échoue, vérifiez que votre compte Looop dispose des autorisations d’administrateur et réessayez.
 
     ![URL de locataire + Jeton](common/provisioning-testconnection-tenanturltoken.png)
 
@@ -139,7 +135,23 @@ Cette section vous guide tout au long des étapes de configuration du service de
 
 9. Dans la section **Mappage d’attributs**, passez en revue les attributs utilisateur qui sont synchronisés entre Azure AD et Looop. Les attributs sélectionnés en tant que propriétés de **Correspondance** sont utilisés afin de faire correspondre les comptes d’utilisateur dans Looop pour les opérations de mise à jour. Cliquez sur le bouton **Enregistrer** pour valider les modifications.
 
-    ![Looop - Attributs utilisateur](media/looop-provisioning-tutorial/userattributes.png)
+   |Attribut|Type|Pris en charge pour le filtrage|
+   |---|---|---|
+   |userName|String|&check;|
+   |active|Boolean|
+   |emails[type eq "work"].value|String|
+   |name.givenName|String|
+   |name.familyName|String|
+   |externalId|String|
+   |urn:ietf:params:scim:schemas:extension:Looop:2.0:User:area|String|
+   |urn:ietf:params:scim:schemas:extension:Looop:2.0:User:custom_1|String|
+   |urn:ietf:params:scim:schemas:extension:Looop:2.0:User:custom_2|String|
+   |urn:ietf:params:scim:schemas:extension:Looop:2.0:User:custom_3|String|
+   |urn:ietf:params:scim:schemas:extension:Looop:2.0:User:department|String|
+   |urn:ietf:params:scim:schemas:extension:Looop:2.0:User:employee_id|String|
+   |urn:ietf:params:scim:schemas:extension:Looop:2.0:User:location|String|
+   |urn:ietf:params:scim:schemas:extension:Looop:2.0:User:position|String|
+   |urn:ietf:params:scim:schemas:extension:Looop:2.0:User:startAt|String|
 
 10. Dans la section **Mappages**, sélectionnez **Synchroniser les groupes Azure Active Directory avec Meta Networks Connector**.
 
@@ -147,7 +159,12 @@ Cette section vous guide tout au long des étapes de configuration du service de
 
 11. Dans la section **Mappages des attributs**, passez en revue les attributs de groupe qui sont synchronisés entre Azure AD et Meta Networks Connector. Les attributs sélectionnés en tant que propriétés de **Correspondance** sont utilisés pour faire correspondre les groupes dans Meta Networks Connector pour les opérations de mise à jour. Cliquez sur le bouton **Enregistrer** pour valider les modifications.
 
-    ![Looop - Attributs de groupe](media/looop-provisioning-tutorial/groupattributes.png)
+    |Attribut|Type|Pris en charge pour le filtrage|
+    |---|---|---|
+    |displayName|String|&check;|
+    |membres|Informations de référence|
+    |externalId|String|
+
 
 10. Pour configurer des filtres d’étendue, reportez-vous aux instructions suivantes fournies dans [Approvisionnement d’applications basé sur les attributs avec filtres d’étendue](../app-provisioning/define-conditional-rules-for-provisioning-user-accounts.md).
 

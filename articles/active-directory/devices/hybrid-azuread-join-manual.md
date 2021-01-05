@@ -11,12 +11,12 @@ author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: sandeo
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: f23520bd724d2f7ed5a9422a0541e717c800dee2
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 5316a1647c96076696b14de157e74e2155a6b368
+ms.sourcegitcommit: 21c3363797fb4d008fbd54f25ea0d6b24f88af9c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82201021"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96860012"
 ---
 # <a name="tutorial-configure-hybrid-azure-active-directory-joined-devices-manually"></a>Tutoriel : Configurer manuellement des appareils joints à Azure Active Directory hybride
 
@@ -39,7 +39,7 @@ Si vous disposez d’un environnement Active Directory local et que vous souhait
 
 Ce tutoriel part du principe que vous êtes familiarisé avec ce qui suit :
 
-* [Présentation de la gestion des appareils dans Azure Active Directory](../device-management-introduction.md)
+* [Présentation de la gestion des appareils dans Azure Active Directory](./overview.md)
 * [Planifier l’implémentation de la jonction Azure Active Directory hybride](hybrid-azuread-join-plan.md)
 * [Contrôler la jointure d’Azure AD hybride de vos appareils](hybrid-azuread-join-control.md)
 
@@ -59,6 +59,9 @@ Assurez-vous que les URL suivantes sont accessibles à partir d’ordinateurs au
 * `https://login.microsoftonline.com`
 * `https://device.login.microsoftonline.com`
 * Le STS de votre organisation (pour les domaines fédérés), qui doit être inclus dans les paramètres intranet locaux de l’utilisateur
+
+> [!WARNING]
+> Si votre organisation utilise des serveurs proxy qui interceptent le trafic SSL dans des scénarios de protection contre la perte de données ou de restrictions de locataire Azure AD par exemple, veillez à exclure le trafic à destination de « https://device.login.microsoftonline.com  » de l’inspection TLS. Faute d’exclure « https://device.login.microsoftonline.com  », l’authentification par certificat client peut être sujette à des interférences, ce qui occasionne des problèmes d’inscription d’appareil et d’accès conditionnel en fonction de l’appareil.
 
 Si votre organisation envisage d’utiliser l’authentification unique fluide, l’URL suivante doit être accessible à partir des ordinateurs à l’intérieur de votre organisation. Elle doit également être ajoutée à la zone intranet local de l’utilisateur.
 
@@ -91,7 +94,7 @@ Pour obtenir une vue d’ensemble des étapes requises par votre scénario, util
 
 Vos appareils utilisent un objet point de connexion de service (SCP) lors de l’inscription pour découvrir les informations de locataire Azure AD. Dans votre instance Active Directory locale, l’objet SCP des appareils hybrides joints à Azure AD doit exister dans la partition de contexte d’appellation de configuration de la forêt de l’ordinateur. Il n’existe qu’un seul contexte d’appellation de configuration par forêt. Dans une configuration Active Directory multi-forêt, le point de connexion de service doit exister dans toutes les forêts qui contiennent des ordinateurs joints à un domaine.
 
-Pour récupérer le contexte d’appellation de configuration de votre forêt, vous pouvez utiliser l’applet de commande [**Get-ADRootDSE**](https://technet.microsoft.com/library/ee617246.aspx).  
+Pour récupérer le contexte d’appellation de configuration de votre forêt, vous pouvez utiliser l’applet de commande [**Get-ADRootDSE**](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/ee617246(v=technet.10)).  
 
 Pour une forêt avec le nom de domaine Active Directory *fabrikam.com*, le contexte d’appellation de configuration est le suivant :
 
@@ -164,9 +167,9 @@ Dans le cas de contrôleurs de domaine exécutant Windows Server 2008 ou des ve
 
 Dans le script précédent, `$verifiedDomain = "contoso.com"` est un espace réservé. Remplacez-le par un de vos noms de domaine vérifiés dans Azure AD. Vous devez posséder le domaine pour pouvoir l’utiliser.
 
-Pour plus d’informations sur les noms de domaine vérifiés, consultez [Ajouter un nom de domaine personnalisé à Azure Active Directory](../active-directory-domains-add-azure-portal.md).
+Pour plus d’informations sur les noms de domaine vérifiés, consultez [Ajouter un nom de domaine personnalisé à Azure Active Directory](../fundamentals/add-custom-domain.md).
 
-Pour obtenir la liste de vos domaines d’entreprise vérifiés, vous pouvez utiliser le cmdlet [Get-AzureADDomain](/powershell/module/Azuread/Get-AzureADDomain?view=azureadps-2.0).
+Pour obtenir la liste de vos domaines d’entreprise vérifiés, vous pouvez utiliser le cmdlet [Get-AzureADDomain](/powershell/module/Azuread/Get-AzureADDomain).
 
 ![Liste des domaines d’entreprise](./media/hybrid-azuread-join-manual/01.png)
 
@@ -200,7 +203,7 @@ Si vous disposez de plusieurs noms de domaine vérifiés, vous devez fournir la 
 
 * `http://schemas.microsoft.com/ws/2008/06/identity/claims/issuerid`
 
-Si vous émettez déjà une revendication ImmutableID (par exemple, un ID de connexion alternatif), vous devez fournir une seule revendication correspondante pour les ordinateurs :
+Si vous émettez déjà une revendication ImmutableID (par exemple, en utilisant `mS-DS-ConsistencyGuid` ou un autre attribut comme valeur source pour ImmutableID), vous devez fournir une revendication correspondante pour les ordinateurs :
 
 * `http://schemas.microsoft.com/LiveID/Federation/2008/05/ImmutableID`
 
@@ -323,13 +326,13 @@ La revendication `http://schemas.microsoft.com/ws/2008/06/identity/claims/issuer
 
 Dans la revendication précédente, `<verified-domain-name>` est un espace réservé. Remplacez-le par un de vos noms de domaine vérifiés dans Azure AD. Par exemple, utilisez `Value = "http://contoso.com/adfs/services/trust/"`.
 
-Pour plus d’informations sur les noms de domaine vérifiés, consultez [Ajouter un nom de domaine personnalisé à Azure Active Directory](../active-directory-domains-add-azure-portal.md).  
+Pour plus d’informations sur les noms de domaine vérifiés, consultez [Ajouter un nom de domaine personnalisé à Azure Active Directory](../fundamentals/add-custom-domain.md).  
 
-Pour obtenir une liste de vos domaines d’entreprise vérifiés, vous pouvez utiliser l’applet de commande [Get-MsolDomain](/powershell/module/msonline/get-msoldomain?view=azureadps-1.0).
+Pour obtenir une liste de vos domaines d’entreprise vérifiés, vous pouvez utiliser l’applet de commande [Get-MsolDomain](/powershell/module/msonline/get-msoldomain).
 
 ![Liste des domaines d’entreprise](./media/hybrid-azuread-join-manual/01.png)
 
-### <a name="issue-immutableid-for-the-computer-when-one-for-users-exists-for-example-an-alternate-login-id-is-set"></a>Émission de la valeur ImmutableID pour l’ordinateur s’il en existe une pour les utilisateurs (par exemple, définition d’un ID de connexion alternatif)
+### <a name="issue-immutableid-for-the-computer-when-one-for-users-exists-for-example-using-ms-ds-consistencyguid-as-the-source-for-immutableid"></a>Émettre un ImmutableID pour l’ordinateur quand il en existe un pour les utilisateurs (par exemple, en utilisant mS-DS-ConsistencyGuid comme source pour ImmutableID)
 
 La revendication `http://schemas.microsoft.com/LiveID/Federation/2008/05/ImmutableID` doit contenir une valeur valide pour les ordinateurs. Dans AD FS, vous pouvez créer une règle de transformation d’émission comme suit :
 
@@ -549,16 +552,71 @@ Pour inscrire des appareils Windows de bas niveau, vous devez télécharger et i
 
 ## <a name="verify-joined-devices"></a>Vérifier des appareils joints
 
-Vous pouvez rechercher les appareils correctement joints dans votre organisation en utilisant l’applet de commande [Get-MsolDevice](/powershell/msonline/v1/get-msoldevice) dans le [module Azure Active Directory PowerShell](/powershell/azure/install-msonlinev1?view=azureadps-2.0).
+Voici trois méthodes pour rechercher et vérifier l’état de l’appareil :
 
-La sortie de cette applet de commande affiche les appareils qui sont enregistrés et joints à Azure AD. Pour obtenir tous les appareils, utilisez le paramètre **-All**, puis filtrez-les à l’aide de la propriété **deviceTrustType**. Les appareils joints à un domaine présentent la valeur **Joint au domaine**.
+### <a name="locally-on-the-device"></a>Localement sur l’appareil
+
+1. Ouvrez Windows PowerShell.
+2. Entrez `dsregcmd /status`.
+3. Vérifiez que **AzureAdJoined** et **DomainJoined** ont la valeur **OUI**.
+4. Vous pouvez utiliser le **DeviceId** et comparer l’état du service à l’aide du portail Azure ou de PowerShell.
+
+### <a name="using-the-azure-portal"></a>Utilisation du portail Azure
+
+1. Accédez à la page des appareils à l’aide d’un [lien direct](https://portal.azure.com/#blade/Microsoft_AAD_IAM/DevicesMenuBlade/Devices).
+2. Pour plus d’informations sur la localisation d’un appareil, consultez [Gérer les identités de l’appareil à l’aide du portail Microsoft Azure](./device-management-azure-portal.md#manage-devices).
+3. Si la colonne **Inscrit** indique **En attente**, cela signifie que la jonction Azure AD Hybride n’a pas été effectuée complètement. Dans les environnements fédérés, cela peut se produire uniquement si l’inscription a échoué et qu’AAD Connect est configuré pour synchroniser les appareils.
+4. Si la colonne **Inscrit** contient une **date/heure**, cela signifie que la jonction Azure AD Hybride a été effectuée correctement.
+
+### <a name="using-powershell"></a>Utilisation de PowerShell
+
+Vérifiez l’état d’inscription de l’appareil dans votre locataire Azure à l’aide de **[Get-MsolDevice](/powershell/module/msonline/get-msoldevice)** . Cette applet de commande figure dans le [module Azure Active Directory PowerShell](/powershell/azure/active-directory/install-msonlinev1).
+
+Quand vous utilisez l’applet de commande **Get-MSolDevice** pour vérifier les détails du service :
+
+- Un objet dont l’**ID d’appareil** correspond à l’ID défini sur le client Windows doit exister.
+- La valeur pour **DeviceTrustType** est **Joint au domaine**. Ce paramètre équivaut à l’état **Joint à une version hybride d’Azure AD** dans la page **Appareils** du portail Azure AD.
+- Pour les appareils utilisés dans l’accès conditionnel, la valeur pour **Activé** est **True** et celle pour **DeviceTrustLevel** est **Géré**.
+
+1. Ouvrez Windows PowerShell en tant qu’administrateur.
+2. Entrez `Connect-MsolService` pour vous connecter à votre locataire Azure.
+
+#### <a name="count-all-hybrid-azure-ad-joined-devices-excluding-pending-state"></a>Compter tous les appareils joints Azure AD Hybride (sauf ceux qui sont à l’état **En attente**)
+
+```azurepowershell
+(Get-MsolDevice -All -IncludeSystemManagedDevices | where {($_.DeviceTrustType -eq 'Domain Joined') -and (([string]($_.AlternativeSecurityIds)).StartsWith("X509:"))}).count
+```
+
+#### <a name="count-all-hybrid-azure-ad-joined-devices-with-pending-state"></a>Compter tous les appareils joints Azure AD Hybride qui sont à l’état **En attente**
+
+```azurepowershell
+(Get-MsolDevice -All -IncludeSystemManagedDevices | where {($_.DeviceTrustType -eq 'Domain Joined') -and (-not([string]($_.AlternativeSecurityIds)).StartsWith("X509:"))}).count
+```
+
+#### <a name="list-all-hybrid-azure-ad-joined-devices"></a>Lister tous les appareils joints Azure AD Hybride
+
+```azurepowershell
+Get-MsolDevice -All -IncludeSystemManagedDevices | where {($_.DeviceTrustType -eq 'Domain Joined') -and (([string]($_.AlternativeSecurityIds)).StartsWith("X509:"))}
+```
+
+#### <a name="list-all-hybrid-azure-ad-joined-devices-with-pending-state"></a>Lister tous les appareils joints Azure AD Hybride qui sont à l’état **En attente**
+
+```azurepowershell
+Get-MsolDevice -All -IncludeSystemManagedDevices | where {($_.DeviceTrustType -eq 'Domain Joined') -and (-not([string]($_.AlternativeSecurityIds)).StartsWith("X509:"))}
+```
+
+#### <a name="list-details-of-a-single-device"></a>Lister les détails d’un seul appareil :
+
+1. Entrez `get-msoldevice -deviceId <deviceId>` (il s’agit du **DeviceId** obtenu localement sur l’appareil).
+2. Vérifiez que le paramètre **Enabled** est défini sur **True**.
 
 ## <a name="troubleshoot-your-implementation"></a>Résoudre les problèmes liés à votre implémentation
 
-Si vous rencontrez des problèmes pour effectuer une jonction Azure AD hybride avec des appareils Windows joints à un domaine, consultez :
+Si vous rencontrez des problèmes en réalisant une jointure Azure AD hybride pour des appareils Windows joints à un domaine, consultez :
 
-* [Résolution des problèmes de jonction Azure AD hybride pour les appareils Windows actuels](troubleshoot-hybrid-join-windows-current.md)
-* [Résolution des problèmes de jonction Azure AD hybride pour les appareils Windows de bas niveau](troubleshoot-hybrid-join-windows-legacy.md)
+- [Dépannage des appareils à l’aide de la commande dsregcmd](./troubleshoot-device-dsregcmd.md)
+- [Résolution des problèmes liés aux appareils hybrides joints à Azure Active Directory](troubleshoot-hybrid-join-windows-current.md)
+- [Dépanner des appareils hybrides de bas niveau joints à Azure Active Directory](troubleshoot-hybrid-join-windows-legacy.md)
 
 ## <a name="next-steps"></a>Étapes suivantes
 

@@ -9,17 +9,17 @@ editor: ''
 ms.assetid: 837018e3-03e6-4f9c-a23e-4b63d5707a64
 ms.service: azure-cdn
 ms.devlang: multiple
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: integration
 ms.date: 11/17/2017
 ms.author: mazha
-ms.openlocfilehash: 491f413f9bf189b1a46d04042fd7223a47af1f24
-ms.sourcegitcommit: a6d477eb3cb9faebb15ed1bf7334ed0611c72053
+ms.openlocfilehash: 21ef06f37e6840df08b1477f9c0ff24f6e15d1a3
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82929126"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95978033"
 ---
 # <a name="securing-azure-cdn-assets-with-token-authentication"></a>Sécurisation des ressources CDN Azure avec l’authentification du jeton
 
@@ -33,7 +33,7 @@ L’authentification du jeton est un mécanisme qui vous permet d’empêcher Az
 
 L’authentification du jeton s’assure que les requêtes sont générées par un site de confiance en vérifiant qu’elles comportent une valeur de jeton contenant des informations codées sur le demandeur. Le contenu est fourni à un demandeur uniquement si les informations codées respectent les exigences définies. Dans le cas contraire, les requêtes sont refusées. Vous pouvez procéder à la configuration à l’aide d’un ou de plusieurs des paramètres suivants :
 
-- Pays : autorisez ou refusez les requêtes provenant des pays/régions spécifiés par leur [code pays](/previous-versions/azure/mt761717(v=azure.100)).
+- Pays/région : autorisez ou refusez les requêtes provenant des pays/régions spécifiés par leur [code pays/région](/previous-versions/azure/mt761717(v=azure.100)).
 - URL : autorisez uniquement les requêtes qui correspondent à la ressource ou au chemin d’accès spécifique.
 - Hôte : autorisez ou refusez les requêtes utilisant les hôtes spécifiés dans l’en-tête de requête.
 - Référent : autorisez ou refusez une requête provenant du référent spécifié.
@@ -120,11 +120,11 @@ L’organigramme suivant décrit comment Azure CDN valide une demande du client 
       > </tr>
       > <tr>
       >    <td><b>ec_country_allow</b></td> 
-      >    <td>Autorise uniquement les requêtes provenant d’un ou de plusieurs pays (ou régions) spécifiés. Les requêtes provenant de tous les autres pays/régions sont refusées. Utilisez un [code de pays ISO 3166](/previous-versions/azure/mt761717(v=azure.100)) de deux lettres pour chaque pays, en séparant les codes par une virgule ; n’ajoutez pas d’espace. Par exemple, pour autoriser l’accès aux requêtes provenant uniquement des États-Unis et de France, entrez `US,FR`.</td>
+      >    <td>Autorise uniquement les requêtes provenant d’un ou de plusieurs pays (ou régions) spécifiés. Les requêtes provenant de tous les autres pays/régions sont refusées. Utilisez un [code de pays/région ISO 3166](/previous-versions/azure/mt761717(v=azure.100)) de deux lettres pour chaque pays/région, en séparant les codes par une virgule ; n’ajoutez pas d’espace. Par exemple, pour autoriser l’accès aux requêtes provenant uniquement des États-Unis et de France, entrez `US,FR`.</td>
       > </tr>
       > <tr>
       >    <td><b>ec_country_deny</b></td> 
-      >    <td>Refuse les requêtes provenant d’un ou de plusieurs pays (ou régions) spécifiés. Les requêtes provenant de tous les autres pays/régions sont autorisées. L’implémentation est identique à celle du paramètre <b>ec_country_allow</b>. Si un code de pays est présent dans les paramètres <b>ec_country_allow</b> et <b>ec_country_deny</b>, le paramètre <b>ec_country_allow</b> est prioritaire.</td>
+      >    <td>Refuse les requêtes provenant d’un ou de plusieurs pays (ou régions) spécifiés. Les requêtes provenant de tous les autres pays/régions sont autorisées. L’implémentation est identique à celle du paramètre <b>ec_country_allow</b>. Si un code de pays/région est présent dans les paramètres <b>ec_country_allow</b> et <b>ec_country_deny</b>, le paramètre <b>ec_country_allow</b> est prioritaire.</td>
       > </tr>
       > <tr>
       >    <td><b>ec_ref_allow</b></td>
@@ -170,20 +170,20 @@ L’organigramme suivant décrit comment Azure CDN valide une demande du client 
 
    9. Personnalisez éventuellement le type de code de réponse qui est retourné lorsqu’une requête est refusée. Sélectionnez **Enabled (Activé)** , puis sélectionnez le code de réponse dans la liste **Code de réponse**. Le **Header Name (Nom d’en-tête)** est automatiquement défini sur **Location (Emplacement)** . Sélectionnez **Save (Enregistrer)** pour implémenter le nouveau code de réponse. Pour certains codes de réponse, vous devez également entrer l’URL de votre page d’erreur dans la zone **Header Value (Valeur d’en-tête)** . Le code de réponse **403** (Interdit) est sélectionné par défaut. 
 
-3. Sélectionnez **Rules Engine (Moteur de règles)** sous **HTTP Large**. Le moteur de règles permet de définir les chemins d’accès pour appliquer la fonctionnalité, d’activer la fonctionnalité d’authentification du jeton et d’activer d’autres fonctionnalités associées à l’authentification du jeton. Pour plus d’informations, consultez [Moteur des règles Azure CDN](cdn-rules-engine-reference.md).
+3. Sélectionnez **Rules Engine (Moteur de règles)** sous **HTTP Large**. Le moteur de règles permet de définir les chemins d’accès pour appliquer la fonctionnalité, d’activer la fonctionnalité d’authentification du jeton et d’activer d’autres fonctionnalités associées à l’authentification du jeton. Pour plus d’informations, consultez [Moteur des règles Azure CDN](./cdn-verizon-premium-rules-engine-reference.md).
 
    1. Sélectionnez une règle existante ou créez-en une pour définir la ressource ou le chemin d’accès pour lesquels vous souhaitez appliquer l’authentification du jeton. 
-   2. Pour activer l’authentification du jeton sur une règle, sélectionnez **[Token Auth (Authentification du jeton)](cdn-verizon-premium-rules-engine-reference-features.md#token-auth)** dans la liste **Fonctionnalités**, puis sélectionnez **Enabled (Activé)** . Sélectionnez **Update (Mettre à jour)** si vous mettez à jour une règle ou **Add (Ajouter)** si vous en créez une.
+   2. Pour activer l’authentification du jeton sur une règle, sélectionnez **[Token Auth (Authentification du jeton)](https://docs.vdms.com/cdn/Content/HRE/F/Token-Auth.htm)** dans la liste **Fonctionnalités**, puis sélectionnez **Enabled (Activé)** . Sélectionnez **Update (Mettre à jour)** si vous mettez à jour une règle ou **Add (Ajouter)** si vous en créez une.
         
       ![Exemple d’activation de l’authentification du jeton via le moteur de règles dans CDN](./media/cdn-token-auth/cdn-rules-engine-enable2.png)
 
 4. Dans le moteur de règles, vous pouvez également activer d’autres fonctionnalités associées à l’authentification. Pour activer l’une des fonctionnalités suivantes, sélectionnez-la dans la liste **Features (Fonctionnalités)** , puis sélectionnez **Enabled (Activé)** .
     
-   - **[Token Auth Denial Code (Code de refus d’authentification du jeton)](cdn-verizon-premium-rules-engine-reference-features.md#token-auth-denial-code)**  : détermine le type de réponse à retourner à un utilisateur quand une requête est refusée. Les règles définies ici remplacent les codes de réponse de la section **Custom Denial Handling (Gestion personnalisée des refus)** de la page d’authentification basée sur le jeton.
+   - **[Token Auth Denial Code (Code de refus d’authentification du jeton)](https://docs.vdms.com/cdn/Content/HRE/F/Token-Auth-Denial-Code.htm)**  : détermine le type de réponse à retourner à un utilisateur quand une requête est refusée. Les règles définies ici remplacent les codes de réponse de la section **Custom Denial Handling (Gestion personnalisée des refus)** de la page d’authentification basée sur le jeton.
 
-   - **[Token Auth Ignore URL Case (Ignorer la casse de l’URL pour l’authentification du jeton)](cdn-verizon-premium-rules-engine-reference-features.md#token-auth-ignore-url-case)**  : détermine si la casse de l’URL utilisée pour valider le jeton est prise en compte.
+   - **[Token Auth Ignore URL Case (Ignorer la casse de l’URL pour l’authentification du jeton)](https://docs.vdms.com/cdn/Content/HRE/F/Token-Auth-Ignore-URL-Case.htm)**  : détermine si la casse de l’URL utilisée pour valider le jeton est prise en compte.
 
-   - **[Token Auth Parameter (Paramètre d’authentification du jeton)](cdn-verizon-premium-rules-engine-reference-features.md#token-auth-parameter)**  : renomme le paramètre de chaîne de requête d’authentification du jeton affiché dans l’URL demandée. 
+   - **[Token Auth Parameter (Paramètre d’authentification du jeton)](https://docs.vdms.com/cdn/Content/HRE/F/Token-Auth-Parameter.htm)**  : renomme le paramètre de chaîne de requête d’authentification du jeton affiché dans l’URL demandée. 
         
      ![Exemple de paramètres d’authentification du jeton via le moteur de règles dans CDN](./media/cdn-token-auth/cdn-rules-engine2.png)
 
@@ -195,7 +195,7 @@ L’organigramme suivant décrit comment Azure CDN valide une demande du client 
    - PHP
    - Perl
    - Java
-   - Python 
+   - Python    
 
 ## <a name="azure-cdn-features-and-provider-pricing"></a>Tarification du fournisseur et des fonctionnalités du CDN Azure
 

@@ -8,17 +8,17 @@ manager: daveba
 ms.assetid: 9f994aca-6088-40f5-b2cc-c753a4f41da7
 ms.service: active-directory
 ms.workload: identity
-ms.topic: article
+ms.topic: troubleshooting
 ms.date: 10/07/2019
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 759748124893a8f906a4bc336f835546202b0b62
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 5bc638eec174a52d501120d5e53bb2dc9e35b688
+ms.sourcegitcommit: d2d1c90ec5218b93abb80b8f3ed49dcf4327f7f4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80049490"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97591172"
 ---
 # <a name="troubleshoot-azure-active-directory-seamless-single-sign-on"></a>Résoudre les problèmes d’authentification unique transparente Azure Active Directory
 
@@ -29,7 +29,7 @@ Cet article fournit des informations sur les problèmes courants liés à l’au
 - Dans certains cas, l’activation de l’authentification unique transparente peut prendre jusqu’à 30 minutes.
 - Si vous désactivez et réactivez l’authentification unique transparente sur votre client, les utilisateurs ne recevront pas l’expérience d’authentification unique jusqu'à ce que leurs tickets Kerberos, généralement valides pour 10 heures, expirent.
 - Si l’authentification unique transparente réussit, l’utilisateur n’a pas la possibilité de choisir l’option **Maintenir la connexion**. En raison de ce comportement, [les scénarios de mappage SharePoint et OneDrive](https://support.microsoft.com/help/2616712/how-to-configure-and-to-troubleshoot-mapped-network-drives-that-connec) ne fonctionnent pas.
-- Les clients Win32 Office 365 (Outlook, Word, Excel, etc.) dotés des versions 16.0.8730.xxxx et ultérieures sont pris en charge au moyen d’un flux non interactif. Les autres versions ne sont pas prises en charge ; dans ces versions, les utilisateurs entrent leur nom d’utilisateur, mais pas les mots de passe, pour se connecter. En ce qui concerne OneDrive, vous devez activer la [fonctionnalité de configuration silencieuse OneDrive](https://techcommunity.microsoft.com/t5/Microsoft-OneDrive-Blog/Previews-for-Silent-Sync-Account-Configuration-and-Bandwidth/ba-p/120894) pour une utilisation de l’authentification sans assistance.
+- Les clients Win32 Microsoft 365 (Outlook, Word, Excel, etc.) dotés des versions 16.0.8730.xxxx et ultérieures sont pris en charge au moyen d'un flux non interactif. Les autres versions ne sont pas prises en charge ; dans ces versions, les utilisateurs entrent leur nom d’utilisateur, mais pas les mots de passe, pour se connecter. En ce qui concerne OneDrive, vous devez activer la [fonctionnalité de configuration silencieuse OneDrive](https://techcommunity.microsoft.com/t5/Microsoft-OneDrive-Blog/Previews-for-Silent-Sync-Account-Configuration-and-Bandwidth/ba-p/120894) pour une utilisation de l’authentification sans assistance.
 - L’authentification unique transparente ne fonctionne pas en mode Navigation privée sur Firefox.
 - L’authentification unique transparente ne fonctionne pas sur Internet Explorer quand le mode protégé amélioré est activé.
 - L’authentification unique transparente ne fonctionne pas sur les navigateurs mobiles iOS et Android.
@@ -37,6 +37,7 @@ Cet article fournit des informations sur les problèmes courants liés à l’au
 - Si vous synchronisez 30 forêts Active Directory ou plus, vous ne pouvez pas activer l’authentification unique transparente via Azure AD Connect. En guise de solution de contournement, vous pouvez [activer manuellement](#manual-reset-of-the-feature) la fonctionnalité pour votre locataire.
 - L’ajout de l’URL du service Azure AD (`https://autologon.microsoftazuread-sso.com`) à la zone Sites de confiance, plutôt qu’à la zone Intranet local, *empêche les utilisateurs de se connecter*.
 - L’authentification unique transparente prend en charge les types de chiffrement AES256_HMAC_SHA1, AES128_HMAC_SHA1 et RC4_HMAC_MD5 pour Kerberos. Il est recommandé de définir le type de chiffrement du compte AzureADSSOAcc$ sur AES256_HMAC_SHA1 ou l’un des types AES plutôt que sur RC4 pour plus de sécurité. Le type de chiffrement est stocké dans l’attribut msDS-SupportedEncryptionTypes du compte de votre annuaire Active Directory.  Si le type de chiffrement du compte AzureADSSOAcc$ a la valeur RC4_HMAC_MD5 et que vous voulez le remplacer par l’un des types de chiffrement AES, veillez d’abord à remplacer la clé de déchiffrement Kerberos du compte AzureADSSOAcc$, comme expliqué dans les [questions fréquentes (FAQ)](how-to-connect-sso-faq.md), sous la question concernée, sans quoi l’authentification unique transparente ne se produira pas.
+-  Si vous avez plusieurs forêts dotées d’une approbation de forêt, l’activation de l’authentification unique (SSO) dans l’une de ces forêts active l’authentification unique dans toutes les forêts approuvées. Si vous activez l’authentification unique (SSO) dans une forêt où l’authentification unique est déjà activée, vous obtenez une erreur indiquant que l’authentification unique est déjà activée dans la forêt.
 
 ## <a name="check-status-of-feature"></a>Vérifier l’état de la fonctionnalité
 
@@ -74,9 +75,9 @@ Accédez à **Azure Active Directory** > **Connexions** dans le [Centre d’admi
 Utilisez la liste de contrôle suivante pour résoudre les problèmes d’authentification unique transparente :
 
 - Vérifiez que la fonctionnalité d’authentification unique transparente est activée dans Azure AD Connect. Si vous ne pouvez pas activer la fonctionnalité (par exemple, en raison d’un port bloqué), vérifiez que toutes les [conditions préalables](how-to-connect-sso-quick-start.md#step-1-check-the-prerequisites) sont bien respectées.
-- Si vous avez activé [Azure AD Join](../active-directory-azureadjoin-overview.md) et l’authentification unique transparente sur votre client, assurez-vous que le problème ne vient pas d’Azure AD Join. L’authentification unique à partir d’Azure AD Join est prioritaire sur l’authentification unique transparente si l’appareil est inscrit auprès d’Azure AD et est joint au domaine. Avec l’authentification unique à partir d’Azure AD Join, l’utilisateur voit une vignette de connexion qui indique « Connecté à Windows ».
+- Si vous avez activé [Azure AD Join](../devices/overview.md) et l’authentification unique transparente sur votre client, assurez-vous que le problème ne vient pas d’Azure AD Join. L’authentification unique à partir d’Azure AD Join est prioritaire sur l’authentification unique transparente si l’appareil est inscrit auprès d’Azure AD et est joint au domaine. Avec l’authentification unique à partir d’Azure AD Join, l’utilisateur voit une vignette de connexion qui indique « Connecté à Windows ».
 - Vérifiez que l’URL Azure AD (`https://autologon.microsoftazuread-sso.com`) fait partie des paramètres de la zone Intranet de l’utilisateur.
-- Vérifiez que l’appareil d’entreprise est joint au domaine Active Directory. L’appareil _n’a pas_ besoin d’être [joint à Azure AD](../active-directory-azureadjoin-overview.md) pour que l’authentification unique fluide soit opérationnelle.
+- Vérifiez que l’appareil d’entreprise est joint au domaine Active Directory. L’appareil _n’a pas_ besoin d’être [joint à Azure AD](../devices/overview.md) pour que l’authentification unique fluide soit opérationnelle.
 - Assurez-vous que l'utilisateur est connecté à l'appareil via un compte de domaine Active Directory.
 - Vérifiez que le compte de l’utilisateur provient d’une forêt Active Directory dans laquelle l’authentification unique (SSO) transparente a été configurée.
 - Vérifiez que l’appareil est connecté au réseau d’entreprise.
@@ -93,11 +94,11 @@ Utilisez la liste de contrôle suivante pour résoudre les problèmes d’authen
 Si vous activez l’audit des réussites sur votre contrôleur de domaine, chaque fois qu’un utilisateur se connecte à l’aide de l’authentification unique transparente, une entrée de sécurité est enregistrée dans le journal des événements. Vous trouverez ces événements de sécurité au moyen de la requête suivante. (Recherchez l'événement **4769** associé au compte d'ordinateur **AzureADSSOAcc$** .)
 
 ```
-    <QueryList>
-      <Query Id="0" Path="Security">
-    <Select Path="Security">*[EventData[Data[@Name='ServiceName'] and (Data='AZUREADSSOACC$')]]</Select>
-      </Query>
-    </QueryList>
+  <QueryList>
+    <Query Id="0" Path="Security">
+      <Select Path="Security">*[EventData[Data[@Name='ServiceName'] and (Data='AZUREADSSOACC$')]]</Select>
+    </Query>
+  </QueryList>
 ```
 
 ## <a name="manual-reset-of-the-feature"></a>Réinitialisation manuelle de la fonctionnalité
@@ -106,7 +107,7 @@ Si vous n’avez pas réussi à résoudre le problème, vous pouvez réinitialis
 
 ### <a name="step-1-import-the-seamless-sso-powershell-module"></a>Étape 1 : Importer le module PowerShell Authentification unique (SSO) transparente
 
-1. Commencez par télécharger et installer [Azure AD PowerShell](https://docs.microsoft.com/powershell/azure/active-directory/overview).
+1. Commencez par télécharger et installer [Azure AD PowerShell](/powershell/azure/active-directory/overview).
 2. Accédez au dossier `%programfiles%\Microsoft Azure Active Directory Connect`.
 3. Importez le module PowerShell Authentification unique (SSO) transparente à l’aide de la commande suivante : `Import-Module .\AzureADSSO.psd1`.
 

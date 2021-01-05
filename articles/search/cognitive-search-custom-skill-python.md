@@ -8,12 +8,13 @@ ms.author: luisca
 ms.service: cognitive-search
 ms.topic: conceptual
 ms.date: 01/15/2020
-ms.openlocfilehash: fc69761a05ea381d39d58d5ebf0046e0d9874961
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-python
+ms.openlocfilehash: 40e20ad4bab0275b44cd868521c7dc70dec52567
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77210463"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88936127"
 ---
 # <a name="example-create-a-custom-skill-using-python"></a>Exemple : Créer une compétence personnalisée avec Python
 
@@ -25,12 +26,12 @@ La conception de la compétence personnalisée est simple (elle concatène deux 
 
 + Pour connaître l’interface d’entrée et de sortie qu’une compétence personnalisée doit implémenter, examinez l’[interface de compétence personnalisée](cognitive-search-custom-skill-interface.md).
 
-+ Configurez votre environnement. Nous avons suivi [ce tutoriel de bout en bout](https://docs.microsoft.com/azure/python/tutorial-vs-code-serverless-python-01) pour configurer une fonction Azure serverless à l’aide d’extensions Visual Studio Code et Python. Ce tutoriel va vous guider tout au long de l’installation des outils et des composants suivants : 
++ Configurez votre environnement. Nous avons suivi [ce tutoriel de bout en bout](/azure/python/tutorial-vs-code-serverless-python-01) pour configurer une fonction Azure serverless à l’aide d’extensions Visual Studio Code et Python. Ce tutoriel va vous guider tout au long de l’installation des outils et des composants suivants : 
 
   + [Python 3.75](https://www.python.org/downloads/release/python-375/)
   + [Visual Studio Code](https://code.visualstudio.com/)
   + [Extension Python pour Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=ms-python.python)
-  + [Azure Functions Core Tools](https://docs.microsoft.com/azure/azure-functions/functions-run-local#v2)
+  + [Azure Functions Core Tools](../azure-functions/functions-run-local.md#v2)
   + [Extension Azure Functions pour Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurefunctions)
 
 ## <a name="create-an-azure-function"></a>Création d’une fonction Azure
@@ -269,5 +270,5 @@ Félicitations ! Vous avez créé votre première qualification personnalisée. 
 + [Super compétences : référentiel de compétences personnalisées](https://github.com/Azure-Samples/azure-search-power-skills)
 + [Ajouter une qualification personnalisée à un pipeline d’enrichissement par IA](cognitive-search-custom-skill-interface.md)
 + [Guide pratique pour définir un ensemble de compétences](cognitive-search-defining-skillset.md)
-+ [Créer un jeu de compétences (REST)](https://docs.microsoft.com/rest/api/searchservice/create-skillset)
++ [Créer un jeu de compétences (REST)](/rest/api/searchservice/create-skillset)
 + [Guide pratique pour mapper des champs enrichis](cognitive-search-output-field-mapping.md)

@@ -7,18 +7,20 @@ ms.service: web-application-firewall
 ms.date: 11/14/2019
 ms.author: ant
 ms.topic: conceptual
-ms.openlocfilehash: 9cfb44fbf84ad85f3e2684dfec21cc83d4aaa666
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 483d261a8cc107d01cfb7a405eac43667d7efcc6
+ms.sourcegitcommit: 33368ca1684106cb0e215e3280b828b54f7e73e8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82131251"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92131834"
 ---
 # <a name="troubleshoot-web-application-firewall-waf-for-azure-application-gateway"></a>Résoudre les problèmes liés au pare-feu d’applications web (WAF) pour Azure Application Gateway
 
 Vous pouvez prendre plusieurs mesures si les demandes censées transiter par votre pare-feu d’applications web (WAF) sont bloquées.
 
 Tout d’abord, veillez à lire les documents de [présentation du WAF](ag-overview.md) et de [configuration du WAF](application-gateway-waf-configuration.md). De même, vérifiez que vous avez activé la [supervision du WAF](../../application-gateway/application-gateway-diagnostics.md). Ces articles expliquent comment fonctionne le WAF et ses ensembles de règles et comment accéder aux journaux du WAF.
+
+Les ensembles de règles OWASP sont conçues de manière à être très strictes et adaptées aux besoins spécifiques de l’application ou de l’organisation qui utilise WAF. Il est tout à fait normal, et même attendu dans de nombreux cas, de créer des exclusions, des règles personnalisées, et même de désactiver des règles qui peuvent causer des problèmes ou des faux positifs. Les stratégies par site et par URI permettent que ces changements n’affectent que des sites/URI spécifiques de sorte que tout changement ne devrait pas affecter d’autres sites qui pourraient ne pas être confrontés aux mêmes problèmes. 
 
 ## <a name="understanding-waf-logs"></a>Compréhension des journaux du WAF
 
@@ -135,7 +137,7 @@ Les deux dernières entrées de journal montrent que la demande a été bloquée
 
 ## <a name="fixing-false-positives"></a>Correction des faux-positifs
 
-Compte tenu de ces éléments et sachant que la règle 942130 est celle qui a mis en correspondance la chaîne *1=1*, vous pouvez prendre quelques mesures pour empêcher le blocage du trafic :
+Compte tenu de ces éléments et sachant que la règle 942130 est celle qui a mis en correspondance la chaîne *1=1* , vous pouvez prendre quelques mesures pour empêcher le blocage du trafic :
 
 - Utiliser une liste d’exclusion.
 
@@ -148,11 +150,11 @@ Pour prendre une décision avisée sur le traitement d’un faux positif, il est
 
 Un des avantages d’utiliser une liste d’exclusion est que seule une partie d’une demande est désactivée. Cependant, cela signifie qu’une exclusion spécifique est applicable à l’ensemble du trafic transitant par votre WAF, car il s’agit d’un paramètre global. Cela peut par exemple causer un problème si *1=1* est une demande valide dans le corps pour une application donnée, mais pas pour les autres. Un autre avantage est que vous pouvez choisir entre exclure le corps, les en-têtes et les cookies si une certaine condition est remplie, au lieu d’exclure la demande dans son intégralité.
 
-À certaines occasions, il peut arriver que certains paramètres spécifiques soient transmis au WAF de manière peu intuitive. Par exemple, un jeton est transmis quand l’authentification repose sur Azure Active Directory. Ce jeton, *__RequestVerificationToken*, est généralement transmis dans le cookie d’une demande. Cependant, dans certains cas où les cookies sont désactivés, ce jeton est aussi transmis comme attribut de demande ou « arg ». Si cela se produit, vous devez veiller à ce que *__RequestVerificationToken* soit également ajouté à la liste d’exclusion comme **nom d’attribut de la demande**.
+À certaines occasions, il peut arriver que certains paramètres spécifiques soient transmis au WAF de manière peu intuitive. Par exemple, un jeton est transmis quand l’authentification repose sur Azure Active Directory. Ce jeton, *__RequestVerificationToken* , est généralement transmis dans le cookie d’une demande. Cependant, dans certains cas où les cookies sont désactivés, ce jeton est aussi transmis comme attribut de demande ou « arg ». Si cela se produit, vous devez veiller à ce que *__RequestVerificationToken* soit également ajouté à la liste d’exclusion comme **nom d’attribut de la demande** .
 
 ![Exclusions](../media/web-application-firewall-troubleshoot/exclusion-list.png)
 
-Dans cet exemple, vous souhaitez exclure le **nom d’attribut de la demande** correspondant à *text1*. Cela est visible dans les journaux du pare-feu où figure le nom de l’attribut : **data: Matched Data: 1=1 found within ARGS:text1: 1=1**. L’attribut est **text1**. Il existe d’autres façons de rechercher ce nom d’attribut ; consultez [Rechercher les noms d’attributs d’une demande](#finding-request-attribute-names).
+Dans cet exemple, vous souhaitez exclure le **nom d’attribut de la demande** correspondant à *text1* . Cela est visible dans les journaux du pare-feu où figure le nom de l’attribut : **data: Matched Data: 1=1 found within ARGS:text1: 1=1** . L’attribut est **text1** . Il existe d’autres façons de rechercher ce nom d’attribut ; consultez [Rechercher les noms d’attributs d’une demande](#finding-request-attribute-names).
 
 ![Listes d’exclusions du WAF](../media/web-application-firewall-troubleshoot/waf-config.png)
 
@@ -170,9 +172,9 @@ Si vous voulez utiliser Azure PowerShell, consultez [Personnaliser les règles d
 
 À l’aide de [Fiddler](https://www.telerik.com/fiddler), inspectez les différentes demandes et identifiez les champs spécifiques d’une page web qui sont appelés. Cela peut vous aider à exclure certains champs de l’inspection avec des listes d’exclusion.
 
-Dans cet exemple, vous pouvez voir que le champ dans lequel la chaîne *1=1* a été entrée s’appelle **text1**.
+Dans cet exemple, vous pouvez voir que le champ dans lequel la chaîne *1=1* a été entrée s’appelle **text1** .
 
-![Fiddler](../media/web-application-firewall-troubleshoot/fiddler-1.png)
+:::image type="content" source="../media/web-application-firewall-troubleshoot/fiddler-1.png" alt-text="Capture d’écran du débogueur web Progress Telerik Fiddler. Dans l’onglet Raw, 1 = 1 est visible après le nom text1." border="false":::
 
 Il s’agit d’un champ que vous pouvez exclure. Pour en savoir plus sur les listes d’exclusion, consultez [Limites de la taille des demandes adressées au pare-feu d’applications web et listes d’exclusions](application-gateway-waf-configuration.md#waf-exclusion-lists). Vous pouvez exclure l’évaluation dans ce cas en configurant l’exclusion suivante :
 
@@ -291,15 +293,15 @@ Compte tenu du fonctionnement des ensembles de règles CRS et sachant que l’en
 
 La première entrée est journalisée, car l’utilisateur a utilisé une adresse IP numérique pour accéder à Application Gateway, ce qui peut être ignoré dans ce cas.
 
-La deuxième (règle 942130) est celle qui nous intéresse. En y regardant de plus près, vous pouvez voir qu’elle a été mise en correspondance avec un modèle (1=1) et que le champ est nommé **text1**. Suivez les mêmes étapes que précédemment pour exclure le **Nom d’attribut de la demande** qui **correspond** à **1=1**.
+La deuxième (règle 942130) est celle qui nous intéresse. En y regardant de plus près, vous pouvez voir qu’elle a été mise en correspondance avec un modèle (1=1) et que le champ est nommé **text1** . Suivez les mêmes étapes que précédemment pour exclure le **Nom d’attribut de la demande** qui **correspond** à **1=1** .
 
 ## <a name="finding-request-header-names"></a>Rechercher les noms d’en-tête d’une demande
 
-Encore une fois, Fiddler est un outil utile quand il s’agit de rechercher les noms d’en-tête d’une demande. Dans la capture d’écran suivante figurent les en-têtes de la demande GET, à savoir *Content-Type*, *User-Agent*, etc.
+Encore une fois, Fiddler est un outil utile quand il s’agit de rechercher les noms d’en-tête d’une demande. Dans la capture d’écran suivante figurent les en-têtes de la demande GET, à savoir *Content-Type* , *User-Agent* , etc.
 
-![Fiddler](../media/web-application-firewall-troubleshoot/fiddler-2.png)
+:::image type="content" source="../media/web-application-firewall-troubleshoot/fiddler-2.png" alt-text="Capture d’écran du débogueur web Progress Telerik Fiddler. L’onglet Raw répertorie les détails contenus dans l’en-tête de demande, tels que les variables connection, content-type et user-agent." border="false":::
 
-Une autre façon d’examiner les en-têtes de demande et de réponse est de regarder dans les outils de développement de Chrome. Vous pouvez appuyer sur F12 ou cliquer avec le bouton droit sur -> **Inspecter** -> **Outils de développement**, puis sélectionner l’onglet **Network**. Chargez une page web, puis cliquez sur la demande que vous voulez inspecter.
+Une autre façon d’examiner les en-têtes de demande et de réponse est de regarder dans les outils de développement de Chrome. Vous pouvez appuyer sur F12 ou cliquer avec le bouton droit sur -> **Inspecter** -> **Outils de développement** , puis sélectionner l’onglet **Network** . Chargez une page web, puis cliquez sur la demande que vous voulez inspecter.
 
 ![Chrome F12](../media/web-application-firewall-troubleshoot/chrome-f12.png)
 
@@ -311,7 +313,7 @@ Si la demande contient des cookies, l’onglet **Cookies** peut être sélection
 
 - Désactiver l’inspection du corps de la demande
 
-   En désactivant **Inspecter le corps de la demande**, votre pare-feu n’évalue pas le corps des demandes pour l’ensemble du trafic. Cela peut être utile si vous savez que le corps des demandes n’est pas malveillant pour votre application.
+   En désactivant **Inspecter le corps de la demande** , votre pare-feu n’évalue pas le corps des demandes pour l’ensemble du trafic. Cela peut être utile si vous savez que le corps des demandes n’est pas malveillant pour votre application.
 
    En désactivant cette option, seul le corps de la demande n’est pas inspecté. Les en-têtes et les cookies sont inspectés, sauf ceux qui ont été exclus avec la fonctionnalité de liste d’exclusion.
 

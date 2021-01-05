@@ -1,6 +1,6 @@
 ---
 title: Préchargement d’éléments multimédias sur un point de terminaison CDN Azure | Microsoft Docs
-description: Découvrez comment précharger du contenu mis en cache sur un point de terminaison CDN Azure.
+description: Découvrez comment précharger du contenu mis en cache sur un point de terminaison Azure Content Delivery Network. Cette fonctionnalité est disponible sur certaines versions du produit.
 services: cdn
 documentationcenter: ''
 author: asudbring
@@ -11,15 +11,15 @@ ms.service: azure-cdn
 ms.workload: tbd
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.date: 02/12/2018
 ms.author: allensu
-ms.openlocfilehash: c45d0a9195a719d830753a9614cfa7efb6f1c23d
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 7fb414680b8ff64d057f9f68d7b97380baeaa551
+ms.sourcegitcommit: 400f473e8aa6301539179d4b320ffbe7dfae42fe
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81260273"
+ms.lasthandoff: 10/28/2020
+ms.locfileid: "92778196"
 ---
 # <a name="pre-load-assets-on-an-azure-cdn-endpoint"></a>Préchargement d’éléments multimédias sur un point de terminaison CDN Azure
 [!INCLUDE [cdn-verizon-only](../../includes/cdn-verizon-only.md)]
@@ -37,17 +37,17 @@ Ce didacticiel vous guide tout au long du préchargement de contenu mis en cache
 1. Dans le [portail Azure](https://portal.azure.com), recherchez le profil CDN qui contient le point de terminaison que vous souhaitez précharger. Le volet du profil s’ouvre.
     
 2. Cliquez sur le point de terminaison dans la liste. Le volet du point de terminaison s’ouvre.
-3. Dans le volet du point de terminaison CDN, sélectionnez **Charger**.
+3. Dans le volet du point de terminaison CDN, sélectionnez **Charger** .
    
     ![Volet du point de terminaison CDN](./media/cdn-preload-endpoint/cdn-endpoint-blade.png)
    
     Le volet **Charger** s’ouvre.
    
     ![Volet de chargement CDN](./media/cdn-preload-endpoint/cdn-load-blade.png)
-4. Sous **Chemin du contenu**, entrez le chemin complet de chaque ressource que vous souhaitez charger (par exemple, `/pictures/kitten.png`).
+4. Sous **Chemin du contenu** , entrez le chemin complet de chaque ressource que vous souhaitez charger (par exemple, `/pictures/kitten.png`).
    
    > [!TIP]
-   > Après avoir commencé à saisir du texte, d’autres zones de texte **Chemin du contenu** s’afficheront pour vous permettre de créer une liste de plusieurs ressources. Pour supprimer des ressources de la liste, sélectionnez le bouton avec les points de suspension (...), puis sélectionnez **Supprimer**.
+   > Après avoir commencé à saisir du texte, d’autres zones de texte **Chemin du contenu** s’afficheront pour vous permettre de créer une liste de plusieurs ressources. Pour supprimer des ressources de la liste, sélectionnez le bouton avec les points de suspension (...), puis sélectionnez **Supprimer** .
    > 
    > Chaque chemin du contenu doit être une URL relative qui satisfait aux [expressions régulières](/dotnet/standard/base-types/regular-expression-language-quick-reference) suivantes :  
    > - Chargement d’un fichier unique : `^(?:\/[a-zA-Z0-9-_.%=\u0020]+)+$`  
@@ -58,7 +58,7 @@ Ce didacticiel vous guide tout au long du préchargement de contenu mis en cache
    > 
    
     ![Bouton Charger](./media/cdn-preload-endpoint/cdn-load-paths.png)
-5. Lorsque vous avez terminé d’entrer des chemins de contenu, sélectionnez **Charger**.
+5. Lorsque vous avez terminé d’entrer des chemins de contenu, sélectionnez **Charger** .
    
 
 > [!NOTE]
@@ -68,6 +68,5 @@ Ce didacticiel vous guide tout au long du préchargement de contenu mis en cache
 
 ## <a name="see-also"></a>Voir aussi
 * [Purger un point de terminaison CDN Azure](cdn-purge-endpoint.md)
-* [Référence API REST du CDN Azure : précharger le contenu d’un point de terminaison](https://docs.microsoft.com/rest/api/cdn/endpoints/loadcontent)
-* [Référence API REST du CDN Azure : vider le contenu d’un point de terminaison](https://docs.microsoft.com/rest/api/cdn/endpoints/purgecontent)
-
+* [Référence API REST du CDN Azure : précharger le contenu d’un point de terminaison](/rest/api/cdn/endpoints/loadcontent)
+* [Référence API REST du CDN Azure : vider le contenu d’un point de terminaison](/rest/api/cdn/endpoints/purgecontent)

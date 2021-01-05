@@ -9,17 +9,17 @@ editor: ''
 tags: azure-resource-manager
 ms.service: network-watcher
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 01/26/2020
 ms.author: damendo
-ms.openlocfilehash: 104311904b99cadbbc8c0267a98f2709443608ea
-ms.sourcegitcommit: df8b2c04ae4fc466b9875c7a2520da14beace222
+ms.openlocfilehash: c3ac2eab68963d75cd5c916e06285d49edd37aed
+ms.sourcegitcommit: ad677fdb81f1a2a83ce72fa4f8a3a871f712599f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/08/2020
-ms.locfileid: "80891456"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97656085"
 ---
 # <a name="configure-nsg-flow-logs-from-an-azure-resource-manager-template"></a>Configurer des journaux de flux NSG avec un modèle Azure Resource Manager
 
@@ -31,15 +31,15 @@ ms.locfileid: "80891456"
 > - [Azure Resource Manager](network-watcher-nsg-flow-logging-azure-resource-manager.md)
 
 
-[Azure Resource Manager](https://azure.microsoft.com/features/resource-manager/) est la méthode native et puissante d’Azure pour gérer votre [infrastructure en tant que code](https://docs.microsoft.com/azure/devops/learn/what-is-infrastructure-as-code).
+[Azure Resource Manager](https://azure.microsoft.com/features/resource-manager/) est la méthode native et puissante d’Azure pour gérer votre [infrastructure en tant que code](/azure/devops/learn/what-is-infrastructure-as-code).
 
-Cet article explique comment activer les [journaux de flux NSG](https://docs.microsoft.com/azure/network-watcher/network-watcher-nsg-flow-logging-overview) programmatiquement avec un modèle Azure Resource Manager et Azure PowerShell. Nous commençons par fournir une vue d’ensemble des propriétés de l’objet de journal de flux NSG, suivie de quelques exemples de modèles. Ensuite, nous déployons le modèle à l’aide d’une instance PowerShell locale.
+Cet article explique comment activer les [journaux de flux NSG](./network-watcher-nsg-flow-logging-overview.md) programmatiquement avec un modèle Azure Resource Manager et Azure PowerShell. Nous commençons par fournir une vue d’ensemble des propriétés de l’objet de journal de flux NSG, suivie de quelques exemples de modèles. Ensuite, nous déployons le modèle à l’aide d’une instance PowerShell locale.
 
 
 ## <a name="nsg-flow-logs-object"></a>Objet de journaux de flux NSG
 
 L'objet de journaux de flux NSG ainsi que tous les paramètres sont indiqués ci-après.
-Pour obtenir une vue d’ensemble complète des propriétés, vous pouvez consulter les [informations de référence sur le modèle de journaux de flux NSG](https://docs.microsoft.com/azure/templates/microsoft.network/2019-11-01/networkwatchers/flowlogs#RetentionPolicyParameters).
+Pour obtenir une vue d’ensemble complète des propriétés, vous pouvez consulter les [informations de référence sur le modèle de journaux de flux NSG](/azure/templates/microsoft.network/2019-11-01/networkwatchers/flowlogs#RetentionPolicyParameters).
 
 ```json
 {
@@ -76,8 +76,8 @@ Pour créer une ressource Microsoft.Network/networkWatchers/flowLogs, ajoutez le
 
 Si vous utilisez des modèles Azure Resource Manager pour la première fois, vous pouvez en savoir plus à leur sujet à l’aide des liens ci-dessous.
 
-* [Déployer des ressources à l’aide de modèles Resource Manager et d’Azure PowerShell](https://docs.microsoft.com/azure/azure-resource-manager/templates/deploy-powershell#deploy-local-template)
-* [Tutoriel : Créer et déployer votre premier modèle Azure Resource Manager](https://docs.microsoft.com/azure/azure-resource-manager/templates/template-tutorial-create-first-template?tabs=azure-powershell)
+* [Déployer des ressources à l’aide de modèles Resource Manager et d’Azure PowerShell](../azure-resource-manager/templates/deploy-powershell.md#deploy-local-template)
+* [Tutoriel : Créer et déployer votre premier modèle Azure Resource Manager](../azure-resource-manager/templates/template-tutorial-create-first-template.md?tabs=azure-powershell)
 
 
 Vous trouverez ci-dessous deux exemples de modèles complets permettant de configurer des journaux de flux NSG.
@@ -110,7 +110,7 @@ Vous trouverez ci-dessous deux exemples de modèles complets permettant de confi
 ```
 
 > [!NOTE]
-> * Le nom de la ressource a le format « ressource parente>/ressource enfant ». Ici, la ressource parente est l’instance de Network Watcher régionale (format : NetworkWatcher_<RegionName>. Exemple : NetworkWatcher_centraluseuap)
+> * Le nom de la ressource a le format « Parent Resource_Child resource ». Ici, la ressource parente est l’instance de Network Watcher régionale (format : NetworkWatcher_NomRégion. Exemple : NetworkWatcher_centraluseuap)
 > * targetResourceId est l’ID de ressource du groupe de sécurité réseau cible
 > * storageId est l’ID de ressource du compte de stockage de destination
 
@@ -122,33 +122,32 @@ Vous trouverez ci-dessous deux exemples de modèles complets permettant de confi
   "contentVersion": "1.0.0.0",
   "apiProfile": "2019-09-01",
   "resources": [
- {
-    "name": "NetworkWatcher_centraluseuap/Microsoft.NetworkDalanDemoPerimeterNSG",
-    "type": "Microsoft.Network/networkWatchers/FlowLogs/",
-    "location": "centraluseuap",
-    "apiVersion": "2019-09-01",
-    "properties": {
-      "targetResourceId": "/subscriptions/56abfbd6-ec72-4ce9-831f-bc2b6f2c5505/resourceGroups/DalanDemo/providers/Microsoft.Network/networkSecurityGroups/PerimeterNSG",
-      "storageId": "/subscriptions/56abfbd6-ec72-4ce9-831f-bc2b6f2c5505/resourceGroups/MyCanaryFlowLog/providers/Microsoft.Storage/storageAccounts/storagev2ira",
-      "enabled": true,
-      "flowAnalyticsConfiguration": {
-        "networkWatcherFlowAnalyticsConfiguration": {
+    {
+      "name": "NetworkWatcher_centraluseuap/Microsoft.NetworkDalanDemoPerimeterNSG",
+      "type": "Microsoft.Network/networkWatchers/FlowLogs/",
+      "location": "centraluseuap",
+      "apiVersion": "2019-09-01",
+      "properties": {
+        "targetResourceId": "/subscriptions/56abfbd6-ec72-4ce9-831f-bc2b6f2c5505/resourceGroups/DalanDemo/providers/Microsoft.Network/networkSecurityGroups/PerimeterNSG",
+        "storageId": "/subscriptions/56abfbd6-ec72-4ce9-831f-bc2b6f2c5505/resourceGroups/MyCanaryFlowLog/providers/Microsoft.Storage/storageAccounts/storagev2ira",
+        "enabled": true,
+        "flowAnalyticsConfiguration": {
+          "networkWatcherFlowAnalyticsConfiguration": {
             "enabled": true,
             "workspaceResourceId": "/subscriptions/56abfbd6-ec72-4ce9-831f-bc2b6f2c5505/resourceGroups/defaultresourcegroup-wcus/providers/Microsoft.OperationalInsights/workspaces/1c4f42e5-3a02-4146-ac9b-3051d8501db0",
             "trafficAnalyticsInterval": 10
-                }
-      },
-      "retentionPolicy": {
-        "days": 5,
-        "enabled": true
-      },
-      "format": {
-        "type": "JSON",
-        "version": 2            
+          }
+        },
+        "retentionPolicy": {
+          "days": 5,
+          "enabled": true
+        },
+        "format": {
+          "type": "JSON",
+          "version": 2          
+        }
       }
     }
-
-  }
   ]
 }
 ```
@@ -160,21 +159,26 @@ Vous pouvez enregistrer les exemples de modèles ci-dessus localement en tant qu
 
 Pour déployer le modèle, exécutez la commande suivante dans PowerShell.
 ```azurepowershell
+$context = Get-AzSubscription -SubscriptionId 56acfbd6-vc72-43e9-831f-bcdb6f2c5505
+Set-AzContext $context
 New-AzResourceGroupDeployment -Name EnableFlowLog -ResourceGroupName NetworkWatcherRG `
     -TemplateFile "C:\MyTemplates\azuredeploy.json"
 ```
 
+> [!NOTE]
+> Les commandes ci-dessus déploient une ressource dans le groupe de ressources NetworkWatcherRG et non le groupe de ressources contenant le groupe de sécurité réseau
+
 
 ## <a name="verifying-your-deployment"></a>Vérification de votre déploiement
 
-Il existe deux façons de vérifier si votre déploiement a réussi. Votre console PowerShell doit indiquer « Succeeded » (réussite) pour « ProvisioningState ». De plus, vous pouvez consulter la [page du portail dédiée aux journaux de flux NSG](https://ms.portal.azure.com/#blade/Microsoft_Azure_Network/NetworkWatcherMenuBlade/flowLogs) pour vérifier vos modifications. Si vous rencontrez des problèmes lors du déploiement, consultez [Résolution des erreurs courantes dans un déploiement Azure avec Azure Resource Manager](https://docs.microsoft.com/azure/azure-resource-manager/templates/common-deployment-errors).
+Il existe deux façons de vérifier si votre déploiement a réussi. Votre console PowerShell doit indiquer « Succeeded » (réussite) pour « ProvisioningState ». De plus, vous pouvez consulter la [page du portail dédiée aux journaux de flux NSG](https://ms.portal.azure.com/#blade/Microsoft_Azure_Network/NetworkWatcherMenuBlade/flowLogs) pour vérifier vos modifications. Si vous rencontrez des problèmes lors du déploiement, consultez [Résolution des erreurs courantes dans un déploiement Azure avec Azure Resource Manager](../azure-resource-manager/templates/common-deployment-errors.md).
 
 ## <a name="deleting-your-resource"></a>Suppression de votre ressource
-Azure permet la suppression des ressources via le mode de déploiement « Complet ». Pour supprimer une ressource de journaux de flux, spécifiez un déploiement en mode complet sans inclure la ressource que vous souhaitez supprimer. En savoir plus sur le [mode de déploiement complet](https://docs.microsoft.com/azure/azure-resource-manager/templates/deployment-modes#complete-mode)
+Azure permet la suppression des ressources via le mode de déploiement « Complet ». Pour supprimer une ressource de journaux de flux, spécifiez un déploiement en mode complet sans inclure la ressource que vous souhaitez supprimer. En savoir plus sur le [mode de déploiement complet](../azure-resource-manager/templates/deployment-modes.md#complete-mode)
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 Découvrez comment visualiser vos données de flux NSG avec les outils suivants :
 * [Microsoft Power BI](network-watcher-visualize-nsg-flow-logs-power-bi.md)
 * [Outils open source](network-watcher-visualize-nsg-flow-logs-open-source-tools.md)
-* [Azure Traffic Analytics](https://docs.microsoft.com/azure/network-watcher/traffic-analytics)
+* [Azure Traffic Analytics](./traffic-analytics.md)

@@ -7,12 +7,12 @@ ms.workload: infrastructure-services
 ms.topic: conceptual
 ms.date: 05/08/2019
 ms.author: cynthn
-ms.openlocfilehash: 33d530181f4cc389f81ea83dc42b774ccfc8fd85
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: d5dda567d0cfa89863731a3e8e651aede4ab5957
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81869623"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87825189"
 ---
 # <a name="frequently-asked-question-about-windows-virtual-machines"></a>Questions fréquentes sur les machines virtuelles Azure
 Cet article traite certaines questions courantes concernant les machines virtuelles Windows créées dans Azure avec le modèle de déploiement Resource Manager. Pour la version Linux de cette rubrique, consultez [Forum aux questions sur les machines virtuelles Linux](../linux/faq.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
@@ -23,7 +23,7 @@ Tous les abonnés peuvent exécuter des logiciels serveur sur une machine virtue
 Certaines versions de Windows 7, Windows 8.1 et Windows 10 sont disponibles pour les abonnés MSDN Azure et les abonnés Développement et test MSDN avec paiement à l’utilisation (pour les tâches de test et de développement). Pour plus d’informations, notamment des instructions et des limitations, voir [Images de client Windows pour les abonnés MSDN](https://azure.microsoft.com/blog/2014/05/29/windows-client-images-on-azure/). 
 
 ## <a name="how-much-storage-can-i-use-with-a-virtual-machine"></a>Quelle quantité de stockage puis-je utiliser avec une machine virtuelle ?
-Chaque disque de données peut avoir une capacité allant jusqu’à 32 767 Gio. Le nombre de disques de données que vous pouvez utiliser dépend de la taille de la machine virtuelle. Pour en savoir plus, voir la rubrique [Tailles de machines virtuelles](sizes.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
+Chaque disque de données peut avoir une capacité allant jusqu’à 32 767 Gio. Le nombre de disques de données que vous pouvez utiliser dépend de la taille de la machine virtuelle. Pour en savoir plus, voir la rubrique [Tailles de machines virtuelles](../sizes.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
 
 Les disques managés Azure sont les offres de stockage sur disque recommandées à utiliser avec les machines virtuelles Azure pour le stockage persistant de données. Vous pouvez utiliser plusieurs disques managés avec chaque machine virtuelle. Ces disques offrent deux types d’options de stockage durable : les disques managés Premium et les disques managés Standard. Pour obtenir des informations sur la tarification, consultez [Tarification de la fonctionnalité Disques managés](https://azure.microsoft.com/pricing/details/managed-disks).
 
@@ -32,7 +32,7 @@ Les comptes de stockage Azure peuvent aussi fournir le stockage pour le disque d
 ## <a name="how-can-i-access-my-virtual-machine"></a>Comment puis-je accéder à ma machine virtuelle ?
 Établissez une connexion à distance à l’aide du protocole RDP (Remote Desktop Protocol) pour une machine virtuelle Windows. Pour plus d’informations, voir [Connexion à une machine virtuelle Azure exécutant Windows](connect-logon.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). Deux connexions simultanées maximum sont prises en charge, sauf si le serveur est configuré en tant qu’hôte de session Services Bureau à distance.  
 
-En cas de problème avec le Bureau à distance, consultez [Résoudre les problèmes de connexion Bureau à distance à une machine virtuelle Azure Windows](troubleshoot-rdp-connection.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). 
+En cas de problème avec le Bureau à distance, consultez [Résoudre les problèmes de connexion Bureau à distance à une machine virtuelle Azure Windows](../troubleshooting/troubleshoot-rdp-connection.md?toc=/azure/virtual-machines/windows/toc.json). 
 
 Si vous connaissez bien Hyper-V, vous pouvez rechercher un outil semblable à VMConnect. Azure n’offre pas d’outil similaire car l’accès console à une machine virtuelle n’est pas pris en charge.
 
@@ -79,17 +79,35 @@ Les noms d’utilisateur peuvent comporter un maximum de 20 caractères et ne do
 
 Les noms d’utilisateur suivants ne sont pas autorisés :
 
-| | | | |
-|-----------------|-----------|--------------------|----------|
-| `administrator` | `admin`   | `user`             | `user1`  |
-| `test`          | `user2`   | `test1`            | `user3`  |
-| `admin1`        | `1`       | `123`              | `a`      |
-| `actuser`       | `adm`     | `admin2`           | `aspnet` |
-| `backup`        | `console` | `david`            | `guest`  |
-| `john`          | `owner`   | `root`             | `server` |
-| `sql`           | `support` | `support_388945a0` | `sys`    |
-| `test2`         | `test3`   | `user4`            | `user5`  |
-
+- `1`
+- `123`
+- `a`
+- `actuser`
+- `adm`
+- `admin`
+- `admin1`
+- `admin2`
+- `administrator`
+- `aspnet`
+- `backup`
+- `console`
+- `david`
+- `guest`
+- `john`
+- `owner`
+- `root`
+- `server`
+- `sql`
+- `support_388945a0`
+- `support`
+- `sys`
+- `test`
+- `test1`
+- `test2`
+- `test3`
+- `user`
+- `user1`
+- `user2`
 
 ## <a name="what-are-the-password-requirements-when-creating-a-vm"></a>Quelles sont les exigences en matière de mot de passe lors de la création d’une machine virtuelle ?
 

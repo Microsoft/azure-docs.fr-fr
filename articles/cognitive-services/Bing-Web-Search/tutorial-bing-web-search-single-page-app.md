@@ -1,5 +1,5 @@
 ---
-title: 'Tutoriel : Créer une application web monopage - API Recherche Web Bing'
+title: 'Tutoriel : Créer une application web monopage - API Recherche Web Bing'
 titleSuffix: Azure Cognitive Services
 description: Cette application monopage montre comment l’API Recherche Web Bing peut être utilisée pour récupérer, analyser et afficher des résultats de recherche pertinents dans une application monopage.
 services: cognitive-services
@@ -10,14 +10,20 @@ ms.subservice: bing-web-search
 ms.topic: tutorial
 ms.date: 03/05/2020
 ms.author: aahi
-ms.openlocfilehash: f692367ad431dc8f1623e1b3d5109c313e351934
-ms.sourcegitcommit: 9ee0cbaf3a67f9c7442b79f5ae2e97a4dfc8227b
+ms.custom: devx-track-js
+ms.openlocfilehash: ff54d605fd81fa640314d99359f1aabacf7a469e
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "78943872"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96350379"
 ---
-# <a name="tutorial-create-a-single-page-app-using-the-bing-web-search-api"></a>Tutoriel : Créer une application monopage avec l’API Recherche Web Bing
+# <a name="tutorial-create-a-single-page-app-using-the-bing-web-search-api"></a>Tutoriel : Créer une application web monopage à l’aide de l’API Recherche Web Bing
+
+> [!WARNING]
+> Les API Recherche Bing passent de Cognitive Services aux services de recherche Bing. À compter du **30 octobre 2020**, toutes les nouvelles instances de Recherche Bing doivent être provisionnées en suivant le processus documenté [ici](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Les API Recherche Bing provisionnées à l’aide de Cognitive Services seront prises en charge les trois prochaines années ou jusqu’à la fin de votre Contrat Entreprise, selon la première éventualité.
+> Pour obtenir des instructions de migration, consultez [Services de recherche Bing](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
 
 Cette application monopage montre comment récupérer, analyser et afficher des résultats de recherche à partir de l’API Recherche Web Bing. Le tutoriel utilise du code HTML et CSS réutilisable, et se concentre sur le code JavaScript. Les fichiers HTML, CSS et JS sont disponibles sur [GitHub](https://github.com/Azure-Samples/cognitive-services-REST-api-samples/tree/master/Tutorials/Bing-Web-Search) avec des instructions de démarrage rapide.
 
@@ -30,15 +36,16 @@ Cet exemple d’application peut :
 > * Gérer les clés d’abonnement
 > * des erreurs
 
-Pour utiliser cette application, vous devrez disposer d’un [compte Azure Cognitive Services](https://docs.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account) avec des API Recherche Bing. Si vous n’avez pas de compte, vous pouvez utiliser la [version d’évaluation gratuite](https://azure.microsoft.com/try/cognitive-services/?api=bing-web-search-api) pour obtenir une clé d’abonnement.
+Pour utiliser cette application, vous devrez disposer d’un [compte Azure Cognitive Services](../cognitive-services-apis-create-account.md) avec des API Recherche Bing.
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 Voici quelques éléments dont vous aurez besoin pour exécuter l’application :
 
+* Un abonnement Azure - [En créer un gratuitement](https://azure.microsoft.com/free/cognitive-services/)
+* Une fois que vous avez votre abonnement Azure, <a href="https://portal.azure.com/#create/Microsoft.CognitiveServicesBingSearch-v7"  title="Créer une ressource Recherche Bing"  target="_blank">créez une ressource Recherche Bing<span class="docon docon-navigate-external x-hidden-focus"></span></a> dans le portail Azure pour obtenir votre clé et votre point de terminaison. Une fois le déploiement effectué, cliquez sur **Accéder à la ressource**.
+
 * Node.js 8 ou version ultérieure
-* Une clé d’abonnement pour l’API Recherche Bing. Si vous n’en avez pas, [créez une ressource Recherche Bing v7](https://ms.portal.azure.com/#create/Microsoft.CognitiveServicesBingSearch-v7). Vous pouvez également utiliser une [clé d’essai](https://azure.microsoft.com/try/cognitive-services/?api=bing-web-search-api).
-## <a name="get-the-source-code-and-install-dependencies"></a>Obtenir le code source et installer des dépendances
 
 La première étape consiste à cloner le dépôt avec le code source de l’exemple d’application.
 
@@ -79,7 +86,7 @@ L’élément `index.html` comprend un formulaire qui permet aux utilisateurs de
 
 ## <a name="query-options"></a>Options de requête
 
-Le formulaire HTML inclut des options qui mappent à des paramètres de requête dans [l’API Recherche Web Bing v7](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-web-api-v7-reference#query-parameters). Le tableau suivant montre comment les utilisateurs peuvent filtrer les résultats de recherche à l’aide de l’exemple d’application :
+Le formulaire HTML inclut des options qui mappent à des paramètres de requête dans [l’API Recherche Web Bing v7](/rest/api/cognitiveservices-bingsearch/bing-web-api-v7-reference#query-parameters). Le tableau suivant montre comment les utilisateurs peuvent filtrer les résultats de recherche à l’aide de l’exemple d’application :
 
 | Paramètre | Description |
 |-----------|-------------|
@@ -92,7 +99,7 @@ Le formulaire HTML inclut des options qui mappent à des paramètres de requête
 | `offset` | Champ masqué. Décalage du premier résultat de recherche dans la requête, qui est utilisé pour la pagination. Il est réinitialisé sur `0` à chaque nouvelle requête. |
 
 > [!NOTE]
-> L’API Recherche Web Bing offre des paramètres de requête supplémentaires pour affiner les résultats de la recherche. Le présent exemple en utilise seulement quelque uns. Pour obtenir la liste complète des paramètres disponibles, consultez les [informations de référence sur l’API Recherche Web Bing v7](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-web-api-v7-reference#query-parameters).
+> L’API Recherche Web Bing offre des paramètres de requête supplémentaires pour affiner les résultats de la recherche. Le présent exemple en utilise seulement quelque uns. Pour obtenir la liste complète des paramètres disponibles, consultez les [informations de référence sur l’API Recherche Web Bing v7](/rest/api/cognitiveservices-bingsearch/bing-web-api-v7-reference#query-parameters).
 
 La fonction `bingSearchOptions()` convertit ces options pour correspondre au format exigé par l’API Recherche Bing.
 
@@ -296,7 +303,7 @@ Les erreurs sont gérées en appelant `renderErrorMessage()`. Si la réponse ré
 
 ## <a name="display-search-results"></a>Afficher les résultats de la recherche
 
-Il existe des [conditions d’utilisation et d’affichage](useanddisplayrequirements.md) pour les résultats retournés par l’API Recherche Web Bing. Dans la mesure où une réponse peut inclure différents types de résultats, une itération dans la collection de niveau supérieur `WebPages` ne suffit pas. Au lieu de cela, l’exemple d’application utilise `RankingResponse` pour classer les résultats conformément aux spécifications.
+Il existe des [conditions d’utilisation et d’affichage](./use-display-requirements.md) pour les résultats retournés par l’API Recherche Web Bing. Dans la mesure où une réponse peut inclure différents types de résultats, une itération dans la collection de niveau supérieur `WebPages` ne suffit pas. Au lieu de cela, l’exemple d’application utilise `RankingResponse` pour classer les résultats conformément aux spécifications.
 
 > [!NOTE]
 > Si vous voulez seulement un type de résultat unique, utilisez le paramètre de requête `responseFilter`, ou utilisez l’un des autres points de terminaison Recherche Bing, comme Recherche d’images Bing.
@@ -441,7 +448,7 @@ Les stratégies de sécurité de navigateur, comme le partage des ressources cro
 > [!NOTE]
 > Dans une application web de production, vous devez effectuer la requête côté serveur malgré tout. Dans le cas contraire, votre clé d’abonnement d’API Recherche Bing doit être incluse dans la page web, où elle est accessible à toute personne qui consulte la source. Vous êtes facturé pour toutes les utilisations associées à votre clé d’abonnement d’API, y compris les requêtes effectuées par des tiers non autorisés. Il est donc important de ne pas exposer votre clé.
 
-À des fins de développement, vous pouvez effectuer la requête par le biais d’un proxy CORS. La réponse émanant de ce type de proxy a un en-tête `Access-Control-Expose-Headers` qui met les en-têtes de réponse sur liste verte et les rend disponibles pour JavaScript.
+À des fins de développement, vous pouvez effectuer la requête par le biais d’un proxy CORS. La réponse émanant de ce type de proxy a un en-tête `Access-Control-Expose-Headers` qui filtre les en-têtes de réponse et les rend disponibles pour JavaScript.
 
 Il est facile d’installer un proxy CORS pour autoriser notre exemple d’application à accéder à l’en-tête d’ID client. Exécutez cette commande :
 

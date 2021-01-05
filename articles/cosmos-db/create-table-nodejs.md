@@ -6,22 +6,24 @@ ms.service: cosmos-db
 ms.subservice: cosmosdb-table
 ms.devlang: nodejs
 ms.topic: quickstart
-ms.date: 08/06/2019
+ms.date: 05/28/2020
 ms.author: sngun
-ms.openlocfilehash: e0d2d2ea99822c95b9fab73642db37430771c583
-ms.sourcegitcommit: 09a124d851fbbab7bc0b14efd6ef4e0275c7ee88
+ms.custom: devx-track-js
+ms.openlocfilehash: a9f5a307bfefedf74f884e39b482bd90454fc5c8
+ms.sourcegitcommit: 3bdeb546890a740384a8ef383cf915e84bd7e91e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/23/2020
-ms.locfileid: "82083762"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93096867"
 ---
 # <a name="quickstart-build-a-table-api-app-with-nodejs-and-azure-cosmos-db"></a>Démarrage rapide : Créer une application d’API Table avec Node.js et Azure Cosmos DB
+[!INCLUDE[appliesto-table-api](includes/appliesto-table-api.md)]
 
 > [!div class="op_single_selector"]
 > * [.NET](create-table-dotnet.md)
 > * [Java](create-table-java.md)
 > * [Node.JS](create-table-nodejs.md)
-> * [Python](create-table-python.md)
+> * [Python](./table-storage-how-to-use-python.md)
 > 
 
 Dans ce guide de démarrage rapide, vous allez créer un compte d’API Table Azure Cosmos DB, puis utiliser l’Explorateur de données et une application Node.js clonée à partir de GitHub pour créer des tables et des entités. Azure Cosmos DB est un service de base de données multimodèle qui vous permet de créer et d’interroger rapidement des bases de données de documents, de tables, de paires clé/valeur et de graphes avec des capacités de distribution mondiale et de mise à l’échelle horizontale.
@@ -70,19 +72,79 @@ Dans ce guide de démarrage rapide, vous allez créer un compte d’API Table Az
     git clone https://github.com/Azure-Samples/storage-table-node-getting-started.git
     ```
 
-> ![CONSEIL] Pour une procédure pas à pas détaillée sur du code similaire, consultez l’article [Exemple d’API Table Cosmos DB](table-storage-how-to-use-nodejs.md). 
+> [!TIP]
+> Pour une procédure pas à pas détaillée sur du code similaire, consultez l’article [Exemple d’API Table Cosmos DB](table-storage-how-to-use-nodejs.md). 
 
+## <a name="review-the-code"></a>Vérifier le code
+
+Cette étape est facultative. Pour savoir comment les ressources de base de données sont créées dans le code, vous pouvez examiner les extraits de code suivants. Sinon, vous pouvez passer à la section [Mise à jour de votre chaîne de connexion](#update-your-connection-string) de ce document.
+
+* Le code suivant montre comment créer une table dans le stockage Azure :
+
+  ```javascript
+  storageClient.createTableIfNotExists(tableName, function (error, createResult) {
+    if (error) return callback(error);
+
+    if (createResult.isSuccessful) {
+      console.log("1. Create Table operation executed successfully for: ", tableName);
+    }
+  }
+
+  ```
+
+* Le code suivant montre comment insérer des données dans la table :
+
+  ```javascript
+  var customer = createCustomerEntityDescriptor("Harp", "Walter", "Walter@contoso.com", "425-555-0101");
+
+  storageClient.insertOrMergeEntity(tableName, customer, function (error, result, response) {
+    if (error) return callback(error);
+
+    console.log("   insertOrMergeEntity succeeded.");
+  }
+  ```
+
+* Le code suivant montre comment interroger les données de la table :
+
+  ```javascript
+  console.log("6. Retrieving entities with surname of Smith and first names > 1 and <= 75");
+
+  var storageTableQuery = storage.TableQuery;
+  var segmentSize = 10;
+
+  // Demonstrate a partition range query whereby we are searching within a partition for a set of entities that are within a specific range. 
+  var tableQuery = new storageTableQuery()
+      .top(segmentSize)
+      .where('PartitionKey eq ?', lastName)
+      .and('RowKey gt ?', "0001").and('RowKey le ?', "0075");
+  
+  runPageQuery(tableQuery, null, function (error, result) {
+  
+      if (error) return callback(error);
+  
+  ```
+
+* Le code suivant montre comment supprimer des données de la table :
+
+  ```javascript
+  storageClient.deleteEntity(tableName, customer, function entitiesQueried(error, result) {
+      if (error) return callback(error);
+  
+      console.log("   deleteEntity succeeded.");
+  }
+  ```
+  
 ## <a name="update-your-connection-string"></a>Mise à jour de votre chaîne de connexion
 
 Maintenant, retournez dans le portail Azure afin d’obtenir les informations de votre chaîne de connexion et de les copier dans l’application. Cette opération permet à votre application de communiquer avec votre base de données hébergée. 
 
 1. Dans votre compte Azure Cosmos DB, sur le [portail Azure](https://portal.azure.com/), sélectionnez **Chaîne de connexion**. 
 
-    ![Affichez et copiez les informations de chaîne de connexion qui se trouvent dans le volet Chaîne de connexion](./media/create-table-nodejs/connection-string.png)
+    :::image type="content" source="./media/create-table-nodejs/connection-string.png" alt-text="Afficher et copier les informations de chaîne de connexion nécessaires dans le volet Chaîne de connexion":::
 
 2. Copiez la CHAÎNE DE CONNEXION PRINCIPALE à l’aide du bouton Copier à droite.
 
-3. Ouvrez le fichier *app.config*, puis collez la valeur dans connectionString à la ligne trois. 
+3. Ouvrez le fichier *app.config* , puis collez la valeur dans connectionString à la ligne trois. 
 
     > [!IMPORTANT]
     > Si votre point de terminaison utilise documents.azure.com, cela signifie que vous disposez d’un compte de version préliminaire et que vous devez créer un [nouveau compte d’API Table](#create-a-database-account) à utiliser avec le Kit de développement logiciel (SDK) d’API Table généralement disponible.

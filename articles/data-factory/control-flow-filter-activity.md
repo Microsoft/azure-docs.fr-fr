@@ -3,20 +3,20 @@ title: Activité de filtrage dans Azure Data Factory
 description: L’activité de filtrage permet de filtrer les entrées.
 services: data-factory
 documentationcenter: ''
-author: djpmsft
-ms.author: daperlov
+author: dcstwh
+ms.author: weetok
 manager: jroth
 ms.reviewer: maghan
 ms.service: data-factory
 ms.workload: data-services
 ms.topic: conceptual
 ms.date: 05/04/2018
-ms.openlocfilehash: 2c8ada22b4492bef0239b6f811d5a7bd58e58510
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 2026bdd1898df460bfed2ae9d5544f90c532308f
+ms.sourcegitcommit: 63d0621404375d4ac64055f1df4177dfad3d6de6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81417224"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97507436"
 ---
 # <a name="filter-activity-in-azure-data-factory"></a>Activité de filtrage dans Azure Data Factory
 Vous pouvez utiliser une activité de filtrage dans un pipeline pour appliquer une expression de filtre à un tableau d’entrée. 

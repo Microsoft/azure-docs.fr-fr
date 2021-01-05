@@ -2,16 +2,14 @@
 title: Concepts - Mettre à l’échelle des applications dans Azure Kubernetes Service (AKS)
 description: Découvrez la mise à l’échelle dans Azure Kubernetes Service (AKS), notamment l’autoscaler de pods élastique, l’autoscaler de cluster et le connecteur Azure Container Instances.
 services: container-service
-author: zr-msft
 ms.topic: conceptual
 ms.date: 02/28/2019
-ms.author: zarhoads
-ms.openlocfilehash: c5c1180acec726d0863e11a3fe0825ffc7c48e3f
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: b72ed7cefc6a16eb484e1337dbd64e5f069a2201
+ms.sourcegitcommit: c157b830430f9937a7fa7a3a6666dcb66caa338b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82232528"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94686036"
 ---
 # <a name="scaling-options-for-applications-in-azure-kubernetes-service-aks"></a>Options de mise à l’échelle des applications dans AKS (Azure Kubernetes Service)
 
@@ -28,7 +26,7 @@ Cet article présente les concepts fondamentaux qui vous aident à mettre à l�
 
 Vous pouvez mettre à l’échelle des réplicas (pods) et des nœuds manuellement pour tester la façon dont votre application répond à une modification au niveau des ressources disponibles et de l’état. Adapter manuellement les ressources vous permet également de définir une quantité donnée de ressources à utiliser pour maintenir un coût fixe, par exemple le nombre de nœuds. Pour mettre à l’échelle manuellement, vous définissez le nombre de réplicas ou de nœuds. L’API Kubernetes planifie ensuite la création de pods supplémentaires ou le drainage de nœuds en fonction du nombre de réplicas ou de nœuds.
 
-Lors d’un scale-down des nœuds, l’API Kubernetes appelle l’API de calcul Azure appropriée liée au type de calcul utilisé par votre cluster. Par exemple, pour les clusters basés sur VM Scale Sets, la logique de sélection des nœuds à supprimer est déterminée par l’API VM Scale Sets. Pour en savoir plus sur la façon dont les nœuds sont sélectionnés pour la suppression lors d’un scale-down, consultez les [Questions fréquentes (FAQ) sur VMSS](https://docs.microsoft.com/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-faq#if-i-reduce-my-scale-set-capacity-from-20-to-15-which-vms-are-removed).
+Lors d’un scale-down des nœuds, l’API Kubernetes appelle l’API de calcul Azure appropriée liée au type de calcul utilisé par votre cluster. Par exemple, pour les clusters basés sur VM Scale Sets, la logique de sélection des nœuds à supprimer est déterminée par l’API VM Scale Sets. Pour en savoir plus sur la façon dont les nœuds sont sélectionnés pour la suppression lors d’un scale-down, consultez les [Questions fréquentes (FAQ) sur VMSS](../virtual-machine-scale-sets/virtual-machine-scale-sets-faq.md#if-i-reduce-my-scale-set-capacity-from-20-to-15-which-vms-are-removed).
 
 Pour vous familiariser avec la mise à l’échelle manuelle des pods et des nœuds, consultez [Mettre à l’échelle des applications dans AKS][aks-scale].
 
@@ -52,7 +50,7 @@ Actuellement, vous ne pouvez pas paramétrer ces valeurs de ralentissement à pa
 
 ## <a name="cluster-autoscaler"></a>Autoscaler de cluster
 
-Pour répondre aux demandes changeantes de pods, Kubernetes propose un autoscaler de cluster qui ajuste le nombre de nœuds en fonction des ressources de calcul demandées dans le pool de nœuds. Par défaut, l’autoscaler de cluster vérifie le serveur d’API de métriques toutes les 10 secondes à la recherche de toute modification à apporter au nombre de nœuds. Si l’autoscaler de cluster détermine qu’une modification est nécessaire, le nombre de nœuds de votre cluster AKS est augmenté ou diminué en conséquence. L’autoscaler de cluster fonctionne avec les clusters AKS activés pour RBAC qui exécutent Kubernetes 1.10.x ou une version ultérieure.
+Pour répondre aux demandes changeantes de pods, Kubernetes propose un autoscaler de cluster qui ajuste le nombre de nœuds en fonction des ressources de calcul demandées dans le pool de nœuds. Par défaut, l’autoscaler de cluster vérifie le serveur d’API de métriques toutes les 10 secondes à la recherche de toute modification à apporter au nombre de nœuds. Si l’autoscaler de cluster détermine qu’une modification est nécessaire, le nombre de nœuds de votre cluster AKS est augmenté ou diminué en conséquence. L’autoscaler de cluster fonctionne avec les clusters AKS avec RBAC Kubernetes qui exécutent Kubernetes versions 1.10.x ou ultérieures.
 
 ![Autoscaler de cluster Kubernetes](media/concepts-scale/cluster-autoscaler.png)
 
@@ -60,7 +58,7 @@ L’autoscaler de cluster est généralement utilisé parallèlement à l’auto
 
 Pour vous familiariser avec l’autoscaler de cluster dans AKS, consultez [Autoscaler de cluster sur AKS][aks-cluster-autoscaler].
 
-### <a name="scale-up-events"></a>Événements de mise à l’échelle par augmentation (scale up)
+### <a name="scale-out-events"></a>Événements de scale-out
 
 Si les ressources de calcul d’un nœud sont insuffisantes pour l’exécution d’un pod demandé, ce pod ne peut pas avancer dans le processus de planification. Le pod ne peut pas démarrer, sauf si des ressources de calcul supplémentaires sont disponibles dans le pool de nœuds.
 
@@ -68,7 +66,7 @@ Lorsque l’autoscaler de cluster remarque que des pods ne sont pas panifiables 
 
 Si votre application doit rapidement se mettre à l'échelle, il est possible que certains pods restent en état d’attente de planification, jusqu’à ce que les nœuds supplémentaires déployés par l’autoscaler de cluster puissent accepter les pods planifiés. Pour les applications qui présentent des demandes de croissance extrêmement forte et rapide, vous pouvez mettre à l’échelle au moyen de nœuds virtuels et d’Azure Container Instances.
 
-### <a name="scale-down-events"></a>Scale-down d’événements
+### <a name="scale-in-events"></a>Événements de scale-in
 
 L’autoscaler de cluster surveille également le statut de planification des pods pour les nœuds qui n’ont pas reçu récemment de nouvelles demandes de planification. Ce scénario indique que le pool de nœuds détient plus de ressources de calcul que nécessaire, et que le nombre de nœuds peut être réduit.
 
@@ -82,7 +80,7 @@ Pour faire évoluer rapidement votre cluster AKS, vous pouvez intégrer Azure Co
 
 ![Mise à l'échelle rapide de Kubernetes sur ACI](media/concepts-scale/burst-scaling.png)
 
-ACI vous permet de déployer rapidement des instances de conteneur sans la surcharge d’une infrastructure supplémentaire. Lorsque vous vous connectez à AKS, ACI devient une extension logique et sécurisée de votre cluster AKS. Le composant [nœuds virtuels][virtual-nodes-cli], qui est basé sur [Virtual Kubelet][virtual-kubelet], est installé dans votre cluster AKS qui présente ACI comme un nœud Kubernetes virtuel. Kubernetes peut alors planifier les pods s’exécutant en tant qu’instances ACI via des nœuds virtuels, et non en tant que pods sur des nœuds de machine virtuelle, directement dans votre cluster AKS. Les nœuds virtuels sont actuellement en préversion dans AKS.
+ACI vous permet de déployer rapidement des instances de conteneur sans la surcharge d’une infrastructure supplémentaire. Lorsque vous vous connectez à AKS, ACI devient une extension logique et sécurisée de votre cluster AKS. Le composant [nœuds virtuels][virtual-nodes-cli], qui est basé sur [Virtual Kubelet][virtual-kubelet], est installé dans votre cluster AKS qui présente ACI comme un nœud Kubernetes virtuel. Kubernetes peut alors planifier les pods s’exécutant en tant qu’instances ACI via des nœuds virtuels, et non en tant que pods sur des nœuds de machine virtuelle, directement dans votre cluster AKS.
 
 Votre application n’a besoin d’aucune modification pour utiliser les nœuds virtuels. Les déploiements peuvent mettre à l’échelle dans AKS et ACI, et sans aucun délai car l’autoscaler de cluster déploie les nouveaux nœuds dans votre cluster AKS.
 
@@ -113,7 +111,7 @@ Pour plus d’informations sur les concepts fondamentaux de Kubernetes et d’AK
 [aks-scale]: tutorial-kubernetes-scale.md
 [aks-manually-scale-pods]: tutorial-kubernetes-scale.md#manually-scale-pods
 [aks-manually-scale-nodes]: tutorial-kubernetes-scale.md#manually-scale-aks-nodes
-[aks-cluster-autoscaler]: autoscaler.md
+[aks-cluster-autoscaler]: ./cluster-autoscaler.md
 [aks-concepts-clusters-workloads]: concepts-clusters-workloads.md
 [aks-concepts-security]: concepts-security.md
 [aks-concepts-storage]: concepts-storage.md

@@ -1,25 +1,26 @@
 ---
 title: Gérer des règles de pare-feu - Azure CLI - Azure Database pour PostgreSQL - Serveur unique
 description: Cet article décrit comment créer et gérer des règles de pare-feu dans Azure Database pour PostgreSQL – Serveur unique en utilisant l’interface de ligne de commande Azure.
-author: rachel-msft
-ms.author: raagyema
+author: niklarin
+ms.author: nlarin
 ms.service: postgresql
 ms.devlang: azurecli
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 5/6/2019
-ms.openlocfilehash: 4af0fb288961689fb051bab8091c838f793cfcc3
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: 3a559b8c65ab57b0144b807a3b4cc1faa912d430
+ms.sourcegitcommit: 7cc10b9c3c12c97a2903d01293e42e442f8ac751
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "74765645"
+ms.lasthandoff: 11/06/2020
+ms.locfileid: "93422737"
 ---
 # <a name="create-and-manage-firewall-rules-in-azure-database-for-postgresql---single-server-using-azure-cli"></a>Créer et gérer des règles de pare-feu dans Azure Database pour PostgreSQL – Serveur unique en utilisant Azure CLI
 Les règles de pare-feu au niveau du serveur peuvent être utilisées pour gérer l’accès à un serveur Azure Database pour PostgreSQL à partir d’une adresse IP ou d’une plage d’adresses IP spécifiques. À l’aide de commandes d’interface de ligne de commande Azure pratiques, vous pouvez créer, mettre à jour, supprimer, répertorier et afficher les règles de pare-feu pour gérer votre serveur. Pour une vue d’ensemble des règles de pare-feu Azure Database pour PostgreSQL, voir [Règles de pare-feu d’un serveur Azure Database pour PostgreSQL](concepts-firewall-rules.md).
 
 Des règles de réseau virtuel (VNet) peuvent également être utilisées pour sécuriser l'accès à votre serveur. Découvrez-en plus sur [la création et la gestion des règles et des points de terminaison de service de réseau virtuel à l'aide d'Azure CLI](howto-manage-vnet-using-cli.md).
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 Pour parcourir ce guide pratique, vous avez besoin des éléments suivants :
 - Installer l’utilitaire de ligne de commande [Azure CLI](/cli/azure/install-azure-cli) ou utiliser Azure Cloud Shell dans le navigateur.
 - Un [serveur Azure Database pour PostgreSQL et une base de données](quickstart-create-server-database-azure-cli.md).
@@ -39,8 +40,8 @@ az postgres server firewall-rule list --resource-group myresourcegroup --server-
 ## <a name="create-firewall-rule"></a>Créer une règle de pare-feu
 Pour créer une règle de pare-feu sur le serveur, exécutez la commande [az postgres server firewall-rule create](/cli/azure/postgres/server/firewall-rule). 
 
-```
-To allow access to a singular IP address, provide the same address in the `--start-ip-address` and `--end-ip-address`, as in this example, replacing the IP shown here with your specific IP.
+
+Pour autoriser l’accès à une seule adresse IP, fournissez la même adresse en `--start-ip-address` et en `--end-ip-address`, comme dans cet exemple, en remplaçant l’adresse IP indiquée ici par votre adresse IP spécifique.
 ```azurecli-interactive
 az postgres server firewall-rule create --resource-group myresourcegroup --server-name mydemoserver --name AllowSingleIpAddress --start-ip-address 13.83.152.1 --end-ip-address 13.83.152.1
 ```

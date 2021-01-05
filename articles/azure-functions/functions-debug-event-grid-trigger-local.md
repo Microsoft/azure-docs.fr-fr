@@ -1,16 +1,16 @@
 ---
 title: Débogage local de fonctions Azure Event Grid
-description: Apprendre à déboguer localement des fonctions Azure déclenchées par un événement Event Grid
+description: Apprendre à déboguer localement des fonctions Azure Functions déclenchées par un événement Event Grid
 author: craigshoemaker
-ms.topic: reference
+ms.topic: conceptual
 ms.date: 10/18/2018
 ms.author: cshoe
-ms.openlocfilehash: 97509001aa66c2c1bf0c91b6b2a5ab25f9d6ec88
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: be05d237d2799404c3fd8b5733464e23eeb49aa3
+ms.sourcegitcommit: 0a9df8ec14ab332d939b49f7b72dea217c8b3e1e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74227063"
+ms.lasthandoff: 11/18/2020
+ms.locfileid: "94833059"
 ---
 # <a name="azure-function-event-grid-trigger-local-debugging"></a>Débogage local lors du déclenchement de fonctions Azure Event Grid
 
@@ -52,7 +52,7 @@ ngrok http -host-header=localhost 7071
 ```
 Pendant la configuration de l’utilitaire, la fenêtre de commande doit ressembler à la capture d’écran suivante :
 
-![Démarrer ngrok](./media/functions-debug-event-grid-trigger-local/functions-debug-event-grid-trigger-local-ngrok.png)
+![Capture d’écran de l’invite de commandes après le lancement de l’utilitaire « ngrok »](./media/functions-debug-event-grid-trigger-local/functions-debug-event-grid-trigger-local-ngrok.png)
 
 Copiez l’URL **HTTPS** générée lorsque *ngrok* est exécuté. Cette valeur est utilisée lors de la configuration du point de terminaison de l’événement Event Grid.
 

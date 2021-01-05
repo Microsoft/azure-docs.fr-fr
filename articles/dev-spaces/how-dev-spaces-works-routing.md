@@ -5,14 +5,16 @@ ms.date: 03/24/2020
 ms.topic: conceptual
 description: Décrit les processus sur lesquels repose Azure Dev Spaces et le fonctionnement du routage
 keywords: Azure Dev Spaces, Dev Spaces, Docker, Kubernetes, Azure, AKS, Azure Kubernetes Service, conteneurs
-ms.openlocfilehash: e9bc1875c053335da6a8e2603406bcdb34a6dd04
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 2d2c6f336222b4ae0907d6579289a8cad8d73aa6
+ms.sourcegitcommit: d103a93e7ef2dde1298f04e307920378a87e982a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80241239"
+ms.lasthandoff: 10/13/2020
+ms.locfileid: "91977967"
 ---
 # <a name="how-routing-works-with-azure-dev-spaces"></a>Fonctionnement du routage avec Azure Dev Spaces
+
+[!INCLUDE [Azure Dev Spaces deprecation](../../includes/dev-spaces-deprecation.md)]
 
 Azure Dev Spaces vous offre plusieurs façons de parcourir et de déboguer rapidement des applications Kubernetes et de collaborer avec votre équipe sur un cluster Azure Kubernetes Service (AKS). Une fois que votre projet s’exécute dans un espace de développement, Azure Dev Spaces fournit des fonctionnalités de routage et de mise en réseau supplémentaires pour votre projet.
 
@@ -49,7 +51,7 @@ Tout autre trafic TCP non HTTP transite par le contrôleur d’entrée et les co
 
 ## <a name="sharing-a-dev-space"></a>Partage d’un espace de développement
 
-Lorsque vous travaillez en équipe, vous pouvez [partager un espace de développement avec tous les membres de cette équipe](how-to/share-dev-spaces.md) et créer des espaces de développement dérivés. Un espace de développement peut être utilisé par toute personne ayant un accès contributeur au groupe de ressources de cet espace de développement.
+Lorsque vous travaillez en équipe, vous pouvez partager un espace de développement avec tous les membres de cette équipe et créer des espaces de développement dérivés. Un espace de développement peut être utilisé par toute personne ayant un accès contributeur au groupe de ressources de cet espace de développement.
 
 Vous pouvez également créer un espace de développement dérivé d'un autre espace de développement. Lorsque vous créez un espace de développement dérivé, l’étiquette *azds.io/parent-space=PARENT-SPACE-NAME* est ajouté à l'espace de noms de l'espace de développement dérivé. De plus, toutes les applications de l'espace de développement parent sont partagées avec l'espace de développement dérivé. Si vous déployez une version mise à jour d'une application dans l'espace de développement dérivé, elle n'existera que dans cet espace de développement dérivé, et l'espace de développement parent ne sera pas affecté. Vous pouvez avoir un maximum de trois niveaux d'espaces de développement dérivés ou espaces *grands-parents*.
 
@@ -64,13 +66,7 @@ Lorsque vous utilisez *azureuser*, toutes les requêtes envoyées à *serviceA* 
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour voir des exemples de la façon dont Azure Dev Spaces utilise le routage pour fournir une itération et un développement rapides, consultez [Comment fonctionne la connexion de votre ordinateur de développement à votre espace de développement][how-it-works-connect], [Comment fonctionne le débogage à distance de votre code avec Azure Dev Spaces][how-it-works-remote-debugging]et [GitHub Actions et Azure Kubernetes Service][pr-flow].
+Pour voir un exemple de la façon dont Azure Dev Spaces utilise le routage pour fournir une itération et un développement rapides, consultez [Comment fonctionne le débogage à distance de votre code avec Azure Dev Spaces][how-it-works-remote-debugging].
 
-Pour commencer à utiliser le routage avec Azure Dev Spaces pour le développement en équipe, consultez le Guide de démarrage rapide [Développement en équipe dans Azure Dev Spaces][quickstart-team].
 
-[helm-upgrade]: https://helm.sh/docs/intro/using_helm/#helm-upgrade-and-helm-rollback-upgrading-a-release-and-recovering-on-failure
-[how-it-works-connect]: how-dev-spaces-works-connect.md
 [how-it-works-remote-debugging]: how-dev-spaces-works-remote-debugging.md
-[pr-flow]: how-to/github-actions.md
-[quickstart-team]: quickstart-team-development.md
-[troubleshooting]: troubleshooting.md

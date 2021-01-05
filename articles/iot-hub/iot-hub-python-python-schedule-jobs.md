@@ -8,12 +8,13 @@ ms.devlang: python
 ms.topic: conceptual
 ms.date: 03/17/2020
 ms.author: robinsh
-ms.openlocfilehash: 1d721e89534c09a5572e5674796f28355f652165
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-python
+ms.openlocfilehash: 733e3be21a1a1305b5c7947de1ae54ddce5e0d2f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79527399"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87876680"
 ---
 # <a name="schedule-and-broadcast-jobs-python"></a>Planifier et diffuser des travaux (Python)
 

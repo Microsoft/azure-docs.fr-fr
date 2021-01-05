@@ -7,16 +7,16 @@ author: msmimart
 manager: celestedg
 ms.service: active-directory
 ms.workload: identity
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 05/12/2020
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: 5c6956c38d15213d84b43b24784d2bb2b3a1963f
-ms.sourcegitcommit: fdec8e8bdbddcce5b7a0c4ffc6842154220c8b90
+ms.openlocfilehash: 5d6fb23d7325347a1b27165d3e9bc3bf33797682
+ms.sourcegitcommit: 1bf144dc5d7c496c4abeb95fc2f473cfa0bbed43
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83638576"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95994352"
 ---
 # <a name="configure-the-resource-owner-password-credentials-flow-in-azure-active-directory-b2c-using-a-custom-policy"></a>Configurer le flux des informations d’identification par mot de passe de propriétaire de ressource dans Azure Active Directory B2C en utilisant un stratégie personnalisée
 
@@ -26,7 +26,7 @@ Dans Azure Active Directory B2C (Azure AD B2C), le flux des informations d’ide
 
 [!INCLUDE [active-directory-b2c-ropc-notes](../../includes/active-directory-b2c-ropc-notes.md)]
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 Suivez les étapes de l’article [Prise en main des stratégies personnalisées dans Azure Active Directory B2C](custom-policy-get-started.md).
 
@@ -39,7 +39,7 @@ Suivez les étapes de l’article [Prise en main des stratégies personnalisées
 1. Ouvrez le fichier *TrustFrameworkExtensions.xml*.
 2. Si elle n’existe pas encore, ajoutez un élément **ClaimsSchema** et ses éléments enfants en tant que premier élément sous l’élément **BuildingBlocks** :
 
-    ```XML
+    ```xml
     <ClaimsSchema>
       <ClaimType Id="logonIdentifier">
         <DisplayName>User name or email address that the user can use to sign in</DisplayName>
@@ -62,7 +62,7 @@ Suivez les étapes de l’article [Prise en main des stratégies personnalisées
 
 3. Après l’élément **ClaimsSchema**, ajoutez un élément **ClaimsTransformations** et ses éléments enfants à l’élément **BuildingBlocks** :
 
-    ```XML
+    ```xml
     <ClaimsTransformations>
       <ClaimsTransformation Id="CreateSubjectClaimFromObjectID" TransformationMethod="CreateStringClaim">
         <InputParameters>
@@ -88,7 +88,7 @@ Suivez les étapes de l’article [Prise en main des stratégies personnalisées
 
 4. Recherchez l’élément **ClaimsProvider** dont le **DisplayName** est `Local Account SignIn`, et ajoutez le profil technique de suivant :
 
-    ```XML
+    ```xml
     <TechnicalProfile Id="ResourceOwnerPasswordCredentials-OAUTH2">
       <DisplayName>Local Account SignIn</DisplayName>
       <Protocol Name="OpenIdConnect" />
@@ -103,6 +103,7 @@ Suivez les étapes de l’article [Prise en main des stratégies personnalisées
         <Item Key="response_types">id_token</Item>
         <Item Key="response_mode">query</Item>
         <Item Key="scope">email openid</Item>
+        <Item Key="grant_type">password</Item>
       </Metadata>
       <InputClaims>
         <InputClaim ClaimTypeReferenceId="logonIdentifier" PartnerClaimType="username" Required="true" DefaultValue="{OIDC:Username}"/>
@@ -110,8 +111,8 @@ Suivez les étapes de l’article [Prise en main des stratégies personnalisées
         <InputClaim ClaimTypeReferenceId="grant_type" DefaultValue="password" />
         <InputClaim ClaimTypeReferenceId="scope" DefaultValue="openid" />
         <InputClaim ClaimTypeReferenceId="nca" PartnerClaimType="nca" DefaultValue="1" />
-        <InputClaim ClaimTypeReferenceId="client_id" DefaultValue="00000000-0000-0000-0000-000000000000" />
-        <InputClaim ClaimTypeReferenceId="resource_id" PartnerClaimType="resource" DefaultValue="00000000-0000-0000-0000-000000000000" />
+        <InputClaim ClaimTypeReferenceId="client_id" DefaultValue="ProxyIdentityExperienceFrameworkAppId" />
+        <InputClaim ClaimTypeReferenceId="resource_id" PartnerClaimType="resource" DefaultValue="IdentityExperienceFrameworkAppId" />
       </InputClaims>
       <OutputClaims>
         <OutputClaim ClaimTypeReferenceId="objectId" PartnerClaimType="oid" />
@@ -128,7 +129,7 @@ Suivez les étapes de l’article [Prise en main des stratégies personnalisées
 
 5. Ajoutez les éléments **ClaimsProvider** suivants avec leurs profils techniques à l’élément **ClaimsProviders** :
 
-    ```XML
+    ```xml
     <ClaimsProvider>
       <DisplayName>Azure Active Directory</DisplayName>
       <TechnicalProfiles>
@@ -182,7 +183,7 @@ Suivez les étapes de l’article [Prise en main des stratégies personnalisées
 
 6. Ajoutez un élément **UserJourneys** et ses éléments enfants à l’élément **TrustFrameworkPolicy** :
 
-    ```XML
+    ```xml
     <UserJourney Id="ResourceOwnerPasswordCredentials">
       <PreserveOriginalAssertion>false</PreserveOriginalAssertion>
       <OrchestrationSteps>
@@ -230,7 +231,7 @@ Ensuite, mettez à jour le fichier de partie de confiance qui lance le parcours 
 3. Modifiez la valeur de l’attribut **ReferenceId** dans **DefaultUserJourney** en `ResourceOwnerPasswordCredentials`.
 4. Modifiez l’élément **OutputClaims** afin qu’il ne contienne que les revendications suivantes :
 
-    ```XML
+    ```xml
     <OutputClaim ClaimTypeReferenceId="sub" />
     <OutputClaim ClaimTypeReferenceId="objectId" />
     <OutputClaim ClaimTypeReferenceId="displayName" DefaultValue="" />
@@ -246,7 +247,7 @@ Ensuite, mettez à jour le fichier de partie de confiance qui lance le parcours 
 
 Utilisez votre application de développement d’API favorite pour générer un appel d’API et examinez la réponse pour déboguer votre stratégie. Construisez un appel similaire à cet exemple, avec les informations suivantes en tant que corps de la requête POST :
 
-`https://<tenant-name>.b2clogin.com/<tenant-name>.onmicrosoft.com/B2C_1_ROPC_Auth/oauth2/v2.0/token`
+`https://<tenant-name>.b2clogin.com/<tenant-name>.onmicrosoft.com/B2C_1A_ROPC_Auth/oauth2/v2.0/token`
 
 - Remplacez `<tenant-name>` par le nom de votre locataire Azure AD B2C.
 - Remplacez `B2C_1A_ROPC_Auth` par le nom complet de votre stratégie d’informations d’identification de mot de passe du propriétaire de ressource.
@@ -254,8 +255,8 @@ Utilisez votre application de développement d’API favorite pour générer un 
 | Clé | Valeur |
 | --- | ----- |
 | username | `user-account` |
-| password | `password1` |
-| grant_type | password |
+| mot de passe | `password1` |
+| grant_type | mot de passe |
 | scope | openid `application-id` offline_access |
 | client_id | `application-id` |
 | response_type | jeton id_token |
@@ -267,8 +268,8 @@ Utilisez votre application de développement d’API favorite pour générer un 
 
 La requête POST réelle ressemble à l’exemple suivant :
 
-```HTTPS
-POST /<tenant-name>.onmicrosoft.com/oauth2/v2.0/token?B2C_1_ROPC_Auth HTTP/1.1
+```https
+POST /<tenant-name>.onmicrosoft.com/oauth2/v2.0/token?B2C_1A_ROPC_Auth HTTP/1.1
 Host: <tenant-name>.b2clogin.com
 Content-Type: application/x-www-form-urlencoded
 
@@ -277,7 +278,7 @@ username=contosouser.outlook.com.ws&password=Passxword1&grant_type=password&scop
 
 Une réponse correcte avec accès hors connexion ressemble à l’exemple suivant :
 
-```JSON
+```json
 {
     "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik9YQjNhdTNScWhUQWN6R0RWZDM5djNpTmlyTWhqN2wxMjIySnh6TmgwRlki...",
     "token_type": "Bearer",
@@ -291,7 +292,7 @@ Une réponse correcte avec accès hors connexion ressemble à l’exemple suivan
 
 Construire un appel POST comme celui illustré ici. Utilisez les informations du tableau suivant comme corps de la requête :
 
-`https://<tenant-name>.b2clogin.com/<tenant-name>.onmicrosoft.com/B2C_1_ROPC_Auth/oauth2/v2.0/token`
+`https://<tenant-name>.b2clogin.com/<tenant-name>.onmicrosoft.com/B2C_1A_ROPC_Auth/oauth2/v2.0/token`
 
 - Remplacez `<tenant-name>` par le nom de votre locataire Azure AD B2C.
 - Remplacez `B2C_1A_ROPC_Auth` par le nom complet de votre stratégie d’informations d’identification de mot de passe du propriétaire de ressource.
@@ -309,7 +310,7 @@ Construire un appel POST comme celui illustré ici. Utilisez les informations du
 
 Une réponse correcte ressemble à l’exemple suivant :
 
-```JSON
+```json
 {
     "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ilg1ZVhrNHh5b2pORnVtMWtsMll0djhkbE5QNC1jNTdkTzZRR1RWQndhT...",
     "id_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ilg1ZVhrNHh5b2pORnVtMWtsMll0djhkbE5QNC1jNTdkTzZRR1RWQn...",

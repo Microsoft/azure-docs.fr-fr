@@ -10,10 +10,10 @@ ms.date: 04/27/2020
 ms.author: cynthn
 ms.reviewer: akjosh
 ms.openlocfilehash: c6bc4fea05f79c446f318eb4cbc86beb160ea108
-ms.sourcegitcommit: e0330ef620103256d39ca1426f09dd5bb39cd075
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/05/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "82793965"
 ---
 # <a name="list-update-and-delete-image-resources-using-powershell"></a>Répertorier, mettre à jour et supprimer des ressources d’image à l’aide de PowerShell 

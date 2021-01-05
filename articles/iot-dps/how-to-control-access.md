@@ -8,12 +8,13 @@ services: iot-dps
 ms.topic: conceptual
 ms.date: 04/09/2019
 ms.author: wesmc
-ms.openlocfilehash: 2a7e0932d226b1533c039b8529c2c11de06cf525
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-js, devx-track-csharp
+ms.openlocfilehash: 024dbf6518748a4048873de4eb54a53f9d9a6362
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79237521"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94954322"
 ---
 # <a name="control-access-to-azure-iot-hub-device-provisioning-service"></a>Contrôler l’accès au service de provisionnement d’appareils Azure IoT Hub
 
@@ -191,4 +192,4 @@ Le tableau suivant répertorie les autorisations qui vous permettent de contrôl
 [lnk-sdks]: ../iot-hub/iot-hub-devguide-sdks.md
 [lnk-management-portal]: https://portal.azure.com
 [lnk-azure-resource-manager]: ../azure-resource-manager/management/overview.md
-[lnk-resource-provider-apis]: https://docs.microsoft.com/rest/api/iot-dps/
+[lnk-resource-provider-apis]: /rest/api/iot-dps/

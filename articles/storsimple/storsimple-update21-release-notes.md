@@ -14,12 +14,12 @@ ms.tgt_pltfrm: NA
 ms.workload: TBD
 ms.date: 11/03/2017
 ms.author: alkohli
-ms.openlocfilehash: 12d11cddf077d4d07732490255d44e89ddaf3217
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 73b9ecd03875b60ed2d9b9d4c8e8a3a0c8de3cfa
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "60531047"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94956600"
 ---
 # <a name="storsimple-8000-series-update-22-release-notes"></a>Notes de publication de StorSimple série 8000 Update 2.2
 
@@ -56,7 +56,7 @@ Le tableau suivant récapitule les problèmes qui ont été résolus dans Update
 | 4 |Création d’instantanés |Des problèmes ont été constatés lors de la création d’instantanés incrémentiels dans des scénarios impliquant d’importants volumes et une évolution des données réduite voire nulle. Ces problèmes ont été résolus dans cette version. |Oui |Oui |
 | 5 |Authentification OpenStack |Lorsque vous utilisez Openstack comme fournisseur de services cloud, l’utilisateur rencontrait parfois un bogue d’authentification qui entraînait un plantage de l’analyseur JSON. Ce bogue est résolu dans cette version. |Oui |Non |
 | 6 |Copie côté hôte |Dans les versions précédentes du logiciel, un bogue lié à l’horodatage ODX survenait parfois lors de la copie des données d’un volume vers un autre. Ce problème entraînait un basculement du contrôleur, avec le risque de voir le système passer en mode de récupération. Ce bogue est résolu dans cette version. |Oui |Non |
-| 7 |Windows Management Instrumentation (WMI) |Dans les versions précédentes du logiciel, plusieurs cas d'échec du proxy web ont été observés avec l'exception « \<Exception de gestion> Échec du chargement du fournisseur ». Ce bogue a été attribué à une fuite de mémoire WMI et est maintenant résolu. |Oui |Non |
+| 7 |Windows Management Instrumentation (WMI) |Dans les versions précédentes du logiciel, plusieurs cas d’échec du proxy web ont été observés avec l’exception «\<ManagementException> Échec du chargement du fournisseur ». Ce bogue a été attribué à une fuite de mémoire WMI et est maintenant résolu. |Oui |Non |
 | 8 |Update |Dans de rares cas, l’utilisateur des versions précédentes du logiciel recevait un message « CisPowershellHcsscripterror » lorsqu’il tentait d’effectuer une analyse ou d’installer des mises à jour. Ce problème a été résolu dans cette version. |Oui |Oui |
 | 9 |Package de prise en charge |Cette version améliore le mode de collecte et de chargement du package Support. |Oui |Oui |
 
@@ -70,7 +70,7 @@ Le tableau suivant récapitule les problèmes connus dans cette version.
 | 3 |Comptes de stockage |La suppression du compte de stockage à l’aide du service de stockage n’est pas prise en charge. En effet, cette opération donnerait lieu à une situation dans laquelle il serait impossible de récupérer les données utilisateur. | |Oui |Oui |
 | 4 |Basculement de l’appareil |Le basculement multiple d’un conteneur de volumes d’un même appareil source vers différents appareils cibles n’est pas pris en charge. Si un appareil inactif est basculé vers plusieurs appareils, les conteneurs de volumes du premier appareil basculé perdent la propriété des données. Après un basculement de ce type, les conteneurs de volumes concernés apparaissent ou se comportent différemment lorsque vous les affichez dans le portail Azure Classic. | |Oui |Non |
 | 5 |Installation |Lors de l’installation de l’adaptateur StorSimple pour SharePoint, vous devez fournir une adresse IP d’appareil pour que l’installation s’effectue correctement. | |Oui |Non |
-| 6 |Proxy web |Si HTTPS est défini comme protocole dans la configuration du proxy web, la communication appareil-service est altérée et l’appareil se met hors connexion. Des packages de prise en charge sont également générés, ce qui consomme de nombreuses ressources de l’appareil. |Vérifiez que le protocole défini pour l’URL du proxy web est bien HTTP. Pour plus d’informations, consultez la section [Configuration du proxy web pour votre appareil](storsimple-configure-web-proxy.md). |Oui |Non |
+| 6 |Proxy web |Si HTTPS est défini comme protocole dans la configuration du proxy web, la communication appareil-service est altérée et l’appareil se met hors connexion. Des packages de prise en charge sont également générés, ce qui consomme de nombreuses ressources de l’appareil. |Vérifiez que le protocole défini pour l’URL du proxy web est bien HTTP. Pour plus d’informations, consultez la section [Configuration du proxy web pour votre appareil](./storsimple-8000-configure-web-proxy.md). |Oui |Non |
 | 7 |Proxy web |Si vous configurez et activez le proxy web sur un appareil inscrit, vous devez redémarrer le contrôleur actif sur votre appareil. | |Oui |Non |
 | 8 |Latence de cloud élevée et charge de travail d’E/S élevée |Lorsque l’appareil StorSimple doit gérer à la fois des latences de cloud très élevées (de l’ordre de quelques secondes) et une charge de travail d’E/S élevée, ses volumes se détériorent et une défaillance peut se produire au niveau des E/S, avec l’erreur « appareil non prêt ». |Vous devez redémarrer les contrôleurs de l’appareil manuellement ou effectuer un basculement d’appareil pour résoudre ce problème. |Oui |Non |
 | 9 |Azure PowerShell |Lorsque vous utilisez l’applet de commande StorSimple **Get-AzureStorSimpleStorageAccountCredential &#124; Select-Object -First 1 -Wait** pour sélectionner le premier objet afin de créer un objet **contrôleur de volumes**, l’applet de commande renvoie l’ensemble des objets. |Encapsulez l’applet de commande entre parenthèses comme suit : **(Get-Azure-StorSimpleStorageAccountCredential) &#124; Select-Object -First 1 -Wait** |Oui |Oui |
@@ -90,11 +90,10 @@ Le tableau suivant récapitule les problèmes connus dans cette version.
 ## <a name="controller-and-firmware-updates-in-update-22"></a>Mises à jour du contrôleur et du microprogramme dans Update 2.2
 Cette version comporte uniquement des mises à jour logicielles. Toutefois, si vous effectuez la mise à jour à partir d’une version antérieure à Update 2, vous devrez installer sur votre appareil les mises à jour du pilote, de Storport, de Spaceport et, dans certains cas,du microprogramme de disque.
 
-Pour plus d’informations sur la procédure d’installation du pilote, de Storport, de Spaceport et du microprogramme de disque, consultez [Installer Update 2.2 sur votre appareil StorSimple](storsimple-install-update-21.md) .
+Pour plus d’informations sur la procédure d’installation du pilote, de Storport, de Spaceport et du microprogramme de disque, consultez [Installer Update 2.2 sur votre appareil StorSimple](./storsimple-8000-install-update-5.md) .
 
 ## <a name="virtual-device-updates-in-update-22"></a>Mises à jour des appareils virtuels dans Update 2.2
 Cette mise à jour ne peut pas être appliquée à l’appareil virtuel. De nouveaux appareils virtuels devront être créés. 
 
 ## <a name="next-step"></a>Étape suivante
-Découvrez comment [installer Update 2.2](storsimple-install-update-21.md) sur votre appareil StorSimple.
-
+Découvrez comment [installer Update 2.2](./storsimple-8000-install-update-5.md) sur votre appareil StorSimple.

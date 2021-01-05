@@ -4,12 +4,12 @@ description: Dans ce tutoriel, vous allez apprendre à configurer l’intégrati
 ms.topic: tutorial
 ms.date: 08/29/2018
 ms.custom: mvc
-ms.openlocfilehash: 9cf619eddd07bbe55cd7aea5f27051a7d0415c24
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: bb0eb9226a99f139ff10a8da12a1e22017536c67
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "75614126"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96018849"
 ---
 # <a name="tutorial-deploy-a-container-application-with-cicd-to-a-service-fabric-cluster"></a>Tutoriel : Déployer une application conteneur avec intégration et déploiement continus sur un cluster Service Fabric
 
@@ -46,11 +46,11 @@ Créez un dépôt Git local pour votre projet en sélectionnant **Ajouter au con
 
 Dans la vue **Envoi (push)** de **Team Explorer**, sélectionnez le bouton **Publier le référentiel Git** sous **Push sur Azure DevOps**.
 
-![Envoi (push) du dépôt Git][push-git-repo]
+![Capture d’écran de la fenêtre de synchronisation de Team Explorer dans Visual Studio. Sous Transmettre à Azure DevOps, le bouton Publier le dépôt Git est mis en surbrillance.][push-git-repo]
 
 Vérifiez votre adresse e-mail et sélectionnez votre organisation dans la liste déroulante **Compte**. Vous aurez peut-être à configurer une organisation si vous n’en avez pas déjà une. Entrez le nom de votre dépôt et sélectionnez **Publier le dépôt**.
 
-![Envoi (push) du dépôt Git][publish-code]
+![Capture d’écran de la fenêtre Push to Azure DevOps (Transmettre à Azure DevOps). Les paramètres d’e-mail, de compte, de nom de référentiel et le bouton de publication du référentiel sont mis en surbrillance.][publish-code]
 
 La publication du référentiel entraîne la création d’un projet d’équipe portant le même nom que le référentiel local dans votre compte. Pour créer le référentiel dans un projet d’équipe existant, cliquez sur **Avancé** à côté du **Nom du référentiel** et sélectionnez un projet d’équipe. Vous pouvez afficher votre code sur le web en sélectionnant **See it on the web** (Visualiser sur le web).
 
@@ -71,7 +71,7 @@ Sélectionnez l’option **Pipelines** dans le volet gauche, puis cliquez sur **
 
 ![Nouveau pipeline][new-pipeline]
 
-Sélectionnez la source **Azure Repos Git**, votre projet d’équipe, le dépôt de votre projet, puis la branche par défaut **master** pour les builds manuelles et planifiées.  Cliquez ensuite sur **Continuer**.
+Sélectionnez la source **Azure Repos Git**, votre projet d’équipe, le dépôt de votre projet, puis la branche par défaut **master** pour les builds manuelles et planifiées.  Puis, cliquez sur **Continuer**.
 
 Dans **Sélectionner un modèle**, sélectionnez le modèle **Application Azure Service Fabric avec prise en charge Docker** et cliquez sur **Appliquer**.
 
@@ -126,7 +126,7 @@ Cliquez sur **Paramètres Docker**, puis sur **Configurer les paramètres Docker
 
 ![Agent du pipeline de mise en production][release-pipeline-agent]
 
-Ensuite, ajoutez un artefact de build au pipeline afin de permettre à la définition de mise en production de trouver la sortie de la build. Sélectionnez **Pipeline** et **Artefacts**-> **+ Ajouter**.  Dans **Source (définition de build)** , sélectionnez la définition de build que vous avez créée précédemment.  Cliquez sur **Ajouter** pour enregistrer l’artefact de la build.
+Ensuite, ajoutez un artefact de build au pipeline afin de permettre à la définition de mise en production de trouver la sortie de la build. Sélectionnez **Pipeline** et **Artefacts**->**+ Ajouter**.  Dans **Source (définition de build)**, sélectionnez la définition de build que vous avez créée précédemment.  Cliquez sur **Ajouter** pour enregistrer l’artefact de la build.
 
 ![Ajoutez un artefact][add-artifact]
 
@@ -142,7 +142,7 @@ Vérifiez que le déploiement a réussi et que l’application est en cours d’
 
 Vérifiez que le pipeline d’intégration continue fonctionne en archivant certaines modifications de code dans Azure DevOps.
 
-Lorsque vous écrivez votre code, vos modifications sont suivies automatiquement par Visual Studio. Validez les modifications dans votre dépôt Git local en sélectionnant l’icône de modifications en attente (![Pending][pending]) dans la barre d’état en bas à droite.
+Lorsque vous écrivez votre code, vos modifications sont suivies automatiquement par Visual Studio. Validez les modifications dans votre dépôt Git local en sélectionnant l’icône de modifications en attente (![L’icône des modifications en attente affiche un crayon et un chiffre.][pending]) dans la barre d’état en bas à droite.
 
 Dans la vue **Modifications** de Team Explorer, ajoutez un message décrivant votre mise à jour, puis validez vos modifications.
 
@@ -158,7 +158,7 @@ Pour vérifier la progression de votre build, basculez vers l’onglet **Builds*
 
 Vérifiez que le déploiement a réussi et que l’application est en cours d’exécution dans le cluster.  Ouvrez un navigateur web et accédez à `http://mysftestcluster.southcentralus.cloudapp.azure.com:19080/Explorer/`.  Notez la version de l’application. Dans cet exemple, il s’agit de la version 1.0.0.20170815.3.
 
-![Service Fabric Explorer][sfx1]
+![Capture d’écran de l’application de vote dans Service Fabric Explorer. Dans l’onglet Essentials, la version de l’application « 1.0.0.20170815.3 » est mise en surbrillance.][sfx1]
 
 ## <a name="update-the-application"></a>Mettre à jour l’application
 
@@ -166,11 +166,11 @@ Apportez des modifications au code de l’application.  Enregistrez et validez l
 
 Une fois que la mise à niveau de l’application a commencé, vous pouvez suivre la progression dans Service Fabric Explorer :
 
-![Service Fabric Explorer][sfx2]
+![Capture d’écran de l’application de vote dans Service Fabric Explorer. Un message « Mise à niveau en cours » est mis en surbrillance et l’état de l’application est « Mise à niveau ».][sfx2]
 
 La mise à niveau de l’application peut prendre plusieurs minutes. Une fois la mise à niveau terminée, l’application exécute la version suivante.  Dans cet exemple, 1.0.0.20170815.4.
 
-![Service Fabric Explorer][sfx3]
+![Capture d’écran de l’application de vote dans Service Fabric Explorer. Dans l’onglet Essentials, la version de l’application mise à jour « 1.0.0.20170815.4 » est mise en surbrillance.][sfx3]
 
 ## <a name="next-steps"></a>Étapes suivantes
 

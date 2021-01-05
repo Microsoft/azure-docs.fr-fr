@@ -10,12 +10,13 @@ ms.subservice: face-api
 ms.topic: conceptual
 ms.date: 12/03/2019
 ms.author: longl
-ms.openlocfilehash: da9ad5576d146c007e45124668875e9681860ce6
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 016b8bf010f597e963e0901d1ec48486f79bbb35
+ms.sourcegitcommit: d76108b476259fe3f5f20a91ed2c237c1577df14
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "76938822"
+ms.lasthandoff: 10/29/2020
+ms.locfileid: "92913124"
 ---
 # <a name="specify-a-face-recognition-model"></a>Spécifier un modèle de reconnaissance faciale
 
@@ -23,14 +24,22 @@ Ce guide vous montre comment spécifier un modèle de reconnaissance faciale pou
 
 Le service Visage utilise des modèles Machine Learning pour effectuer des opérations sur les visages humains présents dans les images. Nous continuons d’améliorer la précision de nos modèles en fonction des commentaires de nos clients et des progrès de la recherche, et nous intégrons ces améliorations sous forme de mises à jour de modèles. Les développeurs peuvent spécifier la version du modèle de reconnaissance faciale qu'ils souhaitent utiliser ; ils peuvent choisir le modèle qui correspond le mieux à leur cas d'utilisation.
 
-Si vous êtes un nouvel utilisateur, nous vous recommandons d'utiliser le dernier modèle. Poursuivez la lecture pour découvrir comment spécifier ce modèle dans différentes opérations de détection de visages, tout en évitant les conflits de modèles. Si vous êtes un utilisateur avancé et hésitez à passer au modèle le plus récent, passez à la section [Évaluer des modèles différents](#evaluate-different-models) pour évaluer le nouveau modèle et comparer les résultats en utilisant votre ensemble de données actuel.
+Le service Visage d’Azure dispose de trois modèles de reconnaissance. Les modèles _recognition_01_ (publié en 2017) et _recognition_02_ (publié en 2019) sont continuellement pris en charge pour assurer la compatibilité descendante pour les clients utilisant les objets FaceList ou **PersonGroup** créés avec ces modèles. Un objet **FaceList** ou **Persongroup** utilise toujours le modèle de reconnaissance avec lequel il a été créé et de nouveaux visages sont associés à ce modèle lorsqu'ils y sont ajoutés. Ceci ne peut pas être modifié après la création et les clients doivent utiliser le modèle de reconnaissance correspondant avec l’objet **FaceList** ou **PersonGroup** correspondant.
 
-## <a name="prerequisites"></a>Conditions préalables requises
+Vous pouvez passer à des modèles de reconnaissance ultérieurs à votre convenance. Toutefois, vous devrez créer de nouveaux objets FaceList et PersonGroup avec le modèle de reconnaissance de votre choix.
 
-Vous devez maîtriser les concepts de la détection et de l'identification de visages par intelligence artificielle (AI). Si ce n’est pas les cas, consultez d’abord ces guides pratiques :
+Le modèle _recognition_03_ (publié en 2020) est le modèle le plus précis actuellement disponible. Si vous êtes un nouveau client, nous vous recommandons d’utiliser ce modèle. _Recognition_03_ offrira une meilleure précision pour les comparaisons de similarité et les comparaisons de correspondance de personne. Notez que chaque modèle fonctionne indépendamment des autres et qu’un seuil de confiance défini pour un modèle n’est pas destiné à être comparé avec les autres modèles de reconnaissance.
 
+Poursuivez la lecture pour en savoir plus sur la détermination d’un modèle spécifique dans différentes opérations de détection de visages, tout en évitant les conflits de modèles. Si vous êtes un utilisateur expérimenté et souhaitez déterminer si vous devez passer au modèle le plus récent, passez à la section [Évaluer des modèles différents](#evaluate-different-models) pour évaluer le nouveau modèle et comparer les résultats en utilisant votre ensemble de données actuel.
+
+
+## <a name="prerequisites"></a>Prérequis
+
+Vous devez maîtriser les concepts de la détection et de l'identification de visages par intelligence artificielle (AI). Si ce n’est pas les cas, consultez d’abord ces guides :
+
+* [Concepts de détection de visage](../concepts/face-detection.md)
+* [Concepts de reconnaissance faciale](../concepts/face-recognition.md)
 * [Comment détecter des visages dans une image](HowtoDetectFacesinImage.md)
-* [Comment identifier des visages dans une image](HowtoIdentifyFacesinImage.md)
 
 ## <a name="detect-faces-with-specified-model"></a>Détecter des visages avec le modèle spécifié
 
@@ -39,27 +48,27 @@ La détection des visages identifie les repères visuels des visages humains et 
 Le modèle de reconnaissance est utilisé lors de l’extraction des traits du visage, de sorte que vous pouvez spécifier une version du modèle lors de l’exécution de l'opération de détection.
 
 Lorsque vous utilisez l’API [Face - Detect], attribuez la version du modèle avec le paramètre `recognitionModel`. Les valeurs disponibles sont :
+* recognition_01
+* recognition_02
+* recognition_03
 
-* `recognition_01`
-* `recognition_02`
 
-Si vous le souhaitez, vous pouvez spécifier le paramètre _returnRecognitionModel_ (par défaut **false**) pour indiquer si _recognitionModel_ doit être retourné comme réponse. Ainsi, une URL de requête pour l’API REST [Face - Detect] se présentera comme suit :
+Si vous le souhaitez, vous pouvez spécifier le paramètre _returnRecognitionModel_ (par défaut **false** ) pour indiquer si _recognitionModel_ doit être retourné comme réponse. Ainsi, une URL de requête pour l’API REST [Face - Detect] se présentera comme suit :
 
 `https://westus.api.cognitive.microsoft.com/face/v1.0/detect[?returnFaceId][&returnFaceLandmarks][&returnFaceAttributes][&recognitionModel][&returnRecognitionModel]&subscription-key=<Subscription key>`
 
-Si vous utilisez la bibliothèque cliente, vous pouvez attribuer la valeur de `recognitionModel` en passant une chaîne représentant la version.
-Si vous n’attribuez aucune valeur, la version du modèle par défaut (_recognition_01_) sera utilisée. Consultez l'exemple de code suivant pour la bibliothèque cliente .NET.
+Si vous utilisez la bibliothèque cliente, vous pouvez attribuer la valeur de `recognitionModel` en passant une chaîne représentant la version. Si vous ne lui attribuez aucune valeur, une version du modèle par défaut de `recognition_01` est utilisée. Consultez l'exemple de code suivant pour la bibliothèque cliente .NET.
 
 ```csharp
 string imageUrl = "https://news.microsoft.com/ceo/assets/photos/06_web.jpg";
-var faces = await faceClient.Face.DetectWithUrlAsync(imageUrl, true, true, recognitionModel: "recognition_02", returnRecognitionModel: true);
+var faces = await faceClient.Face.DetectWithUrlAsync(imageUrl, true, true, recognitionModel: "recognition_01", returnRecognitionModel: true);
 ```
 
 ## <a name="identify-faces-with-specified-model"></a>Identifier des visages avec le modèle spécifié
 
 Le service Visage peut extraire les données de visage d’une image et les associer à un objet **Person** (via l’appel d’API [Add face](https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f3039523b), par exemple), et plusieurs objets **Person** peuvent être stockés ensemble dans un objet **PersonGroup**. Ensuite, un nouveau visage peut être comparé à un objet **PersonGroup** (avec l'appel [Visage - Identifier]), et la personne correspondante dans ce groupe peut être identifiée.
 
-Un objet **PersonGroup** doit avoir un modèle de reconnaissance unique pour toutes les **personnes**, et vous pouvez le spécifier en utilisant le paramètre `recognitionModel` lorsque vous créez le groupe ([PersonGroup - Créer] ou [LargePersonGroup - Créer]). Si vous ne spécifiez pas ce paramètre, le modèle original `recognition_01` est utilisé. Un groupe utilisera toujours le modèle de reconnaissance avec lequel il a été créé, et de nouveaux visages seront associés à ce modèle lorsqu'ils y seront ajoutés ; ceci ne peut pas être modifié après la création d’un groupe. Pour voir avec quel modèle un objet **PersonGroup** est configuré, utilisez l'API [PersonGroup - Get] avec le jeu de paramètres _returnRecognitionModel_ défini sur **true**.
+Un objet **PersonGroup** doit avoir un modèle de reconnaissance unique pour toutes les **personnes** , et vous pouvez le spécifier en utilisant le paramètre `recognitionModel` lorsque vous créez le groupe ( [PersonGroup - Créer] ou [LargePersonGroup - Créer]). Si vous ne spécifiez pas ce paramètre, le modèle original `recognition_01` est utilisé. Un groupe utilisera toujours le modèle de reconnaissance avec lequel il a été créé, et de nouveaux visages seront associés à ce modèle lorsqu'ils y seront ajoutés ; ceci ne peut pas être modifié après la création d’un groupe. Pour voir avec quel modèle un objet **PersonGroup** est configuré, utilisez l'API [PersonGroup - Get] avec le jeu de paramètres _returnRecognitionModel_ défini sur **true**.
 
 Consultez l'exemple de code suivant pour la bibliothèque cliente .NET.
 
@@ -77,29 +86,30 @@ Aucun changement n’est apporté à l'API [Visage - Identifier] ; il vous suffi
 
 ## <a name="find-similar-faces-with-specified-model"></a>Rechercher des visages avec le modèle spécifié
 
-Vous pouvez également spécifier un modèle de reconnaissance pour la recherche de similarités. Vous pouvez attribuer la version du modèle avec `recognitionModel` lors de la création de la liste des visages avec l’API [FaceList - Create] ou [LargeFaceList - Create]. Si vous ne spécifiez pas ce paramètre, le modèle original `recognition_01` est utilisé. Une liste de visages utilisera toujours le modèle de reconnaissance avec lequel il a été créé, et de nouveaux visages seront associés à ce modèle lorsqu'ils y seront ajoutés ; ceci ne peut pas être modifié après la création d’une liste. Pour voir avec quel modèle une liste de visages est configurée, utilisez l'API [FaceList - Get] avec le jeu de paramètres _returnRecognitionModel_ défini sur **true**.
+Vous pouvez également spécifier un modèle de reconnaissance pour la recherche de similarités. Vous pouvez attribuer la version du modèle avec `recognitionModel` lors de la création de la liste des visages avec l’API [FaceList - Create] ou [LargeFaceList - Create]. Si vous ne spécifiez pas ce paramètre, le modèle `recognition_01` est utilisé par défaut. Une liste de visages utilise toujours le modèle de reconnaissance avec lequel il a été créé et de nouveaux visages sont associés à ce modèle lorsqu'ils y sont ajoutés. Vous ne pouvez pas modifier ceci après la création. Pour voir avec quel modèle une liste de visages est configurée, utilisez l'API [FaceList - Get] avec le jeu de paramètres _returnRecognitionModel_ défini sur **true**.
 
 Consultez l'exemple de code suivant pour la bibliothèque cliente .NET.
 
 ```csharp
-await faceClient.FaceList.CreateAsync(faceListId, "My face collection", recognitionModel: "recognition_02");
+await faceClient.FaceList.CreateAsync(faceListId, "My face collection", recognitionModel: "recognition_03");
 ```
 
-Ce code crée une liste de visages appelée `My face collection`, en utilisant le modèle _recognition_02_ pour l’extraction des traits de visage. Lorsque vous recherchez dans cette liste des visages similaires à un nouveau visage détecté, ce visage doit avoir été détecté ([Face - Detect]) en utilisant le modèle _recognition_02_. Comme dans la section précédente, le modèle doit être cohérent.
+Ce code crée une liste de visages appelée `My face collection`, en utilisant le modèle _recognition_03_ pour l’extraction des traits de visage. Lorsque vous recherchez dans cette liste des visages similaires à un nouveau visage détecté, ce visage doit avoir été détecté ( [Face - Detect]) en utilisant le modèle _recognition_03_. Comme dans la section précédente, le modèle doit être cohérent.
 
 Aucun changement n’est apporté à l'API [Face - Find Similar] ; vous spécifiez uniquement la version du modèle lors de la détection.
 
 ## <a name="verify-faces-with-specified-model"></a>Vérifier des visages avec le modèle spécifié
 
-L’API [Face - Verify] évalue si deux visages appartiennent à la même personne. Aucun changement n’est apporté à l'API Verify au niveau des modèles de reconnaissance, mais vous pouvez uniquement comparer des visages qui ont été détectés avec le même modèle. Ainsi, les deux visages devront avoir été détectés avec `recognition_01` ou `recognition_02`.
+L’API [Face - Verify] évalue si deux visages appartiennent à la même personne. Aucun changement n’est apporté à l'API Verify au niveau des modèles de reconnaissance, mais vous pouvez uniquement comparer des visages qui ont été détectés avec le même modèle.
 
 ## <a name="evaluate-different-models"></a>Évaluer des modèles différents
 
-Si vous souhaitez comparer les performances des modèles _recognition_01_et _recognition_02_ sur vos données, vous devrez :
+Si vous souhaitez comparer les performances des différents modèles de reconnaissance sur vos propres données, vous devez :
+1. créer trois objets PersonGroup utilisant respectivement _recognition_01_ , _recognition_02_ et _recognition_03_  ;
+1. utiliser vos données d’image pour détecter les visages et les relier à des **personne** s au sein de ces trois objets **PersonGroup**  ; 
+1. former vos objets PersonGroup à l'aide de l'API PersonGroup - Former ;
+1. effectuer un test avec l’API Face - Identify sur les trois objets **PersonGroup** et comparer les résultats.
 
-1. Créer deux objets **PersonGroup** avec _recognition_01_ et _recognition_02_, respectivement.
-1. Utiliser vos données d’image pour détecter les visages et les enregistrer dans l’objet **Person** pour ces deux objets **PersonGroup**, et déclencher le processus de formation avec l’API [PersonGroup - Effectuer l’apprentissage].
-1. Effectuer un test avec l’API [Visage - Identifier] sur les deux objets **PersonGroup** et comparer les résultats.
 
 Si vous spécifiez normalement un seuil de confiance (une valeur comprise entre zéro et une valeur qui détermine le degré de confiance que doit avoir le modèle pour identifier un visage), vous devrez peut-être utiliser différents seuils pour différents modèles. Le seuil d’un modèle n'est pas destiné à être partagé avec un autre modèle, et il ne produira pas nécessairement les mêmes résultats.
 
@@ -107,9 +117,9 @@ Si vous spécifiez normalement un seuil de confiance (une valeur comprise entre 
 
 Dans cet article, vous avez appris comment spécifier le modèle de reconnaissance à utiliser avec différentes API du service Visage. Voici maintenant un guide de démarrage rapide pour commencer à utiliser la détection des visages.
 
-* [SDK .NET Visage](../Quickstarts/csharp-sdk.md)
-* [Kit de développement logiciel (SDK) Face Python](../Quickstarts/python-sdk.md)
-* [Kit de développement logiciel (SDK) Go face Go](../Quickstarts/go-sdk.md)
+* [SDK .NET Visage](../quickstarts/client-libraries.md?pivots=programming-language-csharp%253fpivots%253dprogramming-language-csharp)
+* [Kit de développement logiciel (SDK) Face Python](../quickstarts/client-libraries.md?pivots=programming-language-python%253fpivots%253dprogramming-language-python)
+* [Kit de développement logiciel (SDK) Go face Go](../quickstarts/client-libraries.md?pivots=programming-language-go%253fpivots%253dprogramming-language-go)
 
 [Face - Detect]: https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d
 [Face - Find Similar]: https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395237
@@ -118,7 +128,7 @@ Dans cet article, vous avez appris comment spécifier le modèle de reconnaissan
 [PersonGroup - Créer]: https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395244
 [PersonGroup - Get]: https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395246
 [PersonGroup Person - Add Face]: https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f3039523b
-[PersonGroup - Effectuer l’apprentissage]: https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395249
+[PersonGroup - Train]: https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395249
 [LargePersonGroup - Créer]: https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/599acdee6ac60f11b48b5a9d
 [FaceList - Create]: https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f3039524b
 [FaceList - Get]: https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f3039524c

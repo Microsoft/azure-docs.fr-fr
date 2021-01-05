@@ -4,12 +4,12 @@ description: Découvrez comment utiliser les régions géographiques pour la red
 ms.assetid: 9058fb2f-8a93-4036-a921-97a0772f503c
 ms.topic: conceptual
 ms.date: 08/29/2019
-ms.openlocfilehash: 481a716bd6ced5c304da41c70fdcfc687b76661d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 446a76b823ce3592a83d0c2f898041951361b47e
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79080237"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86506279"
 ---
 # <a name="azure-functions-geo-disaster-recovery"></a>Géo-reprise d’activité après sinistre dans Azure Functions
 
@@ -22,7 +22,7 @@ Azure Functions s’exécute dans une région spécifique.  Pour bénéficier d�
 * Mode actif/actif. Les deux régions sont actives et reçoivent des événements (en double ou en rotation). Le modèle actif/actif est recommandé pour les fonctions HTTPS en association avec Azure Front Door.
 * Modèle actif/passif. Une région est active et reçoit des événements tandis qu’une autre région, la région secondaire, est inactive.  Quand un basculement est nécessaire, la région secondaire est activée et prend en charge le traitement.  Ce modèle est recommandé pour les fonctions non-HTTP comme les fonctions Service Bus et Event Hubs.
 
-Pour plus d’informations sur les déploiements dans plusieurs régions, consultez cette page expliquant comment [exécuter des applications dans plusieurs régions](https://docs.microsoft.com/azure/architecture/reference-architectures/app-service-web-app/multi-region).
+Pour plus d’informations sur les déploiements dans plusieurs régions, consultez cette page expliquant comment [exécuter des applications dans plusieurs régions](/azure/architecture/reference-architectures/app-service-web-app/multi-region).
 
 ## <a name="activeactive-for-https-functions"></a>Modèle actif/actif pour les fonctions HTTPS
 

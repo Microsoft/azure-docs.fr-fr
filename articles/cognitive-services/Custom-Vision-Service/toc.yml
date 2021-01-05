@@ -4,7 +4,7 @@
   expanded: true
   items:
     - name: Qu’est-ce que Custom Vision ?
-      href: home.md
+      href: overview.md
     - name: Nouveautés
       href: whats-new.md
 - name: Démarrages rapides
@@ -39,6 +39,8 @@
       href: use-prediction-api.md
     - name: Utiliser les suggestions d’étiquettes
       href: suggested-tags.md
+    - name: Contrôle d'accès en fonction du rôle Azure
+      href: role-based-access-control.md
     - name: Exporter des modèles
       items:
         - name: Exporter votre modèle sur votre mobile
@@ -47,7 +49,11 @@
           href: custom-vision-onnx-windows-ml.md
         - name: Exécuter le modèle TensorFlow dans Python
           href: export-model-python.md
-    - name: Exporter ou supprimer des données de compte
+    - name: Intégrer des notifications de stockage
+      href: storage-integration.md
+    - name: Copier et déplacer des projets
+      href: copy-move-projects.md
+    - name: Afficher ou supprimer des données de compte
       href: ./export-delete-data.md
     - name: "Mettre à jour votre application avec l’API\_3.0"
       href: ./update-application-to-3.0-sdk.md
@@ -60,23 +66,25 @@
     - name: Kits SDK
       items:
         - name: .NET
-          href: 'https://docs.microsoft.com/dotnet/api/overview/azure/cognitiveservices/client/customvision?view=azure-dotnet'
+          href: /dotnet/api/overview/azure/cognitiveservices/client/customvision?view=azure-dotnet
         - name: Java
-          href: 'https://docs.microsoft.com/java/api/overview/azure/cognitiveservices/client/customvision?view=azure-java-stable'
+          href: /java/api/overview/azure/cognitiveservices/client/customvision?view=azure-java-stable
         - name: Node.js - Entraînement
-          href: 'https://docs.microsoft.com/javascript/api/@azure/cognitiveservices-customvision-training/?view=azure-node-latest'
+          href: /javascript/api/@azure/cognitiveservices-customvision-training/?view=azure-node-latest
         - name: Node.js - Prédiction
-          href: 'https://docs.microsoft.com/javascript/api/@azure/cognitiveservices-customvision-prediction/?view=azure-node-latest'
+          href: /javascript/api/@azure/cognitiveservices-customvision-prediction/?view=azure-node-latest
         - name: Python
-          href: 'https://docs.microsoft.com/python/api/overview/azure/cognitiveservices/customvision?view=azure-python'
+          href: /python/api/overview/azure/cognitiveservices/customvision?view=azure-python
         - name: Go - Entraînement
           href: 'https://godoc.org/github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v2.1/customvision/training'
         - name: Go - Prédiction
           href: 'https://godoc.org/github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v1.1/customvision/prediction'
 - name: Ressources
   items:
+    - name: Options d’aide et de support
+      href: ../cognitive-services-support-options.md?context=/azure/cognitive-services/custom-vision-service/context/context
     - name: Exemples
-      href: 'https://docs.microsoft.com/samples/browse/?products=azure&term=vision'
+      href: /samples/browse/?products=azure&term=vision
     - name: Limites et quotas
       href: limits-and-quotas.md
     - name: UserVoice

@@ -7,10 +7,10 @@ ms.date: 3/23/2020
 ms.topic: how-to
 ms.service: notification-hubs
 ms.openlocfilehash: c99af881b8f93b75633741c2352dc5df17dd2963
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "80137649"
 ---
 # <a name="use-apns-voip-through-notification-hubs-not-officially-supported"></a>Utiliser VoIP APNS par le biais de Notification Hubs (non officiellement pris en charge)

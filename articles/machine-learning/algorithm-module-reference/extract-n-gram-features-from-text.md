@@ -1,24 +1,24 @@
 ---
 title: Informations de référence sur le module d’extraction des caractéristiques de N-grammes du texte
 titleSuffix: Azure Machine Learning
-description: Découvrez comment caractériser des données texte à l’aide du module d’extraction des caractéristiques de N-grammes du texte dans Azure Machine Learning.
+description: Découvrez comment caractériser des données texte à l’aide du module d’extraction des caractéristiques de N-grammes du texte dans le concepteur Azure Machine Learning.
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: core
 ms.topic: reference
 author: likebupt
 ms.author: keli19
-ms.date: 09/01/2019
-ms.openlocfilehash: efe09c1d516b37c23b024e07ae387772fa7e5992
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 12/08/2019
+ms.openlocfilehash: 37a10d90fa0e277fbe45d9f1377e365cb3d42996
+ms.sourcegitcommit: 21c3363797fb4d008fbd54f25ea0d6b24f88af9c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79477610"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96861455"
 ---
 # <a name="extract-n-gram-features-from-text-module-reference"></a>Informations de référence sur le module d’extraction des caractéristiques de N-grammes du texte
 
-Cet article décrit un module dans le concepteur Azure Machine Learning (version préliminaire). Utilisez le module Extract N-Gram Features from Text (Extraire les caractéristiques de N-grammes du texte) pour *caractériser* des données texte non structurées. 
+Cet article décrit un module dans le concepteur Azure Machine Learning. Utilisez le module Extract N-Gram Features from Text (Extraire les caractéristiques de N-grammes du texte) pour *caractériser* des données texte non structurées. 
 
 ## <a name="configuration-of-the-extract-n-gram-features-from-text-module"></a>Configuration du module Extract N-Gram Features from Text
 
@@ -28,7 +28,7 @@ Le module prend en charge les scénarios suivants pour l’utilisation d’un di
 
 * [Utiliser un ensemble existant de caractéristiques de texte](#use-an-existing-n-gram-dictionary) pour caractériser une colonne de texte libre.
 
-* [Noter ou publier un modèle](#score-or-publish-a-model-that-uses-n-grams) utilisant N-grammes.
+* [Noter ou déployer un modèle](#build-inference-pipeline-that-uses-n-grams-to-deploy-a-real-time-endpoint) qui utilise des N-grammes.
 
 ### <a name="create-a-new-n-gram-dictionary"></a>Créer un dictionnaire de N-grammes
 
@@ -94,17 +94,23 @@ Le module prend en charge les scénarios suivants pour l’utilisation d’un di
 
 1.  Envoyez le pipeline.
 
-### <a name="score-or-publish-a-model-that-uses-n-grams"></a>Noter ou publier un modèle qui utilise des N-grammes
+### <a name="build-inference-pipeline-that-uses-n-grams-to-deploy-a-real-time-endpoint"></a>Créer un pipeline d’inférence qui utilise des N-grammes pour déployer un point de terminaison en temps réel
 
-1.  Copiez le module **Extract N-Gram Features from Text** (Extraire les caractéristiques de N-grammes du texte) du flux de données d’apprentissage dans le flux de données de notation.
+Un pipeline d’entraînement qui contient un module d’**extraction des caractéristiques de N-grammes du texte** et un module **Modèle de score** pour effectuer une prédiction sur le jeu de données de test, est construit dans la structure suivante :
 
-1.  Connectez la sortie **Result Vocabulary** (Vocabulaire de résultat) du flux de données d’apprentissage à **Input Vocabulary** (Vocabulaire d’entrée) sur le flux de travail de scoring.
+:::image type="content" source="./media/module/extract-n-gram-training-pipeline-score-model.png" alt-text="Exemple de pipeline d’entraînement à extraction des caractéristiques de N-grammes" border="true":::
 
-1.  Dans le flux de travail de scoring, modifiez le module Extract N-Gram Features from Text et définissez le paramètre **Vocabulary mode** sur **ReadOnly**. Laissez tout le reste identique.
+Le **mode de vocabulaire** du module d’**extraction des caractéristiques de N-grammes du texte** cerclé est **Créer**, et le **mode de vocabulaire** du module qui se connecte au module **Modèle de score** est **Lecture seule**.
 
-1.  Pour publier le pipeline, enregistrez la sortie **Vocabulaire de résultat** en tant que jeu de données.
+Une fois que vous avez envoyé le pipeline d’entraînement ci-dessus, vous pouvez enregistrer la sortie du module cerclé en tant que jeu de données.
 
-1.  Connectez le jeu de données enregistré au module Extract N-Gram Features from Text dans votre graphe de scoring.
+:::image type="content" source="./media/module/extract-n-gram-output-voc-register-dataset.png" alt-text="inscrire le jeu de données" border="true":::
+
+Vous pouvez ensuite créer un pipeline d’inférence en temps réel. Après avoir créé un pipeline d’inférence, vous devez l’ajuster manuellement comme suit :
+
+:::image type="content" source="./media/module/extract-n-gram-inference-pipeline.png" alt-text="pipeline d’inférence" border="true":::
+
+Ensuite, soumettez le pipeline d’inférence et déployez un point de terminaison en temps réel.
 
 ## <a name="results"></a>Résultats
 

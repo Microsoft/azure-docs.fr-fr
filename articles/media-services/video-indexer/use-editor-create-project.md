@@ -10,12 +10,12 @@ ms.subservice: video-indexer
 ms.topic: article
 ms.date: 04/02/2019
 ms.author: juliako
-ms.openlocfilehash: 9f16ab34dc9b37806f9c58b22a3f02afe839632e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 28186a7dcced47a42b3249f1f74b13e969b41978
+ms.sourcegitcommit: 4f4a2b16ff3a76e5d39e3fcf295bca19cff43540
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "73839165"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93041364"
 ---
 # <a name="use-the-video-indexer-editor-to-create-projects"></a>Utiliser l’éditeur Video Indexer pour créer des projets
 
@@ -35,7 +35,7 @@ Cet article explique comment créer un projet à partir de zéro, mais égalemen
 1. Sélectionnez l’onglet **Projets**. Si vous avez créé des projets avant, vous les verrez tous à cet endroit.
 1. Cliquez sur **Créer un projet**.  
 
-    ![Nouveau projet](./media/video-indexer-view-edit/new-project.png)
+    ![Capture d’écran montrant la page « Video Indexer » avec l’onglet « Projets » sélectionné.](./media/video-indexer-view-edit/new-project.png)
 1. Nommez votre projet en cliquant sur l’icône de crayon. Remplacez le texte « Projet sans titre » par le nom de votre projet, puis cliquez sur la coche.
 
     ![Nouveau projet](./media/video-indexer-view-edit/new-project3.png)
@@ -51,7 +51,7 @@ Cet article explique comment créer un projet à partir de zéro, mais égalemen
     
     Par exemple, dans l’image ci-dessous, nous recherchons des vidéos qui mentionnent « GitHub ».
     
-    ![GitHub](./media/video-indexer-view-edit/github.png)
+    ![Capture d’écran montrant la recherche de vidéos qui mentionnent GitHub avec deux résultats.](./media/video-indexer-view-edit/github.png)
 
     Vous pouvez filtrer davantage vos résultats en sélectionnant **Filtrer les résultats**. Vous pouvez filtrer pour afficher des vidéos avec une personne spécifique ou pour indiquer que vous voulez uniquement voir des résultats de vidéos dans une langue donnée ou ayant un certain propriétaire. <br/> Vous pouvez également spécifier l’étendue de votre requête. Par exemple, si vous voulez rechercher « GitHub » dans l’OCR, sélectionnez **Texte visuel**.
 
@@ -63,7 +63,7 @@ Cet article explique comment créer un projet à partir de zéro, mais égalemen
 
     Vous pouvez réorganiser l’ordre des vidéos en les glissant-déposant ou en sélectionnant le bouton de menu de liste et en cliquant sur **Descendre** ou **Monter**. Dans le menu de la liste, vous serez également en mesure de supprimer la vidéo de ce projet. 
 
-    ![Réorganiser](./media/video-indexer-view-edit/rearrange.png)
+    ![Capture d’écran montrant Video Indexer avec un menu contextuel pour l’une des vidéos à supprimer, effacer la sélection ou descendre.](./media/video-indexer-view-edit/rearrange.png)
     
     Vous avez la possibilité d’ajouter plus de vidéos à ce projet à tout moment en sélectionnant **Ajouter des vidéos**. Vous pouvez également ajouter plusieurs occurrences de la même vidéo à votre projet. Vous souhaiterez peut-être le faire si vous voulez diffuser un clip d’une vidéo, puis un clip à partir d’un autre vidéo, pour finir par un autre clip de la première vidéo. 
 
@@ -81,7 +81,7 @@ Si vous cliquez sur la flèche vers le bas dans la partie droite de chaque vidé
 
     Par exemple, vous voulez peut-être voir des clips où GitHub est mentionné pendant que Donovan Brown est à l’écran. Pour ce faire, vous devez ajouter un filtre « inclure » avec la valeur « Personnes » en tant que type d’information. Vous devez ensuite saisir « Donovan Brown » dans la zone de recherche du filtre.
     
-    ![Inclure](./media/video-indexer-view-edit/include.png)
+    ![Capture d’écran montrant Video Indexer avec Personnes sélectionné pour un filtre d’inclusion.](./media/video-indexer-view-edit/include.png)
     
     Si vous souhaitez des clips où GitHub est mentionné pendant que Donovan Brown n’est _pas_ à l’écran, il vous suffit de remplacer le filtre « inclure » par un filtre « exclure » à l’aide de la liste déroulante. 
 
@@ -96,7 +96,7 @@ Si vous cliquez sur la flèche vers le bas dans la partie droite de chaque vidé
 > [!TIP]
 > À mesure que vous sélectionnez et organiser vos clips, vous pouvez afficher un aperçu de la vidéo dans le lecteur sur le côté droit de la page. 
 
-![PRÉVERSION](./media/video-indexer-view-edit/preview.png)
+![Capture d’écran montrant Video Indexer avec l’aperçu d’une vidéo sur le côté droit de la fenêtre.](./media/video-indexer-view-edit/preview.png)
 
 Pensez à enregistrer votre projet lorsque vous apportez des modifications en sélectionnant **Enregistrer le projet**. 
 
@@ -107,7 +107,7 @@ Pensez à enregistrer votre projet lorsque vous apportez des modifications en s�
 
 1. Une fois que vous avez terminé, assurez-vous que votre projet a été enregistré. Vous pouvez maintenant restituer ce projet. Sélectionnez **Rendu et téléchargement**. 
 
-    ![Enregistrer](./media/video-indexer-view-edit/save.png)
+    ![Capture d’écran montrant Video Indexer avec l’option permettant d’afficher et de télécharger votre projet.](./media/video-indexer-view-edit/save.png)
 
     Une fenêtre contextuelle vous indiquera que Video Indexer va restituer un fichier, puis le lien de téléchargement sera envoyé à votre adresse e-mail. Sélectionnez Continuer. 
     
@@ -117,7 +117,7 @@ Pensez à enregistrer votre projet lorsque vous apportez des modifications en s�
 
 1. Vous pouvez accéder à des projets enregistrés depuis l’onglet **Projets**. 
 
-    Si vous sélectionnez ce projet, vous voyez toutes les informations et la chronologie de ce projet. Si vous sélectionnez **Éditeur de vidéo**, vous pouvez continuer à apporter des modifications à ce projet. Les modifications incluent l’ajout ou la suppression de vidéos et de clips ou le renommage du projet.
+    Si vous sélectionnez ce projet, vous voyez toutes les informations et la chronologie de ce projet. Si vous sélectionnez **Éditeur de vidéo** , vous pouvez continuer à apporter des modifications à ce projet. Les modifications incluent l’ajout ou la suppression de vidéos et de clips ou le renommage du projet.
 
     ![Éditeur de vidéo](./media/video-indexer-view-edit/video-editor.png)
      

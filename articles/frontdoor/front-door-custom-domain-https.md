@@ -3,21 +3,21 @@ title: 'Tutoriel : Configurer HTTPS sur un domaine personnalisé Azure Front Do
 description: Dans ce tutoriel, vous allez apprendre à activer et désactiver HTTPS dans votre configuration Azure Front Door pour un domaine personnalisé.
 services: frontdoor
 documentationcenter: ''
-author: sharad4u
+author: duongau
 editor: ''
 ms.service: frontdoor
 ms.workload: infrastructure-services
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: tutorial
-ms.date: 10/05/2018
-ms.author: sharadag
-ms.openlocfilehash: 56a2246b4f1da51d9b18a34279eff04264530ef5
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.date: 10/21/2020
+ms.author: duau
+ms.openlocfilehash: 6c6d33a36c4a0b71932e8c19c8f6dd105c33817c
+ms.sourcegitcommit: 28c5fdc3828316f45f7c20fc4de4b2c05a1c5548
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82160083"
+ms.lasthandoff: 10/22/2020
+ms.locfileid: "92368330"
 ---
 # <a name="tutorial-configure-https-on-a-front-door-custom-domain"></a>Tutoriel : Configurer HTTPS sur un domaine personnalisé Front Door
 
@@ -59,15 +59,18 @@ Lorsque vous utilisez un certificat géré par Azure Front Door, la fonctionnali
 
 Pour activer HTTPS sur un domaine personnalisé, suivez ces étapes :
 
-1. Dans le [portail Azure](https://portal.azure.com), accédez à votre profil **Front Door**.
+1. Dans le [portail Azure](https://portal.azure.com), accédez à votre profil **Front Door** .
 
 2. Dans la liste des hôtes frontend, sélectionnez le domaine personnalisé pour lequel vous souhaitez activer le protocole HTTPS.
 
-3. Sous la section **HTTPS sur un domaine personnalisé**, cliquez sur **Activé**, puis sélectionnez **Porte d’entrée managée** en tant que source du certificat.
+3. Sous la section **HTTPS sur un domaine personnalisé** , cliquez sur **Activé** , puis sélectionnez **Porte d’entrée managée** en tant que source du certificat.
 
 4. Cliquez sur Enregistrer.
 
 5. Faites [Valider le domaine](#validate-the-domain).
+
+> [!NOTE]
+> Pour les certificats managés AFD, la limite de 64 caractères de DigiCert est appliquée. En cas de dépassement de cette limite, la validation échoue.
 
 
 ### <a name="option-2-use-your-own-certificate"></a>Option n°2 : utiliser votre propre certificat ;
@@ -81,7 +84,7 @@ Vous pouvez utiliser votre propre certificat pour activer la fonctionnalité HTT
 > [!WARNING]
 > Azure Front Door ne prend actuellement en charge que les comptes Key Vault dans le même abonnement que la configuration Front Door. Le choix d’un Key Vault sous un autre abonnement que votre porte d’entrée entraîne un échec.
 
-2. Certificats Azure Key Vault : si vous disposez déjà d’un certificat, vous pouvez le charger directement vers votre compte Azure Key Vault. Vous pouvez également en créer un directement à l’aide d’Azure Key Vault à partir d’une des autorités de certification (CA) partenaires de ce coffre Azure Key Vault. Chargez votre certificat en tant qu’objet de **certificat** et non en tant que **secret**.
+2. Certificats Azure Key Vault : si vous disposez déjà d’un certificat, vous pouvez le charger directement vers votre compte Azure Key Vault. Vous pouvez également en créer un directement à l’aide d’Azure Key Vault à partir d’une des autorités de certification (CA) partenaires de ce coffre Azure Key Vault. Chargez votre certificat en tant qu’objet de **certificat** et non en tant que **secret** .
 
 > [!NOTE]
 > Pour votre propre certificat TLS/SSL, Front Door ne prend pas en charge les certificats avec des algorithmes de chiffrement EC.
@@ -103,15 +106,15 @@ Inscrivez le principal du service pour Azure Front Door en tant qu’application
  
 Accordez à Azure Front Door l’autorisation d’accéder aux certificats de votre compte Azure Key Vault.
 
-1. Dans votre compte de coffre de clés, sous PARAMÈTRES, sélectionnez **Stratégies d’accès**, puis **Ajouter nouveau** pour créer une stratégie.
+1. Dans votre compte de coffre de clés, sous PARAMÈTRES, sélectionnez **Stratégies d’accès** , puis **Ajouter nouveau** pour créer une stratégie.
 
-2. Dans **Sélectionner le principal**, recherchez **ad0e1c7e-6d38-4ba4-9efd-0bc77ba9f037**, puis choisissez **Microsoft.Azure.Frontdoor**. Cliquez sur **Sélectionner**.
+2. Dans **Sélectionner le principal** , recherchez **ad0e1c7e-6d38-4ba4-9efd-0bc77ba9f037** , puis choisissez **Microsoft.Azure.Frontdoor** . Cliquez sur **Sélectionner** .
 
-3. Sous **Autorisations du secret**, sélectionnez **Obtenir** pour permettre à Front Door de récupérer le certificat.
+3. Sous **Autorisations du secret** , sélectionnez **Obtenir** pour permettre à Front Door de récupérer le certificat.
 
-4. Sous **Autorisations de certificat**, sélectionnez **Obtenir** pour permettre à Front Door de récupérer le certificat.
+4. Sous **Autorisations de certificat** , sélectionnez **Obtenir** pour permettre à Front Door de récupérer le certificat.
 
-5. Sélectionnez **OK**. 
+5. Sélectionnez **OK** . 
 
     Azure Front Door peut désormais accéder à ce coffre de clés et aux certificats qui sont stockés dans ce coffre de clés.
  
@@ -123,7 +126,7 @@ Accordez à Azure Front Door l’autorisation d’accéder aux certificats de vo
 
     La page **Domaine personnalisé** s’affiche.
 
-3. Sous Type de gestion de certificats, sélectionnez **Utiliser mon propre certificat**. 
+3. Sous Type de gestion de certificats, sélectionnez **Utiliser mon propre certificat** . 
 
 4. Azure Front Door nécessite que l’abonnement du compte Key Vault soit identique à celui de Front Door. Sélectionnez un coffre de clés, un certificat (secret) et une version du certificat.
 
@@ -131,6 +134,11 @@ Accordez à Azure Front Door l’autorisation d’accéder aux certificats de vo
     - les comptes du coffre de clés de votre ID d’abonnement ; 
     - les certificats (secrets) dans le coffre de clés sélectionné ; 
     - les versions disponibles du certificat. 
+
+> [!NOTE]
+> Si vous laissez la version de certificat vide, vous obtiendrez :
+> - La version la plus récente du certificat qui est sélectionné.
+> - La rotation automatique des certificats pour la toute dernière version en date, quand une version plus récente du certificat est disponible dans votre coffre de clés.
  
 5. Lorsque vous utilisez votre propre certificat, la validation du domaine n’est pas nécessaire. Passez à [En attente de la propagation](#wait-for-propagation).
 
@@ -151,7 +159,7 @@ Votre enregistrement CNAME doit être au format suivant, où *Nom* désigne le n
 |-----------------|-------|-----------------------|
 | <www.contoso.com> | CNAME | contoso.azurefd.net |
 
-Pour plus d’informations sur les enregistrements CNAME, consultez [Create the CNAME DNS record](https://docs.microsoft.com/azure/cdn/cdn-map-content-to-custom-domain) (Créer l’enregistrement DNS CNAME).
+Pour plus d’informations sur les enregistrements CNAME, consultez [Create the CNAME DNS record](../cdn/cdn-map-content-to-custom-domain.md) (Créer l’enregistrement DNS CNAME).
 
 Si le format de votre enregistrement CNAME est correct, DigiCert vérifie automatiquement le nom de votre domaine personnalisé et crée un certificat dédié pour votre nom de domaine. DigiCert ne vous envoie pas de courrier électronique de vérification, et vous ne devez pas approuver votre requête. Le certificat est valide pendant un an et est automatiquement renouvelé avant son expiration. Passez à [En attente de la propagation](#wait-for-propagation). 
 
@@ -216,34 +224,6 @@ Si une erreur survient avant la soumission de la requête, le message d’erreur
 We encountered an unexpected error while processing your HTTPS request. Please try again and contact support if the issue persists.
 </code>
 
-
-
-## <a name="clean-up-resources---disable-https"></a>Nettoyer les ressources : désactiver HTTPS
-
-Dans les étapes précédentes, vous avez activé le protocole HTTPS sur votre domaine personnalisé. Si vous ne souhaitez plus utiliser votre domaine personnalisé avec HTTPS, vous pouvez désactiver HTTPS en procédant comme suit :
-
-### <a name="disable-the-https-feature"></a>Désactiver la fonctionnalité HTTPS 
-
-1. Dans le [portail Azure](https://portal.azure.com), accédez à votre configuration **Azure Front Door**.
-
-2. Dans la liste d’hôtes frontend, cliquez sur le domaine personnalisé pour lequel vous souhaitez désactiver HTTPS.
-
-3. Cliquez sur **Désactiver** pour désactiver HTTPS, puis cliquez sur **Enregistrer**.
-
-### <a name="wait-for-propagation"></a>En attente de la propagation
-
-Après la désactivation de la fonctionnalité HTTPS sur un domaine personnalisé, il peut s’écouler jusqu’à 6 à 8 heures avant que cette modification soit effective. Quand le processus est terminé, l’état HTTPS personnalisé est défini sur **Désactivé** dans le portail Azure, et les trois étapes de l’opération sont marquées comme terminées dans la boîte de dialogue Domaine personnalisé. Votre domaine personnalisé ne peut plus utiliser HTTPS.
-
-#### <a name="operation-progress"></a>Progression de l’opération
-
-Le tableau suivant présente le déroulement de l’opération qui s’exécute lorsque vous désactivez HTTPS. Une fois que vous avez désactivé HTTPS, les trois étapes de l’opération s’affichent dans la boîte de dialogue Domaine personnalisé. À mesure que chaque étape devient active, des détails supplémentaires s’affichent sous l’étape en cours d’exécution. Lorsqu’une étape se termine correctement, une coche verte apparaît en regard de celle-ci. 
-
-| Progression de l’opération | Détails de l’opération | 
-| --- | --- |
-| 1 Soumission de la requête | Envoi de la requête |
-| 2 Annulation de l’approvisionnement du certificat | Suppression du certificat |
-| 3 Fin | Le certificat est supprimé |
-
 ## <a name="frequently-asked-questions"></a>Forum aux questions
 
 1. *Qui est le fournisseur de certificats et quel est le type de certificat utilisé ?*
@@ -266,8 +246,41 @@ Le tableau suivant présente le déroulement de l’opération qui s’exécute 
 
     Non, un enregistrement CAA n’est pas requis. Toutefois, si vous en avez un, il doit inclure DigiCert en tant qu’autorité de certification valide.
 
+## <a name="clean-up-resources"></a>Nettoyer les ressources
+
+Dans les étapes précédentes, vous avez activé le protocole HTTPS sur votre domaine personnalisé. Si vous ne souhaitez plus utiliser votre domaine personnalisé avec HTTPS, vous pouvez désactiver HTTPS en procédant comme suit :
+
+### <a name="disable-the-https-feature"></a>Désactiver la fonctionnalité HTTPS 
+
+1. Dans le [portail Azure](https://portal.azure.com), accédez à votre configuration **Azure Front Door** .
+
+2. Dans la liste d’hôtes frontend, cliquez sur le domaine personnalisé pour lequel vous souhaitez désactiver HTTPS.
+
+3. Cliquez sur **Désactiver** pour désactiver HTTPS, puis cliquez sur **Enregistrer** .
+
+### <a name="wait-for-propagation"></a>En attente de la propagation
+
+Après la désactivation de la fonctionnalité HTTPS sur un domaine personnalisé, il peut s’écouler jusqu’à 6 à 8 heures avant que cette modification soit effective. Quand le processus est terminé, l’état HTTPS personnalisé est défini sur **Désactivé** dans le portail Azure, et les trois étapes de l’opération sont marquées comme terminées dans la boîte de dialogue Domaine personnalisé. Votre domaine personnalisé ne peut plus utiliser HTTPS.
+
+#### <a name="operation-progress"></a>Progression de l’opération
+
+Le tableau suivant présente le déroulement de l’opération qui s’exécute lorsque vous désactivez HTTPS. Une fois que vous avez désactivé HTTPS, les trois étapes de l’opération s’affichent dans la boîte de dialogue Domaine personnalisé. À mesure que chaque étape devient active, des détails supplémentaires s’affichent sous l’étape en cours d’exécution. Lorsqu’une étape se termine correctement, une coche verte apparaît en regard de celle-ci. 
+
+| Progression de l’opération | Détails de l’opération | 
+| --- | --- |
+| 1 Soumission de la requête | Envoi de la requête |
+| 2 Annulation de l’approvisionnement du certificat | Suppression du certificat |
+| 3 Fin | Le certificat est supprimé |
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- Découvrez comment [créer une porte d’entrée](quickstart-create-front-door.md).
-- Découvrez [comment fonctionne Front Door](front-door-routing-architecture.md).
+Dans ce didacticiel, vous avez appris à :
+
+* Charger un certificat sur Key Vault.
+* Valider un domaine.
+* Activer HTTPS pour votre domaine personnalisé.
+
+Pour savoir comment configurer une stratégie de géofiltrage destinée à votre Front Door, passez au tutoriel suivant.
+
+> [!div class="nextstepaction"]
+> [Configurer une stratégie de géofiltrage](front-door-geo-filtering.md)

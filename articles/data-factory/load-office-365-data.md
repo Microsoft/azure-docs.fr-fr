@@ -11,12 +11,12 @@ ms.workload: data-services
 ms.topic: conceptual
 ms.date: 10/22/2018
 ms.author: jingwang
-ms.openlocfilehash: 3422176ed89b7f575c11cc40e5be8420da0018b0
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 05f336af62bc0869249d5b32700ea3515ac5994f
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81415812"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96459701"
 ---
 # <a name="load-data-from-office-365-by-using-azure-data-factory"></a>Charger des données d’Office 365 à l’aide d’Azure Data Factory
 
@@ -79,7 +79,7 @@ Cet article vous montre comment _charger des données d’Office 365 dans le st
 
     ![Configuration de la table du jeu de données Office 365](./media/load-office-365-data/edit-dataset.png)
 
-8. Revenez maintenant au **pipeline** > **onglet Source** pour continuer à configurer des propriétés supplémentaires pour l’extraction de données Office 365.  L’étendue de l’utilisateur et le filtre d’étendue utilisateur sont des prédicats facultatifs que vous pouvez définir pour limiter les données que vous souhaitez extraire d’Office 365. Pour plus d’informations sur la configuration de ces paramètres, consultez les [propriétés du jeu de données Office 365](https://docs.microsoft.com/azure/data-factory/connector-office-365#dataset-properties).
+8. Revenez maintenant au **pipeline** > **onglet Source** pour continuer à configurer des propriétés supplémentaires pour l’extraction de données Office 365.  L’étendue de l’utilisateur et le filtre d’étendue utilisateur sont des prédicats facultatifs que vous pouvez définir pour limiter les données que vous souhaitez extraire d’Office 365. Pour plus d’informations sur la configuration de ces paramètres, consultez les [propriétés du jeu de données Office 365](./connector-office-365.md#dataset-properties).
 
 9. Vous devez choisir l’un des filtres de date et fournir les valeurs heure de début et heure de fin.
 
@@ -147,7 +147,7 @@ Maintenant, accédez au Stockage Blob Azure de destination et vérifiez que les 
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Lisez l’article suivant pour en savoir plus sur la prise en charge d’Azure SQL Data Warehouse : 
+Lisez l’article suivant pour en savoir plus sur la prise en charge d’Azure Synapse Analytics : 
 
 > [!div class="nextstepaction"]
 >[Connecteur Office 365](connector-office-365.md)

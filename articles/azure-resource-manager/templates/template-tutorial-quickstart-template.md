@@ -5,12 +5,13 @@ author: mumian
 ms.date: 03/27/2020
 ms.topic: tutorial
 ms.author: jgao
-ms.openlocfilehash: 4b82e02ecc009e587b89d1fd151fd13f75a4bcf8
-ms.sourcegitcommit: 27bbda320225c2c2a43ac370b604432679a6a7c0
+ms.custom: ''
+ms.openlocfilehash: 46b32ae7aeb971c9391a69e3ca3d01f669774248
+ms.sourcegitcommit: 6172a6ae13d7062a0a5e00ff411fd363b5c38597
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/31/2020
-ms.locfileid: "80408511"
+ms.lasthandoff: 12/11/2020
+ms.locfileid: "97106901"
 ---
 # <a name="tutorial-use-azure-quickstart-templates"></a>Tutoriel : Utiliser les modèles de démarrage rapide Azure
 
@@ -33,10 +34,10 @@ Ce modèle fonctionne pour le déploiement de comptes de stockage et de plans Ap
 ## <a name="find-template"></a>Rechercher un modèle
 
 1. Ouvrez [Modèles de démarrage rapide Azure](https://azure.microsoft.com/resources/templates/).
-1. Dans **Rechercher**, entrez **deploy linux web app** (déployer une application web Linux).
-1. Sélectionnez celle qui est intitulée **Deploy a basic Linux web app** (Déployer une application web Linux de base). Si vous rencontrez des difficultés pour la trouver, voici le [lien direct](https://azure.microsoft.com/resources/templates/101-webapp-basic-linux/).
+1. Dans **Rechercher**, entrez _deploy linux web app_ (déployer une application web Linux).
+1. Sélectionnez la vignette intitulée **Deploy a basic Linux web app** (Déployer une application web Linux de base). Si vous rencontrez des difficultés pour la trouver, voici le [lien direct](https://azure.microsoft.com/resources/templates/101-webapp-basic-linux/).
 1. Sélectionnez **Rechercher sur GitHub**.
-1. Sélectionnez **azuredeploy.json**.
+1. Sélectionnez _azuredeploy.json_.
 1. Vérifiez le modèle. Recherchez en particulier la ressource `Microsoft.Web/sites`.
 
     ![Modèle Resource Manager - Site web de démarrage rapide](./media/template-tutorial-quickstart-template/resource-manager-template-quickstart-template-web-site.png)
@@ -47,15 +48,15 @@ Fusionnez le modèle de démarrage rapide avec le modèle existant :
 
 :::code language="json" source="~/resourcemanager-templates/get-started-with-templates/quickstart-template/azuredeploy.json" range="1-108" highlight="32-45,49,85-100":::
 
-Le nom de l’application web doit être unique dans Azure. Pour éviter d’avoir des noms en double, la variable **webAppPortalName** a été mise à jour en passant de **"webAppPortalName": "[concat(parameters('webAppName'), '-webapp')]"** à **"webAppPortalName": "[concat(parameters('webAppName'), uniqueString(resourceGroup().id))]"** .
+Le nom de l’application web doit être unique dans Azure. Pour éviter d’avoir des noms en double, la variable `webAppPortalName` a été mise à jour en passant de `"webAppPortalName": "[concat(parameters('webAppName'), '-webapp')]"` à `"webAppPortalName": "[concat(parameters('webAppName'), uniqueString(resourceGroup().id))]"` .
 
 Ajoutez une virgule à la fin de la définition de `Microsoft.Web/serverfarms` pour séparer la définition de ressource de la définition de `Microsoft.Web/sites`.
 
 Il y a quelques fonctionnalités importantes à noter dans cette nouvelle ressource.
 
-Vous remarquerez qu’elle comporte un élément nommé **dependsOn** qui est défini sur le plan App Service. Ce paramètre est obligatoire, car le plan App Service doit préexister à la création de l’application web. L’élément **dependsOn** indique à Resource Manager comment ordonner les ressources pour le déploiement.
+Vous remarquerez qu’elle comporte un élément nommé `dependsOn` qui est défini sur le plan App Service. Ce paramètre est obligatoire, car le plan App Service doit préexister à la création de l’application web. L’élément `dependsOn` indique à Resource Manager comment ordonner les ressources pour le déploiement.
 
-La propriété **serverFarmId** utilise la fonction [resourceId](template-functions-resource.md#resourceid). Cette fonction obtient l’identificateur unique pour une ressource. Dans ce cas, elle obtient l’identificateur unique pour le plan App Service. L’application web est associée à un plan App Service spécifique.
+La propriété `serverFarmId` utilise la fonction [resourceId](template-functions-resource.md#resourceid). Cette fonction obtient l’identificateur unique pour une ressource. Dans ce cas, elle obtient l’identificateur unique pour le plan App Service. L’application web est associée à un plan App Service spécifique.
 
 ## <a name="deploy-template"></a>Déployer un modèle
 
@@ -90,7 +91,7 @@ az deployment group create \
 ---
 
 > [!NOTE]
-> En cas d’échec du déploiement, utilisez le commutateur **debug** avec la commande de déploiement pour afficher les journaux de débogage.  Vous pouvez également utiliser le commutateur **verbose** pour afficher les journaux de débogage complets.
+> Si le déploiement a échoué, utilisez le commutateur `verbose` pour obtenir des informations sur les ressources en cours de création. Utilisez le commutateur `debug` pour obtenir des informations supplémentaires sur le débogage.
 
 ## <a name="clean-up-resources"></a>Nettoyer les ressources
 

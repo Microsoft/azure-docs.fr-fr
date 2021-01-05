@@ -1,20 +1,20 @@
 ---
-title: Utiliser le serveur d’historique Spark étendu pour déboguer des applications – Apache Spark dans Azure Synapse
+title: Utiliser le serveur d’historique Spark étendu pour déboguer des applications
 description: Utilisez le serveur d’historique Spark étendu pour déboguer et diagnostiquer des applications Spark dans Azure Synapse Analytics.
 services: synapse-analytics
 author: euangMS
 ms.service: synapse-analytics
 ms.topic: conceptual
-ms.subservice: ''
-ms.date: 04/15/2020
+ms.subservice: spark
+ms.date: 10/15/2020
 ms.author: euang
 ms.reviewer: euang
-ms.openlocfilehash: 4f03033942517f4778192e0b12f84610df8fd469
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: 94c30cad1e09a01686a9042a6271a152d0f433fd
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81426825"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95995384"
 ---
 # <a name="use-extended-apache-spark-history-server-to-debug-and-diagnose-apache-spark-applications"></a>Utiliser le serveur d’historique Apache Spark étendu pour déboguer et diagnostiquer des applications Apache Spark
 
@@ -30,11 +30,11 @@ Le serveur d’historique Apache Spark est l’interface utilisateur web pour le
 
 1. Ouvrez [Azure Synapse Analytics](https://web.azuresynapse.net/).
 
-2. Cliquez sur **Superviser**, puis sélectionnez **Applications Apache Spark**.
+2. Sélectionnez **Superviser**, puis **Applications Apache Spark**.
 
-    ![Cliquez sur Surveiller, puis sélectionnez Application Spark.](./media/apache-spark-history-server/click-monitor-spark-application.png)
+    ![Sélectionnez Superviser, puis sélectionnez une application Spark.](./media/apache-spark-history-server/click-monitor-spark-application.png)
 
-3. Sélectionnez une application, puis ouvrez la fenêtre **Requête de journal** en cliquant dessus.
+3. Sélectionnez une application, puis ouvrez la fenêtre **Requête de journal** en la sélectionnant.
 
     ![Ouvrez la fenêtre Requête de journal.](./media/apache-spark-history-server/open-application-window.png)
 
@@ -46,11 +46,11 @@ Le serveur d’historique Apache Spark est l’interface utilisateur web pour le
 
 1. Dans votre bloc-notes Azure Synapse Studio, sélectionnez **Serveur d’historique Spark** dans la cellule de sortie de l’exécution du travail ou dans le panneau d’état au bas du document du bloc-notes. Sélectionnez **Détails de la session**.
 
-   ![Lancer le serveur d’historique Spark](./media/apache-spark-history-server/launch-history-server2.png "Lancer le serveur d’historique Spark")
+   ![Lancer le serveur d’historique Spark 1](./media/apache-spark-history-server/launch-history-server2.png "Lancer le serveur d’historique Spark")
 
 2. Sélectionnez **Serveur d’historique Spark** dans le panneau coulissant.
 
-   ![Lancer le serveur d’historique Spark](./media/apache-spark-history-server/launch-history-server.png "Lancer le serveur d’historique Spark")
+   ![Lancer le serveur d’historique Spark 2](./media/apache-spark-history-server/launch-history-server.png "Lancer le serveur d’historique Spark")
 
 ## <a name="explore-the-data-tab-in-spark-history-server"></a>Explorer l’onglet Données dans le serveur d’historique Spark
 
@@ -80,7 +80,7 @@ Sélectionnez l’ID du travail à afficher. Sélectionnez ensuite **Données** 
 
     ![Données pour l’application Spark - Télécharger](./media/apache-spark-history-server/sparkui-data-download-row.png)
 
-* Pour copier un chemin d’accès complet ou relatif, sélectionnez l’une des options **Copier le chemin complet** ou **Copier le chemin relatif** qui se développent à partir du menu déroulant. Pour les fichiers Azure Data Lake Storage, l’option **Ouvrir dans l’Explorateur Stockage Azure** lance l’Explorateur Stockage Azure et localise le dossier lorsque vous êtes connecté.
+* Pour copier un chemin complet ou relatif, sélectionnez l’option **Copier le chemin complet** ou l’option **Copier le chemin relatif** qui se développent à partir du menu déroulant. Pour les fichiers Azure Data Lake Storage, l’option **Ouvrir dans l’Explorateur Stockage Azure** lance l’Explorateur Stockage Azure et localise le dossier lorsque vous êtes connecté.
 
     ![Données pour l’application Spark - Copier le chemin](./media/apache-spark-history-server/sparkui-data-copy-path.png)
 
@@ -112,7 +112,7 @@ Par défaut, l’affichage **Progress** (Progression) est sélectionné. Vous po
 
 ![Application Spark - Graphe du travail - Affichage](./media/apache-spark-history-server/sparkui-graph-display.png)
 
-Le nœud Graph (Graphique) affiche les couleurs indiquées dans la légende de la carte thermique.
+Le nœud Graph affiche les couleurs indiquées dans la légende de la carte thermique.
 
 ![Application Spark - Graphe du travail - Carte thermique](./media/apache-spark-history-server/sparkui-graph-heatmap.png)
 
@@ -200,7 +200,7 @@ Vérifiez l’**asymétrie des données**, l’**asymétrie temporelle** et l’
 
 Lorsque vous sélectionnez l’onglet **Data Skew** (Asymétrie des données), les tâches asymétriques correspondante sont affichées en fonction des paramètres spécifiés.
 
-* **Spécifier les paramètres** : la première section affiche les paramètres qui sont utilisés pour détecter l’asymétrie des données. La règle par défaut est : Les données des tâches lues sont trois fois supérieures aux données des tâches lues en moyenne, et les données des tâches lues sont supérieures à 10 Mo. Si vous souhaitez définir votre propre règle pour les tâches asymétriques, vous pouvez choisir vos paramètres. Les sections **Skewed Stage** (Phase asymétrique) et **Skew Chart** (Graphique des asymétries) sont actualisées en conséquence.
+* **Spécifier les paramètres** : la première section affiche les paramètres qui sont utilisés pour détecter l’asymétrie des données. La règle par défaut est : Les données des tâches lues sont trois fois supérieures aux données des tâches lues en moyenne, et les données des tâches lues sont supérieures à 10 Mo. Si vous souhaitez définir votre propre règle pour les tâches asymétriques, vous pouvez choisir vos paramètres. Les sections **Skewed Stage**(Phase asymétrique) et **Skew Chart** (Graphe d’asymétrie) sont actualisées en conséquence.
 
 * **Phase asymétrique** : la seconde section affiche les phases comportant des tâches asymétriques qui répondent aux critères spécifiés ci-dessus. S’il y a plusieurs tâches asymétriques dans une phase, la table des phases asymétriques affiche uniquement la tâche la plus asymétrique (par exemple, les données les plus volumineuses pour l’asymétrie des données).
 
@@ -224,7 +224,7 @@ L’onglet **Time Skew** affiche les tâches asymétriques en fonction de la dur
 
 Le graphique de l’utilisation de l’exécuteur présente l’allocation et l’état de l’exécution de l’exécuteur du travail Spark.  
 
-1. Sélectionnez **Executor Usage Analysis** (Analyse de l’utilisation de l’exécuteur) pour afficher quatre types de courbes portant sur l’utilisation de l’exécuteur, à savoir **Allocated Executors** (Exécuteurs alloués), **Running Executors** (Exécuteurs en cours d’exécution), **Idle Executors** (Exécuteurs inactifs) et **Max Executor Instances** (Nombre maximal d’instances d’exécuteur). En ce qui concerne les exécuteurs alloués, chaque événement d’ajout ou de suppression d’exécuteur augmente ou réduit les exécuteurs alloués. Vous pouvez cocher la case « Event Timeline » (Chronologie des événements) sous l’onglet « Jobs » (Travaux) pour effectuer d’autres comparaisons.
+1. Sélectionnez **Executor Usage Analysis** (Analyse de l’utilisation de l’exécuteur) pour afficher quatre types de courbes portant sur l’utilisation de l’exécuteur, à savoir **Allocated Executors** (Exécuteurs alloués), **Running Executors** (Exécuteurs en cours d’exécution), **Idle Executors** (Exécuteurs inactifs) et **Max Executor Instances** (Nombre maximal d’instances d’exécuteur). En ce qui concerne les exécuteurs alloués, chaque événement d’ajout ou de suppression d’exécuteur augmente ou réduit le nombre d’exécuteurs alloués. Vous pouvez cocher la case « Event Timeline » (Chronologie des événements) sous l’onglet « Jobs » (Travaux) pour effectuer d’autres comparaisons.
 
    ![SparkUI - Diagnostic - Onglet Exécuteurs](./media/apache-spark-history-server/sparkui-diagnosis-executors.png)
 

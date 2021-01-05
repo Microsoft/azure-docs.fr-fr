@@ -5,15 +5,15 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
+ms.topic: how-to
 ms.custom: H1Hack27Feb2017,hdinsightactive
 ms.date: 02/14/2020
-ms.openlocfilehash: 0b746963cea5a950ba47d8b4dfeb074cb0910436
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c678372fbd54e528a8a16eacc601e815cfd32e58
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77471021"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86082231"
 ---
 # <a name="add-custom-apache-hive-libraries-when-creating-your-hdinsight-cluster"></a>Ajouter des bibliothèques Apache Hive personnalisées lors de la création de votre cluster HDInsight
 

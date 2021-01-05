@@ -10,12 +10,13 @@ ms.subservice: speech-service
 ms.topic: conceptual
 ms.date: 07/05/2019
 ms.author: fmegen
-ms.openlocfilehash: 23a426bf8cc3f30516fff0a672d7118a49666433
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 87fa97dafe9de4a23f5eaadfd4083cd1ca517cde
+ms.sourcegitcommit: 10d00006fec1f4b69289ce18fdd0452c3458eca5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83584924"
+ms.lasthandoff: 11/21/2020
+ms.locfileid: "95026588"
 ---
 # <a name="about-the-speech-sdk-audio-input-stream-api"></a>À propos de l’API de flux d’entrée audio du SDK Speech
 
@@ -25,7 +26,7 @@ Les étapes suivantes sont nécessaires à l’utilisation des flux d’entrée 
 
 - Identifiez le format du flux audio. Le format doit être pris en charge par le SDK et le service Speech. Seule la configuration suivante est prise en charge :
 
-  Échantillons audio au format PCM, un canal, 16 bits par échantillon, 8 000 ou 16 000 échantillons par seconde (16 000 ou 32 000 octets par seconde), alignement de deux blocs (16 bits incluant le remplissage d’un échantillon).
+  Les échantillons audio sont au format PCM, un canal, 16 bits par échantillon, 8 000 ou 16 000 échantillons par seconde (16 000 ou 32 000 octets par seconde), alignement de 2 blocs (16 bits incluant le remplissage d’un échantillon).
 
   Dans le SDK, le code correspondant permettant de créer le format audio se présente ainsi :
 
@@ -36,7 +37,7 @@ Les étapes suivantes sont nécessaires à l’utilisation des flux d’entrée 
   var audioFormat = AudioStreamFormat.GetWaveFormatPCM(samplesPerSecond, bitsPerSample, channels);
   ```
 
-- Vérifiez que votre code peut fournir les données audio RAW respectant ces spécifications. Si vos données sources audio ne correspondent pas aux formats pris en charge, le fichier audio doit être converti au format requis.
+- Vérifiez que votre code fournit les données audio RAW respectant ces spécifications. Assurez-vous également que les exemples 16 bits arrivent au format little-endian. Les exemples signés sont également pris en charge. Si vos données sources audio ne correspondent pas aux formats pris en charge, le fichier audio doit être converti au format requis.
 
 - Créez votre propre classe de flux d’entrée audio dérivée de `PullAudioInputStreamCallback`. Implémentez les membres `Read()` et `Close()`. La signature de fonction exacte dépend de la langue, mais le code doit ressembler à cet exemple :
 
@@ -75,5 +76,5 @@ Les étapes suivantes sont nécessaires à l’utilisation des flux d’entrée 
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- [Obtenir votre abonnement d’essai gratuit au service Speech](https://azure.microsoft.com/try/cognitive-services/)
-- [Découvrir comment utiliser la reconnaissance vocale en C#](~/articles/cognitive-services/Speech-Service/quickstarts/speech-to-text-from-microphone.md?pivots=programming-language-csharp&tabs=dotnet)
+- [Créez un compte Azure gratuit](https://azure.microsoft.com/free/cognitive-services/)
+- [Découvrir comment utiliser la reconnaissance vocale en C#](./get-started-speech-to-text.md?pivots=programming-language-csharp&tabs=dotnet)

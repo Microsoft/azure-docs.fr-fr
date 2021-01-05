@@ -1,25 +1,26 @@
 ---
-title: 'Tutoriel : Déployer un modèle Machine Learning avec le concepteur'
+title: 'Tutoriel : Déployer des modèles Machine Learning avec le concepteur'
 titleSuffix: Azure Machine Learning
-description: Ce tutoriel vous montre comment créer une solution d’analyse prédictive dans le concepteur Azure Machine Learning (préversion). Entraînez, évaluez à l’aide d’un score et déployez un modèle Machine Learning à l’aide de modules fonctionnant par glisser-déposer.
-author: peterclu
-ms.author: peterlu
+description: Créez une solution d’analytique prédictive dans le concepteur Azure Machine Learning. Entraînez, évaluez et déployez un modèle Machine Learning à l’aide de modules de type glisser-déplacer.
+author: likebupt
+ms.author: keli19
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: core
 ms.topic: tutorial
-ms.date: 11/04/2019
-ms.openlocfilehash: c3ca37fd47b6551a95f9a491053ec7863acd1eeb
-ms.sourcegitcommit: 0553a8b2f255184d544ab231b231f45caf7bbbb0
+ms.date: 11/25/2020
+ms.custom: designer
+ms.openlocfilehash: 14be695f2f58b9738af11a3d2ca3f06592a1cc6e
+ms.sourcegitcommit: 16c7fd8fe944ece07b6cf42a9c0e82b057900662
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/30/2020
-ms.locfileid: "80389390"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96575956"
 ---
-# <a name="tutorial-deploy-a-machine-learning-model-with-the-designer-preview"></a>Tutoriel : Déployer un modèle Machine Learning avec le concepteur (préversion)
-[!INCLUDE [applies-to-skus](../../includes/aml-applies-to-enterprise-sku.md)]
+# <a name="tutorial-deploy-a-machine-learning-model-with-the-designer"></a>Tutoriel : Déployer un modèle Machine Learning avec le concepteur
 
-Vous pouvez déployer le modèle prédictif développé dans la [première partie de ce tutoriel](tutorial-designer-automobile-price-train-score.md) pour donner l’occasion à d’autres personnes de l’utiliser. Dans la première partie, vous avez entraîné votre modèle. À présent, il est temps de générer de nouvelles prédictions basées sur des entrées utilisateur. Dans cette partie du didacticiel, vous allez :
+
+Vous pouvez déployer le modèle prédictif développé dans la [première partie de ce tutoriel](tutorial-designer-automobile-price-train-score.md) pour donner l’occasion à d’autres personnes de l’utiliser. Dans la première partie, vous avez entraîné votre modèle. À présent, il est temps de générer de nouvelles prédictions basées sur des entrées utilisateur. Dans cette partie du tutoriel, vous allez :
 
 > [!div class="checklist"]
 > * Créez un pipeline d’inférence en temps réel.
@@ -31,6 +32,8 @@ Vous pouvez déployer le modèle prédictif développé dans la [première parti
 
 Suivez la [première partie du tutoriel](tutorial-designer-automobile-price-train-score.md) pour découvrir comment entraîner et évaluer un modèle Machine Learning dans le concepteur.
 
+[!INCLUDE [machine-learning-missing-ui](../../includes/machine-learning-missing-ui.md)]
+
 ## <a name="create-a-real-time-inference-pipeline"></a>Créer un pipeline d’inférence en temps réel
 
 Pour déployer votre pipeline, vous devez d’abord convertir le pipeline d’entraînement en pipeline d’inférence en temps réel. Ce processus supprime les modules d’entraînement et ajoute les entrées et sorties de service web pour gérer les demandes.
@@ -39,7 +42,7 @@ Pour déployer votre pipeline, vous devez d’abord convertir le pipeline d’en
 
 1. Au-dessus du canevas de pipeline, sélectionnez **Create inference pipeline** > **Real-time inference pipeline** (Créer un pipeline d’inférence > Pipeline d’inférence en temps réel).
 
-    ![Capture d’écran montrant l’emplacement du bouton pour créer un pipeline](./media/tutorial-designer-automobile-price-deploy/tutorial2-create-inference-pipeline.png)
+    :::image type="content" source="./media/tutorial-designer-automobile-price-deploy/tutorial2-create-inference-pipeline.png"alt-text="Capture d’écran montrant l’emplacement du bouton pour créer un pipeline":::
 
     Votre pipeline doit maintenant se présenter comme suit : 
 
@@ -58,7 +61,7 @@ Pour déployer votre pipeline, vous devez d’abord convertir le pipeline d’en
 
 1. Sélectionnez **Envoyer**, puis utilisez la même cible de calcul et la même expérience que durant la première partie.
 
-    La première fois, l’exécution de votre pipeline peut prendre jusqu’à 20 minutes. Les paramètres de calcul par défaut ont une taille de nœud minimale de 0, ce qui signifie que le concepteur doit allouer des ressources après une période d’inactivité. Les exécutions de pipeline répétées prennent moins de temps dans la mesure où les ressources de calcul sont déjà allouées. Par ailleurs, le concepteur utilise les résultats mis en cache pour chaque module afin d’améliorer l’efficacité.
+    Si c’est la première fois, l’exécution de votre pipeline peut prendre jusqu’à 20 minutes. Les paramètres de calcul par défaut ont une taille de nœud minimale de 0, ce qui signifie que le concepteur doit allouer des ressources après une période d’inactivité. Les exécutions de pipeline répétées prennent moins de temps dans la mesure où les ressources de calcul sont déjà allouées. Par ailleurs, le concepteur utilise les résultats mis en cache pour chaque module afin d’améliorer l’efficacité.
 
 1. Sélectionnez **Déployer**.
 
@@ -71,7 +74,7 @@ Dans la boîte de dialogue qui s’affiche, vous pouvez sélectionner n’import
 1. Dans le ruban de navigation, sélectionnez **Clusters d’inférence** >  **+ Nouveau**.
 
     ![Capture d’écran montrant comment accéder au volet Nouveau cluster d’inférence](./media/tutorial-designer-automobile-price-deploy/new-inference-cluster.png)
-
+   
 1. Dans le volet Cluster d’inférence, configurez un nouveau service Kubernetes.
 
 1. Entrez *aks-compute* pour **Nom du calcul**.
@@ -95,26 +98,24 @@ Une fois le provisionnement du service AKS terminé, revenez au pipeline d’inf
 1. Sélectionnez le cluster AKS que vous avez créé.
 
 1. Sélectionnez **Déployer**.
-
-    ![Capture d’écran montrant comment configurer un nouveau point de terminaison en temps réel](./media/tutorial-designer-automobile-price-deploy/setup-endpoint.png)
+    
+    :::image type="content" source="./media/tutorial-designer-automobile-price-deploy/setup-endpoint.png"alt-text="Capture d’écran montrant comment configurer un nouveau point de terminaison en temps réel":::
 
     Une notification de réussite s’affiche au-dessus du canevas, une fois le déploiement effectué. Cela peut prendre quelques minutes.
 
-## <a name="test-the-real-time-endpoint"></a>Tester le point de terminaison en temps réel
+## <a name="view-the-real-time-endpoint"></a>Afficher le point de terminaison en temps réel
 
-Une fois le déploiement effectué, vous pouvez tester votre point de terminaison en temps réel en accédant à la page **Points de terminaison**.
+Une fois le déploiement effectué, vous pouvez afficher votre point de terminaison en temps réel en accédant à la page **Points de terminaison**.
 
 1. Dans la page **Points de terminaison**, sélectionnez le point de terminaison que vous avez déployé.
 
-    ![Capture d’écran montrant l’onglet des points de terminaison en temps réel avec le point de terminaison créé récemment mis en surbrillance](./media/tutorial-designer-automobile-price-deploy/endpoints.png)
+1. Sous l’onglet **Détails**, vous pouvez obtenir plus d’informations, telles que l’URI REST, l’état et les étiquettes.
 
-1. Sélectionnez **Test**.
+1. Sous l’onglet **Consommer**, vous pouvez rechercher des clés de sécurité et définir des méthodes d’authentification.
 
-1. Vous pouvez entrer manuellement des données de test ou utiliser les exemples de données automatiquement renseignés, puis sélectionner **Test** (Tester).
+1. Sous l’onglet **Journaux de déploiement**, vous trouverez les journaux de déploiement détaillés de votre point de terminaison en temps réel. 
 
-    Le portail soumet une requête de test au point de terminaison et affiche les résultats. Bien qu’une valeur de prix soit générée pour les données d’entrée, elle n’est pas utilisée pour générer la valeur de prédiction.
-
-    ![Capture d’écran montrant comment tester le point de terminaison en temps réel avec l’étiquette scorée pour le prix mise en surbrillance](./media/tutorial-designer-automobile-price-deploy/test-endpoint.png)
+Pour plus d’informations sur l’utilisation de votre service web, consultez [Consommer un modèle déployé en tant que service web](how-to-consume-web-service.md).
 
 ## <a name="clean-up-resources"></a>Nettoyer les ressources
 
@@ -122,7 +123,7 @@ Une fois le déploiement effectué, vous pouvez tester votre point de terminaiso
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Dans ce tutoriel, vous avez découvert les étapes clés de la création, du déploiement et de la consommation d’un modèle Machine Learning dans le concepteur. Pour en savoir plus sur l’utilisation du concepteur pour résoudre d’autres types de problème, consultez nos autres exemples de pipelines.
+Dans ce tutoriel, vous avez découvert les étapes clés de la création, du déploiement et de la consommation d’un modèle Machine Learning dans le concepteur. Pour en savoir plus sur la façon dont vous pouvez utiliser le concepteur, consultez les liens suivants :
 
-> [!div class="nextstepaction"]
-> [Exemples de concepteur](samples-designer.md)
++ [Exemples du concepteur](samples-designer.md) : Découvrez comment utiliser le concepteur pour résoudre d’autres types de problèmes.
++ [Utiliser le studio Azure Machine Learning dans un réseau virtuel Azure](how-to-enable-studio-virtual-network.md).

@@ -1,17 +1,17 @@
 ---
 title: Tutoriels vidéo sur le flux de données de mappage
 description: Liste de tutoriels vidéo expliquant les concepts du flux de données de mappage
-author: djpmsft
-ms.author: daperlov
+author: dcstwh
+ms.author: weetok
 ms.service: data-factory
 ms.topic: tutorial
-ms.date: 04/17/2020
-ms.openlocfilehash: 3abec9b0c37e0475e369ce3cd2f91e40a1040b75
-ms.sourcegitcommit: 1895459d1c8a592f03326fcb037007b86e2fd22f
+ms.date: 11/02/2020
+ms.openlocfilehash: 605d740b56b4f1cd57ab705e442a8b3e3946fcff
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82628961"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96490701"
 ---
 # <a name="mapping-data-flow-video-tutorials"></a>Tutoriels vidéo sur le flux de données de mappage
 
@@ -37,6 +37,8 @@ Des mises à jour étant apportées en permanence au produit, certaines fonction
 
 [Minutages des tests d’évaluation](http://youtu.be/6CSbWm4lRhw?hd=1)
 
+[Débogage de flux de travail pour les flux de données](https://youtu.be/y3suL7UsWVw)
+
 ## <a name="transformation-overviews"></a>Vues d’ensemble de la transformation
 
 [Transformation d’agrégation](http://youtu.be/jdL75xIr98I)
@@ -51,6 +53,8 @@ Des mises à jour étant apportées en permanence au produit, certaines fonction
 
 [Transformation de recherche](https://www.youtube.com/watch?v=9U-0VPU2ZPU)
 
+[Mises à jour et conseils relatifs à la transformation de recherche](https://youtu.be/MBskWoeuTLw)
+
 [Transformation de tableau croisé dynamique](https://www.youtube.com/watch?v=Tua14ZQA3F8&t=34s)
 
 [Transformation de tableau croisé dynamique : mappage de colonnes dérivées](https://youtu.be/5MygzCX0wnM)
@@ -58,6 +62,8 @@ Des mises à jour étant apportées en permanence au produit, certaines fonction
 [Transformation de sélection](http://youtu.be/F9VjQ_YyRyU?hd=1)
 
 [Transformation de sélection : mappage basé sur les règles](https://youtu.be/5lf1lh1qMwU)
+
+[Transformation de sélection : Jeux de données volumineux](https://www.youtube.com/watch?v=R5ea2_R0ouc)
 
 [Transformation de clé de substitution](https://www.youtube.com/watch?v=ISpegL9CbTM)
 
@@ -76,6 +82,12 @@ Des mises à jour étant apportées en permanence au produit, certaines fonction
 [Jointures dynamiques et recherches dynamiques](https://youtu.be/CMOPPie9bXM)
 
 [Transformation d’aplatissement](https://youtu.be/VY2tFQJoAXE)
+
+[Transformer des données hiérarchiques](https://youtu.be/oAEh21NFgWQ)
+
+[Transformation du classement](https://youtu.be/6XvgkbMtws0)
+
+[Recherche mise en cache](https://www.youtube.com/watch?v=HqCn42FaRJs)
 
 ## <a name="source-and-sink"></a>Source et récepteur
 
@@ -101,8 +113,6 @@ Des mises à jour étant apportées en permanence au produit, certaines fonction
 
 [Lignage des données](https://www.youtube.com/watch?v=5KvqYF-y93s)
 
-[Conseils d’optimisation](https://www.youtube.com/watch?v=a2KtwUJngHo)
-
 [Itérer des fichiers avec des paramètres](http://youtu.be/uEgz0ptYRDM?hd=1)
 
 [Réduire les temps de démarrage](https://youtu.be/FFCbU4ujCiY?t=528)
@@ -115,6 +125,8 @@ Des mises à jour étant apportées en permanence au produit, certaines fonction
 
 [Optimiser les temps de démarrage de flux de données](https://www.youtube.com/watch?v=VT_2ZV3a7Fc)
 
+[Runtimes d’intégration Azure pour les flux de données](https://www.youtube.com/watch?v=VT_2ZV3a7Fc)
+
 ## <a name="mapping-data-flow-scenarios"></a>Scénarios de flux de données de mappage
 
 [Recherches floues](http://youtu.be/7gdwExjHBbw)
@@ -123,7 +135,7 @@ Des mises à jour étant apportées en permanence au produit, certaines fonction
 
 [Modèle d’adresses propres](https://youtu.be/axEYbuU3lmw)
 
-[Déduplication](https://www.youtube.com/watch?v=OLenvYwg__I)
+[Déduplication](https://youtu.be/QOi26ETtPTw)
 
 [Fusionner des fichiers](http://youtu.be/WbDTBAyYte8)
 
@@ -149,6 +161,8 @@ Des mises à jour étant apportées en permanence au produit, certaines fonction
 
 [Détecter les modifications des données sources](http://youtu.be/CaxIlI7oXfI?hd=1)
 
+[Dimension à variation lente de type générique 2](http://youtu.be/tc283k8CWh8)
+
 ## <a name="data-flow-expressions"></a>Expressions de flux de données
 
 [Expressions de date et d’heure](https://www.youtube.com/watch?v=uboyCZ25r_E&feature=youtu.be&hd=1)
@@ -162,3 +176,7 @@ Des mises à jour étant apportées en permanence au produit, certaines fonction
 [Expressions de qualité des données](https://www.youtube.com/watch?v=O8gmv5-lXhs)
 
 [Collect aggregate function](https://www.youtube.com/watch?v=zneE18EHJSE)
+
+## <a name="metadata"></a>Métadonnées
+
+[Règles de validation des métadonnées](https://www.youtube.com/watch?v=E_UD3R-VpYE)

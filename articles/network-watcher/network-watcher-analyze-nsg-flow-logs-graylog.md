@@ -9,17 +9,17 @@ tags: azure-resource-manager
 ms.assetid: ''
 ms.service: network-watcher
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 09/19/2017
 ms.author: damendo
-ms.openlocfilehash: 1e597a81967a8fb6be2959d53e65ad01135e5e25
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 8b363d90d05e95b017c3a655b57dbabc3712a155
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76842901"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94965542"
 ---
 # <a name="manage-and-analyze-network-security-group-flow-logs-in-azure-using-network-watcher-and-graylog"></a>Gérer et analyser les journaux de flux des groupes de sécurité réseau à l’aide de Network Watcher et de Graylog
 
@@ -40,7 +40,7 @@ Les journaux de flux des groupes de sécurité réseau sont activés à l’aide
 
 ### <a name="enable-network-security-group-flow-logging"></a>Activer les journaux de flux des groupes de sécurité réseau
 
-Pour ce scénario, la journalisation des flux de groupe de sécurité réseau doit être activée sur au moins un groupe de sécurité réseau dans votre compte. Pour obtenir des instructions sur l’activation des journaux de flux des groupes de sécurité réseau, consultez l’article suivant  [Présentation de la journalisation des flux pour les groupes de sécurité réseau](network-watcher-nsg-flow-logging-overview.md).
+Pour ce scénario, la journalisation des flux de groupe de sécurité réseau doit être activée sur au moins un groupe de sécurité réseau dans votre compte. Pour obtenir des instructions sur l’activation des journaux de flux des groupes de sécurité réseau, consultez l’article suivant [Présentation de la journalisation des flux pour les groupes de sécurité réseau](network-watcher-nsg-flow-logging-overview.md).
 
 ### <a name="setting-up-graylog"></a>Configurer Graylog
 
@@ -53,7 +53,7 @@ Cet exemple utilise la configuration minimale de Graylog (c’est-à-dire une se
 
 Vous pouvez installer Graylog de bien des façons, selon votre plateforme et vos préférences. Pour obtenir une liste complète des méthodes d’installation possibles, reportez-vous à la [documentation](https://docs.graylog.org/en/2.2/pages/installation.html) officielle de Graylog. L’application serveur Graylog s’exécute sur les distributions Linux et implique les prérequis suivants :
 
--  Java SE 8 ou version ultérieure – [Documentation d’Azul Azure JDK](https://aka.ms/azure-jdks)
+-  Java SE 8 ou version ultérieure – [Documentation d’Azul Azure JDK](/azure/developer/java/fundamentals/java-jdk-long-term-support)
 -  Elastic Search 2.x (2.1.0 ou version ultérieure) - [Documentation d’installation Elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/2.4/_installation.html)
 -  MongoDB 2.4 ou version ultérieure – [Documentation d’installation MongoDB](https://docs.mongodb.com/manual/administration/install-on-linux/)
 
@@ -186,11 +186,11 @@ Une connexion aux journaux de flux étant établie à l’aide de Logstash, et l
 
    Veillez à lier l’entrée à l’adresse IP sur laquelle vous avez configurée votre serveur Graylog. L’adresse IP doit correspondre au champ **host** (hôte) de la sortie UDP du fichier de configuration Logstash. Le port par défaut doit être *12201*. Vérifiez que le port correspond au champ **port** dans la sortie UDP désignée dans le fichier de configuration Logstash.
 
-   ![Entrées](./media/network-watcher-analyze-nsg-flow-logs-graylog/inputs.png)
+   ![Capture d’écran montrant les entrées Graylog, avec des options pour lancer et rechercher des entrées.](./media/network-watcher-analyze-nsg-flow-logs-graylog/inputs.png)
 
    Dès que vous avez lancé l’entrée, celle-ci doit apparaître sous la section **Local inputs** (Entrées locales), comme illustré dans l’image suivante :
 
-   ![](./media/network-watcher-analyze-nsg-flow-logs-graylog/local-inputs.png)
+   ![Capture d’écran montrant la section Entrées locales qui contient l’entrée que vous avez lancée.](./media/network-watcher-analyze-nsg-flow-logs-graylog/local-inputs.png)
 
    Pour approfondir votre connaissance des entrées de message Graylog, reportez-vous à la [documentation](https://docs.graylog.org/en/2.2/pages/sending_data.html#what-are-graylog-message-inputs).
 
@@ -200,11 +200,11 @@ Une connexion aux journaux de flux étant établie à l’aide de Logstash, et l
 
 Après avoir laissé le temps à votre serveur Graylog de collecter les messages, vous pouvez effectuer des recherches dans les messages. Pour vérifier les messages envoyés à votre serveur Graylog, dans la page de configuration **Inputs** (Entrées), cliquez sur le bouton **Show received messages** (Afficher les messages reçus) de l’entrée GELF UDP que vous avez créée. Vous êtes dirigé vers un écran semblable à l’image suivante : 
 
-![Histogramme](./media/network-watcher-analyze-nsg-flow-logs-graylog/histogram.png)
+![Capture d’écran montrant le serveur Graylog qui affiche le résultat de la recherche, l’histogramme et les messages.](./media/network-watcher-analyze-nsg-flow-logs-graylog/histogram.png)
 
 En cliquant sur le lien bleu « %{Message} », vous développez chaque message pour afficher les paramètres de chaque tuple de flux, comme illustré dans l’image suivante :
 
-![Messages](./media/network-watcher-analyze-nsg-flow-logs-graylog/messages.png)
+![Capture d’écran montrant les détails d’un messages du serveur Graylog.](./media/network-watcher-analyze-nsg-flow-logs-graylog/messages.png)
 
 Par défaut, tous les champs de message sont inclus dans la recherche si vous ne sélectionnez pas un champ particulier à rechercher. Si vous souhaitez rechercher des messages spécifiques (comme des tuples de flux à partir d’une adresse IP source particulière), vous pouvez utiliser le langage de requête de recherche Graylog tel qu’il est [documenté](https://docs.graylog.org/en/2.2/pages/queries.html).
 
@@ -218,7 +218,7 @@ Par défaut, tous les champs de message sont inclus dans la recherche si vous ne
 
 2. À partir de là, cliquez sur le bouton vert **Create dashboard** (Créer un tableau de bord) et renseignez la forme abrégée avec le titre et la description de votre tableau de bord. Cliquez sur le bouton **Save** (Enregistrer) pour créer le tableau de bord. Vous voyez un tableau de bord similaire à l’image suivante :
 
-    ![Tableaux de bord](./media/network-watcher-analyze-nsg-flow-logs-graylog/dashboards.png)
+    ![Capture d’écran montrant les tableaux de bord du serveur Graylog, avec les options permettant de créer et de modifier ces tableaux de bord.](./media/network-watcher-analyze-nsg-flow-logs-graylog/dashboards.png)
 
 ### <a name="add-widgets"></a>Ajout de widgets
 
@@ -246,4 +246,4 @@ L’intégration de Network Watcher à Graylog vous permet de visualiser et de g
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Découvrez comment visualiser vos journaux de flux des groupes de sécurité réseau avec Power BI en consultant la page  [Visualiser les journaux de flux des groupes de sécurité réseau avec Power BI](network-watcher-visualize-nsg-flow-logs-power-bi.md).
+Découvrez comment visualiser vos journaux de flux des groupes de sécurité réseau avec Power BI en consultant la page [Visualiser les journaux de flux des groupes de sécurité réseau avec Power BI](network-watcher-visualize-nsg-flow-logs-power-bi.md).

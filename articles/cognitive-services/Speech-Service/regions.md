@@ -8,15 +8,15 @@ manager: nitinme
 ms.service: cognitive-services
 ms.subservice: speech-service
 ms.topic: conceptual
-ms.date: 11/05/2019
+ms.date: 08/20/2020
 ms.author: panosper
 ms.custom: seodec18
-ms.openlocfilehash: 560575ca7f51218e472abecb4319f4a3db69b1ff
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 7b872340c50c800ebe4d4d6c7ca56b3b327bf162
+ms.sourcegitcommit: 10d00006fec1f4b69289ce18fdd0452c3458eca5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "79218975"
+ms.lasthandoff: 11/21/2020
+ms.locfileid: "95972643"
 ---
 # <a name="speech-service-supported-regions"></a>Régions prises en charge pour le service Speech
 
@@ -24,7 +24,11 @@ Le service Speech permet à votre application de convertir de l’audio en texte
 
 Le portail Speech permettant d’effectuer des configurations personnalisées de votre expérience vocale pour toutes les régions est disponible ici : https://speech.microsoft.com
 
-Assurez-vous que les appels de votre service Speech correspondent à la région de votre abonnement.
+Gardez à l’esprit les points suivants lorsque vous envisagez les régions :
+
+* Si votre application utilise un [SDK Speech](speech-sdk.md), vous fournissez l’identificateur de région, tel que `westus`, quand vous créez une configuration de reconnaissance vocale.
+* Si votre application utilise l’une des [API REST](./overview.md#reference-docs) du service Speech, la région fait partie de l’URI de point de terminaison que vous utilisez pour effectuer des requêtes.
+* Les clés créées pour une région sont valides uniquement dans cette région. Si vous essayez de les utiliser avec d’autres régions, des erreurs d’authentification se produisent.
 
 ## <a name="speech-sdk"></a>Kit de développement logiciel (SDK) de reconnaissance vocale
 
@@ -59,7 +63,7 @@ Les régions disponibles pour la **reconnaissance de l'intention** via le kit de
 | Amérique du Nord | USA Ouest 2        | `westus2`            |
 | Amérique du Sud | Brésil Sud     | `brazilsouth`        |
 
-Il s'agit d'un sous-ensemble des régions de publication prises en charge par le [service Language Understanding (LUIS)](/azure/cognitive-services/luis/luis-reference-regions).
+Il s'agit d'un sous-ensemble des régions de publication prises en charge par le [service Language Understanding (LUIS)](../luis/luis-reference-regions.md).
 
 ### <a name="voice-assistants"></a>Assistants vocaux
 
@@ -74,6 +78,10 @@ Le [Kit de développement logiciel (SDK) Speech](speech-sdk.md) prend en charge 
 | Europe Ouest    | `westeurope`         |
 | Europe Nord   | `northeurope`        |
 | Asie Sud-Est | `southeastasia`      |
+
+### <a name="speaker-recognition"></a>Reconnaissance de l’orateur
+
+Reconnaissance de l’orateur est actuellement disponible uniquement dans la région `westus`.
 
 ## <a name="rest-apis"></a>API REST
 

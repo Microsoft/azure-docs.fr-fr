@@ -1,9 +1,9 @@
 ---
 ms.openlocfilehash: c06b94d179f9f5a17a652cf32bd560cc9b5f8e4f
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "67176759"
 ---
 ### <a name="azure-active-directory-authentication"></a>Authentification Azure Active Directory

@@ -10,10 +10,10 @@ ms.date: 01/30/2020
 ms.author: jlian
 ms.custom: amqp
 ms.openlocfilehash: 373acc30ed652a7f540e840dfad5eeeda65ca179
-ms.sourcegitcommit: 31e9f369e5ff4dd4dda6cf05edf71046b33164d3
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/22/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "81759559"
 ---
 # <a name="504101-gatewaytimeout"></a>504101 GatewayTimeout

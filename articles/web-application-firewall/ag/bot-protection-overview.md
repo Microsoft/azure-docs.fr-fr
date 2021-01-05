@@ -5,15 +5,15 @@ description: Cet article fournit une vue d'ensemble de la protection bot du pare
 services: web-application-firewall
 author: winthrop28
 ms.service: web-application-firewall
-ms.date: 02/04/2020
+ms.date: 05/20/2020
 ms.author: victorh
 ms.topic: conceptual
-ms.openlocfilehash: 3bc481cfc35ac94699d2795862f1fe8e4decf875
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: e01f9ac8966223e11ad218af7bf6fbb2462f28f6
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77026513"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "83714897"
 ---
 # <a name="azure-web-application-firewall-on-azure-application-gateway-bot-protection-overview"></a>Vue d'ensemble de la protection bot du pare-feu d'applications web (WAF) sur Azure Application Gateway
 
@@ -33,6 +33,33 @@ Vous pouvez utiliser l'ensemble de règles de protection bot avec n'importe quel
 ## <a name="ruleset-update"></a>Mise à jour d'un ensemble de règles
 
 La liste des mauvaises adresses IP connues des ensembles de règles d'atténuation de bots est mise à jour plusieurs fois par jour à partir du flux Microsoft Threat Intelligence pour rester synchronisé avec les bots. Vos applications web sont protégées en permanence, même lorsque les vecteurs d'attaque des bots changent.
+
+## <a name="log-example"></a>Exemple de journaux
+
+Voici un exemple d’entrée de journal pour la protection bot :
+
+```
+{
+        "timeStamp": "0000-00-00T00:00:00+00:00",
+            "resourceId": "appgw",
+            "operationName": "ApplicationGatewayFirewall",
+            "category": "ApplicationGatewayFirewallLog",
+            "properties": {
+            "instanceId": "vm1",
+                "clientIp": "1.2.3.4",
+                "requestUri": "/hello.php?arg1=aaaaaaabccc",
+                "ruleSetType": "MicrosoftBotProtection",
+                "message": "IPReputationTriggered",
+                "action": "Blocked",
+                "hostname": "example.com",
+                "transactionId": "abc",
+                "policyId": "waf policy 1",
+                "policyScope": "Global",
+                "policyScopeName": "Default Policy",
+                "engine": "Azwaf"
+        }
+    }
+```
 
 ## <a name="next-steps"></a>Étapes suivantes
 

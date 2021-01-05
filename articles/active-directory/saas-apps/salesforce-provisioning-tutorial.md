@@ -1,26 +1,21 @@
 ---
 title: 'Tutoriel : Configurer Salesforce pour l’approvisionnement automatique d’utilisateurs avec Azure Active Directory | Microsoft Docs'
-description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et Salesforce.
+description: Découvrez les étapes à effectuer dans Salesforce et Azure AD pour approvisionner et déprovisionner automatiquement des comptes d’utilisateur d’Azure AD vers Salesforce.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: daveba
-ms.assetid: 49384b8b-3836-4eb1-b438-1c46bb9baf6f
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: article
+ms.topic: tutorial
 ms.date: 08/01/2019
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: 5b8038896a11b65e835ce71f5fc34e85723cc91a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 2a4d3f3f9465b8813cdf6ee26760d819d73a08c1
+ms.sourcegitcommit: 0b9fe9e23dfebf60faa9b451498951b970758103
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77060519"
+ms.lasthandoff: 11/07/2020
+ms.locfileid: "94353102"
 ---
 # <a name="tutorial-configure-salesforce-for-automatic-user-provisioning"></a>Tutoriel : Configurer Salesforce pour l’approvisionnement automatique d’utilisateurs
 
@@ -36,13 +31,13 @@ Le scénario décrit dans ce didacticiel part du principe que vous disposez des 
 > [!IMPORTANT]
 > Si vous utilisez un compte d’essai Salesforce.com, vous ne pouvez pas configurer l’approvisionnement automatique des utilisateurs. Les comptes d’essai n’ont pas l’accès d’API requis tant qu’ils ne sont pas achetés. Vous pouvez contourner cette limitation en utilisant un [compte de développeur](https://developer.salesforce.com/signup) gratuit pour suivre ce didacticiel.
 
-Si vous utilisez un environnement Salesforce Sandbox, veuillez consulter la page [Didacticiel : intégration d’Azure Active Directory à Salesforce Sandbox](https://go.microsoft.com/fwLink/?LinkID=521879).
+Si vous utilisez un environnement Salesforce Sandbox, veuillez consulter la page [Didacticiel : intégration d’Azure Active Directory à Salesforce Sandbox](./salesforce-sandbox-tutorial.md).
 
 ## <a name="assigning-users-to-salesforce"></a>Assigner des utilisateurs à Salesforce
 
 Azure Active Directory utilise un concept appelé « affectations » pour déterminer les utilisateurs devant recevoir l’accès aux applications sélectionnées. Dans le cadre de l’approvisionnement automatique des comptes d’utilisateur, seuls les utilisateurs et les groupes qui ont été « affectés » à une application dans Azure AD sont synchronisés.
 
-Avant de configurer et d’activer le service de provisionnement, vous devez déterminer quels utilisateurs ou groupes dans Azure AD ont besoin d’accéder à votre application Salesforce. Une fois cette décision prise, vous pouvez affecter ces utilisateurs à votre application Salesforce en suivant les instructions fournies dans [Affecter un utilisateur ou un groupe à une application d’entreprise](https://docs.microsoft.com/azure/active-directory/active-directory-coreapps-assign-user-azure-portal)
+Avant de configurer et d’activer le service de provisionnement, vous devez déterminer quels utilisateurs ou groupes dans Azure AD ont besoin d’accéder à votre application Salesforce. Une fois cette décision prise, vous pouvez affecter ces utilisateurs à votre application Salesforce en suivant les instructions fournies dans [Affecter un utilisateur ou un groupe à une application d’entreprise](../manage-apps/assign-user-or-group-access-portal.md)
 
 ### <a name="important-tips-for-assigning-users-to-salesforce"></a>Conseils importants concernant l’assignation d’utilisateurs à Salesforce
 
@@ -72,41 +67,41 @@ Cette section décrit comment activer l’approvisionnement des utilisateurs des
 
 4. Définissez le **Mode d’approvisionnement** sur **Automatique**.
 
-    ![approvisionnement](./media/salesforce-provisioning-tutorial/provisioning.png)
+    ![Capture d’écran montrant la page d’approvisionnement Salesforce, avec le Mode d’approvisionnement défini sur Automatique et d’autres valeurs que vous pouvez définir.](./media/salesforce-provisioning-tutorial/provisioning.png)
 
-5. Dans la section **Informations d’identification de l’administrateur**, fournissez les paramètres de configuration suivants :
+5. Dans la section **Informations d’identification de l’administrateur** , fournissez les paramètres de configuration suivants :
 
-    a. Dans la zone de texte **Nom d’utilisateur administrateur**, saisissez le nom d’un compte Salesforce auquel le profil **Administrateur système** est assigné dans Salesforce.com.
+    a. Dans la zone de texte **Nom d’utilisateur administrateur** , saisissez le nom d’un compte Salesforce auquel le profil **Administrateur système** est assigné dans Salesforce.com.
 
-    b. Dans la zone de texte **Mot de passe d’administrateur**, entrez le mot de passe de ce compte.
+    b. Dans la zone de texte **Mot de passe d’administrateur** , entrez le mot de passe de ce compte.
 
 6. Pour obtenir le jeton de sécurité Salesforce, ouvrez un nouvel onglet et connectez-vous au même compte d’administration Salesforce. Dans le coin supérieur droit de la page, cliquez sur votre nom, puis cliquez sur **Paramètres**.
 
-    ![Activer l'approvisionnement automatique d’utilisateurs](./media/salesforce-provisioning-tutorial/sf-my-settings.png "Activer l'approvisionnement de l'utilisateur automatique.")
+    ![Capture d’écran montrant le lien Paramètres sélectionné.](./media/salesforce-provisioning-tutorial/sf-my-settings.png "Activer l'approvisionnement de l'utilisateur automatique.")
 
 7. Dans le volet de navigation gauche, cliquez sur **Mes informations personnelles** pour développer la section associée, puis sur **Réinitialiser mon jeton de sécurité**.
   
-    ![Activer l'approvisionnement automatique d’utilisateurs](./media/salesforce-provisioning-tutorial/sf-personal-reset.png "Activer l'approvisionnement de l'utilisateur automatique.")
+    ![Capture d’écran montrant Réinitialiser mon jeton de sécurité sélectionné à partir de Mes informations personnelles.](./media/salesforce-provisioning-tutorial/sf-personal-reset.png "Activer l'approvisionnement de l'utilisateur automatique.")
 
-8. Sur la page **Réinitialiser le jeton de sécurité**, cliquez sur **Réinitialiser le jeton de sécurité**.
+8. Sur la page **Réinitialiser le jeton de sécurité** , cliquez sur **Réinitialiser le jeton de sécurité**.
 
-    ![Activer l'approvisionnement automatique d’utilisateurs](./media/salesforce-provisioning-tutorial/sf-reset-token.png "Activer l'approvisionnement de l'utilisateur automatique.")
+    ![La capture d’écran montre la page Jeton de sécurité REST, avec du texte explicatif et l’option de réinitialisation du jeton de sécurité](./media/salesforce-provisioning-tutorial/sf-reset-token.png "Activer l'approvisionnement de l'utilisateur automatique.")
 
 9. Contrôlez la boîte de réception associée à ce compte d’administrateur. Recherchez un message électronique provenant de Salesforce.com qui contient le nouveau jeton de sécurité.
 
 10. Copiez le jeton, accédez à votre fenêtre Azure AD et collez-le dans le champ **Jeton secret**.
 
-11. L’**URL de locataire** doit être entrée si l’instance de Salesforce se trouve sur Salesforce Government Cloud. Dans le cas contraire, elle est facultative. Entrez l’URL de locataire en utilisant le format « https://\<your-instance\>.my.salesforce.com », où vous devez remplacer \<your-instance\> par le nom de votre instance Salesforce.
+11. L’ **URL de locataire** doit être entrée si l’instance de Salesforce se trouve sur Salesforce Government Cloud. Dans le cas contraire, elle est facultative. Entrez l’URL de locataire en utilisant le format « https://\<your-instance\>.my.salesforce.com », où vous devez remplacer \<your-instance\> par le nom de votre instance Salesforce.
 
 12. Dans le portail Azure, cliquez sur **Tester la connexion** pour vous assurer qu’Azure AD peut se connecter à votre application Salesforce.
 
-13. Dans le champ **E-mail de notification**, saisissez l’adresse e-mail d’une personne ou d’un groupe qui doit recevoir les notifications d’erreur d’approvisionnement, puis cochez la case.
+13. Dans le champ **E-mail de notification** , saisissez l’adresse e-mail d’une personne ou d’un groupe qui doit recevoir les notifications d’erreur d’approvisionnement, puis cochez la case.
 
 14. Cliquez sur **Enregistrer.**  
 
 15. Dans la section Mappages, sélectionnez **Synchroniser les utilisateurs Azure Active Directory avec Salesforce.**
 
-16. Dans la section **Mappages d’attributs**, passez en revue les attributs utilisateur qui sont synchronisés à partir d’Azure AD vers Salesforce. Remarque : Les attributs sélectionnés en tant que propriétés de **Correspondance** servent à faire correspondre les comptes utilisateur dans Salesforce, en vue d’opérations de mise à jour. Cliquez sur le bouton Enregistrer pour valider les modifications.
+16. Dans la section **Mappages d’attributs** , passez en revue les attributs utilisateur qui sont synchronisés à partir d’Azure AD vers Salesforce. Remarque : Les attributs sélectionnés en tant que propriétés de **Correspondance** servent à faire correspondre les comptes utilisateur dans Salesforce, en vue d’opérations de mise à jour. Cliquez sur le bouton Enregistrer pour valider les modifications.
 
 17. Pour activer le service d’approvisionnement Azure AD pour Salesforce, accédez à la section Paramètres et définissez le **Statut de l’approvisionnement** sur **Activé**.
 
@@ -127,7 +122,7 @@ Pour plus d’informations sur la lecture des journaux d’activité d’approvi
 * Le service d’approvisionnement Azure AD prend en charge la langue, les paramètres régionaux et le fuseau horaire d’approvisionnement pour un utilisateur. Ces attributs figurent dans les mappages d'attributs par défaut mais n'ont pas d'attribut source par défaut. Assurez-vous que vous sélectionnez l'attribut source par défaut et que l'attribut source est dans le format attendu par SalesForce. Par exemple, localeSidKey pour english(UnitedStates) est en_US. Passez en revue les conseils fournis [ici](https://help.salesforce.com/articleView?id=setting_your_language.htm&type=5) pour déterminer le format localeSidKey approprié. Les formats languageLocaleKey se trouvent [ici](https://help.salesforce.com/articleView?id=faq_getstart_what_languages_does.htm&type=5). En plus de vous assurer que le format est correct, vous devrez peut-être vérifier que la langue est activée pour vos utilisateurs, comme décrit [ici](https://help.salesforce.com/articleView?id=setting_your_language.htm&type=5). 
 * **SalesforceLicenseLimitExceeded :** L’utilisateur n’a pas pu être créé dans l’application cible, car il n’existe aucune licence disponible pour cet utilisateur. Procurez-vous des licences supplémentaires pour l’application cible, ou passez en revue vos attributions d’utilisateurs et la configuration de mappage des attributs pour vous assurer que les utilisateurs appropriés sont affectés avec les attributs appropriés.
 * **SalesforceDuplicateUserName :** L'utilisateur ne peut pas être approvisionné car il dispose d'un attribut 'Username' Salesforce.com qui est dupliqué dans un autre locataire Salesforce.com.  Dans Salesforce.com, les valeurs de l'attribut 'Username' doivent être uniques pour tous les locataires Salesforce.com.  Par défaut, l’attribut userPrincipalName d'un utilisateur dans Azure Active Directory devient son attribut 'Username' dans Salesforce.com.   Vous avez le choix entre deux options.  Une option consiste à trouver et à renommer l'utilisateur avec le doublon 'Username' dans l'autre locataire Salesforce.com, si vous administrez également cet autre locataire.  L'autre option consiste à supprimer l'accès de l'utilisateur Azure Active Directory au locataire Salesforce.com auquel votre répertoire est intégré. Nous réessayerons cette opération lors de la prochaine tentative de synchronisation. 
-* **SalesforceRequiredFieldMissing :** Salesforce exige que certains attributs soient présents sur l'utilisateur pour créer ou mettre à jour avec succès l’utilisateur. Il manque à cet utilisateur un des attributs requis. Assurez-vous que tous les utilisateurs que vous souhaitez approvisionner dans Salesforce possèdent des attributs tels que l'e-mail et l'alias. Vous pouvez définir l’étendue des utilisateurs qui n'ont pas ces attributs à l'aide de [filtres d’étendue basés sur des attributs](https://docs.microsoft.com/azure/active-directory/manage-apps/define-conditional-rules-for-provisioning-user-accounts). 
+* **SalesforceRequiredFieldMissing :** Salesforce exige que certains attributs soient présents sur l'utilisateur pour créer ou mettre à jour avec succès l’utilisateur. Il manque à cet utilisateur un des attributs requis. Assurez-vous que tous les utilisateurs que vous souhaitez approvisionner dans Salesforce possèdent des attributs tels que l'e-mail et l'alias. Vous pouvez définir l’étendue des utilisateurs qui n'ont pas ces attributs à l'aide de [filtres d’étendue basés sur des attributs](../app-provisioning/define-conditional-rules-for-provisioning-user-accounts.md). 
 * Le mappage d'attributs par défaut pour l’approvisionnement dans Salesforce inclut l'expression SingleAppRoleAssignments permettant de mapper appRoleAssignments dans Azure AD à ProfileName dans Salesforce. Assurez-vous que les utilisateurs n'ont pas plusieurs affectations de rôles d'applications dans Azure AD car le mappage d’attributs ne prend en charge qu'un seul rôle. 
 * Salesforce requiert l’approbation manuelle des mises à jour de la messagerie électronique avant leur modification. Par conséquent, vous pouvez voir plusieurs entrées dans les journaux d’approvisionnement pour mettre à jour la messagerie de l’utilisateur (jusqu’à ce que la modification de la messagerie ait été approuvée).
 
@@ -136,4 +131,4 @@ Pour plus d’informations sur la lecture des journaux d’activité d’approvi
 
 * [Gestion de l’approvisionnement de comptes d’utilisateur pour les applications d’entreprise](tutorial-list.md)
 * [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
-* [Configurer l’authentification unique](https://docs.microsoft.com/azure/active-directory/active-directory-saas-salesforce-tutorial)
+* [Configurer l’authentification unique](./salesforce-tutorial.md)

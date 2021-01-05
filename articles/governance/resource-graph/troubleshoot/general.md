@@ -1,14 +1,14 @@
 ---
 title: Résolution des erreurs courantes
 description: Découvrez comment résoudre les problèmes liés aux différents Kits de développement logiciel (SDK) lors de l’interrogation des ressources Azure avec Azure Resource Graph.
-ms.date: 10/18/2019
+ms.date: 10/14/2020
 ms.topic: troubleshooting
-ms.openlocfilehash: f881db4f75bcee8c13221717596442ac29a4b1ac
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 13c5d5ffde8b0b82fcafa5e8149400555a0b18a6
+ms.sourcegitcommit: 1b47921ae4298e7992c856b82cb8263470e9e6f9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "74303895"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92056955"
 ---
 # <a name="troubleshoot-errors-using-azure-resource-graph"></a>Résoudre les erreurs à l’aide d’Azure Resource Graph
 
@@ -19,6 +19,25 @@ Vous pouvez rencontrer des erreurs lors de l’interrogation des ressources Azur
 La plupart des erreurs sont le résultat d’un problème lors de l’exécution d’une requête avec Azure Resource Graph. En cas d’échec d’une requête, le kit de développement logiciel (SDK) fournit des détails sur la requête qui a échoué. Ces informations précisent le problème afin que vous puissiez le résoudre et que la requête suivante réussisse.
 
 ## <a name="general-errors"></a>Erreurs générales.
+
+### <a name="scenario-throttled-requests"></a><a name="throttled"></a>Scénario : Requêtes limitées
+
+#### <a name="issue"></a>Problème
+
+Lorsque les clients envoient des requêtes de ressources fréquentes ou volumineuses, ces dernières sont limitées.
+
+#### <a name="cause"></a>Cause
+
+Azure Resource Graph alloue un quota à chaque utilisateur en fonction d’une fenêtre de temps. Par exemple, un utilisateur peut envoyer au maximum 15 requêtes durant chaque fenêtre de cinq secondes sans être limité. La valeur de quota est déterminée par de nombreux facteurs et est susceptible de changer. Pour plus d’informations, voir [Throttle in Azure Resource Graph](../overview.md#throttling) (Limitation dans Azure Resource Graph).
+
+#### <a name="resolution"></a>Résolution
+
+Il existe plusieurs méthodes pour traiter les requêtes limitées :
+
+- [Regroupement des requêtes](../concepts/guidance-for-throttled-requests.md#grouping-queries)
+- [Échelonnement des requêtes](../concepts/guidance-for-throttled-requests.md#staggering-queries)
+- [Interrogation en parallèle](../concepts/guidance-for-throttled-requests.md#query-in-parallel)
+- [Pagination](../concepts/guidance-for-throttled-requests.md#pagination)
 
 ### <a name="scenario-too-many-subscriptions"></a><a name="toomanysubscription"></a>Scénario : Trop d’abonnements
 
@@ -79,7 +98,7 @@ Les clients qui transmettent explicitement une liste d’abonnements à l’aide
 
 #### <a name="cause"></a>Cause
 
-Si le client ne dispose pas d’autorisation de lecture sur tous les abonnements fournis, la requête est refusée en raison de l’absence de droits de sécurité appropriés.
+Si le client ne dispose pas d’autorisations de lecture sur tous les abonnements fournis, la requête est refusée en raison de l’absence de droits de sécurité appropriés.
 
 #### <a name="resolution"></a>Résolution
 

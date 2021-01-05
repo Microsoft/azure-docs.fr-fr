@@ -3,20 +3,23 @@ title: Utiliser l'API de requête avec langage intégré JavaScript dans les pro
 description: Cet article présente les concepts de l’API de requête avec langage intégré JavaScript pour créer des procédures stockées et des déclencheurs dans Azure Cosmos DB.
 author: timsander1
 ms.service: cosmos-db
+ms.subservice: cosmosdb-sql
 ms.topic: conceptual
 ms.date: 05/07/2020
 ms.author: tisande
 ms.reviewer: sngun
-ms.openlocfilehash: 785c430347bc62a00eee80c977f2d6ce440c08db
-ms.sourcegitcommit: 999ccaf74347605e32505cbcfd6121163560a4ae
+ms.custom: devx-track-js
+ms.openlocfilehash: b2563a9af0e0ca6943059698e29d139143780d93
+ms.sourcegitcommit: fa90cd55e341c8201e3789df4cd8bd6fe7c809a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82982273"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93340972"
 ---
 # <a name="javascript-query-api-in-azure-cosmos-db"></a>API de requête JavaScript dans Azure Cosmos DB
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
 
-Outre l'émission de requêtes à l'aide de l'API SQL dans Azure Cosmos DB, le [kit SDK côté serveur Cosmos DB](https://azure.github.io/azure-cosmosdb-js-server/) fournit une interface JavaScript pour exécuter des requêtes optimisées dans les procédures stockées et déclencheurs Cosmos DB. Vous n’êtes pas obligé de connaître le langage SQL pour utiliser cette interface JavaScript. L’API de requête JavaScript permet de créer des requêtes par programmation, en transmettant des fonctions de prédicat dans une séquence d’appels de fonction, avec une syntaxe usuelle des types prédéfinis de tableau ECMAScript5 et des bibliothèques JavaScript courantes, telles que Lodash. Les requêtes sont analysées par le runtime JavaScript et exécutées efficacement à l’aide d’index Azure Cosmos DB.
+Outre l'émission de requêtes à l'aide de l'API SQL dans Azure Cosmos DB, le [kit SDK côté serveur Cosmos DB](https://github.com/Azure/azure-cosmosdb-js-server/) fournit une interface JavaScript pour exécuter des requêtes optimisées dans les procédures stockées et déclencheurs Cosmos DB. Vous n’êtes pas obligé de connaître le langage SQL pour utiliser cette interface JavaScript. L’API de requête JavaScript permet de créer des requêtes par programmation, en transmettant des fonctions de prédicat dans une séquence d’appels de fonction, avec une syntaxe usuelle des types prédéfinis de tableau ECMAScript5 et des bibliothèques JavaScript courantes, telles que Lodash. Les requêtes sont analysées par le runtime JavaScript et exécutées efficacement à l’aide d’index Azure Cosmos DB.
 
 ## <a name="supported-javascript-functions"></a>Fonctions JavaScript prises en charge
 
@@ -42,7 +45,7 @@ Les constructions JavaScript suivantes ne sont pas optimisées pour les index Az
 - Flux de contrôle (par exemple, if, for, while)
 - Appels de fonction
 
-Pour plus d’informations, consultez la [documentation JavaScript Azure Cosmos DB côté serveur](https://azure.github.io/azure-cosmosdb-js-server/).
+Pour plus d’informations, consultez la [documentation JavaScript Azure Cosmos DB côté serveur](https://github.com/Azure/azure-cosmosdb-js-server/).
 
 ## <a name="sql-to-javascript-cheat-sheet"></a>Aide-mémoire SQL vers JavaScript
 

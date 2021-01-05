@@ -8,16 +8,16 @@ ms.service: hdinsight
 ms.topic: tutorial
 ms.custom: hdinsightactive,mvc
 ms.date: 07/02/2019
-ms.openlocfilehash: 7413a32fdddb579bad61c9cfe539be6aaeae9881
-ms.sourcegitcommit: 7e04a51363de29322de08d2c5024d97506937a60
+ms.openlocfilehash: 730a6bfa627eafcab799fc811db4e20a1d4cec48
+ms.sourcegitcommit: d767156543e16e816fc8a0c3777f033d649ffd3c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/14/2020
-ms.locfileid: "81313743"
+ms.lasthandoff: 10/26/2020
+ms.locfileid: "92534581"
 ---
 # <a name="tutorial-extract-transform-and-load-data-using-interactive-query-in-azure-hdinsight"></a>Tutoriel : Extraire, transformer et charger des données à l’aide d’Interactive Query sur Azure HDInsight
 
-Dans ce tutoriel, vous téléchargez un fichier de données brutes CSV de données de vol disponibles publiquement. Importez-le dans le stockage de cluster HDInsight, puis transformez les données avec Interactive Query dans Azure HDInsight. Une fois les données transformées, chargez-les dans une base de données Azure SQL à l’aide d’[Apache Sqoop](https://sqoop.apache.org/).
+Dans ce tutoriel, vous téléchargez un fichier de données brutes CSV de données de vol disponibles publiquement. Importez-le dans le stockage de cluster HDInsight, puis transformez les données avec Interactive Query dans Azure HDInsight. Une fois les données transformées, chargez-les dans une base de données dans Azure SQL Database à l’aide d’[Apache Sqoop](https://sqoop.apache.org/).
 
 Ce tutoriel décrit les tâches suivantes :
 
@@ -25,14 +25,14 @@ Ce tutoriel décrit les tâches suivantes :
 > * Télécharger l’exemple des données de vol
 > * Charger des données vers un cluster HDInsight
 > * Transformer les données à l’aide d’Interactive Query
-> * Créer une table dans une base de données Azure SQL
-> * Utiliser Sqoop pour exporter des données vers une base de données Azure SQL
+> * Créer une table dans une base de données dans Azure SQL Database
+> * Utiliser Sqoop pour exporter des données vers une base de données Azure SQL Database
 
 ## <a name="prerequisites"></a>Prérequis
 
-* Un cluster Interactive Query sur HDInsight. Consultez [Création clusters Apache Hadoop à l’aide du portail Azure](../hdinsight-hadoop-create-linux-clusters-portal.md) et sélectionnez **Interactive Query** pour le **Type de cluster**.
+* Un cluster Interactive Query sur HDInsight. Consultez [Création clusters Apache Hadoop à l’aide du portail Azure](../hdinsight-hadoop-create-linux-clusters-portal.md) et sélectionnez **Interactive Query** pour le **Type de cluster** .
 
-* Une base de données Azure SQL. Vous allez utiliser une base de données Azure SQL comme magasin de données cible. Si vous n’avez pas de base de données SQL, consultez [Créer une base de données Azure SQL dans le portail Azure](/azure/sql-database/sql-database-single-database-get-started).
+* base de données Azure SQL Database. Vous utilisez la base de données en tant que magasin de données de destination. Si vous n’avez pas de base de données dans Azure SQL Database, consultez [Créer une base de données dans Azure SQL Database dans le portail Azure](../../azure-sql/database/single-database-create-quickstart.md).
 
 * Un client SSH. Pour plus d’informations, consultez [Se connecter à HDInsight (Apache Hadoop) à l’aide de SSH](../hdinsight-hadoop-linux-use-ssh-unix.md).
 
@@ -48,7 +48,7 @@ Ce tutoriel décrit les tâches suivantes :
    | Filtre période |Janvier |
    | Champs |`Year, FlightDate, Reporting_Airline, DOT_ID_Reporting_Airline, Flight_Number_Reporting_Airline, OriginAirportID, Origin, OriginCityName, OriginState, DestAirportID, Dest, DestCityName, DestState, DepDelayMinutes, ArrDelay, ArrDelayMinutes, CarrierDelay, WeatherDelay, NASDelay, SecurityDelay, LateAircraftDelay`. |
 
-3. Sélectionnez **Télécharger**. Vous obtenez un fichier .zip avec les champs de données que vous avez sélectionnés.
+3. Sélectionnez **Télécharger** . Vous obtenez un fichier .zip avec les champs de données que vous avez sélectionnés.
 
 ## <a name="upload-data-to-an-hdinsight-cluster"></a>Charger des données vers un cluster HDInsight
 
@@ -95,9 +95,9 @@ De nombreuses méthodes permettent de charger des données vers l’espace de st
 
 De nombreuses méthodes permettent d’exécuter un travail Hive sur un cluster HDInsight. Dans cette section, vous allez utiliser [Beeline](https://cwiki.apache.org/confluence/display/Hive/HiveServer2+Clients#HiveServer2Clients-Beeline%E2%80%93CommandLineShell) pour exécuter un travail Hive. Pour plus d’informations sur les autres méthodes d’exécution d’un travail Hive, consultez [Utilisation d’Apache Hive sur HDInsight](../hadoop/hdinsight-use-hive.md).
 
-Dans le cadre du travail Hive, vous allez importer les données du fichier .csv dans une table Hive nommée **Delays**.
+Dans le cadre du travail Hive, vous allez importer les données du fichier .csv dans une table Hive nommée **Delays** .
 
-1. À partir de l’invite SSH que vous avez déjà pour le cluster HDInsight, utilisez la commande suivante pour créer et modifier un fichier nommé **flightdelays.hql** :
+1. À partir de l’invite SSH que vous avez déjà pour le cluster HDInsight, utilisez la commande suivante pour créer et modifier un fichier nommé **flightdelays.hql**  :
 
     ```bash
     nano flightdelays.hql
@@ -165,9 +165,9 @@ Dans le cadre du travail Hive, vous allez importer les données du fichier .csv 
     FROM delays_raw;
     ```
 
-3. Pour enregistrer le fichier, appuyez successivement sur **Ctrl + X**, **y** et Entrée.
+3. Pour enregistrer le fichier, appuyez successivement sur **Ctrl + X** , **y** et Entrée.
 
-4. Pour démarrer Hive et exécuter le fichier **flightdelays.hql**, utilisez la commande suivante :
+4. Pour démarrer Hive et exécuter le fichier **flightdelays.hql** , utilisez la commande suivante :
 
     ```bash
     beeline -u 'jdbc:hive2://localhost:10001/;transportMode=http' -f flightdelays.hql
@@ -205,7 +205,7 @@ Il existe de nombreuses façons de se connecter à la base de données SQL et de
     sudo apt-get --assume-yes install freetds-dev freetds-bin
     ```
 
-2. Dès l’installation terminée, utilisez la commande suivante pour vous connecter au serveur SQL Database.
+2. Dès l’installation terminée, utilisez la commande suivante pour vous connecter à SQL Database.
 
     ```bash
     TDSVER=8.0 tsql -H $SQLSERVERNAME.database.windows.net -U $SQLUSER -p 1433 -D $DATABASE -P $SQLPASWORD
@@ -250,9 +250,9 @@ Il existe de nombreuses façons de se connecter à la base de données SQL et de
 
 4. Entrée `exit` at the `1>` .
 
-## <a name="export-data-to-sql-database-using-apache-sqoop"></a>Exporter des données vers la base de données SQL à l’aide d’ Apache Sqoop
+## <a name="export-data-to-sql-database-using-apache-sqoop"></a>Exporter des données vers SQL Database à l’aide d’Apache Sqoop
 
-Dans les sections précédentes, vous avez copié les données transformées dans `/tutorials/flightdelays/output`. Dans cette section, vous allez utiliser Sqoop pour exporter les données de `/tutorials/flightdelays/output` vers la table que vous avez créée dans la base de données Azure SQL.
+Dans les sections précédentes, vous avez copié les données transformées dans `/tutorials/flightdelays/output`. Dans cette section, vous allez utiliser Sqoop pour exporter les données de `/tutorials/flightdelays/output` vers la table que vous avez créée dans Azure SQL Database.
 
 1. Pour vérifier que Sqoop peut voir votre base de données SQL, entrez la commande ci-dessous :
 

@@ -5,12 +5,12 @@ author: tfitzmac
 ms.topic: conceptual
 ms.date: 06/28/2018
 ms.author: tomfitz
-ms.openlocfilehash: 06412a1f08f1f242a3f3bd9be17b795ee09fcf9d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: a8172b63039d2d247f30fca4099254cb8fca068e
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75649633"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87073416"
 ---
 # <a name="microsoftstoragemultistorageaccountcombo-ui-element"></a>Élément d’interface utilisateur Microsoft.Storage.MultiStorageAccountCombo
 
@@ -18,7 +18,7 @@ Groupe de contrôles pour la création de plusieurs comptes de stockage avec des
 
 ## <a name="ui-sample"></a>Exemple d’interface utilisateur
 
-![Microsoft.Storage.MultiStorageAccountCombo](./media/managed-application-elements/microsoft.storage.multistorageaccountcombo.png)
+![Microsoft.Storage.MultiStorageAccountCombo](./media/managed-application-elements/microsoft-storage-multistorageaccountcombo.png)
 
 ## <a name="schema"></a>schéma
 

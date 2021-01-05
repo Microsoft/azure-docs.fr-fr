@@ -3,29 +3,29 @@ title: Personnaliser une page d’accueil pour les applications publiées - Prox
 description: Couvre les bases sur les connecteurs de proxy d’application Azure AD.
 services: active-directory
 documentationcenter: ''
-author: msmimart
-manager: CelesteDG
+author: kenwith
+manager: celestedg
 ms.service: active-directory
 ms.subservice: app-mgmt
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 05/23/2019
-ms.author: mimart
+ms.author: kenwith
 ms.reviewer: harshja
 ms.custom: it-pro
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 1621b273f617955a374ed46d9c215ba99e5b2913
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 155a91ded6c814e2d868e8edd4572459460d006f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74275600"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88642059"
 ---
 # <a name="set-a-custom-home-page-for-published-apps-by-using-azure-ad-application-proxy"></a>Définir une page d’accueil personnalisée pour les applications publiées à l’aide du proxy d’application Azure AD
 
-Cet article explique comment configurer une applications pour diriger un utilisateur vers une page d’accueil personnalisée. Lorsque vous publiez une application avec le proxy d’application, vous définissez une URL interne, mais parfois, ce n’est pas la page que l’utilisateur doit d’abord voir. Définissez une page d’accueil personnalisée afin que l’utilisateur tombe sur la page adéquate quand il accède à l’application. Un utilisateur voit la page d’accueil personnalisée que vous avez définie, qu’il accède à l’application à partir du volet d’accès Azure Active Directory ou du lanceur d’applications Office 365.
+Cet article explique comment configurer une applications pour diriger un utilisateur vers une page d’accueil personnalisée. Lorsque vous publiez une application avec le proxy d’application, vous définissez une URL interne, mais parfois, ce n’est pas la page que l’utilisateur doit d’abord voir. Définissez une page d’accueil personnalisée afin que l’utilisateur tombe sur la page adéquate quand il accède à l’application. Un utilisateur voit la page d’accueil personnalisée que vous avez définie, qu’il accède à l’application à partir de Mes applications Azure Active Directory ou du lanceur d’applications Microsoft 365.
 
 Quand un utilisateur lance l’application, il est dirigé par défaut vers l’URL du domaine racine de l’application publiée. La page d’arrivée est généralement définie comme URL de page d’accueil. Le module PowerShell Azure AD permet de définir une URL de la page d’accueil personnalisée lorsque vous souhaitez que l’utilisateur de l’application arrive sur une page spécifique au sein de l’application.
 
@@ -37,7 +37,7 @@ Voici un scénario expliquant pourquoi votre entreprise pourrait vouloir défini
 - Vous préférez définir `https://ExpenseApp-contoso.msappproxy.net/login/login.aspx` comme URL de la page d’accueil de sorte qu’un utilisateur externe voie d’abord la page de connexion.
 
 > [!NOTE]
-> Si vous octroyez aux utilisateurs un accès aux applications publiées, celles-ci sont affichées dans le [volet d’accès Azure AD](../user-help/my-apps-portal-end-user-access.md) et le [lanceur d’applications Office 365](https://www.microsoft.com/microsoft-365/blog/2016/09/27/introducing-the-new-office-365-app-launcher/).
+> Si vous octroyez aux utilisateurs un accès aux applications publiées, celles-ci sont affichées dans [Mes applications](../user-help/my-apps-portal-end-user-access.md) et le [lanceur d’applications Office 365](https://www.microsoft.com/microsoft-365/blog/2016/09/27/introducing-the-new-office-365-app-launcher/).
 
 ## <a name="before-you-start"></a>Avant de commencer
 

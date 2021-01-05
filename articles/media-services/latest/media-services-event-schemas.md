@@ -1,24 +1,26 @@
 ---
 title: Schémas Azure Event Grid pour les événements Media Services
-description: Décrit les propriétés qui sont fournies pour les événements Media Services avec Azure Event Grid
+description: Découvrez les propriétés qui sont fournies pour les événements Media Services avec Azure Event Grid.
 services: media-services
 documentationcenter: ''
-author: Juliako
+author: IngridAtMicrosoft
 manager: femila
 editor: ''
 ms.service: media-services
 ms.workload: ''
 ms.topic: reference
-ms.date: 02/25/2020
-ms.author: juliako
-ms.openlocfilehash: 3733a641bc116b57556c5ad4f5750bec69e10e9b
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.date: 08/31/2020
+ms.author: inhenkel
+ms.openlocfilehash: 47ba1af15101ae68cf5311ed73f7078bf9fc7f35
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81393728"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91336426"
 ---
 # <a name="azure-event-grid-schemas-for-media-services-events"></a>Schémas Azure Event Grid pour les événements Media Services
+
+[!INCLUDE [media services api v3 logo](./includes/v3-hr.md)]
 
 Cet article fournit les schémas et les propriétés pour les événements Media Services.
 

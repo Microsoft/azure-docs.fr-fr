@@ -2,26 +2,21 @@
 title: 'Didacticiel : Intégration d’Azure Active Directory à Bersin | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et Bersin.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: bbc9d229-69fb-4ab5-b6c3-5f3d790ea13e
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 02/19/2019
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: 6c6794baab00dbb59df89187c8ab91f1a42ab03e
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 7dc9bbe4b4f2d5de2a79dbdeabb4b61ecb02f2d7
+ms.sourcegitcommit: d79513b2589a62c52bddd9c7bd0b4d6498805dbe
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "73158891"
+ms.lasthandoff: 12/18/2020
+ms.locfileid: "97673492"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-bersin"></a>Didacticiel : Intégration d’Azure Active Directory à Bersin
 
@@ -32,7 +27,7 @@ L’intégration de Bersin à Azure AD vous offre les avantages suivants :
 * Vous pouvez permettre à vos utilisateurs d’être automatiquement connectés à Bersin (par le biais de l’authentification unique) avec leur compte Azure AD.
 * Vous pouvez gérer vos comptes dans un emplacement central : le portail Azure
 
-Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
 ## <a name="prerequisites"></a>Conditions préalables requises
@@ -68,7 +63,7 @@ Pour configurer l’intégration de Bersin à Azure AD, vous devez ajouter Bersi
 
 4. Dans la zone de recherche, tapez **Bersin**, sélectionnez **Bersin** dans le panneau des résultats, puis cliquez sur le bouton **Ajouter** pour ajouter l’application.
 
-     ![Bersin dans la liste des résultats](common/search-new-app.png)
+    ![Bersin dans la liste des résultats](common/search-new-app.png)
 
 ## <a name="configure-and-test-azure-ad-single-sign-on"></a>Configurer et tester l’authentification unique Azure AD
 
@@ -103,7 +98,7 @@ Pour configurer l’authentification unique Azure AD auprès de Bersin, effectue
 
 4. Dans la section **Configuration SAML de base**, si vous souhaitez configurer l’application en mode lancé par le **fournisseur d’identité**, effectuez l’étape suivante :
 
-    ![Informations d’authentification unique dans Domaine et URL Bersin](common/idp-identifier-relay.png)
+    ![Capture d’écran montrant Configuration SAML de base, où vous pouvez entrer l’identificateur, l’URL de réponse, et sélectionner Enregistrer.](common/idp-identifier-relay.png)
 
     a. Dans la zone de texte **Identificateur**, tapez une URL au format suivant : `https://www.bersin.com/shibboleth`
 
@@ -113,7 +108,7 @@ Pour configurer l’authentification unique Azure AD auprès de Bersin, effectue
 
 5. Cliquez sur **Définir des URL supplémentaires**, puis effectuez les étapes suivantes si vous souhaitez configurer l’application en mode lancé par le **fournisseur de services** :
 
-    ![Informations d’authentification unique dans Domaine et URL Bersin](common/metadata-upload-additional-signon.png)
+    ![Capture d’écran montrant Définir des URL supplémentaires, où vous pouvez entrer une URL de connexion.](common/metadata-upload-additional-signon.png)
 
     Dans la zone de texte **URL de connexion**, tapez une URL au format suivant : `https://www.bersin.com/Login.aspx`
 
@@ -152,7 +147,7 @@ L’objectif de cette section est de créer un utilisateur de test appelé Britt
     ![Boîte de dialogue Utilisateur](common/user-properties.png)
 
     a. Dans le champ **Nom**, entrez **BrittaSimon**.
-  
+
     b. Dans le champ **Nom d’utilisateur**, tapez **brittasimon\@domainedevotresociété.extension**.  
     Par exemple : BrittaSimon@contoso.com
 
@@ -188,18 +183,18 @@ Dans cette section, vous allez autoriser Britta Simon à utiliser l’authentifi
 
 ### <a name="create-bersin-test-user"></a>Créer l’utilisateur de test Bersin
 
-Dans cette section, vous allez créer un utilisateur appelé Britta Simon dans Bersin. Collaborez avec  [l’équipe du support technique de Bersin](mailto:USBersinServiceClient@deloitte.com) pour ajouter des utilisateurs, ou le domaine qui doit être mis en liste verte dans la plateforme Bersin. Si le domaine est ajouté par l’équipe, les utilisateurs seront automatiquement approvisionnés sur la plateforme Bersin. Les utilisateurs doivent être créés et activés avant que vous utilisiez l’authentification unique.
+Dans cette section, vous allez créer un utilisateur appelé Britta Simon dans Bersin. Collaborez avec l’[équipe du support technique de Bersin](mailto:USBersinServiceClient@deloitte.com) pour ajouter des utilisateurs, ou le domaine qui doit être mis en liste verte dans la plateforme Bersin. Si le domaine est ajouté par l’équipe, les utilisateurs seront automatiquement approvisionnés sur la plateforme Bersin. Les utilisateurs doivent être créés et activés avant que vous utilisiez l’authentification unique.
 
 ### <a name="test-single-sign-on"></a>Tester l’authentification unique
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Le fait de cliquer sur la vignette Bersin dans le volet d’accès doit vous connecter automatiquement à l’application Bersin pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Le fait de cliquer sur la vignette Bersin dans le volet d’accès doit vous connecter automatiquement à l’application Bersin pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

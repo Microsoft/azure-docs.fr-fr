@@ -10,21 +10,21 @@ metadata:
   author: cynthn
   ms.author: cynthn
   ms.date: 09/19/2019
-  ms.openlocfilehash: 12c3447bc7e46e45d05711e1b0c7a59f8d8d0218
-  ms.sourcegitcommit: 253d4c7ab41e4eb11cd9995190cd5536fcec5a3c
+  ms.openlocfilehash: 77c73159d604a137af470f137d261b5a172d6875
+  ms.sourcegitcommit: d103a93e7ef2dde1298f04e307920378a87e982a
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 03/25/2020
-  ms.locfileid: "77115825"
+  ms.lasthandoff: 10/13/2020
+  ms.locfileid: "91978388"
 landingContent:
 - title: Dernières fonctionnalités
   linkLists:
   - linkListType: whats-new
     links:
     - text: Machines virtuelles Spot
-      url: spot-vms.md
+      url: ../spot-vms.md
     - text: Hôtes dédiés
-      url: dedicated-hosts.md
+      url: ../dedicated-hosts.md
     - text: Groupes de placements de proximité
       url: proximity-placement-groups.md
 - title: Bien démarrer
@@ -32,28 +32,28 @@ landingContent:
   - linkListType: quickstart
     links:
     - text: Azure CLI
-      url: https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-quick-create-cli
+      url: ./quick-create-cli.md
     - text: Portail Azure
-      url: https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-quick-create-portal
+      url: ./quick-create-portal.md
     - text: Azure PowerShell
-      url: https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-quick-create-powershell
+      url: ./quick-create-powershell.md
 - title: Guides pas à pas
   linkLists:
   - linkListType: tutorial
     links:
     - text: Créer et gérer des machines virtuelles Linux
-      url: /azure/virtual-machines/linux/tutorial-manage-vm
+      url: ./tutorial-manage-vm.md
     - text: Disques de machine virtuelle
-      url: /azure/virtual-machines/linux/tutorial-manage-disks
+      url: ./tutorial-manage-disks.md
     - text: Automatiser la configuration de machine virtuelle
-      url: /azure/virtual-machines/linux/tutorial-automate-vm-deployment
+      url: ./tutorial-automate-vm-deployment.md
     - text: Créer des images de machines virtuelles personnalisées
-      url: /azure/virtual-machines/linux/tutorial-custom-images
+      url: ./tutorial-custom-images.md
     - text: Gérer les machines virtuelles avec des réseaux virtuels
-      url: /azure/virtual-machines/linux/tutorial-virtual-network
+      url: ./tutorial-virtual-network.md
 - title: Entrainement auto-rythmé
   linkLists:
   - linkListType: learn
     links:
     - text: " Créer une machine virtuelle Linux dans Azure"
-      url: https://docs.microsoft.com/learn/modules/create-linux-virtual-machine-in-azure/
+      url: /learn/modules/create-linux-virtual-machine-in-azure/

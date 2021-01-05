@@ -6,16 +6,17 @@ ms.author: govindk
 ms.reviewer: sngun
 ms.service: cosmos-db
 ms.subservice: cosmosdb-cassandra
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 09/24/2018
-ms.openlocfilehash: 4fbb86f4fbda9b8e521f7465bb8bb3d18602ca13
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 5939690d3f2c0bb9affa3e2fb425b909b96cf002
+ms.sourcegitcommit: 3bdeb546890a740384a8ef383cf915e84bd7e91e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "60894184"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93087619"
 ---
 # <a name="aggregate-operations-on-azure-cosmos-db-cassandra-api-tables-from-spark"></a>Opérations d’agrégation sur des tables de l’API Cassandra Azure Cosmos DB à partir de Spark 
+[!INCLUDE[appliesto-cassandra-api](includes/appliesto-cassandra-api.md)]
 
 Cet article décrit les opérations d’agrégation de base sur les tables de l’API Cassandra Azure Cosmos DB à partir de Spark. 
 
@@ -77,7 +78,7 @@ sc.cassandraTable("books_ks", "books").count
 ```
 
 **Output:**
-```
+```bash
 res48: Long = 5
 ```
 

@@ -10,14 +10,20 @@ ms.subservice: bing-visual-search
 ms.topic: tutorial
 ms.date: 03/31/2020
 ms.author: scottwhi
-ms.openlocfilehash: ecd1ab5e613bb326b65f6aa50f3f85172bc334ac
-ms.sourcegitcommit: efefce53f1b75e5d90e27d3fd3719e146983a780
+ms.custom: devx-track-js
+ms.openlocfilehash: 96a4b13d11e40e24e78d3aed8dfebcc88b41c525
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/01/2020
-ms.locfileid: "80477937"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96486876"
 ---
 # <a name="tutorial-upload-images-to-the-bing-visual-search-api"></a>Tutoriel : Charger des images vers l’API Recherche visuelle Bing
+
+> [!WARNING]
+> Les API Recherche Bing passent de Cognitive Services aux services de recherche Bing. À compter du **30 octobre 2020**, toutes les nouvelles instances de Recherche Bing doivent être provisionnées en suivant le processus documenté [ici](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Les API Recherche Bing provisionnées à l’aide de Cognitive Services seront prises en charge les trois prochaines années ou jusqu’à la fin de votre Contrat Entreprise, selon la première éventualité.
+> Pour obtenir des instructions de migration, consultez [Services de recherche Bing](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
 
 L’API Recherche visuelle Bing vous permet de rechercher sur le web des images similaires à celles que vous chargez. Utilisez ce tutoriel pour créer une application web qui peut envoyer une image à l’API et afficher les aperçus que cette dernière retourne dans la page web. Notez que cette application n’est pas conforme à toutes les [conditions d’utilisation et d’affichage de Bing](../bing-web-search/use-display-requirements.md) concernant l’utilisation de l’API.
 
@@ -471,7 +477,7 @@ function addDivContent(div, tag, json) {
 
 ## <a name="display-insights-for-different-actions"></a>Afficher les informations concernant différentes actions
 
-Les fonctions suivantes affichent des informations pour différentes actions. Elles fournissent une image interactive ou un lien interactif qui vous renvoie à une page Web avec plus d’informations sur l’image. Cette page est hébergée soit par Bing.com, soit sur le site Web d’origine de l’image. Toutes les données des aperçus ne s’affichent pas dans cette application. Pour voir tous les champs disponibles pour un insight, consultez les informations de référence sur [Images - Recherche visuelle](https://aka.ms/bingvisualsearchreferencedoc).
+Les fonctions suivantes affichent des informations pour différentes actions. Elles fournissent une image interactive ou un lien interactif qui vous renvoie à une page Web avec plus d’informations sur l’image. Cette page est hébergée soit par Bing.com, soit sur le site Web d’origine de l’image. Toutes les données des aperçus ne s’affichent pas dans cette application. Pour voir tous les champs disponibles pour un insight, consultez les informations de référence sur [Images - Recherche visuelle](/rest/api/cognitiveservices/bingvisualsearch/images/visualsearch).
 
 > [!NOTE]
 > Une quantité minimale d’informations d’aperçu doit être affichée sur la page. Pour plus d’informations , consultez [Conditions d’utilisation et d’affichage de l’API Recherche Bing](../bing-web-search/use-display-requirements.md).

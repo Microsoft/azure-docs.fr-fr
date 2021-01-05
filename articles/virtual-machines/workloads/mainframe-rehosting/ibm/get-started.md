@@ -3,6 +3,7 @@ title: Charges de travail IBM dans Azure | Microsoft Docs
 description: Utilisez un émulateur mainframe et d’autres services de partenaires Microsoft pour réhéberger vos charges de travail IBM z/OS en utilisant Microsoft Azure.
 services: virtual-machines-linux
 ms.service: virtual-machines-linux
+ms.subservice: workloads
 documentationcenter: ''
 author: njray
 ms.author: edprice
@@ -12,12 +13,12 @@ ms.topic: conceptual
 ms.date: 02/22/2019
 tags: ''
 keywords: ''
-ms.openlocfilehash: 13c83c53cdad719d6a4bed4cc1852b85d62082e8
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: efc4f6293623278314df3ac55b2fecae2e28f7d8
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "68834589"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94968347"
 ---
 # <a name="ibm-workloads-on-azure"></a>Charges de travail IBM dans Azure
 
@@ -37,7 +38,7 @@ Un écosystème de partenaires étendu se tient à votre disposition pour vous a
 
 **Étapes suivantes**
 
-- [Migration de mainframe : mythes et réalités](https://docs.microsoft.com/azure/architecture/cloud-adoption/infrastructure/mainframe-migration/myths-and-facts)
+- [Migration de mainframe : mythes et réalités](/azure/architecture/cloud-adoption/infrastructure/mainframe-migration/myths-and-facts)
 - [Installer l’environnement de développement/test IBM zD&T sur Azure](./install-ibm-z-environment.md)
 - [Configurer une instance ADCD (Application Developers Controlled Distribution) dans IBM zD&T v1](./demo.md)
-- [IBM DB2 pureScale sur Azure](https://docs.microsoft.com/azure/virtual-machines/linux/ibm-db2-purescale-azure)
+- [IBM DB2 pureScale sur Azure](../../../linux/ibm-db2-purescale-azure.md)

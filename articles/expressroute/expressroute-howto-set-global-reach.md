@@ -2,17 +2,17 @@
 title: 'Azure ExpressRoute : Configurer Global Reach'
 description: Cet article vous aide à associer des circuits ExpressRoute afin de constituer un réseau privé entre vos réseaux locaux et d’activer Global Reach.
 services: expressroute
-author: jaredr80
+author: duongau
 ms.service: expressroute
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 02/25/2019
-ms.author: jaredro
-ms.openlocfilehash: 587a17659a412d6f894faf5a744a7d9c444935c8
-ms.sourcegitcommit: 62c5557ff3b2247dafc8bb482256fef58ab41c17
+ms.author: duau
+ms.openlocfilehash: 2365317d83a4c11fa17cb5c449a25b70da17c2eb
+ms.sourcegitcommit: 28c5fdc3828316f45f7c20fc4de4b2c05a1c5548
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/03/2020
-ms.locfileid: "80656742"
+ms.lasthandoff: 10/22/2020
+ms.locfileid: "92368364"
 ---
 # <a name="configure-expressroute-global-reach"></a>Configurer ExpressRoute Global Reach
 
@@ -105,17 +105,17 @@ Une fois l’opération terminée, vous disposerez d’une connectivité entre v
 
 Utilisez la commande suivante pour vérifier la configuration sur le circuit où elle a été effectuée (par exemple, le circuit 1 dans l'exemple précédent).
 ```azurepowershell-interactive
-$ckt1 = Get-AzExpressRouteCircuit -Name "Your_circuit_1_name" -ResourceGroupName "Your_resource_group"
+$ckt_1 = Get-AzExpressRouteCircuit -Name "Your_circuit_1_name" -ResourceGroupName "Your_resource_group"
 ```
 
-Si vous exécutez *$ckt1* dans PowerShell, vous voyez s’afficher la valeur *CircuitConnectionStatus*. Cela indique si la connectivité est établie, « Connecté » ou « Déconnecté ». 
+Si vous exécutez simplement *$ckt_1* dans PowerShell, vous voyez s’afficher la valeur *CircuitConnectionStatus* dans le résultat. Cela indique si la connectivité est établie, « Connecté » ou « Déconnecté ». 
 
 ## <a name="disable-connectivity"></a>Désactiver la connectivité
 
 Pour désactiver la connectivité entre vos réseaux locaux, exécutez les commandes sur le circuit où la configuration a été effectuée (le circuit 1 dans l’exemple précédent).
 
 ```azurepowershell-interactive
-$ckt1 = Get-AzExpressRouteCircuit -Name "Your_circuit_1_name" -ResourceGroupName "Your_resource_group"
+$ckt_1 = Get-AzExpressRouteCircuit -Name "Your_circuit_1_name" -ResourceGroupName "Your_resource_group"
 Remove-AzExpressRouteCircuitConnectionConfig -Name "Your_connection_name" -ExpressRouteCircuit $ckt_1
 Set-AzExpressRouteCircuit -ExpressRouteCircuit $ckt_1
 ```

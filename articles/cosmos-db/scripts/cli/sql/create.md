@@ -1,24 +1,25 @@
 ---
-title: Créer une base de données et un conteneur d’API SQL (Core) pour Azure Cosmos DB
-description: Créer une base de données et un conteneur d’API SQL (Core) pour Azure Cosmos DB
+title: Créer une base de données et un conteneur d’API (Core) SQL pour Azure Cosmos DB
+description: Créer une base de données et un conteneur d’API (Core) SQL pour Azure Cosmos DB
 author: markjbrown
 ms.author: mjbrown
 ms.service: cosmos-db
 ms.subservice: cosmosdb-sql
 ms.topic: sample
-ms.date: 9/25/2019
-ms.openlocfilehash: ae958c7e48b1c4a93a09c607d5a2e51abf49a8ca
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.date: 07/29/2020
+ms.openlocfilehash: e181100d664d02193d248c8f925503523bbaa129
+ms.sourcegitcommit: 04fb3a2b272d4bbc43de5b4dbceda9d4c9701310
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "71275026"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94566841"
 ---
-# <a name="create-an-azure-cosmos-sql-core-api-account-database-and-container-using-azure-cli"></a>Créer un compte, une base de données et un conteneur d’API SQL (Core) Azure Cosmos DB avec Azure CLI
+# <a name="create-an-azure-cosmos-core-sql-api-account-database-and-container-using-azure-cli"></a>Créer un compte, une base de données et un conteneur d’API (Core) SQL Azure Cosmos DB avec Azure CLI
+[!INCLUDE[appliesto-sql-api](../../../includes/appliesto-sql-api.md)]
 
-[!INCLUDE [cloud-shell-try-it.md](../../../../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../../../../includes/azure-cli-prepare-your-environment.md)]
 
-Si vous choisissez d’installer et d’utiliser localement l’interface de ligne de commande, cette rubrique vous impose d’exécuter Azure CLI version 2.0.73 ou ultérieure. Exécutez `az --version` pour trouver la version. Si vous devez installer ou mettre à niveau, voir [Installer Azure CLI](/cli/azure/install-azure-cli).
+- Cet article nécessite la version 2.9.1 ou ultérieure d’Azure CLI. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée.
 
 ## <a name="sample-script"></a>Exemple de script
 

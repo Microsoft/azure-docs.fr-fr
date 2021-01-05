@@ -5,15 +5,15 @@ services: vpn-gateway
 titleSuffix: Azure VPN Gateway
 author: cherylmc
 ms.service: vpn-gateway
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 10/17/2018
 ms.author: cherylmc
-ms.openlocfilehash: 1dc0eec6178420976181b05a059e9f8b4859ec2a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 63505f470410234f720dd28c29e87c4a2a6d123f
+ms.sourcegitcommit: 8e7316bd4c4991de62ea485adca30065e5b86c67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77152004"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94661135"
 ---
 # <a name="connect-virtual-networks-from-different-deployment-models-using-powershell"></a>Connecter des réseaux virtuels utilisant des modèles de déploiement différents à l’aide de PowerShell
 
@@ -35,9 +35,9 @@ Les étapes suivantes vous guident à travers les paramétrages nécessaires pou
 
 ### <a name="prerequisites"></a><a name="pre"></a>Configuration requise
 
-* Les deux réseaux virtuels ont déjà été créés. Pour créer un réseau virtuel Azure Resource Manager, consultez [Créer un groupe de ressources et un réseau virtuel](../virtual-network/quick-create-powershell.md#create-a-resource-group-and-a-virtual-network). Pour créer un réseau virtuel classique, consultez [Créer un réseau virtuel (Classic)](https://docs.microsoft.com/azure/virtual-network/create-virtual-network-classic).
+* Les deux réseaux virtuels ont déjà été créés. Pour créer un réseau virtuel Azure Resource Manager, consultez [Créer un groupe de ressources et un réseau virtuel](../virtual-network/quick-create-powershell.md#create-a-resource-group-and-a-virtual-network). Pour créer un réseau virtuel classique, consultez [Créer un réseau virtuel (Classic)](/previous-versions/azure/virtual-network/create-virtual-network-classic).
 * Les plages d’adresses des réseaux virtuels ne se chevauchent pas ou ne chevauchent aucune des plages des autres connexions susceptibles d’être utilisées par les passerelles.
-* Vous avez installé les dernières applets de commande PowerShell. Pour plus d’informations, consultez [Installation et configuration d’Azure PowerShell](/powershell/azure/overview) . Veillez à installer à la fois les applets de commande de gestion des services et Resource Manager (RM). 
+* Vous avez installé les dernières applets de commande PowerShell. Pour plus d’informations, consultez [Installation et configuration d’Azure PowerShell](/powershell/azure/) . Veillez à installer à la fois les applets de commande de gestion des services et Resource Manager (RM). 
 
 ### <a name="example-settings"></a><a name="exampleref"></a>Exemples de paramètres
 
@@ -90,7 +90,7 @@ Configuration d’adressage IP de la passerelle = gwipconfig
    ```azurepowershell
    Get-AzureVNetConfig -ExportToFile C:\AzureNet\NetworkConfig.xml
    ```
-3. Ouvrez le fichier .xml que vous avez téléchargé pour le modifier. Pour obtenir un exemple de fichier de configuration réseau, consultez le [schéma de configuration réseau](https://msdn.microsoft.com/library/jj157100.aspx).
+3. Ouvrez le fichier .xml que vous avez téléchargé pour le modifier. Pour obtenir un exemple de fichier de configuration réseau, consultez le [schéma de configuration réseau](/previous-versions/azure/reference/jj157100(v=azure.100)).
 
 ### <a name="2-verify-the-gateway-subnet"></a>2. Vérifier le sous-réseau de passerelle
 Dans l’élément **VirtualNetworkSites**, ajoutez un sous-réseau de passerelle à votre réseau virtuel si vous n’en avez pas déjà créé un. Lorsque vous travaillez avec le fichier de configuration réseau, le sous-réseau de passerelle DOIT être nommé « GatewaySubnet ». Sinon, Azure ne peut pas le reconnaître et l’utiliser comme sous-réseau de passerelle.
@@ -99,44 +99,50 @@ Dans l’élément **VirtualNetworkSites**, ajoutez un sous-réseau de passerell
 
 **Exemple :**
 
-    <VirtualNetworkSites>
-      <VirtualNetworkSite name="ClassicVNet" Location="West US">
-        <AddressSpace>
-          <AddressPrefix>10.0.0.0/24</AddressPrefix>
-        </AddressSpace>
-        <Subnets>
-          <Subnet name="Subnet-1">
-            <AddressPrefix>10.0.0.0/27</AddressPrefix>
-          </Subnet>
-          <Subnet name="GatewaySubnet">
-            <AddressPrefix>10.0.0.32/29</AddressPrefix>
-          </Subnet>
-        </Subnets>
-      </VirtualNetworkSite>
-    </VirtualNetworkSites>
+```xml
+<VirtualNetworkSites>
+  <VirtualNetworkSite name="ClassicVNet" Location="West US">
+    <AddressSpace>
+      <AddressPrefix>10.0.0.0/24</AddressPrefix>
+    </AddressSpace>
+    <Subnets>
+      <Subnet name="Subnet-1">
+        <AddressPrefix>10.0.0.0/27</AddressPrefix>
+      </Subnet>
+      <Subnet name="GatewaySubnet">
+        <AddressPrefix>10.0.0.32/29</AddressPrefix>
+      </Subnet>
+    </Subnets>
+  </VirtualNetworkSite>
+</VirtualNetworkSites>
+```
 
 ### <a name="3-add-the-local-network-site"></a>3. Ajouter le site de réseau local
 Le site de réseau local que vous ajoutez représente le réseau virtuel RM auquel vous souhaitez vous connecter. Ajoutez un élément **LocalNetworkSites** au fichier s’il n’en existe pas déjà un. À ce stade de la configuration, n’importe quelle adresse IP publique valide peut être utilisée pour l’élément VPNGatewayAddress, car nous n’avons pas encore créé la passerelle pour le réseau virtuel Resource Manager. Une fois la passerelle créée, nous remplacerons cette adresse IP temporaire par l’adresse IP publique qui a été affectée à la passerelle RM.
 
-    <LocalNetworkSites>
-      <LocalNetworkSite name="RMVNetLocal">
-        <AddressSpace>
-          <AddressPrefix>192.168.0.0/16</AddressPrefix>
-        </AddressSpace>
-        <VPNGatewayAddress>13.68.210.16</VPNGatewayAddress>
-      </LocalNetworkSite>
-    </LocalNetworkSites>
+```xml
+<LocalNetworkSites>
+  <LocalNetworkSite name="RMVNetLocal">
+    <AddressSpace>
+      <AddressPrefix>192.168.0.0/16</AddressPrefix>
+    </AddressSpace>
+    <VPNGatewayAddress>13.68.210.16</VPNGatewayAddress>
+  </LocalNetworkSite>
+</LocalNetworkSites>
+```
 
 ### <a name="4-associate-the-vnet-with-the-local-network-site"></a>4. Associer le réseau virtuel au site de réseau local
 Dans cette section, nous spécifions le site de réseau local auquel vous souhaitez connecter le réseau virtuel. Dans ce cas, il s’agit du réseau virtuel Resource Manager que vous avez référencé plus tôt. Assurez-vous que les noms correspondent. Cette étape ne vise pas à créer une passerelle. Elle spécifie le réseau local auquel la passerelle se connectera.
 
-        <Gateway>
-          <ConnectionsToLocalNetwork>
-            <LocalNetworkSiteRef name="RMVNetLocal">
-              <Connection type="IPsec" />
-            </LocalNetworkSiteRef>
-          </ConnectionsToLocalNetwork>
-        </Gateway>
+```xml
+<Gateway>
+  <ConnectionsToLocalNetwork>
+    <LocalNetworkSiteRef name="RMVNetLocal">
+      <Connection type="IPsec" />
+    </LocalNetworkSiteRef>
+  </ConnectionsToLocalNetwork>
+</Gateway>
+```
 
 ### <a name="5-save-the-file-and-upload"></a>5. Enregistrer et charger le fichier
 Enregistrez le fichier, puis importez-le dans Azure en exécutant la commande ci-dessous. Assurez-vous que vous modifiez le chemin d'accès selon les besoins de votre environnement.
@@ -147,9 +153,11 @@ Set-AzureVNetConfig -ConfigurationPath C:\AzureNet\NetworkConfig.xml
 
 Vous verrez un résultat similaire indiquant que l’importation a réussi.
 
-        OperationDescription        OperationId                      OperationStatus                                                
-        --------------------        -----------                      ---------------                                                
-        Set-AzureVNetConfig        e0ee6e66-9167-cfa7-a746-7casb9    Succeeded 
+```output
+OperationDescription        OperationId                      OperationStatus                                                
+--------------------        -----------                      ---------------                                                
+Set-AzureVNetConfig        e0ee6e66-9167-cfa7-a746-7casb9    Succeeded 
+```
 
 ### <a name="6-create-the-gateway"></a>6. Créer la passerelle
 

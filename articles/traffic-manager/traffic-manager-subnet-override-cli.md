@@ -3,18 +3,17 @@ title: Remplacement de sous-réseau Azure Traffic Manager avec Azure CLI | Micro
 description: Cet article va vous aider à comprendre comment le remplacement de sous-réseau Traffic Manager permet de remplacer la méthode de routage d’un profil Traffic Manager pour diriger le trafic vers un point de terminaison en fonction de l’adresse IP de l’utilisateur final via une plage d’adresses IP prédéfinie pour les mappages de point de terminaison.
 services: traffic-manager
 documentationcenter: ''
-author: rohinkoul
-manager: twooley
-ms.topic: article
+author: duongau
+ms.topic: how-to
 ms.service: traffic-manager
 ms.date: 09/18/2019
-ms.author: rohink
-ms.openlocfilehash: 818b692884bd9d31efd08663a582ebcfec2032e9
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: duau
+ms.openlocfilehash: 984cdfb3e60717f7632ea1fdcd05a4681dd6a1fd
+ms.sourcegitcommit: 5831eebdecaa68c3e006069b3a00f724bea0875a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76938468"
+ms.lasthandoff: 11/11/2020
+ms.locfileid: "94517935"
 ---
 # <a name="traffic-manager-subnet-override-using-azure-cli"></a>Remplacement de sous-réseau Traffic Manager avec Azure CLI
 
@@ -35,17 +34,14 @@ Il existe deux types de profil de routage qui prennent en charge les remplacemen
 
 Pour créer un remplacement de sous-réseau Traffic Manager, vous pouvez utiliser Azure CLI afin d’ajouter les sous-réseaux du remplacement au point de terminaison Traffic Manager.
 
-## <a name="azure-cli"></a>Azure CLI
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../includes/azure-cli-prepare-your-environment.md)]
 
-[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
-
-Si vous choisissez d’installer et d’utiliser l’interface CLI localement, vous devez exécuter Azure CLI version 2.0.28 ou ultérieure pour poursuivre la procédure décrite dans ce tutoriel. Pour connaître la version de l’interface, exécutez `az --version`. Si vous devez installer ou mettre à niveau, voir [Installer Azure CLI]( /cli/azure/install-azure-cli).
+- Cet article nécessite la version 2.0.28 ou ultérieure d’Azure CLI. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée.
 
 ## <a name="update-the-traffic-manager-endpoint-with-subnet-override"></a>Mettez à jour le point de terminaison Traffic Manager avec le remplacement de sous-réseau.
 Utilisez Azure CLI pour mettre à jour votre point de terminaison avec [az network traffic-manager endpoint update](https://docs.microsoft.com/cli/azure/network/traffic-manager/endpoint?view=azure-cli-latest#az-network-traffic-manager-endpoint-update).
 
-```azurecli
-
+```azurecli-interactive
 ### Add a range of IPs ###
 az network traffic-manager endpoint update \
     --name MyEndpoint \
@@ -61,22 +57,21 @@ az network traffic-manager endpoint update \
     --resource-group MyResourceGroup \
     --subnets 9.10.11.0:24 \
     --type AzureEndpoints
-
 ```
 
 Vous pouvez supprimer les plages d’adresses IP en exécutant [az network traffic-manager endpoint update](https://docs.microsoft.com/cli/azure/network/traffic-manager/endpoint?view=azure-cli-latest#az-network-traffic-manager-endpoint-update) avec l’option **--remove**.
 
-```azurecli
-
+```azurecli-interactive
 az network traffic-manager endpoint update \
     --name MyEndpoint \
     --profile-name MyTmProfile \
     --resource-group MyResourceGroup \
     --remove subnets \
     --type AzureEndpoints
-
 ```
+
 ## <a name="next-steps"></a>Étapes suivantes
+
 En savoir plus sur les [méthodes de routage du trafic](traffic-manager-routing-methods.md)de Traffic Manager.
 
 En savoir plus sur la [méthode de routage du trafic de sous-réseau](https://docs.microsoft.com/azure/traffic-manager/traffic-manager-routing-methods#subnet-traffic-routing-method)

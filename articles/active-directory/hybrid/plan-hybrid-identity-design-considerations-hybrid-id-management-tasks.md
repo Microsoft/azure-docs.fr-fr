@@ -1,6 +1,6 @@
 ---
 title: 'Conception d’identités hybrides : tâches de gestion Azure | Microsoft Docs'
-description: Avec le contrôle d’accès conditionnel, Azure Active Directory vérifie les conditions spécifiques que vous choisissez lors de l’authentification de l’utilisateur et avant d’autoriser l’accès à l’application. Une fois que ces conditions sont remplies, l’utilisateur est authentifié et autorisé à accéder à l’application.
+description: Azure AD vérifie les conditions spécifiques que vous choisissez lors de l'authentification de l'utilisateur et avant d'autoriser l'accès à l'application avec le contrôle par accès conditionnel.
 documentationcenter: ''
 services: active-directory
 author: billmath
@@ -17,12 +17,12 @@ ms.subservice: hybrid
 ms.author: billmath
 ms.custom: seohack1
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 8a829d39ff21a1abeafd3b4362747894d196d9d4
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c416bf19acb1736eeed679c16dbd87de1cc98537
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "67109384"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90986529"
 ---
 # <a name="plan-for-hybrid-identity-lifecycle"></a>Planifier le cycle de vie des identités hybrides
 L'identité est un des fondements de la stratégie de mobilité et d'accès aux applications de votre entreprise. Que vous vous connectiez à votre appareil mobile ou à une application SaaS, votre identité est la clé d'accès à tous les éléments. À son niveau le plus élevé, une solution de gestion des identités englobe l'unification et la synchronisation entre vos référentiels d'identités, ce qui inclut l'automatisation et la centralisation du processus de provisionnement des ressources. La solution d'identité doit être une identité centralisée en local et dans le cloud et, également, utiliser une forme de fédération d'identité, afin de gérer une authentification centralisée et partager ainsi que collaborer de manière sécurisée avec des utilisateurs et entreprises externes. Les ressources vont de systèmes d'exploitation et d’applications à des personnes dans ou affiliés à une organisation. La structure organisationnelle peut être modifiée pour prendre en compte les stratégies et les procédures d’approvisionnement.

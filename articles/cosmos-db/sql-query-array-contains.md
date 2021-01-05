@@ -3,18 +3,21 @@ title: 'Langage de requête Azure Cosmos DB : ARRAY_CONTAINS'
 description: Découvrez la fonction système SQL ARRAY_CONTAINS dans Azure Cosmos DB, qui retourne une valeur booléenne indiquant si le tableau contient la valeur spécifiée
 author: ginamr
 ms.service: cosmos-db
+ms.subservice: cosmosdb-sql
 ms.topic: conceptual
 ms.date: 09/13/2019
 ms.author: girobins
 ms.custom: query-reference
-ms.openlocfilehash: 47fe20888aa546e414b268b30c2e03580750a040
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: ff88d66ee6d1ceee4f1cf4e7b6501ab323dbc79e
+ms.sourcegitcommit: fa90cd55e341c8201e3789df4cd8bd6fe7c809a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78303475"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93332659"
 ---
 # <a name="array_contains-azure-cosmos-db"></a>ARRAY_CONTAINS (Azure Cosmos DB)
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
+
 Retourne une valeur booléenne qui indique si le tableau contient la valeur spécifiée. Vous pouvez rechercher une correspondance partielle ou totale d'un objet en utilisant une expression booléenne dans la commande. 
 
 ## <a name="syntax"></a>Syntaxe

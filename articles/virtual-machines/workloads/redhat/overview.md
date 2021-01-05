@@ -1,20 +1,19 @@
 ---
 title: Vue d’ensemble des charges de travail Red Hat sur Azure | Microsoft Docs
 description: Découvrez les offres de produits Red Hat disponibles sur Azure.
-services: virtual-machines-linux
 author: asinn826
-manager: borisb2015
 ms.service: virtual-machines-linux
-ms.workload: infrastructure-services
+ms.subservice: workloads
 ms.topic: overview
 ms.date: 02/10/2020
 ms.author: alsin
-ms.openlocfilehash: 718447e1dbf597af4349eab0be78a2bb544dec90
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.reviewer: cynthn
+ms.openlocfilehash: 09612ff3d86c669801f9e824d367a2b9a5bb10ac
+ms.sourcegitcommit: beacda0b2b4b3a415b16ac2f58ddfb03dd1a04cf
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "78970174"
+ms.lasthandoff: 12/31/2020
+ms.locfileid: "97830647"
 ---
 # <a name="red-hat-workloads-on-azure"></a>Charges de travail Red Hat sur Azure
 
@@ -37,7 +36,7 @@ Vous pouvez utiliser les images avec paiement à l’utilisation si vous ne souh
 ### <a name="red-hat-gold-images"></a>Images Red Hat Gold
 
 Azure propose également des images Red Hat Gold (`rhel-byos`). Ces images peuvent être utiles aux clients qui ont des abonnements Red Hat existants et souhaitent les utiliser dans Azure. Vous devez activer vos abonnements Red Hat existants pour Red Hat Cloud Access avant de pouvoir les utiliser dans Azure. L’accès à ces images vous est accordé automatiquement quand vos abonnements Red Hat sont activés pour Cloud Access et qu’ils répondent aux conditions d’éligibilité. L’utilisation de ces images permet à un client d’éviter une double facturation qui peut être encourue suite à l’utilisation des images avec paiement à l’utilisation.
-* Découvrez comment [activer vos abonnements Red Hat pour Cloud Access avec Azure](https://access.redhat.com/documentation/en-us/red_hat_subscription_management/1/html/red_hat_cloud_access_reference_guide/con-enable-subs).
+* Découvrez comment [activer vos abonnements Red Hat pour Cloud Access avec Azure](https://access.redhat.com/documentation/en-us/red_hat_subscription_management/1/html/red_hat_cloud_access_reference_guide/enabling-and-maintaining-subs_cloud-access).
 * Découvrez comment [localiser les images Red Hat Gold à l’aide du portail Azure, de l’interface Azure CLI ou d’une applet de commande PowerShell](./byos.md).
 
 > [!NOTE]
@@ -45,7 +44,7 @@ Azure propose également des images Red Hat Gold (`rhel-byos`). Ces images peuve
 
 ### <a name="generation-2-images"></a>Images de 2e génération
 
-Les machines virtuelles de 2e génération fournissent quelques nouvelles fonctionnalités par rapport aux machines virtuelles de 1re génération. Pour plus d’informations, consultez la [documentation sur la 2e génération](https://docs.microsoft.com/azure/virtual-machines/linux/generation-2). En ce qui concerne les images RHEL, la principale différence est la suivante : les machines virtuelles de 2e génération utilisent une interface UEFI et non une interface de microprogramme BIOS. Par ailleurs, au moment du démarrage, elles utilisent une table de partition GUID et non un enregistrement de démarrage principal. L’utilisation d’une table de partition GUID permet, entre autres, des tailles de disque de système d’exploitation supérieures à 2 To. De plus, les [machines virtuelles de la série Mv2](../../mv2-series.md) s’exécutent uniquement sur les images de 2e génération.
+Les machines virtuelles de 2e génération fournissent quelques nouvelles fonctionnalités par rapport aux machines virtuelles de 1re génération. Pour plus d’informations, consultez la [documentation sur la 2e génération](../../generation-2.md). En ce qui concerne les images RHEL, la principale différence est la suivante : les machines virtuelles de 2e génération utilisent une interface UEFI et non une interface de microprogramme BIOS. Par ailleurs, au moment du démarrage, elles utilisent une table de partition GUID et non un enregistrement de démarrage principal. L’utilisation d’une table de partition GUID permet, entre autres, des tailles de disque de système d’exploitation supérieures à 2 To. De plus, les [machines virtuelles de la série Mv2](../../mv2-series.md) s’exécutent uniquement sur les images de 2e génération.
 
 Les images RHEL de 2e génération sont disponibles sur la Place de Marché Azure. Recherchez « gen2 » dans la référence SKU d’image dans la liste complète des images qui s’affiche quand vous utilisez l’interface Azure CLI. Accédez à l’onglet **Avancé** durant le processus de déploiement de la machine virtuelle pour déployer une machine virtuelle de 2e génération.
 

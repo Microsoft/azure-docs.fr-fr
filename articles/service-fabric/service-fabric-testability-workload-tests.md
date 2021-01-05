@@ -1,16 +1,15 @@
 ---
 title: Simuler des défaillances dans des applications Azure Service Fabric
 description: Découvrez comment renforcer vos services Azure Service Fabric contre les défaillances avec et sans pertes de données.
-author: anmolah
 ms.topic: conceptual
 ms.date: 06/15/2017
-ms.author: anmola
-ms.openlocfilehash: d3d9f6478336c59adb875bf21438d5ffa457b1d4
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: c714ae30c64ea073cbac521eac5e15a8d968b7ea
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75645988"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91531308"
 ---
 # <a name="simulate-failures-during-service-workloads"></a>Simuler des défaillances au cours des charges de travail de services
 Grâce aux scénarios de testabilité dans Azure Service Fabric, les développeurs n’ont plus à s’inquiéter des erreurs individuelles. Toutefois, certains scénarios nécessitent l’entrelacement explicite de la charge de travail et des défaillances du client. Cet entrelacement interdit toute inactivité du service pendant la défaillance. Compte tenu du niveau de contrôle procuré par la testabilité, il est possible de cibler des points précis de l’exécution de la charge de travail. Cette incorporation d’erreur à différents états de l’application permet d’identifier les bogues et d’améliorer la qualité.

@@ -1,15 +1,16 @@
 ---
 title: Forum Aux Questions - LUIS
 description: Cet article contient des réponses aux questions fréquemment posées sur Language Understanding (LUIS).
-ms.topic: conceptual
+ms.service: cognitive-services
+ms.subservice: language-understanding
+ms.topic: troubleshooting
 ms.date: 05/06/2020
-ms.author: diberry
-ms.openlocfilehash: 3a30dd1c55d1ee4314e5a9a2f14ffe832994c467
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.openlocfilehash: e803fa393d85f7f0b4849aed96356b7a4e77d83f
+ms.sourcegitcommit: 10d00006fec1f4b69289ce18fdd0452c3458eca5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83592846"
+ms.lasthandoff: 11/21/2020
+ms.locfileid: "96000128"
 ---
 # <a name="language-understanding-frequently-asked-questions-faq"></a>Forum aux questions (FAQ) sur Language Understanding
 
@@ -43,7 +44,7 @@ Oui, il est conseillé de former votre intention **None** avec davantage d’én
 Consultez le didacticiel sur l’[API Vérification orthographique Bing v7](luis-tutorial-bing-spellcheck.md). LUIS applique les limites imposées par l’API Vérification orthographique v7.
 
 ### <a name="how-do-i-edit-my-luis-app-programmatically"></a>Comment faire pour modifier mon application LUIS par programmation ?
-Pour modifier votre application LUIS par programmation, utilisez l’[API Création](https://go.microsoft.com/fwlink/?linkid=2092087). Pour obtenir des exemples d’appel de l’API Création, voir [Appel de l’API Création de LUIS](./get-started-get-model-rest-apis.md) et [Créer une application LUIS par programmation à l’aide de Node.js](./luis-tutorial-node-import-utterances-csv.md). L’API Création exige que vous utilisiez une [clé de création](luis-concept-keys.md#azure-resources-for-luis) plutôt qu’une clé de point de terminaison. La création par programmation permet jusqu’à 1 000 000 d’appels par mois et cinq transactions par seconde. Pour plus d’informations sur les clés à utiliser avec LUIS, voir [Gérer les clés](./luis-concept-keys.md).
+Pour modifier votre application LUIS par programmation, utilisez l’[API Création](https://go.microsoft.com/fwlink/?linkid=2092087). Pour obtenir des exemples d’appel de l’API Création, voir [Appel de l’API Création de LUIS](./get-started-get-model-rest-apis.md) et [Créer une application LUIS par programmation à l’aide de Node.js](./luis-tutorial-node-import-utterances-csv.md). L’API Création exige que vous utilisiez une [clé de création](luis-how-to-azure-subscription.md#azure-resources-for-luis) plutôt qu’une clé de point de terminaison. La création par programmation permet jusqu’à 1 000 000 d’appels par mois et cinq transactions par seconde. Pour plus d’informations sur les clés à utiliser avec LUIS, voir [Gérer les clés](./luis-how-to-azure-subscription.md).
 
 ### <a name="where-is-the-pattern-feature-that-provided-regular-expression-matching"></a>Où est la fonctionnalité Modèle qui assurait la mise en correspondance d’expression régulière ?
 La **fonctionnalité Modèle** précédente est actuellement désapprouvée. Elle est remplacée par **[Modèles](luis-concept-patterns.md)** .
@@ -76,7 +77,7 @@ Découvrez-en plus sur les [erreurs d’importation de version](luis-how-to-mana
 
 ## <a name="collaborating-and-contributing"></a>Collaboration et contribution
 
-### <a name="how-do-i-give-collaborators-access-to-luis-with-azure-active-directory-azure-ad-or-role-based-access-control-rbac"></a>Comment permettre aux collaborateurs d'accéder à LUIS avec Azure Active Directory (Azure AD) ou le contrôle d'accès en fonction du rôle (RBAC) ?
+### <a name="how-do-i-give-collaborators-access-to-luis-with-azure-active-directory-azure-ad-or-azure-role-based-access-control-azure-rbac"></a>Comment permettre aux collaborateurs d'accéder à LUIS avec Azure Active Directory (Azure AD) ou le contrôle d'accès en fonction du rôle Azure (Azure RBAC) ?
 
 Pour savoir comment octroyer l'accès aux collaborateurs, consultez [Ressources Azure Active Directory](luis-how-to-collaborate.md#azure-active-directory-resources) et [Utilisateur locataire Azure Active Directory](luis-how-to-collaborate.md#azure-active-directory-tenant-user).
 
@@ -90,7 +91,7 @@ Vous obtenez des codes d’état d’erreur 403 et 429 lorsque vous dépassez le
 
 Lorsque vous utilisez l’ensemble des 1 000 requêtes de point de terminaison gratuites ou quand vous dépassez le quota de transactions mensuel de votre niveau tarifaire, vous recevez un code d’état d’erreur HTTP 403.
 
-Pour corriger cette erreur, vous devez [modifier votre niveau tarifaire](luis-how-to-azure-subscription.md#change-pricing-tier) pour en choisir un de niveau supérieur ou [créer une ressource](get-started-portal-deploy-app.md#create-the-endpoint-resource) et [l’attribuer à votre application](get-started-portal-deploy-app.md#assign-the-resource-key-to-the-luis-app-in-the-luis-portal).
+Pour corriger cette erreur, vous devez [modifier votre niveau tarifaire](luis-how-to-azure-subscription.md#change-the-pricing-tier) pour en choisir un de niveau supérieur ou [créer une ressource](get-started-portal-deploy-app.md#create-the-endpoint-resource) et [l’attribuer à votre application](get-started-portal-deploy-app.md#assign-the-resource-key-to-the-luis-app-in-the-luis-portal).
 
 Les solutions pour corriger cette erreur incluent :
 
@@ -105,9 +106,9 @@ Ce code d’état est renvoyé lorsque le nombre de transactions par seconde dé
 
 Les solutions pour corriger le problème incluent :
 
-* Vous pouvez [augmenter votre niveau tarifaire](luis-how-to-azure-subscription.md#change-pricing-tier), si vous n’êtes pas au niveau le plus élevé.
+* Vous pouvez [augmenter votre niveau tarifaire](luis-how-to-azure-subscription.md#change-the-pricing-tier), si vous n’êtes pas au niveau le plus élevé.
 * Si votre utilisation dépasse le niveau tarifaire le plus élevé, ajoutez plus de ressources Language Understanding avec un équilibreur de charge placé devant celles-ci. Le [conteneur Language Understanding](luis-container-howto.md) avec Kubernetes ou Docker Compose peut vous y aider.
-* Vous pouvez réguler vos requêtes d’application cliente avec une [stratégie de nouvelles tentatives](https://docs.microsoft.com/azure/architecture/best-practices/transient-faults#general-guidelines) que vous implémentez lorsque vous recevez ce code d’état.
+* Vous pouvez réguler vos requêtes d’application cliente avec une [stratégie de nouvelles tentatives](/azure/architecture/best-practices/transient-faults#general-guidelines) que vous implémentez lorsque vous recevez ce code d’état.
 
 ### <a name="my-endpoint-query-returned-unexpected-results-what-should-i-do"></a>Ma requête de point de terminaison a retourné des résultats inattendus. Que dois-je faire ?
 
@@ -123,7 +124,7 @@ Pour obtenir d’autres conseils, passez en revue les [bonnes pratiques](luis-co
 LUIS [tokénise](luis-glossary.md#token) l’énoncé en fonction de la [culture](luis-language-support.md#tokenization). Tant la valeur d’origine que la valeur tokénisée sont disponibles pour l’[extraction de données](luis-concept-data-extraction.md#tokenized-entity-returned).
 
 ### <a name="how-do-i-create-and-assign-a-luis-endpoint-key"></a>Comment faire pour créer et affecter une clé de point de terminaison LUIS ?
-[Créez la clé de point de terminaison](luis-how-to-azure-subscription.md) dans Azure pour votre niveau de [service](https://azure.microsoft.com/pricing/details/cognitive-services/language-understanding-intelligent-services/). [Attribuez la clé](luis-how-to-azure-subscription.md) dans la page **[Ressources Azure](luis-how-to-azure-subscription.md)** . Il n’existe d’API pour cette action. Ensuite, vous devez modifier la requête HTTP adressée au point de terminaison de façon à [utiliser la nouvelle clé de point de terminaison](luis-concept-keys.md).
+[Créez la clé de point de terminaison](luis-how-to-azure-subscription.md) dans Azure pour votre niveau de [service](https://azure.microsoft.com/pricing/details/cognitive-services/language-understanding-intelligent-services/). [Attribuez la clé](luis-how-to-azure-subscription.md) dans la page **[Ressources Azure](luis-how-to-azure-subscription.md)** . Il n’existe d’API pour cette action. Ensuite, vous devez modifier la requête HTTP adressée au point de terminaison de façon à [utiliser la nouvelle clé de point de terminaison](luis-how-to-azure-subscription.md).
 
 ### <a name="how-do-i-interpret-luis-scores"></a>Comment interpréter les scores de LUIS ?
 Votre système doit utiliser l’intention de score le plus élevée, quelle qu’en soit la valeur. Par exemple, un score inférieur à 0,5 (moins de 50 %) ne signifie pas nécessairement que la confiance de LUIS est faible. La fourniture de données d’entraînement supplémentaires peut aider à augmenter le [score](luis-concept-prediction-score.md) de l’intention la plus probable.
@@ -144,10 +145,10 @@ Get-AzCognitiveServicesAccountUsage -ResourceGroupName <your-resource-group> -Na
 ```
 
 ### <a name="my-luis-app-was-working-yesterday-but-today-im-getting-403-errors-i-didnt-change-the-app-how-do-i-fix-it"></a>Mon application LUIS fonctionnait hier, et aujourd’hui j’obtiens des erreurs 403. Je n’ai pas modifié l’application. Comment la corriger ?
-Suivez ces [instructions](#how-do-i-create-and-assign-a-luis-endpoint-key) pour créer une clé de point de terminaison LUIS et l’affecter à l’application. Ensuite, vous devez modifier la requête HTTP de l’application cliente adressée au point de terminaison de façon à [utiliser la nouvelle clé de point de terminaison](luis-concept-keys.md). Si vous avez créé une nouvelle ressource dans une autre région, modifiez également la région de la requête du client HTTP.
+Suivez ces [instructions](#how-do-i-create-and-assign-a-luis-endpoint-key) pour créer une clé de point de terminaison LUIS et l’affecter à l’application. Ensuite, vous devez modifier la requête HTTP de l’application cliente adressée au point de terminaison de façon à [utiliser la nouvelle clé de point de terminaison](luis-how-to-azure-subscription.md). Si vous avez créé une nouvelle ressource dans une autre région, modifiez également la région de la requête du client HTTP.
 
 ### <a name="how-do-i-secure-my-luis-endpoint"></a>Comment faire pour sécuriser mon point de terminaison LUIS ?
-Voir [Sécurisation du point de terminaison](luis-concept-keys.md#securing-the-endpoint).
+Voir [Sécurisation du point de terminaison](luis-how-to-azure-subscription.md#securing-the-endpoint).
 
 ## <a name="working-within-luis-limits"></a>Respect des limites de LUIS
 
@@ -206,7 +207,7 @@ Si votre application existait avant la disponibilité générale de LUIS, les cl
 
 ### <a name="how-do-i-know-what-key-i-need-where-i-get-it-and-what-i-do-with-it"></a>Comment savoir de quelle clé j'ai besoin, où l'obtenir et ce que je dois en faire ?
 
-Pour en savoir plus sur les différences entre la clé de création et la clé de runtime de prédiction, voir [Clés de point de terminaison de création et de prédiction de requête dans LUIS](luis-concept-keys.md).
+Pour en savoir plus sur les différences entre la clé de création et la clé de runtime de prédiction, voir [Clés de point de terminaison de création et de prédiction de requête dans LUIS](luis-how-to-azure-subscription.md).
 
 ### <a name="i-got-an-error-about-being-out-of-quota-how-do-i-fix-it"></a>J'ai rencontré une erreur de dépassement de quota. Comment la corriger ?
 
@@ -267,7 +268,7 @@ Il faut d’abord constater si le problème est lié à LUIS ou survient en deho
 #### <a name="resolve-issue-in-luis"></a>Résoudre le problème dans LUIS
 Passer le même énoncé à LUIS à partir du [point de terminaison LUIS](luis-get-started-create-app.md#query-the-v2-api-prediction-endpoint). Si vous recevez une erreur, résolvez le problème dans LUIS jusqu'à ce que l’erreur ne soit plus renvoyée. Les erreurs courantes sont les suivantes :
 
-* `Out of call volume quota. Quota will be replenished in <time>.` -Ce problème indique que vous devez passer d’une clé de création à une [clé de point de terminaison](luis-how-to-azure-subscription.md) ou changer les [niveaux de service](luis-how-to-azure-subscription.md#change-pricing-tier).
+* `Out of call volume quota. Quota will be replenished in <time>.` -Ce problème indique que vous devez passer d’une clé de création à une [clé de point de terminaison](luis-how-to-azure-subscription.md) ou changer les [niveaux de service](luis-how-to-azure-subscription.md#change-the-pricing-tier).
 
 #### <a name="resolve-issue-in-azure-bot-service"></a>Résoudre le problème dans Azure Bot Service
 
@@ -285,7 +286,7 @@ Si vous utilisez Azure Bot Service et que le problème est que le **test dans la
 
 #### <a name="resolve-issue-while-debugging-on-local-machine-with-bot-framework"></a>Résolvez le problème en déboguant sur un ordinateur local avec Bot Framework.
 
-Pour en savoir plus sur le débogage local d’un bot, consultez [Déboguer un robot](https://docs.microsoft.com/azure/bot-service/bot-service-debug-bot?view=azure-bot-service-4.0).
+Pour en savoir plus sur le débogage local d’un bot, consultez [Déboguer un robot](/azure/bot-service/bot-service-debug-bot?view=azure-bot-service-4.0).
 
 ## <a name="integrating-luis"></a>Intégration de LUIS
 
@@ -295,7 +296,7 @@ Si vous choisissez un modèle LUIS, puis le bouton **Sélectionner** dans le vol
 ![Région du bot d’application web de modèle LUIS](./media/luis-faq/web-app-bot-location.png)
 
 ### <a name="what-luis-regions-support-bot-framework-speech-priming"></a>Quelles régions LUIS prennent en charge la préparation vocale de Bot Framework ?
-La [préparation vocale](https://docs.microsoft.com/bot-framework/bot-service-manage-speech-priming) est prise en charge uniquement pour les applications LUIS dans l’instance centrale (États-Unis).
+La [préparation vocale](/bot-framework/bot-service-manage-speech-priming) est prise en charge uniquement pour les applications LUIS dans l’instance centrale (États-Unis).
 
 ## <a name="api-programming-strategies"></a>Stratégies de programmation d'API
 
@@ -333,4 +334,4 @@ Vidéos :
 
 Pour en savoir plus sur LUIS, voir les ressources suivantes :
 * [Questions de Stack Overflow balisées avec LUIS](https://stackoverflow.com/questions/tagged/luis)
-* [Forum Language Understanding Intelligent Services (LUIS) de MSDN](https://social.msdn.microsoft.com/forums/azure/home?forum=LUIS)
+* [Page de questions Microsoft Q&A sur MSDN Language Understanding Intelligent Services (LUIS)](/answers/topics/azure-language-understanding.html)

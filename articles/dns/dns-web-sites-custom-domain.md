@@ -5,14 +5,14 @@ services: dns
 author: rohinkoul
 ms.service: dns
 ms.topic: tutorial
-ms.date: 3/11/2019
+ms.date: 10/20/2020
 ms.author: rohink
-ms.openlocfilehash: 8722a52a097f7f830287d125a4e56e9bbcb9f932
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 369c7dab174f0269797b10635882a6821ade8311
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "76939093"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94952911"
 ---
 # <a name="tutorial-create-dns-records-in-a-custom-domain-for-a-web-app"></a>Didacticiel : créer des enregistrements DNS pour une application web dans un domaine personnalisé 
 
@@ -35,27 +35,26 @@ Dans ce tutoriel, vous allez apprendre à :
 > * Créer un enregistrement A et TXT pour votre domaine personnalisé
 > * Créer un enregistrement CNAME pour votre domaine personnalisé
 > * Tester les nouveaux enregistrements
-> * Ajouter les noms d'hôte personnalisés à votre application web
+> * Ajouter des noms d’hôte personnalisés à votre application web
 > * Tester les noms d'hôtes personnalisés
 
+## <a name="prerequisites"></a>Prérequis
 
 Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
-
-[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
-
-## <a name="prerequisites"></a>Conditions préalables requises
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 
 * Pour le test, vous devez disposer d’un nom de domaine disponible que vous pouvez héberger dans Azure DNS. Vous devez disposer d’un contrôle total de ce domaine. Le contrôle total comprend notamment la possibilité de définir les enregistrements de serveur de noms pour le domaine.
-* [Créez une application App Service](../app-service/app-service-web-get-started-html.md), ou utilisez une application créée pour un autre didacticiel.
+* [Créez une application App Service](../app-service/quickstart-html.md), ou utilisez une application créée pour un autre didacticiel.
 
 * Créez une zone DNS dans Azure DNS et déléguez cette zone de votre bureau d’enregistrement à Azure DNS.
 
-   1. Pour créer une zone DNS, suivez la procédure décrite dans [Créer une zone DNS](dns-getstarted-create-dnszone.md).
+   1. Pour créer une zone DNS, suivez la procédure décrite dans [Créer une zone DNS](./dns-getstarted-powershell.md).
    2. Pour déléguer votre zone à Azure DNS, suivez la procédure décrite dans [Délégation de domaine DNS](dns-delegate-domain-azure-dns.md).
 
 Après avoir créé une zone et l’avoir déléguée à Azure DNS, vous pouvez ensuite créer des enregistrements pour votre domaine personnalisé.
+
+[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
 
 ## <a name="create-an-a-record-and-txt-record"></a>Créer un enregistrement A et un enregistrement TXT
 

@@ -3,12 +3,12 @@ title: Présentation de Reliable Collections
 description: Les services avec état de Service Fabric fournissent des collections fiables qui vous permettent d’écrire des applications cloud hautement disponibles, évolutives et à faible latence.
 ms.topic: conceptual
 ms.date: 3/10/2020
-ms.openlocfilehash: 78ecc57a4da43bf416839226253e6d0e2f4c1651
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: 6e0f39b994087fe44038e62e85326945589c719a
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81398432"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86245124"
 ---
 # <a name="introduction-to-reliable-collections-in-azure-service-fabric-stateful-services"></a>Introduction aux Collections fiables dans les services avec état d’Azure Service Fabric
 
@@ -40,8 +40,8 @@ Les API de Collections fiables sont une évolution des API de collections simu
 
 Actuellement, **Microsoft.ServiceFabric.Data.Collections** contient trois collections :
 
-* [Dictionnaire fiable](https://msdn.microsoft.com/library/azure/dn971511.aspx) : représente une collection répliquée, transactionnelle et asynchrone de paires clé/valeur. Semblables à celles de **ConcurrentDictionary**, la clé et la valeur peuvent être de tout type.
-* [File d’attente fiable](https://msdn.microsoft.com/library/azure/dn971527.aspx) : représente une file d’attente FIFO stricte, répliquée, transactionnelle et asynchrone. Semblable à celle de **ConcurrentQueue**, la valeur peut être de tout type.
+* [Dictionnaire fiable](/dotnet/api/microsoft.servicefabric.data.collections.ireliabledictionary-2?view=azure-dotnet#microsoft_servicefabric_data_collections_ireliabledictionary_2) : représente une collection répliquée, transactionnelle et asynchrone de paires clé/valeur. Semblables à celles de **ConcurrentDictionary**, la clé et la valeur peuvent être de tout type.
+* [File d’attente fiable](/dotnet/api/microsoft.servicefabric.data.collections.ireliablequeue-1?view=azure-dotnet#microsoft_servicefabric_data_collections_ireliablequeue_1) : représente une file d’attente FIFO stricte, répliquée, transactionnelle et asynchrone. Semblable à celle de **ConcurrentQueue**, la valeur peut être de tout type.
 * [File d’attente simultanée fiable](service-fabric-reliable-services-reliable-concurrent-queue.md) : représente une file d’attente de classement de meilleur effort répliquée, transactionnelle et asynchrone, pour un débit élevé. Semblable à celle de **ConcurrentQueue**, la valeur peut être de tout type.
 
 ## <a name="next-steps"></a>Étapes suivantes
@@ -57,4 +57,4 @@ Actuellement, **Microsoft.ServiceFabric.Data.Collections** contient trois collec
   * [Configuration du Gestionnaire d’état fiable](service-fabric-reliable-services-configuration.md)
 * Autres
   * [Démarrage rapide de Reliable Services](service-fabric-reliable-services-quick-start.md)
-  * [Référence du développeur pour les Collections fiables](https://msdn.microsoft.com/library/azure/microsoft.servicefabric.data.collections.aspx)
+  * [Référence du développeur pour les Collections fiables](/dotnet/api/microsoft.servicefabric.data.collections?view=azure-dotnet#microsoft_servicefabric_data_collections)

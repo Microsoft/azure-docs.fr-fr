@@ -1,5 +1,5 @@
 ---
-title: 'Démarrage rapide : Définir et récupérer une clé dans Azure Key Vault'
+title: Créer et récupérer les attributs d’une clé dans Azure Key Vault - Azure CLI
 description: Démarrage rapide montrant comment définir et récupérer une clé dans Azure Key Vault à l’aide d’Azure CLI
 services: key-vault
 author: msmbaldwin
@@ -10,31 +10,23 @@ ms.subservice: keys
 ms.topic: quickstart
 ms.date: 03/30/2020
 ms.author: mbaldwin
-ms.openlocfilehash: defc5317c127d771786989748e404285ca0c0584
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: 69801c9b70ea3d34838ba0b35deab3e6802ecb1f
+ms.sourcegitcommit: 5831eebdecaa68c3e006069b3a00f724bea0875a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81420303"
+ms.lasthandoff: 11/11/2020
+ms.locfileid: "94515776"
 ---
 # <a name="quickstart-set-and-retrieve-a-key-from-azure-key-vault-using-azure-cli"></a>Démarrage rapide : Définir et récupérer une clé dans Azure Key Vault avec Azure CLI
 
 Dans ce guide de démarrage rapide, vous créez un coffre de clés dans Azure Key Vault avec Azure CLI. Azure Key Vault est un service cloud qui fonctionne comme un magasin des secrets sécurisé. Vous pouvez stocker des clés, des mots de passe, des certificats et d’autres secrets en toute sécurité. Pour plus d’informations sur Key Vault, consultez la [présentation](../general/overview.md). Azure CLI vous permet de créer et gérer des ressources Azure à l’aide de commandes ou de scripts. Une fois que vous avez terminé, vous allez stocker une clé.
 
-Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
+[!INCLUDE [quickstarts-free-trial-note](../../../includes/quickstarts-free-trial-note.md)]
 
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../../includes/azure-cli-prepare-your-environment.md)]
 
-[!INCLUDE [cloud-shell-try-it.md](../../../includes/cloud-shell-try-it.md)]
-
-Si vous choisissez d’installer et d’utiliser l’interface de ligne de commande en local, ce guide de démarrage rapide nécessite au minimum la version 2.0.4 d’Azure CLI. Exécutez `az --version` pour trouver la version. Si vous devez effectuer une installation ou une mise à niveau, consultez [Installer Azure CLI]( /cli/azure/install-azure-cli).
-
-Pour vous connecter à Azure à l’aide de l’interface CLI, vous pouvez taper la commande suivante :
-
-```azurecli
-az login
-```
-
-Pour plus d’informations sur les options de connexion par le biais de l’interface CLI, consultez [Se connecter avec Azure CLI](/cli/azure/authenticate-azure-cli?view=azure-cli-latest)
+ - Pour ce guide de démarrage rapide, vous devez avoir la version 2.0.4 ou ultérieure de l’interface Azure CLI. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée.
 
 ## <a name="create-a-resource-group"></a>Créer un groupe de ressources
 
@@ -73,9 +65,9 @@ Tapez les commandes ci-dessous pour créer une clé appelée **ExampleKey** :
 az keyvault key create --vault-name "Contoso-Vault2" -n ExampleKey --protection software
 ```
 
-Vous pouvez maintenant référencer cette clé que vous avez ajoutée à Azure Key Vault à l’aide de son URI. Utilisez **https://Contoso-Vault2.vault.azure.net/keys/ExampleKey** pour obtenir la version actuelle. 
+Vous pouvez maintenant référencer cette clé que vous avez ajoutée à Azure Key Vault à l’aide de son URI. Utilisez **« https://Contoso-Vault2.vault.azure.net/keys/ExampleKey  »** pour obtenir la version actuelle. 
 
-Pour voir la clé stockée précédemment :
+Pour afficher la clé stockée précédemment :
 
 ```azurecli
 

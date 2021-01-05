@@ -1,22 +1,22 @@
 ---
 title: 'Passerelle VPN Azure : Créer et installer les fichiers de configuration du client VPN - Connexions P2S RADIUS'
-description: Créer des fichiers de configuration du client VPN Windows, Mac OS X et Linux pour les connexions utilisant l’authentification RADIUS.
+description: Créer des fichiers config du client VPN Windows, OS X et Linux pour les connexions utilisant l’authentification RADIUS.
 services: vpn-gateway
 author: cherylmc
 ms.service: vpn-gateway
-ms.topic: article
-ms.date: 01/10/2020
+ms.topic: how-to
+ms.date: 09/02/2020
 ms.author: cherylmc
-ms.openlocfilehash: 69517d69a26364cf1cc950d7aaa849522decacf1
-ms.sourcegitcommit: ffc6e4f37233a82fcb14deca0c47f67a7d79ce5c
+ms.openlocfilehash: e6d811e19bb19c8c8bf96764cfcca2b1294f4a85
+ms.sourcegitcommit: 3792cf7efc12e357f0e3b65638ea7673651db6e1
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81732737"
+ms.lasthandoff: 09/29/2020
+ms.locfileid: "91440056"
 ---
 # <a name="create-and-install-vpn-client-configuration-files-for-p2s-radius-authentication"></a>Créer et installer les fichiers de configuration du client VPN pour une authentification P2S RADIUS
 
-Pour vous connecter à un réseau virtuel de point à site, vous devez configurer l’appareil client à partir duquel vous allez vous connecter. Vous pouvez créer des connexions VPN de point à site à partir d’appareils clients Windows, Mac OS X et Linux. 
+Pour vous connecter à un réseau virtuel de point à site, vous devez configurer l’appareil client à partir duquel vous allez vous connecter. Vous pouvez créer des connexions VPN de point à site à partir d’appareils clients Windows, OS X et Linux. 
 
 Lorsque vous utilisez l’authentification RADIUS, vous disposez de plusieurs options d’authentification : authentification par nom d’utilisateur/mot de passe, authentification par certificat, et bien d’autres. La configuration du client VPN est différente pour chaque type d’authentification. Pour configurer le client VPN, vous utilisez les fichiers de configuration du client qui contiennent les paramètres requis. Cet article vous aide à créer et installer la configuration du client VPN pour le type d’authentification RADIUS que vous souhaitez utiliser.
 
@@ -36,7 +36,7 @@ Le flux de travail de configuration pour l’authentification RADIUS point à si
 >
 >
 
-Pour utiliser les sections de cet article, vous devez d’abord décider quel type d’authentification vous souhaitez utiliser : nom d’utilisateur/mot de passe, certificat ou d’autres types d’authentification. Les procédures pour Windows, Mac OS X et Linux sont détaillées dans chaque section (pour le moment, les procédures disponibles sont limitées).
+Pour utiliser les sections de cet article, vous devez d’abord décider quel type d’authentification vous souhaitez utiliser : nom d’utilisateur/mot de passe, certificat ou d’autres types d’authentification. Les procédures pour Windows, OS X et Linux sont détaillées dans chaque section (pour le moment, les procédures disponibles sont limitées).
 
 
 ## <a name="usernamepassword-authentication"></a><a name="adeap"></a>Authentification par nom d’utilisateur/mot de passe
@@ -144,7 +144,7 @@ Suivez les étapes suivantes pour configurer le client VPN Windows natif pour un
     ![Détails de la connexion VPN](./media/point-to-site-vpn-client-configuration-radius/adconnection.png)
 11. Sélectionnez **Paramètres d’authentification**. Sélectionnez **Nom d’utilisateur** dans la liste et entrez vos informations d’identification. Si vous avez entré les informations d’identification précédemment, alors **Nom d’utilisateur** est automatiquement sélectionné dans la liste et le nom d’utilisateur et le mot de passe sont déjà renseignés. Sélectionnez **OK** pour enregistrer les paramètres.
 
-    ![Authentication settings](./media/point-to-site-vpn-client-configuration-radius/adauthentication.png)
+    ![Capture d’écran montrant la liste déroulante « Paramètres d’authentification » avec l’option « Nom d’utilisateur » sélectionnée.](./media/point-to-site-vpn-client-configuration-radius/adauthentication.png)
 12. Dans la boîte de dialogue **Réseau**, sélectionnez **Appliquer** pour enregistrer les modifications. Pour lancer la connexion, sélectionnez **Connecter**.
 
 #### <a name="linux-vpn-client-setup-through-strongswan"></a><a name="adlinuxcli"></a>Configuration du client VPN Linux via strongSwan

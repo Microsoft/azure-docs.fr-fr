@@ -1,24 +1,14 @@
 ---
 title: Prérécupérer les messages Azure Service Bus | Microsoft Docs
 description: Améliorez les performances en prérécupérant les messages Azure Service Bus. Les messages sont immédiatement récupérables localement, avant que l'application les demande.
-services: service-bus-messaging
-documentationcenter: ''
-author: axisc
-manager: timlt
-editor: spelluru
-ms.service: service-bus-messaging
-ms.workload: na
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
-ms.date: 01/24/2020
-ms.author: aschhab
-ms.openlocfilehash: 80717ab940d27e9bf108b3740309bcd7d71668fd
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 06/23/2020
+ms.openlocfilehash: 05e23b0590f0c04171efda8fb561b4c2664ed096
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76760655"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85341046"
 ---
 # <a name="prefetch-azure-service-bus-messages"></a>Prérécupérer les messages Azure Service Bus
 

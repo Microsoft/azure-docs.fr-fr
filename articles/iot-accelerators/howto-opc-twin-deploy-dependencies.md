@@ -8,20 +8,23 @@ ms.topic: conceptual
 ms.service: industrial-iot
 services: iot-industrialiot
 manager: philmea
-ms.openlocfilehash: 231d1efa02ec80e8ad56a8895d4262d774480111
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 42024fc506de7befed7c44ebcc410756b6f43a35
+ms.sourcegitcommit: a92fbc09b859941ed64128db6ff72b7a7bcec6ab
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "73824098"
+ms.lasthandoff: 10/15/2020
+ms.locfileid: "92078984"
 ---
 # <a name="deploying-dependencies-for-local-development"></a>Déploiement de dépendances pour un développement local
+
+> [!IMPORTANT]
+> Pendant la mise à jour de cet article, consultez [Azure Industrial IoT](https://azure.github.io/Industrial-IoT/) pour obtenir le contenu le plus récent.
 
 Cet article explique comment déployer seulement les services de plateforme Azure nécessaires pour le développement et le débogage local.   À la fin, vous aurez un groupe de ressources déployé qui contient tout ce dont vous avez besoin pour le développement et le débogage local.
 
 ## <a name="deploy-azure-platform-services"></a>Déployer des services de plateforme Azure
 
-1. Vérifiez que PowerShell et les extensions [AzureRM PowerShell](https://docs.microsoft.com/powershell/azure/azurerm/install-azurerm-ps) sont installés.  Ouvrez une invite de commandes ou un terminal, et exécutez :
+1. Vérifiez que PowerShell et les extensions [AzureRM PowerShell](/powershell/azure/azurerm/install-azurerm-ps) sont installés.  Ouvrez une invite de commandes ou un terminal, et exécutez :
 
    ```bash
    git clone https://github.com/Azure/azure-iiot-components
@@ -42,12 +45,12 @@ Cet article explique comment déployer seulement les services de plateforme Azur
 
 Veillez à utiliser un nom de groupe de ressources court et simple.  Le nom est également utilisé pour nommer les ressources : il doit donc être conforme aux spécifications de nommage des ressources.  
 
-### <a name="azure-active-directory-aad-registration"></a>Inscription dans Azure Active Directory (AAD)
+### <a name="azure-active-directory-ad-registration"></a>Inscription dans Azure Active Directory (AD)
 
-Le script de déploiement essaie d’inscrire les applications AAD dans Azure Active Directory.  En fonction de vos droits sur le locataire AAD sélectionné, cette opération peut échouer.   Vous disposez de trois options :
+Le script de déploiement essaie d’inscrire les applications Azure AD dans Azure AD.  En fonction de vos droits sur le locataire Azure AD sélectionné, cette opération peut échouer. Vous disposez de trois options :
 
-1. Si vous avez choisi un locataire AAD dans une liste de locataires, redémarrez le script et choisissez un autre locataire dans la liste.
-2. Vous pouvez aussi déployer un locataire AAD privé, redémarrer le script et choisir de l’utiliser.
+1. Si vous avez choisi un locataire Azure AD dans une liste de locataires, redémarrez le script et choisissez un autre locataire dans la liste.
+2. Vous pouvez aussi déployer un locataire Azure AD privé, redémarrer le script et choisir de l’utiliser.
 3. Continuer sans authentification.  Comme vous exécutez vos microservices localement, ceci est acceptable, mais ne reproduit pas les environnements de production.  
 
 ## <a name="next-steps"></a>Étapes suivantes

@@ -1,25 +1,15 @@
 ---
 title: Vue d’ensemble des API .NET standard Azure Relay | Microsoft Docs
 description: Cet article résume une partie de la clé de Azure Relay Connexions hybrides .NET Standard API.
-services: service-bus-relay
-documentationcenter: na
-author: spelluru
-manager: timlt
-editor: ''
-ms.assetid: b1da9ac1-811b-4df7-a22c-ccd013405c40
-ms.service: service-bus-relay
-ms.devlang: na
 ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: na
-ms.date: 01/23/2018
-ms.author: spelluru
-ms.openlocfilehash: 18eaf2d2daae817107be6cdb0da9359bb5f9b4e9
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.custom: devx-track-csharp
+ms.date: 06/23/2020
+ms.openlocfilehash: 44d5800c08b49118e99a678e31d02e5b7a1f550c
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83204624"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88935668"
 ---
 # <a name="azure-relay-hybrid-connections-net-standard-api-overview"></a>Présentation des API .NET standard pour les connexions hybrides Azure Relay
 
@@ -93,7 +83,7 @@ var hybridConnectionStream = await client.CreateConnectionAsync();
 
 ### <a name="receiving-data"></a>Réception de données
 
-La classe [HybridConnectionStream][HCStream] permet une communication bidirectionnelle. Dans la plupart des cas, vous recevez en continu à partir du flux. Si vous lisez du texte à partir du flux, vous pouvez également utiliser un objet [StreamReader](https://msdn.microsoft.com/library/system.io.streamreader(v=vs.110).aspx), qui facilite l’analyse des données. Par exemple, vous pouvez lire les données sous forme de texte plutôt que sous forme de `byte[]`.
+La classe [HybridConnectionStream][HCStream] permet une communication bidirectionnelle. Dans la plupart des cas, vous recevez en continu à partir du flux. Si vous lisez du texte à partir du flux, vous pouvez également utiliser un objet [StreamReader](/dotnet/api/system.io.streamreader?view=netcore-3.1), qui facilite l’analyse des données. Par exemple, vous pouvez lire les données sous forme de texte plutôt que sous forme de `byte[]`.
 
 Le code suivant lit des lignes individuelles de texte à partir du flux jusqu’à ce qu’une annulation soit demandée :
 
@@ -120,14 +110,14 @@ while (!cancellationToken.IsCancellationRequested)
 
 ### <a name="sending-data"></a>Envoi de données
 
-Une fois qu’une connexion a été établie, vous pouvez envoyer un message au point de terminaison Relay. Parce que l’objet de connexion hérite de la classe [Stream](https://msdn.microsoft.com/library/system.io.stream(v=vs.110).aspx), envoyez vos données sous forme de `byte[]`. L’exemple suivant vous montre comment procéder :
+Une fois qu’une connexion a été établie, vous pouvez envoyer un message au point de terminaison Relay. Parce que l’objet de connexion hérite de la classe [Stream](/dotnet/api/system.io.stream?view=netcore-3.1), envoyez vos données sous forme de `byte[]`. L’exemple suivant vous montre comment procéder :
 
 ```csharp
 var data = Encoding.UTF8.GetBytes("hello");
 await clientConnection.WriteAsync(data, 0, data.Length);
 ```
 
-Toutefois, si vous souhaitez envoyer du texte directement, sans avoir à coder la chaîne à chaque fois, vous pouvez encapsuler l’objet `hybridConnectionStream` avec un objet [StreamWriter](https://msdn.microsoft.com/library/system.io.streamwriter(v=vs.110).aspx).
+Toutefois, si vous souhaitez envoyer du texte directement, sans avoir à coder la chaîne à chaque fois, vous pouvez encapsuler l’objet `hybridConnectionStream` avec un objet [StreamWriter](/dotnet/api/system.io.streamwriter?view=netcore-3.1).
 
 ```csharp
 // The StreamWriter object only needs to be created once

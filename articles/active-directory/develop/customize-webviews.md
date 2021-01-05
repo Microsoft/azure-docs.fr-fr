@@ -7,18 +7,18 @@ author: mmacy
 manager: CelesteDG
 ms.service: active-directory
 ms.subservice: develop
-ms.topic: conceptual
+ms.topic: how-to
 ms.workload: identity
 ms.date: 08/28/2019
 ms.author: marsma
 ms.reviewer: oldalton
 ms.custom: aaddev
-ms.openlocfilehash: 3b4362e4c5e69efddfbc99ef0f98ad3c5966165c
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: a8486ec87b5198231a33b1dab382ba457c8c8066
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81450870"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85478125"
 ---
 # <a name="how-to-customize-browsers-and-webviews-for-iosmacos"></a>Procédure : personnaliser les navigateurs et les vues web pour iOS/macOS
 

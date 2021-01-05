@@ -1,24 +1,24 @@
 ---
 title: 'Transformation de sélection de colonnes : sur le module Modifier les métadonnées'
 titleSuffix: Azure Machine Learning
-description: Découvrez comment utiliser le module Transformation de sélection de colonnes dans Azure Machine Learning pour créer une transformation qui sélectionne le même sous-ensemble de colonnes que dans le jeu de données concerné.
+description: Découvrez comment utiliser le module Transformation de sélection de colonnes dans le concepteur Azure Machine Learning pour effectuer une transformation de sélection.
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: core
 ms.topic: reference
 author: likebupt
 ms.author: keli19
-ms.date: 10/10/2019
-ms.openlocfilehash: a5264c14294f84858cd489f5892b8cdd19e117d0
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 10/10/2020
+ms.openlocfilehash: f03840e55366d7f105ca4b57bd60061c82833e72
+ms.sourcegitcommit: 7cc10b9c3c12c97a2903d01293e42e442f8ac751
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79455908"
+ms.lasthandoff: 11/06/2020
+ms.locfileid: "93420714"
 ---
 # <a name="select-columns-transform"></a>Transformation de sélection de colonnes
 
-Cet article décrit comment utiliser le module Transformation de sélection de colonnes dans le concepteur Azure Machine Learning (préversion). L’objectif du module Transformation de sélection de colonnes consiste à s’assurer qu’un ensemble de colonnes prévisible et cohérent est utilisé dans les opérations de machine learning en aval.
+Cet article décrit comment utiliser le module Transformation de sélection de colonnes dans le concepteur Azure Machine Learning. L’objectif du module Transformation de sélection de colonnes consiste à s’assurer qu’un ensemble de colonnes prévisible et cohérent est utilisé dans les opérations de machine learning en aval.
 
 Ce module est utile pour des tâches telles que le scoring, qui nécessitent des colonnes spécifiques. Les modifications apportées aux colonnes disponibles peuvent rompre le pipeline ou changer les résultats.
 
@@ -46,8 +46,14 @@ Ce scénario suppose que vous souhaitez utiliser la sélection de caractéristiq
 
    *Ne connectez pas le jeu de données d’entrée.* Au lieu de cela, ajoutez le module [Appliquer une transformation](apply-transformation.md) et connectez la sortie de la transformation de sélection de caractéristiques.
 
+   La structure du pipeline doit être similaire à ce qui suit :
+
+   > [!div class="mx-imgBorder"]
+   > ![Exemple de pipeline](media/module/filter-based-feature-selection-score.png)
+
    > [!IMPORTANT]
    > Vous ne pouvez pas escompter les mêmes résultats si vous appliquez le module [Sélection de caractéristiques par filtrage](filter-based-feature-selection.md) au jeu de données de scoring. Comme la sélection des caractéristiques est basée sur des valeurs, elle peut choisir un autre ensemble de colonnes, ce qui entraînerait l’échec de l’opération de scoring.
+    
 7. Envoyez le pipeline.
 
 Ce processus d’enregistrement, puis d’application d’une sélection de colonnes garantit que le même schéma de données est disponible pour l’entraînement et le scoring.

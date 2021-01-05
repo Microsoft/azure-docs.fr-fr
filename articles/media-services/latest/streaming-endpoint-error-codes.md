@@ -1,7 +1,7 @@
 ---
 title: Erreurs d’origine et de packaging Azure Media Services | Microsoft Docs
 description: Cette rubrique décrit les erreurs que vous pouvez recevoir du service (d’origine) de point de terminaison de streaming Azure Media Services.
-author: Juliako
+author: IngridAtMicrosoft
 manager: femila
 editor: ''
 services: media-services
@@ -10,17 +10,17 @@ ms.service: media-services
 ms.workload: media
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
+ms.topic: error-reference
 ms.date: 05/07/2019
-ms.author: juliako
-ms.openlocfilehash: 7d3a85e6fcc5b9d1c5ca1511cd7edd05ff5d9ae4
-ms.sourcegitcommit: 3c318f6c2a46e0d062a725d88cc8eb2d3fa2f96a
+ms.author: inhenkel
+ms.openlocfilehash: 8442c52052a2016da002d392c6fe0834b3813229
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/02/2020
-ms.locfileid: "80582696"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89295323"
 ---
-# <a name="streaming-endpoint-origin-errors"></a>Erreurs (d’origine) du point de terminaison de streaming 
+# <a name="streaming-endpoint-origin-errors"></a>Erreurs (d’origine) du point de terminaison de streaming
 
 Cette rubrique décrit les erreurs que vous pouvez recevoir du [service de point de terminaison de streaming](streaming-endpoint-concept.md) Azure Media Services.
 
@@ -200,7 +200,7 @@ Découvrez l’article [Communauté Azure Media Services](media-services-communi
 
 ## <a name="see-also"></a>Voir aussi
 
-- [Codes d’erreur d’encodage](https://docs.microsoft.com/rest/api/media/jobs/get#joberrorcode)
+- [Codes d’erreur d’encodage](/rest/api/media/jobs/get#joberrorcode)
 - [Concepts Azure Media Services](concepts-overview.md)
 - [Quotas et limites](limits-quotas-constraints.md)
 

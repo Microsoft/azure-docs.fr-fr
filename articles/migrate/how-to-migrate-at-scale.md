@@ -1,23 +1,23 @@
 ---
 title: Automatiser la migration de la machine de migration dans Azure Migrate
 description: Décrit comment utiliser des scripts pour migrer un grand nombre de machines dans Azure Migrate
-author: snehaamicrosoft
-ms.service: azure-migrate
-ms.topic: article
+author: anvar-ms
+ms.author: anvar
+ms.manager: bsiva
+ms.topic: how-to
 ms.date: 04/01/2019
-ms.author: snehaa
-ms.openlocfilehash: 317b6e8aa799b7982e9897c6a504d6092491c7ec
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 01196b23ce5bf9ce842da89d0773a77e6a1d5107
+ms.sourcegitcommit: ea551dad8d870ddcc0fee4423026f51bf4532e19
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74196364"
+ms.lasthandoff: 12/07/2020
+ms.locfileid: "96754230"
 ---
 # <a name="scale-migration-of-vms"></a>Mettre à l'échelle une migration de machines virtuelles 
 
 Cet article vous aide à comprendre le processus d’utilisation de scripts pour migrer un grand nombre de machines virtuelles. Pour mettre à l’échelle la migration, utilisez [Azure Site Recovery](../site-recovery/site-recovery-overview.md). 
 
-Les scripts Site Recovery sont disponibles pour votre téléchargement dans le dépôt [Exemples Azure PowerShell](https://github.com/Azure/azure-docs-powershell-samples/tree/master/azure-migrate/migrate-at-scale-with-site-recovery) sur GitHub. Il est possible d’utiliser les scripts pour migrer des machines virtuelles VMware, AWS, GCP et des serveurs physiques vers des disques managés dans Azure. Vous pouvez également utiliser ces scripts pour migrer des machines virtuelles Hyper-V si vous migrez les machines virtuelles en tant que serveurs physiques. Les scripts qui tirent parti d’Azure Site Recovery PowerShell sont documentés [ici](https://docs.microsoft.com/azure/site-recovery/vmware-azure-disaster-recovery-powershell).
+Les scripts Site Recovery sont disponibles pour votre téléchargement dans le dépôt [Exemples Azure PowerShell](https://github.com/Azure/azure-docs-powershell-samples/tree/master/azure-migrate/migrate-at-scale-with-site-recovery) sur GitHub. Il est possible d’utiliser les scripts pour migrer des machines virtuelles VMware, AWS, GCP et des serveurs physiques vers des disques managés dans Azure. Vous pouvez également utiliser ces scripts pour migrer des machines virtuelles Hyper-V si vous migrez les machines virtuelles en tant que serveurs physiques. Les scripts qui tirent parti d’Azure Site Recovery PowerShell sont documentés [ici](../site-recovery/vmware-azure-disaster-recovery-powershell.md).
 
 ## <a name="current-limitations"></a>Limites actuelles
 - Prendre en charge la spécification de l’adresse IP statique uniquement pour la carte réseau principale de la machine virtuelle cible
@@ -69,4 +69,4 @@ Par défaut, le script migre les machines virtuelles vers des disques managés d
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-[En savoir plus](https://docs.microsoft.com/azure/site-recovery/migrate-tutorial-on-premises-azure) sur la migration de serveurs vers Azure à l’aide d’Azure Site Recovery
+[En savoir plus](../site-recovery/migrate-tutorial-on-premises-azure.md) sur la migration de serveurs vers Azure à l’aide d’Azure Site Recovery

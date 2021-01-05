@@ -4,16 +4,16 @@ description: Apprenez à charger un disque dur virtuel sur un disque managé Azu
 services: virtual-machines,storage
 author: roygara
 ms.author: rogarana
-ms.date: 03/27/2020
-ms.topic: article
+ms.date: 06/15/2020
+ms.topic: how-to
 ms.service: virtual-machines
 ms.subservice: disks
-ms.openlocfilehash: c32915617d3149eee42bfdfd03d22f9ce5799ef2
-ms.sourcegitcommit: b9d4b8ace55818fcb8e3aa58d193c03c7f6aa4f1
+ms.openlocfilehash: 473e87904742395eca6b7eeba0875cd93789104d
+ms.sourcegitcommit: d103a93e7ef2dde1298f04e307920378a87e982a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82580231"
+ms.lasthandoff: 10/13/2020
+ms.locfileid: "91978983"
 ---
 # <a name="upload-a-vhd-to-azure-or-copy-a-managed-disk-to-another-region---azure-cli"></a>Charger un disque dur virtuel sur Azure ou copier un disque dans une autre région - Azure CLI
 
@@ -28,13 +28,13 @@ ms.locfileid: "82580231"
 
 ## <a name="getting-started"></a>Prise en main
 
-Si vous préférez charger des disques via une interface graphique utilisateur, vous pouvez utiliser l'Explorateur Stockage Azure. Pour plus d'informations, consultez : [Utiliser l'Explorateur Stockage Azure pour gérer des disques managés Azure](disks-use-storage-explorer-managed-disks.md)
+Si vous préférez charger des disques via une interface graphique utilisateur, vous pouvez utiliser l’Explorateur Stockage Azure. Pour plus d’informations, consultez : [Utiliser l’Explorateur Stockage Azure pour gérer des disques managés Azure](../disks-use-storage-explorer-managed-disks.md)
 
-Pour charger votre disque dur virtuel sur Azure, vous devez créer un disque managé vierge configuré pour ce processus de chargement. Avant de créer ce disque, vous devez prendre connaissance des informations ci-dessous.
+Pour charger votre disque dur virtuel sur Azure, vous devez créer un disque managé vide configuré pour ce processus de chargement. Avant de créer ce disque, vous devez prendre connaissance des informations ci-dessous.
 
 Ce type de disque managé présente deux états uniques :
 
-- ReadToUpload, qui signifie que le disque est prêt à recevoir un chargement, mais qu'aucune [signature d'accès partagé](https://docs.microsoft.com/azure/storage/common/storage-dotnet-shared-access-signature-part-1) (SAS) n'a été générée.
+- ReadToUpload, qui signifie que le disque est prêt à recevoir un chargement, mais qu'aucune [signature d'accès partagé](../../storage/common/storage-sas-overview.md) (SAS) n'a été générée.
 - ActiveUpload, qui signifie que le disque est prêt à recevoir un chargement et que la SAS a été générée.
 
 > [!NOTE]
@@ -47,6 +47,9 @@ Avant de pouvoir créer un disque HDD standard vierge pour le chargement, vous d
 Créez un disque dur standard vierge pour le chargement en spécifiant les paramètres **-–for-upload** et **--upload-size-bytes** dans une applet de commande [disk create](/cli/azure/disk#az-disk-create) :
 
 Remplacez `<yourdiskname>`, `<yourresourcegroupname>`, `<yourregion>` par les valeurs de votre choix. Le paramètre `--upload-size-bytes` contient un exemple de valeur : `34359738880`. Remplacez cet exemple par la valeur appropriée.
+
+> [!TIP]
+> Si vous créez un disque de système d’exploitation, ajoutez --hyper-v-generation <yourGeneration> à `az disk create`.
 
 ```azurecli
 az disk create -n <yourdiskname> -g <yourresourcegroupname> -l <yourregion> --for-upload --upload-size-bytes 34359738880 --sku standard_lrs
@@ -76,7 +79,7 @@ Maintenant que vous disposez d'une SAS pour votre disque managé vierge, vous po
 
 Utilisez AzCopy v10 pour charger votre fichier de disque dur virtuel local sur un disque managé en spécifiant l'URI de la SAS que vous avez générée.
 
-Ce chargement présente le même débit que le disque [HDD Standard](disks-types.md#standard-hdd) correspondant. Par exemple, pour une taille correspondant à S4, vous aurez un débit allant jusqu'à 60 Mio/s. Mais pour une taille correspondant à S70, le débit ira jusqu’à 500 Mio/s.
+Ce chargement présente le même débit que le disque [HDD Standard](../disks-types.md#standard-hdd) correspondant. Par exemple, pour une taille correspondant à S4, vous aurez un débit allant jusqu'à 60 Mio/s. Mais pour une taille correspondant à S70, le débit ira jusqu’à 500 Mio/s.
 
 ```bash
 AzCopy.exe copy "c:\somewhere\mydisk.vhd" "sas-URI" --blob-type PageBlob
@@ -101,18 +104,21 @@ Le script suivant effectuera cette opération pour vous. Le processus est simila
 
 Remplacez `<sourceResourceGroupHere>`, `<sourceDiskNameHere>`, `<targetDiskNameHere>`, `<targetResourceGroupHere>` et `<yourTargetLocationHere>` (la valeur d’emplacement pourrait par exemple être uswest2) par vos valeurs, puis exécutez le script suivant afin de copier un disque managé.
 
+> [!TIP]
+> Si vous créez un disque de système d’exploitation, ajoutez --hyper-v-generation <yourGeneration> à `az disk create`.
+
 ```azurecli
-sourceDiskName = <sourceDiskNameHere>
-sourceRG = <sourceResourceGroupHere>
-targetDiskName = <targetDiskNameHere>
-targetRG = <targetResourceGroupHere>
-targetLocale = <yourTargetLocationHere>
+sourceDiskName=<sourceDiskNameHere>
+sourceRG=<sourceResourceGroupHere>
+targetDiskName=<targetDiskNameHere>
+targetRG=<targetResourceGroupHere>
+targetLocation=<yourTargetLocationHere>
 
-sourceDiskSizeBytes= $(az disk show -g $sourceRG -n $sourceDiskName --query '[diskSizeBytes]' -o tsv)
+sourceDiskSizeBytes=$(az disk show -g $sourceRG -n $sourceDiskName --query '[diskSizeBytes]' -o tsv)
 
-az disk create -g $targetRG -n $targetDiskName -l $targetLocale --for-upload --upload-size-bytes $(($sourceDiskSizeBytes+512)) --sku standard_lrs
+az disk create -g $targetRG -n $targetDiskName -l $targetLocation --for-upload --upload-size-bytes $(($sourceDiskSizeBytes+512)) --sku standard_lrs
 
-targetSASURI = $(az disk grant-access -n $targetDiskName -g $targetRG  --access-level Write --duration-in-seconds 86400 -o tsv)
+targetSASURI=$(az disk grant-access -n $targetDiskName -g $targetRG  --access-level Write --duration-in-seconds 86400 -o tsv)
 
 sourceSASURI=$(az disk grant-access -n $sourceDiskName -g $sourceRG --duration-in-seconds 86400 --query [accessSas] -o tsv)
 
@@ -125,5 +131,4 @@ az disk revoke-access -n $targetDiskName -g $targetRG
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Maintenant que vous avez réussi à charger un disque dur virtuel sur un disque managé, vous pouvez joindre le disque en tant que [disque de données à une machine virtuelle existante](add-disk.md) ou [joindre le disque à une machine virtuelle en tant que disque de système d'exploitation](upload-vhd.md#create-the-vm) pour créer une nouvelle machine virtuelle. 
-
+Maintenant que vous avez réussi à charger un disque dur virtuel sur un disque managé, vous pouvez joindre le disque en tant que [disque de données à une machine virtuelle existante](add-disk.md) ou [joindre le disque à une machine virtuelle en tant que disque de système d'exploitation](upload-vhd.md#create-the-vm) pour créer une nouvelle machine virtuelle.

@@ -5,18 +5,18 @@ ms.assetid: 39d5514f-0139-453a-b52e-4a1c06d8d914
 ms.topic: article
 ms.date: 10/30/2018
 ms.custom: seodec18
-ms.openlocfilehash: ed84cb2b0cb8d98b12fe787e49c400ba47e4e38a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 949e408544e25cb55622cf2a1b1d2dddb92350a6
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74671623"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96001505"
 ---
 # <a name="operating-system-functionality-on-azure-app-service"></a>Fonctionnalités de système d’exploitation sur Azure App Service
-Cet article décrit les fonctionnalités de système d’exploitation communes de base accessibles à toutes les applications Windows exécutées sur [Azure App Service](https://go.microsoft.com/fwlink/?LinkId=529714). Ces fonctionnalités englobent notamment l’accès aux fichiers, l’accès réseau et l’accès au registre, ainsi que les journaux d’activité et événements de diagnostic. 
+Cet article décrit les fonctionnalités de système d’exploitation communes de base accessibles à toutes les applications Windows exécutées sur [Azure App Service](./overview.md). Ces fonctionnalités englobent notamment l’accès aux fichiers, l’accès réseau et l’accès au registre, ainsi que les journaux d’activité et événements de diagnostic. 
 
 > [!NOTE] 
-> Les [applications Linux](containers/app-service-linux-intro.md) dans App Service s’exécutent dans leurs propres conteneurs. Aucun accès au système d’exploitation hôte n’est autorisé, car vous n’avez pas d’accès racine au conteneur. De même, pour les [applications qui s’exécutent dans des conteneurs Windows](app-service-web-get-started-windows-container.md), vous disposez d’un accès administratif au conteneur mais pas d’un accès au système d’exploitation hôte. 
+> Les [applications Linux](overview.md#app-service-on-linux) dans App Service s’exécutent dans leurs propres conteneurs. Aucun accès au système d’exploitation hôte n’est autorisé, car vous n’avez pas d’accès racine au conteneur. De même, pour les [applications qui s’exécutent dans des conteneurs Windows](quickstart-custom-container.md?pivots=container-windows), vous disposez d’un accès administratif au conteneur mais pas d’un accès au système d’exploitation hôte. 
 >
 
 <a id="tiers"></a>
@@ -60,7 +60,7 @@ Il est important de surveiller l’utilisation du disque à mesure du développe
 
 <a id="NetworkDrives"></a>
 
-### <a name="network-drives-aka-unc-shares"></a>Lecteurs réseau (partages UNC)
+### <a name="network-drives-unc-shares"></a>Lecteurs réseau (partages UNC)
 Pour simplifier le déploiement et la maintenance d’applications, App Service stocke tout le contenu utilisateur sur un ensemble de partages UNC. Ce modèle s’adapte bien au modèle commun de stockage de contenu utilisé par les environnements d’hébergement web locaux dotés de plusieurs serveurs à charge équilibrée. 
 
 App Service intègre un certain nombre de partages UNC créés dans chaque centre de données. Un certain pourcentage du contenu de l'ensemble des utilisateurs de chaque centre de données est alloué à chacun des partages UNC. En outre, le contenu de tous les fichiers associés à l'abonnement d'un client est systématiquement placé sur le même partage UNC. 
@@ -126,4 +126,3 @@ App Service ne fournit pas l’accès au Bureau à distance aux instances de mac
 ## <a name="more-information"></a>Informations complémentaires
 
 [Bac à sable Azure App Service](https://github.com/projectkudu/kudu/wiki/Azure-Web-App-sandbox) : informations les plus récentes sur l’environnement d’exécution d’App Service. L’équipe de développement d’App Service gère cette page directement.
-

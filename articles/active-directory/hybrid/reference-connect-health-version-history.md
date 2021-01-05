@@ -13,15 +13,15 @@ ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: reference
-ms.date: 03/20/2019
+ms.date: 08/10/2020
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: ace8d170a5ba48c00775c3b376df8bb70a337d5d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: e7653f850edc910fc78b14a628b87dcb22aeb903
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76897036"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89279412"
 ---
 # <a name="azure-ad-connect-health-version-release-history"></a>Azure AD Connect Health : Historique de publication des versions
 L’équipe Azure Active Directory met régulièrement à jour Azure AD Connect Health avec de nouvelles fonctions et fonctionnalités. Cet article répertorie les versions et les fonctionnalités qui ont été publiées.  
@@ -30,7 +30,15 @@ L’équipe Azure Active Directory met régulièrement à jour Azure AD Connect 
 > Les agents Connect Health sont mis à jour automatiquement lorsqu’une nouvelle version est publiée. Vérifiez que les paramètres de mise à niveau automatique sont activés à partir du portail Azure.
 >
 
-Azure AD Connect Health pour la synchronisation est intégré à l’installation d’Azure AD Connect. Vous trouverez ici plus d’informations sur l’[historique des versions d’Azure AD Connect](https://docs.microsoft.com/azure/active-directory/connect/active-directory-aadconnect-version-history). Pour nous donner un feedback sur les fonctionnalités, votez sur le [canal User Voice Connect Health](https://feedback.azure.com/forums/169401-azure-active-directory/filters/new?category_id=165591)
+Azure AD Connect Health pour la synchronisation est intégré à l’installation d’Azure AD Connect. Vous trouverez ici plus d’informations sur l’[historique des versions d’Azure AD Connect](./reference-connect-version-history.md). Pour nous donner un feedback sur les fonctionnalités, votez sur le [canal User Voice Connect Health](https://feedback.azure.com/forums/169401-azure-active-directory/filters/new?category_id=165591)
+
+## <a name="april-2020"></a>Avril 2020
+**Mise à jour de l’agent**
+
+- Agent Azure AD Connect Health pour AD FS (version 3.1.77.0)
+
+   1.   Résolution de bogue pour l’alerte « Nom de principal du service (SPN) non valide pour le service AD FS », pour laquelle l’alerte signalait une erreur incorrecte.
+
 
 ## <a name="july-2019"></a>Juillet 2019
 **Mise à jour de l’agent**
@@ -217,7 +225,7 @@ Azure AD Connect Health pour la synchronisation est intégré à l’installatio
 ## <a name="november-2015"></a>Novembre 2015
 **Nouvelles fonctionnalités :**
 
-* Prise en charge du [Contrôle d’accès en fonction du rôle](how-to-connect-health-operations.md#manage-access-with-role-based-access-control)
+* Prise en charge du [Contrôle d’accès en fonction du rôle Azure (Azure RBAC)](how-to-connect-health-operations.md#manage-access-with-azure-rbac)
 
 **Nouvelles fonctionnalités préliminaires :**
 
@@ -252,5 +260,4 @@ Azure AD Connect Health pour la synchronisation est intégré à l’installatio
 * Déploiement d’agent plus simple à l’aide des informations d’identification d’administrateur général Azure AD.  
 
 ## <a name="next-steps"></a>Étapes suivantes
-En savoir plus sur [Surveillez votre infrastructure d’identité locale et vos services de synchronisation dans le cloud](whatis-hybrid-identity-health.md).
-
+En savoir plus sur [Surveillez votre infrastructure d’identité locale et vos services de synchronisation dans le cloud](./whatis-azure-ad-connect.md).

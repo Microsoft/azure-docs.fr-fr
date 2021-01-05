@@ -3,12 +3,12 @@ title: Exemples de modèles Azure Resource Manager
 description: Rechercher des exemples de modèles Azure Resource Manager pour déployer Azure Container Instances dans différentes configurations
 ms.topic: article
 ms.date: 03/07/2019
-ms.openlocfilehash: a8f3c81c539562a3c56e4822cf6e4df77d04928f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 6c487087b39244178643fd81364150ceb3ac4a63
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75981644"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86169644"
 ---
 # <a name="azure-resource-manager-templates-for-azure-container-instances"></a>Modèles Azure Resource Manager pour Azure Container Instances
 
@@ -18,7 +18,7 @@ Pour plus d’options de déploiement, consultez la section [Déploiement](#depl
 
 ## <a name="sample-templates"></a>Exemples de modèles
 
-| | |
+| Modèle | Description |
 |-|-|
 | **Applications** ||
 | [WordPress][app-wp] | Crée un site web WordPress et sa base de données MySQL dans un groupe de conteneurs. Le contenu du site WordPress et de la base de données MySQL est conservé sur un partage Azure Files. Crée également une passerelle d’application pour exposer l’accès réseau public pour WordPress. |
@@ -30,7 +30,7 @@ Pour plus d’options de déploiement, consultez la section [Déploiement](#depl
 | **Mise en réseau** ||
 | [Conteneur avec exposition UDP][net-udp] | Déploie un conteneur Windows ou Linux qui expose un port UDP. |
 | [Conteneur Linux avec adresse IP publique][net-publicip] | Déploie un conteneur Linux accessible via une adresse IP publique. |
-| [Déployer un groupe de conteneurs dans un réseau virtuel (préversion)][net-vnet] | Déploie un nouveau réseau virtuel, un nouveau sous-réseau, un nouveau profil de réseau et un nouveau groupe de conteneurs. |
+| [Déployer un groupe de conteneurs dans un réseau virtuel][net-vnet] | Déploie un nouveau réseau virtuel, un nouveau sous-réseau, un nouveau profil de réseau et un nouveau groupe de conteneurs. |
 | **Ressources Azure** ||
 | [Créer un compte de stockage Azure et un partage de fichiers][az-files] | Utilise l’interface de ligne de commande Azure dans une instance de conteneur pour créer un compte de stockage et un partage Azure Files.
 

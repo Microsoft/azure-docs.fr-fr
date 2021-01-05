@@ -5,12 +5,12 @@ author: peterpogorski
 ms.topic: conceptual
 ms.date: 01/23/2019
 ms.author: pepogors
-ms.openlocfilehash: 1c044d5fd973d3c577088a887f2fac413d2ab79d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: a0f0324d1f7308eb1392c4f7a98a6a5d226026be
+ms.sourcegitcommit: e7152996ee917505c7aba707d214b2b520348302
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75551826"
+ms.lasthandoff: 12/20/2020
+ms.locfileid: "97705504"
 ---
 # <a name="infrastructure-as-code"></a>Infrastructure as code
 
@@ -27,7 +27,7 @@ ResourceGroupName="sfclustergroup"
 Location="westus"
 
 az group create --name $ResourceGroupName --location $Location 
-az group deployment create --name $ResourceGroupName  --template-file azuredeploy.json --parameters @azuredeploy.parameters.json
+az deployment group create --name $ResourceGroupName  --template-file azuredeploy.json --parameters @azuredeploy.parameters.json
 ```
 
 Création d’une ressource à l’aide de PowerShell
@@ -44,7 +44,7 @@ New-AzResourceGroupDeployment -Name $ResourceGroupName -TemplateFile $Template -
 
 ## <a name="azure-service-fabric-resources"></a>Ressources Azure Service Fabric
 
-Vous pouvez déployer des applications et services sur votre cluster Service Fabric par le biais d’Azure Resource Manager. Pour plus d’informations, consultez [Gérer des applications et services en tant que ressources Azure Resource Manager](https://docs.microsoft.com/azure/service-fabric/service-fabric-application-arm-resource). Voici les bonnes pratiques relatives aux applications Service Fabric, qui concernent plus spécifiquement les ressources à inclure dans vos ressources de modèle Resource Manager.
+Vous pouvez déployer des applications et services sur votre cluster Service Fabric par le biais d’Azure Resource Manager. Pour plus d’informations, consultez [Gérer des applications et services en tant que ressources Azure Resource Manager](./service-fabric-application-arm-resource.md). Voici les bonnes pratiques relatives aux applications Service Fabric, qui concernent plus spécifiquement les ressources à inclure dans vos ressources de modèle Resource Manager.
 
 ```json
 {
@@ -73,7 +73,7 @@ Vous pouvez déployer des applications et services sur votre cluster Service Fab
 }
 ```
 
-Pour déployer votre application à l’aide d’Azure Resource Manager, vous devez d’abord [créer un package d’application sfpkg](https://docs.microsoft.com/azure/service-fabric/service-fabric-package-apps#create-an-sfpkg) Service Fabric. Le script Python suivant montre comment créer un package sfpkg :
+Pour déployer votre application à l’aide d’Azure Resource Manager, vous devez d’abord [créer un package d’application sfpkg](./service-fabric-package-apps.md#create-an-sfpkg) Service Fabric. Le script Python suivant montre comment créer un package sfpkg :
 
 ```python
 # Create SFPKG that needs to be uploaded to Azure Storage Blob Container
@@ -91,7 +91,7 @@ microservices_sfpkg.close()
 ```
 
 ## <a name="azure-virtual-machine-operating-system-automatic-upgrade-configuration"></a>Configuration de mise à niveau automatique du système d’exploitation Machine virtuelle Azure 
-La mise à niveau de vos machines virtuelles est une opération initiée par l’utilisateur. Il est recommandé d’utiliser la [mise à niveau automatique du système d’exploitation dans des groupes de machines virtuelles identiques](https://docs.microsoft.com/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-automatic-upgrade) pour la gestion des correctifs hôtes des clusters Azure Service Fabric. L’application d’orchestration des correctifs est une solution alternative utilisée en cas d’hébergement en dehors d’Azure, bien qu’elle puisse être utilisée dans Azure, sachant que la surcharge d’hébergement de l’application d’orchestration des correctifs dans Azure est une raison courante de préférer la mise à niveau automatique du système d’exploitation dans des groupes de machines virtuelles identiques. Les propriétés du modèle Groupe de machines virtuelles identiques de calcul Resource Manager pour activer la mise à niveau automatique du système d’exploitation sont les suivantes :
+La mise à niveau de vos machines virtuelles est une opération initiée par l’utilisateur. Il est recommandé d’utiliser la [mise à niveau automatique du système d’exploitation dans des groupes de machines virtuelles identiques](../virtual-machine-scale-sets/virtual-machine-scale-sets-automatic-upgrade.md) pour la gestion des correctifs hôtes des clusters Azure Service Fabric. L’application d’orchestration des correctifs est une solution alternative utilisée en cas d’hébergement en dehors d’Azure, bien qu’elle puisse être utilisée dans Azure, sachant que la surcharge d’hébergement de l’application d’orchestration des correctifs dans Azure est une raison courante de préférer la mise à niveau automatique du système d’exploitation dans des groupes de machines virtuelles identiques. Les propriétés du modèle Groupe de machines virtuelles identiques de calcul Resource Manager pour activer la mise à niveau automatique du système d’exploitation sont les suivantes :
 
 ```json
 "upgradePolicy": {

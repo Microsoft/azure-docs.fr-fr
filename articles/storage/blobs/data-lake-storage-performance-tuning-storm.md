@@ -1,19 +1,19 @@
 ---
 title: 'Régler les performances : Storm, HDInsight et Azure Data Lake Storage Gen2 | Microsoft Docs'
-description: Recommandations en matière de réglage des performances d’Azure Data Lake Storage Gen2 Storm
+description: Comprendre les recommandations relatives au réglage des performances d’une topologie Azure Storm sur un cluster Azure HDInsight et Azure Data Lake Storage Gen2.
 author: normesta
 ms.subservice: data-lake-storage-gen2
 ms.service: storage
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 11/18/2019
 ms.author: normesta
 ms.reviewer: stewu
-ms.openlocfilehash: 125c583512f6bae34c2dd3c3dd76a1b96a181ac1
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 4db85357ee970d13d6b4fcce195cae66932bed18
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74327904"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95912788"
 ---
 # <a name="tune-performance-storm-hdinsight--azure-data-lake-storage-gen2"></a>Régler les performances : Storm, HDInsight et Azure Data Lake Storage Gen2
 
@@ -22,9 +22,9 @@ Comprendre les facteurs à prendre en compte lorsque vous optimisez les performa
 ## <a name="prerequisites"></a>Prérequis
 
 * **Un abonnement Azure**. Consultez la page [Obtention d’un essai gratuit d’Azure](https://azure.microsoft.com/pricing/free-trial/).
-* **Un compte Azure Data Lake Storage Gen2**. Pour obtenir les instructions de création de compte, consultez [Démarrage rapide : Créer un compte de stockage pour l’analyse](data-lake-storage-quickstart-create-account.md).
-* Un **cluster Azure HDInsight** avec un accès à un compte Data Lake Storage Gen2. Consultez [Utiliser Azure Data Lake Storage Gen2 avec des clusters Azure HDInsight](https://docs.microsoft.com/azure/hdinsight/hdinsight-hadoop-use-data-lake-storage-gen2). Veillez à activer le Bureau à distance pour le cluster.
-* **Exécution d’un cluster Storm sur Data Lake Storage Gen2**. Pour plus d’informations, consultez [Présentation d’Apache Storm sur HDInsight : analyse en temps réel pour Hadoop](https://docs.microsoft.com/azure/hdinsight/hdinsight-storm-overview).
+* **Un compte Azure Data Lake Storage Gen2**. Pour obtenir les instructions de création de compte, consultez [Démarrage rapide : Créer un compte de stockage pour l’analyse](../common/storage-account-create.md).
+* Un **cluster Azure HDInsight** avec un accès à un compte Data Lake Storage Gen2. Consultez [Utiliser Azure Data Lake Storage Gen2 avec des clusters Azure HDInsight](../../hdinsight/hdinsight-hadoop-use-data-lake-storage-gen2.md). Veillez à activer le Bureau à distance pour le cluster.
+* **Exécution d’un cluster Storm sur Data Lake Storage Gen2**. Pour plus d’informations, consultez [Présentation d’Apache Storm sur HDInsight : analyse en temps réel pour Hadoop](../../hdinsight/storm/apache-storm-overview.md).
 * **Conseils de réglage des performances sur Data Lake Storage Gen2**.  Pour en savoir plus sur les concepts généraux relatifs aux performances, consultez [Recommandations en matière de réglage des performances de Data Lake Storage Gen2](data-lake-storage-performance-tuning-guidance.md).   
 
 ## <a name="tune-the-parallelism-of-the-topology"></a>Ajuster le parallélisme de la topologie
@@ -114,6 +114,6 @@ Pour vérifier si une limitation est appliquée, activez la journalisation du d�
 2. Surveillez l’éventuelle présence d’exceptions de limitation de Data Lake Storage Gen2 dans les journaux d’activité de topologie Storm sur les nœuds Worker (sous /var/log/storm/worker-artifacts/&lt;NomTopologie&gt;/&lt;port&gt;/worker.log).
 
 ## <a name="next-steps"></a>Étapes suivantes
-Pour optimiser davantage les performances, consultez [ce blog](https://blogs.msdn.microsoft.com/shanyu/2015/05/14/performance-tuning-for-hdinsight-storm-and-microsoft-azure-eventhubs/).
+Pour optimiser davantage les performances, consultez [ce blog](/archive/blogs/shanyu/performance-tuning-for-hdinsight-storm-and-microsoft-azure-eventhubs).
 
 Pour exécuter un exemple supplémentaire, consultez [celui-ci sur GitHub](https://github.com/hdinsight/storm-performance-automation).

@@ -9,17 +9,17 @@ editor: ''
 ms.assetid: ''
 ms.service: storsimple
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 06/29/2017
 ms.author: alkohli
-ms.openlocfilehash: 13a3e57bb27c075fc045e87790dbe13369ed9f8e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 56170ffbbfe14248bcfd1f94549a3565873f8646
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79228213"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96005892"
 ---
 # <a name="use-the-storsimple-device-manager-service-to-manage-storsimple-bandwidth-templates"></a>Utiliser le service StorSimple Device Manager pour gérer les modèles de bande passante StorSimple
 

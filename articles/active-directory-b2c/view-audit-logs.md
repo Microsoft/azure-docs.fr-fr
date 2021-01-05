@@ -6,18 +6,18 @@ services: active-directory-b2c
 author: msmimart
 manager: celestedg
 ms.service: active-directory
-ms.topic: conceptual
+ms.topic: how-to
 ms.workload: identity
 ms.date: 02/20/2020
 ms.author: mimart
 ms.subservice: B2C
 ms.custom: fasttrack-edit
-ms.openlocfilehash: 83086fa2cb96eba423b9111134a0406d7256821f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 9485fb09d3ac7684ba91bcd37720a0e55603404b
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79231081"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94952724"
 ---
 # <a name="accessing-azure-ad-b2c-audit-logs"></a>Accès aux journaux d’audit Azure AD B2C
 
@@ -84,7 +84,7 @@ Pour télécharger la liste des événements d’activité dans un fichier de va
 
 ## <a name="get-audit-logs-with-the-azure-ad-reporting-api"></a>Obtenir les journaux d’audit avec l’API de création de rapports Azure AD
 
-Les journaux d’audit sont publiés dans le même pipeline que les autres activités Azure Active Directory, afin d’être accessibles par le biais de l’[API de création de rapports Azure Active Directory](https://docs.microsoft.com/graph/api/directoryaudit-list). Pour plus d’informations, consultez [Prise en main de l’API de création de rapports Azure Active Directory](../active-directory/reports-monitoring/concept-reporting-api.md).
+Les journaux d’audit sont publiés dans le même pipeline que les autres activités Azure Active Directory, afin d’être accessibles par le biais de l’[API de création de rapports Azure Active Directory](/graph/api/directoryaudit-list). Pour plus d’informations, consultez [Prise en main de l’API de création de rapports Azure Active Directory](../active-directory/reports-monitoring/concept-reporting-api.md).
 
 ### <a name="enable-reporting-api-access"></a>Activer l’accès à l’API de rapports
 
@@ -102,7 +102,7 @@ Après avoir inscrit une application avec les autorisations appropriées, voir l
 
 Pour télécharger les événements du journal d’audit Azure AD B2C via l’API, filtrez les journaux avec la catégorie `B2C`. Pour filtrer par catégorie, utilisez le paramètre de chaîne de requête `filter` lors de l’appel du point de terminaison de l’API de création de rapport Azure AD.
 
-```HTTP
+```http
 https://graph.microsoft.com/v1.0/auditLogs/directoryAudits?$filter=loggedByService eq 'B2C' and activityDateTime gt 2019-09-10T02:28:17Z
 ```
 
@@ -158,7 +158,7 @@ if ($oauth.access_token -ne $null) {
 
 Voici la représentation JSON de l’exemple d’événement d’activité illustré plus haut dans l’article :
 
-```JSON
+```json
 {
     "id": "B2C_DQO3J_4984536",
     "category": "Authentication",

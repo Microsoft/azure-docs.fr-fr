@@ -4,23 +4,24 @@ description: Apprenez à créer une machine virtuelle avec une adresse IP publiq
 services: virtual-network
 documentationcenter: na
 author: KumudD
-manager: twooley
+manager: mtillman
 editor: ''
 tags: azure-resource-manager
 ms.assetid: 55bc21b0-2a45-4943-a5e7-8d785d0d015c
 ms.service: virtual-network
+ms.subservice: ip-services
 ms.devlang: azurecli
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 08/08/2018
 ms.author: kumud
-ms.openlocfilehash: 8e3e37347c8c23ccc9746bbb98ef6a822743848b
-ms.sourcegitcommit: e0330ef620103256d39ca1426f09dd5bb39cd075
+ms.openlocfilehash: 110f5ab4f0912ae264eb1dc4b649a40cc40f4e12
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82790284"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "84703087"
 ---
 # <a name="create-a-virtual-machine-with-a-static-public-ip-address-using-the-azure-cli"></a>Créer une machine virtuelle avec une adresse IP publique statique à l’aide d’Azure CLI
 

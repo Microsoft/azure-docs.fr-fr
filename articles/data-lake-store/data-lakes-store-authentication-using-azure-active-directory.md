@@ -6,12 +6,12 @@ ms.service: data-lake-store
 ms.topic: conceptual
 ms.date: 05/29/2018
 ms.author: twooley
-ms.openlocfilehash: 49e6df417190071e06582be400575e1880f2543a
-ms.sourcegitcommit: 366e95d58d5311ca4b62e6d0b2b47549e06a0d6d
+ms.openlocfilehash: 6fc09f9145b7a1652b621ed38a8bf9af7c4c82a8
+ms.sourcegitcommit: ae6e7057a00d95ed7b828fc8846e3a6281859d40
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82692280"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92106567"
 ---
 # <a name="authentication-with-azure-data-lake-storage-gen1-using-azure-active-directory"></a>Authentification auprès d’Azure Data Lake Storage Gen1 à l’aide d’Azure Active Directory
 
@@ -40,11 +40,9 @@ Le tableau suivant illustre comment les mécanismes d’authentification de l’
 <i>* Cliquez sur le symbole <b>✔\*</b>. Il s’agit d’un lien.</i><br>
 <i>** MFA signifie Multi-Factor Authentication (authentification multifacteur)</i>
 
-Pour plus d’informations sur la façon d’utiliser Azure Active Directory pour l’authentification, consultez [Scénarios d’authentification Azure Active Directory](../active-directory/develop/authentication-scenarios.md).
+Pour plus d’informations sur la façon d’utiliser Azure Active Directory pour l’authentification, consultez [Scénarios d’authentification Azure Active Directory](../active-directory/develop/authentication-vs-authorization.md).
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 * [Authentification de l’utilisateur final](data-lake-store-end-user-authenticate-using-active-directory.md)
 * [Authentification de service à service](data-lake-store-service-to-service-authenticate-using-active-directory.md)
-
-

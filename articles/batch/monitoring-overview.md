@@ -3,26 +3,26 @@ title: Superviser Azure Batch
 description: Découvrez les services de supervision Azure, les métriques, les journaux de diagnostic et d’autres fonctionnalités de supervision d’Azure Batch.
 ms.topic: how-to
 ms.date: 04/05/2018
-ms.openlocfilehash: 09ac9c676dc1e95cbece6fa500b4f2cf554f8526
-ms.sourcegitcommit: 6fd8dbeee587fd7633571dfea46424f3c7e65169
+ms.openlocfilehash: 9387d4894dbf06445fd43722353ca7ae98607359
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83723525"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86144948"
 ---
 # <a name="monitor-batch-solutions"></a>Solutions Monitor Batch
 
 Azure et le service Batch fournissent une gamme de services, d’outils et d’API permettant de surveiller vos solutions Batch. Cet article de présentation vous aide à choisir une approche de surveillance correspondant à vos besoins.
 
-Pour une vue d’ensemble des composants et services Azure disponibles permettant de surveiller les ressources Azure, consultez [Surveillance des applications et ressources Azure](../monitoring-and-diagnostics/monitoring-overview.md).
+Pour une vue d’ensemble des composants et services Azure disponibles permettant de surveiller les ressources Azure, consultez [Surveillance des applications et ressources Azure](../azure-monitor/overview.md).
 
 ## <a name="subscription-level-monitoring"></a>Surveillance au niveau de l’abonnement
 
-Au niveau de l’abonnement, qui inclut les comptes Batch, le [journal d’activité Azure](../azure-monitor/platform/platform-logs-overview.md) collecte les données des événements opérationnels dans [plusieurs catégories](../azure-monitor/platform/activity-log-view.md#categories-in-the-activity-log).
+Au niveau de l’abonnement, qui inclut les comptes Batch, le [journal d’activité Azure](../azure-monitor/platform/platform-logs-overview.md) collecte les données des événements opérationnels dans [plusieurs catégories](../azure-monitor/platform/activity-log.md#view-the-activity-log).
 
 Plus précisément, pour les comptes Batch, le journal d’activité collecte les événements liés à la gestion des clés et à la création ou la suppression de comptes.
 
-L’une des méthodes pour récupérer des événements dans votre journal d’activité consiste à utiliser le portail Azure. Cliquez sur **Tous les services** > **Journal d’activité**. Vous pouvez également rechercher des événements à l’aide d’Azure CLI, des applets de commande PowerShell ou de l’API REST Azure Monitor. Vous pouvez également exporter le journal d’activité ou configurer les [alertes de journal d’activité](../monitoring-and-diagnostics/monitoring-activity-log-alerts-new-experience.md).
+L’une des méthodes pour récupérer des événements dans votre journal d’activité consiste à utiliser le portail Azure. Cliquez sur **Tous les services** > **Journal d’activité**. Vous pouvez également rechercher des événements à l’aide d’Azure CLI, des applets de commande PowerShell ou de l’API REST Azure Monitor. Vous pouvez également exporter le journal d’activité ou configurer les [alertes de journal d’activité](../azure-monitor/platform/alerts-activity-log.md).
 
 ## <a name="batch-account-level-monitoring"></a>Surveillance au niveau du compte Batch
 

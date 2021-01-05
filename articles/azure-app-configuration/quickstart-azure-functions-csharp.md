@@ -1,18 +1,19 @@
 ---
 title: Démarrage rapide d’Azure App Configuration avec Azure Functions | Microsoft Docs
-description: Guide de démarrage rapide pour utiliser Azure App Configuration avec Azure Functions.
+description: Dans ce guide de démarrage rapide, créez une application Azure Functions avec Azure App Configuration et C#. Créez et connectez-vous à un magasin App Configuration. Testez la fonction localement.
 services: azure-app-configuration
-author: lisaguthrie
+author: AlexandraKemperMS
 ms.service: azure-app-configuration
+ms.custom: devx-track-csharp
 ms.topic: quickstart
-ms.date: 1/9/2019
-ms.author: lcozzens
-ms.openlocfilehash: 2f6efdad7ab0685e58d2edd73bc36b758e8dbae2
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.date: 09/28/2020
+ms.author: alkemper
+ms.openlocfilehash: 4197891949062123042736e578cfbcc5def4e1f9
+ms.sourcegitcommit: 1756a8a1485c290c46cc40bc869702b8c8454016
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "80245495"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96930787"
 ---
 # <a name="quickstart-create-an-azure-functions-app-with-azure-app-configuration"></a>Démarrage rapide : Créer une application Azure Functions avec Azure App Configuration
 
@@ -20,7 +21,7 @@ Dans ce guide de démarrage rapide, vous allez intégrer le service Azure App Co
 
 ## <a name="prerequisites"></a>Prérequis
 
-- Abonnement Azure : [créez-en un gratuitement](https://azure.microsoft.com/free/)
+- Abonnement Azure : [créez-en un gratuitement](https://azure.microsoft.com/free/dotnet)
 - [Visual Studio 2019](https://visualstudio.microsoft.com/vs) avec la charge de travail **Développement Azure**
 - [Outils Azure Functions](../azure-functions/functions-develop-vs.md#check-your-tools-version)
 
@@ -28,7 +29,7 @@ Dans ce guide de démarrage rapide, vous allez intégrer le service Azure App Co
 
 [!INCLUDE [azure-app-configuration-create](../../includes/azure-app-configuration-create.md)]
 
-6. Sélectionnez **Explorateur de configurations** >  **+ Créer** > **Clé-valeur** pour ajouter les paires clé-valeur suivantes :
+7. Sélectionnez **Explorateur de configurations** >  **+ Créer** > **Clé-valeur** pour ajouter les paires clé-valeur suivantes :
 
     | Clé | Valeur |
     |---|---|
@@ -36,7 +37,7 @@ Dans ce guide de démarrage rapide, vous allez intégrer le service Azure App Co
 
     Laissez **Étiquette** et **Type de contenu** vides pour l’instant.
 
-7. Sélectionnez **Appliquer**.
+8. Sélectionnez **Appliquer**.
 
 ## <a name="create-a-functions-app"></a>Créer une application Functions
 
@@ -119,7 +120,7 @@ Dans ce guide de démarrage rapide, vous allez intégrer le service Azure App Co
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-En suivant ce guide de démarrage rapide, vous avez créé un magasin App Configuration et l’avez utilisé avec une application Azure Functions par l’intermédiaire du [fournisseur App Configuration](https://go.microsoft.com/fwlink/?linkid=2074664). Pour savoir comment configurer votre application Azure Functions afin d’actualiser dynamiquement les paramètres de configuration, passez au tutoriel suivant.
+En suivant ce guide de démarrage rapide, vous avez créé un magasin App Configuration et l’avez utilisé avec une application Azure Functions par l’intermédiaire du [fournisseur App Configuration](/dotnet/api/Microsoft.Extensions.Configuration.AzureAppConfiguration). Pour savoir comment configurer votre application Azure Functions afin d’actualiser dynamiquement les paramètres de configuration, passez au tutoriel suivant.
 
 > [!div class="nextstepaction"]
 > [Activer la configuration dynamique](./enable-dynamic-configuration-azure-functions-csharp.md)

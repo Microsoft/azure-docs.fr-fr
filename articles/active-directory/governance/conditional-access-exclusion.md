@@ -12,16 +12,16 @@ ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: conceptual
 ms.subservice: compliance
-ms.date: 04/24/2020
+ms.date: 12/23/2020
 ms.author: barclayn
 ms.reviewer: mwahl
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: ab2974cf95726f44641b4ac220c7ee871890ca56
-ms.sourcegitcommit: 493b27fbfd7917c3823a1e4c313d07331d1b732f
+ms.openlocfilehash: 426e28048ae370919529ea710717a3a3867d999d
+ms.sourcegitcommit: 6e2d37afd50ec5ee148f98f2325943bafb2f4993
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83736839"
+ms.lasthandoff: 12/23/2020
+ms.locfileid: "97746250"
 ---
 # <a name="use-azure-ad-access-reviews-to-manage-users-excluded-from-conditional-access-policies"></a>Utiliser les révisions d’accès Azure AD pour gérer les utilisateurs exclus des stratégies d’accès conditionnel
 
@@ -38,7 +38,7 @@ Il se peut également que vous utilisiez des [emplacements nommés](../condition
 
 ![Emplacements nommés dans l’accès conditionnel](./media/conditional-access-exclusion/named-locations.png)
 
-Malheureusement, certains utilisateurs peuvent avoir encore une raison valable de se connecter à partir de ces pays/régions bloqués. Par exemple, des utilisateurs en déplacement professionnel peuvent avoir besoin d’accéder aux ressources de l’entreprise. Dans ce cas, la stratégie d’accès conditionnel visant à bloquer ces pays/régions pourrait utiliser un groupe de sécurité cloud pour les utilisateurs exclus de la stratégie. Les utilisateurs qui nécessitent un accès dans le cadre de leurs déplacements peuvent alors s’ajouter à ce groupe à l’aide de la fonctionnalité de [gestion de groupes en libre-service Azure AD](../users-groups-roles/groups-self-service-management.md).
+Malheureusement, certains utilisateurs peuvent avoir encore une raison valable de se connecter à partir de ces pays/régions bloqués. Par exemple, des utilisateurs en déplacement professionnel peuvent avoir besoin d’accéder aux ressources de l’entreprise. Dans ce cas, la stratégie d’accès conditionnel visant à bloquer ces pays/régions pourrait utiliser un groupe de sécurité cloud pour les utilisateurs exclus de la stratégie. Les utilisateurs qui nécessitent un accès dans le cadre de leurs déplacements peuvent alors s’ajouter à ce groupe à l’aide de la fonctionnalité de [gestion de groupes en libre-service Azure AD](../enterprise-users/groups-self-service-management.md).
 
 Vous avez peut-être aussi une stratégie d’accès conditionnel qui [bloque l’authentification héritée pour la grande majorité de vos utilisateurs](https://cloudblogs.microsoft.com/enterprisemobility/2018/06/07/azure-ad-conditional-access-support-for-blocking-legacy-auth-is-in-public-preview/). Cependant, si certains de vos utilisateurs doivent pouvoir utiliser des méthodes d’authentification héritées pour accéder à vos ressources par le biais de clients Office 2010 ou IMAP/SMTP/POP, vous pouvez les exclure de la stratégie bloquant les méthodes d’authentification héritées.
 
@@ -144,7 +144,7 @@ Supposons que vous disposez d’une stratégie d’accès conditionnel qui bloqu
     ![Volet Créer une révision d’accès pour l’exemple 2](./media/conditional-access-exclusion/create-access-review-2.png)
 
 >[!IMPORTANT] 
->Si vous disposez de nombreux groupes d’exclusions et devez donc créer plusieurs révisions d’accès, nous proposons désormais dans le point de terminaison bêta de Microsoft Graph une API permettant de créer et de gérer ces révisions par programmation. Pour commencer, consultez les [informations de référence sur les API des révisions d’accès Azure AD](https://developer.microsoft.com/graph/docs/api-reference/beta/resources/accessreviews_root), ainsi que l’article [Example of retrieving Azure AD access reviews via Microsoft Graph](https://techcommunity.microsoft.com/t5/Azure-Active-Directory/Example-of-retrieving-Azure-AD-access-reviews-via-Microsoft/td-p/236096) (Exemple de récupération de révisions d’accès Azure AD par le biais de Microsoft Graph).
+>Si vous disposez de nombreux groupes d’exclusions et devez donc créer plusieurs révisions d’accès, nous proposons désormais dans le point de terminaison bêta de Microsoft Graph une API permettant de créer et de gérer ces révisions par programmation. Pour commencer, consultez les [informations de référence sur les API des révisions d’accès Azure AD](/graph/api/resources/accessreviews-root?view=graph-rest-beta), ainsi que l’article [Example of retrieving Azure AD access reviews via Microsoft Graph](https://techcommunity.microsoft.com/t5/Azure-Active-Directory/Example-of-retrieving-Azure-AD-access-reviews-via-Microsoft/td-p/236096) (Exemple de récupération de révisions d’accès Azure AD par le biais de Microsoft Graph).
 
 ## <a name="access-review-results-and-audit-logs"></a>Résultats des révisions d’accès et journaux d’audit
 

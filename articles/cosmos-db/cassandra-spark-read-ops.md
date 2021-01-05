@@ -2,22 +2,23 @@
 title: Lecture des données de tables de l’API Cassandra à l’aide de Spark
 titleSufix: Azure Cosmos DB
 description: Cet article explique comment lire les données stockées des tables de l’API Cassandra dans Azure Cosmos DB.
-author: kanshiG
-ms.author: govindk
+author: TheovanKraay
+ms.author: thvankra
 ms.reviewer: sngun
 ms.service: cosmos-db
 ms.subservice: cosmosdb-cassandra
-ms.topic: conceptual
-ms.date: 12/06/2018
+ms.topic: how-to
+ms.date: 06/02/2020
 ms.custom: seodec18
-ms.openlocfilehash: 01a9582062d8eb0d039473a03901fc83fe179020
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: ceede96cbf3be12a6129e27d34e318e4c4163458
+ms.sourcegitcommit: 3bdeb546890a740384a8ef383cf915e84bd7e91e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "60893388"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93073494"
 ---
 # <a name="read-data-from-azure-cosmos-db-cassandra-api-tables-using-spark"></a>Lire les données de tables de l’API Cassandra dans Azure Cosmos DB à l’aide de Spark
+[!INCLUDE[appliesto-cassandra-api](includes/appliesto-cassandra-api.md)]
 
  Cet article explique comment lire les données stockées dans l’API Cassandra Azure Cosmos DB à partir de Spark.
 
@@ -83,25 +84,22 @@ readBooksDF.show
 
 ### <a name="apply-filters"></a>Appliquer des filtres
 
-Le pushdown de prédicats n’étant pas pris en charge, les exemples ci-dessous reflètent le filtrage côté client. 
+Vous pouvez effectuer un pushdown de prédicats vers la base de données pour optimiser encore les requêtes Spark. Un prédicat est une condition sur une requête, généralement dans la clause WHERE, qui retourne true ou false. Un pushdown de prédicat filtre les données dans la requête de base de données, réduisant ainsi le nombre d’entrées récupérées à partir de la base de données et améliorant les performances des requêtes. Par défaut, l’API Spark DataSet effectue automatiquement un pushdown des clauses WHERE valides vers la base de données. 
 
 ```scala
-val readBooksDF = spark
-  .read
-  .format("org.apache.spark.sql.cassandra")
-  .options(Map( "table" -> "books", "keyspace" -> "books_ks"))
-  .load
-  .select("book_name","book_author", "book_pub_year")
-  .filter("book_pub_year > 1891")
-//.filter("book_name IN ('A sign of four','A study in scarlet')")
-//.filter("book_name='A sign of four' OR book_name='A study in scarlet'")
-//.filter("book_author='Arthur Conan Doyle' AND book_pub_year=1890")
-//.filter("book_pub_year=1903")  
+val df = spark.read.cassandraFormat("books", "books_ks").load
+df.explain
+val dfWithPushdown = df.filter(df("book_pub_year") > 1891)
+dfWithPushdown.explain
 
 readBooksDF.printSchema
 readBooksDF.explain
 readBooksDF.show
 ```
+
+La section PushedFilters du plan physique comprend le filtre pushdown GreaterThan. 
+
+:::image type="content" source="./media/cassandra-spark-read-ops/pushdown-predicates.png" alt-text="partitions":::
 
 ## <a name="rdd-api"></a>API pour le jeu de donnée distribué résilient
 

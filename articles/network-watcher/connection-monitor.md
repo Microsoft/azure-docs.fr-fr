@@ -12,17 +12,20 @@ ms.devlang: na
 ms.topic: tutorial
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 10/25/2018
+ms.date: 11/23/2020
 ms.author: damendo
 ms.custom: mvc
-ms.openlocfilehash: acdaf2318c3082db876ed9c69b704d3d00cd4c90
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 2da675f0836dbb10ce5227e7e93e98d706cc5c64
+ms.sourcegitcommit: c95e2d89a5a3cf5e2983ffcc206f056a7992df7d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "76834652"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95544800"
 ---
 # <a name="tutorial-monitor-network-communication-between-two-virtual-machines-using-the-azure-portal"></a>Tutoriel : surveiller la communication réseau entre deux machines virtuelles à l’aide du portail Azure
+
+> [!NOTE]
+> Ce tutoriel traite du Moniteur de connexion (classique). Essayez le nouveau [Moniteur de connexion](connection-monitor-overview.md), qui offre une meilleure expérience de la supervision de la connectivité.
 
 Il peut être essentiel pour votre organisation que la communication soit efficace entre une machine virtuelle et un point de terminaison comme une autre machine virtuelle. Parfois, des modifications de configuration sont introduites et mettent en péril cette communication. Dans ce tutoriel, vous allez apprendre à :
 
@@ -33,6 +36,8 @@ Il peut être essentiel pour votre organisation que la communication soit effica
 > * Diagnostiquer un problème de communication entre deux machines virtuelles et apprendre à le résoudre
 
 Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
+
+
 
 ## <a name="sign-in-to-azure"></a>Connexion à Azure
 
@@ -50,12 +55,12 @@ Créez deux machines virtuelles.
 
     |Paramètre|Valeur|
     |---|---|
-    |Name|myVm1|
+    |Nom|myVm1|
     |Nom d'utilisateur| Entrez un nom d’utilisateur de votre choix.|
     |Mot de passe| Entrez un mot de passe de votre choix. Le mot de passe doit contenir au moins 12 caractères et satisfaire aux [exigences de complexité définies](../virtual-machines/windows/faq.md?toc=%2fazure%2fnetwork-watcher%2ftoc.json#what-are-the-password-requirements-when-creating-a-vm).|
-    |Subscription| Sélectionnez votre abonnement.|
+    |Abonnement| Sélectionnez votre abonnement.|
     |Resource group| Sélectionnez **Créer** et entrez **myResourceGroup**.|
-    |Location| Sélectionnez **USA Est**.|
+    |Emplacement| Sélectionnez **USA Est**.|
 
 4. Choisissez une taille de machine virtuelle, puis cliquez sur **Sélectionner**.
 5. Sous **Paramètres**, sélectionnez **Extensions**. Sélectionnez **Ajouter une extension**, puis **Agent Network Watcher pour Windows**, comme l’illustre l’image suivante :
@@ -73,7 +78,7 @@ Réeffectuez les étapes indiquées dans [Créer la première machine virtuelle]
 |Étape|Paramètre|Valeur|
 |---|---|---|
 | 1 | Sélectionner une version de **Ubuntu Server** |                                                                         |
-| 3 | Name                                  | myVm2                                                                   |
+| 3 | Nom                                  | myVm2                                                                   |
 | 3 | Type d'authentification                   | Collez votre clé publique SSH ou sélectionnez **Mot de passe**, puis entrez un mot de passe. |
 | 3 | Resource group                        | Sélectionnez **Utiliser l’existant**, puis **myResourceGroup**.                 |
 | 6 | Extensions                            | **Agent Network Watcher pour Linux**                                             |
@@ -92,7 +97,7 @@ Créez un moniteur de connexion pour surveiller la communication sur le port TCP
 
     | Paramètre                  | Valeur               |
     | ---------                | ---------           |
-    | Name                     | myVm1-myVm2(22)     |
+    | Nom                     | myVm1-myVm2(22)     |
     | Source                   |                     |
     | Machine virtuelle          | myVm1               |
     | Destination              |                     |
@@ -108,7 +113,7 @@ Créez un moniteur de connexion pour surveiller la communication sur le port TCP
 
     ![Moniteurs de connexion](./media/connection-monitor/connection-monitors.png)
 
-2. Sélectionnez le moniteur qui porte le nom **myVm1-myVm2(22)** , comme l’illustre l’image précédente, pour en voir les détails, comme l’illustre l’image suivante :
+2. Sélectionnez le moniteur qui porte le nom **myVm1-myVm2(22)**, comme l’illustre l’image précédente, pour en voir les détails, comme l’illustre l’image suivante :
 
     ![Détails du moniteur](./media/connection-monitor/vm-monitor.png)
 
@@ -129,7 +134,7 @@ Les alertes sont créées par des règles d’alerte dans Azure Monitor et peuve
 2. Cliquez sur **Sélectionner une cible**, puis sélectionnez les ressources que vous souhaitez cibler. Sélectionnez l’**abonnement** et définissez le **type de ressource** pour déterminer la surveillance de connexion que vous voulez utiliser.
 
     ![écran d’alerte avec la cible sélectionnée](./media/connection-monitor/set-alert-rule.png)
-1. Une fois que vous avez sélectionné une ressource à cibler, sélectionnez **Ajouter des critères**. Network Watcher dispose de [métriques à partir desquelles vous pouvez créer des alertes](https://docs.microsoft.com/azure/monitoring-and-diagnostics/monitoring-near-real-time-metric-alerts#metrics-and-dimensions-supported). Attribuez des **signaux disponibles** aux paramètres ProbesFailedPercent et AverageRoundtripMs des métriques :
+1. Une fois que vous avez sélectionné une ressource à cibler, sélectionnez **Ajouter des critères**. Network Watcher dispose de [métriques à partir desquelles vous pouvez créer des alertes](../azure-monitor/platform/alerts-metric-near-real-time.md#metrics-and-dimensions-supported). Attribuez des **signaux disponibles** aux paramètres ProbesFailedPercent et AverageRoundtripMs des métriques :
 
     ![page d’alerte avec les signaux sélectionnés](./media/connection-monitor/set-alert-signals.png)
 1. Renseignez les détails de l’alerte, comme le nom de règle d’alerte, la description et la gravité. Vous pouvez également ajouter un groupe d’actions à l’alerte afin d’automatiser et de personnaliser la réponse à l’alerte.
@@ -151,9 +156,9 @@ Par défaut, Azure permet la communication sur tous les ports entre les machines
     | Plages de ports de destination | 22             |
     | Action                  | Deny           |
     | Priority                | 100            |
-    | Name                    | DenySshInbound |
+    | Nom                    | DenySshInbound |
 
-5. Étant donné que le moniteur de connexion effectue un sondage toutes les 60 secondes, patientez quelques minutes, puis dans la partie gauche du portail, sélectionnez **Network Watcher**, puis **Moniteur de connexion**, puis resélectionnez le moniteur **myVm1-myVm2(22)** . Les résultats sont à présent différents, comme l’illustre l’image suivante :
+5. Étant donné que le moniteur de connexion effectue un sondage toutes les 60 secondes, patientez quelques minutes, puis dans la partie gauche du portail, sélectionnez **Network Watcher**, puis **Moniteur de connexion**, puis resélectionnez le moniteur **myVm1-myVm2(22)**. Les résultats sont à présent différents, comme l’illustre l’image suivante :
 
     ![Détails de l’erreur moniteur](./media/connection-monitor/vm-monitor-fault.png)
 

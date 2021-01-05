@@ -7,23 +7,25 @@ ms.subservice: imaging
 ms.topic: how-to
 ms.date: 10/08/2018
 ms.author: cynthn
-ms.custom: legacy
-ms.openlocfilehash: 70282879b64054d48d904b5ada9284f844448851
-ms.sourcegitcommit: e0330ef620103256d39ca1426f09dd5bb39cd075
+ms.custom: legacy, devx-track-azurecli
+ms.openlocfilehash: eacd1426b856de11a18b0da6c509d281b3bca94c
+ms.sourcegitcommit: ad677fdb81f1a2a83ce72fa4f8a3a871f712599f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82792681"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97655167"
 ---
 # <a name="how-to-create-a-managed-image-of-a-virtual-machine-or-vhd"></a>Créer une image managée d’une machine virtuelle ou d’un disque dur virtuel
 
 Pour créer plusieurs copies d’une machine virtuelle à utiliser dans Azure à des fins de développement et de test, capturez une image managée de la machine virtuelle ou du disque dur virtuel de système d’exploitation. Pour créer, stocker et partager des images à grande échelle, consultez [Galeries d’images partagées](../shared-images-cli.md).
 
+Une image managée prend en charge jusqu’à 20 déploiements simultanés. Une tentative de création simultanée de plus de 20 machines virtuelles à partir de la même image managée peut entraîner l’expiration des délais d’approvisionnement en raison des limites de performances de stockage d’un disque dur virtuel unique. Pour créer plus de 20 machines virtuelles simultanément, utilisez une image de la [galerie d’images partagées](shared-image-galleries.md) configurée avec 1 réplica tous les 20 déploiements simultanés de machines virtuelles.
+
 Pour créer une image managée, vous devez supprimer les informations personnelles du compte. Les étapes suivantes vous permettent de déprovisionner une machine virtuelle existante, de la désallouer et de créer une image. Vous pouvez utiliser cette image pour créer des machines virtuelles dans n’importe quel groupe de ressources de votre abonnement.
 
 Pour créer une copie de votre machine virtuelle Linux actuelle à des fins de sauvegarde ou de débogage, ou pour charger un disque dur virtuel Linux spécialisé à partir d’une machine virtuelle locale, consultez [Charger et créer une machine virtuelle Linux à partir d’une image de disque personnalisée](upload-vhd.md).  
 
-Vous pouvez utiliser le service **Générateur d’images de machine virtuelle Azure (préversion publique)** pour créer votre image personnalisée ; il suffit de fournir une configuration d’image et le Générateur créera l’image (inutile d’apprendre à utiliser tous les outils, ou de configurer les pipelines de build). Pour en savoir plus, voir [Aperçu : Vue d’ensemble du Générateur d’images Azure](https://docs.microsoft.com/azure/virtual-machines/linux/image-builder-overview).
+Vous pouvez utiliser le service **Générateur d’images de machine virtuelle Azure (préversion publique)** pour créer votre image personnalisée ; il suffit de fournir une configuration d’image et le Générateur créera l’image (inutile d’apprendre à utiliser tous les outils, ou de configurer les pipelines de build). Pour en savoir plus, voir [Aperçu : Vue d’ensemble du Générateur d’images Azure](./image-builder-overview.md).
 
 Vous avez besoin des éléments suivants avant de créer une image :
 
@@ -58,8 +60,8 @@ Utilisez Azure CLI pour marquer la machine virtuelle comme étant généralisée
    
     ```azurecli
     az vm deallocate \
-      --resource-group myResourceGroup \
-      --name myVM
+        --resource-group myResourceGroup \
+        --name myVM
     ```
     
     Attendez que la machine virtuelle soit complètement désallouée avant de poursuivre. L’exécution de cette opération nécessite quelques minutes.  La machine virtuelle est arrêtée pendant la désallocation.
@@ -68,8 +70,8 @@ Utilisez Azure CLI pour marquer la machine virtuelle comme étant généralisée
    
     ```azurecli
     az vm generalize \
-      --resource-group myResourceGroup \
-      --name myVM
+        --resource-group myResourceGroup \
+        --name myVM
     ```
 
     Une machine virtuelle qui a été généralisée ne peut plus être redémarrée.
@@ -78,8 +80,8 @@ Utilisez Azure CLI pour marquer la machine virtuelle comme étant généralisée
    
     ```azurecli
     az image create \
-      --resource-group myResourceGroup \
-      --name myImage --source myVM
+        --resource-group myResourceGroup \
+        --name myImage --source myVM
     ```
    
    > [!NOTE]
@@ -135,4 +137,4 @@ az vm show \
 ```
 
 ## <a name="next-steps"></a>Étapes suivantes
-Pour créer, stocker et partager des images à grande échelle, consultez [Galeries d’images partagées](shared-images.md).
+Pour créer, stocker et partager des images à grande échelle, consultez [Galeries d’images partagées](../shared-images-cli.md).

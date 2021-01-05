@@ -9,16 +9,16 @@ ms.service: active-directory
 ms.subservice: develop
 ms.topic: conceptual
 ms.workload: identity
-ms.date: 04/28/2020
+ms.date: 05/11/2020
 ms.author: ryanwi
 ms.reviewer: jmprieur, saeeda, sureshja, hirsin
 ms.custom: aaddev, identityplatformtop40, scenarios:getting-started
-ms.openlocfilehash: faaf4a9c4fe37bc184b9860390f1eb99eede035c
-ms.sourcegitcommit: b9d4b8ace55818fcb8e3aa58d193c03c7f6aa4f1
+ms.openlocfilehash: 88dc4bb86459cd0390c4c01deb871aa93e39c6d1
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82584157"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "84266744"
 ---
 # <a name="security-tokens"></a>Jetons de sécurité
 
@@ -26,9 +26,12 @@ Un fournisseur d’identité centralisé est particulièrement utile pour les ap
 
 Un **jeton d’accès** est un jeton de sécurité émis par un [serveur d’autorisation](developer-glossary.md#authorization-server) dans le cadre d’un flux [OAuth 2.0](active-directory-v2-protocols.md). Il contient des informations sur l’utilisateur et l’application auxquels le jeton est destiné, ce qui peut servir pour accéder aux API web et à d’autres ressources protégées. Pour en savoir plus sur la façon dont la Plateforme d’identités Microsoft émet des jetons d’accès, consultez [Jetons d’accès](access-tokens.md).
 
-Les jetons d’accès ne sont valides que pendant une courte période. Par conséquent, les serveurs d’autorisation émettent parfois des **jetons d’actualisation** en même temps que le jeton d’accès. L’application cliente peut alors échanger ce jeton d’actualisation contre un nouveau jeton d’accès si nécessaire. Pour en savoir plus sur la façon dont la Plateforme d’identités Microsoft utilise des jetons d’actualisation pour révoquer des autorisations, consultez [Révocation des jetons](access-tokens.md#token-revocation).
+Les jetons d’accès ne sont valides que pendant une courte période. Par conséquent, les serveurs d’autorisation émettent parfois un **jeton d’actualisation** en même temps que le jeton d’accès. L’application cliente peut alors échanger ce jeton d’actualisation contre un nouveau jeton d’accès si nécessaire. Pour en savoir plus sur la façon dont la Plateforme d’identités Microsoft utilise des jetons d’actualisation pour révoquer des autorisations, consultez [Révocation des jetons](access-tokens.md#token-revocation).
 
 Les **jetons d’ID** sont envoyés à l’application cliente dans le cadre d’un flux [OpenID Connect](v2-protocols-oidc.md). Ils peuvent être envoyés avec ou à la place un jeton d’accès et sont utilisés par le client pour authentifier l’utilisateur. Pour en savoir plus sur la façon dont la Plateforme d’identités Microsoft émet des jetons d’ID, consultez [Jetons d’ID](id-tokens.md).
+
+> [!NOTE]
+> Cet article traite des jetons de sécurité utilisés par les protocoles OAuth2 et OpenID Connect. De nombreuses applications d’entreprise utilisent SAML pour authentifier les utilisateurs. Pour plus d’informations sur les assertions SAML, consultez [Référence de jeton SAML Azure AD](reference-saml-tokens.md).
 
 ## <a name="validating-security-tokens"></a>Validation des jetons de sécurité
 
@@ -43,9 +46,9 @@ Les jetons d’accès sont passés à une API web en tant que jeton du porteur d
 
 ## <a name="json-web-tokens-jwts-and-claims"></a>Jetons JSON Web Token (JWT) et revendications
 
-La Plateforme d’identités Microsoft implémente des jetons de sécurité comme des **jetons JSON Web Token (JWT)** qui contiennent des **revendications**.
+La Plateforme d’identités Microsoft implémente des jetons de sécurité comme des **jetons JSON Web Token (JWT)** qui contiennent des **revendications**. Étant donné que les jetons JWT sont utilisés comme jetons de sécurité, cette forme d’authentification est parfois appelée **Authentification JWT**.
 
-Une [revendication](developer-glossary.md#claim) fournit des assertions sur une entité (telle qu’une application cliente ou un [propriétaire de ressources](developer-glossary.md#resource-owner)) à une autre entité, telle que le serveur de ressources.
+Une [revendication](developer-glossary.md#claim) fournit des assertions sur une entité (telle qu’une application cliente ou un [propriétaire de ressources](developer-glossary.md#resource-owner)) à une autre entité, telle qu’un serveur de ressources. Une revendication peut également être appelée revendication JWT ou revendication JSON Web Token.
 
 Les revendications sont des paires nom/valeur qui relaient des faits sur le sujet du jeton. Par exemple, une revendication peut contenir des faits sur le principal de sécurité authentifié par le serveur d’autorisation. Les revendications présentes dans un jeton donné dépendent de plusieurs variables, notamment le type de jeton, le type d’informations d’identification utilisées pour authentifier le sujet, la configuration de l’application et ainsi de suite.
 
@@ -74,7 +77,7 @@ Selon la façon dont votre client est créé, il peut utiliser un ou plusieurs d
 |-----|----------|----------|--------------|---------------|--------------------|
 |[Flux du code d’autorisation](v2-oauth2-auth-code-flow.md) | | x | x | x | x|
 |[Flux implicite](v2-oauth2-implicit-grant-flow.md) | | x        | x    |      |                    |
-|[Circuit OIDC hybride](v2-protocols-oidc.md#get-access-tokens)| | x  | |          |            x   |
+|[Circuit OIDC hybride](v2-protocols-oidc.md#protocol-diagram-access-token-acquisition)| | x  | |          |            x   |
 |[Échange de jetons d’actualisation](v2-oauth2-auth-code-flow.md#refresh-the-access-token) | jeton d'actualisation | x | x | x| |
 |[Flux On-Behalf-Of](v2-oauth2-on-behalf-of-flow.md) | access token| x| x| x| |
 |[Informations d’identification du client](v2-oauth2-client-creds-grant-flow.md) | | | x (application uniquement)| | |

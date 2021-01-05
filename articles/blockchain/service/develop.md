@@ -5,10 +5,10 @@ ms.date: 03/26/2020
 ms.topic: conceptual
 ms.reviewer: janders
 ms.openlocfilehash: 4a98e5ea025894303bc5c77bba0c6154a08315f2
-ms.sourcegitcommit: 8a9c54c82ab8f922be54fb2fcfd880815f25de77
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "80348382"
 ---
 # <a name="azure-blockchain-service-development-overview"></a>Vue d’ensemble du développement d’Azure Blockchain Service

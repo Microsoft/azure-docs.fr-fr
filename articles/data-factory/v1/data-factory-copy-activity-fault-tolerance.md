@@ -11,12 +11,12 @@ ms.topic: conceptual
 ms.date: 03/27/2018
 ms.author: jingwang
 robots: noindex
-ms.openlocfilehash: 8ffaee75154fd5fe025bdb683c89f16799d6e86b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 65584b2a6a3bdfbb863c26dac688b20279c4b54d
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74926146"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96452298"
 ---
 # <a name="add-fault-tolerance-in-copy-activity-by-skipping-incompatible-rows"></a>Ajouter une tolérance de panne de l’activité de copie en ignorant les lignes incompatibles
 
@@ -48,7 +48,7 @@ L’activité de copie offre la possibilité de détecter, d’ignorer et de jou
     Exemple : copie de données depuis un serveur SQL dans une base de données SQL. Il existe une clé primaire définie dans la base de données SQL réceptrice, mais aucune clé primaire correspondante n’est définie dans le serveur SQL source. Les lignes en double qui peuvent exister dans la source ne sont pas copiées dans le récepteur. L’activité de copie ne copie que la première ligne des données sources dans le récepteur. Toutes les lignes sources suivantes contenant une valeur de clé primaire en double sont considérées comme incompatibles et ignorées.
 
 >[!NOTE]
->Cette fonctionnalité ne s’applique pas quand l’activité de copie est configurée pour appeler un mécanisme de chargement de données externes, comme [Azure SQL Data Warehouse PolyBase](data-factory-azure-sql-data-warehouse-connector.md#use-polybase-to-load-data-into-azure-sql-data-warehouse) ou [Amazon Redshift Unload](data-factory-amazon-redshift-connector.md#use-unload-to-copy-data-from-amazon-redshift). Pour charger des données dans SQL Data Warehouse avec PolyBase, utilisez la prise en charge native de la tolérance de panne de PolyBase en spécifiant « [polyBaseSettings](data-factory-azure-sql-data-warehouse-connector.md#sqldwsink) » dans l’activité de copie.
+>Cette fonctionnalité ne s’applique pas quand l’activité de copie est configurée pour appeler un mécanisme de chargement de données externes, comme [Azure Synapse Analytics PolyBase](data-factory-azure-sql-data-warehouse-connector.md#use-polybase-to-load-data-into-azure-synapse-analytics) ou [Amazon Redshift Unload](data-factory-amazon-redshift-connector.md#use-unload-to-copy-data-from-amazon-redshift). Pour charger des données dans Azure Synapse Analytics avec PolyBase, utilisez la prise en charge native de la tolérance de panne de PolyBase en spécifiant « [polyBaseSettings](data-factory-azure-sql-data-warehouse-connector.md#sqldwsink) » dans l’activité de copie.
 
 ## <a name="configuration"></a>Configuration
 L’exemple suivant fournit une définition JSON pour configurer la manière d’ignorer les lignes incompatibles dans le cadre de l’activité de copie :

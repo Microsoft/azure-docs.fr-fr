@@ -1,6 +1,6 @@
 ---
 title: Diffusez en continu Widevine Android hors connexion avec Azure Media Services V3
-description: Cette rubrique montre comment configurer votre compte Azure Media Services pour la diffusion en continu hors connexion du contenu protégé de Widevine.
+description: Cette rubrique montre comment configurer votre compte Azure Media Services v3 pour la diffusion en continu hors connexion du contenu protégé de Widevine.
 services: media-services
 keywords: DASH, DRM, Widevine hors connexion, ExoPlayer, Android
 documentationcenter: ''
@@ -11,22 +11,27 @@ ms.service: media-services
 ms.workload: media
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
-ms.date: 04/07/2020
+ms.topic: conceptual
+ms.date: 08/31/2020
 ms.author: willzhan
-ms.openlocfilehash: 94edec8261d9916b7575fb247e1698273f244130
-ms.sourcegitcommit: d187fe0143d7dbaf8d775150453bd3c188087411
+ms.custom: devx-track-csharp
+ms.openlocfilehash: b8c4bed81a73957cc80318064f2aa2a58b3cfe11
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/08/2020
-ms.locfileid: "80887195"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91597079"
 ---
 # <a name="offline-widevine-streaming-for-android-with-media-services-v3"></a>Diffusion en continu Widevine hors connexion pour Android avec Media Services v3
+
+[!INCLUDE [media services api v3 logo](./includes/v3-hr.md)]
 
 Outre la protection de contenu pour la diffusion en continu en ligne, les services d’abonnement et de location du contenu multimédia offrent un contenu téléchargeable qui fonctionne lorsque vous n’êtes pas connecté à internet. Vous devrez peut-être télécharger le contenu sur votre téléphone ou tablette pour une lecture en mode avion, lorsque vous êtes en vol et déconnecté du réseau. Scénarios supplémentaires, dans lesquels vous pouvez souhaiter télécharger du contenu :
 
 - Certains fournisseurs de contenu peuvent interdire la remise de licence de gestion des droits numériques (DRM) au-delà de la frontière d’un pays/d’une région. Si un utilisateur souhaite regarder du contenu en voyage à l’étranger, le téléchargement hors connexion est nécessaire.
 - Dans certains pays/certaines régions, la disponibilité Internet ou la bande passante sont limitées. Les utilisateurs peuvent choisir de télécharger du contenu afin de pouvoir le regarder en résolution suffisamment élevée pour une expérience d’affichage satisfaisante.
+
+[!INCLUDE [Widevine is not available in the GovCloud region.](./includes/widevine-not-available-govcloud.md)]
 
 Cet article explique comment mettre en œuvre la lecture en mode hors connexion pour le contenu DASH protégé par Widevine sur les appareils Android. La gestion des droits numériques (DRM) hors connexion vous permet de fournir des modèles d’abonnement, de location et d’achat pour votre contenu, permettant aux clients de vos services d’emporter facilement du contenu avec eux lorsqu’ils sont déconnectés d’internet.
 

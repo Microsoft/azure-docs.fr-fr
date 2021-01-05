@@ -9,15 +9,15 @@ ms.service: active-directory
 ms.subservice: develop
 ms.topic: conceptual
 ms.workload: identity
-ms.date: 05/07/2019
+ms.date: 07/15/2020
 ms.author: jmprieur
 ms.custom: aaddev
-ms.openlocfilehash: 073eca94ad93c69811b02abe2c8649940a394e8e
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: bfbfb1ff5b6cb9c711d987608226c51822dfc935
+ms.sourcegitcommit: 6109f1d9f0acd8e5d1c1775bc9aa7c61ca076c45
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80882469"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94442954"
 ---
 # <a name="protected-web-api-code-configuration"></a>API web protégée : Configuration de code
 
@@ -91,11 +91,39 @@ Cette section décrit comment configurer un jeton du porteur.
 }
 ```
 
+#### <a name="case-where-you-used-a-custom-app-id-uri-for-your-web-api"></a>Cas où vous avez utilisé un URI ID d’application personnalisé pour votre API web
+
+Si vous avez accepté l’URI ID d’application proposé par le portail d’inscription des applications, vous n’avez pas besoin de spécifier le public (consultez [URI et étendues de l’ID d’application](scenario-protected-web-api-app-registration.md#application-id-uri-and-scopes)). Dans le cas contraire, vous devez ajouter une propriété `Audience` dont la valeur est l’URI ID d’application de votre API web.
+
+```Json
+{
+  "AzureAd": {
+    "Instance": "https://login.microsoftonline.com/",
+    "ClientId": "[Client_id-of-web-api-eg-2ec40e65-ba09-4853-bcde-bcb60029e596]",
+    "TenantId": "common",
+    "Audience": "custom App ID URI for your web API"
+  },
+  // more lines
+}
+```
+
 ### <a name="code-initialization"></a>Initialisation du code
 
-Quand une application est appelée sur une action de contrôleur qui contient un attribut **[Authorize]** , ASP.NET et ASP.NET Core extraient le jeton d’accès à partir du jeton du porteur dans l’en-tête d’autorisation. Le jeton d’accès est ensuite transmis à l’intergiciel JwtBearer qui appelle Microsoft IdentityModel Extensions pour .NET.
+Quand une application est appelée sur une action de contrôleur qui contient un attribut **[Authorize]**, ASP.NET et ASP.NET Core extraient le jeton d’accès à partir du jeton du porteur dans l’en-tête d’autorisation. Le jeton d’accès est ensuite transmis à l’intergiciel JwtBearer qui appelle Microsoft IdentityModel Extensions pour .NET.
 
-Dans ASP.NET Core, cet intergiciel est initialisé dans le fichier Startup.cs.
+#### <a name="microsoftidentityweb"></a>Microsoft.Identity.Web
+
+Microsoft vous recommande d’utiliser le package NuGet [Microsoft.Identity.Web](https://www.nuget.org/packages/Microsoft.Identity.Web) lors du développement d’une API web avec ASP.NET Core.
+
+_Microsoft.Identity.Web_ fournit le ciment entre ASP.NET Core, l’intergiciel d’authentification et la [bibliothèque d’authentification Microsoft (MSAL)](msal-overview.md) pour .NET. Il favorise une expérience développeur plus claire et plus robuste, et tire parti de la puissance de la plateforme d’identités Microsoft et d’Azure AD B2C.
+
+#### <a name="using-microsoftidentityweb-templates"></a>Utilisation de modèles Microsoft.Identity.Web
+
+Vous pouvez créer une API web à partir de zéro à l’aide des modèles de projet Microsoft.Identity.Web. Pour plus d’informations, consultez [Modèles de projet d’API web Microsoft.Identity.Web](https://aka.ms/ms-id-web/webapi-project-templates).
+
+#### <a name="starting-from-an-existing-aspnet-core-31-application"></a>À partir d’une application ASP.NET Core 3.1 existante
+
+Aujourd’hui, ASP.NET Core 3.1 utilise la bibliothèque Microsoft.AspNetCore.AzureAD.UI. Cet intergiciel est initialisé dans le fichier Startup.cs.
 
 ```csharp
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -104,33 +132,50 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 L’intergiciel (middleware) est ajouté à l’API web par cette instruction :
 
 ```csharp
- services.AddAuthentication(AzureADDefaults.JwtBearerAuthenticationScheme)
-         .AddAzureADBearer(options => Configuration.Bind("AzureAd", options));
+// This method gets called by the runtime. Use this method to add services to the container.
+public void ConfigureServices(IServiceCollection services)
+{
+  services.AddAuthentication(AzureADDefaults.JwtBearerAuthenticationScheme)
+          .AddAzureADBearer(options => Configuration.Bind("AzureAd", options));
+}
 ```
 
- Actuellement, les modèles ASP.NET Core créent des API web Azure Active Directory (Azure AD) qui connectent des utilisateurs de votre organisation ou d’une autre organisation. Elles ne connectent pas d’utilisateurs à l’aide de comptes personnels. Cependant, vous pouvez modifier les modèles pour utiliser le point de terminaison de la plateforme d’identités Microsoft en ajoutant ce code à Startup.cs :
+ Actuellement, les modèles ASP.NET Core créent des API web Azure Active Directory (Azure AD) qui connectent des utilisateurs de votre organisation ou d’une autre organisation. Elles ne connectent pas d’utilisateurs à l’aide de comptes personnels. Toutefois, vous pouvez modifier les modèles permettant d’utiliser le point de terminaison de la plateforme d’identités Microsoft en utilisant [Microsoft.Identity.Web](https://www.nuget.org/packages/Microsoft.Identity.Web) pour remplacer le code dans *Startup.cs* :
 
 ```csharp
-services.Configure<JwtBearerOptions>(AzureADDefaults.JwtBearerAuthenticationScheme, options =>
-{
-    // This is a Microsoft identity platform web API.
-    options.Authority += "/v2.0";
-
-    // The web API accepts as audiences both the Client ID (options.Audience) and api://{ClientID}.
-    options.TokenValidationParameters.ValidAudiences = new []
-    {
-     options.Audience,
-     $"api://{options.Audience}"
-    };
-
-    // Instead of using the default validation (validating against a single tenant,
-    // as we do in line-of-business apps),
-    // we inject our own multitenant validation logic (which even accepts both v1 and v2 tokens).
-    options.TokenValidationParameters.IssuerValidator = AadIssuerValidator.GetIssuerValidator(options.Authority).Validate;;
-});
+using Microsoft.Identity.Web;
 ```
 
-L’extrait de code précédent est extrait du tutoriel incrémentiel de l’API web ASP.NET Core, dans [Microsoft.Identity.Web/WebApiServiceCollectionExtensions.cs#L50-L63](https://github.com/Azure-Samples/active-directory-dotnet-native-aspnetcore-v2/blob/154282843da2fc2958fad151e2a11e521e358d42/Microsoft.Identity.Web/WebApiServiceCollectionExtensions.cs#L50-L63). La méthode **AddProtectedWebApi**, qui en fait plus que ce que montre l’extrait de code, est appelée à partir de Startup.cs.
+```csharp
+public void ConfigureServices(IServiceCollection services)
+{
+ // Adds Microsoft Identity platform (AAD v2.0) support to protect this API
+ services.AddMicrosoftIdentityWebApiAuthentication(Configuration, "AzureAd");
+
+ services.AddControllers();
+}
+```
+
+vous pouvez également écrire ce qui suit (qui est équivalent)
+
+```csharp
+public void ConfigureServices(IServiceCollection services)
+{
+ // Adds Microsoft Identity platform (AAD v2.0) support to protect this API
+ services.AddAuthentication(AzureADDefaults.JwtBearerAuthenticationScheme)
+             .AddMicrosoftIdentityWebApi(Configuration, "AzureAd");
+
+services.AddControllers();
+}
+```
+
+> [!NOTE]
+> Si vous utilisez Microsoft.Identity.Web et que vous ne définissez pas `Audience` dans *appsettings.json*, les éléments suivants sont utilisés :
+> -  `$"{ClientId}"` si vous avez défini la [version acceptée du jeton d’accès](scenario-protected-web-api-app-registration.md#accepted-token-version) sur `2` ou pour des API web Azure AD B2C.
+> - `$"api://{ClientId}` dans tous les autres cas (pour les [jetons d’accès](access-tokens.md) v1.0).
+> Pour plus d’informations, consultez le [code source](https://github.com/AzureAD/microsoft-identity-web/blob/d2ad0f5f830391a34175d48621a2c56011a45082/src/Microsoft.Identity.Web/Resource/RegisterValidAudience.cs#L70-L83) de Microsoft.Identity.Web.
+
+L’extrait de code précédent est extrait du [didacticiel incrémentiel de l’API web ASP.NET Core](https://github.com/Azure-Samples/active-directory-dotnet-native-aspnetcore-v2/blob/63087e83326e6a332d05fee6e1586b66d840b08f/1.%20Desktop%20app%20calls%20Web%20API/TodoListService/Startup.cs#L23-L28). Les détails relatifs à **AddMicrosoftIdentityWebApiAuthentication** sont disponibles dans [Microsoft.Identity.Web](https://github.com/AzureAD/microsoft-identity-web/blob/d2ad0f5f830391a34175d48621a2c56011a45082/src/Microsoft.Identity.Web/WebApiExtensions/WebApiServiceCollectionExtensions.cs#L27). Cette méthode appelle [AddMicrosoftWebAPI](https://github.com/AzureAD/microsoft-identity-web/blob/d2ad0f5f830391a34175d48621a2c56011a45082/src/Microsoft.Identity.Web/WebApiExtensions/WebApiAuthenticationBuilderExtensions.cs#L58), qui lui-même indique à l’intergiciel comment valider le jeton. Pour plus d’informations, consultez son [code source](https://github.com/AzureAD/microsoft-identity-web/blob/d2ad0f5f830391a34175d48621a2c56011a45082/src/Microsoft.Identity.Web/WebApiExtensions/WebApiAuthenticationBuilderExtensions.cs#L104-L122).
 
 ## <a name="token-validation"></a>Validation du jeton
 
@@ -159,15 +204,42 @@ Ce tableau décrit les validateurs :
 | **ValidateSignature** | S’assure que le jeton n’a pas été falsifié. |
 | **ValidateTokenReplay** | S’assure que le jeton n’est pas en cours de réexécution Il existe un cas particulier pour certains protocoles d’utilisation unique. |
 
+#### <a name="customizing-token-validation"></a>Personnalisation de la validation des jetons
+
 Les validateurs sont associés aux propriétés de la classe **TokenValidationParameters**. Les propriétés sont initialisées à partir de la configuration ASP.NET et ASP.NET Core.
 
-Dans la plupart des cas, vous n’avez pas besoin de modifier les paramètres. Les applications qui ne sont pas à locataire unique sont des exceptions. Ces applications web acceptent des utilisateurs de toute organisation ou de comptes Microsoft personnels. Dans ce cas, les émetteurs doivent être validés.
+Dans la plupart des cas, vous n’avez pas besoin de modifier les paramètres. Les applications qui ne sont pas à locataire unique sont des exceptions. Ces applications web acceptent des utilisateurs de toute organisation ou de comptes Microsoft personnels. Dans ce cas, les émetteurs doivent être validés. Microsoft.Identity.Web s’occupe également de la validation de l’émetteur. Pour plus d’informations, consultez [AadIssuerValidator](https://github.com/AzureAD/microsoft-identity-web/blob/master/src/Microsoft.Identity.Web/Resource/AadIssuerValidator.cs) de Microsoft.Identity.Web.
+
+Dans ASP.NET Core, si vous souhaitez personnaliser les paramètres de validation du jeton, utilisez l’extrait de code suivant dans votre *Startup.cs* :
+
+```c#
+services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+        .AddMicrosoftIdentityWebApi(Configuration);
+services.Configure<JwtBearerOptions>(JwtBearerDefaults.AuthenticationScheme, options =>
+{
+  var existingOnTokenValidatedHandler = options.Events.OnTokenValidated;
+  options.Events.OnTokenValidated = async context =>
+  {
+       await existingOnTokenValidatedHandler(context);
+      // Your code to add extra configuration that will be executed after the current event implementation.
+      options.TokenValidationParameters.ValidIssuers = new[] { /* list of valid issuers */ };
+      options.TokenValidationParameters.ValidAudiences = new[] { /* list of valid audiences */};
+  }
+});
+```
+
+Pour le MVC d’ASP.NET, l’exemple de code suivant montre comment effectuer une validation de jeton personnalisée :
+
+https://github.com/azure-samples/active-directory-dotnet-webapi-manual-jwt-validation
 
 ## <a name="token-validation-in-azure-functions"></a>Validation des jetons dans Azure Functions
 
-Vous pouvez également valider les jetons d’accès entrants dans Azure Functions. Vous trouverez des exemples de ce type de validation dans [Microsoft .NET](https://github.com/Azure-Samples/ms-identity-dotnet-webapi-azurefunctions), [NodeJS](https://github.com/Azure-Samples/ms-identity-nodejs-webapi-azurefunctions) et [Python](https://github.com/Azure-Samples/ms-identity-python-webapi-azurefunctions).
+Vous pouvez également valider les jetons d’accès entrants dans Azure Functions. Vous trouverez des exemples de cette validation dans les exemples de code suivants sur GitHub :
+
+- .NET : [Azure-Samples/ms-identity-dotnet-webapi-azurefunctions](https://github.com/Azure-Samples/ms-identity-dotnet-webapi-azurefunctions)
+- Node.js : [Azure-Samples/ms-identity-nodejs-webapi-azurefunctions](https://github.com/Azure-Samples/ms-identity-nodejs-webapi-azurefunctions)
+- Python : [Azure-Samples/ms-identity-python-webapi-azurefunctions)](https://github.com/Azure-Samples/ms-identity-python-webapi-azurefunctions)
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-> [!div class="nextstepaction"]
-> [Vérifiez les étendues et les rôles d’application dans votre code](scenario-protected-web-api-verification-scope-app-roles.md)
+Passez à l’article suivant de ce scénario, [Vérifier les étendues et les rôles d’application dans votre code](scenario-protected-web-api-verification-scope-app-roles.md).

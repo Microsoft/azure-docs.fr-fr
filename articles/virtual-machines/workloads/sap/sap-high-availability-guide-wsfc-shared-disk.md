@@ -10,22 +10,23 @@ tags: azure-resource-manager
 keywords: ''
 ms.assetid: f6fb85f8-c77a-4af1-bde8-1de7e4425d2e
 ms.service: virtual-machines-windows
+ms.subservice: workloads
 ms.topic: article
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure-services
-ms.date: 05/05/2017
+ms.date: 10/16/2020
 ms.author: radeltch
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: cf85632ff062bff5b71451379f37c14830bf6b68
-ms.sourcegitcommit: 999ccaf74347605e32505cbcfd6121163560a4ae
+ms.openlocfilehash: e46aa79bc84f3eba218932c1e8a463584de3f1bb
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82982953"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96488950"
 ---
 # <a name="cluster-an-sap-ascsscs-instance-on-a-windows-failover-cluster-by-using-a-cluster-shared-disk-in-azure"></a>Mettre en cluster une instance SAP ASCS/SCS sur un cluster de basculement Windows à l’aide d’un disque partagé de cluster dans Azure
 
-> ![Windows][Logo_Windows] Windows
+> ![Système d’exploitation Windows][Logo_Windows] Windows
 >
 
 Le clustering de basculement Windows Server constitue la base d’une installation de SGBD et de SAP ASCS/SCS à haute disponibilité dans Windows.
@@ -40,7 +41,7 @@ Avant d’aborder les tâches décrites dans cet article, consultez l’article 
 
 ## <a name="windows-server-failover-clustering-in-azure"></a>Clustering de basculement Windows Server dans Azure
 
-Par rapport aux déploiements complets ou de cloud privé, le service Machines virtuelles Azure requiert des étapes supplémentaires pour configurer le clustering de basculement Windows Server. Quand vous créez un cluster, vous devez définir plusieurs adresses IP et noms d’hôtes virtuels pour l’instance SAP ASCS/SCS.
+Le clustering de basculement Windows Server avec Machines virtuelles Azure implique des étapes de configuration supplémentaires. Quand vous créez un cluster, vous devez définir plusieurs adresses IP et noms d’hôtes virtuels pour l’instance SAP ASCS/SCS.
 
 ### <a name="name-resolution-in-azure-and-the-cluster-virtual-host-name"></a>Résolution de noms dans Azure et nom d’hôte virtuel du cluster
 
@@ -50,9 +51,12 @@ Le service Azure Load Balancer fournit un *équilibreur de charge interne* pour 
 
 Déployez l’équilibreur de charge interne dans le groupe de ressources qui contient les nœuds de cluster. Ensuite, configurez toutes les règles de réacheminement de port nécessaires en utilisant les ports de sondage de l’équilibreur de charge interne. Les clients peuvent se connecter avec le nom d’hôte virtuel. Le serveur DNS résout l’adresse IP du cluster et l’équilibrage de charge interne gère le réacheminement de port vers le nœud actif du cluster.
 
+> [!IMPORTANT]
+> Une adresse IP flottante n’est pas prise en charge sur une configuration IP secondaire de carte réseau pour des scénarios d’équilibrage de charge. Pour plus d’informations, consultez [Limitations d’équilibreur de charge Azure](../../../load-balancer/load-balancer-multivip-overview.md#limitations). Si vous avez besoin d’une adresse IP supplémentaire pour la machine virtuelle, déployez une deuxième carte réseau.  
+
 ![Figure 1 : Configuration du clustering de basculement Windows dans Azure sans disque partagé][sap-ha-guide-figure-1001]
 
-_**Figure 1 :** Configuration du clustering de basculement Windows Server dans Azure sans disque partagé_
+_Configuration du clustering de basculement Windows Server dans Azure sans disque partagé_
 
 ### <a name="sap-ascsscs-ha-with-cluster-shared-disks"></a>Haute disponibilité SAP ASCS/SCS avec des disques partagés de cluster
 Dans Windows, une instance SAP ASCS/SCS contient des services SAP centraux, le serveur de messages SAP, des processus de serveur de mise en file d’attente et des fichiers d’hôte global SAP. Les fichiers d’hôte global SAP stockent les fichiers centraux pour l’ensemble du système SAP.
@@ -60,8 +64,8 @@ Dans Windows, une instance SAP ASCS/SCS contient des services SAP centraux, le s
 Une instance SAP ASCS/SCS inclut les composants suivants :
 
 * Services centraux SAP :
-    * Deux processus, un serveur de messages et de mise en file d’attente, et un \<nom_hôte_virtuel_ASCS/SCS> utilisé pour accéder à ces deux processus.
-    * Structure de fichiers : S:\usr\sap\\&lt;SID&gt;\ASCS/SCS\<numéro d’instance\>
+    * Deux processus, un serveur de messages et de mise en file d’attente, et un \<ASCS/SCS virtual host name> utilisé pour accéder à ces deux processus.
+    * Structure de fichiers : S:\usr\sap\\&lt;SID&gt;\ASCS/SCS\<instance number\>
 
 
 * Fichiers d’hôte global SAP :
@@ -73,30 +77,104 @@ Une instance SAP ASCS/SCS inclut les composants suivants :
 
 ![Figure 2 : Processus, structure de fichiers et partage de fichiers sapmnt d’hôte global d’une instance SAP ASCS/SCS][sap-ha-guide-figure-8001]
 
-_**Figure 2 :** Processus, structure de fichiers et partage de fichiers sapmnt d’hôte global d’une instance SAP ASCS/SCS_
+_Processus, structure de fichiers et partage de fichiers sapmnt d’hôte global d’une instance SAP ASCS/SCS_
 
 Dans un paramètre de haute disponibilité, vous mettez en cluster les instances SAP ASCS/SCS. Nous utilisons des *disques partagés de cluster* (lecteur S dans notre exemple) pour placer les fichiers SAP ASCS/SCS et d’hôte global SAP.
 
 ![Figure 3 : Architecture de haute disponibilité (HA) SAP ASCS/SCS avec disque partagé][sap-ha-guide-figure-8002]
 
-_**Figure 3 :** Architecture de haute disponibilité (HA) SAP ASCS/SCS avec disque partagé_
+_Architecture de haute disponibilité (HA) SAP ASCS/SCS avec disque partagé_
 
-> [!IMPORTANT]
-> Ces deux composants s’exécutent sous la même instance SAP ASCS/SCS :
->* Le même \<nom d’hôte virtuel ASCS/SCS> est utilisé pour accéder aux processus de serveur de mise en file d’attente et de messages SAP, ainsi qu’aux fichiers d’hôte global SAP par le biais du partage de fichiers sapmnt.
->* Ils partagent le même lecteur de disque partagé de cluster S.
->
 
+Avec l’architecture ERS1 (Enqueue Replication Server 1) :
+* Le même \<ASCS/SCS virtual host name> est utilisé pour accéder aux processus de serveur de mise en file d’attente et de messages SAP, ainsi qu’aux fichiers d’hôte global SAP par le biais du partage de fichiers sapmnt.
+* Ils partagent le même lecteur de disque partagé de cluster S.  
+
+Avec l’architecture ERS2 (Enqueue Replication Server 2) : 
+* Le \<ASCS/SCS virtual host name> utilisé pour accéder au processus de serveur de messages SAP et aux fichiers d’hôte global SAP par le biais du partage de fichiers sapmnt est le même.
+* Ils partagent le même lecteur de disque partagé de cluster S.
+* Il existe un \<ERS virtual host name> distinct servant à accéder au processus du serveur d’empilement.  
 
 ![Figure 4 : Architecture de haute disponibilité (HA) SAP ASCS/SCS avec disque partagé][sap-ha-guide-figure-8003]
 
-_**Figure 4 :** Architecture de haute disponibilité (HA) SAP ASCS/SCS avec disque partagé_
+_Architecture de haute disponibilité (HA) SAP ASCS/SCS avec disque partagé_
+
+#### <a name="shared-disk-and-enqueue-replication-server"></a>Disque partagé et architecture ERS 
+
+1. Le disque partagé est pris en charge avec l’architecture ERS1, où l’instance ERS respecte les conditions suivantes :   
+
+   - Il ne s’agit pas d’une instance en cluster.
+   - L’instance utilise le nom `localhost`.
+   - L’instance est déployée sur des disques locaux sur chacun des nœuds de cluster.
+
+2. Le disque partagé est également pris en charge avec l’architecture ERS2, où l’instance ERS2 respecte les conditions suivantes :  
+
+   - Il s’agit d’une instance en cluster.
+   - L’instance utilise un nom d’hôte virtuel/réseau dédié.
+   - L’adresse IP du nom d’hôte virtuel ERS est configurée sur l’équilibreur de charge interne Azure, en plus de l’adresse IP (A)SCS.
+   - L’instance est déployée sur des **disques locaux** sur chacun des nœuds de cluster. Il n’est donc pas nécessaire de disposer d’un disque partagé.
+
+   > [!TIP]
+   > Vous trouverez ici des informations complémentaires sur les architectures ERS1 et ERS2 :  
+   > [Serveur de réplication d’empilement dans un cluster de basculement Microsoft](https://help.sap.com/viewer/3741bfe0345f4892ae190ee7cfc53d4c/CURRENT_VERSION_SWPM20/en-US/8abd4b52902d4b17a105c2fabdf5c0cf.html)  
+   > [Nouveau réplicateur d’empilement dans les environnements de cluster de basculement](https://blogs.sap.com/2019/03/19/new-enqueue-replicator-in-failover-cluster-environments/)  
+
+#### <a name="options-for-shared-disk-in-azure-for-sap-workloads"></a>Options de disque partagé dans Azure pour les charges de travail SAP
+
+Il existe deux options pour le disque partagé dans un cluster de basculement Windows dans Azure :
+
+- La fonctionnalité de [disques partagés Azure](../../disks-shared.md), qui permet d’attacher simultanément un disque managé Azure à plusieurs machines virtuelles. 
+- Le logiciel tiers [SIOS DataKeeper Cluster Edition](https://us.sios.com/products/datakeeper-cluster) pour créer un stockage en miroir qui simule un stockage partagé de cluster. 
+
+Lorsque vous sélectionnez une technologie de disque partagé, gardez à l’esprit les points suivants :
+
+**Disque partagé Azure pour les charges de travail SAP**
+- Cette fonctionnalité permet d’attacher simultanément un disque managé Azure à plusieurs machines virtuelles sans logiciels supplémentaires à gérer ni à utiliser. 
+- Cette fonctionnalité implique d’utiliser un seul disque partagé Azure au sein d’un cluster de stockage, ce qui a une incidence sur la fiabilité de votre solution SAP.
+- Actuellement, seuls sont pris en charge les déploiements avec disque partagé Premium Azure dans un groupe à haute disponibilité. Le disque partagé Azure n’est pas pris en charge dans le déploiement zonal.     
+- Veillez à approvisionner le disque Azure Premium avec une taille de disque minimale (cf. [Plages SSD Premium](../../disks-shared.md#disk-sizes)) pour pouvoir l’attacher simultanément au nombre nécessaire de machines virtuelles (généralement, deux pour le cluster de basculement Windows SAP ASCS). 
+- Le disque Ultra partagé Azure n’est pas pris en charge pour les charges de travail SAP, car il ne gère ni le déploiement dans un groupe à haute disponibilité ni le déploiement zonal.  
+ 
+**SIOS**
+- La solution SIOS assure la réplication synchrone et en temps réel des données entre deux disques.
+- La solution SIOS implique de travailler avec deux disques managés. Or, si vous utilisez des groupes à haute disponibilité ou des zones de disponibilité, ces disques s’afficheront sur des clusters de stockage différents. 
+- Le déploiement dans les zones de disponibilité est pris en charge.
+- Des logiciels tiers doivent être achetés en plus, installés et utilisés.
+
+### <a name="shared-disk-using-azure-shared-disk"></a>Disque partagé à l’aide d’un disque partagé Azure
+
+Microsoft propose des [disques partagés Azure](../../disks-shared.md), qui peuvent être utilisés pour implémenter la haute disponibilité SAP ASCS/SCS avec une option de disque partagé.
+
+#### <a name="prerequisites-and-limitations"></a>Conditions préalables et limitations
+
+Il est actuellement possible d’utiliser des disques SSD Premium Azure comme disque partagé Azure pour l'instance SAP ASCS/SCS. Quelques limitations s'appliquent pour le moment :
+
+-  Le [disque Ultra Azure](../../disks-types.md#ultra-disk) n'est pas pris en charge comme disque partagé Azure pour les charges de travail SAP. Il est actuellement impossible de placer des machines virtuelles Azure dans un groupe à haute disponibilité à l'aide d'un disque Ultra Azure.
+-  Le [disque partagé Azure](../../disks-shared.md) avec disques SSD Premium n'est pris en charge qu'avec les machines virtuelles d'un groupe à haute disponibilité. Il n'est pas pris en charge dans le cadre d'un déploiement de zones de disponibilité. 
+-  La valeur [maxShares](../../disks-shared-enable.md?tabs=azure-cli#disk-sizes) du disque partagé Azure détermine combien de nœuds de cluster peuvent utiliser le disque partagé. En règle générale, pour une instance SAP ASCS/SCS, on configure deux nœuds dans le cluster de basculement Windows. Par conséquent, la valeur de `maxShares` doit être définie sur deux.
+-  Toutes les machines virtuelles en cluster SAP ASCS/SCS doivent être déployées dans le même [groupe de placement de proximité Azure](../../windows/proximity-placement-groups.md).   
+   Bien qu'il soit possible de déployer des machines virtuelles en cluster Windows dans un groupe à haute disponibilité avec un disque partagé Azure sans groupe de placement de proximité, le groupe de placement de proximité garantira une proximité physique étroite des disques partagés Azure et des machines virtuelles en cluster, réduisant ainsi la latence entre les machines virtuelles et la couche de stockage.    
+
+Pour plus d’informations sur les limitations du disque partagé Azure, lisez attentivement la section [Limitations](../../disks-shared.md#limitations) de la documentation consacrée au disque partagé Azure.
+
+> [!IMPORTANT]
+> Lors du déploiement d'un cluster de basculement Windows SAP ASCS/SCS avec disque partagé Azure, sachez que votre déploiement fonctionnera avec un seul disque partagé au sein d'un cluster de stockage. Votre instance SAP ASCS/SCS serait affectée en cas de problème au niveau du cluster de stockage dans lequel le disque partagé Azure est déployé.    
+
+> [!TIP]
+> Pour connaître les points importants à prendre en compte lors de la planification de votre déploiement SAP, consultez le [Guide de planification SAP NetWeaver sur Azure](./planning-guide.md) et le [Guide de stockage Azure pour les charges de travail SAP](./planning-guide-storage.md).
+
+### <a name="supported-os-versions"></a>Versions du système d'exploitation prises en charge
+
+Windows Server 2016 et 2019 sont tous deux pris en charge (utilisez les dernières images du centre de données).
+
+Nous vous recommandons vivement d'utiliser **Windows Server 2019 Datacenter** pour plusieurs raisons :
+- Le service de cluster de basculement Windows 2019 est compatible avec Azure.
+- L'intégration et la compatibilité de la maintenance de l'hôte Azure sont renforcées, et l'expérience est améliorée grâce à la supervision des événements de planification Azure.
+- Il est possible d'utiliser le nom de réseau distribué (option par défaut). Il n'est donc pas nécessaire de disposer d’une adresse IP dédiée pour le nom réseau du cluster. En outre, il n'y a pas lieu de configurer cette adresse IP sur l'équilibreur de charge interne Azure. 
 
 ### <a name="shared-disks-in-azure-with-sios-datakeeper"></a>Disques partagés dans Azure avec SIOS DataKeeper
 
-Vous avez besoin d’un stockage partagé en cluster pour bénéficier d’une instance SAP ASCS/SCS à haute disponibilité.
-
-Vous pouvez utiliser le logiciel tiers SIOS DataKeeper Cluster Edition pour créer un stockage en miroir qui simule un stockage partagé en cluster. La solution SIOS assure la réplication synchrone des données en temps réel.
+Autre solution pour le disque partagé, vous pouvez utiliser le logiciel tiers SIOS DataKeeper Cluster Edition pour créer un stockage en miroir qui simule un stockage partagé en cluster. La solution SIOS assure la réplication synchrone des données en temps réel.
 
 Pour créer une ressource de disque partagé pour un cluster :
 
@@ -108,7 +186,7 @@ Vous trouverez plus d’informations sur SIOS DataKeeper [ici](https://us.sios.c
 
 ![Figure 5 : Configuration du clustering de basculement Windows Server dans Azure avec SIOS DataKeeper][sap-ha-guide-figure-1002]
 
-_**Figure 5 :** Configuration du clustering de basculement Windows dans Azure avec SIOS DataKeeper_
+_Configuration du clustering de basculement Windows dans Azure avec SIOS DataKeeper_
 
 > [!NOTE]
 > Avec certains SGBD, tels que SQL Server, vous n’avez pas besoin de disques partagés pour atteindre une haute disponibilité. SQL Server AlwaysOn assure la réplication des données et des fichiers de journaux du SGBD à partir du disque local d’un nœud du cluster vers le disque local d’un autre nœud du cluster. Dans ce cas, la configuration du cluster Windows ne nécessite pas de disque partagé.

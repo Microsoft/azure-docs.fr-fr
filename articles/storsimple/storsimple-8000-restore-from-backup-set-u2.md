@@ -4,30 +4,24 @@ description: Explique comment utiliser le Catalogue de sauvegarde du service Sto
 services: storsimple
 documentationcenter: NA
 author: alkohli
-manager: timlt
-editor: ''
 ms.assetid: ''
 ms.service: storsimple
 ms.devlang: NA
-ms.topic: article
-ms.tgt_pltfrm: NA
-ms.workload: TBD
-ms.date: 05/23/2017
+ms.topic: how-to
+ms.date: 07/15/2020
 ms.author: alkohli
-ms.openlocfilehash: 6a2e022697ced90d968075b7a4abe4163be7a539
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: ff70df225b5ed27960c96889d409d7005f0fbcc4
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "60723345"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94950726"
 ---
 # <a name="restore-a-storsimple-volume-from-a-backup-set"></a>Restauration d’un volume StorSimple à partir d’un jeu de sauvegarde
 
 ## <a name="overview"></a>Vue d’ensemble
 
 Ce didacticiel décrit la restauration d’un appareil de la gamme StorSimple 8000 à l’aide d’un jeu de sauvegarde existant. Utilisez le panneau **Catalogue de sauvegarde** pour restaurer un volume à partir d’une sauvegarde locale ou cloud. Le panneau **Catalogue de sauvegarde** affiche tous les jeux de sauvegarde créés lors de sauvegardes manuelles ou automatisées. L’opération de restauration à partir d’un jeu de sauvegarde met le volume en ligne immédiatement pendant le téléchargement des données en arrière-plan.
-
-Pour démarrer la restauration, vous pouvez également accéder à **Appareils > [Votre appareil] > Volumes**. Dans le panneau **Volumes**, cliquez sur un volume avec le bouton droit de la souris pour appeler le menu contextuel, puis sélectionnez **Restaurer**.
 
 ## <a name="before-you-restore"></a>Avant de procéder à la restauration
 
@@ -69,7 +63,7 @@ Dans Update 4, les cmdlets Windows PowerShell peuvent être utilisées pour int
 
 * `Set-HcsRehydrationJob` : cette cmdlet vous permet d’interrompre, d’arrêter ou de reprendre le travail de rafraîchissement au cours du rafraîchissement.
 
-Pour plus d’informations sur les cmdlets de rafraîchissement, consultez le [document de référence sur les cmdlets Windows PowerShell pour StorSimple](https://technet.microsoft.com/library/dn688168.aspx).
+Pour plus d’informations sur les cmdlets de rafraîchissement, consultez le [document de référence sur les cmdlets Windows PowerShell pour StorSimple](/powershell/module/hcs/?viewFallbackFrom=winserverr2-ps).
 
 Avec le rafraîchissement automatique, les performances de lecture temporaires sont généralement plus élevées. L'ampleur des améliorations dépend de divers facteurs, tels que le modèle d'accès, le taux d'activité des données et le type de données. 
 
@@ -121,7 +115,7 @@ Vous pouvez utiliser le panneau **Catalogue de sauvegarde** pour restaurer votre
    
 4. Revenez à l’onglet **Catalogue de sauvegarde** et sélectionnez un jeu de sauvegarde. Cliquez dessus avec le bouton droit puis sélectionnez **Restaurer** dans le menu contextuel.
 
-    ![Liste des jeux de sauvegarde](./media/storsimple-8000-restore-from-backup-set-u2/restorebu1.png)
+    ![Liste des jeux de sauvegarde 2](./media/storsimple-8000-restore-from-backup-set-u2/restorebu1.png)
 
 5. Vous êtes invité à confirmer l’opération. Passez en revue les informations de restauration, puis cochez la case de confirmation.
    
@@ -129,7 +123,7 @@ Vous pouvez utiliser le panneau **Catalogue de sauvegarde** pour restaurer votre
 
 7. Cliquez sur **Restaurer**. Cette opération lance une tâche de restauration que vous pouvez afficher en accédant à la page **Tâches**.
 
-   ![Page Confirmation](./media/storsimple-8000-restore-from-backup-set-u2/restorebu5.png)
+   ![Page Confirmation 2](./media/storsimple-8000-restore-from-backup-set-u2/restorebu5.png)
 
 8. Une fois la restauration terminée, vérifiez que le contenu de vos volumes a été remplacé par les volumes provenant de la sauvegarde.
 
@@ -143,4 +137,3 @@ Pour terminer l’opération de restauration, mettez le volume hors connexion su
 ## <a name="next-steps"></a>Étapes suivantes
 * Découvrez comment [gérer des volumes StorSimple](storsimple-8000-manage-volumes-u2.md).
 * Découvrez comment [utiliser le service StorSimple Device Manager pour gérer votre appareil StorSimple](storsimple-8000-manager-service-administration.md).
-

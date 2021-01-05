@@ -7,15 +7,15 @@ ms.service: virtual-machines-linux
 ms.subservice: workloads
 ms.workload: infrastructure-services
 ms.tgt_pltfrm: vm-linux
-ms.topic: article
+ms.topic: how-to
 ms.date: 07/11/2018
 ms.author: cynthn
-ms.openlocfilehash: 0d3f0a61da3654c31c99cfac43c86b081876f700
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 7fbdeda4cce737a6220d42642473e5f86ef8e525
+ms.sourcegitcommit: 192f9233ba42e3cdda2794f4307e6620adba3ff2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78944575"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96295959"
 ---
 # <a name="install-mysql-on-a-virtual-machine-running-opensuse-linux-in-azure"></a>Installation de MySQL sur une machine virtuelle exécutant OpenSUSE Linux dans Azure
 
@@ -32,7 +32,7 @@ Créez d’abord un groupe de ressources. Dans cet exemple, le groupe de ressour
 az group create --name mySQLSUSEResourceGroup --location eastus
 ```
 
-Créez la machine virtuelle. Dans cet exemple, la machine virtuelle est nommée *myVM* et sa taille est *Standard_D2s_v3*, mais vous devez sélectionner la [taille de machine virtuelle](sizes.md) la plus adaptée à votre charge de travail.
+Créez la machine virtuelle. Dans cet exemple, la machine virtuelle est nommée *myVM* et sa taille est *Standard_D2s_v3*, mais vous devez sélectionner la [taille de machine virtuelle](../sizes.md) la plus adaptée à votre charge de travail.
 
 ```azurecli-interactive
 az vm create --resource-group mySQLSUSEResourceGroup \
@@ -117,7 +117,7 @@ mysql_secure_installation
 Vous pouvez maintenant vous connecter et entrer l’invite MySQL.
 
 ```bash  
-mysql -u root -p
+sudo mysql -u root -p
 ```
 Cette action vous renvoie à l’invite MySQL où vous pouvez émettre des instructions SQL pour interagir avec la base de données.
 
@@ -157,7 +157,3 @@ quit
 
 ## <a name="next-steps"></a>Étapes suivantes
 Pour plus d’informations sur MySQL, consultez la [Documentation MySQL](https://dev.mysql.com/doc).
-
-
-
-

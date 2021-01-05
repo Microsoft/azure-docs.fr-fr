@@ -8,14 +8,17 @@ services: iot-accelerators
 ms.topic: conceptual
 ms.date: 06/10/2019
 ms.author: dobett
-ms.openlocfilehash: c868aa0f1c2449ccf163523c9ded25a31d1d84c4
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: e492ebf70f69c985691852a1c1f2351d1e09578e
+ms.sourcegitcommit: 6906980890a8321dec78dd174e6a7eb5f5fcc029
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "73820108"
+ms.lasthandoff: 10/22/2020
+ms.locfileid: "92425013"
 ---
 # <a name="what-is-connected-factory-iot-solution-accelerator"></a>Qu’est-ce que l’accélérateur de solution IoT Usine connectée ?
+
+> [!IMPORTANT]
+> Pendant la mise à jour de cet article, consultez [Azure Industrial IoT](https://azure.github.io/Industrial-IoT/) pour obtenir le contenu le plus récent.
 
 Usine connectée est une implémentation de l’architecture de référence de Microsoft Azure Industrial IoT, sous la forme d’une solution open source. Vous pouvez l’utiliser comme point de départ pour un produit commercial. Vous pouvez déployer une version prédéfinie de la solution Usine connectée dans votre abonnement Azure à partir des [accélérateurs de solution Azure IoT Suite](https://www.azureiotsolutions.com/#solutions/types/CF).
 
@@ -55,7 +58,7 @@ Usine connectée propose les fonctionnalités suivantes :
 
 ## <a name="end-to-end-security"></a>Sécurité de bout en bout
 
-- Configurez les autorisations de sécurité des utilisateurs à l’aide du contrôle d’accès en fonction du rôle (RBAC).
+- Configurez les autorisations de sécurité des utilisateurs à l'aide du contrôle d'accès en fonction du rôle (RBAC).
 - Le chiffrement de bout en bout est implémenté à l’aide de l’authentification OPC UA (avec des certificats X.509) et des jetons de sécurité.
 
 ## <a name="customizability"></a>Possibilités de personnalisation

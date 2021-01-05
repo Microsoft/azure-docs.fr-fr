@@ -5,12 +5,12 @@ author: florianborn71
 ms.author: flborn
 ms.date: 02/03/2020
 ms.topic: article
-ms.openlocfilehash: 8573a88d5371bbde07a541c789f52e6c44f1e279
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 536f5e7d2fa12d1f9a9f09a31b463d2096dcad37
+ms.sourcegitcommit: 957c916118f87ea3d67a60e1d72a30f48bad0db6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81411132"
+ms.lasthandoff: 10/19/2020
+ms.locfileid: "92207408"
 ---
 # <a name="system-requirements"></a>Configuration système requise
 
@@ -24,7 +24,7 @@ Ce chapitre décrit la configuration requise pour utiliser *Azure Remote Renderi
 
 * Windows 10 version 1903 ou ultérieure.
 * Pilotes graphiques à jour.
-* Facultatif : Décodeur vidéo matériel H265, si vous souhaitez utiliser l’aperçu local du contenu rendu à distance (par exemple, dans Unity).
+* Facultatif : [Décodeur vidéo matériel H265](https://www.microsoft.com/p/hevc-video-extensions/9nmzlz57r3t7), si vous souhaitez utiliser l’aperçu local du contenu rendu à distance (par exemple, dans Unity).
 
 > [!IMPORTANT]
 > Windows Update ne fournissant pas toujours les pilotes GPU les plus récents, consultez le site web du fabricant de votre GPU pour obtenir les pilotes les plus récents :
@@ -52,7 +52,7 @@ Il est important d’utiliser le codec HEVC le plus récent, car les versions pl
 1. Démarrez **Microsoft Store**.
 1. Cliquez sur le bouton **« ... »** dans l’angle supérieur droit.
 1. Sélectionnez **Téléchargements et mises à jour**.
-1. Dans la liste, recherchez **Extensions vidéo HEVC du fabricant de l’appareil**.
+1. Dans la liste, recherchez **Extensions vidéo HEVC du fabricant de l’appareil**. Si cet élément n’est pas listé sous les mises à jour, la version la plus récente est déjà installée.
 1. Assurez-vous que la version du codec répertorié est au minimum la version **1.0.21821.0**.
 1. Cliquez sur le bouton **Obtenir les mises à jour**, puis attendez que l’installation soit terminée.
 
@@ -64,14 +64,28 @@ Consultez le chapitre dédié à la [configuration réseau requise](../reference
 
 Pour résoudre les problèmes de réseau, reportez-vous au [Guide de résolution des problèmes](../resources/troubleshoot.md#unstable-holograms).
 
+### <a name="network-ports"></a>Ports réseau
+
+Vérifiez que vos pare-feu (sur l’appareil, dans les routeurs, etc.) ne bloquent pas les ports suivants :
+
+| Port              | Protocol | Allow    | Description |
+|-------------------|----------|----------|-------------|
+| 50051             | TCP      | Sortant | Connexion initiale (poignée de main HTTP) |
+| 8266              | UDP      | Sortant | Transfert de données |
+| 5000, 5433, 8443  | TCP      | Sortant | Requis pour l’[outil ArrInspector](../resources/tools/arr-inspector.md)|
+
+
 ## <a name="software"></a>Logiciel
 
 Les logiciels suivants doivent être installés :
 
 * La dernière version de **Visual Studio 2019** [(télécharger)](https://visualstudio.microsoft.com/vs/older-downloads/)
+* [Outils Visual Studio pour Mixed Reality](/windows/mixed-reality/install-the-tools). Plus précisément, les installations de *charge de travail* suivantes sont obligatoires :
+  * **Développement Desktop en C++**
+  * **Développement de la plateforme Windows universelle (UWP)**
 * **Le SDK Windows 10.0.18362.0** [(télécharger)](https://developer.microsoft.com/windows/downloads/windows-10-sdk)
 * **GIT** [(télécharger)](https://git-scm.com/downloads)
-* Facultatif : Pour afficher le flux vidéo du serveur sur un PC de bureau, vous avez besoin des **Extensions vidéo HEVC** [(lien du Microsoft Store)](https://www.microsoft.com/p/hevc-video-extensions/9nmzlz57r3t7).
+* Facultatif : Pour afficher le flux vidéo du serveur sur un PC de bureau, vous avez besoin des **Extensions vidéo HEVC** [(lien du Microsoft Store)](https://www.microsoft.com/p/hevc-video-extensions/9nmzlz57r3t7). Vérifiez que la version la plus récente est installée en recherchant des mises à jour dans le Store.
 
 ## <a name="unity"></a>Unity
 

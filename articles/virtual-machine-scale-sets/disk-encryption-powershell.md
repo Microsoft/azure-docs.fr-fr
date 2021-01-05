@@ -8,13 +8,13 @@ ms.service: virtual-machine-scale-sets
 ms.subservice: disks
 ms.date: 10/15/2019
 ms.reviewer: mimckitt
-ms.custom: mimckitt
-ms.openlocfilehash: a20abec6ab9925408dd769c5238186af9b7c3d1c
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.custom: mimckitt, devx-track-azurepowershell
+ms.openlocfilehash: cac2f57ccb5fd5d0aa251533bd4a5dd1179ec058
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83195899"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89069747"
 ---
 # <a name="encrypt-os-and-attached-data-disks-in-a-virtual-machine-scale-set-with-azure-powershell"></a>Chiffrer des disques de données joints et de systèmes d’exploitation dans un groupe de machines virtuelles identiques avec Azure PowerShell
 
@@ -51,7 +51,7 @@ Set-AzKeyVaultAccessPolicy -VaultName $vaultName -EnabledForDiskEncryption
 
 ## <a name="create-a-scale-set"></a>Créer un groupe identique
 
-Tout d’abord, définissez un nom d’utilisateur administrateur et un mot de passe pour les instances de machine virtuelle avec [Get-Credential](https://msdn.microsoft.com/powershell/reference/5.1/microsoft.powershell.security/Get-Credential) :
+Tout d’abord, définissez un nom d’utilisateur administrateur et un mot de passe pour les instances de machine virtuelle avec [Get-Credential](/powershell/module/microsoft.powershell.security/get-credential?view=powershell-5.1) :
 
 ```azurepowershell-interactive
 $cred = Get-Credential

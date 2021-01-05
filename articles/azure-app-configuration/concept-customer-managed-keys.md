@@ -1,17 +1,17 @@
 ---
 title: Utiliser des clés gérées par le client pour chiffrer vos données de configuration
 description: Chiffrer vos données de configuration avec des clés gérées par le client
-author: lisaguthrie
-ms.author: lcozzens
-ms.date: 02/18/2020
+author: AlexandraKemperMS
+ms.author: alkemper
+ms.date: 07/28/2020
 ms.topic: conceptual
 ms.service: azure-app-configuration
-ms.openlocfilehash: ace34cf4a72b871ba6646b279007b8ce21c03e9b
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 46a1e99a7bc75efa85fcb5eff649c14af5abd17b
+ms.sourcegitcommit: 1756a8a1485c290c46cc40bc869702b8c8454016
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81457431"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96930498"
 ---
 # <a name="use-customer-managed-keys-to-encrypt-your-app-configuration-data"></a>Utiliser des clés gérées par le client pour chiffrer vos données App Configuration
 Azure App Configuration [chiffre les informations sensibles au repos](../security/fundamentals/encryption-atrest.md). L’utilisation de clés gérées par le client offre une protection améliorée des données en vous permettant de gérer vos clés de chiffrement.  Quand un chiffrement avec des clés gérées est utilisé, toutes les informations sensibles dans App Configuration sont chiffrées avec une clé Azure Key Vault fournie par l’utilisateur.  Ceci donne la possibilité d’effectuer une rotation de la clé de chiffrement à la demande.  Ceci permet aussi de révoquer l’accès d’Azure App Configuration à des informations sensibles en révoquant l’accès à la clé par l’instance App Configuration.
@@ -20,7 +20,7 @@ Azure App Configuration [chiffre les informations sensibles au repos](../securit
 Azure App Configuration chiffre les informations sensibles au repos en utilisant une clé de chiffrement AES 256 bits fournie par Microsoft. Chaque instance App Configuration a sa propre clé de chiffrement gérée par le service et utilisée pour chiffrer les informations sensibles. Les informations sensibles incluent les valeurs qui se trouvent dans les paires clé-valeur.  Quand la fonctionnalité de clé gérée par le client est activée, App Configuration utilise une identité managée affectée à l’instance App Configuration pour s’authentifier auprès d’Azure Active Directory. L’identité managée appelle ensuite Azure Key Vault et encapsule la clé de chiffrement de l’instance App Configuration. La clé de chiffrement encapsulée est ensuite stockée et la clé de chiffrement désencapsulée est mise en cache pour une heure dans App Configuration. App Configuration actualise toutes les heures la version désencapsulée de la clé de chiffrement de l’instance App Configuration. Ceci garantit la disponibilité dans des conditions de fonctionnement normales. 
 
 >[!IMPORTANT]
-> Si l’identité affectée à l’instance App Configuration n’est plus autorisée à désencapsuler la clé de chiffrement de l’instance, ou si la clé gérée est supprimée définitivement, il n’est plus possible de déchiffrer les informations sensibles stockées dans l’instance App Configuration. L’utilisation de la fonction de [suppression réversible](../key-vault/general/overview-soft-delete.md) d’Azure Key Vault réduit le risque de suppression accidentelle de votre clé de chiffrement.
+> Si l’identité affectée à l’instance App Configuration n’est plus autorisée à désencapsuler la clé de chiffrement de l’instance, ou si la clé gérée est supprimée définitivement, il n’est plus possible de déchiffrer les informations sensibles stockées dans l’instance App Configuration. L’utilisation de la fonction de [suppression réversible](../key-vault/general/soft-delete-overview.md) d’Azure Key Vault réduit le risque de suppression accidentelle de votre clé de chiffrement.
 
 Quand des utilisateurs activent la fonctionnalité de clé gérée par le client sur leur instance Azure App Configuration, ils contrôlent la capacité du service à accéder à leurs informations sensibles. La clé gérée sert de clé de chiffrement racine. Un utilisateur peut révoquer l’accès de son instance App Configuration à sa clé gérée en changeant sa stratégie d’accès au coffre de clés. Quand cet accès est révoqué, App Configuration perd la capacité à déchiffrer les données utilisateur dans un délai d’une heure. À ce stade, l’instance App Configuration interdit toutes les tentatives d’accès. Cette situation est récupérable en accordant à nouveau au service l’accès à la clé gérée.  Dans un délai d’une heure, App Configuration est en mesure de déchiffrer les données utilisateur et de fonctionner dans des conditions normales.
 
@@ -75,10 +75,10 @@ Pour commencer, vous avec besoin d’une instance Azure App Configuration correc
 1. Créez une identité managée affectée par le système avec Azure CLI, en utilisant le nom de votre instance App Configuration et le nom groupe de ressources des étapes précédentes. L’identité managée sera utilisée pour accéder à la clé gérée. Nous utilisons `contoso-app-config` pour illustrer le nom d’une instance App Configuration :
     
     ```azurecli
-    az appconfig identity assign --na1. me contoso-app-config --group contoso-resource-group --identities [system]
+    az appconfig identity assign --name contoso-app-config --resource-group contoso-resource-group --identities [system]
     ```
     
-    La sortie de cette commande comprend l’ID du principal (« principalId ») et l’ID de locataire (« tenandId ») de l’identité affectée par le système.  Ceci sera utilisé pour accorder à l’identité l’accès à la clé gérée.
+    La sortie de cette commande comprend l’ID du principal (« principalId ») et l’ID de locataire (« tenandId ») de l’identité affectée par le système.  Ces ID seront utilisés pour accorder à l’identité l’accès à la clé gérée.
 
     ```json
     {
@@ -89,7 +89,7 @@ Pour commencer, vous avec besoin d’une instance Azure App Configuration correc
     }
     ```
 
-1. L’identité managée de l’instance Azure App Configuration doit accéder à la clé pour effectuer la validation, le chiffrement et le déchiffrement des clés. L’ensemble d’actions spécifique auquel il doit accéder inclut : `GET`, `WRAP` et `UNWRAP` pour les clés.  L’octroi de l’accès nécessite l’ID du principal de l’identité managée de l’instance App Configuration. Cette valeur a été obtenue à l’étape précédente. Elle figure ci-dessous en tant que `contoso-principalId`. Accordez l’autorisation à la clé gérée en utilisant la ligne de commande :
+1. L’identité managée de l’instance Azure App Configuration doit accéder à la clé pour effectuer la validation des clés, le chiffrement et le déchiffrement. L’ensemble d’actions spécifique auquel il doit accéder inclut : `GET`, `WRAP` et `UNWRAP` pour les clés.  L’octroi de l’accès nécessite l’ID du principal de l’identité managée de l’instance App Configuration. Cette valeur a été obtenue à l’étape précédente. Elle figure ci-dessous en tant que `contoso-principalId`. Accordez l’autorisation à la clé gérée en utilisant la ligne de commande :
 
     ```azurecli
     az keyvault set-policy -n contoso-vault --object-id contoso-principalId --key-permissions get wrapKey unwrapKey

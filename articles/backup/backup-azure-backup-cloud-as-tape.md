@@ -3,12 +3,12 @@ title: Guide pratique pour remplacer votre infrastructure sur bande
 description: Découvrir comment la Sauvegarde Azure fournit une sémantique de type bande qui vous permet de sauvegarder et de restaurer des données dans Azure
 ms.topic: conceptual
 ms.date: 04/30/2017
-ms.openlocfilehash: aeda1cefc84d425855c40b793f8334936541e63f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 695cc2644521384527ecd871f3613a078e987aa7
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77425100"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89378438"
 ---
 # <a name="move-your-long-term-storage-from-tape-to-the-azure-cloud"></a>Déplacement de votre stockage à long terme de la bande vers le cloud Azure
 
@@ -62,13 +62,13 @@ Le nombre total de points de récupération est 56.
 
 ## <a name="advanced-configuration"></a>Configuration avancée
 
-En cliquant sur **Modifier** dans l’écran précédent, les clients peuvent spécifier les planifications de rétention de manière plus flexible.
+En sélectionnant **Modifier** dans l’écran précédent, les clients peuvent spécifier les planifications de rétention de manière plus flexible.
 
-![Modifier](./media/backup-azure-backup-cloud-as-tape/modify.png)
+![Modifier la fenêtre de stratégie](./media/backup-azure-backup-cloud-as-tape/modify.png)
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 Pour plus d’informations sur la Sauvegarde Azure, consultez :
 
-* [Présentation d’Azure Backup](backup-introduction-to-azure-backup.md)
-* [Test d’Azure Backup](backup-try-azure-backup-in-10-mins.md)
+* [Présentation d’Azure Backup](./backup-overview.md)
+* [Test d’Azure Backup](./backup-windows-with-mars-agent.md)

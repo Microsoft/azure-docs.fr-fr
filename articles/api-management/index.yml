@@ -10,12 +10,12 @@ metadata:
   author: georgewallace
   ms.author: gwallace
   ms.date: 03/08/2020
-  ms.openlocfilehash: 2ed84dfdfcabafe7222b8cb64a853ed04e2335a2
-  ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+  ms.openlocfilehash: 5a3b09c3835e09d734c1083f84893224c3fe8cfd
+  ms.sourcegitcommit: cc13f3fc9b8d309986409276b48ffb77953f4458
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 03/24/2020
-  ms.locfileid: "78944161"
+  ms.lasthandoff: 12/14/2020
+  ms.locfileid: "97399092"
 landingContent:
 - title: En savoir plus sur la Gestion des API
   linkLists:
@@ -29,10 +29,16 @@ landingContent:
   linkLists:
   - linkListType: quickstart
     links:
+    - text: Azure CLI
+      url: get-started-create-service-instance-cli.md
     - text: Portail Azure
       url: get-started-create-service-instance.md
     - text: Azure PowerShell
       url: powershell-create-service-instance.md
+    - text: Visual Studio Code
+      url: vscode-create-service-instance.md
+    - text: Modèle ARM
+      url: quickstart-arm-template.md
 - title: Gérer la Gestion des API
   linkLists:
   - linkListType: tutorial
@@ -54,18 +60,22 @@ landingContent:
     - text: 8. Publier plusieurs versions de votre API
       url: api-management-get-started-publish-versions.md
     - text: 9. Personnaliser le style des pages du portail des développeurs
-      url: api-management-customize-styles.md
+      url: api-management-howto-developer-portal-customize.md
+    - text: 10. Gérer les API dans Visual Studio Code
+      url: visual-studio-code-tutorial.md
 - title: Exemples
   linkLists:
   - linkListType: sample
     links:
-    - text: Stratégie
-      url: policy-samples.md
+    - text: Stratégies
+      url: ./policies/index.md
     - text: Azure PowerShell
       url: powershell-samples.md
+    - text: Éléments intégrés Azure Policy
+      url: ./policy-reference.md
 - title: Architecture
   linkLists:
   - linkListType: architecture
     links:
     - text: Intégration d’entreprise de base
-      url: https://docs.microsoft.com/azure/architecture/reference-architectures/enterprise-integration/basic-enterprise-integration
+      url: /azure/architecture/reference-architectures/enterprise-integration/basic-enterprise-integration

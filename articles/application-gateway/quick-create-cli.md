@@ -1,20 +1,20 @@
 ---
 title: 'Démarrage rapide : Diriger le trafic web à l’aide d’une interface de ligne de commande (CLI)'
 titleSuffix: Azure Application Gateway
-description: Découvrez comment utiliser Azure CLI pour créer une passerelle Azure Application Gateway qui dirige le trafic web vers les machines virtuelles d’un pool de back-ends.
+description: Dans ce guide de démarrage rapide, découvrez comment utiliser Azure CLI pour créer une passerelle d’application Azure qui dirige le trafic web vers les machines virtuelles d’un pool de back-ends.
 services: application-gateway
 author: vhorne
 ms.service: application-gateway
 ms.topic: quickstart
-ms.date: 03/05/2020
+ms.date: 08/27/2020
 ms.author: victorh
-ms.custom: mvc
-ms.openlocfilehash: f60b26756c0affffbd45c8596fdf73d11ffa8e81
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.custom: mvc, devx-track-js, devx-track-azurecli
+ms.openlocfilehash: d4b6fc296ae41667d271e243e9aca9b594e4a5b6
+ms.sourcegitcommit: 230d5656b525a2c6a6717525b68a10135c568d67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "80239510"
+ms.lasthandoff: 11/19/2020
+ms.locfileid: "94886700"
 ---
 # <a name="quickstart-direct-web-traffic-with-azure-application-gateway---azure-cli"></a>Démarrage rapide : Diriger le trafic web avec Azure Application Gateway - Azure CLI
 
@@ -24,12 +24,11 @@ La passerelle d’application dirige le trafic web des applications vers des res
 
 Vous pouvez également suivre ce guide de démarrage rapide en utilisant [Azure PowerShell](quick-create-powershell.md) ou le [portail Azure](quick-create-portal.md).
 
-[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
 
-## <a name="prerequisites"></a>Prérequis
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../includes/azure-cli-prepare-your-environment.md)]
 
-- Compte Azure avec un abonnement actif. [Créez un compte gratuitement](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
-- [Azure CLI version 2.0.4 ou ultérieure](/cli/azure/install-azure-cli) (si vous exécutez Azure CLI localement).
+- Cet article demande la version 2.0.4 ou ultérieure d’Azure CLI. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée.
 
 ## <a name="create-resource-group"></a>Créer un groupe de ressources
 

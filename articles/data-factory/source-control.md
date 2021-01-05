@@ -4,19 +4,19 @@ description: Découvrez comment configurer le contrôle de code source dans Azur
 services: data-factory
 ms.service: data-factory
 ms.workload: data-services
-author: djpmsft
-ms.author: daperlov
+author: dcstwh
+ms.author: weetok
 manager: anandsub
 ms.reviewer: ''
 ms.topic: conceptual
 ms.custom: seo-lt-2019
-ms.date: 04/30/2020
-ms.openlocfilehash: 2d6f667b6a49520dfe210fd797a828328899b634
-ms.sourcegitcommit: 50673ecc5bf8b443491b763b5f287dde046fdd31
+ms.date: 11/02/2020
+ms.openlocfilehash: d219ff8469c471a37deb47e0f217292d70e8f0f9
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83674596"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96497110"
 ---
 # <a name="source-control-in-azure-data-factory"></a>Contrôle de code source dans Azure Data Factory
 [!INCLUDE[appliesto-adf-xxx-md](includes/appliesto-adf-xxx-md.md)]
@@ -26,10 +26,14 @@ Par défaut, l’interface utilisateur d’Azure Data Factory publie directement
 - Le service Data Factory n’inclut pas de référentiel pour stocker les entités JSON de vos modifications. La seule façon d’enregistrer les modifications consiste à utiliser le bouton **Publier tout** pour publier toutes les modifications directement vers le service de fabrique de données.
 - Le service de fabrique de données n’est pas optimisé pour la collaboration ou le contrôle de version.
 
-Pour améliorer l’expérience de création, Azure Data Factory permet de configurer un dépôt Git avec Azure Repos ou GitHub. Git est un système de contrôle de version qui facilite le suivi des modifications et la collaboration. Ce didacticiel explique comment configurer et utiliser un dépôt Git, met en évidence les meilleures pratiques et constitue un guide de résolution des problèmes.
+Pour améliorer l’expérience de création, Azure Data Factory permet de configurer un dépôt Git avec Azure Repos ou GitHub. Git est un système de contrôle de version qui facilite le suivi des modifications et la collaboration. Cet article explique comment configurer et utiliser un référentiel Git, met en évidence les meilleures pratiques et constitue un guide de résolution des problèmes.
 
 > [!NOTE]
-> L’intégration Git de fabrique de données Azure n’est pas disponible dans Microsoft Azure Government.
+> L’intégration Git d’Azure Data Factory n’est pas disponible dans le cloud Azure Government.
+
+Pour en savoir plus sur la façon dont Azure Data Factory s’intègre à git, consultez le didacticiel vidéo de 15 minutes ci-dessous :
+
+> [!VIDEO https://www.microsoft.com/videoplayer/embed/RE4GNKv]
 
 ## <a name="advantages-of-git-integration"></a>Avantages de l’intégration Git
 
@@ -38,7 +42,7 @@ Voici quelques-uns des avantages que l’intégration Git apporte à l’expéri
 -   **Contrôle de la source :** Lorsque vos charges de travail de fabrique de données sont cruciales, vous pouvez intégrer votre fabrique avec Git bénéficier de plusieurs avantages de contrôle source tels que les suivants :
     -   Possibilité de suivre/auditer les modifications.
     -   Possibilité d’annuler les modifications qui ont introduit de bogues.
--   **Sauvegardes partielles :** Lorsque vous créez pour le service de fabrique de données, vous ne pouvez pas enregistrer les modifications en tant que brouillon, et toutes les publications doivent passer par la validation de la fabrique de données. Si vos pipelines ne sont pas finis ou si vous ne souhaitez tout simplement pas perdre de modifications en cas de panne informatique, l’intégration Git permet d’apporter des modifications incrémentielles aux ressources de la fabrique de données, quel qu’en soit l’état. La configuration d’un dépôt Git vous permet d’enregistrer les modifications, et donc de publier uniquement après que vous avez testé vos modifications et en êtes satisfait.
+-   **Sauvegardes partielles :** Lorsque vous créez pour le service de fabrique de données, vous ne pouvez pas enregistrer les modifications en tant que brouillon, et toutes les publications doivent passer par la validation de la fabrique de données. Si vos pipelines ne sont pas finis ou si vous ne souhaitez tout simplement pas perdre de modifications en cas de panne de votre ordinateur, l’intégration Git permet d’apporter des modifications incrémentielles aux ressources de la fabrique de données, quel qu’en soit l’état. La configuration d’un dépôt Git vous permet d’enregistrer les modifications, et donc de publier uniquement après que vous avez testé vos modifications et en êtes satisfait.
 -   **Collaboration et contrôle :** Si plusieurs membres de votre équipe contribuent à la même fabrique, vous pouvez leur permettre de collaborer via un processus de révision du code. Vous pouvez également configurer votre fabrique de manière à ce que tous les contributeurs n’aient pas des autorisations égales. Certains membres de l’équipe peuvent n’être autorisés qu’à apporter des modifications via Git, tandis que d’autres sont autorisés à publier les modifications dans la fabrique.
 -   **Intégration et livraison continus améliorés :**  Si vous déployez dans plusieurs environnements au travers d’un [processus de livraison continue](continuous-integration-deployment.md), l’intégration Git facilite certaines actions. Certaines de ces actions sont les suivantes :
     -   Configurez votre pipeline de mise en production afin qu’il se déclenche automatiquement dès que des modifications sont apportées à votre fabrique « dev ».
@@ -46,31 +50,47 @@ Voici quelques-uns des avantages que l’intégration Git apporte à l’expéri
 -   **Meilleures performances :** Une fabrique moyenne avec l’intégration Git se charge 10 fois plus rapidement qu’une création pour le service de fabrique de données. Cette amélioration des performances est due au fait que les ressources sont téléchargées via Git.
 
 > [!NOTE]
-> La création directe avec le service Data Factory est désactivée dans l’expérience en matière d’interface utilisateur Azure Data Factory quand un dépôt Git est configuré. Les modifications peuvent être apportées directement au service via PowerShell ou un kit SDK.
+> La création directe avec le service Data Factory est désactivée dans l’expérience en matière d’interface utilisateur Azure Data Factory quand un dépôt Git est configuré. Les modifications apportées via PowerShell ou un kit de développement logiciel (SDK) sont publiées directement dans le service Data Factory et ne sont pas entrées dans Git.
 
-## <a name="author-with-azure-repos-git-integration"></a>Créer avec l’intégration Azure Repos Git
+## <a name="connect-to-a-git-repository"></a>Se connecter à un référentiel Git
 
-La création visuelle avec l’intégration Azure Repos Git prend en charge le contrôle du code source et la collaboration pour les utiliser sur vos pipelines Data Factory. Vous pouvez associer une fabrique de données à un dépôt d’organisation Azure Repos Git pour le contrôle du code source, la collaboration, la gestion des versions, etc. Une seule organisation Azure Repos Git peut avoir plusieurs dépôts, mais un dépôt Azure Repos Git ne peut être associé qu’à une seule fabrique de données. Si vous n’avez pas de dépôt ni d’organisation Azure Repos, suivez [ces instructions](https://docs.microsoft.com/azure/devops/organizations/accounts/create-organization-msa-or-work-student) pour créer vos ressources.
+Il existe quatre façons différentes de connecter un référentiel Git à votre fabrique de données pour Azure Repos et GitHub. Après vous être connecté à un référentiel Git, vous pouvez visualiser et gérer votre configuration dans le [hub de gestion](author-management-hub.md) sous **Configuration Git** dans la section **Contrôle de code source**.
 
-> [!NOTE]
-> Vous pouvez stocker les fichiers de scripts et de données dans un dépôt Azure Repos Git. Toutefois, vous devez charger les fichiers manuellement dans le stockage Azure. Un pipeline Data Factory ne charge pas automatiquement les fichiers de scripts ou de données stockés dans un dépôt Azure Repos Git sur le stockage Azure.
-
-### <a name="configure-an-azure-repos-git-repository-with-azure-data-factory"></a>Configurer un dépôt Azure Repos Git avec Azure Data Factory
-
-Vous pouvez configurer un dépôt Azure Repos Git avec une fabrique de données via deux méthodes.
-
-#### <a name="configuration-method-1-azure-data-factory-home-page"></a>Méthode de configuration 1 : Page d’accueil Azure Data Factory
+### <a name="configuration-method-1-home-page"></a>Méthode de configuration 1 : page d'accueil
 
 Dans la page d’accueil Azure Data Factory, sélectionnez **Set up Code Repository** (Configurer le dépôt de code).
 
-![Configurer un dépôt de code Azure Repos](media/author-visually/configure-repo.png)
+![Configurer un référentiel de code à partir de la page d’accueil](media/author-visually/configure-repo.png)
 
-#### <a name="configuration-method-2-ux-authoring-canvas"></a>Méthode de configuration 2 : Canevas de création de l’expérience utilisateur
+### <a name="configuration-method-2-authoring-canvas"></a>Méthode de configuration 2 : Zone de travail de création
+
 Dans la zone de travail de création de l’expérience en matière d’interface utilisateur Azure Data Factory, sélectionnez le menu déroulant **Data Factory**, puis **Set up Code Repository** (Configurer le dépôt de code).
 
-![Configurer les paramètres du référentiel de code pour la création de l’expérience utilisateur](media/author-visually/configure-repo-2.png)
+![Configurer les paramètres du référentiel de code à partir de la création](media/author-visually/configure-repo-2.png)
 
-Les deux méthodes ouvrent le volet de configuration des paramètres du dépôt.
+### <a name="configuration-method-3-management-hub"></a>Méthode de configuration 3 : Hub de gestion
+
+Accédez au hub de gestion dans l’expérience utilisateur ADF. Sélectionnez **Configuration Git** dans la section **Contrôle de code source**. Si vous n’avez pas de référentiel connecté, cliquez sur **Set up code repository** (Configurer le référentiel de code).
+
+![Configurer les paramètres du référentiel de code à partir du hub de gestion](media/author-visually/configure-repo-3.png)
+
+### <a name="configuration-method-4-during-factory-creation"></a>Méthode de configuration 4 : Lors de la création de la fabrique
+
+Lorsque vous créez une fabrique de données dans le Portail Azure, vous pouvez configurer les informations de référentiel Git dans l’onglet **Configuration Git**.
+
+> [!NOTE]
+> Lors de la configuration de Git dans le Portail Azure, il est nécessaire d’entrer manuellement des paramètres tels que le nom du projet et le nom du référentiel, dans une liste déroulante.
+
+![Configurer les paramètres du référentiel de code à partir du Portail Azure](media/author-visually/configure-repo-4.png)
+
+## <a name="author-with-azure-repos-git-integration"></a>Créer avec l’intégration Azure Repos Git
+
+La création visuelle avec l’intégration Azure Repos Git prend en charge le contrôle du code source et la collaboration pour les utiliser sur vos pipelines Data Factory. Vous pouvez associer une fabrique de données à un dépôt d’organisation Azure Repos Git pour le contrôle du code source, la collaboration, la gestion des versions, etc. Une seule organisation Azure Repos Git peut avoir plusieurs dépôts, mais un dépôt Azure Repos Git ne peut être associé qu’à une seule fabrique de données. Si vous n’avez pas de dépôt ni d’organisation Azure Repos, suivez [ces instructions](/azure/devops/organizations/accounts/create-organization-msa-or-work-student) pour créer vos ressources.
+
+> [!NOTE]
+> Vous pouvez stocker les fichiers de scripts et de données dans un dépôt Azure Repos Git. Toutefois, vous devez charger les fichiers manuellement dans le stockage Azure. Un pipeline de fabrique de données ne charge pas automatiquement les fichiers de scripts ou de données stockés dans un référentiel Azure Repos Git sur le stockage Azure.
+
+### <a name="azure-repos-settings"></a>Paramètres Azure Repos
 
 ![Configurer les paramètres du référentiel de code](media/author-visually/repo-settings.png)
 
@@ -93,13 +113,16 @@ Le volet de configuration affiche les paramètres du dépôt de code Azure Repos
 
 ### <a name="use-a-different-azure-active-directory-tenant"></a>Utiliser un autre locataire Azure Active Directory
 
-Le dépôt Git Azure Repos peut se trouver dans un autre locataire Azure Active Directory. Pour définir un autre locataire Azure AD, vous devez disposer des droits d’administrateur pour l’abonnement Azure que vous utilisez.
+Le dépôt Git Azure Repos peut se trouver dans un autre locataire Azure Active Directory. Pour définir un autre locataire Azure AD, vous devez disposer des droits d’administrateur pour l’abonnement Azure que vous utilisez. Pour plus d’informations, consultez la rubrique [Modifier l’administrateur d’abonnement](../cost-management-billing/manage/add-change-subscription-administrator.md#to-assign-a-user-as-an-administrator).
+
+> [!IMPORTANT]
+> Pour se connecter à un autre annuaire Azure Active Directory, l’utilisateur connecté doit être membre d’Active Directory. 
 
 ### <a name="use-your-personal-microsoft-account"></a>Ajouter votre compte Microsoft personnel
 
 Pour utiliser un compte Microsoft personnel à des fins d'intégration de Git, vous pouvez lier votre référentiel Azure personnel au répertoire Active Directory de votre organisation.
 
-1. Ajoutez votre compte Microsoft personnel au répertoire Active Directory de votre organisation en tant qu’invité. Pour plus d'informations, voir [Ajouter des utilisateurs Azure Active Directory B2B Collaboration dans le Portail Azure](../active-directory/b2b/add-users-administrator.md).
+1. Ajoutez votre compte Microsoft personnel au répertoire Active Directory de votre organisation en tant qu’invité. Pour plus d'informations, voir [Ajouter des utilisateurs Azure Active Directory B2B Collaboration dans le Portail Azure](../active-directory/external-identities/add-users-administrator.md).
 
 2. Connectez-vous au portail Azure avec votre compte Microsoft personnel. Basculez ensuite vers le répertoire Active Directory de votre organisation.
 
@@ -111,33 +134,13 @@ Pour plus d’informations sur la connexion de référentiels Azure au répertoi
 
 ## <a name="author-with-github-integration"></a>Créer avec l’intégration de GitHub
 
-La création avec l’intégration de GitHub prend en charge le contrôle du code source et la collaboration pendant l’utilisation de vos pipelines de fabrique de données. Vous pouvez associer une fabrique de données à un référentiel de compte GitHub pour le contrôle du code source, la collaboration et la gestion des versions. Un compte GitHub peut avoir plusieurs référentiels, mais un référentiel GitHub ne peut être associé qu’à une seule fabrique de données. Si vous n’avez pas de compte ou de référentiel GitHub, suivez  [ces instructions](https://github.com/join)  pour créer vos ressources.
+La création avec l’intégration de GitHub prend en charge le contrôle du code source et la collaboration pendant l’utilisation de vos pipelines de fabrique de données. Vous pouvez associer une fabrique de données à un référentiel de compte GitHub pour le contrôle du code source, la collaboration et la gestion des versions. Un compte GitHub peut avoir plusieurs référentiels, mais un référentiel GitHub ne peut être associé qu’à une seule fabrique de données. Si vous n’avez pas un compte ou un référentiel GitHub, suivez [ces instructions](https://github.com/join) pour créer vos ressources.
 
 L’intégration de GitHub à Data Factory prend à la fois en charge le service GitHub public ([https://github.com](https://github.com)) que GitHub Enterprise. Vous pouvez utiliser des référentiels GitHub publics et privés avec Data Factory à condition de disposer des autorisations de lecture et d'écriture pour ceux-ci dans GitHub.
 
 Pour configurer un dépôt GitHub, vous devez disposer des droits d’administrateur pour l’abonnement Azure que vous utilisez.
 
-Pour une présentation de neuf minutes et la démonstration de cette fonctionnalité, regardez la vidéo suivante :
-
-> [!VIDEO https://channel9.msdn.com/shows/azure-friday/Azure-Data-Factory-visual-tools-now-integrated-with-GitHub/player]
-
-### <a name="configure-a-github-repository-with-azure-data-factory"></a>Configurer un dépôt GitHub avec Azure Data Factory
-
-Vous pouvez configurer un référentiel GitHub avec une fabrique de données via deux méthodes.
-
-#### <a name="configuration-method-1-azure-data-factory-home-page"></a>Méthode de configuration 1 : Page d’accueil Azure Data Factory
-
-Dans la page d’accueil Azure Data Factory, sélectionnez **Set up Code Repository** (Configurer le dépôt de code).
-
-![Configurer un dépôt de code Azure Repos](media/author-visually/configure-repo.png)
-
-#### <a name="configuration-method-2-ux-authoring-canvas"></a>Méthode de configuration 2 : Canevas de création de l’expérience utilisateur
-
-Dans la zone de travail de création de l’expérience en matière d’interface utilisateur Azure Data Factory, sélectionnez le menu déroulant **Data Factory**, puis **Set up Code Repository** (Configurer le dépôt de code).
-
-![Configurer les paramètres du référentiel de code pour la création de l’expérience utilisateur](media/author-visually/configure-repo-2.png)
-
-Les deux méthodes ouvrent le volet de configuration des paramètres du dépôt.
+### <a name="github-settings"></a>Paramètres GitHub
 
 ![Paramètres du référentiel GitHub](media/author-visually/github-integration-image2.png)
 
@@ -155,6 +158,38 @@ Le volet de configuration affiche les paramètres du dépôt GitHub suivants :
 | **Import existing Data Factory resources to repository** (Importer des ressources Data Factory existantes dans le référentiel) | Indique s’il faut importer des ressources de fabrique de données existantes à partir de la zone de travail de création de l’expérience en matière d’interface utilisateur dans un dépôt GitHub. Activez la case pour importer vos ressources de fabrique de données dans le référentiel Git associé au format JSON. Cette action exporte chaque ressource individuellement (autrement dit, les services et jeux de données liés sont exportés dans des fichiers JSON distincts). Lorsque cette case n’est pas activée, les ressources existantes ne sont pas importées. | Activée (par défaut) |
 | **Branche sur laquelle importer la ressource** | Indique dans quelle branche les ressources de la fabrique de données (pipelines, ensembles de données, services liés, etc.) sont importées. Vous pouvez importer des ressources dans l’une des branches suivantes : a. Collaboration b. Créer c. Utiliser l’existant |  |
 
+### <a name="github-organizations"></a>Organisations GitHub
+
+La connexion à une organisation GitHub nécessite que l’organisation accorde l’autorisation à Azure Data Factory. Un utilisateur disposant d’autorisations d’administrateur sur l’organisation doit effectuer les étapes ci-dessous pour permettre à la fabrique de données de se connecter.
+
+#### <a name="connecting-to-github-for-the-first-time-in-azure-data-factory"></a>Première connexion à GitHub dans Azure Data Factory
+
+Si vous vous connectez à GitHub à partir d’Azure Data Factory pour la première fois, procédez comme suit pour vous connecter à une organisation GitHub.
+
+1. Dans le volet Configuration git, entrez le nom de l’organisation dans le champ *Compte GitHub*. Une invite de connexion à GitHub s’affiche. 
+1. Connectez-vous à l’aide des informations d’identification de l’utilisateur.
+1. Vous êtes invité à autoriser Azure Data Factory en tant qu’application appelée *AzureDataFactory*. Dans cet écran, une option vous permet d’accorder à ADF l’autorisation d’accéder à l’organisation. Si vous ne voyez pas l’option permettant d’accorder une autorisation, demandez à un administrateur d’accorder manuellement l’autorisation par le biais de GitHub.
+
+Une fois ces étapes effectuées, votre fabrique est en mesure de se connecter aux référentiels publics et privés au sein de votre organisation. Si vous ne parvenez pas à vous connecter, essayez de vider le cache du navigateur et de réessayer.
+
+#### <a name="already-connected-to-github-using-a-personal-account"></a>Déjà connecté à GitHub à l’aide d’un compte personnel
+
+Si vous êtes déjà connecté à GitHub et que vous avez accordé uniquement l’autorisation d’accéder à un compte personnel, suivez les étapes ci-dessous pour accorder des autorisations à une organisation. 
+
+1. Accédez à GitHub et ouvrez **Paramètres**.
+
+    ![Ouvrir les paramètres GitHub](media/author-visually/github-settings.png)
+
+1. Sélectionnez **Applications**. Dans l’onglet **Authorized OAuth apps** (Applications OAuth autorisées), vous devez trouver *AzureDataFactory*.
+
+    ![Sélectionner les applications OAuth](media/author-visually/github-organization-select-application.png)
+
+1. Sélectionnez l’application et accordez-lui l’accès à votre organisation.
+
+    ![Accorder l'accès](media/author-visually/github-organization-grant.png)
+
+Une fois ces étapes effectuées, votre fabrique est en mesure de se connecter aux référentiels publics et privés au sein de votre organisation. 
+
 ### <a name="known-github-limitations"></a>Limitations connues de GitHub
 
 - Vous pouvez stocker les fichiers de scripts et de données dans un référentiel GitHub. Toutefois, vous devez charger les fichiers manuellement dans le stockage Azure. Un pipeline Data Factory ne charge pas automatiquement les fichiers de scripts ou de données stockés dans un référentiel GitHub vers le stockage Azure.
@@ -162,6 +197,7 @@ Le volet de configuration affiche les paramètres du dépôt GitHub suivants :
 - Les versions de GitHub Enterprise antérieures à 2.14.0 ne fonctionnent pas dans le navigateur Microsoft Edge.
 
 - L’intégration de GitHub aux outils de création visuelle Data Factory ne fonctionne que dans la version généralement disponible de Data Factory.
+
 
 - Un maximum de 1 000 entités par type de ressource (par exemple, des pipelines et des jeux de données) peut être extrait à partir d’une seule branche GitHub. Si cette limite est atteinte, il est suggéré de fractionner vos ressources en fabriques distinctes. Azure DevOps Git n’a pas cette limitation.
 
@@ -171,7 +207,7 @@ Les systèmes de contrôle de version (également appelé _contrôle du code sou
 
 ### <a name="creating-feature-branches"></a>Création de branches de fonctionnalités
 
-Chaque dépôt Azure Repos Git associé à une fabrique de données comporte une branche de collaboration. (`master` est la branche de collaboration par défaut). Les utilisateurs peuvent également créer des branches de fonctionnalités en cliquant sur **+ Nouvelle branche** dans la liste déroulante des branches. Une fois le volet de la nouvelle branche affiché, entrez le nom de votre branche de fonctionnalités.
+Chaque dépôt Azure Repos Git associé à une fabrique de données comporte une branche de collaboration. (`main` est la branche de collaboration par défaut). Les utilisateurs peuvent également créer des branches de fonctionnalités en cliquant sur **+ Nouvelle branche** dans la liste déroulante des branches. Une fois le volet de la nouvelle branche affiché, entrez le nom de votre branche de fonctionnalités.
 
 ![Créer une branche](media/author-visually/new-branch.png)
 
@@ -211,11 +247,11 @@ Un volet latéral s’ouvre, dans lequel vous confirmez que la branche de public
 
 ### <a name="permissions"></a>Autorisations
 
-En règle générale, vous ne souhaitez pas autoriser tous les membres de l’équipe à mettre à jour la fabrique. Les paramètres des autorisations suivants sont recommandés :
+En règle générale, vous ne souhaitez pas autoriser tous les membres de l’équipe à mettre à jour la fabrique de données. Les paramètres des autorisations suivants sont recommandés :
 
-*   Tous les membres de l’équipe doivent disposer d'autorisations de lecture dans la fabrique de données.
-*   Seul un ensemble sélectionné de personnes doit être autorisé à publier sur la fabrique. Pour ce faire, elles doivent avoir le rôle **Contributeurs de Data Factory** sur le groupe de ressources où se trouve la fabrique. Pour plus d’informations sur les autorisations, consultez [Rôles et autorisations pour Azure Data Factory](concepts-roles-permissions.md).
-   
+*   Tous les membres de l’équipe doivent disposer d’autorisations de lecture dans la fabrique de données.
+*   Seul un ensemble sélectionné de personnes doit être autorisé à publier sur la fabrique de données. Pour ce faire, ces personnes doivent avoir le rôle **Contributeur de Data Factory** sur le **groupe de ressources** contenant la fabrique de données. Pour plus d’informations sur les autorisations, consultez [Rôles et autorisations pour Azure Data Factory](concepts-roles-permissions.md).
+
 Il est recommandé de ne pas autoriser les archivages directs dans la branche de collaboration. Cette restriction peut aider à éviter les bogues, car chaque archivage passe par un processus de demande de tirage décrit dans [Création de branches de fonctionnalités](source-control.md#creating-feature-branches).
 
 ### <a name="using-passwords-from-azure-key-vault"></a>Utilisation de mots de passe à partir d’Azure Key Vault
@@ -231,7 +267,7 @@ L’utilisation de Key Vault de l’authentification MSI facilite également l�
 Si la branche de publication n’est pas synchronisée avec la branche principale et contient des ressources obsolètes malgré une publication récente, essayez d’effectuer les étapes suivantes :
 
 1. Supprimez votre dépôt Git actuel
-1. Reconfigurez Git avec les mêmes paramètres, mais vérifiez que l’option**Import existing Data Factory resources to repository** (Importer des ressources Data Factory existantes dans le dépôt) est sélectionnée et choisissez **Nouvelle branche**
+1. Reconfigurez Git avec les mêmes paramètres, mais vérifiez que l’option **Import existing Data Factory resources to repository** (Importer des ressources Data Factory existantes dans le dépôt) est sélectionnée et choisissez **Nouvelle branche**
 1. Créez une demande de tirage pour fusionner les modifications apportées à la branche de collaboration 
 
 Voici quelques exemples de situations qui peuvent provoquer une branche de publication obsolète :
@@ -242,13 +278,13 @@ Voici quelques exemples de situations qui peuvent provoquer une branche de publi
 
 ## <a name="switch-to-a-different-git-repository"></a>Passer à un autre dépôt Git
 
-Pour passer à un autre dépôt Git, cliquez sur l’icône **Paramètres de dépôt Git** dans l’angle supérieur droit de la page de présentation de Data Factory. Si vous ne voyez pas l’icône, effacez le cache de votre navigateur local. Sélectionnez l’icône pour supprimer l’association au dépôt actuel.
+Pour basculer vers un autre référentiel Git, accédez à la page de configuration de Git dans le hub de gestion, sous **Contrôle de code source**. Sélectionnez **Déconnecter**. 
 
-![Icône Git](media/author-visually/remove-repo.png)
+![Icône Git](media/author-visually/remove-repository.png)
 
-Une fois que le volet Paramètres du dépôt s’affiche, sélectionnez **Supprimer Git**. Entrez le nom de votre fabrique de données, puis cliquez sur **Confirmer** pour supprimer le dépôt Git associé à votre fabrique de données.
+Entrez le nom de votre fabrique de données, puis cliquez sur **Confirmer** pour supprimer le dépôt Git associé à votre fabrique de données.
 
-![Supprimer l’association au référentiel Git actuel](media/author-visually/remove-repo2.png)
+![Supprimer l’association au référentiel Git actuel](media/author-visually/remove-repository-2.png)
 
 Après avoir supprimé l’association avec le dépôt actuel, vous pouvez configurer vos paramètres Git pour utiliser un autre dépôt, puis importer des ressources Data Factory dans le nouveau dépôt.
 

@@ -6,14 +6,14 @@ services: dns
 author: rohinkoul
 ms.service: dns
 ms.topic: quickstart
-ms.date: 3/11/2019
+ms.date: 10/20/2020
 ms.author: rohink
-ms.openlocfilehash: 3b34b45cba805d748dcc8a0c31340cd8116e1c80
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: be76a7902c2747c7a8dc1bfc21d58ae88f3ff343
+ms.sourcegitcommit: b6f3ccaadf2f7eba4254a402e954adf430a90003
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82160764"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92282144"
 ---
 # <a name="quickstart-create-an-azure-dns-zone-and-record-using-the-azure-portal"></a>Démarrage rapide : Créer une zone et un enregistrement Azure DNS à partir du portail Azure
 
@@ -31,6 +31,14 @@ You can also perform these steps using [Azure PowerShell](dns-getstarted-powersh
 Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
 
 Pour toutes les étapes du portail, connectez-vous au [portail Azure](https://portal.azure.com).
+
+## <a name="prerequisites"></a>Prérequis
+
+- Compte Azure avec un abonnement actif. [Créez un compte gratuitement](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
+
+## <a name="sign-in-to-the-azure-portal"></a>Connectez-vous au portail Azure.
+
+Connectez-vous au [portail Azure](https://portal.azure.com) avec votre compte Azure.
 
 ## <a name="create-a-dns-zone"></a>Création d’une zone DNS
 
@@ -97,7 +105,7 @@ Maintenant que vous disposez d’une zone DNS test avec un enregistrement « A
 
    Un écran similaire à celui-ci doit s’afficher :
 
-   ![nslookup](media/dns-getstarted-portal/nslookup.PNG)
+   ![Capture d’écran montrant une fenêtre d’invite de commandes avec une commande nslookup et des valeurs pour Serveur, Adresse, Nom et Adresse.](media/dns-getstarted-portal/nslookup.PNG)
 
 Le nom d’hôte **www\.contoso.xyz** se résout en **10.10.10.10**, tel que vous l’avez configuré. Ce résultat confirme que la résolution de noms fonctionne correctement. 
 

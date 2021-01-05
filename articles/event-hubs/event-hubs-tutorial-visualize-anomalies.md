@@ -1,20 +1,14 @@
 ---
 title: Azure Event Hubs - Visualiser les anomalies des données dans les événements en temps réel
 description: 'Tutoriel : Visualiser les anomalies des données dans les événements en temps réel envoyés à Microsoft Azure Event Hubs'
-services: event-hubs
-author: ShubhaVijayasarathy
-manager: timlt
-ms.author: shvija
 ms.topic: tutorial
-ms.service: event-hubs
-ms.custom: seodec18
-ms.date: 01/15/2020
-ms.openlocfilehash: f71d8e9f88dad32818ed25d4a0719a1528656f96
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.date: 06/23/2020
+ms.openlocfilehash: b72b82f3959565e6bd0598fef8e21bb64fedb053
+ms.sourcegitcommit: ad677fdb81f1a2a83ce72fa4f8a3a871f712599f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "77163175"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97655677"
 ---
 # <a name="tutorial-visualize-data-anomalies-in-real-time-events-sent-to-azure-event-hubs"></a>Tutoriel : Visualiser les anomalies des données dans les événements en temps réel envoyés à Azure Event Hubs
 
@@ -32,14 +26,12 @@ Dans ce tutoriel, vous allez apprendre à :
 
 Pour suivre ce tutoriel, vous devez disposer d’un abonnement Azure. Si vous n’en avez pas, [créez un compte gratuit][] avant de commencer.
 
-## <a name="prerequisites"></a>Prérequis
-
-[!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
-
-[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../includes/azure-cli-prepare-your-environment.md)]
 
 - Installer [Visual Studio](https://www.visualstudio.com/). 
 - Vous avez besoin d’un compte Power BI pour analyser la sortie d’une tâche Stream Analytics. Vous pouvez [essayer Power BI gratuitement](https://app.powerbi.com/signupredirect?pbi_source=web).
+
+[!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 
 ## <a name="set-up-resources"></a>Configurer des ressources
 
@@ -314,7 +306,7 @@ Dans la tâche Stream Analytics, cliquez sur **Démarrer**, **Maintenant**, puis
 
    ![Capture d’écran de la spécification du jeu de données.](./media/event-hubs-tutorial-visualize-anomalies/power-bi-dashboard-select-dataset.png)
 
-9. Sélectionnez **Carte** pour le type de visualisation. Sous **Champs**, cliquez sur **Ajouter une valeur**, puis sélectionnez **fraudulentuses**.
+9. Sélectionnez **Carte** pour le type de visualisation. Sous **Champs**, cliquez sur **Ajouter une valeur**, puis sélectionnez `fraudulentuses`.
 
    ![Capture d’écran de la spécification du type de visualisation et des champs.](./media/event-hubs-tutorial-visualize-anomalies/power-bi-add-card-tile.png)
 
@@ -335,9 +327,9 @@ Dans la tâche Stream Analytics, cliquez sur **Démarrer**, **Maintenant**, puis
 
 12. Sous **Type de visualisation**, sélectionnez **Graphique en courbes**.
 
-13. Sous **Axe**, cliquez sur **Ajouter une valeur**, puis sélectionnez **windowend**. 
+13. Sous **Axe**, cliquez sur **Ajouter une valeur**, puis sélectionnez `windowend`. 
 
-14. Sous **Valeurs**, cliquez sur **Ajouter une valeur** et sélectionnez **fraudulentuses**.
+14. Sous **Valeurs**, cliquez sur **Ajouter une valeur**, puis sélectionnez `fraudulentuses`.
 
 15. Sous **Fenêtre de temps à afficher**, sélectionnez les cinq dernières minutes. Cliquez sur **Suivant**.
 
@@ -384,6 +376,6 @@ Dans ce didacticiel, vous avez appris à :
 Passez à l’article suivant pour découvrir plus d’informations sur Azure Event Hubs.
 
 > [!div class="nextstepaction"]
-> [Bien démarrer avec l’envoi de messages vers Azure Event Hubs dans .NET Standard](get-started-dotnet-standard-send-v2.md)
+> [Bien démarrer avec l’envoi de messages vers Azure Event Hubs dans .NET Standard](event-hubs-dotnet-standard-getstarted-send.md)
 
 [créez un compte gratuit]: https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio

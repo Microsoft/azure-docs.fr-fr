@@ -3,18 +3,18 @@ title: Documentation Azure CDN
 summary: Microsoft Azure Content Delivery Network (CDN) est une solution de réseau de distribution de contenu globale permettant de diffuser du contenu à bande passante élevée. Elle peut être hébergée dans Azure ou tout autre emplacement. Avec Microsoft Azure Content Delivery Network, vous pouvez mettre en cache des objets statiques chargés à partir du Stockage Blob Azure, d’une application web ou de tout serveur web en accès public, en utilisant le serveur de point de présence (POP) le plus proche. Azure CDN peut aussi accélérer le contenu dynamique qui ne peut être mis en cache, en exploitant diverses optimisations réseau et de routage.
 metadata:
   title: Documentation Azure CDN - Tutoriels, informations de référence sur les API
-  description: Microsoft Azure Content Delivery Network (CDN) est une solution de réseau de distribution de contenu globale permettant de diffuser du contenu à bande passante élevée. Elle peut être hébergée dans Azure ou tout autre emplacement. Avec Microsoft Azure Content Delivery Network, vous pouvez mettre en cache des objets statiques chargés à partir du Stockage Blob Azure, d’une application web ou de tout serveur web en accès public, en utilisant le serveur de point de présence (POP) le plus proche. Azure CDN peut aussi accélérer le contenu dynamique qui ne peut être mis en cache, en exploitant diverses optimisations réseau et de routage.
+  description: Découvrez Azure Content Delivery Network, solution qui fournit du contenu à large bande passante pouvant être hébergé sur Azure ou ailleurs.
   ms.service: azure-cdn
   ms.topic: landing-page
   author: asudbring
   ms.author: allensu
   ms.date: 02/24/2020
-  ms.openlocfilehash: e181f5cb94dc33765b6fceb81cc98832a3b800ce
-  ms.sourcegitcommit: 253d4c7ab41e4eb11cd9995190cd5536fcec5a3c
+  ms.openlocfilehash: 194b89058b68b73ff651e9fef85717fcc578d66a
+  ms.sourcegitcommit: 400f473e8aa6301539179d4b320ffbe7dfae42fe
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 03/25/2020
-  ms.locfileid: "79479771"
+  ms.lasthandoff: 10/28/2020
+  ms.locfileid: "92777774"
 landingContent:
 - title: À propos d’Azure CDN
   linkLists:
@@ -47,7 +47,7 @@ landingContent:
   - linkListType: learn
     links:
     - text: Créer un réseau de distribution de contenu pour votre site web avec Azure CDN et les services blob
-      url: https://docs.microsoft.com/learn/modules/create-cdn-static-resources-blob-storage/
+      url: /learn/modules/create-cdn-static-resources-blob-storage/
 - title: Surveillance
   linkLists:
   - linkListType: how-to-guide
@@ -68,3 +68,13 @@ landingContent:
       url: cdn-verizon-custom-reports.md
     - text: Analyser les statistiques d’utilisation avec les rapports HTTP avancés dans Microsoft Azure CDN
       url: cdn-advanced-http-reports.md
+- title: Verizon Premium
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: Moteur de règles Verizon Premium
+      url: cdn-verizon-premium-rules-engine-reference.md
+    - text: Expressions conditionnelles du moteur de règles
+      url: cdn-verizon-premium-rules-engine-reference-conditional-expressions.md
+    - text: Fonctionnalités du moteur de règles
+      url: cdn-verizon-premium-rules-engine-reference-features.md

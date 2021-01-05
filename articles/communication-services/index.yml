@@ -1,0 +1,102 @@
+### YamlMime:Landing
+title: Azure Communication Services
+summary: Azure Communication Services est un service de communication basé sur le cloud qui vous permet d’ajouter des fonctionnalités vocales, vidéo, conversationnelles et de téléphonie à vos applications. Notez qu’Azure Communication Services est actuellement en préversion publique.
+metadata:
+  title: Azure Communication Services
+  description: Azure Communication Services est un service de communication basé sur le cloud qui vous permet d’ajouter des fonctionnalités vocales, vidéo, conversationnelles et de téléphonie à vos applications. Notez qu’Azure Communication Services est actuellement en préversion publique.
+  ms.service: azure-communication-services
+  ms.topic: landing-page
+  author: mikben
+  ms.author: mikben
+  ms.date: 08/10/2020
+  ms.openlocfilehash: 396b32a9f84895532c8c233b5c7ccc3d2ce85c11
+  ms.sourcegitcommit: dea56e0dd919ad4250dde03c11d5406530c21c28
+  ms.translationtype: HT
+  ms.contentlocale: fr-FR
+  ms.lasthandoff: 12/09/2020
+  ms.locfileid: "96937302"
+landingContent:
+- title: À propos d’Azure Communication Services
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Qu’est-ce que Azure Communication Services ?
+      url: overview.md
+  - linkListType: concept
+    links:
+    - text: Options de la bibliothèque de client
+      url: concepts/sdk-options.md
+- title: Bien démarrer
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: Créer une ressource Communication Services
+      url: quickstarts/create-communication-resource.md
+    - text: Créer et gérer des jetons d’accès utilisateur
+      url: quickstarts/access-tokens.md
+  - linkListType: concept
+    links:
+    - text: Architecture client et serveur
+      url: concepts/client-and-server-architecture.md
+    - text: Authentification et autorisation
+      url: concepts/authentication.md
+    - text: Gestion des événements
+      url: concepts/event-handling.md
+    - text: Notifications
+      url: concepts/notifications.md
+- title: Appel vocal et appel vidéo
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: Ajouter l’appel vocal et l’appel vidéo à votre application
+      url: quickstarts/voice-video-calling/getting-started-with-calling.md
+    - text: Utiliser la bibliothèque de client Appel
+      url: quickstarts/voice-video-calling/calling-client-samples.md
+  - linkListType: concept
+    links:
+    - text: Concepts relatifs à la voix et à la vidéo
+      url: concepts/voice-video-calling/about-call-types.md
+    - text: Vue d’ensemble de la bibliothèque de client Appel
+      url: concepts/voice-video-calling/calling-sdk-features.md
+    - text: Flux d’appels
+      url: concepts/call-flows.md
+- title: Téléphonie et SMS
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: Obtenir un numéro de téléphone
+      url: quickstarts/telephony-sms/get-phone-number.md
+    - text: Envoyer un message SMS
+      url: quickstarts/telephony-sms/send.md
+    - text: Gérer les événements SMS
+      url: quickstarts/telephony-sms/handle-sms-events.md
+  - linkListType: concept
+    links:
+    - text: Concepts relatifs au SMS
+      url: concepts/telephony-sms/concepts.md
+    - text: Vue d’ensemble de la bibliothèque de client SMS
+      url: concepts/telephony-sms/sdk-features.md
+    - text: Vue d’ensemble de l’appel
+      url: concepts/voice-video-calling/calling-sdk-features.md
+    - text: Planifier votre solution de téléphonie et SMS
+      url: concepts/telephony-sms/plan-solution.md
+- title: Conversation
+  linkLists:
+  - linkListType: quickstart
+    links:
+    - text: Ajouter la conversation à votre application
+      url: quickstarts/chat/get-started.md
+  - linkListType: concept
+    links:
+    - text: Concepts relatifs à la conversation
+      url: concepts/chat/concepts.md
+    - text: Vue d’ensemble de la bibliothèque de client Conversation
+      url: concepts/chat/sdk-features.md
+- title: Exemples
+  linkLists:
+  - linkListType: get-started
+    links:
+    - text: Bien démarrer avec l’exemple de bannière d’appel de groupe
+      url: samples/calling-hero-sample.md
+    - text: Bien démarrer avec l’exemple de bannière de conversation
+      url: samples/chat-hero-sample.md

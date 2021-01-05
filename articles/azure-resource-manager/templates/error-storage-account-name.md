@@ -4,10 +4,10 @@ description: Décrit les erreurs que vous pouvez rencontrer lorsque vous spécif
 ms.topic: troubleshooting
 ms.date: 03/09/2018
 ms.openlocfilehash: 5b2706d8540ea38ef08bf7ca0f804e6811a93085
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "76153970"
 ---
 # <a name="resolve-errors-for-storage-account-names"></a>Résoudre les erreurs liées aux noms de compte de stockage

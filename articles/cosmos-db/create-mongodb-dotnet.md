@@ -7,15 +7,17 @@ ms.service: cosmos-db
 ms.subservice: cosmosdb-mongo
 ms.devlang: dotnet
 ms.topic: quickstart
-ms.date: 05/21/2019
-ms.openlocfilehash: 08aa887025908b50c9de9a4bb92012c9f0b4e934
-ms.sourcegitcommit: fdec8e8bdbddcce5b7a0c4ffc6842154220c8b90
+ms.date: 10/15/2020
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 5d3c73bdc107ce1971e2958073ad5c100c6bf6bd
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83650301"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96349195"
 ---
 # <a name="quickstart-build-a-net-web-app-using-azure-cosmos-dbs-api-for-mongodb"></a>Démarrage rapide : Générer une application web .NET à l’aide de l’API d’Azure Cosmos DB pour MongoDB 
+[!INCLUDE[appliesto-mongodb-api](includes/appliesto-mongodb-api.md)]
 
 > [!div class="op_single_selector"]
 > * [.NET](create-mongodb-dotnet.md)
@@ -26,7 +28,7 @@ ms.locfileid: "83650301"
 > * [Golang](create-mongodb-go.md)
 >  
 
-Azure Cosmos DB est le service de base de données multi-modèle de Microsoft distribué à l’échelle mondiale. Rapidement, vous avez la possibilité de créer et d’interroger des documents, des paires clé/valeur et des bases de données orientées graphe, profitant tous de la distribution à l’échelle mondiale et des capacités de mise à l’échelle horizontale au cœur de Cosmos DB. 
+Azure Cosmos DB est la base de données NoSQL rapide de Microsoft avec des API ouvertes pour toute échelle. Rapidement, vous avez la possibilité de créer et d’interroger des documents, des paires clé/valeur et des bases de données orientées graphe, profitant tous de la distribution à l’échelle mondiale et des capacités de mise à l’échelle horizontale au cœur de Cosmos DB. 
 
 Ce démarrage rapide montre comment créer un compte Cosmos avec l’[API d’Azure Cosmos DB pour MongoDB](mongodb-introduction.md). Vous allez ensuite créer et déployer une application web de liste des tâches à l’aide du [pilote .NET MongoDB](https://docs.mongodb.com/ecosystem/drivers/csharp/).
 
@@ -52,7 +54,7 @@ Commencez par télécharger l’exemple d’application sur GitHub.
 1. Ouvrez une invite de commandes, créez un nouveau dossier nommé git-samples, puis fermez l’invite de commandes.
 
     ```bash
-    md "C:\git-samples"
+    mkdir "C:\git-samples"
     ```
 
 2. Ouvrez une fenêtre de terminal git comme Git Bash et utilisez la commande `cd` pour accéder au nouveau dossier d’installation pour l’exemple d’application.
@@ -146,7 +148,7 @@ Vous venez de mettre à jour votre application avec toutes les informations néc
 
 1. Dans Visual Studio, cliquez avec le bouton droit sur le nom du projet dans l’**Explorateur de solutions**, puis cliquez sur **Gérer les packages NuGet**. 
 
-2. Dans la zone **Parcourir**de NuGet, tapez *MongoDB.Driver*.
+2. Dans la zone **Parcourir** de NuGet, tapez *MongoDB.Driver*.
 
 3. À partir des résultats, installez la bibliothèque **MongoDB.Driver**. Cette opération permet d’installer le package MondoDB.Driver ainsi que toutes les dépendances.
 
@@ -167,4 +169,4 @@ Vous venez de mettre à jour votre application avec toutes les informations néc
 Dans ce guide de démarrage rapide, vous avez appris à créer un compte Cosmos, à créer une collection et à exécuter une application console. Vous pouvez maintenant importer des données supplémentaires dans votre base de données Cosmos. 
 
 > [!div class="nextstepaction"]
-> [Importer des données MongoDB dans Azure Cosmos DB](mongodb-migrate.md)
+> [Importer des données MongoDB dans Azure Cosmos DB](../dms/tutorial-mongodb-cosmos-db.md?toc=%2fazure%2fcosmos-db%2ftoc.json%253ftoc%253d%2fazure%2fcosmos-db%2ftoc.json)

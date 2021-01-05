@@ -5,24 +5,24 @@ services: active-directory
 ms.service: active-directory
 ms.subservice: authentication
 ms.topic: conceptual
-ms.date: 03/23/2020
-ms.author: iainfou
-author: iainfoulds
+ms.date: 07/14/2020
+ms.author: justinha
+author: justinha
 manager: daveba
 ms.reviewer: librown
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: f4de359f60b556390b8271b728580ef66ae53ffa
-ms.sourcegitcommit: 67bddb15f90fb7e845ca739d16ad568cbc368c06
+ms.openlocfilehash: 2b4ac8f87e8e19d3487859849ba37272c501751d
+ms.sourcegitcommit: ad83be10e9e910fd4853965661c5edc7bb7b1f7c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82201718"
+ms.lasthandoff: 12/06/2020
+ms.locfileid: "96744378"
 ---
 # <a name="passwordless-authentication-options-for-azure-active-directory"></a>Options d’authentification sans mot de passe pour Azure Active Directory
 
-L’authentification multifacteur (MFA) est un excellent moyen de sécuriser votre organisation, mais les utilisateurs sont souvent déçus de la couche de sécurité supplémentaire en plus de devoir se rappeler leurs mots de passe. Les méthodes d’authentification sans mot de passe sont plus pratiques, car le mot de passe est supprimé et remplacé par quelque chose que vous avez, en plus de quelque chose que vous êtes ou que vous savez.
+Les fonctionnalités telles que l’authentification multifacteur (MFA) sont un excellent moyen de sécuriser votre organisation, mais les utilisateurs sont souvent frustrés par la couche de sécurité supplémentaire qui s’ajoute à la nécessité de se souvenir de leurs mots de passe. Les méthodes d’authentification sans mot de passe sont plus pratiques, car le mot de passe est supprimé et remplacé par quelque chose que vous avez, en plus de quelque chose que vous êtes ou que vous savez.
 
-|   | Quelque chose que vous avez | Quelque chose que vous êtes ou savez |
+| Authentification  | Quelque chose que vous avez | Quelque chose que vous êtes ou savez |
 | --- | --- | --- |
 | Sans mot de passe | Appareil Windows 10, téléphone ou clé de sécurité | Biométrie ou code confidentiel |
 
@@ -36,31 +36,33 @@ Chaque organisation a des besoins différents en matière d’authentification. 
 
 ## <a name="windows-hello-for-business"></a>Windows Hello Entreprise
 
-Windows Hello Entreprise est idéal pour les professionnels de l’information qui disposent de leur propre PC Windows. Les données biométriques et le code PIN sont directement liés au PC de l’utilisateur. Personne à part son propriétaire ne peut donc y accéder. Avec l’intégration de l’infrastructure à clé publique (PKI)et la prise en charge intégrée de l’authentification unique (SSO), Windows Hello Entreprise propose une méthode d’accès pratique aux ressources d’entreprise localement et dans le cloud.
+Windows Hello Entreprise est idéal pour les professionnels de l’information qui disposent de leur propre PC Windows. Les informations d’identification biométriques et de code secret sont directement liées au PC de l’utilisateur et, dès lors, personne d’autre ne peut y accéder. Avec l’intégration de l’infrastructure à clé publique (PKI)et la prise en charge intégrée de l’authentification unique (SSO), Windows Hello Entreprise propose une méthode d’accès pratique aux ressources d’entreprise localement et dans le cloud.
 
 ![Exemple de connexion d’un utilisateur à Windows Hello Entreprise](./media/concept-authentication-passwordless/windows-hellow-sign-in.jpeg)
 
-Les étapes suivantes montrent comment le processus de connexion fonctionne avec Azure Active Directory.
+Les étapes suivantes montrent la manière dont le processus de connexion fonctionne avec Azure AD :
 
 ![Diagramme décrivant les étapes nécessaires à la connexion des utilisateurs avec Windows Hello Entreprise](./media/concept-authentication-passwordless/windows-hello-flow.png)
 
 1. Un utilisateur se connecte à Windows l’aide d'un geste biométrique ou d'un code confidentiel. Cette opération déverrouille la clé privée Windows Hello Entreprise et est transmise au fournisseur SSP (Security Support Provider) d'authentification cloud, appelé *fournisseur Cloud AP*.
-1. Le fournisseur Cloud AP demande un nonce à Azure AD.
+1. Le fournisseur Cloud AP demande un nonce (un nombre arbitraire aléatoire qui ne peut être utilisé qu’une seule fois) à Azure AD.
 1. Azure AD renvoie un nonce qui est valide pendant 5 minutes.
 1. Le fournisseur Cloud AP signe le nonce à l’aide de la clé privée de l’utilisateur et le renvoie signé à Azure AD.
 1. Azure AD vérifie le nonce signé à l’aide de la clé publique de l'utilisateur par rapport à la signature du nonce. Une fois la signature validée, Azure AD valide le nonce signé renvoyé. Après avoir validé le nonce, Azure AD crée un jeton d’actualisation principal (PRT) avec la clé de session chiffrée sur la clé de transport de l’appareil et le retourne au fournisseur Cloud AP.
 1. Le fournisseur Cloud AP reçoit le PRT chiffré avec la clé de session. Le fournisseur Cloud AP utilise la clé de transport privée de l'appareil pour déchiffrer la clé de session et protège cette dernière à l’aide du module de plateforme sécurisée (TPM) de l’appareil.
 1. Le fournisseur Cloud AP renvoie une réponse d’authentification réussie à Windows. L’utilisateur peut alors accéder aux applications Windows, ainsi qu’aux applications cloud et locales sans avoir à s’authentifier à nouveau (SSO).
 
-Le [guide de planification](https://docs.microsoft.com/windows/security/identity-protection/hello-for-business/hello-planning-guide) Windows Hello Entreprise peut vous aider à déterminer le type de déploiement de Windows Hello Entreprise dont vous avez besoin, ainsi que les options à prendre en compte.
+Le [guide de planification](/windows/security/identity-protection/hello-for-business/hello-planning-guide) Windows Hello Entreprise peut vous aider à déterminer le type de déploiement de Windows Hello Entreprise dont vous avez besoin, ainsi que les options à prendre en compte.
 
 ## <a name="microsoft-authenticator-app"></a>Application Microsoft Authenticator
 
-Autorisez le téléphone de votre employé à devenir une méthode d’authentification sans mot de passe. Vous utilisez peut-être déjà l’application Microsoft Authenticator comme une option pratique d’authentification multifacteur en plus d’un mot de passe. Vous pouvez également utiliser l’application Authenticator comme option sans mot de passe.
+Vous pouvez également autoriser le téléphone de votre employé à devenir une méthode d’authentification sans mot de passe. Vous utilisez peut-être déjà l’application Microsoft Authenticator comme une option pratique d’authentification multifacteur en plus d’un mot de passe. Vous pouvez également utiliser l’application Authenticator comme option sans mot de passe.
 
 ![Connectez-vous à Microsoft Edge avec l’application Microsoft Authenticator](./media/concept-authentication-passwordless/concept-web-sign-in-microsoft-authenticator-app.png)
 
-L’application Authenticator transforme n’importe quel téléphone iOS ou Android en informations d’identification fortes et sans mot de passe. Les utilisateurs peuvent se connecter à toute plateforme ou tout navigateur en obtenant une notification sur leur téléphone, en faisant correspondre un numéro affiché sur l’écran à celui affiché sur leur téléphone, puis en utilisant leur leurs données biométriques (toucher ou visage) ou un code confidentiel pour confirmer. Pour plus d’informations sur l’installation, consultez [Télécharger et installer l’application Microsoft Authenticator](https://docs.microsoft.com/azure/active-directory/user-help/user-help-auth-app-download-install).
+L’application Authenticator transforme n’importe quel téléphone iOS ou Android en informations d’identification fortes et sans mot de passe. Les utilisateurs peuvent se connecter à toute plateforme ou tout navigateur en obtenant une notification sur leur téléphone, en faisant correspondre un numéro affiché sur l’écran à celui affiché sur leur téléphone, puis en utilisant leur leurs données biométriques (toucher ou visage) ou un code confidentiel pour confirmer. Pour plus d’informations sur l’installation, consultez [Télécharger et installer l’application Microsoft Authenticator](../user-help/user-help-auth-app-download-install.md).
+
+La connexion sans mot de passe avec l’application Microsoft Authenticator sur Azure AD est actuellement disponible en préversion. L'utilisation de l'application Microsoft Authenticator comme méthode d'authentification secondaire pour Azure AD Multi-Factor Authentication, la réinitialisation de mot de passe en libre-service (SSPR) ou les jetons logiciels OATH est en GA. Pour plus d’informations sur les préversions, consultez [Conditions d’utilisation supplémentaires pour les préversions de Microsoft Azure](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
 
 L’authentification sans mot de passe à l’aide de l’application Authenticator suit le même modèle de base que Windows Hello Entreprise. C’est un peu plus compliqué lorsque l’utilisateur a besoin d’être identifié afin qu’Azure AD puisse trouver la version de l’application Microsoft Authenticator en cours d’utilisation :
 
@@ -75,11 +77,22 @@ L’authentification sans mot de passe à l’aide de l’application Authentica
 1. Le nonce est signé avec la clé privée, puis renvoyé à Azure AD.
 1. Azure AD procède à la validation des clés publique/privée et renvoie un jeton.
 
+Pour prendre en main la connexion sans mot de passe, procédez comme suit :
+
+> [!div class="nextstepaction"]
+> [Activer la connexion sans mot de passe à l’aide de l’application Authenticator](howto-authentication-passwordless-phone.md)
+
 ## <a name="fido2-security-keys"></a>Clés de sécurité FIDO2
+
+La FIDO (Fast Identity Online) Alliance permet de promouvoir les normes d’authentification ouverte et de réduire l’utilisation des mots de passe en tant qu’authentification. FIDO2 est la dernière norme qui incorpore la norme d’authentification Web (WebAuthn).
 
 Les clés de sécurité FIDO2 sont une méthode d’authentification sans mot de passe basée sur une norme. Elles ne peuvent pas être usurpées et peuvent s’afficher dans n’importe quel facteur de forme. Fast Identity Online (FIDO) est une norme ouverte d’authentification sans mot de passe. Elle permet aux utilisateurs et aux organisations de tirer parti de la norme pour se connecter à leurs ressources sans nom d’utilisateur ou mot de passe, en utilisant une clé de sécurité externe ou une clé de plateforme intégrée à un appareil.
 
-Avec la préversion publique, les employés peuvent utiliser des clés de sécurité pour se connecter à leurs appareils Windows 10 joints à Azure AD ou à Azure  AD hybride, et bénéficier de l’authentification unique sur leurs ressources cloud et locales. Les utilisateurs peuvent également se connecter aux navigateurs pris en charge. Les clés de sécurité FIDO2 constituent une excellente solution pour les entreprises qui sont très sensibles à la sécurité ou ayant des scénarios ou des employés qui ne sont pas prêts à ou capables d’utiliser leur téléphone comme deuxième facteur.
+Les utilisateurs peuvent enregistrer, puis sélectionner une clé de sécurité FIDO2 dans l’interface de connexion en tant que principal moyen d’authentification. Ces clés de sécurité FIDO2 sont généralement des périphériques USB, mais elles peuvent également utiliser les technologies Bluetooth ou NFC. Avec un périphérique matériel gérant l’authentification, la sécurité d’un compte augmente car il n’existe aucun mot de passe qui pourrait être exposé ou deviné.
+
+Les clés de sécurité FIDO2 peuvent être utilisées pour se connecter à leurs appareils Windows 10 joints à Azure AD ou à Azure AD hybride et bénéficier de l’authentification unique sur leurs ressources cloud et locales. Les utilisateurs peuvent également se connecter aux navigateurs pris en charge. Les clés de sécurité FIDO2 constituent une excellente solution pour les entreprises qui sont très sensibles à la sécurité ou ayant des scénarios ou des employés qui ne sont pas prêts à ou capables d’utiliser leur téléphone comme deuxième facteur.
+
+Les clés de sécurité FIDO2 permettant de se connecter à Azure AD sont actuellement disponibles en préversion. Pour plus d’informations sur les préversions, consultez [Conditions d’utilisation supplémentaires pour les préversions de Microsoft Azure](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
 
 ![Connectez-vous à Microsoft Edge avec une clé de sécurité](./media/concept-authentication-passwordless/concept-web-sign-in-security-key.png)
 
@@ -108,26 +121,39 @@ Une clé de sécurité **doit** implémenter les fonctionnalités et extensions 
 | 3 | hmac-secret | Cette extension garantit que vous pouvez vous connecter à votre appareil lorsqu’il est hors connexion ou en mode avion. |
 | 4 | Plusieurs comptes par fournisseur de ressources | Cette fonctionnalité garantit que vous pouvez utiliser la même clé de sécurité dans plusieurs services, comme un compte Microsoft et Azure Active Directory. |
 
+### <a name="fido2-security-key-providers"></a>Fournisseurs de clés de sécurité FIDO2
+
 Les fournisseurs suivants offrent des clés de sécurité FIDO2 de différents facteurs de forme, qui sont connues pour être compatibles avec l’expérience sans mot de passe. Nous vous encourageons à évaluer les propriétés de sécurité de ces clés en contactant le fournisseur, ainsi que la FIDO Alliance.
 
 | Fournisseur | Contact |
 | --- | --- |
 | Yubico | [https://www.yubico.com/support/contact/](https://www.yubico.com/support/contact/) |
-| Feitian | [https://www.ftsafe.com/about/Contact_Us](https://www.ftsafe.com/about/Contact_Us) |
+| Feitian | [https://ftsafe.us/pages/microsoft](https://ftsafe.us/pages/microsoft) |
 | HID | [https://www.hidglobal.com/contact-us](https://www.hidglobal.com/contact-us) |
 | Ensurity | [https://www.ensurity.com/contact](https://www.ensurity.com/contact) |
-| eWBM | [https://www.ewbm.com/support](https://www.ewbm.com/support) |
+| Solutions TrustKey | [https://www.trustkeysolutions.com/security-keys/](https://www.trustkeysolutions.com/security-keys/) |
 | AuthenTrend | [https://authentrend.com/about-us/#pg-35-3](https://authentrend.com/about-us/#pg-35-3) |
 | Gemalto (Thales Group) | [https://safenet.gemalto.com/multi-factor-authentication/authenticators/passwordless-authentication/](https://safenet.gemalto.com/multi-factor-authentication/authenticators/passwordless-authentication/) |
 | OneSpan Inc. | [https://www.onespan.com/products/fido](https://www.onespan.com/products/fido) |
-| IDmelon Technologies Inc. | [https://www.idmelon.com/#idmelon](https://www.idmelon.com/#idmelon) | 
+| IDmelon Technologies Inc. | [https://www.idmelon.com/#idmelon](https://www.idmelon.com/#idmelon) |
+| Hypersecu | [https://www.hypersecu.com/hyperfido](https://www.hypersecu.com/hyperfido) |
+| VinCSS | [https://passwordless.vincss.net](https://passwordless.vincss.net) |
+| KONA I | [https://konai.com/business/security/fido](https://konai.com/business/security/fido) |
+| Excelsecu | [https://www.excelsecu.com/productdetail/esecufido2secu.html](https://www.excelsecu.com/productdetail/esecufido2secu.html) |
 
 > [!NOTE]
 > Si vous achetez des clés de sécurité NFC et que vous prévoyez de les utiliser, vous devez disposer d’un lecteur NFC pris en charge pour la clé de sécurité. Le lecteur NFC n’est pas une exigence ou une limitation Azure. Pour obtenir la liste des lecteurs NFC pris en charge, contactez le fournisseur de votre clé de sécurité NFC.
 
 Si vous êtes fournisseur et que vous voulez que votre appareil figure dans la liste des appareils pris en charge, contactez [Fido2Request@Microsoft.com](mailto:Fido2Request@Microsoft.com).
 
+Pour prendre en main les clés de sécurité FIDO2, procédez comme suit :
+
+> [!div class="nextstepaction"]
+> [Activer la connexion sans mot de passe à l’aide des clés de sécurité FIDO2](howto-authentication-passwordless-security-key.md)
+
 ## <a name="what-scenarios-work-with-the-preview"></a>Scénarios fonctionnant avec la préversion
+
+Les fonctionnalités de connexion sans mot de passe d’Azure AD sont actuellement disponibles en préversion. Les considérations suivantes s'appliquent :
 
 - Les administrateurs peuvent activer des méthodes d’authentification sans mot de passe pour leur locataire
 - Les administrateurs peuvent cibler tous les utilisateurs ou sélectionner des utilisateurs/groupes au sein de leur locataire pour chaque méthode
@@ -144,7 +170,7 @@ Voici quelques facteurs à prendre en compte au moment de choisir une technologi
 
 ||**Windows Hello Entreprise**|**Connexion avec l’application Microsoft Authenticator**|**Clés de sécurité FIDO2**|
 |:-|:-|:-|:-|
-|**Conditions préalables**| Windows 10 version 1809 ou ultérieure<br>Azure Active Directory| Application Microsoft Authenticator<br>Téléphone (appareils iOS et Android exécutant Android version 6.0 ou ultérieure).|Windows 10 version 1809 ou ultérieure<br>Azure Active Directory|
+|**Conditions préalables**| Windows 10 version 1809 ou ultérieure<br>Azure Active Directory| Application Microsoft Authenticator<br>Téléphone (appareils iOS et Android exécutant Android version 6.0 ou ultérieure).|Windows 10 version 1903 ou ultérieure<br>Azure Active Directory|
 |**Mode**|Plateforme|Logiciel|Matériel|
 |**Systèmes et appareils**|PC avec module de plateforme sécurisée (TPM) intégré<br>Code confidentiel et reconnaissance biométrique |Code confidentiel et reconnaissance biométrique sur téléphone|Périphériques de sécurité FIDO2 compatibles Microsoft|
 |**Expérience utilisateur**|Connectez-vous à l’aide d’un code confidentiel ou d'une reconnaissance biométrique (faciale, iris ou empreinte digitale) aux appareils Windows.<br>L'authentification Windows Hello est liée à l'appareil ; l'utilisateur a besoin de l'appareil et d'un composant de connexion tel qu'un code confidentiel ou un facteur biométrique pour accéder aux ressources de l'entreprise.|Connectez-vous à l’aide d’un téléphone mobile en utilisant une empreinte digitale, une reconnaissance faciale ou de l'iris, ou un code confidentiel.<br>Les utilisateurs se connectent à un compte professionnel ou personnel à partir de leur PC ou téléphone mobile.|Connectez-vous à l’aide du périphérique de sécurité FIDO2 (biométrie, code confidentiel et carte NFC)<br>L'utilisateur peut accéder à l'appareil selon les contrôles de l’organisation et s’authentifier par code confidentiel ou biométrie à l'aide de périphériques tels que des clés de sécurité USB et des cartes à puce NFC, des clés ou autres objets connectés portables.|
@@ -162,12 +188,12 @@ Utilisez le tableau suivant pour choisir la méthode répondant à vos besoins e
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-[Activer les options de clé de sécurité FIDO2 sans mot de passe dans votre organisation](howto-authentication-passwordless-security-key.md)
+Pour prendre en main la connexion sans mot de passe dans Azure AD, effectuez l’une des procédures suivantes :
 
-[Activer les options sans mot de passe par téléphone dans votre organisation](howto-authentication-passwordless-phone.md)
+* [Activer la connexion sans mot de passe par clé de sécurité FIDO2](howto-authentication-passwordless-security-key.md)
+* [Activer la connexion sans mot de passe par téléphone avec l’application Authenticator](howto-authentication-passwordless-phone.md)
 
 ### <a name="external-links"></a>Liens externes
 
-[FIDO Alliance](https://fidoalliance.org/)
-
-[Spécification de FIDO2 CTAP](https://fidoalliance.org/specs/fido-v2.0-id-20180227/fido-client-to-authenticator-protocol-v2.0-id-20180227.html)
+* [FIDO Alliance](https://fidoalliance.org/)
+* [Spécification de FIDO2 CTAP](https://fidoalliance.org/specs/fido-v2.0-id-20180227/fido-client-to-authenticator-protocol-v2.0-id-20180227.html)

@@ -1,15 +1,15 @@
 ---
-title: Conserver la sortie des travaux et des tâches dans un magasin de données - Azure Batch
+title: Conserver la sortie des travaux et des tâches dans un magasin de données
 description: Découvrez les différentes possibilités pour conserver les données de sortie des tâches et des travaux Batch. Vous pouvez conserver les données dans le Stockage Azure ou un autre magasin de données.
-ms.topic: article
+ms.topic: how-to
 ms.date: 11/14/2018
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: 3a0c8f7517e88bf4e5476c7bad98d167ce760a9a
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 4ebe0b6d57225eff9f3f1251d5e491c95e9b7ffc
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82116415"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85965108"
 ---
 # <a name="persist-job-and-task-output"></a>Conserver les résultats des tâches et des travaux
 
@@ -35,7 +35,7 @@ Les sections suivantes décrivent brièvement chaque approche ainsi que les cons
 
 ### <a name="use-the-batch-service-api"></a>Utiliser l’API du service Batch
 
-Le service Batch permet de spécifier des fichiers de sortie dans le Stockage Azure pour les données de tâches quand vous [ajoutez une tâche à un travail](https://docs.microsoft.com/rest/api/batchservice/add-a-task-to-a-job) ou [ajoutez une collection de tâches à un travail](https://docs.microsoft.com/rest/api/batchservice/add-a-collection-of-tasks-to-a-job).
+Le service Batch permet de spécifier des fichiers de sortie dans le Stockage Azure pour les données de tâches quand vous [ajoutez une tâche à un travail](/rest/api/batchservice/add-a-task-to-a-job) ou [ajoutez une collection de tâches à un travail](/rest/api/batchservice/add-a-collection-of-tasks-to-a-job).
 
 Pour plus d’informations sur la conservation de la sortie des tâches avec l’API du service Batch, consultez [Conserver les données des tâches dans le Stockage Azure à l’aide de l’API du service Batch](batch-task-output-files.md).
 

@@ -7,12 +7,12 @@ ms.service: internet-analyzer
 ms.topic: overview
 ms.date: 10/16/2019
 ms.author: mebeatty
-ms.openlocfilehash: 3d9d1240e31d40a3d9c75d56314acc1721d90b99
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: 2512092c69390ce604c26ab6c5dd000afafc7c05
+ms.sourcegitcommit: d95cab0514dd0956c13b9d64d98fdae2bc3569a0
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "73488135"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91360886"
 ---
 # <a name="what-is-internet-analyzer-preview"></a>Qu’est-ce qu’Internet Analyzer ? (Préversion)
 
@@ -90,7 +90,7 @@ Pour utiliser Internet Analyzer, configurez une ressource Internet Analyzer dans
 
 Lorsqu’un utilisateur visite l’application web, le client JavaScript sélectionne deux points de terminaison à mesurer sur tous les tests configurés. Pour chaque point de terminaison, le client effectue une mesure _à froid_ et _à chaud_. La mesure _à froid_ implique une latence supplémentaire en regard de la latence réseau pure entre l’utilisateur et le point de terminaison, comme pour la résolution DNS, la négociation de connexion TCP et la négociation SSL/TLS. La mesure _à chaud_ s’effectue après la complétion de la mesure _à froid_ et tire parti de la gestion des connexions TCP permanente des navigateurs modernes afin d’obtenir une mesure précise de la latence de bout en bout. Lorsqu’elle est prise en charge par le navigateur de l’utilisateur, l’API de minutage des ressources W3C est utilisée pour un minutage précis des mesures. Actuellement, seules les mesures de latence à chaud sont utilisées pour l’analyse.
 
-![architecture](./media/ia-overview/architecture.png)
+![Le schéma montre un utilisateur final se connectant à un serveur d’applications avec un client intégré et aux deux points de terminaison sur Internet à partir de plusieurs options. L’utilisateur charge des mesures dans Internet Analyzer.](./media/ia-overview/architecture.png)
 
 
 ## <a name="scorecards"></a>Cartes de performance 

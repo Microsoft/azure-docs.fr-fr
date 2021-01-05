@@ -9,12 +9,12 @@ ms.topic: tutorial
 ms.custom: mvc
 ms.date: 10/25/2018
 ms.author: troyhop
-ms.openlocfilehash: 302b863e7ad7d6df286adf53342356f279ab92d2
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 1fe86aef832223a7485036343b4b12d8bb526e06
+ms.sourcegitcommit: 48cb2b7d4022a85175309cf3573e72c4e67288f5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "61450548"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96852385"
 ---
 # <a name="tutorial-create-a-custom-simulated-device"></a>Tutoriel : Créer un appareil simulé personnalisé
 
@@ -34,15 +34,7 @@ Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://az
 
 Pour suivre ce tutoriel, vous avez besoin d’une instance déployée de la simulation d’appareil dans votre abonnement Azure.
 
-Si vous n’avez pas encore déployé la Simulation d’appareil, vous devez terminer le guide de démarrage rapide [Déployer et exécuter une simulation d’appareil IoT dans Azure](quickstart-device-simulation-deploy.md).
-
-## <a name="open-device-simulation"></a>Ouvrir la Simulation d’appareil
-
-Pour exécuter la Simulation d’appareil dans votre navigateur, accédez d’abord aux [Accélérateurs de solution Microsoft Azure IoT](https://www.azureiotsolutions.com).
-
-Vous pouvez être invité à vous connecter les informations d’identification de votre abonnement Azure.
-
-Puis cliquez sur **Lancer** sur la vignette de la Simulation d’appareil que vous avez déployée dans le guide de démarrage rapide [Déployer et exécuter une simulation d’appareil IoT dans Azure](quickstart-device-simulation-deploy.md).
+Si vous n’avez pas encore déployé la simulation d’appareil, consultez [Déploiement de la simulation d’appareil](https://github.com/Azure/device-simulation-dotnet/blob/master/README.md) sur GitHub.
 
 ## <a name="view-your-device-models"></a>Afficher vos modèles d’appareils
 
@@ -88,7 +80,7 @@ Le clonage d’un modèle d’appareil vous permet de créer une copie d’un mo
 
 Pour cloner un modèle d’appareil, cochez la case en regard du modèle, puis cliquez sur **Cloner** dans la barre d’action :
 
-![Supprimer un modèle d’appareil](media/iot-accelerators-device-simulation-create-custom-device/clonedevice.png)
+![Capture d’écran avec mise en évidence du modèle sélectionné et du bouton Cloner.](media/iot-accelerators-device-simulation-create-custom-device/clonedevice.png)
 
 ## <a name="delete-a-device-model"></a>Supprimer un modèle d’appareil
 

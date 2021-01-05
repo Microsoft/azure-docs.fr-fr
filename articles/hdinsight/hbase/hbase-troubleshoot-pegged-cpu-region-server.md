@@ -7,12 +7,12 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.date: 08/01/2019
-ms.openlocfilehash: 16c994029e91d743f1c2a7e2eab51eb86fc378e8
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: bed73c3ccc7f514ffc9ff8f97534ae4b249834ce
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75887306"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96017013"
 ---
 # <a name="scenario-pegged-cpu-on-region-server-in-apache-hbase-cluster-in-azure-hdinsight"></a>Scénario : Processeur invariable sur le serveur de région dans le cluster Apache HBase d'Azure HDInsight
 
@@ -38,7 +38,7 @@ Si vous exécutez la version 3.4 du cluster HBase, vous avez peut-être rencont
 
 1. Accédez à **HBase -> Configurations -> Avancé -> Avancé** `hbase-env configs` et remplacez la variable `JAVA_HOME` par `export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64`. Enregistrez le changement de configuration.
 
-1. [Facultatif mais recommandé] [Videz toutes les tables du cluster](https://blogs.msdn.microsoft.com/azuredatalake/2016/09/19/hdinsight-hbase-how-to-improve-hbase-cluster-restart-time-by-flushing-tables/).
+1. [Facultatif mais recommandé] [Videz toutes les tables du cluster](/archive/blogs/azuredatalake/hdinsight-hbase-how-to-improve-hbase-cluster-restart-time-by-flushing-tables).
 
 1. À partir de l'interface utilisateur Ambari, redémarrez tous les services HBase qui doivent l'être.
 
@@ -52,10 +52,4 @@ ps -aux | grep regionserver, and verify the version like '''/usr/lib/jvm/java-8-
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Si votre problème ne figure pas dans cet article ou si vous ne parvenez pas à le résoudre, utilisez un des canaux suivants pour obtenir de l’aide :
-
-* Obtenez des réponses de la part d’experts Azure en faisant appel au [Support de la communauté Azure](https://azure.microsoft.com/support/community/).
-
-* Connectez-vous avec [@AzureSupport](https://twitter.com/azuresupport), le compte Microsoft Azure officiel pour améliorer l’expérience client en connectant la communauté Azure aux ressources appropriées (réponses, support et experts).
-
-* Si vous avez besoin d’une aide supplémentaire, vous pouvez envoyer une requête de support à partir du [Portail Microsoft Azure](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade/). Sélectionnez **Support** dans la barre de menus, ou ouvrez le hub **Aide + Support**. Pour en savoir plus, voir [Création d’une requête de support Azure](https://docs.microsoft.com/azure/azure-portal/supportability/how-to-create-azure-support-request). L’accès au support relatif à la gestion et à la facturation des abonnements est inclus avec votre abonnement Microsoft Azure. En outre, le support technique est fourni avec l’un des [plans de support Azure](https://azure.microsoft.com/support/plans/).
+[!INCLUDE [troubleshooting next steps](../../../includes/hdinsight-troubleshooting-next-steps.md)]

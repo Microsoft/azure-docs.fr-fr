@@ -3,8 +3,8 @@ title: Gestion des certificats de fédération dans Azure AD | Microsoft Docs
 description: Apprenez à personnaliser la date d’expiration pour vos certificats de fédération, mais aussi à renouveler les certificats arrivant à expiration.
 services: active-directory
 documentationcenter: ''
-author: msmimart
-manager: CelesteDG
+author: kenwith
+manager: celestedg
 ms.service: active-directory
 ms.subservice: app-mgmt
 ms.workload: identity
@@ -12,15 +12,15 @@ ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: conceptual
 ms.date: 04/04/2019
-ms.author: mimart
+ms.author: kenwith
 ms.reviewer: jeedes
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: de60dc5095ce4ab4d0219a388c445b08f544e1f9
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 87190e9a7aa3c3a26b77220dd0332d65c640bc2e
+ms.sourcegitcommit: 8e7316bd4c4991de62ea485adca30065e5b86c67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77159027"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94658993"
 ---
 # <a name="manage-certificates-for-federated-single-sign-on-in-azure-active-directory"></a>Gérer des certificats pour l’authentification unique fédérée sur Azure Active Directory
 
@@ -111,4 +111,4 @@ Si un certificat est sur le point d'expirer, vous pouvez le renouveler en utilis
 - [Tutoriels pour l’intégration d’applications SaaS avec Azure Active Directory](../saas-apps/tutorial-list.md)
 - [Gestion des applications avec Azure Active Directory](what-is-application-management.md)
 - [S’authentifier avec l’authentification unique auprès des applications dans Azure Active Directory](what-is-single-sign-on.md)
-- [Déboguer l’authentification unique SAML aux applications dans Azure Active Directory](../azuread-dev/howto-v1-debug-saml-sso-issues.md)
+- [Déboguer l’authentification unique SAML aux applications dans Azure Active Directory](./debug-saml-sso-issues.md)

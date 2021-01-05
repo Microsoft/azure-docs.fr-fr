@@ -5,22 +5,23 @@ services: storage
 author: tamram
 ms.service: storage
 ms.topic: article
-ms.date: 10/20/2017
+ms.date: 11/10/2020
 ms.author: tamram
-ms.reviewer: cbrooks
+ms.reviewer: ozgun
 ms.subservice: common
-ms.openlocfilehash: c07167a9f3a9194b7c45932ac749324429943ea9
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 5f2d3ba12fa65beb7156e056c23e44b028cbb520
+ms.sourcegitcommit: 6109f1d9f0acd8e5d1c1775bc9aa7c61ca076c45
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81450120"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94445062"
 ---
 # <a name="client-side-encryption-and-azure-key-vault-for-microsoft-azure-storage"></a>Chiffrement côté client et Azure Key Vault pour Microsoft Azure Storage
 [!INCLUDE [storage-selector-client-side-encryption-include](../../../includes/storage-selector-client-side-encryption-include.md)]
 
 ## <a name="overview"></a>Vue d’ensemble
-La [bibliothèque cliente Stockage Azure pour .NET](/dotnet/api/overview/azure/storage?view=azure-dotnet) prend en charge le chiffrement des données au sein des applications clientes avant le chargement vers Stockage Azure, ainsi que le déchiffrement des données pendant leur téléchargement vers le client. La bibliothèque prend également en charge l’intégration au [coffre de clés Azure](https://azure.microsoft.com/services/key-vault/) pour la gestion des clés de compte de stockage.
+La [bibliothèque cliente Stockage Azure pour .NET](/dotnet/api/overview/azure/storage) prend en charge le chiffrement des données au sein des applications clientes avant le chargement vers Stockage Azure, ainsi que le déchiffrement des données pendant leur téléchargement vers le client. La bibliothèque prend également en charge l’intégration au [coffre de clés Azure](https://azure.microsoft.com/services/key-vault/) pour la gestion des clés de compte de stockage.
 
 Pour obtenir une procédure pas à pas sur le processus de chiffrement des objets Blob à l’aide du chiffrement côté client et d’Azure Key Vault, consultez [Chiffrement et déchiffrement d’objets blob dans Microsoft Azure Storage à l'aide d'Azure Key Vault](../blobs/storage-encrypt-decrypt-blobs-key-vault.md).
 
@@ -52,7 +53,7 @@ Le déchiffrement via la technique d’enveloppe fonctionne de la façon suivant
 La bibliothèque cliente du stockage utilise [AES](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard) pour chiffrer les données utilisateur. Plus précisément, le mode [CBC (Cipher Block Chaining)](https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation#Cipher-block_chaining_.28CBC.29) avec AES. Chaque service fonctionnant un peu différemment, nous allons les étudier un par un ici.
 
 ### <a name="blobs"></a>Objets blob
-La bibliothèque cliente prend actuellement en charge le chiffrement des objets blob entiers uniquement. Plus précisément, le chiffrement est pris en charge lors de l’utilisation des méthodes **UploadFrom** ou de la méthode **OpenWrite**. Les téléchargements complets et de plages sont tous deux pris en charge.
+La bibliothèque cliente prend actuellement en charge le chiffrement des objets blob entiers uniquement. Les téléchargements complets et de plages sont tous deux pris en charge.
 
 Au cours du chiffrement, la bibliothèque cliente génère un vecteur d’initialisation aléatoire (IV) de 16 octets avec une clé de chiffrement de contenu (CEK) aléatoire de 32 octets, puis effectue le chiffrement d’enveloppe des données d’objets blob à l’aide de ces informations. La clé de chiffrement de contenu encapsulée ainsi que des métadonnées de chiffrement supplémentaires sont ensuite stockées en tant que métadonnées d’objet blob en même temps que l’objet blob chiffré sur le service.
 
@@ -61,9 +62,9 @@ Au cours du chiffrement, la bibliothèque cliente génère un vecteur d’initia
 > 
 > 
 
-Le téléchargement d’un objet blob chiffré implique de récupérer le contenu de l’objet blob entier à l’aide des méthodes pratiques **DownloadTo**/**BlobReadStream**. La clé de chiffrement de contenu encapsulée est désencapsulée et utilisée en combinaison avec le vecteur d’initialisation (stocké en tant que métadonnées d’objet blob dans cet exemple) pour renvoyer les données déchiffrées aux utilisateurs.
+Lors du téléchargement d’un objet blob entier, la clé de chiffrement de contenu encapsulée est désencapsulée et utilisée en combinaison avec le vecteur d’initialisation (stocké en tant que métadonnées d’objet blob dans cet exemple) pour renvoyer les données déchiffrées aux utilisateurs.
 
-Le téléchargement d’une plage arbitraire (méthodes **DownloadRange**) dans l’objet blob chiffré implique d’ajuster la plage fournie par les utilisateurs pour obtenir une petite quantité de données supplémentaires susceptibles d’être utilisées pour déchiffrer la plage demandée.
+Le téléchargement d’une plage arbitraire dans l’objet blob chiffré implique d’ajuster la plage fournie par les utilisateurs pour obtenir une petite quantité de données supplémentaires susceptibles d’être utilisées pour déchiffrer la plage demandée.
 
 Tous les types d’objets blob (objets blob de blocs, objets blob de pages et objets blob d’ajouts) peuvent être chiffrés/déchiffrés à l’aide de ce schéma.
 
@@ -72,11 +73,18 @@ Dans la mesure où les messages de la file d’attente peuvent avoir n’importe
 
 Au cours du chiffrement, la bibliothèque cliente génère un vecteur d’initialisation aléatoire de 16 octets avec une clé de chiffrement de contenu aléatoire de 32 octets, puis effectue le chiffrement d’enveloppe du texte du message de la file d’attente à l’aide de ces informations. La clé de chiffrement de contenu encapsulée et les métadonnées de chiffrement supplémentaires sont ensuite ajoutées au message chiffré de la file d’attente. Ce message modifié (illustré ci-dessous) est stocké sur le service.
 
-    <MessageText>{"EncryptedMessageContents":"6kOu8Rq1C3+M1QO4alKLmWthWXSmHV3mEfxBAgP9QGTU++MKn2uPq3t2UjF1DO6w","EncryptionData":{…}}</MessageText>
+```xml
+<MessageText>{"EncryptedMessageContents":"6kOu8Rq1C3+M1QO4alKLmWthWXSmHV3mEfxBAgP9QGTU++MKn2uPq3t2UjF1DO6w","EncryptionData":{…}}</MessageText>
+```
 
-Au cours du déchiffrement, la clé encapsulée est extraite du message de la file d’attente et désencapsulée. Le vecteur d’initialisation est également extrait du message de la file d’attente et utilisé en combinaison avec la clé désencapsulée pour déchiffrer les données du message de la file d’attente. Notez que les métadonnées de chiffrement sont peu volumineuses (moins de 500 octets). Donc, même si elles entrent en compte dans la limite de 64 Ko du message de la file d’attente, leur impact reste facile à gérer.
+Au cours du déchiffrement, la clé encapsulée est extraite du message de la file d’attente et désencapsulée. Le vecteur d’initialisation est également extrait du message de la file d’attente et utilisé en combinaison avec la clé désencapsulée pour déchiffrer les données du message de la file d’attente. Notez que les métadonnées de chiffrement sont peu volumineuses (moins de 500 octets). Donc, même si elles entrent en compte dans la limite de 64 Ko du message de la file d’attente, leur impact reste facile à gérer. Notez que le message chiffré est encodé en base64, comme illustré dans l’extrait de code ci-dessus, ce qui augmente également la taille du message envoyé.
 
 ### <a name="tables"></a>Tables
+> [!NOTE]
+> Le service de table est pris en charge dans la bibliothèque de client stockage Azure jusqu’à la version 9.x uniquement.
+> 
+> 
+
 La bibliothèque cliente prend en charge le chiffrement des propriétés de l’entité pour les opérations d’insertion et de remplacement.
 
 > [!NOTE]
@@ -108,22 +116,34 @@ Dans les opérations de traitement par lots, la même clé de chiffrement de cl�
 ## <a name="azure-key-vault"></a>Azure Key Vault
 Azure Key Vault permet de protéger les clés de chiffrement et les secrets utilisés par les services et les applications cloud. En utilisant Azure Key Vault, les utilisateurs peuvent chiffrer les clés et secrets (tels que les clés d’authentification, les clés de compte de stockage, les clés de chiffrement de données, les fichiers .PFX et les mots de passe) à l’aide de clés protégées par des modules de sécurité matériels (HSM). Pour plus d’informations, consultez la page [Qu’est-ce qu’Azure Key Vault ?](../../key-vault/general/overview.md)
 
-La bibliothèque cliente de stockage utilise la bibliothèque principale du coffre de clés Key Vault afin de fournir une infrastructure commune de gestion des clés sur Azure. Les utilisateurs ont un avantage supplémentaire : la possibilité d’utiliser la bibliothèque d’extensions du coffre de clés. La bibliothèque d’extensions fournit une fonctionnalité utile basée sur des fournisseurs de clés Symmetric/RSA simples et transparents, en local et dans le cloud, avec capacité d’agrégation et de mise en cache.
+La bibliothèque cliente de stockage utilise les interfaces Key Vault dans la bibliothèque principale afin de fournir une infrastructure commune de gestion des clés sur Azure. Les utilisateurs peuvent tirer parti des bibliothèques Key Vault pour bénéficier de tous les avantages supplémentaires qu’ils fournissent, par exemple des fonctionnalités utiles sur des fournisseurs de clés de cloud et locaux symétriques/RSA simples et transparents, ainsi que sur l’agrégation et la mise en cache.
 
 ### <a name="interface-and-dependencies"></a>Interfaces et dépendances
+
+# <a name="net-v12"></a>[.NET v12](#tab/dotnet)
+
+Il existe deux packages nécessaires pour l’intégration du coffre de clés :
+
+* Azure.Core contient les interfaces `IKeyEncryptionKey` et `IKeyEncryptionKeyResolver`. La bibliothèque cliente de stockage pour .NET le définit déjà en tant que dépendance.
+* Azure.Security.KeyVault.Keys (v4. x) contient le client REST de coffre de clés, ainsi que les clients de chiffrement utilisés avec le chiffrement côté client.
+
+# <a name="net-v11"></a>[.NET v11](#tab/dotnet11)
+
 Il existe trois packages de coffre de clés :
 
 * Microsoft.Azure.KeyVault.Core contient IKey et IKeyResolver. Il s’agit d’un petit package sans dépendances. La bibliothèque cliente de stockage pour .NET le définit en tant que dépendance.
-* Microsoft.Azure.KeyVault contient le client REST du coffre de clés.
-* Microsoft.Azure.KeyVault.Extensions contient le code d’extension qui inclut des implémentations d’algorithmes de chiffrement, RSAKey et SymmetricKey. Il repose sur les espaces de noms Core et KeyVault, et fournit une fonctionnalité permettant de définir un programme de résolution d’agrégation (lorsque les utilisateurs veulent utiliser plusieurs fournisseurs de clés) et un programme de résolution de clé de mise en cache. Bien que la bibliothèque cliente de stockage ne dépende pas directement de ce package, si les utilisateurs veulent utiliser Azure Key Vault pour stocker leurs clés ou utiliser les extensions du coffre de clés pour recourir aux fournisseurs de chiffrement en local et dans le cloud, ils ont besoin de ce package.
+* Microsoft.Azure.KeyVault (v3.x) contient le client REST du coffre de clés.
+* Microsoft.Azure.KeyVault.Extensions (v3.x) contient le code d’extension qui inclut des implémentations d’algorithmes de chiffrement, RSAKey et SymmetricKey. Il repose sur les espaces de noms Core et KeyVault, et fournit une fonctionnalité permettant de définir un programme de résolution d’agrégation (lorsque les utilisateurs veulent utiliser plusieurs fournisseurs de clés) et un programme de résolution de clé de mise en cache. Bien que la bibliothèque cliente de stockage ne dépende pas directement de ce package, si les utilisateurs veulent utiliser Azure Key Vault pour stocker leurs clés ou utiliser les extensions du coffre de clés pour recourir aux fournisseurs de chiffrement en local et dans le cloud, ils ont besoin de ce package.
+
+Vous trouverez plus d’informations concernant l’utilisation de Key Vault dans la v11 dans les [exemples de code de chiffrement dans la v11](https://github.com/Azure/azure-storage-net/tree/master/Samples/GettingStarted/EncryptionSamples).
+
+---
 
 Le coffre de clés est conçu pour les clés principales de valeur élevée et les seuils de limitation par coffre de clés sont définies avec cela à l’esprit. Lors du chiffrement côté client avec le coffre de clés, il est préférable d’utiliser les clés principales Symmetric stockées en tant que secrets dans le coffre de clés et mises en cache localement. Les utilisateurs doivent procéder comme suit :
 
 1. Créer un secret hors connexion et le télécharger dans le coffre de clés.
 2. Utiliser l’identificateur de base du secret comme paramètre pour résoudre la version actuelle du secret pour le chiffrement et mettre en cache ces informations localement. Utiliser CachingKeyResolver pour la mise en cache ; les utilisateurs ne doivent pas implémenter leur propre programme logique de mise en cache.
 3. Utiliser le programme de résolution de mise en cache en tant qu’entrée lors de la création de la stratégie de chiffrement.
-
-Vous trouverez plus d’informations concernant l’utilisation du coffre de clés dans les [exemples de code de chiffrement](https://github.com/Azure/azure-storage-net/tree/master/Samples/GettingStarted/EncryptionSamples).
 
 ## <a name="best-practices"></a>Meilleures pratiques
 La prise en charge du chiffrement est disponible uniquement dans la bibliothèque cliente de stockage pour .NET. Windows Phone et Windows Runtime ne prennent pas en charge le chiffrement pour le moment.
@@ -135,46 +155,176 @@ La prise en charge du chiffrement est disponible uniquement dans la bibliothèqu
 > * Pour les tables, une contrainte similaire existe. Veillez à ne pas mettre à jour les propriétés chiffrées sans aussi mettre à jour les métadonnées de chiffrement.
 > * Si vous définissez des métadonnées sur l’objet blob chiffré, vous risquez de remplacer les métadonnées relatives au chiffrement et nécessaires au déchiffrement, car la définition des métadonnées n’est pas additive. Cela est également vrai pour les instantanés : évitez de spécifier des métadonnées lors de la création d’un instantané d’objet blob chiffré. Si des métadonnées doivent être définies, veillez à appeler la méthode **FetchAttributes** pour obtenir les métadonnées de chiffrement actuelles et éviter des écritures simultanées pendant la définition des métadonnées.
 > * Activez la propriété **RequireEncryption** dans les options de requête par défaut pour les utilisateurs qui doivent recourir uniquement à des données chiffrées. Pour plus d’informations, consultez la section ci-dessous.
-> 
-> 
+>
+>
 
 ## <a name="client-api--interface"></a>API/Interface cliente
-Lors de la création d’un objet EncryptionPolicy, les utilisateurs peuvent fournir une clé seulement (implémentation de IKey), un programme de résolution seulement (implémentation de IKeyResolver), ou les deux. IKey est le type de clé de base identifié à l’aide d’un identificateur de clé. Il fournit le programme logique pour l’encapsulage/le désencapsulage. IKeyResolver est utilisé pour résoudre une clé pendant le processus de déchiffrement. Il définit une méthode ResolveKey qui renvoie un IKey avec un identificateur de clé. Les utilisateurs ont ainsi la possibilité de choisir entre plusieurs clés gérées dans plusieurs emplacements.
+Les utilisateurs peuvent fournir uniquement une clé, uniquement un programme de résolution ou les deux. Les clés sont identifiées à l’aide d’un identificateur de clé et fournissent le programme logique pour l’encapsulage/le désencapsulage. Les programmes de résolution sont utilisés pour résoudre une clé pendant le processus de déchiffrement. Il définit une méthode de résolution qui renvoie une clé avec un identificateur de clé. Les utilisateurs ont ainsi la possibilité de choisir entre plusieurs clés gérées dans plusieurs emplacements.
 
 * Pour le chiffrement, la clé est toujours utilisée et l’absence de clé entraîne une erreur.
 * Pour le déchiffrement :
+  * Si la clé est spécifiée et que son identificateur correspond à l’identificateur de clé nécessaire, la clé est utilisée pour le déchiffrement. Dans le cas contraire, le programme de résolution est tenté. S’il n’existe aucun programme de résolution pour cette tentative, une erreur est générée.
   * S’il est spécifié, le programme de résolution de clé est appelé pour obtenir la clé. Si le programme de résolution est spécifié, mais ne comporte pas de mappage pour l’identificateur de clé, une erreur est générée.
-  * Si le programme de résolution n’est pas spécifié, mais qu’une clé est spécifiée, celle-ci est utilisée si son identificateur correspond à l’identificateur de clé nécessaire. Si l’identificateur ne correspond pas, une erreur est générée.
 
-Les exemples de code dans cet article montrent comment définir une stratégie de chiffrement et comment utiliser des données chiffrées. Toutefois, ils n’expliquent pas comment utiliser Azure Key Vault. Les [exemples de chiffrement](https://github.com/Azure/azure-storage-net/tree/master/Samples/GettingStarted/EncryptionSamples) sur GitHub présentent un scénario de bout en bout plus détaillé pour les objets blob, les files d’attente et les tables, ainsi que pour l’intégration à Key Vault.
-
-### <a name="requireencryption-mode"></a>Mode RequireEncryption
+### <a name="requireencryption-mode-v11-only"></a>Mode RequireEncryption (v11 uniquement)
 Les utilisateurs peuvent éventuellement activer un mode de fonctionnement dans lequel tous les chargements et téléchargements doivent être chiffrés. Dans ce mode, les tentatives de chargement de données sans une stratégie de chiffrement ou de téléchargement de données non chiffrées sur le service échouent sur le client. La propriété **RequireEncryption** de l’objet d’options de requête contrôle ce comportement. Si votre application chiffre tous les objets stockés dans Azure Storage, vous pouvez définir la propriété **RequireEncryption** sur les options de requête par défaut pour l’objet client de service. Par exemple, définissez **CloudBlobClient.DefaultRequestOptions.RequireEncryption** sur **true** pour imposer le chiffrement pour toutes les opérations d’objet blob effectuées par le biais de cet objet client.
 
 
 ### <a name="blob-service-encryption"></a>Chiffrement du service BLOB
-Créez un objet **BlobEncryptionPolicy** et définissez-le dans les options de requête (par API ou au niveau client à l’aide de **DefaultRequestOptions**). Tout le reste est géré par la bibliothèque cliente en interne.
+
+
+# <a name="net-v12"></a>[.NET v12](#tab/dotnet)
+Créez un objet **ClientSideEncryptionOptions** et définissez-le sur la création du client à l’aide de **SpecializedBlobClientOptions**. Vous ne pouvez pas définir des options de chiffrement par API. Tout le reste est géré par la bibliothèque cliente en interne.
+
+```csharp
+// Your key and key resolver instances, either through KeyVault SDK or an external implementation
+IKeyEncryptionKey key;
+IKeyEncryptionKeyResolver keyResolver;
+
+// Create the encryption options to be used for upload and download.
+ClientSideEncryptionOptions encryptionOptions = new ClientSideEncryptionOptions(ClientSideEncryptionVersion.V1_0)
+{
+   KeyEncryptionKey = key,
+   KeyResolver = keyResolver,
+   // string the storage client will use when calling IKeyEncryptionKey.WrapKey()
+   KeyWrapAlgorithm = "some algorithm name"
+};
+
+// Set the encryption options on the client options
+BlobClientOptions options = new SpecializedBlobClientOptions() { ClientSideEncryption = encryptionOptions };
+
+// Get your blob client with client-side encryption enabled.
+// Client-side encryption options are passed from service to container clients, and container to blob clients.
+// Attempting to construct a BlockBlobClient, PageBlobClient, or AppendBlobClient from a BlobContainerClient
+// with client-side encryption options present will throw, as this functionality is only supported with BlobClient.
+BlobClient blob = new BlobServiceClient(connectionString, options).GetBlobContainerClient("myContainer").GetBlobClient("myBlob");
+
+// Upload the encrypted contents to the blob.
+blob.Upload(stream);
+
+// Download and decrypt the encrypted contents from the blob.
+MemoryStream outputStream = new MemoryStream();
+blob.DownloadTo(outputStream);
+```
+
+Un **BlobServiceClient** n’est pas nécessaire pour appliquer des options de chiffrement. Elles peuvent également être passées dans les constructeurs **BlobContainerClient**/**BlobClient** qui acceptent les objets **BlobClientOptions**.
+
+Si un objet **BlobClient** souhaité existe déjà mais sans options de chiffrement côté client, il existe une méthode d’extension pour créer une copie de cet objet avec le **ClientSideEncryptionOptions** donné. Cette méthode d’extension évite la surcharge liée à la construction d’un nouvel objet **BlobClient** à partir de zéro.
+
+```csharp
+using Azure.Storage.Blobs.Specialized;
+
+// Your existing BlobClient instance and encryption options
+BlobClient plaintextBlob;
+ClientSideEncryptionOptions encryptionOptions;
+
+// Get a copy of plaintextBlob that uses client-side encryption
+BlobClient clientSideEncryptionBlob = plaintextBlob.WithClientSideEncryptionOptions(encryptionOptions);
+```
+
+# <a name="net-v11"></a>[.NET v11](#tab/dotnet11)
+Créez un objet **BlobEncryptionPolicy** et définissez-le dans les options de requête (par API ou au niveau client à l’aide de **DefaultRequestOptions** ). Tout le reste est géré par la bibliothèque cliente en interne.
 
 ```csharp
 // Create the IKey used for encryption.
- RsaKey key = new RsaKey("private:key1" /* key identifier */);
+RsaKey key = new RsaKey("private:key1" /* key identifier */);
 
- // Create the encryption policy to be used for upload and download.
- BlobEncryptionPolicy policy = new BlobEncryptionPolicy(key, null);
+// Create the encryption policy to be used for upload and download.
+BlobEncryptionPolicy policy = new BlobEncryptionPolicy(key, null);
 
- // Set the encryption policy on the request options.
- BlobRequestOptions options = new BlobRequestOptions() { EncryptionPolicy = policy };
+// Set the encryption policy on the request options.
+BlobRequestOptions options = new BlobRequestOptions() { EncryptionPolicy = policy };
 
- // Upload the encrypted contents to the blob.
- blob.UploadFromStream(stream, size, null, options, null);
+// Upload the encrypted contents to the blob.
+blob.UploadFromStream(stream, size, null, options, null);
 
- // Download and decrypt the encrypted contents from the blob.
- MemoryStream outputStream = new MemoryStream();
- blob.DownloadToStream(outputStream, null, options, null);
+// Download and decrypt the encrypted contents from the blob.
+MemoryStream outputStream = new MemoryStream();
+blob.DownloadToStream(outputStream, null, options, null);
 ```
 
+---
+
 ### <a name="queue-service-encryption"></a>Chiffrement du service de File d’attente
-Créez un objet **QueueEncryptionPolicy** et définissez-le dans les options de requête (par API ou au niveau client à l’aide de **DefaultRequestOptions**). Tout le reste est géré par la bibliothèque cliente en interne.
+# <a name="net-v12"></a>[.NET v12](#tab/dotnet)
+Créez un objet **ClientSideEncryptionOptions** et définissez-le sur la création du client à l’aide de **SpecializedQueueClientOptions**. Vous ne pouvez pas définir des options de chiffrement par API. Tout le reste est géré par la bibliothèque cliente en interne.
+
+```csharp
+// Your key and key resolver instances, either through KeyVault SDK or an external implementation
+IKeyEncryptionKey key;
+IKeyEncryptionKeyResolver keyResolver;
+
+// Create the encryption options to be used for upload and download.
+ClientSideEncryptionOptions encryptionOptions = new ClientSideEncryptionOptions(ClientSideEncryptionVersion.V1_0)
+{
+   KeyEncryptionKey = key,
+   KeyResolver = keyResolver,
+   // string the storage client will use when calling IKeyEncryptionKey.WrapKey()
+   KeyWrapAlgorithm = "some algorithm name"
+};
+
+// Set the encryption options on the client options
+QueueClientOptions options = new SpecializedQueueClientOptions() { ClientSideEncryption = encryptionOptions };
+
+// Get your queue client with client-side encryption enabled.
+// Client-side encryption options are passed from service to queue clients.
+QueueClient queue = new QueueServiceClient(connectionString, options).GetQueueClient("myQueue");
+
+// Send an encrypted queue message.
+queue.SendMessage("Hello, World!");
+
+// Download queue messages, decrypting ones that are detected to be encrypted
+QueueMessage[] queue.ReceiveMessages(); 
+```
+
+Un **QueueServiceClient** n’est pas nécessaire pour appliquer des options de chiffrement. Elles peuvent également être passées dans les constructeurs **QueueClient** qui acceptent les objets **QueueClientOptions**.
+
+Si un objet **QueueClient** souhaité existe déjà mais sans options de chiffrement côté client, il existe une méthode d’extension pour créer une copie de cet objet avec le **ClientSideEncryptionOptions** donné. Cette méthode d’extension évite la surcharge liée à la construction d’un nouvel objet **QueueClient** à partir de zéro.
+
+```csharp
+using Azure.Storage.Queues.Specialized;
+
+// Your existing QueueClient instance and encryption options
+QueueClient plaintextQueue;
+ClientSideEncryptionOptions encryptionOptions;
+
+// Get a copy of plaintextQueue that uses client-side encryption
+QueueClient clientSideEncryptionQueue = plaintextQueue.WithClientSideEncryptionOptions(encryptionOptions);
+```
+
+Certains utilisateurs peuvent avoir des files d’attente où tous les messages reçus ne peuvent pas être déchiffrés correctement et la clé ou le programme de résolution doit lever une exception. La dernière ligne de l’exemple ci-dessus lèvera dans ce cas, et aucun des messages reçus ne sera accessible. Dans ces scénarios, la sous-classe **QueueClientSideEncryptionOptions** peut être utilisée pour fournir des options de chiffrement aux clients. Il expose un événement **DecryptionFailed** qui se déclenche chaque fois qu’un message de file d’attente ne peut pas être déchiffré, tant qu’au moins un appel a été ajouté à l’événement. Les messages ayant échoué individuellement peuvent être traités de cette manière, et ils sont filtrés à partir du dernier **QueueMessage []** retourné par **ReceiveMessages**.
+
+```csharp
+// Create your encryption options using the sub-class.
+QueueClientSideEncryptionOptions encryptionOptions = new QueueClientSideEncryptionOptions(ClientSideEncryptionVersion.V1_0)
+{
+   KeyEncryptionKey = key,
+   KeyResolver = keyResolver,
+   // string the storage client will use when calling IKeyEncryptionKey.WrapKey()
+   KeyWrapAlgorithm = "some algorithm name"
+};
+
+// Add a handler to the DecryptionFailed event.
+encryptionOptions.DecryptionFailed += (source, args) => {
+   QueueMessage failedMessage = (QueueMessage)source;
+   Exception exceptionThrown = args.Exception;
+   // do something
+};
+
+// Use these options with your client objects.
+QueueClient queue = new QueueClient(connectionString, queueName, new SpecializedQueueClientOptions()
+{
+   ClientSideEncryption = encryptionOptions
+});
+
+// Retrieve 5 messages from the queue.
+// Assume 5 messages come back and one throws during decryption.
+QueueMessage[] messages = queue.ReceiveMessages(maxMessages: 5).Value;
+Debug.Assert(messages.Length == 4)
+```
+
+# <a name="net-v11"></a>[.NET v11](#tab/dotnet11)
+Créez un objet **QueueEncryptionPolicy** et définissez-le dans les options de requête (par API ou au niveau client à l’aide de **DefaultRequestOptions** ). Tout le reste est géré par la bibliothèque cliente en interne.
 
 ```csharp
 // Create the IKey used for encryption.
@@ -191,7 +341,9 @@ Créez un objet **QueueEncryptionPolicy** et définissez-le dans les options de 
  CloudQueueMessage retrMessage = queue.GetMessage(null, options, null);
 ```
 
-### <a name="table-service-encryption"></a>Chiffrement du service de Table
+---
+
+### <a name="table-service-encryption-v11-only"></a>Chiffrement du service de Table (v11 uniquement)
 En plus de créer une stratégie de chiffrement et de la définir dans les options de requête, vous devez spécifier un **EncryptionResolver** dans **TableRequestOptions** ou définir l’attribut [EncryptProperty] sur l’entité.
 
 #### <a name="using-the-resolver"></a>Utilisation du programme de résolution
@@ -242,7 +394,7 @@ Comme mentionné ci-dessus, si l’entité implémente TableEntity, les proprié
 Notez que le chiffrement de vos données de stockage affecte les performances. La clé de contenu et le vecteur d’initialisation doivent être générés, le contenu proprement dit doit être chiffré et des métadonnées supplémentaires doivent être mises en forme et téléchargées. Cette surcharge varie selon la quantité de données chiffrées. Nous recommandons de tester systématiquement les performances des applications au cours du développement.
 
 ## <a name="next-steps"></a>Étapes suivantes
-* [Tutoriel : Chiffrement et déchiffrement d’objets blob dans le service Stockage Microsoft Azure à l’aide d’Azure Key Vault](../blobs/storage-encrypt-decrypt-blobs-key-vault.md)
+* [Didacticiel : Chiffrement et déchiffrement d’objets blob dans Microsoft Azure Storage à l'aide d'Azure Key Vault](../blobs/storage-encrypt-decrypt-blobs-key-vault.md)
 * Télécharger la [Bibliothèque cliente Azure Storage pour le package NuGet .NET](https://www.nuget.org/packages/WindowsAzure.Storage)
 * Télécharger les packages NuGet [Core](https://www.nuget.org/packages/Microsoft.Azure.KeyVault.Core/), [Client](https://www.nuget.org/packages/Microsoft.Azure.KeyVault/) et [Extensions](https://www.nuget.org/packages/Microsoft.Azure.KeyVault.Extensions/) d’Azure Key Vault  
 * Consulter la [documentation d’Azure Key Vault](../../key-vault/general/overview.md)

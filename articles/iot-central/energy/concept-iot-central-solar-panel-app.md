@@ -1,24 +1,21 @@
 ---
-title: Concepts d’architecture dans Azure IoT Central - Énergie | Microsoft Docs
-description: Cet article présente les concepts clés relatifs à l’architecture d’Azure IoT Central
+title: Concepts d’architecture dans Azure IoT Central - Panneau solaire | Microsoft Docs
+description: Cet article présente les concepts clés de l’architecture d’une application de suivi de panneau solaire Azure IoT Central.
 author: op-ravi
 ms.author: omravi
-ms.date: 10/23/2019
+ms.date: 12/11/2020
 ms.topic: overview
 ms.service: iot-central
 services: iot-central
 manager: abjork
-ms.openlocfilehash: 44171a08e69cfa058e0a9e75e3220fb996b7789d
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: cd35381e4c2cdb849662ad134cfbef8229707eed
+ms.sourcegitcommit: 66479d7e55449b78ee587df14babb6321f7d1757
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "77018004"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97516641"
 ---
 # <a name="azure-iot-central---solar-panel-app-architecture"></a>Azure IoT Central - Architecture d’application pour panneau solaire
-
-
-
 
 Cet article fournit une vue d’ensemble de l’architecture du modèle d’application de suivi de panneau solaire. Le diagramme ci-dessous illustre une architecture couramment utilisée pour l’application de panneau solaire sur Azure à l’aide de la plateforme IoT Central.
 
@@ -27,11 +24,9 @@ Cet article fournit une vue d’ensemble de l’architecture du modèle d’appl
 
 Cette architecture est constituée des composants suivants. Certaines applications peuvent ne pas avoir besoin de tous les composants listés ici.
 
-## <a name="solar-panels-and-connectivity"></a>Panneaux solaires et connectivité 
+## <a name="solar-panels-and-connectivity"></a>Panneaux solaires et connectivité
 
-Les panneaux solaires sont l’une des principales sources d’énergie renouvelable. Selon le type de panneau solaire et sa configuration, vous pouvez le connecter via des passerelles ou d’autres appareils intermédiaires et systèmes propriétaires. Vous pouvez être amené à créer un pont d’appareil IoT Central pour connecter les appareils qui ne peuvent pas être connectés directement. Le pont IoT Central est une solution open source ; vous pouvez trouver des informations complètes à son sujet [ici](https://docs.microsoft.com/azure/iot-central/core/howto-build-iotc-device-bridge). 
-
-
+Les panneaux solaires sont l’une des principales sources d’énergie renouvelable. Selon le type de panneau solaire et sa configuration, vous pouvez le connecter via des passerelles ou d’autres appareils intermédiaires et systèmes propriétaires. Vous pouvez être amené à créer un pont d’appareil IoT Central pour connecter les appareils qui ne peuvent pas être connectés directement. Le pont IoT Central est une solution open source ; vous pouvez trouver des informations complètes à son sujet [ici](../core/howto-build-iotc-device-bridge.md). 
 
 ## <a name="iot-central-platform"></a>Plateforme IoT Central
 Azure IoT Central est une plateforme qui simplifie la création de votre solution IoT et contribue à réduire la charge et les coûts liés à la gestion, aux opérations et au développement IoT. Avec IoT Central, vous pouvez facilement connecter, surveiller et gérer facilement vos ressources Internet des objets (IoT) à grande échelle. Une fois que vous avez connecté vos panneaux solaires à IoT Central, le modèle d’application utilise des fonctionnalités intégrées, comme des modèles d’appareil, des commandes et des tableaux de bord. Le modèle d’application utilise également le stockage IoT Central pour les scénarios de chemin à chaud tels que la surveillance, l’analyse, les règles et la visualisation des données de mesure en temps quasi-réel.
@@ -43,4 +38,4 @@ La plateforme IoT Central fournit deux options d’extensibilité : L’exporta
 ## <a name="next-steps"></a>Étapes suivantes
 
 * Maintenant que nous vous avons présenté l’architecture, vous pouvez [créer une application de panneau solaire gratuitement](https://apps.azureiotcentral.com/build/new/solar-panel-monitoring)
-* Pour plus d’informations sur IoT Central, consultez la [vue d’ensemble d’IoT Central](https://docs.microsoft.com/azure/iot-central/)
+* Pour plus d’informations sur IoT Central, consultez la [vue d’ensemble d’IoT Central](../index.yml)

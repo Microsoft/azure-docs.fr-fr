@@ -6,12 +6,13 @@ ms.author: inhenkel
 ms.service: media-services
 ms.topic: overview
 ms.date: 04/20/2020
-ms.openlocfilehash: 85eaa04836774b838da67e073017f4af3d2fe179
-ms.sourcegitcommit: acb82fc770128234f2e9222939826e3ade3a2a28
+ms.custom: devx-track-js
+ms.openlocfilehash: b9772f89f78f21cfb0f2f9baa7c6b9915fbacf37
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81727506"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "91275691"
 ---
 # <a name="playback-technology-tech"></a>Technologie de lecture (« tech ») #
 

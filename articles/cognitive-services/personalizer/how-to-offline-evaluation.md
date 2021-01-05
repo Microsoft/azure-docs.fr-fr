@@ -3,19 +3,17 @@ title: Guide pratique pour effectuer une évaluation hors connexion - Personaliz
 titleSuffix: Azure Cognitive Services
 description: Cet article vous montre comment utiliser l’évaluation hors connexion pour mesurer l’efficacité de votre application et analyser votre boucle d’apprentissage.
 services: cognitive-services
-author: diberry
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: personalizer
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 02/20/2020
-ms.author: diberry
-ms.openlocfilehash: ce85c2d264b2b4849a4a36ed757150292fdf39f0
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: a473085f9c94ca42a75d01b342d60cc33836b096
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77622774"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88244837"
 ---
 # <a name="analyze-your-learning-loop-with-an-offline-evaluation"></a>Analysez votre boucle d’apprentissage avec une évaluation hors connexion
 
@@ -32,7 +30,7 @@ Pour plus d’informations, consultez [Évaluations hors connexion](concepts-off
 
 ## <a name="run-an-offline-evaluation"></a>Exécuter une évaluation hors connexion
 
-1. Dans le [portail Azure](https://azure.microsoft.com/free/), recherchez votre ressource Personalizer.
+1. Dans le [portail Azure](https://azure.microsoft.com/free/cognitive-services), recherchez votre ressource Personalizer.
 1. Sur le portail Azure, accédez à la section **Évaluations**, puis sélectionnez l’option **Créer une évaluation**.
     ![Sur le portail Azure, accédez à la section **Évaluations**, puis sélectionnez l’option **Créer une évaluation**.](./media/offline-evaluation/create-new-offline-evaluation.png)
 1. Configurez les valeurs suivantes :

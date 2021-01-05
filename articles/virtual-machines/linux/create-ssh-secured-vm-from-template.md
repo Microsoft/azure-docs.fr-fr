@@ -3,19 +3,23 @@ title: Créer une machine virtuelle Linux dans Azure à partir d’un modèle
 description: Comment utiliser l’interface de ligne de commande Azure pour créer une machine virtuelle Linux à partir d’un modèle Resource Manager
 author: cynthn
 ms.service: virtual-machines-linux
-ms.topic: article
+ms.topic: how-to
 ms.date: 03/22/2019
 ms.author: cynthn
-ms.openlocfilehash: 581eadc60835b758f67ae616d4413800f1d6d718
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 184e856636a74ce5b7ac72b2e8cab3d1f19c4e17
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78969526"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89074387"
 ---
 # <a name="how-to-create-a-linux-virtual-machine-with-azure-resource-manager-templates"></a>Comment créer une machine virtuelle Linux avec des modèles Azure Resource Manager
 
 Apprenez à créer une machine virtuelle Linux en utilisant un modèle Azure Resource Manager et Azure CLI à partir d'Azure Cloud Shell. Pour créer une machine virtuelle Windows, consultez [Créer une machine virtuelle Windows à partir d'un modèle Resource Manager](../windows/ps-template.md).
+
+Une alternative consiste à déployer le modèle à partir du portail Azure. Pour ouvrir le modèle dans le portail, sélectionnez le bouton **Déployer sur Azure**.
+
+[![Déployer sur Azure](../../media/template-deployments/deploy-to-azure.svg)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2F101-vm-sshkey%2Fazuredeploy.json)
 
 ## <a name="templates-overview"></a>Vue d’ensemble des modèles
 
@@ -46,7 +50,7 @@ read username &&
 echo "Enter the SSH public key:" &&
 read key &&
 az group create --name $resourceGroupName --location "$location" &&
-az group deployment create --resource-group $resourceGroupName --template-uri https://raw.githubusercontent.com/azure/azure-quickstart-templates/master/101-vm-sshkey/azuredeploy.json --parameters projectName=$projectName adminUsername=$username adminPublicKey="$key" &&
+az deployment group create --resource-group $resourceGroupName --template-uri https://raw.githubusercontent.com/azure/azure-quickstart-templates/master/101-vm-sshkey/azuredeploy.json --parameters projectName=$projectName adminUsername=$username adminPublicKey="$key" &&
 az vm show --resource-group $resourceGroupName --name "$projectName-vm" --show-details --query publicIps --output tsv
 ```
 
@@ -56,7 +60,7 @@ Dans l’exemple précédent, vous avez spécifié un modèle stocké dans GitHu
 
 Voici quelques ressources supplémentaires :
 
-- Pour savoir comment développer des modèles Resource Manager, consultez la [documentation Azure Resource Manager](/azure/azure-resource-manager/).
+- Pour savoir comment développer des modèles Resource Manager, consultez la [documentation Azure Resource Manager](../../azure-resource-manager/index.yml).
 - Pour examiner les schémas des machines virtuelles Azure, consultez [Informations de référence sur les modèles Azure](/azure/templates/microsoft.compute/allversions).
 - Pour accéder à d'autres exemples de modèles de machine virtuelle, consultez [Modèles de démarrage rapide Azure](https://azure.microsoft.com/resources/templates/?resourceType=Microsoft.Compute&pageNumber=1&sort=Popular).
 

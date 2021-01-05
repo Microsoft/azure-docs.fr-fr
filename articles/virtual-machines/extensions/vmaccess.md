@@ -9,24 +9,25 @@ editor: ''
 tags: azure-resource-manager
 ms.assetid: 261a9646-1f93-407e-951e-0be7226b3064
 ms.service: virtual-machines-linux
+ms.subservice: extensions
 ms.workload: infrastructure-services
 ms.tgt_pltfrm: vm-linux
 ms.devlang: azurecli
 ms.topic: article
 ms.date: 05/10/2018
 ms.author: akjosh
-ms.openlocfilehash: bd9dc05a84a4ee54fce40e6c88e87ac90bfee8a5
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: e46f7f3d51d2841a2287c86f9e8dddd7460b1a5d
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79226817"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96016435"
 ---
 # <a name="manage-administrative-users-ssh-and-check-or-repair-disks-on-linux-vms-using-the-vmaccess-extension-with-the-azure-cli"></a>Gérer les utilisateurs administratifs, SSH, et vérifier ou réparer les disques de machines virtuelles Linux à l’aide de l’extension VMAccess avec Azure CLI
 ## <a name="overview"></a>Vue d’ensemble
 Le disque de votre machine virtuelle Linux affiche des erreurs. Vous avez d'une certaine manière réinitialisé le mot de passe racine de votre machine virtuelle Linux ou supprimé accidentellement votre clé privée SSH. Dans les anciens centres de données, vous deviez aller sur place et ouvrir le KVM pour accéder à la console du serveur. Considérez l’extension Azure VMAccess comme ce commutateur KVM qui vous permet d’accéder à la console pour réinitialiser l’accès à Linux ou effectuer la maintenance au niveau du disque.
 
-Cet article vous explique comment utiliser l’extension Azure VMAccess pour vérifier ou réparer un disque, réinitialiser l’accès des utilisateurs administratifs, gérer les comptes d’utilisateur ou mettre à jour la configuration SSH sous Linux lors de leur exécution en tant que machines virtuelles Azure Resource Manager. Si vous avez besoin de gérer des machines virtuelles classiques, vous pouvez suivre les instructions figurant dans la [Documentation de la machine virtuelle classique](../linux/classic/reset-access-classic.md). 
+Cet article vous explique comment utiliser l’extension Azure VMAccess pour vérifier ou réparer un disque, réinitialiser l’accès des utilisateurs administratifs, gérer les comptes d’utilisateur ou mettre à jour la configuration SSH sous Linux lors de leur exécution en tant que machines virtuelles Azure Resource Manager. Si vous avez besoin de gérer des machines virtuelles classiques, vous pouvez suivre les instructions figurant dans la [Documentation de la machine virtuelle classique](/previous-versions/azure/virtual-machines/linux/classic/reset-access-classic). 
  
 > [!NOTE]
 > Si vous utilisez l’extension VMAccess pour réinitialiser le mot de passe de votre machine virtuelle après l’installation de l’extension de connexion AAD, vous devez réexécuter l’extension de connexion AAD pour réactiver la connexion AAD sur votre machine.

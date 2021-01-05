@@ -6,22 +6,22 @@ ms.suite: integration
 ms.reviewer: klam, logicappspm
 ms.date: 10/03/2018
 ms.topic: article
-ms.openlocfilehash: b84db69f79b1611347a4c55d929e5426141e7ac6
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 95b5cc191ac6857bf8e1b09e70b22d928473fe03
+ms.sourcegitcommit: ce8eecb3e966c08ae368fafb69eaeb00e76da57e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74791495"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92314840"
 ---
 # <a name="run-actions-based-on-group-status-by-using-scopes-in-azure-logic-apps"></a>Exécuter des actions en fonction de l’état du groupe à l’aide d’étendues dans Azure Logic Apps
 
 Pour exécuter des actions uniquement après l’échec ou la réussite d’un groupe d’actions, placez ce groupe dans une *étendue*. Cette structure est utile lorsque vous souhaitez organiser les actions en tant que groupe logique, évaluer l’état de ce groupe et effectuer des actions qui sont basées sur l’état de l’étendue. Une fois que toutes les actions d’une étendue ont été exécutées, l’étendue récupère également son propre état. Par exemple, vous pouvez utiliser des étendues lorsque vous souhaitez implémenter la [gestion des erreurs et des exceptions](../logic-apps/logic-apps-exception-handling.md#scopes). 
 
-Pour vérifier l’état d’une étendue, vous pouvez utiliser les mêmes critères que ceux utilisés pour déterminer l’état d’exécution des applications logiques, tels que « Réussi », « Échec », « Annulé », etc. Par défaut, lorsque toutes les actions de l’étendue réussissent, l’état de l’étendue est défini sur « Réussi ». Mais lorsqu’une action dans l’étendue échoue ou est annulée, l’état de l’étendue est défini sur « Échec ». Pour les limites sur les étendues, consultez [Limites et configuration](../logic-apps/logic-apps-limits-and-config.md). 
+Pour vérifier l’état d’une étendue, vous pouvez utiliser les mêmes critères que ceux utilisés pour déterminer l’état d’exécution des applications logiques, tels que **Réussi**, **Échec**, **Annulé**, etc. Par défaut, quand toutes les actions de l’étendue réussissent, l’état de l’étendue est marqué comme **Réussi**. Mais quand une action dans l’étendue échoue ou est annulée, l’état de l’étendue est défini sur **Échec**. Pour les limites sur les étendues, consultez [Limites et configuration](../logic-apps/logic-apps-limits-and-config.md). 
 
-Par exemple, voici une application logique de haut niveau qui utilise une étendue pour exécuter des actions spécifiques et une condition pour vérifier l’état de l’étendue. Si des actions de l’étendue échouent ou se ferment de façon inattendue, l’étendue est définie sur « Échec » ou « Abandonné », respectivement ; l’application logique envoie un message « Scope failed » (Échec de l’étendue). Si toutes les actions de l’étendue réussissent, l’application logique envoie un message « Scope succeeded » (Réussite de l’étendue).
+Par exemple, voici une application logique de haut niveau qui utilise une étendue pour exécuter des actions spécifiques et une condition pour vérifier l’état de l’étendue. Si des actions de l’étendue échouent ou se ferment de façon inattendue, l’étendue est définie sur **Échec** ou **Abandonné**, respectivement ; l’application logique envoie un message « Scope failed » (Échec de l’étendue). Si toutes les actions de l’étendue réussissent, l’application logique envoie un message « Scope succeeded » (Réussite de l’étendue).
 
-![Configurer le déclencheur « Planification - Périodicité »](./media/logic-apps-control-flow-run-steps-group-scopes/scope-high-level.png)
+![Diagramme montrant le flux de l’étendue de l’application logique avec des exemples d’échec et de réussite de l’étendue](./media/logic-apps-control-flow-run-steps-group-scopes/scope-high-level.png)
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -31,7 +31,7 @@ Pour suivre l’exemple de cet article, vous avez besoin de ces éléments :
 
 * Un compte de messagerie de n’importe quel fournisseur de messagerie pris en charge par Logic Apps. Cet exemple utilise Outlook.com. Si vous utilisez un autre fournisseur, le flux général reste le même, mais votre interface utilisateur peut s’afficher différemment.
 
-* Une clé Bing Maps. Pour obtenir cette clé, consultez <a href="https://msdn.microsoft.com/library/ff428642.aspx" target="_blank">Getting a Bing Maps Key</a> (Obtention d’une clé Bing Maps).
+* Une clé Bing Maps. Pour obtenir cette clé, consultez <a href="/bingmaps/getting-started/bing-maps-dev-center-help/getting-a-bing-maps-key" target="_blank">Getting a Bing Maps Key</a> (Obtention d’une clé Bing Maps).
 
 * Des connaissances de base en [création d’applications logiques](../logic-apps/quickstart-create-first-logic-app-workflow.md)
 
@@ -71,13 +71,13 @@ Vous pouvez enregistrer votre application logique à tout moment, par conséquen
 
       ![Configurer l’action « Bing Maps - Obtenir un itinéraire »](./media/logic-apps-control-flow-run-steps-group-scopes/get-route.png) 
 
-      Pour plus d’informations sur ces paramètres, voir [Calculate a route (Calculer un itinéraire)](https://msdn.microsoft.com/library/ff701717.aspx).
+      Pour plus d’informations sur ces paramètres, voir [Calculate a route (Calculer un itinéraire)](/bingmaps/rest-services/routes/calculate-a-route).
 
       | Paramètre | Valeur | Description |
       | ------- | ----- | ----------- |
       | **Étape 1** | <*start*> | Entrez l’origine de votre itinéraire. | 
       | **Étape 2** | <*end*> | Entrez la destination de votre itinéraire. | 
-      | **Avoid** | None | Entrez les éléments à éviter sur votre itinéraire, par exemple les autoroutes, les péages, etc. Pour les valeurs possibles, consultez [Calculate a route](https://msdn.microsoft.com/library/ff701717.aspx) (Calculer un itinéraire). | 
+      | **Avoid** | None | Entrez les éléments à éviter sur votre itinéraire, par exemple les autoroutes, les péages, etc. Pour les valeurs possibles, consultez [Calculate a route](/bingmaps/rest-services/routes/calculate-a-route) (Calculer un itinéraire). | 
       | **Optimize** | timeWithTraffic | Sélectionnez un paramètre permettant d’optimiser votre itinéraire, par exemple la distance, la durée du trajet avec les informations de circulation actuelle, etc. Cet exemple utilise cette valeur : « timeWithTraffic » | 
       | **Unité de distance** | <*your-preference*> | Entrez l’unité de distance pour calculer votre itinéraire. Cet exemple utilise cette valeur : « Mile » | 
       | **Mode de déplacement** | Conduite | Entrez le mode de déplacement pour votre itinéraire. Cet exemple utilise cette valeur : « Driving » | 
@@ -192,7 +192,7 @@ Ensuite, ajoutez une étendue afin que vous puissiez regrouper des actions spéc
    
       `result('Scope')[0]['status']`
 
-      ![Ajouter l’expression qui vérifie l’état de l’étendue](./media/logic-apps-control-flow-run-steps-group-scopes/check-scope-status.png)
+      ![Capture d’écran montrant la zone « Expression » avec mise en évidence de l’expression de résultat](./media/logic-apps-control-flow-run-steps-group-scopes/check-scope-status.png)
 
    1. Pour les deux lignes, sélectionnez **est égal à** comme opérateur. 
    
@@ -388,7 +388,7 @@ Si vous travaillez en mode code, vous pouvez définir une structure d’étendue
 
 ## <a name="get-support"></a>Obtenir de l’aide
 
-* Si vous avez des questions, consultez le [forum Azure Logic Apps](https://social.msdn.microsoft.com/Forums/en-US/home?forum=azurelogicapps).
+* Pour toute question, consultez la page [Microsoft Q&A pour Azure Logic Apps](/answers/topics/azure-logic-apps.html).
 * Pour voter pour des fonctionnalités et suggestions ou pour en soumettre, visitez le [site de commentaires des utilisateurs Azure Logic Apps](https://aka.ms/logicapps-wish).
 
 ## <a name="next-steps"></a>Étapes suivantes

@@ -1,23 +1,24 @@
 ---
 title: Utiliser le connecteur Ethereum Blockchain avec Azure Logic Apps - Azure Blockchain Service
 description: Utilisez le connecteur Ethereum Blockchain avec Azure Logic Apps pour déclencher des fonctions de contrat intelligent et répondre à des événements de contrat intelligent.
-ms.date: 10/14/2019
-ms.topic: article
-ms.reviewer: chrisseg
-ms.openlocfilehash: 4a9acfd6098ed45fd92c7e3047b5d1446eeddbd6
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 08/31/2020
+ms.topic: how-to
+ms.reviewer: caleteet
+ms.openlocfilehash: 411337908553e58c252a0ed1a42d17f76195c720
+ms.sourcegitcommit: d6e92295e1f161a547da33999ad66c94cf334563
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74325222"
+ms.lasthandoff: 12/07/2020
+ms.locfileid: "96763789"
 ---
 # <a name="use-the-ethereum-blockchain-connector-with-azure-logic-apps"></a>Utiliser le connecteur Ethereum Blockchain avec Azure Logic Apps
 
-Utilisez le [connecteur Ethereum Blockchain](https://docs.microsoft.com/connectors/blockchainethereum/) avec [Azure Logic Apps](https://docs.microsoft.com/azure/logic-apps/) pour déclencher des fonctions de contrat intelligent et répondre à des événements de contrat intelligent. Par exemple, supposons que vous souhaitiez créer un microservice basé sur REST qui retourne des informations à partir d’un registre blockchain. À l’aide d’une application logique, vous pouvez accepter les requêtes HTTP qui interrogent les informations stockées dans un registre blockchain.
+Utilisez le [connecteur Ethereum Blockchain](/connectors/blockchainethereum/) avec [Azure Logic Apps](../../logic-apps/index.yml) pour déclencher des fonctions de contrat intelligent et répondre à des événements de contrat intelligent. Cet article explique comment vous utiliser le connecteur Ethereum Blockchain pour envoyer des informations de blockchain à un autre service ou appeler une fonction de blockchain. Par exemple, supposons que vous souhaitiez créer un microservice basé sur REST qui retourne des informations à partir d’un registre blockchain. À l’aide d’une application logique, vous pouvez accepter les requêtes HTTP qui interrogent les informations stockées dans un registre blockchain.
 
 ## <a name="prerequisites"></a>Prérequis
 
-Effectuez le guide de démarrage rapide prérequis facultatif intitulé [Démarrage rapide : Utiliser Visual Studio Code pour se connecter à un réseau du consortium Azure Blockchain Service](connect-vscode.md). Le guide de démarrage rapide vous dirige tout au long de l’installation de l’[Azure Blockchain Development Kit for Ethereum](https://marketplace.visualstudio.com/items?itemName=AzBlockchain.azure-blockchain) et de la configuration de votre environnement de développement blockchain.
+- Effectuez le guide de démarrage rapide prérequis facultatif intitulé [Démarrage rapide : Utiliser Visual Studio Code pour se connecter à un réseau du consortium Azure Blockchain Service](connect-vscode.md). Le guide de démarrage rapide vous dirige tout au long de l’installation de l’[Azure Blockchain Development Kit for Ethereum](https://marketplace.visualstudio.com/items?itemName=AzBlockchain.azure-blockchain) et de la configuration de votre environnement de développement blockchain.
+- Si vous débutez avec Azure Logic Apps, songez à consulter les modules Microsoft Learn [Présentation d’Azure Logic Apps](/learn/modules/intro-to-logic-apps/) et [Appeler une API à partir d’un flux de travail Logic Apps à l’aide d’un connecteur personnalisé](/learn/modules/logic-apps-and-custom-connectors/).
 
 ## <a name="create-a-logic-app"></a>Créer une application logique
 
@@ -33,7 +34,7 @@ Azure Logic Apps vous aide à planifier et à automatiser les processus et workf
 
 Chaque application logique doit démarrer avec un déclencheur, qui s’active lorsqu’un événement spécifique se produit ou lorsqu’une condition particulière est remplie. Chaque fois que le déclencheur s’active, le moteur Logic Apps crée une instance d’application logique qui démarre et exécute votre flux de travail.
 
-Le connecteur Ethereum Blockchain a un déclencheur et plusieurs actions. Le déclencheur ou l’action que vous utilisez dépend de votre scénario.
+Le connecteur Ethereum Blockchain a un déclencheur et plusieurs actions. Le déclencheur ou l’action que vous utilisez dépend de votre scénario. Suivez la section de cet article qui correspond le mieux à votre scénario.
 
 Si votre workflow :
 
@@ -128,7 +129,7 @@ Par exemple, les étapes suivantes génèrent une application logique de microse
 
     ![Vue du concepteur avec l’étape Connexions sélectionnée](./media/ethereum-logic-app/microservice-logic-app.png)
 
-1. Vous pouvez maintenant utiliser votre application logique. Pour tester le microservice basé sur REST, émettez une requête HTTP POST à l’URL de requête de l’application logique. Copiez le contenu de l’**URL HTTP POST** à partir de l’étape **When a HTTP request is received** (Quand une requête HTTP est reçue).
+1. Vous pouvez maintenant utiliser votre application logique. Pour tester le microservice basé sur REST, émettez une requête HTTP POST à l’URL de requête de l’application logique. Copiez le contenu de **URL HTTP POST** de l’étape **Quand une requête HTTP est reçue**.
 
     ![Volet du Concepteur Logic Apps avec l’URL HTTP POST](./media/ethereum-logic-app/post-url.png)
 
@@ -193,7 +194,7 @@ L’adresse du point de terminaison RPC Azure Blockchain Service est nécessaire
 Vous pouvez utiliser la clé privée du compte Ethereum pour l’authentification lors de l’envoi d’une transaction à la blockchain. Les clés publiques et privées de votre compte Ethereum sont générées à partir d’un mnémonique de 12 mots. Azure Blockchain Development Kit for Ethereum génère un mnémonique quand vous vous connectez à un membre du consortium Azure Blockchain Service. Vous pouvez obtenir l’adresse du point de terminaison à l’aide de l’extension du kit de développement.
 
 1. Dans Visual Studio Code, ouvrez la palette de commandes (F1).
-1. Sélectionnez **Azure Blockchain : Retrieve private key** (Récupérer la clé privée).
+1. Sélectionnez **Blockchain : Retrieve private key** (Récupérer la clé privée).
 1. Sélectionnez le mnémonique que vous avez enregistré lors de la connexion au membre du consortium.
 
     ![Palette de commandes avec une option pour sélectionner le mnémonique](./media/ethereum-logic-app/private-key.png)

@@ -11,12 +11,12 @@ ms.workload: data-services
 ms.topic: tutorial
 ms.date: 11/08/2019
 ms.author: jingwang
-ms.openlocfilehash: a835e67b1091a55c832955d8dac8615289a6d99e
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: b2293c0dd74903921abb58037afd8eb5db3659d9
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "81418692"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85513271"
 ---
 # <a name="copy-data-from-azure-blob-to-azure-sql-database-using-azure-data-factory"></a>Copier des données à partir d’un objet blob Azure vers Azure SQL Database à l’aide d’Azure Data Factory
 
@@ -41,10 +41,10 @@ Si vous n’avez pas d’abonnement Azure, créez un [compte Azure gratuit](http
 ## <a name="prerequisites"></a>Prérequis
 
 * *Compte Stockage Azure*. Vous utilisez le stockage blob comme magasins de données *source*. Si vous n’avez pas de compte de stockage Azure, consultez [Créer un compte de stockage universel](../storage/common/storage-account-create.md).
-* *Azure SQL Database*. Vous utilisez la base de données en tant que magasin de données *récepteur*. Si vous n’avez pas de base de données SQL, consultez [Créer une base de données Azure SQL](../sql-database/sql-database-single-database-get-started.md).
+* *Azure SQL Database*. Vous utilisez la base de données en tant que magasin de données *récepteur*. Si vous n’avez pas de base de données dans Azure SQL Database, consultez [Créer une base de données dans Azure SQL Database](../azure-sql/database/single-database-create-quickstart.md).
 * *Visual Studio*. La procédure pas à pas décrite dans cet article utilise Visual Studio 2019.
 * *[SDK Azure pour .NET](/dotnet/azure/dotnet-tools)* .
-* *Application Azure Active Directory*. Si vous n’avez pas d’application Azure Active Directory, consultez la section [Créer une application Azure Active Directory](../active-directory/develop/howto-create-service-principal-portal.md#create-an-azure-active-directory-application) dans [Procédure : Utiliser le portail pour créer une application Azure AD](../active-directory/develop/howto-create-service-principal-portal.md). Copiez les valeurs suivantes pour les utiliser dans les étapes ultérieures : **ID d’application (client)** , **Clé d’authentification** et **ID de l’annuaire (locataire)** . Affectez l’application au rôle **Contributeur** en suivant les instructions données dans le même article.
+* *Application Azure Active Directory*. Si vous n’avez pas d’application Azure Active Directory, consultez la section [Créer une application Azure Active Directory](../active-directory/develop/howto-create-service-principal-portal.md#register-an-application-with-azure-ad-and-create-a-service-principal) dans [Procédure : Utiliser le portail pour créer une application Azure AD](../active-directory/develop/howto-create-service-principal-portal.md). Copiez les valeurs suivantes pour les utiliser dans les étapes ultérieures : **ID d’application (client)** , **Clé d’authentification** et **ID de l’annuaire (locataire)** . Affectez l’application au rôle **Contributeur** en suivant les instructions données dans le même article.
 
 ### <a name="create-a-blob-and-a-sql-table"></a>Créer un objet blob et une table SQL
 
@@ -81,7 +81,7 @@ Ensuite, créez une table SQL de récepteur.
     CREATE CLUSTERED INDEX IX_emp_ID ON dbo.emp (ID);
     ```
 
-2. Autorisez les services Azure à accéder au serveur SQL. Veillez à autoriser l’accès aux services Azure sur votre serveur SQL Azure pour que le service Data Factory puisse écrire des données sur votre serveur SQL Azure. Pour vérifier et activer ce paramètre, procédez comme suit :
+2. Autorisez les services Azure à accéder à SQL Database. Veillez à autoriser l’accès aux services Azure sur votre serveur pour que le service Data Factory puisse écrire des données sur SQL Database. Pour vérifier et activer ce paramètre, procédez comme suit :
 
     1. Accédez au [portail Azure](https://portal.azure.com) pour gérer votre serveur SQL. Recherchez et sélectionnez les **serveurs SQL**.
 

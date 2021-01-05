@@ -1,21 +1,19 @@
 ---
-title: Fichier Include
-description: Fichier Include
+title: Fichier include
+description: Fichier include
 services: cognitive-services
-author: diberry
 manager: nitinme
 ms.service: cognitive-services
 ms.topic: include
 ms.custom: include file
 ms.date: 02/14/2020
 ms.subservice: language-understanding
-ms.author: diberry
-ms.openlocfilehash: 956aa308bf1cb3736c491031239661ec6b295ddb
-ms.sourcegitcommit: 9ee0cbaf3a67f9c7442b79f5ae2e97a4dfc8227b
+ms.openlocfilehash: 1509d175979bb65c467424db5de967f56825a3f9
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77279540"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91545195"
 ---
 L’application cliente doit savoir si un énoncé est inutile ou inapproprié pour l’application. L’intention **None** est ajoutée à chaque application dans le cadre du processus de création pour déterminer si un énoncé ne doit pas être traité par l’application cliente.
 

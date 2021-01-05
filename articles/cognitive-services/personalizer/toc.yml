@@ -12,9 +12,13 @@
 - name: Démarrages rapides
   items:
     - name: Utiliser le kit de développement logiciel (SDK)
-      href: sdk-learning-loop.md
+      href: ./quickstart-personalizer-sdk.md
 - name: Tutoriels
   items:
+    - name: Utiliser l’application web
+      href: tutorial-use-personalizer-web-app.md
+    - name: Utiliser un bot conversationnel
+      href: tutorial-use-personalizer-chat-bot.md
     - name: Utiliser un notebook Azure
       href: tutorial-use-azure-notebook-generate-loop-data.md
       displayName: 'jupyter, notebook, python, cell, graph, chart, aggregate, model update frequency'
@@ -84,27 +88,29 @@
         - name: .NET
           items:
             - name: Informations de référence
-              href: 'https://docs.microsoft.com/dotnet/api/overview/azure/cognitiveservices/client/personalizer?view=azure-dotnet'
+              href: /dotnet/api/overview/azure/cognitiveservices/client/personalizer?view=azure-dotnet
             - name: "Package\_NuGet"
               href: 'https://go.microsoft.com/fwlink/?linkid=2092272'
         - name: Go
           items:
             - name: Kit SDK
-              href: 'https://github.com/Azure/azure-sdk-for-go/tree/master/services/preview/personalizer/v1.0/personalizer'
+              href: 'https://github.com/Azure/azure-sdk-for-go/tree/master/services/preview'
         - name: Node.js
           items:
             - name: Informations de référence
-              href: 'https://docs.microsoft.com/javascript/api/@azure/cognitiveservices-personalizer/?view=azure-node-latest'
+              href: /javascript/api/@azure/cognitiveservices-personalizer/?view=azure-node-latest
             - name: NPM
               href: 'https://www.npmjs.com/package/@azure/cognitiveservices-personalizer/v/1.0.0'
         - name: Python
           items:
             - name: Informations de référence
-              href: 'https://docs.microsoft.com/python/api/overview/azure/cognitiveservices/personalizer?view=azure-python'
+              href: /python/api/overview/azure/cognitiveservices/personalizer?view=azure-python
             - name: Package Pypi
               href: 'https://pypi.org/project/azure-cognitiveservices-personalizer/'
 - name: Ressources
   items:
+    - name: Options d’aide et de support
+      href: ../cognitive-services-support-options.md?context=/azure/cognitive-services/personalizer/context/context
     - name: Dépannage
       href: troubleshooting.md
     - name: Disponibilité régionale
@@ -117,7 +123,3 @@
       href: 'https://go.microsoft.com/fwlink/?linkid=2092153'
     - name: Tarifs
       href: 'https://go.microsoft.com/fwlink/?linkid=2092154'
-    - name: Stack Overflow
-      href: 'https://stackoverflow.com/questions/tagged/personalizer'
-    - name: UserVoice
-      href: 'https://cognitive.uservoice.com/forums/921562-personalizer'

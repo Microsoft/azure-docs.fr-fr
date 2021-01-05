@@ -1,89 +1,101 @@
 ---
-title: Surveiller la remise des messages Azure Event Grid
-description: Cet article explique comment utiliser le Portail Azure pour afficher l’état de la remise de messages Azure Event Grid.
-services: event-grid
-author: spelluru
-manager: timlt
-ms.service: event-grid
+title: Afficher des métriques Azure Event Grid et définir des alertes
+description: Cet article explique comment utiliser le portail Azure pour afficher des métriques des rubriques et abonnements de Azure Event Grid, et créer des alertes sur ces éléments.
 ms.topic: conceptual
-ms.date: 01/23/2020
-ms.author: spelluru
-ms.openlocfilehash: 16587feaca65aa21836d9be1c44e00faa0f4f8d8
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 07/07/2020
+ms.openlocfilehash: 518d34d39e6fbecc408fe9a44d899fe4745d60d0
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76722133"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96008954"
 ---
 # <a name="monitor-event-grid-message-delivery"></a>Surveiller la remise des messages Event Grid 
+Cet article explique comment utiliser le portail pour afficher des métriques des rubriques et abonnements Event Grid et créer des alertes sur ces éléments. 
 
-Cet article décrit comment utiliser le portail pour connaître l’état des remises des événements.
-
-Event Grid assure une distribution fiable. Il distribue chaque message au moins une fois pour chaque abonnement. Les événements sont envoyés immédiatement au webhook inscrit de chaque abonnement. Si un webhook n’accuse pas réception d’un événement dans les 60 secondes suivant la première tentative de distribution, Event Grid effectue une nouvelle tentative de distribution de l’événement.
-
-Pour plus d’informations sur la remise d’événements et sur les nouvelles tentatives, consultez [Remise et nouvelle tentative de remise de messages avec Azure Grid](delivery-and-retry.md).
-
-## <a name="delivery-metrics"></a>Métriques des remises
+## <a name="metrics"></a>Mesures
 
 Le portail affiche les métriques pour l’état de la remise des messages d’événement.
 
-Pour les rubriques, les métriques sont les suivantes :
+Voici quelques-unes des mesures disponibles pour les rubriques :
 
-* **Publication réussie** : événement correctement envoyé à la rubrique et traité avec une réponse 2xx.
-* **Échec de la publication** : événement envoyé à la rubrique mais rejeté avec un code d’erreur.
-* **Sans correspondance** : événement correctement publié dans la rubrique, mais sans correspondance avec un abonnement aux événements. L’événement a été supprimé.
+* **Publication réussie** : événement correctement envoyé à la rubrique et traité avec une réponse 2xx.
+* **Échec de la publication** : événement envoyé à la rubrique mais rejeté avec un code d’erreur.
+* **Sans correspondance** : événement correctement publié dans la rubrique, mais sans correspondance avec un abonnement aux événements. L’événement a été supprimé.
 
-Pour les abonnements, les métriques sont les suivantes :
+Pour les abonnements, voici quelques-unes des mesures :
 
-* **Remise réussie** : l’événement a été correctement remis au point de terminaison de l’abonnement et a reçu une réponse 2xx.
-* **Échec de la remise** : l’événement a été envoyé au point de terminaison de l’abonnement, mais a reçu une réponse 4xx ou 5xx.
-* **Événements expirés** : l’événement n’a pas été remis et toutes les nouvelles tentatives ont été envoyées. L’événement a été supprimé.
-* **Événements correspondants** : l’événement dans la rubrique a été mis en correspondance par l’abonnement aux événements.
+* **Remise réussie** : l’événement a été correctement remis au point de terminaison de l’abonnement et a reçu une réponse 2xx.
+* **Échec de la remise** : chaque fois que le service tente d’effectuer une remise et que le gestionnaire d’événements ne retourne pas de code 2xx de réussite, le compteur **Échec de la remise** est incrémenté. Si le service tente de remettre le même événement plusieurs fois et échoue, le compteur **Échec de la remise** est incrémenté à chaque nouvel échec.
+* **Événements expirés** : l’événement n’a pas été remis et toutes les nouvelles tentatives ont été envoyées. L’événement a été supprimé.
+* **Événements correspondants** : l’événement dans la rubrique a été mis en correspondance par l’abonnement aux événements.
 
-## <a name="event-subscription-status"></a>État de l’abonnement aux événements
+    > [!NOTE]
+    > Pour obtenir la liste complète des métriques, consultez [Métriques prises en charge par Azure Event Grid](metrics.md).
 
-Pour afficher les métriques pour un abonnement aux événements, vous pouvez rechercher par type d’abonnement ou par abonnement pour une ressource spécifique.
+## <a name="view-custom-topic-metrics"></a>Afficher des métriques d’une rubrique personnalisée
 
-Pour effectuer une recherche par type d’abonnement aux événements, sélectionnez **Tous les services**.
+Si vous avez publié une rubrique personnalisée, vous pouvez afficher ses métriques. 
 
-![Sélectionner Tous les services](./media/monitor-event-delivery/all-services.png)
+1. Connectez-vous au [portail Azure](https://portal.azure.com/).
+2. Dans la barre de recherche de la rubrique, tapez **Rubriques Event Grid**, puis sélectionnez **Rubriques Event Grid** dans la liste déroulante. 
 
-Recherchez **event grid** et sélectionnez **Abonnements Event Grid** parmi les options disponibles.
+    Rechercher et sélectionner :::image type="content" source="./media/custom-event-quickstart-portal/select-event-grid-topics.png" alt-text="Rubriques Event Grid":::
+3. Sélectionnez votre rubrique personnalisée dans la liste des rubriques. 
 
-![Rechercher des abonnements aux événements](./media/monitor-event-delivery/search-and-select.png)
+    :::image type="content" source="./media/monitor-event-delivery/select-custom-topic.png" alt-text="Sélectionnez votre rubrique personnalisée":::
+4. Affichez les métriques de la rubrique d’événement personnalisé sur la page **Rubrique Event Grid**. Dans l’image suivante, la section **Essentials** qui affiche le groupe de ressources, l’abonnement, etc. est réduite. 
 
-Filtrez par le type d’événement, l’abonnement et l’emplacement. Sélectionnez **Métriques** pour l’abonnement à afficher.
+    :::image type="content" source="./media/monitor-event-delivery/custom-topic-metrics.png" alt-text="Afficher les métriques d’événement":::
 
-![Filtrer les abonnements aux événements](./media/monitor-event-delivery/filter-events.png)
+Vous pouvez créer des graphiques avec des métriques prises en charge à l’aide de l’onglet **Métriques** de la page **Rubrique Event Grid**.
 
-Affichez les métriques de la rubrique d’événement et de l’abonnement.
+:::image type="content" source="./media/monitor-event-delivery/topics-metrics-page.png" alt-text="Rubrique - Page des métriques":::
 
-![Afficher les métriques d’événement](./media/monitor-event-delivery/subscription-metrics.png)
+Pour plus d’informations sur les métriques, consultez [Métriques dans Azure Monitor](../azure-monitor/platform/data-platform-metrics.md)
 
-Pour rechercher les métriques pour une ressource spécifique, sélectionnez cette ressource. Ensuite, sélectionnez **Événements**.
+Par exemple, consultez le graphique des métriques pour la métrique **Événements publiés**.
 
-![Sélectionner les événements pour une ressource](./media/monitor-event-delivery/select-events.png)
+:::image type="content" source="./media/monitor-event-delivery/custom-topic-metrics-example.png" alt-text="Métrique des événements publiés":::
 
-Les métriques pour les abonnements pour cette ressource s’affichent.
 
-## <a name="custom-event-status"></a>État d’un événement personnalisé
+## <a name="view-subscription-metrics"></a>Afficher les métriques des abonnements
+1. Accédez à la page **Rubrique Event Grid** en suivant les étapes de la section précédente. 
+2. Sélectionnez l’abonnement dans le volet inférieur, comme indiqué dans l’exemple suivant. 
 
-Si vous avez publié une rubrique personnalisée, vous pouvez afficher ses métriques. Sélectionnez le groupe de ressources pour la rubrique, puis sélectionnez la rubrique.
+    :::image type="content" source="./media/monitor-event-delivery/select-event-subscription.png" alt-text="Sélectionner l’abonnement aux événements":::    
 
-![Sélectionner une rubrique personnalisée](./media/monitor-event-delivery/select-custom-topic.png)
+    Vous pouvez également rechercher des **abonnements Event Grid** dans la barre de recherche du portail Azure, sélectionnez **Type de rubrique**, **Abonnement** et **Emplacement** pour voir un abonnement aux événements. 
 
-Afficher les métriques de la rubrique d’événement personnalisée.
+    :::image type="content" source="./media/monitor-event-delivery/event-subscriptions-page.png" alt-text="Sélectionner l’abonnement aux événements à partir de la page Abonnements Event Grid":::        
 
-![Afficher les métriques d’événement](./media/monitor-event-delivery/custom-topic-metrics.png)
+    Pour les rubriques personnalisées, sélectionnez **Rubriques Event Grid** comme **Type de rubrique**. Pour les rubriques système, sélectionnez le type de la ressource Azure, par exemple **Comptes de stockage (blob, GPv2)** . 
+3. Consultez les métriques d’un abonnement sur sa page d’accueil sous forme de graphique. Vous pouvez voir les métriques **Général**, **Erreur**, **Latence** et **Lettres mortes** pour la dernière heure, les 6 dernières heures, les 12 dernières heures, une journée, 7 jours ou 30 jours. 
 
-## <a name="set-alerts"></a>Définir des alertes
+    :::image type="content" source="./media/monitor-event-delivery/subscription-home-page-metrics.png" alt-text="Métriques sur la page d’accueil de l’abonnement":::    
 
-Vous pouvez définir des alertes sur les métriques au niveau de la rubrique et du domaine pour les rubriques personnalisées et les domaines d’événements. Dans le panneau Vue d’ensemble, sélectionnez **Alertes** dans le menu de ressources de gauche afin d’afficher, de gérer et de créer des règles d’alerte. [En savoir plus sur les alertes Azure Monitor](../azure-monitor/platform/alerts-overview.md)
+## <a name="view-system-topic-metrics"></a>Afficher les métriques de rubrique système
 
-![Afficher les métriques d’événement](./media/monitor-event-delivery/select-alerts.png)
+1. Connectez-vous au [portail Azure](https://portal.azure.com/).
+2. Dans la barre de recherche de la rubrique, tapez **Rubriques système Event Grid**, puis sélectionnez **Rubriques système Event Grid** dans la liste déroulante. 
+
+    :::image type="content" source="./media/monitor-event-delivery/search-system-topics.png" alt-text="Rechercher et sélectionner des rubriques système Event Grid":::
+3. Sélectionnez votre rubrique système dans la liste des rubriques. 
+
+    :::image type="content" source="./media/monitor-event-delivery/select-system-topic.png" alt-text="Sélectionner votre rubrique système":::
+4. Affichez les métriques de la rubrique système sur la page **Rubrique système Event Grid**. Dans l’image suivante, la section **Essentials** qui affiche le groupe de ressources, l’abonnement, etc. est réduite. 
+
+    :::image type="content" source="./media/monitor-event-delivery/system-topic-overview-metrics.png" alt-text="Afficher les métriques de rubrique système sur la page de présentation":::
+
+Vous pouvez créer des graphiques avec des métriques prises en charge à l’aide de l’onglet **Métriques** de la page **Rubrique Event Grid**.
+
+:::image type="content" source="./media/monitor-event-delivery/system-topic-metrics-page.png" alt-text="Rubrique système - Page des métriques":::
+
+Pour plus d’informations sur les métriques, consultez [Métriques dans Azure Monitor](../azure-monitor/platform/data-platform-metrics.md)
+
 
 ## <a name="next-steps"></a>Étapes suivantes
+Voir les articles suivants :
 
-* Pour plus d’informations sur la remise d’événements et sur les nouvelles tentatives, consultez [Remise et nouvelle tentative de remise de messages avec Azure Grid](delivery-and-retry.md).
-* Pour une présentation d’Event Grid, consultez [À propos d’Event Grid](overview.md).
-* Pour une prise en main rapide d’Event Grid, consultez [Créer et acheminer des événements personnalisés avec Azure Event Grid](custom-event-quickstart.md).
+- Pour apprendre à créer des alertes sur des métriques et des opérations du journal d’activité, consultez [Définir des alertes](set-alerts.md).
+- Pour plus d’informations sur la remise d’événements et sur les nouvelles tentatives, consultez [Remise et nouvelle tentative de remise de messages avec Azure Grid](delivery-and-retry.md).

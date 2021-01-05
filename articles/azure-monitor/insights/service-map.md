@@ -6,27 +6,27 @@ ms.topic: conceptual
 author: bwren
 ms.author: bwren
 ms.date: 07/24/2019
-ms.openlocfilehash: f2f3e84462307f43ffe432fe878476d979f489f0
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f7268f698dcc26dbe99b517c9dd4584be67c3a82
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79480910"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91448455"
 ---
 # <a name="using-service-map-solution-in-azure"></a>Utilisation de la solution Service Map dans Azure
 
 La solution Service Map détecte automatiquement les composants d’application sur les systèmes Windows et Linux, et mappe la communication entre les services. Elle vous permet d’afficher vos serveurs comme vous les imaginez, en tant que systèmes interconnectés fournissant des services critiques. Elle affiche les connexions entre serveurs, les processus, la latence des connexions entrantes et sortantes, ainsi que les ports au sein de toute architecture TCP connectée, sans nécessiter de configuration autre que l’installation d’un agent.
 
-Cet article décrit les détails de l’intégration et de l’utilisation de Service Map. Pour plus d’informations sur la configuration des conditions préalables pour cette solution, consultez [Activer la vue d’ensemble Azure Monitor pour machines virtuelles](vminsights-enable-overview.md#prerequisites). Pour résumer, vous avez besoin des éléments suivants :
+Cet article décrit les détails de l’intégration et de l’utilisation de Service Map. Les conditions préalables de la solution sont les suivantes :
 
-* Un espace de travail Log Analytics pour activer cette solution.
+* Un espace de travail Log Analytics dans une [région prise en charge](vminsights-configure-workspace.md#supported-regions).
 
-* L’agent Log Analytics installé sur l’ordinateur Windows ou le serveur Linux configuré pour signaler le même espace de travail que celui avec lequel vous avez activé la solution.
+* L’[agent Log Analytics](vminsights-enable-overview.md#agents) installé sur l’ordinateur Windows ou le serveur Linux connecté à l’espace de travail avec lequel vous avez activé la solution.
 
-* L’agent de dépendances installé sur l’ordinateur Windows ou le serveur Linux.
+* L’[agent Dependency](vminsights-enable-overview.md#agents) installé sur l’ordinateur Windows ou le serveur Linux.
 
 >[!NOTE]
->Si vous avez déjà déployé Service Map, vous pouvez maintenant visualiser vos mappages dans Azure Monitor pour les machines virtuelles, incluant des fonctionnalités supplémentaires pour la supervision de l’intégrité et des performances de celles-ci. Pour en savoir plus, consultez [Présentation d’Azure Monitor pour machines virtuelles](../../azure-monitor/insights/vminsights-overview.md). Pour en savoir plus sur les différences entre la solution Service Map et la fonctionnalité de carte Azure Monitor pour machines virtuelles, consultez les [questions fréquentes (FAQ)](../faq.md#azure-monitor-for-vms).
+>Si vous avez déjà déployé Service Map, vous pouvez maintenant visualiser vos mappages dans Azure Monitor pour les machines virtuelles, incluant des fonctionnalités supplémentaires pour la supervision de l’intégrité et des performances de celles-ci. Pour en savoir plus, consultez [Présentation d’Azure Monitor pour machines virtuelles](./vminsights-overview.md). Pour en savoir plus sur les différences entre la solution Service Map et la fonctionnalité de carte Azure Monitor pour machines virtuelles, consultez les [questions fréquentes (FAQ)](../faq.md#azure-monitor-for-vms).
 
 ## <a name="sign-in-to-azure"></a>Connexion à Azure
 
@@ -35,7 +35,7 @@ Connectez-vous au portail Azure sur [https://portal.azure.com](https://portal.az
 ## <a name="enable-service-map"></a>Activer Service Map
 
 1. Activez la solution Service Map depuis la [Place de marché Azure](https://azuremarketplace.microsoft.com/marketplace/apps/Microsoft.ServiceMapOMS?tab=Overview) ou en procédant de la manière décrite dans [Ajouter des solutions de supervision à partir de la galerie Solutions](solutions.md).
-1. [Installez l’agent de dépendances sur Windows](vminsights-enable-hybrid-cloud.md#install-the-dependency-agent-on-windows) ou [installez l’agent de dépendances sur Linux](vminsights-enable-hybrid-cloud.md#install-the-dependency-agent-on-linux) sur chaque ordinateur sur lequel vous souhaitez obtenir des données. L’agent de dépendances peut surveiller les connexions aux voisins immédiats ; par conséquent, vous n’avez pas forcément besoin d’un agent sur chaque ordinateur.
+1. [Installez l’agent de dépendances sur Windows](./vminsights-enable-hybrid.md#install-the-dependency-agent-on-windows) ou [installez l’agent de dépendances sur Linux](./vminsights-enable-hybrid.md#install-the-dependency-agent-on-linux) sur chaque ordinateur sur lequel vous souhaitez obtenir des données. L’agent de dépendances peut surveiller les connexions aux voisins immédiats ; par conséquent, vous n’avez pas forcément besoin d’un agent sur chaque ordinateur.
 
 Accédez à Service Map dans le portail Azure à partir de votre espace de travail Log Analytics, puis sélectionnez l’option **Solutions** dans le volet gauche.<br><br> ![Sélectionnez l’option Solutions dans l’espace de travail](./media/service-map/select-solution-from-workspace.png).<br> Dans la liste des solutions, sélectionnez **ServiceMap(workspaceName)** et dans la page de présentation de la solution Service Map, cliquez sur la vignette de résumé Service Map.<br><br> ![Vignette de résumé Service Map](./media/service-map/service-map-summary-tile.png).
 
@@ -169,7 +169,7 @@ Certains processus jouent des rôles particuliers sur les machines : serveurs w
 
 Les connexions qui ont échoué sont affichées dans les cartes de type Service Map des processus et machines, avec une ligne rouge en pointillés indiquant qu’un système client ne parvient pas à atteindre un processus ou un port. Les connexions ayant échoué sont signalées par n’importe quel système ayant un agentService Map déployé si ce système est celui qui a tenté d’établir de telles connexions. La solution Service Map mesure ce processus en observant les sockets TCP qui ne parviennent pas à établir une connexion. Cet échec peut être dû à un pare-feu, à une configuration incorrecte du client ou du serveur, ou à l’indisponibilité d’un service distant.
 
-![Connexions ayant échoué](media/service-map/failed-connections.png)
+![Capture d'écran d'une partie d'une solution Service Map dans laquelle une ligne rouge en pointillés est mise en surbrillance pour signaler que la connexion entre le processus backup.pl et le port 4475 a échoué.](media/service-map/failed-connections.png)
 
 Le fait de comprendre les connexions ayant échoué peut faciliter le dépannage, la validation de la migration, l’analyse de la sécurité et la compréhension globale de l’architecture. Les échecs de connexion sont parfois sans incidence, mais ils dénotent souvent directement un problème tel qu’un environnement de basculement devenant subitement inaccessible ou deux couches Application incapables de communiquer après une migration vers le cloud.
 
@@ -193,7 +193,7 @@ Les groupes de ports du serveur sont des zones qui représentent les ports de ch
 
 Un clic sur les points de suspension (...) en haut à droite d’un serveur permet d’afficher le menu contextuel de ce serveur.
 
-![Connexions ayant échoué](media/service-map/context-menu.png)
+![Capture d'écran représentant le menu contextuel d'un serveur dans Service Map. Le menu contient les options Charger la carte des serveurs et Afficher les self-links.](media/service-map/context-menu.png)
 
 ### <a name="load-server-map"></a>Charger la carte des serveurs
 
@@ -241,7 +241,7 @@ Service Map intègre la recherche dans les journaux pour afficher un nombre de t
 
 ## <a name="service-desk-integration"></a>Intégration du service d’assistance
 
-L’intégration de Service Map au connecteur de gestion des services informatiques est automatique quand les deux solutions sont activées et configurées dans votre espace de travail Log Analytics. L’intégration dans Service Map est libellée « Service Desk ». Pour plus d’informations, voir [Gérer de manière centralisée les éléments de travail ITSM à l’aide d’IT Service Management Connector (version préliminaire)](https://docs.microsoft.com/azure/log-analytics/log-analytics-itsmc-overview).
+L’intégration de Service Map au connecteur de gestion des services informatiques est automatique quand les deux solutions sont activées et configurées dans votre espace de travail Log Analytics. L’intégration dans Service Map est libellée « Service Desk ». Pour plus d’informations, voir [Gérer de manière centralisée les éléments de travail ITSM à l’aide d’IT Service Management Connector (version préliminaire)](../platform/itsmc-overview.md).
 
 Le volet **Service Desk d’une machine** affiche la liste de tous les événements d’IT Service Management survenus pour le serveur sélectionné pendant la période sélectionnée. Le serveur affiche une icône s’il existe des éléments en cours, et le volet Service Desk de la machine affiche la liste de ceux-ci.
 
@@ -258,7 +258,7 @@ L’intégration de Service Map à Change Tracking est automatique quand les deu
 
 Le volet **Change Tracking d’une machine** affiche la liste de toutes les modifications, les plus récentes en tête, ainsi qu’un lien pour consulter des détails supplémentaires dans Recherche dans les journaux.
 
-![Volet Change Tracking d’une machine](media/service-map/change-tracking.png)
+![Capture d'écran du volet Change Tracking d'une machine dans Service Map.](media/service-map/change-tracking.png)
 
 L’illustration suivante est une vue détaillée d’un événement ModificationDeConfiguration que vous pourriez voir après avoir sélectionné **Afficher dans Log Analytics**.
 
@@ -270,7 +270,7 @@ Le volet **Performances d’une machine** affiche des métriques de performance 
 
 ![Volet Performances d’une machine](media/service-map/machine-performance.png)
 
-Pour afficher les données de performances, vous pouvez avoir besoin d’[activer les compteurs de performances Log Analytics appropriés](https://docs.microsoft.com/azure/log-analytics/log-analytics-data-sources-performance-counters).  Les compteurs que vous souhaitez activer :
+Pour afficher les données de performances, vous pouvez avoir besoin d’[activer les compteurs de performances Log Analytics appropriés](../platform/data-sources-performance-counters.md).  Les compteurs que vous souhaitez activer :
 
 Windows :
 - Processeur(*)\\ % de temps processeur
@@ -300,11 +300,11 @@ L’intégration de Service Map à Update Management est automatique quand les d
 
 Le volet **Mises à jour de la machine** affiche les données de la solution Update Management pour le serveur sélectionné. Le volet affiche un récapitulatif de toutes les mises à jour manquantes pour le serveur pendant la période sélectionnée.
 
-![Volet Change Tracking d’une machine](media/service-map/machine-updates.png)
+![Capture d'écran du volet Mises à jour de la machine dans Service Map.](media/service-map/machine-updates.png)
 
 ## <a name="log-analytics-records"></a>Enregistrements Log Analytics
 
-Les données d’inventaire des ordinateurs et processus de la solution Service Map sont disponibles pour effectuer une [recherche](../../azure-monitor/log-query/log-query-overview.md) dans Log Analytics. Vous pouvez appliquer ces données à divers scénarios tels que la planification de la migration, l’analyse de la capacité, la détection et la résolution de problèmes de performances à la demande.
+Les données d’inventaire des ordinateurs et processus de la solution Service Map sont disponibles pour effectuer une [recherche](../log-query/log-query-overview.md) dans Log Analytics. Vous pouvez appliquer ces données à divers scénarios tels que la planification de la migration, l’analyse de la capacité, la détection et la résolution de problèmes de performances à la demande.
 
 Un enregistrement par heure est généré pour chaque processus et ordinateur, en plus des enregistrements générés quand un processus ou ordinateur démarre ou est intégré à la solution Service Map. Les propriétés de ces enregistrements sont décrites dans les tableaux suivants. Les champs et les valeurs des événements ServiceMapComputer_CL sont mappés aux champs de la ressource Machine dans l’API Azure Resource Manager ServiceMap. Les champs et les valeurs des événements ServiceMapProcess_CL sont mappés aux champs de la ressource Processus dans l’API Azure Resource Manager ServiceMap. Le champ ResourceName_s correspond au champ de nom dans la ressource Azure Resource Manager correspondante. 
 
@@ -457,43 +457,43 @@ Les enregistrements de type *ServiceMapProcess_CL* ont des données d’inventai
 
 ### <a name="list-all-known-machines"></a>Liste de tous les ordinateurs connus
 
-ServiceMapComputer_CL | summarize arg_max(TimeGenerated, *) by ResourceId
+`ServiceMapComputer_CL | summarize arg_max(TimeGenerated, *) by ResourceId`
 
 ### <a name="list-the-physical-memory-capacity-of-all-managed-computers"></a>Répertorier la capacité de mémoire physique de tous les ordinateurs gérés
 
-ServiceMapComputer_CL | summarize arg_max(TimeGenerated, *) by ResourceId | project PhysicalMemory_d, ComputerName_s
+`ServiceMapComputer_CL | summarize arg_max(TimeGenerated, *) by ResourceId | project PhysicalMemory_d, ComputerName_s`
 
 ### <a name="list-computer-name-dns-ip-and-os"></a>Répertorier le nom de l’ordinateur, le DNS, l’adresse IP et le système d’exploitation.
 
-ServiceMapComputer_CL | summarize arg_max(TimeGenerated, *) by ResourceId | project ComputerName_s, OperatingSystemFullName_s, DnsNames_s, Ipv4Addresses_s
+`ServiceMapComputer_CL | summarize arg_max(TimeGenerated, *) by ResourceId | project ComputerName_s, OperatingSystemFullName_s, DnsNames_s, Ipv4Addresses_s`
 
 ### <a name="find-all-processes-with-sql-in-the-command-line"></a>Rechercher tous les processus contenant "sql" dans la ligne de commande
 
-ServiceMapProcess_CL | where CommandLine_s contains_cs "sql" | summarize arg_max(TimeGenerated, *) by ResourceId
+`ServiceMapProcess_CL | where CommandLine_s contains_cs "sql" | summarize arg_max(TimeGenerated, *) by ResourceId`
 
 ### <a name="find-a-machine-most-recent-record-by-resource-name"></a>Rechercher un ordinateur (enregistrement le plus récent) par nom de ressource
 
-search in (ServiceMapComputer_CL) "m-4b9c93f9-bc37-46df-b43c-899ba829e07b" | summarize arg_max(TimeGenerated, *) by ResourceId
+`search in (ServiceMapComputer_CL) "m-4b9c93f9-bc37-46df-b43c-899ba829e07b" | summarize arg_max(TimeGenerated, *) by ResourceId`
 
 ### <a name="find-a-machine-most-recent-record-by-ip-address"></a>Rechercher une machine (enregistrement le plus récent) par adresse IP
 
-search in (ServiceMapComputer_CL) "10.229.243.232" | summarize arg_max(TimeGenerated, *) by ResourceId
+`search in (ServiceMapComputer_CL) "10.229.243.232" | summarize arg_max(TimeGenerated, *) by ResourceId`
 
 ### <a name="list-all-known-processes-on-a-specified-machine"></a>Répertorier tous les processus sur une machine spécifiée
 
-ServiceMapProcess_CL | where MachineResourceName_s == "m-559dbcd8-3130-454d-8d1d-f624e57961bc" | summarize arg_max(TimeGenerated, *) by ResourceId
+`ServiceMapProcess_CL | where MachineResourceName_s == "m-559dbcd8-3130-454d-8d1d-f624e57961bc" | summarize arg_max(TimeGenerated, *) by ResourceId`
 
 ### <a name="list-all-computers-running-sql"></a>Répertorier tous les ordinateurs exécutant SQL
 
-ServiceMapComputer_CL | where ResourceName_s in ((search in (ServiceMapProcess_CL) "\*sql\*" | distinct MachineResourceName_s)) | distinct ComputerName_s
+`ServiceMapComputer_CL | where ResourceName_s in ((search in (ServiceMapProcess_CL) "\*sql\*" | distinct MachineResourceName_s)) | distinct ComputerName_s`
 
 ### <a name="list-all-unique-product-versions-of-curl-in-my-datacenter"></a>Répertorier toutes les versions de produit uniques de CURL dans mon centre de données
 
-ServiceMapProcess_CL | where ExecutableName_s == "curl" | distinct ProductVersion_s
+`ServiceMapProcess_CL | where ExecutableName_s == "curl" | distinct ProductVersion_s`
 
 ### <a name="create-a-computer-group-of-all-computers-running-centos"></a>Créer un groupe de tous les ordinateurs exécutant CentOS
 
-ServiceMapComputer_CL | where OperatingSystemFullName_s contains_cs "CentOS" | distinct ComputerName_s
+`ServiceMapComputer_CL | where OperatingSystemFullName_s contains_cs "CentOS" | distinct ComputerName_s`
 
 ### <a name="summarize-the-outbound-connections-from-a-group-of-machines"></a>Synthétiser les connexions sortantes d’un groupe de machines
 
@@ -540,7 +540,7 @@ let remoteMachines = remote | summarize by RemoteMachine;
 
 ## <a name="rest-api"></a>API REST
 
-L’ensemble des données relatives au serveur, au processus et aux dépendances dans Service Map est disponible via [l’API REST Carte de service](https://docs.microsoft.com/rest/api/servicemap/).
+L’ensemble des données relatives au serveur, au processus et aux dépendances dans Service Map est disponible via [l’API REST Carte de service](/rest/api/servicemap/).
 
 ## <a name="diagnostic-and-usage-data"></a>Données relatives aux diagnostics et à l’utilisation
 
@@ -550,7 +550,7 @@ Pour plus d’informations sur l’utilisation et la collecte de données, voir 
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-En savoir plus sur les [recherches dans les journaux](../../azure-monitor/log-query/log-query-overview.md) dans Log Analytics pour récupérer les données collectées par la solution Service Map.
+En savoir plus sur les [recherches dans les journaux](../log-query/log-query-overview.md) dans Log Analytics pour récupérer les données collectées par la solution Service Map.
 
 ## <a name="troubleshooting"></a>Dépannage
 
@@ -600,6 +600,6 @@ Si vous voyez votre machine dans Service Map, mais qu’elle ne comporte aucune 
 
 Vérifiez le `C:\Program Files\Microsoft Dependency Agent\logs\wrapper.log file` (Windows) ou `/var/opt/microsoft/dependency-agent/log/service.log file` (Linux). Les dernières lignes du fichier doivent indiquer la raison pour laquelle le noyau ne s’est pas chargé. Par exemple, le noyau n’est peut-être pas pris en charge sous Linux si vous l’avez mis à jour.
 
-## <a name="feedback"></a>Commentaires
+## <a name="suggestions"></a>Suggestions
 
 Avez-vous des commentaires à nous transmettre à propos de Service Map ou de sa documentation ?  Si c’est le cas, sachez que notre page [User Voice](https://feedback.azure.com/forums/267889-log-analytics/category/184492-service-map) vous permet de nous suggérer des fonctionnalités ou de voter pour des suggestions en cours.

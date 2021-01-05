@@ -9,12 +9,12 @@ ms.topic: conceptual
 ms.date: 12/18/2019
 ms.author: tamram
 ms.subservice: common
-ms.openlocfilehash: e134c69f5d602cb4369e9410e3e2b9d3478b11a0
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 2c238bf3911283db5d09fdd5679d784c5e5401f8
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76756247"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88654801"
 ---
 # <a name="scalability-and-performance-targets-for-premium-page-blob-storage-accounts"></a>Objectifs d’extensibilité et de performances pour les comptes de stockage d’objets blob de pages Premium
 
@@ -25,7 +25,7 @@ ms.locfileid: "76756247"
 Un compte de stockage d’objets blob de pages Premium est optimisé pour les opérations de lecture/écriture. Ce type de compte de stockage stocke un disque non managé pour une machine virtuelle Azure.
 
 > [!NOTE]
-> Microsoft recommande d’utiliser des disques managés avec des machines virtuelles Azure (VM) si possible. Pour plus d’informations sur les disques managés, consultez [Vue d’ensemble de Stockage sur disque Azure pour les machines virtuelles Windows](../../virtual-machines/windows/managed-disks-overview.md).
+> Microsoft recommande d’utiliser des disques managés avec des machines virtuelles Azure (VM) si possible. Pour plus d'informations sur les disques managés, consultez [Vue d'ensemble de Stockage sur disque Azure pour les machines virtuelles](../../virtual-machines/managed-disks-overview.md).
 
 Les objectifs d’extensibilité des comptes de stockage d’objets blob de pages Premium sont les suivants :
 
@@ -39,7 +39,7 @@ Les objectifs d’extensibilité des comptes de stockage d’objets blob de page
 
 Un compte d’objets blob de pages Premium est un compte à usage général configuré pour des performances Premium. Les comptes de stockage v2 à usage général sont recommandés.
 
-Si vous utilisez des comptes de stockage d’objets blob de page Premium pour des disques non managés et que votre application dépasse les objectifs d’extensibilité d’un compte de stockage unique, Microsoft vous recommande de migrer vers des disques managés. Pour plus d’informations sur les disques managés, consultez [Vue d’ensemble de Stockage sur disque Azure pour les machines virtuelles Windows](../../virtual-machines/windows/managed-disks-overview.md) ou [Vue d’ensemble de Stockage sur disque Azure pour les machines virtuelles Linux](../../virtual-machines/linux/managed-disks-overview.md).
+Si vous utilisez des comptes de stockage d’objets blob de page Premium pour des disques non managés et que votre application dépasse les objectifs d’extensibilité d’un compte de stockage unique, Microsoft vous recommande de migrer vers des disques managés. Pour plus d'informations sur les disques managés, consultez [Vue d'ensemble de Stockage sur disque Azure pour les machines virtuelles](../../virtual-machines/managed-disks-overview.md).
 
 Si vous ne pouvez pas migrer vers des disques managés, générez votre application pour utiliser plusieurs comptes de stockage et partitionnez vos données sur ces différents comptes. Par exemple, si vous souhaitez attacher des disques de 51 To sur plusieurs machines virtuelles, répartissez-les entre deux comptes de stockage. La limite pour un compte de stockage Premium unique est de 35 To. Vérifiez qu’un compte de stockage Premium n’a jamais plus de 35 To de disques configurés.
 

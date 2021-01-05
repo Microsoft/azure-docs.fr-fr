@@ -6,14 +6,38 @@ metadata:
   ms.topic: landing-page
   author: erikadoyle
   ms.author: edoyle
-  ms.date: 12/04/2019
-  ms.openlocfilehash: a2651387a425439d09ad68b0e763ff0c6c3f7f27
-  ms.sourcegitcommit: 253d4c7ab41e4eb11cd9995190cd5536fcec5a3c
+  ms.date: 07/31/2020
+  ms.openlocfilehash: 2f9b7264fe8199cb25772b0598354e474196ca93
+  ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 03/25/2020
-  ms.locfileid: "75452221"
+  ms.lasthandoff: 12/02/2020
+  ms.locfileid: "96499796"
 landingContent:
+- title: Essayer les clusters managés Service Fabric (préversion)
+  linkLists:
+  - linkListType: get-started
+    links:
+    - text: Que sont les clusters managés Service Fabric (préversion)
+      url: overview-managed-cluster.md
+    - text: Déployer un cluster managé (préversion)
+      url: quickstart-managed-cluster-template.md
+  - linkListType: tutorial
+    links:
+    - text: Créer un cluster managé (préversion)
+      url: tutorial-managed-cluster-deploy.md
+    - text: Effectuer le scale-out d’un type de nœud de cluster managé (préversion)
+      url: tutorial-managed-cluster-scale.md
+    - text: Ajouter et supprimer des types de nœuds de clusters managés (préversion)
+      url: tutorial-managed-cluster-add-remove-node-type.md
+    - text: Déployer une application sur un cluster managé (préversion)
+      url: tutorial-managed-cluster-deploy-app.md
+    - text: Ajouter une extension de groupe de machines virtuelles identiques à un type de nœud de cluster managé (préversion)
+      url: how-to-managed-cluster-vmss-extension.md
+  - linkListType: whats-new
+    links:
+    - text: FAQ sur les clusters managés Service Fabric
+      url: faq-managed-cluster.md
 - title: À propos de Service Fabric
   linkLists:
   - linkListType: overview
@@ -102,14 +126,14 @@ landingContent:
   linkLists:
   - linkListType: concept
     links:
-    - text: Bonnes pratiques de sécurité
+    - text: Meilleures pratiques en matière de sécurité
       url: service-fabric-best-practices-security.md
     - text: Sécurité des applications
       url: service-fabric-application-and-service-security.md
     - text: Sécurité des clusters
       url: service-fabric-cluster-security.md
     - text: Contrôles de sécurité pour Service Fabric
-      url: service-fabric-security-controls.md
+      url: ./security-baseline.md
     - text: Service Fabric Secrets Store
       url: service-fabric-application-secret-store.md
   - linkListType: how-to-guide
@@ -138,7 +162,7 @@ landingContent:
       url: samples-cli.md
   - linkListType: whats-new
     links:
-    - text: Questions fréquentes sur Service Fabric
+    - text: FAQ sur Service Fabric
       url: service-fabric-common-questions.md
 - title: Utiliser Service Fabric en local
   linkLists:

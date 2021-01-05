@@ -11,12 +11,12 @@ ms.topic: quickstart
 ms.date: 04/04/2020
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: 0a754873aeafe8d4e7b48d49647469874ff40f7e
-ms.sourcegitcommit: 2d7910337e66bbf4bd8ad47390c625f13551510b
+ms.openlocfilehash: 6471d1b5a5ad2b8ba34080ae1220872fa0e2e232
+ms.sourcegitcommit: 7cc10b9c3c12c97a2903d01293e42e442f8ac751
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/08/2020
-ms.locfileid: "80875871"
+ms.lasthandoff: 11/06/2020
+ms.locfileid: "93421054"
 ---
 # <a name="quickstart-set-up-sign-in-for-a-single-page-app-using-azure-active-directory-b2c"></a>Démarrage rapide : Configurer la connexion pour une application monopage à l’aide d’Azure Active Directory B2C
 
@@ -29,12 +29,12 @@ Azure Active Directory B2C (Azure AD B2C) assure la gestion des identités de c
 - [Visual Studio Code](https://code.visualstudio.com/)
 - [Node.JS](https://nodejs.org/en/download/)
 - Compte de réseau social Facebook, Google ou Microsoft
-- Exemple de code GitHub : [active-directory-b2c-javascript-msal-singlepageapp](https://github.com/Azure-Samples/active-directory-b2c-javascript-msal-singlepageapp)
+- Exemple de code issu de GitHub : [ms-identity-b2c-javascript-spa](https://github.com/Azure-Samples/ms-identity-b2c-javascript-spa)
 
-    Vous pouvez [télécharger l’archive zip](https://github.com/Azure-Samples/active-directory-b2c-javascript-msal-singlepageapp/archive/master.zip) ou cloner le dépôt :
+    Vous pouvez [télécharger l’archive zip](https://github.com/Azure-Samples/ms-identity-b2c-javascript-spa/archive/main.zip) ou cloner le dépôt :
 
     ```console
-    git clone https://github.com/Azure-Samples/active-directory-b2c-javascript-msal-singlepageapp.git
+    git clone https://github.com/Azure-Samples/ms-identity-b2c-javascript-spa.git
     ```
 
 ## <a name="run-the-application"></a>Exécution de l'application
@@ -42,7 +42,6 @@ Azure Active Directory B2C (Azure AD B2C) assure la gestion des identités de c
 1. Démarrez le serveur en exécutant les commandes suivantes à partir de l’invite de commandes Node.js :
 
     ```console
-    cd active-directory-b2c-javascript-msal-singlepageapp
     npm install && npm update
     npm start
     ```
@@ -60,7 +59,7 @@ Azure Active Directory B2C (Azure AD B2C) assure la gestion des identités de c
 ## <a name="sign-in-using-your-account"></a>Connectez-vous à l’aide de votre compte
 
 1. Sélectionnez **Se connecter** pour démarrer le parcours utilisateur.
-1. Azure AD B2C présente une page de connexion d’une entreprise fictive appelée Fabrikam pour l’exemple d’application web. Pour vous inscrire au moyen d’un fournisseur d’identité sociale, sélectionnez le bouton en regard du fournisseur d’identité que vous souhaitez utiliser.
+1. Azure AD B2C présente la page de connexion d’une entreprise fictive appelée « Fabrikam » pour l’exemple d’application web. Pour vous inscrire au moyen d’un fournisseur d’identité sociale, sélectionnez le bouton en regard du fournisseur d’identité que vous souhaitez utiliser.
 
     ![Page de connexion ou d’inscription affichant des boutons de fournisseur d’identité](./media/quickstart-single-page-app/sign-in-or-sign-up-spa.png)
 
@@ -75,6 +74,10 @@ Cliquez sur **Call API** (Appeler une API) pour que votre nom d’affichage soit
 ![Exemple d’application dans un navigateur affichant la réponse de l’API web](./media/quickstart-single-page-app/call-api-spa.png)
 
 L’exemple d’application monopage inclut un jeton d’accès dans la requête envoyée à la ressource de l’API web protégée.
+
+## <a name="clean-up-resources"></a>Nettoyer les ressources
+
+Vous pouvez utiliser votre locataire Azure AD B2C si vous envisagez d’effectuer d’autres didacticiels ou démarrages rapides Azure AD B2C. Si vous n’en avez plus besoin, vous pouvez [supprimer votre client Azure AD B2C](faq.md#how-do-i-delete-my-azure-ad-b2c-tenant).
 
 ## <a name="next-steps"></a>Étapes suivantes
 

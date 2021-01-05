@@ -5,15 +5,15 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
-ms.custom: hdinsightactive,hdiseo17may2017,seoapr2020
+ms.topic: how-to
+ms.custom: hdinsightactive,hdiseo17may2017,seoapr2020, devx-track-python
 ms.date: 04/27/2020
-ms.openlocfilehash: 48bd53160c3d2e76dccd1f22723c30c2c7e00d7a
-ms.sourcegitcommit: 856db17a4209927812bcbf30a66b14ee7c1ac777
+ms.openlocfilehash: bd61c6812d794d30e28f087dabf58db51e9c3296
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82559934"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89230413"
 ---
 # <a name="use-apache-spark-mllib-to-build-a-machine-learning-application-and-analyze-a-dataset"></a>Utiliser Apache Spark MLlib pour créer une application de Machine Learning et analyser un jeu de données
 
@@ -44,7 +44,7 @@ Dans la procédure ci-dessous, vous développez un modèle pour voir ce qui est 
 
 ## <a name="create-an-apache-spark-mllib-machine-learning-app"></a>Créer une application de Machine Learning Apache Spark MLlib
 
-1. Créez un bloc-notes Jupyter à l’aide du noyau PySpark. Pour obtenir des instructions, consultez [Créer un bloc-notes Jupyter](./apache-spark-jupyter-spark-sql.md#create-a-jupyter-notebook).
+1. Créez un bloc-notes Jupyter à l’aide du noyau PySpark. Pour obtenir des instructions, consultez [Créer un fichier bloc-notes Jupyter](./apache-spark-jupyter-spark-sql.md#create-a-jupyter-notebook-file).
 
 2. Importez les types requis pour cette application. Copiez et collez le code suivant dans une cellule vide, puis appuyez sur **MAJ + ENTRÉE**.
 

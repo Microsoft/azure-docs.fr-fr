@@ -7,12 +7,12 @@ ms.service: application-gateway
 ms.date: 09/10/2019
 ms.author: victorh
 ms.topic: conceptual
-ms.openlocfilehash: 1d393055b0ac62198bd5a7239b2b92b7aeff62e5
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: a9b2e8148586ec58ea6a7a033099e726920857b6
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82145366"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "84987941"
 ---
 # <a name="url-path-based-routing-overview"></a>Présentation du routage basé sur le chemin d’accès de l’URL
 
@@ -75,7 +75,7 @@ Les règles de chemin ne respectent pas la casse.
 |Modèle de chemin d’accès v1  |Prise en charge ?  |
 |---------|---------|
 |`/images/*`     |Oui|
-|`/images*`     |non|
+|`/images*`     |Oui|
 |`/images/*.jpg`     |non|
 |`/*.jpg`     |non|
 |`/Repos/*/Comments/*`     |non|

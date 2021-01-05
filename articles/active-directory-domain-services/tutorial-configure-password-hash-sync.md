@@ -1,20 +1,20 @@
 ---
 title: Activer la synchronisation de hachage du mot de passe pour Azure AD Domain Services | Microsoft Docs
 description: Dans ce tutoriel, vous allez apprendre à activer la synchronisation de hachage du mot de passe à l’aide d’Azure AD Connect sur un domaine managé Azure Active Directory Domain Services.
-author: iainfoulds
+author: justinha
 manager: daveba
 ms.service: active-directory
 ms.subservice: domain-services
 ms.workload: identity
 ms.topic: tutorial
-ms.date: 02/10/2020
-ms.author: iainfou
-ms.openlocfilehash: 4bf85a8e38a3cfc46fe4dbaf86639899e7267178
-ms.sourcegitcommit: 642a297b1c279454df792ca21fdaa9513b5c2f8b
+ms.date: 07/06/2020
+ms.author: justinha
+ms.openlocfilehash: e83d8941d1be7fd36f53a881a21716252ad01954
+ms.sourcegitcommit: 8192034867ee1fd3925c4a48d890f140ca3918ce
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80676608"
+ms.lasthandoff: 12/05/2020
+ms.locfileid: "96618346"
 ---
 # <a name="tutorial-enable-password-synchronization-in-azure-active-directory-domain-services-for-hybrid-environments"></a>Tutoriel : Activer la synchronisation du mot de passe dans Azure Active Directory Domain Services pour les environnements hybrides
 
@@ -22,7 +22,7 @@ Pour les environnements hybrides, un locataire Azure Active Directory (Azure AD
 
 Pour utiliser Azure AD DS avec des comptes synchronisés à partir d’un environnement AD DS local, vous devez configurer Azure AD Connect afin de synchroniser ces hachages de mot de passe nécessaires pour l’authentification NTLM et Kerberos. Une fois Azure AD Connect configuré, un événement de création de compte ou de modification de mot de passe local synchronise également les hachages de mot de passe existants avec Azure AD.
 
-Vous n’avez pas besoin d’effectuer ces étapes si vous utilisez des comptes cloud uniquement sans environnement AD DS local.
+Vous n’avez pas besoin d’effectuer ces étapes si vous utilisez des comptes cloud uniquement sans environnement AD DS local ou si vous utilisez une *forêt de ressources*. Pour les domaines managés qui utilisent une forêt de ressources, les hachages de mots de passe ne sont jamais synchronisés. L’authentification des comptes locaux réutilise la ou les approbations de forêt pour vos propres contrôleurs de domaine AD DS.
 
 Dans ce tutoriel, vous allez voir comment :
 
@@ -42,7 +42,7 @@ Pour effectuer ce didacticiel, vous avez besoin des ressources suivantes :
     * Si nécessaire, [créez un locataire Azure Active Directory][create-azure-ad-tenant] ou [associez un abonnement Azure à votre compte][associate-azure-ad-tenant].
     * Si nécessaire, [activez Azure AD Connect pour la synchronisation de hachage du mot de passe][enable-azure-ad-connect].
 * Un domaine managé Azure Active Directory Domain Services activé et configuré dans votre locataire Azure AD.
-    * Si nécessaire, [créez et configurez une instance Azure Active Directory Domain Services][create-azure-ad-ds-instance].
+    * Si nécessaire, [créez et configurez un domaine managé Azure Active Directory Domain Services][create-azure-ad-ds-instance].
 
 ## <a name="password-hash-synchronization-using-azure-ad-connect"></a>Synchronisation de hachage du mot de passe à l’aide d’Azure AD Connect
 
@@ -97,7 +97,7 @@ Une fois Azure AD Connect installé et configuré pour se synchroniser avec Azu
     Set-ADSyncAADPasswordSyncConfiguration -SourceConnector $adConnector -TargetConnector $azureadConnector -Enable $true
     ```
 
-    En fonction de la taille de votre annuaire en termes de nombre de comptes et de groupes, la synchronisation des hachages de mot de passe existants avec Azure AD peut prendre un certain temps. Après avoir été synchronisés avec Azure AD, les mots de passe sont ensuite synchronisés avec le domaine managé Azure AD DS.
+    En fonction de la taille de votre annuaire en termes de nombre de comptes et de groupes, la synchronisation des hachages de mot de passe existants avec Azure AD peut prendre un certain temps. Après avoir été synchronisés avec Azure AD, les mots de passe sont ensuite synchronisés avec le domaine managé.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

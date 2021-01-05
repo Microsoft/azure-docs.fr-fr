@@ -8,23 +8,23 @@ ms.service: cognitive-services
 ms.subservice: immersive-reader
 ms.topic: tutorial
 ms.date: 01/14/2020
-ms.author: metan
-ms.openlocfilehash: a7e0cb41f32a60e4f00cb60cc3c86e40ab926785
-ms.sourcegitcommit: 4499035f03e7a8fb40f5cff616eb01753b986278
+ms.author: metang
+ms.openlocfilehash: d8ee6b2344f0c953233195a693e774e410a8a8ea
+ms.sourcegitcommit: 22da82c32accf97a82919bf50b9901668dc55c97
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/03/2020
-ms.locfileid: "82735128"
+ms.lasthandoff: 11/08/2020
+ms.locfileid: "94368200"
 ---
 # <a name="tutorial-create-an-ios-app-that-launches-the-immersive-reader-with-content-from-a-photo-swift"></a>Tutoriel : Créer une application iOS qui lance le lecteur immersif avec le contenu d’une photo (Swift)
 
 Le [lecteur immersif](https://www.onenote.com/learningtools) est un outil conçu de façon inclusive qui implémente des techniques éprouvées pour améliorer la compréhension de la lecture.
 
-L’[API Lire Vision par ordinateur Cognitive Services](https://docs.microsoft.com/azure/cognitive-services/computer-vision/concept-recognizing-text) détecte le contenu textuel d’une image à l’aide des derniers modèles de reconnaissance de Microsoft et convertit le texte identifié en flux de caractères lisibles par ordinateur.
+L’[API Lire Vision par ordinateur Cognitive Services](../computer-vision/concept-recognizing-text.md) détecte le contenu textuel d’une image à l’aide des derniers modèles de reconnaissance de Microsoft et convertit le texte identifié en flux de caractères lisibles par ordinateur.
 
 Dans ce tutoriel, vous allez générer une application iOS à partir de zéro et intégrer l’API Lire ainsi que le lecteur immersif à l’aide du kit SDK Lecteur immersif. Un exemple complet fonctionnel de ce tutoriel est disponible [ici](https://github.com/microsoft/immersive-reader-sdk/tree/master/js/samples/ios).
 
-Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
+Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/cognitive-services/) avant de commencer.
 
 ## <a name="prerequisites"></a>Prérequis
 

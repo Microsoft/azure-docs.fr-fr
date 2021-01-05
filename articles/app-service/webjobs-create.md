@@ -8,12 +8,12 @@ ms.date: 10/16/2018
 ms.author: glenga
 ms.reviewer: msangapu;suwatch;pbatum;naren.soni
 ms.custom: seodec18
-ms.openlocfilehash: 028551f04b2e44e9456e2f7343159ad9b52fd25f
-ms.sourcegitcommit: 09a124d851fbbab7bc0b14efd6ef4e0275c7ee88
+ms.openlocfilehash: 2743efa5a9067f0667d54be0b7df75a627e60fcd
+ms.sourcegitcommit: 4cb89d880be26a2a4531fedcc59317471fe729cd
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/23/2020
-ms.locfileid: "82085142"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92674033"
 ---
 # <a name="run-background-tasks-with-webjobs-in-azure-app-service"></a>Exécuter des tâches en arrière-plan avec WebJobs dans Azure App Service
 
@@ -61,21 +61,24 @@ Several steps in the three "Create..." sections are identical;
 when making changes in one don't forget the other two.
 -->
 
+> [!IMPORTANT]
+> Si vous avez configuré un contrôle de code source avec votre application, les tâches web doivent être déployées dans le cadre de l’intégration du contrôle de code source. Une fois que le contrôle de code source est configuré avec votre application, une tâche web ne peut pas être ajoutée à partir du portail Azure.
+
 1. Dans le [portail Azure](https://portal.azure.com), ouvrez la page **App Service** de votre application Web App Service, application API ou application mobile.
 
 2. Sélectionnez **WebJobs**.
 
    ![Sélection de WebJobs](./media/web-sites-create-web-jobs/select-webjobs.png)
 
-2. Dans la page **WebJobs**, sélectionnez **Ajouter**.
+2. Dans la page **WebJobs** , sélectionnez **Ajouter**.
 
     ![Page WebJob](./media/web-sites-create-web-jobs/wjblade.png)
 
-3. Utilisez les paramètres **Ajouter une tâche web**, comme spécifié dans le tableau.
+3. Utilisez les paramètres **Ajouter une tâche web** , comme spécifié dans le tableau.
 
-   ![Ajouter une page WebJob](./media/web-sites-create-web-jobs/addwjcontinuous.png)
+   ![Capture d’écran montrant les paramètres Ajouter une tâche web que vous devez configurer.](./media/web-sites-create-web-jobs/addwjcontinuous.png)
 
-   | Paramètre      | Exemple de valeur   | Description  |
+   | Paramètre      | Exemple de valeur   | Description  |
    | ------------ | ----------------- | ------------ |
    | **Nom** | myContinuousWebJob | Un nom unique au sein d’une application App Service. Doit commencer par une lettre ou un chiffre et ne peut pas contenir de caractères spéciaux, à part les tirets et les traits de soulignement (« - » et « _ »). |
    | **Chargement de fichiers** | ConsoleApp.zip | Un fichier *.zip* qui contient votre exécutable un fichier script ainsi que les fichiers de prise en charge requis pour exécuter le programme ou le script. Les types de fichiers exécutables ou scripts pris en charge sont répertoriés dans la section [Types de fichiers pris en charge](#acceptablefiles). |
@@ -105,15 +108,15 @@ when making changes in one don't forget the other two.
 
    ![Sélection de WebJobs](./media/web-sites-create-web-jobs/select-webjobs.png)
 
-2. Dans la page **WebJobs**, sélectionnez **Ajouter**.
+2. Dans la page **WebJobs** , sélectionnez **Ajouter**.
 
     ![Page WebJob](./media/web-sites-create-web-jobs/wjblade.png)
 
-3. Utilisez les paramètres **Ajouter une tâche web**, comme spécifié dans le tableau.
+3. Utilisez les paramètres **Ajouter une tâche web** , comme spécifié dans le tableau.
 
-   ![Ajouter une page WebJob](./media/web-sites-create-web-jobs/addwjtriggered.png)
+   ![Capture d’écran montrant les paramètres qui doivent être définis pour créer un tâche web déclenchée manuellement.](./media/web-sites-create-web-jobs/addwjtriggered.png)
 
-   | Paramètre      | Exemple de valeur   | Description  |
+   | Paramètre      | Exemple de valeur   | Description  |
    | ------------ | ----------------- | ------------ |
    | **Nom** | myTriggeredWebJob | Un nom unique au sein d’une application App Service. Doit commencer par une lettre ou un chiffre et ne peut pas contenir de caractères spéciaux, à part les tirets et les traits de soulignement (« - » et « _ »).|
    | **Chargement de fichiers** | ConsoleApp.zip | Un fichier *.zip* qui contient votre exécutable un fichier script ainsi que les fichiers de prise en charge requis pour exécuter le programme ou le script. Les types de fichiers exécutables ou scripts pris en charge sont répertoriés dans la section [Types de fichiers pris en charge](#acceptablefiles). |
@@ -143,15 +146,15 @@ when making changes in one don't forget the other two.
 
    ![Sélection de WebJobs](./media/web-sites-create-web-jobs/select-webjobs.png)
 
-2. Dans la page **WebJobs**, sélectionnez **Ajouter**.
+2. Dans la page **WebJobs** , sélectionnez **Ajouter**.
 
    ![Page WebJob](./media/web-sites-create-web-jobs/wjblade.png)
 
-3. Utilisez les paramètres **Ajouter une tâche web**, comme spécifié dans le tableau.
+3. Utilisez les paramètres **Ajouter une tâche web** , comme spécifié dans le tableau.
 
    ![Ajouter une page WebJob](./media/web-sites-create-web-jobs/addwjscheduled.png)
 
-   | Paramètre      | Exemple de valeur   | Description  |
+   | Paramètre      | Exemple de valeur   | Description  |
    | ------------ | ----------------- | ------------ |
    | **Nom** | myScheduledWebJob | Un nom unique au sein d’une application App Service. Doit commencer par une lettre ou un chiffre et ne peut pas contenir de caractères spéciaux, à part les tirets et les traits de soulignement (« - » et « _ »). |
    | **Chargement de fichiers** | ConsoleApp.zip | Un fichier *.zip* qui contient votre exécutable un fichier script ainsi que les fichiers de prise en charge requis pour exécuter le programme ou le script. Les types de fichiers exécutables ou scripts pris en charge sont répertoriés dans la section [Types de fichiers pris en charge](#acceptablefiles). |
@@ -185,11 +188,11 @@ Pour en savoir plus, consultez [Planification d’un WebJob déclenché](webjobs
    
    ![Bouton Journaux d’activité](./media/web-sites-create-web-jobs/wjbladelogslink.png)
 
-2. À la page **Détails de la tâche web**, sélectionnez une heure pour afficher les détails d’une exécution.
+2. À la page **Détails de la tâche web** , sélectionnez une heure pour afficher les détails d’une exécution.
    
    ![Détails de la tâche web](./media/web-sites-create-web-jobs/webjobdetails.png)
 
-3. À la page **WebJob Run Details**, sélectionnez **Activer/désactiver la sortie** pour afficher le texte du contenu du journal.
+3. À la page **WebJob Run Details** , sélectionnez **Activer/désactiver la sortie** pour afficher le texte du contenu du journal.
    
     ![Détails d'exécution de la tâche WebJob](./media/web-sites-create-web-jobs/webjobrundetails.png)
 

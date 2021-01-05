@@ -1,5 +1,5 @@
 ---
-title: 'Démarrage rapide : Créer un ensemble de compétences dans le portail Azure'
+title: Créer un ensemble de compétences dans le portail Azure
 titleSuffix: Azure Cognitive Search
 description: Dans ce guide de démarrage rapide du portail, découvrez comment utiliser l’Assistant Importation de données pour ajouter des compétences cognitives à un pipeline d’indexation dans Recherche cognitive Azure. Les compétences incluent l’OCR (reconnaissance optique de caractères) et le traitement en langage naturel.
 manager: nitinme
@@ -7,57 +7,66 @@ author: HeidiSteen
 ms.author: heidist
 ms.service: cognitive-search
 ms.topic: quickstart
-ms.date: 12/20/2019
-ms.openlocfilehash: e2e17ba6af60fa495a03e7d46a07cfe6b66f4e68
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.date: 09/25/2020
+ms.openlocfilehash: be45292552a7ac62c7131c637b044edc477328e2
+ms.sourcegitcommit: 4313e0d13714559d67d51770b2b9b92e4b0cc629
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "77472415"
+ms.lasthandoff: 09/27/2020
+ms.locfileid: "91396788"
 ---
 # <a name="quickstart-create-an-azure-cognitive-search-cognitive-skillset-in-the-azure-portal"></a>Démarrage rapide : Créer un ensemble de compétences cognitives pour la Recherche cognitive Azure dans le portail Azure
 
-Un ensemble de compétences est une fonctionnalité IA (intelligence artificielle) qui extrait des informations et une structure à partir de fichiers texte ou de fichiers image non différenciés et volumineux. L’ensemble de compétences les rend indexables et offre des possibilités de recherche à l’aide de requêtes de recherche en texte intégral dans la Recherche cognitive Azure. 
+Un ensemble de compétences est une fonctionnalité basée sur l’IA (intelligence artificielle) qui extrait des informations et une structure à partir de fichiers texte ou de fichiers image non différenciés et volumineux, et qui rend le contenu indexable et offrant des possibilités de recherche dans Recherche cognitive Azure. 
 
-Dans ce guide de démarrage rapide, vous allez combiner les services et les données du cloud Azure pour créer l’ensemble de compétences. Une fois tout en place, vous allez exécuter l’Assistant **Importation de données** dans le portail pour tout rassembler. Le résultat final est un index de recherche qui contient des données créées par le traitement IA, que vous pouvez interroger dans le portail ([Explorateur de recherche](search-explorer.md)).
+Dans ce guide de démarrage rapide, vous allez combiner les services et les données du cloud Azure pour créer l’ensemble de compétences. Une fois que tout est en place, vous exécutez l’Assistant **Importer des données** dans le portail Azure pour tout préparer. Le résultat final est un index de recherche qui contient des données créées par le traitement IA, que vous pouvez interroger dans le portail ([Explorateur de recherche](search-explorer.md)).
 
-Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
+## <a name="prerequisites"></a>Prérequis
 
-## <a name="create-services-and-load-data"></a>Créer des services et charger des données
+Avant de commencer la lecture cet article, vous devez disposer des éléments suivants :
 
-Ce guide de démarrage rapide utilise la Recherche cognitive Azure, le [Stockage Blob Azure](https://docs.microsoft.com/azure/storage/blobs/) et [Azure Cognitive Services](https://azure.microsoft.com/services/cognitive-services/) pour l’IA. 
++ Compte Azure avec un abonnement actif. [Créez un compte gratuitement](https://azure.microsoft.com/free/).
 
-Parce que la charge de travail est vraiment petite, Cognitive Services est utilisé en arrière-plan pour traiter gratuitement jusqu’à 20 transactions. Pour un jeu de données aussi petit, vous pouvez ignorer la création ou l’attachement d’une ressource Cognitive Services.
++ Service Recherche cognitive Azure. [Créez un service](search-create-service-portal.md) ou [recherchez un service existant](https://ms.portal.azure.com/#blade/HubsExtension/BrowseResourceBlade/resourceType/Microsoft.Search%2FsearchServices) dans votre abonnement actuel. Vous pouvez utiliser un service gratuit pour ce guide de démarrage rapide. 
+
++ Un compte de stockage Azure avec un [stockage blob](../storage/blobs/index.yml).
+
+> [!NOTE]
+> Ce guide de démarrage rapide utilise également [Azure Cognitive Services](https://azure.microsoft.com/services/cognitive-services/) pour l’intelligence artificielle. Parce que la charge de travail est vraiment petite, Cognitive Services est utilisé en arrière-plan pour traiter gratuitement jusqu’à 20 transactions. Cela signifie que vous pouvez effectuer cet exercice sans avoir à créer une ressource Cognitive Services supplémentaire.
+
+## <a name="set-up-your-data"></a>Configurer vos données
+
+Dans les étapes suivantes, configurez un conteneur d’objets blob dans Stockage Azure pour stocker des fichiers de contenu hétérogènes.
 
 1. [Téléchargez les exemples de données](https://1drv.ms/f/s!As7Oy81M_gVPa-LCb5lC_3hbS-4) consistant en un petit ensemble de fichiers de types différents. Décompressez les fichiers
 
-1. [Créez un compte de stockage Azure](https://docs.microsoft.com/azure/storage/common/storage-quickstart-create-account?tabs=azure-portal) ou [recherchez un compte existant](https://ms.portal.azure.com/#blade/HubsExtension/BrowseResourceBlade/resourceType/Microsoft.Storage%2storageAccounts/). 
+1. [Créez un compte de stockage Azure](../storage/common/storage-account-create.md?tabs=azure-portal) ou [recherchez un compte existant](https://ms.portal.azure.com/#blade/HubsExtension/BrowseResourceBlade/resourceType/Microsoft.Storage%2storageAccounts/). 
 
-   Choisissez la même région que celle de la Recherche cognitive Azure pour éviter des frais de bande passante. 
-   
-   Choisissez le type de compte StorageV2 (V2 à usage général) si vous souhaitez tester la fonctionnalité de base de connaissances plus tard, au cours d’une autre procédure pas à pas. Sinon, choisissez n’importe quel type.
+   + Choisissez la même région que celle de la Recherche cognitive Azure pour éviter des frais de bande passante. 
+
+   + Choisissez le type de compte StorageV2 (V2 à usage général) si vous souhaitez tester la fonctionnalité de base de connaissances plus tard, au cours d’une autre procédure pas à pas. Sinon, choisissez n’importe quel type.
 
 1. Ouvrez les pages des services BLOB et créez un conteneur. Vous pouvez utiliser le niveau d’accès public par défaut. 
 
 1. Dans le conteneur, cliquez sur **Charger** pour charger les exemples de fichiers que vous avez téléchargés au cours de la première étape. Notez que vous disposez d’un large éventail de types de contenu, notamment des images et des fichiers d’application qui ne peuvent pas faire l’objet de recherches en texte intégral dans leurs formats natifs.
 
-   ![Fichiers source sur le Stockage Blob Azure](./media/cognitive-search-quickstart-blob/sample-data.png)
-
-1. [Créez un service Recherche cognitive Azure](search-create-service-portal.md) ou [recherchez un service existant](https://ms.portal.azure.com/#blade/HubsExtension/BrowseResourceBlade/resourceType/Microsoft.Search%2FsearchServices). Vous pouvez utiliser un service gratuit pour ce guide de démarrage rapide.
+   :::image type="content" source="media/cognitive-search-quickstart-blob/sample-data.png" alt-text="Fichiers source sur le Stockage Blob Azure" border="false":::
 
 Vous êtes maintenant prêt à passer à l’Assistant Importation de données.
 
 ## <a name="run-the-import-data-wizard"></a>Exécuter l’Assistant Importation de données
 
-Dans la page Vue d’ensemble du service Recherche, cliquez dans la barre de commandes sur **Importer des données** pour configurer l’enrichissement cognitif en quatre étapes.
+1. Connectez-vous au [portail Azure](https://portal.azure.com/) avec votre compte Azure.
 
-  ![Commande Importer des données](media/cognitive-search-quickstart-blob/import-data-cmd2.png)
+1. [Recherchez votre service de recherche](https://ms.portal.azure.com/#blade/HubsExtension/BrowseResourceBlade/resourceType/Microsoft.Storage%2storageAccounts/). Ensuite, dans la page Vue d’ensemble, cliquez sur **Importer des données** sur la barre de commandes pour configurer l’enrichissement cognitif en quatre étapes.
+
+   :::image type="content" source="media/cognitive-search-quickstart-blob/import-data-cmd2.png" alt-text="Fichiers source sur le Stockage Blob Azure" border="false":::
 
 ### <a name="step-1---create-a-data-source"></a>Étape 1 : Créer une source de données
 
 1. Dans **Connexion à vos données**, choisissez **Stockage Blob Azure**, sélectionnez le compte de stockage et le conteneur que vous avez créés. Donnez un nom à la source de données et utilisez les valeurs par défaut pour le reste. 
 
-   ![Configuration d’objets blob Azure](./media/cognitive-search-quickstart-blob/blob-datasource.png)
+   :::image type="content" source="media/cognitive-search-quickstart-blob/blob-datasource.png" alt-text="Fichiers source sur le Stockage Blob Azure" border="false":::
 
     Passez à la page suivante.
 
@@ -67,7 +76,7 @@ Ensuite, configurez l’enrichissement par IA pour appeler l’OCR, l’analyse 
 
 1. Pour ce guide de démarrage rapide, nous utilisons la ressource Cognitive Services au niveau **Gratuit**. Les exemples de données se composent de 14 fichiers. L’allocation gratuite de 20 transactions sur Cognitive Services est donc suffisante pour ce guide de démarrage rapide. 
 
-   ![Attacher Cognitive Services](media/cognitive-search-quickstart-blob/cog-search-attach.png)
+   :::image type="content" source="media/cognitive-search-quickstart-blob/cog-search-attach.png" alt-text="Fichiers source sur le Stockage Blob Azure" border="false":::
 
 1. Développez **Ajouter des enrichissements** et effectuez quatre sélections. 
 
@@ -77,7 +86,7 @@ Ensuite, configurez l’enrichissement par IA pour appeler l’OCR, l’analyse 
 
    Choisissez des compétences de reconnaissance d’entité (personnes, organisations, emplacements) et d’analyse d’image.
 
-   ![Attacher Cognitive Services](media/cognitive-search-quickstart-blob/skillset.png)
+   :::image type="content" source="media/cognitive-search-quickstart-blob/skillset.png" alt-text="Fichiers source sur le Stockage Blob Azure" border="false":::
 
    Passez à la page suivante.
 
@@ -93,7 +102,7 @@ Pour ce guide de démarrage rapide, l’Assistant effectue un travail de qualit�
 
 + Les attributs par défaut sont **Récupérable** et **PossibilitéRecherche**. **PossibilitéRecherche** permet la recherche en texte intégral dans un champ. **Récupérable** signifie que les valeurs des champs peuvent être retournées dans les résultats. L’Assistant suppose que vous souhaitez ces champs récupérables et interrogeables, car vous les avez créés par l’intermédiaire de compétences.
 
-  ![Champs d’index](media/cognitive-search-quickstart-blob/index-fields.png)
+  :::image type="content" source="media/cognitive-search-quickstart-blob/index-fields.png" alt-text="Fichiers source sur le Stockage Blob Azure" border="false":::
 
 Remarquez la zone barrée et le point d’interrogation sur l’attribut **Récupérable** près du champ `content`. Pour les documents d’objets blob comportant beaucoup de texte, le champ `content` contient la majeure partie du fichier qui peut atteindre des milliers de lignes. Un champ comme celui-ci pouvant alourdir les résultats de la recherche, vous devez l’exclure de cette démonstration. 
 
@@ -109,7 +118,7 @@ L’indexeur est une ressource de niveau supérieur qui gère le processus d’i
 
 1. Dans la page **Indexeur**, vous pouvez accepter le nom par défaut et cliquer sur l’option de planification **Une fois** pour l’exécuter immédiatement. 
 
-   ![Définition de l’indexeur](media/cognitive-search-quickstart-blob/indexer-def.png)
+   :::image type="content" source="media/cognitive-search-quickstart-blob/indexer-def.png" alt-text="Fichiers source sur le Stockage Blob Azure" border="false":::
 
 1. Cliquez sur **Envoyer** pour créer et exécuter simultanément l’indexeur.
 
@@ -117,7 +126,7 @@ L’indexeur est une ressource de niveau supérieur qui gère le processus d’i
 
 L’indexation des compétences cognitives prend plus de temps que l’indexation textuelle classique, notamment l’OCR et l’analyse d’image. Pour superviser la progression, accédez à la page Vue d’ensemble, puis cliquez sur **Indexeurs** au centre de la page.
 
-  ![Notification de la Recherche cognitive Azure](./media/cognitive-search-quickstart-blob/indexer-notification.png)
+  :::image type="content" source="media/cognitive-search-quickstart-blob/indexer-notification.png" alt-text="Fichiers source sur le Stockage Blob Azure" border="false":::
 
 Les avertissements sont normaux compte tenu de la large gamme de types de contenu. Certains types de contenu ne sont pas valides pour certaines compétences et, à des niveaux inférieurs, il est courant de rencontrer des [limites d’indexeur](search-limits-quotas-capacity.md#indexer-limits). Par exemple, les notifications de troncation de 32 000 caractères sont une limite d’indexeur au niveau Gratuit. Si vous exécutiez cette démonstration à un niveau supérieur, de nombreux avertissements de troncation disparaîtraient.
 
@@ -125,11 +134,11 @@ Pour vérifier les avertissements ou les erreurs, cliquez sur l’état Avertiss
 
 Dans cette page, recliquez sur l’état Avertissement pour afficher la liste des avertissements similaires à celui illustré ci-dessous. 
 
-  ![Liste d’avertissements de l’indexeur](./media/cognitive-search-quickstart-blob/indexer-warnings.png)
+  :::image type="content" source="media/cognitive-search-quickstart-blob/indexer-warnings.png" alt-text="Fichiers source sur le Stockage Blob Azure" border="false":::
 
 Les détails s’affichent quand vous cliquez sur une ligne d’état spécifique. Cet avertissement indique que la fusion s’est arrêtée après avoir atteint un seuil maximal (le fichier PDF en question est volumineux).
 
-  ![Détails de l’avertissement](./media/cognitive-search-quickstart-blob/warning-detail.png)
+  :::image type="content" source="media/cognitive-search-quickstart-blob/warning-detail.png" alt-text="Fichiers source sur le Stockage Blob Azure" border="false":::
 
 ## <a name="query-in-search-explorer"></a>Requête dans l’Explorateur de recherche
 
@@ -148,7 +157,7 @@ Les résultats sont retournés au format JSON, qui peut être long et difficile 
 
 Les chaînes de requête respectent la casse. Ainsi, si vous recevez un message « champ inconnu », consultez l’onglet **Champs** ou **Définition d’index (JSON)** pour vérifier le nom et la casse. 
 
-  ![Exemple de l’explorateur de recherche](./media/cognitive-search-quickstart-blob/search-explorer.png)
+  :::image type="content" source="media/cognitive-search-quickstart-blob/search-explorer.png" alt-text="Fichiers source sur le Stockage Blob Azure" border="false":::
 
 ## <a name="takeaways"></a>Éléments importants à retenir
 
@@ -160,7 +169,7 @@ Un autre concept important est que les compétences fonctionnent sur les types d
 
 La sortie est dirigée vers un index de recherche. Il existe un mappage entre les paires nom-valeur créées durant l’indexation et les champs individuels de votre index. En interne, le portail configure les [annotations](cognitive-search-concept-annotations-syntax.md) et définit un [ensemble de compétences](cognitive-search-defining-skillset.md), en établissant l’ordre des opérations et le flux général. Ces étapes sont masquées dans le portail, mais lorsque vous démarrez l’écriture de code, ces concepts deviennent importants.
 
-Enfin, vous avez appris que vous pouvez vérifier le contenu en interrogeant l’index. Pour finir, la Recherche cognitive Azure fournit un index offrant des possibilités de recherche, que vous pouvez interroger à l’aide de la [syntaxe de requête simple](https://docs.microsoft.com/rest/api/searchservice/simple-query-syntax-in-azure-search) ou de la [syntaxe de recherche entièrement étendue](https://docs.microsoft.com/rest/api/searchservice/lucene-query-syntax-in-azure-search). Un index contenant des champs enrichis ressemble à n’importe quel autre index. Si vous souhaitez intégrer des analyseurs standard ou [personnalisés](search-analyzers.md), des [profils de scoring](https://docs.microsoft.com/rest/api/searchservice/add-scoring-profiles-to-a-search-index), des [synonymes](search-synonyms.md), des [filtres à facettes](search-filters-facets.md), une recherche géographique ou toute autre fonctionnalité liée à la Recherche cognitive Azure, vous pouvez le faire sans problème.
+Enfin, vous avez appris que vous pouvez vérifier le contenu en interrogeant l’index. Pour finir, la Recherche cognitive Azure fournit un index offrant des possibilités de recherche, que vous pouvez interroger à l’aide de la [syntaxe de requête simple](/rest/api/searchservice/simple-query-syntax-in-azure-search) ou de la [syntaxe de recherche entièrement étendue](/rest/api/searchservice/lucene-query-syntax-in-azure-search). Un index contenant des champs enrichis ressemble à n’importe quel autre index. Si vous souhaitez intégrer des analyseurs standard ou [personnalisés](search-analyzers.md), des [profils de scoring](/rest/api/searchservice/add-scoring-profiles-to-a-search-index), des [synonymes](search-synonyms.md), des [filtres à facettes](search-filters-facets.md), une recherche géographique ou toute autre fonctionnalité liée à la Recherche cognitive Azure, vous pouvez le faire sans problème.
 
 ## <a name="clean-up-resources"></a>Nettoyer les ressources
 

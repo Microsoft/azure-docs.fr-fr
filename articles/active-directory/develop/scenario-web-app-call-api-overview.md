@@ -8,15 +8,15 @@ ms.service: active-directory
 ms.subservice: develop
 ms.topic: conceptual
 ms.workload: identity
-ms.date: 05/07/2019
+ms.date: 07/14/2020
 ms.author: jmprieur
 ms.custom: aaddev
-ms.openlocfilehash: 5af9e34baf6115e801fbfe35e6e3895e48b360e7
-ms.sourcegitcommit: d187fe0143d7dbaf8d775150453bd3c188087411
+ms.openlocfilehash: b4123b0424e52c6a2919de4b60bcc6158062b0f1
+ms.sourcegitcommit: 6109f1d9f0acd8e5d1c1775bc9aa7c61ca076c45
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/08/2020
-ms.locfileid: "80881721"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94442631"
 ---
 # <a name="scenario-a-web-app-that-calls-web-apis"></a>Scénario : Application web qui appelle des API web
 
@@ -24,12 +24,7 @@ Découvrez comment générer une application web qui connecte des utilisateurs �
 
 ## <a name="prerequisites"></a>Prérequis
 
-[!INCLUDE [Prerequisites](../../../includes/active-directory-develop-scenarios-prerequisites.md)]
-
-Ce scénario suppose que vous avez déjà parcouru le scénario suivant :
-
-> [!div class="nextstepaction"]
-> [Application web qui connecte les utilisateurs](scenario-web-app-sign-user-overview.md)
+Ce scénario suppose que vous avez déjà suivi le [scénario : application web qui connecte les utilisateurs](scenario-web-app-sign-user-overview.md).
 
 ## <a name="overview"></a>Vue d’ensemble
 
@@ -49,10 +44,13 @@ C’est pourquoi elles inscrivent un secret (un mot de passe ou un certificat d�
 
 Le développement de ce scénario implique ces tâches spécifiques :
 
-- Pendant l’[inscription de l’application](scenario-web-app-call-api-app-registration.md), vous devez fournir un URI de réponse, un secret ou un certificat à partager avec Azure AD. Si vous déployez votre application dans plusieurs emplacements, vous devrez fournir ces informations pour chaque emplacement.
+- Pendant l’[inscription de l’application](scenario-web-app-call-api-app-registration.md), vous devez fournir un URI de réponse, un secret ou un certificat à partager avec Azure AD. Si vous déployez votre application dans plusieurs emplacements, vous devrez fournir un URI de réponse pour chaque emplacement.
 - La [configuration de l’application](scenario-web-app-call-api-app-configuration.md) doit fournir les informations d’identification du client qui ont été partagées avec Azure AD lors de l’inscription de l’application.
+
+## <a name="recommended-reading"></a>Lectures recommandées
+
+[!INCLUDE [recommended-topics](../../../includes/active-directory-develop-scenarios-prerequisites.md)]
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-> [!div class="nextstepaction"]
-> [Application web qui appelle des API web : inscription d’application](scenario-web-app-call-api-app-registration.md)
+Passez à l’article suivant de ce scénario, [Inscription d’application](scenario-web-app-call-api-app-registration.md).

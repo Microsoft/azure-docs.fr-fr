@@ -1,6 +1,6 @@
 ---
 title: Tutoriel - Commander Azure Data Box Heavy | Microsoft Docs
-description: Découvrir les prérequis du déploiement et la façon de commander un Azure Data Box Heavy
+description: Dans ce tutoriel, découvrez Azure Data Box Heavy, une solution hybride qui vous permet d’importer des données locales dans Azure, et comment commander Data Box Heavy.
 services: databox
 author: alkohli
 ms.service: databox
@@ -9,12 +9,12 @@ ms.topic: tutorial
 ms.date: 07/03/2019
 ms.author: alkohli
 ms.localizationpriority: high
-ms.openlocfilehash: 4e9077d06341ce5ecf6b2238374ce1ac8e13dca3
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: 9b2b97f11c1493deca9b79907e894efbb7b9c456
+ms.sourcegitcommit: 4f1c7df04a03856a756856a75e033d90757bb635
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81415158"
+ms.lasthandoff: 08/07/2020
+ms.locfileid: "87920991"
 ---
 # <a name="tutorial-order-azure-data-box-heavy"></a>Tutoriel : Commander Azure Data Box Heavy
 
@@ -75,7 +75,7 @@ Procédez comme suit dans le portail Azure pour commander un appareil.
     |---------|---------|
     |Abonnement     | Sélectionnez un abonnement EA, CSP ou Azure pour le service Data Box. <br> L’abonnement est lié à votre compte de facturation.       |
     |Type de transfert     | Sélectionnez **Importer vers Azure**.        |
-    |Pays source     | Sélectionnez le pays ou la région où vos données se trouvent actuellement.         |
+    |Pays/région source     | Sélectionnez le pays ou la région où vos données se trouvent actuellement.         |
     |Région Azure de destination     | Sélectionnez la région Azure où vous souhaitez transférer des données.        |
 
     [![Sélectionner la disponibilité de la famille d’appareils Data Box](media/data-box-deploy-ordered/select-data-box-option1.png)](media/data-box-deploy-ordered/select-data-box-option1.png#lightbox)
@@ -91,7 +91,7 @@ Procédez comme suit dans le portail Azure pour commander un appareil.
     |Nom     | Indiquez un nom convivial pour suivre la commande. <br> Le nom peut comporter entre 3 et 24 caractères qui peuvent être des lettres, des chiffres et des traits d’union. <br> Il doit commencer et se terminer par une lettre ou un chiffre.      |
     |Resource group     | Créez-en un nouveau ou utilisez un groupe existant. <br> Un groupe de ressources est un conteneur logique pour les ressources qui peuvent être gérées ou déployées ensemble.         |
     |Région Azure de destination     | Sélectionnez une région pour votre compte de stockage. <br> Pour plus d’informations, consultez la [disponibilité des régions](https://azure.microsoft.com/global-infrastructure/services/?products=databox).        |
-    |Destination de stockage     | Choisissez un compte de stockage, des disques managés ou les deux. <br> Selon la région Azure spécifiée, sélectionnez un ou plusieurs comptes de stockage dans la liste filtrée d’un compte de stockage existant. <br>Le Data Box Heavy peut être liée à 10 comptes de stockage maximum. <br> Vous pouvez également créer un **compte de stockage blob**, **Usage général v1** ou **Usage général v2**. <br> Les comptes Azure Data Lake Storage Gen 2 ne sont pas pris en charge. Consultez les [comptes de stockage pris en charge avec votre appareil](data-box-heavy-system-requirements.md#supported-storage-accounts). <br>Les comptes de stockage avec des réseaux virtuels sont pris en charge. Pour autoriser le service Data Box à travailler avec des comptes de stockage sécurisés, activez les services approuvés dans les paramètres de pare-feu réseau du compte de stockage. Pour plus d’informations, consultez le guide pratique pour [Ajouter le service Azure Data Box en tant que service approuvé](../storage/common/storage-network-security.md#exceptions).|
+    |Destination de stockage     | Choisissez un compte de stockage, des disques managés ou les deux. <br> Selon la région Azure spécifiée, sélectionnez un ou plusieurs comptes de stockage dans la liste filtrée d’un compte de stockage existant. <br>Le Data Box Heavy peut être liée à 10 comptes de stockage maximum. <br> Vous pouvez également créer un **compte de stockage blob**, **Usage général v1** ou **Usage général v2**. <br>Consultez les [comptes de stockage pris en charge avec votre appareil](data-box-heavy-system-requirements.md#supported-storage-accounts). <br>Les comptes de stockage avec des réseaux virtuels sont pris en charge. Pour autoriser le service Data Box à travailler avec des comptes de stockage sécurisés, activez les services approuvés dans les paramètres de pare-feu réseau du compte de stockage. Pour plus d’informations, consultez le guide pratique pour [Ajouter le service Azure Data Box en tant que service approuvé](../storage/common/storage-network-security.md#exceptions).|
 
     Si vous utilisez le compte de stockage comme destination de stockage, vous voyez s’afficher l’écran suivant :
 

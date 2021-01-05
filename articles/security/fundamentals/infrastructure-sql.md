@@ -15,12 +15,12 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 03/09/2020
 ms.author: terrylan
-ms.openlocfilehash: ad6d3992f03802174eb03aa30b57b8d3dac1d6c4
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: e0e7089e7c674f324c2c3d293661c518b41731b9
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78942956"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "84021855"
 ---
 # <a name="azure-sql-database-security-features"></a>Fonctionnalités de sécurité Azure SQL Database    
 Azure SQL Database fournit un service de base de données relationnelle dans Azure. Pour protéger les données des clients et fournir des fonctionnalités de sécurité renforcée que les clients attendent d’un service de base de données relationnelle, SQL Database a ses propres jeux de fonctionnalités de sécurité. Ces fonctionnalités reposent sur les contrôles hérités d’Azure.
@@ -31,13 +31,13 @@ Azure SQL Database fournit un service de base de données relationnelle dans Azu
 Azure SQL Database prend uniquement en charge le protocole TDS (tabular data stream), qui exige que la base de données soit accessible uniquement sur le port par défaut TCP/1433.
 
 ### <a name="azure-sql-database-firewall"></a>Pare-feu Azure SQL Database
-Pour protéger les données des clients, Azure SQL Database comprend une fonctionnalité de pare-feu qui, par défaut, empêche tout accès au serveur SQL Database, comme indiqué ci-dessous.
+Pour protéger les données des clients, Azure SQL Database comprend une fonctionnalité de pare-feu qui, par défaut, empêche tout accès à SQL Database, comme indiqué ci-dessous.
 
 ![Pare-feu Azure SQL Database](./media/infrastructure-sql/sql-database-firewall.png)
 
 Le pare-feu de la passerelle permet de limiter les adresses, les clients peuvent ainsi bénéficier d’un contrôle précis en spécifiant des plages d’adresses IP acceptables. Le pare-feu accorde l’accès en fonction de l’adresse IP d’origine de chaque demande.
 
-Vous pouvez procéder à la configuration du pare-feu à l’aide d’un portail de gestion ou par programmation avec l’API REST Azure SQL Database Management. Par défaut, le pare-feu de la passerelle Azure SQL Database empêche tout accès TDS client aux instances de bases de données Azure SQL. L’accès doit être configuré à l’aide de listes de contrôle d’accès ACL pour autoriser les connexions à Azure SQL Database en fonction des adresses Internet sources et cibles, des protocoles et des numéros de port.
+Vous pouvez procéder à la configuration du pare-feu à l’aide d’un portail de gestion ou par programmation avec l’API REST Azure SQL Database Management. Par défaut, le pare-feu de la passerelle Azure SQL Database empêche tout accès TDS client à Azure SQL Database. L’accès doit être configuré à l’aide de listes de contrôle d’accès ACL pour autoriser les connexions à Azure SQL Database en fonction des adresses Internet sources et cibles, des protocoles et des numéros de port.
 
 ### <a name="dosguard"></a>DoSGuard
 Les attaques par déni de service (DoS) sont réduites par un service de passerelle SQL Database appelé DoSGuard. DoSGuard suit activement les échecs de connexion des adresses IP. Si une adresse IP spécifique présente plusieurs échecs de connexion dans une période donnée, elle est bloquée et ne peut plus accéder aux ressources du service pour une durée prédéfinie.
@@ -62,9 +62,9 @@ Toutes les informations accessibles au public sont gérées au sein du réseau d
 ### <a name="vlan-isolation"></a>Isolation du VLAN
 Le réseau de production Azure est logiquement séparé en trois grands réseaux VLAN :
 
-- Le VLAN principal : interconnecte les nœuds des clients non approuvés.
-- Le VLAN du contrôleur de structure : contient les systèmes de support et les contrôleurs de structure approuvés.
-- Le VLAN de l’appareil : contient les réseaux approuvés et les autres infrastructures d’appareil.
+- Le VLAN principal : Interconnecte les nœuds des clients non approuvés.
+- Le VLAN du contrôleur de structure : Contient les systèmes de support et les contrôleurs de structure approuvés.
+- Le VLAN de l’appareil : Contient les réseaux approuvés et les autres infrastructures d’appareil.
 
 ### <a name="packet-filtering"></a>Filtrage des paquets
 Les pare-feux IPFilter et logiciels implémentés sur le système d’exploitation racine et le système d’exploitation invité des nœuds appliquent des restrictions de connectivité et empêchent le trafic non autorisé entre les machines virtuelles.

@@ -1,30 +1,20 @@
 ---
 title: Vue d’ensemble des fonctionnalités d’Azure Event Hubs | Microsoft Docs
 description: Cet article décrit en détails les fonctionnalités et la terminologie d’Azure Event Hubs.
-services: event-hubs
-documentationcenter: .net
-author: ShubhaVijayasarathy
-manager: timlt
-ms.service: event-hubs
-ms.devlang: na
 ms.topic: article
-ms.custom: seodec18
-ms.tgt_pltfrm: na
-ms.workload: na
-ms.date: 12/06/2018
-ms.author: shvija
-ms.openlocfilehash: c16dd4345e62fa9e826e657cce9a752186ec1b82
-ms.sourcegitcommit: 1895459d1c8a592f03326fcb037007b86e2fd22f
+ms.date: 06/23/2020
+ms.openlocfilehash: a38cf4ba6a06dc6e977f9ea168fcf67ce83ff5de
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82628655"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96339980"
 ---
 # <a name="features-and-terminology-in-azure-event-hubs"></a>Fonctionnalités et terminologie dans Azure Event Hubs
 
-Azure Event Hubs est un service évolutif de traitement d’événements qui ingère et traite de gros volumes de données et d’événements avec une faible latence et une haute fiabilité. Consultez la page [Qu’est-ce qu’Event Hubs ?](event-hubs-what-is-event-hubs.md) pour une vue d’ensemble de haut niveau.
+Azure Event Hubs est un service évolutif de traitement d’événements qui ingère et traite de gros volumes de données et d’événements avec une faible latence et une haute fiabilité. Consultez la page [Qu’est-ce qu’Event Hubs ?](./event-hubs-about.md) pour une vue d’ensemble de haut niveau.
 
-Cet article s’appuie sur les informations de l’[article de présentation](event-hubs-what-is-event-hubs.md) et fournit des détails techniques et de mise en œuvre sur les fonctionnalités et composants d’Event Hubs.
+Cet article s’appuie sur les informations de l’[article de présentation](./event-hubs-about.md) et fournit des détails techniques et de mise en œuvre sur les fonctionnalités et composants d’Event Hubs.
 
 ## <a name="namespace"></a>Espace de noms
 Un espace de noms Event Hubs fournit un conteneur d’étendue unique, référencé par son [nom de domaine complet](https://en.wikipedia.org/wiki/Fully_qualified_domain_name), dans lequel vous créez un ou plusieurs Event Hubs ou rubriques Kafka. 
@@ -43,11 +33,13 @@ Toute entité qui envoie des données à un concentrateur d’événements est u
 
 ### <a name="publishing-an-event"></a>Publication d'un événement
 
-Vous pouvez publier un événement avec AMQP 1.0, Kafka 1.0 (ou version ultérieure) ou HTTPS. Event Hubs fournit des [bibliothèques et des classes client](event-hubs-dotnet-framework-api-overview.md) pour la publication d’événements sur un concentrateur d’événements à partir de clients .NET. Pour les autres runtimes et plateformes, vous pouvez utiliser n'importe quel client AMQP 1.0, comme [Apache Qpid](https://qpid.apache.org/). Vous pouvez publier les événements individuellement ou par lots. Une publication unique (instance de données d’événement) est limitée à 1 Mo, qu’il s’agisse d’un événement unique ou d’un lot. La publication d'événements plus volumineux que ce seuil entraîne une erreur. Il est préférable pour les éditeurs de ne pas être au courant des partitions dans le concentrateur d’événements et de spécifier uniquement une *clé de partition* (présentée dans la section suivante) ou leur identité par le biais de leur jeton SAS.
+Vous pouvez publier un événement avec AMQP 1.0, Kafka 1.0 (ou version ultérieure) ou HTTPS. Le service Event Hubs fournit l'[API REST](/rest/api/eventhub/) ainsi que les bibliothèques de clients [.NET](event-hubs-dotnet-standard-getstarted-send.md), [Java](event-hubs-java-get-started-send.md), [Python](event-hubs-python-get-started-send.md), [JavaScript](event-hubs-node-get-started-send.md) et [Go](event-hubs-go-get-started-send.md) pour la publication d'événements dans un Event Hub. Pour les autres runtimes et plateformes, vous pouvez utiliser n'importe quel client AMQP 1.0, comme [Apache Qpid](https://qpid.apache.org/). 
+
+Vous pouvez publier les événements individuellement ou par lots. Une publication unique (instance de données d’événement) est limitée à 1 Mo, qu’il s’agisse d’un événement unique ou d’un lot. La publication d'événements plus volumineux que ce seuil entraîne une erreur. Il est préférable pour les éditeurs de ne pas être au courant des partitions dans le concentrateur d’événements et de spécifier uniquement une *clé de partition* (présentée dans la section suivante) ou leur identité par le biais de leur jeton SAS.
 
 Le choix d'utiliser AMQP ou HTTPS est spécifique au scénario d'utilisation. AMQP requiert l'établissement d'un socket bidirectionnel persistant en plus de la sécurité au niveau du transport (TLS) ou SSL/TLS. Le protocole AMQP présente des coûts de gestion réseau plus élevés lors de l’initialisation de la session, mais le protocole HTTPS nécessite un temps de traitement TLS supplémentaire pour chaque requête. Par ailleurs, AMQP propose des performances plus élevées pour les éditeurs courants.
 
-![Event Hubs](./media/event-hubs-features/partition_keys.png)
+![Clés de partition](./media/event-hubs-features/partition_keys.png)
 
 Azure Event Hubs garantit que tous les événements qui partagent une clé de partition sont fournis dans l’ordre, et à la même partition. Si des clés de partition sont utilisées avec des stratégies d’éditeur, l’identité de l’éditeur et la valeur de la clé de partition doivent correspondre. Sinon, une erreur se produit.
 
@@ -56,7 +48,7 @@ Azure Event Hubs garantit que tous les événements qui partagent une clé de pa
 Event Hubs permet un contrôle granulaire sur les éditeurs d'événements par le biais des *stratégies d'éditeur*. Les stratégies d’éditeur regroupent des fonctionnalités runtime conçues pour fournir un grand nombre d’éditeurs d’événements indépendants. Avec les stratégies d’éditeur, chaque éditeur utilise son propre identificateur unique lors de la publication d’événements sur un concentrateur d’événements, à l’aide du mécanisme suivant :
 
 ```http
-//[my namespace].servicebus.windows.net/[event hub name]/publishers/[my publisher name]
+//<my namespace>.servicebus.windows.net/<event hub name>/publishers/<my publisher name>
 ```
 
 Vous n'êtes pas obligé de créer des noms d'éditeurs à l'avance, mais ils doivent correspondre au jeton SAS utilisé lors de la publication d'un événement, afin de garantir les identités de l'éditeur indépendant. Lors de l'utilisation de stratégies d'éditeur, la valeur **PartitionKey** est définie sur le nom de l'éditeur. Pour fonctionner correctement, ces valeurs doivent correspondre.
@@ -85,23 +77,24 @@ Dans une architecture de traitement de flux, chaque application en aval équivau
 
 Il peut y avoir au maximum 5 lecteurs simultanés sur une partition par groupe de consommateurs. Toutefois **il est recommandé de n’avoir qu’un seul récepteur actif sur une partition par groupe de consommateurs**. Dans une partition unique, chaque lecteur reçoit tous les messages. Si vous avez plusieurs lecteurs sur la même partition, vous traitez des messages en double. Vous devez gérer cela dans votre code, ce qui peut poser problème. Toutefois, il s’agit une approche valide dans certains scénarios.
 
+Certains clients proposés par les kits de développement logiciel (SDK) Azure sont des agents de consommateurs intelligents qui gèrent automatiquement les détails pour garantir que chaque partition possède un lecteur unique à partir duquel toutes les partitions d’un Event Hub sont lues. Cela permet à votre code de se concentrer sur le traitement des événements lus à partir d’Event Hub afin qu’il puisse ignorer la plupart des détails des partitions. Pour plus d’informations, consultez [Connexion à une partition](#connect-to-a-partition).
 
-Voici quelques exemples de la convention URI de groupe consommateurs :
+Les exemples suivants montrent la convention URI de groupe consommateurs :
 
 ```http
-//[my namespace].servicebus.windows.net/[event hub name]/[Consumer Group #1]
-//[my namespace].servicebus.windows.net/[event hub name]/[Consumer Group #2]
+//<my namespace>.servicebus.windows.net/<event hub name>/<Consumer Group #1>
+//<my namespace>.servicebus.windows.net/<event hub name>/<Consumer Group #2>
 ```
 
 La figure suivante montre l’architecture de traitement de flux Event Hubs :
 
-![Event Hubs](./media/event-hubs-features/event_hubs_architecture.png)
+![Architecture Event Hubs](./media/event-hubs-features/event_hubs_architecture.png)
 
 ### <a name="stream-offsets"></a>Décalages du flux
 
 Un *décalage* correspond à la position d’un événement dans une partition. Vous pouvez considérer un décalage comme un curseur côté client. Le décalage est une numérotation en octets de l'événement. Ce décalage permet à un consommateur d’événements (lecteur) de spécifier un point dans le flux d’événements à partir duquel il veut commencer la lecture des événements. Vous pouvez spécifier le décalage comme un horodatage ou une valeur de décalage. Les consommateurs ont la responsabilité de stocker leurs propres valeurs de décalage en dehors du service des hubs d'événements. Dans une partition, chaque événement inclut un décalage.
 
-![Event Hubs](./media/event-hubs-features/partition_offset.png)
+![Décalage de la partition](./media/event-hubs-features/partition_offset.png)
 
 ### <a name="checkpointing"></a>Points de contrôle
 
@@ -110,8 +103,8 @@ Les *points de contrôle* constituent un processus par lequel les lecteurs marqu
 Si un lecteur se déconnecte d'une partition, lorsqu'il se reconnecte il commence la lecture au point de contrôle qui a été précédemment soumis par le dernier lecteur de cette partition dans ce groupe de consommateurs. Lorsque le lecteur se connecte, il transmet le décalage à l’Event Hub pour spécifier l’emplacement où commencer la lecture. De cette façon, vous pouvez utiliser les points de contrôle pour marquer les événements comme « terminés » par les applications en aval et pour assurer la résilience si un basculement se produit entre des lecteurs en cours d’exécution sur des ordinateurs différents. Il est possible de revenir à des données plus anciennes en spécifiant un décalage inférieur à partir de ce processus de vérification. Grâce à ce mécanisme, les points de contrôle permettent une résilience au basculement renforcée, mais également la relecture du flux d’événements.
 
 > [!NOTE]
-> Si vous utilisez Stockage Blob Azure comme magasin de points de contrôle dans un environnement qui prend en charge une autre version du SDK de stockage Blob que celle généralement disponible sur Azure, vous devez utiliser le code pour remplacer la version de l’API de service de stockage par la version prise en charge par cet environnement. Par exemple, si vous exécutez [Event Hubs sur Azure Stack Hub version 2002](https://docs.microsoft.com/azure-stack/user/event-hubs-overview), la version la plus élevée disponible pour le service Stockage est la version 2017-11-09. Dans ce cas, vous devez utiliser le code pour cibler la version de l’API de service de stockage 2017-11-09. Pour obtenir un exemple sur la façon de cibler une version spécifique de l’API de stockage, consultez les exemples suivants sur GitHub : 
-> - [.NET](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/eventhub/Azure.Messaging.EventHubs.Processor/samples/Sample10_RunningWithDifferentStorageVersion.cs). 
+> Si vous utilisez Stockage Blob Azure comme magasin de points de contrôle dans un environnement qui prend en charge une autre version du SDK de stockage Blob que celle généralement disponible sur Azure, vous devez utiliser le code pour remplacer la version de l’API de service de stockage par la version prise en charge par cet environnement. Par exemple, si vous exécutez [Event Hubs sur Azure Stack Hub version 2002](/azure-stack/user/event-hubs-overview), la version la plus élevée disponible pour le service Stockage est la version 2017-11-09. Dans ce cas, vous devez utiliser le code pour cibler la version de l’API de service de stockage 2017-11-09. Pour obtenir un exemple sur la façon de cibler une version spécifique de l’API de stockage, consultez les exemples suivants sur GitHub : 
+> - [.NET](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/eventhub/Azure.Messaging.EventHubs.Processor/samples/). 
 > - [Java](https://github.com/Azure/azure-sdk-for-java/blob/master/sdk/eventhubs/azure-messaging-eventhubs-checkpointstore-blob/src/samples/java/com/azure/messaging/eventhubs/checkpointstore/blob/)
 > - [JavaScript](https://github.com/Azure/azure-sdk-for-js/blob/master/sdk/eventhub/eventhubs-checkpointstore-blob/samples/javascript) ou [TypeScript](https://github.com/Azure/azure-sdk-for-js/blob/master/sdk/eventhub/eventhubs-checkpointstore-blob/samples/typescript)
 > - [Python](https://github.com/Azure/azure-sdk-for-python/blob/master/sdk/eventhub/azure-eventhub-checkpointstoreblob-aio/samples/)
@@ -122,7 +115,12 @@ Tous les consommateurs Azure Event Hubs se connectent via une session AMQP 1.0,
 
 #### <a name="connect-to-a-partition"></a>Se connecter à une partition
 
-Lors de la connexion aux partitions, il est courant d’utiliser un mécanisme de bail pour coordonner les connexions du lecteur à des partitions spécifiques. De cette façon, chaque partition dans un groupe de consommateurs peut n'avoir qu'un seul lecteur actif. Le contrôle, la location et la gestion des lecteurs ont été simplifiés grâce à l’utilisation de la classe [EventProcessorHost](/dotnet/api/microsoft.azure.eventhubs.processor.eventprocessorhost) pour les clients .NET. L’hôte du processeur d’événements est un agent consommateur intelligent.
+Lors de la connexion aux partitions, il est courant d’utiliser un mécanisme de bail pour coordonner les connexions du lecteur à des partitions spécifiques. De cette façon, chaque partition dans un groupe de consommateurs peut n'avoir qu'un seul lecteur actif. Les points de contrôle, la location et la gestion des lecteurs sont simplifiés à l’aide des clients dans les kits de développement logiciel (SDK) Event Hubs, qui jouent le rôle d’agents de consommateurs intelligents. Ces règles sont les suivantes :
+
+- [EventProcessorClient](/dotnet/api/azure.messaging.eventhubs.eventprocessorclient) for .NET
+- [EventProcessorClient](/java/api/com.azure.messaging.eventhubs.eventprocessorclient) for Java
+- [EventHubConsumerClient](/python/api/azure-eventhub/azure.eventhub.aio.eventhubconsumerclient) for Python
+- [EventHubConsumerClient](/javascript/api/@azure/event-hubs/eventhubconsumerclient) for JavaScript/TypeScript
 
 #### <a name="read-events"></a>Lire les événements
 
@@ -142,13 +140,11 @@ Il vous incombe de gérer le décalage.
 Pour plus d’informations sur les concentrateurs d’événements, accédez aux liens suivants :
 
 - Prise en main des hubs d’événements
-    - [.NET Core](get-started-dotnet-standard-send-v2.md)
-    - [Java](get-started-java-send-v2.md)
-    - [Python](get-started-python-send-v2.md)
-    - [JavaScript](get-started-java-send-v2.md)
+    - [.NET](event-hubs-dotnet-standard-getstarted-send.md)
+    - [Java](event-hubs-java-get-started-send.md)
+    - [Python](event-hubs-python-get-started-send.md)
+    - [JavaScript](event-hubs-java-get-started-send.md)
 * [Guide de programmation Event Hubs](event-hubs-programming-guide.md)
 * [Disponibilité et cohérence dans Event Hubs](event-hubs-availability-and-consistency.md)
 * [FAQ sur les hubs d’événements](event-hubs-faq.md)
-* [Exemples de hubs d’événements][]
-
-[Exemples de hubs d’événements]: https://github.com/Azure/azure-event-hubs/tree/master/samples
+* [Exemples de hubs d’événements](event-hubs-samples.md)

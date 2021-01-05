@@ -5,15 +5,15 @@ services: firewall
 author: vhorne
 ms.service: firewall
 ms.topic: tutorial
-ms.date: 03/24/2020
+ms.date: 11/17/2020
 ms.author: victorh
 customer intent: As an administrator, I want to control network access from an on-premises network to an Azure virtual network.
-ms.openlocfilehash: 208a7a677bdf0b76ffed83e679c6f1ff3041d50d
-ms.sourcegitcommit: 253d4c7ab41e4eb11cd9995190cd5536fcec5a3c
+ms.openlocfilehash: 78e934a90b8d4e8feccf18a5cada3ec4920e1642
+ms.sourcegitcommit: c2dd51aeaec24cd18f2e4e77d268de5bcc89e4a7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/25/2020
-ms.locfileid: "80239682"
+ms.lasthandoff: 11/18/2020
+ms.locfileid: "94734449"
 ---
 # <a name="tutorial-deploy-and-configure-azure-firewall-in-a-hybrid-network-using-the-azure-portal"></a>Tutoriel : Déployer et configurer un Pare-feu Azure dans un réseau hybride à l’aide du portail Azure
 
@@ -54,7 +54,7 @@ Un réseau hybride utilise le modèle d’architecture Hub and Spoke pour router
    De plus, les routes vers les réseaux locaux ou les réseaux virtuels connectés à la passerelle sont propagés automatiquement aux tables de routage pour les réseaux virtuels homologués à l’aide du transit par passerelle. Pour plus d’informations, consultez [Configurer le transit par passerelle VPN pour le peering de réseaux virtuels](../vpn-gateway/vpn-gateway-peering-gateway-transit.md).
 
 - Vous devez définir **UseRemoteGateways** lors du Peering de VNet-Spoke à VNet-Hub. Si **UseRemoteGateways avec** est défini et que **AllowGatewayTransit** sur le Peering distant est également défini, le réseau virtuel spoke utilise les passerelles du réseau virtuel distant pour le transit.
-- Pour router le trafic de sous-réseau spoke par le biais du pare-feu de hub, vous avez besoin d’une route définie par l’utilisateur (UDR, User-Defined Route) qui pointe vers le pare-feu avec l’option **Propagation de la route de la passerelle de réseau virtuel** désactivée. L’option désactivée **Propagation de la route de la passerelle de réseau virtuel** empêche la distribution des routes vers les sous-réseaux spoke. Cela empêche que les routes apprises entrent en conflit avec votre UDR.
+- Pour router le trafic de sous-réseau spoke par le biais du pare-feu de hub, vous pouvez utiliser une route définie par l’utilisateur (UDR, User-Defined Route) qui pointe vers le pare-feu avec l’option **Propagation de la route de la passerelle de réseau virtuel** désactivée. L’option désactivée **Propagation de la route de la passerelle de réseau virtuel** empêche la distribution des routes vers les sous-réseaux spoke. Cela empêche que les routes apprises entrent en conflit avec votre UDR. Si vous souhaitez conserver la **Propagation de la route de la passerelle de réseau virtuel** activée, veillez à définir des routes spécifiques vers le pare-feu pour remplacer celles qui sont publiées à partir du site local sur le protocole BGP.
 - Vous devez configurer une UDR sur le sous-réseau de passerelle hub qui pointe vers l’adresse IP du pare-feu comme prochain tronçon vers les réseaux spoke. Aucun UDR n’est requis sur le sous-réseau du Pare-feu Azure, puisqu’il apprend les itinéraires à partir de BGP.
 
 Consultez la section [Créer des itinéraires](#create-the-routes) de ce didacticiel pour voir comment ces itinéraires sont créés.
@@ -75,11 +75,11 @@ Tout d’abord, créez le groupe de ressources qui doit contenir les ressources 
 
 1. Connectez-vous au portail Azure sur [https://portal.azure.com](https://portal.azure.com).
 2. Dans la page d’accueil du portail Azure, sélectionnez **Groupes de ressources** > **Ajouter**.
-3. Pour **Nom du groupe de ressources**, tapez **FW-Hybrid-Test**.
-4. Pour **Abonnement**, sélectionnez votre abonnement.
-5. Pour **Région**, sélectionnez **USA Est**. Toutes les ressources que vous créez par la suite doivent se trouver dans le même emplacement.
-6. Sélectionnez **Vérifier + créer**.
-7. Sélectionnez **Create** (Créer).
+3. Pour **Abonnement**, sélectionnez votre abonnement.
+1. Pour **Nom du groupe de ressources**, tapez **FW-Hybrid-Test**.
+2. Pour **Région**, sélectionnez **(États-Unis) USA Est**. Toutes les ressources que vous créez par la suite doivent se trouver dans le même emplacement.
+3. Sélectionnez **Vérifier + créer**.
+4. Sélectionnez **Create** (Créer).
 
 À présent, créez le réseau virtuel :
 
@@ -88,77 +88,74 @@ Tout d’abord, créez le groupe de ressources qui doit contenir les ressources 
 
 1. Dans la page d’accueil du portail Azure, sélectionnez **Créer une ressource**.
 2. Sous **Mise en réseau**, sélectionnez **Réseau virtuel**.
-4. Dans le champ **Nom**, tapez **VNet-hub**.
-5. Pour **Espace d’adressage**, tapez **10.5.0.0/16**.
-6. Pour **Abonnement**, sélectionnez votre abonnement.
-7. Pour **Groupe de ressources**, sélectionnez **FW-Hybrid-Test**.
-8. Pour **Emplacement**, sélectionnez **USA Est**.
-9. Sous **Sous-réseau**, pour **Nom**, entrez **AzureFirewallSubnet**. Le pare-feu se trouvera dans ce sous-réseau et le nom du sous-réseau **doit** être AzureFirewallSubnet.
-10. Pour **Plage d’adresses**, tapez **10.5.0.0/26**. 
-11. Acceptez les autres paramètres par défaut, puis sélectionnez **Créer**.
+1. Sélectionnez **Create** (Créer).
+1. Pour **Groupe de ressources**, sélectionnez **FW-Hybrid-Test**.
+1. Dans le champ **Nom**, tapez **VNet-hub**.
+1. Sélectionnez **Suivant : Adresses IP**.
+1. Pour **Espace d’adressage IPv4**, supprimez l’adresse et le type par défaut **10.5.0.0/16**.
+1. Sous **Nom du sous-réseau**, sélectionnez **Ajouter un sous-réseau**.
+1. Sous **Nom du sous-réseau**, entrez **AzureFirewallSubnet**. Le pare-feu se trouvera dans ce sous-réseau et le nom du sous-réseau **doit** être AzureFirewallSubnet.
+1. Pour **Plage d’adresses de sous-réseau**, tapez **10.5.0.0/26**. 
+1. Sélectionnez **Ajouter**.
+1. Sélectionnez **Vérifier + créer**.
+1. Sélectionnez **Create** (Créer).
 
 ## <a name="create-the-spoke-virtual-network"></a>Créer le réseau virtuel spoke
 
 1. Dans la page d’accueil du portail Azure, sélectionnez **Créer une ressource**.
-2. Sous **Mise en réseau**, sélectionnez **Réseau virtuel**.
-4. Pour **Nom**, tapez **VNet-Spoke**.
-5. Pour **Espace d’adressage**, tapez **10.6.0.0/16**.
-6. Pour **Abonnement**, sélectionnez votre abonnement.
+2. Dans **Mise en réseau**, sélectionnez **Réseau virtuel**.
 7. Pour **Groupe de ressources**, sélectionnez **FW-Hybrid-Test**.
-8. Pour **Emplacement**, sélectionnez le même emplacement que celui utilisé précédemment.
-9. Sous **Sous-réseau**, tapez **SN-Workload** pour **Nom**.
-10. Pour **Plage d’adresses**, tapez **10.6.0.0/24**.
-11. Acceptez les autres paramètres par défaut, puis sélectionnez **Créer**.
+1. Pour **Nom**, tapez **VNet-Spoke**.
+2. Pour **Région**, sélectionnez **(États-Unis) USA Est**.
+3. Sélectionnez **Suivant : Adresses IP**.
+4. Pour **Espace d’adressage IPv4**, supprimez l’adresse et le type par défaut **10.6.0.0/16**.
+6. Sous **Nom du sous-réseau**, sélectionnez **Ajouter un sous-réseau**.
+7. Pour **Nom du sous-réseau**, tapez **SN-Workload**.
+8. Pour **Plage d’adresses de sous-réseau**, tapez **10.6.0.0/24**. 
+9. Sélectionnez **Ajouter**.
+10. Sélectionnez **Vérifier + créer**.
+11. Sélectionnez **Create** (Créer).
 
 ## <a name="create-the-on-premises-virtual-network"></a>Créer le réseau virtuel local
 
 1. Dans la page d’accueil du portail Azure, sélectionnez **Créer une ressource**.
-2. Sous **Mise en réseau**, sélectionnez **Réseau virtuel**.
-4. Pour **Nom**, tapez **VNet-OnPrem**.
-5. Pour **Espace d’adressage**, entrez **192.168.0.0/16**.
-6. Pour **Abonnement**, sélectionnez votre abonnement.
+2. Dans **Mise en réseau**, sélectionnez **Réseau virtuel**.
 7. Pour **Groupe de ressources**, sélectionnez **FW-Hybrid-Test**.
-8. Pour **Emplacement**, sélectionnez le même emplacement que celui utilisé précédemment.
-9. Sous **Sous-réseau**, tapez **SN-Corp** pour **Nom**.
-10. Pour **Plage d’adresses**, entrez **192.168.1.0/24**.
-11. Acceptez les autres paramètres par défaut, puis sélectionnez **Créer**.
+1. Pour **Nom**, tapez **VNet-OnPrem**.
+2. Pour **Région**, sélectionnez **(États-Unis) USA Est**.
+3. Sélectionnez **Suivant : Adresses IP**
+4. Pour **Espace d’adressage IPv4**, supprimez l’adresse et le type par défaut **192.168.0.0/16**.
+5. Sous **Nom du sous-réseau**, sélectionnez **Ajouter un sous-réseau**.
+7. Pour **Nom du sous-réseau**, tapez **SN-Corp**.
+8. Pour **Plage d’adresses de sous-réseau**, tapez **192.168.1.0/24**. 
+9. Sélectionnez **Ajouter**.
+10. Sélectionnez **Vérifier + créer**.
+11. Sélectionnez **Create** (Créer).
 
 À présent, créez un second sous-réseau pour la passerelle.
 
 1. Sur la page **VNet-Onprem**, sélectionnez **Sous-réseaux**.
 2. Sélectionnez **+Sous-réseau**.
 3. Pour **Nom**, tapez **GatewaySubnet**.
-4. Pour **Plage d’adresses (bloc CIDR)** , tapez **192.168.2.0/24**.
+4. Pour **Plage d’adresses du sous-réseau**, entrez **192.168.2.0/24**.
 5. Sélectionnez **OK**.
-
-### <a name="create-a-public-ip-address"></a>Créer une adresse IP publique
-
-Il s’agit de l’adresse IP publique utilisée pour la passerelle locale.
-
-1. Dans la page d’accueil du portail Azure, sélectionnez **Créer une ressource**.
-2. Tapez **adresse IP publique** dans la zone de recherche, puis appuyez sur **Entrée**.
-3. Sélectionnez **Adresse IP publique**, puis **Créer**.
-4. Pour le nom, tapez **VNet-Onprem-GW-pip**.
-5. Pour le groupe de ressources, tapez **FW-Hybrid-Test**.
-6. Pour **Emplacement**, sélectionnez le même emplacement que celui utilisé précédemment.
-7. Acceptez les autres valeurs par défaut, puis sélectionnez **Créer**.
 
 ## <a name="configure-and-deploy-the-firewall"></a>Configurer et déployer le pare-feu
 
 À présent, déployez le pare-feu dans le réseau virtuel du hub de pare-feu.
 
 1. Dans la page d’accueil du portail Azure, sélectionnez **Créer une ressource**.
-2. Dans la colonne de gauche, sélectionnez **Réseaux**, puis sélectionnez **Pare-feu**.
+2. Dans la colonne de gauche, sélectionnez **Mise en réseau**, puis recherchez et sélectionnez **Pare-feu**.
 4. Sur la page **Créer un pare-feu**, utilisez le tableau suivant pour configurer le pare-feu :
 
    |Paramètre  |Valeur  |
    |---------|---------|
-   |Abonnement     |\<votre abonnement\>|
+   |Abonnement     |\<your subscription\>|
    |Resource group     |**FW-Hybrid-Test** |
    |Nom     |**AzFW01**|
-   |Emplacement     |Sélectionnez le même emplacement que celui utilisé précédemment|
+   |Région     |**USA Est**|
    |Choisir un réseau virtuel     |**Utiliser l’existant** :<br> **VNet-hub**|
-   |Adresse IP publique     |Créer nouveau : <br>**Nom** - **fw-pip**. |
+   |Adresse IP publique     |Ajouter nouveau : <br>**fw-pip**. |
 
 5. Sélectionnez **Revoir + créer**.
 6. Passez en revue le récapitulatif, puis sélectionnez **Créer** pour créer le pare-feu.
@@ -181,8 +178,9 @@ Tout d’abord, ajoutez une règle de réseau pour autoriser le trafic web.
 7. Pour **Protocole**, sélectionnez **TCP**.
 8. Pour **Type de source**, sélectionnez **Adresse IP**.
 9. Pour **Source**, tapez **192.168.1.0/24**.
-10. Pour **Adresse de destination**, tapez **10.6.0.0/16**.
-11. Pour **Ports de destination**, tapez **80**.
+10. Pour **Type de destination**, sélectionnez **Adresse IP**.
+11. Pour **Adresse de destination**, tapez **10.6.0.0/16**.
+12. Pour **Ports de destination**, tapez **80**.
 
 À présent, ajoutez une règle pour autoriser le trafic RDP.
 
@@ -192,9 +190,10 @@ Sur la deuxième ligne de la règle, tapez les informations suivantes :
 2. Pour **Protocole**, sélectionnez **TCP**.
 3. Pour **Type de source**, sélectionnez **Adresse IP**.
 4. Pour **Source**, tapez **192.168.1.0/24**.
-5. Pour **Adresse de destination**, tapez **10.6.0.0/16**.
-6. Pour **Ports de destination**, tapez **3389**.
-7. Sélectionnez **Ajouter**.
+5. Pour **Type de destination**, sélectionnez **Adresse IP**.
+6. Pour **Adresse de destination**, tapez **10.6.0.0/16**.
+7. Pour **Ports de destination**, tapez **3389**.
+8. Sélectionnez **Ajouter**.
 
 ## <a name="create-and-connect-the-vpn-gateways"></a>Créer et connecter les passerelles VPN
 
@@ -205,7 +204,7 @@ Les réseaux virtuels hub et local sont connectés via des passerelles VPN.
 Maintenant, créez la passerelle VPN pour le réseau virtuel hub. Les configurations de réseau virtuel à réseau virtuel nécessitent un VPN de type RouteBased. La création d’une passerelle VPN nécessite généralement au moins 45 minutes, selon la référence SKU de passerelle VPN sélectionnée.
 
 1. Dans la page d’accueil du portail Azure, sélectionnez **Créer une ressource**.
-2. Tapez **passerelle de réseau virtuel** dans la zone de recherche, puis appuyez sur **Entrée**.
+2. Dans la zone de recherche, tapez **passerelle de réseau virtuel**.
 3. Sélectionnez **Passerelle de réseau virtuel**, puis sélectionnez **Créer**.
 4. Dans le champ **Nom**, tapez **GW-hub**.
 5. Pour **Région**, sélectionnez la même région que celle utilisée précédemment.
@@ -274,21 +273,31 @@ Après environ cinq minutes, l’état des deux connexions doit être **Connect�
 1. Ouvrez le groupe de ressources **FW-Hybrid-Test** et sélectionnez le réseau virtuel **VNet-hub**.
 2. Dans la colonne de gauche, sélectionnez **Peerings**.
 3. Sélectionnez **Ajouter**.
-4. Pour **Nom**, tapez **HubtoSpoke**.
-5. Pour **Réseau virtuel**, sélectionnez **VNet-spoke**.
-6. Pour le nom du peering de VNetSpoke à VNet-hub, tapez **SpoketoHub**.
-7. Sélectionnez **Autoriser le transit par passerelle**.
-8. Sélectionnez **OK**.
+4. Sous **Ce réseau virtuel** :
+ 
+   
+   |Nom du paramètre  |Valeur  |
+   |---------|---------|
+   |Nom du lien de peering| HubtoSpoke|
+   |Trafic vers le réseau virtuel distant|   Autoriser (par défaut)      |
+   |Trafic transféré à partir du réseau virtuel distant    |   Autoriser (par défaut)      |
+   |Passerelle de réseau virtuel     |  Utiliser la passerelle de ce réseau virtuel       |
+    
+5. Sous **Réseau virtuel distant** :
 
-### <a name="configure-additional-settings-for-the-spoketohub-peering"></a>Configurer des paramètres supplémentaires pour le peering SpoketoHub
+   |Nom du paramètre  |Valeur  |
+   |---------|---------|
+   |Nom du lien de peering | SpoketoHub|
+   |Modèle de déploiement de réseau virtuel| Resource manager|
+   |Abonnement|\<your subscription\>|
+   |Réseau virtuel| VNet-Spoke
+   |Trafic vers le réseau virtuel distant     |   Autoriser (par défaut)      |
+   |Trafic transféré à partir du réseau virtuel distant    |   Autoriser (par défaut)      |
+   |Passerelle de réseau virtuel     |  Utiliser la passerelle du réseau virtuel distant       |
 
-Vous devez activer l’option **Autoriser le trafic transféré** sur le peering SpoketoHub.
+5. Sélectionnez **Ajouter**.
 
-1. Ouvrez le groupe de ressources **FW-Hybrid-Test** et sélectionnez le réseau virtuel **VNet-Spoke**.
-2. Dans la colonne de gauche, sélectionnez **Peerings**.
-3. Sélectionnez le peering **SpoketoHub**.
-4. Sous **Autoriser le trafic transféré de VNet-hub à VNet-Spoke**, sélectionnez **Activé**.
-5. Sélectionnez **Enregistrer**.
+   :::image type="content" source="media/tutorial-hybrid-portal/firewall-peering.png" alt-text="VNET Peering":::
 
 ## <a name="create-the-routes"></a>Créer les itinéraires
 
@@ -301,27 +310,27 @@ Ensuite, créez deux itinéraires :
 2. Tapez **table de routage** dans la zone de recherche, puis appuyez sur **Entrée**.
 3. Sélectionnez **Table de routage**.
 4. Sélectionnez **Create** (Créer).
-5. Pour le nom, tapez **UDR-Hub-Spoke**.
 6. Sélectionnez le groupe de ressources **FW-Hybrid-Test**.
-8. Pour **Emplacement**, sélectionnez le même emplacement que celui utilisé précédemment.
-9. Sélectionnez **Create** (Créer).
-10. Une fois la table de routage créée, sélectionnez-la pour ouvrir la page correspondante.
-11. Sélectionnez **Routes** dans la colonne de gauche.
-12. Sélectionnez **Ajouter**.
-13. Pour le nom de la route, tapez **ToSpoke**.
-14. Pour le préfixe d’adresse, tapez **10.6.0.0/16**.
-15. Pour le type de tronçon suivant, sélectionnez **Appliance virtuelle**.
-16. Pour l’adresse du tronçon suivant, tapez l’adresse IP privée du pare-feu que vous avez notée précédemment.
-17. Sélectionnez **OK**.
+8. Pour **Région**, sélectionnez le même emplacement que celui utilisé précédemment.
+1. Pour le nom, tapez **UDR-Hub-Spoke**.
+9. Sélectionnez **Vérifier + créer**.
+10. Sélectionnez **Create** (Créer).
+11. Une fois la table de routage créée, sélectionnez-la pour ouvrir la page correspondante.
+12. Sélectionnez **Routes** dans la colonne de gauche.
+13. Sélectionnez **Ajouter**.
+14. Pour le nom de la route, tapez **ToSpoke**.
+15. Pour le préfixe d’adresse, tapez **10.6.0.0/16**.
+16. Pour le type de tronçon suivant, sélectionnez **Appliance virtuelle**.
+17. Pour l’adresse du tronçon suivant, tapez l’adresse IP privée du pare-feu que vous avez notée précédemment.
+18. Sélectionnez **OK**.
 
 À présent, associez la route au sous-réseau.
 
 1. Sur la page **UDR-Hub-Spoke - Routes**, sélectionnez **Sous-réseaux**.
 2. Sélectionnez **Associer**.
-3. Sélectionnez **Choisir un réseau virtuel**.
-4. Sélectionnez **VNet-hub**.
-5. Sélectionnez **GatewaySubnet**.
-6. Sélectionnez **OK**.
+3. Sous **Réseau virtuel**, sélectionnez **VNet-hub**.
+1. Sous **Sous-réseau**, sélectionnez **GatewaySubnet**.
+2. Sélectionnez **OK**.
 
 À présent, créez la route par défaut à partir du sous-réseau spoke.
 
@@ -329,28 +338,28 @@ Ensuite, créez deux itinéraires :
 2. Tapez **table de routage** dans la zone de recherche, puis appuyez sur **Entrée**.
 3. Sélectionnez **Table de routage**.
 5. Sélectionnez **Create** (Créer).
-6. Pour le nom, tapez **UDR-DG**.
 7. Sélectionnez le groupe de ressources **FW-Hybrid-Test**.
-8. Pour **Emplacement**, sélectionnez le même emplacement que celui utilisé précédemment.
-4. Pour **Propagation de la route de la passerelle de réseau virtuel**, sélectionnez **Désactivée**.
-1. Sélectionnez **Create** (Créer).
-2. Une fois la table de routage créée, sélectionnez-la pour ouvrir la page correspondante.
-3. Sélectionnez **Routes** dans la colonne de gauche.
-4. Sélectionnez **Ajouter**.
-5. Pour le nom de la route, tapez **ToHub**.
-6. Pour le préfixe d’adresse, tapez **0.0.0.0/0**.
-7. Pour le type de tronçon suivant, sélectionnez **Appliance virtuelle**.
-8. Pour l’adresse du tronçon suivant, tapez l’adresse IP privée du pare-feu que vous avez notée précédemment.
-9. Sélectionnez **OK**.
+8. Pour **Région**, sélectionnez le même emplacement que celui utilisé précédemment.
+1. Pour le nom, tapez **UDR-DG**.
+4. Pour **Propager la route de la passerelle**, sélectionnez **Non**.
+5. Sélectionnez **Vérifier + créer**.
+6. Sélectionnez **Create** (Créer).
+7. Une fois la table de routage créée, sélectionnez-la pour ouvrir la page correspondante.
+8. Sélectionnez **Routes** dans la colonne de gauche.
+9. Sélectionnez **Ajouter**.
+10. Pour le nom de la route, tapez **ToHub**.
+11. Pour le préfixe d’adresse, tapez **0.0.0.0/0**.
+12. Pour le type de tronçon suivant, sélectionnez **Appliance virtuelle**.
+13. Pour l’adresse du tronçon suivant, tapez l’adresse IP privée du pare-feu que vous avez notée précédemment.
+14. Sélectionnez **OK**.
 
 À présent, associez la route au sous-réseau.
 
 1. Sur la page **UDR-DG - Routes**, sélectionnez **Sous-réseaux**.
 2. Sélectionnez **Associer**.
-3. Sélectionnez **Choisir un réseau virtuel**.
-4. Sélectionnez **VNet-spoke**.
-5. Sélectionnez **SN-Workload**.
-6. Sélectionnez **OK**.
+3. Sous **Réseau virtuel**, sélectionnez **VNet-spoke**.
+1. Sous **Sous-réseau**, sélectionnez **SN-Workload**.
+2. Sélectionnez **OK**.
 
 ## <a name="create-virtual-machines"></a>Créer des machines virtuelles
 
@@ -366,15 +375,15 @@ Créez une machine virtuelle dans le réseau virtuel spoke, exécutant IIS, sans
     - **Groupe de ressources** : sélectionnez **FW-Hybrid-Test**.
     - **Nom de la machine virtuelle** : *VM-Spoke-01*.
     - **Région** : région que vous avez utilisée précédemment.
-    - **Nom d’utilisateur** : *azureuser*.
-    - **Mot de passe** : *Azure123456!*
+    - **Nom d’utilisateur** : \<type a user name\>.
+    - **Mot de passe** : \<type a password\>
+4. Pour **Ports d’entrée publics**, sélectionnez **Autoriser les ports sélectionnés**, puis sélectionnez **HTTP (80)** et **RDP (3389)** .
 4. Sélectionnez **Suivant : Disques**.
 5. Acceptez les valeurs par défaut, puis sélectionnez **Suivant : Mise en réseau**.
 6. Sélectionnez **VNet-Spoke** pour le réseau virtuel et **SN-Workload** pour le sous-réseau.
-7. Pour **Adresse IP publique**, sélectionnez **Aucune**.
-8. Pour **Ports d’entrée publics**, sélectionnez **Autoriser les ports sélectionnés**, puis sélectionnez **HTTP (80)** et **RDP (3389)** .
+7. Pour **Adresse IP publique**, sélectionnez **Aucune**. 
 9. Sélectionnez **Suivant : Gestion**.
-10. Pour **Diagnostics de démarrage**, sélectionnez **Désactivé**.
+10. Pour **Diagnostics de démarrage**, sélectionnez **Désactiver**.
 11. Sélectionnez **Vérifier + Créer**, vérifiez les paramètres sur la page de résumé, puis sélectionnez **Créer**.
 
 ### <a name="install-iis"></a>Installer IIS
@@ -404,14 +413,14 @@ Il s’agit d’une machine virtuelle que vous utilisez pour vous connecter au m
     - **Groupe de ressources** : sélectionnez Existant, puis **FW-Hybrid-Test**.
     - **Nom de la machine virtuelle** - *VM-Onprem*.
     - **Région** : région que vous avez utilisée précédemment.
-    - **Nom d’utilisateur** : *azureuser*.
-    - **Mot de passe** : *Azure123456!* .
+    - **Nom d’utilisateur** : \<type a user name\>.
+    - **Mot de passe** : \<type a user password\>.
+7. Pour **Ports d’entrée publics**, sélectionnez **Autoriser les ports sélectionnés**, puis sélectionnez **RDP (3389)** .
 4. Sélectionnez **Suivant : Disques**.
 5. Acceptez les valeurs par défaut, puis sélectionnez **Suivant : Réseaux**.
 6. Sélectionnez **VNet-Onprem** pour le réseau virtuel et **SN-Corp** pour le sous-réseau.
-7. Pour **Ports d’entrée publics**, sélectionnez **Autoriser les ports sélectionnés**, puis sélectionnez **RDP (3389)** .
 8. Sélectionnez **Suivant : Gestion**.
-9. Pour **Diagnostics de démarrage**, sélectionnez **Désactivé**.
+10. Pour **Diagnostics de démarrage**, sélectionnez **Désactiver**.
 10. Sélectionnez **Vérifier + Créer**, vérifiez les paramètres sur la page de résumé, puis sélectionnez **Créer**.
 
 ## <a name="test-the-firewall"></a>Tester le pare-feu
@@ -422,7 +431,7 @@ Il s’agit d’une machine virtuelle que vous utilisez pour vous connecter au m
 <!---2. Open a Windows PowerShell command prompt on **VM-Onprem**, and ping the private IP for **VM-spoke-01**.
 
    You should get a reply.--->
-3. Ouvrez un navigateur web sur **VM-Onprem** et accédez à http://\<adresse IP privée de VM-spoke-01\>.
+3. Ouvrez un navigateur web sur **VM-Onprem** et accédez à http://\<VM-spoke-01 private IP\>.
 
    La page web **VM-spoke-01** doit s’afficher : ![Page web VM-Spoke-01](media/tutorial-hybrid-portal/VM-Spoke-01-web.png)
 
@@ -455,4 +464,4 @@ Vous pouvez garder vos ressources de pare-feu pour le prochain didacticiel, ou, 
 Ensuite, vous pouvez surveiller les journaux d’activité de Pare-feu Azure.
 
 > [!div class="nextstepaction"]
-> [Tutoriel : Superviser les journaux d’activité de Pare-feu Azure](./tutorial-diagnostics.md)
+> [Tutoriel : Superviser les journaux d’activité de Pare-feu Azure](./firewall-diagnostics.md)

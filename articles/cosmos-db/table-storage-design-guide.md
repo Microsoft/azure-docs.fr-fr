@@ -3,19 +3,20 @@ title: Concevoir des tables Azure Cosmos DB scalables et performantes
 description: 'Guide de conception Stockage Table Azure : tables scalables et performantes dans Azure Cosmos DB et Stockage Table Azure'
 ms.service: cosmos-db
 ms.subservice: cosmosdb-table
-ms.topic: conceptual
-ms.date: 05/21/2019
+ms.topic: how-to
+ms.date: 06/19/2020
 author: sakash279
 ms.author: akshanka
-ms.custom: seodec18
-ms.openlocfilehash: 78a38938ad31bb349b7215f0a26dda69f4fec966
-ms.sourcegitcommit: fdec8e8bdbddcce5b7a0c4ffc6842154220c8b90
+ms.custom: seodec18, devx-track-csharp
+ms.openlocfilehash: 709b83ad3e71a932202cebb9c9cb6187feae4ed7
+ms.sourcegitcommit: 3bdeb546890a740384a8ef383cf915e84bd7e91e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83651923"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93080003"
 ---
 # <a name="azure-table-storage-table-design-guide-scalable-and-performant-tables"></a>Guide de conception de table de stockage Table Azure : tables scalables et performantes
+[!INCLUDE[appliesto-table-api](includes/appliesto-table-api.md)]
 
 [!INCLUDE [storage-table-cosmos-db-tip-include](../../includes/storage-table-cosmos-db-tip-include.md)]
 
@@ -24,7 +25,7 @@ Pour concevoir des tables scalables et performantes, vous devez prendre en compt
 Le stockage Table est conçu pour prendre en charge des applications à l’échelle du cloud qui peuvent contenir des milliards d’entités (« lignes » dans la terminologie de base de données relationnelle) de données, ou pour des jeux de données devant prendre en charge des volumes de transactions très élevés. Vous devez donc concevoir différemment la façon dont vous stockez vos données et comprendre comment fonctionne le stockage Table. Un magasin de données NoSQL bien conçu améliore la scalabilité de votre solution (pour un coût inférieur) par rapport à une solution qui utilise une base de données relationnelle. Ce guide fournit une aide relative à ces sujets.  
 
 ## <a name="about-azure-table-storage"></a>À propos de Stockage Table Azure
-Cette section présente certaines des principales fonctionnalités du stockage Table qui sont particulièrement adaptées aux conceptions orientées vers l’amélioration des performances et de la scalabilité. Si vous ne connaissez pas Stockage Azure et le stockage Table, consultez [Présentation du Stockage Microsoft Azure](../storage/common/storage-introduction.md) et [Bien démarrer avec le stockage Table Azure à l’aide de .NET](table-storage-how-to-use-dotnet.md) avant de lire le reste de cet article. Bien que ce guide porte sur le stockage Table, il aborde également le stockage File d’attente Azure et le stockage Blob Azure, en expliquant comment les utiliser avec le stockage Table dans une solution.  
+Cette section présente certaines des principales fonctionnalités du stockage Table qui sont particulièrement adaptées aux conceptions orientées vers l’amélioration des performances et de la scalabilité. Si vous ne connaissez pas Stockage Azure et le stockage Table, consultez [Présentation du Stockage Microsoft Azure](../storage/common/storage-introduction.md) et [Bien démarrer avec le stockage Table Azure à l’aide de .NET](./tutorial-develop-table-dotnet.md) avant de lire le reste de cet article. Bien que ce guide porte sur le stockage Table, il aborde également le stockage File d’attente Azure et le stockage Blob Azure, en expliquant comment les utiliser avec le stockage Table dans une solution.  
 
 Le stockage Table utilise un format tabulaire pour stocker les données. Selon la terminologie standard, chaque ligne de la table représente une entité et les colonnes stockent les différentes propriétés de cette entité. Chaque entité a une paire de clés qui permet de l’identifier de manière unique et une colonne d’horodatage que le stockage Table utilise pour suivre les dernières mises à jour de l’entité. Le champ d’horodatage est ajouté automatiquement, et vous ne pouvez pas le remplacer manuellement par une valeur arbitraire. Le stockage Table utilise le dernier horodatage modifié (ou LMT, pour Last Modified Timestamp) afin de gérer l’accès concurrentiel optimiste.  
 
@@ -123,7 +124,7 @@ L'exemple suivant présente la conception d'une table simple pour stocker des en
 </table>
 
 
-Jusqu’à présent, cette conception ressemble à une table dans une base de données relationnelle. Les principales différences sont les colonnes obligatoires et la possibilité de stocker plusieurs types d’entité dans la même table. En outre, chacune des propriétés définies par l’utilisateur, telles que **FirstName** ou **Age**, est caractérisée par un type de données, par exemple un nombre entier ou une chaîne, tout comme une colonne dans une base de données relationnelle. Toutefois, contrairement à une base de données relationnelle, la nature sans schéma du stockage Table signifie qu’une propriété n’a pas nécessairement besoin d’avoir les mêmes types de données pour chaque entité. Pour stocker des types de données complexes dans une seule propriété, vous devez utiliser un format sérialisé comme JSON ou XML. Pour plus d’informations, consultez [Présentation du modèle de données du stockage Table](https://msdn.microsoft.com/library/azure/dd179338.aspx).
+Jusqu’à présent, cette conception ressemble à une table dans une base de données relationnelle. Les principales différences sont les colonnes obligatoires et la possibilité de stocker plusieurs types d’entité dans la même table. En outre, chacune des propriétés définies par l’utilisateur, telles que **FirstName** ou **Age** , est caractérisée par un type de données, par exemple un nombre entier ou une chaîne, tout comme une colonne dans une base de données relationnelle. Toutefois, contrairement à une base de données relationnelle, la nature sans schéma du stockage Table signifie qu’une propriété n’a pas nécessairement besoin d’avoir les mêmes types de données pour chaque entité. Pour stocker des types de données complexes dans une seule propriété, vous devez utiliser un format sérialisé comme JSON ou XML. Pour plus d’informations, consultez [Présentation du modèle de données du stockage Table](/rest/api/storageservices/Understanding-the-Table-Service-Data-Model).
 
 Le choix de la valeur de `PartitionKey` et `RowKey` est fondamental pour une bonne conception de table. Toutes les entités stockées dans une table doivent avoir une combinaison unique de `PartitionKey` et `RowKey`. Comme avec les clés dans une table de base de données relationnelle, les valeurs de `PartitionKey` et `RowKey` sont indexées pour créer un index cluster qui permet d’effectuer des recherches rapides. Toutefois, le stockage Table ne crée pas d’index secondaires. Il s’agit donc des deux seules propriétés indexées (certains des modèles décrits plus loin montrent comment contourner cette limitation apparente).  
 
@@ -134,7 +135,7 @@ Le nom du compte, le nom de la table et la valeur de `PartitionKey` identifient 
 
 Dans le stockage Table, un nœud individuel traite une ou plusieurs partitions complètes, et le service se met à l’échelle en équilibrant la charge des partitions de manière dynamique parmi les nœuds. Si un nœud est en cours de chargement, le stockage Table peut fractionner la plage de partitions servie par ce nœud sur des nœuds différents. Quand le trafic diminue, le stockage Table peut refusionner les plages de partitions des nœuds calmes sur un nœud unique.  
 
-Pour plus d’informations sur les détails internes du stockage Table, et notamment la façon dont il gère les partitions, consultez [Stockage Microsoft Azure : service de stockage cloud hautement disponible à cohérence forte](https://docs.microsoft.com/archive/blogs/windowsazurestorage/sosp-paper-windows-azure-storage-a-highly-available-cloud-storage-service-with-strong-consistency).  
+Pour plus d’informations sur les détails internes du stockage Table, et notamment la façon dont il gère les partitions, consultez [Stockage Microsoft Azure : service de stockage cloud hautement disponible à cohérence forte](/archive/blogs/windowsazurestorage/sosp-paper-windows-azure-storage-a-highly-available-cloud-storage-service-with-strong-consistency).  
 
 ### <a name="entity-group-transactions"></a>Transactions de groupe d’entités
 Dans le stockage Table, les transactions de groupe d’entités (EGT) constituent l’unique mécanisme intégré pour effectuer des mises à jour atomiques entre plusieurs entités. Les EGT sont également appelées *transactions par lots*. Les transactions EGT peuvent uniquement utiliser des entités stockées dans la même partition (partageant la même clé de partition dans une table donnée). Par conséquent, quand vous avez besoin d’un comportement transactionnel atomique entre plusieurs entités, vérifiez que ces entités sont dans la même partition. Ceci justifie souvent la conservation de plusieurs types d’entité dans la même table (et partition) plutôt que l’utilisation de plusieurs tables pour différents types d’entité. Une seule EGT peut traiter jusqu'à 100 entités.  Si vous envoyez plusieurs EGT simultanées pour traitement, vérifiez bien que ces EGT n’opèrent pas sur des entités communes aux différentes EGT. Sinon, le traitement risque d’être retardé.
@@ -156,7 +157,7 @@ Le tableau suivant présente certaines des valeurs de clés à connaître quand 
 | Taille de la `RowKey` |Chaîne jusqu’à 1 Ko |
 | Taille d’une transaction ETG |Une transaction peut inclure au plus 100 entités, et la charge utile doit être inférieure à 4 Mo. Une transaction EGT ne peut mettre à jour une entité qu'une seule fois. |
 
-Pour plus d’informations, consultez [Présentation du modèle de données du service de Table](https://msdn.microsoft.com/library/azure/dd179338.aspx).  
+Pour plus d’informations, consultez [Présentation du modèle de données du service de Table](/rest/api/storageservices/Understanding-the-Table-Service-Data-Model).  
 
 ### <a name="cost-considerations"></a>Considérations relatives au coût
 Le stockage Table est relativement peu coûteux, mais vous devez y inclure les estimations de coût pour l’utilisation des capacités et la quantité de transactions dans le cadre de l’évaluation d’une solution qui utilise le stockage Table. Toutefois, dans de nombreux scénarios, le stockage de données dénormalisées ou dupliquées afin d’améliorer les performances ou la scalabilité de votre solution est une approche appropriée. Pour plus d’informations sur la tarification, consultez la page [Tarification Azure Storage](https://azure.microsoft.com/pricing/details/storage/).  
@@ -202,7 +203,7 @@ Les exemples suivants partent du principe que le stockage Table stocke les entit
 | `Age` |Integer |
 | `EmailAddress` |String |
 
-Voici quelques recommandations générales pour la conception de requêtes de stockage Table. La syntaxe de filtre utilisée dans les exemples suivants provient de l’API REST de stockage Table. Pour plus d’informations, consultez [Entités de requêtes](https://msdn.microsoft.com/library/azure/dd179421.aspx).  
+Voici quelques recommandations générales pour la conception de requêtes de stockage Table. La syntaxe de filtre utilisée dans les exemples suivants provient de l’API REST de stockage Table. Pour plus d’informations, consultez [Entités de requêtes](/rest/api/storageservices/Query-Entities).  
 
 * Une *requête de pointage* constitue la méthode de recherche la plus efficace. Elle est recommandée pour les recherches sur de gros volumes ou des recherches nécessitant la latence la plus faible. Une telle requête peut utiliser les index pour localiser une entité individuelle efficacement en spécifiant les valeurs de `PartitionKey` et `RowKey`. Par exemple : `$filter=(PartitionKey eq 'Sales') and (RowKey eq '2')`.  
 * La deuxième solution consiste à utiliser une *requête de plage de données*. Elle utilise la `PartitionKey` et filtre sur une plage de valeurs `RowKey` pour retourner plusieurs entités. La valeur de `PartitionKey` identifie une partition spécifique, tandis que la valeur de `RowKey` identifie un sous-ensemble des entités de cette partition. Par exemple : `$filter=PartitionKey eq 'Sales' and RowKey ge 'S' and RowKey lt 'T'`.  
@@ -210,7 +211,7 @@ Voici quelques recommandations générales pour la conception de requêtes de st
 * Une *analyse de table* n’inclut pas la valeur de `PartitionKey`, et s’avère inefficace car elle lance une recherche sur toutes les partitions qui composent la table pour toutes les entités correspondantes. Elle effectue une analyse de table, que votre filtre utilise la valeur de `RowKey` ou non. Par exemple : `$filter=LastName eq 'Jones'`.  
 * Les requêtes de stockage Table Azure qui retournent plusieurs entités les trient par ordre de `PartitionKey` et `RowKey`. Pour éviter un nouveau tri des entités dans le client, sélectionnez une valeur de `RowKey` qui définit l’ordre de tri le plus répandu. Les résultats de la requête renvoyés par l’API Table Azure dans Azure Cosmos DB ne sont pas triés par clé de partition ou clé de ligne. Pour obtenir la liste détaillée des différences de fonctionnalités, consultez [Différences entre l'API Table dans Azure Cosmos DB et Stockage Table Azure](table-api-faq.md#table-api-vs-table-storage).
 
-L’utilisation d’un connecteur « **or** » pour spécifier un filtre selon les valeurs de `RowKey` déclenche une analyse de partition, et n’est pas traitée en tant que requête de plage de données. Par conséquent, évitez les requêtes qui utilisent des filtres tels que : `$filter=PartitionKey eq 'Sales' and (RowKey eq '121' or RowKey eq '322')`.  
+L’utilisation d’un connecteur «  **or**  » pour spécifier un filtre selon les valeurs de `RowKey` déclenche une analyse de partition, et n’est pas traitée en tant que requête de plage de données. Par conséquent, évitez les requêtes qui utilisent des filtres tels que : `$filter=PartitionKey eq 'Sales' and (RowKey eq '121' or RowKey eq '322')`.  
 
 Pour obtenir des exemples de code côté client qui utilisent la bibliothèque de client de stockage pour exécuter des requêtes efficaces, consultez :  
 
@@ -252,7 +253,7 @@ Le stockage Table retourne les résultats de requête triés par ordre croissant
 > [!NOTE]
 > Les résultats de la requête renvoyés par l’API Table Azure dans Azure Cosmos DB ne sont pas triés par clé de partition ou clé de ligne. Pour obtenir la liste détaillée des différences de fonctionnalités, consultez [Différences entre l'API Table dans Azure Cosmos DB et Stockage Table Azure](table-api-faq.md#table-api-vs-table-storage).
 
-Les clés dans le stockage Table sont des valeurs de chaîne. Pour être sûr que les valeurs numériques sont triées correctement, vous devez les convertir en une longueur fixe et les remplir avec des zéros. Par exemple, si la valeur d’ID d’un employé que vous utilisez comme `RowKey` est une valeur de nombre entier, vous devez convertir l’ID de cet employé, **123**, en **00000123**. 
+Les clés dans le stockage Table sont des valeurs de chaîne. Pour être sûr que les valeurs numériques sont triées correctement, vous devez les convertir en une longueur fixe et les remplir avec des zéros. Par exemple, si la valeur d’ID d’un employé que vous utilisez comme `RowKey` est une valeur de nombre entier, vous devez convertir l’ID de cet employé, **123** , en **00000123**. 
 
 De nombreuses applications ont des conditions d'utilisation pour l'utilisation des données triées dans différents ordres : par exemple, le tri des employés par nom ou par date d'arrivée. Les modèles suivants de la section [Modèles de conception de table](#table-design-patterns) permettent de comprendre comment alterner les ordres de tri pour vos entités :  
 
@@ -312,7 +313,7 @@ Les relations un-à-plusieurs entre des objets de domaine d’entreprise se prod
 
 Prenons l’exemple d’une grande entreprise multinationale avec des dizaines de milliers de services et d’entités d’employés. Chaque service a de nombreux employés, et chaque employé est associé à un service spécifique. Une approche consiste à stocker séparément les entités relatives aux services (department) et aux employés (employee), comme ceci :  
 
-![Graphique présentant une entité Department et une entité Employee][1]
+:::image type="content" source="./media/storage-table-design-guide/storage-table-design-IMAGE01.png" alt-text="Graphique présentant une entité Department et une entité Employee":::
 
 Cet exemple montre une relation un-à-plusieurs implicite entre les types, basée sur la valeur de `PartitionKey`. Chaque service peut avoir de nombreux employés.  
 
@@ -320,7 +321,7 @@ Cet exemple montre également une entité de service (department) et ses entité
 
 Une autre approche consiste à dénormaliser vos données et à stocker uniquement les entités d’employés avec les données de services dénormalisées, comme indiqué dans l’exemple suivant. Cette approche dénormalisée n’est peut-être pas la meilleure pour ce scénario si vous devez pouvoir modifier les détails d’un responsable de service. Pour ce faire, il vous faudrait mettre à jour chaque employé du service.  
 
-![Graphique de l’entité Employee][2]
+:::image type="content" source="./media/storage-table-design-guide/storage-table-design-IMAGE02.png" alt-text="Graphique de l’entité Employé montrant comment dénormaliser vos données et stocker uniquement les entités d’employés avec les données de services dénormalisées.":::
 
 Pour plus d’informations, consultez la section [Modèle de dénormalisation](#denormalization-pattern) plus loin dans ce guide.  
 
@@ -397,20 +398,20 @@ Par exemple, si vous avez des petites tables qui contiennent des données qui ne
 ### <a name="inheritance-relationships"></a>Relations d'héritage
 Si votre application cliente utilise un ensemble de classes qui font partie d’une relation d’héritage pour représenter des entités métier, vous pouvez facilement conserver ces entités dans le stockage Table. Par exemple, l’ensemble de classes suivant peut être défini dans votre application cliente, `Person` étant une classe abstraite.
 
-![Diagramme des relations d’héritage][3]
+:::image type="content" source="./media/storage-table-design-guide/storage-table-design-IMAGE03.png" alt-text="Diagramme des relations d’héritage":::
 
 Vous pouvez rendre persistantes les instances des deux classes concrètes dans le stockage Table en utilisant une seule table `Person`. Utilisez des entités ressemblant à ce qui suit :  
 
-![Graphique montrant l’entité de client et l’entité d’employé][4]
+:::image type="content" source="./media/storage-table-design-guide/storage-table-design-IMAGE04.png" alt-text="Graphique montrant l’entité Client et l’entité Employee":::
 
 Pour plus d’informations sur l’utilisation de plusieurs types d’entité dans la même table dans le code client, consultez [Utiliser des types d’entités hétérogènes](#work-with-heterogeneous-entity-types) plus loin dans ce guide. Vous y trouverez des exemples montrant comment reconnaître le type d'entité dans le code client.  
 
 ## <a name="table-design-patterns"></a>Modèles de conception de table
 Dans les sections précédentes, vous avez découvert comment optimiser votre conception de table pour la récupération des données d’entité à l’aide de requêtes, et pour l’insertion, la mise à jour et la suppression des données d’entité. Cette section décrit certains modèles appropriés pour une utilisation avec le stockage Table. En outre, vous verrez comment traiter certains problèmes et compromis abordés précédemment dans ce guide. Le diagramme suivant récapitule les relations entre les différents modèles :  
 
-![Diagramme des modèles de conception de tables][5]
+:::image type="content" source="./media/storage-table-design-guide/storage-table-design-IMAGE05.png" alt-text="Diagramme des modèles de conception de tables":::
 
-Le plan des modèles met en évidence les relations entre les modèles (bleus) et les anti-modèles (orange) qui sont décrits dans ce guide. Il existe bien sûr bien d'autres modèles qui méritent votre attention. Par exemple, l’un des principaux scénarios pour un stockage Table consiste à utiliser des [modèles d’affichages matérialisés](https://msdn.microsoft.com/library/azure/dn589782.aspx) à partir du modèle [Répartition de la responsabilité de requête de commande](https://msdn.microsoft.com/library/azure/jj554200.aspx).  
+Le plan des modèles met en évidence les relations entre les modèles (bleus) et les anti-modèles (orange) qui sont décrits dans ce guide. Il existe bien sûr bien d'autres modèles qui méritent votre attention. Par exemple, l’un des principaux scénarios pour un stockage Table consiste à utiliser des [modèles d’affichages matérialisés](/previous-versions/msp-n-p/dn589782(v=pandp.10)) à partir du modèle [Répartition de la responsabilité de requête de commande](/previous-versions/msp-n-p/jj554200(v=pandp.10)).  
 
 ### <a name="intra-partition-secondary-index-pattern"></a>Modèle d’index secondaire intra-partition
 stocker plusieurs copies de chaque entité en utilisant différentes valeurs de `RowKey` (dans la même partition). Cela permet d’effectuer des recherches rapides et efficaces, ainsi que d’autres ordres de tri à l’aide de différentes valeurs de `RowKey`. La cohérence des mises à jour entre les copies peut être assurée à l’aide d’EGT.  
@@ -418,14 +419,14 @@ stocker plusieurs copies de chaque entité en utilisant différentes valeurs de 
 #### <a name="context-and-problem"></a>Contexte et problème
 Le stockage Table indexe automatiquement les entités en utilisant les valeurs `PartitionKey` et `RowKey`. Ainsi, une application cliente peut récupérer une entité efficacement à l’aide de ces valeurs. Par exemple, à l’aide de la structure de table suivante, une application cliente peut utiliser une requête de pointage pour récupérer une entité d’employé individuelle en utilisant le nom de service et l’ID d’employé (valeurs `PartitionKey` et `RowKey`). Un client peut aussi récupérer des entités triées par ID d’employé au sein de chaque service.
 
-![Graphique de l’entité Employee][6]
+:::image type="content" source="./media/storage-table-design-guide/storage-table-design-IMAGE06.png" alt-text="Graphique de l’entité Employé où une application cliente peut utiliser une requête de pointage pour récupérer une entité d’employé individuelle en utilisant le nom de service et l’ID d’employé (valeurs PartitionKey et RowKey).":::
 
 Si vous voulez également trouver une entité d’employé en fonction de la valeur d’une autre propriété, comme l’adresse e-mail, vous devez utiliser une analyse de partition moins efficace pour rechercher une correspondance. En effet, le stockage Table ne fournit pas d’index secondaires. De plus, vous ne pouvez pas demander une liste des employés triés dans un ordre différent de celui de `RowKey`.  
 
 #### <a name="solution"></a>Solution
 Pour contourner l’absence d’index secondaires, vous pouvez stocker plusieurs copies de chaque entité, chaque copie utilisant une valeur différente de `RowKey`. Si vous stockez une entité avec les structures suivantes, vous pouvez récupérer efficacement des entités d’employés d’après leur adresse e-mail ou leur ID d’employé. Les valeurs de préfixe pour `RowKey`, `empid_` et `email_` permettent d’interroger un seul employé, ou une plage d’employés, à l’aide d’une plage d’adresses e-mail ou d’ID d’employés.  
 
-![Graphique montrant une entité Employee avec différentes valeurs RowKey][7]
+:::image type="content" source="./media/storage-table-design-guide/storage-table-design-IMAGE07.png" alt-text="Graphique montrant une entité Employee avec différentes valeurs RowKey":::
 
 Les deux critères de filtre suivants (l’un recherchant d’après l’ID d’employé et l’autre d’après l’adresse e-mail) spécifient des requêtes de pointage :  
 
@@ -437,7 +438,7 @@ Si vous interrogez un ensemble d’entités d’employés, vous pouvez spécifie
 * Pour rechercher tous les employés du service des ventes avec un ID d’employé compris entre 000100 et 000199, utilisez : $filter=(PartitionKey eq 'Sales') and (RowKey ge 'empid_000100') and (RowKey le 'empid_000199')  
 * Pour rechercher tous les employés du service des ventes dont l’adresse e-mail commence par la lettre « a », utilisez : $filter=(PartitionKey eq 'Sales') and (RowKey ge 'email_a') and (RowKey lt 'email_b')  
   
-La syntaxe de filtre utilisée dans les exemples précédents provient de l’API REST de stockage Table. Pour plus d’informations, consultez [Entités de requêtes](https://msdn.microsoft.com/library/azure/dd179421.aspx).  
+La syntaxe de filtre utilisée dans les exemples précédents provient de l’API REST de stockage Table. Pour plus d’informations, consultez [Entités de requêtes](/rest/api/storageservices/Query-Entities).  
 
 #### <a name="issues-and-considerations"></a>Problèmes et considérations
 Prenez en compte les points suivants lorsque vous choisissez comment implémenter ce modèle :  
@@ -449,7 +450,7 @@ Prenez en compte les points suivants lorsque vous choisissez comment implémente
 * Le remplissage des valeurs numériques dans `RowKey` (par exemple l’ID d’employé 000223) permet de corriger le tri et le filtrage en fonction des limites inférieure et supérieure.  
 * Vous n’avez pas forcément besoin de dupliquer toutes les propriétés de votre entité. Par exemple, si les requêtes de recherche des entités à l’aide de l’adresse e-mail dans la `RowKey` n’ont jamais besoin de l’âge de l’employé, ces entités peuvent présenter la structure suivante :
 
-  ![Graphique de l’entité Employee][8]
+  :::image type="content" source="./media/storage-table-design-guide/storage-table-design-IMAGE08.png" alt-text="Graphique de l’entité Employee":::
 
 * En général, il est préférable de stocker les données en double et de vous assurer que vous pouvez récupérer toutes les données dont vous avez besoin avec une seule requête, plutôt que d’utiliser une requête pour rechercher une entité et une autre pour rechercher les données requises.  
 
@@ -476,7 +477,7 @@ Stockez plusieurs copies de chaque entité en utilisant différentes valeurs de 
 #### <a name="context-and-problem"></a>Contexte et problème
 Le stockage Table indexe automatiquement les entités en utilisant les valeurs `PartitionKey` et `RowKey`. Ainsi, une application cliente peut récupérer une entité efficacement à l’aide de ces valeurs. Par exemple, à l’aide de la structure de table suivante, une application cliente peut utiliser une requête de pointage pour récupérer une entité d’employé individuelle en utilisant le nom de service et l’ID d’employé (valeurs `PartitionKey` et `RowKey`). Un client peut aussi récupérer des entités triées par ID d’employé au sein de chaque service.  
 
-![Graphique de l’entité Employee][9]
+:::image type="content" source="./media/storage-table-design-guide/storage-table-design-IMAGE09.png" alt-text="Graphique de la structure de l’entité Employé, qui lorsqu’elle est employée, permet à une application cliente d’utiliser une requête de pointage pour récupérer une entité d’employé individuelle en utilisant le nom de service et l’ID d’employé (valeurs PartitionKey et RowKey).":::[9]
 
 Si vous voulez également pouvoir trouver une entité d'employé en fonction de la valeur d'une autre propriété, comme l'adresse de messagerie, vous devez utiliser une analyse de partition moins efficace pour rechercher une correspondance. En effet, le stockage Table ne fournit pas d’index secondaires. De plus, vous ne pouvez pas demander une liste des employés triés dans un ordre différent de celui de `RowKey`.  
 
@@ -485,7 +486,7 @@ Vous prévoyez un volume élevé de transactions sur ces entités et vous souhai
 #### <a name="solution"></a>Solution
 Pour contourner l’absence d’index secondaires, vous pouvez stocker plusieurs copies de chaque entité, chaque copie utilisant des valeurs différentes de `PartitionKey` et `RowKey`. Si vous stockez une entité avec les structures suivantes, vous pouvez récupérer efficacement des entités d’employés d’après leur adresse e-mail ou leur ID d’employé. Les valeurs de préfixe pour `PartitionKey`, `empid_` et `email_` permettent d’identifier l’index à utiliser pour une requête.  
 
-![Graphique montrant l’entité d’employé avec index primaire et entité d’employé avec index secondaire][10]
+:::image type="content" source="./media/storage-table-design-guide/storage-table-design-IMAGE10.png" alt-text="Graphique montrant l’entité Employee avec index primaire et l’entité Employee avec index secondaire":::
 
 Les deux critères de filtre suivants (l’un recherchant d’après l’ID d’employé et l’autre d’après l’adresse e-mail) spécifient des requêtes de pointage :  
 
@@ -494,10 +495,10 @@ Les deux critères de filtre suivants (l’un recherchant d’après l’ID d’
 
 Si vous interrogez un ensemble d’entités d’employés, vous pouvez spécifier une plage triée par ID d’employé ou une plage triée par adresse e-mail. Recherchez les entités avec le préfixe approprié dans la `RowKey`.  
 
-* Pour rechercher tous les employés du service des ventes avec un ID d’employé compris entre **000100** et **000199**, utilisez : $filter=(PartitionKey eq 'empid_Sales') and (RowKey ge '000100') and (RowKey le '000199')  
+* Pour rechercher tous les employés du service des ventes avec un ID d’employé compris entre **000100** et **000199** , utilisez : $filter=(PartitionKey eq 'empid_Sales') and (RowKey ge '000100') and (RowKey le '000199')  
 * Pour rechercher tous les employés du service des ventes ayant une adresse e-mail qui commence par « a », triés par ordre d’adresse e-mail, utilisez : $filter=(PartitionKey eq 'email_Sales') and (RowKey ge 'a') and (RowKey lt 'b')  
 
-Notez que la syntaxe de filtre utilisée dans les exemples précédents provient de l’API REST de stockage Table. Pour plus d’informations, consultez [Entités de requêtes](https://msdn.microsoft.com/library/azure/dd179421.aspx).  
+Notez que la syntaxe de filtre utilisée dans les exemples précédents provient de l’API REST de stockage Table. Pour plus d’informations, consultez [Entités de requêtes](/rest/api/storageservices/Query-Entities).  
 
 #### <a name="issues-and-considerations"></a>Problèmes et considérations
 Prenez en compte les points suivants lorsque vous choisissez comment implémenter ce modèle :  
@@ -508,7 +509,8 @@ Prenez en compte les points suivants lorsque vous choisissez comment implémente
 * Le remplissage des valeurs numériques dans `RowKey` (par exemple l’ID d’employé 000223) permet de corriger le tri et le filtrage en fonction des limites inférieure et supérieure.  
 * Vous n’avez pas forcément besoin de dupliquer toutes les propriétés de votre entité. Par exemple, si les requêtes de recherche des entités à l’aide de l’adresse e-mail dans la `RowKey` n’ont jamais besoin de l’âge de l’employé, ces entités peuvent présenter la structure suivante :
   
-  ![Graphique montrant l’entité Employee avec index secondaire][11]
+  :::image type="content" source="./media/storage-table-design-guide/storage-table-design-IMAGE11.png" alt-text="Graphique montrant l’entité Employee avec index secondaire":::
+
 * En général, il est préférable de stocker les données en double et de vous assurer que vous pouvez récupérer toutes les données dont vous avez besoin en utilisant une seule requête, plutôt que d’utiliser une requête pour rechercher une entité à l’aide de l’index secondaire et une autre pour rechercher les données requises dans l’index primaire.  
 
 #### <a name="when-to-use-this-pattern"></a>Quand utiliser ce modèle
@@ -547,16 +549,16 @@ Pour illustrer cette approche, supposez que vous avez besoin d’archiver des en
 
 Toutefois, vous ne pouvez pas utiliser une EGT pour effectuer ces deux opérations Pour éviter le risque qu'une défaillance provoque l'apparition d'une entité dans les deux tables ou dans aucune d'elles, l'opération d'archivage doit être cohérente. Le diagramme de séquence suivant décrit les étapes de cette opération.  
 
-![Diagramme de solution pour la cohérence finale][12]
+:::image type="content" source="./media/storage-table-design-guide/storage-table-design-IMAGE12.png" alt-text="Diagramme de solution pour la cohérence finale":::
 
-Un client lance l’opération d’archivage en plaçant un message dans une file d’attente Azure (dans cet exemple, pour archiver l’employé n°456). Un rôle de travail interroge la file d'attente à la recherche de nouveaux messages ; lorsqu'il en trouve un, il le lit et laisse une copie masquée dans la file d'attente. Le rôle de travail extrait ensuite une copie de l’entité à partir de la table **Current**, insère une copie dans la table **Archive** et supprime l’original de la table **Current**. Enfin, si aucune erreur n'est survenue lors des étapes précédentes, le rôle de travail supprime le message masqué de la file d'attente.  
+Un client lance l’opération d’archivage en plaçant un message dans une file d’attente Azure (dans cet exemple, pour archiver l’employé n°456). Un rôle de travail interroge la file d'attente à la recherche de nouveaux messages ; lorsqu'il en trouve un, il le lit et laisse une copie masquée dans la file d'attente. Le rôle de travail extrait ensuite une copie de l’entité à partir de la table **Current** , insère une copie dans la table **Archive** et supprime l’original de la table **Current**. Enfin, si aucune erreur n'est survenue lors des étapes précédentes, le rôle de travail supprime le message masqué de la file d'attente.  
 
 Dans cet exemple, l’étape 4 du diagramme permet d’insérer l’employé dans la table **Archive** . L’employé peut être ajouté à un objet blob dans le stockage Blob ou à un fichier dans un système de fichiers.  
 
 #### <a name="recover-from-failures"></a>Récupérer suite à des échecs
 Il est important que les opérations des étapes 4-5 du diagramme soient *idempotentes* au cas où le rôle de travail nécessite un redémarrage de l’opération d’archivage. Si vous utilisez le stockage Table, à l’étape 4 vous devez utiliser une opération « insérer ou remplacer » ; à l’étape 5, vous devez faire appel à une opération « supprimer si existe » dans la bibliothèque de client que vous utilisez. Si vous utilisez un autre système de stockage, vous devez utiliser une opération idempotent appropriée.  
 
-Si le rôle de travail ne termine jamais l’étape 6, après un délai d’attente le message réapparaît dans la file d’attente, prêt pour le rôle de travail qui tentera de le retraiter. Le rôle de travail peut vérifier le nombre de fois où un message de file d’attente a été lu et, si nécessaire, l’indiquer comme message « incohérent » en vue d’une investigation en l’envoyant vers une file d’attente distincte. Pour plus d’informations sur la lecture des messages de la file d’attente et la vérification du nombre de retraits, consultez [Obtenir des messages](https://msdn.microsoft.com/library/azure/dd179474.aspx).  
+Si le rôle de travail ne termine jamais l’étape 6, après un délai d’attente le message réapparaît dans la file d’attente, prêt pour le rôle de travail qui tentera de le retraiter. Le rôle de travail peut vérifier le nombre de fois où un message de file d’attente a été lu et, si nécessaire, l’indiquer comme message « incohérent » en vue d’une investigation en l’envoyant vers une file d’attente distincte. Pour plus d’informations sur la lecture des messages de la file d’attente et la vérification du nombre de retraits, consultez [Obtenir des messages](/rest/api/storageservices/Get-Messages).  
 
 Certaines erreurs provenant du stockage Table et du stockage File d’attente sont des erreurs temporaires, et votre application cliente doit inclure une logique de nouvelle tentative appropriée pour les gérer.  
 
@@ -587,7 +589,7 @@ Permet de mettre à jour des entités d'index pour mener des recherches efficace
 #### <a name="context-and-problem"></a>Contexte et problème
 Le stockage Table indexe automatiquement les entités en utilisant les valeurs `PartitionKey` et `RowKey`. Ainsi, une application cliente peut récupérer une entité efficacement à l’aide d’une requête de pointage. Par exemple, à l’aide de la structure de table suivante, une application cliente peut récupérer efficacement une entité d’employé individuelle en utilisant le nom de service et l’ID d’employé (valeurs `PartitionKey` et `RowKey`).  
 
-![Graphique de l’entité Employee][13]
+:::image type="content" source="./media/storage-table-design-guide/storage-table-design-IMAGE13.png" alt-text="Graphique de la structure de l’entité Employé où une application cliente peut récupérer efficacement une entité d’employé individuelle en utilisant le nom de service et l’ID d’employé (PartitionKey et RowKey).":::
 
 Si vous voulez également récupérer la liste des entités d’employés en fonction de la valeur d’une autre propriété qui n’est pas unique (par exemple son nom), vous devez utiliser une analyse de partition moins efficace. Cette analyse recherche des correspondances au lieu d’utiliser un index pour rechercher directement. En effet, le stockage Table ne fournit pas d’index secondaires.  
 
@@ -606,7 +608,7 @@ Option n°2 : Créer des entités d’index dans la même partition
 
 Utilisez des entités d’index qui stockent les données suivantes :  
 
-![Graphique montrant l’entité d’employé avec une chaîne contenant la liste des ID d’employés ayant le même nom de famille][14]
+:::image type="content" source="./media/storage-table-design-guide/storage-table-design-IMAGE14.png" alt-text="Graphique montrant l’entité Employee, avec une chaîne contenant une liste des ID d’employés ayant le même nom de famille":::
 
 La propriété `EmployeeIDs` contient une liste d’ID d’employés pour les employés portant le nom stocké dans la `RowKey`.  
 
@@ -628,9 +630,9 @@ Option 3 : Créer des entités d’index dans une table ou une partition sépa
 
 Pour cette méthode, utilisez les entités d’index qui stockent les données suivantes :  
 
-![Graphique montrant l’entité Employee avec une chaîne contenant la liste des ID d’employés ayant le même nom de famille][15]
+:::image type="content" source="./media/storage-table-design-guide/storage-table-design-IMAGE15.png" alt-text="Capture d’écran qui montre l’entité d’index Employé qui contient une liste des ID d’employés pour les employés dont le nom de famille est stocké dans RowKey et PartitionKey.":::
 
-La propriété `EmployeeIDs` contient une liste d’ID d’employés pour les employés portant le nom stocké dans la `RowKey`.  
+La propriété `EmployeeIDs` contient une liste d’ID d’employés pour les employés portant le nom stocké dans la `RowKey` et `PartitionKey`.  
 
 Vous ne pouvez pas utiliser des EGT pour maintenir la cohérence, car les entités d’index sont dans une partition distincte des entités d’employés. Vérifiez que les entités d’index sont cohérentes avec les entités d’employé.  
 
@@ -660,12 +662,12 @@ Combinez des données connexes dans une entité unique pour pouvoir récupérer 
 #### <a name="context-and-problem"></a>Contexte et problème
 Dans une base de données relationnelle, vous normalisez généralement des données pour supprimer les doublons générés quand des requêtes extraient des données provenant de plusieurs tables. Si vous normalisez des données dans les tables Azure, vous devez effectuer plusieurs allers-retours à partir du client vers le serveur pour récupérer des données associées. Par exemple, avec la structure de table suivante, vous avez besoin de deux allers-retours pour récupérer les détails d’un service. Un aller-retour extrait l’entité Department qui comprend l’ID du responsable, et le deuxième aller-retour extrait les détails du responsable dans une entité Employee.  
 
-![Graphique d’entité Department et d’entité Employee][16]
+:::image type="content" source="./media/storage-table-design-guide/storage-table-design-IMAGE16.png" alt-text="Graphique d’entité Department et d’entité Employee":::
 
 #### <a name="solution"></a>Solution
 Au lieu de stocker les données dans les deux entités distinctes, dénormalisez les données et conservez une copie des détails du responsable dans l’entité du service. Par exemple :  
 
-![Graphique d’entité Department dénormalisée et combinée][17]
+:::image type="content" source="./media/storage-table-design-guide/storage-table-design-IMAGE17.png" alt-text="Graphique d’entité Department dénormalisée et combinée":::
 
 Une fois les entités de service stockées avec ces propriétés, vous pouvez récupérer toutes les informations nécessaires sur un service à l’aide d’une requête de pointage.  
 
@@ -693,18 +695,18 @@ Dans une base de données relationnelle, il est naturel d’utiliser des jointur
 
 Supposez que vous stockez des entités relatives aux employés dans le stockage Table à l’aide de la structure suivante :  
 
-![Graphique de l’entité Employee][18]
+:::image type="content" source="./media/storage-table-design-guide/storage-table-design-IMAGE18.png" alt-text="Graphique de la structure d’entité Employé que vous devez utiliser pour stocker les entités d’employés dans le stockage Table.":::
 
 Vous devez également stocker les données historiques relatives aux évaluations et aux performances de chaque année durant laquelle l’employé a travaillé pour votre organisation, et vous devez être en mesure d’accéder à ces informations par année. Une option consiste à créer une autre table qui stocke les entités avec la structure suivante :  
 
-![Graphique d’entité d’évaluation d’employé][19]
+:::image type="content" source="./media/storage-table-design-guide/storage-table-design-IMAGE19.png" alt-text="Graphique d’entité d’évaluation d’employé":::
 
 Avec cette approche, vous pouvez décider de dupliquer certaines informations (telles que le prénom et le nom) dans la nouvelle entité afin de pouvoir récupérer vos données avec une requête unique. Cependant, vous ne pouvez pas conserver une cohérence forte, car vous ne pouvez pas utiliser une EGT pour mettre à jour les deux entités de manière atomique.  
 
 #### <a name="solution"></a>Solution
 Stockez un nouveau type d’entité dans votre table d’origine à l’aide d’entités structurées comme suit :  
 
-![Graphique d’entité Employee avec clé composée][20]
+:::image type="content" source="./media/storage-table-design-guide/storage-table-design-IMAGE20.png" alt-text="Graphique d’entité Employee avec clé composée":::
 
 Notez que la `RowKey` est désormais une clé composée de l’ID d’employé et de l’année des données d’évaluation. Cela vous permet de récupérer les performances de l’employé et d’examiner les données avec une seule requête pour une seule entité.  
 
@@ -776,7 +778,7 @@ De nombreuses applications suppriment les anciennes données qui n’ont plus be
 
 Une conception possible consiste à utiliser la date et l’heure de la requête de connexion dans la `RowKey` :  
 
-![Graphique d’entité de tentative de connexion][21]
+:::image type="content" source="./media/storage-table-design-guide/storage-table-design-IMAGE21.png" alt-text="Graphique d’entité de tentative de connexion":::
 
 Cette approche évite les zones sensibles de partition, car l’application peut insérer et supprimer des entités de connexion pour chaque utilisateur dans une partition distincte. Toutefois, cette approche peut s’avérer coûteuse et fastidieuse si vous avez un grand nombre d’entités. Tout d’abord, vous devez effectuer une analyse de table afin d’identifier toutes les entités à supprimer, puis vous devez supprimer chaque entité ancienne. Vous pouvez réduire le nombre d’allers-retours vers le serveur requis pour supprimer les anciennes entités en traitant par lots plusieurs demandes de suppression dans les TGE.  
 
@@ -806,14 +808,14 @@ Stockez des séries de données complètes dans une entité unique pour réduire
 #### <a name="context-and-problem"></a>Contexte et problème
 Il arrive qu'une application stocke une série de données qu'elle doit fréquemment récupérer en une seule fois : Par exemple, votre application peut enregistrer combien de messages de messagerie instantanée chaque employé envoie toutes les heures, puis utiliser ces informations pour tracer le nombre de messages envoyés par chaque utilisateur dans les 24 heures précédentes. Une conception peut consister à stocker 24 entités pour chaque employé :  
 
-![Graphique d’entité de statistiques de message][22]
+:::image type="content" source="./media/storage-table-design-guide/storage-table-design-IMAGE22.png" alt-text="Graphique d’entité de statistiques de message":::
 
 Grâce à cette conception, vous pouvez facilement rechercher et mettre à jour l'entité mise à jour pour chaque employé chaque fois que l'application doit mettre à jour la valeur de nombre de messages. Cependant, pour récupérer les informations pour tracer un graphique de l'activité des 24 heures précédentes, vous devez récupérer les 24 entités.  
 
 #### <a name="solution"></a>Solution
 Utilisez la conception suivante, avec une propriété distincte pour stocker le nombre de messages pour chaque heure :  
 
-![Graphique d’entité de statistiques de message avec propriétés distinctes][23]
+:::image type="content" source="./media/storage-table-design-guide/storage-table-design-IMAGE23.png" alt-text="Graphique montrant l’entité de statistiques de message avec des propriétés distinctes":::
 
 Grâce à cette conception, vous pouvez utiliser une opération de fusion pour mettre à jour le nombre de messages pour un employé pour une heure spécifique. À présent, vous pouvez récupérer toutes les informations dont vous avez besoin pour tracer le graphique à l’aide d’une requête pour une seule entité.  
 
@@ -842,7 +844,7 @@ Une entité individuelle ne peut pas avoir plus de 252 propriétés (à l’exc
 #### <a name="solution"></a>Solution
 À l’aide du stockage Table, vous pouvez stocker plusieurs entités pour représenter un objet métier volumineux unique ayant plus de 252 propriétés. Par exemple, si vous souhaitez stocker le nombre de messages instantanés envoyés par chaque employé durant les 365 derniers jours, vous pouvez utiliser la conception suivante qui utilise deux entités avec des schémas différents :  
 
-![Graphique d’entité de statistiques de message avec RowKey 01 et entité de statistiques de message avec RowKey 02][24]
+:::image type="content" source="./media/storage-table-design-guide/storage-table-design-IMAGE24.png" alt-text="Graphique montrant l’entité de statistiques de message avec RowKey 01 et l’entité de statistiques de message avec RowKey 02":::
 
 Si vous souhaitez apporter une modification qui nécessite la mise à jour des deux entités pour les garder mutuellement synchronisées, vous pouvez utiliser une EGT. Sinon, vous pouvez utiliser une opération de fusion pour mettre à jour le nombre de messages pour un jour spécifique. Pour récupérer toutes les données d’un employé, vous devez récupérer les deux entités. Vous pouvez effectuer cette opération avec deux requêtes efficaces qui utilisent à la fois une `PartitionKey` et une valeur `RowKey`.  
 
@@ -869,7 +871,7 @@ Une entité individuelle ne peut pas stocker plus de 1 Mo de données au total.
 #### <a name="solution"></a>Solution
 Si votre entité dépasse 1 Mo car une ou plusieurs propriétés contiennent une grande quantité de données, vous pouvez stocker des données dans le stockage Blob et stocker ensuite l’adresse de l’objet blob dans une propriété de l’entité. Par exemple, vous pouvez stocker la photo d’un employé dans le stockage Blob, et stocker un lien vers la photo dans la propriété `Photo` de votre entité d’employé :  
 
-![Graphique montrant l’entité Employee avec chaîne Photo qui pointe vers le stockage Blob][25]
+:::image type="content" source="./media/storage-table-design-guide/storage-table-design-IMAGE25.png" alt-text="Graphique montrant l’entité Employee avec chaîne Photo qui pointe vers le stockage Blob":::
 
 #### <a name="issues-and-considerations"></a>Problèmes et considérations
 Prenez en compte les points suivants lorsque vous choisissez comment implémenter ce modèle :  
@@ -894,12 +896,12 @@ Quand vous avez un volume élevé d’insertions, augmentez la scalabilité en r
 #### <a name="context-and-problem"></a>Contexte et problème
 L'ajout d'entité ou de suffixe d'entité à vos entités stockées pousse généralement l'application à ajouter de nouvelles entités à la première ou à la dernière partition d'une séquence. Dans ce cas, toutes les insertions à un moment donné se produisent dans la même partition, ce qui crée une zone sensible. Cela empêche le stockage Table d’effectuer des insertions d’équilibrage de charge sur plusieurs nœuds, et peut éventuellement obliger votre application à atteindre les objectifs de scalabilité pour la partition. Par exemple, considérez le cas d’une application qui journalise l’accès au réseau et aux ressources par les employés. Une structure d’entité telle que la suivante peut entraîner la saturation de la partition de l’heure actuelle, si le volume des transactions atteint l’objectif de scalabilité pour une partition individuelle :  
 
-![Graphique de l’entité Employee][26]
+:::image type="content" source="./media/storage-table-design-guide/storage-table-design-IMAGE26.png" alt-text="Graphique d’une structure d’entité qui peut entraîner la saturation de la partition de l’heure actuelle, si le volume des transactions atteint l’objectif de scalabilité pour une partition individuelle.":::
 
 #### <a name="solution"></a>Solution
 La structure d’entité alternative suivante permet d’éviter une zone sensible dans n’importe quelle partition particulière tandis que l’application journalise les événements :  
 
-![Graphique montrant l’entité Employee avec RowKey combinant l’année, le mois, le jour, l’heure et l’ID d’événement][27]
+:::image type="content" source="./media/storage-table-design-guide/storage-table-design-IMAGE27.png" alt-text="Graphique montrant l’entité Employee avec RowKey combinant l’année, le mois, le jour, l’heure et l’ID d’événement":::
 
 Dans cet exemple, notez que `PartitionKey` et `RowKey` sont toutes deux des clés composées. `PartitionKey` utilise les ID de service et d’employé pour distribuer la journalisation sur plusieurs partitions.  
 
@@ -925,13 +927,13 @@ En règle générale, vous devez utiliser le stockage Blob plutôt que le stocka
 #### <a name="context-and-problem"></a>Contexte et problème
 Un cas d’usage courant pour les données de journal consiste à récupérer une sélection d’entrées de journal pour une plage de dates/heures spécifique. Par exemple, vous souhaitez rechercher tous les messages d’erreur et messages critiques enregistrés par votre application entre 15:04 et 15:06 à une date spécifique. Vous ne souhaitez pas utiliser la date et l’heure du message de journal pour déterminer la partition sur laquelle vous enregistrez les entités de journal. Cela aboutit à une partition sensible, car à tout moment donné, toutes les entités du journal partagent la même valeur de `PartitionKey` (voir [Ajouter un anti-modèle ou un préfixe d’anti-modèle](#prepend-append-anti-pattern)). Par exemple, le schéma d’entité suivant d’un message de journal génère une partition sensible, car l’application écrit tous les messages de journal sur la partition pour la date et l’heure actuelles :  
 
-![Graphique d’entité de message de journal][28]
+:::image type="content" source="./media/storage-table-design-guide/storage-table-design-IMAGE28.png" alt-text="Graphique montrant un schéma d’entité pour un message de journalisation qui aboutit à une partition sensible.":::
 
 Dans cet exemple, la `RowKey` contient la date et l’heure du message de journal pour s’assurer que les messages du journal sont triés par ordre de date/heure. La `RowKey` comprend également un ID de message, pour le cas où plusieurs messages de journal partageraient les mêmes date et heure.  
 
 Une autre approche consiste à utiliser une valeur de `PartitionKey` qui garantit que l’application écrit des messages dans une plage de partitions. Par exemple, si la source du message de journal offre un moyen de distribuer les messages sur plusieurs partitions, vous pouvez utiliser le schéma d’entité suivant :  
 
-![Graphique d’entité de message de journal][29]
+:::image type="content" source="./media/storage-table-design-guide/storage-table-design-IMAGE29.png" alt-text="Graphique d’entité de message de journal":::
 
 Toutefois, le problème avec ce schéma est que, pour récupérer tous les messages de journal pour un intervalle de temps spécifique, vous devez rechercher sur chaque partition dans la table.
 
@@ -1024,7 +1026,7 @@ Une requête sur le stockage Table peut retourner un maximum de 1000 entités �
 - La requête ne s’est pas terminée dans les cinq secondes.
 - La requête franchit les limites de la partition. 
 
-Pour plus d’informations sur le fonctionnement des jetons de continuation, consultez [Délai de requête et pagination](https://msdn.microsoft.com/library/azure/dd135718.aspx).  
+Pour plus d’informations sur le fonctionnement des jetons de continuation, consultez [Délai de requête et pagination](/rest/api/storageservices/Query-Timeout-and-Pagination).  
 
 Si vous utilisez la bibliothèque de client de stockage, celle-ci peut gérer automatiquement les jetons de continuation pour vous lors du retour des entités à partir du stockage Table. Par exemple, le code C# suivant gère automatiquement les jetons de continuation si le stockage Table les retourne dans une réponse :  
 
@@ -1430,7 +1432,7 @@ Vous pouvez utiliser des signature d’accès partagé (SAS) pour permettre aux 
 * Vous pouvez décharger une partie du travail effectué par les rôles web et de travail dans la gestion de vos entités. Vous pouvez décharger ce travail à des appareils clients tels que les appareils mobiles et les ordinateurs des utilisateurs finaux.  
 * Vous pouvez affecter un ensemble d’autorisations contraintes et limitées dans le temps à un client (par exemple pour autoriser l’accès en lecture seule à des ressources spécifiques).  
 
-Pour plus d’informations sur l’utilisation de jetons SAS avec le stockage Table, consultez [Utilisation des signatures d’accès partagé (SAS)](../storage/common/storage-dotnet-shared-access-signature-part-1.md).  
+Pour plus d’informations sur l’utilisation de jetons SAS avec le stockage Table, consultez [Utilisation des signatures d’accès partagé (SAS)](../storage/common/storage-sas-overview.md).  
 
 Toutefois, vous devez toujours générer les jetons SAS qui accordent à une application cliente l’accès aux entités dans le stockage Table. Vous devez le faire dans un environnement qui dispose d’un accès sécurisé à vos clés de compte de stockage. En règle générale, vous utilisez un rôle web ou de travail pour générer les jetons SAP et les transmettre vers les applications clientes qui ont besoin d'accéder à vos entités. Comme il existe toujours une surcharge impliquée dans la génération et l'envoi de jetons SAP aux clients, vous devez envisager la meilleure méthode pour réduire cette surcharge, en particulier dans les scénarios à volumes élevés.  
 
@@ -1527,36 +1529,4 @@ Dans cet exemple asynchrone, vous pouvez voir les modifications suivantes par ra
 * La signature de méthode inclut désormais le modificateur `async` et retourne une instance `Task`.  
 * Au lieu d’appeler la méthode `Execute` pour mettre à jour l’entité, la méthode appelle maintenant la méthode `ExecuteAsync`. La méthode utilise le modificateur `await` pour récupérer les résultats de façon asynchrone.  
 
-L’application cliente peut appeler plusieurs méthodes asynchrones comme celle-ci, et chaque appel de méthode s’exécute sur un thread distinct.  
-
-
-[1]: ./media/storage-table-design-guide/storage-table-design-IMAGE01.png
-[2]: ./media/storage-table-design-guide/storage-table-design-IMAGE02.png
-[3]: ./media/storage-table-design-guide/storage-table-design-IMAGE03.png
-[4]: ./media/storage-table-design-guide/storage-table-design-IMAGE04.png
-[5]: ./media/storage-table-design-guide/storage-table-design-IMAGE05.png
-[6]: ./media/storage-table-design-guide/storage-table-design-IMAGE06.png
-[7]: ./media/storage-table-design-guide/storage-table-design-IMAGE07.png
-[8]: ./media/storage-table-design-guide/storage-table-design-IMAGE08.png
-[9]: ./media/storage-table-design-guide/storage-table-design-IMAGE09.png
-[10]: ./media/storage-table-design-guide/storage-table-design-IMAGE10.png
-[11]: ./media/storage-table-design-guide/storage-table-design-IMAGE11.png
-[12]: ./media/storage-table-design-guide/storage-table-design-IMAGE12.png
-[13]: ./media/storage-table-design-guide/storage-table-design-IMAGE13.png
-[14]: ./media/storage-table-design-guide/storage-table-design-IMAGE14.png
-[15]: ./media/storage-table-design-guide/storage-table-design-IMAGE15.png
-[16]: ./media/storage-table-design-guide/storage-table-design-IMAGE16.png
-[17]: ./media/storage-table-design-guide/storage-table-design-IMAGE17.png
-[18]: ./media/storage-table-design-guide/storage-table-design-IMAGE18.png
-[19]: ./media/storage-table-design-guide/storage-table-design-IMAGE19.png
-[20]: ./media/storage-table-design-guide/storage-table-design-IMAGE20.png
-[21]: ./media/storage-table-design-guide/storage-table-design-IMAGE21.png
-[22]: ./media/storage-table-design-guide/storage-table-design-IMAGE22.png
-[23]: ./media/storage-table-design-guide/storage-table-design-IMAGE23.png
-[24]: ./media/storage-table-design-guide/storage-table-design-IMAGE24.png
-[25]: ./media/storage-table-design-guide/storage-table-design-IMAGE25.png
-[26]: ./media/storage-table-design-guide/storage-table-design-IMAGE26.png
-[27]: ./media/storage-table-design-guide/storage-table-design-IMAGE27.png
-[28]: ./media/storage-table-design-guide/storage-table-design-IMAGE28.png
-[29]: ./media/storage-table-design-guide/storage-table-design-IMAGE29.png
-
+L’application cliente peut appeler plusieurs méthodes asynchrones comme celle-ci, et chaque appel de méthode s’exécute sur un thread distinct.

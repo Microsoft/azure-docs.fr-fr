@@ -3,19 +3,19 @@ title: Contenu généré par l’utilisateur pour l’API Détecteur d'anomalies
 titleSuffix: Azure Cognitive Services
 description: Recherchez du contenu proposé et découvrez comment les autres personnes approchent et utilisent l’API Détecteur d'anomalies.
 services: cognitive-services
-author: aahill
+author: mrbullwinkle
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: anomaly-detector
 ms.topic: conceptual
 ms.date: 06/17/2019
-ms.author: aahi
-ms.openlocfilehash: 81a2cb7ece775bfaffaf1b1932feb12b2da5f08f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: mbullwin
+ms.openlocfilehash: df526c23460e7146cd630afcb8b29a380c568250
+ms.sourcegitcommit: 2c586a0fbec6968205f3dc2af20e89e01f1b74b5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "74012025"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92017434"
 ---
 # <a name="featured-user-generated-content-for-the-anomaly-detector-api"></a>Contenu généré par l’utilisateur pour l’API Détecteur d'anomalies
 

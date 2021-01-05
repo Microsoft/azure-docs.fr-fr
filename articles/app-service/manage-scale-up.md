@@ -5,12 +5,12 @@ ms.assetid: f7091b25-b2b6-48da-8d4a-dcf9b7baccab
 ms.topic: article
 ms.date: 08/19/2019
 ms.custom: seodec18
-ms.openlocfilehash: dfd9297e80836978b8a185df3fc4659676383802
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 617a2717a1d1265d067cb3e1f26531d135d47941
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75659897"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91743911"
 ---
 # <a name="scale-up-an-app-in-azure-app-service"></a>Montez une application en puissance dans Azure App Service
 
@@ -18,7 +18,7 @@ Cet article décrit la mise à l’échelle d’une application web dans Azure A
 
 * [Montée en puissance](https://en.wikipedia.org/wiki/Scalability#Horizontal_and_vertical_scaling): bénéficiez d’un surcroît de capacité d’UC, de mémoire et d’espace disque, ainsi que de fonctionnalités supplémentaires, comme des machines virtuelles dédiées, des domaines et des certificats personnalisés, des emplacements intermédiaires, la mise à l’échelle automatique, et bien davantage. Pour monter en puissance en modifiant le niveau tarifaire du plan App Service auquel appartient votre application.
 * [Effectuer un scale-out](https://en.wikipedia.org/wiki/Scalability#Horizontal_and_vertical_scaling): augmentez le nombre d’instances de machine virtuelle qui exécutent votre application.
-  Vous pouvez effectuer le scale-out de 30 instances au maximum selon votre niveau tarifaire. La solution [Environnements App Service](environment/intro.md) au niveau **Isolé** augmente votre capacité de montée en puissance parallèle à 100 instances. Pour plus d’informations sur le scale-out, voir [Mise à l’échelle manuelle ou automatique du nombre d’instances](../monitoring-and-diagnostics/insights-how-to-scale.md). Vous y trouverez comment utiliser la mise à l’échelle automatique, qui permet de mettre à l’échelle le nombre d’instances automatiquement en fonction des planifications et des règles prédéfinies.
+  Vous pouvez effectuer le scale-out de 30 instances au maximum selon votre niveau tarifaire. La solution [Environnements App Service](environment/intro.md) au niveau **Isolé** augmente votre capacité de montée en puissance parallèle à 100 instances. Pour plus d’informations sur le scale-out, voir [Mise à l’échelle manuelle ou automatique du nombre d’instances](../azure-monitor/platform/autoscale-get-started.md). Vous y trouverez comment utiliser la mise à l’échelle automatique, qui permet de mettre à l’échelle le nombre d’instances automatiquement en fonction des planifications et des règles prédéfinies.
 
 Ces paramètres de mise à l’échelle sont applicables en quelques secondes et affectent toutes les applications de votre [plan App Service](../app-service/overview-hosting-plans.md).
 Ils ne nécessitent pas de modifier votre code ou de redéployer votre application.
@@ -36,7 +36,7 @@ Pour plus d’informations sur la tarification et les fonctionnalités de chaque
 ## <a name="scale-up-your-pricing-tier"></a>Montée en puissance de votre niveau de tarification
 
 > [!NOTE]
-> Pour savoir comment monter en puissance jusqu’au niveau **PremiumV2**, voir [Configurer le niveau PremiumV2 pour App Service](app-service-configure-premium-tier.md).
+> Pour savoir comment effectuer un scale-up jusqu’au niveau **PremiumV3**, consultez [Configurer le niveau PremiumV3 pour App Service](app-service-configure-premium-tier.md).
 >
 
 1. Dans votre navigateur, ouvrez le [portail Azure][portal].
@@ -62,7 +62,7 @@ Si votre application dépend d’autres services, comme Azure SQL Database ou St
    
     ![Accéder à la page du groupe de ressources pour activer la montée en puissance de votre application Azure](./media/web-sites-scale/ResourceGroup.png)
 
-    Pour monter en puissance la ressource associée, consultez la documentation relative à ce type de ressource précise. Par exemple, pour monter en puissance un SQL Database unique, consultez la page [Mettre à l'échelle des ressources de base de données uniques dans Azure SQL Database](../sql-database/sql-database-single-database-scale.md). Pour monter en puissance une ressource Azure Database pour MySQL, consultez la page [Mettre à l'échelle mes ressources MySQL](../mysql/concepts-pricing-tiers.md#scale-resources).
+    Pour monter en puissance la ressource associée, consultez la documentation relative à ce type de ressource précise. Par exemple, pour monter en puissance un SQL Database unique, consultez la page [Mettre à l'échelle des ressources de base de données uniques dans Azure SQL Database](../azure-sql/database/single-database-scale.md). Pour monter en puissance une ressource Azure Database pour MySQL, consultez la page [Mettre à l'échelle mes ressources MySQL](../mysql/concepts-pricing-tiers.md#scale-resources).
 
 <a name="OtherFeatures"></a>
 <a name="devfeatures"></a>
@@ -77,8 +77,8 @@ Pour un tableau des limites, quotas et contraintes du service, ainsi que des fon
 
 ## <a name="more-resources"></a>Plus de ressources
 
-[Mise à l’échelle manuelle ou automatique du nombre d’instances](../monitoring-and-diagnostics/insights-how-to-scale.md)  
-[Configurer le niveau PremiumV2 pour App Service](app-service-configure-premium-tier.md)
+[Mise à l’échelle manuelle ou automatique du nombre d’instances](../azure-monitor/platform/autoscale-get-started.md)  
+[Configurer le niveau PremiumV3 pour App Service](app-service-configure-premium-tier.md)
 
 <!-- LINKS -->
 [vmsizes]:https://azure.microsoft.com/pricing/details/app-service/

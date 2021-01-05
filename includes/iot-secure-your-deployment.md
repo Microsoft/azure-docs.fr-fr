@@ -9,11 +9,11 @@ ms.date: 08/07/2018
 ms.author: robinsh
 ms.custom: include file
 ms.openlocfilehash: 08cca67455df4b2d28bba0a7410fccc11446fcdc
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "76748860"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96010694"
 ---
 Cet article fournit davantage de détails sur la sécurisation de l’infrastructure Internet des objets (IoT) basée sur Azure IoT. Il est lié à la procédure au niveau de l’implémentation pour la configuration et le déploiement de chaque composant. Il fournit également des comparaisons et des choix entre les différentes méthodes.
 

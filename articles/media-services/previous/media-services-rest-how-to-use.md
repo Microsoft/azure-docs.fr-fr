@@ -15,19 +15,21 @@ ms.topic: article
 ms.date: 03/20/2019
 ms.author: juliako
 ms.reviewer: johndeu
-ms.openlocfilehash: 597839f633ed2b925b86c5f859a0fb2d3b64dd59
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 84e94a431efdc84ff6896de416bd222120784899
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76773656"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89264281"
 ---
-# <a name="media-services-operations-rest-api-overview"></a>Vue d’ensemble de l’API REST Media Services Operations 
+# <a name="media-services-operations-rest-api-overview"></a>Vue d’ensemble de l’API REST Media Services Operations
+
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
 
 > [!NOTE]
-> Aucune nouvelle fonctionnalité ni fonction n’est ajoutée à Media Services v2. <br/>Découvrez la dernière version, [Media Services v3](https://docs.microsoft.com/azure/media-services/latest/). Consultez aussi [Conseils de migration de v2 vers v3](../latest/migrate-from-v2-to-v3.md).
+> Aucune nouvelle fonctionnalité ni fonction n’est ajoutée à Media Services v2. <br/>Découvrez la dernière version, [Media Services v3](../latest/index.yml). Consultez aussi [Conseils de migration de v2 vers v3](../latest/migrate-from-v2-to-v3.md).
 
-L’API **REST Media Services Operations** est utilisée pour créer des tâches, des éléments multimédias, des canaux directs et d’autres ressources dans un compte Media Services. Pour plus d’informations, consultez [Référence de l’API REST Media Services Operations](https://docs.microsoft.com/rest/api/media/operations/azure-media-services-rest-api-reference).
+L’API **REST Media Services Operations** est utilisée pour créer des tâches, des éléments multimédias, des canaux directs et d’autres ressources dans un compte Media Services. Pour plus d’informations, consultez [Référence de l’API REST Media Services Operations](/rest/api/media/operations/azure-media-services-rest-api-reference).
 
 Media Services fournit une API REST qui accepte les deux formats JSON et XML atom+pub. L’API REST Media Services nécessite des en-têtes HTTP spécifiques, que chaque client doit envoyer lors de la connexion à Media Services, ainsi qu’un ensemble d’en-têtes facultatifs. Les sections suivantes décrivent les en-têtes et verbes HTTP que vous pouvez utiliser lors de la création de requêtes et de la réception des réponses à partir de Media Services.
 
@@ -39,21 +41,23 @@ Les considérations suivantes s'appliquent lors de l'utilisation de REST.
 
 * Lors de l'interrogation des entités, il existe une limite de 1 000 entités retournées simultanément car l'API REST v2 publique limite les résultats des requêtes à 1 000 résultats. Vous devez utiliser **Skip** et **Take** (.NET)/ **top** (REST) comme décrit dans [cet exemple .NET](media-services-dotnet-manage-entities.md#enumerating-through-large-collections-of-entities) et cet exemple [d’API REST](media-services-rest-manage-entities.md#enumerating-through-large-collections-of-entities). 
 * Lors de l’utilisation de JSON pour la spécification de l’utilisation du mot clé **__metadata** dans la requête (par exemple pour faire référence à un objet lié), vous DEVEZ définir l’en-tête **Accept** au [format JSON Verbose](https://www.odata.org/documentation/odata-version-3-0/json-verbose-format/) (consultez l’exemple suivant). OData ne comprend pas la propriété **metadata** dans la demande, sauf si vous la définissez sur « verbose ».  
-  
-        POST https://media.windows.net/API/Jobs HTTP/1.1
-        Content-Type: application/json;odata=verbose
-        Accept: application/json;odata=verbose
-        DataServiceVersion: 3.0
-        MaxDataServiceVersion: 3.0
-        x-ms-version: 2.19
-        Authorization: Bearer <ENCODED JWT TOKEN> 
-        Host: media.windows.net
-  
-        {
-            "Name" : "NewTestJob", 
-            "InputMediaAssets" : 
-                [{"__metadata" : {"uri" : "https://media.windows.net/api/Assets('nb%3Acid%3AUUID%3Aba5356eb-30ff-4dc6-9e5a-41e4223540e7')"}}]
-        . . . 
+
+    ```console
+    POST https://media.windows.net/API/Jobs HTTP/1.1
+    Content-Type: application/json;odata=verbose
+    Accept: application/json;odata=verbose
+    DataServiceVersion: 3.0
+    MaxDataServiceVersion: 3.0
+    x-ms-version: 2.19
+    Authorization: Bearer <ENCODED JWT TOKEN> 
+    Host: media.windows.net
+
+    {
+        "Name" : "NewTestJob", 
+        "InputMediaAssets" : 
+            [{"__metadata" : {"uri" : "https://media.windows.net/api/Assets('nb%3Acid%3AUUID%3Aba5356eb-30ff-4dc6-9e5a-41e4223540e7')"}}]
+    . . . 
+   ```
 
 ## <a name="standard-http-request-headers-supported-by-media-services"></a>En-têtes de requête HTTP standard pris en charge par Media Services
 Pour chaque appel dans Media Services, il existe un ensemble d’en-têtes requis, que vous devez inclure dans votre requête, et un ensemble d’en-têtes facultatifs que vous pouvez également inclure. Le tableau ci-dessous répertorie les en-têtes nécessaires :
@@ -128,4 +132,3 @@ Pour savoir comment utiliser l’authentification Azure AD avec l’API REST Med
 
 ## <a name="provide-feedback"></a>Fournir des commentaires
 [!INCLUDE [media-services-user-voice-include](../../../includes/media-services-user-voice-include.md)]
-

@@ -3,20 +3,20 @@ title: Planification et exécution avec Data Factory
 description: Apprenez à connaître les aspects de planification et d’exécution du modèle d’application Azure Data Factory.
 services: data-factory
 documentationcenter: ''
-author: djpmsft
-ms.author: daperlov
+author: dcstwh
+ms.author: weetok
 manager: jroth
 ms.reviewer: maghan
 ms.service: data-factory
 ms.workload: data-services
 ms.topic: conceptual
 ms.date: 01/10/2018
-ms.openlocfilehash: 15a2d6ae5d8b80468ffcdd00d60b1f36843ed677
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 60410eb2a9a5f18abf2daf87646943ffdc944402
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79236265"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96495172"
 ---
 # <a name="data-factory-scheduling-and-execution"></a>Planification et exécution avec Data Factory
 > [!NOTE]
@@ -59,7 +59,7 @@ La propriété **scheduler** (planificateur) d’une activité est facultative. 
 ## <a name="specify-schedule-for-a-dataset"></a>Spécifier la planification d’un jeu de données
 Une activité dans un pipeline Data Factory peut inclure zéro ou plusieurs **jeux de données** d’entrée et produire un ou plusieurs jeux de données de sortie. Pour une activité, vous pouvez spécifier la cadence à laquelle les données d’entrée sont disponibles ou les données de sortie sont produites à l’aide de la section **availability** (disponibilité) dans les définitions de jeu de données. 
 
-La **Fréquence** dans la section **availability** (disponibilité) spécifie l’unité de temps. Les valeurs autorisées pour la fréquence sont : minute, heure, jour, semaine et mois. La propriété **interval** (intervalle) dans la section availability (disponibilité) spécifie un multiplicateur de fréquence. Par exemple : si la fréquence est définie sur Jour et l’intervalle sur 1 pour un jeu de données de sortie, les données de sortie sont produites chaque jour. Si vous définissez la fréquence en minutes, nous vous recommandons de définir l’intervalle sur une valeur au moins égale à 15. 
+La **Fréquence** dans la section **availability** (disponibilité) spécifie l’unité de temps. Les valeurs de fréquence autorisées sont : Minute, Hour, Day, Week et Month. La propriété **interval** (intervalle) dans la section availability (disponibilité) spécifie un multiplicateur de fréquence. Par exemple : si la fréquence est définie sur Jour et l’intervalle sur 1 pour un jeu de données de sortie, les données de sortie sont produites chaque jour. Si vous définissez la fréquence en minutes, nous vous recommandons de définir l’intervalle sur une valeur au moins égale à 15. 
 
 Dans l’exemple suivant, les données d’entrée seront disponibles toutes les heures et les données de sortie sont produites toutes les heures (`"frequency": "Hour", "interval": 1`). 
 
@@ -172,7 +172,7 @@ Les tranches de données recueillies toutes les heures pour le jeu de données d
 
 Vous pouvez accéder à l’intervalle de temps associé à la tranche actuelle dans le jeu de données JSON à l’aide des variables [SliceStart](data-factory-functions-variables.md#data-factory-system-variables) et [SliceEnd](data-factory-functions-variables.md#data-factory-system-variables). De même, vous pouvez accéder à l’intervalle de temps associé à une fenêtre d’activité à l’aide des variables WindowStart et WindowEnd. La planification d’une activité doit correspondre à la planification du jeu de données de sortie pour l’activité. Par conséquent, les valeurs SliceStart et SliceEnd sont identiques aux valeurs WindowStart et WindowEnd, respectivement. Pour plus d’informations sur ces variables, consultez les articles [Variables système et fonctions Data Factory](data-factory-functions-variables.md#data-factory-system-variables).  
 
-Vous pouvez utiliser ces variables à différentes fins dans votre activité JSON. Par exemple, vous pouvez les utiliser pour sélectionner les données à partir des jeux de données d’entrée et de sortie représentant les données de série chronologique (par exemple : 8h à 9h). Cet exemple utilise également **WindowStart** et **WindowEnd** pour sélectionner les données pertinentes pour l’exécution d’une activité et les copier sur un objet Blob avec le bon **folderPath**. **folderPath** est paramétré pour avoir un dossier distinct pour chaque heure.  
+Vous pouvez utiliser ces variables à différentes fins dans votre activité JSON. Par exemple, vous pouvez les utiliser pour sélectionner les données à partir des jeux de données d’entrée et de sortie représentant les données de série chronologique (par exemple : entre 8h et 9h). Cet exemple utilise également **WindowStart** et **WindowEnd** pour sélectionner les données pertinentes pour l’exécution d’une activité et les copier sur un objet Blob avec le bon **folderPath**. **folderPath** est paramétré pour avoir un dossier distinct pour chaque heure.  
 
 Dans l’exemple précédent, la planification spécifiée pour les jeux de données d’entrée et de sortie est la même (toutes les heures). Si le jeu de données d’entrée de l’activité est disponible à une fréquence différente, par exemple toutes les 15 minutes, l’activité qui produit ce jeu de données de sortie est toujours exécutée une fois par heure car le jeu de données de sortie pilote la planification de l’activité. Pour plus d’informations, consultez [Modélisation des jeux de données avec des fréquences différentes](#model-datasets-with-different-frequencies).
 
@@ -184,11 +184,11 @@ Le tableau suivant décrit les propriétés que vous pouvez utiliser dans la sec
 
 | Propriété | Description | Obligatoire | Default |
 | --- | --- | --- | --- |
-| frequency |Spécifie l’unité de temps pour la production du segment du jeu de données.<br/><br/><b>Fréquence prise en charge</b>: minute, heure, jour, semaine, mois |Oui |N/D |
-| interval |Spécifie un multiplicateur de fréquence<br/><br/>«Frequency» et «interval» déterminent la fréquence à laquelle la tranche est produite.<br/><br/>Si vous voulez des tranches de jeu de données d’une heure, définissez <b>frequency</b> sur <b>Hour</b> et <b>interval</b> sur <b>1</b>.<br/><br/><b>Remarque :</b> si vous définissez la fréquence en minutes, nous vous recommandons de définir l’intervalle sur une valeur au moins égale à 15. |Oui |N/D |
+| frequency |Spécifie l’unité de temps pour la production du segment du jeu de données.<br/><br/><b>Fréquence prise en charge</b> : Minute, Hour, Day, Week, Month |Oui |N/D |
+| interval |Spécifie un multiplicateur de fréquence<br/><br/>«Frequency» et «interval» déterminent la fréquence à laquelle la tranche est produite.<br/><br/>Si vous voulez des tranches de jeu de données d’une heure, définissez <b>frequency</b> sur <b>Hour</b> et <b>interval</b> sur <b>1</b>.<br/><br/><b>Remarque</b> : Si vous définissez la fréquence en minutes, nous vous recommandons de définir l’intervalle sur une valeur au moins égale à 15. |Oui |N/D |
 | style |Spécifie si le segment doit être généré au début / à la fin de l’intervalle.<ul><li>StartOfInterval</li><li>EndOfInterval</li></ul><br/><br/>Si la fréquence est définie sur Month et le style défini sur EndOfInterval, le segment est généré le dernier jour du mois. Si le style est défini sur StartOfInterval, le segment est généré le premier jour du mois.<br/><br/>Si la fréquence est définie sur Day et le style défini sur EndOfInterval, le segment est généré la dernière heure du jour.<br/><br/>Si la fréquence est définie sur Hour et le style défini sur EndOfInterval, le segment est généré à la fin de l’heure. Par exemple, pour un segment de la période 13 h-14 h, le segment est généré à 14 h. |Non |EndOfInterval |
-| anchorDateTime |Définit la position absolue dans le temps utilisée par le planificateur pour calculer les limites de tranche de jeu de données. <br/><br/><b>Remarque :</b> si AnchorDateTime contient des éléments de date plus précis que la fréquence, ces éléments plus précis sont ignorés. <br/><br/>Par exemple, si <b>interval</b> est défini sur <b>hourly</b> (frequency : hour et interval : 1) et si <b>AnchorDateTime</b> contient <b>minutes et seconds</b>, les parties <b>minutes et seconds</b> de la valeur AnchorDateTime sont ignorées. |Non |01/01/0001 |
-| offset |Intervalle de temps marquant le déplacement du début et de la fin de toutes les tranches du jeu de données. <br/><br/><b>Remarque :</b> si anchorDateTime et offset sont spécifiés, un décalage combiné est obtenu. |Non |N/D |
+| anchorDateTime |Définit la position absolue dans le temps utilisée par le planificateur pour calculer les limites de tranche de jeu de données. <br/><br/><b>Remarque</b> : Si AnchorDateTime contient des éléments de date plus précis que la fréquence, ces éléments plus précis sont ignorés. <br/><br/>Par exemple, si <b>interval</b> est <b>hourly</b> (frequency: hour et interval: 1), et que <b>AnchorDateTime</b> contient <b>minutes and seconds</b>, les éléments <b>minutes et seconds</b> d’AnchorDateTime sont ignorés. |Non |01/01/0001 |
+| offset |Intervalle de temps marquant le déplacement du début et de la fin de toutes les tranches du jeu de données. <br/><br/><b>Remarque</b> : Si anchorDateTime et offset sont spécifiés, on obtient un décalage combiné. |Non |N/D |
 
 ### <a name="offset-example"></a>exemple offset
 Par défaut, les tranches quotidiennes (`"frequency": "Day", "interval": 1`) commencent à 0 h UTC (minuit). Si vous souhaitez que l’heure de début soit 6 h UTC, définissez le décalage comme indiqué dans l’extrait suivant : 
@@ -233,7 +233,7 @@ La section **policy** de la définition du jeu de données définit les critère
 | Nom de la stratégie | Description | Appliqué(e) à | Obligatoire | Default |
 | --- | --- | --- | --- | --- |
 | minimumSizeMB | Valide le fait que les données dans un **objet blob Azure** répondent aux exigences de taille minimale (en mégaoctets). |Objets blob Azure |Non |N/D |
-| minimumRows | Valide le fait que les données dans une **base de données Azure SQL** ou une **table Azure** contiennent le nombre minimal de lignes. |<ul><li>Azure SQL Database</li><li>table Azure</li></ul> |Non |N/D |
+| minimumRows | Valide le fait que les données dans **Azure SQL Database** ou une **table Azure** contiennent le nombre minimal de lignes. |<ul><li>Azure SQL Database</li><li>table Azure</li></ul> |Non |N/D |
 
 #### <a name="examples"></a>Exemples
 **minimumSizeMB :**
@@ -268,12 +268,12 @@ Les stratégies affectent le comportement d'exécution d'une activité, en parti
 
 | Propriété | Valeurs autorisées | Valeur par défaut | Description |
 | --- | --- | --- | --- |
-| accès concurrentiel |Integer <br/><br/>Valeur max : 10 |1 |Nombre d’exécutions simultanées de l’activité.<br/><br/>Il détermine le nombre d’exécutions en parallèle de l’activité qui peuvent se produire sur différents segments. Par exemple, si une activité doit passer par un grand ensemble de données disponibles, une valeur de concurrence plus élevée accélère le traitement des données. |
+| accès concurrentiel |Integer <br/><br/>Valeur maximale : 10 |1 |Nombre d’exécutions simultanées de l’activité.<br/><br/>Il détermine le nombre d’exécutions en parallèle de l’activité qui peuvent se produire sur différents segments. Par exemple, si une activité doit passer par un grand ensemble de données disponibles, une valeur de concurrence plus élevée accélère le traitement des données. |
 | executionPriorityOrder |NewestFirst<br/><br/>OldestFirst |OldestFirst |Détermine l’ordre des segments de données qui sont traités.<br/><br/>Par exemple, si vous avez 2 segments (l’un se produisant à 16 heures et l’autre à 17 heures) et que les deux sont en attente d’exécution. Si vous définissez executionPriorityOrder sur NewestFirst, le segment à 17 h est traité en premier. De même, si vous définissez executionPriorityOrder sur OldestFIrst, le segment à 16 h est traité en premier. |
 | retry |Integer<br/><br/>La valeur max peut être 10 |0 |Nombre de nouvelles tentatives avant que le traitement des données du segment ne soit marqué comme un échec. L'exécution de l'activité pour un segment de données est répétée jusqu'au nombre de tentatives spécifié. La nouvelle tentative est effectuée dès que possible après l'échec. |
-| délai d'expiration |TimeSpan |00:00:00 |Délai d'expiration de l'activité. Exemple : 00:10:00 (implique un délai d’expiration de 10 minutes)<br/><br/>Si une valeur n’est pas spécifiée ou est égale à 0, le délai d’expiration est infini.<br/><br/>Si le temps de traitement des données sur un segment dépasse la valeur du délai d’expiration, il est annulé et le système tente de réexécuter le traitement. Le nombre de nouvelles tentatives dépend de la propriété « retry ». Quand le délai d’expiration est atteint, l’état est défini sur TimedOut. |
-| delay |TimeSpan |00:00:00 |Spécifie le délai avant le début du traitement des données du segment.<br/><br/>L’exécution d’activité pour une tranche de données est démarrée une fois que le délai a dépassé l’heure d’exécution prévue.<br/><br/>Exemple : 00:10:00 (implique un délai de 10 minutes) |
-| longRetry |Integer<br/><br/>Valeur max : 10 |1 |Le nombre de nouvelles tentatives longues avant l’échec de l’exécution du segment.<br/><br/>Les tentatives longRetry sont espacées par longRetryInterval. Par conséquent, si vous devez spécifier un délai entre chaque tentative, utilisez longRetry. Si les valeurs Retry et longRetry sont spécifiées, chaque tentative longRetry inclut des tentatives Retry et le nombre maximal de tentatives sera égal à Retry * longRetry.<br/><br/>Par exemple, si nous avons les paramètres suivants dans la stratégie de l’activité :<br/>Retry : 3<br/>longRetry : 2<br/>longRetryInterval : 01:00:00<br/><br/>Supposons qu’il existe un seul segment à exécuter (dont l’état est Waiting) et que l’exécution de l’activité échoue à chaque fois. Au départ, il y aurait 3 tentatives consécutives d'exécution. Après chaque tentative, l’état du segment serait Retry. Une fois les 3 premières tentatives terminées, l’état du segment serait LongRetry.<br/><br/>Après une heure (c’est-à-dire la valeur de longRetryInterval), il y aurait un autre ensemble de 3 tentatives consécutives d’exécution. Ensuite, l'état du segment serait Failed et aucune autre tentative ne serait exécutée. Par conséquent, 6 tentatives ont été exécutées.<br/><br/>Si une exécution réussit, l’état de la tranche est Ready et aucune nouvelle tentative n’est tentée.<br/><br/>La valeur longRetry peut être utilisée dans les situations où les données dépendantes arrivent à des moments non déterministes ou lorsque l’environnement global où le traitement des données se produit est douteux. Dans ces cas, l’exécution de nouvelles tentatives l’une après l’autre peut ne pas être utile et procéder ainsi après un intervalle de temps précis produit la sortie désirée.<br/><br/>Mise en garde : ne définissez pas de valeurs élevées pour longRetry ou longRetryInterval. En règle générale, des valeurs plus élevées impliquent d’autres problèmes systémiques. |
+| délai d'expiration |TimeSpan |00:00:00 |Délai d'expiration de l'activité. Exemple : 00:10:00 (implique un délai d’expiration de 10 minutes)<br/><br/>Si une valeur n’est pas spécifiée ou est égale à 0, le délai d’expiration est infini.<br/><br/>Si le temps de traitement des données sur un segment dépasse la valeur du délai d’expiration, il est annulé et le système tente de réexécuter le traitement. Le nombre de nouvelles tentatives dépend de la propriété « retry ». Quand le délai d’expiration est atteint, l’état est défini sur TimedOut. |
+| delay |TimeSpan |00:00:00 |Spécifie le délai avant le début du traitement des données du segment.<br/><br/>L’exécution d’activité pour une tranche de données est démarrée une fois que le délai a dépassé l’heure d’exécution prévue.<br/><br/>Exemple : 00:10:00 (implique un délai de 10 minutes) |
+| longRetry |Integer<br/><br/>Valeur maximale : 10 |1 |Le nombre de nouvelles tentatives longues avant l’échec de l’exécution du segment.<br/><br/>Les tentatives longRetry sont espacées par longRetryInterval. Par conséquent, si vous devez spécifier un délai entre chaque tentative, utilisez longRetry. Si les valeurs Retry et longRetry sont spécifiées, chaque tentative longRetry inclut des tentatives Retry et le nombre maximal de tentatives sera égal à Retry * longRetry.<br/><br/>Par exemple, si nous avons les paramètres suivants dans la stratégie de l’activité :<br/>Retry : 3<br/>longRetry : 2<br/>longRetryInterval : 01:00:00<br/><br/>Supposons qu’il existe un seul segment à exécuter (dont l’état est Waiting) et que l’exécution de l’activité échoue à chaque fois. Au départ, il y aurait 3 tentatives consécutives d'exécution. Après chaque tentative, l’état du segment serait Retry. Une fois les 3 premières tentatives terminées, l’état du segment serait LongRetry.<br/><br/>Après une heure (c’est-à-dire la valeur de longRetryInterval), il y aurait un autre ensemble de 3 tentatives consécutives d’exécution. Ensuite, l'état du segment serait Failed et aucune autre tentative ne serait exécutée. Par conséquent, 6 tentatives ont été exécutées.<br/><br/>Si une exécution réussit, l’état de la tranche est Ready et aucune nouvelle tentative n’est tentée.<br/><br/>La valeur longRetry peut être utilisée dans les situations où les données dépendantes arrivent à des moments non déterministes ou lorsque l’environnement global où le traitement des données se produit est douteux. Dans ces cas, l’exécution de nouvelles tentatives l’une après l’autre peut ne pas être utile et procéder ainsi après un intervalle de temps précis produit la sortie désirée.<br/><br/>Mise en garde : ne définissez pas de valeurs élevées pour longRetry ou longRetryInterval. En règle générale, des valeurs plus élevées impliquent d’autres problèmes systémiques. |
 | longRetryInterval |TimeSpan |00:00:00 |Le délai entre les nouvelles tentatives longues |
 
 Pour plus d’informations, consultez l’article [Pipelines](data-factory-create-pipelines.md). 
@@ -323,14 +323,14 @@ Consultez la section Copier de manière séquentielle de l'annexe pour obtenir u
 ## <a name="model-datasets-with-different-frequencies"></a>Modélisation des jeux de données avec des fréquences différentes
 Dans les exemples, les fréquences de planification des jeux de données d’entrée et de sortie et l’intervalle d’activité sont les mêmes. Certains scénarios exigent que la fréquence de génération d’une sortie à soit différente de celles d’une ou de plusieurs entrées. Data factory prend en charge la modélisation de ces scénarios.
 
-### <a name="sample-1-produce-a-daily-output-report-for-input-data-that-is-available-every-hour"></a>Exemple 1 : production d’un rapport de sortie quotidien pour les données d’entrée est disponible toutes les heures
+### <a name="sample-1-produce-a-daily-output-report-for-input-data-that-is-available-every-hour"></a>Exemple 1 : production d’un rapport de sortie quotidien pour des données d’entrée disponibles toutes les heures
 Imaginez un scénario dans lequel nous avons entré des données de mesure à partir de capteurs disponibles toutes les heures dans un stockage Azure Blob. Vous voulez générer un rapport d’agrégation quotidien avec des statistiques, comme les valeurs moyenne, maximum et minimum pour la journée avec une [Activité Hive Data Factory](data-factory-hive-activity.md).
 
 Voici ce que vous pouvez modéliser ce scénario avec data factory :
 
 **Jeu de données d'entrée**
 
-Les fichiers d’entrée des heures sont supprimés dans le dossier pour le jour donné. La disponibilité de l’entrée est définie sur **Toutes les heures** (fréquence : Heure, intervalle: 1).
+Les fichiers d’entrée des heures sont supprimés dans le dossier pour le jour donné. La disponibilité de l’entrée est définie sur **Hour** (frequency: Hour, interval: 1).
 
 ```json
 {
@@ -359,7 +359,7 @@ Les fichiers d’entrée des heures sont supprimés dans le dossier pour le jour
 ```
 **Jeu de données de sortie**
 
-Un fichier de sortie est créé chaque jour dans le dossier pour la journée. Disponibilité de sortie a pour valeur **Quotidien** (fréquence : jour et intervalle : 1).
+Un fichier de sortie est créé chaque jour dans le dossier pour la journée. La disponibilité de sortie est définie sur **Day** (frequency: Day et interval: 1).
 
 ```json
 {
@@ -443,14 +443,14 @@ Le diagramme suivant illustre le scénario du point de vue de la dépendance des
 
 La tranche de sortie dépend des 24 tranches horaires depuis l’ensemble de données en entrée. Data Factory calcule automatiquement ces dépendances en déterminant les tranches de données d’entrée qui tombent dans la même période que la tranche de données à générer. Si une des 24 tranches d’entrée n’est pas disponible, Data Factory attend que la tranche d’entrée soit prête avant de lancer l’exécution d’activité quotidienne.
 
-### <a name="sample-2-specify-dependency-with-expressions-and-data-factory-functions"></a>Exemple 2 : spécifier les dépendances avec des expressions et des fonctions Data Factory
+### <a name="sample-2-specify-dependency-with-expressions-and-data-factory-functions"></a>Exemple 2 : spécifier les dépendances avec des expressions et des fonctions Data Factory
 Prenons en compte un autre scénario. Supposez que vous avez une activité Hive qui traite deux jeux de données d’entrée. Un d’eux a de nouvelles données tous les jours, mais l’autre obtient de nouvelles données toutes les semaines. Supposons que vous vouliez faire la jonction entre les deux entrées et générer une sortie quotidiennement.
 
 L’approche simple consistant pour Data Factory à déterminer des tranches d’entrée appropriées à traiter en alignant la période de temps de la tranche de données en sortie ne fonctionne plus.
 
 Vous devez spécifier (pour chaque exécution d’activité que Data Factory doit utiliser) les tranches de données de la semaine précédente pour les jeux de données d’entrée. Vous utilisez les fonctions Azure Data Factory comme indiqué dans l’extrait de code suivant pour implémenter ce comportement.
 
-**Entrée1 : Azure Blob**
+**Entrée1 : objet blob Azure**
 
 La première entrée est l’objet Azure Blob mis à jour quotidiennement.
 
@@ -480,7 +480,7 @@ La première entrée est l’objet Azure Blob mis à jour quotidiennement.
 }
 ```
 
-**Entrée2 : objet Blob Azure**
+**Entrée2 : objet blob Azure**
 
 Entrée2 est l’objet Azure Blob mis à jour chaque semaine.
 
@@ -510,9 +510,9 @@ Entrée2 est l’objet Azure Blob mis à jour chaque semaine.
 }
 ```
 
-**Sortie : objet Blob Azure**
+**Sortie : objet blob Azure**
 
-Un fichier de sortie est créé chaque jour dans le dossier pour la journée. La disponibilité de sortie est définie sur **Quotidiennement** (fréquence : jour et intervalle : 1).
+Un fichier de sortie est créé chaque jour dans le dossier pour la journée. La disponibilité de sortie est définie sur **day** (frequency: Day, interval: 1).
 
 ```json
 {
@@ -604,11 +604,11 @@ Il est possible d’exécuter plusieurs opérations de copie l’une après l’
 
 Activitédecopie1
 
-Jeu de données d'entrée. Sortie : Dataset2.
+Entrée : JeudeDonnées. Sortie : JeudeDonnées2.
 
 Activitédecopie2
 
-Entrée : Jeudedonnées2.  Sortie : Jeudedonnées3.
+Entrée : JeudeDonnées2.  Sortie : JeudeDonnées3.
 
 ActivitédeCopie2 s’exécute uniquement si ActivitédeCopie1 s’est exécutée avec succès et que JeudeDonnées2 est disponible.
 
@@ -699,11 +699,11 @@ Dans l’exemple, ActivitédeCopie2 peut avoir une entrée différente, par exem
 
 Activitédecopie1
 
-Entrée : Jeudedonnées1. Sortie : Dataset2.
+Entrée : JeudeDonnées1. Sortie : JeudeDonnées2.
 
 Activitédecopie2
 
-Entrées : Jeudedonnées3, Jeudedonnées2. Sortie : Jeudedonnées4.
+Entrées : JeudeDonnées3, JeudeDonnées2. Sortie : Jeudedonnées4.
 
 ```json
 {

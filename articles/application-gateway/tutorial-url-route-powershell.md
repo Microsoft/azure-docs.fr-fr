@@ -4,29 +4,28 @@ description: Découvrez comment acheminer le trafic web selon l’URL vers des p
 services: application-gateway
 author: vhorne
 ms.service: application-gateway
-ms.topic: article
+ms.topic: how-to
 ms.date: 07/31/2019
 ms.author: victorh
 ms.custom: mvc
-ms.openlocfilehash: 8ca5c411db5644182f7e87f1ee1c63f3cbc4d2e9
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 2a73208ef7014c1f21c78485fc613a26ce3bfc76
+ms.sourcegitcommit: 0ce1ccdb34ad60321a647c691b0cff3b9d7a39c8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "73200405"
+ms.lasthandoff: 11/05/2020
+ms.locfileid: "93397149"
 ---
 # <a name="route-web-traffic-based-on-the-url-using-azure-powershell"></a>Acheminer le trafic web selon l’URL à l’aide d’Azure PowerShell
 
-Vous pouvez utiliser Azure PowerShell pour configurer l’acheminement du trafic web vers des pools de serveurs évolutifs spécifiques selon l’URL utilisée pour accéder à votre application. Dans cet article, vous créez une [Azure Application Gateway](application-gateway-introduction.md) avec trois pools backend à l’aide de [groupes de machines virtuelles identiques](../virtual-machine-scale-sets/virtual-machine-scale-sets-overview.md). Chaque pool backend a un usage spécifique comme les données courantes, les images et la vidéo.  Avec l’acheminement du trafic vers des pools distincts, vos clients ont la garantie d’obtenir les informations dont ils ont besoin lorsqu’ils en ont besoin.
+Vous pouvez utiliser Azure PowerShell pour configurer l’acheminement du trafic web vers des pools de serveurs évolutifs spécifiques selon l’URL utilisée pour accéder à votre application. Dans cet article, vous créez une [Azure Application Gateway](./overview.md) avec trois pools backend à l’aide de [groupes de machines virtuelles identiques](../virtual-machine-scale-sets/overview.md). Chaque pool backend a un usage spécifique comme les données courantes, les images et la vidéo.  Avec l’acheminement du trafic vers des pools distincts, vos clients ont la garantie d’obtenir les informations dont ils ont besoin lorsqu’ils en ont besoin.
 
-Pour activer l’acheminement du trafic, vous créez des [règles d’acheminement](application-gateway-url-route-overview.md) assignées à des écouteurs qui écoutent des ports spécifiques pour veiller à ce que le trafic web arrive sur les serveurs appropriés dans les pools.
+Pour activer l’acheminement du trafic, vous créez des [règles d’acheminement](./url-route-overview.md) assignées à des écouteurs qui écoutent des ports spécifiques pour veiller à ce que le trafic web arrive sur les serveurs appropriés dans les pools.
 
 Dans cet article, vous apprendrez comment :
 
-> [!div class="checklist"]
-> * Configurer le réseau
-> * Créer des écouteurs, un mappage de chemins d’URL et des règles
-> * Créer des pools backend scalables
+* Configurer le réseau
+* Créer des écouteurs, un mappage de chemins d’URL et des règles
+* Créer des pools backend scalables
 
 ![Exemple d’acheminement d’URL](./media/tutorial-url-route-powershell/scenario.png)
 
@@ -85,7 +84,7 @@ $pip = New-AzPublicIpAddress `
 
 Dans cette section, vous créez des ressources qui prennent en charge la passerelle d’application avant de créer cette dernière. Les ressources que vous créez sont les suivantes :
 
-- *Configurations IP et port frontend* : associe le sous-réseau que vous avez créé précédemment pour la passerelle d’application et assigne un port à utiliser pour y accéder.
+- *Configurations IP et port frontend*  : associe le sous-réseau que vous avez créé précédemment pour la passerelle d’application et assigne un port à utiliser pour y accéder.
 - *Pool par défaut* : toutes les passerelles d’application doivent avoir au moins un pool principal de serveurs.
 - *Écouteur et règle par défaut* : l’écouteur par défaut écoute le trafic sur le port assigné et la règle par défaut envoie le trafic au pool par défaut.
 
@@ -213,7 +212,7 @@ La mise à jour de la passerelle d’application peut également prendre jusqu�
 
 ### <a name="add-backend-listener"></a>Ajouter un écouteur principal
 
-Ajoutez l’écouteur back-end nommé *backendListener*, nécessaire pour router le trafic à l’aide d’[Add-AzApplicationGatewayHttpListener](/powershell/module/az.network/add-azapplicationgatewayhttplistener).
+Ajoutez l’écouteur back-end nommé *backendListener* , nécessaire pour router le trafic à l’aide d’ [Add-AzApplicationGatewayHttpListener](/powershell/module/az.network/add-azapplicationgatewayhttplistener).
 
 ```azurepowershell-interactive
 $appgw = Get-AzApplicationGateway `
@@ -313,7 +312,7 @@ Set-AzApplicationGateway -ApplicationGateway $appgw
 
 ## <a name="create-virtual-machine-scale-sets"></a>Créer des groupes de machines virtuelles identiques
 
-Cet exemple crée trois groupes de machines virtuelles identiques prenant en charge les trois pools principaux qui ont été créés. Ils sont nommés *myvmss1*, *myvmss2* et *myvmss3*. Vous assignez le groupe identique au pool principal lorsque vous configurez les paramètres IP.
+Cet exemple crée trois groupes de machines virtuelles identiques prenant en charge les trois pools principaux qui ont été créés. Ils sont nommés *myvmss1* , *myvmss2* et *myvmss3*. Vous assignez le groupe identique au pool principal lorsque vous configurez les paramètres IP.
 
 ```azurepowershell-interactive
 $vnet = Get-AzVirtualNetwork `

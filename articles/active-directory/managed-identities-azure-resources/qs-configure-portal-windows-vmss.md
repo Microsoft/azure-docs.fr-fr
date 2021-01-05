@@ -1,28 +1,28 @@
 ---
-title: Configurer des identités managées sur des Virtual Machine Scale Sets Azure – Azure AD
-description: Instructions détaillées pour configurer des identités managées pour ressources Azure sur un groupe de machines virtuelles identiques en utilisant le portail Azure.
+title: Configurer des identités managées sur un groupe de machines virtuelles identiques – Azure AD
+description: Instructions détaillées pour configurer des identités managées pour des ressources Azure sur un groupe de machines virtuelles identiques en utilisant le portail Azure.
 services: active-directory
 documentationcenter: ''
-author: MarkusVi
+author: barclayn
 manager: daveba
 editor: ''
 ms.service: active-directory
 ms.subservice: msi
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: quickstart
 ms.tgt_pltfrm: na
 ms.workload: identity
-ms.date: 02/20/2018
-ms.author: markvi
+ms.date: 12/15/2020
+ms.author: barclayn
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 32d8944b55794412eb322697469933030e2fbb56
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 73c2f4167d6ce5465a879f6b2ef7e96d91065c4d
+ms.sourcegitcommit: d2d1c90ec5218b93abb80b8f3ed49dcf4327f7f4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74184032"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97590917"
 ---
-# <a name="configure-managed-identities-for-azure-resources-on-a-virtual-machine-scale-set-using-the-azure-portal"></a>Configurer des identités managées pour ressources Azure sur un groupe de machines virtuelles identiques en utilisant le portail Azure
+# <a name="configure-managed-identities-for-azure-resources-on-a-virtual-machine-scale-set-vmss-using-the-azure-portal"></a>Configurer des identités managées pour ressources Azure sur un groupe de machines virtuelles identiques (VMSS) en utilisant le portail Azure
 
 [!INCLUDE [preview-notice](../../../includes/active-directory-msi-preview-notice.md)]
 
@@ -32,12 +32,12 @@ Cet article explique comment effectuer les opérations d’identités managées 
 
 - Si vous n’êtes pas familiarisé avec les identités managées pour ressources Azure, consultez la [section Vue d’ensemble](overview.md).
 - Si vous n’avez pas encore de compte Azure, [inscrivez-vous à un essai gratuit](https://azure.microsoft.com/free/) avant de continuer.
-- Pour effectuer les opérations de gestion dans cet article, votre compte doit disposer de ces affectations de contrôle d'accès basé sur les rôles Azure :
+- Pour effectuer les opérations de gestion dans cet article, votre compte doit disposer des attributions des rôles Azure suivants :
 
     > [!NOTE]
     > Aucune attribution de rôle d'annuaire Azure AD supplémentaire n’est requise.
 
-    - [Contributeur de machine virtuelle](/azure/role-based-access-control/built-in-roles#virtual-machine-contributor) pour activer et supprimer l’identité managée affectée par le système à partir d’un groupe de machines virtuelles identiques.
+    - [Contributeur de machine virtuelle](../../role-based-access-control/built-in-roles.md#virtual-machine-contributor) pour activer et supprimer l’identité managée affectée par le système à partir d’un groupe de machines virtuelles identiques.
 
 ## <a name="system-assigned-managed-identity"></a>Identité managée affectée par le système
 
@@ -59,7 +59,7 @@ Pour activer l’identité managée affectée par le système sur un groupe de m
 
 3. Sous **Attribuée par le système**, **État**, sélectionnez **Activé** puis cliquez sur **Enregistrer** :
 
-   ![Capture d’écran de la page Configuration](./media/msi-qs-configure-portal-windows-vmss/create-windows-vmss-portal-configuration-blade.png) 
+   ![La capture d’écran montre la page « Identité (préversion) » avec l’option « Affectée par le système » sélectionnée, l’état « Activé » et le bouton « Enregistrer » mis en évidence.](./media/msi-qs-configure-portal-windows-vmss/create-windows-vmss-portal-configuration-blade.png) 
 
 ### <a name="remove-system-assigned-managed-identity-from-a-virtual-machine-scale-set"></a>Supprimer une identité managée affectée par le système d’un groupe de machines virtuelles identiques
 
@@ -88,7 +88,7 @@ Actuellement, le portail Azure ne prend pas en charge l’attribution d’une id
 1. Connectez-vous au [portail Azure](https://portal.azure.com) à l’aide d’un compte associé à l’abonnement Azure qui contient le groupe de machines virtuelles identiques.
 2. Accédez au groupe de machines virtuelles identiques souhaité, cliquez sur **Identité**, **Attribuée par l’utilisateur**, puis sur **\+Ajouter**.
 
-   ![Ajouter une identité affectée par l’utilisateur à un groupe de machines virtuelles identiques](./media/msi-qs-configure-portal-windows-vm/add-user-assigned-identity-vmss-screenshot1.png)
+   ![Capture d’écran montrant la page « Identité » avec l’option « Attribuée par l’utilisateur » sélectionnée et le bouton « Ajouter » mis en évidence.](./media/msi-qs-configure-portal-windows-vm/add-user-assigned-identity-vmss-screenshot1.png)
 
 3. Cliquez sur l’identité affectée par l’utilisateur que vous souhaitez ajouter au groupe de machines virtuelles identiques, puis cliquez sur **Ajouter**.
    
@@ -105,5 +105,3 @@ Actuellement, le portail Azure ne prend pas en charge l’attribution d’une id
 ## <a name="next-steps"></a>Étapes suivantes
 
 - Dans le portail Azure, accordez à l’identité managée d’un groupe de machines virtuelles identiques Azure l’[accès à une autre ressource Azure](howto-assign-access-portal.md).
-
-

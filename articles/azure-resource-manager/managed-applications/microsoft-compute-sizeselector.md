@@ -5,12 +5,12 @@ author: tfitzmac
 ms.topic: conceptual
 ms.date: 06/27/2018
 ms.author: tomfitz
-ms.openlocfilehash: d98ddbb09ac4f1f933237b3288db7a0cb78380b5
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: d6408f8c08694ae681d302ae35f5778894091733
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75649685"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87063624"
 ---
 # <a name="microsoftcomputesizeselector-ui-element"></a>Élément d’interface utilisateur Microsoft.Compute.SizeSelector
 
@@ -20,11 +20,11 @@ Contrôle permettant de sélectionner une taille pour une ou plusieurs instances
 
 L’utilisateur voit un sélecteur comportant des valeurs par défaut issues de la définition d’élément.
 
-![Microsoft.Compute.SizeSelector](./media/managed-application-elements/microsoft.compute.sizeselector.png)
+![Microsoft.Compute.SizeSelector](./media/managed-application-elements/microsoft-compute-sizeselector.png)
 
 Après avoir sélectionné le contrôle, l’utilisateur voit une vue développée des tailles disponibles.
 
-![Microsoft.Compute.SizeSelector développé](./media/managed-application-elements/microsoft.compute.sizeselector-expanded.png)
+![Microsoft.Compute.SizeSelector développé](./media/managed-application-elements/microsoft-compute-sizeselector-expanded.png)
 
 ## <a name="schema"></a>schéma
 

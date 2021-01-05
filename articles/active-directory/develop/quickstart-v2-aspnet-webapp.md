@@ -1,6 +1,7 @@
 ---
-title: Ajouter la connexion à la plateforme d’identités Microsoft dans une application web ASP.NET | Azure
-description: Apprenez à implémenter la connexion Microsoft dans une application web ASP.NET à l’aide d’OpenID Connect.
+title: 'Démarrage rapide : Ajouter la connexion avec Microsoft à une application web ASP.NET | Azure'
+titleSuffix: Microsoft identity platform
+description: Dans ce guide de démarrage rapide, apprenez à implémenter la connexion Microsoft dans une application web ASP.NET à l’aide d’OpenID Connect.
 services: active-directory
 author: jmprieur
 manager: CelesteDG
@@ -8,19 +9,28 @@ ms.service: active-directory
 ms.subservice: develop
 ms.topic: quickstart
 ms.workload: identity
-ms.date: 04/11/2019
+ms.date: 09/25/2020
 ms.author: jmprieur
-ms.custom: aaddev, identityplatformtop40, scenarios:getting-started, languages:ASP.NET
-ms.openlocfilehash: 2e225d4d37f6bdb3d50b32f6464456e4f7fa0036
-ms.sourcegitcommit: c535228f0b77eb7592697556b23c4e436ec29f96
+ms.custom: devx-track-csharp, aaddev, identityplatformtop40, scenarios:getting-started, languages:ASP.NET, contperf-fy21q1
+ms.openlocfilehash: 658069f8c8007be2c1b424d8ccff687b986ac237
+ms.sourcegitcommit: 3ea45bbda81be0a869274353e7f6a99e4b83afe2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/06/2020
-ms.locfileid: "82853963"
+ms.lasthandoff: 12/10/2020
+ms.locfileid: "97030931"
 ---
 # <a name="quickstart-add-microsoft-identity-platform-sign-in-to-an-aspnet-web-app"></a>Démarrage rapide : Ajouter la connexion à la Plateforme d'identités Microsoft dans une application web ASP.NET
-Dans ce guide de démarrage rapide, vous utilisez un exemple de code pour découvrir comment une application web ASP.NET peut connecter des comptes personnels (hotmail.com, outlook.com, etc.) et des comptes professionnels et scolaires à partir de n’importe quelle instance Azure Active Directory (Azure AD).  (Consultez [Fonctionnement de l’exemple](#how-the-sample-works) pour une illustration.)
+
+Dans ce guide de démarrage rapide, vous téléchargez et exécutez un exemple de code qui montre comment une application web ASP.NET peut connecter des utilisateurs à partir de n’importe quelle organisation Azure Active Directory (Azure AD). 
+
+Consultez [Fonctionnement de l’exemple](#how-the-sample-works) pour obtenir une illustration.
 > [!div renderon="docs"]
+> ## <a name="prerequisites"></a>Prérequis
+>
+> * Compte Azure avec un abonnement actif. [Créez un compte gratuitement](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
+> * [Visual Studio 2019](https://visualstudio.microsoft.com/vs/)
+> * [.NET Framework 4.7.2+](https://dotnet.microsoft.com/download/visual-studio-sdks)
+>
 > ## <a name="register-and-download-your-quickstart-app"></a>Inscrire et télécharger votre application de démarrage rapide
 > Vous disposez de deux options pour démarrer votre application de démarrage rapide :
 > * [Express] [Option 1 : Inscrire et configurer automatiquement votre application, puis télécharger votre exemple de code](#option-1-register-and-auto-configure-your-app-and-then-download-your-code-sample)
@@ -29,7 +39,7 @@ Dans ce guide de démarrage rapide, vous utilisez un exemple de code pour décou
 > ### <a name="option-1-register-and-auto-configure-your-app-and-then-download-your-code-sample"></a>Option 1 : Inscrire et configurer automatiquement votre application, puis télécharger votre exemple de code
 >
 > 1. Accédez au nouveau volet [Portail Azure - Inscriptions d’applications](https://portal.azure.com/#blade/Microsoft_AAD_RegisteredApps/applicationsListBlade/quickStartType/AspNetWebAppQuickstartPage/sourceType/docs).
-> 1. Saisissez un nom pour votre application et cliquez sur **Inscrire**.
+> 1. Entrez un nom pour votre application, puis sélectionnez **Inscrire**.
 > 1. Suivez les instructions pour télécharger et configurer automatiquement votre nouvelle application pour vous en un seul clic.
 >
 > ### <a name="option-2-register-and-manually-configure-your-application-and-code-sample"></a>Option n°2 : Inscrire et configurer manuellement vos application et exemple de code
@@ -37,16 +47,15 @@ Dans ce guide de démarrage rapide, vous utilisez un exemple de code pour décou
 > #### <a name="step-1-register-your-application"></a>Étape 1 : Inscrivez votre application
 > Pour inscrire votre application et ajouter manuellement les informations d’inscription de l’application à votre solution, procédez comme suit :
 >
-> 1. Connectez-vous au [portail Azure](https://portal.azure.com) avec un compte professionnel ou scolaire ou avec un compte personnel Microsoft.
-> 1. Si votre compte vous propose un accès à plusieurs locataires, sélectionnez votre compte en haut à droite et définissez votre session de portail sur le locataire Azure AD souhaité.
-> 1. Accédez à la page [Inscriptions des applications](https://go.microsoft.com/fwlink/?linkid=2083908) de la plateforme d’identité Microsoft pour les développeurs.
-> 1. Sélectionnez **Nouvelle inscription**.
-> 1. Lorsque la page **Inscrire une application** s’affiche, saisissez les informations d’inscription de votre application :
->      - Dans la section **Nom**, saisissez un nom d’application cohérent qui s’affichera pour les utilisateurs de l’application, par exemple `ASPNET-Quickstart`.
->      - Ajoutez `https://localhost:44368/` dans **URI de redirection**, puis cliquez sur **Inscrire**.
->      - Dans le volet de navigation gauche, dans la section Gérer, sélectionnez **Authentification**.
->          - Dans la sous-section **Octroi implicite**, sélectionnez **Jetons d’ID**.
->          - Puis, sélectionnez **Enregistrer**.
+> 1. Connectez-vous au [portail Azure](https://portal.azure.com).
+> 1. Si vous avez accès à plusieurs locataires, utilisez le filtre **Répertoire + abonnement** :::image type="icon" source="./media/common/portal-directory-subscription-filter.png" border="false"::: dans le menu du haut pour sélectionner le locataire dans lequel vous voulez inscrire une application.
+> 1. Recherchez et sélectionnez **Azure Active Directory**.
+> 1. Sous **Gérer**, sélectionnez **Inscriptions d’applications** > **Nouvelle inscription**.
+> 1. Entrez un **nom** pour votre application (par exemple, `ASPNET-Quickstart`). Les utilisateurs de votre application peuvent voir ce nom, et vous pouvez le changer ultérieurement.
+> 1. Ajoutez `https://localhost:44368/` dans **URI de redirection**, puis sélectionnez **Inscrire**.
+> 1. Dans le volet de navigation gauche, dans la section Gérer, sélectionnez **Authentification**.
+> 1. Dans la sous-section **Octroi implicite**, sélectionnez **Jetons d’ID**.
+> 1. Sélectionnez **Enregistrer**.
 
 > [!div class="sxs-lookup" renderon="portal"]
 > #### <a name="step-1-configure-your-application-in-azure-portal"></a>Étape 1 : Configurer votre application dans le portail Azure
@@ -62,14 +71,14 @@ Dans ce guide de démarrage rapide, vous utilisez un exemple de code pour décou
 > [!div renderon="docs"]
 > [Télécharger la solution Visual Studio 2019](https://github.com/AzureADQuickStarts/AppModelv2-WebApp-OpenIDConnect-DotNet/archive/master.zip)
 
-> [!div renderon="portal"]
+> [!div renderon="portal" class="sxs-lookup"]
 > Exécutez le projet à l’aide de Visual Studio 2019.
-> [!div renderon="portal" id="autoupdate" class="nextstepaction"]
+> [!div renderon="portal" id="autoupdate" class="sxs-lookup nextstepaction"]
 > [Téléchargez l’exemple de code](https://github.com/AzureADQuickStarts/AppModelv2-WebApp-OpenIDConnect-DotNet/archive/master.zip).
 
 > [!div class="sxs-lookup" renderon="portal"]
 > #### <a name="step-3-your-app-is-configured-and-ready-to-run"></a>Étape 3 : Votre application est configurée et prête à être exécutée
-> Nous avons configuré votre projet avec les valeurs des propriétés de votre application. 
+> Nous avons configuré votre projet avec les valeurs des propriétés de votre application.
 
 > [!div renderon="docs"]
 > #### <a name="step-3-run-your-visual-studio-project"></a>Étape 3 : Exécuter votre projet Visual Studio
@@ -114,7 +123,7 @@ Vous pouvez configurer le pipeline d’authentification avec une authentificatio
 ```powershell
 Install-Package Microsoft.Owin.Security.OpenIdConnect
 Install-Package Microsoft.Owin.Security.Cookies
-Install-Package Microsoft.Owin.Host.SystemWeb  
+Install-Package Microsoft.Owin.Host.SystemWeb
 ```
 
 ### <a name="owin-startup-class"></a>Classe de démarrage OWIN
@@ -156,10 +165,10 @@ public void Configuration(IAppBuilder app)
 }
 ```
 
-> |Where  |  |
+> |Where  | Description |
 > |---------|---------|
 > | `ClientId`     | ID d’application de l’application inscrite dans le portail Azure |
-> | `Authority`    | Point de terminaison STS pour l’utilisateur à authentifier. Généralement <https://login.microsoftonline.com/{tenant}/v2.0> pour le cloud public, où {tenant} est le nom de votre client, votre ID de client ou *common* pour une référence au point de terminaison commun (utilisé pour les applications mutualisées). |
+> | `Authority`    | Point de terminaison STS pour l’utilisateur à authentifier. Généralement `https://login.microsoftonline.com/{tenant}/v2.0` pour le cloud public, où {tenant} est le nom de votre client, votre ID de client ou *common* pour une référence au point de terminaison commun (utilisé pour les applications mutualisées). |
 > | `RedirectUri`  | URL vers laquelle les utilisateurs sont dirigés après authentification auprès du point de terminaison de la plateforme d’identités Microsoft |
 > | `PostLogoutRedirectUri`     | URL vers laquelle les utilisateurs sont envoyés après validation |
 > | `Scope`     | Liste des étendues demandées, séparées par des espaces |
@@ -195,13 +204,11 @@ public void SignIn()
 
 Vous pouvez protéger un contrôleur ou les actions d’un contrôleur à l’aide de l’attribut `[Authorize]`. Cet attribut limite l’accès au contrôleur ou aux actions en autorisant uniquement les utilisateurs authentifiés à accéder aux actions dans le contrôleur. Cela signifie que la demande d’authentification se produit automatiquement quand un utilisateur *non authentifié* tente d’accéder à l’une des actions ou au contrôleur décoré par l’attribut `[Authorize]`.
 
+[!INCLUDE [Help and support](../../../includes/active-directory-develop-help-support-include.md)]
+
 ## <a name="next-steps"></a>Étapes suivantes
 
 Essayez le didacticiel ASP.NET pour apprendre à créer, étape par étape, des applications et des fonctionnalités, et pour obtenir une explication complète de ce démarrage rapide.
 
-### <a name="learn-the-steps-to-create-the-application-used-in-this-quickstart"></a>Découvrez les étapes permettant de créer l’application utilisée dans ce démarrage rapide
-
 > [!div class="nextstepaction"]
-> [Didacticiel de connexion](./tutorial-v2-asp-webapp.md)
-
-[!INCLUDE [Help and support](../../../includes/active-directory-develop-help-support-include.md)]
+> [Ajouter une connexion à une application web ASP.NET](tutorial-v2-asp-webapp.md)

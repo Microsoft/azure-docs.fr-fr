@@ -5,15 +5,15 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
+ms.topic: how-to
 ms.custom: hdinsightactive
 ms.date: 12/04/2019
-ms.openlocfilehash: 55373f71c78b6d45b9c78c52dea61a37b89b4a00
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: ab87f181f78158d2ea0dd6575a30e6087600f60c
+ms.sourcegitcommit: 3bcce2e26935f523226ea269f034e0d75aa6693a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81383058"
+ms.lasthandoff: 10/23/2020
+ms.locfileid: "92485679"
 ---
 # <a name="use-azure-kubernetes-service-with-apache-kafka-on-hdinsight"></a>Utiliser Azure Kubernetes Service avec Apache Kafka sur HDInsight
 
@@ -24,9 +24,9 @@ Découvrez comment utiliser Azure Kubernetes Service (AKS) avec [Apache Kafka](h
 > [!NOTE]  
 > Ce document se concentre sur les étapes à suivre pour permettre à Azure Kubernetes Service de communiquer avec Kafka sur HDInsight. Nous prenons pour exemple un simple client Kafka pour montrer que la configuration fonctionne.
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
-* [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest)
+* [Azure CLI](/cli/azure/install-azure-cli)
 * Abonnement Azure
 
 Ce document suppose que vous êtes familiarisé avec la création et l’utilisation des services Azure suivants :
@@ -58,7 +58,7 @@ Si vous n’avez pas déjà un cluster AKS, utilisez un des documents suivants p
 * [Déployer un cluster Azure Kubernetes Service (AKS) : CLI](../../aks/kubernetes-walkthrough.md)
 
 > [!IMPORTANT]  
-> AKS crée un réseau virtuel pendant l’installation dans un groupe de ressources **supplémentaire**. Le groupe de ressources supplémentaire suit la convention de nommage de **MC_resourceGroup_AKSclusterName_location**.  
+> AKS crée un réseau virtuel pendant l’installation dans un groupe de ressources **supplémentaire** . Le groupe de ressources supplémentaire suit la convention de nommage de **MC_resourceGroup_AKSclusterName_location** .  
 > Ce réseau est homologué avec celui créé pour HDInsight dans la section suivante.
 
 ## <a name="configure-virtual-network-peering"></a>Configurer le peering de réseaux virtuels
@@ -67,34 +67,34 @@ Si vous n’avez pas déjà un cluster AKS, utilisez un des documents suivants p
 
 1. À partir du [portail Azure](https://portal.azure.com), localisez le **groupe de ressources** supplémentaire qui contient le réseau virtuel de votre cluster AKS.
 
-2. À partir du groupe de ressources, sélectionnez la ressource __Réseau virtuel__. Notez le nom. Il sera utile plus tard.
+2. À partir du groupe de ressources, sélectionnez la ressource __Réseau virtuel__ . Notez le nom. Il sera utile plus tard.
 
-3. Sous **Paramètres**, sélectionnez __Espace d’adressage__. Notez l’espace d’adressage indiqué.
+3. Sous **Paramètres** , sélectionnez __Espace d’adressage__ . Notez l’espace d’adressage indiqué.
 
 ### <a name="create-virtual-network"></a>Création d’un réseau virtuel
 
-1. Pour créer un réseau virtuel pour HDInsight, accédez à __+ Créer une ressource__ > __Mise en réseau__ > __Réseau virtuel__.
+1. Pour créer un réseau virtuel pour HDInsight, accédez à __+ Créer une ressource__ > __Mise en réseau__ > __Réseau virtuel__ .
 
 1. Créez le réseau à l’aide des instructions suivantes pour certaines propriétés :
 
     |Propriété | Valeur |
     |---|---|
     |Espace d’adressage|Vous devez utiliser un espace d’adressage qui ne chevauche pas celui utilisé par le réseau en cluster AKS.|
-    |Location|Utilisez le même __emplacement__ pour le réseau virtuel que celui que vous avez utilisé pour le cluster AKS.|
+    |Emplacement|Utilisez le même __emplacement__ pour le réseau virtuel que celui que vous avez utilisé pour le cluster AKS.|
 
 1. Attendez que le réseau virtuel ait été créé avant de passer à l’étape suivante.
 
 ### <a name="configure-peering"></a>Configurer le peering
 
-1. Pour configurer le peering entre le réseau HDInsight et le réseau de cluster AKS, sélectionnez le réseau virtuel, puis sélectionnez __Peerings__.
+1. Pour configurer le peering entre le réseau HDInsight et le réseau de cluster AKS, sélectionnez le réseau virtuel, puis sélectionnez __Peerings__ .
 
 1. Sélectionnez __+ Ajouter__ et utilisez les valeurs suivantes pour remplir le formulaire :
 
     |Propriété |Valeur |
     |---|---|
-    |Nom du peering de \<ce réseau virtuel> avec un réseau virtuel distant|entrez un nom unique pour cette configuration de peering.|
-    |Réseau virtuel|Sélectionnez le réseau virtuel pour le **cluster AKS**.|
-    |Nom du peering de \<réseau virtuel AKS> avec \<ce réseau virtuel>|Entrez un nom unique.|
+    |Nom du peering de \<this VN> au réseau virtuel distant|entrez un nom unique pour cette configuration de peering.|
+    |Réseau virtuel|Sélectionnez le réseau virtuel pour le **cluster AKS** .|
+    |Nom du peering de \<this VN> à \<AKS VN>|Entrez un nom unique.|
 
     Laissez tous les autres champs sur la valeur par défaut, puis sélectionnez __OK__ pour configurer le peering.
 
@@ -118,11 +118,11 @@ Suivez les étapes ci-dessous pour configurer Kafka afin qu’il publie des adre
 
     ![Apache Ambari - Configuration des services](./media/apache-kafka-azure-container-services/select-kafka-config1.png)
 
-4. Pour trouver la configuration __kafka-env__, entrez `kafka-env` dans le champ __Filtre__ situé en haut à droite.
+4. Pour trouver la configuration __kafka-env__ , entrez `kafka-env` dans le champ __Filtre__ situé en haut à droite.
 
     ![Configuration Kafka, pour kafka-env](./media/apache-kafka-azure-container-services/search-for-kafka-env.png)
 
-5. Pour configurer Kafka afin qu’il publie des adresses IP, ajoutez le texte suivant au bas du champ __kafka-env-template__ :
+5. Pour configurer Kafka afin qu’il publie des adresses IP, ajoutez le texte suivant au bas du champ __kafka-env-template__  :
 
     ```bash
     # Configure Kafka to advertise IP addresses instead of FQDN
@@ -140,7 +140,7 @@ Suivez les étapes ci-dessous pour configurer Kafka afin qu’il publie des adre
 
     ![Apache Ambari - Enregistrement de la configuration](./media/apache-kafka-azure-container-services/save-configuration-button.png)
 
-9. Pour éviter des erreurs lors du redémarrage de Kafka, utilisez le bouton __Service Actions__ (Actions du service) et sélectionnez __Activer le mode de maintenance__. Sélectionnez OK pour terminer cette opération.
+9. Pour éviter des erreurs lors du redémarrage de Kafka, utilisez le bouton __Service Actions__ (Actions du service) et sélectionnez __Activer le mode de maintenance__ . Sélectionnez OK pour terminer cette opération.
 
     ![Actions de service, avec l’option Activer le mode de maintenance en surbrillance](./media/apache-kafka-azure-container-services/turn-on-maintenance-mode.png)
 
@@ -148,7 +148,7 @@ Suivez les étapes ci-dessous pour configurer Kafka afin qu’il publie des adre
 
     ![Bouton Redémarrer avec l’option Restart All Affected (Redémarrer tous les éléments affectés) en surbrillance](./media/apache-kafka-azure-container-services/restart-required-button.png)
 
-11. Pour désactiver le mode de maintenance, utilisez le bouton __Service Actions__ (Actions du service) et sélectionnez __Désactiver le mode de maintenance__. Sélectionnez **OK** pour terminer cette opération.
+11. Pour désactiver le mode de maintenance, utilisez le bouton __Service Actions__ (Actions du service) et sélectionnez __Désactiver le mode de maintenance__ . Sélectionnez **OK** pour terminer cette opération.
 
 ## <a name="test-the-configuration"></a>Tester la configuration
 
@@ -160,8 +160,8 @@ Suivez les étapes ci-dessous pour configurer Kafka afin qu’il publie des adre
 
 3. Modifiez le fichier `index.js` et modifiez les lignes suivantes :
 
-    * `var topic = 'mytopic'`: Remplacez `mytopic` par le nom de la rubrique Kafka utilisé par cette application.
-    * `var brokerHost = '176.16.0.13:9092`: Remplacez `176.16.0.13` par l’adresse IP interne de l’un des hôtes du répartiteur pour votre cluster.
+    * `var topic = 'mytopic'`: remplacez `mytopic` par le nom de la rubrique Kafka utilisé par cette application.
+    * `var brokerHost = '176.16.0.13:9092`: remplacez `176.16.0.13` par l’adresse IP interne de l’un des hôtes du répartiteur pour votre cluster.
 
         Pour trouver l’adresse IP interne des hôtes du répartiteur (workernodes) dans le cluster, consultez le document [API REST Apache Ambari](../hdinsight-hadoop-manage-ambari-rest-api.md#get-the-internal-ip-address-of-cluster-nodes). Choisissez l’adresse IP de l’une des entrées dont le nom de domaine commence par `wn`.
 
@@ -218,7 +218,7 @@ Suivez les étapes ci-dessous pour configurer Kafka afin qu’il publie des adre
 
     ![Image de page web de test Apache Kafka](./media/apache-kafka-azure-container-services/test-web-page-image1.png)
 
-12. Entrez le texte dans le champ, puis sélectionnez le bouton __Envoyer__. Les données sont envoyées à Kafka. Ensuite, le consommateur Kafka dans l’application lit le message et l’ajoute à la section __Messages à partir de Kafka__.
+12. Entrez le texte dans le champ, puis sélectionnez le bouton __Envoyer__ . Les données sont envoyées à Kafka. Ensuite, le consommateur Kafka dans l’application lit le message et l’ajoute à la section __Messages à partir de Kafka__ .
 
     > [!WARNING]  
     > Vous pouvez recevoir plusieurs copies d’un message. Ce problème se produit généralement lorsque vous actualisez votre navigateur une fois connecté, ou lorsque vous ouvrez plusieurs connexions de navigateur à l’application.

@@ -1,14 +1,14 @@
 ---
 title: Déployer l’exemple de blueprint PCI-DSS v3.2.1
 description: Étapes de déploiement de l’exemple de blueprint Payment Card Industry Data Security Standard v3.2.1, y compris les détails du paramètre d’artefact blueprint.
-ms.date: 01/29/2020
+ms.date: 08/19/2020
 ms.topic: sample
-ms.openlocfilehash: 9df9392430fd0496ffb5e635a6fc3e31ba708208
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: a7917f09e5e5ff898bd155f0961e5c9765b8d791
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "76905561"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88649208"
 ---
 # <a name="deploy-the-pci-dss-v321-blueprint-sample"></a>Déployer l’exemple de blueprint PCI-DSS v3.2.1
 

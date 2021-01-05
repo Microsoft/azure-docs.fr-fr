@@ -1,25 +1,27 @@
 ---
 title: Utiliser l’extension Intégrité de l’application avec des groupes de machines virtuelles identiques Azure
 description: Découvrez comment utiliser l’extension Intégrité de l’application pour surveiller l’intégrité de vos applications déployées sur des groupes de machines virtuelles identiques.
-author: mimckitt
-tags: azure-resource-manager
+author: ju-shim
+ms.author: jushiman
+ms.topic: how-to
 ms.service: virtual-machine-scale-sets
-ms.topic: conceptual
-ms.date: 01/30/2019
-ms.author: mimckitt
-ms.openlocfilehash: cb5f1d48bb1a95db004d9da553e19a35071c73b0
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.subservice: extensions
+ms.date: 05/06/2020
+ms.reviewer: mimckitt
+ms.custom: mimckitt
+ms.openlocfilehash: a38a715b45ab4d0810862ef4d016e4187ea507ab
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81273730"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "84783042"
 ---
 # <a name="using-application-health-extension-with-virtual-machine-scale-sets"></a>Utilisation de l’extension Intégrité de l’application avec des groupes de machines virtuelles identiques
-La surveillance de l’intégrité de votre application est un signal important pour la gestion et la mise à niveau votre déploiement. Les groupes de machines virtuelles identiques prennent en charge les [mises à niveau propagées](virtual-machine-scale-sets-upgrade-scale-set.md#how-to-bring-vms-up-to-date-with-the-latest-scale-set-model), notamment les [mises à niveau automatiques d’image de système d’exploitation](virtual-machine-scale-sets-automatic-upgrade.md), qui reposent sur l’analyse du fonctionnement des instances individuelles pour mettre à niveau votre déploiement.
+La surveillance de l’intégrité de votre application est un signal important pour la gestion et la mise à niveau votre déploiement. Les groupes de machines virtuelles identiques prennent en charge les [mises à niveau propagées](virtual-machine-scale-sets-upgrade-scale-set.md#how-to-bring-vms-up-to-date-with-the-latest-scale-set-model), notamment les [mises à niveau automatiques d’image de système d’exploitation](virtual-machine-scale-sets-automatic-upgrade.md), qui reposent sur l’analyse du fonctionnement des instances individuelles pour mettre à niveau votre déploiement. Vous pouvez également utiliser l’extension d’intégrité pour surveiller l’intégrité des applications de chaque instance de votre groupe identique et effectuer des réparations d’instance à l’aide de [réparations automatiques d’instances](virtual-machine-scale-sets-automatic-instance-repairs.md).
 
 Cet article décrit comment utiliser l’extension Intégrité de l’application pour analyser le fonctionnement de vos applications déployées sur des groupes de machines virtuelles identiques.
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 Cet article suppose de connaître :
 -   Les [extensions](../virtual-machines/extensions/overview.md) de machine virtuelle Azure
 -   La [modification](virtual-machine-scale-sets-upgrade-scale-set.md) des groupes de machines virtuelles identiques
@@ -31,7 +33,7 @@ L’extension Intégrité de l’application est déployée à l’intérieur d�
 
 ## <a name="extension-schema"></a>Schéma d’extensions
 
-Le JSON suivant montre le schéma pour l’extension Intégrité de l’application. L’extension nécessite au minimum une requête « tcp » ou « http » avec respectivement un port ou un chemin d’accès à la demande associés.
+Le JSON suivant montre le schéma pour l’extension Intégrité de l’application. L’extension nécessite au minimum une requête « tcp », « http » ou « https » avec respectivement un port ou un chemin d’accès à la demande associés.
 
 ```json
 {
@@ -55,7 +57,7 @@ Le JSON suivant montre le schéma pour l’extension Intégrité de l’applicat
 
 ### <a name="property-values"></a>Valeurs de propriétés
 
-| Name | Valeur/Exemple | Type de données
+| Nom | Valeur/Exemple | Type de données
 | ---- | ---- | ---- 
 | apiVersion | `2018-10-01` | Date |
 | publisher | `Microsoft.ManagedServices` | string |
@@ -64,11 +66,11 @@ Le JSON suivant montre le schéma pour l’extension Intégrité de l’applicat
 
 ### <a name="settings"></a>Paramètres
 
-| Name | Valeur/Exemple | Type de données
+| Nom | Valeur/Exemple | Type de données
 | ---- | ---- | ----
-| protocol | `http` ou `tcp` | string |
-| port | Facultatif si le protocole est `http`, obligatoire si le protocole est `tcp` | int |
-| requestPath | Obligatoire si le protocole est `http`, non autorisé si le protocole est `tcp` | string |
+| protocol | `http` ou `https` ou `tcp` | string |
+| port | Facultatif si le protocole est `http` ou `https`, obligatoire si le protocole est `tcp` | int |
+| requestPath | Obligatoire si le protocole est `http` ou `https`, non autorisé si le protocole est `tcp` | string |
 
 ## <a name="deploy-the-application-health-extension"></a>Déployer l’extension Intégrité de l’application
 Il existe plusieurs façons de déployer l’extension Intégrité de l’application sur vos groupes identiques, comme indiqué dans les exemples ci-dessous.
@@ -171,7 +173,8 @@ C:\WindowsAzure\Logs\Plugins\Microsoft.ManagedServices.ApplicationHealthWindows\
 ```
 
 ```Linux
-/var/lib/waagent/apphealth
+/var/lib/waagent/Microsoft.ManagedServices.ApplicationHealthLinux-<extension_version>/status
+/var/log/azure/applicationhealth-extension
 ```
 
 Les journaux d’activité capturent également régulièrement l’état d’intégrité de l’application.

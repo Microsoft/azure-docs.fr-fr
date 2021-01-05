@@ -1,0 +1,75 @@
+### YamlMime:Landing
+title: Documentation Azure Data Box Gateway - Transfert en ligne
+summary: Utilisez les appareils Azure Data Box Gateway pour les transferts de données via le réseau à des fins d’archivage cloud, de reprise d’activité ou de traitement des données à l’échelle du cloud.
+metadata:
+  title: Documentation Azure Data Box Gateway - Transfert en ligne
+  description: Documentation Data Box Gateway pour le transfert de données hautes performances via le réseau vers Azure.
+  services: databox
+  ms.service: databox
+  ms.subservice: gateway
+  ms.topic: landing-page
+  ms.collection: collection
+  author: v-dalc
+  ms.author: alkohli
+  ms.date: 10/29/2020
+  ms.openlocfilehash: 811d0555e6fd39f372b4742501a3114bbc9a25b4
+  ms.sourcegitcommit: 16c7fd8fe944ece07b6cf42a9c0e82b057900662
+  ms.translationtype: HT
+  ms.contentlocale: fr-FR
+  ms.lasthandoff: 12/03/2020
+  ms.locfileid: "96579923"
+landingContent:
+- title: À propos de Data Box Gateway
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Qu’est-ce que Data Box Gateway ?
+      url: data-box-gateway-overview.md
+  - linkListType: architecture
+    links:
+    - text: Choisir les options de transfert de données
+      url: /azure/storage/common/storage-choose-data-transfer-solution
+    - text: Utiliser le réseau ou un transfert hors connexion
+      url: /azure/storage/common/storage-solution-large-dataset-low-network#offline-transfer-or-network-transfer
+  - linkListType: whats-new
+    links:
+    - text: Notes de publication 2007 à nos jours
+      url: data-box-gateway-2007-release-notes.md
+- title: Configurations requises et limites
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Configuration requise
+      url: data-box-gateway-system-requirements.md
+    - text: limites
+      url: data-box-gateway-limits.md
+- title: Déployer
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: Préparer au déploiement
+      url: data-box-gateway-deploy-prep.md
+    - text: Approvisionner dans Hyper-V
+      url: data-box-gateway-deploy-provision-hyperv.md
+    - text: Connecter, configurer, activer
+      url: data-box-gateway-deploy-connect-setup-activate.md
+    - text: Transfert de données
+      url: data-box-gateway-deploy-add-shares.md
+- title: Gérer
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Gérer les partages
+      url: data-box-gateway-manage-shares.md
+    - text: Gérer via PowerShell
+      url: data-box-gateway-connect-powershell-interface.md
+- title: Dépanner
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Dépanner
+      url: data-box-gateway-troubleshoot.md
+    - text: Superviser
+      url: data-box-gateway-monitor.md
+    - text: Ouverture d’un ticket de support
+      url: ../databox-online/azure-stack-edge-contact-microsoft-support.md

@@ -8,14 +8,17 @@ ms.topic: conceptual
 ms.service: industrial-iot
 services: iot-industrialiot
 manager: philmea
-ms.openlocfilehash: 7ee186684b702a42335c6e1a7832cc5c761a69d0
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 98dc9345d2c8b392fd094458b612857d6d454739
+ms.sourcegitcommit: a92fbc09b859941ed64128db6ff72b7a7bcec6ab
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81686934"
+ms.lasthandoff: 10/15/2020
+ms.locfileid: "92071487"
 ---
 # <a name="build-and-deploy-the-opc-vault-certificate-management-service"></a>Générer et déployer le service de gestion de certificats OPC Vault
+
+> [!IMPORTANT]
+> Pendant la mise à jour de cet article, consultez [Azure Industrial IoT](https://azure.github.io/Industrial-IoT/) pour obtenir le contenu le plus récent.
 
 Cet article explique comment déployer le service de gestion de certificats OPC Vault dans Azure.
 
@@ -28,7 +31,7 @@ Cet article explique comment déployer le service de gestion de certificats OPC�
 
 Actuellement, l’opération de génération et de déploiement est limitée à Windows.
 Les exemples sont tous écrits pour C# .NET Standard, ce dont vous avez besoin pour générer le service et des exemples pour le déploiement.
-Tous les outils dont vous avez besoin pour .NET Standard sont fournis avec les outils .NET Core. Consultez [Bien démarrer avec .NET Core](https://docs.microsoft.com/dotnet/articles/core/getting-started).
+Tous les outils dont vous avez besoin pour .NET Standard sont fournis avec les outils .NET Core. Consultez [Bien démarrer avec .NET Core](/dotnet/articles/core/getting-started).
 
 1. [Installez .NET Core 2.1+][dotnet-install].
 2. [Installez Docker][docker-url] (facultatif, uniquement si la build Docker locale est nécessaire).
@@ -76,7 +79,7 @@ Un script PowerShell permet de déployer facilement le microservice OPC Vault et
    > En cas de problèmes, consultez la section « Résoudre les problèmes de déploiement » plus loin dans cet article.
 
 8. Ouvrez le navigateur de votre choix, puis ouvrez la page de l’application : `https://myResourceGroup.azurewebsites.net`
-8. Accordez à l’application web et au microservice OPC Vault quelques minutes de préparation après le déploiement. À la première utilisation, il est possible que la page d’accueil web se bloque pendant au maximum une minute avant que les premières réponses vous parviennent.
+8. Accordez à l’application web et au microservice OPC Vault quelques minutes de préparation après le déploiement. Il se peut que la page d’accueil web se fige pendant une minute tout au plus, avant que les premières réponses ne vous parviennent.
 11. Pour examiner l’API Swagger, ouvrez : `https://myResourceGroup-service.azurewebsites.net`
 13. Pour démarrer un serveur GDS local avec dotnet, démarrez `.\myResourceGroup-gds.cmd`. Avec Docker, démarrez `.\myResourceGroup-dockergds.cmd`.
 

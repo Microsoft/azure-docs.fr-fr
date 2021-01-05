@@ -11,17 +11,17 @@ ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 10/21/2018
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: d4b52a3025bfb15e2679709353cebf28254a75c2
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 0b8f613cb7c75d9dd6af1fcf62f9d484398072c6
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77185500"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89279463"
 ---
 # <a name="user-sign-in-with-azure-active-directory-pass-through-authentication"></a>Connexion de l’utilisateur avec l’authentification directe Azure Active Directory
 
@@ -31,7 +31,7 @@ L’authentification directe Azure Active Directory (Azure AD) permet à vos uti
 
 >[!VIDEO https://www.youtube.com/embed/PyeAC85Gm7w]
 
-Cette fonctionnalité est une alternative à [Synchronisation du hachage de mot de passe Azure AD](how-to-connect-password-hash-synchronization.md), qui offre les mêmes fonctionnalités d’authentification sur le cloud aux organisations. Toutefois, certaines organisations souhaitant appliquer leurs stratégies de mot de passe et de sécurité Active Directory locales, peuvent choisir d’utiliser l’authentification directe à la place. Consultez [ce guide](https://docs.microsoft.com/azure/security/fundamentals/choose-ad-authn) pour voir une comparaison entre les différentes méthodes de connexion Azure AD, et savoir comment choisir la méthode de connexion appropriée pour votre organisation.
+Cette fonctionnalité est une alternative à [Synchronisation du hachage de mot de passe Azure AD](how-to-connect-password-hash-synchronization.md), qui offre les mêmes fonctionnalités d’authentification sur le cloud aux organisations. Toutefois, certaines organisations souhaitant appliquer leurs stratégies de mot de passe et de sécurité Active Directory locales, peuvent choisir d’utiliser l’authentification directe à la place. Consultez [ce guide](./choose-ad-authn.md) pour voir une comparaison entre les différentes méthodes de connexion Azure AD, et savoir comment choisir la méthode de connexion appropriée pour votre organisation.
 
 ![Authentification directe Azure AD](./media/how-to-connect-pta/pta1.png)
 
@@ -42,14 +42,14 @@ Vous pouvez combiner l’authentification directe avec la fonctionnalité [Authe
 - *Une meilleure expérience utilisateur*
   - Les utilisateurs utilisent les mêmes mots de passe pour se connecter aux applications locales et sur le cloud.
   - Les utilisateurs passent moins de temps à communiquer avec le service d’assistance informatique pour résoudre les problèmes de mot de passe.
-  - Les utilisateurs peuvent effectuer les tâches de [gestion de mot de passe en libre-service](../authentication/active-directory-passwords-overview.md) dans le cloud.
+  - Les utilisateurs peuvent effectuer les tâches de [gestion de mot de passe en libre-service](../authentication/concept-sspr-howitworks.md) dans le cloud.
 - *Facile à déployer et à gérer*
   - Des déploiements locaux ou une configuration réseau complexes ne sont pas nécessaires.
   - Seul un agent léger doit être installé localement.
   - Aucun frais de gestion. L’agent reçoit automatiquement des améliorations et correctifs de bogues.
 - *Sécuriser*
   - Les mots de passe locaux ne sont jamais stockés dans le cloud sous quelque forme que ce soit.
-  - Il protège vos comptes utilisateur en toute transparence avec les [stratégies d’accès conditionnel d’Azure AD](../active-directory-conditional-access-azure-portal.md), y compris l’authentification multifacteur (MFA), [en bloquant l’authentification héritée](../conditional-access/concept-conditional-access-conditions.md) et [en filtrant des attaques de mot de passe par recherche exhaustive](../authentication/howto-password-smart-lockout.md).
+  - Il protège vos comptes utilisateur en toute transparence avec les [stratégies d’accès conditionnel d’Azure AD](../conditional-access/overview.md), y compris l’authentification multifacteur (MFA), [en bloquant l’authentification héritée](../conditional-access/concept-conditional-access-conditions.md) et [en filtrant des attaques de mot de passe par recherche exhaustive](../authentication/howto-password-smart-lockout.md).
   - L’agent établit uniquement les connexions sortantes depuis votre réseau. Il n’est donc pas nécessaire d’installer l’agent dans un réseau de périmètre, également appelé DMZ.
   - La communication entre les agents et Azure AD est sécurisée à l’aide de l’authentification basée sur les certificats. Ces certificats sont renouvelés automatiquement tous les quelques mois par Azure AD.
 - *Hautement disponible*
@@ -59,8 +59,8 @@ Vous pouvez combiner l’authentification directe avec la fonctionnalité [Authe
 
 - Prend en charge la connexion de l’utilisateur dans toutes les applications basées sur un navigateur web et dans les applications clientes Microsoft Office qui utilisent [l’authentification moderne](https://aka.ms/modernauthga).
 - Les noms d’utilisateur de connexion peuvent être soit un nom d’utilisateur local par défaut (`userPrincipalName`), soit un autre attribut configuré dans Azure AD Connect (appelé `Alternate ID`).
-- Elle s’utilise très facilement avec les fonctionnalités d’[accès conditionnel](../active-directory-conditional-access-azure-portal.md) (telles que l’authentification multifacteur) pour la sécurisation de vos utilisateurs.
-- Elle est intégrée à la [gestion des mots de passe libre-service](../authentication/active-directory-passwords-overview.md) sur le cloud, y compris la réécriture des mots de passe dans l’annuaire Active Directory local et la protection par mot de passe en interdisant l’emploi de mots de passe courants.
+- Elle s’utilise très facilement avec les fonctionnalités d’[accès conditionnel](../conditional-access/overview.md) (telles que l’authentification multifacteur) pour la sécurisation de vos utilisateurs.
+- Elle est intégrée à la [gestion des mots de passe libre-service](../authentication/concept-sspr-howitworks.md) sur le cloud, y compris la réécriture des mots de passe dans l’annuaire Active Directory local et la protection par mot de passe en interdisant l’emploi de mots de passe courants.
 - Les environnements à plusieurs forêts sont pris en charge s’il existe des approbations de forêts entre les forêts AD et si le routage du suffixe de leurs noms est configuré correctement.
 - Cette fonctionnalité est gratuite et il est inutile de disposer des éditions payantes d’Azure AD pour l’utiliser.
 - Elle peut être activée via [Azure AD Connect](whatis-hybrid-identity.md).

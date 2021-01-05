@@ -9,17 +9,18 @@ editor: ''
 tags: azure-resource-manager
 ms.assetid: feae6176-2373-4034-b5d9-a32c6b4e1f10
 ms.service: virtual-machines-windows
+ms.subservice: extensions
 ms.topic: article
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure-services
-ms.date: 01/30/2020
+ms.date: 06/26/2020
 ms.author: akjosh
-ms.openlocfilehash: 85977819d30ddc8745eb9231242eb1990222676c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 389842901a4c508015d527c0fd8fd87af57dcd9b
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79530986"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94967922"
 ---
 # <a name="log-analytics-virtual-machine-extension-for-windows"></a>Extension de machine virtuelle Log Analytics pour Windows
 
@@ -29,13 +30,15 @@ Les journaux Azure Monitor fournissent des fonctionnalités permettant de superv
 
 ### <a name="operating-system"></a>Système d’exploitation
 
-Pour plus d’informations sur les systèmes d’exploitation Windows pris en charge, voir l’article [vue d’ensemble de l’agent Log Analytics](../../azure-monitor/platform/log-analytics-agent.md#supported-windows-operating-systems).
+Pour plus d’informations sur les systèmes d’exploitation Windows pris en charge, consultez l’article [Vue d’ensemble des agents Azure Monitor](../../azure-monitor/platform/agents-overview.md#supported-operating-systems).
 
 ### <a name="agent-and-vm-extension-version"></a>Version de l’agent et de l’extension de machine virtuelle
 Le tableau ci-après mappe la version de l’extension de machine virtuelle Log Analytics Windows à la version du bundle de l’agent Log Analytics pour chaque publication. 
 
 | Version du bundle de l’agent Log Analytics pour Windows | Version d’extension de machine virtuelle Windows Log Analytics | Date de sortie | Notes de publication |
 |--------------------------------|--------------------------|--------------------------|--------------------------|
+| 10.20.18040 | 1.0.18040.2 | Août 2020   | <ul><li>Résout un problème sur Azure Arc</li></ul> |
+| 10.20.18038 | 1.0.18038 | Avril 2020   | <ul><li>Active la connectivité sur un lien privé à l’aide d’étendues Azure Monitor Private Link</li><li>Ajoute la limitation de l’ingestion afin d’éviter un afflux accidentel soudain en ingestion dans un espace de travail</li><li>Ajoute la prise en charge de régions Azure Government supplémentaires</li><li>Résout un bogue dans lequel intégrité.exe s’est bloqué</li></ul> |
 | 10.20.18029 | 1.0.18029 | Mars 2020   | <ul><li>Ajoute la prise en du code de signature SHA-2</li><li>Améliore l’installation et la gestion des extensions de machine virtuelle</li><li>Résout un bogue dans Azure Arc pour l’intégration de serveurs</li><li>Ajoute un outil de dépannage intégré pour le service clientèle</li><li>Ajoute la prise en charge de régions Azure Government supplémentaires</li> |
 | 10.20.18018 | 1.0.18018 | 2 octobre 2019 | <ul><li> Correctifs de bogues mineurs et meilleure stabilité </li></ul> |
 | 10.20.18011 | 1.0.18011 | Juillet 2019 | <ul><li> Correctifs de bogues mineurs et meilleure stabilité </li><li> Augmentation de MaxExpressionDepth à 10 000 </li></ul> |
@@ -97,7 +100,7 @@ Le JSON suivant illustre le schéma de l’extension d’agent Log Analytics. L�
 \* La propriété workspaceId est appelée consumerId dans l’API Log Analytics.
 
 > [!NOTE]
-> Pour obtenir des propriétés supplémentaires, consultez [Connecter des ordinateurs Windows à Azure Monitor](https://docs.microsoft.com/azure/azure-monitor/platform/agent-windows).
+> Pour obtenir des propriétés supplémentaires, consultez [Connecter des ordinateurs Windows à Azure Monitor](../../azure-monitor/platform/agent-windows.md).
 
 ## <a name="template-deployment"></a>Déploiement de modèle
 

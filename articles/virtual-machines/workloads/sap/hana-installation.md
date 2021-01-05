@@ -7,18 +7,19 @@ author: hermanndms
 manager: juergent
 editor: ''
 ms.service: virtual-machines-linux
+ms.subservice: workloads
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
 ms.date: 01/16/2020
 ms.author: juergent
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: 4db072cf881c936db6721845e7823082388515b0
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.openlocfilehash: a1430b32c0e74be7a0e50fa4c5c183018b2b55e0
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83117119"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96006300"
 ---
 # <a name="how-to-install-and-configure-sap-hana-large-instances-on-azure"></a>Guide pratique d’installation et de configuration de SAP HANA (grandes instances) sur Azure
 
@@ -42,11 +43,11 @@ Avant de commencer l’installation de HANA, validez les éléments suivants :
 
 Après avoir reçu l’unité de grandes instances HANA de Microsoft, validez les paramètres suivants, puis effectuez les ajustements nécessaires.
 
-La **première étape** après réception de la Grande instance HANA et l’établissement de l’accès et de la connectivité aux instances consiste à vérifier sur le portail Azure si la ou les instances s’affichent avec les bonnes références SKU et le bon système d’exploitation. Consultez [Contrôle des grandes instances Azure HANA à l’aide du portail Azure](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/hana-li-portal) pour connaître les étapes nécessaires à l’exécution des vérifications.
+La **première étape** après réception de la Grande instance HANA et l’établissement de l’accès et de la connectivité aux instances consiste à vérifier sur le portail Azure si la ou les instances s’affichent avec les bonnes références SKU et le bon système d’exploitation. Consultez [Contrôle des grandes instances Azure HANA à l’aide du portail Azure](./hana-li-portal.md) pour connaître les étapes nécessaires à l’exécution des vérifications.
 
 Après avoir reçu l’unité de grandes instances HANA, puis établi l’accès et la connectivité aux instances, la **deuxième étape** consiste à enregistrer le système d’exploitation de l’instance auprès de votre fournisseur de système d’exploitation. Cela inclut l’inscription de votre système d’exploitation SUSE Linux dans une instance de SUSE SMT déployée sur une machine virtuelle dans Azure. 
 
-L’unité de grandes instances HANA peut se connecter à cette instance SMT. (Pour plus d’informations, consultez la [configuration du serveur SMT pour SUSE Linux](hana-setup-smt.md).) Sinon, l’enregistrement de votre système d’exploitation Red Hat doit se faire avec le gestionnaire d’abonnements Red Hat auquel vous devez vous connecter. Pour plus d’informations, consultez les remarques de la rubrique [Qu’est-ce que SAP HANA sur Azure (grandes instances) ?](https://docs.microsoft.com/azure/virtual-machines/linux/sap-hana-overview-architecture?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json). 
+L’unité de grandes instances HANA peut se connecter à cette instance SMT. (Pour plus d’informations, consultez la [configuration du serveur SMT pour SUSE Linux](hana-setup-smt.md).) Sinon, l’enregistrement de votre système d’exploitation Red Hat doit se faire avec le gestionnaire d’abonnements Red Hat auquel vous devez vous connecter. Pour plus d’informations, consultez les remarques de la rubrique [Qu’est-ce que SAP HANA sur Azure (grandes instances) ?](./hana-overview-architecture.md?toc=/azure/virtual-machines/linux/toc.json). 
 
 Cette étape est nécessaire pour l’application de correctifs au système d’exploitation, qui incombe au client. Pour SUSE, vous trouverez la documentation sur l’installation et la configuration SMT sur cette page relative à l’[installation de SMT](https://www.suse.com/documentation/sles-12/book_smt/data/smt_installation.html).
 
@@ -127,10 +128,10 @@ Par conséquent, vous devez configurer un serveur temporel distinct qui sera uti
 ## <a name="networking"></a>Mise en réseau
 Nous partons du principe que vous avez suivi les recommandations données dans les documents ci-après pour concevoir vos réseaux virtuels Azure et connecter ceux-ci aux grandes instances HANA :
 
-- [Vue d’ensemble et architecture de SAP HANA (grandes instances) sur Azure](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/hana-overview-architecture)
+- [Vue d’ensemble et architecture de SAP HANA (grandes instances) sur Azure](./hana-overview-architecture.md)
 - [Infrastructure et connectivité à SAP HANA (grandes instances) sur Azure](hana-overview-infrastructure-connectivity.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
 
-Certains détails concernant la mise en réseau d’unités individuelles valent la peine d’être soulignés. Chaque unité de grandes instances HANA est fournie avec deux ou trois adresses IP affectées à deux ou trois de ses ports de carte réseau. Trois adresses IP sont utilisées dans les configurations scale-out HANA et dans le scénario de réplication système HANA. Une des adresses IP affectées à la carte réseau de l’unité se situe hors du pool d’adresses IP du serveur décrit à la rubrique [Vue d’ensemble et architecture de SAP HANA (grandes instances) sur Azure](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/hana-overview-architecture).
+Certains détails concernant la mise en réseau d’unités individuelles valent la peine d’être soulignés. Chaque unité de grandes instances HANA est fournie avec deux ou trois adresses IP affectées à deux ou trois de ses ports de carte réseau. Trois adresses IP sont utilisées dans les configurations scale-out HANA et dans le scénario de réplication système HANA. Une des adresses IP affectées à la carte réseau de l’unité se situe hors du pool d’adresses IP du serveur décrit à la rubrique [Vue d’ensemble et architecture de SAP HANA (grandes instances) sur Azure](./hana-overview-architecture.md).
 
 Pour plus d’informations sur les détails d’Ethernet pour votre architecture, consultez les [scénarios HLI pris en charge](hana-supported-scenario.md).
 
@@ -145,7 +146,7 @@ Les conventions d’affectation de noms des volumes de stockage sont répertori�
 | Utilisation du stockage | Nom du montage | Nom du volume | 
 | --- | --- | ---|
 | Données HANA | /hana/data/SID/mnt0000\<m> | Adresse IP du stockage:/hana_data_SID_mnt00001_tenant_vol |
-| Journal HANA | /hana/log/SID/mnt0000\<m> | Adresse IP du stockage:/hana_log_SID_mnt00001_tenant_vol |
+| Journal HANA | /Hana/log/SID/mnt0000\<m> | Adresse IP du stockage:/hana_log_SID_mnt00001_tenant_vol |
 | Sauvegarde de fichier journal HANA | HANA/log/backups | Adresse IP du stockage:/hana_log_backups_SID_mnt00001_tenant_vol |
 | HANA partagé | /Hana/Shared/SID | Adresse IP du stockage:/hana_shared_SID_mnt00001_tenant_vol/shared |
 | /usr/sap | /usr/SAP/SID | Adresse IP du stockage:/hana_shared_SID_mnt00001_tenant_vol/usr_sap |
@@ -179,7 +180,7 @@ Ces points de montage sont configurés dans/etc/fstab, comme indiqué dans les g
 
 La sortie de la commande df -h sur une unité de grande instance HANA S72m ressemblerait à ceci :
 
-![fstab des volumes montés dans l’unité de grande instance HANA](./media/hana-installation/image2_df_output.PNG)
+![Capture d’écran montrant la sortie de la commande pour une unité de grande instance HANA.](./media/hana-installation/image2_df_output.PNG)
 
 
 Le contrôleur de stockage et les nœuds dans les tampons de grandes instances sont synchronisés avec les serveurs NTP. Lorsque vous synchronisez les unités SAP HANA sur Azure (grandes instances) et les machines virtuelles Azure avec un serveur NTP, vous ne devriez pas rencontrer d’écart de temps entre l’infrastructure et les unités Compute dans Azure ou les horodatages de grandes instances.
@@ -265,7 +266,3 @@ Consultez les [scénarios HLI pris en charge](hana-supported-scenario.md) pour c
 
 
  
-
-
-
-

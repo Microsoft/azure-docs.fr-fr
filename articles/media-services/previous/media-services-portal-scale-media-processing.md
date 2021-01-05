@@ -14,19 +14,22 @@ ms.devlang: na
 ms.topic: article
 ms.date: 03/19/2019
 ms.author: juliako
-ms.openlocfilehash: c840764dc978a8dacb3450c0aca5e5d93284b8a6
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c637817e88e9258a0f80cf72f737b0deae753002
+ms.sourcegitcommit: 10d00006fec1f4b69289ce18fdd0452c3458eca5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "61127533"
+ms.lasthandoff: 11/21/2020
+ms.locfileid: "96012252"
 ---
 # <a name="change-the-reserved-unit-type"></a>Modification du type d’unité réservée
+
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
+
 > [!div class="op_single_selector"]
 > * [.NET](media-services-dotnet-encoding-units.md)
 > * [Portail](media-services-portal-scale-media-processing.md)
-> * [REST](https://docs.microsoft.com/rest/api/media/operations/encodingreservedunittype)
-> * [Java](https://github.com/southworkscom/azure-sdk-for-media-services-java-samples)
+> * [REST](/rest/api/media/operations/encodingreservedunittype)
+> * [Java](https://github.com/rnrneverdies/azure-sdk-for-media-services-java-samples)
 > * [PHP](https://github.com/Azure/azure-sdk-for-php/tree/master/examples/MediaServices)
 > 
 > 
@@ -66,4 +69,3 @@ Consultez les parcours d’apprentissage de Media Services.
 
 ## <a name="provide-feedback"></a>Fournir des commentaires
 [!INCLUDE [media-services-user-voice-include](../../../includes/media-services-user-voice-include.md)]
-

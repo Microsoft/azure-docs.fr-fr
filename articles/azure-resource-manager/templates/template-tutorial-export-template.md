@@ -2,15 +2,16 @@
 title: Tutoriel - Exporter un modèle à partir du portail Azure
 description: Découvrez comment utiliser un modèle exporté pour procéder au développement de votre modèle.
 author: mumian
-ms.date: 03/27/2020
+ms.date: 09/09/2020
 ms.topic: tutorial
 ms.author: jgao
-ms.openlocfilehash: f95efbaedc2718c968062c47427ab7765756bde7
-ms.sourcegitcommit: 27bbda320225c2c2a43ac370b604432679a6a7c0
+ms.custom: ''
+ms.openlocfilehash: ba1797da5a78eeebd25f5df1b6e37eb92470f584
+ms.sourcegitcommit: 6172a6ae13d7062a0a5e00ff411fd363b5c38597
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/31/2020
-ms.locfileid: "80408562"
+ms.lasthandoff: 12/11/2020
+ms.locfileid: "97106918"
 ---
 # <a name="tutorial-use-exported-template-from-the-azure-portal"></a>Tutoriel : Utiliser un modèle exporté depuis le portail Azure
 
@@ -61,18 +62,18 @@ Ce modèle fonctionne bien pour le déploiement des comptes de stockage, mais vo
 
    La fonction d’exportation de modèle prend l’état actuel d’une ressource et génère un modèle pour le déployer. L’exportation d’un modèle peut être un moyen pratique d’obtenir rapidement le code JSON dont vous avez besoin pour déployer une ressource.
 
-1. Copiez la définition de **Microsoft.Web/serverfarms** et la définition de paramètre dans votre modèle.
+1. Regardez la définition de `Microsoft.Web/serverfarms` et la définition des paramètres dans le modèle exporté. Vous n’avez pas besoin de copier ces sections. Vous pouvez simplement utiliser ce modèle exporté comme exemple illustrant la façon dont vous souhaitez ajouter cette ressource à votre modèle.
 
     ![Modèle Resource Manager - Exporter le modèle - Modèle exporté](./media/template-tutorial-export-template/resource-manager-template-exported-template.png)
 
 > [!IMPORTANT]
-> En règle générale, le modèle exporté est plus détaillé que ce que vous pourriez souhaiter lors de la création d’un modèle. Par exemple, l’objet SKU du modèle exporté possède cinq propriétés. Ce modèle fonctionne, mais vous pouvez simplement utiliser la propriété **name**. Vous pouvez commencer avec le modèle exporté, puis le modifier à votre convenance pour répondre à vos besoins.
+> En règle générale, le modèle exporté est plus détaillé que ce que vous pourriez souhaiter lors de la création d’un modèle. Par exemple, l’objet SKU du modèle exporté possède cinq propriétés. Ce modèle fonctionne, mais vous pouvez simplement utiliser la propriété `name`. Vous pouvez commencer avec le modèle exporté, puis le modifier à votre convenance pour répondre à vos besoins.
 
 ## <a name="revise-existing-template"></a>Réviser le modèle existant
 
 Le modèle exporté vous donne la majeure partie du code JSON dont vous avez besoin, mais vous devez le personnaliser pour votre modèle. Portez une attention particulière aux différences existant dans les paramètres et les variable,s entre votre modèle et le modèle exporté. Bien entendu, le processus d’exportation ignore les paramètres et les variables que vous avez déjà définis dans votre modèle.
 
-L’exemple suivant met en évidence les ajouts à opérer dans votre modèle. Il contient le code exporté, ainsi que quelques modifications. Tout d’abord, il modifie le nom du paramètre pour qu’il corresponde à votre convention de nommage. Ensuite, il utilise votre paramètre location pour l’emplacement du plan App Service. Enfin, il supprime **name** à l’intérieur de l’objet **properties**, car cette valeur est redondante avec la propriété **name** au niveau de la ressource.
+L’exemple suivant met en évidence les ajouts à opérer dans votre modèle. Il contient le code exporté, ainsi que quelques modifications. Tout d’abord, il modifie le nom du paramètre pour qu’il corresponde à votre convention de nommage. Ensuite, il utilise votre paramètre location pour l’emplacement du plan App Service. Enfin, il supprime certaines propriétés où la valeur par défaut convient.
 
 Copiez l’intégralité du fichier et remplacez votre modèle par son contenu.
 
@@ -82,7 +83,7 @@ Copiez l’intégralité du fichier et remplacez votre modèle par son contenu.
 
 Utilisez Azure CLI ou Azure PowerShell pour déployer un modèle.
 
-Si vous n’avez pas créé le groupe de ressources, consultez [Créer un groupe de ressources](template-tutorial-create-first-template.md#create-resource-group). L’exemple suppose que vous avez défini la variable **templateFile** sur le chemin du fichier de modèle, comme indiqué dans le [premier tutoriel](template-tutorial-create-first-template.md#deploy-template).
+Si vous n’avez pas créé le groupe de ressources, consultez [Créer un groupe de ressources](template-tutorial-create-first-template.md#create-resource-group). L’exemple suppose que vous avez défini la variable `templateFile` sur le chemin du fichier de modèle, comme indiqué dans le [premier tutoriel](template-tutorial-create-first-template.md#deploy-template).
 
 # <a name="powershell"></a>[PowerShell](#tab/azure-powershell)
 
@@ -110,7 +111,7 @@ az deployment group create \
 ---
 
 > [!NOTE]
-> En cas d’échec du déploiement, utilisez le commutateur **debug** avec la commande de déploiement pour afficher les journaux de débogage.  Vous pouvez également utiliser le commutateur **verbose** pour afficher les journaux de débogage complets.
+> Si le déploiement a échoué, utilisez le commutateur `verbose` pour obtenir des informations sur les ressources en cours de création. Utilisez le commutateur `debug` pour obtenir des informations supplémentaires sur le débogage.
 
 ## <a name="verify-deployment"></a>Vérifier le déploiement
 

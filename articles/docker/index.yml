@@ -3,19 +3,19 @@ title: Documentation Docker sur Azure
 summary: Docker est une solution courante de gestion de conteneurs et une plateforme de création d’images qui permet de travailler rapidement avec des conteneurs sous Linux et Windows. Découvrez comment tirer parti de Docker sur Azure.
 metadata:
   title: Documentation Docker sur Azure
-  description: Docker est une solution courante de gestion de conteneurs et une plateforme de création d’images qui permet de travailler rapidement avec des conteneurs sous Linux et Windows. Découvrez comment tirer parti de Docker sur Azure.
+  description: Docker est une solution courante de gestion de conteneurs et une plateforme de création d’images qui permet de travailler rapidement avec des conteneurs sous Linux et Windows.
   services: multiple
   ms.service: multiple
   ms.topic: landing-page
   author: georgewallace
   ms.author: gwallace
   ms.date: 03/08/2020
-  ms.openlocfilehash: daff334cbbe118d6fdbc42a5497313f9671fd7f1
-  ms.sourcegitcommit: 253d4c7ab41e4eb11cd9995190cd5536fcec5a3c
+  ms.openlocfilehash: 700c5b1e113de32b80b3d716db915836049128ec
+  ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 03/25/2020
-  ms.locfileid: "78944019"
+  ms.lasthandoff: 10/09/2020
+  ms.locfileid: "89470117"
 landingContent:
 - title: Déployer Docker sur Azure
   linkLists:
@@ -28,9 +28,9 @@ landingContent:
   - linkListType: tutorial
     links:
     - text: Exécuter une application web Python (Django) avec PostgreSQL dans Azure App Service
-      url: ../app-service/containers/tutorial-python-postgresql-app.md
+      url: ../app-service/tutorial-python-postgresql-app.md
     - text: Créer une infrastructure de développement sur une machine virtuelle Linux dans Azure avec Jenkins, GitHub et Docker
-      url: ../jenkins/tutorial-jenkins-github-docker-cicd.md
+      url: /azure/developer/jenkins/pipeline-with-github-and-docker
 - title: Ressources
   linkLists:
   - linkListType: reference
@@ -39,5 +39,5 @@ landingContent:
       url: https://docs.docker.com/docker-for-azure/why/
     - text: Pilote Docker Azure
       url: https://docs.docker.com/machine/drivers/azure/
-    - text: Découvrir Docker
+    - text: En savoir plus sur Docker
       url: https://docker.com

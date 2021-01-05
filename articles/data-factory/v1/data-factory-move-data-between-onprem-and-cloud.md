@@ -12,12 +12,12 @@ ms.topic: conceptual
 ms.date: 01/10/2018
 ms.author: abnarain
 robots: noindex
-ms.openlocfilehash: be797f76988c924503e11b6f66cce899b515e3a2
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 7f07f08cd320d94495403b0f5ae65d60d8dc93b5
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75982195"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96019682"
 ---
 # <a name="move-data-between-on-premises-sources-and-the-cloud-with-data-management-gateway"></a>Déplacement de données entre des sources locales et le cloud à l’aide de la passerelle de gestion des données
 > [!NOTE]
@@ -152,9 +152,9 @@ Dans cette étape, vous allez utiliser le portail Azure pour créer une instance
 12. Vous devez voir **adftutorialgateway** sous **Passerelles de données** dans l’arborescence de gauche.  Si vous cliquez dessus, vous devez voir le code JSON associé.
 
 ## <a name="create-linked-services"></a>Créez des services liés
-Dans cette étape, vous créez deux services liés : **AzureStorageLinkedService** et **SqlServerLinkedService**. Le service lié **SqlServerLinkedService** associe une base de données SQL Server locale, et le service lié **AzureStorageLinkedService** associe un magasin d’objets blob Azure à la fabrique de données. Plus loin dans cette procédure pas à pas, vous allez créer un pipeline qui copie les données de la base de données SQL Server locale vers le magasin d’objets blob Azure.
+Dans cette étape, vous créez deux services liés : **AzureStorageLinkedService** et **SqlServerLinkedService**. Le service lié **SqlServerLinkedService** associe une base de données SQL Server, et le service lié **AzureStorageLinkedService** associe un magasin d’objets blob Azure à la fabrique de données. Plus loin dans cette procédure pas à pas, vous allez créer un pipeline qui copie les données de la base de données SQL Server vers le magasin d’objets blob Azure.
 
-#### <a name="add-a-linked-service-to-an-on-premises-sql-server-database"></a>Ajout d’un service lié à une base de données SQL Server locale
+#### <a name="add-a-linked-service-to-a-sql-server-database"></a>Ajout d’un service lié à une base de données SQL Server
 1. Dans **Data Factory Editor**, cliquez sur **Nouvelle banque de données** sur la barre d’outils, puis sélectionnez **SQL Server**.
 
    ![Nouveau service lié SQL Server](./media/data-factory-move-data-between-onprem-and-cloud/NewSQLServer.png)
@@ -189,7 +189,7 @@ Dans cette étape, vous allez créer des jeux de données d’entrée et de sort
 * Créez un conteneur d’objets blobs nommé **adftutorial** dans le compte de stockage d’objets blobs Azure que vous avez ajouté en tant que service associé à la fabrique de données.
 
 ### <a name="prepare-on-premises-sql-server-for-the-tutorial"></a>Préparation du serveur SQL Server local pour le didacticiel
-1. Dans la base de données que vous avez spécifiée pour le service lié SQL Server local (**SqlServerLinkedService**), utilisez le script SQL suivant pour créer la table **emp** dans la base de données.
+1. Dans la base de données que vous avez spécifiée pour le service lié SQL Server (**SqlServerLinkedService**), utilisez le script SQL suivant pour créer la table **emp** dans la base de données.
 
     ```SQL   
     CREATE TABLE dbo.emp

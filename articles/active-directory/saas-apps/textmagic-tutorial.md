@@ -2,26 +2,21 @@
 title: 'Tutoriel : Intégration de l’authentification unique Azure Active Directory à TextMagic | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et TextMagic.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: 3e5b49d2-7096-46bc-a9ce-90e09177ba28
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 10/17/2019
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: ca7b900a0e2203fffb5240acd4ab5201fc9d52d7
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: f1e6cd222c9ee8f40f81d4db3750956e8e698e3e
+ms.sourcegitcommit: e15c0bc8c63ab3b696e9e32999ef0abc694c7c41
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "72533020"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97607667"
 ---
 # <a name="tutorial-azure-active-directory-single-sign-on-sso-integration-with-textmagic"></a>Tutoriel : Intégration de l’authentification unique Azure Active Directory à TextMagic
 
@@ -31,7 +26,7 @@ Ce tutoriel explique comment intégrer TextMagic avec Azure Active Directory (Az
 * Permettre à vos utilisateurs de se connecter automatiquement à TextMagic avec leur compte Azure AD.
 * Gérer vos comptes à un emplacement central : le Portail Azure.
 
-Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -98,9 +93,9 @@ Effectuez les étapes suivantes pour activer l’authentification unique Azure A
     | Nom |   Attribut source| Espace de noms  |
     | --------------- | --------------- | --------------- |
     | société | user.companyname | http://schemas.xmlsoap.org/ws/2005/05/identity/claims |
-    | firstName               | user.givenname |  http://schemas.xmlsoap.org/ws/2005/05/identity/claims |
-    | lastName            | user.surname |  http://schemas.xmlsoap.org/ws/2005/05/identity/claims |
-    | phone               | user.telephonenumber |  http://schemas.xmlsoap.org/ws/2005/05/identity/claims |
+    | firstName | user.givenname |  http://schemas.xmlsoap.org/ws/2005/05/identity/claims |
+    | lastName | user.surname |  http://schemas.xmlsoap.org/ws/2005/05/identity/claims |
+    | phone | user.telephonenumber |  http://schemas.xmlsoap.org/ws/2005/05/identity/claims |
 
 1. Dans la page **Configurer l’authentification unique avec SAML**, dans la section **Certificat de signature SAML**, recherchez **Certificat (en base64)** , puis sélectionnez **Télécharger** pour télécharger le certificat et l’enregistrer sur votre ordinateur.
 
@@ -154,11 +149,11 @@ Dans cette section, vous allez autoriser B.Simon à utiliser l’authentificatio
 
 4. Sélectionnez **Paramètres du compte** sous le nom d’utilisateur.
 
-    ![Configuration de TextMagic](./media/textmagic-tutorial/config1.png)
+    ![Capture d’écran montrant l’élément Paramètres du compte sélectionné par l’utilisateur](./media/textmagic-tutorial/config1.png)
 
 5. Cliquez sur l’onglet **Authentification unique (SSO)** , puis complétez les champs suivants :  
 
-    ![Configuration de TextMagic](./media/textmagic-tutorial/config2.png)
+    ![Capture d’écran montrant l’onglet Authentification unique dans lequel vous pouvez entrer les valeurs décrites](./media/textmagic-tutorial/config2.png)
 
     a. Dans la zone de texte **Identity provider Entity ID:** (ID d’entité du fournisseur d’identité), collez la valeur de l’**identificateur Azure AD**, que vous avez copiée à partir du portail Azure.
 
@@ -179,15 +174,14 @@ Vous n’avez aucune opération à effectuer dans cette section.
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Quand vous cliquez sur la vignette TextMagic dans le volet d’accès, vous devez être connecté automatiquement à l’application TextMagic pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Quand vous cliquez sur la vignette TextMagic dans le volet d’accès, vous devez être connecté automatiquement à l’application TextMagic pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de tutoriels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de tutoriels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)
 
 - [Essayer TextMagic avec Azure AD](https://aad.portal.azure.com/)
-

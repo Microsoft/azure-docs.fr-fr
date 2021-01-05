@@ -12,12 +12,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 04/08/2020
 ms.author: kumud
-ms.openlocfilehash: 4601a7f5da8d6e4eda2ee433fe52d08a6341ce6c
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 29ea65e94e97b69e24c6935328cc01c2295adc5a
+ms.sourcegitcommit: 59f506857abb1ed3328fda34d37800b55159c91d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82186014"
+ms.lasthandoff: 10/24/2020
+ms.locfileid: "92518634"
 ---
 # <a name="plan-virtual-networks"></a>Planifier des réseaux virtuels
 
@@ -105,9 +105,9 @@ Les ressources dans un réseau virtuel ne peuvent pas résoudre les noms de ress
 
 ## <a name="permissions"></a>Autorisations
 
-Azure utilise le [contrôle d’accès en fonction du rôle](../role-based-access-control/overview.md?toc=%2fazure%2fvirtual-network%2ftoc.json) (RBAC) aux ressources. Des autorisations sont affectées à une [étendue](../role-based-access-control/overview.md?toc=%2fazure%2fvirtual-network%2ftoc.json#scope) dans la hiérarchie suivante : groupe d’administration, abonnement, groupe de ressources et ressource individuelle. Pour en savoir plus sur la hiérarchie, consultez [Organize your resources](../azure-resource-manager/management-groups-overview.md?toc=%2fazure%2fvirtual-network%2ftoc.json) (Organiser vos ressources). Pour utiliser des réseaux virtuels Azure et toutes leurs fonctionnalités associées, comme le peering, les groupes de sécurité réseau, les points de terminaison de service et les tables de routage, vous pouvez assigner à des membres de votre organisation le rôle [Propriétaire](../role-based-access-control/built-in-roles.md?toc=%2fazure%2fvirtual-network%2ftoc.json#owner), [Contributeur](../role-based-access-control/built-in-roles.md?toc=%2fazure%2fvirtual-network%2ftoc.json#contributor) ou [Contributeur réseau](../role-based-access-control/built-in-roles.md?toc=%2fazure%2fvirtual-network%2ftoc.json#network-contributor) intégré, puis assigner le rôle à l’étendue appropriée. Si vous souhaitez assigner des autorisations spécifiques pour un sous-ensemble de fonctionnalités de réseau virtuel, créez un [rôle personnalisé](../role-based-access-control/custom-roles.md?toc=%2fazure%2fvirtual-network%2ftoc.json) et assignez les autorisations spécifiques nécessaires pour les [réseaux virtuels](manage-virtual-network.md#permissions), [sous-réseaux et points de terminaison de service](virtual-network-manage-subnet.md#permissions), [interfaces réseau](virtual-network-network-interface.md#permissions), [peering](virtual-network-manage-peering.md#permissions), [groupes de sécurité réseau et d’application](manage-network-security-group.md#permissions) ou les [tables de routage](manage-route-table.md#permissions) au rôle.
+Azure utilise le [contrôle d’accès en fonction du rôle Azure (Azure RBAC)](../role-based-access-control/overview.md?toc=%2fazure%2fvirtual-network%2ftoc.json) pour gérer l’accès aux ressources. Des autorisations sont affectées à une [étendue](../role-based-access-control/overview.md?toc=%2fazure%2fvirtual-network%2ftoc.json#scope) dans la hiérarchie suivante : groupe d’administration, abonnement, groupe de ressources et ressource individuelle. Pour en savoir plus sur la hiérarchie, consultez [Organize your resources](../azure-resource-manager/management-groups-overview.md?toc=%2fazure%2fvirtual-network%2ftoc.json) (Organiser vos ressources). Pour utiliser des réseaux virtuels Azure et toutes leurs fonctionnalités associées, comme le peering, les groupes de sécurité réseau, les points de terminaison de service et les tables de routage, vous pouvez assigner à des membres de votre organisation le rôle [Propriétaire](../role-based-access-control/built-in-roles.md?toc=%2fazure%2fvirtual-network%2ftoc.json#owner), [Contributeur](../role-based-access-control/built-in-roles.md?toc=%2fazure%2fvirtual-network%2ftoc.json#contributor) ou [Contributeur réseau](../role-based-access-control/built-in-roles.md?toc=%2fazure%2fvirtual-network%2ftoc.json#network-contributor) intégré, puis assigner le rôle à l’étendue appropriée. Si vous souhaitez assigner des autorisations spécifiques pour un sous-ensemble de fonctionnalités de réseau virtuel, créez un [rôle personnalisé](../role-based-access-control/custom-roles.md?toc=%2fazure%2fvirtual-network%2ftoc.json) et assignez les autorisations spécifiques nécessaires pour les [réseaux virtuels](manage-virtual-network.md#permissions), [sous-réseaux et points de terminaison de service](virtual-network-manage-subnet.md#permissions), [interfaces réseau](virtual-network-network-interface.md#permissions), [peering](virtual-network-manage-peering.md#permissions), [groupes de sécurité réseau et d’application](manage-network-security-group.md#permissions) ou les [tables de routage](manage-route-table.md#permissions) au rôle.
 
-## <a name="policy"></a>Stratégie
+## <a name="policy"></a>Policy
 
 Azure Policy vous permet de créer, d’assigner et de gérer des définitions de stratégie. Les définitions de stratégie appliquent différentes règles sur vos ressources, qui restent donc conformes aux normes et aux contrats de niveau de service de l’organisation. Azure Policy exécute une évaluation de vos ressources, en analysant les ressources qui ne sont pas conformes avec les définitions de stratégie dont vous disposez. Par exemple, vous pouvez définir et appliquer une stratégie qui autorise la création de réseaux virtuels dans seulement une région ou un groupe de ressources spécifique. Une autre stratégie peut exiger qu’un groupe de sécurité réseau soit associé à chaque sous-réseau. Les stratégies sont alors évaluées lors de la création et de la mise à jour des ressources.
 

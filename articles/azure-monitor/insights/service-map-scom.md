@@ -6,12 +6,12 @@ ms.topic: conceptual
 author: bwren
 ms.author: bwren
 ms.date: 07/12/2019
-ms.openlocfilehash: a20884c33d5232661e858e0b3ec722f139825aea
-ms.sourcegitcommit: a6d477eb3cb9faebb15ed1bf7334ed0611c72053
+ms.openlocfilehash: 489b4bfee1eaa2c381b16e88dbcc0bcb7fd8555f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82928004"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91441504"
 ---
 # <a name="integrate-system-center-operations-manager-with-azure-monitor-for-vms-map-feature"></a>Intégrer System Center Operations Manager avec la fonctionnalité de mappage Azure Monitor pour machines virtuelles
 
@@ -73,11 +73,11 @@ Pour configurer l’intégration de la fonctionnalité MAP d’Azure Monitor pou
 
 6. Facultatif : Sélectionnez le pool de ressources de l’ensemble des serveurs d’administration pour communiquer avec Log Analytics, puis cliquez sur **Ajouter un espace de travail**.
 
-    ![Pool de ressources de configuration d’Operations Manager](media/service-map-scom/scom-config-pool.png)
+    ![Capture de l'écran Pool de serveurs dans Ajouter un espace de travail Microsoft Operations Management Suite, avec l'option Pool de ressources de tous les serveurs de gestion sélectionnée.](media/service-map-scom/scom-config-pool.png)
 
     La configuration et l’inscription de l’espace de travail Log Analytics peuvent prendre quelques minutes. Une fois configuré, Operations Manager lance la première synchronisation de la fonctionnalité Map.
 
-    ![Pool de ressources de configuration d’Operations Manager](media/service-map-scom/scom-config-success.png)
+    ![Capture de l'écran Achèvement dans Ajouter un espace de travail Microsoft Operations Management Suite, avec confirmation que l'espace de travail a été ajouté.](media/service-map-scom/scom-config-success.png)
 
 ## <a name="monitor-integration"></a>Superviser l’intégration
 
@@ -98,11 +98,11 @@ Le dossier Service Map possède quatre nœuds :
 
 * **Vues de dépendance de groupe d’ordinateurs** : répertorie tous les groupes d’ordinateurs synchronisés à partir de la fonctionnalité Map. Vous pouvez cliquer sur n’importe quel groupe pour afficher son diagramme d’application distribuée.
 
-    ![Diagramme d’application distribuée Operations Manager](media/service-map-scom/scom-group-dad.png)
+    ![Capture d'écran de Service Map présentant un diagramme avec des images pour chaque groupe de machines et des lignes indiquant les dépendances entre eux.](media/service-map-scom/scom-group-dad.png)
 
 * **Vues de dépendance du serveur** : répertorie tous les serveurs synchronisés à partir de la fonctionnalité Map. Vous pouvez cliquer sur n’importe quel serveur pour afficher son diagramme d’application distribuée.
 
-    ![Diagramme d’application distribuée Operations Manager](media/service-map-scom/scom-dad.png)
+    ![Capture d'écran de Service Map présentant un diagramme avec des images pour chaque serveur et des lignes indiquant les dépendances entre eux.](media/service-map-scom/scom-dad.png)
 
 ## <a name="edit-or-delete-the-workspace"></a>Modification ou suppression de l’espace de travail
 
@@ -138,9 +138,11 @@ La conception actuelle présente les problèmes et les limitations suivants :
 
 Pour obtenir une documentation Azure officielle sur la création d’un principal de service, consultez :
 
-* [Création d’un principal de service à l’aide de PowerShell](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-authenticate-service-principal)
-* [Création d’un principal de service à l’aide d’Azure CLI](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-authenticate-service-principal-cli)
-* [Création d’un principal de service à l’aide du portail Azure](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-create-service-principal-portal)
+* [Création d’un principal de service à l’aide de PowerShell](../../active-directory/develop/howto-authenticate-service-principal-powershell.md)
+* [Création d’un principal de service à l’aide d’Azure CLI](/cli/azure/create-an-azure-service-principal-azure-cli?view=azure-cli-latest)
+* [Création d’un principal de service à l’aide du portail Azure](../../active-directory/develop/howto-create-service-principal-portal.md)
 
-### <a name="feedback"></a>Commentaires
+### <a name="suggestions"></a>Suggestions
+
 Avez-vous des commentaires à nous adresser concernant l’intégration avec la fonctionnalité Map d’Azure Monitor pour machines virtuelles fonctionnalité Map ou cette documentation ? Consultez notre [page Voix utilisateur](https://feedback.azure.com/forums/267889-log-analytics/category/184492-service-map) qui vous permet de suggérer des fonctionnalités ou de voter pour les suggestions en cours.
+

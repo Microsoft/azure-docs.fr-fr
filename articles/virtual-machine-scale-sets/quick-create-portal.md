@@ -6,19 +6,19 @@ ms.author: jushiman
 ms.topic: quickstart
 ms.service: virtual-machine-scale-sets
 ms.subservice: ''
-ms.date: 10/23/2019
+ms.date: 06/30/2020
 ms.reviewer: mimckitt
 ms.custom: mimckitt
-ms.openlocfilehash: 582bf5c6424b9dc13b354a92e75b3a7ee2cdca6f
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.openlocfilehash: 33f7f407c1df45131b0ebb5b14e8fcad2626bffd
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83197642"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "87077548"
 ---
 # <a name="quickstart-create-a-virtual-machine-scale-set-in-the-azure-portal"></a>Démarrage rapide : Créer un groupe de machines virtuelles identiques dans le portail Azure
 
-Un groupe de machines virtuelles identiques vous permet de déployer et de gérer un ensemble de machines virtuelles identiques prenant en charge la mise à l’échelle automatique. Vous pouvez mettre à l’échelle manuellement le nombre de machines virtuelles du groupe identique ou définir des règles de mise à l’échelle automatique en fonction de l’utilisation des ressources telles que l’UC, la demande de mémoire ou le trafic réseau. Un équilibreur de charge Azure distribue ensuite le trafic vers les instances de machine virtuelle du groupe identique. Dans ce guide de démarrage rapide, vous créez un groupe de machines virtuelles identiques dans le portail Azure.
+Un groupe de machines virtuelles identiques vous permet de déployer et de gérer un ensemble de machines virtuelles prenant en charge la mise à l’échelle automatique. Vous pouvez mettre à l’échelle manuellement le nombre de machines virtuelles du groupe identique ou définir des règles de mise à l’échelle automatique en fonction de l’utilisation des ressources telles que l’UC, la demande de mémoire ou le trafic réseau. Un équilibreur de charge Azure distribue ensuite le trafic vers les instances de machine virtuelle du groupe identique. Dans ce guide de démarrage rapide, vous créez un groupe de machines virtuelles identiques dans le portail Azure.
 
 Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
 
@@ -44,8 +44,9 @@ Commencez par créer un équilibreur de charge Standard public en utilisant le p
     | Type          | Sélectionnez **Public**.       |
     | SKU           | Sélectionnez **Standard**.       |
     | Adresse IP publique | Sélectionnez **Créer nouveau**. |
-    | Nom de l’adresse IP publique  | *MyPip*   |
+    | Nom de l’adresse IP publique  | *myPip*   |
     | Affectation| statique |
+    | Zone de disponibilité | Sélectionnez **Redondant dans une zone**. |
 
 1. Quand vous avez terminé, sélectionnez **Vérifier + Créer** 
 1. Après la validation, sélectionnez **Créer**. 
@@ -55,11 +56,11 @@ Commencez par créer un équilibreur de charge Standard public en utilisant le p
 ## <a name="create-virtual-machine-scale-set"></a>Créer un groupe de machines virtuelles identiques
 Vous pouvez déployer un groupe identique avec une image Windows Server ou une image Linux, comme RHEL, CentOS, Ubuntu ou SLES.
 
-1. Tapez **Groupe identique** dans la zone de recherche. Dans les résultats, sous **Place de marché**, sélectionnez **Groupes de machines virtuelles identiques**. La page **Créer un groupe de machines virtuelles identiques** s’ouvre. 
+1. Tapez **Groupe identique** dans la zone de recherche. Dans les résultats, sous **Place de marché**, sélectionnez **Groupes de machines virtuelles identiques**. Sélectionnez **Créer** dans la page **Groupes de machines virtuelles identiques** pour ouvrir la page **Créer un groupe de machines virtuelles identiques**. 
 1. Sous l’onglet **De base**, sous **Détails du projet**, vérifiez que l’abonnement approprié est sélectionné, puis choisissez **Créer** pour créer un groupe de ressources. Tapez *myVMSSResourceGroup* pour le nom, puis sélectionnez **OK**. 
 1. Tapez *myScaleSet* comme nom de votre groupe identique.
 1. Dans **Région**, sélectionnez une région proche de vous.
-1. Laissez la valeur par défaut de **Machines virtuelles identiques** pour **Orchestrateur**.
+1. Pour **Mode d’orchestration**, conservez la valeur par défaut **Machines virtuelles du groupe identique**.
 1. Sélectionnez une image de la place de marché pour **Image**. Dans cet exemple, nous avons choisi *Ubuntu Server 18.04 LTS*.
 1. Entrez le nom d’utilisateur de votre choix, puis sélectionnez le type d’authentification que vous préférez.
    - Un **mot de passe** doit comporter au moins 12 caractères, avec au moins trois des quatre caractères suivants : une minuscule, une majuscule, un chiffre et un caractère spécial. Pour plus d’informations, consultez les [critères de nom d’utilisateur et de mot de passe](../virtual-machines/windows/faq.md#what-are-the-username-requirements-when-creating-a-vm).

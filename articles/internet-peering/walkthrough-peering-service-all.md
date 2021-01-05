@@ -5,15 +5,15 @@ description: Procédure pas à pas pour le partenaire Peering Service
 services: internet-peering
 author: prmitiki
 ms.service: internet-peering
-ms.topic: article
-ms.date: 11/27/2019
+ms.topic: how-to
+ms.date: 12/15/2020
 ms.author: prmitiki
-ms.openlocfilehash: d626d98613bd5d988b599d0980c885d7f73bb958
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 292c850f5352c80112e3f0bcc5c868f8128819be
+ms.sourcegitcommit: d2d1c90ec5218b93abb80b8f3ed49dcf4327f7f4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76720246"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97592311"
 ---
 # <a name="peering-service-partner-walkthrough"></a>Procédure pas à pas pour le partenaire Peering Service
 

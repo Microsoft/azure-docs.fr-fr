@@ -5,11 +5,11 @@ author: ecfan
 ms.author: estfan
 ms.date: 03/02/2018
 ms.openlocfilehash: 1aabc1b33722c571c6519b6620fb62211a44c2e8
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "74789775"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95999538"
 ---
 1. Dans le [portail Azure](https://portal.azure.com), créez une application logique vide. 
 

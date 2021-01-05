@@ -1,19 +1,17 @@
 ---
 title: Diagnostic des problèmes de performances graphiques dans le Bureau à distance - Azure
 description: Cet article décrit comment utiliser les compteurs graphiques RemoteFX dans les sessions de protocole Bureau à distance pour diagnostiquer les problèmes de performances liés aux graphiques dans Windows Virtual Desktop.
-services: virtual-desktop
 author: Heidilohr
-ms.service: virtual-desktop
 ms.topic: troubleshooting
 ms.date: 05/23/2019
 ms.author: helohr
 manager: lizross
-ms.openlocfilehash: 84cee86dbddff77f6142925eec01889cf793a466
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: dc5c6499fa47a1e32a517032d5cc2a97b3f2677f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79127558"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88007164"
 ---
 # <a name="diagnose-graphics-performance-issues-in-remote-desktop"></a>Diagnostic des problèmes de performances graphiques dans le Bureau à distance
 

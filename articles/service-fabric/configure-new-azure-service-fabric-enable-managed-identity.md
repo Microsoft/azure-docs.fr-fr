@@ -3,13 +3,12 @@ title: Configurer la prise en charge des identités managées pour un nouveau cl
 description: Voici comment activer la prise en charge des identités managées dans un nouveau cluster Azure Service Fabric
 ms.topic: article
 ms.date: 12/09/2019
-ms.custom: sfrev
-ms.openlocfilehash: dd0cbd3251185a7831852ead47ca0b120126cf55
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: ae4fec452a2342a68843d874ba955b594014c46d
+ms.sourcegitcommit: 16c7fd8fe944ece07b6cf42a9c0e82b057900662
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81415668"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96574664"
 ---
 # <a name="configure-managed-identity-support-for-a-new-service-fabric-cluster"></a>Configurer la prise en charge des identités managées pour un nouveau cluster Service Fabric
 

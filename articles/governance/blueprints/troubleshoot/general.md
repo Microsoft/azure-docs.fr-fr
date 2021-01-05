@@ -1,14 +1,14 @@
 ---
 title: Résolution des erreurs courantes
 description: Découvrez comment détecter un problème lié à la création, à l’attribution et à la suppression de blueprints tels que les violations de stratégie et les fonctions de paramètres blueprint.
-ms.date: 01/15/2020
+ms.date: 10/14/2020
 ms.topic: troubleshooting
-ms.openlocfilehash: 7306e344a479008a87164a954c4444d375950b0b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: a1689141f95aaac9183391af79edb0cabf5343b6
+ms.sourcegitcommit: 1b47921ae4298e7992c856b82cb8263470e9e6f9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76157081"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92058282"
 ---
 # <a name="troubleshoot-errors-using-azure-blueprints"></a>Résoudre les erreurs à l’aide de blueprints Azure
 
@@ -22,9 +22,9 @@ De nombreuses erreurs sont dues à l’affectation d’un blueprint à une éten
 
 1. Sélectionnez **Blueprints affectés** dans la page de gauche et utilisez la zone de recherche pour filtrer les affectations de blueprints afin d’identifier celle qui a échoué. Vous pouvez également trier la table des affectations d’après la colonne **État de l’approvisionnement** pour regrouper toutes les affectations ayant échoué.
 
-1. Cliquez sur le blueprint ayant l’état _Échec_, ou cliquez avec le bouton droit et sélectionnez **Voir les détails de l’affectation**.
+1. Sélectionnez le blueprint ayant l’état _Échec_, ou cliquez avec le bouton droit et sélectionnez **Voir les détails de l’affectation**.
 
-1. Une bannière rouge signalant que l’affectation a échoué figure en haut de la page d’affectation de blueprint. Cliquez n’importe où sur la bannière pour obtenir plus de détails.
+1. Une bannière rouge signalant que l’affectation a échoué figure en haut de la page d’affectation de blueprint. Sélectionnez n’importe où sur la bannière pour obtenir plus de détails.
 
 Il est courant que l’erreur soit due à un artefact et non au blueprint lui-même. Si un artefact crée un coffre de clés, mais que la stratégie Azure empêche la création du coffre de clés, l’affectation entière échoue.
 
@@ -59,7 +59,7 @@ En passant un paramètre de blueprint qui utilise une fonction, comme `[resource
 
 #### <a name="resolution"></a>Résolution
 
-Pour passer une fonction en tant que paramètre, ajoutez un caractère d’échappement devant toute la chaîne avec `[` pour que le paramètre de blueprint se présente sous la forme `[[resourceGroup().tags.myTag]`. Le caractère d’échappement fait que les blueprints traitent la valeur comme une chaîne lors du traitement du blueprint. Le blueprint place ensuite la fonction sur l’artefact, ce qui lui permet d’être dynamique comme prévu. Pour plus d’informations, voir [Syntaxe et expressions dans les modèles Azure Resource Manager](../../../azure-resource-manager/templates/template-expressions.md).
+Pour passer une fonction en tant que paramètre, ajoutez un caractère d’échappement devant toute la chaîne avec `[` pour que le paramètre de blueprint se présente sous la forme `[[resourceGroup().tags.myTag]`. Le caractère d’échappement fait que les blueprints traitent la valeur comme une chaîne lors du traitement du blueprint. Le service Blueprints place ensuite la fonction sur l’artefact, ce qui lui permet d’être dynamique comme prévu. Pour plus d’informations, voir [Syntaxe et expressions dans les modèles Azure Resource Manager](../../../azure-resource-manager/templates/template-expressions.md).
 
 ## <a name="delete-errors"></a>Supprimer les erreurs
 

@@ -4,16 +4,16 @@ description: Modèle de données Application Insights pour la télémétrie des
 ms.topic: conceptual
 ms.date: 04/25/2017
 ms.reviewer: sergkanz
-ms.openlocfilehash: 3e4a1fc3de58b8e65ab9c7a288bdf3eb37e7bae0
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f8e787b8a94987e7d68e12a0e4e69f4c63e21e19
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77671968"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87320576"
 ---
 # <a name="metric-telemetry-application-insights-data-model"></a>Télémétrie des mesure : modèle de données Application Insights
 
-Deux types de télémétrie des mesures sont prises en charge par [Application Insights](../../azure-monitor/app/app-insights-overview.md) : la mesure unique et la mesure pré-agrégée. La mesure unique consiste simplement dans un nom et une valeur. La mesure pré-agrégée spécifie les valeurs minimale et maximale de la mesure dans l’intervalle d’agrégation, ainsi que son écart standard.
+Deux types de télémétrie des mesures sont prises en charge par [Application Insights](./app-insights-overview.md) : la mesure unique et la mesure pré-agrégée. La mesure unique consiste simplement dans un nom et une valeur. La mesure pré-agrégée spécifie les valeurs minimale et maximale de la mesure dans l’intervalle d’agrégation, ainsi que son écart standard.
 
 La télémétrie des mesures pré-agrégées suppose que cette période d’agrégation est d’une minute.
 
@@ -24,7 +24,7 @@ Système de représentation des mesures et compteurs de processus :
 | **Nom .NET**             | **Nom sans plateforme spécifiée** | **Nom d’API REST** | **Description**
 | ------------------------- | -------------------------- | ----------------- | ---------------- 
 | `\Processor(_Total)\% Processor Time` | Travail en cours... | [processorCpuPercentage](https://dev.applicationinsights.io/apiexplorer/metrics?appId=DEMO_APP&apiKey=DEMO_KEY&metricId=performanceCounters%2FprocessorCpuPercentage) | nombre total de processeurs de l’ordinateur
-| `\Memory\Available Bytes`                 | Travail en cours... | [memoryAvailableBytes](https://dev.applicationinsights.io/apiexplorer/metrics?appId=DEMO_APP&apiKey=DEMO_KEY&metricId=performanceCounters%2FmemoryAvailableBytes) | Affiche la quantité de mémoire physique (en octets) disponible pour les processus en cours d’exécution sur l’ordinateur. Elle est calculée en additionnant la quantité d’espace sur les listes de mémoire mises à zéro, libres et en attente. La mémoire disponible est prête à être utilisée. La mémoire mise à zéro consiste en des pages de mémoire remplies de zéros pour empêcher la consultation des données d’un processus précédent par des processus ultérieurs. La mémoire en attente est une mémoire supprimée de la plage de travail d’un processus (sa mémoire physique) en cours de route sur le disque, mais pouvant toujours être rappelée. Voir [Objet mémoire](https://msdn.microsoft.com/library/ms804008.aspx)
+| `\Memory\Available Bytes`                 | Travail en cours... | [memoryAvailableBytes](https://dev.applicationinsights.io/apiexplorer/metrics?appId=DEMO_APP&apiKey=DEMO_KEY&metricId=performanceCounters%2FmemoryAvailableBytes) | Affiche la quantité de mémoire physique (en octets) disponible pour les processus en cours d’exécution sur l’ordinateur. Elle est calculée en additionnant la quantité d’espace sur les listes de mémoire mises à zéro, libres et en attente. La mémoire disponible est prête à être utilisée. La mémoire mise à zéro consiste en des pages de mémoire remplies de zéros pour empêcher la consultation des données d’un processus précédent par des processus ultérieurs. La mémoire en attente est une mémoire supprimée de la plage de travail d’un processus (sa mémoire physique) en cours de route sur le disque, mais pouvant toujours être rappelée. Voir [Objet mémoire](/previous-versions/ms804008(v=msdn.10))
 | `\Process(??APP_WIN32_PROC??)\% Processor Time` | Travail en cours... | [processCpuPercentage](https://dev.applicationinsights.io/apiexplorer/metrics?appId=DEMO_APP&apiKey=DEMO_KEY&metricId=performanceCounters%2FprocessCpuPercentage) | processeur du processus hébergeant l’application
 | `\Process(??APP_WIN32_PROC??)\Private Bytes`      | Travail en cours... | [processPrivateBytes](https://dev.applicationinsights.io/apiexplorer/metrics?appId=DEMO_APP&apiKey=DEMO_KEY&metricId=performanceCounters%2FprocessPrivateBytes) | mémoire utilisée par le processus hébergeant l’application
 | `\Process(??APP_WIN32_PROC??)\IO Data Bytes/sec` | Travail en cours... | [processIOBytesPerSecond](https://dev.applicationinsights.io/apiexplorer/metrics?appId=DEMO_APP&apiKey=DEMO_KEY&metricId=performanceCounters%2FprocessIOBytesPerSecond) | fréquence des opérations d’E/S exécutées par le processus hébergeant l’application
@@ -65,6 +65,7 @@ Si la propriété personnalisée `CustomPerfCounter` d’une métrique est défi
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- Découvrez comment utiliser [l’API Application Insights pour les événements et les mesures personnalisés](../../azure-monitor/app/api-custom-events-metrics.md#trackmetric).
+- Découvrez comment utiliser [l’API Application Insights pour les événements et les mesures personnalisés](./api-custom-events-metrics.md#trackmetric).
 - Pour connaître les types et les modèles de données Application Insights, consultez [Modèle de données](data-model.md).
-- Découvrez quelles [plateformes](../../azure-monitor/app/platforms.md) sont prises en charge par Application Insights.
+- Découvrez quelles [plateformes](./platforms.md) sont prises en charge par Application Insights.
+

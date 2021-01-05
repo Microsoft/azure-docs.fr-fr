@@ -5,12 +5,13 @@ author: florianborn71
 ms.author: flborn
 ms.date: 02/03/2020
 ms.topic: conceptual
-ms.openlocfilehash: 7f2b1031659864ae338bb0aa320c048ea23c21f3
-ms.sourcegitcommit: 642a297b1c279454df792ca21fdaa9513b5c2f8b
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 3d8ff6640f856b3227cead6dc50befca5d5ef3e8
+ms.sourcegitcommit: 957c916118f87ea3d67a60e1d72a30f48bad0db6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80679355"
+ms.lasthandoff: 10/19/2020
+ms.locfileid: "92202767"
 ---
 # <a name="rendering-modes"></a>Modes de rendu
 
@@ -50,7 +51,7 @@ Les caractéristiques de performances des deux modes variant en fonction du cas 
 
 ## <a name="setting-the-render-mode"></a>Définition du mode de rendu
 
-Le mode de rendu utilisé sur une machine virtuelle Remote Rendering est spécifié pendant l’exécution de `AzureSession.ConnectToRuntime` via les paramètres `ConnectToRuntimeParams`.
+Le mode de rendu utilisé sur un serveur Remote Rendering est spécifié pendant l’exécution de `AzureSession.ConnectToRuntime` via les paramètres `ConnectToRuntimeParams`.
 
 ```cs
 async void ExampleConnect(AzureSession session)
@@ -70,6 +71,13 @@ async void ExampleConnect(AzureSession session)
     await session.ConnectToRuntime(parameters).AsTask();
 }
 ```
+
+## <a name="api-documentation"></a>Documentation de l’API
+
+* [AzureSession.ConnectToRuntime(), C#](/dotnet/api/microsoft.azure.remoterendering.azuresession.connecttoruntime)
+* [ConnectToRuntimeParams, struct C#](/dotnet/api/microsoft.azure.remoterendering.connecttoruntimeparams)
+* [AzureSession::ConnectToRuntime(), C++](/cpp/api/remote-rendering/azuresession#connecttoruntime)
+* [ConnectToRuntimeParams, struct C++](/cpp/api/remote-rendering/connecttoruntimeparams)
 
 ## <a name="next-steps"></a>Étapes suivantes
 

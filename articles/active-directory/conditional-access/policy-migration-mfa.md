@@ -1,22 +1,22 @@
 ---
-title: Migrer des stratégies d’accès conditionnel - Azure Active Directory
+title: Migrer les stratégies d’accès conditionnel avec l’authentification multifacteur - Azure Active Directory
 description: Cet article montre comment migrer une stratégie classique qui nécessite l’authentification multifacteur dans le portail Azure.
 services: active-directory
 ms.service: active-directory
 ms.subservice: conditional-access
-ms.topic: conceptual
-ms.date: 12/04/2019
+ms.topic: how-to
+ms.date: 05/26/2020
 ms.author: joflore
 author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: nigu
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: d637ac464b689a25ce5d5a79cf47da0c85d38d0f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 5cc99241f5fa7c09c69db13dcb3f6c3aaa75e376
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74846020"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87027391"
 ---
 # <a name="migrate-a-classic-policy-in-the-azure-portal"></a>Migrer une stratégie classique dans le Portail Azure
 

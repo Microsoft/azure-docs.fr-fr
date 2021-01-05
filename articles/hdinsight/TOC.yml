@@ -1,3 +1,5 @@
+- name: "Documentation Azure\_HDInsight"
+  href: index.yml
 - name: Service HDInsight
   expanded: true
   items:
@@ -6,6 +8,7 @@
         - name: "Qu’est-ce qu’Azure HDInsight\_?"
           href: ./hdinsight-overview.md
     - name: Tutoriels
+      expanded: true
       items:
         - name: Créer des clusters HDInsight
           href: ./hdinsight-hadoop-provision-linux-clusters.md
@@ -59,12 +62,16 @@
           href: ./hdinsight-selecting-vm-size.md
         - name: Planification de la capacité des clusters
           href: ./hdinsight-capacity-planning.md
-        - name: Demander une augmentation du quota de cœurs de processeur
-          href: ./quota-increase-request.md
         - name: Bonnes pratiques sur la gestion des clusters
           href: ./cluster-management-best-practices.md
-        - name: Disponibilité et fiabilité
-          href: ./hdinsight-high-availability-linux.md
+        - name: Continuité de l’activité
+          items:
+            - name: Vue d’ensemble de la continuité des activités
+              href: hdinsight-business-continuity.md
+            - name: Architecture de la continuité de l’activité
+              href: ./hdinsight-business-continuity-architecture.md
+            - name: Étude de cas sur la haute disponibilité
+              href: ./hdinsight-high-availability-case-study.md
         - name: Comprendre les identités managées
           href: ./hdinsight-managed-identities.md
         - name: Comparer les options de stockage
@@ -76,7 +83,7 @@
               href: overview-data-lake-storage-gen1.md
             - name: Vue d’ensemble d’Azure Data Lake Storage Gen2
               href: overview-data-lake-storage-gen2.md
-    - name: Procédures
+    - name: Guides pratiques
       items:
         - name: Créer des clusters
           items:
@@ -99,12 +106,16 @@
               iconUrl: null
         - name: Utiliser le stockage de cluster
           items:
-            - name: Utilisation de Stockage Azure
+            - name: Utiliser Stockage Azure
               href: hdinsight-hadoop-use-blob-storage.md
-            - name: Utilisation d’Azure Data Lake Storage Gen2
+            - name: Utiliser Data Lake Storage Gen2
               href: hdinsight-hadoop-use-data-lake-storage-gen2.md
-            - name: Utilisation d’Azure Data Lake Storage Gen1
-              href: hdinsight-hadoop-use-data-lake-store.md
+            - name: Utiliser Data Lake Storage Gen2 dans le portail
+              href: hdinsight-hadoop-use-data-lake-storage-gen2-portal.md
+            - name: Utiliser Data Lake Storage Gen2 avec Azure CLI
+              href: hdinsight-hadoop-use-data-lake-storage-gen2-azure-cli.md
+            - name: Utiliser Data Lake Storage Gen1
+              href: hdinsight-hadoop-use-data-lake-storage-gen1.md
         - name: Étendre des clusters
           items:
             - name: Installer des applications HDInsight
@@ -126,7 +137,7 @@
                 - name: Installer des applications personnalisées
                   href: hdinsight-apps-install-custom-applications.md
                 - name: Utiliser REST pour installer des applications
-                  href: 'https://msdn.microsoft.com/library/mt706515.aspx'
+                  href: /rest/api/hdinsight/hdinsight-application
                 - name: Publier des applications HDInsight dans la Place de marché Azure
                   href: hdinsight-apps-publish-applications.md
         - name: Sécuriser
@@ -169,6 +180,8 @@
                   href: ./optimize-hive-ambari.md
                 - name: Optimiser Apache Pig
                   href: ./optimize-pig-ambari.md
+            - name: Redémarrer les nœuds de cluster
+              href: ./cluster-reboot-vm.md
             - name: Utiliser l’API REST Apache Ambari
               href: ./hdinsight-hadoop-manage-ambari-rest-api.md
             - name: Suppression d'un cluster
@@ -221,10 +234,6 @@
               href: ./hadoop/apache-hadoop-visual-studio-tools-get-started.md
             - name: Outils Spark et Hive Tools pour VSCode
               href: ./hdinsight-for-vscode.md
-            - name: Outils HDInsight pour IntelliJ avec Hortonworks Sandbox
-              href: ./hadoop/hdinsight-tools-for-intellij-with-hortonworks-sandbox.md
-            - name: Data Lake Tools avec bac à sable (sandbox) Hortonworks
-              href: ./hdinsight-hadoop-emulator-visual-studio.md
         - name: Surveillance
           items:
             - name: Utiliser les journaux d’activité Azure Monitor
@@ -239,6 +248,8 @@
               href: ./cluster-availability-monitor-logs.md
         - name: Dépanner
           items:
+            - name: Demander une augmentation du quota de cœurs de processeur
+              href: ./quota-increase-request.md
             - name: Résoudre les problèmes liés aux actions de script
               href: ./troubleshoot-script-action.md
             - name: Échecs de la création de ressources
@@ -252,11 +263,11 @@
         - name: Azure PowerShell
           href: /powershell/module/az.hdinsight
         - name: Kit SDK pour .NET
-          href: 'https://docs.microsoft.com/dotnet/api/overview/azure/hdinsight?view=azure-dotnet'
+          href: /dotnet/api/overview/azure/hdinsight?view=azure-dotnet&preserve-view=true
         - name: Kit SDK pour Python
-          href: 'https://docs.microsoft.com/python/api/overview/azure/hdinsight?view=azure-python'
+          href: /python/api/overview/azure/hdinsight?view=azure-python&preserve-view=true
         - name: SDK pour Java
-          href: 'https://docs.microsoft.com/java/api/overview/azure/hdinsight?view=azure-java-stable'
+          href: /java/api/overview/azure/hdinsight
         - name: Kit SDK pour Go
           href: ./hdinsight-go-sdk-overview.md
         - name: .NET (Apache HBase)
@@ -290,7 +301,7 @@
         - name: Activer les dumps de tas pour les services Apache Hadoop
           href: ./hdinsight-hadoop-collect-debug-heap-dump-linux.md
         - name: Obtenir de l’aide sur la page de questions Microsoft Q&A
-          href: 'https://docs.microsoft.com/answers/topics/azure-hdinsight.html'
+          href: /answers/topics/azure-hdinsight.html
         - name: Calculatrice de prix
           href: 'https://azure.microsoft.com/pricing/calculator/'
         - name: Outils Windows pour HDInsight
@@ -344,7 +355,7 @@
               href: ./spark/optimize-cluster-configuration.md
         - name: "Migrer vers Spark\_2.3 ou\_2.4"
           href: ./spark/migrate-versions.md
-    - name: Procédures
+    - name: Guides pratiques
       items:
         - name: Utiliser des outils
           items:
@@ -356,6 +367,8 @@
               href: ./set-up-pyspark-interactive-environment.md
         - name: Développer
           items:
+            - name: Optimiser les requêtes avec SparkCruise
+              href: ./spark/spark-cruise.md
             - name: Utiliser un interpréteur de commandes Apache Spark interactif
               href: ./spark/apache-spark-shell.md
             - name: Travaux à distance avec Apache Livy
@@ -390,14 +403,20 @@
                   href: ./spark/apache-spark-analyze-application-insight-logs.md
         - name: Gérer
           items:
+            - name: Gérer les dépendances
+              items:
+                - name: Gérer les dépendances d’application Spark
+                  href: ./spark/apache-spark-manage-dependencies.md
+                - name: Gérer les dépendances jar de façon sécurisée
+                  href: ./spark/safely-manage-jar-dependency.md
+                - name: Gérer l’environnement Python de façon sécurisée
+                  href: ./spark/apache-spark-python-package-installation.md
             - name: Gérer des ressources de cluster
               href: ./spark/apache-spark-resource-manager.md
             - name: Gérer des applications Apache Spark à l’aide du serveur d’historique étendu
               href: ./spark/apache-azure-spark-history-server.md
             - name: Activer la mise en cache avec le cache d’E/S
               href: ./spark/apache-spark-improve-performance-iocache.md
-            - name: Gérer les dépendances Jar
-              href: ./spark/manage-jar-dependency.md
             - name: Utiliser des blocs-notes avec Apache Spark
               items:
                 - name: Utiliser un bloc-notes Jupyter local
@@ -406,18 +425,14 @@
                   href: ./spark/apache-spark-jupyter-notebook-kernels.md
                 - name: Utiliser des packages externes avec Jupyter à l'aide de commandes magiques de cellules
                   href: ./spark/apache-spark-jupyter-notebook-use-external-packages.md
-                - name: Gérer en toute sécurité l’environnement Python sur Azure HDInsight avec une action de script
-                  href: ./spark/apache-spark-python-package-installation.md
                 - name: Utiliser les blocs-notes Apache Zeppelin
                   href: ./spark/apache-spark-zeppelin-notebook.md
             - name: Utiliser avec d’autres services Azure
               items:
                 - name: Utiliser avec Data Lake Storage
                   href: ./spark/apache-spark-use-with-data-lake-store.md
-                - name: Connexion à la base de données Azure SQL
+                - name: Connexion à Azure SQL Database
                   href: ./spark/apache-spark-connect-to-sql-database.md
-                - name: Implémenter une architecture lambda à l’aide d’Apache Spark et Cosmos DB
-                  href: ../cosmos-db/lambda-architecture.md
                 - name: Exécuter des charges de travail Azure ML avec AutoML
                   href: ./spark/apache-spark-run-machine-learning-automl.md
         - name: Dépanner
@@ -430,8 +445,6 @@
               href: ./spark/apache-spark-troubleshoot-job-fails-noclassdeffounderror.md
             - name: Échec du travail Apache Spark - InvalidClassException
               href: ./spark/apache-spark-troubleshoot-job-fails-invalidclassexception.md
-            - name: Travaux Apache Spark lents - listStatus
-              href: ./spark/apache-spark-troubleshoot-job-slowness-liststatus.md
             - name: Travaux Apache Spark lents - conteneur de stockage
               href: ./spark/apache-spark-troubleshoot-job-slowness-container.md
             - name: Exception IllegalArgumentException
@@ -475,7 +488,7 @@
           href: ./hdinsight-hadoop-create-linux-clusters-adf.md
         - name: Envoyer des tâches Apache Hadoop
           href: ./hadoop/submit-apache-hadoop-jobs-programmatically.md
-    - name: Procédures
+    - name: Guides pratiques
       items:
         - name: Utiliser des outils
           items:
@@ -487,7 +500,7 @@
           items:
             - name: Utiliser MapReduce avec Apache Hadoop
               items:
-                - name: Vue d’ensemble de MapReduce
+                - name: Utiliser MapReduce
                   href: ./hadoop/hdinsight-use-mapreduce.md
                 - name: Utiliser SSH
                   href: ./hadoop/apache-hadoop-use-mapreduce-ssh.md
@@ -501,7 +514,7 @@
                   href: ./hadoop/apache-hadoop-run-samples-linux.md
                 - name: Exécuter des programmes Apache Hadoop MapReduce personnalisés
                   href: ./hadoop/apache-hadoop-run-custom-programs.md
-                - name: 'Développer des programmes MapReduce de streaming C#'
+                - name: Développer des programmes MapReduce de streaming C#
                   href: ./hadoop/apache-hadoop-dotnet-csharp-mapreduce-streaming.md
                 - name: Développer des programmes Java MapReduce
                   href: ./hadoop/apache-hadoop-develop-deploy-java-mapreduce-linux.md
@@ -533,6 +546,8 @@
               items:
                 - name: Utiliser des nœuds de périmètre vides
                   href: ./hdinsight-apps-use-edge-node.md
+                - name: Utiliser des nœuds de périphérie pour mettre à l’échelle HiveServer2
+                  href: ./hdinsight-apps-install-hiveserver2.md
         - name: Dépanner
           items:
             - name: Problèmes courants
@@ -620,7 +635,7 @@
           href: ./kafka/apache-kafka-performance-tuning.md
         - name: Forum aux questions sur Kafka
           href: ./kafka/kafka-faq.md
-    - name: Procédures
+    - name: Guides pratiques
       items:
         - name: Développer
           items:
@@ -630,6 +645,8 @@
               href: ./kafka/apache-kafka-auto-create-topics.md
             - name: Utiliser Apache Kafka avec IoT Hub
               href: ./kafka/apache-kafka-connector-iot-hub.md
+            - name: Confluent Schema Registry
+              href: ./kafka/schema-registry.md
             - name: Créer des pipelines de streaming
               items:
                 - name: 'Apache Spark, Apache Kafka et Azure Cosmos DB'
@@ -671,7 +688,7 @@
       items:
         - name: Utiliser Apache HBase dans HDInsight
           href: ./hbase/apache-hbase-tutorial-get-started-linux.md
-    - name: Procédures
+    - name: Guides pratiques
       items:
         - name: Développer
           items:
@@ -725,8 +742,6 @@
               href: ./hbase/hbase-troubleshoot-pegged-cpu-region-server.md
             - name: Délais d’expiration avec la commande hbase hbck
               href: ./hbase/hbase-troubleshoot-timeouts-hbase-hbck.md
-            - name: Résoudre les problèmes Apache HBase
-              href: ./hbase/apache-troubleshoot-hbase.md
             - name: API REST pour interroger Apache HBase
               href: ./hbase/troubleshoot-rest-api.md
 - name: Interactive Query
@@ -752,13 +767,15 @@
           href: ./interactive-query/gateway-best-practices.md
         - name: Recommandations de dimensionnement
           href: ./interactive-query/sizing-guidelines.md
-    - name: Procédures
+        - name: Réplication Hive
+          href: ./interactive-query/apache-hive-replication.md
+    - name: Guides pratiques
       items:
         - name: Développer
           items:
             - name: Traiter et analyser des documents JSON
               href: ./hadoop/using-json-in-hive.md
-            - name: 'Utiliser des fonctions C# définies par l’utilisateur'
+            - name: Utiliser des fonctions C# définies par l’utilisateur
               href: ./hadoop/apache-hadoop-hive-pig-udf-dotnet-csharp.md
             - name: Utiliser Python avec Apache Hive et Apache Pig
               href: ./hadoop/python-udf-hdinsight.md
@@ -772,6 +789,8 @@
               href: ./hadoop/hdinsight-use-hive.md
             - name: Utiliser la vue Apache Hive
               href: ./hadoop/apache-hadoop-use-hive-ambari-view.md
+            - name: Se connecter à Apache Beeline
+              href: ./hadoop/connect-install-beeline.md
             - name: Utiliser Apache Hive Beeline
               href: ./hadoop/apache-hadoop-use-hive-beeline.md
             - name: Utiliser Grafana
@@ -826,6 +845,8 @@
               href: ./hdinsight-troubleshoot-hive.md
             - name: Journaux Apache Hive occupant tout l’espace disque sur le nœud principal
               href: ./interactive-query/interactive-query-troubleshoot-hive-logs-diskspace-full-headnodes.md
+            - name: Options de sécurité pour Hive
+              href: ./interactive-query/hdinsight-security-options-for-hive.md
 - name: ML Services
   items:
     - name: Vue d’ensemble
@@ -847,7 +868,7 @@
           href: ./r-server/ml-services-tutorial-spark-compute.md
         - name: Utiliser Outils R pour Visual Studio
           href: ./r-server/r-server-submit-jobs-r-tools-vs.md
-    - name: Procédures
+    - name: Guides pratiques
       items:
         - name: Développer
           items:
@@ -879,7 +900,7 @@
           href: ./storm/apache-storm-write-data-lake-store.md
         - name: Apache Kafka et Apache Storm (Java)
           href: ./hdinsight-apache-storm-with-kafka.md
-    - name: Procédures
+    - name: Guides pratiques
       items:
         - name: Migrer Storm vers Spark
           href: ./storm/migrate-storm-to-spark.md
@@ -891,7 +912,7 @@
                   href: ./storm/apache-storm-develop-java-topology.md
                 - name: Développer des topologies à l’aide de Python
                   href: ./storm/apache-storm-develop-python-topology.md
-                - name: 'Développer des topologies avec C#'
+                - name: Développer des topologies avec C#
                   href: ./storm/apache-storm-develop-csharp-visual-studio-topology.md
                 - name: Guide de programmation SCP.NET
                   href: ./storm/apache-storm-scp-programming-guide.md
@@ -899,7 +920,7 @@
                   href: ./storm/apache-storm-example-topology.md
             - name: Pipelines de streaming
               items:
-                - name: 'Event Hub et Apache Storm (C# et Java)'
+                - name: Event Hub et Apache Storm (C# et Java)
                   href: ./storm/apache-storm-develop-csharp-event-hub-topology.md
         - name: Gérer
           items:
@@ -935,6 +956,8 @@
           href: ./domain-joined/apache-domain-joined-architecture.md
         - name: Architecture de réseau virtuel HDInsight
           href: ./hdinsight-virtual-network-architecture.md
+        - name: Liaison privée
+          href: ./hdinsight-private-link.md
         - name: TLS (Transport Layer Security)
           href: ./transport-layer-security.md
         - name: Planifier des réseaux virtuels pour HDInsight
@@ -943,13 +966,13 @@
           href: ./control-network-traffic.md
         - name: Adresses IP requises pour des NSG et des UDR
           href: ./hdinsight-management-ip-addresses.md
-        - name: Étiquettes de service pour le Pare-feu Azure
-          href: ./hdinsight-service-tags.md
         - name: Chiffrement de disque de clés gérées par le client
           href: ./disk-encryption.md
         - name: Synchronisation LDAP dans Ranger et Apache Ambari
           href: ./domain-joined/ldap-sync.md
-    - name: Procédures
+        - name: Double chiffrement en transit
+          href: ./domain-joined/encryption-in-transit.md
+    - name: Guides pratiques
       items:
         - name: Utiliser un broker d’ID pour la gestion des informations d’identification
           href: ./domain-joined/identity-broker.md
@@ -971,8 +994,12 @@
           href: ./hdinsight-hadoop-create-linux-clusters-with-secure-transfer-storage.md
         - name: Utiliser un pare-feu pour limiter le trafic sortant
           href: ./hdinsight-restrict-outbound-traffic.md
+        - name: Créer des stratégies de point de terminaison de service
+          href: ./service-endpoint-policies.md
         - name: Configurer une appliance virtuelle réseau
           href: ./network-virtual-appliance.md
+        - name: Étiquettes de service pour le Pare-feu Azure
+          href: ./hdinsight-service-tags.md
         - name: Dépanner
           items:
             - name: Problèmes d’authentification ESP

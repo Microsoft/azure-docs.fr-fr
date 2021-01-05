@@ -12,12 +12,12 @@ ms.tgt_pltfrm: na
 ms.topic: article
 ms.date: 05/29/2019
 ms.author: apimpm
-ms.openlocfilehash: 7f87389016286c9f1b91abc77155be9e94005371
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 043a3d0b63dfc74f587b58b3c2ac42f1a084cc4a
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80335868"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86250309"
 ---
 # <a name="manage-protocols-and-ciphers-in-azure-api-management"></a>Gérer les protocoles et les chiffrements dans Gestion des API Azure
 
@@ -42,5 +42,5 @@ Pour suivre les étapes décrites dans cet article, vous devez avoir :
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* Découvrez plus d’informations sur [TLS (Transport Layer Security)](https://docs.microsoft.com/dotnet/framework/network-programming/tls).
+* Découvrez plus d’informations sur [TLS (Transport Layer Security)](/dotnet/framework/network-programming/tls).
 * Découvrez plus de [vidéos](https://azure.microsoft.com/documentation/videos/index/?services=api-management) sur Gestion des API.

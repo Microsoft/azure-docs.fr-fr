@@ -5,14 +5,14 @@ services: dns
 author: rohinkoul
 ms.service: dns
 ms.topic: quickstart
-ms.date: 10/11/2019
+ms.date: 10/20/2020
 ms.author: rohink
-ms.openlocfilehash: 52bf9e061eb57c7ce6ea698b7468b5ba5e11b4e8
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: d298dfd5f3ad0beb56a511c124bab056ca25fd27
+ms.sourcegitcommit: ce8eecb3e966c08ae368fafb69eaeb00e76da57e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "78244978"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92310045"
 ---
 # <a name="quickstart-create-an-azure-private-dns-zone-using-the-azure-portal"></a>Démarrage rapide : Créer une zone Azure DNS privée avec le portail Azure
 
@@ -20,15 +20,7 @@ Ce guide de démarrage rapide vous guide tout au long des étapes de création d
 
 Une zone DNS permet d’héberger les enregistrements DNS d’un domaine particulier. Pour commencer à héberger votre domaine dans le DNS Azure, vous devez créer une zone DNS pour ce nom de domaine. Chaque enregistrement DNS pour votre domaine est ensuite créé à l’intérieur de cette zone DNS. Pour publier une zone DNS privée sur votre réseau virtuel, vous spécifiez la liste des réseaux virtuels qui sont autorisés à résoudre les enregistrements dans la zone.  On les appelle réseaux virtuels *liés*. Quand l’inscription automatique est activée, Azure DNS met également à jour les enregistrements de zone chaque fois qu’une machine virtuelle est créée, change d’adresse IP ou est supprimée.
 
-Dans ce guide de démarrage rapide, vous apprenez à :
-
-> [!div class="checklist"]
-> * Créer une zone DNS privée
-> * Créez un réseau virtuel
-> * Lier le réseau virtuel
-> * Créer des machines virtuelles de test
-> * Créer un enregistrement DNS supplémentaire
-> * Tester la zone privée
+## <a name="prerequisites"></a>Prérequis
 
 Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
 
@@ -64,19 +56,19 @@ Dans les étapes de cette section, vous devrez remplacer les paramètres du tabl
 
 | Paramètre                   | Valeur                |
 |-----------------------------|----------------------|
-| **\<nom_groupe_ressources>**  | MyAzureResourceGroup (sélectionnez un groupe de ressources existant) |
-| **\<nom_réseau_virtuel>** | MyAzureVNet          |
-| **\<nom_région>**          | Centre-USA Ouest      |
-| **\<espace_d’adressage_IPv4>**   | 10.2.0.0\16          |
-| **\<nom_sous-réseau>**          | MyAzureSubnet        |
-| **\<plage_adresses_sous-réseau>** | 10.2.0.0\24          |
+| **\<resource-group-name>**  | MyAzureResourceGroup (sélectionnez un groupe de ressources existant) |
+| **\<virtual-network-name>** | MyAzureVNet          |
+| **\<region-name>**          | Centre-USA Ouest      |
+| **\<IPv4-address-space>**   | 10.2.0.0\16          |
+| **\<subnet-name>**          | MyAzureSubnet        |
+| **\<subnet-address-range>** | 10.2.0.0\24          |
 
 
 [!INCLUDE [virtual-networks-create-new](../../includes/virtual-networks-create-new.md)]
 
 ## <a name="link-the-virtual-network"></a>Lier le réseau virtuel
 
-Pour lier la zone DNS privée à un réseau virtuel, vous créez un lien de réseau virtuel.
+Pour lier la zone DNS privée à un réseau virtuel, vous créez une liaison de réseau virtuel.
 
 ![Ajouter un lien de réseau virtuel](media/private-dns-portal/dns-add-virtual-network-link.png)
 
@@ -98,7 +90,7 @@ Maintenant, créez deux machines virtuelles afin de pouvoir tester votre zone DN
 1. Pour **Région**, sélectionnez **USA Centre-Ouest**.
 1. Entrez un nom d’utilisateur administrateur.
 2. Entrez un mot de passe et confirmez-le.
-5. Pour **Ports d’entrée publics**, sélectionnez **Autoriser les ports sélectionnés**, puis, pour **Sélectionner des ports d’entrée**, choisissez **RDP (3389)** .
+5. Pour **Ports d’entrée publics**, sélectionnez **Autoriser les ports sélectionnés**, puis, pour **Sélectionner des ports d’entrée**, choisissez **RDP (3389)**.
 10. Acceptez les autres valeurs par défaut pour la page, puis cliquez sur **Suivant : Disques >** .
 11. Accepter les valeurs par défaut sur la page **Disques**, puis cliquez sur **Suivant : Mise en réseau >** .
 1. Assurez-vous que l’option **myAzureVNet** est sélectionnée pour le réseau virtuel.
@@ -115,7 +107,7 @@ La création des deux machines virtuelles prend quelques minutes.
  L’exemple suivant crée un enregistrement avec le nom relatif **db** dans la zone DNS **private.contoso.com**, dans le groupe de ressources **MyAzureResourceGroup**. Le nom complet du jeu d’enregistrements est **db.private.contoso.com**. Le type d’enregistrement est « A », avec l’adresse IP **myVM01**.
 
 1. Ouvrez le groupe de ressources **MyAzureResourceGroup** et sélectionnez la zone privée **private.contoso.com**.
-2. Sélectionnez **+ Jeu d’enregistrements**.
+2. Sélectionnez **+ Jeu d’enregistrements**.
 3. Pour **Nom**, entrez **db**.
 4. Pour **Adresse IP**, tapez l’adresse IP que vous voyez pour **myVM01**. Celle-ci doit être inscrite automatiquement au démarrage de la machine virtuelle.
 5. Sélectionnez **OK**.
@@ -143,7 +135,7 @@ Répétez l’opération pour myVM02.
    ```
    ping myVM01.private.contoso.com
    ```
-   La sortie doit ressembler à cela :
+   La sortie doit ressembler à ceci :
    ```
    PS C:\> ping myvm01.private.contoso.com
 
@@ -163,7 +155,7 @@ Répétez l’opération pour myVM02.
    ```
    ping db.private.contoso.com
    ```
-   La sortie doit ressembler à cela :
+   La sortie doit ressembler à ceci :
    ```
    PS C:\> ping db.private.contoso.com
 
@@ -180,7 +172,7 @@ Répétez l’opération pour myVM02.
    PS C:\>
    ```
 
-## <a name="delete-all-resources"></a>Supprimer toutes les ressources
+## <a name="clean-up-resources"></a>Nettoyer les ressources
 
 Quand vous n’en avez plus besoin, supprimez le groupe de ressources **MyAzureResourceGroup** afin de supprimer les ressources créées dans cette guide de démarrage rapide.
 

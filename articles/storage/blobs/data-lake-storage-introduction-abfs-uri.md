@@ -1,6 +1,6 @@
 ---
 title: Utiliser l’URI Azure Data Lake Storage Gen2
-description: Utiliser l’URI Azure Data Lake Storage Gen2
+description: En savoir plus sur la syntaxe d’URI pour l’identificateur de schéma ABFS, qui représente le pilote Azure Blob File System (pilote Hadoop FileSystem pour Azure Data Lake Storage Gen2).
 author: normesta
 ms.topic: conceptual
 ms.author: normesta
@@ -8,12 +8,12 @@ ms.date: 12/06/2018
 ms.service: storage
 ms.subservice: data-lake-storage-gen2
 ms.reviewer: jamesbak
-ms.openlocfilehash: fa0f67e0d72ee5710a42b6de744ddae98e20220a
-ms.sourcegitcommit: ced98c83ed25ad2062cc95bab3a666b99b92db58
+ms.openlocfilehash: 948b5aa0ad015f9f3c693e13219ec034724687c0
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/31/2020
-ms.locfileid: "80437126"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95913162"
 ---
 # <a name="use-the-azure-data-lake-storage-gen2-uri"></a>Utiliser l’URI Azure Data Lake Storage Gen2
 
@@ -48,4 +48,4 @@ Toutefois, si le compte que vous ciblez est défini comme système de fichiers p
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- [Utiliser Azure Data Lake Storage Gen2 avec des clusters Azure HDInsight](https://docs.microsoft.com/azure/hdinsight/hdinsight-hadoop-use-data-lake-storage-gen2?toc=%2fazure%2fstorage%2fblobs%2ftoc.json)
+- [Utiliser Azure Data Lake Storage Gen2 avec des clusters Azure HDInsight](../../hdinsight/hdinsight-hadoop-use-data-lake-storage-gen2.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json)

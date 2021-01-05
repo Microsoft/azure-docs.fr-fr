@@ -7,22 +7,23 @@ ms.service: virtual-machines-windows
 ms.subservice: security
 ms.topic: quickstart
 ms.date: 05/17/2019
-ms.openlocfilehash: aa0dd0bf55d51800d6a9b4283aa9e653887bf2f1
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: 0156a1d7cea477a1725b60a5e1de229e76d2664c
+ms.sourcegitcommit: 5831eebdecaa68c3e006069b3a00f724bea0875a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82082796"
+ms.lasthandoff: 11/11/2020
+ms.locfileid: "94517986"
 ---
 # <a name="quickstart-create-and-encrypt-a-windows-vm-with-the-azure-cli"></a>Démarrage rapide : Créer et chiffrer une machine virtuelle Windows avec Azure CLI
 
 L’interface de ligne de commande (CLI) Azure permet de créer et gérer des ressources Azure à partir de la ligne de commande ou dans les scripts. Ce démarrage rapide explique comment utiliser Azure CLI pour créer et chiffrer une machine virtuelle Windows Server 2016.
 
-Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
+[!INCLUDE [quickstarts-free-trial-note](../../../includes/quickstarts-free-trial-note.md)]
 
-[!INCLUDE [cloud-shell-try-it.md](../../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../../includes/azure-cli-prepare-your-environment.md)]
 
-Si vous choisissez d’installer et d’utiliser Azure CLI localement, vous devez exécuter Azure CLI version 2.0.30 ou ultérieure pour ce guide de démarrage rapide. Exécutez `az --version` pour trouver la version. Si vous devez installer ou mettre à niveau, voir [Installer Azure CLI]( /cli/azure/install-azure-cli).
+- Cet article nécessite la version 2.0.30 ou ultérieure de l’interface Azure CLI. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée.
 
 ## <a name="create-a-resource-group"></a>Créer un groupe de ressources
 
@@ -47,7 +48,7 @@ az vm create \
 
 La création de la machine virtuelle et des ressources de support ne nécessite que quelques minutes. L’exemple de sortie suivant illustre la réussite de l’opération de création d’une machine virtuelle.
 
-```
+```console
 {
   "fqdns": "",
   "id": "/subscriptions/<guid>/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
@@ -81,12 +82,12 @@ az vm encryption enable -g MyResourceGroup --name MyVM --disk-encryption-keyvaul
 Vous pouvez vérifier que le chiffrement est activé sur votre machine virtuelle avec [az vm show](/cli/azure/vm/encryption#az-vm-encryption-show)
 
 ```azurecli-interactive
-az vm show --name MyVM -g MyResourceGroup
+az vm encryption show --name MyVM -g MyResourceGroup
 ```
 
 Vous verrez les éléments suivants dans la sortie retournée :
 
-```
+```console
 "EncryptionOperation": "EnableEncryption"
 ```
 

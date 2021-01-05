@@ -3,7 +3,7 @@ title: Vue d’ensemble de la communauté Azure Media Services v3
 description: Cette page de la communauté Azure Media Services présente différentes façons de poser des questions, de formuler des commentaires et d’obtenir des mises à jour sur Media Services.
 services: media-services
 documentationcenter: ''
-author: juliako
+author: IngridAtMicrosoft
 manager: femila
 editor: ''
 ms.service: media-services
@@ -11,16 +11,18 @@ ms.workload: media
 ms.tgt_pltfrm: na
 ms.devlang: dotnet
 ms.topic: article
-ms.date: 01/22/2020
-ms.author: juliako
-ms.openlocfilehash: ab775e8d93111f7494d2bf321216e2725c438fc8
-ms.sourcegitcommit: 0b80a5802343ea769a91f91a8cdbdf1b67a932d3
+ms.date: 08/31/2020
+ms.author: inhenkel
+ms.openlocfilehash: 445155ed48334c9680dfa0be7b5402d057c98cef
+ms.sourcegitcommit: 32c521a2ef396d121e71ba682e098092ac673b30
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/25/2020
-ms.locfileid: "83828497"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91329718"
 ---
-# <a name="azure-media-services-v3-community"></a>Communauté Azure Media Services v3  
+# <a name="azure-media-services-v3-community"></a>Communauté Azure Media Services v3
+
+[!INCLUDE [media services api v3 logo](./includes/v3-hr.md)]  
 
 Cette page de la communauté Azure Media Services présente différentes façons de poser des questions, de formuler des commentaires et d’obtenir des mises à jour sur Media Services.
 
@@ -40,7 +42,7 @@ Les forums suivants permettent de poser des questions sur les fonctionnalités e
 
 MSDN est actuellement le forum principal de la communauté Media Services.
 
-[![MSDN](./media/media-services-community/msdn.png)](https://docs.microsoft.com/answers/topics/azure-media-services.html) 
+[![Capture d’écran montrant le logo de MSDN, forum principal de la communauté Media Services](./media/media-services-community/msdn.png)](/answers/topics/azure-media-services.html) 
 
 L’équipe analyse également les questions étiquetées « azure media services » sur Stack Overflow.
 

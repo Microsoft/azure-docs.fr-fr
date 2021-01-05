@@ -1,15 +1,15 @@
 ---
 author: rothja
-ms.service: cost-management-billing
+ms.service: media-services
 ms.topic: include
-ms.date: 11/09/2018
+ms.date: 09/16/2020
 ms.author: jroth
-ms.openlocfilehash: 2fe091a4ff0295ecadfd69ba3f2d4ca59e9612e5
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c315c071aeb36eea0bd1af84b1344cf2fef5f703
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80334731"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91329655"
 ---
 >[!NOTE]
 >Pour les ressources qui ne sont pas corrigées, ouvrez un ticket de support pour demander une augmentation des quotas. Ne créez pas d’autres comptes Azure Media Services pour obtenir des limites supérieures.
@@ -29,7 +29,7 @@ ms.locfileid: "80334731"
 | Programmes en cours d’exécution par canal |3|
 | Points de terminaison de streaming arrêtés ou en cours d’exécution par compte Media Services|2|
 | Unités de diffusion en continu par point de terminaison de diffusion en continu |10 |
-| Comptes de stockage | 1 000<sup>5</sup> (fixe) |
+| Comptes de stockage | 100<sup>5</sup> (fixe) |
 | Stratégies | 1,000,000<sup>6</sup> |
 | Taille du fichier| Dans certains scénarios, la taille maximale des fichiers pris en charge pour le traitement dans Media Services est soumise à une limite<sup>7</sup>. |
 

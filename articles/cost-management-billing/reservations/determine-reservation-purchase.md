@@ -4,15 +4,16 @@ description: Cet article vous permet de déterminer la réservation à acheter.
 author: bandersmsft
 ms.reviewer: yashar
 ms.service: cost-management-billing
-ms.topic: conceptual
-ms.date: 04/30/2020
+ms.subservice: reservations
+ms.topic: how-to
+ms.date: 08/04/2020
 ms.author: banders
-ms.openlocfilehash: feee7475dcadc6d06693d9e60020097f8dc9149c
-ms.sourcegitcommit: 1895459d1c8a592f03326fcb037007b86e2fd22f
+ms.openlocfilehash: d89f890d3e2bb8238a00b4a529b8804a8c38fa6f
+ms.sourcegitcommit: 56cbd6d97cb52e61ceb6d3894abe1977713354d9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82628603"
+ms.lasthandoff: 08/20/2020
+ms.locfileid: "88684743"
 ---
 # <a name="determine-what-reservation-to-purchase"></a>Déterminer la réservation à acheter
 
@@ -38,7 +39,7 @@ Pour limiter l’analyse à l’utilisation de machines virtuelles éligibles, a
 
 Ignorez les ressources dont l’utilisation est inférieure à 24 heures par jour.
 
-Si vous souhaitez effectuer l’analyse au niveau de la famille de tailles d’instance, vous pouvez obtenir les valeurs de flexibilité de taille d’instance à partir de [https://isfratio.blob.core.windows.net/isfratio/ISFRatio.csv](https://isfratio.blob.core.windows.net/isfratio/ISFRatio.csv). Combinez les valeurs avec vos données pour effectuer l’analyse. Pour plus d’informations à propos de la flexibilité de la taille d’instance, consultez [Flexibilité en termes de taille de machine virtuelle avec des instances de machines virtuelles réservées](../../virtual-machines/windows/reserved-vm-instance-size-flexibility.md).
+Si vous souhaitez effectuer l’analyse au niveau de la famille de tailles d’instance, vous pouvez obtenir les valeurs de flexibilité de taille d’instance à partir de [https://isfratio.blob.core.windows.net/isfratio/ISFRatio.csv](https://isfratio.blob.core.windows.net/isfratio/ISFRatio.csv). Combinez les valeurs avec vos données pour effectuer l’analyse. Pour plus d’informations à propos de la flexibilité de la taille d’instance, consultez [Flexibilité en termes de taille de machine virtuelle avec des instances de machines virtuelles réservées](../../virtual-machines/reserved-vm-instance-size-flexibility.md).
 
 ### <a name="analyze-usage-for-an-azure-synapse-analytics-reserved-instance-purchase"></a>Analyser l’utilisation en vue d’acheter des instances Azure Synapse Analytics réservées
 
@@ -91,6 +92,8 @@ Notez les points suivants :
 Les achats de réservation calculés par le moteur de recommandations apparaissent sous l’onglet **Recommandé** du [portail Azure](https://portal.azure.com/#blade/Microsoft_Azure_Reservations/CreateBlade/referrer/docs). Cette image en fournit un exemple.
 
 ![Image présentant les recommandations](./media/determine-reservation-purchase/select-product-ri.png)
+
+Apprenez-en davantage sur les [recommandations](reserved-instance-purchase-recommendations.md#recommendations-in-the-azure-portal).
 
 ## <a name="recommendations-in-the-cost-management-power-bi-app"></a>Recommandations dans l’application Cost Management pour Power BI
 

@@ -4,12 +4,12 @@ ms.service: site-recovery
 ms.topic: include
 ms.date: 10/26/2018
 ms.author: raynew
-ms.openlocfilehash: 9d9790c9b3dbe3b130be999dd76092ae64f7b52c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 8076a6af2382ccec1ac832cd83c3946d8c7c6f57
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "67176769"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96019131"
 ---
 |Nom du paramètre| Type | Description| Valeurs possibles|
 |-|-|-|-|
@@ -21,7 +21,7 @@ ms.locfileid: "67176769"
 |/PSIP|Obligatoire|Adresse IP de la carte réseau à utiliser pour le transfert de données de réplication| Une adresse IP valide|
 |/CSIP|Obligatoire|Adresse IP de la carte réseau sur laquelle le serveur de configuration écoute| Une adresse IP valide|
 |/PassphraseFilePath|Obligatoire|Chemin d’accès complet vers l’emplacement du fichier de phrase secrète|Chemin d’accès valide du fichier|
-|/BypassProxy|Facultatif|Indique que le serveur de configuration se connecte à Azure sans proxy|Pour obtenir cette valeur de Venu|
+|/BypassProxy|Facultatif|Indique que le serveur de configuration se connecte à Azure sans proxy||
 |/ProxySettingsFilePath|Facultatif|Paramètres de proxy (Le proxy par défaut nécessite une authentification, sinon il faut un proxy personnalisé)|Le fichier doit être au format spécifié ci-dessous|
 |DataTransferSecurePort|Facultatif|Numéro de port sur le PSIP à utiliser pour les données de réplication| Numéro de port valide (valeur par défaut : 9433)|
 |/SkipSpaceCheck|Facultatif|Ignorer la vérification des espaces pour le disque du cache| |

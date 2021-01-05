@@ -1,20 +1,20 @@
 ### YamlMime:Landing
 title: Documentation sur Azure Maps
-summary: 'Microsoft Azure Maps fournit aux développeurs de tous les secteurs d’activité des fonctionnalités géospatiales puissantes. Ces fonctionnalités géospatiales s’accompagnent des données de mappage les plus récentes. Azure Maps est disponible pour les applications web et mobiles. Azure Maps est un ensemble d’API REST conforme à Azure One API. Les services suivants ne sont qu’une vue d’ensemble de ce que peut offrir Azure Maps : cartes, recherche, routage, trafic, mobilité, météo, fuseaux horaires, géolocalisation, geofencing, données cartographiques et opérations spatiales. Les kits SDK Web et Android rendent le développement simple, souple et portable sur plusieurs plateformes.'
+summary: 'Microsoft Azure Maps fournit aux développeurs de tous les secteurs d’activité des fonctionnalités géospatiales puissantes. Ces fonctionnalités géospatiales s’accompagnent des données de mappage les plus récentes. Azure Maps est disponible pour les applications web et mobiles. Azure Maps est un ensemble d’API REST conforme à Azure One API. Les services suivants ne sont qu’une vue d’ensemble de ce que peut offrir Azure Maps : cartes, recherche, routage, trafic, mobilité, météo, fuseaux horaires, géolocalisation, geofencing, données cartographiques, créateur et opérations spatiales. Les kits SDK Web et Android rendent le développement simple, souple et portable sur plusieurs plateformes.'
 metadata:
   title: Documentation sur Azure Maps | Microsoft Docs
   description: Découvrez Azure Maps et comment l’utiliser pour fournir des services géospatiaux à votre application web ou mobile.
   ms.service: azure-maps
   ms.topic: landing-page
-  author: philmea
-  ms.author: philmea
+  author: anastasia-ms
+  ms.author: v-stharr
   ms.date: 1/15/2020
-  ms.openlocfilehash: 83a51c7dff6d616297c7f558b20e7d1934c668d6
-  ms.sourcegitcommit: 0b80a5802343ea769a91f91a8cdbdf1b67a932d3
+  ms.openlocfilehash: fa4db97e2aefe48e792f7d43dbb782e7a0967716
+  ms.sourcegitcommit: 80c1056113a9d65b6db69c06ca79fa531b9e3a00
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 05/25/2020
-  ms.locfileid: "83829884"
+  ms.lasthandoff: 12/09/2020
+  ms.locfileid: "96905262"
 landingContent:
 - title: À propos d’Azure Maps
   linkLists:
@@ -25,7 +25,7 @@ landingContent:
   - linkListType: concept
     links:
     - text: Couverture Azure Maps
-      url: render-coverage.md
+      url: geographic-coverage.md
     - text: Prise en charge de la localisation
       url: supported-languages.md
     - text: Styles de carte pris en charge
@@ -76,16 +76,18 @@ landingContent:
       url: drawing-error-visualizer.md
     - text: Utiliser le module de plans intérieurs
       url: how-to-use-indoor-module.md
+    - text: Utiliser Azure Digital Twins pour mettre à jour une carte d’intérieur
+      url: ../digital-twins/how-to-integrate-maps.md
   - linkListType: reference
     links:
     - text: Service de conversion
-      url: https://docs.microsoft.com/rest/api/maps/conversion
+      url: /rest/api/maps/conversion
     - text: Service de jeu de données
-      url: https://docs.microsoft.com/rest/api/maps/dataset
+      url: /rest/api/maps/dataset
     - text: Service d’ensemble de vignettes
-      url: https://docs.microsoft.com/rest/api/maps/tileset
+      url: /rest/api/maps/tileset
     - text: Service d’ensemble d’états des fonctionnalités
-      url: https://docs.microsoft.com/rest/api/maps/featurestate
+      url: /rest/api/maps/featurestate
 - title: Développement avec le le kit SDK web
   linkLists:
   - linkListType: concept
@@ -119,13 +121,13 @@ landingContent:
   - linkListType: reference
     links:
     - text: Commandes de la carte
-      url: https://docs.microsoft.com/javascript/api/azure-maps-control/?view=azure-maps-typescript-latest
+      url: /javascript/api/azure-maps-control/
     - text: Module Outils de dessin
-      url: https://docs.microsoft.com/javascript/api/azure-maps-drawing-tools/?view=azure-maps-typescript-latest
+      url: /javascript/api/azure-maps-drawing-tools/
     - text: Module de service
-      url: https://docs.microsoft.com/javascript/api/azure-maps-rest/?view=azure-maps-typescript-latest
+      url: /javascript/api/azure-maps-rest/
     - text: Module d’E/S spatiales
-      url: https://docs.microsoft.com/javascript/api/azure-maps-spatial-io/?view=azure-maps-typescript-latest
+      url: /javascript/api/azure-maps-spatial-io/
 - title: Développement avec le kit Android SDK
   linkLists:
   - linkListType: how-to-guide
@@ -163,20 +165,30 @@ landingContent:
   - linkListType: reference
     links:
     - text: Service de Recherche
-      url: https://docs.microsoft.com/rest/api/maps/search
+      url: /rest/api/maps/search
     - text: Service d’itinéraire
-      url: https://docs.microsoft.com/rest/api/maps/route
+      url: /rest/api/maps/route
     - text: Service de trafic
-      url: https://docs.microsoft.com/rest/api/maps/traffic
+      url: /rest/api/maps/traffic
     - text: Service de fuseaux horaires
-      url: https://docs.microsoft.com/rest/api/maps/timezone
+      url: /rest/api/maps/timezone
+- title: Développement avec le service Elevation
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Guide pratique pour récupérer et utiliser des données d’élévation
+      url: how-to-request-elevation-data.md
+  - linkListType: reference
+    links:
+    - text: Service Elevation
+      url: /rest/api/maps/elevation/
 - title: Analytique spatiale
   linkLists:
   - linkListType: concept
     links:
     - text: Intégration d’Azure Maps Event Grid
       url: azure-maps-event-grid-integration.md
-  - linkListType: tutorial
+  - linkListType: how-to-guide
     links:
     - text: Configurer une limite géographique avec Azure Maps
       url: tutorial-geofence.md
@@ -185,14 +197,24 @@ landingContent:
   - linkListType: reference
     links:
     - text: Data Service
-      url: https://docs.microsoft.com/rest/api/maps/data
+      url: /rest/api/maps/data
     - text: Service spatial
-      url: https://docs.microsoft.com/rest/api/maps/spatial
+      url: /rest/api/maps/spatial
+- title: Analyse spatiale avec Power BI
+  linkLists:
+  - linkListType: how-to-guide
+    links:
+    - text: Prise en main
+      url: power-bi-visual-getting-started.md
+    - text: Compréhension des couches
+      url: power-bi-visual-understanding-layers.md
+    - text: Gérer l’accès
+      url: power-bi-visual-manage-access.md
 - title: Développement avec les services Mobility
   linkLists:
   - linkListType: concept
     links:
-    - text: Structures des données du service Mobility
+    - text: Services de mobilité
       url: mobility-service-data-structure.md
   - linkListType: how-to-guide
     links:
@@ -202,19 +224,25 @@ landingContent:
       url: how-to-request-real-time-data.md
   - linkListType: reference
     links:
-    - text: Service Mobilité
-      url: https://docs.microsoft.com/rest/api/maps/mobility
-- title: Développement avec les services météo
+    - text: Services de mobilité
+      url: /rest/api/maps/mobility
+- title: Développement avec les services Météo
   linkLists:
   - linkListType: concept
     links:
-    - text: Concept des services météo
+    - text: Concepts des services Météo
       url: weather-services-concepts.md
+    - text: Questions fréquentes (FAQ) sur le services Météo
+      url: weather-services-faq.md
   - linkListType: tutorial
     links:
-    - text: Analyser des données météo avec des notebooks Azure (Python)
+    - text: Analyser des données météorologiques avec Azure Notebooks (Python)
       url: weather-service-tutorial.md
+  - linkListType: how-to-guide
+    links:
+    - text: Demander des données météorologiques en temps réel et prévues
+      url: how-to-request-weather-data.md
   - linkListType: reference
     links:
-    - text: Service météo
-      url: https://docs.microsoft.com/rest/api/maps/weather
+    - text: Services Météo
+      url: /rest/api/maps/weather

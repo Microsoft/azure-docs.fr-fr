@@ -1,6 +1,6 @@
 ---
 title: Vue d’ensemble du contrôle d’accès dans Data Lake Storage Gen1 | Microsoft Docs
-description: Comprendre le fonctionnement du contrôle d’accès dans Azure Data Lake Storage Gen1
+description: Découvrez les principes de base du modèle de contrôle d’accès d’Azure Data Lake Storage Gen1, qui dérive de HDFS.
 services: data-lake-store
 documentationcenter: ''
 author: twooley
@@ -12,12 +12,12 @@ ms.devlang: na
 ms.topic: conceptual
 ms.date: 03/26/2018
 ms.author: twooley
-ms.openlocfilehash: 276e691351d852d6dcb0075d47bf33af6767fc10
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 48ff32655b107958a3e8e42dbd7de0f405a6fffa
+ms.sourcegitcommit: 5db975ced62cd095be587d99da01949222fc69a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79229885"
+ms.lasthandoff: 12/10/2020
+ms.locfileid: "97094860"
 ---
 # <a name="access-control-in-azure-data-lake-storage-gen1"></a>Contrôle d’accès dans Azure Data Lake Storage Gen1
 
@@ -33,8 +33,6 @@ Il existe deux types de listes de contrôle d’accès (ACL) : les **ACL d’acc
 
 
 Les ACL d’accès et les ACL par défaut ont la même structure.
-
-
 
 > [!NOTE]
 > La modification de l’ACL par défaut d’un parent n’affecte pas l’ACL d’accès ni l’ACL par défaut des éléments enfants qui existent déjà.
@@ -74,7 +72,7 @@ Voici quelques scénarios courants pour vous aider à comprendre les autorisatio
 | Opération | Object              |    /      | Seattle/   | Portland/   | Data.txt       |
 |-----------|---------------------|-----------|------------|-------------|----------------|
 | Lire      | Data.txt            |   `--X`   |   `--X`    |  `--X`      | `R--`          |
-| Ajouter à | Data.txt            |   `--X`   |   `--X`    |  `--X`      | `RW-`          |
+| Ajouter à | Data.txt            |   `--X`   |   `--X`    |  `--X`      | `-W-`          |
 | DELETE    | Data.txt            |   `--X`   |   `--X`    |  `-WX`      | `---`          |
 | Créer    | Data.txt            |   `--X`   |   `--X`    |  `-WX`      | `---`          |
 | List      | /                   |   `R-X`   |   `---`    |  `---`      | `---`          |
@@ -280,7 +278,11 @@ Dans les ACL, les entrées sont stockées sous forme de GUID qui correspondent a
 
 ### <a name="why-do-i-sometimes-see-guids-in-the-acls-when-im-using-the-azure-portal"></a>Pourquoi est-ce que je vois parfois des GUID dans les ACL lorsque j’utilise le portail ?
 
-Un GUID apparaît lorsque l’utilisateur n’existe plus dans Azure AD. Cela se produit généralement lorsque l’utilisateur a quitté l’entreprise ou que son compte a été supprimé dans Azure AD.
+Un GUID apparaît lorsque l’utilisateur n’existe plus dans Azure AD. Cela se produit généralement lorsque l’utilisateur a quitté l’entreprise ou que son compte a été supprimé dans Azure AD. En outre, assurez-vous d’utiliser le bon ID pour définir les ACL (détails dans la question ci-dessous).
+
+### <a name="when-using-service-principal-what-id-should-i-use-to-set-acls"></a>Lorsque j’utilise le principe du service, quel ID dois-je utiliser pour définir les ACL ?
+
+Dans le portail Azure, accédez à **Azure Active Directory > Applications d’entreprise**, puis sélectionnez votre application. L’onglet **Vue d’ensemble** doit afficher un ID d’objet, et c’est ce dernier qui doit être utilisé lors de l’ajout d’ACL pour l’accès aux données (et non l’ID d’application).
 
 ### <a name="does-data-lake-storage-gen1-support-inheritance-of-acls"></a>Data Lake Storage Gen1 prend-il en charge l’héritage des ACL ?
 

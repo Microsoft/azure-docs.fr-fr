@@ -1,19 +1,20 @@
 ---
 title: Ajouter une couche de données simple | Microsoft Azure Maps
 description: Découvrez comment ajouter une couche de données simple à l’aide du module d’E/S spatiales, fourni par le Kit de développement logiciel (SDK) web Azure Maps.
-author: philmea
-ms.author: philmea
+author: anastasia-ms
+ms.author: v-stharr
 ms.date: 02/29/2020
 ms.topic: conceptual
 ms.service: azure-maps
 services: azure-maps
 manager: philmea
-ms.openlocfilehash: 8862c33b7660b8130f692dc4beea89a7b6b5f5ad
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.custom: devx-track-js
+ms.openlocfilehash: 90f3cb0ae44be176d3ae248988d098039c140c3e
+ms.sourcegitcommit: 4064234b1b4be79c411ef677569f29ae73e78731
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80804484"
+ms.lasthandoff: 10/28/2020
+ms.locfileid: "92896155"
 ---
 # <a name="add-a-simple-data-layer"></a>Ajouter une couche de données simple
 
@@ -56,7 +57,7 @@ Le code suivant restitue la fonctionnalité de point ci-dessus à l’aide de la
 
 <br/>
 
-<iframe height="500" style="width: 100%;" scrolling="no" title="Utiliser la couche de données simple" src="//codepen.io/azuremaps/embed/zYGzpQV/?height=500&theme-id=0&default-tab=js,result&editable=true" frameborder="no" allowtransparency="true" allowfullscreen="true"> Consultez l’extrait de code <a href='https://codepen.io/azuremaps/pen/zYGzpQV/'>Use the simple data layer</a> d’Azure Maps (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) sur <a href='https://codepen.io'>CodePen</a>.
+<iframe height="500" style="width: 100%;" scrolling="no" title="Utiliser la couche de données simple" src="//codepen.io/azuremaps/embed/zYGzpQV/?height=500&theme-id=0&default-tab=js,result&editable=true" frameborder='no' loading="lazy" allowtransparency="true" allowfullscreen="true"> Consultez l’extrait de code <a href='https://codepen.io/azuremaps/pen/zYGzpQV/'>Use the simple data layer</a> d’Azure Maps (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) sur <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 
 Le véritable pouvoir de la couche de données simple quand :
@@ -69,7 +70,7 @@ Par exemple, lors de l’analyse de flux de données XML, vous pouvez ne pas con
 
 <br/>
 
-<iframe height="700" style="width: 100%;" scrolling="no" title="Options de la couche de données simple" src="//codepen.io/azuremaps/embed/gOpRXgy/?height=700&theme-id=0&default-tab=result" frameborder="no" allowtransparency="true" allowfullscreen="true"> Consultez l’extrait de code <a href='https://codepen.io/azuremaps/pen/gOpRXgy/'>Simple data layer options</a> d’Azure Maps (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) sur <a href='https://codepen.io'>CodePen</a>.
+<iframe height="700" style="width: 100%;" scrolling="no" title="Options de la couche de données simple" src="//codepen.io/azuremaps/embed/gOpRXgy/?height=700&theme-id=0&default-tab=result" frameborder='no' loading="lazy" allowtransparency="true" allowfullscreen="true"> Consultez l’extrait de code <a href='https://codepen.io/azuremaps/pen/gOpRXgy/'>Simple data layer options</a> d’Azure Maps (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) sur <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 
 
@@ -89,7 +90,7 @@ Les propriétés de style Azure Maps et GitHub sont les deux principaux ensemble
 
 Si le lecteur rencontre une propriété de style moins courante, il la convertit dans la propriété de style Azure Maps la plus proche. En outre, les expressions de style par défaut peuvent être remplacées à l’aide de la fonction `getLayers` de la couche de données simple et de la mise à jour des options sur l’une des couches.
 
-La section suivante fournit des détails sur les propriétés de style par défaut qui sont prises en charge par la couche de données simple. L’ordre du nom de propriété pris en charge représente également la priorité de la propriété. Si deux propriétés de style sont définies pour la même option de couche, la première dans la liste a une priorité plus élevée.
+La section suivante fournit des détails sur les propriétés de style par défaut qui sont prises en charge par la couche de données simple. L’ordre du nom de propriété pris en charge représente également la priorité de la propriété. Si deux propriétés de style sont définies pour la même option de couche, la première dans la liste a une priorité plus élevée. Les couleurs peuvent être n’importe quelle valeur de couleur CSS3 ; HEX, RGB, RVBA, TSL, HSLA ou la valeur de couleur nommée.
 
 ### <a name="bubble-layer-style-properties"></a>Propriétés de style de la couche de bulles
 
@@ -175,10 +176,10 @@ Si la fonctionnalité est un `Polygon` ou un `MultiPolygon` et qu’elle a une p
 En savoir plus sur les classes et les méthodes utilisées dans cet article :
 
 > [!div class="nextstepaction"]
-> [SimpleDataLayer](https://docs.microsoft.com/javascript/api/azure-maps-spatial-io/atlas.layer.simpledatalayer)
+> [SimpleDataLayer](/javascript/api/azure-maps-spatial-io/atlas.layer.simpledatalayer)
 
 > [!div class="nextstepaction"]
-> [SimpleDataLayerOptions](https://docs.microsoft.com/javascript/api/azure-maps-spatial-io/atlas.simpledatalayeroptions)
+> [SimpleDataLayerOptions](/javascript/api/azure-maps-spatial-io/atlas.simpledatalayeroptions)
 
 Pour obtenir plus d’exemples de code à ajouter à vos cartes, consultez les articles suivants :
 

@@ -3,12 +3,12 @@ title: Instructions pour les collections fiables
 description: Instructions et recommandations relatives à l’utilisation de collections fiables Service Fabric dans une application Azure Service Fabric.
 ms.topic: conceptual
 ms.date: 03/10/2020
-ms.openlocfilehash: db37067069b2a9eb08009eb6bb373f6fce1cafa9
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: 63e6de436bdaceed7f1d2a78e8385dd14bfc0ed6
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81398541"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86260920"
 ---
 # <a name="guidelines-and-recommendations-for-reliable-collections-in-azure-service-fabric"></a>Instructions et recommandations pour les collections fiables dans Azure Service Fabric
 Cette section fournit des instructions pour l’utilisation du gestionnaire d’état fiable et des collections fiables. L’objectif consiste à aider les utilisateurs à éviter les pièges courants.
@@ -39,7 +39,8 @@ Voici quelques points à retenir :
 * Les opérations de lecture sur le secondaire peuvent lire des versions qui ne sont pas validées dans le quorum.
   Cela signifie qu’une version des données lue à partir d’un seul secondaire peut présenter une progression erronée.
   Les lectures à partir du principal sont toujours stables : la progression n’est jamais erronée.
-* La sécurité et la confidentialité des données rendues persistantes par votre application dans une collection fiable dépendent de vous et font l’objet des protections fournies par votre gestion du stockage : par exemple, vous pouvez utiliser le chiffrement de disque de système d’exploitation pour protéger vos données au repos.  
+* La sécurité et la confidentialité des données rendues persistantes par votre application dans une collection fiable dépendent de vous et font l’objet des protections fournies par votre gestion du stockage : par exemple, vous pouvez utiliser le chiffrement de disque de système d’exploitation pour protéger vos données au repos.
+* L’énumération `ReliableDictionary` utilise une structure de données triée classée par clé. Pour rendre l’énumération efficace, des validations sont ajoutées à une table de hachage temporaire, puis déplacées vers le point de contrôle post de la structure de données triée principale. Les ajouts/mises à jour/suppressions ont le runtime de meilleur cas O(1) et du pire cas O(log n), dans le cas de contrôles de validation sur la présence de la clé. Les instructions get peuvent être O(1) ou O (log n) selon que vous lisez à partir d’une validation récente ou plus ancienne.
 
 ## <a name="volatile-reliable-collections"></a>Collections fiables volatiles
 Lorsque vous décidez d'utiliser des collections fiables volatiles, tenez compte des éléments suivants :
@@ -63,4 +64,4 @@ Lorsque vous décidez d'utiliser des collections fiables volatiles, tenez compte
   * [Configuration du Gestionnaire d’état fiable](service-fabric-reliable-services-configuration.md)
 * Autres
   * [Démarrage rapide de Reliable Services](service-fabric-reliable-services-quick-start.md)
-  * [Référence du développeur pour les Collections fiables](https://msdn.microsoft.com/library/azure/microsoft.servicefabric.data.collections.aspx)
+  * [Référence du développeur pour les Collections fiables](/dotnet/api/microsoft.servicefabric.data.collections?view=azure-dotnet#microsoft_servicefabric_data_collections)

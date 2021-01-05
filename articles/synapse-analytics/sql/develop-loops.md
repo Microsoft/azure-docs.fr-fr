@@ -1,32 +1,33 @@
 ---
-title: Utilisation des boucles T-SQL
-description: Conseils pour utiliser des boucles T-SQL, remplacer des curseurs et développer des solutions connexes avec un pool SQL dans SQL Synapse.
+title: Utiliser des boucles T-SQL
+description: Conseils pour utiliser des boucles T-SQL, remplacer des curseurs et développer des solutions connexes avec Synapse SQL dans Azure Synapse Analytics.
 services: synapse-analytics
 author: filippopovic
 manager: craigg
 ms.service: synapse-analytics
 ms.topic: conceptual
-ms.subservice: ''
+ms.subservice: sql
 ms.date: 04/15/2020
 ms.author: fipopovi
 ms.reviewer: jrasnick
-ms.openlocfilehash: baff2806b1a8c3c99546365c2496238c24b2b243
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: 99ee41de7ffd66191ff712a5ffbda65f3233196f
+ms.sourcegitcommit: 96918333d87f4029d4d6af7ac44635c833abb3da
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81427053"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93324440"
 ---
-# <a name="using-t-sql-loops-in-synapse-sql"></a>Utilisation de boucles T-SQL dans SQL Synapse
-Cet article vous fournit des conseils essentiels pour l’utilisation de boucles T-SQL, le remplacement de curseurs et le développement de solutions connexes avec un pool SQL dans SQL Synapse.
+# <a name="use-t-sql-loops-with-synapse-sql-in-azure-synapse-analytics"></a>Utiliser des boucles T-SQL avec Synapse SQL dans Azure Synapse Analytics
+
+Cet article vous fournit des conseils essentiels pour l’utilisation de boucles T-SQL, le remplacement de curseurs et le développement de solutions connexes avec Synapse SQL.
 
 ## <a name="purpose-of-while-loops"></a>Objectif des boucles WHILE
 
-SQL Synapse prend en charge la boucle [WHILE](https://docs.microsoft.com/sql/t-sql/language-elements/while-transact-sql?view=sql-server-ver15) pour les blocs d’instructions dont l’exécution se répète. Cette boucle WHILE se poursuit aussi longtemps que les conditions spécifiées sont vraies, ou jusqu’à ce que le code arrête la boucle de manière spécifique, via le mot clé BREAK. 
+SQL Synapse prend en charge la boucle [WHILE](https://docs.microsoft.com/sql/t-sql/language-elements/while-transact-sql?view=sql-server-ver15&preserve-view=true) pour les blocs d’instructions dont l’exécution se répète. Cette boucle WHILE se poursuit aussi longtemps que les conditions spécifiées sont vraies, ou jusqu’à ce que le code arrête la boucle de manière spécifique, via le mot clé BREAK. 
 
-Dans un pool SQL, les boucles s’avèrent utiles pour remplacer des curseurs définis dans le code SQL. Heureusement, presque tous les curseurs écrits en code SQL présentent le type à avance rapide, en lecture seule. Par conséquent, les boucles [WHILE] sont une alternative intéressante pour remplacer les curseurs.
+Dans Synapse SQL, les boucles s’avèrent utiles pour remplacer des curseurs définis dans le code SQL. Heureusement, presque tous les curseurs écrits en code SQL présentent le type à avance rapide, en lecture seule. Par conséquent, les boucles WHILE sont une alternative intéressante pour remplacer les curseurs.
 
-## <a name="replacing-cursors-in-sql-pool"></a>Remplacement de curseurs dans un pool SQL
+## <a name="replace-cursors-in-synapse-sql"></a>Remplacer des curseurs dans Synapse SQL
 
 Avant de vous lancer, posez-vous la question suivante : « Ce curseur peut-il être réécrit pour utiliser des opérations basées sur les jeux ? » Dans de nombreux cas, la réponse est oui, et cette approche est souvent la meilleure. Une opération basée sur un jeu s’exécute généralement plus rapidement qu’une méthode itérative de type ligne par ligne.
 

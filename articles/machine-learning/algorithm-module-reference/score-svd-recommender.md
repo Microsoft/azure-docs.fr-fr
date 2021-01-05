@@ -8,17 +8,17 @@ ms.subservice: core
 ms.topic: reference
 author: likebupt
 ms.author: keli19
-ms.date: 02/10/2020
-ms.openlocfilehash: 82c3454ad4c8db3a9b19084f5b6ece988cc86b9a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 08/10/2020
+ms.openlocfilehash: bf62fa995724b8e1fff757e89945cc39db3d9842
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79455976"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90893715"
 ---
 # <a name="score-svd-recommender"></a>Noter le générateur de recommandations SVD
 
-Cet article décrit comment utiliser le module Noter le générateur de recommandations SVD dans le concepteur Azure Machine Learning (préversion). Utilisez ce module pour créer des prédictions à l’aide d’un modèle de recommandation entraîné en fonction de l’algorithme SVD (décomposition à valeur unique).
+Cet article décrit comment utiliser le module Noter le générateur de recommandations SVD dans le concepteur Azure Machine Learning. Utilisez ce module pour créer des prédictions à l’aide d’un modèle de recommandation entraîné en fonction de l’algorithme SVD (décomposition à valeur unique).
 
 Le générateur de recommandations SVD peut générer deux différents types de prédictions :
 
@@ -107,9 +107,6 @@ Le jeu de données noté retourné par le module Noter le générateur de recomm
 
 - La première colonne contient les identificateurs d’utilisateur.
 - Plusieurs colonnes supplémentaires sont générées, en fonction de la valeur que vous avez définie pour **Maximum number of items to recommend to a user** (Nombre maximal d’éléments à recommander à un utilisateur). Chaque colonne contient un élément recommandé (par identificateur). Les recommandations sont classées par ordre d’affinité utilisateur-élément. L’élément dont l’affinité est la plus élevée est placé dans la colonne **Élément 1**.
-
-> [!WARNING]
-> Vous ne pouvez pas évaluer ce jeu de données noté à l’aide du module [Évaluer le générateur de recommandations](evaluate-recommender.md).
 
 
 ##  <a name="technical-notes"></a>Notes techniques

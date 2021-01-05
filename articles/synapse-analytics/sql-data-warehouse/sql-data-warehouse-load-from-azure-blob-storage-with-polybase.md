@@ -1,26 +1,26 @@
 ---
-title: Charger des données de vente au détail de Contoso dans un entrepôt de données SQL Synapse
-description: Utilisez des commandes PolyBase et T-SQL pour charger deux tables de données de vente au détail Contoso dans SQL Synapse.
+title: Charger des données de vente Contoso sur des pools SQL dédiés
+description: Utilisez des commandes PolyBase et T-SQL pour charger deux tables de données de vente Contoso dans des pools SQL dédiés.
 services: synapse-analytics
 author: kevinvngo
 manager: craigg
 ms.service: synapse-analytics
 ms.topic: conceptual
-ms.subservice: ''
-ms.date: 04/17/2018
+ms.subservice: sql-dw
+ms.date: 11/20/2020
 ms.author: kevin
 ms.reviewer: igorstan
 ms.custom: seo-lt-2019
-ms.openlocfilehash: 118653efc8829ac5ef6287bb36fb5595cff1147b
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: bbe61444404b16a09a1e0d2bdead72ac53a60744
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81416128"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96452888"
 ---
-# <a name="load-contoso-retail-data-to-synapse-sql"></a>Chargement de données de vente au détail Contoso dans SQL Synapse 
+# <a name="load-contoso-retail-data-into-dedicated-sql-pools-in-azure-synapse-analytics"></a>Charger des données de vente Contoso sur des pools SQL dédiés dans Azure Synapse Analytics
 
-Ce tutoriel explique comment utiliser des commandes PolyBase et T-SQL pour charger deux tables de données de vente au détail de Contoso dans un entrepôt de données SQL Synapse.
+Ce tutoriel explique comment utiliser des commandes PolyBase et T-SQL pour charger deux tables de données de vente Contoso sur des pools SQL dédiés.
 
 Ce didacticiel vous apprendra à effectuer les opérations suivantes :
 
@@ -30,11 +30,11 @@ Ce didacticiel vous apprendra à effectuer les opérations suivantes :
 
 ## <a name="before-you-begin"></a>Avant de commencer
 
-Pour exécuter ce tutoriel, vous avez besoin d’un compte Azure possédant d’un entrepôt de données SQL Synapse. Si aucun entrepôt de données n'est approvisionné, consultez [Créer un entrepôt de données et définir une règle de pare-feu au niveau du serveur](create-data-warehouse-portal.md).
+Pour effectuer ce tutoriel, vous avez besoin d’un compte Azure disposant déjà d’un pool SQL dédié. Si aucun entrepôt de données n'est approvisionné, consultez [Créer un entrepôt de données et définir une règle de pare-feu au niveau du serveur](create-data-warehouse-portal.md).
 
 ## <a name="configure-the-data-source"></a>Configurer la source de données
 
-PolyBase utilise des objets externes T-SQL pour définir l’emplacement et les attributs des données externes. Les définitions d’objets externes sont stockées dans votre entrepôt de données SQL Synapse. Les données sont stockées en externe.
+PolyBase utilise des objets externes T-SQL pour définir l’emplacement et les attributs des données externes. Les définitions d’objet externe sont stockées dans des pools SQL dédiés. Les données sont stockées en externe.
 
 ## <a name="create-a-credential"></a>Créer des informations d’identification
 
@@ -274,7 +274,7 @@ ORDER BY
 
 ## <a name="optimize-columnstore-compression"></a>Optimiser la compression columnstore
 
-Par défaut, l’entrepôt de données SQL Synapse stocke la table sous forme d’index columnstore en cluster. Après un chargement, certaines lignes de données peuvent ne pas être compressées dans le columnstore.  Cette situation peut se produire pour différentes raisons. Pour plus d’informations, consultez [Gérer les index Columnstore](sql-data-warehouse-tables-index.md).
+Par défaut, les pools SQL dédiés stockent la table sous la forme d’un index columnstore cluster. Après un chargement, certaines lignes de données peuvent ne pas être compressées dans le columnstore.  Cette situation peut se produire pour différentes raisons. Pour plus d’informations, consultez [Gérer les index Columnstore](sql-data-warehouse-tables-index.md).
 
 Pour optimiser les performances des requêtes et la compression du columnstore après un chargement, reconstruisez la table afin de forcer l’index columnstore à compresser toutes les lignes.
 

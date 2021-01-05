@@ -1,22 +1,22 @@
 ---
-title: 'Azure Data Studio (préversion) : Se connecter et interroger SQL Server'
-description: Utilisez Azure Data Studio (préversion) pour vous connecter à Synapse SQL et l’interroger dans Azure Synapse Analytics.
+title: Se connecter à Synapse SQL avec Azure Data Studio
+description: Utilisez Azure Data Studio pour vous connecter à Synapse SQL et l’interroger dans Azure Synapse Analytics.
 services: synapse analytics
 author: azaricstefan
 ms.service: synapse-analytics
 ms.topic: overview
 ms.subservice: ''
 ms.date: 04/15/2020
-ms.author: v-stazar
+ms.author: stefanazaric
 ms.reviewer: jrasnick
-ms.openlocfilehash: 561ea1a4f3577e037708c3b090188c59bd3c4aad
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 580dfe779ff0f550524781076d3e27805ffd6689
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82187543"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96451660"
 ---
-# <a name="connect-to-synapse-sql-with-azure-data-studio-preview"></a>Se connecter à Synapse SQL avec Azure Data Studio (préversion)
+# <a name="connect-to-synapse-sql-with-azure-data-studio"></a>Se connecter à Synapse SQL avec Azure Data Studio
 
 > [!div class="op_single_selector"]
 >
@@ -26,7 +26,7 @@ ms.locfileid: "82187543"
 > * [sqlcmd](get-started-connect-sqlcmd.md)
 > * [SSMS](get-started-ssms.md)
 
-Vous pouvez utiliser [Azure Data Studio (préversion)](/sql/azure-data-studio/download-azure-data-studio?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest) pour vous connecter à Synapse SQL et l’interroger dans Azure Synapse Analytics. 
+Vous pouvez utiliser [Azure Data Studio](/sql/azure-data-studio/download-azure-data-studio?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest) pour vous connecter à Synapse SQL et l’interroger dans Azure Synapse Analytics. 
 
 ## <a name="connect"></a>Se connecter
 
@@ -42,11 +42,11 @@ La connexion nécessite les paramètres suivants :
 * **Base de données :** Nom de la base de données
 
 > [!NOTE]
-> Si vous souhaitez utiliser **SQL à la demande (préversion)** l’URL doit se présenter comme suit :
+> Si vous souhaitez utiliser le **pool SQL serverless**, l’URL doit se présenter de la façon suivante :
 >
 > - `<Azure Synapse workspace name>`-ondemand.sql.azuresynapse.net.
 >
-> Si vous souhaitez utiliser **Pool SQL** l’URL doit se présenter comme suit :
+> Si vous souhaitez utiliser un **pool SQL dédié**, l’URL doit se présenter comme suit :
 >
 > - `<Azure Synapse workspace name>`.sql.azuresynapse.net
 
@@ -77,7 +77,7 @@ Une fois connecté, vous pouvez interroger Synapse SQL à l’aide des instructi
 
 ![Nouvelle requête](./media/get-started-azure-data-studio/5-new-query.png)
 
-Par exemple, vous pouvez utiliser l’instruction Transact-SQL suivante pour [interroger des fichiers Parquet](query-parquet-files.md) à l’aide de SQL à la demande :
+Par exemple, vous pouvez utiliser l’instruction Transact-SQL suivante pour [interroger des fichiers Parquet](query-parquet-files.md) en utilisant un pool SQL serverless :
 
 ```sql
 SELECT COUNT(*)
@@ -94,4 +94,5 @@ Explorer d’autres façons de se connecter à Synapse SQL :
 - [Power BI](get-started-power-bi-professional.md)
 - [Visual Studio](../sql-data-warehouse/sql-data-warehouse-query-visual-studio.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json)
 - [sqlcmd](get-started-connect-sqlcmd.md)
- 
+
+Pour plus d’informations, consultez [Connexion et interrogation de données avec Azure Data Studio à l’aide d’un pool SQL dédié dans Azure Synapse Analytics](https://docs.microsoft.com/sql/azure-data-studio/quickstart-sql-dw). 

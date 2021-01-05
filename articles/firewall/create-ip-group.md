@@ -4,34 +4,32 @@ description: Les groupes IP vous permettent de regrouper et de gérer des adres
 services: firewall
 author: vhorne
 ms.service: firewall
-ms.topic: conceptual
-ms.date: 02/18/2020
+ms.topic: how-to
+ms.date: 06/23/2020
 ms.author: victorh
-ms.openlocfilehash: 7e8b2350b9e85d07ce1c399ce4536703ec998cbc
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c53b35351108717c7b597e052a66e9902be5ec6c
+ms.sourcegitcommit: 0ce1ccdb34ad60321a647c691b0cff3b9d7a39c8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77444854"
+ms.lasthandoff: 11/05/2020
+ms.locfileid: "93394524"
 ---
-# <a name="create-ip-groups-preview"></a>Créer des groupes IP (préversion)
-
-> [!IMPORTANT]
-> Cette préversion publique est fournie sans contrat de niveau de service et ne doit pas être utilisée pour les charges de travail de production. Certaines fonctionnalités peuvent ne pas être prises en charge, disposer de capacités limitées ou ne pas être disponibles dans tous les emplacements Azure. Consultez les [Conditions d’utilisation supplémentaires des préversions de Microsoft Azure](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
+# <a name="create-ip-groups"></a>Créer des groupes IP
 
 Les groupes IP vous permettent de regrouper et de gérer des adresses IP pour les règles de Pare-feu Azure. Ils peuvent avoir une seule adresse IP, plusieurs adresses IP ou une ou plusieurs plages d’adresses IP.
 
-## <a name="create-an-ip-group"></a>Créer un groupe IP
+## <a name="create-an-ip-group---azure-portal"></a>Créer un groupe IP – Portail Azure
 
-1. Dans la page d’accueil du portail Azure, sélectionnez **Créer une ressource**.
-2. Saisissez **IP Groups** (Groupes IP) dans la zone de recherche, puis sélectionnez **IP Groups** (Groupes IP).
-3. Sélectionnez **Create** (Créer).
-4. Sélectionnez votre abonnement.
-5. Sélectionnez un groupe de ressources ou créez-en un.
-6. Saisissez un nom unique pour votre groupe d’adresses IP, puis sélectionnez une région.
+Pour créer un groupe IP à l’aide du portail Azure :
 
-6. Sélectionnez **Suivant : adresses IP**.
-7. Saisissez une adresse IP, plusieurs adresses IP ou des plages d’adresses IP.
+1. Sur la page d’accueil du portail Azure, sélectionnez **Créer une ressource**.
+1. Dans la zone de recherche, entrez **Groupes IP** puis sélectionnez **Groupes IP**.
+1. Sélectionnez **Create** (Créer).
+1. Sélectionnez votre abonnement.
+1. Sélectionnez un groupe de ressources ou créez-en un.
+1. Entrez un nom unique pour votre groupe IP, puis sélectionnez une région.
+1. Sélectionnez **Suivant : adresses IP**.
+1. Saisissez une adresse IP, plusieurs adresses IP ou des plages d’adresses IP.
 
    Il existe deux façons d’entrer des adresses IP :
    - Vous pouvez les entrer manuellement
@@ -41,9 +39,35 @@ Les groupes IP vous permettent de regrouper et de gérer des adresses IP pour 
 
    Lorsque vous saisissez une adresse IP, le portail la valide pour vérifier les problèmes de chevauchement, de doublons et de mise en forme.
 
-5. Quand vous avez terminé, sélectionnez **Review + Create** (Vérifier + créer).
-6. Sélectionnez **Create** (Créer).
+1. Quand vous avez terminé, sélectionnez **Review + Create** (Vérifier + créer).
+1. Sélectionnez **Create** (Créer).
 
+## <a name="create-an-ip-group---azure-powershell"></a>Créer un groupe IP – Azure PowerShell
+
+Cet exemple crée un groupe IP avec un préfixe d’adresse et une adresse IP à l’aide d’Azure PowerShell :
+
+```azurepowershell
+$ipGroup = @{
+    Name              = 'ipGroup'
+    ResourceGroupName = 'ipGroupRG'
+    Location          = 'West US'
+    IpAddress         = @('10.0.0.0/24', '192.168.1.10') 
+}
+
+New-AzIpGroup @ipGroup
+```
+
+## <a name="create-an-ip-group---azure-cli"></a>Créer un groupe IP – Azure CLI
+
+Cet exemple crée un groupe IP avec un préfixe d’adresse et une adresse IP à l’aide d’Azure CLI :
+
+```azurecli-interactive
+az network ip-group create \
+    --name ipGroup \ 
+    --resource-group ipGroupRG \
+    --location westus \
+    --ip-addresses '10.0.0.0/24' '192.168.1.10'
+```
 
 ## <a name="next-steps"></a>Étapes suivantes
 

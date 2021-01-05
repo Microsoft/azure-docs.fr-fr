@@ -8,11 +8,11 @@ ms.date: 09/12/2018
 ms.author: glenga
 ms.custom: include file
 ms.openlocfilehash: 5f5f682c8c31c17f1a645bcdacdc78f32bd5c001
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77205684"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96018422"
 ---
 Le code de toutes les fonctions d’une application de fonctions spécifique se trouve dans un dossier de projet racine qui contient un fichier de configuration d’hôte, ainsi qu’un ou plusieurs sous-dossiers. Chaque sous-dossier contient le code d’une fonction distincte. La structure de dossiers est présentée dans la représentation suivante :
 

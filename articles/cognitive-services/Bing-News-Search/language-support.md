@@ -10,14 +10,19 @@ ms.subservice: bing-news-search
 ms.topic: conceptual
 ms.date: 1/10/2019
 ms.author: aahi
-ms.openlocfilehash: d15058126f43fff328acfc563ffd081164a69a90
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 9c7fd03c2239cea05dc79ad4dd1965fe253a2ce9
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "79218875"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96341595"
 ---
 # <a name="language-and-region-support-for-the-bing-news-search-api"></a>Langages et régions pris en charge par l’API Recherche d’actualités Bing
+
+> [!WARNING]
+> Les API Recherche Bing passent de Cognitive Services aux services de recherche Bing. À compter du **30 octobre 2020**, toutes les nouvelles instances de Recherche Bing doivent être provisionnées en suivant le processus documenté [ici](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Les API Recherche Bing provisionnées à l’aide de Cognitive Services seront prises en charge les trois prochaines années ou jusqu’à la fin de votre Contrat Entreprise, selon la première éventualité.
+> Pour obtenir des instructions de migration, consultez [Services de recherche Bing](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
 
 L’API Recherche d’actualités Bing prend en charge de nombreux pays/régions, dont beaucoup possèdent plusieurs langues. Spécifier un pays/une région avec une requête sert principalement à affiner les résultats de la recherche en fonction des centres d’intérêt dans ce pays/cette région. En outre, les résultats peuvent contenir des liens vers Bing, servant à localiser l’expérience utilisateur de Bing en fonction du pays/de la région ou de la langue spécifiée.
 
@@ -39,7 +44,7 @@ Pour obtenir la liste des codes pays/régions que vous pouvez spécifier dans le
 |Allemagne|Allemand|de-DE|
 |Australie|Anglais|en-AU|
 |Canada|Anglais|en-CA|
-|United Kingdom|Anglais|en-GB|
+|Royaume-Uni|Anglais|en-GB|
 |Indonésie|Anglais|en-ID|
 |Irlande|Anglais|en-IE|
 |Inde|Anglais|en-IN|
@@ -68,7 +73,7 @@ Pour obtenir la liste des codes pays/régions que vous pouvez spécifier dans le
 |Taïwan|Chinois traditionnel|zh-TW|
 |Japon|Japonais|ja-JP|  
 |Corée du Sud|Coréen|ko-KR|  
-|Pays-bas|Néerlandais|nl-NL|  
+|Pays-Bas|Néerlandais|nl-NL|  
 |République populaire de Chine|Chinois|zh-CN|  
 |Brésil|Portugais|pt-br|
 |Russie|Russe|ru-RU|  
@@ -85,7 +90,7 @@ Pour obtenir la liste des codes pays/régions que vous pouvez spécifier dans le
 |Danemark|Danois|da-DK|
 |Allemagne|Allemand|de-DE|
 |Australie|Anglais|en-AU|
-|United Kingdom|Anglais|en-GB|
+|Royaume-Uni|Anglais|en-GB|
 |États-Unis|Anglais|fr-FR|
 |Anglais|général|en-WW|
 |Chili|Espagnol|es-CL|
@@ -107,7 +112,7 @@ Pour obtenir la liste des codes pays/régions que vous pouvez spécifier dans le
 |---------------------|--------------|-----------------|
 |Allemagne|Allemand|de-DE|
 |Australie|Anglais|en-AU|
-|United Kingdom|Anglais|en-GB|
+|Royaume-Uni|Anglais|en-GB|
 |États-Unis|Anglais|fr-FR|
 |Canada|Anglais|en-CA|
 |Inde|Anglais|en-IN|
@@ -143,7 +148,7 @@ Vous trouverez ci-dessous les codes pays/régions que vous pouvez spécifier dan
 |Corée du Sud|KR|  
 |Malaisie|MY|  
 |Mexique|MX|  
-|Pays-bas|NL|  
+|Pays-Bas|NL|  
 |Nouvelle-Zélande|NZ|  
 |Norvège|Non|  
 |République populaire de Chine|CN|  
@@ -158,8 +163,8 @@ Vous trouverez ci-dessous les codes pays/régions que vous pouvez spécifier dan
 |Suisse|CH|  
 |Taïwan|TW|  
 |Turquie|TR|  
-|United Kingdom|Go|  
+|Royaume-Uni|Go|  
 |États-Unis|US|
 
 ## <a name="next-steps"></a>Étapes suivantes
-Pour plus d’informations sur les points de terminaison de recherche d’actualités Bing, consultez [Référence de l’API de recherche d’actualité v7](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-news-api-v7-reference).
+Pour plus d’informations sur les points de terminaison de recherche d’actualités Bing, consultez [Référence de l’API de recherche d’actualité v7](/rest/api/cognitiveservices-bingsearch/bing-news-api-v7-reference).

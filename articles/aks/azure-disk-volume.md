@@ -4,12 +4,12 @@ description: Découvrez comment créer manuellement un volume avec des disques A
 services: container-service
 ms.topic: article
 ms.date: 03/01/2019
-ms.openlocfilehash: 32e9da592d4c8f3997d5b1844065bf550d7d7d48
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.openlocfilehash: d44c8a7241308c26a3f1148ec70a7a5730dd0c89
+ms.sourcegitcommit: 693df7d78dfd5393a28bf1508e3e7487e2132293
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82207511"
+ms.lasthandoff: 10/28/2020
+ms.locfileid: "92900857"
 ---
 # <a name="manually-create-and-use-a-volume-with-azure-disks-in-azure-kubernetes-service-aks"></a>Créer manuellement et utiliser un volume avec des disques Azure sur Azure Kubernetes Service (AKS)
 
@@ -24,11 +24,11 @@ Pour plus d’informations sur les volumes Kubernetes, consultez [Options de sto
 
 Cet article suppose que vous avez un cluster AKS existant. Si vous avez besoin d’un cluster AKS, consultez le guide de démarrage rapide d’AKS [avec Azure CLI][aks-quickstart-cli]ou avec le [Portail Azure][aks-quickstart-portal].
 
-Azure CLI 2.0.59 (ou une version ultérieure) doit également être installé et configuré. Exécutez  `az --version` pour trouver la version. Si vous devez installer ou mettre à niveau, consultez  [Installation d’Azure CLI][install-azure-cli].
+Azure CLI 2.0.59 (ou une version ultérieure) doit également être installé et configuré. Exécutez `az --version` pour trouver la version. Si vous devez installer ou mettre à niveau, voir [Installer Azure CLI][install-azure-cli].
 
 ## <a name="create-an-azure-disk"></a>Créer un disque Azure
 
-Lorsque vous créez un disque Azure pour une utilisation avec AKS, vous pouvez créer la ressource de disque sur le groupe de ressources de **nœuds**. Cette approche permet au cluster AKS d’accéder et de gérer la ressource de disque. Si, à la place, vous créez le disque dans un groupe de ressources distinct, vous devez donner au service principal Azure Kubernetes Service (AKS) pour votre cluster le rôle `Contributor` dans le groupe de ressource du disque. Vous pouvez également utiliser l’identité managée affectée par le système pour les autorisations, au lieu du principal du service. Pour plus d’informations, consultez [Utiliser des identités managées](use-managed-identity.md).
+Lorsque vous créez un disque Azure pour une utilisation avec AKS, vous pouvez créer la ressource de disque sur le groupe de ressources de **nœuds** . Cette approche permet au cluster AKS d’accéder et de gérer la ressource de disque. Si, à la place, vous créez le disque dans un groupe de ressources distinct, vous devez donner au service principal Azure Kubernetes Service (AKS) pour votre cluster le rôle `Contributor` dans le groupe de ressource du disque. Vous pouvez également utiliser l’identité managée affectée par le système pour les autorisations, au lieu du principal du service. Pour plus d’informations, consultez [Utiliser des identités managées](use-managed-identity.md).
 
 Pour cet article, créez le disque dans le groupe de ressources de nœuds. Tout d’abord, obtenez le nom du groupe de ressources avec la commande [az aks show][az-aks-show] et ajoutez le paramètre de requête `--query nodeResourceGroup`. L’exemple suivant obtient les le groupe de ressources du nœud pour le cluster AKS nommé *myAKSCluster* dans le groupe de ressources nommé *myResourceGroup* :
 
@@ -38,7 +38,7 @@ $ az aks show --resource-group myResourceGroup --name myAKSCluster --query nodeR
 MC_myResourceGroup_myAKSCluster_eastus
 ```
 
-À présent, créez un disque à l’aide de la commande [az disk create][az-disk-create]. Spécifiez en premier le nom de groupe de ressources de nœuds obtenu dans la commande précédente, puis celui pour la ressource de disque, par exemple *myAKSDisk*. L’exemple suivant crée un disque de *20* Gio et génère l’ID du disque après sa création. Si vous avez besoin de créer un disque pour une utilisation avec des conteneurs Windows Server, ajoutez le paramètre `--os-type windows` pour formater correctement le disque.
+À présent, créez un disque à l’aide de la commande [az disk create][az-disk-create]. Spécifiez en premier le nom de groupe de ressources de nœuds obtenu dans la commande précédente, puis celui pour la ressource de disque, par exemple *myAKSDisk* . L’exemple suivant crée un disque de *20* Gio et génère l’ID du disque après sa création. Si vous avez besoin de créer un disque pour une utilisation avec des conteneurs Windows Server, ajoutez le paramètre `--os-type windows` pour formater correctement le disque.
 
 ```azurecli-interactive
 az disk create \
@@ -68,7 +68,7 @@ metadata:
   name: mypod
 spec:
   containers:
-  - image: nginx:1.15.5
+  - image: mcr.microsoft.com/oss/nginx/nginx:1.15.5-alpine
     name: mypod
     resources:
       requests:

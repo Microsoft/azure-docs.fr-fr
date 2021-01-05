@@ -10,10 +10,10 @@ ms.topic: article
 ms.date: 12/14/2016
 ms.author: tagore
 ms.openlocfilehash: 094e08becf4f3a60c98d89bfae7e7c3a69b677f8
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "75386338"
 ---
 # <a name="enable-communication-for-role-instances-in-azure"></a>Activer la communication pour les instances de rôle dans Azure

@@ -8,13 +8,13 @@ ms.service: virtual-machine-scale-sets
 ms.subservice: availability
 ms.date: 03/27/2018
 ms.reviewer: jushiman
-ms.custom: mimckitt
-ms.openlocfilehash: 7a8be9b9cebc72e9605af0aaa581783a75246eef
-ms.sourcegitcommit: 595cde417684e3672e36f09fd4691fb6aa739733
+ms.custom: mimckitt, devx-track-azurecli
+ms.openlocfilehash: 3424fdecf8431d8cc8ef07f330e1dc1ac9c880bb
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83701534"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87499651"
 ---
 # <a name="create-a-zone-redundant-virtual-machine-scale-set-with-azure-cli"></a>Créer un groupe de machines virtuelles identiques redondant interzone avec Azure CLI
 Ce script crée un groupe de machines virtuelles identiques exécutant Ubuntu sur plusieurs zones de disponibilité. Une fois que vous avez exécuté le script, vous pouvez accéder à la machine virtuelle via RDP.
@@ -43,4 +43,4 @@ Ce script utilise les commandes suivantes pour créer un groupe de ressources, u
 | [az group delete](/cli/azure/ad/group) | Supprime un groupe de ressources, y compris toutes les ressources imbriquées. |
 
 ## <a name="next-steps"></a>Étapes suivantes
-Pour plus d’informations sur l’interface Azure CLI, consultez la [documentation relative à l’interface Azure CLI](https://docs.microsoft.com/cli/azure/overview).
+Pour plus d’informations sur l’interface Azure CLI, consultez la [documentation relative à l’interface Azure CLI](/cli/azure/overview).

@@ -1,0 +1,65 @@
+### YamlMime:Landing
+title: Microsoft Azure Attestation (préversion)
+summary: Apprendre à utiliser Azure Attestation
+metadata:
+  title: Documentation Azure Azure Attestation
+  description: Apprenez à utiliser Azure Attestation pour créer et gérer des clés d’accès et de chiffrement pour vos ressources, applications et solutions cloud. Didacticiels, références d’API et autres.
+  services: attestation
+  ms.service: attestation
+  ms.topic: landing-page
+  author: msmbaldwin
+  ms.author: mbaldwin
+  ms.date: 07/20/2020
+  ms.openlocfilehash: 64266f5eff2388634486215c2e9b7a00b2ab157b
+  ms.sourcegitcommit: dea56e0dd919ad4250dde03c11d5406530c21c28
+  ms.translationtype: HT
+  ms.contentlocale: fr-FR
+  ms.lasthandoff: 12/09/2020
+  ms.locfileid: "96937200"
+landingContent:
+- title: À propos de Microsoft Azure Attestation
+  linkLists:
+  - linkListType: overview
+    links:
+    - text: Qu’est-ce que Microsoft Azure Attestation ?
+      url: overview.md
+- title: Bien démarrer
+  linkLists:
+  - linkListType: deploy
+    links:
+    - text: Démarrage rapide de PowerShell
+      url: quickstart-powershell.md
+    - text: Démarrage rapide de CLI
+      url: quickstart-azure-cli.md
+    - text: Démarrage rapide des modèles ARM
+      url: quickstart-template.md
+- title: Concepts
+  linkLists:
+  - linkListType: concept
+    links:
+    - text: Concepts de base
+      url: basic-concepts.md
+    - text: Grammaire des règles de revendication
+      url: claim-rule-grammar.md
+    - text: Ensembles de revendications
+      url: claim-sets.md
+    - text: Workflow
+      url: workflow.md
+- title: Tutoriels
+  linkLists:
+  - linkListType: tutorial
+    links:
+    - text: Création d’une stratégie d’attestation
+      url: author-sign-policy.md
+    - text: Exemples de code d’attestation SGX
+      url: /samples/browse/?expanded=azure&terms=attestation
+- title: Références
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: Forum aux questions
+      url: faq.md
+    - text: REST
+      url: /rest/api/attestation/
+    - text: Problèmes de dépannage
+      url: troubleshoot-guide.md

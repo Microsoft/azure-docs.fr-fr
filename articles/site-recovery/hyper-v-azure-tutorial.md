@@ -8,12 +8,12 @@ ms.topic: tutorial
 ms.date: 11/12/2019
 ms.author: raynew
 ms.custom: MVC
-ms.openlocfilehash: 9a2bb636ba749cae50195cefeb8e7237d382fb99
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 5ce98c785700301bba92926d7d5a243b614eca7f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82182342"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87504226"
 ---
 # <a name="set-up-disaster-recovery-of-on-premises-hyper-v-vms-to-azure"></a>Configurer la récupération d’urgence de machines virtuelles Hyper-V locales vers Azure
 
@@ -30,7 +30,7 @@ Dans ce tutoriel, vous allez apprendre à :
 > * Activer la réplication pour une machine virtuelle.
 
 > [!NOTE]
-> Les tutoriels vous montrent le chemin de déploiement le plus simple pour un scénario. Ils utilisent les options par défaut lorsque cela est possible et n’affichent pas tous les paramètres et chemins d’accès possibles. Pour obtenir des instructions détaillées, consultez les articles de la section **Guides pratiques** de la [documentation sur Site Recovery](https://docs.microsoft.com/azure/site-recovery).
+> Les tutoriels vous montrent le chemin de déploiement le plus simple pour un scénario. Ils utilisent les options par défaut lorsque cela est possible et n’affichent pas tous les paramètres et chemins d’accès possibles. Pour obtenir des instructions détaillées, consultez les articles de la section **Guides pratiques** de la [documentation sur Site Recovery](./index.yml).
 
 
 
@@ -39,7 +39,7 @@ Dans ce tutoriel, vous allez apprendre à :
 Il s’agit du troisième didacticiel d’une série. Il suppose que vous avez déjà effectué les tâches des tutoriels précédents :
 
 1. [Préparer Azure](tutorial-prepare-azure.md)
-2. [Préparer un serveur Hyper-V local](tutorial-prepare-on-premises-hyper-v.md)
+2. [Préparer un serveur Hyper-V local](./hyper-v-prepare-on-premises-tutorial.md)
 
 ## <a name="select-a-replication-goal"></a>Sélectionner un objectif de réplication
 
@@ -51,14 +51,14 @@ Il s’agit du troisième didacticiel d’une série. Il suppose que vous avez d
 6. Dans **Utilisez-vous System Center VMM pour gérer vos hôtes Hyper-V ?** , sélectionnez **Non**.
 7. Sélectionnez **OK**.
 
-    ![Objectif de réplication](./media/hyper-v-azure-tutorial/replication-goal.png)
+    ![Capture d’écran des options Objectif de protection sous Préparer l’infrastructure.](./media/hyper-v-azure-tutorial/replication-goal.png)
 
 ## <a name="confirm-deployment-planning"></a>Confirmer la planification d’un déploiement
 
 1. Dans **Planification du déploiement**, si vous planifiez un déploiement de grande envergure, téléchargez l’outil Planificateur de déploiement pour Hyper-V à partir du lien figurant dans la page. [En savoir plus](hyper-v-deployment-planner-overview.md) sur la planification du déploiement Hyper-V.
 2. Pour ce tutoriel, nous n’avons pas besoin de l’outil Planificateur de déploiement. Dans **Avez-vous effectué la planification du déploiement ?** , sélectionnez **Je le ferai plus tard**, puis sélectionnez **OK**.
 
-    ![Planification de déploiement](./media/hyper-v-azure-tutorial/deployment-planning.png)
+    ![Capture d’écran des options Planification du déploiement sous Préparer l’infrastructure.](./media/hyper-v-azure-tutorial/deployment-planning.png)
 
 ## <a name="set-up-the-source-environment"></a>Configurer l’environnement source
 
@@ -68,17 +68,17 @@ Pour configurer l’environnement source, créez un site Hyper-V et ajoutez à c
 2. Dans **Préparer la source**, sélectionnez **+ Site Hyper-V**.
 3. Dans **Créer un site Hyper-V**, spécifiez le nom du site. Nous utilisons **ContosoHyperVSite**.
 
-    ![Site Hyper-V](./media/hyper-v-azure-tutorial/hyperv-site.png)
+    ![Capture d’écran montrant la sélection du site Hyper-V sous Préparer l’infrastructure](./media/hyper-v-azure-tutorial/hyperv-site.png)
 
 4. Une fois le site créé, dans **Préparer la source** > **Étape 1 : Sélectionner le site Hyper-V**, sélectionnez le site que vous avez créé.
 5. Sélectionnez **+ Serveur Hyper-V**.
 
-    ![Serveur Hyper-V](./media/hyper-v-azure-tutorial/hyperv-server.png)
+    ![Capture d’écran montrant la sélection du serveur Hyper-V sous Préparer l’infrastructure](./media/hyper-v-azure-tutorial/hyperv-server.png)
 
 6. Téléchargez le programme d’installation du fournisseur Microsoft Azure Site Recovery.
 7. Téléchargez la clé d’inscription du coffre. Vous devez avoir cette clé pour installer le fournisseur. Une fois générée, la clé reste valide pendant 5 jours.
 
-    ![Télécharger le fournisseur et la clé d’inscription](./media/hyper-v-azure-tutorial/download.png)
+    ![Capture d’écran des options permettant de télécharger le fournisseur et la clé d’inscription.](./media/hyper-v-azure-tutorial/download.png)
     
 
 ### <a name="install-the-provider"></a>Installer le fournisseur

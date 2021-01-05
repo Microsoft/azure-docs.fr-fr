@@ -3,12 +3,12 @@ title: Qu’est-ce qu’Azure Service Health ?
 description: Obtenez des informations personnalisées concernant l’incidence des problèmes et de la maintenance actuels et futurs d’Azure sur vos applications Azure.
 ms.topic: overview
 ms.date: 05/10/2019
-ms.openlocfilehash: 44b819a88baec383d2faf80ab37edb903b0a5f4d
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: cb1eb8eb75a18a73e8f024f02217df37f45981fe
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "77654084"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "87499770"
 ---
 # <a name="what-is-azure-service-health"></a>Qu’est-ce qu’Azure Service Health ?
 
@@ -18,9 +18,9 @@ Azure Service Health est une combinaison de trois services distincts plus petits
 
 L’article [État Azure](azure-status-overview.md) vous informe des pannes de service d’Azure indiquées dans la **[page État d’Azure](https://status.azure.com)** . Cette page vous présente une vue globale de l’intégrité des services Azure dans l’ensemble des régions Azure. Cette page constitue une bonne référence pour les incidents ayant un large impact. Toutefois, il est fortement recommandé aux utilisateurs Azure d’utiliser Azure Service Health pour rester informés des incidents et de la maintenance concernant les services Azure.
 
-L’article [Azure Service Health](service-health-overview.md) fournit une vue personnalisée de l’intégrité des services et régions Azure que vous utilisez. Il s’agit de l’emplacement idéal pour rechercher des informations relatives aux pannes ou aux activités de maintenance planifiée pouvant impacter les services, et autres avis d’intégrité, puisqu’Azure Service Health connaît les services et les ressources que vous utilisez actuellement. Le meilleur moyen d’utiliser Service Health est de configurer des alertes pour recevoir, par le biais de vos canaux de communication préférés, des notifications vous informant des problèmes affectant les services, des maintenances planifiées et autres changements pouvant impacter les services et régions Azure que vous utilisez.
+[Service Health](service-health-overview.md) fournit une vue personnalisée de l’intégrité des services et régions Azure que vous utilisez. C’est le meilleur endroit où rechercher des informations relatives aux pannes, aux activités de maintenance planifiée et aux autres avis concernant l’intégrité, car l’expérience Service Health authentifiée a connaissance des services et des ressources que vous utilisez actuellement. Le meilleur moyen d’utiliser Service Health est de configurer des alertes pour recevoir, par le biais de vos canaux de communication préférés, des notifications vous informant des problèmes affectant les services, des maintenances planifiées et autres changements pouvant impacter les services et régions Azure que vous utilisez.
 
-L’article [Vue d’ensemble d’Azure Resource Health](resource-health-overview.md) fournit des informations sur l’intégrité de vos ressources cloud, telles qu’une instance de machine virtuelle. Avec Azure Monitor, vous pouvez également configurer des alertes pour être averti des changements de disponibilité affectant vos ressources cloud. Azure Resource Health et les notifications Azure Monitor vous permettent d’être mieux informé de la disponibilité de vos ressources à chaque minute. En outre, ils vous permettent de déterminer rapidement si un problème vient de vous ou s’il est lié à un événement de plateforme Azure.
+[Resource Health](resource-health-overview.md) fournit des informations sur l’intégrité de vos ressources cloud individuelles, comme une instance de machine virtuelle spécifique. Avec Azure Monitor, vous pouvez également configurer des alertes pour être averti des changements de disponibilité affectant vos ressources cloud. Resource Health et les notifications Azure Monitor vous permettent d’être mieux informé de la disponibilité de vos ressources à chaque minute. En outre, ils vous permettent de déterminer rapidement si un problème est de votre côté ou s’il est lié à un événement de la plateforme Azure.
 
 Ensemble, ces expériences vous donnent une vue complète de l’intégrité d’Azure, avec la granularité la plus appropriée pour vous.
 

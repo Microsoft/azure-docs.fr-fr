@@ -8,14 +8,18 @@ ms.topic: conceptual
 ms.service: industrial-iot
 services: iot-industrialiot
 manager: philmea
-ms.openlocfilehash: 0ebbf0d41c05f71c571d9665903ba4ba44f71bd0
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 405fa04a3b6af7f0c87888aa48aba9bdffeaf282
+ms.sourcegitcommit: 28c5fdc3828316f45f7c20fc4de4b2c05a1c5548
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77198801"
+ms.lasthandoff: 10/22/2020
+ms.locfileid: "92366953"
 ---
 # <a name="configure-opc-publisher"></a>Configurer OPC Publisher
+
+> [!IMPORTANT]
+> Pendant la mise à jour de cet article, consultez [Azure Industrial IoT](https://azure.github.io/Industrial-IoT/) pour obtenir le contenu le plus récent.
 
 Vous pouvez configurer OPC Publisher pour spécifier ce qui suit :
 
@@ -58,7 +62,7 @@ L’exemple suivant montre le format du fichier de configuration :
 
 Pour publier les événements OPC UA, vous utilisez le même fichier de configuration que pour les modifications de données.
 
-L’exemple suivant montre comment configurer la publication des événements générés par le serveur [SimpleEvents](https://github.com/OPCFoundation/UA-.NETStandard/tree/master/SampleApplications/Workshop/SimpleEvents/Server). Le serveur SimpleEvents se trouve dans le [référentiel OPC Foundation](https://github.com/OPCFoundation/UA-.NETStandard) :
+L’exemple suivant montre comment configurer la publication des événements générés par le serveur [SimpleEvents](https://github.com/OPCFoundation/UA-.NETStandard-Samples/tree/master/Workshop/SimpleEvents/Server). Le serveur SimpleEvents se trouve dans le [référentiel OPC Foundation](https://github.com/OPCFoundation/UA-.NETStandard-Samples) :
 
 ```json
 [
@@ -116,7 +120,7 @@ Cette section décrit les appels de méthode que vous pouvez utiliser pour confi
 
 ### <a name="configure-using-opc-ua-method-calls"></a>Configurer à l’aide des appels de méthode OPC UA
 
-OPC Publisher inclut un serveur OPC UA, accessible sur le port 62222. Si le nom d’hôte est **publisher**, l’URI du point de terminaison est : `opc.tcp://publisher:62222/UA/Publisher`.
+OPC Publisher inclut un serveur OPC UA, accessible sur le port 62222. Si le nom d’hôte est **publisher** , l’URI du point de terminaison est : `opc.tcp://publisher:62222/UA/Publisher`.
 
 Ce point de terminaison présente les quatre méthodes suivantes :
 
@@ -140,7 +144,7 @@ OPC Publisher implémente les appels de méthode directs IoT Hub suivants :
 - ExitApplication
 - GetInfo
 
-Le format de la charge utile JSON de la requête de méthode et des réponses est défini dans [opcpublisher/HubMethodModel.cs](https://github.com/Azure/iot-edge-opc-publisher/blob/master/opcpublisher/HubMethodModel.cs).
+Le format de la charge utile JSON de la requête de méthode et des réponses est défini dans [opcpublisher/HubMethodModel.cs](https://github.com/Azure/iot-edge-opc-publisher/tree/master/opcpublisher).
 
 Si vous appelez une méthode inconnue sur le module, elle répond avec une chaîne indiquant que la méthode n’est pas implémentée. Vous pouvez appeler une méthode inconnue comme moyen de « pinger » le module.
 

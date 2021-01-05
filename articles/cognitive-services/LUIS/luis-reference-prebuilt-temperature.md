@@ -3,20 +3,18 @@ title: Entité prédéfinie temperature – LUIS
 titleSuffix: Azure Cognitive Services
 description: Cet article contient des informations sur l’entité prédéfinie temperature dans Language Understanding (LUIS).
 services: cognitive-services
-author: diberry
 manager: nitinme
 ms.custom: seodec18
 ms.service: cognitive-services
 ms.subservice: language-understanding
 ms.topic: reference
 ms.date: 10/14/2019
-ms.author: diberry
-ms.openlocfilehash: 7e2b48c6353f56ab2269a8718146cb765797adba
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 46161a83d261ae23ca45b7293e48ff15e435f42d
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78270370"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91535336"
 ---
 # <a name="temperature-prebuilt-entity-for-a-luis-app"></a>Entité prédéfinie temperature pour une application LUIS
 L’entité temperature extrait divers types de températures. Étant donné que cette entité est déjà formée, vous n’avez pas besoin d’ajouter d’exemples d’énoncés contenant des températures à l’application. L’entité temperature est prise en charge dans de [nombreuses cultures](luis-reference-prebuilt-entities.md).

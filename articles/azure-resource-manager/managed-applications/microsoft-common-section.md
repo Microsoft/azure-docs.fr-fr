@@ -5,12 +5,12 @@ author: tfitzmac
 ms.topic: conceptual
 ms.date: 06/27/2018
 ms.author: tomfitz
-ms.openlocfilehash: 999a7386ee7c5b3ef76f87280cc2d0cd45f143cd
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 924aff8f2ba3d796b65f52494845f3b10018065c
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75649749"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87063985"
 ---
 # <a name="microsoftcommonsection-ui-element"></a>Élément d’interface utilisateur Microsoft.Common.Section
 
@@ -18,7 +18,7 @@ Contrôle qui regroupe un ou plusieurs éléments sous un titre.
 
 ## <a name="ui-sample"></a>Exemple d’interface utilisateur
 
-![Microsoft.Common.Section](./media/managed-application-elements/microsoft.common.section.png)
+![Microsoft.Common.Section](./media/managed-application-elements/microsoft-common-section.png)
 
 ## <a name="schema"></a>schéma
 
@@ -49,7 +49,7 @@ Contrôle qui regroupe un ou plusieurs éléments sous un titre.
 - Cet élément ne prend pas en charge la propriété `toolTip`.
 
 ## <a name="sample-output"></a>Exemple de sortie
-Pour accéder aux valeurs de sortie des éléments de `elements`, utilisez les fonctions [basics()](create-uidefinition-functions.md#basics) ou [steps()](create-uidefinition-functions.md#steps) et la notation sous forme de points :
+Pour accéder aux valeurs de sortie des éléments de `elements`, utilisez les fonctions [basics()](create-ui-definition-referencing-functions.md#basics) ou [steps()](create-ui-definition-referencing-functions.md#steps) et la notation sous forme de points :
 
 ```json
 steps('configuration').section1.text1

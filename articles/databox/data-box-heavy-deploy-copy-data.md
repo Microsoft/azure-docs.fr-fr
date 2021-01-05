@@ -1,6 +1,6 @@
 ---
 title: Tutoriel - Copier des données via SMB sur Azure Data Box Heavy | Microsoft Docs
-description: Découvrir comment copier des données sur votre Azure Data Box Heavy via SMB
+description: Dans ce tutoriel, découvrez comment établir une connexion à votre ordinateur hôte et copier des données de cet ordinateur vers Azure Data Box Heavy à l’aide de SMB avec l’interface utilisateur web locale.
 services: databox
 author: alkohli
 ms.service: databox
@@ -9,12 +9,12 @@ ms.topic: tutorial
 ms.date: 08/29/2019
 ms.author: alkohli
 ms.localizationpriority: high
-ms.openlocfilehash: e855bb669d86db246d57709607f62e77385e8c42
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.openlocfilehash: 77dc64d9660f9a0bf66559c4a5a976362cf1acd0
+ms.sourcegitcommit: a2d8acc1b0bf4fba90bfed9241b299dc35753ee6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83199158"
+ms.lasthandoff: 10/12/2020
+ms.locfileid: "91951636"
 ---
 ::: zone target = "docs"
 
@@ -80,7 +80,7 @@ Sous les partages Azure Files :
 
 Le tableau suivant montre le chemin UNC des partages sur votre Data Box Heavy et l’URL du chemin du Stockage Azure où les données sont chargées. La dernière URL de chemin de Stockage Azure peut être dérivée à partir du chemin de partage UNC.
  
-|                   |                                                            |
+| Stockage           | Chemin UNC                                                                       |
 |-------------------|--------------------------------------------------------------------------------|
 | Objets blob de blocs Azure | <li>Chemin UNC aux partages : `\\<DeviceIPAddress>\<StorageAccountName_BlockBlob>\<ContainerName>\files\a.txt`</li><li>URL de Stockage Azure : `https://<StorageAccountName>.blob.core.windows.net/<ContainerName>/files/a.txt`</li> |  
 | Objets blob de pages Azure  | <li>Chemin UNC aux partages : `\\<DeviceIPAddres>\<StorageAccountName_PageBlob>\<ContainerName>\files\a.txt`</li><li>URL de Stockage Azure : `https://<StorageAccountName>.blob.core.windows.net/<ContainerName>/files/a.txt`</li>   |  
@@ -97,11 +97,11 @@ Si vous utilisez un ordinateur hôte Windows Server, effectuez les étapes suiva
 
 1. La première étape consiste à vous authentifier et à démarrer une session. Accédez à la page **Connect and copy** (Connexion et copie). Cliquez sur **Get credentials** (Obtenir les informations d’identification) pour obtenir les informations d’identification requises pour accéder aux partages associés à votre compte de stockage.
 
-    ![Obtenir les informations d’identification du partage 1](media/data-box-heavy-deploy-copy-data/get-share-credentials-1.png)
+    ![Obtenir les informations d’identification de partage](media/data-box-heavy-deploy-copy-data/get-share-credentials-1.png)
 
 2. Dans la boîte de dialogue Access share and copy data (Accéder au partage et copier les données), copiez les valeurs **Nom d’utilisateur** et **Mot de passe** correspondant au partage. Cliquez sur **OK**.
     
-    ![Obtenir les informations d’identification du partage 1](media/data-box-heavy-deploy-copy-data/get-share-credentials-2.png)
+    ![Obtenir les informations d’identification du partage 2](media/data-box-heavy-deploy-copy-data/get-share-credentials-2.png)
 
 3. Pour accéder aux partages associés à votre compte de stockage (*databoxe2etest* dans l’exemple suivant) à partir de votre ordinateur hôte, ouvrez une fenêtre de commande. À l’invite de commandes, tapez :
 
@@ -122,7 +122,7 @@ Si vous utilisez un ordinateur hôte Windows Server, effectuez les étapes suiva
 
 4. Appuyez sur Windows + R. Dans la fenêtre **Exécuter**, spécifiez `\\<device IP address>`. Cliquez sur **OK** pour ouvrir l’Explorateur de fichiers.
     
-    ![Se connecter au partage à l’aide de l’Explorateur de fichiers 2](media/data-box-heavy-deploy-copy-data/connect-shares-file-explorer-1.png)
+    ![Se connecter au partage via l’Explorateur de fichiers](media/data-box-heavy-deploy-copy-data/connect-shares-file-explorer-1.png)
 
     À présent, vous devriez voir les partages sous forme de dossiers.
     

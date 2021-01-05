@@ -1,26 +1,28 @@
 ---
 title: Script CLI - Restaurer un serveur - Azure Database for MariaDB
 description: Cet exemple de script Azure CLI montre comment restaurer un serveur Azure Database for MariaDB et ses bases de données à un point antérieur dans le temps.
-author: ajlam
-ms.author: andrela
+author: savjani
+ms.author: pariks
 ms.service: mariadb
 ms.devlang: azurecli
 ms.topic: sample
-ms.custom: mvc
+ms.custom: mvc, devx-track-azurecli
 ms.date: 12/02/2019
-ms.openlocfilehash: d7591c4f88026644ee2453150cfa226a155ab32d
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: a4fc645f43858e80eeffc6c1672f6bd4369e7290
+ms.sourcegitcommit: 6ab718e1be2767db2605eeebe974ee9e2c07022b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "74771702"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94536759"
 ---
 # <a name="restore-an-azure-database-for-mariadb-server-using-azure-cli"></a>Restaurer un serveur Azure Database for MariaDB à l’aide d’Azure CLI
 Cet exemple de script Azure CLI permet de restaurer un serveur Azure Database for MariaDB à un point antérieur dans le temps.
 
-[!INCLUDE [cloud-shell-try-it](../../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [quickstarts-free-trial-note](../../../includes/quickstarts-free-trial-note.md)]
 
-Si vous choisissez d’exécuter l’interface CLI localement, Azure CLI 2.0 ou ultérieur est indispensable pour poursuivre la procédure décrite dans cet article. Pour vérifier la version, exécutez `az --version`. Consultez [Installer Azure CLI]( /cli/azure/install-azure-cli) pour installer ou mettre à niveau votre version d’Azure CLI. 
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../../includes/azure-cli-prepare-your-environment.md)]
+
+- Cet article nécessite la version 2.0 ou ultérieure d’Azure CLI. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée. 
 
 ## <a name="sample-script"></a>Exemple de script
 Dans cet exemple de script, modifiez les lignes en surbrillance pour mettre à jour le nom d’utilisateur et le mot de passe d’administrateur et utiliser les vôtres. Remplacez l’ID d’abonnement utilisé dans les commandes `az monitor` par votre propre ID d’abonnement.
@@ -42,4 +44,4 @@ Ce script utilise les commandes décrites dans le tableau suivant :
 
 ## <a name="next-steps"></a>Étapes suivantes
 - En savoir plus sur Azure CLI : [Documentation d’Azure CLI](/cli/azure)
-- Pour essayer d’autres scripts : [Exemples Azure CLI pour Azure Database for MariaDB](../sample-scripts-azure-cli.md)
+- Essayez d’autres scripts : [Exemples Azure CLI pour Azure Database for MariaDB](../sample-scripts-azure-cli.md)

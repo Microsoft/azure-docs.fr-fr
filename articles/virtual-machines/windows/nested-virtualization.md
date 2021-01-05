@@ -7,12 +7,12 @@ ms.date: 10/09/2017
 ms.topic: how-to
 ms.service: virtual-machines-windows
 ms.workload: infrastructure
-ms.openlocfilehash: 2c66f88cc49028fae50d89a9a7c24233d5a926b4
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 03df7db13ebd3ebec407bb046cc735c835e01068
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81865712"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87074245"
 ---
 # <a name="how-to-enable-nested-virtualization-in-an-azure-vm"></a>Guide d’activation de la virtualisation imbriquée dans une machine virtuelle Azure
 
@@ -22,7 +22,7 @@ Cet article parcourt l’activation de Hyper-V sur une machine virtuelle Azure e
 
 ## <a name="create-a-nesting-capable-azure-vm"></a>Créer une machine virtuelle Azure prenant en charge l’imbrication
 
-Créer une machine virtuelle Azure Windows Server 2016. Pour obtenir la liste complète des tailles de machine virtuelle prenant en charge l’imbrication, consultez l’[article sur l’unité Compute Azure](acu.md).
+Créer une machine virtuelle Azure Windows Server 2016. Pour obtenir la liste complète des tailles de machine virtuelle prenant en charge l’imbrication, consultez l’[article sur l’unité Compute Azure](../acu.md).
 
 Veillez à choisir une taille de machine virtuelle suffisante pour prendre en charge les demandes d’une machine virtuelle invitée. Dans cet exemple, nous utilisons une machine virtuelle Azure de taille D3_v3. 
 
@@ -30,7 +30,7 @@ Vous pouvez afficher la disponibilité régionale de machines virtuelles des sé
 
 >[!NOTE]
 >
->Pour plus d’instructions sur la création d’une nouvelle machine virtuelle, consultez [Créer et gérer des machines virtuelles Windows avec le module Azure PowerShell](https://docs.microsoft.com/azure/virtual-machines/windows/tutorial-manage-vm)
+>Pour plus d’instructions sur la création d’une nouvelle machine virtuelle, consultez [Créer et gérer des machines virtuelles Windows avec le module Azure PowerShell](./tutorial-manage-vm.md)
     
 ## <a name="connect-to-your-azure-vm"></a>Se connecter à votre machine virtuelle Azure
 
@@ -137,7 +137,7 @@ Vous pouvez affecter une adresse IP à la machine virtuelle invitée en définis
 ###  <a name="option-1-configure-dhcp-to-dynamically-assign-an-ip-address-to-the-guest-virtual-machine"></a>Option 1 : Configurer DHCP pour affecter dynamiquement une adresse IP à la machine virtuelle invitée
 Suivez les étapes ci-dessous pour configurer DHCP sur la machine virtuelle hôte pour l’attribution dynamique d’adresses.
 
-#### <a name="install-dchp-server-on-the-azure-vm"></a>Installer le serveur DHCP sur la machine virtuelle Azure
+#### <a name="install-dhcp-server-on-the-azure-vm"></a>Installer le serveur DHCP sur la machine virtuelle Azure
 
 1. Ouvrez le Gestionnaire de serveurs. Dans le tableau de bord, cliquez sur **Ajouter des rôles et fonctionnalités**. La fenêtre de l’Assistant Ajouter des rôles et fonctionnalités s’affiche.
   
@@ -181,6 +181,4 @@ Dans cet exemple, vous utiliserez une adresse dans la plage 192.168.0.0/24.
 Dans la machine virtuelle invitée, ouvrez votre navigateur et accédez à une page web.
     ![GuestVM](./media/virtual-machines-nested-virtualization/guest-virtual-machine.png)
 
-## <a name="set-up-intranet-connectivity-for-the-guest-virtual-machine"></a>Configurer une connectivité intranet pour la machine virtuelle invitée
-
-Pour obtenir des instructions sur l’activation de la connectivité transparente entre les machines virtuelles Azure et les machines virtuelles invitées, consultez [ce document](https://docs.microsoft.com/virtualization/hyper-v-on-windows/user-guide/nested-virtualization-azure-virtual-network).
+Pour obtenir des instructions sur l’activation de la connectivité transparente entre les machines virtuelles Azure et les machines virtuelles invitées, consultez [ce document](/virtualization/hyper-v-on-windows/user-guide/nested-virtualization).

@@ -13,12 +13,12 @@ ms.date: 10/06/2018
 ms.reviewer: martincoetzer
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: a5518d516848ba7c006827faa41ff76bbca35d0c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 15bcb0f7ca30c343072da396abeac8d08dee03a9
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76897058"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90087007"
 ---
 # <a name="factors-influencing-the-performance-of-azure-ad-connect"></a>Facteurs affectant les performances d’Azure AD Connect
 
@@ -41,9 +41,9 @@ L’objectif de ce document est de décrire les facteurs qui impactent les perfo
 
 Le diagramme ci-dessous illustre l’architecture générale d’un moteur de provisionnement connecté à une seule forêt, mais la connexion à plusieurs forêts est également prise en charge. Cette architecture montre les interactions entre les divers composants.
 
-![AzureADConnentInternal](media/plan-connect-performance-factors/AzureADConnentInternal.png)
+![Le diagramme montre comment les annuaires connectés et le moteur de provisionnement Azure AD Connect interagissent, y compris l’espace de connecteur et les composants Metaverse dans une base de données SQL. ](media/plan-connect-performance-factors/AzureADConnentInternal.png)
 
-Le moteur de provisionnement se connecte à chaque forêt Active Directory et à Azure AD. Importer est le processus consistant à obtenir des informations de chaque annuaire. Exporter fait référence à la mise à jour des annuaires à partir du moteur de provisionnement. Synchroniser est l’opération qui évalue les règles de transfert des objets au sein du moteur de provisionnement. Pour approfondir vos connaissances, consultez [Azure AD Connect Sync : présentation de l'architecture](https://docs.microsoft.com/azure/active-directory/hybrid/concept-azure-ad-connect-sync-architecture).
+Le moteur de provisionnement se connecte à chaque forêt Active Directory et à Azure AD. Importer est le processus consistant à obtenir des informations de chaque annuaire. Exporter fait référence à la mise à jour des annuaires à partir du moteur de provisionnement. Synchroniser est l’opération qui évalue les règles de transfert des objets au sein du moteur de provisionnement. Pour approfondir vos connaissances, consultez [Azure AD Connect Sync : présentation de l'architecture](./concept-azure-ad-connect-sync-architecture.md).
 
 Azure AD Connect utilise les zones de transit, les règles et les processus suivants pour effectuer la synchronisation entre Active Directory et Azure AD :
 
@@ -52,7 +52,7 @@ Azure AD Connect utilise les zones de transit, les règles et les processus suiv
 * **Règles de synchronisation** : elles déterminent quels objets seront créés (projetés) ou quels objets seront connectés (joints) aux objets dans le métaverse. Les règles de synchronisation déterminent également quelles valeurs d’attribut seront copiées ou transformées vers et depuis les annuaires.
 * **Profils d’exécution** : ils regroupent les étapes du processus de copie des objets et de leurs valeurs d’attribut, selon les règles de synchronisation définies, entre les zones de transit et les annuaires connectés.
 
-Il existe plusieurs profils d’exécution pour optimiser les performances du moteur de provisionnement. La plupart des organisations utilisent les planifications et profils d’exécution par défaut pour les opérations habituelles. Toutefois, certaines organisations peuvent avoir besoin de [modifier la planification](https://docs.microsoft.com/azure/active-directory/hybrid/how-to-connect-sync-feature-scheduler) ou de déclencher d’autres profils d’exécution pour faire face à des situations particulières. Les profils d’exécution suivants sont disponibles :
+Il existe plusieurs profils d’exécution pour optimiser les performances du moteur de provisionnement. La plupart des organisations utilisent les planifications et profils d’exécution par défaut pour les opérations habituelles. Toutefois, certaines organisations peuvent avoir besoin de [modifier la planification](./how-to-connect-sync-feature-scheduler.md) ou de déclencher d’autres profils d’exécution pour faire face à des situations particulières. Les profils d’exécution suivants sont disponibles :
 
 ### <a name="initial-sync-profile"></a>Profil de synchronisation initiale
 
@@ -109,7 +109,7 @@ L’exécution du processus de synchronisation présente les caractéristiques d
 
 La taille de la topologie Active Directory à importer est le facteur qui impacte le plus les performances et la durée d’exécution des composants internes du moteur de provisionnement.
 
-Utilisez le [filtrage](https://docs.microsoft.com/azure/active-directory/hybrid/how-to-connect-sync-configure-filtering) pour réduire le nombre d’objets à synchroniser. Vous éviterez ainsi que des objets soient inutilement traités et exportés vers Azure AD. Dans l’ordre de préférence, voici les méthodes de filtrage à votre disposition :
+Utilisez le [filtrage](./how-to-connect-sync-configure-filtering.md) pour réduire le nombre d’objets à synchroniser. Vous éviterez ainsi que des objets soient inutilement traités et exportés vers Azure AD. Dans l’ordre de préférence, voici les méthodes de filtrage à votre disposition :
 
 
 
@@ -130,7 +130,7 @@ La présence d’un grand nombre [d’objets déconnecteurs](concept-azure-ad-co
 
 ### <a name="attribute-flows"></a>Flux de valeurs d’attribut
 
-Les flux de valeurs d’attribut désignent le processus de copie ou de transformation des valeurs d’attribut des objets d’un annuaire connecté dans un autre annuaire connecté. Ils sont définis dans les règles de synchronisation. Par exemple, quand le numéro de téléphone d’un utilisateur est changé dans votre annuaire Active Directory, ce numéro de téléphone est également mis à jour dans Azure AD. Les organisations peuvent [modifier les flux de valeurs d’attribut](https://docs.microsoft.com/azure/active-directory/hybrid/how-to-connect-sync-change-the-configuration) selon leurs besoins. Il est recommandé de faire une copie des flux de valeurs d’attribut existants avant de les modifier.
+Les flux de valeurs d’attribut désignent le processus de copie ou de transformation des valeurs d’attribut des objets d’un annuaire connecté dans un autre annuaire connecté. Ils sont définis dans les règles de synchronisation. Par exemple, quand le numéro de téléphone d’un utilisateur est changé dans votre annuaire Active Directory, ce numéro de téléphone est également mis à jour dans Azure AD. Les organisations peuvent [modifier les flux de valeurs d’attribut](./how-to-connect-sync-change-the-configuration.md) selon leurs besoins. Il est recommandé de faire une copie des flux de valeurs d’attribut existants avant de les modifier.
 
 Les redirections simples, comme passer une valeur d’attribut à un autre attribut, n’impactent pas les performances matérielles. Un exemple de redirection est le transfert d’un numéro de téléphone mobile dans Active Directory vers le numéro de téléphone fixe dans Azure AD.
 
@@ -181,7 +181,7 @@ Pour optimiser les performances de votre implémentation d’Azure AD Connect, t
 
 
 - Respectez la [configuration matérielle recommandée](how-to-connect-install-prerequisites.md) pour le serveur Azure AD Connect en fonction de la taille de votre implémentation.
-- Quand vous effectuez une mise à niveau d’Azure AD Connect dans des déploiements à grande échelle, utilisez la [méthode de migration « swing »](https://docs.microsoft.com/azure/active-directory/hybrid/how-to-upgrade-previous-version#swing-migration) pour garantir un temps d’arrêt minimum et une fiabilité optimale. 
+- Quand vous effectuez une mise à niveau d’Azure AD Connect dans des déploiements à grande échelle, utilisez la [méthode de migration « swing »](./how-to-upgrade-previous-version.md#swing-migration) pour garantir un temps d’arrêt minimum et une fiabilité optimale. 
 - Utilisez un disque SSD pour la base de données SQL afin d’optimiser les performances d’écriture.
 - Filtrez l’étendue Active Directory pour inclure uniquement les objets nécessitant d’être provisionnés dans Azure AD, à l’aide du filtrage par domaine ou unité d’organisation, ou du filtrage des attributs.
 - Si vous devez modifier les règles de flux de valeurs d’attribut par défaut, copiez la règle, modifiez la copie et désactivez la règle d’origine. N’oubliez pas de réexécuter une synchronisation complète.

@@ -8,16 +8,16 @@ ms.topic: tutorial
 ms.date: 11/19/2019
 ms.author: normesta
 ms.reviewer: jamesbak
-ms.openlocfilehash: c9ed675dc970b093f6407d15b3db2ac2668c626b
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 7640b7a6053532360da4c908089aecfe163bd3de
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "74327573"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95912652"
 ---
 # <a name="tutorial-extract-transform-and-load-data-by-using-azure-hdinsight"></a>Tutoriel : Extraire, transformer et charger des données avec Azure HDInsight
 
-Dans ce tutoriel, vous effectuez une opération ETL : extraction, transformation et chargement de données. Vous prenez un fichier de données CSV brut, vous l’importez dans un cluster Azure HDInsight, le transformez avec Apache Hive, puis vous le chargez dans une base de données Azure SQL avec Apache Sqoop.
+Dans ce tutoriel, vous effectuez une opération ETL : extraction, transformation et chargement de données. Vous prenez un fichier de données CSV brut, vous l’importez dans un cluster Azure HDInsight, le transformez avec Apache Hive, puis vous le chargez dans une base de données Azure SQL avec Apache Sqoop.
 
 Dans ce tutoriel, vous allez apprendre à :
 
@@ -32,15 +32,15 @@ Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https:/
 
 * **Un compte de stockage Azure Data Lake Storage Gen2 configuré pour HDInsight**
 
-    Consultez [Utiliser Azure Data Lake Storage Gen2 avec des clusters Azure HDInsight](https://docs.microsoft.com/azure/hdinsight/hdinsight-hadoop-use-data-lake-storage-gen2).
+    Consultez [Utiliser Azure Data Lake Storage Gen2 avec des clusters Azure HDInsight](../../hdinsight/hdinsight-hadoop-use-data-lake-storage-gen2.md).
 
 * **Un cluster Hadoop Linux sur HDInsight**
 
-    Consultez [Démarrage rapide : Bien démarrer avec Apache Hadoop et Apache Hive dans Azure HDInsight à l’aide du portail Azure](https://docs.microsoft.com/azure/hdinsight/hadoop/apache-hadoop-linux-create-cluster-get-started-portal).
+    Consultez [Démarrage rapide : Bien démarrer avec Apache Hadoop et Apache Hive dans Azure HDInsight à l’aide du portail Azure](../../hdinsight/hadoop/apache-hadoop-linux-create-cluster-get-started-portal.md).
 
-* **Azure SQL Database** : Vous allez utiliser une base de données Azure SQL comme magasin de données cible. Si vous n’avez pas de base de données SQL, consultez [Créer une base de données Azure SQL dans le portail Azure](../../sql-database/sql-database-get-started.md).
+* **Azure SQL Database** : Vous allez utiliser une base de données Azure SQL comme magasin de données cible. Si vous n’avez pas de base de données dans SQL Database, consultez [Créer une base de données dans Azure SQL Database dans le portail Azure](../../azure-sql/database/single-database-create-quickstart.md).
 
-* **Azure CLI** : Si vous n’avez pas installé l’interface de ligne de commande Azure, consultez [Installer l’interface de ligne de commande Azure](https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest).
+* **Azure CLI** : Si vous n’avez pas installé l’interface de ligne de commande Azure, consultez [Installer l’interface de ligne de commande Azure](/cli/azure/install-azure-cli?view=azure-cli-latest).
 
 * **Un client Secure Shell (SSH)** : Pour plus d’informations, consultez [Se connecter à HDInsight (Hadoop) à l’aide de SSH](../../hdinsight/hdinsight-hadoop-linux-use-ssh-unix.md).
 
@@ -224,7 +224,7 @@ Dans le cadre du travail Apache Hive, vous allez importer les données du fichie
 
 ## <a name="create-a-sql-database-table"></a>Créer une table de base de données SQL
 
-Vous avez besoin du nom du serveur de votre base de données SQL pour cette opération. Effectuez ces étapes pour rechercher le nom de votre serveur.
+Pour cette opération, vous avez besoin du nom du serveur de SQL Database. Effectuez ces étapes pour rechercher le nom de votre serveur.
 
 1. Accédez au [portail Azure](https://portal.azure.com).
 
@@ -244,12 +244,12 @@ Vous avez besoin du nom du serveur de votre base de données SQL pour cette opé
    sudo apt-get --assume-yes install freetds-dev freetds-bin
    ```
 
-6. Dès l’installation terminée, utilisez la commande suivante pour vous connecter au serveur SQL Database.
+6. Une fois l’installation terminée, utilisez la commande suivante pour vous connecter à SQL Database.
 
    ```bash
    TDSVER=8.0 tsql -H '<server-name>.database.windows.net' -U '<admin-login>' -p 1433 -D '<database-name>'
     ```
-   * Remplacez l’espace réservé `<server-name>` par le nom du serveur SQL Database.
+   * Remplacez l’espace réservé `<server-name>` par le nom du serveur SQL logique.
 
    * Remplacez l’espace réservé `<admin-login>` par la connexion administrateur SQL Database.
 
@@ -344,4 +344,4 @@ Toutes les ressources utilisées dans ce tutoriel existent déjà. Aucun nettoya
 Pour découvrir d’autres façons d’utiliser les données dans HDInsight, consultez l’article suivant :
 
 > [!div class="nextstepaction"]
-> [Utiliser Azure Data Lake Storage Gen2 avec des clusters Azure HDInsight](https://docs.microsoft.com/azure/hdinsight/hdinsight-hadoop-use-data-lake-storage-gen2?toc=%2fazure%2fstorage%2fblobs%2ftoc.json)
+> [Utiliser Azure Data Lake Storage Gen2 avec des clusters Azure HDInsight](../../hdinsight/hdinsight-hadoop-use-data-lake-storage-gen2.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json)

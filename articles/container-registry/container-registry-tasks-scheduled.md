@@ -2,15 +2,15 @@
 title: Didacticiel – Planifier une tâche ACR
 description: Dans ce didacticiel, découvrez comment exécuter une tâche Azure Container Registry Task selon une planification définie en définissant un ou plusieurs déclencheurs de minuteur.
 ms.topic: article
-ms.date: 06/27/2019
-ms.openlocfilehash: 3202b5d8c426165d81129f1affa69b3a3d515ce9
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 11/24/2020
+ms.openlocfilehash: 13a4ccac4ea97538583c1c063a6dc61e4d25686a
+ms.sourcegitcommit: 2e9643d74eb9e1357bc7c6b2bca14dbdd9faa436
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78402884"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96030609"
 ---
-# <a name="run-an-acr-task-on-a-defined-schedule"></a>Exécuter une tâche ACR selon une planification définie
+# <a name="tutorial-run-an-acr-task-on-a-defined-schedule"></a>Tutoriel : Exécuter une tâche ACR selon une planification définie
 
 Ce didacticiel montre comment exécuter une [tâche ACR](container-registry-tasks-overview.md) selon une planification. Planifiez une tâche en définissant un ou plusieurs *déclencheurs de minuteur*. Les déclencheurs de minuteur peuvent être utilisés seuls ou en combinaison avec d’autres déclencheurs de tâche.
 
@@ -25,8 +25,7 @@ Planifier une tâche est utile pour les scénarios tels que les suivants :
 * Exécuter une charge de travail de conteneur pour les opérations de maintenance planifiée. Par exemple, exécuter une application conteneurisée pour supprimer les images inutiles de votre registre.
 * Exécuter un ensemble de tests sur une image de production pendant la journée dans le cadre de votre analyse de site actif.
 
-Pour utiliser les exemples de cet article, vous pouvez utiliser Azure Cloud Shell ou une installation locale d’Azure CLI. Si vous souhaitez l’utiliser en local, la version 2.0.68 ou ultérieure est requise. Exécutez `az --version` pour trouver la version. Si vous devez installer ou mettre à niveau, voir [Installer Azure CLI][azure-cli-install].
-
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../includes/azure-cli-prepare-your-environment.md)]
 
 ## <a name="about-scheduling-a-task"></a>À propos de la planification d’une tâche
 
@@ -37,19 +36,29 @@ Pour utiliser les exemples de cet article, vous pouvez utiliser Azure Cloud Shel
     * Spécifiez plusieurs déclencheurs de minuteurs lorsque vous créez la tâche ou ajoutez-les ultérieurement.
     * Nommez les déclencheurs pour faciliter leur gestion, à défaut de quoi, ACR Tasks leur attribue des noms par défaut.
     * Si des planifications de minuteur se chevauchent, ACR Tasks déclenche la tâche à l’heure planifiée pour chaque minuteur.
-* **Autres déclencheurs de tâche** : dans le cadre d'une tâche déclenchée par minuteur, vous pouvez également activer des déclencheurs basés sur la [validation du code source](container-registry-tutorial-build-task.md) ou les [mises à jour d’images de base](container-registry-tutorial-base-image-update.md). Comme pour les autres tâches ACR, vous pouvez [déclencher manuellement][az-acr-task-run] une tâche planifiée.
+* **Autres déclencheurs de tâche** : dans le cadre d'une tâche déclenchée par minuteur, vous pouvez également activer des déclencheurs basés sur la [validation du code source](container-registry-tutorial-build-task.md) ou les [mises à jour d’images de base](container-registry-tutorial-base-image-update.md). Comme d’autres fonctionnalités ACR Tasks, vous pouvez également [exécuter manuellement][az-acr-task-run] une tâche planifiée.
 
 ## <a name="create-a-task-with-a-timer-trigger"></a>Créer une tâche avec un déclencheur de minuteur
 
+### <a name="task-command"></a>Commande de la tâche
+
+Tout d’abord, renseignez la variable d’environnement d’interpréteur de commandes suivante à l’aide d’une valeur appropriée pour votre environnement. Cette étape n’est pas strictement obligatoire, mais facilite un peu l’exécution des commandes multilignes de l’interface de ligne de commande Azure de ce didacticiel. Si vous ne renseignez pas la variable d’environnement, vous devez remplacer manuellement chaque valeur chaque fois qu’elle apparaît dans les exemples de commandes.
+
+[![Lancement de l’incorporation](https://shell.azure.com/images/launchcloudshell.png "Lancement d’Azure Cloud Shell")](https://shell.azure.com)
+
+```console
+ACR_NAME=<registry-name>        # The name of your Azure container registry
+```
+
 Lorsque vous créez une tâche avec la commande [az acr task create][az-acr-task-create], vous pouvez ajouter un déclencheur de minuteur. Ajoutez le paramètre `--schedule` et transmettez une expression cron pour le minuteur.
 
-À titre d’exemple, les déclencheurs de la commande suivante exécute l'image `hello-world` à partir de Docker Hub tous les jours à 21:00 UTC. La tâche s’exécute sans contexte de code source.
+À titre d’exemple simple, la tâche suivante déclenche l’exécution de l’image `hello-world` à partir de Microsoft Container Registry tous les jours à 21 h 00 UTC. La tâche s’exécute sans contexte de code source.
 
 ```azurecli
 az acr task create \
-  --name mytask \
-  --registry myregistry \
-  --cmd hello-world \
+  --name timertask \
+  --registry $ACR_NAME \
+  --cmd mcr.microsoft.com/hello-world \
   --schedule "0 21 * * *" \
   --context /dev/null
 ```
@@ -57,30 +66,32 @@ az acr task create \
 Exécutez la commande [az acr task show][az-acr-task-show] pour vérifier que le déclencheur de minuteur est configuré. Par défaut, le déclencheur de mise à jour d’image de base est également activé.
 
 ```azurecli
-az acr task show --name mytask --registry registry --output table
+az acr task show --name timertask --registry $ACR_NAME --output table
 ```
 
 ```output
 NAME      PLATFORM    STATUS    SOURCE REPOSITORY       TRIGGERS
 --------  ----------  --------  -------------------     -----------------
-mytask    linux       Enabled                           BASE_IMAGE, TIMER
+timertask linux       Enabled                           BASE_IMAGE, TIMER
 ```
+
+## <a name="trigger-the-task"></a>Déclencher la tâche
 
 Déclenchez la tâche manuellement avec [az acr task run][az-acr-task-run] pour vous assurer qu’elle est correctement configurée :
 
 ```azurecli
-az acr task run --name mytask --registry myregistry
+az acr task run --name timertask --registry $ACR_NAME
 ```
 
-Si le conteneur s’exécute correctement, la sortie ressemble à ce qui suit :
+Si le conteneur s’exécute correctement, la sortie ressemble à ce qui suit. La sortie est condensée pour afficher les principales étapes.
 
 ```output
 Queued a run with ID: cf2a
 Waiting for an agent...
-2019/06/28 21:03:36 Using acb_vol_2ca23c46-a9ac-4224-b0c6-9fde44eb42d2 as the home volume
-2019/06/28 21:03:36 Creating Docker network: acb_default_network, driver: 'bridge'
+2020/11/20 21:03:36 Using acb_vol_2ca23c46-a9ac-4224-b0c6-9fde44eb42d2 as the home volume
+2020/11/20 21:03:36 Creating Docker network: acb_default_network, driver: 'bridge'
 [...]
-2019/06/28 21:03:38 Launching container with name: acb_step_0
+2020/11/20 21:03:38 Launching container with name: acb_step_0
 
 Hello from Docker!
 This message shows that your installation appears to be working correctly.
@@ -90,17 +101,16 @@ This message shows that your installation appears to be working correctly.
 Après l’heure planifiée, exécutez la commande [az acr task list-runs][az-acr-task-list-runs] pour vérifier que le minuteur a déclenché la tâche comme prévu :
 
 ```azurecli
-az acr task list-runs --name mytask --registry myregistry --output table
+az acr task list-runs --name timertask --registry $ACR_NAME --output table
 ```
 
 Si tel est le cas, la sortie ressemble à ce qui suit :
 
 ```output
-RUN ID    TASK     PLATFORM    STATUS     TRIGGER    STARTED               DURATION
---------  -------- ----------  ---------  ---------  --------------------  ----------
-[...]
-cf2b      mytask   linux       Succeeded  Timer      2019-06-28T21:00:23Z  00:00:06
-cf2a      mytask   linux       Succeeded  Manual     2019-06-28T20:53:23Z  00:00:06
+RUN ID    TASK       PLATFORM    STATUS     TRIGGER    STARTED               DURATION
+--------  ---------  ----------  ---------  ---------  --------------------  ----------
+ca15      timertask  linux       Succeeded  Timer      2020-11-20T21:00:23Z  00:00:06
+ca14      timertask  linux       Succeeded  Manual     2020-11-20T20:53:35Z  00:00:06
 ```
 
 ## <a name="manage-timer-triggers"></a>Gérer les déclencheurs de minuteur
@@ -109,12 +119,12 @@ Utilisez la commande [az acr task timer][az-acr-task-timer] pour gérer les déc
 
 ### <a name="add-or-update-a-timer-trigger"></a>Ajouter ou mettre à jour un déclencheur de minuteur
 
-Après avoir créé une tâche, vous pouvez lui ajouter un déclencheur de minuteur en utilisant la commande [az acr task timer add][az-acr-task-timer-add]. L’exemple suivant ajoute un nom de déclencheur de minuteur *timer2* à la tâche *mytask* créée précédemment. Ce minuteur déclenche la tâche tous les jours à 10:30 UTC.
+Après avoir créé une tâche, vous pouvez lui ajouter un déclencheur de minuteur en utilisant la commande [az acr task timer add][az-acr-task-timer-add]. L’exemple suivant ajoute un nom de déclencheur de minuteur *timer2* à la tâche *timertask* créée. Ce minuteur déclenche la tâche tous les jours à 10:30 UTC.
 
 ```azurecli
 az acr task timer add \
-  --name mytask \
-  --registry myregistry \
+  --name timertask \
+  --registry $ACR_NAME \
   --timer-name timer2 \
   --schedule "30 10 * * *"
 ```
@@ -123,8 +133,8 @@ Mettez à jour la planification d’un déclencheur existant ou modifier son ét
 
 ```azurecli
 az acr task timer update \
-  --name mytask \
-  --registry myregistry \
+  --name timertask \
+  --registry $ACR_NAME \
   --timer-name timer2 \
   --schedule "30 11 * * *"
 ```
@@ -134,7 +144,7 @@ az acr task timer update \
 La commande [az acr task timer list][az-acr-task-timer-list] affiche les déclencheurs de minuteur définis pour une tâche :
 
 ```azurecli
-az acr task timer list --name mytask --registry myregistry
+az acr task timer list --name timertask --registry $ACR_NAME
 ```
 
 Exemple de sortie :
@@ -156,12 +166,12 @@ Exemple de sortie :
 
 ### <a name="remove-a-timer-trigger"></a>Supprimer un déclencheur de minuteur
 
-Utilisez la commande [az acr task timer remove][az-acr-task-timer-remove] commande pour supprimer un déclencheur de minuteur associé à une tâche. L’exemple suivant supprime le déclencheur *timer2* de la tâche *mytask* :
+Utilisez la commande [az acr task timer remove][az-acr-task-timer-remove] commande pour supprimer un déclencheur de minuteur associé à une tâche. L’exemple suivant supprime le déclencheur *timer2* de *timertask* :
 
 ```azurecli
 az acr task timer remove \
-  --name mytask \
-  --registry myregistry \
+  --name timertask \
+  --registry $ACR_NAME \
   --timer-name timer2
 ```
 

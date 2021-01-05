@@ -10,12 +10,12 @@ ms.subservice: content-moderator
 ms.topic: conceptual
 ms.date: 01/10/2019
 ms.author: pafarley
-ms.openlocfilehash: 16cfb6c15a4d17ff3fb4f7f41f59f9f80af1e9e7
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f1dfe88741a304da92901d3997c746654336ef54
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "75382121"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85800038"
 ---
 # <a name="moderate-with-custom-term-lists-in-the-api-console"></a>Modérer avec des listes de termes personnalisées dans la console d’API
 
@@ -77,15 +77,17 @@ Une fois les modifications effectuées dans une liste de termes, vous devez actu
 
 5. Utilisez les espaces réservées aux paires clé-valeur pour assigner plus de métadonnées descriptives à votre liste.
 
-       {
-          "Name": "MyExclusionList",
-          "Description": "MyListDescription",
-          "Metadata": 
-          {
-             "Category": "Competitors",
-             "Type": "Exclude"
-          }
-       }
+    ```json
+    {
+        "Name": "MyExclusionList",
+        "Description": "MyListDescription",
+        "Metadata": 
+        {
+            "Category": "Competitors",
+            "Type": "Exclude"
+        }
+    }
+    ```
 
    Ajoutez des métadonnées de liste en tant que paire clé-valeur, pas les termes.
  

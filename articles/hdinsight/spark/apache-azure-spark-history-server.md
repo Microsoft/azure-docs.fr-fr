@@ -5,15 +5,15 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
+ms.topic: how-to
 ms.custom: hdinsightactive,hdiseo17may2017
 ms.date: 11/25/2019
-ms.openlocfilehash: 5cf1986711479f7330b0cd477744d9f4e2ac6459
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: d8dd9aaeaadf13fa48577cf2853e7bcf58badb41
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76548932"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86079290"
 ---
 # <a name="use-the-extended-features-of-the-apache-spark-history-server-to-debug-and-diagnose-spark-applications"></a>Utiliser les fonctionnalités étendues du serveur d’historique Apache Spark pour déboguer et diagnostiquer des applications Spark
 
@@ -328,6 +328,6 @@ Si vous souhaitez effectuer une mise à niveau avec un correctif logiciel, utili
 + [Gérer les ressources d’un cluster Apache Spark sur HDInsight](apache-spark-resource-manager.md)
 + [Configurer les paramètres d’Apache Spark](apache-spark-settings.md)
 
-## <a name="feedback"></a>Commentaires
+## <a name="suggestions"></a>Suggestions
 
 Si vous avez des commentaires ou rencontrez des problèmes lors de l’utilisation de cet outil, envoyez un e-mail à ([hdivstool@microsoft.com](mailto:hdivstool@microsoft.com)).

@@ -14,26 +14,30 @@ ms.devlang: na
 ms.topic: article
 ms.date: 04/01/2019
 ms.author: juliako
-ms.openlocfilehash: 01153317b49e4543f10faa517bce7bcc01ce22d4
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: a0e2f785bb3c097b7d2918198457a3f7baf6a39c
+ms.sourcegitcommit: 10d00006fec1f4b69289ce18fdd0452c3458eca5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79232777"
+ms.lasthandoff: 11/21/2020
+ms.locfileid: "96023446"
 ---
 # <a name="use-aes-128-dynamic-encryption-and-the-key-delivery-service"></a>Utiliser le chiffrement dynamique AES-128 et le service de distribution des clés
+
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
+
 > [!div class="op_single_selector"]
 > * [.NET](media-services-protect-with-aes128.md)
-> * [Java](https://github.com/southworkscom/azure-sdk-for-media-services-java-samples)
+> * [Java](https://github.com/rnrneverdies/azure-sdk-for-media-services-java-samples)
 > * [PHP](https://github.com/Azure/azure-sdk-for-php/tree/master/examples/MediaServices)
 >  
 
 > [!NOTE]
-> Aucune nouvelle fonctionnalité ni fonction n’est ajoutée à Media Services v2. <br/>Découvrez la dernière version, [Media Services v3](https://docs.microsoft.com/azure/media-services/latest/). Consultez aussi [Conseils de migration de v2 vers v3](../latest/migrate-from-v2-to-v3.md).
+> Aucune nouvelle fonctionnalité ni fonction n’est ajoutée à Media Services v2. <br/>Découvrez la dernière version, [Media Services v3](../latest/index.yml). Consultez aussi [Conseils de migration de v2 vers v3](../latest/migrate-from-v2-to-v3.md).
 
 Vous pouvez utiliser Media Services pour transmettre du contenu HTTP Live Streaming (HLS) et Smooth Streaming chiffré avec AES à l’aide de clés de chiffrement 128 bits. Media Services assure également le service de distribution des clés qui fournit des clés de chiffrement aux utilisateurs autorisés. Si vous souhaitez que Media Services chiffre un élément multimédia, associez une clé de chiffrement à l'élément multimédia et configurez des stratégies d'autorisation pour la clé. Lorsqu’un lecteur demande un flux de données, Media Services utilise la clé spécifiée pour chiffrer dynamiquement votre contenu à l’aide du chiffrement AES. Pour déchiffrer le flux de données, le lecteur demande la clé au service de remise de clé. Pour déterminer si l’utilisateur est autorisé à obtenir la clé, le service évalue les stratégies d’autorisation que vous avez spécifiées pour la clé.
 
-Media Services prend en charge plusieurs méthodes d’authentification des utilisateurs effectuant des demandes de clé. La stratégie d’autorisation de la clé de contenu peut comporter une ou plusieurs restrictions d’autorisation, ouvertes ou à jeton. La stratégie de restriction à jeton doit être accompagnée d’un jeton émis par un service d’émission de jeton de sécurité (STS). Media Services prend en charge les jetons aux formats [SWT (Simple Web Tokens)](https://msdn.microsoft.com/library/gg185950.aspx#BKMK_2) et [JWT (JSON Web Token)](https://msdn.microsoft.com/library/gg185950.aspx#BKMK_3). Pour plus d’informations, consultez [Configurer la stratégie d’autorisation de clé de contenu](media-services-protect-with-aes128.md#configure_key_auth_policy).
+Media Services prend en charge plusieurs méthodes d’authentification des utilisateurs effectuant des demandes de clé. La stratégie d’autorisation de la clé de contenu peut comporter une ou plusieurs restrictions d’autorisation, ouvertes ou à jeton. La stratégie de restriction à jeton doit être accompagnée d’un jeton émis par un service d’émission de jeton de sécurité (STS). Media Services prend en charge les jetons aux formats [SWT (Simple Web Tokens)](/previous-versions/azure/azure-services/gg185950(v=azure.100)#BKMK_2) et [JWT (JSON Web Token)](/previous-versions/azure/azure-services/gg185950(v=azure.100)#BKMK_3). Pour plus d’informations, consultez [Configurer la stratégie d’autorisation de clé de contenu](media-services-protect-with-aes128.md#configure_key_auth_policy).
 
 Pour tirer parti du chiffrement dynamique, vous devez avoir un élément multimédia qui contient un ensemble de fichiers MP4 à débit binaire multiple ou de fichiers sources de diffusion en continu lisse (Smooth Streaming) à débit binaire multiple. Vous devez également configurer la stratégie de remise pour l'élément (décrite plus loin dans cet article). Ensuite, en fonction du format spécifié dans l’URL de diffusion en continu, le serveur de diffusion en continu à la demande s’assure que le flux est livré conformément au protocole choisi. Par conséquent, vous devez stocker et payer uniquement les fichiers dans un format de stockage unique. Media Services crée et fournit la réponse appropriée aux demandes du client.
 
@@ -161,28 +165,32 @@ Dans le cas de HLS, le manifeste racine est divisé en fichiers de segment.
 
 Par exemple, le manifeste racine est : http:\//test001.origin.mediaservices.windows.net/8bfe7d6f-34e3-4d1a-b289-3e48a8762490/BigBuckBunny.ism/manifest(format=m3u8-aapl). Il contient une liste de noms de fichiers de segment.
 
-    . . . 
-    #EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=630133,RESOLUTION=424x240,CODECS="avc1.4d4015,mp4a.40.2",AUDIO="audio"
-    QualityLevels(514369)/Manifest(video,format=m3u8-aapl)
-    #EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=965441,RESOLUTION=636x356,CODECS="avc1.4d401e,mp4a.40.2",AUDIO="audio"
-    QualityLevels(842459)/Manifest(video,format=m3u8-aapl)
-    …
+```text
+. . . 
+#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=630133,RESOLUTION=424x240,CODECS="avc1.4d4015,mp4a.40.2",AUDIO="audio"
+QualityLevels(514369)/Manifest(video,format=m3u8-aapl)
+#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=965441,RESOLUTION=636x356,CODECS="avc1.4d401e,mp4a.40.2",AUDIO="audio"
+QualityLevels(842459)/Manifest(video,format=m3u8-aapl)
+…
+```
 
 Si vous ouvrez l’un des fichiers de segment dans un éditeur de texte (par exemple, http:\//test001.origin.mediaservices.windows.net/8bfe7d6f-34e3-4d1a-b289-3e48a8762490/BigBuckBunny.ism/QualityLevels(514369)/Manifest(video,format=m3u8-aapl), il contient #EXT-X-KEY, qui indique que le fichier est chiffré.
 
-    #EXTM3U
-    #EXT-X-VERSION:4
-    #EXT-X-ALLOW-CACHE:NO
-    #EXT-X-MEDIA-SEQUENCE:0
-    #EXT-X-TARGETDURATION:9
-    #EXT-X-KEY:METHOD=AES-128,
-    URI="https://wamsbayclus001kd-hs.cloudapp.net/HlsHandler.ashx?
-         kid=da3813af-55e6-48e7-aa9f-a4d6031f7b4d",
-            IV=0XD7D7D7D7D7D7D7D7D7D7D7D7D7D7D7D7
-    #EXT-X-PROGRAM-DATE-TIME:1970-01-01T00:00:00.000+00:00
-    #EXTINF:8.425708,no-desc
-    Fragments(video=0,format=m3u8-aapl)
-    #EXT-X-ENDLIST
+```text
+#EXTM3U
+#EXT-X-VERSION:4
+#EXT-X-ALLOW-CACHE:NO
+#EXT-X-MEDIA-SEQUENCE:0
+#EXT-X-TARGETDURATION:9
+#EXT-X-KEY:METHOD=AES-128,
+URI="https://wamsbayclus001kd-hs.cloudapp.net/HlsHandler.ashx?
+        kid=da3813af-55e6-48e7-aa9f-a4d6031f7b4d",
+        IV=0XD7D7D7D7D7D7D7D7D7D7D7D7D7D7D7D7
+#EXT-X-PROGRAM-DATE-TIME:1970-01-01T00:00:00.000+00:00
+#EXTINF:8.425708,no-desc
+Fragments(video=0,format=m3u8-aapl)
+#EXT-X-ENDLIST
+```
 
 >[!NOTE] 
 >Si vous envisagez de lire un flux HLS chiffré par AES dans Safari, consultez [ce billet de blog](https://azure.microsoft.com/blog/how-to-make-token-authorized-aes-encrypted-hls-stream-working-in-safari/).

@@ -12,17 +12,19 @@ ms.workload: media
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 03/14/2019
+ms.date: 08/31/2020
 ms.author: willzhan
 ms.reviewer: juliako
-ms.openlocfilehash: 44095cb85c62fd40032263d96ad678bdeb5effc0
-ms.sourcegitcommit: be32c9a3f6ff48d909aabdae9a53bd8e0582f955
+ms.openlocfilehash: 1bf01e98e418edfe8f15043d16a199b276b71020
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/26/2020
-ms.locfileid: "82159401"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89266899"
 ---
-# <a name="hybrid-design-of-drm-subsystems"></a>Conception de modèles hybrides de sous-systèmes de DRM 
+# <a name="hybrid-design-of-drm-subsystems"></a>Conception de modèles hybrides de sous-systèmes de DRM
+
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
 
 Cette rubrique explique comment concevoir des modèles hybrides de sous-systèmes de gestion des droits numériques (DRM) à l’aide d’Azure Media Services.
 
@@ -103,7 +105,7 @@ Sur la base des explications de la section précédente, les cinq scénarios hyb
 |AMS|Tiers|Extérieur|Non|Non|Exemple 4|
 |Tiers|Tiers|AMS|Oui|Non|    
 
-Dans les exemples, la protection PlayReady fonctionne à la fois pour DASH et la diffusion en continu lisse. Les URL de vidéos ci-dessous sont des URL de diffusion en continu lisse. Pour obtenir l’URL DASH correspondante, il vous suffit d’ajouter « (format=mpd-time-csf) ». Vous pouvez utiliser le lecteur [Azure Media Test](https://aka.ms/amtest) pour effectuer des tests dans un navigateur. Il vous permet de configurer le protocole de diffusion en continu à utiliser, sous la technologie de votre choix. IE11 et Microsoft Edge sur Windows 10 prennent en charge PlayReady via EME. Pour plus d’informations, consultez [ce billet de blog sur l’outil de test](https://blogs.msdn.microsoft.com/playready4/2016/02/28/azure-media-test-tool/).
+Dans les exemples, la protection PlayReady fonctionne à la fois pour DASH et la diffusion en continu lisse. Les URL de vidéos ci-dessous sont des URL de diffusion en continu lisse. Pour obtenir l’URL DASH correspondante, il vous suffit d’ajouter « (format=mpd-time-csf) ». Vous pouvez utiliser le lecteur [Azure Media Test](https://aka.ms/amtest) pour effectuer des tests dans un navigateur. Il vous permet de configurer le protocole de diffusion en continu à utiliser, sous la technologie de votre choix. IE11 et Microsoft Edge sur Windows 10 prennent en charge PlayReady via EME. Pour plus d’informations, consultez [ce billet de blog sur l’outil de test](./offline-playready-streaming-windows-10.md).
 
 ### <a name="sample-1"></a>Exemple 1
 
@@ -142,4 +144,3 @@ Afficher les parcours d’apprentissage de Media Services.
 
 ## <a name="provide-feedback"></a>Fournir des commentaires
 [!INCLUDE [media-services-user-voice-include](../../../includes/media-services-user-voice-include.md)]
-

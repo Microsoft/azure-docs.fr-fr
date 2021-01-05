@@ -1,20 +1,14 @@
 ---
 title: Se connecter avec votre application Apache Spark - Azure Event Hubs | Microsoft Docs
 description: Cet article fournit des informations sur l’utilisation d’Apache Spark avec Azure Event Hubs pour Kafka.
-services: event-hubs
-documentationcenter: .net
-author: ShubhaVijayasarathy
-manager: timlt
-ms.service: event-hubs
 ms.topic: how-to
-ms.date: 04/02/2020
-ms.author: shvija
-ms.openlocfilehash: 1b292f9b894dac7df6b9634ce1bad627c8d24fe6
-ms.sourcegitcommit: d597800237783fc384875123ba47aab5671ceb88
+ms.date: 06/23/2020
+ms.openlocfilehash: 84184ed3dffee97863b93c592d1cd577df313605
+ms.sourcegitcommit: d76108b476259fe3f5f20a91ed2c237c1577df14
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/03/2020
-ms.locfileid: "80632761"
+ms.lasthandoff: 10/29/2020
+ms.locfileid: "92913736"
 ---
 # <a name="connect-your-apache-spark-application-with-azure-event-hubs"></a>Connecter votre application Apache Spark avec Azure Event Hubs
 Ce tutoriel vous montre comment connecter votre application Spark à Event Hubs pour un streaming en temps réel. Cette intégration permet la diffusion en continu sans avoir à modifier vos clients de protocole ni exécuter vos propres clusters Zookeeper ou Kafka. Ce tutoriel nécessite Apache Spark v2.4+ et Apache Kafka v2.0+.
@@ -68,7 +62,7 @@ val df = spark.readStream
     .option("kafka.request.timeout.ms", "60000")
     .option("kafka.session.timeout.ms", "30000")
     .option("kafka.group.id", GROUP_ID)
-    .option("failOnDataLoss", "false")
+    .option("failOnDataLoss", "true")
     .load()
 
 //Use dataframe like normal (in this example, write to console)

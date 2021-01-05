@@ -1,0 +1,139 @@
+- name: Documentation Azure Defender pour IoT
+  href: index.yml
+- name: Vue d’ensemble
+  href: overview.md
+  items:
+    - name: Architecture de solution
+      href: architecture.md
+    - name: Module de sécurité pour Azure RTOS
+      href: iot-security-azure-rtos.md
+    - name: Agents de sécurité
+      href: security-agent-architecture.md
+    - name: Module de sécurité Edge
+      href: security-edge-architecture.md
+    - name: Prérequis du service
+      href: service-prerequisites.md
+    - name: Bien démarrer avec Azure Defender pour IoT
+      href: getting-started.md
+      items:
+        - name: IoT Hub
+          href: iot-hub-integration.md
+        - name: Agents de sécurité
+          href: security-agents.md
+- name: Démarrages rapides
+  expanded: true
+  items:
+    - name: Préparer votre réseau
+      href: quickstart-prepare-network-for-defender-for-iot.md
+    - name: Intégrer des capteurs
+      href: quickstart-onboard-sensors.md
+    - name: Configurer le module de sécurité pour Azure RTOS
+      href: quickstart-azure-rtos-security-module.md
+    - name: Intégrer Azure Defender pour IoT à IoT Hub
+      href: quickstart-onboard-iot-hub.md
+    - name: Configurer votre solution
+      href: quickstart-configure-your-solution.md
+    - name: Créer un jumeau de module Azure Defender pour IoT
+      href: quickstart-create-security-twin.md
+    - name: Investiguer les recommandations de sécurité
+      href: quickstart-investigate-security-recommendations.md
+    - name: Créer des alertes de sécurité personnalisées
+      href: quickstart-create-custom-alerts.md
+    - name: Investiguer les alertes de sécurité
+      href: quickstart-investigate-security-alerts.md
+- name: Concepts
+  items:
+    - name: Module de sécurité pour Azure RTOS
+      items:
+        - name: Comprendre le module de sécurité pour Azure RTOS
+          href: concept-rtos-security-module.md
+        - name: Module de sécurité pour les alertes et recommandations Azure RTOS
+          href: concept-rtos-security-alerts-recommendations.md
+    - name: Authentification des agents de sécurité
+      href: concept-security-agent-authentication-methods.md
+    - name: Module de sécurité
+      href: concept-security-module.md
+    - name: Alertes de sécurité
+      href: concept-security-alerts.md
+    - name: Alertes de sécurité personnalisables
+      href: concept-customizable-security-alerts.md
+    - name: Sécurité
+      items:
+        - name: Recommandations de sécurité
+          href: concept-recommendations.md
+        - name: Base de référence de la sécurité
+          href: security-baseline.md
+    - name: Ligne de base
+      href: concept-baseline.md
+    - name: Agrégation des événements
+      href: event-aggregation.md
+    - name: Tarifs et coûts associés
+      href: concept-pricing.md
+- name: Guides pratiques
+  items:
+    - name: Afficher et gérer des capteurs
+      href: how-to-deploy-view-sensors.md
+    - name: Déployer la console d’administration locale
+      href: how-to-deploy-management-console-appliance.md
+    - name: Utiliser le module de sécurité pour Azure RTOS
+      href: how-to-azure-rtos-security-module.md
+    - name: "Quel agent déployer\_?"
+      items:
+        - name: Sélectionner un agent à déployer
+          href: how-to-deploy-agent.md
+        - name: Déployer un agent de sécurité C# sur un appareil Windows
+          href: how-to-deploy-windows-cs.md
+        - name: Déployer un agent de sécurité C# sur un appareil Linux
+          href: how-to-deploy-linux-cs.md
+        - name: Déployer un agent de sécurité C sur un appareil Linux
+          href: how-to-deploy-linux-c.md
+    - name: Résoudre les problèmes d’un agent de sécurité
+      items:
+        - name: Résoudre les problèmes d’un agent de sécurité Azure Defender pour IoT Linux
+          href: troubleshoot-agent.md
+        - name: Configuration C locale
+          href: azure-iot-security-local-configuration-c.md
+        - name: Configuration C# locale
+          href: azure-iot-security-local-configuration-csharp.md
+    - name: Déployer un module de sécurité Edge
+      href: how-to-deploy-edge.md
+    - name: Configurer des agents de sécurité
+      href: how-to-agent-configuration.md
+    - name: Envoyer vos propres messages de sécurité
+      href: how-to-send-security-messages.md
+    - name: Accéder aux données de sécurité brutes
+      href: how-to-security-data-access.md
+    - name: Investiguer un appareil
+      href: how-to-investigate-device.md
+    - name: Se connecter à Azure Sentinel
+      href: how-to-configure-with-sentinel.md
+    - name: Personnaliser votre agent
+      href: how-to-customize-solution.md
+- name: Références
+  items:
+    - name: API Module de sécurité pour Azure RTOS
+      href: azure-rtos-security-module-api.md
+    - name: Questions fréquentes - service
+      href: resources-frequently-asked-questions.md
+    - name: Questions fréquentes - agent
+      href: resources-agent-frequently-asked-questions.md
+    - name: Feuille de route Azure
+      href: 'https://azure.microsoft.com/roadmap/?category=security-identity'
+- name: Ressources
+  items:
+    - name: Développer vos compétences de sécurité avec Microsoft Learn
+      href: /learn/browse/?term=securityS&terms=securityS
+    - name: Documentation sur Azure Security Center
+      href: ../security-center/index.yml
+    - name: Documentation sur la sécurité Azure
+      href: ../security/index.yml
+    - name: Module de sécurité Azure RTOS sur Stack Overflow
+      href: 'https://stackoverflow.com/questions/tagged/azure-rtos+azure-iot-security-module'
+    - name: 'Blog sur la sécurité, la confidentialité et la conformité Azure IoT'
+      href: 'https://techcommunity.microsoft.com/t5/iot-security/bd-p/IoTSecurity'
+    - name: Disponibilité régionale
+      href: 'https://azure.microsoft.com/regions/services/'
+    - name: Tarifs
+      href: 'https://azure.microsoft.com/pricing/details/security-center/'
+    - name: Vidéos
+      href: 'https://azure.microsoft.com/resources/videos/index/?services=security-center&service=internet-of-things&page=1&sort=newest'

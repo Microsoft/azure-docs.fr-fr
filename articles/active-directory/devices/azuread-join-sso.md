@@ -1,6 +1,6 @@
 ---
 title: Fonctionnement de l’authentification unique auprès de ressources locales sur des appareils joints à Azure AD | Microsoft Docs
-description: Découvrez comment configurer des appareils hybrides joints à Azure Active Directory.
+description: Découvrez comment étendre l’expérience SSO en configurant des appareils hybrides joints à Azure Active Directory.
 services: active-directory
 ms.service: active-directory
 ms.subservice: devices
@@ -9,40 +9,40 @@ ms.date: 06/28/2019
 ms.author: joflore
 author: MicrosoftGuyJFlo
 manager: daveba
-ms.reviewer: sandeo
+ms.reviewer: ravenn
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: f9d8c0cd803424e117bd4dc7a3382b7b32df2d05
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: ba802cb86d68298cd4dfff94162069590744833c
+ms.sourcegitcommit: 32c521a2ef396d121e71ba682e098092ac673b30
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78672717"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91256460"
 ---
 # <a name="how-sso-to-on-premises-resources-works-on-azure-ad-joined-devices"></a>Fonctionnement de l’authentification unique auprès de ressources locales sur des appareils joints à Azure AD
 
-Ce n’est probablement pas une surprise qu’un appareil joint à Azure Active Directory (Azure AD) vous offre une expérience d’authentification unique auprès des applications cloud de votre locataire. Si votre environnement comporte un annuaire Active Directory local, vous pouvez étendre à celui-ci l’expérience d’authentification unique sur ces appareils.
+Ce n’est probablement pas une surprise qu’un appareil joint à Azure Active Directory (Azure AD) vous offre une expérience d’authentification unique auprès des applications cloud de votre locataire. Si votre environnement dispose d'un Active Directory (AD) sur site, vous pouvez étendre l'expérience SSO sur ces appareils aux ressources et applications qui dépendent également de l'AD sur site. 
 
 Cet article explique comment cela fonctionne.
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
  Si les machines jointes à Azure AD ne sont pas connectées au réseau de votre organisation, un VPN ou une autre infrastructure réseau est nécessaire. L’authentification unique locale exige une communication à visibilité directe avec vos contrôleurs de domaine AD DS locaux.
 
 ## <a name="how-it-works"></a>Fonctionnement 
 
-Comme vous ne devez mémoriser qu’un seul nom d’utilisateur et un seul mot de passe, l’authentification unique simplifie l’accès à vos ressources et améliore la sécurité de votre environnement. Avec un appareil joint à Azure AD, vos utilisateurs ont déjà une expérience de l’authentification unique après des applications cloud de votre environnement. Si votre environnement comporte un annuaire Azure AD et un annuaire AD local, vous voudrez probablement élargir l’étendue de votre expérience de l’authentification unique à vos applications métier locales, aux partages de fichiers et aux imprimantes.
+Avec un appareil joint à Azure AD, vos utilisateurs ont déjà une expérience de l’authentification unique après des applications cloud de votre environnement. Si votre environnement comporte un AD Azure et un AD sur site, vous souhaiterez peut-être étendre le champ de votre expérience SSO à vos applications de ligne de métier (LOB) sur site, aux partages de fichiers et aux imprimantes.
 
 Les appareils joints à AD Azure n’ont pas connaissance de votre environnement AD local, car ils n’y sont pas joints. Cependant, vous pouvez fournir à ces appareils des informations supplémentaires sur votre annuaire AD local avec Azure AD Connect.
 
 Un environnement qui a à la fois un annuaire Azure AD et un annuaire AD local est également appelé « environnement hybride ». Si vous avez un environnement hybride, il est probable que vous avez déjà déployé Azure AD Connect pour synchroniser vos informations d’identité locales vers le cloud. Dans le cadre du processus de synchronisation, Azure AD Connect synchronise les informations d’utilisateurs locaux sur Azure AD. Quand un utilisateur se connecte à un appareil joint à Azure AD dans un environnement hybride :
 
-1. Azure AD renvoie le nom du domaine local dont l’utilisateur est membre à l’appareil.
-1. Le service de l’autorité de sécurité locale active l’authentification Kerberos sur l’appareil.
+1. Azure AD renvoie les détails du domaine local de l’utilisateur à l’appareil, ainsi que le [jeton d’actualisation principal](concept-primary-refresh-token.md)
+1. Le service de l’autorité de sécurité locale (LSA) active l’authentification Kerberoset NTLM sur l’appareil.
 
-Lors d’une tentative d’accès à une ressource demandant Kerberos dans l’environnement local de l’utilisateur, l’appareil :
+Lors d’une tentative d’accès à une ressource demandant Kerberos ou NTLM dans l’environnement local de l’utilisateur, l’appareil :
 
 1. Envoie les informations du domaine local et les informations d’identification au contrôleur de domaine localisé pour authentifier l’utilisateur.
-1. Reçoit un [ticket TGT (Ticket-Granting Ticket)](/windows/desktop/secauthn/ticket-granting-tickets) Kerberos qui est utilisé pour accéder aux ressources jointes à AD. Si la tentative visant à obtenir le TGT pour le domaine AAD Connect échoue (le délai d’expiration du DCLocator associé peut entraîner un retard), des entrées du gestionnaire d’informations d’identification sont tentées ou l’utilisateur peut recevoir une fenêtre contextuelle d’authentification demandant des informations d’identification pour la ressource cible.
+1. Reçoit un ticket TGT (Ticket-Granting Ticket) [Kerberos](/windows/desktop/secauthn/ticket-granting-tickets) ou un jeton NTLM basé sur le protocole pris en charge par la ressource ou l’application locale. Si la tentative visant à obtenir le TGT Kerberos ou le jeton NTLM pour le domaine échoue (le délai d’expiration du DCLocator associé peut entraîner un retard), des entrées du gestionnaire d’informations d’identification sont tentées ou l’utilisateur peut recevoir une fenêtre contextuelle d’authentification demandant des informations d’identification pour la ressource cible.
 
 Toutes les applications qui sont configurées pour l’**authentification Windows intégrée** bénéficient automatiquement de l’authentification unique quand un utilisateur tente d’y accéder.
 

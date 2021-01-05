@@ -1,24 +1,24 @@
 ---
-title: Améliorer les performances de l’index columnstore
-description: Réduisez les besoins en mémoire ou augmentez la mémoire disponible afin d’optimiser le nombre de lignes dans chaque rowgroup.
+title: Améliorer les performances d’un index columnstore pour un pool SQL dédié
+description: Réduisez les besoins en mémoire ou augmentez la mémoire disponible afin d’optimiser le nombre de lignes dans chaque rowgroup dans un pool SQL dédié.
 services: synapse-analytics
 author: kevinvngo
 manager: craigg
 ms.service: synapse-analytics
 ms.topic: conceptual
-ms.subservice: ''
+ms.subservice: sql-dw
 ms.date: 03/22/2019
 ms.author: kevin
 ms.reviewer: igorstan
 ms.custom: azure-synapse
-ms.openlocfilehash: d2cbe9b94c4698a93b93c032ee4dcb421a78e59b
-ms.sourcegitcommit: bd5fee5c56f2cbe74aa8569a1a5bce12a3b3efa6
+ms.openlocfilehash: 6984ad41c07f7790a746dbd197c18dce2aa83e2f
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80743071"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96453726"
 ---
-# <a name="maximizing-rowgroup-quality-for-columnstore"></a>Optimiser la qualité du rowgroup pour columnstore
+# <a name="maximizing-rowgroup-quality-for-columnstore-indexes-in-dedicated-sql-pool"></a>Optimisation de la qualité du rowgroup pour les index columnstore dans un pool SQL dédié 
 
 La qualité du rowgroup est déterminée par le nombre de lignes d’un rowgroup. L’augmentation de la mémoire disponible peut optimiser le nombre de lignes qu’un index columnstore compresse dans chaque rowgroup.  Utilisez ces méthodes pour améliorer les taux de compression et les performances de requête pour les index columnstore.
 
@@ -99,7 +99,7 @@ La mémoire maximale requise pour compresser un rowgroup est d’environ
 
 Les chaînes longues sont compressés avec une méthode de compression conçue pour la compression de texte. Cette méthode de compression utilise un *dictionnaire* pour stocker les modèles de texte. La taille maximale d’un dictionnaire est de 16 Mo. Il n’y qu’un seul dictionnaire pour chaque colonne de chaîne longue dans le rowgroup.
 
-Pour obtenir une présentation détaillée des besoins en mémoire de columnstore, visionnez la vidéo [Mise à l’échelle du pool SQL Synapse : configuration et instructions](https://channel9.msdn.com/Events/Ignite/2016/BRK3291).
+Pour obtenir une présentation détaillée des besoins en mémoire de columnstore, visionnez la vidéo [Mise à l’échelle du pool SQL dédié : configuration et instructions](https://channel9.msdn.com/Events/Ignite/2016/BRK3291).
 
 ## <a name="ways-to-reduce-memory-requirements"></a>Réduction des besoins en mémoire
 
@@ -122,7 +122,7 @@ Besoins en mémoire supplémentaires pour la compression de chaîne :
 
 ### <a name="avoid-over-partitioning"></a>Éviter un partitionnement excessif
 
-Les index columnstore créent un ou plusieurs rowgroups par partition. Pour le pool SQL dans Azure Synapse Analytics, le nombre de partitions augmente rapidement, car les données sont distribuées et chaque distribution est partitionnée.
+Les index columnstore créent un ou plusieurs rowgroups par partition. Pour le pool SQL dédié dans Azure Synapse Analytics, le nombre de partitions augmente rapidement, car les données sont distribuées et chaque distribution est partitionnée.
 
 Si la table compte un trop grand nombre de partitions, il n’y a peut-être pas suffisamment de lignes pour remplir les rowgroups. Le manque de lignes ne crée pas de sollicitation de la mémoire durant la compression. Mais il a pour effet que les rowgroups ne produisent pas des performances de requête columnstore optimales.
 
@@ -165,4 +165,4 @@ Pour augmenter l’allocation de mémoire pour une requête de chargement, vous 
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour découvrir d’autres façons d’améliorer les performances du pool SQL, consultez [Vue d’ensemble des performances](cheat-sheet.md).
+Pour découvrir d’autres façons d’améliorer les performances du pool SQL dédié, consultez [Vue d’ensemble des performances](cheat-sheet.md).

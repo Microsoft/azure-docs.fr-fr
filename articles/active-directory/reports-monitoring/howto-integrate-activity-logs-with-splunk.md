@@ -1,6 +1,6 @@
 ---
 title: Intégrer Splunk à l’aide d’Azure Monitor | Microsoft Docs
-description: Découvrez comment intégrer des journaux d’activité Azure Active Directory avec SumoLogic à l’aide d’Azure Monitor
+description: Découvrez comment intégrer des journaux d’activité Azure Active Directory à Splunk à l’aide d’Azure Monitor.
 services: active-directory
 documentationcenter: ''
 author: MarkusVi
@@ -9,7 +9,7 @@ editor: ''
 ms.assetid: 2c3db9a8-50fa-475a-97d8-f31082af6593
 ms.service: active-directory
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: identity
 ms.subservice: report-monitor
@@ -17,12 +17,12 @@ ms.date: 03/10/2020
 ms.author: markvi
 ms.reviewer: dhanyahk
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 2eda3643a7b1a341c7ed664dbfea933145f1f927
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 351669453a5ce6930d3eb912e95e530d14febf61
+ms.sourcegitcommit: 32c521a2ef396d121e71ba682e098092ac673b30
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78968706"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91335848"
 ---
 # <a name="how-to-integrate-azure-active-directory-logs-with-splunk-using-azure-monitor"></a>Procédure : Intégrer des journaux d’activité Azure Active Directory à Splunk à l’aide d’Azure Monitor
 
@@ -32,7 +32,7 @@ Cet article explique comment intégrer des journaux d’activité Azure Active D
 
 Pour utiliser cette fonctionnalité, vous avez besoin des éléments suivants :
 
-- Un hub d’événements Azure contenant les journaux d’activité d’Azure AD. Découvrez comment [diffuser en continu vos journaux d’activité sur un hub d’événements](quickstart-azure-monitor-stream-logs-to-event-hub.md). 
+- Un hub d’événements Azure contenant les journaux d’activité d’Azure AD. Découvrez comment [diffuser en continu vos journaux d’activité sur un hub d’événements](./tutorial-azure-monitor-stream-logs-to-event-hub.md). 
 
 -  [Module complémentaire Microsoft Azure pour Splunk](https://splunkbase.splunk.com/app/3757/) 
 

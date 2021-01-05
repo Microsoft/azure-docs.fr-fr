@@ -1,23 +1,24 @@
 ---
-title: 'Tutoriel : Prédire le prix de voitures avec le concepteur'
+title: 'Tutoriel : Prédire les prix des voitures avec le concepteur'
 titleSuffix: Azure Machine Learning
-description: Découvrez comment entraîner, scorer et déployer un modèle Machine Learning via une interface de type glisser-déposer. Ce tutoriel constitue la première partie d’une série en deux volets sur la prédiction des prix des véhicules automobiles à l’aide d’une régression linéaire.
+description: Entraînez un modèle Machine Learning pour prévoir l’évolution des prix dans le secteur automobile avec une régression linéaire. Ce tutoriel est le premier d’une série de deux.
 author: peterclu
 ms.author: peterlu
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: core
 ms.topic: tutorial
-ms.date: 03/12/2020
-ms.openlocfilehash: 0488002352d222abb0166737f9a042060b1a1bb1
-ms.sourcegitcommit: 0553a8b2f255184d544ab231b231f45caf7bbbb0
+ms.date: 09/28/2020
+ms.custom: designer
+ms.openlocfilehash: ca812fc7548e3c70f1faa1e1ed6a34afda3872af
+ms.sourcegitcommit: 16c7fd8fe944ece07b6cf42a9c0e82b057900662
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/30/2020
-ms.locfileid: "80389424"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96575973"
 ---
-# <a name="tutorial-predict-automobile-price-with-the-designer-preview"></a>Tutoriel : Prédire le prix de voitures avec le concepteur (version préliminaire)
-[!INCLUDE [applies-to-skus](../../includes/aml-applies-to-enterprise-sku.md)]
+# <a name="tutorial-predict-automobile-price-with-the-designer"></a>Tutoriel : Prédire le prix de voitures avec le concepteur
+
 
 Dans ce tutoriel en deux parties, vous découvrez comment utiliser le concepteur d’Azure Machine Learning pour entraîner et déployer un modèle Machine Learning qui prédit le prix des voitures. Le concepteur est un outil de type glisser-déposer avec lequel vous créez des modèles Machine Learning sans écrire une seule ligne de code.
 
@@ -37,6 +38,8 @@ Dans la [deuxième partie](tutorial-designer-automobile-price-deploy.md) du tuto
 >
 >Pour le trouver, accédez au concepteur dans votre espace de travail. Dans la section **Nouveau pipeline**, sélectionnez **Exemple 1 - Régression : Prédiction du prix de véhicules automobiles (de base)** .
 
+[!INCLUDE [machine-learning-missing-ui](../../includes/machine-learning-missing-ui.md)]
+
 ## <a name="create-a-new-pipeline"></a>Créer un pipeline
 
 Les pipelines Azure Machine Learning organisent plusieurs étapes de machine learning et de traitement de données en une même ressource. Les pipelines vous permettent d’organiser, de gérer et de réutiliser des workflows de Machine Learning complexes entre des projets et des utilisateurs.
@@ -45,11 +48,10 @@ Pour créer un pipeline Azure Machine Learning, vous devez disposer d’un espac
 
 ### <a name="create-a-new-workspace"></a>Créer un espace de travail
 
-Pour utiliser le concepteur, vous avez d’abord besoin d’un espace de travail Azure Machine Learning. L’espace de travail est la ressource de niveau supérieur pour Azure Machine Learning. Il fournit un emplacement centralisé où vous interagissez avec tous les artefacts que vous créez dans Azure Machine Learning.
+Vous devez avoir un espace de travail Azure Machine Learning pour utiliser le concepteur. L’espace de travail est la ressource de niveau supérieur pour Azure Machine Learning. Il fournit un emplacement centralisé où vous interagissez avec tous les artefacts que vous créez dans Azure Machine Learning. Pour savoir comment créer un espace de travail, consultez [Créer et gérer les espaces de travail Azure Machine Learning](how-to-manage-workspace.md).
 
-Si vous avez un espace de travail Azure Machine Learning édition Entreprise, [passez à la section suivante](#create-the-pipeline).
-
-[!INCLUDE [aml-create-portal](../../includes/aml-create-in-portal-enterprise.md)]
+> [!NOTE]
+> Si votre espace de travail utilise un réseau virtuel, vous devez effectuer des étapes de configuration supplémentaires pour utiliser le concepteur. Pour plus d’informations, consultez [Utiliser le studio Azure Machine Learning dans un réseau virtuel Azure](how-to-enable-studio-virtual-network.md)
 
 ### <a name="create-the-pipeline"></a>Créer le pipeline
 
@@ -76,7 +78,7 @@ Vous pouvez définir une **cible de calcul par défaut** pour le pipeline entier
     Si vous avez déjà une cible de calcul, vous pouvez la sélectionner pour exécuter ce pipeline.
 
     > [!NOTE]
-    > Le concepteur ne peut exécuter des expériences que sur des cibles Capacité de calcul Azure Machine Learning. Les autres cibles de calcul ne sont pas affichées.
+    > Le concepteur peut uniquement exécuter des expérimentations d’entraînement sur des instances de calcul Azure Machine Learning. Les autres cibles de calcul n’apparaîtront pas.
 
 1. Entrez un nom pour la ressource de calcul.
 
@@ -91,7 +93,7 @@ Vous pouvez définir une **cible de calcul par défaut** pour le pipeline entier
 
 Un certain nombre d’exemples de jeux de données que vous pouvez expérimenter sont inclus dans le concepteur. Pour les besoins de ce tutoriel, vous allez utiliser **Automobile price data (Raw)** (Données sur le prix des véhicules automobiles [brutes]). 
 
-1. Sur la gauche du canevas de pipeline se trouve une palette de jeux de données et de modules. Sélectionnez **Datasets** (Jeux de données), puis affichez la section **Samples** (Exemples) pour voir les exemples de jeux de données disponibles.
+1. Sur la gauche du canevas de pipeline se trouve une palette de jeux de données et de modules. Sélectionnez **Exemples de jeux de données** pour voir les exemples de jeux de données disponibles.
 
 1. Sélectionnez le jeu de données **Automobile price data (raw)** (Données sur le prix des automobiles (brut)), puis faites-le glisser vers le canevas.
 
@@ -101,13 +103,7 @@ Un certain nombre d’exemples de jeux de données que vous pouvez expérimenter
 
 Vous pouvez visualiser les données pour comprendre le jeu de données que vous allez utiliser.
 
-1. Sélectionnez le module **Automobile price data (Raw)** .
-
-1. Dans le volet de détails du module à droite du canevas, sélectionnez **Sorties + journaux**.
-
-1. Sélectionnez l’icône de graphique pour visualiser les données.
-
-    ![Visualiser les données](./media/tutorial-designer-automobile-price-train-score/visualize-data.png)
+1. Cliquez avec le bouton droit sur **Données sur le prix des véhicules automobiles (brutes)** , puis sélectionnez **Visualiser**.
 
 1. Cliquez sur différentes colonnes dans la fenêtre de données pour visualiser des informations les concernant.
 
@@ -179,8 +175,8 @@ Il manque encore des valeurs dans votre jeu de données après la suppression de
 1. Dans le volet d’informations du module à droite du canevas, sélectionnez la zone de texte **Comment** (Commentaire) et entrez *Supprimer les lignes avec des valeurs manquantes*. 
 
     Votre pipeline doit maintenant se présenter comme ceci :
-    
-    ![Sélectionner une colonne](./media/tutorial-designer-automobile-price-train-score/pipeline-clean.png)
+
+    :::image type="content" source="./media/tutorial-designer-automobile-price-train-score/pipeline-clean.png"alt-text="Select-column":::
 
 ## <a name="train-a-machine-learning-model"></a>Entraîner un modèle Machine Learning
 
@@ -219,18 +215,16 @@ Entraînez le modèle en lui fournissant un jeu de données incluant le prix. L�
 
 1. Sélectionnez **Regression** > **Linear Regression** (Régression > Régression linéaire), puis faites glisser le module vers le canevas du pipeline.
 
-1. Connectez la sortie du module **Linear Regression** (Régression linéaire) à l’entrée gauche du module **Train model** (Entraîner le modèle).
-
 1. Dans la palette des modules, développez la section **Module training** (Entraînement de module), puis faites glisser le module **Train Model** (Entraîner le modèle) vers le canevas.
 
-1. Sélectionnez le module **Train Model** (Entraîner le modèle) et faites-le glisser jusqu’au canevas du pipeline.
+1. Connectez la sortie du module **Linear Regression** (Régression linéaire) à l’entrée gauche du module **Train model** (Entraîner le modèle).
 
 1. Connectez la sortie des données d’entraînement (port de gauche) du module **Fractionner les données** à l’entrée droite du module **Entraîner le modèle**.
     
     > [!IMPORTANT]
     > Vérifiez que le port de sortie de gauche de **Split Data** est connecté à **Train Model**. Le port de gauche contient le jeu d’entraînement. Le port de droite contient le jeu de test.
 
-    ![Capture d’écran montrant la configuration correcte du module Entraîner le modèle Le module Régression linéaire se connecte au port gauche du module Entraîner le modèle et le module Fractionner les données se connecte au port droit du module Entraîner le modèle.](./media/tutorial-designer-automobile-price-train-score/pipeline-train-model.png)
+    :::image type="content" source="./media/tutorial-designer-automobile-price-train-score/pipeline-train-model.png"alt-text="Capture d’écran montrant la configuration correcte du module Entraîner le modèle. Le module Régression linéaire se connecte au port gauche du module Entraîner le modèle et le module Fractionner les données se connecte au port droit du module Entraîner le modèle.":::
 
 1. Sélectionnez le module **Entraîner le modèle**.
 
@@ -245,7 +239,7 @@ Entraînez le modèle en lui fournissant un jeu de données incluant le prix. L�
 
     Votre pipeline doit se présenter comme suit :
 
-    ![Capture d’écran montrant la configuration correcte du pipeline après l’ajout du module Entraîner le modèle.](./media/tutorial-designer-automobile-price-train-score/pipeline-train-graph.png)
+    :::image type="content" source="./media/tutorial-designer-automobile-price-train-score/pipeline-train-graph.png"alt-text="Capture d’écran montrant la configuration correcte du pipeline après l’ajout du module Entraîner le modèle.":::
 
 ### <a name="add-the-score-model-module"></a>Ajoutez le module Score Model (Noter le modèle)
 
@@ -265,7 +259,7 @@ Utilisez le module **Evaluate Model** (Évaluer le modèle) pour évaluer le sco
 
     Le pipeline final doit maintenant se présenter comme ceci :
 
-    ![Capture d’écran montrant la configuration correcte du pipeline](./media/tutorial-designer-automobile-price-train-score/pipeline-final-graph.png)
+    :::image type="content" source="./media/tutorial-designer-automobile-price-train-score/pipeline-final-graph.png"alt-text="Capture d’écran montrant la configuration correcte du pipeline.":::
 
 ## <a name="submit-the-pipeline"></a>Envoyer le pipeline
 
@@ -284,27 +278,23 @@ Quand vous avez terminé la configuration de votre pipeline, vous pouvez lancer 
     
     Vous pouvez voir l’état et les détails de l’exécution en haut à droite du canevas.
     
-    La première fois, l’exécution de votre pipeline peut prendre jusqu’à 20 minutes. Les paramètres de calcul par défaut ont une taille de nœud minimale de 0, ce qui signifie que le concepteur doit allouer des ressources après une période d’inactivité. Les exécutions de pipeline répétées prennent moins de temps dans la mesure où les ressources de calcul sont déjà allouées. Par ailleurs, le concepteur utilise les résultats mis en cache pour chaque module afin d’améliorer l’efficacité.
+    Si c’est la première fois, l’exécution de votre pipeline peut prendre jusqu’à 20 minutes. Les paramètres de calcul par défaut ont une taille de nœud minimale de 0, ce qui signifie que le concepteur doit allouer des ressources après une période d’inactivité. Les exécutions de pipeline répétées prennent moins de temps dans la mesure où les ressources de calcul sont déjà allouées. Par ailleurs, le concepteur utilise les résultats mis en cache pour chaque module afin d’améliorer l’efficacité.
 
 ### <a name="view-scored-labels"></a>Afficher les étiquettes de score
 
 Une fois l’exécution terminée, vous pouvez voir les résultats de l’exécution du pipeline. Tout d’abord, examinez les prédictions générées par le modèle de régression.
 
-1. Sélectionnez le module **Score Model** pour afficher sa sortie.
-
-1. Dans le volet de détails du module à droite du canevas, sélectionnez **Sorties + journaux** > icône de graphe ![icône de visualisation](./media/tutorial-designer-automobile-price-train-score/visualize-icon.png) pour voir les résultats.
+1. Cliquez avec le bouton droit sur le module **Score Model** et sélectionnez **Visualiser** pour afficher sa sortie.
 
     Vous pouvez voir ici les prix prédits et les prix réels des données à partir des données de test.
 
-    ![Capture d’écran de la visualisation de la sortie mettant en évidence la colonne Scored Labels (Étiquettes de score)](./media/tutorial-designer-automobile-price-train-score/score-result.png)
+    :::image type="content" source="./media/tutorial-designer-automobile-price-train-score/score-result.png"alt-text="Capture d’écran de la visualisation de la sortie mettant en évidence la colonne d’étiquettes notées":::
 
 ### <a name="evaluate-models"></a>Évaluer les modèles
 
 Utilisez **Evaluate Model** pour voir ce que donne le modèle entraîné sur le jeu de données de test.
 
-1. Sélectionnez le module **Evaluate Model** pour afficher sa sortie.
-
-1. Dans le volet de détails du module à droite du canevas, sélectionnez **Sorties + journaux** > icône de graphe ![icône de visualisation](./media/tutorial-designer-automobile-price-train-score/visualize-icon.png) pour voir les résultats.
+1. Cliquez avec le bouton droit sur le module **Evaluate Model** (Évaluer le modèle) et sélectionnez **Visualiser** pour afficher sa sortie.
 
 Les statistiques suivantes s’affichent pour votre modèle :
 

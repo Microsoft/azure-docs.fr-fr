@@ -4,6 +4,8 @@
       href: networking-overview.md
     - name: Architecture
       items:
+        - name: Azure pour les ingénieurs réseau
+          href: azure-for-network-engineers.md
         - name: Centres de données virtuels
           href: /azure/architecture/vdc/networking-virtual-datacenter
         - name: Routage asymétrique avec chemins d’accès réseau multiples
@@ -153,5 +155,5 @@
       href: 'https://azure.microsoft.com/regions/services/'
     - name: Stack Overflow
       href: 'https://stackoverflow.com/questions/tagged/azure-virtual-network'
-    - name: Videos
+    - name: Vidéos
       href: 'https://azure.microsoft.com/resources/videos/index/?services=virtual-network'

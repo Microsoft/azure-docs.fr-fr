@@ -5,17 +5,17 @@ author: rohinkoul
 ms.assetid: 5356a3a5-8dec-44ac-9709-0c2b707f6cb5
 ms.service: dns
 ms.devlang: azurecli
-ms.topic: conceptual
-ms.custom: H1Hack27Feb2017
+ms.topic: how-to
+ms.custom: H1Hack27Feb2017, devx-track-azurecli
 ms.workload: infrastructure-services
 ms.date: 05/15/2018
 ms.author: rohink
-ms.openlocfilehash: 4e017dc940e1d32888ff279904e44d34db1fd5c3
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 2d3989b3c477a35d602f1ccf3e45d6f597f5d78d
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76936883"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96011561"
 ---
 # <a name="manage-dns-records-and-recordsets-in-azure-dns-using-the-azure-cli"></a>Gérer les enregistrements DNS et les jeux d’enregistrement dans Azure DNS à l’aide d’Azure CLI
 

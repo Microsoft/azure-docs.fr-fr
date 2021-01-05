@@ -3,12 +3,12 @@ title: Créer et déployer des projets de groupe de ressources avec Visual Studi
 description: Utilisez Visual Studio pour créer un projet de groupe de ressources Azure et déployer les ressources dans Azure.
 ms.topic: conceptual
 ms.date: 10/16/2019
-ms.openlocfilehash: 5127732ac0c33d4b27f70bd616fb23aaec5c871f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 479dbed1f288148c24fc8464f7895cd3e2b182f9
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76152729"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91372644"
 ---
 # <a name="creating-and-deploying-azure-resource-groups-through-visual-studio"></a>Création et déploiement de groupes de ressources Azure à l’aide de Visual Studio
 
@@ -23,7 +23,7 @@ Dans cette section, vous créez un projet de groupe de ressources Azure avec un 
 1. Dans Visual Studio, choisissez **Fichier**>**Nouveau**>**Projet**.
 1. Sélectionnez le modèle de projet **Groupe de ressources Azure**, puis **Suivant**.
 
-    ![Créer un projet](./media/create-visual-studio-deployment-project/create-project.png)
+    ![Capture d’écran montrant la fenêtre Créer un projet avec un groupe de ressources Azure et le bouton Suivant mis en surbrillance.](./media/create-visual-studio-deployment-project/create-project.png)
 
 1. Donnez un nom à votre projet. Les autres paramètres par défaut conviennent probablement, mais passez-les en revue pour vérifier qu’ils fonctionnent pour votre environnement. Quand vous avez terminé, sélectionnez **Créer**.
 
@@ -65,7 +65,7 @@ Vous pouvez personnaliser un projet de déploiement en modifiant le modèle Reso
 
 1. Vous pouvez ajouter une ressource en sélectionnant le bouton **Ajouter une ressource** en haut de la fenêtre Structure JSON, ou en double-cliquant sur **Ressources** et en sélectionnant **Ajouter une nouvelle ressource**.
 
-   ![Ajouter une ressource](./media/create-visual-studio-deployment-project/add-resource.png)
+   ![Capture d’écran montrant la fenêtre Structure JSON avec l’option Ajouter une nouvelle ressource mise en surbrillance.](./media/create-visual-studio-deployment-project/add-resource.png)
 
 1. Sélectionnez **Compte de stockage** et donnez-lui un nom. Choisissez un nom qui ne contient pas plus de 11 caractères et uniquement des chiffres et des lettres minuscules.
 
@@ -189,7 +189,7 @@ Vérifions les résultats.
 
 1. À présent, vous devez vous assurer que votre projet de groupe de ressources est informé du nouveau projet. Revenez à votre projet de groupe de ressources (ExampleAppDeploy). Cliquez avec le bouton droit sur **Références** et sélectionnez **Ajouter une référence**.
 
-    ![Ajouter la référence](./media/create-visual-studio-deployment-project/add-new-reference.png)
+    ![Capture d’écran montrant le menu ExampleAppDeploy avec l’option Ajouter une référence mise en surbrillance.](./media/create-visual-studio-deployment-project/add-new-reference.png)
 
 1. Sélectionnez le projet d’application web que vous avez créé.
 
@@ -364,13 +364,13 @@ Vous n’êtes pas limité aux seules ressources qui sont disponibles via l’in
 
 1. Une fois le déploiement terminé, regardez votre tableau de bord dans le portail. Sélectionnez **Tableau de bord** et choisissez celui que vous avez déployé.
 
-   ![Tableau de bord personnalisé](./media/create-visual-studio-deployment-project/view-custom-dashboards.png)
+   ![Capture d’écran montrant la page Tableau de bord avec un exemple de tableau de bord personnalisé mis en surbrillance.](./media/create-visual-studio-deployment-project/view-custom-dashboards.png)
 
 1. Vous voyez le tableau de bord personnalisé.
 
    ![Tableau de bord personnalisé](./media/create-visual-studio-deployment-project/Ops-DemoSiteGroup-dashboard.png)
 
-Vous pouvez gérer l’accès au tableau de bord en utilisant des groupes RBAC. Vous pouvez également personnaliser l’apparence du tableau de bord après son déploiement. Toutefois, si vous redéployez le groupe de ressources, le tableau de bord conserve son état par défaut dans votre modèle. Pour plus d’informations sur la création de tableaux de bord, consultez [Créer par programmation des tableaux de bord Azure](../../azure-portal/azure-portal-dashboards-create-programmatically.md).
+Vous pouvez gérer l’accès au tableau de bord à l’aide du contrôle d’accès en fonction du rôle Azure (RBAC Azure). Vous pouvez également personnaliser l’apparence du tableau de bord après son déploiement. Toutefois, si vous redéployez le groupe de ressources, le tableau de bord conserve son état par défaut dans votre modèle. Pour plus d’informations sur la création de tableaux de bord, consultez [Créer par programmation des tableaux de bord Azure](../../azure-portal/azure-portal-dashboards-create-programmatically.md).
 
 ## <a name="clean-up-resources"></a>Nettoyer les ressources
 

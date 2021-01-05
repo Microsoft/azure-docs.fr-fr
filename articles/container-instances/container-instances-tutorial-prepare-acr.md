@@ -3,13 +3,13 @@ title: Tutoriel - Préparer le registre de conteneurs pour déployer une image
 description: Tutoriel Azure Container Instances (partie 2 sur 3) - Préparer un registre de conteneurs Azure et envoyer une image
 ms.topic: tutorial
 ms.date: 12/18/2019
-ms.custom: seodec18, mvc
-ms.openlocfilehash: 1a5b9555572264b6a00b4ce73eaa0719d94fd99b
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.custom: seodec18, mvc, devx-track-azurecli
+ms.openlocfilehash: 2eda960c53fc7ba851ffcfbe96bd8e9a48844910
+ms.sourcegitcommit: 8c7f47cc301ca07e7901d95b5fb81f08e6577550
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "78252155"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92746941"
 ---
 # <a name="tutorial-create-an-azure-container-registry-and-push-a-container-image"></a>Tutoriel : Créer un registre de conteneurs Azure et envoyer une image conteneur
 
@@ -28,66 +28,7 @@ Dans ce dernier article de la série, vous allez déployer le conteneur de votre
 
 [!INCLUDE [container-instances-tutorial-prerequisites](../../includes/container-instances-tutorial-prerequisites.md)]
 
-## <a name="create-azure-container-registry"></a>Créer un registre de conteneurs Azure
-
-Avant de créer votre registre de conteneurs, vous avez besoin d’un *groupe de ressources* vers lequel le déployer. Un groupe de ressources est une collection logique dans laquelle toutes les ressources Azure sont déployées et gérées.
-
-Créez un groupe de ressources avec la commande [az group create][az-group-create]. Dans l’exemple suivant, un groupe de ressources nommé *myResourceGroup* est créé dans la région *eastus* :
-
-```azurecli
-az group create --name myResourceGroup --location eastus
-```
-
-Une fois que vous avez créé le groupe de ressources, créez un registre de conteneurs Azure avec la commande [az acr create][az-acr-create]. Le nom du registre de conteneurs doit être unique dans Azure et contenir de 5 à 50 caractères alphanumériques. Remplacez `<acrName>` par un nom unique pour votre registre :
-
-```azurecli
-az acr create --resource-group myResourceGroup --name <acrName> --sku Basic
-```
-
-Voici un exemple de sortie pour un nouveau registre de conteneurs Azure nommé *mycontainerregistry082* (tronquée ici) :
-
-```output
-...
-{
-  "creationDate": "2018-03-16T21:54:47.297875+00:00",
-  "id": "/subscriptions/<Subscription ID>/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/mycontainerregistry082",
-  "location": "eastus",
-  "loginServer": "mycontainerregistry082.azurecr.io",
-  "name": "mycontainerregistry082",
-  "provisioningState": "Succeeded",
-  "resourceGroup": "myResourceGroup",
-  "sku": {
-    "name": "Basic",
-    "tier": "Basic"
-  },
-  "status": null,
-  "storageAccount": null,
-  "tags": {},
-  "type": "Microsoft.ContainerRegistry/registries"
-}
-```
-
-Dans le reste de ce didacticiel, `<acrName>` désigne l’espace réservé du nom du registre des conteneurs que vous choisissez dans cette étape.
-
-## <a name="log-in-to-container-registry"></a>Se connecter au registre de conteneurs
-
-Vous devez vous connecter à votre instance Azure Container Registry avant de lui envoyer des images. Utilisez la commande [az acr login][az-acr-login] pour terminer l’opération. Vous devez fournir le nom unique que vous avez choisi pour le registre de conteneurs au moment de sa création.
-
-```azurecli
-az acr login --name <acrName>
-```
-
-Par exemple :
-
-```azurecli
-az acr login --name mycontainerregistry082
-```
-
-Une fois l’opération terminée, la commande renvoie `Login Succeeded` :
-
-```output
-Login Succeeded
-```
+[!INCLUDE [container-instances-create-registry](../../includes/container-instances-create-registry.md)]
 
 ## <a name="tag-container-image"></a>Baliser l’image de conteneur
 

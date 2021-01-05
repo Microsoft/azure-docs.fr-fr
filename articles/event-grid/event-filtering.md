@@ -1,18 +1,14 @@
 ---
 title: Filtrage d’événements pour Azure Event Grid
 description: Explique comment filtrer des événements lors de la création d’un abonnement Azure Event Grid.
-services: event-grid
-author: spelluru
-ms.service: event-grid
 ms.topic: conceptual
-ms.date: 04/28/2020
-ms.author: spelluru
-ms.openlocfilehash: ab5dd716253875e4a992b94a4e143cb3e806a4b0
-ms.sourcegitcommit: eaec2e7482fc05f0cac8597665bfceb94f7e390f
+ms.date: 12/03/2020
+ms.openlocfilehash: bc3e84037693fcd909961ba409871d947ef1de7d
+ms.sourcegitcommit: 16c7fd8fe944ece07b6cf42a9c0e82b057900662
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82509650"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96574904"
 ---
 # <a name="understand-event-filtering-for-event-grid-subscriptions"></a>Comprendre le filtrage d’événements pour les abonnements Event Grid
 
@@ -121,6 +117,23 @@ Les opérateurs disponibles pour les **chaînes** sont les suivants :
 
 Les comparaisons de chaînes ne sont **pas toutes** sensibles à la casse.
 
+> [!NOTE]
+> Si le JSON de l’événement ne contient pas de clé de filtre avancé, le filtre est évalué comme **non correspondant** pour les opérateurs suivants : 
+> - NumberGreaterThan
+> - NumberGreaterThanOrEquals
+> - NumberLessThan
+> - NumberLessThanOrEquals
+> - NumberIn
+> - BoolEquals
+> - StringContains
+> - StringBeginsWith
+> - StringEndsWith
+> - StringIn
+> 
+>Le filtre est évalué comme **correspondant** pour les opérateurs suivants :
+> - NumberNotIn
+> - StringNotIn
+
 ### <a name="key"></a>Clé
 
 Pour les événements dans le schéma Event Grid, utilisez les valeurs suivantes pour la clé :
@@ -155,9 +168,10 @@ Les valeurs peuvent être les suivantes :
 
 Le filtrage avancé présente les limites suivantes :
 
-* Cinq filtres avancés par abonnement Event Grid
+* 5 filtres avancés et 25 valeurs de filtre pour tous les filtres par abonnement Event Grid
 * 512 caractères par valeur de type chaîne
 * Cinq valeurs pour les opérateurs **dans** et **pas dans**
+* Clés contenant le signe **`.` (point)** . Par exemple, `http://schemas.microsoft.com/claims/authnclassreference` ou `john.doe@contoso.com`. Actuellement, les caractères d’échappement ne sont pas pris en charge dans les clés. 
 
 La même clé peut être utilisée dans plusieurs filtres.
 

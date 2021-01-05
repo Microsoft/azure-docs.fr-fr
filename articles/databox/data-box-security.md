@@ -6,14 +6,14 @@ author: alkohli
 ms.service: databox
 ms.subservice: pod
 ms.topic: conceptual
-ms.date: 09/23/2019
+ms.date: 06/16/2020
 ms.author: alkohli
-ms.openlocfilehash: 21b05631f1c225c9c4b1f7c65d18588900850b8e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f9330f99a0473aa38da2fcbb8ae0624a37746613
+ms.sourcegitcommit: 6109f1d9f0acd8e5d1c1775bc9aa7c61ca076c45
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77911734"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94444756"
 ---
 # <a name="azure-data-box-security-and-data-protection"></a>Protection des données et sécurité Azure Data Box
 
@@ -30,11 +30,18 @@ La solution Microsoft Azure Data Box repose sur l’interaction de quatre compos
 - **Les clients/hôtes connectés à l’appareil** : les clients de votre infrastructure se connectant à l’appareil Data Box et contenant des données devant être protégées.
 - **Le stockage cloud** : emplacement dans le cloud Azure où les données sont stockées. Il s’agit généralement du compte de stockage lié à la ressource Azure Data Box que vous avez créée.
 
-Le diagramme suivant indique le flux de données à travers la solution Azure Data Box de l’environnement local vers Azure.
+Le diagramme suivant indique le flux de données à travers la solution de Azure Data Box de l’environnement local vers Azure, et les différentes fonctionnalités de sécurité en place quand les données transitent par la solution. Ce flux est destiné à une commande d’importation pour votre Data Box.
 
-![Sécurité Data Box](media/data-box-security/data-box-security-2.png)
+![Sécurité de l’importation Data Box](media/data-box-security/data-box-security-import.png)
 
-Comme les données circulent dans cette solution, les événements sont enregistrés et des journaux sont générés. Pour plus d’informations, accédez à [Suivi et journalisation des événements pour votre Azure Data Box](data-box-logs.md).
+Le diagramme suivant montre l’ordre d’exportation pour votre Data Box.
+
+![Sécurité de l’exportation Data Box](media/data-box-security/data-box-security-export.png)
+
+Comme les données circulent dans cette solution, les événements sont enregistrés et des journaux sont générés. Pour plus d'informations, accédez à :
+
+- [Suivi et journalisation des événements pour les commandes d’importation de votre Azure Data Box](data-box-logs.md).
+- [Suivi et journalisation des événements pour les commandes d’exportation de votre Azure Data Box](data-box-export-logs.md)
 
 ## <a name="security-features"></a>Fonctionnalités de sécurité
 
@@ -45,7 +52,6 @@ Data Box fournit une solution sécurisée pour la protection des données en vei
 Le service Data Box est protégé par les fonctionnalités suivantes :
 
 - Un boîtier robuste qui résiste aux chocs, aux aléas du transport et aux conditions environnementales. 
-- Des scellés inviolables pour éviter toute altération de l’appareil pendant le transit.
 - Un système de détection des altérations matérielles et logicielles empêchant d’autres opérations sur l’appareil.
 - Exécute uniquement des logiciels spécifiques à Data Box.
 - Démarre dans un état verrouillé.
@@ -57,7 +63,7 @@ Le service Data Box est protégé par les fonctionnalités suivantes :
 Les données qui circulent vers et depuis Data Box sont protégées par les fonctionnalités suivantes :
 
 - Chiffrement AES 256 bits pour les données au repos.
-- Des protocoles chiffrés peuvent être utilisés pour les données en transit.
+- Des protocoles chiffrés peuvent être utilisés pour les données en transit. Nous vous recommandons d’utiliser SMB 3.0 avec chiffrement pour protéger les données lorsque vous les copiez depuis vos serveurs de données.
 - Effacement sécurisé des données de l’appareil une fois le chargement des données vers Azure terminé. L’effacement des données est conforme aux instructions de l’[annexe A relative aux lecteurs de disque dur ATA dans les normes NIST 800-88r1](https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-88r1.pdf). L’événement d’effacement de données est enregistré dans le [l’historique des commandes](data-box-logs.md#download-order-history).
 
 ### <a name="data-box-service-protection"></a>Protection du service Data Box
@@ -66,7 +72,7 @@ Le service Data Box est protégé par les fonctionnalités suivantes.
 
 - L’accès au service Data Box requiert que votre organisation dispose d’un abonnement Azure incluant Data Box. Votre abonnement régit les fonctionnalités auxquelles vous pouvez accéder dans le portail Azure.
 - Étant donné que le service Data Box est hébergé dans Azure, il est protégé par les fonctionnalités de sécurité Azure. Pour plus d’informations sur les fonctionnalités de sécurité fournies par Microsoft Azure, accédez au [Centre de confidentialité Microsoft Azure](https://www.microsoft.com/TrustCenter/Security/default.aspx).
-- L’accès à la commande Data Box peut être contrôlé par le biais de l’utilisation des rôles de contrôle d’accès en fonction du rôle (RBAC). Pour plus d’informations, consultez [Configurer le contrôle d’accès pour la commande Data Box](data-box-logs.md#set-up-access-control-on-the-order)
+- L’accès à la commande Data Box peut être contrôlé par le biais de l’utilisation des rôles Azure. Pour plus d’informations, consultez [Configurer le contrôle d’accès pour la commande Data Box](data-box-logs.md#set-up-access-control-on-the-order)
 - Le service Data Box stocke le mot de passe de déverrouillage utilisé pour déverrouiller l’appareil dans le service.
 - Le service Data Box stocke les détails de la commande et l’état dans le service. Ces informations sont supprimées en même temps que la commande.
 
@@ -80,7 +86,7 @@ Azure Data Box collecte et affiche des informations personnelles dans les instan
 
   - Nom du contact
   - Numéro de téléphone
-  - Email
+  - E-mail
   - Adresse postale
   - City
   - Code postal

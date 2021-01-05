@@ -1,14 +1,14 @@
 ---
 title: Vue d’ensemble de l’exemple de blueprint Media
 description: Vue d’ensemble de l’exemple de blueprint Media. Cet exemple de blueprint aide les clients à évaluer des contrôles Media spécifiques.
-ms.date: 02/26/2020
+ms.date: 08/13/2020
 ms.topic: sample
-ms.openlocfilehash: ee4f15d52eea668ebffb8d5f639dd9c86ae04610
-ms.sourcegitcommit: 253d4c7ab41e4eb11cd9995190cd5536fcec5a3c
+ms.openlocfilehash: db7e67cb7f96a19a04efc001bc7752f7c9a02e73
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/25/2020
-ms.locfileid: "78201504"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88208238"
 ---
 # <a name="overview-of-the-media-blueprint-sample"></a>Vue d’ensemble de l’exemple de blueprint Media
 

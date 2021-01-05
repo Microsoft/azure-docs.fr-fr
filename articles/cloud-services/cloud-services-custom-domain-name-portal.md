@@ -8,12 +8,12 @@ ms.service: cloud-services
 ms.topic: article
 ms.date: 07/05/2017
 ms.author: tagore
-ms.openlocfilehash: e764e6a474b9843d43f9e8af9cf3b6a8ddf37189
-ms.sourcegitcommit: 98e79b359c4c6df2d8f9a47e0dbe93f3158be629
+ms.openlocfilehash: 012801d0aada8ee55bb0eb05eaf75caa95878765
+ms.sourcegitcommit: a92fbc09b859941ed64128db6ff72b7a7bcec6ab
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "80811649"
+ms.lasthandoff: 10/15/2020
+ms.locfileid: "92069923"
 ---
 # <a name="configuring-a-custom-domain-name-for-an-azure-cloud-service"></a>Configuration d’un nom de domaine personnalisé pour un service cloud Azure
 Lorsque vous créez un service cloud, Azure l'attribue à un sous-domaine de **cloudapp.net**. Par exemple, si votre service cloud s’intitule « contoso », vos utilisateurs peuvent accéder à votre application par le biais d’une URL telle que `http://contoso.cloudapp.net`. Azure attribue également une adresse IP virtuelle.
@@ -63,7 +63,7 @@ Pour créer un enregistrement CNAME, vous devez ajouter une nouvelle entrée dan
        ![section aperçu rapide indiquant l’URL du site][csurl]
 
        **OR**
-   * Installez et configurez [Azure Powershell](/powershell/azure/overview), puis utilisez la commande suivante :
+   * Installez et configurez [Azure Powershell](/powershell/azure/), puis utilisez la commande suivante :
 
        ```powershell
        Get-AzureDeployment -ServiceName yourservicename | Select Url
@@ -96,7 +96,7 @@ Pour créer un enregistrement A, vous devez tout d’abord connaître l’adres
        ![section aperçu rapide illustrant l’adresse IP virtuelle publique][vip]
 
        **OR**
-   * Installez et configurez [Azure Powershell](/powershell/azure/overview), puis utilisez la commande suivante :
+   * Installez et configurez [Azure Powershell](/powershell/azure/), puis utilisez la commande suivante :
 
        ```powershell
        get-azurevm -servicename yourservicename | get-azureendpoint -VM {$_.VM} | select Vip
@@ -119,7 +119,7 @@ Par exemple, l’enregistrement A suivant transfère tout le trafic de **contoso
 Cet exemple montre comment créer un enregistrement A pour le domaine racine. Pour créer une entrée avec des caractères génériques qui couvre l’ensemble des sous-domaines, entrez ***** comme sous-domaine.
 
 > [!WARNING]
-> Les adresses IP dans Azure sont dynamiques par défaut. Vous souhaiterez probablement utiliser une [adresse IP réservée](../virtual-network/virtual-networks-reserved-public-ip.md) pour vous assurer que votre adresse IP ne change pas.
+> Les adresses IP dans Azure sont dynamiques par défaut. Vous souhaiterez probablement utiliser une [adresse IP réservée](/previous-versions/azure/virtual-network/virtual-networks-reserved-public-ip) pour vous assurer que votre adresse IP ne change pas.
 > 
 > 
 
@@ -138,6 +138,3 @@ Cet exemple montre comment créer un enregistrement A pour le domaine racine. P
 [Azure portal]: https://portal.azure.com
 [vip]: ./media/cloud-services-custom-domain-name-portal/csvip.png
 [csurl]: ./media/cloud-services-custom-domain-name-portal/csurl.png
-
-
-

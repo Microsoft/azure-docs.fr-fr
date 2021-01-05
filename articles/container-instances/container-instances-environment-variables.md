@@ -3,12 +3,12 @@ title: Définir des variables d’environnement dans une instance de conteneur
 description: Découvrez comment définir des variables d’environnement dans les conteneurs que vous exécutez dans Azure Container Instances
 ms.topic: article
 ms.date: 04/17/2019
-ms.openlocfilehash: c3c76ba0c6131a8ab3de68c13c9dfddaf7e8749a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 92ae59f69b7cb43fee1d3ce8190a85fc20a11f60
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79225853"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86169763"
 ---
 # <a name="set-environment-variables-in-container-instances"></a>Définir des variables d’environnement dans des instances de conteneur
 
@@ -166,7 +166,7 @@ Définissez une variable d’environnement sécurisée en spécifiant la propri�
 Créez un fichier `secure-env.yaml` avec l’extrait de code suivant.
 
 ```yaml
-apiVersion: 2018-10-01
+apiVersion: 2019-12-01
 location: eastus
 name: securetest
 properties:

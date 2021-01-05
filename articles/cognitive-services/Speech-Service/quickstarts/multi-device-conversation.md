@@ -8,15 +8,16 @@ manager: cpoulain
 ms.service: cognitive-services
 ms.subservice: speech-service
 ms.topic: quickstart
-ms.date: 01/16/2020
+ms.date: 06/25/2020
 ms.author: ralphe
 zone_pivot_groups: programming-languages-set-nine
-ms.openlocfilehash: 7276b790b3fdb56308c6af9a047a7c290c01b253
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.custom: devx-track-csharp
+ms.openlocfilehash: e71c6959ca62fb19ed74ba4fa679f4edfb710725
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "76268017"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "88925886"
 ---
 # <a name="quickstart-multi-device-conversation"></a>Démarrage rapide : Conversation multi-appareil
 

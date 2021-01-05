@@ -9,16 +9,16 @@ ms.service: active-directory
 ms.subservice: develop
 ms.topic: conceptual
 ms.workload: identity
-ms.date: 07/16/2019
+ms.date: 05/18/2020
 ms.author: marsma
 ms.reviewer: saeeda
-ms.custom: aaddev
-ms.openlocfilehash: ed1f47ae99f6346a932d0fe94be7586dc25a672f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp, aaddev
+ms.openlocfilehash: bf51f39a789b91a4cb0b88eb8bb1f2989bec7358
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79230625"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88165819"
 ---
 # <a name="using-web-browsers-msalnet"></a>Utilisation de navigateurs web (MSAL.NET)
 
@@ -32,14 +32,14 @@ Il est important de comprendre que lors de l'acquisition d'un jeton de manière 
 
 - Le mot de passe (si un a été tapé) n’est jamais stocké par l’application, ni par la bibliothèque d’authentification.
 - Permet les redirections vers d’autres fournisseurs d’identité (par exemple, une connexion avec un compte professionnel ou scolaire, ou un compte personnel avec MSAL, ou avec un compte social par Azure AD B2C).
-- Permet au STS de contrôler l’accès conditionnel, par exemple, en obligeant l’utilisateur à passer par l’authentification multifacteur (MFA) pendant la phase d’authentification (entrée d’un code confidentiel Windows Hello, ou réponse à un appel sur son téléphone ou sur une application d’authentification sur son téléphone). Lorsque l'authentification multifacteur demandée n'est pas encore configurée, l'utilisateur peut la configurer le moment venu dans la même boîte de dialogue.  L’utilisateur indique son numéro de téléphone mobile et reçoit des instructions pour installer une application d’authentification et lire un code QR permettant d’ajouter son compte. Cette interaction pilotée par serveur est une excellente pratique !
+- Permet au STS de contrôler l’accès conditionnel, par exemple, en obligeant l’utilisateur à passer par l’[authentification multifacteur (MFA)](../authentication/concept-mfa-howitworks.md) pendant la phase d’authentification (entrée d’un code confidentiel Windows Hello, ou réponse à un appel sur son téléphone ou sur une application d’authentification sur son téléphone). Lorsque l’authentification multifacteur demandée n’est pas encore configurée, l’utilisateur peut la configurer le moment venu dans la même boîte de dialogue.  L’utilisateur indique son numéro de téléphone mobile et reçoit des instructions pour installer une application d’authentification et lire un code QR permettant d’ajouter son compte. Cette interaction pilotée par serveur est une excellente pratique !
 - Permet à l’utilisateur de modifier son mot de passe dans la même boîte de dialogue lorsque le mot de passe a expiré (en fournissant des champs supplémentaires pour l’ancien mot de passe et le nouveau mot de passe).
 - Permet de personnaliser la marque du locataire, ou l’application (images) contrôlée par le propriétaire de l’application / l’administrateur de locataires Azure AD.
 - Permet aux utilisateurs de donner leur consentement pour laisser l’application accéder aux ressources / étendues en leur nom, juste après l’authentification.
 
 ### <a name="embedded-vs-system-web-ui"></a>Interface utilisateur web incorporée ou système
 
-MSAL.NET est une bibliothèque multi-infrastructures qui dispose d'un code spécifique à l'infrastructure pour héberger un navigateur dans un contrôle d'interface utilisateur (par exemple, sur .Net Classic, elle utilise WinForms, sur Xamarin, elle utilise des contrôles mobiles natifs, etc.). Ce contrôle est appelé interface utilisateur web `embedded`. MSAL.NET peut également lancer le navigateur du système d'exploitation.
+MSAL.NET est une bibliothèque multi-infrastructures qui dispose d’un code spécifique à l’infrastructure pour héberger un navigateur dans un contrôle d’interface utilisateur (par exemple, sur .NET Classic, elle utilise WinForms, sur Xamarin, elle utilise des contrôles mobiles natifs, etc.). Ce contrôle est appelé interface utilisateur web `embedded`. MSAL.NET peut également lancer le navigateur du système d'exploitation.
 
 En règle générale, il est recommandé d'utiliser la plateforme par défaut, qui correspond généralement au navigateur du système. Le navigateur du système mémorise mieux les utilisateurs déjà connectés. Si nécessaire, utilisez `WithUseEmbeddedWebView(bool)` pour modifier ce comportement
 
@@ -98,8 +98,7 @@ IPublicClientApplication pca = PublicClientApplicationBuilder
 
 ### <a name="linux-and-mac"></a>Linux et MAC
 
-Sous Linux, MSAL.NET ouvre le navigateur du système d'exploitation par défaut à l'aide de l'outil xdg-open. Pour y remédier, exécutez l'outil depuis un terminal, par exemple, `xdg-open "https://www.bing.com"`  
-Sous Mac, le navigateur est ouvert en appelant `open <url>`.
+Sous Linux, MSAL.NET ouvre le navigateur du système d'exploitation par défaut à l'aide de l'outil xdg-open. Pour y remédier, exécutez l’outil depuis un terminal, par exemple, `xdg-open "https://www.bing.com"`. Sous Mac, le navigateur est ouvert en appelant `open <url>`.
 
 ### <a name="customizing-the-experience"></a>Personnalisation de l'expérience
 

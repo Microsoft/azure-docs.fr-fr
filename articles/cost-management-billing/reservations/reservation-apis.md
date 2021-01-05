@@ -5,15 +5,16 @@ author: yashesvi
 ms.reviewer: yashesvi
 tags: billing
 ms.service: cost-management-billing
+ms.subservice: reservations
 ms.topic: conceptual
 ms.date: 02/13/2020
 ms.author: banders
-ms.openlocfilehash: c2e590f011c92df6aa942e8e1fc799023f15750f
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 773334787ec7b2706c16e517281d6a60215ad482
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "79237579"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96353015"
 ---
 # <a name="apis-for-azure-reservation-automation"></a>API dédiées à l’automatisation de la réservation Azure
 
@@ -61,9 +62,9 @@ Corps de la requête :
 Vous pouvez également acheter une réservation sur le portail Azure. Pour plus d’informations, consultez les articles suivants :
 
 Plans de service :
-- [Machine virtuelle](../../virtual-machines/windows/prepay-reserved-vm-instances.md?toc=/azure/billing/TOC.json)
+- [Machine virtuelle](../../virtual-machines/prepay-reserved-vm-instances.md?toc=%2fazure%2fbilling%2fTOC.json)
 -  [Cosmos DB](../../cosmos-db/cosmos-db-reserved-capacity.md?toc=/azure/billing/TOC.json)
-- [Base de données SQL](../../sql-database/sql-database-reserved-capacity.md?toc=/azure/billing/TOC.json)
+- [Base de données SQL](../../azure-sql/database/reserved-capacity-overview.md?toc=/azure/billing/TOC.json)
 
 Abonnements logiciels :
 - [Logiciel SUSE Linux](../../virtual-machines/linux/prepay-suse-software-charges.md?toc=/azure/billing/TOC.json)
@@ -87,9 +88,9 @@ Si vous constatez que les réservations de votre organisation sont sous-utilisé
 
 Obtenez la liste de toutes les réservations auxquelles un utilisateur a accès grâce à l’[API de réservation - Opération - Liste](/rest/api/reserved-vm-instances/reservationorder/list). Pour accorder l’accès à une réservation par programmation, consultez les articles suivants :
 
-- [Gérer l’accès avec RBAC et l’API REST](../../role-based-access-control/role-assignments-rest.md)
-- [Gérer l’accès avec RBAC et Azure PowerShell](../../role-based-access-control/role-assignments-powershell.md)
-- [Gérer l’accès à l’aide du contrôle d’accès en fonction du rôle et d’Azure CLI](../../role-based-access-control/role-assignments-cli.md)
+- [Ajouter ou supprimer des attributions de rôle Azure à l’aide de l’API REST](../../role-based-access-control/role-assignments-rest.md)
+- [Ajouter ou supprimer des attributions de rôle Azure à l’aide d’Azure PowerShell](../../role-based-access-control/role-assignments-powershell.md)
+- [Ajouter ou supprimer des attributions de rôle Azure à l’aide d’Azure CLI](../../role-based-access-control/role-assignments-cli.md)
 
 ## <a name="split-or-merge-reservation"></a>Split or merge reservation (Diviser ou fusionner des réservations)
 
@@ -114,4 +115,4 @@ Pour modifier l’étendue par programmation, utilisez l’API [de réservation 
 - [Comprendre l’utilisation d’une réservation pour votre abonnement avec paiement à l’utilisation](understand-reserved-instance-usage.md)
 - [Comprendre l’utilisation d’une réservation pour votre Accord de Mise en Œuvre Entreprise](understand-reserved-instance-usage-ea.md)
 - [Coûts des logiciels Windows non inclus dans les réservations](reserved-instance-windows-software-costs.md)
-- [Réservations Azure dans le cadre du programme Fournisseur de solutions Cloud de l’Espace partenaires](https://docs.microsoft.com/partner-center/azure-reservations)
+- [Réservations Azure dans le cadre du programme Fournisseur de solutions Cloud de l’Espace partenaires](/partner-center/azure-reservations)

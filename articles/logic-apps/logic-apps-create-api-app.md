@@ -3,15 +3,15 @@ title: Créer des API Web et des API REST pour Azure Logic Apps
 description: Créer des API web et des API REST pour appeler vos API, services ou systèmes pour les intégrations système dans Azure Logic Apps
 services: logic-apps
 ms.suite: integration
-ms.reviewer: klam, jehollan, logicappspm
-ms.topic: article
+ms.reviewer: jonfan, logicappspm
+ms.topic: conceptual
 ms.date: 05/26/2017
-ms.openlocfilehash: bb6c99ea12e5b53631d42a04b36b7bfef2337e42
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 3fe98160cc10eb3607b8309a9a263d63380dcfb5
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79233025"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89073214"
 ---
 # <a name="create-custom-apis-you-can-call-from-azure-logic-apps"></a>Créer des API personnalisées que vous pouvez appeler à partir d’Azure Logic Apps
 
@@ -30,14 +30,14 @@ Vous pouvez héberger vos API sur [Azure App Service](../app-service/overview.md
 > [!TIP] 
 > Bien que vous puissiez déployer vos API comme des applications web, envisagez la possibilité de les déployer comme des applications API, car cela pourrait vous faciliter la tâche lorsque vous créerez, hébergerez et consommerez des API dans le cloud et en local. Vous n’êtes pas obligé de modifier le code dans vos API. Il vous suffit de déployer votre code dans une application API. Par exemple, découvrez comment générer des applications API créées dans les langages suivants : 
 > 
-> * [ASP.NET](../app-service/app-service-web-get-started-dotnet.md) 
-> * [Java](../app-service/app-service-web-get-started-java.md)
-> * [Node.JS](../app-service/app-service-web-get-started-nodejs.md)
-> * [PHP](../app-service/app-service-web-get-started-php.md)
-> * [Python](../app-service/containers/quickstart-python.md)
-> * [Ruby](../app-service/containers/quickstart-ruby.md)
+> * [ASP.NET](../app-service/quickstart-dotnetcore.md) 
+> * [Java](../app-service/quickstart-java.md)
+> * [Node.JS](../app-service/quickstart-nodejs.md)
+> * [PHP](../app-service/quickstart-php.md)
+> * [Python](../app-service/quickstart-python.md)
+> * [Ruby](../app-service/quickstart-ruby.md)
 >
-> Pour obtenir des exemples d’application API générées pour les applications logiques, consultez le [référentiel GitHub Azure Logic Apps](https://github.com/logicappsio) ou le [blog](https://aka.ms/logicappsblog).
+> Pour obtenir des exemples d’application API générées pour les applications logiques, consultez le [dépôt GitHub Azure Logic Apps](https://github.com/logicappsio).
 
 ## <a name="how-do-custom-apis-differ-from-custom-connectors"></a>Quelles sont les différences entre les API personnalisées et les connecteurs personnalisés ?
 
@@ -54,8 +54,8 @@ Vous pouvez également proposer des connecteurs inscrits à la certification Mic
 Pour plus d’informations sur les connecteurs personnalisés, consultez les pages : 
 
 * [Vue d’ensemble des connecteurs personnalisés](../logic-apps/custom-connector-overview.md)
-* [Créer des connecteurs personnalisés à partir d’API Web](../logic-apps/custom-connector-build-web-api-app-tutorial.md)
-* [Inscrire des connecteurs personnalisés dans Azure Logic Apps](../logic-apps/logic-apps-custom-connector-register.md)
+* [Créer des connecteurs personnalisés à partir d’API Web](/connectors/custom-connectors/create-web-api-connector)
+* [Inscrire des connecteurs personnalisés dans Azure Logic Apps](/connectors/custom-connectors/)
 
 ## <a name="helpful-tools"></a>Outils utiles
 
@@ -100,7 +100,7 @@ Voici les étapes spécifiques que votre API doit suivre, décrites du point de 
    
    La réponse `202 ACCEPTED` doit inclure ces en-têtes :
    
-   * *Requis* : un en-tête `location` qui spécifie le chemin d’accès absolu à une URL permettant au moteur Logic Apps de vérifier l’état du travail de votre API
+   * *Obligatoire* : un en-tête `location` qui spécifie le chemin absolu à une URL permettant au moteur Logic Apps de vérifier l’état du travail de votre API.
 
    * *Facultatif* : un en-tête `retry-after` qui spécifie le nombre de secondes pendant lesquelles le moteur doit attendre avant de vérifier l’URL `location` pour connaître l’état du travail. 
 
@@ -130,17 +130,19 @@ Lorsque le travail est terminé, votre API utilise l’URL pour en informer le m
 
 Pour ce modèle, définissez deux points de terminaison sur votre contrôleur : `subscribe` et `unsubscribe`
 
-*  Point de terminaison `subscribe` : lorsque l’exécution atteint l’action de votre API dans le flux de travail, le moteur Logic Apps appelle le point de terminaison `subscribe`. Cette étape entraîne la création par l’application logique d’une URL de rappel que votre API enregistre, avant d’attendre le rappel de votre API lorsque le travail est terminé. Votre API envoie ensuite un rappel avec un élément POST HTTP à l’URL et transmet à l’application logique les en-têtes et le contenu renvoyés en tant qu’entrées.
+*  Point de terminaison `subscribe` : quand l’exécution atteint l’action de votre API dans le workflow, le moteur Logic Apps appelle le point de terminaison `subscribe`. Cette étape entraîne la création par l’application logique d’une URL de rappel que votre API enregistre, avant d’attendre le rappel de votre API lorsque le travail est terminé. Votre API envoie ensuite un rappel avec un élément POST HTTP à l’URL et transmet à l’application logique les en-têtes et le contenu renvoyés en tant qu’entrées.
 
 * Point de terminaison `unsubscribe` : si l’exécution de l’application logique est annulée, le moteur Logic Apps appelle le point de terminaison `unsubscribe`. Votre API peut alors annuler l’inscription de l’URL de rappel, et arrêter tous les processus selon les besoins.
 
 ![Modèle d’action Webhook](./media/logic-apps-create-api-app/custom-api-webhook-action-pattern.png)
 
-> [!NOTE]
-> Actuellement, le Concepteur d’application logique ne prend pas en charge la découverte des points de terminaison Webhook via Swagger. Pour ce modèle, vous devez donc ajouter une action [**Webhook**](../connectors/connectors-native-webhook.md) et spécifier l’URL, les en-têtes et le corps de votre requête. Voir également [Actions et déclencheurs de flux de travail](logic-apps-workflow-actions-triggers.md#apiconnection-webhook-action). Pour transmettre l’URL de rappel, vous pouvez utiliser la fonction de flux de travail `@listCallbackUrl()` dans un de ces champs en fonction des besoins.
+Actuellement, le Concepteur d’application logique ne prend pas en charge la découverte des points de terminaison Webhook via Swagger. Pour ce modèle, vous devez donc ajouter une action [**Webhook**](../connectors/connectors-native-webhook.md) et spécifier l’URL, les en-têtes et le corps de votre requête. Voir également [Actions et déclencheurs de flux de travail](logic-apps-workflow-actions-triggers.md#apiconnection-webhook-action). Pour un exemple de modèle Webhook, consultez cet [exemple de déclencheur Webhook dans GitHub](https://github.com/logicappsio/LogicAppTriggersExample/blob/master/LogicAppTriggers/Controllers/WebhookTriggerController.cs).
 
-> [!TIP]
-> Pour un exemple de modèle Webhook, consultez cet [exemple de déclencheur Webhook dans GitHub](https://github.com/logicappsio/LogicAppTriggersExample/blob/master/LogicAppTriggers/Controllers/WebhookTriggerController.cs).
+Voici d’autres conseils et remarques :
+
+* Pour transmettre l’URL de rappel, vous pouvez utiliser la fonction de flux de travail `@listCallbackUrl()` dans un de ces champs en fonction des besoins.
+
+* Si vous possédez l’application logique et le service abonné, vous n’êtes pas obligé d’appeler le point de terminaison `unsubscribe` après l’appel de l’URL de rappel. Dans le cas contraire, le runtime Logic Apps doit appeler le point de terminaison `unsubscribe` pour signaler qu’aucun autre appel n’est attendu et autoriser le nettoyage des ressources côté serveur.
 
 <a name="triggers"></a>
 
@@ -192,19 +194,21 @@ Par exemple, pour vérifier périodiquement la présence de nouveaux fichiers da
 Un déclencheur Webhook est un *déclencheur d’émission* qui attend et écoute les nouvelles données ou les événements au point de terminaison de votre service. Si de nouvelles données ou un événement remplissent la condition spécifiée, le déclencheur est activé et crée une instance d’application logique, qui traite ensuite les données en tant qu’entrée.
 Les déclencheurs Webhook agissent de façon très similaire aux [actions Webhook](#webhook-actions) précédemment décrites dans cette rubrique. Ils sont configurés avec les points de terminaison `subscribe` et `unsubscribe`. 
 
-* Point de terminaison `subscribe` : lorsque vous ajoutez et enregistrez un déclencheur Webhook dans votre application logique, le moteur Logic Apps appelle le point de terminaison `subscribe`. Cette étape entraîne la création par l’application logique d’une URL de rappel que votre API enregistre. Lorsque de nouvelles données ou un événement remplissent la condition spécifiée, votre API envoie un rappel avec un élément POST HTTP à l’URL. La charge utile de contenu et les en-têtes sont transmis à l’application logique en tant qu’entrée.
+* Point de terminaison `subscribe` : quand vous ajoutez et enregistrez un déclencheur de webhook dans votre application logique, le moteur Logic Apps appelle le point de terminaison `subscribe`. Cette étape entraîne la création par l’application logique d’une URL de rappel que votre API enregistre. Lorsque de nouvelles données ou un événement remplissent la condition spécifiée, votre API envoie un rappel avec un élément POST HTTP à l’URL. La charge utile de contenu et les en-têtes sont transmis à l’application logique en tant qu’entrée.
 
-* Point de terminaison `unsubscribe` : si le déclencheur Webhook ou l’intégralité de l’application logique est supprimé, le moteur Logic Apps appelle le point de terminaison `unsubscribe`. Votre API peut alors annuler l’inscription de l’URL de rappel, et arrêter tous les processus selon les besoins.
+* Point de terminaison `unsubscribe` : si le déclencheur de webhook ou l’intégralité de l’application logique est supprimé, le moteur Logic Apps appelle le point de terminaison `unsubscribe`. Votre API peut alors annuler l’inscription de l’URL de rappel, et arrêter tous les processus selon les besoins.
 
 ![Modèle de déclencheur Webhook](./media/logic-apps-create-api-app/custom-api-webhook-trigger-pattern.png)
 
-> [!NOTE]
-> Actuellement, le Concepteur d’application logique ne prend pas en charge la découverte des points de terminaison Webhook via Swagger. Pour ce modèle, vous devez donc ajouter un déclencheur [**Webhook**](../connectors/connectors-native-webhook.md) et spécifier l’URL, les en-têtes et le corps de votre requête. Voir également [Déclencheur HTTPWebhook](logic-apps-workflow-actions-triggers.md#httpwebhook-trigger). Pour transmettre l’URL de rappel, vous pouvez utiliser la fonction de flux de travail `@listCallbackUrl()` dans un de ces champs en fonction des besoins.
->
-> Pour éviter que les mêmes données soient traitées plusieurs fois, votre déclencheur doit nettoyer les données qu’il a déjà lues et transmises à l’application logique.
+Actuellement, le Concepteur d’application logique ne prend pas en charge la découverte des points de terminaison Webhook via Swagger. Pour ce modèle, vous devez donc ajouter un déclencheur [**Webhook**](../connectors/connectors-native-webhook.md) et spécifier l’URL, les en-têtes et le corps de votre requête. Voir également [Déclencheur HTTPWebhook](logic-apps-workflow-actions-triggers.md#httpwebhook-trigger). Pour un exemple de modèle Webhook, consultez cet [exemple de contrôleur de déclencheur Webhook dans GitHub](https://github.com/logicappsio/LogicAppTriggersExample/blob/master/LogicAppTriggers/Controllers/WebhookTriggerController.cs).
 
-> [!TIP]
-> Pour un exemple de modèle Webhook, consultez cet [exemple de contrôleur de déclencheur Webhook dans GitHub](https://github.com/logicappsio/LogicAppTriggersExample/blob/master/LogicAppTriggers/Controllers/WebhookTriggerController.cs).
+Voici d’autres conseils et remarques :
+
+* Pour transmettre l’URL de rappel, vous pouvez utiliser la fonction de flux de travail `@listCallbackUrl()` dans un de ces champs en fonction des besoins.
+
+* Pour éviter que les mêmes données soient traitées plusieurs fois, votre déclencheur doit nettoyer les données qu’il a déjà lues et transmises à l’application logique.
+
+* Si vous possédez l’application logique et le service abonné, vous n’êtes pas obligé d’appeler le point de terminaison `unsubscribe` après l’appel de l’URL de rappel. Dans le cas contraire, le runtime Logic Apps doit appeler le point de terminaison `unsubscribe` pour signaler qu’aucun autre appel n’est attendu et autoriser le nettoyage des ressources côté serveur.
 
 ## <a name="improve-security-for-calls-to-your-apis-from-logic-apps"></a>Améliorer la sécurité des appels à vos API à partir des applications logiques
 
@@ -224,7 +228,7 @@ Pour mettre vos API personnalisées à la disposition de tous les utilisateurs d
 
 * Pour obtenir de l’aide concernant les API personnalisées, contactez [customapishelp@microsoft.com](mailto:customapishelp@microsoft.com).
 
-* Si vous avez des questions, consultez le [forum Azure Logic Apps](https://social.msdn.microsoft.com/Forums/en-US/home?forum=azurelogicapps).
+* Pour toute question, consultez la [page de questions Microsoft Q&A pour Azure Logic Apps](/answers/topics/azure-logic-apps.html).
 
 * Afin de contribuer à améliorer Logic Apps, votez pour des idées ou soumettez-en sur le [site de commentaires des utilisateurs Logic Apps](https://aka.ms/logicapps-wish). 
 

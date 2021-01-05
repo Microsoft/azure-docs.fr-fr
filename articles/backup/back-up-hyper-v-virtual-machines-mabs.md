@@ -3,12 +3,12 @@ title: Sauvegarder des machines virtuelles Hyper-V à l’aide de MABS
 description: Cet article contient les procédures de sauvegarde et de récupération des machines virtuelles à l’aide du serveur de sauvegarde Microsoft Azure (MABS).
 ms.topic: conceptual
 ms.date: 07/18/2019
-ms.openlocfilehash: 71cf446472ef0cf4f50bf64e47d359ea08ccc087
-ms.sourcegitcommit: 7581df526837b1484de136cf6ae1560c21bf7e73
+ms.openlocfilehash: fc4e34e11e2474521082b1c23f600e9a5ca7a9fe
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/31/2020
-ms.locfileid: "80420416"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89377996"
 ---
 # <a name="back-up-hyper-v-virtual-machines-with-azure-backup-server"></a>Sauvegarder des machines virtuelles Hyper-V avec le serveur de sauvegarde Azure
 
@@ -50,7 +50,7 @@ Le serveur MABS effectue la sauvegarde avec VSS comme suit. Les étapes de cette
 
 4. Après la synchronisation de la copie de base de référence initiale de la machine virtuelle avec le serveur MABS, toutes les modifications apportées aux ressources de la machine virtuelle sont capturées dans un nouveau point de récupération. Le point de récupération représente l’état cohérent de la machine virtuelle à un moment donné. Les captures de points de récupération peuvent se produire au moins une fois par jour. Quand un point de récupération est créé, MABS utilise la réplication au niveau du bloc conjointement avec l’enregistreur VSS Hyper-V pour déterminer les blocs qui ont été modifiés sur le serveur qui exécute Hyper-V après la création du dernier point de récupération. Ces blocs de données sont ensuite transférés vers le serveur MABS et sont appliqués au réplica des données protégées.
 
-5. Le serveur MABS utilise VSS sur les volumes qui hébergent les données de récupération hôtes, afin que plusieurs clichés instantanés soient disponibles. Chacun de ces clichés instantanés fournit une récupération distincte. Les points de récupération VSS sont stockés sur le serveur MABS. La copie temporaire effectuée sur le serveur exécutant Hyper-V est stockée uniquement pendant la durée de la synchronisation MABS.
+5. Le serveur MABS utilise VSS sur les volumes qui hébergent les données de récupération hôtes, afin que plusieurs clichés instantanés soient disponibles. Chacun de ces clichés instantanés fournit une récupération distincte. Les points de récupération VSS sont stockés sur le serveur MABS. La copie temporaire effectuée sur le serveur exécutant Hyper-V est stockée uniquement pour la durée de la synchronisation MABS.
 
 >[!NOTE]
 >
@@ -78,7 +78,7 @@ Voici les prérequis pour la sauvegarde des machines virtuelles Hyper-V avec MAB
 
 2. Configurez l’agent de protection MABS sur le serveur Hyper-V ou les nœuds de cluster Hyper-V. Si vous effectuez une sauvegarde au niveau de l’invité, vous installez l’agent sur les machines virtuelles que vous souhaitez sauvegarder au niveau de l’invité.
 
-3. Dans la console Administrateur du serveur de sauvegarde Microsoft Azure, cliquez sur **Protection** > **Créer un groupe de protection** pour ouvrir l’Assistant **Création d’un nouveau groupe de protection**.
+3. Dans la console Administrateur du serveur de sauvegarde Microsoft Azure, sélectionnez **Protection** > **Créer un groupe de protection** pour ouvrir l’Assistant **Création d’un nouveau groupe de protection**.
 
 4. Dans la page **Sélectionner les membres du groupe**, sélectionnez les machines virtuelles que vous souhaitez protéger à partir des serveurs hôtes Hyper-V sur lesquels elles se trouvent. Nous vous recommandons de placer toutes les machines virtuelles avec la même stratégie de protection dans un groupe de protection. Pour utiliser efficacement l’espace, activez la colocation. La colocation vous permet de localiser des données à partir de différents groupes de protection sur le même stockage sur disque ou sur bande, afin que plusieurs sources de données aient un seul réplica et un seul volume des points de récupération.
 
@@ -110,7 +110,7 @@ Si MABS s’exécute sur Windows Server 2012 R2 ou version ultérieure, vous p
 
 **Active la sauvegarde de l’hébergeur** : vous pouvez utiliser un centre de données hébergé en tant que site de réplication, sans avoir besoin d’un centre de données secondaire. Dans ce cas, le contrat SLA de l’hébergeur exige une sauvegarde cohérente des machines virtuelles de réplication.
 
-Une machine virtuelle de réplication est désactivée jusqu’à ce qu’un basculement soit lancé, et VSS ne peut pas garantir une sauvegarde cohérente au niveau des applications pour une machine virtuelle de réplication. Par conséquent, la sauvegarde d’une machine virtuelle de réplication sera cohérente en cas d’incident uniquement. Si la cohérence en cas d’incident ne peut pas être garantie, la sauvegarde échoue et cela peut se produire dans un certain nombre de conditions :
+Une machine virtuelle de réplication est désactivée jusqu’à ce qu’un basculement soit lancé, et VSS ne peut pas garantir une sauvegarde cohérente au niveau des applications pour une machine virtuelle de réplication. La sauvegarde d’une machine virtuelle de réplication ne sera donc cohérente qu’en cas d’incident. Si la cohérence en cas d’incident ne peut pas être garantie, la sauvegarde échoue et cela peut se produire dans un certain nombre de conditions :
 
 - La machine virtuelle de réplication n’est pas saine et se trouve dans un état critique.
 
@@ -128,13 +128,13 @@ Lorsque vous pouvez récupérer une machine virtuelle sauvegardée, vous utilise
 
 1. Dans la console Administrateur MABS, tapez le nom de la machine virtuelle ou développez la liste des éléments protégés et sélectionnez la machine virtuelle que vous souhaitez récupérer.
 
-2. Dans le volet **Points de récupération pour**, cliquez dans le calendrier sur n’importe quelle date pour afficher les points de récupération disponibles. Ensuite, dans le volet **Chemin**, sélectionnez le point de récupération que vous souhaitez utiliser dans l’Assistant Récupération.
+2. Dans le volet **Points de récupération pour**, sélectionnez dans le calendrier n’importe quelle date pour afficher les points de récupération disponibles. Ensuite, dans le volet **Chemin**, sélectionnez le point de récupération que vous souhaitez utiliser dans l’Assistant Récupération.
 
-3. Dans le menu **Actions**, cliquez sur **Récupérer** pour ouvrir l’Assistant Récupération.
+3. Dans le menu **Actions**, sélectionnez **Récupérer** pour ouvrir l’Assistant Récupération.
 
-    La machine virtuelle et le point de récupération que vous avez sélectionnés s’affichent dans l’écran **Vérifier la récupération sélectionnée**. Cliquez sur **Suivant**.
+    La machine virtuelle et le point de récupération que vous avez sélectionnés s’affichent dans l’écran **Vérifier la récupération sélectionnée**. Sélectionnez **Suivant**.
 
-4. Dans l’écran **Sélectionner le type de récupération**, sélectionnez l’emplacement où vous souhaitez restaurer les données, puis cliquez sur **Suivant**.
+4. Dans l’écran **Sélectionner le type de récupération**, sélectionnez l’emplacement où vous souhaitez restaurer les données, puis sélectionnez **Suivant**.
 
     - **Récupérer sur l’instance d’origine** : Lorsque vous récupérez sur l’instance d’origine, le disque dur virtuel d’origine est supprimé. MABS récupère le disque dur virtuel et d’autres fichiers de configuration à l’emplacement d’origine à l’aide de l’enregistreur VSS Hyper-V. À la fin du processus de récupération, les machines virtuelles sont toujours hautement disponibles.
         Le groupe de ressources doit être présent pour la récupération. S’il n’est pas disponible, effectuez la récupération à un autre emplacement, puis rendez la machine virtuelle hautement disponible.
@@ -143,16 +143,16 @@ Lorsque vous pouvez récupérer une machine virtuelle sauvegardée, vous utilise
 
     - **Copier dans un dossier réseau** : MABS prend en charge la récupération au niveau de l’élément, qui vous permet d’effectuer une récupération au niveau de l’élément de fichiers, dossiers, volumes et disques durs virtuels (VHD) à partir d’une sauvegarde au niveau de l’hôte de machines virtuelles Hyper-V vers un partage réseau ou un volume sur un serveur protégé par MABS. Il n’est pas nécessaire d’installer l’agent de protection MABS à l’intérieur de l’invité pour effectuer une récupération au niveau de l’élément. Si vous choisissez cette option, l’Assistant Récupération vous présente un écran supplémentaire pour identifier la destination et le chemin de destination.
 
-5. Dans **Spécifier les options de récupération**, configurez les options de récupération, puis cliquez sur **Suivant** :
+5. Dans **Spécifier les options de récupération**, configurez les options de récupération, puis sélectionnez **Suivant** :
 
-    - Si vous récupérez une machine virtuelle sur une bande passante faible, cliquez sur **Modifier** pour activer **Limitation de l’utilisation de la bande passante réseau**. Après avoir activé l’option de limitation, vous pouvez spécifier la quantité de bande passante que vous souhaitez rendre disponible et l’heure à laquelle cette bande passante est disponible.
+    - Si vous récupérez une machine virtuelle avec une bande passante faible, sélectionnez **Modifier** pour activer **Limitation de l’utilisation de la bande passante réseau**. Après avoir activé l’option de limitation, vous pouvez spécifier la quantité de bande passante que vous souhaitez rendre disponible et l’heure à laquelle cette bande passante est disponible.
     - Sélectionnez **Activer la récupération SAN au moyen d’instantanés matériels** si vous avez configuré votre réseau.
     - Sélectionnez **Send an e-mail when the recovery completes** (Envoyer un e-mail quand la récupération est terminée), puis indiquez les adresses e-mail si vous souhaitez que des notifications par e-mail soient envoyées une fois le processus de récupération terminé.
 
-6. Dans l’écran de résumé, vérifiez que tous les détails sont corrects. Si les détails ne sont pas corrects, ou si vous souhaitez apporter une modification, cliquez sur **Précédent**. Si vous êtes satisfait des paramètres, cliquez sur **Récupérer** pour démarrer le processus de récupération.
+6. Dans l’écran de résumé, vérifiez que tous les détails sont corrects. Si les détails ne sont pas corrects ou si vous souhaitez apporter une modification, sélectionnez **Précédent**. Si vous êtes satisfait des paramètres, sélectionnez **Récupérer** pour démarrer le processus de récupération.
 
 7. L’écran **État de la récupération** fournit des informations sur le travail de récupération.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-[Récupérer des données à partir d’un serveur de sauvegarde Azure](https://docs.microsoft.com/azure/backup/backup-azure-alternate-dpm-server)
+[Récupérer des données à partir d’un serveur de sauvegarde Azure](./backup-azure-alternate-dpm-server.md)

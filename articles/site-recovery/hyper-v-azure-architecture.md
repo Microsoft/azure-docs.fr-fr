@@ -7,12 +7,12 @@ ms.service: site-recovery
 ms.topic: conceptual
 ms.date: 11/14/2019
 ms.author: raynew
-ms.openlocfilehash: 022d6edad1e907173dfde3481e60d2523be087a1
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c5025b83619b505728bfdf5c4e1ccc81d3bb225e
+ms.sourcegitcommit: ad677fdb81f1a2a83ce72fa4f8a3a871f712599f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74082662"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97654759"
 ---
 # <a name="hyper-v-to-azure-disaster-recovery-architecture"></a>Architecture pour la récupération d’urgence de Hyper-V vers Azure
 
@@ -36,7 +36,7 @@ Le tableau et le graphique suivants fournissent une vue d’ensemble des composa
 
 **Architecture Hyper-V vers Azure (sans VMM)**
 
-![Architecture](./media/hyper-v-azure-architecture/arch-onprem-azure-hypervsite.png)
+![Diagramme montrant l’architecture d’un site Hyper-V local vers Azure sans VMM.](./media/hyper-v-azure-architecture/arch-onprem-azure-hypervsite.png)
 
 
 ## <a name="architectural-components---hyper-v-with-vmm"></a>Composants architecturaux : Hyper-V avec VMM
@@ -53,13 +53,30 @@ Le tableau et le graphique suivants fournissent une vue d’ensemble des composa
 
 **Architecture Hyper-V vers Azure (avec VMM)**
 
-![Components](./media/hyper-v-azure-architecture/arch-onprem-onprem-azure-vmm.png)
+![Diagramme montrant l’architecture d’un site Hyper-V local vers Azure avec VMM.](./media/hyper-v-azure-architecture/arch-onprem-onprem-azure-vmm.png)
 
+## <a name="set-up-outbound-network-connectivity"></a>Configurer la connectivité réseau sortante
+
+Pour que Site Recovery fonctionne comme prévu, vous devez modifier la connectivité réseau sortante pour permettre la réplication de votre environnement.
+
+> [!NOTE]
+> Site Recovery ne prend pas en charge l’utilisation d’un proxy d’authentification pour contrôler la connectivité réseau.
+
+### <a name="outbound-connectivity-for-urls"></a>Connectivité sortante pour les URL
+
+Si vous utilisez un proxy de pare-feu basé sur des URL pour contrôler la connectivité sortante, autorisez l’accès à ces URL :
+
+| **Nom**                  | **Commercial**                               | **Secteur public**                                 | **Description** |
+| ------------------------- | -------------------------------------------- | ---------------------------------------------- | ----------- |
+| Stockage                   | `*.blob.core.windows.net`                  | `*.blob.core.usgovcloudapi.net` | Permet d’écrire les données dans le compte de stockage de cache dans la région source à partir de la machine virtuelle. |
+| Azure Active Directory    | `login.microsoftonline.com`                | `login.microsoftonline.us`                   | Fournit l’autorisation et l’authentification aux URL du service Site Recovery. |
+| Réplication               | `*.hypervrecoverymanager.windowsazure.com` | `*.hypervrecoverymanager.windowsazure.com`   | Permet à la machine virtuelle de communiquer avec le service Site Recovery. |
+| Service Bus               | `*.servicebus.windows.net`                 | `*.servicebus.usgovcloudapi.net`             | Permet à la machine virtuelle d’écrire des données de surveillance et de diagnostic Site Recovery. |
 
 
 ## <a name="replication-process"></a>Processus de réplication
 
-![Réplication Hyper-V vers Azure](./media/hyper-v-azure-architecture/arch-hyperv-azure-workflow.png)
+![Diagramme montrant le processus de réplication Hyper-V vers Azure](./media/hyper-v-azure-architecture/arch-hyperv-azure-workflow.png)
 
 **Processus de réplication et de récupération**
 
@@ -67,14 +84,14 @@ Le tableau et le graphique suivants fournissent une vue d’ensemble des composa
 ### <a name="enable-protection"></a>Activer la protection
 
 1. Une fois que vous activez la protection d’une machine virtuelle Hyper-V, dans le portail Azure ou en local, **l’activation de la protection** démarre.
-2. Le travail vérifie que la machine est conforme à la configuration requise, puis appelle la méthode [CreateReplicationRelationship](https://msdn.microsoft.com/library/hh850036.aspx), laquelle configure la réplication avec les paramètres que vous avez configurés.
-3. Le travail démarre la réplication initiale en appelant la méthode [StartReplication](https://msdn.microsoft.com/library/hh850303.aspx) pour initialiser une réplication complète de la machine virtuelle et envoyer les disques virtuels de la machine virtuelle sur Azure.
-4. Vous pouvez surveiller le travail dans l'onglet **Travaux**.      ![Liste des travaux](media/hyper-v-azure-architecture/image1.png) ![Activer l’exploration de la protection](media/hyper-v-azure-architecture/image2.png)
+2. Le travail vérifie que la machine est conforme à la configuration requise, puis appelle la méthode [CreateReplicationRelationship](/windows/win32/hyperv_v2/createreplicationrelationship-msvm-replicationservice), laquelle configure la réplication avec les paramètres que vous avez configurés.
+3. Le travail démarre la réplication initiale en appelant la méthode [StartReplication](/windows/win32/hyperv_v2/startreplication-msvm-replicationservice) pour initialiser une réplication complète de la machine virtuelle et envoyer les disques virtuels de la machine virtuelle sur Azure.
+4. Vous pouvez surveiller le travail dans l'onglet **Travaux**.      ![Screenshot of the jobs list in the Jobs tab.](media/hyper-v-azure-architecture/image1.png) ![Screenshot of the Enable protection screen with more details.](media/hyper-v-azure-architecture/image2.png)
 
 
 ### <a name="initial-data-replication"></a>Réplication initiale des données
 
-1. Au moment où la réplication initiale est déclenchée, un [instantané des machines virtuelles Hyper-V](https://technet.microsoft.com/library/dd560637.aspx) a lieu.
+1. Au moment où la réplication initiale est déclenchée, un [instantané des machines virtuelles Hyper-V](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/dd560637(v=ws.10)) a lieu.
 2. Les disques durs virtuels sur la machine virtuelle sont répliqués un par un, jusqu’à ce qu’ils soient tous copiés sur Azure. Cela peut prendre un certain temps selon la taille de la machine virtuelle et la bande passante réseau. [Découvrez comment](https://support.microsoft.com/kb/3056159) augmenter la bande passante réseau.
 3. Si des modifications interviennent sur les disques pendant la réplication initiale, le dispositif de suivi de réplication des réplicas Hyper-V assure le suivi des modifications dans des journaux d’activité de réplication Hyper-V (.hrl). Ces fichiers journaux se trouvent dans le même dossier que les disques. À chaque disque correspond un fichier .hrl, qui est envoyé au stockage secondaire. L’instantané et les fichiers journaux consomment des ressources disque pendant la réplication initiale.
 4. Lorsque la réplication initiale s’achève, l’instantané de machine virtuelle est supprimé.
@@ -106,7 +123,7 @@ Le tableau et le graphique suivants fournissent une vue d’ensemble des composa
 2. Une fois la resynchronisation terminée, la réplication différentielle normale doit reprendre.
 3. Si vous ne souhaitez pas attendre la resynchronisation par défaut en dehors des heures de bureau, vous pouvez resynchroniser une machine virtuelle manuellement, par exemple, en cas de panne. Pour ce faire, dans le portail Azure, sélectionnez **Resynchroniser**.
 
-    ![Resynchronisation manuelle](./media/hyper-v-azure-architecture/image4-site.png)
+    ![Capture d’écran montrant l’option Resynchroniser.](./media/hyper-v-azure-architecture/image4-site.png)
 
 
 ### <a name="retry-process"></a>Processus de nouvelle tentative

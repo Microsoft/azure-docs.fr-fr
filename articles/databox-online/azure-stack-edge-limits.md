@@ -1,38 +1,42 @@
 ---
-title: Limites d’Azure Stack Edge | Microsoft Docs
-description: Décrit les limites système et les tailles recommandées pour Azure Stack Edge.
+title: Limites d’Azure Stack Edge Pro | Microsoft Docs
+description: Découvrez les limites et les tailles recommandées lorsque vous déployez et exploitez Azure Stack Edge Pro, notamment les limites de service, les limites d’appareil et les limites de stockage.
 services: databox
 author: alkohli
 ms.service: databox
 ms.subservice: edge
 ms.topic: article
-ms.date: 03/22/2019
+ms.date: 10/12/2020
 ms.author: alkohli
-ms.openlocfilehash: 4f7800efb5d4382e8d73c819d950fdfafd10f296
-ms.sourcegitcommit: 856db17a4209927812bcbf30a66b14ee7c1ac777
+ms.openlocfilehash: f1bb5662b48765c08ec58d1f7fa9d341de4937bc
+ms.sourcegitcommit: 83610f637914f09d2a87b98ae7a6ae92122a02f1
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82568766"
+ms.lasthandoff: 10/13/2020
+ms.locfileid: "91992765"
 ---
-# <a name="azure-stack-edge-limits"></a>Limites Azure Stack Edge
+# <a name="azure-stack-edge-pro-limits"></a>Limites d’Azure Stack Edge Pro
 
-Tenez compte de ces limites quand vous déployez et utilisez votre solution Microsoft Azure Stack Edge. 
+Tenez compte de ces limites quand vous déployez et utilisez votre solution Microsoft Azure Stack Edge Pro. 
 
 ## <a name="azure-stack-edge-service-limits"></a>Limites du service Azure Stack Edge
 
 [!INCLUDE [data-box-edge-gateway-service-limits](../../includes/data-box-edge-gateway-service-limits.md)]
 
-## <a name="azure-stack-device-limits"></a>Limites de l’appareil Azure Stack
+## <a name="azure-stack-edge-device-limits"></a>Limites de l’appareil Azure Stack Edge
 
-Le tableau suivant décrit les limites de l’appareil Azure Stack Edge. 
+Le tableau suivant décrit les limites de l’appareil Azure Stack Edge Pro. 
+
+Le tableau suivant décrit les limites de l’appareil Azure Stack Edge.
 
 | Description | Valeur |
 |---|---|
 |Non. de fichiers par appareil |100 millions |
-|Non. de partages par appareil |24 |
 |Non. de partages par conteneur |1 |
+|Nombre maximal de points de terminaison de partage et de points de terminaison REST par appareil| 24 |
+|Nombre maximal de comptes de stockage hiérarchisé par appareil| 24|
 |Taille de fichier maximale écrite sur un partage| 5 To |
+|Nombre maximal de groupes de ressources par appareil| 800 |
 
 ## <a name="azure-storage-limits"></a>Limites du stockage Azure
 
@@ -53,4 +57,4 @@ Le tableau suivant décrit les limites de l’appareil Azure Stack Edge.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- [Préparer le déploiement d’Azure Stack Edge](azure-stack-edge-deploy-prep.md)
+- [Préparer le déploiement d’Azure Stack Edge Pro](azure-stack-edge-deploy-prep.md)

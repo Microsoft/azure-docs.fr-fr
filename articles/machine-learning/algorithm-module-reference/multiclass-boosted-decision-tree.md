@@ -9,16 +9,16 @@ ms.topic: reference
 author: likebupt
 ms.author: keli19
 ms.date: 02/19/2020
-ms.openlocfilehash: cfe35f81526a729092edf522f693ccd18494d1ec
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 1a1cb7661ae01dd89d45afe004978813ac90eaff
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82137822"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90905299"
 ---
 # <a name="multiclass-boosted-decision-tree"></a>Arbre de décision optimisé à plusieurs classes
 
-Cet article décrit un module dans le concepteur Azure Machine Learning (version préliminaire).
+Cet article décrit un module dans le concepteur Azure Machine Learning.
 
 Ce module vous permet de créer un modèle Machine Learning reposant sur l’algorithme d’arbres de décision optimisés.
 
@@ -40,35 +40,35 @@ Vous pouvez effectuer l’apprentissage de ce type de modèle à l’aide de l�
 
 1. **Maximum number of leaves per tree** (Nombre maximal de nœuds terminaux par arbre) limite le nombre maximal de nœuds terminaux qui peuvent être créés dans un arbre quelconque.
     
-        By increasing this value, you potentially increase the size of the tree and achieve higher precision, at the risk of overfitting and longer training time.
+    En augmentant cette valeur, vous augmentez potentiellement la taille de l’arbre et vous bénéficiez d’un surcroît de précision, au risque d’un surajustement et d’un temps d’apprentissage plus long.
   
 1. **Minimum number of samples per leaf node** (Nombre minimal d’échantillons par nœud terminal), indique le nombre de cas requis pour la création d’un nœud terminal dans un arbre.  
 
-         By increasing this value, you increase the threshold for creating new rules. For example, with the default value of 1, even a single case can cause a new rule to be created. If you increase the value to 5, the training data would have to contain at least five cases that meet the same conditions.
+    Plus cette valeur est grande, plus le seuil de création de règles augmente. Par exemple, la valeur par défaut de 1, un seul cas suffit à entraîner la création d’une règle. Si la valeur passe à 5, les données d’apprentissage doivent contenir au moins cinq cas remplissant les mêmes conditions.
 
 1. **Learning rate** (taux d’apprentissage) définit la taille de l’étape pendant l’apprentissage. Entrez un nombre compris entre 0 et 1.
 
-         The learning rate determines how fast or slow the learner converges on an optimal solution. If the step size is too large, you might overshoot the optimal solution. If the step size is too small, training takes longer to converge on the best solution.
+    Le taux d’apprentissage détermine la vitesse à laquelle l’apprentissage converge vers une solution optimale. Si la taille de pas est trop élevée, vous risquez de passer à côté de la solution optimale. Si la taille de pas est trop faible, l’apprentissage nécessite plus de temps pour converger vers la meilleure solution.
 
 1. **Number of trees constructed** (Nombre d’arbres construits) indique le nombre total d’arbres de décision à créer dans l’ensemble. En créant plusieurs arbres de décision, vous pouvez obtenir une meilleure couverture, mais cette opération augmente la durée d’apprentissage.
 
 1. **Random number seed** (Valeur de départ aléatoire) définit un entier non négatif à utiliser comme valeur initiale aléatoire. La spécification d’une valeur de départ garantit la reproductibilité entre les exécutions qui présentent les mêmes données et paramètres.  
 
-         The random seed is set by default to 42. Successive runs using different random seeds can have different results.
+    La valeur de départ aléatoire est définie par défaut sur 42. Les exécutions successives utilisant des valeurs de départ aléatoires différentes peuvent avoir des résultats différents.
 
-1. Effectuez l’apprentissage du modèle :
+1. Effectuez l’apprentissage du modèle :
 
     + Si vous définissez **Create trainer mode** (Créer un mode d’apprentissage) sur **Single Parameter** (Paramètre unique), connectez un jeu de données balisé au module [Entraîner le modèle](train-model.md).  
   
-    + Si vous définissez le mode **Créer un formateur** sur **Plage de paramètre**, connectez un jeu de données balisé et formez le modèle à l’aide d’[Optimiser des hyperparamètres de modèles](tune-model-hyperparameters.md).  
+    + Si vous définissez **Créer un mode d’apprentissage** sur **Plage de paramètres**, connectez un jeu de données avec balises et effectuez l’apprentissage du modèle en utilisant [Optimiser les hyperparamètres du modèle](tune-model-hyperparameters.md).  
   
     > [!NOTE]
     > 
-    > Si vous transmettez une plage de paramètres à [Effectuer l'apprentissage du modèle](train-model.md), elle utilise uniquement la valeur par défaut dans la liste de paramètres unique.  
+    > Si vous transmettez une plage de paramètres au module [Entraîner le modèle](train-model.md), il utilise uniquement la valeur par défaut dans la liste des paramètres uniques.  
     > 
-    > Si vous transmettez un ensemble unique de valeurs de paramètre au module [Optimiser des hyperparamètres de modèles](tune-model-hyperparameters.md), quand il attend une plage de paramètres de configuration pour chaque paramètre, il ignore les valeurs et utilise les valeurs par défaut pour l’apprenant.  
+    > Si vous transmettez un ensemble unique de valeurs de paramètre au module [Optimiser les hyperparamètres du modèle](tune-model-hyperparameters.md), quand il attend une plage de paramètres pour chaque paramètre, il ignore les valeurs et utilise les valeurs par défaut pour l’apprenant.  
     > 
-    > Si vous sélectionnez l’option **Plage de paramètres** et que vous entrez une valeur unique pour un paramètre, cette valeur unique que vous avez spécifiée est utilisée tout au long du balayage, même si d’autres paramètres changent sur une plage de valeurs.
+    > Si vous sélectionnez l’option **Plage de paramètres** et que vous entrez une valeur unique pour un paramètre, cette valeur unique que vous avez spécifiée est utilisée tout au long du balayage, même si d’autres paramètres changent dans une plage de valeurs.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

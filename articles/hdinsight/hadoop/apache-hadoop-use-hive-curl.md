@@ -5,15 +5,15 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
+ms.topic: how-to
 ms.custom: hdinsightactive
 ms.date: 01/06/2020
-ms.openlocfilehash: 10a2f413142124db7547e68280a0d5e9abac9b98
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 956406ec5ac99be5973f1928bbb89db10e68b339
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79298748"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96000491"
 ---
 # <a name="run-apache-hive-queries-with-apache-hadoop-in-hdinsight-using-rest"></a>Exécuter des requêtes Apache Hive avec Apache Hadoop dans HDInsight à l’aide de REST
 
@@ -25,7 +25,7 @@ Découvrez comment utiliser l’API REST WebHCat pour exécuter des requêtes Ap
 
 * Un cluster Apache Hadoop sur HDInsight. Consultez [Bien démarrer avec HDInsight sur Linux](./apache-hadoop-linux-tutorial-get-started.md).
 
-* Client REST. Ce document utilise [Invoke-WebRequest](https://docs.microsoft.com/powershell/module/microsoft.powershell.utility/invoke-webrequest) dans Windows PowerShell et [Curl](https://curl.haxx.se/) dans [Bash](https://docs.microsoft.com/windows/wsl/install-win10).
+* Client REST. Ce document utilise [Invoke-WebRequest](/powershell/module/microsoft.powershell.utility/invoke-webrequest) dans Windows PowerShell et [Curl](https://curl.haxx.se/) dans [Bash](/windows/wsl/install-win10).
 
 * Si vous utilisez Bash, vous devez également recourir à jq, un processeur JSON en ligne de commande.  Voir [https://stedolan.github.io/jq/](https://stedolan.github.io/jq/).
 
@@ -185,7 +185,7 @@ $clusterName
 
 1. Une fois que le statut de la tâche est passé à **TERMINÉ**, vous pouvez récupérer les résultats depuis le stockage blob Azure. Le paramètre `statusdir` transmis avec la requête contient l’emplacement du fichier de sortie. Dans notre cas `/example/rest`. Cette adresse stocke le résultat dans le répertoire `example/curl` dans le stockage en cluster par défaut.
 
-    Vous pouvez répertorier et télécharger ces fichiers à l’aide de l' [interface de ligne de commande Azure](https://docs.microsoft.com/cli/azure/install-azure-cli). Pour plus d’informations sur l’utilisation d’Azure CLI avec Stockage Azure, consultez le document [Utiliser Azure CLI avec Stockage Azure](https://docs.microsoft.com/azure/storage/storage-azure-cli).
+    Vous pouvez répertorier et télécharger ces fichiers à l’aide de l' [interface de ligne de commande Azure](/cli/azure/install-azure-cli). Pour plus d’informations sur l’utilisation d’Azure CLI avec Stockage Azure, consultez le document [Utiliser Azure CLI avec Stockage Azure](../../storage/blobs/storage-quickstart-blobs-cli.md).
 
 ## <a name="next-steps"></a>Étapes suivantes
 

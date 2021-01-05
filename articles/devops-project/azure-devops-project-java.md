@@ -1,6 +1,6 @@
 ---
 title: 'Démarrage rapide : Créer un pipeline CI/CD pour Java – Azure DevOps Starter'
-description: DevOps Starter facilite la prise en main d’Azure. Ce composant vous aide à lancer une application sur le service Azure de votre choix en quelques étapes rapides.
+description: Apprenez à utiliser l’expérience Azure DevOps Starter simplifiée pour configurer un pipeline d’intégration continue (CI) et de livraison continue (CD) pour votre application Java dans Azure Pipelines.
 ms.prod: devops
 ms.technology: devops-cicd
 services: vsts
@@ -12,13 +12,13 @@ ms.tgt_pltfrm: na
 ms.topic: quickstart
 ms.date: 03/24/2020
 ms.author: mlearned
-ms.custom: mvc, seo-java-july2019, seo-java-august2019, seo-java-september2019
-ms.openlocfilehash: 1afd9361149fbcaaf88a9cc10c62953d703f8204
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.custom: mvc, seo-java-july2019, seo-java-august2019, seo-java-september2019, devx-track-java
+ms.openlocfilehash: 077730d63d388566bd842a4ba185bd5fd6637043
+ms.sourcegitcommit: d2d1c90ec5218b93abb80b8f3ed49dcf4327f7f4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82232664"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97588996"
 ---
 # <a name="set-up-a-cicd-pipeline-for-a-java-app-with-azure-devops-starter"></a>Configurer un pipeline CI/CD pour une application Java à l’aide d’Azure DevOps Starter
 
@@ -35,7 +35,7 @@ DevOps Starter crée un pipeline CI/CD dans Azure Pipelines. Vous pouvez créer 
 
 1. Connectez-vous au [portail Azure](https://portal.azure.com).
 
-1. Dans la zone de recherche, saisissez puis sélectionnez **DevOps Starter**. Cliquez sur **Ajouter** pour en créer une.
+1. Dans la zone de recherche, tapez, puis sélectionnez **DevOps Starter**. Cliquez sur le **signe +** pour créer une ressource.
 
     ![Tableau de bord DevOps Starter](_img/azure-devops-starter-aks/search-devops-starter.png)
 
@@ -66,9 +66,9 @@ DevOps Starter a configuré automatiquement un déclencheur de build et de mise 
 
 DevOps Starter crée un référentiel Git dans Azure Repos ou dans GitHub. Pour voir le dépôt et modifier le code dans votre application, suivez les étapes ci-dessous :
 
-1. À gauche du tableau de bord DevOps Starter, sélectionnez le lien correspondant à votre branche maîtresse. Ce lien ouvre une vue sur le référentiel Git récemment créé.
+1. À gauche du tableau de bord DevOps Starter, sélectionnez le lien correspondant à votre branche principale. Ce lien ouvre une vue sur le référentiel Git récemment créé.
 
-1. Pour afficher l’URL du clone du dépôt, sélectionnez **Cloner** en haut à droite du navigateur. Vous pouvez cloner votre référentiel Git dans votre environnement de développement intégré favori. Dans les prochaines étapes, vous allez utiliser le navigateur web pour effectuer des modifications de code directement dans la branche maîtresse et les valider.
+1. Pour afficher l’URL du clone du dépôt, sélectionnez **Cloner** en haut à droite du navigateur. Vous pouvez cloner votre référentiel Git dans votre environnement de développement intégré favori. Dans les prochaines étapes, vous allez utiliser le navigateur web pour effectuer des modifications de code directement dans la branche principale et les valider.
 
 1. Sur la gauche du navigateur, accédez au fichier **src/main/webapp/index.html**.
 
@@ -131,4 +131,4 @@ Quand vous n’en avez plus besoin, vous pouvez supprimer Azure App Service et l
 Quand vous avez configuré votre processus CI/CD, les pipelines de build et de mise en production ont été créés automatiquement. Vous pouvez le modifier afin qu’il réponde aux besoins de votre équipe. Pour en savoir plus sur le pipeline CI/CD, consultez :
 
 > [!div class="nextstepaction"]
-> [Personnaliser le processus CD](https://docs.microsoft.com/azure/devops/pipelines/release/define-multistage-release-process?view=vsts)
+> [Personnaliser le processus CD](/azure/devops/pipelines/release/define-multistage-release-process?view=vsts)

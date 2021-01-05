@@ -5,13 +5,13 @@ ms.subservice: logs
 ms.topic: conceptual
 author: bwren
 ms.author: bwren
-ms.date: 11/13/2019
-ms.openlocfilehash: ca9bb3853698b831fe87f48de346183e4bcd0976
-ms.sourcegitcommit: 4499035f03e7a8fb40f5cff616eb01753b986278
+ms.date: 11/12/2020
+ms.openlocfilehash: 8d7fde6661a4a133f689016559f010767c662417
+ms.sourcegitcommit: e2dc549424fb2c10fcbb92b499b960677d67a8dd
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/03/2020
-ms.locfileid: "82731706"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94699744"
 ---
 # <a name="move-a-log-analytics-workspace-to-different-subscription-or-resource-group"></a>Déplacer un espace de travail Log Analytics vers un autre abonnement ou groupe de ressources
 
@@ -29,15 +29,31 @@ Les abonnements source et de destination de l’espace de travail doivent existe
 ```
 
 ## <a name="workspace-move-considerations"></a>Considérations relatives au déplacement de l’espace de travail
-Les solutions gérées qui sont installées dans l’espace de travail seront déplacées à l’aide de l’opération de déplacement de l’espace de travail Log Analytics. Les agents connectés restent connectés et continuent à envoyer des données à l’espace de travail après le déplacement. Étant donné que l’opération de déplacement exige qu’il n’existe aucun service lié à partir de l’espace de travail, les solutions qui s’appuient sur ce lien doivent être supprimées pour permettre le déplacement de l’espace de travail.
+- Les solutions gérées qui sont installées dans l’espace de travail seront déplacées à l’aide de l’opération de déplacement de l’espace de travail Log Analytics. 
+- Les clés d’espace de travail (principales et secondaires) sont régénérées avec l’opération de déplacement d’espace de travail. Si vous conservez une copie de vos clés d’espace de travail dans le coffre de clés, mettez-les à jour avec les nouvelles clés générées après le déplacement de l’espace de travail. 
+- Les agents connectés restent connectés et continuent à envoyer des données à l’espace de travail après le déplacement. 
+- Étant donné que l’opération de déplacement exige qu’il n’existe aucun service lié à partir de l’espace de travail, les solutions qui s’appuient sur ce lien doivent être supprimées pour permettre le déplacement de l’espace de travail. Solutions qui doivent être supprimées avant de pouvoir dissocier votre compte Automation :
+  - Update Management
+  - Suivi des modifications
+  - Démarrer/arrêter des machines virtuelles pendant les heures creuses
+  - Azure Security Center
 
-Solutions qui doivent être supprimées avant de pouvoir dissocier votre compte Automation :
-
-- Update Management
-- Suivi des modifications
-- Démarrer/arrêter des machines virtuelles pendant les heures creuses
-- Azure Security Center
-
+>[!IMPORTANT]
+> **Clients Azure Sentinel**
+> - Actuellement, une fois Azure Sentinel déployé dans un espace de travail, le déplacement de l’espace de travail vers un autre groupe de ressources ou abonnement n’est pas pris en charge. 
+> - Si vous avez déjà déplacé l’espace de travail, désactivez toutes les règles actives dans **Analytics**, puis réactivez-les après cinq minutes. Cette solution s’avère efficace la plupart du temps, mais pour rappel, elle n’est pas prise en charge et relève de votre propre responsabilité.
+> 
+> **Recréer des alertes**
+> - Toutes les alertes doivent être recréées après un déplacement, car les autorisations sont basées sur l’ID de ressource Azure de l’espace de travail, qui change lors du déplacement d’un espace de travail.
+>
+> **Mettre à jour les chemins d’accès aux ressources**
+> - Après le déplacement d’un espace de travail, toutes les ressources Azure ou externes qui pointent vers l’espace de travail doivent être examinées et mises à jour pour pointer vers le nouveau chemin cible des ressources.
+> 
+>   *Exemples :*
+>   - [Règles d’alerte Azure Monitor](alerts-resource-move.md)
+>   - Applications tierces
+>   - Scripts personnalisés
+>
 
 ### <a name="delete-solutions-in-azure-portal"></a>Supprimer des solutions dans le portail Azure
 Procédez comme suit pour supprimer les solutions via le portail Azure :
@@ -91,7 +107,7 @@ Procédez comme suit pour déplacer votre espace de travail via le portail Azure
 4. Sélectionnez un **abonnement** de destination et un **groupe de ressources**. Si vous déplacez l’espace de travail vers un autre groupe de ressources dans le même abonnement, vous ne verrez pas l’option **Abonnement**.
 5. Cliquez sur **OK** pour déplacer l’espace de travail et les ressources sélectionnées.
 
-    ![Portail](media/move-workspace/portal.png)
+    ![Capture d’écran affichant le volet Vue d’ensemble de l’espace de travail Log Analytics avec les options permettant de modifier le groupe de ressources et le nom de l’abonnement.](media/move-workspace/portal.png)
 
 ### <a name="powershell"></a>PowerShell
 Pour déplacer votre espace de travail à l’aide de PowerShell, utilisez la cmdlet [Move-AzResource](/powershell/module/AzureRM.Resources/Move-AzureRmResource) comme dans l’exemple suivant :

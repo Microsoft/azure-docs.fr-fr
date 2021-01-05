@@ -1,15 +1,15 @@
 ---
 author: rothja
-ms.service: cost-management-billing
+ms.service: app-service
 ms.topic: include
 ms.date: 11/09/2018
 ms.author: jroth
-ms.openlocfilehash: 2a9e9d79328a7bf5c3ff85ea5a8e8a594d68c4cf
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: be87d2af698bb71573952943b5ddc3f0910a3333
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "74224354"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85838699"
 ---
 | Niveau | Gratuit | De base | standard |
 | --- | --- | --- | --- |

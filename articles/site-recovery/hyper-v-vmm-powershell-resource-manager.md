@@ -7,12 +7,12 @@ manager: rochakm
 ms.topic: article
 ms.date: 1/10/2020
 ms.author: sutalasi
-ms.openlocfilehash: deef7bfdbc28d744cb81da59d3ffc13a1abee54d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: a4f7d330db9a4a0d9b435ebe7527e55e37c254e2
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77048615"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87086215"
 ---
 # <a name="set-up-disaster-recovery-of-hyper-v-vms-to-a-secondary-site-by-using-powershell-resource-manager"></a>Configurer la reprise d’activité de machines virtuelles Hyper-V sur un site secondaire à l’aide de PowerShell (Resource Manager)
 
@@ -23,9 +23,9 @@ Cet article montre comment automatiser les étapes de la réplication des machin
 ## <a name="prerequisites"></a>Prérequis
 
 - Examinez [l’architecture et les composants du scénario](hyper-v-vmm-architecture.md).
-- Vérifiez les [exigences de prise en charge](site-recovery-support-matrix-to-sec-site.md) pour tous les composants.
-- Assurez-vous que les serveurs Virtual Machine Manager et les hôtes Hyper-V sont conformes aux [exigences de prise en charge](site-recovery-support-matrix-to-sec-site.md).
-- Vérifiez que les machines virtuelles à répliquer sont conformes à la [prise en charge de la machine répliquée](site-recovery-support-matrix-to-sec-site.md).
+- Vérifiez les [exigences de prise en charge](./vmware-physical-secondary-support-matrix.md) pour tous les composants.
+- Assurez-vous que les serveurs Virtual Machine Manager et les hôtes Hyper-V sont conformes aux [exigences de prise en charge](./vmware-physical-secondary-support-matrix.md).
+- Vérifiez que les machines virtuelles à répliquer sont conformes à la [prise en charge de la machine répliquée](./vmware-physical-secondary-support-matrix.md).
 
 ## <a name="prepare-for-network-mapping"></a>Préparer le mappage réseau
 
@@ -37,18 +37,18 @@ Le [mappage réseau](hyper-v-vmm-network-mapping.md) effectue un mappage entre l
 
 Préparez Virtual Machine Manager comme suit :
 
-- Assurez-vous que vous avez des [réseaux logiques Virtual Machine Manager](https://docs.microsoft.com/system-center/vmm/network-logical) sur les serveurs source et cible Virtual Machine Manager :
+- Assurez-vous que vous avez des [réseaux logiques Virtual Machine Manager](/system-center/vmm/network-logical) sur les serveurs source et cible Virtual Machine Manager :
   - Le réseau logique sur le serveur source doit être associé au cloud source dans lequel se trouvent les hôtes Hyper-V.
   - Le réseau logique sur le serveur cible doit être associé au cloud cible.
-- Assurez-vous que vous avez des [réseaux de machines virtuelles](https://docs.microsoft.com/system-center/vmm/network-virtual) sur les serveurs Virtual Machine Manager source et cible. Les réseaux de machines virtuelles doivent être associés au réseau logique dans chaque emplacement.
+- Assurez-vous que vous avez des [réseaux de machines virtuelles](/system-center/vmm/network-virtual) sur les serveurs Virtual Machine Manager source et cible. Les réseaux de machines virtuelles doivent être associés au réseau logique dans chaque emplacement.
 - Connectez les machines virtuelles sur les hôtes Hyper-V sources au réseau de machines virtuelles source.
 
 ## <a name="prepare-for-powershell"></a>Préparer PowerShell
 
 Assurez-vous qu’Azure PowerShell est prêt à l’emploi :
 
-- Si vous utilisez déjà PowerShell, mettez à niveau vers la version 0.8.10 ou version ultérieure. [En savoir plus](/powershell/azureps-cmdlets-docs) sur la configuration de PowerShell.
-- Après avoir installé et configuré PowerShell, examinez les [cmdlets de service](/powershell/azure/overview).
+- Si vous utilisez déjà PowerShell, mettez à niveau vers la version 0.8.10 ou version ultérieure. [En savoir plus](/powershell/azure/) sur la configuration de PowerShell.
+- Après avoir installé et configuré PowerShell, examinez les [cmdlets de service](/powershell/azure/).
 - Pour en savoir plus sur l’utilisation des valeurs de paramètre, des entrées dans PowerShell, consultez le guide [Prise en main](/powershell/azure/get-started-azureps).
 
 ## <a name="set-up-a-subscription"></a>Configurer un abonnement

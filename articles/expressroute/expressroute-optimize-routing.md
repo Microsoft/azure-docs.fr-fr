@@ -2,17 +2,17 @@
 title: 'Azure ExpressRoute : Optimiser le routage'
 description: Cette page fournit des détails sur l’optimisation du routage lorsque vous avez le choix entre plusieurs circuits ExpressRoute de connexion entre Microsoft et votre réseau professionnel.
 services: expressroute
-author: charwen
+author: duongau
 ms.service: expressroute
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 07/11/2019
-ms.author: charwen
-ms.openlocfilehash: dcbae103933167c583bf0f73dc2fa09178c38bd5
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: duau
+ms.openlocfilehash: f35f1d390762d3f83176d7b36db8959dc5ed0157
+ms.sourcegitcommit: 957c916118f87ea3d67a60e1d72a30f48bad0db6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74080131"
+ms.lasthandoff: 10/19/2020
+ms.locfileid: "92204875"
 ---
 # <a name="optimize-expressroute-routing"></a>Optimiser le routage ExpressRoute
 En présence de plusieurs circuits ExpressRoute, vous pouvez vous connecter à Microsoft par le biais de plusieurs chemins d’accès. Par conséquent, le routage pourrait ne pas être optimal. Autrement dit, votre trafic peut emprunter un chemin d’accès plus long pour atteindre Microsoft ; Microsoft peut faire de même pour atteindre votre réseau. Plus le chemin d’accès réseau est long, plus la latence est élevée. La latence a un impact direct sur les performances d’application ainsi que sur l’expérience utilisateur. Cet article aborde ce problème et explique comment optimiser le routage à l’aide des technologies de routage standard.
@@ -27,24 +27,24 @@ Il est important de s’assurer que lors de l’utilisation du peering Microsoft
 
 Examinez l’exemple de scénario suivant :
 
-![Scénario ExpressRoute n° 1 : routage non optimal entre le client et Microsoft](./media/expressroute-optimize-routing/expressroute-localPreference.png)
+![Diagramme illustrant le scénario ExpressRoute n° 1 : routage non optimal entre le client et Microsoft](./media/expressroute-optimize-routing/expressroute-localPreference.png)
 
 Dans l’exemple ci-dessus, pour préférer les chemins ExpressRoute, configurez la préférence locale comme suit. 
 
 **Configuration Cisco IOS-XE du point de vue R1 :**
 
-    R1(config)#route-map prefer-ExR permit 10
-    R1(config-route-map)#set local-preference 150
+- R1(config)#route-map prefer-ExR permit 10
+- R1(config-route-map)#set local-preference 150
 
-    R1(config)#router BGP 345
-    R1(config-router)#neighbor 1.1.1.2 remote-as 12076
-    R1(config-router)#neighbor 1.1.1.2 activate
-    R1(config-router)#neighbor 1.1.1.2 route-map prefer-ExR in
+- R1(config)#router BGP 345
+- R1(config-router)#neighbor 1.1.1.2 remote-as 12076
+- R1(config-router)#neighbor 1.1.1.2 activate
+- R1(config-router)#neighbor 1.1.1.2 route-map prefer-ExR in
 
 **Configuration Junos du point de vue R1 :**
 
-    user@R1# set protocols bgp group ibgp type internal
-    user@R1# set protocols bgp group ibgp local-preference 150
+- user@R1# set protocols bgp group ibgp type internal
+- user@R1# set protocols bgp group ibgp local-preference 150
 
 
 
@@ -64,7 +64,7 @@ Pour optimiser le routage pour les utilisateurs des deux bureaux, vous devez sav
 >
 
 ## <a name="suboptimal-routing-from-microsoft-to-customer"></a>Routage non optimal entre Microsoft et le client
-Voici un autre exemple dans lequel les connexions en provenance de Microsoft prennent un chemin plus long pour atteindre votre réseau. Dans ce cas, vous utilisez des serveurs Exchange locaux et Exchange Online dans un [environnement hybride](https://technet.microsoft.com/library/jj200581%28v=exchg.150%29.aspx). Vos bureaux sont connectés à un réseau étendu. Vous publiez vers Microsoft les préfixes des serveurs locaux de vos deux bureaux par le biais des deux circuits ExpressRoute. Dans certains cas, tels que la migration de boîte aux lettres, Exchange Online lance les connexions aux serveurs locaux. Malheureusement, la connexion à votre bureau de Los Angeles est routée au circuit ExpressRoute dans la région USA Est, puis retraverse l’ensemble du pays avant d’atteindre la côte ouest. L’origine du problème est similaire au premier cas. En l’absence d’indicateur, le réseau Microsoft ne peut pas déterminer quel préfixe est le plus proche de la côte Ouest et de la côte Est. Malheureusement, il choisit le mauvais chemin vers votre bureau de Los Angeles.
+Voici un autre exemple dans lequel les connexions en provenance de Microsoft prennent un chemin plus long pour atteindre votre réseau. Dans ce cas, vous utilisez des serveurs Exchange locaux et Exchange Online dans un [environnement hybride](/exchange/exchange-hybrid). Vos bureaux sont connectés à un réseau étendu. Vous publiez vers Microsoft les préfixes des serveurs locaux de vos deux bureaux par le biais des deux circuits ExpressRoute. Dans certains cas, tels que la migration de boîte aux lettres, Exchange Online lance les connexions aux serveurs locaux. Malheureusement, la connexion à votre bureau de Los Angeles est routée au circuit ExpressRoute dans la région USA Est, puis retraverse l’ensemble du pays avant d’atteindre la côte ouest. L’origine du problème est similaire au premier cas. En l’absence d’indicateur, le réseau Microsoft ne peut pas déterminer quel préfixe est le plus proche de la côte Ouest et de la côte Est. Malheureusement, il choisit le mauvais chemin vers votre bureau de Los Angeles.
 
 ![Scénario ExpressRoute n° 2 : routage non optimal entre Microsoft et le client](./media/expressroute-optimize-routing/expressroute-case2-problem.png)
 

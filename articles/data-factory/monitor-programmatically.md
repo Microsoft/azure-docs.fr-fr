@@ -7,15 +7,16 @@ ms.service: data-factory
 ms.workload: data-services
 ms.topic: conceptual
 ms.date: 01/16/2018
-author: djpmsft
-ms.author: daperlov
+author: dcstwh
+ms.author: weetok
 manager: anandsub
-ms.openlocfilehash: d416a4a2bace2aeced6961d4959b0478feb0e650
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.custom: devx-track-python
+ms.openlocfilehash: e7b435080fda48e1df0bb31d16dafed30ac3d3db
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81398838"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96497858"
 ---
 # <a name="programmatically-monitor-an-azure-data-factory"></a>Surveiller par programmation une fabrique de données Azure
 

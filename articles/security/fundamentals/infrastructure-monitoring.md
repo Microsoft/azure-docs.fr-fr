@@ -1,6 +1,6 @@
 ---
 title: Surveillance de l’infrastructure Azure
-description: Cet article aborde le monitoring du réseau de production Azure.
+description: Découvrez les différents aspects de la surveillance de l’infrastructure du réseau de production Azure, tels que l’analyse des vulnérabilités.
 services: security
 documentationcenter: na
 author: TerryLanfear
@@ -15,12 +15,12 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 06/28/2018
 ms.author: terrylan
-ms.openlocfilehash: af9c157b4644156edc6dcdb1b53c141263576500
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 7b75c9dc874a41d4221c55a8b00dd12d943e80fc
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "68727150"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87542940"
 ---
 # <a name="azure-infrastructure-monitoring"></a>Surveillance de l’infrastructure Azure   
 

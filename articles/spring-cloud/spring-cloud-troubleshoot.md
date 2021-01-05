@@ -4,14 +4,15 @@ description: Guide de dépannage pour Azure Spring Cloud
 author: bmitchell287
 ms.service: spring-cloud
 ms.topic: troubleshooting
-ms.date: 11/04/2019
+ms.date: 09/08/2020
 ms.author: brendm
-ms.openlocfilehash: 5dcdb03a6d4ec4f448108dbd771a44f362aa7f20
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-java
+ms.openlocfilehash: 09415c47432f71310b10c86390c10e55f1ccc4b2
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76277581"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96498606"
 ---
 # <a name="troubleshoot-common-azure-spring-cloud-issues"></a>Résoudre les problèmes courants liés à Azure Spring Cloud
 
@@ -57,10 +58,15 @@ Quand vous déboguez des incidents d’application, commencez par vérifier l’
     * Une explosion de mémoire au tout début.
     * La répartition de mémoire en surtension pour un chemin d’accès logique spécifique.
     * Fuites de mémoire progressives.
-
   Pour plus d’informations, consultez [Métriques](spring-cloud-concept-metrics.md).
+  
+* Si l’application ne démarre pas, vérifiez qu’elle possède des paramètres jvm valides. Si la mémoire jvm est trop élevée, le message d’erreur suivant peut s’afficher dans vos journaux :
 
-Pour en savoir plus sur Azure Log Analytics, consultez [Prise en main de Log Analytics dans Azure Monitor](https://docs.microsoft.com/azure/azure-monitor/log-query/get-started-portal).
+  >« required memory 2728741K is greater than 2000M available for allocation »
+
+
+
+Pour en savoir plus sur Azure Log Analytics, consultez [Prise en main de Log Analytics dans Azure Monitor](../azure-monitor/log-query/log-analytics-tutorial.md).
 
 ### <a name="my-application-experiences-high-cpu-usage-or-high-memory-usage"></a>Mon application connaît une utilisation élevée du processeur ou une utilisation élevée de la mémoire
 
@@ -82,7 +88,7 @@ Pour plus d’informations, consultez [Métriques pour Azure Spring Cloud](sprin
 
 Si toutes les instances sont opérationnelles, accédez à Azure Log Analytics pour interroger vos journaux d’application et passez en revue votre logique de code. Cela vous permettra de déterminer si l’une d’entre elles peut perturber le partitionnement de l’échelle. Pour plus d’informations, consultez [Analyser les journaux et les métriques avec les paramètres de diagnostic](diagnostic-services.md).
 
-Pour en savoir plus sur Azure Log Analytics, consultez [Prise en main de Log Analytics dans Azure Monitor](https://docs.microsoft.com/azure/azure-monitor/log-query/get-started-portal). Interrogez les journaux à l’aide du [langage de requête Kusto](https://docs.microsoft.com/azure/kusto/query/).
+Pour en savoir plus sur Azure Log Analytics, consultez [Prise en main de Log Analytics dans Azure Monitor](../azure-monitor/log-query/log-analytics-tutorial.md). Interrogez les journaux à l’aide du [langage de requête Kusto](/azure/kusto/query/).
 
 ### <a name="checklist-for-deploying-your-spring-application-to-azure-spring-cloud"></a>Check-list pour le déploiement de votre application Spring sur Azure Spring Cloud
 
@@ -102,22 +108,30 @@ Avant d’intégrer votre application, assurez-vous qu’elle répond aux critè
 
 Quand vous configurez une instance du service Azure Spring Cloud par le biais du Portail Azure, Azure Spring Cloud effectue la validation pour vous.
 
-Toutefois, si vous tentez de configurer l’instance de service Azure Spring Cloud par le biais d’[Azure CLI](https://docs.microsoft.com/cli/azure/get-started-with-azure-cli) ou du [modèle Azure Resource Manager](https://docs.microsoft.com/azure/azure-resource-manager/), vérifiez les points suivants :
+Toutefois, si vous tentez de configurer l’instance de service Azure Spring Cloud par le biais d’[Azure CLI](/cli/azure/get-started-with-azure-cli) ou du [modèle Azure Resource Manager](../azure-resource-manager/index.yml), vérifiez les points suivants :
 
 * L’abonnement est actif.
 * L’emplacement est [pris en charge](spring-cloud-faq.md) par Azure Spring Cloud.
 * Le groupe de ressources pour l’instance est créé.
 * Le nom de la ressource est conforme à la règle de nommage. Il ne doit contenir que des lettres minuscules, des chiffres et des traits d’union. Le premier caractère doit être une lettre. Le dernier caractère doit être une lettre ou un chiffre. La valeur doit comprendre entre 2 et 32 caractères.
 
-Si vous souhaitez configurer l’instance de service Azure Spring Cloud à l’aide du modèle Resource Manager, consultez d’abord [Comprendre la structure et la syntaxe des modèles Azure Resource Manager](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-authoring-templates).
+Si vous souhaitez configurer l’instance de service Azure Spring Cloud à l’aide du modèle Resource Manager, consultez d’abord [Comprendre la structure et la syntaxe des modèles Azure Resource Manager](../azure-resource-manager/templates/template-syntax.md).
 
 Le nom de l’instance de service Azure Spring Cloud est utilisé pour demander un nom de sous-domaine sous `azureapps.io`, de sorte que la configuration échoue si le nom est en conflit avec un nom existant. Vous pouvez trouver plus de détails dans les journaux d’activité.
+
+### <a name="i-cant-deploy-a-net-core-app"></a>Je ne parviens pas à déployer une application .NET Core
+
+Vous ne pouvez pas télécharger un fichier *.zip* pour une application .NET Core Steeltoe à l’aide du portail Azure ou du modèle Resource Manager.
+
+Quand vous déployez votre package d’application à l’aide d’[Azure CLI](/cli/azure/get-started-with-azure-cli), ce dernier interroge régulièrement l’avancement du déploiement, puis, à la fin, affiche son résultat.
+
+Vérifiez que votre application est empaquetée dans le bon format *.zip*. Si elle n’est pas empaquetée correctement, le processus cessera de répondre ou un message d’erreur s’affichera.
 
 ### <a name="i-cant-deploy-a-jar-package"></a>Je ne peux pas déployer un package JAR
 
 Vous ne pouvez pas télécharger le package source ou celui du fichier d’archive Java (JAR) à l’aide du Portail Azure ou du modèle Resource Manager.
 
-Quand vous déployez votre package d’application à l’aide d’[Azure CLI](https://docs.microsoft.com/cli/azure/get-started-with-azure-cli), ce dernier interroge régulièrement l’avancement du déploiement, puis, à la fin, affiche son résultat.
+Quand vous déployez votre package d’application à l’aide d’[Azure CLI](/cli/azure/get-started-with-azure-cli), ce dernier interroge régulièrement l’avancement du déploiement, puis, à la fin, affiche son résultat.
 
 Si l’interrogation est interrompue, vous pouvez toujours utiliser la commande suivante pour extraire les journaux de déploiement :
 
@@ -131,13 +145,13 @@ Vérifiez que votre application est empaquetée dans le bon [format JAR exécuta
 
 Vous ne pouvez pas télécharger le package source ou JAR à l’aide du Portail Azure ou du modèle Resource Manager.
 
-Quand vous déployez votre package d’application à l’aide d’[Azure CLI](https://docs.microsoft.com/cli/azure/get-started-with-azure-cli), ce dernier interroge régulièrement l’avancement du déploiement, puis, à la fin, affiche son résultat.
+Quand vous déployez votre package d’application à l’aide d’[Azure CLI](/cli/azure/get-started-with-azure-cli), ce dernier interroge régulièrement l’avancement du déploiement, puis, à la fin, affiche son résultat.
 
 Si l’interrogation est interrompue, vous pouvez toujours utiliser la commande suivante pour extraire les journaux de compilation et de déploiement :
 
 `az spring-cloud app show-deploy-log -n <app-name>`
 
-Toutefois, notez qu’une instance de service Azure Spring Cloud ne peut déclencher qu’un seul travail de génération pour un package source à la fois. Pour plus d’informations, consultez [Déployer une application](spring-cloud-quickstart-launch-app-portal.md) et [Configurer un environnement intermédiaire dans Azure Spring Cloud](spring-cloud-howto-staging-environment.md).
+Toutefois, notez qu’une instance de service Azure Spring Cloud ne peut déclencher qu’un seul travail de génération pour un package source à la fois. Pour plus d’informations, consultez [Déployer une application](spring-cloud-quickstart.md) et [Configurer un environnement intermédiaire dans Azure Spring Cloud](spring-cloud-howto-staging-environment.md).
 
 ### <a name="my-application-cant-be-registered"></a>Impossible d’inscrire mon application
 
@@ -149,7 +163,7 @@ Si vous migrez une solution existante basée sur Spring Cloud vers Azure, vérif
 
 Vous pouvez également vérifier les journaux du client _Service Registry_ dans Azure Log Analytics. Pour plus d’informations, consultez [Analyser les journaux et les métriques avec les paramètres de diagnostic](diagnostic-services.md)
 
-Pour en savoir plus sur Azure Log Analytics, consultez [Prise en main de Log Analytics dans Azure Monitor](https://docs.microsoft.com/azure/azure-monitor/log-query/get-started-portal). Interrogez les journaux à l’aide du [langage de requête Kusto](https://docs.microsoft.com/azure/kusto/query/).
+Pour en savoir plus sur Azure Log Analytics, consultez [Prise en main de Log Analytics dans Azure Monitor](../azure-monitor/log-query/log-analytics-tutorial.md). Interrogez les journaux à l’aide du [langage de requête Kusto](/azure/kusto/query/).
 
 ### <a name="i-want-to-inspect-my-applications-environment-variables"></a>Je souhaite inspecter les variables d’environnement de mon application
 
@@ -198,7 +212,9 @@ Recherchez le nœud enfant nommé `systemEnvironment`.  Ce nœud contient les va
 
 Accédez à **Gestion des applications** pour vous assurer que les états de l’application sont _En cours d’exécution_ et _En service_.
 
-Si vous pouvez voir des métriques à partir de _JVM_, mais aucune métrique à partir de _Tomcat_, vérifiez si la dépendance `spring-boot-actuator` est activée dans votre package d’application et démarre correctement.
+Vérifiez que _JMX_ est activé dans votre package d’application. Cette fonctionnalité peut être activée à l’aide de la propriété de configuration `spring.jmx.enabled=true`.  
+
+Vérifiez si la dépendance `spring-boot-actuator` est activée dans votre package d’application et démarre correctement.
 
 ```xml
 <dependency>
@@ -207,4 +223,8 @@ Si vous pouvez voir des métriques à partir de _JVM_, mais aucune métrique à 
 </dependency>
 ```
 
-Si vos journaux d’applications peuvent être archivés dans un compte de stockage, mais ne sont pas envoyés à Azure Log Analytics, vérifiez si vous avez [correctement configuré votre espace de travail](https://docs.microsoft.com/azure/azure-monitor/learn/quick-create-workspace). Si vous utilisez un niveau gratuit d’Azure Log Analytics, notez que [le niveau gratuit ne fournit pas de contrat de niveau de service (SLA)](https://azure.microsoft.com/support/legal/sla/log-analytics/v1_3/).
+Si vos journaux d’applications peuvent être archivés dans un compte de stockage, mais ne sont pas envoyés à Azure Log Analytics, vérifiez si vous avez [correctement configuré votre espace de travail](../azure-monitor/learn/quick-create-workspace.md). Si vous utilisez un niveau gratuit d’Azure Log Analytics, notez que [le niveau gratuit ne fournit pas de contrat de niveau de service (SLA)](https://azure.microsoft.com/support/legal/sla/log-analytics/v1_3/).
+
+## <a name="next-steps"></a>Étapes suivantes
+
+* [Guide pratique pour diagnostiquer et résoudre les problèmes dans Azure Spring Cloud par soi-même](spring-cloud-howto-self-diagnose-solve.md)

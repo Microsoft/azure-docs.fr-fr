@@ -12,14 +12,15 @@ ms.tgt_pltfrm: ''
 ms.workload: infrastructure
 ms.date: 07/07/2017
 ms.author: kumud
-ms.openlocfilehash: 97e26eaed72bc15ebc46a893d269b05484d8a064
-ms.sourcegitcommit: b0ff9c9d760a0426fd1226b909ab943e13ade330
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: c0964eb5e44a0e1a2329ec6acef91d70cbd5c32f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/01/2020
-ms.locfileid: "80521537"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87503869"
 ---
-# <a name="create-a-network-for-multi-tier-applications"></a>Créer un réseau pour les applications multiniveau
+# <a name="use-an-azure-cli-script-sample-to-create-a-network-for-multi-tier-applications"></a>Utilisez un exemple de script Azure CLI afin de créer un réseau pour les applications multiniveau
 
 Cet exemple de script permet de créer un réseau virtuel avec des sous-réseaux frontaux et principaux. Le trafic vers le sous-réseau frontal est limité à HTTP et SSH, tandis que le trafic vers le sous-réseau principal est limité à MySQL, port 3306. Après avoir exécuté le script, vous obtenez deux machines virtuelles, une dans chaque sous-réseau sur laquelle que vous pouvez déployer le serveur web et le logiciel MySQL.
 

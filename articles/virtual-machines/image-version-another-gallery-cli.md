@@ -1,5 +1,5 @@
 ---
-title: Copier une version d’image à partir d’une autre galerie
+title: Copier une version d'image à partir d'une autre galerie avec Azure CLI
 description: Copiez une version d’image à partir d’une autre galerie avec Azure CLI.
 author: cynthn
 ms.service: virtual-machines
@@ -9,14 +9,14 @@ ms.workload: infrastructure
 ms.date: 05/04/2020
 ms.author: cynthn
 ms.reviewer: akjosh
-ms.openlocfilehash: add08d7b8ef39322f03e0faf78959b08a6ae2a14
-ms.sourcegitcommit: e0330ef620103256d39ca1426f09dd5bb39cd075
+ms.openlocfilehash: e8aabcd1c68272a78b3c1fe88913c5a62496f681
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82793981"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88225833"
 ---
-# <a name="copy-an-image-from-another-gallery"></a>Copier une image à partir d’une autre galerie
+# <a name="copy-an-image-from-another-gallery-using-the-azure-cli"></a>Copiez une image à partir d'une autre galerie en utilisant Azure CLI.
 
 Si vous avez plusieurs galeries dans votre organisation, vous pouvez également créer des versions d’image à partir de versions d’images existantes stockées dans d’autres galeries. Par exemple, vous pouvez avoir une galerie de développement et de test pour créer et tester de nouvelles images. Lorsqu’elles sont prêtes à être utilisées en production, vous pouvez les copier dans une galerie de production à l’aide de cet exemple. Vous pouvez également créer une image à partir d’une image dans une autre galerie à l’aide d’[Azure PowerShell](image-version-another-gallery-powershell.md).
 
@@ -154,7 +154,7 @@ az sig image-version create \
 > [!NOTE]
 > Vous devez attendre que la version d’image soit totalement intégrée et répliquée avant de pouvoir utiliser la même image managée pour créer une autre version d’image.
 >
-> Vous pouvez également stocker votre image dans le Stockage Premium, en ajoutant `--storage-account-type  premium_lrs`, ou dans le [stockage redondant interzone](https://docs.microsoft.com/azure/storage/common/storage-redundancy-zrs), en ajoutant `--storage-account-type  standard_zrs`, quand vous créez la version de l’image.
+> Vous pouvez également stocker votre image dans le Stockage Premium, en ajoutant `--storage-account-type  premium_lrs`, ou dans le [stockage redondant interzone](../storage/common/storage-redundancy.md), en ajoutant `--storage-account-type  standard_zrs`, quand vous créez la version de l’image.
 >
 
 ## <a name="next-steps"></a>Étapes suivantes
@@ -162,3 +162,5 @@ az sig image-version create \
 Créez une machine virtuelle à partir d’une version d’image [généralisée](vm-generalized-image-version-cli.md) ou [spécialisée](vm-specialized-image-version-cli.md).
 
 Par ailleurs, essayez [Azure Image Builder (en préversion)](./linux/image-builder-overview.md) pour automatiser la création d’une version d’image. Vous pouvez même l’utiliser pour mettre à jour et [créer une nouvelle version de l’image à partir d’une image existante](./linux/image-builder-gallery-update-image-version.md). 
+
+Pour savoir comment fournir des informations sur le plan d'achat, consultez [Donner des informations sur le plan d'achat de la Place de marché Azure lors de la création d'images](marketplace-images.md).

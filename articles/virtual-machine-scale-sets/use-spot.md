@@ -8,13 +8,13 @@ ms.service: virtual-machine-scale-sets
 ms.subservice: spot
 ms.date: 03/25/2020
 ms.reviewer: jagaveer
-ms.custom: jagaveer
-ms.openlocfilehash: 59de7a8decef807b548ff4b85f06fc1115ce110b
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.custom: jagaveer, devx-track-azurecli, devx-track-azurepowershell
+ms.openlocfilehash: 4c5386e2fad0ebdd30ca8f9a8f4933e8adaf5d6b
+ms.sourcegitcommit: 638f326d02d108cf7e62e996adef32f2b2896fd5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83125041"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "91729013"
 ---
 # <a name="azure-spot-vms-for-virtual-machine-scale-sets"></a>Machines virtuelles Azure Spot pour les groupes identiques de machines virtuelles 
 
@@ -40,6 +40,11 @@ Si vous souhaitez que les instances dans votre groupe identique Spot soient supp
 
 Les utilisateurs peuvent s’abonner pour recevoir des notifications dans la machine virtuelle via [Azure Scheduled Events](../virtual-machines/linux/scheduled-events.md). Vous serez ainsi informé si vos machines virtuelles sont en cours d’éviction, et vous aurez 30 secondes pour terminer vos tâches et arrêter la machine virtuelle avant que ne commence l’éviction. 
 
+## <a name="placement-groups"></a>Groupes de placement
+Un groupe de placement est une construction similaire à un groupe à haute disponibilité Azure, avec ses propres domaines d’erreur et domaines de mise à niveau. Par défaut, un groupe identique se compose d’un seul groupe de placement contenant au maximum 100 machines virtuelles. Si la propriété de groupe identique appelée `singlePlacementGroup` est définie sur *false*, le groupe identique peut se composer de plusieurs groupes de placement et présente une plage de 0 à 1 000 machines virtuelles. 
+
+> [!IMPORTANT]
+> À moins que vous n’utilisiez InfiniBand avec HPC, il est fortement recommandé de définir la propriété de groupe identique `singlePlacementGroup` sur *false* pour activer plusieurs groupes de placement et améliorer la mise à l’échelle dans la région ou la zone. 
 
 ## <a name="deploying-spot-vms-in-scale-sets"></a>Déploiement de machines virtuelles Spot dans des groupes identiques
 
@@ -64,6 +69,7 @@ az vmss create \
     --name myScaleSet \
     --image UbuntuLTS \
     --upgrade-policy-mode automatic \
+    --single-placement-group false \
     --admin-username azureuser \
     --generate-ssh-keys \
     --priority Spot \
@@ -89,14 +95,26 @@ $vmssConfig = New-AzVmssConfig `
 
 Le processus de création d’un groupe identique qui utilise des machines virtuelles Spot est le même que celui décrit dans l’article de démarrage rapide pour [Linux](quick-create-template-linux.md) ou [Windows](quick-create-template-windows.md). 
 
-Pour les déploiements de machines virtuelles Spot à l’aide d’un modèle, utilisez `"apiVersion": "2019-03-01"` ou version ultérieure. Ajoutez les propriétés `priority`, `evictionPolicy` et `billingProfile` à la section `"virtualMachineProfile":` de votre modèle : 
+Pour les déploiements de machines virtuelles Spot à l’aide d’un modèle, utilisez `"apiVersion": "2019-03-01"` ou version ultérieure. 
+
+Ajoutez les propriétés `priority`, `evictionPolicy` et `billingProfile` à la section `"virtualMachineProfile":` et la propriété `"singlePlacementGroup": false,` à la section `"Microsoft.Compute/virtualMachineScaleSets"` de votre modèle :
 
 ```json
-                "priority": "Spot",
+
+{
+  "type": "Microsoft.Compute/virtualMachineScaleSets",
+  },
+  "properties": {
+    "singlePlacementGroup": false,
+    }
+
+        "virtualMachineProfile": {
+              "priority": "Spot",
                 "evictionPolicy": "Deallocate",
                 "billingProfile": {
                     "maxPrice": -1
                 }
+            },
 ```
 
 Pour supprimer l’instance après son exclusion, remplacez le paramètre `evictionPolicy` par `Delete`.
@@ -115,12 +133,12 @@ Pour supprimer l’instance après son exclusion, remplacez le paramètre `evict
 
 **Q :** Comment les quotas sont-ils gérés pour Spot ?
 
-**R :** Les instances Spot et les instances standard auront des pools de quotas distincts. Le quota Spot est partagé entre les machines virtuelles et les instances de groupe identique. Pour plus d’informations, consultez [Abonnement Azure et limites, quotas et contraintes de service](https://docs.microsoft.com/azure/azure-resource-manager/management/azure-subscription-service-limits).
+**R :** Les instances Spot et les instances standard auront des pools de quotas distincts. Le quota Spot est partagé entre les machines virtuelles et les instances de groupe identique. Pour plus d’informations, consultez [Abonnement Azure et limites, quotas et contraintes de service](../azure-resource-manager/management/azure-subscription-service-limits.md).
 
 
 **Q :** Puis-je demander une augmentation de mon quota pour Spot ?
 
-**R :** Oui, vous pouvez demander une augmentation de votre quota pour les machines virtuelles Spot via la [procédure de demande de quota standard](https://docs.microsoft.com/azure/azure-portal/supportability/per-vm-quota-requests).
+**R :** Oui, vous pouvez demander une augmentation de votre quota pour les machines virtuelles Spot via la [procédure de demande de quota standard](../azure-portal/supportability/per-vm-quota-requests.md).
 
 
 **Q :** Puis-je convertir des groupes identiques existants en groupes identiques Spot ?
@@ -145,8 +163,7 @@ Pour supprimer l’instance après son exclusion, remplacez le paramètre `evict
 
 **Q :**  La mise à l’échelle automatique fonctionne-t-elle avec les deux stratégies d’éviction (Libérer et Supprimer) ?
 
-**R :** Il est recommandé de choisir la stratégie d’éviction Supprimer avec la mise à l’échelle automatique. En effet, le nombre d’instances libérées est soustrait de la capacité sur le groupe identique. Quand vous utilisez la mise à l’échelle automatique, le nombre d’instances cibles est souvent rapidement atteint en raison des instances libérées et écartées. 
-
+**R :** Oui. Toutefois, il est recommandé de choisir la stratégie d’éviction Supprimer avec la mise à l’échelle automatique. En effet, le nombre d’instances libérées est soustrait de la capacité sur le groupe identique. Quand vous utilisez la mise à l’échelle automatique, le nombre d’instances cibles est souvent rapidement atteint en raison des instances libérées et écartées. En outre, vos opérations de mise à l’échelle peuvent être affectées par les évictions Spot. Par exemple, les instances VMSS peuvent tomber sous le nombre minimal défini en raison de plusieurs évictions Spot au cours des opérations de mise à l’échelle. 
 
 **Q :** Quels sont les canaux qui prennent en charge les machines virtuelles Spot ?
 
@@ -158,15 +175,15 @@ Pour supprimer l’instance après son exclusion, remplacez le paramètre `evict
 |------------------------------|-----------------------------------|
 | Contrat Entreprise         | Oui                               |
 | Paiement à l’utilisation                | Oui                               |
-| Fournisseur de services cloud (CSP) | [Contactez votre partenaire](https://docs.microsoft.com/partner-center/azure-plan-get-started) |
+| Fournisseur de services cloud (CSP) | [Contactez votre partenaire](/partner-center/azure-plan-get-started) |
 | Avantages                     | Non disponible                     |
-| Sponsorisé                    | Non disponible                     |
+| Sponsorisé                    | Oui                               |
 | Version d’évaluation gratuite                   | Non disponible                     |
 
 
 **Q :** Où puis-je poster des questions ?
 
-**R :** Vous pouvez poster et étiqueter vos questions avec `azure-spot` sur [Questions et réponses](https://docs.microsoft.com/answers/topics/azure-spot.html). 
+**R :** Vous pouvez poster et étiqueter vos questions avec `azure-spot` sur [Questions et réponses](/answers/topics/azure-spot.html). 
 
 ## <a name="next-steps"></a>Étapes suivantes
 

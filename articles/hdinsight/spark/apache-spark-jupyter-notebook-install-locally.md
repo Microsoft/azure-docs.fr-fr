@@ -1,32 +1,32 @@
 ---
 title: Installer Jupyter localement et le connecter à Spark dans Azure HDInsight
-description: Découvrez comment installer un bloc-notes Jupyter localement sur votre ordinateur et le connecter à un cluster Apache Spark.
+description: Découvrez comment installer le notebook Jupyter localement sur votre ordinateur et le connecter à un cluster Apache Spark.
 author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
-ms.custom: hdinsightactive,seoapr2020
+ms.topic: how-to
+ms.custom: hdinsightactive,seoapr2020, devx-track-python
 ms.date: 04/23/2020
-ms.openlocfilehash: b2394c580b871105fee84d63c478c3c490b56a0b
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 16cb8a9c2a951c9f60640248ef74757d1e5ee200
+ms.sourcegitcommit: 84e3db454ad2bccf529dabba518558bd28e2a4e6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82191921"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96518921"
 ---
-# <a name="install-jupyter-notebook-on-your-computer-and-connect-to-apache-spark-on-hdinsight"></a>Installer un bloc-notes Jupyter sur votre ordinateur et le connecter à Apache Spark sur HDInsight
+# <a name="install-jupyter-notebook-on-your-computer-and-connect-to-apache-spark-on-hdinsight"></a>Installer le notebook Jupyter sur votre ordinateur et le connecter à Apache Spark sur HDInsight
 
-Cet article explique comment installer un bloc-notes Jupyter avec les noyaux PySpark (pour Python) et Apache Spark (pour Scala) personnalisés à l’aide de Spark Magic. Vous connectez ensuite le bloc-notes à un cluster HDInsight.
+Cet article explique comment installer le notebook Jupyter avec les noyaux PySpark (pour Python) et Apache Spark (pour Scala) personnalisés à l’aide de Spark Magic. Vous connectez ensuite le bloc-notes à un cluster HDInsight.
 
 Le processus d’installation de Jupyter et de connexion à Apache Spark sur HDInsight comprend quatre étapes principales.
 
 * Configuration du cluster Spark.
-* Installation de Jupyter Notebook.
+* Installation du notebook Jupyter.
 * Installation des noyaux PySpark et Spark avec Spark Magic.
 * Configuration de Spark Magic pour accéder au cluster Spark sur HDInsight.
 
-Pour plus d’informations sur les noyaux personnalisés et Spark Magic, consultez [Noyaux disponibles pour les blocs-notes Jupyter avec les clusters HDInsight Spark Linux sur HDInsight](apache-spark-jupyter-notebook-kernels.md).
+Pour plus d’informations sur les noyaux personnalisés et Spark Magic, consultez [Noyaux disponibles pour les notebooks Jupyter avec les clusters HDInsight Spark Linux sur HDInsight](apache-spark-jupyter-notebook-kernels.md).
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -34,9 +34,9 @@ Pour plus d’informations sur les noyaux personnalisés et Spark Magic, consult
 
 * Connaissances sur l’utilisation des blocs-notes Jupyter Notebook avec Spark sur HDInsight.
 
-## <a name="install-jupyter-notebook-on-your-computer"></a>Installer le bloc-notes Jupyter sur votre ordinateur
+## <a name="install-jupyter-notebook-on-your-computer"></a>Installer le notebook Jupyter sur votre ordinateur
 
-Installez Python avant d’installer les blocs-notes Jupyter. Le [distribution Anaconda](https://www.anaconda.com/download/) installera à la fois Python et Jupyter Notebook.
+Installez Python avant d’installer les notebooks Jupyter. Le [distribution Anaconda](https://www.anaconda.com/download/) installera à la fois Python et Jupyter Notebook.
 
 Téléchargez le [programme d’installation Anaconda](https://www.anaconda.com/download/) pour votre plateforme et exécutez le programme d’installation. Lors de l’exécution de l’assistant d’installation, veillez à sélectionner l’option permettant d’ajouter Anaconda à votre variable PATH.  Consultez aussi ces instructions d’[installation de Jupyter à l’aide d’Anaconda](https://jupyter.readthedocs.io/en/latest/install.html).
 
@@ -170,7 +170,7 @@ Dans cette section, vous configurez Spark magic, que vous avez installé précé
 
 Raisons d’installer Jupyter sur son ordinateur et de le connecter à un cluster Apache Spark sur HDInsight :
 
-* offre la possibilité de créer vos blocs-notes localement, de tester votre application sur un cluster en cours d’exécution, puis de charger les blocs-notes dans le cluster. Vous pouvez charger les blocs-notes dans le cluster à l’aide du bloc-notes Jupyter en cours d’exécution ou du cluster, ou en les enregistrant dans le dossier `/HdiNotebooks` du compte de stockage associé au cluster. Pour plus d’informations sur le stockage des blocs-notes, consultez [Where are Jupyter notebooks stored](apache-spark-jupyter-notebook-kernels.md#where-are-the-notebooks-stored)(Où sont stockés les blocs-notes Jupyter) ?
+* offre la possibilité de créer vos blocs-notes localement, de tester votre application sur un cluster en cours d’exécution, puis de charger les blocs-notes dans le cluster. Vous pouvez charger les notebooks dans le cluster à l’aide du notebook Jupyter en cours d’exécution ou du cluster, ou en les enregistrant dans le dossier `/HdiNotebooks` du compte de stockage associé au cluster. Pour plus d’informations sur le stockage des notebooks, consultez [Where are Jupyter Notebooks stored](apache-spark-jupyter-notebook-kernels.md#where-are-the-notebooks-stored)(Où sont stockés les notebooks Jupyter) ?
 * Les blocs-notes étant disponibles localement, vous pouvez vous connecter à différents clusters Spark selon les besoins de votre application.
 * Vous pouvez utiliser GitHub pour implémenter un système de contrôle de code source et disposer du contrôle de version pour les blocs-notes. Vous pouvez également disposer d’un environnement de collaboration où plusieurs utilisateurs peuvent travailler avec le même bloc-notes.
 * Vous pouvez travailler avec les blocs-notes localement sans avoir un cluster activé. Il vous suffit d’un cluster avec lequel tester vos blocs-notes, sans avoir à gérer manuellement vos blocs-notes ou à disposer d’un environnement de développement.
@@ -182,5 +182,5 @@ Raisons d’installer Jupyter sur son ordinateur et de le connecter à un cluste
 ## <a name="next-steps"></a>Étapes suivantes
 
 * [Vue d’ensemble : Apache Spark sur Azure HDInsight](apache-spark-overview.md)
-* [Noyaux pour le Notebook Jupyter sur Apache Spark](apache-spark-jupyter-notebook-kernels.md)
-* [Utiliser des packages externes avec les blocs-notes Jupyter dans Apache Stark](apache-spark-jupyter-notebook-use-external-packages.md)
+* [Noyaux pour le notebook Jupyter sur Apache Spark](apache-spark-jupyter-notebook-kernels.md)
+* [Utiliser des packages externes avec les notebooks Jupyter dans Apache Stark](apache-spark-jupyter-notebook-use-external-packages.md)

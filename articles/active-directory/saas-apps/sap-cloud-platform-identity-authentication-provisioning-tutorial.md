@@ -2,25 +2,21 @@
 title: 'Tutoriel : Configurer SAP Cloud Platform Identity Authentication pour le provisionnement automatique d’utilisateurs avec Azure Active Directory | Microsoft Docs'
 description: Découvrez comment configurer Azure Active Directory pour provisionner et déprovisionner automatiquement des comptes d’utilisateur sur SAP Cloud Platform Identity Authentication.
 services: active-directory
-documentationcenter: ''
 author: zchia
 writer: zchia
-manager: beatrizd
-ms.assetid: f49b5738-c769-403b-8f29-84ddeea7fbf1
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: article
+ms.topic: tutorial
 ms.date: 09/19/2019
 ms.author: Zhchia
-ms.openlocfilehash: c30a7b1e6440cf69f7a4858273b365d885e5ec7b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 419f25ee3df471bc2fc4526254f5677b8bd71856
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77060420"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96342729"
 ---
 # <a name="tutorial-configure-sap-cloud-platform-identity-authentication-for-automatic-user-provisioning"></a>Tutoriel : Configurer SAP Cloud Platform Identity Authentication pour le provisionnement automatique d’utilisateurs
 
@@ -58,7 +54,10 @@ Avant de configurer et d’activer le provisionnement automatique d’utilisateu
 
     ![Console d’administration SAP Cloud Platform Identity Authentication](media/sap-cloud-platform-identity-authentication-provisioning-tutorial/adminconsole.png)
 
-2.  Créez un utilisateur administrateur et sélectionnez-le.  
+2.  Appuyez sur le bouton **+Add** (+Ajouter) dans le panneau de gauche afin d’ajouter un nouvel administrateur à la liste. Choisissez **Add System** (Ajouter un système) et entrez le nom du système.   
+
+> [!NOTE]
+> L’utilisateur administrateur dans SAP Cloud Platform Identity Authentication doit être de type **système**. La création d’un utilisateur administrateur standard peut entraîner des erreurs *non autorisé* pendant le provisionnement.   
 
 3.  Sous Configure Authorizations (Configurer les autorisations), activez le bouton bascule en regard de **Manage Users** (Gérer les utilisateurs) et **Manage Groups** (Gérer les groupes).
 
@@ -95,7 +94,7 @@ Avant de configurer SAP Cloud Platform Identity Authentication pour le provision
 Cette section vous guide tout au long des étapes de configuration du service de provisionnement Azure AD pour créer, mettre à jour et désactiver des utilisateurs et/ou des groupes dans SAP Cloud Platform Identity Authentication en fonction des affectations d’utilisateurs et/ou de groupes dans Azure AD.
 
 > [!TIP]
-> Vous pouvez également choisir d’activer l’authentification unique basée sur SAML pour SAP Cloud Platform Identity Authentication, en suivant les instructions fournies dans le [tutoriel sur l’authentification unique SAP Cloud Platform Identity Authentication](https://docs.microsoft.com/azure/active-directory/saas-apps/sap-hana-cloud-platform-identity-authentication-tutorial). L’authentification unique peut être configurée indépendamment de l’attribution automatique d’utilisateurs, bien que ces deux fonctionnalités se complètent
+> Vous pouvez aussi choisir d’activer l’authentification unique basée sur SAML pour SAP Cloud Platform Identity Authentication en suivant les instructions fournies dans le [tutoriel sur l’authentification unique pour SAP Cloud Platform Identity Authentication](./sap-hana-cloud-platform-identity-authentication-tutorial.md). L’authentification unique peut être configurée indépendamment de l’attribution automatique d’utilisateurs, bien que ces deux fonctionnalités se complètent
 
 ### <a name="to-configure-automatic-user-provisioning-for-sap-cloud-platform-identity-authentication-in-azure-ad"></a>Pour configurer le provisionnement automatique d’utilisateurs pour SAP Cloud Platform Identity Authentication dans Azure AD
 
@@ -109,11 +108,11 @@ Cette section vous guide tout au long des étapes de configuration du service de
 
 3. Sélectionnez l’onglet **Approvisionnement**.
 
-    ![Onglet Approvisionnement](common/provisioning.png)
+    ![Capture d’écran des options Gérer avec l’option Provisionnement en évidence.](common/provisioning.png)
 
 4. Définissez le **Mode d’approvisionnement** sur **Automatique**.
 
-    ![Onglet Approvisionnement](common/provisioning-automatic.png)
+    ![Capture d’écran de la liste déroulante Mode de provisionnement avec l’option Automatique en évidence.](common/provisioning-automatic.png)
 
 5. Dans la section **Informations d’identification de l’administrateur**, entrez `https://<tenantID>.accounts.ondemand.com/service/scim ` dans **URL de locataire**. Entrez les valeurs **User ID** et **Password** récupérées plus tôt dans les champs **Nom d’utilisateur de l’administrateur** et **Mot de passe de l’administrateur**, respectivement. Cliquez sur **Tester la connexion** pour vérifier qu’Azure AD peut se connecter à SAP Cloud Platform Identity Authentication. Si la connexion échoue, vérifiez que votre compte SAP Cloud Platform Identity Authentication dispose d’autorisations d’administrateur et réessayez.
 
@@ -163,4 +162,3 @@ Pour plus d’informations sur la lecture des journaux d’activité d’approvi
 ## <a name="next-steps"></a>Étapes suivantes
 
 * [Découvrez comment consulter les journaux d’activité et obtenir des rapports sur l’activité d’approvisionnement](../app-provisioning/check-status-user-account-provisioning.md)
-

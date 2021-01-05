@@ -9,12 +9,13 @@ ms.topic: how-to
 ms.date: 05/04/2020
 ms.author: cynthn
 ms.reviewer: akjosh
-ms.openlocfilehash: 4126b7e0b48b455d9e5fcf65d6707f7e04de13ef
-ms.sourcegitcommit: e0330ef620103256d39ca1426f09dd5bb39cd075
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: 6fcd7ba0e3582a614acab46bffd5f76e5baa982f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82793993"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87496353"
 ---
 # <a name="list-update-and-delete-image-resources"></a>Répertorier, mettre à jour et supprimer des ressources d’image 
 

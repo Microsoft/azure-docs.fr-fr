@@ -11,12 +11,12 @@ ms.workload: identity
 ms.date: 09/17/2019
 ms.author: jmprieur
 ms.custom: aaddev
-ms.openlocfilehash: 47a45b52ac10a44b6efd54c41b3fec1e61a47a35
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: fd9890cb94bf6bb4b82ebbb585ab8bbb9d5ba46a
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82181628"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96169288"
 ---
 # <a name="web-app-that-signs-in-users-move-to-production"></a>Application web qui connecte les utilisateurs : Passer en production
 
@@ -24,9 +24,7 @@ Maintenant que vous savez comment obtenir un jeton pour appeler des API web, dé
 
 [!INCLUDE [Move to production common steps](../../../includes/active-directory-develop-scenarios-production.md)]
 
-## <a name="next-steps"></a>Étapes suivantes
-
-### <a name="troubleshooting"></a>Dépannage
+## <a name="troubleshooting"></a>Dépannage
 
 > [!NOTE]
 > Lorsque les utilisateurs se connectent à l’application web pour la première fois, ils doivent donner leur consentement. Toutefois, dans certaines organisations, les utilisateurs peuvent voir un message similaire à ce qui suit :
@@ -35,40 +33,32 @@ Maintenant que vous savez comment obtenir un jeton pour appeler des API web, dé
 >
 > Cela est dû au fait que votre administrateur client a **désactivé** la possibilité pour les utilisateurs de donner leur consentement. Dans ce cas, vous devez contacter vos administrateurs clients pour qu’ils effectuent un consentement d’administrateur pour les étendues requises par l’application.
 
-### <a name="same-site"></a>Même site
+## <a name="same-site"></a>Même site
 
-Vérifier que vous comprenez les problèmes susceptibles d’affecter les nouvelles versions du navigateur Chrome
-
-> [!div class="nextstepaction"]
-> [Guide pratique pour gérer les changements de cookie SameSite dans le navigateur Chrome](howto-handle-samesite-cookie-changes-chrome-browser.md)
+Vérifiez que vous comprenez les problèmes susceptibles d’affecter les nouvelles versions du navigateur Chrome : [Guide pratique pour gérer les changements de cookie SameSite dans le navigateur Chrome](howto-handle-samesite-cookie-changes-chrome-browser.md).
 
 Le package NuGet Microsoft.Identity.Web gère les problèmes SameSite les plus courants.
-
-### <a name="scenario-for-calling-web-apis"></a>Scénario d’appel d’API web
-
-Lorsque votre application web connecte des utilisateurs, elle peut appeler des API web pour le compte des utilisateurs connectés. L’appel d’API web à partir de l’application web est l’objet du scénario suivant :
-
-> [!div class="nextstepaction"]
-> [Application web qui appelle des API web](scenario-web-app-call-api-overview.md)
 
 ## <a name="deep-dive-aspnet-core-web-app-tutorial"></a>Présentation approfondie : Didacticiel sur les applications web ASP.NET Core
 
 En savoir plus sur les autres façons de connecter les utilisateurs avec ce didacticiel ASP.NET Core : 
 
-> [!div class="nextstepaction"]
-> [Permettez à vos applications web de connecter des utilisateurs et d’appeler des API avec la plateforme d’identité Microsoft pour les développeurs](https://github.com/Azure-Samples/ms-identity-aspnetcore-webapp-tutorial) 
+[Permettez à vos applications web de connecter des utilisateurs et d’appeler des API avec la plateforme d’identité Microsoft pour les développeurs](https://github.com/Azure-Samples/ms-identity-aspnetcore-webapp-tutorial)
 
 Ce didacticiel progressif propose un code prêt pour la production d’une application web, avec la procédure d’ajout de connexion aux comptes dans :
 
 - votre organisation
 - plusieurs organisations
 - des comptes professionnels et scolaires ou des comptes Microsoft personnels
-- [Azure AD B2C](https://aka.ms/aadb2c)
+- [Azure AD B2C](../../active-directory-b2c/overview.md)
 - Clouds nationaux
 
 ## <a name="sample-code-java-web-app"></a>Exemple de code : Applications web Java
 
 En savoir plus sur l’application web Java à partir de cet exemple sur GitHub : 
 
-> [!div class="nextstepaction"]
-> [Une application web Java qui connecte les utilisateurs à la plateforme d’identités Microsoft et appelle Microsoft Graph](https://github.com/Azure-Samples/ms-identity-java-webapp)
+[Une application web Java qui connecte les utilisateurs à la plateforme d’identités Microsoft et appelle Microsoft Graph](https://github.com/Azure-Samples/ms-identity-java-webapp)
+
+## <a name="next-steps"></a>Étapes suivantes
+
+Lorsque votre application web connecte des utilisateurs, elle peut appeler des API web pour le compte des utilisateurs connectés. L’appel d’API web à partir de l’application web est l’objet du scénario suivant : [Application web qui appelle des API web](scenario-web-app-call-api-overview.md).

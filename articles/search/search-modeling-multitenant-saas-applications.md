@@ -7,21 +7,25 @@ author: LiamCavanagh
 ms.author: liamca
 ms.service: cognitive-search
 ms.topic: conceptual
-ms.date: 11/04/2019
-ms.openlocfilehash: d8e453336005f3389f67e9571fac438bfc340c1b
-ms.sourcegitcommit: 980c3d827cc0f25b94b1eb93fd3d9041f3593036
+ms.date: 09/25/2020
+ms.openlocfilehash: cd21197d6d1559b681ae622b974f6eb7ba95ad3d
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/02/2020
-ms.locfileid: "80549025"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91397366"
 ---
 # <a name="design-patterns-for-multitenant-saas-applications-and-azure-cognitive-search"></a>Modèles de conception pour les applications SaaS mutualisées et Recherche cognitive Azure
+
 Une application mutualisée est une application qui fournit les mêmes services et fonctionnalités à plusieurs clients qui ne peuvent pas voir ni partager les données d’un autre client. Ce document aborde les stratégies d’isolation de client pour les applications mutualisées conçues avec Recherche cognitive Azure.
 
 ## <a name="azure-cognitive-search-concepts"></a>Concepts de Recherche cognitive Azure
-En tant que solution SaaS (search-as-a-service), Recherche cognitive Azure permet aux développeurs d’ajouter des expériences de recherche enrichies dans les applications sans avoir à gérer d’infrastructure, ni devenir un expert en matière de récupération d’informations. Les données sont téléchargées vers le service, puis stockées dans le cloud. À l’aide de requêtes simples dans l’API Recherche cognitive Azure, les données peuvent ensuite être modifiées et faire l’objet de recherches. [Cet article](https://aka.ms/whatisazsearch)présente une vue d’ensemble du service. Avant d’aborder les modèles de conception, il est important de comprendre certains concepts de Recherche cognitive Azure.
+En tant que solution SaaS (search-as-a-service), [Recherche cognitive Azure](search-what-is-azure-search.md) permet aux développeurs d’ajouter des expériences de recherche enrichies dans les applications sans avoir à gérer d’infrastructure, ni devenir un expert en matière de récupération d’informations. Les données sont téléchargées vers le service, puis stockées dans le cloud. À l’aide de requêtes simples dans l’API Recherche cognitive Azure, les données peuvent ensuite être modifiées et faire l’objet de recherches. 
 
 ### <a name="search-services-indexes-fields-and-documents"></a>Rechercher des services, des index, des champs et des documents
+
+Avant d’aborder les modèles de conception, il est important de comprendre certains concepts de base.
+
 Lorsque vous utilisez Recherche cognitive Azure, vous vous abonnez à un *service de recherche*. Lorsque les données sont téléchargées vers Recherche cognitive Azure, elles sont stockées dans un *index* au sein du service de recherche. Un seul service peut contenir plusieurs index. Pour utiliser les concepts familiers des bases de données, le service de recherche peut être comparé à une base de données, tandis que les index au sein d’un service peuvent être comparés aux tables dans une base de données.
 
 Chaque index au sein d’un service de recherche possède son propre schéma, qui est défini par un certain nombre de *champs*personnalisables. Les données sont ajoutées à un index Recherche cognitive Azure sous la forme de *documents*individuels. Chaque document doit être téléchargé dans un index spécifique et doit respecter le schéma de cet index. Lors de la recherche de données à l’aide de Recherche cognitive Azure, les requêtes de recherche en texte intégral sont exécutées sur un index spécifique.  Pour comparer ces concepts à ceux d’une base de données, les champs peuvent être comparés aux colonnes d’une table et les documents peuvent être comparés aux lignes.
@@ -39,12 +43,12 @@ Il existe différents [niveaux tarifaires](https://azure.microsoft.com/pricing/d
 
 |  | De base | Standard1 | Standard2 | Standard3 | Standard3 HD |
 | --- | --- | --- | --- | --- | --- |
-| Nombre maximal de réplicas par service |3 |12 |12 |12 |12 |
-| Nombre maximal de partitions par service |1 |12 |12 |12 |3 |
-| Nombre maximal d’unités de recherche (réplicas*partitions) par service |3 |36 |36 |36 |36 (3 partitions max.) |
-| Stockage maximal par service |2 Go |300 Go |1,2 To |2,4 To |600 Go |
-| Stockage maximal par partition |2 Go |25 Go |100 Go |200 Go |200 Go |
-| Nombre maximal d’index par service |5 |50 |200 |200 |3000 (1 000 index max. par partition) |
+| **Nombre maximal de réplicas par service** |3 |12 |12 |12 |12 |
+| **Nombre maximal de partitions par service** |1 |12 |12 |12 |3 |
+| **Nombre maximal d’unités de recherche (réplicas*partitions) par service** |3 |36 |36 |36 |36 (3 partitions max.) |
+| **Stockage maximal par service** |2 Go |300 Go |1,2 To |2,4 To |600 Go |
+| **Stockage maximal par partition** |2 Go |25 Go |100 Go |200 Go |200 Go |
+| **Nombre maximal d’index par service** |5 |50 |200 |200 |3000 (1 000 index max. par partition) |
 
 #### <a name="s3-high-density"></a>Haute densité S3
 Dans le niveau tarifaire S3 de Recherche cognitive Azure, il existe une option pour le mode haute densité (HD) conçu spécifiquement pour les scénarios mutualisés. Dans de nombreux cas, il est nécessaire de prendre en charge un grand nombre de clients plus petits sous un seul service pour tirer parti des avantages de simplicité et de rentabilité.
@@ -72,7 +76,8 @@ Dans le cas d’un scénario mutualisé, le développeur de l’application cons
 3. *Combinaison des deux :* les locataires les plus volumineux et actifs se voient attribuer des services dédiés, tandis que les locataires plus petits se voient attribuer des index individuels au sein de services partagés.
 
 ## <a name="1-index-per-tenant"></a>1. Index par client
-![Une image du modèle d’index par client](./media/search-modeling-multitenant-saas-applications/azure-search-index-per-tenant.png)
+
+:::image type="content" source="media/search-modeling-multitenant-saas-applications/azure-search-index-per-tenant.png" alt-text="Une image du modèle d’index par client" border="false":::
 
 Dans un modèle d’index par client, plusieurs clients occupent un seul service Recherche cognitive Azure où chaque client a son propre index.
 
@@ -89,7 +94,8 @@ Recherche cognitive Azure permet la croissance des index individuels et du nombr
 Si le nombre total d’index devient trop important pour un seul service, un autre service doit être configuré pour prendre en charge les nouveaux clients. Si les index doivent être déplacés entre les services de recherche lorsque de nouveaux services sont ajoutés, les données de l’index doivent être copiées manuellement d’un index vers l’autre car le déplacement d’un index n’est pas autorisé dans Recherche cognitive Azure.
 
 ## <a name="2-service-per-tenant"></a>2. Service par client
-![Une image du modèle de service par client](./media/search-modeling-multitenant-saas-applications/azure-search-service-per-tenant.png)
+
+:::image type="content" source="media/search-modeling-multitenant-saas-applications/azure-search-service-per-tenant.png" alt-text="Une image du modèle d’index par client" border="false":::
 
 Dans une architecture de service par client, chaque client possède son propre service de recherche.
 
@@ -115,7 +121,7 @@ Les modèles de conception ci-dessus pour les scénarios mutualisés dans Recher
 
 Si les modèles service par client et index par client ne sont pas des étendues suffisamment petites, il est possible de modéliser un index pour atteindre un degré de granularité encore plus fin.
 
-Pour qu’un seul index se comporte différemment pour des points de terminaison clients différents, il est possible d’ajouter un champ à un index qui désigne une certaine valeur pour chaque client possible. À chaque fois qu’un client appelle Recherche cognitive Azure pour interroger ou modifier un index, le code de l’application cliente spécifie la valeur appropriée pour ce champ à l’aide de la fonctionnalité [filter](https://msdn.microsoft.com/library/azure/dn798921.aspx) de Recherche cognitive Azure au moment de la requête.
+Pour qu’un seul index se comporte différemment pour des points de terminaison clients différents, il est possible d’ajouter un champ à un index qui désigne une certaine valeur pour chaque client possible. À chaque fois qu’un client appelle Recherche cognitive Azure pour interroger ou modifier un index, le code de l’application cliente spécifie la valeur appropriée pour ce champ à l’aide de la fonctionnalité [filter](./query-odata-filter-orderby-syntax.md) de Recherche cognitive Azure au moment de la requête.
 
 Cette méthode peut être utilisée pour obtenir une fonctionnalité de comptes d’utilisateurs distincts, de niveaux d’autorisation distincts et même d’applications distinctes.
 
@@ -128,4 +134,3 @@ Cette méthode peut être utilisée pour obtenir une fonctionnalité de comptes 
 Recherche cognitive Azure est un choix attrayant pour de nombreuses applications. Lorsque vous évaluez les différents modèles de conception pour les applications mutualisées, consultez les [différents niveaux tarifaires](https://azure.microsoft.com/pricing/details/search/) et les [limites de service](search-limits-quotas-capacity.md) respectives pour mieux adapter la Recherche cognitive Azure aux architectures et aux charges de travail de toutes tailles.
 
 Toutes questions relatives à Recherche cognitive Azure et les scénarios partagés au sein d’une architecture mutualisée peuvent être envoyés vers azuresearch_contact@microsoft.com.
-

@@ -5,15 +5,15 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
+ms.topic: how-to
 ms.custom: hdinsightactive
 ms.date: 12/06/2019
-ms.openlocfilehash: 8407aafdb9b9dadcbc8e220ac42e5d7856116959
-ms.sourcegitcommit: 309a9d26f94ab775673fd4c9a0ffc6caa571f598
+ms.openlocfilehash: e412b82be911f0b4ba2e5cda51495cdcd7826917
+ms.sourcegitcommit: d767156543e16e816fc8a0c3777f033d649ffd3c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/09/2020
-ms.locfileid: "82996778"
+ms.lasthandoff: 10/26/2020
+ms.locfileid: "92542299"
 ---
 # <a name="migrate-on-premises-apache-hadoop-clusters-to-azure-hdinsight---infrastructure-best-practices"></a>Migrer des clusters Apache Hadoop locaux vers Azure HDInsight - bonnes pratiques sur l’infrastructure
 
@@ -27,7 +27,7 @@ Les principaux choix à effectuer pour la planification de la capacité des clus
 La région Azure détermine où le cluster est physiquement approvisionné. Pour réduire la latence de lecture et d’écriture, le cluster doit être dans la même région que les données.
 
 **Emplacement et taille de stockage**  
-Le stockage par défaut doit être dans la même région que le cluster. Pour un cluster à 48 nœuds, il est recommandé d’avoir 4 à 8 comptes de stockage. Bien que le stockage total actuel puisse être suffisant, chaque compte de stockage fournit une bande passante réseau supplémentaire pour les nœuds de calcul. Quand il existe plusieurs comptes de stockage, utilisez un nom aléatoire pour chaque compte de stockage, sans préfixe. L’objectif de l’attribution aléatoire des noms est de réduire le risque de goulot d’étranglement de stockage (limitation) ou les défaillances en mode commun parmi tous les comptes. Pour de meilleures performances, utilisez un seul conteneur par compte de stockage.
+Le stockage par défaut doit être dans la même région que le cluster.  Pour un cluster à 48 nœuds, il est recommandé d’avoir 4 à 8 comptes de stockage. Bien que le stockage total actuel puisse être suffisant, chaque compte de stockage fournit une bande passante réseau supplémentaire pour les nœuds de calcul. Quand il existe plusieurs comptes de stockage, utilisez un nom aléatoire pour chaque compte de stockage, sans préfixe. L’objectif de l’attribution aléatoire des noms est de réduire le risque de goulot d’étranglement de stockage (limitation) ou les défaillances en mode commun parmi tous les comptes. Pour de meilleures performances, utilisez un seul conteneur par compte de stockage.
 
 **Taille et type de machine virtuelle (prend désormais en charge la série G)**  
 Chaque type de cluster a un ensemble de types de nœuds, et chaque type de nœud a des options spécifiques pour la taille et le type de machine virtuelle. La taille et le type de machine virtuelle sont déterminés par la puissance de traitement de l’UC, la taille de la RAM et la latence du réseau. Une charge de travail simulée peut être utilisée pour déterminer la taille de machine virtuelle optimale et le type de chaque nœud.
@@ -52,35 +52,35 @@ Les applications ou composants qui étaient disponibles dans les clusters locaux
 |**Application**|**Intégration**
 |---|---|
 |Ventilation|Nœud de périphérie HDInsight ou IaaS
-|Alluxio|IaaS  
-|Arcadia|IaaS 
+|Alluxio|IaaS  
+|Arcadia|IaaS 
 |Atlas|Aucune (HDP uniquement)
 |Datameer|Nœud de périphérie HDInsight
 |Datastax (Cassandra)|IaaS (CosmosDB comme alternative sur Azure)
-|DataTorrent|IaaS 
-|Drill|IaaS 
+|DataTorrent|IaaS 
+|Drill|IaaS 
 |Ignite|IaaS
-|Jethro|IaaS 
-|Mapador|IaaS 
+|Jethro|IaaS 
+|Mapador|IaaS 
 |Mongo|IaaS (CosmosDB comme alternative sur Azure)
-|NiFi|IaaS 
-|Presto|Nœud de périphérie HDInsight ou IaaS
-|Python 2|PaaS 
-|Python 3|PaaS 
-|R|PaaS 
-|SAS|IaaS 
+|NiFi|IaaS 
+|Presto|Nœud de périphérie HDInsight ou IaaS
+|Python 2|PaaS 
+|Python 3|PaaS 
+|R|PaaS 
+|SAS|IaaS 
 |Vertica|IaaS (SQLDW comme alternative sur Azure)
-|Tableau|IaaS 
+|Tableau|IaaS 
 |Waterline|Nœud de périphérie HDInsight
-|StreamSets|Périphérie HDInsight 
-|Palantir|IaaS 
-|Sailpoint|Iaas 
+|StreamSets|Périphérie HDInsight 
+|Palantir|IaaS 
+|Sailpoint|Iaas 
 
 Pour plus d’informations, consultez l’article [Composants Apache Hadoop disponibles avec différentes versions de HDInsight](../hdinsight-component-versioning.md#apache-components-available-with-different-hdinsight-versions)
 
 ## <a name="customize-hdinsight-clusters-using-script-actions"></a>Personnaliser des clusters HDInsight à l’aide d’actions de script
 
-HDInsight fournit une méthode de configuration des clusters appelée **action de script**. Une action de script est un script bash qui s’exécute sur les nœuds dans un cluster HDInsight et peut être utilisé pour installer des composants supplémentaires et modifier des paramètres de configuration.
+HDInsight fournit une méthode de configuration des clusters appelée **action de script** . Une action de script est un script bash qui s’exécute sur les nœuds dans un cluster HDInsight et peut être utilisé pour installer des composants supplémentaires et modifier des paramètres de configuration.
 
 Les actions de script doivent être stockées sur un URI accessible à partir du cluster HDInsight. Elles peuvent être utilisées pendant ou après la création du cluster et peuvent aussi être limitées de manière à s’exécuter sur certains types de nœuds uniquement.
 
@@ -109,7 +109,7 @@ Pour plus d’informations, consultez les articles suivants :
 
 ## <a name="customize-hdinsight-configs-using-bootstrap"></a>Personnaliser des configurations HDInsight à l’aide de Bootstrap
 
-Les modifications des configurations dans les fichiers config tels que `core-site.xml`, `hive-site.xml` et `oozie-env.xml` peuvent être apportées à l’aide de Bootstrap. Le script suivant est un exemple d’utilisation de l’applet de commande [New-AzHDInsightClusterConfig](https://docs.microsoft.com/powershell/azure/new-azureps-module-az) du [module AZ](https://docs.microsoft.com/powershell/module/az.hdinsight/new-azhdinsightcluster) PowerShell :
+Les modifications des configurations dans les fichiers config tels que `core-site.xml`, `hive-site.xml` et `oozie-env.xml` peuvent être apportées à l’aide de Bootstrap. Le script suivant est un exemple d’utilisation de l’applet de commande [New-AzHDInsightClusterConfig](/powershell/azure/new-azureps-module-az) du [module AZ](/powershell/module/az.hdinsight/new-azhdinsightcluster) PowerShell :
 
 ```powershell
 # hive-site.xml configuration

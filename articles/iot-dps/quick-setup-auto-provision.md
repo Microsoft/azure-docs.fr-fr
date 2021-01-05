@@ -1,5 +1,5 @@
 ---
-title: Configurer le service IoT Hub Device Provisioning dans le portail Azure
+title: Démarrage rapide – Configurer le service IoT Hub Device Provisioning dans le portail Azure
 description: 'Démarrage rapide : Configurer le service IoT Hub Device Provisioning (DPS) dans le portail Azure'
 author: wesmc7777
 ms.author: wesmc
@@ -8,22 +8,22 @@ ms.topic: quickstart
 ms.service: iot-dps
 services: iot-dps
 ms.custom: mvc
-ms.openlocfilehash: 765b7e5bb7341974a6a16d3f1ed0bcabf415f9f3
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: 644635d1ab7b0a43c8df3e10bbbd02d1ea67a94a
+ms.sourcegitcommit: 32c521a2ef396d121e71ba682e098092ac673b30
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "76029181"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91297230"
 ---
 # <a name="quickstart-set-up-the-iot-hub-device-provisioning-service-with-the-azure-portal"></a>Démarrage rapide : Configurer le service d’approvisionnement d’appareil IoT Hub avec le portail Azure
 
 Le service IoT Hub Device Provisioning peut s’utiliser avec IoT Hub pour effectuer un provisionnement sans contact juste-à-temps sur le hub IoT souhaité, sans intervention humaine. Les clients peuvent ainsi provisionner des millions d’appareils IoT de façon sécurisée et scalable. Le service Azure IoT Hub Device Provisioning prend en charge les appareils IoT avec les authentifications par TPM, clé symétrique et certificat X.509. Pour plus d’informations, consultez [Vue d’ensemble du service IoT Hub Device Provisioning](./about-iot-dps.md)
 
 Ce guide de démarrage rapide vous montre comment configurer le service IoT Hub Device Provisioning dans le portail Azure pour provisionner vos appareils selon ces étapes :
-> [!div class="checklist"]
-> * Utiliser le portail Azure pour créer un hub IoT
-> * Utiliser le portail Azure pour créer un service IoT Hub Device Provisioning et obtenir l’étendue de l’ID
-> * Lier le hub IoT au service Device Provisioning
+
+* Utiliser le portail Azure pour créer un hub IoT
+* Utiliser le portail Azure pour créer un service IoT Hub Device Provisioning et obtenir l’étendue de l’ID
+* Lier le hub IoT au service Device Provisioning
 
 
 Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.

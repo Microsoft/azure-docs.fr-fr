@@ -1,22 +1,23 @@
 ---
 title: 'Azure ExpressRoute : Configurer ExpressRoute Direct : Interface de ligne de commande'
-description: Cet article vous aide à configurer ExpressRoute Direct à l’aide d’Azure CLI
+description: Découvrez comment utiliser Azure CLI pour configurer Azure ExpressRoute Direct en vue de vous connecter directement au réseau mondial Microsoft.
 services: expressroute
-author: cherylmc
+author: duongau
 ms.service: expressroute
-ms.topic: conceptual
-ms.date: 05/20/2019
-ms.author: cherylmc
-ms.openlocfilehash: dcca1417aec52fb4bf99d5c480d81995154a68b0
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.topic: how-to
+ms.date: 09/28/2020
+ms.author: duau
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: 7931ad9e55d62d5fa2b1828d276e56f7c8cd02e1
+ms.sourcegitcommit: 7863fcea618b0342b7c91ae345aa099114205b03
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79481974"
+ms.lasthandoff: 11/03/2020
+ms.locfileid: "93286479"
 ---
 # <a name="configure-expressroute-direct-by-using-the-azure-cli"></a>Configurer ExpressRoute Direct à l’aide d’Azure CLI
 
-Vous pouvez utiliser Azure ExpressRoute Direct pour vous connecter directement au réseau mondial Microsoft à partir d’emplacements de peering distribués stratégiquement dans le monde entier. Pour plus d’informations, consultez [À propos d’ExpressRoute Direct Connect](expressroute-erdirect-about.md).
+ExpressRoute Direct vous offre la possibilité de vous connecter directement au réseau mondial Microsoft à partir d’emplacements de peering qui sont distribués stratégiquement dans le monde entier. Pour plus d’informations, consultez [À propos d’ExpressRoute Direct Connect](expressroute-erdirect-about.md).
 
 ## <a name="create-the-resource"></a><a name="resources"></a>Créer la ressource
 
@@ -284,9 +285,10 @@ Par défaut, vous pouvez créer 10 circuits dans l’abonnement qui contient la
 
 Vous pouvez utiliser des bandes passantes de circuit supplémentaires dans ExpressRoute Direct uniquement pour prendre en charge les scénarios décrits ici. Les bandes passantes sont de 40 Gbits/s et de 100 Gbits/s.
 
-La valeur du paramètre **SkuTier** peut être Local, Standard ou Premium.
+La valeur de **SkuTier** peut être Local, Standard ou Premium.
 
-Le paramètre **SkuFamily** ne peut avoir que la valeur MeteredData, car un nombre illimité n’est pas possible sur ExpressRoute Direct.
+**SkuFamily** peut uniquement être MeteredData. Un nombre illimité n’est pas pris en charge sur ExpressRoute Direct.
+
 Créez un circuit dans la ressource ExpressRoute Direct :
 
   ```azurecli

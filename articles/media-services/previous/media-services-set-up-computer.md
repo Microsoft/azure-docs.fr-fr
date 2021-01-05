@@ -14,17 +14,19 @@ ms.devlang: na
 ms.topic: conceptual
 ms.date: 04/01/2019
 ms.author: juliako
-ms.openlocfilehash: 5ef9b3d6f13de70cdf2fff87d9aed0a8efc2b782
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 67cf46fbe86dfd8388c61f3a55b4068e57d0b538
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74895799"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89266508"
 ---
-# <a name="set-up-your-media-services-development-environment"></a>Configurer votre environnement de développement Media Services  
+# <a name="set-up-your-media-services-development-environment"></a>Configurer votre environnement de développement Media Services 
+
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
 
 > [!NOTE]
-> Aucune nouvelle fonctionnalité ni fonction n’est ajoutée à Media Services v2. <br/>Découvrez la dernière version, [Media Services v3](https://docs.microsoft.com/azure/media-services/latest/). Consultez aussi [Conseils de migration de v2 vers v3](../latest/migrate-from-v2-to-v3.md).
+> Aucune nouvelle fonctionnalité ni fonction n’est ajoutée à Media Services v2. <br/>Découvrez la dernière version, [Media Services v3](../latest/index.yml). Consultez aussi [Conseils de migration de v2 vers v3](../latest/migrate-from-v2-to-v3.md).
 
 Les étapes suivantes décrivent les conditions requises pour le développement d’applications avec Azure Media Services.
 
@@ -53,4 +55,3 @@ Découvrez plusieurs exemples de code dans la galerie **Exemples de code Azure**
 
 ## <a name="provide-feedback"></a>Fournir des commentaires
 [!INCLUDE [media-services-user-voice-include](../../../includes/media-services-user-voice-include.md)]
-

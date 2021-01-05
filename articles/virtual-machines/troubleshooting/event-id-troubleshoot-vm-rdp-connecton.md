@@ -14,12 +14,12 @@ ms.tgt_pltfrm: vm-windows
 ms.devlang: azurecli
 ms.date: 11/01/2018
 ms.author: delhan
-ms.openlocfilehash: 2073d5f91b26cd2ae53e3291a6d1dad4d711b66d
-ms.sourcegitcommit: ced98c83ed25ad2062cc95bab3a666b99b92db58
+ms.openlocfilehash: 507cd6cfe9f251dbc304b579d634ff986b001264
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/31/2020
-ms.locfileid: "80437061"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87088595"
 ---
 # <a name="troubleshoot-azure-vm-rdp-connection-issues-by-event-id"></a>Résoudre les problèmes de connexion RDP des machines virtuelles Azure par ID d’événement 
 
@@ -290,13 +290,12 @@ Pour résoudre ce problème, le rôle de service Broker pour les connexions Bure
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-[Schannel Events](https://technet.microsoft.com/library/dn786445(v=ws.11).aspx) (Événements Schannel)
+[Schannel Events](/previous-versions/windows/it-pro/windows-server-2012-R2-and-2012/dn786445(v=ws.11)) (Événements Schannel)
 
-[Schannel SSP Technical Overview](https://technet.microsoft.com/library/dn786429(v=ws.11).aspx) (Présentation technique du fournisseur SSP Schannel)
+[Schannel SSP Technical Overview](/previous-versions/windows/it-pro/windows-server-2012-R2-and-2012/dn786429(v=ws.11)) (Présentation technique du fournisseur SSP Schannel)
 
-[RDP Fails with Event ID 1058 & Event 36870 with Remote Desktop Session Host Certificate & SSL Communication](https://blogs.technet.microsoft.com/askperf/2014/10/22/rdp-fails-with-event-id-1058-event-36870-with-remote-desktop-session-host-certificate-ssl-communication/) (Le protocole RDP échoue avec les ID d’événement 1058 et 36870 avec le certificat Hôte de session Bureau à distance et la communication SSL)
+[RDP Fails with Event ID 1058 & Event 36870 with Remote Desktop Session Host Certificate & SSL Communication](https://techcommunity.microsoft.com/t5/ask-the-performance-team/bg-p/AskPerf) (Le protocole RDP échoue avec les ID d’événement 1058 et 36870 avec le certificat Hôte de session Bureau à distance et la communication SSL)
 
-[Schannel 36872 or Schannel 36870 on a Domain Controller](https://blogs.technet.microsoft.com/instan/2009/01/05/schannel-36872-or-schannel-36870-on-a-domain-controller/) (Schannel 36872 ou Schannel 36870 sur un contrôleur de domaine)
+[Schannel 36872 or Schannel 36870 on a Domain Controller](/archive/blogs/instan/schannel-36872-or-schannel-36870-on-a-domain-controller) (Schannel 36872 ou Schannel 36870 sur un contrôleur de domaine)
 
-[Event ID 1058 — Remote Desktop Services Authentication and Encryption](https://technet.microsoft.com/library/ee890862(v=ws.10).aspx) (ID d’événement 1058 : authentification et chiffrement des Services Bureau à distance)
-
+[Event ID 1058 — Remote Desktop Services Authentication and Encryption](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/ee890862(v=ws.10)) (ID d’événement 1058 : authentification et chiffrement des Services Bureau à distance)

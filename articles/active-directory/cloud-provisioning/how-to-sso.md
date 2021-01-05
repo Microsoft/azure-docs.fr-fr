@@ -6,17 +6,17 @@ author: billmath
 manager: daveba
 ms.service: active-directory
 ms.workload: identity
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 01/28/2020
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 3667dd529ce5542be84c5e357053d8cd11eb91e9
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: ca9afda3303d828bdbb162a9e18ac817b7f8091e
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76908987"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85360654"
 ---
 # <a name="using-single-sign-on-with-cloud-provisioning"></a>Utiliser l'authentification unique avec approvisionnement cloud
 Le document suivant explique comment utiliser l'authentification unique avec approvisionnement cloud.

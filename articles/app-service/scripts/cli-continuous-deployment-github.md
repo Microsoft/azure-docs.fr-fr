@@ -9,12 +9,12 @@ ms.topic: sample
 ms.date: 09/02/2019
 ms.author: msangapu
 ms.custom: mvc, seodec18
-ms.openlocfilehash: 0578ea7f677e1abaa5687295fc7bc871e6db2d3f
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 2147976ae73f93e6f451dbd871ead865e2331455
+ms.sourcegitcommit: 273c04022b0145aeab68eb6695b99944ac923465
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "80044781"
+ms.lasthandoff: 12/10/2020
+ms.locfileid: "97006319"
 ---
 # <a name="create-an-app-service-app-with-continuous-deployment-from-github-using-cli"></a>Créer une application App Service avec un déploiement continu à partir de GitHub à l’aide de l’interface CLI
 
@@ -41,13 +41,13 @@ Ce script utilise les commandes suivantes. Chaque commande du tableau renvoie à
 
 | Commande | Notes |
 |---|---|
-| [`az group create`](/cli/azure/group?view=azure-cli-latest#az-group-create) | Crée un groupe de ressources dans lequel toutes les ressources sont stockées. |
-| [`az appservice plan create`](/cli/azure/appservice/plan?view=azure-cli-latest#az-appservice-plan-create) | Crée un plan App Service. |
-| [`az webapp create`](/cli/azure/webapp?view=azure-cli-latest#az-webapp-create) | Crée une application App Service. |
-| [`az webapp deployment source config`](/cli/azure/webapp/deployment/source?view=azure-cli-latest#az-webapp-deployment-source-config) | Associe une application App Service à un dépôt Git ou Mercurial. |
+| [`az group create`](/cli/azure/group#az-group-create) | Crée un groupe de ressources dans lequel toutes les ressources sont stockées. |
+| [`az appservice plan create`](/cli/azure/appservice/plan#az-appservice-plan-create) | Crée un plan App Service. |
+| [`az webapp create`](/cli/azure/webapp#az-webapp-create) | Crée une application App Service. |
+| [`az webapp deployment source config`](/cli/azure/webapp/deployment/source#az-webapp-deployment-source-config) | Associe une application App Service à un dépôt Git ou Mercurial. |
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour plus d’informations sur l’interface Azure CLI, consultez la [documentation relative à l’interface Azure CLI](https://docs.microsoft.com/cli/azure).
+Pour plus d’informations sur l’interface Azure CLI, consultez la [documentation relative à l’interface Azure CLI](/cli/azure).
 
 Vous trouverez des exemples supplémentaires de scripts CLI App Service dans la [documentation relative à Azure App Service](../samples-cli.md).

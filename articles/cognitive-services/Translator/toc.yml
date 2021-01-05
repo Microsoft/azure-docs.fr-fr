@@ -2,24 +2,12 @@
   href: index.yml
 - name: Convertisseur
   items:
-    - name: Vue d’ensemble
-      items:
-        - name: Présentation de Translator
-          href: translator-info-overview.md
-    - name: Démarrages rapides
-      items:
-        - name: Traduire le texte
-          href: quickstart-translate.md
-        - name: Translittérer du texte
-          href: quickstart-transliterate.md
-        - name: Détecter la langue
-          href: quickstart-detect.md
-        - name: Rechercher des traductions de mots
-          href: quickstart-dictionary.md
-        - name: Obtenir les langues prises en charge
-          href: quickstart-languages.md
-        - name: Déterminer la longueur des phrases
-          href: quickstart-sentences.md
+    - name: Présentation de Translator
+      href: translator-info-overview.md
+    - name: Démarrage rapide
+      href: quickstart-translator.md
+    - name: Prise en charge de la langue
+      href: language-support.md
     - name: Tutoriels
       items:
         - name: 'Créer une application WPF pour Translator, C#'
@@ -35,7 +23,7 @@
     - name: Guides pratiques
       items:
         - name: S’inscrire à Translator
-          href: translator-text-how-to-signup.md
+          href: ./translator-how-to-signup.md
         - name: Migrer vers l’API de texte V3
           href: migrate-to-v3.md
         - name: Ajouter un filtrage des grossièretés
@@ -50,7 +38,7 @@
           href: firewalls.md
     - name: Exemples
       items:
-        - name: 'C#'
+        - name: C#
           href: 'https://github.com/MicrosoftTranslator/Text-Translation-API-V3-C-Sharp'
         - name: Java
           href: 'https://github.com/MicrosoftTranslator/Text-Translation-API-V3-Java'
@@ -68,48 +56,36 @@
       items:
         - name: Informations de référence Translator v3
           href: reference/v3-0-reference.md
-          items:
-            - name: Languages
-              href: reference/v3-0-languages.md
-            - name: Translate
-              href: reference/v3-0-translate.md
-            - name: Transliterate
-              href: reference/v3-0-transliterate.md
-            - name: Detect
-              href: reference/v3-0-detect.md
-            - name: BreakSentence
-              href: reference/v3-0-break-sentence.md
-            - name: Recherche dans le dictionnaire
-              href: reference/v3-0-dictionary-lookup.md
-            - name: Exemples de dictionnaire
-              href: reference/v3-0-dictionary-examples.md
-        - name: Informations de référence Translator v2 (déprécié)
-          href: reference/v2-0-reference.md
-          items:
-            - name: Transformer le texte
-              href: transform-text.md
-            - name: Guide pratique pour utiliser le compte-rendu CTF (Collaborative Translation Framework)
-              href: ctf-reporting.md
-            - name: Renvoyer des traductions N-Best
-              href: return-n-best-translations.md
+        - name: Languages
+          href: reference/v3-0-languages.md
+        - name: Translate
+          href: reference/v3-0-translate.md
+        - name: Transliterate
+          href: reference/v3-0-transliterate.md
+        - name: Detect
+          href: reference/v3-0-detect.md
+        - name: BreakSentence
+          href: reference/v3-0-break-sentence.md
+        - name: Recherche dans le dictionnaire
+          href: reference/v3-0-dictionary-lookup.md
+        - name: Exemples de dictionnaire
+          href: reference/v3-0-dictionary-examples.md
+        - name: Limites de requête
+          href: request-limits.md
     - name: Ressources
       items:
+        - name: Options d’aide et de support
+          href: ../cognitive-services-support-options.md?context=/azure/cognitive-services/translator/context/context
         - name: Exemples de code sur GitHub
           href: 'https://aka.ms/TranslatorGitHub'
         - name: Questions fréquentes (FAQ)
           href: 'https://www.microsoft.com/translator/faq.aspx'
-        - name: Support multilingue
-          href: language-support.md
         - name: Tarifs
           href: 'https://azure.microsoft.com/pricing/details/cognitive-services/translator-text-api/'
         - name: Disponibilité régionale
           href: 'https://azure.microsoft.com/global-infrastructure/services/?products=cognitive-services'
         - name: Conformité
           href: 'https://azure.microsoft.com/support/legal/cognitive-services-compliance-and-privacy/'
-        - name: Limites de requête
-          href: request-limits.md
-        - name: Stack Overflow
-          href: 'https://stackoverflow.com/questions/tagged/microsoft-translator'
 - name: Custom Translator
   items:
     - name: Vue d’ensemble
@@ -162,8 +138,8 @@
           href: custom-translator/unsupported-language-deployments.md
     - name: Ressources
       items:
-        - name: Prise en charge de la langue
-          href: 'https://docs.microsoft.com/azure/cognitive-services/translator/language-support#customization'
+        - name: Options d’aide et de support
+          href: ../cognitive-services-support-options.md?context=/azure/cognitive-services/translator/context/context
         - name: Glossaire
           href: custom-translator/glossary.md
         - name: Questions fréquentes (FAQ)
@@ -174,5 +150,3 @@
           href: 'https://azure.microsoft.com/support/legal/cognitive-services-compliance-and-privacy/'
         - name: Chiffrement
           href: translator-encryption-of-data-at-rest.md
-        - name: Stack Overflow
-          href: 'https://stackoverflow.com/questions/tagged/microsoft-translator'

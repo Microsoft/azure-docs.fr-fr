@@ -1,17 +1,17 @@
 ---
 title: Recommandations sur les performances - Azure Database pour PostgreSQL - Serveur unique
 description: Cet article décrit la fonctionnalité Recommandations sur les performances dans Azure Database pour PostgreSQL - Serveur unique.
-author: rachel-msft
-ms.author: raagyema
+author: sunilagarwal
+ms.author: sunila
 ms.service: postgresql
 ms.topic: conceptual
 ms.date: 08/21/2019
-ms.openlocfilehash: a30af0c8bef47a37fe3439e885d3895a2c826225
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: d547844671e6485e71be7dd8c355de08f3dec5e6
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "74768467"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91710564"
 ---
 # <a name="performance-recommendations-in-azure-database-for-postgresql---single-server"></a>Recommandations sur les performances dans Azure Database pour PostgreSQL - Serveur unique
 
@@ -27,13 +27,13 @@ La fonctionnalité [Recommandations sur les performances](concepts-performance-r
 
 Ouvrez **Recommandations sur les performances** à partir de la section **Performances intelligentes** de la barre de menus sur la page du portail Azure pour votre serveur PostgreSQL.
 
-![Page d’accueil des recommandations sur les performances](./media/concepts-performance-recommendations/performance-recommendations-page.png)
+:::image type="content" source="./media/concepts-performance-recommendations/performance-recommendations-page.png" alt-text="Page d’accueil des suggestions sur les performances":::
 
 Sélectionnez **Analyser** et choisissez une base de données, l’analyse commence alors. En fonction de votre charge de travail, l’analyse peut prendre plusieurs minutes. Une fois l’analyse terminée, une notification apparaît dans le portail. L’analyse effectue une étude approfondie de votre base de données. Nous vous recommandons d’effectuer une analyse pendant les périodes creuses. 
 
 La fenêtre **Recommandations** affiche une liste de recommandations si des recommandations ont été trouvées.
 
-![Nouvelle page Recommandations sur les performances](./media/concepts-performance-recommendations/performance-recommendations-result.png)
+:::image type="content" source="./media/concepts-performance-recommendations/performance-recommendations-result.png" alt-text="Page d’accueil des suggestions sur les performances":::
 
 Les recommandations ne sont pas appliquées automatiquement. Pour appliquer la recommandation, copiez le texte de la requête et exécutez-le à partir du client de votre choix. N’oubliez pas de tester et de surveiller pour évaluer la recommandation. 
 

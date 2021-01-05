@@ -3,20 +3,20 @@ title: Migration de Linux vers Azure File Sync
 description: Découvrez comment migrer des fichiers d’un serveur Linux vers un déploiement de cloud hybride à l’aide d’Azure File Sync et de partages de fichiers Azure.
 author: fauhse
 ms.service: storage
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 03/19/2020
 ms.author: fauhse
 ms.subservice: files
-ms.openlocfilehash: 3131d6a7e3675027968eadd5f3e3ca8a7f2449c3
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 46bcfd48d8fdfb228670b87df166c1ad8de61e52
+ms.sourcegitcommit: 9826fb9575dcc1d49f16dd8c7794c7b471bd3109
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82143625"
+ms.lasthandoff: 11/14/2020
+ms.locfileid: "94626348"
 ---
 # <a name="migrate-from-linux-to-a-hybrid-cloud-deployment-with-azure-file-sync"></a>Migrer de Linux vers un déploiement de cloud hybride avec Azure File Sync
 
-Azure File Sync fonctionne sur des instances Windows Servers avec un stockage en attachement direct (DAS). Il ne prend en charge ni la synchronisation vers et depuis Linux, ni un partage SMB (Server Message Block) distant.
+Azure File Sync fonctionne sur des instances Windows Servers avec un stockage en attachement direct (DAS). Il ne prend en charge ni la synchronisation vers et depuis des clients Linux, ni un partage SMB (Server Message Block) distant, ni des partages NFS (Network File System).
 
 Par conséquent, la transformation de vos services de fichiers en un déploiement hybride rend nécessaire une migration vers un Windows Server. Cet article vous guide tout au long de la planification et de l’exécution d’une telle migration.
 
@@ -118,7 +118,7 @@ Arrière-plan :
 :::row-end:::
 :::row:::
    :::column span="1":::
-      /UNILOG:\<nom de fichier\>
+      /UNILOG:\<file name\>
    :::column-end:::
    :::column span="1":::
       Renvoie l’état au fichier journal au format Unicode (remplace le journal existant).
@@ -219,6 +219,6 @@ Pour plus d’informations sur la résolution des problèmes Azure File Sync, su
 
 Vous pouvez en apprendre davantage sur les partages de fichiers Azure et Azure File Sync. Les articles suivants contiennent des options avancées, les meilleures pratiques et des aides pour la résolution des problèmes. Ces articles sont liés à la [documentation relative aux partages de fichiers Azure](storage-files-introduction.md), le cas échéant.
 
-* [Vue d’ensemble d’Azure File Sync](https://aka.ms/AFS)
+* [Vue d’ensemble d’Azure File Sync](./storage-sync-files-planning.md)
 * [Guide de déploiement d’Azure File Sync](storage-files-deployment-guide.md)
 * [Résolution des problèmes Azure File Sync](storage-sync-files-troubleshoot.md)

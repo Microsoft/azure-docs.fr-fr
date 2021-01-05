@@ -1,24 +1,15 @@
 ---
 title: Vue d'ensemble du traitement des transactions dans Azure Service Bus
 description: Cet article offre une vue d'ensemble du traitement transactionnel et de la fonctionnalité « Envoyer par » dans Azure Service Bus.
-services: service-bus-messaging
-documentationcenter: .net
-author: axisc
-editor: spelluru
-ms.assetid: 64449247-1026-44ba-b15a-9610f9385ed8
-ms.service: service-bus-messaging
-ms.devlang: na
 ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: na
-ms.date: 01/27/2020
-ms.author: aschhab
-ms.openlocfilehash: 22744ecbced40b3195f4d047227b1e2a37228102
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 10/28/2020
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 9162b8578fe4f48cc3740b38d9d84ffaa2f260de
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79230061"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96023599"
 ---
 # <a name="overview-of-service-bus-transaction-processing"></a>Vue d’ensemble du traitement des transactions Service Bus
 
@@ -36,8 +27,8 @@ Service Bus prend en charge les opérations de regroupement par rapport à une e
 
 Les opérations qui peuvent être effectuées dans une étendue de transaction sont les suivantes :
 
-* **[QueueClient](/dotnet/api/microsoft.azure.servicebus.queueclient), [MessageSender](/dotnet/api/microsoft.azure.servicebus.core.messagesender), [TopicClient](/dotnet/api/microsoft.azure.servicebus.topicclient)** : Send, SendAsync, SendBatch, SendBatchAsync 
-* **[BrokeredMessage](/dotnet/api/microsoft.servicebus.messaging.brokeredmessage)** : Complete, CompleteAsync, Abandon, AbandonAsync, Deadletter, DeadletterAsync, Defer, DeferAsync, RenewLock, RenewLockAsync 
+* **[QueueClient](/dotnet/api/microsoft.azure.servicebus.queueclient), [MessageSender](/dotnet/api/microsoft.azure.servicebus.core.messagesender), [TopicClient](/dotnet/api/microsoft.azure.servicebus.topicclient)**  : `Send`, `SendAsync`, `SendBatch`, `SendBatchAsync`
+* **[BrokeredMessage](/dotnet/api/microsoft.servicebus.messaging.brokeredmessage)** : `Complete`, `CompleteAsync`, `Abandon`, `AbandonAsync`, `Deadletter`, `DeadletterAsync`, `Defer`, `DeferAsync`, `RenewLock`, `RenewLockAsync` 
 
 Les opérations de réception ne sont pas incluses, car on suppose que l’application acquiert d’abord des messages à l’aide du mode [ReceiveMode.PeekLock](/dotnet/api/microsoft.azure.servicebus.receivemode) dans une boucle de réception ou avec un rappel [OnMessage](/dotnet/api/microsoft.servicebus.messaging.queueclient.onmessage) avant d’ouvrir une étendue de transaction pour le traitement du message.
 
@@ -45,9 +36,9 @@ Le traitement du message (exécution, abandon, lettre morte, report) se produit 
 
 ## <a name="transfers-and-send-via"></a>Transferts
 
-Pour activer la remise transactionnelle des données à partir d’une file d’attente à un processeur, puis à une autre file d’attente, Service Bus prend en charge les *transferts*. Dans une opération de transfert, un expéditeur envoie d’abord un message à une *file d’attente de transfert*. Celle-ci déplace immédiatement le message vers la file d’attente de destination prévue à l’aide d’une implémentation de transfert particulièrement fiable (celle sur laquelle repose également la fonctionnalité de transfert automatique). Le message n’est jamais validé dans le journal de la file d’attente de transfert de telle façon qu’il devient visible pour les consommateurs de la file d’attente de transfert.
+Pour permettre la remise transactionnelle des données d’une file d’attente ou d’une rubrique à un processeur, puis à une autre file d’attente ou rubrique, Service Bus prend en charge les *transferts*. Dans une opération de transfert, un expéditeur envoie d’abord un message à une *file d’attente ou à une rubrique de transfert*. Celle-ci déplace immédiatement le message vers la file d’attente ou rubrique de destination prévue suivant une implémentation de transfert fiable (sur laquelle repose également la fonctionnalité de transfert automatique). Le message n’est jamais validé dans le journal de la file d’attente ou de la rubrique de transfert de façon à devenir accessible aux consommateurs de la file d’attente ou rubrique de transfert.
 
-La puissance de cette fonctionnalité transactionnelle devient évidente lorsque la file d’attente de transfert elle-même est la source des messages d’entrée de l’expéditeur. En d’autres termes, Service Bus peut transférer le message vers la file d’attente de destination « via » la file d’attente de transfert, tout en effectuant une opération d’exécution (ou une opération de report ou de lettre morte) sur le message d’entrée, en une opération atomique. 
+La puissance de cette fonctionnalité transactionnelle se révèle lorsque la file d’attente ou la rubrique de transfert est elle-même la source des messages d’entrée de l’expéditeur. En d’autres termes, Service Bus peut transférer le message à la file d’attente ou à la rubrique de destination « via » la file d’attente ou rubrique de transfert, tout en effectuant une opération d’exécution complète (ou différée ou de lettres mortes) sur le message d’entrée, en une seule opération atomique. 
 
 ### <a name="see-it-in-code"></a>Apparence dans le code
 
@@ -97,13 +88,16 @@ using (var ts = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
 }
 ```
 
+## <a name="timeout"></a>Délai d'expiration
+Une transaction expire au bout de 2 minutes. Le minuteur de transaction démarre lorsque la première opération de la transaction démarre. 
+
 ## <a name="next-steps"></a>Étapes suivantes
 
 Pour plus d’informations sur les files d’attente de lettres mortes Service Bus, consultez les articles suivants :
 
 * [Utilisation des files d’attente Service Bus](service-bus-dotnet-get-started-with-queues.md)
 * [Chaînage des entités Service Bus avec transfert automatique](service-bus-auto-forwarding.md)
-* Exemple [Auto-forward](https://github.com/Azure/azure-service-bus/tree/master/samples/DotNet/Microsoft.ServiceBus.Messaging/AutoForward) (Transfert automatique)
+* [Exemple de transfert automatique](https://github.com/Azure/azure-service-bus/tree/master/samples/DotNet/Microsoft.ServiceBus.Messaging/AutoForward)
 * Exemple [Atomic Transactions with Service Bus](https://github.com/Azure/azure-service-bus/tree/master/samples/DotNet/Microsoft.ServiceBus.Messaging/AtomicTransactions) (Transactions atomiques avec Service Bus)
 * [Comparaison des files d’attente Azure et Service Bus](service-bus-azure-and-service-bus-queues-compared-contrasted.md)
 

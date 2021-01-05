@@ -4,23 +4,23 @@ description: Créer une stratégie d’accès conditionnel personnalisée pour b
 services: active-directory
 ms.service: active-directory
 ms.subservice: conditional-access
-ms.topic: conceptual
-ms.date: 03/25/2020
+ms.topic: how-to
+ms.date: 05/26/2020
 ms.author: joflore
 author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: calebb, rogoya
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 34b29ceadaaf85e69d1214039fa1b563ed21a77d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: a531692264a768e4f6cb8e6475807789df049d03
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80295181"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89049144"
 ---
 # <a name="conditional-access-block-access-by-location"></a>Accès conditionnel : Bloquer l’accès par emplacement
 
-Avec la condition d’emplacement dans l’accès conditionnel, vous pouvez contrôler l’accès à vos applications cloud basées sur l’emplacement réseau d’un utilisateur. La condition d’emplacement est couramment utilisée pour bloquer l’accès à partir des pays où votre organisation sait que le trafic ne doit pas provenir.
+Avec la condition d’emplacement dans l’accès conditionnel, vous pouvez contrôler l’accès à vos applications cloud basées sur l’emplacement réseau d’un utilisateur. La condition d’emplacement est couramment utilisée pour bloquer l’accès à partir des pays/régions d’où votre organisation sait que le trafic ne doit pas provenir.
 
 ## <a name="define-locations"></a>Définir des emplacements
 
@@ -43,22 +43,20 @@ Pour plus d’informations sur la condition d’emplacement dans l’accès cond
 1. Donnez un nom à votre stratégie. Nous recommandons aux organisations de créer une norme explicite pour les noms de leurs stratégies.
 1. Sous **Affectations**, sélectionnez **Utilisateurs et groupes**
    1. Sous **Inclure**, sélectionnez **Tous les utilisateurs**.
-   1. Sélectionnez **Terminé**.
-1. Sous **Applications ou actions cloud** > **Inclure**, sélectionnez **Toutes les applications cloud** et sélectionnez **Terminé**.
+1. Sous **Applications ou actions cloud** > **Inclure**, sélectionnez **Toutes les applications cloud**.
 1. Sous **Conditions** > **Emplacement**.
    1. Définissez **Configurer** sur **Oui**
    1. Sous **Inclure**, sélectionnez **Emplacements sélectionnés**
    1. Sélectionnez l’emplacement bloqué que vous avez créé pour votre organisation.
-   1. Cliquez sur **Sélectionner** > **Terminé** > **Terminé**.
-1. Sous **Conditions** > **Applications clientes (préversion)** , définissez **Configurer** sur **Oui**, puis sélectionnez **Terminé**.
-1. Sous **Contrôles d’accès** > **Bloquer**, sélectionnez **Sélectionner**.
+   1. Cliquez sur **Sélectionner**.
+1. Sous **Contrôles d’accès**, sélectionnez **Bloquer l’accès**, puis **Sélectionner**.
 1. Confirmez vos paramètres et réglez **Activer la stratégie** sur **Activé**.
-1. Sélectionnez **Créer** pour créer votre stratégie.
+1. Sélectionnez **Créer** pour appliquer la stratégie d’accès conditionnel.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 [Stratégies d’accès conditionnel courantes](concept-conditional-access-policy-common.md)
 
-[Déterminer l'impact à l'aide du mode Rapport seul de l'Accès conditionnel](howto-conditional-access-report-only.md)
+[Déterminer l'impact à l'aide du mode Rapport seul de l'Accès conditionnel](howto-conditional-access-insights-reporting.md)
 
 [Simuler le comportement de connexion à l’aide de l’outil What If pour l’accès conditionnel](troubleshoot-conditional-access-what-if.md)

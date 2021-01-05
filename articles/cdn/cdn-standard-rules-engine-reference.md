@@ -5,14 +5,14 @@ services: cdn
 author: asudbring
 ms.service: azure-cdn
 ms.topic: article
-ms.date: 11/01/2019
+ms.date: 08/04/2020
 ms.author: allensu
-ms.openlocfilehash: 6d4fa4451c3db3d6f2a506eabd5676d18b0219f4
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 1a0f4456f38939632026645500dd48acbf7dbc88
+ms.sourcegitcommit: 80034a1819072f45c1772940953fef06d92fefc8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81259899"
+ms.lasthandoff: 11/03/2020
+ms.locfileid: "93242206"
 ---
 # <a name="standard-rules-engine-reference-for-azure-cdn"></a>Informations de référence sur le moteur de règles standard pour Azure CDN
 
@@ -32,9 +32,19 @@ Pour définir une règle dans le moteur de règles, définissez les [conditions 
 
  ![Structure des règles Azure CDN](./media/cdn-standard-rules-engine-reference/cdn-rules-structure.png)
 
-Chaque règle peut avoir jusqu’à quatre conditions de correspondance et trois actions. Chaque point de terminaison Azure CDN peut avoir jusqu’à cinq règles. 
+Chaque règle peut avoir jusqu’à dix conditions de correspondance et cinq actions. Chaque point de terminaison Azure CDN peut avoir jusqu’à 25 règles. 
 
-La limite actuelle de cinq règles pour un point de terminaison Azure CDN inclut une *règle générale* par défaut. La règle générale n’a pas de conditions de correspondance, et les actions définies dans une règle générale se déclenchent toujours.
+Une valeur par défaut *règle globale* est incluse dans cette limite. La règle globale n’a pas de conditions de correspondance ; les actions définies dans une règle globale se déclenchent toujours.
+
+   > [!IMPORTANT]
+   > L’ordre dans lequel plusieurs règles sont listées affecte la façon dont elles sont gérées. Les actions spécifiées dans une règle peuvent être remplacées par une règle suivante.
+
+## <a name="limits-and-pricing"></a>Limites et tarification 
+
+Chaque point de terminaison Azure CDN peut avoir jusqu’à 25 règles. Chaque règle peut avoir jusqu’à dix conditions de correspondance et cinq actions. La tarification du moteur de règles suit les dimensions ci-dessous : 
+- Règles : 1 USD par règle par mois 
+- Demandes traitées : 0,60 $ par million de demandes
+- Les 5 premières règles restent gratuites
 
 ## <a name="syntax"></a>Syntaxe
 
@@ -52,15 +62,7 @@ Un symbole de pourcentage est utilisé pour indiquer l’encodage des URL (par e
 
 ### <a name="wildcard-values"></a>Valeurs de caractère générique
 
-Le texte interprété comme une valeur de caractère générique attribue une signification supplémentaire aux caractères spéciaux. Le tableau suivant décrit la façon dont les caractères spéciaux spécifiques sont interprétés dans le moteur de règles standard :
-
-Caractère | Description
-----------|------------
-\ | Une barre oblique inverse est utilisée pour échapper les caractères spécifiés dans ce tableau. Une barre oblique inverse doit être spécifiée juste avant le caractère spécial à échapper. Par exemple, la syntaxe suivante échappe un astérisque : `\*`
-% | Un symbole de pourcentage est utilisé pour indiquer l’encodage des URL (par exemple, `%20`).
-\* | Un astérisque est un caractère générique représentant un ou plusieurs caractères.
-espace | Un caractère d’espace indique qu’une condition de correspondance peut être remplie par les valeurs ou les modèles spécifiés.
-guillemets simples | Un guillemet simple n’a pas de signification particulière. Toutefois, un jeu de guillemets simples indique qu’une valeur doit être traitée comme une valeur littérale. Les guillemets simples peuvent être utilisés des manières suivantes :<ul><li>Permettre de remplir une condition de correspondance lorsque la valeur spécifiée correspond à une partie de la valeur de comparaison.  Par exemple, `'ma'` peut correspondre à l’une des chaînes suivantes : <ul><li>/business/**ma**rathon/asset.htm</li><li>**ma**p.gif</li><li>/business/template.**ma**p</li></ul><li>Permettre de spécifier un caractère spécial en tant que caractère littéral. Par exemple, vous pouvez spécifier un caractère d’espace littéral en plaçant un caractère d’espace dans un jeu de guillemets simples (`' '` ou `'<sample value>'`).</li><li>Permettre de spécifier une valeur vide. Spécifiez une valeur vide en entrant un jeu de guillemets simples ( **''** ).</li></ul>**Important !**<br /><ul><li>Si la valeur spécifiée ne contient pas de caractère générique, elle est automatiquement considérée comme une valeur littérale. Vous n’avez pas besoin de spécifier un jeu de guillemets simples pour une valeur littérale.</li><li>Si une barre oblique inverse n’est pas utiliser pour échapper à un autre caractère dans ce tableau, elle est ignorée lorsqu’elle est placée dans un jeu de guillemets simples.</li><li>Une autre manière de spécifier un caractère spécial en tant que caractère littéral consiste à l’échapper à l’aide d’une barre oblique inverse (`\`).</li></ul>
+Actuellement, nous prenons en charge le caractère générique dans la **condition de correspondance UrlPath** dans le moteur de règles standard. Le caractère \* est un caractère générique qui représente un ou plusieurs caractères. 
 
 ## <a name="next-steps"></a>Étapes suivantes
 

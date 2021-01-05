@@ -8,10 +8,10 @@ ms.service: web-application-firewall
 ms.date: 04/14/2020
 ms.author: victorh
 ms.openlocfilehash: c0f802f5113e38e811c110ee913099e76fa7be0b
-ms.sourcegitcommit: ea006cd8e62888271b2601d5ed4ec78fb40e8427
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/14/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "81383810"
 ---
 # <a name="custom-rules-for-web-application-firewall-v2-on-azure-application-gateway"></a>Règles personnalisées du pare-feu d’applications web v2 sur Azure Application Gateway

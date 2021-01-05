@@ -11,12 +11,12 @@ ms.topic: article
 ms.date: 01/10/2020
 ms.author: tdsp
 ms.custom: seodec18, previous-author=deguhath, previous-ms.author=deguhath
-ms.openlocfilehash: e429dce497411305964cb1ec5298228dc4093b1f
-ms.sourcegitcommit: acb82fc770128234f2e9222939826e3ade3a2a28
+ms.openlocfilehash: 3d80ff9f5f96bbc642aed6598c86cb682d606695
+ms.sourcegitcommit: 17b36b13857f573639d19d2afb6f2aca74ae56c1
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81685952"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94410672"
 ---
 # <a name="explore-data-in-azure-blob-storage-with-pandas"></a>Explorer les données dans le stockage d’objets blob Azure avec Pandas
 
@@ -28,7 +28,7 @@ Cette tâche est une étape du [processus Team Data Science Process](overview.md
 Cet article suppose que vous avez :
 
 * Créé un compte de stockage Azure. Pour des instructions, voir [Créer un compte Stockage Azure](../../storage/common/storage-account-create.md).
-* Stocké vos données dans un compte de stockage d’objets blob Azure. Si vous avez besoin d’aide, consultez la page [Transfert de données vers et à partir d’Azure Storage](../../storage/common/storage-moving-data.md)
+* Stocké vos données dans un compte de stockage d’objets blob Azure. Si vous avez besoin d’aide, consultez la page [Transfert de données vers et à partir d’Azure Storage](../../storage/common/storage-choose-data-transfer-solution.md)
 
 ## <a name="load-the-data-into-a-pandas-dataframe"></a>Chargement des données dans une trame de données Pandas
 Pour explorer et manipuler un jeu de données, celui-ci doit d’abord être téléchargé depuis la source Blob vers un fichier local qui peut ensuite être chargé dans une trame de données Pandas. Voici les étapes à suivre pour cette procédure :
@@ -51,7 +51,7 @@ Pour explorer et manipuler un jeu de données, celui-ci doit d’abord être té
     blob_service=BlockBlobService(account_name=STORAGEACCOUNTNAME,account_key=STORAGEACCOUNTKEY)
     blob_service.get_blob_to_path(CONTAINERNAME,BLOBNAME,LOCALFILENAME)
     t2=time.time()
-    print(("It takes %s seconds to download "+blobname) % (t2 - t1))
+    print(("It takes %s seconds to download "+BLOBNAME) % (t2 - t1))
     ```
 
 1. Lisez les données du fichier téléchargé dans une table Pandas.
@@ -69,7 +69,7 @@ Voici quelques méthodes pour explorer des données à l’aide de Pandas :
 1. Vérifiez le **nombre de lignes et de colonnes**
 
     ```python
-    print 'the size of the data is: %d rows and  %d columns' % dataframe_blobdata.shape
+    print('the size of the data is: %d rows and  %d columns' % dataframe_blobdata.shape)
     ```
 
 1. **Vérifiez** les premières ou dernières **lignes** de l’ensemble de données ci-dessous :
@@ -84,7 +84,7 @@ Voici quelques méthodes pour explorer des données à l’aide de Pandas :
 
     ```python
     for col in dataframe_blobdata.columns:
-        print dataframe_blobdata[col].name, ':\t', dataframe_blobdata[col].dtype
+        print(dataframe_blobdata[col].name, ':\t', dataframe_blobdata[col].dtype)
     ```
 
 1. Vérifiez les **statistiques de base** des colonnes dans l’ensemble de données, comme indiqué ci-dessous :
@@ -103,7 +103,7 @@ Voici quelques méthodes pour explorer des données à l’aide de Pandas :
 
     ```python
     miss_num = dataframe_blobdata.shape[0] - dataframe_blobdata.count()
-    print miss_num
+    print(miss_num)
     ```
 
 1. Si des **valeurs sont manquantes** dans une colonne spécifique, vous pouvez les supprimer comme suit :

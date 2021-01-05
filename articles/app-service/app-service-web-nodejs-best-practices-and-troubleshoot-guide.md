@@ -8,16 +8,16 @@ ms.topic: article
 ms.date: 11/09/2017
 ms.author: msangapu
 ms.custom: seodec18
-ms.openlocfilehash: 682884d11b298a97e27056af3c10802dfd410e4c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 370b84f451e22c20c798018951a7a801e0bba826
+ms.sourcegitcommit: d6e92295e1f161a547da33999ad66c94cf334563
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75430560"
+ms.lasthandoff: 12/07/2020
+ms.locfileid: "96763942"
 ---
 # <a name="best-practices-and-troubleshooting-guide-for-node-applications-on-azure-app-service-windows"></a>Bonnes pratiques et guide de résolution des problèmes pour les applications Node sur Azure App Service
 
-Cet article présente des bonnes pratiques et des procédures de dépannage pour les [applications node](app-service-web-get-started-nodejs.md) exécutées sur Azure App Service (avec [iisnode](https://github.com/azure/iisnode)).
+Cet article présente des bonnes pratiques et des procédures de dépannage pour les [applications Node.js Windows](quickstart-nodejs.md?pivots=platform-windows) exécutées sur Azure App Service (avec [iisnode](https://github.com/azure/iisnode)).
 
 > [!WARNING]
 > Soyez vigilant lorsque vous appliquez ces étapes de dépannage sur votre site de production. Il est recommandé de résoudre les problèmes de votre application sur une installation hors production (par exemple, votre emplacement intermédiaire) et, une fois le problème résolu, de remplacer votre emplacement intermédiaire par votre emplacement de production.
@@ -121,13 +121,13 @@ Lisez [Debug node.js applications on Windows](https://tomasz.janczuk.org/2011/11
 
 La plupart des applications cherchent à établir des connexions sortantes dans le cadre de leur fonctionnement normal. Par exemple, à l’arrivée d’une requête, votre application node va chercher à contacter une API REST à un autre emplacement et à obtenir des informations afin de traiter cette requête. Vous pouvez utiliser un agent keep alive lors des appels http ou https. Vous pouvez utiliser le module agentkeepalive en tant qu’agent keep alive lors de l’exécution de ces appels sortants.
 
-Le module agentkeepalive garantit que les sockets sont réutilisés sur la machine virtuelle de votre application web Azure. La création d’un nouveau socket sur chaque demande sortante ajoute une surcharge à votre application. Le fait que votre application puisse réutiliser des sockets pour les demandes sortantes permet de garantir que votre application ne dépasse pas la limite maxSockets allouée par machine virtuelle. Sur Azure App Service, il est recommandé de définir la valeur maxSockets du module agentKeepAlive sur un total de (4 instances de node.exe \* 40 maxSockets/instance) 160 sockets par machine virtuelle.
+Le module agentkeepalive garantit que les sockets sont réutilisés sur la machine virtuelle de votre application web Azure. La création d’un nouveau socket sur chaque demande sortante ajoute une surcharge à votre application. Le fait que votre application puisse réutiliser des sockets pour les demandes sortantes permet de garantir que votre application ne dépasse pas la limite maxSockets allouée par machine virtuelle. Sur Azure App Service, il est recommandé de définir la valeur maxSockets du module agentKeepAlive sur un total de (4 instances de node.exe \* 32 maxSockets/instance) 128 sockets par machine virtuelle.
 
 Exemple de configuration [d’agentKeepALive](https://www.npmjs.com/package/agentkeepalive) :
 
 ```nodejs
 let keepaliveAgent = new Agent({
-    maxSockets: 40,
+    maxSockets: 32,
     maxFreeSockets: 10,
     timeout: 60000,
     keepAliveTimeout: 300000
@@ -140,7 +140,7 @@ let keepaliveAgent = new Agent({
 
 #### <a name="my-node-application-is-consuming-too-much-cpu"></a>Mon application node consomme trop de ressources processeur
 
-Azure App Service vous enverra peut-être une recommandation sur votre portail concernant le niveau de consommation processeur considéré comme élevé. Vous pouvez également configurer des analyses pour surveiller certaines [métriques](web-sites-monitor.md). Pendant la vérification de l’utilisation du processeur sur le [tableau de bord du Portail Azure](../azure-monitor/app/web-monitor-performance.md), vérifiez les valeurs MAX de processeur afin d’éviter de passer à côté des pics de valeur.
+Azure App Service vous enverra peut-être une recommandation sur votre portail concernant le niveau de consommation processeur considéré comme élevé. Vous pouvez également configurer des analyses pour surveiller certaines [métriques](web-sites-monitor.md). Lorsque vous vérifiez l’utilisation de l’UC sur le [tableau de bord du portail Azure](../azure-monitor/platform/metrics-charts.md), vérifiez les valeurs MAX de l’UC afin d’éviter de passer à côté des pics de valeur.
 Si vous pensez que votre application node consomme trop de ressources processeur, et que vous ne savez pas pourquoi, vous pouvez en rechercher la cause en la profilant.
 
 #### <a name="profiling-your-node-application-on-azure-app-service-with-v8-profiler"></a>Profilage de votre application node sur Azure App Service à l’aide de V8-Profiler
@@ -170,7 +170,7 @@ Accédez au site de la console de débogage `https://yoursite.scm.azurewebsites.
 
 Allez dans votre répertoire site/wwwroot. Il contient une invite de commande, comme illustré dans l’exemple suivant :
 
-![](./media/app-service-web-nodejs-best-practices-and-troubleshoot-guide/scm_install_v8.png)
+![Capture d’écran qui montre votre répertoire site/wwwroot et l’invite de commandes.](./media/app-service-web-nodejs-best-practices-and-troubleshoot-guide/scm_install_v8.png)
 
 Exécutez la commande `npm install v8-profiler`.
 
@@ -203,17 +203,17 @@ http.createServer(function (req, res) {
 
 Le code précédent profile la fonction WriteConsoleLog, puis écrit la sortie du profil dans le fichier « profile.cpuprofile » sous le répertoire wwwroot de votre site. Envoyez une requête à votre application. Vous voyez qu’un fichier « profile.cpuprofile » a été créé sous le répertoire wwwroot de votre site.
 
-![](./media/app-service-web-nodejs-best-practices-and-troubleshoot-guide/scm_profile.cpuprofile.png)
+![Capture d’écran qui montre le fichier profile.cpuprofile.](./media/app-service-web-nodejs-best-practices-and-troubleshoot-guide/scm_profile.cpuprofile.png)
 
 Téléchargez ce fichier et ouvrez-le avec la fonctionnalité Outils de Chrome (F12). Appuyez sur F12 dans Chrome, puis choisissez l’onglet **Profils**. Choisissez le bouton **Charger**. Sélectionnez le fichier profile.cpuprofile que vous avez téléchargé. Cliquez sur le profil que vous venez de télécharger.
 
-![](./media/app-service-web-nodejs-best-practices-and-troubleshoot-guide/chrome_tools_view.png)
+![Capture d’écran qui montre le fichier profile.cpuprofile que vous avez chargé.](./media/app-service-web-nodejs-best-practices-and-troubleshoot-guide/chrome_tools_view.png)
 
 Vous pouvez voir que 95 % du temps a été consommé par la fonction WriteConsoleLog. Ce résultat vous montre également précisément les numéros de ligne et les fichiers source qui sont à l’origine du problème.
 
 ### <a name="my-node-application-is-consuming-too-much-memory"></a>Mon application node consomme trop de mémoire
 
-Si votre application consomme trop de mémoire, votre portail affiche une notification d’Azure App Service indiquant une consommation de mémoire élevée. Vous pouvez configurer des analyses pour surveiller certaines [métriques](web-sites-monitor.md). Pendant la vérification de l’utilisation de mémoire sur le [tableau de bord du Portail Azure](../azure-monitor/app/web-monitor-performance.md), vérifiez les valeurs MAX de la mémoire afin d’éviter de passer à côté des pics de valeur.
+Si votre application consomme trop de mémoire, votre portail affiche une notification d’Azure App Service indiquant une consommation de mémoire élevée. Vous pouvez configurer des analyses pour surveiller certaines [métriques](web-sites-monitor.md). Lorsque vous vérifiez l’utilisation de la mémoire sur le [tableau de bord du portail Azure](../azure-monitor/platform/metrics-charts.md), vérifiez les valeurs MAX de la mémoire afin d’éviter de passer à côté des pics de valeur.
 
 #### <a name="leak-detection-and-heap-diff-for-nodejs"></a>Détection des fuites et procédure de Heap Diff pour node.js
 
@@ -273,9 +273,9 @@ NODE.exe possède un paramètre appelé `NODE_PENDING_PIPE_INSTANCES`. Sur Azure
 
 Cliquez sur ces liens pour en savoir plus sur les applications node.js dans Azure App Service.
 
-* [Prise en main des applications web Node.js dans Azure App Service](app-service-web-get-started-nodejs.md)
-* [Débogage d’une application web Node.js dans Azure Web Service](https://blogs.msdn.microsoft.com/azureossds/2018/08/03/debugging-node-js-apps-on-azure-app-services/)
+* [Prise en main des applications web Node.js dans Azure App Service](quickstart-nodejs.md)
+* [Débogage d’une application web Node.js dans Azure Web Service](/archive/blogs/azureossds/debugging-node-js-apps-on-azure-app-services)
 * [Utilisation de modules Node.js avec des applications Azure](../nodejs-use-node-modules-azure-apps.md)
-* [Azure App Service Web Apps : Node.js](https://blogs.msdn.microsoft.com/silverlining/2012/06/14/windows-azure-websites-node-js/)
+* [Azure App Service Web Apps : Node.js](/archive/blogs/silverlining/windows-azure-websites-node-js)
 * [Centre de développement Node.js](../nodejs-use-node-modules-azure-apps.md)
 * [Exploring the Super Secret Kudu Debug Console (Exploration de la console de débogage Kudu Super Secret)](https://azure.microsoft.com/documentation/videos/super-secret-kudu-debug-console-for-azure-web-sites/)

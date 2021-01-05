@@ -14,12 +14,12 @@ ms.workload: infrastructure-services
 ms.date: 04/27/2018
 ms.author: damendo
 ms.custom: mvc
-ms.openlocfilehash: 974e45b761fb45e4bc1c451fa6755e16cab49e11
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 25c58f99f56a4328527d1dd970e3ade21eb51819
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "76834679"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90987169"
 ---
 # <a name="tutorial-diagnose-a-communication-problem-between-networks-using-the-azure-portal"></a>Tutoriel : Diagnostiquer un problème de communication existant entre des réseaux à l’aide du portail Azure
 
@@ -73,12 +73,12 @@ Si vous avez déjà un observateur réseau activé dans la région USA Est, pass
 8. Pendant l’exécution du test, **En cours d’exécution** s’affiche dans la colonne **ÉTAT DU DÉPANNAGE** où la mention **Non démarré** est affichée, comme illustré sur l’image précédente. L’exécution du test peut prendre plusieurs minutes.
 9. Affichez l’état d’un test terminé. L’image suivante montre les résultats d’état d’un test de diagnostic terminé :
 
-    ![Statut](./media/diagnose-communication-problem-between-networks/status.png)
+    ![Capture d’écran montrant les résultats d’un test de diagnostic (dans cet exemple, le test a révélé que le réseau n’est pas sain), comprenant un résumé et une description détaillée.](./media/diagnose-communication-problem-between-networks/status.png)
 
     Vous pouvez voir que la colonne **ÉTAT DU DÉPANNAGE** indique la mention **Défectueux**, et observer les paramètres **Résumé** et **Détail** du problème dans l’onglet **État**.
 10. Lorsque vous sélectionnez l’onglet **Action**, la fonctionnalité de diagnostics VPN fournit des informations supplémentaires. Dans l’exemple illustré dans l’image suivante, la fonctionnalité de diagnostics VPN vous informe que vous devez vérifier l’intégrité de chaque connexion :
 
-    ![Action](./media/diagnose-communication-problem-between-networks/action.png)
+    ![Capture d’écran montrant l’onglet Action, qui fournit des informations supplémentaires.](./media/diagnose-communication-problem-between-networks/action.png)
 
 ## <a name="diagnose-a-gateway-connection"></a>Effectuer le diagnostic d’une connexion à une passerelle
 
@@ -86,7 +86,7 @@ Une passerelle est connectée à d’autres réseaux via une connexion de passer
 
 1. Effectuez de nouveau l’étape 7 de la section [Diagnostiquer une passerelle](#diagnose-a-gateway), en sélectionnant cette fois une connexion. Dans l’exemple suivant, une connexion nommée **VNet1toSite1** est testée :
 
-    ![Connexion](./media/diagnose-communication-problem-between-networks/connection.png)
+    ![Capture d’écran montrant comment démarrer le dépannage de la connexion sélectionnée.](./media/diagnose-communication-problem-between-networks/connection.png)
 
     Le test est exécuté pendant plusieurs minutes.
 2. À l’issue du test de la connexion, vous recevez des résultats similaires aux résultats présentés dans les images suivantes dans les onglets **État** et **Action** :

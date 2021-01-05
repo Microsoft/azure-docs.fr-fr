@@ -5,20 +5,22 @@ services: synapse-analytics
 author: euangMS
 ms.service: synapse-analytics
 ms.topic: conceptual
-ms.subservice: ''
+ms.subservice: spark
 ms.date: 04/15/2020
 ms.author: euang
 ms.reviewer: euang
-ms.openlocfilehash: 52758eab645fa0bb89cb499a5c617df62c21279e
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: 6a38b61ee03aa4853526586ca60542bd3641b66f
+ms.sourcegitcommit: 32c521a2ef396d121e71ba682e098092ac673b30
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81426821"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91249397"
 ---
 # <a name="what-is-delta-lake"></a>Présentation de Delta Lake
 
 Azure Synapse Analytics est compatible avec Linux Foundation Delta Lake. Delta Lake est une couche de stockage open source qui apporte des transactions ACID (atomicité, cohérence, isolation et durabilité) à Apache Spark et aux charges de travail Big Data.
+
+La version actuelle de Delta Lake incluse dans Azure Synapse offre une prise en charge des langages pour Scala, PySpark et .NET. Des liens vers pour des exemples et une documentation plus détaillés se trouvent en bas de la page.
 
 ## <a name="key-features"></a>Fonctionnalités clés
 
@@ -32,12 +34,12 @@ Azure Synapse Analytics est compatible avec Linux Foundation Delta Lake. Delta L
 | **Application du schéma** | L’application du schéma permet de s’assurer que les types de données sont corrects et que les colonnes requises sont présentes, évitant ainsi des données incorrectes entraînent une incohérence des données. Pour plus d’informations, consultez [Plongée dans Delta Lake : application et évolution du schéma](https://databricks.com/blog/2019/09/24/diving-into-delta-lake-schema-enforcement-evolution.html) |
 | **Évolution du schéma** | Delta Lake vous permet d’apporter à un schéma de table des modifications qui peuvent être appliquées automatiquement, sans devoir écrire de DDL de migration. Pour plus d’informations, consultez [Plongée dans Delta Lake : application et évolution du schéma](https://databricks.com/blog/2019/09/24/diving-into-delta-lake-schema-enforcement-evolution.html) |
 | **Historique des audits** | Le journal des transactions de Delta Lake enregistre des détails sur chaque modification apportée aux données, en fournissant une piste d’audit complète des modifications. |
-| **Mises à jour et suppressions** | Delta Lake prend en charge les API Scala, Java, Python et SQL pour offrir un vaste éventail de fonctionnalités. La prise en charge des opérations de fusion, de mise à jour et de suppression vous aide à répondre aux exigences de conformité. Pour plus d’informations, consultez les articles [Annonce de la mise en production de Delta Lake 0.4.0](https://delta.io/news/delta-lake-0-4-0-released/) et [Upserts et suppressions simples et fiables sur des tables Delta Lake à l’aide d’API Python](https://databricks.com/blog/2019/10/03/simple-reliable-upserts-and-deletes-on-delta-lake-tables-using-python-apis.html), qui contiennent des extraits de code pour les commandes DML de fusion, de mise à jour et de suppression. |
+| **Mises à jour et suppressions** | Delta Lake prend en charge les API Scala, Java, Python et SQL pour offrir un vaste éventail de fonctionnalités. La prise en charge des opérations de fusion, de mise à jour et de suppression vous aide à répondre aux exigences de conformité. Pour plus d’informations, consultez les articles [Annonce de la mise en production de Delta Lake 0.6.1](https://delta.io/news/delta-lake-0-6-1-released/) , [Annonce de la mise en production de Delta Lake 0.7](https://delta.io/news/delta-lake-0-7-0-released/) et [Upserts et suppressions simples et fiables sur des tables Delta Lake à l’aide d’API Python](https://databricks.com/blog/2019/10/03/simple-reliable-upserts-and-deletes-on-delta-lake-tables-using-python-apis.html), qui contiennent des extraits de code pour les commandes DML de fusion, de mise à jour et de suppression. |
 | **100 % compatible avec l’API Apache Spark** | Les développeurs peuvent utiliser Delta Lake avec leurs pipelines de données existants pratiquement sans aucune modification, car il est entièrement compatible avec les implémentations Spark existantes. |
 
 Pour obtenir une documentation complète, consultez la page [Documentation de Delta Lake](https://docs.delta.io/latest/delta-intro.html).
 
-Pour plus d’informations, consultez [Projet Delta Lake](https://lfprojects.org).
+Pour plus d’informations, consultez [Projet Delta Lake](https://github.com/delta-io/delta).
 
 ## <a name="next-steps"></a>Étapes suivantes
 

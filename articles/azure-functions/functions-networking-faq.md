@@ -1,17 +1,15 @@
 ---
 title: Questions fréquentes concernant les réseaux dans Azure Functions
 description: Répond à certaines questions courantes concernant les réseaux dans Azure Functions.
-author: alexkarcher-msft
 ms.topic: troubleshooting
 ms.date: 4/11/2019
-ms.author: alkarche
 ms.reviewer: glenga
-ms.openlocfilehash: acb1e942c1f342ce6fee7d8aeacafcc1d7b6fd91
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 3e8a992aac95b6c2688cb45aa980bf0b01883a53
+ms.sourcegitcommit: 1d6ec4b6f60b7d9759269ce55b00c5ac5fb57d32
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75409524"
+ms.lasthandoff: 11/13/2020
+ms.locfileid: "94578227"
 ---
 # <a name="frequently-asked-questions-about-networking-in-azure-functions"></a>Questions fréquentes concernant les réseaux dans Azure Functions
 
@@ -29,15 +27,13 @@ Vous pouvez limiter l’accès Internet de deux façons :
     * Lorsque des restrictions d’adresse IP sont appliquées, vous pouvez également configurer des [points de terminaison de service](../virtual-network/virtual-network-service-endpoints-overview.md),afin de contraindre votre fonction à n’accepter que le trafic entrant provenant d’un réseau virtuel particulier.
 * Suppression de tous les déclencheurs HTTP. Pour certaines applications, il suffit simplement d’éviter les déclencheurs HTTP et d’utiliser toute autre source d’événement pour déclencher votre fonction.
 
-N’oubliez pas que l’éditeur du portail Azure nécessite un accès direct à la fonction actuellement exécutée. Les modifications apportées au code via le portail Azure nécessitent que l’appareil que vous utilisez accède au portail afin d’obtenir que son adresse IP soit ajoutée à la liste verte. Toutefois, vous pouvez aussi utiliser l’une des options qui se trouvent sous l’onglet Fonctionnalités de la plateforme lorsque des restrictions de réseau sont appliquées.
+N’oubliez pas que l’éditeur du portail Azure nécessite un accès direct à la fonction actuellement exécutée. Pour que les modifications apportées au code via le portail Azure soient appliquées, l'ID de l'appareil que vous utilisez pour accéder au portail doit être ajouté à la liste approuvée. Toutefois, vous pouvez aussi utiliser l’une des options qui se trouvent sous l’onglet Fonctionnalités de la plateforme lorsque des restrictions de réseau sont appliquées.
 
 ## <a name="how-do-i-restrict-my-function-app-to-a-virtual-network"></a>Comment limiter mon application de fonction à un réseau virtuel ?
 
-Vous pouvez limiter le trafic **entrant** d’une application de fonction à un seul réseau virtuel à l’aide de [points de terminaison de service](./functions-networking-options.md#private-site-access). Cette configuration permet toujours à l’application de fonction d’effectuer des appels sortants vers Internet.
+Vous pouvez limiter le trafic **entrant** d’une application de fonction à un seul réseau virtuel à l’aide de [points de terminaison de service](./functions-networking-options.md#use-service-endpoints). Cette configuration permet toujours à l’application de fonction d’effectuer des appels sortants vers Internet.
 
-La seule façon de restreindre totalement une fonction afin que tout le trafic transite via un réseau virtuel consiste à utiliser un environnement App Service Environment dont la charge est équilibrée en interne. Cette option déploie votre site sur une infrastructure dédiée à l’intérieur d’un réseau virtuel, et envoie le trafic ainsi que l’ensemble des déclencheurs via le réseau virtuel. 
-
-Pour plus d’informations sur l’utilisation d’App Service Environment, commencez par lire l’article [Créer et utiliser un équilibreur de charge interne avec App Service Environment](../app-service/environment/create-ilb-ase.md).
+Pour limiter complètement une fonction de sorte que tout le trafic transite par un réseau virtuel, vous pouvez utiliser des [points de terminaison privés](./functions-networking-options.md#private-endpoint-connections) avec l’intégration du réseau virtuel sortant ou un App Service Environment.
 
 ## <a name="how-can-i-access-resources-in-a-virtual-network-from-a-function-app"></a>Comment accéder aux ressources d’un réseau virtuel à partir d’une application de fonction ?
 
@@ -49,13 +45,13 @@ Avec l’intégration de réseau virtuel, vous pouvez accéder aux ressources s�
 
 ## <a name="how-can-i-trigger-a-function-from-a-resource-in-a-virtual-network"></a>Comment déclencher une fonction à partir d’une ressource d’un réseau virtuel ?
 
-Vous pouvez permettre aux déclencheurs HTTP d’être appelés à partir d’un réseau virtuel en utilisant des [points de terminaison de service](./functions-networking-options.md#private-site-access). 
+Vous pouvez permettre aux déclencheurs HTTP d’être appelés à partir d’un réseau virtuel en utilisant des [points de terminaison de service](./functions-networking-options.md#use-service-endpoints) ou des [connexions de point de terminaison privé](./functions-networking-options.md#private-endpoint-connections). 
 
 Vous pouvez également déclencher une fonction à partir d’autres ressources d’un réseau virtuel en déployant votre application de fonction dans un plan Premium, un plan App Service ou App Service Environment. Pour plus d’informations, consultez [Déclencheurs de réseau virtuel non-HTTP](./functions-networking-options.md#virtual-network-triggers-non-http).
 
 ## <a name="how-can-i-deploy-my-function-app-in-a-virtual-network"></a>Comment déployer mon application de fonction dans un réseau virtuel ?
 
-Un déploiement dans App Service Environment est le seul moyen de créer une application de fonction qui se trouve entièrement dans un réseau virtuel. Pour plus d’informations sur l’utilisation d’un équilibreur de charge interne avec App Service Environment, commencez par lire l’article [Créer et utiliser un équilibreur de charge interne avec App Service Environment](https://docs.microsoft.com/azure/app-service/environment/create-ilb-ase).
+Un déploiement dans App Service Environment est le seul moyen de créer une application de fonction qui se trouve entièrement dans un réseau virtuel. Pour plus d’informations sur l’utilisation d’un équilibreur de charge interne avec App Service Environment, commencez par lire l’article [Créer et utiliser un équilibreur de charge interne avec App Service Environment](../app-service/environment/create-ilb-ase.md).
 
 Si vous avez seulement besoin d’un accès unidirectionnel aux ressources d’un réseau virtuel ou d’un isolement réseau moins complet, consultez [Vue d’ensemble des réseaux Azure Functions](functions-networking-options.md).
 

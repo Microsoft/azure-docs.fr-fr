@@ -8,16 +8,17 @@ ms.topic: how-to
 ms.workload: infrastructure
 ms.date: 05/04/2020
 ms.author: cynthn
-ms.openlocfilehash: 5e59872a4da0136232652008a2980601428eeab6
-ms.sourcegitcommit: e0330ef620103256d39ca1426f09dd5bb39cd075
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: 090b041c605c2328add8b46a97b6f151bae268c6
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82793897"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87501080"
 ---
 # <a name="create-a-vm-from-a-generalized-image-version-using-the-cli"></a>Créer une machine virtuelle à partir d’une version d’image généralisée à l’aide de l’interface de ligne de commande
 
-Créez une machine virtuelle à partir d’une [version d’image généralisée](https://docs.microsoft.com/azure/virtual-machines/linux/shared-image-galleries#generalized-and-specialized-images) stockée dans une galerie d’images partagées. Si vous souhaitez créer une machine virtuelle en utilisant une image spécialisée, consultez [Créer une machine virtuelle à partir d’une image spécialisée](vm-specialized-image-version-powershell.md). 
+Créez une machine virtuelle à partir d’une [version d’image généralisée](./linux/shared-image-galleries.md#generalized-and-specialized-images) stockée dans une galerie d’images partagées. Si vous souhaitez créer une machine virtuelle en utilisant une image spécialisée, consultez [Créer une machine virtuelle à partir d’une image spécialisée](vm-specialized-image-version-powershell.md). 
 
 
 ## <a name="get-the-image-id"></a>Obtenir l’ID de l’image

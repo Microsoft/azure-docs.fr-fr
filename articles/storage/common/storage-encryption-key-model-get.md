@@ -8,14 +8,15 @@ ms.service: storage
 ms.topic: how-to
 ms.date: 03/13/2020
 ms.author: tamram
-ms.reviewer: cbrooks
+ms.reviewer: ozgun
 ms.subservice: common
-ms.openlocfilehash: 0df0ba4ce76d249bcb4738b41c94677e061f14ca
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: f59e4238c983cdb336500a68c52730ae5346b1c7
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79409851"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91612419"
 ---
 # <a name="determine-which-azure-storage-encryption-key-model-is-in-use-for-the-storage-account"></a>Déterminer le modèle de clé de chiffrement Stockage Azure utilisé pour le compte de stockage
 
@@ -78,4 +79,4 @@ Si la valeur de la propriété **keySource** est `Microsoft.Storage`, le compte 
 ## <a name="next-steps"></a>Étapes suivantes
 
 - [Chiffrement du stockage Azure pour les données au repos](storage-service-encryption.md)
-- [Utiliser des clés gérées par le client avec Azure Key Vault pour gérer le chiffrement du stockage Azure](encryption-customer-managed-keys.md)
+- [Clés gérées par le client pour le chiffrement du Stockage Azure](customer-managed-keys-overview.md)

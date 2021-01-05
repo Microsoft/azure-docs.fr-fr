@@ -11,10 +11,10 @@ ms.topic: conceptual
 ms.date: 03/04/2020
 ms.author: jiajzhan
 ms.openlocfilehash: 770e97ad126f66efb43bf8cf7eb12f7510858192
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "78675339"
 ---
 # <a name="speech-service-phonetic-sets"></a>Ensembles phonétiques du service Speech

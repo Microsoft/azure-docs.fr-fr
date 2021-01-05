@@ -5,38 +5,41 @@ ms.service: time-series-insights
 services: time-series-insights
 author: deepakpalled
 ms.author: dpalled
-manager: cshankar
+manager: diviso
 ms.topic: quickstart
 ms.workload: big-data
 ms.custom: mvc seodec18
-ms.date: 04/13/2020
-ms.openlocfilehash: a566c55d2ac51efc5ff2650ad682f10dae2bdc31
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.date: 09/30/2020
+ms.openlocfilehash: dd5ed52187a7cd23142b59e20c91c6d125946a72
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "81271996"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "91613779"
 ---
-# <a name="quickstart-explore-azure-time-series-insights"></a>Démarrage rapide : Explorer Azure Time Series Insights
+# <a name="quickstart-explore-azure-time-series-insights-gen1"></a>Démarrage rapide : Explorer Azure Time Series Insights Gen1
 
-Ce guide de démarrage rapide consacré à l’explorateur Azure Time Series Insights vous aide à démarrer avec Time Series Insights dans un environnement de démonstration gratuit. Ce guide de démarrage rapide explique comment utiliser votre navigateur web pour visualiser de grands volumes de données IoT avant de faire le tour de fonctionnalités clés désormais en disponibilité générale.
+> [!CAUTION]
+> Il s’agit d’un article Gen1.
+
+Ce guide de démarrage rapide consacré à l’Explorateur Azure Time Series Insights vous aide à démarrer avec Azure Time Series Insights dans un environnement de démonstration gratuit. Ce guide de démarrage rapide explique comment utiliser votre navigateur web pour visualiser de grands volumes de données IoT avant de faire le tour de fonctionnalités clés désormais en disponibilité générale.
 
 Azure Time Series Insights est un service entièrement managé d’analyse, de stockage et de visualisation qui simplifie la découverte et l’analyse simultanées de milliards d’événements IoT. Cette solution vous donne une vue globale de vos données afin que vous puissiez valider rapidement votre solution IoT et éviter des temps morts coûteux d’appareils stratégiques. Azure Time Series Insights vous aide à découvrir des tendances masquées, détecter les anomalies et effectuer des analyses de cause première quasiment en temps réel.
 
-Pour plus de flexibilité, vous pouvez ajouter Azure Time Series Insights à des applications préexistantes via ses [API REST](./time-series-insights-update-tsq.md) puissantes et son [kit SDK client](https://github.com/microsoft/tsiclient). Vous pouvez utiliser les API pour stocker, interroger et consommer des données de série chronologique dans l’application cliente de votre choix. Vous pouvez également utiliser le kit SDK client pour ajouter des composants d’interface utilisateur à votre application existante.
+Pour plus de flexibilité, vous pouvez ajouter Azure Time Series Insights à des applications préexistantes via ses [API REST](./concepts-query-overview.md) puissantes et son [kit SDK client](https://github.com/microsoft/tsiclient). Vous pouvez utiliser les API pour stocker, interroger et consommer des données de série chronologique dans l’application cliente de votre choix. Vous pouvez également utiliser le kit SDK client pour ajouter des composants d’interface utilisateur à votre application existante.
 
-Ce guide de démarrage rapide consacré à l’explorateur Time Series Insights propose une visite guidée des fonctionnalités désormais en disponibilité générale.
+Ce guide de démarrage rapide consacré à l’Explorateur Azure Time Series Insights propose une visite guidée des fonctionnalités.
 
 > [!IMPORTANT]
 > Créez un [compte Azure gratuit](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio) si ce n’est déjà fait.
 
 ## <a name="prepare-the-demo-environment"></a>Préparer l’environnement de démonstration
 
-1. Dans votre navigateur, accédez à la [démonstration de la disponibilité générale](https://insights.timeseries.azure.com/demo).
+1. Dans votre navigateur, accédez à la [démonstration Gen1](https://insights.timeseries.azure.com/demo).
 
-1. Si vous y êtes invité, connectez-vous à l’Explorateur Time Series Insights à l’aide de vos informations d’identification de compte Azure.
+1. Si vous y êtes invité, connectez-vous à l’Explorateur Azure Time Series Insights à l’aide de vos informations d’identification de compte Azure.
 
-1. La page de présentation Time Series Insights s’affiche. Sélectionnez **Suivant** pour commencer la visite guidée.
+1. La page de présentation Azure Time Series Insights s’affiche. Sélectionnez **Suivant** pour commencer la visite guidée.
 
    [![Bienvenue dans le tutoriel de démarrage rapide - sélectionnez Suivant](media/quickstart/quickstart-welcome.png)](media/quickstart/quickstart-welcome.png#lightbox)
 
@@ -50,7 +53,7 @@ Ce guide de démarrage rapide consacré à l’explorateur Time Series Insights 
 
    [![Sélectionner un délai d’exécution](media/quickstart/quickstart-select-time.png)](media/quickstart/quickstart-select-time.png#lightbox)
 
-   Time Series Insights affiche une visualisation de graphique pour l’intervalle de temps spécifié. Vous pouvez effectuer diverses actions dans le graphique en courbes. Par exemple, vous pouvez filtrer, épingler, trier et empiler.
+   Azure Time Series Insights affiche une visualisation de graphique pour l’intervalle de temps spécifié. Vous pouvez effectuer diverses actions dans le graphique en courbes. Par exemple, vous pouvez filtrer, épingler, trier et empiler.
 
    Pour revenir au **volet de sélection de temps**, sélectionnez la flèche vers le bas, comme illustré :
 
@@ -91,6 +94,4 @@ Maintenant que vous avez terminé le didacticiel, nettoyez les ressources que vo
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Vous êtes prêt à créer votre propre environnement Time Series Insights :
-> [!div class="nextstepaction"]
-> [Planifier votre environnement Time Series Insights](time-series-insights-environment-planning.md)
+* Vous êtes prêt à créer votre propre environnement Azure Time Series Insights. Consultez [Planifier votre environnement Azure Time Series Insights](time-series-insights-environment-planning.md).

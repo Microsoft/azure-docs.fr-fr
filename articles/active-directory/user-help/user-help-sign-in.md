@@ -12,12 +12,12 @@ ms.topic: end-user-help
 ms.date: 07/18/2019
 ms.author: curtand
 ms.custom: user-help
-ms.openlocfilehash: c7e2b522d475a49f694a8cb57bf57f62900948b0
-ms.sourcegitcommit: 493b27fbfd7917c3823a1e4c313d07331d1b732f
+ms.openlocfilehash: 42ced6632ebfa56af8fe13a02f531b9835e13df3
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83743187"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88799381"
 ---
 # <a name="sign-in-using-two-step-verification-or-security-info"></a>Se connecter à l’aide de la vérification en deux étapes ou des informations de sécurité
 
@@ -90,9 +90,9 @@ Si, pour une raison quelconque, vous ne parvenez pas à utiliser votre méthode 
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- Découvrez les informations de sécurité avec l’article [Security info (preview) overview](user-help-security-info-overview.md) (Vue d’ensemble des informations de sécurité [préversion]).
+- Découvrez les informations de sécurité avec l’article [Security info (preview) overview](./security-info-setup-signin.md) (Vue d’ensemble des informations de sécurité [préversion]).
 
-- Pour plus d’informations sur la vérification en deux étapes, consultez l’article [Vue d’ensemble de la vérification en deux étapes](user-help-two-step-verification-overview.md).
+- Pour plus d’informations sur la vérification en deux étapes, consultez l’article [Vue d’ensemble de la vérification en deux étapes](./multi-factor-authentication-end-user-first-time.md).
 
 - En cas de perte ou d’oubli de votre mot de passe, réinitialisez-le à partir du [portail de réinitialisation de mot de passe](https://passwordreset.microsoftonline.com/).
 

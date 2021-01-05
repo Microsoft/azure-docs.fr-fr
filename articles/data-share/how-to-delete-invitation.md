@@ -1,17 +1,17 @@
 ---
 title: Supprimer une invitation dans Azure Data Share
 description: Découvrez comment supprimer une invitation à un destinataire de partage de données dans Azure Data Share.
-author: joannapea
-ms.author: joanpo
+author: jifems
+ms.author: jife
 ms.service: data-share
-ms.topic: conceptual
-ms.date: 07/10/2019
-ms.openlocfilehash: 97068ce652881818527557dd63a186b5d63a9363
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.topic: how-to
+ms.date: 07/30/2020
+ms.openlocfilehash: 5ba19978a797c2e885e2b1726baad07a87f5bcbc
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "73490489"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87512072"
 ---
 # <a name="how-to-delete-an-invitation-to-a-recipient-in-azure-data-share"></a>Comment supprimer une invitation à un destinataire dans Azure Data Share
 

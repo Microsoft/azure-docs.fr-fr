@@ -5,12 +5,12 @@ description: Découvrez les quotas par défaut, les tailles des références SKU
 services: container-service
 ms.topic: conceptual
 ms.date: 04/09/2019
-ms.openlocfilehash: e3edbcf9603657ce0c747b01b3c59c2923bc0181
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.openlocfilehash: 9592b03f5bd9e9436db5665e040b4afd3b68b764
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82208021"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87562733"
 ---
 # <a name="quotas-virtual-machine-size-restrictions-and-region-availability-in-azure-kubernetes-service-aks"></a>Quotas, restrictions de taille de machine virtuelle et disponibilité des régions dans Azure Kubernetes Service (AKS)
 
@@ -56,5 +56,5 @@ Certains quotas et limites par défaut peuvent être augmentés. Si votre ressou
 [region-availability]: https://azure.microsoft.com/global-infrastructure/services/?products=kubernetes-service
 
 <!-- LINKS - Internal -->
-[vm-skus]: ../virtual-machines/linux/sizes.md
+[vm-skus]: ../virtual-machines/sizes.md
 [nodepool-upgrade]: use-multiple-node-pools.md#upgrade-a-node-pool

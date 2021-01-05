@@ -1,25 +1,27 @@
 ---
-title: Provisionner des appareils hérités en utilisant des clés symétriques – Service Azure IoT Hub Device Provisioning
-description: Guide pratique pour utiliser des clés symétriques afin de provisionner des appareils hérités avec votre instance DPS (Device Provisioning Service)
+title: Provisionner des appareils en utilisant des clés symétriques – Service Azure IoT Hub Device Provisioning
+description: Guide pratique pour utiliser des clés symétriques afin de provisionner des appareils avec votre instance DPS (Device Provisioning Service)
 author: wesmc7777
 ms.author: wesmc
-ms.date: 04/10/2019
+ms.date: 07/13/2020
 ms.topic: conceptual
 ms.service: iot-dps
 services: iot-dps
-manager: philmea
-ms.openlocfilehash: 4d1a92f3ebf32d2270eb77ec9c79fe860ba090e1
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+manager: eliotga
+ms.openlocfilehash: dc33dcd2c80b2a6d4a1cc27778e49dc06ac48b34
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75434711"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94967310"
 ---
-# <a name="how-to-provision-legacy-devices-using-symmetric-keys"></a>Comment provisionner des appareils hérités avec des clés symétriques
+# <a name="how-to-provision-devices-using-symmetric-key-enrollment-groups"></a>Comment approvisionner des appareils à l’aide de groupes d’inscription avec des clés symétriques
 
-Un problème courant avec beaucoup d’appareils hérités est qu’ils ont souvent une identité composée d’un seul élément d’information. Cette information d’identité est généralement une adresse MAC ou un numéro de série. Les appareils hérités peuvent ne pas avoir de certificat, de module de plateforme sécurisée (TPM) ou d’autre fonctionnalité de sécurité utilisable pour identifier l’appareil de façon sécurisée. Le service Device Provisioning pour les hubs IoT inclut l’attestation de clé symétrique. L’attestation de clé symétrique peut être utilisée pour identifier un appareil sur la base d’informations comme l’adresse MAC ou un numéro de série.
+Cet article explique comment approvisionner de façon sécurisée plusieurs appareils avec des clés symétriques sur un seul IoT Hub à l’aide d’un groupe d’inscription.
 
-Si vous pouvez facilement installer un [module de sécurité matériel](concepts-security.md#hardware-security-module) et un certificat, cette approche peut être meilleure pour identifier et provisionner vos appareils. En effet, cette approche peut vous permettre de contourner la mise à jour du code déployé sur tous vos appareils et vous n’avez pas de clé secrète incorporée dans l’image de votre appareil.
+Certains appareils peuvent ne pas avoir de certificat, de module de plateforme sécurisée (TPM) ou d’autre fonctionnalité de sécurité utilisable pour identifier l’appareil de façon sécurisée. Le service Device Provisioning inclut l’[attestation de clé symétrique](concepts-symmetric-key-attestation.md). L’attestation de clé symétrique peut être utilisée pour identifier un appareil sur la base d’informations uniques comme l’adresse MAC ou un numéro de série.
+
+Si vous pouvez facilement installer un [module de sécurité matériel](concepts-service.md#hardware-security-module) et un certificat, cette approche peut être meilleure pour identifier et provisionner vos appareils. En effet, cette approche peut vous permettre de contourner la mise à jour du code déployé sur tous vos appareils et vous n’avez pas de clé secrète incorporée dans l’image de votre appareil.
 
 Cet article suppose que ni un module de sécurité matériel ni un certificat ne sont des options viables. Il est cependant supposé que vous disposez d’une méthode de mise à jour du code de l’appareil pour utiliser le service Device Provisioning afin de provisionner ces appareils. 
 
@@ -45,9 +47,9 @@ Le code de l’appareil montré dans cet article suit le même modèle que le [D
 
 * Avoir effectué les étapes décrites dans le guide de démarrage rapide [Configurer le service IoT Hub Device Provisioning avec le portail Azure](./quick-setup-auto-provision.md).
 
-Les pré-requis suivants sont nécessaires pour un environnement de développement Windows. Pour Linux ou macOS, consultez la section appropriée de [Préparer votre environnement de développement](https://github.com/Azure/azure-iot-sdk-c/blob/master/doc/devbox_setup.md) dans la documentation du kit de développement logiciel (SDK).
+Les prérequis suivants s’appliquent à un environnement de développement Windows. Pour Linux ou macOS, consultez la section appropriée de [Préparer votre environnement de développement](https://github.com/Azure/azure-iot-sdk-c/blob/master/doc/devbox_setup.md) dans la documentation du kit de développement logiciel (SDK).
 
-* [Visual Studio](https://visualstudio.microsoft.com/vs/) 2019 avec la charge de travail [« Développement Desktop en C++ »](https://docs.microsoft.com/cpp/?view=vs-2019#pivot=workloads) activée. Visual Studio 2015 et Visual Studio 2017 sont également pris en charge.
+* [Visual Studio](https://visualstudio.microsoft.com/vs/) 2019 avec la charge de travail [« Développement Desktop en C++ »](/cpp/ide/using-the-visual-studio-ide-for-cpp-desktop-development) activée. Visual Studio 2015 et Visual Studio 2017 sont également pris en charge.
 
 * Dernière version de [Git](https://git-scm.com/download/) installée.
 
@@ -86,7 +88,7 @@ Le SDK inclut l’exemple de code pour l’appareil simulé. Cet appareil simul�
     cmake -Dhsm_type_symm_key:BOOL=ON -Duse_prov_client:BOOL=ON  ..
     ```
     
-    Si `cmake` ne trouve pas votre compilateur C++, vous obtiendrez peut-être des erreurs de build lors de l’exécution de la commande ci-dessus. Si cela se produit, essayez d’exécuter cette commande dans [l’invite de commandes de Visual Studio](https://docs.microsoft.com/dotnet/framework/tools/developer-command-prompt-for-vs). 
+    Si `cmake` ne trouve pas votre compilateur C++, vous obtiendrez peut-être des erreurs de build lors de l’exécution de la commande ci-dessus. Si cela se produit, essayez d’exécuter cette commande dans [l’invite de commandes de Visual Studio](/dotnet/framework/tools/developer-command-prompt-for-vs). 
 
     Une fois la génération terminée, les dernières lignes de sortie doivent ressembler à la sortie suivante :
 
@@ -113,15 +115,15 @@ Le SDK inclut l’exemple de code pour l’appareil simulé. Cet appareil simul�
 
 3. Dans **Ajouter un groupe d’inscriptions**, entrez les informations suivantes, puis cliquez sur le bouton **Enregistrer**.
 
-   - **Nom du groupe** : entrez **mylegacydevices**.
+   - **Nom du groupe** : entrez **mylegacydevices**.
 
-   - **Type d’attestation** : sélectionnez **Clé symétrique**.
+   - **Type d’attestation** : sélectionnez **Clé symétrique**.
 
-   - **Générer automatiquement les clés** : cochez cette case.
+   - **Générer automatiquement les clés** : cochez cette case.
 
-   - **Sélectionner le mode d’affectation des appareils aux hubs** : sélectionnez **Configuration statique** afin de les affecter à un hub spécifique.
+   - **Sélectionner le mode d’affectation des appareils aux hubs** : sélectionnez **Configuration statique** pour pouvoir affecter à un hub spécifique.
 
-   - **Sélectionner les hubs IoT auxquels ce groupe peut être attribué** : sélectionnez un de vos hubs.
+   - **Sélectionner les hubs IoT auxquels ce groupe peut être affecté** : sélectionnez un de vos hubs.
 
      ![Ajouter un groupe d’inscription pour l’attestation de clé symétrique](./media/how-to-legacy-device-symm-key/symm-key-enrollment-group.png)
 
@@ -147,7 +149,8 @@ Créez un ID d’inscription unique pour votre appareil. Les caractères valides
 
 Pour générer la clé de l’appareil, calculez le code [HMAC-SHA256](https://wikipedia.org/wiki/HMAC) de l’ID d’inscription unique de l’appareil en utilisant la clé de groupe principale, puis convertissez le résultat au format Base64.
 
-N’incluez pas votre clé de groupe principale dans le code de l’appareil.
+> [!WARNING]
+> Votre code d’appareil doit inclure uniquement la clé d’appareil dérivée pour l’appareil individuel. N’incluez pas votre clé de groupe principale dans le code de l’appareil. Une clé principale compromise est susceptible de compromettre la sécurité de tous les appareils qui y sont authentifiés.
 
 
 #### <a name="linux-workstations"></a>Stations de travail Linux
@@ -205,7 +208,7 @@ Dans cette section, vous allez mettre à jour un exemple de provisionnement nomm
 
 Cet exemple de code simule une séquence de démarrage d’un appareil qui envoie la demande de provisionnement à votre instance du service Device Provisioning. La séquence de démarrage entraîne la reconnaissance de l’appareil et son affectation au hub IoT que vous avez configuré sur le groupe d’inscription.
 
-1. Dans le portail Azure, sélectionnez l’onglet **Vue d’ensemble** de votre service Device Provisioning et notez les valeurs de **_Étendue de l’ID_** .
+1. Dans le portail Azure, sélectionnez l’onglet **Vue d’ensemble** de votre service Device Provisioning et notez les valeurs de **_Étendue de l’ID_**.
 
     ![Extraction des informations de point de terminaison du service Device Provisioning à partir du panneau du Portail](./media/quick-create-simulated-device-x509/extract-dps-endpoints.png) 
 
@@ -246,7 +249,7 @@ Cet exemple de code simule une séquence de démarrage d’un appareil qui envoi
     prov_dev_set_symmetric_key_info("sn-007-888-abc-mac-a1-b2-c3-d4-e5-f6", "Jsm0lyGpjaVYVP2g3FnmnmG9dI/9qU24wNoykUmermc=");
     ```
    
-    Enregistrez le fichier .
+    Enregistrez le fichier.
 
 7. Cliquez avec le bouton droit sur le projet **prov\_dev\_client\_sample** et sélectionnez **Définir comme projet de démarrage**. 
 
@@ -286,16 +289,5 @@ Ne perdez pas de vue que ceci laisse la clé d’appareil dérivée incluse dans
 ## <a name="next-steps"></a>Étapes suivantes
 
 * Pour en savoir plus sur le reprovisionnement, consultez [Concepts du reprovisionnement d’appareils IoT Hub](concepts-device-reprovision.md) 
-* [Démarrage rapide : provisionner un appareil simulé avec des clés symétriques](quick-create-simulated-device-symm-key.md)
-* Pour en savoir plus sur le déprovisionnement, consultez [Guide pratique pour déprovisionner des appareils auparavant provisionnés automatiquement](how-to-unprovision-devices.md) 
-
-
-
-
-
-
-
-
-
-
-
+* [Démarrage rapide : provisionner un appareil simulé avec des clés symétriques](quick-create-simulated-device-symm-key.md)
+* Pour en savoir plus sur le déprovisionnement, consultez [Guide pratique pour déprovisionner des appareils auparavant provisionnés automatiquement](how-to-unprovision-devices.md)

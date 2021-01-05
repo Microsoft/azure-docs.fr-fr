@@ -3,25 +3,25 @@ title: Créer un package d’accès dans la gestion des droits d’utilisation �
 description: Découvrez comment créer un package d’accès de ressources que vous souhaitez partager dans la gestion des droits d’utilisation Azure Active Directory.
 services: active-directory
 documentationCenter: ''
-author: msaburnley
+author: ajburnle
 manager: daveba
 editor: ''
 ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.subservice: compliance
-ms.date: 10/15/2019
+ms.date: 06/18/2020
 ms.author: ajburnle
 ms.reviewer: ''
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 7c858a17d4574e6e45283df7c1276cd303f25297
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: b2ce3b362d02e7acb0a11e6d93b8e94ca8e4d04e
+ms.sourcegitcommit: 80c1056113a9d65b6db69c06ca79fa531b9e3a00
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79230401"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96903528"
 ---
 # <a name="create-a-new-access-package-in-azure-ad-entitlement-management"></a>Créer un package d’accès dans la gestion des droits d’utilisation Azure AD
 
@@ -99,13 +99,16 @@ Sous l’onglet **Rôles de ressources**, sélectionnez les ressources à inclur
 
     Si vous créez le package d’accès dans un catalogue existant, vous pouvez sélectionner n’importe quelle ressource déjà présente dans le catalogue sans avoir à en être propriétaire.
 
-    Si vous êtes Administrateur général, Administrateur d’utilisateurs ou Propriétaire de catalogue, vous avez également la possibilité de sélectionner des ressources que vous possédez et qui ne sont pas encore dans le catalogue. Si vous sélectionnez des ressources qui ne sont actuellement pas présentes dans le catalogue sélectionné, ces ressources sont ajoutées au catalogue pour que d’autres administrateurs du catalogue puissent créer des packages d’accès à partir de ces dernières. Si les ressources que vous souhaitez sélectionner se trouvent actuellement dans le catalogue choisi, cochez la case **Voir uniquement** en haut du volet Sélectionner.
+    Si vous êtes Administrateur général, Administrateur d’utilisateurs ou Propriétaire de catalogue, vous avez également la possibilité de sélectionner des ressources que vous possédez et qui ne sont pas encore dans le catalogue. Si vous sélectionnez des ressources qui ne sont actuellement pas présentes dans le catalogue sélectionné, ces ressources sont ajoutées au catalogue pour que d’autres administrateurs du catalogue puissent créer des packages d’accès à partir de ces dernières. Pour afficher toutes les ressources qui peuvent être ajoutées au catalogue, cochez la case **Afficher tout** en haut du volet Sélectionner. Si vous souhaitez uniquement sélectionner les ressources qui se trouvent actuellement dans le catalogue sélectionné, laissez la case à cocher **Afficher tout** désactivée (état par défaut).
 
 1. Une fois que vous avez sélectionné les ressources, dans la liste **Rôle**, sélectionnez le rôle à assigner aux utilisateurs pour les ressources.
 
     ![Package d’accès - Sélection du rôle des ressources](./media/entitlement-management-access-package-create/resource-roles-role.png)
 
 1. Cliquez sur **Suivant**.
+
+>[!NOTE]
+>Vous pouvez ajouter des groupes dynamiques à un catalogue et à un package d’accès. Toutefois, si vous gérez une ressource de groupe dynamique dans un package d’accès, vous ne pourrez sélectionner que le rôle Propriétaire.
 
 ## <a name="requests"></a>Demandes
 
@@ -125,7 +128,7 @@ Sous l’onglet **Vérifier + créer**, vous pouvez consulter vos paramètres et
 
 1. Vérifier les paramètres du package d’accès
 
-    ![Package d’accès - Stratégie - Paramètre Activer la stratégie](./media/entitlement-management-access-package-create/review-create.png)
+    ![Package d’accès – Activer le paramètre de stratégie](./media/entitlement-management-access-package-create/review-create.png)
 
 1. Cliquez sur **Créer** pour créer le package d’accès.
 
@@ -135,11 +138,11 @@ Sous l’onglet **Vérifier + créer**, vous pouvez consulter vos paramètres et
 
 Vous pouvez également créer un package d’accès à l’aide de Microsoft Graph.  Un utilisateur doté d’un rôle approprié avec une application disposant de l’autorisation déléguée `EntitlementManagement.ReadWrite.All` peut appeler l’API pour
 
-1. [Répertorier les ressources accessPackageResources dans le catalogue](https://docs.microsoft.com/graph/api/accesspackagecatalog-list-accesspackageresources?view=graph-rest-beta) et [créer une demande accessPackageResourceRequest](https://docs.microsoft.com/graph/api/accesspackageresourcerequest-post?view=graph-rest-beta) pour toutes les ressources qui ne figurent pas encore dans le catalogue.
-1. [Répertorier les rôles accessPackageResourceRoles](https://docs.microsoft.com/graph/api/accesspackagecatalog-list-accesspackageresourceroles?view=graph-rest-beta) de chaque ressources accessPackageResource dans un catalogue accessPackageCatalog. Cette liste de rôles est ensuite utilisée pour sélectionner un rôle lors de la création ultérieure d’une étendue accessPackageResourceRoleScope.
-1. [Créer un package accessPackage](https://docs.microsoft.com/graph/api/accesspackage-post?view=graph-rest-beta).
-1. [Créer une stratégie accessPackageAssignmentPolicy](https://docs.microsoft.com/graph/api/accesspackageassignmentpolicy-post?view=graph-rest-beta).
-1. [Créer une étendue accessPackageResourceRoleScope](https://docs.microsoft.com/graph/api/accesspackage-post-accesspackageresourcerolescopes?view=graph-rest-beta) pour chaque rôle de ressource nécessaire dans le package d’accès.
+1. [Répertorier les ressources accessPackageResources dans le catalogue](/graph/api/accesspackagecatalog-list?tabs=http&view=graph-rest-beta) et [créer une demande accessPackageResourceRequest](/graph/api/accesspackageresourcerequest-post?tabs=http&view=graph-rest-beta) pour toutes les ressources qui ne figurent pas encore dans le catalogue.
+1. [Répertorier les rôles accessPackageResourceRoles](/graph/api/accesspackage-list-accesspackageresourcerolescopes?tabs=http&view=graph-rest-beta) de chaque ressources accessPackageResource dans un catalogue accessPackageCatalog. Cette liste de rôles est ensuite utilisée pour sélectionner un rôle lors de la création ultérieure d’une étendue accessPackageResourceRoleScope.
+1. [Créer un package accessPackage](/graph/tutorial-access-package-api?view=graph-rest-beta).
+1. [Créer une stratégie accessPackageAssignmentPolicy](/graph/api/accesspackageassignmentpolicy-post?tabs=http&view=graph-rest-beta).
+1. [Créer une étendue accessPackageResourceRoleScope](/graph/api/accesspackage-post-accesspackageresourcerolescopes?tabs=http&view=graph-rest-beta) pour chaque rôle de ressource nécessaire dans le package d’accès.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

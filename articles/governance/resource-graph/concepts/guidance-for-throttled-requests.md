@@ -1,14 +1,15 @@
 ---
 title: Instructions pour les requêtes limitées
 description: Apprenez à regrouper, échelonner, paginer et interroger en parallèle pour éviter que les demandes soient limitées par Azure Resource Graph.
-ms.date: 12/02/2019
+ms.date: 10/14/2020
 ms.topic: conceptual
-ms.openlocfilehash: fbd4bec715b187bcc643fe32b8452b0e062e7713
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 4a8ba991d13b9be221e67f2ff1e393fb01f8a2d4
+ms.sourcegitcommit: 1b47921ae4298e7992c856b82cb8263470e9e6f9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79229737"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92056172"
 ---
 # <a name="guidance-for-throttled-requests-in-azure-resource-graph"></a>Conseils pour les requêtes limitées dans Azure Resource Graph
 
@@ -29,6 +30,8 @@ Dans chaque réponse de requête, Azure Resource Graph ajoute deux en-têtes de 
 
 - `x-ms-user-quota-remaining` (int) : quota de ressources restant pour l'utilisateur. Cette valeur correspond au nombre de requêtes.
 - `x-ms-user-quota-resets-after` (hh:mm:ss) : délai à attendre avant la réinitialisation de la consommation du quota d’un utilisateur.
+
+Quand un principal de sécurité a accès à plus de 5 000 abonnements au sein du client ou du groupe d’administration [étendue de la requête](./query-language.md#query-scope), la réponse est limitée aux 5 000 premiers abonnements et l’en-tête `x-ms-tenant-subscription-limit-hit` est retourné en tant que `true`.
 
 Pour illustrer le fonctionnement des en-têtes, jetons un œil à une réponse de requête qui a les en-têtes et valeurs `x-ms-user-quota-remaining: 10` et `x-ms-user-quota-resets-after: 00:00:03`.
 
@@ -129,7 +132,7 @@ En raison de la manière dont la limitation est appliquée, nous vous recommando
   |---------------------|-----|------|-------|-------|
   | Intervalle de temps (sec) | 0-5 | 5-10 | 10-15 | 15-20 |
 
-Voici un exemple du respect des en-têtes de limitation lors de l’interrogation d’Azure Resource Graph :
+Voici un exemple montrant comment respecter les en-têtes de limitation lors de l’interrogation d’Azure Resource Graph :
 
 ```csharp
 while (/* Need to query more? */)
@@ -153,7 +156,7 @@ while (/* Need to query more? */)
 
 ### <a name="query-in-parallel"></a>Interroger en parallèle
 
-Bien que le regroupement soit préférable à la parallélisation, il arrive parfois que les requêtes soient difficiles à regrouper. Dans ces cas-là, vous souhaiterez peut-être interroger Azure Resource Graph en envoyant plusieurs requêtes de manière parallèle. Voici un exemple montrant comment effectuer une _interruption_ sur la base des en-têtes de limitation dans ce genre de scénario :
+Bien que le regroupement soit préférable à la parallélisation, il arrive parfois que les requêtes soient difficiles à regrouper. Dans ces cas-là, vous souhaiterez peut-être interroger Azure Resource Graph en envoyant plusieurs requêtes de manière parallèle. Voici un exemple montrant comment effectuer une _interruption_ en fonction des en-têtes de limitation dans ce genre de scénario :
 
 ```csharp
 IEnumerable<IEnumerable<string>> queryGroup = /* Groups of queries  */
@@ -216,7 +219,7 @@ async Task ExecuteQueries(IEnumerable<string> queries)
 
 - Azure CLI / Azure PowerShell
 
-  Quand vous utilisez Azure CLI ou Azure PowerShell, les requêtes envoyées à Azure Resource Graph sont automatiquement paginées afin d’extraire au maximum 5000 entrées. Les résultats de requête retournent une liste combinée d’entrées à partir de tous les appels paginés. Dans ce cas, en fonction du nombre d’entrées dans le résultat de requête, une requête paginée peut consommer plus d’un quota de requête. Par exemple, dans l’exemple ci-dessous, une seule exécution de la requête peut consommer jusqu’à cinq quotas de requête :
+  Quand vous utilisez Azure CLI ou Azure PowerShell, les requêtes envoyées à Azure Resource Graph sont automatiquement paginées afin d’extraire au maximum 5000 entrées. Les résultats de requête retournent une liste combinée d’entrées à partir de tous les appels paginés. Dans ce cas, en fonction du nombre d’entrées dans le résultat de requête, une requête paginée peut consommer plus d’un quota de requête. Dans les exemples suivants, une seule exécution de la requête peut consommer jusqu’à cinq quotas de requête :
 
   ```azurecli-interactive
   az graph query -q 'Resources | project id, name, type' --first 5000
@@ -235,7 +238,7 @@ Fournissez les détails suivants :
 - Votre cas d’usage spécifique et les axes stratégiques qui imposent de disposer d’une limite plus élevée.
 - À combien de ressources avez-vous accès ? Combien d’entre elles sont retournées par une requête unique ?
 - Quels sont les types de ressources qui vous intéressent ?
-- Quel est votre modèle de requête ? X requêtes toutes les Y secondes, etc.
+- Quel est votre modèle de requête ? X requêtes toutes les Y secondes, etc.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

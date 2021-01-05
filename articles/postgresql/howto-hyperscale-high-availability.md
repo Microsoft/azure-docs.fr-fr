@@ -5,14 +5,14 @@ author: jonels-msft
 ms.author: jonels
 ms.service: postgresql
 ms.subservice: hyperscale-citus
-ms.topic: conceptual
-ms.date: 11/04/2019
-ms.openlocfilehash: 78e6e8c18e67ce2dff0de94d298f06693a40135f
-ms.sourcegitcommit: b9d4b8ace55818fcb8e3aa58d193c03c7f6aa4f1
+ms.topic: how-to
+ms.date: 07/27/2020
+ms.openlocfilehash: 46b842994cbcf7efe66d5992c79246d77626e268
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82584054"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90907394"
 ---
 # <a name="configure-hyperscale-citus-high-availability"></a>Configurer la haute disponibilité Hyperscale (Citus)
 
@@ -21,15 +21,15 @@ Azure Database pour PostgreSQL - Hyperscale (Citus) fournit une haute disponibi
 > [!IMPORTANT]
 > Étant donné que la haute disponibilité double le nombre de serveurs d’un groupe, elle doublera également le coût.
 
-Il est possible d’activer la haute disponibilité lors de la création d’un groupe de serveurs, ou par la suite sous l’onglet **Configurer** de votre groupe de serveurs dans le portail Azure. L’interface utilisateur est similaire dans les deux cas. Faites glisser le curseur de l’option **Haute disponibilité** sur OUI :
+Il est possible d’activer la haute disponibilité lors de la création d’un groupe de serveurs, ou par la suite sous l’onglet **Calcul + stockage** pour votre groupe de serveurs dans le portail Azure. L’interface utilisateur est similaire dans les deux cas. Faites coulisser le curseur de l’option **Haute disponibilité** de NON vers OUI :
 
-![Curseur de haute disponibilité](./media/howto-hyperscale-high-availability/01-ha-slider.png)
+:::image type="content" source="./media/howto-hyperscale-high-availability/01-ha-slider.png" alt-text="Curseur de haute disponibilité":::
 
 Cliquez sur le bouton **Enregistrer** pour appliquer votre sélection. L’activation de la haute disponibilité peut prendre un certain temps, car le groupe de serveurs provisionne des nœuds de secours et leur envoie des données en streaming.
 
 L’onglet **Vue d’ensemble** du groupe de serveurs liste tous les nœuds et leurs nœuds de secours, ainsi qu’une colonne **Haute disponibilité** indiquant si la haute disponibilité est correctement activée pour chaque nœud.
 
-![Vue d’ensemble de la colonne Haute disponibilité dans le groupe de serveurs](./media/howto-hyperscale-high-availability/02-ha-column.png)
+:::image type="content" source="./media/howto-hyperscale-high-availability/02-ha-column.png" alt-text="Curseur de haute disponibilité":::
 
 ### <a name="next-steps"></a>Étapes suivantes
 

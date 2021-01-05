@@ -6,12 +6,12 @@ ms.devlang: powershell
 ms.topic: sample
 ms.date: 10/27/2017
 ms.author: tomfitz
-ms.openlocfilehash: e076128a5be453028635b1657bf3f90980863148
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: a2687e9c943df8454ff42a17f44866dcdb7f4730
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "75648936"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86055883"
 ---
 # <a name="deploy-a-managed-application-for-a-service-catalog-with-powershell"></a>Déployer une application managée pour un catalogue de services avec PowerShell
 
@@ -33,10 +33,10 @@ Ce script utilise la commande suivante pour déployer l’application managée. 
 
 | Commande | Notes |
 |---|---|
-| [New-AzManagedApplication](https://docs.microsoft.com/powershell/module/az.resources/new-azmanagedapplication) | Créer une application managée. Fournir les paramètres et l’ID de définition pour le modèle. |
+| [New-AzManagedApplication](/powershell/module/az.resources/new-azmanagedapplication) | Créer une application managée. Fournir les paramètres et l’ID de définition pour le modèle. |
 
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 * Pour voir une présentation des applications gérées, consultez [Vue d’ensemble des applications gérées Azure](../overview.md).
-* Pour plus d’informations sur PowerShell, consultez la [documentation Azure PowerShell](https://docs.microsoft.com/powershell/azure/get-started-azureps).
+* Pour plus d’informations sur PowerShell, consultez la [documentation Azure PowerShell](/powershell/azure/get-started-azureps).

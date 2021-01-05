@@ -11,12 +11,12 @@ ms.custom:
 ms.author: timlt
 author: timlt
 ms.date: 11/12/2019
-ms.openlocfilehash: 50dd6038a8642f13cea7840fff723a5cf12ce2dd
-ms.sourcegitcommit: 25490467e43cbc3139a0df60125687e2b1c73c09
+ms.openlocfilehash: fc8928c9f64e323aafb29c9b1e717cc5c2ab6691
+ms.sourcegitcommit: fa807e40d729bf066b9b81c76a0e8c5b1c03b536
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/09/2020
-ms.locfileid: "80999779"
+ms.lasthandoff: 12/11/2020
+ms.locfileid: "97346705"
 ---
 # <a name="tutorial-create-an-in-store-analytics-application-in-azure-iot-central"></a>Tutoriel : Créer une application d’analytique en magasin dans Azure IoT Central
 
@@ -148,7 +148,7 @@ Pour ajouter un modèle d’appareil RuuviTag à votre application :
 
 1. Sélectionnez **Suivant : Personnaliser**.
 
-    ![Modèle d’appareil du capteur RuuviTag Azure IoT Central](./media/tutorial-in-store-analytics-create-app/ruuvitag-device-template.png)
+    ![Capture d’écran mettant en évidence le bouton Suivant : Personnaliser.](./media/tutorial-in-store-analytics-create-app/ruuvitag-device-template.png)
 
 1. Sélectionnez **Create** (Créer). L’application ajoute le modèle d’appareil RuuviTag.
 
@@ -191,7 +191,7 @@ Pour le type de télémétrie `humidity`, apportez les modifications suivantes 
 
 1. Cliquez sur **Enregistrer** pour enregistrer vos modifications.
 
-    ![Personnalisation du modèle d’appareil RuuviTag Azure IoT Central](./media/tutorial-in-store-analytics-create-app/ruuvitag-device-template-customize.png)
+    ![Capture d’écran affichant l’écran Personnaliser et mettant en évidence le bouton Enregistrer.](./media/tutorial-in-store-analytics-create-app/ruuvitag-device-template-customize.png)
 
 Pour ajouter une propriété cloud à un modèle d’appareil dans votre application :
 

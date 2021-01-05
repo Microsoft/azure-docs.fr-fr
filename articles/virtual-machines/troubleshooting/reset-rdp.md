@@ -14,16 +14,16 @@ ms.tgt_pltfrm: vm-windows
 ms.topic: troubleshooting
 ms.date: 03/25/2019
 ms.author: genli
-ms.openlocfilehash: 580ec443dc087f270e30856c336a5699bbf1ae71
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 80bcac36271d86334e11cb3cd161cd96777e6fe5
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "71058439"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87832448"
 ---
 # <a name="reset-remote-desktop-services-or-its-administrator-password-in-a-windows-vm"></a>Réinitialiser les Services Bureau à distance ou le mot de passe administrateur associé dans une machine virtuelle Windows
 Si vous ne pouvez pas vous connecter à une machine virtuelle Windows, vous pouvez réinitialiser le mot de passe d’administrateur local ou la configuration du service Bureau à distance (pas de prise en charge sur les contrôleurs de domaine Windows). Pour réinitialiser le mot de passe, utilisez le Portail Azure ou l’extension d’accès aux machines virtuelles dans Azure PowerShell. Une fois connecté à la machine virtuelle, réinitialisez le mot de passe de cet administrateur local.  
-Si vous utilisez PowerShell, assurez-vous d’avoir [installé et configuré le dernier module PowerShell](/powershell/azure/overview) et d’être connecté à votre abonnement Azure. Vous pouvez également [effectuer ces étapes pour les machines virtuelles créées à l’aide du modèle de déploiement classique](https://docs.microsoft.com/azure/virtual-machines/windows/classic/reset-rdp).
+Si vous utilisez PowerShell, assurez-vous d’avoir [installé et configuré le dernier module PowerShell](/powershell/azure/) et d’être connecté à votre abonnement Azure. Vous pouvez également [effectuer ces étapes pour les machines virtuelles créées à l’aide du modèle de déploiement classique](/previous-versions/azure/virtual-machines/windows/classic/reset-rdp).
 
 Vous pouvez réinitialiser les informations d’identification et les Services Bureau à distance de plusieurs manières :
 
@@ -55,11 +55,11 @@ Ce processus a pour effet d’activer le service Bureau à distance dans la mach
 
 ## <a name="reset-by-using-the-vmaccess-extension-and-powershell"></a>Réinitialisation en utilisant l’extension VMAccess et PowerShell
 
-Commencez par vérifier que le [dernier module PowerShell est installé et configuré](/powershell/azure/overview) et que vous êtes connecté à votre abonnement Azure à l’aide de l’applet de commande [Connect-AzAccount](https://docs.microsoft.com/powershell/module/az.accounts/connect-azaccount).
+Commencez par vérifier que le [dernier module PowerShell est installé et configuré](/powershell/azure/) et que vous êtes connecté à votre abonnement Azure à l’aide de l’applet de commande [Connect-AzAccount](/powershell/module/az.accounts/connect-azaccount).
 
 ### <a name="reset-the-local-administrator-account-password"></a>**Réinitialiser le mot de passe de compte d’administrateur local**
 
-- Réinitialisez le mot de passe ou le nom d’utilisateur de l’administrateur à l’aide de l’applet de commande PowerShell [Set-AzVMAccessExtension](https://docs.microsoft.com/powershell/module/az.compute/set-azvmaccessextension). La version du paramètre `typeHandlerVersion` doit être 2.0 ou ultérieure, car la version 1 est déconseillée. 
+- Réinitialisez le mot de passe ou le nom d’utilisateur de l’administrateur à l’aide de l’applet de commande PowerShell [Set-AzVMAccessExtension](/powershell/module/az.compute/set-azvmaccessextension). La version du paramètre `typeHandlerVersion` doit être 2.0 ou ultérieure, car la version 1 est déconseillée. 
 
     ```powershell
     $SubID = "<SUBSCRIPTION ID>" 
@@ -77,7 +77,7 @@ Commencez par vérifier que le [dernier module PowerShell est installé et confi
 
 ### <a name="reset-the-remote-desktop-services-configuration"></a>**Réinitialiser la configuration des Services Bureau à distance**
 
-1. Réinitialisez l’accès à distance à votre machine virtuelle avec l’applet de commande PowerShell [Set-AzVMAccessExtension](https://docs.microsoft.com/powershell/module/az.compute/set-azvmaccessextension). L’exemple suivant réinitialise l’extension d’accès nommée `myVMAccess`, sur la machine virtuelle nommée `myVM`, dans le groupe de ressources nommé `myResourceGroup` :
+1. Réinitialisez l’accès à distance à votre machine virtuelle avec l’applet de commande PowerShell [Set-AzVMAccessExtension](/powershell/module/az.compute/set-azvmaccessextension). L’exemple suivant réinitialise l’extension d’accès nommée `myVMAccess`, sur la machine virtuelle nommée `myVM`, dans le groupe de ressources nommé `myResourceGroup` :
 
     ```powershell
     Set-AzVMAccessExtension -ResourceGroupName "myResoureGroup" -VMName "myVM" -Name "myVMAccess" -Location WestUS -typeHandlerVersion "2.0" -ForceRerun
@@ -94,7 +94,6 @@ Commencez par vérifier que le [dernier module PowerShell est installé et confi
 
 - [En savoir plus sur les extensions et fonctionnalités des machines virtuelles Azure](../extensions/features-windows.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)
 
-- [Connecter une machine virtuelle Azure avec RDP ou SSH](https://msdn.microsoft.com/library/azure/dn535788.aspx)
+- [Connecter une machine virtuelle Azure avec RDP ou SSH](/previous-versions/azure/dn535788(v=azure.100))
 
 - [Résoudre les problèmes de connexion Bureau à distance à une machine virtuelle Azure exécutant Windows](troubleshoot-rdp-connection.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)
-

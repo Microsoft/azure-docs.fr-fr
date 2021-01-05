@@ -9,12 +9,12 @@ ms.topic: article
 ms.service: azure-vmware-cloudsimple
 ms.reviewer: cynthn
 manager: dikamath
-ms.openlocfilehash: a2fe7daf1476f19f6a6eea83174342fa1273fe14
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 487308aca3231650aee3fac5ae127006649e19b9
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81867977"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87073907"
 ---
 # <a name="quickstart---configure-a-private-cloud-environment"></a>Démarrage rapide - Configurer un environnement de cloud privé
 
@@ -148,7 +148,7 @@ Le réseau local virtuel/sous-réseau sera créé.  Vous pouvez désormais utili
 
 ## <a name="connect-your-environment-to-an-azure-virtual-network"></a>Connecter votre environnement à un réseau virtuel Azure
 
-CloudSimple vous fournit un circuit ExpressRoute pour votre cloud privé. Vous pouvez connecter votre réseau virtuel sur Azure au circuit ExpressRoute. Pour plus d’informations sur la configuration de la connexion, suivez les étapes indiquées dans [Connexion au réseau virtuel Azure à l’aide d’ExpressRoute](https://docs.microsoft.com/azure/vmware-cloudsimple/cloudsimple-azure-network-connection).
+CloudSimple vous fournit un circuit ExpressRoute pour votre cloud privé. Vous pouvez connecter votre réseau virtuel sur Azure au circuit ExpressRoute. Pour plus d’informations sur la configuration de la connexion, suivez les étapes indiquées dans [Connexion au réseau virtuel Azure à l’aide d’ExpressRoute](./cloudsimple-azure-network-connection.md).
 
 ## <a name="sign-in-to-vcenter"></a>Se connecter à vCenter
 

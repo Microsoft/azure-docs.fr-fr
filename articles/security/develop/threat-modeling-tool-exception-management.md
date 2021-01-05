@@ -1,6 +1,6 @@
 ---
 title: Gestion des exceptions - Outil Microsoft de modélisation des menaces - Azure | Microsoft Docs
-description: Mesures de correction des menaces exposées dans l’outil de modélisation des menaces
+description: En savoir plus sur la gestion des exceptions dans l’outil Threat Modeling Tool. Voir les informations sur l’atténuation et les exemples de code.
 services: security
 documentationcenter: na
 author: jegeib
@@ -15,12 +15,13 @@ ms.devlang: na
 ms.topic: article
 ms.date: 02/07/2017
 ms.author: jegeib
-ms.openlocfilehash: 074098c3adae0dd8ff2a127d819e2b3630b754da
-ms.sourcegitcommit: fdec8e8bdbddcce5b7a0c4ffc6842154220c8b90
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 41532e554623c47e9728c6ccab92d99500e42021
+ms.sourcegitcommit: 5831eebdecaa68c3e006069b3a00f724bea0875a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83650090"
+ms.lasthandoff: 11/11/2020
+ms.locfileid: "94517425"
 ---
 # <a name="security-frame-exception-management--mitigations"></a>Infrastructure de sécurité : gestion des exceptions | Atténuation des risques 
 | Produit/Service | Article |
@@ -37,7 +38,7 @@ ms.locfileid: "83650090"
 | **Phase SDL**               | Build |  
 | **Technologies applicables** | Générique, NET Framework 3 |
 | **Attributs**              | N/A  |
-| **Informations de référence**              | [MSDN](https://msdn.microsoft.com/library/ff648500.aspx), [Fortify Kingdom](https://vulncat.fortify.com/en/detail?id=desc.config.dotnet.wcf_misconfiguration_debug_information) |
+| **Informations de référence**              | [MSDN](/previous-versions/msp-n-p/ff648500(v=pandp.10)), [Fortify Kingdom](https://vulncat.fortify.com/en/detail?id=desc.config.dotnet.wcf_misconfiguration_debug_information) |
 | **Étapes** | Des services Windows Communication Framework (WCF) peuvent être configurés pour exposer des informations de débogage. Les informations de débogage ne doivent pas être utilisées dans les environnements de production. La balise `<serviceDebug>` définit si la fonctionnalité d’informations de débogage est activée pour un service WCF. Si l’attribut includeExceptionDetailInFaults est défini sur true, les informations sur les exceptions de l’application sont renvoyées aux clients. Les personnes malveillantes peuvent exploiter les informations supplémentaires qu’elles obtiennent de la sortie de débogage pour lancer des attaques ciblées sur l’infrastructure, la base de données ou d’autres ressources utilisées par l’application. |
 
 ### <a name="example"></a>Exemple
@@ -61,7 +62,7 @@ Désactivez les informations de débogage dans le service. Ceci peut être effec
 | **Phase SDL**               | Build |  
 | **Technologies applicables** | Générique |
 | **Attributs**              | Générique, NET Framework 3 |
-| **Informations de référence**              | [MSDN](https://msdn.microsoft.com/library/ff648500.aspx), [Fortify Kingdom](https://vulncat.fortify.com/en/detail?id=desc.config.dotnet.wcf_misconfiguration_service_enumeration) |
+| **Informations de référence**              | [MSDN](/previous-versions/msp-n-p/ff648500(v=pandp.10)), [Fortify Kingdom](https://vulncat.fortify.com/en/detail?id=desc.config.dotnet.wcf_misconfiguration_service_enumeration) |
 | **Étapes** | L’exposition publique des informations sur un service peut fournir aux personnes malveillantes une piste précieuse sur la manière dont elles peuvent exploiter le service. La balise `<serviceMetadata>` active la fonctionnalité de publication de métadonnées. Les métadonnées de service peuvent contenir des informations sensibles qui ne doivent pas être accessibles publiquement. Au minimum, autorisez uniquement les utilisateurs approuvés à accéder aux métadonnées et vérifiez que les informations inutiles ne sont pas exposées. Mieux encore, désactivez complètement la possibilité de publier des métadonnées. Une configuration WCF sûre ne contiendra pas la balise `<serviceMetadata>`. |
 
 ## <a name="ensure-that-proper-exception-handling-is-done-in-aspnet-web-api"></a><a id="exception"></a>Vérifier que la gestion des exceptions correcte est effectuée dans l’API web ASP.NET
@@ -201,7 +202,7 @@ Vérifiez les liens dans la section Références pour plus d’informations sur 
 | **Phase SDL**               | Build |  
 | **Technologies applicables** | Générique |
 | **Attributs**              | N/A  |
-| **Informations de référence**              | [Modifier la boîte de dialogue des paramètres des pages d’erreur ASP.NET](https://technet.microsoft.com/library/dd569096(WS.10).aspx) |
+| **Informations de référence**              | [Modifier la boîte de dialogue des paramètres des pages d’erreur ASP.NET](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/dd569096(v=ws.10)) |
 | **Étapes** | <p>Lorsqu’une application ASP.NET échoue et provoque une erreur serveur interne HTTP/1.x 500, ou que la configuration d’une fonctionnalité (comme le filtrage des demandes) empêche l’affichage d’une page, un message d’erreur est généré. Les administrateurs peuvent choisir si l’application doit afficher ou non un message convivial pour le client, un message d’erreur détaillé au client ou un message d’erreur détaillé à l’hôte local uniquement. La balise `<customErrors>` dans le fichier web.config comporte trois modes :</p><ul><li>**On :** spécifie que les erreurs personnalisées sont activées. Si aucun attribut defaultRedirect n’est spécifié, les utilisateurs voient une erreur générique. Les erreurs personnalisées sont présentées aux clients distants et à l’hôte local</li><li>**Off :** spécifie que les erreurs personnalisées sont désactivées. Les erreurs ASP.NET détaillées sont présentées aux clients distants et à l’hôte local</li><li>**RemoteOnly :** spécifie que les erreurs personnalisées sont visibles uniquement pour les clients distants, et que les erreurs ASP.NET sont visibles pour l’hôte local. Il s'agit de la valeur par défaut</li></ul><p>Ouvrez le fichier `web.config` pour l’application/le site et vérifiez que la balise est définie sur `<customErrors mode="RemoteOnly" />` ou `<customErrors mode="On" />`.</p>|
 
 ## <a name="set-deployment-method-to-retail-in-iis"></a><a id="deployment"></a>Définir la méthode de déploiement sur Vente au détail dans IIS
@@ -212,7 +213,7 @@ Vérifiez les liens dans la section Références pour plus d’informations sur 
 | **Phase SDL**               | Déploiement |  
 | **Technologies applicables** | Générique |
 | **Attributs**              | N/A  |
-| **Informations de référence**              | [Élément de déploiement (schéma des paramètres ASP.NET)](https://msdn.microsoft.com/library/ms228298(VS.80).aspx) |
+| **Informations de référence**              | [Élément de déploiement (schéma des paramètres ASP.NET)](/previous-versions/dotnet/netframework-2.0/ms228298(v=vs.80)) |
 | **Étapes** | <p>Le commutateur `<deployment retail>` est conçu pour être utilisé par les serveurs IIS de production. Ce commutateur est utilisé pour permettre aux applications de s’exécuter avec les meilleurs niveaux de performances et le moins de fuites d’informations de sécurité possibles en désactivant la capacité de l’application à générer la sortie de trace sur une page, en désactivant la capacité à afficher des messages d’erreur détaillés pour les utilisateurs finaux et en désactivant le commutateur de débogage.</p><p>Les commutateurs et les options destinés aux développeurs, comme le suivi et le débogage des échecs de demande, sont généralement activés pendant le développement actif. Il est recommandé de définir la méthode de déploiement de n’importe quel serveur de production sur Vente au détail. Ouvrez le fichier machine.config et vérifiez que `<deployment retail="true" />` est toujours défini sur true.</p>|
 
 ## <a name="exceptions-should-fail-safely"></a><a id="fail"></a>Les exceptions doivent échouer en toute sécurité
@@ -267,4 +268,4 @@ Vérifiez les liens dans la section Références pour plus d’informations sur 
             }
         }
 ```
-La méthode ci-dessus renvoie toujours la valeur True si une exception se produit. Si l’utilisateur final fournit une URL incorrecte acceptée par le navigateur mais pas par le constructeur `Uri()`, une exception est levée et la victime est dirigée vers l’URL valide mais mal formée. 
+La méthode ci-dessus renvoie toujours la valeur True si une exception se produit. Si l’utilisateur final fournit une URL incorrecte acceptée par le navigateur mais pas par le constructeur `Uri()`, une exception est levée et la victime est dirigée vers l’URL valide mais mal formée.

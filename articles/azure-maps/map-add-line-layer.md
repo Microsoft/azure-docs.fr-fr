@@ -1,6 +1,6 @@
 ---
 title: Ajouter une couche de lignes à une carte | Microsoft Azure Maps
-description: Dans cet article, vous allez apprendre à ajouter une couche de lignes à une carte à l’aide du SDK web Microsoft Azure Maps.
+description: Découvrez comment ajouter des lignes aux cartes. Consultez les exemples qui utilisent le Kit de développement logiciel (SDK) web Azure Maps pour ajouter des couches de lignes aux cartes et pour personnaliser les lignes avec des symboles et des dégradés de couleurs.
 author: rbrundritt
 ms.author: richbrun
 ms.date: 08/08/2019
@@ -8,13 +8,13 @@ ms.topic: conceptual
 ms.service: azure-maps
 services: azure-maps
 manager: ''
-ms.custom: codepen
-ms.openlocfilehash: c473be25907eb3a761fbccd598bb9b732e5be5b9
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.custom: codepen, devx-track-js
+ms.openlocfilehash: 9cf2f4876d62572ace118562fe5760f2b4010fa5
+ms.sourcegitcommit: 4064234b1b4be79c411ef677569f29ae73e78731
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80802346"
+ms.lasthandoff: 10/28/2020
+ms.locfileid: "92891157"
 ---
 # <a name="add-a-line-layer-to-the-map"></a>Ajouter un calque de lignes à la carte
 
@@ -23,7 +23,7 @@ Vous pouvez utiliser un calque de lignes pour afficher des caractéristiques `Li
 > [!TIP]
 > Les couches de lignes par défaut affichent les coordonnées de polygones ainsi que de lignes dans une source de données. Pour limiter la couche afin qu’elle n’affiche que les fonctionnalités LineString, définissez la propriété `filter` de la couche sur `['==', ['geometry-type'], 'LineString']` ou `['any', ['==', ['geometry-type'], 'LineString'], ['==', ['geometry-type'], 'MultiLineString']]` si vous voulez également inclure les fonctionnalités MultiLineString.
 
-Le code suivant montre comment créer une ligne. Ajoutez la ligne à une source de données, puis affichez-la avec une couche de lignes à l’aide de la classe [LineLayer](https://docs.microsoft.com/javascript/api/azure-maps-control/atlas.layer.linelayer?view=azure-iot-typescript-latest).
+Le code suivant montre comment créer une ligne. Ajoutez la ligne à une source de données, puis affichez-la avec une couche de lignes à l’aide de la classe [LineLayer](/javascript/api/azure-maps-control/atlas.layer.linelayer).
 
 ```javascript
 //Create a data source and add it to the map.
@@ -44,10 +44,10 @@ Vous trouverez ci-dessous l’exemple de code d’exécution complet de la fonct
 
 <br/>
 
-<iframe height='500' scrolling='no' title='Ajouter une ligne à une carte' src='//codepen.io/azuremaps/embed/qomaKv/?height=500&theme-id=0&default-tab=js,result&embed-version=2&editable=true' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>Consultez le stylet <a href='https://codepen.io/azuremaps/pen/qomaKv/'>Add a line to a map</a> (Ajouter une ligne à une carte) d’Azure Maps (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) sur <a href='https://codepen.io'>CodePen</a>.
+<iframe height='500' scrolling='no' title='Ajouter une ligne à une carte' src='//codepen.io/azuremaps/embed/qomaKv/?height=500&theme-id=0&default-tab=js,result&embed-version=2&editable=true' frameborder='no' loading="lazy" allowtransparency='true' allowfullscreen='true' style='width: 100%;'>Consultez le stylet <a href='https://codepen.io/azuremaps/pen/qomaKv/'>Add a line to a map</a> (Ajouter une ligne à une carte) d’Azure Maps (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) sur <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 
-Les calques de lignes peuvent être stylisés à l’aide de [LineLayerOptions](/javascript/api/azure-maps-control/atlas.linelayeroptions?view=azure-iot-typescript-latest) et [Utiliser des expressions de style basées sur les données](data-driven-style-expressions-web-sdk.md).
+Les calques de lignes peuvent être stylisés à l’aide de [LineLayerOptions](/javascript/api/azure-maps-control/atlas.linelayeroptions) et [Utiliser des expressions de style basées sur les données](data-driven-style-expressions-web-sdk.md).
 
 ## <a name="add-symbols-along-a-line"></a>Ajouter des symboles le long d’une ligne
 
@@ -55,7 +55,7 @@ Cet exemple montre comment ajouter des icônes en forme de flèches le long d’
 
 <br/>
 
-<iframe height="500" style="width: 100%;" scrolling="no" title="Afficher une flèche le long de la ligne" src="//codepen.io/azuremaps/embed/drBJwX/?height=500&theme-id=0&default-tab=js,result&editable=true" frameborder="no" allowtransparency="true" allowfullscreen="true">
+<iframe height="500" style="width: 100%;" scrolling="no" title="Afficher une flèche le long de la ligne" src="//codepen.io/azuremaps/embed/drBJwX/?height=500&theme-id=0&default-tab=js,result&editable=true" frameborder='no' loading="lazy" loading="lazy" allowtransparency="true" allowfullscreen="true">
 Consultez l’extrait de code <a href='https://codepen.io/azuremaps/pen/drBJwX/'>Show arrow along line</a> (Afficher une flèche le long de la ligne) proposée par Azure Maps (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) sur <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 
@@ -70,7 +70,7 @@ Vous pouvez appliquer une couleur de trait à une ligne. Vous pouvez également 
 
 <br/>
 
-<iframe height="500" style="width: 100%;" scrolling="no" title="Ligne avec dégradé de traits" src="//codepen.io/azuremaps/embed/wZwWJZ/?height=500&theme-id=0&default-tab=js,result&editable=true" frameborder="no" allowtransparency="true" allowfullscreen="true">
+<iframe height="500" style="width: 100%;" scrolling="no" title="Ligne avec dégradé de traits" src="//codepen.io/azuremaps/embed/wZwWJZ/?height=500&theme-id=0&default-tab=js,result&editable=true" frameborder='no' loading="lazy" loading="lazy" allowtransparency="true" allowfullscreen="true">
 Consultez l’extrait de code <a href='https://codepen.io/azuremaps/pen/wZwWJZ/'>Line with Stroke Gradient</a> (Ligne avec dégradé de traits) par Azure Maps (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) sur <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 
@@ -80,7 +80,7 @@ Plusieurs options de style sont disponibles pour les couches de lignes. Voici un
 
 <br/>
 
-<iframe height='700' scrolling='no' title='Options de la couche de lignes' src='//codepen.io/azuremaps/embed/GwLrgb/?height=700&theme-id=0&default-tab=result' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>Consultez l’extrait de code <a href='https://codepen.io/azuremaps/pen/GwLrgb/'>Line Layer Options</a> (Options de la couche de lignes) Azure Maps (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) sur <a href='https://codepen.io'>CodePen</a>.
+<iframe height='700' scrolling='no' title='Options de la couche de lignes' src='//codepen.io/azuremaps/embed/GwLrgb/?height=700&theme-id=0&default-tab=result' frameborder='no' loading="lazy" allowtransparency='true' allowfullscreen='true' style='width: 100%;'>Consultez l’extrait de code <a href='https://codepen.io/azuremaps/pen/GwLrgb/'>Line Layer Options</a> (Options de la couche de lignes) Azure Maps (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) sur <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 
 ## <a name="next-steps"></a>Étapes suivantes
@@ -88,10 +88,10 @@ Plusieurs options de style sont disponibles pour les couches de lignes. Voici un
 En savoir plus sur les classes et les méthodes utilisées dans cet article :
 
 > [!div class="nextstepaction"]
-> [LineLayer](https://docs.microsoft.com/javascript/api/azure-maps-control/atlas.layer.linelayer?view=azure-iot-typescript-latest) 
+> [LineLayer](/javascript/api/azure-maps-control/atlas.layer.linelayer) 
 
 > [!div class="nextstepaction"]
-> [LineLayerOptions](/javascript/api/azure-maps-control/atlas.linelayeroptions?view=azure-iot-typescript-latest)
+> [LineLayerOptions](/javascript/api/azure-maps-control/atlas.linelayeroptions)
 
 Pour obtenir plus d’exemples de code à ajouter à vos cartes, consultez les articles suivants :
 

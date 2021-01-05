@@ -7,12 +7,12 @@ ms.reviewer: klam, logicappspm
 ms.topic: conceptual
 ms.date: 05/21/2018
 tags: connectors
-ms.openlocfilehash: e547ae59f7b3260f46756825bca2bef1c10bcc97
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 52bf42434640dc965999895549b4fa12a139dcce
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75665885"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95999601"
 ---
 # <a name="find-results-in-bing-search-by-using-azure-logic-apps"></a>Résultats de la recherche de Recherche Bing obtenus à l’aide d’Azure Logic Apps
 
@@ -21,7 +21,7 @@ Cet article explique comment rechercher des actualités, des vidéos et d’autr
 Par exemple, vous pouvez rechercher des éléments d’actualités en fonction de critères de recherche et les publier comme tweets dans votre flux Twitter.
 
 Si vous n’avez pas d’abonnement Azure, [inscrivez-vous pour bénéficier d’un compte Azure gratuit](https://azure.microsoft.com/free/). Si vous débutez avec les applications logiques, consultez [Qu’est-ce qu’Azure Logic Apps ?](../logic-apps/logic-apps-overview.md) et [Démarrage rapide : Créer votre première application logique](../logic-apps/quickstart-create-first-logic-app-workflow.md).
-Pour obtenir des informations techniques spécifiques aux connecteurs, consultez la [référence du connecteur de recherche Bing](https://docs.microsoft.com/connectors/bingsearch/).
+Pour obtenir des informations techniques spécifiques aux connecteurs, consultez la [référence du connecteur de recherche Bing](/connectors/bingsearch/).
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -168,3 +168,4 @@ Pour plus d’informations techniques, telles que les déclencheurs, actions et 
 ## <a name="next-steps"></a>Étapes suivantes
 
 * En savoir plus sur les autres [connecteurs d’applications logiques](../connectors/apis-list.md)
+

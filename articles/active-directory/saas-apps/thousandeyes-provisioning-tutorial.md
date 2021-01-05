@@ -2,25 +2,20 @@
 title: 'Tutoriel : Approvisionnement d’utilisateurs pour ThousandEyes – Azure AD'
 description: Découvrez comment configurer Azure Active Directory pour approvisionner et retirer automatiquement des comptes d’utilisateur sur ThousandEyes.
 services: active-directory
-documentationcenter: ''
 author: ArvindHarinder1
 manager: CelesteDG
-ms.assetid: d4ca2365-6729-48f7-bb7f-c0f5ffe740a3
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: article
+ms.topic: tutorial
 ms.date: 03/28/2019
 ms.author: arvinh
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: d87cffce636146eac3e557670ffc4fb2fc34ae38
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: ff55528013ac89be48454c25e1fc86deac2bca6f
+ms.sourcegitcommit: 0b9fe9e23dfebf60faa9b451498951b970758103
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77062878"
+ms.lasthandoff: 11/07/2020
+ms.locfileid: "94357230"
 ---
 # <a name="tutorial-configure-thousandeyes-for-automatic-user-provisioning"></a>Tutoriel : Configurer ThousandEyes pour l’approvisionnement automatique d’utilisateurs
 
@@ -68,21 +63,21 @@ Cette section va vous guider afin de connecter votre instance Azure AD à l’AP
 
 4. Définissez le **Mode d’approvisionnement** sur **Automatique**.
 
-    ![Approvisionnement de ThousandEyes](./media/thousandeyes-provisioning-tutorial/ThousandEyes1.png)
+    ![Capture d’écran montrant l’onglet Approvisionnement pour ThousandEyes avec Automatique sélectionné pour le mode d’approvisionnement.](./media/thousandeyes-provisioning-tutorial/ThousandEyes1.png)
 
-5. Dans la section **Informations d’identification de l’administrateur**, entrez le **jeton du porteur OAuth** généré par votre compte ThousandEyes (vous pouvez le trouver ou le générer sous la section **Profil** de votre compte ThousandEyes).
+5. Dans la section **Informations d’identification de l’administrateur** , entrez le **jeton du porteur OAuth** généré par votre compte ThousandEyes (vous pouvez le trouver ou le générer sous la section **Profil** de votre compte ThousandEyes).
 
-    ![Approvisionnement de ThousandEyes](./media/thousandeyes-provisioning-tutorial/ThousandEyes2.png)
+    ![Capture d’écran montrant où trouver le lien des paramètres de compte pour le groupe de comptes actuel.](./media/thousandeyes-provisioning-tutorial/ThousandEyes2.png)
 
 6. Dans le portail Azure, cliquez sur **Tester la connexion** pour vous assurer qu’Azure AD peut se connecter à votre application ThousandEyes. Si la connexion échoue, vérifiez que votre compte ThousandEyes dispose des autorisations d’administrateur et réessayez l’étape 5.
 
-7. Entrez l’adresse de courrier d’une personne ou d’un groupe qui doit recevoir les notifications d’erreur d’approvisionnement dans le champ **E-mail de notification**, puis cochez la case « Envoyer une notification par e-mail en cas de défaillance ».
+7. Entrez l’adresse de courrier d’une personne ou d’un groupe qui doit recevoir les notifications d’erreur d’approvisionnement dans le champ **E-mail de notification** , puis cochez la case « Envoyer une notification par e-mail en cas de défaillance ».
 
 8. Cliquez sur **Enregistrer**.
 
 9. Dans la section Mappages, sélectionnez **Synchroniser les utilisateurs Azure Active Directory avec ThousandEyes**.
 
-10. Dans la section **Mappages d’attributs**, passez en revue les attributs utilisateur qui sont synchronisés à partir d’Azure AD vers ThousandEyes. Les attributs sélectionnés en tant que propriétés de **Correspondance** sont utilisés pour faire correspondre les comptes d’utilisateur dans ThousandEyes pour les opérations de mise à jour. Cliquez sur le bouton Enregistrer pour valider les modifications.
+10. Dans la section **Mappages d’attributs** , passez en revue les attributs utilisateur qui sont synchronisés à partir d’Azure AD vers ThousandEyes. Les attributs sélectionnés en tant que propriétés de **Correspondance** sont utilisés pour faire correspondre les comptes d’utilisateur dans ThousandEyes pour les opérations de mise à jour. Cliquez sur le bouton Enregistrer pour valider les modifications.
 
 11. Pour activer le service d’approvisionnement Azure AD pour ThousandEyes, accédez à la section **Paramètres** et définissez le **Statut de l’approvisionnement** sur **Activé**.
 

@@ -5,15 +5,15 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
-ms.custom: hdinsightactive,hdiseo17may2017
+ms.topic: how-to
+ms.custom: hdinsightactive,hdiseo17may2017, devx-track-java
 ms.date: 01/16/2020
-ms.openlocfilehash: a37a8bb45c11d5b74f3059a153806e3d083cf452
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 8b80616806f846951ebbaffcb2bf31ad77b96266
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76311952"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95996030"
 ---
 # <a name="develop-java-mapreduce-programs-for-apache-hadoop-on-hdinsight"></a>Développer des programmes MapReduce Java pour Apache Hadoop sur HDInsight
 
@@ -21,7 +21,7 @@ Découvrez comment utiliser Apache Maven pour créer une application MapReduce b
 
 ## <a name="prerequisites"></a>Prérequis
 
-* [Kit de développeur Java (JDK), version 8](https://aka.ms/azure-jdks).
+* [Kit de développeur Java (JDK), version 8](/azure/developer/java/fundamentals/java-jdk-long-term-support).
 
 * [Apache Maven](https://maven.apache.org/download.cgi) correctement [installé](https://maven.apache.org/install.html) en fonction d’Apache.  Maven est un système de génération de projet pour les projets Java.
 

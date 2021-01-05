@@ -10,11 +10,11 @@ ms.subservice: speech-service
 ms.topic: include
 ms.date: 10/28/2019
 ms.author: erhopf
-ms.openlocfilehash: 17bc5c6a76a270cac611ed2342ffe9e38d84bd7b
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.openlocfilehash: f6ea9ea3209e84d365706207db079a400fb7cb6f
+ms.sourcegitcommit: 3543d3b4f6c6f496d22ea5f97d8cd2700ac9a481
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "75468050"
+ms.lasthandoff: 07/20/2020
+ms.locfileid: "86544985"
 ---
-Si vous préférez vous y mettre tout de suite, affichez ou téléchargez tous les <a href="https://aka.ms/speech/github-python">Échantillons Python du Kit de développement logiciel (SDK) Speech</a> sur GitHub. Sinon, commençons.
+Vous pouvez consulter ou télécharger tous les <a href="https://aka.ms/speech/github-python">Exemples Python du kit SDK Speech</a> sur GitHub. 

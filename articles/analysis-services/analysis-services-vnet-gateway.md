@@ -7,12 +7,12 @@ ms.topic: conceptual
 ms.date: 05/19/2020
 ms.author: owend
 ms.reviewer: minewiskan
-ms.openlocfilehash: 7622b6b5855850a0150f43863fa117828e23d4bd
-ms.sourcegitcommit: 595cde417684e3672e36f09fd4691fb6aa739733
+ms.openlocfilehash: 912dab16cd854ae940b7bbdfe88a8da7adf1c5e0
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83698872"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "84197192"
 ---
 # <a name="use-gateway-for-data-sources-on-an-azure-virtual-network-vnet"></a>Utiliser la passerelle pour les sources de données sur un réseau virtuel Azure (VNet)
 
@@ -22,7 +22,7 @@ Cet article décrit la propriété de serveur **AlwaysUseGateway** d’Azure Ana
 
 Si vos sources de données sont accessibles via un réseau virtuel, votre serveur Azure Analysis Services doit se connecter à ces sources de données comme si elles étaient accessibles en local, dans votre propre environnement. Vous pouvez configurer la propriété de serveur **AlwaysUseGateway** pour indiquer le serveur qui accédera à toutes les sources de données via une [passerelle locale](analysis-services-gateway.md). 
 
-Les sources de données Azure SQL Database Managed Instance s’exécutent dans Azure VNet avec une adresse IP privée. Si le point de terminaison public est activé sur l’instance, aucune passerelle n’est requise. Si le point de terminaison public n’est pas activé, une passerelle de données locale est requise et la propriété AlwaysUseGateway doit avoir la valeur true.
+Les sources de données Azure SQL Managed Instance s’exécutent dans Azure VNet avec une adresse IP privée. Si le point de terminaison public est activé sur l’instance, aucune passerelle n’est requise. Si le point de terminaison public n’est pas activé, une passerelle de données locale est requise et la propriété AlwaysUseGateway doit avoir la valeur true.
 
 > [!NOTE]
 > Cette propriété est effective uniquement quand une [passerelle de données locale](analysis-services-gateway.md) est installée et configurée. La passerelle peut se trouver sur le réseau virtuel.

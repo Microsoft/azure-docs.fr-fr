@@ -5,15 +5,15 @@ services: security-center
 author: memildin
 manager: rkarlin
 ms.service: security-center
-ms.topic: conceptual
-ms.date: 04/22/2020
+ms.topic: how-to
+ms.date: 12/03/2020
 ms.author: memildin
-ms.openlocfilehash: db310cb7ea5c3a89eb727262a7a7ed63ce55b5db
-ms.sourcegitcommit: fdec8e8bdbddcce5b7a0c4ffc6842154220c8b90
+ms.openlocfilehash: 8d2b43ab57ea7a3b1dc1d13bcdea9932ccecb9dc
+ms.sourcegitcommit: 65a4f2a297639811426a4f27c918ac8b10750d81
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83650891"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96559029"
 ---
 # <a name="using-custom-security-policies"></a>Utilisation de stratégies de sécurité personnalisées
 
@@ -21,7 +21,7 @@ Pour vous aider à sécuriser vos systèmes et votre environnement, Azure Securi
 
 Avec cette fonctionnalité, vous pouvez ajouter vos propres initiatives *personnalisées*. Vous recevez ensuite des recommandations si votre environnement ne suit pas les stratégies que vous créez. Toutes les initiatives personnalisées que vous créez apparaîtront à côté des initiatives intégrées dans le tableau de bord de conformité à la réglementation, comme décrit dans le tutoriel [Améliorer votre conformité aux normes](security-center-compliance-dashboard.md).
 
-Comme nous l’avons vu dans la [documentation Azure Policy](https://docs.microsoft.com/azure/governance/policy/concepts/definition-structure#definition-location), quand vous spécifiez un emplacement pour votre initiative personnalisée, il doit correspondre à un groupe d’administration ou à un abonnement. 
+Comme nous l’avons vu dans la [documentation Azure Policy](../governance/policy/concepts/definition-structure.md#definition-location), quand vous spécifiez un emplacement pour votre initiative personnalisée, il doit correspondre à un groupe d’administration ou à un abonnement. 
 
 ## <a name="to-add-a-custom-initiative-to-your-subscription"></a>Pour ajouter une initiative personnalisée à votre abonnement 
 
@@ -38,7 +38,7 @@ Comme nous l’avons vu dans la [documentation Azure Policy](https://docs.micros
 
 1. Dans la page Stratégie de sécurité, sous vos initiatives personnalisées, cliquez sur **Ajouter une initiative personnalisée**.
 
-    [![Cliquez sur *Ajouter une initiative personnalisée*](media/custom-security-policies/custom-policy-add-initiative.png)](media/custom-security-policies/custom-policy-add-initiative.png#lightbox)
+    [![Cliquez sur Ajouter une initiative personnalisée](media/custom-security-policies/custom-policy-add-initiative.png)](media/custom-security-policies/custom-policy-add-initiative.png#lightbox)
 
     La page suivante apparaît :
 
@@ -69,7 +69,7 @@ Comme nous l’avons vu dans la [documentation Azure Policy](https://docs.micros
 
     [![Recommandations personnalisées](media/custom-security-policies/custom-policy-recommendations.png)](media/custom-security-policies/custom-policy-recommendations-in-context.png#lightbox)
 
-## <a name="enhancing-your-custom-recommendations-with-detailed-information"></a>Amélioration de vos recommandations personnalisées avec des informations détaillées
+## <a name="enhance-your-custom-recommendations-with-detailed-information"></a>Améliorez vos recommandations personnalisées grâce à des informations détaillées
 
 Les recommandations intégrées fournies avec Azure Security Center incluent des détails tels que des niveaux de gravité et des instructions de correction. Si vous souhaitez ajouter ce type d’informations à vos recommandations personnalisées afin qu’elles apparaissent dans le portail Azure ou à l’endroit où vous accédez à vos recommandations, vous devez utiliser l’API REST. 
 
@@ -84,7 +84,7 @@ Les métadonnées doivent être ajoutées à la définition de stratégie pour u
  "metadata": {
     "securityCenter": {
         "RemediationDescription": "Custom description goes here",
-        "Severity": "High",
+        "Severity": "High"
     },
 ```
 
@@ -99,8 +99,8 @@ Voici un exemple de stratégie personnalisée incluant la propriété metadata/s
     "description": "Audit required resource groups lock",
     "metadata": {
         "securityCenter": {
-            "remediationDescription": "Resource Group locks can be set via Azure Portal -> Resource Group -> Locks",
-            "severity": "High"
+            "RemediationDescription": "Resource Group locks can be set via Azure Portal -> Resource Group -> Locks",
+            "Severity": "High"
         }
     },
     "parameters": {
@@ -136,7 +136,7 @@ Voici un exemple de stratégie personnalisée incluant la propriété metadata/s
 }
   ```
 
-Pour obtenir un autre exemple d’utilisation de la propriété securityCenter, consultez [cette section de la documentation de l’API REST](https://docs.microsoft.com/rest/api/securitycenter/assessmentsmetadata/createinsubscription#examples).
+Pour obtenir un autre exemple d’utilisation de la propriété securityCenter, consultez [cette section de la documentation de l’API REST](/rest/api/securitycenter/assessmentsmetadata/createinsubscription#examples).
 
 
 ## <a name="next-steps"></a>Étapes suivantes
@@ -146,4 +146,4 @@ Dans cet article, vous avez appris à créer des stratégies de sécurité perso
 Pour d’autres informations connexes, consultez les articles suivants : 
 
 - [La vue d’ensemble des stratégies de sécurité](tutorial-security-policy.md)
-- [Liste des stratégies de sécurité intégrées](security-center-policy-definitions.md)
+- [Liste des stratégies de sécurité intégrées](./policy-reference.md)

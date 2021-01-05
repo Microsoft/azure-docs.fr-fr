@@ -1,23 +1,22 @@
 ---
-title: Tutoriel - Configurer le routage du trafic en tourniquet par pondération avec Azure Traffic Manager
+title: 'Tutoriel : Configurer le routage du trafic en tourniquet par pondération avec Azure Traffic Manager'
 description: Ce tutoriel explique comment équilibrer le trafic en utilisant une méthode en tourniquet (round robin) dans Traffic Manager
 services: traffic-manager
 documentationcenter: ''
-author: rohinkoul
-manager: twooley
+author: duongau
 ms.service: traffic-manager
 ms.devlang: na
 ms.topic: tutorial
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 03/20/2017
-ms.author: rohink
-ms.openlocfilehash: 8bdc710b36cae70d29d32333f431b8a9dda154cc
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.date: 10/19/2020
+ms.author: duau
+ms.openlocfilehash: abcfce43b90c7371d5b38aa5b7a6d478e9d6a0dd
+ms.sourcegitcommit: 957c916118f87ea3d67a60e1d72a30f48bad0db6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "76938709"
+ms.lasthandoff: 10/19/2020
+ms.locfileid: "92207824"
 ---
 # <a name="tutorial-configure-the-weighted-traffic-routing-method-in-traffic-manager"></a>Tutoriel : Configurer la méthode de routage du trafic par pondération dans Traffic Manager
 
@@ -26,31 +25,62 @@ Il est courant d'utiliser un ensemble de points de terminaison identiques, compr
 > [!NOTE]
 > Azure Web App propose déjà une fonctionnalité d’équilibrage de charge en tourniquet (round robin) pour les sites web d’une région Azure (comportant potentiellement plusieurs centres de données). Traffic Manager permet de répartir le trafic entre les sites web de différents centres de données.
 
-## <a name="to-configure-the-weighted-traffic-routing-method"></a>Pour configurer la méthode de routage du trafic par pondération
+Dans ce tutoriel, vous allez apprendre à :
+> [!div class="checklist"]
+> - Créer un profil Traffic Manager basé sur le routage pondéré
+> - Utiliser un profil Traffic Manager
+> - Supprimer un profil Traffic Manager
 
-1. Dans un navigateur, connectez-vous au [portail Azure](https://portal.azure.com). Si vous ne possédez pas encore de compte, vous pouvez [vous inscrire pour bénéficier d’un essai gratuit d’un mois](https://azure.microsoft.com/free/). 
-2. Dans la barre de recherche du portail, recherchez les **profils Traffic Manager** et cliquez sur le nom du profil pour lequel vous souhaitez configurer la méthode de routage.
-3. Dans le panneau **Profil Traffic Manager**, vérifiez que les services cloud et les sites web que vous souhaitez inclure dans votre configuration sont présents.
-4. Dans la section **Paramètres**, cliquez sur **Configuration** et dans le panneau **Configuration**, procédez comme suit :
-    1. Pour les **paramètres de la méthode de routage de trafic**, vérifiez que la méthode de routage du trafic est **pondérée**. Si ce n’est pas le cas, cliquez sur **Pondérée** dans la liste déroulante.
-    2. Définissez l’option **Paramètres de surveillance des points de terminaison** de manière identique pour tous les points de terminaison de ce profil comme suit :
-        1. Sélectionnez le **protocole** approprié et spécifiez le numéro du **port**. 
-        2. Pour **Chemin d’accès**, entrez une barre oblique */* . Pour surveiller les points de terminaison, vous devez indiquer un chemin et un nom de fichier. Une barre oblique (« / ») est une entrée valide pour le chemin d’accès relatif. Elle implique que le fichier se trouve dans le répertoire racine (par défaut).
-        3. En haut de la page, cliquez sur **Enregistrer**.
-5. Testez les modifications dans votre configuration comme suit :
-    1.  Dans la barre de recherche du portail, recherchez le nom du profil Traffic Manager et cliquez sur le profil Traffic Manager dans les résultats affichés.
-    2.  Dans le panneau du profil **Traffic Manager**, cliquez sur **Vue d’ensemble**.
-    3.  Le panneau **Profil Traffic Manager** affiche le nom DNS de votre profil Traffic Manager nouvellement créé. Celui-ci peut être utilisé par tous les clients (par exemple, en y accédant à l’aide d’un navigateur web) pour être routés vers le point de terminaison correct, comme déterminé par le type de routage. Dans ce cas, toutes les demandes sont routées vers chaque point de terminaison de manière alternée.
-6. Une fois le profil Traffic Manager opérationnel, modifiez l’enregistrement DNS sur le serveur DNS faisant autorité, afin de faire pointer votre nom de domaine d’entreprise vers le nom de domaine Traffic Manager.
+## <a name="prerequisites"></a>Prérequis
 
-![Configuration de la méthode de routage du trafic par pondération à l’aide de Traffic Manager][1]
+* Compte Azure avec un abonnement actif. [Créez un compte gratuitement](https://azure.microsoft.com/free/).
+
+## <a name="configure-the-weighted-traffic-routing-method"></a>Configurer la méthode de routage du trafic par pondération
+
+1. Dans un navigateur, connectez-vous au [portail Azure](https://portal.azure.com).
+
+1. Dans la barre de recherche du portail, recherchez le nom du **profil Traffic Manager** que vous avez créé dans la section précédente, puis sélectionnez le profil Traffic Manager dans les résultats affichés.
+
+    :::image type="content" source="./media/traffic-manager-weighted-routing-method/search-traffic-manager-weighted-profile.png" alt-text="Recherche du profil Traffic Manager":::
+
+1. Sélectionnez **Configuration** , puis sélectionnez ou saisissez les paramètres suivants :
+
+    | Paramètre         | Value                                              |
+    | ---             | ---                                                |
+    | Méthode de routage            | Sélectionnez **Pondéré** . |    
+    | Durée de vie du DNS (TTL) | Cette valeur contrôle la fréquence à laquelle le serveur de noms de mise en cache locale du client interroge le système Traffic Manager au sujet des entrées DNS mises à jour. Toute modification dans Traffic Manager, telle que le changement de la méthode de routage du trafic ou de la disponibilité des points de terminaison ajoutés, sera actualisée au terme de cette période dans le système global des serveurs DNS. |
+    | Protocol    | Sélectionnez un protocole pour la supervision des points de terminaison. *Options : HTTP, HTTPS et TCP* |
+    | Port | Spécifiez le numéro de port. |
+    | Chemin d’accès | Pour surveiller les points de terminaison, vous devez indiquer un chemin et un nom de fichier. Une barre oblique (« / ») est une entrée valide pour le chemin d’accès relatif. Elle implique que le fichier se trouve dans le répertoire racine (par défaut). |
+    | Paramètres d’en-tête personnalisé | Configurez les en-têtes personnalisés au format suivant : host:contoso.com,newheader:newvalue. Le nombre maximal de paires est de 8. S’applique aux protocoles HTTP et HTTPS. S’applique à tous les points de terminaison du profil |
+    | Plages de codes d’état attendues (par défaut : 200) | Configurez les plages de codes d’état au format suivant : 200-299,301-301. Le nombre maximal de plages est de 8. S’applique aux protocoles HTTP et HTTPS. S’applique à tous les points de terminaison du profil |
+    | Intervalle de sondage | Configurez l’intervalle de temps entre chaque sonde d’intégrité de point de terminaison. Vous pouvez choisir 10 ou 30 secondes. |
+    | Nombre d’échecs tolérés | Configurez le nombre d’échecs de sonde d’intégrité tolérés avant le déclenchement d’un échec du point de terminaison. Vous pouvez entrer un nombre entre 0 et 9. | 
+    | Délai d’expiration de la sonde | Configurez le délai d’expiration pour les sondes d’intégrité du point de terminaison. Cette valeur doit être au moins égale à 5 et inférieure à la valeur de l’intervalle de sondage. |
+
+1. Sélectionnez **Enregistrer** pour terminer la configuration.
+
+    :::image type="content" source="./media/traffic-manager-weighted-routing-method/traffic-manager-weighted-configuration.png" alt-text="Recherche du profil Traffic Manager"::: 
+
+1. Sélectionnez **Point de terminaison** , puis configurez le poids de chaque point de terminaison. Le poids peut être compris entre 1 et 1 000. Plus le poids est élevé, plus la priorité l’est également.  
+
+    :::image type="content" source="./media/traffic-manager-weighted-routing-method/traffic-manager-configure-endpoints-weighted.png" alt-text="Recherche du profil Traffic Manager"::: 
+
+## <a name="use-the-traffic-manager-profile"></a>Utiliser le profil Traffic Manager
+
+Le **profil Traffic Manager** affiche le nom DNS de votre profil Traffic Manager nouvellement créé. Tous les clients peuvent utiliser ce nom (par exemple, en y accédant à l’aide d’un navigateur web) en vue d’être routés vers le bon point de terminaison, selon le type de routage. Dans ce cas, toutes les requêtes sont routées vers chaque point de terminaison de manière alternée.
+
+:::image type="content" source="./media/traffic-manager-weighted-routing-method/traffic-manager-weighted-overview.png" alt-text="Recherche du profil Traffic Manager"::: 
+
+## <a name="clean-up-resources"></a>Nettoyer les ressources
+
+Si vous n’avez plus besoin du profil Traffic Manager, recherchez le profil, puis sélectionnez **Supprimer le profil** .
+
+:::image type="content" source="./media/traffic-manager-weighted-routing-method/delete-traffic-manager-weighted-profile.png" alt-text="Recherche du profil Traffic Manager":::
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- En savoir plus sur la [méthode de routage du trafic prioritaire](traffic-manager-configure-priority-routing-method.md).
-- En savoir plus sur la [méthode de routage du trafic basé sur les performances](traffic-manager-configure-performance-routing-method.md).
-- En savoir plus sur la [méthode de routage géographique](traffic-manager-configure-geographic-routing-method.md).
-- Découvrez comment [tester les paramètres Traffic Manager](traffic-manager-testing-settings.md).
+Pour plus d’informations sur la méthode de routage pondéré, consultez :
 
-<!--Image references-->
-[1]: ./media/traffic-manager-weighted-routing-method/traffic-manager-weighted-routing-method.png
+> [!div class="nextstepaction"]
+> [Méthode de routage du trafic basée sur la pondération](traffic-manager-routing-methods.md#weighted)

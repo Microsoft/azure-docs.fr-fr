@@ -5,35 +5,43 @@ description: L’API Content Moderator propose des bibliothèques de client qui 
 services: cognitive-services
 author: PatrickFarley
 manager: nitinme
-zone_pivot_groups: programming-languages-set-eleven
+zone_pivot_groups: programming-languages-set-conmod
 ms.service: cognitive-services
 ms.subservice: content-moderator
 ms.topic: quickstart
-ms.date: 04/24/2020
+ms.date: 12/15/2020
 ms.author: pafarley
-ms.openlocfilehash: 36160c4fb2ee49b5b516c23d4debd8ab5a9c98d3
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.custom: devx-track-python, devx-track-csharp, cog-serv-seo-aug-2020
+keywords: modérateur de contenu, modérateur de contenu Azure, modérateur en ligne, logiciel de filtrage de contenu
+ms.openlocfilehash: 37e7421c0847a8253b9e05aa5b8f7e75d78bd13b
+ms.sourcegitcommit: 77ab078e255034bd1a8db499eec6fe9b093a8e4f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82186520"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97561458"
 ---
 # <a name="quickstart-use-the-content-moderator-client-library"></a>Démarrage rapide : Utiliser la bibliothèque de client Content Moderator
 
 ::: zone pivot="programming-language-csharp"
 
-[!INCLUDE [C# quickstart](includes/quickstarts/content-moderator-client-library-csharp.md)]
+[!INCLUDE [C# quickstart](includes/quickstarts/csharp-sdk.md)]
 
 ::: zone-end
 
 ::: zone pivot="programming-language-java"
 
-[!INCLUDE [Java quickstart](includes/quickstarts/content-moderator-client-library-java.md)]
+[!INCLUDE [Java quickstart](includes/quickstarts/java-sdk.md)]
 
 ::: zone-end
 
 ::: zone pivot="programming-language-python"
 
-[!INCLUDE [Python quickstart](includes/quickstarts/content-moderator-client-library-python.md)]
+[!INCLUDE [Python quickstart](includes/quickstarts/python-sdk.md)]
+
+::: zone-end
+
+::: zone pivot="programming-language-rest-api"
+
+[!INCLUDE [REST API quickstart](includes/quickstarts/rest-api.md)]
 
 ::: zone-end

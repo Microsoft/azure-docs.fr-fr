@@ -1,6 +1,6 @@
 ---
 title: Comment définir ou modifier des stratégies dans Gestion des API Azure | Microsoft Docs
-description: Cette rubrique montre comment définir ou modifier des stratégies dans Gestion des API Azure.
+description: Découvrez comment définir ou modifier des stratégies Gestion des API Azure. Ces stratégies sont des documents XML qui décrivent une séquence d’instructions entrantes et sortantes.
 services: api-management
 documentationcenter: ''
 author: mikebudzynski
@@ -12,12 +12,12 @@ ms.tgt_pltfrm: na
 ms.topic: article
 ms.date: 11/01/2018
 ms.author: apimpm
-ms.openlocfilehash: 2df57477ae5270405a1774b7a4f04ed185fea396
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: a737fada3e019029967bc752aaa0dedc354fa880
+ms.sourcegitcommit: a92fbc09b859941ed64128db6ff72b7a7bcec6ab
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "70071699"
+ms.lasthandoff: 10/15/2020
+ms.locfileid: "92078321"
 ---
 # <a name="how-to-set-or-edit-azure-api-management-policies"></a>Comment définir ou modifier des stratégies dans Gestion des API Azure
 
@@ -41,7 +41,7 @@ Pour définir ou modifier une stratégie, procédez comme suit :
 7. Sélectionnez l’icône **</>** (éditeur de code) dans la section **Traitement entrant** ou **Traitement sortant**.
 8. Collez le code de la stratégie de votre choix dans l’une des zones appropriées.
 
-    ```XML
+    ```xml
     <policies>
         <inbound>
             <base />
@@ -135,5 +135,5 @@ L’étendue de l’opération est configurée pour l’opération sélectionné
 Consultez les rubriques associées suivantes :
 
 + [Transform and protect your API](transform-api.md) (Transformer et protéger votre API)
-+ [Référence de stratégie](api-management-policy-reference.md) pour obtenir la liste complète des instructions et des paramètres de stratégie
-+ [Exemples de stratégie](policy-samples.md)
++ [Référence de stratégie](./api-management-policies.md) pour obtenir la liste complète des instructions et des paramètres de stratégie
++ [Exemples de stratégie](./policy-reference.md)

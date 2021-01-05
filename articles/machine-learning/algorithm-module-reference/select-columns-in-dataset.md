@@ -9,16 +9,16 @@ ms.topic: reference
 author: likebupt
 ms.author: keli19
 ms.date: 10/22/2019
-ms.openlocfilehash: 714148815fa4ff543ecbf86ab21e8d51fe775543
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 7926d5dd33df5538713f8de152dbbace2bc29864
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77153772"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90890296"
 ---
 # <a name="select-columns-in-dataset-module"></a>Module Sélectionner des colonnes dans le jeu de données
 
-Cet article décrit un module dans le concepteur Azure Machine Learning (version préliminaire).
+Cet article décrit un module dans le concepteur Azure Machine Learning.
 
 Utilisez ce module pour choisir un sous-ensemble de colonnes à utiliser dans des opérations en aval. Le module ne supprime pas physiquement les colonnes de jeu de données source. Au lieu de cela, il crée un sous-ensemble de colonnes, à l’instar d’une *vue* ou *projection* de base de données.
 

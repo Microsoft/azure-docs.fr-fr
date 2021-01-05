@@ -12,20 +12,20 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 08/14/2019
 ms.author: allensu
-ms.openlocfilehash: 9003d35ce2eea18aa912a866802b026bb923aa08
-ms.sourcegitcommit: 530e2d56fc3b91c520d3714a7fe4e8e0b75480c8
+ms.openlocfilehash: 9c322620e1d66182937be41bb02d48fd1469f459
+ms.sourcegitcommit: e2dc549424fb2c10fcbb92b499b960677d67a8dd
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/14/2020
-ms.locfileid: "81272693"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94697558"
 ---
 # <a name="standard-load-balancer-diagnostics-with-metrics-alerts-and-resource-health"></a>Diagnostics Azure Standard Load Balancer avec les métriques, les alertes et l’intégrité des ressources
 
 Azure Load Balancer Standard expose les fonctionnalités de diagnostic suivantes :
 
-* **Métriques multidimensionnelles et alertes** : des fonctionnalités de diagnostic multidimensionnel sont proposées par le biais d’[Azure Monitor](https://docs.microsoft.com/azure/azure-monitor/overview) pour les configurations d’équilibreur standard. Vous pouvez surveiller, gérer et résoudre les problèmes de vos ressources d’équilibreur de charge standard.
+* **Métriques multidimensionnelles et alertes** : des fonctionnalités de diagnostic multidimensionnel sont proposées par le biais d’[Azure Monitor](../azure-monitor/overview.md) pour les configurations d’équilibreur standard. Vous pouvez surveiller, gérer et résoudre les problèmes de vos ressources d’équilibreur de charge standard.
 
-* **Intégrité des ressources** : La page associée à l’équilibreur de charge dans le portail Azure et celle associée à l’intégrité des ressources (sous Monitor) affichent la section Intégrité des ressources pour Standard Load Balancer. 
+* **Intégrité des ressources** : l’état d’intégrité des ressources de votre équilibreur de charge est disponible dans la page Resource Health sous Superviser. Cette vérification automatique vous informe de la disponibilité actuelle de votre ressource Load Balancer.
 
 Cet article propose une présentation rapide de ces fonctionnalités et des méthodes pour les utiliser dans Load Balancer Standard. 
 
@@ -46,6 +46,9 @@ Les différentes configurations de Load Balancer Standard fournissent les métri
 | Compteurs d’octets |  Équilibreur de charge interne et public | Load Balancer Standard indique les données traitées par serveur frontal. Vous pouvez remarquer que les octets ne sont pas répartis de manière égale entre les instances du serveur principal. Cela est normal, car l’algorithme d’Azure Load Balance est basé sur les flux | Average |
 | Compteurs de paquets |  Équilibreur de charge interne et public | Load Balancer Standard indique les paquets traités par serveur frontal.| Average |
 
+  >[!NOTE]
+  >Lorsque vous utilisez la distribution du trafic à partir d’un équilibreur de charge interne via un appliance virtuelle réseau ou un pare-feu, les métriques de paquet Syn, de compteur d’octets et de compteur de paquets ne sont pas disponibles et affichent zéro. 
+  
 ### <a name="view-your-load-balancer-metrics-in-the-azure-portal"></a>Afficher vos métriques d’équilibreur de charge dans le portail Azure
 
 Le Portail Azure présente les métriques d’équilibreur de charge via la page Métriques, qui est disponible sur la page de ressource d’équilibreur de charge pour une ressource spécifique, ainsi que sur la page Azure Monitor. 
@@ -67,7 +70,7 @@ Pour afficher les métriques de vos ressources de Load Balancer Standard :
 
 ### <a name="retrieve-multi-dimensional-metrics-programmatically-via-apis"></a>Récupérer les métriques multidimensionnelles par programme via des API
 
-Pour obtenir des instructions relatives à l’API permettant de récupérer les définitions et valeurs de métrique multidimensionnelle, consultez [Procédure pas à pas d’utilisation de l’API REST d’Azure Monitor](https://docs.microsoft.com/azure/monitoring-and-diagnostics/monitoring-rest-api-walkthrough#retrieve-metric-definitions-multi-dimensional-api). Ces indicateurs de performance peuvent être écrits dans un compte de stockage à l’aide de l’option « Tous les indicateurs de performance » uniquement. 
+Pour obtenir des instructions relatives à l’API permettant de récupérer les définitions et valeurs de métrique multidimensionnelle, consultez [Procédure pas à pas d’utilisation de l’API REST d’Azure Monitor](../azure-monitor/platform/rest-api-walkthrough.md#retrieve-metric-definitions-multi-dimensional-api). Ces indicateurs de performance peuvent être écrits dans un compte de stockage à l’aide de l’option « Tous les indicateurs de performance » uniquement. 
 
 ### <a name="configure-alerts-for-multi-dimensional-metrics"></a>Configurer des alertes pour des métriques multidimensionnelles ###
 
@@ -88,7 +91,7 @@ Pour configurer des alertes :
 #### <a name="is-the-data-path-up-and-available-for-my-load-balancer-frontend"></a>Le chemin d’accès aux données est-il opérationnel et disponible pour mon serveur frontal d’équilibrage de charge ?
 <details><summary>Développez</summary>
 
-La métrique de disponibilité du chemin d’accès aux données décrit l’intégrité de celui-ci dans la région, vers l’hôte de calcul où résident vos machines virtuelles. La métrique reflète l’intégrité de l’infrastructure Azure. Vous pouvez utiliser la métrique pour :
+La métrique de disponibilité du chemin de données décrit l’intégrité de ce dernier dans la région jusqu’à l’hôte de calcul où résident vos machines virtuelles. La métrique reflète l’intégrité de l’infrastructure Azure. Vous pouvez utiliser la métrique pour :
 - Surveiller la disponibilité externe de votre service
 - Aller plus loin et savoir si la plateforme sur laquelle votre service est déployé est intègre ou si votre système d’exploitation invité ou instance d’application est intègre.
 - Déterminez si un événement est associé à votre service ou au plan de données sous-jacent. Ne confondez pas cette métrique avec l’état de la sonde d’intégrité (« disponibilité de l’instance de serveur principal »).
@@ -107,7 +110,7 @@ La métrique est générée par une mesure intrabande active. Un service de dét
 
 Un paquet correspondant au serveur frontal et à la règle de votre déploiement est généré régulièrement. Il traverse la région depuis la source vers l’hôte où une machine virtuelle dans le pool de serveur principal se trouve. L’infrastructure de l’équilibreur de charge effectue les mêmes opérations d’équilibrage de charge et de conversion que pour tout autre trafic. Cette sonde est intrabande sur votre point de terminaison équilibré en charge. Lorsque la sonde arrive sur l’hôte de calcul sur lequel se trouve une machine virtuelle intègre du pool principal, l’hôte de calcul génère une réponse au service de détection. Votre machine virtuelle ne voit pas ce trafic.
 
-La mesure de la disponibilité du chemin d’accès échoue pour les raisons suivantes :
+La disponibilité du chemin de données fait défaut pour les raisons suivantes :
 - Il ne reste plus de machines virtuelles intègres du pool principal dans votre déploiement. 
 - Une panne s’est produite au niveau de l’infrastructure.
 
@@ -135,9 +138,9 @@ Utilisez une agrégation **Moyenne** pour la plupart des scénarios.
 #### <a name="how-do-i-check-my-outbound-connection-statistics"></a>Comment faire pour vérifier les statistiques de ma connexion sortante ? 
 <details>
   <summary>Développez</summary>
-La métrique des connexions SNAT indique le volume de connexions ayant réussi et ayant échoué pour les [flux sortants](https://aka.ms/lboutbound).
+La métrique des connexions SNAT indique le volume de connexions ayant réussi et ayant échoué pour les [flux sortants](./load-balancer-outbound-connections.md).
 
-Un volume de connexions ayant échoué supérieur à zéro indique un épuisement du port SNAT. Vous devez mener un examen précis pour déterminer les causes de ces échecs. L’épuisement du port SNAT se traduit par un problème d’établissement de [flux sortant](https://aka.ms/lboutbound). Consultez l’article sur les connexions sortantes pour comprendre les scénarios, les mécanismes au travail et pour apprendre à atténuer et éviter l’épuisement du port SNAT. 
+Un volume de connexions ayant échoué supérieur à zéro indique un épuisement du port SNAT. Vous devez mener un examen précis pour déterminer les causes de ces échecs. L’épuisement du port SNAT se traduit par un problème d’établissement de [flux sortant](./load-balancer-outbound-connections.md). Consultez l’article sur les connexions sortantes pour comprendre les scénarios, les mécanismes au travail et pour apprendre à atténuer et éviter l’épuisement du port SNAT. 
 
 Pour obtenir des statistiques de connexion SNAT :
 1. Sélectionnez le type de métrique **Connexions SNAT** et l’agrégation **Somme**. 
@@ -152,14 +155,14 @@ Pour obtenir des statistiques de connexion SNAT :
 #### <a name="how-do-i-check-my-snat-port-usage-and-allocation"></a>Comment vérifier l’utilisation et l’allocation des ports SNAT ?
 <details>
   <summary>Développez</summary>
-La métrique d’utilisation SNAT indique le nombre de flux uniques établis entre une source Internet et une machine virtuelle principale ou un groupe de machines virtuelles identiques se trouvant derrière un équilibreur de charge et sans adresse IP publique. En la comparant à la métrique d’allocation SNAT, vous pouvez déterminer si votre service présente des problèmes d’épuisement des ressources SNAT se traduisant par un échec de flux sortant. 
+La métrique Ports SNAT utilisés assure le suivi du nombre de ports SNAT consommés pour maintenir les flux sortants. Elle indique le nombre de flux uniques établis entre une source Internet et une machine virtuelle back-end ou un groupe de machines virtuelles identiques qui se trouve derrière un équilibreur de charge et qui n’a pas d’adresse IP publique. En comparant le nombre de ports SNAT que vous utilisez à la métrique Ports SNAT alloués, vous pouvez déterminer si votre service présente des problèmes ou des risques d’épuisement SNAT se traduisant par un échec de flux sortant. 
 
-Si vos métriques indiquent un risque d'échec de [flux sortant](https://aka.ms/lboutbound), reportez-vous à l’article et prenez les mesures qui s'imposent pour l’atténuer afin de garantir l’intégrité du service.
+Si vos métriques indiquent un risque d'échec de [flux sortant](./load-balancer-outbound-connections.md), reportez-vous à l’article et prenez les mesures qui s'imposent pour l’atténuer afin de garantir l’intégrité du service.
 
 Pour afficher l’utilisation et l’allocation des ports SNAT :
 1. Définissez l’agrégation de temps du graphique sur une minute pour vous assurer que les données souhaitées s'affichent.
-1. Sélectionnez **Utilisation SNAT** et/ou **Allocation SNAT** comme type de métrique et **Moyenne** comme agrégation.
-    * Par défaut, il s’agit du nombre moyen de ports SNAT alloués ou utilisés par chaque machine virtuelle principale ou VMSS, correspondant à toutes les adresses IP publiques frontales mappées à l'équilibreur de charge, agrégées sur TCP et UDP.
+1. Sélectionnez **Ports SNAT utilisés** et/ou **Ports SNAT alloués** comme type de métrique et **Moyenne** comme agrégation
+    * Par défaut, ces métriques représentent le nombre moyen de ports SNAT alloués ou utilisés par chaque VMSS ou machine virtuelle back-end, correspondant à toutes les adresses IP publiques front-end mappées à l’équilibreur de charge, agrégées sur TCP et UDP.
     * Pour afficher le nombre total de ports SNAT utilisés ou alloués pour l’équilibreur de charge, utilisez l’agrégation de métriques **Sum**.
 1. Filtrez sur un **Type de protocole** spécifique, un ensemble d'**Adresses IP principales** et/ou des **Adresses IP frontales**.
 1. Pour surveiller l’intégrité par instance principale ou frontale, utilisez le fractionnement. 
@@ -178,7 +181,7 @@ Pour afficher l’utilisation et l’allocation des ports SNAT :
 #### <a name="how-do-i-check-inboundoutbound-connection-attempts-for-my-service"></a>Comment faire pour vérifier les tentatives de connexions entrantes/sortantes pour mon service ?
 <details>
   <summary>Développez</summary>
-Une métrique de paquets SYN indique le volume de paquets TCP SYN qui ont été reçus ou qui ont été envoyés (pour les [flux sortants](https://aka.ms/lboutbound)) associés à un serveur frontal spécifique. Vous pouvez utiliser cette métrique pour comprendre les tentatives de connexions TCP vers votre service.
+Une métrique de paquets SYN indique le volume de paquets TCP SYN qui ont été reçus ou qui ont été envoyés (pour les [flux sortants](./load-balancer-outbound-connections.md)) associés à un serveur frontal spécifique. Vous pouvez utiliser cette métrique pour comprendre les tentatives de connexions TCP vers votre service.
 
 Utilisez une agrégation **Totale** pour la plupart des scénarios.
 
@@ -249,17 +252,18 @@ Pour afficher l’intégrité de vos ressources Load Balancer Standard public :
 
    *Figure : Vue d’intégrité de la ressource Load Balancer*
  
-Le tableau suivant répertorie les divers états d’intégrité de ressource et leurs descriptions : 
+La description de l’état d’intégrité de ressource générique est disponible dans la [documentation RHC](../service-health/resource-health-overview.md). Les états spécifiques d’Azure Load Balancer sont listés dans le tableau ci-dessous : 
 
 | État d’intégrité des ressources | Description |
 | --- | --- |
 | Disponible | Votre ressource d’équilibreur de charge standard est intègre et disponible. |
-| Non disponible | Votre ressource d’équilibreur de charge standard n’est pas intègre. Diagnostiquez l’intégrité en sélectionnant **Azure Monitor** > **Métriques**.<br>(L’état *Non disponible* peut également indiquer que la ressource n’est pas connectée avec votre équilibreur de charge standard.) |
-| Unknown | L’état d’intégrité des ressources de votre ressource d’équilibreur de charge standard n’a pas encore été mis à jour.<br>(L’état *Inconnu* peut également indiquer que la ressource n’est pas connectée avec votre équilibreur de charge standard.)  |
+| Détérioré | Votre équilibreur de charge standard présente des événements lancés par la plateforme ou l’utilisateur qui nuisent aux performances. La métrique Disponibilité du chemin de données a fait état d’une intégrité inférieure à 90 %, mais supérieure à 25 % pendant au moins deux minutes. L’impact sur les performances que vous allez subir sera de niveau modéré à grave. [Suivez le guide de résolution des problèmes de disponibilité du chemin de données] pour déterminer si les événements ayant un impact sur votre disponibilité sont lancés par l’utilisateur.
+| Non disponible | Votre ressource d’équilibreur de charge standard n’est pas intègre. La métrique Disponibilité du chemin des données a fait état d’une intégrité inférieure à 25 % pendant au moins deux minutes. Vous allez subir un impact sur les performances significatif ou un défaut de disponibilité pour la connectivité entrante. Des événements utilisateur ou plateforme peuvent être à l’origine de l’indisponibilité. [Suivez le guide de résolution des problèmes de disponibilité du chemin de données] pour déterminer si les événements ayant un impact sur votre disponibilité sont lancés par l’utilisateur. |
+| Unknown | L’état d’intégrité de votre ressource d’équilibrage de charge standard n’a pas encore été mis à jour ou n’a pas encore reçu d’informations de disponibilité du chemin de données au cours des 10 dernières minutes. Cet état devrait être transitoire et passer à un état correct dès que des données seront reçues. |
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- En savoir plus sur l’[équilibreur de charge standard](load-balancer-standard-overview.md).
-- En savoir plus sur la [connectivité sortante de votre équilibreur de charge](https://aka.ms/lboutbound).
-- Découvrez [Azure Monitor](https://docs.microsoft.com/azure/azure-monitor/overview).
-- Découvrez l’[API REST Azure Monitor](https://docs.microsoft.com/rest/api/monitor/) et [comment récupérer des métriques par le biais de l’API REST](/rest/api/monitor/metrics/list).
+- En savoir plus sur l’[équilibreur de charge standard](./load-balancer-overview.md).
+- En savoir plus sur la [connectivité sortante de votre équilibreur de charge](./load-balancer-outbound-connections.md).
+- Découvrez [Azure Monitor](../azure-monitor/overview.md).
+- Découvrez l’[API REST Azure Monitor](/rest/api/monitor/) et [comment récupérer des métriques par le biais de l’API REST](/rest/api/monitor/metrics/list).

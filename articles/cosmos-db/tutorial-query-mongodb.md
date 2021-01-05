@@ -8,14 +8,15 @@ ms.subservice: cosmosdb-mongo
 ms.topic: tutorial
 ms.date: 12/03/2019
 ms.reviewer: sngun
-ms.openlocfilehash: 5b9bc78f6af833d89a3404de0295ddad78ebdf20
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: f93ec39e7a2e3b5829c0d6205404c6c5c4af6189
+ms.sourcegitcommit: 3bdeb546890a740384a8ef383cf915e84bd7e91e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "74870137"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93074316"
 ---
 # <a name="query-data-by-using-azure-cosmos-dbs-api-for-mongodb"></a>Interroger des données à l’aide de l’API Azure Cosmos DB pour MongoDB
+[!INCLUDE[appliesto-mongodb-api](includes/appliesto-mongodb-api.md)]
 
 [L’API Azure Cosmos DB pour MongoDB](mongodb-introduction.md) prend en charge les [requêtes MongoDB](https://docs.mongodb.com/manual/tutorial/query-documents/). 
 
@@ -63,12 +64,15 @@ L’exemple de document suivant est utilisé pour les requêtes de cet article.
 Étant donné l’exemple de document de famille ci-dessus, la requête suivante renvoie les documents où le champ id correspond à `WakefieldFamily`.
 
 **Requête**
-    
-    db.families.find({ id: "WakefieldFamily"})
+
+```bash
+db.families.find({ id: "WakefieldFamily"})
+```
 
 **Résultats**
 
-    {
+```json
+{
     "_id": "ObjectId(\"58f65e1198f3a12c7090e68c\")",
     "id": "WakefieldFamily",
     "parents": [
@@ -106,19 +110,23 @@ L’exemple de document suivant est utilisé pour les requêtes de cet article.
     },
     "creationDate": 1431620462,
     "isRegistered": false
-    }
+}
+```
 
 ## <a name="example-query-2"></a><a id="examplequery2"></a>Exemple de requête 2 
 
 La requête suivante renvoie tous les enfants de la famille. 
 
 **Requête**
-    
-    db.families.find( { id: "WakefieldFamily" }, { children: true } )
+
+```bash 
+db.families.find( { id: "WakefieldFamily" }, { children: true } )
+``` 
 
 **Résultats**
 
-    {
+```json
+{
     "_id": "ObjectId("58f65e1198f3a12c7090e68c")",
     "children": [
       {
@@ -138,28 +146,37 @@ La requête suivante renvoie tous les enfants de la famille.
         "grade": 8
       }
     ]
-    }
-
+}
+```
 
 ## <a name="example-query-3"></a><a id="examplequery3"></a>Exemple de requête 3 
 
 La requête suivante renvoie toutes les familles qui sont enregistrées. 
 
 **Requête**
-    
-    db.families.find( { "isRegistered" : true })
-**Résultats** Aucun document n’est renvoyé. 
+
+```bash
+db.families.find( { "isRegistered" : true })
+``` 
+
+**Résultats**
+
+Aucun document n’est retourné. 
 
 ## <a name="example-query-4"></a><a id="examplequery4"></a>Exemple de requête 4
 
 La requête suivante renvoie toutes les familles qui ne sont pas enregistrées. 
 
 **Requête**
-    
-    db.families.find( { "isRegistered" : false })
+
+```bash
+db.families.find( { "isRegistered" : false })
+``` 
+
 **Résultats**
 
-     {
+```json
+{
     "_id": ObjectId("58f65e1198f3a12c7090e68c"),
     "id": "WakefieldFamily",
     "parents": [{
@@ -193,18 +210,22 @@ La requête suivante renvoie toutes les familles qui ne sont pas enregistrées.
     "creationDate": 1431620462,
     "isRegistered": false
 }
+```
 
 ## <a name="example-query-5"></a><a id="examplequery5"></a>Exemple de requête 5
 
 La requête suivante renvoie toutes les familles qui ne sont pas enregistrées dans l’état de New-York (NY). 
 
 **Requête**
-    
-     db.families.find( { "isRegistered" : false, "address.state" : "NY" })
+
+```bash
+db.families.find( { "isRegistered" : false, "address.state" : "NY" })
+``` 
 
 **Résultats**
 
-     {
+```json
+{
     "_id": ObjectId("58f65e1198f3a12c7090e68c"),
     "id": "WakefieldFamily",
     "parents": [{
@@ -238,19 +259,22 @@ La requête suivante renvoie toutes les familles qui ne sont pas enregistrées d
     "creationDate": 1431620462,
     "isRegistered": false
 }
-
+```
 
 ## <a name="example-query-6"></a><a id="examplequery6"></a>Exemple de requête 6
 
 La requête suivante renvoie toutes les familles dans lesquelles les enfants sont en 8e année.
 
 **Requête**
-  
-     db.families.find( { children : { $elemMatch: { grade : 8 }} } )
+
+```bash
+db.families.find( { children : { $elemMatch: { grade : 8 }} } )
+```
 
 **Résultats**
 
-     {
+```json
+{
     "_id": ObjectId("58f65e1198f3a12c7090e68c"),
     "id": "WakefieldFamily",
     "parents": [{
@@ -284,14 +308,17 @@ La requête suivante renvoie toutes les familles dans lesquelles les enfants son
     "creationDate": 1431620462,
     "isRegistered": false
 }
+```
 
 ## <a name="example-query-7"></a><a id="examplequery7"></a>Exemple de requête 7
 
 La requête suivante renvoie toutes les familles dont le nombre d’enfants est 3.
 
 **Requête**
-  
-      db.Family.find( {children: { $size:3} } )
+
+```bash
+db.Family.find( {children: { $size:3} } )
+```
 
 **Résultats**
 

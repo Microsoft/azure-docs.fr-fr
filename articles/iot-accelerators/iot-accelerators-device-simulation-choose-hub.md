@@ -9,11 +9,11 @@ services: iot-accelerators
 ms.date: 10/25/2018
 ms.topic: conceptual
 ms.openlocfilehash: 1f89e23d7bb279e7cce5c104060cc7898517f8b7
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "73889193"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96009362"
 ---
 # <a name="use-an-existing-iot-hub-with-the-device-simulation-solution-accelerator"></a>Utiliser un IoT Hub existant avec l’accélérateur de solution de simulation d’appareil
 

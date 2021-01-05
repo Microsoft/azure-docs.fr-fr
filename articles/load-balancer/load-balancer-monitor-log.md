@@ -1,178 +1,116 @@
 ---
-title: Surveiller les opérations, les événements et les compteurs pour une instance publique de Basic Load Balancer
+title: Surveiller les opérations, les événements et les compteurs pour un équilibreur de charge public
 titleSuffix: Azure Load Balancer
-description: Découvrez comment activer les événements d’alerte, et sonder la journalisation de l’état d’intégrité pour une instance publique de Basic Load Balancer.
+description: Découvrez comment activer la journalisation pour Azure Load Balancer.
 services: load-balancer
 documentationcenter: na
 author: asudbring
 ms.service: load-balancer
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.custom: seodec18
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 05/05/2020
 ms.author: allensu
-ms.openlocfilehash: 7563eb4d22048021886925f6864e3616bed83a75
-ms.sourcegitcommit: c535228f0b77eb7592697556b23c4e436ec29f96
+ms.openlocfilehash: fcfd3da30ef9ace723b4204f5924591b1e2717f8
+ms.sourcegitcommit: 2ba6303e1ac24287762caea9cd1603848331dd7a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/06/2020
-ms.locfileid: "82858768"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97503163"
 ---
-# <a name="azure-monitor-logs-for-public-basic-load-balancer"></a>Journaux Azure Monitor pour une instance publique de Basic Load Balancer
+# <a name="azure-monitor-logs-for-azure-standard-load-balancer"></a>Journaux Azure Monitor pour Azure Standard Load Balancer
 
-Vous pouvez utiliser différents types de journaux d’activité dans Azure pour gérer les instances de Basic Load Balancer et résoudre les problèmes associés. Certains de ces journaux d’activité sont accessibles via le portail. Les journaux peuvent être envoyés en streaming à un hub d’événements ou à un espace de travail Log Analytics. Tous les journaux peuvent être extraits à partir du Stockage Blob Azure et affichés dans différents outils, comme Excel et Power BI.  Pour en savoir plus sur les différents types de journaux d’activité, consultez la liste ci-dessous.
+Vous pouvez utiliser différents types de journaux Azure Monitor pour gérer Azure Standard Load Balancer et résoudre les problèmes associés. Les journaux peuvent être envoyés en streaming à un hub d’événements ou à un espace de travail Log Analytics. Vous pouvez extraire tous les journaux du stockage Blob Azure et les afficher dans des outils comme Excel et Power BI. 
 
-* **Journaux d’activité :** Vous pouvez utiliser l’article [Afficher les journaux d’activité pour superviser les actions sur les ressources](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-audit) afin d’afficher toutes les activités soumises à vos abonnements Azure et leur état. Les journaux d’activité sont activés par défaut et peuvent être affichés dans le portail Azure.
-* **Journaux d’activité d’événements d’alerte** : Vous pouvez utiliser ces journaux pour afficher les alertes générées par l’équilibreur de charge. L'état de l'équilibreur de charge est collecté toutes les cinq minutes. Ce journal est écrit uniquement si un événement d'alerte d’équilibreur de charge est généré.
-* **Journaux d’activité de sonde d’intégrité** : Vous pouvez utiliser ces journaux pour connaître les problèmes détectés par votre sonde d’intégrité, tels que le nombre d’instances du pool principal qui ne reçoivent pas les demandes de l’équilibreur de charge en raison d’échecs de sonde d’intégrité. Toute modification de l’état de la sonde d’intégrité est indiquée dans ce journal.
+Les types de journaux sont les suivants :
+
+* **Journaux d’activité :** Vous pouvez afficher toutes les activités envoyées à vos abonnements Azure, ainsi que leur état. Pour plus d’informations, consultez [Afficher les journaux d’activité pour surveiller les actions sur les ressources](../azure-resource-manager/management/view-activity-logs.md). Les journaux d’activité sont activés par défaut et peuvent être affichés dans le portail Azure. Ces journaux sont disponibles pour Azure Basic Load Balancer et Standard Load Balancer.
+* **Métriques de Standard Load Balancer :** Vous pouvez utiliser ce journal pour interroger les métriques exportées sous forme de journaux pour Standard Load Balancer. Ces journaux sont disponibles uniquement pour Standard Load Balancer.
 
 > [!IMPORTANT]
-> Les journaux Azure Monitor peuvent uniquement être utilisés pour les instances publiques de Basic Load Balancer. Les journaux d’activité ne sont disponibles que pour les ressources déployées avec le modèle de déploiement de Resource Manager. Vous ne pouvez pas les utiliser pour les ressources utilisant le modèle de déploiement classique. Pour plus d’informations sur les modèles de déploiement, consultez [Présentation du déploiement Resource Manager et du déploiement classique](../azure-resource-manager/management/deployment-models.md).
+> Actuellement, les journaux d’événements de sonde d’intégrité et d’alertes Load Balancer ne sont pas fonctionnels et sont listés parmi les [problèmes connus avec Azure Load Balancer](whats-new.md#known-issues). 
+
+> [!IMPORTANT]
+> Les journaux d’activité ne sont disponibles que pour les ressources déployées dans le modèle de déploiement Azure Resource Manager. Vous ne pouvez pas les utiliser pour les ressources utilisant le modèle de déploiement classique. Pour plus d’informations sur les modèles de déploiement, consultez [Présentation du déploiement Resource Manager et du déploiement classique](../azure-resource-manager/management/deployment-models.md).
 
 ## <a name="enable-logging"></a>Activation de la journalisation
 
-La journalisation d’activité est automatiquement activée pour chaque ressource Resource Manager. Activez la journalisation des événements et des sondes d’intégrité pour commencer à collecter les données disponibles dans ces journaux. Utilisez les étapes suivantes pour activer la journalisation.
+La journalisation d’activité est automatiquement activée pour chaque ressource Resource Manager. Activez la journalisation des événements et des sondes d’intégrité pour commencer à collecter les données disponibles dans ces journaux. Utiliser les étapes suivantes :
 
-Connectez-vous au [portail Azure](https://portal.azure.com). Si vous ne disposez pas déjà d'un équilibreur de charge, [créez un équilibreur de charge](https://docs.microsoft.com/azure/load-balancer/quickstart-create-basic-load-balancer-portal) avant de continuer.
-
-1. Dans le portail, cliquez sur **Groupes de ressources**.
-2. Sélectionnez le groupe **\<nom_groupe_ressources>** dans lequel se trouve votre équilibreur de charge.
+1. Connectez-vous au [portail Azure](https://portal.azure.com). Si vous ne disposez pas déjà d'un équilibreur de charge, [créez un équilibreur de charge](./quickstart-load-balancer-standard-public-portal.md) avant de continuer.
+1. Dans le portail, sélectionnez **Groupes de ressources**.
+2. Sélectionnez **\<resource-group-name>** l’emplacement de votre équilibreur de charge.
 3. Sélectionnez votre équilibreur de charge.
-4. Sélectionnez **Supervision** > **Paramètres de diagnostic**.
+4. Sélectionnez **Journal d’activité** > **Paramètres de diagnostic**.
 5. Dans le volet **Paramètres de diagnostic**, sous **Paramètres de diagnostic**, sélectionnez **+ Ajouter un paramètre de diagnostic**.
-6. Dans le volet de création de **Paramètres de diagnostic**, entrez **myLBDiagnostic** dans le champ **Nom**.
-7. Trois options s’offrent à vous pour les **Paramètres de diagnostic**.  Vous pouvez en choisir une, deux ou les trois, et configurer chacune d’elles selon vos besoins :
-   * **Archiver dans un compte de stockage**
-   * **Diffuser vers un hub d’événements**
-   * **Envoyer à Log Analytics**
+6. Dans le volet de création de **Paramètres de diagnostic**, entrez **myLBDiagnostic** dans la zone **Nom**.
+7. Trois options s’offrent à vous pour les **Paramètres de diagnostic**. Vous pouvez en choisir une, deux ou les trois, et configurer chacune d’elles selon vos besoins :
 
-    ### <a name="archive-to-a-storage-account"></a>Archiver dans un compte de stockage
-    Vous avez besoin d’un compte de stockage déjà créé pour ce processus.  Pour créer un compte de stockage, consultez [Créez un compte de stockage](https://docs.microsoft.com/azure/storage/common/storage-quickstart-create-account?tabs=azure-portal)
+   * **Archive vers un compte de stockage**. Vous avez besoin d’un compte de stockage déjà créé pour ce processus. Pour créer un compte de stockage, consultez [Créer un compte de stockage](../storage/common/storage-account-create.md?tabs=azure-portal).
+     1. Cochez la case **Archiver dans un compte de stockage**.
+     2. Sélectionnez **Configurer** pour ouvrir le volet **Sélectionnez un compte de stockage**.
+     3. Dans la liste déroulante **Abonnement**, sélectionnez l’abonnement dans lequel votre compte de stockage a été créé.
+     4. Dans la liste déroulante **Compte de stockage**, sélectionnez le nom de votre compte de stockage.
+     5. Sélectionnez **OK**.
 
-    1. Cochez la case en regard d’**Archiver dans un compte de stockage**.
-    2. Sélectionnez **Configurer** pour ouvrir le volet **Sélectionnez un compte de stockage**.
-    3. Dans la zone déroulante, sélectionnez l’**Abonnement** dans lequel votre compte de stockage a été créé.
-    4. Sélectionnez le nom de votre compte de stockage sous **Compte de stockage** dans la zone déroulante.
-    5. Sélectionnez OK.
+   * **Transmettre à un Event Hub**. Vous avez besoin d’un hub d’événements déjà créé pour ce processus. Pour créer un hub d’événements, consultez [Démarrage rapide : Créer un hub d’événement à l’aide du portail Azure](../event-hubs/event-hubs-create.md).
+     1. Cochez la case **Diffuser vers Event Hub**.
+     2. Sélectionnez **Configurer** pour ouvrir le volet **Sélectionner un hub d’événements**.
+     3. Dans la liste déroulante **Abonnement**, sélectionnez l’abonnement dans lequel votre hub d’événements a été créé.
+     4. Dans la liste déroulante **Sélectionner l’espace de noms Event Hub**, sélectionnez l’espace de noms.
+     5. Dans la liste déroulante **Sélectionner le nom de stratégie Event Hub**, sélectionnez le nom.
+     6. Sélectionnez **OK**.
 
-    ### <a name="stream-to-an-event-hub"></a>Diffuser vers un hub d’événements
-    Vous avez besoin d’un hub d’événements déjà créé pour ce processus.  Pour créer un hub d’événements, consultez [Démarrage rapide : Créer un hub d’événements avec le portail Azure](https://docs.microsoft.com/azure/event-hubs/event-hubs-create)
+   * **Envoyer à Log Analytics**. Vous devez avoir un espace de travail Log Analytics déjà créé et configuré pour ce processus. Pour créer un espace de travail Log Analytics, consultez [Créer un espace de travail Log Analytics dans le portail Azure](../azure-monitor/learn/quick-create-workspace.md).
+     1. Cochez la case **Envoyer à Log Analytics**.
+     2. Dans la liste déroulante **Abonnement**, sélectionnez l’abonnement où figure votre espace de travail Log Analytics.
+     3. Dans la liste déroulante **Espace de travail Log Analytics**, sélectionnez l’espace de travail.
 
-    1. Cochez la case en regard de **Diffuser vers un hub d’événements**.
-    2. Sélectionnez **Configurer** pour ouvrir le volet **Sélectionner un hub d’événements**.
-    3. Dans la zone déroulante, sélectionnez l’**Abonnement** dans lequel votre hub d’événements a été créé.
-    4. **Sélectionnez un espace de noms de hub d’événements** dans la zone déroulante.
-    5. **Sélectionnez un nom de stratégie de hub d’événements** dans la zone déroulante.
-    6. Sélectionnez OK.
+8. Dans la section **MÉTRIQUE** du volet **Paramètres de diagnostic**, cochez la case **AllMetrics**.
 
-    ### <a name="send-to-log-analytics"></a>Envoyer à Log Analytics
-    Vous devez avoir un espace de travail Log Analytics déjà créé et configuré pour ce processus.  Pour créer un espace de travail Log Analytics, consultez [Créer un espace de travail Log Analytics dans le portail Azure](https://docs.microsoft.com/azure/azure-monitor/learn/quick-create-workspace).
+9. Vérifiez que tout semble correct, puis sélectionnez **Enregistrer** en haut du volet de création **Paramètres de diagnostic**.
 
-    1. Cochez la case en regard de l’option **Envoyer à Log Analytics**.
-    2. Dans la zone déroulante, sélectionnez l’**Abonnement** dans lequel se trouve votre espace de travail Log Analytics.
-    3. Sélectionnez l’**Espace de travail Log Analytics** dans la zone déroulante.
+## <a name="view-and-analyze-the-activity-log"></a>Afficher et analyser le journal d’activité
 
+Le journal d’activité est généré par défaut. Vous pouvez le configurer pour l’exporter à un niveau d’abonnement [en suivant les instructions de cet article](https://docs.microsoft.com/azure/azure-monitor/platform/activity-log). Pour en savoir plus sur ces journaux, lisez l’article [Afficher les journaux d’activité pour superviser les actions sur les ressources](../azure-resource-manager/management/view-activity-logs.md).
 
-8. Sous la section **JOURNAL** du volet **Paramètres de diagnostic**, cochez la case en regard des deux options :
-   * **LoadBalancerAlertEvent**
-   * **LoadBalancerProbeHealthStatus**
+Vous pouvez afficher et analyser les données du journal d’activité en utilisant l’une ou l’autre des méthodes suivantes :
 
-9.  Sous la section **JOURNAL** du volet **MÉTRIQUE**, cochez la case en regard de :
-   * **AllMetrics**
+* **Outils Azure** : récupérez les informations du journal d’activité en utilisant Azure PowerShell, Azure CLI, l’API REST Azure ou le portail Azure. L’article [Opérations d’audit avec Resource Manager](../azure-resource-manager/management/view-activity-logs.md) fournit des instructions pas à pas pour chaque méthode.
+* **Power BI :** si vous n’avez pas encore de compte [Power BI](https://powerbi.microsoft.com/pricing), vous pouvez l’essayer gratuitement. À l’aide de l’[intégration des journaux d’audit Azure pour Power BI](https://powerbi.microsoft.com/integrations/azure-audit-logs/), vous pouvez analyser vos données avec des tableaux de bord préconfigurés. Vous pouvez aussi personnaliser les vues selon vos besoins.
 
-11. Vérifiez que tout semble correct, puis cliquez sur **Enregistrer** en haut du volet de création de **Paramètres de diagnostic**.
+## <a name="view-and-analyze-metrics-as-logs"></a>Afficher et analyser les métriques sous forme de journaux
+À l’aide de la fonctionnalité d’exportation dans Azure Monitor, vous pouvez exporter vos métriques Load Balancer. Ces métriques génèrent une entrée de journal pour chaque intervalle d’échantillonnage d’une minute.
 
-## <a name="activity-log"></a>Journal d’activité
+L’exportation de métriques sous forme de journaux est activée au niveau de chaque ressource. Pour activer ces journaux :
 
-Le journal d’activité est généré par défaut. Les journaux d’activité sont conservés pendant 90 jours dans la banque de Journaux d’activité d’événements d’Azure. Pour en savoir plus sur ces journaux, lisez l’article [Afficher les journaux d’activité pour superviser les actions sur les ressources](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-audit).
+1. Accédez au volet **Paramètres de diagnostic**.
+1. Filtrez par groupe de ressources, puis sélectionnez l’instance Load Balancer pour laquelle vous souhaitez activer l’exportation de métriques. 
+1. Une fois la page des paramètres de diagnostic de l’instance Load Balancer affichée, sélectionnez **AllMetrics** pour exporter les métriques éligibles sous forme de journaux.
 
-## <a name="archive-to-storage-account-logs"></a>Archiver dans des journaux de compte de stockage
+Pour connaître les limitations relatives à l’exportation de métriques, consultez la section [Limitations](#limitations) de cet article.
 
-### <a name="alert-event-log"></a>Journal des événements d'alerte
+Une fois l’option **AllMetrics** activée dans les paramètres de diagnostic de Standard Load Balancer, si vous utilisez un hub d’événements ou un espace de travail Log Analytics, ces journaux sont renseignés dans la table **AzureMonitor**. 
 
-Ce journal n’est généré que si vous l’avez activé au niveau de chaque équilibreur de charge. Les événements sont journalisés au format JSON et stockés dans le compte de stockage spécifié lors de l’activation de la journalisation. L’exemple suivant est celui d’un événement.
-
-```json
-{
-    "time": "2016-01-26T10:37:46.6024215Z",
-    "systemId": "32077926-b9c4-42fb-94c1-762e528b5b27",
-    "category": "LoadBalancerAlertEvent",
-    "resourceId": "/SUBSCRIPTIONS/XXXXXXXXXXXXXXXXX-XXXX-XXXX-XXXXXXXXX/RESOURCEGROUPS/RG7/PROVIDERS/MICROSOFT.NETWORK/LOADBALANCERS/WWEBLB",
-    "operationName": "LoadBalancerProbeHealthStatus",
-    "properties": {
-        "eventName": "Resource Limits Hit",
-        "eventDescription": "Ports exhausted",
-        "eventProperties": {
-            "public ip address": "40.117.227.32"
-        }
-    }
-}
-```
-
-La sortie JSON affiche la propriété *eventname*, qui décrit la raison pour laquelle l’équilibreur de charge a créé une alerte. Dans le cas présent, l’alerte a été générée en raison de l’épuisement du port TCP à cause des limites de traduction NAT d’adresses IP sources (SNAT).
-
-### <a name="health-probe-log"></a>Journal des sondes d’intégrité
-
-Ce journal n’est généré que si vous l’avez activé au niveau de chaque équilibreur de charge, comme détaillé ci-dessous. Les données sont stockées dans le compte de stockage spécifié lors de l’activation de la journalisation. Un conteneur nommé « insights-logs-loadbalancerprobehealthstatus » est créé et les données suivantes sont enregistrées :
-
-```json
-{
-    "records":[
-    {
-        "time": "2016-01-26T10:37:46.6024215Z",
-        "systemId": "32077926-b9c4-42fb-94c1-762e528b5b27",
-        "category": "LoadBalancerProbeHealthStatus",
-        "resourceId": "/SUBSCRIPTIONS/XXXXXXXXXXXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXX/RESOURCEGROUPS/RG7/PROVIDERS/MICROSOFT.NETWORK/LOADBALANCERS/WWEBLB",
-        "operationName": "LoadBalancerProbeHealthStatus",
-        "properties": {
-            "publicIpAddress": "40.83.190.158",
-            "port": "81",
-            "totalDipCount": 2,
-            "dipDownCount": 1,
-            "healthPercentage": 50.000000
-        }
-    },
-    {
-        "time": "2016-01-26T10:37:46.6024215Z",
-        "systemId": "32077926-b9c4-42fb-94c1-762e528b5b27",
-        "category": "LoadBalancerProbeHealthStatus",
-        "resourceId": "/SUBSCRIPTIONS/XXXXXXXXXXXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXX/RESOURCEGROUPS/RG7/PROVIDERS/MICROSOFT.NETWORK/LOADBALANCERS/WWEBLB",
-        "operationName": "LoadBalancerProbeHealthStatus",
-        "properties": {
-            "publicIpAddress": "40.83.190.158",
-            "port": "81",
-            "totalDipCount": 2,
-            "dipDownCount": 0,
-            "healthPercentage": 100.000000
-        }
-    }]
-}
-```
-
-La sortie JSON apparaît dans le champ des propriétés des informations de base pour l'état des sondes d’intégrité. La propriété *dipDownCount* indique le nombre total d’instances sur le back-end qui ne reçoivent pas le trafic réseau en raison d’une absence de réponse de la part de la sonde.
-
-### <a name="view-and-analyze-the-activity-log"></a>Afficher et analyser le journal d’activité
-
-Vous pouvez afficher et analyser les données du journal d’activité en utilisant l’une des méthodes suivantes :
-
-* **Outils Azure** : Récupérez les informations du journal d'activité par le biais d'Azure PowerShell, de l'interface de ligne de commande (CLI) Azure, de l'API REST Azure ou du portail Azure. Des instructions détaillées pour chaque méthode sont détaillées dans l’article [Opérations d’audit avec Resource Manager](../azure-resource-manager/management/view-activity-logs.md) .
-* **Power BI :** si vous n’avez pas encore de compte [Power BI](https:// .microsoft.com/pricing), vous pouvez l’essayer gratuitement. À l’aide du [pack de contenus des journaux d’activité d’audit Azure pour Power BI](https:// .microsoft.com/documentation/ -content-pack-azure-audit-logs), vous pouvez analyser vos données avec des tableaux de bord préconfigurés ou personnaliser les vues selon vos besoins.
-
-### <a name="view-and-analyze-the-health-probe-and-event-log"></a>Afficher et analyser les journaux des sondes d’intégrité et des événements
-
-Connectez-vous à votre compte de stockage et récupérez les entrées de journal JSON pour les journaux des événements et des sondes d’intégrité. Une fois que vous avez téléchargé les fichiers JSON, vous pouvez les convertir en CSV et les afficher dans Excel, Power BI ou tout autre outil de visualisation de données.
+Si vous exportez vers le stockage, connectez-vous à votre compte de stockage et récupérez les entrées de journal JSON pour les journaux des événements et des sondes d’intégrité. Après avoir téléchargé les fichiers JSON, vous pouvez les convertir en CSV et les afficher dans Excel, Power BI ou tout autre outil de visualisation de données. 
 
 > [!TIP]
-> Si vous savez utiliser Visual Studio et les concepts de base de la modification des valeurs de constantes et variables en C#, vous pouvez utiliser les [outils de convertisseur de journaux](https://github.com/Azure-Samples/networking-dotnet-log-converter) disponibles dans GitHub.
+> Si vous savez utiliser Visual Studio et les concepts de base de la modification des valeurs de constantes et variables en C#, vous pouvez utiliser les [outils de convertisseur de journaux](https://github.com/Azure-Samples/networking-dotnet-log-converter) disponibles dans GitHub.
 
 ## <a name="stream-to-an-event-hub"></a>Diffuser vers un hub d’événements
-Quand les informations de diagnostic sont envoyées en streaming vers un hub d’événements, elles peuvent être utilisées pour une analyse centralisée des journaux dans un outil SIEM tiers avec intégration à Azure Monitor. Pour plus d’informations, consultez [Envoyer en streaming des données de supervision Azure vers un hub d’événements](../azure-monitor/platform/stream-monitoring-data-event-hubs.md#partner-tools-with-azure-monitor-integration)
+Quand les informations de diagnostic sont envoyées en streaming vers un hub d’événements, elles peuvent être utilisées pour une analyse centralisée des journaux dans un outil SIEM partenaire avec intégration à Azure Monitor. Pour plus d’informations, consultez [Transmettre en continu des données de surveillance Azure à un hub d’événements](../azure-monitor/platform/stream-monitoring-data-event-hubs.md#partner-tools-with-azure-monitor-integration).
 
 ## <a name="send-to-log-analytics"></a>Envoyer à Log Analytics
-Les informations de diagnostic des ressources dans Azure peuvent être envoyées directement à un espace de travail Log Analytics où des requêtes complexes peuvent être exécutées sur les informations en vue d’un dépannage et d’une analyse.  Pour plus d’informations, consultez [Collecter les journaux de ressources Azure dans l’espace de travail Log Analytics dans Azure Monitor](https://docs.microsoft.com/azure/azure-monitor/platform/resource-logs-collect-workspace).
+Vous pouvez envoyer des informations de diagnostic pour les ressources figurant dans Azure directement à un espace de travail Log Analytics. Dans cet espace de travail, vous pouvez exécuter des requêtes complexes sur les informations en vue d’un dépannage et d’une analyse. Pour plus d’informations, consultez [Collecter les journaux de ressources Azure dans un espace de travail Log Analytics dans Azure Monitor](../azure-monitor/platform/resource-logs.md#send-to-log-analytics-workspace).
+
+## <a name="limitations"></a>Limites
+La fonctionnalité d’exportation des métriques sous forme de journaux pour Azure Load Balancer présente les limitations suivantes :
+* Les métriques sont actuellement affichées via des noms internes lorsqu’ils sont exportés sous forme de journaux. Vous pouvez trouver le mappage dans le tableau ci-dessous.
+* La dimensionnalité des métriques n’est pas conservée. Par exemple, avec des métriques telles que **DipAvailability** (état de la sonde d’intégrité), vous ne pouvez pas fractionner ni afficher par adresse IP de back-end.
+* Actuellement, les métriques pour les ports SNAT utilisés et les ports SNAT alloués ne sont pas disponibles pour l’exportation sous forme de journaux.
 
 ## <a name="next-steps"></a>Étapes suivantes
-
-[Comprendre les sondes de l’équilibrage de charge](load-balancer-custom-probe-overview.md)
+* [Examiner les métriques disponibles pour votre équilibreur de charge](https://docs.microsoft.com/azure/load-balancer/load-balancer-standard-diagnostics)
+* [Créer et tester des requêtes en suivant les instructions Azure Monitor](https://docs.microsoft.com/azure/azure-monitor/log-query/log-query-overview)

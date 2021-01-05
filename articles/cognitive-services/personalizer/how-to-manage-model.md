@@ -1,14 +1,16 @@
 ---
 title: Gérer les paramètres de modèle et d’apprentissage – Personalizer
 description: Les paramètres d’apprentissage et de modèle d’apprentissage automatique peuvent être exportés à des fins de sauvegarde dans votre propre système de contrôle de code source.
-ms.topic: conceptual
+ms.service: cognitive-services
+ms.subservice: personalizer
+ms.topic: how-to
 ms.date: 02/20/2020
-ms.openlocfilehash: c544d058019c8d507f65dc6bfd854376b364abd1
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 48e954eab9da5dfc638f93a7c4e55c675c4f2ac9
+ms.sourcegitcommit: ab829133ee7f024f9364cd731e9b14edbe96b496
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77624207"
+ms.lasthandoff: 12/28/2020
+ms.locfileid: "97797245"
 ---
 # <a name="how-to-manage-model-and-learning-settings"></a>Comment gérer les paramètres de modèle et d’apprentissage
 
@@ -40,7 +42,7 @@ Dans la section **Paramètres de modèle et d’apprentissage** de Gestion des r
 Les paramètres de [stratégie d’apprentissage](concept-active-learning.md#understand-learning-policy-settings) déterminent les _hyperparamètres_ de la formation des modèles. Effectuez une [évaluation hors connexion](how-to-offline-evaluation.md) pour rechercher une nouvelle stratégie d’apprentissage.
 
 1. Ouvrez le [portail Azure](https://portal.azure.com) et sélectionnez votre ressource Personalizer.
-1. Sélectionnez **Paramètres de modèle et d’apprentissage**  dans la section **Gestion des ressources**.
+1. Sélectionnez **Paramètres de modèle et d’apprentissage** dans la section **Gestion des ressources**.
 1. Pour **Importer les paramètres d’apprentissage** sélectionnez le fichier que vous avez créé au format JSON spécifié ci-dessus, puis sélectionnez le bouton **Charger**.
 
     Attendez la notification qui indique que la stratégie d’apprentissage a été chargée avec succès.
@@ -48,9 +50,9 @@ Les paramètres de [stratégie d’apprentissage](concept-active-learning.md#und
 ## <a name="export-a-learning-policy"></a>Exporter une stratégie d’apprentissage
 
 1. Ouvrez le [portail Azure](https://portal.azure.com) et sélectionnez votre ressource Personalizer.
-1. Sélectionnez **Paramètres de modèle et d’apprentissage**  dans la section **Gestion des ressources**.
+1. Sélectionnez **Paramètres de modèle et d’apprentissage** dans la section **Gestion des ressources**.
 1. Pour **Importer les paramètres d’apprentissage**, sélectionnez le bouton **Exporter les paramètres d’apprentissage**. Cette opération enregistre le fichier `json` sur votre ordinateur local.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-[Découvrir comment gérer une stratégie d’apprentissage](how-to-manage-model.md)
+[Analysez votre boucle d’apprentissage avec une évaluation hors connexion](how-to-offline-evaluation.md)

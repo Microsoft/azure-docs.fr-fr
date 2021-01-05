@@ -4,27 +4,26 @@ description: Découvrez comment créer une passerelle d’application avec un gr
 services: application-gateway
 author: vhorne
 ms.service: application-gateway
-ms.topic: article
+ms.topic: how-to
 ms.date: 07/19/2019
 ms.author: victorh
 ms.custom: mvc
-ms.openlocfilehash: a313296a9a19aa762803652a3b139cdac7ca3a58
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 7e410218117aa0d21167b6d615a3835aeec470e7
+ms.sourcegitcommit: 0ce1ccdb34ad60321a647c691b0cff3b9d7a39c8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "68359928"
+ms.lasthandoff: 11/05/2020
+ms.locfileid: "93397108"
 ---
 # <a name="manage-web-traffic-with-an-application-gateway-using-azure-powershell"></a>Gérer le trafic web avec une passerelle d’application en utilisant Azure PowerShell
 
-La passerelle d’application est utilisée pour gérer et sécuriser le trafic web vers les serveurs que vous gérez. Vous pouvez utiliser Azure PowerShell afin de créer une [passerelle d’application](overview.md) qui utilise un [groupe de machines virtuelles identiques](../virtual-machine-scale-sets/virtual-machine-scale-sets-overview.md) pour les serveurs principaux afin de gérer le trafic web. Dans cet exemple, le groupe identique contient deux instances de machine virtuelle qui sont ajoutées au pool backend par défaut de la passerelle d’application.
+La passerelle d’application est utilisée pour gérer et sécuriser le trafic web vers les serveurs que vous gérez. Vous pouvez utiliser Azure PowerShell afin de créer une [passerelle d’application](overview.md) qui utilise un [groupe de machines virtuelles identiques](../virtual-machine-scale-sets/overview.md) pour les serveurs principaux afin de gérer le trafic web. Dans cet exemple, le groupe identique contient deux instances de machine virtuelle qui sont ajoutées au pool backend par défaut de la passerelle d’application.
 
 Dans cet article, vous apprendrez comment :
 
-> [!div class="checklist"]
-> * Configurer le réseau
-> * Créer une passerelle Application Gateway
-> * Créer un groupe de machines virtuelles identiques avec le pool backend par défaut
+* Configurer le réseau
+* Créer une passerelle Application Gateway
+* Créer un groupe de machines virtuelles identiques avec le pool backend par défaut
 
 Si vous préférez, vous pouvez suivre cette procédure en utilisant [Azure CLI](tutorial-manage-web-traffic-cli.md).
 
@@ -76,7 +75,7 @@ $pip = New-AzPublicIpAddress `
 
 Dans cette section, vous créez des ressources qui prennent en charge la passerelle d’application avant de créer cette dernière. Les ressources que vous créez sont les suivantes :
 
-- *Configurations IP et port frontend* : associe le sous-réseau que vous avez créé précédemment pour la passerelle d’application et assigne un port à utiliser pour y accéder.
+- *Configurations IP et port frontend*  : associe le sous-réseau que vous avez créé précédemment pour la passerelle d’application et assigne un port à utiliser pour y accéder.
 - *Pool par défaut* : toutes les passerelles d’application doivent avoir au moins un pool principal de serveurs.
 - *Écouteur et règle par défaut* : l’écouteur par défaut écoute le trafic sur le port assigné et la règle par défaut envoie le trafic au pool par défaut.
 
@@ -258,4 +257,4 @@ Remove-AzResourceGroup -Name myResourceGroupAG
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-[Limiter le trafic web avec un pare-feu d’applications web](./tutorial-restrict-web-traffic-powershell.md)
+[Limiter le trafic web avec un pare-feu d’applications web](../web-application-firewall/ag/tutorial-restrict-web-traffic-powershell.md)

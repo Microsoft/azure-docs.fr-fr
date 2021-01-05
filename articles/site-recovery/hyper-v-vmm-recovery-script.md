@@ -1,24 +1,24 @@
 ---
 title: Ajouter un script au plan de récupération dans Azure Site Recovery
 description: Découvrez comment ajouter un script VMM à un plan de reprise d’activité pour la reprise d’activité après sinistre de machines virtuelles Hyper-V dans des clouds VMM.
-author: rajani-janaki-ram
+author: Sharmistha-Rai
 manager: rochakm
 ms.service: site-recovery
 ms.topic: conceptual
 ms.date: 11/27/2018
-ms.author: rajanaki
-ms.openlocfilehash: 6902876e066649ae4dff4134fb8cc462f30dd0b7
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: sharrai
+ms.openlocfilehash: 3217c30737a133c1c1092fc4a8a8caaa0338e980
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74084875"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89425872"
 ---
 # <a name="add-a-vmm-script-to-a-recovery-plan"></a>Ajouter un script VMM à un plan de récupération
 
 Cet article explique comment créer un script VMM (System Center Virtual Machine Manager) et l’ajouter à un plan de récupération dans [Azure Site Recovery](site-recovery-overview.md).
 
-Postez des commentaires ou des questions au bas de cet article ou sur le [forum Azure Recovery Services](https://social.msdn.microsoft.com/forums/azure/home?forum=hypervrecovmgr).
+Publiez des commentaires ou des questions au bas de cet article ou sur la [page de questions Microsoft Q&R sur Azure Recovery Services](/answers/topics/azure-site-recovery.html).
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -38,7 +38,7 @@ Vous pouvez utiliser des scripts PowerShell dans vos plans de récupération. Po
 
     `Import-Module -Name virtualmachinemanager`
 
-    Pour plus d’informations, consultez [Bien démarrer avec Windows PowerShell et VMM](https://technet.microsoft.com/library/hh875013.aspx).
+    Pour plus d’informations, consultez [Bien démarrer avec Windows PowerShell et VMM](/previous-versions/system-center/system-center-2012-R2/hh875013(v=sc.12)).
 * Vérifiez que vous disposez d’au moins un serveur de bibliothèque au sein de votre déploiement VMM. Par défaut, le chemin de partage de bibliothèque d’un serveur VMM est disponible localement sur le serveur VMM. Le nom du dossier est MSCVMMLibrary.
 
   Si votre chemin de partage de bibliothèque est distant (ou local mais non partagé avec MSCVMMLibrary), configurez le partage comme suit, en utilisant \\libserver2.contoso.com\share\ comme exemple :
@@ -51,7 +51,7 @@ Vous pouvez utiliser des scripts PowerShell dans vos plans de récupération. Po
 
      a. Ouvrez la console **Windows PowerShell 64 bits** en tant qu’administrateur.
      
-     b. Entrez **Set-executionpolicy bypass**. Pour plus d’informations, consultez [Utilisation de l’applet de commande Set-ExecutionPolicy](https://technet.microsoft.com/library/ee176961.aspx).
+     b. Entrez **Set-executionpolicy bypass**. Pour plus d’informations, consultez [Utilisation de l’applet de commande Set-ExecutionPolicy](/previous-versions/windows/it-pro/windows-powershell-1.0/ee176961(v=technet.10)).
 
      > [!IMPORTANT]
      > Définissez **Set-executionpolicy bypass** uniquement dans la console PowerShell 64 bits. Si vous la définissez pour la console PowerShell de 32 bits, les scripts ne s’exécutent pas.
@@ -60,9 +60,9 @@ Vous pouvez utiliser des scripts PowerShell dans vos plans de récupération. Po
 
 Si vous avez un site source VMM, libre à vous de créer un script sur le serveur VMM. Il vous suffit ensuite d’inclure ce script dans votre plan de récupération.
 
-1. Dans le partage de bibliothèque, créez un dossier. Par exemple, \<Nom du serveur VMM> \MSSCVMMLibrary\RPScripts. Placez le dossier sur les serveurs VMM source et cible.
+1. Dans le partage de bibliothèque, créez un dossier. Par exemple, \<VMM server name>\MSSCVMMLibrary\RPScripts. Placez le dossier sur les serveurs VMM source et cible.
 1. Créez le script. Par exemple, nommez le script RPScript. Vérifiez le bon fonctionnement du script.
-1. Placez le script dans le dossier \<Nom du serveur VMM>\MSSCVMMLibrary sur les serveurs VMM source et cible.
+1. Placez le script dans le dossier \<VMM server name>\MSSCVMMLibrary sur les serveurs VMM source et cible.
 
 ## <a name="add-the-script-to-a-recovery-plan"></a>Ajouter le script à un plan de récupération
 

@@ -9,18 +9,18 @@ editor: ''
 ms.assetid: 9997a97b-9382-43ed-b56e-61369335c987
 ms.service: storsimple
 ms.devlang: NA
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: NA
 ms.workload: TBD
 ms.date: 02/27/2017
 ms.author: alkohli
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: 7bf064ff01693f7a65c756a99c435d7f1a39840e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 3bd6f298ad2bb01503492b52c2d50dec82ec0ca5
+ms.sourcegitcommit: 6ab718e1be2767db2605eeebe974ee9e2c07022b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "61409253"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94534040"
 ---
 # <a name="install-updates-on-your-storsimple-virtual-array---azure-portal"></a>Installation de mises à jour sur votre instance StorSimple Virtual Array - Portail Azure
 
@@ -77,26 +77,26 @@ Cette méthode permet d’installer les mises à jour sur un appareil exécutant
 
 1. Dans l’interface utilisateur web locale, accédez à **Maintenance** > **Mise à jour logicielle**.
    
-    ![mettre à jour l'appareil](./media/storsimple-virtual-array-install-update/update1m.png)
+    ![Capture d’écran montrant les Mises à jour logicielles sélectionnées dans le menu Maintenance.](./media/storsimple-virtual-array-install-update/update1m.png)
 
 2. Dans le **chemin d’accès au fichier de mise à jour**, entrez le nom du fichier de mise à jour ou de correctif. Vous pouvez également accéder au fichier d'installation de la mise à jour ou du correctif si celui-ci est placé sur un partage réseau. Cliquez sur **Appliquer**.
    
-    ![mettre à jour l'appareil](./media/storsimple-virtual-array-install-update/update2m.png)
+    ![Capture d’écran montrant la zone de texte Mise à jour du chemin du fichier sur la page Mise à jour logicielle.](./media/storsimple-virtual-array-install-update/update2m.png)
 
 3. Un avertissement s’affiche. Puisqu’il s’agit d’un appareil à nœud unique, l’application de la mise à jour entraîne le redémarrage de l’appareil et provoque un temps d’arrêt. Cliquez sur l’icône en forme de coche.
    
-   ![mettre à jour l'appareil](./media/storsimple-virtual-array-install-update/update3m.png)
+   ![Capture d’écran montrant une boîte de dialogue avertissant d’un temps d’arrêt.](./media/storsimple-virtual-array-install-update/update3m.png)
 
 4. La mise à jour démarre. Une fois l’appareil correctement mis à jour, il est redémarré. L’interface utilisateur locale n’est pas accessible pendant cet intervalle.
    
-    ![mettre à jour l'appareil](./media/storsimple-virtual-array-install-update/update5m.png)
+    ![Capture d’écran montrant un message confirmant la réussite de la mise à jour.](./media/storsimple-virtual-array-install-update/update5m.png)
 
 5. Une fois le redémarrage effectué, vous êtes redirigé vers la page **Se connecter** . Pour vérifier que le logiciel de l’appareil a été mis à jour, accédez à **Maintenance** > **Mise à jour logicielle** dans l’interface utilisateur web locale. La version du logiciel doit être **10.0.0.0.0.10288.0** pour Update 0.3.
    
    > [!NOTE]
    > L’affichage des versions logicielles diffère légèrement entre l’interface utilisateur web locale et le portail Azure. Par exemple, la même version est signalée par **10.0.0.0.0.10288** dans l’interface utilisateur web locale et par **10.0.10288.0** sur le portail Azure.
    
-    ![mettre à jour l'appareil](./media/storsimple-virtual-array-install-update/update6m.png)
+    ![Capture d’écran montrant la page des mises à jour logicielles avec la version actuelle du logiciel.](./media/storsimple-virtual-array-install-update/update6m.png)
 
 ## <a name="use-the-azure-portal"></a>Utilisation du portail Azure
 

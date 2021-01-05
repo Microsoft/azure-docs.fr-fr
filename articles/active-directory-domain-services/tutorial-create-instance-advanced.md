@@ -1,32 +1,32 @@
 ---
-title: Tutoriel - Créer une instance Azure Active Directory Domain Services | Microsoft Docs
-description: Dans ce tutoriel, vous découvrez comment utiliser le portail Azure pour créer et configurer une instance Azure Active Directory Domain Services, et définir des options de configuration avancées.
-author: iainfoulds
+title: Tutoriel - Créer un domaine managé personnalisé Azure Active Directory Domain Services | Microsoft Docs
+description: Dans ce tutoriel, vous allez découvrir comment utiliser le portail Azure pour créer et configurer un domaine managé personnalisé Azure Active Directory Domain Services, et définir des options de configuration avancées.
+author: justinha
 manager: daveba
 ms.service: active-directory
 ms.subservice: domain-services
 ms.workload: identity
 ms.topic: tutorial
-ms.date: 03/31/2020
-ms.author: iainfou
-ms.openlocfilehash: f2d7f1725623dcc031f3c2b36bacd6dbc9ad339d
-ms.sourcegitcommit: d791f8f3261f7019220dd4c2dbd3e9b5a5f0ceaf
+ms.date: 07/06/2020
+ms.author: justinha
+ms.openlocfilehash: 4d03edac98329d7c47b8bfafbf4d30cfca18863c
+ms.sourcegitcommit: 8192034867ee1fd3925c4a48d890f140ca3918ce
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/18/2020
-ms.locfileid: "81639947"
+ms.lasthandoff: 12/05/2020
+ms.locfileid: "96618227"
 ---
-# <a name="tutorial-create-and-configure-an-azure-active-directory-domain-services-instance-with-advanced-configuration-options"></a>Tutoriel : Créer et configurer une instance Azure Active Directory Domain Services avec des options de configuration avancées
+# <a name="tutorial-create-and-configure-an-azure-active-directory-domain-services-managed-domain-with-advanced-configuration-options"></a>Tutoriel : Créer et configurer un domaine managé Azure Active Directory Domain Services avec des options de configuration avancées
 
 Azure Active Directory Domain Services (Azure AD DS) fournit des services de domaine managés, comme la jonction de domaine, la stratégie de groupe, le protocole LDAP, et l’authentification Kerberos/NTLM entièrement compatible avec Windows Server Active Directory. Vous consommez ces services de domaine sans déployer, gérer et mettre à jour avec des correctifs les contrôleurs de domaine vous-même. Azure AD DS s’intègre à votre locataire Azure AD existant. Cette intégration permet aux utilisateurs de se connecter en utilisant leurs informations d’identification d’entreprise, et vous pouvez utiliser des groupes et des comptes d’utilisateur existants pour sécuriser l’accès aux ressources.
 
-Vous pouvez [créer un domaine managé avec des options de configuration par défaut][tutorial-create-instance] pour la mise en réseau et la synchronisation, ou définir manuellement ces paramètres. Ce tutoriel vous montre comment définir ces options de configuration avancées pour créer et configurer une instance Azure AD DS avec le portail Azure.
+Vous pouvez [créer un domaine managé avec des options de configuration par défaut][tutorial-create-instance] pour la mise en réseau et la synchronisation, ou définir manuellement ces paramètres. Ce tutoriel montre comment définir ces options de configuration avancées pour créer et configurer un domaine managé Azure AD DS avec le portail Azure.
 
 Dans ce tutoriel, vous allez apprendre à :
 
 > [!div class="checklist"]
 > * Configurer les paramètres de réseau virtuel et DNS pour un domaine managé
-> * Créer une instance Azure AD DS
+> * Créer un domaine managé
 > * Ajouter des utilisateurs d’administration à la gestion du domaine
 > * Activer la synchronisation de hachage de mot de passe
 
@@ -46,13 +46,13 @@ Pour effectuer ce tutoriel, vous avez besoin des ressources et des privilèges s
 Bien que ce ne soit pas obligatoire pour Azure AD DS, nous vous recommandons de [configurer la réinitialisation de mot de passe en libre-service (SSPR)][configure-sspr] pour le locataire Azure AD. Les utilisateurs peuvent changer leur mot de passe sans SSPR, mais SSPR aide s’ils oublient leur mot de passe et doivent les réinitialiser.
 
 > [!IMPORTANT]
-> Après avoir créé un domaine managé Azure AD DS, vous ne pouvez pas déplacer l’instance vers un autre groupe de ressources, réseau virtuel, abonnement, etc. Veillez à sélectionner l’abonnement, le groupe de ressources, la région et le réseau virtuel les plus appropriés quand vous déployez l’instance Azure AD DS.
+> Une fois que vous avez créé un domaine managé, vous ne pouvez plus le déplacer vers un autre groupe de ressources, réseau virtuel, abonnement, etc. Veillez à sélectionner l’abonnement, le groupe de ressources, la région et le réseau virtuel les plus appropriés quand vous déployez le domaine managé.
 
 ## <a name="sign-in-to-the-azure-portal"></a>Connectez-vous au portail Azure.
 
-Dans ce tutoriel, vous créez et vous configurez une instance Azure AD DS avec le portail Azure. Pour commencer, connectez-vous au [portail Azure](https://portal.azure.com).
+Dans ce tutoriel, vous créez et configurez le domaine managé avec le portail Azure. Pour commencer, connectez-vous au [portail Azure](https://portal.azure.com).
 
-## <a name="create-an-instance-and-configure-basic-settings"></a>Créer une instance et configurer les paramètres de base
+## <a name="create-a-managed-domain-and-configure-basic-settings"></a>Créer un domaine managé et configurer les paramètres de base
 
 Pour lancer l’Assistant **Activer Azure AD Domain Services**, procédez comme suit :
 
@@ -62,7 +62,7 @@ Pour lancer l’Assistant **Activer Azure AD Domain Services**, procédez comme 
 1. Sélectionnez l’**Abonnement** Azure dans lequel vous souhaitez créer le domaine managé.
 1. Sélectionnez le **Groupe de ressources** auquel le domaine managé doit appartenir. Choisissez de **Créer** ou de sélectionner un groupe de ressources existant.
 
-Quand vous créez une instance Azure AD DS, vous spécifiez un nom DNS. Voici quelques considérations liées au choix de ce nom DNS :
+Quand vous créez un domaine managé, vous spécifiez un nom DNS. Voici quelques considérations liées au choix de ce nom DNS :
 
 * **Nom de domaine intégré :** Par défaut, le nom de domaine intégré de l’annuaire est utilisé (un suffixe *.onmicrosoft.com*). Si vous voulez activer l’accès LDAP sécurisé au domaine managé via Internet, vous ne pouvez pas créer un certificat numérique pour sécuriser la connexion avec ce domaine par défaut. Microsoft détient le domaine *.onmicrosoft.com* : une autorité de certification n’émettra donc pas de certificat.
 * **Noms de domaine personnalisés :** L’approche la plus courante consiste à spécifier un nom de domaine personnalisé, en général celui que vous possédez déjà et qui est routable. Quand vous utilisez un domaine personnalisé routable, le trafic peut s’écouler correctement en fonction des besoins pour prendre en charge vos applications.
@@ -71,7 +71,7 @@ Quand vous créez une instance Azure AD DS, vous spécifiez un nom DNS. Voici qu
 > [!TIP]
 > Si vous créez un nom de domaine personnalisé, faites attention aux espaces de noms DNS existants. Il est recommandé d’utiliser un nom de domaine distinct de tout espace de noms DNS local ou Azure existant.
 >
-> Par exemple, si vous disposez de l’espace de noms DNS existant *contoso.com*, créez un domaine managé Azure AD DS avec le nom de domaine personnalisé *aaddscontoso.com*. Si vous devez utiliser le protocole LDAP sécurisé, vous devez inscrire et avoir ce nom de domaine personnalisé pour générer les certificats requis.
+> Par exemple, si vous disposez de l’espace de noms DNS existant *contoso.com*, créez un domaine managé avec le nom de domaine personnalisé *aaddscontoso.com*. Si vous devez utiliser le protocole LDAP sécurisé, vous devez inscrire et avoir ce nom de domaine personnalisé pour générer les certificats requis.
 >
 > Vous devrez peut-être créer des enregistrements DNS supplémentaires pour d’autres services dans votre environnement, ou des redirecteurs DNS conditionnels entre les espaces de noms DNS existants dans votre environnement. Par exemple, si vous exécutez un serveur web qui héberge un site à l’aide du nom DNS racine, il peut y avoir des conflits de nommage qui nécessitent des entrées DNS supplémentaires.
 >
@@ -85,29 +85,32 @@ Les restrictions de nom DNS suivantes s’appliquent également :
     * Si le réseau virtuel dans lequel vous envisagez d’activer le domaine managé a une connexion VPN avec votre réseau local. Dans ce scénario, veillez à ne pas avoir de domaine portant le même nom de domaine DNS sur votre réseau local.
     * Si vous avez un service cloud Azure avec ce nom sur le réseau virtuel Azure.
 
-Renseignez les champs de la fenêtre *De base* du portail Azure pour créer une instance Azure AD DS :
+Renseignez les champs de la fenêtre *De base* du portail Azure pour créer un domaine managé :
 
 1. Entrez un **Nom de domaine DNS** pour votre domaine managé, en tenant compte des points précédents.
 1. Choisissez l’**Emplacement** Azure dans lequel créer le domaine managé. Si vous choisissez une région qui prend en charge les Zones de disponibilité, les ressources Azure AD DS sont réparties entre les zones pour assurer une redondance supplémentaire.
 
-    Les Zones de disponibilité sont des emplacements physiques uniques au sein d’une région Azure. Chaque zone de disponibilité est composée d’un ou de plusieurs centres de données équipés d’une alimentation, d’un système de refroidissement et d’un réseau indépendants. Pour garantir la résilience, un minimum de trois zones distinctes sont activées dans toutes les régions.
-
-    Vous ne devez rien configurer pour la répartition d’Azure AD DS entre les zones. La plateforme Azure gère automatiquement la répartition de zone des ressources. Pour plus d’informations et pour connaître la disponibilité régionale, consultez [Que sont les zones de disponibilité dans Azure ?][availability-zones]
+    > [!TIP]
+    > Les Zones de disponibilité sont des emplacements physiques uniques au sein d’une région Azure. Chaque zone de disponibilité est composée d’un ou de plusieurs centres de données équipés d’une alimentation, d’un système de refroidissement et d’un réseau indépendants. Pour garantir la résilience, un minimum de trois zones distinctes sont activées dans toutes les régions.
+    >
+    > Vous ne devez rien configurer pour la répartition d’Azure AD DS entre les zones. La plateforme Azure gère automatiquement la répartition de zone des ressources. Pour plus d’informations et pour connaître la disponibilité régionale, consultez [Que sont les zones de disponibilité dans Azure ?][availability-zones]
 
 1. La référence **SKU** détermine les performances, la fréquence de sauvegarde et le nombre maximal d’approbations de forêt que vous pouvez créer. Vous pouvez changer de référence SKU après la création du domaine managé en cas de changement des besoins métier. Pour plus d’informations, consultez [Concepts relatifs aux références SKU dans Azure AD DS][concepts-sku].
 
     Pour ce tutoriel, sélectionnez la référence SKU *Standard*.
-1. Une *forêt* est une construction logique utilisée par Active Directory Domain Services pour regrouper un ou plusieurs domaines. Par défaut, un domaine managé Azure AD DS est créé en tant que forêt d’*utilisateurs*. Ce type de forêt synchronise tous les objets d’Azure AD, notamment les comptes d’utilisateur créés dans un environnement AD DS local. Une forêt de *ressources* synchronise uniquement les utilisateurs et les groupes créés directement dans Azure AD. Les forêts de ressources sont actuellement en préversion. Pour plus d’informations sur les forêts de *ressources*, notamment sur la raison pour laquelle vous pouvez en utiliser une et comment créer des approbations de forêts avec des domaines AD DS locaux, consultez [Vue d’ensemble des forêts de ressources Azure AD DS][resource-forests].
+1. Une *forêt* est une construction logique utilisée par Active Directory Domain Services pour regrouper un ou plusieurs domaines. Par défaut, un domaine managé est créé en tant que forêt d’*utilisateurs*. Ce type de forêt synchronise tous les objets d’Azure AD, notamment les comptes d’utilisateur créés dans un environnement AD DS local.
+
+    Une forêt de *ressources* synchronise uniquement les utilisateurs et les groupes créés directement dans Azure AD. Les hachages de mots de passe pour les utilisateurs locaux ne sont jamais synchronisés dans un domaine managé quand vous créez une forêt de ressources. Pour plus d’informations sur les forêts de *ressources*, notamment sur la raison pour laquelle vous pouvez en utiliser une et comment créer des approbations de forêts avec des domaines AD DS locaux, consultez [Vue d’ensemble des forêts de ressources Azure AD DS][resource-forests].
 
     Pour ce tutoriel, choisissez de créer une forêt d’*utilisateurs*.
 
-    ![Configurer les paramètres de base pour une instance Azure AD Domain Services](./media/tutorial-create-instance-advanced/basics-window.png)
+    ![Configurer les paramètres de base pour un domaine managé Azure AD Domain Services](./media/tutorial-create-instance-advanced/basics-window.png)
 
 1. Pour configurer manuellement des options supplémentaires, choisissez **Suivant - Réseau**. Sinon, sélectionnez **Vérifier + créer** pour accepter les options de configuration par défaut, puis passez à la section [Déployer votre domaine managé](#deploy-the-managed-domain). Quand vous choisissez cette option de création, les paramètres par défaut suivants sont configurés :
 
     * Crée un réseau virtuel nommé *aadds-vnet* qui utilise la plage d’adresses IP *10.0.1.0/24*.
     * Crée un sous-réseau appelé *aadds-subnet* qui utilise la plage d’adresses IP *10.0.1.0/24*.
-    * Synchronise *tous* les utilisateurs entre Azure AD et le domaine managé Azure AD DS.
+    * Synchronise *tous* les utilisateurs entre Azure AD et le domaine managé.
 
 ## <a name="create-and-configure-the-virtual-network"></a>Créer et configurer le réseau virtuel
 
@@ -128,7 +131,7 @@ Renseignez les champs de la fenêtre *Réseau* comme suit :
     1. Si vous choisissez de créer un réseau virtuel, entrez un nom pour ce nouveau réseau, comme *myVnet*, puis spécifiez une plage d’adresses, par exemple *10.0.1.0/24*.
     1. Créez un sous-réseau dédié avec un nom explicite, par exemple *DomainServices*. Spécifiez une plage d’adresses, par exemple *10.0.1.0/24*.
 
-    [![](./media/tutorial-create-instance-advanced/create-vnet.png "Create a virtual network and subnet for use with Azure AD Domain Services")](./media/tutorial-create-instance-advanced/create-vnet-expanded.png#lightbox)
+    [ ![Créer un réseau virtuel et un sous-réseau pour une utilisation avec Azure AD Domain Services](./media/tutorial-create-instance-advanced/create-vnet.png)](./media/tutorial-create-instance-advanced/create-vnet-expanded.png#lightbox)
 
     Veillez à choisir une plage d’adresses qui se trouve dans votre plage d’adresses IP privée. Les plages d’adresses IP qui ne vous appartiennent pas et qui se trouvent dans l’espace d’adressage public provoquent des erreurs dans Azure AD DS.
 
@@ -139,7 +142,10 @@ Renseignez les champs de la fenêtre *Réseau* comme suit :
 
 Un groupe d’administration spécial nommé *Administrateurs AAD DC* est utilisé pour la gestion du domaine Azure AD DS. Les membres de ce groupe bénéficient d’autorisations d’administration sur les machines virtuelles jointes au domaine managé. Sur les machines virtuelles jointes au domaine, ce groupe est ajouté au groupe des administrateurs locaux. Les membres de ce groupe peuvent aussi utiliser Bureau à distance pour se connecter à distance aux machines virtuelles jointes au domaine.
 
-Vous ne disposez pas des autorisations *Administrateur de domaine* ou *Administrateur d’entreprise* sur un domaine managé avec Azure AD DS. Ces autorisations sont réservées par le service et ne sont pas disponibles pour les utilisateurs au sein du locataire. Au lieu de cela, le groupe *Administrateurs AAD DC* vous permet d’effectuer des opérations privilégiées. Ces opérations incluent l’appartenance au groupe d’administration sur les machines virtuelles jointes au domaine ainsi que la configuration de la stratégie de groupe.
+> [!IMPORTANT]
+> Vous ne disposez pas des autorisations *Administrateur de domaine* ou *Administrateur d’entreprise* sur un domaine managé avec Azure AD DS. Ces autorisations sont réservées par le service et ne sont pas disponibles pour les utilisateurs au sein du locataire.
+>
+> Au lieu de cela, le groupe *Administrateurs AAD DC* vous permet d’effectuer des opérations privilégiées. Ces opérations incluent l’appartenance au groupe d’administration sur les machines virtuelles jointes au domaine ainsi que la configuration de la stratégie de groupe.
 
 L’Assistant crée automatiquement le groupe *Administrateurs AAD DC* dans votre annuaire Azure AD. Si vous disposez d’un groupe du même nom dans votre répertoire Azure AD, l’Assistant sélectionne ce groupe. Vous pouvez aussi choisir d’ajouter des utilisateurs supplémentaires à ce groupe *Administrateurs AAD DC* lors du processus de déploiement. Ces étapes peuvent être effectuées ultérieurement.
 
@@ -148,12 +154,12 @@ L’Assistant crée automatiquement le groupe *Administrateurs AAD DC* dans votr
     ![Configurer l’appartenance au groupe, du groupe Administrateurs AAD DC](./media/tutorial-create-instance-advanced/admin-group.png)
 
 1. Sélectionnez le bouton **Ajouter des membres**, puis recherchez et sélectionnez les utilisateurs dans votre annuaire Azure AD. Par exemple, recherchez votre propre compte, puis ajoutez-le au groupe *Administrateurs AAD DC*.
-1. Si vous le souhaitez, changez les destinataires ou ajoutez des destinataires supplémentaires auxquels doivent être envoyées les notifications des alertes générées dans le domaine managé Azure AD DS qui nécessitent une attention particulière.
+1. Si vous le souhaitez, changez les destinataires ou ajoutez des destinataires supplémentaires auxquels doivent être envoyées les notifications des alertes générées dans le domaine managé qui nécessitent une attention particulière.
 1. Quand vous êtes prêt, choisissez **Suivant - Synchronisation**.
 
 ## <a name="configure-synchronization"></a>Configurer la synchronisation
 
-Azure AD DS vous permet de synchroniser *tous* les utilisateurs et les groupes disponibles dans Azure AD, ou d’effectuer une synchronisation *limitée* seulement à des groupes spécifiques. Si vous choisissez de synchroniser *tous* les utilisateurs et groupes, vous ne pourrez pas choisir ultérieurement d’effectuer seulement une synchronisation limitée. Pour en savoir plus sur la synchronisation limitée, consultez [Synchronisation limitée d’Azure AD Domain Services][scoped-sync].
+Azure AD DS vous permet de synchroniser *tous* les utilisateurs et les groupes disponibles dans Azure AD, ou d’effectuer une synchronisation *limitée* seulement à des groupes spécifiques. Vous pouvez modifier l’étendue de synchronisation maintenant, ou une fois que le domaine managé est déployé. Pour plus d’informations, consultez [Synchronisation limitée d’Azure AD Domain Services][scoped-sync].
 
 1. Pour ce tutoriel, choisissez de synchroniser **Tous** les utilisateurs et groupes. Ce choix de synchronisation est l’option par défaut.
 
@@ -163,14 +169,14 @@ Azure AD DS vous permet de synchroniser *tous* les utilisateurs et les groupes d
 
 ## <a name="deploy-the-managed-domain"></a>Déployer le domaine managé
 
-Dans la page **Résumé** de l’Assistant, examinez les paramètres de configuration du domaine managé. Vous pouvez revenir à n’importe quelle étape de l’Assistant pour faire des modifications. Pour redéployer un domaine managé Azure AD DS dans un autre client Azure AD en utilisant ces mêmes options de configuration, vous pouvez également **télécharger un modèle pour l’automatisation**.
+Dans la page **Résumé** de l’Assistant, examinez les paramètres de configuration du domaine managé. Vous pouvez revenir à n’importe quelle étape de l’Assistant pour faire des modifications. Pour redéployer un domaine managé sur un autre client Azure AD en utilisant ces mêmes options de configuration, vous pouvez également **télécharger un modèle pour l’automatisation**.
 
 1. Pour créer le domaine managé, sélectionnez **Créer**. Une remarque s’affiche pour signaler que certaines options de configuration, telles que le nom DNS ou le réseau virtuel, ne sont plus modifiables une fois que le domaine managé Azure AD DS a été créé. Pour continuer, sélectionnez **OK**.
 1. Le processus d’approvisionnement de votre domaine managé peut prendre jusqu’à une heure. Vous voyez une notification dans le portail indiquant la progression de votre déploiement Azure AD DS. Sélectionnez la notification pour voir la progression détaillée du déploiement.
 
     ![Notification dans le portail Azure du déploiement en cours](./media/tutorial-create-instance-advanced/deployment-in-progress.png)
 
-1. Sélectionnez votre groupe de ressources, tel que *myResourceGroup*, puis choisissez votre instance Azure AD DS dans la liste des ressources Azure, par exemple *aaddscontoso.com*. L’onglet **Vue d’ensemble** montre que le domaine managé est actuellement en cours de *Déploiement*. Vous ne pouvez pas configurer le domaine managé tant qu’il n’est pas entièrement provisionné.
+1. Sélectionnez votre groupe de ressources, tel que *myResourceGroup*, puis choisissez votre domaine managé dans la liste des ressources Azure, par exemple *aaddscontoso.com*. L’onglet **Vue d’ensemble** montre que le domaine managé est actuellement en cours de *Déploiement*. Vous ne pouvez pas configurer le domaine managé tant qu’il n’est pas entièrement provisionné.
 
     ![État des services de domaine pendant l’état Provisionnement](./media/tutorial-create-instance-advanced/provisioning-in-progress.png)
 
@@ -178,15 +184,16 @@ Dans la page **Résumé** de l’Assistant, examinez les paramètres de configur
 
     ![État des services de domaine une fois le provisionnement terminé](./media/tutorial-create-instance-advanced/successfully-provisioned.png)
 
-Le domaine managé est associé à votre locataire Azure AD. Pendant le processus d’approvisionnement, Azure AD DS crée deux applications d’entreprise nommées *Services de contrôleur de domaine* et *AzureActiveDirectoryDomainControllerServices* dans le locataire Azure AD. Ces applications d’entreprise sont nécessaires pour entretenir votre domaine géré. Ne supprimez pas ces applications.
+> [!IMPORTANT]
+> Le domaine managé est associé à votre locataire Azure AD. Pendant le processus d’approvisionnement, Azure AD DS crée deux applications d’entreprise nommées *Services de contrôleur de domaine* et *AzureActiveDirectoryDomainControllerServices* dans le locataire Azure AD. Ces applications d’entreprise sont nécessaires pour entretenir votre domaine géré. Ne supprimez pas ces applications.
 
 ## <a name="update-dns-settings-for-the-azure-virtual-network"></a>Mettre à jour les paramètres DNS pour le réseau virtuel Azure
 
-Avec Azure AD DS correctement déployé, configurez maintenant le réseau virtuel pour permettre à d’autres machines virtuelles et applications connectées d’utiliser le domaine managé. Pour fournir cette connectivité, mettez à jour les paramètres du serveur DNS pour que votre réseau virtuel pointe vers les deux adresses IP où Azure AD DS est déployé.
+Avec Azure AD DS correctement déployé, configurez maintenant le réseau virtuel pour permettre à d’autres machines virtuelles et applications connectées d’utiliser le domaine managé. Pour fournir cette connectivité, mettez à jour les paramètres du serveur DNS pour que votre réseau virtuel pointe vers les deux adresses IP où le domaine managé est déployé.
 
 1. L’onglet **Vue d’ensemble** pour votre domaine managé montre quelques **Étapes de configuration obligatoires**. La première étape de configuration est de mettre à jour les paramètres du serveur DNS pour votre réseau virtuel. Une fois les paramètres DNS correctement configurés, cette étape n’apparaît plus.
 
-    Les adresses listées sont les contrôleurs de domaine à utiliser dans le réseau virtuel. Dans cet exemple, ces adresses sont *10.1.0.4* et *10.1.0.5*. Vous pouvez trouver ultérieurement ces adresses IP sous l’onglet **Propriétés**.
+    Les adresses listées sont les contrôleurs de domaine à utiliser dans le réseau virtuel. Dans cet exemple, ces adresses sont *10.0.1.4* et *10.0.1.5*. Vous pouvez trouver ultérieurement ces adresses IP sous l’onglet **Propriétés**.
 
     ![Configurer les paramètres DNS pour votre réseau virtuel avec les adresses IP d’Azure AD Domain Services](./media/tutorial-create-instance-advanced/configure-dns.png)
 
@@ -200,9 +207,17 @@ Avec Azure AD DS correctement déployé, configurez maintenant le réseau virtue
 Pour authentifier les utilisateurs sur le domaine managé, Azure AD DS nécessite les hachages de mot de passe dans un format adapté à l’authentification NTLM (NT LAN Manager) et Kerberos. Azure AD ne génère pas et ne stocke pas les hachages de mot de passe au format nécessaire pour l’authentification NTLM ou Kerberos tant que vous n’activez pas Azure AD DS pour votre locataire. Pour des raisons de sécurité, Azure AD ne stocke pas non plus d’informations d’identification de mot de passe sous forme de texte en clair. Par conséquent, Azure AD ne peut pas générer automatiquement ces hachages de mot de passe NTLM ou Kerberos en fonction des informations d’identification existantes des utilisateurs.
 
 > [!NOTE]
-> Une fois configurés de façon appropriée, les hachages de mot de passe utilisables sont stockés dans le domaine managé Azure AD DS. Si vous supprimez le domaine managé Azure AD DS, tout hachage de mot de passe stocké à ce stade est également supprimé. Les informations d’identification synchronisées dans Azure AD ne peuvent pas être réutilisées si vous créez par la suite un domaine managé Azure AD DS : vous devez reconfigurer la synchronisation de hachage de mot de passe pour stocker à nouveau les hachages de mot de passe. Les machines virtuelles ou les utilisateurs auparavant joints à un domaine ne pourront pas s’authentifier immédiatement : Azure AD doit générer et stocker les hachages de mot de passe dans le nouveau domaine managé Azure AD DS. Pour plus d’informations, consultez [Processus de synchronisation du hachage de mot de passe pour Azure AD DS et Azure AD Connect][password-hash-sync-process].
+> Une fois configurés de façon appropriée, les hachages de mot de passe utilisables sont stockés dans le domaine managé. Si vous supprimez le domaine managé, tout hachage de mot de passe stocké à ce stade est également supprimé.
+>
+> Les informations d’identification synchronisées dans Azure AD ne peuvent pas être réutilisées si vous créez par la suite un domaine managé : vous devez reconfigurer la synchronisation de hachage de mot de passe pour stocker à nouveau les hachages de mot de passe. Les machines virtuelles ou les utilisateurs auparavant joints à un domaine ne pourront pas s’authentifier immédiatement : Azure AD doit générer et stocker les hachages de mot de passe dans le nouveau domaine managé.
+>
+> Pour plus d’informations, consultez [Processus de synchronisation du hachage de mot de passe pour Azure AD DS et Azure AD Connect][password-hash-sync-process].
 
-Les étapes de génération et de stockage de ces hachages de mot de passe sont différentes pour les comptes d’utilisateur cloud uniquement créés dans Azure AD et pour les comptes d’utilisateur qui sont synchronisés à partir de votre annuaire local avec Azure AD Connect. Un compte d’utilisateur uniquement dans le cloud est un compte qui a été créé dans votre répertoire Azure AD à l’aide du portail Azure ou d’applets de commande PowerShell Azure AD. Ces comptes d’utilisateurs ne sont pas synchronisés à partir d’un annuaire local. Dans ce tutoriel, nous utilisons un compte d’utilisateur de base cloud uniquement. Pour plus d’informations sur les étapes supplémentaires nécessaires pour utiliser Azure AD Connect, consultez [Synchroniser les hachages de mot de passe pour les comptes d’utilisateur synchronisés à partir de votre annuaire Active Directory local vers votre domaine managé][on-prem-sync].
+Les étapes de génération et de stockage de ces hachages de mot de passe sont différentes pour les comptes d’utilisateur cloud uniquement créés dans Azure AD et pour les comptes d’utilisateur qui sont synchronisés à partir de votre annuaire local avec Azure AD Connect.
+
+Un compte d’utilisateur uniquement dans le cloud est un compte qui a été créé dans votre répertoire Azure AD à l’aide du portail Azure ou d’applets de commande PowerShell Azure AD. Ces comptes d’utilisateurs ne sont pas synchronisés à partir d’un annuaire local.
+
+Dans ce tutoriel, nous utilisons un compte d’utilisateur de base cloud uniquement. Pour plus d’informations sur les étapes supplémentaires nécessaires pour utiliser Azure AD Connect, consultez [Synchroniser les hachages de mot de passe pour les comptes d’utilisateur synchronisés à partir de votre annuaire Active Directory local vers votre domaine managé][on-prem-sync].
 
 > [!TIP]
 > Si votre locataire Azure AD utilise une combinaison d’utilisateurs cloud uniquement et d’utilisateurs provenant de votre annuaire Active Directory local, vous devez effectuer ces deux ensembles d’étapes.
@@ -230,7 +245,7 @@ Dans ce didacticiel, vous avez appris à :
 
 > [!div class="checklist"]
 > * Configurer les paramètres de réseau virtuel et DNS pour un domaine managé
-> * Créer une instance Azure AD DS
+> * Créer un domaine managé
 > * Ajouter des utilisateurs d’administration à la gestion du domaine
 > * Activer les comptes d’utilisateur pour Azure AD DS et générer les hachages de mot de passe
 
@@ -247,7 +262,7 @@ Pour voir ce domaine managé en action, créez et joignez une machine virtuelle 
 [create-dedicated-subnet]: ../virtual-network/virtual-network-manage-subnet.md#add-a-subnet
 [scoped-sync]: scoped-synchronization.md
 [on-prem-sync]: tutorial-configure-password-hash-sync.md
-[configure-sspr]: ../active-directory/authentication/quickstart-sspr.md
+[configure-sspr]: ../active-directory/authentication/tutorial-enable-sspr.md
 [password-hash-sync-process]: ../active-directory/hybrid/how-to-connect-password-hash-synchronization.md#password-hash-sync-process-for-azure-ad-domain-services
 [resource-forests]: concepts-resource-forest.md
 [availability-zones]: ../availability-zones/az-overview.md

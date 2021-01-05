@@ -3,15 +3,15 @@ title: Utiliser des clés gérées par le client pour chiffrer des données dans
 description: Comment utiliser Azure Key Vault avec Azure HPC Cache pour contrôler l’accès à la clé de chiffrement au lieu d’utiliser les clés de chiffrement gérées par Microsoft par défaut
 author: ekpgh
 ms.service: hpc-cache
-ms.topic: conceptual
-ms.date: 04/29/2020
+ms.topic: how-to
+ms.date: 07/20/2020
 ms.author: v-erkel
-ms.openlocfilehash: 2d10241b8395c33767ffeeb550d9d8060bde3ce3
-ms.sourcegitcommit: acc558d79d665c8d6a5f9e1689211da623ded90a
+ms.openlocfilehash: 90af33a01450002c7d36a4ab4cf4a3da647068c5
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82597737"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96444579"
 ---
 # <a name="use-customer-managed-encryption-keys-for-azure-hpc-cache"></a>Utiliser des clés de chiffrement gérées par le client pour Azure HPC Cache
 
@@ -19,6 +19,8 @@ Vous pouvez utiliser Azure Key Vault pour contrôler la propriété des clés ut
 
 > [!NOTE]
 > Toutes les données stockées dans Azure, y compris sur les caches de disque, sont chiffrées au repos à l’aide de clés gérées par Microsoft par défaut. Vous devez suivre les étapes de cet article uniquement si vous souhaitez gérer les clés utilisées pour chiffrer vos données.
+
+Azure HPC Cache est également protégé par le [chiffrement de l’hôte de machine virtuelle](../virtual-machines/disk-encryption.md#encryption-at-host---end-to-end-encryption-for-your-vm-data) sur les disques gérés qui contiennent vos données mises en cache, même si vous ajoutez une clé de client pour les caches de disque. L’ajout d’une clé gérée par le client pour le double chiffrement offre un niveau supplémentaire de sécurité aux clients ayant des besoins élevés en matière de sécurité. Pour plus d’informations, lisez [Chiffrement côté serveur de stockage sur disque Azure](../virtual-machines/disk-encryption.md).
 
 Cette fonctionnalité est disponible uniquement dans certaines régions Azure où Azure HPC Cache est disponible. Pour plus d’informations, reportez-vous à la liste [Disponibilité des région](hpc-cache-overview.md#region-availability).
 
@@ -56,7 +58,7 @@ Autorisations d’accès au coffre de clés :
 
 * L’utilisateur qui crée le cache Azure HPC Cache doit disposer d’autorisations équivalentes à celles du [rôle Contributeur de Key Vault](../role-based-access-control/built-in-roles.md#key-vault-contributor). Les mêmes autorisations sont requises pour configurer et gérer Azure Key Vault.
 
-  Pour plus d’informations, consultez [Sécuriser l’accès à un coffre de clés](../key-vault/key-vault-secure-your-key-vault.md).
+  Pour plus d’informations, consultez [Sécuriser l’accès à un coffre de clés](../key-vault/general/secure-your-key-vault.md).
 
 ## <a name="1-set-up-azure-key-vault"></a>1. Configurer Azure Key Vault
 
@@ -64,7 +66,7 @@ Vous pouvez configurer un coffre de clés et une clé avant de créer le cache, 
 
 Au moment de la création du cache, vous devez spécifier un coffre, une clé et une version de clé à utiliser pour le chiffrement du cache.
 
-Pour plus d’informations, lisez la [documentation Azure Key Vault](../key-vault/key-vault-overview.md).
+Pour plus d’informations, lisez la [documentation Azure Key Vault](../key-vault/general/overview.md).
 
 > [!NOTE]
 > Le coffre Azure Key Vault doit utiliser le même abonnement et se trouver dans la même région que le cache Azure HPC Cache. Assurez-vous que la région que vous choisissez [prend en charge la fonctionnalité de clés gérées par le client](hpc-cache-overview.md#region-availability).
@@ -90,7 +92,7 @@ L’utilisateur qui crée le cache doit avoir des privilèges égaux ou supérie
 
 1. Après avoir sélectionné un coffre, sélectionnez la clé individuelle parmi les options disponibles ou créez une nouvelle clé. La clé doit être une clé RSA 2048 bits.
 
-1. Spécifiez la version de la clé sélectionnée. En savoir plus sur le contrôle de version dans la [documentation Azure Key Vault](../key-vault/about-keys-secrets-and-certificates.md#objects-identifiers-and-versioning).
+1. Spécifiez la version de la clé sélectionnée. En savoir plus sur le contrôle de version dans la [documentation Azure Key Vault](../key-vault/general/about-keys-secrets-certificates.md#objects-identifiers-and-versioning).
 
 Poursuivez avec le reste des spécifications et créez le cache comme décrit dans [Créer un cache Azure HPC Cache](hpc-cache-create.md).
 
@@ -142,7 +144,7 @@ Une fois que vous avez choisi les nouvelles valeurs de clé de chiffrement, cliq
 Ces articles expliquent plus en détail l’utilisation d’Azure Key Vault et des clés gérées par le client pour chiffrer les données dans Azure :
 
 * [Vue d’ensemble du chiffrement du stockage Azure](../storage/common/storage-service-encryption.md)
-* [Chiffrement de disque avec des clés gérées par le client](../virtual-machines/linux/disk-encryption.md#customer-managed-keys) : documentation pour l’utilisation d’Azure Key Vault avec de disques managés, qui est un scénario similaire à Azure HPC Cache
+* [Chiffrement de disque avec des clés gérées par le client](../virtual-machines/disk-encryption.md#customer-managed-keys) : documentation pour l’utilisation d’Azure Key Vault avec de disques managés, qui est un scénario similaire à Azure HPC Cache
 
 ## <a name="next-steps"></a>Étapes suivantes
 

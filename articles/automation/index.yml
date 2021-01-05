@@ -10,12 +10,12 @@ metadata:
   ms.topic: landing-page
   ms.date: 09/06/2019
   ms.author: magoedte
-  ms.openlocfilehash: d154705e17a51453648a8e1d3dd14bcdc6881917
-  ms.sourcegitcommit: 253d4c7ab41e4eb11cd9995190cd5536fcec5a3c
+  ms.openlocfilehash: c146be313391397c9ecf64314a580175e8220ac5
+  ms.sourcegitcommit: 8d8deb9a406165de5050522681b782fb2917762d
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 03/25/2020
-  ms.locfileid: "77208666"
+  ms.lasthandoff: 10/20/2020
+  ms.locfileid: "92216417"
 landingContent:
 - title: Prise en main d'Azure Automation
   linkLists:
@@ -40,15 +40,11 @@ landingContent:
   - linkListType: overview
     links:
     - text: Vue d’ensemble de Update Management
-      url: automation-update-management.md
+      url: update-management/overview.md
   - linkListType: get-started
     links:
     - text: Gérer les mises à jour pour plusieurs machines virtuelles
-      url: manage-update-multi.md
-  - linkListType: deploy
-    links:
-    - text: Opérations de mise à jour, d’inventaire et de suivi des changements sur les machines virtuelles Azure
-      url: automation-onboard-solutions.md
+      url: update-management/manage-updates-for-vm.md
 - title: Configurer vos machines virtuelles avec Desired State Configuration
   linkLists:
   - linkListType: overview

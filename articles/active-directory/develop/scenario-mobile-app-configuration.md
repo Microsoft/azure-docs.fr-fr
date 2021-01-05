@@ -1,7 +1,7 @@
 ---
 title: Configurer des applications mobiles appelant des API web | Azure
 titleSuffix: Microsoft identity platform
-description: Découvrez comment créer une application mobile qui appelle des API web (configuration du code de l’application)
+description: Découvrez comment configurer le code de votre application mobile pour appeler une API Web
 services: active-directory
 author: jmprieur
 manager: CelesteDG
@@ -9,15 +9,15 @@ ms.service: active-directory
 ms.subservice: develop
 ms.topic: conceptual
 ms.workload: identity
-ms.date: 07/23/2019
+ms.date: 06/16/2020
 ms.author: jmprieur
 ms.custom: aaddev
-ms.openlocfilehash: 06475b53acf6c9161888e29723feab9cdc4336d5
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: a18a36b8583f8534b2a2e643e5c155dc7a2d65e2
+ms.sourcegitcommit: 6109f1d9f0acd8e5d1c1775bc9aa7c61ca076c45
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80882724"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94444059"
 ---
 # <a name="configure-a-mobile-app-that-calls-web-apis"></a>Configurer une application mobile qui appelle des API web
 
@@ -47,12 +47,12 @@ PublicClientApplication sampleApp = new PublicClientApplication(
 
 ### <a name="ios"></a>iOS
 
-Les applications mobiles sur iOS doivent instancier la classe `MSALPublicClientApplication`. Pour instancier la classe, utilisez le code suivant. 
+Les applications mobiles sur iOS doivent instancier la classe `MSALPublicClientApplication`. Pour instancier la classe, utilisez le code suivant.
 
 ```objc
 NSError *msalError = nil;
-     
-MSALPublicClientApplicationConfig *config = [[MSALPublicClientApplicationConfig alloc] initWithClientId:@"<your-client-id-here>"];    
+
+MSALPublicClientApplicationConfig *config = [[MSALPublicClientApplicationConfig alloc] initWithClientId:@"<your-client-id-here>"];
 MSALPublicClientApplication *application = [[MSALPublicClientApplication alloc] initWithConfiguration:config error:&msalError];
 ```
 
@@ -61,7 +61,7 @@ let config = MSALPublicClientApplicationConfig(clientId: "<your-client-id-here>"
 if let application = try? MSALPublicClientApplication(configuration: config){ /* Use application */}
 ```
 
-Des [propriétés MSALPublicClientApplicationConfig supplémentaires](https://azuread.github.io/microsoft-authentication-library-for-objc/Classes/MSALPublicClientApplicationConfig.html#/Configuration%20options) peuvent remplacer l’autorité par défaut, spécifier un URI de redirection ou modifier le comportement de mise en cache des jetons MSAL. 
+Des [propriétés MSALPublicClientApplicationConfig supplémentaires](https://azuread.github.io/microsoft-authentication-library-for-objc/Classes/MSALPublicClientApplicationConfig.html#/Configuration%20options) peuvent remplacer l’autorité par défaut, spécifier un URI de redirection ou modifier le comportement de mise en cache des jetons MSAL.
 
 ### <a name="xamarin-or-uwp"></a>Xamarin ou UWP
 
@@ -76,7 +76,7 @@ var app = PublicClientApplicationBuilder.Create(clientId)
                                         .Build();
 ```
 
-Des méthodes `With<Parameter>` supplémentaires définissent le parent de l’interface utilisateur, remplacent l’autorité par défaut, spécifient un nom et une version de client pour la télémétrie, spécifient un URI de redirection et spécifient la fabrique HTTP à utiliser. La fabrique HTTP peut être utilisée, par exemple, pour gérer les proxies et pour spécifier la télémétrie et la journalisation. 
+Des méthodes `With<Parameter>` supplémentaires définissent le parent de l’interface utilisateur, remplacent l’autorité par défaut, spécifient un nom et une version de client pour la télémétrie, spécifient un URI de redirection et spécifient la fabrique HTTP à utiliser. La fabrique HTTP peut être utilisée, par exemple, pour gérer les proxies et pour spécifier la télémétrie et la journalisation.
 
 Les sections ci-dessous fournissent plus d’informations sur l’instanciation de l’application.
 
@@ -102,9 +102,9 @@ var pca = PublicClientApplicationBuilder
 
 ##### <a name="find-more-app-building-parameters"></a>Rechercher d’autres paramètres de création d’applications
 
-Pour obtenir la liste de toutes les méthodes disponibles sur `PublicClientApplicationBuilder`, consultez la [liste des méthodes](https://docs.microsoft.com/dotnet/api/microsoft.identity.client.publicclientapplicationbuilder#methods).
+Pour obtenir la liste de toutes les méthodes disponibles sur `PublicClientApplicationBuilder`, consultez la [liste des méthodes](/dotnet/api/microsoft.identity.client.publicclientapplicationbuilder#methods).
 
-Pour obtenir une description de toutes les options exposées dans `PublicClientApplicationOptions`, consultez la [documentation de référence](https://docs.microsoft.com/dotnet/api/microsoft.identity.client.publicclientapplicationoptions).
+Pour obtenir une description de toutes les options exposées dans `PublicClientApplicationOptions`, consultez la [documentation de référence](/dotnet/api/microsoft.identity.client.publicclientapplicationoptions).
 
 ## <a name="tasks-for-xamarin-ios"></a>Tâches pour Xamarin iOS
 
@@ -132,7 +132,7 @@ Si vous utilisez Xamarin.Android, effectuez les tâches suivantes :
 - [S’assurer que le contrôle revient à la bibliothèque MSAL une fois la partie interactive du flux d’authentification terminée](msal-net-xamarin-android-considerations.md#ensure-that-control-returns-to-msal)
 - [Mettre à jour le manifeste Android](msal-net-xamarin-android-considerations.md#update-the-android-manifest)
 - [Utiliser la vue web incorporée (facultatif)](msal-net-xamarin-android-considerations.md#use-the-embedded-web-view-optional)
-- [Détecter un problème le cas échéant](msal-net-xamarin-android-considerations.md#troubleshoot)
+- [Détecter un problème le cas échéant](msal-net-xamarin-android-considerations.md#troubleshooting)
 
 Pour plus d’informations, consultez [Considérations relatives à Xamarin.Android](msal-net-xamarin-android-considerations.md).
 
@@ -154,17 +154,17 @@ Sur Android et iOS, les répartiteurs activent :
 
 ### <a name="enable-the-broker-on-xamarin"></a>Activer le répartiteur sur Xamarin
 
-Pour activer le répartiteur sur Xamarin, utilisez le paramètre `WithBroker()` lorsque vous appelez la méthode `PublicClientApplicationBuilder.CreateApplication`. Par défaut, `.WithBroker()` est défini sur true. 
+Pour activer le répartiteur sur Xamarin, utilisez le paramètre `WithBroker()` lorsque vous appelez la méthode `PublicClientApplicationBuilder.CreateApplication`. Par défaut, `.WithBroker()` est défini sur true.
 
 Pour activer l’authentification répartie pour Xamarin.iOS, suivez les étapes de la [section Xamarin.iOS](#enable-brokered-authentication-for-xamarin-ios) dans cet article.
 
 ### <a name="enable-the-broker-for-msal-for-android"></a>Activer le répartiteur pour MSAL pour Android
 
-Pour plus d’informations sur l’activation d’un répartiteur sur Android, consultez [Authentification répartie sur Android](brokered-auth.md). 
+Pour plus d’informations sur l’activation d’un répartiteur sur Android, consultez [Authentification répartie sur Android](msal-android-single-sign-on.md).
 
 ### <a name="enable-the-broker-for-msal-for-ios-and-macos"></a>Activer le répartiteur pour MSAL pour iOS et macOS
 
-L’authentification répartie est activée par défaut pour les scénarios Azure AD dans MSAL pour iOS et macOS. 
+L’authentification répartie est activée par défaut pour les scénarios Azure AD dans MSAL pour iOS et macOS.
 
 Les sections suivantes fournissent des instructions pour configurer votre application pour la prise en charge de l’authentification répartie pour MSAL pour Xamarin.iOS ou MSAL pour iOS et macOS. Certaines étapes diffèrent dans les deux ensembles d’instructions.
 
@@ -235,23 +235,23 @@ Pour définir la fenêtre de l’objet, procédez comme suit :
                  .WithParentActivityOrWindow(App.RootViewController)
                  .ExecuteAsync();
     ```
-    
+
 #### <a name="step-4-register-a-url-scheme"></a>Étape 4 : Inscrire un schéma d’URL
 
-MSAL.NET utilise des URL pour appeler le répartiteur, avant de retourner la réponse du répartiteur à votre application. Pour terminer l’aller-retour, inscrivez un schéma d’URL de votre application dans le fichier `Info.plist`. 
+MSAL.NET utilise des URL pour appeler le répartiteur, avant de retourner la réponse du répartiteur à votre application. Pour terminer l’aller-retour, inscrivez un schéma d’URL de votre application dans le fichier `Info.plist`.
 
 Pour inscrire le schéma d’URL de votre application, procédez comme suit :
 
-1. Ajoutez le préfixe `msauth` à `CFBundleURLSchemes`. 
-1. Ajoutez `CFBundleURLName` à la fin. Suivez ce modèle : 
+1. Ajoutez le préfixe `msauth` à `CFBundleURLSchemes`.
+1. Ajoutez `CFBundleURLName` à la fin. Suivez ce modèle :
 
    `$"msauth.(BundleId)"`
 
    Ici, `BundleId` identifie de façon unique votre appareil. Par exemple, si `BundleId` est `yourcompany.xforms`, votre schéma d’URL est `msauth.com.yourcompany.xforms`.
-    
+
    > [!NOTE]
    > Ce schéma d’URL fera partie de l’URI de redirection qui identifie de façon unique votre application lorsqu’il reçoit la réponse du répartiteur.
-    
+
    ```XML
     <key>CFBundleURLTypes</key>
        <array>
@@ -267,14 +267,14 @@ Pour inscrire le schéma d’URL de votre application, procédez comme suit :
          </dict>
        </array>
    ```
-    
+
 #### <a name="step-5-add-to-the-lsapplicationqueriesschemes-section"></a>Étape 5 : Ajouter à la section LSApplicationQueriesSchemes
 
 MSAL utilise `–canOpenURL:` pour vérifier si le répartiteur est installé sur l’appareil. Dans iOS 9, Apple a verrouillé les schémas qu’une application peut interroger.
 
 Ajoutez `msauthv2` à la section `LSApplicationQueriesSchemes` du fichier `Info.plist`, comme dans l’exemple de code suivant :
 
-```XML 
+```XML
 <key>LSApplicationQueriesSchemes</key>
     <array>
       <string>msauthv2</string>
@@ -294,18 +294,18 @@ Quand MSAL pour iOS et macOS appelle le répartiteur, celui-ci rappelle votre ap
             openURL:(NSURL *)url
             options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
 {
-    return [MSALPublicClientApplication handleMSALResponse:url 
+    return [MSALPublicClientApplication handleMSALResponse:url
                                          sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]];
 }
 ```
 
 ```swift
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        
+
         guard let sourceApplication = options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String else {
             return false
         }
-        
+
         return MSALPublicClientApplication.handleMSALResponse(url, sourceApplication: sourceApplication)
     }
 ```
@@ -319,19 +319,19 @@ Quand MSAL pour iOS et macOS appelle le répartiteur, celui-ci rappelle votre ap
 
 MSAL pour iOS et macOS utilise des URL pour appeler le répartiteur, avant de retourner la réponse du répartiteur à votre application. Pour terminer l’aller-retour, inscrivez un schéma d’URL pour votre application dans le fichier `Info.plist`.
 
-Pour inscrire un schéma pour votre application : 
+Pour inscrire un schéma pour votre application :
 
-1. Ajoutez le préfixe `msauth` à votre modèle d’URL personnalisée. 
+1. Ajoutez le préfixe `msauth` à votre modèle d’URL personnalisée.
 
-1. Ajoutez l’identificateur de votre offre groupée à la fin de votre schéma. Suivez ce modèle : 
+1. Ajoutez l’identificateur de votre offre groupée à la fin de votre schéma. Suivez ce modèle :
 
    `$"msauth.(BundleId)"`
 
    Ici, `BundleId` identifie de façon unique votre appareil. Par exemple, si `BundleId` est `yourcompany.xforms`, votre schéma d’URL est `msauth.com.yourcompany.xforms`.
-  
+
    > [!NOTE]
    > Ce schéma d’URL fera partie de l’URI de redirection qui identifie de façon unique votre application lorsqu’il reçoit la réponse du répartiteur. Assurez-vous que l’URI de redirection au format `msauth.(BundleId)://auth` est inscrit pour votre application dans le [Portail Azure](https://portal.azure.com).
-  
+
    ```XML
    <key>CFBundleURLTypes</key>
    <array>
@@ -349,11 +349,11 @@ Pour inscrire un schéma pour votre application :
 Ajoutez `LSApplicationQueriesSchemes` pour autoriser les appels à l’application Microsoft Authenticator, si elle est installée.
 
 > [!NOTE]
-> Le schéma `msauthv3` est nécessaire lorsque votre application est compilée à l’aide de Xcode 11 et versions ultérieures. 
+> Le schéma `msauthv3` est nécessaire lorsque votre application est compilée à l’aide de Xcode 11 et versions ultérieures.
 
 Voici un exemple d’ajout de `LSApplicationQueriesSchemes` :
 
-```XML 
+```XML
 <key>LSApplicationQueriesSchemes</key>
 <array>
   <string>msauthv2</string>
@@ -363,9 +363,8 @@ Voici un exemple d’ajout de `LSApplicationQueriesSchemes` :
 
 ### <a name="brokered-authentication-for-xamarinandroid"></a>Authentification répartie pour Xamarin.Android
 
-MSAL.NET ne prend pas en charge les répartiteurs pour Android.
+Pour plus d’informations sur l’activation d’un répartiteur sur Android, consultez [Authentification répartie sur Xamarin.Android](msal-net-use-brokers-with-xamarin-apps.md#brokered-authentication-for-android).
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-> [!div class="nextstepaction"]
-> [Acquisition d’un jeton](scenario-mobile-acquire-token.md)
+Passez à l’article suivant de ce scénario, [Acquisition d’un jeton](scenario-mobile-acquire-token.md).

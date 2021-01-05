@@ -1,6 +1,6 @@
 ---
-title: Créer une capture instantanée d’un disque dur virtuel dans Azure
-description: Découvrez comment créer une copie d’une machine virtuelle Azure pour l’utiliser comme sauvegarde ou pour la résolution de problèmes.
+title: Créer une capture instantanée d’un disque dur virtuel à l’aide du portail ou de PowerShell
+description: Découvrez comment créer une copie d’une machine virtuelle Azure pour l’utiliser comme sauvegarde ou à des fins de résolution de problèmes à l’aide du portail ou de PowerShell.
 author: roygara
 manager: twooley
 ms.service: virtual-machines-windows
@@ -9,14 +9,14 @@ ms.topic: how-to
 ms.date: 10/08/2018
 ms.author: rogarana
 ms.subservice: disks
-ms.openlocfilehash: 92957bd078c04a9bb7ac35f9d30f042a44e10764
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: c0fddca70ca09f0a3abb3c84672e20a42551ecd5
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82100632"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96014310"
 ---
-# <a name="create-a-snapshot"></a>Créer un instantané
+# <a name="create-a-snapshot-using-the-portal-or-powershell"></a>Créer une capture instantanée à l’aide du portail ou de PowerShell
 
 Une capture instantanée est une copie complète en lecture seule d’un disque dur virtuel (VHD). Vous pouvez prendre une capture instantanée d’un disque dur virtuel de système d’exploitation ou de données que vous utiliserez comme sauvegarde ou pour résoudre les problèmes de la machine virtuelle.
 
@@ -37,7 +37,7 @@ Pour créer une capture instantanée, effectuez les étapes suivantes :
 
 ## <a name="use-powershell"></a>Utiliser PowerShell
 
-Les étapes suivantes montrent comment copier le disque dur virtuel et créer la configuration de capture instantanée. Vous pouvez ensuite prendre une capture instantanée du disque en utilisant l’applet de commande [New-AzSnapshot](https://docs.microsoft.com/powershell/module/az.compute/new-azsnapshot). 
+Les étapes suivantes montrent comment copier le disque dur virtuel et créer la configuration de capture instantanée. Vous pouvez ensuite prendre une capture instantanée du disque en utilisant l’applet de commande [New-AzSnapshot](/powershell/module/az.compute/new-azsnapshot). 
 
  
 
@@ -53,18 +53,18 @@ Les étapes suivantes montrent comment copier le disque dur virtuel et créer la
 2. Obtenez la machine virtuelle :
 
    ```azurepowershell-interactive
-   $vm = get-azvm `
-   -ResourceGroupName $resourceGroupName 
-   -Name $vmName
+   $vm = Get-AzVM `
+       -ResourceGroupName $resourceGroupName `
+       -Name $vmName
    ```
 
 3. Créez la configuration de capture instantanée. Pour cet exemple, la capture instantanée est celle du disque de système d’exploitation :
 
    ```azurepowershell-interactive
-   $snapshot =  New-AzSnapshotConfig 
-   -SourceUri $vm.StorageProfile.OsDisk.ManagedDisk.Id 
-   -Location $location 
-   -CreateOption copy
+   $snapshot =  New-AzSnapshotConfig `
+       -SourceUri $vm.StorageProfile.OsDisk.ManagedDisk.Id `
+       -Location $location `
+       -CreateOption copy
    ```
    
    > [!NOTE]
@@ -73,10 +73,10 @@ Les étapes suivantes montrent comment copier le disque dur virtuel et créer la
 4. Prenez la capture instantanée :
 
    ```azurepowershell-interactive
-   New-AzSnapshot 
-   -Snapshot $snapshot 
-   -SnapshotName $snapshotName 
-   -ResourceGroupName $resourceGroupName 
+   New-AzSnapshot `
+       -Snapshot $snapshot `
+       -SnapshotName $snapshotName `
+       -ResourceGroupName $resourceGroupName 
    ```
 
 

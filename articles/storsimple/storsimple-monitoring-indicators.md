@@ -9,17 +9,17 @@ editor: ''
 ms.assetid: 59dee7b9-ca6d-4fd9-96e6-a0071e8d248e
 ms.service: storsimple
 ms.devlang: NA
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: NA
 ms.workload: TBD
 ms.date: 11/03/2017
 ms.author: alkohli
-ms.openlocfilehash: ef8acf1c3c9211168ebacc8d62647f6789c745a2
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 97209dca7d30de037dbd21f5cc145b2941060e70
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "60630562"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96015398"
 ---
 # <a name="use-storsimple-monitoring-indicators-to-manage-your-device"></a>Utiliser les indicateurs de suivi StorSimple pour gérer votre appareil
 

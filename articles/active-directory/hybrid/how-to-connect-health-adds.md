@@ -12,16 +12,16 @@ ms.subservice: hybrid
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 07/18/2017
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: e27287a414a2a4edef3e9090b7d91beb1c70f554
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: d75b439c2753db17cffecdc97b6389a7b31b833e
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76897313"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89279871"
 ---
 # <a name="using-azure-ad-connect-health-with-ad-ds"></a>Utilisation d’Azure AD Connect Health avec AD DS
 La documentation suivante s’applique à la surveillance des services de domaine Active Directory avec Azure AD Connect Health. Les versions prises en charge d’AD DS sont les suivantes : Windows Server 2008 R2, Windows Server 2012, Windows Server 2012 R2 et Windows Server 2016.
@@ -57,11 +57,10 @@ Cette fonctionnalité fournit les tendances graphiques de différents compteurs 
 Par défaut, nous avons présélectionné quatre compteurs de performances. Vous pouvez toutefois en inclure d’autres en cliquant sur la commande de filtre et en sélectionnant ou en désélectionnant les compteurs de performances de votre choix. En outre, vous pouvez double-cliquer sur un graphique de compteur de performances pour ouvrir un nouveau panneau incluant les points de données de chacun des contrôleurs de domaine surveillés.
 
 ## <a name="related-links"></a>Liens connexes
-* [Azure AD Connect Health](whatis-hybrid-identity-health.md)
+* [Azure AD Connect Health](./whatis-azure-ad-connect.md)
 * [Installation de l’agent Azure AD Connect Health](how-to-connect-health-agent-install.md)
 * [Opérations Azure AD Connect Health](how-to-connect-health-operations.md)
 * [Utilisation d’Azure AD Connect Health avec AD FS](how-to-connect-health-adfs.md)
 * [Utilisation d'Azure AD Connect Health pour la synchronisation (en Anglais)](how-to-connect-health-sync.md)
 * [Forum Aux Questions (FAQ) Azure AD Connect Health](reference-connect-health-faq.md)
 * [Historique de publication des versions d’Azure AD Connect Health](reference-connect-health-version-history.md)
-

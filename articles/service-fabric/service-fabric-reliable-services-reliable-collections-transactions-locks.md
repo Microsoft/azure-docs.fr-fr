@@ -3,13 +3,12 @@ title: Transactions et modes de verrouillage dans les collections Reliable
 description: Verrouillage et transactions des collections fiables et gestionnaire d’état fiable Azure Service Fabric.
 ms.topic: conceptual
 ms.date: 5/1/2017
-ms.custom: sfrev
-ms.openlocfilehash: 5f7b3a4d43d35f0d2965dd33c8f69143f4b3a8f7
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 57ca46047641b79d5e4c50ede4a27e16dcec5d89
+ms.sourcegitcommit: 16c7fd8fe944ece07b6cf42a9c0e82b057900662
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76938906"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96576721"
 ---
 # <a name="transactions-and-lock-modes-in-azure-service-fabric-reliable-collections"></a>Modes Transactions et Verrouillage dans les Collections fiables Azure Service Fabric
 
@@ -19,7 +18,7 @@ Une transaction est une suite d'opérations effectuées comme une seule unité l
 
 * **Atomicité** : une transaction doit correspondre à une unité de travail atomique. En d’autres termes, soit toutes les modifications de données sont effectuées, soit aucune n’est effectuée.
 * **Cohérence** : Lorsqu'elle est terminée, une transaction doit laisser les données dans un état cohérent. Toutes les structures de données internes doivent être correctes à la fin de la transaction.
-* **Isolation** : Les modifications effectuées par des transactions concurrentes doivent être isolées transaction par transaction. Le niveau d'isolation utilisé pour une opération dans le cadre d'une [ITransaction](https://docs.microsoft.com/dotnet/api/microsoft.servicefabric.data.itransaction?view=azure-dotnet) est déterminé par l'état [IReliableState](https://docs.microsoft.com/dotnet/api/microsoft.servicefabric.data.ireliablestate?view=azure-dotnet) qui effectue l'opération.
+* **Isolation** : Les modifications effectuées par des transactions concurrentes doivent être isolées transaction par transaction. Le niveau d'isolation utilisé pour une opération dans le cadre d'une [ITransaction](/dotnet/api/microsoft.servicefabric.data.itransaction?view=azure-dotnet) est déterminé par l'état [IReliableState](/dotnet/api/microsoft.servicefabric.data.ireliablestate?view=azure-dotnet) qui effectue l'opération.
 * **Durabilité** : lorsqu’une transaction est terminée, ses effets sont définitivement en place dans le système. Les modifications sont conservées même en cas de défaillance du système.
 
 ### <a name="isolation-levels"></a>Niveaux d'isolement
@@ -85,4 +84,4 @@ Dans ce cas, l’une ou les deux opérations arrivent à expiration. Dans ce sc�
 * [Notifications Reliable Services](service-fabric-reliable-services-notifications.md)
 * [Sauvegarde et restauration de Reliable Services (récupération d’urgence)](service-fabric-reliable-services-backup-restore.md)
 * [Configuration du Gestionnaire d’état fiable](service-fabric-reliable-services-configuration.md)
-* [Référence du développeur pour les Collections fiables](https://msdn.microsoft.com/library/azure/microsoft.servicefabric.data.collections.aspx)
+* [Référence du développeur pour les Collections fiables](/dotnet/api/microsoft.servicefabric.data.collections?view=azure-dotnet#microsoft_servicefabric_data_collections)

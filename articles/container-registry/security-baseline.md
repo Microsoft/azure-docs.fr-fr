@@ -6,25 +6,25 @@ ms.service: security
 ms.topic: conceptual
 ms.date: 03/16/2020
 ms.author: mbaldwin
-ms.custom: security-benchmark
-ms.openlocfilehash: 95864f932fe255d561eaeb2d803b5fcc79cb2802
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.custom: subject-security-benchmark
+ms.openlocfilehash: 3fcbc386c60611493912fdfb17226490549cdc53
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82184093"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89396809"
 ---
 # <a name="azure-security-baseline-for-azure-container-registry"></a>Ligne de base de sécurité Azure pour Azure Container Registry
 
 La ligne de base de sécurité Azure pour Azure Container Registry contient des recommandations qui vous aideront à améliorer la posture de sécurité de votre déploiement.
 
-La base de référence pour ce service est tirée du [benchmark de sécurité Azure version 1.0](https://docs.microsoft.com/azure/security/benchmarks/overview), qui fournit des recommandations sur la façon de sécuriser vos solutions cloud sur Azure en suivant nos conseils sur les bonnes pratiques.
+La base de référence pour ce service est tirée du [benchmark de sécurité Azure version 1.0](../security/benchmarks/overview.md), qui fournit des recommandations sur la façon de sécuriser vos solutions cloud sur Azure en suivant nos conseils sur les bonnes pratiques.
 
-Pour plus d’informations, consultez [Vue d’ensemble des lignes de base de sécurité Azure](https://docs.microsoft.com/azure/security/benchmarks/security-baselines-overview).
+Pour plus d’informations, consultez [Vue d’ensemble des lignes de base de sécurité Azure](../security/benchmarks/security-baselines-overview.md).
 
 ## <a name="network-security"></a>Sécurité réseau
 
-*Pour plus d’informations, consultez [Contrôle de sécurité : sécurité réseau](https://docs.microsoft.com/azure/security/benchmarks/security-control-network-security).*
+*Pour plus d’informations, consultez [Contrôle de sécurité : sécurité réseau](../security/benchmarks/security-control-network-security.md).*
 
 ### <a name="11-protect-resources-using-network-security-groups-or-azure-firewall-on-your-virtual-network"></a>1.1 : Protéger les ressources à l'aide de groupes de sécurité réseau ou du Pare-feu Azure sur votre réseau virtuel
 
@@ -91,7 +91,7 @@ Comment activer les journaux de flux NSG : https://docs.microsoft.com/azure/net
 Activer Network Watcher : https://docs.microsoft.com/azure/network-watcher/network-watcher-create
 
 
-**Supervision d’Azure Security Center** : Oui
+**Supervision Azure Security Center** : Oui
 
 **Responsabilité** : Customer
 
@@ -135,7 +135,7 @@ Autoriser l’accès par étiquette de service : https://docs.microsoft.com/azu
 
 **Aide** : Définissez et implémentez des configurations de sécurité standard pour les ressources réseau associées à vos registres de conteneurs Azure à l’aide d’Azure Policy. Utilisez des alias Azure Policy dans les espaces de noms « Microsoft.ContainerRegistry » et « Microsoft.Network » afin de créer des stratégies personnalisées pour auditer ou appliquer la configuration réseau de vos registres de conteneurs. 
 
-Vous pouvez utiliser Azure Blueprints pour simplifier les déploiements Azure à grande échelle en regroupant les artefacts d'environnement clés, tels que les modèles Azure Resource Manager, les contrôles RBAC et les stratégies, au sein d'une seule définition de blueprint. Appliquez aisément le blueprint aux nouveaux abonnements et affiner le contrôle et la gestion via le contrôle de version.
+Vous pouvez utiliser Azure Blueprints pour simplifier les déploiements Azure à grande échelle en regroupant les artefacts d’environnement clés, tels que les modèles Resource Manager, les contrôles Azure RBAC et les stratégies, au sein d’une seule définition de blueprint. Appliquez aisément le blueprint aux nouveaux abonnements et affiner le contrôle et la gestion via le contrôle de version.
 
 Auditer la conformité des registres de conteneurs Azure à l’aide d’Azure Policy :  https://docs.microsoft.com/azure/container-registry/container-registry-azure-policy
 
@@ -148,7 +148,7 @@ Créer une instance Azure Blueprint : https://docs.microsoft.com/azure/governan
 
 ### <a name="110-document-traffic-configuration-rules"></a>1.10 : Règles de configuration du trafic de documents
 
-**Aide** : Le client peut utiliser Azure Blueprints pour simplifier les déploiements Azure à grande échelle en regroupant les artefacts d'environnement clés, tels que les modèles Azure Resource Manager, les contrôles RBAC et les stratégies, au sein d'une seule définition de blueprint. Appliquez aisément le blueprint aux nouveaux abonnements et affiner le contrôle et la gestion via le contrôle de version.
+**Aide** : Le client peut utiliser Azure Blueprints pour simplifier les déploiements Azure à grande échelle en regroupant les artefacts d’environnement clés, tels que les modèles Resource Manager, les contrôles Azure RBAC et les stratégies, au sein d’une seule définition de blueprint. Appliquez aisément le blueprint aux nouveaux abonnements et affiner le contrôle et la gestion via le contrôle de version.
 
 Créer une instance Azure Blueprint : https://docs.microsoft.com/azure/governance/blueprints/create-blueprint-portal
 
@@ -160,7 +160,7 @@ Créer une instance Azure Blueprint : https://docs.microsoft.com/azure/governan
 
 ### <a name="111-use-automated-tools-to-monitor-network-resource-configurations-and-detect-changes"></a>1.11 : Utiliser des outils automatisés pour superviser les configurations des ressources réseau et détecter les modifications
 
-**Aide** : Utilisez le journal des activités Azure pour superviser les configurations des ressources réseau et détecter les changements des ressources réseau associées à vos registres de conteneurs. Créez des alertes dans Azure Monitor, qui se déclenchent lors de la modification de ressources réseau critiques.
+**Conseils** : Utilisez le journal des activités Azure pour superviser les configurations des ressources réseau et détecter les changements des ressources réseau associées à vos registres de conteneurs. Créez des alertes dans Azure Monitor, qui se déclenchent lors de la modification de ressources réseau critiques.
 
 Comment consulter et récupérer les événements du journal d’activité Azure :  https://docs.microsoft.com/azure/azure-monitor/platform/activity-log-view
 
@@ -174,7 +174,7 @@ Comment créer des alertes dans Azure Monitor :  https://docs.microsoft.com/azu
 
 ## <a name="logging-and-monitoring"></a>Journalisation et supervision
 
-*Pour plus d’informations, consultez [Contrôle de sécurité : journalisation et supervision](https://docs.microsoft.com/azure/security/benchmarks/security-control-logging-monitoring).*
+*Pour plus d’informations, consultez [Contrôle de sécurité : journalisation et supervision](../security/benchmarks/security-control-logging-monitoring.md).*
 
 ### <a name="21-use-approved-time-synchronization-sources"></a>2.1 : Utiliser des sources de synchronisation date/heure approuvées
 
@@ -285,7 +285,7 @@ Comment générer une alerte sur des données de journal Log Analytics :  https
 
 ## <a name="identity-and-access-control"></a>Contrôle des accès et des identités
 
-*Pour plus d’informations, consultez [Contrôle de sécurité : contrôle des accès et des identités](https://docs.microsoft.com/azure/security/benchmarks/security-control-identity-access-control).*
+*Pour plus d’informations, consultez [Contrôle de sécurité : contrôle des accès et des identités](../security/benchmarks/security-control-identity-access-control.md).*
 
 ### <a name="31-maintain-an-inventory-of-administrative-accounts"></a>3.1 : Tenir un inventaire des comptes d’administration
 
@@ -320,7 +320,7 @@ Compte d’administrateur Azure Container Registry : https://docs.microsoft.com
 
 ### <a name="33-use-dedicated-administrative-accounts"></a>3.3 : Utiliser des comptes d’administration dédiés
 
-**Aide** : Créez des procédures standard autour de l’utilisation de comptes d’administration dédiés. Utilisez la gestion des identités et des accès dans Azure Security Center pour superviser le nombre de comptes d’administration.
+**Conseils** : Créez des procédures standard autour de l’utilisation de comptes d’administration dédiés. Utilisez la gestion des identités et des accès dans Azure Security Center pour superviser le nombre de comptes d’administration.
 
 Créez également des procédures pour activer le compte administrateur intégré d’un registre de conteneurs. Désactivez le compte lorsqu’il n’est pas utilisé.
 
@@ -336,7 +336,7 @@ Compte d’administrateur Azure Container Registry :  https://docs.microsoft.co
 
 ### <a name="34-use-single-sign-on-sso-with-azure-active-directory"></a>3.4 : Utiliser l’authentification unique (SSO) avec Azure Active Directory
 
-**Aide** : Dans la mesure du possible, utilisez l’authentification unique (SSO) d’Azure Active Directory au lieu de configurer des informations d’identification autonomes individuelles par service. Suivez les recommandations liées à la gestion des identités et des accès dans Azure Security Center.
+**Conseils** : Dans la mesure du possible, utilisez l’authentification unique (SSO) d’Azure Active Directory au lieu de configurer des informations d’identification autonomes individuelles par service. Suivez les recommandations liées à la gestion des identités et des accès dans Azure Security Center.
 
 Pour un accès individuel au registre de conteneurs, utilisez une connexion individuelle intégrée avec Azure Active Directory.
 
@@ -464,7 +464,7 @@ Liste des services pris en charge pour Customer Lockbox : https://docs.microsof
 
 ## <a name="data-protection"></a>Protection des données
 
-*Pour plus d’informations, consultez [Contrôle de sécurité : protection des données](https://docs.microsoft.com/azure/security/benchmarks/security-control-data-protection).*
+*Pour plus d’informations, consultez [Contrôle de sécurité : protection des données](../security/benchmarks/security-control-data-protection.md).*
 
 ### <a name="41-maintain-an-inventory-of-sensitive-information"></a>4.1 : Conserver un inventaire des informations sensibles
 
@@ -556,9 +556,9 @@ Comprendre la protection des données client dans Azure : https://docs.microsof
 
 ### <a name="46-use-azure-rbac-to-control-access-to-resources"></a>4.6 : Utiliser Azure RBAC pour contrôler l’accès aux ressources
 
-**Aide** : Utilisez le contrôle d’accès en fonction du rôle (RBAC) d’Azure Active Directory (Azure AD) pour contrôler l’accès aux données et aux ressources dans un registre de conteneurs Azure. 
+**Aide** : Utilisez le contrôle d’accès en fonction du rôle Azure (Azure RBAC) pour contrôler l’accès aux données et aux ressources dans un registre de conteneurs Azure. 
 
-Configurer le contrôle d’accès en fonction du rôle dans Azure :  https://docs.microsoft.com/azure/role-based-access-control/role-assignments-portal
+Comment configurer Azure RBAC : https://docs.microsoft.com/azure/role-based-access-control/role-assignments-portal
 
 Autorisations et rôles Azure Container Registry :  https://docs.microsoft.com/azure/container-registry/container-registry-roles
 
@@ -570,7 +570,7 @@ Autorisations et rôles Azure Container Registry :  https://docs.microsoft.com/
 
 ### <a name="47-use-host-based-data-loss-prevention-to-enforce-access-control"></a>4.7 : Utiliser la protection contre la perte de données basée sur l’hôte pour appliquer le contrôle d’accès
 
-**Aide** : Si nécessaire à des fins de conformité sur les ressources de calcul, implémentez un outil tiers, tel qu’une solution automatisée de prévention contre la perte de données basée sur l’hôte, pour appliquer des contrôles d’accès aux données même lorsque des données sont copiées à partir d’un système.
+**Conseils** : Si nécessaire à des fins de conformité sur les ressources de calcul, implémentez un outil tiers, tel qu’une solution automatisée de prévention contre la perte de données basée sur l’hôte, pour appliquer des contrôles d’accès aux données même lorsque des données sont copiées à partir d’un système.
 
 Pour la plateforme sous-jacente qui est gérée par Microsoft, Microsoft traite tout le contenu client comme sensible et déploie d'importants efforts pour vous protéger contre la perte et l’exposition des données client. Pour garantir la sécurité des données client dans Azure, Microsoft a implémenté et tient à jour une suite de contrôles et de fonctionnalités de protection des données robustes.
 
@@ -608,7 +608,7 @@ Journaux d’Azure Container Registry pour l’évaluation et l’audit de diagn
 
 ## <a name="vulnerability-management"></a>Gestion des vulnérabilités
 
-*Pour plus d’informations, consultez [Contrôle de sécurité : Gestion des vulnérabilités](https://docs.microsoft.com/azure/security/benchmarks/security-control-vulnerability-management).*
+*Pour plus d’informations, consultez [Contrôle de sécurité : Gestion des vulnérabilités](../security/benchmarks/security-control-vulnerability-management.md).*
 
 ### <a name="51-run-automated-vulnerability-scanning-tools"></a>5.1 : Exécuter les outils d’analyse des vulnérabilités automatisés
 
@@ -674,7 +674,7 @@ Intégration d’Azure Container Registry à Security Center (préversion) :  h
 
 ## <a name="inventory-and-asset-management"></a>Gestion des stocks et des ressources
 
-*Pour plus d’informations, consultez [Contrôle de sécurité : Gestion des stocks et des ressources](https://docs.microsoft.com/azure/security/benchmarks/security-control-inventory-asset-management).*
+*Pour plus d’informations, consultez [Contrôle de sécurité : Gestion des stocks et des ressources](../security/benchmarks/security-control-inventory-asset-management.md).*
 
 ### <a name="61-use-azure-asset-discovery"></a>6.1 : Utiliser la découverte de ressources Azure
 
@@ -748,7 +748,7 @@ Créer des requêtes avec Azure Graph :  https://docs.microsoft.com/azure/gover
 
 ### <a name="66-monitor-for-unapproved-software-applications-within-compute-resources"></a>6.6 : Analyser les applications logicielles non approuvées dans des ressources de calcul
 
-**Aide** : Analysez et supervisez les journaux Azure Container Registry pour détecter les comportements anormaux et examinez régulièrement les résultats. Utilisez l’espace de travail Log Analytics d’Azure Monitor pour examiner les journaux et effectuer des requêtes sur leurs données.
+**Conseils** : Analysez et supervisez les journaux Azure Container Registry pour détecter les comportements anormaux et examinez régulièrement les résultats. Utilisez l’espace de travail Log Analytics d’Azure Monitor pour examiner les journaux et effectuer des requêtes sur leurs données.
 
 Journaux d’Azure Container Registry pour l’évaluation et l’audit de diagnostics :  https://docs.microsoft.com/azure/container-registry/container-registry-diagnostics-audit-logs
 
@@ -819,7 +819,7 @@ Configurer l’accès conditionnel pour bloquer l’accès à Azure Resource Man
 
 ### <a name="612-limit-users-ability-to-execute-scripts-within-compute-resources"></a>6.12 : Limiter la capacité des utilisateurs à exécuter des scripts dans des ressources de calcul
 
-**Aide** : Utilisez des configurations de système d’exploitation spécifiques ou des ressources tierces pour limiter la capacité des utilisateurs à exécuter des scripts dans des ressources de calcul Azure.
+**Conseils** : Utilisez des configurations de système d’exploitation spécifiques ou des ressources tierces pour limiter la capacité des utilisateurs à exécuter des scripts dans des ressources de calcul Azure.
 
 Par exemple, contrôler l’exécution d’un script PowerShell dans des environnements Windows :  https://docs.microsoft.com/powershell/module/microsoft.powershell.security/set-executionpolicy?view=powershell-6
 
@@ -843,7 +843,7 @@ Comment créer un NSG avec une configuration de sécurité :  https://docs.micr
 
 ## <a name="secure-configuration"></a>Configuration sécurisée
 
-*Pour plus d’informations, consultez [Contrôle de sécurité : Configuration sécurisée](https://docs.microsoft.com/azure/security/benchmarks/security-control-secure-configuration).*
+*Pour plus d’informations, consultez [Contrôle de sécurité : Configuration sécurisée](../security/benchmarks/security-control-secure-configuration.md).*
 
 ### <a name="71-establish-secure-configurations-for-all-azure-resources"></a>7.1 : Établir des configurations sécurisées pour toutes les ressources Azure
 
@@ -970,9 +970,11 @@ Auditer la conformité des registres de conteneurs Azure à l’aide d’Azure P
 
 Intégration aux identités managées Azure :  https://docs.microsoft.com/azure/azure-app-configuration/howto-integrate-azure-managed-service-identity
 
-Pour créer un coffre de clés :  https://docs.microsoft.com/azure/key-vault/quick-create-portal
+Pour créer un coffre de clés : https://docs.microsoft.com/azure/key-vault/general/quick-create-portal
 
-Fournir une authentification Key Vault avec une identité managée :  https://docs.microsoft.com/azure/key-vault/managed-identity
+Comment s’authentifier auprès de Key Vault : https://docs.microsoft.com/azure/key-vault/general/authentication
+
+Comment attribuer une stratégie d’accès Key Vault : https://docs.microsoft.com/azure/key-vault/general/assign-access-policy-portal
 
 Utiliser une identité managée Azure dans Azure Container Registry Tasks :  https://docs.microsoft.com/azure/container-registry/container-registry-tasks-authentication-managed-identity
 
@@ -1007,7 +1009,7 @@ Configuration de Credential Scanner :  https://secdevtools.azurewebsites.net/he
 
 ## <a name="malware-defense"></a>Défense contre les programmes malveillants
 
-*Pour plus d’informations, consultez [Contrôle de sécurité : Défense contre les programmes malveillants](https://docs.microsoft.com/azure/security/benchmarks/security-control-malware-defense).*
+*Pour plus d’informations, consultez [Contrôle de sécurité : Défense contre les programmes malveillants](../security/benchmarks/security-control-malware-defense.md).*
 
 ### <a name="81-use-centrally-managed-anti-malware-software"></a>8.1 : Utiliser un logiciel anti-programme malveillant géré de manière centralisée
 
@@ -1042,7 +1044,7 @@ Pré-analysez les fichiers chargés sur des ressources Azure non liées au calcu
 
 ## <a name="data-recovery"></a>Récupération des données
 
-*Pour plus d’informations, consultez [Contrôle de sécurité : récupération de données](https://docs.microsoft.com/azure/security/benchmarks/security-control-data-recovery).*
+*Pour plus d’informations, consultez [Contrôle de sécurité : récupération de données](../security/benchmarks/security-control-data-recovery.md).*
 
 ### <a name="91-ensure-regular-automated-back-ups"></a>9.1 : garantir des sauvegardes automatisées régulières
 
@@ -1069,7 +1071,7 @@ Importer des images conteneur dans un registre de conteneurs :  https://docs.mi
 Comment sauvegarder des clés Key Vault dans Azure :  https://docs.microsoft.com/powershell/module/azurerm.keyvault/backup-azurekeyvaultkey?view=azurermps-6.13.0
 
 
-**Supervision d’Azure Security Center** : Non applicable
+**Supervision Azure Security Center** : Non applicable
 
 **Responsabilité** : Customer
 
@@ -1097,7 +1099,7 @@ Comment activer la suppression réversible dans Key Vault : https://docs.micros
 
 ## <a name="incident-response"></a>Réponse aux incidents
 
-*Pour plus d’informations, consultez [Contrôle de sécurité : réponse aux incidents](https://docs.microsoft.com/azure/security/benchmarks/security-control-incident-response).*
+*Pour plus d’informations, consultez [Contrôle de sécurité : réponse aux incidents](../security/benchmarks/security-control-incident-response.md).*
 
 ### <a name="101-create-an-incident-response-guide"></a>10.1 : Créer un guide de réponse aux incidents
 
@@ -1146,7 +1148,7 @@ Reportez-vous à la publication du NIST : Guide to Test, Training, and Exercise 
 Comment définir le contact de sécurité d’Azure Security Center :  https://docs.microsoft.com/azure/security-center/security-center-provide-security-contact-details
 
 
-**Supervision d’Azure Security Center** : Non applicable
+**Supervision Azure Security Center** : Non applicable
 
 **Responsabilité** : Customer
 
@@ -1176,7 +1178,7 @@ Comment configurer l’automatisation des workflows et Logic Apps :  https://do
 
 ## <a name="penetration-tests-and-red-team-exercises"></a>Tests d’intrusion et exercices Red Team
 
-*Pour plus d’informations, consultez [Contrôle de sécurité : tests d’intrusion et exercices Red Team](https://docs.microsoft.com/azure/security/benchmarks/security-control-penetration-tests-red-team-exercises).*
+*Pour plus d’informations, consultez [Contrôle de sécurité : tests d’intrusion et exercices Red Team](../security/benchmarks/security-control-penetration-tests-red-team-exercises.md).*
 
 ### <a name="111-conduct-regular-penetration-testing-of-your-azure-resources-and-ensure-remediation-of-all-critical-security-findings-within-60-days"></a>11.1 : Procédez régulièrement à des tests d’intrusion de vos ressources Azure et veillez à résoudre tous les problèmes de sécurité critiques détectés dans un délai de 60 jours
 
@@ -1192,5 +1194,5 @@ Vous trouverez plus d’informations sur la stratégie de Microsoft, sur l’ex�
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- Consultez le [benchmark de sécurité Azure](https://docs.microsoft.com/azure/security/benchmarks/overview)
-- Apprenez-en davantage sur les [Bases de référence de la sécurité Azure](https://docs.microsoft.com/azure/security/benchmarks/security-baselines-overview)
+- Consultez le [benchmark de sécurité Azure](../security/benchmarks/overview.md)
+- Apprenez-en davantage sur les [Bases de référence de la sécurité Azure](../security/benchmarks/security-baselines-overview.md)

@@ -8,12 +8,12 @@ ms.author: victliu
 ms.service: cognitive-search
 ms.topic: conceptual
 ms.date: 11/04/2019
-ms.openlocfilehash: 65e483fd772e20daa73b465ea17dfa6ecde42233
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 9e8625724f67caac99ae799674f9db9399e11ad8
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76964887"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89294252"
 ---
 # <a name="configure-a-connection-from-an-azure-cognitive-search-indexer-to-sql-managed-instance"></a>Configurer une connexion entre un indexeur Recherche cognitive Azure et SQL Managed Instance
 
@@ -27,7 +27,7 @@ Créez une instance SQL Managed Instance avec l’option **Activer le point de t
 ## <a name="enable-azure-sql-managed-instance-public-endpoint"></a>Activer un point de terminaison public Azure SQL Managed Instance
 Vous pouvez également activer un point de terminaison public sur une instance SQL Managed Instance existante sous **Sécurité** > **Réseau virtuel** > **Point de terminaison public** > **Activer**.
 
-   ![Activer le point de terminaison public](media/search-howto-connecting-azure-sql-mi-to-azure-search-using-indexers/mi-vnet.png "Activer un point de terminaison public")
+   ![Activer un point de terminaison public au moyen d’une instance managée de VNET](media/search-howto-connecting-azure-sql-mi-to-azure-search-using-indexers/mi-vnet.png "Activer un point de terminaison public")
 
 ## <a name="verify-nsg-rules"></a>Vérifier les règles du groupe de sécurité réseau
 Vérifiez que le groupe de sécurité réseau contient des **règles de sécurité de trafic entrant** appropriées qui autorisent les connexions à partir des services Azure.
@@ -38,7 +38,7 @@ Vérifiez que le groupe de sécurité réseau contient des **règles de sécurit
 > Les indexeurs requièrent toujours que SQL Managed Instance soit configuré avec un point de terminaison public pour pouvoir lire les données.
 > Toutefois, vous pouvez choisir de restreindre l’accès entrant de ce point de terminaison public en remplaçant la règle actuelle (`public_endpoint_inbound`) par les deux règles suivantes :
 >
-> * Autorisation de l’accès entrant à partir de la [balise de service](https://docs.microsoft.com/azure/virtual-network/service-tags-overview#available-service-tags) `AzureCognitiveSearch` ("SOURCE" = `AzureCognitiveSearch`, "NAME" = `cognitive_search_inbound`)
+> * Autorisation de l’accès entrant à partir de la [balise de service](../virtual-network/service-tags-overview.md#available-service-tags) `AzureCognitiveSearch` ("SOURCE" = `AzureCognitiveSearch`, "NAME" = `cognitive_search_inbound`)
 >
 > * Autorisation de l’accès entrant à partir de l’adresse IP du service de recherche, qui peut être obtenue en exécutant une commande ping sur son nom de domaine complet (par exemple, `<your-search-service-name>.search.windows.net`). ("SOURCE" = `IP address`, "NAME" = `search_service_inbound`)
 >

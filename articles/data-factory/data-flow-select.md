@@ -6,13 +6,13 @@ ms.author: makromer
 ms.service: data-factory
 ms.topic: conceptual
 ms.custom: seo-lt-2019
-ms.date: 03/18/2020
-ms.openlocfilehash: a90a2def874c7f081f83a34aea956083eb72879a
-ms.sourcegitcommit: acb82fc770128234f2e9222939826e3ade3a2a28
+ms.date: 06/02/2020
+ms.openlocfilehash: 2d8c4d1915e22ccabf193f1b34c5fc4797ead549
+ms.sourcegitcommit: 4f4a2b16ff3a76e5d39e3fcf295bca19cff43540
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81686498"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93040242"
 ---
 # <a name="select-transformation-in-mapping-data-flow"></a>Transformation de sélection dans le flux de données de mappage
 
@@ -39,15 +39,18 @@ Les mappages fixes peuvent être utilisés pour mapper une sous-colonne d’une 
 
 ## <a name="rule-based-mapping"></a>Mappage basé sur des règles
 
+
+> [!VIDEO https://www.microsoft.com/en-us/videoplayer/embed/RE4xiXz]
+
 Si vous voulez mapper plusieurs colonnes à la fois ou passer des colonnes dérivées en aval, utilisez un mappage basé sur des règles pour définir vos mappages à l’aide de modèles de colonne. Correspondance basée sur les valeurs `name`, `type`, `stream` et `position` de colonnes. Vous pouvez réaliser n’importe quelle combinaison de mappage fixe et basé sur des règles. Par défaut, toutes les projections contenant plus de 50 colonnes ont comme valeur par défaut un mappage basé sur des règles qui correspond à chaque colonne et génère le nom entré. 
 
 Pour ajouter un mappage basé sur les règles, cliquez sur **Ajouter un mappage** et sélectionnez **Mappage basé sur les règles**.
 
-![Mappage basé sur les règles](media/data-flow/rule2.png "Mappage basé sur des règles")
+![Capture d’écran montrant l’option Mappage basé sur les règles sélectionnée dans Ajouter un mappage.](media/data-flow/rule2.png "Mappage basé sur des règles")
 
 Chaque mappage basé sur des règles nécessite deux entrées : la condition à rechercher et le nom de chaque colonne mappée. Les deux valeurs sont entrées par l’intermédiaire du [générateur d’expressions](concepts-data-flow-expression-builder.md). Dans la zone d’expression de gauche, entrez votre condition de correspondance booléenne. Dans la zone d’expression de droite, indiquez ce à quoi la colonne correspondante sera mappée.
 
-![Mappage basé sur les règles](media/data-flow/rule-based-mapping.png "Mappage basé sur des règles")
+![Capture d’écran montrant un mappage.](media/data-flow/rule-based-mapping.png "Mappage basé sur des règles")
 
 Utilisez la syntaxe `$$` pour référencer le nom d’entrée d’une colonne correspondante. Prenons l’image ci-dessus comme exemple et imaginons qu’un utilisateur souhaite faire correspondre toutes les colonnes de chaîne dont les noms ont moins de six caractères. Si une colonne entrante a été nommée `test`, l’expression `$$ + '_short'` renomme la colonne en `test_short`. Si c’est le seul mappage qui existe, toutes les colonnes qui ne répondent pas à la condition sont supprimées des données générées.
 
@@ -57,7 +60,7 @@ Les modèles correspondent à la fois aux colonnes dérivées et définies. Pour
 
 Si vous cliquez sur l’icône du chevron pointant vers le bas, vous pouvez spécifier une condition de mappage regex. Une condition de mappage regex correspond à tous les noms de colonne qui correspondent à la condition regex spécifiée. Elle peut être utilisée en association avec les mappages standard basés sur des règles.
 
-![Mappage basé sur les règles](media/data-flow/regex-matching.png "Mappage basé sur des règles")
+![Capture d’écran montrant la condition regex-mapping avec des correspondances de niveau de hiérarchie et de nom.](media/data-flow/regex-matching.png "Mappage basé sur des règles")
 
 L’exemple ci-dessus correspond au modèle regex `(r)` ou à tout nom de colonne qui contient un r minuscule. À l’instar du mappage standard basé sur des règles, toutes les colonnes correspondantes sont modifiées par la condition à droite à l’aide de la syntaxe `$$`.
 
@@ -67,7 +70,7 @@ Si vous avez plusieurs correspondances regex dans votre nom de colonne, vous pou
 
 Si votre projection définie a une hiérarchie, vous pouvez utiliser le mappage basé sur des règles pour mapper les sous-colonnes de hiérarchies. Spécifiez une condition de correspondance et la colonne complexe dont vous souhaitez mapper les sous-colonnes. Chaque sous-colonne correspondante est générée à l’aide de la règle « Nommer » spécifiée à droite.
 
-![Mappage basé sur les règles](media/data-flow/rule-based-hierarchy.png "Mappage basé sur des règles")
+![Capture d’écran montrant un mappage basé sur les règles et utilisant une hiérarchie.](media/data-flow/rule-based-hierarchy.png "Mappage basé sur des règles")
 
 L’exemple ci-dessus correspond à toutes les sous-colonnes de la colonne complexe `a`. `a` contient deux sous-colonnes `b` et `c`. Le schéma de sortie inclut deux colonnes `b` et `c`, car la condition « Nommer » est `$$`.
 

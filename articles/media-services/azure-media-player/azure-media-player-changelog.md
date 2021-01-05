@@ -5,15 +5,141 @@ author: IngridAtMicrosoft
 ms.author: inhenkel
 ms.service: media-services
 ms.topic: overview
-ms.date: 04/20/2020
-ms.openlocfilehash: 15f8a3ac8c2777b3a878de92db495e559f64ad20
-ms.sourcegitcommit: acb82fc770128234f2e9222939826e3ade3a2a28
+ms.date: 09/23/2020
+ms.openlocfilehash: 9d126f591da1bffebbfd29119c56927cfbb21dcd
+ms.sourcegitcommit: 28c5fdc3828316f45f7c20fc4de4b2c05a1c5548
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81727596"
+ms.lasthandoff: 10/22/2020
+ms.locfileid: "92370574"
 ---
-# <a name="changelog"></a>Journal des modifications #
+# <a name="changelog"></a>Journal des modifications
+
+## <a name="236-official-update-september-21-2020"></a>2.3.6 (mise à jour officielle du 21 septembre 2020)
+
+### <a name="features-236"></a>Fonctionnalités 2.3.6
+
+Ajout du support audio uniquement pour la technologie azureHtml5JS (DASH) Prise en charge du début tardif de transcription en direct Prise en charge du changement de langue dans la transcription en direct
+
+### <a name="bug-fixes-236"></a>Correctifs de bogues 2.3.6
+
+Lors de l’utilisation de « playsinline » dans les lectures HLS sur les appareils Apple, le fait de cliquer sur le bouton « LIVE » entraîne le redémarrage de la vidéo L’image de l’affiche AMP provoque parfois une exception Le bouton de volume était manquant lors d’une lecture FairPlay HLS [Accessibilité] Info-bulles non définies pour les boutons lorsque le clavier est utilisé [Accessibilité] Le ratio de luminosité est inférieur à 1,3:1 pour la barre de progression [Accessibilité] Le focus clavier ne retourne parfois pas au bouton de qualité vidéo [Accessibilité] Les contrôles ne sont pas visibles sur l’écran vidéo et le Narrateur ne parvient pas à les trouver
+
+### <a name="changes-236"></a>Modifications 2.3.6
+
+Retourner les erreurs significatives de remise de clé aux applications appelantes
+
+## <a name="235-official-update-june-1-2020"></a>2.3.5 (mise à jour officielle du 1er juin 2020)
+
+### <a name="bug-fixes-235"></a>Correctifs de bogues 2.3.5
+
+- [Accessibilité] L’écouteur de la touche Échap dans le volet Options est attaché au document
+- [Accessibilité] Empêcher la disparition de l’interface utilisateur du lecteur si la barre de contrôle ou le menu Options contient le focus
+- La barre de contrôle affiche un temps horloge incorrect quand les paramètres d’affichage du temps horloge sont activés
+
+### <a name="changes-235"></a>Modifications 2.3.5
+
+- Ajout et documentation d’un message d’erreur pour le code d’erreur 0x00400005
+
+## <a name="234-official-update-march-4-2020"></a>2.3.4 (mise à jour officielle du 4 mars 2020)
+
+### <a name="bug-fixes-234"></a>Correctifs de bogues 2.3.4
+
+- Impossible de définir PlayReady overrideLicenseAcquistionUrl
+- Impossible de lire du contenu avec des discontinuités
+- [Accessibilité] La valeur de l’attribut ID pour l’alerte du lecteur d’écran doit être unique
+- [Accessibilité] Lors de la navigation dans la boîte de dialogue de paramètres Sous-titres, le focus se déplace hors de la boîte de dialogue
+
+### <a name="changes-234"></a>Modifications 2.3.4
+
+- Journaliser Content-Length après un téléchargement réussi pour faciliter l’analyse des erreurs de déchiffrement 2.3.3 (mise à jour officielle du 12 novembre 2019)
+
+### <a name="features-234"></a>Fonctionnalités 2.3.4
+
+- Ajout de la prise en charge de l’affichage du temps horloge d’une vidéo sous forme de superposition et dans la barre de contrôle
+
+### <a name="bug-fixes-234"></a>Correctifs de bogues 2.3.4
+
+- Le commutateur de piste audio fonctionne, mais génère sur IE 11 et Windows 7 l’erreur « L’objet ne gère pas la propriété ou la méthode 'enabled' »
+- Le commutateur de piste audio échoue quand le tampon est entièrement chargé
+- Le commutateur de piste audio échoue quand l’utilisateur interrompt la vidéo et bascule entre les pistes audio très rapidement
+- [Accessibilité] Info-bulles non définies pour le contrôle vidéo sous le lecteur vidéo
+- Boutons de volume manquants sur HTML5 selon le moment auquel « loadstart » est reçu
+- [Accessibilité] Impossible de définir le texte de remplacement pour l’image d’affiche
+- [Accessibilité] Le focus de l’application est perdu après la sélection de l’option « Terminé » dans la boîte de dialogue des paramètres des légendes
+- [Accessibilité] Des attributs ARIA incorrects sont définis pour « video » sous « segments preview »
+
+### <a name="changes-234"></a>Modifications 2.3.4
+
+- Piste/étiquette de légende vide supprimée lors de la lecture de HLS sur iOS et macOS Safari
+- Réduction du nombre d’erreurs 412 pour les légendes IMSC1
+- Générer un avertissement dans la console pour 10 réponses de légende IMSC1 vides consécutives pour faciliter le débogage en direct
+
+## <a name="232-official-update-october-9-2019"></a>2.3.2 (mise à jour officielle du 9 octobre 2019)
+
+### <a name="features-232"></a>Fonctionnalités 2.3.2
+
+-Ajout de la prise en charge de PlayReady pour la lecture DASH pour le navigateur Chromium Edge
+
+### <a name="bug-fixes-232"></a>Correctifs de bogues 2.3.2
+
+- La vitesse de lecture actuelle n’est pas affichée dans le menu Vitesse de lecture, sauf si l’utilisateur la définit manuellement
+- [Accessibilité] Le volet « Paramètres » n’est pas réduit avec la touche Échap
+- [Accessibilité] La touche de raccourci AMP « M » ne fonctionne pas quand le narrateur est activé
+
+### <a name="changes-232"></a>Modifications 2.3.2
+
+- Pour les navigateurs qui ne prennent pas en charge le codec audio E-AC3, les pistes audio E-AC3 sont masquées dans le menu Piste audio.
+- Pour les navigateurs qui prennent en charge le codec audio E-AC3, une piste audio E-AC3 est sélectionnée par défaut.
+- Pour les navigateurs qui ne prennent pas en charge le changement de codec audio, les pistes audio dont le codec diffère de celui de la piste sélectionnée sont masquées dans le menu Piste audio.
+
+## <a name="231-official-update-august-12-2019"></a>2.3.1 (mise à jour officielle du 12 août 2019)
+
+### <a name="features-231"></a>Fonctionnalités 2.3.1
+
+- Signaler un événement lors de la réception de zones de message pendant une lecture DASH - Ajout de la prise en charge de l’affichage des pistes audio ce-3 dans le menu Audio sur les navigateurs qui prennent en charge ce-3 et de la possibilité de passer d’une piste audio aac à ec3 et vice versa uniquement sur le navigateur Edge basé sur Chromimum
+
+### <a name="bug-fixes-231"></a>Correctifs de bogues 2.3.1
+
+- Le menu Piste audio est endommagé après la suppression des pistes ec-3
+- La durée actuelle peut être supérieure à la durée de la vidéo
+- La définition de la vitesse de lecture via initialSpeed ne fonctionne pas
+- Parfois, après une recherche, le lecteur semble coincé
+- Sur Edge et IE, sur un écran tactile, après avoir effectué un zoom sur une page, le fait d’appuyer ou de pointer sur la barre de recherche ne permet pas d’obtenir avec précision le segment correct de la vidéo
+- [Accessibilité] L’étiquette Aria pour la lecture/pause n’est pas explicite pour le lecteur vidéo, mise en correspondance de l’erreur de segment actif introuvable pour flashSS avec la bonne erreur AMP
+- [Accessibilité] Les rôles Aria utilisés pour la lecture/pause doivent être conformes aux valeurs valides (.vjs-text-track-display)
+- [Accessibilité] Certains rôles ARIA doivent se trouver dans des parents particuliers
+- [Accessibilité] Aucune info-bulle n’est définie pour le bouton de lecture/pause du lecteur vidéo. Les légendes IMSC1 peuvent disparaître après une recherche dans la mémoire tampon audio/vidéo actuelle.
+
+### <a name="changes-231"></a>Modifications 2.3.1
+
+- Lors de l’obtention d’une erreur segmentDecryptError et si le lecteur se trouve dans la périphérie en direct, le lecteur actualise le manifeste au lieu d’essayer le segment suivant.
+- Enrichissement de la journalisation pour le diagnostic
+- Mise à jour de la documentation afin d’inclure la prise en charge de FairPlay pour iOS Safari
+- Ajout d’un exemple pour le « srclang » de l’option IMSC1
+- Ajout des remplacements padding, textPadding et boxShadow pour les pistes de texte.
+- Ajout d’un code d’erreur (0x0020025B) pour bien indiquer que l’échec du téléchargement du segment est dû à l’absence de connexion Internet, au lieu de simplement lever une erreur 0x00200259
+
+## <a name="230-official-release-april-30-2019"></a>2.3.0 (publication officielle du 30 avril 2019)
+
+### <a name="features-230"></a>Fonctionnalités 2.3.0
+
+- Ajout de la prise en charge des légendes IMSC1 pour DASH
+- Ajout de la prise en charge des ressources vidéo uniquement pour DASH
+- Ajout de l’API presentationTimeOffsetInSec
+
+### <a name="bug-fixes-230"></a>Correctifs de bogues 2.3.0
+
+- Le profil d’heuristiques AMP LowLatency interfère avec la lecture vidéo iOS. Les paramètres d’activation (« mute ») et de désactivation (« unmute ») du son pour certaines langues ont des traductions erronées
+- La valeur aria-valuenow du curseur de la barre de progression est parfois incorrecte
+- La valeur de rôle aria de l’affichage de la piste de texte est incorrecte
+
+### <a name="changes-230"></a>Modifications 2.3.0
+
+- Les journaux incluent maintenant la taille des fragments multimédias téléchargés
+- Suppression de la prise en charge d’IE 9 et d’IE 10
+- Mise à jour de l’exemple CEA708 pour illustrer l’alignement à gauche des légendes
+- Inclusion de MediaError.message dans les journaux pour les échecs de lecture
 
 ## <a name="224-official-update-february-22-2019"></a>2.2.4 (mise à jour officielle du 22 février 2019) ##
 
@@ -31,7 +157,7 @@ ms.locfileid: "81727596"
 
 ## <a name="223-official-update-january-9-2019"></a>2.2.3 (mise à jour officielle du 9 janvier 2019) ##
 
-### <a name="features"></a>Fonctionnalités ###
+### <a name="features-223"></a>Fonctionnalités 2.2.3 ###
 
 - [Fonctionnalité][HLS] Ajout du menu de pistes audio pour la lecture HLS de Safari
 
@@ -72,7 +198,7 @@ ms.locfileid: "81727596"
 
 ### <a name="changes"></a>Modifications ###
 
-- [Modification][Sous-titrage en direct] Changement du nom de l’API pour les sous-titres CEA de 608 à 708. Pour plus d’informations, consultez [Paramètres des sous-titres CEA708](https://docs.microsoft.com/javascript/api/azuremediaplayer/amp.player.cea708captionssettings)-->.
+- [Modification][Sous-titrage en direct] Changement du nom de l’API pour les sous-titres CEA de 608 à 708. Pour plus d’informations, consultez [Paramètres des sous-titres CEA708](/javascript/api/azuremediaplayer/cea708captionssettings)-->.
 
 ## <a name="220-official-release"></a>2.2.0 (publication officielle) ##
 
@@ -116,7 +242,7 @@ ms.locfileid: "81727596"
 
 ### <a name="changes-218"></a>Modifications 2.1.8 ###
 
-- [Modification] Mise à jour de l’erreur 0x0600001 à afficher lorsque le contenu AES est lu avec Flash 30, car ce plug-in n’est pas pris en charge pour le moment. Pour plus de détails, voir [Problèmes connus](azure-media-player-known-issues.md).
+- [Modification] Mise à jour de l’erreur 0x0600001 à afficher quand le contenu AES est lu avec Flash 30, car ce plug-in n’est pas pris en charge pour le moment. Pour plus de détails, voir [Problèmes connus](azure-media-player-known-issues.md).
 - [Modification] Ajout de nouvelles tentatives supplémentaires pour les scénarios en direct quand le manifeste demande 404 ou retourne des manifestes vides.
 
 ## <a name="217-official-update"></a>2.1.7 (mise à jour officielle) ##
@@ -577,8 +703,8 @@ ms.locfileid: "81727596"
 - [Correctif de bogue][AzureHtml5JS] La lecture en direct se fige sur les mises à jour MPD lorsqu’il existe de petites imprécisions dans l’horodatage
 - [Correctif de bogue][AzureHtml5JS] Atténuation de plusieurs problèmes de lecture en direct
 - [Correctif de bogue][AzureHtml5JS] Vidage des mémoires tampons lorsque l’heuristique de la taille des fenêtres est activée et accède à un écran de résolution supérieure
-- [Correctif de bogue][AzureHtml5JS] Chrome affiche désormais correctement l’événement terminé. Est lié au problème antérieur connu que *Chrome n’envoie pas correctement l’événement â&euro;œterminéâ&euro; lors de l’utilisation d’AzureHtml5JS. Il y a un problème dans le navigateur sous-jacent.*
-- [Correctif de bogue][AzureHtml5JS] Désactivation de Safari pour cette technologie afin de résoudre le *Problème de lecture avec OSX Yosemite et la technologie AzureHtml5JS. Il existe des problèmes d’implémentation de MSE. Atténuation temporaire : forcer â&euro;œFlashSSâ&euro;, â&euro;œSilverlightSSâ&euro; en tant qu’ordre des technologies pour ces agents utilisateurs*
+- [Correctif de bogue][AzureHtml5JS] Chrome affiche désormais correctement l’événement terminé. Est lié au problème connu antérieur selon lequel *Chrome n’envoie pas correctement l’événement terminé lorsque AzureHtml5JS est utilisé. Il y a un problème dans le navigateur sous-jacent.*
+- [Correctif de bogue][AzureHtml5JS] Désactivation de Safari pour cette technologie afin de résoudre le *Problème de lecture avec OSX Yosemite et la technologie AzureHtml5JS. Il existe des problèmes d’implémentation de MSE. Atténuation temporaire : forcer flashSS, silverlightSS comme ordre des technologies pour ces agents utilisateurs*
 - [Correctif de bogue][FlashSS] Déclenchement de loadstart après la survenue d’une erreur
 
 ## <a name="020-beta"></a>0.2.0 (Bêta) ##
@@ -601,7 +727,7 @@ ms.locfileid: "81727596"
 - [Correctif de bogue] Mise à jour de l’expérience de chargement de l’interface utilisateur pour le mode Lecture automatique
 - [Correctif de bogue] Problème de chargeur AMD et définition de conflits de méthode
 - [Correctif de bogue] Problème de chargement de l’application WP 8.1 Cordova
-- [Correctif de bogue] ProtectionType pris en charge par la plateforme/technologie de requêtes de contenu protégé afin de sélectionner la technologie appropriée pour la lecture.  Résolution du problème antérieur connu que le « _contenu PlayReady sur chrome (bureau) / Safari 8 (sur OSX Yosemite) ne revient pas sur le lecteur Silverlight_ »
+- [Correctif de bogue] ProtectionType pris en charge par la plateforme/technologie de requêtes de contenu protégé afin de sélectionner la technologie appropriée pour la lecture.  Résolution du problème antérieur connu que le «  _contenu PlayReady sur chrome (bureau) / Safari 8 (sur OSX Yosemite) ne revient pas sur le lecteur Silverlight_  »
 - [Correctif de bogue] Exception non interceptée sur WinServer 2012 R2 étant donné que Media Foundation n’est pas installé sur cette machine par défaut.  Tentative d’utilisation d’API de balises vidéo HTML qui ne sont pas implémentées, ce qui génère une erreur. L’atténuation actuelle consiste à intercepter cette erreur et à retourner false au lieu de lever l’erreur.
 - [Correctif de bogue] Obtention systématique du segment init après une recherche ou un échec http pour éviter les erreurs lors de la lecture
 - [Correctif de bogue] Désactivation du suivi de la progression simulée et des mises à jour de l’heure lors de la survenue de l’erreur.

@@ -3,20 +3,20 @@ title: Azure Front Door – Sécurité de la couche Application | Microsoft Doc
 description: Cet article explique comment Azure Front Door permet de protéger et de sécuriser vos back-ends d’application.
 services: frontdoor
 documentationcenter: ''
-author: sharad4u
+author: duongau
 ms.service: frontdoor
 ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 09/10/2018
-ms.author: sharadag
-ms.openlocfilehash: e458926930c1b95d48886559551878fc6c9d0673
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: duau
+ms.openlocfilehash: 4ee50b4c7da27df3630c1b4d263f076da44189bc
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79471793"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89399937"
 ---
 # <a name="application-layer-security-with-front-door"></a>Sécurité de la couche Application avec Front Door
 Azure Front Door offre une fonction de protection des applications web contre les attaques réseau et les types courants de code malveillant exploitant une faille de sécurité web, comme l’injection de code SQL le cross-site scripting (XSS). Activée pour les frontends HTTP(S), la sécurité de la couche Application de Front Door est distribuée mondialement et toujours activée, ce qui arrête les attaques malveillantes au niveau du périmètre de réseau, loin de vos backends. Avec une sécurité accrue et une optimisation des performances, Front Door offre des expériences web rapides et sécurisées pour vos utilisateurs finaux.

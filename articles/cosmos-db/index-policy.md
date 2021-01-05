@@ -3,24 +3,26 @@ title: Stratégies d’indexation d’Azure Cosmos DB
 description: Découvrez comment configurer et modifier la stratégie d’indexation par défaut pour bénéficier d’une indexation automatique et de meilleures performances dans Azure Cosmos DB.
 author: timsander1
 ms.service: cosmos-db
+ms.subservice: cosmosdb-sql
 ms.topic: conceptual
-ms.date: 04/28/2020
+ms.date: 12/07/2020
 ms.author: tisande
-ms.openlocfilehash: 68adfb8b4cfb7c665a8e8b162b4698a095bb671e
-ms.sourcegitcommit: f57297af0ea729ab76081c98da2243d6b1f6fa63
+ms.openlocfilehash: 2d99e0e2b65f7131e564e6ab64e454d2947c58a6
+ms.sourcegitcommit: 80c1056113a9d65b6db69c06ca79fa531b9e3a00
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/06/2020
-ms.locfileid: "82869942"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96903018"
 ---
 # <a name="indexing-policies-in-azure-cosmos-db"></a>Stratégies d’indexation dans Azure Cosmos DB
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
 
-Dans Azure Cosmos DB, chaque conteneur est doté d’une stratégie d’indexation qui détermine la façon dont les éléments du conteneur doivent être indexés. La stratégie d’indexation par défaut pour les conteneurs nouvellement créés indexe toutes les propriétés de chaque élément, mettant en œuvre des index de plage pour les chaînes ou les nombres et des index spatiaux pour les objets GeoJSON de type Point. Ceci vous permet d’obtenir des performances de requête élevées sans avoir à réfléchir à l’indexation et à la gestion des index dès le départ.
+Dans Azure Cosmos DB, chaque conteneur est doté d’une stratégie d’indexation qui détermine la façon dont les éléments du conteneur doivent être indexés. La stratégie d’indexation par défaut pour les conteneurs nouvellement créés indexe chaque propriété de chaque élément et applique des index de plage pour les chaînes ou les nombres. Vous obtenez ainsi un bon niveau de performance des requêtes sans avoir à réfléchir dès le départ à l’indexation ni à la gestion des index.
 
 Dans certaines situations, vous souhaiterez peut-être remplacer ce comportement automatique pour mieux répondre à vos besoins. Vous pouvez personnaliser la stratégie d’indexation d’un conteneur en définissant son *mode d’indexation* et inclure ou exclure des *chemins de la propriété*.
 
 > [!NOTE]
-> La méthode de mise à jour des stratégies d’indexation décrite dans cet article s’applique uniquement à l’API SQL (principale) de la base de données SQL Azure Cosmos.
+> La méthode de mise à jour des stratégies d’indexation décrite dans cet article s’applique uniquement à l’API SQL (principale) de la base de données SQL Azure Cosmos. Découvrez l’indexation dans[API Azure Cosmos DB pour MongoDB](mongodb-indexing.md).
 
 ## <a name="indexing-mode"></a>Mode d'indexation
 
@@ -30,13 +32,13 @@ Azure Cosmos DB prend en charge deux modes d’indexation :
 - **Aucun** : L’indexation est désactivée sur le conteneur. C’est courant lorsqu’un conteneur est exclusivement utilisé comme magasin clé-valeur sans que des index secondaires soient nécessaires. Vous pouvez également l’utiliser pour améliorer les performances des opérations en bloc. Une fois les opérations en bloc effectuées, vous pouvez définir le mode d’indexation Consistent (Cohérent), puis le superviser à l’aide de [IndexTransformationProgress](how-to-manage-indexing-policy.md#dotnet-sdk) jusqu’à la fin du processus.
 
 > [!NOTE]
-> Azure Cosmos DB prend également en charge un mode d’indexation différée. L’indexation différée effectue des mises à jour de l’index à un niveau de priorité nettement inférieur quand le moteur ne fait aucun autre travail. Cela peut entraîner des résultats de requête **incohérents ou incomplets**. Si vous prévoyez d’interroger un conteneur Cosmos, vous ne devez pas sélectionner l’indexation différée.
+> Azure Cosmos DB prend également en charge un mode d’indexation différée. L’indexation différée effectue des mises à jour de l’index à un niveau de priorité nettement inférieur quand le moteur ne fait aucun autre travail. Cela peut entraîner des résultats de requête **incohérents ou incomplets**. Si vous prévoyez d’interroger un conteneur Cosmos, vous ne devez pas sélectionner l’indexation différée. Les nouveaux conteneurs ne peuvent pas sélectionner l’indexation différée. Vous pouvez demander une exemption en contactant le [support Azure](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade) (sauf si vous utilisez un compte Azure Cosmos en mode [serverless](serverless.md), qui ne prend pas en charge l’indexation différée).
 
 Par défaut, la stratégie d’indexation a la valeur `automatic`. Ce résultat est obtenu en affectant à la propriété `automatic` de la stratégie d’indexation la valeur `true`. L’affectation de `true` à cette propriété permet à Azure CosmosDB d’indexer automatiquement les documents au fur et à mesure de leur rédaction.
 
-## <a name="including-and-excluding-property-paths"></a><a id="include-exclude-paths"></a> Inclusion et exclusion de chemins de propriété
+## <a name="including-and-excluding-property-paths"></a><a id="include-exclude-paths"></a>Inclusion et exclusion de chemins de propriété
 
-Une stratégie d’indexation personnalisée peut spécifier des chemins de propriétés qui sont explicitement inclus dans l’indexation ou en sont exclus. En optimisant le nombre de chemins indexés, vous pouvez réduire la quantité de stockage utilisé par votre conteneur et améliorer la latence des opérations d’écriture. Ces chemins sont définis à l’aide de [la méthode décrite dans la section de vue d’ensemble de l’indexation](index-overview.md#from-trees-to-property-paths) avec les ajouts suivants :
+Une stratégie d’indexation personnalisée peut spécifier des chemins de propriétés qui sont explicitement inclus dans l’indexation ou en sont exclus. En optimisant le nombre de chemins d’accès qui sont indexés, vous pouvez réduire considérablement la latence et les frais de chargement des opérations d’écriture. Ces chemins sont définis à l’aide de [la méthode décrite dans la section de vue d’ensemble de l’indexation](index-overview.md#from-trees-to-property-paths) avec les ajouts suivants :
 
 - un chemin menant à une valeur scalaire (chaîne ou nombre) se termine par `/?`
 - les éléments tirés d’un tableau sont traités ensemble par le biais de la notation `/[]` (au lieu de `/0`, `/1` etc.)
@@ -73,7 +75,7 @@ Toute stratégie d’indexation doit inclure le chemin racine `/*` comme chemin 
 - Inclure le chemin racine pour exclure sélectivement des chemins qui n’ont pas besoin d’être indexés. C’est l’approche recommandée, car elle permet à Azure Cosmos DB d’indexer proactivement toute nouvelle propriété qui peut être ajoutée à votre modèle.
 - Exclure le chemin racine pour inclure sélectivement des chemins devant être indexés.
 
-- Pour les chemins avec des caractères normaux qui incluent : des caractères alphanumériques et _ (caractère de soulignement), vous n’êtes pas obligé d’échapper la chaîne de chemin entourée de guillemets doubles (par exemple, "/path/?"). Pour les chemins avec d’autres caractères spéciaux, vous devez avoir les caractères d’échappement que sont les guillemets doubles autour de la chaîne de chemin (par exemple, "/\"path\"/ ?"). Si vous prévoyez des caractères spéciaux dans votre chemin, vous pouvez échapper chaque chemin pour des raisons de sécurité. Du point de vue fonctionnel, que vous échappiez chaque chemin ou uniquement ceux qui ont des caractères spéciaux ne fait aucune différence.
+- Pour les chemins avec des caractères normaux qui incluent : des caractères alphanumériques et _ (caractère de soulignement), vous n’êtes pas obligé d’échapper la chaîne de chemin entourée de guillemets doubles (par exemple, "/path/?"). Pour les chemins avec d’autres caractères spéciaux, vous devez avoir les caractères d’échappement que sont les guillemets doubles autour de la chaîne de chemin (par exemple, "/\"path\"/ ?"). Si vous prévoyez des caractères spéciaux dans votre chemin, vous pouvez échapper chaque chemin pour des raisons de sécurité. Du point de vue fonctionnel, que vous échappiez tous les chemins ou seulement ceux qui comportent des caractères spéciaux ne fait aucune différence.
 
 - La propriété système `_etag` est exclue de l’indexation par défaut, sauf si l’etag est ajouté au chemin inclus pour l’indexation.
 
@@ -81,7 +83,7 @@ Toute stratégie d’indexation doit inclure le chemin racine `/*` comme chemin 
 
 Lorsque vous incluez et excluez des chemins d’accès, vous pouvez rencontrer les attributs suivants :
 
-- `kind` peut être `range` ou `hash`. La fonctionnalité d’index de plage fournit toutes les fonctionnalités d’un index de hachage. Nous vous recommandons donc d’utiliser un index de plage.
+- `kind` peut être `range` ou `hash`. La prise en charge des index de hachage est limitée aux filtres d’égalité. La fonctionnalité d’index de plage fournit toutes les fonctionnalités des index de hachage, ainsi que le tri efficace, les filtres de plage et les fonctions système. Nous recommandons toujours d’utiliser un index de plage.
 
 - `precision` est un nombre défini au niveau de l’index pour les chemins inclus. La valeur `-1` indique la précision maximale. Nous vous recommandons de toujours définir cette valeur sur `-1`.
 
@@ -129,7 +131,7 @@ Lorsque vous définissez un chemin d’accès spatial dans la stratégie d’ind
 
 * LineString
 
-Azure Cosmos DB, par défaut, ne crée pas d’index spatial. Si vous souhaitez utiliser des fonctions intégrées SQL spatiales, vous devez créer un index spatial sur les propriétés requises. Consultez [cette section](geospatial.md) pour des exemples de stratégies d’indexation afin d’ajouter des index spatiaux.
+Azure Cosmos DB, par défaut, ne crée pas d’index spatial. Si vous souhaitez utiliser des fonctions intégrées SQL spatiales, vous devez créer un index spatial sur les propriétés requises. Consultez [cette section](sql-query-geospatial-index.md) pour des exemples de stratégies d’indexation afin d’ajouter des index spatiaux.
 
 ## <a name="composite-indexes"></a>Index composites
 
@@ -198,6 +200,8 @@ Les considérations suivantes sont utilisées lors de la création d’index com
 - Si une propriété a un filtre de plage (`>`, `<`, `<=`, `>=` ou `!=`), cette propriété doit être définie en dernier dans l’index composite. Si une requête a plusieurs filtres de plage, elle n’utilise pas l’index composite.
 - Lors de la création d’un index composite pour optimiser des requêtes avec plusieurs filtres, `ORDER` de l’index composite n’aura aucun impact sur les résultats. Cette propriété est facultative.
 - Si vous ne définissez pas d’index composite pour une requête avec des filtres sur plusieurs propriétés, la requête réussit quand même. Toutefois, le coût RU de la requête peut être réduit à l’aide d’un index composite.
+- Les index composites se révèlent également avantageux pour les requêtes qui comportent à la fois des agrégations (par exemple, COUNT ou SUM) et des filtres.
+- Les expressions de filtre peuvent utiliser plusieurs index composites.
 
 Prenons les exemples suivants, où un index composite est défini sur des propriétés name, age et timestamp :
 
@@ -205,10 +209,12 @@ Prenons les exemples suivants, où un index composite est défini sur des propri
 | ----------------------- | -------------------------------- | -------------- |
 | ```(name ASC, age ASC)```   | ```SELECT * FROM c WHERE c.name = "John" AND c.age = 18``` | ```Yes```            |
 | ```(name ASC, age ASC)```   | ```SELECT * FROM c WHERE c.name = "John" AND c.age > 18```   | ```Yes```             |
+| ```(name ASC, age ASC)```   | ```SELECT COUNT(1) FROM c WHERE c.name = "John" AND c.age > 18```   | ```Yes```             |
 | ```(name DESC, age ASC)```    | ```SELECT * FROM c WHERE c.name = "John" AND c.age > 18``` | ```Yes```            |
 | ```(name ASC, age ASC)```     | ```SELECT * FROM c WHERE c.name != "John" AND c.age > 18``` | ```No```             |
 | ```(name ASC, age ASC, timestamp ASC)``` | ```SELECT * FROM c WHERE c.name = "John" AND c.age = 18 AND c.timestamp > 123049923``` | ```Yes```            |
 | ```(name ASC, age ASC, timestamp ASC)``` | ```SELECT * FROM c WHERE c.name = "John" AND c.age < 18 AND c.timestamp = 123049923``` | ```No```            |
+| ```(name ASC, age ASC) and (name ASC, timestamp ASC)``` | ```SELECT * FROM c WHERE c.name = "John" AND c.age < 18 AND c.timestamp > 123049923``` | ```Yes```            |
 
 ### <a name="queries-with-a-filter-as-well-as-an-order-by-clause"></a>Requêtes avec un filtre et une clause ORDER BY
 
@@ -245,6 +251,7 @@ SELECT * FROM c WHERE c.name = "John", c.age = 18 ORDER BY c.name, c.age, c.time
 Les considérations suivantes sont utilisées lors de la création d’index composites pour optimiser une requête avec un filtre et une clause `ORDER BY` :
 
 * Si la requête filtre sur les propriétés, celles-ci doivent être incluses en premier dans la clause `ORDER BY`.
+* Si la requête filtre plusieurs propriétés, les filtres d’égalité doivent être les premières propriétés de la clause `ORDER BY`.
 * Si vous ne définissez pas d’index composite sur une requête avec un filtre sur une propriété et une clause `ORDER BY` distincte à l’aide d’une autre propriété, la requête réussit quand même. Toutefois, le coût RU de la requête peut être réduit à l’aide d’un index composite, en particulier si la propriété de la clause `ORDER BY` a une cardinalité élevée.
 * Toutes les considérations relatives à la création d’index composites pour les requêtes `ORDER BY` avec plusieurs propriétés, ainsi que les requêtes avec des filtres sur plusieurs propriétés, s’appliquent toujours.
 
@@ -252,6 +259,8 @@ Les considérations suivantes sont utilisées lors de la création d’index com
 | **Index composite**                      | **Exemple `ORDER BY` de requête**                                  | **Pris en charge par l’index composite ?** |
 | ---------------------------------------- | ------------------------------------------------------------ | --------------------------------- |
 | ```(name ASC, timestamp ASC)```          | ```SELECT * FROM c WHERE c.name = "John" ORDER BY c.name ASC, c.timestamp ASC``` | `Yes` |
+| ```(name ASC, timestamp ASC)```          | ```SELECT * FROM c WHERE c.name = "John" AND c.timestamp > 1589840355 ORDER BY c.name ASC, c.timestamp ASC``` | `Yes` |
+| ```(timestamp ASC, name ASC)```          | ```SELECT * FROM c WHERE c.timestamp > 1589840355 AND c.name = "John" ORDER BY c.timestamp ASC, c.name ASC``` | `No` |
 | ```(name ASC, timestamp ASC)```          | ```SELECT * FROM c WHERE c.name = "John" ORDER BY c.timestamp ASC, c.name ASC``` | `No`  |
 | ```(name ASC, timestamp ASC)```          | ```SELECT * FROM c WHERE c.name = "John" ORDER BY c.timestamp ASC``` | ```No```   |
 | ```(age ASC, name ASC, timestamp ASC)``` | ```SELECT * FROM c WHERE c.age = 18 and c.name = "John" ORDER BY c.age ASC, c.name ASC,c.timestamp ASC``` | `Yes` |
@@ -259,25 +268,31 @@ Les considérations suivantes sont utilisées lors de la création d’index com
 
 ## <a name="modifying-the-indexing-policy"></a>Modification de la stratégie d’indexation
 
-La stratégie d’indexation d’un conteneur peut être mise à jour à tout moment [à l’aide du portail Azure ou de l’un des kit de développement logiciel (SDK) pris en charge](how-to-manage-indexing-policy.md). Une mise à jour de la stratégie d’indexation déclenche une transformation de l’ancien index vers le nouveau, qui est effectuée en ligne et localement (aucun espace de stockage supplémentaire n’est consommé pendant l’opération). L’index de l’ancienne stratégie est transformé efficacement en nouvelle stratégie, sans affecter la disponibilité d’écriture ou le débit approvisionné sur le conteneur. La transformation d’index est une opération asynchrone. Le temps nécessaire pour l’effectuer dépend du débit approvisionné, du nombre d’éléments et de leur taille.
+La stratégie d’indexation d’un conteneur peut être mise à jour à tout moment [à l’aide du portail Azure ou de l’un des kit de développement logiciel (SDK) pris en charge](how-to-manage-indexing-policy.md). Une mise à jour de la stratégie d’indexation déclenche une transformation de l’ancien index vers le nouveau, qui est effectuée en ligne et localement (aucun espace de stockage supplémentaire n’est consommé pendant l’opération). L’ancienne stratégie d’indexation est transformée efficacement en nouvelle stratégie, sans incidence sur la disponibilité d’écriture ni de lecture, ni sur le débit approvisionné sur le conteneur. La transformation d’index est une opération asynchrone. Le temps nécessaire pour l’effectuer dépend du débit approvisionné, du nombre d’éléments et de leur taille.
+
+> [!IMPORTANT]
+> La transformation d’index est une opération qui consomme des [unités de requête](request-units.md). Les unités de requête consommées par une transformation d’index ne sont pas facturées si vous utilisez des conteneurs [serverless](serverless.md). Ces unités de requête seront facturées quand les conteneurs serverless seront généralement disponibles.
 
 > [!NOTE]
-> Pendant l’ajout d’un index de plage ou spatial, il est possible que les requêtes ne retournent pas tous les résultats correspondants, et ce, sans retourner d’erreurs. Cela signifie que les résultats de la requête ne seront peut-être pas cohérentes avant la fin de la transformation de l’index. Il est possible de suivre la progression de la transformation d’index [avec un des kits de développement logiciel (SDK)](how-to-manage-indexing-policy.md).
+> Il est possible de suivre la progression de la transformation d’index [avec un des kits de développement logiciel (SDK)](how-to-manage-indexing-policy.md).
 
-Si le mode d’indexation de la nouvelle stratégie est défini sur Cohérent, aucune autre modification de la stratégie d’indexation ne peut être appliquée pendant la transformation de l’index. Une transformation d’index en cours d’exécution peut être annulée en définissant le mode de la stratégie d’indexation sur Aucun (ce qui supprime immédiatement l’index).
+Il n’y a aucun impact sur la disponibilité des écritures lors des transformations d’index. La transformation d’index utilise vos unités de requête approvisionnées, mais à une priorité inférieure à celles de vos opérations CRUD ou de vos requêtes.
+
+Il n’y a aucun impact sur la disponibilité de lecture lors de l’ajout d’un nouvel index. Les requêtes utilisent uniquement les nouveaux index une fois la transformation d’index terminée. Pendant la transformation d’index, le moteur de requête continue d’utiliser les index existants, ce qui vous permet d’observer des performances de lecture similaires pendant la transformation d’indexation à ce que vous aviez observé avant de lancer la modification de l’indexation. Lors de l’ajout de nouveaux index, il n’y a pas non plus de risque de résultats de requête incomplets ou incohérents.
+
+Lorsque vous supprimez des index et que vous exécutez immédiatement des requêtes qui filtrent sur les index supprimés, il n’existe pas de garantie de résultats de requête cohérents ou complets. Si vous supprimez plusieurs index et que vous le faites dans une seule modification de stratégie d’indexation, le moteur de requête fournit des résultats cohérents et complets tout au long de la transformation d’index. Toutefois, si vous supprimez des index par le biais de plusieurs modifications de stratégie d’indexation, le moteur de requête ne fournit pas de résultats cohérents ou complets tant que toutes les transformations d’index ne sont pas terminées. La plupart des développeurs ne suppriment pas les index, puis essaient immédiatement de les interroger. Or, en pratique, cette situation est peu probable.
+
+> [!NOTE]
+> Dans la mesure du possible, vous devez toujours essayer de regrouper plusieurs modifications d’indexation dans une seule modification de stratégie d’indexation.
 
 ## <a name="indexing-policies-and-ttl"></a>Stratégies d’indexation et TTL
 
-La [fonctionnalité Time-to-Live (TTL)](time-to-live.md) nécessite que l’indexation soit active sur le conteneur sur lequel elle est activée. Cela signifie que :
+L’utilisation de la [fonctionnalité de durée de vie (TTL, Time-to-Live) ](time-to-live.md) nécessite l’indexation. Cela signifie que :
 
-- il n’est pas possible d’activer TTL sur un conteneur dans lequel le mode d’indexation est défini sur Aucun ;
+- il n’est pas possible d’activer la fonctionnalité TTL sur un conteneur dans lequel le mode d’indexation est défini sur `none` ;
 - il n’est pas possible de définir le mode d’indexation sur Aucun sur un conteneur dans lequel TLL est activée.
 
-Pour les scénarios où aucun chemin de propriété ne doit être indexé, mais où TTL est requise, vous pouvez utiliser une stratégie d’indexation avec :
-
-- un mode d’indexation défini sur Cohérent,
-- sans chemin d’accès inclus et avec
-- `/*` comme seul chemin exclu.
+Dans les scénarios où aucun chemin de propriété ne doit être indexé, mais où la fonctionnalité TTL est nécessaire, vous pouvez utiliser une stratégie d’indexation avec le mode d’indexation `consistent`, aucun chemin inclus et un seul chemin exclu (`/*`).
 
 ## <a name="next-steps"></a>Étapes suivantes
 

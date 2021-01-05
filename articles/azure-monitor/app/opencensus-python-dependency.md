@@ -5,18 +5,19 @@ ms.topic: conceptual
 author: lzchen
 ms.author: lechen
 ms.date: 10/15/2019
-ms.openlocfilehash: e400669fd96518adead74a81fc332767c5f9b23b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-python
+ms.openlocfilehash: abfd5e104bd4854781a0d3c9d08544506279518a
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77669928"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87850081"
 ---
 # <a name="track-dependencies-with-opencensus-python"></a>Effectuer le suivi des dépendances avec OpenCensus Python
 
 Une dépendance est un composant externe appelé par votre application. Les données de dépendance sont collectées à l’aide d’OpenCensus Python et de ses diverses intégrations. Ces données sont ensuite envoyées à Application Insights dans Azure Monitor, en tant que télémétrie de `dependencies`.
 
-Commencez par instrumenter votre application Python avec le dernier [kit SDK OpenCensus Python](../../azure-monitor/app/opencensus-python.md).
+Commencez par instrumenter votre application Python avec le dernier [kit SDK OpenCensus Python](./opencensus-python.md).
 
 ## <a name="in-process-dependencies"></a>Dépendances in-process
 
@@ -83,6 +84,9 @@ conn.close()
 ## <a name="dependencies-with-django-integration"></a>Dépendances avec intégration de « django »
 
 Effectuez le suivi de vos requêtes Django sortantes avec l’intégration de `django` d’OpenCensus.
+
+> [!NOTE]
+> Les seules requêtes Django sortantes à être suivies sont les appels adressés à une base de données. Pour les demandes adressées à l’application Django, consultez [requêtes entrantes](./opencensus-python-request.md#tracking-django-applications).
 
 Téléchargez et installez `opencensus-ext-django` à partir de [PyPI](https://pypi.org/project/opencensus-ext-django/), puis ajoutez la ligne suivante à la section `MIDDLEWARE` du fichier `settings.py` de Django.
 
@@ -166,8 +170,9 @@ config_integration.trace_integrations(['sqlalchemy'])
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* [Plan de l’application](../../azure-monitor/app/app-map.md)
-* [Disponibilité](../../azure-monitor/app/monitor-web-app-availability.md)
-* [action](../../azure-monitor/app/diagnostic-search.md)
-* [Requête de journal (Analytics)](../../azure-monitor/log-query/log-query-overview.md)
-* [Diagnostics de transaction](../../azure-monitor/app/transaction-diagnostics.md)
+* [Plan de l’application](./app-map.md)
+* [Disponibilité](./monitor-web-app-availability.md)
+* [action](./diagnostic-search.md)
+* [Requête de journal (Analytics)](../log-query/log-query-overview.md)
+* [Diagnostics de transaction](./transaction-diagnostics.md)
+

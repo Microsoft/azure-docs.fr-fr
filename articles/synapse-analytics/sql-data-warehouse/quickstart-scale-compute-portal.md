@@ -1,22 +1,22 @@
 ---
-title: Mettre à l’échelle le calcul pour le pool SQL Synapse (portail Azure)
+title: 'Démarrage rapide : Mettre à l’échelle le calcul pour le pool SQL Synapse (portail Azure)'
 description: Vous pouvez mettre à l’échelle le calcul pour le pool SQL Synapse (entrepôt de données) à l’aide du portail Azure.
 services: synapse-analytics
 author: Antvgski
 manager: craigg
 ms.service: synapse-analytics
 ms.topic: quickstart
-ms.subservice: ''
+ms.subservice: sql-dw
 ms.date: 04/28/2020
 ms.author: anvang
 ms.reviewer: jrasnick
 ms.custom: seo-lt-2019, azure-synapse
-ms.openlocfilehash: 96c3c05fea912433731dc7a6a8ab705ab76d3058
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: b8a39220bda788cf6dac0be5151c2cdf5385e342
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82232221"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "91570275"
 ---
 # <a name="quickstart-scale-compute-for-synapse-sql-pool-with-the-azure-portal"></a>Démarrage rapide : Mettre à l’échelle le calcul pour le pool SQL Synapse à l’aide du portail Azure
 

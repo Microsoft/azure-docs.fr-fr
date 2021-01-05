@@ -2,21 +2,21 @@
 title: Planifier un déploiement d’attribution automatique d’utilisateurs pour Azure Active Directory
 description: Conseils relatifs à la planification et à l’exécution de l’attribution automatique d’utilisateurs
 services: active-directory
-author: martincoetzer
-manager: CelesteDG
+author: kenwith
+manager: celestedg
 ms.service: active-directory
 ms.subservice: app-provisioning
 ms.topic: conceptual
 ms.workload: identity
-ms.date: 10/17/2019
-ms.author: martinco
+ms.date: 12/31/2020
+ms.author: kenwith
 ms.reviewer: arvindha, celested
-ms.openlocfilehash: 4f391a2fce669c2684ac5001e3659247adfeb4f6
-ms.sourcegitcommit: 3abadafcff7f28a83a3462b7630ee3d1e3189a0e
+ms.openlocfilehash: 689276d44a175f3c314b0fcf681fd6a995b8dde2
+ms.sourcegitcommit: 8be279f92d5c07a37adfe766dc40648c673d8aa8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82593537"
+ms.lasthandoff: 12/31/2020
+ms.locfileid: "97832622"
 ---
 # <a name="plan-an-automatic-user-provisioning-deployment"></a>Planifier un déploiement d’attribution automatique d’utilisateurs
 
@@ -99,7 +99,7 @@ Dans cet exemple, les utilisateurs et/ou les groupes sont créés dans une base 
 
 Dans cet exemple, la création d’utilisateurs a lieu dans Azure AD tandis que le service de provisionnement Azure AD gère le provisionnement automatique d’utilisateurs dans les applications (SaaS) cibles.
 
-![Image 2](./media/plan-auto-user-provisioning/cloudprovisioning.png)
+![Diagramme illustrant le processus de création d’utilisateurs/de groupes d’une application RH locale aux applications SaaS cibles, en passant par le service d’approvisionnement Azure AD.](./media/plan-auto-user-provisioning/cloudprovisioning.png)
 
 **Description du workflow :**
 
@@ -129,7 +129,7 @@ Tenez compte des besoins de votre organisation pour déterminer la stratégie de
 
 ### <a name="engage-the-right-stakeholders"></a>Impliquer les parties prenantes appropriées
 
-Les échecs de projets informatiques, lorsqu’ils se produisent, proviennent généralement d’une disparité entre les attentes et l’impact, les responsabilités et les résultats. Pour éviter ces écueils, [veillez à faire appel aux parties prenantes appropriées](https://aka.ms/deploymentplans) et à ce que les rôles de ces parties prenantes dans le projet soient également bien compris. Pour ce faire, dressez une liste de leurs contributions et de leurs responsabilités.
+Les échecs de projets informatiques, lorsqu’ils se produisent, proviennent généralement d’une disparité entre les attentes et l’impact, les responsabilités et les résultats. Pour éviter ces écueils, [veillez à faire appel aux parties prenantes appropriées](../fundamentals/active-directory-deployment-plans.md) et à ce que les rôles de ces parties prenantes dans le projet soient également bien compris. Pour ce faire, dressez une liste de leurs contributions et de leurs responsabilités.
 
 ### <a name="plan-communications"></a>Planifier les communications
 
@@ -139,13 +139,13 @@ La communication est essentielle à la réussite de tout nouveau service. Commun
 
 Nous recommandons de procéder à la configuration initiale de l’attribution automatique d’utilisateurs dans un environnement de test avec une petite partie des utilisateurs avant de l’appliquer à tous les utilisateurs en production. Consultez les [meilleures pratiques](../fundamentals/active-directory-deployment-plans.md#best-practices-for-a-pilot) pour l’exécution d’un pilote.
 
-#### <a name="best-practices-for-a-pilot"></a>Bonnes pratiques pour un pilote  
+#### <a name="best-practices-for-a-pilot"></a>Bonnes pratiques pour un pilote  
 
 Un pilote vous permet de tester une fonctionnalité sur un petit groupe avant de la déployer pour tout le monde. Vérifiez que, dans le cadre de vos tests, chaque cas d’usage au sein de votre organisation est soigneusement testé.
 
 Dans votre première vague, ciblez le service informatique, la convivialité et d’autres utilisateurs appropriés qui peuvent tester et fournir des commentaires. Utilisez ces commentaires pour enrichir les communications et les instructions que vous envoyez à vos utilisateurs, et pour donner également des insights sur les types de problèmes que le personnel de votre support technique peut rencontrer.
 
-Élargissez le déploiement à des groupes d’utilisateurs plus importants en augmentant l’étendue du ou des groupes ciblés. Pour ce faire, vous pouvez utiliser l’[appartenance de groupe dynamique](../users-groups-roles/groups-dynamic-membership.md) ou ajouter manuellement des utilisateurs aux groupes ciblés.
+Élargissez le déploiement à des groupes d’utilisateurs plus importants en augmentant l’étendue du ou des groupes ciblés. Pour ce faire, vous pouvez utiliser l’[appartenance de groupe dynamique](../enterprise-users/groups-dynamic-membership.md) ou ajouter manuellement des utilisateurs aux groupes ciblés.
 
 ## <a name="plan-application-connections-and-administration"></a>Planifier l’administration et les connexions des applications
 
@@ -157,7 +157,7 @@ Les étapes nécessaires pour activer et configurer l’approvisionnement automa
 
 Sinon, suivez ces étapes ci-dessous :
 
-1. [Créez une requête](../develop/howto-app-gallery-listing.md) pour un connecteur d’attribution d’utilisateurs préintégré. Notre équipe travaille avec vous et avec le développeur de l’application pour intégrer votre application à notre plateforme, si elle prend en charge SCIM.
+1. [Créez une requête](../develop/v2-howto-app-gallery-listing.md) pour un connecteur d’attribution d’utilisateurs préintégré. Notre équipe travaille avec vous et avec le développeur de l’application pour intégrer votre application à notre plateforme, si elle prend en charge SCIM.
 
 1. Utilisez la prise en charge de l’attribution d’utilisateurs générique [BYOA SCIM](../app-provisioning/use-scim-to-provision-users-and-groups.md) (Apportez votre propre application avec SCIM) pour l’application. Il s’agit d’une condition nécessaire à Azure AD pour attribuer des utilisateurs à l’application sans connecteur de provisionnement préintégré.
 
@@ -256,7 +256,7 @@ Choisissez les étapes qui correspondent aux besoins de votre solution.
 
 Lorsque le service de provisionnement Azure AD s’exécute pour la première fois, le cycle initial, utilisant le système source et les systèmes cibles, crée un instantané de tous les objets utilisateur pour chaque système cible.
 
-Lors de l’activation du provisionnement automatique d’une application, le cycle initial peut demander entre 20 minutes et plusieurs heures pour s’accomplir. La durée dépend de la taille de l’annuaire Azure AD et du nombre d’utilisateurs dans l’étendue du provisionnement. Consultez [Comment améliorer les performances du provisionnement](../app-provisioning/application-provisioning-when-will-provisioning-finish.md).
+Lors de l’activation du provisionnement automatique d’une application, le cycle initial peut demander entre 20 minutes et plusieurs heures pour s’accomplir. La durée dépend de la taille de l’annuaire Azure AD et du nombre d’utilisateurs dans l’étendue du provisionnement.
 
 Le service de provisionnement stocke l’état des deux systèmes après le cycle initial, ce qui améliore les performances des cycles incrémentiels suivants.
 
@@ -264,7 +264,7 @@ Le service de provisionnement stocke l’état des deux systèmes après le cycl
 
 Utilisez le [portail Azure](https://portal.azure.com/) pour gérer le provisionnement et le déprovisionnement automatiques de comptes d’utilisateur pour les applications qui les prennent en charge. Suivez les étapes dans [Comment configurer le provisionnement automatique pour une application ?](../app-provisioning/user-provisioning.md)
 
-Le service d’approvisionnement des utilisateurs Azure AD peut également être configuré et géré à l’aide de [l’API Microsoft Graph](https://developer.microsoft.com/graph/docs/api-reference/beta/resources/synchronization-overview).
+Le service d’approvisionnement des utilisateurs Azure AD peut également être configuré et géré à l’aide de [l’API Microsoft Graph](/graph/api/resources/synchronization-overview).
 
 ## <a name="manage-automatic-user-provisioning"></a>Gérer l’attribution automatique d’utilisateurs
 
@@ -274,7 +274,7 @@ Maintenant que vous avez déployé, vous devez gérer la solution.
 
 Après l’exécution d’un [cycle initial](../app-provisioning/user-provisioning.md) réussi, le service de provisionnement Azure AD exécute indéfiniment des mises à jour incrémentielles, à des intervalles propres à chaque application, jusqu’à ce que l’un des événements suivants se produise :
 
-* Le service est arrêté manuellement, et un nouveau cycle initial est déclenché à l’aide du [portail Azure](https://portal.azure.com/) ou de la commande [API Microsoft Graph](https://developer.microsoft.com/graph/docs/api-reference/beta/resources/synchronization-overview) appropriée.
+* Le service est arrêté manuellement, et un nouveau cycle initial est déclenché à l’aide du [portail Azure](https://portal.azure.com/) ou de la commande [API Microsoft Graph](/graph/api/resources/synchronization-overview) appropriée.
 
 * Une nouveau cycle initial est déclenché par une modification dans les mappages d’attributs ou les filtres d’étendue.
 
@@ -300,19 +300,17 @@ Reportez-vous aux liens suivants pour résoudre les problèmes susceptibles de s
 
 * [Synchroniser un attribut entre votre instance Active Directory local et Azure AD pour le provisionnement d’une application](../app-provisioning/user-provisioning-sync-attributes-for-mapping.md)
 
-* [L’attribution d’utilisateurs dans une application de la galerie Azure AD prend des heures](../app-provisioning/application-provisioning-when-will-provisioning-finish.md)
-
-* [Problème d’enregistrement des informations d’identification d’administrateur lors de la configuration de l’approvisionnement des utilisateurs pour une application de galerie Azure Active Directory](../app-provisioning/application-provisioning-config-problem-storage-limit.md)
+* [Problème d’enregistrement des informations d’identification d’administrateur lors de la configuration de l’approvisionnement des utilisateurs pour une application de galerie Azure Active Directory](./user-provisioning.md)
 
 * [Aucun utilisateur n’est attribué à une application de la galerie Azure AD](../app-provisioning/application-provisioning-config-problem-no-users-provisioned.md)
 
-* [Un mauvais ensemble d’utilisateurs est attribué à une application de la galerie Azure AD](../app-provisioning/application-provisioning-config-problem-wrong-users-provisioned.md)
+* [Un mauvais ensemble d’utilisateurs est attribué à une application de la galerie Azure AD](../manage-apps/add-application-portal-assign-users.md)
 
 ### <a name="helpful-documentation"></a>Documentation utile
 
 * [Écriture d’expressions pour les mappages d’attributs](../app-provisioning/functions-for-customizing-application-data.md)
 
-* [Azure AD synchronization API overview](https://developer.microsoft.com/graph/docs/api-reference/beta/resources/synchronization-overview) (Vue d’ensemble de l’API de synchronisation Azure AD)
+* [Azure AD synchronization API overview](/graph/api/resources/synchronization-overview) (Vue d’ensemble de l’API de synchronisation Azure AD)
 
 * [Ignorer la suppression des comptes d’utilisateurs qui sortent de l’étendue](skip-out-of-scope-deletions.md)
 

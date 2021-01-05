@@ -5,12 +5,12 @@ author: florianborn71
 ms.author: flborn
 ms.date: 02/11/2020
 ms.topic: article
-ms.openlocfilehash: 46560f067e020236031487677ad4f48a9560d4e1
-ms.sourcegitcommit: 642a297b1c279454df792ca21fdaa9513b5c2f8b
+ms.openlocfilehash: 0af9d6906e038a4b9285a2c302fc0c98345fdbd9
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80679215"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90023752"
 ---
 # <a name="use-the-session-management-rest-api"></a>Utiliser l’API REST de gestion de session
 
@@ -71,9 +71,9 @@ Cette commande crée une session. Elle retourne l’ID de la nouvelle session. V
 
 **Corps de la demande :**
 
-* maxLeaseTime (timespan) : valeur de délai d’expiration lorsque la machine virtuelle est désactivée automatiquement.
+* maxLeaseTime (timespan) : valeur de délai d’expiration lorsque la session est désactivée automatiquement.
 * models (array) : URL de conteneur de ressources à précharger.
-* size (string) : taille de la machine virtuelle ( **« standard »** ou **« Premium »** ). Consultez les [limitations de taille de machine virtuelle](../reference/limits.md#overall-number-of-polygons) spécifiques.
+* size (string) : taille du serveur à configurer ([ **« Standard »** ](../reference/vm-sizes.md) ou [ **« Premium »** ](../reference/vm-sizes.md)). Voir les [limitations de taille](../reference/limits.md#overall-number-of-polygons) spécifiques.
 
 **Réponses :**
 
@@ -117,7 +117,14 @@ La réponse à la demande ci-dessus comprend un **sessionId** dont vous avez bes
 $sessionId = "d31bddca-dab7-498e-9bc9-7594bc12862f"
 ```
 
-## <a name="update-a-session"></a>Mettre à jour une session
+## <a name="modify-and-query-session-properties"></a>Modifier et interroger des propriétés de session
+
+Il existe quelques commandes permettant d’interroger ou de modifier les paramètres de sessions existantes.
+
+> [!CAUTION]
+> Comme pour tous les appels REST, une fréquence trop élevée d’envoi de ces commandes entraîne une limitation du serveur, et finit par retourner un échec. Dans ce cas, le code d’état est 429 (« trop de demandes »). En règle générale, il doit y avoir un délai de **5 à 10 secondes entre les appels successifs**.
+
+### <a name="update-session-parameters"></a>Mettre à jour les paramètres de session
 
 Cette commande met à jour les paramètres d’une session. Actuellement, vous pouvez uniquement étendre la durée du bail d’une session.
 
@@ -130,7 +137,7 @@ Cette commande met à jour les paramètres d’une session. Actuellement, vous p
 
 **Corps de la demande :**
 
-* maxLeaseTime (timespan) : valeur de délai d’expiration lorsque la machine virtuelle est désactivée automatiquement.
+* maxLeaseTime (timespan) : valeur de délai d’expiration lorsque la session est désactivée automatiquement.
 
 **Réponses :**
 
@@ -138,7 +145,7 @@ Cette commande met à jour les paramètres d’une session. Actuellement, vous p
 |-----------|:-----------|:-----------|
 | 200 | | Succès |
 
-### <a name="example-script-update-a-session"></a>Exemple de script : mettre à jour une session
+#### <a name="example-script-update-a-session"></a>Exemple de script : mettre à jour une session
 
 ```PowerShell
 Invoke-WebRequest -Uri "$endPoint/v1/accounts/$accountId/sessions/$sessionId" -Method Patch -ContentType "application/json" -Body "{ 'maxLeaseTime': '5:0:0' }" -Headers @{ Authorization = "Bearer $token" }
@@ -160,7 +167,7 @@ Headers           : {[MS-CV, Fe+yXCJumky82wuoedzDTA.0], [Content-Length, 0], [Da
 RawContentLength  : 0
 ```
 
-## <a name="get-active-sessions"></a>Obtenir les sessions actives
+### <a name="get-active-sessions"></a>Obtenir les sessions actives
 
 Cette commande renvoie la liste des sessions actives.
 
@@ -174,7 +181,7 @@ Cette commande renvoie la liste des sessions actives.
 |-----------|:-----------|:-----------|
 | 200 | -sessions : tableau des propriétés de session | Pour obtenir une description des propriétés d’une session, consultez la section « Obtenir les propriétés de session ». |
 
-### <a name="example-script-query-active-sessions"></a>Exemple de script : interroger les sessions actives
+#### <a name="example-script-query-active-sessions"></a>Exemple de script : interroger les sessions actives
 
 ```PowerShell
 Invoke-WebRequest -Uri "$endPoint/v1/accounts/$accountId/sessions" -Method Get -Headers @{ Authorization = "Bearer $token" }
@@ -203,7 +210,7 @@ ParsedHtml        : mshtml.HTMLDocumentClass
 RawContentLength  : 2
 ```
 
-## <a name="get-sessions-properties"></a>Obtenir les propriétés de session
+### <a name="get-sessions-properties"></a>Obtenir les propriétés de session
 
 Cette commande retourne des informations sur une session, par exemple, son nom d’hôte de machine virtuelle.
 
@@ -217,7 +224,7 @@ Cette commande retourne des informations sur une session, par exemple, son nom d
 |-----------|:-----------|:-----------|
 | 200 | - message: string<br/>- sessionElapsedTime: timespan<br/>- sessionHostname: string<br/>- sessionId: string<br/>- sessionMaxLeaseTime: timespan<br/>- sessionSize: enum<br/>- sessionStatus: enum | enum sessionStatus { starting, ready, stopping, stopped, expired, error}<br/>Si l’État est « error » ou « expired », le message contient plus d’informations. |
 
-### <a name="example-script-get-session-properties"></a>Exemple de script : Définit les propriétés de session
+#### <a name="example-script-get-session-properties"></a>Exemple de script : Définit les propriétés de session
 
 ```PowerShell
 Invoke-WebRequest -Uri "$endPoint/v1/accounts/$accountId/sessions/$sessionId/properties" -Method Get -Headers @{ Authorization = "Bearer $token" }

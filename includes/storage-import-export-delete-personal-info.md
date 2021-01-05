@@ -8,12 +8,12 @@ ms.topic: include
 ms.date: 05/18/2018
 ms.author: cshoe
 ms.custom: include file
-ms.openlocfilehash: e6a0ded137162328fd446b65ddb4a15fa6f1db88
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 137aca7c6c857ee6e833c359b710e1c1848d15ed
+ms.sourcegitcommit: c95e2d89a5a3cf5e2983ffcc206f056a7992df7d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "67177276"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95561752"
 ---
 ## <a name="deleting-personal-information"></a>Suppression d’informations personnelles
 
@@ -37,7 +37,7 @@ Lors de la création d’un travail d’importation/exportation, les utilisateur
 
 Les informations de contact personnel peuvent être supprimées des manières suivantes :
 
-- Les données enregistrées avec le travail sont supprimées avec le travail. Les utilisateurs peuvent supprimer manuellement des travaux et les travaux terminés sont automatiquement supprimés après 90 jours. Vous pouvez supprimer manuellement les travaux via l’API REST ou le Portail Azure. Pour supprimer le travail dans le Portail Azure, accédez à votre travail d’importation/exportation, puis cliquez sur *Supprimer* dans la barre de commandes. Pour plus d’informations sur la suppression d’un travail d’importation/exportation via l’API REST, consultez [Supprimer un travail d’importation/exportation](../articles/storage/common/storage-import-export-cancelling-and-deleting-jobs.md).
+- Les données enregistrées avec le travail sont supprimées avec le travail. Les utilisateurs peuvent supprimer manuellement des travaux et les travaux terminés sont automatiquement supprimés après 90 jours. Vous pouvez supprimer manuellement les travaux via l’API REST ou le Portail Azure. Pour supprimer le travail dans le Portail Azure, accédez à votre travail d’importation/exportation, puis cliquez sur *Supprimer* dans la barre de commandes. Pour plus d’informations sur la suppression d’un travail d’importation/exportation via l’API REST, consultez [Supprimer un travail d’importation/exportation](/previous-versions/azure/storage/common/storage-import-export-cancelling-and-deleting-jobs).
 
 - Les informations de contact enregistrées dans les paramètres du portail peuvent être supprimées en supprimant les paramètres du portail. Vous pouvez supprimer les paramètres du portail en procédant comme suit :
   - Connectez-vous au [portail Azure](https://portal.azure.com).

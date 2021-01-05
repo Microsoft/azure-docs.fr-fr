@@ -10,12 +10,12 @@ ms.workload: data-services
 ms.topic: conceptual
 ms.date: 10/31/2019
 ms.author: chlound
-ms.openlocfilehash: f2531ebfd8b1eafc04fa6eda660b0eec3d1147f2
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 1766705e73afab5d15cdb5aa2c5bb1487ad3d7c5
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81417079"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96013885"
 ---
 # <a name="use-azure-key-vault-secrets-in-pipeline-activities"></a>Utiliser des secrets Azure Key Vault dans les activités de pipeline
 
@@ -25,7 +25,7 @@ Vous pouvez stocker des informations d’identification ou des valeurs secrètes
 
 ## <a name="prerequisites"></a>Prérequis
 
-Cette fonctionnalité repose sur l’identité managée de la fabrique de données.  Découvrez comment cela fonctionne dans la section [Identité managée pour Data Factory](https://docs.microsoft.com/azure/data-factory/data-factory-service-identity) et vérifiez que votre fabrique de données est bien associée à une identité managée.
+Cette fonctionnalité repose sur l’identité managée de la fabrique de données.  Découvrez comment cela fonctionne dans la section [Identité managée pour Data Factory](./data-factory-service-identity.md) et vérifiez que votre fabrique de données est bien associée à une identité managée.
 
 ## <a name="steps"></a>Étapes
 
@@ -35,7 +35,7 @@ Cette fonctionnalité repose sur l’identité managée de la fabrique de donné
 
 2. Ouvrez les stratégies d’accès Key Vault et ajoutez les autorisations d’identité managée pour récupérer et répertorier les secrets.
 
-    ![Stratégies d’accès Key Vault](media/how-to-use-azure-key-vault-secrets-pipeline-activities/akvaccesspolicies.png)
+    ![Capture d'écran représentant la page « Stratégies d'accès », sur laquelle l'action « Ajouter une stratégie d'accès » est en surbrillance.](media/how-to-use-azure-key-vault-secrets-pipeline-activities/akvaccesspolicies.png)
 
     ![Stratégies d’accès Key Vault](media/how-to-use-azure-key-vault-secrets-pipeline-activities/akvaccesspolicies-2.png)
 
@@ -71,4 +71,4 @@ Cette fonctionnalité repose sur l’identité managée de la fabrique de donné
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour savoir comment utiliser Azure Key Vault pour stocker les informations d’identification des magasins de données et des calculs, voir [Informations d’identification dans Azure Key Vault](https://docs.microsoft.com/azure/data-factory/store-credentials-in-key-vault).
+Pour savoir comment utiliser Azure Key Vault pour stocker les informations d’identification des magasins de données et des calculs, voir [Informations d’identification dans Azure Key Vault](./store-credentials-in-key-vault.md).

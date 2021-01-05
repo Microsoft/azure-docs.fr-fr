@@ -15,10 +15,10 @@ ms.topic: conceptual
 ms.date: 02/09/2017
 ms.author: vlvinogr
 ms.openlocfilehash: ebf2cbd430339378a09d10d91ad61327d24842e4
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "75430629"
 ---
 # <a name="modify-the-content-and-layout-of-pages-on-the-developer-portal-in-azure-api-management"></a>Modifier le contenu et la disposition des pages dans le portail des développeurs dans Gestion des API Azure

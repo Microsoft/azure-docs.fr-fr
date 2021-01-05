@@ -1,18 +1,19 @@
 ---
 title: Démarrage rapide pour Azure App Configuration avec .NET Core | Microsoft Docs
-description: Guide de démarrage rapide pour utiliser Azure App Configuration avec des applications .NET Core
+description: Dans ce démarrage rapide, créez une application .NET Core avec Azure App Configuration pour centraliser le stockage et la gestion des paramètres d’application en dehors de votre code.
 services: azure-app-configuration
-author: lisaguthrie
+author: AlexandraKemperMS
 ms.service: azure-app-configuration
 ms.topic: quickstart
-ms.date: 1/9/2019
-ms.author: lcozzens
-ms.openlocfilehash: 420d9b48013f5f6debe588667fe1cc0390517e66
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.custom: devx-track-csharp
+ms.date: 09/28/2020
+ms.author: alkemper
+ms.openlocfilehash: 1a5e756e05543d9f19775f4e2d1abcee82794f9e
+ms.sourcegitcommit: 1756a8a1485c290c46cc40bc869702b8c8454016
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "80245376"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96932062"
 ---
 # <a name="quickstart-create-a-net-core-app-with-app-configuration"></a>Démarrage rapide : Créer une application .NET Core avec App Configuration
 
@@ -20,14 +21,14 @@ Dans ce guide de démarrage rapide, vous intégrez Azure App Configuration dans 
 
 ## <a name="prerequisites"></a>Prérequis
 
-- Abonnement Azure : [créez-en un gratuitement](https://azure.microsoft.com/free/)
+- Abonnement Azure : [créez-en un gratuitement](https://azure.microsoft.com/free/dotnet)
 - [Kit SDK .NET Core](https://dotnet.microsoft.com/download) : également disponible dans [Azure Cloud Shell](https://shell.azure.com).
 
 ## <a name="create-an-app-configuration-store"></a>Créer un magasin App Configuration
 
 [!INCLUDE [azure-app-configuration-create](../../includes/azure-app-configuration-create.md)]
 
-6. Sélectionnez **Explorateur de configurations** > **Créer** > **Clé-valeur** pour ajouter les paires clé-valeur suivantes :
+7. Sélectionnez **Explorateur de configurations** > **Créer** > **Clé-valeur** pour ajouter les paires clé-valeur suivantes :
 
     | Clé | Valeur |
     |---|---|
@@ -35,15 +36,15 @@ Dans ce guide de démarrage rapide, vous intégrez Azure App Configuration dans 
 
     Laissez **Étiquette** et **Type de contenu** vides pour l’instant.
 
-7. Sélectionnez **Appliquer**.
+8. Sélectionnez **Appliquer**.
 
 ## <a name="create-a-net-core-console-app"></a>Créer une application console .NET Core
 
-Vous utilisez l’[interface de ligne de commande (CLI) .NET Core](https://docs.microsoft.com/dotnet/core/tools/) pour créer un projet d’application console .NET Core. Par rapport à Visual Studio, l’interface CLI .NET Core offre l’avantage d’être disponible sur les plateformes Windows, macOS et Linux.  Vous pouvez également utiliser les outils préinstallés qui sont disponibles dans [Azure Cloud Shell](https://shell.azure.com).
+Vous utilisez l’[interface de ligne de commande (CLI) .NET Core](/dotnet/core/tools/) pour créer un projet d’application console .NET Core. Par rapport à Visual Studio, l’interface CLI .NET Core offre l’avantage d’être disponible sur les plateformes Windows, macOS et Linux.  Vous pouvez également utiliser les outils préinstallés qui sont disponibles dans [Azure Cloud Shell](https://shell.azure.com).
 
 1. Créez un nouveau dossier pour votre projet.
 
-2. Dans le nouveau dossier, exécutez la commande suivante pour créer un projet d’application ASP.NET Core :
+2. Dans le nouveau dossier, exécutez la commande suivante pour créer un projet d’application console .NET Core :
 
     ```dotnetcli
     dotnet new console
@@ -99,7 +100,9 @@ Vous utilisez l’[interface de ligne de commande (CLI) .NET Core](https://docs.
 
     Si vous utilisez macOS ou Linux, exécutez la commande suivante :
 
-        export ConnectionString='connection-string-of-your-app-configuration-store'
+    ```console
+    export ConnectionString='connection-string-of-your-app-configuration-store'
+    ```
 
     Redémarrez l’invite de commandes pour que la modification soit prise en compte. Imprimez la valeur de la variable d’environnement pour confirmer qu’elle est correctement définie.
 
@@ -121,7 +124,7 @@ Vous utilisez l’[interface de ligne de commande (CLI) .NET Core](https://docs.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-En suivant ce guide de démarrage rapide, vous avez créé un magasin App Configuration et l’avez utilisé avec une application console .NET Core par l’intermédiaire du [fournisseur App Configuration](https://go.microsoft.com/fwlink/?linkid=2074664). Pour savoir comment configurer votre application .NET Core afin d’actualiser dynamiquement les paramètres de configuration, passez au tutoriel suivant.
+En suivant ce guide de démarrage rapide, vous avez créé un magasin App Configuration et l’avez utilisé avec une application console .NET Core par l’intermédiaire du [fournisseur App Configuration](/dotnet/api/Microsoft.Extensions.Configuration.AzureAppConfiguration). Pour savoir comment configurer votre application .NET Core afin d’actualiser dynamiquement les paramètres de configuration, passez au tutoriel suivant.
 
 > [!div class="nextstepaction"]
 > [Activer la configuration dynamique](./enable-dynamic-configuration-dotnet-core.md)

@@ -11,15 +11,15 @@ ms.service: virtual-machines-linux
 ms.workload: infrastructure-services
 ms.tgt_pltfrm: vm-linux
 ms.devlang: azurecli
-ms.topic: article
+ms.topic: how-to
 ms.date: 10/10/2019
 ms.author: cynthn
-ms.openlocfilehash: 3306647078c46a7c66b3d7b257b213c7a48e690d
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: df2b58e0067932edd9dfa21ee1a6fbb2a5c1fdf7
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81460424"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87289763"
 ---
 # <a name="create-a-linux-vm-from-a-custom-disk-with-the-azure-cli"></a>Créer une machine virtuelle Linux à partir d’un disque personnalisé avec Azure CLI
 
@@ -40,10 +40,10 @@ Pour exécuter la procédure ci-après, vous avez besoin des éléments suivants
 - Une machine virtuelle Linux qui a été préparée pour une utilisation dans Azure. La section [Préparation de la machine virtuelle](#prepare-the-vm) de cet article explique où trouver les informations propres à la distribution concernant l’installation de l’agent Linux Azure (waagent), qui vous sont nécessaires pour vous connecter à une machine virtuelle avec SSH.
 - Le fichier VHD d’une [distribution Linux approuvée par Azure](endorsed-distros.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) existante (ou consultez [les informations relatives aux distributions non approuvées](create-upload-generic.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)) sur un disque virtuel au format VHD. Plusieurs outils permettent de créer une machine virtuelle et un disque dur virtuel :
   - Installez et configurez [QEMU](https://en.wikibooks.org/wiki/QEMU/Installing_QEMU) ou [KVM](https://www.linux-kvm.org/page/RunningKVM), en veillant à utiliser VHD comme format d’image. En cas de besoin, vous pouvez [convertir une image](https://en.wikibooks.org/wiki/QEMU/Images#Converting_image_formats) avec `qemu-img convert`.
-  - Vous pouvez également utiliser Hyper-V [sur Windows 10](https://msdn.microsoft.com/virtualization/hyperv_on_windows/quick_start/walkthrough_install) ou [sur Windows Server 2012/2012 R2](https://technet.microsoft.com/library/hh846766.aspx).
+  - Vous pouvez également utiliser Hyper-V [sur Windows 10](/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v) ou [sur Windows Server 2012/2012 R2](/previous-versions/windows/it-pro/windows-server-2012-R2-and-2012/hh846766(v=ws.11)).
 
 > [!NOTE]
-> Azure ne prend pas en charge le nouveau format VHDX. Lorsque vous créez une machine virtuelle, spécifiez le format de disque dur virtuel (VHD). Si nécessaire, vous pouvez convertir des disques VHDX en VHD avec la commande [qemu-img convert](https://en.wikibooks.org/wiki/QEMU/Images#Converting_image_formats) ou l’applet de commande PowerShell [Convert-VHD](https://technet.microsoft.com/library/hh848454.aspx). Azure ne prend pas en charge le chargement de VHD dynamiques. Vous devez donc convertir ces disques en VHD statiques avant le chargement. Vous pouvez utiliser des outils tels que les [utilitaires de disque dur virtuel Azure pour GO](https://github.com/Microsoft/azure-vhd-utils-for-go) pour convertir les disques dynamiques lors de leur chargement dans Azure.
+> Azure ne prend pas en charge le nouveau format VHDX. Lorsque vous créez une machine virtuelle, spécifiez le format de disque dur virtuel (VHD). Si nécessaire, vous pouvez convertir des disques VHDX en VHD avec la commande [qemu-img convert](https://en.wikibooks.org/wiki/QEMU/Images#Converting_image_formats) ou l’applet de commande PowerShell [Convert-VHD](/powershell/module/hyper-v/convert-vhd?view=win10-ps). Azure ne prend pas en charge le chargement de VHD dynamiques. Vous devez donc convertir ces disques en VHD statiques avant le chargement. Vous pouvez utiliser des outils tels que les [utilitaires de disque dur virtuel Azure pour GO](https://github.com/Microsoft/azure-vhd-utils-for-go) pour convertir les disques dynamiques lors de leur chargement dans Azure.
 > 
 > 
 
@@ -64,7 +64,7 @@ Azure prend en charge diverses distributions de Linux (voir [Distributions Lin
 * [Red Hat Enterprise Linux](redhat-create-upload-vhd.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
 * [SLES et openSUSE](suse-create-upload-vhd.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
 * [Ubuntu](create-upload-ubuntu.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
-* [Autres - Distributions non approuvées](create-upload-generic.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
+* [Autres : Distributions non approuvées](create-upload-generic.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
 
 Consultez également les [notes d’installation Linux](create-upload-generic.md#general-linux-installation-notes) pour obtenir d’autres conseils généraux sur la préparation d’images Linux pour Azure.
 
@@ -73,11 +73,11 @@ Consultez également les [notes d’installation Linux](create-upload-generic.md
 > 
 > 
 
-## <a name="option-1-upload-a-vhd"></a>Option 1 : charger un disque dur virtuel
+## <a name="option-1-upload-a-vhd"></a>Option 1 : Télécharger un disque dur virtuel
 
 Vous pouvez désormais charger un disque dur virtuel directement dans un disque managé. Pour plus d’instructions, consultez [Charger un disque dur virtuel dans Azure à l'aide d'Azure CLI](disks-upload-vhd-to-managed-disk-cli.md).
 
-## <a name="option-2-copy-an-existing-vm"></a>Option 2 : copier une machine virtuelle existante
+## <a name="option-2-copy-an-existing-vm"></a>Option n°2 : Copier une machine virtuelle existante
 
 Vous pouvez également créer une machine virtuelle personnalisée dans Azure, puis copier le disque du système d’exploitation et l’attacher à une nouvelle machine virtuelle pour créer une autre copie. Cette approche est bien adaptée à un test, mais si vous souhaitez utiliser une machine virtuelle Azure existante comme modèle pour plusieurs nouvelles machines virtuelles, créez plutôt une *image*. Pour plus d’informations sur la création d’une image à partir d’une machine virtuelle Azure existante, consultez l’article [Créer une image personnalisée d’une machine virtuelle Azure avec Azure CLI](tutorial-custom-images.md).
 

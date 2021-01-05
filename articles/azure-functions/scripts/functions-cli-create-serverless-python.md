@@ -4,12 +4,13 @@ description: Créer une application de fonction Python serverless avec l’inter
 ms.assetid: 0e221db6-ee2d-4e16-9bf6-a456cd05b6e7
 ms.topic: sample
 ms.date: 11/23/2019
-ms.openlocfilehash: c55934c42db6bb7248db107b97fb8998163fae8b
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.custom: devx-track-python, devx-track-azurecli
+ms.openlocfilehash: 21c8476bd76a591b7bd7ba7cae41e3c64d06b329
+ms.sourcegitcommit: 04fb3a2b272d4bbc43de5b4dbceda9d4c9701310
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "75922624"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94565100"
 ---
 # <a name="create-a-serverless-python-function-app-using-azure-cli"></a>Créer une application de fonction Python serverless avec l’interface de ligne de commande Azure
 
@@ -20,9 +21,9 @@ Cet exemple de script Azure Functions crée une application de fonction, qui con
 
 [!INCLUDE [quickstarts-free-trial-note](../../../includes/quickstarts-free-trial-note.md)]
 
-[!INCLUDE [cloud-shell-try-it.md](../../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../../includes/azure-cli-prepare-your-environment.md)]
 
-Si vous choisissez d’installer et d’utiliser l’interface de ligne de commande localement, vous devez exécuter Azure CLI version 2.0 ou une version ultérieure pour poursuivre la procédure décrite dans cet article. Exécutez `az --version` pour trouver la version. Si vous devez effectuer une installation ou une mise à niveau, consultez [Installer Azure CLI]( /cli/azure/install-azure-cli). 
+ - Ce tutoriel nécessite l’interface Azure CLI version 2.0 ou ultérieure. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée. 
 
 ## <a name="sample-script"></a>Exemple de script
 

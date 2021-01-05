@@ -14,17 +14,19 @@ ms.devlang: na
 ms.topic: conceptual
 ms.date: 03/19/2019
 ms.author: juliako
-ms.openlocfilehash: 4a947c01d63e3842ead91481e480024a54380144
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f8b2454bb0e39f5923af00502367f7b16bb040a4
+ms.sourcegitcommit: 2c586a0fbec6968205f3dc2af20e89e01f1b74b5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "69015052"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92018982"
 ---
 # <a name="get-started-with-delivering-content-on-demand-by-using-the-azure-portal"></a>Prise en main de la diffusion de contenus à la demande à l’aide du portail Azure
 
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
+
 > [!NOTE]
-> Aucune nouvelle fonctionnalité ni fonction n’est ajoutée à Media Services v2. <br/>Découvrez la dernière version, [Media Services v3](https://docs.microsoft.com/azure/media-services/latest/). Consultez aussi [Conseils de migration de v2 vers v3](../latest/migrate-from-v2-to-v3.md).
+> Aucune nouvelle fonctionnalité ni fonction n’est ajoutée à Media Services v2. <br/>Découvrez la dernière version, [Media Services v3](../latest/index.yml). Consultez aussi [Conseils de migration de v2 vers v3](../latest/migrate-from-v2-to-v3.md).
 
 Ce didacticiel explique comment implémenter un service de base de diffusion de contenu vidéo à la demande avec l’application Azure Media Services du portail Azure.
 
@@ -106,26 +108,26 @@ Pour fournir aux utilisateurs une URL pouvant être utilisée pour diffuser en c
 
 Pour créer une URL de streaming HLS, ajoutez *(format=m3u8-aapl)* à l’URL :
 
-    {streaming endpoint name-media services account name}.streaming.mediaservices.windows.net/{locator ID}/{file name}.ism/Manifest(format=m3u8-aapl)
+`{streaming endpoint name-media services account name}.streaming.mediaservices.windows.net/{locator ID}/{file name}.ism/Manifest(format=m3u8-aapl)`
 
 Pour générer une URL de streaming afin de lire les actifs multimédias Smooth Streaming, utilisez le format d’URL suivant :
 
-    {streaming endpoint name-media services account name}.streaming.mediaservices.windows.net/{locator ID}/{file name}.ism/Manifest
+`{streaming endpoint name-media services account name}.streaming.mediaservices.windows.net/{locator ID}/{file name}.ism/Manifest`
 
 Pour créer une URL de streaming MPEG DASH, ajoutez *(format=mpd-time-csf)* à l’URL :
 
-    {streaming endpoint name-media services account name}.streaming.mediaservices.windows.net/{locator ID}/{file name}.ism/Manifest(format=mpd-time-csf)
+`{streaming endpoint name-media services account name}.streaming.mediaservices.windows.net/{locator ID}/{file name}.ism/Manifest(format=mpd-time-csf)`
 
 Une URL de signature d’accès partagé a le format suivant :
 
-    {blob container name}/{asset name}/{file name}/{shared access signature}
+`{blob container name}/{asset name}/{file name}/{shared access signature}`
 
 > [!NOTE]
 > Les localisateurs qui ont été créés dans le portail Azure avant mars 2015 expirent au bout de deux ans.  
 > 
 > 
 
-Pour mettre à jour une date d’expiration sur un localisateur, vous pouvez utiliser une [API REST](https://docs.microsoft.com/rest/api/media/operations/locator#update_a_locator) ou une [API .NET](https://go.microsoft.com/fwlink/?LinkID=533259). 
+Pour mettre à jour une date d’expiration sur un localisateur, vous pouvez utiliser une [API REST](/rest/api/media/operations/locator#update_a_locator) ou une [API .NET](/dotnet/api/microsoft.windowsazure.mediaservices.client.ilocator). 
 
 > [!NOTE]
 > Lorsque vous mettez à jour la date d’expiration d’un localisateur de signature d’accès partagé, l’URL est modifiée.

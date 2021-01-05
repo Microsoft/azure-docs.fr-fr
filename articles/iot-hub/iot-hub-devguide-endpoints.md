@@ -11,12 +11,14 @@ ms.date: 06/10/2019
 ms.custom:
 - amqp
 - mqtt
-ms.openlocfilehash: 53660ad93ab2218d546ae6f363873c4d66872e2b
-ms.sourcegitcommit: ffc6e4f37233a82fcb14deca0c47f67a7d79ce5c
+- 'Role: Cloud Development'
+- 'Role: System Architecture'
+ms.openlocfilehash: a58e141c6232db08b125b265e3d4ad74c784ba24
+ms.sourcegitcommit: dbe434f45f9d0f9d298076bf8c08672ceca416c6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81730311"
+ms.lasthandoff: 10/17/2020
+ms.locfileid: "92152189"
 ---
 # <a name="reference---iot-hub-endpoints"></a>Référence - Points de terminaison IoT Hub
 
@@ -38,11 +40,11 @@ La liste ci-dessous décrit les points de terminaison :
 
 * **Gestion d’identité de l’appareil**. Chaque IoT Hub expose un ensemble de points de terminaison HTTPS REST afin de gérer les identités des appareils (par exemple pour les opérations de création, de récupération, de mise à jour et de suppression). Les [identités des appareils](iot-hub-devguide-identity-registry.md) sont utilisées pour l’authentification et le contrôle d’accès des appareils.
 
-* **Gestion des représentations d’appareils**. Chaque hub IoT expose un ensemble de points de terminaison REST HTTPS orientés service pour interroger et mettre à jour les [jumeaux d’appareil](iot-hub-devguide-device-twins.md) (mise à jour des étiquettes et des propriétés).
+* **Gestion des représentations d’appareils**. Chaque hub IoT expose un ensemble de points de terminaison REST HTTPS orientés service pour interroger et mettre à jour les [jumeaux d’appareil](iot-hub-devguide-device-twins.md) (mise à jour des étiquettes et des propriétés). 
 
 * **Gestion des travaux**. Chaque hub IoT Hub expose un ensemble de points de terminaison REST HTTPS orientés service pour interroger et gérer les [travaux](iot-hub-devguide-jobs.md).
 
-* **Points de terminaison des appareils**. Pour chaque appareil dans le registre des identités, IoT Hub expose un ensemble de points de terminaison :
+* **Points de terminaison des appareils**. Pour chaque appareil figurant dans le registre des identités, IoT Hub expose un ensemble de points de terminaison. Sauf indication contraire, ces points de terminaison sont exposés en utilisant les protocoles [MQTT v3.1.1](https://mqtt.org/), HTTPS 1.1 et [AMQP 1.0](https://www.amqp.org/). Les protocoles AMQP et MQTT sont également disponibles sur [WebSockets](https://tools.ietf.org/html/rfc6455) sur le port 443.
 
   * *Envoyer des messages appareil-à-cloud*. Un appareil utilise ce point de terminaison pour [envoyer des messages appareil-à-cloud](iot-hub-devguide-messages-d2c.md).
 
@@ -50,13 +52,13 @@ La liste ci-dessous décrit les points de terminaison :
 
   * *Initier des téléchargements de fichiers*. Un appareil utilise ce point de terminaison pour recevoir un URI SAP du Stockage Azure provenant d’IoT Hub pour [charger un fichier](iot-hub-devguide-file-upload.md).
 
-  * *Récupérer et mettre à jour les propriétés d’une représentation d’appareil*. Un appareil utilise ce point de terminaison pour accéder aux propriétés de son [jumeau d’appareil](iot-hub-devguide-device-twins.md).
+  * *Récupérer et mettre à jour les propriétés d’une représentation d’appareil*. Un appareil utilise ce point de terminaison pour accéder aux propriétés de son [jumeau d’appareil](iot-hub-devguide-device-twins.md). HTTPS n’est pas pris en charge.
 
-  * *Recevoir des requêtes de méthodes directes*. Un appareil utilise ce point de terminaison pour écouter les requêtes des [méthodes directes](iot-hub-devguide-direct-methods.md).
+  * *Recevoir des requêtes de méthodes directes*. Un appareil utilise ce point de terminaison pour écouter les requêtes des [méthodes directes](iot-hub-devguide-direct-methods.md). HTTPS n’est pas pris en charge.
 
-    Ces points de terminaison sont exposés en utilisant les protocoles [MQTT v3.1.1](https://mqtt.org/), HTTPS 1.1 et [AMQP 1.0](https://www.amqp.org/). Le protocole AMQP est également disponible sur [WebSockets](https://tools.ietf.org/html/rfc6455) sur le port 443.
+  [!INCLUDE [iot-hub-include-x509-ca-signed-support-note](../../includes/iot-hub-include-x509-ca-signed-support-note.md)]
 
-* **Points de terminaison de service**. Chaque IoT Hub expose un ensemble de points de terminaison pour que votre système principal de solution puisse communiquer avec vos appareils. À une exception près, ces points de terminaison sont uniquement exposés avec le protocole [AMQP](https://www.amqp.org/). Le point de terminaison d’appel de méthode est exposé via le protocole HTTPS.
+* **Points de terminaison de service**. Chaque IoT Hub expose un ensemble de points de terminaison pour que votre système principal de solution puisse communiquer avec vos appareils. À une exception près, ces points de terminaison sont uniquement exposés au moyen des protocoles [AMQP](https://www.amqp.org/) et AMQP sur WebSockets. Le point de terminaison d’appel de méthode directe est exposé via le protocole HTTPS.
   
   * *Recevoir des messages Appareil vers cloud*. Ce point de terminaison est compatible avec [Azure Event Hubs](https://azure.microsoft.com/documentation/services/event-hubs/). Il peut être utilisé par un backend pour lire les [messages appareil-à-cloud](iot-hub-devguide-messages-d2c.md) envoyés par vos appareils. Vous pouvez créer des points de terminaison sur votre IoT Hub en plus de ce point de terminaison prédéfini.
   
@@ -85,20 +87,15 @@ IoT Hub prend actuellement en charge les services Azure suivants en tant que poi
 
 Pour connaître les limites du nombre de points de terminaison que vous pouvez ajouter, consultez [Quotas et limitation](iot-hub-devguide-quotas-throttling.md).
 
-Vous pouvez utiliser l’API REST [Get Endpoint Health](https://docs.microsoft.com/rest/api/iothub/iothubresource/getendpointhealth#iothubresource_getendpointhealth) pour obtenir l’état d’intégrité des points de terminaison. Nous vous recommandons d’utiliser les [métriques IoT Hub](iot-hub-metrics.md) associées à la latence de routage des messages pour identifier et déboguer des erreurs lorsque le point de terminaison est inactif ou n’est pas sain, car nous nous attendons à ce que la latence soit plus élevée lorsque le point de terminaison se trouve dans l’un des états indiqués ci-dessous.
+## <a name="endpoint-health"></a>État d’intégrité des points de terminaison
 
-|État d’intégrité|Description|
-|---|---|
-|healthy|Le point de terminaison accepte des messages comme prévu.|
-|unhealthy|Le point de terminaison n’accepte pas les messages comme prévu, et IoT Hub réessaie d’envoyer des données à ce point de terminaison. L’état d’un point de terminaison non sain doit être mis à jour vers l’état sain si IoT Hub a établi un état cohérent d’intégrité.|
-|unknown|IoT Hub n’a pas établi une connexion avec le point de terminaison. Aucun message n’a été remis à ce point de terminaison ni rejeté par celui-ci.|
-|dead|Le point de terminaison n’accepte pas les messages une fois que IoT Hub a réessayé d’envoyer des messages pendant la nouvelle période d’essai.|
+[!INCLUDE [iot-hub-endpoint-health](../../includes/iot-hub-include-endpoint-health.md)]
 
 ## <a name="field-gateways"></a>Passerelles de champ
 
 Dans une solution IoT, une *passerelle de champ* se situe entre vos appareils et vos points de terminaison IoT Hub. Elle est généralement située près de vos appareils. Vos appareils communiquent directement avec la passerelle de champ à l’aide d’un protocole pris en charge. La passerelle de champ se connecte à un point de terminaison IoT Hub à l’aide d’un protocole pris en charge par ce dernier. Une passerelle de champ peut être un matériel dédié ou un ordinateur à faible puissance exécutant un logiciel de passerelle personnalisé.
 
-Vous pouvez utiliser [Azure IoT Edge](/azure/iot-edge/) pour implémenter une passerelle de champ. IoT Edge offre des fonctionnalités, comme la possibilité de multiplexer les communications à partir de plusieurs appareils sur la même connexion IoT Hub.
+Vous pouvez utiliser [Azure IoT Edge](../iot-edge/index.yml) pour implémenter une passerelle de champ. IoT Edge offre des fonctionnalités, comme la possibilité de multiplexer les communications à partir de plusieurs appareils sur la même connexion IoT Hub.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

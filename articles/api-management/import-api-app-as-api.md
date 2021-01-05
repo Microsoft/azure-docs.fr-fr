@@ -1,6 +1,6 @@
 ---
 title: Importer une application API en tant qu’API avec le portail Azure | Microsoft Docs
-description: Ce didacticiel vous montre comment utiliser le service Gestion des API (APIM) pour importer une application API en tant qu’API.
+description: Cet article vous montre comment utiliser le service Gestion des API (APIM) pour importer une application API en tant qu’API.
 services: api-management
 documentationcenter: ''
 author: vladvino
@@ -9,15 +9,15 @@ editor: ''
 ms.service: api-management
 ms.workload: mobile
 ms.tgt_pltfrm: na
-ms.topic: tutorial
+ms.topic: article
 ms.date: 04/22/2020
 ms.author: apimpm
-ms.openlocfilehash: e6195409a08498527ec40a2ddd2f909a092c9d19
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 41209233ec59f578db4ff7fd344bb96aefeb975e
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82202823"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95994738"
 ---
 # <a name="import-an-api-app-as-an-api"></a>Importer une application API en tant qu’API
 
@@ -33,7 +33,7 @@ Dans cet article, vous apprendrez comment :
 ## <a name="prerequisites"></a>Prérequis
 
 + Suivez ce guide de démarrage rapide : [Créer une instance du service Gestion des API Azure](get-started-create-service-instance.md)
-+ Assurez-vous que votre abonnement contient une application API. Pour plus d’informations, consultez [Documentation App Service](https://docs.microsoft.com/azure/app-service/)
++ Assurez-vous que votre abonnement contient une application API. Pour plus d’informations, consultez [Documentation App Service](../app-service/index.yml)
 
 [!INCLUDE [api-management-navigate-to-instance.md](../../includes/api-management-navigate-to-instance.md)]
 
@@ -56,7 +56,7 @@ Dans cet article, vous apprendrez comment :
 
     * **Starter**
     * **Illimité**   
-7. Entrez d’autres paramètres d’API. Vous pouvez définir les valeurs lors de la création, ou les configurer ultérieurement en accédant à l’onglet **Paramètres**. Les paramètres sont expliqués dans le tutoriel [Importer et publier votre première API](import-and-publish.md#-import-and-publish-a-backend-api).
+7. Entrez d’autres paramètres d’API. Vous pouvez définir les valeurs lors de la création, ou les configurer ultérieurement en accédant à l’onglet **Paramètres**. Les paramètres sont expliqués dans le tutoriel [Importer et publier votre première API](import-and-publish.md#import-and-publish-a-backend-api).
 8. Sélectionnez **Create** (Créer).
 
 ## <a name="test-the-new-api-in-the-azure-portal"></a>Tester la nouvelle API dans le Portail Azure

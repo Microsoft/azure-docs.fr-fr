@@ -3,13 +3,12 @@ title: Sécuriser un cluster Azure Service Fabric
 description: Découvrez des scénarios de sécurité relatifs aux clusters Azure Service Fabric, ainsi que les différentes technologies que vous pouvez utiliser pour les implémenter.
 ms.topic: conceptual
 ms.date: 08/14/2018
-ms.custom: sfrev
-ms.openlocfilehash: c43cfbd4468a64867d50482d9c8055622602f159
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 6f7bb785184938fe5c1e20e3c915b0112c7723ee
+ms.sourcegitcommit: 16c7fd8fe944ece07b6cf42a9c0e82b057900662
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81461580"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96573066"
 ---
 # <a name="service-fabric-cluster-security-scenarios"></a>Scénarios de sécurité d’un cluster Service Fabric
 
@@ -19,7 +18,7 @@ Cet article présente des scénarios de sécurité relatifs aux clusters Azure e
 
 * Sécurité nœud à nœud
 * Sécurité client à nœud
-* Contrôle d’accès en fonction du rôle
+* Contrôle d’accès en fonction du rôle Service Fabric
 
 ## <a name="node-to-node-security"></a>Sécurité nœud à nœud
 
@@ -27,19 +26,24 @@ La sécurité nœud à nœud aide à sécuriser la communication entre les machi
 
 ![Diagramme de communication nœud à nœud][Node-to-Node]
 
-Les clusters exécutés dans Azure et les clusters autonomes exécutés sur Windows peuvent utiliser la [sécurité par certificat](https://msdn.microsoft.com/library/ff649801.aspx) ou la [sécurité Windows](https://msdn.microsoft.com/library/ff649396.aspx) pour les ordinateurs Windows Server.
+Les clusters exécutés dans Azure et les clusters autonomes exécutés sur Windows peuvent utiliser la [sécurité par certificat](/previous-versions/msp-n-p/ff649801(v=pandp.10)) ou la [sécurité Windows](/previous-versions/msp-n-p/ff649396(v=pandp.10)) pour les ordinateurs Windows Server.
 
 ### <a name="node-to-node-certificate-security"></a>Sécurité de certificat de nœud à nœud
 
 Service Fabric utilise des certificats de serveur X.509 que vous spécifiez dans le cadre de la configuration du type de nœud, lorsque vous créez un cluster. La fin de cet article propose un rapide aperçu de ce que sont ces certificats et de la façon dont vous pouvez les acquérir ou les créer.
 
-Pour configurer la sécurité par certificat lors de la création du cluster, vous pouvez utiliser un modèle Azure Resource Manager dans le portail Azure, ou un modèle JSON autonome. Le comportement par défaut du Kit de développement logiciel (SDK) Service Fabric consiste à déployer et à installer le certificat avec le certificat dont la date d’expiration est la plus lointaine ; le comportement classique permettait de définir des certificats principaux et secondaires, pour autoriser les déploiements manuels, mais cette approche n’est pas recommandée avec cette nouvelle fonctionnalité. Les certificats principaux qui seront utilisés présentant la date d’expiration la plus lointaine doivent être différents de ceux du client d’administration et du client en lecture seule que vous spécifiez pour la [sécurité client à nœud](#client-to-node-security).
+Pour configurer la sécurité par certificat lors de la création du cluster, vous pouvez utiliser un modèle Azure Resource Manager dans le portail Azure, ou un modèle JSON autonome. Le comportement par défaut du SDK Service Fabric est de déployer et d’installer le certificat dont la date d’expiration est la plus lointaine ; le comportement classique permettait de définir des certificats principaux et secondaires pour autoriser les déploiements manuels, mais cette approche n’est pas recommandée avec cette nouvelle fonctionnalité. Les certificats principaux qui seront utilisés présentant la date d’expiration la plus lointaine doivent être différents de ceux du client d’administration et du client en lecture seule que vous spécifiez pour la [sécurité client à nœud](#client-to-node-security).
 
 Pour plus d’informations sur la configuration de la sécurité par certificat dans un cluster Azure, consultez [Configurer un cluster à l’aide d’un modèle Azure Resource Manager](service-fabric-cluster-creation-via-arm.md).
 
 Pour plus d’informations sur la configuration de la sécurité par certificat dans un cluster autonome Windows Server, consultez [Sécuriser un cluster autonome sur Windows à l’aide de certificats X.509](service-fabric-windows-cluster-x509-security.md).
 
 ### <a name="node-to-node-windows-security"></a>Sécurité Windows de nœud à nœud
+
+> [!NOTE]
+> L’authentification Windows est basée sur Kerberos. NTLM n’est pas pris en charge comme type d’authentification.
+>
+> Quand c’est possible, utilisez l’authentification par certificat X.509 pour les clusters Service Fabric.
 
 Pour plus d’informations sur la configuration Windows dans un cluster autonome Windows Server, consultez [Sécuriser un cluster autonome sous Windows avec la sécurité Windows](service-fabric-windows-cluster-windows-security.md).
 
@@ -49,13 +53,13 @@ La sécurité client à nœud authentifie les clients et sécurise la communicat
 
 ![Diagramme de communication client à nœud][Client-to-Node]
 
-Les clusters exécutés dans Azure et les clusters autonomes exécutés sur Windows peuvent utiliser la [sécurité par certificat](https://msdn.microsoft.com/library/ff649801.aspx) ou la [sécurité Windows](https://msdn.microsoft.com/library/ff649396.aspx).
+Les clusters qui s’exécutent sur Azure et les clusters autonomes qui s’exécutent sur Windows peuvent utiliser la [sécurité par certificat](/previous-versions/msp-n-p/ff649801(v=pandp.10)) ou la [sécurité Windows](/previous-versions/msp-n-p/ff649396(v=pandp.10)), bien que la recommandation soit d’utiliser un certificat d’authentification X.509 quand c’est possible.
 
 ### <a name="client-to-node-certificate-security"></a>Sécurité par certificat de client à nœud
 
 Pour configurer la sécurité par certificat de type « client à nœud » lors de la création du cluster, vous pouvez utiliser un modèle Azure Resource Manager dans le portail Azure, ou un modèle JSON autonome. Pour créer le certificat, spécifiez un certificat client d’administration ou un certificat client utilisateur. Selon les bonnes pratiques, les certificats client d’administration et client utilisateur que vous spécifiez doivent être différents des certificats principaux et secondaires que vous spécifiez pour la [sécurité de nœud à nœud](#node-to-node-security). Les certificats de cluster ont les mêmes droits que les certificats d’administrateur client. Toutefois, il est conseillé pour des raisons de sécurité que seul le cluster les utilise, et non les utilisateurs administratifs.
 
-Les clients se connectant au cluster avec le certificat d’administration ont un accès complet aux fonctions de gestion. Les clients se connectant au cluster avec le certificat client utilisateur en lecture seule ont uniquement un accès en lecture aux fonctions de gestion. Ces certificats sont utilisés pour le contrôle d’accès en fonction du rôle (RBAC), qui est abordé plus loin dans cet article.
+Les clients se connectant au cluster avec le certificat d’administration ont un accès complet aux fonctions de gestion. Les clients se connectant au cluster avec le certificat client utilisateur en lecture seule ont uniquement un accès en lecture aux fonctions de gestion. Ces certificats sont utilisés pour le contrôle d’accès en fonction du rôle (RBAC) Service Fabric, qui est abordé plus loin dans cet article.
 
 Pour plus d’informations sur la configuration de la sécurité par certificat dans un cluster Azure, consultez [Configurer un cluster à l’aide d’un modèle Azure Resource Manager](service-fabric-cluster-creation-via-arm.md).
 
@@ -80,17 +84,17 @@ Pour les clusters Service Fabric déployés dans un réseau public hébergé dan
 
 Pour les clusters Windows Server autonomes, nous vous recommandons d’utiliser la sécurité Windows avec des comptes de service gérés de groupe si vous disposez de Windows Server 2012 R2 et d’Active Directory. Sinon, continuez à utiliser la sécurité Windows avec les comptes Windows.
 
-## <a name="role-based-access-control-rbac"></a>Contrôle d’accès en fonction du rôle
+## <a name="service-fabric-role-based-access-control"></a>Contrôle d’accès en fonction du rôle Service Fabric
 
 Vous pouvez utiliser le contrôle d’accès pour limiter l’accès à certaines opérations de cluster pour différents groupes d’utilisateurs. Ainsi, vous rendez le cluster plus sécurisé. Deux types de contrôle d’accès sont pris en charge pour les clients qui se connectent à un cluster : le rôle Administrateur et le rôle Utilisateur.
 
 Les utilisateurs qui reçoivent le rôle Administrateur ont un accès complet aux fonctionnalités de gestion (y compris les fonctionnalités de lecture/écriture). Les utilisateurs qui reçoivent le rôle Utilisateur ne disposent, par défaut, que d’un accès en lecture aux fonctionnalités de gestion (par exemple, aux fonctionnalités de requête). Ils peuvent également résoudre des applications et des services.
 
-Configurez les rôles clients Administrateur et Utilisateur lorsque vous créez le cluster. Attribuez des rôles en fournissant des identités distinctes (par exemple, en utilisant des certificats ou Azure AD) pour chaque type de rôle. Pour plus d’informations sur les paramètres de contrôle d’accès par défaut et sur la modification des paramètres par défaut, consultez [Contrôle d’accès en fonction du rôle pour les clients de Service Fabric](service-fabric-cluster-security-roles.md).
+Configurez les rôles clients Administrateur et Utilisateur lorsque vous créez le cluster. Attribuez des rôles en fournissant des identités distinctes (par exemple, en utilisant des certificats ou Azure AD) pour chaque type de rôle. Pour plus d’informations sur les paramètres de contrôle d’accès par défaut et sur la modification des paramètres par défaut, consultez [Contrôle d’accès en fonction du rôle Service Fabric pour les clients Service Fabric](service-fabric-cluster-security-roles.md).
 
 ## <a name="x509-certificates-and-service-fabric"></a>Certificats X.509 et Service Fabric
 
-Les certificats numériques X.509 sont couramment utilisés pour authentifier les clients et les serveurs. Ils sont également utilisés pour chiffrer et signer numériquement les messages. Service Fabric utilise des certificats X.509 pour sécuriser un cluster et fournir des fonctionnalités de sécurité d’applications. Pour plus d’informations sur les certificats numériques X.509, consultez [Utilisation des certificats](https://msdn.microsoft.com/library/ms731899.aspx). [Key Vault](../key-vault/general/overview.md) sert à gérer des certificats pour des clusters Service Fabric dans Azure.
+Les certificats numériques X.509 sont couramment utilisés pour authentifier les clients et les serveurs. Ils sont également utilisés pour chiffrer et signer numériquement les messages. Service Fabric utilise des certificats X.509 pour sécuriser un cluster et fournir des fonctionnalités de sécurité d’applications. Pour plus d’informations sur les certificats numériques X.509, consultez [Utilisation des certificats](/dotnet/framework/wcf/feature-details/working-with-certificates). [Key Vault](../key-vault/general/overview.md) sert à gérer des certificats pour des clusters Service Fabric dans Azure.
 
 Quelques éléments importants à prendre en compte :
 
@@ -129,7 +133,7 @@ La méthode de création de clusters sécurisés est la même pour les clusters 
 
 ### <a name="client-authentication-certificates-optional"></a>Certificats d’authentification client (facultatif)
 
-Autant de certificats supplémentaires que vous souhaitez peuvent être spécifiés pour les opérations de client utilisateur ou administrateur. Le client peut utiliser ce certificat lorsque l’authentification mutuelle est nécessaire. Les certificats clients ne sont généralement pas émis par une autorité de certification tierce. Au lieu de cela, le magasin personnel de l’emplacement actuel de l’utilisateur contient généralement des certificats clients placés là par une autorité racine. Le certificat doit avoir la valeur **Rôles prévus** définie sur **Authentification du client**.  
+Autant de certificats supplémentaires que vous souhaitez peuvent être spécifiés pour les opérations de client utilisateur ou administrateur. Le client peut utiliser ces certificats lorsque l’authentification mutuelle est nécessaire. Les certificats clients ne sont généralement pas émis par une autorité de certification tierce. Au lieu de cela, le magasin personnel de l’emplacement actuel de l’utilisateur contient généralement des certificats clients placés là par une autorité racine. Le certificat doit avoir la valeur **Rôles prévus** définie sur **Authentification du client**.  
 
 Par défaut, le certificat de cluster a des privilèges de client administrateur. Ces certificats client supplémentaires ne doivent pas être installés dans le cluster, mais sont spécifiés comme étant autorisés dans la configuration du cluster.  Toutefois, les certificats client doivent être installés sur les ordinateurs clients pour se connecter au cluster et effectuer des opérations.
 

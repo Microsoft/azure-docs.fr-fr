@@ -11,12 +11,12 @@ ms.workload: data-services
 ms.topic: conceptual
 ms.custom: seo-lt-2019
 ms.date: 12/11/2019
-ms.openlocfilehash: f0aa70333454b327a0ca76beef2985062ce56715
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: bb9f2673eb080ee2919297fcbb5199f99d176bce
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81415379"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96013681"
 ---
 # <a name="copy-and-transform-data-in-azure-cosmos-db-sql-api-by-using-azure-data-factory"></a>Copier et transformer des données dans Azure Cosmos DB (API SQL) à l’aide d’Azure Data Factory
 
@@ -43,7 +43,7 @@ Ce connecteur Azure Cosmos DB (API SQL) est pris en charge pour les activités s
 
 Pour l'activité de copie, ce connecteur Azure Cosmos DB (API SQL) prend en charge :
 
-- Copier des données depuis et vers l’[API SQL](https://docs.microsoft.com/azure/cosmos-db/documentdb-introduction) Azure Cosmos DB.
+- Copier des données depuis et vers l’[API SQL](../cosmos-db/introduction.md) Azure Cosmos DB.
 - Écrire dans Azure Cosmos DB comme **insert** ou **upsert**.
 - Importer et exporter des documents JSON en l’état, ou copier des données depuis ou vers un jeu de données tabulaire. Les exemples incluent une base de données SQL et un fichier CSV. Pour copier des documents en l'état vers ou depuis des fichiers JSON ou une autre collection Azure Cosmos DB, consultez [Importer et exporter des documents JSON](#import-and-export-json-documents).
 
@@ -95,13 +95,13 @@ Les propriétés prises en charge pour le service lié Azure Cosmos DB (API SQL)
         "type": "CosmosDb",
         "typeProperties": {
             "connectionString": "AccountEndpoint=<EndpointUrl>;Database=<Database>",
-            "accountKey": { 
-                "type": "AzureKeyVaultSecret", 
-                "store": { 
-                    "referenceName": "<Azure Key Vault linked service name>", 
-                    "type": "LinkedServiceReference" 
-                }, 
-                "secretName": "<secretName>" 
+            "accountKey": { 
+                "type": "AzureKeyVaultSecret", 
+                "store": { 
+                    "referenceName": "<Azure Key Vault linked service name>", 
+                    "type": "LinkedServiceReference" 
+                }, 
+                "secretName": "<secretName>" 
             }
         },
         "connectVia": {
@@ -204,7 +204,7 @@ Lorsque vous copiez des données à partir de Cosmos DB, à moins que vous ne so
 
 Pour copier des données vers Azure Cosmos DB (SQL API), affectez la valeur **DocumentDbCollectionSink** au type **récepteur** dans l’activité de copie. 
 
-Les propriétés prises en charge dans la section **source** de l’activité de copie sont les suivantes :
+Les propriétés suivantes sont prises en charge dans la section **sink** de l’activité de copie :
 
 | Propriété | Description | Obligatoire |
 |:--- |:--- |:--- |

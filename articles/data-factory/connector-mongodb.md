@@ -11,15 +11,16 @@ ms.service: data-factory
 ms.workload: data-services
 ms.topic: conceptual
 ms.custom: seo-lt-2019; seo-dt-2019
-ms.date: 08/12/2019
-ms.openlocfilehash: 3b6476b794d2e1b2e9a36aa26f35c247641d44e8
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.date: 09/28/2020
+ms.openlocfilehash: bb9768c2a4d3be9ac0e06844c5ac0835707cf455
+ms.sourcegitcommit: ba7fafe5b3f84b053ecbeeddfb0d3ff07e509e40
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81418148"
+ms.lasthandoff: 10/12/2020
+ms.locfileid: "91945853"
 ---
 # <a name="copy-data-from-mongodb-using-azure-data-factory"></a>Déplacer des données de MongoDB à l’aide d’Azure Data Factory
+
 [!INCLUDE[appliesto-adf-asa-md](includes/appliesto-adf-asa-md.md)]
 
 Cet article décrit comment utiliser l’activité de copie dans Azure Data Factory pour copier des données d’une base de données MongoDB. Il s’appuie sur l’article [Vue d’ensemble de l’activité de copie](copy-activity-overview.md).
@@ -50,7 +51,7 @@ Les propriétés prises en charge pour le service lié MongoDB sont les suivante
 | Propriété | Description | Obligatoire |
 |:--- |:--- |:--- |
 | type |La propriété type doit être définie sur : **MongoDbV2** |Oui |
-| connectionString |Spécifiez la chaîne de connexion MongoDB, par exemple `mongodb://[username:password@]host[:port][/[database][?options]]`. Pour plus d’informations, consultez le [manuel MongoDB sur la chaîne de connexion](https://docs.mongodb.com/manual/reference/connection-string/). <br/><br /> Vous pouvez également définir un mot de passe dans Azure Key Vault et extraire la configuration `password` de la chaîne de connexion. Pour plus d’informations, consultez la section  [Stocker des informations d’identification dans Azure Key Vault](store-credentials-in-key-vault.md). |Oui |
+| connectionString |Spécifiez la chaîne de connexion MongoDB, par exemple `mongodb://[username:password@]host[:port][/[database][?options]]`. Pour plus d’informations, consultez le [manuel MongoDB sur la chaîne de connexion](https://docs.mongodb.com/manual/reference/connection-string/). <br/><br /> Vous pouvez également stocker une chaîne de connexion dans Azure Key Vault. Pour plus d’informations, consultez la section [Stocker des informations d’identification dans Azure Key Vault](store-credentials-in-key-vault.md). |Oui |
 | database | Nom de la base de données à laquelle vous souhaitez accéder. | Oui |
 | connectVia | [Runtime d’intégration](concepts-integration-runtime.md) à utiliser pour la connexion à la banque de données. Pour plus d’informations, consultez la section [Conditions préalables](#prerequisites). À défaut de spécification, le runtime d’intégration Azure par défaut est utilisé. |Non |
 

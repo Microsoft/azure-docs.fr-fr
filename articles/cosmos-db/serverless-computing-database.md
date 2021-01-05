@@ -3,17 +3,19 @@ title: Traitement de base de données serverless avec Azure Cosmos DB et Azure F
 description: Découvrez comment Azure Cosmos DB et Azure Functions peuvent être utilisés ensemble pour créer des applications informatiques sans serveur basées sur les événements.
 author: SnehaGunda
 ms.service: cosmos-db
-ms.topic: conceptual
+ms.subservice: cosmosdb-sql
+ms.topic: how-to
 ms.date: 07/17/2019
 ms.author: sngun
-ms.openlocfilehash: 079c246f87bb8294f3c7ad6dea3391f5c67ba0ad
-ms.sourcegitcommit: 7d8158fcdcc25107dfda98a355bf4ee6343c0f5c
+ms.openlocfilehash: 73a34cc27eaba33d04f4d31585c7f494f58e7274
+ms.sourcegitcommit: fa90cd55e341c8201e3789df4cd8bd6fe7c809a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/09/2020
-ms.locfileid: "80985250"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93334070"
 ---
 # <a name="serverless-database-computing-using-azure-cosmos-db-and-azure-functions"></a>Traitement de base de données serverless à l’aide d’Azure Cosmos DB et d’Azure Functions
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
 
 L’informatique sans serveur permet de se concentrer sur des éléments de logique individuels renouvelables et sans état. Ces éléments ne nécessitent aucune gestion d’infrastructure et consomment uniquement des ressources le temps de leur exécution (secondes ou millisecondes). Au cœur du mouvement informatique sans serveur se trouvent des fonctions, qui sont mises à disposition dans l’écosystème Azure par [Azure Functions](https://azure.microsoft.com/services/functions). Pour en savoir plus sur les autres environnements d’exécution serverless dans Azure, consultez la page [Le Serverless dans Azure](https://azure.microsoft.com/solutions/serverless/). 
 
@@ -33,7 +35,7 @@ Azure Cosmos DB et Azure Functions permettent d’intégrer vos bases de donnée
 
 Le diagramme suivant illustre chacune de ces trois intégrations : 
 
-![Mode d’intégration d’Azure Cosmos DB et d’Azure Functions](./media/serverless-computing-database/cosmos-db-azure-functions-integration.png)
+:::image type="content" source="./media/serverless-computing-database/cosmos-db-azure-functions-integration.png" alt-text="Mode d’intégration d’Azure Cosmos DB et d’Azure Functions" border="false":::
 
 Le déclencheur Azure Functions, la liaison d’entrée et la liaison de sortie Azure Cosmos DB peuvent être utilisés dans les combinaisons suivantes :
 
@@ -61,7 +63,7 @@ Dans les implémentations IoT, vous pouvez appeler une fonction quand le voyant 
 
 L’illustration suivante montre le code écrit dans le portail Azure pour ce déclencheur.
 
-![Créer un déclencheur Azure Functions pour Cosmos DB dans le portail Azure](./media/serverless-computing-database/cosmos-db-trigger-portal.png)
+:::image type="content" source="./media/serverless-computing-database/cosmos-db-trigger-portal.png" alt-text="Créer un déclencheur Azure Functions pour Cosmos DB dans le portail Azure":::
 
 ### <a name="financial-use-case---timer-trigger-and-input-binding"></a>Cas d’usage financier - Déclencheur de minuteur et liaison d’entrée
 
@@ -75,13 +77,13 @@ Dans les implémentations financières, vous pouvez appeler une fonction lorsqu�
 
 Les illustrations suivantes montrent le code dans le portail Azure pour ce scénario.
 
-![Fichier index.js pour un déclencheur de minuteur dans un scénario financier](./media/serverless-computing-database/cosmos-db-functions-financial-trigger.png)
+:::image type="content" source="./media/serverless-computing-database/cosmos-db-functions-financial-trigger.png" alt-text="Fichier index.js pour un déclencheur de minuteur dans un scénario financier":::
 
-![Fichier run.csx pour un déclencheur de minuteur dans un scénario financier](./media/serverless-computing-database/azure-function-cosmos-db-trigger-run.png)
+:::image type="content" source="./media/serverless-computing-database/azure-function-cosmos-db-trigger-run.png" alt-text="Fichier run.csx pour un déclencheur de minuteur dans un scénario financier":::
 
 ### <a name="gaming-use-case---azure-functions-trigger-and-output-binding-for-cosmos-db"></a>Cas d’usage de jeu - Déclencheur Azure Functions et liaison de sortie pour Cosmos DB 
 
-En matière de gaming, quand un utilisateur est créé, vous pouvez rechercher d’autres utilisateurs que vous connaissez peut-être à l’aide de l’[API Gremlin Azure Cosmos DB](graph-introduction.md). Vous pouvez ensuite écrire les résultats dans une [base de données SQL Azure Cosmos DB] pour faciliter leur récupération.
+En matière de gaming, quand un utilisateur est créé, vous pouvez rechercher d’autres utilisateurs que vous connaissez peut-être à l’aide de l’[API Gremlin Azure Cosmos DB](graph-introduction.md). Vous pouvez ensuite écrire les résultats dans une base de données SQL Azure Cosmos DB pour faciliter leur récupération.
 
 **Implémentation :** Utiliser un déclencheur Azure Functions et une liaison de sortie pour Cosmos DB
 

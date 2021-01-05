@@ -3,20 +3,20 @@ title: Activité de fonction Azure dans Azure Data Factory
 description: Découvrir comment utiliser l’activité de fonction Azure pour exécuter une fonction Azure dans un pipeline Data Factory
 services: data-factory
 documentationcenter: ''
-author: djpmsft
-ms.author: daperlov
+author: dcstwh
+ms.author: weetok
 manager: jroth
 ms.reviewer: maghan
 ms.service: data-factory
 ms.workload: data-services
 ms.topic: conceptual
 ms.date: 01/09/2019
-ms.openlocfilehash: ee2e59e794cf34a8fd5043a56867a81c2537f1ae
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: f7c8f1e5ae0da9e7c404a942fcb4f554281486a7
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81415308"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96500038"
 ---
 # <a name="azure-function-activity-in-azure-data-factory"></a>Activité de fonction Azure dans Azure Data Factory
 [!INCLUDE[appliesto-adf-asa-md](includes/appliesto-adf-asa-md.md)]
@@ -47,10 +47,10 @@ Le type de retour de la fonction Azure doit être un `JObject` valide (n’oubli
 | nom de fonction  | Nom de la fonction dans l’application de fonction Azure que cette activité appelle. | String | Oui |
 | method  | Méthode API REST de l’appel de fonction. | Types de chaîne pris en charge : « GET », « POST », « PUT »   | Oui |
 | en-tête  | En-têtes envoyés à la demande. Par exemple, pour définir la langue et le type sur une demande : "headers": { "Accept-Language": "en-us", "Content-Type": "application/json" } | Chaîne (ou expression avec resultType de chaîne) | Non |
-| body  | Corps envoyé avec la demande à la méthode d’api de la fonction  | Chaîne (ou expression avec resultType de chaîne) ou objet.   | Obligatoire pour les méthodes PUT/POST |
+| body  | Corps envoyé avec la demande à la méthode d’api de la fonction  | Chaîne (ou expression avec resultType de chaîne) ou objet.   | Obligatoire pour les méthodes PUT/POST |
 |   |   |   | |
 
-Reportez-vous au schéma de la charge utile de demande dans la section  [Schéma de charge utile de demande](control-flow-web-activity.md#request-payload-schema) .
+Voir le schéma de la charge utile de demande dans la section [Schéma de la charge utile](control-flow-web-activity.md#request-payload-schema).
 
 ## <a name="routing-and-queries"></a>Routage et requêtes
 

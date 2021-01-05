@@ -1,19 +1,14 @@
 ---
 title: Publier un événement dans une rubrique Azure Event Grid personnalisée
 description: Cet article explique comment publier un événement dans une rubrique personnalisée. Il montre le format des données de publication et d’événement.
-services: event-grid
-author: spelluru
-manager: timlt
-ms.service: event-grid
 ms.topic: conceptual
-ms.date: 01/23/2020
-ms.author: spelluru
-ms.openlocfilehash: 0afad249f71a36bf7552da499e985b68d48ee7a9
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 07/07/2020
+ms.openlocfilehash: 197d8eb1963300bc6576e664c7c3fd470cf70bb2
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76721555"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86108241"
 ---
 # <a name="post-to-custom-topic-for-azure-event-grid"></a>Publier dans une rubrique personnalisée pour Azure Event Grid
 

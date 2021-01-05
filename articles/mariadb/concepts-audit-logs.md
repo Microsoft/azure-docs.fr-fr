@@ -1,26 +1,26 @@
 ---
 title: Journaux d’audit - Azure Database for MariaDB
 description: Décrit les journaux d’audit disponibles dans Azure Database for MariaDB et les paramètres disponibles pour l’activation de différents niveaux de journalisation.
-author: ajlam
-ms.author: andrela
+author: savjani
+ms.author: pariks
 ms.service: mariadb
 ms.topic: conceptual
-ms.date: 3/19/2020
-ms.openlocfilehash: e8d5abd81feb86ba48fc442ee95615cb52230a24
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 6/24/2020
+ms.openlocfilehash: e66eaf62b54759222421b17ebc7e33b82e018338
+ms.sourcegitcommit: 6ab718e1be2767db2605eeebe974ee9e2c07022b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80063831"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94541757"
 ---
 # <a name="audit-logs-in-azure-database-for-mariadb"></a>Journaux d’audit dans Azure Database for MariaDB
 
 Dans Azure Database for MariaDB, le journal d’audit est accessible aux utilisateurs. Le journal d’audit peut être utilisé pour suivre l’activité au niveau de la base de données et est couramment utilisé à des fins de conformité.
 
-> [!IMPORTANT]
-> Pour l’instant, la fonctionnalité Journal d’audit n’existe qu’en préversion.
-
 ## <a name="configure-audit-logging"></a>Configurer l’enregistrement d’audit
+
+>[!IMPORTANT]
+> Il est recommandé de ne consigner que les types d’événements et les utilisateurs requis à des fins d’audit pour garantir que les performances de votre serveur ne sont pas fortement affectées.
 
 Par défaut, le journal d’audit est désactivé. Pour l’activer, affectez la valeur ON à `audit_log_enabled`.
 
@@ -28,9 +28,10 @@ Les autres paramètres que vous pouvez ajuster incluent :
 
 - `audit_log_events` : contrôle les événements à enregistrer. Consultez le tableau ci-dessous pour des événements d’audit spécifiques.
 - `audit_log_include_users`: Utilisateurs MariaDB à inclure pour la journalisation. La valeur par défaut de ce paramètre est vide, ce qui inclut tous les utilisateurs pour la journalisation. Il a une plus grande priorité que `audit_log_exclude_users`. La longueur maximale du paramètre est de 512 caractères.
+- `audit_log_exclude_users`: utilisateurs MariaDB à exclure de l’enregistrement. Quatre utilisateurs maximum sont autorisés. La longueur maximale du paramètre est de 256 caractères.
+
 > [!Note]
 > `audit_log_include_users` a une priorité plus élevée que `audit_log_exclude_users`. Par exemple, si `audit_log_include_users` = `demouser` et `audit_log_exclude_users` = `demouser`, l’utilisateur sera inclus dans les journaux d’audit, car `audit_log_include_users` a une priorité plus élevée.
-- `audit_log_exclude_users`: utilisateurs MariaDB à exclure de l’enregistrement. Quatre utilisateurs maximum sont autorisés. La longueur maximale du paramètre est de 256 caractères.
 
 | **Event** | **Description** |
 |---|---|
@@ -79,6 +80,9 @@ Les sections suivantes décrivent la sortie des journaux d’audit MariaDB en fo
 ### <a name="general"></a>Général
 
 Le schéma ci-dessous s’applique aux types d’événements GENERAL, DML_SELECT, DML_NONSELECT, DML, DDL, DCL et ADMIN.
+
+> [!NOTE]
+> Pour `sql_text`, le journal est tronqué s’il dépasse 2 048 caractères.
 
 | **Propriété** | **Description** |
 |---|---|

@@ -11,18 +11,18 @@ Customer intent: I want only specific Azure Storage account to be allowed access
 ms.assetid: ''
 ms.service: virtual-network
 ms.devlang: azurecli
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: virtual-network
 ms.workload: infrastructure-services
 ms.date: 02/03/2020
 ms.author: rdhillon
 ms.custom: ''
-ms.openlocfilehash: e01af052a936403162115965f2dc5b3ad46dd9cf
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: a080c3953c48227301052a0bb151c8cba96e515a
+ms.sourcegitcommit: c2dd51aeaec24cd18f2e4e77d268de5bcc89e4a7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78271184"
+ms.lasthandoff: 11/18/2020
+ms.locfileid: "94737334"
 ---
 # <a name="manage-data-exfiltration-to-azure-storage-accounts-with-virtual-network-service-endpoint-policies-using-the-azure-cli"></a>Gérer l’exfiltration de données vers des comptes Stockage Azure avec des stratégies de points de terminaison de service de réseau virtuel à l’aide d’Azure CLI
 
@@ -37,11 +37,11 @@ Dans cet article, vous apprendrez comment :
 * Vérifier l’accès au compte de stockage autorisé à partir du sous-réseau.
 * Vérifier que l’accès au compte de stockage non autorisé à partir du sous-réseau est refusé.
 
-Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
+[!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
 
-[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../includes/azure-cli-prepare-your-environment.md)]
 
-Si vous choisissez d’installer et d’utiliser l’interface de ligne de commande en local, ce guide de démarrage rapide nécessite que vous exécutiez la version 2.0.28 d’Azure CLI, ou une version ultérieure. Pour connaître la version de l’interface, exécutez `az --version`. Si vous devez installer ou mettre à niveau, voir [Installer Azure CLI]( /cli/azure/install-azure-cli). 
+- Cet article nécessite la version 2.0.28 ou ultérieure d’Azure CLI. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée.
 
 ## <a name="create-a-virtual-network"></a>Créez un réseau virtuel
 
@@ -252,7 +252,7 @@ az storage account network-rule add \
 
 Les stratégies de points de terminaison de service Azure sont uniquement disponibles pour le Stockage Azure. Pour cet exemple de configuration, nous allons donc activer le point de terminaison de service pour *Microsoft.Storage* sur ce sous-réseau.
 
-Les stratégies de points de terminaison de service sont appliquées sur les points de terminaison de service. Nous allons commencer par créer une stratégie de points de terminaison de service. Après quoi, nous allons créer les définitions de stratégie dans le cadre de cette stratégie pour les comptes Stockage Azure à ajouter à la liste verte pour ce sous-réseau.
+Les stratégies de points de terminaison de service sont appliquées sur les points de terminaison de service. Nous allons commencer par créer une stratégie de points de terminaison de service. Après quoi, nous allons créer les définitions de stratégie dans le cadre de cette stratégie pour les comptes Stockage Azure à approuver pour ce sous-réseau.
 
 Créer une stratégie de point de terminaison de service
 
@@ -313,7 +313,7 @@ La création de la machine virtuelle ne nécessite que quelques minutes. Une foi
 
 ### <a name="confirm-access-to-storage-account"></a>Vérifier l’accès au compte de stockage
 
-Ouvrez une session SSH avec la machine virtuelle *myVmPrivate*. Remplacez *\<publicIpAddress>* par l’adresse IP publique de votre machine virtuelle *myVmPrivate*.
+Ouvrez une session SSH avec la machine virtuelle *myVmPrivate*. Remplacez *\<publicIpAddress>* par l’adresse IP publique de votre machine virtuelle *myVmPrivate*.
 
 ```bash 
 ssh <publicIpAddress>

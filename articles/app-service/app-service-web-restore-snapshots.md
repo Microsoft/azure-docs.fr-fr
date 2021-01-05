@@ -6,12 +6,12 @@ ms.topic: article
 ms.date: 04/04/2018
 ms.reviewer: nicking
 ms.custom: seodec18
-ms.openlocfilehash: b17a49535541c8f75f65cdbe9986a895427f3877
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f7edb632559dc8da2de32c58d994a7c51b1b09e8
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78255146"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86169968"
 ---
 # <a name="restore-an-app-in-azure-from-a-snapshot"></a>Restauration d’une application dans Azure à partir d’un instantané
 Cet article explique comment restaurer une application dans [Azure App Service](../app-service/overview.md) à partir d’un instantané. Vous pouvez utiliser l’un des instantanés de votre application pour restaurer cette dernière à un état antérieur. Il n’est pas nécessaire d’activer la sauvegarde d’instantanés : la plateforme enregistre automatiquement un instantané de toutes les applications dans le cadre de la récupération de données.
@@ -37,15 +37,15 @@ La restauration à partir d’instantanés est disponible pour des applications 
 
 1. Sur la page **Paramètres** de votre application dans le [portail Azure](https://portal.azure.com), cliquez sur **Sauvegardes** pour afficher la page **Sauvegardes**. Cliquez ensuite sur **Restaurer** sous la section **Instantané (préversion)** .
    
-    ![](./media/app-service-web-restore-snapshots/1.png)
+    ![Capture d’écran montrant comment restaurer une application à partir d’une sauvegarde d’instantané.](./media/app-service-web-restore-snapshots/1.png)
 
 2. Sur la page **Restaurer**, sélectionnez l’instantané à restaurer.
    
-    ![](./media/app-service-web-restore-snapshots/2.png)
+    ![Capture d’écran montrant comment sélectionner l’instantané à restaurer. ](./media/app-service-web-restore-snapshots/2.png)
    
 3. Indiquez à quelle destination restaurer l’application dans **Destination de restauration**.
    
-    ![](./media/app-service-web-restore-snapshots/3.png)
+    ![Capture d’écran montrant comment spécifier la destination de la restauration.](./media/app-service-web-restore-snapshots/3.png)
    
    > [!WARNING]
    > Si vous choisissez **Remplacer**, toutes les données existantes du système de fichiers actuel de votre application seront effacées et remplacées. Avant de cliquer sur **OK**, vérifiez qu’il s’agit bien de l’opération que vous souhaitez exécuter.
@@ -61,6 +61,6 @@ La restauration à partir d’instantanés est disponible pour des applications 
 
 4. Vous pouvez choisir de restaurer la configuration de votre site.
    
-    ![](./media/app-service-web-restore-snapshots/4.png)
+    ![Capture d’écran montrant comment restaurer la configuration d’un site.](./media/app-service-web-restore-snapshots/4.png)
 
 5. Cliquez sur **OK**.

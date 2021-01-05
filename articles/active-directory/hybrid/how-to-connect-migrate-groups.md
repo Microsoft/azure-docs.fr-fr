@@ -5,18 +5,18 @@ services: active-directory
 author: billmath
 manager: daveba
 ms.service: active-directory
-ms.topic: reference
+ms.topic: how-to
 ms.workload: identity
 ms.date: 04/02/2020
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: da2328674fd601f2e04684e8a9af1ae242ff6106
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 5ef693a48dc52854e4e1fd8359ef24f65ce236f7
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82229797"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85358580"
 ---
 # <a name="migrate-groups-from-one-forest-to-another-for-azure-ad-connect"></a>Migrer des groupes d’une forêt à une autre pour Azure AD Connect
 

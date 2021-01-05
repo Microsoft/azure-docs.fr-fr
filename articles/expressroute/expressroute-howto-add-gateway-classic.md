@@ -2,18 +2,18 @@
 title: 'Azure ExpressRoute : Ajouter une passerelle à un réseau virtuel : classique'
 description: Configurez une passerelle de réseau virtuel pour un réseau virtuel suivant le modèle de déploiement classique avec PowerShell pour une configuration ExpressRoute.
 services: expressroute
-author: charwen
+author: duongau
 ms.service: expressroute
-ms.topic: article
+ms.topic: how-to
 ms.date: 12/06/2019
-ms.author: charwen
+ms.author: duau
 ms.custom: seodec18
-ms.openlocfilehash: d7927af5b831dbe3294e1abc3a878e323bf1867e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 0f42a7d030f45be1b96728fdcac7a13cf797ed34
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74928063"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89396401"
 ---
 # <a name="configure-a-virtual-network-gateway-for-expressroute-using-powershell-classic"></a>Configurer une passerelle de réseau virtuel pour ExpressRoute à l’aide de PowerShell (classique)
 > [!div class="op_single_selector"]

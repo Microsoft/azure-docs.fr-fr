@@ -9,16 +9,22 @@ ms.assetid: 2575A80C-FC74-4631-AE5D-8101CF2591D3
 ms.service: cognitive-services
 ms.subservice: bing-web-search
 ms.topic: tutorial
-ms.date: 12/19/2019
+ms.date: 06/24/2020
 ms.author: aahi
-ms.openlocfilehash: 1c8e0bb136fddeb84dc991e63a761378b38cc470
-ms.sourcegitcommit: 9ee0cbaf3a67f9c7442b79f5ae2e97a4dfc8227b
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 077c715616e377d8b296e53fdd5a861f944ab940
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75382325"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96349501"
 ---
 # <a name="build-a-console-app-search-client-in-c"></a>Générer un client de recherche d’application console en C#
+
+> [!WARNING]
+> Les API Recherche Bing passent de Cognitive Services aux services de recherche Bing. À compter du **30 octobre 2020**, toutes les nouvelles instances de Recherche Bing doivent être provisionnées en suivant le processus documenté [ici](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Les API Recherche Bing provisionnées à l’aide de Cognitive Services seront prises en charge les trois prochaines années ou jusqu’à la fin de votre Contrat Entreprise, selon la première éventualité.
+> Pour obtenir des instructions de migration, consultez [Services de recherche Bing](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
 
 Ce tutoriel montre comment générer une application console .NET Core simple qui permet aux utilisateurs d’interroger l’API Recherche web Bing et d’afficher les résultats classés.
 
@@ -27,12 +33,13 @@ Ce tutoriel montre comment :
 - Effectuer une requête simple auprès de l’API Recherche web Bing
 - Afficher les résultats de la requête dans un ordre de classement
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 Pour suivre le tutoriel, vous avez besoin des éléments suivants :
 
-- Visual Studio. Si vous ne l’avez pas, [téléchargez et installez Visual Studio 2017 Community Edition, qui est gratuit](https://www.visualstudio.com/downloads/).
-- Une clé d’abonnement pour l’API Recherche web Bing. Si vous n’en avez pas, [inscrivez-vous à un essai gratuit](https://azure.microsoft.com/try/cognitive-services/?api=bing-web-search-api).
+* Un abonnement Azure - [En créer un gratuitement](https://azure.microsoft.com/free/cognitive-services/)
+* Une fois que vous avez votre abonnement Azure, <a href="https://portal.azure.com/#create/Microsoft.CognitiveServicesBingSearch-v7"  title="Créer une ressource Recherche Bing"  target="_blank">créez une ressource Recherche Bing<span class="docon docon-navigate-external x-hidden-focus"></span></a> dans le portail Azure pour obtenir votre clé et votre point de terminaison. Une fois le déploiement effectué, cliquez sur **Accéder à la ressource**.
+* [IDE Visual Studio](https://www.visualstudio.com/downloads/).
 
 ## <a name="create-a-new-console-app-project"></a>Créer un projet d’application console
 
@@ -42,14 +49,14 @@ Dans la boîte de dialogue **Nouveau projet**, cliquez sur **Visual C# > Bureau 
 
 Nommez l’application **MyConsoleSearchApp**, puis cliquez sur **OK**.
 
-## <a name="add-the-jsonnet-nuget-package-to-the-project"></a>Ajouter le package NuGet Json.NET au projet
+## <a name="add-the-jsonnet-nuget-package-to-the-project"></a>Ajouter le package NuGet JSON.net au projet
 
 Json.NET vous permet d’utiliser les réponses JSON retournées par l’API. Ajoutez son package NuGet à votre projet :
 
 - Dans **l’Explorateur de solutions**, cliquez avec le bouton droit sur le projet, puis sélectionnez **Gérer les packages NuGet...** .
 - Sous l’onglet **Parcourir**, recherchez `Newtonsoft.Json`. Sélectionnez la version la plus récente, puis cliquez sur **Installer**.
 - Cliquez sur le bouton **OK** dans la fenêtre **Examiner les modifications**.
-- Fermez l’onglet Visual Studio intitulé **NuGet : MyConsoleSearchApp**.
+- Fermez l’onglet de Visual Studio intitulé **NuGet : MyConsoleSearchApp**.
 
 ## <a name="add-a-reference-to-systemweb"></a>Ajouter une référence à System.Web
 
@@ -221,11 +228,11 @@ Avant de voir comment afficher les résultats dans un ordre de classement, exami
 }
 ```
 
-L’objet JSON `rankingResponse` ([documentation](https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-web-api-v7-reference#rankingresponse)) décrit l’ordre d’affichage approprié pour les résultats de la recherche. Il contient un ou plusieurs des groupes suivants, classés par ordre de priorité :
+L’objet JSON `rankingResponse` ([documentation](/rest/api/cognitiveservices-bingsearch/bing-web-api-v7-reference#rankingresponse)) décrit l’ordre d’affichage approprié pour les résultats de la recherche. Il contient un ou plusieurs des groupes suivants, classés par ordre de priorité :
 
-- `pole` : Résultats de la recherche qui doivent être le plus visibles (par exemple, affichés au-dessus de la partie principale et de l’encadré).
-- `mainline` : Résultats de la recherche à afficher dans la partie principale.
-- `sidebar` : Résultats de la recherche à afficher dans l’encadré. En l’absence d’encadré, affichez les résultats sous la partie principale.
+- `pole`: Résultats de la recherche qui doivent être les plus visibles (par exemple, affichés au-dessus de la partie principale et de l’encadré).
+- `mainline`: Résultats de la recherche à afficher dans la partie principale.
+- `sidebar`: Résultats de la recherche à afficher dans l’encadré. En l’absence d’encadré, affichez les résultats sous la partie principale.
 
 La réponse de classement JSON peut inclure un ou plusieurs des groupes.
 

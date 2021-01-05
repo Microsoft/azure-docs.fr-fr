@@ -1,18 +1,17 @@
 ---
 title: Évaluer un grand nombre de serveurs physiques pour la migration vers Azure avec Azure Migrate | Microsoft Docs
 description: Décrit comment évaluer un grand nombre de serveurs physiques pour la migration vers Azure à l’aide du service Azure Migrate.
-author: rayne-wiselman
-manager: carmonm
-ms.service: azure-migrate
-ms.topic: conceptual
+author: rashi-ms
+ms.author: rajosh
+ms.manager: abhemraj
+ms.topic: how-to
 ms.date: 01/19/2020
-ms.author: hamusa
-ms.openlocfilehash: a19a1b6e7416667079ab07fc5440ee8828c26bf4
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 45954a42613fb1716e3b66305c0485a3966b8e37
+ms.sourcegitcommit: ea551dad8d870ddcc0fee4423026f51bf4532e19
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76294835"
+ms.lasthandoff: 12/07/2020
+ms.locfileid: "96753686"
 ---
 # <a name="assess-large-numbers-of-physical-servers-for-migration-to-azure"></a>Évaluer un grand nombre de serveurs physiques pour la migration vers Azure
 
@@ -30,7 +29,7 @@ Dans cet article, vous apprendrez comment :
 
 
 > [!NOTE]
-> Si vous voulez tester une preuve de concept afin d’évaluer quelques serveurs avant d’effectuer une évaluation à grande échelle, suivez notre [série de tutoriels](tutorial-prepare-physical.md).
+> Si vous voulez tester une preuve de concept afin d’évaluer quelques serveurs avant d’effectuer une évaluation à grande échelle, suivez notre [série de tutoriels](./tutorial-discover-physical.md).
 
 ## <a name="plan-for-assessment"></a>Planifier l’évaluation
 
@@ -47,7 +46,7 @@ Utilisez les limites résumées dans ce tableau pour la planification.
 **Planification** | **Limites**
 --- | --- 
 **Projets Azure Migrate** | Évaluez jusqu’à 35 000 serveurs par projet.
-**Appliance Azure Migrate** | Une appliance peut découvrir jusqu’à 250 serveurs.<br/> Une appliance ne peut être associée qu’à un seul projet Azure Migrate.<br/> Un nombre quelconque d’appliances peut être associé à un même projet Azure Migrate. <br/><br/> 
+**Appliance Azure Migrate** | Une appliance peut découvrir jusqu’à 1000 serveurs.<br/> Une appliance ne peut être associée qu’à un seul projet Azure Migrate.<br/> Un nombre quelconque d’appliances peut être associé à un même projet Azure Migrate. <br/><br/> 
 **Groupe** | Vous pouvez ajouter jusqu’à 35 000 serveurs dans un groupe unique.
 **Évaluation d’Azure Migrate** | Vous pouvez évaluer jusqu’à 35 000 serveurs par évaluation.
 
@@ -64,7 +63,7 @@ Préparez les serveurs physiques et Azure à une évaluation de serveur.
 2. Configurez des autorisations pour permettre à votre compte Azure d’interagir avec Azure Migrate.
 3. Préparez les serveurs physiques.
 
-Suivez les instructions de [ce tutoriel](tutorial-prepare-physical.md) pour configurer ces paramètres.
+Suivez les instructions de [ce tutoriel](./tutorial-discover-physical.md) pour configurer ces paramètres.
 
 ## <a name="create-a-project"></a>Création d’un projet
 
@@ -73,7 +72,7 @@ Conformément à vos exigences de planification, procédez comme suit :
 1. Créer un projet Azure Migrate.
 2. Ajoutez l’outil Évaluation de serveur Azure Migrate aux projets.
 
-[En savoir plus](how-to-add-tool-first-time.md)
+[En savoir plus](./create-manage-projects.md)
 
 ## <a name="create-and-review-an-assessment"></a>Créer et examiner une évaluation
 

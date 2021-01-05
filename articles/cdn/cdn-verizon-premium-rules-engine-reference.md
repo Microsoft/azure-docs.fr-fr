@@ -5,14 +5,14 @@ services: cdn
 author: asudbring
 ms.service: azure-cdn
 ms.topic: article
-ms.date: 05/31/2019
+ms.date: 05/26/2020
 ms.author: allensu
-ms.openlocfilehash: bda817712faf1f54287e880dc62ef2b08273ff42
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 295bc0a20a547bf944f48af6711b18af34571b02
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81253388"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91362578"
 ---
 # <a name="azure-cdn-from-verizon-premium-rules-engine-reference"></a>Documentation de référence sur le moteur de règles Azure CDN de Verizon Premium
 
@@ -26,20 +26,62 @@ Le moteur de règles est conçu pour être l’autorité finale sur la façon do
 - Sécuriser ou refuser les demandes de contenu sensible.
 - Rediriger les demandes.
 - Stocker les données de journal personnalisé.
+## <a name="key-concepts"></a>Concepts clés
+Les concepts clés de la configuration du moteur de règles sont décrits ci-dessous.
+### <a name="draft"></a>Brouillon
+Le brouillon d’une stratégie est constitué d’une ou de plusieurs règles destinées à identifier les demandes et l’ensemble des actions qui leur seront appliquées. Il s’agit d’un travail en cours qui permet des mises à jour de configuration fréquentes sans affecter le trafic du site. Une fois prêt à être finalisé, le brouillon doit être converti en une stratégie en lecture seule.
 
-## <a name="terminology"></a>Terminologie
+### <a name="rule"></a>Règle
+Une règle identifie un ou plusieurs types de demandes et l’ensemble des actions qui leur seront appliquées.
 
-Une règle est définie à l’aide d’[**expressions conditionnelles**](cdn-verizon-premium-rules-engine-reference-conditional-expressions.md), de [**conditions de correspondance**](cdn-verizon-premium-rules-engine-reference-match-conditions.md) et de [**fonctionnalités**](cdn-verizon-premium-rules-engine-reference-features.md). Ces éléments sont mis en surbrillance dans l’illustration suivante :
+Elle comprend : 
 
- ![Condition de correspondance CDN](./media/cdn-rules-engine-reference/cdn-rules-engine-terminology.png)
+- Un ensemble d’expressions conditionnelles qui définissent la logique d’identification des demandes.
+- Un ensemble de conditions de correspondance qui définissent les critères d’identification des demandes.
+- Un ensemble de fonctionnalités qui définissent la façon dont le réseau CDN gère les requêtes ci-dessus.
+Ces éléments sont mis en surbrillance dans l’illustration suivante.
 
+![Capture d’écran avec des étiquettes montrant l’expression conditionnelle, la correspondance et les fonctionnalités d’une règle.](./media/cdn-verizon-premium-rules-engine-reference/verizon-rules-engine-reference.png)
+
+### <a name="policy"></a>Stratégie
+Une stratégie, qui se compose d’un ensemble de règles en lecture seule, permet d’effectuer les opérations suivantes :
+
+- Créer, stocker et gérer plusieurs variantes des règles.
+- Restaurer une version déployée auparavant.
+- Préparer à l’avance des règles propres aux événements (par exemple, une règle qui redirige le trafic à la suite d’une opération de maintenance provenant du client).
+
+> [!NOTE]
+> Bien que seule une stratégie soit autorisée par environnement, les stratégies peuvent être déployées en fonction des besoins.
+
+### <a name="deploy-request"></a>Demande de déploiement
+Une demande de déploiement représente une procédure simple et rationalisée par le biais de laquelle une stratégie peut être appliquée rapidement à l’environnement intermédiaire ou de production. Un historique des demandes de déploiement est fourni pour faciliter le suivi des modifications appliquées à ces environnements.
+
+> [!NOTE]
+> Seules les demandes non approuvées par notre système automatisé de validation et de détection des erreurs réclament une révision et une approbation manuelles.
+
+### <a name="rule-precedence"></a>Précédence des règles
+Les règles contenues dans une stratégie sont généralement traitées dans l’ordre dans lequel elles apparaissent (soit de haut en bas). Si la demande correspond à des règles en conflit, la dernière règle à traiter est prioritaire.
+
+### <a name="policy-deployment-workflow"></a>Workflow de déploiement de stratégies
+Le workflow par le biais duquel une stratégie peut être appliquée à l’environnement de production ou intermédiaire est illustré ci-dessous.
+
+![Workflow de déploiement de stratégies](./media/cdn-verizon-premium-rules-engine-reference/policy-deployment-workflow.png)
+
+|Étape |Description |
+|---------|---------|
+|[Créer un brouillon](https://docs.vdms.com/cdn/index.html#HRE/AdministeringDraftsandRules.htm#Create)    |    Un brouillon est constitué d’un ensemble de règles qui définissent la façon dont les demandes de contenu doivent être gérées par le réseau CDN.     |
+|Verrouiller le brouillon   |     Une fois finalisé, le brouillon doit être verrouillé et converti en une stratégie en lecture seule.    |
+|[Envoyer une demande de déploiement](https://docs.vdms.com/cdn/index.html#HRE/DeployRequest.htm)   |   <br> Une demande de déploiement permet d’appliquer une stratégie à un trafic de test ou de production.</br> <br>Envoyez une demande de déploiement à l’environnement intermédiaire ou de production.</br>     |
+|Vérifier la demande de déploiement   |    <br>La demande de déploiement subit une validation et une détection d’erreurs automatiques.</br><br>Si la majorité d’entre elles sont approuvées automatiquement, une révision manuelle reste nécessaire pour les stratégies complexes.</br>   |
+|Déploiement de la stratégie ([Intermédiaire](https://docs.vdms.com/cdn/index.html#HRE/Environment.htm#Staging))   |  <br> Après approbation de la demande de déploiement dans l’environnement intermédiaire, la stratégie est appliquée à l’environnement intermédiaire. Cet environnement permet de tester une stratégie sur du trafic de site fictif.</br><br>Une fois la stratégie prête à être appliquée au trafic de site actif, une nouvelle demande de déploiement dans l’environnement de production doit être envoyée.</br>      |
+|Déploiement de la stratégie ([Production](https://docs.vdms.com/cdn/index.html#HRE/Environment.htm#Producti))   |  Après approbation de la demande de déploiement dans l’environnement de production, une stratégie est appliquée à l’environnement de production. Cet environnement permet à la stratégie de servir d’autorité finale pour déterminer comment le réseau CDN doit gérer le trafic actif.     |
 ## <a name="syntax"></a>Syntaxe
 
 La façon dont les caractères spéciaux sont traités varie en fonction de la façon dont une condition de correspondance ou une fonctionnalité gère les valeurs de texte. Une condition de correspondance ou une fonctionnalité peut interpréter le texte de l’une des manières suivantes :
 
-1. [**Valeurs littérales**](#literal-values)
-2. [**Valeurs de caractère générique**](#wildcard-values)
-3. [**Expressions régulières**](#regular-expressions)
+- [**Valeurs littérales**](#literal-values)
+- [**Valeurs de caractère générique**](#wildcard-values)
+- [**Expressions régulières**](#regular-expressions)
 
 ### <a name="literal-values"></a>Valeurs littérales
 
@@ -66,12 +108,14 @@ Les expressions régulières définissent un modèle qui est recherché dans une
 Caractère spécial | Description
 ------------------|------------
 \ | Une barre oblique inverse échappe le caractère qui la suit, ce caractère est alors traité comme une valeur littérale plutôt que d’utiliser sa signification d’expression régulière. Par exemple, la syntaxe suivante échappe un astérisque : `\*`
-% | La signification d’un symbole de pourcentage dépend de son utilisation.<br/><br/> `%{HTTPVariable}` : cette syntaxe identifie une variable HTTP.<br/>`%{HTTPVariable%Pattern}` : cette syntaxe utilise un symbole de pourcentage pour identifier une variable HTTP et comme délimiteur.<br />`\%` : l’échappement d’un symbole de pourcentage permet de l’utiliser comme une valeur littérale ou d’indiquer l’encodage des URL (par exemple, `\%20`).
+% | La signification d’un symbole de pourcentage dépend de son utilisation.<br/><br/> `%{HTTPVariable}`: cette syntaxe identifie une variable HTTP.<br/>`%{HTTPVariable%Pattern}`: cette syntaxe utilise un symbole de pourcentage pour identifier une variable HTTP et comme délimiteur.<br />`\%`: l’échappement d’un symbole de pourcentage permet de l’utiliser comme une valeur littérale ou d’indiquer l’encodage des URL (par exemple, `\%20`).
 \* | Un astérisque permet de mettre en correspondance une ou plusieurs fois le caractère qui le précède.
 Espace | Un caractère d’espace est généralement traité comme un caractère littéral.
 'valeur' | Les guillemets simples sont traités comme des caractères littéraux. Un jeu de guillemets simples n’a pas de signification particulière.
 
 Les conditions et fonctionnalités de correspondance qui prennent en charge les expressions régulières acceptent les modèles définis par des expressions régulières compatibles Perl (PCRE).
+
+
 
 ## <a name="next-steps"></a>Étapes suivantes
 

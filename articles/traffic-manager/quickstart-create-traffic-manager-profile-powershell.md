@@ -1,8 +1,8 @@
 ---
-title: 'Démarrage rapide : Créer un profil pour assurer une haute disponibilité à vos applications – Azure PowerShell – Azure Traffic Manager'
+title: 'Démarrage rapide : Créer un profil pour la haute disponibilité des applications - Azure PowerShell - Azure Traffic Manager'
 description: Cet article de démarrage rapide décrit comment créer un profil Traffic Manager pour créer des applications web hautement disponibles.
 services: traffic-manager
-author: rohinkoul
+author: duongau
 mnager: twooley
 Customer intent: As an IT admin, I want to direct user traffic to ensure high availability of web applications.
 ms.service: traffic-manager
@@ -10,14 +10,14 @@ ms.devlang: na
 ms.topic: quickstart
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 03/04/2019
-ms.author: rohink
-ms.openlocfilehash: 0ab7392b4fa6e248d51392706fedaed156344a99
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.date: 10/01/2020
+ms.author: duau
+ms.openlocfilehash: 9b34a17cc9add0bed4bffb7677aa81bb17f3125b
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "76934817"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "91631560"
 ---
 # <a name="quickstart-create-a-traffic-manager-profile-for-a-highly-available-web-application-using-azure-powershell"></a>Démarrage rapide : Créer un profil Traffic Manager pour assurer une haute disponibilité à vos applications web avec Azure PowerShell
 
@@ -25,17 +25,18 @@ Ce démarrage rapide explique comment créer un profil Traffic Manager qui assur
 
 Dans ce démarrage rapide, vous allez créer deux instances d’une application web. Chacune d’elles s’exécute dans une région Azure distincte. Vous allez créer un profil Traffic Manager en fonction de la [priorité du point de terminaison](traffic-manager-routing-methods.md#priority-traffic-routing-method). Le profil dirige le trafic utilisateur vers le site principal exécutant l’application web. Traffic Manager supervise en permanence l’application web. Si le site principal est indisponible, il assure un basculement automatique vers le site de secours.
 
+## <a name="prerequisites"></a>Prérequis
+
 Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) maintenant.
 
 [!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
 
-Si vous choisissez d’installer et d’utiliser PowerShell en local, vous devez exécuter le module Azure PowerShell version 5.4.1 ou ultérieure pour les besoins de cet article. Exécutez `Get-Module -ListAvailable Az` pour rechercher la version installée. Si vous devez effectuer une mise à niveau, consultez [Installer le module Azure PowerShell](/powershell/azure/install-Az-ps). Si vous exécutez PowerShell en local, vous devez également lancer `Connect-AzAccount` pour créer une connexion avec Azure.
+Si vous choisissez d’installer et d’utiliser PowerShell en local, vous devez exécuter le module Azure PowerShell version 5.4.1 ou ultérieure pour les besoins de cet article. Exécutez `Get-Module -ListAvailable Az` pour rechercher la version installée. Si vous devez effectuer une mise à niveau, consultez [Installer le module Azure PowerShell](/powershell/azure/install-Az-ps). Si vous exécutez PowerShell en local, vous devez également exécuter `Connect-AzAccount` pour créer une connexion avec Azure.
 
-## <a name="create-a-resource-group"></a>Création d’un groupe de ressources
+## <a name="create-a-resource-group"></a>Créer un groupe de ressources
 Créer un groupe de ressources avec [New-AzResourceGroup](/powershell/module/az.resources/new-azresourcegroup).
 
 ```azurepowershell-interactive
-
 
 # Variables
 $Location1="WestUS"
@@ -70,7 +71,7 @@ New-AzTrafficManagerProfile `
 Pour ce guide de démarrage rapide, vous aurez besoin de deux instances d’une application web déployée dans deux régions Azure différentes (*USA Ouest* et *USA Est*). Chacune servira de point de terminaison principal et de point de terminaison de basculement à Traffic Manager.
 
 ### <a name="create-web-app-service-plans"></a>Créer des plans Web App Service
-Créez les plans Web App Service avec [New-AzAppServicePlan](/powershell/module/az.websites/new-azappserviceplan) pour les deux instances de l’application web que vous allez déployer dans deux régions Azure.
+Créez des plans Web App Service avec [New-AzAppServicePlan](/powershell/module/az.websites/new-azappserviceplan) pour les deux instances de l’application web que vous allez déployer dans deux régions Azure différentes.
 
 ```azurepowershell-interactive
 

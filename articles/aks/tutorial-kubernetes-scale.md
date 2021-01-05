@@ -3,14 +3,14 @@ title: Didacticiel Kubernetes sur Azure – Mise à l’échelle d’une applica
 description: Dans ce didacticiel Azure Kubernetes Service (AKS), vous découvrez comment mettre à l’échelle des nœuds et pods dans Kubernetes, et comment implémenter la mise à l’échelle automatique de pod horizontal.
 services: container-service
 ms.topic: tutorial
-ms.date: 01/14/2019
+ms.date: 09/30/2020
 ms.custom: mvc
-ms.openlocfilehash: f830d42ef09a60b1f9ced43250b24a68003d1e87
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 7f16ba3ffe6b6f96f17df540eb67e9cec0bfea8c
+ms.sourcegitcommit: e7179fa4708c3af01f9246b5c99ab87a6f0df11c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82128999"
+ms.lasthandoff: 12/30/2020
+ms.locfileid: "97825683"
 ---
 # <a name="tutorial-scale-applications-in-azure-kubernetes-service-aks"></a>Tutoriel : Mettre à l’échelle des applications dans Azure Kubernetes Service (AKS)
 
@@ -113,6 +113,7 @@ spec:
     name: azure-vote-back
   targetCPUUtilizationPercentage: 50 # target CPU utilization
 
+---
 
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler

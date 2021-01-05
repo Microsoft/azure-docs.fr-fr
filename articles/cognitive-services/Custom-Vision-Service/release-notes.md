@@ -3,19 +3,19 @@ title: Notes de publication du service Vision personnalisée
 titleSuffix: Azure Cognitive Services
 description: Consultez les dernières informations sur les nouvelles versions fournies par l’équipe Custom Vision.
 services: cognitive-services
-author: anrothMSFT
+author: PatrickFarley
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: custom-vision
 ms.topic: conceptual
 ms.date: 04/03/2019
-ms.author: anroth
-ms.openlocfilehash: b9606c63ec7b53fb0b69918c21bdd9206f34c555
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.author: pafarley
+ms.openlocfilehash: ccf742e5ff612816cae1056ef7bf0e64fc9dbb5b
+ms.sourcegitcommit: 9706bee6962f673f14c2dc9366fde59012549649
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "73647577"
+ms.lasthandoff: 11/13/2020
+ms.locfileid: "94616465"
 ---
 # <a name="custom-vision-service-release-notes"></a>Notes de publication du service Vision personnalisée
 
@@ -41,7 +41,7 @@ ms.locfileid: "73647577"
 
 - Le service Custom Vision est mis à la disponibilité générale sur Azure !
 - Fonctionnalité Formation avancée ajoutée avec un nouveau système de Machine Learning améliorant les performances, en particulier pour les jeux de données complexes et la classification fine. Avec la formation avancée, vous pouvez spécifier un budget de temps de calcul pour la formation. Custom Vision identifiera de manière expérimentale les meilleurs paramètres de formation et d’augmentation. Pour les itérations rapides, vous pouvez continuer à utiliser la formation rapide existante.
-- Lancement des API 3.0. Prochaine dépréciation annoncée des API antérieures à 3.0 le 1er octobre 2019. Consultez les Démarrages rapides dans la documentation pour [.Net](https://docs.microsoft.com/azure/cognitive-services/custom-vision-service/csharp-tutorial), [Python](https://docs.microsoft.com/azure/cognitive-services/custom-vision-service/python-tutorial), [Node](https://docs.microsoft.com/azure/cognitive-services/custom-vision-service/node-tutorial), [Java](https://docs.microsoft.com/azure/cognitive-services/custom-vision-service/java-tutorial) ou [Go](https://docs.microsoft.com/azure/cognitive-services/custom-vision-service/go-tutorial) pour obtenir des exemples sur la prise en main.
+- Lancement des API 3.0. Prochaine dépréciation annoncée des API antérieures à 3.0 le 1er octobre 2019. Consultez les Démarrages rapides dans la documentation pour [.Net](./quickstarts/image-classification.md), [Python](./quickstarts/image-classification.md), [Node](./quickstarts/image-classification.md), [Java](./quickstarts/image-classification.md) ou [Go](./quickstarts/image-classification.md) pour obtenir des exemples sur la prise en main.
 - « Itérations par défaut » remplacées par Publier/Dépublier dans les API 3.0.
 - De nouvelles cibles d’exportation de modèle ont été ajoutées. L’exportation Dockerfile a été mise à niveau pour prendre en charge ARM pour Raspberry Pi 3. Prise en charge de l’exportation ajoutée au [Kit Vision AI Dev](https://visionaidevkit.com/).
 - Augmentation de la limite de balises par projet à 500 pour le niveau S0. Augmentation de la limite d’images par projet à 100 000 pour le niveau S0.

@@ -11,12 +11,12 @@ metadata:
   author: tfitzmac
   ms.author: tomfitz
   ms.date: 03/04/2020
-  ms.openlocfilehash: 6a0c4ecff3f381dc12ba3ce6f385782754857bfe
-  ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+  ms.openlocfilehash: e844a428910a220d77c143baa74124a112135387
+  ms.sourcegitcommit: 5e5a0abe60803704cf8afd407784a1c9469e545f
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 03/24/2020
-  ms.locfileid: "78297726"
+  ms.lasthandoff: 12/01/2020
+  ms.locfileid: "96435210"
 highlightedContent:
   items:
   - title: Présentation de Resource Manager
@@ -46,7 +46,7 @@ conceptualContent:
       text: Fonctions des modèles de gestionnaire des ressources Azure
     - url: /azure/templates/
       itemType: reference
-      text: Référence de modèle
+      text: Informations de référence sur les modèles
     - url: templates/deploy-powershell.md
       itemType: how-to-guide
       text: Déployer
@@ -55,7 +55,7 @@ conceptualContent:
       text: Meilleures pratiques
     footerLink:
       url: templates/index.yml
-      text: En savoir plus
+      text: Voir plus
   - title: Gestion des ressources
     links:
     - url: management/overview.md
@@ -78,7 +78,7 @@ conceptualContent:
       text: Limites du service et de l’abonnement
     footerLink:
       url: management/index.yml
-      text: En savoir plus
+      text: Voir plus
   - title: Applications gérées
     links:
     - url: managed-applications/overview.md
@@ -90,12 +90,12 @@ conceptualContent:
     - url: managed-applications/create-uidefinition-overview.md
       itemType: how-to-guide
       text: Définir le volet de portail pour créer une application
-    - url: managed-applications/publish-marketplace-app.md
+    - url: ../marketplace/create-new-azure-apps-offer.md
       itemType: tutorial
       text: Ajouter une application à la Place de marché
     footerLink:
       url: managed-applications/index.yml
-      text: En savoir plus
+      text: Voir plus
   - title: Fournisseurs personnalisés Azure
     links:
     - url: custom-providers/overview.md

@@ -5,19 +5,19 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
+ms.topic: how-to
 ms.custom: hdinsightactive
 ms.date: 04/13/2020
-ms.openlocfilehash: a3884fdfbbc215c305053d8615d690880f4026ea
-ms.sourcegitcommit: 7e04a51363de29322de08d2c5024d97506937a60
+ms.openlocfilehash: b70de1915e6c068bd658dff60776085075412789
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/14/2020
-ms.locfileid: "81314159"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96024008"
 ---
 # <a name="use-azure-toolkit-for-intellij-to-create-apache-spark-applications-for-hdinsight-cluster"></a>Utiliser Azure Toolkit for IntelliJ afin de créer des applications Apache Spark pour le cluster HDInsight
 
-Cet article montre comment développer des applications Apache Spark sur Azure HDInsight en utilisant le plug-in **Azure Toolkit**pour l’IDE IntelliJ. [Azure HDInsight](../hdinsight-overview.md) est un service cloud d’analytique managé open source. Il vous permet d’utiliser des frameworks open source tels que Hadoop, Apache Spark, Apache Hive et Apache Kafka.
+Cet article montre comment développer des applications Apache Spark sur Azure HDInsight en utilisant le plug-in **Azure Toolkit** pour l’IDE IntelliJ. [Azure HDInsight](../hdinsight-overview.md) est un service cloud d’analytique managé open source. Il vous permet d’utiliser des frameworks open source tels que Hadoop, Apache Spark, Apache Hive et Apache Kafka.
 
 Vous pouvez utiliser le plug-in **Azure Toolkit** de différentes façons :
 
@@ -39,7 +39,7 @@ Dans cet article, vous apprendrez comment :
 
 * IntelliJ IDEA. Cet article utilise [IntelliJ IDEA Community  version 2018.3.4](https://www.jetbrains.com/idea/download/).
 
-* Azure Toolkit for IntelliJ.  Consultez [Installation d’Azure Toolkit for IntelliJ](https://docs.microsoft.com/java/azure/intellij/azure-toolkit-for-intellij-installation?view=azure-java-stable).
+* Azure Toolkit for IntelliJ.  Consultez [Installation d’Azure Toolkit for IntelliJ](/azure/developer/java/toolkit-for-intellij/).
 
 ## <a name="install-scala-plugin-for-intellij-idea"></a>Installer le plug-in Scala pour IntelliJ IDEA
 
@@ -239,7 +239,7 @@ Après avoir créé l’application Scala, vous pouvez l’envoyer au cluster.
     |Main class name|La valeur par défaut est la classe principale du fichier sélectionné. Vous pouvez changer la classe en sélectionnant les points de suspension ( **...** ), puis en choisissant une autre classe.|
     |Configurations du travail|Vous pouvez changer les clés et/ou les valeurs par défaut. Pour plus d’informations, consultez [API REST Apache Livy](https://livy.incubator.apache.org/docs/latest/rest-api.html).|
     |Arguments de ligne de commande|Vous pouvez entrer des arguments séparés par un espace pour la classe main, si nécessaire.|
-    |JAR référencés et fichiers référencés|vous pouvez entrer les chemins des fichiers jar et des fichiers référencés, si vous en avez. Vous pouvez également parcourir les fichiers dans le système de fichiers virtuel Azure, qui ne prend en charge que le cluster ADLS Gen 2. Pour plus d'informations : [Apache Spark Configuration](https://spark.apache.org/docs/latest/configuration.html#runtime-environment).  Consultez également [Guide pratique pour charger des ressources sur un cluster](https://docs.microsoft.com/azure/storage/blobs/storage-quickstart-blobs-storage-explorer).|
+    |JAR référencés et fichiers référencés|vous pouvez entrer les chemins des fichiers jar et des fichiers référencés, si vous en avez. Vous pouvez également parcourir les fichiers dans le système de fichiers virtuel Azure, qui ne prend en charge que le cluster ADLS Gen 2. Pour plus d'informations : [Apache Spark Configuration](https://spark.apache.org/docs/latest/configuration.html#runtime-environment).  Consultez également [Guide pratique pour charger des ressources sur un cluster](../../storage/blobs/storage-quickstart-blobs-storage-explorer.md).|
     |Stockage des chargements de travaux|Développez pour afficher des options supplémentaires.|
     |Type de stockage|Sélectionnez **Utiliser l’objet blob Azure pour charger** dans la liste déroulante.|
     |Compte de stockage|Entrez votre compte de stockage.|
@@ -262,7 +262,7 @@ Vous pouvez effectuer diverses opérations à l’aide d’Azure Toolkit for Int
 
 ### <a name="access-the-job-view"></a>Accéder à la vue des travaux
 
-1. Dans Azure Explorer, accédez à **HDInsight** > \<votre_cluster> > **Travaux**.
+1. Dans Azure Explorer, accédez à **HDInsight** > \<Your Cluster> > **Travaux**.
 
     ![IntelliJ - Nœud de la vue des travaux dans Azure Explorer](./media/apache-spark-intellij-tool-plugin/intellij-job-view-node.png)
 
@@ -450,15 +450,15 @@ Vous pouvez convertir les applications Spark Scala existantes que vous avez cré
 
 2. Au niveau de la racine se trouve un élément **module** ressemblant au texte suivant :
 
-        ```
-        <module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
-        ```
+    ```xml
+    <module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
+    ```
 
    Ajoutez `UniqueKey="HDInsightTool"` à l’élément **module**, qui doit alors ressembler au texte suivant :
 
-        ```
-        <module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4" UniqueKey="HDInsightTool">
-        ```
+    ```xml
+    <module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4" UniqueKey="HDInsightTool">
+    ```
 
 3. Enregistrez les modifications. Votre application doit maintenant être compatible avec le kit de ressources Azure pour IntelliJ. Vous pouvez effectuer un test en cliquant avec le bouton droit sur le nom du projet dans Project. Le menu contextuel doit maintenant comporter l’option **Submit Spark Application to HDInsight**(Envoyer l’application Spark à HDInsight).
 

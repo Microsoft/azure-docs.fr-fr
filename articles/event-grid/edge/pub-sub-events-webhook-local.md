@@ -5,16 +5,14 @@ author: VidyaKukke
 manager: rajarv
 ms.author: vkukke
 ms.reviewer: spelluru
-ms.date: 10/29/2019
+ms.date: 07/08/2020
 ms.topic: article
-ms.service: event-grid
-services: event-grid
-ms.openlocfilehash: ba82b1bea4753cd51e275a78b248247032d79a01
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 2a7cc864366bd9a35c96dd453c0dc68f77d8abd9
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79236245"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86171446"
 ---
 # <a name="tutorial-publish-subscribe-to-events-locally"></a>Tutoriel : Publier, s'abonner à des événements localement
 

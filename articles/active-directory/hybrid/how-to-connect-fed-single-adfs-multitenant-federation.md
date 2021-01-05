@@ -12,17 +12,17 @@ ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 07/17/2017
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 9122e3a7af2230dc0f68e72b28891d488b01a80a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 956428b6f197912e2ab7c3a94133ed9d59f37749
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "65137835"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89279922"
 ---
 # <a name="federate-multiple-instances-of-azure-ad-with-single-instance-of-ad-fs"></a>Fédérer plusieurs instances d’Azure AD avec une seule instance d’AD FS
 
@@ -42,7 +42,7 @@ Prenons un domaine contoso.com dans Azure Active Directory : contoso.onmicrosoft
 
 ## <a name="step-1-establish-a-two-way-trust"></a>Étape 1 : Établir une relation d’approbation bidirectionnelle
  
-Pour qu’AD FS dans contoso.com puisse authentifier les utilisateurs de fabrikam.com, une approbation bidirectionnelle est nécessaire entre contoso.com et fabrikam.com. Suivez les instructions de cet [article](https://technet.microsoft.com/library/cc816590.aspx) pour créer l’approbation bidirectionnelle.
+Pour qu’AD FS dans contoso.com puisse authentifier les utilisateurs de fabrikam.com, une approbation bidirectionnelle est nécessaire entre contoso.com et fabrikam.com. Suivez les instructions de cet [article](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc816590(v=ws.10)) pour créer l’approbation bidirectionnelle.
  
 ## <a name="step-2-modify-contosocom-federation-settings"></a>Étape 2 : Modifier les paramètres de fédération contoso.com 
  
@@ -58,10 +58,14 @@ L’émetteur du paramètre de fédération de domaines sera remplacé par « h
  
 Dans la session PowerShell Azure AD, procédez comme suit : Connectez-vous au Azure Active Directory qui contient le domaine fabrikam.com
 
-    Connect-MsolService
+```powershell
+Connect-MsolService
+```
 Convertissez le domaine managé fabrikam.com en un domaine fédéré :
 
-    Convert-MsolDomainToFederated -DomainName fabrikam.com -Verbose -SupportMultipleDomain
+```powershell
+Convert-MsolDomainToFederated -DomainName fabrikam.com -Verbose -SupportMultipleDomain
+```
  
 L’opération ci-dessus fédère le domaine fabrikam.com avec la même instance d’AD FS. Vous pouvez vérifier les paramètres de domaine en utilisant Get-MsolDomainFederationSettings pour les deux domaines.
 

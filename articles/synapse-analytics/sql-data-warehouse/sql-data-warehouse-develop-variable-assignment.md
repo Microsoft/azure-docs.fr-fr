@@ -1,30 +1,30 @@
 ---
 title: Affecter des variables
-description: Dans cet article, vous trouverez des conseils essentiels pour l’attribution de variables T-SQL dans un pool SQL.
+description: Dans cet article, vous trouverez des conseils essentiels concernant l’affectation de variables T-SQL pour des pools SQL dédiés dans Azure Synapse Analytics.
 services: synapse-analytics
-author: XiaoyuMSFT
+author: MSTehrani
 manager: craigg
 ms.service: synapse-analytics
 ms.topic: conceptual
-ms.subservice: ''
+ms.subservice: sql-dw
 ms.date: 04/17/2018
-ms.author: xiaoyul
+ms.author: emtehran
 ms.reviewer: igorstan
-ms.custom: seo-lt-2019
-ms.openlocfilehash: 2dcf706ea59657abc2718a69e59191604dc2849d
-ms.sourcegitcommit: d597800237783fc384875123ba47aab5671ceb88
+ms.custom: seo-lt-2019, azure-synapse
+ms.openlocfilehash: 87448ea737c11af13a52632e5bf4f67dc54d9ae3
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/03/2020
-ms.locfileid: "80633406"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96459228"
 ---
-# <a name="assign-variables-in-synapse-sql-pool"></a>Attribuer des variables dans le pool SQL Synapse
+# <a name="assign-variables-for-dedicated-sql-pools-in-azure-synapse-analytics"></a>Affecter des variables pour des pools SQL dédiés dans Azure Synapse Analytics
 
-Dans cet article, vous trouverez des conseils essentiels pour l’attribution de variables T-SQL dans un pool SQL.
+Cet article fournit des conseils essentiels concernant l’affectation de variables T-SQL dans un pool SQL dédié.
 
 ## <a name="set-variables-with-declare"></a>Définir des variables via l’instruction DECLARE
 
-Dans le pool SQL, les variables sont définies au moyen de l’instruction `DECLARE` ou `SET`. L’initialisation de variables avec l’instruction DECLARE constitue l’une des méthodes les plus flexibles pour définir une valeur de variable dans un pool SQL.
+Dans le pool SQL dédié, les variables sont définies à l’aide de l’instruction `DECLARE` ou `SET`. L’initialisation de variables avec l’instruction DECLARE constitue l’une des méthodes les plus flexibles pour définir une valeur de variable dans un pool SQL.
 
 ```sql
 DECLARE @v  int = 0

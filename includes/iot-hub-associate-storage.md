@@ -1,6 +1,6 @@
 ---
-title: Fichier Include
-description: Fichier Include
+title: Fichier include
+description: Fichier include
 services: iot-edge
 author: kgremban
 ms.service: iot-edge
@@ -9,10 +9,10 @@ ms.date: 01/22/2019
 ms.author: kgremban
 ms.custom: include file
 ms.openlocfilehash: ebc23ce4238c736442fbc4507e858876f9192fd9
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "76020899"
 ---
 ## <a name="associate-an-azure-storage-account-to-iot-hub"></a>Associer un compte Azure Storage à IoT Hub

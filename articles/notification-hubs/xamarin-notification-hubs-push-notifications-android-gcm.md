@@ -12,17 +12,17 @@ ms.workload: mobile
 ms.tgt_pltfrm: mobile-xamarin-android
 ms.devlang: dotnet
 ms.topic: tutorial
-ms.custom: mvc
+ms.custom: mvc, devx-track-csharp
 ms.date: 08/01/2019
 ms.author: sethm
 ms.reviewer: jowargo
 ms.lastreviewed: 08/01/2019
-ms.openlocfilehash: 0e4354fa7466efcf27f430bbce7edb30bb9a304c
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 95e244f956940f9d75df50243714f0fb8f8d0654
+ms.sourcegitcommit: 6906980890a8321dec78dd174e6a7eb5f5fcc029
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "72387667"
+ms.lasthandoff: 10/22/2020
+ms.locfileid: "92424171"
 ---
 # <a name="tutorial-send-push-notifications-to-xamarinandroid-apps-using-notification-hubs"></a>Tutoriel : Envoyer des notifications Push vers des applications Xamarin.Android à l’aide de Notification Hubs
 
@@ -60,7 +60,7 @@ Dans ce tutoriel, vous effectuez les étapes suivantes :
 2. Entrez la **clé du serveur** que vous avez notée à partir de la console Google Firebase.
 3. Sélectionnez **Enregistrer** dans la barre d’outils.
 
-    ![](./media/notification-hubs-android-get-started/notification-hubs-gcm-api.png)
+    ![Capture d’écran du hub de notification dans le portail Azure avec l’option Google GCM/FCM encadrée en rouge.](./media/notification-hubs-android-get-started/notification-hubs-gcm-api.png)
 
 Votre concentrateur de notification est configuré pour FCM, et vous disposez des chaînes de connexion vous permettant d’inscrire votre application pour la réception de notifications et l’envoi de notifications Push.
 
@@ -71,18 +71,18 @@ Votre concentrateur de notification est configuré pour FCM, et vous disposez de
 > [!NOTE]
 > Les étapes décrites dans ce tutoriel sont destinées à Visual Studio 2017. 
 
-1. Dans Visual Studio, ouvrez le menu **Fichier**, sélectionnez **Nouveau**, puis **Projet**. Dans la fenêtre **Nouveau projet**, procédez comme suit :
-    1. Développez **Installé**, **Visual C#** , puis cliquez sur **Android**.
+1. Dans Visual Studio, ouvrez le menu **Fichier** , sélectionnez **Nouveau** , puis **Projet**. Dans la fenêtre **Nouveau projet** , procédez comme suit :
+    1. Développez **Installé** , **Visual C#** , puis cliquez sur **Android**.
     2. Sélectionnez **Application Android (Xamarin)** dans la liste.
     3. Entrez un **nom** pour le projet.
     4. Sélectionnez un **emplacement** pour le projet.
     5. Sélectionnez **OK**.
 
         ![Boîte de dialogue Nouveau projet](./media/partner-xamarin-notification-hubs-android-get-started/new-project-dialog-new.png)
-2. Dans la boîte de dialogue **application Android**, sélectionnez **Application vide**, puis **OK**.
+2. Dans la boîte de dialogue **application Android** , sélectionnez **Application vide** , puis **OK**.
 
-    ![Boîte de dialogue Nouveau projet](./media/partner-xamarin-notification-hubs-android-get-started/new-android-app-dialog.png)
-3. Dans la fenêtre **Explorateur de solutions**, développez **Propriétés**, puis cliquez sur **AndroidManifest.xml**. Mettez à jour le nom du package pour correspondre au nom de package que vous avez saisi lors de l’ajout de Firebase Cloud Messaging à votre projet dans la Google Firebase Console.
+    ![Capture d’écran qui met en évidence le modèle Application vide.](./media/partner-xamarin-notification-hubs-android-get-started/new-android-app-dialog.png)
+3. Dans la fenêtre **Explorateur de solutions** , développez **Propriétés** , puis cliquez sur **AndroidManifest.xml**. Mettez à jour le nom du package pour correspondre au nom de package que vous avez saisi lors de l’ajout de Firebase Cloud Messaging à votre projet dans la Google Firebase Console.
 
     ![Nom du package dans GCM](./media/partner-xamarin-notification-hubs-android-get-started/package-name-gcm.png)
 4. Définissez la version Android cible du projet sur **Android 9.0 (Pie)** en suivant ces étapes : 
@@ -91,19 +91,19 @@ Votre concentrateur de notification est configuré pour FCM, et vous disposez de
     1. Sélectionnez **Oui** dans la boîte de message pour poursuivre la modification du framework cible.
 1. Ajoutez au projet les packages NuGet demandés en suivant ces étapes :
     1. Cliquez avec le bouton droit sur votre projet et sélectionnez **Gérer les packages NuGet...** .
-    1. Basculez vers l’onglet **Installé**, sélectionnez **Xamarin.Android.Support.Design**, puis sélectionnez **Mettre à jour** dans le volet droit pour actualiser le package avec la dernière version.
+    1. Basculez vers l’onglet **Installé** , sélectionnez **Xamarin.Android.Support.Design** , puis sélectionnez **Mettre à jour** dans le volet droit pour actualiser le package avec la dernière version.
     1. Basculez vers l’onglet **Parcourir**. Recherchez **Xamarin.GooglePlayServices.Base**. Sélectionnez **Xamarin.GooglePlayServices.Base** dans la liste des résultats. Sélectionnez **Installer**.
 
         ![Package NuGet de Google Play Services](./media/partner-xamarin-notification-hubs-android-get-started/google-play-services-nuget.png)
-    6. Dans la fenêtre **Gestionnaire de packages NuGet**, recherchez **Xamarin.Firebase.Messaging**. Sélectionnez **Xamarin.Firebase.Messaging** dans la liste des résultats. Sélectionnez **Installer**.
+    6. Dans la fenêtre **Gestionnaire de packages NuGet** , recherchez **Xamarin.Firebase.Messaging**. Sélectionnez **Xamarin.Firebase.Messaging** dans la liste des résultats. Sélectionnez **Installer**.
     7. Recherchez maintenant **Xamarin.Azure.NotificationHubs.Android**. Sélectionnez **Xamarin.Azure.NotificationHubs.Android** dans la liste des résultats. Sélectionnez **Installer**.
 
 ### <a name="add-the-google-services-json-file"></a>Ajout du fichier JSON Google Services
 
 1. Copiez dans le dossier du projet le fichier `google-services.json` que vous avez téléchargé à partir de la console Google Firebase.
 2. Ajoutez `google-services.json` au projet.
-3. Sélectionnez `google-services.json` dans la fenêtre de l’**Explorateur de solutions**.
-4. Dans le volet **Propriétés**, définissez l’action de génération sur **GoogleServicesJson**. Si vous ne voyez pas **GoogleServicesJson**, fermez et redémarrez Visual Studio, rouvrez le projet et réessayez.
+3. Sélectionnez `google-services.json` dans la fenêtre de l’ **Explorateur de solutions**.
+4. Dans le volet **Propriétés** , définissez l’action de génération sur **GoogleServicesJson**. Si vous ne voyez pas **GoogleServicesJson** , fermez et redémarrez Visual Studio, rouvrez le projet et réessayez.
 
     ![Action de génération GoogleServicesJson](./media/partner-xamarin-notification-hubs-android-get-started/google-services-json-build-action.png)
 
@@ -136,8 +136,8 @@ Votre concentrateur de notification est configuré pour FCM, et vous disposez de
 3. Collectez les informations suivantes pour votre application Android et votre concentrateur de notifications :
 
    * **Listen connection string** (Chaîne de connexion d’écoute) : dans le tableau de bord du [Azure portal], sélectionnez **Afficher les chaînes de connexion**. Copiez la chaîne de connexion `DefaultListenSharedAccessSignature` pour cette valeur.
-   * **Hub name** : nom de votre hub sur le [Azure portal]. Par exemple, *mynotificationhub2*.
-4. Dans la fenêtre de l’**Explorateur de solutions**, cliquez avec le bouton droit sur votre **projet**, sélectionnez **Ajouter**, puis **Classe**.
+   * **Hub name**  : nom de votre hub sur le [Azure portal]. Par exemple, *mynotificationhub2*.
+4. Dans la fenêtre de l’ **Explorateur de solutions** , cliquez avec le bouton droit sur votre **projet** , sélectionnez **Ajouter** , puis **Classe**.
 5. Créez une classe `Constants.cs` pour votre projet Xamarin et définissez les valeurs constantes suivantes dans la classe. Remplacez les espaces réservés par vos valeurs.
 
     ```csharp
@@ -248,7 +248,7 @@ Votre concentrateur de notification est configuré pour FCM, et vous disposez de
     public class MyFirebaseMessagingService : FirebaseMessagingService
     ```
 
-18. Ajoutez le code suivant à `MyFirebaseMessagingService.cs` pour traiter les messages reçus. 
+18. Ajoutez le code suivant dans la classe `MyFirebaseMessagingService` pour traiter les messages reçus. 
 
     ```csharp
         const string TAG = "MyFirebaseMsgService";
@@ -292,7 +292,7 @@ Votre concentrateur de notification est configuré pour FCM, et vous disposez de
         }
     ```
 
-19. Ajoutez les méthodes suivantes à la classe MyFirebaseMessagingService pour recevoir le jeton d’inscription FCM et l’envoyer à l’instance Notification Hubs (hub). 
+19. Ajoutez les méthodes suivantes à la classe MyFirebaseMessagingService (directement sous le code ajouté à l’étape précédente) pour recevoir le jeton d’inscription FCM et l’envoyer à l’instance Notification Hubs (hub). 
 
     ```csharp
         public override void OnNewToken(string token)
@@ -359,12 +359,12 @@ Dans ce didacticiel, vous avez envoyé des notifications de diffusion à tous vo
 [Live SDK for Windows]: https://go.microsoft.com/fwlink/p/?LinkId=262253
 [Get started with Mobile Services]: /develop/mobile/tutorials/get-started-xamarin-android/#create-new-service
 [JavaScript and HTML]: /develop/mobile/tutorials/get-started-with-push-js
-[Visual Studio avec Xamarin]: https://docs.microsoft.com/visualstudio/install/install-visual-studio
+[Visual Studio avec Xamarin]: /visualstudio/install/install-visual-studio
 [Visual Studio pour Mac]: https://www.visualstudio.com/vs/visual-studio-mac/
 [Azure portal]: https://portal.azure.com/
-[wns object]: https://go.microsoft.com/fwlink/p/?LinkId=260591
-[Notification Hubs Guidance]: https://msdn.microsoft.com/library/jj927170.aspx
-[Notification Hubs How-To for Android]: https://msdn.microsoft.com/library/dn282661.aspx
+[wns object]: /previous-versions/azure/reference/jj860484(v=azure.100)
+[Notification Hubs Guidance]: /previous-versions/azure/azure-services/jj927170(v=azure.100)
+[Notification Hubs How-To for Android]: /previous-versions/azure/dn282661(v=azure.100)
 [Use Notification Hubs to push notifications to users]: notification-hubs-aspnet-backend-ios-apple-apns-notification.md
 [Use Notification Hubs to send breaking news]: notification-hubs-windows-notification-dotnet-push-xplat-segmented-wns.md
 [GitHub]: https://github.com/Azure/azure-notificationhubs-android

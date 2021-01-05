@@ -1,16 +1,16 @@
 ---
-title: Effectuer le rendu d’une scène de Blender avec Azure Batch et Batch Explorer
+title: Tutoriel - Effectuer le rendu d’une scène de Blender avec Azure Batch et Batch Explorer
 description: 'Didacticiel : comment effectuer le rendu de plusieurs images à partir d’une scène de Blender avec Azure Batch et l’application cliente Batch Explorer'
 author: mscurrell
 ms.author: markscu
 ms.date: 08/02/2018
 ms.topic: tutorial
-ms.openlocfilehash: ca23bbc2b53eaaaf1848a7a98228be23c9ffed0c
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 5c015e4e83b0505a45690e92c1d732f74b6f6b0e
+ms.sourcegitcommit: 6172a6ae13d7062a0a5e00ff411fd363b5c38597
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82117078"
+ms.lasthandoff: 12/11/2020
+ms.locfileid: "97106459"
 ---
 # <a name="tutorial-render-a-blender-scene-using-batch-explorer"></a>Didacticiel : Effectuer le rendu d’une scène de Blender avec Batch Explorer
 
@@ -27,9 +27,9 @@ Dans ce tutoriel, vous allez apprendre à :
 
 Vous avez besoin d’un abonnement de paiement à l’utilisation ou autre option d’achat Azure pour utiliser les applications de rendu dans Batch sur une base de paiement à l’utilisation. Les licences de paiement à l’utilisation ne sont pas prises en charge si vous utilisez une offre Azure gratuite qui propose un crédit monétaire.
 
-Un compte Azure Batch avec un compte de stockage associé est requis.  Consultez un des articles de démarrage rapide de Batch, comme [l’article CLI](https://docs.microsoft.com/azure/batch/quick-create-cli) pour créer un compte Batch.
+Un compte Azure Batch avec un compte de stockage associé est requis.  Consultez un des articles de démarrage rapide de Batch, comme [l’article CLI](./quick-create-cli.md) pour créer un compte Batch.
 
-Un quota de cœurs de faible priorité d’au moins 50 cœurs est requis pour la taille de machine virtuelle et le nombre de machines virtuelles spécifiées dans ce didacticiel. Le quota par défaut peut être utilisé, mais une machine virtuelle de plus petite taille devra être utilisée, ce qui signifie que le rendu des images prendra plus de temps. Le processus permettant de demander une augmentation du quota de cœurs accrue est détaillé dans [cet article](https://docs.microsoft.com/azure/batch/batch-quota-limit).
+Un quota de cœurs de faible priorité d’au moins 50 cœurs est requis pour la taille de machine virtuelle et le nombre de machines virtuelles spécifiées dans ce didacticiel. Le quota par défaut peut être utilisé, mais une machine virtuelle de plus petite taille devra être utilisée, ce qui signifie que le rendu des images prendra plus de temps. Le processus permettant de demander une augmentation du quota de cœurs accrue est détaillé dans [cet article](./batch-quota-limit.md).
 
 Enfin, [Batch Explorer](https://azure.github.io/BatchExplorer/) doit être installé. Il est disponible sur Windows, OSX et Linux. Il est facultatif, mais si [Blender](https://www.blender.org/download/) est installé, l’exemple de fichier modèle peut être affiché.
 
@@ -93,6 +93,7 @@ L’état du pool et des machines virtuelles peut être surveillé dans la vue �
 ## <a name="create-a-rendering-job"></a>Créer un travail de rendu
 
 Créez un travail de rendu pour effectuer le rendu d’images à l’aide du pool créé :
+
 * Sélectionnez l’élément de menu « Galerie » dans le menu principal sur le côté gauche.
 * Sélectionnez l’élément « Blender » pour obtenir la liste des éléments de l’application.
 * Sélectionnez les éléments pour le rendu des images sur Windows Server.
@@ -137,6 +138,18 @@ Une fois toutes les tâches terminées, le travail est marqué comme étant term
 * Faites un clic droit et cliquez sur « Supprimer » ou bien sélectionnez l’icône Corbeille au-dessus du pool
 
 ## <a name="next-steps"></a>Étapes suivantes
-* Dans la section « Galerie », explorez les applications de rendu disponibles via Batch Explorer.
-* Pour chaque application, plusieurs modèles sont disponibles, et d’autres seront disponibles au fil du temps.  Par exemple, des modèles Blender permettent de diviser une image en une mosaïque, de sorte que des parties de l’image puissent être rendues en parallèle.
-* Pour une description complète des fonctionnalités de rendu, consultez l’ensemble des articles [ici](https://docs.microsoft.com/azure/batch/batch-rendering-service).
+
+Dans ce didacticiel, vous avez appris à :
+
+> [!div class="checklist"]
+> * Charger une scène de Blender sur le Stockage Azure
+> * Créer un pool Batch avec plusieurs nœuds pour effectuer le rendu
+> * Effectuer le rendu de plusieurs images
+> * Afficher et télécharger les fichiers de rendu des images
+
+Continuez en explorant les applications de rendu disponibles par le biais de Batch Explorer dans la section **Galerie**. Pour chaque application, plusieurs modèles sont disponibles, et d’autres seront disponibles au fil du temps. Par exemple, des modèles Blender permettent de diviser une image en une mosaïque, de sorte que des parties de l’image puissent être rendues en parallèle.
+
+Pour en savoir plus sur le rendu à l’échelle du cloud, consultez les options relatives au service Batch Rendering.
+
+> [!div class="nextstepaction"]
+> [Service de rendu Batch](batch-rendering-service.md)

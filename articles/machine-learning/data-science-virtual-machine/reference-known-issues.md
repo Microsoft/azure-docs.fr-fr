@@ -9,12 +9,12 @@ author: gvashishtha
 ms.author: gopalv
 ms.topic: reference
 ms.date: 10/10/2019
-ms.openlocfilehash: b83effa95b17d712d4019f8ab5bf13c4f02a7d2b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 864b5e519875029149e93df248aa5953f62ec51e
+ms.sourcegitcommit: 96918333d87f4029d4d6af7ac44635c833abb3da
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78206518"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93322951"
 ---
 # <a name="known-issues-and-troubleshooting-the-azure-data-science-virtual-machine"></a>Problèmes connus et dépannage d’Azure Data Science Virtual Machine
 
@@ -30,7 +30,7 @@ Utilisez `sudo pip install` à la place de `pip install` lors de l’installatio
 
 ### <a name="disk-encryption-fails-on-the-ubuntu-dsvm"></a>Le chiffrement de disque échoue sur la machine virtuelle DSVM Ubuntu
 
-Azure Disk Encryption (ADE) n’est actuellement pas pris en charge sur la machine virtuelle DSVM Ubuntu. Pour contourner ce problème, envisagez de configurer le [chiffrement côté serveur des disques managés Azure](../../virtual-machines/windows/disk-encryption.md).
+Azure Disk Encryption (ADE) n’est actuellement pas pris en charge sur la machine virtuelle DSVM Ubuntu. Pour contourner ce problème, envisagez de configurer le [chiffrement côté serveur des disques managés Azure](../../virtual-machines/disk-encryption.md).
 
 ## <a name="tool-appears-disabled"></a>Un outil apparaît désactivé
 
@@ -46,4 +46,3 @@ Pour le moment, Hyper-V ne fonctionne pas sur Windows. Pour garantir les perform
 Votre écran final doit ressembler à ceci :
 
    ![Activer Hyper-V](./media/workaround/hyperv-enable-dsvm.png)
-

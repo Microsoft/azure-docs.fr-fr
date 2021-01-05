@@ -4,12 +4,12 @@ ms.service: storsimple
 ms.topic: include
 ms.date: 10/26/2018
 ms.author: alkohli
-ms.openlocfilehash: 7700f1c92aecab76dbc347814b7b161bc3d822a0
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 338332eb90fda9afe7655f9f2ad19ed726419b6c
+ms.sourcegitcommit: c95e2d89a5a3cf5e2983ffcc206f056a7992df7d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "67177119"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95557267"
 ---
 ### <a name="to-configure-and-register-the-device"></a>Configuration et inscription de l’appareil
 1. Accédez à l’interface Windows PowerShell sur la console série de votre appareil StorSimple. Consultez la page [Utilisation de PuTTY pour se connecter à la console en série de l’appareil](../articles/storsimple/storsimple-8000-deployment-walkthrough-gov-u2.md#use-putty-to-connect-to-the-device-serial-console) pour obtenir des instructions. **Veillez à suivre la procédure pas à pas, sans quoi vous ne pourrez pas accéder à la console.**
@@ -43,7 +43,7 @@ ms.locfileid: "67177119"
    4. Configurez éventuellement votre serveur proxy web.
       
       > [!IMPORTANT]
-      > Bien que la configuration du proxy web soit facultative, si vous en utilisez un, vous pouvez uniquement le configurer ici. Pour plus d’informations, consultez la section [Configuration du proxy web pour votre appareil](../articles/storsimple/storsimple-configure-web-proxy.md).
+      > Bien que la configuration du proxy web soit facultative, si vous en utilisez un, vous pouvez uniquement le configurer ici. Pour plus d’informations, consultez la section [Configuration du proxy web pour votre appareil](../articles/storsimple/storsimple-8000-configure-web-proxy.md).
      
 6. Appuyez sur Ctrl+C pour quitter l’Assistant Installation.
 8. Exécutez l’applet de commande suivante pour faire pointer l’appareil vers le portail Microsoft Azure Government (il pointe en effet vers le portail Azure Classic par défaut). Les deux contrôleurs redémarrent. Nous vous recommandons d’utiliser deux sessions PuTTY pour vous connecter simultanément aux deux contrôleurs afin de voir quand chacun d’eux est redémarré.
@@ -86,4 +86,3 @@ ms.locfileid: "67177119"
         Si l’appareil est toujours déconnecté après quelques minutes, vous devez vous assurer que votre réseau de pare-feu a été configuré comme décrit dans [Configuration réseau requise pour votre appareil StorSimple](../articles/storsimple/storsimple-8000-system-requirements.md).
        
         Vérifiez que le port 9354 est ouvert pour la communication sortante, car le Service Bus l’utilise pour la communication entre le service StorSimple Device Manager et l’appareil.
-

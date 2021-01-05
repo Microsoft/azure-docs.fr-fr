@@ -1,21 +1,15 @@
 ---
-title: Fichier Include
-description: Fichier Include
-services: cognitive-services
-author: diberry
-manager: nitinme
-ms.custom: include file
-ms.service: cognitive-services
-ms.subservice: language-understanding
+title: Fichier include
+description: Fichier include
+ms.custom: seodec18
 ms.date: 02/14/2020
 ms.topic: include
-ms.author: diberry
-ms.openlocfilehash: 7c028127343fe522c7546fc68adcf950c7777df0
-ms.sourcegitcommit: 9ee0cbaf3a67f9c7442b79f5ae2e97a4dfc8227b
+ms.openlocfilehash: f9749c9e283a9b0c3c726856d51c49d2efc6743f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77371976"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91545678"
 ---
 ## <a name="clean-up-resources"></a>Nettoyer les ressources
 

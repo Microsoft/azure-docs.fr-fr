@@ -6,16 +6,16 @@ ms.topic: conceptual
 author: bwren
 ms.author: bwren
 ms.date: 03/12/2020
-ms.openlocfilehash: 61a71539dc034a216689eafd8991df60db96d2a4
-ms.sourcegitcommit: 632e7ed5449f85ca502ad216be8ec5dd7cd093cb
+ms.openlocfilehash: 118bdcb6929abfc162ff05e91f1621f087b6c50c
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/30/2020
-ms.locfileid: "80396922"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96186726"
 ---
 # <a name="how-to-query-logs-from-azure-monitor-for-vms"></a>Comment interroger des journaux d’activité à partir d’Azure Monitor pour les machines virtuelles
 
-Azure Monitor pour machines virtuelles collecte des métriques de performances et de connexion, les données d’inventaire des ordinateurs et processus et des informations concernant l’état d’intégrité, puis les transfère à l'espace de travail Log Analytics dans Azure Monitor.  Ces données sont disponibles pour la [requête](../../azure-monitor/log-query/log-query-overview.md) dans Azure Monitor. Vous pouvez appliquer ces données à divers scénarios tels que la planification de la migration, l’analyse de la capacité, la détection et la résolution de problèmes de performances à la demande.
+Azure Monitor pour machines virtuelles collecte des métriques de performances et de connexion, les données d’inventaire des ordinateurs et processus et des informations concernant l’état d’intégrité, puis les transfère à l'espace de travail Log Analytics dans Azure Monitor.  Ces données sont disponibles pour la [requête](../log-query/log-query-overview.md) dans Azure Monitor. Vous pouvez appliquer ces données à divers scénarios tels que la planification de la migration, l’analyse de la capacité, la détection et la résolution de problèmes de performances à la demande.
 
 ## <a name="map-records"></a>Mapper des enregistrements
 
@@ -454,7 +454,7 @@ Les compteurs de performance actuellement collectés dans la table *InsightsMetr
 | Espace de noms | Nom | Description | Unité | Balises |
 |:---|:---|:---|:---|:---|
 | Computer    | Heartbeat             | Pulsation de l’ordinateur                        | | |
-| Mémoire      | AvailableMB           | Mémoire en octets disponible                    | Octets          | memorySizeMB - Taille totale de la mémoire|
+| Mémoire      | AvailableMB           | Mémoire en octets disponible                    | Mo      | memorySizeMB - Taille totale de la mémoire|
 | Réseau     | WriteBytesPerSecond   | Octets écrits sur le réseau par seconde            | BytesPerSecond | NetworkDeviceId - ID de l’appareil<br>bytes - Nombre total d’octets envoyés |
 | Réseau     | ReadBytesPerSecond    | Octets lus sur le réseau par seconde             | BytesPerSecond | networkDeviceId - ID de l’appareil<br>bytes - Nombre total d’octets reçus |
 | Processeur   | UtilizationPercentage | Pourcentage d’utilisation du processeur          | Pourcentage        | totalCpus - Nombre total de processeurs |
@@ -467,12 +467,12 @@ Les compteurs de performance actuellement collectés dans la table *InsightsMetr
 | LogicalDisk | ReadLatencyMs         | Latence de lecture sur le disque logique en millisecondes     | Millisecondes   | mountId - ID de montage de l’appareil |
 | LogicalDisk | ReadBytesPerSecond    | Octets de lecture sur le disque logique par seconde        | BytesPerSecond | mountId - ID de montage de l’appareil |
 | LogicalDisk | FreeSpacePercentage   | Pourcentage d’espace libre sur le disque logique        | Pourcentage        | mountId - ID de montage de l’appareil |
-| LogicalDisk | FreeSpaceMB           | Espace libre du disque logique en octets             | Octets          | mountId - ID de montage de l’appareil<br>diskSizeMB - Taille totale du disque |
+| LogicalDisk | FreeSpaceMB           | Espace libre du disque logique en octets             | Mo      | mountId - ID de montage de l’appareil<br>diskSizeMB - Taille totale du disque |
 | LogicalDisk | BytesPerSecond        | Octets par seconde sur le disque logique             | BytesPerSecond | mountId - ID de montage de l’appareil |
 
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* Si vous débutez dans l’écriture de requêtes de journal dans Azure Monitor, consultez [Comment utiliser Log Analytics](../../azure-monitor/log-query/get-started-portal.md) dans le portail Azure pour en savoir plus.
+* Si vous débutez dans l’écriture de requêtes de journal dans Azure Monitor, consultez [Comment utiliser Log Analytics](../log-query/log-analytics-tutorial.md) dans le portail Azure pour en savoir plus.
 
-* Découvrez [l’écriture de requêtes de recherche](../../azure-monitor/log-query/search-queries.md).
+* Découvrez [l’écriture de requêtes de recherche](../log-query/get-started-queries.md).

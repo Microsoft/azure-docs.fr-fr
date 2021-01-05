@@ -7,18 +7,18 @@ author: rayluo
 manager: CelesteDG
 ms.service: active-directory
 ms.subservice: develop
-ms.topic: conceptual
+ms.topic: how-to
 ms.workload: identity
 ms.date: 11/13/2019
 ms.author: rayluo
 ms.reviewer: nacanuma
-ms.custom: aaddev
-ms.openlocfilehash: 9c6edd0b3cfd6620f04553f9f6dfe89f1c7b7024
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.custom: aaddev, devx-track-python
+ms.openlocfilehash: 7aaf59377949101ba8dd5c9454b89229e925e859
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81536197"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87846188"
 ---
 # <a name="custom-token-cache-serialization-in-msal-for-python"></a>Sérialisation personnalisée du cache de jetons dans MSAL pour Python
 

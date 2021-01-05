@@ -12,18 +12,18 @@ ms.author: sawinark
 author: swinarko
 ms.reviewer: douglasl
 manager: mflasko
-ms.custom: seo-lt-2019
-ms.date: 11/14/2019
-ms.openlocfilehash: f505313b37d5289a5af10c40ede7f376eab4841d
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.custom: seo-lt-2019, devx-track-azurepowershell
+ms.date: 07/20/2020
+ms.openlocfilehash: 1bd983f7faeff456b04d4b2958236193a827a2cc
+ms.sourcegitcommit: fb3c846de147cc2e3515cd8219d8c84790e3a442
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81605960"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92635012"
 ---
 # <a name="run-an-ssis-package-with-the-execute-ssis-package-activity-in-azure-data-factory"></a>Exécuter un package SSIS avec l’activité Exécuter le Package SSIS dans Azure Data Factory
 
-[!INCLUDE[appliesto-adf-asa-md](includes/appliesto-adf-asa-md.md)]
+[!INCLUDE[appliesto-adf-xxx-md](includes/appliesto-adf-xxx-md.md)]
 
 Cet article décrit comment exécuter un package SQL Server Integration Services (SSIS) dans un pipeline Azure Data Factory à l’aide de l’activité Exécuter le Package SSIS. 
 
@@ -31,7 +31,7 @@ Cet article décrit comment exécuter un package SQL Server Integration Services
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 
-Créez un runtime d’intégration Azure-SSIS si vous n’en avez pas encore en suivant les instructions pas à pas fournies dans le [Tutoriel : Approvisionnement de votre IR Azure-SSIS](tutorial-create-azure-ssis-runtime-portal.md).
+Créez un runtime d’intégration Azure-SSIS si vous n’en avez pas encore en suivant les instructions pas à pas fournies dans le [Tutoriel : Approvisionnement de votre IR Azure-SSIS](./tutorial-deploy-ssis-packages-azure.md).
 
 ## <a name="run-a-package-in-the-azure-portal"></a>Exécuter un package dans le portail Azure
 Dans cette section, vous utilisez l’interface utilisateur ou l’application de Data Factory pour créer un pipeline Data Factory avec une activité Exécuter le Package SSIS qui exécute votre package SSIS.
@@ -43,112 +43,272 @@ Lors de cette étape, vous utilisez l’interface utilisateur ou l’application
 
    ![Page d’accueil Data Factory](./media/how-to-invoke-ssis-package-stored-procedure-activity/data-factory-home-page.png)
 
-   Dans la page **Prise en main**, cliquez sur **Créer un pipeline**. 
+   Dans la page **Prise en main** , cliquez sur **Créer un pipeline** . 
 
    ![Page de prise en main](./media/how-to-invoke-ssis-package-stored-procedure-activity/get-started-page.png)
 
-1. Dans la boîte à outils **Activités**, étendez **Général**. Ensuitez, faites glisser une activité **Execute SSIS Package** jusqu’à l’aire du concepteur de pipeline. 
+1. Dans la boîte à outils **Activités** , étendez **Général** . Ensuitez, faites glisser une activité **Execute SSIS Package** jusqu’à l’aire du concepteur de pipeline. 
 
    ![Faire glisser une activité Execute SSIS Package jusqu’à l’aire du concepteur](media/how-to-invoke-ssis-package-ssis-activity/ssis-activity-designer.png) 
 
-1. Sous l’onglet **Général** d’Exécuter le Package SSIS, fournissez un nom et une description pour l’activité. Définissez les valeurs de **Délai d’attente** et de **Nouvelle tentative** facultatives.
+   Sélectionnez l'objet d'activité Exécuter le package SSIS pour configurer les onglets **Général** , **Paramètres** , **Paramètres SSIS** , **Gestionnaires de connexions** et **Substitutions de propriété** correspondants.
 
-   ![Définissez les propriétés sous l’onglet Général](media/how-to-invoke-ssis-package-ssis-activity/ssis-activity-general.png)
+#### <a name="general-tab"></a>Onglet Général
 
-1. Dans l’onglet **Paramètres** pour l’activité Exécuter le package SSIS, sélectionnez un Azure-SSIS IR sur lequel exécuter votre package. Si votre package utilise l’authentification Windows pour accéder aux magasins de données (par exemple, les serveurs SQL Server ou les partages de fichiers locaux ou Azure Files), sélectionnez case à cocher **Authentification Windows**. Entrez les valeurs pour vos informations d’identification pour l’exécution du package dans les zones **Domaine**, **Nom d'utilisateur** et **Mot de passe**. 
+Sous l'onglet **Général** de l'activité Exécuter le package SSIS, procédez comme suit.
 
-    Vous pouvez également utiliser les secrets stockés dans votre Azure Key Vault en tant que valeurs. Pour ce faire, sélectionnez la case à cocher **COFFRE DE CLÉS AZURE** en regard des informations d’identification correspondantes. Sélectionnez ou modifiez votre service de coffre de clés lié existant ou créez-en un. Sélectionnez ensuite la version ou le nom du secret pour la valeur de vos informations d’identification.
+![Définissez les propriétés sous l’onglet Général](media/how-to-invoke-ssis-package-ssis-activity/ssis-activity-general.png)
 
-    Lorsque vous créez ou modifiez votre service de coffre de clés lié, vous pouvez sélectionner ou modifier votre coffre de clés existant ou en créer un nouveau. Veillez à accorder à Data Factory l’accès géré à votre coffre de clés si vous ne l’avez pas déjà fait. Vous pouvez également entrer vos secrets directement au format suivant : `<Key vault linked service name>/<secret name>/<secret version>`. Si votre package a besoin d’un runtime 32 bits pour fonctionner, sélectionnez la case **Runtime 32 bits**.
+   1. Dans le champ **Nom** , entrez le nom de votre activité Exécuter le package SSIS.
 
-   Pour **Emplacement du package**, sélectionnez **SSISDB**, **File System (Package)** (Système de fichiers (Package)), **File System (Project)** (Système de fichiers (Projet)), ou **Embedded package** (Package incorporé). Si vous sélectionnez **SSISDB** comme emplacement pour votre package, qui est automatiquement sélectionné si Azure-SSIS IR a été provisionné avec le catalogue SSIS (SSISDB) hébergé par un serveur Azure SQL Database/Managed Instance, spécifiez votre package à exécuter qui a été déployé dans SSISDB. 
+   1. Dans le champ **Description** , entrez la description de votre activité Exécuter le package SSIS.
 
-    Si votre Azure-SSIS IR est en cours d’exécution et que la case **Entrées manuelles** n’est pas cochée, vous pouvez parcourir et sélectionner vos dossiers, projets, packages ou environnements existants dans SSISDB. Sélectionnez **Actualiser** pour récupérer vos nouveaux dossiers, projets, packages ou environnements ajoutés dans SSISDB afin qu’ils soient sélectionnables lors de la navigation. Pour parcourir ou sélectionner les environnements pour vos exécutions de package, vous devez configurer vos projets au préalable afin d’ajouter ces environnements en tant que références à partir des mêmes dossiers sous SSISDB. Pour plus d’informations, consultez [Créer et mapper des environnements SSIS](https://docs.microsoft.com/sql/integration-services/create-and-map-a-server-environment?view=sql-server-2014).
+   1. Dans le champ **Délai d'expiration** , entrez la durée maximale pendant laquelle votre activité Exécuter le package SSIS peut être exécutée. La valeur par défaut est de 7 jours, et le format est J.HH:MM:SS.
 
-   Concernant **Niveau de journalisation**, sélectionnez un périmètre prédéfini de journalisation pour l’exécution de votre package. Sélectionnez la case **Personnalisé** si vous préférez entrer un nom de journalisation personnalisé. 
+   1. Dans le champ **Nouvelle tentative** , entrez le nombre maximal de tentatives d'exécution de votre activité Exécuter le package SSIS.
 
-   ![Définir les propriétés sous l’onglet Paramètres - Automatique](media/how-to-invoke-ssis-package-ssis-activity/ssis-activity-settings.png)
+   1. Dans le champ **Intervalle avant nouvelle tentative** , entrez le nombre de secondes qui doivent s'écouler entre chaque tentative d'exécution de votre activité Exécuter le package SSIS. La valeur par défaut est de 30 secondes.
 
-   Si votre Azure-SSIS IR n’est pas en cours d’exécution ou que la case **Entrées manuelles** est sélectionnée, entrez les chemins de votre package et de votre environnement directement à partir de SSISDB aux formats suivants : `<folder name>/<project name>/<package name>.dtsx` et `<folder name>/<environment name>`.
+   1. Cochez la case **Sortie sécurisée** pour déterminer si vous souhaitez exclure la sortie de votre activité Exécuter le package SSIS de la journalisation.
 
-   ![Définir les propriétés sous l’onglet Paramètres - Manuel](media/how-to-invoke-ssis-package-ssis-activity/ssis-activity-settings2.png)
+   1. Cochez la case **Entrée sécurisée** pour déterminer si vous souhaitez exclure l'entrée de votre activité Exécuter le package SSIS de la journalisation.
 
-   Si vous sélectionnez **File System (Package)** (Système de fichiers (Package)) comme emplacement de votre package, qui est sélectionné automatiquement si votre Azure-SSIS IR a été provisionné sans SSISDB, spécifiez votre package à exécuter en fournissant un chemin d’accès UNC à votre fichier de package (`.dtsx`) dans la zone **Chemin d’accès du package**. Par exemple, si vous stockez votre package dans Azure Files, le chemin d’accès du package est `\\<storage account name>.file.core.windows.net\<file share name>\<package name>.dtsx`. 
+#### <a name="settings-tab"></a>Onglet Paramètres
+
+Sous l'onglet **Paramètres** de l'activité Exécuter le package SSIS, procédez comme suit.
+
+![Définir les propriétés sous l’onglet Paramètres - Automatique](media/how-to-invoke-ssis-package-ssis-activity/ssis-activity-settings.png)
+
+   1. Dans le champ **Azure-SSIS IR** , sélectionnez le runtime d'intégration Azure-SSIS désigné pour lancer votre activité Exécuter le package SSIS.
+
+   1. Dans le champ **Description** , entrez la description de votre activité Exécuter le package SSIS.
+
+   1. Cochez la case **Authentification Windows** afin de déterminer si vous souhaitez utiliser l'authentification Windows pour accéder aux magasins de données, comme les serveurs SQL/partages de fichiers locaux ou Azure Files.
    
-   Si vous configurez votre package dans un fichier distinct, vous devez également fournir un chemin d’accès UNC à votre fichier de configuration (`.dtsConfig`) dans la zone **Chemin d’accès de configuration**. Par exemple, si vous stockez votre configuration dans Azure Files, son chemin d’accès de configuration est `\\<storage account name>.file.core.windows.net\<file share name>\<configuration name>.dtsConfig`.
+      Si vous cochez cette case, entrez les valeurs des informations d'identification requises pour l'exécution de votre package dans les champs **Domaine** , **Nom d'utilisateur** et **Mot de passe** . Par exemple, pour accéder à Azure Files, le domaine, le nom d'utilisateur et le mot de passe sont respectivement `Azure`, `<storage account name>` et `<storage account key>`.
 
-   ![Définir les propriétés sous l’onglet Paramètres - Manuel](media/how-to-invoke-ssis-package-ssis-activity/ssis-activity-settings3.png)
+      Vous pouvez également utiliser les secrets stockés dans votre coffre de clés Azure Key Vault comme valeurs. Pour ce faire, cochez la case **AZURE KEY VAULT** en regard de ceux-ci. Sélectionnez ou modifiez votre service de coffre de clés lié existant ou créez-en un. Sélectionnez ensuite la version et le nom du secret correspondant à votre valeur. Lorsque vous créez ou modifiez votre service de coffre de clés lié, vous pouvez sélectionner ou modifier votre coffre de clés existant ou en créer un nouveau. Veillez à accorder à Data Factory l’accès géré à votre coffre de clés si vous ne l’avez pas déjà fait. Vous pouvez également entrer votre secret directement au format suivant : `<key vault linked service name>/<secret name>/<secret version>`.
+      
+   1. Cochez la case **Runtime 32 bits** pour déterminer si votre package a besoin d'un runtime 32 bits pour s'exécuter.
 
-   Si vous sélectionnez **File System (Project)** (Système de fichiers (Projet)) comme emplacement de votre package, spécifiez votre package à exécuter en fournissant un chemin d’accès UNC à votre fichier projet (`.ispac`) dans la zone **Chemin d’accès du projet** et un fichier de package (`.dtsx`) de votre projet dans la zone **Nom du package**. Par exemple, si vous stockez votre projet dans Azure Files, le chemin d’accès du projet est `\\<storage account name>.file.core.windows.net\<file share name>\<project name>.ispac`.
+   1. Dans le champ **Emplacement du package** , sélectionnez **SSISDB** , **Système de fichiers (Package)** , **Système de fichiers (Projet)** , **Package incorporé** ou **Magasin de packages** . 
 
-   ![Définir les propriétés sous l’onglet Paramètres - Manuel](media/how-to-invoke-ssis-package-ssis-activity/ssis-activity-settings4.png)
+##### <a name="package-location-ssisdb"></a>Emplacement du package : SSISDB
 
-   Ensuite, spécifiez les informations d’identification pour accéder à votre projet, votre package ou vos fichiers de configuration. Si vous avez précédemment entré les valeurs de vos informations d’identification d’exécution de package (voir plus tôt), vous pouvez les réutiliser en sélectionnant la case **Same as package execution credentials** (Identiques aux informations d’identification pour l’exécution du package). Dans le cas contraire, entrez les valeurs pour vos informations d’identification pour l’accès au package dans les zones **Domaine**, **Nom d'utilisateur** et **Mot de passe**. Par exemple, si vous stockez votre projet, package ou configuration dans Azure Files, le domaine est `Azure` ; le nom d’utilisateur est `<storage account name>` ; et le mot de passe est `<storage account key>`. 
+**SSISDB** est automatiquement sélectionné comme emplacement de votre package si votre runtime d'intégration Azure-SSIS a été approvisionné avec un catalogue SSIS (SSISDB) hébergé par un serveur Azure SQL Database/Managed Instance. Vous pouvez également le sélectionner vous-même. S'il est sélectionné, procédez comme suit.
 
-   Vous pouvez également utiliser les secrets stockés dans votre coffre de clés en tant que valeurs (voir ce qui précède). Ces informations d’identification seront utilisées pour accéder à votre package et aux packages enfants dans la tâche Exécuter le package, tous depuis leur propre chemin d’accès/le même projet, ainsi qu’aux configurations, y compris celles spécifiées dans vos packages. 
+   1. Si votre runtime d'intégration Azure-SSIS est en cours d'exécution et que la case **Entrées manuelles** n'est pas cochée, vous pouvez parcourir et sélectionner vos dossiers, projets, packages et environnements existants dans SSISDB. Sélectionnez **Actualiser** pour récupérer vos nouveaux dossiers, projets, packages ou environnements ajoutés dans SSISDB afin qu'ils soient sélectionnables lors de la navigation. Pour parcourir et sélectionner les environnements à des fins d'exécution de vos packages, vous devez configurer vos projets au préalable de manière à ajouter ces environnements en tant que références à partir des mêmes dossiers sous SSISDB. Pour plus d’informations, consultez [Créer et mapper des environnements SSIS](/sql/integration-services/packages/deploy-integration-services-ssis-projects-and-packages).
 
-   Si vous sélectionnez **Embedded package** (Package incorporé) comme emplacement de votre package, glissez-déposez votre package à exécuter ou **chargez-le** depuis un dossier vers la boîte fournie. Votre package sera automatiquement compressé et incorporé à la charge utile de l'activité. Une fois votre package incorporé, vous pouvez le **télécharger** ultérieurement afin de le modifier. Vous pouvez également **paramétrer** votre package incorporé en l'assignant à un paramètre pipeline qui peut être utilisé dans plusieurs activités, optimisant ainsi la taille de votre charge utile de pipeline. Si votre package incorporé n'est pas entièrement chiffré et que nous détectons la commande Tâche d'exécution de package, la case **Tâche d'exécution de package**  sera automatiquement cochée et les packages enfants pertinents avec leurs références système seront automatiquement ajoutés pour que vous puissiez également les incorporer. Si nous ne pouvons pas détecter l'utilisation de la commande Tâche d'exécution de package, vous devrez cocher la case **Tâche d'exécution de package** et ajouter un par un les packages enfants pertinents avec leurs références de système de fichiers afin de les incorporer. Si les packages enfants utilisent des références SQL Server, veuillez vous assurer que le serveur SQL est accessible par votre runtime d’intégration Azure SSIS.  L'utilisation de références de projets pour les packages enfants n'est actuellement pas prise en charge.
+   1. Concernant **Niveau de journalisation** , sélectionnez un périmètre prédéfini de journalisation pour l’exécution de votre package. Sélectionnez la case **Personnalisé** si vous préférez entrer un nom de journalisation personnalisé. 
+
+   1. Si votre Azure-SSIS IR n’est pas en cours d’exécution ou que la case **Entrées manuelles** est sélectionnée, entrez les chemins de votre package et de votre environnement directement à partir de SSISDB aux formats suivants : `<folder name>/<project name>/<package name>.dtsx` et `<folder name>/<environment name>`.
+
+      ![Définir les propriétés sous l’onglet Paramètres - Manuel](media/how-to-invoke-ssis-package-ssis-activity/ssis-activity-settings2.png)
+
+##### <a name="package-location-file-system-package"></a>Emplacement du package : Système de fichiers (Package)
+
+**Système de fichiers (Package)** est automatiquement sélectionné comme emplacement de votre package si votre runtime d'intégration Azure-SSIS a été approvisionné sans SSISDB. Vous pouvez également le sélectionner vous-même. S'il est sélectionné, procédez comme suit.
+
+![Définir les propriétés sous l'onglet Paramètres - Système de fichiers (Package)](media/how-to-invoke-ssis-package-ssis-activity/ssis-activity-settings3.png)
    
-   ![Définir les propriétés sous l’onglet Paramètres - Manuel](media/how-to-invoke-ssis-package-ssis-activity/ssis-activity-settings5.png)
+   1. Désignez le package à exécuter en fournissant un chemin d'accès UNC (Universal Naming Convention) à votre fichier de package (avec `.dtsx`) dans le champ **Chemin d'accès du package** . Vous pouvez accéder à votre package en sélectionnant **Parcourir le stockage de fichiers** ou entrer manuellement le chemin d'accès de celui-ci. Par exemple, si vous stockez votre package dans Azure Files, son chemin d'accès est `\\<storage account name>.file.core.windows.net\<file share name>\<package name>.dtsx`. 
    
-   Si vous avez utilisé le niveau de protection **EncryptAllWithPassword** ou **EncryptSensitiveWithPassword** lorsque vous avez créé votre package via SQL Server Data Tools, entrez la valeur de votre mot de passe dans la zone **Mot de passe de chiffrement**. Vous pouvez également utiliser un secret stocké dans votre coffre de clés en tant que valeur (voir précédemment). Si vous avez utilisé le niveau de protection **EncryptSensitiveWithUserKey**, entrez de nouveau vos valeurs sensibles dans les fichiers config ou dans les onglets **Paramètres SSIS**, **Gestionnaires de connexions** ou **Substitutions de propriété** (voir plus loin). 
+   1. Si vous configurez votre package dans un fichier distinct, vous devez également fournir le chemin d'accès UNC de votre fichier de configuration (avec `.dtsConfig`) dans le champ **Chemin d'accès de la configuration** . Vous pouvez accéder à votre configuration en sélectionnant **Parcourir le stockage de fichiers** ou entrer manuellement le chemin d'accès de celle-ci. Par exemple, si vous stockez votre configuration dans Azure Files, son chemin d'accès est `\\<storage account name>.file.core.windows.net\<file share name>\<configuration name>.dtsConfig`.
 
-   Si vous avez utilisé le niveau de protection **EncryptAllWithUserKey** , cela n’est pas pris en charge. Vous devez reconfigurer votre package pour utiliser un autre niveau de protection via SQL Server Data Tools ou l’utilitaire de ligne de commande `dtutil`. 
+   1. Entrez les informations d'identification requises pour accéder aux fichiers de votre package et de votre configuration. Si vous avez précédemment entré les valeurs des informations d'identification requises pour l'exécution de votre package ( **authentification Windows** ), vous pouvez les réutiliser en cochant la case **Identiques aux informations d'identification requises pour l'exécution du package** . Dans le cas contraire, entrez les valeurs pour vos informations d’identification pour l’accès au package dans les zones **Domaine** , **Nom d'utilisateur** et **Mot de passe** . Par exemple, si vous stockez votre package et votre configuration dans Azure Files, le domaine, le nom d'utilisateur et le mot de passe sont respectivement `Azure`, `<storage account name>` et `<storage account key>`. 
+
+      Vous pouvez également utiliser les secrets stockés dans votre coffre de clés Azure Key Vault comme valeurs. Pour ce faire, cochez la case **AZURE KEY VAULT** en regard de ceux-ci. Sélectionnez ou modifiez votre service de coffre de clés lié existant ou créez-en un. Sélectionnez ensuite la version et le nom du secret correspondant à votre valeur. Lorsque vous créez ou modifiez votre service de coffre de clés lié, vous pouvez sélectionner ou modifier votre coffre de clés existant ou en créer un nouveau. Veillez à accorder à Data Factory l’accès géré à votre coffre de clés si vous ne l’avez pas déjà fait. Vous pouvez également entrer votre secret directement au format suivant : `<key vault linked service name>/<secret name>/<secret version>`. 
+
+      Ces informations d'identification sont également utilisées pour accéder aux packages enfants de la Tâche d'exécution de package qui sont référencés par leur propre chemin d'accès et d'autres configurations spécifiées dans vos packages. 
+
+   1. Si vous avez utilisé le niveau de protection **EncryptAllWithPassword** ou **EncryptSensitiveWithPassword** lorsque vous avez créé votre package via SQL Server Data Tools (SSDT), entrez la valeur de votre mot de passe dans le champ **Mot de passe de chiffrement** . Vous pouvez également utiliser un secret stocké dans votre coffre de clés Azure Key Vault comme valeur (voir précédemment).
+      
+      Si vous avez utilisé le niveau de protection **EncryptSensitiveWithUserKey** , entrez de nouveau vos valeurs sensibles dans les fichiers de configuration ou dans les onglets **Paramètres SSIS** , **Gestionnaires de connexions** ou **Substitutions de propriété** (voir ci-dessous).
+      
+      Si vous avez utilisé le niveau de protection **EncryptAllWithUserKey** , cela n’est pas pris en charge. Vous devez reconfigurer votre package pour utiliser un autre niveau de protection via SSDT ou l'utilitaire de ligne de commande `dtutil`. 
+
+   1. Concernant **Niveau de journalisation** , sélectionnez un périmètre prédéfini de journalisation pour l’exécution de votre package. Sélectionnez la case **Personnalisé** si vous préférez entrer un nom de journalisation personnalisé. 
    
-   Concernant **Niveau de journalisation**, sélectionnez un périmètre prédéfini de journalisation pour l’exécution de votre package. Sélectionnez la case **Personnalisé** si vous préférez entrer un nom de journalisation personnalisé. Si vous souhaitez journaliser vos exécutions de package au-delà à l’aide de modules fournisseurs d’informations, spécifiez votre dossier de journaux en fournissant son chemin d’accès UNC dans la zone **Chemin d’accès de journalisation**. Par exemple, si vous stockez vos journaux dans Azure Files, votre chemin d’accès de journalisation est `\\<storage account name>.file.core.windows.net\<file share name>\<log folder name>`. Un sous-dossier est créé dans ce chemin d’accès pour chaque exécution de package individuel et nommé d’après l’ID d’exécution de l’activité Exécuter le package SSIS, dans lequel les fichiers journaux sont générés toutes les cinq minutes. 
+   1. Si vous souhaitez journaliser vos exécutions de package au-delà à l’aide de modules fournisseurs d’informations, spécifiez votre dossier de journaux en fournissant son chemin d’accès UNC dans la zone **Chemin d’accès de journalisation** . Vous pouvez accéder à votre dossier journal en sélectionnant **Parcourir le stockage de fichiers** ou entrer manuellement le chemin d'accès de celui-ci. Par exemple, si vous stockez vos journaux dans Azure Files, votre chemin d’accès de journalisation est `\\<storage account name>.file.core.windows.net\<file share name>\<log folder name>`. Un sous-dossier est créé à cet emplacement pour l'exécution de chaque package, et nommé d'après l'ID d'exécution de l'activité Exécuter le package SSIS. Des fichiers journaux y sont générés toutes les cinq minutes. 
    
-   Enfin, spécifiez les informations d’identification pour accéder à votre dossier de journal. Si vous avez précédemment entré les valeurs de vos informations d’identification d’accès de package (voir plus tôt), vous pouvez les réutiliser en sélectionnant la case **Same as package execution credentials** (Identiques aux informations d’identification pour l’accès au package). Dans le cas contraire, entrez les valeurs pour vos informations d’identification pour l’accès aux journaux dans les zones **Domaine**, **Nom d'utilisateur** et **Mot de passe**. Par exemple, si vous stockez vos journaux dans Azure Files, le domaine est `Azure` ; le nom d’utilisateur est `<storage account name>` ; et le mot de passe est `<storage account key>`. 
-
-    Vous pouvez également utiliser les secrets stockés dans votre coffre de clés en tant que valeurs (voir ce qui précède). Ces informations d’identification sont utilisées pour stocker vos journaux. 
+   1. Entrez les informations d'identification pour accéder à votre dossier journal. Si vous avez précédemment entré les valeurs des informations d'identification requises pour l'accès au package (voir précédemment), vous pouvez les réutiliser en cochant la case **Identiques aux informations d'identification requises pour l'accès au package** . Dans le cas contraire, entrez les valeurs pour vos informations d’identification pour l’accès aux journaux dans les zones **Domaine** , **Nom d'utilisateur** et **Mot de passe** . Par exemple, si vous stockez vos journaux dans Azure Files, le domaine est `Azure` ; le nom d’utilisateur est `<storage account name>` ; et le mot de passe est `<storage account key>`. Vous pouvez également utiliser les secrets stockés dans votre coffre de clés Azure Key Vault comme valeurs (voir précédemment).
    
-   Pour tous les chemins d’accès UNC mentionnés précédemment, le nom de fichier complet doit être inférieur à 260 caractères. Le nom de répertoire ne doit pas dépasser 248 caractères.
+Pour tous les chemins d’accès UNC mentionnés précédemment, le nom de fichier complet doit être inférieur à 260 caractères. Le nom de répertoire ne doit pas dépasser 248 caractères.
 
-1. Sous l’onglet **Paramètres SSIS** de l’activité Exécuter le package SSIS, si votre Azure-SSIS IR s’exécute, **SSISDB** est sélectionné en tant qu’emplacement du package et si la case **Entrées manuelles** de l’onglet **Paramètres** est décochée, les paramètres SSIS existants dans votre projet ou package sélectionné depuis SSISDB sont affichés pour que vous puissiez leur assigner des valeurs. Sinon, vous pouvez affecter manuellement des valeurs une par une. Assurez-vous que les valeurs existent et qu’elles sont correctement entrées pour que l’exécution du package réussisse. 
+##### <a name="package-location-file-system-project"></a>Emplacement du package : Système de fichiers (Projet)
+
+Si vous sélectionnez **Système de fichiers (Projet)** comme emplacement de votre package, procédez comme suit.
+
+![Définir les propriétés sous l'onglet Paramètres - Système de fichiers (Projet)](media/how-to-invoke-ssis-package-ssis-activity/ssis-activity-settings4.png)
+
+   1. Désignez le package à exécuter en fournissant un chemin d'accès UNC à votre fichier de projet (avec `.ispac`) dans le champ **Chemin d'accès du projet** et un fichier de package (avec `.dtsx`) de votre projet dans le champ **Nom du package** . Vous pouvez accéder à votre projet en sélectionnant **Parcourir le stockage de fichiers** ou entrer manuellement le chemin d'accès de celui-ci. Par exemple, si vous stockez votre projet dans Azure Files, son chemin d'accès est `\\<storage account name>.file.core.windows.net\<file share name>\<project name>.ispac`.
+
+   1. Entrez les informations d'identification requises pour accéder aux fichiers de votre projet et de votre package. Si vous avez précédemment entré les valeurs des informations d'identification requises pour l'exécution de votre package ( **authentification Windows** ), vous pouvez les réutiliser en cochant la case **Identiques aux informations d'identification requises pour l'exécution du package** . Dans le cas contraire, entrez les valeurs pour vos informations d’identification pour l’accès au package dans les zones **Domaine** , **Nom d'utilisateur** et **Mot de passe** . Par exemple, si vous stockez votre projet et votre package dans Azure Files, le domaine, le nom d'utilisateur et le mot de passe sont respectivement `Azure`, `<storage account name>` et `<storage account key>`. 
+
+      Vous pouvez également utiliser les secrets stockés dans votre coffre de clés Azure Key Vault comme valeurs. Pour ce faire, cochez la case **AZURE KEY VAULT** en regard de ceux-ci. Sélectionnez ou modifiez votre service de coffre de clés lié existant ou créez-en un. Sélectionnez ensuite la version et le nom du secret correspondant à votre valeur. Lorsque vous créez ou modifiez votre service de coffre de clés lié, vous pouvez sélectionner ou modifier votre coffre de clés existant ou en créer un nouveau. Veillez à accorder à Data Factory l’accès géré à votre coffre de clés si vous ne l’avez pas déjà fait. Vous pouvez également entrer votre secret directement au format suivant : `<key vault linked service name>/<secret name>/<secret version>`. 
+
+      Ces informations d'identification sont également utilisées pour accéder aux packages enfants de la Tâche d'exécution de package qui sont référencés à partir du même projet. 
+
+   1. Si vous avez utilisé le niveau de protection **EncryptAllWithPassword** ou **EncryptSensitiveWithPassword** lorsque vous avez créé votre package via SSDT, entrez la valeur de votre mot de passe dans le champ **Mot de passe de chiffrement** . Vous pouvez également utiliser un secret stocké dans votre coffre de clés Azure Key Vault comme valeur (voir précédemment).
+      
+      Si vous avez utilisé le niveau de protection **EncryptSensitiveWithUserKey** , entrez de nouveau vos valeurs sensibles dans les onglets **Paramètres SSIS** , **Gestionnaires de connexions** ou **Substitutions de propriété** (voir ci-dessous).
+      
+      Si vous avez utilisé le niveau de protection **EncryptAllWithUserKey** , cela n’est pas pris en charge. Vous devez reconfigurer votre package pour utiliser un autre niveau de protection via SSDT ou l'utilitaire de ligne de commande `dtutil`. 
+
+   1. Concernant **Niveau de journalisation** , sélectionnez un périmètre prédéfini de journalisation pour l’exécution de votre package. Sélectionnez la case **Personnalisé** si vous préférez entrer un nom de journalisation personnalisé. 
    
-   Si vous avez utilisé le niveau de protection **EncryptSensitiveWithUserKey** lorsque vous avez créé votre package via SSDT et que **File System (Package) (Système de fichiers (Package))** ou **File System (Project) (Système de fichiers (Projet))** est sélectionné en tant qu’emplacement de votre package, vous devez également entrer de nouveau vos paramètres sensibles pour y attribuer des valeurs dans les fichiers config ou dans cet onglet. 
+   1. Si vous souhaitez journaliser vos exécutions de package au-delà à l’aide de modules fournisseurs d’informations, spécifiez votre dossier de journaux en fournissant son chemin d’accès UNC dans la zone **Chemin d’accès de journalisation** . Vous pouvez accéder à votre dossier journal en sélectionnant **Parcourir le stockage de fichiers** ou entrer manuellement le chemin d'accès de celui-ci. Par exemple, si vous stockez vos journaux dans Azure Files, votre chemin d’accès de journalisation est `\\<storage account name>.file.core.windows.net\<file share name>\<log folder name>`. Un sous-dossier est créé à cet emplacement pour l'exécution de chaque package, et nommé d'après l'ID d'exécution de l'activité Exécuter le package SSIS. Des fichiers journaux y sont générés toutes les cinq minutes. 
    
-   Lorsque vous attribuez des valeurs à vos paramètres, vous pouvez ajouter du contenu dynamique à l’aide d’expressions, de fonctions, de variables système Data Factory et de paramètres ou variables de pipeline Data Factory. Vous pouvez également utiliser les secrets stockés dans votre coffre de clés en tant que valeurs (voir ce qui précède).
-
-   ![Définir les propriétés sous l’onglet Paramètres SSIS](media/how-to-invoke-ssis-package-ssis-activity/ssis-activity-ssis-parameters.png)
-
-1. Dans l’onglet **Gestionnaires de connexions** de l’activité Exécuter un package SSIS, si votre Azure-SSIS IR s’exécute, si **SSISDB** est sélectionné en tant qu’emplacement de votre package et si la case **Entrées manuelles** de l’onglet **Paramètres** est décochée, les gestionnaires de connexions existants dans votre projet ou package sélectionné depuis SSISDB sont affichés pour que vous puissiez attribuer des valeurs à leurs propriétés. Sinon, vous pouvez affecter manuellement des valeurs aux propriétés une par une. Assurez-vous que les valeurs existent et qu’elles sont correctement entrées pour que l’exécution du package réussisse. 
+   1. Entrez les informations d'identification pour accéder à votre dossier journal. Si vous avez précédemment entré les valeurs des informations d'identification requises pour l'accès au package (voir précédemment), vous pouvez les réutiliser en cochant la case **Identiques aux informations d'identification requises pour l'accès au package** . Dans le cas contraire, entrez les valeurs pour vos informations d’identification pour l’accès aux journaux dans les zones **Domaine** , **Nom d'utilisateur** et **Mot de passe** . Par exemple, si vous stockez vos journaux dans Azure Files, le domaine est `Azure` ; le nom d’utilisateur est `<storage account name>` ; et le mot de passe est `<storage account key>`. Vous pouvez également utiliser les secrets stockés dans votre coffre de clés Azure Key Vault comme valeurs (voir précédemment).
    
-   Si vous avez utilisé le niveau de protection **EncryptSensitiveWithUserKey** lorsque vous avez créé votre package via SQL Server Data Tools et que **File System (Package)** (Système de fichiers (Package)) ou **File System (Project)** (Système de fichiers (Projet)) est sélectionné en tant qu’emplacement de votre package, vous devez également entrer de nouveau vos propriétés de gestionnaire de connexions sensibles pour y attribuer des valeurs dans les fichiers config ou dans cet onglet. 
+Pour tous les chemins d’accès UNC mentionnés précédemment, le nom de fichier complet doit être inférieur à 260 caractères. Le nom de répertoire ne doit pas dépasser 248 caractères.
+
+##### <a name="package-location-embedded-package"></a>Emplacement du package : Package incorporé
+
+Si vous sélectionnez **Package incorporé** comme emplacement de votre package, procédez comme suit.
+
+![Définir les propriétés sous l'onglet Paramètres - Package incorporé](media/how-to-invoke-ssis-package-ssis-activity/ssis-activity-settings5.png)
+
+   1. Glissez-déplacez le fichier de votre package (avec `.dtsx`) ou **chargez-le** dans la zone prévue à cet effet depuis un dossier de fichiers. Votre package sera automatiquement compressé et incorporé à la charge utile de l'activité. Une fois votre package incorporé, vous pouvez le **télécharger** ultérieurement afin de le modifier. Vous pouvez également **paramétrer** votre package incorporé en l'assignant à un paramètre pipeline qui peut être utilisé dans plusieurs activités, optimisant ainsi la taille de votre charge utile de pipeline. L’incorporation de Fichiers projet (avec `.ispac`) n’est pas prise en charge pour le moment. Vous ne pouvez donc pas utiliser de paramètres SSIS ni gestionnaires de connexions avec une étendue au niveau du projet dans vos packages incorporés.
    
-   Lorsque vous attribuez des valeurs à vos propriétés de gestionnaire de connexions, vous pouvez ajouter du contenu dynamique à l’aide d’expressions, de fonctions, de variables système Data Factory et de paramètres ou variables de pipeline Data Factory. Vous pouvez également utiliser les secrets stockés dans votre coffre de clés en tant que valeurs (voir ce qui précède).
-
-   ![Définir les propriétés sous l’onglet Gestionnaires de connexions](media/how-to-invoke-ssis-package-ssis-activity/ssis-activity-connection-managers.png)
-
-1. Sous l’onglet **Substitutions de propriété** de l’activité Exécuter le package SSIS, entrez les chemins d’accès des propriétés existantes dans le package sélectionné un par un pour leur affecter manuellement des valeurs. Assurez-vous que les valeurs existent et qu’elles sont correctement entrées pour que l’exécution du package réussisse. Par exemple, pour remplacer la valeur de votre variable utilisateur, entrez son chemin d’accès au format suivant : `\Package.Variables[User::<variable name>].Value`. 
+   1. Si votre package incorporé n’est pas entièrement chiffré et que nous détectons l’utilisation de Tâche d’exécution de package, la case **Tâche d’exécution de package**  sera automatiquement cochée et vos packages enfants référencés par leur chemin d’accès au système de fichiers seront automatiquement ajoutés pour que vous puissiez également les incorporer.
    
-   Si vous avez utilisé le niveau de protection **EncryptSensitiveWithUserKey** lorsque vous avez créé votre package via SSDT et que **File System (Package)(Système de fichiers (Package))** ou **File System (Project)** (Système de fichiers (Projet)) est sélectionné en tant qu’emplacement de votre package, vous devez également entrer de nouveau vos propriétés sensibles pour y attribuer des valeurs dans les fichiers config ou dans cet onglet. 
+      Si nous ne parvenons pas à détecter l’utilisation de Tâche d’exécution de package, vous devez sélectionner manuellement la case à cocher **Tâche d’exécution de package** et ajouter un par un les packages enfants qui sont référencés par leur chemin d’accès au système de fichiers afin de les incorporer. Si vos packages enfants sont stockés dans une base de données SQL Server (MSDB), vous ne pouvez pas les incorporer. Vous devez donc vous assurer que votre runtime d’intégration Azure-SSIS peut accéder à la MSDB pour les récupérer à l’aide de leurs références SQL Server. L’incorporation de Fichiers projet (avec `.ispac`) n’est pas prise en charge pour le moment. Vous ne pouvez donc pas utiliser de références de projet pour vos packages enfants.
    
-   Lorsque vous attribuez des valeurs à vos propriétés, vous pouvez ajouter du contenu dynamique à l’aide d’expressions, de fonctions, de variables système Data Factory et de paramètres ou variables de pipeline Data Factory.
+   1. Si vous avez utilisé le niveau de protection **EncryptAllWithPassword** ou **EncryptSensitiveWithPassword** lorsque vous avez créé votre package via SSDT, entrez la valeur de votre mot de passe dans le champ **Mot de passe de chiffrement** . 
+   
+      Vous pouvez également utiliser un secret stocké dans votre coffre de clés Azure Key Vault comme valeur. Pour ce faire, cochez la case **AZURE KEY VAULT** en regard de celui-ci. Sélectionnez ou modifiez votre service de coffre de clés lié existant ou créez-en un. Sélectionnez ensuite la version et le nom du secret correspondant à votre valeur. Lorsque vous créez ou modifiez votre service de coffre de clés lié, vous pouvez sélectionner ou modifier votre coffre de clés existant ou en créer un nouveau. Veillez à accorder à Data Factory l’accès géré à votre coffre de clés si vous ne l’avez pas déjà fait. Vous pouvez également entrer votre secret directement au format suivant : `<key vault linked service name>/<secret name>/<secret version>`.
+      
+      Si vous avez utilisé le niveau de protection **EncryptSensitiveWithUserKey** , entrez de nouveau vos valeurs sensibles dans les fichiers de configuration ou dans les onglets **Paramètres SSIS** , **Gestionnaires de connexions** ou **Substitutions de propriété** (voir ci-dessous).
+      
+      Si vous avez utilisé le niveau de protection **EncryptAllWithUserKey** , cela n’est pas pris en charge. Vous devez reconfigurer votre package pour utiliser un autre niveau de protection via SSDT ou l'utilitaire de ligne de commande `dtutil`.
 
-   ![Définir les propriétés sous l’onglet Substitutions de propriété](media/how-to-invoke-ssis-package-ssis-activity/ssis-activity-property-overrides.png)
+   1. Concernant **Niveau de journalisation** , sélectionnez un périmètre prédéfini de journalisation pour l’exécution de votre package. Sélectionnez la case **Personnalisé** si vous préférez entrer un nom de journalisation personnalisé. 
+   
+   1. Si vous souhaitez journaliser vos exécutions de package au-delà à l’aide de modules fournisseurs d’informations, spécifiez votre dossier de journaux en fournissant son chemin d’accès UNC dans la zone **Chemin d’accès de journalisation** . Vous pouvez accéder à votre dossier journal en sélectionnant **Parcourir le stockage de fichiers** ou entrer manuellement le chemin d'accès de celui-ci. Par exemple, si vous stockez vos journaux dans Azure Files, votre chemin d’accès de journalisation est `\\<storage account name>.file.core.windows.net\<file share name>\<log folder name>`. Un sous-dossier est créé à cet emplacement pour l'exécution de chaque package, et nommé d'après l'ID d'exécution de l'activité Exécuter le package SSIS. Des fichiers journaux y sont générés toutes les cinq minutes. 
+   
+   1. Spécifiez les informations d'identification requises pour accéder à votre dossier journal en entrant les valeurs correspondantes dans les champs **Domaine** , **Nom d'utilisateur** et **Mot de passe** . Par exemple, si vous stockez vos journaux dans Azure Files, le domaine est `Azure` ; le nom d’utilisateur est `<storage account name>` ; et le mot de passe est `<storage account key>`. Vous pouvez également utiliser les secrets stockés dans votre coffre de clés Azure Key Vault comme valeurs (voir précédemment).
+   
+Pour tous les chemins d’accès UNC mentionnés précédemment, le nom de fichier complet doit être inférieur à 260 caractères. Le nom de répertoire ne doit pas dépasser 248 caractères.
 
-   Les valeurs attribuées dans les fichiers de configuration et dans l’onglet **Paramètres SSIS** peuvent être remplacées à l’aide des onglets **Gestionnaires de connexions** et **Substitutions de propriété**. Vous pouvez également remplacer les valeurs affectées dans l’onglet **Gestionnaires de connexions** dans l’onglet **Substitutions de propriété**.
+##### <a name="package-location-package-store"></a>Emplacement du package : Magasin de packages
 
-1. Pour valider la configuration du pipeline, sélectionnez **Valider** dans la barre d’outils. Pour fermer le **Rapport de validation de pipeline**, sélectionnez **>>** .
+Si vous sélectionnez **Magasin de packages** comme emplacement de votre package, procédez comme suit.
 
-1. Pour publier le pipeline sur Data Factory, sélectionnez **Publier tout**. 
+![Définir les propriétés sous l'onglet Paramètres - Magasin de packages](media/how-to-invoke-ssis-package-ssis-activity/ssis-activity-settings6.png)
+   
+   1. Dans le champ **Nom du magasin de packages** , sélectionnez un magasin de packages existant associé à votre runtime d'intégration Azure-SSIS.
+
+   1. Désignez le package à exécuter en fournissant son chemin d'accès (sans `.dtsx`) depuis le magasin de packages sélectionné dans le champ **Chemin d'accès du package** . Si le magasin de packages sélectionné se trouve au sommet du système de fichiers/Azure Files, vous pouvez accéder à votre package en sélectionnant **Parcourir le stockage de fichiers** . Vous pouvez également entrer son chemin au format `<folder name>\<package name>`. Vous avez aussi la possibilité d'importer de nouveaux packages dans le magasin de packages sélectionné via SQL Server Management Studio (SSMS), comme pour le [magasin de packages SSIS hérité](/sql/integration-services/service/package-management-ssis-service?view=sql-server-2017). Pour plus d'informations, consultez [Gérer les packages SSIS avec des magasins de packages Azure-SSIS IR](./azure-ssis-integration-runtime-package-store.md).
+
+   1. Si vous configurez votre package dans un fichier distinct, vous devez fournir le chemin d'accès UNC de votre fichier de configuration (avec `.dtsConfig`) dans le champ **Chemin d'accès de la configuration** . Vous pouvez accéder à votre configuration en sélectionnant **Parcourir le stockage de fichiers** ou entrer manuellement le chemin d'accès de celle-ci. Par exemple, si vous stockez votre configuration dans Azure Files, son chemin d'accès est `\\<storage account name>.file.core.windows.net\<file share name>\<configuration name>.dtsConfig`.
+
+   1. Cochez la case **Informations d'identification requises pour l'accès à la configuration** afin de déterminer si des informations d'identification sont nécessaires pour accéder à votre fichier de configuration séparément. Cette opération est nécessaire lorsque le magasin de packages sélectionné se trouve au sommet de la base de données SQL Server (MSDB) hébergée par Azure SQL Managed Instance ou si votre fichier de configuration n'y est pas stocké.
+   
+      Si vous avez précédemment entré les valeurs des informations d'identification requises pour l'exécution de votre package ( **authentification Windows** ), vous pouvez les réutiliser en cochant la case **Identiques aux informations d'identification requises pour l'exécution du package** . Si ce n'est pas le cas, entrez les valeurs des informations d'identification requises pour l'accès à la configuration dans les champs **Domaine** , **Nom d'utilisateur** et **Mot de passe** . Par exemple, si vous stockez votre configuration dans Azure Files, le domaine, le nom d'utilisateur et le mot de passe sont respectivement `Azure`, `<storage account name>` et `<storage account key>`. 
+
+      Vous pouvez également utiliser les secrets stockés dans votre coffre de clés Azure Key Vault comme valeurs. Pour ce faire, cochez la case **AZURE KEY VAULT** en regard de ceux-ci. Sélectionnez ou modifiez votre service de coffre de clés lié existant ou créez-en un. Sélectionnez ensuite la version et le nom du secret correspondant à votre valeur. Lorsque vous créez ou modifiez votre service de coffre de clés lié, vous pouvez sélectionner ou modifier votre coffre de clés existant ou en créer un nouveau. Veillez à accorder à Data Factory l’accès géré à votre coffre de clés si vous ne l’avez pas déjà fait. Vous pouvez également entrer votre secret directement au format suivant : `<key vault linked service name>/<secret name>/<secret version>`.
+
+   1. Si vous avez utilisé le niveau de protection **EncryptAllWithPassword** ou **EncryptSensitiveWithPassword** lorsque vous avez créé votre package via SSDT, entrez la valeur de votre mot de passe dans le champ **Mot de passe de chiffrement** . Vous pouvez également utiliser un secret stocké dans votre coffre de clés Azure Key Vault comme valeur (voir précédemment).
+      
+      Si vous avez utilisé le niveau de protection **EncryptSensitiveWithUserKey** , entrez de nouveau vos valeurs sensibles dans les fichiers de configuration ou dans les onglets **Paramètres SSIS** , **Gestionnaires de connexions** ou **Substitutions de propriété** (voir ci-dessous).
+      
+      Si vous avez utilisé le niveau de protection **EncryptAllWithUserKey** , cela n’est pas pris en charge. Vous devez reconfigurer votre package pour utiliser un autre niveau de protection via SSDT ou l'utilitaire de ligne de commande `dtutil`. 
+
+   1. Concernant **Niveau de journalisation** , sélectionnez un périmètre prédéfini de journalisation pour l’exécution de votre package. Sélectionnez la case **Personnalisé** si vous préférez entrer un nom de journalisation personnalisé. 
+   
+   1. Si vous souhaitez journaliser vos exécutions de package au-delà à l’aide de modules fournisseurs d’informations, spécifiez votre dossier de journaux en fournissant son chemin d’accès UNC dans la zone **Chemin d’accès de journalisation** . Vous pouvez accéder à votre dossier journal en sélectionnant **Parcourir le stockage de fichiers** ou entrer manuellement le chemin d'accès de celui-ci. Par exemple, si vous stockez vos journaux dans Azure Files, votre chemin d’accès de journalisation est `\\<storage account name>.file.core.windows.net\<file share name>\<log folder name>`. Un sous-dossier est créé à cet emplacement pour l'exécution de chaque package, et nommé d'après l'ID d'exécution de l'activité Exécuter le package SSIS. Des fichiers journaux y sont générés toutes les cinq minutes. 
+   
+   1. Spécifiez les informations d'identification requises pour accéder à votre dossier journal en entrant les valeurs correspondantes dans les champs **Domaine** , **Nom d'utilisateur** et **Mot de passe** . Par exemple, si vous stockez vos journaux dans Azure Files, le domaine est `Azure` ; le nom d’utilisateur est `<storage account name>` ; et le mot de passe est `<storage account key>`. Vous pouvez également utiliser les secrets stockés dans votre coffre de clés Azure Key Vault comme valeurs (voir précédemment).
+   
+Pour tous les chemins d’accès UNC mentionnés précédemment, le nom de fichier complet doit être inférieur à 260 caractères. Le nom de répertoire ne doit pas dépasser 248 caractères.
+
+#### <a name="ssis-parameters-tab"></a>Onglet Paramètres SSIS
+
+Sous l'onglet **Paramètres SSIS** de l'activité Exécuter le package SSIS, procédez comme suit.
+
+![Définir les propriétés sous l’onglet Paramètres SSIS](media/how-to-invoke-ssis-package-ssis-activity/ssis-activity-ssis-parameters.png)
+
+   1. Si votre runtime d'intégration Azure-SSIS est en cours d'exécution, **SSISDB** est sélectionné comme emplacement de votre package, et si la case **Entrées manuelles** de l'onglet **Paramètres** n'est pas cochée, les paramètres SSIS existants du projet et du package sélectionnés à partir de SSISDB apparaissent pour vous permettre de leur attribuer des valeurs. Sinon, vous pouvez affecter manuellement des valeurs une par une. Assurez-vous que les valeurs existent et qu’elles sont correctement entrées pour que l’exécution du package réussisse. 
+   
+   1. Si vous avez utilisé le niveau de protection **EncryptSensitiveWithUserKey** lorsque vous avez créé votre package via SSDT et que **Système de fichiers (Package)** , **Système de fichiers (Projet)** , **Package incorporé** ou **Magasin de packages** est sélectionné comme emplacement de votre package, vous devez également réentrer vos paramètres sensibles pour leur attribuer des valeurs dans cet onglet. 
+   
+Lorsque vous attribuez des valeurs à vos paramètres, vous pouvez ajouter du contenu dynamique à l’aide d’expressions, de fonctions, de variables système Data Factory et de paramètres ou variables de pipeline Data Factory.
+
+Vous pouvez également utiliser les secrets stockés dans votre coffre de clés Azure Key Vault comme valeurs. Pour ce faire, cochez la case **AZURE KEY VAULT** en regard de ceux-ci. Sélectionnez ou modifiez votre service de coffre de clés lié existant ou créez-en un. Sélectionnez ensuite la version et le nom du secret correspondant à votre valeur. Lorsque vous créez ou modifiez votre service de coffre de clés lié, vous pouvez sélectionner ou modifier votre coffre de clés existant ou en créer un nouveau. Veillez à accorder à Data Factory l’accès géré à votre coffre de clés si vous ne l’avez pas déjà fait. Vous pouvez également entrer votre secret directement au format suivant : `<key vault linked service name>/<secret name>/<secret version>`. 
+
+#### <a name="connection-managers-tab"></a>Onglet Connection Managers (Gestionnaires de connexions)
+
+Sous l'onglet **Gestionnaires de connexions** de l'activité Exécuter le package SSIS, procédez comme suit.
+
+![Définir les propriétés sous l’onglet Gestionnaires de connexions](media/how-to-invoke-ssis-package-ssis-activity/ssis-activity-connection-managers.png)
+
+   1. Si votre runtime d'intégration Azure-SSIS est en cours d'exécution, **SSISDB** est sélectionné comme emplacement de votre package, et si la case **Entrées manuelles** de l'onglet **Paramètres** n'est pas cochée, les gestionnaires de connexions existants du projet et du package sélectionnés à partir de SSISDB apparaissent pour vous permettre d'attribuer des valeurs à leurs propriétés. Sinon, vous pouvez affecter manuellement des valeurs aux propriétés une par une. Assurez-vous que les valeurs existent et qu’elles sont correctement entrées pour que l’exécution du package réussisse. 
+   
+      Vous pouvez obtenir les noms **ÉTENDUE** , **NOM** et **PROPRIÉTÉ** corrects pour tout gestionnaire de connexions en ouvrant le package qui le contient sur SSDT. Une fois le package ouvert, sélectionnez le gestionnaire de connexions approprié pour afficher les noms et les valeurs de toutes ses propriétés dans la fenêtre **Propriétés** de SSDT. Grâce à ces informations, vous pouvez remplacer les valeurs de toutes les propriétés du gestionnaire de connexions à l’exécution. 
+
+      ![Obtenir les propriétés du gestionnaire de connexions sur SSDT](media/how-to-invoke-ssis-package-ssis-activity/ssdt-connection-manager-properties.png)
+
+      Par exemple, sans modifier votre package d’origine sur SSDT, vous pouvez convertir ses flux de données local vers local s’exécutant sur SQL Server en flux de données local vers cloud s’exécutant sur un runtime d’intégration SSIS dans ADF en remplaçant les valeurs des propriétés **ConnectByProxy** , **ConnectionString** et **ConnectUsingManagedIdentity** dans les gestionnaires de connexions existants à l’exécution.
+      
+      Ces remplacements à l’exécution peuvent activer le runtime d’intégration auto-hébergé (SHIR) comme proxy pour le runtime d’intégration SSIS lors de l’accès aux données localement (voir [Configurer un runtime d’intégration auto-hébergé en tant que proxy pour le runtime d’intégration SSIS](./self-hosted-integration-runtime-proxy-ssis.md)) et aux connexions Azure SQL Database/Managed Instance à l’aide du dernier pilote MSOLEDBSQL qui, à son tour, active l’authentification Azure Active Directory (AAD) avec l’identité managée ADF (voir [Configurer l’authentification AAD avec une identité managée ADF pour les connexions OLEDB](/sql/integration-services/connection-manager/ole-db-connection-manager?view=sql-server-ver15#managed-identities-for-azure-resources-authentication)).
+
+      ![Définir les propriétés à partir de SSDT sous l’onglet Gestionnaires de connexions](media/how-to-invoke-ssis-package-ssis-activity/ssis-activity-connection-managers2.png)
+   
+   1. Si vous avez utilisé le niveau de protection **EncryptSensitiveWithUserKey** lorsque vous avez créé votre package via SSDT et que **Système de fichiers (Package)** , **Système de fichiers (Projet)** , **Package incorporé** ou **Magasin de packages** est sélectionné comme emplacement de votre package, vous devez également réentrer les propriétés sensibles de vos gestionnaires de connexions pour leur attribuer des valeurs dans cet onglet. 
+
+Lorsque vous attribuez des valeurs à vos propriétés de gestionnaire de connexions, vous pouvez ajouter du contenu dynamique à l’aide d’expressions, de fonctions, de variables système Data Factory et de paramètres ou variables de pipeline Data Factory. 
+
+Vous pouvez également utiliser les secrets stockés dans votre coffre de clés Azure Key Vault comme valeurs. Pour ce faire, cochez la case **AZURE KEY VAULT** en regard de ceux-ci. Sélectionnez ou modifiez votre service de coffre de clés lié existant ou créez-en un. Sélectionnez ensuite la version et le nom du secret correspondant à votre valeur. Lorsque vous créez ou modifiez votre service de coffre de clés lié, vous pouvez sélectionner ou modifier votre coffre de clés existant ou en créer un nouveau. Veillez à accorder à Data Factory l’accès géré à votre coffre de clés si vous ne l’avez pas déjà fait. Vous pouvez également entrer votre secret directement au format suivant : `<key vault linked service name>/<secret name>/<secret version>`. 
+
+#### <a name="property-overrides-tab"></a>Onglet Substitutions de propriété
+
+Sous l'onglet **Substitutions de propriété** de l'activité Exécuter le package SSIS, procédez comme suit.
+
+![Définir les propriétés sous l’onglet Substitutions de propriété](media/how-to-invoke-ssis-package-ssis-activity/ssis-activity-property-overrides.png)
+
+   1. Entrez un par un les chemins d'accès des propriétés existantes dans le package sélectionné pour leur attribuer manuellement des valeurs. Assurez-vous que les valeurs existent et qu’elles sont correctement entrées pour que l’exécution du package réussisse. Par exemple, pour remplacer la valeur de votre variable utilisateur, entrez son chemin d’accès au format suivant : `\Package.Variables[User::<variable name>].Value`. 
+
+      Vous pouvez obtenir le **CHEMIN D’ACCÈS À LA PROPRIÉTÉ** correct pour toute propriété de package en ouvrant le package qui le contient sur SSDT. Une fois le package ouvert, sélectionnez son flux de contrôle et sa propriété **Configurations** dans la fenêtre **Propriétés** de SSDT. Sélectionnez ensuite le bouton de sélection ( **…** ) à côté de sa propriété **Configurations** pour ouvrir la **bibliothèque des configurations du package** qui est normalement utilisée pour [créer des configurations de package dans le modèle de déploiement de package](/sql/integration-services/packages/legacy-package-deployment-ssis#create-package-configurations). 
+
+      ![Récupérer les propriétés de package à partir de SSDT – Propriété Configurations](media/how-to-invoke-ssis-package-ssis-activity/ssdt-package-properties.png)
+
+      Dans la **bibliothèque des configurations du package** , cochez la case **Activer les configurations du package** et sélectionnez le bouton **Ajouter…** pour ouvrir l’ **Assistant Configuration de package** . 
+      
+      Dans l’ **Assistant Configuration du package** , sélectionnez l’élément **Fichier config XML** dans menu déroulant **Type de configuration** et le bouton **Spécifier directement les paramètres de configuration** , entrez le nom de votre fichier config, puis sélectionnez le bouton **Suivant >** . 
+
+      ![Récupérer les propriétés de package à partir de SSDT – Bibliothèque des configurations](media/how-to-invoke-ssis-package-ssis-activity/ssdt-package-properties2.png)
+
+      Enfin, sélectionnez les propriétés du package dont vous souhaitez obtenir le chemin d’accès et le bouton **Suivant >** .  Vous pouvez maintenant voir, copier et coller les chemins d’accès aux propriétés du package de votre choix et les enregistrer dans votre fichier config. Grâce à ces informations, vous pouvez remplacer les valeurs de toutes les propriétés du package à l’exécution. 
+
+      ![Récupérer les propriétés de package à partir de SSDT – Assistant Configuration](media/how-to-invoke-ssis-package-ssis-activity/ssdt-package-properties3.png)
+   
+   1. Si vous avez utilisé le niveau de protection **EncryptSensitiveWithUserKey** lorsque vous avez créé votre package via SSDT et que **Système de fichiers (Package)** , **Système de fichiers (Projet)** , **Package incorporé** ou **Magasin de packages** est sélectionné comme emplacement de votre package, vous devez également réentrer les propriétés sensibles de votre package pour leur attribuer des valeurs dans cet onglet. 
+   
+Lorsque vous attribuez des valeurs à vos propriétés de package, vous pouvez ajouter du contenu dynamique à l'aide d'expressions, de fonctions, de variables système Data Factory et de paramètres ou variables de pipeline Data Factory.
+
+Les valeurs attribuées dans les fichiers de configuration et dans l’onglet **Paramètres SSIS** peuvent être remplacées à l’aide des onglets **Gestionnaires de connexions** et **Substitutions de propriété** . Vous pouvez également remplacer les valeurs affectées dans l’onglet **Gestionnaires de connexions** dans l’onglet **Substitutions de propriété** .
+
+Pour valider la configuration du pipeline, sélectionnez **Valider** dans la barre d’outils. Pour fermer le **Rapport de validation de pipeline** , sélectionnez **>>** .
+
+Pour publier le pipeline sur Data Factory, sélectionnez **Publier tout** . 
 
 ### <a name="run-the-pipeline"></a>Exécuter le pipeline
 À cette étape, vous déclenchez une exécution du pipeline. 
 
-1. Pour déclencher une exécution de pipeline, sélectionnez **Déclencher** dans la barre d’outils, puis **Déclencher maintenant**. 
+1. Pour déclencher une exécution de pipeline, sélectionnez **Déclencher** dans la barre d’outils, puis **Déclencher maintenant** . 
 
    ![Déclencher maintenant](./media/how-to-invoke-ssis-package-ssis-activity/ssis-activity-trigger.png)
 
-2. Dans la fenêtre **Exécution du pipeline**, sélectionnez **Terminer**. 
+2. Dans la fenêtre **Exécution du pipeline** , sélectionnez **Terminer** . 
 
 ### <a name="monitor-the-pipeline"></a>Surveiller le pipeline
 
-1. Basculez vers l’onglet **Surveiller** sur la gauche. Vous voyez l’exécution de pipeline et son état, ainsi que d’autres informations (telles que l’heure de **Début d’exécution**). Sélectionnez **Actualiser** pour actualiser l’affichage.
+1. Basculez vers l’onglet **Surveiller** sur la gauche. Vous voyez l’exécution de pipeline et son état, ainsi que d’autres informations (telles que l’heure de **Début d’exécution** ). Sélectionnez **Actualiser** pour actualiser l’affichage.
 
    ![Exécutions de pipeline](./media/how-to-invoke-ssis-package-stored-procedure-activity/pipeline-runs.png)
 
-2. Cliquez sur le lien **Afficher les exécutions d’activités** dans la colonne **Actions**. Une seule exécution d’activité est affichée, étant donné que le pipeline n’a qu’une seule activité. Il s’agit de l’activité Exécuter le package SSIS.
+2. Cliquez sur le lien **Afficher les exécutions d’activités** dans la colonne **Actions** . Une seule exécution d’activité est affichée, étant donné que le pipeline n’a qu’une seule activité. Il s’agit de l’activité Exécuter le package SSIS.
 
    ![Exécutions d’activités](./media/how-to-invoke-ssis-package-ssis-activity/ssis-activity-runs.png)
 
@@ -174,12 +334,12 @@ Dans cette section, vous utilisez Azure PowerShell pour créer un pipeline Data 
 Installez les modules Azure PowerShell les plus récents en suivant les instructions pas à pas décrites dans [Comment installer et configurer Azure PowerShell](/powershell/azure/install-az-ps).
 
 ### <a name="create-a-data-factory-with-azure-ssis-ir"></a>Créer une fabrique de données avec Azure-SSIS IR
-Vous pouvez utiliser une fabrique de données existante avec Azure-SSIS IR configuré ou créer une nouvelle fabrique de données avec Azure-SSIS IR. Suivez les instructions pas à pas du [Tutoriel : Déployer des packages SSIS sur Azure via Powershell](https://docs.microsoft.com/azure/data-factory/tutorial-deploy-ssis-packages-azure-powershell).
+Vous pouvez utiliser une fabrique de données existante avec Azure-SSIS IR configuré ou créer une nouvelle fabrique de données avec Azure-SSIS IR. Suivez les instructions pas à pas du [Tutoriel : Déployer des packages SSIS sur Azure via Powershell](./tutorial-deploy-ssis-packages-azure-powershell.md).
 
 ### <a name="create-a-pipeline-with-an-execute-ssis-package-activity"></a>Créer un pipeline avec une activité Exécuter le Package SSIS 
 Au cours de cette étape, vous créez un pipeline avec une activité Execute SSIS Package. L’activité exécute votre package SSIS. 
 
-1. Créez un fichier JSON nommé *RunSSISPackagePipeline.json* dans le dossier *C:\ADF\RunSSISPackage* avec un contenu similaire à l’exemple suivant.
+1. Créez un fichier JSON nommé `RunSSISPackagePipeline.json` dans le dossier `C:\ADF\RunSSISPackage` avec un contenu semblable à l'exemple suivant.
 
    > [!IMPORTANT]
    > Remplacez les noms d’objets, les descriptions et les chemins ou que les valeurs de propriété et de paramètre, les mots de passe et autres valeurs de variable avant d’enregistrer le fichier. 
@@ -208,8 +368,8 @@ Au cours de cette étape, vous créez un pipeline avec une activité Execute SSI
                    "runtime": "x64",
                    "loggingLevel": "Basic",
                    "packageLocation": {
-                       "packagePath": "MyFolder/MyProject/MyPackage.dtsx",
-                       "type": "SSISDB"
+                       "type": "SSISDB",
+                       "packagePath": "MyFolder/MyProject/MyPackage.dtsx"
                    },
                    "environmentPath": "MyFolder/MyEnvironment",
                    "projectParameters": {
@@ -289,7 +449,7 @@ Au cours de cette étape, vous créez un pipeline avec une activité Execute SSI
    }
    ```
 
-   Pour exécuter des packages stockés dans des systèmes de fichiers, partages de fichiers ou Azure Files, entrez les valeurs des propriétés d’emplacement de votre package et journal comme suit :
+   Pour exécuter des packages stockés dans un système de fichiers/Azure Files, entrez les valeurs des propriétés d'emplacement de votre package et journal comme suit :
 
    ```json
    {
@@ -297,8 +457,8 @@ Au cours de cette étape, vous créez un pipeline avec une activité Execute SSI
            {
                {
                    "packageLocation": {
-                       "packagePath": "//MyStorageAccount.file.core.windows.net/MyFileShare/MyPackage.dtsx",
                        "type": "File",
+                       "packagePath": "//MyStorageAccount.file.core.windows.net/MyFileShare/MyPackage.dtsx",
                        "typeProperties": {
                            "packagePassword": {
                                "type": "SecureString",
@@ -315,8 +475,8 @@ Au cours de cette étape, vous créez un pipeline avec une activité Execute SSI
                        }
                    },
                    "logLocation": {
-                       "logPath": "//MyStorageAccount.file.core.windows.net/MyFileShare/MyLogFolder",
                        "type": "File",
+                       "logPath": "//MyStorageAccount.file.core.windows.net/MyFileShare/MyLogFolder",
                        "typeProperties": {
                            "accessCredential": {
                                "domain": "Azure",
@@ -326,7 +486,7 @@ Au cours de cette étape, vous créez un pipeline avec une activité Execute SSI
                                    "store": {
                                        "referenceName": "myAKV",
                                        "type": "LinkedServiceReference"
-                           },
+                                   },
                                    "secretName": "MyAccountKey"
                                }
                            }
@@ -338,7 +498,7 @@ Au cours de cette étape, vous créez un pipeline avec une activité Execute SSI
    }
    ```
 
-   Pour exécuter des packages dans des projets stockés dans des systèmes de fichiers, partages de fichiers ou Azure Files, vous pouvez entrer les valeurs de la propriété d’emplacement de votre package comme suit :
+   Pour exécuter des packages dans des projets stockés dans un système de fichiers/Azure Files, entrez les valeurs des propriétés d'emplacement de votre package comme suit :
 
    ```json
    {
@@ -346,8 +506,8 @@ Au cours de cette étape, vous créez un pipeline avec une activité Execute SSI
            {
                {
                    "packageLocation": {
-                       "packagePath": "//MyStorageAccount.file.core.windows.net/MyFileShare/MyProject.ispac:MyPackage.dtsx",
                        "type": "File",
+                       "packagePath": "//MyStorageAccount.file.core.windows.net/MyFileShare/MyProject.ispac:MyPackage.dtsx",
                        "typeProperties": {
                            "packagePassword": {
                                "type": "SecureString",
@@ -369,7 +529,7 @@ Au cours de cette étape, vous créez un pipeline avec une activité Execute SSI
    }
    ```
 
-   Pour exécuter des packages incorporés, entrez les valeurs de propriété d'emplacement de votre package comme suit :
+   Pour exécuter des packages incorporés, entrez les valeurs des propriétés d'emplacement de votre package comme suit :
 
    ```json
    {
@@ -394,9 +554,53 @@ Au cours de cette étape, vous créez un pipeline avec une activité Execute SSI
    }
    ```
 
-2. Dans Azure PowerShell, basculez vers le dossier *C:\ADF\RunSSISPackage*.
+   Pour exécuter des packages stockés dans des magasins de packages, entrez les valeurs des propriétés d'emplacement de votre package et configuration comme suit :
 
-3. Pour créer le pipeline **RunSSISPackagePipeline**, exécutez la cmdlet **Set-AzDataFactoryV2Pipeline**.
+   ```json
+   {
+       {
+           {
+               {
+                   "packageLocation": {
+                       "type": "PackageStore",
+                       "packagePath": "myPackageStore/MyFolder/MyPackage",
+                       "typeProperties": {
+                           "packagePassword": {
+                               "type": "SecureString",
+                               "value": "MyEncryptionPassword"
+                           },
+                           "accessCredential": {
+                               "domain": "Azure",
+                               "username": "MyStorageAccount",
+                               "password": {
+                                   "type": "SecureString",
+                                   "value": "MyAccountKey"
+                               }
+                           },
+                           "configurationPath": "//MyStorageAccount.file.core.windows.net/MyFileShare/MyConfiguration.dtsConfig",
+                           "configurationAccessCredential": {
+                               "domain": "Azure",
+                               "userName": "MyStorageAccount",
+                               "password": {
+                                   "type": "AzureKeyVaultSecret",
+                                   "store": {
+                                       "referenceName": "myAKV",
+                                       "type": "LinkedServiceReference"
+                                   },
+                                   "secretName": "MyAccountKey"
+                               }
+                           }
+                       }
+                   }
+               }
+           }
+       }
+   }
+   ```
+
+2. Dans Azure PowerShell, accédez au dossier `C:\ADF\RunSSISPackage`.
+
+3. Pour créer le pipeline **RunSSISPackagePipeline** , exécutez la cmdlet **Set-AzDataFactoryV2Pipeline** .
 
    ```powershell
    $DFPipeLine = Set-AzDataFactoryV2Pipeline -DataFactoryName $DataFactory.DataFactoryName `
@@ -452,7 +656,7 @@ Vous pouvez également surveiller le pipeline à l’aide du portail Azure. Pour
 ### <a name="schedule-the-pipeline-with-a-trigger"></a>Planifier le pipeline avec un déclencheur
 À l’étape précédente, vous avez exécuté le pipeline à la demande. Vous pouvez également créer un déclencheur de planification pour exécuter le pipeline d’après une planification, par exemple horaire ou quotidienne.
 
-1. Créez un fichier JSON nommé *MyTrigger.json* dans le dossier *C:\ADF\RunSSISPackage* avec le contenu suivant : 
+1. Créez un fichier JSON nommé `MyTrigger.json` dans le dossier `C:\ADF\RunSSISPackage` avec le contenu suivant : 
         
    ```json
    {
@@ -478,7 +682,7 @@ Vous pouvez également surveiller le pipeline à l’aide du portail Azure. Pour
    }    
    ```
     
-1. Dans Azure PowerShell, basculez vers le dossier *C:\ADF\RunSSISPackage*.
+1. Dans Azure PowerShell, accédez au dossier `C:\ADF\RunSSISPackage`.
 1. Exécutez la cmdlet **Set-AzDataFactoryV2Trigger** pour créer le déclencheur. 
 
    ```powershell
@@ -486,14 +690,14 @@ Vous pouvez également surveiller le pipeline à l’aide du portail Azure. Pour
                                    -DataFactoryName $DataFactory.DataFactoryName `
                                    -Name "MyTrigger" -DefinitionFile ".\MyTrigger.json"
    ```
-1. Par défaut, le déclencheur est arrêté. Démarrez le déclencheur en exécutant la cmdlet **Start-AzDataFactoryV2Trigger**. 
+1. Par défaut, le déclencheur est arrêté. Démarrez le déclencheur en exécutant la cmdlet **Start-AzDataFactoryV2Trigger** . 
 
    ```powershell
    Start-AzDataFactoryV2Trigger -ResourceGroupName $ResGrp.ResourceGroupName `
                                      -DataFactoryName $DataFactory.DataFactoryName `
                                      -Name "MyTrigger" 
    ```
-1. Vérifiez que le déclencheur est démarré en exécutant la cmdlet **Get-AzDataFactoryV2Trigger**. 
+1. Vérifiez que le déclencheur est démarré en exécutant la cmdlet **Get-AzDataFactoryV2Trigger** . 
 
    ```powershell
    Get-AzDataFactoryV2Trigger -ResourceGroupName $ResourceGroupName `

@@ -1,16 +1,14 @@
 ---
 title: Visualisation de votre cluster à l’aide de l’outil Azure Service Fabric Explorer
 description: Service Fabric Explorer est une application dédiée à l’inspection et à la gestion des applications cloud et des nœuds dans un cluster Microsoft Azure Service Fabric.
-author: mikkelhegn
 ms.topic: conceptual
 ms.date: 01/24/2019
-ms.author: mikhegn
-ms.openlocfilehash: 80e3d990b6e8026c57ffff0048d0447a95529564
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: a45aff305f97610cb2660c2e3f4b4427b905d7d4
+ms.sourcegitcommit: 16c7fd8fe944ece07b6cf42a9c0e82b057900662
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79229225"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96574053"
 ---
 # <a name="visualize-your-cluster-with-service-fabric-explorer"></a>Visualiser votre cluster à l’aide de l’outil Service Fabric Explorer
 
@@ -106,7 +104,7 @@ Vous pouvez également utiliser Service Fabric Explorer pour créer des instance
 ## <a name="event-store"></a>EventStore
 EventStore est une fonctionnalité proposée par la plateforme qui fournit les événements de la plateforme Service Fabric disponibles dans Service Fabric Explorer et via l’API REST. Vous pouvez obtenir une vue de capture de ce qui se passe dans votre cluster pour chaque entité (nœud, service, application et requête) basée sur l’heure de l’événement. Pour plus d’informations sur EventStore, consultez [Vue d’ensemble d’EventStore](service-fabric-diagnostics-eventstore.md).   
 
-![EventStore][sfx-eventstore]
+![Capture d’écran montrant le volet Nœuds avec ÉVÉNEMENTS sélectionné.][sfx-eventstore]
 
 >[!NOTE]
 >Depuis Service Fabric version 6.4, EventStore n’est pas activé par défaut et doit être activé dans le modèle Resource Manager
@@ -117,7 +115,7 @@ EventStore est une fonctionnalité proposée par la plateforme qui fournit les �
 ## <a name="image-store-viewer"></a>Image Store Viewer
 Image Store Viewer est une fonctionnalité proposée si vous utilisez Native Image Store qui permet d’afficher le contenu actuel du magasin d’images, d’obtenir des informations sur les fichiers et dossiers et de supprimer les fichiers et dossiers.
 
-![Mappage de cluster de Service Fabric Explorer][sfx-imagestore]
+![Capture d’écran montrant la page Image Store Viewer.][sfx-imagestore]
 
 ## <a name="backup-and-restore"></a>Sauvegarde et restauration
 Service Fabric Explorer offre la possibilité d’interagir avec [Sauvegarde et de restauration](./service-fabric-reliable-services-backup-restore.md). Pour afficher les fonctionnalités de sauvegarde et de restauration dans SFX, vous devez activer le mode avancé.
@@ -132,7 +130,7 @@ Les opérations suivantes sont possibles :
 * Déclencher et suivre la sauvegarde d’une partition.
 * Déclencher et suivre la restauration d’une partition.
 
-Pour plus d’informations sur le service Sauvegarde et restauration, consultez la [référence sur l’API REST](https://docs.microsoft.com/rest/api/servicefabric/sfclient-index-backuprestore).
+Pour plus d’informations sur le service Sauvegarde et restauration, consultez la [référence sur l’API REST](/rest/api/servicefabric/sfclient-index-backuprestore).
 ## <a name="next-steps"></a>Étapes suivantes
 * [Gestion de vos applications Service Fabric dans Visual Studio](service-fabric-manage-application-in-visual-studio.md)
 * [Déploiement d’application Service Fabrix à l’aide de PowerShell](service-fabric-deploy-remove-applications.md)

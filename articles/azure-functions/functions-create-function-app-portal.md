@@ -5,10 +5,10 @@ ms.topic: how-to
 ms.date: 08/29/2019
 ms.custom: mvc
 ms.openlocfilehash: 001b4e4f0ea7fbacd232b2a87abfe353f34919bd
-ms.sourcegitcommit: 7d8158fcdcc25107dfda98a355bf4ee6343c0f5c
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/09/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "80985012"
 ---
 # <a name="create-a-function-app-from-the-azure-portal"></a>Créer une Function App à l’aide du Portail Azure

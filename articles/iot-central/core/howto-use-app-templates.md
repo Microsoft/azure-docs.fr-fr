@@ -8,16 +8,14 @@ ms.topic: how-to
 ms.service: iot-central
 services: iot-central
 manager: philmea
-ms.openlocfilehash: f50c7e8dcb33fd2ed95829286aaf815926d9fb3f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: aec72644f708d6363a80da28c5e571d0165fcdfa
+ms.sourcegitcommit: b4f303f59bb04e3bae0739761a0eb7e974745bb7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80157607"
+ms.lasthandoff: 10/02/2020
+ms.locfileid: "91651834"
 ---
 # <a name="export-your-application"></a>Exporter votre application
-
-
 
 Cet article explique comment, en tant que gestionnaire de solutions, exporter une application IoT Central pour pouvoir la réutiliser.
 
@@ -32,7 +30,7 @@ Vous pouvez créer une copie de n’importe quelle application, à l’exception
 
 Sélectionnez **Copier**. Dans la boîte de dialogue, entrez les détails de la nouvelle application. Ensuite, sélectionnez **Copier** pour confirmer que vous souhaitez continuer. Pour plus d’informations sur les champs du formulaire, consultez le guide de démarrage rapide [Créer une application](quick-deploy-iot-central.md).
 
-![Page Paramètres de l’application](media/howto-use-app-templates/appcopy2.png)
+![Capture d’écran montrant la page de paramètres « Copier l’application ».](media/howto-use-app-templates/appcopy2.png)
 
 Une fois l’application correctement copiée, vous pouvez accéder à la nouvelle application à l’aide du lien.
 
@@ -61,7 +59,6 @@ Lorsque vous créez un modèle d’application, il n’inclut pas les éléments
 
 - Appareils
 - Utilisateurs
-- Définitions des travaux
 - Définitions des exportations de données continues
 
 Ajoutez ces éléments manuellement à toutes les applications créées depuis un modèle d’application.
@@ -93,4 +90,4 @@ Pour mettre à jour votre modèle d’application, modifiez le nom du modèle ou
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Maintenant que vous avez appris à utiliser des modèles d’application, l’étape suivante conseillée est d’apprendre à [Gérer des applications IoT Central à partir du portail Azure](howto-manage-iot-central-from-portal.md)
+Maintenant que vous avez appris à utiliser des modèles d’application, l’étape suivante conseillée est d’apprendre à [surveiller l’intégrité globale des appareils connectés à une application IoT Central](howto-monitor-application-health.md).

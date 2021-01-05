@@ -1,6 +1,6 @@
 ---
 title: Gérer les points de terminaison de streaming avec le SDK .NET. | Microsoft Docs
-description: Cet article montre comment gérer les points de terminaison de streaming avec le portail Azure.
+description: Cet article montre comment gérer les points de terminaison de streaming avec le Kit de développement logiciel (SDK) Microsoft .NET.
 services: media-services
 documentationcenter: ''
 author: Juliako
@@ -15,17 +15,20 @@ ms.devlang: na
 ms.topic: article
 ms.date: 03/18/2019
 ms.author: juliako
-ms.openlocfilehash: b6c6fccd473ae57139c0b46bf32dc9468a4ba1a8
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: faf9acc6e91b43e2dd82589127f8697c666d86e3
+ms.sourcegitcommit: 32c521a2ef396d121e71ba682e098092ac673b30
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74901275"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91250525"
 ---
-# <a name="manage-streaming-endpoints-with-net-sdk"></a>Gérer les points de terminaison de streaming avec le SDK .NET  
+# <a name="manage-streaming-endpoints-with-net-sdk"></a>Gérer les points de terminaison de streaming avec le SDK .NET
+
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]  
 
 >[!NOTE]
->Consultez l’article de [présentation](media-services-streaming-endpoints-overview.md). Consultez aussi [StreamingEndpoint](https://docs.microsoft.com/rest/api/media/operations/streamingendpoint).
+>Consultez l’article de [présentation](media-services-streaming-endpoints-overview.md). Consultez aussi [StreamingEndpoint](/rest/api/media/operations/streamingendpoint).
 
 Le code de cet article montre comment effectuer les tâches suivantes à l’aide du kit SDK Azure Media Services pour .NET :
 
@@ -150,4 +153,3 @@ Consultez les parcours d’apprentissage de Media Services.
 
 ## <a name="provide-feedback"></a>Fournir des commentaires
 [!INCLUDE [media-services-user-voice-include](../../../includes/media-services-user-voice-include.md)]
-

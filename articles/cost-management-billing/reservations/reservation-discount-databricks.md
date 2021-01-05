@@ -1,18 +1,19 @@
 ---
 title: Processus d’application d’une remise pré-achat Azure Databricks
-description: Découvrez comment s’applique une remise pré-achat Azure Databricks.
+description: Découvrez comment s’applique une remise pré-achat Azure Databricks. Vous pouvez utiliser ces Databricks à tout moment pendant la période d’achat.
 author: yashesvi
 ms.reviewer: yashar
 ms.service: cost-management-billing
+ms.subservice: reservations
 ms.topic: conceptual
 ms.date: 02/12/2020
 ms.author: banders
-ms.openlocfilehash: 69f83fc1d390fcbea77468045b89ee6024e7fe9a
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: f5a2102cedfa2b8631c1eb7ff6a3ff2452d315e3
+ms.sourcegitcommit: 56cbd6d97cb52e61ceb6d3894abe1977713354d9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "77200314"
+ms.lasthandoff: 08/20/2020
+ms.locfileid: "88690525"
 ---
 # <a name="how-azure-databricks-pre-purchase-discount-is-applied"></a>Processus d’application d’une remise pré-achat Azure Databricks
 

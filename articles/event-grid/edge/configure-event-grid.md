@@ -5,16 +5,14 @@ author: VidyaKukke
 manager: rajarv
 ms.author: vkukke
 ms.reviewer: spelluru
-ms.date: 10/03/2019
+ms.date: 07/08/2020
 ms.topic: article
-ms.service: event-grid
-services: event-grid
-ms.openlocfilehash: 841b5092775353bbe3340dbbd55610026f998a15
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 632227579fd021a0d2ce1d0b1bb0b8a8288c5f47
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76846476"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86171667"
 ---
 # <a name="event-grid-configuration"></a>Configuration d’Event Grid
 

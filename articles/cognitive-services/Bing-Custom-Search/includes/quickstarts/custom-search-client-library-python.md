@@ -8,19 +8,19 @@ ms.service: cognitive-services
 ms.topic: include
 ms.date: 02/27/2020
 ms.author: aahi
-ms.openlocfilehash: ec0ffdcf86e67a7126a3100c1e20b6e5c3474e35
-ms.sourcegitcommit: 9ee0cbaf3a67f9c7442b79f5ae2e97a4dfc8227b
+ms.openlocfilehash: 92df45e38a926b4a791315f731e1d1cb078d5852
+ms.sourcegitcommit: 22da82c32accf97a82919bf50b9901668dc55c97
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "78253048"
+ms.lasthandoff: 11/08/2020
+ms.locfileid: "94371679"
 ---
 Commencez à utiliser la bibliothèque cliente Recherche personnalisée Bing pour Python. Suivez les étapes suivantes pour installer le package et essayer l’exemple de code pour les tâches de base. L’API Recherche personnalisée Bing vous permet de créer des expériences de recherche exemptes de publicité, adaptées aux sujets qui vous intéressent. Le code source de cet exemple est disponible sur [GitHub](https://github.com/Azure-Samples/cognitive-services-python-sdk-samples/blob/master/samples/search/custom_search_samples.py).
 
 Utilisez la bibliothèque cliente Recherche personnalisée Bing pour Python pour :
 * Rechercher des résultats de recherche sur le web à partir de votre instance Recherche personnalisée Bing.
 
-[Documentation de référence](https://docs.microsoft.com/python/api/overview/azure/cognitiveservices/customsearch?view=azure-python) | [Code source de la bibliothèque](https://github.com/Azure/azure-sdk-for-python/tree/master/sdk/cognitiveservices/azure-cognitiveservices-search-customsearch) | [Package (PyPi)](https://pypi.org/project/azure-cognitiveservices-search-customsearch/) | [Exemples](https://github.com/Azure-Samples/cognitive-services-python-sdk-samples/)
+[Documentation de référence](/python/api/azure-cognitiveservices-search-customsearch/?view=azure-python) | [Code source de la bibliothèque](https://github.com/Azure/azure-sdk-for-python/tree/master/sdk/cognitiveservices/azure-cognitiveservices-search-customsearch) | [Package (PyPi)](https://pypi.org/project/azure-cognitiveservices-search-customsearch/) | [Exemples](https://github.com/Azure-Samples/cognitive-services-python-sdk-samples/)
 
 
 ## <a name="prerequisites"></a>Prérequis

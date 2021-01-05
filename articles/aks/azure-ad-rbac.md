@@ -1,20 +1,20 @@
 ---
-title: Utiliser Azure AD et RBAC pour les clusters
+title: Utiliser Azure AD et le RBAC Kubernetes pour les clusters
 titleSuffix: Azure Kubernetes Service
-description: Découvrez comment utiliser l’appartenance de groupe Azure Active Directory pour restreindre l’accès aux ressources de cluster à l’aide du contrôle d’accès en fonction du rôle (RBAC) dans Azure Kubernetes Service (ACS)
+description: Découvrez comment utiliser l’appartenance de groupe Azure Active Directory pour restreindre l’accès aux ressources de cluster à l’aide du contrôle d’accès en fonction du rôle Kubernetes (RBAC Kubernetes) dans Azure Kubernetes Service (ACS)
 services: container-service
 ms.topic: article
-ms.date: 04/16/2019
-ms.openlocfilehash: ad195085c049776bf0db418c57f2c72830f1adff
-ms.sourcegitcommit: 6397c1774a1358c79138976071989287f4a81a83
+ms.date: 07/21/2020
+ms.openlocfilehash: 89bf785a082ff479dcd824a773123fcd061dc22d
+ms.sourcegitcommit: 16c7fd8fe944ece07b6cf42a9c0e82b057900662
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "80803567"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96576109"
 ---
-# <a name="control-access-to-cluster-resources-using-role-based-access-control-and-azure-active-directory-identities-in-azure-kubernetes-service"></a>Contrôler l’accès aux ressources de cluster à l’aide du contrôle d’accès en fonction du rôle et des identités Azure Active Directory dans Azure Kubernetes Service
+# <a name="control-access-to-cluster-resources-using-kubernetes-role-based-access-control-and-azure-active-directory-identities-in-azure-kubernetes-service"></a>Contrôler l’accès aux ressources de cluster à l’aide du contrôle d’accès en fonction du rôle Kubernetes et des identités Azure Active Directory dans Azure Kubernetes Service
 
-Azure Kubernetes Service (AKS) peut être configuré pour utiliser Azure Active Directory (AD) pour l’authentification utilisateur. Dans cette configuration, vous vous connectez à un cluster AKS en utilisant un jeton d’authentification Azure AD. Vous pouvez également configurer le contrôle d’accès en fonction du rôle (RBAC) de Kubernetes pour limiter l’accès aux ressources de cluster en fonction de l’identité ou de l’appartenance de groupe d’un utilisateur.
+Azure Kubernetes Service (AKS) peut être configuré pour utiliser Azure Active Directory (AD) pour l’authentification utilisateur. Dans cette configuration, vous vous connectez à un cluster AKS en utilisant un jeton d’authentification Azure AD. Vous pouvez également configurer le contrôle d’accès en fonction du rôle Kubernetes (RBAC Kubernetes) pour limiter l’accès aux ressources de cluster en fonction de l’identité ou de l’appartenance à un groupe d’un utilisateur.
 
 Cet article montre comment utiliser l’appartenance de groupe Azure AD pour contrôler l’accès aux espaces de noms et ressources de cluster à l’aide du contrôle d’accès en fonction du rôle (RBAC) de Kubernetes dans un cluster AKS. Des exemples de groupes et d’utilisateurs sont créés dans Azure AD, puis des Roles et RoleBindings sont créés dans le cluster AKS pour accorder les autorisations appropriées pour créer et afficher des ressources.
 
@@ -79,7 +79,7 @@ az role assignment create \
 
 ## <a name="create-demo-users-in-azure-ad"></a>Créer des utilisateurs de démonstration dans Azure AD
 
-Avec les deux exemples de groupes créés dans Azure AD pour nos développeurs d’applications et ingénieurs de fiabilité de site, créons à présent deux exemples d’utilisateurs. Pour tester l’intégration de RBAC à la fin de l’article, vous allez vous connecter au cluster AKS avec ces comptes.
+Avec les deux exemples de groupes créés dans Azure AD pour nos développeurs d’applications et ingénieurs de fiabilité de site, créons à présent deux exemples d’utilisateurs. Pour tester l’intégration du RBAC Kubernetes à la fin de l’article, vous allez vous connecter au cluster AKS avec ces comptes.
 
 Créez le premier compte d’utilisateur dans Azure AD à l’aide de la commande [az ad user create][az-ad-user-create].
 
@@ -129,7 +129,7 @@ Créez un espace de noms dans le cluster AKS à l’aide de la commande [kubectl
 kubectl create namespace dev
 ```
 
-Dans Kubernetes, les *Roles* définissent les autorisations à accorder, et les *RoleBindings* les appliquent aux utilisateurs ou groupes souhaités. Ces affectations peuvent s’appliquer à un espace de noms donné ou à l’ensemble du cluster. Pour plus d’informations, consultez [Utilisation de l’autorisation RBAC][rbac-authorization].
+Dans Kubernetes, les *Roles* définissent les autorisations à accorder, et les *RoleBindings* les appliquent aux utilisateurs ou groupes souhaités. Ces affectations peuvent s’appliquer à un espace de noms donné ou à l’ensemble du cluster. Pour plus d’informations, consultez [Utilisation de l’autorisation Kubernetes RBAC][rbac-authorization].
 
 Commencez par créer un rôle pour l’espace de noms *dev*. Ce rôle accorde des autorisations complètes pour l’espace de noms. Dans des environnements de production, vous pouvez spécifier des autorisations plus granulaires pour différents utilisateurs ou groupes.
 
@@ -137,7 +137,7 @@ Créez un fichier nommé `role-dev-namespace.yaml` et collez le manifeste YAML s
 
 ```yaml
 kind: Role
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: dev-user-full-access
   namespace: dev
@@ -168,7 +168,7 @@ Maintenant, créez un RoleBinding pour le groupe *appdev* afin d’utiliser le R
 
 ```yaml
 kind: RoleBinding
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: dev-user-access
   namespace: dev
@@ -202,7 +202,7 @@ Créez un fichier nommé `role-sre-namespace.yaml` et collez le manifeste YAML s
 
 ```yaml
 kind: Role
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: sre-user-full-access
   namespace: sre
@@ -233,7 +233,7 @@ Créez un RoleBinding pour le groupe *opssre* afin d’utiliser le Role créé p
 
 ```yaml
 kind: RoleBinding
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: sre-user-access
   namespace: sre
@@ -266,13 +266,13 @@ az aks get-credentials --resource-group myResourceGroup --name myAKSCluster --ov
 Planifiez un pod NGINX de base à l’aide de la commande [kubectl run][kubectl-run] dans l’espace de noms *dev* :
 
 ```console
-kubectl run --generator=run-pod/v1 nginx-dev --image=nginx --namespace dev
+kubectl run nginx-dev --image=nginx --namespace dev
 ```
 
 En tant qu’invite de connexion, entrez les informations d’identification de votre propre compte `appdev@contoso.com` créé au début de l’article. Une fois que vous êtes correctement connecté, le jeton de compte est mis en cache pour des commandes `kubectl` futures. Le pod NGINX est correctement planifié, comme le montre l’exemple de sortie suivant :
 
 ```console
-$ kubectl run --generator=run-pod/v1 nginx-dev --image=nginx --namespace dev
+$ kubectl run nginx-dev --image=nginx --namespace dev
 
 To sign in, use a web browser to open the page https://microsoft.com/devicelogin and enter the code B24ZD6FP8 to authenticate.
 
@@ -313,7 +313,7 @@ Error from server (Forbidden): pods is forbidden: User "aksdev@contoso.com" cann
 De la même façon, essayez de planifier un pod dans un espace de noms différent, tel que *sre*. L’appartenance de groupe de l’utilisateur ne s’aligne pas avec un Role et des RoleBinding Kubernetes pour accorder ces autorisations, comme le montre l’exemple de sortie suivant :
 
 ```console
-$ kubectl run --generator=run-pod/v1 nginx-dev --image=nginx --namespace sre
+$ kubectl run nginx-dev --image=nginx --namespace sre
 
 Error from server (Forbidden): pods is forbidden: User "aksdev@contoso.com" cannot create resource "pods" in API group "" in the namespace "sre"
 ```
@@ -331,14 +331,14 @@ az aks get-credentials --resource-group myResourceGroup --name myAKSCluster --ov
 Essayez de planifier et d’afficher les pods dans l’espace de noms *sre* attribué. Lorsque vous y êtes invité, connectez-vous avec vos propres informations d’identification `opssre@contoso.com` créées au début de l’article :
 
 ```console
-kubectl run --generator=run-pod/v1 nginx-sre --image=nginx --namespace sre
+kubectl run nginx-sre --image=nginx --namespace sre
 kubectl get pods --namespace sre
 ```
 
 Comme le montre l’exemple de sortie suivant, vous pouvez correctement créer et afficher les pods :
 
 ```console
-$ kubectl run --generator=run-pod/v1 nginx-sre --image=nginx --namespace sre
+$ kubectl run nginx-sre --image=nginx --namespace sre
 
 To sign in, use a web browser to open the page https://microsoft.com/devicelogin and enter the code BM4RHP3FD to authenticate.
 
@@ -354,7 +354,7 @@ nginx-sre   1/1     Running   0
 
 ```console
 kubectl get pods --all-namespaces
-kubectl run --generator=run-pod/v1 nginx-sre --image=nginx --namespace dev
+kubectl run nginx-sre --image=nginx --namespace dev
 ```
 
 Ces commandes `kubectl` échouent, comme le montre l’exemple de sortie suivant. L’appartenance de groupe de l’utilisateur et le Role et les RoleBindings Kubernetes n’accordent pas d’autorisations pour créer ou gérer des ressources dans d’autres espaces de noms :
@@ -363,7 +363,7 @@ Ces commandes `kubectl` échouent, comme le montre l’exemple de sortie suivant
 $ kubectl get pods --all-namespaces
 Error from server (Forbidden): pods is forbidden: User "akssre@contoso.com" cannot list pods at the cluster scope
 
-$ kubectl run --generator=run-pod/v1 nginx-sre --image=nginx --namespace dev
+$ kubectl run nginx-sre --image=nginx --namespace dev
 Error from server (Forbidden): pods is forbidden: User "akssre@contoso.com" cannot create pods in the namespace "dev"
 ```
 
@@ -410,5 +410,5 @@ Pour découvrir les meilleures pratiques de contrôle des identités et des ress
 [az-ad-user-create]: /cli/azure/ad/user#az-ad-user-create
 [az-ad-group-member-add]: /cli/azure/ad/group/member#az-ad-group-member-add
 [az-ad-group-show]: /cli/azure/ad/group#az-ad-group-show
-[rbac-authorization]: concepts-identity.md#role-based-access-controls-rbac
+[rbac-authorization]: concepts-identity.md#kubernetes-role-based-access-control-kubernetes-rbac
 [operator-best-practices-identity]: operator-best-practices-identity.md

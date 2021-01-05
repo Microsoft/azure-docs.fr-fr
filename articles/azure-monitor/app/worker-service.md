@@ -2,27 +2,28 @@
 title: Application Insights pour les applications Service Worker (applications non HTTP)
 description: Surveillance des applications .NET Core/.NET Framework non HTTP avec Azure Monitor Application Insights.
 ms.topic: conceptual
-ms.date: 12/16/2019
-ms.openlocfilehash: f043140e5a342d114f777ad16bba588790b7f8cc
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.custom: devx-track-csharp
+ms.date: 05/11/2020
+ms.openlocfilehash: 3d02b6e70d0832b92ae88db237b4c554b92e7f3b
+ms.sourcegitcommit: fbb620e0c47f49a8cf0a568ba704edefd0e30f81
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81536724"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91875068"
 ---
 # <a name="application-insights-for-worker-service-applications-non-http-applications"></a>Application Insights pour les applications Service Worker (applications non HTTP)
 
-Application Insights publie un nouveau kit de développement logiciel (SDK), appelé `Microsoft.ApplicationInsights.WorkerService`, qui est le mieux adapté aux charges de travail non HTTP, telles que la messagerie, les tâches en arrière-plan, les applications console, etc. À la différence d’une application web ASP.NET/ASP.NET Core traditionnelle, ces types d’applications ne peuvent pas gérer les requêtes HTTP entrantes. Par conséquent, l’utilisation de packages Application Insights pour les applications [ASP.NET](asp-net.md) ou [ASP.NET Core](asp-net-core.md) n’est pas prise en charge.
+Le nouveau [kit de développement logiciel (SDK) Application Insights pour services Worker](https://www.nuget.org/packages/Microsoft.ApplicationInsights.WorkerService) est le mieux adapté aux charges de travail non HTTP, telles que la messagerie, les tâches en arrière-plan, les applications console, etc. À la différence d’une application web ASP.NET/ASP.NET Core traditionnelle, ces types d’applications ne peuvent pas gérer les requêtes HTTP entrantes. Par conséquent, l’utilisation de packages Application Insights pour les applications [ASP.NET](asp-net.md) ou [ASP.NET Core](asp-net-core.md) n’est pas prise en charge.
 
 Le nouveau kit de développement logiciel (SDK) n’effectue pas de collecte de données de télémétrie par lui-même. Au lieu de cela, il intègre d’autres collecteurs automatiques Application Insights réputés, comme [DependencyCollector](https://www.nuget.org/packages/Microsoft.ApplicationInsights.DependencyCollector/), [PerfCounterCollector](https://www.nuget.org/packages/Microsoft.ApplicationInsights.PerfCounterCollector/), [ApplicationInsightsLoggingProvider](https://www.nuget.org/packages/Microsoft.Extensions.Logging.ApplicationInsights), etc. Ce kit de développement logiciel (SDK) expose des méthodes d’extension sur `IServiceCollection` pour activer et configurer la collecte de données de télémétrie.
 
 ## <a name="supported-scenarios"></a>Scénarios pris en charge
 
-Le [SDK Application Insights pour Service Worker](https://www.nuget.org/packages/Microsoft.ApplicationInsights.WorkerService) est particulièrement bien adapté aux applications non HTTP, peu importe où et comment elles s’exécutent. Si votre application est en cours d’exécution et dispose d’une connectivité réseau vers Azure, les données de télémétrie peuvent être collectées. La surveillance Application Insights est prise en charge partout où .NET Core est pris en charge. Ce package peut être utilisé dans le nouveau [Service Worker .NET Core 3.0](https://devblogs.microsoft.com/aspnet/dotnet-core-workers-in-azure-container-instances), les [tâches en arrière-plan dans Asp.Net Core 2.1/2.2](https://docs.microsoft.com/aspnet/core/fundamentals/host/hosted-services?view=aspnetcore-2.2), les applications console (.NET Core/ .NET Framework), etc.
+Le [SDK Application Insights pour Service Worker](https://www.nuget.org/packages/Microsoft.ApplicationInsights.WorkerService) est particulièrement bien adapté aux applications non HTTP, peu importe où et comment elles s’exécutent. Si votre application est en cours d’exécution et dispose d’une connectivité réseau vers Azure, les données de télémétrie peuvent être collectées. La surveillance Application Insights est prise en charge partout où .NET Core est pris en charge. Ce package peut être utilisé dans le nouveau [Service Worker .NET Core 3.0](https://devblogs.microsoft.com/aspnet/dotnet-core-workers-in-azure-container-instances), les [tâches en arrière-plan dans Asp.Net Core 2.1/2.2](/aspnet/core/fundamentals/host/hosted-services?view=aspnetcore-2.2&preserve-view=true), les applications console (.NET Core/ .NET Framework), etc.
 
 ## <a name="prerequisites"></a>Prérequis
 
-Clé d’instrumentation Application Insights valide. Cette clé est requise pour envoyer les données de télémétrie à Application Insights. Si vous avez besoin créer une ressource Application Insights pour obtenir une instrumentation clé, consultez [Créer une ressource Application Insights](https://docs.microsoft.com/azure/azure-monitor/app/create-new-resource).
+Clé d’instrumentation Application Insights valide. Cette clé est requise pour envoyer les données de télémétrie à Application Insights. Si vous avez besoin créer une ressource Application Insights pour obtenir une instrumentation clé, consultez [Créer une ressource Application Insights](./create-new-resource.md).
 
 ## <a name="using-application-insights-sdk-for-worker-services"></a>Utilisation du kit de développement logiciel (SDK) Application Insights pour services Worker
 
@@ -43,7 +44,7 @@ Les instructions spécifiques pour chaque type d’application sont décrites da
 
 ## <a name="net-core-30-worker-service-application"></a>Application de service Worker .NET Core 3.0
 
-Un exemple complet est disponible [ici](https://github.com/microsoft/ApplicationInsights-Home/tree/master/Samples/WorkerServiceSDK/WorkerServiceSampleWithApplicationInsights)
+Un exemple complet est disponible [ici](https://github.com/microsoft/ApplicationInsights-dotnet/tree/develop/examples/WorkerServiceSDK/WorkerServiceSampleWithApplicationInsights)
 
 1. Télécharger et installer [.NET Core 3.0](https://dotnet.microsoft.com/download/dotnet-core/3.0)
 2. Créer un projet Service Worker à l’aide du nouveau modèle de projet ou de la ligne de commande Visual Studio `dotnet new worker`
@@ -133,11 +134,11 @@ En règle générale, `APPINSIGHTS_INSTRUMENTATIONKEY` spécifie la clé d’ins
 
 ## <a name="aspnet-core-background-tasks-with-hosted-services"></a>Tâches ASP.NET Core en arrière-plan avec services hébergés
 
-[Ce](https://docs.microsoft.com/aspnet/core/fundamentals/host/hosted-services?view=aspnetcore-2.2&tabs=visual-studio) document décrit la façon de créer des tâches en arrière-plan dans une application ASP.NET Core 2.1/2.2.
+[Ce](/aspnet/core/fundamentals/host/hosted-services?tabs=visual-studio&view=aspnetcore-2.2&preserve-view=true) document décrit la façon de créer des tâches en arrière-plan dans une application ASP.NET Core 2.1/2.2.
 
-Un exemple complet est disponible [ici](https://github.com/microsoft/ApplicationInsights-Home/tree/master/Samples/WorkerServiceSDK/BackgroundTasksWithHostedService)
+Un exemple complet est disponible [ici](https://github.com/microsoft/ApplicationInsights-dotnet/tree/develop/examples/WorkerServiceSDK/BackgroundTasksWithHostedService)
 
-1. Installez le package Microsoft.ApplicationInsights.WorkerService (https://www.nuget.org/packages/Microsoft.ApplicationInsights.WorkerService) ) dans l’application.
+1. Installez le package [Microsoft.ApplicationInsights.WorkerService](https://www.nuget.org/packages/Microsoft.ApplicationInsights.WorkerService) dans l’application.
 2. Ajoutez `services.AddApplicationInsightsTelemetryWorkerService();` à la méthode `ConfigureServices()`, comme dans cet exemple :
 
 ```csharp
@@ -220,11 +221,11 @@ Voici le code pour `TimedHostedService` où réside la logique de tâche en arri
 
 ## <a name="net-corenet-framework-console-application"></a>Application console .NET Core /. NET Framework
 
-Comme indiqué au début de cet article, le nouveau package peut être utilisé pour activer Application Insights Telemetry à partir d’une application de console normale. Ce package cible [`NetStandard2.0`](https://docs.microsoft.com/dotnet/standard/net-standard) et peut donc être utilisé pour les applications console .NET Core 2.0 ou version ultérieure, et dans .NET Framework 4.7.2 ou version ultérieure.
+Comme indiqué au début de cet article, le nouveau package peut être utilisé pour activer Application Insights Telemetry à partir d’une application de console normale. Ce package cible [`NetStandard2.0`](/dotnet/standard/net-standard) et peut donc être utilisé pour les applications console .NET Core 2.0 ou version ultérieure, et dans .NET Framework 4.7.2 ou version ultérieure.
 
-Un exemple complet est disponible [ici](https://github.com/microsoft/ApplicationInsights-Home/tree/master/Samples/WorkerServiceSDK/ConsoleAppWithApplicationInsights)
+Un exemple complet est disponible [ici](https://github.com/microsoft/ApplicationInsights-dotnet/tree/develop/examples/WorkerServiceSDK/ConsoleAppWithApplicationInsights)
 
-1. Installez le package Microsoft.ApplicationInsights.WorkerService (https://www.nuget.org/packages/Microsoft.ApplicationInsights.WorkerService) ) dans l’application.
+1. Installez le package [Microsoft.ApplicationInsights.WorkerService](https://www.nuget.org/packages/Microsoft.ApplicationInsights.WorkerService) dans l’application.
 
 2. Modifiez Program.cs comme dans l’exemple ci-après.
 
@@ -292,15 +293,15 @@ Cette application console utilise également la même valeur par défaut `Teleme
 
 ## <a name="run-your-application"></a>Exécuter votre application
 
-Exécutez votre application. Les exemples de Worker ci-avant appellent tous « bing.com » via une requête HTTP chaque seconde, et ils émettent également peu de journaux en utilisant ILogger. Ces lignes sont encapsulées à l’intérieur de l’appel `StartOperation` de `TelemetryClient`, qui est utilisé pour créer une opération (dans cet exemple `RequestTelemetry`, elle est nommée « operation »). Application Insights recueillera ces journaux ILogger (avertissement ou niveau d’alerte supérieur par défaut) et les dépendances, et ils seront corrélés à `RequestTelemetry` avec une relation parent-enfant. La corrélation fonctionne également entre les limites réseau et inter-processus. Par exemple, si l’appel a été effectué vers un autre composant surveillé, il est également corrélé à ce parent.
+Exécutez votre application. Les exemples de Worker ci-dessus appellent tous « bing.com » via une requête HTTP chaque seconde, et ils émettent également peu de journaux en utilisant `ILogger`. Ces lignes sont encapsulées à l’intérieur de l’appel `StartOperation` de `TelemetryClient`, qui est utilisé pour créer une opération (dans cet exemple `RequestTelemetry`, elle est nommée « operation »). Application Insights recueillera ces journaux ILogger (avertissement ou niveau d’alerte supérieur par défaut) et les dépendances, et ils seront corrélés à `RequestTelemetry` avec une relation parent-enfant. La corrélation fonctionne également entre les limites réseau et inter-processus. Par exemple, si l’appel a été effectué vers un autre composant surveillé, il est également corrélé à ce parent.
 
-Cette opération personnalisée de `RequestTelemetry` peut être considérée comme l’équivalent d’une requête web entrante dans une application web classique. S’il n’est pas nécessaire d’utiliser une opération, celle-ci est parfaitement bien adaptée au [modèle de données de corrélation Application Insights](https://docs.microsoft.com/azure/azure-monitor/app/correlation). `RequestTelemetry` agit en tant qu’opération parente, et les données de télémétrie générées à l’intérieur de l’itération du worker sont considérées comme appartenant logiquement à la même opération. Cette approche garantit également que toutes les données de télémétrie produites (automatiques et manuelles) posséderont le même `operation_id`. Comme l’échantillonnage est basé sur `operation_id`, l’algorithme d’échantillonnage conserve ou supprime toutes les données de télémétrie d’une même itération.
+Cette opération personnalisée de `RequestTelemetry` peut être considérée comme l’équivalent d’une requête web entrante dans une application web classique. S’il n’est pas nécessaire d’utiliser une opération, celle-ci est parfaitement bien adaptée au [modèle de données de corrélation Application Insights](./correlation.md). `RequestTelemetry` agit en tant qu’opération parente, et les données de télémétrie générées à l’intérieur de l’itération du worker sont considérées comme appartenant logiquement à la même opération. Cette approche garantit également que toutes les données de télémétrie produites (automatiques et manuelles) posséderont le même `operation_id`. Comme l’échantillonnage est basé sur `operation_id`, l’algorithme d’échantillonnage conserve ou supprime toutes les données de télémétrie d’une même itération.
 
 La liste suivante répertorie les données de télémétrie complètes collectées automatiquement par Application Insights.
 
 ### <a name="live-metrics"></a>Métriques temps réel
 
-Les [métriques temps réel](https://docs.microsoft.com/azure/application-insights/app-insights-live-stream) peuvent être utilisées pour vérifier rapidement si la supervision Application Insights est correctement configurée. Quelques minutes peuvent être nécessaires avant l'apparition des données de télémétrie sur le portail et dans les analyses, mais les métriques temps réel affichent en temps quasi réel l'utilisation UC du processus en cours. Elles peuvent également afficher d’autres données de télémétrie comme les requêtes, les dépendances, les traces, etc.
+Les [métriques temps réel](./live-stream.md) peuvent être utilisées pour vérifier rapidement si la supervision Application Insights est correctement configurée. Quelques minutes peuvent être nécessaires avant l'apparition des données de télémétrie sur le portail et dans les analyses, mais les métriques temps réel affichent en temps quasi réel l'utilisation UC du processus en cours. Elles peuvent également afficher d’autres données de télémétrie comme les requêtes, les dépendances, les traces, etc.
 
 ### <a name="ilogger-logs"></a>Journaux ILogger
 
@@ -322,7 +323,7 @@ Le kit de développement logiciel (SDK) collecte automatiquement les données de
 
 La valeur par défaut `TelemetryConfiguration` utilisée par le kit de développement logiciel (SDK) du service Worker est similaire à la configuration automatique utilisée dans une application ASP.NET ou ASP.NET Core, moins les TelemetryInitializers utilisés pour enrichir les données de télémétrie de `HttpContext`.
 
-Vous pouvez personnaliser le SDK Application Insights pour Service Worker afin de modifier la configuration par défaut. Les utilisateurs du SDK Application Insights ASP.NET Core peuvent maîtriser la modification de configuration à l’aide de l’[injection de dépendances](https://docs.microsoft.com/aspnet/core/fundamentals/dependency-injection) intégrée à ASP.NET Core. Le kit de développement logiciel (SDK) WorkerService est également basé sur des principes similaires. Effectuez pratiquement toutes les modifications de configuration dans la section `ConfigureServices()` en appelant les méthodes appropriées sur `IServiceCollection`, comme indiqué ci-dessous.
+Vous pouvez personnaliser le SDK Application Insights pour Service Worker afin de modifier la configuration par défaut. Les utilisateurs du SDK Application Insights ASP.NET Core peuvent maîtriser la modification de configuration à l’aide de l’[injection de dépendances](/aspnet/core/fundamentals/dependency-injection) intégrée à ASP.NET Core. Le kit de développement logiciel (SDK) WorkerService est également basé sur des principes similaires. Effectuez pratiquement toutes les modifications de configuration dans la section `ConfigureServices()` en appelant les méthodes appropriées sur `IServiceCollection`, comme indiqué ci-dessous.
 
 > [!NOTE]
 > Quand vous utilisez ce kit de développement logiciel (SDK), il n’est pas possible de modifier la configuration à l’aide de `TelemetryConfiguration.Active`, et les modifications réalisées par ce biais ne sont pas répercutées.
@@ -332,19 +333,18 @@ Vous pouvez personnaliser le SDK Application Insights pour Service Worker afin d
 Vous pouvez modifier quelques paramètres courants en passant de `ApplicationInsightsServiceOptions` à `AddApplicationInsightsTelemetryWorkerService`, comme dans cet exemple :
 
 ```csharp
-    using Microsoft.ApplicationInsights.WorkerService;
+using Microsoft.ApplicationInsights.WorkerService;
 
-    public void ConfigureServices(IServiceCollection services)
-    {
-        Microsoft.ApplicationInsights.WorkerService.ApplicationInsightsServiceOptions aiOptions
-                    = new Microsoft.ApplicationInsights.WorkerService.ApplicationInsightsServiceOptions();
-        // Disables adaptive sampling.
-        aiOptions.EnableAdaptiveSampling = false;
+public void ConfigureServices(IServiceCollection services)
+{
+    var aiOptions = new ApplicationInsightsServiceOptions();
+    // Disables adaptive sampling.
+    aiOptions.EnableAdaptiveSampling = false;
 
-        // Disables QuickPulse (Live Metrics stream).
-        aiOptions.EnableQuickPulseMetricStream = false;
-        services.AddApplicationInsightsTelemetryWorkerService(aiOptions);
-    }
+    // Disables QuickPulse (Live Metrics stream).
+    aiOptions.EnableQuickPulseMetricStream = false;
+    services.AddApplicationInsightsTelemetryWorkerService(aiOptions);
+}
 ```
 
 Notez que `ApplicationInsightsServiceOptions` dans ce kit de développement logiciel (SDK) se trouve dans l’espace de noms `Microsoft.ApplicationInsights.WorkerService` au lieu de `Microsoft.ApplicationInsights.AspNetCore.Extensions` dans le SDK ASP.NET Core.
@@ -357,16 +357,47 @@ Paramètres couramment utilisés dans `ApplicationInsightsServiceOptions`
 |EnableAdaptiveSampling | Active/désactive l’échantillonnage adaptatif | true
 |EnableHeartbeat | Active/désactive la fonctionnalité des pulsations, qui envoie régulièrement (toutes les 15 minutes, par défaut) une métrique personnalisée nommée « HeartBeatState » avec des informations sur le runtime, telles que la version de .NET, des informations relatives à l'environnement Azure, le cas échéant, etc. | true
 |AddAutoCollectedMetricExtractor | Active/désactive l’extracteur AutoCollectedMetrics, qui est un TelemetryProcessor qui envoie des métriques pré-agrégées sur les demandes/dépendances avant l’échantillonnage. | true
+|EnableDiagnosticsTelemetryModule | Active/désactive `DiagnosticsTelemetryModule`. La désactivation de cet élément entraîne l’abandon des paramètres suivants : `EnableHeartbeat`, `EnableAzureInstanceMetadataTelemetryModule`, `EnableAppServicesHeartbeatTelemetryModule`. | true
 
 Consultez les [paramètres configurables dans `ApplicationInsightsServiceOptions`](https://github.com/microsoft/ApplicationInsights-dotnet/blob/develop/NETCORE/src/Shared/Extensions/ApplicationInsightsServiceOptions.cs) pour obtenir la liste la plus à jour.
 
 ### <a name="sampling"></a>échantillonnage
 
-Le SDK Application Insights pour Service Worker prend en charge l’échantillonnage à taux fixe et adaptatif. L’échantillonnage adaptatif est activé par défaut. La configuration de l’échantillonnage pour le service Worker s’effectue de la même façon que pour des [applications ASP.NET Core](https://docs.microsoft.com/azure/azure-monitor/app/sampling#configuring-adaptive-sampling-for-aspnet-core-applications).
+Le SDK Application Insights pour Service Worker prend en charge l’échantillonnage à taux fixe et adaptatif. L’échantillonnage adaptatif est activé par défaut. L’échantillonnage peut être désactivé à l’aide de l’option `EnableAdaptiveSampling` qui se trouve dans [ApplicationInsightsServiceOptions](#using-applicationinsightsserviceoptions).
+
+Pour configurer des paramètres d’échantillonnage supplémentaires, vous pouvez utiliser l’exemple suivant.
+
+```csharp
+using Microsoft.ApplicationInsights.Extensibility;
+using Microsoft.ApplicationInsights.WorkerService;
+
+public void ConfigureServices(IServiceCollection services)
+{
+    // ...
+
+    var aiOptions = new ApplicationInsightsServiceOptions();
+    
+    // Disable adaptive sampling.
+    aiOptions.EnableAdaptiveSampling = false;
+    services.AddApplicationInsightsTelemetryWorkerService(aiOptions);
+
+    // Add Adaptive Sampling with custom settings.
+    // the following adds adaptive sampling with 15 items per sec.
+    services.Configure<TelemetryConfiguration>((telemetryConfig) =>
+        {
+            var builder = telemetryConfig.DefaultTelemetrySink.TelemetryProcessorChainBuilder;
+            builder.UseAdaptiveSampling(maxTelemetryItemsPerSecond: 15);
+            builder.Build();
+        });
+    //...
+}
+```
+
+Vous trouverez des informations supplémentaires dans le document [Échantillonnage](#sampling).
 
 ### <a name="adding-telemetryinitializers"></a>Ajout de TelemetryInitializers
 
-Utilisez des [initialiseurs de télémétrie](https://docs.microsoft.com/azure/azure-monitor/app/api-filtering-sampling#addmodify-properties-itelemetryinitializer) lorsque vous souhaitez définir des propriétés qui sont envoyées avec toutes les données de télémétrie.
+Utilisez des [initialiseurs de télémétrie](./api-filtering-sampling.md#addmodify-properties-itelemetryinitializer) lorsque vous souhaitez définir des propriétés qui sont envoyées avec toutes les données de télémétrie.
 
 Ajoutez un nouveau `TelemetryInitializer` au conteneur `DependencyInjection` et le kit de développement logiciel (SDK) les ajoutera automatiquement au `TelemetryConfiguration`.
 
@@ -404,7 +435,7 @@ Les initialiseurs de télémétrie sont présents par défaut. Pour supprimer to
 
 ### <a name="adding-telemetry-processors"></a>Ajout de processeurs de télémétrie
 
-Vous pouvez ajouter des processeurs de télémétrie personnalisés à `TelemetryConfiguration` à l’aide de la méthode d’extension `AddApplicationInsightsTelemetryProcessor` sur `IServiceCollection`. Vous utilisez des processeurs de télémétrie dans des [scénarios de filtrage avancés](https://docs.microsoft.com/azure/azure-monitor/app/api-filtering-sampling#itelemetryprocessor-and-itelemetryinitializer) pour permettre un contrôle plus direct sur les informations contenues ou non dans le données de télémétrie que vous envoyez au service Application Insights. Utilisez l’exemple suivant.
+Vous pouvez ajouter des processeurs de télémétrie personnalisés à `TelemetryConfiguration` à l’aide de la méthode d’extension `AddApplicationInsightsTelemetryProcessor` sur `IServiceCollection`. Vous utilisez des processeurs de télémétrie dans des [scénarios de filtrage avancés](./api-filtering-sampling.md#itelemetryprocessor-and-itelemetryinitializer) pour permettre un contrôle plus direct sur les informations contenues ou non dans le données de télémétrie que vous envoyez au service Application Insights. Utilisez l’exemple suivant.
 
 ```csharp
     public void ConfigureServices(IServiceCollection services)
@@ -425,7 +456,8 @@ Les modules de collecte automatique suivants sont activés par défaut. Ces modu
 * `DependencyTrackingTelemetryModule`
 * `PerformanceCollectorModule`
 * `QuickPulseTelemetryModule`
-* `AppServicesHeartbeatTelemetryModule`
+* `AppServicesHeartbeatTelemetryModule` -(Il existe actuellement un problème impliquant ce module de télémétrie. Pour une solution de contournement temporaire, voir le [problème GitHub 1689](https://github.com/microsoft/ApplicationInsights-dotnet/issues/1689
+).)
 * `AzureInstanceMetadataTelemetryModule`
 
 Pour configurer tout `TelemetryModule` par défaut, utilisez la méthode d’extension `ConfigureTelemetryModule<T>` sur `IServiceCollection`, comme illustré dans l’exemple suivant.
@@ -502,7 +534,7 @@ L’intégration de l’IDE Visual Studio est actuellement prise en charge uniqu
 
 ### <a name="can-i-enable-application-insights-monitoring-by-using-tools-like-status-monitor"></a>Puis-je activer la surveillance Application Insights à l’aide d’outils tels que Status Monitor ?
 
-Non. [Status Monitor](https://docs.microsoft.com/azure/azure-monitor/app/monitor-performance-live-website-now) et [Status Monitor version 2](https://docs.microsoft.com/azure/azure-monitor/app/status-monitor-v2-overview) prennent actuellement en charge ASP.NET 4.x uniquement.
+Non. [Status Monitor](./monitor-performance-live-website-now.md) et [Status Monitor version 2](./status-monitor-v2-overview.md) prennent actuellement en charge ASP.NET 4.x uniquement.
 
 ### <a name="if-i-run-my-application-in-linux-are-all-features-supported"></a>Si j’exécute mon application sous Linux, toutes les fonctionnalités sont-elles prises en charge ?
 
@@ -529,19 +561,21 @@ using Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel;
 
 ## <a name="sample-applications"></a>Exemples d'applications
 
-[Application console .NET Core](https://github.com/microsoft/ApplicationInsights-Home/tree/master/Samples/WorkerServiceSDK/ConsoleAppWithApplicationInsights) Choisissez cet exemple si vous utilisez une application console écrite en .NET Core (version 2.0 ou ultérieure) ou .NET Framework (version 4.7.2 ou ultérieure)
+[Application console .NET Core](https://github.com/microsoft/ApplicationInsights-dotnet/tree/develop/examples/WorkerServiceSDK/ConsoleAppWithApplicationInsights) Choisissez cet exemple si vous utilisez une application console écrite en .NET Core (version 2.0 ou ultérieure) ou .NET Framework (version 4.7.2 ou ultérieure)
 
-[Tâches en arrière-plan ASP .NET Core avec HostedServices](https://github.com/microsoft/ApplicationInsights-Home/tree/master/Samples/WorkerServiceSDK/BackgroundTasksWithHostedService) Choisissez cet exemple si vous utilisez Asp.Net Core 2.1/2.2 et créez des tâches en arrière-plan conformément aux instructions officielles stipulées [ici](https://docs.microsoft.com/aspnet/core/fundamentals/host/hosted-services?view=aspnetcore-2.2)
+[Tâches en arrière-plan ASP .NET Core avec HostedServices](https://github.com/microsoft/ApplicationInsights-dotnet/tree/develop/examples/WorkerServiceSDK/BackgroundTasksWithHostedService) Choisissez cet exemple si vous utilisez Asp.Net Core 2.1/2.2 et créez des tâches en arrière-plan conformément aux instructions officielles stipulées [ici](/aspnet/core/fundamentals/host/hosted-services?view=aspnetcore-2.2&preserve-view=true)
 
-[Service Worker .NET Core 3.0](https://github.com/microsoft/ApplicationInsights-Home/tree/master/Samples/WorkerServiceSDK/WorkerServiceSampleWithApplicationInsights) Utilisez cet exemple si vous disposez d’une application Service Worker .NET Core 3.0, conformément aux instructions officielles ([ici](https://docs.microsoft.com/aspnet/core/fundamentals/host/hosted-services?view=aspnetcore-3.0&tabs=visual-studio#worker-service-template))
+[Service Worker .NET Core 3.0](https://github.com/microsoft/ApplicationInsights-dotnet/tree/develop/examples/WorkerServiceSDK/WorkerServiceSampleWithApplicationInsights) Utilisez cet exemple si vous disposez d’une application Service Worker .NET Core 3.0, conformément aux instructions officielles ([ici](/aspnet/core/fundamentals/host/hosted-services?tabs=visual-studio&view=aspnetcore-3.0&preserve-view=true#worker-service-template))
 
 ## <a name="open-source-sdk"></a>Kit de développement logiciel (SDK) open source
 
-[Lisez et contribuez au code](https://github.com/Microsoft/ApplicationInsights-aspnetcore#recent-updates).
+* [Lisez et contribuez au code](https://github.com/microsoft/ApplicationInsights-dotnet).
+
+Pour obtenir les mises à jour et correctifs de bogues les plus récents, [consultez les notes de publication](./release-notes.md).
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* [Utilisez l’API](../../azure-monitor/app/api-custom-events-metrics.md) pour envoyer vos propres événements et mesures pour obtenir une vue détaillée des performances et de l’utilisation de votre application.
-* [Suivre les dépendances supplémentaires non suivies automatiquement](../../azure-monitor/app/auto-collect-dependencies.md).
-* [Enrichir ou filtrer les données de télémétrie collectées automatiquement](../../azure-monitor/app/api-filtering-sampling.md).
-* [Injection de dépendances dans ASP.NET Core](https://docs.microsoft.com/aspnet/core/fundamentals/dependency-injection).
+* [Utilisez l’API](./api-custom-events-metrics.md) pour envoyer vos propres événements et mesures pour obtenir une vue détaillée des performances et de l’utilisation de votre application.
+* [Suivre les dépendances supplémentaires non suivies automatiquement](./auto-collect-dependencies.md).
+* [Enrichir ou filtrer les données de télémétrie collectées automatiquement](./api-filtering-sampling.md).
+* [Injection de dépendances dans ASP.NET Core](/aspnet/core/fundamentals/dependency-injection).

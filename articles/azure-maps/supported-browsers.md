@@ -1,6 +1,6 @@
 ---
 title: Navigateurs pris en charge par le SDK web | Microsoft Azure Maps
-description: Dans cet article, vous allez découvrir les navigateurs pris en charge par le Kit de développement logiciel (SDK) web Microsoft Azure Maps et comment vérifier si un navigateur est pris en charge.
+description: Découvrez comment vérifier si le Kit de développement logiciel (SDK) web Azure Maps prend en charge un navigateur. Affichez la liste des navigateurs pris en charge. Découvrez comment utiliser les services cartographiques avec les navigateurs hérités.
 author: rbrundritt
 ms.author: richbrun
 ms.date: 03/25/2019
@@ -8,16 +8,16 @@ ms.topic: conceptual
 ms.service: azure-maps
 services: azure-maps
 manager: cpendle
-ms.openlocfilehash: e81b15b974469d319384a67b08512130b7876a30
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 43bf70d66c42bc0ecd5e26e4cc724456bd4bf84e
+ms.sourcegitcommit: 4064234b1b4be79c411ef677569f29ae73e78731
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76988785"
+ms.lasthandoff: 10/28/2020
+ms.locfileid: "92896920"
 ---
 # <a name="web-sdk-supported-browsers"></a>Navigateurs pris en charge pour le kit SDK web
 
-Le SDK web Azure Maps fournit une fonction d’assistance appelée [atlas.isSupported](https://docs.microsoft.com/javascript/api/azure-maps-control/atlas?view=azure-iot-typescript-latest#issupported-boolean-). Cette fonction détecte si un navigateur web a l’ensemble minimal de fonctionnalités WebGL requises pour prendre en charge le chargement et le rendu du contrôle de carte. L’exemple suivant montre comment utiliser la fonction :
+Le SDK web Azure Maps fournit une fonction d’assistance appelée [atlas.isSupported](/javascript/api/azure-maps-control/atlas#issupported-boolean-). Cette fonction détecte si un navigateur web a l’ensemble minimal de fonctionnalités WebGL requises pour prendre en charge le chargement et le rendu du contrôle de carte. L’exemple suivant montre comment utiliser la fonction :
 
 ```JavaScript
 if (!atlas.isSupported()) {
@@ -76,8 +76,6 @@ Consultez la page <a href='https://codepen.io/azuremaps/pen/GeLgyx/'>Azure Maps 
 
 En savoir plus sur le SDK web Azure Maps :
 
-> [!div class="nextstepaction"]
-> [Commandes de la carte](how-to-use-map-control.md)
+[Contrôle de carte](how-to-use-map-control.md)
 
-> [!div class="nextstepaction"]
-> [Module de services](how-to-use-services-module.md)
+[Module de services](how-to-use-services-module.md)

@@ -1,40 +1,42 @@
 ---
-title: Créer et mettre à jour des statistiques
+title: Créer et mettre à jour des statistiques à l’aide de ressources Azure Synapse SQL
 description: Recommandations et exemples pour la création et la mise à jour de statistiques d’optimisation des requêtes dans SQL Synapse.
 services: synapse-analytics
 author: filippopovic
 manager: craigg
 ms.service: synapse-analytics
 ms.topic: conceptual
-ms.subservice: ''
+ms.subservice: sql
 ms.date: 04/19/2020
 ms.author: fipopovi
 ms.reviewer: jrasnick
 ms.custom: ''
-ms.openlocfilehash: 5196c85ca1d68028893caee55035c6c455b37d64
-ms.sourcegitcommit: acb82fc770128234f2e9222939826e3ade3a2a28
+ms.openlocfilehash: 52e3ea3e07a81495f64f70f72686154a02a654af
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81676936"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96451795"
 ---
 # <a name="statistics-in-synapse-sql"></a>Statistiques dans SQL Synapse
 
-Cet article propose des recommandations et des exemples pour la création et la mise à jour des statistiques d’optimisation des requêtes à l'aide des ressources SQL Synapse. Pool SQL et SQL à la demande (préversion).
+Cet article propose des recommandations et des exemples de création et de mise à jour des statistiques d’optimisation des requêtes à l’aide des ressources Synapse SQL : un pool SQL dédié et un pool SQL serverless.
 
-## <a name="statistics-in-sql-pool"></a>Statistiques dans le pool SQL
+## <a name="statistics-in-dedicated-sql-pool"></a>Statistiques dans un pool SQL dédié
 
 ### <a name="why-use-statistics"></a>Pourquoi utiliser des statistiques ?
 
-Plus la ressource de pool SQL connaît vos données, plus elle peut exécuter de requêtes rapidement. Après le chargement des données dans le pool SQL, la collecte de statistiques sur vos données est l’une des actions les plus importantes pour optimiser vos requêtes.  
+Plus le pool SQL dédié connaît vos données, plus il peut exécuter des requêtes rapidement. Après le chargement des données dans un pool SQL dédié, la collecte de statistiques sur vos données est l’une des actions les plus importantes pour optimiser vos requêtes.  
 
-L’optimiseur de requête du pool SQL est un optimiseur basé sur les coûts. Il compare le coût de différents plans de requête, puis choisit le plan avec le coût le plus bas. Dans la plupart des cas, il choisit le plan qui s’exécute le plus rapidement.
+L’optimiseur de requête du pool SQL dédié est un optimiseur basé sur les coûts. Il compare le coût de différents plans de requête, puis choisit le plan avec le coût le plus bas. Dans la plupart des cas, il choisit le plan qui s’exécute le plus rapidement.
 
-Par exemple, si l’optimiseur estime que la date de filtrage de votre requête va renvoyer une ligne, il choisira un certain plan. S’il estime que la date sélectionnée va renvoyer un million de lignes, il choisira un autre plan.
+Par exemple, si l’optimiseur estime que la date de filtrage de votre requête va renvoyer une ligne, il choisira un seul plan. S’il estime que la date sélectionnée va renvoyer un million de lignes, il choisira un autre plan.
 
 ### <a name="automatic-creation-of-statistics"></a>Création automatique de statistiques
 
-Le pool SQL analyse les requêtes utilisateur entrantes à la recherche de statistiques manquantes lorsque l’option AUTO_CREATE_STATISTICS de la base de données est définie sur `ON`.  Si des statistiques manquent, l’optimiseur de requête crée des statistiques sur des colonnes individuelles dans le prédicat de requête ou la condition de jointure. Cette fonction permet d’améliorer les estimations de cardinalité du plan de requête.
+Le moteur du pool SQL dédié analyse les requêtes utilisateur entrantes à la recherche de statistiques manquantes lorsque l’option AUTO_CREATE_STATISTICS de la base de données est définie sur `ON`.  Si des statistiques manquent, l’optimiseur de requête crée des statistiques sur des colonnes individuelles dans le prédicat de requête ou la condition de jointure. 
+
+Cette fonction permet d’améliorer les estimations de cardinalité du plan de requête.
 
 > [!IMPORTANT]
 > La création automatique de statistiques est activée par défaut.
@@ -70,9 +72,9 @@ La création automatique de statistiques s'effectue de façon synchrone. Dès lo
 Pour éviter toute détérioration notable des performances, vous devez vérifier que les statistiques ont été créées en exécutant la charge de travail du test d’évaluation avant de profiler le système.
 
 > [!NOTE]
-> La création de statistiques est journalisée dans [sys.dm_pdw_exec_requests](/sql/relational-databases/system-dynamic-management-views/sys-dm-pdw-exec-requests-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest) sous un contexte utilisateur distinct.
+> La création de statistiques est journalisée dans [sys.dm_pdw_exec_requests](/sql/relational-databases/system-dynamic-management-views/sys-dm-pdw-exec-requests-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest&preserve-view=true) sous un contexte utilisateur distinct.
 
-Lorsque des statistiques automatiques sont créées, elles prennent la forme suivante : _WA_Sys_<ID de colonne de 8 chiffres en notation hexadécimale>_<ID de table de 8 chiffres en notation hexadécimale>. Vous pouvez visualiser les statistiques déjà créées en exécutant la commande [DBCC SHOW_STATISTICS](/sql/t-sql/database-console-commands/dbcc-show-statistics-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest) :
+Lorsque des statistiques automatiques sont créées, elles prennent la forme suivante : _WA_Sys_<ID de colonne de 8 chiffres en notation hexadécimale>_<ID de table de 8 chiffres en notation hexadécimale>. Vous pouvez visualiser les statistiques déjà créées en exécutant la commande [DBCC SHOW_STATISTICS](/sql/t-sql/database-console-commands/dbcc-show-statistics-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest&preserve-view=true) :
 
 ```sql
 DBCC SHOW_STATISTICS (<table_name>, <target>)
@@ -101,7 +103,9 @@ L’une des premières questions que vous devez vous poser quand vous dépannez 
 
 Or, vous ne pouvez pas répondre à cette question en vous appuyant sur l’âge des données. Un objet de statistiques à jour peut être ancien si aucune modification notable n’affecte les données sous-jacentes. Lorsque le nombre de lignes ou la distribution des valeurs change de manière substantielle dans une colonne, il convient *alors* de mettre à jour les statistiques.
 
-Aucune vue de gestion dynamique n'est disponible pour déterminer si les données de la table ont changé depuis la dernière mise à jour des statistiques. Le fait de connaître l’ancienneté de vos statistiques peut vous donner un petit aperçu. Vous pouvez utiliser la requête suivante pour déterminer la date de la dernière mise à jour des statistiques sur chaque table.
+Aucune vue de gestion dynamique n'est disponible pour déterminer si les données de la table ont changé depuis la dernière mise à jour des statistiques. Le fait de connaître l’ancienneté de vos statistiques peut vous donner un petit aperçu. 
+
+Vous pouvez utiliser la requête suivante pour déterminer la date de la dernière mise à jour des statistiques sur chaque table.
 
 > [!NOTE]
 > Si la distribution des valeurs d’une colonne a subi une modification significative, vous devez mettre à jour les statistiques, quelle que soit la date de la dernière mise à jour.
@@ -137,9 +141,11 @@ Par exemple, les statistiques des **colonnes de date** d’un entrepôt de donn�
 
 Les statistiques d’une colonne indiquant le sexe d’un client dans une table n’auront peut-être jamais besoin d’être mises à jour. Si l’on part du principe que la distribution des données est constante d’un client à l’autre, l’ajout de nouvelles lignes dans une table ne devrait pas affecter cette distribution.
 
-Cela étant, si votre entrepôt de données ne fait mention que d’un seul sexe et qu’une nouvelle exigence nécessite le recours à plusieurs sexes, vous devez mettre à jour les statistiques de la colonne relative au sexe. Pour plus d’informations, consultez l’article [Statistiques](/sql/relational-databases/statistics/statistics).
+Cela étant, si votre entrepôt de données ne fait mention que d’un seul sexe et qu’une nouvelle exigence nécessite le recours à plusieurs sexes, vous devez mettre à jour les statistiques de la colonne relative au sexe. 
 
-### <a name="implementing-statistics-management"></a>Implémentation de fonctions de gestion des statistiques
+Pour plus d’informations, consultez l’article [Statistiques](/sql/relational-databases/statistics/statistics).
+
+### <a name="implement-statistics-management"></a>Implémenter la gestion des statistiques
 
 Il est souvent judicieux d’étendre le processus de chargement des données afin de vérifier que les statistiques sont mises à jour à la fin du chargement. Le chargement des données se produit lorsque la taille ou la distribution des valeurs, voire les deux, sont souvent modifiées dans les tables. Dès lors, il est logique que le processus de chargement implémente certains processus de gestion.
 
@@ -160,7 +166,7 @@ Ces exemples indiquent comment utiliser différentes options pour créer des sta
 #### <a name="create-single-column-statistics-with-default-options"></a>Créer des statistiques sur une colonne en utilisant les options par défaut
 
 Pour créer des statistiques sur une colonne, indiquez le nom de l’objet de statistiques ainsi que celui de la colonne.
-Cette syntaxe a recours à toutes les options par défaut. Par défaut, le pool SQL échantillonne **20 %** de la table quand il crée des statistiques.
+Cette syntaxe a recours à toutes les options par défaut. Par défaut, le pool SQL dédié échantillonne **20 %** de la table quand il crée des statistiques.
 
 ```sql
 CREATE STATISTICS [statistics_name]
@@ -230,7 +236,7 @@ CREATE STATISTICS stats_col1
     WITH SAMPLE = 50 PERCENT;
 ```
 
-Pour accéder à la référence complète, consultez [CREATE STATISTICS](/sql/t-sql/statements/create-statistics-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest).
+Pour accéder à la référence complète, consultez [CREATE STATISTICS](/sql/t-sql/statements/create-statistics-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest&preserve-view=true).
 
 #### <a name="create-multi-column-statistics"></a>Créer des statistiques sur plusieurs colonnes
 
@@ -275,6 +281,7 @@ CREATE STATISTICS stats_col3 on dbo.table3 (col3);
 #### <a name="use-a-stored-procedure-to-create-statistics-on-all-columns-in-a-database"></a>Utiliser une procédure stockée pour créer des statistiques sur toutes les colonnes d’une base de données
 
 Le pool SQL n’inclut pas de procédure stockée par le système équivalente à sp_create_stats dans SQL Server. Cette procédure stockée crée un objet de statistiques sur une colonne portant sur chaque colonne de la base de données non pourvue de statistiques.
+
 L’exemple suivant vous aidera à commencer à concevoir votre base de données. N’hésitez pas à l’adapter à vos besoins :
 
 ```sql
@@ -418,13 +425,15 @@ Par exemple :
 UPDATE STATISTICS dbo.table1;
 ```
 
-L’instruction UPDATE STATISTICS est facile à utiliser. N’oubliez pas que cette action met à jour *toutes* les statistiques dans la table et, ce qui implique davantage de tâches que nécessaire. Si les performances ne constituent pas un problème, il s’agit de la méthode la plus simple et la plus exhaustive pour garantir que les statistiques sont à jour.
+L’instruction UPDATE STATISTICS est facile à utiliser. N’oubliez pas que cette action met à jour *toutes* les statistiques dans la table et, ce qui implique davantage de tâches que nécessaire. 
+
+Si les performances ne constituent pas un problème, il s’agit de la méthode la plus simple et la plus exhaustive pour garantir que les statistiques sont à jour.
 
 > [!NOTE]
-> Lors de la mise à jour de toutes les statistiques d’une table, le pool SQL procède à une analyse pour échantillonner la table à la recherche de chaque objet de statistiques. Si la table est volumineuse et comprend un grand nombre de colonnes et de statistiques, il peut s’avérer plus efficace de mettre à jour les statistiques individuellement, en fonction des besoins.
+> Lors de la mise à jour de toutes les statistiques d’une table, le pool SQL dédié procède à une analyse pour échantillonner la table à la recherche de chaque objet de statistiques. Si la table est volumineuse et comprend un grand nombre de colonnes et de statistiques, il peut s’avérer plus efficace de mettre à jour les statistiques individuellement, en fonction des besoins.
 
 Pour obtenir une implémentation d’une procédure `UPDATE STATISTICS`, consultez [Tables temporaires](develop-tables-temporary.md). La méthode d’implémentation est légèrement différente de celle de la procédure `CREATE STATISTICS` précédente, mais le résultat est le même.
-Pour accéder à la syntaxe complète, consultez [Mettre à jour les statistiques](/sql/t-sql/statements/update-statistics-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest).
+Pour accéder à la syntaxe complète, consultez [Mettre à jour les statistiques](/sql/t-sql/statements/update-statistics-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest&preserve-view=true).
 
 ### <a name="statistics-metadata"></a>Métadonnées de statistiques
 
@@ -436,13 +445,13 @@ Ces vues système fournissent des informations sur les statistiques :
 
 | Affichage catalogue | Description |
 |:--- |:--- |
-| [sys.columns](/sql/relational-databases/system-catalog-views/sys-columns-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest) |Une ligne pour chaque colonne. |
-| [sys.objects](/sql/relational-databases/system-catalog-views/sys-objects-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest) |Une ligne pour chaque objet de la base de données. |
-| [sys.schemas](/sql/relational-databases/system-catalog-views/sys-objects-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest) |Une ligne pour chaque schéma de la base de données. |
-| [sys.stats](/sql/relational-databases/system-catalog-views/sys-stats-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest) |Une ligne pour chaque objet de statistiques. |
-| [sys.stats_columns](/sql/relational-databases/system-catalog-views/sys-stats-columns-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest) |Une ligne pour chaque colonne de l’objet de statistiques. Paramètre lié à l’élément « sys.columns ». |
-| [sys.tables](/sql/relational-databases/system-catalog-views/sys-tables-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest) |Une ligne pour chaque table (y compris les tables externes). |
-| [sys.table_types](/sql/relational-databases/system-catalog-views/sys-table-types-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest) |Une ligne pour chaque type de données. |
+| [sys.columns](/sql/relational-databases/system-catalog-views/sys-columns-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest&preserve-view=true) |Une ligne pour chaque colonne. |
+| [sys.objects](/sql/relational-databases/system-catalog-views/sys-objects-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest&preserve-view=true) |Une ligne pour chaque objet de la base de données. |
+| [sys.schemas](/sql/relational-databases/system-catalog-views/sys-objects-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest&preserve-view=true) |Une ligne pour chaque schéma de la base de données. |
+| [sys.stats](/sql/relational-databases/system-catalog-views/sys-stats-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest&preserve-view=true) |Une ligne pour chaque objet de statistiques. |
+| [sys.stats_columns](/sql/relational-databases/system-catalog-views/sys-stats-columns-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest&preserve-view=true) |Une ligne pour chaque colonne de l’objet de statistiques. Paramètre lié à l’élément « sys.columns ». |
+| [sys.tables](/sql/relational-databases/system-catalog-views/sys-tables-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest&preserve-view=true) |Une ligne pour chaque table (y compris les tables externes). |
+| [sys.table_types](/sql/relational-databases/system-catalog-views/sys-table-types-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest&preserve-view=true) |Une ligne pour chaque type de données. |
 
 #### <a name="system-functions-for-statistics"></a>Fonctions système relatives aux statistiques
 
@@ -450,8 +459,8 @@ Ces fonctions système sont utiles lorsque vous gérez des statistiques :
 
 | Fonction système | Description |
 |:--- |:--- |
-| [STATS_DATE](/sql/t-sql/functions/stats-date-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest) |Date de la dernière mise à jour de l’objet de statistiques. |
-| [DBCC SHOW_STATISTICS](/sql/t-sql/database-console-commands/dbcc-show-statistics-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest) |Informations détaillées et récapitulatives sur la distribution des valeurs, telles que l’objet de statistiques la comprend. |
+| [STATS_DATE](/sql/t-sql/functions/stats-date-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest&preserve-view=true) |Date de la dernière mise à jour de l’objet de statistiques. |
+| [DBCC SHOW_STATISTICS](/sql/t-sql/database-console-commands/dbcc-show-statistics-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest&preserve-view=true) |Informations détaillées et récapitulatives sur la distribution des valeurs, telles que l’objet de statistiques la comprend. |
 
 #### <a name="combine-statistics-columns-and-functions-into-one-view"></a>Combiner des fonctions et des colonnes de statistiques en une seule vue
 
@@ -501,7 +510,9 @@ La fonction DBCC SHOW_STATISTICS() présente les données contenues dans un obje
 - Vecteur de densité
 - Histogramme
 
-L'en-tête correspond aux métadonnées sur les statistiques. L’histogramme affiche la distribution des valeurs dans la première colonne de l’objet de statistiques. Le vecteur de densité mesure la corrélation entre les colonnes. Le pool SQL calcule les évaluations de cardinalité avec certaines données dans l’objet de statistiques.
+L'en-tête correspond aux métadonnées sur les statistiques. L’histogramme affiche la distribution des valeurs dans la première colonne de l’objet de statistiques. 
+
+Le vecteur de densité mesure la corrélation entre les colonnes. Le pool SQL dédié calcule les évaluations de cardinalité avec certaines données dans l’objet de statistiques.
 
 #### <a name="show-header-density-and-histogram"></a>Afficher l’en-tête, la densité et l’histogramme
 
@@ -535,7 +546,7 @@ DBCC SHOW_STATISTICS (dbo.table1, stats_col1)
 
 ### <a name="dbcc-show_statistics-differences"></a>Différences liées à la fonction DBCC SHOW_STATISTICS()
 
-`DBCC SHOW_STATISTICS()` est implémentée de manière plus stricte dans le pool SQL que dans SQL Server :
+`DBCC SHOW_STATISTICS()` est implémentée de manière plus stricte dans le pool SQL dédié que dans SQL Server :
 
 - Les fonctionnalités non documentées ne sont pas prises en charge.
 - Impossible d’utiliser Stats_stream.
@@ -545,21 +556,25 @@ DBCC SHOW_STATISTICS (dbo.table1, stats_col1)
 - Vous ne pouvez pas utiliser les noms de colonnes pour identifier les objets de statistiques.
 - L’erreur personnalisée 2767 n’est pas prise en charge.
 
-### <a name="next-steps"></a>Étapes suivantes
 
-Pour améliorer davantage les performances des requêtes, consultez [Surveiller votre charge de travail](../sql-data-warehouse/sql-data-warehouse-manage-monitor.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json).
-
-## <a name="statistics-in-sql-on-demand-preview"></a>Statistiques dans SQL à la demande (préversion)
+## <a name="statistics-in-serverless-sql-pool"></a>Statistiques dans un pool SQL serverless
 
 Les statistiques sont créées par colonne donnée pour un jeu de données particulier (chemin de stockage).
 
+> [!NOTE]
+> Les statistiques ne peuvent pas être créées pour les colonnes LOB.
+
 ### <a name="why-use-statistics"></a>Pourquoi utiliser des statistiques ?
 
-Plus SQL à la demande (préversion) connaît vos données, plus il peut exécuter des requêtes sur celles-ci rapidement. Collecter des statistiques sur vos données est l’une des actions les plus importantes pour optimiser vos requêtes. L’optimiseur de requête de SQL à la demande est un optimiseur basé sur les coûts. Il compare le coût de différents plans de requête, puis choisit le plan avec le coût le plus bas. Dans la plupart des cas, il choisit le plan qui s’exécute le plus rapidement. Par exemple, si l’optimiseur estime que la date de filtrage de votre requête va renvoyer une ligne, il choisira un certain plan. S’il estime que la date sélectionnée va renvoyer un million de lignes, il choisira un autre plan.
+Mieux le pool SQL serverless connaît vos données, plus vite il peut exécuter des requêtes dessus. Collecter des statistiques sur vos données est l’une des actions les plus importantes pour optimiser vos requêtes. 
+
+L’optimiseur de requête du pool SQL serverless est un optimiseur basé sur les coûts. Il compare le coût de différents plans de requête, puis choisit le plan avec le coût le plus bas. Dans la plupart des cas, il choisit le plan qui s’exécute le plus rapidement. 
+
+Par exemple, si l’optimiseur estime que la date de filtrage de votre requête va renvoyer une ligne, il choisira un certain plan. S’il estime que la date sélectionnée va renvoyer un million de lignes, il choisira un autre plan.
 
 ### <a name="automatic-creation-of-statistics"></a>Création automatique de statistiques
 
-SQL à la demande analyse les requêtes utilisateur entrantes pour repérer les statistiques manquantes. Si des statistiques manquent, l’optimiseur de requête crée des statistiques sur des colonnes individuelles dans le prédicat de requête ou la condition de jointure afin d’améliorer les estimations de cardinalité pour le plan de requête.
+Le pool SQL serverless analyse les requêtes utilisateur entrantes pour repérer les statistiques manquantes. Si des statistiques manquent, l’optimiseur de requête crée des statistiques sur des colonnes individuelles dans le prédicat de requête ou la condition de jointure afin d’améliorer les estimations de cardinalité pour le plan de requête.
 
 L'instruction SELECT déclenche la création automatique de statistiques.
 
@@ -570,13 +585,15 @@ La création automatique de statistiques étant effectuée de façon synchrone, 
 
 ### <a name="manual-creation-of-statistics"></a>Création manuelle de statistiques
 
-SQL à la demande vous permet de créer des statistiques manuellement. Pour les fichiers CSV, vous devez créer des statistiques manuellement, la création automatique de statistiques n'étant pas activée pour ces fichiers. Consultez les exemples ci-dessous pour obtenir des instructions sur la création manuelle de statistiques.
+Le pool SQL serverless vous permet de créer des statistiques manuellement. Pour les fichiers CSV, vous devez créer des statistiques manuellement, la création automatique de statistiques n'étant pas activée pour ces fichiers. 
 
-### <a name="updating-statistics"></a>Mettre à jour les statistiques
+Consultez les exemples suivants pour obtenir des instructions sur la création manuelle de statistiques.
+
+### <a name="update-statistics"></a>Mettre à jour les statistiques
 
 Les modifications apportées aux données des fichiers, de même que la suppression et l’ajout de fichiers entraînent des modifications de distribution des données et rendent les statistiques obsolètes. Dès lors, les statistiques doivent être mises à jour.
 
-SQL à la demande recrée automatiquement les statistiques si les données changent considérablement. Chaque fois que des statistiques sont créées automatiquement, l’état du jeu de données est enregistré : chemins d’accès aux fichiers, tailles, dates de la dernière modification.
+Le pool SQL serverless recrée automatiquement les statistiques si les données changent considérablement. Chaque fois que des statistiques sont créées automatiquement, l’état du jeu de données est enregistré : chemins d’accès aux fichiers, tailles, dates de la dernière modification.
 
 Lorsque les statistiques sont obsolètes, de nouvelles statistiques sont créées. L’algorithme parcourt les données et les compare à l’état actuel du jeu de données. Si la taille des modifications est supérieure au seuil spécifique, les statistiques précédentes sont supprimées et recrées sur le nouveau jeu de données.
 
@@ -592,14 +609,14 @@ Lorsque le nombre de lignes ou la distribution des valeurs change de manière su
 > [!NOTE]
 > Si la distribution des valeurs d’une colonne a subi une modification significative, vous devez mettre à jour les statistiques, quelle que soit la date de la dernière mise à jour.
 
-### <a name="implementing-statistics-management"></a>Implémentation de fonctions de gestion des statistiques
+### <a name="implement-statistics-management"></a>Implémenter la gestion des statistiques
 
-Vous pouvez étendre votre pipeline de données pour permettre la mise à jour des statistiques lorsque les données changent considérablement en cas d'ajout, de suppression ou de modification de fichiers.
+Vous pouvez étendre votre pipeline de données pour permettre la mise à jour des statistiques lorsque les données sont considérablement modifiées en cas d'ajout, de suppression ou de modification de fichiers.
 
 Les principes généraux suivants sont fournis afin de vous aider à mettre à jour vos statistiques :
 
 - Assurez-vous que jeu de données présente au moins un objet de statistiques mis à jour. Cela met à jour les informations sur la taille (nombre de lignes et de pages) dans le cadre du processus de mise à jour des statistiques.
-- Concentrez-vous sur les colonnes participant aux clauses JOIN, GROUP BY, ORDER BY et DISTINCT.
+- Concentrez-vous sur les colonnes participant aux clauses WHERE, JOIN, GROUP BY, ORDER BY et DISTINCT.
 - Mettez à jour les colonnes de « clé croissante », comme celles des dates de transactions, car ces valeurs ne seront pas incluses dans l’histogramme des statistiques.
 - Mettez moins souvent à jour les colonnes de distribution statiques.
 
@@ -611,11 +628,13 @@ Ces exemples montrent comment utiliser différentes options pour créer des stat
 
 > [!NOTE]
 > À ce stade, vous pouvez créer des statistiques à une seule colonne uniquement.
+>
+> Les autorisations suivantes sont requises pour exécuter sp_create_openrowset_statistics et sp_drop_openrowset_statistics : ADMINISTER BULK OPERATIONS ou ADMINISTER DATABASE BULK OPERATIONS.
 
 La procédure stockée suivante est utilisée pour créer des statistiques :
 
 ```sql
-sys.sp_create_file_statistics [ @stmt = ] N'statement_text'
+sys.sp_create_openrowset_statistics [ @stmt = ] N'statement_text'
 ```
 
 Arguments : [ @stmt =] N’statement_text' - Spécifie une instruction Transact-SQL qui renvoie les valeurs de colonne à utiliser pour les statistiques. Vous pouvez utiliser TABLESAMPLE pour spécifier des exemples de données à utiliser. Si TABLESAMPLE n’est pas spécifié, FULLSCAN est utilisé.
@@ -631,7 +650,7 @@ Arguments : [ @stmt =] N’statement_text' - Spécifie une instruction Transact
 
 Pour créer des statistiques sur une colonne, fournissez une requête qui renvoie la colonne pour laquelle vous avez besoin de statistiques.
 
-Par défaut, en l'absence de spécification, SQL à la demande utilise 100 % des données fournies dans le jeu de données lors de la création des statistiques.
+Par défaut, en l'absence de spécification, le pool SQL serverless utilise 100 % des données fournies dans le jeu de données lors de la création des statistiques.
 
 Par exemple, pour créer des statistiques avec les options par défaut (FULLSCAN) pour une colonne year du jeu de données basé sur le fichier population.csv :
 
@@ -647,7 +666,7 @@ SECRET = ''
 GO
 */
 
-EXEC sys.sp_create_file_statistics N'SELECT year
+EXEC sys.sp_create_openrowset_statistics N'SELECT year
 FROM OPENROWSET(
         BULK ''https://sqlondemandstorage.blob.core.windows.net/csv/population/population.csv'',
         FORMAT = ''CSV'',
@@ -679,7 +698,7 @@ SECRET = ''
 GO
 */
 
-EXEC sys.sp_create_file_statistics N'SELECT payment_type
+EXEC sys.sp_create_openrowset_statistics N'SELECT payment_type
 FROM OPENROWSET(
         BULK ''https://sqlondemandstorage.blob.core.windows.net/parquet/taxi/year=2018/month=6/*.parquet'',
          FORMAT = ''PARQUET''
@@ -693,15 +712,18 @@ FROM OPENROWSET(
 Pour mettre à jour les statistiques, vous devez supprimer et créer des statistiques. La procédure stockée suivante est utilisée pour supprimer des statistiques :
 
 ```sql
-sys.sp_drop_file_statistics [ @stmt = ] N'statement_text'
+sys.sp_drop_openrowset_statistics [ @stmt = ] N'statement_text'
 ```
+
+> [!NOTE]
+> Les autorisations suivantes sont requises pour exécuter sp_create_openrowset_statistics et sp_drop_openrowset_statistics : ADMINISTER BULK OPERATIONS ou ADMINISTER DATABASE BULK OPERATIONS.
 
 Arguments : [ @stmt =] N’statement_text' - Spécifie la même instruction Transact-SQL que celle utilisée lors de la création des statistiques.
 
 Pour mettre à jour les statistiques de la colonne year du jeu de données basé sur le fichier population.csv, vous devez supprimer et créer des statistiques :
 
 ```sql
-EXEC sys.sp_drop_file_statistics N'SELECT payment_type
+EXEC sys.sp_drop_openrowset_statistics N'SELECT payment_type
 FROM OPENROWSET(
         BULK ''https://sqlondemandstorage.blob.core.windows.net/parquet/taxi/year=2018/month=6/*.parquet'',
          FORMAT = ''PARQUET''
@@ -721,7 +743,7 @@ SECRET = ''
 GO
 */
 
-EXEC sys.sp_create_file_statistics N'SELECT payment_type
+EXEC sys.sp_create_openrowset_statistics N'SELECT payment_type
 FROM OPENROWSET(
         BULK ''https://sqlondemandstorage.blob.core.windows.net/parquet/taxi/year=2018/month=6/*.parquet'',
          FORMAT = ''PARQUET''
@@ -750,7 +772,7 @@ ON { external_table } ( column )
 
 Arguments : external_table - Spécifie la table externe dans laquelle les statistiques doivent être créées.
 
-FULLSCAN calcule les statistiques en analysant toutes les lignes. FULLSCAN et SAMPLE 100 PERCENT ont les mêmes résultats. Cette option ne peut pas être utilisée avec l'option SAMPLE.
+FULLSCAN calcule les statistiques en analysant toutes les lignes. FULLSCAN et SAMPLE 100 PERCENT ont les mêmes résultats. FULLSCAN ne peut pas être utilisé avec l'option SAMPLE.
 
 SAMPLE number PERCENT - Spécifie le pourcentage ou nombre de lignes approximatif dans la table ou vue indexée devant être utilisé par l'optimiseur de requête lors de la création des statistiques. Ce nombre peut être compris entre 0 et 100.
 
@@ -792,6 +814,76 @@ CREATE STATISTICS sState
     WITH FULLSCAN, NORECOMPUTE
 ```
 
+### <a name="statistics-metadata"></a>Métadonnées de statistiques
+
+Vous pouvez utiliser plusieurs fonctions et vues système pour rechercher des informations sur des statistiques. Par exemple, vous pouvez voir si un objet de statistiques peut être obsolète à l’aide de la fonction STATS_DATE(). STATS_DATE () vous permet de savoir quand les statistiques ont été créées ou mises à jour pour la dernière fois.
+
+> [!NOTE]
+> Les métadonnées de statistiques sont disponibles uniquement pour les colonnes d’une table externe. Les métadonnées de statistiques ne sont pas disponibles pour les colonnes OPENROWSET.
+
+#### <a name="catalog-views-for-statistics"></a>Vues de catalogue des statistiques
+
+Ces vues système fournissent des informations sur les statistiques :
+
+| Affichage catalogue                                                 | Description                                                  |
+| :----------------------------------------------------------- | :----------------------------------------------------------- |
+| [sys.columns](/sql/relational-databases/system-catalog-views/sys-columns-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest&preserve-view=true) | Une ligne pour chaque colonne.                                     |
+| [sys.objects](/sql/relational-databases/system-catalog-views/sys-objects-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest&preserve-view=true) | Une ligne pour chaque objet de la base de données.                     |
+| [sys.schemas](/sql/relational-databases/system-catalog-views/sys-objects-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest&preserve-view=true) | Une ligne pour chaque schéma de la base de données.                     |
+| [sys.stats](/sql/relational-databases/system-catalog-views/sys-stats-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest&preserve-view=true) | Une ligne pour chaque objet de statistiques.                          |
+| [sys.stats_columns](/sql/relational-databases/system-catalog-views/sys-stats-columns-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest&preserve-view=true) | Une ligne pour chaque colonne de l’objet de statistiques. Paramètre lié à l’élément « sys.columns ». |
+| [sys.tables](/sql/relational-databases/system-catalog-views/sys-tables-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest&preserve-view=true) | Une ligne pour chaque table (y compris les tables externes).           |
+| [sys.table_types](/sql/relational-databases/system-catalog-views/sys-table-types-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest&preserve-view=true) | Une ligne pour chaque type de données.                                  |
+
+#### <a name="system-functions-for-statistics"></a>Fonctions système relatives aux statistiques
+
+Ces fonctions système sont utiles lorsque vous gérez des statistiques :
+
+| Fonction système                                              | Description                                  |
+| :----------------------------------------------------------- | :------------------------------------------- |
+| [STATS_DATE](/sql/t-sql/functions/stats-date-transact-sql?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json&view=azure-sqldw-latest&preserve-view=true) | Date de la dernière mise à jour de l’objet de statistiques. |
+
+#### <a name="combine-statistics-columns-and-functions-into-one-view"></a>Combiner des fonctions et des colonnes de statistiques en une seule vue
+
+Cette vue regroupe les colonnes portant sur les statistiques et les résultats de la fonction STATS_DATE().
+
+```sql
+CREATE VIEW dbo.vstats_columns
+AS
+SELECT
+        sm.[name]                           AS [schema_name]
+,       tb.[name]                           AS [table_name]
+,       st.[name]                           AS [stats_name]
+,       st.[filter_definition]              AS [stats_filter_definition]
+,       st.[has_filter]                     AS [stats_is_filtered]
+,       STATS_DATE(st.[object_id],st.[stats_id])
+                                            AS [stats_last_updated_date]
+,       co.[name]                           AS [stats_column_name]
+,       ty.[name]                           AS [column_type]
+,       co.[max_length]                     AS [column_max_length]
+,       co.[precision]                      AS [column_precision]
+,       co.[scale]                          AS [column_scale]
+,       co.[is_nullable]                    AS [column_is_nullable]
+,       co.[collation_name]                 AS [column_collation_name]
+,       QUOTENAME(sm.[name])+'.'+QUOTENAME(tb.[name])
+                                            AS two_part_name
+,       QUOTENAME(DB_NAME())+'.'+QUOTENAME(sm.[name])+'.'+QUOTENAME(tb.[name])
+                                            AS three_part_name
+FROM    sys.objects                         AS ob
+JOIN    sys.stats           AS st ON    ob.[object_id]      = st.[object_id]
+JOIN    sys.stats_columns   AS sc ON    st.[stats_id]       = sc.[stats_id]
+                            AND         st.[object_id]      = sc.[object_id]
+JOIN    sys.columns         AS co ON    sc.[column_id]      = co.[column_id]
+                            AND         sc.[object_id]      = co.[object_id]
+JOIN    sys.types           AS ty ON    co.[user_type_id]   = ty.[user_type_id]
+JOIN    sys.tables          AS tb ON    co.[object_id]      = tb.[object_id]
+JOIN    sys.schemas         AS sm ON    tb.[schema_id]      = sm.[schema_id]
+WHERE   st.[user_created] = 1
+;
+```
+
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour plus d’informations sur l'amélioration des performances des requêtes, consultez [Bonnes pratiques concernant les pools SQL](best-practices-sql-pool.md#maintain-statistics).
+Afin d’améliorer davantage les performances des requêtes pour le pool SQL dédié, consultez [Surveiller votre charge de travail](../sql-data-warehouse/sql-data-warehouse-manage-monitor.md?toc=/azure/synapse-analytics/toc.json&bc=/azure/synapse-analytics/breadcrumb/toc.json) et [Bonnes pratiques pour les pools SQL dédiés](best-practices-sql-pool.md#maintain-statistics).
+
+Afin d’améliorer davantage les performances des requêtes pour un pool SQL serverless, consultez [Bonnes pratiques pour les pools SQL serverless](best-practices-sql-on-demand.md)

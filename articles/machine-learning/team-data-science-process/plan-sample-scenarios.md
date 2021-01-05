@@ -11,17 +11,17 @@ ms.topic: article
 ms.date: 01/10/2020
 ms.author: tdsp
 ms.custom: seodec18, previous-author=deguhath, previous-ms.author=deguhath
-ms.openlocfilehash: 48b51c40e5de8f10d9d1d16b02e2c70b045816b3
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 2d589d6c3394556499daf033c4c1d528a214b0e3
+ms.sourcegitcommit: 96918333d87f4029d4d6af7ac44635c833abb3da
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79227205"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93319297"
 ---
 # <a name="scenarios-for-advanced-analytics-in-azure-machine-learning"></a>Scénarios d’analyses avancées dans Azure Machine Learning
 Cet article présente les divers exemples de sources de données et les scénarios cibles qui peuvent être gérés par le processus [TDSP (Team Data Science Process)](overview.md). Le processus TDSP fournit une approche systématique permettant aux équipes de collaborer à la création d’applications intelligentes. Les scénarios présentés ici illustrent les options disponibles dans le flux de travail de traitement basées sur les caractéristiques des données, les emplacements sources et les référentiels cibles dans Azure.
 
-L’**arbre de décision** permettant de sélectionner les exemples de scénarios qui conviennent dans le cas de vos données et objectifs est présenté à la dernière section.
+L’ **arbre de décision** permettant de sélectionner les exemples de scénarios qui conviennent dans le cas de vos données et objectifs est présenté à la dernière section.
 
 Les sections suivantes présentent quelques exemples de scénarios. Pour chaque scénario, un flux possible de science des données ou d’analyse avancée et les ressources Azure connexes sont répertoriés.
 
@@ -31,7 +31,7 @@ Les sections suivantes présentent quelques exemples de scénarios. Pour chaque 
 > 
 > * [Créez un compte de stockage](../../storage/common/storage-account-create.md)
 >   <br/>
-> * [Création d’un espace de travail Microsoft Azure Machine Learning](../studio/create-workspace.md)
+> * [Création d’un espace de travail Microsoft Azure Machine Learning](../classic/create-workspace.md)
 > 
 > 
 
@@ -196,8 +196,6 @@ Pour répliquer l’ensemble de la base de données SQL Server dans votre machi
    
    a.  Pré-traitez et nettoyez les données dans IPython Notebook, en accédant aux données des objets blob Azure.
    
-       blobs.
-   
    b.  Si besoin, transformez les données sous forme de tableau nettoyé.
    
    c.  Enregistrez les données dans des fichiers locaux de la machine virtuelle (IPython Notebook est en cours d’exécution sur l’ordinateur virtuel, les lecteurs locaux font référence aux lecteurs de machine virtuelle).
@@ -254,4 +252,4 @@ Pour connaître les procédures pas à pas de bout en bout pour Azure Machine Le
 
 
 <!-- Module References -->
-[import-data]: https://msdn.microsoft.com/library/azure/4e1b0fe6-aded-4b3f-a36f-39b8862b9004/
+[import-data]: /azure/machine-learning/studio-module-reference/import-data

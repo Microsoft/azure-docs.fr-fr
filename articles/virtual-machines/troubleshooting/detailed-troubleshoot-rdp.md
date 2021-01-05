@@ -15,12 +15,12 @@ ms.tgt_pltfrm: vm-windows
 ms.topic: troubleshooting
 ms.date: 10/31/2018
 ms.author: genli
-ms.openlocfilehash: ea448b87f9e6954abecead2934bfb7f4ed04a9c5
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 91f15e32866cca008553286f7585247909d9a4ba
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77920142"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96002678"
 ---
 # <a name="detailed-troubleshooting-steps-for-remote-desktop-connection-issues-to-windows-vms-in-azure"></a>Étapes de dépannage détaillées pour les problèmes de connexion du Bureau à distance aux machines virtuelles Windows dans Azure
 Cet article décrit les étapes de dépannage détaillées pour diagnostiquer et résoudre les erreurs complexes du Bureau à distance pour les machines virtuelles basées Azure sur Windows.
@@ -36,7 +36,7 @@ Si vous avez besoin d'aide supplémentaire concernant n'importe quel point de ce
 ## <a name="components-of-a-remote-desktop-connection"></a>Composants d’une connexion Bureau à distance
 Voici les composants impliqués dans une connexion Bureau à distance :
 
-![](./media/detailed-troubleshoot-rdp/tshootrdp_0.png)
+![Diagramme montrant les composants impliqués dans une connexion Bureau à distance.](./media/detailed-troubleshoot-rdp/tshootrdp_0.png)
 
 Avant de poursuivre, nous vous recommandons de réfléchir à tout ce qui a changé depuis que vous avez créé avec succès une connexion Bureau à distance à la machine virtuelle. Par exemple :
 
@@ -65,7 +65,7 @@ Le client Bureau à distance peut ne pas être en mesure d’atteindre le servic
 ## <a name="source-1-remote-desktop-client-computer"></a>Source 1 : ordinateur client de Bureau à distance ;
 Vérifiez que votre ordinateur peut établir des connexions Bureau à distance avec un autre ordinateur Windows local.
 
-![](./media/detailed-troubleshoot-rdp/tshootrdp_1.png)
+![Diagramme des composants d’une connexion Bureau à distance avec le client Bureau à distance mis en surbrillance et une flèche pointant vers un autre ordinateur local indiquant une connexion.](./media/detailed-troubleshoot-rdp/tshootrdp_1.png)
 
 Si vous n’y parvenez pas, recherchez les paramètres suivants sur votre ordinateur :
 
@@ -79,9 +79,9 @@ Dans tous ces cas, désactivez temporairement le logiciel concerné et essayez d
 ## <a name="source-2-organization-intranet-edge-device"></a>Source 2 : périphérique de périmètre intranet de l’entreprise ;
 Vérifiez qu’un ordinateur directement connecté à Internet peut établir des connexions Bureau à distance avec votre machine virtuelle Azure.
 
-![](./media/detailed-troubleshoot-rdp/tshootrdp_2.png)
+![Diagramme des composants d’une connexion Bureau à distance avec le client Bureau à distance connecté à Internet mis en surbrillance et une flèche pointant vers une machine virtuelle Azure indiquant une connexion.](./media/detailed-troubleshoot-rdp/tshootrdp_2.png)
 
-Si vous n’avez pas d’ordinateur directement connecté à Internet, créez et testez une nouvelle machine virtuelle Azure dans un groupe de ressources ou service cloud. Pour plus d’informations, consultez [Création d’une machine virtuelle exécutant Windows dans Azure](../virtual-machines-windows-hero-tutorial.md). Une fois le test terminé, supprimez la machine virtuelle et le groupe de ressources ou le service cloud.
+Si vous n’avez pas d’ordinateur directement connecté à Internet, créez et testez une nouvelle machine virtuelle Azure dans un groupe de ressources ou service cloud. Pour plus d’informations, consultez [Création d’une machine virtuelle exécutant Windows dans Azure](../windows/quick-create-portal.md). Une fois le test terminé, supprimez la machine virtuelle et le groupe de ressources ou le service cloud.
 
 Si vous pouvez créer une connexion Bureau à distance avec un ordinateur directement connecté à Internet, recherchez sur votre périphérique de périmètre intranet d’entreprise :
 
@@ -97,29 +97,29 @@ Contactez votre administrateur réseau pour corriger les paramètres de votre p�
 
 Pour les machines virtuelles créées à l’aide du modèle de déploiement classique, vérifiez qu’une autre machine virtuelle Azure du même service cloud ou réseau virtuel peut établir des connexions Bureau à distance avec votre machine virtuelle Azure.
 
-![](./media/detailed-troubleshoot-rdp/tshootrdp_3.png)
+![Diagramme des composants d’une connexion Bureau à distance avec une machine virtuelle Azure mise en surbrillance et une flèche pointant vers une autre machine virtuelle Azure au sein du même service cloud indiquant une connexion.](./media/detailed-troubleshoot-rdp/tshootrdp_3.png)
 
 > [!NOTE]
 > Pour les machines virtuelles créées dans Resource Manager, passez à [Source 4 : groupes de sécurité réseau](#source-4-network-security-groups).
 
-Si vous ne disposez pas d’une autre machine virtuelle dans le même service cloud ou réseau virtuel, créez-en une. Suivez les étapes de [création d’une machine virtuelle exécutant Windows dans Azure](../virtual-machines-windows-hero-tutorial.md). Une fois le test terminé, supprimez la machine virtuelle de test.
+Si vous ne disposez pas d’une autre machine virtuelle dans le même service cloud ou réseau virtuel, créez-en une. Suivez les étapes de [création d’une machine virtuelle exécutant Windows dans Azure](../windows/quick-create-portal.md). Une fois le test terminé, supprimez la machine virtuelle de test.
 
 Si vous pouvez vous connecter à une machine virtuelle via le Bureau à distance dans le même service cloud ou réseau virtuel, vérifiez les paramètres suivants :
 
 * La configuration du point de terminaison pour le trafic de Bureau à distance sur la machine virtuelle cible : le port TCP privé du point de terminaison doit correspondre au port TCP sur lequel le service Bureau à distance de la machine virtuelle écoute (par défaut, le port 3389).
-* La liste de contrôle d’accès du point de terminaison du trafic de Bureau à distance sur la machine virtuelle cible : les listes de contrôle d’accès vous permettent de spécifier le trafic Internet entrant autorisé et interdit en fonction de l’adresse IP source. Une mauvaise configuration des listes de contrôle d’accès peut empêcher le trafic du Bureau à distance d’accéder au point de terminaison. Examinez vos listes de contrôle d’accès pour vous assurer que le trafic entrant provenant des adresses IP publiques de votre proxy ou d’un autre serveur Edge est autorisé. Pour plus d’informations, consultez [Qu’est-ce qu’une liste de contrôle d’accès (ACL) réseau ?](../../virtual-network/virtual-networks-acl.md)
+* La liste de contrôle d’accès du point de terminaison du trafic de Bureau à distance sur la machine virtuelle cible : les listes de contrôle d’accès vous permettent de spécifier le trafic Internet entrant autorisé et interdit en fonction de l’adresse IP source. Une mauvaise configuration des listes de contrôle d’accès peut empêcher le trafic du Bureau à distance d’accéder au point de terminaison. Examinez vos listes de contrôle d’accès pour vous assurer que le trafic entrant provenant des adresses IP publiques de votre proxy ou d’un autre serveur Edge est autorisé. Pour plus d’informations, consultez [Qu’est-ce qu’une liste de contrôle d’accès (ACL) réseau ?](/previous-versions/azure/virtual-network/virtual-networks-acl)
 
-Pour vérifier si le point de terminaison est la source du problème, supprimez le point de terminaison actuel et créez un autre point en choisissant un port aléatoire dont le numéro externe se situe entre 49152 et 65535. Pour plus d’informations, consultez [Configuration des points de terminaison sur une machine virtuelle](../windows/classic/setup-endpoints.md?toc=%2fazure%2fvirtual-machines%2fwindows%2fclassic%2ftoc.json).
+Pour vérifier si le point de terminaison est la source du problème, supprimez le point de terminaison actuel et créez un autre point en choisissant un port aléatoire dont le numéro externe se situe entre 49152 et 65535. Pour plus d’informations, consultez [Configuration des points de terminaison sur une machine virtuelle](/previous-versions/azure/virtual-machines/windows/classic/setup-endpoints?toc=/azure/virtual-machines/windows/classic/toc.json).
 
 ## <a name="source-4-network-security-groups"></a>Source 4 : Network Security Group
 Les groupes de sécurité réseau vous permettent de contrôler plus précisément le trafic entrant et sortant autorisé. Vous pouvez créer des règles qui s’étendent aux sous-réseaux et aux services cloud d’un réseau virtuel Azure.
 
-Utilisez la [vérification des flux IP](../../network-watcher/network-watcher-check-ip-flow-verify-portal.md) pour savoir si une règle d’un groupe de sécurité réseau bloque le trafic depuis ou vers une machine virtuelle. Vous pouvez également vérifier les règles de groupe de sécurité effectives pour vous assurer que la règle « Allow » entrante du groupe de sécurité réseau existe pour le port RDP (par défaut, 3389). Pour en savoir plus, voir [Utilisation de règles de sécurité effectives pour résoudre des problèmes de flux de trafic de machine virtuelle](../../virtual-network/diagnose-network-traffic-filter-problem.md).
+Utilisez la [vérification des flux IP](../../network-watcher/diagnose-vm-network-traffic-filtering-problem.md) pour savoir si une règle d’un groupe de sécurité réseau bloque le trafic depuis ou vers une machine virtuelle. Vous pouvez également vérifier les règles de groupe de sécurité effectives pour vous assurer que la règle « Allow » entrante du groupe de sécurité réseau existe pour le port RDP (par défaut, 3389). Pour en savoir plus, voir [Utilisation de règles de sécurité effectives pour résoudre des problèmes de flux de trafic de machine virtuelle](../../virtual-network/diagnose-network-traffic-filter-problem.md).
 
 ## <a name="source-5-windows-based-azure-vm"></a>Source 5 : Machine virtuelle Windows sur Azure
-![](./media/detailed-troubleshoot-rdp/tshootrdp_5.png)
+![Diagramme des composants d’une connexion Bureau à distance avec une machine virtuelle Azure mise en surbrillance au sein d’un service cloud et un message indiquant qu’il peut s’agir d’une « potentielle source de problèmes ». Une ligne bleue indique que les règles du groupe de sécurité réseau peuvent bloquer le trafic vers ou depuis la machine virtuelle Azure.](./media/detailed-troubleshoot-rdp/tshootrdp_5.png)
 
-Suivez les instructions de [cet article](../windows/reset-rdp.md). Cet article est consacré à la réinitialisation du service Bureau à distance sur la machine virtuelle :
+Suivez les instructions de [cet article](./reset-rdp.md). Cet article est consacré à la réinitialisation du service Bureau à distance sur la machine virtuelle :
 
 * activer la règle par défaut du pare-feu Windows Bureau à distance (port TCP 3389) ;
 * activer les connexions Bureau à distance en définissant la valeur de registre HKLM\System\CurrentControlSet\Control\Terminal Server\fDenyTSConnections sur 0.
@@ -133,9 +133,9 @@ Essayez une nouvelle fois de vous connecter à partir de votre ordinateur. Si vo
 
 Pour les machines virtuelles créées à l’aide du modèle de déploiement classique, vous pouvez utiliser une session Azure PowerShell distante vers la machine virtuelle Azure. Tout d’abord, vous devez installer un certificat pour le service cloud d’hébergement de la machine virtuelle. Accédez à [Configurer l’accès à distance sécurisé de PowerShell aux machines virtuelles Azure](https://gallery.technet.microsoft.com/scriptcenter/Configures-Secure-Remote-b137f2fe) et téléchargez le fichier de script **InstallWinRMCertAzureVM.ps1** sur votre ordinateur local.
 
-Installez ensuite Azure PowerShell si ce n’est pas déjà fait. Consultez [Installation et configuration d’Azure PowerShell](/powershell/azure/overview).
+Installez ensuite Azure PowerShell si ce n’est pas déjà fait. Consultez [Installation et configuration d’Azure PowerShell](/powershell/azure/).
 
-Ouvrez ensuite une invite de commandes Azure PowerShell, puis remplacez le dossier actif par l’emplacement du fichier de script **InstallWinRMCertAzureVM.ps1** . Pour exécuter un script Azure PowerShell, vous devez définir la bonne stratégie d’exécution. Exécutez la commande **Get-ExecutionPolicy** afin de déterminer votre niveau de stratégie actuel. Pour plus d’informations sur la définition du niveau approprié, consultez [Set-ExecutionPolicy](https://technet.microsoft.com/library/hh849812.aspx).
+Ouvrez ensuite une invite de commandes Azure PowerShell, puis remplacez le dossier actif par l’emplacement du fichier de script **InstallWinRMCertAzureVM.ps1** . Pour exécuter un script Azure PowerShell, vous devez définir la bonne stratégie d’exécution. Exécutez la commande **Get-ExecutionPolicy** afin de déterminer votre niveau de stratégie actuel. Pour plus d’informations sur la définition du niveau approprié, consultez [Set-ExecutionPolicy](/powershell/module/microsoft.powershell.security/set-executionpolicy?view=powershell-5.1).
 
 Indiquez ensuite le nom de votre abonnement Azure, le nom du service cloud et le nom de votre machine virtuelle (en supprimant les caractères < et >), puis exécutez les commandes suivantes.
 
@@ -194,11 +194,10 @@ Exit-PSSession
 Vérifiez que le point de terminaison du Bureau à distance de la machine virtuelle Azure utilise également le port TCP 3398 comme port interne. Redémarrez la machine virtuelle Azure puis testez de nouveau la connexion Bureau à distance.
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
-[Réinitialisation d’un mot de passe ou du service Bureau à distance pour les machines virtuelles Windows](../windows/reset-rdp.md)
+[Réinitialisation d’un mot de passe ou du service Bureau à distance pour les machines virtuelles Windows](./reset-rdp.md)
 
-[Installation et configuration d’Azure PowerShell](/powershell/azure/overview)
+[Installation et configuration d’Azure PowerShell](/powershell/azure/)
 
-[Résolution des problèmes des connexions SSH avec une machine virtuelle Azure Linux](../linux/troubleshoot-ssh-connection.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
+[Résolution des problèmes des connexions SSH avec une machine virtuelle Azure Linux](./troubleshoot-ssh-connection.md?toc=/azure/virtual-machines/linux/toc.json)
 
-[Résolution des problèmes d’accès à une application exécutée sur une machine virtuelle Azure](../linux/troubleshoot-app-connection.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
-
+[Résolution des problèmes d’accès à une application exécutée sur une machine virtuelle Azure](./troubleshoot-app-connection.md?toc=/azure/virtual-machines/linux/toc.json)

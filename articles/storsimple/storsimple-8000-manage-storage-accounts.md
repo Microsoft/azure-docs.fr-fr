@@ -9,17 +9,17 @@ editor: ''
 ms.assetid: ''
 ms.service: storsimple
 ms.devlang: NA
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: NA
 ms.workload: TBD
 ms.date: 06/29/2017
 ms.author: alkohli
-ms.openlocfilehash: 65aa83731be97b59a36a5baf60ea308690a0dcf8
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 0df0c12d5942179e2492bfdc932fa25d126a2426
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80297742"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96016866"
 ---
 # <a name="use-the-storsimple-device-manager-service-to-manage-your-storage-account-credentials"></a>Utiliser le service StorSimple Device Manager pour gérer vos informations d’identification de compte de stockage
 
@@ -33,7 +33,7 @@ La section **Configuration** du panneau du service StorSimple Device Manager pr�
 
 Ce didacticiel explique comment ajouter, modifier ou supprimer des informations d’identification de compte de stockage, ou effectuer une rotation des clés de sécurité d’un compte de stockage.
 
- ![Liste d’informations d’identification de compte de stockage](./media/storsimple-8000-manage-storage-accounts/createnewstorageacct6.png)  
+ ![Liste d’informations d’identification de compte de stockage 1](./media/storsimple-8000-manage-storage-accounts/createnewstorageacct6.png)  
 
 Les comptes de stockage contiennent les informations d’identification que l’appareil StorSimple utilise pour accéder au compte de stockage que vous procure votre fournisseur de services cloud. Pour les comptes de stockage Microsoft Azure, il s’agit d’informations d’identification telles que le nom du compte et la clé d’accès primaire. 
 
@@ -55,7 +55,7 @@ Les tâches les plus courantes que vous pouvez effectuer sur les comptes de stoc
 Vous pouvez utiliser trois types de compte de stockage avec votre appareil StorSimple.
 
 * **Comptes de stockage générés automatiquement** : comme son nom l’indique, ce type de compte de stockage est généré automatiquement à la création du service. Pour plus d'informations sur la création des comptes de stockage, consultez [Étape 1 : Créer un nouveau service](storsimple-8000-deployment-walkthrough-u2.md#step-1-create-a-new-service) dans [Déployer votre appareil StorSimple local](storsimple-8000-deployment-walkthrough-u2.md). 
-* **Comptes de stockage de l’abonnement au service** : il s’agit des comptes de stockage Azure associés à l’abonnement au service. Pour en savoir plus sur la création de ces comptes de stockage, consultez la rubrique [À propos des comptes de stockage Azure](../storage/common/storage-create-storage-account.md). 
+* **Comptes de stockage de l’abonnement au service** : il s’agit des comptes de stockage Azure associés à l’abonnement au service. Pour en savoir plus sur la création de ces comptes de stockage, consultez la rubrique [À propos des comptes de stockage Azure](../storage/common/storage-account-create.md). 
 * **Comptes de stockage hors abonnement au service** : il s’agit des comptes de stockage Azure qui ne sont pas associés à votre service et existaient probablement avant sa création.
 
 ## <a name="add-a-storage-account"></a>Ajout d’un compte de stockage
@@ -102,7 +102,7 @@ Vous pouvez modifier un compte de stockage utilisé par un conteneur de volumes.
 
 1. Accédez à votre service StorSimple Device Manager. Dans la section **Configuration**, cliquez sur **Informations d’identification du compte de stockage**.
 
-    ![Informations d’identification du compte de stockage](./media/storsimple-8000-manage-storage-accounts/editstorageacct1.png)
+    ![Informations d’identification du compte de stockage 2](./media/storsimple-8000-manage-storage-accounts/editstorageacct1.png)
 
 2. Dans la liste des informations d’identification du compte de stockage du panneau **Informations d’identification du compte de stockage**, sélectionnez et cliquez sur les informations que vous souhaitez modifier. 
 
@@ -110,7 +110,7 @@ Vous pouvez modifier un compte de stockage utilisé par un conteneur de volumes.
 
     ![Enregistrer les modifications apportées aux informations d’identification de compte de stockage](./media/storsimple-8000-manage-storage-accounts/editstorageacct3.png)
 
-4. Cliquez sur **Oui**lorsque vous êtes invité à confirmer l’opération. 
+4. Cliquez sur **Oui** lorsque vous êtes invité à confirmer l’opération. 
 
     ![Confirmer les modifications](./media/storsimple-8000-manage-storage-accounts/editstorageacct4.png)
 
@@ -159,11 +159,11 @@ Pour informer le service StorSimple Device Manager de la modification, vous deve
 
 3. Cliquez sur **Plus**, puis sélectionnez **Synchroniser la clé d’accès** pour effectuer la rotation.   
 
-    ![synchroniser les clés](./media/storsimple-8000-manage-storage-accounts/syncaccesskey2.png)
+    ![synchroniser les clés 2](./media/storsimple-8000-manage-storage-accounts/syncaccesskey2.png)
 
 4. Dans le service StorSimple Device Manager, vous devez mettre à jour la clé que vous avez précédemment modifiée dans le service de stockage Microsoft Azure. Si vous avez modifié (régénéré) la clé primaire, sélectionnez la clé **primaire**. Si vous avez modifié la clé secondaire, sélectionnez la clé **secondaire**. Cliquez sur **Synchroniser la clé**.
       
-      ![synchroniser les clés](./media/storsimple-8000-manage-storage-accounts/syncaccesskey3.png)
+      ![synchroniser les clés 3](./media/storsimple-8000-manage-storage-accounts/syncaccesskey3.png)
 
 Un message vous informe que la clé est synchronisée.
 
@@ -179,4 +179,3 @@ Un message vous informe que la clé est synchronisée.
 ## <a name="next-steps"></a>Étapes suivantes
 * En savoir plus sur la [sécurité StorSimple](storsimple-8000-security.md).
 * En savoir plus sur l’[utilisation du service StorSimple Device Manager pour gérer votre appareil StorSimple](storsimple-8000-manager-service-administration.md).
-

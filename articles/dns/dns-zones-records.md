@@ -9,12 +9,12 @@ ms.custom: H1Hack27Feb2017
 ms.workload: infrastructure-services
 ms.date: 12/18/2017
 ms.author: rohink
-ms.openlocfilehash: 19189af6424960b8e20be686af745b10f2d8578b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 41eb15a38c97532951723f12d1ac74c90c838eb1
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79231369"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94968194"
 ---
 # <a name="overview-of-dns-zones-and-records"></a>Vue d’ensemble des enregistrements et des zones DNS
 
@@ -53,7 +53,7 @@ Pour créer un jeu d’enregistrements génériques, utilisez le nom de jeu d’
 ### <a name="caa-records"></a>Enregistrements CAA
 
 Un enregistrement CAA permet aux propriétaires de domaine de spécifier les autorités de certification autorisées à émettre des certificats pour leur domaine. Ainsi, les autorités de certification peuvent éviter d’émettre des certificats incorrects dans certains cas. Les enregistrements CAA présentent trois propriétés :
-* **Flags** : il s’agit d’un entier compris entre 0 et 255, utilisé pour représenter l’indicateur critique qui a une signification particulière par le [RFC](https://tools.ietf.org/html/rfc6844#section-3).
+* **Flags** : il s’agit d’un entier compris entre 0 et 255, utilisé pour représenter l’indicateur critique qui a une signification particulière d’après la [RFC](https://tools.ietf.org/html/rfc6844#section-3).
 * **Tag** : une chaîne ASCII qui peut être l’un des éléments suivants :
     * **issue** : utilisez cette option si vous souhaitez spécifier quelles autorités de certification sont autorisées à émettre des certificats (de tous types).
     * **issuewild** : utilisez cette option si vous souhaitez spécifier quelles autorités de certification sont autorisées à émettre des certificats (certificats avec caractères génériques uniquement).
@@ -143,5 +143,5 @@ Les limites par défaut suivantes s’appliquent lors de l’utilisation du DNS 
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* Pour commencer à utiliser le DNS Azure, découvrez comment [créer une zone DNS](dns-getstarted-create-dnszone-portal.md) et [créer des enregistrements DNS](dns-getstarted-create-recordset-portal.md).
+* Pour commencer à utiliser le DNS Azure, découvrez comment [créer une zone DNS](./dns-getstarted-portal.md) et [créer des enregistrements DNS](./dns-getstarted-portal.md).
 * Pour migrer une zone DNS, découvrez comment [importer et exporter un fichier de zone DNS](dns-import-export.md).

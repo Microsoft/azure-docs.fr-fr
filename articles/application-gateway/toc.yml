@@ -4,8 +4,6 @@
   items:
     - name: À propos des passerelles Application Gateway
       href: overview.md
-    - name: Nouveautés
-      href: whats-new.md
 - name: Démarrages rapides
   expanded: true
   items:
@@ -30,6 +28,10 @@
       href: tutorial-url-redirect-cli.md
     - name: Mise à l’échelle et redondant dans une zone
       href: tutorial-autoscale-ps.md
+    - name: Complément Ingress Controller pour AKS (Greenfield)
+      href: tutorial-ingress-controller-add-on-new.md
+    - name: Complément Ingress Controller pour AKS (Brownfield)
+      href: tutorial-ingress-controller-add-on-existing.md
 - name: Exemples
   items:
     - name: Azure PowerShell
@@ -50,8 +52,20 @@
           href: how-application-gateway-works.md
         - name: Composants d’Application Gateway
           href: application-gateway-components.md
-        - name: Présentation de la configuration
-          href: configuration-overview.md
+        - name: Configuration
+          items:
+            - name: Vue d'ensemble
+              href: configuration-overview.md
+            - name: Infrastructure
+              href: configuration-infrastructure.md
+            - name: Adresse IP front-end
+              href: configuration-front-end-ip.md
+            - name: Écouteurs
+              href: configuration-listeners.md
+            - name: Règles de routage des requêtes
+              href: configuration-request-routing-rules.md
+            - name: Paramètres HTTP
+              href: configuration-http-settings.md
     - name: Prise en charge du trafic élevé
       href: high-traffic-support.md
     - name: "Référence SKU de mise à l’échelle version\_2"
@@ -64,10 +78,12 @@
           href: url-route-overview.md
         - name: Redirection
           href: redirect-overview.md
-        - name: Réécrire les en-têtes HTTP
-          href: rewrite-http-headers.md
-        - name: Pages d’erreur personnalisées
-          href: custom-error.md
+        - name: Réécrire les en-têtes et les URL HTTP
+          href: rewrite-http-headers-url.md
+    - name: Sécurité
+      items:
+        - name: Base de référence de la sécurité
+          href: security-baseline.md
     - name: SSL
       items:
         - name: Arrêt SSL et SSL de bout en bout
@@ -90,6 +106,8 @@
       href: application-gateway-web-app-overview.md
     - name: Prise en charge de WebSocket
       href: application-gateway-websocket.md
+    - name: Compréhension de la tarification
+      href: understanding-pricing.md
     - name: Questions fréquentes (FAQ)
       href: application-gateway-faq.md
 - name: Guides pratiques
@@ -136,10 +154,12 @@
               href: application-gateway-configure-ssl-policy-powershell.md
     - name: Entrée pour AKS
       items:
-        - name: Configurer avec une passerelle d’application existante
+        - name: Ingress pour AKS via Helm (Brownfield)
           href: ingress-controller-install-existing.md
-        - name: Configurer avec une nouvelle passerelle d’application
+        - name: Ingress pour AKS via Helm (Greenfield)
           href: ingress-controller-install-new.md
+        - name: Désactiver et réactiver le complément AKS Ingress Controller
+          href: ingress-controller-disable-addon.md
         - name: Activer l’affinité de cookies
           href: ingress-controller-cookie-affinity.md
         - name: Activer la prise en charge de plusieurs espaces de noms
@@ -194,14 +214,20 @@
               href: redirect-internal-site-cli.md
         - name: Rediriger le trafic web avec Azure PowerShell
           href: tutorial-url-redirect-powershell.md
-    - name: Réécrire les en-têtes HTTP
+    - name: Réécrire les en-têtes et les URL HTTP
       items:
-        - name: Portail Azure
-          href: rewrite-http-headers-portal.md
-        - name: Azure PowerShell
-          href: add-http-header-rewrite-rule-powershell.md
-        - name: Créer et réécrire des en-têtes HTTP
-          href: tutorial-http-header-rewrite-powershell.md
+        - name: Réécriture d’en-tête
+          items:
+            - name: Portail Azure
+              href: rewrite-http-headers-portal.md
+            - name: Azure PowerShell
+              href: add-http-header-rewrite-rule-powershell.md
+            - name: Créer et réécrire des en-têtes HTTP
+              href: tutorial-http-header-rewrite-powershell.md
+        - name: Réécrire URL
+          items:
+            - name: Portail Azure
+              href: rewrite-url-portal.md
     - name: Configurer une application web App Service et un service multilocataire
       items:
         - name: Portail
@@ -234,6 +260,8 @@
           href: log-analytics.md
         - name: Problèmes d’intégrité du back-end
           href: application-gateway-backend-health-troubleshooting.md
+    - name: Pages d’erreur personnalisées
+      href: custom-error.md
     - name: Effectuer la migration de la version 1 à la version 2
       href: migrate-v1-v2.md
 - name: Informations de référence
@@ -243,7 +271,7 @@
     - name: Azure CLI
       href: /cli/azure/network/application-gateway
     - name: Azure PowerShell
-      href: /powershell/azure/overview
+      href: /powershell/azure/
     - name: .NET
       href: /dotnet/api
     - name: Java
@@ -259,7 +287,7 @@
       href: ../azure-resource-manager/management/overview.md
     - name: Modèle Resource Manager
       displayName: ARM
-      href: 'https://docs.microsoft.com/azure/templates/microsoft.network/applicationgateways'
+      href: /azure/templates/microsoft.network/applicationgateways
 - name: Ressources
   items:
     - name: Créer des modèles

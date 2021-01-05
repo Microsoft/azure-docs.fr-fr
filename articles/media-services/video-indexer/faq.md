@@ -8,14 +8,14 @@ manager: femila
 ms.service: media-services
 ms.subservice: video-indexer
 ms.topic: article
-ms.date: 04/20/2020
+ms.date: 05/12/2020
 ms.author: juliako
-ms.openlocfilehash: dc57978dd881532cab59150dec921df9ffa958c3
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 721af069a76497576b92c4203a93656d19c283aa
+ms.sourcegitcommit: 8d8deb9a406165de5050522681b782fb2917762d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81767202"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92217726"
 ---
 # <a name="video-indexer-frequently-asked-questions"></a>Forum Aux Questions sur Video Indexer
 
@@ -59,13 +59,13 @@ Non, Video Indexer fournit l’intégration de plusieurs modèles Machine Learni
 
 ### <a name="what-media-formats-does-video-indexer-support"></a>Quels formats multimédias sont pris en charge par Video Indexer ?
 
-Video Indexer prend en charge les formats multimédias les plus courants. Reportez-vous à la liste des [formats standard Azure Media Encoder](https://docs.microsoft.com/azure/media-services/latest/media-encoder-standard-formats) pour plus d’informations.
+Video Indexer prend en charge les formats multimédias les plus courants. Reportez-vous à la liste des [formats standard Azure Media Encoder](../latest/media-encoder-standard-formats.md) pour plus d’informations.
 
 ### <a name="how-do-i-upload-a-media-file-into-video-indexer-and-what-are-the-limitations"></a>Comment charger un fichier multimédia dans Video Indexer et quelles sont les limitations ?
 
 Dans le portail web Video Indexer, vous pouvez charger un fichier multimédia par le biais de la boîte de dialogue de chargement de fichier, ou en faisant pointer vers une URL qui héberge directement le fichier source (voir l’[exemple](https://nimbuscdn-nimbuspm.streaming.mediaservices.windows.net/2b533311-b215-4409-80af-529c3e853622/Ignite-short.mp4)). Une URL qui héberge le contenu multimédia à l’aide d’un iFrame ou d’un code incorporé ne fonctionne pas (voir l’[exemple](https://www.videoindexer.ai/accounts/7e1282e8-083c-46ab-8c20-84cae3dc289d/videos/5cfa29e152/?t=4.11)). 
 
-Pour plus d’informations, consultez ce [guide pratique](https://docs.microsoft.com/azure/media-services/video-indexer/upload-index-videos).
+Pour plus d’informations, consultez ce [guide pratique](./upload-index-videos.md).
 
 #### <a name="limitations"></a>Limites
 
@@ -76,7 +76,7 @@ Pour obtenir une liste complète, consultez [Considérations et limitations rela
 
 ### <a name="how-long-does-it-take-video-indexer-to-extract-insights-from-media"></a>Combien de temps faut-il à Video Indexer pour extraire des insights à partir d’un fichier multimédia ?
 
-Le temps nécessaire pour indexer un fichier vidéo ou audio, que ce soit à l’aide de l’API Video Indexer ou de l’interface web Video Indexer, dépend de plusieurs paramètres, tels que la longueur et la qualité du fichier, le nombre d’insights trouvés dans le fichier, le nombre d’[unités réservées](https://docs.microsoft.com/azure/media-services/previous/media-services-scale-media-processing-overview) disponibles et l’activation ou non du [point de terminaison de streaming](https://docs.microsoft.com/azure/media-services/previous/media-services-streaming-endpoints-overview). Nous vous recommandons d’exécuter quelques fichiers de test avec votre propre contenu et de prendre une moyenne pour obtenir une meilleure idée.
+Le temps nécessaire pour indexer un fichier vidéo ou audio, que ce soit à l’aide de l’API Video Indexer ou de l’interface web Video Indexer, dépend de plusieurs paramètres, tels que la longueur et la qualité du fichier, le nombre d’insights trouvés dans le fichier, le nombre d’[unités réservées](../previous/media-services-scale-media-processing-overview.md) disponibles et l’activation ou non du [point de terminaison de streaming](../previous/media-services-streaming-endpoints-overview.md). Nous vous recommandons d’exécuter quelques fichiers de test avec votre propre contenu et de prendre une moyenne pour obtenir une meilleure idée.
 
 ### <a name="can-i-create-customized-workflows-to-automate-processes-with-video-indexer"></a>Puis-je créer des workflows personnalisés pour automatiser des processus avec Video Indexer ?
 
@@ -99,6 +99,10 @@ Pour plus d’informations, consultez les articles sur la personnalisation des m
 Oui. Appuyez sur le bouton **Modifier la vidéo** à partir de la vue de la bibliothèque, ou sur le bouton **Ouvrir dans l’éditeur** à partir de la vue du lecteur pour accéder à l’onglet **Projets**. Vous pouvez créer un nouveau projet et ajouter d’autres vidéos à partir de votre bibliothèque pour les modifier. Une fois que vous avez terminé, vous pouvez afficher votre vidéo et la télécharger. 
 
 Si vous souhaitez obtenir des insights sur votre nouvelle vidéo, indexez-la avec Video Indexer et elle apparaîtra dans votre bibliothèque avec ses insights.
+
+### <a name="can-i-index-multiple-audio-streams-or-channels"></a>Puis-je indexer plusieurs flux ou canaux audio ?
+
+S’il existe plusieurs flux audio, Video Indexer prend le premier qu’il rencontre et ne traite que celui-là. Dans n’importe quel flux audio qu’il traite, Video Indexer prend les différents canaux (s’il y en a) et les traite ensemble comme mono. Pour la manipulation de flux/canaux, vous pouvez utiliser des commandes ffmpeg sur le fichier avant de l’indexer.
 
 ### <a name="what-is-the-sla-for-video-indexer"></a>Quel est le contrat SLA pour Video Indexer ?
 
@@ -179,7 +183,7 @@ Actuellement, des fonctionnalités sont disponibles à la fois dans l’API Vide
 
 L’API Video Indexer contient une API Autorisations et une API Opérations. L’API Autorisations contient des appels qui vous donnent un jeton d’accès. Chaque appel à l’API Opérations doit être associé à un jeton d’accès correspondant à l’étendue d’autorisation de l’appel.
 
-Les jetons d’accès sont nécessaires pour utiliser les API Video Indexer pour des raisons de sécurité. Cela garantit que tous les appels proviennent de vous ou des personnes qui ont des autorisations d’accès à votre compte. 
+Les jetons d’accès sont nécessaires pour utiliser les API Video Indexer pour des raisons de sécurité. Cela garantit que tous les appels proviennent de vous ou des personnes qui ont des autorisations d’accès à votre compte. 
 
 ### <a name="what-is-the-difference-between-account-access-token-user-access-token-and-video-access-token"></a>Quelle est la différence entre le jeton d’accès Compte, le jeton d’accès Utilisateur et le jeton d’accès Vidéo ?
 
@@ -213,4 +217,5 @@ Oui. Video Indexer propose un essai gratuit qui offre des fonctionnalités compl
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-[Vue d'ensemble](video-indexer-overview.md)
+* [Vue d'ensemble](video-indexer-overview.md)
+* [Stack Overflow](https://stackoverflow.com/search?q=video-indexer)

@@ -11,12 +11,12 @@ author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: tanning
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: ae8ce24aeb665a7f99326e83dbe18d020e1b6196
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: df70891ef090d44769aadbc235273e3193bc780e
+ms.sourcegitcommit: 0a9df8ec14ab332d939b49f7b72dea217c8b3e1e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78672352"
+ms.lasthandoff: 11/18/2020
+ms.locfileid: "94837207"
 ---
 # <a name="troubleshooting-enterprise-state-roaming-settings-in-azure-active-directory"></a>Résolution des problèmes de paramètres Enterprise State Roaming dans Azure Active Directory
 
@@ -76,15 +76,15 @@ Enterprise State Roaming exige que l’appareil soit inscrit auprès d’Azure A
 
 ## <a name="enterprise-state-roaming-and-multi-factor-authentication"></a>Enterprise State Roaming et authentification multifacteur 
 
-Il peut arriver qu’Enterprise State Roaming ne parvienne pas à synchroniser les données si l’authentification multifacteur Azure (MFA) est configurée. Pour plus d’informations sur ces symptômes, consultez le document de support [KB3193683](https://support.microsoft.com/kb/3193683). 
+Il peut arriver qu’Enterprise State Roaming ne parvienne pas à synchroniser les données si Azure AD Multi-Factor Authentication est configuré. Pour plus d’informations sur ces symptômes, consultez le document de support [KB3193683](https://support.microsoft.com/kb/3193683). 
 
-**Problème potentiel** : si votre appareil est configuré pour requérir l’authentification multifacteur sur le portail Azure Active Directory, la synchronisation des paramètres lors de la connexion à un appareil Windows 10 à l’aide d’un mot de passe peut échouer. Ce type de configuration de l’authentification multifacteur a pour but de protéger un compte d’administrateur Windows Azure. Les utilisateurs administrateurs peuvent cependant continuer de synchroniser les paramètres en se connectant à leurs appareils Windows 10 à l’aide du code confidentiel Microsoft Passport for Work ou en effectuant une authentification multifacteur lors de l’accès à d’autres services Azure comme Office 365.
+**Problème potentiel** : si votre appareil est configuré pour requérir l’authentification multifacteur sur le portail Azure Active Directory, la synchronisation des paramètres lors de la connexion à un appareil Windows 10 à l’aide d’un mot de passe peut échouer. Ce type de configuration de l’authentification multifacteur a pour but de protéger un compte d’administrateur Windows Azure. Les utilisateurs administrateurs peuvent cependant continuer de synchroniser les paramètres en se connectant à leurs appareils Windows 10 à l’aide du code confidentiel Microsoft Passport for Work ou en effectuant une authentification multifacteur lors de l’accès à d’autres services Azure comme Microsoft 365.
 
-**Problème potentiel** : la synchronisation peut échouer si l’administrateur configure la stratégie d’accès conditionnel Multi-Factor Authentication des services de fédération Active Directory (AD FS) et que le jeton d’accès de l’appareil arrive à expiration. Veillez à vous connecter et à vous déconnecter en utilisant le code confidentiel Microsoft Passport for Work ou à effectuer une authentification multifacteur lorsque vous accédez à d’autres services Azure comme Office 365.
+**Problème potentiel** : la synchronisation peut échouer si l’administrateur configure la stratégie d’accès conditionnel Multi-Factor Authentication des services de fédération Active Directory (AD FS) et que le jeton d’accès de l’appareil arrive à expiration. Veillez à vous connecter et à vous déconnecter en utilisant le code confidentiel Microsoft Passport for Work ou à effectuer une authentification multifacteur lorsque vous accédez à d’autres services Azure comme Microsoft 365.
 
 ### <a name="event-viewer"></a>Observateur d'événements
 
-Pour une résolution des problèmes avancée, l’Observateur d’événements peut être utilisé pour rechercher des erreurs spécifiques. Celles-ci sont décrites dans le tableau ci-dessous. Vous trouverez les événements sous Observateur d’événements > Journaux des applications et des services > **Microsoft** > **Windows** > **SettingSync-Azure** et pour les problèmes liés à l’identité avec la synchronisation **Microsoft** > **Windows** > **AAD**.
+Pour une résolution des problèmes avancée, l’Observateur d’événements peut être utilisé pour rechercher des erreurs spécifiques. Celles-ci sont décrites dans le tableau ci-dessous. Les événements se trouvent sous Observateur d’événements > **Journaux des applications et des services** > **Microsoft** > **Windows** > **SettingSync-Azure** et, pour les problèmes liés à l’identité, avec la synchronisation **Journaux des applications et des services** > **Microsoft** > **Windows** > **AAD**.
 
 ## <a name="known-issues"></a>Problèmes connus
 
@@ -108,7 +108,7 @@ Assurez-vous que le client Windows 10 v1511 inclut la mise à jour cumulative de
 
 ### <a name="theme-is-not-syncing-as-well-as-data-protected-with-windows-information-protection"></a>Le thème n’est pas synchronisé, ainsi que les données protégées avec Windows Information Protection 
 
-Pour empêcher les fuites de données, les données protégées avec [Windows Information Protection](https://technet.microsoft.com/itpro/windows/keep-secure/protect-enterprise-data-using-wip) ne sont pas synchronisées via Enterprise State Roaming pour les appareils utilisant la mise à jour anniversaire de Windows 10.
+Pour empêcher les fuites de données, les données protégées avec [Windows Information Protection](/windows/security/information-protection/windows-information-protection/protect-enterprise-data-using-wip) ne sont pas synchronisées via Enterprise State Roaming pour les appareils utilisant la mise à jour anniversaire de Windows 10.
 
 **Action recommandée**  
 Aucun. Les mises à jour futures de Windows résoudront peut-être ce problème.

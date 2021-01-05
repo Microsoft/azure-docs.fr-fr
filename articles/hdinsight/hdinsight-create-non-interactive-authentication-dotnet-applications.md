@@ -5,15 +5,15 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
-ms.custom: hdinsightactive
+ms.topic: how-to
+ms.custom: hdinsightactive, devx-track-csharp
 ms.date: 12/23/2019
-ms.openlocfilehash: 5e6a0586bc750f8972586920c15dbb297295aa20
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: a696ba4f7bab85f2353e80d028220688531b3b69
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79371271"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89021763"
 ---
 # <a name="create-a-non-interactive-authentication-net-hdinsight-application"></a>Créer une application .NET HDInsight d’authentification non interactive
 
@@ -21,9 +21,9 @@ Exécutez votre application Microsoft .NET Azure HDInsight sous l’identité de
 
 À partir de votre application .NET non interactive, vous avez besoin des éléments suivants :
 
-* Votre ID de locataire d’abonnement Azure (également appelée *ID répertoire*). Voir [Obtenir l’ID de locataire](../active-directory/develop/howto-create-service-principal-portal.md#get-values-for-signing-in).
-* L’ID client d’application Azure Active Directory (Azure AD). Voir [Créer une application Azure Active Directory](../active-directory/develop/howto-create-service-principal-portal.md#create-an-azure-active-directory-application) et la rubrique [Obtenir un ID d’application](../active-directory/develop/howto-create-service-principal-portal.md#get-values-for-signing-in).
-* La clé secrète de l’application Azure AD. Voir la rubrique sur [l’obtention de la clé d’authentification de l’application](../active-directory/develop/howto-create-service-principal-portal.md#get-values-for-signing-in).
+* Votre ID de locataire d’abonnement Azure (également appelée *ID répertoire*). Voir [Obtenir l’ID de locataire](../active-directory/develop/howto-create-service-principal-portal.md#get-tenant-and-app-id-values-for-signing-in).
+* L’ID client d’application Azure Active Directory (Azure AD). Voir [Créer une application Azure Active Directory](../active-directory/develop/howto-create-service-principal-portal.md#register-an-application-with-azure-ad-and-create-a-service-principal) et la rubrique [Obtenir un ID d’application](../active-directory/develop/howto-create-service-principal-portal.md#get-tenant-and-app-id-values-for-signing-in).
+* La clé secrète de l’application Azure AD. Voir la rubrique sur [l’obtention de la clé d’authentification de l’application](../active-directory/develop/howto-create-service-principal-portal.md#get-tenant-and-app-id-values-for-signing-in).
 
 ## <a name="prerequisites"></a>Conditions préalables requises
 
@@ -47,9 +47,9 @@ Affectez à votre application Azure AD un [rôle](../role-based-access-control/b
 1. Créez une application console C#.
 2. Ajoutez les packages [NuGet](https://www.nuget.org/) suivants :
 
-        Install-Package Microsoft.Azure.Common.Authentication -Pre
-        Install-Package Microsoft.Azure.Management.HDInsight -Pre
-        Install-Package Microsoft.Azure.Management.Resources -Pre
+    * `Install-Package Microsoft.Azure.Common.Authentication -Pre`
+    * `Install-Package Microsoft.Azure.Management.HDInsight -Pre`
+    * `Install-Package Microsoft.Azure.Management.Resources -Pre`
 
 3. Exécutez le code ci-dessous :
 
@@ -123,4 +123,4 @@ Affectez à votre application Azure AD un [rôle](../role-based-access-control/b
 
 * [Créez une application Azure Active Directory et un principal du service dans le portail Azure](../active-directory/develop/howto-create-service-principal-portal.md).
 * Découvrez comment [authentifier un principal du service à l’aide d’Azure Resource Manager](../active-directory/develop/howto-authenticate-service-principal-powershell.md).
-* En savoir plus sur le [Contrôle d’accès en fonction du rôle dans Azure (RBAC)](../role-based-access-control/role-assignments-portal.md).
+* En savoir plus sur le [contrôle d’accès en fonction du rôle Azure (Azure RBAC)](../role-based-access-control/role-assignments-portal.md).

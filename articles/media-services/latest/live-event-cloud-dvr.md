@@ -4,28 +4,30 @@ titleSuffix: Azure Media Services
 description: Cet article explique comment utiliser le décalage temporel et les sorties en direct pour enregistrer des livestreams et créer une lecture à la demande.
 services: media-services
 documentationcenter: ''
-author: Juliako
+author: IngridAtMicrosoft
 manager: femila
 editor: ''
 ms.service: media-services
 ms.workload: media
 ms.tgt_pltfrm: na
 ms.devlang: ne
-ms.topic: article
-ms.date: 08/27/2019
-ms.author: juliako
-ms.openlocfilehash: 4c7618b60e5fd86a9b8b3f22fb3333c00cfdfa61
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.topic: conceptual
+ms.date: 08/31/2020
+ms.author: inhenkel
+ms.openlocfilehash: 11485ebac449cbde0a4f31e2a099a153476577b6
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74899796"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89289509"
 ---
 # <a name="use-time-shifting-and-live-outputs-to-create-on-demand-video-playback"></a>Utiliser le décalage temporel et des sorties en direct pour créer une lecture vidéo à la demande
 
-Dans Azure Media Services, un objet [Sortie en direct](https://docs.microsoft.com/rest/api/media/liveoutputs) fonctionne comme un magnétoscope numérique qui capture et enregistre votre stream en direct dans un élément multimédia dans votre compte Media Services. Le contenu enregistré est conservé dans le conteneur défini par la ressource [Élément multimédia](https://docs.microsoft.com/rest/api/media/assets) (le conteneur est dans le compte de stockage Azure associé à votre compte). La sortie en direct vous permet également de contrôler certaines propriétés du stream en direct sortant, notamment la quantité du flux conservée dans l’enregistrement archive (par exemple, la capacité du magnétoscope numérique cloud) et quand les destinataires sont autorisés à démarrer la lecture du stream en direct. L’archive sur le disque est une archive circulaire de type « fenêtre » qui stocke uniquement la quantité de contenu spécifiée dans la propriété **archiveWindowLength** de la sortie en direct. Le contenu qui dépasse cette fenêtre d’archive est automatiquement supprimé du conteneur de stockage et n’est pas récupérable. La valeur archiveWindowLength représente un intervalle de temps ISO-8601 (par exemple, PTHH:MM:SS), qui spécifie la capacité du magnétoscope numérique. La valeur est comprise entre 3 minutes minimum et 25 heures maximum.
+[!INCLUDE [media services api v3 logo](./includes/v3-hr.md)]
 
-La relation entre un événement en direct et ses sorties en direct est comparable à la diffusion télévisuelle traditionnelle, où un canal (événement en direct) représente un flux vidéo constant et un enregistrement (sortie en direct) est limité à une plage horaire spécifique (par exemple, un journal télévisé de 18h30 à 19h). Une fois que le flux transite dans l’événement en direct, vous pouvez commencer l’événement de streaming en créant un élément multimédia, une sortie en direct et un localisateur de streaming. La sortie en direct archive le flux et le met à la disposition des observateurs via le [point de terminaison de streaming](https://docs.microsoft.com/rest/api/media/streamingendpoints). Vous pouvez créer plusieurs sorties en direct (trois maximum) sur un événement en direct avec différents paramètres et longueurs de fenêtre d’archive. Pour plus d’informations sur le flux de travail de streaming en direct, vois la section [Étapes générales](live-streaming-overview.md#general-steps).
+Dans Azure Media Services, un objet [Sortie en direct](/rest/api/media/liveoutputs) fonctionne comme un magnétoscope numérique qui capture et enregistre votre stream en direct dans un élément multimédia dans votre compte Media Services. Le contenu enregistré est conservé dans le conteneur défini par la ressource [Élément multimédia](/rest/api/media/assets) (le conteneur est dans le compte de stockage Azure associé à votre compte). La sortie en direct vous permet également de contrôler certaines propriétés du stream en direct sortant, notamment la quantité du flux conservée dans l’enregistrement archive (par exemple, la capacité du magnétoscope numérique cloud) et quand les destinataires sont autorisés à démarrer la lecture du stream en direct. L’archive sur le disque est une archive circulaire de type « fenêtre » qui stocke uniquement la quantité de contenu spécifiée dans la propriété **archiveWindowLength** de la sortie en direct. Le contenu qui dépasse cette fenêtre d’archive est automatiquement supprimé du conteneur de stockage et n’est pas récupérable. La valeur archiveWindowLength représente un intervalle de temps ISO-8601 (par exemple, PTHH:MM:SS), qui spécifie la capacité du magnétoscope numérique. La valeur est comprise entre 1 minute minimum et 25 heures maximum.
+
+La relation entre un événement en direct et ses sorties en direct est comparable à la diffusion télévisuelle traditionnelle, où un canal (événement en direct) représente un flux vidéo constant et un enregistrement (sortie en direct) est limité à une plage horaire spécifique (par exemple, un journal télévisé de 18h30 à 19h). Une fois que le flux transite dans l’événement en direct, vous pouvez commencer l’événement de streaming en créant un élément multimédia, une sortie en direct et un localisateur de streaming. La sortie en direct archive le flux et le met à la disposition des observateurs via le [point de terminaison de streaming](/rest/api/media/streamingendpoints). Vous pouvez créer plusieurs sorties en direct (trois maximum) sur un événement en direct avec différents paramètres et longueurs de fenêtre d’archive. Pour plus d’informations sur le flux de travail de streaming en direct, vois la section [Étapes générales](live-streaming-overview.md#general-steps).
 
 ## <a name="using-a-dvr-during-an-event"></a>Utilisation d’un magnétoscope numérique pendant un événement
 
@@ -39,7 +41,7 @@ Un événement en direct prend en charge jusqu’à trois sorties en direct simu
 
 ## <a name="creating-an-archive-for-on-demand-playback"></a>Création d’une archive pour une lecture à la demande
 
-La ressource sur laquelle la sortie dynamique est archivée devient automatiquement une ressource à la demande lorsque la sortie dynamique est supprimée. Vous devez supprimer toutes les sorties dynamiques avant de pouvoir arrêter un événement en direct. Vous pouvez éventuellement utiliser un indicateur [removeOutputsOnStop](https://docs.microsoft.com/rest/api/media/liveevents/stop#request-body) pour supprimer automatiquement les sorties dynamiques à l’arrêt.
+La ressource sur laquelle la sortie dynamique est archivée devient automatiquement une ressource à la demande lorsque la sortie dynamique est supprimée. Vous devez supprimer toutes les sorties dynamiques avant de pouvoir arrêter un événement en direct. Vous pouvez éventuellement utiliser un indicateur [removeOutputsOnStop](/rest/api/media/liveevents/stop#request-body) pour supprimer automatiquement les sorties dynamiques à l’arrêt.
 
 Même après l’arrêt et la suppression de l’événement, les utilisateurs pourront lire votre contenu archivé en tant que vidéo à la demande tant que vous n’aurez pas supprimé l’élément multimédia. Vous ne devez pas supprimer d’élément multimédia s’il est utilisé par un événement. Vous devez d’abord supprimer l’événement.
 

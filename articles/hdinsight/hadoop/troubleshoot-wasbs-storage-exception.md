@@ -7,12 +7,12 @@ ms.reviewer: jasonh
 ms.service: hdinsight
 ms.topic: troubleshooting
 ms.date: 02/06/2020
-ms.openlocfilehash: 14c43e4557275d6a425127acfee7495f68d1d354
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: b7f3a3b76169b99389fe8222177ddcb713c27713
+ms.sourcegitcommit: d767156543e16e816fc8a0c3777f033d649ffd3c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77163830"
+ms.lasthandoff: 10/26/2020
+ms.locfileid: "92546583"
 ---
 # <a name="the-account-being-accessed-does-not-support-http-error-in-azure-hdinsight"></a>Le compte auquel vous accédez ne prend pas en charge les erreurs HTTP dans Azure HDInsight
 
@@ -32,7 +32,7 @@ Le message d’erreur est reçu pour plusieurs raisons :
 
 * Le [transfert sécurisé](../../storage/common/storage-require-secure-transfer.md) du compte de stockage est activé et un [schéma d’URI](../hdinsight-hadoop-linux-information.md#URI-and-scheme) incorrect est utilisé.
 
-* Un cluster a été créé avec un compte de stockage dont le transfert sécurisé est *désactivé*. Par la suite, le transfert sécurisé a été activé sur le compte de stockage.
+* Un cluster a été créé avec un compte de stockage dont le transfert sécurisé est *désactivé* . Par la suite, le transfert sécurisé a été activé sur le compte de stockage.
 
 ## <a name="resolution"></a>Résolution
 
@@ -48,4 +48,4 @@ Si votre problème ne figure pas dans cet article ou si vous ne parvenez pas à 
 
 * Connectez-vous à [@AzureSupport](https://twitter.com/azuresupport), le compte Microsoft Azure officiel pour améliorer l’expérience client. Connexion de la communauté Azure aux ressources appropriées : réponses, support technique et experts.
 
-* Si vous avez besoin d’une aide supplémentaire, vous pouvez envoyer une requête de support à partir du [Portail Microsoft Azure](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade/). Sélectionnez **Support** dans la barre de menus, ou ouvrez le hub **Aide + Support**. Pour plus d’informations, consultez [Création d’une demande de support Azure](https://docs.microsoft.com/azure/azure-supportability/how-to-create-azure-support-request). L’accès au support relatif à la gestion et à la facturation des abonnements est inclus avec votre abonnement Microsoft Azure. En outre, le support technique est fourni avec l’un des [plans de support Azure](https://azure.microsoft.com/support/plans/).
+* Si vous avez besoin d’une aide supplémentaire, vous pouvez envoyer une requête de support à partir du [Portail Microsoft Azure](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade/). Sélectionnez **Support** dans la barre de menus, ou ouvrez le hub **Aide + Support** . Pour plus d’informations, consultez [Création d’une demande de support Azure](../../azure-portal/supportability/how-to-create-azure-support-request.md). L’accès au support relatif à la gestion et à la facturation des abonnements est inclus avec votre abonnement Microsoft Azure. En outre, le support technique est fourni avec l’un des [plans de support Azure](https://azure.microsoft.com/support/plans/).

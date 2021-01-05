@@ -8,12 +8,12 @@ ms.author: divswa
 ms.reviewer: jonfan, divswa, logicappspm
 ms.topic: article
 ms.date: 04/22/2020
-ms.openlocfilehash: c32b3ee5c4689e960834d543de1ca377e918751d
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: b36641677dbf36402c7f578b9b1887c52f441afd
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82106285"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96000009"
 ---
 # <a name="decode-edifact-messages-for-azure-logic-apps-with-the-enterprise-integration-pack"></a>Décodez des messages EDIFACT pour Azure Logic Apps avec Enterprise Integration Pack
 
@@ -84,13 +84,13 @@ Le connecteur Decode EDIFACT effectue les tâches suivantes :
   * Vérifie le numéro de contrôle du document informatisé par rapport aux autres numéros de contrôle de document informatisé dans ce groupe.
 * Fractionne l’échange en documents informatisés ou conserve l’échange entier :
   * Scinder l’échange en documents informatisés  - suspendre les documents informatisés en cas d’erreur : Scinde l’échange en documents informatisés et analyse chaque document informatisé. 
-  L’action X12 Decode ne génère que les documents informatisés qui échouent à la validation `badMessages` et produit les documents informatisés restants en tant que `goodMessages`.
+  L’action EDIFACT Decode ne génère que les documents informatisés qui échouent à la validation avec `badMessages` et produit les documents informatisés restants en tant que `goodMessages`.
   * Scinder l’échange en documents informatisés - suspendre l’échange en cas d’erreur : Scinde l’échange en documents informatisés et analyse chaque document informatisé. 
-  Si la validation d’un ou de plusieurs documents informatisés de l’échange échoue, l’action X12 Decode génère tous les documents informatisés dans cet échange en tant que `badMessages`.
+  Si la validation d’un ou de plusieurs documents informatisés de l’échange échoue, l’action EDIFACT Decode génère tous les documents informatisés dans cet échange en tant que `badMessages`.
   * Préserver l’échange - suspendre les documents informatisés en cas d’erreur : Préserve l’échange et traite l’intégralité de l’échange par lot. 
-  L’action X12 Decode ne génère que les documents informatisés qui échouent à la validation `badMessages` et produit les documents informatisés restants en tant que `goodMessages`.
+  L’action EDIFACT Decode ne génère que les documents informatisés qui échouent à la validation avec `badMessages` et produit les documents informatisés restants en tant que `goodMessages`.
   * Préserver l’échange - suspendre l’échange en cas d’erreur : Préserve l’échange et traite l’intégralité de l’échange par lot. 
-  Si la validation d’un ou de plusieurs documents informatisés de l’échange échoue, l’action X12 Decode génère tous les documents informatisés dans cet échange en tant que `badMessages`.
+  Si la validation d’un ou de plusieurs documents informatisés de l’échange échoue, l’action EDIFACT Decode génère tous les documents informatisés dans cet échange en tant que `badMessages`.
 * Génère un accusé de réception fonctionnel et/ou technique (contrôle) (si configuré).
   * Un accusé de réception technique ou l’ACK CONTRL renvoie les résultats d’une vérification syntaxique de tout l’échange reçu.
   * Un accusé de réception fonctionnel accuse réception de l’acceptation ou du refus d’un groupe ou d’un échange reçu

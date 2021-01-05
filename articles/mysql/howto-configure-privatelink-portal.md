@@ -1,17 +1,17 @@
 ---
 title: Private Link - Portail Azure - Azure Database pour MySQL
 description: Découvrez comment configurer une instance Private Link pour Azure Database pour MySQL à partir du portail Azure
-author: kummanish
-ms.author: manishku
+author: mksuni
+ms.author: sumuth
 ms.service: mysql
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 01/09/2020
-ms.openlocfilehash: 4a4824a9f8340b12bca7e18562d723eb24e58b71
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: fbc75df0b22ba452b8c91dfcb21ca13aaed557a3
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "79371917"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95998564"
 ---
 # <a name="create-and-manage-private-link-for-azure-database-for-mysql-using-portal"></a>Créer et gérer une liaison privée pour Azure Database pour MySQL en utilisant le portail
 
@@ -20,7 +20,7 @@ Private Endpoint est le composant fondamental de Private Link dans Azure. Il per
 Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
 
 > [!NOTE]
-> Cette fonctionnalité est disponible dans toutes les régions Azure où Azure Database pour MySQL prend en charge les niveaux tarifaires Usage général et Mémoire optimisée.
+> La fonctionnalité de lien privé est disponible uniquement pour les serveurs Azure Database pour MySQL dans les niveaux tarifaires Usage général ou Mémoire optimisée. Vérifiez que le serveur de base de données se trouve dans l’un de ces niveaux tarifaires.
 
 ## <a name="sign-in-to-azure"></a>Connexion à Azure
 Connectez-vous au [portail Azure](https://portal.azure.com).
@@ -122,15 +122,19 @@ Dans cette section, vous allez créer un serveur Azure Database pour MySQL dans 
 9. Quand le message Validation réussie s’affiche, sélectionnez **Créer**. 
 10. Quand le message Validation réussie s’affiche, sélectionnez Créer. 
 
+> [!NOTE]
+> Il peut arriver que l’instance Azure Database pour MySQL et le sous-réseau de réseau virtuel se trouvent dans des abonnements différents. Dans ce cas, vous devez vérifier les configurations suivantes :
+> - Assurez-vous que le fournisseur de ressources **Microsoft.DBforMySQL** est inscrit pour les deux abonnements. Pour plus d’informations, reportez-vous à [resource-manager-registration][resource-manager-portal]
+
 ## <a name="create-a-private-endpoint"></a>Créer un Private Endpoint
 
 Dans cette section, vous allez créer un serveur MySQL et lui ajouter un point de terminaison privé. 
 
-1. En haut à gauche de l’écran du portail Azure, sélectionnez **Créer une ressource** > **Réseau** > **Liaison privée**.
+1. En haut à gauche de l’écran du portail Azure, sélectionnez **Créer une ressource** > **Mise en réseau** > **Liaison privée**.
 
-2. Dans **Centre de liaisons privées - Vue d’ensemble**, dans l’option permettant de **générer une connexion privée à un service**, sélectionnez **Démarrer**.
+2. Dans **Centre de liaisons privées - Vue d’ensemble**, dans l’option permettant de **Générer une connexion privée à un service**, sélectionnez **Démarrer**.
 
-    ![Présentation de Private Link](media/concepts-data-access-and-security-private-link/privatelink-overview.png)
+    :::image type="content" source="media/concepts-data-access-and-security-private-link/privatelink-overview.png" alt-text="Présentation de Private Link":::
 
 1. Dans **Créer un point de terminaison privé – Informations de base**, entrez ou sélectionnez ces informations :
 
@@ -162,16 +166,19 @@ Dans cette section, vous allez créer un serveur MySQL et lui ajouter un point d
     | ------- | ----- |
     |**MISE EN RÉSEAU**| |
     | Réseau virtuel| Sélectionnez *MyVirtualNetwork*. |
-    | Subnet | Sélectionnez *mySubnet*. |
+    | Subnet | Sélectionnez *mySubnet*. |
     |**INTÉGRATION À DNS PRIVÉ**||
     |Intégrer à une zone DNS privée |Sélectionnez **Oui**. |
     |Zone DNS privée |Sélectionnez *(New)privatelink.mysql.database.azure.com* |
     |||
 
+    > [!Note] 
+    > Utilisez la zone DNS privée prédéfinie pour votre service ou indiquez le nom de la zone DNS de votre choix. Pour plus d’informations, reportez-vous à la [Configuration de la zone DNS des services Azure](../private-link/private-endpoint-dns.md).
+
 1. Sélectionnez **Revoir + créer**. Vous êtes redirigé vers la page **Vérifier + créer** où Azure valide votre configuration. 
 2. Lorsque le message **Validation passed** (Validation réussie) apparaît, sélectionnez **Créer**. 
 
-    ![Instance Private Link créée](media/concepts-data-access-and-security-private-link/show-mysql-private-link.png)
+    :::image type="content" source="media/concepts-data-access-and-security-private-link/show-mysql-private-link.png" alt-text="Instance Private Link créée":::
 
     > [!NOTE] 
     > Le FQDN dans le paramètre DNS du client n’est pas résolu en adresse IP privée configurée. Vous devez configurer une zone DNS pour le FQDN configuré, comme indiqué [ici](../dns/dns-operations-recordsets-portal.md).
@@ -204,7 +211,7 @@ Après avoir créé **myVm**, connectez-vous à cette machine virtuelle à parti
 
 ## <a name="access-the-mysql-server-privately-from-the-vm"></a>Accéder au serveur MySQL en privé à partir de la machine virtuelle
 
-1. Dans le Bureau à distance de  *myVM*, ouvrez PowerShell.
+1. Dans le Bureau à distance de *myVM*, ouvrez PowerShell.
 
 2. Entrez `nslookup  myServer.privatelink.mysql.database.azure.com`. 
 
@@ -236,15 +243,18 @@ Après avoir créé **myVm**, connectez-vous à cette machine virtuelle à parti
 
 7. (Facultatif) Créez ou interrogez des informations à partir du serveur MySQL.
 
-8. Fermez la connexion Bureau à distance à myVm.
+8. Fermez la connexion Bureau à distance avec myVm.
 
 ## <a name="clean-up-resources"></a>Nettoyer les ressources
 Lorsque vous avez fini d’utiliser le point de terminaison privé, le serveur MySQL et la machine virtuelle, supprimez le groupe de ressources et toutes les ressources qu’il contient :
 
-1. Entrez *myResourceGroup* dans la zone **Rechercher** en haut du portail, puis sélectionnez *myResourceGroup* dans les résultats de la recherche.
+1. Entrez *myResourceGroup* dans la zone **Recherche** en haut du portail, puis sélectionnez *myResourceGroup* dans les résultats de la recherche.
 2. Sélectionnez **Supprimer le groupe de ressources**.
 3. Entrez myResourceGroup dans **TAPER LE NOM DU GROUPE DE RESSOURCES**, puis sélectionnez **Supprimer**.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Dans ce guide pratique, vous avez créé une machine virtuelle sur un réseau virtuel, une instance Azure Database pour MySQL et un point de terminaison privé pour un accès privé. Vous vous êtes connecté à une machine virtuelle à partir d’Internet et avez communiqué de façon sécurisée avec le serveur MySQL via Azure Private Link. Pour plus d’informations sur les points de terminaison privés, consultez [Qu’est-ce qu’Azure Private Endpoint ?](https://docs.microsoft.com/azure/private-link/private-endpoint-overview).
+Dans ce guide pratique, vous avez créé une machine virtuelle sur un réseau virtuel, une instance Azure Database pour MySQL et un point de terminaison privé pour un accès privé. Vous vous êtes connecté à une machine virtuelle à partir d’Internet et avez communiqué de façon sécurisée avec le serveur MySQL via Azure Private Link. Pour plus d’informations sur les points de terminaison privés, consultez [Qu’est-ce qu’Azure Private Endpoint ?](../private-link/private-endpoint-overview.md)
+
+<!-- Link references, to text, Within this same GitHub repo. -->
+[resource-manager-portal]: ../azure-resource-manager/management/resource-providers-and-types.md

@@ -3,14 +3,15 @@ title: Rendu du débogage
 description: Vue d’ensemble des effets du rendu du débogage côté serveur
 author: jumeder
 ms.author: jumeder
-ms.date: 04/09/2020
+ms.date: 06/15/2020
 ms.topic: article
-ms.openlocfilehash: dc07b20340b852eadeb7c93e5cef2ed2092b3641
-ms.sourcegitcommit: 0690ef3bee0b97d4e2d6f237833e6373127707a7
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 7924409a1760d59f4ecc88a736f7b8238fbd647b
+ms.sourcegitcommit: 957c916118f87ea3d67a60e1d72a30f48bad0db6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83758654"
+ms.lasthandoff: 10/19/2020
+ms.locfileid: "92205861"
 ---
 # <a name="debug-rendering"></a>Rendu du débogage
 
@@ -45,16 +46,16 @@ void EnableDebugRenderingEffects(AzureSession session, bool highlight)
 ```cpp
 void EnableDebugRenderingEffects(ApiHandle<AzureSession> session, bool highlight)
 {
-    ApiHandle<DebugRenderingSettings> settings = *session->Actions()->DebugRenderingSettings();
+    ApiHandle<DebugRenderingSettings> settings = session->Actions()->GetDebugRenderingSettings();
 
     // Enable frame counter text overlay on the server side rendering
-    settings->RenderFrameCount(true);
+    settings->SetRenderFrameCount(true);
 
     // Enable polygon count text overlay on the server side rendering
-    settings->RenderPolygonCount(true);
+    settings->SetRenderPolygonCount(true);
 
     // Enable wireframe rendering of object geometry on the server
-    settings->RenderWireframe(true);
+    settings->SetRenderWireframe(true);
 }
 ```
 
@@ -73,6 +74,10 @@ Toutefois, les effets fournis ne donnent aucune introspection détaillée de l�
 
 * L’activation des superpositions de texte entraîne peu, voire pas, de surcharge de performances.
 * L’activation du mode filaire entraîne une surcharge de performances non négligeable, même si elle peut varier en fonction de la scène. Pour les scènes complexes, ce mode peut provoquer la chute de la fréquence d’images en dessous de la cible de 60 Hz.
+
+## <a name="api-documentation"></a>Documentation de l’API
+
+* [C++ RemoteManager::DebugRenderingSettings()](/cpp/api/remote-rendering/remotemanager#debugrenderingsettings)
 
 ## <a name="next-steps"></a>Étapes suivantes
 

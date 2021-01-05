@@ -5,12 +5,12 @@ description: Découvrir les bonnes pratiques de l’opérateur relatives à l’
 services: container-service
 ms.topic: conceptual
 ms.date: 11/26/2018
-ms.openlocfilehash: 00643dc1699d1cbd47efd271738015ea05e895e2
-ms.sourcegitcommit: 67addb783644bafce5713e3ed10b7599a1d5c151
+ms.openlocfilehash: cdeecabf569e3c6f9b280e6b0179e5378f5b1c95
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/05/2020
-ms.locfileid: "80668351"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96011368"
 ---
 # <a name="best-practices-for-cluster-isolation-in-azure-kubernetes-service-aks"></a>Bonnes pratiques relatives à l’isolation de clusters dans Azure Kubernetes Service (AKS)
 
@@ -30,7 +30,7 @@ Kubernetes fournit des fonctionnalités qui vous permettent d’isoler logiqueme
   * Le planificateur comprend également des fonctionnalités plus avancées, notamment les teintes (taints) et tolérances (tolerations), les sélecteurs de nœud ainsi que l’affinité ou l’anti-affinité des nœuds et des pods. Pour plus d’informations sur ces fonctionnalités, consultez [Bonnes pratiques relatives aux fonctionnalités avancées du planificateur dans AKS][aks-best-practices-advanced-scheduler].
 * **Réseau** : inclut l’utilisation de stratégies réseau pour contrôler le flux du trafic à destination et en provenance des pods.
 * **Authentification et autorisation** : incluent l’utilisation du contrôle d’accès en fonction du rôle (RBAC) et de l’intégration Azure Active Directory (AD), les identités de pod et les secrets dans Azure Key Vault. Pour plus d’informations sur ces fonctionnalités, consultez [Bonnes pratiques relatives à l’authentification et à l’autorisation dans AKS][aks-best-practices-identity].
-* **Conteneurs** : incluent les stratégies de sécurité des pods, les contextes de sécurité des pods ainsi que l’analyse d’images et de runtimes à la recherche de vulnérabilités. Implique également l’utilisation d’App Armor ou de Seccomp (Secure Computing) pour restreindre l’accès du conteneur au nœud sous-jacent.
+* **Conteneurs** comprend le module complémentaire Azure Policy pour AKS afin d’appliquer la sécurité de pod, l’utilisation de contextes de sécurité de pod et l’analyse des deux images et du runtime pour les vulnérabilités. Implique également l’utilisation d’App Armor ou de Seccomp (Secure Computing) pour restreindre l’accès du conteneur au nœud sous-jacent.
 
 ## <a name="logically-isolate-clusters"></a>Isoler logiquement des clusters
 
@@ -42,7 +42,7 @@ Grâce à l’isolation logique, un même cluster AKS peut être utilisé pour p
 
 La séparation logique de clusters fournit généralement une densité de pods supérieure à celle résultant de l’isolation physique. L’excédent de capacité de calcul en état d’inactivité dans le cluster est moins important. En combinant cette approche à l’outil Kubernetes de mise à l’échelle automatique de cluster (« autoscaler »), vous pouvez effectuer un scale-up ou un scale-down des nœuds pour répondre aux demandes. Cette bonne pratique concernant la mise à l’échelle automatique vous permet d’exécuter uniquement le nombre de nœuds nécessaires et de réduire les coûts.
 
-Les environnements Kubernetes, dans AKS ou ailleurs, ne sont pas totalement sûrs pour une utilisation multi-locataire hostile. Dans un environnement multilocataire, plusieurs locataires travaillent sur une infrastructure partagée commune. Par conséquent, si aucun locataire ne peut être approuvé, vous devez effectuer une planification supplémentaire pour éviter qu’un locataire n’affecte la sécurité et le service d’un autre. Des fonctionnalités de sécurité supplémentaires, telles que la *stratégie de sécurité Pod*, et des contrôles d'accès en fonction du rôle (RBAC) plus détaillés pour les nœuds rendent les attaques plus difficiles. Mais lors de l’exécution de charges de travail multi-locataires hostiles, seul un hyperviseur garantira véritablement la sécurité. Le domaine de sécurité de Kubernetes devient le cluster, et non un nœud individuel. Pour ces types de charges de travail multi-locataires hostiles, vous devez utiliser des clusters physiquement isolés.
+Les environnements Kubernetes, dans AKS ou ailleurs, ne sont pas totalement sûrs pour une utilisation multi-locataire hostile. Dans un environnement multilocataire, plusieurs locataires travaillent sur une infrastructure partagée commune. Par conséquent, si aucun locataire ne peut être approuvé, vous devez effectuer une planification supplémentaire pour éviter qu’un locataire n’affecte la sécurité et le service d’un autre. Des fonctionnalités de sécurité supplémentaires, telles que la *stratégie de sécurité des pods*, et un contrôle d’accès en fonction du rôle (RBAC) plus détaillé pour les nœuds rendent les attaques plus difficiles. Mais lors de l’exécution de charges de travail multi-locataires hostiles, seul un hyperviseur garantira véritablement la sécurité. Le domaine de sécurité de Kubernetes devient le cluster, et non un nœud individuel. Pour ces types de charges de travail multi-locataires hostiles, vous devez utiliser des clusters physiquement isolés.
 
 ## <a name="physically-isolate-clusters"></a>Isoler physiquement des clusters
 

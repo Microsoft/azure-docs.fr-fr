@@ -5,15 +5,15 @@ description: Découvrez comment générer un certificat auto-signé Azure Applic
 services: application-gateway
 author: vhorne
 ms.service: application-gateway
-ms.topic: article
+ms.topic: how-to
 ms.date: 07/23/2019
 ms.author: victorh
-ms.openlocfilehash: 5ceefb076b63df942cfff202946f6b82050bbab9
-ms.sourcegitcommit: 7e04a51363de29322de08d2c5024d97506937a60
+ms.openlocfilehash: e60aa9f072a447af97aa7cc66534e6e893fdbcf6
+ms.sourcegitcommit: 0ce1ccdb34ad60321a647c691b0cff3b9d7a39c8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/14/2020
-ms.locfileid: "81311938"
+ms.lasthandoff: 11/05/2020
+ms.locfileid: "93396938"
 ---
 # <a name="generate-an-azure-application-gateway-self-signed-certificate-with-a-custom-root-ca"></a>Générer un certificat auto-signé Azure Application Gateway avec une autorité de certification racine personnalisée
 
@@ -67,7 +67,7 @@ Créez votre certificat d’autorité de certification racine à l’aide d’Op
    ```
    Les commandes précédentes créent le certificat racine. Vous utiliserez ceci pour signer votre certificat de serveur.
 
-1. Lorsque vous y êtes invité, tapez le mot de passe de la clé racine et les informations d’organisation de l’autorité de certification personnalisée, telles que Country, State, Org, OU et le nom de domaine complet (domaine de l’émetteur).
+1. Lorsque vous y êtes invité, tapez le mot de passe de la clé racine et les informations d’organisation de l’autorité de certification personnalisée, telles que Pays/Région, État, Org, OU et le nom de domaine complet (domaine de l’émetteur).
 
    ![créer un certificat racine](media/self-signed-certificates/root-cert.png)
 
@@ -97,7 +97,7 @@ La requête de signature de certificat est une clé publique qui est donnée à 
    openssl req -new -sha256 -key fabrikam.key -out fabrikam.csr
    ```
 
-1. Lorsque vous y êtes invité, tapez le mot de passe de la clé racine et les informations d’organisation de l’autorité de certification personnalisée : Country, State, Org, OU et le nom de domaine complet. Il s’agit du domaine du site web qui doit être différent de celui de l’émetteur.
+1. Lorsque vous y êtes invité, tapez le mot de passe de la clé racine et les informations d’organisation de l’autorité de certification personnalisée : Pays/Région, État, Org, OU et le nom de domaine complet. Il s’agit du domaine du site web qui doit être différent de celui de l’émetteur.
 
    ![Certificat serveur](media/self-signed-certificates/server-cert.png)
 
@@ -133,7 +133,7 @@ Dans votre serveur web, configurez TLS à l’aide des fichiers fabrikam.crt et 
 
 Pour obtenir des instructions sur l’importation d’un certificat et son téléchargement sous la forme d’un certificat de serveur sur IIS, consultez [Procédure : Installer des certificats importés sur un serveur web dans Windows Server 2003](https://support.microsoft.com/help/816794/how-to-install-imported-certificates-on-a-web-server-in-windows-server).
 
-Pour obtenir des instructions de liaison TLS, consultez [Configuration de SSL sur IIS 7](https://docs.microsoft.com/iis/manage/configuring-security/how-to-set-up-ssl-on-iis#create-an-ssl-binding-1).
+Pour obtenir des instructions de liaison TLS, consultez [Configuration de SSL sur IIS 7](/iis/manage/configuring-security/how-to-set-up-ssl-on-iis#create-an-ssl-binding-1).
 
 ### <a name="apache"></a>Apache
 
@@ -273,4 +273,3 @@ Set-AzApplicationGateway -ApplicationGateway $gw
 ## <a name="next-steps"></a>Étapes suivantes
 
 Pour en savoir plus sur SSL/TLS dans Application Gateway, consultez [Présentation de la terminaison TLS et du chiffrement TLS de bout en bout sur la passerelle Application Gateway](ssl-overview.md).
-

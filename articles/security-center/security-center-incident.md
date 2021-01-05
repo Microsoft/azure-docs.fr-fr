@@ -5,49 +5,62 @@ services: security-center
 author: memildin
 manager: rkarlin
 ms.service: security-center
-ms.topic: conceptual
-ms.date: 03/15/2020
+ms.topic: how-to
+ms.date: 06/15/2020
 ms.author: memildin
-ms.openlocfilehash: 98fc339e473ffb2bf54e7119634e93046cca1ef3
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 2b5dc30de19704b5e8950515cfa6224b4bbdbaf0
+ms.sourcegitcommit: f88074c00f13bcb52eaa5416c61adc1259826ce7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79415667"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92341344"
 ---
 # <a name="manage-security-incidents-in-azure-security-center"></a>Gérer les incidents de sécurité dans Azure Security Center
 
-Procéder au triage et à l’examen des alertes de sécurité peut prendre beaucoup de temps, même pour le plus compétent des analystes de sécurité, et bien souvent il est difficile de savoir par où commencer. En utilisant les [fonctions d’analyse](security-center-detection-capabilities.md) pour connecter les informations entre différentes [alertes de sécurité](security-center-managing-and-responding-alerts.md), le Centre de sécurité peut vous fournir une vue unique d’une campagne d’attaque et de l’ensemble des alertes associées. Vous pouvez donc rapidement savoir quelles actions l’attaquant a effectuées et quelles ressources ont été affectées.
+Procéder au triage et à l’examen des alertes de sécurité peut prendre beaucoup de temps, même pour le plus compétent des analystes de sécurité. Pour de nombreuses personnes, il est difficile de savoir où commencer. 
 
-Cette rubrique explique les incidents dans Security Center, et comment utiliser ce dernier pour corriger les alertes associées.
+Security Center utilise l’[analyse](./security-center-alerts-overview.md) pour connecter les informations entre des [alertes de sécurité](security-center-managing-and-responding-alerts.md) distinctes. À l’aide de ces connexions, Security Center peut fournir une vue unique d’une campagne d’attaque et de ses alertes associées pour vous aider à comprendre les actions de l’attaquant et les ressources affectées.
+
+Cette page offre une vue d’ensemble des incidents dans Security Center.
 
 ## <a name="what-is-a-security-incident"></a>Qu’est-ce qu’un incident de sécurité ?
 
-Dans le Centre de sécurité, un incident de sécurité est un regroupement de toutes les alertes d’une ressource correspondant à des modèles de [chaîne de destruction](alerts-reference.md#intentions) . Les incidents apparaissent dans la liste [Alertes de sécurité](security-center-managing-and-responding-alerts.md). Cliquez sur un incident pour afficher les alertes associées, ce qui vous permet d’en savoir plus sur chaque occurrence.
+Dans le Centre de sécurité, un incident de sécurité est un regroupement de toutes les alertes d’une ressource correspondant à des modèles de [chaîne de destruction](alerts-reference.md#intentions) . Les incidents apparaissent dans la page [Alertes de sécurité](security-center-managing-and-responding-alerts.md). Sélectionnez un incident pour afficher les alertes associées et obtenir plus d’informations.
 
 ## <a name="managing-security-incidents"></a>Gestion des incidents de sécurité
 
-1. Dans le tableau de bord de Security Center, cliquez sur la mosaïque **Alertes de sécurité**. Les incidents et les alertes sont répertoriés. Notez que la description de l’incident de sécurité présente une autre icône que celle utilisée pour les autres alertes.
+1. Sur la page de présentation de Security Center, sélectionnez la vignette **Alertes de sécurité**. Les incidents et les alertes sont répertoriés. Notez que l’icône des incidents de sécurité est différente de celle des alertes de sécurité.
 
     ![Afficher les incidents de sécurité](./media/security-center-managing-and-responding-alerts/security-center-manage-alerts.png)
 
-1. Pour afficher les détails, cliquez sur un incident. Le panneau **Incident de sécurité détecté** affiche des détails supplémentaires. La section **Informations générales** peut vous donner un aperçu de ce qui a déclenché l’alerte de sécurité. Elle affiche des informations telles que la ressource cible, l’adresse IP source (le cas échéant), elle indique si l’alerte est toujours active et affiche des recommandations sur la façon de résoudre le problème.  
+1. Pour afficher les détails, sélectionnez un incident. La page **Incident de sécurité** affiche plus de détails. 
 
-    ![Répondre aux incidents de sécurité dans Azure Security Center](./media/security-center-managing-and-responding-alerts/security-center-alert-incident.png)
+    [![Répondre aux incidents de sécurité dans Azure Security Center](media/security-center-incident/incident-details.png)](media/security-center-incident/incident-details.png#lightbox)
 
-1. Pour obtenir plus d’informations sur chaque alerte, cliquez dessus. La correction suggérée par Security Center dépend de l’alerte de sécurité.
+    Le volet gauche de la page de l’incident de sécurité affiche des informations générales sur l’incident de sécurité : titre, gravité, état, durée d’activité, description et ressource affectée. En regard de la ressource affectée, vous pouvez voir les balises Azure correspondantes. Utilisez-les pour déduire le contexte organisationnel de la ressource lors de l’examen de l’alerte.
+
+    Le volet droit comprend l’onglet **Alertes** avec les alertes de sécurité corrélées dans le cadre de cet incident. 
+
+    >[!TIP]
+    > Pour plus d’informations sur une alerte spécifique, sélectionnez-la. 
+
+    [![Onglet Entreprendre une action de l’incident](media/security-center-incident/incident-take-action-tab.png)](media/security-center-incident/incident-take-action-tab.png#lightbox)
+
+    Pour basculer vers l’onglet **Entreprendre une action**, sélectionnez l’onglet ou le bouton en bas du volet droit. Utilisez cet onglet pour entreprendre d’autres actions telles que :
+    - *Atténuer la menace* : fournit des étapes de correction manuelle pour cet incident de sécurité
+    - *Empêcher les attaques futures* : fournit des recommandations de sécurité pour aider à réduire la surface d’attaque, améliorer la posture de sécurité et empêcher les attaques futures
+    - *Déclencher une réponse automatisée* : permet de déclencher une application logique en guide de réponse à cet incident de sécurité
+    - *Supprimer les alertes similaires* : permet de supprimer les alertes futures ayant des caractéristiques similaires si l’alerte n’est pas pertinente pour votre organisation 
 
    > [!NOTE]
    > Une même alerte peut s’afficher dans le cadre d’un incident, mais également apparaître sous la forme d’une alerte autonome.
 
-    ![Détails de l’alerte](./media/security-center-incident/security-center-incident-alert.png)
-
-1. Suivez les étapes de correction indiquées pour chaque alerte.
+1. Pour atténuer les menaces dans l’incident, suivez les étapes de correction fournies avec chaque alerte.
 
 
-## <a name="see-also"></a>Voir aussi
-Dans ce document, vous avez vu comment utiliser la fonctionnalité de gestion des incidents de sécurité du Centre de sécurité. Pour obtenir des informations associées, consultez les rubriques suivantes :
+## <a name="next-steps"></a>Étapes suivantes
 
-* [Protection contre les menaces dans Azure Security Center](threat-protection.md)
-* [Alertes de sécurité dans le Centre de sécurité Azure](security-center-alerts-overview.md)
-* [Gérer les alertes de sécurité](security-center-managing-and-responding-alerts.md)
+Cette page a expliqué les fonctionnalités d’incident de sécurité de Security Center. Pour accéder à des informations connexes, consultez les rubriques suivantes :
+
+- [Alertes de sécurité dans Security Center](security-center-alerts-overview.md)
+- [Gérer et répondre aux alertes de sécurité](security-center-managing-and-responding-alerts.md)

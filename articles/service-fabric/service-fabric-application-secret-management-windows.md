@@ -4,10 +4,10 @@ description: Découvrez comment configurer un certificat de chiffrement et chiff
 ms.topic: conceptual
 ms.date: 01/04/2019
 ms.openlocfilehash: eb4909d62a2627c368f24dab572b25c6f1df30ec
-ms.sourcegitcommit: b9d4b8ace55818fcb8e3aa58d193c03c7f6aa4f1
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "82583295"
 ---
 # <a name="set-up-an-encryption-certificate-and-encrypt-secrets-on-windows-clusters"></a>Configurer un certificat de chiffrement et chiffrer des secrets sur clusters Windows

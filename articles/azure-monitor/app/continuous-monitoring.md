@@ -3,12 +3,12 @@ title: Analyse continue de votre pipeline de mise en production DevOps avec Azur
 description: Fournit des instructions permettant de configurer rapidement une analyse continue avec Application Insights
 ms.topic: conceptual
 ms.date: 05/01/2020
-ms.openlocfilehash: 0d47fb1eccdfcfc7b2719825575f06dc85e62452
-ms.sourcegitcommit: d662eda7c8eec2a5e131935d16c80f1cf298cb6b
+ms.openlocfilehash: fd7cd6a107ed45adb60167a57661b60be5dc8212
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82652765"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86517125"
 ---
 # <a name="add-continuous-monitoring-to-your-release-pipeline"></a>Ajouter l’analyse continue à votre pipeline de mise en production
 
@@ -101,4 +101,4 @@ Vous pouvez voir le comportement du jalon de déploiement et d’autres étapes 
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour plus d’informations sur Azure Pipelines, consultez la [documentation Azure Pipelines](https://docs.microsoft.com/azure/devops/pipelines).
+Pour plus d’informations sur Azure Pipelines, consultez la [documentation Azure Pipelines](/azure/devops/pipelines).

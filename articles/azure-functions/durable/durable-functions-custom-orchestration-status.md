@@ -2,14 +2,14 @@
 title: État d’orchestration personnalisé dans Fonctions durables - Azure
 description: Découvrez comment configurer et utiliser l’état d’orchestration personnalisé pour Fonctions durables.
 ms.topic: conceptual
-ms.date: 11/02/2019
+ms.date: 07/10/2020
 ms.author: azfuncdf
-ms.openlocfilehash: 31b7d51293878c9d0e8567b6b4bd58c48d75ec63
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 4a95e7c74fac7043d0adb5f31d2bdcdd73b9577a
+ms.sourcegitcommit: 489ce69c0ff3f5188889ecfef5ffa76f7121e0d3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76766267"
+ms.lasthandoff: 12/24/2020
+ms.locfileid: "97766326"
 ---
 # <a name="custom-orchestration-status-in-durable-functions-azure-functions"></a>État d’orchestration personnalisé dans Fonctions durables (Azure Functions)
 
@@ -18,7 +18,7 @@ L’état d’orchestration personnalisé vous permet de définir une valeur d�
 ## <a name="sample-use-cases"></a>Exemples de cas d’utilisation
 
 > [!NOTE]
-> Les exemples suivants montrent comment utiliser la fonctionnalité d’état personnalisée en C# et JavaScript. Les exemples C# sont écrits pour Durable Functions 2.x et ne sont pas compatibles avec Durable Functions 1.x. Pour en savoir plus sur les différences entre les versions, consultez l’article [Versions de Durable Functions](durable-functions-versions.md).
+> Les exemples suivants montrent comment utiliser la fonctionnalité d’état personnalisée en C#, JavaScript et Python. Les exemples C# sont écrits pour Durable Functions 2.x et ne sont pas compatibles avec Durable Functions 1.x. Pour en savoir plus sur les différences entre les versions, consultez l’article [Versions de Durable Functions](durable-functions-versions.md).
 
 ### <a name="visualize-progress"></a>Visualiser la progression
 
@@ -80,6 +80,34 @@ module.exports = async function(context, name) {
     return `Hello ${name}!`;
 };
 ```
+# <a name="python"></a>[Python](#tab/python)
+
+### <a name="e1_hellosequence-orchestrator-function"></a>Fonction d’orchestrateur `E1_HelloSequence`
+```python
+import azure.functions as func
+import azure.durable_functions as df
+
+
+def orchestrator_function(context: df.DurableOrchestrationContext):
+    
+    output1 = yield context.call_activity('E1_SayHello', 'Tokyo')
+    context.set_custom_status('Tokyo')
+    output2 = yield context.call_activity('E1_SayHello', 'Seattle')
+    context.set_custom_status('Seattle')
+    output3 = yield context.call_activity('E1_SayHello', 'London')
+    context.set_custom_status('London')
+    
+    return [output1, output2, output3]
+
+main = df.Orchestrator.create(orchestrator_function)
+```
+
+### <a name="e1_sayhello-activity-function"></a>Fonction d’activité `E1_SayHello`
+```python
+def main(name: str) -> str:
+    return f"Hello {name}!"
+
+```
 
 ---
 
@@ -97,7 +125,7 @@ public static async Task<HttpResponseMessage> Run(
 {
     // Function input comes from the request content.
     dynamic eventData = await req.Content.ReadAsAsync<object>();
-    string instanceId = await starter.StartNewAsync(functionName, eventData);
+    string instanceId = await starter.StartNewAsync(functionName, (string)eventData);
 
     log.LogInformation($"Started orchestration with ID = '{instanceId}'.");
 
@@ -150,6 +178,31 @@ module.exports = async function(context, req) {
 > [!NOTE]
 > Dans JavaScript, le champ `customStatus` sera défini lorsque la prochaine action `yield` ou `return` est planifiée.
 
+# <a name="python"></a>[Python](#tab/python)
+```python
+import json
+import logging
+import azure.functions as func
+import azure.durable_functions as df
+from time import sleep
+
+async def main(req: func.HttpRequest, starter: str) -> func.HttpResponse:
+    client = df.DurableOrchestrationClient(starter)    
+    instance_id = await client.start_new(req.params.functionName, None, None)
+
+    logging.info(f"Started orchestration with ID = '{instance_id}'.")
+
+    durable_orchestration_status = await client.get_status(instance_id)
+    while durable_orchestration_status.custom_status != 'London':
+        sleep(0.2)
+        durable_orchestration_status = await client.get_status(instance_id)
+
+    return func.HttpResponse(body='Success', status_code=200, mimetype='application/json')
+```
+
+> [!NOTE]
+> Dans Python, le champ `custom_status` sera défini lors de la planification de la prochaine action `yield` ou `return`.
+
 ---
 
 ### <a name="output-customization"></a>Personnalisation de la sortie
@@ -196,6 +249,8 @@ public static void Run(
 
 # <a name="javascript"></a>[JavaScript](#tab/javascript)
 
+#### <a name="cityrecommender-orchestrator"></a>Orchestrateur `CityRecommender`
+
 ```javascript
 const df = require("durable-functions");
 
@@ -227,6 +282,39 @@ module.exports = df.orchestrator(function*(context) {
 });
 ```
 
+# <a name="python"></a>[Python](#tab/python)
+
+#### <a name="cityrecommender-orchestrator"></a>Orchestrateur `CityRecommender`
+
+```python
+import azure.functions as func
+import azure.durable_functions as df
+
+def orchestrator_function(context: df.DurableOrchestrationContext):
+    userChoice = int(context.get_input())
+
+    if userChoice == 1:
+        context.set_custom_status({
+            'recommendedCities' : ['Tokyo', 'Seattle'], 
+            'recommendedSeasons' : ['Spring', 'Summer']
+        }))
+    if userChoice == 2:
+        context.set_custom_status({
+            'recommendedCities' : ['Seattle', 'London']
+            'recommendedSeasons' : ['Summer']
+        }))
+    if userChoice == 3:
+        context.set_custom_status({
+            'recommendedCities' : ['Tokyo', 'London'], 
+            'recommendedSeasons' : ['Spring', 'Summer']
+        }))
+
+
+
+    # Wait for user selection and refine the recommendation
+
+main = df.Orchestrator.create(orchestrator_function)
+```
 ---
 
 ### <a name="instruction-specification"></a>Spécification d’instructions
@@ -287,6 +375,30 @@ module.exports = df.orchestrator(function*(context) {
     return isBookingConfirmed;
 });
 ```
+# <a name="python"></a>[Python](#tab/python)
+
+```python
+import azure.functions as func
+import azure.durable_functions as df
+
+def orchestrator_function(context: df.DurableOrchestrationContext):
+    userId = int(context.get_input())
+
+    discount = yield context.call_activity('CalculateDiscount', userId)
+
+    status = { 'discount' : discount,
+        'discountTimeout' : 60,
+        'bookingUrl' : "https://www.myawesomebookingweb.com",
+    }
+    context.set_custom_status(status)
+
+    is_booking_confirmed = yield context.wait_for_external_event('BookingConfirmed')
+    context.set_custom_status({'message': 'Thank you for confirming your booking.'} if is_booking_confirmed 
+        else {'message': 'The booking was not confirmed on time. Please try again.'})
+    return is_booking_confirmed
+
+main = df.Orchestrator.create(orchestrator_function)
+```
 
 ---
 
@@ -325,6 +437,22 @@ module.exports = df.orchestrator(function*(context) {
 });
 ```
 
+# <a name="python"></a>[Python](#tab/python)
+
+```python
+import azure.functions as func
+import azure.durable_functions as df
+
+def orchestrator_function(context: df.DurableOrchestrationContext):
+    # ...do work...
+
+    custom_status = {'nextActions': ['A','B','C'], 'foo':2}
+    context.set_custom_status(custom_status)
+
+    # ...do more work...
+
+main = df.Orchestrator.create(orchestrator_function)
+```
 ---
 
 Pendant l’exécution de l’orchestration, les clients externes peuvent récupérer cet état personnalisé :

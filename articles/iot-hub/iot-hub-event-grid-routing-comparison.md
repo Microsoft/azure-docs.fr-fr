@@ -8,12 +8,13 @@ services: iot-hub
 ms.topic: conceptual
 ms.date: 02/20/2019
 ms.author: kgremban
-ms.openlocfilehash: 877467b65d346c871dd93f4b3f96b2c1664fa4b9
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: fasttrack-edit
+ms.openlocfilehash: 3f0853261e770b2cba9a243ae66b0b0d766fcd92
+ms.sourcegitcommit: 10d00006fec1f4b69289ce18fdd0452c3458eca5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "73906793"
+ms.lasthandoff: 11/21/2020
+ms.locfileid: "95024685"
 ---
 # <a name="compare-message-routing-and-event-grid-for-iot-hub"></a>Comparer le routage des messages et Event Grid pour IoT Hub
 
@@ -31,10 +32,10 @@ Le routage des messages et Event Grid permettent tous deux de configurer des ale
 
 | Fonctionnalité | Routage des messages IoT Hub | Intégration d’IoT Hub avec Event Grid |
 | ------- | --------------- | ---------- |
-| **Messages et événements d’appareil** | Oui, le routage des messages peut être utilisé pour les données de télémétrie, les changements de jumeau des appareils de rapport, les événements de cycle de vie des appareils et les événements de changement de jumeau numérique (qui font partie de la [préversion publique d’IoT Plug-and-Play](../iot-pnp/overview-iot-plug-and-play.md)). | Oui, Event Grid peut être utilisé pour les données de télémétrie, mais peut également signaler la création, la suppression, la connexion et la déconnexion d’appareils de IoT Hub |
-| **Ordonnancement** | Oui, l’ordonnancement des événements est conservé.  | Non, l’ordonnancement des événements n’est pas garanti. | 
-| **Filtering** | Filtrage élaboré opérant sur les propriétés de l’application de messagerie, les propriétés système des messages, le corps des messages, ainsi que les étiquettes et propriétés de jumeaux d’appareil. Le filtrage n’est pas appliqué aux événements de changement de jumeau numérique. Pour obtenir des exemples, consultez [Syntaxe des requêtes de routage des messages](iot-hub-devguide-routing-query-syntax.md). | Filtrage basé sur le type d’événement, le type de sujet et les attributs de chaque événement. Pour des exemples, voir [Comprendre les événements de filtrage dans les inscriptions à Event Grid](../event-grid/event-filtering.md). Lorsque vous vous abonnez à des événements de télémétrie, vous pouvez appliquer des filtres supplémentaires sur les données pour filtrer les propriétés du message, le corps du message et le jumeau d’appareil dans votre IoT Hub, avant la publication dans Event Grid. Voir [Comment filtrer les événements](../iot-hub/iot-hub-event-grid.md#filter-events). |
-| **Points de terminaison** | <ul><li>Event Hubs</li> <li>Stockage Blob Azure</li> <li>File d’attente Service Bus</li> <li>Rubriques Service Bus</li></ul><br>Les références SKU IoT Hub payantes (S1, S2 et S3) sont limitées à 10 points de terminaison personnalisés. Vous pouvez créer 100 itinéraires par hub IoT. | <ul><li>Azure Functions</li> <li>Azure Automation</li> <li>Event Hubs</li> <li>Logic Apps</li> <li>Storage Blob</li> <li>Rubriques personnalisées</li> <li>Stockage File d’attente</li> <li>Microsoft Flow</li> <li>Services tiers par le biais de WebHooks</li></ul><br>500 points de terminaison sont pris en charge pour chaque instance IoT Hub. Pour obtenir la liste la plus récente des points de terminaison, consultez [Gestionnaires d’événements Event Grid](../event-grid/overview.md#event-handlers). |
+| **Messages et événements d’appareil** | Oui, le routage des messages peut être utilisé pour les données de télémétrie, les changements de jumeau des appareils de rapport, les événements de cycle de vie des appareils (p. ex. lorsque des appareils sont créés, supprimés, connectés et déconnectés d’IoT Hub) et les événements de changement de jumeau. | Oui, Event Grid peut être utilisé pour les données de télémétrie et les événements de cycle de vie des appareils. Mais Event Grid ne peut pas être utilisé pour les événements de changement de jumeau d’appareil et les événements de changement de jumeau numérique. |
+| **Classement** | Oui, l’ordonnancement des événements est conservé.  | Non, l’ordonnancement des événements n’est pas garanti. | 
+| **Filtrage** | Filtrage élaboré opérant sur les propriétés de l’application de messagerie, les propriétés système des messages, le corps des messages, ainsi que les étiquettes et propriétés de jumeaux d’appareil. Le filtrage n’est pas appliqué aux événements de changement de jumeau numérique. Pour obtenir des exemples, consultez [Syntaxe des requêtes de routage des messages](iot-hub-devguide-routing-query-syntax.md). | Filtrage basé sur le type d’événement, le type de sujet et les attributs de chaque événement. Pour des exemples, voir [Comprendre les événements de filtrage dans les inscriptions à Event Grid](../event-grid/event-filtering.md). Lorsque vous vous abonnez à des événements de télémétrie, vous pouvez appliquer des filtres supplémentaires sur les données pour filtrer les propriétés du message, le corps du message et le jumeau d’appareil dans votre IoT Hub, avant la publication dans Event Grid. Voir [Comment filtrer les événements](../iot-hub/iot-hub-event-grid.md#filter-events). |
+| **Points de terminaison** | <ul><li>Event Hubs</li> <li>Stockage Blob Azure</li> <li>File d’attente Service Bus</li> <li>Rubriques Service Bus</li></ul><br>Les références SKU IoT Hub payantes (S1, S2 et S3) sont limitées à 10 points de terminaison personnalisés. Vous pouvez créer 100 itinéraires par hub IoT. | <ul><li>Azure Functions</li> <li>Azure Automation</li> <li>Event Hubs</li> <li>Logic Apps</li> <li>Storage Blob</li> <li>Rubriques personnalisées</li> <li>Stockage File d’attente</li> <li>Power Automate</li> <li>Services tiers par le biais de WebHooks</li></ul><br>500 points de terminaison sont pris en charge pour chaque instance IoT Hub. Pour obtenir la liste la plus récente des points de terminaison, consultez [Gestionnaires d’événements Event Grid](../event-grid/overview.md#event-handlers). |
 | **Coût** | Le routage des messages n’est pas facturé séparément. Seule l’entrée de télémétrie dans IoT Hub est facturée. Par exemple, si vous avez un message acheminé vers trois points de terminaison différents, un seul message vous est facturé. | Aucun frais IoT Hub n’est facturé. Avec Event Grid, les 100 000 premières opérations par mois sont gratuites. Ensuite, le coût est de 0,60 $ par million d’opérations par la suite. |
 
 ## <a name="similarities"></a>Similitudes

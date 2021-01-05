@@ -9,32 +9,32 @@ editor: ''
 ms.assetid: 995ee876-4415-4bb0-a258-cca3cbb02193
 ms.service: active-directory
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: identity
 ms.date: 11/12/2019
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 80438319a6337dd6f28f9bdca8a428829b6cb0b9
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 74bc659c11c4f43ab3cf85cdc53f704cd07a1cde
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77917911"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96172365"
 ---
 # <a name="azure-ad-connect-sync-directory-extensions"></a>Azure AD Connect Sync : extensions d’annuaire
-Vous pouvez utiliser les extensions d’annuaire pour étendre le schéma dans Azure Active Directory (Azure AD) avec vos propres attributs à partir d’un annuaire Active Directory local. Cette fonctionnalité vous permet de générer des applications métiers en consommant les attributs que vous continuez à gérer en local. Ces attributs peuvent être utilisés via des [extensions](https://docs.microsoft.com/graph/extensibility-overview
+Vous pouvez utiliser les extensions d’annuaire pour étendre le schéma dans Azure Active Directory (Azure AD) avec vos propres attributs à partir d’un annuaire Active Directory local. Cette fonctionnalité vous permet de générer des applications métiers en consommant les attributs que vous continuez à gérer en local. Ces attributs peuvent être utilisés via des [extensions](/graph/extensibility-overview
 ). Vous pouvez voir les attributs disponibles à l’aide de [Microsoft Graph Explorer](https://developer.microsoft.com/graph/graph-explorer). Vous pouvez également utiliser cette fonctionnalité pour créer des groupes dynamiques dans Azure AD.
 
-Actuellement, aucune charge de travail Office 365 ne consomme ces attributs.
+Actuellement, aucune charge de travail Microsoft 365 n’utilise ces attributs.
 
 ## <a name="customize-which-attributes-to-synchronize-with-azure-ad"></a>Personnaliser les attributs à synchroniser avec Azure AD
 
 Vous pouvez configurer les attributs supplémentaires à synchroniser dans le chemin d’accès des paramètres personnalisés dans l’Assistant d’installation.
 
->[!NOTE]
->La zone Attributs disponibles respecte la casse.
+> [!NOTE]
+> Dans les versions d’Azure AD Connect antérieures à 1.2.65.0, la zone de recherche pour les **Attributs disponibles** respecte la casse.
 
 ![Assistant d’extension de schéma](./media/how-to-connect-sync-feature-directory-extensions/extension2.png)  
 
@@ -69,11 +69,14 @@ Ces attributs sont désormais disponibles par le biais de l’API Microsoft Grap
 >[!NOTE]
 > Dans l’API Microsoft Graph, vous devez demander que les attributs soient retournés. Sélectionnez explicitement les attributs comme suit : `https://graph.microsoft.com/beta/users/abbie.spencer@fabrikamonline.com?$select=extension_9d98ed114c4840d298fad781915f27e4_employeeID,extension_9d98ed114c4840d298fad781915f27e4_division`.
 >
-> Pour plus d’informations, consultez l’article [Microsoft Graph : Utilisation de paramètres de requête](https://developer.microsoft.com/graph/docs/concepts/query_parameters#select-parameter).
+> Pour plus d’informations, consultez l’article [Microsoft Graph : Utilisation de paramètres de requête](/graph/query-parameters#select-parameter).
+
+>[!NOTE]
+> La synchronisation des valeurs d’attribut d’AADConnect vers des attributs d’extension qui ne sont pas créés par AADConnect n’est pas prise en charge. Cela peut entraîner des problèmes de performances et des résultats inattendus. Seuls les attributs d’extension créés comme indiqué ci-dessus sont pris en charge pour la synchronisation.
 
 ## <a name="use-the-attributes-in-dynamic-groups"></a>Utiliser les attributs dans des groupes dynamiques
 
-L’un des scénarios les plus utiles consiste à utiliser ces attributs dans la sécurité dynamique ou dans des groupes Office 365.
+L’un des scénarios les plus utiles consiste à utiliser ces attributs dans la sécurité dynamique ou dans des groupes Microsoft 365.
 
 1. Créez un groupe dans Azure AD. Donnez-lui un bon nom et vérifiez que le **Type d’appartenance** est **Utilisateur dynamique**.
 

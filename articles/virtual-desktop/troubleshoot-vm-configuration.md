@@ -1,21 +1,22 @@
 ---
 title: Détecter un problème sur un hôte de la session Windows Virtual Desktop – Azure
 description: Guide pratique pour résoudre les problèmes pendant la configuration de machines virtuelles hôte de session Windows Virtual Desktop.
-services: virtual-desktop
 author: Heidilohr
-ms.service: virtual-desktop
 ms.topic: troubleshooting
-ms.date: 12/03/2019
+ms.date: 05/11/2020
 ms.author: helohr
 manager: lizross
-ms.openlocfilehash: c7d9a5d576ceec301eba7436c1e0af34412ae854
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 31e9b4b065b2acb8378c2eeac332341f48b28165
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79127587"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88005221"
 ---
 # <a name="session-host-virtual-machine-configuration"></a>Configuration d’une machine virtuelle hôte de session
+
+>[!IMPORTANT]
+>Ce contenu s’applique à Windows Virtual Desktop avec des objets Windows Virtual Desktop Azure Resource Manager. Si vous utilisez la version Windows Virtual Desktop (classique) sans objets Azure Resource Manager, consultez [cet article](./virtual-desktop-fall-2019/troubleshoot-vm-configuration-2019.md).
 
 Utilisez cet article pour résoudre les problèmes rencontrés lors de la configuration des machines virtuelles hôtes de session Windows Virtual Desktop.
 
@@ -28,7 +29,7 @@ Rendez-vous sur le site [Windows Virtual Desktop Tech Community](https://techcom
 Suivez ces instructions si vous rencontrez des problèmes de jonction de machines virtuelles au domaine.
 
 - Pour joindre la machine virtuelle manuellement, consultez [Joindre une machine virtuelle Windows Server à un domaine géré](../active-directory-domain-services/join-windows-vm.md) ou utilisez le [modèle de jonction de domaine](https://azure.microsoft.com/resources/templates/201-vm-domain-join-existing/).
-- Essayez d'envoyer une requête Ping au nom de domaine à partir de la ligne de commande de la machine virtuelle.
+- Essayez d’effectuer un test ping du nom de domaine à partir de la ligne de commande sur la machine virtuelle.
 - Passez en revue la liste des messages d’erreur de jonction de domaine dans [Résolution des problèmes de jonction de domaine](https://social.technet.microsoft.com/wiki/contents/articles/1935.troubleshooting-domain-join-error-messages.aspx).
 
 ### <a name="error-incorrect-credentials"></a>Erreur : Informations d’identification incorrectes
@@ -77,7 +78,7 @@ Suivez ces instructions si vous rencontrez des problèmes de jonction de machine
 
 ## <a name="windows-virtual-desktop-agent-and-windows-virtual-desktop-boot-loader-are-not-installed"></a>L'agent Windows Virtual Desktop et le chargeur de démarrage Windows Virtual Desktop ne sont pas installés.
 
-Pour approvisionner les machines virtuelles, il est recommandé d'utiliser le modèle Azure Resource Manager **Créer et approvisionner le pool d'hôtes Windows Virtual Desktop**. Ce modèle installe automatiquement l'agent et le chargeur de démarrage Windows Virtual Desktop.
+La méthode recommandée pour approvisionner des machines virtuelles consiste à utiliser le modèle de création disponible sur le portail Azure. Ce modèle installe automatiquement l'agent et le chargeur de démarrage Windows Virtual Desktop.
 
 Suivez ces instructions pour vérifier que les composants sont installés et rechercher d'éventuels messages d'erreur.
 
@@ -96,8 +97,8 @@ Suivez ces instructions pour vérifier que les composants sont installés et rec
 **Correctif 2 :** Vérifiez les éléments dans la liste suivante.
 
 - Assurez-vous que le compte ne dispose pas de l'authentification multifacteur.
-- Vérifiez que le nom du locataire est correct et que le locataire existe dans Windows Virtual Desktop.
-- Vérifiez que le compte dispose au minimum des autorisations Contributeur RDS.
+- Vérifiez que le nom du pool d’hôtes est correct et que le pool d’hôtes existe dans Windows Virtual Desktop.
+- Vérifiez que le compte dispose au moins d’autorisations de collaborateur sur l’abonnement Azure ou le groupe de ressources.
 
 ### <a name="error-authentication-failed-error-in-cwindowstempscriptloglog"></a>Erreur : L’authentification a échoué, erreur dans C:\Windows\Temp\ScriptLog.log
 
@@ -106,16 +107,17 @@ Suivez ces instructions pour vérifier que les composants sont installés et rec
 **Correctif :** Vérifiez les éléments dans la liste suivante.
 
 - Inscrivez manuellement les machines virtuelles auprès du service Windows Virtual Desktop.
-- Vérifiez que le compte utilisé pour se connecter à Windows Virtual Desktop dispose des autorisations requises par le locataire pour créer des pools d’hôtes.
+- Vérifiez que le compte utilisé pour se connecter à Windows Virtual Desktop dispose des autorisations requises sur l’abonnement ou le groupe de ressources Azure pour créer des pools d’hôtes.
 - Vérifiez que le compte ne dispose pas de l'authentification multifacteur.
 
 ## <a name="windows-virtual-desktop-agent-is-not-registering-with-the-windows-virtual-desktop-service"></a>L'agent Windows Virtual Desktop n'est pas enregistré auprès du service Windows Virtual Desktop.
 
-Lorsque l’agent Windows Virtual Desktop est installé pour la première fois sur les machines virtuelles hôtes de session (manuellement ou via le modèle Azure Resource Manager et la DSC PowerShell), il fournit un jeton d’inscription. La section suivante traite de la résolution des problèmes ayant trait à l'agent Windows Virtual Desktop et au jeton.
+Lorsque l’agent Windows Virtual Desktop est installé pour la première fois sur les machines virtuelles hôtes de session (manuellement ou via le modèle Azure Resource Manager et la DSC PowerShell), il fournit un jeton d’inscription. La section suivante traite de la résolution des problèmes ayant trait à l’agent et au jeton Windows Virtual Desktop.
 
-### <a name="error-the-status-filed-in-get-rdssessionhost-cmdlet-shows-status-as-unavailable"></a>Erreur : L’état consigné dans la cmdlet Get-RdsSessionHost indique Non disponible.
+### <a name="error-the-status-filed-in-get-azwvdsessionhost-cmdlet-shows-status-as-unavailable"></a>Erreur : L’état consigné dans la cmdlet Get-AzWvdSessionHost indique Non disponible.
 
-![La cmdlet Get-RdsSessionHost indique un état Non disponible.](media/23b8e5f525bb4e24494ab7f159fa6b62.png)
+> [!div class="mx-imgBorder"]
+> ![La cmdlet Get-AzWvdSessionHost indique un état Non disponible.](media/23b8e5f525bb4e24494ab7f159fa6b62.png)
 
 **Cause :** L’agent n’est pas en mesure de se mettre à jour vers une nouvelle version.
 
@@ -128,17 +130,17 @@ Lorsque l’agent Windows Virtual Desktop est installé pour la première fois s
 5. Terminez l’Assistant d'installation.
 6. Ouvrez le Gestionnaire des tâches et démarrez le service RDAgentBootLoader.
 
-## <a name="error--windows-virtual-desktop-agent-registry-entry-isregistered-shows-a-value-of-0"></a>Erreur :  L'entrée de registre IsRegistered de l'agent Windows Virtual Desktop affiche une valeur nulle.
+## <a name="error-windows-virtual-desktop-agent-registry-entry-isregistered-shows-a-value-of-0"></a>Erreur : L'entrée de registre IsRegistered de l'agent Windows Virtual Desktop affiche une valeur nulle.
 
-**Cause :** Le jeton d’inscription a expiré ou a été généré avec une valeur d’expiration de 999999.
+**Cause :** Le jeton d’inscription a expiré.
 
 **Correctif :** Suivez ces instructions pour corriger l'erreur de registre de l'agent.
 
-1. Si un jeton d’inscription existe déjà, supprimez-le avec Remove-RDSRegistrationInfo.
-2. Générez un nouveau jeton avec Rds-NewRegistrationInfo.
-3. Vérifiez que le paramètre -ExpriationHours est défini sur 72 (la valeur maximale est 99999).
+1. S’il existe déjà un jeton d’inscription, supprimez-le à l’aide de la cmdlet Remove-RDSRegistrationInfo.
+2. Exécutez la cmdlet **New-AzWvdRegistrationInfo** pour générer un nouveau jeton.
+3. Vérifiez que le paramètre *-ExpriationTime* est défini sur 3 jours.
 
-### <a name="error-windows-virtual-desktop-agent-isnt-reporting-a-heartbeat-when-running-get-rdssessionhost"></a>Erreur : L'agent Windows Virtual Desktop ne signale aucune pulsation lors de l'exécution de Get-RdsSessionHost.
+### <a name="error-windows-virtual-desktop-agent-isnt-reporting-a-heartbeat-when-running-get-azwvdsessionhost"></a>Erreur : L’agent Windows Virtual Desktop ne signale aucune pulsation lors de l’exécution de la cmdlet Get-RdsSessionHost.
 
 **Cause 1 :** Le service RDAgentBootLoader a été arrêté.
 
@@ -180,7 +182,7 @@ La pile côte à côte Windows Virtual Desktop est automatiquement installée av
 
 Il existe trois méthodes principales pour installer ou activer la pile côte à côte sur les machines virtuelles hôtes de session :
 
-- Avec le modèle Azure Resource Manager **Créer et approvisionner un pool d'hôtes Windows Virtual Desktop**
+- Avec le modèle de création du portail Azure
 - En l'incluant et en l'activant sur l’image principale
 - En l'installant ou en l'activant manuellement sur chaque machine virtuelle (ou avec des extensions/PowerShell)
 
@@ -188,7 +190,8 @@ Si vous rencontrez des problèmes avec la pile côte à côte Windows Virtual De
 
 La sortie de **qwinsta** indique **rdp-sxs** si la pile côte à côte est installée et activée.
 
-![Pile côte à côte installée ou activée avec qwinsta indiquée par rdp-sxs dans la sortie.](media/23b8e5f525bb4e24494ab7f159fa6b62.png)
+> [!div class="mx-imgBorder"]
+> ![Pile côte à côte installée ou activée avec qwinsta indiquée par rdp-sxs dans la sortie.](media/23b8e5f525bb4e24494ab7f159fa6b62.png)
 
 Examinez les entrées de registre répertoriées ci-dessous et vérifiez que leurs valeurs correspondent. En cas de clés de registre manquantes ou de valeurs incompatibles, suivez les instructions contenues dans [Créer un pool d’hôtes avec PowerShell](create-host-pools-powershell.md) pour savoir comment réinstaller la pile côte à côte.
 
@@ -202,20 +205,15 @@ Examinez les entrées de registre répertoriées ci-dessous et vérifiez que leu
 
 ### <a name="error-o_reverse_connect_stack_failure"></a>Erreur : O_REVERSE_CONNECT_STACK_FAILURE
 
-![Code d'erreur O_REVERSE_CONNECT_STACK_FAILURE.](media/23b8e5f525bb4e24494ab7f159fa6b62.png)
+> [!div class="mx-imgBorder"]
+> ![Code d’erreur O_REVERSE_CONNECT_STACK_FAILURE.](media/23b8e5f525bb4e24494ab7f159fa6b62.png)
 
 **Cause :** La pile côte à côte n'est pas installée sur la machine virtuelle hôte de session.
 
 **Correctif :** Suivez ces instructions pour installer la pile de côte à côte sur la machine virtuelle hôte de session.
 
 1. Utilisez le protocole RDP (Remote Desktop Protocol) pour accéder directement à la machine virtuelle hôte de session en tant qu’administrateur local.
-2. Si ce n’est déjà fait, téléchargez et importez le [module PowerShell Windows Virtual Desktop](/powershell/windows-virtual-desktop/overview/) pour l’utiliser dans votre session PowerShell, puis exécutez cette applet de commande pour vous connecter à votre compte :
-
-    ```powershell
-    Add-RdsAccount -DeploymentUrl "https://rdbroker.wvd.microsoft.com"
-    ```
-
-3. Pour installer la pile côte à côte, consultez [Créer un pool d'hôtes avec PowerShell](create-host-pools-powershell.md).
+2. Pour installer la pile côte à côte, consultez [Créer un pool d'hôtes avec PowerShell](create-host-pools-powershell.md).
 
 ## <a name="how-to-fix-a-windows-virtual-desktop-side-by-side-stack-that-malfunctions"></a>Procédure de résolution d'un dysfonctionnement de pile côte à côte Windows Virtual Desktop
 
@@ -244,19 +242,21 @@ Suivez ces instructions pour exécuter la correction à partir des mêmes sous-r
             psexec.exe \\<VMname> cmd
     ```
 
-    >[!Note]
+    >[!NOTE]
     >VMname correspond au nom de la machine virtuelle présentant un dysfonctionnement de pile côte à côte.
 
 7. Acceptez le Contrat de licence PsExec en cliquant sur Accepter.
 
-    ![Capture d'écran du Contrat de licence logiciel.](media/SoftwareLicenseTerms.png)
+    > [!div class="mx-imgBorder"]
+    > ![Capture d’écran du Contrat de licence logiciel.](media/SoftwareLicenseTerms.png)
 
-    >[!Note]
+    >[!NOTE]
     >Cette boîte de dialogue s’affiche uniquement lors de la première exécution de PsExec.
 
 8. Une fois la session d'invite de commandes ouverte sur la machine virtuelle présentant un dysfonctionnement de pile côte à côte, exécutez qwinsta et vérifiez qu'une entrée nommée rdp-sxs est disponible. Si ce n’est pas le cas, cela signifie qu'une pile côte à côte n’est pas présente et que le problème n'est pas lié à cette dernière.
 
-    ![Invite de commandes Administrateur](media/AdministratorCommandPrompt.png)
+    > [!div class="mx-imgBorder"]
+    > ![Invite de commandes Administrateur](media/AdministratorCommandPrompt.png)
 
 9. Exécutez la commande suivante afin de répertorier les composants Microsoft installés sur la machine virtuelle présentant un dysfonctionnement de pile côte à côte.
 
@@ -303,7 +303,7 @@ Si vous vous connectez à Windows 10 Entreprise multisession à l’aide d’un
 
 Si le délai limite expire, le message d’erreur « La session distante a été déconnectée, car aucune licence d’accès client Bureau à distance n’est disponible pour cet ordinateur » s’affiche.
 
-Si vous voyez l’un de ces messages, cela signifie que les dernières mises à jour Windows ne sont pas installées sur l’image ou que vous définissez le mode de licence Bureau à distance via la stratégie de groupe. Suivez les étapes décrites dans les sections suivantes pour vérifier le paramètre de stratégie de groupe, identifier la version de Windows 10 Entreprise multi-session et installer la mise à jour correspondante.  
+Si vous voyez l’un de ces messages, cela signifie que les dernières mises à jour Windows ne sont pas installées sur l’image ou que vous définissez le mode de licence Bureau à distance via la stratégie de groupe. Suivez les étapes décrites dans les sections suivantes pour vérifier le paramètre de stratégie de groupe, identifier la version de Windows 10 Entreprise multi-session et installer la mise à jour correspondante.
 
 >[!NOTE]
 >Windows Virtual Desktop nécessite une licence d’accès client (CAL) aux services Bureau à distance uniquement si votre pool d’hôtes contient des hôtes de session Windows Server. Pour savoir comment configurer une licence d’accès client aux services Bureau à distance, consultez [Gérer les licences de votre déploiement Services Bureau à distance avec des licences d’accès client (CAL)](/windows-server/remote/remote-desktop-services/rds-client-access-license/).
@@ -324,7 +324,8 @@ Pour identifier le numéro de votre version de Windows 10 Entreprise multisessi
 3. Sélectionnez **À propos de votre PC**.
 4. Regardez quel nombre figure à côté de « Version ». Le nombre doit être « 1809 » ou « 1903 », comme dans l’image suivante.
 
-    ![Capture d’écran de la fenêtre Spécifications Windows. Le numéro de version est mis en surbrillance en bleu.](media/windows-specifications.png)
+    > [!div class="mx-imgBorder"]
+    > ![Capture d’écran de la fenêtre Spécifications Windows. Le numéro de version est mis en surbrillance en bleu.](media/windows-specifications.png)
 
 Maintenant que vous connaissez le numéro de votre version, passez directement à la section correspondante.
 
@@ -336,10 +337,16 @@ Si votre numéro de version indique « 1809 », installez [la mise à jour KB4
 
 Redéployez le système d’exploitation hôte avec la dernière version de l’image Windows 10 version 1903 à partir de la galerie Azure.
 
+## <a name="we-couldnt-connect-to-the-remote-pc-because-of-a-security-error"></a>Nous n’avons pas pu nous connecter à l’ordinateur distant en raison d’une erreur de sécurité
+
+Si vos utilisateurs reçoivent une erreur indiquant « Nous n’avons pas pu nous connecter à l’ordinateur distant en raison d’une erreur de sécurité. Si ce problème persiste, demandez de l’aide à votre administrateur ou support technique. », validez les éventuelles stratégies existantes qui modifient les autorisations RDP par défaut. L’une des stratégies pouvant provoquer l’apparition de cette erreur est « Autoriser l’ouverture de session par le biais d’une stratégie de sécurité des Services Bureau à distance ».
+
+Pour en savoir plus sur cette stratégie, consultez [Autoriser l’ouverture de session via les Services Bureau à distance](/windows/security/threat-protection/security-policy-settings/allow-log-on-through-remote-desktop-services).
+
 ## <a name="next-steps"></a>Étapes suivantes
 
 - Pour découvrir une vue d’ensemble de la résolution des problèmes Windows Virtual Desktop et des procédures d’escalade, consultez l’article [Vue d’ensemble du dépannage, commentaires et support](troubleshoot-set-up-overview.md).
-- Pour résoudre les problèmes de création d’un pool de locataires et d’hôtes dans un environnement Windows Virtual Desktop, consultez [Création d’un pool de locataires et d’hôtes](troubleshoot-set-up-issues.md).
+- Pour résoudre les problèmes de création d’un pool d’hôtes dans un environnement Windows Virtual Desktop, consultez [Création d’un environnement et d’un pool d’hôtes](troubleshoot-set-up-issues.md).
 - Pour résoudre les problèmes de configuration d’une machine virtuelle dans Windows Virtual Desktop, consultez [Configuration d’une machine virtuelle hôte de session](troubleshoot-vm-configuration.md).
 - Pour résoudre les problèmes de connexion au client Windows Virtual Desktop, consultez [Connexions au service Windows Virtual Desktop](troubleshoot-service-connection.md).
 - Pour résoudre les problèmes liés aux clients Bureau à distance, consultez [Résoudre des problèmes du client Bureau à distance](troubleshoot-client.md).

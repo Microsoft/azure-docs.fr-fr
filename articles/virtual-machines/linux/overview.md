@@ -8,12 +8,12 @@ ms.workload: infrastructure
 ms.date: 11/14/2019
 ms.author: cynthn
 ms.custom: mvc
-ms.openlocfilehash: 83676850a58da4e4bd3c549d9d0c6ac25ae20f83
-ms.sourcegitcommit: 31e9f369e5ff4dd4dda6cf05edf71046b33164d3
+ms.openlocfilehash: 54982189a5da584c7daf66855ffb655e403a455a
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81759430"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96500510"
 ---
 # <a name="linux-virtual-machines-in-azure"></a>Machines virtuelles Linux dans Azure
 
@@ -30,7 +30,7 @@ Les Machines Virtuelles Azure peuvent être utilisées de différentes manières
 Le nombre de machines virtuelles utilisées par votre application peut varier (montée en puissance et augmentation de la charge) pour répondre à vos besoins.
 
 ## <a name="what-do-i-need-to-think-about-before-creating-a-vm"></a>À quoi dois-je penser avant de créer une machine virtuelle ?
-Il existe toujours une multitude de [considérations liées à la conception](https://docs.microsoft.com/azure/architecture/reference-architectures/n-tier/windows-vm) lorsque vous générez une infrastructure d’application dans Azure. Il est important de réfléchir à ces aspects des machines virtuelles avant de commencer :
+Il existe toujours une multitude de [considérations liées à la conception](/azure/architecture/reference-architectures/n-tier/linux-vm) lorsque vous générez une infrastructure d’application dans Azure. Il est important de réfléchir à ces aspects des machines virtuelles avant de commencer :
 
 * le nom de vos ressources d’application,
 * l’emplacement de stockage des ressources,
@@ -48,15 +48,19 @@ Ce tableau présente quelques moyens d’obtenir la liste des emplacements dispo
 | Méthode | Description |
 | --- | --- |
 | Portail Azure |Sélectionnez un emplacement dans la liste lorsque vous créez une machine virtuelle. |
-| Azure PowerShell |Utilisez la commande [Get-AzLocation](https://docs.microsoft.com/powershell/module/az.resources/get-azlocation). |
-| API REST |Utilisez l’opération [Lister les emplacements](https://docs.microsoft.com/rest/api/resources/subscriptions). |
-| Azure CLI |Utilisez l’opération [az account list-locations](https://docs.microsoft.com/cli/azure/account?view=azure-cli-latest). |
+| Azure PowerShell |Utilisez la commande [Get-AzLocation](/powershell/module/az.resources/get-azlocation). |
+| API REST |Utilisez l’opération [Lister les emplacements](/rest/api/resources/subscriptions). |
+| Azure CLI |Utilisez l’opération [az account list-locations](/cli/azure/account?view=azure-cli-latest). |
+
+### <a name="singapore-data-residency"></a>Résidence des données à Singapour
+
+Dans Azure, la fonctionnalité permettant le stockage de données client dans une seule région n’est actuellement disponible que dans la région Asie Sud-Est (Singapour) de la zone géographique Asie-Pacifique. Pour toutes les autres régions, les données client sont stockées dans Zone géographique. Pour plus d’informations, consultez le [Centre de gestion de la confidentialité](https://azuredatacentermap.azurewebsites.net/).
 
 ## <a name="availability"></a>Disponibilité
 Azure a annoncé un contrat de niveau de service de pointe pour machine virtuelle à instance unique de 99,9 % à condition de déployer la machine virtuelle avec le stockage premium pour tous les disques.  Afin que votre déploiement puisse bénéficier du contrat de niveau de service standard de 99,95 % pour les machines virtuelles, vous devez déployer au moins deux machines virtuelles exécutant votre charge de travail à l’intérieur d’un groupe à haute disponibilité. Un groupe à haute disponibilité assure que vos machines virtuelles sont réparties sur plusieurs domaines d’erreur dans les centres de données Azure et déployées sur des hôtes ayant des fenêtres de maintenance distinctes. La version complète du [contrat SLA Azure](https://azure.microsoft.com/support/legal/sla/virtual-machines/) explique la disponibilité garantie d’Azure dans son ensemble.
 
 ## <a name="vm-size"></a>Taille de la machine virtuelle
-La [taille](sizes.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) de la machine virtuelle que vous utilisez est déterminée par la charge de travail que vous souhaitez exécuter. La taille que vous choisissez détermine ensuite des facteurs comme la puissance de traitement, la mémoire et la capacité de stockage. Azure propose différentes tailles vous permettant de prendre en charge de nombreux types d'utilisation.
+La [taille](../sizes.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) de la machine virtuelle que vous utilisez est déterminée par la charge de travail que vous souhaitez exécuter. La taille que vous choisissez détermine ensuite des facteurs comme la puissance de traitement, la mémoire et la capacité de stockage. Azure propose différentes tailles vous permettant de prendre en charge de nombreux types d'utilisation.
 
 Azure facture un [prix horaire](https://azure.microsoft.com/pricing/details/virtual-machines/linux/) en fonction de la taille et du système d’exploitation de la machine virtuelle. Pour les heures partielles, Azure facture uniquement les minutes utilisées. Le stockage est facturé séparément.
 
@@ -67,27 +71,27 @@ Votre abonnement comporte des [limites de quota](../../azure-resource-manager/ma
 
 La fonctionnalité Disques managés se charge de la création et de la gestion du compte de stockage Azure en arrière-plan, éliminant les préoccupations liées aux limites d’extensibilité du compte de stockage. Vous spécifiez la taille du disque et le niveau de performances (Standard ou Premium) et Azure crée et gère le disque. Lorsque vous ajoutez des disques ou faites monter ou descendre en puissance la machine virtuelle, vous n’avez pas à vous soucier du stockage utilisé. Si vous créez de nouvelles machines virtuelles, [utilisez Azure CLI](quick-create-cli.md) ou le Portail Azure pour créer des machines virtuelles avec des disques de système d’exploitation et de données managés. Si vous avez des machines virtuelles qui utilisent des disques non managés, vous pouvez [convertir vos machines virtuelles pour qu’elles soient sauvegardées avec la fonctionnalité Disques managés](convert-unmanaged-to-managed-disks.md).
 
-Vous pouvez également gérer vos images personnalisées dans un compte de stockage par région Azure et les utiliser pour créer des centaines de machines virtuelles dans le même abonnement. Pour plus d’informations sur la fonctionnalité Disques managés, consultez [Vue d’ensemble de la fonctionnalité Disques managés](../linux/managed-disks-overview.md).
+Vous pouvez également gérer vos images personnalisées dans un compte de stockage par région Azure et les utiliser pour créer des centaines de machines virtuelles dans le même abonnement. Pour plus d’informations sur la fonctionnalité Disques managés, consultez [Vue d’ensemble de la fonctionnalité Disques managés](../managed-disks-overview.md).
 
 ## <a name="distributions"></a>Distributions 
-Microsoft Azure prend en charge un certain nombre de distributions Linux populaires fournies et gérées par plusieurs partenaires.  Vous pouvez trouver des distributions comme Red Hat Enterprise, CentOS, SUSE Linux Enterprise, Debian, Ubuntu, CoreOS, RancherOS, FreeBSD et plus encore dans la Place de marché Microsoft Azure. Microsoft travaille activement avec différentes communautés Linux pour enrichir davantage la liste des [distributions Linux approuvées par Azure](endorsed-distros.md).
+Microsoft Azure prend en charge un certain nombre de distributions Linux populaires fournies et gérées par plusieurs partenaires.  Vous pouvez trouver les distributions disponibles dans la Place de marché Azure. Microsoft travaille activement avec différentes communautés Linux pour enrichir davantage la liste des [distributions Linux approuvées par Azure](endorsed-distros.md).
 
 Si votre distribution Linux préférée n’est pas présente dans la galerie, vous pouvez « apporter votre propre machine virtuelle Linux » en [créant et chargeant un disque dur virtuel dans Azure](create-upload-generic.md).
 
-Microsoft travaille en étroite collaboration avec des partenaires afin de garantir que les images disponibles sont mises à jour et optimisées pour un runtime Azure.  Pour plus d’informations sur les partenaires Azure, consultez les liens suivants :
+Microsoft travaille en étroite collaboration avec des partenaires afin de garantir que les images disponibles sont mises à jour et optimisées pour un runtime Azure.  Pour plus d’informations sur les offres des partenaires Azure, consultez les liens suivants :
 
 * Linux sur Azure : [Distributions approuvées](endorsed-distros.md)
-* SUSE : [Place de marché Azure - SUSE Linux Enterprise Server](https://azuremarketplace.microsoft.com/marketplace/apps/SUSE.SLES?tab=Overview)
-* Red Hat - [Place de marché Azure - Red Hat Enterprise Linux 7.2](https://azure.microsoft.com/marketplace/partners/redhat/redhatenterpriselinux72/)
-* Canonical - [Place de marché Azure - Ubuntu Server 16.04 LTS](https://azure.microsoft.com/marketplace/partners/canonical/ubuntuserver1604lts/)
-* Debian - [Place de marché Azure - Debian 8 "Jessie"](https://azure.microsoft.com/marketplace/partners/credativ/debian8/)
-* FreeBSD - [Place de marché Azure - FreeBSD 10.4](https://azuremarketplace.microsoft.com/marketplace/apps/Microsoft.FreeBSD104)
-* CoreOS - [Place de marché Azure - CoreOS (Stable)](https://azure.microsoft.com/marketplace/partners/coreos/coreosstable/)
-* RancherOS - [Place de marché Azure - RancherOS](https://azure.microsoft.com/marketplace/partners/rancher/rancheros/)
+* SUSE : [Place de marché Azure - SUSE Linux Enterprise Server](https://azuremarketplace.microsoft.com/marketplace/apps?page=1&search=suse)
+* Red Hat : [Place de marché Azure - Red Hat Enterprise Linux](https://azuremarketplace.microsoft.com/marketplace/apps?search=Red%20Hat%20Enterprise%20Linux)
+* Canonical - [Place de marché Azure - Ubuntu Server](https://azuremarketplace.microsoft.com/marketplace/apps/Canonical.UbuntuServer)
+* Debian : [Place de marché Azure - Debian](https://azuremarketplace.microsoft.com/marketplace/apps?search=Debian&page=1)
+* FreeBSD : [Place de marché Azure - FreeBSD](https://azuremarketplace.microsoft.com/marketplace/apps?search=freebsd&page=1)
+* Flatcar : [Place de marché Azure - Flatcar Container Linux](https://azuremarketplace.microsoft.com/marketplace/apps?search=Flatcar&page=1)
+* RancherOS - [Place de marché Azure - RancherOS](https://azuremarketplace.microsoft.com/marketplace/apps/rancher.rancheros)
 * Bitnami - [Bitnami Library pour Azure](https://azure.bitnami.com/)
-* Mesosphere - [Place de marché Azure - Mesosphere DC/OS sur Azure](https://azure.microsoft.com/marketplace/partners/mesosphere/dcosdcos/)
-* Docker - [Place de marché Azure - Azure Container Service avec Docker Swarm](https://azure.microsoft.com/marketplace/partners/microsoft/acsswarms/)
-* Jenkins - [Place de marché Azure - CloudBees Jenkins Platform](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/cloudbees.cloudbees-core-contact)
+* Mesosphere - [Place de marché Azure - Mesosphere DC/OS sur Azure](https://azure.microsoft.com/services/kubernetes-service/mesosphere/)
+* Docker - [Place de marché Azure - Images Docker](https://azuremarketplace.microsoft.com/marketplace/apps?search=docker&page=1&filters=virtual-machine-images)
+* Jenkins - [Place de marché Azure - CloudBees Jenkins Platform](https://azuremarketplace.microsoft.com/marketplace/apps/cloudbees.cloudbees-core-contact)
 
 
 ## <a name="cloud-init"></a>Cloud-Init 
@@ -95,7 +99,7 @@ Microsoft travaille en étroite collaboration avec des partenaires afin de garan
 Pour obtenir une culture DevOps appropriée, toute l’infrastructure doit être du code.  Lorsque l’ensemble de l’infrastructure se trouve dans le code, elle est facile à recréer.  Azure fonctionne avec tous les principaux outils d’automatisation, comme Ansible, Chef, SaltStack et Puppet.  Azure propose également ses propres outils pour l’automatisation :
 
 * [Les modèles Azure](create-ssh-secured-vm-from-template.md)
-* [Azure VMAccess](using-vmaccess-extension.md)
+* [Azure `VMaccess`](../extensions/vmaccess.md)
 
 Azure prend en charge [cloud-init](https://cloud-init.io/) sur la plupart des distributions Linux qui le prennent en charge.  Nous travaillons activement avec nos partenaires de distribution Linux afin de mettre des images compatibles cloud-init à disposition sur la Place de marché Azure. Ces images permettent à vos déploiements et configurations cloud-init de fonctionner de manière fluide avec des machines virtuelles et des groupes de machines virtuelles identiques.
 
@@ -108,9 +112,14 @@ Azure prend en charge [cloud-init](https://cloud-init.io/) sur la plupart des di
 
 ## <a name="networking"></a>Mise en réseau
 * [Présentation du réseau virtuel.](../../virtual-network/virtual-networks-overview.md)
-* [Adresses IP dans Azure](../../virtual-network/virtual-network-ip-addresses-overview-arm.md)
+* [Adresses IP dans Azure](../../virtual-network/public-ip-addresses.md)
 * [Ouverture de ports sur une machine virtuelle Linux dans Azure](nsg-quickstart.md)
-* [Créer un nom de domaine complet dans le portail Azure](portal-create-fqdn.md)
+* [Créer un nom de domaine complet dans le portail Azure](../create-fqdn.md)
+
+
+## <a name="data-residency"></a>Résidence des données
+
+Dans Azure, la fonctionnalité permettant le stockage de données client dans une seule région n’est actuellement disponible que dans la région Asie Sud-Est (Singapour) de la zone géographique Asie-Pacifique et la région Brésil Sud (État de Sao Paulo) de la zone géographique Brésil. Pour toutes les autres régions, les données client sont stockées dans Zone géographique. Pour plus d’informations, consultez le [Centre de gestion de la confidentialité](https://azuredatacentermap.azurewebsites.net/).
 
 
 ## <a name="next-steps"></a>Étapes suivantes
@@ -120,4 +129,3 @@ Créer votre première machine virtuelle
 - [Portail](quick-create-portal.md)
 - [Azure CLI](quick-create-cli.md)
 - [PowerShell](quick-create-powershell.md)
-

@@ -1,6 +1,6 @@
 ---
 title: Charger des fichiers dans un compte Media Services à l’aide de .NET | Microsoft Docs
-description: Apprenez à obtenir du contenu multimédia dans Media Services en créant et en chargeant des ressources.
+description: Apprenez à obtenir du contenu multimédia dans Media Services en créant et en chargeant des ressources à l’aide de .NET.
 services: media-services
 documentationcenter: ''
 author: juliako
@@ -14,17 +14,20 @@ ms.devlang: na
 ms.topic: article
 ms.date: 03/18/2019
 ms.author: juliako
-ms.openlocfilehash: 03b9995eab503ac1fcd4615882419dde31d4f8bf
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 83e9b0278e99867cafa7e633bc382e490ec273c1
+ms.sourcegitcommit: 32c521a2ef396d121e71ba682e098092ac673b30
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "64869449"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91250524"
 ---
-# <a name="upload-files-into-a-media-services-account-using-net"></a>Charger des fichiers dans un compte Media Services à l’aide de .NET 
+# <a name="upload-files-into-a-media-services-account-using-net"></a>Charger des fichiers dans un compte Media Services à l’aide de .NET
+
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
 
 > [!NOTE]
-> Aucune nouvelle fonctionnalité ni fonction n’est ajoutée à Media Services v2. <br/>Découvrez la dernière version, [Media Services v3](https://docs.microsoft.com/azure/media-services/latest/). Consultez aussi [Conseils de migration de v2 vers v3](../latest/migrate-from-v2-to-v3.md).
+> Aucune nouvelle fonctionnalité ni fonction n’est ajoutée à Media Services v2. <br/>Découvrez la dernière version, [Media Services v3](../latest/index.yml). Consultez aussi [Conseils de migration de v2 vers v3](../latest/migrate-from-v2-to-v3.md).
 
 Dans Media Services, vous téléchargez (ou réceptionnez) vos fichiers numériques dans un élément multimédia. L’entité **Asset** peut contenir des fichiers vidéo et audio, des images, des collections de miniatures, des pistes textuelles et des légendes (et les métadonnées concernant ces fichiers).  Une fois les fichiers téléchargés, votre contenu est stocké en toute sécurité dans le cloud et peut faire l’objet d’un traitement et d’une diffusion en continu.
 
@@ -315,4 +318,3 @@ Vous pouvez également utiliser les fonctions Azure pour déclencher une tâche 
 Après avoir chargé un élément multimédia dans Media Services, consultez l’article [Guide pratique pour obtenir un processeur multimédia][How to Get a Media Processor].
 
 [How to Get a Media Processor]: media-services-get-media-processor.md
-

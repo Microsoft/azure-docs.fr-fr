@@ -2,24 +2,21 @@
 title: 'Tutoriel : Intégration d’Azure Active Directory à New Relic by Account | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et New Relic by Account.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: 3186b9a8-f4d8-45e2-ad82-6275f95e7aa6
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
 ms.topic: tutorial
 ms.date: 04/16/2020
 ms.author: jeedes
-ms.openlocfilehash: 9fdcec5b55f52b7b6b824bf2ba25c14541b2a3c6
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 2a7d191af78da417d0ee2ade12b1576912643b6c
+ms.sourcegitcommit: 42922af070f7edf3639a79b1a60565d90bb801c0
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82186564"
+ms.lasthandoff: 12/31/2020
+ms.locfileid: "97827459"
 ---
 # <a name="tutorial-azure-active-directory-single-sign-on-sso-integration-with-new-relic-by-account"></a>Tutoriel : Intégration de l’authentification unique (SSO) Azure Active Directory à New Relic by Account
 
@@ -29,7 +26,7 @@ Dans ce tutoriel, vous allez apprendre à intégrer New Relic by Account à Azur
 * Permettre aux utilisateurs de se connecter automatiquement à New Relic by Account avec leur compte Azure AD.
 * Gérer vos comptes à un emplacement central : le Portail Azure.
 
-Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -44,7 +41,7 @@ Dans ce tutoriel, vous allez configurer et tester l’authentification unique Az
 
 * New Relic by Account prend en charge l’authentification unique lancée par le **fournisseur de services**
 
-* Après avoir configuré New Relic by Account, vous pouvez appliquer des contrôles de session, qui protègent contre l’exfiltration et l’infiltration des données sensibles de votre organisation en temps réel. Les contrôles de session sont étendus à partir de l’accès conditionnel. [Découvrez comment appliquer un contrôle de session avec Microsoft Cloud App Security](https://docs.microsoft.com/cloud-app-security/proxy-deployment-any-app).
+* Après avoir configuré New Relic by Account, vous pouvez appliquer des contrôles de session, qui protègent contre l’exfiltration et l’infiltration des données sensibles de votre organisation en temps réel. Les contrôles de session sont étendus à partir de l’accès conditionnel. [Découvrez comment appliquer un contrôle de session avec Microsoft Cloud App Security](/cloud-app-security/proxy-deployment-any-app).
 
 ## <a name="adding-new-relic-by-account-from-the-gallery"></a>Ajout de New Relic by Account à partir de la galerie
 
@@ -83,7 +80,7 @@ Effectuez les étapes suivantes pour activer l’authentification unique Azure A
 
     a. Dans la zone de texte **URL de connexion**, entrez une URL au format suivant :
 
-    `https://rpm.newrelic.com/accounts/{acc_id}/sso/saml/login`. Veillez à remplacer `acc_id` par votre propre ID de compte New Relic by Account.
+    `https://rpm.newrelic.com:443/accounts/{acc_id}/sso/saml/finalize`. Veillez à remplacer `acc_id` par votre propre ID de compte New Relic by Account.
 
     b. Dans la zone de texte **Identificateur (ID d’entité)** , saisissez une URL : `rpm.newrelic.com`
 
@@ -137,7 +134,7 @@ Dans cette section, vous allez autoriser B.Simon à utiliser l’authentificatio
 
 2. Dans le menu situé en haut, cliquez sur **Account Settings**.
    
-    ![Paramètres du compte](./media/new-relic-tutorial/ic797036.png "Account Settings")
+    ![Capture d’écran montrant la page d’accueil avec l’élément Account settings sélectionné.](./media/new-relic-tutorial/ic797036.png "Account Settings")
 
 3. Cliquez sur l’onglet **Security and authentication**, puis sur l’onglet **Single sign on**.
    
@@ -161,11 +158,11 @@ Dans cette section, vous allez autoriser B.Simon à utiliser l’authentificatio
 
 2. Dans le menu situé en haut, cliquez sur **Account Settings**.
    
-    ![Paramètres du compte](./media/new-relic-tutorial/ic797040.png "Account Settings")
+    ![Capture d’écran montrant l’élément Account settings sélectionné dans la page d’accueil.](./media/new-relic-tutorial/ic797040.png "Account Settings")
 
 3. Dans le volet **Account** situé sur le côté gauche, cliquez sur **Summary**, puis sur **Add user**.
    
-    ![Paramètres du compte](./media/new-relic-tutorial/ic797041.png "Account Settings")
+    ![Capture d’écran montrant le volet Summary dans lequel vous pouvez sélectionner Add user.](./media/new-relic-tutorial/ic797041.png "Account Settings")
 
 4. Dans la boîte de dialogue **Active users** , procédez comme suit :
    
@@ -184,16 +181,16 @@ Dans cette section, vous allez autoriser B.Simon à utiliser l’authentificatio
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Quand vous cliquez sur la vignette New Relic by Account dans le volet d’accès, vous êtes automatiquement connecté à l’application New Relic by Account pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Quand vous cliquez sur la vignette New Relic by Account dans le volet d’accès, vous êtes automatiquement connecté à l’application New Relic by Account pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de tutoriels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de tutoriels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)
 
 - [Essayer New Relic by Account avec Azure AD](https://aad.portal.azure.com/)
 
-- [Qu’est-ce que le contrôle de session dans Microsoft Cloud App Security ?](https://docs.microsoft.com/cloud-app-security/proxy-intro-aad)
+- [Qu’est-ce que le contrôle de session dans Microsoft Cloud App Security ?](/cloud-app-security/proxy-intro-aad)

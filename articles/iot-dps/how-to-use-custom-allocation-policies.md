@@ -7,12 +7,13 @@ ms.date: 11/14/2019
 ms.topic: conceptual
 ms.service: iot-dps
 services: iot-dps
-ms.openlocfilehash: 87ffca1957d4ec449753f1966ed05cf3948f5ca2
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp, devx-track-azurecli
+ms.openlocfilehash: 26615b82bb9dcbc1247bec9b7a06b579dfa1eb2b
+ms.sourcegitcommit: 16c7fd8fe944ece07b6cf42a9c0e82b057900662
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75453939"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96571638"
 ---
 # <a name="how-to-use-custom-allocation-policies"></a>Comment utiliser des stratégies d’allocation personnalisées
 
@@ -43,11 +44,11 @@ Dans cet article, vous allez effectuer les étapes suivantes :
 
 Les prérequis suivants s’appliquent à un environnement de développement Windows. Pour Linux ou macOS, consultez la section appropriée de [Préparer votre environnement de développement](https://github.com/Azure/azure-iot-sdk-c/blob/master/doc/devbox_setup.md) dans la documentation du kit de développement logiciel (SDK).
 
-* [Visual Studio](https://visualstudio.microsoft.com/vs/) 2019 avec la charge de travail [« Développement Desktop en C++ »](https://docs.microsoft.com/cpp/?view=vs-2019#pivot=workloads) activée. Visual Studio 2015 et Visual Studio 2017 sont également pris en charge.
+- [Visual Studio](https://visualstudio.microsoft.com/vs/) 2019 avec la charge de travail [« Développement Desktop en C++ »](/cpp/ide/using-the-visual-studio-ide-for-cpp-desktop-development) activée. Visual Studio 2015 et Visual Studio 2017 sont également pris en charge.
 
-* Dernière version de [Git](https://git-scm.com/download/) installée.
+- Dernière version de [Git](https://git-scm.com/download/) installée.
 
-[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [azure-cli-prepare-your-environment-no-header.md](../../includes/azure-cli-prepare-your-environment-no-header.md)]
 
 ## <a name="create-the-provisioning-service-and-two-divisional-iot-hubs"></a>Créer le service d’approvisionnement et deux hubs IoT des divisions
 
@@ -132,7 +133,7 @@ Dans cette section, vous allez créer une fonction Azure qui implémente votre s
 
 7. Sur la page suivante, pour l’étape **CRÉER UNE FONCTION**, sélectionnez la vignette **Webhook + API**, puis sélectionnez **Créer**. Une fonction nommée **HttpTrigger1** est créée et le portail affiche le contenu du fichier de code **run.csx**.
 
-8. Référencez les packages Nuget requis. Pour créer le jumeau d’appareil initial, la fonction d’allocation personnalisée utilise des classes qui sont définies dans deux packages Nuget qui doivent être chargés dans l’environnement d’hébergement. Avec Azure Functions, les packages NuGet sont référencés à l’aide d’un fichier *function.host*. À cette étape, vous enregistrez et chargez un fichier *function.host*.
+8. Référencez les packages NuGet requis. Pour créer le jumeau d’appareil initial, la fonction d’allocation personnalisée utilise des classes qui sont définies dans deux packages NuGet qui doivent être chargés dans l’environnement d’hébergement. Avec Azure Functions, les packages NuGet sont référencés à l’aide d’un fichier *function.host*. À cette étape, vous enregistrez et chargez un fichier *function.host*.
 
     1. Copiez les lignes suivantes dans votre éditeur favori et enregistrez le fichier sur votre ordinateur en tant que *fonction.host*.
 
@@ -297,7 +298,7 @@ Dans cette section, vous allez créer une fonction Azure qui implémente votre s
 
 ## <a name="create-the-enrollment"></a>Créer l’inscription
 
-Dans cette section, vous allez créer un groupe d’inscriptions qui utilise la stratégie d’allocation personnalisée. Par souci de simplicité, cet article utilise [l’attestation de clé symétrique](concepts-symmetric-key-attestation.md) avec l’inscription. Pour sécuriser votre solution, utilisez plutôt [l’attestation de certificat X.509](concepts-security.md#x509-certificates) avec une chaîne d’approbation.
+Dans cette section, vous allez créer un groupe d’inscriptions qui utilise la stratégie d’allocation personnalisée. Par souci de simplicité, cet article utilise [l’attestation de clé symétrique](concepts-symmetric-key-attestation.md) avec l’inscription. Pour sécuriser votre solution, utilisez plutôt [l’attestation de certificat X.509](concepts-x509-attestation.md) avec une chaîne d’approbation.
 
 1. Toujours dans le [Portail Azure](https://portal.azure.com), ouvrez votre service d’approvisionnement.
 
@@ -436,7 +437,7 @@ Cette section s’applique à une station de travail Windows. Pour obtenir un ex
     cmake -Dhsm_type_symm_key:BOOL=ON -Duse_prov_client:BOOL=ON  ..
     ```
 
-    Si `cmake` ne trouve pas votre compilateur C++, vous risquez de rencontrer des erreurs de build lors de l’exécution de la commande. Si cela se produit, essayez d’exécuter la commande dans [l’invite de commandes de Visual Studio](https://docs.microsoft.com/dotnet/framework/tools/developer-command-prompt-for-vs).
+    Si `cmake` ne trouve pas votre compilateur C++, vous risquez de rencontrer des erreurs de build lors de l’exécution de la commande. Si cela se produit, essayez d’exécuter la commande dans [l’invite de commandes de Visual Studio](/dotnet/framework/tools/developer-command-prompt-for-vs).
 
     Une fois la génération terminée, les dernières lignes de sortie doivent ressembler à la sortie suivante :
 
@@ -590,4 +591,4 @@ Pour supprimer le groupe de ressources par nom :
 ## <a name="next-steps"></a>Étapes suivantes
 
 * Pour en savoir plus sur le reprovisionnement, consultez [Concepts du reprovisionnement d’appareils IoT Hub](concepts-device-reprovision.md) 
-* Pour en savoir plus sur le déprovisionnement, consultez [Guide pratique pour déprovisionner des appareils auparavant provisionnés automatiquement](how-to-unprovision-devices.md) 
+* Pour en savoir plus sur le déprovisionnement, consultez [Guide pratique pour déprovisionner des appareils auparavant provisionnés automatiquement](how-to-unprovision-devices.md)

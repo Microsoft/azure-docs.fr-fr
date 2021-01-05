@@ -5,16 +5,18 @@ ms.service: cosmos-db
 ms.subservice: cosmosdb-graph
 ms.topic: reference
 ms.date: 09/03/2019
-author: luisbosquez
-ms.author: lbosq
-ms.openlocfilehash: 95677f4c45c0213de5ffac5521bac1c6bf7294e4
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+author: christopheranderson
+ms.author: chrande
+ms.openlocfilehash: 3f5996b281c1985747f754e3796e9fb84f90fdd3
+ms.sourcegitcommit: 6a902230296a78da21fbc68c365698709c579093
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "72755075"
+ms.lasthandoff: 11/05/2020
+ms.locfileid: "93356958"
 ---
 # <a name="azure-cosmos-db-gremlin-server-response-headers"></a>En-têtes de réponse du serveur Gremlin d’Azure Cosmos DB
+[!INCLUDE[appliesto-gremlin-api](includes/appliesto-gremlin-api.md)]
+
 Cet article traite des en-têtes que le serveur Gremlin de Cosmos DB retourne à l’appelant lors de l’exécution d’une requête. Ces en-têtes sont utiles pour la résolution des problèmes de performance des requêtes et la création d’applications s’intégrant de manière native au service Cosmos DB. Ils contribuent également à simplifier les opérations du service clientèle.
 
 Gardez à l’esprit que la dépendance à ces en-têtes limite la portabilité de votre application vers d’autres implémentations Gremlin. En revanche, vous bénéficiez d’une intégration plus étroite à l’API Gremlin de Cosmos DB. Ces en-têtes ne représentent pas une norme TinkerPop.
@@ -29,7 +31,7 @@ Gardez à l’esprit que la dépendance à ces en-têtes limite la portabilité 
 | **x-ms-total-server-time-ms** | double | 130.512 | Success and Failure (« Succès et échec ») | Cet en-tête indique, en millisecondes, le temps total passé par le serveur Gremlin de Cosmos DB pour exécuter le parcours complet. Il est inclus dans chaque réponse partielle. Il représente le temps d’exécution cumulé depuis le début de la requête. La dernière réponse indique le temps d’exécution total. Cet en-tête est utile pour déterminer si la latence provient du client ou du serveur. Vous pouvez comparer le temps d’exécution du parcours sur le client avec la valeur de cet en-tête. |
 | **x-ms-status-code** | long | 200 | Success and Failure (« Succès et échec ») | Cet en-tête indique le motif interne d’exécution ou d’achèvement d’une requête. L’application est invitée à examiner la valeur de cet en-tête et à appliquer une action corrective. |
 | **x-ms-substatus-code** | long | 1003 | Échec uniquement | Cosmos DB est une base de données multimodèle basée sur une couche de stockage unifiée. Cet en-tête contient des insights supplémentaires concernant le motif de l’échec quand l’échec se produit dans les couches inférieures de la pile de haute disponibilité. L’application est invitée à stocker cet en-tête et à l’utiliser lors d’une communication avec le service clientèle Cosmos DB. La valeur de cet en-tête permet aux ingénieurs Cosmos DB de résoudre les problèmes plus rapidement. |
-| **x-ms-retry-after-ms** | Chaîne (TimeSpan) | "00:00:03.9500000" | Échec uniquement | Cet en-tête est une représentation d’un type .NET [TimeSpan](https://docs.microsoft.com/dotnet/api/system.timespan) sous forme de chaîne. Cette valeur est incluse uniquement dans les requêtes ayant échoué en raison de la saturation du débit provisionné. L’application doit soumettre de nouveau le parcours après le délai indiqué. |
+| **x-ms-retry-after-ms** | Chaîne (TimeSpan) | "00:00:03.9500000" | Échec uniquement | Cet en-tête est une représentation d’un type .NET [TimeSpan](/dotnet/api/system.timespan) sous forme de chaîne. Cette valeur est incluse uniquement dans les requêtes ayant échoué en raison de la saturation du débit provisionné. L’application doit soumettre de nouveau le parcours après le délai indiqué. |
 | **x-ms-activity-id** | Chaîne (Guid) | "A9218E01-3A3A-4716-9636-5BD86B056613" | Success and Failure (« Succès et échec ») | Cet en-tête contient l’identificateur côté serveur unique d’une requête. Le serveur attribue un identificateur unique à chaque requête à des fins de suivi. Les applications doivent consigner les identificateurs d’activité retournés par le serveur en vue des situations où les clients souhaitent contacter le service clientèle au sujet d’une requête spécifique. Le personnel du service clientèle de Cosmos DB peut rechercher des requêtes spécifiques à l’aide de ces identificateurs dans les données de télémétrie du service Cosmos DB. |
 
 ## <a name="status-codes"></a>Codes d’état
@@ -107,6 +109,6 @@ try {
 ```
 
 ## <a name="next-steps"></a>Étapes suivantes
-* [Codes d’état HTTP pour Azure Cosmos DB](https://docs.microsoft.com/rest/api/cosmos-db/http-status-codes-for-cosmosdb) 
-* [En-têtes de réponse REST courants d’Azure Cosmos DB](https://docs.microsoft.com/rest/api/cosmos-db/common-cosmosdb-rest-response-headers)
+* [Codes d’état HTTP pour Azure Cosmos DB](/rest/api/cosmos-db/http-status-codes-for-cosmosdb) 
+* [En-têtes de réponse REST courants d’Azure Cosmos DB](/rest/api/cosmos-db/common-cosmosdb-rest-response-headers)
 * [TinkerPop Graph Driver Provider Requirements]( http://tinkerpop.apache.org/docs/current/dev/provider/#_graph_driver_provider_requirements) (Exigences liées aux fournisseurs de pilote de graphe TinkerPop)

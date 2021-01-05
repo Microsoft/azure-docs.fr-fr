@@ -1,6 +1,6 @@
 ---
-title: Haute disponibilité des machines virtuelles Azure pour SAP NetWeaver | Microsoft Docs
-description: Guide de haute disponibilité pour SAP NetWeaver sur machines virtuelles Azure
+title: Haute disponibilité des machines virtuelles Azure pour SAP NetWeaver
+description: Dans cet article, nous allons parler des machines virtuelles Azure haute disponibilité pour SAP NetWeaver.
 services: virtual-machines-windows,virtual-network,storage
 documentationcenter: saponazure
 author: rdeltcheva
@@ -10,20 +10,21 @@ tags: azure-resource-manager
 keywords: ''
 ms.assetid: 5e514964-c907-4324-b659-16dd825f6f87
 ms.service: virtual-machines-windows
+ms.subservice: workloads
 ms.topic: article
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure-services
 ms.date: 05/05/2017
 ms.author: radeltch
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: 8a881f1cbc93d4774e25833a5c57b4727cc2e4be
-ms.sourcegitcommit: 3abadafcff7f28a83a3462b7630ee3d1e3189a0e
+ms.openlocfilehash: 8e0baeb7eddb1d74a8d7708b04391134d2e188b2
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82594829"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96005671"
 ---
-# <a name="azure-virtual-machines-high-availability-for-sap-netweaver"></a>Haute disponibilité des machines virtuelles Azure pour SAP NetWeaver
+# <a name="high-availability-azure-virtual-machines-for-sap-netweaver"></a>Machines virtuelles Azure haute disponibilité pour SAP NetWeaver
 
 [1928533]:https://launchpad.support.sap.com/#/notes/1928533
 [1999351]:https://launchpad.support.sap.com/#/notes/1999351
@@ -36,7 +37,7 @@ ms.locfileid: "82594829"
 [azure-resource-manager/management/azure-subscription-service-limits]:../../../azure-resource-manager/management/azure-subscription-service-limits.md
 [azure-resource-manager/management/azure-subscription-service-limits-subscription]:../../../azure-resource-manager/management/azure-subscription-service-limits.md
 
-[dbms-guide]:../../virtual-machines-windows-sap-dbms-guide.md
+[dbms-guide]:dbms-guide.md
 
 [deployment-guide]:deployment-guide.md
 
@@ -171,7 +172,7 @@ Pour simplifier le déploiement et la configuration, dans cet article, nous util
 ## <a name="prerequisites"></a><a name="217c5479-5595-4cd8-870d-15ab00d4f84c"></a> Conditions préalables
 Avant de commencer, assurez-vous que vous remplissez les conditions préalables décrites dans les sections suivantes. Veillez également à consulter toutes les ressources répertoriées dans la section [Ressources][sap-ha-guide-2].
 
-Dans cet article, nous utilisons des modèles Azure Resource Manager pour [SAP NetWeaver à trois niveaux à l’aide de la fonctionnalité Disques managés](https://github.com/Azure/azure-quickstart-templates/tree/master/sap-3-tier-marketplace-image-md/). Pour une vue d’ensemble utile des modèles Azure Resource Manager SAP, consultez [cet article](https://blogs.msdn.microsoft.com/saponsqlserver/2016/05/16/azure-quickstart-templates-for-sap/).
+Dans cet article, nous utilisons des modèles Azure Resource Manager pour [SAP NetWeaver à trois niveaux à l’aide de la fonctionnalité Disques managés](https://github.com/Azure/azure-quickstart-templates/tree/master/sap-3-tier-marketplace-image-md/). Pour une vue d’ensemble utile des modèles Azure Resource Manager SAP, consultez [cet article](/archive/blogs/saponsqlserver/azure-quickstart-templates-for-sap).
 
 ## <a name="resources"></a><a name="42b8f600-7ba3-4606-b8a5-53c4f026da08"></a> Ressources
 Ces articles couvrent les déploiements SAP dans Azure :
@@ -238,7 +239,7 @@ Lorsque vous utilisez le clustering de basculement Windows Server, vous pouvez c
 * **Nœud et disque majoritaires** : chaque nœud et un disque désigné dans l’espace de stockage en cluster (disque témoin) peuvent voter lorsqu’ils sont disponibles et en communication. Le cluster fonctionne uniquement avec une majorité de voix, c’est-à-dire plus de la moitié. Ce mode est pertinent dans un environnement de cluster comprenant un nombre pair de nœuds. Si la moitié des nœuds et le disque sont en ligne, le cluster conserve son état d’intégrité.
 * **Nœud et partage de fichiers majoritaires** : chaque nœud et un partage de fichiers désigné (témoin de partage de fichiers) créé par l’administrateur peuvent voter, que les nœuds et le partage de fichiers soient ou non disponibles et en communication. Le cluster fonctionne uniquement avec une majorité de voix, c’est-à-dire plus de la moitié. Ce mode est pertinent dans un environnement de cluster comprenant un nombre pair de nœuds. Il est similaire au mode Nœud et disque majoritaires, mais il utilise un témoin de partage de fichiers au lieu d’un disque témoin. Ce mode est facile à implémenter, mais si le partage de fichiers lui-même n’est pas hautement disponible, il risque de devenir un point de défaillance unique.
 * **Sans majorité : Disque uniquement**. un quorum est atteint pour le cluster si un nœud est disponible et en communication avec un disque spécifique dans l’espace de stockage en cluster. Seuls les nœuds qui sont également en communication avec ce disque peuvent rejoindre le cluster. Nous vous déconseillons d’utiliser ce mode.
- 
+
 
 ## <a name="windows-server-failover-clustering-on-premises"></a><a name="fdfee875-6e66-483a-a343-14bbaee33275"></a> Clustering de basculement Windows Server local
 La figure 1 illustre un cluster de deux nœuds. Si la connexion réseau entre les nœuds échoue et les deux nœuds restent opérationnels, un disque ou un partage de fichiers quorum détermine quel nœud continuera de fournir les applications et services du cluster. Le nœud qui a accès au disque ou au partage de fichiers quorum est celui qui garantit que les services restent disponibles.
@@ -320,7 +321,7 @@ Vous devez placer toutes les machines virtuelles qui hébergent des instances de
 * Toutes les machines virtuelles font partie du même domaine de mise à niveau. Un domaine de mise à niveau permet par exemple d’éviter que les machines virtuelles soient mises à jour en même temps lors d’une interruption de maintenance planifiée.
 * Toutes les machines virtuelles font partie du même domaine d’erreur. Un domaine d’erreur permet par exemple de s’assurer que les machines virtuelles soient déployées de sorte qu’aucun point de défaillance unique n’affecte la disponibilité de l’ensemble des machines virtuelles.
 
-En savoir plus sur la [gestion de la disponibilité des machines virtuelles][virtual-machines-manage-availability].
+Découvrez comment [Gérer la disponibilité des machines virtuelles][../manage-availability.md].
 
 Disque non managé uniquement : Comme le compte de stockage Azure constitue un point de défaillance unique potentiel, il est important de disposer d’au moins deux comptes de stockage Azure sur lesquels au moins deux machines virtuelles sont distribuées. Dans une configuration idéale, les disques de chaque machine virtuelle exécutant une instance de dialogue SAP sont déployés dans un compte de stockage différent.
 
@@ -771,7 +772,7 @@ Pour ajouter des entrées de registre aux deux nœuds du cluster de l’instance
 | Nom de la variable |`KeepAliveTime` |
 | Type de variable |REG_DWORD (décimal) |
 | Valeur |120 000 |
-| Lien vers la documentation |[https://technet.microsoft.com/library/cc957549.aspx](https://technet.microsoft.com/library/cc957549.aspx) |
+| Lien vers la documentation |[https://technet.microsoft.com/library/cc957549.aspx](/previous-versions/windows/it-pro/windows-2000-server/cc957549(v=technet.10)) |
 
 _**Tableau 3 :** Changer le premier paramètre TCP/IP_
 
@@ -782,7 +783,7 @@ Puis, ajoutez ces entrées de registre Windows aux deux nœuds de cluster Window
 | Nom de la variable |`KeepAliveInterval` |
 | Type de variable |REG_DWORD (décimal) |
 | Valeur |120 000 |
-| Lien vers la documentation |[https://technet.microsoft.com/library/cc957548.aspx](https://technet.microsoft.com/library/cc957548.aspx) |
+| Lien vers la documentation |[https://technet.microsoft.com/library/cc957548.aspx](/previous-versions/windows/it-pro/windows-2000-server/cc957548(v=technet.10)) |
 
 _**Tableau 4 :** Changer le deuxième paramètre TCP/IP_
 
@@ -1328,7 +1329,7 @@ Vous pouvez facilement tester et surveiller le basculement et la réplication de
 
 ### <a name="sap-ascsscs-instance-is-running-on-cluster-node-a"></a><a name="65fdef0f-9f94-41f9-b314-ea45bbfea445"></a> L’instance SAP ASCS/SCS s’exécute sur le nœud de cluster A
 
-Le groupe de clusters **SAP PR1**s’exécute sur le nœud de cluster A, par exemple sur **pr1-ascs-0**. Affectez le lecteur de disque partagé S, qui fait partie du groupe de clusters **SAP PR1** et que l’instance ASCS/SCS utilise, au nœud de cluster A.
+Le groupe de clusters **SAP PR1** s’exécute sur le nœud de cluster A, par exemple sur **pr1-ascs-0**. Affectez le lecteur de disque partagé S, qui fait partie du groupe de clusters **SAP PR1** et que l’instance ASCS/SCS utilise, au nœud de cluster A.
 
 ![Figure 61 : Gestionnaire du cluster de basculement : Le groupe de cluster SAP <SID> s’exécute sur le nœud de cluster A][sap-ha-guide-figure-5000]
 

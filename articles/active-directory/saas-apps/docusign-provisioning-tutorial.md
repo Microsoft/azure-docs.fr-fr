@@ -1,32 +1,27 @@
 ---
-title: 'Didacticiel : configurer DocuSign pour l’approvisionnement automatique d’utilisateurs avec Azure Active Directory | Microsoft Docs'
+title: 'Tutoriel : Configurer DocuSign pour l’approvisionnement automatique d’utilisateurs avec Azure Active Directory | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et DocuSign.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: daveba
-ms.assetid: 294cd6b8-74d7-44bc-92bc-020ccd13ff12
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: article
-ms.date: 01/26/2018
+ms.topic: tutorial
+ms.date: 10/21/2020
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: 88b65c8e8962ad8420ded47da1a343672123c589
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: dc3f307a21b746981a84b1c0747c4b22c448541f
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77058176"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96349903"
 ---
-# <a name="tutorial-configure-docusign-for-automatic-user-provisioning"></a>Didacticiel : configurer DocuSign pour l’approvisionnement automatique d’utilisateurs
+# <a name="tutorial-configure-docusign-for-automatic-user-provisioning"></a>Tutoriel : Configurer DocuSign pour l’approvisionnement automatique d’utilisateurs
 
 L’objectif de ce didacticiel est de vous montrer les étapes à effectuer dans DocuSign et Azure AD pour approvisionner et retirer automatiquement des comptes utilisateur d’Azure AD vers DocuSign.
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 Le scénario décrit dans ce didacticiel part du principe que vous disposez des éléments suivants :
 
@@ -40,7 +35,7 @@ Azure Active Directory utilise un concept appelé « affectations » pour dét
 
 Avant de configurer et d’activer le service d’approvisionnement, vous devez déterminer quels utilisateurs et/ou groupes dans Azure AD représentent les utilisateurs qui ont besoin d’accéder à votre application DocuSign. Une fois que vous avez choisi, vous pouvez assigner ces utilisateurs à votre application DocuSign en suivant les instructions fournies ici :
 
-[Affecter un utilisateur ou un groupe à une application d’entreprise](https://docs.microsoft.com/azure/active-directory/active-directory-coreapps-assign-user-azure-portal)
+[Affecter un utilisateur ou un groupe à une application d’entreprise](../manage-apps/assign-user-or-group-access-portal.md)
 
 ### <a name="important-tips-for-assigning-users-to-docusign"></a>Conseils importants pour l’affectation d’utilisateurs à DocuSign
 
@@ -70,13 +65,16 @@ L’objectif de cette section est d’expliquer comment activer l’approvisionn
 
 1. Définissez le **Mode d’approvisionnement** sur **Automatique**. 
 
-    ![approvisionnement](./media/docusign-provisioning-tutorial/provisioning.png)
+    ![Capture d’écran de l’onglet Provisionnement pour DocuSign dans le portail Azure. Le mode de provisionnement est défini sur Automatique et les champs Nom d’utilisateur administrateur, Mot de passe et Tester la connexion sont en évidence.](./media/docusign-provisioning-tutorial/provisioning.png)
 
 1. Dans la section **Informations d’identification de l’administrateur**, fournissez les paramètres de configuration suivants :
    
     a. Dans la zone de texte **Nom d’utilisateur Admin**, tapez le nom d’un compte DocuSign auquel le profil **System Administrator** (Administrateur système) est affecté dans DocuSign.com.
    
     b. Dans la zone de texte **Mot de passe d’administrateur**, entrez le mot de passe de ce compte.
+
+> [!NOTE]
+> Si l’authentification unique et le provisionnement d’utilisateurs sont configurés, les informations d’identification d’autorisation utilisées pour le provisionnement doivent être configurées pour fonctionner avec l’authentification unique et le nom d’utilisateur/mot de passe.
 
 1. Sur le portail Azure, cliquez sur **Tester la connexion** pour vérifier qu’Azure AD peut se connecter à votre application DocuSign.
 
@@ -95,6 +93,12 @@ L’objectif de cette section est d’expliquer comment activer l’approvisionn
 Cette commande démarre la synchronisation initiale des utilisateurs affectés à DocuSign dans la section Utilisateurs et Groupes. La synchronisation initiale prend plus de temps que les synchronisations suivantes, qui se produisent toutes les 40 minutes environ tant que le service est en cours d’exécution. Vous pouvez utiliser la section **Détails de la synchronisation** pour surveiller la progression et suivre les liens vers les journaux d’activité de provisionnement, qui décrivent toutes les actions effectuées par le service de provisionnement dans votre application DocuSign.
 
 Pour plus d’informations sur la lecture des journaux d’activité d’approvisionnement Azure AD, consultez [Création de rapports sur l’approvisionnement automatique de comptes d’utilisateur](../app-provisioning/check-status-user-account-provisioning.md).
+
+## <a name="troubleshooting-tips"></a>Conseils de dépannage
+* L’approvisionnement d’un rôle ou d’un profil d’autorisation pour un utilisateur dans Docusign peut être effectué à l’aide d’une expression dans vos mappages d’attributs à l’aide des fonctions [switch](../app-provisioning/functions-for-customizing-application-data.md#switch) et [singleAppRoleAssignment](../app-provisioning/functions-for-customizing-application-data.md#singleapproleassignment). Par exemple, l’expression ci-dessous approvisionne l’ID « 8032066 » lorsqu’un utilisateur a le rôle « administrateur DS » affecté dans Azure AD. Aucun profil d’autorisation n’est approvisionné si l’utilisateur n’est pas affecté à un rôle dans Azure AD. L’ID peut être récupéré à partir du [portail](https://support.docusign.com/articles/Default-settings-for-out-of-the-box-DocuSign-Permission-Profiles) DocuSign.
+
+Switch(SingleAppRoleAssignment([appRoleAssignments])," ", "8032066", "DS Admin")
+
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 

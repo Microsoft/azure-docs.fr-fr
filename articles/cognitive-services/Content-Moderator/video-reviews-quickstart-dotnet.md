@@ -10,12 +10,13 @@ ms.subservice: content-moderator
 ms.topic: conceptual
 ms.date: 10/24/2019
 ms.author: pafarley
-ms.openlocfilehash: 7130ed43183d64b00f8f5ef1697b9a3b456ad396
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: d9f80de5a18e27de4a9f8e85613e3c2eee6c111c
+ms.sourcegitcommit: 48cb2b7d4022a85175309cf3573e72c4e67288f5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "72931675"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96853473"
 ---
 # <a name="create-video-reviews-using-net"></a>Créer des révisions de vidéos à l’aide de .NET
 
@@ -157,7 +158,7 @@ Créez une révision de vidéo avec **ContentModeratorClient.Reviews.CreateVideo
 **CreateVideoReviews** a les paramètres obligatoires suivants :
 1. Une chaîne contenant un type MIME, qui doit être « application/json ». 
 1. Le nom de votre équipe Content Moderator.
-1. Un objet **IList\<CreateVideoReviewsBodyItem>** . Chaque objet **CreateVideoReviewsBodyItem** représente une révision de vidéo. Ce guide de démarrage rapide crée une révision à la fois.
+1. Un objet **IList\<CreateVideoReviewsBodyItem>**. Chaque objet **CreateVideoReviewsBodyItem** représente une révision de vidéo. Ce guide de démarrage rapide crée une révision à la fois.
 
 **CreateVideoReviewsBodyItem** a plusieurs propriétés. Vous définissez au moins les propriétés suivantes :
 - **Content**. URL de la vidéo à réviser.
@@ -165,7 +166,7 @@ Créez une révision de vidéo avec **ContentModeratorClient.Reviews.CreateVideo
 - **Status**. Définissez la valeur sur « Unpublished ». Si vous ne définissez pas cette propriété, sa valeur par défaut est « Pending », ce qui signifie que la révision de la vidéo est publiée et en attente d’une révision par un opérateur humain. Une fois qu’une révision de vidéo est publiée, vous ne pouvez plus y ajouter de trames vidéo, de transcription ou de résultat de la modération des transcriptions.
 
 > [!NOTE]
-> **CreateVideoReviews** retourne une chaîne IList\<string>. Chacune de ces chaînes contient un ID de révision de vidéo. Ces ID sont des GUID et sont différents de la valeur de la propriété **ContentId**. 
+> **CreateVideoReviews** retourne un IList\<string>. Chacune de ces chaînes contient un ID de révision de vidéo. Ces ID sont des GUID et sont différents de la valeur de la propriété **ContentId**. 
 
 Ajoutez la définition de méthode suivante à la classe Program de l’espace de noms VideoReviews.
 
@@ -215,18 +216,18 @@ Vous ajoutez des trames vidéo à une révision de vidéo avec **ContentModerato
 1. Une chaîne contenant un type MIME, qui doit être « application/json ».
 1. Le nom de votre équipe Content Moderator.
 1. L’ID de révision de vidéo retourné par **CreateVideoReviews**.
-1. Un objet **IList\<VideoFrameBodyItem>** . Chaque objet **VideoFrameBodyItem** représente une trame vidéo.
+1. Un objet **IList\<VideoFrameBodyItem>**. Chaque objet **VideoFrameBodyItem** représente une trame vidéo.
 
 **VideoFrameBodyItem** a les propriétés suivantes :
 - **Timestamp**. Chaîne qui contient, en secondes, l’heure dans la vidéo à partir de laquelle la trame vidéo a été prise.
 - **FrameImage**. URL de la trame vidéo.
-- **Metadata**. Un objet IList\<VideoFrameBodyItemMetadataItem>. **VideoFrameBodyItemMetadataItem** est simplement une paire clé/valeur. Les clés valides sont notamment les suivantes :
+- **Metadata**. Un IList\<VideoFrameBodyItemMetadataItem>. **VideoFrameBodyItemMetadataItem** est simplement une paire clé/valeur. Les clés valides sont notamment les suivantes :
 - **reviewRecommended**. True si une révision par un opérateur humain de la trame vidéo est recommandée.
 - **adultScore**. Valeur comprise entre 0 et 1 qui évalue la gravité du contenu pour adultes dans la trame vidéo.
 - **a**. True si la vidéo contient du contenu pour adultes.
 - **racyScore**. Valeur comprise entre 0 et 1 qui évalue la gravité du contenu osé dans la trame vidéo.
 - **r**. True si la trame vidéo contient du contenu osé.
-- **ReviewerResultTags**. Un objet IList\<VideoFrameBodyItemReviewerResultTagsItem>. **VideoFrameBodyItemReviewerResultTagsItem** est simplement une paire clé/valeur. Une application peut utiliser ces balises pour organiser des trames vidéo.
+- **ReviewerResultTags**. Un IList\<VideoFrameBodyItemReviewerResultTagsItem>. **VideoFrameBodyItemReviewerResultTagsItem** est simplement une paire clé/valeur. Une application peut utiliser ces balises pour organiser des trames vidéo.
 
 > [!NOTE]
 > Ce guide de démarrage rapide génère des valeurs aléatoires pour les propriétés **adultScore** et **racyScore**. Dans une application de production, vous devez obtenir ces valeurs à partir du [service de modération des vidéos](video-moderation-api.md), déployé comme un espace Azure Media Service.
@@ -548,7 +549,3 @@ Enfin, la révision de vidéo s’affiche dans votre compte de l’outil de rév
 ## <a name="next-steps"></a>Étapes suivantes
 
 Obtenez le [SDK Content Moderator pour .NET](https://www.nuget.org/packages/Microsoft.Azure.CognitiveServices.ContentModerator/) et la [solution Visual Studio](https://github.com/Azure-Samples/cognitive-services-dotnet-sdk-samples/tree/master/ContentModerator) pour ce guide de démarrage rapide et d’autres guides de démarrage rapide Content Moderator pour .NET.
-
-Découvrez comment ajouter une [modération des transcriptions](video-transcript-moderation-review-tutorial-dotnet.md) à la révision de vidéo. 
-
-Consultez le tutoriel détaillé sur le développement d’une [solution complète de modération de vidéos](video-transcript-moderation-review-tutorial-dotnet.md).

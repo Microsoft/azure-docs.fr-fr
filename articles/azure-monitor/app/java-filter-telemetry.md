@@ -3,14 +3,20 @@ title: Filtrer les données de télémétrie d’Azure Application Insights dans
 description: Réduisez le trafic de télémétrie en excluant les événements que vous n’avez pas besoin de surveiller.
 ms.topic: conceptual
 ms.date: 3/14/2019
-ms.openlocfilehash: 020e54132e0ca0a9f9ccf0236f94515877015637
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+author: MS-jgol
+ms.custom: devx-track-java
+ms.author: jgol
+ms.openlocfilehash: 1e37b38170fb32aa4f9bdb64318ac36767c4bf78
+ms.sourcegitcommit: ad677fdb81f1a2a83ce72fa4f8a3a871f712599f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77659915"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97653144"
 ---
 # <a name="filter-telemetry-in-your-java-web-app"></a>Filtrer la télémétrie dans votre application web Java
+
+> [!IMPORTANT]
+> L’approche recommandée pour surveiller des applications Java consiste à utiliser l’instrumentation automatique sans modifier le code. Suivez les instructions pour l’[agent Application Insights agent Java 3.0](./java-in-process-agent.md).
 
 Les filtres offrent un moyen de sélectionner les données de télémétrie que votre [application web Java envoie à Application Insights](java-get-started.md). Vous pouvez utiliser certains filtres prêts à l’emploi, et également écrire vos propres filtres personnalisés.
 
@@ -23,7 +29,7 @@ Les filtres prêts à l’emploi incluent :
 
 > [!NOTE]
 > Les filtres faussent les mesures de votre application. Par exemple, vous pouvez décider que, pour diagnostiquer les réponses lentes, vous allez définir un filtre permettant d’ignorer les temps de réponse rapides. Toutefois, vous devez être conscient que les temps de réponse moyens signalés par Application Insights seront plus lents que la vitesse réelle, et que le nombre de demandes sera inférieur au nombre réel.
-> Si cela pose problème, utilisez plutôt [l’échantillonnage](../../azure-monitor/app/sampling.md).
+> Si cela pose problème, utilisez plutôt [l’échantillonnage](./sampling.md).
 
 ## <a name="setting-filters"></a>Définition de filtres
 
@@ -77,10 +83,7 @@ Dans ApplicationInsights.xml, ajoutez une section `TelemetryProcessors` comme da
 
 ```
 
-
-
-
-[Inspectez l’ensemble complet des processeurs intégrés](https://github.com/Microsoft/ApplicationInsights-Java/tree/master/core/src/main/java/com/microsoft/applicationinsights/internal/processor).
+[Inspectez l’ensemble complet des processeurs intégrés](https://github.com/Microsoft/ApplicationInsights-Java/tree/master/core/src/main/java/com/microsoft/applicationinsights/internal).
 
 ## <a name="built-in-filters"></a>Filtres intégrés
 
@@ -152,7 +155,7 @@ Exclure les données de télémétrie pour des sources synthétiques spécifique
 
 ### <a name="telemetry-event-filter"></a>Filtre Événements de télémétrie
 
-Filtre les événements personnalisés (consignés à l’aide de [TrackEvent()](../../azure-monitor/app/api-custom-events-metrics.md#trackevent)).
+Filtre les événements personnalisés (consignés à l’aide de [TrackEvent()](./api-custom-events-metrics.md#trackevent)).
 
 
 ```XML
@@ -168,7 +171,7 @@ Filtre les événements personnalisés (consignés à l’aide de [TrackEvent()]
 
 ### <a name="trace-telemetry-filter"></a>Filtre Télémétrie des traces
 
-Filtre les traces de journaux (consignés à l’aide de [TrackTrace()](../../azure-monitor/app/api-custom-events-metrics.md#tracktrace) ou d’un [collecteur framework de journalisation](java-trace-logs.md)).
+Filtre les traces de journaux (consignés à l’aide de [TrackTrace()](./api-custom-events-metrics.md#tracktrace) ou d’un [collecteur framework de journalisation](java-trace-logs.md)).
 
 ```XML
 
@@ -200,32 +203,31 @@ Dans votre code, créez une classe qui implémente `TelemetryProcessor`:
 
     public class SuccessFilter implements TelemetryProcessor {
 
-       /* Any parameters that are required to support the filter.*/
-       private final String successful;
+        /* Any parameters that are required to support the filter.*/
+        private final String successful;
 
-       /* Initializers for the parameters, named "setParameterName" */
-       public void setNotNeeded(String successful)
-       {
-          this.successful = successful;
-       }
-
-       /* This method is called for each item of telemetry to be sent.
-          Return false to discard it.
-          Return true to allow other processors to inspect it. */
-       @Override
-       public boolean process(Telemetry telemetry) {
-        if (telemetry == null) { return true; }
-        if (telemetry instanceof RequestTelemetry)
+        /* Initializers for the parameters, named "setParameterName" */
+        public void setNotNeeded(String successful)
         {
-            RequestTelemetry requestTelemetry = (RequestTelemetry)telemetry;
-            return request.getSuccess() == successful;
+            this.successful = successful;
         }
-        return true;
-       }
+
+        /* This method is called for each item of telemetry to be sent.
+           Return false to discard it.
+           Return true to allow other processors to inspect it. */
+        @Override
+        public boolean process(Telemetry telemetry) {
+            if (telemetry == null) { return true; }
+            if (telemetry instanceof RequestTelemetry)
+            {
+                RequestTelemetry requestTelemetry = (RequestTelemetry)    telemetry;
+                return request.getSuccess() == successful;
+            }
+            return true;
+        }
     }
 
 ```
-
 
 ### <a name="2-invoke-your-filter-in-the-configuration-file"></a>2. Appeler votre filtre dans le fichier de configuration
 
@@ -268,4 +270,5 @@ Vous devez créer vos propres paramètres de filtre dans `application.properties
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* [Échantillonnage](../../azure-monitor/app/sampling.md) : envisagez l’échantillonnage comme une possibilité ne faussant pas vos mesures.
+* [Échantillonnage](./sampling.md) : envisagez l’échantillonnage comme une possibilité ne faussant pas vos mesures.
+

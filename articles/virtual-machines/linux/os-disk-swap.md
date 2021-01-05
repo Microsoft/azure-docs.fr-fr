@@ -5,15 +5,15 @@ author: cynthn
 ms.service: virtual-machines
 ms.subservice: disks
 ms.workload: infrastructure-services
-ms.topic: article
+ms.topic: how-to
 ms.date: 04/24/2018
 ms.author: cynthn
-ms.openlocfilehash: a8c879ae56eb22d9817841667d33e37109a4f63d
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: adcbc5b0ba0056c79576e8d4c8ded2150b206513
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81759401"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87371870"
 ---
 # <a name="change-the-os-disk-used-by-an-azure-vm-using-the-cli"></a>Remplacer le disque du système d’exploitation utilisé par une machine virtuelle Azure à l’aide de l’interface CLI
 

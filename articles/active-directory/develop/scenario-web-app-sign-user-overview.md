@@ -11,20 +11,16 @@ ms.workload: identity
 ms.date: 09/17/2019
 ms.author: jmprieur
 ms.custom: aaddev, identityplatformtop40
-ms.openlocfilehash: 65d254cec5735c54e19f5adfde57fb6aed776a2c
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 38ed7fb2930463e6657422e851a73f2b3b011f35
+ms.sourcegitcommit: 6109f1d9f0acd8e5d1c1775bc9aa7c61ca076c45
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80881483"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94443583"
 ---
 # <a name="scenario-web-app-that-signs-in-users"></a>Scénario : Application web qui connecte les utilisateurs
 
 Découvrez comment créer une application web qui utilise la plateforme d’identités Microsoft pour connecter les utilisateurs.
-
-## <a name="prerequisites"></a>Prérequis
-
-[!INCLUDE [Prerequisites](../../../includes/active-directory-develop-scenarios-prerequisites.md)]
 
 ## <a name="getting-started"></a>Prise en main
 
@@ -32,35 +28,31 @@ Découvrez comment créer une application web qui utilise la plateforme d’iden
 
 Si vous souhaitez créer votre première application web (ASP.NET Core) portable qui connecte les utilisateurs, suivez ce guide de démarrage rapide :
 
-> [!div class="nextstepaction"]
-> [Démarrage rapide : application web ASP.NET Core qui connecte les utilisateurs](quickstart-v2-aspnet-core-webapp.md)
+[Démarrage rapide : application web ASP.NET Core qui connecte les utilisateurs](quickstart-v2-aspnet-core-webapp.md)
 
 # <a name="aspnet"></a>[ASP.NET](#tab/aspnet)
 
 Si vous souhaitez savoir comment ajouter la connexion à une application web ASP.NET existante, essayez le démarrage rapide suivant :
 
-> [!div class="nextstepaction"]
-> [Démarrage rapide : Application web ASP.NET qui connecte les utilisateurs](quickstart-v2-aspnet-webapp.md)
+[Démarrage rapide : Application web ASP.NET qui connecte les utilisateurs](quickstart-v2-aspnet-webapp.md)
 
 # <a name="java"></a>[Java](#tab/java)
 
 Si vous êtes développeur Java, essayez le démarrage rapide suivant :
 
-> [!div class="nextstepaction"]
-> [Démarrage rapide : Ajouter la connexion à Microsoft sur une application web Java](quickstart-v2-java-webapp.md)
+[Démarrage rapide : Ajouter la connexion avec Microsoft à une application web Java](quickstart-v2-java-webapp.md)
 
 # <a name="python"></a>[Python](#tab/python)
 
 Si vous développez avec Python, essayez le démarrage rapide suivant :
 
-> [!div class="nextstepaction"]
-> [Démarrage rapide : Ajouter la connexion à Microsoft sur une application web Python](quickstart-v2-python-webapp.md)
+[Démarrage rapide : Ajouter la connexion avec Microsoft à une application web Python](quickstart-v2-python-webapp.md)
 
 ---
 
 ## <a name="overview"></a>Vue d’ensemble
 
-Vous allez ajouter l’authentification à votre application web afin qu’elle puisse connecter des utilisateurs. L’ajout de l’authentification permet à votre application web d’accéder aux informations de profil limitées afin de personnaliser l’expérience des utilisateurs. 
+Vous allez ajouter l’authentification à votre application web afin qu’elle puisse connecter des utilisateurs. L’ajout de l’authentification permet à votre application web d’accéder aux informations de profil limitées afin de personnaliser l’expérience des utilisateurs.
 
 Les applications web authentifient un utilisateur dans un navigateur web. Dans ce scénario, l’application web dirige le navigateur de l’utilisateur pour connecter ce dernier à Azure Active Directory (Azure AD). Azure AD renvoie une réponse de connexion via le navigateur de l’utilisateur, celle-ci contenant des revendications relatives à l’utilisateur dans un jeton de sécurité. Connecter des utilisateurs permet de tirer parti du protocole standard [Open ID Connect](./v2-protocols-oidc.md) simplifié par l’utilisation de [bibliothèques](scenario-web-app-sign-user-app-configuration.md#libraries-for-protecting-web-apps) d’intergiciels.
 
@@ -77,26 +69,26 @@ Lors d’une deuxième phase, vous pouvez permettre à l’application d’appel
 - Dans le code de l’application, vous devez indiquer l’autorité à laquelle votre application web délègue la connexion. Vous souhaiterez peut-être personnaliser la validation du jeton (en particulier dans les scénarios partenaires).
 - Les applications web prennent en charge tous les types de comptes. Pour plus d’informations, consultez l’article [Types de comptes pris en charge](v2-supported-account-types.md).
 
+## <a name="recommended-reading"></a>Lectures recommandées
+
+[!INCLUDE [recommended-topics](../../../includes/active-directory-develop-scenarios-prerequisites.md)]
+
 ## <a name="next-steps"></a>Étapes suivantes
 
 # <a name="aspnet-core"></a>[ASP.NET Core](#tab/aspnetcore)
 
-> [!div class="nextstepaction"]
-> [Inscription d’application](https://docs.microsoft.com/azure/active-directory/develop/scenario-web-app-sign-user-app-registration?tabs=aspnetcore)
+Passez à l’article suivant de ce scénario, [Inscription d’application](./scenario-web-app-sign-user-app-registration.md?tabs=aspnetcore).
 
 # <a name="aspnet"></a>[ASP.NET](#tab/aspnet)
 
-> [!div class="nextstepaction"]
-> [Inscription d’application](https://docs.microsoft.com/azure/active-directory/develop/scenario-web-app-sign-user-app-registration?tabs=aspnet)
+Passez à l’article suivant de ce scénario, [Inscription d’application](./scenario-web-app-sign-user-app-registration.md?tabs=aspnet).
 
 # <a name="java"></a>[Java](#tab/java)
 
-> [!div class="nextstepaction"]
-> [Inscription d’application](https://docs.microsoft.com/azure/active-directory/develop/scenario-web-app-sign-user-app-registration?tabs=java)
+Passez à l’article suivant de ce scénario, [Inscription d’application](./scenario-web-app-sign-user-app-registration.md?tabs=java).
 
 # <a name="python"></a>[Python](#tab/python)
 
-> [!div class="nextstepaction"]
-> [Inscription d’application](https://docs.microsoft.com/azure/active-directory/develop/scenario-web-app-sign-user-app-registration?tabs=python)
+Passez à l’article suivant de ce scénario, [Inscription d’application](./scenario-web-app-sign-user-app-registration.md?tabs=python).
 
 ---

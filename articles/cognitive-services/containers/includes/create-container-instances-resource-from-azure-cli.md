@@ -9,12 +9,12 @@ ms.service: cognitive-services
 ms.topic: include
 ms.date: 04/01/2020
 ms.author: aahi
-ms.openlocfilehash: 9fd597c7e6e369cfea36c882dfd2cb12e748a843
-ms.sourcegitcommit: 50673ecc5bf8b443491b763b5f287dde046fdd31
+ms.openlocfilehash: 903c36bc228faaac4cbf13fd00ca1b398e2f8add
+ms.sourcegitcommit: e7152996ee917505c7aba707d214b2b520348302
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83696406"
+ms.lasthandoff: 12/20/2020
+ms.locfileid: "97704836"
 ---
 ## <a name="create-an-azure-container-instance-resource-from-the-azure-cli"></a>Créer une ressource d’instance de conteneur Azure depuis Azure CLI
 
@@ -25,7 +25,7 @@ apiVersion: 2018-10-01
 location: # < Valid location >
 name: # < Container Group name >
 properties:
-  imageRegistryCredentials: # This is only required if you are pulling a non-public image that requires authentication to access.
+  imageRegistryCredentials: # This is only required if you are pulling a non-public image that requires authentication to access. For example Text Analytics for health.
   - server: containerpreview.azurecr.io
     username: # < The username for the preview container registry >
     password: # < The password for the preview container registry >
@@ -77,9 +77,9 @@ La sortie de la commande est `Running...` si valide. Un peu après, la sortie de
 > [!TIP]
 > Prêtez attention aux emplacements des offres d’Azure Cognitive Service en préversion, car le YAML devra être ajusté en conséquence pour correspondre à l’emplacement.
 
-[azure-container-create]: https://docs.microsoft.com/cli/azure/container?view=azure-cli-latest#az-container-create
-[template-format]: https://docs.microsoft.com/azure/templates/Microsoft.ContainerInstance/2018-10-01/containerGroups#template-format
+[azure-container-create]: /cli/azure/container#az-container-create
+[template-format]: /azure/templates/Microsoft.ContainerInstance/2018-10-01/containerGroups#template-format
 [aci-yaml-ref]: ../../../container-instances/container-instances-reference-yaml.md
 [repositories-and-images]: ../../cognitive-services-container-support.md#container-repositories-and-images
-[location-to-resource]: ../../../container-instances/container-instances-region-availability.md#availability---general
+[location-to-resource]: ../../../container-instances/container-instances-region-availability.md
 [secure-values]: ../../../container-instances/container-instances-environment-variables.md#secure-values

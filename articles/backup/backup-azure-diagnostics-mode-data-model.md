@@ -3,12 +3,12 @@ title: Modèles de données des journaux Azure Monitor
 description: Dans cet article, découvrez les détails du modèle de données Azure Monitor Log Analytics pour les données de Sauvegarde Azure.
 ms.topic: conceptual
 ms.date: 02/26/2019
-ms.openlocfilehash: 72484923bc94e197cd195c0192b53feb3ef457ce
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 1fcb4eb0c584f792132f19c8c4d66289342aa36e
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82183685"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89020947"
 ---
 # <a name="log-analytics-data-model-for-azure-backup-data"></a>Modèle de données Log Analytics pour les données de sauvegarde Azure
 
@@ -18,7 +18,7 @@ Utilisez le modèle de données Log Analytics pour créer des alertes personnali
 
 > [!NOTE]
 >
-> Ce modèle de données fait référence au mode Diagnostics Azure pour envoyer des événements de diagnostic à Log Analytics (LA). Pour découvrir le modèle de données pour le nouveau mode spécifique aux ressources, vous pouvez vous reporter à l’article suivant : [Modèle de données pour les événements de diagnostics de Sauvegarde Azure](https://docs.microsoft.com/azure/backup/backup-azure-reports-data-model)
+> Ce modèle de données fait référence au mode Diagnostics Azure pour envoyer des événements de diagnostic à Log Analytics (LA). Pour découvrir le modèle de données pour le nouveau mode spécifique aux ressources, vous pouvez vous reporter à l’article suivant : [Modèle de données pour les événements de diagnostics de Sauvegarde Azure](./backup-azure-reports-data-model.md)
 
 ## <a name="using-azure-backup-data-model"></a>Utilisation du modèle de données de sauvegarde Azure
 
@@ -94,14 +94,14 @@ Ce tableau fournit des détails sur les associations d’éléments de sauvegard
 
 | Champ | Type de données | Description |
 | --- | --- | --- |
-| EventName_s |Texte |Ce champ représente le nom de cet événement, qui est toujours AzureBackupCentralReport |  
+| EventName_s |Texte |Ce champ représente le nom de cet événement. Il s’agit toujours d’AzureBackupCentralReport |  
 | BackupItemUniqueId_s |Texte |ID unique de l’élément de sauvegarde |
-| SchemaVersion_s |Texte |Ce champ indique la version actuelle du schéma, **V2** |
+| SchemaVersion_s |Texte |Ce champ indique la version actuelle du schéma Il s’agit de **V2** |
 | State_s |Texte |État actuel de l’objet association d’éléments de sauvegarde, par exemple, Actif, Supprimé |
 | BackupManagementType_s |Texte |Type de fournisseur pour le serveur exécutant la sauvegarde, par exemple, Machine virtuelle IaaS, Dossier de fichiers |
 | BackupItemSourceSize_s |Texte | Taille frontale de l’élément de sauvegarde |
 | BackupManagementServerUniqueId_s |Texte | Champ qui identifie de manière unique le serveur de gestion des sauvegardes par le biais duquel l’élément de sauvegarde est protégé, le cas échéant |
-| Category |Texte |Ce champ représente la catégorie des données de diagnostic transférées à Log Analytics, c’est-à-dire AzureBackupReport |
+| Category |Texte |Ce champ représente la catégorie des données de diagnostic transférées à Log Analytics. Il s’agit d’AzureBackupReport |
 | NomOpération |Texte |Ce champ représente le nom de l’opération en cours - Association d’éléments de sauvegarde |
 | Ressource |Texte |Ceci est la ressource pour laquelle les données sont collectées ; affiche le nom du coffre Recovery Services |
 | ProtectedContainerUniqueId_s |Texte |Identificateur unique du serveur protégé associé à l’élément de sauvegarde (il s’agissait de ProtectedServerUniqueId_s dans V1) |
@@ -144,7 +144,7 @@ Ce tableau fournit plus d’informations sur les champs liés aux travaux.
 | State_s |Texte |État actuel de l’objet travail, par exemple, Actif, Supprimé |
 | BackupManagementType_s |Texte |Type de fournisseur pour le serveur exécutant la sauvegarde, par exemple, Machine virtuelle IaaS, Dossier de fichiers |
 | NomOpération |Texte |Ce champ représente le nom de l’opération en cours - Travail |
-| Category |Texte |Ce champ représente la catégorie des données de diagnostic envoyées (push) aux journaux Azure Monitor, c’est-à-dire AzureBackupReport |
+| Category |Texte |Ce champ représente la catégorie des données de diagnostic envoyées (push) aux journaux Azure Monitor. Il s’agit d’AzureBackupReport |
 | Ressource |Texte |Ceci est la ressource pour laquelle les données sont collectées ; affiche le nom du coffre Recovery Services |
 | ProtectedServerUniqueId_s |Texte |Identificateur unique du serveur protégé associé au travail |
 | ProtectedContainerUniqueId_s |Texte | ID unique identifiant le conteneur protégé sur lequel le travail est exécuté |
@@ -174,12 +174,12 @@ Ce tableau fournit plus d’informations sur les champs liés à la stratégie.
 
 | Champ | Type de données | Versions applicables | Description |
 | --- | --- | --- | --- |
-| EventName_s |Texte ||Ce champ représente le nom de cet événement, qui est toujours AzureBackupCentralReport |
-| SchemaVersion_s |Texte ||Ce champ indique la version actuelle du schéma, **V2** |
+| EventName_s |Texte ||Ce champ représente le nom de cet événement. Il s’agit toujours d’AzureBackupCentralReport |
+| SchemaVersion_s |Texte ||Ce champ indique la version actuelle du schéma. Il s’agit de **V2** |
 | State_s |Texte ||État actuel de l’objet stratégie, par exemple, Actif, Supprimé |
 | BackupManagementType_s |Texte ||Type de fournisseur pour le serveur exécutant la sauvegarde, par exemple, Machine virtuelle IaaS, Dossier de fichiers |
 | NomOpération |Texte ||Ce champ représente le nom de l’opération en cours - Stratégie |
-| Category |Texte ||Ce champ représente la catégorie des données de diagnostic envoyées (push) aux journaux Azure Monitor, c’est-à-dire AzureBackupReport |
+| Category |Texte ||Ce champ représente la catégorie des données de diagnostic envoyées (push) aux journaux Azure Monitor. Il s’agit d’AzureBackupReport |
 | Ressource |Texte ||Ceci est la ressource pour laquelle les données sont collectées ; affiche le nom du coffre Recovery Services |
 | PolicyUniqueId_g |Texte ||ID unique d’identification de la stratégie |
 | PolicyName_s |Texte ||Nom de la stratégie définie |
@@ -196,7 +196,7 @@ Ce tableau fournit plus d’informations sur les champs liés à la stratégie.
 | MonthlyRetentionTimes_s |Texte ||Date et heure auxquelles la rétention mensuelle est configurée |
 | MonthlyRetentionFormat_s |Texte ||Type de configuration de la rétention mensuelle, par exemple, quotidienne pour une configuration quotidienne, hebdomadaire pour une configuration hebdomadaire |
 | MonthlyRetentionDaysOfTheWeek_s |Texte ||Jours de la semaine sélectionnés pour la rétention mensuelle |
-| MonthlyRetentionWeeksOfTheMonth_s |Texte ||Semaines du mois au cours desquelles la rétention mensuelle est configurée, par exemple, Première, Dernière, etc. |
+| MonthlyRetentionWeeksOfTheMonth_s |Texte ||Semaines du mois au cours desquelles la rétention mensuelle est configurée, par exemple Première, Dernière, etc. |
 | YearlyRetentionDuration_s |Nombre décimal ||Durée totale de rétention en années des sauvegardes configurées |
 | YearlyRetentionTimes_s |Texte ||Date et heure auxquelles la rétention annuelle est configurée |
 | YearlyRetentionMonthsOfTheYear_s |Texte ||Mois de l’année sélectionnés pour la rétention annuelle |
@@ -222,12 +222,12 @@ Ce tableau fournit des détails sur les associations de stratégies avec différ
 
 | Champ | Type de données | Versions applicables | Description |
 | --- | --- | --- | --- |
-| EventName_s |Texte ||Ce champ représente le nom de cet événement, qui est toujours AzureBackupCentralReport |
-| SchemaVersion_s |Texte ||Ce champ indique la version actuelle du schéma, **V2** |
+| EventName_s |Texte ||Ce champ représente le nom de cet événement. Il s’agit toujours d’AzureBackupCentralReport |
+| SchemaVersion_s |Texte ||Ce champ indique la version actuelle du schéma. Il s’agit de **V2** |
 | State_s |Texte ||État actuel de l’objet stratégie, par exemple, Actif, Supprimé |
 | BackupManagementType_s |Texte ||Type de fournisseur pour le serveur exécutant la sauvegarde, par exemple, Machine virtuelle IaaS, Dossier de fichiers |
 | NomOpération |Texte ||Ce champ représente le nom de l’opération en cours - Association de stratégies |
-| Category |Texte ||Ce champ représente la catégorie des données de diagnostic envoyées (push) aux journaux Azure Monitor, c’est-à-dire AzureBackupReport |
+| Category |Texte ||Ce champ représente la catégorie des données de diagnostic envoyées (push) aux journaux Azure Monitor. Il s’agit d’AzureBackupReport |
 | Ressource |Texte ||Ceci est la ressource pour laquelle les données sont collectées ; affiche le nom du coffre Recovery Services |
 | PolicyUniqueId_g |Texte ||ID unique d’identification de la stratégie |
 | VaultUniqueId_s |Texte ||ID unique du coffre auquel cette stratégie appartient |
@@ -266,12 +266,12 @@ Ce tableau fournit plus d’informations sur les champs liés au stockage.
 | --- | --- | --- |
 | CloudStorageInBytes_s |Nombre décimal |Stockage des sauvegardes dans le cloud utilisé par les sauvegardes, calculé en fonction de la dernière valeur (ce champ ne concerne que le schéma v1)|
 | ProtectedInstances_s |Nombre décimal |Nombre d’instances protégées utilisées pour calculer le stockage frontal dans la facturation, calculé en fonction de la dernière valeur |
-| EventName_s |Texte |Ce champ représente le nom de cet événement, qui est toujours AzureBackupCentralReport |
-| SchemaVersion_s |Texte |Ce champ indique la version actuelle du schéma, **V2** |
+| EventName_s |Texte |Ce champ représente le nom de cet événement. Il s’agit toujours d’AzureBackupCentralReport |
+| SchemaVersion_s |Texte |Ce champ indique la version actuelle du schéma. Il s’agit de **V2** |
 | State_s |Texte |État actuel de l’objet stockage, par exemple, Actif, Supprimé |
 | BackupManagementType_s |Texte |Type de fournisseur pour le serveur exécutant la sauvegarde, par exemple, Machine virtuelle IaaS, Dossier de fichiers |
 | NomOpération |Texte |Ce champ représente le nom de l’opération en cours - Stockage |
-| Category |Texte |Ce champ représente la catégorie des données de diagnostic envoyées (push) aux journaux Azure Monitor, c’est-à-dire AzureBackupReport |
+| Category |Texte |Ce champ représente la catégorie des données de diagnostic envoyées (push) aux journaux Azure Monitor. Il s’agit d’AzureBackupReport |
 | Ressource |Texte |Ceci est la ressource pour laquelle les données sont collectées ; affiche le nom du coffre Recovery Services |
 | ProtectedServerUniqueId_s |Texte |ID unique du serveur protégé pour lequel le stockage est calculé |
 | VaultUniqueId_s |Texte |ID unique du coffre pour lequel le stockage est calculé |
@@ -293,7 +293,7 @@ Ce tableau indique les champs de base liés au stockage utilisés pour la connex
 | Champ | Type de données | Description |
 | --- | --- |  --- |
 | StorageUniqueId_s |Texte |ID unique utilisé pour identifier l’entité de stockage |
-| SchemaVersion_s |Texte |Ce champ indique la version actuelle du schéma, **V2** |
+| SchemaVersion_s |Texte |Ce champ indique la version actuelle du schéma. Il s’agit de **V2** |
 | BackupItemUniqueId_s |Texte |ID unique utilisé pour identifier l’élément de sauvegarde associé à l’entité de stockage |
 | BackupManagementServerUniqueId_s |Texte |ID unique utilisé pour identifier le serveur de gestion des sauvegardes associé à l’entité de stockage|
 | VaultUniqueId_s |Texte |ID unique utilisé pour identifier le coffre associé à l’entité de stockage|
@@ -306,11 +306,11 @@ Ce tableau fournit plus d’informations sur les champs liés aux coffres.
 
 | Champ | Type de données | Description |
 | --- | --- | --- |
-| EventName_s |Texte |Ce champ représente le nom de cet événement, qui est toujours AzureBackupCentralReport |
-| SchemaVersion_s |Texte |Ce champ indique la version actuelle du schéma, **V2** |
+| EventName_s |Texte |Ce champ représente le nom de cet événement. Il s’agit toujours d’AzureBackupCentralReport |
+| SchemaVersion_s |Texte |Ce champ indique la version actuelle du schéma. Il s’agit de **V2** |
 | State_s |Texte |État actuel de l’objet coffre, par exemple, Actif, Supprimé |
 | NomOpération |Texte |Ce champ représente le nom de l’opération en cours - Coffre |
-| Category |Texte |Ce champ représente la catégorie des données de diagnostic envoyées (push) aux journaux Azure Monitor, c’est-à-dire AzureBackupReport |
+| Category |Texte |Ce champ représente la catégorie des données de diagnostic envoyées (push) aux journaux Azure Monitor. Il s’agit d’AzureBackupReport |
 | Ressource |Texte |Ceci est la ressource pour laquelle les données sont collectées ; affiche le nom du coffre Recovery Services |
 | VaultUniqueId_s |Texte |ID unique du coffre |
 | VaultName_s |Texte |Nom du coffre |
@@ -461,9 +461,37 @@ Voici quelques exemples pour vous aider à écrire des requêtes sur des donnée
     ````
 
 ## <a name="v1-schema-vs-v2-schema"></a>Schéma v1 et schéma v2
-Précédemment, les données de diagnostic pour l’agent de sauvegarde Azure et la sauvegarde de machine virtuelle Azure étaient envoyées dans la table Azure Diagnostics dans un schéma appelé ***schéma v1***. Par la suite, de nouvelles colonnes ont été ajoutées pour prendre en charge d’autres scénarios et charges de travail, et les données de diagnostic ont été déplacées dans un nouveau schéma appelé ***schéma v2***. 
+
+Précédemment, les données de diagnostic pour l’agent de sauvegarde Azure et la sauvegarde de machine virtuelle Azure étaient envoyées dans la table Azure Diagnostics dans un schéma appelé ***schéma v1***. Par la suite, de nouvelles colonnes ont été ajoutées pour prendre en charge d’autres scénarios et charges de travail, et les données de diagnostic ont été déplacées dans un nouveau schéma appelé ***schéma v2***.  
 
 Pour des raisons de compatibilité descendante, les données de diagnostic pour l’agent de sauvegarde Azure et la sauvegarde de machine virtuelle Azure sont actuellement envoyées à la table Azure Diagnostics à la fois dans les schémas v1 et v2 (le schéma v1 se dirigeant vers la dépréciation). Vous pouvez identifier les enregistrements Log Analytics du schéma v1 en filtrant les enregistrements pour SchemaVersion_s=="V1" dans vos requêtes de journal.
+
+Reportez-vous à la troisième colonne « Description » dans le [modèle de données](#using-azure-backup-data-model) décrit ci-dessus pour identifier les colonnes qui appartiennent au schéma v1 uniquement.
+
+### <a name="modifying-your-queries-to-use-the-v2-schema"></a>Modification de vos requêtes afin d’utiliser le schéma V2
+
+Comme le schéma V1 est sur le point d’être déprécié, nous vous recommandons d’utiliser uniquement le schéma V2 dans toutes vos requêtes personnalisées sur les données de diagnostics Sauvegarde Azure. Voici un exemple de mise à jour de vos requêtes pour supprimer les dépendances sur le schéma V1 :
+
+1. Déterminez si votre requête utilise un champ qui s’applique uniquement au schéma V1. Supposons que vous disposez d’une requête pour répertorier tous les éléments de sauvegarde et leurs serveurs protégés associés comme suit :
+
+    ````Kusto
+    AzureDiagnostics
+    | where Category=="AzureBackupReport"
+    | where OperationName=="BackupItemAssociation"
+    | distinct BackupItemUniqueId_s, ProtectedServerUniqueId_s
+    ````
+
+    La requête ci-dessus utilise le champ ProtectedServerUniqueId_s, applicable uniquement au schéma V1. L’équivalent de ce champ pour le schéma V2 est ProtectedContainerUniqueId_s (voir les tables ci-dessus). Le champ BackupItemUniqueId_s s’applique même au schéma V2, et le même champ peut être utilisé dans cette requête.
+
+2. Mettez à jour la requête pour utiliser les noms de champs du schéma V2. Nous vous recommandons d’utiliser le filtre **where SchemaVersion_s=="V2"** dans toutes vos requêtes afin que seuls les enregistrements correspondant au schéma V2 soient analysés par la requête :
+
+    ````Kusto
+    AzureDiagnostics
+    | where Category=="AzureBackupReport"
+    | where OperationName=="BackupItemAssociation"
+    | where SchemaVersion_s=="V2"
+    | distinct BackupItemUniqueId_s, ProtectedContainerUniqueId_s
+    ````
 
 ## <a name="next-steps"></a>Étapes suivantes
 

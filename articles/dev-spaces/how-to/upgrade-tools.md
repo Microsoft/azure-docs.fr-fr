@@ -3,16 +3,19 @@ title: Guide pratique pour mettre à niveau les outils Azure Dev Spaces
 services: azure-dev-spaces
 ms.date: 07/03/2018
 ms.topic: conceptual
+ms.custom: devx-track-azurecli
 description: Découvrez comment mettre à niveau les outils en ligne de commande Azure Dev Spaces, l’extension Visual Studio Code et l’extension Visual Studio.
 keywords: Docker, Kubernetes, Azure, AKS, Azure Container Service, conteneurs
-ms.openlocfilehash: 748ed4699591a21a5a09da924e093011b0813b46
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 2c2878f71deedd8df39316290735df734b97b92a
+ms.sourcegitcommit: d103a93e7ef2dde1298f04e307920378a87e982a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79231393"
+ms.lasthandoff: 10/13/2020
+ms.locfileid: "91960284"
 ---
 # <a name="how-to-upgrade-azure-dev-spaces-tools"></a>Guide pratique pour mettre à niveau les outils Azure Dev Spaces
+
+[!INCLUDE [Azure Dev Spaces deprecation](../../../includes/dev-spaces-deprecation.md)]
 
 S’il existe une nouvelle version et que vous utilisez déjà Azure Dev Spaces, vous devrez peut-être mettre à niveau vos outils client Azure Dev espaces.
 
@@ -35,12 +38,10 @@ az aks use-dev-spaces -n <your-aks-cluster> -g <your-aks-cluster-resource-group>
 
 Une fois installée, l’extension se met à jour automatiquement. Vous devrez peut-être recharger l’extension pour utiliser les nouvelles fonctionnalités. Dans VS Code, ouvrez le volet **Extensions**, choisissez les extensions **Azure Dev Spaces**, puis **Recharger**.
 
-## <a name="update-the-visual-studio-extension"></a>Mettre à jour l’extension Visual Studio
+## <a name="update-visual-studio"></a>Mettre à jour Visual Studio
 
-Comme pour toute autre extension et mise à jour, Visual Studio vous avertit lorsqu’une mise à jour pour Visual Studio Tools pour Kubernetes, avec Azure Dev Spaces inclus, est disponible. Recherchez une icône d’indicateur dans le coin supérieur droit de l’écran.
-
-Pour mettre à jour les outils dans Visual Studio, choisissez l’élément de menu **Outils > Extensions et mises à jour** et, sur le côté gauche, choisissez **Mises à jour**. Recherchez **Visual Studio Tools pour Kubernetes** et choisissez le bouton **Mettre à jour**.
+Azure Dev Spaces fait partie de la charge de travail de développement d’Azure, et est inclus dans toutes les mises à jour de Visual Studio.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Testez les nouveaux outils en créant un nouveau cluster. Testez les démarrages rapides et les didacticiels sur [Azure Dev Spaces](/azure/dev-spaces).
+Testez les nouveaux outils en créant un nouveau cluster. Testez les démarrages rapides et les didacticiels sur [Azure Dev Spaces](../index.yml).

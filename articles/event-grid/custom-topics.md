@@ -1,18 +1,14 @@
 ---
 title: Rubriques personnalisées dans Azure Event Grid
 description: Décrit les rubriques personnalisées dans Azure Event Grid.
-services: event-grid
-author: spelluru
-ms.service: event-grid
 ms.topic: conceptual
-ms.date: 03/16/2020
-ms.author: spelluru
-ms.openlocfilehash: 166a48d74d32c8b0a3a59310e693ea96ada29116
-ms.sourcegitcommit: d6e4eebf663df8adf8efe07deabdc3586616d1e4
+ms.date: 07/07/2020
+ms.openlocfilehash: 8f48824989c8ec51b766385188ad99e9e59cf621
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81393947"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86113783"
 ---
 # <a name="custom-topics-in-azure-event-grid"></a>Rubriques personnalisées dans Azure Event Grid
 Une rubrique Event Grid fournit un point de terminaison où la source envoie des événements. L’éditeur crée la rubrique Event Grid et décide si une source d’événements a besoin d’une ou plusieurs rubriques. Une rubrique est utilisée pour une collection d’événements connexes. Pour répondre à certains types d’événements, les abonnés décident des rubriques auxquelles ils souhaitent s’abonner.

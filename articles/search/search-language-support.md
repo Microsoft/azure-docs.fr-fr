@@ -7,13 +7,13 @@ author: yahnoosh
 ms.author: jlembicz
 ms.service: cognitive-search
 ms.topic: conceptual
-ms.date: 11/04/2019
-ms.openlocfilehash: ca2bc66c755da2011cc7016f37b194caa6200d9a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 07/12/2020
+ms.openlocfilehash: 588de9c9cae114b5f5396db17f7ecb19bcde25c6
+ms.sourcegitcommit: 7cc10b9c3c12c97a2903d01293e42e442f8ac751
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "72793591"
+ms.lasthandoff: 11/06/2020
+ms.locfileid: "93423077"
 ---
 # <a name="how-to-create-an-index-for-multiple-languages-in-azure-cognitive-search"></a>Comment créer un index dans plusieurs langues dans Recherche cognitive Azure
 
@@ -44,7 +44,7 @@ Une fois que l'analyseur de langage est sélectionné pour un champ, il sera uti
 
 Si la langue de l'agent d'émission d'une requête est connue, une demande de recherche peut être étendue à un champ spécifique à l'aide du paramètre de requête **searchFields** . La requête suivante sera émise uniquement sur la description en polonais :
 
-`https://[service name].search.windows.net/indexes/[index name]/docs?search=darmowy&searchFields=PolishContent&api-version=2019-05-06`
+`https://[service name].search.windows.net/indexes/[index name]/docs?search=darmowy&searchFields=PolishContent&api-version=2020-06-30`
 
 Vous pouvez interroger votre index à partir du portail avec l’[**Explorateur de recherche**](search-explorer.md) pour coller une requête similaire à celle présentée ci-dessus.
 
@@ -52,6 +52,7 @@ Vous pouvez interroger votre index à partir du portail avec l’[**Explorateur 
 
 Parfois, la langue de l'agent d'émission d'une requête n'est pas connue, auquel cas la requête peut être exécutée simultanément sur tous les champs. Si nécessaire, la préférence de résultats dans une langue donnée peut être définie à l'aide des [profils de score](index-add-scoring-profiles.md). Dans l'exemple ci-dessous, les correspondances trouvées dans la description en anglais auront un score supérieur par rapport aux correspondances en polonais et en français :
 
+```http
     "scoringProfiles": [
       {
         "name": "englishFirst",
@@ -60,9 +61,10 @@ Parfois, la langue de l'agent d'émission d'une requête n'est pas connue, auque
         }
       }
     ]
+```
 
-`https://[service name].search.windows.net/indexes/[index name]/docs?search=Microsoft&scoringProfile=englishFirst&api-version=2019-05-06`
+`https://[service name].search.windows.net/indexes/[index name]/docs?search=Microsoft&scoringProfile=englishFirst&api-version=2020-06-30`
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Si vous êtes développeur .NET, notez que vous pouvez configurer les analyseurs de langue à l’aide du [Kit de développement logiciel (SDK) Recherche cognitive Azure .NET](https://www.nuget.org/packages/Microsoft.Azure.Search) et de la propriété [Analyzer](https://docs.microsoft.com/dotnet/api/microsoft.azure.search.models.analyzer?view=azure-dotnet). 
+Si vous êtes développeur .NET, notez que vous pouvez configurer les analyseurs de langue à l’aide du [Kit de développement logiciel (SDK) Recherche cognitive Azure .NET](https://www.nuget.org/packages/Microsoft.Azure.Search) et de la propriété [LexicalAnalyzer](/dotnet/api/azure.search.documents.indexes.models.lexicalanalyzer).

@@ -4,21 +4,21 @@ description: Déplacez une instance Windows EC2 Amazon Web Services (AWS) vers u
 author: cynthn
 ms.service: virtual-machines-windows
 ms.workload: infrastructure-services
-ms.topic: article
+ms.topic: how-to
 ms.date: 06/01/2018
 ms.author: cynthn
-ms.openlocfilehash: 59d1bf08c0680d222710b55c6d6bdb4d5745da56
-ms.sourcegitcommit: 09a124d851fbbab7bc0b14efd6ef4e0275c7ee88
+ms.openlocfilehash: 9f66653996cb36e58054756ac877f859559609be
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/23/2020
-ms.locfileid: "82084513"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87267096"
 ---
 # <a name="move-a-windows-vm-from-amazon-web-services-aws-to-an-azure-virtual-machine"></a>Déplacer une machine virtuelle Windows d’Amazon Web Services (AWS) vers une machine virtuelle Azure
 
 Si vous évaluez la capacité des machines virtuelles Azure à héberger vos charges de travail, vous pouvez exporter une instance existante de la machine virtuelle Windows fonctionnant sous Amazon Web Services (AWS) EC2, puis charger le disque dur virtuel sur Azure. Une fois le disque dur virtuel chargé, vous pouvez créer une machine virtuelle dans Azure à partir du disque dur virtuel. 
 
-Cet article traite du transfert d’une machine virtuelle depuis AWS vers Azure. Si vous souhaitez transférer des machines virtuelles à partir de AWS vers Azure à l’échelle requise, voir [Migrer des machines virtuelles Windows dans Amazon Web Services (AWS) vers Azure avec Azure Site Recovery](../../site-recovery/site-recovery-migrate-aws-to-azure.md).
+Cet article traite du transfert d’une machine virtuelle depuis AWS vers Azure. Si vous souhaitez transférer des machines virtuelles à partir de AWS vers Azure à l’échelle requise, voir [Migrer des machines virtuelles Windows dans Amazon Web Services (AWS) vers Azure avec Azure Site Recovery](../../site-recovery/migrate-tutorial-aws-azure.md).
 
 ## <a name="prepare-the-vm"></a>Préparation de la machine virtuelle 
  
@@ -40,7 +40,7 @@ Vous pouvez télécharger des disques durs virtuels généralisés et spécialis
 
 Exportez l’instance EC2 vers un disque dur virtuel dans un compartiment Amazon S3. Suivez les étapes décrites dans l’article de la documentation Amazon intitulé [Exportation d’une instance comme une machine virtuelle à l’aide de VM Import/Export](https://docs.aws.amazon.com/vm-import/latest/userguide/vmexport.html) et exécutez la commande [create-instance-export-task](https://docs.aws.amazon.com/cli/latest/reference/ec2/create-instance-export-task.html) pour exporter l’instance EC2 vers un fichier du disque dur virtuel. 
 
-Le fichier du disque dur virtuel exporté est sauvegardé dans le compartiment Amazon S3 spécifié. La syntaxe de base permettant d’exporter le disque dur virtuel est indiquée ci-dessous. Il vous suffit de remplacer le texte de l’espace réservé entre \<crochets> par vos informations.
+Le fichier du disque dur virtuel exporté est sauvegardé dans le compartiment Amazon S3 spécifié. La syntaxe de base pour l’exportation du disque dur virtuel est indiquée ci-dessous. Remplacez le texte de l’espace réservé \<brackets> par vos informations.
 
 ```
 aws ec2 create-instance-export-task --instance-id <instanceID> --target-environment Microsoft \

@@ -7,16 +7,16 @@ author: msmimart
 manager: celestedg
 ms.service: active-directory
 ms.workload: identity
-ms.topic: conceptual
+ms.topic: reference
 ms.date: 09/26/2019
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: a438363b054361420222804dffac7973470e82e7
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: e5184698cab1874f327173fb30cf527feee48cad
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78183599"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85384972"
 ---
 # <a name="manage-threats-to-resources-and-data-in-azure-active-directory-b2c"></a>Gérer les menaces aux ressources et aux données dans Azure Active Directory B2C
 

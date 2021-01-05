@@ -10,12 +10,12 @@ metadata:
   author: vhorne
   ms.author: victorh
   ms.date: 08/30/2019
-  ms.openlocfilehash: aba20908401cba2c1b740570f62593b5afb92dc5
-  ms.sourcegitcommit: 253d4c7ab41e4eb11cd9995190cd5536fcec5a3c
+  ms.openlocfilehash: 28f591ba65a2e06900b84fe88815a12665fa3881
+  ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 03/25/2020
-  ms.locfileid: "70147313"
+  ms.lasthandoff: 10/09/2020
+  ms.locfileid: "91400619"
 landingContent:
 - title: Découvrez le Pare-feu Azure
   linkLists:
@@ -29,6 +29,10 @@ landingContent:
       url: rule-processing.md
     - text: Forum aux questions
       url: firewall-faq.md
+  - linkListType: whats-new
+    links:
+    - text: Nouveautés
+      url: https://azure.microsoft.com/updates/?category=networking&query=Firewall
 - title: Déployer un pare-feu Azure
   linkLists:
   - linkListType: tutorial

@@ -1,29 +1,29 @@
 ---
 title: Traduire les liens et Proxy d’application d’URL Azure AD | Documents Microsoft
-description: Couvre les bases sur les connecteurs de proxy d’application Azure AD.
+description: Découvrez comment rediriger les liens codés en dur pour des applications publiées avec le proxy d’application Azure AD.
 services: active-directory
 documentationcenter: ''
-author: msmimart
-manager: CelesteDG
+author: kenwith
+manager: celestedg
 ms.service: active-directory
 ms.subservice: app-mgmt
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 08/15/2019
-ms.author: mimart
+ms.author: kenwith
 ms.reviewer: japere
 ms.custom: it-pro
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: aa0dc2081aff5a24fb830b756131cccd5c6ce810
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 08c4020fc03f89b2c583a2458c70e18ecbbe0ba1
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "69533699"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96498062"
 ---
-# <a name="redirect-hardcoded-links-for-apps-published-with-azure-ad-application-proxy"></a>Rediriger les liens codés en dur pour les applications publiées avec le Proxy d’application Azure AD
+# <a name="redirect-hard-coded-links-for-apps-published-with-azure-ad-application-proxy"></a>Rediriger les liens codés en dur pour des applications publiées avec le Proxy d’application Azure AD
 
 Le Proxy d’application Azure AD rend vos applications locales disponibles pour les utilisateurs distants ou sur leurs propres appareils. Toutefois, certaines applications, ont été développées avec des liens locaux incorporés dans le code HTML. Ces liens ne fonctionnent pas correctement lorsque l’application est utilisée à distance. Lorsque vous disposez de plusieurs applications locales en lien l’une avec l’autre, vos utilisateurs attendent que les liens continuent à fonctionner lorsqu’ils ne sont pas au bureau. 
 
@@ -35,11 +35,11 @@ Si vous ne pouvez pas utiliser des domaines personnalisés dans votre locataire,
 > [!NOTE]
 > La traduction des liens n’est pas prise en charge pour les URL internes codées en dur générées via JavaScript.
 
-**Option n°1 : Utiliser Managed Browser ou Microsoft Edge** – Cette solution s'applique uniquement si vous envisagez de recommander ou d'exiger que les utilisateurs accèdent à l'application par le biais du navigateur Intune Managed Browser ou Microsoft Edge. Elle gère toutes les URL publiées. 
+**Option n°1 : Utiliser Microsoft Edge** – Cette solution s’applique uniquement si vous envisagez de recommander ou d’exiger que les utilisateurs accèdent à l’application via le navigateur Microsoft Edge. Elle gère toutes les URL publiées. 
 
 **Option n°2 : Utiliser l’extension MyApps** – Cette solution exige des utilisateurs qu’ils installent une extension de navigateur côté client, mais elle gère les URL publiées et fonctionne avec les navigateurs les plus populaires. 
 
-**Option 3 : Utiliser le paramètre de traduction de lien** – Il s’agit d’un paramètre côté administrateur qui n’est pas visible par les utilisateurs. Toutefois, il gère uniquement les URL en HTML et CSS.   
+**Option 3 : Utiliser le paramètre de traduction de lien** – Il s’agit d’un paramètre côté administrateur qui n’est pas visible par les utilisateurs. En revanche, il gère uniquement les URL en HTML et CSS.   
 
 Ces trois fonctionnalités garantissent le fonctionnement de vos liens quel que soit l’emplacement des utilisateurs. Lorsque vous avez des applications qui indiquent directement les points de terminaison internes ou des ports, vous pouvez mapper ces URL internes aux URL de Proxy d’application externes publiées. 
 
@@ -47,14 +47,14 @@ Ces trois fonctionnalités garantissent le fonctionnement de vos liens quel que 
 > [!NOTE]
 > La dernière option est destinée uniquement aux locataires qui, pour une raison ou une autre, ne peuvent pas utiliser de domaines personnalisés avec les mêmes URL internes et externes pour leurs applications. Avant d’activer cette fonctionnalité, consultez si [des domaines personnalisés dans le Proxy d’application Azure AD](application-proxy-configure-custom-domain.md) peuvent vous être utiles. 
 > 
-> Ou, si l’application que vous souhaitez configurer avec une traduction de liens est SharePoint, consultez [Configurer les mappages d’accès de substitution pour SharePoint 2013](https://technet.microsoft.com/library/cc263208.aspx) pour une autre approche des liens de mappage. 
+> Ou, si l’application que vous souhaitez configurer avec une traduction de liens est SharePoint, consultez [Configurer les mappages d’accès de substitution pour SharePoint 2013](/SharePoint/administration/configure-alternate-access-mappings) pour une autre approche des liens de mappage. 
 
  
-### <a name="option-1-intune-managed-browser-and-microsoft-edge-integration"></a>Option 1 : Intégration d'Intune Managed Browser et de Microsoft Edge 
+### <a name="option-1-microsoft-edge-integration"></a>Option 1 : Intégration de Microsoft Edge 
 
-Vous pouvez utiliser Intune Managed Browser ou Microsoft Edge afin de mieux protéger votre application et votre contenu. Pour utiliser cette solution, vous devez exiger/recommander que les utilisateurs accèdent à l’application par le biais d’Intune Managed Browser. Toutes les URL internes publiées avec Proxy d’application seront reconnues par Managed Browser et redirigées vers l’URL externe correspondante. Cela garantit le fonctionnement de toutes les URL internes codées en dur, et si un utilisateur accède au navigateur et tape directement l’URL interne, elle fonctionnera même si l’utilisateur est distant.  
+Vous pouvez utiliser Microsoft Edge pour renforcer la protection de votre application et de votre contenu. Pour utiliser cette solution, vous devez exiger/recommander que les utilisateurs accèdent à l’application via Microsoft Edge. Toutes les URL internes publiées avec le Proxy d’application seront reconnues par Edge et redirigées vers l’URL externe correspondante. Cela garantit le fonctionnement de toutes les URL internes codées en dur, et si un utilisateur accède au navigateur et tape directement l’URL interne, elle fonctionnera même si l’utilisateur est distant.  
 
-Pour plus d’informations, notamment sur la façon de configurer cette option, consultez la documentation de [Managed Browser](https://docs.microsoft.com/intune/app-configuration-managed-browser).  
+Pour plus d’informations, notamment sur la configuration de cette option, consultez la documentation [Gérer l’accès web à l’aide de Edge pour iOS et Android avec Microsoft Intune](/mem/intune/apps/manage-microsoft-edge).  
 
 ### <a name="option-2-myapps-browser-extension"></a>Option n°2 : Extension de navigateur MyApps 
 
@@ -62,7 +62,7 @@ Avec l’extension de navigateur MyApps, toutes les URL internes publiées avec 
 
 Pour utiliser cette fonctionnalité, l’utilisateur doit télécharger l’extension et être connecté. Aucune autre configuration n’est nécessaire pour les administrateurs ou les utilisateurs. 
 
-Pour plus d’informations, notamment sur la configuration de cette option, consultez la documentation de [l’extension de navigateur MyApps](https://docs.microsoft.com/azure/active-directory/user-help/my-apps-portal-end-user-access#download-and-install-the-my-apps-secure-sign-in-extension).
+Pour plus d’informations, notamment sur la configuration de cette option, consultez la documentation de [l’extension de navigateur MyApps](../user-help/my-apps-portal-end-user-access.md#download-and-install-the-my-apps-secure-sign-in-extension).
 
 ### <a name="option-3-link-translation-setting"></a>Option 3 : Paramètre de traduction de lien 
 
@@ -75,7 +75,7 @@ Quand la traduction de lien est activée, le service Proxy d’application effec
 
 Après l’authentification, lorsque le serveur proxy transmet les données d’application à l’utilisateur, le Proxy d’application analyse l’application pour obtenir des liens codés en dur et les remplace par leurs URL externes publiées respectives.
 
-Le Proxy d’application part du principe que les applications sont encodées en UTF-8. Si tel n’est pas le cas, spécifiez le type de codage dans un en-tête de réponse http, tel que `Content-Type:text/html;charset=utf-8`.
+Le Proxy d’application part du principe que les applications sont encodées en UTF-8. Si tel n’est pas le cas, spécifiez le type de codage dans un en-tête de réponse HTTP, tel que `Content-Type:text/html;charset=utf-8`.
 
 ### <a name="which-links-are-affected"></a>Quels sont les liens qui sont affectés ?
 
@@ -86,28 +86,28 @@ Il existe deux types de liens internes communs dans des applications locales :
 - **Les liens internes relatifs** qui indiquent une ressource partagée dans une structure de fichiers locaux, tels que `/claims/claims.html`. Ces liens fonctionnent automatiquement dans les applications publiées via le Proxy d’application et continuent de fonctionner avec ou sans traduction de liens. 
 - **Les liens internes codés en dur** vers d’autres applications locales comme `http://expenses` ou des fichiers publiés comme `http://expenses/logo.jpg`. La fonctionnalité de traduction de lien fonctionne sur les liens internes codés en dur et les modifie pour pointer vers les URL externes par lesquelles les utilisateurs distants doivent passer.
 
-Liste complète des balises de code HTML pour lesquelles le proxy d’application prend en charge la traduction de liens :
-* a
-* audio
-* base
-* Bouton
-* div
-* embed
-* form
-* frame
-* head
-* html
-* iframe
-* img
-* entrée
-* link
-* menuitem
-* meta
-* object
-* script
-* source
-* track
-* video
+Liste complète des attributs dans les balises de code HTML pour lesquelles le proxy d’application prend en charge la traduction de liens :
+* a (href)
+* audio (src)
+* base (href)
+* button (formaction)
+* div (data-background, style, data-src)
+* embed (src)
+* form (action)
+* frame (src)
+* head (profile)
+* html (manifest)
+* iframe (longdesc, src)
+* img (longdesc, src)
+* input (formaction, src, value)
+* link (href)
+* menuitem (icon)
+* meta (content)
+* object (archive, data, codebase)
+* script (src)
+* source (src)
+* track (src)
+* video (src, poster)
 
 En outre, dans CSS, l’attribut URL est également traduit.
 
@@ -152,4 +152,4 @@ Nous souhaitons votre aide pour que cette fonctionnalité fonctionne pour toutes
 ## <a name="next-steps"></a>Étapes suivantes
 [Utilisez des domaines personnalisés avec le Proxy d’application Azure AD](application-proxy-configure-custom-domain.md) pour que les URL interne et externe soit identiques
 
-[Configurer les mappages d’accès alternatifs dans SharePoint 2013](https://technet.microsoft.com/library/cc263208.aspx)
+[Configurer les mappages d’accès alternatifs dans SharePoint 2013](/SharePoint/administration/configure-alternate-access-mappings)

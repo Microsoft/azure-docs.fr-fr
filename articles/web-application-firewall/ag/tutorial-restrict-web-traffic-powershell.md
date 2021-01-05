@@ -5,15 +5,15 @@ description: Découvrez comment limiter le trafic web avec un pare-feu d’appli
 services: web-application-firewall
 author: vhorne
 ms.service: web-application-firewall
-ms.date: 11/14/2019
+ms.date: 08/31/2020
 ms.author: victorh
-ms.topic: conceptual
-ms.openlocfilehash: a57c5b155f7ab00f781236cfceea59a4277ff06a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.topic: how-to
+ms.openlocfilehash: 1e2fb98d83d1246c54ccb37d68d9b4282701677e
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74046291"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89225184"
 ---
 # <a name="enable-web-application-firewall-using-azure-powershell"></a>Activer le pare-feu d’applications web avec Azure PowerShell
 
@@ -21,11 +21,10 @@ Vous pouvez limiter le trafic sur une passerelle d’application à l’aide d�
 
 Dans cet article, vous apprendrez comment :
 
-> [!div class="checklist"]
-> * Configurer le réseau
-> * Créer une passerelle d’application avec WAF activé
-> * Créer un groupe de machines virtuelles identiques
-> * Créer un compte de stockage et configurer des diagnostics
+* Configurer le réseau
+* Créer une passerelle d’application avec WAF activé
+* Créer un groupe de machines virtuelles identiques
+* Créer un compte de stockage et configurer des diagnostics
 
 ![Exemple de pare-feu d’applications web](../media/tutorial-restrict-web-traffic-powershell/scenario-waf.png)
 

@@ -1,15 +1,16 @@
 ---
 title: Résolution des problèmes - Personalizer
 description: Cet article contient des réponses aux questions fréquemment posées sur la résolution des problèmes de Personalizer.
+ms.service: cognitive-services
+ms.subservice: personalizer
 ms.topic: troubleshooting
 ms.date: 02/26/2020
-ms.author: diberry
-ms.openlocfilehash: ca19fbfc505e3e46338a0930773b1879dce788c1
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.openlocfilehash: b5f7ed1f2ded8f6ec0320d417b59bab016d75028
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83586250"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91777273"
 ---
 # <a name="personalizer-troubleshooting"></a>Résolution des problèmes de Personalizer
 

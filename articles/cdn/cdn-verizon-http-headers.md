@@ -14,18 +14,18 @@ ms.devlang: na
 ms.topic: article
 ms.date: 04/16/2018
 ms.author: allensu
-ms.openlocfilehash: d2208f6769c8051b38bdafb92d62ec03cb2d668c
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: e20f6ce9540d357b61ae2cfdf0e8f96d127dc6c0
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81253558"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "84343215"
 ---
 # <a name="verizon-specific-http-headers-for-azure-cdn-rules-engine"></a>En-têtes HTTP spécifiques à Verizon pour le moteur de règles Azure CDN
 
 Pour les produits **Azure CDN Premium de Verizon**, lorsqu’une requête HTTP est envoyée au serveur d’origine, le serveur de point de présence (POP) peut ajouter un ou plusieurs en-têtes réservés (ou en-têtes spéciaux de proxy) dans la requête client au POP. Ces en-têtes s’ajoutent aux en-têtes de transfert standard reçus. Pour plus d’informations sur les en-têtes de requête standard, consultez [Champs de la requête](https://en.wikipedia.org/wiki/List_of_HTTP_header_fields#Request_fields).
 
-Si vous souhaitez éviter que l’un de ces en-têtes réservés ne soit ajouté dans la requête POP d’Azure CDN (Content Delivery Network) au serveur d’origine, vous devez créer une règle avec la [fonctionnalité En-têtes spéciaux de proxy](cdn-verizon-premium-rules-engine-reference-features.md#proxy-special-headers) dans le moteur de règles. Dans cette règle, excluez l’en-tête que vous souhaitez supprimer de la liste par défaut des en-têtes dans le champ d’en-têtes. Si vous avez activé la [fonctionnalité En-têtes de réponse de cache de débogage](cdn-verizon-premium-rules-engine-reference-features.md#debug-cache-response-headers), veillez à ajouter les en-têtes `X-EC-Debug` nécessaires. 
+Si vous souhaitez éviter que l’un de ces en-têtes réservés ne soit ajouté dans la requête POP d’Azure CDN (Content Delivery Network) au serveur d’origine, vous devez créer une règle avec la [fonctionnalité En-têtes spéciaux de proxy](https://docs.vdms.com/cdn/Content/HRE/F/Proxy-Special-Headers.htm) dans le moteur de règles. Dans cette règle, excluez l’en-tête que vous souhaitez supprimer de la liste par défaut des en-têtes dans le champ d’en-têtes. Si vous avez activé la [fonctionnalité En-têtes de réponse de cache de débogage](https://docs.vdms.com/cdn/Content/HRE/F/Debug-Cache-Response-Headers.htm), veillez à ajouter les en-têtes `X-EC-Debug` nécessaires. 
 
 Par exemple, pour supprimer l’en-tête `Via`, le champ d’en-têtes de la règle doit inclure la liste suivante d’en-têtes : *X-Forwarded-For, X-Forwarded-Proto, X-Host, X-Midgress, X-Gateway-List, X-EC-Name, Host*. 
 

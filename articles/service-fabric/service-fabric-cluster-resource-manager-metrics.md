@@ -5,12 +5,13 @@ author: masnider
 ms.topic: conceptual
 ms.date: 08/18/2017
 ms.author: masnider
-ms.openlocfilehash: ea21502cdab35b261e20af7f23b7b522f77c6667
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 2a7dedea2937c9cafb4216da3628aa1360ad6993
+ms.sourcegitcommit: 2989396c328c70832dcadc8f435270522c113229
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75451997"
+ms.lasthandoff: 10/19/2020
+ms.locfileid: "92173000"
 ---
 # <a name="managing-resource-consumption-and-load-in-service-fabric-with-metrics"></a>Gestion de la consommation des ressources et des charges dans Service Fabric à l’aide de mesures
 Les *mesures* sont les ressources qui intéressent vos services et qui sont fournies par les nœuds dans le cluster. Une mesure représente ce que vous souhaitez gérer afin d’améliorer ou de surveiller les performances de vos services. Par exemple, vous pourrez surveiller la consommation de mémoire pour savoir si votre service est surchargé. Vous pouvez également déterminer si le service peut être déplacé vers un autre emplacement où la mémoire est moins contrainte afin d’obtenir de meilleures performances.
@@ -137,12 +138,13 @@ Rappel : si vous voulez simplement utiliser les mesures par défaut, vous n’a
 ## <a name="load"></a>Load
 La définition de mesures a pour but de représenter certaines charges. Une *charge* correspond à la quantité d’une mesure spécifique qui est consommée par une instance ou un réplica de service sur un nœud donné. La charge peut être configurée en presque n’importe quel point. Par exemple :
 
-  - La charge peut être définie lors de la création d’un service. Il s’agit d’une _charge par défaut_.
-  - Les informations sur les mesures, notamment les charges par défaut, d’un service peuvent être mises à jour une fois le service créé. Il s’agit de la _mise à jour d’un service_. 
-  - Les charges d’une partition donnée peuvent être réinitialisées aux valeurs par défaut pour ce service. Il s’agit de la _réinitialisation d’une charge de partition_.
-  - La charge peut être dynamiquement signalée pour chaque objet de service lors de l’exécution. Il s’agit du _signalement d’une charge_. 
-  
-Toutes ces stratégies peuvent être utilisées dans le même service pendant sa durée de vie. 
+  - La charge peut être définie lors de la création d’un service. Ce type de configuration de chargement est appelé _charge par défaut_ .
+  - Les informations sur les mesures, notamment les charges par défaut, d’un service peuvent être mises à jour une fois le service créé. Cette mise à jour de métrique est effectuée par la _mise à jour d’un service_ .
+  - Les charges d’une partition donnée peuvent être réinitialisées aux valeurs par défaut pour ce service. Cette mise à jour de métrique est nommée _Réinitialisation d’une charge de partition_ .
+  - La charge peut être dynamiquement signalée pour chaque objet de service lors de l’exécution. Cette mise à jour de métrique est nommée _Signalement de charge_ .
+  - Le chargement des réplicas ou instances de la partition peut également être mis à jour en signalant des valeurs de chargement via un appel d’API Fabric. Cette mise à jour de métrique est nommée _Signalement de charge pour une partition_ .
+
+Toutes ces stratégies peuvent être utilisées dans le même service pendant sa durée de vie.
 
 ## <a name="default-load"></a>Charge par défaut
 La *charge par défaut* correspond à la mesure consommée par chaque objet de service (instance sans état ou réplica avec état). Cluster Resource Manager utilise ce nombre pour la charge de l’objet de service jusqu'à ce qu’il reçoive d’autres informations, par exemple un rapport de charge dynamique. Pour les services plus simples, la charge par défaut est une définition statique. La charge par défaut n’est jamais mise à jour et est utilisée pour toute la durée de vie du service. La charge par défaut est idéale pour les scénarios de planification de capacité simples où certaines quantités de ressources sont dédiées à différentes charges de travail et n’évoluent pas.
@@ -174,6 +176,67 @@ this.Partition.ReportLoad(new List<LoadMetric> { new LoadMetric("CurrentConnecti
 ```
 
 Un service peut générer un rapport sur n’importe quelle mesure définie au moment de la création. Si un service génère un rapport pour une charge d’une mesure qui n’est pas configurée pour être utilisée, Service Fabric ignore ce rapport. Si d’autres mesures valides ont été signalées en même temps, ces rapports sont acceptés. Le code du service peut mesurer et signaler toutes les mesures qu’il connaît, et les opérateurs peuvent spécifier la configuration de mesures à utiliser sans avoir à modifier le code du service. 
+
+## <a name="reporting-load-for-a-partition"></a>Création de rapports de charge pour une partition
+La section précédente décrit comment les réplicas de service ou les instances signalent leur chargement. Il existe une option supplémentaire pour signaler dynamiquement la charge avec FabricClient. Lors du signalement de charge pour une partition, vous pouvez générer des rapports sur plusieurs partitions à la fois.
+
+Ces rapports sont utilisés de la même façon que les rapports de charge provenant des réplicas ou des instances eux-mêmes. Les valeurs signalées sont valides jusqu’à ce que de nouvelles valeurs de chargement soient signalées par le réplica ou par l’instance ou en signalant une nouvelle valeur de chargement pour une partition.
+
+Avec cette API, il existe plusieurs façons de mettre à jour la charge dans le cluster :
+
+  - Une partition de service avec état peut mettre à jour sa charge de réplica principal.
+  - Les services sans état et avec état peuvent mettre à jour la charge de tous ses réplicas secondaires ou instances.
+  - Les services sans état et avec état peuvent mettre à jour la charge d’un réplica ou d’une instance sur un nœud.
+
+Il est également possible de combiner les mises à jour par partition en même temps.
+
+La mise à jour de charges pour plusieurs partitions est possible avec un seul appel d’API, auquel cas la sortie contiendra une réponse par partition. Si la mise à jour de la partition n’est pas correctement appliquée pour une raison quelconque, les mises à jour de cette partition seront ignorées et le code d’erreur correspondant pour une partition ciblée est fourni :
+
+  - PartitionNotFound - L’ID de partition spécifié n’existe pas.
+  - ReconfigurationPending - La partition est en cours de reconfiguration.
+  - InvalidForStatelessServices - Une tentative de modification de la charge d’un réplica principal pour une partition appartenant à un service sans état a été effectuée.
+  - ReplicaDoesNotExist - Le réplica ou l’instance secondaire n’existe pas sur un nœud spécifié.
+  - InvalidOperation - Cela peut se produire dans deux cas : la mise à jour de la charge pour une partition qui appartient à l’application système ou la mise à jour de la charge prédite n’est pas activée.
+
+Si certaines de ces erreurs sont retournées, vous pouvez mettre à jour l’entrée pour une partition spécifique et retenter la mise à jour pour une partition spécifique.
+
+Code :
+
+```csharp
+Guid partitionId = Guid.Parse("53df3d7f-5471-403b-b736-bde6ad584f42");
+string metricName0 = "CustomMetricName0";
+List<MetricLoadDescription> newPrimaryReplicaLoads = new List<MetricLoadDescription>()
+{
+    new MetricLoadDescription(metricName0, 100)
+};
+
+string nodeName0 = "NodeName0";
+List<MetricLoadDescription> newSpecificSecondaryReplicaLoads = new List<MetricLoadDescription>()
+{
+    new MetricLoadDescription(metricName0, 200)
+};
+
+OperationResult<UpdatePartitionLoadResultList> updatePartitionLoadResults =
+    await this.FabricClient.UpdatePartitionLoadAsync(
+        new UpdatePartitionLoadQueryDescription
+        {
+            PartitionMetricLoadDescriptionList = new List<PartitionMetricLoadDescription>()
+            {
+                new PartitionMetricLoadDescription(
+                    partitionId,
+                    newPrimaryReplicaLoads,
+                    new List<MetricLoadDescription>(),
+                    new List<ReplicaMetricLoadDescription>()
+                    {
+                        new ReplicaMetricLoadDescription(nodeName0, newSpecificSecondaryReplicaLoads)
+                    })
+            }
+        },
+        this.Timeout,
+        cancellationToken);
+```
+
+Dans cet exemple, vous allez effectuer une mise à jour de la dernière charge signalée pour une partition _53df3d7f-5471-403b-b736-bde6ad584f42_ . La charge du réplica principal d’une mesure _CustomMetricName0_ est mise à jour avec la valeur 100. En même temps, la charge pour la même mesure pour un réplica secondaire spécifique situé sur le nœud _NodeName0_ sera mise à jour avec la valeur 200.
 
 ### <a name="updating-a-services-metric-configuration"></a>Mise à jour de la configuration des mesures d’un service
 La liste des mesures associées au service et les propriétés de ces mesures peuvent être mises à jour dynamiquement pendant que le service est en ligne. Cela permet une meilleure expérimentation et plus de flexibilité. Voici quelques exemples :

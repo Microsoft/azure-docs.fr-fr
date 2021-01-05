@@ -8,14 +8,14 @@ ms.topic: quickstart
 ms.service: iot-dps
 services: iot-dps
 ms.custom: mvc
-ms.openlocfilehash: 82bd284ede23e8880f79c614f4a6e2f588a4293c
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: b2648382fb19fafcfc342379aa9da974f6f8d1ff
+ms.sourcegitcommit: 03662d76a816e98cfc85462cbe9705f6890ed638
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "74976993"
+ms.lasthandoff: 09/15/2020
+ms.locfileid: "90528417"
 ---
-# <a name="quickstart-create-and-provision-a-simulated-tpm-device-using-c-device-sdk-for-iot-hub-device-provisioning-service"></a>Démarrage rapide : Créer et approvisionner un appareil TPM simulé auprès du service IoT Hub Device Provisioning à l’aide du C# Device SDK
+# <a name="quickstart-create-and-provision-a-simulated-tpm-device-using-c-device-sdk-for-iot-hub-device-provisioning-service"></a>Démarrage rapide - Créer et provisionner un appareil TPM simulé à l’aide du kit Java device SDK pour le service IoT Hub Device Provisioning.
 
 [!INCLUDE [iot-dps-selector-quick-create-simulated-device-tpm](../../includes/iot-dps-selector-quick-create-simulated-device-tpm.md)]
 
@@ -23,12 +23,12 @@ Ces étapes expliquent comment utiliser les [échantillons Azure IoT pour C#](ht
 
 Cet exemple de code utilise le simulateur de module de plateforme sécurisée Windows comme [module de sécurité matériel (HSM)](https://azure.microsoft.com/blog/azure-iot-supports-new-security-hardware-to-strengthen-iot-security/) de l’appareil. 
 
-Si vous ne connaissez pas le processus d’approvisionnement automatique, pensez à consulter également l’article [Concepts de provisionnement automatique](concepts-auto-provisioning.md). Vérifiez également que vous avez suivi la procédure décrite dans [Configurer le service d’approvisionnement d’appareil IoT Hub avec le portail Azure](./quick-setup-auto-provision.md) avant de continuer. 
+Si vous ne connaissez pas le processus de provisionnement automatique, veuillez consulter la vue d’ensemble du [provisionnement](about-iot-dps.md#provisioning-process). Vérifiez également que vous avez suivi la procédure décrite dans [Configurer le service d’approvisionnement d’appareil IoT Hub avec le portail Azure](./quick-setup-auto-provision.md) avant de continuer. 
 
 Le service Azure IoT Device Provisioning prend en charge deux types d’inscriptions :
 
 - [Groupes d’inscription](concepts-service.md#enrollment-group) : utilisés pour inscrire plusieurs appareils connexes.
-- [Inscriptions individuelles](concepts-service.md#individual-enrollment) : utilisées pour inscrire un seul appareil.
+- [Inscriptions individuelles](concepts-service.md#individual-enrollment) : utilisées pour inscrire un seul appareil.
 
 Cet article présente les inscriptions individuelles.
 
@@ -49,7 +49,7 @@ Cet article présente les inscriptions individuelles.
 
 ## <a name="provision-the-simulated-device"></a>Approvisionner l’appareil simulé
 
-1. Connectez-vous au portail Azure. Sélectionnez le bouton **Toutes les ressources** dans le menu de gauche, puis ouvrez votre service Device Provisioning. Dans le panneau **Vue d’ensemble**, notez la valeur **_Étendue de l’ID_** .
+1. Connectez-vous au portail Azure. Sélectionnez le bouton **Toutes les ressources** dans le menu de gauche, puis ouvrez votre service Device Provisioning. Dans le panneau **Vue d’ensemble**, notez la valeur **_Étendue de l’ID_**.
 
     ![Comment copier l’étendue d’ID du service d’approvisionnement depuis le panneau du portail](./media/quick-create-simulated-device-tpm-csharp/copy-scope.png) 
 
@@ -67,7 +67,7 @@ Cet article présente les inscriptions individuelles.
 
     Cette commande lancera le simulateur de puce TPM dans une invite de commandes distincte. Sur Windows, vous pouvez rencontrer une alerte de sécurité Windows qui vous demande si vous voulez autoriser Simulator.exe à communiquer sur des réseaux publics. Dans le cadre de cet exemple, vous pouvez annuler la demande.
 
-1. La fenêtre de commande d’origine affiche la **_paire de clés de type EK (Endorsement Key)_** , l’ **_ID d’inscription_** et un **_ID d’appareil_** nécessaires à l’inscription de l’appareil. Prenez note de ces valeurs. Vous utiliserez ces valeurs pour créer une inscription individuelle dans votre instance de Device Provisioning Service. 
+1. La fenêtre de commande d’origine affiche la **_paire de clés de type EK (Endorsement Key)_**, l’**_ID d’inscription_** et un **_ID d’appareil_** nécessaires à l’inscription de l’appareil. Prenez note de ces valeurs. Vous utiliserez ces valeurs pour créer une inscription individuelle dans votre instance de Device Provisioning Service. 
    > [!NOTE]
    > Ne confondez pas la fenêtre contenant la sortie de la commande avec la fenêtre contenant la sortie du simulateur TPM Vous devrez peut-être sélectionner la fenêtre de commande d’origine pour l’amener au premier plan.
 
@@ -88,7 +88,7 @@ Cet article présente les inscriptions individuelles.
 
    Lorsque l’inscription aboutit, *l’ID d’inscription* de votre appareil s’affiche dans la liste sous l’onglet *Inscriptions individuelles*. 
 
-1. Appuyez sur *Entrée* dans la fenêtre de commande (celle qui affichait la **_paire de clés de type EK (Endorsement Key)_** , l’ **_ID d’inscription_** et un **_ID d’appareil_** ) pour inscrire l’appareil simulé. Notez les messages qui simulent le démarrage et la connexion de l’appareil au service d’approvisionnement d’appareil pour obtenir des informations concernant votre IoT Hub. 
+1. Appuyez sur *Entrée* dans la fenêtre de commande (celle qui affichait la **_paire de clés de type EK (Endorsement Key)_**, l’**_ID d’inscription_** et un **_ID d’appareil_**) pour inscrire l’appareil simulé. Notez les messages qui simulent le démarrage et la connexion de l’appareil au service d’approvisionnement d’appareil pour obtenir des informations concernant votre IoT Hub. 
 
 1. Vérifiez que l’appareil a bien été approvisionné. En cas de réussite du provisionnement de l’appareil simulé auprès du hub IoT lié à votre service de provisionnement, l’ID d’appareil s’affiche sur le panneau **Appareils IoT** du hub. 
 

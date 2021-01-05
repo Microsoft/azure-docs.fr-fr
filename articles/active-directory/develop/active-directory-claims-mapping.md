@@ -9,16 +9,16 @@ ms.service: active-directory
 ms.subservice: develop
 ms.custom: aaddev
 ms.workload: identity
-ms.topic: conceptual
-ms.date: 10/22/2019
+ms.topic: how-to
+ms.date: 08/25/2020
 ms.author: ryanwi
 ms.reviewer: paulgarn, hirsin, jeedes, luleon
-ms.openlocfilehash: d8be2c8cc70db963252054a39cad558c4c1b5bd2
-ms.sourcegitcommit: f57297af0ea729ab76081c98da2243d6b1f6fa63
+ms.openlocfilehash: 2d65889a841655fe27994d3855f30f7a7e20e1ed
+ms.sourcegitcommit: 8e7316bd4c4991de62ea485adca30065e5b86c67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/06/2020
-ms.locfileid: "82871207"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94647594"
 ---
 # <a name="how-to-customize-claims-emitted-in-tokens-for-a-specific-app-in-a-tenant-preview"></a>Procédure : Personnaliser des revendications émises dans des jetons pour une application spécifique dans un locataire (préversion)
 
@@ -143,7 +143,6 @@ Il existe des ensembles de revendications qui définissent comment et quand ils 
 | onprem_sid |
 | openid2_id |
 | mot de passe |
-| platf |
 | polids |
 | pop_jwk |
 | preferred_username |
@@ -240,6 +239,9 @@ Il existe des ensembles de revendications qui définissent comment et quand ils 
 
 Pour contrôler les revendications émises et l’origine des données, utilisez les propriétés d’une stratégie de mappage de revendications. Si aucune stratégie n’est définie, le système émet des jetons incluant l’ensemble de revendications principal, l’ensemble de revendications de base et les éventuelles [revendications facultatives](active-directory-optional-claims.md) que l’application a choisi de recevoir.
 
+> [!NOTE]
+> Les revendications de l’ensemble de revendications principal sont présentes dans chaque jeton, indépendamment de la définition de cette propriété.
+
 ### <a name="include-basic-claim-set"></a>Ensemble de revendications de base Include
 
 **Chaîne :** IncludeBasicClaimSet
@@ -248,11 +250,10 @@ Pour contrôler les revendications émises et l’origine des données, utilisez
 
 **Résumé :** Cette propriété détermine si l’ensemble de revendications de base est inclus dans les jetons affectés par cette stratégie.
 
-- Si la valeur est True, toutes les revendications de l’ensemble de revendications de base sont émises dans les jetons affectés par la stratégie. 
+- Si la valeur est True, toutes les revendications de l’ensemble de revendications de base sont émises dans les jetons affectés par la stratégie.
 - Si la valeur est False, les revendications de l’ensemble de revendications de base ne figurent pas dans les jetons, sauf si elles sont ajoutées individuellement à la propriété de schéma de revendications de la même stratégie.
 
-> [!NOTE] 
-> Les revendications de l’ensemble de revendications principal sont présentes dans chaque jeton, indépendamment de la définition de cette propriété. 
+
 
 ### <a name="claims-schema"></a>Schéma de revendications
 
@@ -261,21 +262,23 @@ Pour contrôler les revendications émises et l’origine des données, utilisez
 **Type de données :** Objet blob JSON avec une ou plusieurs entrées de schéma de revendication
 
 **Résumé :** Cette propriété définit les revendications présentes dans les jetons affectés par la stratégie, en plus de l’ensemble de revendications de base et de l’ensemble de revendications principal.
-Pour chaque entrée de schéma de revendication définie dans cette propriété, certaines informations sont requises. Spécifiez l’origine des données (**Value** ou **Paire Source/ID**), et la revendication à laquelle les données ont trait (**Type de revendication**).
+Pour chaque entrée de schéma de revendication définie dans cette propriété, certaines informations sont requises. Spécifiez l’origine des données (**Value**, **Paire Source/ID** ou **Paire Source/ExtensionID**), et la revendication à laquelle les données ont trait (**Type de revendication**).
 
 ### <a name="claim-schema-entry-elements"></a>Éléments d’entrée du schéma de revendication
 
 **Value :** L’élément Value définit une valeur statique en tant que données à émettre dans la revendication.
 
-**Paire Source/ID :** Les éléments Source et ID définissent la provenance des données de la revendication. 
+**Paire Source/ID :** Les éléments Source et ID définissent la provenance des données de la revendication.
 
-Définissez l’élément Source sur l’une des valeurs suivantes : 
+**Paire Source/ExtensionID :** Les éléments Source et ExtensionID définissent l’attribut d’extension de schéma de répertoire à partir duquel proviennent les données de la revendication. Pour plus d’informations, consultez [Utiliser des attributs d’extension de schéma de répertoire dans les revendications](active-directory-schema-extensions.md).
 
-- « user » : Les données de la revendication sont une propriété définie sur l’objet User. 
-- « application » : Les données de la revendication sont une propriété définie sur le principal du service de l’application (client). 
+Définissez l’élément Source sur l’une des valeurs suivantes :
+
+- « user » : Les données de la revendication sont une propriété définie sur l’objet User.
+- « application » : Les données de la revendication sont une propriété définie sur le principal du service de l’application (client).
 - « resource » : Les données de la revendication sont une propriété définie sur le principal du service de la ressource.
 - « audience » : Les données de la revendication sont une propriété définie sur le principal du service qui est l’audience du jeton (principal du service du client ou de la ressource ).
-- « company » : Les données de la revendication sont une propriété définie sur l’objet Company du client de la ressource.
+- « société » : Les données de la revendication sont une propriété définie sur l’objet Company du locataire de la ressource.
 - « transformation » : Les données de la revendication proviennent d’une transformation de revendications (voir la section « Transformation de revendications » plus loin dans cet article).
 
 Si la source est une transformation, l’élément **TransformationID** doit également être inclus dans cette définition de revendication.
@@ -300,8 +303,8 @@ L’élément ID identifie la propriété définie sur la source qui fournit la 
 | Utilisateur | companyname| Nom de l’organisation |
 | Utilisateur | streetaddress | Adresse postale |
 | Utilisateur | postalcode | Code postal |
-| Utilisateur | preferredlanguange | Langue par défaut |
-| Utilisateur | onpremisesuserprincipalname | UPN local |
+| Utilisateur | preferredlanguage | Langue par défaut |
+| Utilisateur | onpremisesuserprincipalname | UPN local |*
 | Utilisateur | mailNickName | pseudonyme de messagerie |
 | Utilisateur | extensionattribute1 | Attribut d’extension 1 |
 | Utilisateur | extensionattribute2 | Attribut d’extension 2 |
@@ -319,18 +322,19 @@ L’élément ID identifie la propriété définie sur la source qui fournit la 
 | Utilisateur | extensionattribute14 | Attribut d’extension 14 |
 | Utilisateur | extensionattribute15 | Attribut d’extension 15 |
 | Utilisateur | othermail | Autre adresse e-mail |
-| Utilisateur | country | Country |
+| Utilisateur | country | Pays/région |
 | Utilisateur | city | City |
 | Utilisateur | state | State |
 | Utilisateur | jobtitle | Poste |
 | Utilisateur | employeeid | ID d’employé |
 | Utilisateur | facsimiletelephonenumber | Numéro de télécopie |
+| Utilisateur | assignedroles | Liste des rôles d’application attribués à l’utilisateur|
 | application, ressource, audience | displayname | Nom d’affichage |
-| application, ressource, audience | objected | ObjectID |
+| application, ressource, audience | objectid | ObjectID |
 | application, ressource, audience | tags | Balise de principal du service |
-| Company | tenantcountry | Pays du locataire |
+| Company | tenantcountry | Pays/région du locataire |
 
-**TransformationID :** L’élément TransformationID doit être fourni uniquement si l’élément Source est défini sur « transformation ».
+**TransformationID :** L’élément TransformationID doit être fourni uniquement si l’élément Source est défini sur « transformation ».
 
 - Cet élément doit correspondre à l’élément d’ID de l’entrée de transformation dans la propriété **ClaimsTransformation** qui définit la façon dont les données de cette revendication sont générées.
 
@@ -339,6 +343,8 @@ L’élément ID identifie la propriété définie sur la source qui fournit la 
 - L’élément JwtClaimType doit contenir le nom de la revendication que les jetons JWT doivent émettre.
 - L’élément SamlClaimType doit contenir l’URI de la revendication que les jetons SAML doivent émettre.
 
+* **Attribut onPremisesUserPrincipalName :** Quand vous utilisez un ID secondaire, l’attribut local userPrincipalName est synchronisé avec l’attribut Azure AD onPremisesUserPrincipalName. Cet attribut est disponible uniquement quand l’option Autre ID est configurée mais il est également disponible via la version bêta de Microsoft Graph : https://graph.microsoft.com/beta/me/.
+
 > [!NOTE]
 > Les noms et URI des revendications dans l’ensemble de revendications restreint ne peuvent pas être utilisés pour les éléments de type de revendication. Pour plus d’informations, consultez la section « Exceptions et restrictions » plus loin dans cet article.
 
@@ -346,7 +352,7 @@ L’élément ID identifie la propriété définie sur la source qui fournit la 
 
 **Chaîne :** ClaimsTransformation
 
-**Type de données :** Blob JSON avec une ou plusieurs entrées de transformation 
+**Type de données :** Blob JSON avec une ou plusieurs entrées de transformation
 
 **Résumé :** Cette propriété permet d’appliquer des transformations communes à des données sources afin de générer les données de sortie pour les revendications spécifiées dans le schéma de revendications.
 
@@ -361,11 +367,11 @@ Selon la méthode choisie, un ensemble d’entrées et sorties est attendu. Déf
 |Méthode de transformation|Entrée attendue|Sortie attendue|Description|
 |-----|-----|-----|-----|
 |Join|string1, string2, séparateur|outputClaim|Joint les chaînes d’entrée à l’aide d’un séparateur. Par exemple : string1:"foo@bar.com", string2:"sandbox", separator:"." produit outputClaim:"foo@bar.com.sandbox"|
-|ExtractMailPrefix|mail|outputClaim|Extrait la partie locale d’une adresse de courrier. Par exemple : mail:"foo@bar.com" produit outputClaim:"foo". Si aucun symbole \@ n’est présent, la chaîne d’entrée d’origine est retournée telle quelle.|
+|ExtractMailPrefix|E-mail ou UPN|chaîne extraite|ExtensionAttributes 1-15 ou toute autre extension de schéma qui stocke une valeur d’UPN ou d’e-mail pour l’utilisateur, par exemple, johndoe@contoso.com. Extrait la partie locale d’une adresse de courrier. Par exemple : mail:"foo@bar.com" produit outputClaim:"foo". Si aucun symbole \@ n’est présent, la chaîne d’entrée d’origine est retournée telle quelle.|
 
 **InputClaims :** L’élément InputClaims permet de transmettre les données d’une entrée de schéma de revendication à une transformation. Il utilise deux attributs : **ClaimTypeReferenceId** et **TransformationClaimType**.
 
-- L’attribut **ClaimTypeReferenceId** est joint à l’élément ID de l’entrée de schéma de revendication pour rechercher la revendication d’entrée appropriée. 
+- L’attribut **ClaimTypeReferenceId** est joint à l’élément ID de l’entrée de schéma de revendication pour rechercher la revendication d’entrée appropriée.
 - L’attribut **TransformationClaimType** est utilisé pour donner un nom unique à cette entrée. Ce nom doit correspondre à l’une des entrées attendues pour la méthode de transformation.
 
 **InputParameters :** Un élément InputParameters permet de transmettre une valeur constante à une transformation. Il utilise deux attributs : **Value** et **ID**.
@@ -415,9 +421,9 @@ Selon la méthode choisie, un ensemble d’entrées et sorties est attendu. Déf
 
 ### <a name="custom-signing-key"></a>Clé de signature personnalisée
 
-Une clé de signature personnalisée doit être affectée à l’objet de principal du service pour qu’une stratégie de mappage de revendications entre en vigueur. Cela garantit la reconnaissance que les jetons ont été modifiés par le créateur de la stratégie de mappage de revendications et protège les applications contre les stratégies de mappage de revendications créées par des personnes malveillantes. Pour ajouter une clé de signature personnalisée, vous pouvez utiliser l’applet de commande Azure PowerShell `new-azureadapplicationkeycredential` pour créer des informations d’identification de clé symétrique pour votre objet d’application. Pour plus d’informations sur cette applet de commande Azure PowerShell, consultez [New-AzureADApplicationKeyCredential](https://docs.microsoft.com/powerShell/module/Azuread/New-AzureADApplicationKeyCredential?view=azureadps-2.0).
+Une clé de signature personnalisée doit être affectée à l’objet de principal du service pour qu’une stratégie de mappage de revendications entre en vigueur. Cela garantit la reconnaissance que les jetons ont été modifiés par le créateur de la stratégie de mappage de revendications et protège les applications contre les stratégies de mappage de revendications créées par des personnes malveillantes. Pour ajouter une clé de signature personnalisée, vous pouvez utiliser la cmdlet Azure PowerShell [`New-AzureADApplicationKeyCredential`](/powerShell/module/Azuread/New-AzureADApplicationKeyCredential) pour créer des informations d’identification de clé de certificat pour votre objet d’application.
 
-Les applications pour lesquelles le mappage de revendications est activé doivent valider leurs clés de signature de jeton en ajoutant `appid={client_id}` à leurs [demandes de métadonnées OpenID Connect](v2-protocols-oidc.md#fetch-the-openid-connect-metadata-document). Le format du document de métadonnées OpenID Connect que vous utilisez se trouve ci-dessous : 
+Les applications pour lesquelles le mappage de revendications est activé doivent valider leurs clés de signature de jeton en ajoutant `appid={client_id}` à leurs [demandes de métadonnées OpenID Connect](v2-protocols-oidc.md#fetch-the-openid-connect-metadata-document). Le format du document de métadonnées OpenID Connect que vous utilisez se trouve ci-dessous :
 
 ```
 https://login.microsoftonline.com/{tenant}/v2.0/.well-known/openid-configuration?appid={client-id}
@@ -434,6 +440,8 @@ Des stratégies de mappage de revendications peuvent être attribuées uniquemen
 ### <a name="example-claims-mapping-policies"></a>Exemples de stratégies de mappage de revendications
 
 Dans Azure AD, de nombreux scénarios sont possibles où vous pouvez personnaliser des revendications émises dans des jetons pour des principaux du service spécifiques. Cette section décrit quelques scénarios courants qui peuvent vous aider à comprendre comment utiliser le type de stratégie de mappage de revendications.
+
+Quand vous créez une stratégie de mappage de revendications, vous pouvez également émettre une revendication à partir d’un attribut d’extension de schéma d’annuaire dans des jetons. Utilisez *ExtensionID* pour l’attribut d’extension au lieu de *ID* dans l’élément `ClaimsSchema`.  Pour plus d’informations sur les attributs d’extension, consultez [Utiliser des attributs de l’extension de schéma d’annuaire](active-directory-schema-extensions.md).
 
 #### <a name="prerequisites"></a>Prérequis
 
@@ -458,72 +466,73 @@ Pour commencer, suivez les étapes ci-dessous :
 Dans cet exemple, vous créez une stratégie qui supprime l’ensemble de revendications de base des jetons émis pour des principaux du service liés.
 
 1. Créez une stratégie de mappage de revendications. Cette stratégie, liée à des principaux du service spécifiques, supprime l’ensemble de revendications de base des jetons.
-   1. Pour créer la stratégie, exécutez la commande suivante : 
-    
+   1. Pour créer la stratégie, exécutez la commande suivante :
+
       ``` powershell
       New-AzureADPolicy -Definition @('{"ClaimsMappingPolicy":{"Version":1,"IncludeBasicClaimSet":"false"}}') -DisplayName "OmitBasicClaims" -Type "ClaimsMappingPolicy"
       ```
    2. Pour voir votre nouvelle stratégie et obtenir son ObjectId, exécutez la commande suivante :
-    
+
       ``` powershell
       Get-AzureADPolicy
       ```
 1. Affectez la stratégie au principal de service. Vous devez également obtenir l’ObjectId de votre principal du service.
    1. Pour afficher tous les principaux de service de votre organisation, vous pouvez [interroger l’API Microsoft Graph](/graph/traverse-the-graph). Ou, dans l’[afficheur Microsoft Graph](https://developer.microsoft.com/graph/graph-explorer), connectez-vous à votre compte Azure AD.
-   2. Une fois que vous disposez de l’ObjectId de votre principal du service, exécutez la commande suivante :  
-     
+   2. Une fois que vous disposez de l’ObjectId de votre principal du service, exécutez la commande suivante :
+
       ``` powershell
       Add-AzureADServicePrincipalPolicy -Id <ObjectId of the ServicePrincipal> -RefObjectId <ObjectId of the Policy>
       ```
 
 #### <a name="example-create-and-assign-a-policy-to-include-the-employeeid-and-tenantcountry-as-claims-in-tokens-issued-to-a-service-principal"></a>Exemple : Créer et attribuer une stratégie pour inclure EmployeeID et TenantCountry en tant que revendications dans des jetons émis pour un principal du service
 
-Dans cet exemple, vous créez une stratégie qui ajoute EmployeeID et TenantCountry à des jetons émis pour des principaux du service liés. EmployeeID est émis en tant que type de revendication de nom dans les jetons SAML et JWT. TenantCountry est émis en tant que type de revendication de pays dans les jetons SAML et JWT. Dans cet exemple, nous continuons à inclure les ensembles de revendications de base dans les jetons.
+Dans cet exemple, vous créez une stratégie qui ajoute EmployeeID et TenantCountry à des jetons émis pour des principaux du service liés. EmployeeID est émis en tant que type de revendication de nom dans les jetons SAML et JWT. TenantCountry est émis en tant que type de revendication de pays/région dans les jetons SAML et JWT. Dans cet exemple, nous continuons à inclure les ensembles de revendications de base dans les jetons.
 
 1. Créez une stratégie de mappage de revendications. Cette stratégie liée à des principaux du service spécifiques ajoute les revendications EmployeeID et TenantCountry aux jetons.
-   1. Pour créer la stratégie, exécutez la commande suivante :  
-     
+   1. Pour créer la stratégie, exécutez la commande suivante :
+
       ``` powershell
       New-AzureADPolicy -Definition @('{"ClaimsMappingPolicy":{"Version":1,"IncludeBasicClaimSet":"true", "ClaimsSchema": [{"Source":"user","ID":"employeeid","SamlClaimType":"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/employeeid","JwtClaimType":"name"},{"Source":"company","ID":"tenantcountry","SamlClaimType":"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/country","JwtClaimType":"country"}]}}') -DisplayName "ExtraClaimsExample" -Type "ClaimsMappingPolicy"
       ```
-    
+
    2. Pour voir votre nouvelle stratégie et obtenir son ObjectId, exécutez la commande suivante :
-     
-      ``` powershell  
+
+      ``` powershell
       Get-AzureADPolicy
       ```
-1. Affectez la stratégie au principal de service. Vous devez également obtenir l’ObjectId de votre principal du service. 
+1. Affectez la stratégie au principal de service. Vous devez également obtenir l’ObjectId de votre principal du service.
    1. Pour afficher tous les principaux de service de votre organisation, vous pouvez [interroger l’API Microsoft Graph](/graph/traverse-the-graph). Ou, dans l’[afficheur Microsoft Graph](https://developer.microsoft.com/graph/graph-explorer), connectez-vous à votre compte Azure AD.
-   2. Une fois que vous disposez de l’ObjectId de votre principal du service, exécutez la commande suivante :  
-     
+   2. Une fois que vous disposez de l’ObjectId de votre principal du service, exécutez la commande suivante :
+
       ``` powershell
       Add-AzureADServicePrincipalPolicy -Id <ObjectId of the ServicePrincipal> -RefObjectId <ObjectId of the Policy>
       ```
 
 #### <a name="example-create-and-assign-a-policy-that-uses-a-claims-transformation-in-tokens-issued-to-a-service-principal"></a>Exemple : Créer et attribuer une stratégie qui utilise une transformation de revendications dans des jetons émis pour un principal du service
 
-Dans cet exemple, vous créez une stratégie qui émet une revendication personnalisée « JoinedData » pour des jetons JWT émis pour des principaux du service liés. Cette revendication contient une valeur créée en joignant les données stockées dans l’attribut extensionattribute1 sur l’objet utilisateur avec « .sandbox ». Dans cet exemple, nous excluons l’ensemble de revendications de base des jetons.
+Dans cet exemple, vous créez une stratégie qui émet une revendication personnalisée « JoinedData » pour des jetons JWT émis pour des principaux du service liés. Cette revendication contient une valeur créée en joignant les données stockées dans l’attribut extensionattribute1 sur l’objet utilisateur avec « .sandbox ». Dans cet exemple, nous excluons l’ensemble de revendications de base des jetons.
 
 1. Créez une stratégie de mappage de revendications. Cette stratégie liée à des principaux du service spécifiques ajoute les revendications EmployeeID et TenantCountry aux jetons.
    1. Pour créer la stratégie, exécutez la commande suivante :
-     
+
       ``` powershell
       New-AzureADPolicy -Definition @('{"ClaimsMappingPolicy":{"Version":1,"IncludeBasicClaimSet":"true", "ClaimsSchema":[{"Source":"user","ID":"extensionattribute1"},{"Source":"transformation","ID":"DataJoin","TransformationId":"JoinTheData","JwtClaimType":"JoinedData"}],"ClaimsTransformations":[{"ID":"JoinTheData","TransformationMethod":"Join","InputClaims":[{"ClaimTypeReferenceId":"extensionattribute1","TransformationClaimType":"string1"}], "InputParameters": [{"ID":"string2","Value":"sandbox"},{"ID":"separator","Value":"."}],"OutputClaims":[{"ClaimTypeReferenceId":"DataJoin","TransformationClaimType":"outputClaim"}]}]}}') -DisplayName "TransformClaimsExample" -Type "ClaimsMappingPolicy"
       ```
-    
-   2. Pour voir votre nouvelle stratégie et obtenir son ObjectId, exécutez la commande suivante : 
-     
+
+   2. Pour voir votre nouvelle stratégie et obtenir son ObjectId, exécutez la commande suivante :
+
       ``` powershell
       Get-AzureADPolicy
       ```
-1. Affectez la stratégie au principal de service. Vous devez également obtenir l’ObjectId de votre principal du service. 
+1. Affectez la stratégie au principal de service. Vous devez également obtenir l’ObjectId de votre principal du service.
    1. Pour afficher tous les principaux de service de votre organisation, vous pouvez [interroger l’API Microsoft Graph](/graph/traverse-the-graph). Ou, dans l’[afficheur Microsoft Graph](https://developer.microsoft.com/graph/graph-explorer), connectez-vous à votre compte Azure AD.
-   2. Une fois que vous disposez de l’ObjectId de votre principal du service, exécutez la commande suivante : 
-     
+   2. Une fois que vous disposez de l’ObjectId de votre principal du service, exécutez la commande suivante :
+
       ``` powershell
       Add-AzureADServicePrincipalPolicy -Id <ObjectId of the ServicePrincipal> -RefObjectId <ObjectId of the Policy>
       ```
 
 ## <a name="see-also"></a>Voir aussi
 
-Pour savoir comment personnaliser les revendications émises dans le jeton SAML via le portail Azure, consultez [How to: Customize claims issued in the SAML token for enterprise applications](active-directory-saml-claims-customization.md) (Comment : Personnaliser des revendications émises dans le jeton SAML pour les applications d’entreprise)
+- Pour savoir comment personnaliser les revendications émises dans le jeton SAML via le portail Azure, consultez [How to: Customize claims issued in the SAML token for enterprise applications](active-directory-saml-claims-customization.md) (Comment : Personnaliser des revendications émises dans le jeton SAML pour les applications d’entreprise)
+- Pour plus d’informations sur les attributs d’extension, consultez [Utiliser des attributs de l’extension de schéma d’annuaire dans les revendications](active-directory-schema-extensions.md).

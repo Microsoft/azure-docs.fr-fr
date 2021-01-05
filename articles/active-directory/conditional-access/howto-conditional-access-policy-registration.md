@@ -4,23 +4,23 @@ description: Créer une stratégie d’accès conditionnel personnalisée pour l
 services: active-directory
 ms.service: active-directory
 ms.subservice: conditional-access
-ms.topic: conceptual
-ms.date: 03/25/2020
+ms.topic: how-to
+ms.date: 05/26/2020
 ms.author: joflore
 author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: calebb, rogoya
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 9c8081bb8145a6654c168fb2d664e1666b32dc18
-ms.sourcegitcommit: b55d7c87dc645d8e5eb1e8f05f5afa38d7574846
+ms.openlocfilehash: 81f4407ee7721332a4143952d1720151bb70d8c9
+ms.sourcegitcommit: 0a9df8ec14ab332d939b49f7b72dea217c8b3e1e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81457907"
+ms.lasthandoff: 11/18/2020
+ms.locfileid: "94837536"
 ---
 # <a name="conditional-access-securing-security-info-registration"></a>Accès conditionnel : Sécurisation de l’inscription des informations de sécurité
 
-La sécurisation de l’inscription des utilisateurs pour l’authentification multifacteur et la réinitialisation de mot de passe en libre-service est désormais possible avec les actions de l’utilisateur dans la stratégie d’accès conditionnel. Cette fonctionnalité en préversion est à la disposition des organisations qui ont activé l’[inscription combinée](../authentication/concept-registration-mfa-sspr-combined.md). Cette fonctionnalité peut être activée dans les organisations qui souhaitent utiliser des conditions telles qu’un emplacement réseau approuvé afin de limiter l’accès pour s’inscrire à l’authentification multifacteur et à la réinitialisation de mot de passe en libre-service (SSPR). Pour plus d’informations sur les conditions utilisables, consultez l’article [Accès conditionnel : Conditions](concept-conditional-access-conditions.md).
+La sécurisation de l’inscription des utilisateurs à Azure AD Multi-Factor Authentication et à la réinitialisation de mot de passe en libre-service est désormais possible avec les actions de l’utilisateur dans la stratégie d’accès conditionnel. Cette fonctionnalité en préversion est à la disposition des organisations qui ont activé l’[inscription combinée](../authentication/concept-registration-mfa-sspr-combined.md). Cette fonctionnalité peut être activée dans les organisations qui souhaitent utiliser des conditions telles qu’un emplacement réseau approuvé afin de limiter l’accès pour s’inscrire à Azure AD Multi-Factor Authentication et à la réinitialisation de mot de passe en libre-service (SSPR). Pour plus d’informations sur les conditions utilisables, consultez l’article [Accès conditionnel : Conditions](concept-conditional-access-conditions.md).
 
 ## <a name="create-a-policy-to-require-registration-from-a-trusted-location"></a>Créer une stratégie pour exiger l’inscription à partir d’un emplacement approuvé
 
@@ -61,11 +61,12 @@ Certains peuvent choisir d’utiliser l’état de l’appareil au lieu de l’e
 
 > [!WARNING]
 > Si vous utilisez l’état de l’appareil comme condition dans votre stratégie, cela peut avoir un impact sur les utilisateurs invités dans l’annuaire. Le [Mode Rapport uniquement](concept-conditional-access-report-only.md) permet de déterminer l’impact des décisions stratégiques.
+> Notez que le mode Rapport uniquement n’est pas applicable pour les stratégies d’autorité de certification avec l’étendue « Actions de l’utilisateur ».
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 [Stratégies d’accès conditionnel courantes](concept-conditional-access-policy-common.md)
 
-[Déterminer l'impact à l'aide du mode Rapport seul de l'Accès conditionnel](howto-conditional-access-report-only.md)
+[Déterminer l'impact à l'aide du mode Rapport seul de l'Accès conditionnel](howto-conditional-access-insights-reporting.md)
 
 [Simuler le comportement de connexion à l’aide de l’outil What If pour l’accès conditionnel](troubleshoot-conditional-access-what-if.md)

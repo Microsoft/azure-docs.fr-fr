@@ -6,16 +6,16 @@ ms.suite: integration
 ms.reviewer: divswa, logicappspm
 ms.topic: article
 ms.date: 01/30/2020
-ms.openlocfilehash: 46989ed2468469443d4e91a1834bc20b12c25a1e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: d1f575d9d588ccd99523c6b6d5d2ceba6369dc3d
+ms.sourcegitcommit: ce8eecb3e966c08ae368fafb69eaeb00e76da57e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76907312"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92309912"
 ---
 # <a name="view-and-create-queries-for-monitoring-and-tracking-in-azure-monitor-logs-for-azure-logic-apps"></a>Afficher et créer des requêtes de surveillance et de suivi dans des journaux Azure Monitor pour Azure Logic Apps
 
-Vous pouvez afficher les requêtes sous-jacentes qui produisent les résultats des [journaux Azure Monitor](../log-analytics/log-analytics-overview.md) et créer des requêtes qui filtrent les résultats en fonction de vos critères spécifiques. Par exemple, vous pouvez rechercher des messages sur la base d’un numéro de contrôle d’échange spécifique. Les requêtes utilisent le [langage de requête Kusto](https://aka.ms/LogAnalyticsLanguageReference) que vous pouvez modifier si vous voulez voir des résultats différents. Pour plus d’informations, voir [Requêtes de journal Azure Monitor](../azure-monitor/log-query/query-language.md).
+Vous pouvez afficher les requêtes sous-jacentes qui produisent les résultats des [journaux Azure Monitor](../azure-monitor/log-query/log-query-overview.md) et créer des requêtes qui filtrent les résultats en fonction de vos critères spécifiques. Par exemple, vous pouvez rechercher des messages sur la base d’un numéro de contrôle d’échange spécifique. Les requêtes utilisent le [langage de requête Kusto](/azure/data-explorer/kusto/query/) que vous pouvez modifier si vous voulez voir des résultats différents. Pour plus d’informations, voir [Requêtes de journal Azure Monitor](/azure/data-explorer/kusto/query/).
 
 ## <a name="prerequisites"></a>Conditions préalables requises
 
@@ -59,7 +59,7 @@ Pour rechercher ou filtrer des résultats en fonction de propriétés ou de vale
 
      ![Démarrer avec des requêtes prédéfinies de solution, « Logic Apps B2B »](./media/create-monitoring-tracking-queries/b2b-prebuilt-queries.png)
 
-   * Pour partir d’une requête vide, dans l’éditeur de requête, commencez à taper le [langage de requête Kusto](../azure-monitor/log-query/query-language.md) pour votre requête.
+   * Pour partir d’une requête vide, dans l’éditeur de requête, commencez à taper le [langage de requête Kusto](/azure/data-explorer/kusto/query/) pour votre requête.
 
      ![Commencer par une requête vide](./media/create-monitoring-tracking-queries/create-query-from-blank.png)
 

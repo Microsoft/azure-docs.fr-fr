@@ -6,12 +6,12 @@ ms.topic: conceptual
 author: bwren
 ms.author: bwren
 ms.date: 08/22/2019
-ms.openlocfilehash: 680cd9b44cc447f9bdea38cb9d04fc661fba9c79
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: ba81e0bd74390d8b20803f8f9cf6e9f2ae9f0eab
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77659252"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96184516"
 ---
 # <a name="oms-portal-moving-to-azure"></a>Migration du portail OMS vers Azure
 
@@ -32,7 +32,7 @@ Les modifications suivantes sont annoncées avec l’abandon du portail OMS. Cha
 - [L’application mobile OMS](#oms-mobile-app) est dépréciée. 
 - La [solution NSG est remplacée](#azure-network-security-group-analytics) par une fonctionnalité améliorée disponible via la solution Traffic Analytics.
 - Les nouvelles connexions de System Center Operations Manager à Log Analytics exigent des [packs d’administration à jour](#system-center-operations-manager).
-- Pour plus d’informations sur les changements apportés à [Update Management](../../automation/automation-update-management.md), consultez [Migrer vos déploiements de mises à jour OMS vers Azure](../../automation/migrate-oms-update-deployments.md).
+- Pour plus d’informations sur les changements apportés à [Update Management](../../automation/update-management/overview.md), consultez [Migrer vos déploiements de mises à jour OMS vers Azure](../../automation/migrate-oms-update-deployments.md).
 
 
 ## <a name="what-should-i-do-now"></a>Que dois-je savoir ?
@@ -41,7 +41,7 @@ Même si vous pouvez continuer à utiliser la plupart des fonctionnalités sans 
 - Vous devez [migrer vos autorisations utilisateur](#user-access-and-role-migration) vers le portail Azure.
 - Pour plus d’informations sur la transition de la solution Update Management, consultez [Migrer vos déploiements de mises à jour OMS vers Azure](../../automation/migrate-oms-update-deployments.md).
 
-Référez-vous à [Questions courantes sur la transition du portail OMS vers le portail Azure pour les utilisateurs Log Analytics](oms-portal-faq.md) pour plus d’informations sur la transition vers le portail Azure. 
+Référez-vous à [Questions courantes sur la transition du portail OMS vers le portail Azure pour les utilisateurs Log Analytics](../overview.md) pour plus d’informations sur la transition vers le portail Azure. 
 
 ## <a name="user-access-and-role-migration"></a>Accès utilisateur et migration du rôle
 La gestion des accès du portail Azure est plus complète et plus puissante que la gestion des accès du portail OMS. Pour plus d’informations sur la gestion des accès dans Log Analytics, voir [Conception de votre espace de travail de journaux Azure](design-logs-deployment.md).
@@ -70,7 +70,7 @@ Vous ne pouvez plus créer d’espaces de travail à l’aide du portail OMS. Po
 
 ### <a name="alert-extension"></a>Extension d’alerte  
 
-Les alertes ont été [étendue dans le portail Azure](alerts-extend.md) Les alertes existantes continueront d’être répertoriées dans le portail Microsoft Operations Management Suite, mais ne vous pourrez les gérer que dans le portail Azure. Si vous accédez aux alertes par programme à l’aide de l’API REST Log Analytics Alert ou du modèle Log Analytics Alert Resource, vous devrez utiliser des groupes d’actions à la place des actions dans vos appels d’API, modèles Azure Resource Manager et commandes PowerShell.
+Les alertes ont été [étendue dans le portail Azure](./alerts-unified-log.md) Les alertes existantes continueront d’être répertoriées dans le portail Microsoft Operations Management Suite, mais ne vous pourrez les gérer que dans le portail Azure. Si vous accédez aux alertes par programme à l’aide de l’API REST Log Analytics Alert ou du modèle Log Analytics Alert Resource, vous devrez utiliser des groupes d’actions à la place des actions dans vos appels d’API, modèles Azure Resource Manager et commandes PowerShell.
 
 ### <a name="alert-management-solution"></a>solution de gestion des alertes
 Contrairement à ce qui avait été annoncé précédemment, la [solution de gestion des alertes](alert-management-solution.md) restera disponible et entièrement prise en charge dans le portail Azure. Vous pouvez continuer d'installer la solution depuis Place de marché Azure.
@@ -102,7 +102,7 @@ Cette solution analyse les journaux de flux NSG et fournit des insights sur les 
 Vous pouvez continuer à utiliser les Paramètres de diagnostics pour envoyer les journaux d’activité NSG à Log Analytics, afin que vos recherches enregistrées, alertes, tableaux de bord existants continuent de fonctionner. Les clients qui ont déjà installé la solution peuvent continuer à l’utiliser jusqu’à nouvel ordre. À partir du 5 septembre, la solution Network Security Group Analytics sera supprimée de la place de marché et mise à disposition via la communauté sous forme de [Modèle de démarrage rapide Azure](https://azure.microsoft.com/resources/templates/?resourceType=Microsoft.Operationalinsights).
 
 ## <a name="system-center-operations-manager"></a>System Center Operations Manager
-Si le [groupe d’administration Operations Manager est déjà connecté à Log Analytics](om-agents.md), il continuera de fonctionner sans modification. Pour les nouvelles connexions en revanche, suivez les instructions du [Pack d’administration Microsoft System Center Operations Manager pour configurer Operations Management Suite](https://blogs.technet.microsoft.com/momteam/2018/07/25/microsoft-system-center-operations-manager-management-pack-to-configure-operations-management-suite/).
+Si le [groupe d’administration Operations Manager est déjà connecté à Log Analytics](om-agents.md), il continuera de fonctionner sans modification. Pour les nouvelles connexions en revanche, suivez les instructions du [Pack d’administration Microsoft System Center Operations Manager pour configurer Operations Management Suite](https://techcommunity.microsoft.com/t5/system-center-blog/bg-p/SystemCenterBlog).
 
 ## <a name="next-steps"></a>Étapes suivantes
-- Consultez [Questions courantes sur la transition du portail OMS vers le portail Azure pour les utilisateurs Log Analytics](oms-portal-faq.md) pour obtenir des conseils sur la transition depuis le portail OMS vers le portail Azure.
+- Consultez [Questions courantes sur la transition du portail OMS vers le portail Azure pour les utilisateurs Log Analytics](../overview.md) pour obtenir des conseils sur la transition depuis le portail OMS vers le portail Azure.

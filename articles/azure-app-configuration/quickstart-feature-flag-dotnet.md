@@ -3,33 +3,33 @@ title: Démarrage rapide pour l’ajout d’indicateurs de fonctionnalités à d
 description: Guide de démarrage rapide pour l’ajout d’indicateurs de fonctionnalités à des applications .NET Framework et leur gestion dans Azure App Configuration
 services: azure-app-configuration
 documentationcenter: ''
-author: lisaguthrie
-manager: maiye
+author: AlexandraKemperMS
 editor: ''
 ms.assetid: ''
 ms.service: azure-app-configuration
 ms.devlang: csharp
+ms.custom: devx-track-csharp
 ms.topic: quickstart
 ms.tgt_pltfrm: .NET
 ms.workload: tbd
-ms.date: 10/21/2019
-ms.author: lcozzens
-ms.openlocfilehash: 5ea9749c07aadc7037e753160e9b053992bebae2
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.date: 10/19/2020
+ms.author: alkemper
+ms.openlocfilehash: 513c826e11ff9dfe6ea94349c67620da9d1bba48
+ms.sourcegitcommit: 1756a8a1485c290c46cc40bc869702b8c8454016
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "77619304"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96932045"
 ---
 # <a name="quickstart-add-feature-flags-to-a-net-framework-app"></a>Démarrage rapide : Ajouter des indicateurs de fonctionnalités à une application .NET Framework
 
 Dans ce guide de démarrage rapide, vous incorporez Azure App Configuration à une application .NET Framework pour créer une implémentation de bout en bout de la gestion des fonctionnalités. Vous pouvez utiliser le service App Configuration pour stocker de manière centralisée tous vos indicateurs de fonctionnalités et contrôler leur état. 
 
-Les bibliothèques de gestion des fonctionnalités .NET étendent le framework avec une prise en charge complète des indicateurs de fonctionnalités. Ces bibliothèques sont basées sur le système de configuration de .NET. Elles s’intègrent facilement à App Configuration via son fournisseur de configuration .NET.
+Les bibliothèques de gestion des fonctionnalités .NET étendent le framework avec une prise en charge des indicateurs de fonctionnalités. Ces bibliothèques sont basées sur le système de configuration de .NET. Elles s’intègrent à App Configuration via son fournisseur de configuration .NET.
 
 ## <a name="prerequisites"></a>Prérequis
 
-- Abonnement Azure : [créez-en un gratuitement](https://azure.microsoft.com/free/)
+- Abonnement Azure : [créez-en un gratuitement](https://azure.microsoft.com/free/dotnet)
 - [Visual Studio 2019](https://visualstudio.microsoft.com/vs)
 - [.NET Framework 4.8](https://dotnet.microsoft.com/download)
 
@@ -37,7 +37,7 @@ Les bibliothèques de gestion des fonctionnalités .NET étendent le framework a
 
 [!INCLUDE [azure-app-configuration-create](../../includes/azure-app-configuration-create.md)]
 
-6. Sélectionnez **Gestionnaire de fonctionnalités** >  **+Ajouter** pour ajouter un indicateur de fonctionnalité appelé `Beta`.
+7. Sélectionnez **Gestionnaire de fonctionnalités** >  **+Ajouter** pour ajouter un indicateur de fonctionnalité appelé `Beta`.
 
     > [!div class="mx-imgBorder"]
     > ![Activer l’indicateur de fonctionnalité nommé Beta](media/add-beta-feature-flag.png)
@@ -69,6 +69,7 @@ Les bibliothèques de gestion des fonctionnalités .NET étendent le framework a
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.Configuration.AzureAppConfiguration;
     using Microsoft.FeatureManagement;
+    using System.Threading.Tasks;
     ```
 
 1. Mettez à jour la méthode `Main` pour vous connecter à App Configuration, en spécifiant l’option `UseFeatureFlags` pour que les indicateurs de fonctionnalité soient récupérés. Affichez ensuite un message si l’indicateur de fonctionnalité `Beta` est activé.
@@ -98,6 +99,8 @@ Les bibliothèques de gestion des fonctionnalités .NET étendent le framework a
             }
 
             Console.WriteLine("Hello World!");
+            Console.WriteLine("Press any key to continue ...");
+            Console.Read();
         }
     ```
 
@@ -105,11 +108,15 @@ Les bibliothèques de gestion des fonctionnalités .NET étendent le framework a
 
 1. Définissez une variable d’environnement nommée **ConnectionString** et affectez-lui la valeur de la chaîne de connexion de votre magasin App Configuration. Si vous utilisez l’invite de commandes Windows, exécutez la commande suivante :
 
+    ```console
         setx ConnectionString "connection-string-of-your-app-configuration-store"
+    ```
 
     Si vous utilisez Windows PowerShell, exécutez la commande suivante :
 
+    ```powershell
         $Env:ConnectionString = "connection-string-of-your-app-configuration-store"
+    ```
 
 1. Redémarrez Visual Studio pour que la modification soit prise en compte. 
 

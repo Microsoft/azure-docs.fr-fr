@@ -11,13 +11,13 @@ ms.service: data-factory
 ms.workload: data-services
 ms.topic: conceptual
 ms.custom: seo-lt-2019
-ms.date: 08/01/2019
-ms.openlocfilehash: e2c9da9c1a37b087a31d1910094f51a39288c192
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.date: 08/03/2020
+ms.openlocfilehash: e9c1651244eecb036ca18ad5dadfe23f48b2bce6
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81416704"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87529260"
 ---
 # <a name="copy-data-from-quickbooks-online-using-azure-data-factory-preview"></a>Copier des données de QuickBooks Online à l’aide d’Azure Data Factory (préversion)
 [!INCLUDE[appliesto-adf-asa-md](includes/appliesto-adf-asa-md.md)]
@@ -36,9 +36,7 @@ Ce connecteur QuickBooks est pris en charge pour les activités suivantes :
 
 Vous pouvez copier des données de QuickBooks Online dans une banque de données réceptrice prise en charge. Pour obtenir la liste des banques de données prises en charge en tant que sources ou récepteurs par l’activité de copie, consultez le tableau [Banques de données prises en charge](copy-activity-overview.md#supported-data-stores-and-formats).
 
-Azure Data Factory fournit un pilote intégré qui permet la connexion. Vous n’avez donc pas besoin d’installer manuellement un pilote à l’aide de ce connecteur.
-
-Actuellement, ce connecteur ne prend en charge que 1.0a, ce qui signifie que vous devez disposer d’un compte de développeur pour les applications créées avant le 17 juillet 2017.
+Ce connecteur prend en charge l’authentification OAuth 2.0 de QuickBooks.
 
 ## <a name="getting-started"></a>Prise en main
 
@@ -53,12 +51,13 @@ Les propriétés prises en charge pour le service lié QuickBooks sont les suiva
 | Propriété | Description | Obligatoire |
 |:--- |:--- |:--- |
 | type | La propriété type doit être définie sur : **QuickBooks** | Oui |
+| connectionProperties | Groupe de propriétés qui définit la façon de se connecter à QuickBooks. | Oui |
+| ***Sous `connectionProperties`:*** | | |
 | endpoint | Le point de terminaison du serveur QuickBooks Online. (À savoir, quickbooks.api.intuit.com.)  | Oui |
-| companyId | L’ID de la société QuickBooks à autoriser. Pour plus d’informations sur la recherche d’ID d’entreprise, consultez [Comment trouver mon ID d’entreprise ?](https://quickbooks.intuit.com/community/Getting-Started/How-do-I-find-my-Company-ID/m-p/185551). | Oui |
-| consumerKey | Clé de consommateur pour l’authentification OAuth 1.0. | Oui |
-| consumerSecret | Secret du client pour l’authentification OAuth 1.0. Marquez ce champ en tant que SecureString afin de le stocker en toute sécurité dans Data Factory, ou [référencez un secret stocké dans Azure Key Vault](store-credentials-in-key-vault.md). | Oui |
-| accessToken | Le jeton d’accès pour l’authentification OAuth 1.0. Marquez ce champ en tant que SecureString afin de le stocker en toute sécurité dans Data Factory, ou [référencez un secret stocké dans Azure Key Vault](store-credentials-in-key-vault.md). | Oui |
-| accessTokenSecret | Le secret de jeton d’accès pour l’authentification OAuth 1.0. Marquez ce champ en tant que SecureString afin de le stocker en toute sécurité dans Data Factory, ou [référencez un secret stocké dans Azure Key Vault](store-credentials-in-key-vault.md). | Oui |
+| companyId | L’ID de la société QuickBooks à autoriser. Pour plus d’informations sur la recherche d’ID d’entreprise, consultez [Comment trouver mon ID d’entreprise](https://quickbooks.intuit.com/community/Getting-Started/How-do-I-find-my-Company-ID/m-p/185551). | Oui |
+| consumerKey | Clé de consommateur pour l’authentification OAuth 2.0. | Oui |
+| consumerSecret | Secret du client pour l’authentification OAuth 2.0. Marquez ce champ en tant que SecureString afin de le stocker en toute sécurité dans Data Factory, ou [référencez un secret stocké dans Azure Key Vault](store-credentials-in-key-vault.md). | Oui |
+| refreshToken | Jeton d’actualisation OAuth 2.0 associé à l’application QuickBooks. Pour plus d’informations, cliquez [ici](https://developer.intuit.com/app/developer/qbo/docs/develop/authentication-and-authorization/oauth-2.0#obtain-oauth2-credentials-for-your-app). Notez que le jeton d’actualisation expirera après 180 jours. Le client doit régulièrement mettre à jour le jeton d’actualisation. <br/>Marquez ce champ en tant que SecureString afin de le stocker en toute sécurité dans Data Factory, ou [référencez un secret stocké dans Azure Key Vault](store-credentials-in-key-vault.md).| Oui |
 | useEncryptedEndpoints | Indique si les points de terminaison de la source de données sont chiffrés suivant le protocole HTTPS. La valeur par défaut est true.  | Non |
 
 **Exemple :**
@@ -69,22 +68,20 @@ Les propriétés prises en charge pour le service lié QuickBooks sont les suiva
     "properties": {
         "type": "QuickBooks",
         "typeProperties": {
-            "endpoint" : "quickbooks.api.intuit.com",
-            "companyId" : "<companyId>",
-            "consumerKey": "<consumerKey>",
-            "consumerSecret": {
-                "type": "SecureString",
-                "value": "<consumerSecret>"
-            },
-            "accessToken": {
-                 "type": "SecureString",
-                 "value": "<accessToken>"
-            },
-            "accessTokenSecret": {
-                 "type": "SecureString",
-                 "value": "<accessTokenSecret>"
-            },
-            "useEncryptedEndpoints" : true
+            "connectionProperties": {
+                "endpoint": "quickbooks.api.intuit.com",
+                "companyId": "<company id>",
+                "consumerKey": "<consumer key>", 
+                "consumerSecret": {
+                     "type": "SecureString",
+                     "value": "<clientSecret>"
+                },
+                "refreshToken": {
+                     "type": "SecureString",
+                     "value": "<refresh token>"
+                },
+                "useEncryptedEndpoints": true
+            }
         }
     }
 }

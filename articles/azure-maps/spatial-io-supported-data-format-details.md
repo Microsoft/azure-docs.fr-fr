@@ -1,19 +1,19 @@
 ---
 title: Détails sur les formats de données pris en charge | Microsoft Azure Maps
 description: Découvrez comment les données spatiales délimitées sont analysées dans le module d’E/S spatiales.
-author: philmea
-ms.author: philmea
+author: anastasia-ms
+ms.author: v-stharr
 ms.date: 03/03/2020
 ms.topic: conceptual
 ms.service: azure-maps
 services: azure-maps
 manager: philmea
-ms.openlocfilehash: 3353620f1751e939a04543115fe704555fb3bc21
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 7227813f607ca18ee50f503a30b290414f333e21
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80334084"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91310167"
 ---
 # <a name="supported-data-format-details"></a>Détails sur les formats de données pris en charge
 
@@ -431,5 +431,4 @@ Si aucune information de type ne peut être extraite de l’en-tête et que l’
 
 Pour obtenir plus d’exemples de code à ajouter à vos cartes, consultez les articles suivants :
 
-> [!div class="nextstepaction"]
-> [Lire et écrire des données spatiales](spatial-io-read-write-spatial-data.md)
+[Lire et écrire des données spatiales](spatial-io-read-write-spatial-data.md)

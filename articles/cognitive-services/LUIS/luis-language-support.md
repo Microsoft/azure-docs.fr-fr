@@ -3,20 +3,18 @@ title: Prise en charge des langues - LUIS
 titleSuffix: Azure Cognitive Services
 description: LUIS possède un éventail de fonctionnalités au sein du service. Certaines fonctionnalités partagent la même parité de langage. Assurez-vous que les fonctionnalités qui que vous intéressent sont prises en charge dans la culture de langue que vous ciblez. Une application LUIS est propre à une culture et ne peut pas être modifiée après configuration.
 services: cognitive-services
-author: diberry
 manager: nitinme
 ms.custom: seodec18
 ms.service: cognitive-services
 ms.subservice: language-understanding
-ms.topic: conceptual
+ms.topic: reference
 ms.date: 12/09/2019
-ms.author: diberry
-ms.openlocfilehash: 69ff3aa3f649b054192f9dd001af83dc8dbc2317
-ms.sourcegitcommit: 493b27fbfd7917c3823a1e4c313d07331d1b732f
+ms.openlocfilehash: 1da43d0ef208d61ced6c8ca8dbc7603e0ef51155
+ms.sourcegitcommit: 10d00006fec1f4b69289ce18fdd0452c3458eca5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83745690"
+ms.lasthandoff: 11/21/2020
+ms.locfileid: "96021569"
 ---
 # <a name="language-and-region-support-for-luis"></a>Prise en charge de la région et de la langue pour LUIS
 
@@ -30,7 +28,7 @@ Si vous avez besoin d’une application client LUIS multilingue, comme un chatb
 
 LUIS comprend les énoncés dans les langues suivantes :
 
-| Langage |Paramètres régionaux  |  Domaine prédéfini | Entité prédéfinie | Recommandations de liste d’expression | \**[Analyse de texte](https://docs.microsoft.com/azure/cognitive-services/text-analytics/text-analytics-supported-languages)<br>(Sentiment et<br>mots clés)|
+| Langage |Paramètres régionaux  |  Domaine prédéfini | Entité prédéfinie | Recommandations de liste d’expression | \**[Analyse de texte](../text-analytics/language-support.md)<br>(Sentiment et<br>mots clés)|
 |--|--|:--:|:--:|:--:|:--:|
 | Anglais (États-Unis) |`en-US` | ✔ | ✔  |✔|✔|
 | Arabe (préversion ; arabe standard moderne) |`ar-AR`|-|-|-|-|
@@ -71,7 +69,7 @@ La prise en charge linguistique varie pour les [entités prédéfinies](luis-ref
 Consultez les [langues prises en charge](../speech-service/speech-to-text.md) par Speech pour connaître les langues du mode de dictée de Speech.
 
 ### <a name="bing-spell-check-supported-languages"></a>Langues prises en charge par la vérification orthographique Bing
-Consultez les [langues prises en charge](https://docs.microsoft.com/azure/cognitive-services/bing-spell-check/bing-spell-check-supported-languages) par la vérification orthographique Bing pour obtenir la liste des langues prises en charge et leur état.
+Consultez les [langues prises en charge](../bing-spell-check/language-support.md) par la vérification orthographique Bing pour obtenir la liste des langues prises en charge et leur état.
 
 ## <a name="rare-or-foreign-words-in-an-application"></a>Mots rares ou étrangers dans une application
 Dans la culture `en-us`, LUIS apprend à distinguer la plupart des mots anglais, y compris l’argot. Dans la culture `zh-cn`, LUIS apprend distinguer la plupart des caractères chinois. Si vous utilisez un mot rare en `en-us` ou caractère en `zh-cn`, et que LUIS semble incapable de distinguer ce mot ou ce caractère, vous pouvez ajouter le mot ou le caractère à une [fonctionnalité de la liste d’expressions](luis-how-to-add-features.md). Par exemple, les mots n’appartenant pas à la culture de l’application (autrement dit, les mots étrangers) doivent être ajoutés à une fonctionnalité de liste d’expressions.
@@ -115,8 +113,8 @@ Les cultures suivantes ont des versions personnalisées du générateur de jeton
 |--|--|--|
 |Allemand<br>`de-de`|1.0.0|Segmente les mots composés en composants simples à l’aide d’un générateur de jetons de type Machine Learning.<br>L’énoncé `Ich fahre einen krankenwagen` est transformé en `Ich fahre einen kranken wagen`. Permet de marquer indépendamment `kranken` et `wagen` comme des entités différentes.|
 |Allemand<br>`de-de`|1.0.2|Segmente les mots en les fractionnant sur les espaces.<br> Si un utilisateur entre `Ich fahre einen krankenwagen` comme énoncé, il reste un jeton unique. `krankenwagen` est donc marqué comme une seule entité. |
-|Néerlandais<br>`de-de`|1.0.0|Segmente les mots composés en composants simples à l’aide d’un générateur de jetons de type Machine Learning.<br>L’énoncé `Ik ga naar de kleuterschool` est transformé en `Ik ga naar de kleuter school`. Permet de marquer indépendamment `kleuter` et `school` comme des entités différentes.|
-|Néerlandais<br>`de-de`|1.0.1|Segmente les mots en les fractionnant sur les espaces.<br> Si un utilisateur entre `Ik ga naar de kleuterschool` comme énoncé, il reste un jeton unique. `kleuterschool` est donc marqué comme une seule entité. |
+|Néerlandais<br>`nl-nl`|1.0.0|Segmente les mots composés en composants simples à l’aide d’un générateur de jetons de type Machine Learning.<br>L’énoncé `Ik ga naar de kleuterschool` est transformé en `Ik ga naar de kleuter school`. Permet de marquer indépendamment `kleuter` et `school` comme des entités différentes.|
+|Néerlandais<br>`nl-nl`|1.0.1|Segmente les mots en les fractionnant sur les espaces.<br> Si un utilisateur entre `Ik ga naar de kleuterschool` comme énoncé, il reste un jeton unique. `kleuterschool` est donc marqué comme une seule entité. |
 
 
 ### <a name="migrating-between-tokenizer-versions"></a>Changer de version du générateur de jetons

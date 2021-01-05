@@ -13,16 +13,16 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 03/06/2020
 ms.author: vinigam
-ms.openlocfilehash: 4fe981576e3f6e58b0886d9c0d2eb2915d8b7720
-ms.sourcegitcommit: 632e7ed5449f85ca502ad216be8ec5dd7cd093cb
+ms.openlocfilehash: be69e7fc0c836257b92aa8573826fe1e8a36d770
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/30/2020
-ms.locfileid: "80396624"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94948440"
 ---
 # <a name="sample-queries-with-new-fields-in-the-traffic-analytics-schema-august-2019-schema-update"></a>Exemples de requêtes avec de nouveaux champs dans le schéma Traffic Analytics (mise à jour du schéma d’août 2019)
 
-Le [schéma de journal Traffic Analytics](https://docs.microsoft.com/azure/network-watcher/traffic-analytics-schema) inclut les nouveaux champs suivants : **SrcPublicIPs_s**, **DestPublicIPs_s**, **NSGRule_s**. Les nouveaux champs fournissent des informations sur les adresses IP source et de destination et simplifient les requêtes.
+Le [schéma de journal Traffic Analytics](./traffic-analytics-schema.md) inclut les nouveaux champs suivants : **SrcPublicIPs_s**, **DestPublicIPs_s**, **NSGRule_s**. Les nouveaux champs fournissent des informations sur les adresses IP source et de destination et simplifient les requêtes.
 
 Dans les prochains mois, les anciens champs suivants seront déconseillés : **VMIP_s**, **Subscription_g**, **Region_s**, **NSGRules_s**, **Subnet_s**, **VM_s**, **NIC_s**, **PublicIPs_s** et **FlowCount_d**.
 
@@ -76,7 +76,7 @@ DestPublicIPsAggregated = iif(isnotempty(DestPublicIPs_s), DestPublicIPs_s, "N/A
 
 L’ancien champ utilise le format :
 
-<Index value 0)>|<NSG_ RuleName>|<Flow Direction>|<Flow Status>|<FlowCount ProcessedByRule>
+`<Index value 0)>|<NSG_ RuleName>|<Flow Direction>|<Flow Status>|<FlowCount ProcessedByRule>`
 
 Nous ne regroupons plus de données dans un groupe de sécurité réseau. Dans le schéma mis à jour, **NSGList_s** contient un seul groupe de sécurité réseau. En outre, **NSGRules** contient une seule règle. Nous avons supprimé la mise en forme compliquée ici et dans d’autres champs, comme indiqué dans l’exemple.
 

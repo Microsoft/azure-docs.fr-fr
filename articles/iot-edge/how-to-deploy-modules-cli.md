@@ -4,31 +4,34 @@ description: Utilisez Azure CLI avec l’extension Azure IoT pour envoyer un Mod
 author: kgremban
 manager: philmea
 ms.author: kgremban
-ms.date: 08/16/2019
+ms.date: 10/13/2020
 ms.topic: conceptual
-ms.reviewer: menchi
 ms.service: iot-edge
+ms.custom: devx-track-azurecli
 services: iot-edge
-ms.openlocfilehash: fbd0d65624852737c424128e9125b8370b870d4d
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 86cccbc9a72459ad038defca32e232381368ef45
+ms.sourcegitcommit: 2e72661f4853cd42bb4f0b2ded4271b22dc10a52
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82133940"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92046687"
 ---
 # <a name="deploy-azure-iot-edge-modules-with-azure-cli"></a>Déployer des modules Azure IoT Edge avec Azure CLI
 
 Une fois que vous avez créé des modules IoT Edge avec votre logique métier, vous pouvez les déployer sur vos appareils afin qu’ils opèrent à la périphérie. Si plusieurs modules fonctionnent ensemble pour collecter et traiter les données, vous pouvez les déployer tous à la fois et déclarer les règles de routage qui les connectent.
 
-[Azure CLI](https://docs.microsoft.com/cli/azure?view=azure-cli-latest) est un outil en ligne de commande open source et multiplateforme, destiné à la gestion des ressources Azure, telles que IoT Edge. Il vous permet de gérer les ressources Azure IoT Hub, les instances de service Device Provisioning et les hubs liés dès l’installation. La nouvelle extension IoT enrichit Azure CLI avec des fonctionnalités telles que la gestion des appareils, et toutes les fonctionnalités IoT Edge.
+[Azure CLI](/cli/azure) est un outil en ligne de commande open source et multiplateforme, destiné à la gestion des ressources Azure, telles que IoT Edge. Il vous permet de gérer les ressources Azure IoT Hub, les instances de service Device Provisioning et les hubs liés dès l’installation. La nouvelle extension IoT enrichit Azure CLI avec des fonctionnalités telles que la gestion des appareils, et toutes les fonctionnalités IoT Edge.
 
 Cet article explique comment créer un manifeste de déploiement JSON, puis utiliser ce fichier pour étendre le déploiement à un appareil IoT Edge. Pour plus d’informations sur la création d’un déploiement ciblant plusieurs appareils en fonction de leurs balises partagées, consultez [Déployer et surveiller des modules IoT Edge à grande échelle](how-to-deploy-cli-at-scale.md).
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 * Un [hub IoT](../iot-hub/iot-hub-create-using-cli.md) dans votre abonnement Azure.
-* Un [appareil IoT Edge](how-to-register-device.md#register-with-the-azure-cli) avec le runtime IoT Edge installé.
-* [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli) dans votre environnement. Vous devez utiliser Azure CLI version 2.0.70 (au minimum) ou ultérieure. Utilisez `az --version` pour valider. Cette version prend en charge les commandes d’extension az et introduit l’infrastructure de la commande Knack.
+* Un appareil IoT Edge.
+
+  Si vous n’avez aucun appareil IoT Edge configuré, vous pouvez en créer un sur une machine virtuelle Azure. Suivez la procédure décrite dans l’un des articles de démarrage rapide suivants : [Création d’un appareil Linux virtuel](quickstart-linux.md) ou [Création d’un appareil Windows virtuel](quickstart.md).
+
+* [Azure CLI](/cli/azure/install-azure-cli) dans votre environnement. Vous devez utiliser Azure CLI version 2.0.70 ou ultérieure. Utilisez `az --version` pour valider. Cette version prend en charge les commandes d’extension az et introduit l’infrastructure de la commande Knack.
 * [Extension IoT pour Azure CLI](https://github.com/Azure/azure-iot-cli-extension).
 
 ## <a name="configure-a-deployment-manifest"></a>Configurer un manifeste de déploiement
@@ -39,13 +42,16 @@ Pour déployer des modules avec Azure CLI, enregistrez localement le manifeste d
 
 Par exemple, voici un manifeste de déploiement de base comportant un seul module :
 
+>[!NOTE]
+>Cet exemple de manifeste de déploiement utilise la version de schéma 1.1 pour l’agent IoT Edge et le hub. La version de schéma 1.1, publiée avec IoT Edge version 1.0.10, active des fonctionnalités telles que l’ordre de démarrage des modules et la hiérarchisation des itinéraires.
+
 ```json
 {
   "content": {
     "modulesContent": {
       "$edgeAgent": {
         "properties.desired": {
-          "schemaVersion": "1.0",
+          "schemaVersion": "1.1",
           "runtime": {
             "type": "docker",
             "settings": {
@@ -88,7 +94,7 @@ Par exemple, voici un manifeste de déploiement de base comportant un seul modul
       },
       "$edgeHub": {
         "properties.desired": {
-          "schemaVersion": "1.0",
+          "schemaVersion": "1.1",
           "routes": {
             "upstream": "FROM /messages/* INTO $upstream"
           },

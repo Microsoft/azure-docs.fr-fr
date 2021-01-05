@@ -14,14 +14,16 @@ ms.topic: article
 ms.date: 03/18/2019
 ms.author: juliako
 ms.reviewer: anilmur
-ms.openlocfilehash: e2ccce13e4ef09426d0f3a02dcbce2f330b0ead8
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 78236a334b6c75f823819c70c0cdbb75bb30191d
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79227021"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89257430"
 ---
 # <a name="media-encoder-standard-formats-and-codecs"></a>Codecs et formats standard de l’encodeur multimédia
+
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
 
 > [!div class="op_single_selector" title1="Sélectionnez la version de Media Services que vous utilisez :"]
 > * [Version 2](media-services-media-encoder-standard-formats.md)
@@ -39,7 +41,7 @@ Ce document contient la liste des formats de fichier d’importation et d’expo
 | Windows Media Video (WMV)/ASF (.wmv, .asf) |Oui |
 | AVI (8 bits/10 bits non compressé) (.avi) |Oui |
 | MP4 (.mp4, .m4a, .m4v)/ISMV (.isma, .ismv) |Oui |
-| [Microsoft Digital Video Recording (DVR-MS)](https://msdn.microsoft.com/library/windows/desktop/dd692984) (.dvr-ms) |Oui |
+| [Microsoft Digital Video Recording (DVR-MS)](/previous-versions/windows/desktop/mstv/about-the-dvr-ms-file-format) (.dvr-ms) |Oui |
 | Matroska/WebM (.mkv) |Oui |
 | WAVE/WAV (.wav) |Oui |
 | QuickTime (.mov) |Oui |
@@ -116,4 +118,3 @@ Le tableau suivant répertorie les codecs et les formats de fichiers pris en cha
 [Encodage de contenu à la demande avec Azure Media Services](media-services-encode-asset.md)
 
 [Encodage avec Media Encoder Standard](media-services-dotnet-encode-with-media-encoder-standard.md)
-

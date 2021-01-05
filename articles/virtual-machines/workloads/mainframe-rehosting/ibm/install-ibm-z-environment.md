@@ -3,6 +3,7 @@ title: Installer l’environnement de développement/test IBM zD&T sur Azure | M
 description: Déployez l’environnement de développement et de test IBM zD&T sur l’infrastructure Machine virtuelle Azure en tant que service IaaS (Infrastructure as a Service).
 services: virtual-machines-linux
 ms.service: virtual-machines-linux
+ms.subservice: workloads
 documentationcenter: ''
 author: njray
 ms.author: edprice
@@ -12,12 +13,12 @@ ms.topic: conceptual
 ms.date: 04/02/2019
 tags: ''
 keywords: ''
-ms.openlocfilehash: 67af4eae03b773fad9cf38964152c1fb9d623bd5
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c12a812f66345a26701b2a1623487fd262ede4be
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "72025938"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94968330"
 ---
 # <a name="install-ibm-zdt-devtest-environment-on-azure"></a>Installer l’environnement de développement/test IBM zD&T sur Azure
 
@@ -56,13 +57,13 @@ Cet article vous montre comment configurer zD&T (Z Development and Test Environm
 
 ## <a name="create-the-base-image-and-connect"></a>Créer l’image de base et se connecter
 
-1. Sur le portail Azure, [créez une machine virtuelle](/azure/virtual-machines/linux/quick-create-portal) avec la configuration de système d’exploitation de votre choix. Dans cet article, la configuration utilisée est une machine virtuelle B4ms (avec 4 processeurs virtuels et 16 Go de mémoire) exécutant Ubuntu 16.04.
+1. Sur le portail Azure, [créez une machine virtuelle](../../../linux/quick-create-portal.md) avec la configuration de système d’exploitation de votre choix. Dans cet article, la configuration utilisée est une machine virtuelle B4ms (avec 4 processeurs virtuels et 16 Go de mémoire) exécutant Ubuntu 16.04.
 
 2. Une fois la machine virtuelle créée, ouvrez les ports entrants 22 pour SSH, 21 pour FTP et 9443 pour le serveur web.
 
 3. Obtenez les informations d’identification SSH figurant dans le panneau **Vue d’ensemble** de la machine virtuelle via le bouton **Connecter**. Sélectionnez l’onglet **SSH** et copiez la commande SSH logon dans le Presse-papiers.
 
-4. Ouvrez une session sur un [shell Bash](/azure/cloud-shell/quickstart) à partir de votre PC local et collez la commande. Elle se présente sous la forme **ssh\<id utilisateur\>\@\<Adresse IP\>** . Quand vous y êtes invité, entrez vos informations d’identification pour établir une connexion à votre répertoire de base.
+4. Ouvrez une session sur un [shell Bash](../../../../cloud-shell/quickstart.md) à partir de votre PC local et collez la commande. Elle se présente sous la forme **ssh\<user id\>\@\<IP Address\>** . Quand vous y êtes invité, entrez vos informations d’identification pour établir une connexion à votre répertoire de base.
 
 ## <a name="copy-the-installation-file-to-the-server"></a>Copier le fichier d’installation sur le serveur
 

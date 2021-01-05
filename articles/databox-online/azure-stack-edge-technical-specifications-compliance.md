@@ -1,6 +1,6 @@
 ---
-title: Spécifications techniques et conformité de Microsoft Azure Stack Edge | Microsoft Docs
-description: En savoir plus sur les spécifications techniques et la conformité de votre Azure Stack Edge
+title: Spécifications techniques et conformité de Microsoft Azure Stack Edge Pro | Microsoft Docs
+description: Découvrir les spécifications techniques et la conformité de votre ressource Azure Stack Edge Pro
 services: databox
 author: alkohli
 ms.service: databox
@@ -8,39 +8,37 @@ ms.subservice: edge
 ms.topic: article
 ms.date: 03/02/2020
 ms.author: alkohli
-ms.openlocfilehash: 054f1449d6f06225633bf0647cac93ca42f2b59b
-ms.sourcegitcommit: a6d477eb3cb9faebb15ed1bf7334ed0611c72053
+ms.openlocfilehash: 8b36bb34f4c9081d807998cb8287797443625a6b
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82929007"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96460301"
 ---
-# <a name="azure-stack-edge-technical-specifications"></a>Spécifications techniques d’Azure Stack Edge
+# <a name="azure-stack-edge-pro-technical-specifications"></a>Spécifications techniques d’Azure Stack Edge Pro
 
-Les composants matériels de l’appareil Microsoft Azure Stack Edge sont conformes aux caractéristiques techniques et normes réglementaires présentées dans cet article. Les spécifications techniques décrivent les blocs d’alimentation (PSU), la capacité de stockage, les boîtiers et les normes environnementales. 
+Les composants matériels de l’appareil Microsoft Azure Stack Edge Pro sont conformes aux caractéristiques techniques et normes réglementaires présentées dans cet article. Les spécifications techniques décrivent les blocs d’alimentation (PSU), la capacité de stockage, les boîtiers et les normes environnementales.
 
 ## <a name="compute-memory-specifications"></a>Spécifications de calcul et de mémoire
 
-L’appareil Azure Stack Edge présente les spécifications suivantes en matière de calcul et de mémoire :
+L’appareil Azure Stack Edge Pro présente les spécifications suivantes en matière de calcul et de mémoire :
 
 | Caractéristique           | Valeur                  |
 |-------------------------|----------------------------|
-| UC    | 2 processeurs 10 cœurs                     |
-| Mémoire              | 128 Go de RAM                  |
-
+| UC    | 2 processeurs 10 cœurs Intel Xeon Silver 4114 2.2G                    |
+| Mémoire              | 128 Go de RAM (8 x16 Go RDIMM)                 |
 
 ## <a name="fpga-specifications"></a>Spécifications FPGA
 
-Pour les scénarios de Machine Learning, chaque appareil Azure Stack Edge dispose d’un FPGA (Field Programmable Gate Array). 
+Pour les scénarios de Machine Learning (ML), chaque appareil Azure Stack Edge Pro dispose d’un FPGA (Field Programmable Gate Array).
 
 | Caractéristique           | Valeur                  |
 |-------------------------|----------------------------|
-| FPGA   | Intel Arria 10 <br> Les modèles à réseau neuronal profond disponibles sont les mêmes que ceux [pris en charge par les instances cloud FPGA](https://docs.microsoft.com/azure/machine-learning/how-to-deploy-fpga-web-service#whats-supported-on-azure).| 
-
+| FPGA   | Intel Arria 10 <br> Les modèles à réseau neuronal profond disponibles sont les mêmes que ceux [pris en charge par les instances cloud FPGA](../machine-learning/how-to-deploy-fpga-web-service.md#fpga-support-in-azure).|
 
 ## <a name="power-supply-unit-specifications"></a>Spécifications des blocs d’alimentation
 
-L’appareil Azure Stack Edge a deux blocs d’alimentation de 100-240 V avec des ventilateurs à hautes performances. Les deux blocs d’alimentation fournissent une alimentation redondante. En cas de défaillance d’un blocs d’alimentation, l’appareil continue à fonctionner normalement sur l’autre bloc jusqu’au remplacement du module défaillant. Le tableau suivant liste les spécifications techniques des blocs d’alimentation.
+L’appareil Azure Stack Edge Pro est équipé de deux blocs d’alimentation de 100-240 V avec des ventilateurs hautes performances. Les deux blocs d’alimentation fournissent une alimentation redondante. En cas de défaillance d’un blocs d’alimentation, l’appareil continue à fonctionner normalement sur l’autre bloc jusqu’au remplacement du module défaillant. Le tableau suivant liste les spécifications techniques des blocs d’alimentation.
 
 | Caractéristique           | Bloc d’alimentation de 750 W                  |
 |-------------------------|----------------------------|
@@ -49,21 +47,35 @@ L’appareil Azure Stack Edge a deux blocs d’alimentation de 100-240 V avec d
 | Sélection de la plage de tension | Détermination automatique : 100-240 V AC |
 | Enfichable à chaud           | Oui                        |
 
+### <a name="azure-stack-edge-pro-power-cord-specifications-by-region"></a>Spécifications du cordon d’alimentation d’Azure Stack Edge Pro par région
+
+Votre appareil Azure Stack Edge Pro a besoin d’un cordon d’alimentation différent en fonction de votre région Azure.
+Pour voir les spécifications techniques de tous les cordons d’alimentation pris en charge, consultez [Spécifications du cordon d’alimentation d’Azure Stack Edge Pro par région](azure-stack-edge-technical-specifications-power-cords-regional.md).
+
 <!--## Power consumption statistics
 
-The following table lists the typical power consumption data (actual values may vary from the published) for the Azure Stack Edge device.-->
+The following table lists the typical power consumption data (actual values may vary from the published) for the Azure Stack Edge Pro device.-->
 
 ## <a name="network-interface-specifications"></a>Spécifications de l’interface réseau
 
-Votre appareil Azure Stack Edge dispose de 6 interfaces réseau : PORT1 à PORT6.
+Votre appareil Azure Stack Edge Pro dispose de 6 interfaces réseau : PORT1 à PORT6.
 
 | Caractéristique           | Description                 |
 |-------------------------|----------------------------|
 |  Interfaces réseau    | 2 interfaces 1 GbE : une pour la gestion, non configurable par l’utilisateur, utilisée pour l’installation initiale. L’autre interface peut être configurée par l’utilisateur, utilisée pour le transfert de données et est définie en mode DHCP par défaut. <br>2 interfaces 25 GbE : peuvent également fonctionner comme interfaces 10 GbE. Ces interfaces de données peuvent être configurées par l’utilisateur en mode statique ou DHCP (par défaut). <br> 2 interfaces 25 GbE : ces interfaces de données peuvent être configurées par l’utilisateur en mode statique ou DHCP (par défaut).                  |
 
+Les cartes réseau utilisées sont les suivantes : 
+
+| Caractéristique           | Description                 |
+|-------------------------|----------------------------|
+|Carte réseau fille (rNDC) |QLogic FastLinQ 41264 double port 25GbE SFP+, double port 1GbE, rNDC|
+|Carte réseau PCI |Carte QLogic FastLinQ 41262 double port 25 Gbit/s SFP28|
+
+Consultez la liste de compatibilité matérielle d’Intel QLogic pour connaître le convertisseur d’interface Gigabit compatible (GBIC). Le convertisseur d’interface Gigabit (GBIC) n’est pas inclus dans la distribution d’Azure Stack Edge. 
+
 ## <a name="storage-specifications"></a>Spécifications de stockage
 
-Les appareils Azure Stack Edge ont 9 disques SSD NVMe de 2,5", chacun avec une capacité de 1,6 To. Un de ces disques SSD est dédié au système d’exploitation, les huit autres étant des disques de données. La capacité utilisable totale pour l’appareil est d’environ 12,5 To. Le tableau suivant présente les détails de la capacité de stockage de l’appareil.
+Les appareils Azure Stack Edge Pro sont dotés de 9 disques SSD NVMe de 2,5", chacun d’une capacité de 1,6 To. Un de ces disques SSD est dédié au système d’exploitation, les huit autres étant des disques de données. La capacité utilisable totale pour l’appareil est d’environ 12,5 To. Le tableau suivant présente les détails de la capacité de stockage de l’appareil.
 
 |     Caractéristique                          |     Valeur             |
 |--------------------------------------------|-----------------------|
@@ -133,7 +145,6 @@ Cette section présente les caractéristiques liées à l’environnement du bo�
 |    Énergie             |    Commission de régulation (UE) N° 617/2013                                                                                                                                                                                        |
 |    RoHS           |    EN 50581:2012                                                                                                                                                                                        |
 
-
 ### <a name="operating-temperature-de-rating-specifications"></a>Spécifications de température de fonctionnement en allègement de régime
 
 |     Température de fonctionnement en allègement de régime     |     Plage de températures ambiantes                                                         |
@@ -142,7 +153,6 @@ Cette section présente les caractéristiques liées à l’environnement du bo�
 |    35°C à 40°C (95°F à 104°F)            |    La température maximale est réduite de 1°C/175 mètres (1°F/319 ft) au-dessus de 950 m (3117 ft).    |
 |    40°C à 45°C (104°F à 113°F)           |    La température maximale est réduite de 1°C/125 mètres (1°F/228 ft) au-dessus de 950 m (3117 ft).    |
 
-
 ## <a name="next-steps"></a>Étapes suivantes
 
-- [Déployer votre Azure Stack Edge](azure-stack-edge-deploy-prep.md)
+- [Déployer votre Azure Stack Edge Pro](azure-stack-edge-deploy-prep.md)

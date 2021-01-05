@@ -1,26 +1,26 @@
 ---
-title: Configurer des conteneurs – Vision par ordinateur
+title: Configurer des conteneurs OCR Read - Vision par ordinateur
 titleSuffix: Azure Cognitive Services
-description: Cet article explique comment configurer les paramètres obligatoires et facultatifs pour les conteneurs Reconnaître le texte dans Vision par ordinateur.
+description: Cet article explique comment configurer les paramètres obligatoires et facultatifs pour les conteneurs OCR Read dans Vision par ordinateur.
 services: cognitive-services
 author: aahill
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: computer-vision
 ms.topic: conceptual
-ms.date: 04/01/2020
+ms.date: 11/23/2020
 ms.author: aahi
 ms.custom: seodec18
-ms.openlocfilehash: 3be302019c712c13bd29d7ed3781151a1648e847
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 0539f37fe15f68d8bfd47bf426333f9d5c67c37d
+ms.sourcegitcommit: 6a770fc07237f02bea8cc463f3d8cc5c246d7c65
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "80879307"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "96006868"
 ---
-# <a name="configure-computer-vision-docker-containers"></a>Configurer les conteneurs Docker Vision par ordinateur
+# <a name="configure-read-ocr-docker-containers"></a>Configurer des conteneurs Docker OCR Read
 
-Configurez l’environnement d’exécution du conteneur Vision par ordinateur à l’aide des arguments de la commande `docker run`. Ce conteneur a plusieurs paramètres obligatoires et quelques paramètres facultatifs. Plusieurs [exemples](#example-docker-run-commands) de commande sont disponibles. Les paramètres propres aux conteneurs correspondent aux paramètres de facturation. 
+Configurez l'environnement d'exécution du conteneur OCR Read de Vision par ordinateur à l'aide des arguments de la commande `docker run`. Ce conteneur a plusieurs paramètres obligatoires et quelques paramètres facultatifs. Plusieurs [exemples](#example-docker-run-commands) de commande sont disponibles. Les paramètres propres aux conteneurs correspondent aux paramètres de facturation. 
 
 ## <a name="configuration-settings"></a>Paramètres de configuration
 
@@ -28,6 +28,17 @@ Configurez l’environnement d’exécution du conteneur Vision par ordinateur �
 
 > [!IMPORTANT]
 > Les paramètres [`ApiKey`](#apikey-configuration-setting), [`Billing`](#billing-configuration-setting) et [`Eula`](#eula-setting) sont utilisés conjointement, et vous devez fournir des valeurs valides pour les trois ; à défaut, votre conteneur ne démarrera pas. Pour plus d’informations sur l’instanciation d’un conteneur à l’aide de ces paramètres de configuration, consultez [Facturation](computer-vision-how-to-install-containers.md).
+
+Les paramètres de configuration spécifiques au conteneur sont les suivants :
+
+|Obligatoire|Paramètre|Objectif|
+|--|--|--|
+|Non|ReadEngineConfig:ResultExpirationPeriod| Conteneurs v2.0 uniquement. Période d’expiration du résultat, en heures. L'intervalle par défaut est de 48 heures. Le paramètre spécifie à quel moment le système doit effacer les résultats de la reconnaissance. Par exemple, si `resultExpirationPeriod=1`, le système efface le résultat de la reconnaissance 1 heure après le processus. Si `resultExpirationPeriod=0`, le système efface le résultat de la reconnaissance après récupération du résultat.|
+|Non|Cache:Redis| Conteneurs v2.0 uniquement. Active le stockage Redis pour le stockage des résultats. Un cache est *obligatoire* si plusieurs conteneurs de lecture sont placés derrière un équilibreur de charge.|
+|Non|Queue:RabbitMQ|Conteneurs v2.0 uniquement. Active RabbitMQ pour la répartition des tâches. Ce paramètre est utile lorsque plusieurs conteneurs de lecture sont placés derrière un équilibreur de charge.|
+|Non|Queue:Azure:QueueVisibilityTimeoutInMilliseconds | Conteneurs v3.x uniquement. Délai à l'issue duquel un message devient invisible car un rôle de travail est en train de le traiter. |
+|Non|Storage::DocumentStore::MongoDB|Conteneurs v2.0 uniquement. Active MongoDB pour le stockage permanent des résultats. |
+|Non|Storage:ObjectStore:AzureBlob:ConnectionString| Conteneurs v3.x uniquement. Chaîne de connexion de stockage d'objets blob Azure. |
 
 ## <a name="apikey-configuration-setting"></a>Paramètre de configuration ApiKey
 
@@ -108,26 +119,56 @@ Remplacez {_argument_name_} par vos propres valeurs :
 
 Les exemples Docker suivants s’appliquent au conteneur Lire.
 
+
+# <a name="version-32-preview"></a>[Version 3.2-preview](#tab/version-3-2)
+
 ### <a name="basic-example"></a>Exemple de base
 
-  ```docker
-  docker run --rm -it -p 5000:5000 --memory 16g --cpus 8 \
-  containerpreview.azurecr.io/microsoft/cognitive-services-read \
-  Eula=accept \
-  Billing={ENDPOINT_URI} \
-  ApiKey={API_KEY} 
-  ```
+```bash
+docker run --rm -it -p 5000:5000 --memory 18g --cpus 8 \
+mcr.microsoft.com/azure-cognitive-services/vision/read:3.2-preview.1 \
+Eula=accept \
+Billing={ENDPOINT_URI} \
+ApiKey={API_KEY}
+
+```
 
 ### <a name="logging-example"></a>Exemple de journalisation 
 
-  ```docker
-  docker run --rm -it -p 5000:5000 --memory 16g --cpus 8 \
-  containerpreview.azurecr.io/microsoft/cognitive-services-read \
-  Eula=accept \
-  Billing={ENDPOINT_URI} \
-  ApiKey={API_KEY} \
-  Logging:Console:LogLevel:Default=Information
-  ```
+```bash
+docker run --rm -it -p 5000:5000 --memory 18g --cpus 8 \
+mcr.microsoft.com/azure-cognitive-services/vision/read:3.2-preview.1 \
+Eula=accept \
+Billing={ENDPOINT_URI} \
+ApiKey={API_KEY}
+Logging:Console:LogLevel:Default=Information
+```
+
+# <a name="version-20-preview"></a>[Version 2.0-preview](#tab/version-2)
+
+### <a name="basic-example"></a>Exemple de base
+
+```bash
+docker run --rm -it -p 5000:5000 --memory 18g --cpus 8 \
+mcr.microsoft.com/azure-cognitive-services/vision/read:2.0-preview \
+Eula=accept \
+Billing={ENDPOINT_URI} \
+ApiKey={API_KEY}
+
+```
+
+### <a name="logging-example"></a>Exemple de journalisation 
+
+```bash
+docker run --rm -it -p 5000:5000 --memory 18g --cpus 8 \
+mcr.microsoft.com/azure-cognitive-services/vision/read:2.0-preview \
+Eula=accept \
+Billing={ENDPOINT_URI} \
+ApiKey={API_KEY}
+Logging:Console:LogLevel:Default=Information
+```
+
+---
 
 ## <a name="next-steps"></a>Étapes suivantes
 

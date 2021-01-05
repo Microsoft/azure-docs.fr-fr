@@ -13,12 +13,12 @@ ms.tgt_pltfrm: vm-windows
 ms.topic: troubleshooting
 ms.date: 9/20/2018
 ms.author: anandh
-ms.openlocfilehash: 16be3d1695608165405a3490b686a01ba6a2a62c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 04b70e593e8b1bee8beb72ac88bc8441bc38bb9a
+ms.sourcegitcommit: d103a93e7ef2dde1298f04e307920378a87e982a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "70080600"
+ms.lasthandoff: 10/13/2020
+ms.locfileid: "91963242"
 ---
 # <a name="performance-diagnostics-for-azure-virtual-machines"></a>Diagnostics de performances pour les machines virtuelles Azure
 
@@ -33,18 +33,35 @@ Vous pouvez exécuter les diagnostics de performances directement depuis le port
 
 ### <a name="windows"></a>Windows
 
-Windows 10, Windows 8, Windows 8 Entreprise, Windows 8 Professionnel, Windows 8.1, Windows Server 2016, Windows Server 2012, Windows Server 2012 Datacenter, Windows Server 2012 R2, Windows Server 2012 R2 Datacenter, Windows Server 2012 R2 Standard, Windows Server 2012 Standard, Windows Server 2008 R2, Windows Server 2008 R2 Datacenter, Windows Server 2008 R2 Entreprise, Windows Server 2008 R2 Foundation, Windows Server 2008 R2 SP1, Windows Server 2008 R2 Standard.
+* Windows Server 2019
+* Windows Server 2016
+* Windows Server 2012 R2
+* Windows Server 2012
+* Windows Server 2008 R2
+* Windows 10
+* Windows 8.1
+* Windows 8
 
 ### <a name="linux"></a>Linux
 
-Oracle Linux Server 6.10 [`*`], 7.3, 7.6, 7.5 (Oracle-Database-Ee 13.8 marketplace image), CentOS 6.5 [`*`], 7.6, RHEL 7.2, 7.5, 8.0 [`*`], Ubuntu 14.04, 16.04, 18.04, Debian 8, 9, 10 [`*`], SLES 12 SP4 [`*`]
+- Les distributions prises en charge sont les suivantes :
+
+    | Distribution               | Version                                         |
+    |----------------------------|-------------------------------------------------|
+    | Oracle Linux Server        | 6.10 [`*`], 7.3, 7.6, 7.5 |
+    | CentOS                     | 6.5 [`*`], 7.6                                    |
+    | RHEL                       | 7.2, 7.5, 8.0 [`*`]                               |
+    | Ubuntu                     | 14.04, 16.04, 18.04, 20.04                               |
+    | Debian                     | 8, 9, 10 [`*`]                                    |
+    | SLES                       | 12 SP4 [`*`]                                      |
+    |                            |                                                   |
 
 >[!Note]
 >[`*`] Reportez-vous aux [Problèmes connus](how-to-use-perfinsights-linux.md#known-issues)
 
 ## <a name="install-and-run-performance-diagnostics-on-your-vm"></a>Installer et exécuter les diagnostics de performances sur votre machine virtuelle
 
-Les diagnostics de performances installent une extension de machine virtuelle qui exécute un outil de diagnostics nommé PerfInsights. PerfInsights est disponible à la fois sur [Windows](https://aka.ms/perfinsights) et sur [Linux](https://aka.ms/perfinsightslinux). Pour installer et exécuter les diagnostics de performances, effectuez les étapes suivantes :
+Les diagnostics de performances installent une extension de machine virtuelle qui exécute un outil de diagnostics nommé PerfInsights. PerfInsights est disponible à la fois sur [Windows](./how-to-use-perfinsights.md) et sur [Linux](./how-to-use-perfinsights-linux.md). Pour installer et exécuter les diagnostics de performances, effectuez les étapes suivantes :
 
 1. Dans la colonne de commandes de gauche, sélectionnez **Machines virtuelles**.
 1. Dans la liste des noms de machine virtuelle, sélectionnez la machine virtuelle sur laquelle vous souhaitez exécuter les diagnostics.
@@ -74,16 +91,16 @@ Les diagnostics de performances installent une extension de machine virtuelle qu
 Les scénarios d’analyse suivants sont disponibles à partir du portail Azure. Sélectionnez une analyse, en fonction du problème de performances que vous rencontrez. Sélectionnez les options de durée et de trace en fonction des besoins pour l’analyse.
 
 * **Analyse rapide des performances**  
-    Recherche les problèmes connus, analyse les bonnes pratiques et collecte des données de diagnostic. L’exécution de cette analyse prend plusieurs minutes. En savoir plus sur [Windows](https://aka.ms/perfinsights/quick) ou [Linux](https://aka.ms/perfinsightslinux/quick)
+    Recherche les problèmes connus, analyse les bonnes pratiques et collecte des données de diagnostic. L’exécution de cette analyse prend plusieurs minutes. En savoir plus sur [Windows](./how-to-use-perfinsights.md) ou [Linux](./how-to-use-perfinsights-linux.md)
 
 * **Analyse des performances**  
-    Inclut toutes les vérifications de l’analyse rapide des performances et supervise la consommation élevée des ressources. Utilisez cette version pour résoudre les problèmes de performances d’ordre général, notamment l’utilisation élevée du processeur, de la mémoire et du disque. Cette analyse prend de 30 secondes à 15 minutes, selon la durée sélectionnée. En savoir plus sur [Windows](https://aka.ms/perfinsights/vmslow) ou [Linux](https://aka.ms/perfinsightslinux/vmslow)
+    Inclut toutes les vérifications de l’analyse rapide des performances et supervise la consommation élevée des ressources. Utilisez cette version pour résoudre les problèmes de performances d’ordre général, notamment l’utilisation élevée du processeur, de la mémoire et du disque. Cette analyse prend de 30 secondes à 15 minutes, selon la durée sélectionnée. En savoir plus sur [Windows](./how-to-use-perfinsights.md) ou [Linux](./how-to-use-perfinsights-linux.md)
 
 * **Analyse avancée des performances** `*`  
-    Inclut toutes les vérifications de l’analyse des performances et collecte une ou plusieurs des traces, comme indiqué dans les sections suivantes. Ce scénario permet de résoudre les problèmes complexes qui nécessitent des traces supplémentaires. L’exécution de ce scénario sur de plus longues périodes augmente la taille globale de la sortie de diagnostics, selon la taille de la machine virtuelle et les options de trace sélectionnées. L’exécution de cette analyse prend de 30 secondes à 15 minutes, selon la durée sélectionnée. [En savoir plus](https://aka.ms/perfinsights/advanced)
+    Inclut toutes les vérifications de l’analyse des performances et collecte une ou plusieurs des traces, comme indiqué dans les sections suivantes. Ce scénario permet de résoudre les problèmes complexes qui nécessitent des traces supplémentaires. L’exécution de ce scénario sur de plus longues périodes augmente la taille globale de la sortie de diagnostics, selon la taille de la machine virtuelle et les options de trace sélectionnées. L’exécution de cette analyse prend de 30 secondes à 15 minutes, selon la durée sélectionnée. [En savoir plus](./how-to-use-perfinsights.md)
 
-* **Analyse Azure Files** `*`  
-    Inclut toutes les vérifications de l’analyse des performances et capture une trace réseau et des compteurs SMB. Utilisez ce scénario pour résoudre les problèmes de performances des fichiers Azure. L’exécution de cette analyse prend de 30 secondes à 15 minutes, selon la durée sélectionnée. [En savoir plus](https://aka.ms/perfinsights/azurefiles)
+* **Analyse de fichiers Azure** `*`  
+    Inclut toutes les vérifications de l’analyse des performances et capture une trace réseau et des compteurs SMB. Utilisez ce scénario pour résoudre les problèmes de performances des fichiers Azure. L’exécution de cette analyse prend de 30 secondes à 15 minutes, selon la durée sélectionnée. [En savoir plus](./how-to-use-perfinsights.md)
 
 >[!Note]
 >[`*`] Ces scénarios d’analyse sont uniquement pris en charge sur Windows.
@@ -184,7 +201,7 @@ Vous pouvez partager un lien vers le fichier compressé des rapports à l’aide
 1. Cliquez sur **Générer un jeton et une URL SAP d’objet blob**.
 1. Copiez **l’URL SAP d’objet blob** et partagez-la avec l’ingénieur du support.
 
-**Option 3** : télécharger le rapport à partir du compte de stockage
+**Option 3 :** télécharger le rapport à partir du compte de stockage
 
 Vous pouvez également localiser le fichier compressé du rapport de diagnostics de performances à l’aide des étapes 1 à 4 de l’option 2. Choisissez de télécharger le fichier, puis partagez-le par e-mail, ou demandez les instructions pour charger le fichier à l’ingénieur du support.  
 

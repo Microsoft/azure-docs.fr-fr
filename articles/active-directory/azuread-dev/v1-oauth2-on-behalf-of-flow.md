@@ -9,17 +9,17 @@ ms.service: active-directory
 ms.subservice: azuread-dev
 ms.workload: identity
 ms.topic: conceptual
-ms.date: 05/22/2019
+ms.date: 08/5/2020
 ms.author: ryanwi
 ms.reviewer: hirsin, nacanuma
 ms.custom: aaddev
 ROBOTS: NOINDEX
-ms.openlocfilehash: 192c91f700dd82f453d52f6891f8aaaaeef8c7ef
-ms.sourcegitcommit: fdec8e8bdbddcce5b7a0c4ffc6842154220c8b90
+ms.openlocfilehash: f746cc654934464d907c6ad669eb7470e4dcaeeb
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83642069"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88117734"
 ---
 # <a name="service-to-service-calls-that-use-delegated-user-identity-in-the-on-behalf-of-flow"></a>Appels de service à service utilisant l’identité utilisateur déléguée dans le flux On-Behalf-Of
 
@@ -59,10 +59,10 @@ Inscrivez le service de niveau intermédiaire et l’application cliente dans Az
 1. Sous **Types de comptes pris en charge**, sélectionnez **Comptes dans un annuaire organisationnel et comptes personnels Microsoft**.
 1. Définir l’URI de redirection sur l’URL de base.
 1. Sélectionnez **Inscrire** pour créer l’application.
-1. Générez une clé secrète du client avant de quitter le portail Azure.
 1. Dans le portail Azure, choisissez votre application, puis sélectionnez **Certificats et secrets**.
 1. Sélectionnez **Nouvelle clé secrète client** et ajouter un secret avec une durée d’un ou deux ans.
 1. Lorsque vous enregistrez cette page, le portail Azure affiche la valeur du secret. Copiez et enregistrez la valeur du secret dans un endroit sûr.
+1. Créez une étendue sur votre application sur la page **Exposer une API** pour votre application, puis cliquez sur « Ajouter une étendue ».  Le portail peut vous obliger à créer également un URI d’ID d’application. 
 
 > [!IMPORTANT]
 > Vous avez besoin du secret pour configurer les paramètres de l’application dans votre implémentation. Cette valeur de secret ne sera plus affichée et elle n’est récupérable par aucun autre moyen. Enregistrez-la dès qu’elle est visible dans le portail Azure.
@@ -79,7 +79,7 @@ Inscrivez le service de niveau intermédiaire et l’application cliente dans Az
 1. Sélectionnez **Inscrire** pour créer l’application.
 1. Configurez les autorisations pour votre application. Dans **Autorisations des API**, sélectionnez **Ajouter une autorisation**, puis **Mes API**.
 1. Tapez le nom du service de niveau intermédiaire dans le champ de texte.
-1. Choisissez **Sélectionner les autorisations**, puis sélectionnez **Accéder à \<Nom du service>** .
+1. Choisissez **Sélectionner les autorisations** puis sélectionnez l’étendue que vous avez créée lors de la dernière étape de l’inscription du niveau intermédiaire.
 
 ### <a name="configure-known-client-applications"></a>Configurer les applications clientes connues
 
@@ -105,7 +105,7 @@ L’application cliente est sécurisée par un secret partagé ou par un certifi
 
 Lorsque l’application utilise un secret partagé, la demande de jeton d’accès de service à service contient les paramètres suivants :
 
-| Paramètre |  | Description |
+| Paramètre | Type | Description |
 | --- | --- | --- |
 | grant_type |Obligatoire | Type de la demande de jeton. Une demande OBO utilise un jeton d’accès JWT : la valeur doit donc être **urn:ietf:params:oauth:grant-type:jwt-bearer**. |
 | assertion |Obligatoire | Valeur du jeton d’accès utilisé dans la requête. |
@@ -139,7 +139,7 @@ grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Ajwt-bearer
 
 Une demande de jeton d’accès de service à service avec un certificat contient les paramètres suivants :
 
-| Paramètre |  | Description |
+| Paramètre | Type | Description |
 | --- | --- | --- |
 | grant_type |Obligatoire | Type de la demande de jeton. Une demande OBO utilise un jeton d’accès JWT : la valeur doit donc être **urn:ietf:params:oauth:grant-type:jwt-bearer**. |
 | assertion |Obligatoire | Valeur du jeton utilisé dans la demande. |
@@ -249,7 +249,7 @@ Certains services web basés sur OAuth doivent accéder à d’autres API de ser
 
 Une demande de service à service pour obtenir une assertion SAML contient les paramètres suivants :
 
-| Paramètre |  | Description |
+| Paramètre | Type | Description |
 | --- | --- | --- |
 | grant_type |Obligatoire | Type de la demande de jeton. Pour une demande qui utilise un JWT, la valeur doit être **urn:ietf:params:oauth:grant-type:jwt-bearer**. |
 | assertion |Obligatoire | Valeur du jeton d’accès utilisé dans la requête.|
@@ -264,7 +264,7 @@ La réponse contient un jeton SAML encodé en UTF8 et Base64url.
 - **SubjectConfirmationData pour une assertion SAML provenant d’un appel OBO** : si l’application cible nécessite une valeur de destinataire dans **SubjectConfirmationData**, la valeur doit être une URL de réponse sans caractère générique dans la configuration de la ressource d’application.
 - **Le nœud SubjectConfirmationData** : le nœud ne peut pas contenir d’attribut **InResponseTo**, dans la mesure où il ne fait pas partie d’une réponse SAML. L’application qui reçoit le jeton SAML doit pouvoir accepter l’assertion SAML sans attribut **InResponseTo**.
 
-- **Consentement** : un consentement doit avoir été accordé pour recevoir un jeton SAML contenant des données utilisateur sur un flux OAuth. Pour plus d’informations sur les autorisations et sur l’obtention d’un consentement de l’administrateur, consultez [Autorisations et consentement dans le point de terminaison Azure Active Directory v1.0](https://docs.microsoft.com/azure/active-directory/azuread-dev/v1-permissions-consent).
+- **Consentement** : un consentement doit avoir été accordé pour recevoir un jeton SAML contenant des données utilisateur sur un flux OAuth. Pour plus d’informations sur les autorisations et sur l’obtention d’un consentement de l’administrateur, consultez [Autorisations et consentement dans le point de terminaison Azure Active Directory v1.0](./v1-permissions-consent.md).
 
 ### <a name="response-with-saml-assertion"></a>Réponse avec instruction d’assertion SAML
 
@@ -283,9 +283,9 @@ La réponse contient un jeton SAML encodé en UTF8 et Base64url.
 - ext_expires_in : 0
 - expires_on : 1529627844
 - resource : `https://api.contoso.com`
-- access_token : \<Assertion SAML\>
+- access_token : \<SAML assertion\>
 - issued_token_type : urn:ietf:params:oauth:token-type:saml2
-- refresh_token : \<Jeton d’actualisation\>
+- refresh_token : \<Refresh token\>
 
 ## <a name="client-limitations"></a>Limitations du client
 

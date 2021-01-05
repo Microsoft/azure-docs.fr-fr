@@ -15,14 +15,17 @@ ms.topic: article
 ms.date: 03/14/2019
 ms.author: Juliako
 ms.reviewer: willzhan
-ms.openlocfilehash: 29a344c739d8d99da2e5c81d41a11c601e48022e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 17b54b2adb21419de61d2309752987f6e4a48e41
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74969137"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89264485"
 ---
-# <a name="using-castlabs-to-deliver-widevine-licenses-to-azure-media-services"></a>Utilisation de castLabs pour fournir des licences Widevine à Azure Media Services 
+# <a name="using-castlabs-to-deliver-widevine-licenses-to-azure-media-services"></a>Utilisation de castLabs pour fournir des licences Widevine à Azure Media Services
+
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
+ 
 > [!div class="op_single_selector"]
 > * [Axinom](media-services-axinom-integration.md)
 > * [castLabs](media-services-castlabs-integration.md)

@@ -9,13 +9,13 @@ metadata:
   ms.collection: collection
   author: DCtheGeek
   ms.author: dacoulte
-  ms.date: 05/20/2020
-  ms.openlocfilehash: b28cae1fd59e863c04d744a5c17108f1bd942a4d
-  ms.sourcegitcommit: 6a9f01bbef4b442d474747773b2ae6ce7c428c1f
+  ms.date: 10/26/2020
+  ms.openlocfilehash: cef3c2ce0973436edf9406f9ef16b565735463ce
+  ms.sourcegitcommit: 3bdeb546890a740384a8ef383cf915e84bd7e91e
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 05/27/2020
-  ms.locfileid: "84119351"
+  ms.lasthandoff: 10/30/2020
+  ms.locfileid: "93102001"
 landingContent:
 - title: À propos d’Azure Policy
   linkLists:
@@ -27,8 +27,12 @@ landingContent:
       url: ./concepts/effects.md
     - text: Structure de définition
       url: ./concepts/definition-structure.md
+    - text: Étendue
+      url: ./concepts/scope.md
     - text: Structure d’attribution
       url: ./concepts/assignment-structure.md
+    - text: Structure d’exemption
+      url: ./concepts/exemption-structure.md
   - linkListType: video
     links:
     - text: Azure Policy dans la build 2018
@@ -37,22 +41,34 @@ landingContent:
   linkLists:
   - linkListType: quickstart
     links:
-    - text: Attribuer une stratégie (portail)
+    - text: Attribuer une stratégie (Portail)
       url: ./assign-policy-portal.md
-    - text: Attribuer une stratégie (PowerShell)
-      url: ./assign-policy-powershell.md
     - text: Attribuer une stratégie (Azure CLI)
       url: ./assign-policy-azurecli.md
-    - text: Attribuer une stratégie (modèle)
+    - text: Attribuer une stratégie (Azure PowerShell)
+      url: ./assign-policy-powershell.md
+    - text: Attribuer une stratégie (.NET)
+      url: ./assign-policy-dotnet.md
+    - text: Attribuer une stratégie (JavaScript)
+      url: ./assign-policy-javascript.md
+    - text: Attribuer une stratégie (Python)
+      url: ./assign-policy-python.md
+    - text: Attribuer une stratégie (REST)
+      url: ./assign-policy-rest-api.md
+    - text: Attribuer une stratégie (Modèle ARM)
       url: ./assign-policy-template.md
+    - text: Attribuer une stratégie (Terraform)
+      url: ./assign-policy-terraform.md
   - linkListType: tutorial
     links:
     - text: Créer et gérer les stratégies
       url: ./tutorials/create-and-manage.md
     - text: Utiliser l’extension VS Code
       url: ./how-to/extension-for-vscode.md
-    - text: Concevoir des workflows de type Policy as Code
+    - text: Concevoir des workflows Azure Policy en tant que code
       url: ./concepts/policy-as-code.md
+    - text: Implémenter Azure Policy en tant que code avec GitHub
+      url: ./tutorials/policy-as-code-github.md
   - linkListType: deploy
     links:
     - text: Index des exemples de stratégie
@@ -71,11 +87,15 @@ landingContent:
       url: ./how-to/programmatically-create.md
     - text: Créer des stratégies pour les groupes
       url: ./how-to/author-policies-for-arrays.md
+    - text: Exporter les ressources
+      url: ./how-to/export-resources.md
   - linkListType: concept
     links:
-    - text: Policy pour Kubernetes
+    - text: Conformité réglementaire
+      url: ./concepts/regulatory-compliance.md
+    - text: Azure Policy pour Kubernetes
       url: ./concepts/policy-for-kubernetes.md
-    - text: Stratégie pour les machines virtuelles
+    - text: Azure Policy pour machines virtuelles
       url: ./concepts/guest-configuration.md
 - title: Vérifier et corriger les ressources
   linkLists:
@@ -85,6 +105,8 @@ landingContent:
       url: ./how-to/get-compliance-data.md
     - text: Déterminer les causes de non-conformité
       url: ./how-to/determine-non-compliance.md
+    - text: Exempter des ressources
+      url: ./concepts/exemption-structure.md
     - text: Remédier aux ressources non conformes
       url: ./how-to/remediate-resources.md
 - title: Être impliqué
@@ -92,7 +114,7 @@ landingContent:
   - linkListType: get-started
     links:
     - text: Microsoft Q&A pour Azure Policy
-      url: /answers/topics/azure-policy.html.html
+      url: /answers/topics/azure-policy.html
     - text: Chaîne YouTube - Gouvernance Azure
       url: https://www.youtube.com/channel/UCZZ3-oMrVI5ssheMzaWC4uQ
     - text: Demander des fonctionnalités pour le produit
@@ -115,6 +137,8 @@ landingContent:
       url: /rest/api/resources/policyassignments
     - text: REST (Définitions)
       url: /rest/api/resources/policydefinitions
+    - text: REST (Exemptions)
+      url: /rest/api/resources/policyexemptions
     - text: REST (Initiatives)
       url: /rest/api/resources/policysetdefinitions
     - text: Modèles Resource Manager
@@ -127,9 +151,9 @@ landingContent:
       url: /dotnet/api/microsoft.azure.management.resourcemanager.models.policyassignment
     - text: Kit SDK Azure pour .NET (définitions de stratégies)
       url: /dotnet/api/microsoft.azure.management.resourcemanager.models.policydefinition
-    - text: SDK Azure pour Node (stratégie)
+    - text: Kit SDK Azure pour JavaScript (stratégie)
       url: /javascript/api/@azure/arm-policy
-    - text: SDK Azure pour Node (Policy Insights)
+    - text: Kit SDK Azure pour JavaScript (insights de stratégie)
       url: /javascript/api/@azure/arm-policyinsights
     - text: SDK Azure pour Python (Policy)
       url: /python/api/azure-mgmt-resource/azure.mgmt.resource.policy

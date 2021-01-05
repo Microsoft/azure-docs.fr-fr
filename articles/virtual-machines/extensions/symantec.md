@@ -1,25 +1,20 @@
 ---
 title: Installer Symantec Endpoint Protection sur une machine virtuelle Windows dans Azure
 description: Découvrez comment installer et configurer l’extension de sécurité Symantec Endpoint Protection sur une machine virtuelle Azure nouvelle ou existante, créée avec le modèle de déploiement Classic.
-services: virtual-machines-windows
-documentationcenter: ''
 author: roiyz
-manager: gwallace
-editor: ''
 tags: azure-service-management
-ms.assetid: 19dcebc7-da6b-4510-907b-d64088e81fa2
 ms.service: virtual-machines-windows
+ms.subservice: extensions
 ms.workload: infrastructure-services
-ms.tgt_pltfrm: vm-multiple
 ms.topic: article
 ms.date: 03/31/2017
 ms.author: akjosh
-ms.openlocfilehash: 63f9441d4df9551405c2ab2bf8c0c67d7de5753c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: e001c85dd960e9d60ff321cfecc8bf8b80de087c
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77919904"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94967939"
 ---
 # <a name="how-to-install-and-configure-symantec-endpoint-protection-on-a-windows-vm"></a>Installation et configuration de Symantec Endpoint Protection sur une machine virtuelle Windows
 [!INCLUDE [classic-vm-deprecation](../../../includes/classic-vm-deprecation.md)]
@@ -75,10 +70,10 @@ Pour vérifier que l’extension de sécurité Symantec a été installée et es
 
 [Create]:../windows/classic/tutorial.md
 
-[PS]: /powershell/azureps-cmdlets-docs
+[PS]: /powershell/azure/
 
 [Agent]: https://go.microsoft.com/fwlink/p/?LinkId=403947
 
 [Logon]:../windows/classic/connect-logon.md
 
-[Ext]: https://go.microsoft.com/fwlink/p/?linkid=390493
+[Ext]: features-windows.md

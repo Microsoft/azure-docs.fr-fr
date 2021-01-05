@@ -4,18 +4,18 @@ ms.service: storsimple
 ms.topic: include
 ms.date: 10/26/2018
 ms.author: alkohli
-ms.openlocfilehash: d6bad1ec584b28fee77bc654eba8a2d0c7b5df30
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 9f1c30b303bd1fe02e0685c7d848be92073ca2f6
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "67177126"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96016865"
 ---
 #### <a name="to-add-a-storage-account-credential-in-the-same-azure-subscription-as-the-storsimple-device-manager-service"></a>Pour ajouter une information d’identification de compte de stockage dans le même abonnement Azure que le service StorSimple Device Manager
 
 1. Accédez à votre service StorSimple Device Manager. Dans la section **Configuration**, cliquez sur **Informations d’identification du compte de stockage**.
 
-    ![Informations d’identification du compte de stockage](./media/storsimple-8000-configure-new-storage-account-u2/createnewstorageacct1.png)
+    ![Accéder aux informations d’identification du compte de stockage](./media/storsimple-8000-configure-new-storage-account-u2/createnewstorageacct1.png)
 
 2. Dans le panneau **Informations d’identification du compte de stockage**, cliquez sur **+ Ajouter**.
 
@@ -39,5 +39,5 @@ ms.locfileid: "67177126"
 
 Les informations d’identification du compte de stockage nouvellement créées seront affichées dans la liste **Informations d’identification du compte de stockage**.
 
-![Liste d’informations d’identification de compte de stockage](./media/storsimple-8000-configure-new-storage-account-u2/createnewstorageacct6.png)
+![Liste des informations d’identification du compte de stockage](./media/storsimple-8000-configure-new-storage-account-u2/createnewstorageacct6.png)
 

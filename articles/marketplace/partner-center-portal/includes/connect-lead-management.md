@@ -2,21 +2,21 @@
 title: Fichier include
 description: Fichier include
 documentationcenter: partner-center-commercial-marketplace
-author: qianw211
 ms.service: marketplace
 ms.subservice: partnercenter-marketplace-publisher
 ms.topic: include
-ms.date: 08/16/2019
-ms.author: dsindona
+ms.date: 08/24/2020
 ms.custom: include file
-ms.openlocfilehash: cf6a5730f92eba8f0a4e63bf40a4d2b50f76eb3a
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+author: mingshen-ms
+ms.author: mingshen
+ms.openlocfilehash: 7709f26b30d41b932569227b8b6f05b5725dc98f
+ms.sourcegitcommit: d39f2cd3e0b917b351046112ef1b8dc240a47a4f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82131092"
+ms.lasthandoff: 08/25/2020
+ms.locfileid: "88815660"
 ---
-Lorsque vous publiez votre offre sur la Place de marché via l’Espace partenaires, vous devez connecter votre offre à votre système CRM. De cette façon, vous pouvez recevoir les coordonnées du client dès lors que celui-ci montre de l’intérêt pour votre produit ou le déploie.
+Lorsque vous publiez votre offre sur la Place de marché commerciale via l’Espace partenaires, vous devez connecter votre offre à votre système CRM. Ainsi, vous pouvez recevoir les coordonnées du client dès lors que celui-ci montre de l’intérêt pour votre produit ou le déploie.
 
 1. Sélectionnez une destination de prospect afin de diriger les prospects vers le système de votre choix. Les systèmes CRM pris en charge sont les suivants :
 
@@ -29,7 +29,6 @@ Lorsque vous publiez votre offre sur la Place de marché via l’Espace partenai
     * [Table Azure](../commercial-marketplace-lead-management-instructions-azure-table.md)
     * [Point de terminaison HTTPS](../commercial-marketplace-lead-management-instructions-https.md)
 
-2. Lisez cette documentation connexe afin de savoir comment configurer la destination de prospect que vous avez sélectionnée pour recevoir les prospects provenant de votre offre sur la Place de marché.
-3. Connectez votre offre à la destination de prospect lorsque vous publiez l’offre sur la place de marché de l’Espace partenaires. Pour plus d’informations sur la façon de procéder, consultez la documentation connexe.
-4. Vérifiez que la connexion à la destination de prospect est correctement configurée. Une fois la destination de prospect correctement configurée, sélectionnez **Publier** sur votre offre dans l’Espace partenaires. Ensuite, nous validerons la connexion et nous vous enverrons un prospect de test. Lorsque vous visualisez l’offre avant son lancement, vous pouvez également tester la connexion des prospects en essayant d’acquérir vous-même votre offre dans l’environnement en préversion.
-5. Assurez-vous que la connexion à la destination de prospect reste à jour afin de ne perdre aucun prospect. Veillez à mettre à jour ces connexions chaque fois qu’un changement a été apporté de votre côté.
+1. Lisez la documentation correspondante ci-dessus pour savoir comment configurer votre destination de prospect et recevoir des prospects à partir de vos offres de la Place de marché commerciale.
+1. Après avoir connecté votre offre à votre destination de prospect, sélectionnez **Publier** sur votre offre dans l’Espace partenaires. Nous validerons la connexion et nous vous enverrons un prospect de test. Lorsque vous visualisez l’offre avant son lancement, vous pouvez également tester la connexion des prospects en essayant d’acquérir vous-même votre offre dans l’environnement en préversion.
+1. Assurez-vous que la connexion à la destination de prospect reste à jour afin de ne perdre aucun prospect. Veillez à mettre à jour ces connexions chaque fois qu’un changement a été apporté.

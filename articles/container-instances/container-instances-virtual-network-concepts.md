@@ -2,14 +2,13 @@
 title: Scénarios d’utilisation d’un réseau virtuel
 description: Scénarios, ressources et limitations relatifs au déploiement de groupes de conteneurs sur un réseau virtuel Azure.
 ms.topic: article
-ms.date: 04/29/2020
-ms.author: danlep
-ms.openlocfilehash: 77fbdb1720e571027f28b5bdca5c0e3c65c3ded2
-ms.sourcegitcommit: b9d4b8ace55818fcb8e3aa58d193c03c7f6aa4f1
+ms.date: 08/11/2020
+ms.openlocfilehash: 5e9c1d1606a9ad491ba7a7e623f1606717aa5b1f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82584193"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89569167"
 ---
 # <a name="virtual-network-scenarios-and-resources"></a>Ressources et scénarios relatifs aux réseaux virtuels
 
@@ -43,6 +42,8 @@ Les groupes de conteneurs déployés dans un réseau virtuel Azure autorisent le
 * Vous ne pouvez pas activer de [probe liveness](container-instances-liveness-probe.md) ni de [probe readiness](container-instances-readiness-probe.md) dans un groupe de conteneurs déployé sur un réseau virtuel.
 * En raison des ressources réseau supplémentaires impliquées, les déploiements sur un réseau virtuel sont généralement plus lents que les déploiements d’une instance de conteneur standard.
 
+[!INCLUDE [container-instances-restart-ip](../../includes/container-instances-restart-ip.md)]
+
 ## <a name="where-to-deploy"></a>Où déployer ?
 
 Les régions et les ressources maximales suivantes sont disponibles pour le déploiement d’un groupe de conteneurs sur un réseau virtuel Azure.
@@ -67,7 +68,7 @@ Le sous-réseau que vous utilisez pour les groupes de conteneurs ne peut conteni
 
 Un profil réseau est un modèle de configuration de réseau pour les ressources Azure. Il spécifie certaines propriétés réseau de la ressource, par exemple le sous-réseau dans lequel il doit être déployé. Lorsque vous utilisez pour la première fois la commande [az container create][az-container-create] pour déployer un groupe de conteneurs sur un sous-réseau (et donc un réseau virtuel), Azure crée un profil réseau pour vous. Vous pouvez ensuite utiliser ce profil réseau pour les déploiements futurs dans le sous-réseau. 
 
-Pour utiliser un modèle Resource Manager, un fichier YAML ou une méthode de programmation pour déployer un groupe de conteneurs dans un sous-réseau, vous devez fournir l’ID de ressource Resource Manager complet d’un profil réseau. Vous pouvez utiliser un profil précédemment créé à l’aide de [az container create][az-container-create] ou créer un profil à l’aide d’un modèle Resource Manager (voir l’[exemple de modèle](https://github.com/Azure/azure-quickstart-templates/tree/master/101-aci-vnet) et la [référence](https://docs.microsoft.com/azure/templates/microsoft.network/networkprofiles)). Pour obtenir l’ID d’un profil précédemment créé, utilisez la commande [az network profile list][az-network-profile-list]. 
+Pour utiliser un modèle Resource Manager, un fichier YAML ou une méthode de programmation pour déployer un groupe de conteneurs dans un sous-réseau, vous devez fournir l’ID de ressource Resource Manager complet d’un profil réseau. Vous pouvez utiliser un profil précédemment créé à l’aide de [az container create][az-container-create] ou créer un profil à l’aide d’un modèle Resource Manager (voir l’[exemple de modèle](https://github.com/Azure/azure-quickstart-templates/tree/master/101-aci-vnet) et la [référence](/azure/templates/microsoft.network/networkprofiles)). Pour obtenir l’ID d’un profil précédemment créé, utilisez la commande [az network profile list][az-network-profile-list]. 
 
 Dans le diagramme suivant, plusieurs groupes de conteneurs ont été déployés dans un sous-réseau délégué à Azure Container Instances. Une fois que vous avez déployé un groupe de conteneurs dans un sous-réseau, vous pouvez déployer d’autres groupes de conteneurs dans ce dernier en spécifiant le même profil réseau.
 
@@ -78,6 +79,7 @@ Dans le diagramme suivant, plusieurs groupes de conteneurs ont été déployés 
 * Pour obtenir des exemples de déploiement avec Azure CLI, consultez [Déployer des instance de conteneur dans un réseau virtuel Azure](container-instances-vnet.md).
 * Pour déployer un réseau virtuel, un sous-réseau, un profil réseau et un groupe de conteneurs nouveaux à l’aide d’un modèle Resource Manager, consultez [Créer un groupe de conteneurs Azure avec un réseau virtuel](https://github.com/Azure/azure-quickstart-templates/tree/master/101-aci-vnet
 ).
+* Lorsque vous utilisez le [portail Azure](container-instances-quickstart-portal.md) pour créer une instance de conteneur, vous pouvez également définir les paramètres d'un réseau virtuel nouveau ou existant dans l'onglet **Mise en réseau**.
 
 
 <!-- IMAGES -->
@@ -86,4 +88,3 @@ Dans le diagramme suivant, plusieurs groupes de conteneurs ont été déployés 
 <!-- LINKS - Internal -->
 [az-container-create]: /cli/azure/container#az-container-create
 [az-network-profile-list]: /cli/azure/network/profile#az-network-profile-list
-

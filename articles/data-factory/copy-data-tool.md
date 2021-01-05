@@ -9,14 +9,14 @@ ms.reviewer: douglasl
 ms.service: data-factory
 ms.workload: data-services
 ms.topic: conceptual
-ms.date: 06/18/2018
+ms.date: 06/17/2020
 ms.author: yexu
-ms.openlocfilehash: df078673aed60086a88961ff64f9bfa596d96346
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: b0ba14a05ac42e9fccc1a146ad5943716652104d
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81414083"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89434195"
 ---
 # <a name="copy-data-tool-in-azure-data-factory"></a>Outil Copier des données dans Azure Data Factory
 [!INCLUDE[appliesto-adf-asa-md](includes/appliesto-adf-asa-md.md)]
@@ -37,7 +37,7 @@ Le tableau suivant fournit des instructions concernant l’utilisation de Copier
 
 Pour lancer l’outil Copier des données, cliquez sur la mosaïque **Copier des données** sur la page d’accueil de votre fabrique de données.
 
-![Page de prise en main - lien vers l’outil Copier des données](./media/copy-data-tool/get-started-page.png)
+![Page de prise en main - lien vers l’outil Copier des données](./media/doc-common-process/get-started-page.png)
 
 
 ## <a name="intuitive-flow-for-loading-data-into-a-data-lake"></a>Flux intuitif pour le chargement des données dans Data Lake
@@ -69,7 +69,7 @@ Souvent, le schéma de la source de données n’est peut-être pas identique au
 L’outil Copier des données surveille votre comportement et s’y adapte lorsque vous mappez des colonnes entre des magasins source et destination. Après avoir sélectionné une ou plusieurs colonnes à partir du magasin de données source et les avoir mappées au schéma de destination, l’outil Copier des données commence à analyser le modèle pour les paires de colonnes que vous avez choisies des deux côtés. Il applique ensuite le même modèle aux autres colonnes. Par conséquent, quelques clics suffisent pour afficher comme vous le souhaitez toutes les colonnes mappées vers la destination.  Si vous n’êtes pas satisfait du choix du mappage de colonnes fourni par l’outil Copier des données, vous pouvez l’ignorer et continuer en mappant manuellement les colonnes. Pendant ce temps, l’outil Copier des données assimile et met à jour continuellement le modèle jusqu’à obtenir le modèle adapté au mappage de colonnes que vous voulez. 
 
 > [!NOTE]
-> Lors de la copie de données depuis SQL Server ou Azure SQL Database vers Azure SQL Data Warehouse, si la table n’existe pas dans le magasin de destination, l’outil Copier des données prend en charge la création automatique de la table à l’aide du schéma source. 
+> Lors de la copie de données depuis SQL Server ou Azure SQL Database vers Azure Synapse Analytics (anciennement SQL Data Warehouse), si la table n’existe pas dans le magasin de destination, l’outil Copier des données prend en charge la création automatique de la table à l’aide du schéma source. 
 
 ## <a name="filter-data"></a>Filtrer les données
 Vous pouvez filtrer les données sources pour sélectionner uniquement celles qui doivent être copiées vers le magasin de données de récepteur. Le filtrage réduit le volume des données à copier vers le magasin de données de récepteur et améliore de ce fait le débit de la copie. L’outil Copier des données fournit un moyen souple de filtrer les données dans une base de données relationnelle à l’aide du langage de requête SQL ou les fichiers d’un dossier d’objets blob Azure. 

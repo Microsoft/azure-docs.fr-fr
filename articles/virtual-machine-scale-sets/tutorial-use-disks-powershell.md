@@ -8,13 +8,13 @@ ms.service: virtual-machine-scale-sets
 ms.subservice: disks
 ms.date: 03/27/2018
 ms.reviewer: mimckitt
-ms.custom: mimckitt
-ms.openlocfilehash: 5c82f087505c1634dd621252935c4017687340b2
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.custom: mimckitt, devx-track-azurepowershell
+ms.openlocfilehash: 9e995e88b80bf14f9c7784f465bcd3d89d0bed65
+ms.sourcegitcommit: 28c5fdc3828316f45f7c20fc4de4b2c05a1c5548
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83198243"
+ms.lasthandoff: 10/22/2020
+ms.locfileid: "92367956"
 ---
 # <a name="tutorial-create-and-use-disks-with-virtual-machine-scale-set-with-azure-powershell"></a>Didacticiel : Créer et utilisez les disques avec un groupe de machines virtuelles identiques à l’aide de Azure PowerShell
 
@@ -44,12 +44,12 @@ Lorsqu’un groupe identique est créé ou mis à l’échelle, deux disques son
 ### <a name="temporary-disk-sizes"></a>Tailles du disque temporaire
 | Type | Tailles courantes | Taille maximale du disque temporaire (Gio) |
 |----|----|----|
-| [Usage général](../virtual-machines/windows/sizes-general.md) | Séries A, B et D | 1 600 |
-| [Optimisé pour le calcul](../virtual-machines/windows/sizes-compute.md) | Série F | 576 |
-| [Mémoire optimisée](../virtual-machines/windows/sizes-memory.md) | Séries D, E, G et M | 6144 |
-| [Optimisé pour le stockage](../virtual-machines/windows/sizes-storage.md) | Série L | 5630 |
-| [GPU](../virtual-machines/windows/sizes-gpu.md) | Série N | 1440 |
-| [Hautes performances](../virtual-machines/windows/sizes-hpc.md) | Séries A et H | 2000 |
+| [Usage général](../virtual-machines/sizes-general.md) | Séries A, B et D | 1 600 |
+| [Optimisé pour le calcul](../virtual-machines/sizes-compute.md) | Série F | 576 |
+| [Mémoire optimisée](../virtual-machines/sizes-memory.md) | Séries D, E, G et M | 6144 |
+| [Optimisé pour le stockage](../virtual-machines/sizes-storage.md) | Série L | 5630 |
+| [GPU](../virtual-machines/sizes-gpu.md) | Série N | 1440 |
+| [Hautes performances](../virtual-machines/sizes-hpc.md) | Séries A et H | 2000 |
 
 
 ## <a name="azure-data-disks"></a>Disques de données Azure
@@ -58,12 +58,12 @@ Des disques de données supplémentaires peuvent être ajoutés si vous avez bes
 ### <a name="max-data-disks-per-vm"></a>Disques de données max. par machine virtuelle
 | Type | Tailles courantes | Disques de données max. par machine virtuelle |
 |----|----|----|
-| [Usage général](../virtual-machines/windows/sizes-general.md) | Séries A, B et D | 64 |
-| [Optimisé pour le calcul](../virtual-machines/windows/sizes-compute.md) | Série F | 64 |
-| [Mémoire optimisée](../virtual-machines/windows/sizes-memory.md) | Séries D, E, G et M | 64 |
-| [Optimisé pour le stockage](../virtual-machines/windows/sizes-storage.md) | Série L | 64 |
-| [GPU](../virtual-machines/windows/sizes-gpu.md) | Série N | 64 |
-| [Hautes performances](../virtual-machines/windows/sizes-hpc.md) | Séries A et H | 64 |
+| [Usage général](../virtual-machines/sizes-general.md) | Séries A, B et D | 64 |
+| [Optimisé pour le calcul](../virtual-machines/sizes-compute.md) | Série F | 64 |
+| [Mémoire optimisée](../virtual-machines/sizes-memory.md) | Séries D, E, G et M | 64 |
+| [Optimisé pour le stockage](../virtual-machines/sizes-storage.md) | Série L | 64 |
+| [GPU](../virtual-machines/sizes-gpu.md) | Série N | 64 |
+| [Hautes performances](../virtual-machines/sizes-hpc.md) | Séries A et H | 64 |
 
 
 ## <a name="vm-disk-types"></a>Type de disque de machine virtuelle
@@ -82,11 +82,13 @@ Les disques Premium reposent sur un disque SSD à faible latence et hautes perfo
 | Nb max. d'E/S par seconde par disque | 120 | 240 | 500 | 2 300 | 5 000 | 7 500 | 7 500 |
 Débit par disque | 25 Mo/s | 50 Mo/s | 100 Mo/s | 150 Mo/s | 200 Mo/s | 250 Mo/s | 250 Mo/s |
 
-Bien que le tableau ci-dessus identifie le nombre max. d’E/S par seconde par disque, un niveau de performances plus élevé est possible en entrelaçant plusieurs disques de données. Par exemple, une machine virtuelle Standard_GS5 peut atteindre un nombre maximum d’E/S par seconde de 80 000. Pour plus d’informations sur le nombre maximal d’E/S par seconde par machine virtuelle, consultez [Tailles des machines virtuelles Windows](../virtual-machines/windows/sizes.md).
+Bien que le tableau ci-dessus identifie le nombre max. d’E/S par seconde par disque, un niveau de performances plus élevé est possible en entrelaçant plusieurs disques de données. Par exemple, une machine virtuelle Standard_GS5 peut atteindre un nombre maximum d’E/S par seconde de 80 000. Pour plus d’informations sur le nombre maximal d’E/S par seconde par machine virtuelle, consultez [Tailles des machines virtuelles Windows](../virtual-machines/sizes.md).
 
 
 ## <a name="create-and-attach-disks"></a>Créer et attacher des disques
 Vous pouvez créer et attacher des disques lorsque vous créez un groupe identique, ou avec un groupe identique existant.
+
+À compter de la version `2019-07-01` de l’API, vous pouvez définir la taille du disque du système d’exploitation dans un groupe de machines virtuelles identiques avec la propriété [storageProfile.osDisk.diskSizeGb](/rest/api/compute/virtualmachinescalesets/createorupdate#virtualmachinescalesetosdisk). Après le provisionnement, il peut être nécessaire d’étendre ou de repartitionner le disque pour utiliser tout l’espace. Découvrez plus en détail [l’extension du disque ici](../virtual-machines/windows/expand-os-disk.md#expand-the-volume-within-the-os).
 
 ### <a name="attach-disks-at-scale-set-creation"></a>Attacher des disques lors de la création d’un groupe identique
 Créez un groupe de machines virtuelles identiques avec [New-AzVmss](/powershell/module/az.compute/new-azvmss). Lorsque vous y êtes invité, saisissez un nom d’utilisateur et le mot de passe correspondant pour les instances de machine virtuelle. Pour distribuer le trafic aux différentes instances de machine virtuelle, un équilibreur de charge est également créé. L’équilibreur de charge inclut des règles pour distribuer le trafic sur le port TCP 80, ainsi que pour autoriser le trafic Bureau à distance sur le port TCP 3389 et le trafic Accès distant PowerShell sur le port TCP 5985.
@@ -135,7 +137,7 @@ Update-AzVmss `
 ## <a name="prepare-the-data-disks"></a>Préparer les disques de données
 Les disques créés et attachés aux instances de machine virtuelle de votre groupe identique sont des disques bruts. Avant que vous ne puissiez les utiliser avec vos données et vos applications, les disques doivent être préparés. Pour préparer les disques, vous devez créer une partition, créer un système de fichiers, et les monter.
 
-Pour automatiser le processus sur plusieurs instances de machine virtuelle dans un groupe identique, vous pouvez utiliser l’extension de script personnalisé Azure. Cette extension peut exécuter des scripts localement sur chaque instance de machine virtuelle, par exemple pour préparer les disques de données attachés. Pour plus d’informations, consultez [Vue d’ensemble de l’extension de script personnalisé](../virtual-machines/windows/extensions-customscript.md).
+Pour automatiser le processus sur plusieurs instances de machine virtuelle dans un groupe identique, vous pouvez utiliser l’extension de script personnalisé Azure. Cette extension peut exécuter des scripts localement sur chaque instance de machine virtuelle, par exemple pour préparer les disques de données attachés. Pour plus d’informations, consultez [Vue d’ensemble de l’extension de script personnalisé](../virtual-machines/extensions/custom-script-windows.md).
 
 
 L’exemple suivant présente l’exécution d’un script à partir d’un dépôt d’exemples GitHub sur chaque instance de machine virtuelle avec la commande [Add-AzVmssExtension](/powershell/module/az.compute/Add-AzVmssExtension) qui prépare tous les disques de données attachés bruts :

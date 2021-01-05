@@ -9,11 +9,11 @@ ms.topic: include
 ms.date: 04/01/2020
 ms.author: aahi
 ms.openlocfilehash: 85c67384c38376dc6f5701cf26e879d6e1b76c7f
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "80875035"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95996417"
 ---
 ## <a name="gathering-required-parameters"></a>Collecte des paramètres requis
 

@@ -1,6 +1,6 @@
 ### YamlMime:Landing
 title: Documentation Azure Lighthouse
-summary: Azure Lighthouse permet aux fournisseurs de services de gérer les ressources Azure sur tous leurs clients avec une automatisation et une scalabilité supérieures ainsi qu’une gouvernance améliorée.
+summary: Azure Lighthouse offre une gestion inter- et multi-locataire, ce qui permet d’améliorer l’automatisation, la scalabilité et la gouvernance entre les ressources et les locataires.
 metadata:
   title: Documentation Azure Lighthouse
   description: Azure Lighthouse permet aux fournisseurs de services de gérer les ressources Azure sur tous leurs clients avec une automatisation et une scalabilité supérieures ainsi qu’une gouvernance améliorée.
@@ -9,13 +9,13 @@ metadata:
   ms.collection: collection
   author: JnHs
   ms.author: jenhayes
-  ms.date: 04/14/2020
-  ms.openlocfilehash: e62db32a20c4124f64e7c77d626099905a960815
-  ms.sourcegitcommit: 64fc70f6c145e14d605db0c2a0f407b72401f5eb
+  ms.date: 12/03/2020
+  ms.openlocfilehash: 02b9ed9bb6146a73da26083718176447a7402f2a
+  ms.sourcegitcommit: c4246c2b986c6f53b20b94d4e75ccc49ec768a9a
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 05/27/2020
-  ms.locfileid: "83871800"
+  ms.lasthandoff: 12/04/2020
+  ms.locfileid: "96602323"
 landingContent:
 - title: À propos d’Azure Lighthouse
   linkLists:
@@ -33,8 +33,10 @@ landingContent:
   linkLists:
   - linkListType: how-to-guide
     links:
-    - text: Intégrer un client dans la gestion des ressources déléguées Azure
+    - text: Intégrer un client à Azure Lighthouse
       url: ./how-to/onboard-customer.md
+    - text: Lier votre ID de partenaire
+      url: ./how-to/partner-earned-credit.md
   - linkListType: concept
     links:
     - text: Pratiques de sécurité recommandées
@@ -71,18 +73,24 @@ landingContent:
       url: ./how-to/view-manage-customers.md
     - text: Voir et gérer les fournisseurs de services
       url: ./how-to/view-manage-service-providers.md
-- title: Utiliser les services Azure
+- title: Utiliser les services Azure à grande échelle
   linkLists:
   - linkListType: how-to-guide
     links:
-    - text: Utiliser les journaux Azure Monitor à grande échelle
+    - text: Gérer les espaces de travail Azure Sentinel
+      url: ./how-to/manage-sentinel-workspaces.md
+    - text: Utiliser les journaux Azure Monitor
       url: ./how-to/monitor-at-scale.md
     - text: Superviser les changements de délégation
-      url: ./how-to/monitor-at-scale.md
-    - text: Déployer Azure Policy à grande échelle
+      url: ./how-to/monitor-delegation-changes.md
+    - text: Déployer Azure Policy
       url: ./how-to/policy-at-scale.md
     - text: Déployer une stratégie pouvant être corrigée
       url: ./how-to/deploy-policy-remediation.md
+    - text: Gérer des machines hybrides avec Azure Arc
+      url: ./how-to/manage-hybrid-infrastructure-arc.md
+    - text: Gérer des projets de migration
+      url: ./how-to/migration-at-scale.md
 - title: Informations de référence - SDK
   linkLists:
   - linkListType: reference
@@ -97,6 +105,8 @@ landingContent:
       url: /dotnet/api/Microsoft.Azure.Management.ManagedServices
     - text: Python
       url: /python/api/azure-mgmt-managedservices
+    - text: Terraform
+      url: https://www.terraform.io/docs/providers/azurerm/r/lighthouse_assignment.html
 - title: Informations de référence - Téléchargements
   linkLists:
   - linkListType: download
@@ -112,6 +122,6 @@ landingContent:
   - linkListType: get-started
     links:
     - text: Microsoft Q&A pour Azure Lighthouse
-      url: https://docs.microsoft.com/answers/topics/azure-lighthouse.html
+      url: /answers/topics/azure-lighthouse.html
     - text: Demander des fonctionnalités pour le produit
       url: https://feedback.azure.com/forums/922753

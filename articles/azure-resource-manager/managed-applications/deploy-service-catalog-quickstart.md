@@ -6,10 +6,10 @@ ms.topic: conceptual
 ms.date: 10/04/2018
 ms.author: tomfitz
 ms.openlocfilehash: ce58fc69496f54c078b0a0a55a8a3c7cad82a051
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "81391706"
 ---
 # <a name="quickstart-deploy-service-catalog-app-through-azure-portal"></a>Démarrage rapide : Déployer une application du catalogue de services à l’aide du portail Microsoft Azure

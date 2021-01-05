@@ -1,6 +1,6 @@
 ---
 title: Copier de façon incrémentielle une table à l’aide du portail Azure
-description: Dans ce tutoriel, vous allez créer un pipeline de fabrique de données Azure qui copie de façon incrémentielle les données d’une base de données Azure SQL dans un stockage Blob Azure.
+description: Dans ce tutoriel, vous créez une fabrique de données Azure Data Factory avec un pipeline qui charge les données delta d’une table dans Azure SQL Database vers un stockage Blob Azure.
 services: data-factory
 author: dearandyxu
 ms.author: yexu
@@ -10,19 +10,19 @@ ms.service: data-factory
 ms.workload: data-services
 ms.topic: tutorial
 ms.custom: seo-dt-2019
-ms.date: 01/11/2018
-ms.openlocfilehash: 78cb58bca9b06b6dcf8549eefa5ebf0eb2b4b01c
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.date: 11/09/2020
+ms.openlocfilehash: d1a7f47b1cdccb02952bd7d9d333855f5eec27d5
+ms.sourcegitcommit: 63d0621404375d4ac64055f1df4177dfad3d6de6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "81409330"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97508524"
 ---
-# <a name="incrementally-load-data-from-an-azure-sql-database-to-azure-blob-storage-using-the-azure-portal"></a>Charger de façon incrémentielle les données d’une base de données Azure SQL dans un stockage Blob Azure à l’aide du portail Azure
+# <a name="incrementally-load-data-from-azure-sql-database-to-azure-blob-storage-using-the-azure-portal"></a>Charger de façon incrémentielle les données depuis Azure SQL Database dans le stockage Blob Azure par le biais du portail Azure
 
 [!INCLUDE[appliesto-adf-xxx-md](includes/appliesto-adf-xxx-md.md)]
 
-Dans ce tutoriel, vous allez créer une fabrique de données Azure avec un pipeline qui charge les données delta d’une table d’une base de données Azure SQL vers un stockage Blob Azure.
+Dans ce tutoriel, vous créez une fabrique de données Azure Data Factory avec un pipeline qui charge les données delta d’une table dans Azure SQL Database vers un stockage Blob Azure.
 
 Dans ce tutoriel, vous allez effectuer les étapes suivantes :
 
@@ -65,7 +65,7 @@ Voici les étapes importantes à suivre pour créer cette solution :
 Si vous n’avez pas d’abonnement Azure, créez un compte [gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
 ## <a name="prerequisites"></a>Prérequis
-* **Azure SQL Database**. Vous utilisez la base de données comme magasin de données source. Si vous ne disposez pas d’une base de données SQL, consultez [Créer une base de données Azure SQL Database](../sql-database/sql-database-get-started-portal.md) pour connaître la procédure à suivre pour en créer une.
+* **Azure SQL Database**. Vous utilisez la base de données comme magasin de données source. Si vous n’avez pas de base de données dans Azure SQL Database, consultez [Créer une base de données dans Azure SQL Database](../azure-sql/database/single-database-create-quickstart.md) pour savoir comme en créer une.
 * **Stockage Azure**. Vous utilisez le stockage d’objets blob comme magasin de données récepteur. Si vous ne possédez pas de compte de stockage, consultez l’article [Créer un compte de stockage](../storage/common/storage-account-create.md) pour découvrir comment en créer un. Créez un conteneur sous le nom adftutorial. 
 
 ### <a name="create-a-data-source-table-in-your-sql-database"></a>Créer une table de source de données dans votre base de données SQL
@@ -103,6 +103,7 @@ Si vous n’avez pas d’abonnement Azure, créez un compte [gratuit](https://az
     ```
 
 ### <a name="create-another-table-in-your-sql-database-to-store-the-high-watermark-value"></a>Créer une autre table dans la base de données SQL pour stocker la valeur de filigrane supérieure
+
 1. Exécutez la commande SQL suivante sur votre base de données SQL pour créer une table sous le nom `watermarktable` pour stocker la valeur de filigrane :  
 
     ```sql
@@ -142,8 +143,8 @@ AS
 
 BEGIN
 
-    UPDATE watermarktable
-    SET [WatermarkValue] = @LastModifiedtime
+UPDATE watermarktable
+SET [WatermarkValue] = @LastModifiedtime
 WHERE [TableName] = @TableName
 
 END
@@ -152,15 +153,15 @@ END
 ## <a name="create-a-data-factory"></a>Créer une fabrique de données
 
 1. Lancez le navigateur web **Microsoft Edge** ou **Google Chrome**. L’interface utilisateur de Data Factory n’est actuellement prise en charge que par les navigateurs web Microsoft Edge et Google Chrome.
-2. Dans le menu de gauche, sélectionnez **Créer une ressource** > **Analytics** > **Data Factory** :
+2. Dans le menu de gauche, sélectionnez **Créer une ressource** > **Intégration** > **Data Factory** :
 
    ![Sélection Data Factory dans le volet « Nouveau »](./media/doc-common-process/new-azure-data-factory-menu.png)
 
 3. Sur la page **Nouvelle fabrique de données**, entrez **ADFTutorialOnPremDF** comme **nom**.
 
-   Le nom de la fabrique de données Azure doit être un nom **global unique**. Si vous voyez un point d’exclamation rouge avec l’erreur suivante, changez le nom de la fabrique de données (par exemple, votrenomADFIncCopyTutorialDF), puis tentez de la recréer. Consultez l’article [Data Factory - Règles d’affectation des noms](naming-rules.md) pour savoir comment nommer les artefacts Data Factory.
+   Le nom de la fabrique de données Azure Data Factory doit être **globalement unique**. Si vous voyez un point d’exclamation rouge avec l’erreur suivante, changez le nom de la fabrique de données (par exemple, votrenomADFIncCopyTutorialDF), puis tentez de la recréer. Consultez l’article [Data Factory - Règles d’affectation des noms](naming-rules.md) pour savoir comment nommer les artefacts Data Factory.
 
-       `Data factory name "ADFIncCopyTutorialDF" is not available`
+    *Le nom de fabrique de données « ADFIncCopyTutorialDF » n’est pas disponible*
 4. Sélectionnez l’**abonnement** Azure dans lequel vous voulez créer la fabrique de données.
 5. Pour le **groupe de ressources**, effectuez l’une des opérations suivantes :
 
@@ -169,7 +170,7 @@ END
          
         Pour plus d’informations sur les groupes de ressources, consultez [Utilisation des groupes de ressources pour gérer vos ressources Azure](../azure-resource-manager/management/overview.md).  
 6. Sélectionnez **V2** pour la **version**.
-7. Sélectionnez **l’emplacement** de la fabrique de données. Seuls les emplacements pris en charge sont affichés dans la liste déroulante. Les magasins de données (Stockage Azure, Azure SQL Database, etc.) et les services de calcul (HDInsight, etc.) utilisés par la fabrique de données peuvent être proposés dans d’autres régions.
+7. Sélectionnez **l’emplacement** de la fabrique de données. Seuls les emplacements pris en charge sont affichés dans la liste déroulante. Les magasins de données (Stockage Azure, Azure SQL Database, Azure SQL Managed Instance, etc.) et les services de calcul (HDInsight, etc.) utilisés par une fabrique de données peuvent se trouver dans d’autres régions.
 8. Cliquez sur **Créer**.      
 9. Une fois la création terminée, la page **Data Factory** s’affiche comme sur l’image.
 
@@ -182,7 +183,7 @@ Dans ce didacticiel, vous allez créer un pipeline avec deux activités de reche
 1. Sur la page **Prise en main** de l’interface utilisateur de Data Factory, cliquez sur la vignette **Créer un pipeline**.
 
    ![Page de prise en main de l’interface utilisateur de Data Factory](./media/doc-common-process/get-started-page.png)    
-3. Sur la page **Général** de la fenêtre **Propriétés** pour le pipeline, entrez le nom **IncrementalCopyPipeline**.
+3. Dans le volet Général, sous **Propriétés**, spécifiez **IncrementalCopyPipeline** comme **Nom**. Réduisez ensuite le panneau en cliquant sur l’icône Propriétés en haut à droite.
 
 4. Vous allez ajouter la première activité de recherche pour obtenir l’ancienne valeur de filigrane. Dans la boîte à outils **Activités**, Développez **Général**, puis faites glisser et déposez une activité **Recherche** sur la surface du concepteur de pipeline. Changez le nom de l’activité par **LookupOldWaterMarkActivity**.
 
@@ -196,10 +197,10 @@ Dans ce didacticiel, vous allez créer un pipeline avec deux activités de reche
 8. Pour **Service lié**, sélectionnez **Nouveau**, puis procédez comme suit :
 
     1. Entrez **AzureSqlDatabaseLinkedService** pour **Nom**.
-    2. Sélectionnez votre serveur SQL Azure comme **nom de serveur**.
+    2. Sélectionnez votre serveur pour **Nom du serveur**.
     3. Sélectionnez le **nom de la base de données** dans la liste déroulante.
     4. Entrez vos **nom d’utilisateur** & **mot de passe**.
-    5. Pour tester la connexion à la base de données Azure SQL, cliquez sur **Tester la connexion**.
+    5. Pour tester la connexion à votre base de données SQL, cliquez sur **Tester la connexion**.
     6. Cliquez sur **Terminer**.
     7. Vérifiez que **AzureSqlDatabaseLinkedService** est sélectionné comme **service lié**.
 
@@ -210,7 +211,7 @@ Dans ce didacticiel, vous allez créer un pipeline avec deux activités de reche
     ![Jeu de données de filigrane - paramètres de connexion](./media/tutorial-incremental-copy-portal/watermark-dataset-connection-settings.png)
 10. Basculez vers l’éditeur de pipeline en cliquant sur l’onglet du pipeline en haut ou bien en cliquant sur le nom du pipeline dans l’arborescence à gauche. Dans la fenêtre Propriétés pour l’activité de **recherche**, vérifiez que **WatermarkDataset** est sélectionné dans le champ **Jeu de données source**.
 
-11. Dans la boîte à outils **Activités**, développez **Général**et faites glisser et déposez une autre activité de **recherche** sur la surface du concepteur de pipeline, puis saisissez le nom **LookupNewWaterMarkActivity** dans l’onglet **Général** de la fenêtre Propriétés. Cette activité de recherche obtient la nouvelle valeur de filigrane à partir de la table avec les données sources à copier vers la destination.
+11. Dans la boîte à outils **Activités**, développez **Général** et faites glisser et déposez une autre activité de **recherche** sur la surface du concepteur de pipeline, puis saisissez le nom **LookupNewWaterMarkActivity** dans l’onglet **Général** de la fenêtre Propriétés. Cette activité de recherche obtient la nouvelle valeur de filigrane à partir de la table avec les données sources à copier vers la destination.
 
 12. Dans la fenêtre Propriétés pour la deuxième activité de **recherche**, basculez vers l’onglet **Paramètres**, puis cliquez sur **Nouveau**. Vous créez un jeu de données pour pointer vers la table source qui contient la nouvelle valeur du filigrane (valeur maximale de LastModifyTime).
 
@@ -233,7 +234,7 @@ Dans ce didacticiel, vous allez créer un pipeline avec deux activités de reche
     ![Connexion des activités de recherche à l’activité de copie](./media/tutorial-incremental-copy-portal/connection-lookups-to-copy.png)
 21. Sélectionnez l’**activité de copie** et vérifiez que vous vouez les propriétés de l’activité dans la fenêtre **Propriétés**.
 
-22. Basculez vers l’onglet **Source** dans la fenêtre**Propriétés**, et procédez comme suit :
+22. Basculez vers l’onglet **Source** dans la fenêtre **Propriétés**, et procédez comme suit :
 
     1. Sélectionnez **SourceDataset** pour le champ **Jeu de données source**.
     2. Sélectionnez **Requête** pour le champ **Utiliser la requête**.
@@ -277,7 +278,7 @@ Dans ce didacticiel, vous allez créer un pipeline avec deux activités de reche
         | LastModifiedtime | DateTime | @{activity('LookupNewWaterMarkActivity').output.firstRow.NewWatermarkvalue} |
         | TableName | String | @{activity('LookupOldWaterMarkActivity').output.firstRow.TableName} |
 
-    ![Activité de procédure stockée- paramètres de procédure stockée](./media/tutorial-incremental-copy-portal/sproc-activity-stored-procedure-settings.png)
+        ![Activité de procédure stockée- paramètres de procédure stockée](./media/tutorial-incremental-copy-portal/sproc-activity-stored-procedure-settings.png)
 27. Pour valider les paramètres du pipeline, cliquez sur **Valider** dans la barre d’outils. Vérifiez qu’il n’y a aucune erreur de validation. Pour fermer la fenêtre **Rapport de validation de pipeline**, cliquez sur >>.   
 
 28. Publiez des entités (services liés, jeux de données et pipelines) pour le service Azure Data Factory en sélectionnant le bouton **Publier tout**. Patientez jusqu’à voir le message de réussite de la publication.
@@ -290,9 +291,9 @@ Dans ce didacticiel, vous allez créer un pipeline avec deux activités de reche
 
 ## <a name="monitor-the-pipeline-run"></a>Surveiller l’exécution du pipeline.
 
-1. Basculez vers l’onglet **Surveiller** sur la gauche. Vous pouvez voir l’état de l’exécution du pipeline déclenchée par le déclencheur manuel. Cliquez sur le bouton **Actualiser** pour actualiser la liste.
+1. Basculez vers l’onglet **Surveiller** sur la gauche. Vous pouvez voir l’état de l’exécution du pipeline déclenchée par un déclencheur manuel. Vous pouvez utiliser les liens sous la colonne **NOM DU PIPELINE** pour voir les détails de l’exécution et réexécuter le pipeline.
 
-2. Pour voir des exécutions d’activité associées à l’exécution de ce pipeline, cliquez sur le premier lien (**Voir les exécutions d’activités**) dans la colonne **Actions**. Vous pouvez revenir à la vue précédente en cliquant sur **Pipelines** en haut. Cliquez sur le bouton **Actualiser** pour actualiser la liste.
+2. Pour voir les exécutions d’activités associées à l’exécution du pipeline, sélectionnez le lien sous la colonne **NOM DU PIPELINE**. Pour plus de détails sur les exécutions d’activités, sélectionnez le lien **Détails** (icône en forme de lunettes) dans la colonne **NOM DE L’ACTIVITÉ**. Sélectionnez **Toutes les exécutions de pipelines** en haut pour revenir à la vue Exécutions de pipelines. Sélectionnez **Actualiser** pour actualiser l’affichage.
 
 
 ## <a name="review-the-results"></a>Passer en revue les résultats.
@@ -322,7 +323,7 @@ Dans ce didacticiel, vous allez créer un pipeline avec deux activités de reche
 
 ## <a name="add-more-data-to-source"></a>Ajouter plus de données à la source
 
-Insérez de nouvelles données dans la base de données SQL (magasin de source de données).
+Insérez de nouvelles données dans votre base de données (magasin de source de données).
 
 ```sql
 INSERT INTO data_source_table
@@ -332,7 +333,7 @@ INSERT INTO data_source_table
 VALUES (7, 'newdata','9/7/2017 9:01:00 AM')
 ```
 
-Données mises à jour dans la base de données SQL :
+Données mises à jour dans votre base de données :
 
 ```
 PersonID | Name | LastModifytime
@@ -346,8 +347,8 @@ PersonID | Name | LastModifytime
 7 | newdata | 2017-09-07 09:01:00.000
 ```
 
-
 ## <a name="trigger-another-pipeline-run"></a>Déclencher une autre exécution de pipeline
+
 1. Basculez vers l’onglet **Modifier**. Cliquez sur le pipeline dans l’arborescence s’il n’est pas ouvert dans le concepteur.
 
 2. Cliquez sur **Ajouter un déclencheur** dans la barre d’outils, puis sur **Déclencher maintenant**.
@@ -355,9 +356,9 @@ PersonID | Name | LastModifytime
 
 ## <a name="monitor-the-second-pipeline-run"></a>Surveiller la deuxième exécution du pipeline
 
-1. Basculez vers l’onglet **Surveiller** sur la gauche. Vous pouvez voir l’état de l’exécution du pipeline déclenchée par le déclencheur manuel. Cliquez sur le bouton **Actualiser** pour actualiser la liste.
+1. Basculez vers l’onglet **Surveiller** sur la gauche. Vous pouvez voir l’état de l’exécution du pipeline déclenchée par un déclencheur manuel. Vous pouvez utiliser les liens sous la colonne **NOM DU PIPELINE** pour voir les détails de l’activité et réexécuter le pipeline.
 
-2. Pour voir des exécutions d’activité associées à l’exécution de ce pipeline, cliquez sur le premier lien (**Voir les exécutions d’activités**) dans la colonne **Actions**. Vous pouvez revenir à la vue précédente en cliquant sur **Pipelines** en haut. Cliquez sur le bouton **Actualiser** pour actualiser la liste.
+2. Pour voir les exécutions d’activités associées à l’exécution du pipeline, sélectionnez le lien sous la colonne **NOM DU PIPELINE**. Pour plus de détails sur les exécutions d’activités, sélectionnez le lien **Détails** (icône en forme de lunettes) dans la colonne **NOM DE L’ACTIVITÉ**. Sélectionnez **Toutes les exécutions de pipelines** en haut pour revenir à la vue Exécutions de pipelines. Sélectionnez **Actualiser** pour actualiser l’affichage.
 
 
 ## <a name="verify-the-second-output"></a>Vérifier la deuxième sortie
@@ -398,7 +399,7 @@ Dans ce tutoriel, vous avez effectué les étapes suivantes :
 > * Surveiller la deuxième exécution du pipeline
 > * Passer en revue les résultats de la deuxième exécution
 
-Dans ce didacticiel, le pipeline a copié les données d’une table unique d’une base de données SQL vers un stockage d’objets blob. Passez au didacticiel suivant pour découvrir comment copier les données de plusieurs tables d’une base de données SQL Server locale vers une base de données SQL.
+Dans ce tutoriel, le pipeline a copié les données d’une table unique dans SQL Database vers le stockage Blob. Passez au tutoriel suivant pour découvrir comment copier les données de plusieurs tables d’une base de données SQL Server vers SQL Database.
 
 > [!div class="nextstepaction"]
 >[Charger de façon incrémentielle des données provenant de plusieurs tables dans SQL Server vers Azure SQL Database](tutorial-incremental-copy-multiple-tables-portal.md)

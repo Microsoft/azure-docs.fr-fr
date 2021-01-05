@@ -9,18 +9,18 @@ editor: ''
 ms.assetid: ''
 ms.service: storsimple
 ms.devlang: NA
-ms.topic: article
+ms.topic: troubleshooting
 ms.tgt_pltfrm: NA
 ms.workload: TBD
 ms.date: 06/02/2017
 ms.author: alkohli
 ms.custom: ''
-ms.openlocfilehash: e05a37122647d4979089f0ba00b1fc15f9b84b0f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 12ab5a9598cc0222f5a3e64985be2e2ea9e7e2fd
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "60321734"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96014854"
 ---
 # <a name="replace-a-hardware-component-on-your-storsimple-8000-series-device"></a>Remplacer un composant matériel sur votre appareil StorSimple série 8000
 
@@ -28,10 +28,10 @@ ms.locfileid: "60321734"
 Les didacticiels de remplacement des composants matériels décrivent les composants matériels de votre appareil Microsoft Azure StorSimple 8000 series et les étapes nécessaires pour les retirer et les remplacer. Cet article décrit les icônes de sécurité, oriente vers les didacticiels détaillés et répertorie les composants remplaçables.
 
 > [!IMPORTANT]
-> Avant de tenter de retirer ou de remplacer un composant StorSimple, passez en revue les [conventions des icônes de sécurité](#safety-icon-conventions) et les autres [précautions de sécurité](storsimple-safety.md).
-
+> Avant de tenter de retirer ou de remplacer un composant StorSimple, passez en revue les [conventions des icônes de sécurité](#safety-icon-conventions) et les autres [précautions de sécurité](storsimple-8000-safety.md).
 
 ### <a name="safety-icon-conventions"></a>Conventions des icônes de sécurité
+
 Le tableau suivant décrit les icônes de sécurité utilisées dans ces didacticiels. Prêtez une attention particulière à ces icônes de sécurité quand vous effectuez les étapes nécessaires pour retirer et remplacer les composants de l’appareil.
 
 | Icône | Texte | Informations supplémentaires |
@@ -47,7 +47,8 @@ Le tableau suivant décrit les icônes de sécurité utilisées dans ces didacti
 | ![Icône Risque de basculement](./media/storsimple-hardware-component-replacement/TipHazard.png) |**Risque de basculement** | |
 
 ### <a name="before-you-begin"></a>Avant de commencer
-Familiarisez-vous avec les informations de sécurité sur votre appareil et avec les icônes de sécurité utilisées dans ce didacticiel. Pour obtenir des informations complètes, accédez à [Installer et utiliser en toute sécurité votre appareil StorSimple](storsimple-safety.md) . Consultez les [précautions de sécurité](storsimple-safety.md#handling-precautions) avant de manipuler votre appareil StorSimple.
+
+Familiarisez-vous avec les informations de sécurité sur votre appareil et avec les icônes de sécurité utilisées dans ce didacticiel. Pour obtenir des informations complètes, accédez à [Installer et utiliser en toute sécurité votre appareil StorSimple](storsimple-8000-safety.md) . Consultez les [précautions de sécurité](storsimple-8000-safety.md#handling-precautions) avant de manipuler votre appareil StorSimple.
 
 Avant d’essayer de remplacer un composant, tenez compte des informations suivantes.
 
@@ -61,6 +62,7 @@ Avant d’essayer de remplacer un composant, tenez compte des informations suiva
 Quand vous remplacez un module, **ne laissez JAMAIS une baie vide à l’arrière du boîtier**. Procurez-vous un module de remplacement ou un module vide avant de retirer le composant qui pose problème.
 
 ## <a name="hardware-component-replacement-procedures"></a>Procédures de remplacement des composants matériels
+
 Votre appareil StorSimple série 8000 est constitué de plusieurs modules enfichables dans les boîtiers principal et/ou EBOD. Le 8100 a un seul boîtier principal, tandis que le 8600 est un appareil à deux boîtiers : un boîtier principal et un boîtier EBOD.
 
 Les principaux composants matériels de votre appareil sont résumés dans les tableaux suivants. Cliquez sur le lien dans la colonne **Procédure de remplacement** pour accéder au didacticiel associé.
@@ -121,6 +123,7 @@ Le boîtier principal et le boîtier EBOD ont tous deux des modules de support d
 | 4 |Contrôleur 1 du boîtier EBOD |
 
 ## <a name="field-replaceable-units"></a>Unités remplaçables sur site
+
 Les unités remplaçables sur site suivantes sont disponibles pour votre appareil StorSimple :
 
 * Châssis (y compris le panneau de commande intégré)
@@ -135,5 +138,5 @@ Les unités remplaçables sur site suivantes sont disponibles pour votre apparei
 [Contactez le Support Microsoft](storsimple-8000-contact-microsoft-support.md) pour commander une de ces unités de remplacement.
 
 ## <a name="next-steps"></a>Étapes suivantes
-Passez en revue toutes les [informations de sécurité](storsimple-safety.md) avant d’essayer de remplacer un composant matériel StorSimple.
 
+Passez en revue toutes les [informations de sécurité](storsimple-8000-safety.md) avant d’essayer de remplacer un composant matériel StorSimple.

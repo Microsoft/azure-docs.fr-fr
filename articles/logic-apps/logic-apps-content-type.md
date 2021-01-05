@@ -6,12 +6,12 @@ ms.suite: integration
 ms.reviewer: klam, logicappspm
 ms.topic: conceptual
 ms.date: 07/20/2018
-ms.openlocfilehash: ae0abe288edda2ce01311d8533b1f104409efce0
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 04642e69adba82cf33b933829d72c51109ad2ee1
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75666871"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91578177"
 ---
 # <a name="handle-content-types-in-azure-logic-apps"></a>Gérer les types de contenu dans Azure Logic Apps
 
@@ -61,7 +61,7 @@ Logic Apps offre la possibilité de générer des jetons conviviaux qui représe
   
   2. Sous **Entrer ou coller un exemple de charge utile JSON**, fournissez un exemple de charge utile, puis choisissez **Terminé**. Par exemple : 
 
-     ![Fournir l’exemple de charge utile JSON](./media/logic-apps-content-type/request-trigger.png)
+     ![Capture d’écran montrant l’action « Lors de la réception d’une requête HTTP » avec un exemple de charge utile JSON.](./media/logic-apps-content-type/request-trigger.png)
 
      Le schéma généré apparaît désormais dans votre déclencheur.
 

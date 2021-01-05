@@ -1,45 +1,49 @@
 ---
-title: Stocker les résultats des requêtes dans le stockage
-description: Dans cet article, vous allez voir comment stocker les résultats des requêtes dans le stockage en utilisant SQL à la demande (préversion).
+title: Stocker des résultats de requêtes à partir d’un pool SQL serverless
+description: Dans cet article, vous allez découvrir comment stocker des résultats de requêtes dans un stockage en utilisant le pool SQL serverless.
 services: synapse-analytics
 author: vvasic-msft
 ms.service: synapse-analytics
 ms.topic: overview
-ms.subservice: ''
+ms.subservice: sql
 ms.date: 04/15/2020
 ms.author: vvasic
-ms.reviewer: jrasnick, carlrab
-ms.openlocfilehash: dd7666bb9f22214fb4701e6be9edc171912d9bf9
-ms.sourcegitcommit: 366e95d58d5311ca4b62e6d0b2b47549e06a0d6d
+ms.reviewer: jrasnick
+ms.openlocfilehash: dd989d5925da864728e944e84962086c0cfb08ea
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82691861"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96462320"
 ---
-# <a name="store-query-results-to-storage-using-sql-on-demand-preview-using-azure-synapse-analytics"></a>Stocker les résultats de la requête dans le stockage en utilisant SQL à la demande (préversion) avec Azure Synapse Analytics
+# <a name="store-query-results-to-storage-using-serverless-sql-pool-in-azure-synapse-analytics"></a>Stocker des résultats de requêtes en utilisant le pool SQL serverless dans Azure Synapse Analytics
 
-Dans cet article, vous allez voir comment stocker les résultats des requêtes dans le stockage en utilisant SQL à la demande (préversion).
+Dans cet article, vous allez découvrir comment stocker des résultats de requêtes dans un stockage en utilisant le pool SQL serverless.
 
 ## <a name="prerequisites"></a>Prérequis
 
-La première étape consiste à consulter les articles ci-dessous et à veiller à suivre les prérequis :
+La première étape consiste à **créer la base de données** dans laquelle seront exécutées les requêtes. Ensuite, initialisez les objets en exécutant le [script d’installation](https://github.com/Azure-Samples/Synapse/blob/master/SQL/Samples/LdwSample/SampleDB.sql) sur cette base de données. Ce script d’installation crée les sources de données, les informations d’identification limitées à la base de données et les formats de fichiers externes utilisés pour la lecture des données dans ces exemples.
 
-- [Première configuration](query-data-storage.md#first-time-setup)
-- [Composants requis](query-data-storage.md#prerequisites)
+Suivez les instructions de cet article pour créer des sources de données, des informations d’identification limitées à la base de données et des formats de fichiers externes utilisés pour l’écriture des données dans le stockage de sortie.
 
 ## <a name="create-external-table-as-select"></a>CREATE EXTERNAL TABLE AS SELECT
 
 Vous pouvez utiliser l’instruction CREATE EXTERNAL TABLE AS SELECT (CETAS) pour stocker les résultats des requêtes dans le stockage.
 
 > [!NOTE]
-> Modifiez la première ligne de la requête, par exemple [mydbname], afin d’utiliser la base de données que vous avez créée. Si vous n’avez pas créé de base de données, lisez [Première configuration](query-data-storage.md#first-time-setup). Vous devez définir le paramètre LOCATION de la source de données externe MyDataSource sur l’emplacement pour lequel vous disposez d’une autorisation d’écriture. 
+> Modifiez la première ligne de la requête, c’est-à-dire [mydbname], afin d’utiliser la base de données que vous avez créée.
 
 ```sql
 USE [mydbname];
 GO
 
+CREATE DATABASE SCOPED CREDENTIAL [SasTokenWrite]
+WITH IDENTITY = 'SHARED ACCESS SIGNATURE',
+     SECRET = 'sv=2018-03-28&ss=bfqt&srt=sco&sp=rwdlacup&se=2019-04-18T20:42:12Z&st=2019-04-18T12:42:12Z&spr=https&sig=lQHczNvrk1KoYLCpFdSsMANd0ef9BrIPBNJ3VYEIq78%3D';
+GO
+
 CREATE EXTERNAL DATA SOURCE [MyDataSource] WITH (
-    LOCATION = 'https://sqlondemandstorage.blob.core.windows.net/csv'
+    LOCATION = 'https://<storage account name>.blob.core.windows.net/csv', CREDENTIAL = [SasTokenWrite]
 );
 GO
 
@@ -58,8 +62,9 @@ SELECT
     *
 FROM
     OPENROWSET(
-        BULK 'https://sqlondemandstorage.blob.core.windows.net/csv/population-unix/population.csv',
-        FORMAT='CSV'
+        BULK 'csv/population-unix/population.csv',
+        DATA_SOURCE = 'sqlondemanddemo',
+        FORMAT = 'CSV', PARSER_VERSION = '2.0'
     ) WITH (
         CountryCode varchar(4),
         CountryName varchar(64),
@@ -69,12 +74,12 @@ FROM
 
 ```
 
-## <a name="use-a-external-table-created"></a>Utiliser une table externe existante
+## <a name="use-the-external-table"></a>Utiliser la table externe
 
-Vous pouvez utiliser une table externe créée via CETAS comme n’importe quelle table externe.
+Vous pouvez utiliser la table externe créée via CETAS comme n’importe quelle table externe.
 
 > [!NOTE]
-> Modifiez la première ligne de la requête, par exemple [mydbname], afin d’utiliser la base de données que vous avez créée. Si vous n’avez pas créé de base de données, lisez [Première configuration](query-data-storage.md#first-time-setup).
+> Modifiez la première ligne de la requête, c’est-à-dire [mydbname], afin d’utiliser la base de données que vous avez créée.
 
 ```sql
 USE [mydbname];
@@ -91,4 +96,4 @@ ORDER BY
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour plus d’informations sur la façon d’interroger différents types de fichiers, reportez-vous aux articles [Interroger un fichier CSV](query-single-csv-file.md), [Interroger des fichiers Parquet](query-parquet-files.md) et [Interroger des fichiers JSON](query-json-files.md).
+Pour plus d’informations sur la façon d’interroger différents types de fichiers, consultez les articles [Interroger un fichier CSV](query-single-csv-file.md), [Interroger des fichiers Parquet](query-parquet-files.md) et [Interroger des fichiers JSON](query-json-files.md).

@@ -6,13 +6,13 @@ ms.author: hrasheed
 ms.reviewer: hrasheed
 ms.service: hdinsight
 ms.topic: conceptual
-ms.date: 04/14/2020
-ms.openlocfilehash: d0fd9999abc4a67ded0f66977e1a3ba5310c87be
-ms.sourcegitcommit: ea006cd8e62888271b2601d5ed4ec78fb40e8427
+ms.date: 08/21/2020
+ms.openlocfilehash: 2fd7a3e512b79651fdcf6a6ac0c14822361fc263
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/14/2020
-ms.locfileid: "81383032"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96350192"
 ---
 # <a name="azure-hdinsight-40-overview"></a>Vue d’ensemble d’Azure HDInsight 4.0
 
@@ -91,12 +91,20 @@ Il n’existe aucun chemin de mise à niveau des versions précédentes de HDIns
 
 * HDInsight 4.0 ne prend pas en charge MapReduce pour Apache Hive. Utilisez plutôt Apache Tez. Découvrez plus en détail [Apache Tez](https://tez.apache.org/).
 * HDInsight 4.0 ne prend pas en charge Apache Storm.
-* L’affichage Hive n’est plus disponible dans HDInsight 4.0.
+* HDInsight 4,0 ne prend pas en charge le type de cluster ML services.
+* La vue Hive est uniquement disponible sur les clusters HDInsight 4.0 dotés d’un numéro de version supérieur ou égal à 4.1. Ce numéro de version est disponible dans Administrateur Ambari -> Versions.
 * L’interpréteur de commandes d’Apache Zeppelin n’est pas pris en charge dans les clusters Spark et Interactive Query.
 * Vous ne pouvez pas *désactiver* LLAP sur un cluster Spark-LLAP. Vous pouvez uniquement désactiver LLAP.
 * Azure Data Lake Storage Gen2 ne peut pas enregistrer les blocs-notes Jupyter dans un cluster Spark.
+* Apache Pig s’exécute par défaut sur Tez, mais vous pouvez le remplacer par MapReduce.
+* L’intégration de Spark SQL Ranger pour la sécurité des lignes et des colonnes est déconseillée.
+* Spark 2.4 et Kafka 2.1 sont disponibles dans HDInsight 4.0. Par conséquent, Spark 2.3 et Kafka  1.1 ne sont plus pris en charge. Nous vous recommandons d’utiliser Spark 2.4 et Kafka 2.1 et versions ultérieures dans HDInsight 4.0.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
+* [Guide de migration HBase](./hbase/apache-hbase-migrate-new-version.md)
+* [Guide de migration Hive](./interactive-query/apache-hive-migrate-workloads.md)
+* [Guide de migration Kafka](./kafka/migrate-versions.md)
+* [Guide de migration Spark](./spark/migrate-versions.md)
 * [Documentation Azure HDInsight](index.yml)
 * [Notes de publication](hdinsight-release-notes.md)

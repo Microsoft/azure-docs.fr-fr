@@ -9,27 +9,26 @@ ms.service: cognitive-services
 ms.topic: conceptual
 ms.date: 11/22/2019
 ms.author: erhopf
-ms.openlocfilehash: d36961a12162a587def76b1ffeb2109f9ed63f4d
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.openlocfilehash: c7aeb9e9f4de7b4de62f9b5a8da6d997e32a2399
+ms.sourcegitcommit: 22da82c32accf97a82919bf50b9901668dc55c97
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83587678"
+ms.lasthandoff: 11/08/2020
+ms.locfileid: "94363321"
 ---
 # <a name="authenticate-requests-to-azure-cognitive-services"></a>Authentifier des requêtes auprès d’Azure Cognitive Services
 
 Chaque requête adressée à un service Azure Cognitive Services doit inclure un en-tête d’authentification. Cet en-tête passe une clé d’abonnement ou un jeton d’accès qui sert à valider votre abonnement à un service ou à un groupe de services. Cet article présente trois façons d’authentifier une requête et les conditions de chaque méthode.
 
-* [Authentification avec une clé d’abonnement monoservice](#authenticate-with-a-single-service-subscription-key)
-* [Authentification avec une clé d’abonnement multiservice](#authenticate-with-a-multi-service-subscription-key)
-* [Authentification avec un jeton](#authenticate-with-an-authentication-token)
-* [Authentifier avec Azure Active Directory (AAD)](#authenticate-with-azure-active-directory)
+* Authentifier avec une clé d’abonnement [monoservice](#authenticate-with-a-single-service-subscription-key) ou [multiservice](#authenticate-with-a-multi-service-subscription-key)
+* Authentifier avec un [jeton](#authenticate-with-an-authentication-token)
+* Authentifier avec [Azure Active Directory (AAD)](#authenticate-with-azure-active-directory)
 
 ## <a name="prerequisites"></a>Prérequis
 
 Pour adresser une requête, vous devez disposer d’un compte Azure et d’un abonnement Azure Cognitive Services. Si vous avez déjà un compte, passez à la section suivante. Si vous n’avez pas de compte, ce guide va vous aider à en créer un en quelques minutes : [Créer un compte Cognitive Services pour Azure](cognitive-services-apis-create-account.md).
 
-Pour obtenir votre clé d’abonnement, rendez-vous sur le [Portail Azure](cognitive-services-apis-create-account.md#get-the-keys-for-your-resource) après avoir créé votre compte ou activé un [essai gratuit](https://azure.microsoft.com/try/cognitive-services/my-apis).
+Vous pouvez obtenir votre clé d’abonnement sur le [portail Azure](cognitive-services-apis-create-account.md#get-the-keys-for-your-resource) après la [création de votre compte](https://azure.microsoft.com/free/cognitive-services/).
 
 ## <a name="authentication-headers"></a>En-têtes d’authentification
 
@@ -82,14 +81,21 @@ Quand vous utilisez la clé d’abonnement multiservice avec le service Translat
 
 L’authentification multiservice est prise en charge dans ces régions :
 
-| | | |
-|-|-|-|
-| `australiaeast` | `brazilsouth` | `canadacentral` |
-| `centralindia` | `eastasia` | `eastus` |
-| `japaneast` | `northeurope` | `southcentralus` |
-| `southeastasia` | `uksouth` | `westcentralus` |
-| `westeurope` | `westus` | `westus2` |
-
+- `australiaeast`
+- `brazilsouth`
+- `canadacentral`
+- `centralindia`
+- `eastasia`
+- `eastus`
+- `japaneast`
+- `northeurope`
+- `southcentralus`
+- `southeastasia`
+- `uksouth`
+- `westcentralus`
+- `westeurope`
+- `westus`
+- `westus2`
 
 ### <a name="sample-requests"></a>Exemples de demandes
 
@@ -142,13 +148,21 @@ curl -v -X POST \
 
 Ces régions multiservices prennent en charge l’échange de jeton :
 
-| | | |
-|-|-|-|
-| `australiaeast` | `brazilsouth` | `canadacentral` |
-| `centralindia` | `eastasia` | `eastus` |
-| `japaneast` | `northeurope` | `southcentralus` |
-| `southeastasia` | `uksouth` | `westcentralus` |
-| `westeurope` | `westus` | `westus2` |
+- `australiaeast`
+- `brazilsouth`
+- `canadacentral`
+- `centralindia`
+- `eastasia`
+- `eastus`
+- `japaneast`
+- `northeurope`
+- `southcentralus`
+- `southeastasia`
+- `uksouth`
+- `westcentralus`
+- `westeurope`
+- `westus`
+- `westus2`
 
 Après avoir obtenu un jeton d’authentification, vous devez le passer dans chaque requête sous la forme de l’en-tête `Authorization`. Voici un exemple d’appel au service Translator :
 
@@ -163,6 +177,6 @@ curl -X POST 'https://api.cognitive.microsofttranslator.com/translate?api-versio
 
 ## <a name="see-also"></a>Voir aussi
 
-* [Qu’est-ce que Cognitive Services ?](welcome.md)
+* [Qu’est-ce que Cognitive Services ?](./what-are-cognitive-services.md)
 * [Tarifs de Cognitive Services](https://azure.microsoft.com/pricing/details/cognitive-services/)
 * [Sous-domaines personnalisés](cognitive-services-custom-subdomains.md)

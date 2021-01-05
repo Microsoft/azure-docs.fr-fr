@@ -6,10 +6,10 @@ ms.topic: reference
 ms.date: 02/21/2020
 ms.author: cshoe
 ms.openlocfilehash: 1c25543b16c3486a8f6a445427346382faaaa09a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "77586125"
 ---
 # <a name="azure-iot-hub-bindings-for-azure-functions"></a>Liaisons Azure IoT Hub pour Azure Functions

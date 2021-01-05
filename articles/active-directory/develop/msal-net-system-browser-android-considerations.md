@@ -12,13 +12,13 @@ ms.workload: identity
 ms.date: 10/30/2019
 ms.author: marsma
 ms.reviewer: saeeda
-ms.custom: aaddev
-ms.openlocfilehash: 8e37d443d75dccae8704bc1ff7856e1d24131766
-ms.sourcegitcommit: d662eda7c8eec2a5e131935d16c80f1cf298cb6b
+ms.custom: devx-track-csharp, aaddev
+ms.openlocfilehash: 8f755b42249a88a2d37117003d561f79aea6b170
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82652712"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88165989"
 ---
 #  <a name="xamarin-android-system-browser-considerations-for-using-msalnet"></a>Considérations sur les navigateurs système Xamarin Android pour l’utilisation de MSAL.NET
 

@@ -13,10 +13,10 @@ ms.workload: azure-vs
 ms.date: 03/06/2018
 ms.author: ghogen
 ms.openlocfilehash: f4622e44c795182ee68c617f335c9e1651d3adcc
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "80294388"
 ---
 # <a name="enable-remote-desktop-connection-for-a-role-in-azure-cloud-services-using-visual-studio"></a>Activer une connexion Bureau à distance pour un rôle dans Azure Cloud Services avec Visual Studio

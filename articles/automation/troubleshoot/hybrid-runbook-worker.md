@@ -1,6 +1,6 @@
 ---
-title: Résolution des problèmes relatifs aux Runbooks Workers hybrides Azure Automation
-description: Cet article fournit des informations sur la résolution des problèmes liés aux Runbooks Workers hybrides Azure Automation.
+title: Résoudre les problèmes de Runbook Worker hybride d’Azure Automation
+description: Cet article explique comment détecter et résoudre des problèmes liés aux Runbook Workers hybride d’Azure Automation.
 services: automation
 ms.service: automation
 ms.subservice: ''
@@ -9,19 +9,16 @@ ms.author: magoedte
 ms.date: 11/25/2019
 ms.topic: conceptual
 manager: carmonm
-ms.openlocfilehash: 6d734c910cc966cfd83f1e1c7f9cbd728643fbc4
-ms.sourcegitcommit: 11572a869ef8dbec8e7c721bc7744e2859b79962
+ms.openlocfilehash: 1386dd820b10b63862ddab38c441f251bea1d83d
+ms.sourcegitcommit: 6906980890a8321dec78dd174e6a7eb5f5fcc029
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82836510"
+ms.lasthandoff: 10/22/2020
+ms.locfileid: "92428404"
 ---
-# <a name="troubleshoot-hybrid-runbook-workers"></a>Résoudre les problèmes liés aux Runbooks Workers hybrides
+# <a name="troubleshoot-hybrid-runbook-worker-issues"></a>Résoudre les problèmes liés à la fonctionnalité Runbook Worker hybride
 
-Cet article fournit des informations sur la résolution des problèmes liés aux Runbook Workers hybrides Azure Automation.
-
->[!NOTE]
->Cet article a été mis à jour pour tenir compte de l’utilisation du nouveau module Az d’Azure PowerShell. Vous pouvez toujours utiliser le module AzureRM, qui continue à recevoir des correctifs de bogues jusqu’à au moins décembre 2020. Pour en savoir plus sur le nouveau module Az et la compatibilité avec AzureRM, consultez [Présentation du nouveau module Az d’Azure PowerShell](https://docs.microsoft.com/powershell/azure/new-azureps-module-az?view=azps-3.5.0). Pour obtenir des instructions relatives à l’installation du module Az sur votre Runbook Worker hybride, voir [Installer le module Azure PowerShell](https://docs.microsoft.com/powershell/azure/install-az-ps?view=azps-3.5.0). Pour votre compte Azure Automation, vous pouvez mettre à jour vos modules vers la toute dernière version en suivant les instructions du [Guide de mise à jour des modules Azure PowerShell dans Azure Automation](../automation-update-azure-modules.md).
+Cet article fournit des informations sur la détection et la résolution de problèmes liés aux Runbook Workers hybrides Azure Automation. Pour obtenir des informations générales, consultez [Vue d’ensemble des Runbook Worker hybrides](../automation-hybrid-runbook-worker.md).
 
 ## <a name="general"></a>Général
 
@@ -49,7 +46,7 @@ Les causes possibles sont les suivantes :
 
 #### <a name="resolution"></a>Résolution
 
-Vérifiez que l’ordinateur dispose d’un accès sortant à * **.azure-automation.net** sur le port 443.
+Vérifiez que l’ordinateur dispose d’un accès sortant à **\*.azure-automation.net** sur le port 443.
 
 Les ordinateurs qui exécutent les Runbooks Worker hybrides doivent respecter la configuration matérielle minimale requise pour pouvoir héberger cette fonctionnalité. Les runbooks et le processus d’arrière-plan qu’ils utilisent peuvent entraîner la sur-utilisation du système et des retards ou expirations de travaux de runbooks.
 
@@ -61,7 +58,7 @@ Vérifiez dans le journal des événements **Microsoft-SMA** la présence d’un
 
 #### <a name="issue"></a>Problème
 
-Le Runbook Worker hybride reçoit l’événement 15011, indiquant qu’un résultat de requête n’est pas valide. L’erreur suivante s’affiche lorsque le Worker tente d’ouvrir une connexion avec le [serveur Signalr](https://docs.microsoft.com/aspnet/core/signalr/introduction?view=aspnetcore-3.1).
+Le Runbook Worker hybride reçoit l’événement 15011, indiquant qu’un résultat de requête n’est pas valide. L’erreur suivante s’affiche lorsque le Worker tente d’ouvrir une connexion avec le [serveur Signalr](/aspnet/core/signalr/introduction?view=aspnetcore-3.1).
 
 ```error
 [AccountId={c7d22bd3-47b2-4144-bf88-97940102f6ca}]
@@ -73,7 +70,7 @@ Le Runbook Worker hybride reçoit l’événement 15011, indiquant qu’un rés
 
 #### <a name="cause"></a>Cause
 
-Le Runbook Worker hybride n’a pas été configuré correctement pour la solution de déploiement automatisé. Cette solution contient un composant qui connecte la machine virtuelle à l’espace de travail Log Analytics. Le script PowerShell recherche l’espace de travail dans l’abonnement avec le nom fourni. Dans ce cas, l’espace de travail Log Analytics se trouve dans un autre abonnement. Le script ne trouve pas l’espace de travail et tente d’en créer un, mais le nom est déjà utilisé. Par conséquent, le déploiement échoue.
+Le Runbook Worker hybride n’a pas été configuré correctement pour le déploiement de fonctionnalités automatisé, par exemple, pour Update Management. Le déploiement contient un composant qui connecte la machine virtuelle à l’espace de travail Log Analytics. Le script PowerShell recherche l’espace de travail dans l’abonnement avec le nom fourni. Dans ce cas, l’espace de travail Log Analytics se trouve dans un autre abonnement. Le script ne trouve pas l’espace de travail et tente d’en créer un, mais le nom est déjà utilisé. Par conséquent, le déploiement échoue.
 
 #### <a name="resolution"></a>Résolution
 
@@ -134,7 +131,7 @@ La phase d’inscription initiale du Worker échoue et vous recevez le message e
 Les causes possibles sont les suivantes :
 
 * Un ID ou une clé (primaire) d’espace de travail est mal orthographié(e) dans les paramètres de l’agent. 
-* Le Runbook Worker hybride ne peut pas télécharger la configuration, ce qui entraîne une erreur de liaison de compte. Quand Azure active des solutions, seules certaines régions sont prises en charge pour la liaison d’un espace de travail Log Analytics et d’un compte Automation. Il est également possible qu’une date et/ou une heure incorrectes soient définies sur l’ordinateur. Si l’heure varie de +/-15 minutes par rapport à l’heure actuelle, l’intégration échoue.
+* Le Runbook Worker hybride ne peut pas télécharger la configuration, ce qui entraîne une erreur de liaison de compte. Quand Azure active des fonctionnalités sur des machines, il ne prend en charge que certaines régions pour la liaison d’un espace de travail Log Analytics et d’un compte Automation. Il est également possible qu’une date et/ou une heure incorrectes soient définies sur l’ordinateur. Si l’heure s’écarte de +/-15 minutes par rapport à l’heure actuelle, le déploiement des fonctionnalités échoue.
 
 #### <a name="resolution"></a>Résolution
 
@@ -167,7 +164,7 @@ Le compte **nxautomationuser** de l’agent Log Analytics pour Linux n’est pas
 
 * Vérifiez la configuration du compte **nxautomationuser** dans le fichier **sudoers**. Consultez [Exécution de runbooks sur un Runbook Worker hybride](../automation-hrw-run-runbooks.md).
 
-### <a name="scenario-the-log-analytics-agent-for-linux-isnt-running"></a><a name="oms-agent-not-running"></a>Scénario : L’agent Log Analytics pour Linux n’est pas en cours d’exécution
+### <a name="scenario-log-analytics-agent-for-linux-isnt-running"></a><a name="oms-agent-not-running"></a>Scénario : L’agent Log Analytics pour Linux n’est pas en cours d’exécution.
 
 #### <a name="issue"></a>Problème
 
@@ -179,7 +176,7 @@ Si l’agent n’est pas en cours d’exécution, le Runbook Worker hybride Linu
 
 #### <a name="resolution"></a>Résolution
 
- Vérifiez que l’agent est en cours d’exécution en entrant la commande `ps -ef | grep python`. Le résultat ressemble à ce qui suit. Python traite avec le compte d’utilisateur **nxautomation**. Si la solution Update Management ou Azure Automation n’est pas activée, aucun des processus suivants ne fonctionne.
+ Vérifiez que l’agent est en cours d’exécution en entrant la commande `ps -ef | grep python`. Le résultat ressemble à ce qui suit. Python traite avec le compte d’utilisateur **nxautomation**. Si la fonctionnalité Azure Automation n’est pas activée, aucun des processus suivants n’est en cours d’exécution.
 
 ```bash
 nxautom+   8567      1  0 14:45 ?        00:00:00 python /opt/microsoft/omsconfig/modules/nxOMSAutomationWorker/DSCResources/MSFT_nxOMSAutomationWorkerResource/automationworker/worker/main.py /var/opt/microsoft/omsagent/state/automationworker/oms.conf rworkspace:<workspaceId> <Linux hybrid worker version>
@@ -189,15 +186,15 @@ nxautom+   8595      1  0 14:45 ?        00:00:02 python /opt/microsoft/omsconfi
 
 La liste suivante présente les processus démarrés pour un Runbook Worker hybride Linux. Ils se trouvent tous dans le répertoire /var/opt/Microsoft/omsagent/State/automationworker/.
 
-* **oms.conf** : processus du gestionnaire de Workers. Vous pouvez le démarrer directement à partir de DSC.
-* **worker.conf** : processus Worker hybride automatiquement inscrit. Il est démarré par le gestionnaire de Worker. Ce processus est utilisé par Update Management et il est transparent pour l’utilisateur. Ce processus n’est pas présent si la solution Update Management n’est pas activée sur l’ordinateur.
-* **diy/worker.conf** : processus Worker hybride personnalisé. Le processus Worker hybride personnalisé est utilisé pour exécuter des runbooks utilisateur sur le Runbook Worker hybride. Il diffère uniquement du processus Worker hybride automatiquement inscrit par le fait qu’il utilise une configuration différente. Ce processus n’est pas présent si la solution Azure Automation est désactivée et si le Worker hybride Linux personnalisé n’est pas inscrit.
+* **oms.conf**  : processus du gestionnaire de Workers. Vous pouvez le démarrer directement à partir de DSC.
+* **worker.conf**  : processus Worker hybride automatiquement inscrit. Il est démarré par le gestionnaire de Worker. Ce processus est utilisé par Update Management et il est transparent pour l’utilisateur. Ce processus n’est pas présent si Update Management n’est pas activé sur la machine.
+* **diy/worker.conf**  : processus Worker hybride personnalisé. Le processus Worker hybride personnalisé est utilisé pour exécuter des runbooks utilisateur sur le Runbook Worker hybride. Il diffère uniquement du processus Worker hybride automatiquement inscrit par le fait qu’il utilise une configuration différente. Ce processus n’est pas présent si Azure Automation est désactivé et si le Worker hybride Linux personnalisé n’est pas inscrit.
 
 Si l’agent n’est pas en cours d’exécution, exécutez la commande suivante pour démarrer le service : `sudo /opt/microsoft/omsagent/bin/service_control restart`.
 
 ### <a name="scenario-the-specified-class-doesnt-exist"></a><a name="class-does-not-exist"></a>Scénario : La classe spécifiée n’existe pas.
 
-Si vous voyez le message d’erreur `The specified class does not exist..` dans **/var/opt/Microsoft/omsconfig/omsconfig.log**, l’agent Log Analytics pour Linux doit être mis à jour. Exécutez la commande suivante pour réinstaller l’agent.
+Si vous voyez le message d’erreur `The specified class does not exist..` dans **/var/opt/Microsoft/omsconfig/omsconfig.log** , l’agent Log Analytics pour Linux doit être mis à jour. Exécutez la commande suivante pour réinstaller l’agent.
 
 ```bash
 wget https://raw.githubusercontent.com/Microsoft/OMS-Agent-for-Linux/master/installer/scripts/onboard_agent.sh && sh onboard_agent.sh -w <WorkspaceID> -s <WorkspaceKey>
@@ -225,23 +222,23 @@ Vérifiez que l’agent est en cours d’exécution en entrant la commande suiva
 
 #### <a name="issue"></a>Problème
 
-Dans le journal des événements **Journaux des applications et des services\Operations Manager**, vous voyez l’événement 4502 et un message d’événement contenant `Microsoft.EnterpriseManagement.HealthService.AzureAutomation.HybridAgent` avec la description suivante :<br>`The certificate presented by the service \<wsid\>.oms.opinsights.azure.com was not issued by a certificate authority used for Microsoft services. Please contact your network administrator to see if they are running a proxy that intercepts TLS/SSL communication.`
+Dans le journal des événements **Journaux des applications et des services\Operations Manager** , vous voyez l’événement 4502 et un message d’événement contenant `Microsoft.EnterpriseManagement.HealthService.AzureAutomation.HybridAgent` avec la description suivante :<br>`The certificate presented by the service \<wsid\>.oms.opinsights.azure.com was not issued by a certificate authority used for Microsoft services. Please contact your network administrator to see if they are running a proxy that intercepts TLS/SSL communication.`
 
 #### <a name="cause"></a>Cause
 
-Une cause possible de ce problème est que votre proxy ou votre pare-feu réseau bloque les communications vers Microsoft Azure. Vérifiez que l’ordinateur dispose d’un accès sortant à * **.azure-automation.net** sur le port 443.
+Une cause possible de ce problème est que votre proxy ou votre pare-feu réseau bloque les communications vers Microsoft Azure. Vérifiez que l’ordinateur dispose d’un accès sortant à **\*.azure-automation.net** sur le port 443.
 
 #### <a name="resolution"></a>Résolution
 
-Les journaux d’activité sont stockés localement sur chaque Worker hybride à l’emplacement C:\ProgramData\Microsoft\System Center\Orchestrator\7.2\SMA\Sandboxes. Vous pouvez vérifier s’il existe des événements d’avertissement ou d’erreur dans les journaux des événements **Journaux des applications et des services\Microsoft-SMA\Operations** et **Journaux des applications et des services\Operations Manager**. Ces journaux indiquent une connectivité ou un autre type de problème qui affecte l’intégration du rôle à Azure Automation ou un problème rencontré dans le cadre d’opérations normales. Pour obtenir de l’aide supplémentaire concernant la résolution des problèmes liés à l’agent Log Analytics, consultez [Résoudre les problèmes liés à l’agent Log Analytics Windows](../../azure-monitor/platform/agent-windows-troubleshoot.md).
+Les journaux d’activité sont stockés localement sur chaque Worker hybride à l’emplacement C:\ProgramData\Microsoft\System Center\Orchestrator\7.2\SMA\Sandboxes. Vous pouvez vérifier s’il existe des événements d’avertissement ou d’erreur dans les journaux des événements **Journaux des applications et des services\Microsoft-SMA\Operations** et **Journaux des applications et des services\Operations Manager**. Ces journaux indiquent un problème de connectivité ou autre qui affecte l’activation du rôle pour Azure Automation, ou un problème rencontré dans le cadre d’opérations normales. Pour obtenir de l’aide supplémentaire concernant la résolution des problèmes liés à l’agent Log Analytics, consultez [Résoudre les problèmes liés à l’agent Log Analytics Windows](../../azure-monitor/platform/agent-windows-troubleshoot.md).
 
 Les Workers hybrides envoient une [sortie et des messages de runbook](../automation-runbook-output-and-messages.md) à Azure Automation de la même façon que les travaux Runbook qui s’exécutent dans le cloud envoient une sortie et des messages. Vous pouvez activer les flux détaillés et de progression de la même façon que pour les runbooks.
 
-### <a name="scenario-orchestratorsandboxexe-cant-connect-to-office-365-through-proxy"></a><a name="no-orchestrator-sandbox-connect-O365"></a>Scénario : Orchestrator.Sandbox.exe ne peut pas se connecter à Office 365 via un proxy
+### <a name="scenario-orchestratorsandboxexe-cant-connect-to-microsoft-365-through-proxy"></a>Scénario : Orchestrator.Sandbox.exe ne peut pas se connecter à Microsoft 365 via un proxy
 
 #### <a name="issue"></a>Problème
 
-Un script exécuté sur un Runbook Worker hybride Windows ne peut pas se connecter comme prévu à Office 365 sur un bac à sable Orchestrator. Le script utilise [Connect-MsolService](https://docs.microsoft.com/powershell/module/msonline/connect-msolservice?view=azureadps-1.0) pour la connexion. 
+Un script exécuté sur un Runbook Worker hybride Windows ne peut pas se connecter comme prévu à Microsoft 365 sur un bac à sable Orchestrator. Le script utilise [Connect-MsolService](/powershell/module/msonline/connect-msolservice?view=azureadps-1.0) pour la connexion. 
 
 Le bac à sable ne se connecte toujours pas correctement si vous modifiez le fichier **Orchestrator.Sandbox.exe.config** de manière à définir le proxy et la liste de contournement. Un fichier **Powershell_ise.exe.config** comportant les mêmes paramètres de proxy et de liste de contournement semble fonctionner comme prévu. Les journaux SMA (Service Management Automation) et PowerShell ne fournissent aucune information concernant le proxy.
 
@@ -251,9 +248,9 @@ La connexion aux services de fédération Active Directory (AD FS) sur le serveu
 
 #### <a name="resolution"></a>Résolution
 
-Vous pouvez résoudre le problème du bac à sable Orchestrator en migrant votre script afin d'utiliser les modules Azure Active Directory au lieu du module MSOnline pour les cmdlets PowerShell. Pour plus d’informations, consultez [Migration d'Orchestrator vers Azure Automation (bêta)](https://docs.microsoft.com/azure/automation/automation-orchestrator-migration).
+Vous pouvez résoudre le problème du bac à sable Orchestrator en migrant votre script afin d'utiliser les modules Azure Active Directory au lieu du module MSOnline pour les cmdlets PowerShell. Pour plus d’informations, consultez [Migration d'Orchestrator vers Azure Automation (bêta)](../automation-orchestrator-migration.md).
 
-Si vous souhaitez continuer à utiliser les cmdlets du module MSOnline, modifiez votre script pour utiliser [Invoke-Command](https://docs.microsoft.com/powershell/module/microsoft.powershell.core/invoke-command?view=powershell-7). Spécifiez les valeurs des paramètres `ComputerName` et `Credential`. 
+Si vous souhaitez continuer à utiliser les cmdlets du module MSOnline, modifiez votre script pour utiliser [Invoke-Command](/powershell/module/microsoft.powershell.core/invoke-command?view=powershell-7). Spécifiez les valeurs des paramètres `ComputerName` et `Credential`. 
 
 ```powershell
 $Credential = Get-AutomationPSCredential -Name MyProxyAccessibleCredential
@@ -264,7 +261,7 @@ Invoke-Command -ComputerName $env:COMPUTERNAME -Credential $Credential
 Cette modification du code démarre une toute nouvelle session PowerShell dans le contexte des informations d'identification spécifiées. Elle doit permettre au trafic de passer par un serveur proxy qui authentifie l'utilisateur actif.
 
 >[!NOTE]
->Cette solution rend inutile la manipulation du fichier de configuration du bac à sable. Même si vous parvenez à faire fonctionner le fichier de configuration avec votre script, le fichier est effacé à chaque mise à jour de l'agent Runbook Worker hybride.
+>Cette résolution rend inutile la manipulation du fichier de configuration du bac à sable. Même si vous parvenez à faire fonctionner le fichier de configuration avec votre script, le fichier est effacé à chaque mise à jour de l'agent Runbook Worker hybride.
 
 ### <a name="scenario-hybrid-runbook-worker-not-reporting"></a><a name="corrupt-cache"></a>Scénario : Runbook Worker hybride ne créant pas de rapports
 
@@ -296,7 +293,7 @@ Remove-Item -Path 'C:\Program Files\Microsoft Monitoring Agent\Agent\Health Serv
 Start-Service -Name HealthService
 ```
 
-### <a name="scenario-you-cant-add-a-hybrid-runbook-worker"></a><a name="already-registered"></a>Scénario : Vous ne pouvez pas ajouter un Runbook Worker hybride
+### <a name="scenario-you-cant-add-a-windows-hybrid-runbook-worker"></a><a name="already-registered"></a>Scénario : Vous ne pouvez pas ajouter de Runbook Worker hybride Windows
 
 #### <a name="issue"></a>Problème
 
@@ -315,6 +312,46 @@ Ce problème peut venir du fait que l’ordinateur est déjà inscrit avec un au
 Pour résoudre ce problème, supprimez la clé de Registre suivante, puis redémarrez `HealthService` et réessayez la cmdlet `Add-HybridRunbookWorker`.
 
 `HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\HybridRunbookWorker`
+
+### <a name="scenario-you-cant-add-a-linux-hybrid-runbook-worker"></a><a name="already-registered"></a>Scénario : Vous ne pouvez pas ajouter de Runbook Worker hybride Linux
+
+#### <a name="issue"></a>Problème
+
+Le message suivant s’affiche lorsque vous tentez d’ajouter un Runbook Worker hybride à l’aide du script python `sudo python /opt/microsoft/omsconfig/.../onboarding.py --register` :
+
+```error
+Unable to register, an existing worker was found. Please deregister any existing worker and try again.
+```
+
+En outre, si vous tentez de désinscrire un Runbook Worker hybride à l’aide du script Python `sudo python /opt/microsoft/omsconfig/.../onboarding.py --deregister` :
+
+```error
+Failed to deregister worker. [response_status=404]
+```
+
+#### <a name="cause"></a>Cause :
+
+Ce problème peut se produire si l’ordinateur est déjà inscrit avec un autre compte Automation en cas de suppression du groupe Worker hybride Azure, ou si vous essayez de rajouter le Runbook Worker hybride après l’avoir supprimé d’un ordinateur.
+
+#### <a name="resolution"></a>Résolution
+
+Pour résoudre ce problème :
+
+1. supprimez l’agent `sudo sh onboard_agent.sh --purge`.
+
+1. Exécutez ces commandes :
+
+   ```
+   sudo mv -f /home/nxautomation/state/worker.conf /home/nxautomation/state/worker.conf_old
+   sudo mv -f /home/nxautomation/state/worker_diy.crt /home/nxautomation/state/worker_diy.crt_old
+   sudo mv -f /home/nxautomation/state/worker_diy.key /home/nxautomation/state/worker_diy.key_old
+   ```
+
+1. Réintégrez l’agent `sudo sh onboard_agent.sh -w <workspace id> -s <workspace key> -d opinsights.azure.com`.
+
+1. Attendez que le dossier `/opt/microsoft/omsconfig/modules/nxOMSAutomationWorker` se renseigne.
+
+1. Réessayez le script Python `sudo python /opt/microsoft/omsconfig/.../onboarding.py --register`.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

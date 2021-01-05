@@ -6,17 +6,20 @@ ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
 ms.topic: conceptual
-ms.date: 11/11/2019
-ms.openlocfilehash: 38fb45fd339b5e2c7cab6f66a1ed6c0df73fb29e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 10/07/2020
+ms.openlocfilehash: 1ff7932f0afb128f6e7568ecdae602c6471db0bd
+ms.sourcegitcommit: d767156543e16e816fc8a0c3777f033d649ffd3c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74069627"
+ms.lasthandoff: 10/26/2020
+ms.locfileid: "92539715"
 ---
 # <a name="high-availability-services-supported-by-azure-hdinsight"></a>Services de haute disponibilité pris en charge par Azure HDInsight
 
- Afin de vous fournir des niveaux optimaux de disponibilité pour vos composants analytiques, HDInsight a été développé avec une architecture unique pour assurer une haute disponibilité (HA) des services critiques. Certains composants de cette architecture ont été développés par Microsoft pour fournir un basculement automatique. Les autres composants sont des composants Apache standard déployés pour prendre en charge des services spécifiques. Cet article décrit en détail l’architecture du modèle de service de haute disponibilité dans HDInsight, la façon dont HDInsight prend en charge le basculement pour les services haute disponibilité et les meilleures pratiques pour effectuer une reprise à partir d’autres interruptions de service.
+Afin de vous fournir des niveaux optimaux de disponibilité pour vos composants analytiques, HDInsight a été développé avec une architecture unique pour assurer une haute disponibilité (HA) des services critiques. Certains composants de cette architecture ont été développés par Microsoft pour fournir un basculement automatique. Les autres composants sont des composants Apache standard déployés pour prendre en charge des services spécifiques. Cet article décrit en détail l’architecture du modèle de service de haute disponibilité dans HDInsight, la façon dont HDInsight prend en charge le basculement pour les services haute disponibilité et les meilleures pratiques pour effectuer une reprise à partir d’autres interruptions de service.
+
+> [!NOTE]
+> Cet article contient des références au terme *esclave* , un terme que Microsoft n’utilise plus. Lorsque le terme sera supprimé du logiciel, nous le supprimerons de cet article.
 
 ## <a name="high-availability-infrastructure"></a>Infrastructure de haute disponibilité
 
@@ -36,7 +39,7 @@ Cette infrastructure est constituée d’un certain nombre de services et de com
 
 ![Infrastructure de haute disponibilité](./media/hdinsight-high-availability-components/high-availability-architecture.png)
 
-Il existe également d’autres services de haute disponibilité, qui sont pris en charge par les composants de fiabilité Apache Open source. Ces composants sont également présents sur les clusters HDInsight :
+Il existe également d’autres services de haute disponibilité, qui sont pris en charge par les composants open source de fiabilité Apache. Ces composants sont également présents sur les clusters HDInsight :
 
 - Système de fichiers Hadoop (HDFS) NameNode
 - Interface utilisateur de ResourceManager YARN
@@ -56,7 +59,7 @@ Microsoft assure la prise en charge des quatre services Apache dans le tableau s
 | Apache Livy | Nœud principal actif | Spark | Permet une interaction facile avec un cluster Spark sur une interface REST |
 
 >[!Note]
-> Les clusters HDInsight Pack Sécurité Entreprise (ESP) fournissent actuellement uniquement la haute disponibilité du serveur Ambari.
+> Les clusters HDInsight Pack Sécurité Entreprise (ESP) fournissent actuellement uniquement la haute disponibilité du serveur Ambari. Le serveur de chronologie de l’application, le serveur d’historique des travaux et Livy sont tous en cours d’exécution uniquement sur headnode0 et ne basculent pas vers headnode1 lorsque Ambari bascule. La base de données de chronologie de l’application se trouve également sur headnode0 et non sur le serveur SQL Ambari.
 
 ### <a name="architecture"></a>Architecture
 
@@ -133,5 +136,5 @@ Les clusters HDInsight HBase prennent en charge la haute disponibilité du maît
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- [Availability and reliability of Apache Hadoop clusters in HDInsight](hdinsight-high-availability-linux.md) (Disponibilité et fiabilité des clusters Apache Hadoop dans HDInsight)
+- [Availability and reliability of Apache Hadoop clusters in HDInsight](./hdinsight-business-continuity.md) (Disponibilité et fiabilité des clusters Apache Hadoop dans HDInsight)
 - [Architecture de réseau virtuel Azure HDInsight](hdinsight-virtual-network-architecture.md)

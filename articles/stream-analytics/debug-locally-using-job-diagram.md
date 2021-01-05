@@ -5,14 +5,14 @@ author: su-jie
 ms.author: sujie
 ms.reviewer: mamccrea
 ms.service: stream-analytics
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 01/23/2020
-ms.openlocfilehash: 106b1f0b765700803d2cd55b5e049fae5be3dfad
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c32ba468979e4566d8e349d481eddca7d407b659
+ms.sourcegitcommit: 857859267e0820d0c555f5438dc415fc861d9a6b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76850540"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93130984"
 ---
 # <a name="debug-azure-stream-analytics-queries-locally-using-job-diagram-in-visual-studio"></a>Déboguer des requêtes Azure Stream Analytics en local à l’aide du diagramme de travail dans Visual Studio
 
@@ -87,7 +87,7 @@ Dans cette section, vous explorez les métriques disponibles pour chaque partie 
   
 #### <a name="output-sinks-live-output"></a>Récepteurs de sortie (sortie dynamique)
 
-![Récepteurs de sortie locale dans le diagramme de travail](./media/debug-locally-using-job-diagram/live-output.png)
+![Diagramme de travail représentant les récepteurs de sortie locale.](./media/debug-locally-using-job-diagram/live-output.png)
 
 |Métrique|Description|
 |-|-|
@@ -119,7 +119,7 @@ D’autres métriques au niveau du travail s’affichent dans la console context
 
 * Les récepteurs de sortie Power BI et Azure Data Lake Storage Gen1 ne sont pas pris en charge en raison des limitations du modèle d’authentification.
 
-* Seules les options d’entrée dans le cloud offrent une prise en charge de [stratégies de temps](stream-analytics-out-of-order-and-late-events.md) ; les options d’entrée locale n’en proposent pas.
+* Seules les options d’entrée dans le cloud offrent une prise en charge de [stratégies de temps](./stream-analytics-time-handling.md) ; les options d’entrée locale n’en proposent pas.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

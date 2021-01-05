@@ -3,12 +3,12 @@ title: Surveiller les instances de conteneur
 description: Comment superviser la consommation des ressources de calcul comme le processeur et la mémoire par vos conteneurs dans Azure Container Instances
 ms.topic: article
 ms.date: 04/24/2019
-ms.openlocfilehash: e8d41e419abe43530186e256ac6253e2d4783f9b
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: b10c370b599233d00b2b4a65268f6c61a11cbd5c
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82116365"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96007254"
 ---
 # <a name="monitor-container-resources-in-azure-container-instances"></a>Surveiller les ressources des conteneurs dans Azure Container Instances
 
@@ -44,7 +44,7 @@ Dans un groupe de conteneurs comportant plusieurs conteneurs, utilisez une [dime
 1. Dans la page **Vue d’ensemble**, sélectionnez un des graphiques de métriques, par exemple **UC**. 
 1. Sélectionnez le bouton **Appliquer la division**, puis sélectionnez **Nom du conteneur**.
 
-![dimension][dimension]
+![Capture d’écran des métriques pour une instance de conteneur avec l’option Appliquer la division sélectionnée et le nom du conteneur sélectionné.][dimension]
 
 ## <a name="get-metrics---azure-cli"></a>Obtenir des métriques : Azure CLI
 

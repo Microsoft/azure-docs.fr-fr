@@ -3,21 +3,21 @@ title: Installer Update 5.1 sur un appareil de la gamme StorSimple 8000 | Micr
 description: Explique comment installer Update 5.1 pour la gamme d’appareils StorSimple 8000 sur votre appareil de la gamme StorSimple 8000.
 services: storsimple
 documentationcenter: NA
-author: priestlg
+author: alkohli
 ms.assetid: ''
 ms.service: storsimple
 ms.devlang: NA
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: NA
 ms.workload: TBD
 ms.date: 03/05/2020
-ms.author: v-grpr
-ms.openlocfilehash: b90f0f35f908d16b0746075e638fe66769939a64
-ms.sourcegitcommit: 62c5557ff3b2247dafc8bb482256fef58ab41c17
+ms.author: alkohli
+ms.openlocfilehash: 5b9958f3dd497aa612a92947b8d968439ef9d0e4
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/03/2020
-ms.locfileid: "80657901"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91575960"
 ---
 # <a name="install-update-51-on-your-storsimple-device"></a>Installer Update 5.1 sur votre appareil StorSimple
 
@@ -60,15 +60,15 @@ Suivez la procédure ci-dessous pour mettre à jour votre appareil vers [Update�
 
 2. Accédez à **Paramètres de l’appareil** > **Mises à jour de l’appareil**.
 
-    ![Cliquez sur Mises à jour de l’appareil](./media/storsimple-8000-install-update-51/update2.png)
+    ![Capture d’écran du panneau Paramètres avec l’option Mises à jour de l’appareil en évidence.](./media/storsimple-8000-install-update-51/update2.png)
 
 3. Une notification s’affiche si de nouvelles mises à jour sont disponibles. Dans le panneau **Mises à jour de l’appareil**, vous pouvez également cliquer sur **Rechercher les mises à jour**. Une tâche est créée pour rechercher les mises à jour disponibles. Un message s’affiche lorsque la tâche est terminée.
 
-    ![Cliquez sur Mises à jour de l’appareil](./media/storsimple-8000-install-update-51/update3.png)
+    ![Capture d’écran du panneau Paramètres avec l’option Mises à jour de l’appareil en évidence et le panneau Mises à jour de l’appareil avec le message De nouvelles mises à jour régulières sont disponibles en évidence.](./media/storsimple-8000-install-update-51/update3.png)
 
 4. Nous vous recommandons de consulter les notes de publication avant d’appliquer une mise à jour sur votre appareil. Pour appliquer les mises à jour, cliquez sur **Installer les mises à jour**. Dans le panneau **Confirmer les mises à jour standard**, passez en revue les conditions préalables à remplir avant d’appliquer les mises à jour. Cochez la case pour indiquer que vous êtes prêt à mettre à jour l’appareil, puis cliquez sur **Installer**.
 
-    ![Cliquez sur Mises à jour de l’appareil](./media/storsimple-8000-install-update-51/update4.png)
+    ![Capture d’écran du panneau Mises à jour de l’appareil avec l’option Installer les mises à jour en évidence et l’option Confirmer les mises à jour standard avec les options Accepter et Installer en évidence.](./media/storsimple-8000-install-update-51/update4.png)
 
 5. Un ensemble de vérifications préalables démarre. Ces vérifications incluent :
    
@@ -80,17 +80,17 @@ Suivez la procédure ci-dessous pour mettre à jour votre appareil vers [Update�
 
 7. Une fois les vérifications préalables terminées, une tâche de mise à jour est créée. Un message s’affiche une fois la tâche de mise à jour créée.
    
-    ![Création de la tâche de mise à jour](./media/storsimple-8000-install-update-51/update6.png)
+    ![Capture d’écran de la notification indiquant « Démarrage du travail de mise à jour logicielle ».](./media/storsimple-8000-install-update-51/update6.png)
    
     La mise à jour est ensuite appliquée à votre appareil.
 
 9. La mise à jour prend quelques heures. Sélectionnez la tâche de mise à jour et cliquez sur **Détails** pour afficher les détails de la tâche à tout moment.
 
-    ![Création de la tâche de mise à jour](./media/storsimple-8000-install-update-51/update8.png)
+    ![Capture d’écran du panneau Mises à jour de l’appareil avec l’option Télécharger et installer les mises à jour logicielles en cours en évidence et le panneau Installer les mises à jour.](./media/storsimple-8000-install-update-51/update8.png)
 
      Vous pouvez également surveiller la progression de la tâche de mise à jour à partir de **Paramètres de l’appareil > Travaux**. Le panneau **Travaux** indique la progression de la mise à jour.
 
-     ![Création de la tâche de mise à jour](./media/storsimple-8000-install-update-51/update7.png)
+     ![Capture d’écran du panneau Paramètres avec Travaux en évidence et le panneau Travaux montrant la progression de la mise à jour.](./media/storsimple-8000-install-update-51/update7.png)
 
 10. Une fois la tâche terminée, accédez à **Paramètres de l’appareil > Mises à jour de l’appareil**. La version du logiciel doit maintenant être mise à jour.
 

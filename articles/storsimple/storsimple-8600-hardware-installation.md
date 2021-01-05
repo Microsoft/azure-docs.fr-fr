@@ -8,11 +8,11 @@ ms.topic: conceptual
 ms.date: 01/09/2018
 ms.author: alkohli
 ms.openlocfilehash: 8d118e71b29b54b034788c37916091ad8f8b996f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79228169"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91871811"
 ---
 # <a name="unpack-rack-mount-and-cable-your-storsimple-8600-device"></a>Déballer, monter en rack et câbler votre appareil StorSimple 8600
 

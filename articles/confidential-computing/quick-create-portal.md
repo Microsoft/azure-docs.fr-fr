@@ -8,12 +8,12 @@ ms.workload: infrastructure
 ms.topic: quickstart
 ms.date: 04/23/2020
 ms.author: JenCook
-ms.openlocfilehash: 49824b324df044ae2883ab6844dd321be27cbcbf
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 1e417563b463d7033072b27bec505d10ef1adb47
+ms.sourcegitcommit: e2dc549424fb2c10fcbb92b499b960677d67a8dd
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82150354"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94695739"
 ---
 # <a name="quickstart-deploy-an-azure-confidential-computing-vm-in-the-azure-portal"></a>Démarrage rapide : Déployer une machine virtuelle d’informatique confidentielle Azure dans le portail Azure
 
@@ -62,7 +62,7 @@ Si vous n’avez pas d’abonnement Azure, [créez un compte](https://azure.micr
 
     * **Choisir une image** : pour ce tutoriel, sélectionnez Ubuntu 18.04 LTS. Vous pouvez également sélectionner Windows Server 2019, Windows Server 2016 ou Ubuntu 16.04 LTS. Dans ce cas, vous serez redirigé en conséquence dans ce tutoriel.
     
-    * **Activer l’image de 2e génération** : les machines virtuelles d’informatique confidentielle s’exécutent uniquement sur des images de [2e génération](../virtual-machines/linux/generation-2.md). Vérifiez que l’image que vous sélectionnez est une image de 2e génération. Cliquez sur l’onglet **Avancé** au-dessus de l’emplacement où vous configurez la machine virtuelle. Faites défiler vers le bas jusqu’à la section intitulée « Génération de machine virtuelle ». Sélectionnez Génération 2, puis revenez à l’onglet **Options de base**.
+    * **Activer l’image de 2e génération** : les machines virtuelles d’informatique confidentielle s’exécutent uniquement sur des images de [2e génération](../virtual-machines/generation-2.md). Vérifiez que l’image que vous sélectionnez est une image de 2e génération. Cliquez sur l’onglet **Avancé** au-dessus de l’emplacement où vous configurez la machine virtuelle. Faites défiler vers le bas jusqu’à la section intitulée « Génération de machine virtuelle ». Sélectionnez Génération 2, puis revenez à l’onglet **Options de base**.
     
 
         ![Options avancées, onglet](media/quick-create-portal/advanced-tab-virtual-machine.png)
@@ -84,7 +84,7 @@ Si vous n’avez pas d’abonnement Azure, [créez un compte](https://azure.micr
    * **Type d'authentification** : Sélectionnez **Clé publique SSH** si vous créez une machine virtuelle Linux. 
 
         > [!NOTE]
-         > Vous pouvez choisir d’utiliser une clé publique SSH ou un mot de passe pour l’authentification. L’utilisation d’une clé SSH est plus sécurisée. Pour savoir comment générer une clé SSH, consultez [Créer des clés SSH sur Linux et Mac pour les machines virtuelles Linux dans Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-mac-create-ssh-keys).
+        > Vous pouvez choisir d’utiliser une clé publique SSH ou un mot de passe pour l’authentification. L’utilisation d’une clé SSH est plus sécurisée. Pour savoir comment générer une clé SSH, consultez [Créer des clés SSH sur Linux et Mac pour les machines virtuelles Linux dans Azure](../virtual-machines/linux/mac-create-ssh-keys.md).
 
     * **Nom d’utilisateur** : indiquez le nom d’administrateur pour la machine virtuelle.
 
@@ -127,8 +127,7 @@ ssh azureadmin@40.55.55.555
 
 Vous trouverez l’adresse IP publique de votre machine virtuelle dans le portail Azure, sous la section Vue d’ensemble de votre machine virtuelle.
 
-[!div class="mx-imgBorder"]
-![Adresse IP dans le portail Azure](media/quick-create-portal/public-ip-virtual-machine.png)
+:::image type="content" source="media/quick-create-portal/public-ip-virtual-machine.png" alt-text="Adresse IP dans le portail Azure":::
 
 Si vous êtes sous Windows et que vous n’avez pas d’interpréteur de commandes BASH, installez un client SSH, tel que PuTTY.
 
@@ -169,7 +168,7 @@ wget -qO - https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add 
 ```bash
 sudo apt update
 sudo apt -y install dkms
-wget https://download.01.org/intel-sgx/sgx-dcap/1.4/linux/distro/ubuntuServer18.04/sgx_linux_x64_driver_1.21.bin -O sgx_linux_x64_driver.bin
+wget https://download.01.org/intel-sgx/sgx-dcap/1.9/linux/distro/ubuntu18.04-server/sgx_linux_x64_driver_1.36.2.bin -O sgx_linux_x64_driver.bin
 chmod +x sgx_linux_x64_driver.bin
 sudo ./sgx_linux_x64_driver.bin
 ```
@@ -200,9 +199,7 @@ Sélectionnez le groupe de ressources de la machine virtuelle, puis sélectionne
 
 Dans ce guide de démarrage rapide, vous avez déployé une machine virtuelle d’informatique confidentielle et installé le SDK Open Enclave. Pour plus d’informations sur les machines virtuelles d’informatique confidentielle sur Azure, consultez [Solutions sur les machines virtuelles](virtual-machine-solutions.md). 
 
-Si vous avez déployé une machine virtuelle Windows, découvrez comment créer des applications avec les [exemples du SDK OE pour Windows](https://github.com/openenclave/openenclave/blob/master/samples/README_Windows.md) sur GitHub. 
-
-Découvrez comment créer des applications d’informatique confidentielle sur Linux en accédant aux exemples du SDK Open Enclave sur GitHub. 
+Découvrez comment créer des applications d’informatique confidentielle en accédant aux exemples du SDK Open Enclave sur GitHub. 
 
 > [!div class="nextstepaction"]
-> [Génération des exemples du SDK Open Enclave sur Linux](https://github.com/openenclave/openenclave/blob/master/samples/README_Linux.md)
+> [Création d’exemples de SDK Open Enclave](https://github.com/openenclave/openenclave/blob/master/samples/README.md)

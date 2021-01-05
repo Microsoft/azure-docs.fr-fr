@@ -9,26 +9,27 @@ ms.subservice: immersive-reader
 ms.topic: tutorial
 ms.date: 01/14/2020
 ms.author: skamal
-ms.openlocfilehash: f68112095bc8a8fd9bcc1bd67ff77827d6d00fd7
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.custom: devx-track-js
+ms.openlocfilehash: eba2b53c20f3b0edb79cc32f3c8fb3d82d5433b8
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82195619"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91309283"
 ---
 # <a name="tutorial-integrate-multiple-immersive-reader-resources"></a>Tutoriel : Intégrer plusieurs ressources Lecteur immersif
 
-Dans la [présentation](./overview.md), vous avez appris ce qu’est le Lecteur immersif et comment il implémente des techniques éprouvées pour améliorer la compréhension de la lecture pour les apprenants en langue, les lecteurs émergents et les étudiants présentant des difficultés d’apprentissage. Dans le [guide de démarrage rapide Node.js](./quickstart-nodejs.md), vous avez appris à utiliser le Lecteur immersif avec une seule ressource. Ce tutoriel explique comment intégrer plusieurs ressources du Lecteur immersif dans la même application. Dans ce tutoriel, vous allez apprendre à :
+Dans la [présentation](./overview.md), vous avez appris ce qu’est le Lecteur immersif et comment il implémente des techniques éprouvées pour améliorer la compréhension de la lecture pour les apprenants en langue, les lecteurs émergents et les étudiants présentant des difficultés d’apprentissage. Dans le [guide de démarrage rapide Node.js](./quickstarts/client-libraries.md?pivots=programming-language-nodejs), vous avez appris à utiliser le Lecteur immersif avec une seule ressource. Ce tutoriel explique comment intégrer plusieurs ressources du Lecteur immersif dans la même application. Dans ce tutoriel, vous allez apprendre à :
 
 > [!div class="checklist"]
 > * Créer plusieurs ressources Lecteur immersif dans un groupe de ressources existant
 > * Lancer le Lecteur immersif avec plusieurs ressources
 
-Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
+Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/cognitive-services/) avant de commencer.
 
 ## <a name="prerequisites"></a>Prérequis
 
-* Suivez les étapes du [guide de démarrage rapide](./quickstart-nodejs.md) pour créer une application web qui lance le Lecteur immersif avec Node.js. Dans ce guide de démarrage rapide, vous configurez une seule ressource Lecteur immersif. Nous partirons de là pour effectuer le présent tutoriel.
+* Suivez les étapes du [guide de démarrage rapide](./quickstarts/client-libraries.md?pivots=programming-language-nodejs) pour créer une application web qui lance le Lecteur immersif avec Node.js. Dans ce guide de démarrage rapide, vous configurez une seule ressource Lecteur immersif. Nous partirons de là pour effectuer le présent tutoriel.
 
 ## <a name="create-the-immersive-reader-resources"></a>Créer des ressources Lecteur immersif
 

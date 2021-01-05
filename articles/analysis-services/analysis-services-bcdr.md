@@ -7,12 +7,13 @@ ms.topic: conceptual
 ms.date: 03/30/2020
 ms.author: owend
 ms.reviewer: minewiskan
-ms.openlocfilehash: 78a6d41b638d79111a58830f0cb0d5190ea0796c
-ms.sourcegitcommit: 27bbda320225c2c2a43ac370b604432679a6a7c0
+ms.custom: references_regions
+ms.openlocfilehash: abfcc38601887cd14509ac436e0344b681e3577e
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/31/2020
-ms.locfileid: "80408683"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86506750"
 ---
 # <a name="analysis-services-high-availability"></a>Haute disponibilité Analysis Services
 

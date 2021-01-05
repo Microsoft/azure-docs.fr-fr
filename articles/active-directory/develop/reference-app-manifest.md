@@ -1,29 +1,30 @@
 ---
 title: Comprendre le manifeste d’application Azure Active Directory
+titleSuffix: Microsoft identity platform
 description: Présentation détaillée de l’utilisation du manifeste d’application Azure Active Directory, qui représente la configuration d’identité d’une application dans un locataire Azure AD et permet de faciliter l’autorisation OAuth, le consentement et bien plus encore.
 services: active-directory
 author: rwike77
 manager: CelesteDG
 ms.service: active-directory
 ms.subservice: develop
-ms.topic: conceptual
+ms.topic: reference
 ms.workload: identity
 ms.date: 04/15/2020
 ms.author: ryanwi
 ms.custom: aaddev
 ms.reviewer: sureshja
-ms.openlocfilehash: 9f2ed6ea8cc75e2ee72f15c14f3de7bb8bf8cef6
-ms.sourcegitcommit: b55d7c87dc645d8e5eb1e8f05f5afa38d7574846
+ms.openlocfilehash: 1f4e1def81fc79ec159ce6be825793a9bd8d0ce7
+ms.sourcegitcommit: 7863fcea618b0342b7c91ae345aa099114205b03
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81450877"
+ms.lasthandoff: 11/03/2020
+ms.locfileid: "93286960"
 ---
 # <a name="azure-active-directory-app-manifest"></a>Manifeste d’application Azure Active Directory
 
-Le manifeste d’application contient une définition de tous les attributs d’un objet d’application dans la plateforme d’identité Microsoft. Il sert également de mécanisme de mise à jour de l’objet d’application. Pour plus d’informations sur l’entité Application et son schéma, consultez la [documentation relative à l’entité Application de l’API Graph](https://docs.microsoft.com/previous-versions/azure/ad/graph/api/entity-and-complex-type-reference#application-entity).
+Le manifeste d’application contient une définition de tous les attributs d’un objet d’application dans la plateforme d’identité Microsoft. Il sert également de mécanisme de mise à jour de l’objet d’application. Pour plus d’informations sur l’entité Application et son schéma, consultez la [documentation relative à l’entité Application de l’API Graph](/graph/api/resources/application).
 
-Vous pouvez configurer les attributs d’une application via le portail Azure ou par programmation à l’aide de [l’API REST](https://docs.microsoft.com/previous-versions/azure/ad/graph/api/entity-and-complex-type-reference#application-entity) ou de [PowerShell](https://docs.microsoft.com/powershell/module/azuread/?view=azureadps-2.0#applications). Toutefois, il existe des scénarios dans lesquels vous devez modifier le manifeste de l’application pour configurer un attribut de l’application. Ces scénarios sont les suivants :
+Vous pouvez configurer les attributs d’une application via le portail Azure ou par programmation à l’aide de [l’API REST](/graph/api/resources/application) ou de [PowerShell](/powershell/module/azuread#applications). Toutefois, il existe des scénarios dans lesquels vous devez modifier le manifeste de l’application pour configurer un attribut de l’application. Ces scénarios sont les suivants :
 
 * Si vous avez inscrit l’application en tant que comptes Microsoft personnels et Azure AD multi-locataires, vous ne pouvez pas modifier les comptes Microsoft pris en charge dans l’interface utilisateur. À la place, vous devez utiliser l’éditeur de manifeste d’application pour changer le type de compte pris en charge.
 * Si vous avez besoin de définir les autorisations et les rôles que votre application prend en charge, vous devez modifier le manifeste de l’application.
@@ -81,7 +82,7 @@ Exemple :
 | :--- | :--- |
 | addIns | Collection |
 
-Définit un comportement personnalisé qu’un service consommateur peut utiliser pour appeler une application dans des contextes spécifiques. Par exemple, les applications pouvant restituer des flux de fichiers peuvent définir la propriété `addIns` pour sa fonctionnalité « FileHandler ». Ce paramètre permet aux services tels qu’Office 365 d’appeler l’application dans le contexte d’un document sur lequel l’utilisateur travaille.
+Définit un comportement personnalisé qu’un service consommateur peut utiliser pour appeler une application dans des contextes spécifiques. Par exemple, les applications pouvant restituer des flux de fichiers peuvent définir la propriété `addIns` pour sa fonctionnalité « FileHandler ». Ce paramètre permet à des services tels que Microsoft 365 d’appeler l’application dans le contexte d’un document sur lequel l’utilisateur travaille.
 
 Exemple :
 
@@ -153,7 +154,7 @@ Exemple :
     "appRoles": [
         {
            "allowedMemberTypes": [
-               "User"
+               "User"
            ],
            "description": "Read-only access to device information",
            "displayName": "Read Only",
@@ -193,6 +194,7 @@ Configure la revendication `groups` émise dans un utilisateur ou un jeton d’a
 
 - `"None"`
 - `"SecurityGroup"` (pour les groupes de sécurité et les rôles Azure AD)
+- `"ApplicationGroup"` (cette option comprend uniquement les groupes attribués à l'application)
 - `"All"` (ceci permet d’obtenir tous les groupes de sécurité, groupes de distribution et rôles d’annuaire Azure AD dont l’utilisateur connecté est membre)
 
 Exemple :
@@ -432,8 +434,8 @@ Exemple :
 | :--- | :--- |
 | parentalControlSettings | String |
 
-- `countriesBlockedForMinors` spécifie les pays dans lesquels l’application est bloquée pour les utilisateurs mineurs.
-- `legalAgeGroupRule` spécifie la règle de groupe de tranche d’âge légal qui s’applique aux utilisateurs de l’application. Peut être défini sur `Allow`, `RequireConsentForPrivacyServices`, `RequireConsentForMinors`, `RequireConsentForKids` ou `BlockMinors`.  
+- `countriesBlockedForMinors` spécifie les pays ou régions dans lesquels l’application est bloquée pour les utilisateurs mineurs.
+- `legalAgeGroupRule` spécifie la règle de groupe de tranche d’âge légal qui s’applique aux utilisateurs de l’application. Peut être défini sur `Allow`, `RequireConsentForPrivacyServices`, `RequireConsentForMinors`, `RequireConsentForKids` ou `BlockMinors`.
 
 Exemple :
 
@@ -493,7 +495,7 @@ Exemple :
 | :--- | :--- |
 | publicClient | Boolean|
 
-Spécifie si cette application est un client public (comme une application installée s’exécutant sur un appareil mobile). 
+Spécifie si cette application est un client public (comme une application installée s’exécutant sur un appareil mobile).
 
 Cette propriété est disponible uniquement dans l’expérience **Inscriptions d’applications (hérité)** . Remplacé par `allowPublicClient` dans l’expérience [Inscriptions d’applications](https://go.microsoft.com/fwlink/?linkid=2083908).
 
@@ -531,8 +533,9 @@ Cette propriété à valeurs multiples contient la liste des valeurs de redirect
 
 - `Web`
 - `InstalledClient`
+- `Spa`
 
-Pour plus d’informations, consultez les [restrictions et limitations de replyUrl](https://docs.microsoft.com/azure/active-directory/develop/reply-url).
+Pour plus d’informations, consultez les [restrictions et limitations de replyUrl](./reply-url.md).
 
 Exemple :
 
@@ -661,15 +664,15 @@ Pour obtenir une description de ces attributs, consultez la section [Référence
 
 Lorsque vous essayez de charger un manifeste téléchargé précédemment, vous pouvez voir les erreurs suivantes. Cette erreur est probablement due au fait que l’éditeur de manifeste prend désormais en charge une version plus récente du schéma, qui ne correspond pas à celle que vous tentez de charger.
 
-* « Échec de mise à jour de l’application xxxxxx. Détail de l’erreur : Identificateur d’objet non valide 'undefined'. []. »
-* « Échec de mise à jour de l’application xxxxxx. Détail de l’erreur : Une ou plusieurs valeurs de propriété spécifiées ne sont pas valides. []. »
-* « Échec de mise à jour de l’application xxxxxx. Détail de l’erreur : Impossible de paramétrer availableToOtherTenants dans cette version d’api pour une mise à jour. []. »
-* « Échec de mise à jour de l’application xxxxxx. Détail de l’erreur : Les mises à jour de la propriété « replyUrls » ne sont pas autorisées pour cette application. Utilisez plutôt la propriété 'replyUrlsWithType'. []. »
-* « Échec de mise à jour de l’application xxxxxx. Détail de l’erreur : Une valeur sans nom de type a été trouvée et aucun type attendu n’est disponible. Lorsque le modèle est spécifié, chaque valeur dans la charge utile doit avoir un type qui peut être spécifié dans la charge utile, explicitement par l’appelant ou implicitement par déduction à partir de la valeur parente. [] »
+* « Échec de mise à jour de l’application xxxxxx. Détail de l’erreur : Identificateur d’objet non valide 'undefined'. []."
+* « Échec de mise à jour de l’application xxxxxx. Détail de l’erreur : Une ou plusieurs valeurs de propriété spécifiées ne sont pas valides. []."
+* « Échec de mise à jour de l’application xxxxxx. Détail de l’erreur : Impossible de paramétrer availableToOtherTenants dans cette version d’api pour une mise à jour. []."
+* « Échec de mise à jour de l’application xxxxxx. Détail de l’erreur : Les mises à jour de la propriété « replyUrls » ne sont pas autorisées pour cette application. Utilisez plutôt la propriété 'replyUrlsWithType'. []."
+* « Échec de mise à jour de l’application xxxxxx. Détail de l’erreur : Une valeur sans nom de type a été trouvée et aucun type attendu n’est disponible. Lorsque le modèle est spécifié, chaque valeur dans la charge utile doit avoir un type qui peut être spécifié dans la charge utile, explicitement par l’appelant ou implicitement par déduction à partir de la valeur parente. []"
 
 Lorsque vous voyez l’une de ces erreurs, nous recommandons l’une des actions suivantes :
 
-1. Modifiez les attributs individuellement dans l’éditeur de manifeste au lieu de charger un manifeste téléchargé précédemment. Utilisez la table [référence du manifeste](#manifest-reference) pour comprendre la syntaxe et la sémantique des anciens et des nouveaux attributs afin que vous puissiez modifier correctement les attributs qui vous intéresse. 
+1. Modifiez les attributs individuellement dans l’éditeur de manifeste au lieu de charger un manifeste téléchargé précédemment. Utilisez la table [référence du manifeste](#manifest-reference) pour comprendre la syntaxe et la sémantique des anciens et des nouveaux attributs afin que vous puissiez modifier correctement les attributs qui vous intéresse.
 1. Si votre flux de travail vous oblige à enregistrer les manifestes dans votre référentiel de code source pour une utilisation ultérieure, nous vous suggérons de relocaliser les manifestes enregistrés dans votre référentiel avec celui que vous voyez dans l’expérience **inscriptions d’applications**.
 
 ## <a name="next-steps"></a>Étapes suivantes
@@ -684,14 +687,10 @@ Utilisez la section Commentaires suivante pour donner votre avis et nous aider �
 [AAD-DEVELOPER-GLOSSARY]:developer-glossary.md
 [AAD-GROUPS-FOR-AUTHORIZATION]: http://www.dushyantgill.com/blog/2014/12/10/authorization-cloud-applications-using-ad-groups/
 [ADD-UPD-RMV-APP]:quickstart-v1-integrate-apps-with-azure-ad.md
-[APPLICATION-ENTITY]: https://msdn.microsoft.com/Library/Azure/Ad/Graph/api/entity-and-complex-type-reference#application-entity
-[APPLICATION-ENTITY-APP-ROLE]: https://msdn.microsoft.com/Library/Azure/Ad/Graph/api/entity-and-complex-type-reference#approle-type
-[APPLICATION-ENTITY-OAUTH2-PERMISSION]: https://msdn.microsoft.com/Library/Azure/Ad/Graph/api/entity-and-complex-type-reference#oauth2permission-type
 [AZURE-PORTAL]: https://portal.azure.com
 [DEV-GUIDE-TO-AUTH-WITH-ARM]: http://www.dushyantgill.com/blog/2015/05/23/developers-guide-to-auth-with-azure-resource-manager-api/
 [GRAPH-API]: active-directory-graph-api.md
 [IMPLICIT-GRANT]:v1-oauth2-implicit-grant-flow.md
-[INTEGRATING-APPLICATIONS-AAD]: https://azure.microsoft.com/documentation/articles/active-directory-integrating-applications/
-[O365-PERM-DETAILS]: https://msdn.microsoft.com/office/office365/HowTo/application-manifest
-[O365-SERVICE-DAEMON-APPS]: https://msdn.microsoft.com/office/office365/howto/building-service-apps-in-office-365
+[INTEGRATING-APPLICATIONS-AAD]: ./quickstart-register-app.md
+[O365-PERM-DETAILS]: /graph/permissions-reference
 [RBAC-CLOUD-APPS-AZUREAD]: http://www.dushyantgill.com/blog/2014/12/10/roles-based-access-control-in-cloud-applications-using-azure-ad/

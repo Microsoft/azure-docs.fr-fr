@@ -1,41 +1,44 @@
 ---
 title: 'Démarrage rapide : Créer un pare-feu d’application web (WAF) v2 sur Application Gateway - Modèle Azure Resource Manager'
 titleSuffix: Azure Application Gateway
-description: Découvrez comment utiliser un modèle Resource Manager pour créer un pare-feu d’applications web v2 sur Azure Application Gateway.
+description: Découvrez comment utiliser un modèle de démarrage rapide Azure Resource Manager (modèle ARM) pour créer un pare-feu d’applications web v2 sur Azure Application Gateway.
 services: web-application-firewall
 author: vhorne
 ms.service: web-application-firewall
 ms.topic: quickstart
-ms.date: 04/02/2020
+ms.date: 09/16/2020
 ms.author: victorh
-ms.openlocfilehash: 6759071e73adfd3af4ac780da6db3a0e6e967ea1
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.custom: subject-armqs
+ms.openlocfilehash: 4c5d5c4cafee9402e2afd7ddc047fd3b68e84540
+ms.sourcegitcommit: 30505c01d43ef71dac08138a960903c2b53f2499
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "81617978"
+ms.lasthandoff: 10/15/2020
+ms.locfileid: "92091319"
 ---
-# <a name="quickstart-create-an-azure-waf-v2-on-application-gateway---resource-manager-template"></a>Démarrage rapide : Créer un pare-feu d’application web (WAF) v2 sur Application Gateway - Modèle Azure Resource Manager
+# <a name="quickstart-create-an-azure-waf-v2-on-application-gateway-using-an-arm-template"></a>Démarrage rapide : Créer un pare-feu d’application web (WAF) v2 sur Application Gateway à l’aide d’un modèle Resource Manager
 
-Dans ce guide de démarrage rapide, vous utilisez un modèle Resource Manager pour créer un pare-feu d’applications web Azure v2 sur Application Gateway.
+Dans ce guide de démarrage rapide, vous utilisez un modèle Azure Resource Manager (modèle ARM) pour créer un pare-feu d’applications web Azure v2 sur Application Gateway.
 
 [!INCLUDE [About Azure Resource Manager](../../../includes/resource-manager-quickstart-introduction.md)]
 
 [!INCLUDE [updated-for-az](../../../includes/updated-for-az.md)]
 
+Si votre environnement remplit les prérequis et que vous êtes déjà familiarisé avec l’utilisation des modèles ARM, sélectionnez le bouton **Déployer sur Azure**. Le modèle s’ouvre dans le portail Azure.
+
+[![Déployer sur Azure](../../media/template-deployments/deploy-to-azure.svg)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2Fag-docs-wafv2%2Fazuredeploy.json)
+
 ## <a name="prerequisites"></a>Prérequis
 
 - Compte Azure avec un abonnement actif. [Créez un compte gratuitement](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
 
-## <a name="create-a-web-application-firewall"></a>Créer un pare-feu d’applications web
+## <a name="review-the-template"></a>Vérifier le modèle
 
 Ce modèle crée un pare-feu d’applications web v2 simple sur Azure Application Gateway. Cela comprend l’adresse IP d’un front-end d’adresses IP publiques, des paramètres HTTP, une règle avec un écouteur de base sur le port 80 et un pool back-end. Une stratégie WAF avec une règle personnalisée est créée pour bloquer le trafic vers le pool back-end en fonction d’un type de correspondance d’adresse IP.
 
-### <a name="review-the-template"></a>Vérifier le modèle
+Le modèle utilisé dans ce démarrage rapide est tiré des [modèles de démarrage rapide Azure](https://azure.microsoft.com/resources/templates/ag-docs-wafv2/).
 
-Le modèle utilisé dans ce guide de démarrage rapide est tiré des [modèles de démarrage rapide Azure](https://github.com/Azure/azure-quickstart-templates/blob/master/ag-docs-wafv2/azuredeploy.json).
-
-:::code language="json" source="~/quickstart-templates/ag-docs-wafv2/azuredeploy.json" range="001-404" highlight="314-358":::
+:::code language="json" source="~/quickstart-templates/ag-docs-wafv2/azuredeploy.json":::
 
 Plusieurs ressources Azure sont définies dans le modèle :
 
@@ -48,9 +51,9 @@ Plusieurs ressources Azure sont définies dans le modèle :
 - [**Microsoft.Network/networkInterfaces**](/azure/templates/microsoft.network/networkinterfaces) : deux pour les machines virtuelles
 - [**Microsoft.Compute/virtualMachine/extensions**](/azure/templates/microsoft.compute/virtualmachines/extensions) : pour configurer IIS et les pages web
 
-### <a name="deploy-the-template"></a>Déployer le modèle
+## <a name="deploy-the-template"></a>Déployer le modèle
 
-Déployez le modèle Resource Manager sur Azure :
+Déployez le modèle ARM sur Azure :
 
 1. Sélectionnez **Déployer sur Azure** pour vous connecter à Azure et ouvrir le modèle. Le modèle crée une passerelle d’application, l’infrastructure réseau et deux machines virtuelles dans le pool de back-ends exécutant IIS.
 
@@ -61,7 +64,7 @@ Déployez le modèle Resource Manager sur Azure :
 
 ## <a name="validate-the-deployment"></a>Valider le déploiement
 
-Même si IIS n’est pas obligatoire pour créer la passerelle d’application, il est installé sur les serveurs back-end pour vérifier si Azure a bien créé un pare-feu d’applications web (WAF) v2 sur la passerelle d’application. 
+Même si IIS n’est pas obligatoire pour créer la passerelle d’application, il est installé sur les serveurs back-end pour vérifier si Azure a bien créé un pare-feu d’applications web (WAF) v2 sur la passerelle d’application.
 
 Utilisez IIS pour tester la passerelle d’application :
 

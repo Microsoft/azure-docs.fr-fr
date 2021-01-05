@@ -8,13 +8,14 @@ ms.author: heidist
 ms.devlang: rest-api
 ms.service: cognitive-search
 ms.topic: conceptual
-ms.date: 11/04/2019
-ms.openlocfilehash: 699b5a4e5a7f10c883667ca5030dd971855467f5
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 07/12/2020
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 0107dfb24ddad2a5b0f9f0ab12d2fe701466e385
+ms.sourcegitcommit: 65d518d1ccdbb7b7e1b1de1c387c382edf037850
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74112980"
+ms.lasthandoff: 11/09/2020
+ms.locfileid: "94372827"
 ---
 # <a name="how-to-monitor-azure-cognitive-search-indexer-status-and-results"></a>Comment surveiller l’état et les résultats d’un indexeur Recherche cognitive Azure
 
@@ -80,38 +81,42 @@ Pour plus d’informations sur l’analyse des erreurs et des avertissements de 
 
 ## <a name="monitor-using-rest-apis"></a>Surveiller à l’aide d’API REST
 
-Vous pouvez récupérer l’état et l’historique d’exécution d’un indexeur à l’aide de la [commande Get Indexer Status](https://docs.microsoft.com/rest/api/searchservice/get-indexer-status) :
+Vous pouvez récupérer l’état et l’historique d’exécution d’un indexeur à l’aide de la [commande Get Indexer Status](/rest/api/searchservice/get-indexer-status) :
 
-    GET https://[service name].search.windows.net/indexers/[indexer name]/status?api-version=2019-05-06
-    api-key: [Search service admin key]
+```http
+GET https://[service name].search.windows.net/indexers/[indexer name]/status?api-version=2020-06-30
+api-key: [Search service admin key]
+```
 
 La réponse contient l'état d'intégrité global de l'indexeur, le dernier appel de l'indexeur (ou celui en cours), ainsi que l'historique des appels récents de l'indexeur.
 
-    {
-        "status":"running",
-        "lastResult": {
-            "status":"success",
-            "errorMessage":null,
-            "startTime":"2018-11-26T03:37:18.853Z",
-            "endTime":"2018-11-26T03:37:19.012Z",
-            "errors":[],
-            "itemsProcessed":11,
-            "itemsFailed":0,
-            "initialTrackingState":null,
-            "finalTrackingState":null
-         },
-        "executionHistory":[ {
-            "status":"success",
-             "errorMessage":null,
-            "startTime":"2018-11-26T03:37:18.853Z",
-            "endTime":"2018-11-26T03:37:19.012Z",
-            "errors":[],
-            "itemsProcessed":11,
-            "itemsFailed":0,
-            "initialTrackingState":null,
-            "finalTrackingState":null
-        }]
-    }
+```output
+{
+    "status":"running",
+    "lastResult": {
+        "status":"success",
+        "errorMessage":null,
+        "startTime":"2018-11-26T03:37:18.853Z",
+        "endTime":"2018-11-26T03:37:19.012Z",
+        "errors":[],
+        "itemsProcessed":11,
+        "itemsFailed":0,
+        "initialTrackingState":null,
+        "finalTrackingState":null
+     },
+    "executionHistory":[ {
+        "status":"success",
+         "errorMessage":null,
+        "startTime":"2018-11-26T03:37:18.853Z",
+        "endTime":"2018-11-26T03:37:19.012Z",
+        "errors":[],
+        "itemsProcessed":11,
+        "itemsFailed":0,
+        "initialTrackingState":null,
+        "finalTrackingState":null
+    }]
+}
+```
 
 L’historique d’exécution contient les 50 exécutions les plus récentes, classées par ordre chronologique inverse (la plus récente en premier).
 
@@ -121,22 +126,21 @@ Chaque exécution de l’indexeur possède également un état qui indique si ce
 
 Lorsque l’on réinitialise un indexeur pour actualiser son état de suivi des modifications, une entrée distincte indiquant l’état **Réinitialiser** est ajoutée à l’historique des exécutions.
 
-Pour plus d’informations sur les codes d’état et les données de surveillance de l’indexeur, consultez [GetIndexerStatus](https://docs.microsoft.com/rest/api/searchservice/get-indexer-status).
+Pour plus d’informations sur les codes d’état et les données de surveillance de l’indexeur, consultez [GetIndexerStatus](/rest/api/searchservice/get-indexer-status).
 
 <a name="dotnetsdk"></a>
 
 ## <a name="monitor-using-the-net-sdk"></a>Surveiller à l’aide du Kit de développement logiciel (SDK) .NET
 
-Vous pouvez configurer la planification d’un indexeur à l’aide du Kit de développement logiciel (SDK) .NET Recherche cognitive Azure. Pour ce faire, ajoutez la propriété **schedule** lors de la création ou de la mise à jour d’un indexeur.
-
-L’exemple C# suivant écrit des informations sur l’état d’un indexeur et les résultats de son exécution la plus récente (ou en cours) à la console.
+En utilisant le Kit de développement logiciel (SDK) .NET Recherche cognitive Azure, l’exemple C# suivant écrit des informations sur l’état d’un indexeur et les résultats de son exécution la plus récente (ou en cours) sur la console.
 
 ```csharp
-static void CheckIndexerStatus(Indexer indexer, SearchServiceClient searchService)
+static void CheckIndexerStatus(SearchIndexerClient indexerClient, SearchIndexer indexer)
 {
     try
     {
-        IndexerExecutionInfo execInfo = searchService.Indexers.GetStatus(indexer.Name);
+        string indexerName = "hotels-sql-idxr";
+        SearchIndexerStatus execInfo = indexerClient.GetIndexerStatus(indexerName);
 
         Console.WriteLine("Indexer has run {0} times.", execInfo.ExecutionHistory.Count);
         Console.WriteLine("Indexer Status: " + execInfo.Status.ToString());
@@ -144,15 +148,15 @@ static void CheckIndexerStatus(Indexer indexer, SearchServiceClient searchServic
         IndexerExecutionResult result = execInfo.LastResult;
 
         Console.WriteLine("Latest run");
-        Console.WriteLine("  Run Status: {0}", result.Status.ToString());
-        Console.WriteLine("  Total Documents: {0}, Failed: {1}", result.ItemCount, result.FailedItemCount);
+        Console.WriteLine("Run Status: {0}", result.Status.ToString());
+        Console.WriteLine("Total Documents: {0}, Failed: {1}", result.ItemCount, result.FailedItemCount);
 
         TimeSpan elapsed = result.EndTime.Value - result.StartTime.Value;
-        Console.WriteLine("  StartTime: {0:T}, EndTime: {1:T}, Elapsed: {2:t}", result.StartTime.Value, result.EndTime.Value, elapsed);
+        Console.WriteLine("StartTime: {0:T}, EndTime: {1:T}, Elapsed: {2:t}", result.StartTime.Value, result.EndTime.Value, elapsed);
 
         string errorMsg = (result.ErrorMessage == null) ? "none" : result.ErrorMessage;
-        Console.WriteLine("  ErrorMessage: {0}", errorMsg);
-        Console.WriteLine("  Document Errors: {0}, Warnings: {1}\n", result.Errors.Count, result.Warnings.Count);
+        Console.WriteLine("ErrorMessage: {0}", errorMsg);
+        Console.WriteLine(" Document Errors: {0}, Warnings: {1}\n", result.Errors.Count, result.Warnings.Count);
     }
     catch (Exception e)
     {
@@ -163,14 +167,16 @@ static void CheckIndexerStatus(Indexer indexer, SearchServiceClient searchServic
 
 Sur la console, vous obtenez un résultat semblable à ceci :
 
-    Indexer has run 18 times.
-    Indexer Status: Running
-    Latest run
-      Run Status: Success
-      Total Documents: 7, Failed: 0
-      StartTime: 10:02:46 PM, EndTime: 10:02:47 PM, Elapsed: 00:00:01.0990000
-      ErrorMessage: none
-      Document Errors: 0, Warnings: 0
+```output
+Indexer has run 18 times.
+Indexer Status: Running
+Latest run
+  Run Status: Success
+  Total Documents: 7, Failed: 0
+  StartTime: 11:29:31 PM, EndTime: 11:29:31 PM, Elapsed: 00:00:00.2560000
+  ErrorMessage: none
+  Document Errors: 0, Warnings: 0
+```
 
 Notez qu’il existe deux valeurs d’état différentes. L’état de niveau supérieur est l’état de l’indexeur lui-même. Un état d’indexeur **En cours** signifie que l’indexeur est correctement configuré et disponible pour être exécuté mais qu’il n’est pas actuellement en cours d’exécution.
 
@@ -178,8 +184,11 @@ Chaque exécution de l’indexeur possède également un état qui indique si ce
 
 Lorsque l’on réinitialise un indexeur pour actualiser son état de suivi des modifications, une entrée distincte indiquant l’état **Réinitialiser** est ajoutée à l’historique.
 
-Pour plus d’informations sur les codes d’état et les données de surveillance de l’indexeur, consultez [GetIndexerStatus](https://docs.microsoft.com/rest/api/searchservice/get-indexer-status) dans l’API REST.
+## <a name="next-steps"></a>Étapes suivantes
 
-Il est possible de récupérer les détails sur les erreurs ou les avertissements spécifiques aux documents en énumérant les listes `IndexerExecutionResult.Errors` et `IndexerExecutionResult.Warnings`.
+Pour plus d’informations sur les codes d’état et les données de surveillance de l’indexeur, consultez la référence API suivante :
 
-Pour plus d’informations sur les classes du SDK .NET permettant de surveiller les indexeurs, consultez [IndexerExecutionInfo](https://docs.microsoft.com/dotnet/api/microsoft.azure.search.models.indexerexecutioninfo?view=azure-dotnet) et [IndexerExecutionResult](https://docs.microsoft.com/dotnet/api/microsoft.azure.search.models.indexerexecutionresult?view=azure-dotnet).
+* [GetIndexerStatus (API REST)](/rest/api/searchservice/get-indexer-status)
+* [IndexerStatus](/dotnet/api/azure.search.documents.indexes.models.indexerstatus)
+* [IndexerExecutionStatus](/dotnet/api/azure.search.documents.indexes.models.indexerexecutionstatus)
+* [IndexerExecutionResult](/dotnet/api/azure.search.documents.indexes.models.indexerexecutionresult)

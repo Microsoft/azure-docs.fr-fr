@@ -1,6 +1,6 @@
 ---
-title: Fichier Include
-description: Fichier Include
+title: Fichier include
+description: Fichier include
 ms.topic: include
 ms.custom: include file
 services: time-series-insights
@@ -8,13 +8,13 @@ ms.service: time-series-insights
 author: deepakpalled
 ms.author: dpalled
 manager: cshankar
-ms.date: 02/03/2020
-ms.openlocfilehash: 5be6e7937a6e1f710b8e2576a9058963413fb6c2
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 10/02/2020
+ms.openlocfilehash: 50f203357d29d450f5b34593952f611f025b14ff
+ms.sourcegitcommit: c95e2d89a5a3cf5e2983ffcc206f056a7992df7d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76984549"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95559890"
 ---
 1. Dans le [portail Azure](https://ms.portal.azure.com/), sélectionnez **Azure Active Directory** > **Inscriptions des applications** > **Nouvelle inscription**.
 
@@ -22,7 +22,7 @@ ms.locfileid: "76984549"
 
     Votre application est répertoriée ici une fois que vous l’enregistrez.
 
-1. Donnez à l’application un nom et sélectionnez **Comptes dans cet annuaire organisationnel uniquement** pour spécifier les **Types de comptes pris en charge** qui peuvent accéder à l’API. Choisissez une URI valide pour rediriger les utilisateurs après l’authentification, puis **Inscrire**.
+1. Donnez à l’application un nom et sélectionnez **Comptes dans cet annuaire organisationnel uniquement** pour spécifier les **Types de comptes pris en charge** qui peuvent accéder à l’API. Si vous créez une [application cliente publique](../articles/active-directory/develop/msal-client-application-configuration.md#redirect-uri), ajoutez un URI de redirection valide, puis sélectionnez **Inscrire**.
 
    [![Créer l’application dans Azure Active Directory](media/time-series-insights-aad-registration/active-directory-registration.png)](media/time-series-insights-aad-registration/active-directory-registration.png#lightbox)
 
@@ -32,7 +32,7 @@ ms.locfileid: "76984549"
 
    Copie votre **ID d’application (client)** à utiliser dans votre application cliente.
 
-1. Le panneau **Authentification** spécifie les paramètres importants de configuration d’authentification. 
+1. Le panneau **Authentification** spécifie les paramètres importants de configuration d’authentification.
 
     1. Ajoutez des **URI de redirection** et configurez des **Jetons d’accès** en sélectionnant **+ Ajouter une plateforme**.
 
@@ -66,7 +66,7 @@ ms.locfileid: "76984549"
    > [!NOTE]
    > Vous avez la possibilité d’importer un certificat à la place. Pour une sécurité renforcée, un certificat est recommandé. Pour utiliser un certificat, sélectionnez **Charger un certificat**.
 
-1. Associez votre application Azure Active Directory à Azure Time Series Insights. Sélectionnez **Autorisations de l’API** > **Ajouter une autorisation** > **API que mon organisation utilise**. 
+1. Associez votre application Azure Active Directory à Azure Time Series Insights. Sélectionnez **Autorisations de l’API** > **Ajouter une autorisation** > **API que mon organisation utilise**.
 
     [![Associer une API à votre application Azure Active Directory](media/time-series-insights-aad-registration/active-directory-app-api-permission.png)](media/time-series-insights-aad-registration/active-directory-app-api-permission.png#lightbox)
 

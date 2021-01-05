@@ -3,23 +3,25 @@ title: Encoder une transformation personnalisée avec Media Services v3 Azure C
 description: Cette rubrique explique comment utiliser Azure Media Services v3 pour encoder une transformation personnalisée à l’aide d’Azure CLI.
 services: media-services
 documentationcenter: ''
-author: Juliako
+author: IngridAtMicrosoft
 manager: femila
 editor: ''
 ms.service: media-services
 ms.workload: ''
-ms.topic: article
-ms.custom: ''
-ms.date: 05/14/2019
-ms.author: juliako
-ms.openlocfilehash: 7c1b446ccf04199449f012e738f6a03660735f50
-ms.sourcegitcommit: e040ab443f10e975954d41def759b1e9d96cdade
+ms.topic: how-to
+ms.custom: devx-track-azurecli
+ms.date: 08/31/2020
+ms.author: inhenkel
+ms.openlocfilehash: c61ac8c7cf85b1fae4c9b531f16b951dd2b80876
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/29/2020
-ms.locfileid: "80382951"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89295783"
 ---
 # <a name="how-to-encode-with-a-custom-transform---azure-cli"></a>Comment encoder une transformation personnalisée avec Azure CLI
+
+[!INCLUDE [media services api v3 logo](./includes/v3-hr.md)]
 
 Lors de l’encodage avec Azure Media Services, vous pouvez commencer rapidement avec l’un des préréglages intégrés recommandés et basés sur les bonnes pratiques, comme illustré dans le démarrage rapide [Streaming de fichiers](stream-files-cli-quickstart.md#create-a-transform-for-adaptive-bitrate-encoding). Vous pouvez également créer un préréglage personnalisé pour les besoins de votre scénario ou votre appareil.
 
@@ -32,7 +34,7 @@ Lorsque vous créez des préréglages personnalisés, les considérations suivan
 
 ## <a name="prerequisites"></a>Prérequis
 
-[Créer un compte Media Services](create-account-cli-how-to.md).
+[Créer un compte Media Services](./create-account-howto.md).
 
 Veillez à mémoriser le nom du groupe de ressources et le nom du compte Media Services.
 

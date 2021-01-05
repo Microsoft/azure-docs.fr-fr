@@ -3,23 +3,23 @@ title: Tâches de sauvegarde du Gestionnaire d’instantanés StorSimple | Micr
 description: Explique comment utiliser le composant logiciel enfichable MMC Gestionnaire d’instantanés StorSimple pour afficher et gérer les tâches de sauvegarde planifiées, en cours d’exécution et terminées.
 services: storsimple
 documentationcenter: NA
-author: twooley
+author: alkohli
 manager: timlt
 editor: ''
 ms.assetid: bf4dcff6-c819-4766-b9d9-9922831cb200
 ms.service: storsimple
 ms.devlang: NA
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: NA
 ms.workload: TBD
 ms.date: 06/05/2017
-ms.author: twooley
-ms.openlocfilehash: 094b996cd3227903995c7a74ef14ed8c0561f59d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: alkohli
+ms.openlocfilehash: 3c26a84e32a17cba83b5ca895f146e561072fa62
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75933351"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95998190"
 ---
 # <a name="use-storsimple-snapshot-manager-to-view-and-manage-backup-jobs"></a>Utiliser le Gestionnaire d’instantanés StorSimple pour afficher et gérer les tâches de sauvegarde
 

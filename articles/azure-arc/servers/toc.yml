@@ -1,0 +1,100 @@
+- name: Documentation des serveurs avec Azure Arc
+  href: index.yml
+- name: Vue d’ensemble
+  items:
+    - name: À propos des serveurs avec Azure Arc
+      href: overview.md
+    - name: Nouveautés de l’agent Connected Machine
+      href: agent-release-notes.md
+- name: Démarrages rapides
+  items:
+    - name: Activer l’agent des serveurs compatibles avec Arc
+      href: ./learn/quick-enable-hybrid-vm.md
+- name: Tutoriels
+  items:
+    - name: Attribuer une stratégie pour évaluer la conformité
+      href: ./learn/tutorial-assign-policy-portal.md
+    - name: Superviser l’ordinateur
+      href: ./learn/tutorial-enable-vm-insights.md
+- name: Concepts
+  items:
+    - name: Sécurité
+      items:
+        - name: Contrôles de sécurité par Azure Policy
+          displayName: 'regulatory, compliance, standards, domains'
+          href: security-controls-policy.md
+        - name: Présentation de la sécurité
+          href: security-overview.md
+- name: Guides pratiques
+  items:
+    - name: "Se connecter à Azure\_Arc"
+      items:
+        - name: Vue d’ensemble de l’agent Machine connectée
+          href: agent-overview.md
+        - name: Connecter des ordinateurs à Azure Arc depuis le portail Azure
+          href: onboard-portal.md
+        - name: Connecter des ordinateurs à grande échelle avec un principal de service
+          href: onboard-service-principal.md
+        - name: Connecter des ordinateurs à Azure Arc avec PowerShell DSC
+          href: onboard-dsc.md
+        - name: Connecter des ordinateurs depuis Windows Admin Center
+          href: onboard-windows-admin-center.md
+        - name: Connecter des ordinateurs à Azure Arc avec PowerShell
+          href: onboard-powershell.md
+    - name: Gérer
+      items:
+        - name: Extensions de machine virtuelle
+          items:
+            - name: Vue d’ensemble
+              href: manage-vm-extensions.md
+            - name: Gérer les extensions à partir du portail
+              href: manage-vm-extensions-portal.md
+            - name: Gérer les extensions avec CLI
+              href: manage-vm-extensions-cli.md
+            - name: Gérer les extensions avec PowerShell
+              href: manage-vm-extensions-powershell.md
+            - name: Déployer des extensions avec un modèle ARM
+              href: manage-vm-extensions-template.md
+        - name: Identités managées utilisées sur le serveur
+          href: managed-identity-authentication.md
+        - name: Gérer les agents
+          href: manage-agent.md
+    - name: Scénarios
+      items:
+        - name: Intégrer à Azure Sentinel
+          href: scenario-onboard-azure-sentinel.md
+        - name: Intégrer à Azure Security Center
+          href: ../../security-center/quickstart-onboard-machines.md
+    - name: Dépannage
+      items:
+        - name: Problèmes de connexion de l’agent
+          href: troubleshoot-agent-onboard.md
+        - name: Problèmes des extensions de machine virtuelle
+          href: troubleshoot-vm-extensions.md
+- name: Informations de référence
+  items:
+    - name: Résidence des données
+      href: data-residency.md
+    - name: Azure CLI
+      href: /cli/azure/ext/connectedmachine/connectedmachine
+    - name: Azure PowerShell
+      href: /powershell/module/az.connectedmachine
+    - name: .NET
+      href: /dotnet/api/overview/azure/hybridcompute/management
+    - name: REST
+      href: /rest/api/hybridcompute
+    - name: Go
+      href: 'https://godoc.org/github.com/Azure/azure-sdk-for-go/services/hybridcompute/mgmt/2020-08-02/hybridcompute'
+    - name: Java
+      href: /java/api/overview/azure/compute/resourcemanagement
+    - name: JavaScript
+      href: /javascript/api/%40azure/arm-hybridcompute
+    - name: Python
+      href: 'https://azuresdkdocs.blob.core.windows.net/$web/python/azure-mgmt-hybridcompute/2.0.0/index.html'
+    - name: Éléments intégrés Azure Policy
+      displayName: 'samples, policies, definitions'
+      href: policy-reference.md
+- name: Ressources
+  items:
+    - name: Démarrage rapide avec Azure Arc
+      href: 'https://github.com/microsoft/azure_arc'

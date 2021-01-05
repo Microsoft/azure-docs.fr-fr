@@ -10,12 +10,12 @@ ms.subservice: speech-service
 ms.topic: conceptual
 ms.date: 03/23/2020
 ms.author: trbye
-ms.openlocfilehash: 77bba9433052c00df671caf73198ff75356b1c9a
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 77a8321ba8bac0ecaf577bce6c3c05d10508128e
+ms.sourcegitcommit: 10d00006fec1f4b69289ce18fdd0452c3458eca5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "81400173"
+ms.lasthandoff: 11/21/2020
+ms.locfileid: "96020158"
 ---
 # <a name="text-to-speech-rest-api"></a>API REST de synthèse vocale
 
@@ -32,6 +32,9 @@ L’API REST de synthèse vocale prend en charge les voix de synthèse vocale ne
 Avant d’utiliser cette API, tenez compte du point suivant :
 
 * L’API REST de synthèse vocale nécessite un en-tête d’autorisation. Cela signifie que vous devez échanger un jeton pour accéder au service. Pour en savoir plus, consultez [Authentification](#authentication).
+
+> [!TIP]
+> Consultez la [documentation](../../azure-government/compare-azure-government-global-azure.md) Azure Government pour les points de terminaison Government Cloud (FairFax).
 
 [!INCLUDE [](../../../includes/cognitive-services-speech-service-rest-auth.md)]
 
@@ -178,18 +181,18 @@ Ce tableau liste les en-têtes obligatoires et facultatifs pour les demandes de 
 
 Liste de formats audio pris en charge envoyés dans chaque demande en tant qu’en-tête `X-Microsoft-OutputFormat`. Chaque format indique la vitesse de transmission et le type d’encodage. Les services Speech prennent en charge les sorties audio de 24 kHz, 16 kHz et 8 kHz.
 
-|||
-|-|-|
-| `raw-16khz-16bit-mono-pcm` | `raw-8khz-8bit-mono-mulaw` |
-| `riff-8khz-8bit-mono-alaw` | `riff-8khz-8bit-mono-mulaw` |
-| `riff-16khz-16bit-mono-pcm` | `audio-16khz-128kbitrate-mono-mp3` |
-| `audio-16khz-64kbitrate-mono-mp3` | `audio-16khz-32kbitrate-mono-mp3` |
-| `raw-24khz-16bit-mono-pcm` | `riff-24khz-16bit-mono-pcm` |
-| `audio-24khz-160kbitrate-mono-mp3` | `audio-24khz-96kbitrate-mono-mp3` |
-| `audio-24khz-48kbitrate-mono-mp3` | |
+```output
+raw-16khz-16bit-mono-pcm            raw-8khz-8bit-mono-mulaw
+riff-8khz-8bit-mono-alaw            riff-8khz-8bit-mono-mulaw
+riff-16khz-16bit-mono-pcm           audio-16khz-128kbitrate-mono-mp3
+audio-16khz-64kbitrate-mono-mp3     audio-16khz-32kbitrate-mono-mp3
+raw-24khz-16bit-mono-pcm            riff-24khz-16bit-mono-pcm
+audio-24khz-160kbitrate-mono-mp3    audio-24khz-96kbitrate-mono-mp3
+audio-24khz-48kbitrate-mono-mp3     ogg-24khz-16bit-mono-opus
+```
 
 > [!NOTE]
-> Si la voix que vous avez sélectionnée ne présente pas la même vitesse de transmission que le format de sortie spécifié, les données audio sont rééchantillonnées si nécessaire. Cependant, les voix de 24 kHz ne prennent pas en charge les formats de sortie `audio-16khz-16kbps-mono-siren` et `riff-16khz-16kbps-mono-siren`.
+> Si la voix que vous avez sélectionnée ne présente pas la même vitesse de transmission que le format de sortie spécifié, les données audio sont rééchantillonnées si nécessaire. ogg-24khz-16bit-mono-opus peut être décodé avec le [codec opus](https://opus-codec.org/downloads/)
 
 ### <a name="request-body"></a>Corps de la demande
 
@@ -219,9 +222,9 @@ Authorization: Bearer [Base64 access_token]
 
 Consultez nos guides de démarrage rapide pour obtenir des exemples propres aux langages :
 
-* [.NET Core, C#](~/articles/cognitive-services/Speech-Service/quickstarts/text-to-speech.md?pivots=programming-language-csharp&tabs=dotnetcore)
-* [Python](~/articles/cognitive-services/Speech-Service/quickstarts/text-to-speech.md?pivots=programming-language-python)
-* [Node.JS](quickstart-nodejs-text-to-speech.md)
+* [.NET Core, C#](./get-started-text-to-speech.md?pivots=programming-language-csharp&tabs=dotnetcore)
+* [Python](./get-started-text-to-speech.md?pivots=programming-language-python)
+* [Node.JS](./get-started-text-to-speech.md)
 
 ### <a name="http-status-codes"></a>Codes d’état HTTP
 
@@ -241,6 +244,6 @@ Si l’état HTTP est `200 OK`, le corps de la réponse contient un fichier audi
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- [Obtenir votre abonnement d’essai gratuit au service Speech](https://azure.microsoft.com/try/cognitive-services)
-- [Synthèse asynchrone pour un contenu audio long](quickstarts/text-to-speech/async-synthesis-long-form-audio.md)
+- [Créez un compte Azure gratuit](https://azure.microsoft.com/free/cognitive-services/)
+- [Synthèse asynchrone pour un contenu audio long](./long-audio-api.md)
 - [Bien démarrer avec Custom Voice](how-to-custom-voice.md)

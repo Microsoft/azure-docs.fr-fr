@@ -4,18 +4,18 @@ ms.service: sql-database
 ms.topic: include
 ms.date: 12/10/2018
 ms.author: genemi
-ms.openlocfilehash: e30651cb0ed7d74082163a92acbc428c21018255
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: bca885f9b19086302fd91d29b8ff6553b7205f28
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "67177141"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86544019"
 ---
 ## <a name="c-program-example"></a>Exemple de programme C#
 
 Les sections suivantes de cet article présentent un programme C# qui utilise ADO.NET pour envoyer des instructions Transact-SQL (T-SQL) à la base de données SQL. Le programme C# fait la démonstration des opérations suivantes :
 
-- [Se connecter à la base de données SQL avec ADO.NET](#cs_1_connect)
+- [Se connecter à SQL Database avec ADO.NET](#cs_1_connect)
 - [Méthodes qui retournent des instructions T-SQL](#cs_2_return)
     - Créer des tables
     - Remplir des tables avec des données
@@ -80,9 +80,9 @@ Logiquement, le programme C# est un fichier .cs qui est physiquement divisé en 
     View the report output here, then press any key to end the program...
     ```
 
-<a name="cs_1_connect"/>
+<a name="cs_1_connect"></a>
 
-### <a name="connect-to-sql-database-using-adonet"></a>Se connecter à la base de données SQL avec ADO.NET
+### <a name="connect-to-sql-database-using-adonet"></a>Se connecter à SQL Database avec ADO.NET
 
 ```csharp
 using System;
@@ -130,7 +130,7 @@ namespace csharp_db_test
         }
 ```
 
-<a name="cs_2_return"/>
+<a name="cs_2_return"></a>
 
 ### <a name="methods-that-return-t-sql-statements"></a>Méthodes qui retournent des instructions T-SQL
 
@@ -238,7 +238,7 @@ static string Build_6_Tsql_SelectEmployees()
 }
 ```
 
-<a name="cs_3_submit"/>
+<a name="cs_3_submit"></a>
 
 ### <a name="submit-t-sql-to-the-database"></a>Envoyer T-SQL à la base de données
 

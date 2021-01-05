@@ -5,18 +5,22 @@ ms.topic: conceptual
 author: lzchen
 ms.author: lechen
 ms.date: 10/15/2019
-ms.openlocfilehash: 0396bd8d150c6145a39f36e7be9e6e2dcacef2c4
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-python
+ms.openlocfilehash: 4b88550ad489607bb66eb737067190d45a466a43
+ms.sourcegitcommit: 4c89d9ea4b834d1963c4818a965eaaaa288194eb
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77669945"
+ms.lasthandoff: 12/04/2020
+ms.locfileid: "96607073"
 ---
 # <a name="track-incoming-requests-with-opencensus-python"></a>Suivre les requêtes entrantes avec OpenCensus Python
 
 Les données de requêtes entrantes sont collectées à l’aide d’OpenCensus Python et de ses diverses intégrations. Suivez les données des requêtes entrantes envoyées à vos applications Web basées sur les infrastructures Web populaires `django`, `flask` et `pyramid`. Ces données sont ensuite envoyées à Application Insights dans Azure Monitor, en tant que télémétrie de `requests`.
 
-Commencez par instrumenter votre application Python avec le dernier [kit SDK OpenCensus Python](../../azure-monitor/app/opencensus-python.md).
+Commencez par instrumenter votre application Python avec le dernier [kit SDK OpenCensus Python](./opencensus-python.md).
+
+> [!NOTE]
+> Cet article contient des références au terme *liste noire*, un terme que Microsoft n’utilise plus. Lorsque le terme sera supprimé du logiciel, nous le supprimerons de cet article.
 
 ## <a name="tracking-django-applications"></a>Suivi des applications Django
 
@@ -32,7 +36,7 @@ Commencez par instrumenter votre application Python avec le dernier [kit SDK Ope
     )
     ```
 
-3. Vérifiez qu’AzureExporter est correctement configuré dans votre fichier `settings.py` sous `OPENCENSUS`.
+3. Vérifiez qu’AzureExporter est correctement configuré dans votre fichier `settings.py` sous `OPENCENSUS`. Pour les requêtes provenant d’URL que vous ne souhaitez pas suivre, ajoutez-les à `BLACKLIST_PATHS`.
 
     ```python
     OPENCENSUS = {
@@ -41,20 +45,7 @@ Commencez par instrumenter votre application Python avec le dernier [kit SDK Ope
             'EXPORTER': '''opencensus.ext.azure.trace_exporter.AzureExporter(
                 connection_string="InstrumentationKey=<your-ikey-here>"
             )''',
-        }
-    }
-    ```
-
-4. Vous pouvez également ajouter des URL à `settings.py` sous `BLACKLIST_PATHS` pour les requêtes dont vous ne souhaitez pas effectuer le suivi.
-
-    ```python
-    OPENCENSUS = {
-        'TRACE': {
-            'SAMPLER': 'opencensus.trace.samplers.ProbabilitySampler(rate=0.5)',
-            'EXPORTER': '''opencensus.ext.azure.trace_exporter.AzureExporter(
-                connection_string="InstrumentationKey=<your-ikey-here>",
-            )''',
-            'BLACKLIST_PATHS': ['https://example.com'],  <--- These sites will not be traced if a request is sent from it.
+            'BLACKLIST_PATHS': ['https://example.com'],  <--- These sites will not be traced if a request is sent to it.
         }
     }
     ```
@@ -86,7 +77,7 @@ Commencez par instrumenter votre application Python avec le dernier [kit SDK Ope
     
     ```
 
-2. Vous pouvez configurer votre intergiciel `flask` directement dans le code. Pour les requêtes provenant d’URL que vous ne souhaitez pas suivre, ajoutez-les à `BLACKLIST_PATHS`.
+2. Vous pouvez aussi configurer votre application `flask` via `app.config`. Pour les requêtes provenant d’URL que vous ne souhaitez pas suivre, ajoutez-les à `BLACKLIST_PATHS`.
 
     ```python
     app.config['OPENCENSUS'] = {
@@ -129,10 +120,66 @@ Commencez par instrumenter votre application Python avec le dernier [kit SDK Ope
     config = Configurator(settings=settings)
     ```
 
+## <a name="tracking-fastapi-applications"></a>Suivi des applications FastAPI
+
+OpenCensus n’a pas d’extension pour FastAPI. Pour écrire votre propre intergiciel FastAPI, procédez comme suit :
+
+1. Les dépendances suivantes sont requises : 
+    - [fastapi](https://pypi.org/project/fastapi/)
+    - [uvicorn](https://pypi.org/project/uvicorn/)
+
+2. Ajoutez l’[intergiciel FastAPI](https://fastapi.tiangolo.com/tutorial/middleware/). Veillez à définir le serveur de type d’étendue : `span.span_kind = SpanKind.SERVER`.
+
+3. Exécutez votre application. Les appels adressés à votre application FastAPI doivent être automatiquement suivis et la télémétrie doit être enregistrée directement dans Azure Monitor.
+
+    ```python 
+    # Opencensus imports
+    from opencensus.ext.azure.trace_exporter import AzureExporter
+    from opencensus.trace.samplers import ProbabilitySampler
+    from opencensus.trace.tracer import Tracer
+    from opencensus.trace.span import SpanKind
+    from opencensus.trace.attributes_helper import COMMON_ATTRIBUTES
+    # FastAPI imports
+    from fastapi import FastAPI, Request
+    # uvicorn
+    import uvicorn
+
+    app = FastAPI()
+
+    HTTP_URL = COMMON_ATTRIBUTES['HTTP_URL']
+    HTTP_STATUS_CODE = COMMON_ATTRIBUTES['HTTP_STATUS_CODE']
+
+    # fastapi middleware for opencensus
+    @app.middleware("http")
+    async def middlewareOpencensus(request: Request, call_next):
+        tracer = Tracer(exporter=AzureExporter(connection_string=f'InstrumentationKey={APPINSIGHTS_INSTRUMENTATIONKEY}'),sampler=ProbabilitySampler(1.0))
+        with tracer.span("main") as span:
+            span.span_kind = SpanKind.SERVER
+
+            response = await call_next(request)
+
+            tracer.add_attribute_to_current_span(
+                attribute_key=HTTP_STATUS_CODE,
+                attribute_value=response.status_code)
+            tracer.add_attribute_to_current_span(
+                attribute_key=HTTP_URL,
+                attribute_value=str(request.url))
+
+        return response
+
+    @app.get("/")
+    async def root():
+        return "Hello World!"
+
+    if __name__ == '__main__':
+        uvicorn.run("example:app", host="127.0.0.1", port=5000, log_level="info")
+    ```
+
 ## <a name="next-steps"></a>Étapes suivantes
 
-* [Plan de l’application](../../azure-monitor/app/app-map.md)
-* [Disponibilité](../../azure-monitor/app/monitor-web-app-availability.md)
-* [action](../../azure-monitor/app/diagnostic-search.md)
-* [Requête de journal (Analytics)](../../azure-monitor/log-query/log-query-overview.md)
-* [Diagnostics de transaction](../../azure-monitor/app/transaction-diagnostics.md)
+* [Plan de l’application](./app-map.md)
+* [Disponibilité](./monitor-web-app-availability.md)
+* [action](./diagnostic-search.md)
+* [Requête de journal (Analytics)](../log-query/log-query-overview.md)
+* [Diagnostics de transaction](./transaction-diagnostics.md)
+

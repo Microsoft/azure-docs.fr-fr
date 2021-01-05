@@ -1,28 +1,29 @@
 ---
 title: Ingestion des données avec Azure Data Factory
 titleSuffix: Azure Machine Learning
-description: Découvrez comment créer un pipeline d’ingestion de données avec Azure Data Factory.
+description: Découvrez les options disponibles pour construire un pipeline d’ingestion des données avec Azure Data Factory et les avantages de chacune.
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: core
-ms.topic: conceptual
 ms.author: iefedore
 author: eedorenko
 manager: davete
 ms.reviewer: larryfr
 ms.date: 03/01/2020
-ms.openlocfilehash: 5b4ed40048aab815397c9726098880b2125b732c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.topic: conceptual
+ms.custom: how-to, devx-track-python, data4ml
+ms.openlocfilehash: 73850d8022618dd6544d19564e425288aff09771
+ms.sourcegitcommit: 6a902230296a78da21fbc68c365698709c579093
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78274569"
+ms.lasthandoff: 11/05/2020
+ms.locfileid: "93360630"
 ---
 # <a name="data-ingestion-with-azure-data-factory"></a>Ingestion des données avec Azure Data Factory
 
-Dans cet article, vous apprenez à créer un pipeline d’ingestion de données avec Azure Data Factory (ADF). Ce pipeline est utilisé pour ingérer des données à utiliser avec Azure Machine Learning. Azure Data Factory vous permet d’extraire, de transformer et de charger (ETL) facilement des données. Une fois les données transformées et chargées dans le stockage, elles peuvent être utilisées pour effectuer l’apprentissage de vos modèles Machine Learning.
+Dans cet article, vous allez découvrir les options disponibles pour la création d’un pipeline d’ingestion de données avec Azure Data Factory (ADF). Ce pipeline est utilisé pour ingérer des données à utiliser avec Azure Machine Learning. Azure Data Factory vous permet d’extraire, de transformer et de charger (ETL) facilement des données. Une fois les données transformées et chargées dans le stockage, elles peuvent être utilisées pour effectuer l’apprentissage de vos modèles Machine Learning.
 
-Une transformation simple des données peut être effectuée avec les activités et les instruments ADF natifs, tels que le [flux de données](https://docs.microsoft.com/azure/data-factory/control-flow-execute-data-flow-activity). Lorsqu’il s’agit de scénarios plus compliqués, les données peuvent être traitées avec du code personnalisé. Par exemple, le code Python ou R.
+Une transformation simple des données peut être effectuée avec les activités et les instruments ADF natifs, tels que le [flux de données](../data-factory/control-flow-execute-data-flow-activity.md). Lorsqu’il s’agit de scénarios plus compliqués, les données peuvent être traitées avec du code personnalisé. Par exemple, le code Python ou R.
 
 Il existe plusieurs techniques courantes d’utilisation d’Azure Data Factory pour transformer des données lors de l’ingestion. Chaque technique a ses avantages et ses inconvénients qui déterminent s’ils sont adaptés à un cas d’usage spécifique :
 
@@ -34,15 +35,15 @@ Il existe plusieurs techniques courantes d’utilisation d’Azure Data Factory 
 
 ## <a name="adf-with-azure-functions"></a>ADF avec Azure Functions
 
-![adf-function](media/how-to-data-ingest-adf/adf-function.png)
+![Le diagramme illustre un pipeline Azure Data Factory, avec une fonction Azure et l’exécution du pipeline de ML, ainsi qu’un pipeline Azure Machine Learning, avec un modèle d’apprentissage et la façon dont ils interagissent avec les données brutes et les données préparées.](media/how-to-data-ingest-adf/adf-function.png)
 
 Azure Functions vous permet d’exécuter de petits morceaux de code (« fonctions ») sans vous préoccuper de l’infrastructure de l’application. Dans cette option, les données sont traitées avec du code Python personnalisé enveloppé dans une fonction Azure. 
 
-La fonction est appelée à l’aide de l’[activité ADF Azure Functions](https://docs.microsoft.com/azure/data-factory/control-flow-azure-function-activity). Cette approche est une bonne option pour les transformations légères de données. 
+La fonction est appelée à l’aide de l’[activité ADF Azure Functions](../data-factory/control-flow-azure-function-activity.md). Cette approche est une bonne option pour les transformations légères de données. 
 
 * Avantages :
     * Les données sont traitées sur un calcul serverless avec une latence relativement faible
-    * Le pipeline ADF peut appeler une [fonction Azure durable](/azure/azure-functions/durable/durable-functions-overview) qui peut implémenter un workflow sophistiqué de transformation des données 
+    * Le pipeline ADF peut appeler une [fonction Azure durable](../azure-functions/durable/durable-functions-overview.md) qui peut implémenter un workflow sophistiqué de transformation des données 
     * Les détails de la transformation de données sont extraits par la fonction Azure qui peut être réutilisée et appelée à partir d’autres emplacements
 * Inconvénients :
     * Les fonctions Azure Functions doivent être créées avant d’être utilisées avec ADF
@@ -50,12 +51,12 @@ La fonction est appelée à l’aide de l’[activité ADF Azure Functions](http
 
 ## <a name="adf-with-custom-component-activity"></a>ADF avec activité de composant personnalisé
 
-![adf-customcomponent](media/how-to-data-ingest-adf/adf-customcomponent.png)
+![Le diagramme illustre un pipeline Azure Data Factory, avec un composant personnalisé et l’exécution du pipeline de ML, ainsi qu’un pipeline Azure Machine Learning, avec un modèle d’apprentissage et la façon dont ils interagissent avec les données brutes et les données préparées.](media/how-to-data-ingest-adf/adf-customcomponent.png)
 
-Dans cette option, les données sont traitées avec du code Python personnalisé enveloppé dans un fichier exécutable. Il est appelé à l’aide d’une [activité de composant personnalisé ADF](https://docs.microsoft.com/azure/data-factory/transform-data-using-dotnet-custom-activity). Cette approche est plus adaptée aux données volumineuses que la technique précédente.
+Dans cette option, les données sont traitées avec du code Python personnalisé enveloppé dans un fichier exécutable. Il est appelé à l’aide d’une [activité de composant personnalisé ADF](../data-factory/transform-data-using-dotnet-custom-activity.md). Cette approche est plus adaptée aux données volumineuses que la technique précédente.
 
 * Avantages :
-    * Les données sont traitées sur le pool [Azure Batch](https://docs.microsoft.com/azure/batch/batch-technical-overview), qui permet un calcul parallèle à grande échelle et à haute performance
+    * Les données sont traitées sur le pool [Azure Batch](../batch/batch-technical-overview.md), qui permet un calcul parallèle à grande échelle et à haute performance
     * Peut être utilisée pour exécuter des algorithmes lourds et traiter de grandes quantités de données
 * Inconvénients :
     * Le pool Azure Batch doit être créé avant d’être utilisé avec ADF
@@ -63,11 +64,11 @@ Dans cette option, les données sont traitées avec du code Python personnalisé
 
 ## <a name="adf-with-azure-databricks-python-notebook"></a>ADF avec notebook Python Azure Databricks
 
-![adf-databricks](media/how-to-data-ingest-adf/adf-databricks.png)
+![Le diagramme illustre un pipeline Azure Data Factory, avec Azure Databricks Python et l’exécution du pipeline de ML, ainsi qu’un pipeline Azure Machine Learning, avec un modèle d’apprentissage et la façon dont ils interagissent avec les données brutes et les données préparées.](media/how-to-data-ingest-adf/adf-databricks.png)
 
 [Azure Databricks](https://azure.microsoft.com/services/databricks/) est une plateforme d’analytique basée sur Apache Spark dans le cloud Microsoft.
 
-Dans cette technique, la transformation des données est effectuée par un [notebook Python](https://docs.microsoft.com/azure/data-factory/transform-data-using-databricks-notebook) exécuté sur un cluster Azure Databricks. C’est probablement l’approche la plus courante qui tire parti de toute la puissance d’un service Azure Databricks. Elle est conçue pour le traitement des données distribuées à grande échelle.
+Dans cette technique, la transformation des données est effectuée par un [notebook Python](../data-factory/transform-data-using-databricks-notebook.md) exécuté sur un cluster Azure Databricks. C’est probablement l’approche la plus courante qui tire parti de toute la puissance d’un service Azure Databricks. Elle est conçue pour le traitement des données distribuées à grande échelle.
 
 * Avantages :
     * Les données sont transformées sur le service Azure de traitement des données le plus puissant, qui est assisté par l’environnement Apache Spark.
@@ -81,14 +82,14 @@ Dans cette technique, la transformation des données est effectuée par un [note
 
 ## <a name="consuming-data-in-azure-machine-learning-pipelines"></a>Utilisation de données dans des pipelines Azure Machine Learning
 
-![aml-dataset](media/how-to-data-ingest-adf/aml-dataset.png)
+![Le diagramme illustre un pipeline Azure Data Factory et un pipeline Azure Machine Learning, et la façon dont ils interagissent avec les données brutes et les données préparées. Le pipeline Data Factory alimente les données dans la base de données préparée, qui alimente un magasin de données, qui alimente les jeux de données de l’espace de travail Machine Learning.](media/how-to-data-ingest-adf/aml-dataset.png)
 
-Les données transformées du pipeline ADF sont enregistrées dans le stockage de données (comme Azure Blob). Azure Machine Learning peut accéder à ces données à l’aide de [magasins de données](https://docs.microsoft.com/azure/machine-learning/how-to-access-data#create-and-register-datastores) et de [jeux de données](https://docs.microsoft.com/azure/machine-learning/how-to-create-register-datasets).
+Les données transformées du pipeline ADF sont enregistrées dans le stockage de données (comme Azure Blob). Azure Machine Learning peut accéder à ces données à l’aide de [magasins de données](./how-to-access-data.md#create-and-register-datastores) et de [jeux de données](./how-to-create-register-datasets.md).
 
 Chaque fois que le pipeline ADF s’exécute, les données sont enregistrées à un autre emplacement du stockage. Pour transmettre l’emplacement à Azure Machine Learning, le pipeline ADF appelle un pipeline Azure Machine Learning. Lors de l’appel du pipeline ML, l’emplacement des données et l’ID d’exécution sont envoyés en tant que paramètres. Le pipeline ML peut ensuite créer un magasin de données ou un jeu de données à l’aide de l’emplacement des données. 
 
 > [!TIP]
-> Les jeux de données [prennent en charge le contrôle de version](https://docs.microsoft.com/azure/machine-learning/how-to-version-track-datasets), de sorte que le pipeline ML peut inscrire une nouvelle version du jeu de données qui pointe vers les données les plus récentes à partir du pipeline ADF.
+> Les jeux de données [prennent en charge le contrôle de version](./how-to-version-track-datasets.md), de sorte que le pipeline ML peut inscrire une nouvelle version du jeu de données qui pointe vers les données les plus récentes à partir du pipeline ADF.
 
 Une fois que les données sont accessibles par le biais d’un magasin de données ou d’un jeu de données, vous pouvez les utiliser pour effectuer l’apprentissage d’un modèle ML. Le processus d’apprentissage peut faire partie du même pipeline ML appelé à partir d’ADF. Il peut également s’agir d’un processus distinct, tel que l’expérimentation dans un notebook Jupyter.
 
@@ -96,8 +97,7 @@ Une fois que les données sont accessibles par le biais d’un magasin de donné
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* [Exécuter un notebook Databricks dans Azure Data Factory](https://docs.microsoft.com/azure/data-factory/transform-data-using-databricks-notebook)
-* [Accéder aux données dans les services de stockage Azure](https://docs.microsoft.com/azure/machine-learning/how-to-access-data#create-and-register-datastores)
-* [Effectuer l’apprentissage de modèles dans Azure Machine Learning](https://docs.microsoft.com/azure/machine-learning/how-to-train-with-datasets)
-* [DevOps pour un pipeline d’ingestion des données](https://docs.microsoft.com/azure/machine-learning/how-to-cicd-data-ingestion)
-
+* [Exécuter un notebook Databricks dans Azure Data Factory](../data-factory/transform-data-using-databricks-notebook.md)
+* [Accéder aux données dans les services de stockage Azure](./how-to-access-data.md#create-and-register-datastores)
+* [Effectuer l’apprentissage de modèles dans Azure Machine Learning](./how-to-train-with-datasets.md)
+* [DevOps pour un pipeline d’ingestion des données](./how-to-cicd-data-ingestion.md)

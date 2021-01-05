@@ -7,27 +7,27 @@ ms.topic: conceptual
 ms.date: 02/16/2018
 ms.author: dukek
 ms.subservice: alerts
-ms.openlocfilehash: 50ad9d57b24fab9ee57c2f9caae8f4c39d2681f0
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 01fb93a4b74a35501d0684b822ea83fc7b20770a
+ms.sourcegitcommit: 857859267e0820d0c555f5438dc415fc861d9a6b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77669078"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93130576"
 ---
 # <a name="create-an-action-group-with-a-resource-manager-template"></a>Créer un groupe d’actions avec un modèle Resource Manager
-Cet article vous explique comment utiliser un [modèle Azure Resource Manager](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-authoring-templates) pour configurer les groupes d’action. À l’aide de modèles, vous pouvez configurer automatiquement des groupes d’actions qui peuvent être réutilisés dans certains types d’alertes. Ces groupes d’actions vous assurent que toutes les parties concernées sont averties lorsqu’une alerte est déclenchée.
+Cet article vous explique comment utiliser un [modèle Azure Resource Manager](../../azure-resource-manager/templates/template-syntax.md) pour configurer les groupes d’action. À l’aide de modèles, vous pouvez configurer automatiquement des groupes d’actions qui peuvent être réutilisés dans certains types d’alertes. Ces groupes d’actions vous assurent que toutes les parties concernées sont averties lorsqu’une alerte est déclenchée.
 
 Étapes élémentaires :
 
 1. Créez un modèle sous la forme d’un fichier JSON qui décrit comment créer le groupe d’actions.
 
-2. Déployez le modèle à l’aide de [n’importe quelle méthode de déploiement](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-template-deploy).
-
-Nous allons tout d’abord présenter comment créer un modèle Resource Manager pour un groupe d’actions où les définitions d’action sont codées en dur dans le modèle. Nous allons ensuite expliquer comment créer un modèle qui utilise les informations de configuration de webhook comme des paramètres d’entrée lorsque le modèle est déployé.
+2. Déployez le modèle à l’aide de [n’importe quelle méthode de déploiement](../../azure-resource-manager/templates/deploy-powershell.md).
 
 ## <a name="resource-manager-templates-for-an-action-group"></a>Modèles Resource Manager pour un groupe d’actions
 
 Pour créer un groupe d’actions à l’aide d’un modèle Resource Manager, vous créez une ressource de type `Microsoft.Insights/actionGroups`. Puis, renseignez toutes les propriétés associées. Voici deux exemples de modèles qui créent un groupe d’actions.
+
+Le premier modèle explique comment créer un modèle Resource Manager pour un groupe d’actions où les définitions d’action sont codées en dur dans le modèle. Le second modèle décrit comment créer un modèle qui utilise les informations de configuration du webhook comme paramètres d’entrée lorsque le modèle est déployé.
 
 ```json
 {
@@ -163,7 +163,7 @@ Pour créer un groupe d’actions à l’aide d’un modèle Resource Manager, v
 
 
 ## <a name="next-steps"></a>Étapes suivantes
-* En savoir plus sur les [groupes d’actions](../../azure-monitor/platform/action-groups.md).
+* En savoir plus sur les [groupes d’actions](./action-groups.md).
 * En savoir plus sur les [alertes](alerts-overview.md).
-* En savoir pour sur l’ajout d’[alertes à l’aide d’un modèle Resource Manager](../../azure-monitor/platform/alerts-activity-log.md).
+* En savoir pour sur l’ajout d’[alertes à l’aide d’un modèle Resource Manager](./alerts-activity-log.md).
 

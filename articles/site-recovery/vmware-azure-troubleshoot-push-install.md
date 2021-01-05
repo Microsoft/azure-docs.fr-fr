@@ -7,12 +7,12 @@ ms.service: site-recovery
 ms.topic: conceptual
 ms.author: ramamill
 ms.date: 04/03/2020
-ms.openlocfilehash: 1afd931249d4dbeda2b4b25f822837e2a564f959
-ms.sourcegitcommit: 62c5557ff3b2247dafc8bb482256fef58ab41c17
+ms.openlocfilehash: 8ee6449f357a578b30809bb03723ac1556e4f459
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/03/2020
-ms.locfileid: "80656320"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88816166"
 ---
 # <a name="troubleshoot-mobility-service-push-installation"></a>Résoudre les problèmes d’installation Push du service Mobility
 
@@ -130,6 +130,28 @@ Pour résoudre l’erreur :
 
 Cette erreur se produit lorsque le réseau dans lequel réside la machine source est introuvable, peut avoir été supprimé ou n’est plus disponible. La seule façon de résoudre l’erreur est de s’assurer que le réseau existe.
 
+## <a name="check-access-for-network-shared-folders-on-source-machine-errorid-9510595523"></a>Vérifiez l’accès aux dossiers partagés du réseau sur la machine source (ErrorID : 95105,95523)
+
+Vérifiez si les dossiers partagés sur la machine source sont accessibles à partir du serveur de processus à distance en utilisant les informations d’identification spécifiées. Pour confirmez l’accès : 
+
+1. Connectez-vous à votre serveur de processus.
+2. Ouvrez l’Explorateur de fichiers. Dans la barre d’adresses, tapez `\\<SOURCE-MACHINE-IP>\C$`, puis cliquez sur Entrée.
+
+    ![Ouvrir un dossier dans le serveur de processus](./media/vmware-azure-troubleshoot-push-install/open-folder-process-server.PNG)
+
+3. Dans l’Explorateur de fichiers, vous êtes invité à indiquer des informations d’identification. Entrez le nom d’utilisateur et le mot de passe, puis cliquez sur OK. <br><br/>
+
+    ![Fournir des informations d’identification](./media/vmware-azure-troubleshoot-push-install/provide-credentials.PNG)
+
+    >[!NOTE]
+    > Si la machine source est jointe au domaine, indiquez le nom de domaine ainsi que le nom d’utilisateur sous la forme `<domainName>\<username>`. Si la machine source est dans un groupe de travail, fournissez uniquement le nom d’utilisateur.
+
+4. Si la connexion aboutit, les dossiers de machine source sont visibles à distance depuis le serveur de processus.
+
+    ![Dossiers visibles de la machine source](./media/vmware-azure-troubleshoot-push-install/visible-folders-from-source.png)
+
+Si la connexion échoue, vérifiez que tous les prérequis sont bien respectés.
+
 ## <a name="file-and-printer-sharing-services-check-errorid-95105--95106"></a>Vérification des services de partage de fichiers et d’imprimantes (ErrorID : 95105 & 95106)
 
 Après une vérification de la connectivité, vérifiez si le service de partage de fichiers et d’imprimantes est activé sur votre machine virtuelle. Ces paramètres sont requis pour copier l’agent Mobility sur la machine source.
@@ -170,7 +192,7 @@ Vous pouvez également autoriser le trafic WMI à traverser le pare-feu à l’
 
 Vous pouvez trouver d’autres articles concernant la résolution des problèmes WMI dans les articles suivants.
 
-* [Test de base WMI](https://blogs.technet.microsoft.com/askperf/2007/06/22/basic-wmi-testing/)
+* [Test de base WMI](https://techcommunity.microsoft.com/t5/ask-the-performance-team/bg-p/AskPerf)
 * [Résolution des problèmes WMI](/windows/win32/wmisdk/wmi-troubleshooting)
 * [Résolution des problèmes liés aux scripts et aux services WMI](/previous-versions/tn-archive/ff406382(v=msdn.10))
 
@@ -257,6 +279,10 @@ Avant la version 9.20, Logical Volume Manager (LVM) était pris en charge uniqu
 ## <a name="insufficient-space-errorid-95524"></a>Espace insuffisant (ErrorID : 95524)
 
 Lorsque l’agent Mobility est copié sur la machine source, au moins 100 Mo d’espace libre sont nécessaires. Assurez-vous que votre machine source dispose de la quantité d’espace libre requise et recommencez l’opération.
+
+## <a name="low-system-resources"></a>Ressources système faibles
+
+Les ID d’erreur possibles affichés pour ce problème sont 95572 et 95573. Ce problème se produit lorsque la mémoire système est insuffisante et qu’elle n’est pas en mesure d’allouer de la mémoire pour l’installation du service Mobilité. Veillez à libérer suffisamment de mémoire afin que l’installation s’effectue correctement.
 
 ## <a name="vss-installation-failures"></a>Échecs d’installation VSS
 
@@ -362,7 +388,7 @@ Ce problème entraîne l’échec de l’installation de l’agent Mobility d’
 
 ### <a name="to-identify-the-issue"></a>Pour identifier le problème
 
-Dans le journal situé sur le serveur de configuration dans _C:\ProgramData\ASRSetupLogs\UploadedLogs\<date-heure>UA_InstallLogFile.log_, vous trouverez l’exception suivante :
+Dans le journal situé sur le serveur de configuration dans _C:\ProgramData\ASRSetupLogs\UploadedLogs\<date-time>UA_InstallLogFile.log_, vous trouverez l’exception suivante :
 
 ```plaintext
 COM+ was unable to talk to the Microsoft Distributed Transaction Coordinator (Exception from HRESULT: 0x8004E00F)

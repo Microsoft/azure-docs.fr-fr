@@ -18,11 +18,11 @@ ms.author: markvi
 ms.reviewer: dhanyahk
 ms.collection: M365-identity-device-management
 ms.openlocfilehash: 86bc72f69903134afa3750ad6b72486a713b6cc0
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "68989673"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96011912"
 ---
 # <a name="quickstart-download-a-sign-in-report-using-the-azure-portal"></a>Démarrage rapide : Télécharger un rapport de connexion avec le portail Azure
 

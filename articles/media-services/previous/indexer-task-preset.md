@@ -13,14 +13,16 @@ ms.devlang: dotnet
 ms.topic: article
 ms.date: 03/14/2019
 ms.author: juliako
-ms.openlocfilehash: 29753759af341f82429f12b6710ae9c32dcb4103
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f8daa25239b935a9e0092c6bf2e388c7cc3c6789
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74896037"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89264757"
 ---
-# <a name="task-preset-for-azure-media-indexer"></a>Tâches prédéfinies pour Azure Media Indexer 
+# <a name="task-preset-for-azure-media-indexer"></a>Tâches prédéfinies pour Azure Media Indexer
+
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
 
 Azure Media Indexer est un processeur multimédia qui permet d’effectuer les tâches suivantes : rendre possibles les recherches dans les fichiers et le contenu multimédias, générer des pistes de sous-titrage et des mots clés et indexer les fichiers qui font partie d’une ressource.
 

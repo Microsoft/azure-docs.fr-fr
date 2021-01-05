@@ -2,14 +2,13 @@
 title: Collecter et analyser les journaux de ressources
 description: Découvrez comment envoyer des journaux de ressources et des données d’événement à partir de groupes de conteneurs dans Azure Container Instances vers les journaux d'activité Azure Monitor
 ms.topic: article
-ms.date: 04/07/2020
-ms.author: danlep
-ms.openlocfilehash: bd21a511641d5ea027c18bedb4dce47749110bcb
-ms.sourcegitcommit: df8b2c04ae4fc466b9875c7a2520da14beace222
+ms.date: 07/13/2020
+ms.openlocfilehash: b110ba46bdcf2741e5f16845f28fe8305bcee1a1
+ms.sourcegitcommit: dbe434f45f9d0f9d298076bf8c08672ceca416c6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/08/2020
-ms.locfileid: "80892391"
+ms.lasthandoff: 10/17/2020
+ms.locfileid: "92148645"
 ---
 # <a name="container-group-and-instance-logging-with-azure-monitor-logs"></a>Groupe de conteneurs et journalisation des instances de conteneur avec les journaux d’activité Azure Monitor
 
@@ -29,7 +28,7 @@ Les sections suivantes décrivent comment créer un groupe de conteneurs dans le
 Pour activer la journalisation dans vos instances de conteneur, vous avez besoin des éléments suivants :
 
 * [Espace de travail Log Analytics](../azure-monitor/learn/quick-create-workspace.md)
-* [Azure CLI](/cli/azure/install-azure-cli) (ou [Cloud Shell](/azure/cloud-shell/overview))
+* [Azure CLI](/cli/azure/install-azure-cli) (ou [Cloud Shell](../cloud-shell/overview.md))
 
 ## <a name="get-log-analytics-credentials"></a>Obtenir les informations d’identification de Log Analytics
 
@@ -38,11 +37,10 @@ Azure Container Instances doit disposer d’une autorisation pour envoyer des do
 Pour obtenir l’ID et la clé primaire de l’espace de travail Log Analytics :
 
 1. Accédez à votre espace de travail Log Analytics dans le portail Azure
-1. Sous **Paramètres**, sélectionnez **Paramètres avancés**.
-1. Sélectionnez **Sources connectées** > **Serveurs Windows** (ou **Serveurs Linux**, l’ID et les clés sont les mêmes pour les deux)
+1. Sous **Paramètres**, sélectionnez **Gestion des agents**
 1. Notez :
-   * **ID DE L’ESPACE DE TRAVAIL**
-   * **CLÉ PRIMAIRE**
+   * **ID de l’espace de travail**
+   * **Clé primaire**
 
 ## <a name="create-container-group"></a>Créer un groupe de conteneurs
 
@@ -68,7 +66,7 @@ az container create \
 Utilisez cette méthode si vous préférez déployer des groupes de conteneurs avec YAML. Le code YAML suivant définit un groupe de conteneurs à un seul conteneur. Copiez le code YAML dans un nouveau fichier, puis remplacez `LOG_ANALYTICS_WORKSPACE_ID` et `LOG_ANALYTICS_WORKSPACE_KEY` par les valeurs obtenues à l’étape précédente. Enregistrez le fichier sous le nom **deploy-aci.yaml**.
 
 ```yaml
-apiVersion: 2018-10-01
+apiVersion: 2019-12-01
 location: eastus
 name: mycontainergroup001
 properties:
@@ -102,7 +100,9 @@ Vous devriez recevoir une réponse à partir des détails du déploiement de con
 
 ## <a name="view-logs"></a>Afficher les journaux d’activité
 
-Une fois que vous avez déployé le groupe de conteneurs, l’affichage dans le portail Azure des premières entrées de journal peut prendre plusieurs minutes (jusqu’à 10). Pour voir les journaux du groupe de conteneurs dans la table `ContainerInstanceLog_CL` :
+Une fois que vous avez déployé le groupe de conteneurs, l’affichage dans le portail Azure des premières entrées de journal peut prendre plusieurs minutes (jusqu’à 10). 
+
+Pour voir les journaux du groupe de conteneurs dans la table `ContainerInstanceLog_CL` :
 
 1. Accédez à votre espace de travail Log Analytics dans le portail Azure
 1. Sous **Général**, sélectionnez **Journaux**.  
@@ -153,7 +153,7 @@ ContainerInstanceLog_CL
 
 Pour plus d’informations sur l’interrogation des journaux d’activité et la configuration d’alertes dans les journaux d’activité Azure Monitor, consultez :
 
-* [Présentation des recherches dans les journaux d’activité Azure Monitor](../log-analytics/log-analytics-log-search.md)
+* [Présentation des recherches dans les journaux d’activité Azure Monitor](../azure-monitor/log-query/log-query-overview.md)
 * [Alertes unifiées dans Azure Monitor](../azure-monitor/platform/alerts-overview.md)
 
 
@@ -169,7 +169,7 @@ Pour plus d’informations sur la surveillance des ressources processeur et mém
 
 <!-- LINKS - External -->
 [fluentd]: https://hub.docker.com/r/fluent/fluentd/
-[query_lang]: https://aka.ms/LogAnalyticsLanguage
+[query_lang]: /azure/data-explorer/
 
 <!-- LINKS - Internal -->
 [az-container-create]: /cli/azure/container#az-container-create

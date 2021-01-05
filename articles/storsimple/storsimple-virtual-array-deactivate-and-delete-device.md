@@ -9,17 +9,17 @@ editor: ''
 ms.assetid: a929f5bc-03e2-4b01-b925-973db236f19f
 ms.service: storsimple
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 11/21/2016
 ms.author: alkohli
-ms.openlocfilehash: bb1a56d204a46f89213f20e317494120f0ea565e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 84fd1a2d3d0dc4ce6960469ea3212b8ca1d4d07c
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "60580604"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96023021"
 ---
 # <a name="deactivate-and-delete-a-storsimple-virtual-array"></a>Désactiver et supprimer un StorSimple Virtual Array
 
@@ -30,7 +30,7 @@ Quand vous désactivez une instance StorSimple Virtual Array, vous interrompez l
 * Désactiver un appareil 
 * Supprimer un appareil désactivé
 
-Les informations publiées dans cet article s'appliquent uniquement aux instances StorSimple Virtual Array. Pour plus d’informations sur la série 8000, accédez la procédure relative à la [désactivation ou la suppression d’un appareil](storsimple-deactivate-and-delete-device.md).
+Les informations publiées dans cet article s'appliquent uniquement aux instances StorSimple Virtual Array. Pour plus d’informations sur la série 8000, accédez la procédure relative à la [désactivation ou la suppression d’un appareil](./storsimple-8000-deactivate-and-delete-device.md).
 
 ## <a name="when-to-deactivate"></a>Quand désactiver ?
 
@@ -90,5 +90,4 @@ Pour supprimer l’appareil, procédez comme suit.
 
 * Pour plus d’informations sur la procédure de basculement, accédez à la page [Failover and disaster recovery of your StorSimple Virtual Array](storsimple-virtual-array-failover-dr.md) (Basculement et récupération d’urgence de votre instance StorSimple Virtual Array).
 
-* Pour plus d’informations sur l’utilisation du service StorSimple Device Manager, accédez à [Utiliser le service StorSimple Device Manager pour gérer votre StorSimple Virtual Array](storsimple-virtual-array-manager-service-administration.md). 
-
+* Pour plus d’informations sur l’utilisation du service StorSimple Device Manager, accédez à [Utiliser le service StorSimple Device Manager pour gérer votre StorSimple Virtual Array](storsimple-virtual-array-manager-service-administration.md).

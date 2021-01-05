@@ -1,5 +1,5 @@
 ---
-title: Copier des données de Presto avec Azure Data Factory (préversion)
+title: Copier des données de Presto avec Azure Data Factory
 description: Découvrez comment utiliser l’activité de copie pour copier des données de Presto vers des magasins de données récepteurs pris en charge dans le cadre d’un pipeline Azure Data Factory.
 services: data-factory
 documentationcenter: ''
@@ -9,22 +9,19 @@ ms.reviewer: douglasl
 ms.service: data-factory
 ms.workload: data-services
 ms.topic: conceptual
-ms.date: 09/04/2019
+ms.date: 12/18/2020
 ms.author: jingwang
-ms.openlocfilehash: 261bdedee56bb4de2dfbbef27358fae5ae8fdc3e
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: af05983432c0f76a88ff82a3638d86a971ef77f5
+ms.sourcegitcommit: 66b0caafd915544f1c658c131eaf4695daba74c8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81416741"
+ms.lasthandoff: 12/18/2020
+ms.locfileid: "97680709"
 ---
-# <a name="copy-data-from-presto-using-azure-data-factory-preview"></a>Copier des données de Presto avec Azure Data Factory (préversion)
+# <a name="copy-data-from-presto-using-azure-data-factory"></a>Copier des données de Presto avec Azure Data Factory
 [!INCLUDE[appliesto-adf-asa-md](includes/appliesto-adf-asa-md.md)]
 
 Cet article explique comment utiliser l’activité de copie dans Azure Data Factory pour copier des données de Presto. Il s’appuie sur l’article [Vue d’ensemble de l’activité de copie](copy-activity-overview.md).
-
-> [!IMPORTANT]
-> Ce connecteur est actuellement en préversion. Essayez-le et envoyez-nous vos commentaires. Si vous souhaitez établir une dépendance sur les connecteurs en préversion dans votre solution, veuillez contacter le [support Azure](https://azure.microsoft.com/support/).
 
 ## <a name="supported-capabilities"></a>Fonctionnalités prises en charge
 
@@ -50,8 +47,8 @@ Les propriétés suivantes sont prises en charge pour le service lié Presto :
 | Propriété | Description | Obligatoire |
 |:--- |:--- |:--- |
 | type | La propriété type doit être définie sur : **Presto** | Oui |
-| host | Adresse IP ou nom d’hôte du serveur Presto (c’est-à-dire 192.168.222.160).  | Oui |
-| serverVersion | Version du serveur Presto (c’est-à-dire 0.148-t).  | Oui |
+| host | Adresse IP ou nom d’hôte du serveur Presto (par exemple, 192.168.222.160)  | Oui |
+| serverVersion | Version du serveur Presto (par exemple, 0.148-t)  | Oui |
 | catalogue | Contexte du catalogue pour toutes les requêtes effectuées sur le serveur.  | Oui |
 | port | Port TCP utilisé par le serveur Presto pour écouter les connexions clientes. La valeur par défaut est 8080.  | Non |
 | authenticationType | Mécanisme d’authentification utilisé pour se connecter au serveur Presto. <br/>Les valeurs autorisées sont les suivantes : **Anonymous**, **LDAP** | Oui |

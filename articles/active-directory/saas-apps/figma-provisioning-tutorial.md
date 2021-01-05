@@ -2,25 +2,21 @@
 title: 'Tutoriel : Configurer Figma pour l’approvisionnement automatique d’utilisateurs avec Azure Active Directory | Microsoft Docs'
 description: Découvrez comment configurer Azure Active Directory pour approvisionner et retirer automatiquement des comptes utilisateur sur Figma.
 services: active-directory
-documentationcenter: ''
 author: zchia
 writer: zchia
-manager: beatrizd
-ms.assetid: na
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: article
+ms.topic: tutorial
 ms.date: 07/12/2019
 ms.author: zhchia
-ms.openlocfilehash: a50f1c81f5eda78ee6834aba3085f685c197b4dc
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: ec509cc04db87602b3e29230253d9b363a5e30d5
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77057955"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96353916"
 ---
 # <a name="tutorial-configure-figma-for-automatic-user-provisioning"></a>Tutoriel : Configurer Figma pour le provisionnement automatique d’utilisateurs
 
@@ -57,23 +53,23 @@ Avant de configurer Figma pour l’approvisionnement automatique d’utilisateur
 
 1. Connectez-vous à votre [Console d’administration Figma](https://www.Figma.com/). Cliquez sur l’icône d’engrenage à côté de votre locataire.
 
-    ![FigmaFigma-employee-provision](media/Figma-provisioning-tutorial/image0.png)
+    :::image type="content" source="media/Figma-provisioning-tutorial/image0.png" alt-text="Capture d’écran de la console d’administration Figma. Un locataire nommé AAD Scim Test est visible. À côté du locataire, une icône d’engrenage est mise en évidence." border="false":::
 
 2. Accédez à **Général > Mettre à jour les paramètres de connexion**.
 
-    ![FigmaFigma-employee-provision](media/Figma-provisioning-tutorial/figma03.png)
+    :::image type="content" source="media/Figma-provisioning-tutorial/figma03.png" alt-text="Capture d’écran de l’onglet General de la console d’administration Figma. Sous Log in and provisioning, Update log in settings est mis en évidence." border="false":::
 
 3. Copiez **l’ID de locataire**. Cette valeur sera utilisée pour construire l’URL de point de terminaison SCIM à entrer dans le champ **URL de locataire** dans l’onglet Approvisionnement de votre application Figma dans le portail Azure.
 
-    ![Figma - Créer un jeton](media/Figma-provisioning-tutorial/figma-tenantid.png)
+    :::image type="content" source="media/Figma-provisioning-tutorial/figma-tenantid.png" alt-text="Capture d’écran de la section SAMLSSO dans la console d’administration Figma. Une étiquette d’ID de locataire et un lien adjacent indiquant Copy sont mis en évidence." border="false":::
 
 4. Défilez vers le bas, puis cliquez sur **Générer un jeton d’API**.
 
-    ![Figma - Créer un jeton](media/Figma-provisioning-tutorial/token.png)
+    :::image type="content" source="media/Figma-provisioning-tutorial/token.png" alt-text="Capture d’écran de la section de provisionnement SCIM dans la console d’administration Figma. Un lien intitulé Generate API token est mis en évidence." border="false":::
 
 5. Copiez la valeur du **Jeton d’API**. Cette valeur devra être entrée dans le champ **Jeton secret** dans l’onglet Approvisionnement de votre application Figma dans le portail Azure. 
 
-    ![Figma - Créer un jeton](media/Figma-provisioning-tutorial/figma04.png)
+    :::image type="content" source="media/Figma-provisioning-tutorial/figma04.png" alt-text="Capture d’écran d’une page dans la console d’administration Figma. Sous Your provisioning API token, un espace réservé pour le jeton est mis en évidence." border="false":::
 
 ## <a name="add-figma-from-the-gallery"></a>Ajouter Figma depuis la galerie
 
@@ -100,7 +96,7 @@ Avant de configurer Figma pour le provisionnement automatique d’utilisateurs a
 Cette section vous guide tout au long des étapes de configuration du service de provisionnement d’Azure AD pour créer, mettre à jour et désactiver des utilisateurs et/ou des groupes dans Figma en fonction des assignations d’utilisateurs et/ou de groupes dans Azure AD.
 
 > [!TIP]
-> Vous pouvez également choisir d’activer l’authentification unique basée sur SAML pour Figma en suivant les instructions fournies dans le [didacticiel sur l’authentification unique Figma](figma-tutorial.md). L’authentification unique peut être configurée indépendamment de l’attribution automatique d’utilisateurs, bien que ces deux fonctionnalités se complètent.
+> Vous pouvez aussi choisir d’activer l’authentification unique basée sur SAML pour Figma en suivant les instructions fournies dans le [tutoriel sur l’authentification unique pour Figma](figma-tutorial.md). L’authentification unique peut être configurée indépendamment de l’attribution automatique d’utilisateurs, bien que ces deux fonctionnalités se complètent.
 
 ### <a name="to-configure-automatic-user-provisioning-for-figma--in-azure-ad"></a>Pour configurer le provisionnement automatique d’utilisateurs pour Figma dans Azure AD :
 
@@ -114,11 +110,11 @@ Cette section vous guide tout au long des étapes de configuration du service de
 
 3. Sélectionnez l’onglet **Approvisionnement**.
 
-    ![Onglet Approvisionnement](common/provisioning.png)
+    ![Capture d’écran des options Gérer avec l’option Provisionnement en évidence.](common/provisioning.png)
 
 4. Définissez le **Mode d’approvisionnement** sur **Automatique**.
 
-    ![Onglet Approvisionnement](common/provisioning-automatic.png)
+    ![Capture d’écran de la liste déroulante Mode de provisionnement avec l’option Automatique en évidence.](common/provisioning-automatic.png)
 
 5. Sous la section **Informations d’identification administrateur**, entrez `https://www.figma.com/scim/v2/<TenantID>` dans **URL de locataire**, où **TenantID** est la valeur que vous avez récupérée à partir de Figma. Entrez la valeur du **jeton d’API** dans **Jeton secret**. Cliquez sur **Tester la connexion** pour vérifier qu’Azure AD peut se connecter à Figma. Si la connexion échoue, vérifiez que votre compte Figma dispose des autorisations d’administrateur et réessayez.
 
@@ -140,7 +136,7 @@ Cette section vous guide tout au long des étapes de configuration du service de
 
 12. Pour configurer des filtres d’étendue, reportez-vous aux instructions suivantes fournies dans [Approvisionnement d’applications basé sur les attributs avec filtres d’étendue](../app-provisioning/define-conditional-rules-for-provisioning-user-accounts.md).
 
-13. Pour activer le service d’approvisionnement Azure AD pour Figma, définissez le paramètre **État d’approvisionnement** sur **Activé** dans la section **Paramètres**.
+13. Pour activer le service de provisionnement Azure AD pour Figma, définissez le paramètre **État de l’approvisionnement** sur **Activé** dans la section **Paramètres**.
 
     ![État d’approvisionnement activé](common/provisioning-toggle-on.png)
 

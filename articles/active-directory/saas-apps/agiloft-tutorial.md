@@ -2,26 +2,21 @@
 title: 'Didacticiel : Intégration d’Azure Active Directory avec Agiloft | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et Agiloft.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: aca13814-cdbd-46b8-93dc-1578099c5ee4
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 01/17/2019
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: 3283695c42c5bccf00ca43274d120409646c380f
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: cd926875eda5676da6c154a57b0ac18ca12d9b79
+ms.sourcegitcommit: d79513b2589a62c52bddd9c7bd0b4d6498805dbe
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "73153965"
+ms.lasthandoff: 12/18/2020
+ms.locfileid: "97671572"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-agiloft"></a>Didacticiel : Intégration d’Azure Active Directory avec Agiloft
 
@@ -32,7 +27,7 @@ L’intégration d’Agiloft dans Azure AD vous offre les avantages suivants :
 * Vous pouvez permettre aux utilisateurs de se connecter automatiquement à Agiloft (par le biais de l’authentification unique) avec leur compte Azure AD.
 * Vous pouvez gérer vos comptes dans un emplacement central : le portail Azure
 
-Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
 ## <a name="prerequisites"></a>Conditions préalables requises
@@ -69,7 +64,7 @@ Pour configurer l’intégration d’Agiloft à Azure AD, vous devez ajouter Agi
 
 4. Dans la zone de recherche, saisissez **Agiloft**, sélectionnez **Agiloft** à nouveau dans le volet de résultats, puis cliquez sur le bouton **Ajouter** pour ajouter l’application.
 
-     ![Agiloft dans la liste des résultats](common/search-new-app.png)
+    ![Agiloft dans la liste des résultats](common/search-new-app.png)
 
 ## <a name="configure-and-test-azure-ad-single-sign-on"></a>Configurer et tester l’authentification unique Azure AD
 
@@ -105,23 +100,19 @@ Pour configurer l’authentification unique Azure AD avec Agiloft, effectuez les
 
 4. À la section **Configuration SAML de base**, si vous souhaitez configurer l’application en mode initié par **IDP**, suivez les étapes ci-dessous :
 
-    ![Informations d’authentification unique dans les domaines et URL Agiloft](common/idp-intiated.png)
+    ![Capture d’écran mettant en évidence les zones de texte Identifier et Reply URL.](common/idp-intiated.png)
 
     a. Dans la zone de texte **Identificateur**, tapez une URL au format suivant :
 
-    | |
-    |-|-|
-    | `https://<subdomain>.saas.enterprisewizard.com/project/<KB_NAME>` |
-    | `https://<subdomain>.agiloft.com/project/<KB_NAME>` |
-    | |
+    ```http
+    https://<subdomain>.agiloft.com/<KB_NAME>
+    ```
 
     b. Dans la zone de texte **URL de réponse**, tapez une URL au format suivant :
 
-    | |
-    |-|-|
-    | `https://<subdomain>.saas.enterprisewizard.com:443/gui2/spsamlsso?project=<KB_NAME>` |
-    | `https://<subdomain>.agiloft.com:443/gui2/spsamlsso?project=<KB_NAME>` |
-    | |
+    ```http
+    https://<subdomain>.agiloft.com:443/gui2/spsamlsso?project=<KB_NAME>
+    ```
 
 5. Si vous souhaitez configurer l’application en **mode démarré par le fournisseur de services**, cliquez sur **Définir des URL supplémentaires**, puis effectuez les étapes suivantes :
 
@@ -129,11 +120,9 @@ Pour configurer l’authentification unique Azure AD avec Agiloft, effectuez les
 
     Dans la zone de texte **URL d’authentification**, tapez une URL au format suivant :
 
-    | |
-    |-|-|
-    | `https://<subdomain>.saas.enterprisewizard.com/gui2/samlssologin.jsp?project=<KB_NAME>` |
-    | `https://<subdomain>.agiloft.com/gui2/samlssologin.jsp?project=<KB_NAME>` |
-    | |
+    ```http
+    https://<subdomain>.agiloft.com/gui2/samlssologin.jsp?project=<KB_NAME>
+    ```
 
     > [!NOTE]
     > Il ne s’agit pas de valeurs réelles. Mettez à jour ces valeurs avec l’identificateur, l’URL de réponse et l’URL de connexion réels. Pour obtenir ces valeurs, contactez [l’équipe de support technique Agiloft](https://www.agiloft.com/support-login.htm). Vous pouvez également consulter les modèles figurant à la section **Configuration SAML de base** dans le portail Azure.
@@ -158,11 +147,11 @@ Pour configurer l’authentification unique Azure AD avec Agiloft, effectuez les
 
 2. Cliquez sur **Setup** (Configurer) dans le volet gauche, puis sur **Access** (Accès).
 
-    ![Configuration d’Agiloft](./media/agiloft-tutorial/setup1.png)
+    ![Capture d’écran mettant en évidence la section Access.](./media/agiloft-tutorial/setup1.png)
 
 3. Cliquez sur le bouton permettant de **configurer l’authentification unique SAML 2.0**.
 
-    ![Configuration d’Agiloft](./media/agiloft-tutorial/setup2.png)
+    ![Capture d’écran mettant en évidence le bouton Configure SAML 2.0 Single Sign-On.](./media/agiloft-tutorial/setup2.png)
 
 4. Une boîte de dialogue d’assistant s’affiche. Dans la boîte de dialogue, cliquez sur **Identity Provider Details** (Détails du fournisseur d’identité) et renseignez les champs suivants :  
 
@@ -195,7 +184,7 @@ L’objectif de cette section est de créer un utilisateur de test appelé Britt
     ![Boîte de dialogue Utilisateur](common/user-properties.png)
 
     a. Dans le champ **Nom**, entrez **BrittaSimon**.
-  
+
     b. Dans le champ **Nom d’utilisateur**, tapez **brittasimon\@domainedevotreentreprise.extension**.  
     Par exemple : BrittaSimon@contoso.com
 
@@ -237,12 +226,12 @@ Dans cette section, un utilisateur appelé Britta Simon est créé dans Agiloft.
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Quand vous cliquez sur la vignette Agiloft dans le volet d’accès, vous devez être connecté automatiquement à l’application Agiloft pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Quand vous cliquez sur la vignette Agiloft dans le volet d’accès, vous devez être connecté automatiquement à l’application Agiloft pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

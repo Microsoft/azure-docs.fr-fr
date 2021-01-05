@@ -3,31 +3,34 @@ title: Exemple de script Azure CLI - Réinitialiser vos informations d’identif
 description: Utilisez le script Azure CLI pour réinitialiser vos informations d’identification de compte et récupérer les paramètres du fichier app.config.
 services: media-services
 documentationcenter: ''
-author: Juliako
+author: IngridAtMicrosoft
 manager: femila
 editor: ''
 ms.assetid: ''
 ms.service: media-services
 ms.devlang: azurecli
-ms.topic: sample
+ms.topic: troubleshooting
 ms.tgt_pltfrm: multiple
 ms.workload: na
-ms.date: 08/20/2019
-ms.author: juliako
-ms.openlocfilehash: 63f2abe7a3890efbaf4c79186467a3eb20d8afda
-ms.sourcegitcommit: e040ab443f10e975954d41def759b1e9d96cdade
+ms.date: 08/31/2020
+ms.author: inhenkel
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: da997ec71655231876749d9f3aa65ba06fd3a1f8
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/29/2020
-ms.locfileid: "80382985"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89295833"
 ---
 # <a name="azure-cli-example-reset-the-account-credentials"></a>Exemple Azure CLI : Réinitialiser les informations d’identification
+
+[!INCLUDE [media services api v3 logo](./includes/v3-hr.md)]
 
 Le script Azure CLI de cet article vous montre comment réinitialiser vos informations d’identification de compte et récupérer les paramètres du fichier app.config.
 
 ## <a name="prerequisites"></a>Prérequis
 
-[Créer un compte Media Services](create-account-cli-how-to.md).
+[Créer un compte Media Services](./create-account-howto.md).
 
 [!INCLUDE [media-services-cli-instructions.md](../../../includes/media-services-cli-instructions.md)]
 

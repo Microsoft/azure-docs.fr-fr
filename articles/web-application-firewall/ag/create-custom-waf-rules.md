@@ -6,20 +6,22 @@ services: web-application-firewall
 ms.topic: article
 author: vhorne
 ms.service: web-application-firewall
-ms.date: 11/14/2019
+ms.date: 11/20/2020
 ms.author: victorh
-ms.openlocfilehash: bfa6690c636e15fa933f50698cd81359600b5c05
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: b14bd60ab744be5a1735abc073f32f8ebc3e1ab1
+ms.sourcegitcommit: ab94795f9b8443eef47abae5bc6848bb9d8d8d01
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77368307"
+ms.lasthandoff: 11/27/2020
+ms.locfileid: "96301705"
 ---
 # <a name="create-and-use-web-application-firewall-v2-custom-rules-on-application-gateway"></a>Créer et utiliser des règles personnalisées du pare-feu d’applications web v2 sur Application Gateway
 
 Le pare-feu d’applications web (WAF) v2 sur Azure Application Gateway fournit une protection pour les applications web. Cette protection est fournie par le jeu de règles (Core Rule Set, CRS) de l’Open Web Application Security Project (OWASP). Dans certains cas, vous devrez peut-être créer vos propres règles personnalisées pour répondre à vos besoins spécifiques. Pour plus d’informations sur les règles de pare-feu d’applications web personnalisées, consultez [Vue d’ensemble des règles personnalisées pour un pare-feu d’applications web](custom-waf-rules-overview.md).
 
 Cet article montre quelques exemples de règles personnalisées que vous pouvez créer et utiliser avec votre pare-feu d’applications web v2. Pour savoir comment déployer un pare-feu d’applications web avec une règle personnalisée à l’aide d’Azure PowerShell, consultez [Configurer les règles personnalisées du pare-feu d’applications web à l’aide d’Azure PowerShell](configure-waf-custom-rules.md).
+
+Les extraits de code JSON présentés dans cet article sont dérivés d’une ressource [ApplicationGatewayWebApplicationFirewallPolicies](/azure/templates/microsoft.network/applicationgatewaywebapplicationfirewallpolicies).
 
 >[!NOTE]
 > Si votre passerelle Application Gateway n’utilise pas la couche WAF, l’option de mise à niveau de la passerelle Application Gateway vers la couche WAF s’affiche dans le volet de droite.

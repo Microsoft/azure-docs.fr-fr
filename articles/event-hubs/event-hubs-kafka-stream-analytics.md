@@ -1,24 +1,14 @@
 ---
 title: Azure Event Hubs - Traiter les événements Apache Kafka
 description: 'Tutoriel : Cet article décrit comment traiter les événements Kafka ingérés à travers des hubs d’événements à l’aide d’Azure Stream Analytics'
-services: event-hubs
-documentationcenter: ''
-author: spelluru
-manager: ''
-ms.service: event-hubs
-ms.devlang: na
 ms.topic: tutorial
-ms.tgt_pltfrm: na
-ms.workload: na
-ms.custom: seodec18
-ms.date: 04/02/2020
-ms.author: spelluru
-ms.openlocfilehash: 9c678a91b88b87acb438311b4968be4cae46733b
-ms.sourcegitcommit: d597800237783fc384875123ba47aab5671ceb88
+ms.date: 06/23/2020
+ms.openlocfilehash: 328537eebd05391fc4c8138395a9c10f0a5d072f
+ms.sourcegitcommit: ce8eecb3e966c08ae368fafb69eaeb00e76da57e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/03/2020
-ms.locfileid: "80632798"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92319393"
 ---
 # <a name="tutorial-process-apache-kafka-for-event-hubs-events-using-stream-analytics"></a>Tutoriel : Processus Apache Kafka pour les événements Event Hubs à l’aide de Stream Analytics 
 Cet article montre comment diffuser en streaming des données dans Event Hubs et les traiter avec Azure Stream Analytics. Il vous guide dans les étapes suivantes : 
@@ -35,7 +25,7 @@ Vous n’avez pas besoin de changer vos clients de protocole ou d’exécuter vo
 Pour suivre ce démarrage rapide, vérifiez que vous avez :
 
 * Un abonnement Azure. Si vous n’en avez pas, créez un [compte gratuit](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio) avant de commencer.
-* [Java Development Kit (JDK) 1.7+](https://aka.ms/azure-jdks).
+* [Java Development Kit (JDK) 1.7+](/azure/developer/java/fundamentals/java-jdk-long-term-support).
 * [Téléchargez](https://maven.apache.org/download.cgi) et [installez](https://maven.apache.org/install.html) une archive binaire Maven.
 * [Git](https://www.git-scm.com/)
 * Un **compte de stockage Azure**. Si vous n’en avez pas, [créez-en un](../storage/common/storage-account-create.md) avant de continuer. Le travail Stream Analytics dans cette procédure pas à pas stocke les données de sortie dans un stockage blob Azure. 
@@ -139,14 +129,14 @@ La requête dans le travail Stream Analytics parcourt les données sans effectue
  
 
 ### <a name="define-a-query"></a>Définir une requête
-Lorsque vous disposez d’un travail Stream Analytics configuré pour lire un flux de données entrantes, l’étape suivante consiste à créer une transformation qui analyse les données en temps réel. Vous définissez la requête de transformation à l’aide du [Langage de requête Stream Analytics](https://docs.microsoft.com/stream-analytics-query/stream-analytics-query-language-reference). Dans cette procédure pas à pas, vous définissez une requête qui parcourt les données sans aucune transformation.
+Lorsque vous disposez d’un travail Stream Analytics configuré pour lire un flux de données entrantes, l’étape suivante consiste à créer une transformation qui analyse les données en temps réel. Vous définissez la requête de transformation à l’aide du [Langage de requête Stream Analytics](/stream-analytics-query/stream-analytics-query-language-reference). Dans cette procédure pas à pas, vous définissez une requête qui parcourt les données sans aucune transformation.
 
 1. Sélectionnez **Requête**.
 2. Dans la fenêtre de requête, remplacez `[YourOutputAlias]` par l’alias de sortie que vous avez créé précédemment.
 3. Remplacez `[YourInputAlias]` par l’alias d’entrée que vous avez créé précédemment. 
 4. Sélectionnez **Enregistrer** dans la barre d’outils. 
 
-    ![Requête](./media/event-hubs-kafka-stream-analytics/query.png)
+    ![Capture d’écran montrant la fenêtre de requête avec des valeurs pour les variables d’entrée et de sortie.](./media/event-hubs-kafka-stream-analytics/query.png)
 
 
 ### <a name="run-the-stream-analytics-job"></a>Exécuter la tâche Stream Analytics
@@ -181,4 +171,4 @@ Lorsque vous disposez d’un travail Stream Analytics configuré pour lire un fl
 
 
 ## <a name="next-steps"></a>Étapes suivantes
-Dans cet article, vous avez appris à diffuser en streaming dans Event Hubs sans changer vos clients de protocole ni exécuter vos propres clusters. Pour en savoir plus sur Event Hubs pour Apache Kafka, consultez [Guide du développeur Apache Kafka pour Azure Event Hubs](apache-kafka-developer-guide.md). 
+Dans cet article, vous avez appris à diffuser en streaming dans Event Hubs sans changer vos clients de protocole ni exécuter vos propres clusters. Pour en savoir plus sur Event Hubs pour Apache Kafka, consultez [Guide du développeur Apache Kafka pour Azure Event Hubs](apache-kafka-developer-guide.md).

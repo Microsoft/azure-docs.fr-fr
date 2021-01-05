@@ -5,11 +5,11 @@ ms.topic: include
 ms.date: 11/09/2018
 ms.author: vlvinogr
 ms.openlocfilehash: ace11adbaaeebd3101ac621f44408e27ba7d18ab
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "67849581"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96183819"
 ---
 ## <a name="related-topics"></a>Rubriques connexes
 

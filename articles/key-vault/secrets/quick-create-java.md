@@ -2,42 +2,56 @@
 title: Démarrage rapide - Bibliothèque de client Azure Key Vault pour Java
 description: Fournit des critères de format et de contenu pour l’écriture de guides de démarrage rapide liés aux bibliothèques de client du kit Azure SDK.
 author: msmbaldwin
+ms.custom: devx-track-java, devx-track-azurecli
 ms.author: mbaldwin
 ms.date: 10/20/2019
 ms.service: key-vault
 ms.subservice: secrets
 ms.topic: quickstart
-ms.openlocfilehash: 7e0d05ce97def0a255e6ac9909544b04fb13bb37
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: a382f5bc2cb7223ea7c740225a8e39bc63e3e65e
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81421473"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96188596"
 ---
-# <a name="quickstart-azure-key-vault-client-library-for-java"></a>Démarrage rapide : Bibliothèque de client Azure Key Vault pour Java
+# <a name="quickstart-azure-key-vault-secret-client-library-for-java"></a>Démarrage rapide : Bibliothèque de client de secrets Azure Key Vault pour Java
 
-Bien démarrer avec la bibliothèque de client Azure Key Vault pour Java. Suivez les étapes ci-dessous pour installer le package et tester un exemple de code relatif à des tâches de base.
+Bien démarrer avec la bibliothèque de client de secrets Azure Key Vault pour Java. Suivez les étapes ci-dessous pour installer le package et tester un exemple de code relatif à des tâches de base.
 
-Azure Key Vault permet de protéger les clés de chiffrement et les secrets utilisés par les services et les applications cloud. Utilisez la bibliothèque de client Key Vault pour Java pour :
+Ressources supplémentaires :
 
-- Accroître la sécurité et le contrôle des clés et des mots de passe
-- Créer et importer des clés de chiffrement en quelques minutes
-- Réduire la latence avec la mise à l’échelle du cloud et la redondance globale
-- Simplifier et automatiser les tâches associées aux certificats TLS/SSL
-- Utiliser des HSM (modules de sécurité matériels) validés conformes à la norme FIPS 140-2 de niveau 2
-
-[Code source](https://github.com/Azure/azure-sdk-for-java/tree/master/sdk/keyvault) | [Documentation de référence de l’API](https://azure.github.io/azure-sdk-for-java) | [Documentation du produit](index.yml) | [Exemples](https://github.com/Azure/azure-sdk-for-java/tree/master/sdk/keyvault/azure-security-keyvault-secrets/src/samples/java/com/azure/security/keyvault/secrets)
+* [Code source](https://github.com/Azure/azure-sdk-for-java/tree/master/sdk/keyvault)
+* [Documentation de référence de l’API](https://azure.github.io/azure-sdk-for-java)
+* [Documentation du produit](index.yml)
+* [Exemples](https://github.com/Azure/azure-sdk-for-java/tree/master/sdk/keyvault/azure-security-keyvault-secrets/src/samples/java/com/azure/security/keyvault/secrets)
 
 ## <a name="prerequisites"></a>Prérequis
 
 - Un abonnement Azure - [En créer un gratuitement](https://azure.microsoft.com/free/?WT.mc_id=A261C142F)
-- [Kit de développement Java (JDK)](/java/azure/jdk/?view=azure-java-stable), version 8 ou ultérieure
+- [Kit de développement Java (JDK)](/java/azure/jdk/), version 8 ou ultérieure
 - [Apache Maven](https://maven.apache.org)
-- [Azure CLI](/cli/azure/install-azure-cli?view=azure-cli-latest) ou [Azure PowerShell](/powershell/azure/overview)
+- [Azure CLI](/cli/azure/install-azure-cli)
 
-Ce guide de démarrage rapide suppose que vous exécutez [Azure CLI](/cli/azure/install-azure-cli?view=azure-cli-latest) et [Apache Maven](https://maven.apache.org) dans une fenêtre de terminal Linux.
+Ce guide de démarrage rapide suppose que vous exécutez [Azure CLI](/cli/azure/install-azure-cli) et [Apache Maven](https://maven.apache.org) dans une fenêtre de terminal Linux.
 
 ## <a name="setting-up"></a>Configuration
+
+Ce guide de démarrage rapide utilise la bibliothèque Azure Identity avec Azure CLI pour authentifier l’utilisateur auprès des services Azure. Les développeurs peuvent également utiliser Visual Studio ou Visual Studio Code pour authentifier leurs appels. Pour plus d’informations, consultez [Authentifier le client avec la bibliothèque de client Azure Identity](/java/api/overview/azure/identity-readme)
+
+### <a name="sign-in-to-azure"></a>Connexion à Azure
+
+1. Exécutez la commande `login`.
+
+    ```azurecli-interactive
+    az login
+    ```
+
+    Si l’interface CLI peut ouvrir votre navigateur par défaut, elle le fait et charge une page de connexion Azure par la même occasion.
+
+    Sinon, ouvrez une page de navigateur à l’adresse [https://aka.ms/devicelogin](https://aka.ms/devicelogin) et entrez le code d’autorisation affiché dans votre terminal.
+
+2. Dans le navigateur, connectez-vous avec les informations d’identification de votre compte.
 
 ### <a name="create-new-java-console-app"></a>Créer une application console Java
 
@@ -101,72 +115,37 @@ Ouvrez le fichier *pom.xml* dans votre éditeur de texte. Ajoutez les éléments
 
 ### <a name="create-a-resource-group-and-key-vault"></a>Créer un groupe de ressources et un coffre de clés
 
-Ce guide de démarrage rapide utilise un coffre de clés Azure créé au préalable. Vous pouvez créer un coffre de clés en suivant les étapes décrites dans le [guide de démarrage rapide d’Azure CLI](quick-create-cli.md), le [guide de démarrage rapide d’Azure PowerShell](quick-create-powershell.md) ou le [guide de démarrage rapide du portail Azure](quick-create-portal.md). Vous pouvez aussi exécuter les commandes Azure CLI ci-dessous.
+[!INCLUDE [Create a resource group and key vault](../../../includes/key-vault-rg-kv-creation.md)]
 
-> [!Important]
-> Chaque coffre de clés doit avoir un nom unique. Remplacez <your-unique-keyvault-name> par le nom de votre coffre de clés dans les exemples suivants.
+#### <a name="grant-access-to-your-key-vault"></a>Accorder l’accès à votre coffre de clés
 
-```azurecli
-az group create --name "myResourceGroup" -l "EastUS"
-
-az keyvault create --name <your-unique-keyvault-name> -g "myResourceGroup"
-```
-
-### <a name="create-a-service-principal"></a>Créer un principal du service
-
-Le moyen le plus simple d’authentifier une application cloud consiste à utiliser une identité managée. Pour plus d’informations, consultez [Utiliser une identité managée App Service pour accéder à Azure Key Vault](../general/managed-identity.md). Cependant, pour des raisons de simplicité, ce guide de démarrage rapide crée une application pour poste de travail, qui nécessite l’utilisation d’un principal de service et d’une stratégie de contrôle d’accès.
-
-Créez un principal de service à l’aide de la commande Azure CLI [az ad sp create-for-rbac](/cli/azure/ad/sp?view=azure-cli-latest#az-ad-sp-create-for-rbac) :
-
-```azurecli
-az ad sp create-for-rbac -n "http://mySP" --sdk-auth
-```
-
-Cette opération retourne une série de paires clé/valeur. 
+Créer une stratégie d’accès pour votre coffre de clés qui accorde une autorisation de secret à votre compte d’utilisateur
 
 ```console
-{
-  "clientId": "7da18cae-779c-41fc-992e-0527854c6583",
-  "clientSecret": "b421b443-1669-4cd7-b5b1-394d5c945002",
-  "subscriptionId": "443e30da-feca-47c4-b68f-1636b75e16b3",
-  "tenantId": "35ad10f1-7799-4766-9acf-f2d946161b77",
-  "activeDirectoryEndpointUrl": "https://login.microsoftonline.com",
-  "resourceManagerEndpointUrl": "https://management.azure.com/",
-  "sqlManagementEndpointUrl": "https://management.core.windows.net:8443/",
-  "galleryEndpointUrl": "https://gallery.azure.com/",
-  "managementEndpointUrl": "https://management.core.windows.net/"
-}
+az keyvault set-policy --name <YourKeyVaultName> --upn user@domain.com --secret-permissions delete get list set purge
 ```
 
-Prenez note des valeurs clientId, clientSecret et tenantId, car nous allons les utiliser dans les deux étapes suivantes.
+#### <a name="set-environment-variables"></a>Définir des variables d’environnement
 
-#### <a name="give-the-service-principal-access-to-your-key-vault"></a>Accorder au principal de service l’accès à votre coffre de clés
+Cette application utilise le nom de coffre de clés en tant que variable d’environnement appelée `KEY_VAULT_NAME`.
 
-Créez une stratégie d’accès pour votre coffre de clés qui accorde l’autorisation à votre principal de service en passant le clientId à la commande [az keyvault set-policy](/cli/azure/keyvault?view=azure-cli-latest#az-keyvault-set-policy). Accordez au principal de service les autorisations get, list et set sur les clés et les secrets.
-
-```azurecli
-az keyvault set-policy -n <your-unique-keyvault-name> --spn <clientId-of-your-service-principal> --secret-permissions delete get list set --key-permissions create decrypt delete encrypt get list unwrapKey wrapKey
-```
-
-#### <a name="set-environmental-variables"></a>Définir des variables d’environnement
-
-La méthode DefaultAzureCredential dans notre application s’appuie sur trois variables d’environnement : `AZURE_CLIENT_ID`, `AZURE_CLIENT_SECRET` et `AZURE_TENANT_ID`. Définissez ces variables sur les valeurs clientId, clientSecret et tenantId que vous avez notées à l’étape [Créer un principal de service](#create-a-service-principal) ci-dessus. Utilisez le format `export VARNAME=VALUE` pour définir vos variables d’environnement. (Cette méthode définit seulement les variables pour votre interpréteur de commandes actuel et les processus créés depuis celui-ci ; pour ajouter ces variables de façon permanente à votre environnement, modifiez votre fichier `/etc/environment `.) 
-
-Vous devrez également enregistrer votre nom de coffre de clés en tant que variable d’environnement appelée `KEY_VAULT_NAME`.
-
-```console
-export AZURE_CLIENT_ID=<your-clientID>
-
-export AZURE_CLIENT_SECRET=<your-clientSecret>
-
-export AZURE_TENANT_ID=<your-tenantId>
-
-export KEY_VAULT_NAME=<your-key-vault-name>
+Windows
+```cmd
+set KEY_VAULT_NAME=<your-key-vault-name>
 ````
+Windows PowerShell
+```powershell
+$Env:KEY_VAULT_NAME=<your-key-vault-name>
+```
+
+macOS ou Linux
+```cmd
+export KEY_VAULT_NAME=<your-key-vault-name>
+```
 
 ## <a name="object-model"></a>Modèle objet
 
-La bibliothèque de client Azure Key Vault pour Java vous permet de gérer des clés et les ressources associées, par exemple des certificats et des secrets. Les exemples de code ci-dessous vous montrent comment créer un client et définir, récupérer et supprimer un secret.
+La bibliothèque de client de secrets Azure Key Vault pour Java vous permet de gérer des secrets. La section [Exemples de code](#code-examples) montre comment créer un client, et définir, récupérer et supprimer un secret.
 
 L’application console complète est [ci-dessous](#sample-code).
 
@@ -186,7 +165,9 @@ import com.azure.security.keyvault.secrets.models.KeyVaultSecret;
 
 ### <a name="authenticate-and-create-a-client"></a>Authentifier et créer un client
 
-L’authentification auprès de votre coffre de clés et la création d’un client de coffre de clés dépendent des variables d’environnement de l’étape [Définir des variables d’environnement](#set-environmental-variables) ci-dessus. Le nom de votre coffre de clés est étendu à l’URI du coffre de clés, au format `https://<your-key-vault-name>.vault.azure.net`.
+Dans ce guide de démarrage rapide, l’utilisateur connecté est utilisé pour l’authentification auprès du coffre de clés, qui est la méthode recommandée pour le développement local. Pour les applications déployées sur Azure, l’identité managée doit être affectée à App Service ou à une machine virtuelle. Pour plus d’informations, consultez [Vue d’ensemble des identités managées](https://docs.microsoft.com/azure/active-directory/managed-identities-azure-resources/overview).
+
+Dans l’exemple ci-dessous, le nom de votre coffre de clés est étendu à l’URI du coffre de clés, au format « https://\<your-key-vault-name\>.vault.azure.net ». Cet exemple utilise la classe [« DefaultAzureCredential() »](https://docs.microsoft.com/java/api/com.azure.identity.defaultazurecredential), qui permet d’utiliser le même code dans différents environnements avec des options différentes pour fournir une identité. Pour plus d’informations, consultez [Authentification des informations d’identification Azure par défaut](https://docs.microsoft.com/java/api/overview/azure/identity-readme). 
 
 ```java
 String keyVaultName = System.getenv("KEY_VAULT_NAME");
@@ -206,7 +187,7 @@ Maintenant que votre application est authentifiée, vous pouvez placer un secret
 secretClient.setSecret(new KeyVaultSecret(secretName, secretValue));
 ```
 
-Vous pouvez vérifier que le secret a été défini à l’aide de la commande [az keyvault secret show](/cli/azure/keyvault/secret?view=azure-cli-latest#az-keyvault-secret-show) :
+Vous pouvez vérifier que le secret a été défini à l’aide de la commande [az keyvault secret show](/cli/azure/keyvault/secret?#az-keyvault-secret-show) :
 
 ```azurecli
 az keyvault secret show --vault-name <your-unique-keyvault-name> --name mySecret
@@ -230,7 +211,7 @@ Enfin, nous allons supprimer le secret de votre coffre de clés avec la méthode
 secretClient.beginDeleteSecret(secretName);
 ```
 
-Vous pouvez vérifier que le secret a été effacé à l’aide de la commande [az keyvault secret show](/cli/azure/keyvault/secret?view=azure-cli-latest#az-keyvault-secret-show) :
+Vous pouvez vérifier que le secret a été effacé à l’aide de la commande [az keyvault secret show](/cli/azure/keyvault/secret?#az-keyvault-secret-show) :
 
 ```azurecli
 az keyvault secret show --vault-name <your-unique-keyvault-name> --name mySecret
@@ -315,4 +296,5 @@ Dans ce guide de démarrage rapide, vous avez créé un coffre de clés, enregis
 
 - Lire la [vue d’ensemble Azure Key Vault](../general/overview.md)
 - Consulter le [Guide du développeur Azure Key Vault](../general/developers-guide.md)
+- Découvrir comment [Sécuriser l’accès à un coffre de clés](../general/secure-your-key-vault.md)
 - Passer en revue les [bonnes pratiques relatives à Azure Key Vault](../general/best-practices.md)

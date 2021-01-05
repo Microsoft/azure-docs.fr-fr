@@ -1,22 +1,16 @@
 ---
 title: Exemple de script Azure CLI - Créer une rubrique personnalisée | Microsoft Docs
 description: Cet article fournit un exemple de script Azure CLI qui montre comment créer une rubrique personnalisée Azure Event Grid.
-services: event-grid
-documentationcenter: na
-author: spelluru
-ms.service: event-grid
 ms.devlang: azurecli
 ms.topic: sample
-ms.tgt_pltfrm: na
-ms.workload: na
-ms.date: 01/23/2020
-ms.author: spelluru
-ms.openlocfilehash: 2c6e027d234104d5e45c632dd73e79d8f069deb5
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.date: 07/08/2020
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: d61dac0e76fc7b7006fa36f1cb96965ccee3d863
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "76720841"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87494126"
 ---
 # <a name="create-event-grid-custom-topic-with-azure-cli"></a>Créer une rubrique personnalisée Event Grid avec Azure CLI
 
@@ -36,10 +30,10 @@ Ce script utilise la commande suivante pour créer la rubrique personnalisée. C
 
 | Commande | Notes |
 |---|---|
-| [az eventgrid topic create](https://docs.microsoft.com/cli/azure/eventgrid/topic#az-eventgrid-topic-create) | Crée une rubrique personnalisée Event Grid. |
+| [az eventgrid topic create](/cli/azure/eventgrid/topic#az-eventgrid-topic-create) | Crée une rubrique personnalisée Event Grid. |
 
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 * Pour plus d’informations sur l’interrogation d’abonnements, consultez [Interroger les abonnements Event Grid](../query-event-subscriptions.md).
-* Pour plus d’informations sur l’interface Azure CLI, consultez la [documentation relative à l’interface Azure CLI](https://docs.microsoft.com/cli/azure).
+* Pour plus d’informations sur l’interface Azure CLI, consultez la [documentation relative à l’interface Azure CLI](/cli/azure).

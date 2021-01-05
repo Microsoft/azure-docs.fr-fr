@@ -4,12 +4,12 @@ ms.service: cognitive-services
 ms.topic: include
 ms.date: 05/07/2018
 ms.author: wolfma
-ms.openlocfilehash: 22507b7432a200a5c24c7063ca644b1b82eb5481
-ms.sourcegitcommit: 9ee0cbaf3a67f9c7442b79f5ae2e97a4dfc8227b
+ms.openlocfilehash: 57806f42601a7f31ae8d5255f154d0df9c75df9a
+ms.sourcegitcommit: 80c1056113a9d65b6db69c06ca79fa531b9e3a00
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "67177357"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96906430"
 ---
 | Path | Description |
 |:-----|:----|
@@ -17,5 +17,7 @@ ms.locfileid: "67177357"
 | `ThirdPartyNotices.md` | Mentions tierces.
 | `REDIST.txt` | Avis de redistribution.
 | `include` | Les fichiers d’en-tête requis pour C et C++
+| `lib/arm32` | Bibliothèque native ARM32 nécessaire pour lier votre application
+| `lib/arm64` | Bibliothèque native ARM64 nécessaire pour lier votre application
 | `lib/x64` | Bibliothèque native pour x64 requise pour lier votre application
 | `lib/x86` | Bibliothèque native pour x86 requise pour lier votre application

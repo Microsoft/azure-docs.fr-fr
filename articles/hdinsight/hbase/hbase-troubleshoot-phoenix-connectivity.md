@@ -7,12 +7,12 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.date: 08/14/2019
-ms.openlocfilehash: b886f51bcb2bb7308c49c76563dcb70148bbc583
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: ed12c9629506fa8defb23b987fe672bb3b384418
+ms.sourcegitcommit: d767156543e16e816fc8a0c3777f033d649ffd3c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75887289"
+ms.lasthandoff: 10/26/2020
+ms.locfileid: "92540089"
 ---
 # <a name="scenario-apache-phoenix-connectivity-issues-in-azure-hdinsight"></a>Scénario : Problèmes de connectivité Apache Phoenix dans Azure HDInsight
 
@@ -28,7 +28,7 @@ Adresse IP incorrecte du nœud Zookeeper actif.
 
 ### <a name="resolution"></a>Résolution
 
-L’adresse IP du nœud Zookeeper actif peut être identifiée à partir de l’interface utilisateur Ambari, en suivant les liens vers **HBase** > **Liens rapides** > **ZK (Active)**  > **Zookeeper Info**. Corrigez l’adresse IP en fonction des besoins.
+L’adresse IP du nœud Zookeeper actif peut être identifiée à partir de l’interface utilisateur Ambari, en suivant les liens vers **HBase** > **Liens rapides** > **ZK (Active)**  > **Zookeeper Info** . Corrigez l’adresse IP en fonction des besoins.
 
 ---
 
@@ -66,4 +66,4 @@ Si votre problème ne figure pas dans cet article ou si vous ne parvenez pas à 
 
 * Connectez-vous à [@AzureSupport](https://twitter.com/azuresupport), le compte Microsoft Azure officiel pour améliorer l’expérience client. Connexion de la communauté Azure aux ressources appropriées : réponses, support technique et experts.
 
-* Si vous avez besoin d’une aide supplémentaire, vous pouvez envoyer une requête de support à partir du [Portail Microsoft Azure](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade/). Sélectionnez **Support** dans la barre de menus, ou ouvrez le hub **Aide + Support**. Pour plus d’informations, consultez [Création d’une demande de support Azure](https://docs.microsoft.com/azure/azure-portal/supportability/how-to-create-azure-support-request). L’accès au support relatif à la gestion et à la facturation des abonnements est inclus avec votre abonnement Microsoft Azure. En outre, le support technique est fourni avec l’un des [plans de support Azure](https://azure.microsoft.com/support/plans/).
+* Si vous avez besoin d’une aide supplémentaire, vous pouvez envoyer une requête de support à partir du [Portail Microsoft Azure](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade/). Sélectionnez **Support** dans la barre de menus, ou ouvrez le hub **Aide + Support** . Pour plus d’informations, consultez [Création d’une demande de support Azure](../../azure-portal/supportability/how-to-create-azure-support-request.md). L’accès au support relatif à la gestion et à la facturation des abonnements est inclus avec votre abonnement Microsoft Azure. En outre, le support technique est fourni avec l’un des [plans de support Azure](https://azure.microsoft.com/support/plans/).

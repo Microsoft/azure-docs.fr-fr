@@ -1,14 +1,16 @@
 ---
 title: Conversations multitours dans QnA Maker
 description: Servez-vous des invites et du contexte pour gérer plusieurs tours (ou « multitour ») pour votre bot d’une question à l’autre. La conversation multitour est la possibilité d’avoir une conversation nourrie où le contexte de la question précédente influence la question et la réponse suivantes.
+ms.service: cognitive-services
+ms.subservice: qna-maker
 ms.topic: conceptual
 ms.date: 04/13/2020
-ms.openlocfilehash: 8ef244e1b6baf480189bb90ea5ff53138a6f377a
-ms.sourcegitcommit: 8dc84e8b04390f39a3c11e9b0eaf3264861fcafc
+ms.openlocfilehash: cef2e2ca9c7ad4640014d9b5a9a7da42d308ef7c
+ms.sourcegitcommit: e15c0bc8c63ab3b696e9e32999ef0abc694c7c41
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/13/2020
-ms.locfileid: "81261463"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97605142"
 ---
 # <a name="use-follow-up-prompts-to-create-multiple-turns-of-a-conversation"></a>Utiliser des invites de suivi pour créer plusieurs tours de conversation
 
@@ -37,7 +39,6 @@ Dans l’image précédente, un utilisateur a lancé une conversation en entrant
 
 Quand l’utilisateur sélectionne une option (#3), la liste suivante d’options d’affinage (#4) est présentée. Cette séquence se poursuit (#5) jusqu’à ce que l’utilisateur détermine la réponse finale correcte (#6).
 
-
 ### <a name="use-multi-turn-in-a-bot"></a>Utiliser la conversation multitour dans un bot
 
 Après avoir publié votre base de connaissances, vous pouvez sélectionner le bouton **Créer un bot** pour déployer votre bot QnA Maker sur Azure Bot Service. Les invites s’affichent dans les clients de conversation que vous avez activés pour votre bot.
@@ -52,7 +53,7 @@ Lorsque vous sélectionnez cette option, QnA Maker extrait la hiérarchie prése
 
 La structure multitour ne peut être déduite qu’à partir d’URL, de fichiers PDF ou de fichiers DOCX. Pour obtenir un exemple de structure, examinez une image du [fichier PDF du manuel utilisateur Microsoft Surface](https://github.com/Azure-Samples/cognitive-services-sample-data-files/blob/master/qna-maker/data-source-formats/product-manual.pdf).
 
-![![Exemple de structure dans un manuel utilisateur]\(../media/conversational-context/import-file-with-conversational-structure.png)](../media/conversational-context/import-file-with-conversational-structure.png#lightbox)
+:::image type="content" source="../media/conversational-context/import-file-with-conversational-structure.png" alt-text="Capture d'écran représentant un exemple de la structure dans un manuel d'utilisation." lightbox="../media/conversational-context/import-file-with-conversational-structure.png":::
 
 ### <a name="building-your-own-multi-turn-document"></a>Création de votre propre document multitour
 
@@ -77,10 +78,9 @@ Quand vous ajoutez un document hiérarchique, QnA Maker détermine des invites d
 > [!Caution]
 > L’utilisation d’un fichier de base de connaissances multitour TSV ou XLS exporté comme source de données pour une base de connaissances, nouvelle ou vide, n’est pas prise en charge. Vous devez importer (**Import**) ce type de fichier à partir de la page **Settings** du portail QnA Maker pour ajouter des invites multitours exportées à une base de connaissances.
 
-
 ## <a name="create-knowledge-base-with-multi-turn-prompts-with-the-create-api"></a>Créer la base de connaissances avec des invites multitours à l’aide de l’API Create
 
-Vous pouvez créer une base de connaissances avec des invites multitours à l’aide de l’[API Create de QnA Maker](https://docs.microsoft.com/rest/api/cognitiveservices/qnamaker/knowledgebase/create). Les invites sont ajoutées dans le tableau `prompts` de la propriété `context`.
+Vous pouvez créer une base de connaissances avec des invites multitours à l’aide de l’[API Create de QnA Maker](/rest/api/cognitiveservices/qnamaker/knowledgebase/create). Les invites sont ajoutées dans le tableau `prompts` de la propriété `context`.
 
 ## <a name="show-questions-and-answers-with-context"></a>Présenter les questions et les réponses avec du contexte
 
@@ -92,7 +92,7 @@ Sélectionnez **Options d’affichage**, puis **Afficher le contexte**. La liste
 
 Le contexte multitour s’affiche dans la première colonne.
 
-![! [La colonne « Context (PREVIEW) »]\(../media/conversational-context/surface-manual-pdf-follow-up-prompt.png)](../media/conversational-context/surface-manual-pdf-follow-up-prompt.png#lightbox)
+:::image type="content" source="../media/conversational-context/surface-manual-pdf-follow-up-prompt.png" alt-text="Capture d'écran dans laquelle la section Context est mise en surbrillance." lightbox="../media/conversational-context/surface-manual-pdf-follow-up-prompt.png":::
 
 Dans l’image précédente, **#1** désigne le texte en gras dans la colonne, qui représente la question actuelle. La question parente est le premier élément de la ligne. Les questions situées en dessous sont les paires de questions/réponses liées. Vous pouvez sélectionner ces éléments pour accéder immédiatement aux autres éléments contextuels.
 
@@ -114,7 +114,6 @@ Ajoutez une invite de suivi à une paire de questions/réponses existante qui n�
     |Context-only| Cochez cette case. Une réponse est retournée uniquement si la question spécifie le contexte.|
     |Link to answer|Entrez **Use the sign-in screen** pour rechercher la paire de questions/réponses existante.|
 
-
 1.  Une seule correspondance est retournée. Sélectionnez cette réponse comme suivi, puis choisissez **Save**.
 
     ![Page « Follow-up prompt (PREVIEW) »](../media/conversational-context/search-follow-up-prompt-for-existing-answer.png)
@@ -135,7 +134,6 @@ Quand une invite de suivi est créée et qu’une paire de questions/réponses e
 1. Une fois le texte d’affichage modifié, sélectionnez **Save**.
 1. Dans la barre de navigation du haut, choisissez **Save and train**.
 
-
 ## <a name="add-a-new-question-and-answer-pair-as-a-follow-up-prompt"></a>Ajouter une nouvelle paire de questions/réponses comme invite de suivi
 
 Quand vous ajoutez une nouvelle paire de questions/réponses à la base de connaissances, chaque paire doit être liée à une question existante en tant qu’invite de suivi.
@@ -154,12 +152,11 @@ Quand vous ajoutez une nouvelle paire de questions/réponses à la base de conna
 
     ![Créer une nouvelle question et réponse d’invite](../media/conversational-context/create-child-prompt-from-parent.png)
 
-
 1. Sélectionnez **Create new**, puis **Save**.
 
     Cette action a pour effet de créer une nouvelle paire de questions/réponses et de lier la question sélectionnée en tant qu’invite de suivi. La colonne **Context**, pour ces deux questions, indique une relation d’invite de suivi.
 
-1. Sélectionnez **View options**, puis [**Show context (PREVIEW)** ](#show-questions-and-answers-with-context).
+1. Sélectionnez **View options**, puis [**Show context (PREVIEW)**](#show-questions-and-answers-with-context).
 
     La nouvelle question montre comment elle est liée.
 
@@ -167,7 +164,7 @@ Quand vous ajoutez une nouvelle paire de questions/réponses à la base de conna
 
     La question parente affiche une nouvelle question parmi ses différents choix.
 
-    ![! [La colonne Context, pour ces deux questions, indique une relation d’invite de suivi]\(../media/conversational-context/child-prompt-created.png)](../media/conversational-context/child-prompt-created.png#lightbox)
+    :::image type="content" source="../media/conversational-context/child-prompt-created.png" alt-text="Capture d'écran représentant la colonne Context, qui indique une relation d'invite de suivi pour les deux questions." lightbox="../media/conversational-context/child-prompt-created.png":::
 
 1. Une fois que vous avez ajouté l’invite de suivi, sélectionnez **Save and train** dans la barre de navigation supérieure.
 
@@ -225,7 +222,7 @@ Dans la section précédente, une réponse et les invites de suivi éventuelles 
             "questions": [
                 "Sign out"
             ],
-            "answer": "**Sign out**\n\nHere's how to sign out: \n\n Go to Start, and right-click your name. Then select Sign out. ",
+            "answer": "**Sign out**\n\nHere's how to sign out: \n\n  Go to Start, and right-click your name. Then select Sign out. ",
             "score": 38.01,
             "id": 18,
             "source": "product-manual.pdf",
@@ -352,14 +349,13 @@ La réponse JSON _GenerateAnswer_ de QnA Maker comprend les invites de suivi dan
 
 Si vous créez une application personnalisée à l’aide de la fonctionnalité multitour. Dans la réponse de la question initiale, les éventuelles invites de suivi et leurs `qnaId` associés sont retournés. Maintenant que vous disposez de l’ID, vous pouvez le transmettre dans le corps de la demande de l’invite de suivi. Si le corps de la demande contient le `qnaId` et l’objet de contexte (qui contient les propriétés QnA Maker précédentes), GenerateAnswer retourne la question exacte par ID, au lieu d’utiliser l’algorithme de classement pour trouver la réponse à partir du texte de la question.
 
-
 ## <a name="display-order-is-supported-in-the-update-api"></a>L’ordre d’affichage est pris en charge dans l’API Update
 
-Le [texte d’affichage et l’ordre d’affichage](https://docs.microsoft.com/rest/api/cognitiveservices/qnamaker/knowledgebase/update#promptdto), retournés dans la réponse JSON, sont pris en charge par l’[API Update](https://docs.microsoft.com/rest/api/cognitiveservices/qnamaker/knowledgebase/update) et peuvent être modifiés.
+Le [texte d’affichage et l’ordre d’affichage](/rest/api/cognitiveservices/qnamaker/knowledgebase/update#promptdto), retournés dans la réponse JSON, sont pris en charge par l’[API Update](/rest/api/cognitiveservices/qnamaker/knowledgebase/update) et peuvent être modifiés.
 
 ## <a name="add-or-delete-multi-turn-prompts-with-the-update-api"></a>Ajouter ou supprimer des invites multitours à l’aide de l’API Update
 
-Vous pouvez ajouter ou supprimer des invites multitours à l’aide de l’[API Update de QnA Maker](https://docs.microsoft.com/rest/api/cognitiveservices/qnamaker/knowledgebase/update).  Les invites sont ajoutées dans le tableau `promptsToAdd` et le tableau `promptsToDelete` de la propriété `context`.
+Vous pouvez ajouter ou supprimer des invites multitours à l’aide de l’[API Update de QnA Maker](/rest/api/cognitiveservices/qnamaker/knowledgebase/update).  Les invites sont ajoutées dans le tableau `promptsToAdd` et le tableau `promptsToDelete` de la propriété `context`.
 
 ## <a name="export-knowledge-base-for-version-control"></a>Exporter la base de connaissances pour la gestion de versions
 
@@ -367,7 +363,7 @@ QnA Maker prend en charge la gestion de versions en incluant des étapes de conv
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Découvrez plus en détail les conversations contextuelles à travers cet [exemple de boîte de dialogue](https://aka.ms/qnamakermultiturnsample) ou apprenez-en davantage sur la [conception de bots conceptuels pour les conversations multitours](https://docs.microsoft.com/azure/bot-service/bot-builder-conversations?view=azure-bot-service-4.0).
+Découvrez plus en détail les conversations contextuelles à travers cet [exemple de boîte de dialogue](https://github.com/microsoft/BotBuilder-Samples/blob/master/samples/csharp_dotnetcore/adaptive-dialog/07.qnamaker/QnAMaker.csproj) ou apprenez-en davantage sur la [conception de bots conceptuels pour les conversations multitours](/azure/bot-service/bot-builder-conversations?view=azure-bot-service-4.0).
 
 > [!div class="nextstepaction"]
 > [Migrer une base de connaissances](../Tutorials/migrate-knowledge-base.md)

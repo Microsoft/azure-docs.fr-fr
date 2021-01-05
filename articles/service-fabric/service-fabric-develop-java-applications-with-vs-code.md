@@ -4,13 +4,14 @@ description: Cet article montre comment générer, déployer et déboguer des ap
 author: peterpogorski
 ms.topic: article
 ms.date: 06/29/2018
+ms.custom: devx-track-java
 ms.author: pepogors
-ms.openlocfilehash: 999dbb8c36c4e0413f287b2a73cf39ab4acd15f5
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: cc65deb924a9f3367c2ea1d7c71544743ccf2697
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75610044"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87327359"
 ---
 # <a name="develop-java-service-fabric-applications-with-visual-studio-code"></a>Développer des applications Service Fabric en Java avec Visual Studio Code
 

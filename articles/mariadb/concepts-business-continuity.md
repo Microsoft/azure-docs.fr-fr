@@ -1,17 +1,17 @@
 ---
 title: Continuité de l’activité - Azure Database for MariaDB
 description: Découvrez en quoi consiste la continuité d’activité (limite de restauration dans le temps, interruption de centre de données, géorestauration) quand vous utilisez le service Azure Database for MariaDB.
-author: ajlam
-ms.author: andrela
+author: savjani
+ms.author: pariks
 ms.service: mariadb
 ms.topic: conceptual
-ms.date: 3/18/2020
-ms.openlocfilehash: c01e0df1f420c8489ca3445d9fa025b251a870f2
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.date: 7/7/2020
+ms.openlocfilehash: e164930736f7b93e56d9bd4187e72a9c8eb76202
+ms.sourcegitcommit: 6ab718e1be2767db2605eeebe974ee9e2c07022b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "79532389"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94541723"
 ---
 # <a name="understand-business-continuity-in-azure-database-for-mariadb"></a>Comprendre la continuité d’activité dans Azure Database for MariaDB
 
@@ -48,11 +48,16 @@ L’autre solution consiste à utiliser la fonctionnalité de géorestauration d
 > [!IMPORTANT]
 > La géorestauration n’est possible que si vous avez provisionné le serveur avec le stockage de sauvegardes géoredondantes.
 
+## <a name="cross-region-read-replicas"></a>Réplicas en lecture inter-régions
+
+Vous pouvez utiliser des réplicas en lecture inter-régions pour améliorer la planification de la continuité d’activité et de la reprise d’activité. Les réplicas en lecture sont mis à jour de façon asynchrone à l’aide de la technologie de réplication de journal des transactions de MariaDB. Pour plus d’informations sur les réplicas en lecture, les régions disponibles et le basculement, consultez cet [article sur les concepts relatifs aux réplicas en lecture](concepts-read-replicas.md). 
+
+## <a name="faq"></a>Questions fréquentes (FAQ)
+### <a name="where-does-azure-database-for-mariadb-store-customer-data"></a>Où Azure Database for MariaDB stocke-t-il les données client ?
+Par défaut, Azure Database for MariaDB ne déplace pas ni ne stocke les données client en dehors de la région dans laquelle il est déployé. Toutefois, les clients peuvent s’ils le souhaitent choisir d’activer les [sauvegardes géoredondantes](concepts-backup.md#backup-redundancy-options) ou de créer un [réplica en lecture sur plusieurs régions](concepts-read-replicas.md#cross-region-replication) pour stocker les données dans une autre région.
+
 ## <a name="next-steps"></a>Étapes suivantes
 
-- Pour découvrir plus en détail les sauvegardes automatisées, consultez [Sauvegardes dans Azure Database for MariaDB](concepts-backup.md).
-- Pour effectuer une restauration à un point dans le temps à l’aide du portail Azure, consultez  [Restauration d’une base de données à un point dans le temps à l’aide du portail Azure](howto-restore-server-portal.md).
-
-<!--
-- To restore to a point in time using Azure CLI, see [restore database to a point in time using CLI](howto-restore-server-cli.md). 
--->
+- Apprenez-en davantage sur les [sauvegardes automatisées dans Azure Database pour MariaDB](concepts-backup.md).
+- Découvrez comment effectuer une restauration à l’aide du [portail Azure](howto-restore-server-portal.md) ou de l’interface [Azure CLI](howto-restore-server-cli.md).
+- Apprenez-en davantage sur les [réplicas en lecture dans Azure Database pour MariaDB](concepts-read-replicas.md).

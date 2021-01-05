@@ -10,12 +10,12 @@ metadata:
   author: philmea
   ms.author: philmea
   ms.date: 10/25/2019
-  ms.openlocfilehash: 31ef06104f57fd2ec1530c621bceab899921b8f8
-  ms.sourcegitcommit: 75089113827229663afed75b8364ab5212d67323
+  ms.openlocfilehash: 93c5aea44586a37ac9d4c4c2647754fb7ba5659d
+  ms.sourcegitcommit: b8a175b6391cddd5a2c92575c311cc3e8c820018
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 04/22/2020
-  ms.locfileid: "82024640"
+  ms.lasthandoff: 11/25/2020
+  ms.locfileid: "96122397"
 landingContent:
 - title: Créer des solutions de vente au détail
   linkLists:
@@ -37,26 +37,36 @@ landingContent:
       url: tutorial-iot-central-connected-logistics.md
     - text: Créer une application pour un centre de distribution numérique
       url: tutorial-iot-central-digital-distribution-center.md
+    - text: Créer une application d’analytique vidéo
+      url: tutorial-video-analytics-create-app-yolo-v3.md
   - linkListType: how-to-guide
     links:
     - text: Connecter un Rigado Cascade 500
       url: ../core/howto-connect-rigado-cascade-500.md
-- title: Se connecter
+- title: Connecter et développer des appareils
   linkLists:
+  - linkListType: overview
+    links:
+    - text: Vue d’ensemble pour les développeurs d’appareils
+      url: ../core/overview-iot-central-developer.md
   - linkListType: tutorial
     links:
-    - text: Configurer un modèle d’appareil
-      url: ../core/howto-set-up-template.md
-    - text: Connexion d'un appareil
-      url: ../core/tutorial-connect-device-nodejs.md
-    - text: Connecter un appareil IoT Plug-and-Play (préversion)
-      url: ../core/tutorial-connect-pnp-device.md
+    - text: Créer et connecter un appareil
+      url: ../core/tutorial-connect-device.md
+  - linkListType: concept
+    links:
+    - text: Connectivité des appareils
+      url: ../core/concepts-get-connected.md
+    - text: Modèles d’appareil
+      url: ../core/concepts-device-templates.md
   - linkListType: how-to-guide
     links:
-    - text: Préparer et connecter un kit de développement IoT MXChip
-      url: ../core/howto-connect-devkit.md
-    - text: Connecter d’autres clouds IoT
-      url: ../core/howto-build-iotc-device-bridge.md
+    - text: Configurer un modèle
+      url: ../core/howto-set-up-template.md
+    - text: Connecter un appareil Azure Sphere
+      url: ../core/howto-connect-sphere.md
+    - text: Résolution des problèmes de connectivité des appareils
+      url: ../core/troubleshoot-connection.md
 - title: Rester connecté
   linkLists:
   - linkListType: tutorial

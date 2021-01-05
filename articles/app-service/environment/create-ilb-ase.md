@@ -4,15 +4,15 @@ description: Découvrez comment créer un environnement ASE (App Service Environ
 author: ccompy
 ms.assetid: 0f4c1fa4-e344-46e7-8d24-a25e247ae138
 ms.topic: quickstart
-ms.date: 08/05/2019
+ms.date: 09/16/2020
 ms.author: ccompy
 ms.custom: mvc, seodec18
-ms.openlocfilehash: b7fa447e8564fcbf77702f1d3d474cceb48705c5
-ms.sourcegitcommit: fb23286d4769442631079c7ed5da1ed14afdd5fc
+ms.openlocfilehash: 27c9198558a730d0af49077d6f5baa6db4789416
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/10/2020
-ms.locfileid: "81114636"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96009549"
 ---
 # <a name="create-and-use-an-internal-load-balancer-app-service-environment"></a>Créer et utiliser un environnement App Service Environment avec équilibreur de charge interne 
 
@@ -100,15 +100,26 @@ Les fonctions et les tâches Web sont prises en charge sur un environnement App 
 
 ## <a name="dns-configuration"></a>Configuration DNS 
 
-Lorsque vous utilisez une adresse IP virtuelle externe, le DNS est géré par Azure. Toute application créée dans votre environnement ASE est automatiquement ajoutée au service Azure DNS, qui est un service DNS public. Dans un environnement ASE ILB, vous devez gérer votre propre service DNS. Le suffixe de domaine utilisé avec un ASE ILB varie selon le nom de l’ASE. Le suffixe de domaine est *&lt;nom ASE&gt;.appserviceenvironment.net*. L’adresse IP de votre ILB se trouve dans le portail sous **Adresses IP**. 
+Lorsque vous utilisez un environnement ASE externe, les applications effectuées dans votre ASE sont inscrites auprès d’Azure DNS. Il n’est pas nécessaire de passer par d’autres étapes dans un ASE externe pour que vos applications soient disponibles publiquement. Avec un environnement ASE ILB, vous devez gérer votre propre service DNS. Vous pouvez effectuer cette opération sur votre propre serveur DNS ou avec des zones privées Azure DNS.
 
-Pour configurer votre DNS :
+Pour configurer DNS sur votre propre serveur DNS avec votre ASE ILB :
 
-- créez une zone pour *&lt;nom ASE&gt;.appserviceenvironment.net*
-- créez un enregistrement A dans cette zone qui pointe * vers l’adresse IP ILB
-- créez un enregistrement A dans cette zone qui pointe @ vers l’adresse IP ILB
-- créez une zone dans le scm nommé *&lt;nom ASE&gt;.appserviceenvironment.net*
-- créez un enregistrement A dans la zone scm qui pointe * vers l’adresse IP ILB
+1. créez une zone pour &lt;nom ASE&gt;.appserviceenvironment.net
+2. créez un enregistrement A dans cette zone qui pointe * vers l’adresse IP ILB
+3. créez un enregistrement A dans cette zone qui pointe @ vers l’adresse IP ILB
+4. créez une zone dans le scm nommé &lt;nom ASE&gt;.appserviceenvironment.net
+5. créez un enregistrement A dans la zone scm qui pointe * vers l’adresse IP ILB
+
+Pour configurer DNS dans les zones privées Azure DNS :
+
+1. créez une zone privée Azure DNS nommée &lt;nom ASE&gt;.appserviceenvironment.net
+2. créez un enregistrement A dans cette zone qui pointe * vers l’adresse IP ILB
+3. créez un enregistrement A dans cette zone qui pointe @ vers l’adresse IP ILB
+4. créez un enregistrement A dans cette zone qui pointe *.scm vers l’adresse IP ILB
+
+Les paramètres DNS du suffixe de domaine par défaut de votre ASE ne limitent pas vos applications à être accessibles uniquement par ces noms. Vous pouvez définir un nom de domaine personnalisé sans validation sur vos applications dans un environnement ASE ILB. Si vous souhaitez ensuite créer une zone nommée contoso.net, vous pouvez le faire et la pointer vers l’adresse IP ILB. Le nom de domaine personnalisé fonctionne pour les demandes d’application, mais pas pour le site GCL. Le site GCL est disponible uniquement pour &lt;appname&gt;.scm.&lt;asename&gt;.appserviceenvironment.net.
+
+La zone nommée .&lt;asename&gt;.appserviceenvironment.net est globalement unique. Avant mai 2019, les clients pouvaient spécifier le suffixe de domaine de l’ASE ILB. Si vous souhaitez utiliser .contoso.com comme suffixe de domaine, vous pouvez le faire et inclure le site GCL. Ce modèle présentait quelques contraintes au niveau de la gestion du certificat SSL par défaut, de l’absence d’authentification unique auprès du site GCL, et de la nécessité d’utiliser un certificat générique. Le processus de mise à niveau du certificat par défaut de l’ASE ILB entraînait également une interruption du service et le redémarrage de l’application. Pour résoudre ces problèmes, le comportement de l’ASE ILB a été modifié pour utiliser un suffixe de domaine basé sur le nom de l’ASE, avec un suffixe appartenant à Microsoft. La modification apportée au comportement de l’ASE ILB affecte uniquement les environnements ASE ILB créés après mai 2019. Les environnements ASE ILB préexistants doivent toujours gérer le certificat par défaut de l’ASE et leur configuration DNS.
 
 ## <a name="publish-with-an-ilb-ase"></a>Publier avec un ASE ILB
 
@@ -147,17 +158,17 @@ Pour les ASE ILB créés avant mai 2019, vous deviez définir le suffixe de doma
 [ASENetwork]: ./network-info.md
 [UsingASE]: ./using-an-ase.md
 [UDRs]: ../../virtual-network/virtual-networks-udr-overview.md
-[NSGs]: ../../virtual-network/security-overview.md
+[NSGs]: ../../virtual-network/network-security-groups-overview.md
 [ConfigureASEv1]: app-service-web-configure-an-app-service-environment.md
 [ASEv1Intro]: app-service-app-service-environment-intro.md
 [webapps]: ../overview.md
-[mobileapps]: ../../app-service-mobile/app-service-mobile-value-prop.md
+[mobileapps]: /previous-versions/azure/app-service-mobile/app-service-mobile-value-prop
 [Functions]: ../../azure-functions/index.yml
 [Pricing]: https://azure.microsoft.com/pricing/details/app-service/
 [ARMOverview]: ../../azure-resource-manager/management/overview.md
 [ConfigureSSL]: ../configure-ssl-certificate.md
 [Kudu]: https://azure.microsoft.com/resources/videos/super-secret-kudu-debug-console-for-azure-web-sites/
 [ASEWAF]: app-service-app-service-environment-web-application-firewall.md
-[AppGW]: ../../application-gateway/application-gateway-web-application-firewall-overview.md
+[AppGW]: ../../web-application-firewall/ag/ag-overview.md
 [customdomain]: ../app-service-web-tutorial-custom-domain.md
-[linuxapp]: ../containers/app-service-linux-intro.md
+[linuxapp]: ../overview.md#app-service-on-linux

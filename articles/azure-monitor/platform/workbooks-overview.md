@@ -1,23 +1,25 @@
 ---
 title: Vue d’ensemble des classeurs Azure Monitor
-description: Créer des rapports complexes en toute simplicité grâce à des classeurs paramétrables prédéfinis et personnalisés
-author: mrbullwinkle
+description: Découvrez comment les classeurs fournissent un canevas flexible pour l’analyse des données et la création de rapports visuels enrichis au sein du portail Azure.
 manager: carmonm
 services: azure-monitor
 ms.tgt_pltfrm: ibiza
 ms.topic: conceptual
-ms.date: 10/23/2019
-ms.author: mbullwin
-ms.openlocfilehash: 29e675f3ae35df9211f58d45ad8450566d67a588
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 07/23/2020
+ms.openlocfilehash: 5dd553f0a41f82991c467ab256a87beabbff25ee
+ms.sourcegitcommit: dbe434f45f9d0f9d298076bf8c08672ceca416c6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77658232"
+ms.lasthandoff: 10/17/2020
+ms.locfileid: "92143639"
 ---
 # <a name="azure-monitor-workbooks"></a>Classeurs Azure Monitor
 
 Les classeurs fournissent un canevas flexible pour l’analyse des données et la création de rapports visuels enrichis au sein du portail Azure. Ils vous permettent d’exploiter plusieurs sources de données à travers l’écosystème Azure et de les combiner dans des expériences interactives unifiées. 
+
+Voici une procédure vidéo expliquant la création de classeurs.
+
+> [!VIDEO https://www.microsoft.com/en-us/videoplayer/embed/RE4B4Ap]
 
 ## <a name="data-sources"></a>Sources de données
 
@@ -31,20 +33,21 @@ Les classeurs sont actuellement compatibles avec les sources de données suivant
 * [Métriques](workbooks-data-sources.md#metrics)
 * [Azure Resource Graph](workbooks-data-sources.md#azure-resource-graph)
 * [Alertes (préversion)](workbooks-data-sources.md#alerts-preview)
-* [Intégrité de la charge de travail (préversion)](workbooks-data-sources.md#workload-health-preview)
-* [Azure Resource Health (préversion)](workbooks-data-sources.md#azure-resource-health)
-* [Azure Data Explorer (préversion)](workbooks-data-sources.md#azure-data-explorer-preview)
+* [Intégrité de la charge de travail](workbooks-data-sources.md#workload-health)
+* [Azure Resource Health](workbooks-data-sources.md#azure-resource-health)
+* [Explorateur de données Azure](workbooks-data-sources.md#azure-data-explorer)
 
 ## <a name="visualizations"></a>Visualisations
 
 Les classeurs fournissent un ensemble complet de fonctionnalités pour la visualisation de vos données. Pour obtenir des exemples détaillés de chaque type de visualisation, vous pouvez consulter les exemples de liens ci-dessous :
 
-* [Text](workbooks-visualizations.md#text)
-* [Graphiques](workbooks-visualizations.md#charts)
-* [Grilles](workbooks-visualizations.md#grids)
-* [Vignettes](workbooks-visualizations.md#tiles)
-* [Arborescences](workbooks-visualizations.md#trees)
-* [Graphes](workbooks-visualizations.md#graphs)
+* [Text](workbooks-text-visualizations.md)
+* [Graphiques](workbooks-chart-visualizations.md)
+* [Grilles](workbooks-grid-visualizations.md)
+* [Vignettes](workbooks-tile-visualizations.md)
+* [Arborescences](workbooks-tree-visualizations.md)
+* [Graphes](workbooks-graph-visualizations.md)
+* [Barre composite](workbooks-composite-bar.md)
 
 ![Exemples de visualisations de classeur](./media/workbooks-overview/visualizations.png)
 
@@ -52,9 +55,9 @@ Les classeurs fournissent un ensemble complet de fonctionnalités pour la visual
 
 Pour explorer l’expérience des classeurs, accédez d’abord au service Azure Monitor. Pour ce faire, vous pouvez saisir **Monitor** dans la zone de recherche du portail Azure.
 
-Sélectionnez ensuite **Classeurs (préversion)** .
+Sélectionnez ensuite **Classeurs**.
 
-![Capture d’écran du bouton Aperçu des classeurs mis en surbrillance dans une zone rouge](./media/workbooks-overview/workbooks-preview.png)
+![Capture d’écran du bouton Classeurs mis en surbrillance dans une zone rouge](./media/workbooks-overview/workbooks.png)
 
 ### <a name="gallery"></a>Galerie
 
@@ -82,9 +85,9 @@ Dans le cas de ce classeur particulier, l’expérience est interactive. Vous po
 
 ### <a name="editing-mode"></a>Mode édition
 
-Pour comprendre comment ce modèle de classeur est assemblé, vous devez basculer en mode édition en sélectionnant **Modifier**. 
+Pour comprendre comment ce modèle de classeur est assemblé, vous devez basculer en mode édition en sélectionnant **Modifier**.
 
-![Capture d’écran du modèle d’analyse d’échec de l’application](./media/workbooks-overview/edit.png)
+![Capture d’écran du bouton Modifier dans les classeurs.](./media/workbooks-overview/edit.png)
 
 Une fois que vous êtes passé en mode édition, vous remarquerez un certain nombre de zones **Modifier** à de chaque aspect individuel de votre classeur.
 
@@ -94,7 +97,7 @@ Si vous sélectionnez le bouton modifier se trouvant immédiatement sous la gril
 
 ![Capture d’écran de la requête Kusto sous-jacente](./media/workbooks-overview/kusto.png)
 
-En cliquant sur les autres boutons **Modifier** sur la droite, vous pouvez afficher un certain nombre de composants principaux qui composent les classeurs, comme des [zones de texte](workbooks-visualizations.md#text) des éléments d’interface utilisateur pour la [sélection de paramètres](workbooks-parameters.md) et d’autres [types de graphiques ou de visualisations](workbooks-visualizations.md). 
+En cliquant sur les autres boutons **Modifier** sur la droite, vous pouvez afficher un certain nombre de composants principaux qui composent les classeurs, comme des [zones de texte](workbooks-text-visualizations.md) des éléments d’interface utilisateur pour la [sélection de paramètres](workbooks-parameters.md) et d’autres [types de graphiques ou de visualisations](#visualizations). 
 
 Explorez les modèles prédéfinis en mode édition, puis modifiez-les en fonction de vos besoins et enregistrez votre propre classeur personnalisé pour commencer à découvrir ce qui est possible avec les classeurs Azure Monitor.
 
@@ -126,5 +129,5 @@ Une fois que vous avez commencé à créer vos propres modèles de classeur, vou
 
 ## <a name="next-step"></a>Étape suivante
 
-* [Commencez](workbooks-visualizations.md) à en apprendre davantage sur les nombreuses options pour les visualisations enrichies des classeurs.
+* [Commencez](#visualizations) à en apprendre davantage sur les nombreuses options pour les visualisations enrichies des classeurs.
 * [Contrôlez](workbooks-access-control.md) et partagez l’accès à vos ressources de classeur.

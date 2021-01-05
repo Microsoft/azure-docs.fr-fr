@@ -1,25 +1,14 @@
 ---
 title: Guide du protocole de connexions hybrides Azure Relay | Microsoft Docs
 description: Cet article décrit les interactions côté client avec le relais Connexions hybrides pour la connexion de clients ayant le rôle d’expéditeur ou d’écouteur.
-services: service-bus-relay
-documentationcenter: na
-author: clemensv
-manager: timlt
-editor: ''
-ms.assetid: 149f980c-3702-4805-8069-5321275bc3e8
-ms.service: service-bus-relay
-ms.devlang: na
 ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: na
-ms.date: 01/21/2020
-ms.author: clemensv
-ms.openlocfilehash: 68668452152064584d1c419a3053ccb642b103f8
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.date: 06/23/2020
+ms.openlocfilehash: 8a812aa401077b81934d89ada99cf1dc312d8dbc
+ms.sourcegitcommit: 21c3363797fb4d008fbd54f25ea0d6b24f88af9c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83204580"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96862324"
 ---
 # <a name="azure-relay-hybrid-connections-protocol"></a>Protocole de connexions hybrides Azure Relay
 
@@ -66,8 +55,7 @@ Les informations encodées sont valides uniquement pendant une courte durée, co
 
 Outre les connexions WebSocket, l’écouteur peut recevoir des trames de requêtes HTTP de la part d’un expéditeur, si cette fonctionnalité est explicitement activée sur la connexion hybride.
 
-Les écouteurs qui se joignent aux connexions hybrides prenant en charge HTTP DOIVENT gérer l’opération `request`. Un écouteur ne prenant pas en charge l’opération `request` et occasionnant par conséquent des erreurs répétées de dépassement de délai de connexion RISQUE par la suite d’être placé en liste rouge
- par le service.
+Les écouteurs qui se joignent aux connexions hybrides prenant en charge HTTP DOIVENT gérer l’opération `request`. Un écouteur ne prenant pas en charge l’opération `request` et occasionnant par conséquent des erreurs répétées de dépassement de délai de connexion RISQUE par la suite d’être bloqué par le service.
 
 Les métadonnées d’en-tête de trame HTTP sont converties au format JSON pour en faciliter le traitement par l’infrastructure d’écouteur, et également parce que les bibliothèques d’analyse d’en-tête HTTP sont plus rares que les analyseurs JSON. Les métadonnées HTTP qui s’appliquent uniquement à la relation entre l’expéditeur et la passerelle HTTP de relais, y compris les informations d’autorisation, ne sont pas transférées. Le corps des requêtes HTTP est transféré de manière transparente sous la forme d’une trame WebSocket binaire.
 
@@ -338,7 +326,7 @@ Le contenu JSON pour `request` est le suivant :
 
 ##### <a name="responding-to-requests"></a>Réponse aux requêtes
 
-Le destinataire DOIT répondre. Des échecs répétés des réponses aux requêtes pendant que la connexion est maintenue peuvent entraîner la mise en liste rouge de l’écouteur.
+Le destinataire DOIT répondre. Des échecs répétés des réponses aux requêtes pendant que la connexion est maintenue peuvent entraîner le blocage de l’écouteur.
 
 Les réponses peuvent être envoyées dans n’importe quel ordre, mais chaque requête doit obtenir une réponse dans les 60 secondes, sans quoi la remise sera considérée comme ayant échoué. Le délai de 60 secondes est pris en compte jusqu’à ce que la trame `response` ait été reçue par le service. Une réponse en cours avec plusieurs trames binaires ne peut pas rester inactive pendant plus de 60 secondes ; dans le cas contraire, elle est interrompue.
 
@@ -426,7 +414,7 @@ Le protocole de l’expéditeur est identique au mode d’établissement d’un 
 L’objectif est une transparence maximale pour le WebSocket de bout en bout. L’adresse de connexion est la même que pour l’écouteur, mais « l’action » diffère et le jeton a besoin d’une autorisation différente :
 
 ```
-wss://{namespace-address}/$hc/{path}?sb-hc-action=...&sb-hc-id=...&sbc-hc-token=...
+wss://{namespace-address}/$hc/{path}?sb-hc-action=...&sb-hc-id=...&sb-hc-token=...
 ```
 
 _namespace-address_ est le nom de domaine complet de l’espace de noms Azure Relay qui héberge la connexion hybride, généralement de la forme `{myname}.servicebus.windows.net`.
@@ -445,7 +433,7 @@ Voici les options de paramètres des chaînes de requête :
  Le `{path}` est le chemin d’accès de l’espace de noms encodé au format URL de la connexion hybride préconfigurée sur laquelle cet écouteur doit être inscrit. L’expression `path` peut être étendue par un suffixe ou une expression de chaîne de requête pour prolonger la communication. Si la connexion hybride est enregistrée sous le chemin `hyco`, l’expression `path` peut être `hyco/suffix?param=value&...`, suivi des paramètres de chaîne de requête définis ici. Ainsi, l’expression complète peut être celle-ci :
 
 ```
-wss://{namespace-address}/$hc/hyco/suffix?param=value&sb-hc-action=...[&sb-hc-id=...&]sbc-hc-token=...
+wss://{namespace-address}/$hc/hyco/suffix?param=value&sb-hc-action=...[&sb-hc-id=...&]sb-hc-token=...
 ```
 
 L’expression `path` est transmise à l’écouteur dans l’URI d’adresse contenu dans le message de contrôle « accept ».
@@ -474,12 +462,12 @@ Le protocole de requête HTTP autorise les requêtes HTTP arbitraires, à l’ex
 Les requêtes HTTP pointent vers l’adresse d’exécution régulière de l’entité, sans l’infixe $hc qui est utilisé pour les clients WebSocket des connexions hybrides.
 
 ```
-https://{namespace-address}/{path}?sbc-hc-token=...
+https://{namespace-address}/{path}?sb-hc-token=...
 ```
 
 _namespace-address_ est le nom de domaine complet de l’espace de noms Azure Relay qui héberge la connexion hybride, généralement de la forme `{myname}.servicebus.windows.net`.
 
-La demande peut contenir des en-têtes HTTP arbitraires supplémentaires, notamment ceux définis par l’application. Tous les en-têtes fournis, à l’exception de ceux directement définis dans RFC7230 (voir la section relative au [message de requête](#Request message)) sont transmis à l’écouteur et se trouvent sur l’objet `requestHeader` du message de **requête**.
+La demande peut contenir des en-têtes HTTP arbitraires supplémentaires, notamment ceux définis par l’application. Tous les en-têtes fournis, à l’exception de ceux directement définis dans RFC7230 (voir la section relative au [message de requête](#request-message)) sont transmis à l’écouteur et se trouvent sur l’objet `requestHeader` du message de **requête**.
 
 Voici les options de paramètres des chaînes de requête :
 

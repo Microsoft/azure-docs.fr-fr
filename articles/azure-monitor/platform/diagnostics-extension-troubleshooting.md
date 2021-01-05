@@ -6,12 +6,12 @@ ms.topic: conceptual
 author: bwren
 ms.author: bwren
 ms.date: 05/08/2019
-ms.openlocfilehash: 043369bd6112c4cac36539bbd764393d889439c0
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: de42a70cf2950aca3dbe151407671306c793ed10
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79234269"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86515493"
 ---
 # <a name="azure-diagnostics-troubleshooting"></a>Résolution des problèmes de diagnostics Azure
 Cet article contient des informations de dépannage pour Diagnostics Azure. Pour plus d’informations sur les diagnostics Microsoft Azure, voir [Vue d’ensemble des diagnostics Azure](diagnostics-extension-overview.md).
@@ -50,7 +50,7 @@ Voici les chemins d’accès de quelques journaux d’activité et artefacts imp
 | **Fichier journal MonAgentHost** | C:\WindowsAzure\Logs\Plugins\Microsoft.Azure.Diagnostics.IaaSDiagnostics\<DiagnosticsVersion>\WAD0107\Configuration\MonAgentHost.<seq_num>.log |
 
 ## <a name="metric-data-doesnt-appear-in-the-azure-portal"></a>Les données métriques ne s’affichent pas dans le portail Azure
-Diagnostics Azure fournit des données métriques qu’il est possible d’afficher dans le portail Azure. Si vous rencontrez des problèmes liés à l’affichage de ces données dans le portail, consultez la table WADMetrics\* dans le compte de stockage de Diagnostics Azure pour voir si les enregistrements de métriques correspondants sont bien présents et vous assurer que le [fournisseur de ressources](https://docs.microsoft.com/azure/azure-resource-manager/resource-manager-supported-services) Microsoft.Insights est inscrit.
+Diagnostics Azure fournit des données métriques qu’il est possible d’afficher dans le portail Azure. Si vous rencontrez des problèmes liés à l’affichage de ces données dans le portail, consultez la table WADMetrics\* dans le compte de stockage de Diagnostics Azure pour voir si les enregistrements de métriques correspondants sont bien présents et vous assurer que le [fournisseur de ressources](../../azure-resource-manager/management/resource-providers-and-types.md) Microsoft.Insights est inscrit.
 
 Ici, la valeur **PartitionKey** de la table correspond à l’ID de ressource, à la machine virtuelle ou à un groupe de machines virtuelles identiques. La valeur **RowKey** correspond au nom de la métrique (également appelé nom du compteur de performances).
 
@@ -297,4 +297,3 @@ Par défaut, le portail des machines virtuelles affiche certains compteurs de pe
 - Les noms de compteur des données disponibles dans le stockage sont en anglais. Si les noms de compteur ne sont pas en anglais, ils n’apparaîtront pas dans le graphique des métriques du portail. **Atténuation** : modifiez la langue de la machine pour la définir sur l’anglais pour les comptes système. Pour ce faire, sélectionnez **Panneau de configuration** > **Région** > **Administrative** > **Copier les paramètres**. Ensuite, désactivez l’option **Écran d’accueil et comptes système** afin que la langue personnalisée ne soit pas appliquée au compte système.
 
 - Si vous utilisez des caractères génériques (\*) dans les noms de compteur de performances, le portail ne peut pas établir de corrélation entre le compteur configuré et le compteur collecté lors de l’envoi des compteurs de performances vers le récepteur du Stockage Azure. **Atténuation** : pour pouvoir utiliser des caractères génériques et permettre au portail de développer (\*), dirigez vos compteurs de performances vers le récepteur Azure Monitor.
-

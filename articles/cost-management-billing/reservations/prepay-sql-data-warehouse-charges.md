@@ -4,15 +4,16 @@ description: Découvrez comment réduire les coûts d’Azure Synapse Analytics 
 author: yashesvi
 ms.reviewer: yashar
 ms.service: cost-management-billing
-ms.topic: conceptual
-ms.date: 04/30/2020
+ms.subservice: reservations
+ms.topic: how-to
+ms.date: 07/24/2020
 ms.author: banders
-ms.openlocfilehash: 3706493f0132cd4cc57af589e0d2935c31d6657e
-ms.sourcegitcommit: 1895459d1c8a592f03326fcb037007b86e2fd22f
+ms.openlocfilehash: b82f4252754e79813629e0c792ee0ba35e437714
+ms.sourcegitcommit: dbe434f45f9d0f9d298076bf8c08672ceca416c6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82629148"
+ms.lasthandoff: 10/17/2020
+ms.locfileid: "92151524"
 ---
 # <a name="save-costs-for-azure-synapse-analytics-charges-with-reserved-capacity"></a>Réduire les coûts d’Azure Synapse Analytics avec une capacité de réserve
 
@@ -26,7 +27,7 @@ Quand la capacité de réserve arrive à expiration, les instances Azure Synapse
 
 Pour plus d’informations sur les tarifs, consultez l’[offre de capacité de réserve Azure Synapse Analytics](https://azure.microsoft.com/pricing/details/synapse-analytics/).
 
-Vous pouvez acheter une capacité de réserve Azure Synapse Analytics sur le [portail Azure](https://portal.azure.com/#blade/Microsoft_Azure_Reservations/ReservationsBrowseBlade). Payez la réservation [à l’avance ou par paiements mensuels](monthly-payments-reservations.md). Pour acheter une capacité réservée :
+Vous pouvez acheter une capacité de réserve Azure Synapse Analytics sur le [portail Azure](https://portal.azure.com/#blade/Microsoft_Azure_Reservations/ReservationsBrowseBlade). Payez la réservation [à l’avance ou par paiements mensuels](./prepare-buy-reservation.md). Pour acheter une capacité réservée :
 
 - Vous devez avoir le rôle propriétaire pour au moins un abonnement Entreprise ou avec paiement à l’utilisation.
 - Pour les abonnements Entreprise, l’option **Ajouter des instances réservées** doit être activée sur le [portail EA](https://ea.azure.com/). Si le paramètre est désactivé, vous devez être un administrateur EA.

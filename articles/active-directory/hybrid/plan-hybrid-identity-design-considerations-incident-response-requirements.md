@@ -17,15 +17,15 @@ ms.subservice: hybrid
 ms.author: billmath
 ms.custom: seohack1
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 52b5e37c29e4b3df3f171f683266b5d0a3e0c95d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 8c68be4e46693621f77cb25dd8f34f8e0b7d75dd
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "67109273"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89278409"
 ---
 # <a name="determine-incident-response-requirements-for-your-hybrid-identity-solution"></a>Déterminer les exigences de réponse aux incidents pour votre solution d'identité hybride
-Les organisations de taille moyenne ou grande auront probablement mis en place une [réponse aux incidents de sécurité](https://technet.microsoft.com/library/cc700825.aspx) pour aider les services informatiques à agir en fonction du niveau de l'incident. Le système de gestion des identités est un composant important du processus de réponse aux incidents. Il peut en effet être utilisé pour aider à identifier l'auteur d’une action spécifique dirigée contre la cible. La solution d'identité hybride doit être en mesure de fournir des capacités de surveillance et de création de rapports pouvant être exploitées par les services informatiques pour prendre des mesures permettant d'identifier et d'atténuer la menace. Un plan de réponse aux incidents typique devra comprendre les phases suivantes :
+Les organisations de taille moyenne ou grande auront probablement mis en place une [réponse aux incidents de sécurité](/previous-versions/tn-archive/cc700825(v=technet.10)) pour aider les services informatiques à agir en fonction du niveau de l'incident. Le système de gestion des identités est un composant important du processus de réponse aux incidents. Il peut en effet être utilisé pour aider à identifier l'auteur d’une action spécifique dirigée contre la cible. La solution d'identité hybride doit être en mesure de fournir des capacités de surveillance et de création de rapports pouvant être exploitées par les services informatiques pour prendre des mesures permettant d'identifier et d'atténuer la menace. Un plan de réponse aux incidents typique devra comprendre les phases suivantes :
 
 1. Évaluation initiale.
 2. Communication de l'incident.
@@ -69,4 +69,3 @@ Pendant la phase de réduction des risques et de contrôle des dommages, il est 
 
 ## <a name="see-also"></a>Voir aussi
 [Présentation des considérations relatives à la conception](plan-hybrid-identity-design-considerations-overview.md)
-

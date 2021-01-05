@@ -2,13 +2,13 @@
 title: Guide pratique pour la gestion de l’agent Azure Monitor pour conteneurs | Microsoft Docs
 description: Cet article décrit la gestion des tâches de maintenance les plus courantes avec l’agent en conteneur Log Analytics utilisé par Azure Monitor pour conteneurs.
 ms.topic: conceptual
-ms.date: 01/24/2020
-ms.openlocfilehash: 1a1f8d690979a846dbf5041999180221752acc0b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 07/21/2020
+ms.openlocfilehash: b656b0cc89e40dd732def4ebf56dceae69a033b0
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79234497"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91618435"
 ---
 # <a name="how-to-manage-the-azure-monitor-for-containers-agent"></a>Guide pratique pour la gestion de l’agent Azure Monitor pour conteneurs
 
@@ -16,13 +16,13 @@ Azure Monitor pour conteneurs utilise une version en conteneur de l’agent Log 
 
 ## <a name="how-to-upgrade-the-azure-monitor-for-containers-agent"></a>Comment mettre à niveau l’agent Azure Monitor pour conteneurs
 
-Azure Monitor pour conteneurs utilise une version en conteneur de l’agent Log Analytics pour Linux. Lorsqu'une nouvelle version de l’agent est disponible, celui-ci est automatiquement mis à niveau sur vos clusters Kubernetes managés sur Azure Kubernetes Service (AKS) et Azure Red Hat OpenShift. Pour un [cluster Kubernetes hybride](container-insights-hybrid-setup.md), l’agent n’est pas managé et vous devez le mettre à niveau manuellement.
+Azure Monitor pour conteneurs utilise une version en conteneur de l’agent Log Analytics pour Linux. Lorsqu’une nouvelle version de l’agent est disponible, celui-ci est automatiquement mis à niveau sur vos clusters Kubernetes managés sur Azure Kubernetes Service (AKS) et Azure Red Hat OpenShift version 3.x. Pour un [cluster Kubernetes hybride](container-insights-hybrid-setup.md) et Azure Red Hat OpenShift version 4.x, l’agent n’est pas managé et vous devez le mettre à niveau manuellement.
 
-Si la mise à niveau de l’agent sur un cluster managé sur AKS échoue, cet article décrit également le processus permettant de mettre à niveau l’agent manuellement. Pour suivre les versions publiées, consultez [Annonces des versions de l’agent](https://github.com/microsoft/docker-provider/tree/ci_feature_prod).
+Si la mise à niveau de l’agent échoue pour un cluster hébergé sur AKS ou Azure Red Hat OpenShift version 3.x, cet article décrit également le processus permettant de mettre à niveau l’agent manuellement. Pour suivre les versions publiées, consultez [Annonces des versions de l’agent](https://github.com/microsoft/docker-provider/tree/ci_feature_prod).
 
-### <a name="upgrade-agent-on-monitored-kubernetes-cluster"></a>Mettre à niveau l’agent sur un cluster Kubernetes surveillé
+### <a name="upgrade-agent-on-aks-cluster"></a>Mettre à niveau l’agent sur un cluster AKS
 
-Le processus de mise à niveau de l’agent sur les clusters autres qu’Azure Red Hat OpenShift comprend deux étapes simples. La première étape consiste à désactiver la surveillance avec Azure Monitor pour conteneurs à l’aide de l'interface de ligne de commande Azure. Suivez les étapes décrites dans l'article [Désactiver la surveillance](container-insights-optout.md?#azure-cli). L'interface de ligne de commande Azure permet de supprimer l’agent des nœuds du cluster, sans incidence sur la solution et les données correspondantes stockées dans l’espace de travail. 
+Le processus de mise à niveau de l’agent sur des clusters AKS se compose de deux étapes simples. La première étape consiste à désactiver la surveillance avec Azure Monitor pour conteneurs à l’aide de l'interface de ligne de commande Azure. Suivez les étapes décrites dans l'article [Désactiver la surveillance](container-insights-optout.md?#azure-cli). L'interface de ligne de commande Azure permet de supprimer l’agent des nœuds du cluster, sans incidence sur la solution et les données correspondantes stockées dans l’espace de travail. 
 
 >[!NOTE]
 >Lors de cette activité de maintenance, les nœuds du cluster ne transfèrent pas les données collectées et les vues de performances n'affichent pas les données entre le moment où vous supprimez l'agent et celui où vous installez la nouvelle version. 
@@ -30,51 +30,70 @@ Le processus de mise à niveau de l’agent sur les clusters autres qu’Azure R
 
 Afin d’installer la nouvelle version de l’agent, suivez les étapes décrites dans l’article [Activer la surveillance de l’intégration à l’aide de l’interface de ligne de commande Azure](container-insights-enable-new-cluster.md#enable-using-azure-cli) pour terminer ce processus.  
 
-Après l’activation de la surveillance, un délai d’environ 15 minutes peut être nécessaire pour afficher les métriques d’intégrité mises à jour pour le cluster. Pour vérifier que l’agent a bien été mis à niveau, exécutez la commande : `kubectl logs omsagent-484hw --namespace=kube-system`
+Après l’activation de la surveillance, un délai d’environ 15 minutes peut être nécessaire pour afficher les métriques d’intégrité mises à jour pour le cluster. Pour vérifier que l’agent a bien été mis à niveau, vous pouvez soit :
 
-L’état doit ressembler à l’exemple suivant, où la valeur *omi* et *omsagent* doit correspondre à la dernière version spécifiée dans [l’historique des versions de l’agent](https://github.com/microsoft/docker-provider/tree/ci_feature_prod).  
+* Exécuter la commande : `kubectl get pod <omsagent-pod-name> -n kube-system -o=jsonpath='{.spec.containers[0].image}'`. Dans l’état renvoyé, notez la valeur sous **Image** pour omsagent, dans la section *Containers* de la sortie.
+* Sous l’onglet **Nœuds**, sélectionnez le nœud de cluster, puis, dans le volet **Propriétés** à droite, notez la valeur sous **Balise d’image de l’agent**.
 
-    User@aksuser:~$ kubectl logs omsagent-484hw --namespace=kube-system
-    :
-    :
-    instance of Container_HostInventory
-    {
-        [Key] InstanceID=3a4407a5-d840-4c59-b2f0-8d42e07298c2
-        Computer=aks-nodepool1-39773055-0
-        DockerVersion=1.13.1
-        OperatingSystem=Ubuntu 16.04.3 LTS
-        Volume=local
-        Network=bridge host macvlan null overlay
-        NodeRole=Not Orchestrated
-        OrchestratorType=Kubernetes
-    }
-    Primary Workspace: b438b4f6-912a-46d5-9cb1-b44069212abc    Status: Onboarded(OMSAgent Running)
-    omi 1.4.2.5
-    omsagent 1.6.0-163
-    docker-cimprov 1.0.0.31
+La version de l’agent indiquée doit correspondre à la version la plus récente répertoriée sur la page [Historique de version](https://github.com/microsoft/docker-provider/tree/ci_feature_prod).
 
-## <a name="upgrade-agent-on-hybrid-kubernetes-cluster"></a>Mettre à niveau l’agent sur un cluster Kubernetes hybride
+### <a name="upgrade-agent-on-hybrid-kubernetes-cluster"></a>Mettre à niveau l’agent sur un cluster Kubernetes hybride
 
-Le processus permettant de mettre à niveau l’agent sur un cluster Kubernetes managé localement, sur le moteur AKS sur Azure et sur Azure Stack peut être effectué en exécutant la commande suivante :
+Procédez comme suit pour mettre à niveau l’agent sur un cluster Kubernetes s’exécutant sur :
 
-```
+* Des clusters Kubernetes automanagés hébergés sur Azure à l’aide du moteur AKS.
+* Des clusters Kubernetes automanagés hébergés sur Azure Stack ou localement à l’aide du moteur AKS.
+* Red Hat OpenShift version 4.x.
+
+Si l’espace de travail Log Analytics se trouve dans un cloud commercial Azure, exécutez la commande suivante :
+
+```console
 $ helm upgrade --name myrelease-1 \
 --set omsagent.secret.wsid=<your_workspace_id>,omsagent.secret.key=<your_workspace_key>,omsagent.env.clusterName=<my_prod_cluster> incubator/azuremonitor-containers
 ```
 
-Si l’espace de travail Log Analytics se trouve dans Azure Chine, exécutez la commande suivante :
+Si l’espace de travail Log Analytics se trouve dans Azure China 21Vianet, exécutez la commande suivante :
 
-```
+```console
 $ helm upgrade --name myrelease-1 \
 --set omsagent.domain=opinsights.azure.cn,omsagent.secret.wsid=<your_workspace_id>,omsagent.secret.key=<your_workspace_key>,omsagent.env.clusterName=<your_cluster_name> incubator/azuremonitor-containers
 ```
 
 Si l’espace de travail Log Analytics se trouve dans Azure US Government, exécutez la commande suivante :
 
-```
+```console
 $ helm upgrade --name myrelease-1 \
 --set omsagent.domain=opinsights.azure.us,omsagent.secret.wsid=<your_workspace_id>,omsagent.secret.key=<your_workspace_key>,omsagent.env.clusterName=<your_cluster_name> incubator/azuremonitor-containers
 ```
+
+### <a name="upgrade-agent-on-azure-red-hat-openshift-v4"></a>Mettre à niveau l’agent sur Azure Red Hat OpenShift v4
+
+Procédez comme suit pour mettre à niveau l’agent sur un cluster Kubernetes s’exécutant sur Azure Red Hat OpenShift version 4.x. 
+
+>[!NOTE]
+>Azure Red Hat OpenShift version 4.x prend uniquement en charge l’exécution dans le cloud commercial Azure.
+>
+
+```console
+curl -o upgrade-monitoring.sh -L https://aka.ms/upgrade-monitoring-bash-script
+export azureAroV4ClusterResourceId="/subscriptions/<subscriptionId>/resourceGroups/<resourceGroupName>/providers/Microsoft.RedHatOpenShift/OpenShiftClusters/<clusterName>"
+bash upgrade-monitoring.sh --resource-id $ azureAroV4ClusterResourceId
+```
+
+Pour plus d'informations sur l'utilisation d'un principal de service avec cette commande, consultez la section **Utilisation du principal de service** de l'article [Activer la supervision d'un cluster Kubernetes avec Azure Arc](container-insights-enable-arc-enabled-clusters.md#enable-using-bash-script).
+
+### <a name="upgrade-agent-on-azure-arc-enabled-kubernetes"></a>Mettre à niveau un agent sur Azure Arc pour Kubernetes
+
+Exécutez la commande suivante pour procéder à la mise à niveau de l'agent sur un cluster Kubernetes avec Azure Arc.
+
+```console
+curl -o upgrade-monitoring.sh -L https://aka.ms/upgrade-monitoring-bash-script
+export azureArcClusterResourceId="/subscriptions/<subscriptionId>/resourceGroups/<resourceGroupName>/providers/Microsoft.Kubernetes/connectedClusters/<clusterName>"
+bash upgrade-monitoring.sh --resource-id $azureArcClusterResourceId
+```
+
+Pour plus d'informations sur l'utilisation d'un principal de service avec cette commande, consultez la section **Utilisation du principal de service** de l'article [Activer la supervision d'un cluster Kubernetes avec Azure Arc](container-insights-enable-arc-enabled-clusters.md#enable-using-bash-script).
+
 
 ## <a name="how-to-disable-environment-variable-collection-on-a-container"></a>Comment désactiver la collecte des variables d’environnement sur un conteneur
 
@@ -82,14 +101,14 @@ Azure Monitor pour conteneurs collecte des variables d’environnement à partir
 
 Pour désactiver la collecte des variables d’environnement sur un nouveau conteneur ou sur un conteneur existant, définissez la variable **AZMON_COLLECT_ENV** avec la valeur **False** dans votre fichier de configuration yaml pour le déploiement de Kubernetes. 
 
-```  
+```yaml
 - name: AZMON_COLLECT_ENV  
   value: "False"  
-```  
+```
 
 Pour appliquer la modification aux clusters Kubernetes autres qu’Azure Red Hat OpenShift, exécutez cette commande : `kubectl apply -f  <path to yaml file>`. Pour modifier ConfigMap et appliquer cette modification aux clusters Azure Red Hat OpenShift, exécutez la commande suivante :
 
-``` bash
+```bash
 oc edit configmaps container-azm-ms-agentconfig -n openshift-azure-logging
 ```
 
@@ -99,7 +118,7 @@ Pour vérifier que le changement de configuration est effectif, sélectionnez un
 
 Pour réactiver la découverte des variables d’environnement, suivez le même processus et remplacez la valeur **False** par **True**, avant de réexécuter la commande `kubectl` pour mettre à jour le conteneur.  
 
-```  
+```yaml
 - name: AZMON_COLLECT_ENV  
   value: "True"  
 ```  

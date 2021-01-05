@@ -4,21 +4,22 @@ ms.service: cognitive-services
 ms.topic: include
 ms.date: 04/04/2020
 ms.author: travisw
-ms.openlocfilehash: 62c317843c275531286eeb2ae616d79ad76c6f99
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.custom: devx-track-csharp
+ms.openlocfilehash: ea7ea08fc07a895bc038b27701d7038a5f76c26f
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80671663"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96187601"
 ---
 ## <a name="prerequisites"></a>Prérequis
 
 Avant de commencer, assurez-vous de :
 
 > [!div class="checklist"]
-> * [Créer une ressource Azure Speech](~/articles/cognitive-services/speech-service/get-started.md)
+> * [Créer une ressource Azure Speech](../../../../overview.md#try-the-speech-service-for-free)
 > * [Configurer votre environnement de développement et créer un projet vide](~/articles/cognitive-services/speech-service/quickstarts/setup-platform.md?tabs=uwp&pivots=programming-language-csharp)
-> * Créer un bot connecté au [canal Direct Line Speech](https://docs.microsoft.com/azure/bot-service/bot-service-channel-connect-directlinespeech)
+> * Créer un bot connecté au [canal Direct Line Speech](/azure/bot-service/bot-service-channel-connect-directlinespeech)
 > * Veiller à avoir accès à un microphone pour la capture audio
 > 
   > [!NOTE]
@@ -263,12 +264,12 @@ Le mode Création est mis à jour pour afficher l’interface utilisateur de l�
 
     ```csharp
     // Create a BotFrameworkConfig by providing a Speech service subscription key
-    // the RecoLanguage property is optional (default en-US)
+    // the botConfig.Language property is optional (default en-US)
     const string speechSubscriptionKey = "YourSpeechSubscriptionKey"; // Your subscription key
     const string region = "YourServiceRegion"; // Your subscription service region.
 
     var botConfig = BotFrameworkConfig.FromSubscription(speechSubscriptionKey, region);
-    botConfig.SetProperty(PropertyId.SpeechServiceConnection_RecoLanguage, "en-US");
+    botConfig.Language = "en-US";
     connector = new DialogServiceConnector(botConfig);
     ```
 
@@ -276,7 +277,7 @@ Le mode Création est mis à jour pour afficher l’interface utilisateur de l�
    > Reportez-vous à [la liste des régions prises en charge pour les assistants vocaux](~/articles/cognitive-services/speech-service/regions.md#voice-assistants) et vérifiez que vos ressources sont déployées dans une de ces régions.
 
    > [!NOTE]
-   > Pour plus d’informations sur la configuration de votre bot, consultez la documentation de Bot Framework relative au [canal Direct Line Speech](https://docs.microsoft.com/azure/bot-service/bot-service-channel-connect-directlinespeech).
+   > Pour plus d’informations sur la configuration de votre bot, consultez la documentation de Bot Framework relative au [canal Direct Line Speech](/azure/bot-service/bot-service-channel-connect-directlinespeech).
 
 1. Remplacez les chaînes `YourSpeechSubscriptionKey` et `YourServiceRegion` par vos propres valeurs pour votre abonnement Speech et votre [région](~/articles/cognitive-services/speech-service/regions.md).
 

@@ -8,19 +8,19 @@ manager: daveba
 ms.assetid: 05f16c3e-9d23-45dc-afca-3d0fa9dbf501
 ms.service: active-directory
 ms.workload: identity
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 02/26/2020
 ms.subservice: hybrid
 ms.author: billmath
 search.appverid:
 - MET150
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: c41b11ab65f5710d338ce0041579e1eb4678ec42
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 47d7d541ed7d9805641ffdfde381d482c8700006
+ms.sourcegitcommit: 21c3363797fb4d008fbd54f25ea0d6b24f88af9c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80331367"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96858737"
 ---
 # <a name="implement-password-hash-synchronization-with-azure-ad-connect-sync"></a>Implémenter la synchronisation de hachage de mot de passe avec la synchronisation Azure AD Connect
 Cet article vous fournit les informations nécessaires pour synchroniser vos mots de passe utilisateur à partir d’une instance Active Directory (AD) locale vers une instance Azure Active Directory (Azure AD) dans le cloud.
@@ -32,7 +32,7 @@ Pour synchroniser votre mot de passe, Azure AD Connect Sync extrait le hachage d
 
 Le flux de données réel du processus de synchronisation du hachage de mot de passe est similaire à celui de la synchronisation des données de l’utilisateur. Cependant, les mots de passe sont synchronisés plus fréquemment que la fenêtre de synchronisation d’annuaire standard pour d’autres attributs. Le processus de hachage de synchronisation de mot de passe s’exécute toutes les deux minutes. Vous ne pouvez pas modifier la fréquence de ce processus. Quand vous synchronisez un mot de passe, il remplace le mot de passe cloud existant.
 
-La première fois que vous activez la fonctionnalité de synchronisation de hachage de mot de passe, elle effectue une synchronisation initiale des mots de passe de tous les utilisateurs concernés. Vous ne pouvez pas définir explicitement un sous-ensemble de mots de passe utilisateur à synchroniser. Toutefois, s’il y a plusieurs connecteurs, il est possible de désactiver la synchronisation du hachage de mot de passe pour certains connecteurs, mais pas pour d’autres, à l’aide de l’applet de commande [Set-ADSyncAADPasswordSyncConfiguration](https://docs.microsoft.com/azure/active-directory-domain-services/active-directory-ds-getting-started-password-sync-synced-tenant).
+La première fois que vous activez la fonctionnalité de synchronisation de hachage de mot de passe, elle effectue une synchronisation initiale des mots de passe de tous les utilisateurs concernés. Vous ne pouvez pas définir explicitement un sous-ensemble de mots de passe utilisateur à synchroniser. Toutefois, s’il y a plusieurs connecteurs, il est possible de désactiver la synchronisation du hachage de mot de passe pour certains connecteurs, mais pas pour d’autres, à l’aide de l’applet de commande [Set-ADSyncAADPasswordSyncConfiguration](../../active-directory-domain-services/tutorial-configure-password-hash-sync.md).
 
 Lorsque vous modifiez un mot de passe local, le mot de passe mis à jour est synchronisé, plus souvent en quelques minutes.
 La fonctionnalité de synchronisation de hachage de mot de passe tente automatiquement d’effectuer à nouveau les tentatives de synchronisation ayant échoué. Si une erreur se produit lors d’une tentative de synchronisation de mot de passe, une erreur est enregistrée dans l’Observateur d’événements.
@@ -51,12 +51,12 @@ La section suivante explique en détail comment fonctionne la synchronisation du
 
 ![Flux de travail détaillé des mots de passe](./media/how-to-connect-password-hash-synchronization/arch3b.png)
 
-1. Toutes les deux minutes, l’agent de synchronisation du hachage de mot de passe qui se trouve sur le serveur AD Connect demande des hachages de mots de passe stockés (l’attribut unicodePwd) à un contrôleur de domaine.  Cette demande utilise le protocole de réplication [MS-DRSR](https://msdn.microsoft.com/library/cc228086.aspx) permettant de synchroniser les données entre les contrôleurs de domaine. Le compte de service doit disposer des autorisations Répliquer les changements d’annuaires et Répliquer les changements d’annuaire Tout d’Active Directory (accordées par défaut lors de l’installation) pour obtenir les hachages de mot de passe.
+1. Toutes les deux minutes, l’agent de synchronisation du hachage de mot de passe qui se trouve sur le serveur AD Connect demande des hachages de mots de passe stockés (l’attribut unicodePwd) à un contrôleur de domaine.  Cette demande utilise le protocole de réplication [MS-DRSR](/openspecs/windows_protocols/ms-drsr/f977faaa-673e-4f66-b9bf-48c640241d47) permettant de synchroniser les données entre les contrôleurs de domaine. Le compte de service doit disposer des autorisations Répliquer les changements d’annuaires et Répliquer les changements d’annuaire Tout d’Active Directory (accordées par défaut lors de l’installation) pour obtenir les hachages de mot de passe.
 2. Avant l’envoi, le contrôleur de domaine chiffre le hachage de mot de passe MD4 à l’aide d’une clé qui est un hachage [MD5](https://www.rfc-editor.org/rfc/rfc1321.txt) de la clé de session RPC et un salt. Il envoie ensuite le résultat à l’agent de synchronisation de hachage de mot de passe via RPC. Le contrôleur de domaine passe également le salt à l’agent de synchronisation à l’aide du protocole de réplication du contrôleur de domaine, pour que l’agent puisse déchiffrer l’enveloppe.
-3. Une fois que l’agent de synchronisation de hachage de mot de passe dispose de l’enveloppe chiffrée, il utilise [MD5CryptoServiceProvider](https://msdn.microsoft.com/library/System.Security.Cryptography.MD5CryptoServiceProvider.aspx) et le salt pour générer une clé afin de déchiffrer les données reçues dans leur format MD4 d’origine. L’agent de synchronisation du hachage de mot de passe n’a jamais accès au mot de passe en texte clair. L’utilisation de MD5 par l’agent de synchronisation de hachage de mot de passe est strictement destinée à assurer la compatibilité du protocole de réplication avec le contrôleur de domaine, et uniquement en local entre le contrôleur de domaine et l’agent de synchronisation de hachage de mot de passe.
+3. Une fois que l’agent de synchronisation de hachage de mot de passe dispose de l’enveloppe chiffrée, il utilise [MD5CryptoServiceProvider](/dotnet/api/system.security.cryptography.md5cryptoserviceprovider) et le salt pour générer une clé afin de déchiffrer les données reçues dans leur format MD4 d’origine. L’agent de synchronisation du hachage de mot de passe n’a jamais accès au mot de passe en texte clair. L’utilisation de MD5 par l’agent de synchronisation de hachage de mot de passe est strictement destinée à assurer la compatibilité du protocole de réplication avec le contrôleur de domaine, et uniquement en local entre le contrôleur de domaine et l’agent de synchronisation de hachage de mot de passe.
 4. L’agent de synchronisation de hachage de mot de passe étend le hachage de mot de passe binaire de 16 octets à 64 octets en convertissant d’abord le hachage en chaîne hexadécimale de 32 octets, puis en reconvertissant cette chaîne au format binaire avec l’encodage UTF-16.
 5. L’agent de synchronisation de hachage de mot de passe ajoute pour chaque utilisateur un salt de 10 octets de long au fichier binaire de 64 octets pour renforcer la protection du hachage d’origine.
-6. L’agent de synchronisation de hachage de mot de passe combine alors le hachage MD4 et le salt par utilisateur, puis place le tout dans la fonction [PBKDF2](https://www.ietf.org/rfc/rfc2898.txt). 1 000 itérations de l’algorithme de hachage à clé [HMAC-SHA256](https://msdn.microsoft.com/library/system.security.cryptography.hmacsha256.aspx) sont utilisées. 
+6. L’agent de synchronisation de hachage de mot de passe combine alors le hachage MD4 et le salt par utilisateur, puis place le tout dans la fonction [PBKDF2](https://www.ietf.org/rfc/rfc2898.txt). 1 000 itérations de l’algorithme de hachage à clé [HMAC-SHA256](/dotnet/api/system.security.cryptography.hmacsha256) sont utilisées. 
 7. L’agent de synchronisation de hachage de mot de passe prend le hachage de 32 octets résultant, concatène le salt par utilisateur et le nombre d’itérations SHA256 (pour une utilisation par Azure AD), puis transmet la chaîne d’Azure AD Connect à Azure AD par TLS.</br> 
 8. Lorsqu’un utilisateur tente de se connecter à Azure AD et entre son mot de passe, le mot de passe est traité par le même processus MD4+salt+PBKDF2+HMAC-SHA256. Si le hachage résultant correspond au hachage stocké dans Azure AD, l’utilisateur a entré le bon mot de passe et est authentifié.
 
@@ -89,14 +89,13 @@ Si un utilisateur est concerné par la synchronisation de hachage de mot de pass
 
 Vous pouvez continuer à vous connecter aux services cloud à l’aide d’un mot de passe synchronisé qui a expiré dans votre environnement local. Votre mot de passe cloud est mis à jour la prochaine fois que vous modifiez le mot de passe dans l’environnement local.
 
-##### <a name="public-preview-of-the-enforcecloudpasswordpolicyforpasswordsyncedusers-feature"></a>Préversion publique de la fonctionnalité *EnforceCloudPasswordPolicyForPasswordSyncedUsers*
+##### <a name="enforcecloudpasswordpolicyforpasswordsyncedusers"></a>EnforceCloudPasswordPolicyForPasswordSyncedUsers
 
 S’il existe des utilisateurs synchronisés qui interagissent uniquement avec des services intégrés Azure AD et doivent également respecter une stratégie d’expiration de mot de passe, vous pouvez les forcer à respecter votre stratégie d’expiration de mot de passe Azure AD en activant la fonctionnalité *EnforceCloudPasswordPolicyForPasswordSyncedUsers*.
 
 Quand *EnforceCloudPasswordPolicyForPasswordSyncedUsers* est désactivée (ce qui est le paramètre par défaut), Azure AD Connect affecte la valeur « DisablePasswordExpiration » à l’attribut PasswordPolicies. Cette action est effectuée chaque fois que le mot de passe d’un utilisateur est synchronisé, et indique à Azure AD qu’il faut ignorer la stratégie d’expiration du mot de passe cloud pour cet utilisateur. Vous pouvez vérifier la valeur de l’attribut à l’aide du module Azure AD PowerShell à l’aide de la commande suivante :
 
 `(Get-AzureADUser -objectID <User Object ID>).passwordpolicies`
-
 
 Pour activer la fonctionnalité EnforceCloudPasswordPolicyForPasswordSyncedUsers, exécutez la commande suivante en utilisant le module MSOnline PowerShell, comme illustré ci-dessous. Vous devez taper Oui pour le paramètre Activer, comme illustré ci-dessous :
 
@@ -110,7 +109,7 @@ Continue with this operation?
 [Y] Yes [N] No [S] Suspend [?] Help (default is "Y"): y
 ```
 
-Une fois la fonctionnalité activée, Azure AD n’accède pas à chaque utilisateur synchronisé pour supprimer la valeur `DisablePasswordExpiration` de l’attribut PasswordPolicies. Au lieu de cela, la valeur est définie sur `None` lors de la synchronisation de mot de passe suivante pour chaque utilisateur la prochaine fois qu’il change son mot de passe dans l’annuaire Active Directory local.  
+Une fois la fonctionnalité activée, Azure AD n’accède pas à chaque utilisateur synchronisé pour supprimer la valeur `DisablePasswordExpiration` de l’attribut PasswordPolicies. Au lieu de cela, la valeur `DisablePasswordExpiration` est supprimée de PasswordPolicies lors de la synchronisation de hachage de mot de passe suivante pour chaque utilisateur, lors de modification de mot de passe suivante dans l’annuaire Active Directory local.
 
 Nous vous recommandons d’activer EnforceCloudPasswordPolicyForPasswordSyncedUsers avant d’activer la synchronisation du hachage de mot de passe, afin que la synchronisation initiale du hachage de mot de passe n’ajoute pas la valeur `DisablePasswordExpiration` à l’attribut PasswordPolicies pour les utilisateurs.
 
@@ -123,10 +122,9 @@ Inconvénient : si des comptes synchronisés doivent avoir des mots de passe sa
 `Set-AzureADUser -ObjectID <User Object ID> -PasswordPolicies "DisablePasswordExpiration"`
 
 > [!NOTE]
-> Cette fonctionnalité est actuellement en préversion publique.
 > La commande PowerShell Set-MsolPasswordPolicy ne fonctionne pas sur les domaines fédérés. 
 
-#### <a name="public-preview-of-synchronizing-temporary-passwords-and-force-password-change-on-next-logon"></a>Préversion publique de la synchronisation des mots de passe temporaires et « Forcer la modification du mot de passe à la prochaine ouverture de session »
+#### <a name="synchronizing-temporary-passwords-and-force-password-change-on-next-logon"></a>Synchronisation des mots de passe temporaires et « Forcer la modification du mot de passe à la prochaine ouverture de session »
 
 Il est courant de forcer un utilisateur à modifier son mot de passe lors de sa première ouverture de session, en particulier après la réinitialisation d’un mot de passe d’administrateur.  Il s’agit généralement de définir un mot de passe « temporaire ». Vous devez pour cela sélectionner l’indicateur « L’utilisateur doit changer le mot de passe à la prochaine ouverture de session » sur un objet utilisateur dans Active Directory (AD).
   
@@ -134,7 +132,7 @@ La fonctionnalité de mot de passe temporaire permet de s’assurer que le trans
 
 Pour prendre en charge les mots de passe temporaires dans Azure AD pour les utilisateurs synchronisés, vous pouvez activer la fonctionnalité *ForcePasswordChangeOnLogOn* en exécutant la commande suivante sur votre serveur Azure AD Connect :
 
-`Set-ADSyncAADCompanyFeature  -ForcePasswordChangeOnLogOn $true`
+`Set-ADSyncAADCompanyFeature -ForcePasswordChangeOnLogOn $true`
 
 > [!NOTE]
 > forcer un utilisateur à changer son mot de passe lors de la prochaine ouverture de session nécessite en même temps un changement du mot de passe.  Azure AD Connect ne récupère pas de lui-même l’indicateur de changement forcé du mot de passe. Cela s’ajoute au changement de mot de passe détecté qui se produit pendant la synchronisation du hachage de mot de passe.
@@ -142,12 +140,9 @@ Pour prendre en charge les mots de passe temporaires dans Azure AD pour les util
 > [!CAUTION]
 > Vous devez utiliser cette fonctionnalité uniquement quand la réinitialisation de mot de passe en libre-service (SSPR) et la réécriture du mot de passe sont activées sur le locataire.  Ainsi, si un utilisateur modifie son mot de passe via SSPR, il sera synchronisé avec Active Directory.
 
-> [!NOTE]
-> Cette fonctionnalité est actuellement en préversion publique.
-
 #### <a name="account-expiration"></a>Expiration du compte
 
-Si votre organisation utilise l’attribut accountExpires dans le cadre de la gestion des comptes d’utilisateur, il n’est pas synchronisé avec Azure AD. Par conséquent, un compte Active Directory expiré dans un environnement configuré pour la synchronisation de hachage de mot de passe sera toujours actif dans Azure AD. Nous recommandons, si le compte a expiré, qu’une action de workflow déclenche un script PowerShell qui désactive le compte Azure AD de l’utilisateur (via l’applet de commande [Set-AzureADUser](https://docs.microsoft.com/powershell/module/azuread/set-azureaduser?view=azureadps-2.0)). Inversement, lorsque le compte est activé, l’instance Azure AD doit être activée.
+Si votre organisation utilise l’attribut accountExpires dans le cadre de la gestion des comptes d’utilisateur, il n’est pas synchronisé avec Azure AD. Par conséquent, un compte Active Directory expiré dans un environnement configuré pour la synchronisation de hachage de mot de passe sera toujours actif dans Azure AD. Nous recommandons, si le compte a expiré, qu’une action de workflow déclenche un script PowerShell qui désactive le compte Azure AD de l’utilisateur (via l’applet de commande [Set-AzureADUser](/powershell/module/azuread/set-azureaduser)). Inversement, lorsque le compte est activé, l’instance Azure AD doit être activée.
 
 ### <a name="overwrite-synchronized-passwords"></a>Remplacement des mots de passe synchronisés
 

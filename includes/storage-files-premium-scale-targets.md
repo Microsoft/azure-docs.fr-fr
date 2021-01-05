@@ -2,14 +2,14 @@
 author: roygara
 ms.service: storage
 ms.topic: include
-ms.date: 06/07/2019
+ms.date: 08/10/2020
 ms.author: rogarana
-ms.openlocfilehash: b28427b3ede0cfaeb9e08d3c73b15ea7f2961f1b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 8dcb58499113b0b7ae0814419f0a76965a0ed945
+ms.sourcegitcommit: 8e7316bd4c4991de62ea485adca30065e5b86c67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "71180046"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94680961"
 ---
 #### <a name="additional-premium-file-share-level-limits"></a>Limites du niveau de partage de fichiers premium supplémentaires
 
@@ -23,11 +23,15 @@ ms.locfileid: "71180046"
 
 #### <a name="file-level-limits"></a>Limites relatives au niveau des fichiers
 
-|Domaine  |Fichier Premium  |Fichier standard |
+|Domaine  |Fichier standard  |Fichier Premium  |
 |---------|---------|---------|
-|Size                  |1 Tio         |1 Tio|
-|Nb max. d’IOPS par fichier     |5 000         |1 000|
-|Descripteurs simultanés    |2 000         |2 000|
-|Sortie  |300 Mio/s|      Consultez les valeurs de débit de fichier standard|
-|Entrée  |200 Mio/s| Consultez les valeurs de débit de fichier standard|
-|Débit| Voir les valeurs d’entrée et de sortie des fichiers Premium| Jusqu’à 60 Mio/s|
+|Size     |1 Tio         |4 Tio         |
+|Nb max. d’IOPS par fichier      |1 000         |Jusqu’à 8 000*         |
+|Descripteurs simultanés     |2 000         |2 000         |
+|Sortie     |Consultez les valeurs de débit de fichier standard         |300 Mio/s (jusqu’à 1 Gio/s avec la version préliminaire de SMB Multichannel)**         |
+|Entrée     |Consultez les valeurs de débit de fichier standard         |200 Mio/s (jusqu’à 1 Gio/s avec la version préliminaire de SMB Multichannel)**        |
+|Débit     |Jusqu’à 60 Mio/s         |Voir les valeurs d’entrée et de sortie des fichiers Premium         |
+
+\* <sup> S’applique aux opérations d’E/S en lecture et écriture (généralement des tailles d’E/S plus petites < = 64 ko). Les opérations sur les métadonnées, autres que les lectures et les écritures, peuvent être inférieures. </sup>
+
+\*\* <sup> En fonction des limites du réseau des machines, de la bande passante disponible, des tailles des opérations d’E/S, de la profondeur de la file d’attente et d’autres facteurs. Pour plus d’informations, consultez [Performances de SMB Multichannel](../articles/storage/files/storage-files-smb-multichannel-performance.md). </sup>

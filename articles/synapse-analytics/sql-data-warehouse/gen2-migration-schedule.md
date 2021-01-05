@@ -1,6 +1,6 @@
 ---
-title: Migrer votre pool SQL vers Gen2
-description: Instructions concernant la migration d’un pool SQL existant vers Gen2 et la planification de la migration par région.
+title: Migrer votre pool SQL dédié (anciennement SQL DW) vers Gen2
+description: Instructions concernant la migration d’un pool SQL dédié existant (anciennement SQL DW) vers Gen2 et la planification de la migration par région.
 services: synapse-analytics
 author: mlee3gsd
 ms.author: anjangsh
@@ -9,21 +9,22 @@ manager: craigg
 ms.assetid: 04b05dea-c066-44a0-9751-0774eb84c689
 ms.service: synapse-analytics
 ms.topic: article
+ms.subservice: sql-dw
 ms.date: 01/21/2020
 ms.custom: seo-lt-2019, azure-synapse
-ms.openlocfilehash: 6f2af826473bfd13f8100796a540d41cbedbb037
-ms.sourcegitcommit: d597800237783fc384875123ba47aab5671ceb88
+ms.openlocfilehash: 512775369bd7787c6228c6d452be0e236ddf5cc2
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/03/2020
-ms.locfileid: "80631568"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96456335"
 ---
-# <a name="upgrade-your-sql-pool-to-gen2"></a>Migrer votre pool SQL vers Gen2
+# <a name="upgrade-your-dedicated-sql-pool-formerly-sql-dw-to-gen2"></a>Mettre à niveau votre pool SQL dédié (anciennement SQL DW) vers Gen2
 
-Microsoft aide à réduire le coût d’entrée de gamme de l’exécution d’un pool SQL.  Des niveaux de service de calcul plus bas capables de gérer des requêtes exigeantes sont désormais disponibles pour les pools SQL. Lire l’intégralité de l’annonce [Prise en charge du niveau de service de calcul plus bas Gen2](https://azure.microsoft.com/blog/azure-sql-data-warehouse-gen2-now-supports-lower-compute-tiers/). La nouvelle offre est disponible dans les régions indiquées dans le tableau ci-dessous. Pour les régions prises en charge, les pools SQL Gen1 existants peuvent être mis à niveau vers Gen2 à l’aide de l’une des méthodes suivantes :
+Microsoft aide à réduire le coût d’entrée de gamme de l’exécution d’un pool SQL dédié (anciennement SQL DW).  Des niveaux de service de calcul plus bas capables de gérer des requêtes exigeantes sont désormais disponibles pour les pools SQL dédiés (anciennement SQL DW). Lire l’intégralité de l’annonce [Prise en charge du niveau de service de calcul plus bas Gen2](https://azure.microsoft.com/blog/azure-sql-data-warehouse-gen2-now-supports-lower-compute-tiers/). La nouvelle offre est disponible dans les régions indiquées dans le tableau ci-dessous. Pour les régions prises en charge, un pool SQL dédié Gen1 existant (anciennement SQL DW) peut être mis à niveau vers Gen2 à l’aide de l’une des méthodes suivantes :
 
 - **Processus de mise à niveau automatique :** Les mises à niveau automatiques ne commencent pas dès que le service est disponible dans une région.  Quand les mises à niveau automatiques commenceront dans une région spécifique, les mises à niveau individuelles de pools SQL s’effectueront pendant la planification de maintenance que vous avez sélectionnée.
-- [**Mise à niveau automatique vers Gen2 :** ](#self-upgrade-to-gen2) Vous pouvez contrôler quand mettre à niveau en effectuant une mise à niveau automatique vers Gen2. Si votre région n’est pas encore prise en charge, vous pouvez restaurer à partir d’un point de restauration directement vers une instance Gen2 dans une région prise en charge.
+- [**Mise à niveau automatique vers Gen2 :**](#self-upgrade-to-gen2) Vous pouvez contrôler quand mettre à niveau en effectuant une mise à niveau automatique vers Gen2. Si votre région n’est pas encore prise en charge, vous pouvez restaurer à partir d’un point de restauration directement vers une instance Gen2 dans une région prise en charge.
 
 ## <a name="automated-schedule-and-region-availability-table"></a>Tableau des planifications automatisées et de la disponibilité dans les régions
 
@@ -42,9 +43,9 @@ Le tableau suivant récapitule par région le moment où le niveau de capacité 
 
 ## <a name="automatic-upgrade-process"></a>Processus de mise à niveau automatique
 
-Selon le graphique de disponibilité ci-dessus, nous allons planifier des mises à niveau automatisées pour vos instances Gen1. Pour éviter des interruptions inattendues de la disponibilité du pool SQL, les mises à niveau automatiques seront planifiées pendant votre planification de maintenance. La possibilité de créer une nouvelle instance Gen1 sera désactivée dans les régions où des mise à niveau automatiques vers Gen2 sont effectuées. Gen1 sera déconseillée une fois que les mises à niveau automatiques auront été effectuées. Pour plus d’informations sur les planifications, consultez [Afficher une planification de maintenance](maintenance-scheduling.md#view-a-maintenance-schedule).
+Selon le graphique de disponibilité ci-dessus, nous allons planifier des mises à niveau automatisées pour vos instances Gen1. Pour éviter des interruptions inattendues de la disponibilité du pool SQL dédié (anciennement SQL DW), les mises à niveau automatiques seront planifiées pendant votre planification de maintenance. La possibilité de créer une nouvelle instance Gen1 sera désactivée dans les régions où des mise à niveau automatiques vers Gen2 sont effectuées. Gen1 sera déconseillée une fois que les mises à niveau automatiques auront été effectuées. Pour plus d’informations sur les planifications, consultez [Afficher une planification de maintenance](maintenance-scheduling.md#view-a-maintenance-schedule).
 
-Le processus de mise à niveau impliquera une brève baisse de connectivité (environ 5 min) quand nous redémarrons votre pool SQL.  Une fois que votre pool SQL aura été redémarré, il sera entièrement disponible pour utilisation. Cependant, vous pouvez être confronté à une délai des performances pendant que le processus de mise à niveau continue à mettre à niveau les fichiers de données en arrière-plan. La durée totale de la dégradation des performances varie en fonction de la taille de vos fichiers de données.
+Le processus de mise à niveau impliquera une brève baisse de connectivité (environ 5 min) quand nous redémarrons votre pool SQL dédié (anciennement SQL DW).  Une fois que votre pool SQL dédié (anciennement SQL DW) aura été redémarré, il sera entièrement disponible pour utilisation. Cependant, vous pouvez être confronté à une délai des performances pendant que le processus de mise à niveau continue à mettre à niveau les fichiers de données en arrière-plan. La durée totale de la dégradation des performances varie en fonction de la taille de vos fichiers de données.
 
 Vous pouvez également accélérer le processus de mise à niveau des fichiers de données en exécutant la commande [Alter Index Rebuild](sql-data-warehouse-tables-index.md) sur toutes les tables columnstore primaires à l’aide d’une plus large classe de ressources et de SLO après le redémarrage.
 
@@ -53,12 +54,12 @@ Vous pouvez également accélérer le processus de mise à niveau des fichiers d
 
 ## <a name="self-upgrade-to-gen2"></a>Mise à niveau automatique vers Gen2
 
-Vous pouvez choisir d’effectuer une mise à niveau automatique en suivant ces étapes sur un pool SQL Gen1 existant. Si vous choisissez la mise à niveau automatique, vous devez l’effectuer avant le début du processus de mise à niveau automatique dans votre région. Vous évitez ainsi tout risque de conflit dû aux mises à niveau automatique.
+Vous pouvez choisir d’effectuer une mise à niveau automatique en suivant ces étapes sur un pool SQL dédié (anciennement SQL DW) Gen1 existant. Si vous choisissez la mise à niveau automatique, vous devez l’effectuer avant le début du processus de mise à niveau automatique dans votre région. Vous évitez ainsi tout risque de conflit dû aux mises à niveau automatique.
 
-Deux options s’offrent à vous quand vous procédez à une mise à niveau automatique.  Vous pouvez soit mettre à niveau votre pool SQL actuel sur place, soit restaurer un pool SQL Gen1 dans une instance Gen2.
+Deux options s’offrent à vous quand vous procédez à une mise à niveau automatique.  Vous pouvez soit mettre à niveau votre pool SQL dédié actuel (anciennement SQL DW) sur place, soit restaurer un pool SQL dédié Gen1 (anciennement SQL DW) dans une instance Gen2.
 
-- [Mettre à niveau sur place](upgrade-to-latest-generation.md) : cette option met à niveau votre pool SQL Gen1 existant vers Gen2. Le processus de mise à niveau impliquera une brève baisse de connectivité (environ 5 min) quand nous redémarrons votre pool SQL.  Une fois que votre pool SQL aura été redémarré, il sera entièrement disponible pour utilisation. Si vous rencontrez des problèmes pendant la mise à niveau, ouvrez une [demande de support](sql-data-warehouse-get-started-create-support-ticket.md) et indiquez « Mise à niveau vers Gen2 » comme cause possible.
-- [Mettre à niveau à partir du point de restauration](sql-data-warehouse-restore-points.md) : créez un point de restauration défini par l’utilisateur sur votre pool SQL Gen1 actuel, puis effectuez la restauration directement sur une instance Gen2. Le pool SQL Gen1 existant est conservé. Une fois la restauration terminée, votre pool SQL Gen2 sera entièrement disponible pour utilisation.  Une fois tous les processus de test et de validation exécutés sur l’instance Gen2 restaurée, l’instance Gen1 d’origine peut être supprimée.
+- [Mettre à niveau sur place](upgrade-to-latest-generation.md) : cette option met à niveau votre pool SQL dédié (anciennement SQL DW) Gen1 existant vers Gen2. Le processus de mise à niveau impliquera une brève baisse de connectivité (environ 5 min) quand nous redémarrons votre pool SQL dédié (anciennement SQL DW).  Une fois redémarré, il sera entièrement disponible pour utilisation. Si vous rencontrez des problèmes pendant la mise à niveau, ouvrez une [demande de support](sql-data-warehouse-get-started-create-support-ticket.md) et indiquez « Mise à niveau vers Gen2 » comme cause possible.
+- [Mettre à niveau à partir du point de restauration](sql-data-warehouse-restore-points.md) : créez un point de restauration défini par l’utilisateur sur votre pool SQL dédié (anciennement SQL DW) Gen1 actuel, puis effectuez la restauration directement sur une instance Gen2. Le pool SQL dédié (anciennement SQL DW) Gen1 existant est conservé. Une fois la restauration terminée, votre pool SQL dédié (anciennement SQL DW) Gen2 sera entièrement disponible pour utilisation.  Une fois tous les processus de test et de validation exécutés sur l’instance Gen2 restaurée, l’instance Gen1 d’origine peut être supprimée.
 
   - Étape 1 : À partir du portail Azure, [créez un point de restauration défini par l’utilisateur](sql-data-warehouse-restore-active-paused-dw.md).
   - Étape 2 : Lors d’une restauration à partir d’un point de restauration défini par l’utilisateur, définissez le « niveau de performances » sur votre niveau Gen2 préféré.
@@ -70,7 +71,7 @@ Pour accélérer le processus de migration de données en arrière-plan, vous po
 > [!NOTE]
 > Alter Index Rebuild est une opération hors connexion et les tables ne seront pas disponibles tant que la reconstruction ne sera pas terminée.
 
-Si vous rencontrez des problèmes avec votre pool SQL, créez une [demande de support](sql-data-warehouse-get-started-create-support-ticket.md) et indiquez « Mise à niveau vers Gen2 » comme cause possible.
+Si vous rencontrez des problèmes avec votre pool SQL dédié (anciennement SQL DW), créez une [demande de support](sql-data-warehouse-get-started-create-support-ticket.md) et indiquez « Mise à niveau vers Gen2 » comme cause possible.
 
 Pour plus d’informations, consultez [Mettre à niveau vers Gen2](upgrade-to-latest-generation.md).
 
@@ -88,12 +89,12 @@ Pour plus d’informations, consultez [Mettre à niveau vers Gen2](upgrade-to-la
 
 - A : Vous pouvez effectuer une mise à niveau sur place ou à partir d’un point de restauration.
 
-  - Une mise à niveau sur place provoque une suspension momentanée puis une reprise de votre pool SQL.  Un processus en arrière-plan continuera pendant que le pool SQL sera en ligne.  
+  - Une mise à niveau sur place provoque une suspension momentanée puis une reprise de votre pool SQL dédié (anciennement SQL DW).  Un processus en arrière-plan continue pendant que le pool SQL dédié (anciennement SQL DW) est en ligne.  
   - L’opération prend plus de temps si vous effectuez la mise à niveau par le biais d’un point de restauration, car la mise à niveau passera par le processus de restauration complète.
 
 **Q : Combien de temps prend la mise à niveau automatique ?**
 
-- A : Le temps d’arrêt réel pour la mise à niveau est uniquement le temps nécessaire pour suspendre et reprendre le service, qui est compris entre 5 et 10 minutes. Après la courte interruption, un processus en arrière-plan exécutera une migration de stockage. La durée du processus en arrière-plan dépend de la taille de votre pool SQL.
+- A : Le temps d’arrêt réel pour la mise à niveau est uniquement le temps nécessaire pour suspendre et reprendre le service, qui est compris entre 5 et 10 minutes. Après la courte interruption, un processus en arrière-plan exécutera une migration de stockage. La durée du processus en arrière-plan dépend de la taille de votre pool SQL dédié (anciennement SQL DW).
 
 **Q : Quand cette mise à niveau automatique aura-t-elle lieu ?**
 
@@ -109,7 +110,7 @@ Pour plus d’informations, consultez [Mettre à niveau vers Gen2](upgrade-to-la
 
 **Q : Puis-je désactiver la géosauvegarde ?**
 
-- A : Non. La géosauvegarde est une fonctionnalité d’entreprise permettant de préserver la disponibilité de votre pool SQL dans le cas où une région n’est plus disponible. Si vous avez d’autres questions, ouvrez une [demande de support](sql-data-warehouse-get-started-create-support-ticket.md).
+- A : Non. La géosauvegarde est une fonctionnalité d’entreprise permettant de préserver la disponibilité de votre pool SQL dédié (anciennement SQL DW) dans le cas où une région n’est plus disponible. Si vous avez d’autres questions, ouvrez une [demande de support](sql-data-warehouse-get-started-create-support-ticket.md).
 
 **Q : Existe-t-il une différence de syntaxe T-SQL entre Gen1 et Gen2 ?**
 
@@ -132,4 +133,4 @@ Pour plus d’informations, consultez [Mettre à niveau vers Gen2](upgrade-to-la
 - [Mise à niveau sur place et mise à niveau à partir d’un point de restauration](upgrade-to-latest-generation.md)
 - [Créer un point de restauration défini par l’utilisateur](sql-data-warehouse-restore-points.md)
 - [Découvrir comment effectuer une restauration vers Gen2](sql-data-warehouse-restore-active-paused-dw.md)
-- [Ouvrir une demande de support SQL Data Warehouse](https://go.microsoft.com/fwlink/?linkid=857950)
+- [Ouvrir une demande de support Azure Synapse Analytics](https://go.microsoft.com/fwlink/?linkid=857950)

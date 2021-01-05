@@ -13,12 +13,12 @@ ms.devlang: powershell
 ms.topic: conceptual
 ms.date: 01/19/2018
 ms.author: jingwang
-ms.openlocfilehash: ea86c4670a8eb6dc5e2133ed01045e8aada0f707
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: c7a99e7e5f27f8c3503c7fa6124d27cfc4e7f4a4
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "75438781"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96012831"
 ---
 # <a name="invoke-an-ssis-package-using-stored-procedure-activity-in-azure-data-factory"></a>Appeler un package SSIS à l’aide de l’activité de procédure stockée dans Azure Data Factory
 Cet article décrit comment appeler un package SSIS à partir d’un pipeline Azure Data Factory à l’aide d’une activité de procédure stockée. 
@@ -29,10 +29,10 @@ Cet article décrit comment appeler un package SSIS à partir d’un pipeline Az
 ## <a name="prerequisites"></a>Prérequis
 
 ### <a name="azure-sql-database"></a>Azure SQL Database 
-La procédure pas à pas dans cet article utilise une base de données Azure SQL qui héberge le catalogue SSIS. Vous pouvez également utiliser Azure SQL Database Managed Instance.
+La procédure pas à pas décrite dans cet article utilise Azure SQL Database. Vous pouvez également utiliser Azure SQL Managed Instance.
 
 ### <a name="create-an-azure-ssis-integration-runtime"></a>Créer un runtime d’intégration Azure-SSIS
-Créez un runtime d’intégration Azure-SSIS si vous n’en avez pas en suivant les instructions pas à pas fournies dans le [Tutoriel : Déployer des packages SSIS](../tutorial-create-azure-ssis-runtime-portal.md). Vous ne pouvez pas utiliser Data Factory version 1 pour créer un runtime d’intégration Azure-SSIS. 
+Créez un runtime d’intégration Azure-SSIS si vous n’en avez pas en suivant les instructions pas à pas fournies dans le [Tutoriel : Déployer des packages SSIS](../tutorial-deploy-ssis-packages-azure.md). Vous ne pouvez pas utiliser Data Factory version 1 pour créer un runtime d’intégration Azure-SSIS. 
 
 ## <a name="azure-powershell"></a>Azure PowerShell
 Dans cette section, vous utilisez Azure PowerShell pour créer un pipeline Data Factory avec une activité de procédure stockée qui appelle un package SSIS.
@@ -82,7 +82,7 @@ Notez les points suivants :
 * Pour créer des instances de fabrique de données, le compte d’utilisateur que vous utilisez pour vous connecter à Azure doit être un membre des rôles **contributeur** ou **propriétaire**, ou un **administrateur** de l’abonnement Azure.
 
 ### <a name="create-an-azure-sql-database-linked-service"></a>Créer un service lié Azure SQL Database
-Créez un service lié pour lier votre base de données Azure SQL qui héberge le catalogue SSIS à votre fabrique de données. Data Factory utilise les informations de ce service lié pour se connecter à la base de données SSISDB, et exécute une procédure stockée pour exécuter un package SSIS. 
+Créez un service lié pour lier votre base de données dans Azure SQL Database qui héberge le catalogue SSIS à votre fabrique de données. Data Factory utilise les informations de ce service lié pour se connecter à la base de données SSISDB, et exécute une procédure stockée pour exécuter un package SSIS. 
 
 1. Créez un fichier JSON nommé **AzureSqlDatabaseLinkedService.json** dans le dossier **C:\ADF\RunSSISPackage** avec le contenu suivant : 
 
@@ -190,7 +190,7 @@ Lors de cette étape, vous allez créer un pipeline avec une activité de procé
 
     Vous pouvez continuer d’exécuter cette applet de commande jusqu’à ce que le segment apparaisse dans l’état **Prêt** ou **En échec**. 
 
-    Vous pouvez exécuter la requête suivante par rapport à la base de données SSISDB dans votre serveur Azure SQL pour vérifier que le package s’est exécuté. 
+    Vous pouvez exécuter la requête suivante dans la base de données SSISDB de votre serveur pour vérifier que le package s'est exécuté. 
 
     ```sql
     select * from catalog.executions
@@ -198,4 +198,3 @@ Lors de cette étape, vous allez créer un pipeline avec une activité de procé
 
 ## <a name="next-steps"></a>Étapes suivantes
 Pour plus d’informations sur l’activité de procédure stockée, consultez l’article [Activité de procédure stockée](data-factory-stored-proc-activity.md).
-

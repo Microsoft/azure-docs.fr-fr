@@ -3,17 +3,18 @@ title: Utiliser l’explorateur Azure Cosmos DB pour gérer vos données
 description: L’explorateur Azure Cosmos DB est une interface web autonome qui vous permet de voir et de gérer les données stockées dans Azure Cosmos DB.
 author: deborahc
 ms.service: cosmos-db
-ms.topic: conceptual
-ms.date: 05/23/2019
+ms.topic: how-to
+ms.date: 09/23/2020
 ms.author: dech
-ms.openlocfilehash: 57ba647ade45928f03cd7fb2b037642d5e4d52cc
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: d4baa92fe4aa2ed402c394198684c4deec2bf9f1
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79096822"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96348600"
 ---
-# <a name="work-with-data-using-azure-cosmos-explorer"></a>Utiliser des données à l’aide d’Azure Cosmos Explorer 
+# <a name="work-with-data-using-azure-cosmos-db-explorer"></a>Utiliser des données à l’aide de l’explorateur Azure Cosmos DB 
+[!INCLUDE[appliesto-all-apis](includes/appliesto-all-apis.md)]
 
 L’explorateur Azure Cosmos DB est une interface web autonome qui vous permet de voir et de gérer les données stockées dans Azure Cosmos DB. L’explorateur Azure Cosmos DB est l’équivalent de l’onglet **Explorateur de données** qui se trouve dans le portail Azure lorsque vous créez un compte Azure Cosmos DB. Les principaux avantages de l’explorateur Azure Cosmos DB par rapport à l’Explorateur de données existant sont les suivants :
 
@@ -39,9 +40,9 @@ L’explorateur Azure Cosmos DB est une interface web autonome qui vous permet d
 
    **Lecture** : lorsque vous partagez l’URL en lecture seule avec d’autres utilisateurs, ceux-ci peuvent afficher les bases de données, collections, requêtes et d’autres ressources associées à ce compte particulier. Par exemple, si vous souhaitez partager les résultats d’une requête avec vos collègues qui n’ont pas accès au portail Azure ou à votre compte Azure Cosmos DB, vous pouvez leur fournir cette URL.
 
-   Choisissez le type d’accès avec lequel vous souhaitez ouvrir le compte et cliquez sur **Ouvrir**. Une fois l’Explorateur ouvert, l’expérience est identique à celle que vous aviez avec l’onglet Explorateur de données dans le portail Azure.   
+   Choisissez le type d’accès avec lequel vous souhaitez ouvrir le compte et cliquez sur **Ouvrir**. Une fois l’Explorateur ouvert, l’expérience est identique à celle que vous aviez avec l’onglet Explorateur de données dans le portail Azure.
 
-   ![Ouvrir l’explorateur Azure Cosmos DB](./media/data-explorer/open-data-explorer-with-access-url.png)
+   :::image type="content" source="./media/data-explorer/open-data-explorer-with-access-url.png" alt-text="Ouvrir l’explorateur Azure Cosmos DB":::
 
 ## <a name="known-issues"></a>Problèmes connus
 
@@ -49,7 +50,10 @@ Pour le moment, l’expérience **Ouvrir en mode plein écran** qui vous permet 
 
 Actuellement, l’affichage des documents qui contiennent un UUID n’est pas pris en charge dans l’Explorateur de données. Cela n’affecte pas le chargement des collections, mais uniquement l’affichage des documents individuels ou des requêtes qui incluent ces documents. Pour afficher et gérer ces documents, les utilisateurs doivent continuer à utiliser l’outil initialement utilisé pour créer ces documents.
 
+Si les clients reçoivent des erreurs HTTP-401, cela peut être dû à des autorisations Azure RBAC insuffisantes pour le compte Azure du client, en particulier si le compte a un rôle personnalisé. Tous les rôles personnalisés doivent avoir l’action `Microsoft.DocumentDB/databaseAccounts/listKeys/*` pour utiliser Explorateur de données s’ils se connectent en utilisant leurs informations d’identification Azure Active Directory.
+
 ## <a name="next-steps"></a>Étapes suivantes
+
 Maintenant que vous avez découvert comment démarrer avec l’explorateur Azure Cosmos DB pour gérer vos données, vous pouvez :
 
-* Commencer à définir des [requêtes](sql-api-query-reference.md) à l’aide de la syntaxe SQL, et faire de la [programmation côté serveur](stored-procedures-triggers-udfs.md) en vous servant de procédures stockées, d’UDF et de déclencheurs. 
+* Commencer à définir des [requêtes](./sql-query-getting-started.md) à l’aide de la syntaxe SQL, et faire de la [programmation côté serveur](stored-procedures-triggers-udfs.md) en vous servant de procédures stockées, d’UDF et de déclencheurs.

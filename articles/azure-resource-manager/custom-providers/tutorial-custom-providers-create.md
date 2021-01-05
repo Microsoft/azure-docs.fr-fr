@@ -5,12 +5,13 @@ author: jjbfour
 ms.topic: tutorial
 ms.date: 06/19/2019
 ms.author: jobreen
-ms.openlocfilehash: 09df78955de6423244c2d8ec94e1e1c06ecab257
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: 4f425af7681b666b42fbcc70ac0e4c31d9df6d49
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "75648736"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87503750"
 ---
 # <a name="create-and-use-a-custom-provider"></a>Créer et utiliser un fournisseur personnalisé
 

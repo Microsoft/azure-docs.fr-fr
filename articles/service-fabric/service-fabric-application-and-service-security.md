@@ -3,12 +3,12 @@ title: Découvrir la sécurité des applications Azure Service Fabric
 description: Explique comment exécuter des applications de microservices de manière sécurisée dans Service Fabric. Découvrez comment exécuter des services et un script de démarrage sous différents comptes de sécurité, authentifier et autoriser des utilisateurs, gérer les secrets des applications, sécuriser les communications avec les services, utiliser une passerelle API et sécuriser des données d’application au repos.
 ms.topic: conceptual
 ms.date: 03/16/2018
-ms.openlocfilehash: c97c5345a1a18cce8c44508542f12d3642d2b8f9
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: f17840f31d2a4c12a1d4618bd16e81dcc2cc8a14
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81461427"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86256575"
 ---
 # <a name="service-fabric-application-and-service-security"></a>Sécurité des applications et des services Service Fabric
 Une architecture de microservices peut présenter de [nombreux avantages](service-fabric-overview-microservices.md). Cependant, la gestion de la sécurité des microservices représente un défi autrement plus complexe que celui constitué par la gestion de la sécurité des applications monolithiques traditionnelles. 
@@ -35,7 +35,7 @@ Après l’authentification, les services doivent autoriser l’accès utilisate
 ## <a name="restrict-and-secure-access-using-an-api-gateway"></a>Limiter et sécuriser l’accès à l’aide d’une passerelle API
 Les applications cloud ont généralement besoin d’une passerelle frontale afin de fournir un point d’entrée unique pour les utilisateurs, les appareils ou d’autres applications. Une [passerelle API](/azure/architecture/microservices/gateway) est située entre les clients et les services, et constitue le point d’entrée de tous les services fournis par votre application. Elle agit comme un proxy inverse, en acheminant les requêtes des clients vers les services. Elle peut également effectuer diverses tâches transversales telles que l’authentification et l’autorisation, l’arrêt TLS et la limitation du débit. Si vous ne pouvez pas déployer de passerelle, les clients doivent envoyer des requêtes directement aux services frontaux.
 
-Dans Service Fabric, une passerelle peut être n’importe quel service sans état, comme une [application ASP.NET Core](service-fabric-reliable-services-communication-aspnetcore.md), ou un autre service conçu pour l’entrée de trafic, par exemple [Traefik](https://docs.traefik.io/), [Event Hubs](https://docs.microsoft.com/azure/event-hubs/), [IoT Hub](https://docs.microsoft.com/azure/iot-hub/) ou la [ Gestion des API Azure](https://docs.microsoft.com/azure/api-management).
+Dans Service Fabric, une passerelle peut être n’importe quel service sans état, comme une [application ASP.NET Core](service-fabric-reliable-services-communication-aspnetcore.md), ou un autre service conçu pour l’entrée de trafic, par exemple [Traefik](https://docs.traefik.io/), [Event Hubs](../event-hubs/index.yml), [IoT Hub](../iot-hub/index.yml) ou la [ Gestion des API Azure](../api-management/index.yml).
 
 Gestion des API s’intègre directement dans Service Fabric, ce qui vous permet de publier des API avec un ensemble complet de règles de routage vers vos services Service Fabric principaux.  Vous pouvez sécuriser l’accès aux services backend, empêcher des attaques de déni de service à l’aide de la limitation, ou vérifier les clés d’API, les jetons JSON Web Token, les certificats et autres informations d’identification. Pour plus d’informations, lisez la [Vue d’ensemble d’Azure Service Fabric avec Gestion des API](service-fabric-api-management-overview.md).
 
@@ -85,7 +85,7 @@ Vous pouvez établir une connexion sécurisée entre le proxy inverse et les ser
 L’infrastructure d’application Reliable Services fournit quelques piles et outils de communication prédéfinis afin d’améliorer la sécurité. Découvrez comment améliorer la sécurité lorsque vous utilisez la communication à distance du service (en [C#](service-fabric-reliable-services-secure-communication.md) ou [Java](service-fabric-reliable-services-secure-communication-java.md)) ou à l’aide de [WCF](service-fabric-reliable-services-secure-communication-wcf.md).
 
 ## <a name="encrypt-application-data-at-rest"></a>Chiffrer les données d’application au repos
-Chaque [type de nœud](service-fabric-cluster-nodetypes.md) d’un cluster Service Fabric exécuté dans Azure s’appuie sur un [groupe de machines virtuelles identiques](../virtual-machine-scale-sets/virtual-machine-scale-sets-overview.md). Avec un modèle Azure Resource Manager, vous pouvez associer des disques de données aux groupes identiques constituant le cluster Service Fabric.  Si vos services enregistrent des données sur un disque de données attaché, vous pouvez [chiffrer ces disques de données](../virtual-machine-scale-sets/virtual-machine-scale-sets-encrypt-disks-ps.md) pour protéger vos données d’application.
+Chaque [type de nœud](service-fabric-cluster-nodetypes.md) d’un cluster Service Fabric exécuté dans Azure s’appuie sur un [groupe de machines virtuelles identiques](../virtual-machine-scale-sets/overview.md). Avec un modèle Azure Resource Manager, vous pouvez associer des disques de données aux groupes identiques constituant le cluster Service Fabric.  Si vos services enregistrent des données sur un disque de données attaché, vous pouvez [chiffrer ces disques de données](../virtual-machine-scale-sets/disk-encryption-powershell.md) pour protéger vos données d’application.
 
 <!--TO DO: Enable BitLocker on Windows standalone clusters?
 TO DO: Encrypt disks on Linux clusters?-->

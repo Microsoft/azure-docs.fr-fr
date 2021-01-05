@@ -4,15 +4,16 @@ description: Découvrez comment vous connecter à un serveur Analysis Services d
 author: minewiskan
 ms.service: azure-analysis-services
 ms.topic: conceptual
-ms.date: 04/17/2020
+ms.date: 12/01/2020
 ms.author: owend
 ms.reviewer: minewiskan
-ms.openlocfilehash: cc671629934d80b3e727ca69f9026f534d05e160
-ms.sourcegitcommit: acb82fc770128234f2e9222939826e3ade3a2a28
+ms.custom: references_regions
+ms.openlocfilehash: 4abe1e9c6f9d7b62792936f816b9c46a937be41a
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81676645"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96499422"
 ---
 # <a name="connecting-to-servers"></a>Connexion aux serveurs
 
@@ -20,9 +21,9 @@ Cet article décrit la connexion à un serveur à l’aide d’applications de m
 
 ## <a name="client-libraries"></a>Bibliothèques clientes
 
-[Obtention des bibliothèques clientes les plus récentes](analysis-services-data-providers.md)
+[Obtention des bibliothèques clientes les plus récentes](/analysis-services/client-libraries?view=azure-analysis-services-current&preserve-view=true)
 
-Toutes les connexions à un serveur, quel que soit le type, nécessitent des bibliothèques clientes AMO, ADOMD.NET et OLEDB mises à jour pour interagir avec un serveur Analysis Services. Pour SSMS, Visual Studio, Excel 2016 ou version ultérieure et Power BI, les bibliothèques clientes les plus récentes sont installées ou mises à jour avec les versions mensuelles. Toutefois, dans certains cas, il est possible qu’une application ne dispose pas de la version la plus récente. Par exemple, lorsque les stratégies retardent les mises à jour, ou lorsque les mises à jour Office 365 se trouvent sur le canal différé.
+Toutes les connexions à un serveur, quel que soit le type, nécessitent des bibliothèques clientes AMO, ADOMD.NET et OLEDB mises à jour pour interagir avec un serveur Analysis Services. Pour SSMS, Visual Studio, Excel 2016 ou version ultérieure et Power BI, les bibliothèques clientes les plus récentes sont installées ou mises à jour avec les versions mensuelles. Toutefois, dans certains cas, il est possible qu’une application ne dispose pas de la version la plus récente. Par exemple, lorsque les stratégies retardent les mises à jour, ou lorsque les mises à jour Microsoft 365 se trouvent sur le canal différé.
 
 > [!NOTE]
 > Les bibliothèques clientes ne peuvent pas se connecter à Azure Analysis Services par le biais de serveurs proxy qui nécessitent un nom d'utilisateur et un mot de passe. 
@@ -76,10 +77,27 @@ Utilisez le compte Windows qui exécute le processus en cours.
 
 Avec les versions antérieures d’Excel, les utilisateurs peuvent se connecter à un serveur Azure Analysis Services à l’aide d’un fichier Office Data Connection (.odc). Pour en savoir plus, consultez [Créer un fichier Office Data Connection (.odc)](analysis-services-odc.md).
 
+## <a name="connect-as-a-linked-server-from-sql-server"></a>Se connecter en tant que serveur lié à partir de SQL Server
+
+SQL Server peut se connecter à une ressource Azure Analysis Services en tant que [serveur lié](/sql/relational-databases/linked-servers/create-linked-servers-sql-server-database-engine) en spécifiant MSOLAP comme fournisseur de source de données. Avant de configurer une connexion de serveur lié, veillez à installer la dernière [bibliothèque de client MSOLAP](/analysis-services/client-libraries?view=azure-analysis-services-current&preserve-view=true) (fournisseur). 
+
+Pour les connexions de serveur lié à Azure Analysis Services, le fournisseur MSOLAP doit être instancié en dehors du processus SQL Server. Lors de la configuration des options de serveur lié, vérifiez que l’option **Autoriser inprocess** **n’est pas sélectionnée**.
+
+Si **Autoriser inprocess** est sélectionné et que le fournisseur est instancié dans le processus SQL Server, l’erreur suivante est retournée :
+
+```
+OLE DB provider "MSOLAP" for linked server "(null)" returned message "The following system error occurred: ".
+
+OLE DB provider "MSOLAP" for linked server "(null)" returned message "The connection failed because user credentials are needed and Sign-In UI is not allowed.".
+
+Msg 7303, Level 16, State 1, Line 2
+Cannot initialize the data source object of OLE DB provider "MSOLAP" for linked server "(null)".
+```
+
+
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 [Connexion avec Excel](analysis-services-connect-excel.md)    
 [Connexion avec Power BI](analysis-services-connect-pbi.md)   
-[Gérer votre serveur](analysis-services-manage.md)   
-
+[Gérer votre serveur](analysis-services-manage.md)

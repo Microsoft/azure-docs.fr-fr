@@ -1,22 +1,15 @@
 ---
 title: Azure PowerShell - S’abonner à un groupe de ressources
 description: Cet article fournit un exemple de script Azure PowerShell qui montre comment s’abonner à des événements Event Grid pour un groupe de ressources et filtrer pour trouver une ressource.
-services: event-grid
-documentationcenter: na
-author: spelluru
-ms.service: event-grid
 ms.devlang: powershell
 ms.topic: sample
-ms.tgt_pltfrm: na
-ms.workload: na
-ms.date: 01/23/2020
-ms.author: spelluru
-ms.openlocfilehash: 5d41bfec5978d1baf38eaf1608f50375170d9929
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.date: 07/08/2020
+ms.openlocfilehash: f3aeec208ba6b80643e50307b89f590977bfb446
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "76720603"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87460760"
 ---
 # <a name="subscribe-to-events-for-a-resource-group-and-filter-for-a-resource-with-powershell"></a>S’inscrire aux événements d’un groupe de ressources et filtrer pour trouver une ressource avec PowerShell
 
@@ -44,9 +37,9 @@ Ce script utilise la commande suivante pour créer l’abonnement aux événemen
 
 | Commande | Notes |
 |---|---|
-| [New-AzEventGridSubscription](https://docs.microsoft.com/powershell/module/az.eventgrid/new-azeventgridsubscription) | Créer un abonnement Event Grid. |
+| [New-AzEventGridSubscription](/powershell/module/az.eventgrid/new-azeventgridsubscription) | Créer un abonnement Event Grid. |
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 * Pour voir une présentation des applications gérées, consultez [Vue d’ensemble des applications gérées Azure](../overview.md).
-* Pour plus d’informations sur PowerShell, consultez la [documentation Azure PowerShell](https://docs.microsoft.com/powershell/azure/get-started-azureps).
+* Pour plus d’informations sur PowerShell, consultez la [documentation Azure PowerShell](/powershell/azure/get-started-azureps).

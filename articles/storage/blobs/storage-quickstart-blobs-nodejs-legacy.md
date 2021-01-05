@@ -3,20 +3,24 @@ title: 'Démarrage rapide : Bibliothèque de client Stockage Blob Azure v10 pou
 description: Créez, chargez et supprimez des objets blob et des conteneurs en Node.js avec la bibliothèque de client Stockage Azure v10 pour JavaScript.
 author: mhopkins-msft
 ms.author: mhopkins
-ms.date: 01/24/2020
+ms.date: 07/24/2020
 ms.service: storage
 ms.subservice: blobs
 ms.topic: quickstart
-ms.openlocfilehash: c2bf401713dc7ae3b060181f1df56d0915f68aed
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.custom: devx-track-js
+ms.openlocfilehash: 1f47c35997fe060fd3c318602bcad17de83b530c
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "78269499"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "91249618"
 ---
 # <a name="quickstart-manage-blobs-with-javascript-v10-sdk-in-nodejs"></a>Démarrage rapide : Gérer des objets blob avec le SDK JavaScript v10 en Node.js
 
 Dans ce guide de démarrage rapide, vous découvrez comment gérer des objets blob avec Node.js. Les objets blob sont des objets pouvant contenir de grandes quantités de texte ou de données binaires, notamment des images, des documents, des médias en streaming et des données d’archive. Vous allez charger, télécharger, lister et supprimer des objets blob, et vous allez gérer des conteneurs.
+
+> [!NOTE]
+> Ce guide de démarrage rapide utilise une version héritée de la bibliothèque de client Stockage Blob Azure. Pour démarrer avec la dernière version, consultez [Démarrage rapide : Gérer les blobs avec le kit SDK JavaScript v12 en Node.js](storage-quickstart-blobs-nodejs.md).
 
 ## <a name="prerequisites"></a>Prérequis
 

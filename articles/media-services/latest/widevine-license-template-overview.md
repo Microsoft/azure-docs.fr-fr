@@ -1,7 +1,7 @@
 ---
 title: Vue d’ensemble du modèle de licence Widevine avec Azure Media Services v3
-description: Cette rubrique donne un aperçu d’un modèle de licence Widevine utilisé pour configurer des licences Widevine.
-author: juliako
+description: Découvrez Azure Media Services avec le modèle de licence Widevine et comment l’utiliser pour configurer des licences Widevine.
+author: IngridAtMicrosoft
 manager: femila
 editor: ''
 services: media-services
@@ -10,53 +10,60 @@ ms.service: media-services
 ms.workload: media
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
+ms.topic: conceptual
 ms.date: 05/07/2020
-ms.author: juliako
-ms.openlocfilehash: f614bd7f00587c5bdc0e7bc3e4ec737985da328b
-ms.sourcegitcommit: 309a9d26f94ab775673fd4c9a0ffc6caa571f598
+ms.author: inhenkel
+ms.custom: devx-track-csharp
+ms.openlocfilehash: abedbd60a82f280bcd983c05a43685524a3a24e7
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/09/2020
-ms.locfileid: "82996978"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91598151"
 ---
 # <a name="media-services-v3-with-widevine-license-template-overview"></a>Vue d’ensemble du modèle de licence Widevine avec Media Services v3
 
 Azure Media Services vous permet de chiffrer votre contenu avec **Google Widevine**. Media Services fournit également un service de remise de licences Widevine. Vous pouvez utiliser les API Azure Media Services pour configurer des licences Widevine. Quand un lecteur tente de lire votre contenu protégé par Widevine, une demande est envoyée au service de remise de licence pour obtenir la licence. Si le service de licence approuve la demande, le service émet la licence. Elle est envoyée au client et utilisée pour déchiffrer et lire le contenu spécifié.
 
+[!INCLUDE [Widevine is not available in the GovCloud region.](./includes/widevine-not-available-govcloud.md)]
+
 Une demande de licence Widevine se présente sous forme de message JSON.  
+
+
+
+```json
+{  
+    "payload":"<license challenge>",
+    "content_id": "<content id>"
+    "provider": "<provider>"
+    "allowed_track_types":"<types>",
+    "content_key_specs":[  
+        {  
+            "track_type":"<track type 1>"
+        },
+        {  
+            "track_type":"<track type 2>"
+        },
+        …
+    ],
+    "policy_overrides":{  
+        "can_play":<can play>,
+        "can persist":<can persist>,
+        "can_renew":<can renew>,
+        "rental_duration_seconds":<rental duration>,
+        "playback_duration_seconds":<playback duration>,
+        "license_duration_seconds":<license duration>,
+        "renewal_recovery_duration_seconds":<renewal recovery duration>,
+        "renewal_server_url":"<renewal server url>",
+        "renewal_delay_seconds":<renewal delay>,
+        "renewal_retry_interval_seconds":<renewal retry interval>,
+        "renew_with_usage":<renew with usage>
+    }
+}
+```
 
 >[!NOTE]
 > Vous pouvez créer un message vide sans valeur, simplement « {} ». Dans ce cas, un modèle de licence est créé avec les valeurs par défaut. Les valeurs par défaut fonctionnent pour la plupart des cas. Les scénarios de remise de licence Microsoft doivent toujours utiliser les valeurs par défaut. Si vous devez définir les valeurs « provider » et « content_id », un fournisseur doit correspondre aux informations d’identification Widevine.
-
-    {  
-       "payload":"<license challenge>",
-       "content_id": "<content id>"
-       "provider": "<provider>"
-       "allowed_track_types":"<types>",
-       "content_key_specs":[  
-          {  
-             "track_type":"<track type 1>"
-          },
-          {  
-             "track_type":"<track type 2>"
-          },
-          …
-       ],
-       "policy_overrides":{  
-          "can_play":<can play>,
-          "can persist":<can persist>,
-          "can_renew":<can renew>,
-          "rental_duration_seconds":<rental duration>,
-          "playback_duration_seconds":<playback duration>,
-          "license_duration_seconds":<license duration>,
-          "renewal_recovery_duration_seconds":<renewal recovery duration>,
-          "renewal_server_url":"<renewal server url>",
-          "renewal_delay_seconds":<renewal delay>,
-          "renewal_retry_interval_seconds":<renewal retry interval>,
-          "renew_with_usage":<renew with usage>
-       }
-    }
 
 ## <a name="json-message"></a>Message JSON
 
@@ -110,7 +117,7 @@ Chaque valeur content_key_specs doit être spécifiée pour toutes les pistes, q
 
 ## <a name="configure-your-widevine-license-with-net"></a>Configurer vos licences Widevine avec .NET 
 
-Media Services propose une classe vous permettant de configurer une licence Widevine. Pour créer la licence, transférez JSON vers [WidevineTemplate](https://docs.microsoft.com/dotnet/api/microsoft.azure.management.media.models.contentkeypolicywidevineconfiguration.widevinetemplate?view=azure-dotnet#Microsoft_Azure_Management_Media_Models_ContentKeyPolicyWidevineConfiguration_WidevineTemplate).
+Media Services propose une classe vous permettant de configurer une licence Widevine. Pour créer la licence, transférez JSON vers [WidevineTemplate](/dotnet/api/microsoft.azure.management.media.models.contentkeypolicywidevineconfiguration.widevinetemplate?view=azure-dotnet#Microsoft_Azure_Management_Media_Models_ContentKeyPolicyWidevineConfiguration_WidevineTemplate).
 
 Pour configurer le modèle, vous pouvez :
 
@@ -256,7 +263,7 @@ public class WidevineTemplate
 
 #### <a name="configure-the-license"></a>Configurer la licence
 
-Utilisez les classes définies dans la section précédente pour créer un JSON utilisé pour configurer [WidevineTemplate](https://docs.microsoft.com/dotnet/api/microsoft.azure.management.media.models.contentkeypolicywidevineconfiguration.widevinetemplate?view=azure-dotnet#Microsoft_Azure_Management_Media_Models_ContentKeyPolicyWidevineConfiguration_WidevineTemplate) :
+Utilisez les classes définies dans la section précédente pour créer un JSON utilisé pour configurer [WidevineTemplate](/dotnet/api/microsoft.azure.management.media.models.contentkeypolicywidevineconfiguration.widevinetemplate?view=azure-dotnet#Microsoft_Azure_Management_Media_Models_ContentKeyPolicyWidevineConfiguration_WidevineTemplate) :
 
 ```csharp
 private static ContentKeyPolicyWidevineConfiguration ConfigureWidevineLicenseTempate()

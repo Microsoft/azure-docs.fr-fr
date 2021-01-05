@@ -11,17 +11,17 @@ ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 04/13/2020
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: ca425c7c5739785f3463086d89b4796f09bf45b4
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 31bdfc7e3eca2a2678b75b80973a1680448737d1
+ms.sourcegitcommit: 63d0621404375d4ac64055f1df4177dfad3d6de6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82229814"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97507674"
 ---
 # <a name="azure-active-directory-pass-through-authentication-quickstart"></a>Authentification directe Azure Active Directory : Démarrage rapide
 
@@ -33,7 +33,7 @@ L’authentification directe Azure Active Directory (Azure AD) permet à vos uti
 >Si vous procédez à une migration depuis AD FS (ou d’autres technologies de fédération) vers l’authentification directe, nous vous recommandons vivement de vous référer à notre guide de déploiement détaillé, publié [ici](https://aka.ms/adfstoPTADPDownload).
 
 >[!NOTE]
->Si vous déployez l’authentification directe avec le cloud Azure Government, consultez [Considérations sur les identités hybrides pour Azure Government](https://docs.microsoft.com/azure/active-directory/hybrid/reference-connect-government-cloud).
+>Si vous déployez l’authentification directe avec le cloud Azure Government, consultez [Considérations sur les identités hybrides pour Azure Government](./reference-connect-government-cloud.md).
 
 Suivez ces instructions pour déployer l’authentification directe sur votre locataire :
 
@@ -42,12 +42,12 @@ Suivez ces instructions pour déployer l’authentification directe sur votre lo
 Vérifiez que les prérequis suivants sont remplis.
 
 >[!IMPORTANT]
->Du point de vue de la sécurité, les administrateurs doivent traiter le serveur exécutant l’agent PTA comme s’il s’agissait d’un contrôleur de domaine.  Les serveurs d’agent PTA doivent être renforcés de la même manière que décrit dans [Sécurisation des contrôleurs de domaine contre les attaques](https://docs.microsoft.com/windows-server/identity/ad-ds/plan/security-best-practices/securing-domain-controllers-against-attack)
+>Du point de vue de la sécurité, les administrateurs doivent traiter le serveur exécutant l’agent PTA comme s’il s’agissait d’un contrôleur de domaine.  Les serveurs d’agent PTA doivent être renforcés de la même manière que décrit dans [Sécurisation des contrôleurs de domaine contre les attaques](/windows-server/identity/ad-ds/plan/security-best-practices/securing-domain-controllers-against-attack)
 
 ### <a name="in-the-azure-active-directory-admin-center"></a>Dans le Centre d’administration Azure Active Directory
 
-1. Créez un compte d’administrateur général « cloud uniquement » dans votre locataire Azure AD. De cette façon, vous pouvez gérer la configuration de votre locataire si vos services locaux venaient à échouer ou ne plus être disponibles. Découvrez comment [ajouter un compte d’administrateur général de type cloud uniquement](../active-directory-users-create-azure-portal.md). Cette étape est essentielle si vous voulez éviter de vous retrouver en dehors de votre locataire.
-2. Ajoutez un ou plusieurs [noms de domaine personnalisés](../active-directory-domains-add-azure-portal.md) à votre locataire Azure AD. Vos utilisateurs peuvent se connecter à l’aide de l’un de ces noms de domaine.
+1. Créez un compte d’administrateur général « cloud uniquement » dans votre locataire Azure AD. De cette façon, vous pouvez gérer la configuration de votre locataire si vos services locaux venaient à échouer ou ne plus être disponibles. Découvrez comment [ajouter un compte d’administrateur général de type cloud uniquement](../fundamentals/add-users-azure-active-directory.md). Cette étape est essentielle si vous voulez éviter de vous retrouver en dehors de votre locataire.
+2. Ajoutez un ou plusieurs [noms de domaine personnalisés](../fundamentals/add-custom-domain.md) à votre locataire Azure AD. Vos utilisateurs peuvent se connecter à l’aide de l’un de ces noms de domaine.
 
 ### <a name="in-your-on-premises-environment"></a>Dans votre environnement local
 
@@ -55,12 +55,12 @@ Vérifiez que les prérequis suivants sont remplis.
 2. Installez la [version la plus récente d’Azure AD Connect](https://www.microsoft.com/download/details.aspx?id=47594) sur le serveur identifié à l’étape précédente. Si vous exécutez déjà Azure AD Connect, vérifiez qu’il s’agit de la version 1.1.750.0 ou d’une version ultérieure.
 
     >[!NOTE]
-    >Les versions 1.1.557.0, 1.1.558.0, 1.1.561.0 et 1.1.614.0 d’Azure AD Connect comportent un problème lié à la synchronisation de hachage de mot de passe. Si vous _ne prévoyez pas_ d’utiliser la synchronisation de hachage de mot de passe en même temps que l’authentification directe, lisez les [Notes de publication Azure AD Connect](https://docs.microsoft.com/azure/active-directory/hybrid/reference-connect-version-history#116470).
+    >Les versions 1.1.557.0, 1.1.558.0, 1.1.561.0 et 1.1.614.0 d’Azure AD Connect comportent un problème lié à la synchronisation de hachage de mot de passe. Si vous _ne prévoyez pas_ d’utiliser la synchronisation de hachage de mot de passe en même temps que l’authentification directe, lisez les [Notes de publication Azure AD Connect](./reference-connect-version-history.md).
 
 3. Identifiez un ou plusieurs serveurs supplémentaires (exécutant Windows Server 2012 R2 ou version ultérieure, avec TLS 1.2 activé) sur lesquels vous pouvez exécuter des agents d’authentification autonomes. Ces serveurs supplémentaires sont nécessaires pour garantir une haute disponibilité des requêtes de connexion. Ajoutez ces serveurs à la même forêt Active Directory que celle des utilisateurs dont vous devez valider les mots de passe.
 
     >[!IMPORTANT]
-    >Dans les environnements de production, nous vous recommandons l’utilisation d’au moins 3 agents d’authentification s’exécutant sur votre locataire. Il existe une limite système de 40 agents d’authentification par client. En tant que bonne pratique, traitez tous les serveurs exécutant des agents d’authentification comme des systèmes de niveau 0 (voir [référence](https://docs.microsoft.com/windows-server/identity/securing-privileged-access/securing-privileged-access-reference-material)).
+    >Dans les environnements de production, nous vous recommandons l’utilisation d’au moins 3 agents d’authentification s’exécutant sur votre locataire. Il existe une limite système de 40 agents d’authentification par client. En tant que bonne pratique, traitez tous les serveurs exécutant des agents d’authentification comme des systèmes de niveau 0 (voir [référence](/windows-server/identity/securing-privileged-access/securing-privileged-access-reference-material)).
 
 4. S’il existe un pare-feu entre vos serveurs et Azure AD, configurez les éléments suivants :
    - Assurez-vous que les agents d’authentification peuvent effectuer des requêtes *sortantes* vers Azure AD sur les ports suivants :
@@ -72,9 +72,9 @@ Vérifiez que les prérequis suivants sont remplis.
      | **8080** (facultatif) | Les agents d’authentification signalent leur état toutes les dix minutes sur le port 8080 (si le port 443 n’est pas disponible). Cet état est affiché sur le portail Azure AD. Le port 8080 _n’est pas utilisé_ pour les connexions utilisateur. |
      
      Si votre pare-feu applique les règles en fonction des utilisateurs d’origine, ouvrez ces ports au trafic provenant des services Windows exécutés en tant que service réseau.
-   - Si votre pare-feu ou votre proxy autorise la mise en liste verte de DNS, ajoutez des connexions vers **\*.msappproxy.net** et **\*.servicebus.windows.net**. Dans le cas contraire, autorisez l’accès aux [plages d’adresses IP du centre de données Azure](https://www.microsoft.com/download/details.aspx?id=41653), qui sont mises à jour chaque semaine.
+   - Si votre pare-feu ou proxy vous permet d’ajouter des entrées DNS à une liste d’autorisation, ajoutez des connexions à **\*.msappproxy.net** et **\*.servicebus.windows.net**. Dans le cas contraire, autorisez l’accès aux [plages d’adresses IP du centre de données Azure](https://www.microsoft.com/download/details.aspx?id=41653), qui sont mises à jour chaque semaine.
    - Vos agents d’authentification doivent accéder à **login.windows.net** et à **login.microsoftonline.net** pour l’inscription initiale. Par conséquent, ouvrez également votre pare-feu pour ces URL.
-   - Pour valider le certificat, débloquez les URL suivantes : **mscrl.microsoft.com:80**, **crl.microsoft.com:80**, **ocsp.msocsp.com:80** et **www\.microsoft.com:80**. Ces URL étant utilisées pour la validation de certificat avec d’autres produits Microsoft, elles sont peut-être déjà débloquées.
+    - Pour la validation des certificats, débloquez les URL suivantes : **crl3.digicert.com:80**, **crl4.digicert.com:80**, **ocsp.digicert.com:80**, **www\.d-trust.net:80**, **root-c3-ca2-2009.ocsp.d-trust.net:80**, **crl.microsoft.com:80**, **oneocsp.microsoft.com:80** et **ocsp.msocsp.com:80**. Ces URL étant utilisées pour la validation de certificat avec d’autres produits Microsoft, elles sont peut-être déjà débloquées.
 
 ### <a name="azure-government-cloud-prerequisite"></a>Cloud Azure Government - Prérequis
 Avant d'activer l'authentification directe via Azure AD Connect à l'étape 2, téléchargez la dernière version de l'agent PTA à partir du portail Azure.  Vous devez vous assurer que vous disposez de la version **1.5.1742.0.** ou version ultérieure.  Pour vérifier votre agent, consultez [Mettre à niveau les agents d'authentification](how-to-connect-pta-upgrade-preview-authentication-agents.md).
@@ -120,7 +120,7 @@ Suivez ces instructions pour vérifier que vous avez activé correctement l’au
 Si vous envisagez de déployer l’authentification directe dans un environnement de production, vous devez installer des agents d’authentification autonomes supplémentaires. Installez ces agents d’authentification sur des serveurs _autres_ que celui qui exécute Azure AD Connect. Cette configuration fournit une haute disponibilité pour les requêtes de connexion des utilisateurs.
 
 >[!IMPORTANT]
->Dans les environnements de production, nous vous recommandons l’utilisation d’au moins 3 agents d’authentification s’exécutant sur votre locataire. Il existe une limite système de 40 agents d’authentification par client. En tant que bonne pratique, traitez tous les serveurs exécutant des agents d’authentification comme des systèmes de niveau 0 (voir [référence](https://docs.microsoft.com/windows-server/identity/securing-privileged-access/securing-privileged-access-reference-material)).
+>Dans les environnements de production, nous vous recommandons l’utilisation d’au moins 3 agents d’authentification s’exécutant sur votre locataire. Il existe une limite système de 40 agents d’authentification par client. En tant que bonne pratique, traitez tous les serveurs exécutant des agents d’authentification comme des systèmes de niveau 0 (voir [référence](/windows-server/identity/securing-privileged-access/securing-privileged-access-reference-material)).
 
 L’installation de plusieurs agents d’authentification directe assure une haute disponibilité, mais pas d’équilibrage de charge entre les agents d’authentification. Pour savoir combien d’agents d’authentification sont nécessaires pour votre client, tenez compte des pics et de la charge moyenne des demandes de connexion que vous attendez sur votre client. À titre de référence, un seul agent d’authentification peut gérer entre 300 et 400 authentifications par seconde sur un serveur doté d’un CPU à 4 cœurs et de 16 Go de RAM.
 
@@ -151,15 +151,19 @@ Tout d’abord, vous pouvez le faire interactivement en exécutant le fichier ex
 La deuxième solution consiste à créer et à exécuter un script de déploiement sans assistance. C’est utile lorsque vous souhaitez déployer plusieurs agents d’authentification à la fois, ou installer des agents d’authentification sur des serveurs Windows qui ne disposent pas d’une interface utilisateur, ou auxquels vous ne pouvez pas accéder avec le Bureau à distance. Voici des instructions pour utiliser cette méthode :
 
 1. Exécutez la commande suivante pour installer un agent d’authentification : `AADConnectAuthAgentSetup.exe REGISTERCONNECTOR="false" /q`.
-2. Vous pouvez inscrire l’agent d’authentification auprès de notre service à l’aide de Windows PowerShell. Créez un objet d’informations d’identification PowerShell `$cred` qui contient un nom d’utilisateur et un mot de passe d’administrateur général pour votre locataire. Exécutez la commande suivante, en remplaçant *\<username\>* et *\<password\>*  :
+2. Vous pouvez inscrire l’agent d’authentification auprès de notre service à l’aide de Windows PowerShell. Créez un objet d’informations d’identification PowerShell `$cred` qui contient un nom d’utilisateur et un mot de passe d’administrateur général pour votre locataire. Exécutez la commande suivante, en remplaçant *\<username\>* et *\<password\>* :
 
-        $User = "<username>"
-        $PlainPassword = '<password>'
-        $SecurePassword = $PlainPassword | ConvertTo-SecureString -AsPlainText -Force
-        $cred = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $User, $SecurePassword
+  ```powershell
+  $User = "<username>"
+  $PlainPassword = '<password>'
+  $SecurePassword = $PlainPassword | ConvertTo-SecureString -AsPlainText -Force
+  $cred = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $User, $SecurePassword
+  ```
 3. Accédez à **C:\Program Files\Microsoft Azure AD Connect Authentication Agent** et exécutez le script suivant en utilisant l’objet `$cred` que vous venez de créer :
 
-        RegisterConnector.ps1 -modulePath "C:\Program Files\Microsoft Azure AD Connect Authentication Agent\Modules\" -moduleName "PassthroughAuthPSModule" -Authenticationmode Credentials -Usercredentials $cred -Feature PassthroughAuthentication
+  ```powershell
+  RegisterConnector.ps1 -modulePath "C:\Program Files\Microsoft Azure AD Connect Authentication Agent\Modules\" -moduleName "PassthroughAuthPSModule" -Authenticationmode Credentials -Usercredentials $cred -Feature PassthroughAuthentication
+  ```
 
 >[!IMPORTANT]
 >Si un agent d’authentification est installé sur une machine virtuelle, vous ne pouvez pas cloner cette machine virtuelle pour installer un autre agent d’authentification. Cette méthode n’est **pas prise en charge**.

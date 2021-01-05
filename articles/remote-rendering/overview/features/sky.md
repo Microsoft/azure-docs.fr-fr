@@ -5,12 +5,13 @@ author: florianborn71
 ms.author: flborn
 ms.date: 02/07/2020
 ms.topic: article
-ms.openlocfilehash: be3dc2b113cb21c2dfb54a29e7f426e0d925c6d9
-ms.sourcegitcommit: 0690ef3bee0b97d4e2d6f237833e6373127707a7
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 58c07654c174f5b94512574cb4c279d35897dc71
+ms.sourcegitcommit: e2dc549424fb2c10fcbb92b499b960677d67a8dd
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83759113"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94701940"
 ---
 # <a name="sky-reflections"></a>Reflets du ciel
 
@@ -27,8 +28,8 @@ Les images ci-dessous montrent les résultats de l’éclairage de différentes 
 
 | Roughness  | 0                                        | 0,25                                          | 0.5                                          | 0,75                                          | 1                                          |
 |:----------:|:----------------------------------------:|:---------------------------------------------:|:--------------------------------------------:|:---------------------------------------------:|:------------------------------------------:|
-| Non métallique  | ![Dielectric0](media/dielectric-0.png)   | ![GreenPointPark](media/dielectric-0.25.png)  | ![GreenPointPark](media/dielectric-0.5.png)  | ![GreenPointPark](media/dielectric-0.75.png)  | ![GreenPointPark](media/dielectric-1.png)  |
-| Métallique      | ![GreenPointPark](media/metallic-0.png)  | ![GreenPointPark](media/metallic-0.25.png)    | ![GreenPointPark](media/metallic-0.5.png)    | ![GreenPointPark](media/metallic-0.75.png)    | ![GreenPointPark](media/metallic-1.png)    |
+| Non métallique  | ![Diélectrique, Rugosité=0](media/dielectric-0.png)   | ![Diélectrique, Rugosité=0,25](media/dielectric-0.25.png)  | ![Diélectrique, Rugosité=0,5](media/dielectric-0.5.png)  | ![Diélectrique, Rugosité=0,75](media/dielectric-0.75.png)  | ![Diélectrique, Rugosité=1](media/dielectric-1.png)  |
+| Métallique      | ![Métallique, Rugosité=0](media/metallic-0.png)  | ![Métallique, Rugosité=0,25](media/metallic-0.25.png)    | ![Métallique, Rugosité=0,5](media/metallic-0.5.png)    | ![Métallique, Rugosité=0,75](media/metallic-0.75.png)    | ![Métallique, Rugosité=1](media/metallic-1.png)    |
 
 Pour plus d’informations sur le modèle d’éclairage, reportez-vous au chapitre sur les [matériaux](../../concepts/materials.md).
 
@@ -75,17 +76,17 @@ void ChangeEnvironmentMap(ApiHandle<AzureSession> session)
     ApiHandle<LoadTextureAsync> skyTextureLoad = *session->Actions()->LoadTextureFromSASAsync(params);
 
     skyTextureLoad->Completed([&](ApiHandle<LoadTextureAsync> res)
-    {
-        if (res->IsRanToCompletion())
         {
-            ApiHandle<SkyReflectionSettings> settings = *session->Actions()->SkyReflectionSettings();
-            settings->SkyReflectionTexture(*res->Result());
-        }
-        else
-        {
-            printf("Texture loading failed!");
-        }
-    });
+            if (res->GetIsRanToCompletion())
+            {
+                ApiHandle<SkyReflectionSettings> settings = session->Actions()->GetSkyReflectionSettings();
+                settings->SetSkyReflectionTexture(res->GetResult());
+            }
+            else
+            {
+                printf("Texture loading failed!\n");
+            }
+        });
 }
 
 ```
@@ -120,24 +121,28 @@ Azure Remote Rendering fournit quelques cartes d’environnement intégrées qui
 
 |Identificateur                         | Description                                              | Illustration                                                      |
 |-----------------------------------|:---------------------------------------------------------|:-----------------------------------------------------------------:|
-|builtin://Autoshop                 | Divers éclairages directs, éclairage intérieur lumineux    | ![Autoshop](media/autoshop.png)
-|builtin://BoilerRoom               | Intérieur clair, lumineux, plusieurs sources d’éclairage naturel      | ![BoilerRoom](media/boiler-room.png)
-|builtin://ColorfulStudio           | Lumières de différentes couleurs et intensités, dans un décor intérieur moyennement éclairé  | ![ColorfulStudio](media/colorful-studio.png)
-|builtin://Hangar                   | Éclairage de grande salle, moyennement lumineux                     | ![SmallHangar](media/hangar.png)
-|builtin://IndustrialPipeAndValve   | Décor intérieur sombre avec lumière contrastée              | ![IndustrialPipeAndValve](media/industrial-pipe-and-valve.png)
-|builtin://Lebombo                  | Pièce claire, ambiance de jour, lumière vive provenant d’une fenêtre     | ![Lebombo](media/lebombo.png)
-|builtin://SataraNight              | Sol sombre et nuit noire avec de nombreuses lumières environnantes   | ![SataraNight](media/satara-night.png)
-|builtin://SunnyVondelpark          | Lumière du soleil vive et ombre contrastée                      | ![SunnyVondelpark](media/sunny-vondelpark.png)
-|builtin://Syferfontein             | Ciel clair avec sol modérément éclairé            | ![Syferfontein](media/syferfontein.png)
-|builtin://TearsOfSteelBridge       | Soleil et ombre modérément contrastés                         | ![TearsOfSteelBridge](media/tears-of-steel-bridge.png)
-|builtin://VeniceSunset             | Soir, lumière de coucher de soleil à l’approche du crépuscule                    | ![VeniceSunset](media/venice-sunset.png)
-|builtin://WhippleCreekRegionalPark | Sol dans l’ombre ; tonalités vives, vert luxuriant et lumière blanche | ![WhippleCreekRegionalPark](media/whipple-creek-regional-park.png)
-|builtin://WinterRiver              | Ambiante diurne, lumière vive et sol clair                 | ![WinterRiver](media/winter-river.png)
-|builtin://DefaultSky               | Identique à TearsOfSteelBridge                               | ![DefaultSky](media/tears-of-steel-bridge.png)
+|builtin://Autoshop                 | Divers éclairages directs, éclairage intérieur lumineux    | ![Skybox Autoshop utilisée pour éclairer un objet](media/autoshop.png)
+|builtin://BoilerRoom               | Intérieur clair, lumineux, plusieurs sources d’éclairage naturel      | ![Skybox BoilerRoom utilisée pour éclairer un objet](media/boiler-room.png)
+|builtin://ColorfulStudio           | Lumières de différentes couleurs et intensités, dans un décor intérieur moyennement éclairé  | ![Skybox ColorfulStudio utilisée pour éclairer un objet](media/colorful-studio.png)
+|builtin://Hangar                   | Éclairage de grande salle, moyennement lumineux                     | ![Skybox SmallHangar utilisée pour éclairer un objet](media/hangar.png)
+|builtin://IndustrialPipeAndValve   | Décor intérieur sombre avec lumière contrastée              | ![Skybox IndustrialPipeAndValve utilisée pour éclairer un objet](media/industrial-pipe-and-valve.png)
+|builtin://Lebombo                  | Pièce claire, ambiance de jour, lumière vive provenant d’une fenêtre     | ![Skybox Lebombo utilisée pour éclairer un objet](media/lebombo.png)
+|builtin://SataraNight              | Sol sombre et nuit noire avec de nombreuses lumières environnantes   | ![Skybox SataraNight utilisée pour éclairer un objet](media/satara-night.png)
+|builtin://SunnyVondelpark          | Lumière du soleil vive et ombre contrastée                      | ![Skybox SunnyVondelpark utilisée pour éclairer un objet](media/sunny-vondelpark.png)
+|builtin://Syferfontein             | Ciel clair avec sol modérément éclairé            | ![Skybox Syferfontein utilisée pour éclairer un objet](media/syferfontein.png)
+|builtin://TearsOfSteelBridge       | Soleil et ombre modérément contrastés                         | ![Skybox TearsOfSteelBridge utilisée pour éclairer un objet](media/tears-of-steel-bridge.png)
+|builtin://VeniceSunset             | Soir, lumière de coucher de soleil à l’approche du crépuscule                    | ![Skybox VeniceSunset utilisée pour éclairer un objet](media/venice-sunset.png)
+|builtin://WhippleCreekRegionalPark | Sol dans l’ombre ; tonalités vives, vert luxuriant et lumière blanche | ![Skybox WhippleCreekRegionalPark utilisée pour éclairer un objet](media/whipple-creek-regional-park.png)
+|builtin://WinterRiver              | Ambiante diurne, lumière vive et sol clair                 | ![Skybox WinterRiver utilisée pour éclairer un objet](media/winter-river.png)
+|builtin://DefaultSky               | Identique à TearsOfSteelBridge                               | ![Skybox DefaultSky utilisée pour éclairer un objet](media/tears-of-steel-bridge.png)
+
+## <a name="api-documentation"></a>Documentation de l’API
+
+* [RemoteManager.SkyReflectionSettings, propriété C#](/dotnet/api/microsoft.azure.remoterendering.remotemanager.skyreflectionsettings)
+* [RemoteManager::SkyReflectionSettings(), propriété C++](/cpp/api/remote-rendering/remotemanager#skyreflectionsettings)
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 * [Lumières](../../overview/features/lights.md)
 * [Matériaux](../../concepts/materials.md)
 * [Textures](../../concepts/textures.md)
-* [L’outil en ligne de commande TexConv](../../resources/tools/tex-conv.md)

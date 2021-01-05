@@ -4,12 +4,12 @@ description: Présente le service Azure Site Recovery et récapitule les différ
 ms.topic: overview
 ms.date: 03/17/2020
 ms.custom: MVC
-ms.openlocfilehash: ee387682e935522b37a5b4f9f32e53712bfb9150
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: 19860e64182cd73fe9f9fa1246f440a03109d465
+ms.sourcegitcommit: b6f3ccaadf2f7eba4254a402e954adf430a90003
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "80067541"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92281885"
 ---
 # <a name="about-site-recovery"></a>À propos de Site Recovery
 
@@ -20,7 +20,7 @@ En tant qu’organisation, vous devez adopter une stratégie de continuité d’
 Azure Recovery Services contribue à votre stratégie BCDR :
 
 - **Service Site Recovery** : Site Recovery permet d’assurer la continuité de l’activité en maintenant l’exécution des charges de travail et applications métier lors des interruptions. Site Recovery réplique les charges de travail s’exécutant sur des machines virtuelles et physiques depuis un site principal vers un emplacement secondaire. En cas d’interruption au niveau de votre site principal, vous basculez vers l’emplacement secondaire, depuis lequel vous pouvez accéder aux applications. Quand l’emplacement principal est de nouveau fonctionnel, vous pouvez effectuer une restauration automatique vers celui-ci.
-- **Service Sauvegarde** : Le service [Sauvegarde Azure](/azure/backup/) préserve la sécurité et la capacité de récupération de vos données.
+- **Service Sauvegarde** : Le service [Sauvegarde Azure](../backup/index.yml) préserve la sécurité et la capacité de récupération de vos données.
 
 Site Recovery peut gérer la réplication pour :
 
@@ -50,7 +50,7 @@ Site Recovery peut gérer la réplication pour :
 **Pris en charge** | **Détails**
 --- | ---
 **Scénarios de réplication** | Répliquez des machines virtuelles Azure d’une région Azure vers une autre.<br/><br/>  Répliquez des machines virtuelles VMware, des machines virtuelles Hyper-V, des serveurs physiques (Windows et Linux) et des machines virtuelles Azure Stack locales sur Azure.<br/><br/> Répliquez des instances Windows AWS sur Azure.<br/><br/> Répliquer des machines virtuelles VMware locales, des machines virtuelles Hyper-V gérées par System Center VMM et des serveurs physiques vers un site secondaire.
-**Régions** | Consultez les [régions prises en charge](https://azure.microsoft.com/regions/services/) pour Site Recovery. |
+**Régions** | Consultez les [régions prises en charge](https://azure.microsoft.com/global-infrastructure/services/?products=site-recovery) pour Site Recovery. |
 **Machines répliquées** | Passez en revue la configuration requise pour la réplication de [machines virtuelles Azure](azure-to-azure-support-matrix.md#replicated-machine-operating-systems), de [machines virtuelles locales VMware et de serveurs physiques](vmware-physical-azure-support-matrix.md#replicated-machines),et de [machines virtuelles locales Hyper-V](hyper-v-azure-support-matrix.md#replicated-vms).
 **Charges de travail** | Vous pouvez répliquer toutes les charges de travail qui s’exécutent sur une machine prenant en charge la réplication. En outre, l’équipe Site Recovery a effectué des tests spéciaux pour [plusieurs applications](site-recovery-workload.md#workload-summary).
 

@@ -4,12 +4,12 @@ ms.service: site-recovery
 ms.topic: include
 ms.date: 10/26/2018
 ms.author: raynew
-ms.openlocfilehash: c9a0d4387511bbfa033bcb90d9f83e1a7bb39719
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 31e61069c95be9bd1c7a684bb83ebcd93bcb14be
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "67176768"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96019133"
 ---
 1. Lancer le fichier UnifiedSetup.exe d’Azure Site Recovery
 2. Dans la zone **Avant de commencer**, sélectionnez **l’ajout de serveurs de traitement supplémentaires pour effectuer un déploiement avec scale-out**.
@@ -39,7 +39,7 @@ ms.locfileid: "67176768"
      ![Ajouter un serveur de traitement 5](./media/site-recovery-add-process-server/ps-page-5.png)
 
 7. Dans **Emplacement d’installation**, sélectionnez l’emplacement où vous voulez installer les fichiers binaires et stocker le cache. Le lecteur sélectionné doit présenter au moins 5 Go d’espace disque disponible. Toutefois, nous vous recommandons d’utiliser un lecteur de cache présentant au moins 600 Go d’espace disponible.
-     ![Ajouter un serveur de traitement 5](./media/site-recovery-add-process-server/ps-page-6.png)
+     ![Capture d’écran montrant où sont installés les fichiers binaires et le stockage du cache](./media/site-recovery-add-process-server/ps-page-6.png)
 
 8. Dans **Sélection du réseau**, spécifiez l’écouteur (carte réseau et port SSL) à partir duquel le serveur de configuration envoie et reçoit les données de réplication. Le port 9443 est le port utilisé par défaut pour envoyer et recevoir le trafic de réplication, mais vous pouvez le modifier en fonction des exigences de votre environnement. Outre le port 9443, nous ouvrons également le port 443, qui est utilisé par un serveur web pour orchestrer les opérations de réplication. N’utilisez pas le port 443 pour envoyer ou recevoir le trafic de réplication.
 

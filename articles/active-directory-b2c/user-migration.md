@@ -1,35 +1,35 @@
 ---
 title: Approches de la migration des utilisateurs
 titleSuffix: Azure AD B2C
-description: Migrez les comptes d’utilisateur d’un autre fournisseur d’identité vers Azure AD B2C en utilisant les méthodes d’importation en bloc ou de migration fluide.
+description: Migrez les comptes d’utilisateur d’un autre fournisseur d’identité vers Azure AD B2C en utilisant les méthodes de prémigration ou de migration fluide.
 services: active-directory-b2c
 author: msmimart
 manager: celestedg
 ms.service: active-directory
 ms.workload: identity
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 02/14/2020
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: b3ee069985fd39288a562d3caafc50b12290c060
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 5d680da7a5f09a55bec5d791642b80fd76c6088e
+ms.sourcegitcommit: 63d0621404375d4ac64055f1df4177dfad3d6de6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80332329"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97509612"
 ---
 # <a name="migrate-users-to-azure-ad-b2c"></a>Migrer des utilisateurs vers Azure AD B2C
 
-La migration depuis un autre fournisseur d’identité vers Azure Active Directory B2C (Azure AD B2C) peut également nécessiter la migration des comptes d’utilisateur existants. Deux méthodes de migration sont décrites ici : *importation en bloc* et *migration fluide*. Dans les deux approches, vous devez écrire une application ou un script qui utilise l’[API Microsoft Graph](manage-user-accounts-graph-api.md) pour créer des comptes d’utilisateur dans Azure AD B2C.
+La migration depuis un autre fournisseur d’identité vers Azure Active Directory B2C (Azure AD B2C) peut également nécessiter la migration des comptes d’utilisateur existants. Deux méthodes de migration sont décrites ici : la *prémigration* et la *migration fluide*. Dans les deux approches, vous devez écrire une application ou un script qui utilise l’[API Microsoft Graph](manage-user-accounts-graph-api.md) pour créer des comptes d’utilisateur dans Azure AD B2C.
 
-## <a name="bulk-import"></a>Importation en bloc
+## <a name="pre-migration"></a>Prémigration
 
-Dans le flux de l’importation en bloc, votre application de migration effectue les étapes suivantes pour chaque compte d’utilisateur :
+Dans le flux de prémigration, votre application de migration effectue les étapes suivantes pour chaque compte d’utilisateur :
 
 1. Lire le compte d’utilisateur de l’ancien fournisseur d’identité, y compris ses informations d’identification actuelles (nom d’utilisateur et mot de passe).
 1. Créer un compte correspondant dans votre annuaire Azure AD B2C avec les informations d’identification actuelles.
 
-Utilisez le flux d’importation en bloc dans l’une ou l’autre de ces deux situations :
+Utilisez le flux de prémigration dans l’une ou l’autre de ces deux situations :
 
 - Vous avez accès aux informations d’identification en texte clair d’un utilisateur (son nom d’utilisateur et son mot de passe).
 - Les informations d’identification sont chiffrées, mais vous pouvez les déchiffrer.
@@ -43,18 +43,18 @@ Utilisez le flux de migration fluide si les mots de passe en texte en clair dans
 - Le mot de passe est stocké dans un format chiffré unidirectionnel, comme avec une fonction de hachage.
 - Le mot de passe est stocké par le fournisseur d’identité précédent de telle façon que vous ne pouvez pas y accéder. Par exemple, quand le fournisseur d’identité valide les informations d’identification en appelant un service web.
 
-Le flux de migration fluide nécessite néanmoins toujours la migration en bloc des comptes d’utilisateur, mais il utilise ensuite une [stratégie personnalisée](custom-policy-get-started.md) pour interroger une [API REST](custom-policy-rest-api-intro.md) (que vous créez) pour définir le mot de passe de chaque utilisateur lors de la première connexion.
+Le flux de migration fluide nécessite néanmoins toujours la prémigration des comptes d’utilisateur, mais il utilise ensuite une [stratégie personnalisée](custom-policy-get-started.md) pour interroger une [API REST](custom-policy-rest-api-intro.md) (que vous créez) pour définir le mot de passe de chaque utilisateur lors de la première connexion.
 
-Le flux de migration fluide comporte ainsi deux phases : *importation en bloc* et *définition des informations d’identification*.
+Le flux de migration fluide comporte ainsi deux phases : la *prémigration* et la *définition des informations d’identification*.
 
-### <a name="phase-1-bulk-import"></a>Phase 1 : Importation en bloc
+### <a name="phase-1-pre-migration"></a>Phase 1 : Prémigration
 
 1. Votre application de migration lit les comptes d’utilisateur de l’ancien fournisseur d’identité.
 1. L’application de migration crée les comptes d’utilisateur correspondants dans votre annuaire Azure AD B2C, mais *ne définit pas les mots de passe*.
 
 ### <a name="phase-2-set-credentials"></a>Phase 2 : Définition des informations d’identification
 
-Une fois que la migration en bloc des comptes est terminée, votre stratégie et votre API REST personnalisées effectuent les opérations suivantes quand un utilisateur se connecte :
+Une fois que la prémigration des comptes est terminée, votre stratégie et votre API REST personnalisées effectuent les opérations suivantes quand un utilisateur se connecte :
 
 1. Lire le compte d’utilisateur Azure AD B2C correspondant à l’adresse e-mail entrée.
 1. Vérifier si le compte est marqué pour migration en évaluant un attribut d’extension booléen.
@@ -90,7 +90,7 @@ Toutes les informations du fournisseur d’identité précédent ne doivent pas 
 
 Avant de commencer le processus de migration, vous pouvez en profiter pour nettoyer votre annuaire.
 
-- Identifiez l’ensemble des attributs utilisateur à stocker dans Azure AD B2C et migrez seulement ce dont vous avez besoin. Si nécessaire, vous pouvez créer des [attributs personnalisés](custom-policy-custom-attributes.md) pour stocker davantage de données sur un utilisateur.
+- Identifiez l’ensemble des attributs utilisateur à stocker dans Azure AD B2C et migrez seulement ce dont vous avez besoin. Si nécessaire, vous pouvez créer des [attributs personnalisés](user-flow-custom-attributes.md) pour stocker davantage de données sur un utilisateur.
 - Si vous effectuez une migration à partir d’un environnement avec plusieurs sources d’authentification (par exemple chaque application a son propre annuaire d’utilisateurs), migrez vers un compte unifié dans Azure AD B2C.
 - Si plusieurs applications ont des noms d’utilisateur différents, vous pouvez les stocker dans un compte d’utilisateur Azure AD B2C en utilisant la collection d’identités. En ce qui concerne le mot de passe, laissez l’utilisateur en choisir un et définissez-le dans l’annuaire. Par exemple, avec la migration fluide, seul le mot de passe choisi doit être stocké dans le compte Azure AD B2C.
 - Supprimez les comptes d’utilisateur inutilisés avant la migration ou ne migrez pas les comptes obsolètes.

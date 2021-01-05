@@ -6,12 +6,12 @@ ms.author: dukek
 ms.topic: conceptual
 ms.date: 3/12/2018
 ms.subservice: alerts
-ms.openlocfilehash: 61e6cc22171815b15b865dd6ed5670bd9c446ead
-ms.sourcegitcommit: fb23286d4769442631079c7ed5da1ed14afdd5fc
+ms.openlocfilehash: 39b9fd8396601d777aa802a147bee3acc4a22cd0
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/10/2020
-ms.locfileid: "81114326"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87045290"
 ---
 # <a name="rate-limiting-for-voice-sms-emails-azure-app-push-notifications-and-webhook-posts"></a>Limitation de la fréquence des appels vocaux, SMS, e-mails, notifications push Azure App et publications Webhook
 La limitation de la fréquence est une suspension des notifications qui se produit lorsque trop de notifications sont envoyées à une adresse e-mail, à un numéro de téléphone ou un appareil donnés. Elle garantit que les alertes sont faciles à gérer et exploitables.
@@ -32,5 +32,4 @@ Voici les seuils de limitation de la fréquence :
 ## <a name="next-steps"></a>Étapes suivantes ##
 * En savoir plus sur le [comportement des alertes SMS](alerts-sms-behavior.md).
 * Obtenir une [vue d’ensemble des alertes du journal d’activité](alerts-overview.md) et découvrir comment recevoir des alertes.  
-* Découvrir comment [configurer des alertes lorsqu’une notification d’intégrité de service est publiée](../../azure-monitor/platform/alerts-activity-log-service-notifications.md).
-
+* Découvrir comment [configurer des alertes lorsqu’une notification d’intégrité de service est publiée](../../service-health/alerts-activity-log-service-notifications-portal.md).

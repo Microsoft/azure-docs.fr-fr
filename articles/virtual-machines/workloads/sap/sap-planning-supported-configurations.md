@@ -10,21 +10,22 @@ tags: azure-resource-manager
 keywords: SAP
 ms.assetid: d7c59cc1-b2d0-4d90-9126-628f9c7a5538
 ms.service: virtual-machines-linux
+ms.subservice: workloads
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure-services
 ms.date: 03/11/2020
 ms.author: juergent
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: 564c648a550b41017ffc684ca19ff03612fc63d3
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 54f3f0e1b57525a3bd425575ff03a9f3c91b0044
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79137626"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94951211"
 ---
 # <a name="sap-workload-on-azure-virtual-machine-supported-scenarios"></a>Charge de travail SAP sur les machines virtuelles Azure - Scénarios pris en charge
-Concevoir un architecture système SAP NetWeaver, Business One, `Hybris` ou S/4HANA dans Azure ouvre la voie à bien des opportunités en termes d'architectures et d'outils à utiliser afin d'obtenir un déploiement évolutif, efficace et hautement disponible. Bien qu’elles dépendent du système d’exploitation ou du SGBD utilisé, il existe des restrictions. De même, tous les scénarios pris en charge localement ne sont pas pris en charge de la même manière dans Azure. Ce document présente les configurations sans haute disponibilité prises en charge, ainsi que les configurations et architectures haute disponibilité utilisant exclusivement des machines virtuelles Azure. Pour les scénarios pris en charge avec de [grandes instances HANA](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/hana-overview-architecture), consultez l’article [Scénarios pris en charge pour les grandes instances HANA](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/hana-supported-scenario). 
+Concevoir un architecture système SAP NetWeaver, Business One, `Hybris` ou S/4HANA dans Azure ouvre la voie à bien des opportunités en termes d'architectures et d'outils à utiliser afin d'obtenir un déploiement évolutif, efficace et hautement disponible. Bien qu’elles dépendent du système d’exploitation ou du SGBD utilisé, il existe des restrictions. De même, tous les scénarios pris en charge localement ne sont pas pris en charge de la même manière dans Azure. Ce document présente les configurations sans haute disponibilité prises en charge, ainsi que les configurations et architectures haute disponibilité utilisant exclusivement des machines virtuelles Azure. Pour les scénarios pris en charge avec de [grandes instances HANA](./hana-overview-architecture.md), consultez l’article [Scénarios pris en charge pour les grandes instances HANA](./hana-supported-scenario.md). 
 
 
 ## <a name="2-tier-configuration"></a>Configuration à deux niveaux
@@ -34,7 +35,7 @@ Graphiquement, une telle configuration peut se présenter comme suit :
 
 ![Configuration simple à deux niveaux](./media/sap-planning-supported-configurations/two-tier-simple-configuration.png)
 
-De telles configurations sont prises en charge avec Windows, Red Hat, SUSE et Oracle Linux pour les systèmes SGBD de SQL Server, Oracle, Db2, maxDB et SAP ASE pour les cas de production et de non-production. Pour SAP HANA en tant que SGBD, ce type de configuration est uniquement pris en charge pour les cas de non-production. Cela comprend également le cas de déploiement de [grandes instances Azure HANA](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/hana-overview-architecture).
+De telles configurations sont prises en charge avec Windows, Red Hat, SUSE et Oracle Linux pour les systèmes SGBD de SQL Server, Oracle, Db2, maxDB et SAP ASE pour les cas de production et de non-production. Pour SAP HANA en tant que SGBD, ce type de configuration est uniquement pris en charge pour les cas de non-production. Cela comprend également le cas de déploiement de [grandes instances Azure HANA](./hana-overview-architecture.md).
 Pour toutes les combinaisons SE/SGBD prises en charge sur Azure, ce type de configuration est pris en charge. Toutefois, il est impératif de définir la configuration du SGBD et des composants SAP de manière à ce que ceux-ci ne soient pas en concurrence en termes de mémoire et de ressources de processeur, et dépassent ainsi les ressources physiques disponibles. Cela doit se faire en limitant la mémoire que le SGBD est autorisé à allouer. Vous devez également limiter la mémoire étendue SAP sur les instances d’application. En outre, vous devez surveiller la consommation d'UC de la machine virtuelle pour vous assurer que les composants n’optimisent pas les ressources d'UC. 
 
 > [!NOTE]
@@ -46,9 +47,9 @@ Dans de telles configurations, vous séparez la couche d’application SAP et la
 
 La représentation graphique se présente comme suit :
 
-![Configuration simple à deux niveaux](./media/sap-planning-supported-configurations/three-tier-simple-configuration.png)
+![Diagramme d’une configuration simple à trois niveaux](./media/sap-planning-supported-configurations/three-tier-simple-configuration.png)
 
-Ce type de configuration est pris en charge sur Windows, Red Hat, SUSE et Oracle Linux pour les systèmes SGBD de SQL Server, Oracle, DB2, SAP HANA, maxDB et SAP ASE pour les cas de production et de non-production. Il s’agit de la configuration de déploiement par défaut pour les [grandes instances Azure HANA](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/hana-overview-architecture). Dans un souci de simplification, nous n’avons pas fait la distinction entre les services centraux SAP et les instances de dialogue SAP dans la couche d'application SAP. Dans cette configuration simple à trois niveaux, aucune protection haute disponibilité n’est disponible pour les services centraux SAP.
+Ce type de configuration est pris en charge sur Windows, Red Hat, SUSE et Oracle Linux pour les systèmes SGBD de SQL Server, Oracle, DB2, SAP HANA, maxDB et SAP ASE pour les cas de production et de non-production. Il s’agit de la configuration de déploiement par défaut pour les [grandes instances Azure HANA](./hana-overview-architecture.md). Dans un souci de simplification, nous n’avons pas fait la distinction entre les services centraux SAP et les instances de dialogue SAP dans la couche d'application SAP. Dans cette configuration simple à trois niveaux, aucune protection haute disponibilité n’est disponible pour les services centraux SAP.
 
 > [!NOTE]
 > Pour les systèmes SAP de production, nous recommandons plus de haute disponibilité et d'éventuelles configurations de récupération d’urgence, comme décrit plus loin dans ce document.
@@ -72,7 +73,7 @@ Ce type de déploiement SGBD est pris en charge pour :
 En exécutant plusieurs instances de base de données sur un seul hôte, vous devez vous assurer que les différentes instances ne sont pas en concurrence en termes de ressources et, par conséquent, dépasser les limites de ressources physiques de la machine virtuelle. Cela se vérifie notamment lorsqu'il vous faut limiter la mémoire que chaque utilisateur partageant la machine virtuelle peut allouer. Cela peut également se vérifier pour les ressources d'UC que les différentes instances de base de données peuvent utiliser. Tous les SGBD mentionnés sont dotés de configurations qui permettent de limiter l’allocation de la mémoire et les ressources d'UC au niveau de l’instance.
 Pour que cette configuration soit prise en charge pour les machines virtuelles Azure, il convient de séparer les disques ou volumes utilisés pour les données et les fichiers journaux/de restauration des bases de données gérées par les différentes instances. En d’autres termes, les données ou les fichiers journaux/de restauration des bases de données gérés par différentes instances SGBD ne sont pas censés partager les mêmes disques ou volumes. 
 
-La configuration de disque pour les grandes instances HANA est fournie et détaillée dans [Scénarios pris en charge pour les grandes instances HANA](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/hana-supported-scenario#single-node-mcos). 
+La configuration de disque pour les grandes instances HANA est fournie et détaillée dans [Scénarios pris en charge pour les grandes instances HANA](./hana-supported-scenario.md#single-node-mcos). 
 
 > [!NOTE]
 > Pour les systèmes SAP de production, nous recommandons plus de haute disponibilité et d'éventuelles configurations de récupération d’urgence, comme décrit plus loin dans ce document. Les machines virtuelles dotées de plusieurs instances SGBD ne sont pas prises en charge avec les configurations haute disponibilité décrites ultérieurement dans ce document.
@@ -83,7 +84,7 @@ Dans de nombreux cas, plusieurs instances de dialogue sont déployées sur des s
 
 Une configuration à trois niveaux où plusieurs instances de dialogue SAP sont exécutées dans des machines virtuelles Azure peut se présenter comme suit :
 
-![Plusieurs instances SGBD dans une seule unité](./media/sap-planning-supported-configurations/multiple-dialog-instances.png)
+![Diagramme d’une configuration à trois niveaux dans laquelle plusieurs instances de dialogue SAP sont exécutées dans des machines virtuelles Azure](./media/sap-planning-supported-configurations/multiple-dialog-instances.png)
 
 Dans un souci de simplification, nous n’avons pas fait la distinction entre les services centraux SAP et les instances de dialogue SAP dans la couche d'application SAP. Dans cette configuration simple à trois niveaux, aucune protection haute disponibilité n’est disponible pour les services centraux SAP. En ce qui concerne les systèmes de production, il est conseillé de protéger les services centraux SAP. Pour plus d'informations sur les configurations multi-SID liées aux instances de services centraux SAP et la haute disponibilité de telles configurations multi-SID, consultez les sections ultérieures de ce document.
 
@@ -92,33 +93,33 @@ Lors du déploiement de systèmes de production SAP, vous devez prendre en compt
 
 En général, Microsoft ne prend en charge que les configurations haute disponibilité et les packages logiciels décrits dans la section consacrée à la charge de travail SAP dans docs.microsoft.com. Vous pouvez consulter la même instruction dans la note SAP [n° 1928533](https://launchpad.support.sap.com/#/notes/1928533). Microsoft ne fournit pas de prise en charge pour les autres infrastructures logicielles tierces haute disponibilité non documentées par Microsoft conjointement avec la charge de travail SAP. Dans ce cas, le fournisseur tiers de l’infrastructure haute disponibilité est le tiers de prise en charge pour la configuration haute disponibilité que vous devez contacter en tant que client. Les exceptions seront mentionnées dans cet article. 
 
-En règle générale, Microsoft prend en charge un ensemble limité de configurations haute disponibilité sur les machines virtuelles Azure ou les unités de grandes instances HANA. Pour connaître les scénarios pris en charge pour les grandes instances HANA, consultez le document [Scénarios pris en charge pour les grandes instances HANA](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/hana-supported-scenario).
+En règle générale, Microsoft prend en charge un ensemble limité de configurations haute disponibilité sur les machines virtuelles Azure ou les unités de grandes instances HANA. Pour connaître les scénarios pris en charge pour les grandes instances HANA, consultez le document [Scénarios pris en charge pour les grandes instances HANA](./hana-supported-scenario.md).
 
 Pour les machines virtuelles Azure, les configurations haute disponibilité suivantes sont prises en charge au niveau SGBD :
 
 - Réplication du système SAP HANA basé sur Linux Pacemaker sur SUSE et Red Hat. Consultez les articles détaillés :
-    - [Haute disponibilité de SAP HANA sur les machines virtuelles Azure sur SUSE Linux Enterprise Server](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/sap-hana-high-availability)
-    - [Haute disponibilité de SAP HANA sur les machines virtuelles Azure sur Red Hat Enterprise Linux](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/sap-hana-high-availability-rhel)
+    - [Haute disponibilité de SAP HANA sur les machines virtuelles Azure sur SUSE Linux Enterprise Server](./sap-hana-high-availability.md)
+    - [Haute disponibilité de SAP HANA sur les machines virtuelles Azure sur Red Hat Enterprise Linux](./sap-hana-high-availability-rhel.md)
 - Configurations n+m scale-out SAP HANA utilisant [Azure NetApp Files](https://azure.microsoft.com/services/netapp/) sur SUSE et Red Hat. Des détails sont fournis dans ces articles :
-    - [Déployer un système scale-out SAP HANA avec nœud de secours sur des machines virtuelles Azure à l’aide d’Azure NetApp Files sur SUSE Linux Enterprise Server}](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/sap-hana-scale-out-standby-netapp-files-suse)
-    - [Déployer un système scale-out SAP HANA avec nœud de secours sur des machines virtuelles Azure à l’aide d’Azure NetApp Files sur Red Hat Enterprise Linux](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/sap-hana-scale-out-standby-netapp-files-rhel)
+    - [Déployer un système scale-out SAP HANA avec nœud de secours sur des machines virtuelles Azure à l’aide d’Azure NetApp Files sur SUSE Linux Enterprise Server}](./sap-hana-scale-out-standby-netapp-files-suse.md)
+    - [Déployer un système scale-out SAP HANA avec nœud de secours sur des machines virtuelles Azure à l’aide d’Azure NetApp Files sur Red Hat Enterprise Linux](./sap-hana-scale-out-standby-netapp-files-rhel.md)
 - Cluster de basculement SQL Server basé sur Windows Scale-Out File Services. En matière de systèmes de production, il est recommandé d'utiliser SQL Server Always On plutôt que le clustering. SQL Server Always On offre une meilleure disponibilité avec un stockage distinct. Des détails sont fournis dans cet article : 
-    - [Configurer une instance de cluster de basculement SQL Server sur des machines virtuelles Azure](https://docs.microsoft.com/azure/virtual-machines/windows/sql/virtual-machines-windows-portal-sql-create-failover-cluster)
+    - [Configurer une instance de cluster de basculement SQL Server sur des machines virtuelles Azure](../../../azure-sql/virtual-machines/windows/failover-cluster-instance-storage-spaces-direct-manually-configure.md)
 - SQL Server Always On est pris en charge avec le système d’exploitation Windows pour SQL Server sur Azure. Il s’agit de la recommandation par défaut pour les instances SQL Server de production sur Azure. Des détails sont fournis dans ces articles :
-    - [Présentation des groupes de disponibilité SQL Server Always On sur des machines virtuelles Azure](https://docs.microsoft.com/azure/virtual-machines/windows/sql/virtual-machines-windows-portal-sql-availability-group-overview)
-    - [Configurer un groupe de disponibilité Always On sur des machines virtuelles Azure dans des régions différentes](https://docs.microsoft.com/azure/virtual-machines/windows/sql/virtual-machines-windows-portal-sql-availability-group-dr)
-    - [Configurer un équilibreur de charge pour un groupe de disponibilité Always On dans Azure](https://docs.microsoft.com/azure/virtual-machines/windows/sql/virtual-machines-windows-portal-sql-alwayson-int-listener)
+    - [Présentation des groupes de disponibilité SQL Server Always On sur des machines virtuelles Azure](../../../azure-sql/virtual-machines/windows/availability-group-overview.md)
+    - [Configurer un groupe de disponibilité Always On sur des machines virtuelles Azure dans des régions différentes](../../../azure-sql/virtual-machines/windows/availability-group-manually-configure-multiple-regions.md)
+    - [Configurer un équilibreur de charge pour un groupe de disponibilité Always On dans Azure](../../../azure-sql/virtual-machines/windows/availability-group-load-balancer-portal-configure.md)
 - Oracle Data Guard pour Windows et Oracle Linux. Des détails pour Oracle Linux sont fournis dans cet article :
-    - [Implémenter Oracle Data Guard sur une machine virtuelle Azure Linux](https://docs.microsoft.com/azure/virtual-machines/workloads/oracle/configure-oracle-dataguard)
+    - [Implémenter Oracle Data Guard sur une machine virtuelle Azure Linux](../oracle/configure-oracle-dataguard.md)
 - La documentation détaillée IBM Db2 HADR sur SUSE et RHEL pour SUSE et RHEL avec Pacemaker est disponible ici :
-    - [Haute disponibilité d’IBM Db2 LUW sur les machines virtuelles Azure sur SUSE Linux Enterprise Server avec Pacemaker](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/dbms-guide-ha-ibm)
-    - [Haute disponibilité d’IBM Db2 LUW sur les machines virtuelles Azure sur Red Hat Enterprise Linux Server](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/high-availability-guide-rhel-ibm-db2-luw)
+    - [Haute disponibilité d’IBM Db2 LUW sur les machines virtuelles Azure sur SUSE Linux Enterprise Server avec Pacemaker](./dbms-guide-ha-ibm.md)
+    - [Haute disponibilité d’IBM Db2 LUW sur les machines virtuelles Azure sur Red Hat Enterprise Linux Server](./high-availability-guide-rhel-ibm-db2-luw.md)
 - Configuration SAP ASE et SAP maxDB, telle que détaillée dans les documents suivants :
-    - [Déploiement SGBD de machines virtuelles SAP ASE Azure pour charge de travail SAP](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/dbms_guide_sapase)
-    - [Déploiement Content Server, liveCache et SAP MaxDB sur les machines virtuelles Azure](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/dbms_guide_maxdb)
+    - [Déploiement SGBD de machines virtuelles SAP ASE Azure pour charge de travail SAP](./dbms_guide_sapase.md)
+    - [Déploiement Content Server, liveCache et SAP MaxDB sur les machines virtuelles Azure](./dbms_guide_maxdb.md)
 - Les scénarios haute disponibilité des grandes instances HANA sont détaillés dans :
-    - [Scénarios pris en charge pour les grandes instances HANA - HSR avec STONITH pour la haute disponibilité](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/hana-supported-scenario#hsr-with-stonith-for-high-availability)
-    - [Scénario pris en charge pour les grandes instances HANA - Basculement automatique de l'hôte (1+1)](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/hana-supported-scenario#host-auto-failover-11)
+    - [Scénarios pris en charge pour les grandes instances HANA - HSR avec STONITH pour la haute disponibilité](./hana-supported-scenario.md#hsr-with-stonith-for-high-availability)
+    - [Scénario pris en charge pour les grandes instances HANA - Basculement automatique de l'hôte (1+1)](./hana-supported-scenario.md#host-auto-failover-11)
 
 > [!IMPORTANT]
 > Pour aucun des scénarios décrits ci-dessus, nous prenons en charge les configurations de plusieurs instances SGBD dans une machine virtuelle. Ainsi, dans chaque cas, une seule instance de base de données peut être déployée par machine virtuelle et protégée à l'aide des méthodes de haute disponibilité décrites. Actuellement, la protection de plusieurs instances SGBD sous le même cluster de basculement Windows ou Pacemaker n'est **PAS** prise en charge. En outre, Oracle Data Guard est pris en charge pour une seule instance par cas de déploiement de machine virtuelle. 
@@ -146,23 +147,23 @@ D’autres infrastructures haute disponibilité existent et s'exécutent égalem
 Les services centraux SAP constituent un second point de défaillance unique de votre configuration SAP. Dès lors, il vous faut également protéger ces processus de services centraux. L’offre prise en charge et documentée pour les charges de travail SAP se présente comme suit :
 
 - Serveur de cluster de basculement utilisant Windows Scale-out File Services pour sapmnt et le répertoire global transport. Des détails sont fournis dans cet article :
-    - [Mettre en cluster une instance SAP ASCS/SCS sur un cluster de basculement Windows à l’aide du partage de fichiers dans Azure](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/sap-high-availability-guide-wsfc-file-share)
-    - [Préparer une infrastructure Azure pour la haute disponibilité SAP à l’aide d’un cluster de basculement Windows et un partage de fichiers pour une instance SAP ASCS/SCS](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/sap-high-availability-infrastructure-wsfc-file-share)
+    - [Mettre en cluster une instance SAP ASCS/SCS sur un cluster de basculement Windows à l’aide du partage de fichiers dans Azure](./sap-high-availability-guide-wsfc-file-share.md)
+    - [Préparer une infrastructure Azure pour la haute disponibilité SAP à l’aide d’un cluster de basculement Windows et un partage de fichiers pour une instance SAP ASCS/SCS](./sap-high-availability-infrastructure-wsfc-file-share.md)
 - Serveur de cluster de basculement Windows utilisant le partage SMB basé sur [Azure NetApp Files](https://azure.microsoft.com/services/netapp/) pour sapmnt et le répertoire global transport. Des détails sont fournis dans cet article :
-    - [Haute disponibilité pour SAP NetWeaver sur des machines virtuelles Azure sur Windows avec Azure NetApp Files (SMB) pour les applications SAP](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/high-availability-guide-windows-netapp-files-smb)
+    - [Haute disponibilité pour SAP NetWeaver sur des machines virtuelles Azure sur Windows avec Azure NetApp Files (SMB) pour les applications SAP](./high-availability-guide-windows-netapp-files-smb.md)
 - Serveur de cluster de basculement Windows basé sur SIOS `Datakeeper`. Bien qu'elle soit documentée par Microsoft, vous devez vous rapprocher de SIOS à des fins de support si vous utilisez cette solution. Des détails sont fournis dans cet article :
-    - [Mettre en cluster une instance SAP ASCS/SCS sur un cluster de basculement Windows à l’aide d’un disque partagé de cluster dans Azure](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/sap-high-availability-guide-wsfc-shared-disk)
-    - [Préparer l’infrastructure Azure pour la haute disponibilité SAP à l’aide d’un cluster de basculement Windows et d’un disque partagé pour SAP ASCS/SCS](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/sap-high-availability-infrastructure-wsfc-shared-disk)
+    - [Mettre en cluster une instance SAP ASCS/SCS sur un cluster de basculement Windows à l’aide d’un disque partagé de cluster dans Azure](./sap-high-availability-guide-wsfc-shared-disk.md)
+    - [Préparer l’infrastructure Azure pour la haute disponibilité SAP à l’aide d’un cluster de basculement Windows et d’un disque partagé pour SAP ASCS/SCS](./sap-high-availability-infrastructure-wsfc-shared-disk.md)
 - Pacemaker sur système d'exploitation SUSE avec création d'un partage NFS haute disponibilité utilisant deux machines virtuelles SUSE et `drdb` pour la réplication de fichiers. Des détails sont fournis dans cet article :
-    - [Haute disponibilité pour SAP NetWeaver sur les machines virtuelles Azure sur SUSE Linux Enterprise Server pour les applications SAP](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/high-availability-guide-suse)
-    - [Haute disponibilité pour NFS sur les machines virtuelles Azure sur SUSE Linux Enterprise Server](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/high-availability-guide-suse-nfs)
+    - [Haute disponibilité pour SAP NetWeaver sur les machines virtuelles Azure sur SUSE Linux Enterprise Server pour les applications SAP](./high-availability-guide-suse.md)
+    - [Haute disponibilité pour NFS sur les machines virtuelles Azure sur SUSE Linux Enterprise Server](./high-availability-guide-suse-nfs.md)
 - Le système d’exploitation Pacemaker SUSE avec utilisation de partages NFS fournis par [Azure NetApp Files](https://azure.microsoft.com/services/netapp/). Des détails sont fournis dans :
-    - [Haute disponibilité pour SAP NetWeaver sur les machines virtuelles Azure sur SUSE Linux Enterprise Server avec Azure NetApp Files pour les applications SAP](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/high-availability-guide-suse-netapp-files)
+    - [Haute disponibilité pour SAP NetWeaver sur les machines virtuelles Azure sur SUSE Linux Enterprise Server avec Azure NetApp Files pour les applications SAP](./high-availability-guide-suse-netapp-files.md)
 - Pacemaker sur système d’exploitation Red Hat avec partage NFS hébergé sur un cluster `glusterfs`. Des détails sont fournis dans ces articles :
-    - [Haute disponibilité des machines virtuelles Azure pour SAP NetWeaver sur Red Hat Enterprise Linux](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/high-availability-guide-rhel)
-    - [`GlusterFS` sur les machines virtuelles Azure sur Red Hat Enterprise Linux pour SAP NetWeaver](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/high-availability-guide-rhel-glusterfs)
+    - [Haute disponibilité des machines virtuelles Azure pour SAP NetWeaver sur Red Hat Enterprise Linux](./high-availability-guide-rhel.md)
+    - [`GlusterFS` sur les machines virtuelles Azure sur Red Hat Enterprise Linux pour SAP NetWeaver](./high-availability-guide-rhel-glusterfs.md)
 - Pacemaker sur système d’exploitation Red Hat avec partage NFS hébergé sur [Azure NetApp Files](https://azure.microsoft.com/services/netapp/). Des détails sont fournis dans cet article :
-    - [Haute disponibilité des machines virtuelles Azure pour SAP NetWeaver sur Red Hat Enterprise Linux avec Azure NetApp Files pour les applications SAP](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/high-availability-guide-rhel-netapp-files)
+    - [Haute disponibilité des machines virtuelles Azure pour SAP NetWeaver sur Red Hat Enterprise Linux avec Azure NetApp Files pour les applications SAP](./high-availability-guide-rhel-netapp-files.md)
 
 Parmi les solutions répertoriées, il vous faut disposer d'un support auprès de SIOS pour prendre en charge le produit `Datakeeper` et vous rapprocher directement de SIOS en cas de problème. Selon votre licence Windows, Red Hat et/ou SUSE, vous pouvez être tenu de disposer d'un contrat de support auprès de votre fournisseur de système d’exploitation afin de pleinement bénéficier de la prise en charge des configurations haute disponibilité répertoriées.
 
@@ -195,8 +196,8 @@ Pour réduire le nombre de machines virtuelles nécessaires dans les grands pays
 
 Sur Azure, une configuration de cluster multi-SID est prise en charge pour le système d’exploitation Windows avec ENSA1 et ENSA2. Il est déconseillé de combiner la précédente architecture Enqueue Replication Service (ENSA1) avec la nouvelle architecture (ENSA2) sur un cluster multi-SID. Les détails relatifs à une tel architecture sont fournis dans ces articles :
 
-- [Haute disponibilité multi-SID pour une instance SAP ASCS/SCS avec le clustering de basculement Windows Server et un disque partagé sur Azure](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/sap-ascs-ha-multi-sid-wsfc-shared-disk) 
-- [Haute disponibilité multi-SID pour une instance SAP ASCS/SCS avec le clustering de basculement Windows Server et le partage de fichiers sur Azure](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/sap-ascs-ha-multi-sid-wsfc-file-share) 
+- [Haute disponibilité multi-SID pour une instance SAP ASCS/SCS avec le clustering de basculement Windows Server et un disque partagé sur Azure](./sap-ascs-ha-multi-sid-wsfc-shared-disk.md) 
+- [Haute disponibilité multi-SID pour une instance SAP ASCS/SCS avec le clustering de basculement Windows Server et le partage de fichiers sur Azure](./sap-ascs-ha-multi-sid-wsfc-file-share.md) 
 
 Pour SUSE, un cluster multi-SID basé sur Pacemaker est également pris en charge. Actuellement, la configuration est prise en charge pour :
 
@@ -204,40 +205,40 @@ Pour SUSE, un cluster multi-SID basé sur Pacemaker est également pris en charg
 - La précédente architecture Enqueue Replication Server (ENSA1)
 - Les configurations de cluster Pacemaker à deux nœuds
 
-La configuration est documentée dans [Guide de haute disponibilité multi-SID pour SAP NetWeaver sur les machines virtuelles Azure sur SUSE Linux Enterprise Server pour les applications SAP](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/high-availability-guide-suse-multi-sid)
+La configuration est documentée dans [Guide de haute disponibilité multi-SID pour SAP NetWeaver sur les machines virtuelles Azure sur SUSE Linux Enterprise Server pour les applications SAP](./high-availability-guide-suse-multi-sid.md)
 
 Un cluster multi-SID avec Enqueue Replication Server se présente schématiquement comme suit
 
-![Configuration haute disponibilité SGBD et ASCS](./media/sap-planning-supported-configurations/high-available-multi-system-configuration.png)
+![Diagramme d’un cluster multi-SID avec Enqueue Replication Server](./media/sap-planning-supported-configurations/high-available-multi-system-configuration.png)
 
 
 ## <a name="sap-hana-scale-out-scenarios"></a>Scénarios de scale-out SAP HANA
 Les scénarios de scale-out SAP HANA sont pris en charge pour un sous-ensemble des machines virtuelles Azure certifiées HANA listées dans le [répertoire matériel SAP HANA](https://www.sap.com/dmc/exp/2014-09-02-hana-hardware/enEN/iaas.html#categories=Microsoft%20Azure). Toutes les machines virtuelles accompagnées de « oui » dans la colonne « clustering » peuvent être utilisées à des fins de scale-out OLAP ou S/4HANA. Les configurations sans nœud de secours sont prises en charge avec les types de Stockage Azure : 
 
 - Stockage Premium Azure, y compris l’accélérateur d'écriture Azure pour le volume /hana/log
-- [Disque Ultra](https://docs.microsoft.com/azure/virtual-machines/linux/disks-enable-ultra-ssd)
+- [Disque Ultra](../../disks-enable-ultra-ssd.md)
 - [Azure NetApp Files](https://azure.microsoft.com/services/netapp/) 
 
 Les configurations scale-out SAP HANA pour OLAP ou S/4HANA sans nœud de secours sont uniquement prises en charge avec partages NFS hébergés sur Azure NetApp Files.
 
 Pour plus d’informations sur les configurations de stockage exactes avec ou sans nœud de secours, consultez les articles suivants :
 
-- [Configurations du stockage des machines virtuelles SAP HANA Azure](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/hana-vm-operations-storage) 
-- [Déployer un système scale-out SAP HANA avec nœud de secours sur des machines virtuelles Azure à l’aide d’Azure NetApp Files sur SUSE Linux Enterprise Server](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/sap-hana-scale-out-standby-netapp-files-suse)
-- [Déployer un système scale-out SAP HANA avec nœud de secours sur des machines virtuelles Azure à l’aide d’Azure NetApp Files sur Red Hat Enterprise Linux](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/sap-hana-scale-out-standby-netapp-files-rhel)
+- [Configurations du stockage des machines virtuelles SAP HANA Azure](./hana-vm-operations-storage.md) 
+- [Déployer un système scale-out SAP HANA avec nœud de secours sur des machines virtuelles Azure à l’aide d’Azure NetApp Files sur SUSE Linux Enterprise Server](./sap-hana-scale-out-standby-netapp-files-suse.md)
+- [Déployer un système scale-out SAP HANA avec nœud de secours sur des machines virtuelles Azure à l’aide d’Azure NetApp Files sur Red Hat Enterprise Linux](./sap-hana-scale-out-standby-netapp-files-rhel.md)
 - [Note de support SAP n° 2080991](https://launchpad.support.sap.com/#/notes/2080991)
 
 Pour plus d’informations sur les grandes instances HANA prises en charge pour les configurations scale-out HANA, consultez la documentation suivante :
 
-- [Scénarios pris en charge pour les grandes instances scale-out HANA avec nœud de secours](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/hana-supported-scenario#scale-out-with-standby)
-- [Scénarios pris en charge pour les grandes instances scale-out HANA sans nœud de secours](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/hana-supported-scenario#scale-out-without-standby)
+- [Scénarios pris en charge pour les grandes instances scale-out HANA avec nœud de secours](./hana-supported-scenario.md#scale-out-with-standby)
+- [Scénarios pris en charge pour les grandes instances scale-out HANA sans nœud de secours](./hana-supported-scenario.md#scale-out-without-standby)
 
 
 ## <a name="disaster-recovery-scenario"></a>Scénario de récupération d'urgence
 Plusieurs scénarios de récupération d’urgence sont pris en charge. Nous entendons par architectures de récupération d’urgence les architectures amenées à compenser les régions Azure déconnectées. Ainsi, la cible de récupération d'urgence doit se trouver dans une région Azure différente pour exécuter votre paysage SAP. Nous séparons les méthodes et configurations en couche SGBD et couche non-SGBD. 
 
 ### <a name="dbms-layer"></a>Couche SGBD
-Pour la couche SGBD, les configurations utilisant les mécanismes de réplication natifs SGBD, comme Always On, Oracle Data Guard, Db2 HADR, SAP ASE Always on ou HANA System Replication sont pris en charge. Dès lors, il est impératif que le flux de réplication soit asynchrone plutôt que synchrone, comme dans les scénarios haute disponibilité classiques déployés dans une seule région Azure. Un exemple type de configuration de récupération d’urgence SGBD prise en charge est décrit dans l’article [Disponibilité de SAP HANA dans l’ensemble des régions Azure](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/sap-hana-availability-across-regions#combine-availability-within-one-region-and-across-regions). Le deuxième graphique de cette section décrit un scénario avec HANA à titre d'exemple. Les principales bases de données prises en charge pour les applications SAP peuvent toutes être déployées dans un tel scénario.
+Pour la couche SGBD, les configurations utilisant les mécanismes de réplication natifs SGBD, comme Always On, Oracle Data Guard, Db2 HADR, SAP ASE Always on ou HANA System Replication sont pris en charge. Dès lors, il est impératif que le flux de réplication soit asynchrone plutôt que synchrone, comme dans les scénarios haute disponibilité classiques déployés dans une seule région Azure. Un exemple type de configuration de récupération d’urgence SGBD prise en charge est décrit dans l’article [Disponibilité de SAP HANA dans l’ensemble des régions Azure](./sap-hana-availability-across-regions.md#combine-availability-within-one-region-and-across-regions). Le deuxième graphique de cette section décrit un scénario avec HANA à titre d'exemple. Les principales bases de données prises en charge pour les applications SAP peuvent toutes être déployées dans un tel scénario.
 
 L’utilisation d’une machine virtuelle plus petite comme instance cible dans la région de récupération d’urgence est prise en charge, car cette machine virtuelle ne se heurte pas à tout le trafic de charge de travail. Ce faisant, vous devez garder à l’esprit les points suivants :
 
@@ -246,22 +247,22 @@ L’utilisation d’une machine virtuelle plus petite comme instance cible dans 
 - Le redimensionnement entre familles de machines virtuelles peut s'avérer problématique lorsque différentes machines virtuelles sont collectées dans un groupe à haute disponibilité Azure ou lorsque le redimensionnement doit intervenir entre machines virtuelles de série M et MV2
 - Consommation d’UC et de mémoire de l’instance de base de données capable de recevoir le flux de modifications avec un délai minimal, et ressources d'UC et de mémoire suffisantes pour appliquer ces modifications aux données avec un délai minimal  
 
-Vous trouverez plus d’informations sur les limitations des différentes tailles de machines virtuelles [ici](https://docs.microsoft.com/azure/virtual-machines/linux/sizes) 
+Vous trouverez plus d’informations sur les limitations des différentes tailles de machines virtuelles [ici](../../sizes.md) 
 
 Une autre méthode prise en charge à des fins de déploiement d'une cible de récupération d'urgence consiste à installer une seconde instance SGBD exécutant une instance SGBD non-production d’une instance SAP non-production. Cela peut s'avérer plus complexe car vous devez déterminer la mémoire, les ressources d'UC, la bande passante réseau et la bande passante de stockage nécessaires pour les instances cibles spécifiques censées fonctionner en tant qu’instance principale dans le scénario de récupération d’urgence. En particulier dans HANA, il vous est vivement recommandé de configurer l’instance fonctionnant en tant que cible de récupération d’urgence sur un hôte partagé de manière à ce que les données ne soient pas préchargées dans l’instance cible de récupération d’urgence.
 
 Pour les scénarios de récupération d’urgence de grandes instances HANA, consultez les documents suivants :
 
-- [Nœud unique avec récupération d'urgence à l'aide de la réplication du stockage](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/hana-supported-scenario#single-node-with-dr-using-storage-replication)
-- [Nœud unique avec récupération d'urgence (polyvalente) à l'aide de la réplication du stockage](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/hana-supported-scenario#single-node-with-dr-multipurpose-using-storage-replication)
-- [Nœud unique avec récupération d'urgence (polyvalente) à l'aide de la réplication du stockage](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/hana-supported-scenario#single-node-with-dr-multipurpose-using-storage-replication)
-- [Haute disponibilité avec HSR et récupération d'urgence avec réplication de stockage](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/hana-supported-scenario#high-availability-with-hsr-and-dr-with-storage-replication)
-- [Scale-out avec récupération d'urgence à l'aide de la réplication du stockage](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/hana-supported-scenario#scale-out-with-dr-using-storage-replication)
-- [Nœud unique avec récupération d'urgence à l'aide de HSR](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/hana-supported-scenario#single-node-with-dr-using-hsr)
-- [Réplication HSR à nœud unique vers site de récupération d'urgence (à coût optimisé)](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/hana-supported-scenario#single-node-hsr-to-dr-cost-optimized)
-- [Haute disponibilité et récupération d'urgence avec HSR](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/hana-supported-scenario#high-availability-and-disaster-recovery-with-hsr)
-- [Haute disponibilité et récupération d'urgence avec HSR (à coût optimisé)](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/hana-supported-scenario#high-availability-and-disaster-recovery-with-hsr-cost-optimized)
-- [Scale-out avec récupération d'urgence à l'aide de la réplication HSR](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/hana-supported-scenario#scale-out-with-dr-using-hsr)
+- [Nœud unique avec récupération d'urgence à l'aide de la réplication du stockage](./hana-supported-scenario.md#single-node-with-dr-using-storage-replication)
+- [Nœud unique avec récupération d'urgence (polyvalente) à l'aide de la réplication du stockage](./hana-supported-scenario.md#single-node-with-dr-multipurpose-using-storage-replication)
+- [Nœud unique avec récupération d'urgence (polyvalente) à l'aide de la réplication du stockage](./hana-supported-scenario.md#single-node-with-dr-multipurpose-using-storage-replication)
+- [Haute disponibilité avec HSR et récupération d'urgence avec réplication de stockage](./hana-supported-scenario.md#high-availability-with-hsr-and-dr-with-storage-replication)
+- [Scale-out avec récupération d'urgence à l'aide de la réplication du stockage](./hana-supported-scenario.md#scale-out-with-dr-using-storage-replication)
+- [Nœud unique avec récupération d'urgence à l'aide de HSR](./hana-supported-scenario.md#single-node-with-dr-using-hsr)
+- [Réplication HSR à nœud unique vers site de récupération d'urgence (à coût optimisé)](./hana-supported-scenario.md#single-node-hsr-to-dr-cost-optimized)
+- [Haute disponibilité et récupération d'urgence avec HSR](./hana-supported-scenario.md#high-availability-and-disaster-recovery-with-hsr)
+- [Haute disponibilité et récupération d'urgence avec HSR (à coût optimisé)](./hana-supported-scenario.md#high-availability-and-disaster-recovery-with-hsr-cost-optimized)
+- [Scale-out avec récupération d'urgence à l'aide de la réplication HSR](./hana-supported-scenario.md#scale-out-with-dr-using-hsr)
 
 > [!NOTE]
 > L’utilisation d'[Azure Site Recovery](https://azure.microsoft.com/services/site-recovery/) n’a pas été testée dans le cadre de déploiements SGBD avec charge de travail SAP. Dès lors et à ce stade, elle n’est pas prise en charge pour la couche SGBD des systèmes SAP. Les autres méthodes de réplication par Microsoft et SAP non répertoriées ne sont pas prises en charge. L’utilisation de logiciels tiers à des fins de réplication de la couche SGBD des systèmes SAP entre différentes régions Azure doit être prise en charge par le fournisseur du logiciel, et n’est pas prise en charge par le biais des canaux de support Microsoft et SAP. 
@@ -269,7 +270,7 @@ Pour les scénarios de récupération d’urgence de grandes instances HANA, con
 ## <a name="non-dbms-layer"></a>Couche non-SGBD
 Pour la couche d’application SAP et les éventuels partages ou emplacements de stockage requis, les deux principaux scénarios sont exploités par les clients :
 
-- Les cibles de récupération d’urgence de la deuxième région Azure ne sont pas utilisées à des fins de production ou de non-production. Dans ce scénario, les machines virtuelles fonctionnant en tant que cibles de récupération d’urgence ne sont pas idéalement déployées et l'image, de même que les modifications apportées aux images de la couche d'application SAP de production, sont répliquées dans la région de récupération d’urgence. [Azure Site Recovery](https://docs.microsoft.com/azure/site-recovery/azure-to-azure-move-overview) permet d'effectuer une telle tâche. Azure Site Recovery prend en charge les scénarios de réplication Azure vers Azure tels que celui-ci. 
+- Les cibles de récupération d’urgence de la deuxième région Azure ne sont pas utilisées à des fins de production ou de non-production. Dans ce scénario, les machines virtuelles fonctionnant en tant que cibles de récupération d’urgence ne sont pas idéalement déployées et l'image, de même que les modifications apportées aux images de la couche d'application SAP de production, sont répliquées dans la région de récupération d’urgence. [Azure Site Recovery](../../../site-recovery/azure-to-azure-move-overview.md) permet d'effectuer une telle tâche. Azure Site Recovery prend en charge les scénarios de réplication Azure vers Azure tels que celui-ci. 
 - Les cibles de récupération d’urgence sont des machines virtuelles utilisées par des systèmes de non-production. L’intégralité du paysage SAP est répartie entre deux régions Azure différentes, les systèmes de production généralement situés dans une région et les systèmes de non-production dans une autre. Dans de nombreux déploiements clients, le client dispose d’un système de non-production qui équivaut à un système de production. Le client dispose d'instances d’application de production préinstallées sur les systèmes de non-production de la couche d'application. En cas de basculement, les instances de non-production sont arrêtées, les noms virtuels des machines virtuelles de production sont déplacés vers les machines virtuelles de non-production (après attribution de nouvelles adresses IP dans DNS) et les instances de production pré-installées sont démarrées.
 
 ### <a name="sap-central-services-clusters"></a>Clusters des services centraux SAP
@@ -304,12 +305,9 @@ Scénario(s) que nous n’avons pas testés et sur lesquels nous n'avons pas enc
  
 
 ## <a name="next-steps"></a>Étapes suivantes
-Découvrez les étapes suivantes dans [Planification et implémentation de machines virtuelles Azure pour SAP NetWeaver](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/planning-guide)
+Découvrez les étapes suivantes dans [Planification et implémentation de machines virtuelles Azure pour SAP NetWeaver](./planning-guide.md)
 
 
 
 
   
-
-
-

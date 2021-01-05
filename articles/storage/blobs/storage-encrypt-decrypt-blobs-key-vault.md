@@ -8,14 +8,15 @@ ms.service: storage
 ms.topic: tutorial
 ms.date: 12/04/2019
 ms.author: tamram
-ms.reviewer: cbrooks
+ms.reviewer: ozgun
 ms.subservice: blobs
-ms.openlocfilehash: c1d26fda57d665cc8d83f594f4efeebebc7bf139
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.custom: devx-track-csharp
+ms.openlocfilehash: ddc9dbf77c04ea95e5b873c45de4c0df109514c7
+ms.sourcegitcommit: c95e2d89a5a3cf5e2983ffcc206f056a7992df7d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "81456887"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95544443"
 ---
 # <a name="tutorial---encrypt-and-decrypt-blobs-using-azure-key-vault"></a>Tutoriel - Chiffrer et déchiffrer des objets blob avec Azure Key Vault
 
@@ -210,7 +211,7 @@ L’utilisation d’un secret avec le chiffrement côté client s’effectue via
 Voici un exemple de création de secret dans Key Vault, effectuée dans PowerShell, qui peut être utilisé comme une valeur SymmetricKey.
 Veuillez noter que la valeur codée en dur, $key, est fournie uniquement à des fins de démonstration. Dans votre propre code, vous devez générer cette clé.
 
-```csharp
+```powershell
 // Here we are making a 128-bit key so we have 16 characters.
 //     The characters are in the ASCII range of UTF8 so they are
 //    each 1 byte. 16 x 8 = 128.
@@ -235,8 +236,8 @@ Vous avez terminé. Vous n’avez plus qu’à l’utiliser !
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour plus d’informations sur l’utilisation du Stockage Microsoft Azure avec C#, consultez [Bibliothèque cliente Stockage Microsoft Azure pour .NET](https://msdn.microsoft.com/library/azure/dn261237.aspx).
+Pour plus d’informations sur l’utilisation du Stockage Microsoft Azure avec C#, consultez [Bibliothèque cliente Stockage Microsoft Azure pour .NET](/previous-versions/azure/dn261237(v=azure.100)).
 
-Pour plus d’informations sur l’API REST Blob, consultez [API REST du service BLOB](https://msdn.microsoft.com/library/azure/dd135733.aspx).
+Pour plus d’informations sur l’API REST Blob, consultez [API REST du service BLOB](/rest/api/storageservices/Blob-Service-REST-API).
 
-Pour obtenir les dernières informations sur Stockage Microsoft Azure, consultez le [Blog de l’équipe Stockage Microsoft Azure](https://blogs.msdn.com/b/windowsazurestorage/).
+Pour obtenir les dernières informations sur Stockage Microsoft Azure, consultez le [Blog de l’équipe Stockage Microsoft Azure](/archive/blogs/windowsazurestorage/).

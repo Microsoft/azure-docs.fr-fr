@@ -6,28 +6,34 @@ ms.service: active-directory
 ms.subservice: authentication
 ms.topic: how-to
 ms.date: 07/11/2018
-ms.author: iainfou
-author: iainfoulds
+ms.author: justinha
+author: justinha
 manager: daveba
 ms.reviewer: michmcla
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 23e2f7424464860b647883be2441e903900cb266
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: ff89e8c803e0edf5245a62d625a6367d68de96ba
+ms.sourcegitcommit: ad83be10e9e910fd4853965661c5edc7bb7b1f7c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80652883"
+ms.lasthandoff: 12/06/2020
+ms.locfileid: "96742066"
 ---
 # <a name="remote-desktop-gateway-and-azure-multi-factor-authentication-server-using-radius"></a>Passerelle des services Bureau à distance et serveur Multi-Factor Authentication avec RADIUS
 
-Souvent, la passerelle du Bureau à distance (RD) utilise les [services de stratégie réseau (NPS)](https://docs.microsoft.com/windows-server/networking/core-network-guide/core-network-guide#BKMK_optionalfeatures) locaux pour authentifier les utilisateurs. Cet article explique comment acheminer la demande RADIUS hors de la passerelle Bureau à distance (via le serveur NPS local) vers le serveur Multi-Factor Authentication. La combinaison d’Azure MFA et de la passerelle RD signifie que les utilisateurs peuvent accéder à leur environnement de travail à partir de n’importe quel emplacement, tout en exigeant une authentification forte.
+Souvent, la passerelle du Bureau à distance (RD) utilise les [services de stratégie réseau (NPS)](/windows-server/networking/core-network-guide/core-network-guide#BKMK_optionalfeatures) locaux pour authentifier les utilisateurs. Cet article explique comment acheminer la demande RADIUS hors de la passerelle Bureau à distance (via le serveur NPS local) vers le serveur Multi-Factor Authentication. La combinaison d’Azure MFA et de la passerelle RD signifie que les utilisateurs peuvent accéder à leur environnement de travail à partir de n’importe quel emplacement, tout en exigeant une authentification forte.
 
 Étant donné que l’authentification Windows pour Terminal Services n’est pas prise en charge pour Server 2012 R2, utilisez la passerelle RD et RADIUS pour l’intégration au serveur MFA.
 
 Installez le serveur Multi-Factor Authentication sur un serveur distinct, qui envoie par proxy la demande RADIUS au serveur NPS sur le serveur de la passerelle Bureau à distance. Une fois que le serveur NPS (Network Policy Server) a validé le nom d’utilisateur et le mot de passe, il renvoie une réponse au serveur Multi-Factor Authentication. Ensuite, le serveur MFA applique le second facteur d’authentification et retourne un résultat à la passerelle.
 
 > [!IMPORTANT]
-> À compter du 1er juillet 2019, Microsoft ne propose plus MFA Server pour les nouveaux déploiements. Les nouveaux clients qui veulent demander à leurs utilisateurs de procéder à une authentification multifacteur doivent utiliser la fonction Azure Multi-Factor Authentication basée sur le cloud. Les clients existants qui ont activé MFA Server avant le 1er juillet peuvent télécharger la dernière version et les futures mises à jour, et générer des informations d’identification d’activation comme d’habitude.
+> Depuis le 1er juillet 2019, Microsoft ne propose plus MFA Server pour les nouveaux déploiements. Les nouveaux clients qui souhaitent imposer une authentification multifacteur lors des événements de connexion doivent utiliser la fonctionnalité d’authentification multifacteur Azure AD basée sur le cloud.
+>
+> Pour commencer à utiliser l’authentification multifacteur basée sur le cloud, consultez [Tutoriel : Événements de connexion utilisateur sécurisée avec Azure AD Multi-Factor Authentication](tutorial-enable-azure-mfa.md).
+>
+> Si vous utilisez une authentification multifacteur basée sur le cloud, consultez [Intégrer avec l’authentification RADIUS pour l’authentification multifacteur Azure](howto-mfa-nps-extension.md).
+>
+> Les clients existants qui ont activé le serveur MFA avant le 1er juillet 2019 peuvent télécharger la dernière version, les futures mises à jour et générer des informations d’identification d’activation comme d’habitude.
 
 ## <a name="prerequisites"></a>Prérequis
 

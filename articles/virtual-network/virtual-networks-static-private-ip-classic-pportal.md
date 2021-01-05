@@ -8,19 +8,20 @@ manager: dcscontentpm
 tags: azure-service-management
 ms.assetid: b8ef8367-58b2-42df-9f26-3269980950b8
 ms.service: virtual-network
+ms.subservice: ip-services
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 02/04/2016
 ms.author: genli
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: 0bc080ed41f32ae2af018e9316e67ab38c2d0650
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 57df05918b590cedbf4af0464690ef2524f8ba79
+ms.sourcegitcommit: b4f303f59bb04e3bae0739761a0eb7e974745bb7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81449899"
+ms.lasthandoff: 10/02/2020
+ms.locfileid: "91650505"
 ---
 # <a name="configure-private-ip-addresses-for-a-virtual-machine-classic-using-the-azure-portal"></a>Configurer des adresses IP privées pour une machine virtuelle (Classic) à l’aide du portail Azure
 
@@ -42,20 +43,20 @@ Pour créer une machine virtuelle nommée *DNS01* dans le sous-réseau *FrontEnd
 1. Dans un navigateur, accédez à https://portal.azure.com et, si nécessaire, connectez-vous avec votre compte Azure.
 2. Sélectionnez **Nouveau** > **Compute** > **Windows Server 2012 R2 Datacenter** (notez que la liste **Sélectionner un modèle de déploiement** contient déjà **Classique**), puis sélectionnez **Créer**.
    
-    ![Création d'une machine virtuelle dans le portail Azure](./media/virtual-networks-static-ip-classic-pportal/figure01.png)
+    ![Capture d’écran représentant le Portail Azure dans lequel la mosaïque Nouveau > Calculer > Windows Server 2012 R2 Datacenter est mise en surbrillance.](./media/virtual-networks-static-ip-classic-pportal/figure01.png)
 3. Sous **Créer une machine virtuelle**, entrez le nom de la machine virtuelle à créer (*DNS01* dans le scénario), le compte d’administrateur local et un mot de passe.
    
-    ![Création d'une machine virtuelle dans le portail Azure](./media/virtual-networks-static-ip-classic-pportal/figure02.png)
+    ![Capture d’écran montrant comment créer une machine virtuelle en entrant le nom de la machine virtuelle, le nom d’utilisateur de l’administrateur local et le mot de passe.](./media/virtual-networks-static-ip-classic-pportal/figure02.png)
 4. Sélectionnez **Configuration facultative** > **Réseau** > **Réseau virtuel**, puis sélectionnez **TestVNet**. Si l’option **TestVNet** n’est pas disponible, assurez-vous que vous utilisez l’emplacement *USA Centre* et avez créé l’environnement de test décrit au début de cet article.
    
-    ![Création d'une machine virtuelle dans le portail Azure](./media/virtual-networks-static-ip-classic-pportal/figure03.png)
+    ![Capture d’écran représentant l’option Configuration facultative > Réseau > Réseau virtuel > TestVNet est mise en surbrillance.](./media/virtual-networks-static-ip-classic-pportal/figure03.png)
 5. Sous **Réseau**, vérifiez que le sous-réseau actuellement sélectionné est *FrontEnd*, puis sélectionnez **Adresses IP**. Sous **Affectation d’adresses IP**, sélectionnez **Statique**, puis entrez *192.168.1.101* pour **Adresse IP**, comme illustré ci-dessous.
    
-    ![Création d'une machine virtuelle dans le portail Azure](./media/virtual-networks-static-ip-classic-pportal/figure04.png)    
+    ![Capture d’écran représentant le champ Adresses IP dans lequel vous pouvez saisir l’adresse IP statique.](./media/virtual-networks-static-ip-classic-pportal/figure04.png)    
 6. Sélectionnez **OK** sous **Adresses IP**, sélectionnez **OK** sous **Réseau**, puis sélectionnez **OK** sous **Configuration facultative**.
 7. Sous **Créer une machine virtuelle**, sélectionnez **Créer**. Notez la vignette ci-dessous affichée dans votre tableau de bord :
    
-    ![Création d'une machine virtuelle dans le portail Azure](./media/virtual-networks-static-ip-classic-pportal/figure05.png)
+    ![Capture d’écran représentant la mosaïque Windows Server 2012 R2 Datacenter.](./media/virtual-networks-static-ip-classic-pportal/figure05.png)
 
 ## <a name="how-to-retrieve-static-private-ip-address-information-for-a-vm"></a>Récupération d’informations d’adresse IP privée statique pour une machine virtuelle
 Pour afficher les informations d’adresse IP privée statique de la machine virtuelle créée lors des étapes ci-dessus, exécutez les étapes ci-dessous.
@@ -68,7 +69,7 @@ Pour afficher les informations d’adresse IP privée statique de la machine vir
 
 Sous **Adresses IP**, sélectionnez **Dynamique** à droite de **Affectation d’adresses IP**, sélectionnez **Enregistrer**, puis sélectionnez **Oui**, comme illustré dans l’image suivante :
    
-    ![Create VM in Azure portal](./media/virtual-networks-static-ip-classic-pportal/figure07.png)
+![Capture d’écran représentant l’opération de suppression de l’adresse IP privée statique d’une machine virtuelle à l’aide de la sélection dynamique à droite de l’étiquette d’attribution d’adresse IP.](./media/virtual-networks-static-ip-classic-pportal/figure07.png)
 
 ## <a name="how-to-add-a-static-private-ip-address-to-an-existing-vm"></a>Ajout d’une adresse IP privée statique à une machine virtuelle existante
 

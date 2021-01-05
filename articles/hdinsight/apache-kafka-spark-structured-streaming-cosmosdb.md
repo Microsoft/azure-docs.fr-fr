@@ -5,15 +5,15 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
-ms.custom: hdinsightactive
+ms.topic: how-to
+ms.custom: hdinsightactive, devx-track-azurecli
 ms.date: 11/18/2019
-ms.openlocfilehash: 04faafca0811e60ded47d1e91a82054a1c1cdb25
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 387eb4f4c73b2103a7461c0d06c4d0e0562ec9db
+ms.sourcegitcommit: 0a9df8ec14ab332d939b49f7b72dea217c8b3e1e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74406170"
+ms.lasthandoff: 11/18/2020
+ms.locfileid: "94842462"
 ---
 # <a name="use-apache-spark-structured-streaming-with-apache-kafka-and-azure-cosmos-db"></a>Utiliser Apache Spark Structured Streaming avec Apache Kafka et Azure Cosmos DB
 
@@ -86,7 +86,7 @@ Même si vous pouvez créer un réseau virtuel Azure, et des clusters Kafka et S
 
 Le projet utilisé dans ce document stocke des données dans Cosmos DB. Avant d’exécuter le code, vous devez d’abord créer une _base de données_ et une _collection_ dans votre instance Cosmos DB. Vous devez également récupérer le point de terminaison du document et la _clé_ utilisés pour authentifier les requêtes sur Cosmos DB.
 
-L’une des méthodes possibles est d’utiliser [Azure CLI](https://docs.microsoft.com/cli/azure/?view=azure-cli-latest). Le script suivant crée une base de données nommée `kafkadata` et une collection nommée `kafkacollection`. Il retourne ensuite la clé primaire.
+L’une des méthodes possibles est d’utiliser [Azure CLI](/cli/azure/). Le script suivant crée une base de données nommée `kafkadata` et une collection nommée `kafkacollection`. Il retourne ensuite la clé primaire.
 
 ```azurecli
 #!/bin/bash
@@ -136,7 +136,9 @@ Pour charger les blocs-notes à partir du projet vers votre cluster Spark sur HD
 
 1. Dans votre navigateur web, connectez-vous au bloc-notes Jupyter sur votre cluster Spark. Dans l’URL suivante, remplacez `CLUSTERNAME` par le nom de votre cluster __Spark__ :
 
-        https://CLUSTERNAME.azurehdinsight.net/jupyter
+    ```http
+    https://CLUSTERNAME.azurehdinsight.net/jupyter
+    ```
 
     Lorsque vous y êtes invité, entrez l’identifiant de connexion (admin) et le mot de passe du cluster utilisés lors de la création du cluster.
 

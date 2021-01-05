@@ -7,16 +7,16 @@ ms.service: site-recovery
 ms.topic: conceptual
 ms.date: 10/15/2019
 ms.author: sideeksh
-ms.openlocfilehash: d8c896bc655339fbd7d51f738fb629450e8c12ae
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c334eee34eb878135d3d81ab15d03618c6604846
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "72376217"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86135174"
 ---
 # <a name="support-for-using-site-recovery-with-azure-backup"></a>Prise en charge de l’utilisation de Site Recovery avec Sauvegarde Azure
 
-Cet article résume la prise en charge de l’utilisation conjointe du [service Site Recovery](site-recovery-overview.md) avec le [service Sauvegarde Azure](https://docs.microsoft.com/azure/backup/backup-overview).
+Cet article résume la prise en charge de l’utilisation conjointe du [service Site Recovery](site-recovery-overview.md) avec le [service Sauvegarde Azure](../backup/backup-overview.md).
 
 **Action** | **Prise en charge de Site Recovery** | **Détails**
 --- | --- | ---

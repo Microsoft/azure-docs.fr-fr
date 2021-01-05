@@ -9,12 +9,12 @@ ms.topic: tutorial
 ms.date: 11/30/2018
 ms.author: cynthn
 ms.custom: mvc
-ms.openlocfilehash: d269b95e5e6fb8491afd4c2f9729cbb047cf3419
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 7fe1c01542df2fcc38982fe2a30f9e94c712eacb
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82100445"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87065263"
 ---
 # <a name="tutorial-create-and-deploy-highly-available-virtual-machines-with-azure-powershell"></a>Tutoriel : Créer et déployer des machines virtuelles hautement disponibles avec Azure PowerShell
 
@@ -47,7 +47,7 @@ Pour ouvrir Cloud Shell, sélectionnez simplement **Essayer** en haut à droite 
 
 Le matériel situé à un emplacement est divisé en plusieurs domaines de mise à jour et d’erreur. Un **domaine de mise à jour** est un groupe de machines virtuelles et d’équipements physiques sous-jacents pouvant être redémarrés en même temps. Les machines virtuelles d’un même **domaine d’erreur** partagent un espace de stockage commun ainsi qu’une source d’alimentation et un commutateur réseau.  
 
-Vous pouvez créer un groupe à haute disponibilité avec la commande [New-AzAvailabilitySet](https://docs.microsoft.com/powershell/module/az.compute/new-azavailabilityset). Dans cet exemple, le nombre de domaines de mise à jour et d’erreur s’élève à *2* et le groupe à haute disponibilité est nommé *myAvailabilitySet*.
+Vous pouvez créer un groupe à haute disponibilité avec la commande [New-AzAvailabilitySet](/powershell/module/az.compute/new-azavailabilityset). Dans cet exemple, le nombre de domaines de mise à jour et d’erreur s’élève à *2* et le groupe à haute disponibilité est nommé *myAvailabilitySet*.
 
 Créez un groupe de ressources.
 
@@ -57,7 +57,7 @@ New-AzResourceGroup `
    -Location EastUS
 ```
 
-Créez un groupe à haute disponibilité managé à l’aide de [New-AzAvailabilitySet](https://docs.microsoft.com/powershell/module/az.compute/new-azavailabilityset) avec le paramètre `-sku aligned`.
+Créez un groupe à haute disponibilité managé à l’aide de [New-AzAvailabilitySet](/powershell/module/az.compute/new-azavailabilityset) avec le paramètre `-sku aligned`.
 
 ```azurepowershell-interactive
 New-AzAvailabilitySet `
@@ -73,15 +73,15 @@ New-AzAvailabilitySet `
 Vous devez créer des machines virtuelles au sein du groupe à haute disponibilité pour vous assurer qu’elles sont correctement réparties dans le matériel. Vous ne pouvez pas ajouter une machine virtuelle existante à un groupe à haute disponibilité après sa création. 
 
 
-Quand vous créez une machine virtuelle à l’aide de [New-AzVM](https://docs.microsoft.com/powershell/module/az.compute/new-azvm), vous utilisez le paramètre `-AvailabilitySetName` pour spécifier le nom du groupe à haute disponibilité.
+Quand vous créez une machine virtuelle à l’aide de [New-AzVM](/powershell/module/az.compute/new-azvm), vous utilisez le paramètre `-AvailabilitySetName` pour spécifier le nom du groupe à haute disponibilité.
 
-Tout d’abord, définissez un nom d’utilisateur administrateur et un mot de passe pour la machine virtuelle avec [Get-Credential](https://msdn.microsoft.com/powershell/reference/5.1/microsoft.powershell.security/Get-Credential) :
+Tout d’abord, définissez un nom d’utilisateur administrateur et un mot de passe pour la machine virtuelle avec [Get-Credential](/powershell/module/microsoft.powershell.security/get-credential?view=powershell-5.1) :
 
 ```azurepowershell-interactive
 $cred = Get-Credential
 ```
 
-Créez maintenant deux machines virtuelles avec [New-AzVM](https://docs.microsoft.com/powershell/module/az.compute/new-azvm) dans le groupe à haute disponibilité.
+Créez maintenant deux machines virtuelles avec [New-AzVM](/powershell/module/az.compute/new-azvm) dans le groupe à haute disponibilité.
 
 ```azurepowershell-interactive
 for ($i=1; $i -le 2; $i++)
@@ -107,7 +107,7 @@ Si vous examinez le groupe à haute disponibilité dans le portail en accédant 
 
 ## <a name="check-for-available-vm-sizes"></a>Vérifier les tailles de machines virtuelles disponibles 
 
-Lorsque vous créez une machine virtuelle à l’intérieur d’un groupe à haute disponibilité, vous devez connaître les tailles de machine virtuelle qui sont disponibles sur le matériel. Utilisez la commande [Get-AzVMSize](https://docs.microsoft.com/powershell/module/az.compute/get-azvmsize) afin d’obtenir toutes les tailles disponibles pour les machines virtuelles que vous pouvez déployer dans le groupe à haute disponibilité.
+Lorsque vous créez une machine virtuelle à l’intérieur d’un groupe à haute disponibilité, vous devez connaître les tailles de machine virtuelle qui sont disponibles sur le matériel. Utilisez la commande [Get-AzVMSize](/powershell/module/az.compute/get-azvmsize) afin d’obtenir toutes les tailles disponibles pour les machines virtuelles que vous pouvez déployer dans le groupe à haute disponibilité.
 
 ```azurepowershell-interactive
 Get-AzVMSize `
@@ -136,5 +136,3 @@ Passez au didacticiel suivant pour en savoir plus sur les groupes de machines vi
 
 > [!div class="nextstepaction"]
 > [Créer un groupe de machines virtuelles identiques](tutorial-create-vmss.md)
-
-

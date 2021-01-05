@@ -7,12 +7,12 @@ ms.service: application-gateway
 ms.topic: article
 ms.date: 11/4/2019
 ms.author: caya
-ms.openlocfilehash: f54381ddcd11a2e4a24d30d812468da85b5403de
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 4f570f9f18f9c9d484a9bc9c1a5c64d42dbdc714
+ms.sourcegitcommit: 0ce1ccdb34ad60321a647c691b0cff3b9d7a39c8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80335819"
+ms.lasthandoff: 11/05/2020
+ms.locfileid: "93397448"
 ---
 # <a name="annotations-for-application-gateway-ingress-controller"></a>Annotations pour le contrôleur d’entrée Application Gateway 
 
@@ -72,7 +72,7 @@ Dans l’exemple ci-dessus, nous avons défini une ressource d’entrée nommée
 
 ## <a name="tls-redirect"></a>Redirection TLS
 
-Application Gateway [peut être configurée](https://docs.microsoft.com/azure/application-gateway/application-gateway-redirect-overview) pour rediriger automatiquement les URL HTTP vers leur équivalent HTTPS. Lorsque cette annotation est présente et que le protocole TLS est correctement configuré, le contrôleur d’entrée Kubernetes créera une [règle d’acheminement avec une configuration de redirection](https://docs.microsoft.com/azure/application-gateway/redirect-http-to-https-portal#add-a-routing-rule-with-a-redirection-configuration) et appliquera les modifications à votre Application Gateway. La redirection créée sera HTTP `301 Moved Permanently`.
+Application Gateway [peut être configurée](./redirect-overview.md) pour rediriger automatiquement les URL HTTP vers leur équivalent HTTPS. Lorsque cette annotation est présente et que le protocole TLS est correctement configuré, le contrôleur d’entrée Kubernetes créera une [règle d’acheminement avec une configuration de redirection](./redirect-http-to-https-portal.md#add-a-routing-rule-with-a-redirection-configuration) et appliquera les modifications à votre Application Gateway. La redirection créée sera HTTP `301 Moved Permanently`.
 
 ### <a name="usage"></a>Usage
 

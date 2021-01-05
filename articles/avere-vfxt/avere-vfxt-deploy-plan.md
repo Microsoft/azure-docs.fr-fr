@@ -1,17 +1,17 @@
 ---
 title: Planification de votre système Avere vFXT - Azure
-description: Explique la planification à effectuer avant de déployer Avere vFXT pour Azure
+description: Planifiez un cluster Avere vFXT pour Azure adapté à vos besoins. Découvrez les questions à poser avant d’accéder à la Place de marché Azure ou de créer des machines virtuelles.
 author: ekpgh
 ms.service: avere-vfxt
 ms.topic: conceptual
 ms.date: 01/21/2020
 ms.author: rohogue
-ms.openlocfilehash: 6acc1ffd197ddba4290ff7c0751b259d98a70927
-ms.sourcegitcommit: 441db70765ff9042db87c60f4aa3c51df2afae2d
+ms.openlocfilehash: 9f852ec056f3252005bba0bc142c05a9cfbe6c20
+ms.sourcegitcommit: f88074c00f13bcb52eaa5416c61adc1259826ce7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80754395"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92342397"
 ---
 # <a name="plan-your-avere-vfxt-system"></a>Planifier votre système Avere vFXT
 
@@ -109,7 +109,7 @@ Chaque nœud vFXT est identique. Autrement dit, si vous créez un cluster à tro
 
 La taille du cache de disque par nœud est configurable et peut aller de 1 000 Go à 8 000 Go. La taille du cache recommandée est de 4 To par nœud pour les nœuds Standard_E32s_v3.
 
-Pour plus d’informations sur ces machines virtuelles, consultez la documentation Microsoft Azure : [Tailles de machine virtuelle à mémoire optimisée](https://docs.microsoft.com/azure/virtual-machines/windows/sizes-memory)
+Pour plus d’informations sur ces machines virtuelles, consultez la documentation Microsoft Azure : [Tailles de machine virtuelle à mémoire optimisée](../virtual-machines/sizes-memory.md)
 
 ## <a name="account-quota"></a>Quota des comptes
 
@@ -166,7 +166,7 @@ Quand vous créez le cluster, vous pouvez choisir s’il faut créer une adresse
 
 ## <a name="vm-access-roles"></a>Rôles d’accès de machine virtuelle
 
-Azure utilise le [contrôle d’accès en fonction du rôle](../role-based-access-control/index.yml) (RBAC) pour autoriser les machines virtuelles de cluster à effectuer certaines tâches. Par exemple, le contrôleur de cluster doit être autorisé à créer et configurer les machines virtuelles de nœud de cluster. Les nœuds de cluster doivent pouvoir affecter ou réaffecter des adresses IP à d’autres nœuds de cluster.
+Azure utilise le [contrôle d’accès en fonction du rôle Azure (Azure RBAC)](../role-based-access-control/index.yml) pour autoriser les machines virtuelles de cluster à effectuer certaines tâches. Par exemple, le contrôleur de cluster doit être autorisé à créer et configurer les machines virtuelles de nœud de cluster. Les nœuds de cluster doivent pouvoir affecter ou réaffecter des adresses IP à d’autres nœuds de cluster.
 
 Deux rôles Azure intégrés sont utilisés pour les machines virtuelles Avere vFXT :
 

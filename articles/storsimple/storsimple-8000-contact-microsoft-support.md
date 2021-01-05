@@ -3,15 +3,15 @@ title: Créer un ticket ou cas de support pour la gamme StorSimple 8000
 description: Découvrez comment créer une demande de support et démarrer une session de support sur votre appareil de la gamme StorSimple 8000.
 author: alkohli
 ms.service: storsimple
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 01/09/2018
 ms.author: alkohli
-ms.openlocfilehash: 99de3a6fbbbb1c4324df1712a5e24fd334ca4977
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c288f59b1cb9a85ed4bc978d1c3fba18ba30b572
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79228241"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96017200"
 ---
 # <a name="contact-microsoft-support"></a>Contacter le support Microsoft
 
@@ -21,7 +21,7 @@ StorSimple Device Manager offre la possibilité de **créer une demande de suppo
 * Gestion du cycle de vie d’une demande de support à partir du portail
 * Démarrage d’une session de support dans l’interface Windows PowerShell de votre appareil StorSimple
 
-Examinez les [informations et les contrats de niveau de service relatifs à la prise en charge de la gamme StorSimple 8000](https://msdn.microsoft.com/library/mt433077.aspx) avant de créer une demande de support.
+Examinez les [informations et les contrats de niveau de service relatifs à la prise en charge de la gamme StorSimple 8000](./storsimple-8000-support-options.md) avant de créer une demande de support.
 
 ## <a name="create-a-support-request"></a>Création d’une demande de support
 
@@ -39,7 +39,7 @@ Selon votre [plan de support](https://azure.microsoft.com/support/plans/), vous 
    3. Sélectionnez un **plan de support** dans la liste déroulante si plusieurs plans sont associés à votre abonnement. Vous avez besoin d'un plan de support payant pour bénéficier du support technique.
    4. Cliquez sur **Suivant**.
 
-       ![Contacter le support MS avec le nouveau portail](./media/storsimple-8000-contact-microsoft-support/contactsupport2.png)
+       ![Contacter le support MS avec le nouveau portail 2](./media/storsimple-8000-contact-microsoft-support/contactsupport2.png)
 
 3. Dans le panneau **Nouvelle demande de support**, sélectionnez **2 Problème**. Dans le panneau **Problème**, procédez comme suit :
     
@@ -51,7 +51,7 @@ Selon votre [plan de support](https://azure.microsoft.com/support/plans/), vous 
     6. Sélectionnez la case à cocher **Partager les informations de diagnostic**.
     7. Cliquez sur **Suivant**.
 
-       ![Contacter le support MS avec le nouveau portail](./media/storsimple-8000-contact-microsoft-support/contactsupport3.png) 
+       ![Contacter le support MS avec le nouveau portail 3](./media/storsimple-8000-contact-microsoft-support/contactsupport3.png) 
 
 4. Dans le panneau **Nouvelle demande de support**, cliquez sur **3 Informations de contact**. Dans le panneau **Informations de contact**, procédez comme suit :
 
@@ -59,7 +59,7 @@ Selon votre [plan de support](https://azure.microsoft.com/support/plans/), vous 
    2. Dans la section Informations de contact, fournissez votre nom, votre adresse e-mail, un contact secondaire (facultatif) et votre pays/région. Cochez la case **Enregistrer les modifications de contact pour les futures demandes de support** .
    3. Cliquez sur **Créer**.
    
-       ![Contacter le support MS avec le nouveau portail](./media/storsimple-8000-contact-microsoft-support/contactsupport5.png)   
+       ![Contacter le support MS avec le nouveau portail 4](./media/storsimple-8000-contact-microsoft-support/contactsupport5.png)   
 
       Le Support Microsoft vous contactera à l’aide de ces informations pour approfondir le diagnostic et vous aider à résoudre le problème.
       Une fois votre demande envoyée, un ingénieur de support vous contactera dès que possible pour traiter votre demande.
@@ -76,11 +76,11 @@ Après avoir créé un ticket de support, vous pouvez gérer son cycle de vie de
 
 2. Une liste tabulaire de toutes les demandes de support est affichée dans le panneau **Aide + support**.
 
-    ![Gérer les demandes de support](./media/storsimple-8000-contact-microsoft-support/managesupport2.png)
+    ![Gérer les demandes de support 2](./media/storsimple-8000-contact-microsoft-support/managesupport2.png)
 
 3. Sélectionnez une demande de support. Vous pouvez afficher l’état et les détails de cette demande. Si vous souhaitez donner suite à cette demande, cliquez sur **+ Nouveau message**.
 
-    ![Gérer les demandes de support](./media/storsimple-8000-contact-microsoft-support/managesupport3.png)
+    ![Gérer les demandes de support 3](./media/storsimple-8000-contact-microsoft-support/managesupport3.png)
 
 ## <a name="start-a-support-session-in-windows-powershell-for-storsimple"></a>Démarrage d’une session de support dans Windows PowerShell pour StorSimple
 

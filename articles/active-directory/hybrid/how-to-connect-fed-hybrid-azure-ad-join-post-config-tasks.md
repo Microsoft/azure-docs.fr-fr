@@ -11,17 +11,17 @@ ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 08/10/2018
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: ffb8243041bb93ba8be6a65bb83df6f84affaee3
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: da5cefbacbd3851d2609a687c1948d9bcba5ffae
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80049661"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88612467"
 ---
 # <a name="post-configuration-tasks-for-hybrid-azure-ad-join"></a>Tâches post-configuration concernant la jonction Azure AD Hybride
 
@@ -86,15 +86,7 @@ Ce programme d’installation crée une tâche planifiée sur le système de l�
 
 ## <a name="10-configure-group-policy-to-allow-device-registration"></a>10. Configurer la stratégie de groupe pour autoriser l’inscription d’appareil
 
-* Créez un objet de stratégie de groupe dans Active Directory si ce dernier n’existe pas encore.
-* Attribuez-lui un nom (par exemple, Jonction Azure AD Hybride).
-* Accédez à :  Configuration ordinateur > Stratégies > Modèles d’administration > Composants Windows > Inscription de l’appareil
-* Activez :  Enregistrer les ordinateurs appartenant au domaine en tant qu’appareils
-* Appliquez vos modifications, puis cliquez sur OK.
-* Liez l’objet de stratégie de groupe à l’emplacement de votre choix (unité d’organisation, groupe de sécurité ou domaine pour tous les appareils).
-
->[!NOTE]
->Dans le cas de la version 2012R2, les paramètres de stratégie sont accessibles à l’emplacement **Configuration ordinateur > Stratégies > Modèles d’administration > Composants Windows > Rattacher à l’espace de travail > Joindre automatiquement les ordinateurs clients à l’espace de travail**.
+Pour savoir comment autoriser la jonction Azure AD Hybride pour certains appareils, consultez [Validation contrôlée de la jonction Azure AD Hybride](../devices/hybrid-azuread-join-control.md).
 
 ## <a name="next-steps"></a>Étapes suivantes
 [Configurer la réécriture d’appareil](how-to-connect-device-writeback.md)

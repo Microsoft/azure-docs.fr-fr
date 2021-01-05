@@ -7,13 +7,13 @@ ms.topic: quickstart
 ms.workload: infrastructure
 ms.date: 07/02/2019
 ms.author: cynthn
-ms.custom: mvc
-ms.openlocfilehash: 45160e8bc406318f3b3924142899e33640ee6b73
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.custom: mvc, devx-track-azurepowershell
+ms.openlocfilehash: d23bc83d9cfd60585a63df0acbfb2b4076cd83f4
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82097946"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "89077322"
 ---
 # <a name="quickstart-create-a-windows-virtual-machine-in-azure-with-powershell"></a>Démarrage rapide : Créer une machine virtuelle Windows dans Azure avec PowerShell
 
@@ -30,7 +30,7 @@ Pour ouvrir Cloud Shell, sélectionnez simplement **Essayer** en haut à droite 
 
 ## <a name="create-resource-group"></a>Créer un groupe de ressources
 
-Créez un groupe de ressources Azure avec [New-AzResourceGroup](https://docs.microsoft.com/powershell/module/az.resources/new-azresourcegroup). Un groupe de ressources est un conteneur logique dans lequel les ressources Azure sont déployées et gérées.
+Créez un groupe de ressources Azure avec [New-AzResourceGroup](/powershell/module/az.resources/new-azresourcegroup). Un groupe de ressources est un conteneur logique dans lequel les ressources Azure sont déployées et gérées.
 
 ```azurepowershell-interactive
 New-AzResourceGroup -Name myResourceGroup -Location EastUS
@@ -38,7 +38,7 @@ New-AzResourceGroup -Name myResourceGroup -Location EastUS
 
 ## <a name="create-virtual-machine"></a>Créer une machine virtuelle
 
-Créez une machine virtuelle avec [New-AzVM](https://docs.microsoft.com/powershell/module/az.compute/new-azvm). Indiquez le nom de chacune des ressources. L’applet de commande `New-AzVM` les crée si les ressources spécifiées n’existent pas déjà.
+Créez une machine virtuelle avec [New-AzVM](/powershell/module/az.compute/new-azvm). Indiquez le nom de chacune des ressources. L’applet de commande `New-AzVM` les crée si les ressources spécifiées n’existent pas déjà.
 
 Lorsque vous y êtes invité, indiquez un nom d’utilisateur et un mot de passe à utiliser comme informations d’identification pour se connecter à la machine virtuelle :
 
@@ -58,7 +58,7 @@ New-AzVm `
 
 Une fois le déploiement terminé, établissez une connexion RDP vers la machine virtuelle. Pour que vous puissiez voir votre machine virtuelle en action, le serveur web IIS est installé.
 
-Pour voir l’adresse IP publique de la machine virtuelle, utilisez l’applet de commande [Get-AzPublicIpAddress](https://docs.microsoft.com/powershell/module/az.network/get-azpublicipaddress) :
+Pour voir l’adresse IP publique de la machine virtuelle, utilisez l’applet de commande [Get-AzPublicIpAddress](/powershell/module/az.network/get-azpublicipaddress) :
 
 ```powershell
 Get-AzPublicIpAddress -ResourceGroupName "myResourceGroup" | Select "IpAddress"
@@ -92,7 +92,7 @@ Une fois IIS installé et le port 80 ouvert d’Internet à votre machine virtue
 
 ## <a name="clean-up-resources"></a>Nettoyer les ressources
 
-Lorsque vous n’en avez plus besoin, vous pouvez utiliser la cmdlet [Remove-AzResourceGroup](https://docs.microsoft.com/powershell/module/az.resources/remove-azresourcegroup) pour supprimer le groupe de ressources, la machine virtuelle et toutes les ressources associées :
+Lorsque vous n’en avez plus besoin, vous pouvez utiliser la cmdlet [Remove-AzResourceGroup](/powershell/module/az.resources/remove-azresourcegroup) pour supprimer le groupe de ressources, la machine virtuelle et toutes les ressources associées :
 
 ```azurepowershell-interactive
 Remove-AzResourceGroup -Name myResourceGroup

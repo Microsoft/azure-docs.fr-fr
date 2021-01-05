@@ -9,38 +9,34 @@ ms.service: active-directory
 ms.workload: identity
 ms.subservice: user-help
 ms.topic: end-user-help
-ms.date: 01/24/2019
+ms.date: 05/31/2020
 ms.author: curtand
 ms.reviewer: olhaun
-ms.openlocfilehash: 18c34e270f1849ef8d8d692b68567eab7d103b13
-ms.sourcegitcommit: 493b27fbfd7917c3823a1e4c313d07331d1b732f
+ms.openlocfilehash: 5aac6c0b903a3b2adf481a2c63847272122ce2d7
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83741369"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88798973"
 ---
 # <a name="download-and-install-the-microsoft-authenticator-app"></a>Télécharger et installer l’application Microsoft Authenticator
 
 >[!Important]
->Ce contenu est destiné aux utilisateurs. Si vous êtes un administrateur, vous trouverez plus d’informations sur la méthode à suivre pour configurer et gérer votre environnement Azure Active Directory (Azure AD) dans le [documentation relative à Azure Active Directory](https://docs.microsoft.com/azure/active-directory).
+>Ce contenu est destiné aux utilisateurs. Si vous êtes un administrateur, vous trouverez plus d’informations sur la méthode à suivre pour configurer et gérer votre environnement Azure Active Directory (Azure AD) dans la [documentation d’administration relative à Azure Active Directory](../index.yml).
+>
+> Si vous rencontrez des problèmes de connexion à votre compte, consultez [Quand vous ne pouvez pas vous connecter à votre compte Microsoft](https://support.microsoft.com/help/12429) pour obtenir de l’aide.  Vous pouvez aussi obtenir plus d’informations sur la procédure à suivre quand vous recevez le message [« Ce compte Microsoft n’existe pas »](https://support.microsoft.com/help/13811) lors d’une tentative de connexion à votre compte Microsoft.
 
-L’application Microsoft Authenticator vous aide à vous connecter à vos comptes si vous utilisez la vérification à deux facteurs. La vérification en deux étapes vous permet d’accéder à vos comptes de façon plus sûre, en particulier quand vous consultez des informations sensibles. Les mots de passe pouvant être oubliés, volés ou compromis, la vérification à deux facteurs est une mesure de sécurité supplémentaire qui renforce la protection de votre compte contre les tentatives d’intrusion.
-
-Vous pouvez utiliser l’application Microsoft Authenticator de plusieurs manières, notamment :
+L’application Microsoft Authenticator vous aide à vous connecter à vos comptes si vous utilisez la vérification à deux facteurs. La vérification à deux facteurs vous permet d’utiliser vos comptes de manière plus sécurisée, car les mots de passe peuvent être oubliés, volés ou compromis. La vérification à deux facteurs utilise un second facteur, comme votre téléphone, pour rendre plus difficile le piratage de votre compte. Vous pouvez utiliser l’application Microsoft Authenticator de plusieurs manières, notamment :
 
 - **Vérification en deux étapes.** Il s’agit de la méthode de vérification standard, où l’un des facteurs est votre mot de passe. Une fois connecté à l’aide de votre nom d’utilisateur et de votre mot de passe, vous pouvez approuver une notification ou entrer un code de vérification fourni.
 
-- **Connexion par téléphone.** Version de la vérification en deux étapes qui vous permet de vous connecter sans mot de passe, à l’aide de votre nom d’utilisateur et de votre appareil mobile avec votre empreinte digitale, visage ou code PIN.
+- **Connexion par téléphone.** Version de la vérification à deux facteurs qui vous permet de vous connecter sans mot de passe, à l’aide de votre nom d’utilisateur et de votre appareil mobile avec votre empreinte digitale, visage ou code PIN.
 
 - **Génération de code.** En tant que générateur de code pour tous les comptes prenant en charge les applications d’authentification.
 
-> [!Important]
-> L’application Microsoft Authenticator fonctionne avec tout compte utilisant une vérification en deux étapes et prenant en charge les mots de passe à usage unique et durée définie (normes TOTP).
->
-> Votre organisation peut vous obliger à utiliser une application d’authentification pour vous connecter et accéder à ses données et documents. Même si votre nom d’utilisateur peut apparaître dans l’application, le compte n’est pas réellement configuré comme méthode de vérification tant que vous n’avez pas terminé le processus d’inscription. Pour plus d’informations, consultez [Ajouter votre compte professionnel ou scolaire](user-help-auth-app-add-work-school-account.md).
-> 
-> [!NOTE]
-> Si vous rencontrez des problèmes de connexion à votre compte, consultez [Quand vous ne pouvez pas vous connecter à votre compte Microsoft](https://support.microsoft.com/help/12429) pour obtenir de l’aide.  Obtenez plus d’informations sur la procédure à suivre quand vous recevez le message [« Ce compte Microsoft n’existe pas »](https://support.microsoft.com/help/13811) lors d’une tentative de connexion à votre compte Microsoft.
+Authenticator fonctionne avec tout compte utilisant une vérification à deux facteurs et prenant en charge les mots de passe à usage unique et durée définie (normes TOTP).
+
+Votre organisation peut vous obliger à utiliser l’application Authenticator pour vous connecter et accéder à ses données et documents. Même si votre nom d’utilisateur apparaît dans l’application, le compte n’est pas configuré comme méthode de vérification tant que vous n’avez pas terminé l’inscription. Pour plus d’informations, consultez [Ajouter votre compte professionnel ou scolaire](user-help-auth-app-add-work-school-account.md).
 
 ## <a name="download-and-install-the-app"></a>Télécharger et installer l’application
 
@@ -55,7 +51,7 @@ Installez la dernière version de l’application Microsoft Authenticator corres
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Après avoir téléchargé et installé l’application, vous devez ajouter vos différents comptes. Pour plus d'informations, consultez les pages suivantes :
+Après avoir téléchargé et installé l’application, consultez la [Vue d’ensemble de l’application Authenticator](user-help-auth-app-overview.md) pour en savoir plus. Pour obtenir d’autres options d’installation, consultez :
 
 - **Application d’authentification.** Téléchargez et utilisez une application d’authentification pour obtenir une notification d’approbation ou un code d’approbation généré de manière aléatoire pour la réinitialisation du mot de passe ou la vérification en deux étapes. Pour obtenir des instructions détaillées sur la configuration et l’utilisation de l’application Microsoft Authenticator, consultez [Configurer les informations de sécurité pour utiliser une application d’authentification](security-info-setup-auth-app.md).
 

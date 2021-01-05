@@ -7,12 +7,12 @@ ms.reviewer: hrasheed
 ms.service: hdinsight
 ms.topic: tutorial
 ms.date: 03/10/2020
-ms.openlocfilehash: 21376eb40fb40abe67f7e03d15aabd7d89ea62f8
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: bdce735bdacbe7ff0752650c6949fdb361342c73
+ms.sourcegitcommit: d767156543e16e816fc8a0c3777f033d649ffd3c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "80081898"
+ms.lasthandoff: 10/26/2020
+ms.locfileid: "92542554"
 ---
 # <a name="tutorial-configure-apache-ambari-email-notifications-in-azure-hdinsight"></a>Tutoriel : Configurer des notifications par e-mail Apache Ambari dans Azure HDInsight
 
@@ -26,7 +26,7 @@ Dans ce tutoriel, vous allez apprendre à :
 
 ## <a name="prerequisites"></a>Prérequis
 
-* Un compte de messagerie SendGrid. Pour obtenir des instructions, consultez [Envoi de courriers électroniques à l’aide de SendGrid avec Azure](https://docs.microsoft.com/azure/sendgrid-dotnet-how-to-send-email).
+* Un compte de messagerie SendGrid. Pour obtenir des instructions, consultez [Envoi de courriers électroniques à l’aide de SendGrid avec Azure](../sendgrid-dotnet-how-to-send-email.md).
 
 * Un cluster HDInsight. Consultez [Créer des clusters Apache Hadoop à l’aide du Portail Azure](./hdinsight-hadoop-create-linux-clusters-portal.md).
 
@@ -38,11 +38,11 @@ Dans ce tutoriel, vous allez apprendre à :
 
     ![Présentation de SendGrid dans le portail Azure](./media/apache-ambari-email/azure-portal-sendgrid-manage.png)
 
-1. Dans le menu de gauche, accédez au nom de votre compte, puis à **Détails du compte**.
+1. Dans le menu de gauche, accédez au nom de votre compte, puis à **Détails du compte** .
 
     ![Navigation dans le tableau de bord SendGrid](./media/apache-ambari-email/sendgrid-dashboard-navigation.png)
 
-1. Dans la page **Détails du compte**, notez le **Nom d’utilisateur**.
+1. Dans la page **Détails du compte** , notez le **Nom d’utilisateur** .
 
     ![Détails du compte SendGrid](./media/apache-ambari-email/sendgrid-account-details.png)
 
@@ -50,11 +50,11 @@ Dans ce tutoriel, vous allez apprendre à :
 
 1. Dans un navigateur web, accédez à `https://CLUSTERNAME.azurehdinsight.net/#/main/alerts`, où `CLUSTERNAME` est le nom de votre cluster.
 
-1. Dans la liste déroulante **Actions**, sélectionnez **Manage Notifications** (Gérer les notifications).
+1. Dans la liste déroulante **Actions** , sélectionnez **Manage Notifications** (Gérer les notifications).
 
 1. Dans la fenêtre **Manage Alert Notifications** (Gérer les notifications d’alerte), sélectionnez l’icône **+** .
 
-    ![Ambari - Créer une notification d’alerte](./media/apache-ambari-email/azure-portal-create-notification.png)
+    ![La capture d’écran présente la boîte de dialogue Manage Alert Notifications (Gérer les notifications d’alerte).](./media/apache-ambari-email/azure-portal-create-notification.png)
 
 1. Dans la boîte de dialogue **Create Alert Notification** (Créer une notification d’alerte), fournissez les informations suivantes :
 
@@ -64,7 +64,7 @@ Dans ce tutoriel, vous allez apprendre à :
     |Groupes|Configurez selon vos besoins.|
     |severity|Configurez selon vos besoins.|
     |Description|facultatif.|
-    |Méthode|Laissez **EMAIL**.|
+    |Méthode|Laissez **EMAIL** .|
     |Email To (Adresse e-mail de destination)|Indiquez la ou les adresses e-mails auxquelles envoyer les notifications, séparées par une virgule.|
     |SMTP Server (Serveur SMTP)|`smtp.sendgrid.net`|
     |SMTP Port (Port SMTP)|25 ou 587 (pour les connexions non chiffrées/TLS).|
@@ -75,11 +75,11 @@ Dans ce tutoriel, vous allez apprendre à :
     |Password Confirmation (Confirmation de mot de passe)|Retapez le mot de passe.|
     |Start TLS (Démarrer TLS)|Cochez cette case.|
 
-    ![Ambari - Créer une notification d’alerte](./media/apache-ambari-email/ambari-create-alert-notification.png)
+    ![La capture d’écran présente la boîte de dialogue Create Alert Notification (Créer une notification d’alerte).](./media/apache-ambari-email/ambari-create-alert-notification.png)
 
-    Sélectionnez **Enregistrer**. Vous revenez à la fenêtre **Manage Alert Notifications** (Gérer les notifications d’alerte).
+    Sélectionnez **Enregistrer** . Vous revenez à la fenêtre **Manage Alert Notifications** (Gérer les notifications d’alerte).
 
-1. Dans la fenêtre **Manage Alert Notifications**, sélectionnez l’icône **Close** (Fermer).
+1. Dans la fenêtre **Manage Alert Notifications** , sélectionnez l’icône **Close** (Fermer).
 
 ## <a name="next-steps"></a>Étapes suivantes
 

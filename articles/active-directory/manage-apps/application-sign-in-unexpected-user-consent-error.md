@@ -3,29 +3,29 @@ title: Erreur inattendue lors du consentement à une application | Microsoft Doc
 description: Aborde les erreurs qui peuvent se produire durant le processus de consentement à une application et ce que vous pouvez faire
 services: active-directory
 documentationcenter: ''
-author: msmimart
-manager: CelesteDG
+author: kenwith
+manager: celestedg
 ms.assetid: ''
 ms.service: active-directory
 ms.subservice: app-mgmt
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: troubleshooting
 ms.date: 07/11/2017
-ms.author: mimart
+ms.author: kenwith
 ms.reviewer: asteen
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: ea14e02920cf7ba6c5e0a7b415cb92137c915576
-ms.sourcegitcommit: b0ff9c9d760a0426fd1226b909ab943e13ade330
+ms.openlocfilehash: 558c6dc24f6d0d17c9a82bbc79f39649f63dc7f4
+ms.sourcegitcommit: 8e7316bd4c4991de62ea485adca30065e5b86c67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/01/2020
-ms.locfileid: "80519701"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94658483"
 ---
 # <a name="unexpected-error-when-performing-consent-to-an-application"></a>Erreur inattendue lors du consentement à une application
 
-Cet article traite des erreurs qui peuvent se produire durant le processus de consentement à une application. Si vous rencontrez des invites de consentement inattendues qui ne contiennent aucun message d’erreur, consultez [Scénarios d’authentification pour Azure AD](https://docs.microsoft.com/azure/active-directory/develop/active-directory-authentication-scenarios) pour résoudre le problème.
+Cet article traite des erreurs qui peuvent se produire durant le processus de consentement à une application. Si vous rencontrez des invites de consentement inattendues qui ne contiennent aucun message d’erreur, consultez [Scénarios d’authentification pour Azure AD](../develop/authentication-vs-authorization.md) pour résoudre le problème.
 
 Pour fonctionner, de nombreuses applications qui s’intègrent à Azure Active Directory nécessitent des autorisations à d’autres ressources. Quand ces ressources sont également intégrées à Azure Active Directory, vous devez souvent utiliser l’infrastructure de consentement commune pour demander les autorisations nécessaires pour y accéder. Une invite de consentement s’affiche, généralement lors de la première utilisation de l’application, mais parfois lors d’une utilisation ultérieure.
 
@@ -38,6 +38,8 @@ Certaines conditions doivent être réunies pour qu’un utilisateur consente au
 Cette erreur se produit quand un utilisateur, qui n’est pas un administrateur d’entreprise, tente d’utiliser une application qui demande des autorisations pouvant uniquement être accordées par un administrateur. Pour résoudre cette erreur, un administrateur peut accorder l’accès à l’application au nom de son organisation.
 
 Cette erreur peut également se produire quand un utilisateur est empêché de donner son consentement à une application parce que Microsoft a détecté que la demande d’autorisation présente un risque. Dans ce cas, un événement d’audit est également journalisé avec la catégorie « ApplicationManagement », le type d’activité « Consent to application » et la raison de l’état « Risky application detected ».
+
+Cette erreur peut également se produire lorsque l’affectation de l’utilisateur est requise pour l’application, mais qu’aucun consentement de l’administrateur n’a été fourni. Dans ce cas, l’administrateur doit d’abord fournir son consentement.   
 
 ## <a name="policy-prevents-granting-permissions-error"></a>Erreur : stratégie empêchant l’octroi d’autorisations
 * **AADSTS90093 :** Un administrateur de &lt;tenantDisplayName&gt; a défini une stratégie qui vous empêche d’octroyer à &lt;nom_application&gt; les autorisations qu’elle demande. Contactez un administrateur de &lt;tenantDisplayName&gt;, qui peut accorder des autorisations à cette application en votre nom.
@@ -76,10 +78,18 @@ Ces erreurs se produisent quand l’application à laquelle un utilisateur tente
 
     -   Ajout de l’application à partir de la galerie d’applications Azure AD
 
+## <a name="risky-app-error-and-warning"></a>Erreur et avertissement : application à risque
+* **AADSTS900941 :** Le consentement de l’administrateur est obligatoire. L’application est considérée comme risquée. (AdminConsentRequiredDueToRiskyApp)
+* Cette application peut présenter un risque. Si vous faites confiance à cette application, demandez à votre administrateur de vous accorder l’accès.
+* **AADSTS900981 :** Une demande de consentement administrateur a été reçue pour une application risquée. (AdminConsentRequestRiskyAppWarning)
+* Cette application peut présenter un risque. Continuez uniquement si vous faites confiance à cette application.
+
+Ces deux messages s’affichent lorsque Microsoft a déterminé que la demande de consentement peut présenter un risque. Parmi d’autres facteurs, cela peut se produire si aucun [éditeur vérifié](../develop/publisher-verification-overview.md) n’a été ajouté à l’inscription de l’application. Les utilisateurs finaux verront le premier code d’erreur et le premier message lorsque le [workflow de consentement administrateur](configure-admin-consent-workflow.md) est désactivé. Les administrateurs ainsi que les utilisateurs finaux verront le second code et le second message lorsque le workflow de consentement administrateur est activé. 
+
+Les utilisateurs finaux ne pourront pas donner leur consentement aux applications qui ont été détectées comme présentant un risque. Les administrateurs peuvent le faire, mais ils doivent évaluer l’application avec beaucoup de soin et procéder avec prudence. Si l’application semble suspecte après un examen plus approfondi, elle peut être signalée à Microsoft sur l’écran de consentement. 
+
 ## <a name="next-steps"></a>Étapes suivantes 
 
-[Applications, autorisations et consentement dans Azure Active Directory (point de terminaison v1)](https://docs.microsoft.com/azure/active-directory/active-directory-apps-permissions-consent)<br>
+[Applications, autorisations et consentement dans Azure Active Directory (point de terminaison v1)](../develop/quickstart-register-app.md)<br>
 
-[Étendues, autorisations et consentement dans Azure Active Directory (point de terminaison v2.0)](https://docs.microsoft.com/azure/active-directory/develop/active-directory-v2-scopes)
-
-
+[Étendues, autorisations et consentement dans Azure Active Directory (point de terminaison v2.0)](../develop/v2-permissions-and-consent.md)

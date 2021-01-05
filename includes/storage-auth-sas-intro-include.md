@@ -9,10 +9,10 @@ ms.date: 12/20/2019
 ms.author: tamram
 ms.custom: include file
 ms.openlocfilehash: aec1faa4de1149f08fb6fbc1cc5bf3aa2ab6becd
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "75371772"
 ---
 Une signature d’accès partagé (SAP) vous permet d’accorder un accès limité aux conteneurs et aux objets blob de votre compte de stockage. Lorsque vous créez une SAP, vous spécifiez ses contraintes, notamment les ressources de Stockage Azure auxquelles un client est autorisé à accéder, les autorisations dont ils disposent sur ces ressources et la durée de validité de la SAP.

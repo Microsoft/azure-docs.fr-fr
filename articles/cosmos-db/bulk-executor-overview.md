@@ -3,18 +3,19 @@ title: Vue d’ensemble de la bibliothèque d’exécuteur en bloc Azure Cosmos 
 description: Effectuez des opérations en bloc dans Azure Cosmos DB par l’intermédiaire des API d’importation en bloc et de mise à jour en bloc proposées par la bibliothèque d’exécuteur en bloc.
 author: tknandu
 ms.service: cosmos-db
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 05/28/2019
 ms.author: ramkris
 ms.reviewer: sngun
-ms.openlocfilehash: af17f9c2ef7eea5eb531327d4df13d5885a49b7e
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 211fc85f97069fcf3251048a074d625e777f8e7d
+ms.sourcegitcommit: 3bdeb546890a740384a8ef383cf915e84bd7e91e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80985590"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93100471"
 ---
 # <a name="azure-cosmos-db-bulk-executor-library-overview"></a>Vue d’ensemble de la bibliothèque d’exécuteur en bloc Azure Cosmos DB
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
  
 Azure Cosmos DB est un service de base de données rapide, flexible et distribué à l’échelle mondiale, conçu pour effectuer un scale-out élastique afin de prendre en charge : 
 
@@ -25,6 +26,9 @@ La bibliothèque d’exécuteur en bloc vous permet de tirer parti de ces stocka
 
 > [!NOTE] 
 > Actuellement, la bibliothèque d’exécuteur en bloc gère les opérations d’importation et de mise à jour. Seuls les comptes d’API SQL Azure Cosmos DB et les comptes d’API Gremlin la prennent en charge.
+
+> [!IMPORTANT]
+> La bibliothèque d’exécuteurs en bloc n’est actuellement pas prise en charge sur les comptes [serverless](serverless.md). Sur .NET, il est recommandé d’utiliser la [prise en charge de l’exécution en bloc](https://devblogs.microsoft.com/cosmosdb/introducing-bulk-support-in-the-net-sdk/) disponible dans la version V3 du kit SDK.
  
 ## <a name="key-features-of-the-bulk-executor-library"></a>Principales fonctionnalités de la bibliothèque d’exécuteur en bloc  
  
@@ -42,7 +46,7 @@ La bibliothèque d’exécuteur en bloc vous permet de tirer parti de ces stocka
 
 Quand une opération en bloc visant à importer ou mettre à jour des documents est déclenchée avec un lot d’entités, elles sont initialement mélangées dans des compartiments correspondant à leur plage de clés de partition Azure Cosmos DB. Dans chaque compartiment qui correspond à une plage de clés de partition, elles sont divisées en mini-lots jouant chacun le rôle de charge utile validée côté serveur. La bibliothèque d’exécuteur en bloc comporte des optimisations intégrées permettant l’exécution simultanée de ces mini-lots entre les groupes de clés de partition et au sein d’un même groupe. L’image suivante montre comment l’exécuteur en bloc traite les données par lots dans différentes clés de partition :  
 
-![Architecture de BulkExecutor](./media/bulk-executor-overview/bulk-executor-architecture.png)
+:::image type="content" source="./media/bulk-executor-overview/bulk-executor-architecture.png" alt-text="Architecture de l’exécuteur en bloc" :::
 
 La bibliothèque de l’exécuteur en bloc veille à utiliser au maximum le débit alloué à une collection. Elle utilise un  [mécanisme de contrôle de congestion de style AIMD](https://tools.ietf.org/html/rfc5681) pour chaque plage de clés de partition Azure Cosmos DB afin de gérer efficacement la limitation du taux et les délais d’attente. 
 

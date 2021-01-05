@@ -5,14 +5,14 @@ services: web-application-firewall
 author: vhorne
 ms.service: web-application-firewall
 ms.topic: tutorial
-ms.date: 11/14/2019
+ms.date: 09/16/2020
 ms.author: victorh
-ms.openlocfilehash: 68a9f051bf3d59cbf32377cb503e9ded0a54d5e9
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: b9733eeb0d9941f6e23dcc9c0fa4dba60f4e4d30
+ms.sourcegitcommit: 04fb3a2b272d4bbc43de5b4dbceda9d4c9701310
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "74049224"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94561027"
 ---
 # <a name="tutorial-create-an-application-gateway-with-a-web-application-firewall-using-the-azure-portal"></a>Tutoriel : Créer une passerelle d’application avec un pare-feu d’applications web à l’aide du portail Azure
 
@@ -31,6 +31,8 @@ Dans ce tutoriel, vous allez apprendre à :
 [!INCLUDE [updated-for-az](../../../includes/updated-for-az.md)]
 
 <!---If you prefer, you can complete this tutorial using [Azure PowerShell](tutorial-restrict-web-traffic-powershell.md) or [Azure CLI](tutorial-restrict-web-traffic-cli.md).--->
+
+## <a name="prerequisites"></a>Prérequis
 
 Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
 
@@ -169,7 +171,7 @@ Pour ce faire, vous allez effectuer les opérations suivantes :
 
 Dans cet exemple, vous allez installer IIS sur les machines virtuelles uniquement pour vérifier si Azure a bien créé la passerelle d’application.
 
-1. Ouvrez [Azure PowerShell](https://docs.microsoft.com/azure/cloud-shell/quickstart-powershell). Pour ce faire, sélectionnez **Cloud Shell** dans la barre de navigation supérieure du portail Azure, puis sélectionnez **PowerShell** dans la liste déroulante. 
+1. Ouvrez [Azure PowerShell](../../cloud-shell/quickstart-powershell.md). Pour ce faire, sélectionnez **Cloud Shell** dans la barre de navigation supérieure du portail Azure, puis sélectionnez **PowerShell** dans la liste déroulante. 
 
     ![Installer l’extension personnalisée](../media/application-gateway-web-application-firewall-portal/application-gateway-extension.png)
 

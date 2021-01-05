@@ -6,15 +6,15 @@ author: swmachan
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: translator-text
-ms.date: 02/21/2019
+ms.date: 08/17/2020
 ms.author: swmachan
 ms.topic: conceptual
-ms.openlocfilehash: eee2271b6d1fb51ff4b27c0d612306b1f7f8747a
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.openlocfilehash: 542f62f04adc7d4858e4b4621b0ae85e906434ad
+ms.sourcegitcommit: 22da82c32accf97a82919bf50b9901668dc55c97
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83584720"
+ms.lasthandoff: 11/08/2020
+ms.locfileid: "94369322"
 ---
 # <a name="view-system-test-results"></a>Afficher les résultats de test système
 
@@ -70,12 +70,12 @@ Pour demander un déploiement :
 
 2. Pour un modèle formé réussi, il affiche le bouton « Déployer », s'il n'est pas déployé.
 
-    ![Déployer un modèle](media/how-to/how-to-deploy-model.png)
+    ![Capture d’écran mettant en évidence le bouton Déployer permettant de déployer un modèle.](media/how-to/how-to-deploy-model.png)
 
 3.  Cliquez sur Déployer.
 4.  Sélectionnez **Deployed (Déployé)** pour la ou les régions où vous souhaitez déployer votre modèle, puis cliquez sur Enregistrer. Vous pouvez sélectionner **Deployed (Déployé)** pour plusieurs régions.
 
-    ![Déployer un modèle](media/how-to/how-to-deploy-model-regions.png)
+    ![Capture d’écran montrant où vous pouvez déployer un modèle ou annuler son déploiement.](media/how-to/how-to-deploy-model-regions.png)
 
 5.  Vous pouvez afficher l’état de votre modèle dans la colonne « État ».
 
@@ -90,7 +90,7 @@ Pour mettre à jour les paramètres de déploiement :
 
 2. Pour un modèle déployé réussi, il affiche le bouton **Update (Mettre à jour)** .
 
-    ![Déployer un modèle](media/how-to/how-to-update-undeploy-model.png)
+    ![Capture d’écran mettant en évidence le bouton Mettre à jour pour la mise à jour des paramètres de déploiement.](media/how-to/how-to-update-undeploy-model.png)
 
 3.  Sélectionnez **Update**.
 4.  Sélectionnez **Deployed (Déployé)** ou **Undeployed (Non déployé)** pour la ou les régions où vous souhaitez déployer votre modèle (ou en annuler le déploiement), puis cliquez sur **Save (Enregistrer)** .
@@ -102,6 +102,6 @@ Pour mettre à jour les paramètres de déploiement :
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- Commencez à utiliser votre modèle de traduction personnalisé déployé via [Translator V3](https://docs.microsoft.com/azure/cognitive-services/translator/reference/v3-0-translate?tabs=curl).
+- Commencez à utiliser votre modèle Custom Translator déployé via [Microsoft Translator Text API V3](../reference/v3-0-translate.md?tabs=curl).
 - Découvrez [comment gérer les paramètres](how-to-manage-settings.md) pour partager votre espace de travail, gérer la clé d’abonnement.
 - Découvrez [comment migrer votre espace de travail et le projet](how-to-migrate.md) depuis [Microsoft Translator Hub](https://hub.microsofttranslator.com)

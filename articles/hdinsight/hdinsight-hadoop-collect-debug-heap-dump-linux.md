@@ -8,12 +8,12 @@ ms.service: hdinsight
 ms.topic: conceptual
 ms.custom: hdinsightactive
 ms.date: 01/02/2020
-ms.openlocfilehash: 9134eb6922b0ed37bbe6051b138da2c7c082b175
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 1ef52d74f7ae6e7e0d8c58e3b1972a0a1227c6b5
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75658795"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96001919"
 ---
 # <a name="enable-heap-dumps-for-apache-hadoop-services-on-linux-based-hdinsight"></a>Activer les dumps de tas pour les services Apache Hadoop sur HDInsight sur Linux
 
@@ -51,7 +51,7 @@ Les processus de mappage et de réduction sont légèrement différents, car ces
 
 L’option suivante active les dumps de tas quand OutOfMemoryError se produit :
 
-    -XX:+HeapDumpOnOutOfMemoryError
+`-XX:+HeapDumpOnOutOfMemoryError`
 
 Le **+** indique que cette option est activée. La valeur par défaut est désactivée.
 
@@ -62,7 +62,7 @@ Le **+** indique que cette option est activée. La valeur par défaut est désac
 
 L’emplacement par défaut pour le fichier dump est le répertoire de travail actuel. Vous pouvez contrôler l’endroit de stockage du fichier à l’aide de l’option suivante :
 
-    -XX:HeapDumpPath=/path
+`-XX:HeapDumpPath=/path`
 
 Par exemple, l’utilisation de `-XX:HeapDumpPath=/tmp` entraîne le stockage des dumps dans le répertoire /tmp.
 
@@ -70,7 +70,7 @@ Par exemple, l’utilisation de `-XX:HeapDumpPath=/tmp` entraîne le stockage de
 
 Vous pouvez également déclencher un script quand **OutOfMemoryError** se produit. Par exemple, vous pouvez déclencher une notification pour signaler que l’erreur s’est produite. Utilisez l’option suivante pour déclencher un script quand __OutOfMemoryError__ survient :
 
-    -XX:OnOutOfMemoryError=/path/to/script
+`-XX:OnOutOfMemoryError=/path/to/script`
 
 > [!NOTE]  
 > Apache Hadoop étant un système distribué, tout script utilisé doit être placé sur tous les nœuds du cluster où le service s’exécute.

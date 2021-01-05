@@ -1,26 +1,29 @@
 ---
-title: Implémenter la confidentialité différentielle avec le package WhiteNoise
+title: Implémenter la confidentialité différentielle avec le package WhiteNoise (version préliminaire)
 titleSuffix: Azure Machine Learning
 description: Découvrez ce qu’est la confidentialité différentielle et comment le package WhiteNoise peut vous aider à implémenter des systèmes privés différentiels qui préservent la confidentialité des données.
 author: luisquintanilla
 ms.author: luquinta
-ms.date: 05/03/2020
+ms.date: 07/09/2020
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: core
 ms.topic: conceptual
-ms.openlocfilehash: 09ac31f31f42f5aed9e7dd464e1fce1436cfe581
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.openlocfilehash: 9728bf2c86c0629b09e2325650ce288cf9b3cc7e
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83594988"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86199795"
 ---
-# <a name="preserve-data-privacy-by-using-differential-privacy-and-the-whitenoise-package"></a>Préserver la confidentialité des données en utilisant la confidentialité différentielle et le package WhiteNoise
+# <a name="preserve-data-privacy-by-using-differential-privacy-and-the-whitenoise-package-preview"></a>Préserver la confidentialité des données en utilisant la confidentialité différentielle et le package WhiteNoise (version préliminaire)
 
 Découvrez ce qu’est la confidentialité différentielle et comment le package WhiteNoise peut vous aider à implémenter des systèmes offrant une confidentialité différentielle.
 
 Les préoccupations liées à la confidentialité et à la sécurité augmentent à mesure qu’augmente la quantité de données qu’une organisation collecte et utilise à des fins d’analyse. Les analyses requièrent des données. En règle générale, plus il y a de données utilisées pour effectuer l’apprentissage des modèles, plus ceux-ci sont précis. Lorsque des informations personnelles sont utilisées pour ces analyses, il est particulièrement important que les données restent confidentielles tout au long de leur utilisation.
+
+> [!NOTE]
+> Veuillez noter que nous allons renommer le kit de ressources et que nous présenterons le nouveau nom dans les semaines à venir. 
 
 ## <a name="how-differential-privacy-works"></a>Fonctionnement de la confidentialité différentielle
 
@@ -79,4 +82,6 @@ La bibliothèque système fournit les outils et services suivants pour travaille
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour découvrir l’utilisation des composants de WhiteNoise, consultez les dépôts GitHub pour [Package principal WhiteNoise](https://github.com/opendifferentialprivacy/whitenoise-core), [Package système WhiteNoise](https://github.com/opendifferentialprivacy/whitenoise-system) et [Exemples WhiteNoise](https://github.com/opendifferentialprivacy/whitenoise-samples).
+[Préserver la confidentialité des données](how-to-differential-privacy.md) dans Azure Machine Learning.
+
+Pour en savoir plus sur les composants de WhiteNoise, consultez les référentiels GitHub pour [Package principal WhiteNoise](https://github.com/opendifferentialprivacy/whitenoise-core), [Package système WhiteNoise](https://github.com/opendifferentialprivacy/whitenoise-system) et [Exemples WhiteNoise](https://github.com/opendifferentialprivacy/whitenoise-samples) (disponibles en anglais uniquement).

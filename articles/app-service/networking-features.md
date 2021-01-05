@@ -1,234 +1,301 @@
 ---
 title: Fonctionnalités réseau
-description: Découvrez les fonctionnalités réseau d’Azure App Service ainsi que les fonctionnalités nécessaires à la sécurité et au fonctionnement de votre réseau.
+description: Découvrez les fonctionnalités réseau d’Azure App Service, ainsi que les fonctionnalités nécessaires à la sécurité et autres.
 author: ccompy
 ms.assetid: 5c61eed1-1ad1-4191-9f71-906d610ee5b7
 ms.topic: article
-ms.date: 03/16/2020
+ms.date: 10/18/2020
 ms.author: ccompy
 ms.custom: seodec18
-ms.openlocfilehash: 79f85261115dbddcb0b04cd2863a90912de2ab87
-ms.sourcegitcommit: efefce53f1b75e5d90e27d3fd3719e146983a780
+ms.openlocfilehash: 5d950598e4a0af86ac37b53722e80eb4ef0a71a4
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/01/2020
-ms.locfileid: "80474909"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96183054"
 ---
 # <a name="app-service-networking-features"></a>Fonctionnalités de mise en réseau App Service
 
-Dans Azure App Service, les applications peuvent être déployées de nombreuses façons. Par défaut, les applications hébergées App Service sont directement accessibles via Internet et ne peuvent atteindre que les points de terminaison Internet hébergés. Toutefois, la plupart des applications clientes ont besoin de contrôler le trafic réseau entrant et sortant. Il existe plusieurs fonctionnalités disponibles dans App Service pour répondre à ces besoins. Le défi est de savoir quelle fonctionnalité doit être utilisée pour résoudre un problème donné. Ce document vise à aider les clients à déterminer la fonction à utiliser grâce à différents cas d’usage.
+Vous pouvez déployer des applications dans Azure App Service de plusieurs façons. Par défaut, les applications hébergées dans App Service sont accessibles directement via Internet et peuvent atteindre uniquement des points de terminaison hébergés sur Internet. Toutefois, pour bon nombre d’applications, vous devez contrôler le trafic réseau entrant et sortant. App Service inclut plusieurs fonctionnalités destinées à vous aider à répondre à ces besoins. Le défi consiste à savoir quelle fonctionnalité utiliser pour résoudre un problème donné. Cet article vous aidera à déterminer la fonctionnalité à utiliser, sur la base d’exemples de cas d’usage.
 
-Il existe deux types de déploiement principaux pour Azure App Service. Il y a le service public multilocataire, qui héberge les plans App Service dans les références SKU de tarification Gratuit, De base, Standard, Premium et Premiumv2. Il y a également l’environnement Azure App Service Environment (ASE) de locataire unique, qui héberge les plans App Service de référence SKU Isolé directement dans votre réseau virtuel Microsoft Azure. Les fonctionnalités que vous utilisez varient en fonction du déploiement (service multilocataire ou ASE). 
+Il existe deux types de déploiement principaux pour Azure App Service : 
+- Le service public mutualisé héberge des plans App Service dans les niveaux tarifaires Gratuit, Partagé, De base, Standard, Premium, PremiumV2 et PremiumV3. 
+- L’environnement Azure App Service Environment (ASE) de locataire unique héberge les plans App Service de référence SKU Isolé directement dans votre réseau virtuel Azure. 
 
-## <a name="multi-tenant-app-service-networking-features"></a>Fonctionnalités de mise en réseau App Service multilocataire 
+Les fonctionnalités que vous utilisez varient selon que vous êtes dans le service mutualisé ou dans un environnement ASE. 
 
-Azure App Service est un système distribué. Les rôles qui gèrent les requêtes HTTP/HTTPS entrantes sont appelés serveurs frontend. Les rôles qui hébergent la charge de travail du client sont appelés rôles de travail. Tous les rôles d’un déploiement App Service existent dans un réseau multilocataire. Comme il existe de nombreux clients différents dans la même unité d’échelle App Service, vous ne pouvez pas connecter le réseau App Service directement à votre réseau. Au lieu de connecter les réseaux, nous avons besoin de fonctionnalités pour gérer différents aspects de la communication des applications. Les fonctionnalités qui gèrent les demandes VERS votre application ne peuvent pas être utilisées pour résoudre des problèmes lorsque des appels sont effectués DEPUIS votre application. De même, les fonctionnalités qui résolvent des problèmes pour les appels DEPUIS votre application ne peuvent pas être utilisées pour résoudre des problèmes VERS votre application.  
+## <a name="multitenant-app-service-networking-features"></a>Fonctionnalités réseau App Service mutualisées 
+
+Azure App Service est un système distribué. Les rôles qui gèrent les requêtes HTTP/HTTPS entrantes sont appelés *serveurs frontaux*. Les rôles qui hébergent la charge de travail du client sont appelés *rôles de travail*. Tous les rôles d’un déploiement App Service existent dans un réseau mutualisé. Comme il existe de nombreux clients différents dans la même unité d’échelle App Service, vous ne pouvez pas connecter le réseau App Service directement à votre réseau. 
+
+Au lieu de connecter les réseaux, vous avez besoin de fonctionnalités pour gérer les différents aspects de la communication de l’application. Les fonctionnalités qui gèrent les demandes *vers* votre application ne peuvent pas être utilisées pour résoudre des problèmes lorsque des appels sont effectués *depuis* votre application. De même, les fonctionnalités qui résolvent des problèmes pour les appels depuis votre application ne peuvent pas être utilisées pour résoudre des problèmes vers votre application.  
 
 | Fonctionnalités en entrée | Fonctionnalités en sortie |
 |---------------------|-------------------|
 | Adresse attribuée par l’application | les connexions hybrides |
-| Restrictions d’accès | Intégration au réseau virtuel avec passerelle obligatoire |
+| Restrictions d'accès | Intégration au réseau virtuel avec passerelle obligatoire |
 | Points de terminaison de service | Intégration au réseau virtuel |
+| Instances Private Endpoint ||
 
-Sauf indication contraire, toutes les fonctionnalités peuvent être utilisées ensemble. Vous pouvez combiner les fonctionnalités pour résoudre différents problèmes.
+À part les exceptions notées, vous pouvez utiliser toutes ces fonctionnalités ensemble. Vous pouvez combiner les fonctionnalités pour résoudre vos problèmes.
 
-## <a name="use-case-and-features"></a>Cas d’usage et fonctionnalités
+## <a name="use-cases-and-features"></a>Cas d’usage et fonctionnalités
 
-Pour tout cas d’usage, il peut y avoir plusieurs façons de résoudre le problème.  La fonctionnalité appropriée à utiliser dépend parfois d’autres critères que le cas d’usage en lui-même. Les cas d’usage en entrée suivants suggèrent comment utiliser des fonctionnalités de mise en réseau App Service pour résoudre des problèmes en lien avec le contrôle du trafic vers votre application. 
+Pour tout cas d’usage, il peut y avoir plusieurs façons de résoudre le problème. Le choix de la meilleure fonctionnalité va parfois au-delà du cas d’usage. Les cas d’usage en entrée suivants suggèrent comment utiliser des fonctionnalités réseau App Service pour résoudre des problèmes en lien avec le contrôle du trafic vers votre application :
  
 | Cas d’usage en entrée | Fonctionnalité |
 |---------------------|-------------------|
-| Prendre en charge les besoins SSL en fonction des adresses IP pour votre application | adresse attribuée par l’application |
-| Adresse entrante dédiée, non partagée pour votre application | adresse attribuée par l’application |
-| Restreindre l’accès à votre application à partir d’un ensemble d’adresses bien définies | Restrictions d’accès |
-| Restreindre l’accès à mon application à partir des ressources dans un réseau virtuel | Points de terminaison de service </br> ASE ILB </br> Point de terminaison privé (préversion) |
-| Exposer mon application sur une adresse IP privée dans mon réseau virtuel | ASE ILB </br> adresse IP privée en entrée sur Application Gateway avec des points de terminaison de service </br> Point de terminaison de service (préversion) |
-| Protéger mon application avec un pare-feu d’applications web | Application Gateway + ASE ILB </br> Application Gateway avec des points de terminaison de service </br> Azure Front Door avec des restrictions d’accès |
-| Équilibrer la charge du trafic vers mes applications dans différentes régions | Azure Front Door avec des restrictions d’accès | 
+| Prendre en charge les besoins SSL en fonction des adresses IP pour votre application | Adresse attribuée par l’application |
+| Prendre en charge une adresse entrante dédiée non partagée pour votre application | Adresse attribuée par l’application |
+| Restreindre l’accès à votre application à partir d’un ensemble d’adresses bien définies | Restrictions d'accès |
+| Restreindre l’accès à votre application à partir des ressources d’un réseau virtuel | Points de terminaison de service </br> ASE ILB </br> Instances Private Endpoint |
+| Exposer votre application sur une adresse IP privée dans votre réseau virtuel | ASE ILB </br> Instances Private Endpoint </br> Adresse IP privée pour le trafic entrant sur une instance Application Gateway avec des points de terminaison de service |
+| Protéger votre application avec un pare-feu d’applications web (WAF) | Application Gateway et ASE ILB </br> Application Gateway avec des points de terminaison privés </br> Application Gateway avec des points de terminaison de service </br> Azure Front Door avec des restrictions d’accès |
+| Équilibrer la charge du trafic vers vos applications dans différentes régions | Azure Front Door avec des restrictions d’accès | 
 | Équilibrer la charge du trafic dans la même région | [Application Gateway avec des points de terminaison de service][appgwserviceendpoints] | 
 
-Les cas d’usage en sortie suivants suggèrent comment utiliser les fonctionnalités de mise en réseau App Service pour répondre aux besoins d’accès sortant de votre application. 
+Les cas d’usage en sortie suivants suggèrent comment utiliser les fonctionnalités réseau d’App Service pour répondre aux besoins d’accès sortant de votre application :
 
 | Cas d’usage en sortie | Fonctionnalité |
 |---------------------|-------------------|
 | Accéder à des ressources dans un réseau virtuel Azure situé dans la même région | Intégration au réseau virtuel </br> ASE |
-| Accéder à des ressources dans un réseau virtuel Azure situé dans une région différente | Intégration au réseau virtuel avec passerelle obligatoire </br> ASE et peering de réseau virtuel |
+| Accéder à des ressources dans un réseau virtuel Azure situé dans une région différente | Intégration au réseau virtuel avec passerelle obligatoire </br> ASE et homologation de réseau virtuel mondial |
 | Accéder à des ressources sécurisées avec des points de terminaison de service | Intégration au réseau virtuel </br> ASE |
 | Accéder à des ressources dans un réseau privé non connecté à Azure | les connexions hybrides |
-| Accéder à des ressources via des circuits ExpressRoute | Intégration au réseau virtuel </br> ASE | 
+| Accéder à des ressources via des circuits Azure ExpressRoute | Intégration au réseau virtuel </br> ASE | 
 | Sécuriser le trafic sortant à partir de votre application web | Intégration au réseau virtuel et groupes de sécurité réseau </br> ASE | 
 | Router le trafic sortant à partir de votre application web | Intégration au réseau virtuel et tables de route </br> ASE | 
 
 
 ### <a name="default-networking-behavior"></a>Comportement de mise en réseau par défaut
 
-Les unités d’échelle Azure App Service prennent en charge de nombreux clients dans chaque déploiement. Les plans de référence SKU Gratuit et Partagé hébergent des charges de travail clientes sur les rôles de travail multilocataires. Les plans De base, et supérieurs, hébergent les charges de travail clientes dédiées à un seul plan App Service. Si vous aviez un plan App Service Standard, toutes les applications dans ce plan sont exécutées sur le même rôle de travail. Si vous effectuez un scale-out du rôle de travail, toutes les applications dans ce plan App Service seront répliquées sur un nouveau rôle de travail pour chaque instance dans votre plan App Service. Les rôles de travail qui sont utilisés pour Premiumv2 sont différents des rôles de travail utilisés pour les autres plans. Chaque déploiement App Service a une adresse IP qui est utilisée pour tout le trafic entrant vers les applications dans ce déploiement App Service. Toutefois, il existe entre 4 et 11 adresses qui sont utilisées pour effectuer des appels sortants. Ces adresses sont partagées par toutes les applications dans ce déploiement App Service. Les adresses sortantes diffèrent en fonction des divers types de rôles de travail. Cela signifie que les adresses utilisées par les plans App Service Gratuit, Partagé, De base, Standard et Premium sont différentes de celles utilisées pour les appels sortants des plans App Service Premiumv2. Si vous observez les propriétés de votre application, vous pouvez voir les adresses entrantes et sortantes qui sont utilisées par votre application. Si vous avez besoin de verrouiller une dépendance avec une liste de contrôle d’accès d’adresses IP, utilisez possibleOutboundAddresses. 
+Des unités d’échelle Azure App Service prennent en charge de nombreux clients dans chaque déploiement. Les plans de référence SKU Gratuit et Partagé hébergent des charges de travail client sur des rôles de travail mutualisés. Les plans De base et supérieurs hébergent les charges de travail client dédiées sur un seul plan App Service. Si vous avez un plan App Service Standard, toutes les applications dans ce plan s’exécutent sur le même rôle de travail. Si vous effectuez un scale-out du rôle de travail, toutes les applications de ce plan App Service sont répliquées sur un nouveau rôle de travail pour chaque instance de votre plan App Service. 
 
-![Propriétés de l’application](media/networking-features/app-properties.png)
+#### <a name="outbound-addresses"></a>Adresses sortantes
 
-App Service a plusieurs points de terminaison qui sont utilisés pour gérer le service.  Ces adresses sont publiées dans un document distinct et se trouvent également dans la balise de service d’adresse IP AppServiceManagement. La balise AppServiceManagement est utilisée uniquement avec un App Service environnement (ASE) dans lequel vous devez autoriser ce trafic. Les adresses App Service entrantes sont suivies dans la balise de service d’adresse IP App Service. Il n’y a aucune balise de service d’adresse IP qui contient les adresses sortantes utilisées par App Service. 
+Les machines virtuelles de travail sont décomposées en grande partie par les plans App Service. Les plans Gratuit, Partagé, De base, Standard et Premium utilisent tous le même type de machine virtuelle de travail. Le plan PremiumV2 utilise un autre type de machine virtuelle. Le plan PremiumV3 utilise encore un autre type de machine virtuelle. Lorsque vous modifiez la famille de machines virtuelles, vous recevez un autre ensemble d’adresses sortantes. Si vous passez d’un plan Standard à un plan Premiumv2, vos adresses sortantes changent. Si vous passez d’un plan Premiumv2 à un plan Premiumv3, vos adresses sortantes changent. Dans certaines unités d’échelle plus anciennes, les adresses tant entrantes que sortantes changent lorsque vous effectuez une mise à l’échelle d’un plan Standard vers un plan PremiumV2. 
 
-![Schéma des entrées et sorties App Service](media/networking-features/default-behavior.png)
+Un certain nombre d’adresses sont utilisées pour des appels sortants. Les adresses sortantes utilisées par votre application pour effectuer des appels sortants sont répertoriées dans les propriétés de votre application. Ces adresses sont partagées par toutes les applications qui s’exécutent sur la même famille de machines virtuelles de travail dans le déploiement App Service. Si vous souhaitez voir toutes les adresses que votre application peut utiliser dans une unité d’échelle, il existe une propriété appelée `possibleOutboundAddresses` qui les répertorie. 
+
+![Capture d’écran montrant les propriétés de l’application.](media/networking-features/app-properties.png)
+
+App Service a plusieurs points de terminaison qui sont utilisés pour gérer le service.  Ces adresses sont publiées dans un document distinct, et figurent également dans la balise de service d’adresse IP `AppServiceManagement`. La balise `AppServiceManagement` est utilisée uniquement dans les environnements ASE où vous devez autoriser un tel trafic. Les adresses App Service entrantes sont suivies dans la balise de service d’adresse IP `AppService`. Il n’y a aucune balise de service d’adresse IP contenant les adresses sortantes qu’App Service utilise. 
+
+![Diagramme montrant le trafic entrant et sortant d’App Service.](media/networking-features/default-behavior.png)
 
 ### <a name="app-assigned-address"></a>Adresse attribuée par l’application 
 
-La fonctionnalité d’adresse attribuée par l’application est une ramification de la fonctionnalité SSL basée sur des adresses IP, qui est accessible en configurant SSL avec votre application. Cette fonctionnalité peut être utilisée pour les appels SSL basés sur une adresse IP, mais elle peut également servir à donner à votre application une adresse que juste elle possède. 
+La fonctionnalité d’adresse attribuée par l’application est une ramification de la fonctionnalité SSL basée sur IP. Vous y accédez en configurant SSL avec votre application. Vous pouvez utiliser cette fonctionnalité pour les appels SSL basés sur IP. Vous pouvez également l’utiliser pour fournir à votre application une adresse dont elle seule dispose. 
 
-![Schéma de la fonctionnalité d’adresse attribuée par l’application](media/networking-features/app-assigned-address.png)
+![Diagramme illustrant l’adresse attribuée par l’application.](media/networking-features/app-assigned-address.png)
 
-Lorsque vous utilisez une adresse attribuée par l’application, votre trafic traverse toujours les mêmes rôles frontend qui gèrent tout le trafic entrant dans l’unité d’échelle App Service. Néanmoins, l’adresse qui est attribuée à votre application est uniquement utilisée par votre application. Cette fonctionnalité peut notamment être utilisée dans les cas suivants :
+Lorsque vous utilisez une adresse attribuée par l’application, votre trafic traverse toujours les mêmes rôles de serveur frontal qui gèrent tout le trafic entrant dans l’unité d’échelle App Service. Toutefois, l’adresse attribuée à votre application est utilisée uniquement par celle-ci. Cas d’usage de cette fonctionnalité :
 
-* Prendre en charge les besoins SSL en fonction des adresses IP pour votre application
-* Définir une adresse dédiée pour votre application qui n’est pas partagée avec un autre élément
+* Prendre en charge les besoins SSL basés sur IP pour votre application.
+* Définir une adresse dédiée non partagée pour votre application.
 
-Vous pouvez apprendre à définir une adresse sur votre application en suivant le tutoriel [Ajouter un certificat TLS/SSL dans Azure App Service][appassignedaddress]. 
+Pour découvrir comment définir une adresse sur votre application, consultez [Ajouter un certificat TLS/SSL dans Azure App Service][appassignedaddress]. 
 
-### <a name="access-restrictions"></a>Restrictions d’accès 
+### <a name="access-restrictions"></a>Restrictions d'accès 
 
-La fonctionnalité Restrictions d’accès vous permet de filtrer les requêtes **entrantes** en fonction de l’adresse IP d’origine. L’action de filtrage a lieu sur les rôles front-end situés en amont des déploiements des rôles de travail où vos applications s’exécutent. Étant donné que les rôles frontend sont en amont des rôles de travail, la fonctionnalité Restrictions d’accès peut être considérée comme une protection de vos applications au niveau du réseau. La fonctionnalité vous permet de créer une liste de blocs d’adresses d’autorisation et de refus qui sont évalués par ordre de priorité. Elle est similaire à la fonctionnalité de groupe de sécurité réseau qui existe dans Mise en réseau Azure.  Vous pouvez utiliser cette fonctionnalité dans un ASE ou dans le service multilocataire. Lorsqu’elle est utilisée avec un ASE ILB, vous pouvez restreindre l’accès à partir de blocs d’adresses privées.
+Les restrictions d’accès vous permettent de filtrer les demandes *entrantes*. L’action de filtrage a lieu sur les rôles front-end situés en amont des déploiements des rôles de travail où vos applications s’exécutent. Étant donné que les rôles de serveur frontal sont en amont des rôles de travail, vous pouvez considérer les restrictions d’accès comme une protection de vos applications au niveau du réseau. 
 
-![Restrictions d’accès](media/networking-features/access-restrictions.png)
+Cette fonctionnalité vous permet de créer une liste de règles d’autorisation et de refus qui sont évaluées par ordre de priorité. Elle est similaire à la fonctionnalité de groupe de sécurité réseau (NSG) dans Azure Networking. Vous pouvez utiliser cette fonctionnalité dans un environnement ASE ou dans le service mutualisé. Lorsque vous l’utilisez avec un ASE ILB ou point de terminaison privé, vous pouvez restreindre l’accès à partir de blocs d’adresses privées.
+> [!NOTE]
+> Vous pouvez configurer Jusqu’à 512 règles de restrictions par application. 
 
-La fonctionnalité Restrictions d’accès est utile dans les scénarios dans lesquels vous souhaitez limiter les adresses IP qui peuvent être utilisées pour accéder à votre application. Cette fonctionnalité peut notamment être utilisée dans les cas suivants :
+![Diagramme illustrant les restrictions d’accès.](media/networking-features/access-restrictions.png)
 
-* Restreindre l’accès à votre application à partir d’un ensemble d’adresses bien définies 
-* Restreindre les accès provenant d’un service d’équilibrage de charge, tels qu’Azure Front Door. Si vous souhaitiez verrouiller votre trafic entrant vers Azure Front Door, créez des règles pour autoriser le trafic à partir de 147.243.0.0/16 et 2a01:111:2050::/44. 
+#### <a name="ip-based-access-restriction-rules"></a>Règles de restrictions d’accès basées sur IP
 
-![Restrictions d’accès avec Front Door](media/networking-features/access-restrictions-afd.png)
+La fonctionnalité des restrictions d’accès basées sur IP est utile quand vous souhaitez limiter les adresses IP qui peuvent être utilisées pour atteindre votre application. IPv4 et IPv6 sont pris en charge. Cas d’usage de cette fonctionnalité :
+* Restreindre l’accès à votre application à partir d’un ensemble d’adresses bien définies. 
+* Restreindre l’accès au trafic provenant d’un service d’équilibrage de charge tel qu’Azure Front Door. Si vous souhaitez verrouiller votre trafic entrant vers Azure Front Door, créez des règles pour autoriser le trafic à partir de 147.243.0.0/16 et 2a01:111:2050::/44. 
 
-Si vous souhaitez verrouiller l’accès à votre application de sorte qu’elle soit uniquement accessible à partir de ressources dans votre réseau virtuel Azure, vous avez besoin d’une adresse publique statique à l’emplacement où se trouve votre source dans votre réseau virtuel. Si les ressources n’ont pas d’adresse publique, vous devez utiliser la fonctionnalité Points de terminaison de service à la place. Découvrez comment activer cette fonctionnalité avec le didacticiel sur la [configuration de la fonctionnalité Restrictions d’accès][iprestrictions].
+Pour découvrir comment activer cette fonctionnalité, voir [Restrictions d’accès dans Azure App Service][iprestrictions].
 
-### <a name="service-endpoints"></a>Points de terminaison de service
+#### <a name="access-restriction-rules-based-on-service-endpoints"></a>Règles de restriction d’accès basées sur des points de terminaison de service 
 
-La fonctionnalité Points de terminaison de service vous permet de verrouiller l’accès **entrant** à votre application, de façon que l’adresse source doit provenir d’un ensemble de sous-réseaux que vous sélectionnez. Cette fonctionnalité fonctionne conjointement avec les restrictions d’accès d’adresse IP. Les points de terminaison de service sont définis dans la même expérience utilisateur que les restrictions d’accès d’adresse IP. Vous pouvez créer une liste d’autorisation/de refus des règles d’accès qui inclut les adresses publiques, ainsi que des sous-réseaux dans vos réseaux virtuels. Cette fonctionnalité prend en charge des scénarios tels que :
+Les points de terminaison de service vous permettent de verrouiller l’accès *entrant* à votre application, de façon que l’adresse source doive faire partie d’un ensemble de sous-réseaux que vous sélectionnez. Cette fonctionnalité opère conjointement avec les restrictions d’accès IP. Les points de terminaison de service ne sont pas compatibles avec le débogage à distance. Si vous voulez utiliser le débogage à distance avec votre application, votre client ne peut pas se trouver dans un sous-réseau dans lequel des points de terminaison de service sont activés. Le processus de définition de points de terminaison de service est similaire au processus de définition de restrictions d’accès IP. Vous pouvez créer une liste d’autorisation/de refus des règles d’accès qui inclut des adresses publiques, ainsi que des sous-réseaux dans vos réseaux virtuels. 
 
-![points de terminaison de service](media/networking-features/service-endpoints.png)
+Cas d’usage de cette fonctionnalité :
 
-* La configuration d’Application Gateway avec votre application pour verrouiller le trafic entrant vers votre application
-* La restriction de l’accès de votre application aux ressources de votre réseau virtuel. Cela peut inclure des machines virtuelles, des ASE ou même d’autres applications qui utilisent l’intégration au réseau virtuel 
+* Configurer une passerelle applicative avec votre application pour verrouiller le trafic entrant vers votre application.
+* Limiter l’accès à votre application aux ressources de votre réseau virtuel. Celles-ci peuvent inclure des machines virtuelles, des environnements ASE, voire d’autres applications qui utilisent une intégration au réseau virtuel. 
 
-![points de terminaison de service avec application gateway](media/networking-features/service-endpoints-appgw.png)
+![Diagramme illustrant l’utilisation de points de terminaison de service avec Application Gateway.](media/networking-features/service-endpoints-appgw.png)
 
-Vous trouverez plus d’informations sur la configuration des points de terminaison de service avec votre application dans le didacticiel sur la [configuration de la fonctionnalité Restrictions d’accès de point de terminaison de service][serviceendpoints]
+Pour en savoir plus sur la configuration des points de terminaison de service avec votre application, consultez [Restrictions d’accès dans Azure App Service][serviceendpoints].
 
-### <a name="private-endpoint-preview"></a>Point de terminaison privé (préversion)
+### <a name="private-endpoint"></a>Point de terminaison privé
 
-Private Endpoint est une interface réseau qui vous permet de vous connecter de façon privée et sécurisée à votre application web Azure Private Link. Private Endpoint utilise une adresse IP privée de votre réseau virtuel, plaçant de fait l’application web dans votre réseau virtuel. Cette fonctionnalité s’applique uniquement aux flux **entrants** dans votre application web.
-[Utilisation de points de terminaison privés pour une application web Azure (préversion)][privateendpoints]
+Un point de terminaison privé est une interface réseau qui vous permet de vous connecter de façon privée et sécurisée à votre application web via une liaison privée Azure. Un point de terminaison privé utilise une adresse IP privée de votre réseau virtuel, ce qui a pour effet d’introduire l’application web dans votre réseau virtuel. Cette fonctionnalité s’applique uniquement aux flux *entrants* dans votre application web.
+Pour plus d’informations, consultez [Utilisation de points de terminaison privés pour une application web Azure][privateendpoints].
+
+Cas d’usage de cette fonctionnalité :
+
+* Limiter l’accès à votre application à partir de ressources d’un réseau virtuel. 
+* Exposer votre application sur une adresse IP privée dans votre réseau virtuel. 
+* Protéger votre application avec un pare-feu d’applications web (WAF).
+
+Les points de terminaison privés empêchent l’exfiltration de données, car la seule chose que vous pouvez atteindre sur le point de terminaison privé est l’application avec laquelle il est configuré. 
  
 ### <a name="hybrid-connections"></a>les connexions hybrides
 
-La fonctionnalité Connexions hybrides App Service permet à vos applications d’effectuer des appels **sortants** vers des points de terminaison TCP spécifiés. Le point de terminaison peut être en local, dans un réseau virtuel ou dans n’importe quel emplacement qui autorise le trafic sortant vers Azure sur le port 443. La fonctionnalité nécessite l’installation d’un agent de relais appelé Hybrid Connection Manager (HCM) sur un ordinateur hôte Windows Server 2012 ou plus récent. HCM doit être en mesure d’atteindre Azure Relay sur le port 443. HCM peut être téléchargé à partir de l’interface utilisateur Connexions hybrides App Service dans le portail. 
+La fonctionnalité Connexions hybrides App Service permet à vos applications d’effectuer des appels *sortants* vers des points de terminaison TCP spécifiés. Le point de terminaison peut être local, dans un réseau virtuel, ou dans n’importe quel emplacement autorisant le trafic sortant vers Azure sur le port 443. Pour utiliser cette fonctionnalité, vous devez installer un agent de relais appelé Hybrid Connection Manager sur un serveur Windows Server 2012 ou un hôte plus récent. L’agent de relais Hybrid Connection Manager doit être en mesure d’atteindre Azure Relay sur le port 443. Vous pouvez télécharger Hybrid Connection Manager à partir de l’interface utilisateur des connexions hybrides d’App Service dans le portail. 
 
-![Flux réseau Connexions hybrides](media/networking-features/hybrid-connections.png)
+![Diagramme montrant le flux réseau de connexions hybrides.](media/networking-features/hybrid-connections.png)
 
-La fonctionnalité Connexions hybrides App Service repose sur la fonctionnalité Connexions hybrides Azure Relay. App Service utilise une forme spécialisée de la fonctionnalité qui prend uniquement en charge les appels sortants de votre application vers un port et un hôte TCP. Cet hôte et ce port doivent uniquement effectuer la résolution sur l’hôte sur lequel HCM est installé. Lorsque l’application, dans App Service, effectue une recherche DNS sur l’hôte et le port définis dans votre connexion hybride, le trafic est redirigé automatiquement pour traverser la connexion hybride et sortir de HCM. Pour en savoir plus sur les connexions hybrides, consultez la documentation sur les [connexions hybrides App Service][hybridconn]
+Les connexions hybrides d’App Service reposent sur la capacité de connexions hybrides d’Azure Relay. App Service utilise une forme spécialisée de la fonctionnalité qui prend uniquement en charge les appels sortants de votre application vers un port et un hôte TCP. Cet hôte et ce port doivent être résolus uniquement sur l’hôte sur lequel Hybrid Connection Manager est installé. 
+
+Lorsque l’application, dans App Service, effectue une recherche DNS sur l’hôte et le port définis dans votre connexion hybride, le trafic est redirigé automatiquement pour traverser la connexion hybride et sortir de Hybrid Connection Manager. Pour plus d’informations, consultez [Connexions hybrides d’App Service][hybridconn].
 
 Cette fonctionnalité est couramment utilisée pour :
 
-* Accéder aux ressources dans des réseaux privés qui ne sont pas connectés à Azure avec une connexion VPN ou ExpressRoute
-* Prendre en charge les opérations lift and shift des applications locales vers App Service sans avoir à déplacer également les bases de données prise en charge  
-* Fournir un accès sécurisé à un seul hôte et un port par connexion hybride. La plupart des fonctionnalités de mise en réseau ouvrent l’accès à un réseau et avec Connexions hybrides, vous pouvez uniquement avoir les hôte et port uniques que vous pouvez atteindre.
-* Aborder les scénarios non couverts par les autres méthodes de connectivité sortante
-* Effectuer le développement dans App Service où les applications peuvent facilement tirer parti des ressources locales 
+* Accéder aux ressources dans des réseaux privés qui ne sont pas connectés à Azure via un VPN ou un circuit ExpressRoute.
+* Prendre en charge la migration d’applications locales vers App Service sans avoir à déplacer les bases de données associées.  
+* Fournir un accès avec une sécurité améliorée à un hôte et un port uniques par connexion hybride. La plupart des fonctionnalités réseau ouvrent l’accès à un réseau. Avec des connexions hybrides, vous ne pouvez atteindre que l’hôte et le port uniques.
+* Couvrir des scénarios non couverts par d’autres méthodes de connectivité sortante.
+* Effectuer du développement dans App Service de manière à permettre aux applications d’utiliser facilement des ressources locales. 
 
-Étant donné que la fonctionnalité permet d’accéder aux ressources locales sans un trou de pare-feu de trafic entrant, elle est populaire auprès des développeurs. Les autres fonctionnalités de mise en réseau App Service sortantes sont en lien très étroit avec le réseau virtuel Azure. La fonctionnalité Connexions hybrides ne doit pas nécessairement passer par un réseau virtuel et peut être utilisée pour des besoins de mise en réseau plus larges. Il est important de noter que la fonctionnalité Connexions hybrides App Service n’a que faire de savoir ce que vous utilisez en plus de celle-ci ou de le savoir. Cela signifie que vous pouvez l’utiliser pour accéder à une base de données, à un service web ou à un socket TCP arbitraire sur un mainframe. La fonctionnalité crée essentiellement des tunnels pour les paquets TCP. 
+Étant donné que cette fonctionnalité permet d’accéder aux ressources locales sans un trou dans le pare-feu de trafic entrant, elle est populaire auprès des développeurs. Les autres fonctionnalités réseau d’App Service sortantes ont trait au réseau virtuel Azure. Les connexions hybrides ne dépendent pas d’un passage par un réseau virtuel. Elles peuvent être utilisées pour couvrir un éventail plus vaste de besoins de réseau. 
 
-Bien que la fonctionnalité Connexions hybrides soit populaire pour le développement, elle est également utilisée dans de nombreuses applications de production. Elle est très utile pour accéder à un service web ou à une base de données, mais elle n’est pas appropriée pour les situations impliquant la création de nombreuses connexions. 
+Notez que les connexions hybrides d’App Service ignorent ce que vous en faites. Vous pouvez les utiliser pour accéder à une base de données, à un service web ou à un socket TCP arbitraire sur un ordinateur mainframe. La fonctionnalité crée essentiellement des tunnels pour les paquets TCP. 
+
+Les connexions hybrides sont populaires pour le développement, mais sont également utilisées dans des applications de production. Elles sont très utiles pour accéder à un service web ou à une base de données, mais ne conviennent pas pour des situations impliquant la création de nombreuses connexions. 
 
 ### <a name="gateway-required-vnet-integration"></a>Intégration au réseau virtuel avec passerelle obligatoire 
 
-La fonctionnalité Passerelle exigeant l’intégration au réseau virtuel App Service permet à votre application d’envoyer des requêtes **sortantes** dans un réseau virtuel Azure. La fonctionnalité fonctionne en connectant l’hôte sur lequel votre application s’exécute à une passerelle de réseau virtuel sur votre réseau virtuel avec une connexion VPN de point à site. Lorsque vous configurez la fonctionnalité, votre application obtient une des adresses de point à site attribuées à chaque instance. Cette fonctionnalité vous permet d’accéder aux ressources dans les réseaux virtuels classiques ou Resource Manager dans une région. 
+L’intégration au réseau virtuel App Service avec passerelle obligatoire permet à votre application d’envoyer des requêtes *sortantes* à un réseau virtuel Azure. La fonctionnalité fonctionne en connectant l’hôte sur lequel votre application s’exécute à une passerelle de réseau virtuel sur votre réseau virtuel en utilisant une connexion VPN point à site. Lorsque vous configurez la fonctionnalité, votre application obtient une des adresses de point à site attribuées à chaque instance. Cette fonctionnalité vous permet d’accéder aux ressources dans des réseaux virtuels classiques ou Azure Resource Manager dans toute région. 
 
-![Intégration au réseau virtuel avec passerelle obligatoire](media/networking-features/gw-vnet-integration.png)
+![Diagramme illustrant l’intégration au réseau virtuel avec passerelle obligatoire.](media/networking-features/gw-vnet-integration.png)
 
-Cette fonctionnalité résout le problème de l’accès aux ressources dans d’autres réseaux virtuels et peut même être utilisée pour se connecter via un réseau virtuel à d’autres réseaux virtuels, voire à des réseaux locaux. Elle ne fonctionne pas avec des réseaux virtuels connectés à ExpressRoute, mais fonctionne avec des réseaux connectés VPN de site à site. Il est normalement inapproprié d’utiliser cette fonctionnalité à partir d’une application dans un ASE, car l’ASE est déjà dans votre réseau virtuel. Les cas d’usage que cette fonctionnalité traite sont les suivants :
+Cette fonctionnalité résout le problème d’accès aux ressources dans d’autres réseaux virtuels. Elle permet même de se connecter via un réseau virtuel à d’autres réseaux virtuels ou à des réseaux locaux. Elle ne fonctionne pas avec des réseaux virtuels connectés via ExpressRoute, mais fonctionne avec des réseaux connectés via un VPN site à site. Il est généralement inapproprié d’utiliser cette fonctionnalité à partir d’une application dans un environnement ASE, car celui-ci est déjà dans votre réseau virtuel. Cas d’usage de cette fonctionnalité :
 
-* Accéder aux ressources sur des adresses IP privées dans vos réseaux virtuels Azure 
-* Accéder aux ressources locales s’il existe un VPN de site à site 
-* Accéder aux ressources dans des réseaux virtuels avec peering 
+* Accéder aux ressources sur des adresses IP privées dans vos réseaux virtuels Azure. 
+* Accéder aux ressources locales s’il existe un VPN site à site. 
+* Accéder aux ressources de réseaux virtuels appairés. 
 
-Lorsque cette fonctionnalité est activée, votre application utilise le serveur DNS avec lequel le réseau virtuel de destination est configuré. Vous trouverez plus d’informations sur cette fonctionnalité dans la documentation sur [l’intégration au réseau virtuel App Service][vnetintegrationp2s]. 
+Lorsque cette fonctionnalité est activée, votre application utilise le serveur DNS avec lequel le réseau virtuel de destination est configuré. Pour plus d’informations sur cette fonctionnalité, consultez [Intégration au réseau virtuel App Service][vnetintegrationp2s]. 
 
 ### <a name="vnet-integration"></a>Intégration au réseau virtuel
 
-La fonctionnalité Passerelle exigeant l’intégration au réseau virtuel est très utile mais ne résout pas le problème d’accès aux ressources via ExpressRoute. En plus de devoir atteindre les ressources via des connexions ExpressRoute, il est nécessaire que les applications soient en mesure d’effectuer des appels vers les services sécurisés de point de terminaison de service. Pour traiter ces deux besoins supplémentaires, une autre fonctionnalité Intégration au réseau virtuel a été ajoutée. La nouvelle fonctionnalité Intégration au réseau virtuel vous permet de placer le back end de votre application dans un sous-réseau dans un réseau virtuel Resource Manager dans la même région. Cette fonctionnalité n’est pas disponible à partir d’un ASE, qui se trouve déjà dans un réseau virtuel. Cette fonctionnalité permet :
+L’intégration au réseau virtuel avec passerelle obligatoire est utile, mais elle ne résout pas le problème d’accès aux ressources via ExpressRoute. En plus de devoir transiter par des connexions ExpressRoute, il est nécessaire que les applications soient en mesure d’effectuer des appels à des services sécurisés par point de terminaison de service. Une autre fonctionnalité d’intégration au réseau virtuel peut répondre à ces besoins. 
 
-* D’accéder aux ressources dans les réseaux virtuels Resource Manager de la même région
-* D’accéder à des ressources sécurisées avec des points de terminaison de service 
-* D’accéder à des ressources qui sont accessibles via des connexions ExpressRoute ou VPN
-* De sécuriser tout le trafic sortant 
-* De forcer le mode tunneling sur tout le trafic sortant. 
+La nouvelle fonctionnalité Intégration au réseau virtuel vous permet de placer le back end de votre application dans un sous-réseau d’un réseau virtuel Resource Manager situé dans la même région que votre application. Cette fonctionnalité n’est pas disponible à partir d’un environnement ASE, qui se trouve déjà dans un réseau virtuel. Cas d’usage de cette fonctionnalité :
 
-![Intégration au réseau virtuel](media/networking-features/vnet-integration.png)
+* Accéder à des ressources de réseaux virtuels Resource Manager dans la même région.
+* Accéder à des ressources sécurisées avec des points de terminaison de service. 
+* Accéder à des ressources accessibles via des connexions ExpressRoute ou VPN.
+* Aider à sécuriser tout le trafic sortant. 
+* Forcer le tunneling de tout le trafic sortant. 
 
-Pour en savoir plus sur cette fonctionnalité, lisez la documentation sur [l’intégration au réseau virtuel App Service][vnetintegration].
+![Diagramme illustrant l’intégration au réseau virtuel.](media/networking-features/vnet-integration.png)
 
-## <a name="app-service-environment"></a>Environnement App Service 
+Pour plus d’informations, consultez [Intégration au réseau virtuel App Service][vnetintegration].
 
-Un ASE est un déploiement avec locataire unique d’Azure App Service, qui s’exécute sur votre réseau virtuel. Vous pouvez utiliser l’ASE dans les cas suivants :
+### <a name="app-service-environment"></a>Environnement App Service 
 
-* Accéder aux ressources dans votre réseau virtuel
-* Accéder aux ressources via ExpressRoute
-* Exposer vos applications avec une adresse privée dans votre réseau virtuel 
-* Accéder aux ressources via des points de terminaison de service 
+Un environnement ASE est un déploiement monolocataire d’Azure App Service, qui s’exécute dans votre réseau virtuel. Cas d’usage de cette fonctionnalité :
 
-Avec un ASE, vous n’avez pas besoin d’utiliser des fonctionnalités telles que l’intégration au réseau virtuel ou les points de terminaison de service, car l’ASE est déjà dans votre réseau virtuel. Si vous souhaitez accéder aux ressources telles que SQL ou Stockage sur les points de terminaison de service, activez les points de terminaison de service sur le sous-réseau ASE. Si vous souhaitez accéder aux ressources dans le réseau virtuel, aucune configuration supplémentaire n’est requise.  Si vous souhaitez accéder aux ressources sur ExpressRoute, vous êtes déjà dans le réseau virtuel et n’avez pas besoin de configurer quoi que ce soit sur l’ASE ou les applications qu’il contient. 
+* Accéder aux ressources de votre réseau virtuel.
+* Accéder à des ressources via ExpressRoute.
+* Exposer vos applications avec une adresse privée dans votre réseau virtuel. 
+* Accéder à des ressources via des points de terminaison de service. 
 
-Étant donné que les applications dans un ASE ILB peuvent être exposées sur une adresse IP privée, vous pouvez facilement ajouter des appareils de pare-feu d’applications web pour exposer uniquement les applications que vous souhaitez sur Internet tout en sécurisant le reste. L’ASE est tout à fait adapté pour le déploiement simple d’applications à plusieurs niveaux. 
+Avec un environnement ASE, vous n’avez pas besoin d’utiliser des fonctionnalités telles que l’intégration au réseau virtuel ou des points de terminaison de service, car l’ASE est déjà dans votre réseau virtuel. Si vous souhaitez accéder à des ressources telles que SQL ou Stockage Azure sur des points de terminaison de service, activez les points de terminaison de service sur le sous-réseau ASE. Si vous souhaitez accéder à des ressources dans le réseau virtuel, vous n’avez pas besoin d’effectuer de configuration supplémentaire. Si vous souhaitez accéder à des ressources via ExpressRoute, vous êtes déjà dans le réseau virtuel et n’avez pas besoin de configurer quoi que ce soit sur l’environnement ASE ou les applications qu’il contient. 
 
-Néanmoins, certaines actions ne peuvent pas encore être réalisées depuis le service multilocataire alors qu’elles sont possibles via un ASE. Celles-ci comprennent :
+Étant donné que les applications dans un ASE ILB peuvent être exposées sur une adresse IP privée, vous pouvez facilement ajouter des appareils de pare-feu d’applications web pour exposer uniquement les applications que vous souhaitez sur Internet tout en sécurisant le reste. Cette fonctionnalité peut faciliter le développement d’applications multiniveaux. 
 
-* L’exposition de vos applications sur une adresse IP privée
-* La sécurisation de l’ensemble du trafic sortant avec les contrôles réseau qui ne font pas partie de votre application 
-* L’hébergement de vos applications dans un service de locataire unique 
-* La montée en puissance vers beaucoup plus d’instances que dans le service multilocataire 
-* Le chargement de certificats clients d’autorité de certification privés pour une utilisation par vos applications avec des points de terminaison sécurisés d’autorité de certification privés 
-* L’application forcée du protocole TLS 1.1 sur toutes les applications hébergées dans le système sans possibilité de le désactiver au niveau de l’application 
-* La proposition d’une adresse sortante dédiée pour toutes les applications dans votre ASE qui n’est pas partagée avec des clients 
+Certaines choses ne sont actuellement pas possibles à partir du service mutualisé, mais le sont à partir d’un environnement ASE. Voici quelques exemples :
 
-![ASE dans un réseau virtuel](media/networking-features/app-service-environment.png)
+* Exposer vos applications sur une adresse IP privée.
+* Sécuriser l’ensemble du trafic sortant avec des contrôles réseau qui ne font pas partie de votre application.
+* Héberger vos applications dans un service monolocataire. 
+* Effectuer un scale-up vers beaucoup plus d’instances que ne le permet le service mutualisé. 
+* Charger des certificats clients d’autorité de certification privée à l’usage de vos applications avec des points de terminaison sécurisés par l’autorité de certification privée.
+* Forcer l’utilisation du protocole TLS 1.1 pour toutes les applications hébergées dans le système, sans possibilité de le désactiver au niveau de l’application. 
+* Fournir une adresse sortante dédiée pour toutes les applications dans votre environnement ASE qui ne sont pas partagées avec des clients. 
 
-L’ASE offre la meilleure solution en ce qui concerne l’hébergement d’applications dédiées et isolées, mais présente également quelques problèmes de gestion. Voici quelques points à prendre en compte avant d’utiliser un ASE opérationnel :
+![Diagramme illustrant un environnement ASE dans un réseau virtuel.](media/networking-features/app-service-environment.png)
+
+L’environnement ASE offre la meilleure solution en ce qui concerne l’hébergement d’applications dédiées et isolées, mais soulève également quelques problèmes de gestion. Voici quelques points à prendre en compte avant d’utiliser un environnement ASE opérationnel :
  
- * Un ASE s’exécute au sein de votre réseau virtuel, mais a des dépendances en dehors du réseau virtuel. Ces dépendances doivent être autorisées. Apprenez-en davantage dans [Networking considerations for an App Service Environment][networkinfo] (Considérations relatives à la mise en réseau pour un App Service Environment)
- * Un ASE n’évolue pas immédiatement comme le service multilocataire. Vous devez anticiper les besoins de mise à l’échelle, plutôt que d’effectuer une mise à l’échelle quand il est trop tard. 
- * Les frais initiaux d’un ASE sont plus élevés. Afin de tirer le meilleur parti de votre ASE, vous devez planifier l’ajout de nombreuses charges de travail dans un ASE plutôt que de l’utiliser pour quelques tâches uniquement
- * Les applications dans un ASE ne peuvent pas restreindre l’accès à certaines applications dans un ASE et pas dans d’autres.
- * L’ASE se trouve dans un sous-réseau et des règles de mise en réseau s’appliquent à tout le trafic vers et depuis cet environnement ASE. Si vous souhaitez attribuer des règles de trafic entrant pour une seule application, utilisez la fonctionnalité Restrictions d’accès. 
+ * Un environnement ASE s’exécute à l’intérieur de votre réseau virtuel, mais présente des dépendances extérieures au réseau virtuel. Ces dépendances doivent être autorisées. Pour plus d’informations, consultez [Considérations relatives à la mise en réseau pour un environnement App Service][networkinfo].
+ * Un environnement ASE n’évolue pas immédiatement comme le service mutualisé. Vous devez anticiper les besoins de mise à l’échelle, plutôt que d’effectuer une mise à l’échelle quand il est trop tard. 
+ * Un environnement ASE a un coût initial supérieur. Afin de tirer le meilleur parti de votre ASE, vous devez planifier l’ajout de nombreuses charges de travail dans un seul ASE au lieu de ne l’utiliser que pour quelques tâches.
+ * Les applications dans un ASE ne peuvent pas restreindre de manière sélective l’accès à certaines applications dans l’ASE et pas à d’autres.
+ * Un environnement ASE se trouve dans un sous-réseau, et des règles de réseau s’appliquent à tout le trafic vers et depuis cet environnement. Si vous souhaitez attribuer des règles de trafic entrant pour une seule application, utilisez des restrictions d’accès. 
 
 ## <a name="combining-features"></a>Combinaison de fonctionnalités 
 
-Les fonctionnalités indiquées pour le service multilocataire peuvent être utilisées ensemble pour traiter des cas d’usage plus complexes. Deux des cas d’usage les plus courants sont décrits ici, mais ils servent uniquement d’exemples. En comprenant le fonctionnement des différentes fonctionnalités, vous pouvez traiter pratiquement tous les besoins architecturaux de votre système.
+Les fonctionnalités indiquées pour le service mutualisé peuvent être utilisées ensemble pour traiter des cas d’usage plus complexes. Deux cas d’usage plus courants sont décrits ici, mais ils servent uniquement d’exemples. En comprenant le fonctionnement des différentes fonctionnalités, vous pouvez répondre à pratiquement tous les besoins architecturaux de votre système.
 
-### <a name="inject-app-into-a-vnet"></a>Injecter une application dans un réseau virtuel
+### <a name="place-an-app-into-a-virtual-network"></a>Placer une application dans un réseau virtuel
 
-Une requête courante est de savoir comment ajouter votre application dans un réseau virtuel. Ajouter votre application dans un réseau virtuel signifie que les points de terminaison entrants et sortants d’une application se trouvent au sein d’un réseau virtuel. L’ASE offre la meilleure solution pour résoudre ce problème, mais vous pouvez obtenir la majeure partie de ce qui est nécessaire dans le service multilocataire en combinant des fonctionnalités. Par exemple, vous pouvez héberger des applications Intranet uniquement avec des adresses entrantes et sortantes privées en :
+Vous vous demandez peut-être comment placer une application dans un réseau virtuel. Si vous placez votre application dans un réseau virtuel, les points de terminaison entrants et sortants pour l’application se trouvent dans le réseau virtuel. Un environnement ASE est la meilleure façon de résoudre ce problème. Toutefois, vous pouvez répondre à la plupart de vos besoins au sein du service mutualisée en combinant des fonctionnalités. Par exemple, vous pouvez héberger des applications intranet uniquement avec des adresses entrantes et sortantes privées comme suit :
 
-* Créant une instance Application Gateway avec une adresse entrante et sortante privée
-* Sécurisant le trafic entrant vers votre application avec des points de terminaison de service 
-* Utilisant la nouvelle fonctionnalité Intégration au réseau virtuel de façon que le back end de votre application se trouve dans votre réseau virtuel 
+* En créant une passerelle applicative avec des adresse entrante et sortante privées.
+* En sécurisant le trafic entrant vers votre application avec des points de terminaison de service. 
+* En utilisant la nouvelle fonctionnalité d’intégration au réseau virtuel de façon à ce que le back end de votre application se trouve dans votre réseau virtuel. 
 
-Ce style de déploiement ne vous donnerait pas d’adresse dédiée pour le trafic sortant vers Internet ou ne vous donnerait pas la possibilité de verrouiller tout le trafic sortant depuis votre application.  Ce style de déploiement vous permettrait d’obtenir autant d’éléments que ceux que vous pourriez avoir avec un ASE. 
+Ce style de déploiement ne vous donne pas d’adresse dédiée pour le trafic sortant vers Internet, ou la possibilité de verrouiller tout le trafic sortant de votre application. Il vous apporte essentiellement ce que vous ne pourriez obtenir autrement qu’avec un environnement ASE. 
 
-### <a name="create-multi-tier-applications"></a>Créer des applications avec plusieurs niveaux
+### <a name="create-multitier-applications"></a>Créer des applications multiniveaux
 
-Une application avec plusieurs niveaux est une application où les applications de back end d’API sont uniquement accessibles à partir du niveau frontend. Pour créer une application à plusieurs niveaux, vous pouvez :
+Une application multiniveau est une application dans laquelle les applications back end d’API sont accessibles uniquement à partir du niveau frontal. Deux méthodes permettent de créer une application multiniveau. Toutes deux commencent par utiliser une intégration au réseau virtuel pour connecter votre application web frontale à un sous-réseau dans un réseau virtuel. Cela permet à votre application web d’effectuer des appels dans votre réseau virtuel. Une fois votre application frontale est connectée au réseau virtuel, vous devez choisir comment verrouiller l’accès à votre application d’API. Vous pouvez :
 
-* Utiliser la fonctionnalité Intégration au réseau virtuel pour connecter le back end de votre application web frontend à un sous-réseau dans un réseau virtuel
-* Utiliser des points de terminaison de service pour sécuriser le trafic entrant vers votre application API à celui provenant uniquement du sous-réseau utilisé par votre application web frontend
+* Héberger l’application frontale et l’application d’API dans le même ASE ILB, et exposer l’application frontale sur Internet en utilisant une passerelle applicative.
+* Héberger le serveur frontal dans le service mutualisé et le back end dans un ASE ILB.
+* Héberger le serveur frontal et l’application d’API dans le service mutualisé.
 
-![application à plusieurs niveaux](media/networking-features/multi-tier-app.png)
+Si vous hébergez l’application frontale et l’application d’API pour une application multiniveau, vous pouvez :
 
-Vous pouvez avoir plusieurs applications frontend qui utilisent la même application API à l’aide de la fonctionnalité Intégration au réseau virtuel à partir d’autres applications frontend et points de terminaison de service de l’application API avec leurs sous-réseaux.  
+- Exposer votre application d’API à l’aide de points de terminaison privés dans votre réseau virtuel :
+
+  ![Diagramme illustrant l’utilisation de points de terminaison privés dans une application à deux niveaux.](media/networking-features/multi-tier-app-private-endpoint.png)
+
+- Utiliser des points de terminaison de service pour vous assurer que le trafic entrant dans votre application d’API provienne uniquement du sous-réseau qu’utilise votre application web frontale :
+
+  ![Diagramme illustrant l’utilisation de points de terminaison de service pour sécuriser une application.](media/networking-features/multi-tier-app.png)
+
+Voici quelques éléments à prendre en considération pour vous aider à choisir la méthode à utiliser :
+
+* Lorsque vous utilisez des points de terminaison de service, vous devez uniquement sécuriser le trafic vers votre application d’API sur le sous-réseau d’intégration. Cela sécurise l’application d’API, mais pourrait offrir une possibilité d’exfiltration de données de votre application frontale vers d’autres applications dans App Service.
+* Lorsque vous utilisez des points de terminaison privés, vous avez deux sous-réseaux en lecture, ce qui ajoute de la complexité. En outre, le point de terminaison privé est une ressource de niveau supérieur et ajoute une surcharge de gestion. L’avantage de l’utilisation de points de terminaison privés est qu’ils éliminent la possibilité d’exfiltration de données. 
+
+Les deux méthodes fonctionnent avec plusieurs serveurs frontaux. À petite échelle, les points de terminaison de service sont plus faciles à utiliser, car il vous suffit d’activer les points de terminaison de service pour l’application d’API sur le sous-réseau d’intégration frontal. À mesure que vous ajoutez des applications frontales, vous devez ajuster chaque application d’API pour inclure des points de terminaison de service avec le sous-réseau d’intégration. Lorsque vous utilisez des points de terminaison privés, vous avez plus de complexité, mais vous n’avez rien à modifier sur vos applications d’API après avoir défini un point de terminaison privé. 
+
+### <a name="line-of-business-applications"></a>applications métier ;
+
+Les applications métier sont des applications internes qui ne sont normalement pas exposées pour un accès depuis Internet. Ces applications sont appelées à partir de réseaux d’entreprise où l’accès peut être strictement contrôlé. Si vous utilisez un ASE ILB, il est facile d’héberger vos applications métier. Si vous utilisez le service mutualisé, vous pouvez utiliser des points de terminaison privés ou des points de terminaison de service associés à une passerelle applicative. Il existe deux raisons d’utiliser une passerelle applicative avec des points de terminaison de service plutôt que des points de terminaison privés :
+* Vous avez besoin d’une protection WAF sur vos applications métier.
+* Vous souhaitez équilibrer la charge sur plusieurs instances de vos applications métier.
+
+Si aucun de ces besoins ne s’applique, il est préférable d’utiliser des points de terminaison privés. Avec les points de terminaison privés disponibles dans App Service, vous pouvez exposer vos applications sur des adresses privées de votre réseau virtuel. Le point de terminaison privé que vous placez dans votre réseau virtuel peut être atteint via des connexions ExpressRoute et VPN. 
+
+La configuration de points de terminaison privés expose vos applications sur une adresse privée, mais vous devez configurer un DNS pour atteindre cette adresse en local. Pour que cette configuration fonctionne, vous devez transférer la zone Azure DNS privée contenant vos points de terminaison privés vers vos serveurs DNS locaux. Les zones Azure DNS privées ne prennent pas en charge le transfert de zone, mais vous pouvez le prendre en charge à l’aide d’un serveur DNS dédié à cette fin. Le modèle de [Redirecteur DNS](https://azure.microsoft.com/resources/templates/301-dns-forwarder/) facilite le transfert de votre zone Azure DNS privée vers vos serveurs DNS locaux.
+
+## <a name="app-service-ports"></a>Ports App Service
+
+Si vous analysez App Service, vous trouverez plusieurs ports exposés pour les connexions entrantes. Il n’existe aucun moyen de bloquer ou de contrôler l’accès à ces ports dans le service mutualisé. Voici la liste des ports exposés :
+
+| Utilisation | Port ou ports |
+|----------|-------------|
+|  HTTP/HTTPS  | 80, 443 |
+|  Gestion | 454, 455 |
+|  FTP/FTPS    | 21, 990, 10001-10020 |
+|  Débogage distant de Visual Studio  |  4020, 4022, 4024 |
+|  Service Web Deploy | 8172 |
+|  Utilisation de l’infrastructure | 7654, 1221 |
 
 <!--Links-->
-[appassignedaddress]: https://docs.microsoft.com/azure/app-service/configure-ssl-certificate
-[iprestrictions]: https://docs.microsoft.com/azure/app-service/app-service-ip-restrictions
-[serviceendpoints]: https://docs.microsoft.com/azure/app-service/app-service-ip-restrictions
-[hybridconn]: https://docs.microsoft.com/azure/app-service/app-service-hybrid-connections
-[vnetintegrationp2s]: https://docs.microsoft.com/azure/app-service/web-sites-integrate-with-vnet
-[vnetintegration]: https://docs.microsoft.com/azure/app-service/web-sites-integrate-with-vnet
-[networkinfo]: https://docs.microsoft.com/azure/app-service/environment/network-info
-[appgwserviceendpoints]: https://docs.microsoft.com/azure/app-service/networking/app-gateway-with-service-endpoints
-[privateendpoints]: https://docs.microsoft.com/azure/app-service/networking/private-endpoint
+[appassignedaddress]: ./configure-ssl-certificate.md
+[iprestrictions]: ./app-service-ip-restrictions.md
+[serviceendpoints]: ./app-service-ip-restrictions.md
+[hybridconn]: ./app-service-hybrid-connections.md
+[vnetintegrationp2s]: ./web-sites-integrate-with-vnet.md
+[vnetintegration]: ./web-sites-integrate-with-vnet.md
+[networkinfo]: ./environment/network-info.md
+[appgwserviceendpoints]: ./networking/app-gateway-with-service-endpoints.md
+[privateendpoints]: ./networking/private-endpoint.md

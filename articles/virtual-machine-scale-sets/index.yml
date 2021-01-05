@@ -1,6 +1,6 @@
 ### YamlMime:Landing
 title: Documentation sur les groupes de machines virtuelles identiques
-summary: Les groupes identique de machines virtuelles Azure vous permettent de créer et de gérer un groupe de machines virtuelles identiques, disposant d’une charge équilibrée et d’une mise à l’échelle automatique.
+summary: Les groupes de machines virtuelles identiques Azure vous permettent de créer et de gérer un groupe de machines virtuelles avec charge équilibrée et mise à l’échelle automatique.
 metadata:
   title: Documentation sur les groupes de machines virtuelles identiques
   description: Découvrez comment créer, configurer, gérer et mettre automatiquement à l’échelle des groupes identiques de machines virtuelles avec nos guides de démarrage rapide, nos didacticiels et nos exemples.
@@ -10,12 +10,12 @@ metadata:
   ms.author: jushiman
   ms.reviewer: mimckitt
   ms.date: 03/16/2020
-  ms.openlocfilehash: 8eff3979088aecf5ea8ed0383a1af8ad0d71c21d
-  ms.sourcegitcommit: 595cde417684e3672e36f09fd4691fb6aa739733
+  ms.openlocfilehash: 6fd995fbedafaf91ef98389e556286be218227a8
+  ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 05/20/2020
-  ms.locfileid: "83701343"
+  ms.lasthandoff: 10/09/2020
+  ms.locfileid: "87088969"
 landingContent:
 - title: En savoir plus sur les groupes de machines virtuelles identiques
   linkLists:
@@ -74,6 +74,6 @@ landingContent:
   - linkListType: learn
     links:
     - text: Générer une application scalable avec des groupes de machines virtuelles identiques
-      url: https://docs.microsoft.com/learn/modules/build-app-with-scale-sets/
+      url: /learn/modules/build-app-with-scale-sets/
     - text: " Créer une machine virtuelle Windows dans Azure"
-      url: https://docs.microsoft.com/learn/modules/create-windows-virtual-machine-in-azure/
+      url: /learn/modules/create-windows-virtual-machine-in-azure/

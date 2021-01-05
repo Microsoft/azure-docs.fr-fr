@@ -1,26 +1,22 @@
 ---
 title: Créer une fonction dans Azure déclenchée par des messages de file d’attente
-description: Utilisez Azure Functions pour créer une fonction sans serveur appelée par un message soumis à une file d’attente de stockage Azure.
+description: Utilisez Azure Functions pour créer une fonction serverless appelée par un message soumis à une file d’attente dans Azure.
 ms.assetid: 361da2a4-15d1-4903-bdc4-cc4b27fc3ff4
 ms.topic: how-to
 ms.date: 10/01/2018
 ms.custom: mvc, cc996988-fb4f-47
-ms.openlocfilehash: 98f0290aad9971bdb0c0b265d96e96d8ac34b99d
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: d722d420597bb459d3e7b6d2ca33fdc49bfe6f09
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80756523"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90981572"
 ---
 # <a name="create-a-function-triggered-by-azure-queue-storage"></a>Créer une fonction déclenchée par une file d’attente de stockage Azure
 
 Découvrez comment créer une fonction qui est déclenchée lorsque des messages sont envoyés à une file d’attente de stockage Azure.
 
-![Affichez le message dans les journaux d’activité.](./media/functions-create-storage-queue-triggered-function/function-app-in-portal-editor.png)
-
-## <a name="prerequisites"></a>Conditions préalables requises
-
-- Télécharger et installer l’[Explorateur de Stockage Microsoft Azure](https://storageexplorer.com/).
+## <a name="prerequisites"></a>Prérequis
 
 - Un abonnement Azure. Si vous n’en avez pas, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
 
@@ -28,7 +24,7 @@ Découvrez comment créer une fonction qui est déclenchée lorsque des messages
 
 [!INCLUDE [Create function app Azure portal](../../includes/functions-create-function-app-portal.md)]
 
-![Function App créée avec succès.](./media/functions-create-first-azure-function/function-app-create-success.png)
+   :::image type="content" source="./media/functions-create-storage-queue-triggered-function/function-app-create-success.png" alt-text="Function App créée avec succès." border="true":::
 
 Créez ensuite une fonction dans la nouvelle Function App.
 
@@ -36,23 +32,16 @@ Créez ensuite une fonction dans la nouvelle Function App.
 
 ## <a name="create-a-queue-triggered-function"></a>Créer une fonction déclenchée par une file d’attente
 
-1. Développez votre Function App, puis cliquez sur le bouton **+** en regard de **Fonctions**. S’il s’agit de la première fonction de votre application de fonction, sélectionnez **Dans le portail**, puis **Continuer**. Sinon, passez à l’étape 3.
+1. Sélectionnez **Fonctions**, puis **+ Ajouter** pour ajouter une nouvelle fonction.
 
-   ![Page de démarrage rapide des fonctions sur le portail Azure](./media/functions-create-storage-queue-triggered-function/function-app-quickstart-choose-portal.png)
+   :::image type="content" source="./media/functions-create-storage-queue-triggered-function/functions-app-quickstart-choose-template.png" alt-text="Function App créée avec succès." border="true":::
 
-1. Choisissez **Autres modèles**, puis **Terminer et afficher les modèles**.
-
-    ![Page de démarrage rapide Functions permettant de choisir d’autres modèles](./media/functions-create-storage-queue-triggered-function/add-first-function.png)
-
-1. Dans le champ Rechercher, tapez `queue`, puis choisissez le modèle **Déclencheur de file d’attente**.
-
-1. Si vous y êtes invité, sélectionnez **Installer** pour installer l’extension Stockage Azure et toutes les dépendances dans l’application de fonction. Une fois l’installation réussie, sélectionnez **Continuer**.
-
-    ![Installer des extensions de liaison](./media/functions-create-storage-queue-triggered-function/functions-create-queue-storage-trigger-portal.png)
+1. Choisissez le **modèle déclencheur de file d’attente de stockage**.
 
 1. Utilisez les paramètres spécifiés dans le tableau sous l’image.
 
-    ![Configurez la fonction déclenchée par la file d’attente de stockage.](./media/functions-create-storage-queue-triggered-function/functions-create-queue-storage-trigger-portal-2.png)
+    :::image type="content" source="./media/functions-create-storage-queue-triggered-function/functions-create-queue-storage-trigger-portal.png" alt-text="Function App créée avec succès." border="true":::
+
 
     | Paramètre | Valeur suggérée | Description |
     |---|---|---|
@@ -60,27 +49,29 @@ Créez ensuite une fonction dans la nouvelle Function App.
     | **Nom de la file d’attente**   | éléments myqueue    | Le nom de la file d’attente à connecter à votre compte de stockage. |
     | **Connexion au compte de stockage** | AzureWebJobsStorage | Vous pouvez utiliser la connexion de compte de stockage qui est déjà utilisée par votre application de fonction, ou créez-en une.  |    
 
-1. Cliquez sur **Créer** pour créer votre fonction.
+1. Sélectionnez **Créer une fonction** pour créer votre fonction.
+
+    :::image type="content" source="./media/functions-create-storage-queue-triggered-function/functions-create-queue-storage-trigger-portal-3.png" alt-text="Function App créée avec succès." border="true":::
 
 Ensuite, connectez-vous à votre compte de stockage Azure et créez la file d’attente de stockage **myqueue-items**.
 
 ## <a name="create-the-queue"></a>Créer la file d’attente
 
-1. Dans votre fonction, cliquez sur **Intégrer**, développez **Documentation** et copiez le **Nom du compte** et la **Clé du compte**. Vous utilisez ces informations d’identification pour vous connecter au compte de stockage dans l’Explorateur Stockage Azure. Si vous avez déjà connecté votre compte de stockage, passez à l’étape 4.
+1. Dans votre fonction, sur la page **Vue d’ensemble**, sélectionnez votre groupe de ressources.
 
-    ![Obtenez les informations d’identification de connexion au compte de stockage.](./media/functions-create-storage-queue-triggered-function/functions-storage-account-connection.png)
+    :::image type="content" source="./media/functions-create-storage-queue-triggered-function/functions-storage-resource-group.png" alt-text="Function App créée avec succès." border="true":::
 
-1. Exécutez [l’Explorateur de stockage Microsoft Azure](https://storageexplorer.com/), cliquez sur l’icône de connexion située sur la gauche, choisissez **Utiliser un nom et une clé de compte de stockage**, puis cliquez sur **Suivant**.
+1. Recherchez et sélectionnez le compte de stockage de votre groupe de ressources.
 
-    ![Exécutez l’outil Explorateur de compte de stockage.](./media/functions-create-storage-queue-triggered-function/functions-storage-manager-connect-1.png)
+    :::image type="content" source="./media/functions-create-storage-queue-triggered-function/functions-storage-account-access.png" alt-text="Function App créée avec succès." border="true":::
 
-1. Saisissez le **Nom du compte** et la **Clé du compte** récupérés à l’étape 1, puis cliquez sur **Suivant** et sur **Connexion**.
+1. Choisissez **Files d’attente**, puis **+ File d’attente**. 
 
-    ![Entrez les informations d’identification de stockage et connectez-vous.](./media/functions-create-storage-queue-triggered-function/functions-storage-manager-connect-2.png)
+    :::image type="content" source="./media/functions-create-storage-queue-triggered-function/functions-storage-add-queue.png" alt-text="Function App créée avec succès." border="true":::
 
-1. Développez le compte de stockage attaché, cliquez avec le bouton droit sur **Files d’attente**, cliquez sur **Créer une file d’attente**, saisissez `myqueue-items` et appuyez sur Entrée.
+1. Dans le champ **Nom**, tapez `myqueue-items`, puis sélectionnez **Créer**.
 
-    ![Créez une file d’attente de stockage.](./media/functions-create-storage-queue-triggered-function/functions-storage-manager-create-queue.png)
+    :::image type="content" source="./media/functions-create-storage-queue-triggered-function/functions-storage-name-queue.png" alt-text="Function App créée avec succès." border="true":::
 
 Maintenant que vous disposez d’une file d’attente de stockage, vous pouvez tester la fonction en ajoutant un message à la file d’attente.
 
@@ -88,17 +79,23 @@ Maintenant que vous disposez d’une file d’attente de stockage, vous pouvez t
 
 1. Dans le portail Azure, accédez à votre fonction, développez les **Journaux d’activité** en bas de la page et vérifiez que la diffusion de journaux d’activité n’est pas suspendue.
 
-1. Dans l’Explorateur Stockage, développez votre compte de stockage, **Files d’attente** et **myqueue-items**, puis cliquez sur **Ajouter un message**.
+    :::image type="content" source="./media/functions-create-storage-queue-triggered-function/functions-queue-storage-log-expander.png" alt-text="Function App créée avec succès." border="true":::
 
-    ![Ajoutez un message dans la file d’attente.](./media/functions-create-storage-queue-triggered-function/functions-storage-manager-add-message.png)
+1. Dans une fenêtre de navigateur distincte, accédez à votre groupe de ressources dans le Portail Azure, puis sélectionnez le compte de stockage.
 
-1. Saisissez le message « Hello World ! » dans **Texte du message** et cliquez sur **OK**.
+1. Sélectionnez **Files d’attente**, puis sélectionnez le conteneur **myQueue-items**.
+
+    :::image type="content" source="./media/functions-create-storage-queue-triggered-function/functions-storage-queue.png" alt-text="Function App créée avec succès." border="true":::
+
+1. Sélectionnez **Ajouter un message**, puis tapez « Hello World ! » dans **Texte du message**. Sélectionnez **OK**.
+
+    :::image type="content" source="./media/functions-create-storage-queue-triggered-function/functions-storage-queue-test.png" alt-text="Function App créée avec succès." border="true":::
 
 1. Attendez quelques secondes, puis retournez à vos journaux d’activité de fonction et vérifiez que le nouveau message a été lu à partir de la file d’attente.
 
-    ![Affichez le message dans les journaux d’activité.](./media/functions-create-storage-queue-triggered-function/functions-queue-storage-trigger-view-logs.png)
+    :::image type="content" source="./media/functions-create-storage-queue-triggered-function/function-app-in-portal-editor.png" alt-text="Function App créée avec succès." border="true":::
 
-1. Dans l’Explorateur de stockage, cliquez sur **Actualiser** et vérifiez que le message a été traité et qu’il ne se trouve plus dans la file d’attente.
+1. De retour dans votre file d’attente de stockage, sélectionnez **Actualiser** et vérifiez que le message a été traité et qu’il ne se trouve plus dans la file d’attente.
 
 ## <a name="clean-up-resources"></a>Nettoyer les ressources
 

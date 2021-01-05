@@ -3,12 +3,12 @@ title: Modifier les paramètres de cluster Azure Service Fabric
 description: Cet article décrit les paramètres de structure et les stratégies de mise à niveau de la structure que vous pouvez personnaliser.
 ms.topic: reference
 ms.date: 08/30/2019
-ms.openlocfilehash: c2e280af814a3e10ad84c5ba07fc376868fcd851
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: c055ad1dad8b9574c8d811284a34619ee3648a10
+ms.sourcegitcommit: 5db975ced62cd095be587d99da01949222fc69a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81416242"
+ms.lasthandoff: 12/10/2020
+ms.locfileid: "97095268"
 ---
 # <a name="customize-service-fabric-cluster-settings"></a>Personnaliser les paramètres de cluster Service Fabric
 Cet article décrit les différents paramètres de structure personnalisables d’un cluster Service Fabric. Pour des clusters hébergés dans Azure, vous pouvez personnaliser les paramètres via le [portail Azure](https://portal.azure.com) ou en utilisant un modèle Azure Resource Manager. Pour plus d’informations, voir [Mettre à niveau la configuration d’un cluster Azure](service-fabric-cluster-config-upgrade-azure.md). Pour personnaliser les paramètres d’un cluster autonome, mettez à jour le fichier *ClusterConfig.json* et effectuez une mise à niveau de configuration sur le cluster. Pour plus d’informations, voir [Mettre à niveau la configuration d’un cluster autonome](service-fabric-cluster-config-upgrade-windows-server.md).
@@ -57,7 +57,7 @@ Voici une liste des paramètres Fabric que vous pouvez personnaliser, classés p
 |MinReplicaSetSize|entier (valeur par défaut : 0)|statique|Paramètre MinReplicaSetSize pour BackupRestoreService |
 |PlacementConstraints|chaîne, valeur par défaut : « »|statique|    Paramètre PlacementConstraints pour le service BackupRestore |
 |SecretEncryptionCertThumbprint|chaîne, valeur par défaut : « »|Dynamique|Empreinte numérique du certificat X509 de chiffrement de secret |
-|SecretEncryptionCertX509StoreName|chaîne, valeur par défaut : « My »|    Dynamique|    Ce paramètre indique le certificat à utiliser pour le chiffrement et le déchiffrement des informations d’identification. Nom du magasin de certificats X.509 utilisé pour le chiffrement et le déchiffrement des informations d’identification de magasin qu’utilise le service de restauration de sauvegarde |
+|SecretEncryptionCertX509StoreName|chaîne, valeur recommandée « My » (pas de valeur par défaut) |    Dynamique|    Ce paramètre indique le certificat à utiliser pour le chiffrement et le déchiffrement des informations d’identification. Nom du magasin de certificats X.509 utilisé pour le chiffrement et le déchiffrement des informations d’identification de magasin qu’utilise le service de restauration de sauvegarde |
 |TargetReplicaSetSize|entier, valeur par défaut : 0|statique| Paramètre TargetReplicaSetSize pour BackupRestoreService |
 
 ## <a name="clustermanager"></a>ClusterManager
@@ -141,6 +141,7 @@ Voici une liste des paramètres Fabric que vous pouvez personnaliser, classés p
 |IsEnabled|valeur booléenne, valeur par défaut : FALSE|statique|Active/désactive DnsService. DnsService est désactivé par défaut, et cette configuration doit être définie pour l’activer. |
 |PartitionPrefix|Chaîne (valeur par défaut : "--")|statique|Contrôle la valeur de la chaîne de préfixe de partition dans les requêtes DNS pour les services partitionnés. La valeur : <ul><li>doit être conforme à RFC, car elle fera partie d’une requête DNS ;</li><li>ne doit pas contenir de point (« . »), car le point interfère avec le comportement de suffixe DNS ;</li><li>ne doit pas comporter plus de 5 caractères ;</li><li>ne peut pas être une chaîne vide.</li><li>Si le paramètre PartitionPrefix est remplacé, PartitionSuffix doit être substitué et vice versa.</li></ul>Pour en savoir plus, voir [Service DNS Service Fabric](service-fabric-dnsservice.md).|
 |PartitionSuffix|Chaîne (valeur par défaut : "")|statique|Contrôle la valeur de la chaîne de suffixe de partition dans les requêtes DNS pour les services partitionnés. La valeur : <ul><li>doit être conforme à RFC, car elle fera partie d’une requête DNS ;</li><li>ne doit pas contenir de point (« . »), car le point interfère avec le comportement de suffixe DNS ;</li><li>ne doit pas comporter plus de 5 caractères ;</li><li>Si le paramètre PartitionPrefix est remplacé, PartitionSuffix doit être substitué et vice versa.</li></ul>Pour en savoir plus, voir [Service DNS Service Fabric](service-fabric-dnsservice.md). |
+|RetryTransientFabricErrors|Valeur booléenne (valeur par défaut : true)|statique|Le paramètre contrôle les fonctionnalités de nouvelle tentative lors de l’appel des API Service Fabric à partir de DnsService. Lorsqu’il est activé, il effectue jusqu’à trois tentatives en cas d’erreur temporaire.|
 
 ## <a name="eventstoreservice"></a>EventStoreService
 
@@ -243,7 +244,7 @@ Voici une liste des paramètres Fabric que vous pouvez personnaliser, classés p
 |QuorumLossWaitDuration | Durée en secondes (valeur par défaut : MaxValue) |statique|Spécifiez la durée en secondes. Paramètre QuorumLossWaitDuration pour FaultAnalysisService. |
 |ReplicaDropWaitDurationInSeconds|entier, valeur par défaut : 600|statique|Ce paramètre est utilisé lorsque l’api de perte de données est appelée. Il contrôle le délai que le système attend avant qu’un réplica soit abandonné après la suppression d’un réplica appelé en interne. |
 |ReplicaRestartWaitDuration |Durée en secondes (valeur par défaut : 60 minutes)|statique|Spécifiez la durée en secondes. Paramètre ReplicaRestartWaitDuration pour FaultAnalysisService. |
-|StandByReplicaKeepDuration| Durée en secondes (valeur par défaut : 60*24*7 minutes) |statique|Spécifiez la durée en secondes. Paramètre StandByReplicaKeepDuration pour FaultAnalysisService. |
+|StandByReplicaKeepDuration| Durée en secondes (valeur par défaut : 60 *24* 7 minutes) |statique|Spécifiez la durée en secondes. Paramètre StandByReplicaKeepDuration pour FaultAnalysisService. |
 |StoredActionCleanupIntervalInSeconds | Entier (valeur par défaut : 3600) |statique|Fréquence de nettoyage du magasin. Seules les actions dans un état terminal et celles qui exécutées il y a au moins CompletedActionKeepDurationInSeconds secondes seront supprimées. |
 |StoredChaosEventCleanupIntervalInSeconds | Entier (valeur par défaut : 3600) |statique|Fréquence à laquelle le système évalue la nécessité du nettoyage. Si le nombre d’événements est supérieur à 30000, le nettoyage se déclenche. |
 |TargetReplicaSetSize |Entier (valeur par défaut : 0) |statique|NOT_PLATFORM_UNIX_START Paramètre TargetReplicaSetSize pour FaultAnalysisService. |
@@ -423,14 +424,14 @@ Voici une liste des paramètres Fabric que vous pouvez personnaliser, classés p
 |AzureStorageMaxConnections | Entier (valeur par défaut : 5000) |Dynamique|Nombre maximum de connexions simultanées au stockage Azure. |
 |AzureStorageMaxWorkerThreads | Entier (valeur par défaut : 25) |Dynamique|Nombre maximum de threads de travail en parallèle. |
 |AzureStorageOperationTimeout | Durée en secondes (valeur par défaut : 6000) |Dynamique|Spécifiez la durée en secondes. Délai permettant de finaliser l’opération xstore. |
-|CleanupApplicationPackageOnProvisionSuccess|valeur booléenne, valeur par défaut : FALSE |Dynamique|Active ou désactive le nettoyage automatique du package d’application en cas de provisionnement réussi. |
-|CleanupUnusedApplicationTypes|Valeur booléenne, valeur par défaut : FALSE |Dynamique|Cette configuration, si elle est activée, permet de désinscrire automatiquement des versions inutilisées de types d’applications en ignorant les trois dernières versions inutilisées, ce qui réduit l’espace disque occupé par le magasin d’images. Le nettoyage automatique est déclenché à la fin d’un provisionnement réussi pour ce type d’application spécifique et s’exécute aussi régulièrement une fois par jour pour tous les types d’applications. Le nombre de versions inutilisées à ignorer est configurable à l’aide du paramètre « MaxUnusedAppTypeVersionsToKeep ». |
+|CleanupApplicationPackageOnProvisionSuccess|Valeur booléenne, valeur par défaut : true |Dynamique|Active ou désactive le nettoyage automatique du package d’application en cas de provisionnement réussi.
+|CleanupUnusedApplicationTypes|Valeur booléenne, valeur par défaut : FALSE |Dynamique|Cette configuration, si elle est activée, permet de désinscrire automatiquement des versions inutilisées de types d’applications en ignorant les trois dernières versions inutilisées, ce qui réduit l’espace disque occupé par le magasin d’images. Le nettoyage automatique est déclenché à la fin d’un provisionnement réussi pour ce type d’application spécifique et s’exécute aussi régulièrement une fois par jour pour tous les types d’applications. Le nombre de versions inutilisées à ignorer est configurable à l’aide du paramètre « MaxUnusedAppTypeVersionsToKeep ». <br/> *La bonne pratique est d’utiliser `true`.*
 |DisableChecksumValidation | Valeur booléenne (valeur par défaut : false) |statique| Cette configuration nous permet d’activer ou de désactiver la validation de la somme de contrôle pendant l’approvisionnement de l’application. |
 |DisableServerSideCopy | Valeur booléenne (valeur par défaut : false) |statique|Cette configuration active ou désactive la copie côté serveur du package d’application sur le magasin ImageStore pendant l’approvisionnement de l’application. |
 |ImageCachingEnabled | Valeur booléenne (valeur par défaut : true) |statique|Cette configuration nous permet d’activer ou de désactiver la mise en cache. |
 |ImageStoreConnectionString |SecureString |statique|Chaîne de connexion à la racine d’ImageStore. |
 |ImageStoreMinimumTransferBPS | Entier (valeur par défaut : 1024) |Dynamique|Débit de transfert minimum entre le cluster et ImageStore. Cette valeur permet de déterminer le délai d’expiration lors de l’accès au magasin ImageStore externe. Ne modifiez cette valeur que si la latence entre le cluster et ImageStore est élevée afin de laisser davantage de temps au cluster pour effectuer des téléchargements à partir du magasin ImageStore externe. |
-|MaxUnusedAppTypeVersionsToKeep | Entier (valeur par défaut : 3) |Dynamique|Cette configuration définit le nombre de versions inutilisées de types d’applications à ignorer pour le nettoyage. Ce paramètre s’applique uniquement si le paramètre CleanupUnusedApplicationTypes est activé. |
+|MaxUnusedAppTypeVersionsToKeep | Entier (valeur par défaut : 3) |Dynamique|Cette configuration définit le nombre de versions inutilisées de types d’applications à ignorer pour le nettoyage. Ce paramètre s’applique uniquement si le paramètre CleanupUnusedApplicationTypes est activé. <br/>*La meilleure pratique générale consiste à utiliser la valeur par défaut (`3`). Les valeurs inférieures à 1 ne sont pas valides.*|
 
 
 ## <a name="metricactivitythresholds"></a>MetricActivityThresholds
@@ -520,6 +521,7 @@ Voici une liste des paramètres Fabric que vous pouvez personnaliser, classés p
 |AutoDetectAvailableResources|Valeur booléenne, valeur par défaut : TRUE|statique|Cette configuration déclenchera la détection automatique des ressources disponibles sur le nœud (processeur et mémoire). Si cette configuration est définie sur true, nous lirons les capacités réelles et les corrigerons si l’utilisateur a spécifié des capacités de nœud incorrectes ou ne les a pas définies du tout. Si cette configuration est définie sur false, nous enverrons un avertissement que l’utilisateur a spécifié des capacités de nœud incorrectes, mais nous ne les corrigerons pas. Ce qui signifie que cet utilisateur souhaite que les capacités spécifiées soient > à celles du nœud ou si les capacités n’ont pas été définies ; cette valeur suppose une capacité illimitée |
 |BalancingDelayAfterNewNode | Durée en secondes (valeur par défaut : 120) |Dynamique|Spécifiez la durée en secondes. Ne démarrez pas l’équilibrage des activités pendant cette période après l’ajout d’un nouveau nœud. |
 |BalancingDelayAfterNodeDown | Durée en secondes (valeur par défaut : 120) |Dynamique|Spécifiez la durée en secondes. Ne démarrez pas l’équilibrage des activités pendant cette période après un événement d’arrêt de nœud. |
+|BlockNodeInUpgradeConstraintPriority | Entier (valeur par défaut : 0) |Dynamique|Détermine la priorité de la contrainte de capacité : 0 : Stricte ; 1 : Souple ; valeur négative : Ignorer  |
 |CapacityConstraintPriority | Entier (valeur par défaut : 0) | Dynamique|Détermine la priorité de la contrainte de capacité : 0 : Stricte ; 1 : Souple ; valeur négative : à ignorer. |
 |ConsecutiveDroppedMovementsHealthReportLimit | Entier (valeur par défaut : 20) | Dynamique|Définit le nombre de fois consécutives que des mouvements émis par ResourceBalancer sont supprimés avant que des diagnostics soient effectués et que des avertissements d’intégrité soient émis. Négatif : aucun avertissement émis sous cette condition. |
 |ConstraintFixPartialDelayAfterNewNode | Durée en secondes (valeur par défaut : 120) |Dynamique| Spécifiez la durée en secondes. Ne corrigez pas les violations de contrainte FaultDomain et UpgradeDomain pendant cette période après l’ajout d’un nouveau nœud. |
@@ -875,7 +877,7 @@ Voici une liste des paramètres Fabric que vous pouvez personnaliser, classés p
 | --- | --- | --- | --- |
 |ConnectionOpenTimeout|TimeSpan, la valeur par défaut est Common::TimeSpan::FromSeconds(60)|statique|Spécifiez la durée en secondes. Délai d’expiration pour la configuration de la connexion côté entrant et acceptant (y compris la négociation de sécurité en mode sécurisé) |
 |FrameHeaderErrorCheckingEnabled|Valeur booléenne, valeur par défaut : TRUE|statique|Paramètre par défaut pour la vérification d’erreurs dans l’en-tête d’image en mode non sécurisé ; remplacé par le paramètre du composant. |
-|MessageErrorCheckingEnabled|valeur booléenne,valeur par défaut : FALSE|statique|Paramètre par défaut pour la vérification d’erreurs dans l’en-tête et le corps de message en mode non sécurisé ; remplacé par le paramètre du composant. |
+|MessageErrorCheckingEnabled|Valeur booléenne, valeur par défaut : TRUE|statique|Paramètre par défaut pour la vérification d’erreurs dans l’en-tête et le corps de message en mode non sécurisé ; remplacé par le paramètre du composant. |
 |ResolveOption|chaîne, valeur par défaut : « unspecified »|statique|Détermine la façon dont le nom de domaine complet est résolu.  Les valeurs valides sont "unspecified/ipv4/ipv6". |
 |SendTimeout|TimeSpan, la valeur par défaut est Common::TimeSpan::FromSeconds(300)|Dynamique|Spécifiez la durée en secondes. Envoyez un délai d'expiration pour détecter une connexion bloquée. Les rapports d’échec TCP ne sont pas fiables dans certains environnements. Cela peut être ajusté en fonction de la bande passante réseau disponible et de la taille des données sortantes (\*MaxMessageSize\/\*SendQueueSizeLimit). |
 
@@ -890,7 +892,7 @@ Voici une liste des paramètres Fabric que vous pouvez personnaliser, classés p
 |PlacementConstraints | Chaîne (valeur par défaut : "") |statique| Paramètre PlacementConstraints pour UpgradeOrchestrationService. |
 |QuorumLossWaitDuration | Durée en secondes (valeur par défaut : MaxValue) |statique| Spécifiez la durée en secondes. Paramètre QuorumLossWaitDuration pour UpgradeOrchestrationService. |
 |ReplicaRestartWaitDuration | Durée en secondes (valeur par défaut : 60 minutes)|statique| Spécifiez la durée en secondes. Paramètre ReplicaRestartWaitDuration pour UpgradeOrchestrationService. |
-|StandByReplicaKeepDuration | Durée en secondes (valeur par défaut : 60*24*7 minutes) |statique| Spécifiez la durée en secondes. Paramètre StandByReplicaKeepDuration pour UpgradeOrchestrationService. |
+|StandByReplicaKeepDuration | Durée en secondes (valeur par défaut : 60 *24* 7 minutes) |statique| Spécifiez la durée en secondes. Paramètre StandByReplicaKeepDuration pour UpgradeOrchestrationService. |
 |TargetReplicaSetSize |Entier (valeur par défaut : 0) |statique |Paramètre TargetReplicaSetSize pour UpgradeOrchestrationService. |
 |UpgradeApprovalRequired | Valeur booléenne (valeur par défaut : false) | statique|La configuration de la mise à niveau du code requiert une autorisation de l’administrateur. |
 

@@ -5,17 +5,18 @@ author: motanv
 ms.topic: conceptual
 ms.date: 02/05/2018
 ms.author: motanv
-ms.openlocfilehash: 37b451abd0a519dff17aba9b2d6c42b4762f30cd
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 9e9127d9776169131c2ed7f4778052646e84f8b6
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75463171"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89013110"
 ---
 # <a name="induce-controlled-chaos-in-service-fabric-clusters"></a>Induire un chaos contrôlé dans les clusters Service Fabric
 Les systèmes distribués à grande échelle, comme les infrastructures cloud, sont par définition peu fiables. Azure Service Fabric permet aux développeurs d’écrire des services distribués fiables sur une infrastructure peu fiable. Pour écrire des services distribués robustes sur une infrastructure non fiable, les développeurs doivent pouvoir tester la stabilité de leurs services, tandis que l’infrastructure sous-jacente non fiable passe par des transitions d’état complexes en raison d’erreurs.
 
-Le [service d’injection d’erreurs et d’analyse de cluster](https://docs.microsoft.com/azure/service-fabric/service-fabric-testability-overview) (ou Service d’analyse des erreurs) permet aux développeurs de provoquer des erreurs afin de tester les services. Ces erreurs simulées ciblées, comme [le redémarrage d’une partition](https://docs.microsoft.com/powershell/module/servicefabric/start-servicefabricpartitionrestart?view=azureservicefabricps), peuvent vous aider à simuler les transitions d’état les plus courantes. Toutefois, les erreurs simulées ciblées sont biaisées par définition, et peuvent donc manquer des bogues qui se présentent uniquement dans une séquence longue, compliquée et difficile à prédire de transitions d’état. Pour un test non biaisé, vous pouvez utiliser Chaos.
+Le [service d’injection d’erreurs et d’analyse de cluster](./service-fabric-testability-overview.md) (ou Service d’analyse des erreurs) permet aux développeurs de provoquer des erreurs afin de tester les services. Ces erreurs simulées ciblées, comme [le redémarrage d’une partition](/powershell/module/servicefabric/start-servicefabricpartitionrestart?view=azureservicefabricps), peuvent vous aider à simuler les transitions d’état les plus courantes. Toutefois, les erreurs simulées ciblées sont biaisées par définition, et peuvent donc manquer des bogues qui se présentent uniquement dans une séquence longue, compliquée et difficile à prédire de transitions d’état. Pour un test non biaisé, vous pouvez utiliser Chaos.
 
 Au sein du cluster, le chaos simule des erreurs entrelacées et périodiques, avec et sans perte de données, sur des périodes prolongées. Une erreur sans perte de données se compose d’un ensemble d’appels d’API Service Fabric. Par exemple, une erreur de redémarrage du réplica est une erreur sans perte de données puisqu’il s’agit d’une fermeture suivie d’une ouverture sur un réplica. La suppression du réplica, le déplacement du réplica principal et le déplacement du réplica secondaire sont les autres erreurs sans perte de données exercées par Chaos. Les erreurs avec perte de données sont des sorties de processus, comme des packages de redémarrage du nœud et du code. 
 
@@ -25,7 +26,7 @@ Une fois que vous avez configuré Chaos avec la fréquence et le type des erreur
 > Dans sa forme actuelle, le chaos déclenche uniquement des erreurs sécurisées, ce qui implique qu’en l’absence d’erreurs externes, une perte de quorum ou une perte de données ne se produit jamais.
 >
 
-Pendant que le chaos s’exécute, il génère différents événements qui capturent l’état de l’exécution à un moment précis. Par exemple, un ExecutingFaultsEvent contient toutes les erreurs que Chaos a choisi d’exécuter dans cette itération. Un ValidationFailedEvent contient les détails d’un échec de validation (problèmes d’intégrité ou de stabilité) qui a été identifié lors de la validation du cluster. Vous pouvez appeler l’API GetChaosReport (C#, Powershell ou REST) pour obtenir un rapport sur les exécutions de Chaos. Ces événements sont rendus persistants dans un [dictionnaire fiable](https://docs.microsoft.com/azure/service-fabric/service-fabric-reliable-services-reliable-collections), qui a une stratégie de troncation dictée par deux configurations : **MaxStoredChaosEventCount** (la valeur par défaut est 25 000) et **StoredActionCleanupIntervalInSeconds** (la valeur par défaut est 3 600). Toutes les vérifications *StoredActionCleanupIntervalInSeconds* de Chaos et tous les événements *MaxStoredChaosEventCount* à l’exception des plus récents sont purgés du dictionnaire fiable.
+Pendant que le chaos s’exécute, il génère différents événements qui capturent l’état de l’exécution à un moment précis. Par exemple, un ExecutingFaultsEvent contient toutes les erreurs que Chaos a choisi d’exécuter dans cette itération. Un ValidationFailedEvent contient les détails d’un échec de validation (problèmes d’intégrité ou de stabilité) qui a été identifié lors de la validation du cluster. Vous pouvez appeler l’API GetChaosReport (C#, Powershell ou REST) pour obtenir un rapport sur les exécutions de Chaos. Ces événements sont rendus persistants dans un [dictionnaire fiable](./service-fabric-reliable-services-reliable-collections.md), qui a une stratégie de troncation dictée par deux configurations : **MaxStoredChaosEventCount** (la valeur par défaut est 25 000) et **StoredActionCleanupIntervalInSeconds** (la valeur par défaut est 3 600). Toutes les vérifications *StoredActionCleanupIntervalInSeconds* de Chaos et tous les événements *MaxStoredChaosEventCount* à l’exception des plus récents sont purgés du dictionnaire fiable.
 
 ## <a name="faults-induced-in-chaos"></a>Erreurs introduites dans le chaos
 Le chaos génère des erreurs dans l’ensemble du cluster Service Fabric et compresse, en quelques heures, les erreurs constatées au cours de plusieurs mois ou années. L’utilisation d’erreurs entrelacées avec un taux élevé d’erreurs permet d’identifier des dysfonctionnements qui ne pourraient peut-être pas être isolés autrement. Cet exercice du chaos entraîne une amélioration significative de la qualité du code du service.

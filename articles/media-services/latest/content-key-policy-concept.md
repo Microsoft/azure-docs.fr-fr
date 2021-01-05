@@ -3,27 +3,29 @@ title: Stratégies de clé de contenu dans Media Services - Azure | Microsoft Do
 description: Cet article explique ce que sont les stratégies de clé de contenu et comment Azure Media Services les utilise.
 services: media-services
 documentationcenter: ''
-author: Juliako
+author: IngridAtMicrosoft
 manager: femila
 editor: ''
 ms.service: media-services
 ms.workload: ''
-ms.topic: article
-ms.date: 07/26/2019
-ms.author: juliako
+ms.topic: conceptual
+ms.date: 08/31/2020
+ms.author: inhenkel
 ms.custom: seodec18
-ms.openlocfilehash: 85a9cad80156dc6ac40e78610c91805d485ff3df
-ms.sourcegitcommit: 3c318f6c2a46e0d062a725d88cc8eb2d3fa2f96a
+ms.openlocfilehash: dd19d0730b25685b008af16d1c1eac6537750612
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/02/2020
-ms.locfileid: "80585988"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89297267"
 ---
 # <a name="content-key-policies"></a>Stratégies de clé de contenu
 
+[!INCLUDE [media services api v3 logo](./includes/v3-hr.md)]
+
 Media Services vous permet de transmettre votre contenu dynamique ou à la demande chiffré dynamiquement avec la norme Advanced Encryption Standard (AES-128) ou un des principaux systèmes de gestion des droits numériques (DRM) : Microsoft PlayReady, Google Widevine et Apple FairPlay. Media Services fournit également un service de distribution de clés AES et licences (PlayReady, Widevine et FairPlay) DRM aux clients autorisés. 
 
-Pour spécifier des options de chiffrement sur votre flux, vous devez créer une [stratégie de streaming](streaming-policy-concept.md), puis l’associer à votre [localisateur de streaming](streaming-locators-concept.md). Vous créez la [stratégie de clé de contenu](https://docs.microsoft.com/rest/api/media/contentkeypolicies) pour configurer la façon dont la clé de contenu (qui fournit un accès sécurisé à vos [ressources](assets-concept.md)) est remise aux clients finaux. Vous devez définir les exigences (restrictions) sur la stratégie de clé de contenu qui doivent être respectées afin que des clés ayant la configuration spécifiée soient remises à des clients. La stratégie de clé de contenu n’est pas nécessaire pour un téléchargement ou un streaming en clair. 
+Pour spécifier des options de chiffrement sur votre flux, vous devez créer une [stratégie de streaming](streaming-policy-concept.md), puis l’associer à votre [localisateur de streaming](streaming-locators-concept.md). Vous créez la [stratégie de clé de contenu](/rest/api/media/contentkeypolicies) pour configurer la façon dont la clé de contenu (qui fournit un accès sécurisé à vos [ressources](assets-concept.md)) est remise aux clients finaux. Vous devez définir les exigences (restrictions) sur la stratégie de clé de contenu qui doivent être respectées afin que des clés ayant la configuration spécifiée soient remises à des clients. La stratégie de clé de contenu n’est pas nécessaire pour un téléchargement ou un streaming en clair. 
 
 En général, vous associez votre stratégie clé de contenu à votre [localisateur de streaming](streaming-locators-concept.md). Vous pouvez également spécifier la stratégie de clé de contenu dans une [stratégie de streaming](streaming-policy-concept.md) (lors de la création d’une stratégie de streaming personnalisée pour les scénarios avancés). 
 
@@ -43,7 +45,7 @@ En général, vous associez votre stratégie clé de contenu à votre [localisat
 * Si vous avez besoin de créer une nouvelle stratégie, vous devez créer un nouveau localisateur de streaming pour la ressource.
 * Il est recommandé de laisser Media Services générer automatiquement la clé de contenu. 
 
-   Généralement, vous utilisez une clé à longue durée de vie et vous vérifiez l’existence de la stratégie de clé de contenu avec [Get](https://docs.microsoft.com/rest/api/media/contentkeypolicies/get). Pour vous procurer la clé, vous devez appeler une méthode d'action distincte afin d'obtenir des informations d'identification ou des secrets ; reportez-vous à l'exemple ci-dessous.
+   Généralement, vous utilisez une clé à longue durée de vie et vous vérifiez l’existence de la stratégie de clé de contenu avec [Get](/rest/api/media/contentkeypolicies/get). Pour vous procurer la clé, vous devez appeler une méthode d'action distincte afin d'obtenir des informations d'identification ou des secrets ; reportez-vous à l'exemple ci-dessous.
 
 ## <a name="example"></a>Exemple
 

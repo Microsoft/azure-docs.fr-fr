@@ -8,18 +8,18 @@ author: asudbring
 keywords: IPv6, équilibreur de charge azure, double pile, adresse ip publique, ipv6 natif, mobile, iot
 ms.service: load-balancer
 ms.devlang: na
-ms.topic: article
-ms.custom: seodec18
+ms.topic: how-to
+ms.custom: seodec18, devx-track-azurecli
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 06/25/2018
 ms.author: allensu
-ms.openlocfilehash: bff6a7ca6eb1a6859ec25d488f564c66946a780b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 75226f92995794221635ced7ee0e285ac824b6e2
+ms.sourcegitcommit: e2dc549424fb2c10fcbb92b499b960677d67a8dd
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76045412"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94696861"
 ---
 # <a name="create-a-public-load-balancer-with-ipv6-using-azure-cli"></a>Créer un équilibreur de charge public avec IPv6 à l’aide d’Azure CLI
 
@@ -58,7 +58,7 @@ Créez et configurez les objets suivants pour déployer un équilibreur de charg
 
 Dans cet exemple, vous exécutez les outils Azure CLI dans une fenêtre de commande PowerShell. Pour améliorer la lisibilité et la réutilisation, vous utilisez les fonctionnalités de script de PowerShell et non les cmdlets Azure PowerShell.
 
-1. [Installez et configurez l’interface Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest) en suivant les étapes de l’article lié, puis connectez-vous à votre compte Azure.
+1. [Installez et configurez l’interface Azure CLI](/cli/azure/install-azure-cli?view=azure-cli-latest) en suivant les étapes de l’article lié, puis connectez-vous à votre compte Azure.
 
 2. Configurez des variables PowerShell à utiliser avec les commandes Azure CLI :
 
@@ -199,43 +199,45 @@ Cet exemple crée les éléments suivants :
 
     Sortie attendue :
 
-        info:    Executing command network lb show
-        info:    Looking up the load balancer "myIPv4IPv6Lb"
-        data:    Id                              : /subscriptions/########-####-####-####-############/resourceGroups/pscontosorg1southctrlus09152016/providers/Microsoft.Network/loadBalancers/myIPv4IPv6Lb
-        data:    Name                            : myIPv4IPv6Lb
-        data:    Type                            : Microsoft.Network/loadBalancers
-        data:    Location                        : southcentralus
-        data:    Provisioning state              : Succeeded
-        data:
-        data:    Frontend IP configurations:
-        data:    Name             Provisioning state  Private IP allocation  Private IP   Subnet  Public IP
-        data:    ---------------  ------------------  ---------------------  -----------  ------  ---------
-        data:    FrontendVipIPv4  Succeeded           Dynamic                                     myIPv4Vip
-        data:    FrontendVipIPv6  Succeeded           Dynamic                                     myIPv6Vip
-        data:
-        data:    Probes:
-        data:    Name                 Provisioning state  Protocol  Port  Path  Interval  Count
-        data:    -------------------  ------------------  --------  ----  ----  --------  -----
-        data:    ProbeForIPv4AndIPv6  Succeeded           Tcp       80          15        2
-        data:
-        data:    Backend Address Pools:
-        data:    Name             Provisioning state
-        data:    ---------------  ------------------
-        data:    BackendPoolIPv4  Succeeded
-        data:    BackendPoolIPv6  Succeeded
-        data:
-        data:    Load Balancing Rules:
-        data:    Name                  Provisioning state  Load distribution  Protocol  Frontend port  Backend port  Enable floating IP  Idle timeout in minutes
-        data:    --------------------  ------------------  -----------------  --------  -------------  ------------  ------------------  -----------------------
-        data:    LBRuleForIPv4-Port80  Succeeded           Default            Tcp       80             80            false               4
-        data:    LBRuleForIPv6-Port80  Succeeded           Default            Tcp       80             8080          false               4
-        data:
-        data:    Inbound NAT Rules:
-        data:    Name                 Provisioning state  Protocol  Frontend port  Backend port  Enable floating IP  Idle timeout in minutes
-        data:    -------------------  ------------------  --------  -------------  ------------  ------------------  -----------------------
-        data:    NatRule-For-Rdp-VM1  Succeeded           Tcp       3389           3389          false               4
-        data:    NatRule-For-Rdp-VM2  Succeeded           Tcp       3391           3389          false               4
-        info:    network lb show
+    ```output
+    info:    Executing command network lb show
+    info:    Looking up the load balancer "myIPv4IPv6Lb"
+    data:    Id                              : /subscriptions/########-####-####-####-############/resourceGroups/pscontosorg1southctrlus09152016/providers/Microsoft.Network/loadBalancers/myIPv4IPv6Lb
+    data:    Name                            : myIPv4IPv6Lb
+    data:    Type                            : Microsoft.Network/loadBalancers
+    data:    Location                        : southcentralus
+    data:    Provisioning state              : Succeeded
+    data:
+    data:    Frontend IP configurations:
+    data:    Name             Provisioning state  Private IP allocation  Private IP   Subnet  Public IP
+    data:    ---------------  ------------------  ---------------------  -----------  ------  ---------
+    data:    FrontendVipIPv4  Succeeded           Dynamic                                     myIPv4Vip
+    data:    FrontendVipIPv6  Succeeded           Dynamic                                     myIPv6Vip
+    data:
+    data:    Probes:
+    data:    Name                 Provisioning state  Protocol  Port  Path  Interval  Count
+    data:    -------------------  ------------------  --------  ----  ----  --------  -----
+    data:    ProbeForIPv4AndIPv6  Succeeded           Tcp       80          15        2
+    data:
+    data:    Backend Address Pools:
+    data:    Name             Provisioning state
+    data:    ---------------  ------------------
+    data:    BackendPoolIPv4  Succeeded
+    data:    BackendPoolIPv6  Succeeded
+    data:
+    data:    Load Balancing Rules:
+    data:    Name                  Provisioning state  Load distribution  Protocol  Frontend port  Backend port  Enable floating IP  Idle timeout in minutes
+    data:    --------------------  ------------------  -----------------  --------  -------------  ------------  ------------------  -----------------------
+    data:    LBRuleForIPv4-Port80  Succeeded           Default            Tcp       80             80            false               4
+    data:    LBRuleForIPv6-Port80  Succeeded           Default            Tcp       80             8080          false               4
+    data:
+    data:    Inbound NAT Rules:
+    data:    Name                 Provisioning state  Protocol  Frontend port  Backend port  Enable floating IP  Idle timeout in minutes
+    data:    -------------------  ------------------  --------  -------------  ------------  ------------------  -----------------------
+    data:    NatRule-For-Rdp-VM1  Succeeded           Tcp       3389           3389          false               4
+    data:    NatRule-For-Rdp-VM2  Succeeded           Tcp       3391           3389          false               4
+    info:    network lb show
+    ```
 
 ## <a name="create-nics"></a>Créer des cartes réseau
 
@@ -266,7 +268,7 @@ Créez des cartes réseau et associez-les à des règles NAT, des règles d’é
 
 ## <a name="create-the-back-end-vm-resources-and-attach-each-nic"></a>Créer les ressources de machines virtuelles principales et associer chaque carte réseau
 
-Pour créer des machines virtuelles, vous devez disposer d’un compte de stockage. Pour l’équilibrage de charge, les machines virtuelles doivent être membres d’un groupe à haute disponibilité. Pour plus d’informations sur la création des machines virtuelles, consultez [Créer une machine virtuelle Windows avec PowerShell](../virtual-machines/virtual-machines-windows-ps-create.md?toc=%2fazure%2fload-balancer%2ftoc.json).
+Pour créer des machines virtuelles, vous devez disposer d’un compte de stockage. Pour l’équilibrage de charge, les machines virtuelles doivent être membres d’un groupe à haute disponibilité. Pour plus d’informations sur la création des machines virtuelles, consultez [Créer une machine virtuelle Windows avec PowerShell](../virtual-machines/windows/quick-create-powershell.md?toc=%2fazure%2fload-balancer%2ftoc.json).
 
 1. Configurez les variables PowerShell :
 
@@ -282,7 +284,7 @@ Pour créer des machines virtuelles, vous devez disposer d’un compte de stocka
     ```
 
     > [!WARNING]
-    > Cet exemple utilise le nom d’utilisateur et le mot de passe pour les machines virtuelles, en texte en clair. Prenez les mesures nécessaires lorsque vous utilisez ces informations d’identification en texte en clair. Pour découvrir une méthode plus sécurisée de traitement des informations d’identification dans PowerShell, consultez la cmdlet [`Get-Credential`](https://technet.microsoft.com/library/hh849815.aspx).
+    > Cet exemple utilise le nom d’utilisateur et le mot de passe pour les machines virtuelles, en texte en clair. Prenez les mesures nécessaires lorsque vous utilisez ces informations d’identification en texte en clair. Pour découvrir une méthode plus sécurisée de traitement des informations d’identification dans PowerShell, consultez la cmdlet [`Get-Credential`](/powershell/module/microsoft.powershell.security/get-credential).
 
 2. Créez le groupe à haute disponibilité :
 
@@ -297,5 +299,3 @@ Pour créer des machines virtuelles, vous devez disposer d’un compte de stocka
 
     az vm create --resource-group $rgname --name $vm2Name --image $imageurn --admin-username $vmUserName --admin-password $mySecurePassword --nics $nic2Id --location $location --availability-set $availabilitySetName --size "Standard_A1" 
     ```
-
-

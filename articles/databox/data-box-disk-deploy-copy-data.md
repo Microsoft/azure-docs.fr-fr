@@ -1,6 +1,6 @@
 ---
 title: Tutoriel pour copier des données sur Azure Data Box Disk | Microsoft Docs
-description: Utilisez ce didacticiel pour apprendre à copier des données sur votre disque Azure Data Box
+description: Dans ce tutoriel, découvrez comment copier des données de votre ordinateur hôte vers Azure Data Box Disk, puis générer les sommes de contrôle pour vérifier l’intégrité des données.
 services: databox
 author: alkohli
 ms.service: databox
@@ -9,12 +9,12 @@ ms.topic: tutorial
 ms.date: 09/03/2019
 ms.author: alkohli
 ms.localizationpriority: high
-ms.openlocfilehash: 93a7181a3b720a3b313bb75855b2564c4cd33bc1
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: 9186c742f34f1c060b57ffdfbf1bf688607b4c03
+ms.sourcegitcommit: 7dacbf3b9ae0652931762bd5c8192a1a3989e701
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "79214324"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92125335"
 ---
 ::: zone target="docs"
 
@@ -68,7 +68,7 @@ Passez en revue les considérations suivantes avant de commencer la copie des do
 
 Procédez comme suit pour vous connecter et copier des données à partir de votre ordinateur vers le disque Data Box.
 
-1. Affichez le contenu du disque déverrouillé. La liste des dossiers et sous-dossiers précréés sur le disque varie selon les options sélectionnées au moment de la commande Data Box Disk.
+1. Affichez le contenu du disque déverrouillé. La liste des dossiers et sous-dossiers précréés sur le disque varie selon les options sélectionnées au moment de la commande Data Box Disk. S’il n’existe pas de dossier précréé, ne le créez pas, car la copie vers un dossier créé par l’utilisateur ne pourra pas être chargée sur Azure.
 
     |Destination de stockage sélectionnée  |Type de compte de stockage|Type de compte de stockage de préproduction |Dossiers et sous-dossiers  |
     |---------|---------|---------|------------------|
@@ -212,15 +212,15 @@ Vous pouvez exécuter cette procédure facultative lorsque vous utilisez plusieu
 3. Identifiez les données sources à copier. Par exemple, dans ce cas précis :
     - Les données d’objet blob de blocs ci-après ont été identifiées.
 
-         ![Fractionnement des données de copie](media/data-box-disk-deploy-copy-data/split-copy-2.png)    
+         ![Fractionnement des données de copie 2](media/data-box-disk-deploy-copy-data/split-copy-2.png)    
 
     - Les données d’objet blob de pages ci-après ont été identifiées.
 
-         ![Fractionnement des données de copie](media/data-box-disk-deploy-copy-data/split-copy-3.png)
+         ![Fractionnement des données de copie 3](media/data-box-disk-deploy-copy-data/split-copy-3.png)
  
 4. Accédez au dossier dans lequel le logiciel a été extrait. Recherchez le fichier `SampleConfig.json` dans ce dossier. Il s’agit d’un fichier en lecture seule que vous pouvez modifier et enregistrer.
 
-   ![Fractionnement des données de copie](media/data-box-disk-deploy-copy-data/split-copy-4.png)
+   ![Fractionnement des données de copie 4](media/data-box-disk-deploy-copy-data/split-copy-4.png)
  
 5. Modifiez le fichier `SampleConfig.json`.
  
@@ -229,11 +229,11 @@ Vous pouvez exécuter cette procédure facultative lorsque vous utilisez plusieu
    - Entrez les lettres de lecteur correspondant aux disques cibles. Les données sont copiées sur les différents disques à partir du chemin d’accès source.
    - Fournissez un chemin d’accès pour les fichiers journaux. Par défaut, ces fichiers sont envoyés au répertoire dans lequel se trouve le fichier `.exe`.
 
-     ![Fractionnement des données de copie](media/data-box-disk-deploy-copy-data/split-copy-5.png)
+     ![Fractionnement des données de copie 5](media/data-box-disk-deploy-copy-data/split-copy-5.png)
 
 6. Pour valider le format de fichier, accédez à `JSONlint`. Enregistrez le fichier sous le nom `ConfigFile.json`. 
 
-     ![Fractionnement des données de copie](media/data-box-disk-deploy-copy-data/split-copy-6.png)
+     ![Fractionnement des données de copie 6](media/data-box-disk-deploy-copy-data/split-copy-6.png)
  
 7. Ouvrez une fenêtre d’invite de commandes. 
 
@@ -241,24 +241,24 @@ Vous pouvez exécuter cette procédure facultative lorsque vous utilisez plusieu
 
     `DataBoxDiskSplitCopy.exe PrepImport /config:<Your-config-file-name.json>`
 
-     ![Fractionnement des données de copie](media/data-box-disk-deploy-copy-data/split-copy-7.png)
+     ![Fractionnement des données de copie 7](media/data-box-disk-deploy-copy-data/split-copy-7.png)
  
 9. Appuyez sur Entrée pour poursuivre le script.
 
-    ![Fractionnement des données de copie](media/data-box-disk-deploy-copy-data/split-copy-8.png)
+    ![Fractionnement des données de copie 8](media/data-box-disk-deploy-copy-data/split-copy-8.png)
   
 10. Une fois le jeu de données fractionné et copié, le résumé de l’outil Split Copy pour la session de copie vous est présenté. Voici un exemple de sortie obtenue.
 
-    ![Fractionnement des données de copie](media/data-box-disk-deploy-copy-data/split-copy-9.png)
+    ![Fractionnement des données de copie 9](media/data-box-disk-deploy-copy-data/split-copy-9.png)
  
 11. Vérifiez que les données ont été fractionnées entre les disques cibles. 
  
-    ![Fractionner les données de copie](media/data-box-disk-deploy-copy-data/split-copy-10.png)
-    ![Fractionner les données de copie](media/data-box-disk-deploy-copy-data/split-copy-11.png)
+    ![Fractionnement des données de copie 10](media/data-box-disk-deploy-copy-data/split-copy-10.png)
+    ![Fractionnement des données de copie 11](media/data-box-disk-deploy-copy-data/split-copy-11.png)
      
     Si vous examinez de plus près le contenu du lecteur `n:`, vous pouvez constater que deux sous-dossiers ont été créés et correspondent aux données d’objet blob de blocs et d’objet blob de pages.
     
-     ![Fractionnement des données de copie](media/data-box-disk-deploy-copy-data/split-copy-12.png)
+     ![Fractionnement des données de copie 12](media/data-box-disk-deploy-copy-data/split-copy-12.png)
 
 12. Si la session de copie échoue, vous pouvez récupérer et reprendre l’opération en utilisant la commande suivante :
 
@@ -273,7 +273,7 @@ Une fois la copie des données terminée, vous pouvez passer à leur validation.
 
 Si vous n’avez pas utilisé l’outil Split Copy pour copier les données, vous devez les valider. Pour vérifier les données, procédez comme suit.
 
-1. Exécutez le fichier `DataBoxDiskValidation.cmd` pour la validation des sommes de contrôle dans le dossier *DataBoxDiskImport* de votre lecteur.
+1. Exécutez le fichier `DataBoxDiskValidation.cmd` pour la validation des sommes de contrôle dans le dossier *DataBoxDiskImport* de votre lecteur. Cette option est disponible uniquement pour les environnements Windows. Les utilisateurs Linux doivent vérifier que les données sources copiées sur le disque répondent aux [prérequis](./data-box-disk-limits.md).
     
     ![Sortie de l’outil de validation Data Box Disk](media/data-box-disk-deploy-copy-data/data-box-disk-validation-tool-output.png)
 
@@ -335,6 +335,6 @@ Effectuez les étapes suivantes pour vérifier vos données.
 1. Exécutez le fichier `DataBoxDiskValidation.cmd` pour la validation des sommes de contrôle dans le dossier *DataBoxDiskImport* de votre lecteur.
 2. Utilisez l’option 2 pour valider vos fichiers et générer des sommes de contrôle. Selon la taille de vos données, cette étape peut prendre un certain temps. Si des erreurs se produisent pendant la validation et la génération des sommes de contrôle, vous en êtes averti, et un lien d’accès aux journaux d’activité des erreurs vous est également fourni.
 
-    Pour plus d’informations sur la validation de données, consultez [Valider les données](https://docs.microsoft.com/azure/databox/data-box-disk-deploy-copy-data#validate-data). Si des erreurs se produisent lors de la validation, consultez [Résoudre les erreurs de validation](data-box-disk-troubleshoot.md).
+    Pour plus d’informations sur la validation de données, consultez [Valider les données](#validate-data). Si des erreurs se produisent lors de la validation, consultez [Résoudre les erreurs de validation](data-box-disk-troubleshoot.md).
 
 ::: zone-end

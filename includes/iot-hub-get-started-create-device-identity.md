@@ -1,19 +1,19 @@
 ---
-title: Fichier Include
-description: Fichier Include
+title: Fichier include
+description: Fichier include
 services: iot-hub
 author: dominicbetts
 ms.service: iot-hub
 ms.topic: include
 ms.date: 09/07/2018
 ms.author: dobett
-ms.custom: include file
-ms.openlocfilehash: 68260bf8aafbbe5afd46ec7dfb763eb88ee2123e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: include file, devx-track-azurecli
+ms.openlocfilehash: b1a863498603006e37ab98b838ffd426b962d788
+ms.sourcegitcommit: 8c7f47cc301ca07e7901d95b5fb81f08e6577550
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "78893050"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92755946"
 ---
 Dans cette section, vous utilisez Azure CLI pour créer une identité d’appareil pour cet article. Les ID d’appareil respectent la casse.
 

@@ -1,46 +1,48 @@
 ---
 title: Accéder aux journaux d'audit - Azure CLI - Azure Database for MariaDB
 description: Cet article explique comment configurer et consulter les journaux d'audit dans Azure Database for MariaDB à partir d'Azure CLI.
-author: ajlam
-ms.author: andrela
+author: savjani
+ms.author: pariks
 ms.service: mariadb
-ms.topic: conceptual
-ms.date: 4/13/2020
-ms.openlocfilehash: e9716f0fa8e0ae44d614bbb28ed6846105e683d6
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.topic: how-to
+ms.date: 6/24/2020
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: c1d446d8ee2863077ad84c361876758336f5a3cb
+ms.sourcegitcommit: 6ab718e1be2767db2605eeebe974ee9e2c07022b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81384126"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94540958"
 ---
-# <a name="configure-and-access-audit-logs-in-the-azure-cli"></a>Configurer et consulter les journaux d'audit dans Azure CLI
+# <a name="configure-and-access-azure-database-for-maria-db-audit-logs-in-the-azure-cli"></a>Configurer et consulter les journaux d’audit Azure Database pour Maria DB dans l’interface de ligne de commande Azure
 
 Vous pouvez configurer les [journaux d'audit Azure Database for MariaDB](concepts-audit-logs.md) à partir d'Azure CLI.
 
-> [!IMPORTANT]
-> Pour l’instant, la fonctionnalité Journal d’audit n’existe qu’en préversion.
+[!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
-Pour parcourir ce guide pratique, vous avez besoin des éléments suivants :
+Pour suivre ce guide :
 
-- [Serveur Azure Database for MariaDB](quickstart-create-mariadb-server-database-using-azure-portal.md)
+- Vous avez besoin d’un [serveur Azure Database for MariaDB](quickstart-create-mariadb-server-database-using-azure-portal.md).
 
-[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [azure-cli-prepare-your-environment-no-header.md](../../includes/azure-cli-prepare-your-environment-no-header.md)]
 
-> [!IMPORTANT]
-> Ce guide de procédures requiert l’utilisation de la version 2.0 Azure CLI ou version ultérieure. Pour vérifier la version, à l’invite de commande de l’interface Azure CLI, entrez `az --version`. Pour installer ou mettre à niveau Azure CLI, consultez [Installer Azure CLI]( /cli/azure/install-azure-cli).
+- Cet article nécessite la version 2.0 ou ultérieure d’Azure CLI. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée.
 
 ## <a name="configure-audit-logging"></a>Configurer l’enregistrement d’audit
 
+>[!IMPORTANT]
+> Il est recommandé de ne consigner que les types d’événements et les utilisateurs requis à des fins d’audit pour garantir que les performances de votre serveur ne sont pas fortement affectées.
+
 Activez et configurez l'enregistrement d'audit en procédant comme suit : 
 
-1. Activez les journaux d'audit en définissant le paramètre **audit_logs_enabled** sur « ON ». 
+1. Activez les journaux d’audit en définissant le paramètre **audit_logs_enabled** sur « ON ». 
     ```azurecli-interactive
     az mariadb server configuration set --name audit_log_enabled --resource-group myresourcegroup --server mydemoserver --value ON
     ```
 
-1. Sélectionnez les [types d'événements](concepts-audit-logs.md#configure-audit-logging) à enregistrer en mettant à jour le paramètre **audit_log_egitvents**.
+1. Sélectionnez les [types d’événements](concepts-audit-logs.md#configure-audit-logging) à enregistrer en mettant à jour le paramètre **audit_log_events**.
     ```azurecli-interactive
     az mariadb server configuration set --name audit_log_events --resource-group myresourcegroup --server mydemoserver --value "ADMIN,CONNECTION"
     ```

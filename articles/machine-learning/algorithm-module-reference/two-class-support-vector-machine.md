@@ -1,7 +1,7 @@
 ---
 title: 'Machine à vecteurs de support à deux classes : Informations de référence sur les modules'
 titleSuffix: Azure Machine Learning
-description: Découvrez comment utiliser le module **Two-Class Support Vector Machine** (Machine à vecteurs de support à deux classes) dans Azure Machine Learning pour créer un modèle basé sur l’algorithme de machine à vecteurs de support.
+description: Découvrez comment utiliser le module Machine à vecteurs de support à deux classes dans Azure Machine Learning pour créer un classifieur binaire.
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: core
@@ -9,16 +9,16 @@ ms.topic: reference
 author: likebupt
 ms.author: keli19
 ms.date: 04/22/2020
-ms.openlocfilehash: 912d6b80914232d1a2ed2b1fe987ebdf949a1abc
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 46cfdd319fc89e569d165dc2e11303e67c6dd54e
+ms.sourcegitcommit: 7cc10b9c3c12c97a2903d01293e42e442f8ac751
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82136496"
+ms.lasthandoff: 11/06/2020
+ms.locfileid: "93420561"
 ---
 # <a name="two-class-support-vector-machine-module"></a>Module Two-Class Support Vector Machine (Machine à vecteurs de support à deux classes)
 
-Cet article décrit un module dans le concepteur Azure Machine Learning (version préliminaire).
+Cet article décrit un module dans le concepteur Azure Machine Learning.
 
 Utilisez ce module pour créer un modèle basé sur l’algorithme de machine à vecteurs de support. 
 

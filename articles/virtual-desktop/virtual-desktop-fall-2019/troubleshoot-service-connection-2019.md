@@ -1,24 +1,22 @@
 ---
-title: Détecter un problème de connexion au service dans Windows Virtual Desktop – Azure
-description: Comment résoudre des problèmes lorsque vous configurez des connexions à un client dans un environnement de locataire Windows Virtual Desktop.
-services: virtual-desktop
+title: Détecter un problème de connexion au service dans Windows Virtual Desktop (classique) – Azure
+description: Comment résoudre des problèmes lorsque vous configurez des connexions à un client dans un environnement de locataire Windows Virtual Desktop (classique).
 author: Heidilohr
-ms.service: virtual-desktop
 ms.topic: troubleshooting
 ms.date: 05/20/2020
 ms.author: helohr
 manager: lizross
-ms.openlocfilehash: 356506224a0273eeea65f0f901fbc79c338498d2
-ms.sourcegitcommit: 493b27fbfd7917c3823a1e4c313d07331d1b732f
+ms.openlocfilehash: 8a034cb8371972c2c7908cdba4dd491c17d8cc9f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83743598"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88008540"
 ---
-# <a name="windows-virtual-desktop-service-connections"></a>Connexions au service Windows Virtual Desktop
+# <a name="windows-virtual-desktop-classic-service-connections"></a>Connexions au service Windows Virtual Desktop (classique)
 
 >[!IMPORTANT]
->Ce contenu s’applique à la version Automne 2019 qui ne prend pas en charge les objets Azure Resource Manager Windows Virtual Desktop. Si vous essayez de gérer les objets Azure Resource Manager Windows Virtual Desktop introduits dans la mise à jour Printemps 2020, consultez [cet article](../troubleshoot-service-connection.md).
+>Ce contenu s’applique à Windows Virtual Desktop (classique), qui ne prend pas en charge les objets Windows Virtual Desktop Azure Resource Manager. Si vous essayez de gérer des objets Windows Virtual Desktop Azure Resource Manager, consultez [cet article](../troubleshoot-service-connection.md).
 
 Appuyez-vous sur cet article pour résoudre les problèmes liés aux connexions à un client Windows Virtual Desktop.
 

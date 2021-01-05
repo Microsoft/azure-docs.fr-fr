@@ -1,18 +1,18 @@
 ---
 title: Notes pour le support du chinois
 services: cognitive-services
-author: IEvangelist
+author: aahill
 manager: nitinme
 ms.service: cognitive-services
 ms.topic: include
-ms.date: 10/07/2019
-ms.author: dapine
-ms.openlocfilehash: 4af97aa8bc6792f7c9c342b48d757dd558c57861
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 12/29/2020
+ms.author: aahi
+ms.openlocfilehash: e244fe23cb2a5c352c3ab776ee14a26141777465
+ms.sourcegitcommit: 1140ff2b0424633e6e10797f6654359947038b8d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "73500214"
+ms.lasthandoff: 12/30/2020
+ms.locfileid: "97820570"
 ---
 ### <a name="chinese-support-notes"></a>*Notes pour la prise en charge du chinois
 

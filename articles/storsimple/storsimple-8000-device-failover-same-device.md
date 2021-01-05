@@ -1,6 +1,6 @@
 ---
 title: Tutoriel - Basculer un appareil physique StorSimple vers le même appareil
-description: Découvrez comment basculer votre appareil StorSimple vers le même appareil.
+description: Découvrez les étapes requises pour basculer un appareil physique de la gamme StorSimple 8000 vers un autre appareil physique StorSimple en cas d’incident.
 services: storsimple
 documentationcenter: ''
 author: alkohli
@@ -9,17 +9,17 @@ editor: ''
 ms.assetid: ''
 ms.service: storsimple
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 06/23/2017
 ms.author: alkohli
-ms.openlocfilehash: dde01f9b91ff5a04ddb3fcc8d5f0c535278b0539
-ms.sourcegitcommit: 632e7ed5449f85ca502ad216be8ec5dd7cd093cb
+ms.openlocfilehash: 17c116194aa52a82246bcee9114824e8a918ebbd
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/30/2020
-ms.locfileid: "80398073"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96017098"
 ---
 # <a name="fail-over-your-storsimple-physical-device-to-same-device"></a>Basculer votre appareil physique StorSimple vers le même appareil
 

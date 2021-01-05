@@ -1,38 +1,41 @@
 ---
-title: Configurer l’extension NPS pour Azure MFA - Azure Active Directory
-description: Après avoir installé l’extension de serveur NPS, procédez comme suit pour la configuration avancée (liste verte des adresses IP approuvées ou encore remplacement de l’UPN).
+title: Configurer l’extension NPS pour Azure AD MFA - Azure Active Directory
+description: Après avoir installé l’extension NPS, procédez comme suit pour la configuration avancée (par exemple, liste des adresses IP approuvées et remplacement de l’UPN).
 services: multi-factor-authentication
 ms.service: active-directory
 ms.subservice: authentication
 ms.topic: how-to
 ms.date: 07/11/2018
-ms.author: iainfou
-author: iainfoulds
+ms.author: justinha
+author: justinha
 manager: daveba
 ms.reviewer: michmcla
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 34d92af88106151e7efba679c53c5b5bd1c07dcd
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 6d436414393d77c83acc835110f17e55e491dce1
+ms.sourcegitcommit: 2ba6303e1ac24287762caea9cd1603848331dd7a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80653783"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97503487"
 ---
 # <a name="advanced-configuration-options-for-the-nps-extension-for-multi-factor-authentication"></a>Options de configuration avancée de l’extension de serveur NPS pour l’authentification multifacteur
 
-L’extension de serveur NPS (Network Policy Server) étend vos fonctionnalités d’authentification multifacteur Azure informatique à votre infrastructure locale. Cet article suppose que l’extension est déjà installée et que vous souhaitez maintenant savoir comment personnaliser l’extension en fonction de vos propres besoins. 
+L’extension de serveur NPS (Network Policy Server) étend vos fonctionnalités Azure AD Multi-Factor Authentication basées sur le cloud à votre infrastructure locale. Cet article suppose que l’extension est déjà installée et que vous souhaitez maintenant savoir comment personnaliser l’extension en fonction de vos propres besoins.
+
+> [!NOTE]
+> Cet article contient des références au terme *liste verte*, un terme que Microsoft n’utilise plus. Lorsque le terme sera supprimé du logiciel, nous le supprimerons de cet article.
 
 ## <a name="alternate-login-id"></a>ID de connexion de substitution
 
 Étant donné que l’extension de serveur NPS se connecte à vos répertoires locaux et cloud, vous pouvez rencontrer un problème de correspondance entre les noms d’utilisateur principal (UPN) locaux et ceux du cloud. Pour résoudre ce problème, utilisez des ID de connexion de substitution. 
 
-Dans l’extension de serveur NPS, vous pouvez désigner un attribut Active Directory à utiliser à la place de l’UPN pour l’authentification multifacteur Azure. Cela vous permet de protéger vos ressources locales avec la vérification en deux étapes sans modifier vos UPN locaux. 
+Dans l’extension de serveur NPS, vous pouvez désigner un attribut Active Directory à utiliser à la place de l’UPN pour Azure AD Multi-Factor Authentication. Cela vous permet de protéger vos ressources locales avec la vérification en deux étapes sans modifier vos UPN locaux. 
 
 Pour configurer un ID de connexion de substitution, accédez à `HKLM\SOFTWARE\Microsoft\AzureMfa` et modifiez les valeurs de registre suivantes :
 
 | Nom | Type | Valeur par défaut | Description |
 | ---- | ---- | ------------- | ----------- |
-| LDAP_ALTERNATE_LOGINID_ATTRIBUTE | string | Vide | Spécifiez le nom de l’attribut Active Directory que vous souhaitez utiliser au lieu de l’UPN. Cet attribut est utilisé en tant qu’attribut AlternateLoginId. Si cette valeur de registre est définie sur un [attribut Active Directory valide](https://msdn.microsoft.com/library/ms675090.aspx) (par exemple, mail ou displayName), la valeur de l’attribut est utilisée à la place de l’UPN de l’utilisateur pour l’authentification. Si cette valeur de registre est vide ou n’est pas configurée, AlternateLoginId est désactivé et l’UPN de l’utilisateur est utilisé pour l’authentification. |
+| LDAP_ALTERNATE_LOGINID_ATTRIBUTE | string | Vide | Spécifiez le nom de l’attribut Active Directory que vous souhaitez utiliser au lieu de l’UPN. Cet attribut est utilisé en tant qu’attribut AlternateLoginId. Si cette valeur de registre est définie sur un [attribut Active Directory valide](/windows/win32/adschema/attributes-all) (par exemple, mail ou displayName), la valeur de l’attribut est utilisée à la place de l’UPN de l’utilisateur pour l’authentification. Si cette valeur de registre est vide ou n’est pas configurée, AlternateLoginId est désactivé et l’UPN de l’utilisateur est utilisé pour l’authentification. |
 | LDAP_FORCE_GLOBAL_CATALOG | boolean | False | Utilisez cet indicateur pour forcer l’utilisation du catalogue global dans le cadre des recherches LDAP d’AlternateLoginId. Configurez un contrôleur de domaine en tant que catalogue global, ajoutez l’attribut AlternateLoginId dans le catalogue global, puis activez cet indicateur. <br><br> Si LDAP_LOOKUP_FORESTS est configuré (n’est pas vide), **cet indicateur est appliqué comme true**, quelle que soit la valeur du paramètre du registre. Dans ce cas, l’extension de serveur NPS nécessite la configuration du catalogue global avec l’attribut AlternateLoginId pour chaque forêt. |
 | LDAP_LOOKUP_FORESTS | string | Vide | Fournissez une liste séparée par des points-virgules pour les forêts à rechercher. Par exemple, *contoso.com;foobar.com*. Si cette valeur de registre est configurée, l’extension NPS effectue une recherche itérative sur toutes les forêts dans l’ordre dans lequel elles ont été répertoriées, et elle retourne la première valeur AlternateLoginId correcte. Si cette valeur de registre n’est pas configurée, la recherche AlternateLoginId est limitée au domaine actuel.|
 
@@ -55,4 +58,4 @@ Lorsqu’une requête provient d’une adresse IP de la `IP_WHITELIST`, la vér
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-[Résoudre les messages d’erreur liés à l’extension NPS pour Azure Multi-Factor Authentication](howto-mfa-nps-extension-errors.md)
+[Résoudre les messages d'erreur liés à l'extension NPS d'Azure AD Multi-Factor Authentication](howto-mfa-nps-extension-errors.md)

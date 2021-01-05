@@ -1,6 +1,6 @@
 ---
-title: Fichier Include
-description: Fichier Include
+title: Fichier include
+description: Fichier include
 author: robinsh
 ms.service: iot-hub
 services: iot-hub
@@ -9,10 +9,10 @@ ms.date: 11/02/2018
 ms.author: robinsh
 ms.custom: include file
 ms.openlocfilehash: 6f43bbcd83861f7d39de2aa89bbe035c2ff5b809
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "70050446"
 ---
 <!-- This tells how to create a custom shared access policy for your IoT hub and get the connection string for it-->

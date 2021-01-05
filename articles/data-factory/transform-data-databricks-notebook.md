@@ -11,17 +11,17 @@ manager: shwang
 ms.reviewer: maghan
 ms.topic: conceptual
 ms.date: 03/15/2018
-ms.openlocfilehash: 6d3c9f0df0d834ffe75d0b56e3c80a432c27ea38
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 4679d06e877679f0a56ee782b9a43a5a8147d7a5
+ms.sourcegitcommit: e15c0bc8c63ab3b696e9e32999ef0abc694c7c41
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81419015"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97608117"
 ---
 # <a name="transform-data-by-running-a-databricks-notebook"></a>Transformer des données en exécutant un bloc-notes Databricks
 [!INCLUDE[appliesto-adf-asa-md](includes/appliesto-adf-asa-md.md)]
 
-L’activité Azure Databricks Notebook dans un [pipeline Data Factory](concepts-pipelines-activities.md) exécute un bloc-notes Databricks dans votre espace de travail Azure Databricks. Cet article s’appuie sur l’article  [Activités de transformation des données](transform-data.md) , qui présente une vue d’ensemble de la transformation des données et les activités de transformation prises en charge. Azure Databricks est une plateforme gérée pour exécuter Apache Spark.
+L’activité Azure Databricks Notebook dans un [pipeline Data Factory](concepts-pipelines-activities.md) exécute un bloc-notes Databricks dans votre espace de travail Azure Databricks. Cet article s'appuie sur l'article [Activités de transformation des données](transform-data.md) qui présente une vue d'ensemble de la transformation des données et les activités de transformation prises en charge.  Azure Databricks est une plateforme gérée pour exécuter Apache Spark.
 
 ## <a name="databricks-notebook-activity-definition"></a>Définition de l’activité Databricks Notebook
 
@@ -62,10 +62,10 @@ Le tableau suivant décrit les propriétés JSON utilisées dans la définition 
 |name|Nom de l'activité dans le pipeline.|Oui|
 |description|Texte décrivant l’activité.|Non|
 |type|Pour l’activité Databricks Notebook, le type d’activité est DatabricksNotebook.|Oui|
-|linkedServiceName|Nom du service lié Databricks sur lequel s’exécute le bloc-notes Databricks. Pour en savoir plus sur ce service lié, consultez l’article  [Services liés de calcul](compute-linked-services.md) .|Oui|
+|linkedServiceName|Nom du service lié Databricks sur lequel s’exécute le bloc-notes Databricks. Pour en savoir plus sur ce service lié, consultez l’article [Services liés de calcul](compute-linked-services.md).|Oui|
 |notebookPath|Chemin absolu du notebook à exécuter dans l’espace de travail Databricks. Ce chemin doit commencer par une barre oblique.|Oui|
 |baseParameters|Tableau de paires clé-valeur. Des paramètres de base peuvent être utilisés pour chaque exécution d’activité. Si le notebook accepte un paramètre qui n’est pas spécifié, la valeur par défaut du notebook est utilisée. Pour obtenir d’autres paramètres, consultez [Databricks Notebooks](https://docs.databricks.com/api/latest/jobs.html#jobsparampair).|Non|
-|libraries|Liste de bibliothèques à installer sur le cluster qui exécute le travail. Il peut s’agir d’un tableau de \<chaîne, objet>.|Non|
+|libraries|Liste de bibliothèques à installer sur le cluster qui exécute le travail. Il peut s’agir d’un tableau de \<string, object>.|Non|
 
 
 ## <a name="supported-libraries-for-databricks-activities"></a>Bibliothèques prises en charge pour les activités Databricks
@@ -81,7 +81,7 @@ Dans la définition d’activité Databricks ci-dessus, vous précisez ces types
         {
             "egg": "dbfs:/mnt/libraries/library.egg"
         },
-    {
+        {
             "whl": "dbfs:/mnt/libraries/mlflow-0.0.1.dev0-py2-none-any.whl"
         },
         {

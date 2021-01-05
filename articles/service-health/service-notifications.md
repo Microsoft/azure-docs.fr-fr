@@ -1,14 +1,14 @@
 ---
 title: Afficher les notifications Service Health dans le portail Azure
-description: Les notifications Service Health vous permettent de voir les messages relatifs à l’intégrité du service publiés par Microsoft Azure.
+description: Afficher vos notifications Service Health dans le portail Azure. Les notifications Service Health sont publiées par l’infrastructure Azure dans le journal d’activité Azure.
 ms.topic: conceptual
 ms.date: 6/27/2019
-ms.openlocfilehash: 21416edc95d345eb183030a9b0cccb7529305d6d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 615d08b6a04aef9e8ef2033154da8ff8caeebe04
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75748655"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90967766"
 ---
 # <a name="view-service-health-notifications-by-using-the-azure-portal"></a>Afficher les notifications Service Health dans le portail Azure
 
@@ -30,7 +30,7 @@ Pour plus d’informations sur les différentes classes de notifications Service
 
     ![Capture d’écran du journal Suivi de l’activité, avec l’option Alertes sélectionnée](./media/service-notifications/service-health-summary.png)
 
-1. Sélectionnez **+ Ajouter une alerte de journal d’activité** pour configurer une alerte qui vous permettra d’être informé des futures notifications de service. Pour plus d’informations, consultez [Créer des alertes de journal d’activité sur les notifications de service](../azure-monitor/platform/alerts-activity-log-service-notifications.md).
+1. Sélectionnez **+ Ajouter une alerte de journal d’activité** pour configurer une alerte qui vous permettra d’être informé des futures notifications de service. Pour plus d’informations, consultez [Créer des alertes de journal d’activité sur les notifications de service](./alerts-activity-log-service-notifications-portal.md).
 
 ## <a name="next-steps"></a>Étapes suivantes
 

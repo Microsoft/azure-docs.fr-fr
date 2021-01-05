@@ -4,17 +4,17 @@ summary: Découvrez comment utiliser Azure App Configuration, service managé qu
 metadata:
   title: Documentation Azure App Configuration
   description: Découvrez comment utiliser Azure App Configuration, service managé qui permet aux développeurs de centraliser les paramètres de leurs applications et de leurs fonctionnalités de façon simple et sécurisée.
-  author: lisaguthrie
-  ms.author: lcozzens
+  author: AlexandraKemperMS
+  ms.author: alkemper
   ms.service: azure-app-configuration
   ms.topic: landing-page
   ms.date: 02/03/2020
-  ms.openlocfilehash: 29baead8dbb41b004a9ace8576029c9bd8af3290
-  ms.sourcegitcommit: e0330ef620103256d39ca1426f09dd5bb39cd075
+  ms.openlocfilehash: 45b249dbe8e95a063cdeb30c3b7389eb1dcf2001
+  ms.sourcegitcommit: 1756a8a1485c290c46cc40bc869702b8c8454016
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 05/05/2020
-  ms.locfileid: "82790777"
+  ms.lasthandoff: 12/09/2020
+  ms.locfileid: "96929529"
 landingContent:
 - title: À propos d’Azure App Configuration
   linkLists:
@@ -34,6 +34,8 @@ landingContent:
       url: https://channel9.msdn.com/Events/dotnetConf/NET-Conf-2019/B210
     - text: Azure App Configuration sur Cloud Native Show
       url: https://www.youtube.com/watch?v=DJqmA5PcfzE
+    - text: Déploiement de nouvelles fonctionnalités
+      url: https://channel9.msdn.com/Shows/Azure-Friday/How-Azure-App-Configuration-helps-developers-roll-out-new-features?ocid=AID747781&wt.mc_id=azfr-c9-scottha&wt.mc_id=CFID0553
   - linkListType: whats-new
     links:
     - text: Suivre nos annonces
@@ -72,6 +74,8 @@ landingContent:
       url: enable-dynamic-configuration-dotnet.md
     - text: Utiliser une configuration dynamique dans Azure Functions
       url: enable-dynamic-configuration-azure-functions-csharp.md
+    - text: Utiliser une configuration dynamique dans Spring Boot
+      url: enable-dynamic-configuration-java-spring-app.md
   - linkListType: tutorial
     links:
     - text: Intégrer avec un pipeline CI/CD
@@ -111,9 +115,9 @@ landingContent:
   - linkListType: reference
     links:
     - text: Bibliothèque .NET Core
-      url: https://go.microsoft.com/fwlink/?linkid=2091700
+      url: /dotnet/api/microsoft.featuremanagement
     - text: Bibliothèque de filtres .NET Core
-      url: https://go.microsoft.com/fwlink/?linkid=2091601
+      url: /dotnet/api/microsoft.featuremanagement.featurefilters
 - title: Exemples et kits SDK de configuration
   linkLists:
   - linkListType: sample
@@ -123,15 +127,15 @@ landingContent:
   - linkListType: reference
     links:
     - text: Azure CLI
-      url: https://docs.microsoft.com/cli/azure/appconfig?view=azure-cli-latest
+      url: /cli/azure/appconfig?view=azure-cli-latest
+    - text: PowerShell
+      url: /powershell/module/az.appconfiguration/
+    - text: Terraform
+      url: https://www.terraform.io/docs/providers/azurerm/r/app_configuration.html
     - text: Fournisseur .NET Core
-      url: https://go.microsoft.com/fwlink/?linkid=2074664
-    - text: Générateur .NET Framework
-      url: https://go.microsoft.com/fwlink/?linkid=2074663
-    - text: Kit SDK Azure pour .NET
-      url: https://go.microsoft.com/fwlink/?linkid=2092056
+      url: /dotnet/api/Microsoft.Extensions.Configuration.AzureAppConfiguration
     - text: Fournisseur Spring Boot
-      url: https://go.microsoft.com/fwlink/?linkid=2074659
+      url: https://github.com/microsoft/spring-cloud-azure/tree/master/
     - text: Kit SDK Azure pour Java
       url: https://go.microsoft.com/fwlink/?linkid=2098196
     - text: Kit SDK Azure pour Python
@@ -139,4 +143,4 @@ landingContent:
     - text: Kit SDK Azure pour JavaScript
       url: https://go.microsoft.com/fwlink/?linkid=2103664
     - text: REST
-      url: https://go.microsoft.com/fwlink/?linkid=2078296
+      url: rest-api.md

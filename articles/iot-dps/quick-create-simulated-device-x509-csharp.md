@@ -1,5 +1,5 @@
 ---
-title: Provisionner un appareil X.509 simulé auprès d’Azure IoT Hub à l’aide de C#
+title: 'Démarrage rapide : Provisionner un appareil X.509 simulé auprès d’Azure IoT Hub à l’aide de C#'
 description: 'Démarrage rapide : Créer et provisionner un appareil X.509 simulé auprès du service Azure IoT Hub Device Provisioning (DPS) à l’aide du SDK d’appareil C#. Ce démarrage rapide utilise des inscriptions individuelles.'
 author: wesmc7777
 ms.author: wesmc
@@ -9,12 +9,12 @@ ms.service: iot-dps
 services: iot-dps
 ms.devlang: csharp
 ms.custom: mvc
-ms.openlocfilehash: 639ab07113a0e62cac43af5b79f052da1efd93ab
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: 27bb1c97fa082f15642ab9eff6b0bdba357068a2
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "74976517"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "91323972"
 ---
 # <a name="quickstart-create-and-provision-a-simulated-x509-device-using-c-device-sdk-for-iot-hub-device-provisioning-service"></a>Démarrage rapide : Créer et approvisionner un appareil X.509 simulé auprès du service IoT Hub Device Provisioning à l’aide du C# Device SDK
 
@@ -22,7 +22,7 @@ ms.locfileid: "74976517"
 
 Ces étapes expliquent comment utiliser les [échantillons Azure IoT pour C#](https://github.com/Azure-Samples/azure-iot-samples-csharp) afin de simuler un appareil X.509 sur une machine de développement exécutant le système d'exploitation Windows. L'échantillon connecte également l'appareil simulé à un IoT Hub à l'aide de l'instance de Device Provisioning Service.
 
-Si vous ne connaissez pas le processus d’approvisionnement automatique, pensez à consulter également l’article [Concepts de provisionnement automatique](concepts-auto-provisioning.md). Vérifiez également que vous avez suivi la procédure décrite dans [Configurer le service d’approvisionnement d’appareil IoT Hub avec le portail Azure](./quick-setup-auto-provision.md) avant de continuer. 
+Si vous ne connaissez pas le processus de provisionnement automatique, veuillez consulter la vue d’ensemble de l’[approvisionnement](about-iot-dps.md#provisioning-process). Vérifiez également que vous avez suivi la procédure décrite dans [Configurer le service d’approvisionnement d’appareil IoT Hub avec le portail Azure](./quick-setup-auto-provision.md) avant de continuer. 
 
 Le service Azure IoT Device Provisioning prend en charge deux types d’inscriptions :
 - [Groupes d’inscription](concepts-service.md#enrollment-group) : utilisés pour inscrire plusieurs appareils connexes.

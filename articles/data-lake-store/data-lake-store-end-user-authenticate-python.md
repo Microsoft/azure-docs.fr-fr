@@ -3,16 +3,16 @@ title: Authentification des utilisateurs finaux – Python avec Data Lake S
 description: Découvrez comment authentifier les utilisateurs finaux auprès de Data Lake Storage Gen1 à l’aide d’Azure Active Directory et de Python
 author: twooley
 ms.service: data-lake-store
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 05/29/2018
 ms.author: twooley
-ms.custom: has-adal-ref
-ms.openlocfilehash: 6d95e8bae428741c82de270507e41b49d23a3793
-ms.sourcegitcommit: 366e95d58d5311ca4b62e6d0b2b47549e06a0d6d
+ms.custom: has-adal-ref, devx-track-python
+ms.openlocfilehash: c7ee58dec4e8bc04eb07695378e0d4dc973b6705
+ms.sourcegitcommit: ae6e7057a00d95ed7b828fc8846e3a6281859d40
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82691792"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92109083"
 ---
 # <a name="end-user-authentication-with-azure-data-lake-storage-gen1-using-python"></a>Authentification des utilisateurs finaux auprès d’Azure Data Lake Storage Gen1 à l’aide de Python
 > [!div class="op_single_selector"]
@@ -44,11 +44,11 @@ Pour utiliser Data Lake Storage Gen1 avec Python, vous devez installer trois mod
 
 * Le module `azure-mgmt-resource`, qui inclut des modules Azure pour Active Directory, etc.
 * Le module `azure-mgmt-datalake-store`, qui inclut les opérations de gestion du compte Azure Data Lake Storage Gen1. Pour plus d’informations sur ce module, consultez les [informations de référence sur les modules de gestion Azure Data Lake Storage Gen1](/python/api/azure-mgmt-datalake-store/).
-* Le module `azure-datalake-store`, qui inclut les opérations de gestion du système de fichiers Azure Data Lake Storage Gen1. Pour plus d’informations sur ce module, consultez les [informations de référence sur les modules du système de fichiers azure-datalake-store](https://docs.microsoft.com/python/api/azure-datalake-store/azure.datalake.store.core/).
+* Le module `azure-datalake-store`, qui inclut les opérations de gestion du système de fichiers Azure Data Lake Storage Gen1. Pour plus d’informations sur ce module, consultez les [informations de référence sur les modules du système de fichiers azure-datalake-store](/python/api/azure-datalake-store/azure.datalake.store.core/).
 
 Utilisez les commandes suivantes pour installer les modules.
 
-```
+```console
 pip install azure-mgmt-resource
 pip install azure-mgmt-datalake-store
 pip install azure-datalake-store
@@ -88,24 +88,28 @@ pip install azure-datalake-store
 
 Utilisez l’extrait de code suivant pour l’authentification auprès d’Azure AD dans le cas d’opérations de gestion d’un compte Data Lake Storage Gen1. L’extrait de code suivant peut être utilisé pour authentifier votre application à l’aide de l’authentification multifacteur. Indiquez les valeurs ci-dessous pour une application **native** Azure AD déjà présente.
 
-    authority_host_url = "https://login.microsoftonline.com"
-    tenant = "FILL-IN-HERE"
-    authority_url = authority_host_url + '/' + tenant
-    client_id = 'FILL-IN-HERE'
-    redirect = 'urn:ietf:wg:oauth:2.0:oob'
-    RESOURCE = 'https://management.core.windows.net/'
+```python
+authority_host_url = "https://login.microsoftonline.com"
+tenant = "FILL-IN-HERE"
+authority_url = authority_host_url + '/' + tenant
+client_id = 'FILL-IN-HERE'
+redirect = 'urn:ietf:wg:oauth:2.0:oob'
+RESOURCE = 'https://management.core.windows.net/'
 
-    context = adal.AuthenticationContext(authority_url)
-    code = context.acquire_user_code(RESOURCE, client_id)
-    print(code['message'])
-    mgmt_token = context.acquire_token_with_device_code(RESOURCE, code, client_id)
-    armCreds = AADTokenCredentials(mgmt_token, client_id, resource = RESOURCE)
+context = adal.AuthenticationContext(authority_url)
+code = context.acquire_user_code(RESOURCE, client_id)
+print(code['message'])
+mgmt_token = context.acquire_token_with_device_code(RESOURCE, code, client_id)
+armCreds = AADTokenCredentials(mgmt_token, client_id, resource = RESOURCE)
+```
 
 ### <a name="for-filesystem-operations"></a>Pour les opérations du système de fichiers
 
 Utilisez cet extrait de code pour l’authentification auprès d’Azure AD dans le cas d’opérations de gestion du système de fichiers sur un compte Data Lake Storage Gen1. L’extrait de code suivant peut être utilisé pour authentifier votre application à l’aide de l’authentification multifacteur. Indiquez les valeurs ci-dessous pour une application **native** Azure AD déjà présente.
 
-    adlCreds = lib.auth(tenant_id='FILL-IN-HERE', resource = 'https://datalake.azure.net/')
+```console
+adlCreds = lib.auth(tenant_id='FILL-IN-HERE', resource = 'https://datalake.azure.net/')
+```
 
 ## <a name="end-user-authentication-without-multi-factor-authentication"></a>Authentification des utilisateurs finals sans authentification multifacteur
 

@@ -7,16 +7,16 @@ author: msmimart
 manager: celestedg
 ms.service: active-directory
 ms.workload: identity
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 07/31/2019
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: 5daf88e746ea803f345c79bd31d656f2615b6754
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c362ce256259606c85af0a7e13ccde1715bb012b
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78184092"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94953931"
 ---
 # <a name="migrate-an-owin-based-web-api-to-b2clogincom"></a>Migrer une API web OWIN vers b2clogin.com
 
@@ -88,7 +88,7 @@ git clone https://github.com/Azure-Samples/active-directory-b2c-dotnet-webapp-an
 Dans cette section, vous allez mettre à jour le code pour spécifier que les deux points de terminaison de l’émetteur du jeton sont valides.
 
 1. Ouvrez la solution **B2C-WebAPI-DotNet.sln** dans Visual Studio
-1. Dans le projet **TaskService**, ouvrez le fichier *TaskService\\App_Start\\ **Startup.Auth.cs**.* dans votre éditeur
+1. Dans le projet **TaskService**, ouvrez le fichier *TaskService\\App_Start\\**Startup.Auth.cs** _ dans votre éditeur.
 1. Ajoutez la directive `using` suivante en haut du fichier :
 
     `using System.Collections.Generic;`
@@ -107,7 +107,7 @@ Dans cette section, vous allez mettre à jour le code pour spécifier que les de
     };
     ```
 
-`TokenValidationParameters` est fourni par MSAL.net et est utilisé par l’intergiciel OWIN dans la section de code suivante dans *Startup.auth.cs*. Lorsque plusieurs émetteurs valides sont spécifiés, le pipeline d’application OWIN est conscient que les deux points de terminaison de jeton sont des émetteurs valides.
+`TokenValidationParameters` est fourni par MSAL.net et est utilisé par l’intergiciel OWIN dans la section de code suivante dans _Startup.auth.cs*. Lorsque plusieurs émetteurs valides sont spécifiés, le pipeline d’application OWIN est conscient que les deux points de terminaison de jeton sont des émetteurs valides.
 
 ```csharp
 app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions
@@ -123,7 +123,7 @@ Comme mentionné précédemment, d’autres bibliothèques OWIN fournissent gén
 
 Maintenant que les deux URI sont pris en charge par votre API Web, vous devez mettre à jour votre application Web afin qu’elle récupère les jetons à partir du point de terminaison b2clogin.com.
 
-Par exemple, vous pouvez configurer l’exemple d’application Web pour utiliser le nouveau point de terminaison en modifiant la valeur `ida:AadInstance` dans le fichier *TaskWebApp\\**Web.config**.* du projet **TaskWebApp**.
+Par exemple, vous pouvez configurer l’exemple d’application Web pour utiliser le nouveau point de terminaison en modifiant la valeur `ida:AadInstance` dans le fichier *TaskWebApp\\**Web.config** _ du projet _* TaskWebApp**.
 
 Modifiez la valeur `ida:AadInstance` dans le fichier *Web.config* de TaskWebApp afin qu’elle fasse référence à `{your-b2c-tenant-name}.b2clogin.com` à la place de `login.microsoftonline.com`.
 
@@ -154,6 +154,6 @@ Pour plus d’informations sur les différents types de jetons de sécurité ém
 [sample-repo]: https://github.com/Azure-Samples/active-directory-b2c-dotnet-webapp-and-webapi
 
 <!-- LINKS - Internal -->
-[katana]: https://docs.microsoft.com/aspnet/aspnet/overview/owin-and-katana/
-[validissuers]: https://docs.microsoft.com/dotnet/api/microsoft.identitymodel.tokens.tokenvalidationparameters.validissuers
-[tokenvalidationparameters]: https://docs.microsoft.com/dotnet/api/microsoft.identitymodel.tokens.tokenvalidationparameters
+[katana]: /aspnet/aspnet/overview/owin-and-katana/
+[validissuers]: /dotnet/api/microsoft.identitymodel.tokens.tokenvalidationparameters.validissuers
+[tokenvalidationparameters]: /dotnet/api/microsoft.identitymodel.tokens.tokenvalidationparameters

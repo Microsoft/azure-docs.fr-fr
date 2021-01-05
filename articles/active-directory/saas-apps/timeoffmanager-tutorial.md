@@ -2,26 +2,21 @@
 title: 'Tutoriel : Intégration de l’authentification unique Azure Active Directory à TimeOffManager | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et TimeOffManager.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: 3685912f-d5aa-4730-ab58-35a088fc1cc3
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 12/10/2019
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: 06aa2ddf3e7168147ec091ef6fb9826025f23364
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 849236b9ac33cec92cc145bb32b4271b73476057
+ms.sourcegitcommit: e15c0bc8c63ab3b696e9e32999ef0abc694c7c41
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "75561811"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97608814"
 ---
 # <a name="tutorial-azure-active-directory-single-sign-on-sso-integration-with-timeoffmanager"></a>Tutoriel : Intégration de l’authentification unique Azure Active Directory à TimeOffManager
 
@@ -31,7 +26,7 @@ Dans ce tutoriel, vous allez découvrir comment intégrer TimeOffManager à Azur
 * Permettre à vos utilisateurs de se connecter automatiquement à TimeOffManager avec leur compte Azure AD.
 * Gérer vos comptes à un emplacement central : le Portail Azure.
 
-Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS à Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -151,11 +146,11 @@ Dans cette section, vous allez autoriser B.Simon à utiliser l’authentificatio
 
 2. Accédez à **Account \> Account Options \> Single Sign-On Settings**.
    
-    ![Paramètres d’authentification unique](./media/timeoffmanager-tutorial/ic795917.png "Paramètres d’authentification unique")
+    ![Capture d’écran montrant Single Sign-On Settings sélectionné dans Account Options.](./media/timeoffmanager-tutorial/ic795917.png "Paramètres d’authentification unique")
 
 3. Dans la section **Single Sign-On Settings** , procédez comme suit :
    
-    ![Paramètres d’authentification unique](./media/timeoffmanager-tutorial/ic795918.png "Paramètres d’authentification unique")
+    ![Capture d’écran montrant la section Single Sign-On où vous pouvez entrer les valeurs décrites.](./media/timeoffmanager-tutorial/ic795918.png "Paramètres d’authentification unique")
    
     a. Ouvrez votre certificat codé en base 64 dans le bloc-notes, copiez son contenu dans le Presse-papiers et collez-le dans la zone de texte **X.509 Certificate** .
    
@@ -173,7 +168,7 @@ Dans cette section, vous allez autoriser B.Simon à utiliser l’authentificatio
 
 4. Dans la page **Single Sign on settings**, copiez la valeur **Assertion Consumer Service URL** et collez-la dans la zone de texte **URL de réponse** de la section **Configuration SAML de base** dans le portail Azure. 
 
-      ![Paramètres d’authentification unique](./media/timeoffmanager-tutorial/ic795915.png "Paramètres d’authentification unique")
+    ![Capture d’écran montrant le lien Assertion Consumer Service URL.](./media/timeoffmanager-tutorial/ic795915.png "Paramètres d’authentification unique")
 
 ### <a name="create-timeoffmanager-test-user"></a>Créer un utilisateur de test TimeOffManager
 
@@ -186,15 +181,14 @@ Dans cette section, un utilisateur appelé Britta Simon est créé dans TimeOffM
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Quand vous cliquez sur la vignette TimeOffManager dans le volet d’accès, vous devez être connecté automatiquement à l’application TimeOffManager pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Quand vous cliquez sur la vignette TimeOffManager dans le volet d’accès, vous devez être connecté automatiquement à l’application TimeOffManager pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de tutoriels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de tutoriels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)
 
 - [Essayer TimeOffManager avec Azure AD](https://aad.portal.azure.com/)
-

@@ -5,12 +5,12 @@ author: sideeksh
 manager: rochakm
 ms.topic: how-to
 ms.date: 11/27/2018
-ms.openlocfilehash: 0b32f00374aa8ce6c41415e28f319e3e7d5abddb
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: dfa3c108d00aeba9c7d42e96e7a40736a087a508
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75941589"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86133814"
 ---
 # <a name="set-up-disaster-recovery-for-a-multitier-dynamics-ax-application"></a>Configurer la reprise d’activité pour une application Dynamics AX multiniveau   
 
@@ -69,7 +69,7 @@ Le client dispose d’un grand nombre d’applications, exécute une forêt Acti
 Pour obtenir des conseils techniques sur l’option recommandée pour la protection de la couche SQL, consultez [Répliquer des applications avec SQL Server et Azure Site Recovery](site-recovery-sql.md).
 
 ### <a name="3-enable-protection-for-the-dynamics-ax-client-and-application-object-server-vms"></a>3. Activer la protection du client Dynamics AX et des machines virtuelles du serveur d’objets d’application
-Effectuez la configuration Site Recovery appropriée selon que les machines virtuelles sont déployées sur [Hyper-V](site-recovery-hyper-v-site-to-azure.md) ou sur [VMware](site-recovery-vmware-to-azure.md).
+Effectuez la configuration Site Recovery appropriée selon que les machines virtuelles sont déployées sur [Hyper-V](./hyper-v-azure-tutorial.md) ou sur [VMware](./vmware-azure-tutorial.md).
 
 > [!TIP]
 > Il est conseillé de définir la fréquence de cohérence en cas d’incident sur 15 minutes.
@@ -176,7 +176,7 @@ Pour plus d’informations sur SQL Server pendant une restauration automatique, 
 6. Sélectionnez la coche **✓** pour démarrer le processus de basculement.
 
 
-Pour plus d’informations sur le processus de restauration automatique, consultez [Restaurer automatiquement des machines virtuelles VMware d’Azure vers un site local](site-recovery-failback-azure-to-vmware.md).
+Pour plus d’informations sur le processus de restauration automatique, consultez [Restaurer automatiquement des machines virtuelles VMware d’Azure vers un site local](./vmware-azure-failback.md).
 
 ## <a name="summary"></a>Résumé
 À l’aide de Site Recovery, vous pouvez créer un plan de récupération d’urgence automatisée complet pour votre application Dynamics AX. En cas d’interruption du service, vous pouvez démarrer le basculement en quelques secondes, où que vous soyez, et bénéficier d’une application opérationnelle en quelques minutes.

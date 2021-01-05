@@ -11,12 +11,12 @@ ms.topic: reference
 ms.date: 02/03/2020
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: afdf2f531ede30d868123d89cac94fcfae070384
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 52831a1907d5ca8d13b0477c909d0d0358873973
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78188543"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85202218"
 ---
 # <a name="general-claims-transformations"></a>Transformations de revendications générales
 
@@ -35,7 +35,7 @@ Copie la valeur d’une revendication dans une autre. Les deux revendications do
 
 Utilisez cette transformation de revendications pour copier la valeur d’une revendication de chaîne ou numérique dans une autre revendication. L’exemple suivant copie la valeur de revendication externalEmail dans la revendication d’e-mail.
 
-```XML
+```xml
 <ClaimsTransformation Id="CopyEmailAddress" TransformationMethod="CopyClaim">
   <InputClaims>
     <InputClaim ClaimTypeReferenceId="externalEmail" TransformationClaimType="inputClaim"/>
@@ -64,7 +64,7 @@ Vérifie si l’**inputClaim** existe, et définit **outputClaim** sur true ou f
 
 Utilisez cette transformation de revendication pour vérifier si une revendication existe ou si elle contient une valeur quelconque. La valeur de retour est une valeur booléenne qui indique si la revendication existe. L’exemple suivant vérifie si l’adresse e-mail existe.
 
-```XML
+```xml
 <ClaimsTransformation Id="CheckIfEmailPresent" TransformationMethod="DoesClaimExist">
   <InputClaims>
     <InputClaim ClaimTypeReferenceId="email" TransformationClaimType="inputClaim" />
@@ -93,7 +93,7 @@ Hache le texte brut fourni à l’aide de la valeur salt et d’un secret. L’a
 | InputParameter | randomizerSecret | string | Pointe vers une **clé de stratégie** Azure AD B2C existante. Pour créer une clé de stratégie : Dans votre locataire Azure AD B2C, sous **Gérer**, sélectionnez **Identity Experience Framework**. Sélectionnez **Clés de stratégie** pour afficher les clés qui sont disponibles dans votre locataire. Sélectionnez **Ajouter**. Pour **Options**, sélectionnez **Manuel**. Fournissez un nom (il est possible que le préfixe *B2C_1A_* soit ajouté automatiquement). Dans la zone de texte **Secret**, entrez un secret à utiliser, tel que 1234567890. Pour **Utilisation de la clé**, sélectionnez **Signature**. Sélectionnez **Create** (Créer). |
 | OutputClaim | Hachage | string | ClaimType généré après que cette transformation de revendication a été appelée. Revendication configurée dans l’inputClaim `plaintext`. |
 
-```XML
+```xml
 <ClaimsTransformation Id="HashPasswordWithEmail" TransformationMethod="Hash">
   <InputClaims>
     <InputClaim ClaimTypeReferenceId="password" TransformationClaimType="plaintext" />

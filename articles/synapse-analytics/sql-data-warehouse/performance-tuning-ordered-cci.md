@@ -1,32 +1,32 @@
 ---
 title: Réglage des performances avec un index columstore cluster ordonné
-description: Recommandations et points à prendre en compte quand vous utilisez un index columnstore cluster ordonné pour améliorer les performances de vos requêtes.
+description: Recommandations et points à prendre en compte quand vous utilisez un index columnstore cluster ordonné pour améliorer les performances de vos requêtes dans les pools SQL dédiés.
 services: synapse-analytics
 author: XiaoyuMSFT
 manager: craigg
 ms.service: synapse-analytics
 ms.topic: conceptual
-ms.subservice: ''
+ms.subservice: sql-dw
 ms.date: 09/05/2019
 ms.author: xiaoyul
 ms.reviewer: nibruno; jrasnick
 ms.custom: seo-lt-2019, azure-synapse
-ms.openlocfilehash: 088a0d10b96a30ef830b4e8a8dc12c19127141db
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.openlocfilehash: afb6efcee2ad4f5cf25a411eed353ff2fc27d75c
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81417038"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96460788"
 ---
 # <a name="performance-tuning-with-ordered-clustered-columnstore-index"></a>Réglage des performances avec un index columstore cluster ordonné  
 
-Quand des utilisateurs interrogent une table columnstore dans le pool SQL Synapse, l’optimiseur vérifie les valeurs minimales et maximales stockées dans chaque segment.  Les segments en dehors des limites du prédicat de la requête ne sont pas lus à partir du disque vers la mémoire.  Une requête peut voir ses performances accélérer si le nombre de segments à lire et leur taille totale sont petits.   
+Lorsque des utilisateurs interrogent une table columnstore dans le pool SQL dédié, l’optimiseur vérifie les valeurs minimales et maximales stockées dans chaque segment.  Les segments en dehors des limites du prédicat de la requête ne sont pas lus à partir du disque vers la mémoire.  Une requête peut voir ses performances accélérer si le nombre de segments à lire et leur taille totale sont petits.   
 
 ## <a name="ordered-vs-non-ordered-clustered-columnstore-index"></a>Index columnstore cluster ordonné et non ordonné
 
 Par défaut, pour chaque table créée sans option d’index, un composant interne (générateur d’index) crée un index columnstore cluster non ordonné dessus.  Les données incluses dans chaque colonne sont compressées dans un segment de rowgroup distinct de l’index columnstore cluster.  Des métadonnées existent sur la plage de valeurs de chaque segment, si bien que les segments qui se trouvent en dehors des limites du prédicat de la requête ne sont pas lus à partir du disque pendant l’exécution de la requête.  Un index columnstore cluster offre le niveau de compression de données le plus élevé et réduit la taille des segments à lire si bien que les requêtes peuvent s’exécuter plus rapidement. En revanche, étant donné que le générateur d’index ne trie pas les données avant de les compresser dans des segments, les segments peuvent avoir des plages de valeurs qui se chevauchent, ce qui oblige les requêtes à lire plus de segments à partir du disque et prolongent donc leur durée d’exécution.  
 
-Lors de la création d’un index columnstore cluster ordonné, le moteur SQL Synapse trie les données existantes en mémoire sur la ou les clés d’ordre avant que le générateur d’index ne les compresse dans des segments d’index.  Avec les données triées, le chevauchement de segments est réduit, ce qui permet aux requêtes d’éliminer plus efficacement des segments et donc d’accélérer leurs performances, car le nombre de segments à lire à partir du disque est plus petit.  Si toutes les données peuvent être triées en mémoire simultanément, le chevauchement de segments peut être évité.  En raison des tables volumineuses dans les entrepôts de données, ce scénario ne se produit pas souvent.  
+Lors de la création d’un index columnstore cluster ordonné, le moteur du pool SQL dédié trie les données existantes en mémoire sur la ou les clés d’ordre avant que le générateur d’index ne les compresse dans des segments d’index.  Avec les données triées, le chevauchement de segments est réduit, ce qui permet aux requêtes d’éliminer plus efficacement des segments et donc d’accélérer leurs performances, car le nombre de segments à lire à partir du disque est plus petit.  Si toutes les données peuvent être triées en mémoire simultanément, le chevauchement de segments peut être évité.  En raison des tables volumineuses dans les entrepôts de données, ce scénario ne se produit pas souvent.  
 
 Pour vérifier les plages de segments d’une colonne, exécutez la commande suivante avec le nom de la table et le nom de la colonne :
 
@@ -50,7 +50,7 @@ ORDER BY o.name, pnp.distribution_id, cls.min_data_id
 ```
 
 > [!NOTE] 
-> Dans une table avec index columnstore cluster ordonnée, les nouvelles données résultant du même lot d’opérations DML ou de chargement de données sont triées dans ce lot : il n’y a pas de tri global de toutes les données de la table.  Les utilisateurs peuvent reconstruire l’index columnstore cluster ordonné pour trier toutes les données de la table.  Dans SQL Synapse, la reconstruction (REBUILD) de l’index columnstore est une opération hors connexion.  Pour une table partitionnée, la reconstruction est effectuée une partition à la fois.  Les données de la partition en cours de reconstruction sont « hors connexion » et ne sont pas disponibles tant que la reconstruction n’est pas terminée pour cette partition. 
+> Dans une table avec index columnstore cluster ordonnée, les nouvelles données résultant du même lot d’opérations DML ou de chargement de données sont triées dans ce lot : il n’y a pas de tri global de toutes les données de la table.  Les utilisateurs peuvent reconstruire l’index columnstore cluster ordonné pour trier toutes les données de la table.  Dans un pool SQL dédié, la reconstruction (REBUILD) de l’index columnstore est une opération hors connexion.  Pour une table partitionnée, la reconstruction est effectuée une partition à la fois.  Les données de la partition en cours de reconstruction sont « hors connexion » et ne sont pas disponibles tant que la reconstruction n’est pas terminée pour cette partition. 
 
 ## <a name="query-performance"></a>Performances des requêtes
 
@@ -95,7 +95,7 @@ Les performances du chargement des données dans une table à index columnstore 
 
 Voici un exemple de comparaison des performances du chargement des données dans des tables avec des schémas différents.
 
-![Performance_comparison_data_loading](./media/performance-tuning-ordered-cci/cci-data-loading-performance.png)
+![Graphique en barres montrant la comparaison des performances du chargement des données dans des tables avec des schémas différents.](./media/performance-tuning-ordered-cci/cci-data-loading-performance.png)
 
 
 Voici un exemple de comparaison des performances de requête entre index columnstore cluster et index columnstore cluster ordonné.

@@ -3,12 +3,12 @@ title: Planifier un déploiement de cluster Azure Service Fabric
 description: Découvrez-en plus sur la planification et la préparation d'un déploiement de cluster de production Service Fabric sur Azure.
 ms.topic: conceptual
 ms.date: 03/20/2019
-ms.openlocfilehash: ad6a7a6ea9a90bea4a3b6bc553da67a46144dc03
-ms.sourcegitcommit: 7581df526837b1484de136cf6ae1560c21bf7e73
+ms.openlocfilehash: 9de59811397eb47809c6d71f608e43beae5bfadb
+ms.sourcegitcommit: 6172a6ae13d7062a0a5e00ff411fd363b5c38597
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/31/2020
-ms.locfileid: "80422281"
+ms.lasthandoff: 12/11/2020
+ms.locfileid: "97109621"
 ---
 # <a name="plan-and-prepare-for-a-cluster-deployment"></a>Planifier et préparer un déploiement de cluster
 
@@ -28,7 +28,7 @@ Pour un déploiement de production, la planification de la capacité est une ét
 * Caractéristiques de fiabilité et de durabilité du cluster
 
 ### <a name="select-the-initial-number-of-node-types"></a>Sélectionner le nombre initial de types de nœuds
-Vous devez d’abord déterminer l’utilisation du cluster que vous créez. Quels types d’applications planifiez-vous de déployer dans ce cluster ? Votre application inclut-elle plusieurs services ? Si oui, ces services doivent-ils être publics ou accessibles sur Internet ? Vos services (qui composent votre application) ont-ils des besoins d’infrastructure différents tels qu’une RAM plus volumineuse ou des cycles processeur plus élevés ? Un cluster Service Fabric peut être constitué de plusieurs types de nœuds : un type de nœud principal et un ou plusieurs types de nœuds non principaux. Chaque type de nœud est mappé à un groupe de machines virtuelles identiques. Chaque type de nœud peut ensuite faire l’objet d’une montée ou descente en puissance de manière indépendante, avoir différents jeux de ports ouverts et présenter différentes métriques de capacité. Des [propriétés de nœud et contraintes de placement][placementconstraints] peuvent être configurées pour limiter des services spécifiques à des types de nœuds spécifiques.  Pour plus d'informations, consultez [Nombre de types de nœuds avec lesquels votre cluster doit démarrer](service-fabric-cluster-capacity.md#the-number-of-node-types-your-cluster-needs-to-start-out-with).
+Vous devez d’abord déterminer l’utilisation du cluster que vous créez. Quels types d’applications planifiez-vous de déployer dans ce cluster ? Votre application inclut-elle plusieurs services ? Si oui, ces services doivent-ils être publics ou accessibles sur Internet ? Vos services (qui composent votre application) ont-ils des besoins d’infrastructure différents tels qu’une RAM plus volumineuse ou des cycles processeur plus élevés ? Un cluster Service Fabric peut être constitué de plusieurs types de nœuds : un type de nœud principal et un ou plusieurs types de nœuds non principaux. Chaque type de nœud est mappé à un groupe de machines virtuelles identiques. Chaque type de nœud peut ensuite faire l’objet d’une montée ou descente en puissance de manière indépendante, avoir différents jeux de ports ouverts et présenter différentes métriques de capacité. Des [propriétés de nœud et contraintes de placement][placementconstraints] peuvent être configurées pour limiter des services spécifiques à des types de nœuds spécifiques.  Pour plus d’informations, consultez la [Planification de la capacité des clusters Service Fabric](service-fabric-cluster-capacity.md).
 
 ### <a name="select-node-properties-for-each-node-type"></a>Sélectionner les propriétés de nœud pour chaque type de nœud
 Les types de nœuds définissent les références, le nombre et les propriétés des machines virtuelles du groupe identique correspondant.
@@ -37,7 +37,7 @@ La taille minimale des machines virtuelles pour chaque type de nœud est déterm
 
 Le nombre minimal de machines virtuelles pour le type de nœud principal est déterminé par le [niveau de fiabilité][reliability] que vous choisissez.
 
-Consultez les recommandations minimales en matière de [types de nœuds principaux](service-fabric-cluster-capacity.md#primary-node-type---capacity-guidance), [charges de travail avec état sur les types de nœuds non principaux](service-fabric-cluster-capacity.md#non-primary-node-type---capacity-guidance-for-stateful-workloads) et [charges de travail sans état sur les types de nœuds non principaux](service-fabric-cluster-capacity.md#non-primary-node-type---capacity-guidance-for-stateless-workloads).
+Consultez les recommandations minimales en matière de [types de nœuds principaux](service-fabric-cluster-capacity.md#primary-node-type), [charges de travail avec état sur les types de nœuds non principaux](service-fabric-cluster-capacity.md#stateful-workloads) et [charges de travail sans état sur les types de nœuds non principaux](service-fabric-cluster-capacity.md#stateless-workloads).
 
 Tout nombre supérieur au nombre minimal de nœuds doit dépendre du nombre de réplicas des applications/services que vous souhaitez exécuter dans ce type de nœud.  [Planifier la capacité pour les applications Service Fabric](service-fabric-capacity-planning.md) vous aide à estimer les ressources requises pour exécuter vos applications. Vous pourrez ensuite mettre à l'échelle le cluster pour l'ajuster à l'évolution de la charge de travail. 
 
@@ -51,7 +51,7 @@ Les *disques de système d’exploitation éphémères* sont des dispositifs de 
 
 Les disques de système d’exploitation éphémères ne sont pas spécifiques de Service Fabric mais des *groupes de machines virtuelles identiques* Azure mappées à des types de nœuds Service Fabric. Pour les utiliser avec Service Fabric, vous devez disposer des éléments suivants dans votre modèle Azure Resource Manager de cluster :
 
-1. Vérifiez que les types de nœuds spécifient les [tailles de machines virtuelles Azure prises en charge](../virtual-machines/windows/ephemeral-os-disks.md) pour les disques de système d’exploitation éphémères, et que la taille de machine virtuelle offre une taille de cache suffisante pour prendre en charge la taille de son disque de système d’exploitation (voir *Note* ci-dessous). Par exemple :
+1. Vérifiez que les types de nœuds spécifient les [tailles de machines virtuelles Azure prises en charge](../virtual-machines/ephemeral-os-disks.md) pour les disques de système d’exploitation éphémères, et que la taille de machine virtuelle offre une taille de cache suffisante pour prendre en charge la taille de son disque de système d’exploitation (voir *Note* ci-dessous). Par exemple :
 
     ```xml
     "vmNodeType1Size": {
@@ -89,15 +89,13 @@ Les disques de système d’exploitation éphémères ne sont pas spécifiques d
 
 > [!NOTE]
 > Les applications d’utilisateurs ne doivent pas avoir de dépendance/fichier/artefact sur le disque du système d’exploitation, car le disque du système d’exploitation serait perdu en cas de mise à niveau du système d’exploitation.
-> Par conséquent, il n’est pas recommandé d’utiliser [PatchOrchestrationApplication](https://github.com/microsoft/Service-Fabric-POA) avec des disques éphémères.
->
 
 > [!NOTE]
 > Les VMSS non éphémères existants ne peuvent pas être mis à niveau sur place pour utiliser des disques éphémères.
 > Pour effectuer une migration, les utilisateurs devront [ajouter](./virtual-machine-scale-set-scale-node-type-scale-out.md) un nouveau nodeType avec des disques éphémères, déplacer les charges de travail vers le nouveau nodeType, puis [supprimer](./service-fabric-how-to-remove-node-type.md) le nodeType existant.
 >
 
-Pour plus d’informations et d’autres options de configuration, voir [Disques de système d’exploitation éphémères pour machines virtuelles Azure](../virtual-machines/windows/ephemeral-os-disks.md) 
+Pour plus d’informations et d’autres options de configuration, voir [Disques de système d’exploitation éphémères pour machines virtuelles Azure](../virtual-machines/ephemeral-os-disks.md) 
 
 
 ### <a name="select-the-durability-and-reliability-levels-for-the-cluster"></a>Sélectionner les niveaux de durabilité et de fiabilité du cluster
@@ -123,5 +121,5 @@ Votre application et le cluster sont prêts à accepter le trafic de production�
 * [Créer un cluster Service Fabric exécutant Linux](service-fabric-tutorial-create-vnet-and-linux-cluster.md)
 
 [placementconstraints]: service-fabric-cluster-resource-manager-cluster-description.md#node-properties-and-placement-constraints
-[durability]: service-fabric-cluster-capacity.md#the-durability-characteristics-of-the-cluster
-[reliability]: service-fabric-cluster-capacity.md#the-reliability-characteristics-of-the-cluster
+[durability]: service-fabric-cluster-capacity.md#durability-characteristics-of-the-cluster
+[reliability]: service-fabric-cluster-capacity.md#reliability-characteristics-of-the-cluster

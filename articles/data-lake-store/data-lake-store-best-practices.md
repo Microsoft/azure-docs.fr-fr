@@ -10,12 +10,12 @@ ms.devlang: na
 ms.topic: article
 ms.date: 06/27/2018
 ms.author: sachins
-ms.openlocfilehash: a8ca67d1ff3100aee02ed473c9cc2180de3973b8
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 9a5c5f9a4033b70a664071d6077a69f38c905093
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75638933"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96452229"
 ---
 # <a name="best-practices-for-using-azure-data-lake-storage-gen1"></a>Bonnes pratiques d’utilisation d’Azure Data Lake Storage Gen1
 
@@ -33,7 +33,7 @@ Supposons que vous disposez d’un dossier qui contient 100 000 objets enfant. E
 
 Lorsque vous utilisez une quantité importante de données dans Data Lake Storage Gen1, il est fort probable qu’un principal de service est utilisé pour permettre à des services tels qu’Azure HDInsight d’utiliser ces données. Toutefois, dans certains cas, il se peut que les utilisateurs individuels aient aussi besoin d’accéder aux données. Dans ces cas-là, vous devez utiliser les [groupes de sécurité](data-lake-store-secure-data.md#create-security-groups-in-azure-active-directory) Azure Active Directory au lieu d’assigner des utilisateurs individuels à des dossiers et des fichiers.
 
-Une fois que vous avez assigné les autorisations à un groupe de sécurité, ajouter ou supprimer des utilisateurs de ce groupe ne nécessite aucune mise à jour de Data Lake Storage Gen1. Ceci contribue également à garantir que vous ne dépassez pas la limite de [32 ACL d’accès et par défaut](../azure-resource-manager/management/azure-subscription-service-limits.md#data-lake-store-limits) (ceci inclut les quatre ACL de type POSIX qui sont toujours associées à chaque fichier et dossier : [l’utilisateur propriétaire](data-lake-store-access-control.md#the-owning-user), [le groupe propriétaire](data-lake-store-access-control.md#the-owning-group), [le masque](data-lake-store-access-control.md#the-mask) et autres).
+Une fois que vous avez assigné les autorisations à un groupe de sécurité, ajouter ou supprimer des utilisateurs de ce groupe ne nécessite aucune mise à jour de Data Lake Storage Gen1. Ceci contribue également à garantir que vous ne dépassez pas la limite de [32 ACL d’accès et par défaut](../azure-resource-manager/management/azure-subscription-service-limits.md#data-lake-storage-limits) (ceci inclut les quatre ACL de type POSIX qui sont toujours associées à chaque fichier et dossier : [l’utilisateur propriétaire](data-lake-store-access-control.md#the-owning-user), [le groupe propriétaire](data-lake-store-access-control.md#the-owning-group), [le masque](data-lake-store-access-control.md#the-mask) et autres).
 
 ### <a name="security-for-groups"></a>Sécurité liée aux groupes
 
@@ -49,7 +49,7 @@ Data Lake Storage Gen1 prend en charge l’option d’activation d’un pare-feu
 
 ![Paramètres du pare-feu dans Data Lake Storage Gen1](./media/data-lake-store-best-practices/data-lake-store-firewall-setting.png "Paramètres du pare-feu dans Data Lake Storage Gen1")
 
-Une fois le pare-feu activé, seuls les services Azure tels qu’HDInsight, Data Factory, SQL Data Warehouse, etc., pourront accéder à Data Lake Storage Gen1. En raison de la traduction d’adresses réseau interne utilisée par Azure, le pare-feu Data Lake Storage Gen1 ne prend pas en charge la restriction de services spécifiques par adresse IP, et n’est prévu que pour des restrictions de points de terminaison hors d’Azure, comme les points de terminaison locaux.
+Une fois le pare-feu activé, seuls les services Azure tels que HDInsight, Data Factory, Azure Synapse Analytics, etc., pourront accéder à Data Lake Storage Gen1. En raison de la traduction d’adresses réseau interne utilisée par Azure, le pare-feu Data Lake Storage Gen1 ne prend pas en charge la restriction de services spécifiques par adresse IP, et n’est prévu que pour des restrictions de points de terminaison hors d’Azure, comme les points de terminaison locaux.
 
 ## <a name="performance-and-scale-considerations"></a>Considérations sur les performances et l’échelle
 
@@ -126,7 +126,9 @@ Comme Distcp, l’outil AdlCopy doit être orchestré par quelque chose comme Az
 
 Data Lake Storage Gen1 fournit une fonction d’audit et des journaux de diagnostic détaillés. Il fournit certaines mesures de base dans le portail Azure dans le compte Data Lake Storage Gen1 et dans Azure Monitor. La disponibilité de Data Lake Storage Gen1 est affichée dans le portail Azure. Toutefois, cette mesure est actualisée toutes les sept minutes et ne peut être demandée via une API publique. Pour obtenir la disponibilité la plus à jour d’un compte Data Lake Storage Gen1, vous devez exécuter vos propres tests synthétiques pour valider la disponibilité. D’autres mesures telles que l’utilisation totale du stockage, les requêtes de lecture/écriture et d’entrée/sortie peuvent mettre jusqu’à 24 heures pour s’actualiser. Des mesures plus à jour doivent donc être calculées manuellement via les outils en ligne de commande Hadoop ou une agrégation de journaux d’information. La méthode la plus rapide pour obtenir l’utilisation de stockage la plus récente consiste à exécuter cette commande HDFS depuis un nœud de cluster Hadoop (par exemple, nœud principal) :
 
-    hdfs dfs -du -s -h adl://<adlsg1_account_name>.azuredatalakestore.net:443/
+```console
+hdfs dfs -du -s -h adl://<adlsg1_account_name>.azuredatalakestore.net:443/
+```
 
 ### <a name="export-data-lake-storage-gen1-diagnostics"></a>Exporter des diagnostics Data Lake Storage Gen1
 
@@ -138,9 +140,9 @@ Pour plus d’alertes en temps réel et plus de contrôles sur le lieu d’arriv
 
 Si l’envoi de journaux Azure Data Lake Storage Gen1 n’est pas activé, Azure HDInsight fournit aussi une manière d’activer la [journalisation côté client pour Data Lake Storage Gen1](data-lake-store-performance-tuning-mapreduce.md) via loh4j. Vous devez définir la propriété suivante dans **Ambari** > **YARN** > **Configurations** > **Configurations avancées yarn-log4j** :
 
-    log4j.logger.com.microsoft.azure.datalake.store=DEBUG
+`log4j.logger.com.microsoft.azure.datalake.store=DEBUG`
 
-Une fois la propriété définie et les nœuds redémarrés, les diagnostics Data Lake Storage Gen1 sont écrits dans les journaux d’activité YARN sur les nœuds (/tmp/\<utilisateur\>/yarn.log) et les informations importantes comme les erreurs ou les limites (code d’erreur HTTP 429) peuvent être analysées. Ces mêmes informations peuvent aussi être supervisées dans les journaux Azure Monitor ou n’importe quel emplacement où sont envoyés les journaux dans le panneau [Diagnostics](data-lake-store-diagnostic-logs.md) du compte Data Lake Storage Gen1. Il est recommandé de disposer d’au moins un journal côté client activé ou d’utiliser l’option d’envoi de journaux avec Data Lake Storage Gen1 pour une visibilité opérationnelle et un débogage simplifié.
+Une fois la propriété définie et les nœuds redémarrés, les diagnostics Data Lake Storage Gen1 sont écrits dans les journaux d’activité YARN sur les nœuds (/tmp/\<user\>/yarn.log) et les informations importantes comme les erreurs ou les limites (code d’erreur HTTP 429) peuvent être analysées. Ces mêmes informations peuvent aussi être supervisées dans les journaux Azure Monitor ou n’importe quel emplacement où sont envoyés les journaux dans le panneau [Diagnostics](data-lake-store-diagnostic-logs.md) du compte Data Lake Storage Gen1. Il est recommandé de disposer d’au moins un journal côté client activé ou d’utiliser l’option d’envoi de journaux avec Data Lake Storage Gen1 pour une visibilité opérationnelle et un débogage simplifié.
 
 ### <a name="run-synthetic-transactions"></a>Exécuter des transactions synthétiques
 
@@ -154,11 +156,15 @@ Lorsque des données arrivent dans Data Lake Store, il est important d’avoir p
 
 Dans des charges de travail IoT peuvent se trouver un grand nombre de données arrivées dans le magasin de données, couvrant de nombreux produits, appareils, organisations et clients. Il est important de planifier à l’avance la disposition du répertoire pour des questions d’organisation, de sécurité et de traitement efficace des données pour des consommateurs de flux. Voici un modèle général de disposition à prendre en compte :
 
-    {Region}/{SubjectMatter(s)}/{yyyy}/{mm}/{dd}/{hh}/
+```console
+{Region}/{SubjectMatter(s)}/{yyyy}/{mm}/{dd}/{hh}/
+```
 
 Par exemple, la télémétrie d’arrivée d’un moteur d’avion dans le Royaume-Uni ressemble à la structure suivante :
 
-    UK/Planes/BA1293/Engine1/2017/08/11/12/
+```console
+UK/Planes/BA1293/Engine1/2017/08/11/12/
+```
 
 Il est important de placer la date à la fin de la structure du dossier. Si vous voulez verrouiller certaines régions ou certains thèmes à des utilisateurs/groupes, vous pouvez le faire facilement avec les autorisations POSIX. Sinon, s’il faut restreindre l’affichage des données du Royaume-Uni ou de certains avions à certains groupes de sécurité, avec la structure des données en face, une autorisation différente est nécessaire pour de nombreux dossiers sous chaque dossier heure. En outre, placer la structure de date en face augmente grandement le nombre de dossiers à mesure que le temps passe.
 
@@ -168,14 +174,18 @@ Depuis un niveau supérieur, une approche communément usitée dans le traitemen
 
 Parfois le traitement de fichiers échoue en raison de corruption des données ou de formats inattendus. Dans ces cas, la structure du répertoire peut profiter d’un dossier **/bad** où déplacer les fichiers pour une inspection plus en détail. La tâche de traitement par lots peut aussi gérer le rapport ou la notification de ces fichiers *bad* en vue d’une intervention manuelle. Considérez la structure de modèle suivante :
 
-    {Region}/{SubjectMatter(s)}/In/{yyyy}/{mm}/{dd}/{hh}/
-    {Region}/{SubjectMatter(s)}/Out/{yyyy}/{mm}/{dd}/{hh}/
-    {Region}/{SubjectMatter(s)}/Bad/{yyyy}/{mm}/{dd}/{hh}/
+```console
+{Region}/{SubjectMatter(s)}/In/{yyyy}/{mm}/{dd}/{hh}/
+{Region}/{SubjectMatter(s)}/Out/{yyyy}/{mm}/{dd}/{hh}/
+{Region}/{SubjectMatter(s)}/Bad/{yyyy}/{mm}/{dd}/{hh}/
+```
 
 Par exemple, une firme marketing qui reçoit quotidiennement des extraits de données de mises à jour client de la part de leurs clients en Amérique du Nord. Avant et après avoir été traité, il peut ressembler à l’extrait de code suivant :
 
-    NA/Extracts/ACMEPaperCo/In/2017/08/14/updates_08142017.csv
-    NA/Extracts/ACMEPaperCo/Out/2017/08/14/processed_updates_08142017.csv
+```console
+NA/Extracts/ACMEPaperCo/In/2017/08/14/updates_08142017.csv
+NA/Extracts/ACMEPaperCo/Out/2017/08/14/processed_updates_08142017.csv
+```
 
 Dans le cas courant de traitement des données par lots dans des bases de données directement, telles que Hive ou des bases de données SQL traditionnelles, il n’y a pas besoin de dossiers **/in** ou **/out** car la sortie se trouve déjà dans un dossier différent pour le tableau Hive ou la base de données externe. Par exemple, des extraits quotidiens de la part de clients arrivent dans leurs dossiers respectifs, et l’orchestration par des outils comme Azure Data Factory, Apache Oozie ou Apache Airflow déclenche une tâche quotidienne Hive ou Spark pour traiter et écrire les données dans un tableau Hive.
 

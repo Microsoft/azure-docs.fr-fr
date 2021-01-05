@@ -1,39 +1,33 @@
 ---
-title: Stockage de données d’identité pour les clients australiens - Azure AD
-description: Découvrez où Azure Active Directory stocke les données relatives à l’identité de ses clients australiens.
+title: Stockage de données client pour les clients australiens et néo-zélandais – Azure AD
+description: Découvrez où Azure Active Directory stocke les données client pour les clients australiens et néo-zélandais.
 services: active-directory
-author: msaburnley
+author: ajburnle
 manager: daveba
 ms.author: ajburnle
 ms.service: active-directory
 ms.subservice: fundamentals
 ms.workload: identity
 ms.topic: conceptual
-ms.date: 12/13/2019
-ms.custom: it-pro, seodec18
+ms.date: 7/21/2020
+ms.custom: it-pro, seodec18, references_regions
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 0dc659f3d580646c1e86e5e97940268311e5546f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 4d7c37e64e4f1b339ae66fe3d9135b1874476eb3
+ms.sourcegitcommit: 0a9df8ec14ab332d939b49f7b72dea217c8b3e1e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79460532"
+ms.lasthandoff: 11/18/2020
+ms.locfileid: "94836969"
 ---
-# <a name="identity-data-storage-for-australian-and-new-zealand-customers-in-azure-active-directory"></a>Stockage de données d’identité pour les clients australiens et néo-zélandais dans Azure Active Directory
+# <a name="customer-data-storage-for-australian-and-new-zealand-customers-in-azure-active-directory"></a>Stockage de données client pour les clients australiens et néo-zélandais dans Azure Active Directory 
 
-Les données d’identité sont stockées par Azure AD dans un emplacement géographique en fonction de l’adresse fournie par votre organisation lors de l’abonnement à un service Microsoft Online tel qu’Office 365 ou Azure. Pour obtenir des informations sur le lieu de stockage de vos données d’identité client, vous pouvez utiliser la section [Où se trouvent vos données ?](https://www.microsoft.com/trustcenter/privacy/where-your-data-is-located) du Centre de gestion de la confidentialité Microsoft.
+Azure Active Directory (Azure AD) stocke ses données client dans un emplacement géographique qui dépend du pays indiqué lors de l’inscription à un service Microsoft Online Services. Microsoft Online Services inclut Office 365 et Azure. 
+
+Pour plus d’informations sur l’emplacement des données Azure AD et des autres services Microsoft, consultez la section [Où se trouvent vos données ?](https://www.microsoft.com/trustcenter/privacy/where-your-data-is-located) du Centre de gestion de la confidentialité Microsoft.
+
+À partir du 26 février 2020, Microsoft a commencé à stocker les données client Azure AD des nouveaux locataires présentant une adresse de facturation australienne ou néo-zélandaise dans les centres de données australiens. Entre le 1er mai 2020 et le 31 mars 2021, Microsoft migrera les locataires existants disposant d’une adresse de facturation australienne ou néo-zélandaise vers les centres de données australiens sans aucune intervention du client. Le processus de migration n’impliquera pas de temps d’arrêt pour les clients et n’aura aucun impact sur les fonctionnalités des locataires.
+
+Par ailleurs, certaines fonctionnalités Azure AD ne prennent pas encore en charge le stockage des données client en Australie. Pour obtenir des informations spécifiques sur les fonctionnalités, accédez à [Mappage de données Azure AD](https://msit.powerbi.com/view?r=eyJrIjoiYzEyZTc5OTgtNTdlZS00ZTVkLWExN2ItOTM0OWU4NjljOGVjIiwidCI6IjcyZjk4OGJmLTg2ZjEtNDFhZi05MWFiLTJkN2NkMDExZGI0NyIsImMiOjV9). Par exemple, Microsoft Azure AD Multi-Factor Authentication stocke les données client aux États-Unis et les traite à l’échelle mondiale. Consultez [Résidence des données et données client pour Azure AD Multi-Factor Authentication](../authentication/concept-mfa-data-residency.md).
 
 > [!NOTE]
-> Les services et applications qui s’intègrent à Azure AD ont accès aux données d’identité client. Évaluez chaque service et application que vous utilisez pour déterminer comment ils traitent les données d’identité client, et s’ils répondent aux besoins de stockage de données de votre entreprise. Pour plus d’informations sur la résidence des données des services Microsoft, consultez la section « Où se trouvent vos données ? » du Centre de gestion de la confidentialité Microsoft.
-
-Pour les clients qui ont fourni une adresse en Australie et Nouvelle-Zélande, et qui utilisent l’édition gratuite du service Azure AD, celui-ci conserve les données relatives aux informations d’identification personnelle (IIP) au repos au sein de centres de données australiens. 
-
-Tous les autres services Azure AD Premium stockent les données client dans des centres de données globaux. Pour localiser le centre de données d’un service, consultez [Azure Active Directory - Où se trouvent vos données ?](https://www.microsoft.com/trustcenter/privacy/where-your-data-is-located)
-
-## <a name="microsoft-azure-multi-factor-authentication-mfa"></a>Microsoft Azure Multi-Factor Authentication (MFA)
-
-Le service MFA dans Azure AD stocke les données d’identité client dans des centres de données globaux au repos. Pour en savoir plus sur les informations utilisateur collectées et stockées par les serveurs Azure MFA et Azure MFA basés sur le cloud, consultez [Collecte de données utilisateur avec Microsoft Azure Multi-Factor Authentication](https://docs.microsoft.com/azure/active-directory/authentication/concept-mfa-data-residency). Si les clients utilisent MFA, leurs données sont stockées en dehors des centres de données de l’Australie au repos. 
-
-## <a name="next-steps"></a>Étapes suivantes
-Pour plus d’informations sur les fonctions et fonctionnalités décrites ci-dessus, consultez les articles suivants :
-- [Présentation d’authentification multifacteur](https://docs.microsoft.com/azure/active-directory/authentication/multi-factor-authentication)
+> Les produits et services Microsoft ainsi que les applications tierces qui s’intègrent à Azure AD ont accès aux données client. Évaluez chacun des produits, services et applications que vous utilisez pour déterminer comment ils traitent les données client et s’ils répondent aux besoins de stockage de données de votre entreprise. Pour plus d’informations sur la résidence des données des services de Microsoft, consultez la section [Où se trouvent vos données ?](https://www.microsoft.com/trustcenter/privacy/where-your-data-is-located) du Microsoft Trust Center.

@@ -6,17 +6,17 @@ author: ronortloff
 manager: craigg
 ms.service: synapse-analytics
 ms.topic: conceptual
-ms.subservice: ''
+ms.subservice: sql-dw
 ms.date: 02/04/2020
 ms.author: rortloff
 ms.reviewer: jrasnick
 ms.custom: azure-synapse
-ms.openlocfilehash: 6214c7f0d7728d39e36a7b555f503e130b405e81
-ms.sourcegitcommit: fdec8e8bdbddcce5b7a0c4ffc6842154220c8b90
+ms.openlocfilehash: a557d4045b18b5c0ff71b3e47f0c189028702863
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83653059"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91289529"
 ---
 # <a name="workload-management-with-resource-classes-in-azure-synapse-analytics"></a>Gestion des charges de travail avec des classes de ressources dans Azure Synapse Analytics
 
@@ -133,7 +133,7 @@ Les instructions suivantes sont exemptes de classes de ressources et s’exécut
 - DBCC
 
 <!--
-Removed as these two are not confirmed / supported under SQL DW
+Removed as these two are not confirmed / supported under Azure Synapse Analytics
 - CREATE REMOTE TABLE AS SELECT
 - CREATE EXTERNAL TABLE AS SELECT
 - REDISTRIBUTE
@@ -273,7 +273,7 @@ GO
 -- Creating prc_workload_management_by_DWU.
 -------------------------------------------------------------------------------
 CREATE PROCEDURE dbo.prc_workload_management_by_DWU
-(@DWU VARCHAR(7),
+(@DWU VARCHAR(8),
  @SCHEMA_NAME VARCHAR(128),
  @TABLE_NAME VARCHAR(128)
 )

@@ -3,7 +3,7 @@ title: Tutoriel `:` Utiliser une identité managée pour accéder à Azure Reso
 description: Ce didacticiel explique pas à pas comment utiliser une identité managée attribuée par l’utilisateur sur une machine virtuelle Windows pour accéder à Azure Resource Manager.
 services: active-directory
 documentationcenter: ''
-author: MarkusVi
+author: barclayn
 manager: daveba
 editor: ''
 ms.service: active-directory
@@ -12,19 +12,17 @@ ms.devlang: na
 ms.topic: tutorial
 ms.tgt_pltfrm: na
 ms.workload: identity
-ms.date: 01/14/2020
-ms.author: markvi
+ms.date: 12/02/2020
+ms.author: barclayn
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: ec9956f0c5d834633646938da19f03e5467a9f6d
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: d9757a322922524f181b1fa3f48850efbb7a18dd
+ms.sourcegitcommit: 65db02799b1f685e7eaa7e0ecf38f03866c33ad1
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "75977850"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96546775"
 ---
 # <a name="tutorial-use-a-user-assigned-managed-identity-on-a-windows-vm-to-access-azure-resource-manager"></a>Tutoriel : Utiliser une identité managée attribuée par l’utilisateur sur une machine virtuelle Windows pour accéder à Azure Resource Manager
-
-[!INCLUDE [preview-notice](~/includes/active-directory-msi-preview-notice-ua.md)]
 
 Ce tutoriel explique comment créer une identité attribuée par l’utilisateur, comment l’attribuer à une machine virtuelle Windows, puis l’utiliser pour accéder à l’API d’Azure Resource Manager. Les identités MSI sont gérées automatiquement par Azure. Elles permettent l’authentification auprès de services prenant en charge Azure AD authentication, sans devoir nécessairement incorporer des informations d’identification à votre code. 
 
@@ -45,22 +43,45 @@ Vous allez apprendre à effectuer les actions suivantes :
 
 - [Connectez-vous au Portail Azure](https://portal.azure.com).
 
-- [Créez une machine virtuelle Windows](/azure/virtual-machines/windows/quick-create-portal).
+- [Créez une machine virtuelle Windows](../../virtual-machines/windows/quick-create-portal.md).
 
-- Pour effectuer les étapes de création de ressources et de gestion de rôles nécessaires dans ce tutoriel, votre compte doit bénéficier des autorisations « Propriétaire » avec l’étendue appropriée (votre abonnement ou groupe de ressources). Si vous avez besoin d’aide concernant l’attribution de rôle, consultez [Utiliser le contrôle d’accès en fonction du rôle pour gérer l’accès aux ressources d’un abonnement Azure](/azure/role-based-access-control/role-assignments-portal).
-- [Installez la dernière version du module Azure PowerShell](/powershell/azure/install-az-ps). 
-- Exécutez `Connect-AzAccount` pour créer une connexion avec Azure.
-- Installez la [dernière version de PowerShellGet](/powershell/scripting/gallery/installing-psget#for-systems-with-powershell-50-or-newer-you-can-install-the-latest-powershellget).
-- Exécutez `Install-Module -Name PowerShellGet -AllowPrerelease` pour obtenir la préversion du module `PowerShellGet` (vous devrez peut-être utiliser la commande `Exit` pour quitter la session PowerShell actuelle après avoir exécuté cette commande pour installer le module `Az.ManagedServiceIdentity`).
-- Exécutez `Install-Module -Name Az.ManagedServiceIdentity -AllowPrerelease` pour installer la préversion du module `Az.ManagedServiceIdentity` afin d’effectuer les opérations d’identité attribuée par l’utilisateur dans cet article.
+- Pour effectuer les étapes de création de ressources et de gestion de rôles nécessaires dans ce tutoriel, votre compte doit bénéficier des autorisations « Propriétaire » avec l’étendue appropriée (votre abonnement ou groupe de ressources). Si vous avez besoin d’aide concernant l’attribution de rôle, consultez [Utiliser le contrôle d’accès en fonction du rôle pour gérer l’accès aux ressources d’un abonnement Azure](../../role-based-access-control/role-assignments-portal.md).
 
+- Pour exécuter les exemples de scripts, vous avez deux options :
+    - Utiliser [Azure Cloud Shell](../../cloud-shell/overview.md), que vous pouvez ouvrir à l’aide du bouton **Essayer** dans le coin supérieur droit des blocs de code.
+    - Exécutez les scripts localement avec Azure PowerShell, comme décrit dans la section suivante.
+
+### <a name="configure-azure-powershell-locally"></a>Configurer Azure PowerShell localement
+
+Pour utiliser Azure PowerShell localement dans cet article (au lieu d’utiliser Cloud Shell), effectuez les étapes suivantes :
+
+1. Installez [la dernière version d’Azure PowerShell](/powershell/azure/install-az-ps) si ce n’est déjà fait.
+
+1. Connectez-vous à Azure :
+
+    ```azurepowershell
+    Connect-AzAccount
+    ```
+
+1. Installez la [dernière version de PowerShellGet](/powershell/scripting/gallery/installing-psget#for-systems-with-powershell-50-or-newer-you-can-install-the-latest-powershellget).
+
+    ```azurepowershell
+    Install-Module -Name PowerShellGet -AllowPrerelease
+    ```
+
+    Vous devrez peut-être `Exit` de la session PowerShell en cours après avoir exécuté cette commande, pour l’étape suivante.
+
+1. Installez la version en préversion du module `Az.ManagedServiceIdentity`, afin d’effectuer les opérations d’identité managée affectée par l’utilisateur qui sont décrites dans cet article :
+
+    ```azurepowershell
+    Install-Module -Name Az.ManagedServiceIdentity -AllowPrerelease
+    ```
 
 ## <a name="enable"></a>Activer
 
 Pour un scénario basé sur une identité attribuée par l’utilisateur, vous devez effectuer les étapes suivantes :
 
 - Créer une identité
- 
 - Attribuer l’identité nouvellement créée
 
 ### <a name="create-identity"></a>Créer une identité
@@ -163,4 +184,4 @@ La réponse contient les informations particulières du groupe de ressources, co
 Dans ce tutoriel, vous avez découvert comment créer une identité attribuée par l’utilisateur, puis l’attacher à une machine virtuelle Azure pour accéder à l’API Azure Resource Manager.  Pour en savoir plus sur Azure Resource Manager, consultez :
 
 > [!div class="nextstepaction"]
->[Azure Resource Manager](/azure/azure-resource-manager/resource-group-overview)
+>[Azure Resource Manager](../../azure-resource-manager/management/overview.md)

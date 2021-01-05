@@ -5,12 +5,12 @@ author: florianborn71
 ms.author: flborn
 ms.date: 03/09/2020
 ms.topic: article
-ms.openlocfilehash: e3acfc15b0c12822e48009bef4aabadac701fb2d
-ms.sourcegitcommit: 642a297b1c279454df792ca21fdaa9513b5c2f8b
+ms.openlocfilehash: 300e0ff26d643ae0263d21e604cb26da37a18841
+ms.sourcegitcommit: a4533b9d3d4cd6bb6faf92dd91c2c3e1f98ab86a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80678855"
+ms.lasthandoff: 12/22/2020
+ms.locfileid: "97723823"
 ---
 # <a name="the-arrinspector-inspection-tool"></a>Outil d’inspection ArrInspector
 
@@ -29,7 +29,7 @@ Si l’application qui appelle `ConnectToArrInspectorAsync` est déjà en cours 
 
 Si l’application s’exécute sur un HoloLens :
 
-1. Accédez à l’appareil HoloLens à l’aide du [portail d’appareil Windows](https://docs.microsoft.com/windows/mixed-reality/using-the-windows-device-portal).
+1. Accédez à l’appareil HoloLens à l’aide du [portail d’appareil Windows](/windows/mixed-reality/using-the-windows-device-portal).
 1. Accédez à *System > File Explorer*.
 1. Accédez à *User Folders\\LocalAppData\\[votre_application]\\AC\\Temp*.
 1. Enregistrez le fichier *StartArrInspector.html* sur votre PC.
@@ -108,17 +108,3 @@ Dans l’angle supérieur droit, un commutateur vous permet de suspendre les mis
 ![Mode pause](./media/pause-mode.png)
 
 Lors de la réactivation des mises à jour automatiques, tous les panneaux sont réinitialisés.
-
-## <a name="host-configuration"></a>Configuration de l’hôte
-
-Par défaut, l’outil se connecte au serveur ARR qui s’exécute sur le même hôte utilisé par l’ArrInspector. Toutefois, vous pouvez le configurer pour inspecter un autre serveur, en supposant qu’il exécute une instance ARR avec le port d’outils ouvert.
-
-Pour ce faire, accédez au menu principal à gauche de la barre d’en-tête et sélectionnez *Configuration de l’hôte*. Cliquez sur **Ajouter un hôte**, puis entrez le nom et le nom d’hôte. Pour le *nom d’hôte*, utilisez uniquement le nom d’hôte se terminant par `.mixedreality.azure.com`, n’incluez pas `http://` ni de port.
-
-![Configuration de l’hôte](./media/host-configuration.png)
-
-Pour passer rapidement d’un hôte à un autre, utilisez la liste déroulante en haut à droite.
-
-![Combinaison d’hôtes](./media/host-switch-combo.png)
-
-La liste des hôtes est stockée dans le stockage local du navigateur. Elle sera donc conservée lors de la réouverture du même navigateur.

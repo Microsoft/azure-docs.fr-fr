@@ -7,12 +7,12 @@ ms.topic: conceptual
 ms.date: 01/22/2019
 ms.author: vitalyg
 ms.subservice: metrics
-ms.openlocfilehash: e6ff33b6a23cb85649a8811a8bef27ab455ab9e6
-ms.sourcegitcommit: 999ccaf74347605e32505cbcfd6121163560a4ae
+ms.openlocfilehash: be3d3f11e90c17bd8c4792418500da651039e480
+ms.sourcegitcommit: 77ab078e255034bd1a8db499eec6fe9b093a8e4f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82980896"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97562801"
 ---
 # <a name="advanced-features-of-azure-metrics-explorer"></a>Fonctionnalités avancées d’Azure Metrics Explorer
 
@@ -21,7 +21,7 @@ ms.locfileid: "82980896"
 
 ## <a name="metrics-in-azure"></a>Métriques dans Azure
 
-Les [métriques dans Azure Monitor](data-platform-metrics.md) sont les séries de valeurs et de comptes mesurés qui sont collectées et stockées au fil du temps. Il existe des métriques standard (ou de « plateforme ») et des métriques personnalisées. Les métriques standards vous sont fournies par la plateforme Azure elle-même. Les métriques standards reflètent les statistiques d’intégrité et d’utilisation de vos ressources Azure. Tandis que vos applications envoient les mesures personnalisées à Azure à l’aide de l’[API Application Insights pour les événements et mesures personnalisés](https://docs.microsoft.com/azure/application-insights/app-insights-api-custom-events-metrics), [Extension Windows Azure Diagnostics (WAD)](https://docs.microsoft.com/azure/azure-monitor/platform/diagnostics-extension-overview), ou par l’[API REST Azure Monitor](https://docs.microsoft.com/azure/azure-monitor/platform/metrics-store-custom-rest-api).
+Les [métriques dans Azure Monitor](data-platform-metrics.md) sont les séries de valeurs et de comptes mesurés qui sont collectées et stockées au fil du temps. Il existe des métriques standard (ou de « plateforme ») et des métriques personnalisées. Les métriques standards vous sont fournies par la plateforme Azure elle-même. Les métriques standards reflètent les statistiques d’intégrité et d’utilisation de vos ressources Azure. Tandis que vos applications envoient les mesures personnalisées à Azure à l’aide de l’[API Application Insights pour les événements et mesures personnalisés](../app/api-custom-events-metrics.md), [Extension Windows Azure Diagnostics (WAD)](./diagnostics-extension-overview.md), ou par l’[API REST Azure Monitor](./metrics-store-custom-rest-api.md).
 
 ## <a name="create-views-with-multiple-metrics-and-charts"></a>Créer des vues contenant plusieurs métriques et graphiques
 
@@ -77,15 +77,15 @@ Vous pouvez appliquer des filtres à des graphiques qui montrent des métriques 
 
 2. Sélectionnez la dimension (propriété) que vous souhaitez filtrer.
 
-   ![image de métrique](./media/metrics-charts/00006.png)
+   ![Capture d’écran montrant les dimensions (propriétés) que vous pouvez filtrer.](./media/metrics-charts/028.png)
 
 3. Sélectionnez les valeurs de dimension que vous souhaitez inclure lors du traçage du graphique (cet exemple illustre le filtrage des transactions de stockage qui ont réussi) :
 
-   ![image de métrique](./media/metrics-charts/00007.png)
+   ![Capture d’écran montrant le filtrage des transactions de stockage réussies.](./media/metrics-charts/029.png)
 
 4. Après avoir sélectionné les valeurs de filtre, cliquez à côté du sélecteur de filtre pour fermer celui-ci. Le graphique montre à présent le nombre de transactions de stockage qui ont échoué :
 
-   ![image de métrique](./media/metrics-charts/00008.png)
+   ![Capture d’écran montrant le nombre de transactions de stockage ayant échoué.](./media/metrics-charts/030.png)
 
 5. Vous pouvez répéter les étapes 1 à 4 pour appliquer plusieurs filtres aux mêmes graphiques.
 
@@ -104,11 +104,11 @@ Vous pouvez fractionner une métrique par dimension afin de visualiser la façon
 
 2. Choisissez la dimension sur laquelle vous souhaitez segmenter votre graphique :
 
-   ![image de métrique](./media/metrics-charts/00010.png)
+   ![Capture d’écran montrant la dimension sélectionnée sur laquelle vous segmentez votre graphique.](./media/metrics-charts/031.png)
 
    Le graphique montre à présent plusieurs lignes, une par segment de la dimension :
 
-   ![image de métrique](./media/metrics-charts/00012.png)
+   ![Capture d’écran montrant plusieurs lignes, une pour chaque segment de dimension.](./media/metrics-charts/032.png)
 
 3. Cliquez à côté du **sélecteur de regroupement** pour fermer celui-ci.
 
@@ -123,9 +123,13 @@ Par exemple, imaginons que le volume de requêtes réussies passe de 99,99 % à 
 
 Autre exemple avec la fluctuation de la mémoire disponible, pour laquelle la valeur ne peut pas atteindre zéro (techniquement). Si la plage est définie sur une valeur plus élevée, il se peut que les chutes de la mémoire disponible soient plus faciles à repérer. 
 
-Pour contrôler la plage de l’axe des y, utilisez le menu du graphique « ... », puis sélectionnez **Modifier le graphique** pour accéder aux paramètres avancés du graphique. Modifiez les valeurs de la section de la plage de l’axe y, ou utilisez le bouton **Auto** pour rétablir les valeurs par défaut.
+Pour contrôler la plage de l’axe des y, utilisez le menu du graphique « … », puis sélectionnez **Paramètres du graphique** pour accéder aux paramètres avancés du graphique.
 
-![image de métrique](./media/metrics-charts/00014-manually-set-granularity.png)
+![Capture d’écran mettant en évidence l’option des paramètres du graphique.](./media/metrics-charts/033.png)
+
+ Modifiez les valeurs de la section de la plage de l’axe y, ou utilisez le bouton **Auto** pour rétablir les valeurs par défaut.
+ 
+ ![Capture d’écran mettant en évidence la section de la plage de l’axe Y.](./media/metrics-charts/034.png)
 
 > [!WARNING]
 > En général, pour verrouiller les limites de l’axe y pour les graphiques qui effectuent le suivi de nombres ou de sommes différents sur une période (et par conséquent, utilisent les agrégations de compte, somme, minimum ou maximum), vous devez spécifier une granularité temporelle fixe plutôt que de conserver les valeurs définies automatiquement par défaut. En effet, les valeurs des graphiques changent lorsque la granularité temporelle est modifiée automatiquement par l’utilisateur qui redimensionne sa fenêtre de navigation ou qui change de résolution d’écran. La modification de la granularité temporelle qui en découle affecte l’apparence du graphique et invalide la sélection actuelle de la plage de l’axe y.
@@ -136,9 +140,9 @@ Une fois les graphiques configurés, une couleur est automatiquement attribuée 
 
 Pour changer la couleur d'une ligne, cliquez sur la barre de couleur dans la légende qui correspond au graphique. La boîte de dialogue du sélecteur de couleurs s'ouvre. Utilisez le sélecteur de couleurs pour configurer la couleur de la ligne.
 
-Une fois configurées, les couleurs sont conservées lorsque vous épinglez le graphique sur un tableau de bord. La section suivante explique comment épingler un graphique.
+![Capture d’écran montrant comment modifier la couleur.](./media/metrics-charts/035.png)
 
-![image de métrique](./media/metrics-charts/018.png)
+Une fois configurées, les couleurs sont conservées lorsque vous épinglez le graphique sur un tableau de bord. La section suivante explique comment épingler un graphique.
 
 ## <a name="pin-charts-to-dashboards"></a>Épingler des graphiques à des tableaux de bord
 
@@ -146,9 +150,9 @@ Après avoir configuré les graphiques, vous pouvez les ajouter aux tableaux de 
 
 Pour épingler un graphique configuré à un tableau de bord :
 
-Après avoir configuré votre graphique, cliquez sur le menu **Actions** dans l’angle supérieur droit du graphique, puis sur **Épingler au tableau de bord**.
+Après avoir configuré votre graphique, cliquez sur **Épingler au tableau de bord** dans l’angle supérieur droit du graphique.
 
-![image de métrique](./media/metrics-charts/00013.png)
+![Capture d’écran montrant comment épingler un graphique.](./media/metrics-charts/036.png)
 
 ## <a name="create-alert-rules"></a>Créer des règles d'alerte
 
@@ -156,11 +160,11 @@ Vous pouvez utiliser les critères que vous avez définis pour visualiser vos m�
 
 ### <a name="to-create-a-new-alert-rule-click-new-alert-rule"></a>Pour créer une nouvelle règle d’alerte, cliquez sur **Nouvelle règle d’alerte**
 
-![Bouton Nouvelle règle d’alerte surligné en rouge](./media/metrics-charts/015.png)
+![Bouton Nouvelle règle d’alerte surligné en rouge](./media/metrics-charts/042.png)
 
 Vous êtes redirigé vers le volet de la création de règle d’alerte avec les dimensions de métriques sous-jacentes de votre graphique préremplies pour faciliter la génération de règles d’alerte personnalisées.
 
-![Créer une règle d’alerte](./media/metrics-charts/016.png)
+![Créer une règle d’alerte](./media/metrics-charts/041.png)
 
 Lisez cet [article](alerts-metric.md) pour en savoir plus sur la configuration d’alertes de métrique.
 
@@ -176,5 +180,4 @@ Lisez cet [article](alerts-metric.md) pour en savoir plus sur la configuration d
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-  Pour découvrir les meilleures pratiques en matière de création de tableaux de bord actionnables avec des métriques, Voir [Créer des tableaux de bord d’indicateur de performance clé](https://docs.microsoft.com/azure/application-insights/app-insights-tutorial-dashboards).
-
+  Pour découvrir les meilleures pratiques en matière de création de tableaux de bord actionnables avec des métriques, Voir [Créer des tableaux de bord d’indicateur de performance clé](../learn/tutorial-app-dashboards.md).

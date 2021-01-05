@@ -5,12 +5,12 @@ author: florianborn71
 ms.author: flborn
 ms.date: 02/13/2020
 ms.topic: reference
-ms.openlocfilehash: 9bb8818d2bb91c14eafc272774e0b633c51e58e1
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: fe684d15e2ce9b8d302db4eb6bd31dd1416abf21
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81617880"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "83196544"
 ---
 # <a name="network-requirements"></a>Configuration requise pour le réseau
 
@@ -20,7 +20,7 @@ Une connexion réseau stable et à faible latence à un centre de données Azure
 
 La configuration réseau requise exacte dépend de votre utilisation spécifique, comme le nombre et la fréquence des modifications apportées au graphique de scène distant ainsi que la complexité de l’affichage rendu, mais il existe un certain nombre d’instructions pour vous assurer que votre expérience est la meilleure possible :
 
-* Votre connectivité Internet doit prendre en charge au moins **50 Mbits/s en aval** et **10 Mbits/s en amont** de manière constante pour une seule session utilisateur d’Azure Remote Rendering, en supposant qu’il n’y ait aucun trafic en concurrence sur le réseau. Nous vous recommandons les niveaux tarifaires plus élevés pour de meilleures expériences. Avec davantage d’utilisateurs sur le même réseau, ces exigences font l’objet d’un scale-up en conséquence.
+* Votre connectivité Internet doit prendre en charge au moins **40 Mbits/s en aval** et **5 Mbits/s en amont** de manière constante pour une seule session utilisateur d’Azure Remote Rendering, en supposant qu’il n’y ait aucun trafic en concurrence sur le réseau. Nous vous recommandons les niveaux tarifaires plus élevés pour de meilleures expériences. Avec davantage d’utilisateurs sur le même réseau, ces exigences font l’objet d’un scale-up en conséquence.
 * En règle générale, l’utilisation de la **bande Wi-Fi de 5 GHz** produira de meilleurs résultats que la bande Wi-Fi de 2,4 GHz, bien que les deux fonctionnent.
 * S’il existe d’autres réseaux Wi-Fi à proximité, évitez d’utiliser des canaux Wi-Fi en cours d’utilisation par ces autres réseaux. Vous pouvez utiliser les outils d’analyse réseau comme [WifiInfoView](https://www.nirsoft.net/utils/wifi_information_view.html) pour vérifier si les canaux utilisés par votre réseau Wi-Fi sont exempts de trafic en concurrence.
 * **Évitez impérativement d’utiliser des répéteurs Wi-Fi** ou un transfert LAN par courants porteurs en ligne.

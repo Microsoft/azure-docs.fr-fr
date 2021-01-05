@@ -8,12 +8,12 @@ ms.service: site-recovery
 ms.topic: conceptual
 ms.date: 10/21/2019
 ms.author: mayg
-ms.openlocfilehash: 0d39f763d3cdc90f89e0bcd17d0facc67551ffc0
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f230445ecdb046c2b631e89567df71e1d09c3234
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79229137"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95999227"
 ---
 # <a name="analyze-the-azure-site-recovery-deployment-planner-report"></a>Analyser le rapport du planificateur de déploiement Azure Site Recovery
 Cet article décrit les feuilles de calcul du rapport Excel généré par le Planificateur de déploiement Azure Site Recovery pour le déploiement d’Hyper-V vers Azure.
@@ -154,7 +154,7 @@ Vous pouvez vous trouver dans une situation dans laquelle vous ne pouvez pas con
 
 **Disk Storage Type** : le compte de stockage standard ou premium utilisé pour répliquer toutes les machines virtuelles correspondantes, mentionnées dans la colonne **VMs to Place**.
 
-**Suggested Prefix** : le préfixe suggéré à trois caractères qui permet de nommer le compte de stockage. Vous pouvez utiliser votre propre préfixe, mais la suggestion de l’outil suit la [convention d’affectation de noms aux partitions pour les comptes de stockage](https://aka.ms/storage-performance-checklist).
+**Suggested Prefix** : le préfixe suggéré à trois caractères qui permet de nommer le compte de stockage. Vous pouvez utiliser votre propre préfixe, mais la suggestion de l’outil suit la [convention d’affectation de noms aux partitions pour les comptes de stockage](/en-in/azure/storage/blobs/storage-performance-checklist).
 
 **Suggested Account Name** : le nom du compte de stockage après lequel vous incluez le préfixe suggéré. Remplacez le nom entre crochets pointus(< and >) avec votre entrée personnalisée.
 
@@ -179,7 +179,7 @@ Le rapport Excel généré par le Planificateur de déploiement Azure Site Recov
 
 **VM Name** : nom de la machine virtuelle utilisé dans VMListFile lorsqu’un rapport est généré. Cette colonne répertorie également les disques (VHD) qui sont attachés aux machines virtuelles. Les noms incluent les noms d’hôte Hyper-V sur lesquels les machines virtuelles ont été placées lorsqu’elles ont été découvertes par l’outil pendant le profilage.
 
-**VM Compatibility** : les valeurs sont **Oui** et **Oui**\*. **Oui**\* : pour les instances dans lesquelles la machine virtuelle est adaptée aux [disques SSD Premium](../virtual-machines/windows/disks-types.md). Ici, le disque profilé à forte activité ou à IOPS élevé s’ajuste dans une taille de disque premium supérieure à la taille mappée au disque. Le compte de stockage décide du type de disque de stockage Premium sur lequel mapper un disque, en fonction de sa taille : 
+**VM Compatibility** : les valeurs sont **Oui** et **Oui**\*. **Oui**\* : pour les instances dans lesquelles la machine virtuelle est adaptée aux [disques SSD Premium](../virtual-machines/disks-types.md). Ici, le disque profilé à forte activité ou à IOPS élevé s’ajuste dans une taille de disque premium supérieure à la taille mappée au disque. Le compte de stockage décide du type de disque de stockage Premium sur lequel mapper un disque, en fonction de sa taille : 
 * < 128 Go : disque P10.
 * 128 Go à 256 Go : disque P15.
 * 256 Go à 512 Go : disque P20.
@@ -220,7 +220,7 @@ Le rapport Excel généré par le Planificateur de déploiement Azure Site Recov
 
 **VM Name** : nom de la machine virtuelle utilisé dans VMListFile lorsqu’un rapport est généré. Cette colonne répertorie également les disques (VHD) qui sont attachés aux machines virtuelles. Les noms incluent les noms d’hôte Hyper-V sur lesquels les machines virtuelles ont été placées lorsqu’elles ont été découvertes par l’outil pendant le profilage.
 
-**VM Compatibility** : indique pourquoi la machine virtuelle spécifiée est incompatible avec une utilisation avec Site Recovery. Les raisons sont décrites pour chaque disque incompatible de la machine virtuelle et, en fonction des [limites de stockage](https://aka.ms/azure-storage-scalbility-performance), peuvent figurer parmi les suivantes :
+**VM Compatibility** : indique pourquoi la machine virtuelle spécifiée est incompatible avec une utilisation avec Site Recovery. Les raisons sont décrites pour chaque disque incompatible de la machine virtuelle et, en fonction des [limites de stockage](/en-in/azure/storage/common/scalability-targets-standard-account), peuvent figurer parmi les suivantes :
 
 * La taille du disque est supérieure à 4 095 Go. Actuellement, le stockage Azure ne prend pas en charge les tailles de disques de données supérieures à 4 095 Go.
 

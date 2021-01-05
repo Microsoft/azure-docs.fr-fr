@@ -1,20 +1,20 @@
 ---
 title: Vue d’ensemble du compte de stockage
 titleSuffix: Azure Storage
-description: Découvrez les options de création et d’utilisation des comptes de stockage Azure.
+description: Lisez une vue d’ensemble des comptes de stockage dans Stockage Azure. Passez en revue les noms des comptes, les niveaux de performance, les niveaux d’accès, la redondance, le chiffrement, les points de terminaison, etc.
 services: storage
 author: tamram
 ms.service: storage
 ms.topic: conceptual
-ms.date: 01/17/2020
+ms.date: 12/11/2020
 ms.author: tamram
 ms.subservice: common
-ms.openlocfilehash: 3694a1d04ec25f44cfcf9395bdd148e2fd3c0d9f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 2c9c4cd643e2e4b89f9a7d8f44a6569d0dde2b37
+ms.sourcegitcommit: dfc4e6b57b2cb87dbcce5562945678e76d3ac7b6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79371549"
+ms.lasthandoff: 12/12/2020
+ms.locfileid: "97357379"
 ---
 # <a name="storage-account-overview"></a>Vue d’ensemble du compte de stockage
 
@@ -30,7 +30,7 @@ Pour plus d’informations sur la création d’un compte de stockage Azure, con
 
 Les comptes de stockage v2 à usage général prennent en charge les dernières fonctionnalités du Stockage Azure, et intègrent toutes les fonctionnalités des comptes de stockage v1 à usage général et des comptes de stockage d’objets blob. Pour le Stockage Azure, ce sont les comptes v2 à usage général qui offrent les tarifs de capacité par gigaoctet les plus bas. En outre, le prix des transactions est l’un des plus compétitifs du secteur. Les comptes de stockage universels v2 prennent en charge les services de stockage Azure suivants :
 
-- Objets blob (tous les types : Block, Append, Page)
+- Objets blob (tous les types : de blocs, d’ajout et de pages)
 - Data Lake Gen2
 - Fichiers
 - Disques
@@ -54,13 +54,13 @@ Les comptes de stockage universels v1 offrent un accès à tous les services des
 - Files d’attente
 - Tables
 
-Dans la plupart des cas, vous devez utiliser des comptes v2 universels. Vous pouvez utiliser des comptes v1 universels pour les scénarios suivants :
+Microsoft recommande des comptes v2 universels pour la plupart des scénarios. Vous pouvez utiliser des comptes v1 universels pour les scénarios suivants :
 
 - Si vos applications nécessitent le modèle de déploiement Azure Classic. Les comptes universels v2 et les comptes de stockage d’objets blob prennent uniquement en charge le modèle de déploiement Azure Resource Manager.
 
 - Vos applications sont gourmandes en transactions ou utilisent beaucoup de bande passante de géoréplication, mais ne nécessitent pas une capacité importante. Dans ce cas, le compte universel v1 constitue le choix le plus économique.
 
-- Vous utilisez une version de l’[API REST du service Stockage](https://msdn.microsoft.com/library/azure/dd894041.aspx) antérieure à celle du 14/02/2014 ou une bibliothèque de client avec une version inférieure à 4.x. Vous ne pouvez pas mettre à niveau votre application.
+- Vous utilisez une version de l’[API REST du service Stockage](/rest/api/storageservices/Versioning-for-the-Azure-Storage-Services) antérieure à celle du 14/02/2014 ou une bibliothèque de client avec une version inférieure à 4.x. Vous ne pouvez pas mettre à niveau votre application.
 
 ### <a name="blockblobstorage-accounts"></a>Comptes BlockBlobStorage
 
@@ -78,7 +78,7 @@ Les comptes FileStorage offrent des caractéristiques de performances dédiées 
 
 Gardez les règles suivantes à l’esprit lorsque vous nommez votre compte de stockage :
 
-- Les noms des comptes de stockage doivent comporter entre 3 et 24 caractères, uniquement des lettres minuscules et des chiffres.
+- Les noms de compte de stockage doivent avoir entre 3 et 24 caractères, uniquement des lettres minuscules et des chiffres.
 - Le nom de votre compte de stockage doit être unique dans Azure. Deux comptes de stockage ne peuvent avoir le même nom.
 
 ## <a name="performance-tiers"></a>Niveaux de performances
@@ -133,6 +133,7 @@ Par exemple, si le nom de votre compte de stockage universel est *mystorageaccou
 - Stockage Table : `https://*mystorageaccount*.table.core.windows.net`
 - Stockage File d’attente : `https://*mystorageaccount*.queue.core.windows.net`
 - Azure Files : `https://*mystorageaccount*.file.core.windows.net`
+- Azure Data Lake Storage Gen2 : `https://*mystorageaccount*.dfs.core.windows.net` (utilise le [pilote ABFS optimisé pour le Big Data](../blobs/data-lake-storage-introduction.md#key-features-of-data-lake-storage-gen2))
 
 > [!NOTE]
 > Les comptes d’objets blob de blocs et de stockage d’objets blob exposent uniquement le point de terminaison de service BLOB.
@@ -150,8 +151,8 @@ Chaque requête envoyée à votre compte de stockage doit en avoir l’autorisat
 Vous pouvez accorder l’accès aux données de votre compte de stockage à l’aide de l’une des méthodes suivantes :
 
 - **Azure Active Directory :** Utilisez les informations d’identification Azure Active Directory (Azure AD) afin d’authentifier un utilisateur, un groupe ou une autre identité, pour l’accès aux données d’objets blob et de files d’attente. Si l’authentification d’une identité réussit, Azure AD retourne un jeton qui doit être utilisé pour autoriser la requête dans le stockage Blob ou File d’attente d’Azure. Pour plus d’informations, consultez [Authentifier l’accès au Stockage Azure à l’aide d’Azure Active Directory](storage-auth-aad.md).
-- **Autorisation par clé partagée :** Utilisez la clé d’accès de votre compte de stockage pour construire une chaîne de connexion que votre application utilisera lors de l’exécution afin d’accéder au stockage Azure. Les valeurs de la chaîne de connexion sont utilisées pour construire l’en-tête *d’autorisation* qui est passé au stockage Azure. Pour plus d’informations, consultez [Configuration des chaînes de connexion Stockage Azure](storage-configure-connection-string.md).
-- **Signature d’accès partagé :** Utilisez une signature d’accès partagé pour déléguer l’accès aux ressources de votre compte de stockage si vous n’utilisez pas l’autorisation Azure AD. Une signature d’accès partagé est un jeton qui encapsule toutes les informations nécessaires à l’autorisation d’une requête envoyée au stockage Azure via l’URL. Dans le cadre de la signature d’accès partagé, vous pouvez spécifier la ressource de stockage, les autorisations accordées et l’intervalle pendant lequel les autorisations sont valides. Pour plus d’informations, consultez la page [Utiliser des signatures d’accès partagé (SAP)](storage-sas-overview.md).
+- **Autorisation par clé partagée :** utilisez la clé d’accès de votre compte de stockage pour construire une chaîne de connexion que votre application utilisera lors de l’exécution afin d’accéder au stockage Azure. Les valeurs de la chaîne de connexion sont utilisées pour construire l’en-tête *d’autorisation* qui est passé au stockage Azure. Pour plus d’informations, consultez [Configuration des chaînes de connexion Stockage Azure](storage-configure-connection-string.md).
+- **Signature d’accès partagé :** Une signature d’accès partagé (SAS) est un jeton qui permet un accès délégué aux ressources de votre compte de stockage. Le jeton SAS encapsule toutes les informations nécessaires à l’autorisation d’une demande envoyée au stockage Azure via l’URL. Lorsque vous créez une signature SAS, vous pouvez spécifier les autorisations que la signature SAS octroie à une ressource et l’intervalle pendant lequel les autorisations sont valides. Un jeton SAS peut être signé avec des informations d’identification Azure AD ou avec une clé partagée. Pour plus d’informations, consultez [Accorder un accès limité aux ressources du Stockage Azure à l’aide des signatures d’accès partagé (SAS)](storage-sas-overview.md).
 
 > [!NOTE]
 > L’authentification des utilisateurs et des applications à l’aide des informations d’identification Azure AD est plus sécurisée et plus facile à utiliser que les autres modes d’autorisation. Même si vous pouvez continuer à utiliser l’autorisation de clé partagée avec vos applications, avec Azure AD, vous n’avez plus besoin de stocker votre clé d’accès de compte avec votre code. Vous pouvez également continuer à utiliser des signatures d’accès partagé (SAP) pour accorder un accès affiné aux ressources de votre compte de stockage. Toutefois, Azure AD offre des fonctionnalités similaires sans nécessiter de gestion des jetons SAP, ni de révocation des SAP compromises.
@@ -166,7 +167,7 @@ Lorsque vous effectuez une mise à niveau vers un compte de stockage universel v
 
 ### <a name="azcopy"></a>AzCopy
 
-AzCopy est un utilitaire de ligne de commande Windows conçu pour la copie de données hautes performances vers ou à partir d’Azure Storage. Vous pouvez utiliser AzCopy pour copier des données dans votre compte de stockage d’objets blob à partir d’un compte de stockage universel existant, ou pour charger des données à partir de vos appareils de stockage locaux. Pour plus d’informations, consultez [Transfert de données avec l’utilitaire de ligne de commande AzCopy](../common/storage-use-azcopy.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json) .
+AzCopy est un utilitaire de ligne de commande Windows conçu pour la copie de données hautes performances vers ou à partir d’Azure Storage. Vous pouvez utiliser AzCopy pour copier des données dans votre compte de stockage d’objets blob à partir d’un compte de stockage universel existant, ou pour charger des données à partir de vos appareils de stockage locaux. Pour plus d’informations, consultez [Transfert de données avec l’utilitaire de ligne de commande AzCopy](./storage-use-azcopy-v10.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json) .
 
 ### <a name="data-movement-library"></a>Bibliothèque de déplacement des données
 
@@ -174,9 +175,9 @@ La bibliothèque de déplacement de données Stockage Azure pour .NET est basée
 
 ### <a name="rest-api-or-client-library"></a>API REST ou bibliothèque cliente
 
-Vous pouvez créer une application personnalisée pour migrer vos données d’un compte de stockage v1 universel vers un compte de stockage d’objets blob. Utilisez l’une des bibliothèques de client Azure ou l’API REST des services de stockage Azure. Azure Storage offre des bibliothèques clientes enrichies pour une diversité de langages et plateformes, par exemple .NET, Java, C++, Node.JS, PHP, Ruby et Python. Les bibliothèques clientes offrent des fonctionnalités avancées telles que la logique de nouvelle tentative, la journalisation et les téléchargements parallèles. Vous pouvez également développer votre application directement avec l’API REST, qui peut être appelée à l’aide de n’importe quel langage permettant de créer des requêtes HTTP/HTTPS.
+Vous pouvez créer une application personnalisée pour migrer vos données d’un compte de stockage v1 universel vers un compte de stockage d’objets blob. Utilisez l’une des bibliothèques de client Azure ou l’API REST des services de Stockage Azure. Azure Storage offre des bibliothèques clientes enrichies pour une diversité de langages et plateformes, par exemple .NET, Java, C++, Node.JS, PHP, Ruby et Python. Les bibliothèques clientes offrent des fonctionnalités avancées telles que la logique de nouvelle tentative, la journalisation et les téléchargements parallèles. Vous pouvez également développer votre application directement avec l’API REST, qui peut être appelée à l’aide de n’importe quel langage permettant de créer des requêtes HTTP/HTTPS.
 
-Pour plus d’informations sur l’API REST du stockage Azure, consultez [Référence de l’API REST des services Stockage Azure](https://docs.microsoft.com/rest/api/storageservices/).
+Pour plus d’informations sur l’API REST du stockage Azure, consultez [Référence de l’API REST des services Stockage Azure](/rest/api/storageservices/).
 
 > [!IMPORTANT]
 > Les objets blob chiffrés utilisant le chiffrement côté client stockent les métadonnées relatives au chiffrement avec l’objet blob. Si vous copiez un objet blob chiffré avec le chiffrement côté client, assurez-vous que l’opération de copie conserve les métadonnées de l’objet blob, et en particulier les métadonnées relatives au chiffrement. Si vous copiez un objet blob sans ces métadonnées de chiffrement, le contenu de l’objet blob ne peut plus être récupéré. Pour plus d’informations concernant les métadonnées liées au chiffrement, consultez l’article [Chiffrement côté client et Azure Key Vault pour Microsoft Azure Storage](../common/storage-client-side-encryption.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json).
@@ -185,7 +186,11 @@ Pour plus d’informations sur l’API REST du stockage Azure, consultez [Réfé
 
 [!INCLUDE [storage-account-billing-include](../../../includes/storage-account-billing-include.md)]
 
+[!INCLUDE [cost-management-horizontal](../../../includes/cost-management-horizontal.md)]
+
 ## <a name="next-steps"></a>Étapes suivantes
 
 - [Créez un compte de stockage](storage-account-create.md)
 - [Créer un compte de stockage d’objet blob de blocs](../blobs/storage-blob-create-account-block-blob.md)
+- [Mettre à niveau vers un compte de stockage v2 à usage général](storage-account-upgrade.md)
+- [récupérer un compte de stockage supprimé](storage-account-recover.md)

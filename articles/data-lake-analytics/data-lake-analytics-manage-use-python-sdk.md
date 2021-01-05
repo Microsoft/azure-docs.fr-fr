@@ -1,20 +1,17 @@
 ---
 title: Gérer Azure Data Lake Analytics à l’aide de Python
 description: Cet article explique comment utiliser Python pour gérer des comptes, des sources de données, des utilisateurs et des travaux Data Lake Analytics.
-services: data-lake-analytics
 ms.service: data-lake-analytics
-author: matt1883
-ms.author: saveenr
-ms.reviewer: jasonwhowell
-ms.assetid: d4213a19-4d0f-49c9-871c-9cd6ed7cf731
-ms.topic: conceptual
+ms.reviewer: jasonh
+ms.topic: how-to
 ms.date: 06/08/2018
-ms.openlocfilehash: d40658e1510c9ae8a2e3e1f865df7ac95f61abfb
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-python
+ms.openlocfilehash: fda09047d138e404eeca87ed3eba9bb72ff62d56
+ms.sourcegitcommit: 8d8deb9a406165de5050522681b782fb2917762d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "68355985"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92220225"
 ---
 # <a name="manage-azure-data-lake-analytics-using-python"></a>Gérer Azure Data Lake Analytics à l’aide de Python
 [!INCLUDE [manage-selector](../../includes/data-lake-analytics-selector-manage.md)]
@@ -39,7 +36,7 @@ Installez les modules suivants :
 
 Tout d’abord, vérifiez que vous disposez des `pip` les plus récents en exécutant la commande suivante :
 
-```
+```console
 python -m pip install --upgrade pip
 ```
 
@@ -47,7 +44,7 @@ Ce document a été écrit à l’aide de `pip version 9.0.1`.
 
 Utilisez les commandes `pip` suivantes pour installer les modules à partir de la ligne de commande :
 
-```
+```console
 pip install azure-mgmt-resource
 pip install azure-datalake-store
 pip install azure-mgmt-datalake-store

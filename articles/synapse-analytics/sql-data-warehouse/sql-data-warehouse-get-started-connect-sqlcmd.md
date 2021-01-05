@@ -6,19 +6,19 @@ author: XiaoyuMSFT
 manager: craigg
 ms.service: synapse-analytics
 ms.topic: conceptual
-ms.subservice: ''
+ms.subservice: sql-dw
 ms.date: 04/17/2018
 ms.author: xiaoyul
 ms.reviewer: igorstan
-ms.custom: seo-lt-2019
-ms.openlocfilehash: 02157ca0d32d2347e50cc84a5c52e9c47b0f33b5
-ms.sourcegitcommit: bd5fee5c56f2cbe74aa8569a1a5bce12a3b3efa6
+ms.custom: seo-lt-2019, azure-synapse
+ms.openlocfilehash: f61f2932ad9c6342a81ec05df335e9ea4d659fce
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80745202"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96461977"
 ---
-# <a name="connect-to-synapse-sql-pool-with-sqlcmd"></a>Se connecter au pool SQL Synapse avec sqlcmd
+# <a name="connect-to-sql-pool-in-azure-synapse-analytics-with-sqlcmd"></a>Se connecter à un pool SQL dans Azure Synapse Analytics avec sqlcmd
 
 > [!div class="op_single_selector"]
 >
@@ -32,10 +32,10 @@ Utilisez l’utilitaire de ligne de commande [sqlcmd][sqlcmd] pour établir une 
 
 ## <a name="1-connect"></a>1. Se connecter
 
-Pour commencer à utiliser [sqlcmd][sqlcmd], ouvrez l’invite de commandes et entrez **sqlcmd** suivi de la chaîne de connexion de la base de données de votre pool SQL. La chaîne de connexion requiert les paramètres suivants :
+Pour commencer à utiliser [sqlcmd][sqlcmd], ouvrez l’invite de commandes et entrez **sqlcmd** suivi de la chaîne de connexion pour votre pool SQL. La chaîne de connexion requiert les paramètres suivants :
 
 * **Serveur (-S) :** Serveur, sous la forme `<`Nom_serveur`>`.database.windows.net
-* **Base de données (-d) :** Nom de la base de données.
+* **Base de données (-d) :** nom du pool SQL.
 * **Activer les identificateurs entre guillemets (-I) :** Les identificateurs entre guillemets doivent être activés pour permettre la connexion à une instance de pool SQL.
 
 Pour utiliser l’authentification SQL Server, vous devez ajouter les paramètres de nom d’utilisateur/mot de passe :

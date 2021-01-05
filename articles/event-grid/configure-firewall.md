@@ -1,20 +1,16 @@
 ---
-title: Configurer le pare-feu IP pour les rubriques ou domaines Azure Event Grid (version préliminaire)
+title: Configurer le pare-feu IP pour les rubriques ou domaines Azure Event Grid
 description: Cet article explique comment configurer les paramètres de pare-feu pour les rubriques ou domaines Event Grid.
-services: event-grid
-author: spelluru
-ms.service: event-grid
 ms.topic: conceptual
-ms.date: 04/22/2020
-ms.author: spelluru
-ms.openlocfilehash: 0db6c2c346a6eb6ef016340fcfc2974c85958e6c
-ms.sourcegitcommit: c535228f0b77eb7592697556b23c4e436ec29f96
+ms.date: 07/07/2020
+ms.openlocfilehash: fd190a13a177b6b6d0f6b0dbcaa35d63dccd93c9
+ms.sourcegitcommit: 32c521a2ef396d121e71ba682e098092ac673b30
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/06/2020
-ms.locfileid: "82858097"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91324159"
 ---
-# <a name="configure-ip-firewall-for-azure-event-grid-topics-or-domains-preview"></a>Configurer le pare-feu IP pour les rubriques ou domaines Azure Event Grid (version préliminaire)
+# <a name="configure-ip-firewall-for-azure-event-grid-topics-or-domains"></a>Configurer le pare-feu IP pour les rubriques ou domaines Azure Event Grid 
 Par défaut, la rubrique et le domaine sont accessibles sur Internet tant que la demande s’accompagne d’une authentification et d’une autorisation valides. Avec le pare-feu IP, vous pouvez les limiter à un ensemble d’adresses IPv4 ou de plages d’adresses IPv4 dans la notation [CIDR (Classless InterDomain Routing)](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing). Les serveurs de publication provenant de toute autre adresse IP seront rejetés et recevront une réponse 403 (interdit). Pour plus d’informations sur les fonctionnalités de sécurité réseau prises en charge par Event Grid, consultez [Sécurité réseau pour Event Grid](network-security.md).
 
 Cet article explique comment configurer les paramètres de pare-feu IP pour les rubriques ou domaines Azure Event Grid.
@@ -27,7 +23,7 @@ Cette section montre comment utiliser le Portail Azure afin de créer des règle
 
     Vous pouvez limiter le trafic à l’aide de règles de pare-feu basées sur IP. Spécifiez une seule adresse IPv4 ou une plage d’adresses IP dans la notation CIDR (Classless Inter-Domain Routing). 
 
-    ![Page des réseaux publics](./media/configure-firewall/public-networks-page.png)
+    ![Capture d’écran montrant la page « Accès au réseau public » avec l’option « Réseaux publics » sélectionnée.](./media/configure-firewall/public-networks-page.png)
 3. Sélectionnez **Points de terminaison privés uniquement** pour autoriser uniquement les connexions de point de terminaison privées à accéder à cette ressource. Utilisez l’onglet **Connexions des points de terminaison privés** de cette page pour gérer les connexions. 
 
     ![Page des réseaux publics](./media/configure-firewall/private-endpoints-page.png)
@@ -199,7 +195,7 @@ Par défaut, l’accès au réseau public est activé pour les rubriques et les 
 $body = @{"properties"=@{"publicNetworkAccess"="enabled"}} | ConvertTo-Json -Depth 5
 
 Invoke-RestMethod -Method 'Patch' `
-    -Uri "https://management.azure.com/subscriptions/<AZURE SUBSCRIPTION ID>/resourceGroups/<RESOURCE GROUP NAME>/providers/Microsoft.EventGrid/topics/<EVENT GRID TOPIC NAME>?api-version=2020-04-01-preview" `
+    -Uri "https://management.azure.com/subscriptions/<AZURE SUBSCRIPTION ID>/resourceGroups/<RESOURCE GROUP NAME>/providers/Microsoft.EventGrid/topics/<EVENT GRID TOPIC NAME>?api-version=2020-06-01" `
     -Headers $Headers `
     -Body $body `
     | ConvertTo-Json -Depth 5
@@ -212,7 +208,7 @@ Lorsque l’accès au réseau public est désactivé pour une rubrique ou un dom
 $body = @{"properties"=@{"publicNetworkAccess"="disabled"}} | ConvertTo-Json -Depth 5
 
 Invoke-RestMethod -Method 'Patch' `
-    -Uri "https://management.azure.com/subscriptions/<AZURE SUBSCRIPTION ID>/resourceGroups/<RESOURCE GROUP NAME>/providers/Microsoft.EventGrid/topics/<EVENT GRID TOPIC NAME>?api-version=2020-04-01-preview" `
+    -Uri "https://management.azure.com/subscriptions/<AZURE SUBSCRIPTION ID>/resourceGroups/<RESOURCE GROUP NAME>/providers/Microsoft.EventGrid/topics/<EVENT GRID TOPIC NAME>?api-version=2020-06-01" `
     -Headers $Headers `
     -Body $body `
     | ConvertTo-Json -Depth 5
@@ -227,13 +223,13 @@ $body = @{"location"="<LOCATION>"; "sku"= @{"name"="basic"}; "properties"=@{"pub
 
 # create the event grid topic with inbound IP rules
 Invoke-RestMethod -Method 'Put' `
-    -Uri "https://management.azure.com/subscriptions/<AZURE SUBSCRIPTION ID>/resourceGroups/<RESOURCE GROUP NAME>/providers/Microsoft.EventGrid/topics/<EVENT GRID TOPIC NAME>?api-version=2020-04-01-preview" `
+    -Uri "https://management.azure.com/subscriptions/<AZURE SUBSCRIPTION ID>/resourceGroups/<RESOURCE GROUP NAME>/providers/Microsoft.EventGrid/topics/<EVENT GRID TOPIC NAME>?api-version=2020-06-01" `
     -Headers $Headers `
     -Body $body
 
 # verify that the topic was created
 Invoke-RestMethod -Method 'Get' `
-    -Uri "https://management.azure.com/subscriptions/<AZURE SUBSCRIPTION ID>/resourceGroups/<RESOURCE GROUP NAME>/providers/Microsoft.EventGrid/topics/<EVENT GRID TOPIC NAME>?api-version=2020-04-01-preview" `
+    -Uri "https://management.azure.com/subscriptions/<AZURE SUBSCRIPTION ID>/resourceGroups/<RESOURCE GROUP NAME>/providers/Microsoft.EventGrid/topics/<EVENT GRID TOPIC NAME>?api-version=2020-06-01" `
     -Headers $Headers `
     | ConvertTo-Json -Depth 5
 ```
@@ -248,13 +244,13 @@ $body = @{"location"="<LOCATION>"; "sku"= @{"name"="basic"}; "properties"=@{"pub
 
 # create the Event Grid topic
 Invoke-RestMethod -Method 'Put' `
-    -Uri "https://management.azure.com/subscriptions/<AZURE SUBSCRIPTION ID>/resourceGroups/<RESOURCE GROUP NAME>/providers/Microsoft.EventGrid/topics/<EVENT GRID TOPIC NAME>?api-version=2020-04-01-preview" `
+    -Uri "https://management.azure.com/subscriptions/<AZURE SUBSCRIPTION ID>/resourceGroups/<RESOURCE GROUP NAME>/providers/Microsoft.EventGrid/topics/<EVENT GRID TOPIC NAME>?api-version=2020-06-01" `
     -Headers $Headers `
     -Body $body`
 
 # verify that the topic was created
 Invoke-RestMethod -Method 'Get' `
-    -Uri "https://management.azure.com/subscriptions/<AZURE SUBSCRIPTION ID>/resourceGroups/<RESOURCE GROUP NAME>/providers/Microsoft.EventGrid/topics/<EVENT GRID TOPIC NAME>?api-version=2020-04-01-preview" `
+    -Uri "https://management.azure.com/subscriptions/<AZURE SUBSCRIPTION ID>/resourceGroups/<RESOURCE GROUP NAME>/providers/Microsoft.EventGrid/topics/<EVENT GRID TOPIC NAME>?api-version=2020-06-01" `
     -Headers $Headers `
     | ConvertTo-Json -Depth 5
 
@@ -263,13 +259,13 @@ $body = @{"location"="<LOCATION>"; "sku"= @{"name"="basic"}; "properties"=@{"pub
 
 # update the topic with inbound IP rules
 Invoke-RestMethod -Method 'Put' `
-    -Uri "https://management.azure.com/subscriptions/<AZURE SUBSCRIPTION ID>/resourceGroups/<RESOURCE GROUP NAME>/providers/Microsoft.EventGrid/topics/<EVENT GRID TOPIC NAME>?api-version=2020-04-01-preview" `
+    -Uri "https://management.azure.com/subscriptions/<AZURE SUBSCRIPTION ID>/resourceGroups/<RESOURCE GROUP NAME>/providers/Microsoft.EventGrid/topics/<EVENT GRID TOPIC NAME>?api-version=2020-06-01" `
     -Headers $Headers `
     -Body $body
 
 # verify that the topic was updated
 Invoke-RestMethod -Method 'Get' 
-    -Uri "https://management.azure.com/subscriptions/<AzURE SUBSCRIPTION ID>/resourceGroups/<RESOURCE GROUP NAME>/providers/Microsoft.EventGrid/topics/<EVENT GRID TOPIC NAME>?api-version=2020-04-01-preview" `
+    -Uri "https://management.azure.com/subscriptions/<AzURE SUBSCRIPTION ID>/resourceGroups/<RESOURCE GROUP NAME>/providers/Microsoft.EventGrid/topics/<EVENT GRID TOPIC NAME>?api-version=2020-06-01" `
     -Headers $Headers `
     | ConvertTo-Json -Depth 5
 
@@ -280,3 +276,4 @@ Invoke-RestMethod -Method 'Get'
 * Pour plus d’information sur la surveillance des remises des événements, consultez [Surveiller la remise des messages Event Grid](monitor-event-delivery.md).
 * Pour plus d’informations sur la clé d’authentification, consultez la page [Sécurité et authentification Azure Event Grid](security-authentication.md).
 * Pour plus d’informations sur la création d’un abonnement Azure Event Grid, consultez [Schéma d’abonnement à Event Grid](subscription-creation-schema.md).
+* Pour résoudre les problèmes de connectivité réseau, consultez [Résoudre les problèmes de connectivité réseau](troubleshoot-network-connectivity.md).

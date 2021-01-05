@@ -11,12 +11,12 @@ ms.topic: conceptual
 ms.date: 01/10/2018
 ms.author: jingwang
 robots: noindex
-ms.openlocfilehash: 6eb7012e28319ee6cc86de5ee56090743d681068
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: af7a1e40f21b6c9af490abe6f58edcaf798818b4
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74923864"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85318873"
 ---
 # <a name="map-source-dataset-columns-to-destination-dataset-columns"></a>Mapper des colonnes d’un jeu de données source sur des colonnes d’un jeu de données de destination
 > [!NOTE]
@@ -39,7 +39,7 @@ Voici une liste de conditions d’erreur qui entraînent la levée d’une excep
 > Les exemples suivants concernent SQL Azure et les objets blob Azure, mais sont applicables à tout magasin de données prenant en charge les jeux de données rectangulaires. Ajustez les définitions du jeu de données et du service lié dans les exemples de sorte qu’elles pointent vers les données de la source de données appropriée.
 
 ## <a name="sample-1--column-mapping-from-azure-sql-to-azure-blob"></a>Exemple 1 : mappage de colonnes depuis SQL Azure vers un objet blob Azure
-Dans cet exemple, la table d’entrée possède une structure et pointe vers une table SQL comprise dans une base de données Azure SQL.
+Dans cet exemple, la table d’entrée possède une structure et pointe vers une table SQL comprise dans Azure SQL Database.
 
 ```json
 {

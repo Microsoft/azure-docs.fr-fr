@@ -11,12 +11,12 @@ metadata:
   ms.topic: landing-page
   ms.date: 03/10/2020
   ms.author: trbye
-  ms.openlocfilehash: 83bf5f9e623d1d777834e5efdd26fa4cdbc42819
-  ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+  ms.openlocfilehash: d9491c43382def26ca9106675997e1dc4f071535
+  ms.sourcegitcommit: 28c5fdc3828316f45f7c20fc4de4b2c05a1c5548
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 04/16/2020
-  ms.locfileid: "81401465"
+  ms.lasthandoff: 10/22/2020
+  ms.locfileid: "92756850"
 landingContent:
 - title: À propos de la synthèse vocale
   linkLists:
@@ -24,26 +24,20 @@ landingContent:
     links:
     - text: Qu’est-ce que la synthèse vocale ?
       url: text-to-speech.md
-    - text: Bases de la synthèse vocale
-      url: text-to-speech-basics.md
+    - text: Utiliser l’interface de commande Speech pour la conversion de texte par synthèse vocale sans code
+      url: spx-overview.md
   - linkListType: quickstart
     links:
-    - text: Synthétiser la voix vers un haut-parleur
-      url: quickstarts/text-to-speech.md
-    - text: Synthétiser la voix vers un fichier audio
-      url: quickstarts/text-to-speech-audio-file.md
-    - text: Synthétiser la parole au format audio long
-      url: quickstarts/text-to-speech/async-synthesis-long-form-audio.md
+    - text: Bien démarrer avec la conversion de texte par synthèse vocale
+      url: get-started-text-to-speech.md
 - title: Développer avec la synthèse vocale
   linkLists:
   - linkListType: how-to-guide
     links:
     - text: Améliorer la synthèse avec SSML
       url: speech-synthesis-markup.md
-    - text: Obtenir une liste de voix avec REST (Python)
-      url: quickstart-python-get-text-to-speech-voices.md
-    - text: Convertir du texte par synthèse vocale avec REST (Python)
-      url: quickstart-python-text-to-speech.md
+    - text: Synthétiser des exemples de texte volumineux avec l’API Audio long
+      url: long-audio-api.md
   - linkListType: concept
     links:
     - text: Bien démarrer avec Custom Voice
@@ -64,3 +58,9 @@ landingContent:
       url: speech-ssml-phonetic-sets.md
     - text: Tarification de la synthèse vocale
       url: https://azure.microsoft.com/pricing/details/cognitive-services/speech-services
+- title: Aide et commentaires
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: Options d’aide et de support
+      url: ../cognitive-services-support-options.md?context=/azure/cognitive-services/speech-service/context/context

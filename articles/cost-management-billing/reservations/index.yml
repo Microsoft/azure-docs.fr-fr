@@ -1,21 +1,22 @@
 ### YamlMime:Landing
 title: Enregistrer avec les réservations Azure
-summary: Découvrez comment les réservations Azure vous permettent d’économiser en vous engageant sur un plan d’un ou trois ans pour des machines virtuelles, un stockage Blob Azure ou Azure Data Lake Storage Gen2, une capacité de calcul SQL Database, un débit Azure Cosmos DB et autres ressources Azure. 
+summary: Découvrez comment les réservations Azure vous permettent d’économiser en vous engageant sur un plan d’un ou trois ans pour des machines virtuelles, un stockage Blob Azure ou Azure Data Lake Storage Gen2, une capacité de calcul SQL Database, un débit Azure Cosmos DB et autres ressources Azure.
 metadata:
   title: Enregistrer avec les réservations Azure
-  description: Découvrez comment les réservations Azure vous permettent d’économiser en vous engageant sur un plan d’un ou trois ans pour des machines virtuelles, un stockage Blob Azure ou Azure Data Lake Storage Gen2, une capacité de calcul SQL Database, un débit Azure Cosmos DB et autres ressources Azure. 
+  description: Découvrez comment les réservations Azure vous permettent d’économiser en vous engageant sur un plan d’un ou trois ans pour des machines virtuelles, un stockage Blob Azure ou Azure Data Lake Storage Gen2, une capacité de calcul SQL Database, un débit Azure Cosmos DB et autres ressources Azure.
   ms.service: cost-management-billing
+  ms.subservice: reservations
   ms.topic: landing-page
   ms.collection: collection
   author: bandersmsft
   ms.author: banders
   ms.date: 04/30/2020
-  ms.openlocfilehash: 648ba197fd30771061f6629fb834bd3dd95cab40
-  ms.sourcegitcommit: 1895459d1c8a592f03326fcb037007b86e2fd22f
+  ms.openlocfilehash: d6f3b3f6844de00a1d175c1ba32704e55585cd43
+  ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 05/01/2020
-  ms.locfileid: "82628586"
+  ms.lasthandoff: 11/30/2020
+  ms.locfileid: "96344213"
 landingContent:
 - title: Acheter des réservations
   linkLists:
@@ -26,7 +27,7 @@ landingContent:
     - text: Échanges et remboursements de réservations
       url: exchange-and-refund-azure-reservations.md
     - text: Acheter une réservation avec paiements mensuels
-      url: monthly-payments-reservations.md
+      url: ./prepare-buy-reservation.md
   - linkListType: how-to-guide
     links:
     - text: Renouveler des réservations
@@ -34,13 +35,13 @@ landingContent:
     - text: Azure Synapse Analytics
       url: prepay-sql-data-warehouse-charges.md
     - text: Machine virtuelle
-      url: ../../virtual-machines/windows/prepay-reserved-vm-instances.md?toc=/azure/cost-management-billing/reservations/toc.json
+      url: ../../virtual-machines/prepay-reserved-vm-instances.md?toc=%2fazure%2fcost-management-billing%2freservations%2ftoc.json
     - text: Stockage Azure
       url: ../../storage/blobs/storage-blob-reserved-capacity.md?toc=/azure/cost-management-billing/reservations/toc.json
     - text: Cosmos DB
       url: ../../cosmos-db/cosmos-db-reserved-capacity.md?toc=/azure/cost-management-billing/toc.json
     - text: SQL Database
-      url: ../../sql-database/sql-database-reserved-capacity.md?toc=/azure/cost-management-billing/toc.json
+      url: ../../azure-sql/database/reserved-capacity-overview.md?toc=%2fazure%2fcost-management-billing%2ftoc.json
     - text: Explorateur de données Azure
       url: /azure/data-explorer/pricing-reserved-capacity?toc=/azure/cost-management-billing/toc.json
     - text: Azure Databricks
@@ -55,7 +56,7 @@ landingContent:
     links:
     - text: Instances de machines virtuelles réservées
       url: ../manage/understand-vm-reservation-charges.md
-    - text: Capacité réservée Stockage Azure
+    - text: Capacité réservée de stockage Azure
       url: understand-storage-charges.md
     - text: Capacité réservée Cosmos DB
       url: understand-cosmosdb-reservation-charges.md

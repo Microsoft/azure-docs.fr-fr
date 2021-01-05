@@ -1,21 +1,21 @@
 ### YamlMime:Landing
 title: Documentation sur Azure Stream Analytics
-summary: Azure Stream Analytics est un service d’analytique en temps réel entièrement managé. Il est conçu pour vous aider à analyser et à traiter des flux de données à grande vitesse qui peuvent servir à déclencher des alertes et des actions. Découvrez comment utiliser Azure Stream Analytics avec nos guides de démarrage rapide, nos tutoriels et nos exemples.
+summary: Azure Stream Analytics est un service d’analytique en temps réel entièrement managé, qui est conçu pour vous aider à analyser et à traiter des flux de données rapides pouvant servir à obtenir des insights, créer des rapports ou déclencher des alertes et des actions. Découvrez comment utiliser Azure Stream Analytics avec nos guides de démarrage rapide, nos tutoriels et nos exemples.
 metadata:
   title: Documentation sur Azure Stream Analytics
-  description: Azure Stream Analytics est un service d’analytique en temps réel entièrement managé. Il est conçu pour vous aider à analyser et à traiter des flux de données à grande vitesse qui peuvent servir à déclencher des alertes et des actions. Découvrez comment utiliser Azure Stream Analytics avec nos guides de démarrage rapide, nos tutoriels et nos exemples.
+  description: Azure Stream Analytics est un service d’analytique en temps réel entièrement managé, qui est conçu pour vous aider à analyser et à traiter des flux de données rapides pouvant servir à obtenir des insights, créer des rapports ou déclencher des alertes et des actions. Découvrez comment utiliser Azure Stream Analytics avec nos guides de démarrage rapide, nos tutoriels et nos exemples.
   services: service
   ms.service: stream-analytics
   ms.topic: landing-page
   author: mamccrea
   ms.author: mamccrea
   ms.date: 09/16/2019
-  ms.openlocfilehash: 757c60487e4c4c7fedca4824cd40e86cbd9ca465
-  ms.sourcegitcommit: edccc241bc40b8b08f009baf29a5580bf53e220c
+  ms.openlocfilehash: 15383360fcea2625ff93fd61d7ab74ac873ed866
+  ms.sourcegitcommit: e0ec3c06206ebd79195d12009fd21349de4a995d
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 04/24/2020
-  ms.locfileid: "82130947"
+  ms.lasthandoff: 12/18/2020
+  ms.locfileid: "97683516"
 landingContent:
 - title: À propos d’Azure Stream Analytics
   linkLists:
@@ -143,7 +143,7 @@ landingContent:
       url: stream-analytics-machine-learning-anomaly-detection.md
     - text: Effectuer une analyse des sentiments avec Azure Machine Learning Studio (classique)
       url: stream-analytics-machine-learning-integration-tutorial.md
-    - text: Mettre à l’échelle des tâches avec des fonctions Machine Learning Studio
+    - text: Mettre à l’échelle des travaux avec des fonctions Azure Machine Learning Studio (classique)
       url: stream-analytics-scale-with-machine-learning-functions.md
 - title: Créer et gérer des tâches avec les outils de développement
   linkLists:
@@ -171,8 +171,8 @@ landingContent:
   linkLists:
   - linkListType: tutorial
     links:
-    - text: Créer et gérer une tâche
-      url: stream-analytics-manage-job.md
+    - text: Détection des fraudes en temps réel
+      url: stream-analytics-real-time-fraud-detection.md
     - text: Déclencher une fonction Azure
       url: stream-analytics-with-azure-functions.md
   - linkListType: how-to-guide
@@ -183,8 +183,6 @@ landingContent:
       url: stream-analytics-edge.md
     - text: Créer une solution d’analyse des sentiments
       url: stream-analytics-twitter-sentiment-analysis-trends.md
-    - text: Détection des fraudes en temps réel
-      url: stream-analytics-real-time-fraud-detection.md
     - text: Créer une solution IoT
       url: stream-analytics-build-an-iot-solution-using-stream-analytics.md
     - text: Simulation d’échange à fréquence élevée
@@ -193,14 +191,10 @@ landingContent:
       url: stream-analytics-threshold-based-rules.md
 - title: Déployer des tâches Stream Analytics
   linkLists:
-  - linkListType: tutorial
-    links:
-    - text: Déployer une tâche avec CI/CD à l’aide d’Azure Pipelines
-      url: stream-analytics-tools-visual-studio-cicd-vsts.md
   - linkListType: how-to-guide
     links:
     - text: Configurer un pipeline CI/CD avec Visual Studio Code
-      url: setup-cicd-vs-code.md
+      url: ./cicd-overview.md
     - text: Configurer un pipeline CI/CD avec Visual Studio
       url: stream-analytics-tools-for-visual-studio-cicd.md
     - text: Utiliser des API REST pour configurer CI/CD pour des tâches IoT Edge

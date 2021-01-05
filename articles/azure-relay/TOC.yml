@@ -44,6 +44,8 @@
       href: relay-hybrid-connections-protocol.md
 - name: Procédure
   items:
+    - name: Passer d’une région à l’autre
+      href: move-across-regions.md
     - name: Migrer des API Azure Service Manager (Classic) vers des API Resource Manager
       href: ../service-bus-messaging/deprecate-service-bus-management.md?toc=%2fazure%2fservice-bus-relay%2ftoc.json
     - name: Planifier et concevoir
@@ -92,7 +94,7 @@
     - name: Questions fréquentes (FAQ)
       href: relay-faq.md
     - name: Blog
-      href: 'https://blogs.msdn.microsoft.com/servicebus/'
+      href: /archive/blogs/servicebus/
     - name: Tarifs
       href: 'https://azure.microsoft.com/pricing/details/service-bus/'
     - name: Calculatrice de prix

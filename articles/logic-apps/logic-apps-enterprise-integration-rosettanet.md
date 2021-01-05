@@ -8,12 +8,12 @@ ms.author: divswa
 ms.reviewer: jonfan, estfan, logicappspm
 ms.topic: article
 ms.date: 06/22/2019
-ms.openlocfilehash: 2cc2ac08b9624c1d1d9bee9ce91a7c91189d7f2c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f02cbdc7ca8822c5fcc91b106856d7f8f547536b
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74792420"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91565103"
 ---
 # <a name="exchange-rosettanet-messages-for-b2b-enterprise-integration-in-azure-logic-apps"></a>Échanger des messages RosettaNet pour l’intégration d’entreprise B2B dans Azure Logic Apps
 
@@ -82,7 +82,7 @@ Pour ajouter une configuration de processus PIP à votre compte d’intégration
    | Propriété | Obligatoire | Description |
    |----------|----------|-------------|
    | **Nom** | Oui | Nom de votre PIP |
-   | **PIP Code** (Code de PIP) | Oui | Code à trois chiffres du processus PIP. Pour plus d’informations, consultez les [processus PIP RosettaNet](https://docs.microsoft.com/biztalk/adapters-and-accelerators/accelerator-rosettanet/rosettanet-pips). |
+   | **PIP Code** (Code de PIP) | Oui | Code à trois chiffres du processus PIP. Pour plus d’informations, consultez les [processus PIP RosettaNet](/biztalk/adapters-and-accelerators/accelerator-rosettanet/rosettanet-pips). |
    | **PIP Version** (Version de PIP) | Oui | Numéro de version du processus PIP, disponible en fonction de votre code de PIP sélectionné |
    ||||
 
@@ -197,7 +197,7 @@ Pour accélérer le développement et recommander des modèles d’intégration,
 
 1. Entrez les informations pour les propriétés de l’action :
 
-   ![Fournir les détails de l’action](media/logic-apps-enterprise-integration-rosettanet/decode-action-details.png)
+   ![Capture d'écran montrant où entrer les informations relatives aux propriétés de l'action.](media/logic-apps-enterprise-integration-rosettanet/decode-action-details.png)
 
    | Propriété | Obligatoire | Description |
    |----------|----------|-------------|

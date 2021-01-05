@@ -3,24 +3,24 @@ title: Restaurer la clé et le secret du Key Vault pour les machines virtuelles 
 description: Découvrez comment restaurer la clé et la clé secrète du Key Vault dans Azure Backup à l’aide de PowerShell
 ms.topic: conceptual
 ms.date: 08/28/2017
-ms.openlocfilehash: 826b3917fda820ed02cde425ca5a394bffec0df1
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 456ce18f253ffa02cd6b13826a7839f18beecba7
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82186819"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88827084"
 ---
 # <a name="restore-key-vault-key-and-secret-for-encrypted-vms-using-azure-backup"></a>Restaurer la clé et le secret du Key Vault pour les machines virtuelles chiffrées à l’aide d’Azure Backup
 
-Cet article décrit l’utilisation de Sauvegarde de VM Azure pour restaurer des machines virtuelles Azure chiffrées si vos clé et secret n’existent pas dans le Key Vault. Vous pouvez également suivre cette procédure si vous souhaitez conserver une copie distincte de la clé (clé de chiffrement à clé) et du secret (clé de chiffrement BitLocker) pour la machine Virtuelle restaurée.
+Cet article décrit l'utilisation du service de sauvegarde de machines virtuelles Azure pour restaurer des machines virtuelles Azure chiffrées si votre clé et votre secret ne figurent pas dans le coffre de clés. Vous pouvez également suivre cette procédure si vous souhaitez conserver une copie distincte de la clé (clé de chiffrement à clé) et du secret (clé de chiffrement BitLocker) pour la machine Virtuelle restaurée.
 
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
 
 ## <a name="prerequisites"></a>Prérequis
 
-* **Sauvegarder les machines virtuelles chiffrées** : les machines virtuelles Azure chiffrées ont été sauvegardées à l’aide d’Azure Backup. Pour plus d’informations sur la sauvegarde de machines virtuelles Azure chiffrées, consultez [Gérer la sauvegarde et la restauration de machines virtuelles Azure à l’aide de PowerShell](backup-azure-vms-automation.md).
-* **Configurer Azure Key Vault**: assurez-vous que le Key Vault dans lequel les clés et secrets doivent être restaurés est déjà présent. Pour plus d’informations sur la gestion du Key Vault, voir [Prise en main d’Azure Key Vault](../key-vault/key-vault-get-started.md).
-* **Restauration du disque** : vérifiez que vous avez déclenché des travaux de restauration pour restaurer les disques d’une machine virtuelle chiffrée à l’aide des [étapes PowerShell](backup-azure-vms-automation.md#restore-an-azure-vm). Ceci parce que ce travail génère un fichier JSON dans votre compte de stockage contenant les clés et les secrets de la machine virtuelle chiffrée à restaurer.
+* **Sauvegarder les machines virtuelles chiffrées** : les machines virtuelles Azure chiffrées ont été sauvegardées à l’aide d’Azure Backup. Pour plus d'informations sur la sauvegarde de machines virtuelles Azure chiffrées, consultez [Gérer la sauvegarde et la restauration de machines virtuelles Azure à l'aide de PowerShell](backup-azure-vms-automation.md).
+* **Configurer Azure Key Vault**: assurez-vous que le Key Vault dans lequel les clés et secrets doivent être restaurés est déjà présent. Pour plus d'informations sur la gestion du coffre de clés, consultez [Prise en main d'Azure Key Vault](../key-vault/general/overview.md).
+* **Restauration du disque** : vérifiez que vous avez déclenché le travail de restauration pour restaurer les disques d'une machine virtuelle chiffrée à l'aide des [étapes PowerShell](backup-azure-vms-automation.md#restore-an-azure-vm). Ceci parce que ce travail génère un fichier JSON dans votre compte de stockage contenant les clés et les secrets de la machine virtuelle chiffrée à restaurer.
 
 ## <a name="get-key-and-secret-from-azure-backup"></a>Obtenir la clé et le secret à partir d’Azure Backup
 
@@ -92,20 +92,20 @@ Restore-AzureKeyVaultSecret -VaultName '<target_key_vault_name>' -InputFile $sec
 
 > [!NOTE]
 >
-> * La valeur de $secretname peut être obtenue par référence à la sortie de $encryptionObject.OsDiskKeyAndSecretDetails.SecretUrl et en utilisant le texte après secrets/ ; par exemple, l’URL du secret de sortie est `https://keyvaultname.vault.azure.net/secrets/B3284AAA-DAAA-4AAA-B393-60CAA848AAAA/xx000000xx0849999f3xx30000003163` et le nom du secret est B3284AAA-DAAA-4AAA-B393-60CAA848AAAA.
+> * La valeur de $secretname peut être obtenue par référence à la sortie de $encryptionObject.OsDiskKeyAndSecretDetails.SecretUrl et en utilisant le texte après secrets/ Par exemple, l'URL du secret de sortie est `https://keyvaultname.vault.azure.net/secrets/B3284AAA-DAAA-4AAA-B393-60CAA848AAAA/xx000000xx0849999f3xx30000003163` et le nom du secret est B3284AAA-DAAA-4AAA-B393-60CAA848AAAA.
 > * La valeur de la balise DiskEncryptionKeyFileName est identique au nom du secret.
 >
 >
 
 ## <a name="create-virtual-machine-from-restored-disk"></a>Créer une machine virtuelle à partir du disque restauré
 
-Si vous avez sauvegardé une machine virtuelle chiffrée à l’aide de la Sauvegarde de VM Azure, les applets de commande PowerShell mentionnées plus haut peuvent vous aider à restaurer la clé et le secret dans le coffre de clés. Après leur restauration, consultez l’article [Gérer la sauvegarde et la restauration de machines virtuelles Azure à l’aide de PowerShell](backup-azure-vms-automation.md#create-a-vm-from-restored-disks) pour créer des machines virtuelles chiffrées à partir du disque, de la clé et du secret restaurés.
+Si vous avez sauvegardé une machine virtuelle chiffrée à l'aide du service de sauvegarde de machines virtuelles Azure, les cmdlets PowerShell mentionnées plus haut peuvent vous aider à restaurer la clé et le secret dans le coffre de clés. Après leur restauration, consultez l'article [Gérer la sauvegarde et la restauration de machines virtuelles Azure à l'aide de PowerShell](backup-azure-vms-automation.md#create-a-vm-from-restored-disks) pour créer des machines virtuelles chiffrées à partir du disque, de la clé et du secret restaurés.
 
 ## <a name="legacy-approach"></a>Approche héritée
 
 La méthode ci-dessus fonctionne pour tous les points de récupération. Toutefois, l’ancienne méthode d’obtention des informations relatives à la clé et au secret à partir du point de récupération est toujours valide pour les points de récupération antérieurs au 11 juillet 2017, sur les machines virtuelles chiffrées à l’aide de BEK et KEK. Une fois le travail de restauration du disque terminé pour la machine virtuelle chiffrée à l’aide des [étapes PowerShell](backup-azure-vms-automation.md#restore-an-azure-vm), assurez-vous que $rp est alimenté avec une valeur valide.
 
-### <a name="restore-key"></a>Restaurer la clé
+### <a name="restore-key-legacy-approach"></a>Restaurer la clé (approche héritée)
 
 Utilisez les applets de commande suivantes pour obtenir des informations de clés (KEK) à partir du point de récupération et alimentez-les pour restaurer l’applet de commande clé pour la replacer dans le coffre de clés.
 
@@ -114,7 +114,7 @@ $rp1 = Get-AzRecoveryServicesBackupRecoveryPoint -RecoveryPointId $rp[0].Recover
 Restore-AzureKeyVaultKey -VaultName '<target_key_vault_name>' -InputFile 'C:\Users\downloads'
 ```
 
-### <a name="restore-secret"></a>Restaurer le secret
+### <a name="restore-secret-legacy-approach"></a>Restaurer le secret (approche héritée)
 
 Utilisez les applets de commande suivantes pour obtenir des informations de secrets (KEK) à partir du point de récupération et alimentez-les pour restaurer l’applet de commande secrète pour la replacer dans le coffre de clés.
 
@@ -128,7 +128,7 @@ Set-AzureKeyVaultSecret -VaultName '<target_key_vault_name>' -Name $secretname -
 
 > [!NOTE]
 >
-> * La valeur de $secretname peut être obtenue par référence à la sortie de $rp1.KeyAndSecretDetails.SecretUrl et en utilisant le texte après secrets/, par exemple l’URL du secret de sortie est `https://keyvaultname.vault.azure.net/secrets/B3284AAA-DAAA-4AAA-B393-60CAA848AAAA/xx000000xx0849999f3xx30000003163` et le nom secret est B3284AAA-DAAA-4AAA-B393-60CAA848AAAA
+> * La valeur de $secretname peut être obtenue par référence à la sortie de $rp1.KeyAndSecretDetails.SecretUrl et en utilisant le texte après secrets/ Par exemple, l'URL du secret de sortie est `https://keyvaultname.vault.azure.net/secrets/B3284AAA-DAAA-4AAA-B393-60CAA848AAAA/xx000000xx0849999f3xx30000003163` et le nom du secret est B3284AAA-DAAA-4AAA-B393-60CAA848AAAA
 > * La valeur de la balise DiskEncryptionKeyFileName est identique au nom du secret.
 > * Vous pouvez obtenir la valeur de DiskEncryptionKeyEncryptionKeyURL à partir du Key Vault après la restauration des clés, et en utilisant l’applet de commande [Get-AzureKeyVaultKey](/powershell/module/azurerm.keyvault/get-azurekeyvaultkey).
 >
@@ -136,4 +136,4 @@ Set-AzureKeyVaultSecret -VaultName '<target_key_vault_name>' -Name $secretname -
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Après la restauration de la clé et du secret dans le coffre de clés, consultez l’article [Gérer la sauvegarde et la restauration de machines virtuelles Azure à l’aide de PowerShell](backup-azure-vms-automation.md#create-a-vm-from-restored-disks) pour créer des machines virtuelles chiffrées à partir du disque, de la clé et du secret restaurés.
+Après la restauration de la clé et du secret dans le coffre de clés, consultez l'article [Gérer la sauvegarde et la restauration de machines virtuelles Azure à l'aide de PowerShell](backup-azure-vms-automation.md#create-a-vm-from-restored-disks) pour créer des machines virtuelles chiffrées à partir du disque, de la clé et du secret restaurés.

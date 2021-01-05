@@ -7,12 +7,12 @@ ms.service: vpn-gateway
 ms.topic: troubleshooting
 ms.date: 09/16/2019
 ms.author: genli
-ms.openlocfilehash: 4e827c5f6eedc819bc3635cb09a28f65df51312c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 674b8ab8266921a4eef8bbf212f3c556b1e587d7
+ms.sourcegitcommit: 8e7316bd4c4991de62ea485adca30065e5b86c67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75862575"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94658347"
 ---
 # <a name="troubleshooting-an-azure-site-to-site-vpn-connection-cannot-connect-and-stops-working"></a>Résolution des problèmes : la connexion VPN site à site Azure cesse de fonctionner
 
@@ -22,7 +22,7 @@ Après avoir configuré une connexion VPN de site à site entre un réseau local
 
 ## <a name="troubleshooting-steps"></a>Étapes de dépannage
 
-Pour résoudre le problème, essayez d’abord de [réinitialiser la passerelle VPN Azure](vpn-gateway-resetgw-classic.md) et de réinitialiser le tunnel à partir du périphérique VPN local. Si le problème persiste, procédez comme suit pour en identifier la cause.
+Pour résoudre le problème, essayez d’abord de [réinitialiser la passerelle VPN Azure](./reset-gateway.md) et de réinitialiser le tunnel à partir du périphérique VPN local. Si le problème persiste, procédez comme suit pour en identifier la cause.
 
 ### <a name="prerequisite-step"></a>Étape des conditions préalables
 
@@ -60,11 +60,15 @@ Pour afficher la clé partagée dans l’optique de la connexion VPN Azure, util
 
 Pour le modèle de déploiement Azure Resource Manager :
 
-    Get-AzVirtualNetworkGatewayConnectionSharedKey -Name <Connection name> -ResourceGroupName <Resource group name>
+```azurepowershell
+Get-AzVirtualNetworkGatewayConnectionSharedKey -Name <Connection name> -ResourceGroupName <Resource group name>
+```
 
 Pour le modèle de déploiement classique :
 
-    Get-AzureVNetGatewayKey -VNetName -LocalNetworkSiteName
+```azurepowershell
+Get-AzureVNetGatewayKey -VNetName -LocalNetworkSiteName
+```
 
 ### <a name="step-3-verify-the-vpn-peer-ips"></a>Étape 3. Vérifier les adresses IP d’homologue VPN
 

@@ -1,6 +1,6 @@
 ---
 title: Gestion de compte CloudSimple – Azure
-description: Apprenez-en davantage sur la gestion de compte CloudSimple
+description: En savoir plus sur la gestion d’un compte CloudSimple, qui est créé en même temps que votre service CloudSimple et qui est associé à votre abonnement Azure.
 author: sharaths-cs
 ms.author: dikamath
 ms.date: 04/10/2019
@@ -8,12 +8,12 @@ ms.topic: article
 ms.service: azure-vmware-cloudsimple
 ms.reviewer: cynthn
 manager: dikamath
-ms.openlocfilehash: a180e2ba6c1a610116271d5a9b6e3fdf562cecdf
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 68ddea6c58bfff5e82643acc947ac1e7de76d699
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77025110"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88141038"
 ---
 # <a name="account-management-overview"></a>Vue d’ensemble de la gestion de compte
 

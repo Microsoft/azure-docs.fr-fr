@@ -5,12 +5,13 @@ author: sumukhs
 ms.topic: conceptual
 ms.date: 10/02/2017
 ms.author: sumukhs
-ms.openlocfilehash: 9743213394b59af701b25b8be9dd48cf4310b499
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: cda0a9f988afae58a60bff051885a5eec8afe434
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75645512"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96023582"
 ---
 # <a name="configure-stateful-reliable-services"></a>Configuration des services fiables (Reliable Services) avec état
 Il existe deux ensembles de paramètres de configuration pour les services fiables (Reliable Services). L’un des ensembles est global pour tous les services fiables dans le cluster, alors que l’autre est spécifique à un service fiable.
@@ -29,13 +30,15 @@ La configuration de service fiable globale est spécifiée dans le manifeste de 
 
 Dans Azure ARM ou un modèle JSON local, l’exemple ci-dessous montre comment modifier le journal des transactions partagé qui est créé pour sauvegarder toutes les collections fiables pour les services avec état.
 
-    "fabricSettings": [{
-        "name": "KtlLogger",
-        "parameters": [{
-            "name": "SharedLogSizeInMB",
-            "value": "4096"
-        }]
+```json
+"fabricSettings": [{
+    "name": "KtlLogger",
+    "parameters": [{
+        "name": "SharedLogSizeInMB",
+        "value": "4096"
     }]
+}]
+```
 
 ### <a name="sample-local-developer-cluster-manifest-section"></a>Exemple de section du manifeste de cluster pour développeur local
 Si vous souhaitez modifier cette valeur dans votre environnement de développement local, vous devez modifier le fichier local clustermanifest.xml.
@@ -184,5 +187,4 @@ Les paramètres SharedLogId et SharedLogPath sont toujours utilisés ensemble po
 
 ## <a name="next-steps"></a>Étapes suivantes
 * [Déboguer votre application Service Fabric dans Visual Studio](service-fabric-debugging-your-application.md)
-* [Référence du développeur pour les services fiables](https://msdn.microsoft.com/library/azure/dn706529.aspx)
-
+* [Référence du développeur pour les services fiables](/previous-versions/azure/dn706529(v=azure.100))

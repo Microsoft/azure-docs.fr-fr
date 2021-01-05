@@ -11,14 +11,14 @@ ms.devlang: na
 ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 02/25/2020
+ms.date: 11/15/2020
 ms.author: memildin
-ms.openlocfilehash: 0dbad1a94479430426dae47df7ca3a3ecd9dc980
-ms.sourcegitcommit: ced98c83ed25ad2062cc95bab3a666b99b92db58
+ms.openlocfilehash: 64fa6c72e3bc37276dd108e3981bbefb5a2021a7
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/31/2020
-ms.locfileid: "80436196"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96444516"
 ---
 # <a name="faq---questions-about-data-collection-agents-and-workspaces"></a>FAQ – Question relatives à la collecte de données, aux agents et aux espaces de travail
 
@@ -29,9 +29,9 @@ Azure Security Center collecte des données à partir de vos machines virtuelles
 
 Non. Les espaces de travail créés par Security Center, bien qu’ils soient configurés pour une facturation Journaux Azure Monitor par nœud, n’entraînent pas de frais de journaux Azure Monitor. La facturation Security Center est toujours basée sur la stratégie de sécurité Security Center et les solutions installées sur l’espace de travail :
 
-- **Niveau Gratuit** : Security Center active la solution « SecurityCenterFree » sur l’espace de travail par défaut. Vous n’êtes pas facturé pour le niveau Gratuit.
+- **Azure Defender désactivé** : Security Center active la solution « SecurityCenterFree » sur l’espace de travail par défaut. Vous ne serez pas facturé si Azure Defender est désactivé.
 
-- **Niveau Standard** : Security Center active la solution « Security » sur l’espace de travail par défaut.
+- **Azure Defender activé** : Security Center active la solution « Security » sur l’espace de travail par défaut.
 
 Pour plus d’informations sur la tarification, consultez la page de [tarification de Security Center](https://azure.microsoft.com/pricing/details/security-center/).
 
@@ -41,14 +41,57 @@ Pour plus d’informations sur la tarification, consultez la page de [tarificati
 [!INCLUDE [azure-monitor-log-analytics-rebrand](../../includes/azure-monitor-log-analytics-rebrand.md)]
 
 
+## <a name="what-is-the-log-analytics-agent"></a>Qu’est-ce que l’agent Log Analytics ?
+
+Pour superviser les menaces et les failles de sécurité, Azure Security Center dépend de l’[agent Log Analytics](../azure-monitor/platform/log-analytics-agent.md) ; il s’agit du même agent que celui utilisé par le service Azure Monitor. 
+
+Cet agent est parfois appelé Microsoft Monitoring Agent (ou « MMA »). 
+
+L’agent collecte différents journaux des événements et détails de configuration liés à la sécurité à partir des ordinateurs connectés, puis copie les données dans votre espace de travail Log Analytics pour une analyse approfondie. Il peut s’agir des données suivantes : type et version de système d’exploitation, journaux d’activité de système d’exploitation (journaux d’événements Windows), processus en cours d’exécution, nom de machine, adresses IP et utilisateur connecté.
+
+Vérifiez que vos machines exécutent l’un des systèmes d’exploitation pris en charge pour l’agent, comme décrit dans les pages suivantes :
+
+* [Agent Log Analytics pour les systèmes d’exploitation pris en charge par Windows](../azure-monitor/platform/agents-overview.md#supported-operating-systems)
+
+* [Agent Log Analytics pour les systèmes d’exploitation pris en charge par Linux](../azure-monitor/platform/agents-overview.md#supported-operating-systems)
+
+Apprenez-en davantage sur les [données collectées par l’agent Log Analytics](security-center-enable-data-collection.md).
+
+
+
+
 ## <a name="what-qualifies-a-vm-for-automatic-provisioning-of-the-log-analytics-agent-installation"></a>Qu’est-ce qui rend une machine virtuelle apte pour le provisionnement automatique de l’installation de l’agent Log Analytics ?
 
 Les machines virtuelles Windows ou Linux IaaS sont retenues dans les cas suivants :
 
 - L’extension de l’agent Log Analytics n’est pas actuellement installée sur la machine virtuelle.
 - La machine virtuelle est en cours d’exécution.
-- L’[agent de machine virtuelle Azure](https://docs.microsoft.com/azure/virtual-machines/extensions/agent-windows) pour Windows ou Linux est installé.
+- L’[agent de machine virtuelle Azure](../virtual-machines/extensions/agent-windows.md) pour Windows ou Linux est installé.
 - La machine virtuelle n’est pas utilisée comme pare-feu d’applications web ou comme pare-feu de nouvelle génération.
+
+
+## <a name="where-is-the-default-log-analytics-workspace-created"></a>Où est créé l’espace de travail Log Analytics par défaut ?
+
+La localisation de l’espace de travail par défaut dépend de votre région Azure :
+
+- Pour les machines virtuelles aux États-Unis et au Brésil, la localisation de l’espace de travail est les États-Unis
+- Pour les machines virtuelles au Canada, la localisation de l’espace de travail est le Canada
+- Pour les machines virtuelles en Europe, la localisation de l’espace de travail est l’Europe
+- Pour les machines virtuelles au Royaume-Uni, la localisation de l’espace de travail est le Royaume-Uni
+- Pour les machines virtuelles dans les régions Asie Est et Asie Sud-Est, la localisation de l’espace de travail est l’Asie
+- Pour les machines virtuelles en Corée, la localisation de l’espace de travail est la Corée
+- Pour les machines virtuelles en Inde, la localisation de l’espace de travail est l’Inde
+- Pour les machines virtuelles au Japon, la localisation de l’espace de travail est le Japon
+- Pour les machines virtuelles en Chine, la localisation de l’espace de travail est la Chine
+- Pour les machines virtuelles en Australie, la localisation de l’espace de travail est l’Australie
+
+
+## <a name="what-security-events-are-collected-by-the-log-analytics-agent"></a>Quels sont les événements de sécurité collectés par l'agent Log Analytics ?
+
+Pour obtenir la liste complète des événements de sécurité collectés par l'agent, consultez [Quels types d'événements sont stockés pour les paramètres d'événements de sécurité « Commun » et « Minimal » ?](security-center-enable-data-collection.md#what-event-types-are-stored-for-common-and-minimal).
+
+> [!IMPORTANT]
+> Notez que pour certains services, comme Pare-feu Azure, si vous avez activé la journalisation et choisi une ressource bavarde à journaliser (par exemple, en définissant le journal sur *détaillé*), vous pourriez constater des impacts significatifs sur les besoins de stockage de votre espace de travail Log Analytics. 
 
 
 ## <a name="can-i-delete-the-default-workspaces-created-by-security-center"></a>Puis-je supprimer les espaces de travail par défaut créés par Security Center ?
@@ -66,14 +109,19 @@ Vous pouvez sélectionner un espace de travail Log Analytics existant pour stock
 
 Pour sélectionner un espace de travail Log Analytics existant :
 
-1. Dans **Stratégie de sécurité : collecte de données**, sélectionnez **Use another workspace** (Utiliser un autre espace de travail).
+1. Dans le menu de Security Center, sélectionnez **Tarification et paramètres**.
+1. Sélectionnez l’abonnement approprié.
+1. Ouvrir la page **Approvisionnement automatique**
+1. Pour l’agent Log Analytics, sélectionnez **Modifier la configuration**. 
 
-    ![Utiliser un autre espace de travail][4]
+    :::image type="content" source="./media/security-center-enable-data-collection/edit-configuration-auto-deploy-agent.png" alt-text="Configuration de l’agent Log Analytics à utiliser lors de l’utilisation du déploiement automatique" lightbox="./media/security-center-enable-data-collection/edit-configuration-auto-deploy-agent.png":::
 
-1. Dans le menu déroulant, sélectionnez un espace de travail pour stocker les données collectées.
+1. Sélectionnez **Connect Azure VMs to a different workspace** (Connecter des machines virtuelles Azure à un autre espace de travail) et choisissez votre espace de travail existant.
 
-    > [!NOTE]
-    > Dans le menu déroulant, seuls les espaces de travail auxquels vous avez accès et se trouvant dans votre abonnement Azure sont affichés.
+    :::image type="content" source="./media/security-center-enable-data-collection/choose-workspace.png" alt-text="Sélection d’un espace de travail autre que celui par défaut auquel votre agent Log Analytics doit se rapporter" lightbox="./media/security-center-enable-data-collection/choose-workspace.png":::
+
+    > [!TIP]
+    > La liste comprend uniquement les espaces de travail auxquels vous avez accès et ceux qui se trouvent dans votre abonnement Azure.
 
 1. Sélectionnez **Enregistrer**. Vous serez invité à reconfigurer les machines virtuelles surveillées.
 
@@ -83,7 +131,6 @@ Pour sélectionner un espace de travail Log Analytics existant :
     > [!NOTE]
     > Si vous sélectionnez **Oui**, ne supprimez pas les espaces de travail créés par Security Center tant que toutes les machines virtuelles n’ont pas été reconnectées au nouvel espace de travail cible. Cette opération échoue si un espace de travail est supprimé trop tôt.
 
-    - Pour annuler l’opération, sélectionnez **Annuler**.
 
 ## <a name="what-if-the-log-analytics-agent-was-already-installed-as-an-extension-on-the-vm"></a>Que se passe-t-il si l’agent Log Analytics est déjà installé en tant qu’extension sur la machine virtuelle ?<a name="mmaextensioninstalled"></a>
 
@@ -121,12 +168,17 @@ Si vous supprimez l’extension Microsoft Monitoring, Security Center n’est pa
 
 Vous pouvez désactiver l’approvisionnement automatique pour vos abonnements dans la stratégie de sécurité, mais ce n’est pas recommandé. La désactivation de l’approvisionnement automatique a pour effet de limiter les alertes et recommandations de Security Center. Pour désactiver l’approvisionnement automatique :
 
-1. Si votre abonnement est configuré pour le niveau Standard, ouvrez la stratégie de sécurité de cet abonnement, puis sélectionnez le niveau **Gratuit**.
+1. Dans le menu de Security Center, sélectionnez **Tarification et paramètres**.
+1. Sélectionnez l’abonnement approprié.
+1. Si votre abonnement a activé Azure Defender, ouvrez **Plans Azure Defender** et sélectionnez **Azure Defender désactivé**.
 
-   ![Niveau tarifaire][1]
+    :::image type="content" source="./media/security-center-platform-migration-faq/pricing-tier.png" alt-text="Activer ou désactiver Azure Defender":::
 
-1. Ensuite, désactivez l’approvisionnement automatique en sélectionnant **Non** sur le page **Stratégie de sécurité : collecte de données**.
-   ![Collecte de données][2]
+1. Dans la page **Approvisionnement automatique**, sélectionnez Pen et désactivez l’approvisionnement automatique dans la page **Stratégie de sécurité – Collecte de données**.
+
+    :::image type="content" source="./media/security-center-enable-data-collection/agent-toggles.png" alt-text="Activer le déploiement automatique pour l’agent Log Analytics":::
+
+1. Sélectionnez **Enregistrer**.
 
 
 ## <a name="should-i-opt-out-of-the-automatic-agent-installation-and-workspace-creation"></a>Dois-je refuser l’installation automatique de l’agent et la création de l’espace de travail ?
@@ -157,7 +209,7 @@ Installez manuellement l’extension de l’agent Log Analytics pour que Securit
 
 Vous pouvez connecter l’agent à n’importe quel espace de travail personnalisé existant ou à l’espace de travail créé par Security Center. Si les solutions « Security » ou « SecurityCenterFree » ne sont pas activées pour un espace de travail personnalisé, vous devez appliquer une solution. Pour ce faire, sélectionnez l’abonnement ou l’espace de travail personnalisé, puis appliquez un niveau tarifaire via la page **Stratégie de sécurité – Niveau tarifaire**.
 
-   ![Niveau tarifaire][1]
+:::image type="content" source="./media/security-center-platform-migration-faq/pricing-tier.png" alt-text="Activer ou désactiver Azure Defender":::
 
 Security Center active la solution appropriée sur l’espace de travail en fonction du niveau tarifaire sélectionné.
 
@@ -185,9 +237,15 @@ Pour supprimer manuellement l’agent :
 
 ## <a name="how-do-i-disable-data-collection"></a>Comment désactiver la collecte des données ?
 
-L’approvisionnement automatique est désactivé par défaut. Vous pouvez désactiver l’approvisionnement automatique à partir des ressources à tout moment en désactivant ce paramètre dans la stratégie de sécurité. L’approvisionnement automatique est fortement recommandé si vous souhaitez obtenir des alertes de sécurité et des recommandations sur les mises à jour système, les vulnérabilités du système d’exploitation et la protection du point de terminaison.
+L’approvisionnement automatique est fortement recommandé si vous souhaitez obtenir des alertes de sécurité et des recommandations sur les mises à jour système, les vulnérabilités du système d’exploitation et la protection du point de terminaison. Par défaut, le provisionnement automatique désactivé.
 
-Pour désactiver la collecte des données, [connectez-vous au Portail Azure](https://portal.azure.com), sélectionnez **Parcourir**, **Centre de sécurité**, puis **Sélectionner une stratégie**. Sélectionnez l’abonnement pour lequel vous souhaitez désactiver l’approvisionnement automatique. Lorsque vous sélectionnez un abonnement, **Stratégie de sécurité - Collecte de données** s’ouvre. Sous **Auto provisioning** (Approvisionnement automatique), sélectionnez **Off** (Désactivé).
+Si vous l’avez activé, mais que vous souhaitez maintenant le désactiver :
+
+1. Dans le [Portail Azure](https://portal.azure.com), ouvrez **Centre de sécurité** et sélectionnez **Tarification et paramètres**.
+
+1. Sélectionnez l’abonnement pour lequel vous souhaitez désactiver le provisionnement automatique.
+
+1. Sous **Approvisionnement automatique**, désactivez la bascule de l’agent d’analytique des journaux d'activité.
 
 
 ## <a name="how-do-i-enable-data-collection"></a>Comment activer la collecte des données ?
@@ -217,13 +275,9 @@ Pour collecter les données, chaque machine virtuelle et chaque serveur doivent 
 L’agent utilise une quantité minime de ressources système et n’a donc qu’un faible impact sur les performances. Pour en savoir plus sur l’impact sur les performances, l’agent et l’extension, consultez le [Guide de planification et de fonctionnement](security-center-planning-and-operations-guide.md#data-collection-and-storage).
 
 
-## <a name="where-is-my-data-stored"></a>Où sont stockées mes données ?
-
-Les données collectées à partir de cet agent sont stockées dans un espace de travail Log Analytics existant associé à votre abonnement Azure ou dans un nouvel espace de travail. Pour plus d’informations, consultez [Sécurité des données](security-center-data-security.md).
 
 
 <!--Image references-->
-[1]: ./media/security-center-platform-migration-faq/pricing-tier.png
 [2]: ./media/security-center-platform-migration-faq/data-collection.png
 [3]: ./media/security-center-platform-migration-faq/remove-the-agent.png
 [4]: ./media/security-center-platform-migration-faq/use-another-workspace.png

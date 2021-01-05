@@ -3,8 +3,7 @@ title: Tutoriel concernant l’utilisation de références Key Vault avec Azure 
 description: Dans ce tutoriel, vous apprenez à utiliser les références Key Vault avec Azure App Configuration depuis une application ASP.NET Core
 services: azure-app-configuration
 documentationcenter: ''
-author: lisaguthrie
-manager: maiye
+author: AlexandraKemperMS
 editor: ''
 ms.assetid: ''
 ms.service: azure-app-configuration
@@ -12,14 +11,14 @@ ms.workload: tbd
 ms.devlang: csharp
 ms.topic: tutorial
 ms.date: 04/08/2020
-ms.author: lcozzens
-ms.custom: mvc
-ms.openlocfilehash: 4641c50f0579e2a8db514df58c0401eb2173d793
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.author: alkemper
+ms.custom: devx-track-csharp, mvc
+ms.openlocfilehash: 94bab9506d2bf7c29f997bcbfd400a412d5ac041
+ms.sourcegitcommit: 1756a8a1485c290c46cc40bc869702b8c8454016
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "81309050"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96932232"
 ---
 # <a name="tutorial-use-key-vault-references-in-an-aspnet-core-app"></a>Tutoriel : Utiliser des références Key Vault dans une application ASP.NET Core
 
@@ -51,7 +50,7 @@ Avant d’effectuer ce tutoriel, installez le [kit SDK .NET Core](https://dotnet
 
 1. Sélectionnez l’option **Créer une ressource** dans le coin supérieur gauche du Portail Azure :
 
-    ![La sortie après la création du coffre de clés](./media/quickstarts/search-services.png)
+    ![La capture d’écran montre l’option Créer une ressource dans le portail Azure.](./media/quickstarts/search-services.png)
 1. Dans la zone de recherche, entrez **Key Vault**.
 1. Dans la liste des résultats, sélectionnez **Coffres de clés** sur la gauche.
 1. Dans **Coffres de clés**, sélectionnez **Ajouter**.
@@ -65,7 +64,7 @@ Avant d’effectuer ce tutoriel, installez le [kit SDK .NET Core](https://dotnet
 
 À ce stade, votre compte Azure est le seul autorisé à accéder à ce nouveau coffre.
 
-![La sortie après la création du coffre de clés](./media/quickstarts/vault-properties.png)
+![La capture d’écran montre votre coffre de clés.](./media/quickstarts/vault-properties.png)
 
 ## <a name="add-a-secret-to-key-vault"></a>Ajouter un secret au coffre de clés
 

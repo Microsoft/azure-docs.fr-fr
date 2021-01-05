@@ -2,13 +2,14 @@
 title: Conservation et stockage des données dans Azure Application Insights | Microsoft Docs
 description: Retention and privacy policy statement
 ms.topic: conceptual
-ms.date: 09/29/2019
-ms.openlocfilehash: 30878eecf795c85713b9f09b8325b326416022b8
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 06/30/2020
+ms.custom: devx-track-js, devx-track-csharp
+ms.openlocfilehash: 2205ab1115a66092ae6dd6d75ee7004ab281eec7
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79234705"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91263910"
 ---
 # <a name="data-collection-retention-and-storage-in-application-insights"></a>Collecte, rétention et stockage des données dans Application Insights
 
@@ -18,8 +19,8 @@ Tout d’abord, la réponse courte :
 
 * Les modules de télémétrie standard qui s’exécutent « dès le départ » sont peu susceptibles d’envoyer des données sensibles au service. La télémétrie s’attache aux métriques de charge, de performance et d’utilisation, aux rapports d’exception et autres données de diagnostic. Les données d’utilisateur principal visibles dans les rapports de diagnostics sont des URL ; mais votre application ne doit en aucun cas mettre des données sensibles en texte brut dans une URL.
 * Vous pouvez écrire du code qui envoie les données de télémétrie personnalisées supplémentaires, afin de vous aider avec les diagnostics et à surveiller l’utilisation. (Cette extensibilité est une fonctionnalité intéressante de Application Insights.) Il serait possible, par erreur, d’écrire ce code de manière à ce qu’il inclue les données personnelles et d’autres données sensibles. Si votre application fonctionne avec ces données, vous devez vérifier de manière approfondie l’ensemble du code que vous écrivez.
-* Pendant le développement et le test de votre application, il est facile d’examiner ce qui est envoyé par le Kit de développement logiciel (SDK). Les données apparaissent dans les fenêtres de sortie de débogage de l’IDE et du navigateur. 
-* Les données sont stockées sur des serveurs [Microsoft Azure](https://azure.com) aux États-Unis. (Mais votre application peut s’exécuter n’importe où.) Azure dispose de [processus de sécurité renforcés, il est conforme à une large gamme de normes de conformité](https://azure.microsoft.com/support/trust-center/). Seuls vous et votre équipe avez accès à vos données. Le personnel Microsoft peut avoir un accès restreint uniquement dans certaines circonstances définies, avec votre consentement. Les données sont chiffrées, en transit comme au repos.
+* Pendant le développement et le test de votre application, il est facile d’examiner ce qui est envoyé par le Kit de développement logiciel (SDK). Les données apparaissent dans les fenêtres de sortie de débogage de l’IDE et du navigateur.
+* Vous pouvez sélectionner l’emplacement quand vous créez une ressource Application Insights. Vous pouvez en savoir plus sur la disponibilité d’Application Insights par région [ici](https://azure.microsoft.com/global-infrastructure/services/?products=all).
 *   Passez en revue les données collectées, car celles-ci peuvent inclure des données qui sont autorisées dans certains cas, mais pas dans d’autres.  À cet égard, un nom d’appareil constitue un parfait exemple. Le nom d’appareil utilisé à partir d’un serveur n’a aucun impact sur la confidentialité et est utile, mais un nom d’appareil utilisés à partir d’un téléphone ou d’un ordinateur portable peut avoir un impact sur la confidentialité et s’avérer moins utile. Un kit de développement logiciel (SDK) développé principalement pour les serveurs cibles, collecte le nom de l’appareil par défaut, et il peut être nécessaire de le remplacer à la fois dans les événements normaux et les exceptions.
 
 Le reste de cet article aborde plus en détail ces réponses. Il est conçu pour être autonome, afin que vous puissiez le montrer à des collègues qui ne font pas partie de votre équipe.
@@ -38,31 +39,31 @@ Les Kits SDK d’Application Insights sont disponibles pour une variété d’ap
 ## <a name="what-data-does-it-collect"></a>Quelles données collecte-t-il ?
 Il existe trois sources de données :
 
-* Le SDK, que vous intégrez à votre application soit [pendant le développement](../../azure-monitor/app/asp-net.md), soit [au moment de l’exécution](../../azure-monitor/app/monitor-performance-live-website-now.md). Il existe différents Kits SDK pour différents types d’applications. Il existe également un [Kit SDK pour les pages web](../../azure-monitor/app/javascript.md), qui se charge dans le navigateur de l’utilisateur final en même temps que la page.
+* Le SDK, que vous intégrez à votre application soit [pendant le développement](./asp-net.md), soit [au moment de l’exécution](./monitor-performance-live-website-now.md). Il existe différents Kits SDK pour différents types d’applications. Il existe également un [Kit SDK pour les pages web](./javascript.md), qui se charge dans le navigateur de l’utilisateur final en même temps que la page.
   
-  * Chaque Kit SDK comporte un certain nombre de [modules](../../azure-monitor/app/configuration-with-applicationinsights-config.md), utilisant diverses techniques pour collecter différents types de données de télémétrie.
+  * Chaque Kit SDK comporte un certain nombre de [modules](./configuration-with-applicationinsights-config.md), utilisant diverses techniques pour collecter différents types de données de télémétrie.
   * Si vous installez le Kit SDK pendant le développement, vous pouvez utiliser ses API pour envoyer votre propre télémétrie, ainsi que les modules standards. Ces données de télémétrie personnalisées peuvent inclure toutes les données que vous souhaitez envoyer.
-* Sur certains serveurs web, il existe également des agents qui s’exécutent en même temps que l’application et qui envoient des données de télémétrie concernant l’UC, la mémoire et l’occupation du réseau. Par exemple, les machines virtuelles Azure, les hôtes Docker et [les serveurs Java EE](../../azure-monitor/app/java-agent.md) peuvent disposer de ces agents.
-* [Les tests de disponibilité](../../azure-monitor/app/monitor-web-app-availability.md) sont des processus exécutés par Microsoft qui envoient des requêtes à votre application web à intervalles réguliers. Les résultats sont envoyés au service Application Insights.
+* Sur certains serveurs web, il existe également des agents qui s’exécutent en même temps que l’application et qui envoient des données de télémétrie concernant l’UC, la mémoire et l’occupation du réseau. Par exemple, les machines virtuelles Azure, les hôtes Docker et [les serveurs Java EE](./java-agent.md) peuvent disposer de ces agents.
+* [Les tests de disponibilité](./monitor-web-app-availability.md) sont des processus exécutés par Microsoft qui envoient des requêtes à votre application web à intervalles réguliers. Les résultats sont envoyés au service Application Insights.
 
 ### <a name="what-kinds-of-data-are-collected"></a>Quel genre de données est collecté ?
 Les principales catégories sont :
 
-* [La télémétrie du serveur web](../../azure-monitor/app/asp-net.md) : requêtes HTTP.  L’URI, le temps nécessaire pour traiter la demande, le code de réponse, l’adresse IP du client. `Session id`.
-* [Les pages web](../../azure-monitor/app/javascript.md) : page, utilisateur et décomptes de sessions. Le temps de chargement de page. Les exceptions. Appels Ajax.
+* [La télémétrie du serveur web](./asp-net.md) : requêtes HTTP.  L’URI, le temps nécessaire pour traiter la demande, le code de réponse, l’adresse IP du client. `Session id`.
+* [Les pages web](./javascript.md) : page, utilisateur et décomptes de sessions. Le temps de chargement de page. Les exceptions. Appels Ajax.
 * Les performances des compteurs : mémoire, UC, E/S, occupation du réseau.
 * Le contexte du client et du serveur : système d’exploitation, paramètres régionaux, type d’appareil, navigateur, résolution d’écran.
-* [Les exceptions](../../azure-monitor/app/asp-net-exceptions.md) et les incidents : **vidages de pile**, `build id`, type d’UC. 
-* [Les dépendances](../../azure-monitor/app/asp-net-dependencies.md) : les appels aux services externes tels que REST, SQL, AJAX. L’URI ou la chaîne de connexion, la durée, la réussite, la commande.
-* [Les tests de disponibilité](../../azure-monitor/app/monitor-web-app-availability.md) : durée et étapes du test, réponses.
-* [Les journaux d’activité de suivi](../../azure-monitor/app/asp-net-trace-logs.md) et [la télémétrie personnalisée](../../azure-monitor/app/api-custom-events-metrics.md) - **tout ce que vous codez dans vos journaux d’activité ou télémétrie**.
+* [Les exceptions](./asp-net-exceptions.md) et les incidents : **vidages de pile**, `build id`, type d’UC. 
+* [Les dépendances](./asp-net-dependencies.md) : les appels aux services externes tels que REST, SQL, AJAX. L’URI ou la chaîne de connexion, la durée, la réussite, la commande.
+* [Les tests de disponibilité](./monitor-web-app-availability.md) : durée et étapes du test, réponses.
+* [Les journaux d’activité de suivi](./asp-net-trace-logs.md) et [la télémétrie personnalisée](./api-custom-events-metrics.md) - **tout ce que vous codez dans vos journaux d’activité ou télémétrie**.
 
 [Plus de détails](#data-sent-by-application-insights).
 
 ## <a name="how-can-i-verify-whats-being-collected"></a>Comment puis-je vérifier ce qui a été collecté ?
 Si vous développez l’application à l’aide de Visual Studio, exécutez l’application en mode débogage (F5). Les données de télémétrie s’affichent dans la fenêtre Sortie. À partir de là, vous pouvez les copier et les mettre au format JSON pour une inspection facile. 
 
-![](./media/data-retention-privacy/06-vs.png)
+![Capture d’écran montrant l’exécution de l’application en mode débogage dans Visual Studio.](./media/data-retention-privacy/06-vs.png)
 
 Il existe également une vue plus lisible dans la fenêtre Diagnostics.
 
@@ -71,16 +72,16 @@ Pour les pages web, ouvrez la fenêtre de débogage de votre navigateur.
 ![Appuyez sur F12 et ouvrez l’onglet Réseau.](./media/data-retention-privacy/08-browser.png)
 
 ### <a name="can-i-write-code-to-filter-the-telemetry-before-it-is-sent"></a>Puis-je écrire le code pour filtrer les données de télémétrie avant qu’elles soient envoyées ?
-Cela est possible en écrivant un [plug-in de processeur de télémétrie](../../azure-monitor/app/api-filtering-sampling.md).
+Cela est possible en écrivant un [plug-in de processeur de télémétrie](./api-filtering-sampling.md).
 
 ## <a name="how-long-is-the-data-kept"></a>Combien de temps sont conservées les données ?
-Les points de données brutes (autrement dit, les éléments que vous pouvez interroger dans Analytics et inspecter dans Recherche) sont conservés pendant 730 jours maximum. Vous pouvez [sélectionner une durée de rétention](https://docs.microsoft.com/azure/azure-monitor/app/pricing#change-the-data-retention-period) de 30, 60, 90, 120, 180, 270, 365, 550 ou 730 jours. Si vous voulez conserver les données plus longtemps, vous pouvez utiliser [l’exportation continue](../../azure-monitor/app/export-telemetry.md) pour les copier dans un compte de stockage durant l’ingestion des données. 
+Les points de données brutes (autrement dit, les éléments que vous pouvez interroger dans Analytics et inspecter dans Recherche) sont conservés pendant 730 jours maximum. Vous pouvez [sélectionner une durée de rétention](./pricing.md#change-the-data-retention-period) de 30, 60, 90, 120, 180, 270, 365, 550 ou 730 jours. Si vous voulez conserver les données plus longtemps, vous pouvez utiliser [l’exportation continue](./export-telemetry.md) pour les copier dans un compte de stockage durant l’ingestion des données. 
 
 Des frais supplémentaires sont facturés pour les données conservées pendant plus de 90 jours. Plus d’informations sur la tarification d’Application Insights sur la [page de tarification Azure Monitor](https://azure.microsoft.com/pricing/details/monitor/).
 
 Les données agrégées (autrement dit, les nombres, moyennes et autres données statistiques que vous voyez dans Metrics Explorer) sont conservées avec une granularité de 1 minute pendant 90 jours.
 
-[Les captures instantanées de débogage](../../azure-monitor/app/snapshot-debugger.md) sont stockées pendant 15 jours. Cette stratégie de rétention est définie application par application. Si vous devez augmenter cette valeur, faites-en la demande en ouvrant une demande de support dans le portail Azure.
+[Les captures instantanées de débogage](./snapshot-debugger.md) sont stockées pendant 15 jours. Cette stratégie de rétention est définie application par application. Si vous devez augmenter cette valeur, faites-en la demande en ouvrant une demande de support dans le portail Azure.
 
 ## <a name="who-can-access-the-data"></a>Qui peut accéder aux données ?
 Les données sont visibles par vous et, si vous disposez un compte d’organisation, par les membres de votre équipe. 
@@ -92,9 +93,6 @@ Microsoft n’utilise les données que pour vous fournir le service.
 
 ## <a name="where-is-the-data-held"></a>Où sont conservées les données ?
 * Vous pouvez sélectionner l’emplacement quand vous créez une ressource Application Insights. Vous pouvez en savoir plus sur la disponibilité d’Application Insights par région [ici](https://azure.microsoft.com/global-infrastructure/services/?products=all).
-
-#### <a name="does-that-mean-my-app-has-to-be-hosted-in-the-usa-europe-or-southeast-asia"></a>Cela signifie-t-il que mon application doit être hébergée aux États-Unis, en Europe ou en Asie Sud-Est ?
-* Non. Votre application peut s’exécuter n’importe où, sur vos propres hôtes locaux ou dans le cloud.
 
 ## <a name="how-secure-is-my-data"></a>Mes données sont-elles sécurisées ?
 Application Insights est un service Azure. Les stratégies de sécurité sont décrites dans le [livre blanc sur la sécurité, la confidentialité et la conformité Azure](https://go.microsoft.com/fwlink/?linkid=392408).
@@ -122,7 +120,7 @@ Oui, certains canaux de télémétrie conservent les données localement si un p
 
 Les canaux de télémétrie qui utilisent le stockage local créent des fichiers temporaires dans les répertoires TEMP ou APPDATA, qui sont limités au compte exécutant votre application. Cela se produit lorsqu’un point de terminaison a été temporairement indisponible ou lorsque vous avez atteint la limite de bande passante. Une fois ce problème résolu, le canal de télémétrie reprend l’envoi de toutes les données nouvelles et conservées.
 
-Ces données persistantes ne sont pas chiffrées en local. Si cela pose problème, passez en revue les données et limitez la collection de données privées. (Pour plus d’informations, consultez [Comment exporter et supprimer des données privées](https://docs.microsoft.com/azure/application-insights/app-insights-customer-data#how-to-export-and-delete-private-data).)
+Ces données persistantes ne sont pas chiffrées en local. Si cela pose problème, passez en revue les données et limitez la collection de données privées. (Pour plus d’informations, consultez [Comment exporter et supprimer des données privées](../platform/personal-data-mgmt.md#how-to-export-and-delete-private-data).)
 
 Si un client a besoin de configurer ce répertoire avec des exigences de sécurité spécifiques, il peut être configuré par infrastructure. Vérifiez que le processus exécutant votre application a accès en écriture à ce répertoire, mais veillez également à que ce répertoire soit protégé pour éviter la lecture des données de télémétrie par des utilisateurs non autorisés.
 
@@ -130,7 +128,7 @@ Si un client a besoin de configurer ce répertoire avec des exigences de sécuri
 
 `C:\Users\username\AppData\Local\Temp` est utilisé pour les données persistantes. Cet emplacement n’est pas configurable à partir du répertoire de configuration et les autorisations pour accéder à ce dossier sont limitées à l’utilisateur qui possède les informations d’identification requises. (Pour plus d’informations, consultez [Implémentation](https://github.com/Microsoft/ApplicationInsights-Java/blob/40809cb6857231e572309a5901e1227305c27c1a/core/src/main/java/com/microsoft/applicationinsights/internal/util/LocalFileSystemUtils.java#L48-L72).)
 
-###  <a name="net"></a>.Net
+###  <a name="net"></a>.NET
 
 Par défaut, `ServerTelemetryChannel` utilise le dossier de données d’application local `%localAppData%\Microsoft\ApplicationInsights` ou le dossier temp `%TMP%` de l’utilisateur actuel. (Consultez l’[implémentation](https://github.com/Microsoft/ApplicationInsights-dotnet/blob/91e9c91fcea979b1eec4e31ba8e0fc683bf86802/src/ServerTelemetryChannel/Implementation/ApplicationFolderProvider.cs#L54-L84) ici.)
 
@@ -155,7 +153,16 @@ Par le biais du code :
 
 ### <a name="netcore"></a>NetCore
 
-Par défaut, `ServerTelemetryChannel` utilise le dossier de données d’application local `%localAppData%\Microsoft\ApplicationInsights` ou le dossier temp `%TMP%` de l’utilisateur actuel. (Consultez l’[implémentation](https://github.com/Microsoft/ApplicationInsights-dotnet/blob/91e9c91fcea979b1eec4e31ba8e0fc683bf86802/src/ServerTelemetryChannel/Implementation/ApplicationFolderProvider.cs#L54-L84) ici.) Dans un environnement Linux, le stockage local sera désactivé sauf si un dossier de stockage est spécifié.
+Par défaut, `ServerTelemetryChannel` utilise le dossier de données d’application local `%localAppData%\Microsoft\ApplicationInsights` ou le dossier temp `%TMP%` de l’utilisateur actuel. (Consultez l’[implémentation](https://github.com/Microsoft/ApplicationInsights-dotnet/blob/91e9c91fcea979b1eec4e31ba8e0fc683bf86802/src/ServerTelemetryChannel/Implementation/ApplicationFolderProvider.cs#L54-L84) ici.) 
+
+Dans un environnement Linux, le stockage local sera désactivé sauf si un dossier de stockage est spécifié.
+
+> [!NOTE]
+> Grâce à la version 2.15.0-beta3 et celles ultérieures, un stockage local est désormais automatiquement créé pour Linux, Mac et Windows. Pour les systèmes non Windows, le Kit de développement logiciel (SDK) crée automatiquement un dossier de stockage local selon la logique suivante :
+> - `${TMPDIR}` : Si la variable d’environnement `${TMPDIR}` est définie, cet emplacement est utilisé.
+> - `/var/tmp` : Si l’emplacement précédent n’existe pas, nous essayons `/var/tmp`.
+> - `/tmp` : Si les deux emplacements précédents n’existent pas, nous essayons `tmp`. 
+> - Si aucun de ces emplacements n’existe, le stockage local n’est pas créé et la configuration manuelle est toujours requise. [En savoir plus sur l’implémentation](https://github.com/microsoft/ApplicationInsights-dotnet/pull/1860).
 
 L’extrait de code suivant montre comment définir `ServerTelemetryChannel.StorageFolder` dans la méthode `ConfigureServices()` de votre classe `Startup.cs` :
 
@@ -202,16 +209,16 @@ Nous ne recommandons pas de configurer explicitement votre application de façon
 
 |Plateforme/Langage | Support | Informations complémentaires |
 | --- | --- | --- |
-| Azure App Services  | Pris en charge, la configuration peut être nécessaire. | La prise en charge a été annoncée en avril 2018. Lisez l’annonce pour connaître les [détails de configuration](https://blogs.msdn.microsoft.com/appserviceteam/2018/04/17/app-service-and-functions-hosted-apps-can-now-update-tls-versions/).  |
-| Applications de fonction Azure | Pris en charge, la configuration peut être nécessaire. | La prise en charge a été annoncée en avril 2018. Lisez l’annonce pour connaître les [détails de configuration](https://blogs.msdn.microsoft.com/appserviceteam/2018/04/17/app-service-and-functions-hosted-apps-can-now-update-tls-versions/). |
-|.NET | Pris en charge, la configuration diffère selon la version. | Pour des informations de configuration détaillées pour .NET 4.7 et versions antérieures, reportez-vous à [ces instructions](https://docs.microsoft.com/dotnet/framework/network-programming/tls#support-for-tls-12).  |
-|Status Monitor | Pris en charge, configuration requise | Status Monitor s’appuie sur [la configuration du système d’exploitation](https://docs.microsoft.com/windows-server/security/tls/tls-registry-settings) + [la configuration .NET](https://docs.microsoft.com/dotnet/framework/network-programming/tls#support-for-tls-12) pour prendre en charge TLS 1.2.
+| Azure App Services  | Pris en charge, la configuration peut être nécessaire. | La prise en charge a été annoncée en avril 2018. Lisez l’annonce pour connaître les [détails de configuration](https://azure.github.io/AppService/2018/04/17/App-Service-and-Functions-hosted-apps-can-now-update-TLS-versions!).  |
+| Applications de fonction Azure | Pris en charge, la configuration peut être nécessaire. | La prise en charge a été annoncée en avril 2018. Lisez l’annonce pour connaître les [détails de configuration](https://azure.github.io/AppService/2018/04/17/App-Service-and-Functions-hosted-apps-can-now-update-TLS-versions!). |
+|.NET | Pris en charge, la configuration diffère selon la version. | Pour des informations de configuration détaillées pour .NET 4.7 et versions antérieures, reportez-vous à [ces instructions](/dotnet/framework/network-programming/tls#support-for-tls-12).  |
+|Status Monitor | Pris en charge, configuration requise | Status Monitor s’appuie sur [la configuration du système d’exploitation](/windows-server/security/tls/tls-registry-settings) + [la configuration .NET](/dotnet/framework/network-programming/tls#support-for-tls-12) pour prendre en charge TLS 1.2.
 |Node.js |  Pris en charge, dans v10.5.0, la configuration peut être nécessaire. | Utilisez la [documentation officielle de Node.js TLS/SSL](https://nodejs.org/api/tls.html) pour toute configuration spécifique à une application. |
 |Java | Pris en charge, prise en charge JDK pour TLS 1.2 ajoutée dans [JDK 6 mise à jour 121](https://www.oracle.com/technetwork/java/javase/overview-156328.html#R160_121) et [JDK 7](https://www.oracle.com/technetwork/java/javase/7u131-relnotes-3338543.html). | JDK 8 utilise [TLS 1.2 par défaut](https://blogs.oracle.com/java-platform-group/jdk-8-will-use-tls-12-as-default).  |
 |Linux | Les distributions de Linux s’appuient généralement sur [OpenSSL](https://www.openssl.org) pour la prise en charge de TLS 1.2.  | Vérifiez [OpenSSL Changelog](https://www.openssl.org/news/changelog.html) pour vous assurer que votre version d’OpenSSL est prise en charge.|
-| Windows 8.0 - 10 | Pris en charge, activé par défaut. | Pour confirmer que vous utilisez toujours les [paramètres par défaut](https://docs.microsoft.com/windows-server/security/tls/tls-registry-settings).  |
-| Windows Server 2012 - 2016 | Pris en charge, activé par défaut. | Pour confirmer que vous utilisez toujours les [paramètres par défaut](https://docs.microsoft.com/windows-server/security/tls/tls-registry-settings) |
-| Windows 7 SP1 et Windows Server 2008 R2 SP1 | Pris en charge, mais non activé par défaut. | Consultez la page [Paramètres de Registre de TLS](https://docs.microsoft.com/windows-server/security/tls/tls-registry-settings) pour plus d’informations sur l’activation.  |
+| Windows 8.0 - 10 | Pris en charge, activé par défaut. | Pour confirmer que vous utilisez toujours les [paramètres par défaut](/windows-server/security/tls/tls-registry-settings).  |
+| Windows Server 2012 - 2016 | Pris en charge, activé par défaut. | Pour confirmer que vous utilisez toujours les [paramètres par défaut](/windows-server/security/tls/tls-registry-settings) |
+| Windows 7 SP1 et Windows Server 2008 R2 SP1 | Pris en charge, mais non activé par défaut. | Consultez la page [Paramètres de Registre de TLS](/windows-server/security/tls/tls-registry-settings) pour plus d’informations sur l’activation.  |
 | Windows Server 2008 SP2 | La prise en charge de TLS 1.2 nécessite une mise à jour. | Consultez [Mise à jour pour ajouter la prise en charge de TLS 1.2](https://support.microsoft.com/help/4019276/update-to-add-support-for-tls-1-1-and-tls-1-2-in-windows-server-2008-s) dans Windows Server 2008 SP2. |
 |Windows Vista | Non pris en charge. | N/A
 
@@ -233,7 +240,7 @@ openssl s_client -connect bing.com:443 -tls1_2
 
 ## <a name="personal-data-stored-in-application-insights"></a>Données personnelles stockées dans Application Insights
 
-Notre [article Données personnelles Application Insights](../../azure-monitor/platform/personal-data-mgmt.md) traite de ce problème en profondeur.
+Notre [article Données personnelles Application Insights](../platform/personal-data-mgmt.md) traite de ce problème en profondeur.
 
 #### <a name="can-my-users-turn-off-application-insights"></a>Mes utilisateurs peuvent-ils désactiver Application Insights ?
 Pas directement. Il n’existe pas de commutateur que vos utilisateurs peuvent utiliser pour désactiver Application Insights.
@@ -286,7 +293,7 @@ Pour les [Kits de développement logiciel (SDK) des autres plateformes][platform
 Vous pouvez [désactiver certaines données en modifiant ApplicationInsights.config][config]
 
 > [!NOTE]
-> L’IP du client est utilisée pour déduire son emplacement géographique, mais par défaut, les données d’IP ne sont plus stockées et tous les zéros sont écrits dans le champ associé. Pour en savoir plus sur la gestion des données personnelles, nous vous invitons à lire [cet article](../../azure-monitor/platform/personal-data-mgmt.md#application-data). Si vous avez besoin de stocker des données d’adresse IP, notre [article sur la collecte des adresses IP](https://docs.microsoft.com/azure/azure-monitor/app/ip-collection) vous présentera vos options.
+> L’IP du client est utilisée pour déduire son emplacement géographique, mais par défaut, les données d’IP ne sont plus stockées et tous les zéros sont écrits dans le champ associé. Pour en savoir plus sur la gestion des données personnelles, nous vous invitons à lire [cet article](../platform/personal-data-mgmt.md#application-data). Si vous avez besoin de stocker des données d’adresse IP, notre [article sur la collecte des adresses IP](./ip-collection.md) vous présentera vos options.
 
 ## <a name="credits"></a>Crédits
 Ce produit contient des données GeoLite2 créées par MaxMind, disponibles sur [https://www.maxmind.com](https://www.maxmind.com).
@@ -295,13 +302,14 @@ Ce produit contient des données GeoLite2 créées par MaxMind, disponibles sur 
 
 <!--Link references-->
 
-[api]: ../../azure-monitor/app/api-custom-events-metrics.md
-[apiproperties]: ../../azure-monitor/app/api-custom-events-metrics.md#properties
-[client]: ../../azure-monitor/app/javascript.md
-[config]: ../../azure-monitor/app/configuration-with-applicationinsights-config.md
-[greenbrown]: ../../azure-monitor/app/asp-net.md
-[java]: ../../azure-monitor/app/java-get-started.md
-[platforms]: ../../azure-monitor/app/platforms.md
+[api]: ./api-custom-events-metrics.md
+[apiproperties]: ./api-custom-events-metrics.md#properties
+[client]: ./javascript.md
+[config]: ./configuration-with-applicationinsights-config.md
+[greenbrown]: ./asp-net.md
+[java]: ./java-get-started.md
+[platforms]: ./platforms.md
 [pricing]: https://azure.microsoft.com/pricing/details/application-insights/
-[redfield]: ../../azure-monitor/app/monitor-performance-live-website-now.md
-[start]: ../../azure-monitor/app/app-insights-overview.md
+[redfield]: ./monitor-performance-live-website-now.md
+[start]: ./app-insights-overview.md
+

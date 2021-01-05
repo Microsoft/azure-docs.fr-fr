@@ -6,23 +6,24 @@ ms.service: cosmos-db
 ms.subservice: cosmosdb-table
 ms.devlang: java
 ms.topic: quickstart
-ms.date: 04/10/2018
+ms.date: 05/28/2020
 ms.author: sngun
-ms.custom: seo-java-august2019, seo-java-september2019
-ms.openlocfilehash: e3517804cb66a9f98351e4c68f4f7c4387cee8fe
-ms.sourcegitcommit: 09a124d851fbbab7bc0b14efd6ef4e0275c7ee88
+ms.custom: seo-java-august2019, seo-java-september2019, devx-track-java
+ms.openlocfilehash: 48335e577ed248a42914bdaa1b1e662daf2d26cc
+ms.sourcegitcommit: 3bdeb546890a740384a8ef383cf915e84bd7e91e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/23/2020
-ms.locfileid: "82083799"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93090166"
 ---
 # <a name="quickstart-build-a-java-app-to-manage-azure-cosmos-db-table-api-data"></a>Démarrage rapide : Créer une application Java pour gérer les données de l’API Table d’Azure Cosmos DB
+[!INCLUDE[appliesto-table-api](includes/appliesto-table-api.md)]
 
 > [!div class="op_single_selector"]
 > * [.NET](create-table-dotnet.md)
 > * [Java](create-table-java.md)
 > * [Node.JS](create-table-nodejs.md)
-> * [Python](create-table-python.md)
+> * [Python](./table-storage-how-to-use-python.md)
 > 
 
 Dans ce guide de démarrage rapide, vous allez créer un compte d’API Table Azure Cosmos DB, puis utiliser l’Explorateur de données et une application Java clonée à partir de GitHub pour créer des tables et des entités. Azure Cosmos DB est un service de base de données multimodèle qui vous permet de créer et d’interroger rapidement des bases de données de documents, de tables, de paires clé/valeur et de graphes avec des capacités de distribution mondiale et de mise à l’échelle horizontale.
@@ -72,7 +73,86 @@ Dans ce guide de démarrage rapide, vous allez créer un compte d’API Table Az
     git clone https://github.com/Azure-Samples/storage-table-java-getting-started.git 
     ```
 
-> ![CONSEIL] Pour une procédure pas à pas détaillée sur du code similaire, consultez l’article [Exemple d’API Table Cosmos DB](table-storage-how-to-use-java.md). 
+> [!TIP]
+> Pour une procédure pas à pas détaillée sur du code similaire, consultez l’article [Exemple d’API Table Cosmos DB](table-storage-how-to-use-java.md). 
+
+## <a name="review-the-code"></a>Vérifier le code
+
+Cette étape est facultative. Pour savoir comment les ressources de base de données sont créées dans le code, vous pouvez examiner les extraits de code suivants. Sinon, vous pouvez passer à la section [Mise à jour de votre chaîne de connexion](#update-your-connection-string) de ce document.
+
+* Le code suivant montre comment créer une table dans le stockage Azure :
+
+  ```java
+  private static CloudTable createTable(CloudTableClient tableClient, String tableName) throws StorageException, RuntimeException, IOException, InvalidKeyException,   IllegalArgumentException, URISyntaxException, IllegalStateException {
+  
+    // Create a new table
+    CloudTable table = tableClient.getTableReference(tableName);
+    try {
+        if (table.createIfNotExists() == false) {
+            throw new IllegalStateException(String.format("Table with name \"%s\" already exists.", tableName));
+        }
+    }
+    catch (StorageException s) {
+        if (s.getCause() instanceof java.net.ConnectException) {
+            System.out.println("Caught connection exception from the client. If running with the default configuration please make sure you have started the storage emulator.");
+        }
+        throw s;
+    }
+
+    return table;
+  }
+  ```
+
+* Le code suivant montre comment insérer des données dans la table :
+
+  ```javascript
+  private static void batchInsertOfCustomerEntities(CloudTable table) throws StorageException {
+  
+  // Create the batch operation
+  TableBatchOperation batchOperation1 = new TableBatchOperation();
+  for (int i = 1; i <= 50; i++) {
+      CustomerEntity entity = new CustomerEntity("Smith", String.format("%04d", i));
+      entity.setEmail(String.format("smith%04d@contoso.com", i));
+      entity.setHomePhoneNumber(String.format("425-555-%04d", i));
+      entity.setWorkPhoneNumber(String.format("425-556-%04d", i));
+      batchOperation1.insertOrMerge(entity);
+  }
+  
+  // Execute the batch operation
+  table.execute(batchOperation1);
+  }
+  ```
+
+* Le code suivant montre comment interroger les données de la table :
+
+  ```java
+  private static void partitionScan(CloudTable table, String partitionKey) throws StorageException {
+  
+      // Create the partition scan query
+      TableQuery<CustomerEntity> partitionScanQuery = TableQuery.from(CustomerEntity.class).where(
+          (TableQuery.generateFilterCondition("PartitionKey", QueryComparisons.EQUAL, partitionKey)));
+  
+      // Iterate through the results
+      for (CustomerEntity entity : table.execute(partitionScanQuery)) {
+          System.out.println(String.format("\tCustomer: %s,%s\t%s\t%s\t%s", entity.getPartitionKey(), entity.getRowKey(), entity.getEmail(), entity.getHomePhoneNumber(), entity.  getWorkPhoneNumber()));
+      }
+  }
+  ```
+
+* Le code suivant montre comment supprimer des données de la table :
+
+  ```java
+  
+  System.out.print("\nDelete any tables that were created.");
+  
+  if (table1 != null && table1.deleteIfExists() == true) {
+      System.out.println(String.format("\tSuccessfully deleted the table: %s", table1.getName()));
+  }
+  
+  if (table2 != null && table2.deleteIfExists() == true) {
+      System.out.println(String.format("\tSuccessfully deleted the table: %s", table2.getName()));
+  }
+  ```
 
 ## <a name="update-your-connection-string"></a>Mise à jour de votre chaîne de connexion
 
@@ -80,7 +160,7 @@ Maintenant, retournez dans le portail Azure afin d’obtenir les informations de
 
 1. Dans votre compte Azure Cosmos DB, sur le [portail Azure](https://portal.azure.com/), sélectionnez **Chaîne de connexion**. 
 
-   ![Voir les informations de chaîne de connexion dans le volet Chaîne de connexion](./media/create-table-java/cosmos-db-quickstart-connection-string.png)
+   :::image type="content" source="./media/create-table-java/cosmos-db-quickstart-connection-string.png" alt-text="Afficher les informations de chaîne de connexion dans le volet Chaîne de connexion":::
 
 2. Copiez la CHAÎNE DE CONNEXION PRINCIPALE à l’aide du bouton Copier à droite.
 

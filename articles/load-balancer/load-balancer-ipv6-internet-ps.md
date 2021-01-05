@@ -9,17 +9,17 @@ keywords: IPv6, équilibreur de charge azure, double pile, adresse ip publique, 
 ms.service: load-balancer
 ms.custom: seodec18
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 09/25/2017
 ms.author: allensu
-ms.openlocfilehash: 79fc74cc946578ffe91629065ddd03e43aa76957
-ms.sourcegitcommit: 1895459d1c8a592f03326fcb037007b86e2fd22f
+ms.openlocfilehash: 43203a756bcb42c7d00de9c11e9223f1d8b9e2a8
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82629471"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87001585"
 ---
 # <a name="get-started-creating-an-internet-facing-load-balancer-with-ipv6-using-powershell-for-resource-manager"></a>Création d’un équilibrage de charge accessible sur Internet avec IPv6 à l’aide de PowerShell pour Resource Manager
 
@@ -199,7 +199,7 @@ Cet exemple crée les éléments suivants :
 
 ## <a name="create-virtual-machines-and-assign-the-newly-created-nics"></a>Créez des machines virtuelles et affectez-leur les cartes réseau nouvellement créées.
 
-Pour plus d’informations sur la création d’une machine virtuelle, consultez la section [Création d’une machine virtuelle Windows à l’aide de Resource Manager et de PowerShell](../virtual-machines/virtual-machines-windows-ps-create.md?toc=%2fazure%2fload-balancer%2ftoc.json)
+Pour plus d’informations sur la création d’une machine virtuelle, consultez la section [Création d’une machine virtuelle Windows à l’aide de Resource Manager et de PowerShell](../virtual-machines/windows/quick-create-powershell.md?toc=%2fazure%2fload-balancer%2ftoc.json)
 
 1. Créez un groupe à haute disponibilité et un compte de stockage.
 

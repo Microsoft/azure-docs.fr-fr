@@ -1,19 +1,20 @@
 ---
-title: Optimiser les coûts de stockage d’objets blob avec une capacité de réserve – Stockage Azure
+title: Optimiser les coûts de stockage d’objets blob avec une capacité réservée
+titleSuffix: Azure Storage
 description: Découvrez comment l’achat d’une capacité de réserve Stockage Azure peut réduire les coûts sur l’objet blob de blocs et les ressources Azure Data Lake Storage Gen2.
 services: storage
 author: tamram
 ms.service: storage
 ms.topic: conceptual
-ms.date: 03/26/2020
+ms.date: 10/08/2020
 ms.author: tamram
 ms.subservice: blobs
-ms.openlocfilehash: e73686629de8481f6a37e5bfafc9b723206b4853
-ms.sourcegitcommit: 8a9c54c82ab8f922be54fb2fcfd880815f25de77
+ms.openlocfilehash: 1c957330fbd54660367fa350d6985929f0bbd3d1
+ms.sourcegitcommit: c95e2d89a5a3cf5e2983ffcc206f056a7992df7d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "80351025"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95531387"
 ---
 # <a name="optimize-costs-for-blob-storage-with-reserved-capacity"></a>Optimiser les coûts de stockage d’objets blob avec une capacité réservée
 
@@ -29,15 +30,15 @@ Les sections suivantes décrivent les conditions d’une réservation de stockag
 
 ### <a name="reservation-capacity"></a>Capacité de réserve
 
-Vous pouvez acheter une capacité de réserve Stockage Azure en unités de 100 To et 1 Po par mois pour une période d’un an ou de trois ans.
+Vous pouvez acheter une capacité de réserve Stockage Azure en unités de 100 Tio et 1 Pio par mois pour une période d’un an ou de trois ans.
 
 ### <a name="reservation-scope"></a>Étendue de la réservation
 
 La capacité de réserve Stockage Azure est disponible pour un seul abonnement ou plusieurs abonnements (étendue partagée). En cas de limitation à un seul abonnement, la remise de réservation est appliquée à l’abonnement sélectionné uniquement. Lorsque plusieurs abonnements sont concernés, la remise de réservation est partagée entre ces abonnements dans la facturation du client.
 
-Lorsque vous achetez une capacité de réserve Stockage Azure, vous pouvez utiliser votre réservation à la fois pour les objets blob de blocs et les données Azure Data Lake Storage Gen2. Une réservation s’applique à votre utilisation dans le cadre de l’étendue achetée et ne peut pas se limiter à un compte de stockage, un conteneur ou un objet spécifique au sein de l’abonnement. Une réservation ne peut pas être fractionnée sur plusieurs abonnements.
+Lorsque vous achetez une capacité de réserve Stockage Azure, vous pouvez utiliser votre réservation à la fois pour les objets blob de blocs et les données Azure Data Lake Storage Gen2. Une réservation s’applique à votre utilisation dans le cadre de l’étendue achetée et ne peut pas se limiter à un compte de stockage, un conteneur ou un objet spécifique au sein de l’abonnement.
 
-Une réservation de stockage Azure couvre uniquement la quantité de données stockées dans un abonnement ou un groupe de ressources partagé. Les frais relatifs à une suppression anticipée, aux opérations, à la bande passante et au transfert de données ne sont pas inclus dans la réservation. Dès que vous achetez une réservation, les frais de capacité qui correspondent aux attributs de la réservation sont facturés au tarif de la réduction plutôt qu’à celui du paiement à l’utilisation. Pour plus d’informations sur les réservations Azure, consultez [Qu’est-ce qu’une réservation Azure ?](/azure/billing/billing-save-compute-costs-reservations).
+Une réservation de stockage Azure couvre uniquement la quantité de données stockées dans un abonnement ou un groupe de ressources partagé. Les frais relatifs à une suppression anticipée, aux opérations, à la bande passante et au transfert de données ne sont pas inclus dans la réservation. Dès que vous achetez une réservation, les frais de capacité qui correspondent aux attributs de la réservation sont facturés au tarif de la réduction plutôt qu’à celui du paiement à l’utilisation. Pour plus d’informations sur les réservations Azure, consultez [Qu’est-ce qu’une réservation Azure ?](../../cost-management-billing/reservations/save-compute-costs-reservations.md).
 
 ### <a name="supported-account-types-tiers-and-redundancy-options"></a>Types de comptes, niveaux et options de redondance pris en charge
 
@@ -62,11 +63,11 @@ Pour acheter une capacité de réserve :
 
 Lorsque vous achetez une réservation de stockage Azure, vous devez choisir la région, le niveau d’accès et l’option de redondance pour la réservation. Votre réservation est valide uniquement pour les données stockées dans cette région, ce niveau d’accès et ce niveau de redondance. Par exemple, supposons que vous achetez une réservation de données dans la région USA Ouest pour le niveau chaud utilisant un stockage redondant interzone (ZRS). Vous ne pouvez pas utiliser la même réservation pour des données dans la région USA Est, au niveau archive ou dans un stockage géoredondant (GRS). Toutefois, vous pouvez acheter une autre réservation pour vos autres besoins.  
 
-Les réservations sont disponibles aujourd’hui pour les blocs de 100 To ou 1 Po, avec des remises plus élevées pour les blocs de 1 Po. Lorsque vous achetez une réservation dans le Portail Azure, il se peut que Microsoft vous suggère des recommandations en fonction de votre précédente utilisation pour vous permettre de déterminer quelle réservation acheter.
+Les réservations sont disponibles aujourd’hui pour les blocs de 100 Tio ou 1 Pio, avec des remises plus élevées pour les blocs de 1 Pio. Lorsque vous achetez une réservation dans le Portail Azure, il se peut que Microsoft vous suggère des recommandations en fonction de votre précédente utilisation pour vous permettre de déterminer quelle réservation acheter.
 
 ## <a name="purchase-azure-storage-reserved-capacity"></a>Acheter une capacité de réserve Stockage Azure
 
-Vous pouvez acheter une capacité de réserve Stockage Azure par l’intermédiaire du [Portail Azure](https://portal.azure.com). Payez la réservation comptant ou par paiements mensuels. Pour plus d’informations sur l’achat par mensualités, consultez [Acheter des réservations Azure avec des paiements comptants ou mensuels](/azure/billing/billing-monthly-payments-reservations).
+Vous pouvez acheter une capacité de réserve Stockage Azure par l’intermédiaire du [Portail Azure](https://portal.azure.com). Payez la réservation comptant ou par paiements mensuels. Pour plus d’informations sur l’achat par mensualités, consultez [Acheter des réservations Azure avec des paiements comptants ou mensuels](../../cost-management-billing/reservations/prepare-buy-reservation.md).
 
 Pour obtenir de l’aide sur l’identification des conditions de réservation appropriées pour votre scénario, consultez [Comprendre la remise sur la capacité de réserve Stockage Azure](../../cost-management-billing/reservations/understand-storage-charges.md).
 
@@ -84,9 +85,9 @@ Pour acheter une capacité de réserve, procédez comme suit :
    |**Abonnement**  | Abonnement utilisé pour payer la réservation de stockage Azure. Les coûts sont facturés selon le mode de paiement défini sur l’abonnement sélectionné. L’abonnement doit être de l’un des types suivants : <br/><br/>  Contrat Entreprise (références de l’offre : MS-AZR-0017P ou MS-AZR-0148P) : Pour un abonnement Entreprise, les frais sont déduits du solde de l’engagement financier de l’inscription, ou facturés comme un dépassement. <br/><br/> Abonnement individuel avec tarifs de paiement à l’utilisation (références de l’offre : MS-AZR-0003P ou MS-AZR-0023P) : Pour un abonnement individuel avec tarifs de paiement à l’utilisation, les frais sont facturés sur le mode de paiement par carte de crédit ou par facture, défini sur l’abonnement.    |
    | **Région** | Région dans laquelle la réservation est en vigueur. |
    | **Niveau d’accès** | Niveau d’accès pour lequel la réservation est en vigueur. Les options incluent *Chaud*, *Froid* ou *Archive*. Pour plus d’informations sur les niveaux d’accès, consultez [Stockage d’objets blob Azure : niveaux d’accès chaud, froid et archive](storage-blob-storage-tiers.md). |
-   | **Redondance** | Option de redondance pour la réservation. Les options incluent *LRS*, *ZRS*, *GRS* et *RA-GZRS*. Pour plus d’informations sur les options de redondance, consultez [Redondance du stockage Azure](../common/storage-redundancy.md). |
+   | **Redondance** | Option de redondance pour la réservation. Les options incluent *LRS*, *ZRS*, *GRS*, *GZRS*, *RA-GRS* et *RA-GZRS*. Pour plus d’informations sur les options de redondance, consultez [Redondance du stockage Azure](../common/storage-redundancy.md). |
    | **Périodicité de facturation** | Indique la fréquence à laquelle le compte est facturé pour la réservation. Les options incluent *Mensuel* ou *Comptant*. |
-   | **Taille** | Région dans laquelle la réservation est en vigueur. |
+   | **Taille** | Quantité de capacité à réserver. |
    |**Terme**  | Une année ou trois ans.   |
 
 1. Une fois que vous avez sélectionné les paramètres de votre réservation, le Portail Azure affiche le coût. Le Portail affiche également le pourcentage de remise par rapport à la facturation du paiement à l’utilisation.

@@ -5,13 +5,13 @@ author: ashishnegi
 ms.topic: conceptual
 ms.date: 12/03/2018
 ms.author: asnegi
-ms.custom: mvc, devcenter
-ms.openlocfilehash: f26fe70afe7d9e2872f06ac6da7143556278b1b0
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: mvc, devcenter, devx-track-azurecli
+ms.openlocfilehash: 86822c5a9cef84ff4b51bc94b6b2dd3dbdee91bf
+ms.sourcegitcommit: e7152996ee917505c7aba707d214b2b520348302
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75497955"
+ms.lasthandoff: 12/20/2020
+ms.locfileid: "97702007"
 ---
 # <a name="mount-highly-available-service-fabric-reliable-disk-based-volume-in-a-service-fabric-mesh-application"></a>Monter un volume basé sur Service Fabric Reliable Disk dans une application Azure Service Fabric Mesh 
 La méthode courante pour rendre persistant l’état avec des applications de conteneur consiste à utiliser un stockage à distance, tel que le Stockage Fichier Azure ou une base de données du type Azure Cosmos DB. Cela entraîne une importante latence de lecture et d’écriture sur le magasin distant.
@@ -46,6 +46,11 @@ az group create --name myResourceGroup --location eastus
 
 ## <a name="deploy-the-template"></a>Déployer le modèle
 
+>[!NOTE]
+> Depuis le 2 novembre 2020, des [limites de taux de téléchargement s’appliquent](https://docs.docker.com/docker-hub/download-rate-limit/) aux requêtes anonymes et authentifiées qui sont envoyées à Docker Hub à partir de comptes de plan Docker Gratuit. Ces limites sont appliquées par adresse IP. 
+> 
+> Ce modèle utilise des images publiques issues de Docker Hub. Notez que votre taux de téléchargement peut être limité. Pour plus d’informations, consultez [S’authentifier auprès de Docker Hub](../container-registry/buffer-gate-public-content.md#authenticate-with-docker-hub).
+
 La commande suivante déploie une application Linux à l’aide du [modèle counter.sfreliablevolume.linux.json](https://github.com/Azure-Samples/service-fabric-mesh/blob/master/templates/counter/counter.sfreliablevolume.linux.json). Pour déployer une application Windows, utilisez le [modèle counter.sfreliablevolume.windows.json](https://github.com/Azure-Samples/service-fabric-mesh/blob/master/templates/counter/counter.sfreliablevolume.windows.json). N’oubliez pas que le déploiement d’images de conteneur plus grandes peut prendre plus de temps.
 
 ```azurecli-interactive
@@ -55,7 +60,7 @@ az mesh deployment create --resource-group myResourceGroup --template-uri https:
 Vous pouvez également voir l’état du déploiement avec la commande suivante
 
 ```azurecli-interactive
-az group deployment show --name counter.sfreliablevolume.linux --resource-group myResourceGroup
+az deployment group show --name counter.sfreliablevolume.linux --resource-group myResourceGroup
 ```
 
 Notez le nom de la ressource de passerelle dont le type de ressources est `Microsoft.ServiceFabricMesh/gateways`. Il sera utilisé pour obtenir l’adresse IP publique de l’application.

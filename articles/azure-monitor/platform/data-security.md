@@ -5,16 +5,16 @@ ms.subservice: logs
 ms.topic: conceptual
 author: bwren
 ms.author: bwren
-ms.date: 03/04/2019
-ms.openlocfilehash: 63d8d8d3701a9adca4bd01e6e061877f5d0bd245
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.date: 11/11/2020
+ms.openlocfilehash: 87cdecd29d684c712853970c8246002132d274ac
+ms.sourcegitcommit: 5db975ced62cd095be587d99da01949222fc69a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80333355"
+ms.lasthandoff: 12/10/2020
+ms.locfileid: "97094333"
 ---
 # <a name="log-analytics-data-security"></a>Sécurité des données Log Analytics
-Ce document est destiné à fournir des informations propres à Log Analytics, qui est une fonctionnalité d’Azure Monitor, en complément des informations disponibles sur le [Centre de confidentialité Azure](../../security/fundamentals/trust-center.md).  
+Ce document est destiné à fournir des informations propres à Log Analytics, qui est une fonctionnalité d’Azure Monitor, en complément des informations disponibles sur le [Centre de confidentialité Azure](https://www.microsoft.com/en-us/trust-center?rtc=1).  
 
 Cet article décrit les procédures de collecte, de traitement et de sécurisation des données par Log Analytics. Vous pouvez utiliser des agents pour la connexion au service web, utiliser System Center Operations Manager pour collecter des données opérationnelles ou récupérer des données à partir des diagnostics Azure pour une utilisation par Log Analytics. 
 
@@ -26,6 +26,12 @@ Le service Log Analytics gère vos données basées sur le cloud en toute sécur
 * Gestion des incidents
 * Conformité
 * Certifications relatives aux normes de sécurité
+
+Vous pouvez également utiliser des fonctionnalités de sécurité supplémentaires intégrées à Azure Monitor et Log Analytics. Ces fonctionnalités nécessitent une gestion plus poussée de la part de l’administrateur. 
+* Clés (de sécurité) gérées par le client
+* Stockage privé Azure
+* Réseau de liaison privée 
+* Azure prend en charge les limites d’accès définies par Azure Lockbox
 
 Contactez-nous pour toute question, suggestion ou remarque concernant les informations fournies ci-dessous, y compris notre politique de sécurité dans [Options de support Azure](https://azure.microsoft.com/support/options/).
 
@@ -42,9 +48,9 @@ Nous ne recommandons pas de configurer explicitement votre agent de façon à ce
 |Plateforme/Langage | Support | Informations complémentaires |
 | --- | --- | --- |
 |Linux | Les distributions de Linux s’appuient généralement sur [OpenSSL](https://www.openssl.org) pour la prise en charge de TLS 1.2.  | Vérifiez [OpenSSL Changelog](https://www.openssl.org/news/changelog.html) pour vous assurer que votre version d’OpenSSL est prise en charge.|
-| Windows 8.0 - 10 | Pris en charge, activé par défaut. | Pour confirmer que vous utilisez toujours les [paramètres par défaut](https://docs.microsoft.com/windows-server/security/tls/tls-registry-settings).  |
-| Windows Server 2012 - 2016 | Pris en charge, activé par défaut. | Pour confirmer que vous utilisez toujours les [paramètres par défaut](https://docs.microsoft.com/windows-server/security/tls/tls-registry-settings) |
-| Windows 7 SP1 et Windows Server 2008 R2 SP1 | Pris en charge, mais non activé par défaut. | Consultez la page [Paramètres de Registre de TLS](https://docs.microsoft.com/windows-server/security/tls/tls-registry-settings) pour plus d’informations sur l’activation.  |
+| Windows 8.0 - 10 | Pris en charge, activé par défaut. | Pour confirmer que vous utilisez toujours les [paramètres par défaut](/windows-server/security/tls/tls-registry-settings).  |
+| Windows Server 2012 - 2016 | Pris en charge, activé par défaut. | Pour confirmer que vous utilisez toujours les [paramètres par défaut](/windows-server/security/tls/tls-registry-settings) |
+| Windows 7 SP1 et Windows Server 2008 R2 SP1 | Pris en charge, mais non activé par défaut. | Consultez la page [Paramètres de Registre de TLS](/windows-server/security/tls/tls-registry-settings) pour plus d’informations sur l’activation.  |
 
 ## <a name="data-segregation"></a>Ségrégation des données
 Une fois que vos données ont été ingérées par le service Log Analytics, elles sont séparées logiquement sur chaque composant dans l’ensemble du service. Toutes les données sont balisées en fonction de l’espace de travail. Ce balisage est conservé tout au long du cycle de vie des données, et il est appliqué dans chaque couche du service. Vos données sont stockées dans une base de données dédiée dans le cluster de stockage de la région que vous avez sélectionnée.
@@ -121,7 +127,7 @@ Azure Log Analytics répond aux exigences suivantes :
 * [ISO 22301](https://azure.microsoft.com/blog/iso22301/)
 * [Normes de sécurité sur les données de l’industrie des cartes de paiement (PCI DSS)](https://www.microsoft.com/en-us/TrustCenter/Compliance/PCI) édictées par le PCI Security Standards Council (conseil de normalisation pour la sécurité des données de l’ICP).
 * [SOC 1 Type 1 et SOC 2 Type 1](https://www.microsoft.com/en-us/TrustCenter/Compliance/SOC1-and-2).
-* [HIPAA et Hi-TECH](https://www.microsoft.com/en-us/TrustCenter/Compliance/hipaa) pour les organisations qui disposent d’un contrat HIPAA Business Associate Agreement
+* [HIPAA et Hi-TECH](/compliance/regulatory/offering-hipaa-hitech) pour les organisations qui disposent d’un contrat HIPAA Business Associate Agreement
 * Critères de conception communs Windows
 * Microsoft Trustworthy Computing
 * En tant que service Azure, Log Analytics utilise des composants conformes aux exigences de conformité d’Azure. Pour en savoir plus, voir le site du [Microsoft Trust Center](https://www.microsoft.com/en-us/trustcenter/compliance/default.aspx).
@@ -148,7 +154,7 @@ Pour Operations Manager, le groupe d’administration Operations Manager établi
 
 Toutes les communications entre les systèmes connectés et le service Log Analytics sont chiffrées. Le protocole TLS (HTTPS) est utilisé pour le chiffrement.  Le processus Microsoft SDL est suivi pour s’assurer que Log Analytics est à jour avec les dernières avancées en matière de protocoles cryptographiques.
 
-Chaque type d’agent collecte des données pour Log Analytics. Le type des données collectées dépend des types de solutions utilisés. Pour un récapitulatif de la collecte de données, voir [Ajouter des solutions Log Analytics à partir de la galerie de solutions](../../azure-monitor/insights/solutions.md). Par ailleurs, des informations plus détaillées concernant la collecte sont disponibles pour la plupart des solutions. Une solution est un ensemble de vues prédéfinies, de requêtes de recherche de journal, de règles de collecte de données et de logique de traitement. Seuls les administrateurs peuvent utiliser Log Analytics pour importer une solution. Une fois la solution importée, elle est déplacée vers les serveurs d’administration Operations Manager (éventuellement utilisés), puis vers les agents que vous avez choisis. Ensuite, les agents collectent les données.
+Chaque type d’agent collecte des données pour Log Analytics. Le type des données collectées dépend des types de solutions utilisés. Pour un récapitulatif de la collecte de données, voir [Ajouter des solutions Log Analytics à partir de la galerie de solutions](../insights/solutions.md). Par ailleurs, des informations plus détaillées concernant la collecte sont disponibles pour la plupart des solutions. Une solution est un ensemble de vues prédéfinies, de requêtes de recherche de journal, de règles de collecte de données et de logique de traitement. Seuls les administrateurs peuvent utiliser Log Analytics pour importer une solution. Une fois la solution importée, elle est déplacée vers les serveurs d’administration Operations Manager (éventuellement utilisés), puis vers les agents que vous avez choisis. Ensuite, les agents collectent les données.
 
 ## <a name="2-send-data-from-agents"></a>2. Envoyer des données à partir d'agents
 Vous enregistrez tous les types d’agents avec une clé d’inscription et une connexion sécurisée est établie entre l’agent et le service Log Analytics à l’aide de l’authentification par certificat et TLS avec le port 443. Log Analytics utilise un magasin des secrets pour générer et gérer les clés. Les clés privées sont remplacées tous les 90 jours, stockées dans Azure, et gérées par des opérations Azure qui suivent des pratiques réglementaires et de conformité strictes.
@@ -171,8 +177,17 @@ La période de rétention des données collectées stockées dans la base de don
 ## <a name="4-use-log-analytics-to-access-the-data"></a>4. Utiliser Log Analytics pour accéder aux données
 Pour accéder à votre espace de travail Log Analytics, vous vous connectez au portail Azure à l’aide du compte professionnel ou d’un compte Microsoft que vous avez configuré précédemment. La totalité du trafic entre le portail et le service Log Analytics est envoyée par le biais d’un canal HTTPS sécurisé. Lorsque vous utilisez le portail, un ID de session est généré sur le client utilisateur (navigateur web), et les données sont stockées dans un cache local jusqu’à la fin de la session. Ensuite, le cache est supprimé. Les cookies côté client qui ne contiennent pas d’informations d’identification personnelle ne sont pas supprimés automatiquement. Les cookies de session sont marqués HTTPOnly et sécurisés. Après une période d’inactivité prédéfinie, la session du portail Azure prend fin.
 
-## <a name="next-steps"></a>Étapes suivantes
-* Découvrez comment collecter des données avec Log Analytics pour vos machines virtuelles Azure en suivant les instructions de l’article de [démarrage rapide concernant Azure Virtual Machines](../../azure-monitor/learn/quick-collect-azurevm.md).  
 
-*  Si vous souhaitez collecter des données à partir d’ordinateurs physiques ou virtuels Windows ou Linux de votre environnement, consultez l’article de [démarrage rapide pour les ordinateurs Linux](../../azure-monitor/learn/quick-collect-linux-computer.md) ou de [démarrage rapide pour les ordinateurs Windows](../../azure-monitor/learn/quick-collect-windows-computer.md).
+## <a name="additional-security-features"></a>Fonctionnalités de sécurité supplémentaires
+Vous pouvez utiliser ces fonctionnalités de sécurité supplémentaires pour renforcer la sécurité de votre environnement Azure Monitor/Log Analytics. Ces fonctionnalités nécessitent une gestion plus poussée de la part de l’administrateur. 
+- [Clés (de sécurité) gérées par le client](customer-managed-keys.md) : Vous pouvez utiliser des clés gérées par le client pour chiffrer les données envoyées à vos espaces de travail Log Analytics. Cela requiert l’utilisation d’Azure Key Vault. 
+- [Stockage privé/géré par le client](private-storage.md) : Gérez votre compte de stockage chiffré personnellement et indiquez à Log Analytics de l’utiliser pour stocker les données de surveillance. 
+- [Mise en réseau d’Azure Private Link](private-link-security.md) : Azure Private Link vous permet de lier en toute sécurité les services PaaS Azure (notamment Azure Monitor) à votre réseau virtuel à l’aide de points de terminaison privés. 
+- [Azure Customer Lockbox](/azure/security/fundamentals/customer-lockbox-overview#supported-services-and-scenarios-in-preview) : Customer Lockbox pour Microsoft Azure fournit une interface dans laquelle les clients peuvent vérifier et approuver/refuser les demandes d’accès aux données client. Il est utilisé lorsqu’un ingénieur Microsoft doit accéder aux données client dans le cadre d’une demande de support.
+
+
+## <a name="next-steps"></a>Étapes suivantes
+* Découvrez comment collecter des données avec Log Analytics pour vos machines virtuelles Azure en suivant les instructions de l’article de [démarrage rapide concernant Azure Virtual Machines](../learn/quick-collect-azurevm.md).  
+
+*  Si vous souhaitez collecter des données à partir d’ordinateurs physiques ou virtuels Windows ou Linux de votre environnement, consultez l’article de [démarrage rapide pour les ordinateurs Linux](../learn/quick-collect-linux-computer.md) ou de [démarrage rapide pour les ordinateurs Windows](../learn/quick-collect-windows-computer.md).
 

@@ -3,13 +3,13 @@ title: Obtenir les journaux d’activité et les événements d’instance de co
 description: Découvrez comment récupérer les journaux d'activité du conteneur et les événements dans Azure Container Instances pour résoudre les problèmes liés aux conteneurs.
 ms.topic: article
 ms.date: 12/30/2019
-ms.custom: mvc
-ms.openlocfilehash: 0991b9cb1f99606910dbdf2c87b111f67da6da7b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: mvc, devx-track-azurecli
+ms.openlocfilehash: 20b6e1cfe6bb8f6ac721a401c3d0831d4f447edb
+ms.sourcegitcommit: 8c7f47cc301ca07e7901d95b5fb81f08e6577550
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78249996"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92746969"
 ---
 # <a name="retrieve-container-logs-and-events-in-azure-container-instances"></a>Récupérer les journaux d’activité du conteneur et les événements dans Azure Container Instances
 

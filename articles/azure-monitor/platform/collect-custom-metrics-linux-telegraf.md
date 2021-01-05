@@ -7,12 +7,12 @@ ms.topic: conceptual
 ms.date: 09/24/2018
 ms.author: ancav
 ms.subservice: metrics
-ms.openlocfilehash: 06c344130156ae5f72f6e65baa519c11adff2bae
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: b80f27e490dd3b1890eab7740fb4650ba4280abb
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82186439"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96008988"
 ---
 # <a name="collect-custom-metrics-for-a-linux-vm-with-the-influxdata-telegraf-agent"></a>Collecter des métriques personnalisées pour une machine virtuelle Linux avec l’agent InfluxData Telegraf
 
@@ -25,7 +25,7 @@ Azure Monitor vous permet de collecter des métriques personnalisées par le bia
  ![Présentation de l’agent Telegraf](./media/collect-custom-metrics-linux-telegraf/telegraf-agent-overview.png)
 
 > [!NOTE]  
-> Les métriques personnalisées ne sont pas prises en charge dans toutes les régions. Les régions prises en charge sont répertoriées [ici](https://docs.microsoft.com/azure/azure-monitor/platform/metrics-custom-overview#supported-regions).
+> Les métriques personnalisées ne sont pas prises en charge dans toutes les régions. Les régions prises en charge sont répertoriées [ici](./metrics-custom-overview.md#supported-regions).
 
 ## <a name="send-custom-metrics"></a>Envoyer des métriques personnalisées 
 
@@ -127,7 +127,7 @@ Désormais, l’agent collecte les métriques de chacun des plug-ins d’entrée
 
 ## <a name="additional-configuration"></a>Configuration supplémentaire 
 
-La procédure pas à pas précédente explique comment configurer l’agent Telegraf pour collecter les métriques à partir de plusieurs plug-ins d’entrée de base. L’agent Telegraf prend en charge plus de 150 plug-ins d’entrée, dont certains prennent en charge des options de configuration supplémentaires. InfluxData a publié une [liste des plug-ins pris en charge](https://docs.influxdata.com/telegraf/v1.7/plugins/inputs/) et des instructions sur [comment les configurer](https://docs.influxdata.com/telegraf/v1.7/administration/configuration/).  
+La procédure pas à pas précédente explique comment configurer l’agent Telegraf pour collecter les métriques à partir de plusieurs plug-ins d’entrée de base. L’agent Telegraf prend en charge plus de 150 plug-ins d’entrée, dont certains prennent en charge des options de configuration supplémentaires. InfluxData a publié une [liste des plug-ins pris en charge](https://docs.influxdata.com/telegraf/v1.15/plugins/inputs/) et des instructions sur [comment les configurer](https://docs.influxdata.com/telegraf/v1.15/administration/configuration/).  
 
 De plus, dans cette procédure pas à pas, vous avez utilisé un agent Telegraf pour envoyer des métriques concernant la machine virtuelle sur laquelle l’agent est déployé. L’agent Telegraf peut également servir de collecteur et de redirecteur de métriques pour d’autres ressources. Pour savoir comment configurer l’agent afin d’émettre des métriques pour les autres ressources Azure, consultez [Sortie de métriques personnalisée Azure Monitor pour Telegraf](https://github.com/influxdata/telegraf/blob/fb704500386214655e2adb53b6eb6b15f7a6c694/plugins/outputs/azure_monitor/README.md).  
 
@@ -137,6 +137,3 @@ Dès que vous n’en avez plus besoin, vous pouvez supprimer le groupe de ressou
 
 ## <a name="next-steps"></a>Étapes suivantes
 - En savoir plus sur les [métriques personnalisées](metrics-custom-overview.md).
-
-
-

@@ -5,13 +5,13 @@ author: IngridAtMicrosoft
 ms.author: inhenkel
 ms.service: media-services
 ms.topic: reference
-ms.date: 04/20/2020
-ms.openlocfilehash: 250fd242e76f64002a6e55e7caf616ac201b593b
-ms.sourcegitcommit: 366e95d58d5311ca4b62e6d0b2b47549e06a0d6d
+ms.date: 05/11/2020
+ms.openlocfilehash: a31c089971b7e70e70c5906480deb2b17c197b9f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82692256"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87043613"
 ---
 # <a name="known-issues"></a>Problèmes connus #
 
@@ -41,6 +41,7 @@ La version actuelle présente les problèmes connus suivants :
 
 - Des problèmes d’insertion de publicités peuvent survenir (à la demande ou en direct) lorsqu’un bloqueur de publicités est installé sur le navigateur.
 - Les appareils mobiles peuvent avoir des difficultés à lire les publicités.
+- Les publicités MidRoll MP4 ne sont pas actuellement prises en charge par le Lecteur multimédia Azure.
 
 ## <a name="azurehtml5js"></a>AzureHtml5JS ##
 
@@ -49,7 +50,7 @@ La version actuelle présente les problèmes connus suivants :
 
 - Les ressources audio uniquement ne seront pas lues par la technologie AzureHtml5JS.
   - Si vous souhaitez lire des ressources sans audio, vous pouvez le faire en insérant un fichier audio vierge à l’aide de l’[outil Azure Media Services Explorer](https://aka.ms/amse).
-  - Vous trouverez les instructions pour l’insertion d’une piste audio silencieuse [ici](https://azure.microsoft.com/documentation/articles/media-services-advanced-encoding-with-mes/#silent_audio).
+  - Vous trouverez les instructions pour l’insertion d’une piste audio silencieuse [ici](../previous/media-services-advanced-encoding-with-mes.md#silent_audio).
 
 ## <a name="flash"></a>Clignote ##
 

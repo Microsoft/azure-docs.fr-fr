@@ -4,32 +4,29 @@ description: Cet article fournit un exemple de configuration pour la connexion d
 services: vpn-gateway
 author: yushwang
 ms.service: vpn-gateway
-ms.topic: article
-ms.date: 10/19/2018
+ms.topic: how-to
+ms.date: 09/03/2020
 ms.author: yushwang
-ms.openlocfilehash: 96e5c26ea7b5f1baa33fd8830491ee3aa1e60221
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 82e00e0b519040c57fdfd798d8992086c61e5481
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75778080"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89426168"
 ---
 # <a name="sample-configuration-cisco-asa-device-ikev2no-bgp"></a>Exemple de configuration : appareil Cisco ASA (IKEv2/sans BGP)
 Cet article fournit des exemples de configurations pour la connexion de périphériques Cisco ASA (Adaptive Security Appliance) à des passerelles VPN Azure. L’exemple s’applique à des périphériques Cisco ASA qui exécutent IKEv2 sans protocole de passerelle frontière (BGP). 
 
 ## <a name="device-at-a-glance"></a>Aperçu de l’appareil
 
-|                        |                                   |
-| ---                    | ---                               |
-| Fournisseur de l’appareil          | Cisco                             |
-| Modèle de l'appareil           | ASA                               |
-| Version cible         | 8.4 et versions ultérieures                     |
-| Modèle testé           | ASA 5505                          |
-| Version testée         | 9.2                               |
-| Version IKE            | IKEv2                             |
-| BGP                    | Non                                |
-| Type de passerelle VPN Azure | Passerelle VPN basée sur le routage           |
-|                        |                                   |
+* Fournisseur de l’appareil : **Cisco**
+* Modèle de l’appareil : **ASA**           
+* Version cible : **8.4 et versions ultérieures**
+* Modèle testé : **ASA 5505**
+* Version testée : **9.2**             
+* Version IKE : **IKEv2**                  
+* BGP : **Non**      
+* Type de passerelle VPN Azure : **Passerelle VPN basée sur le routage**
 
 > [!NOTE]
 > L’exemple de configuration connecte un périphérique Cisco ASA à une passerelle VPN **basée sur le routage** Azure. Cette connexion utilise une stratégie IPsec/IKE personnalisée avec l’option **UsePolicyBasedTrafficSelectors**, comme décrit dans [cet article](vpn-gateway-connect-multiple-policybased-rm-ps.md).
@@ -115,7 +112,7 @@ Le script fournit un exemple qui se base sur la configuration et les paramètres
   - **Azure_Gateway_Public_IP**
   - **OnPrem_Device_Public_IP**
   - IKE : **Pre_Shared_Key**
-  - Noms du réseau virtuel et de la passerelle réseau locale : **VNetName** et **LNGName**
+  - Noms du réseau virtuel et de la passerelle de réseau local : **VNetName** et **LNGName**
   - **Préfixes** d’adresse du réseau virtuel et du réseau local
   - **Masques de réseau** appropriés
 

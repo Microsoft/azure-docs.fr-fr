@@ -1,6 +1,6 @@
 ---
 title: Vue d’ensemble de Stockage Table Azure
-description: Stockez des données structurées dans le cloud à l’aide du stockage de tables Azure, un magasin de données NoSQL.
+description: Découvrez comment utiliser le Stockage Table pour stocker des jeux de données flexibles, comme des données utilisateur pour des applications web, des carnets d’adresses, des informations sur les appareils ou d’autres types de métadonnées.
 ms.service: cosmos-db
 ms.subservice: cosmosdb-table
 ms.devlang: dotnet
@@ -9,14 +9,15 @@ ms.date: 05/20/2019
 author: sakash279
 ms.author: akshanka
 ms.reviewer: sngun
-ms.openlocfilehash: 20c799f89394dd8978f120097b054a9adf9f1280
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: 42d0b2c5d39ea7b5c44b7004f65f13e07067cdc7
+ms.sourcegitcommit: 3bdeb546890a740384a8ef383cf915e84bd7e91e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "76770734"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93079510"
 ---
 # <a name="azure-table-storage-overview"></a>Vue d’ensemble du stockage de table Azure
+[!INCLUDE[appliesto-table-api](includes/appliesto-table-api.md)]
 
 [!INCLUDE [storage-table-cosmos-db-tip-include](../../includes/storage-table-cosmos-db-tip-include.md)]
 
@@ -30,10 +31,10 @@ Vous pouvez utiliser le Stockage Table pour stocker des jeux de données flexibl
 
 * [Microsoft Azure Storage Explorer](../vs-azure-tools-storage-manage-with-storage-explorer.md) est une application autonome et gratuite de Microsoft qui vous permet d’exploiter visuellement les données de Stockage Azure sur Windows, macOS et Linux.
 
-* [Bien démarrer avec l’API Table d’Azure Cosmos DB et le stockage Table Azure à l’aide du SDK .NET](table-storage-how-to-use-dotnet.md)
+* [Bien démarrer avec l’API Table d’Azure Cosmos DB et le stockage Table Azure à l’aide du SDK .NET](./tutorial-develop-table-dotnet.md)
 
 * Pour plus d'informations sur les API disponibles, consultez la documentation de référence du service de Table :
 
-    * [Référence de la bibliothèque cliente de stockage pour .NET](https://go.microsoft.com/fwlink/?LinkID=390731&clcid=0x409)
+    * [Référence de la bibliothèque cliente de stockage pour .NET](/dotnet/api/overview/azure/storage)
 
-    * [Référence d’API REST](https://msdn.microsoft.com/library/azure/dd179355)
+    * [Référence d’API REST](/rest/api/storageservices/)

@@ -6,15 +6,15 @@ ms.reviewer: jasonh
 author: hrasheed-msft
 ms.service: hdinsight
 ms.custom: hdinsightactive,hdiseo17may2017
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 05/29/2019
 ms.author: hrasheed
-ms.openlocfilehash: 47ee66393e3e1678576b12a70b767f35cb3bc635
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 4f19797fa1c79261dc3459e2b924ed45d0b7e36e
+ms.sourcegitcommit: d767156543e16e816fc8a0c3777f033d649ffd3c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "73044769"
+ms.lasthandoff: 10/26/2020
+ms.locfileid: "92547960"
 ---
 # <a name="get-started-with-an-apache-hadoop-sandbox-an-emulator-on-a-virtual-machine"></a>Bien démarrer avec un bac à sable Apache Hadoop, un émulateur sur une machine virtuelle
 
@@ -39,8 +39,8 @@ Pour télécharger une version antérieure du bac à sable HDP, consultez les li
 ## <a name="start-the-virtual-machine"></a>Démarrage de la machine virtuelle
 
 1. Ouvrez Oracle VirtualBox pour machine virtuelle.
-1. À partir du menu **Fichier**, cliquez sur **Importer l’appliance**, puis spécifiez l’image de sandbox Hortonworks.
-1. Sélectionnez Hortonworks Sandbox, cliquez sur **Démarrer**, puis sur **Démarrage normal**. Une fois le processus de démarrage de la machine virtuelle terminé, celle-ci affiche les instructions de connexion.
+1. À partir du menu **Fichier** , cliquez sur **Importer l’appliance** , puis spécifiez l’image de sandbox Hortonworks.
+1. Sélectionnez Hortonworks Sandbox, cliquez sur **Démarrer** , puis sur **Démarrage normal** . Une fois le processus de démarrage de la machine virtuelle terminé, celle-ci affiche les instructions de connexion.
 
     ![démarrage normal de VirtualBox Manager](./media/apache-hadoop-emulator-get-started/virtualbox-normal-start.png)
 
@@ -57,7 +57,9 @@ Pour télécharger une version antérieure du bac à sable HDP, consultez les li
 
 2. Une fois connecté, entrez la commande suivante :
 
-        ambari-admin-password-reset
+    ```bash
+    ambari-admin-password-reset
+    ```
 
     Lorsque vous y êtes invité, indiquez le mot de passe du compte d’administrateur Ambari. Il est utilisé pour accéder à l’interface utilisateur web d’Ambari.
 
@@ -65,17 +67,25 @@ Pour télécharger une version antérieure du bac à sable HDP, consultez les li
 
 1. À partir d’une connexion SSH au bac à sable, utilisez la commande suivante pour démarrer l’interpréteur de commandes Hive :
 
-        hive
+    ```bash
+    hive
+    ```
+
 2. Une fois l’interpréteur de commandes a démarré, procédez comme suit pour afficher les tables fournies avec le bac à sable :
 
-        show tables;
+    ```hiveql
+    show tables;
+    ```
+
 3. Utilisez la commande suivante pour récupérer 10 lignes de la table `sample_07` :
 
-        select * from sample_07 limit 10;
+    ```hiveql
+    select * from sample_07 limit 10;
+    ```
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* [Apprendre à utiliser Visual Studio avec Hortonworks Sandbox](../hdinsight-hadoop-emulator-visual-studio.md)
+* [Apprendre à utiliser Visual Studio avec Hortonworks Sandbox](./apache-hadoop-visual-studio-tools-get-started.md)
 
 * [Se familiariser avec Hortonworks Sandbox](https://hortonworks.com/hadoop-tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
 

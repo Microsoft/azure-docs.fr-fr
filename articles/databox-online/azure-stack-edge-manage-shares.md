@@ -1,27 +1,27 @@
 ---
-title: Gestion des partages de fichiers sur Azure Stack Edge | Microsoft Docs
-description: Décrit comment utiliser le Portail Azure pour gérer les partages sur votre Azure Stack Edge.
+title: Gestion des partages de fichiers sur Azure Stack Edge Pro | Microsoft Docs
+description: Décrit comment utiliser le Portail Azure pour gérer les partages sur votre Azure Stack Edge Pro.
 services: databox
 author: alkohli
 ms.service: databox
 ms.subservice: edge
-ms.topic: article
+ms.topic: how-to
 ms.date: 03/25/2019
 ms.author: alkohli
-ms.openlocfilehash: d64ecb32c783dcee08164856aa90a43d004894a8
-ms.sourcegitcommit: 856db17a4209927812bcbf30a66b14ee7c1ac777
+ms.openlocfilehash: 4d43b70c8f958ad37b6ac2d0ee043d5f07d11da9
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82568906"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96444586"
 ---
-# <a name="use-the-azure-portal-to-manage-shares-on-your-azure-stack-edge"></a>Utiliser le Portail Azure pour gérer les partages sur votre Azure Stack Edge
+# <a name="use-the-azure-portal-to-manage-shares-on-azure-stack-edge-pro"></a>Utiliser le portail Azure pour gérer les partages sur Azure Stack Edge Pro
 
-Cet article explique comment gérer les partages sur votre Azure Stack Edge. Vous pouvez gérer Azure Stack Edge par le biais du Portail Azure ou de l’interface utilisateur web locale. Utilisez le Portail Azure pour ajouter, supprimer, actualiser les partages ou synchroniser la clé de stockage du compte de stockage associé aux partages.
+Cet article explique comment gérer les partages sur votre Azure Stack Edge Pro. Vous pouvez gérer Azure Stack Edge Pro par le biais du Portail Azure ou de l’interface utilisateur web locale. Utilisez le Portail Azure pour ajouter, supprimer, actualiser les partages ou synchroniser la clé de stockage du compte de stockage associé aux partages.
 
 ## <a name="about-shares"></a>À propos des partages
 
-Pour transférer des données vers Azure, vous devez créer des partages sur votre Azure Stack Edge. Les partages que vous ajoutez sur l’appareil Azure Stack Edge sont des partages locaux ou des partages qui envoient (push) les données vers le cloud.
+Pour transférer des données vers Azure, vous devez créer des partages sur votre Azure Stack Edge Pro. Les partages que vous ajoutez sur l’appareil Azure Stack Edge Pro sont des partages locaux ou des partages qui envoient (push) les données vers le cloud.
 
  - **Partages locaux** : Utilisez ces partages lorsque vous souhaitez que les données soient traitées localement sur l’appareil.
  - **Partages** : Utilisez ces partages lorsque vous souhaitez que les données d’appareil soient automatiquement envoyées à votre compte de stockage dans le cloud. Toutes les fonctions cloud telles que **Actualiser** et **Synchroniser les clés de stockage** s’appliquent à ces partages.
@@ -54,7 +54,7 @@ Pour créer un partage, procédez comme suit dans le Portail Azure.
 5. Dans la liste déroulante, choisissez le **Service de stockage** d’objet blob de blocs, d’objet blob de pages ou de fichier. Le type de service choisi varie selon le format dans lequel vous souhaitez que les données résident dans Azure. Par exemple, dans cette instance, nous voulons que les données résident en tant qu’objets blob de blocs dans Azure. C’est pourquoi nous sélectionnons **Objet blob de blocs**. Si vous choisissez un **Objet blob de pages**, vous devez vous assurer que vos données sont de 512 octets alignés. Si vous choisissez un **Objet blob de pages**, vous devez vous assurer que vos données sont de 512 octets alignés.
 
    > [!IMPORTANT]
-   > Vérifiez que le compte de stockage Azure que vous utilisez n’a pas de stratégies d’immuabilité définies si vous l’utilisez avec un appareil Azure Stack Edge ou Data Box Gateway. Pour plus d’informations, consultez [Définir et gérer des stratégies d’immuabilité pour le stockage Blob](https://docs.microsoft.com/azure/storage/blobs/storage-blob-immutability-policies-manage).
+   > Vérifiez que le compte de stockage Azure que vous utilisez n’a pas de stratégies d’immuabilité définies si vous l’utilisez avec un appareil Azure Stack Edge Pro ou Data Box Gateway. Pour plus d’informations, consultez [Définir et gérer des stratégies d’immuabilité pour le stockage Blob](../storage/blobs/storage-blob-immutability-policies-manage.md).
 
 6. Cette étape varie selon que vous créez un partage SMB ou NFS.
    - **Si vous créez un partage SMB** : dans le champ **All privilege local user** (Utilisateur local avec tous les privilèges), choisissez **Créer** ou **Utiliser l’existant**. Si vous créez un utilisateur local, indiquez un **nom d’utilisateur**, un **mot de passe**, puis confirmez le mot de passe. Cela affecte les autorisations à l’utilisateur local. Après avoir attribué les autorisations à cet emplacement, vous pouvez utiliser l’Explorateur de fichiers par la suite pour modifier ces autorisations.
@@ -74,7 +74,7 @@ Pour créer un partage, procédez comme suit dans le Portail Azure.
 
 1. Sur le Portail Azure, accédez à votre ressource Azure Stack Edge, puis à **Passerelle > Partages**. Sélectionnez **+ Ajouter un partage** dans la barre de commandes.
 
-   ![Sélectionner Ajouter un partage](media/azure-stack-edge-manage-shares/add-local-share-1.png)
+   ![Sélectionner Ajouter un partage 2](media/azure-stack-edge-manage-shares/add-local-share-1.png)
 
 2. Dans **Ajouter un partage**, spécifiez les paramètres du partage. Indiquez un nom unique pour votre partage.
     
@@ -102,11 +102,11 @@ Pour créer un partage, procédez comme suit dans le Portail Azure.
 
 ## <a name="mount-a-share"></a>Monter un partage
 
-Si vous avez créé un partage avant de configurer le calcul sur votre appareil Azure Stack Edge, vous devez monter le partage. Effectuez les étapes suivantes pour monter un partage.
+Si vous avez créé un partage avant de configurer le calcul sur votre appareil Azure Stack Edge Pro, vous devez monter le partage. Effectuez les étapes suivantes pour monter un partage.
 
 1. Sur le Portail Azure, accédez à votre ressource Azure Stack Edge, puis à **Passerelle > Partages**. Dans la liste des partages, sélectionnez le partage que vous souhaitez monter. La colonne **Utilisé pour le computing** affiche l’état **Désactivé** pour le partage sélectionné.
 
-   ![Sélectionner un partage](media/azure-stack-edge-manage-shares/select-share-mount.png)
+   ![Sélectionner un partage 3](media/azure-stack-edge-manage-shares/select-share-mount.png)
 
 2. Sélectionnez **Monter**.
 
@@ -130,7 +130,7 @@ Effectuez les étapes suivantes dans le portail Azure pour démonter un partage.
 
 1. Sur le Portail Azure, accédez à votre ressource Azure Stack Edge, puis à **Passerelle > Partages**.
 
-   ![Sélectionner un partage](media/azure-stack-edge-manage-shares/select-share-unmount.png)
+   ![Sélectionner un partage 4](media/azure-stack-edge-manage-shares/select-share-unmount.png)
 
 2. Dans la liste des partages, sélectionnez le partage que vous souhaitez démonter. Vous devez vous assurer que le partage à démonter n’est pas utilisé par un module. Si le partage est utilisé par un module, vous verrez apparaître des problèmes avec le module correspondant. Sélectionnez **Démonter**.
 
@@ -150,13 +150,13 @@ Pour supprimer un partage, procédez comme suit dans le Portail Azure.
 
 1. Dans la liste des partages, sélectionnez et cliquez sur le partage que vous souhaitez supprimer.
 
-   ![Sélectionner un partage](media/azure-stack-edge-manage-shares/delete-share-1.png)
+   ![Sélectionner un partage 5](media/azure-stack-edge-manage-shares/delete-share-1.png)
 
 2. Cliquez sur **Supprimer**.
 
    ![Clic sur Supprimer](media/azure-stack-edge-manage-shares/delete-share-2.png)
 
-3. Cliquez sur **Oui**lorsque vous êtes invité à confirmer l’opération.
+3. Cliquez sur **Oui** lorsque vous êtes invité à confirmer l’opération.
 
    ![Confirmation de suppression](media/azure-stack-edge-manage-shares/delete-share-3.png)
 
@@ -175,13 +175,13 @@ Pour actualiser un partage, procédez comme suit dans le Portail Azure.
 
 1. Accédez à **Partages** dans le Portail Azure. Sélectionnez et cliquez sur le partage que vous souhaitez actualiser.
 
-   ![Sélectionner un partage](media/azure-stack-edge-manage-shares/refresh-share-1.png)
+   ![Sélectionner un partage 6](media/azure-stack-edge-manage-shares/refresh-share-1.png)
 
 2. Cliquez sur **Actualiser**.
 
    ![Cliquer sur Actualiser](media/azure-stack-edge-manage-shares/refresh-share-2.png)
  
-3. Cliquez sur **Oui**lorsque vous êtes invité à confirmer l’opération. Un travail démarre pour actualiser le contenu du partage local.
+3. Cliquez sur **Oui** lorsque vous êtes invité à confirmer l’opération. Un travail démarre pour actualiser le contenu du partage local.
 
    ![Confirmer l’actualisation](media/azure-stack-edge-manage-shares/refresh-share-3.png)
 

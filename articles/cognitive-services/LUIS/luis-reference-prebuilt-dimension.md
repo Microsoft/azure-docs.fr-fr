@@ -4,19 +4,17 @@ titleSuffix: Azure Cognitive Services
 description: Cet article contient des informations sur l’entité prédéfinie dimension dans Language Understanding (LUIS).
 services: cognitive-services
 ms.custom: seodec18
-author: diberry
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: language-understanding
 ms.topic: reference
 ms.date: 10/14/2019
-ms.author: diberry
-ms.openlocfilehash: 3c7bebb38d0331c76eeaaa1d9d6464c568a61b83
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 0b5f081dc8c0bc203ccafde4a513371d11e36879
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78270631"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91538345"
 ---
 # <a name="dimension-prebuilt-entity-for-a-luis-app"></a>Entité prédéfinie dimension pour une application LUIS
 L’entité prédéfinie dimension détecte différents types de dimensions, indépendamment de la culture de l’application LUIS. Étant donné que cette entité est déjà formée, vous n’avez pas besoin d’ajouter d’exemples d’énoncés contenant des dimensions aux intentions de l’application. L’entité dimension est prise en charge dans de [nombreuses cultures](luis-reference-prebuilt-entities.md).

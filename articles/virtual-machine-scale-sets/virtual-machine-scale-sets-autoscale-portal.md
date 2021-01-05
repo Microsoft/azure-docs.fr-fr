@@ -9,12 +9,12 @@ ms.subservice: autoscale
 ms.date: 05/29/2018
 ms.reviewer: avverma
 ms.custom: avverma
-ms.openlocfilehash: ea9d243e46aace9030c25222217ac3ad09a31c38
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.openlocfilehash: ac42fe3265163a5a967524fe11063803c9ca91d3
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83124939"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87080588"
 ---
 # <a name="automatically-scale-a-virtual-machine-scale-set-in-the-azure-portal"></a>Mettre à l’échelle automatiquement un groupe de machines virtuelles identiques dans le portail Azure
 Lorsque vous créez un groupe identique, vous définissez le nombre d’instances de machine virtuelle que vous souhaitez exécuter. À mesure que la demande de votre application change, vous pouvez augmenter ou diminuer automatiquement le nombre d’instances de machine virtuelle. La capacité de mise à l’échelle automatique vous permet de suivre la demande du client ou de répondre aux changements de performances de votre application tout au long de son cycle de vie.
@@ -22,7 +22,7 @@ Lorsque vous créez un groupe identique, vous définissez le nombre d’instance
 Cet article explique comment créer avec le portail Azure des règles de mise à l’échelle automatique qui analysent les performances des instances de machine virtuelle dans votre groupe identique. Ces règles de mise à l’échelle augmentent ou réduisent le nombre d’instances de machine virtuelle en réponse à ces métriques de performances. Vous pouvez aussi effectuer ces étapes avec [Azure PowerShell](tutorial-autoscale-powershell.md) ou [Azure CLI](tutorial-autoscale-cli.md).
 
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 Pour créer des règles de mise à l’échelle, vous avez besoin d’un groupe de machines virtuelles identiques. Vous pouvez créer un groupe identique avec le [portail Azure](quick-create-portal.md), [Azure PowerShell](quick-create-powershell.md) ou [Azure CLI](quick-create-cli.md).
 
 
@@ -48,8 +48,8 @@ Si la demande de votre application augmente, la charge sur les instances de mach
     | *Statistiques de fragment de temps* | Définit la manière dont les métriques collectées dans chaque fragment de temps doivent être agrégées à des fins d’analyse.                             | Average        |
     | *Opérateur*             | Opérateur utilisé pour comparer les données de métrique au seuil.                                                     | Supérieur à   |
     | *Seuil*            | Pourcentage qui amène la règle de mise à l’échelle automatique à déclencher une action.                                                 | 70             |
-    | *Durée*             | Temps de surveillance avant que les valeurs de métrique et de seuil soient comparées.                                   | 10 minutes     |
-    | *opération*            | Définit si le groupe identique doit augmenter ou réduire l’échelle lorsque la règle s’applique et avec quel incrément                        | Augmenter le pourcentage de |
+    | *Durée*             | Temps de surveillance avant que les valeurs de métrique et de seuil soient comparées. N’inclut pas de période de refroidissement.                                   | 10 minutes     |
+    | *opération*            | Définit si le groupe identique doit augmenter ou réduire l’échelle lorsque la règle s’applique et avec quel incrément.                        | Augmenter le pourcentage de |
     | *Nombre d’instances*       | Le pourcentage d’instances de machine virtuelle doit être modifié lorsque la règle se déclenche.                                            | 20             |
     | *Refroidissement (minutes)*  | Temps d’attente avant que la règle soit appliquée à nouveau afin que les actions de mise à l’échelle automatique aient le temps de porter effet. | 5 minutes      |
 
@@ -123,6 +123,6 @@ Pour voir comment vos règles de mise à l’échelle automatique sont appliqué
 ## <a name="next-steps"></a>Étapes suivantes
 Dans cet article, vous avez appris à utiliser des règles de mise à l’échelle automatique pour mettre à l’échelle horizontalement, et augmenter ou diminuer le *nombre* d’instances de machine virtuelle dans votre groupe identique. Vous pouvez également mettre à l’échelle verticalement pour augmenter ou diminuer la *taille* d’instance de machine virtuelle. Pour plus d’informations, voir [Mise à l’échelle verticale avec des groupes de machines virtuelles identiques](virtual-machine-scale-sets-vertical-scale-reprovision.md).
 
-Pour plus d’informations sur la gestion de vos instances de machine virtuelle, voir [Gérer les groupes de machines virtuelles identiques avec Azure PowerShell](virtual-machine-scale-sets-windows-manage.md).
+Pour plus d’informations sur la gestion de vos instances de machine virtuelle, voir [Gérer les groupes de machines virtuelles identiques avec Azure PowerShell](./virtual-machine-scale-sets-manage-powershell.md).
 
-Pour découvrir comment générer des alertes lorsque vos règles de mise à l’échelle automatique déclenchent, voir [Utilisation d’actions de mise à l’échelle automatique pour envoyer des notifications d’alerte webhook et par courrier électronique dans Azure Monitor](../azure-monitor/platform/autoscale-webhook-email.md). Vous pouvez également [Utiliser des journaux d’audit pour envoyer des notifications d’alerte webhook et par courrier électronique dans Azure Monitor](../monitoring-and-diagnostics/insights-auditlog-to-webhook-email.md).
+Pour découvrir comment générer des alertes lorsque vos règles de mise à l’échelle automatique déclenchent, voir [Utilisation d’actions de mise à l’échelle automatique pour envoyer des notifications d’alerte webhook et par courrier électronique dans Azure Monitor](../azure-monitor/platform/autoscale-webhook-email.md). Vous pouvez également [Utiliser des journaux d’audit pour envoyer des notifications d’alerte webhook et par courrier électronique dans Azure Monitor](../azure-monitor/platform/alerts-log-webhook.md).

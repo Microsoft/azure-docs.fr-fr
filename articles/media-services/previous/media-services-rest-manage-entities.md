@@ -14,14 +14,16 @@ ms.devlang: na
 ms.topic: article
 ms.date: 03/20/2019
 ms.author: juliako
-ms.openlocfilehash: a03bc24b689df342be40536c26149a7611fc5176
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 95124f101b1f14a70dabedd7d44077c5c1b6e99c
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79236957"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89264230"
 ---
-# <a name="managing-media-services-entities-with-rest"></a>Gestion des entités Media Services avec REST  
+# <a name="managing-media-services-entities-with-rest"></a>Gestion des entités Media Services avec REST
+
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
 
 > [!div class="op_single_selector"]
 > * [REST](media-services-rest-manage-entities.md)
@@ -49,73 +51,83 @@ Chaque entité de Media Services est ajoutée à un jeu d'entités, tel que Asse
 
 L’exemple suivant montre comment créer une stratégie AccessPolicy :
 
-    POST https://media.windows.net/API/AccessPolicies HTTP/1.1
-    Content-Type: application/json;odata=verbose
-    Accept: application/json;odata=verbose
-    DataServiceVersion: 3.0
-    MaxDataServiceVersion: 3.0
-    x-ms-version: 2.19
-    Authorization: Bearer <ENCODED JWT TOKEN> 
-    Host: media.windows.net
-    Content-Length: 74
-    Expect: 100-continue
+```console
+POST https://media.windows.net/API/AccessPolicies HTTP/1.1
+Content-Type: application/json;odata=verbose
+Accept: application/json;odata=verbose
+DataServiceVersion: 3.0
+MaxDataServiceVersion: 3.0
+x-ms-version: 2.19
+Authorization: Bearer <ENCODED JWT TOKEN> 
+Host: media.windows.net
+Content-Length: 74
+Expect: 100-continue
 
-    {"Name": "DownloadPolicy", "DurationInMinutes" : "300", "Permissions" : 1}
+{"Name": "DownloadPolicy", "DurationInMinutes" : "300", "Permissions" : 1}
+```
 
 ## <a name="querying-entities"></a>Exécution d’une requête sur les entités
 La procédure d’interrogation et d’énumération des entités est simple et ne nécessite qu’une requête HTTP GET et les opérations OData facultatives.
 L’exemple suivant montre la récupération d’une liste de toutes les entités MediaProcessor.
 
-    GET https://media.windows.net/API/MediaProcessors HTTP/1.1
-    Content-Type: application/json;odata=verbose
-    Accept: application/json;odata=verbose
-    DataServiceVersion: 3.0
-    MaxDataServiceVersion: 3.0
-    x-ms-version: 2.19
-    Authorization: Bearer <ENCODED JWT TOKEN> 
-    Host: media.windows.net
+```console
+GET https://media.windows.net/API/MediaProcessors HTTP/1.1
+Content-Type: application/json;odata=verbose
+Accept: application/json;odata=verbose
+DataServiceVersion: 3.0
+MaxDataServiceVersion: 3.0
+x-ms-version: 2.19
+Authorization: Bearer <ENCODED JWT TOKEN> 
+Host: media.windows.net
+```
 
 Vous pouvez également récupérer une entité spécifique ou tous les jeux d'entités associés à une entité spécifique, comme dans les exemples suivants :
 
-    GET https://media.windows.net/API/JobTemplates('nb:jtid:UUID:e81192f5-576f-b247-b781-70a790c20e7c') HTTP/1.1
-    Content-Type: application/json;odata=verbose
-    Accept: application/json;odata=verbose
-    DataServiceVersion: 3.0
-    MaxDataServiceVersion: 3.0
-    x-ms-version: 2.19
-    Authorization: Bearer <ENCODED JWT TOKEN> 
-    Host: media.windows.net
+```console
+GET https://media.windows.net/API/JobTemplates('nb:jtid:UUID:e81192f5-576f-b247-b781-70a790c20e7c') HTTP/1.1
+Content-Type: application/json;odata=verbose
+Accept: application/json;odata=verbose
+DataServiceVersion: 3.0
+MaxDataServiceVersion: 3.0
+x-ms-version: 2.19
+Authorization: Bearer <ENCODED JWT TOKEN> 
+Host: media.windows.net
 
-    GET https://media.windows.net/API/JobTemplates('nb:jtid:UUID:e81192f5-576f-b247-b781-70a790c20e7c')/TaskTemplates HTTP/1.1
-    Content-Type: application/json;odata=verbose
-    Accept: application/json;odata=verbose
-    DataServiceVersion: 3.0
-    MaxDataServiceVersion: 3.0
-    x-ms-version: 2.19
-    Authorization: Bearer <ENCODED JWT TOKEN> 
-    Host: media.windows.net
+GET https://media.windows.net/API/JobTemplates('nb:jtid:UUID:e81192f5-576f-b247-b781-70a790c20e7c')/TaskTemplates HTTP/1.1
+Content-Type: application/json;odata=verbose
+Accept: application/json;odata=verbose
+DataServiceVersion: 3.0
+MaxDataServiceVersion: 3.0
+x-ms-version: 2.19
+Authorization: Bearer <ENCODED JWT TOKEN> 
+Host: media.windows.net
+```
 
 L’exemple suivant renvoie uniquement la propriété State de toutes les tâches.
 
-    GET https://media.windows.net/API/Jobs?$select=State HTTP/1.1
-    Content-Type: application/json;odata=verbose
-    Accept: application/json;odata=verbose
-    DataServiceVersion: 3.0
-    MaxDataServiceVersion: 3.0
-    x-ms-version: 2.19
-    Authorization: Bearer <ENCODED JWT TOKEN> 
-    Host: media.windows.net
+```console
+GET https://media.windows.net/API/Jobs?$select=State HTTP/1.1
+Content-Type: application/json;odata=verbose
+Accept: application/json;odata=verbose
+DataServiceVersion: 3.0
+MaxDataServiceVersion: 3.0
+x-ms-version: 2.19
+Authorization: Bearer <ENCODED JWT TOKEN> 
+Host: media.windows.net
+```
 
 L'exemple suivant retourne l'ensemble des JobTemplates avec le nom « SampleTemplate ».
 
-    GET https://media.windows.net/API/JobTemplates?$filter=startswith(Name,%20'SampleTemplate') HTTP/1.1
-    Content-Type: application/json;odata=verbose
-    Accept: application/json;odata=verbose
-    DataServiceVersion: 3.0
-    MaxDataServiceVersion: 3.0
-    x-ms-version: 2.19
-    Authorization: Bearer <ENCODED JWT TOKEN> 
-    Host: media.windows.net
+```console
+GET https://media.windows.net/API/JobTemplates?$filter=startswith(Name,%20'SampleTemplate') HTTP/1.1
+Content-Type: application/json;odata=verbose
+Accept: application/json;odata=verbose
+DataServiceVersion: 3.0
+MaxDataServiceVersion: 3.0
+x-ms-version: 2.19
+Authorization: Bearer <ENCODED JWT TOKEN> 
+Host: media.windows.net
+```
 
 > [!NOTE]
 > L’opération $expand n’est pas prise en charge dans Media Services, tout comme les méthodes LINQ non prises en charge décrites dans les considérations sur LINQ (WCF Data Services).
@@ -127,51 +139,56 @@ Lors de l'interrogation des entités, il existe une limite de 1 000 entités re
 
 L’exemple suivant montre comment utiliser **skip** et **top** pour ignorer les 2 000 premiers emplois et obtenir les 1 000 emplois suivants.  
 
-    GET https://media.windows.net/api/Jobs()?$skip=2000&$top=1000 HTTP/1.1
-    Content-Type: application/json;odata=verbose
-    Accept: application/json;odata=verbose
-    DataServiceVersion: 3.0
-    MaxDataServiceVersion: 3.0
-    x-ms-version: 2.19
-    Authorization: Bearer <ENCODED JWT TOKEN>
-    Host: media.windows.net
+```console
+GET https://media.windows.net/api/Jobs()?$skip=2000&$top=1000 HTTP/1.1
+Content-Type: application/json;odata=verbose
+Accept: application/json;odata=verbose
+DataServiceVersion: 3.0
+MaxDataServiceVersion: 3.0
+x-ms-version: 2.19
+Authorization: Bearer <ENCODED JWT TOKEN>
+Host: media.windows.net
+```
 
 ## <a name="updating-entities"></a>Mise à jour des entités
-Selon le type d’entité et l’état dans lequel elle se trouve, vous pouvez mettre à jour les propriétés de cette entité via une requête HTTP PATCH, PUT ou MERGE. Pour plus d’informations sur ces opérations, consultez [PATCH/PUT/MERGE](https://msdn.microsoft.com/library/dd541276.aspx).
+Selon le type d’entité et l’état dans lequel elle se trouve, vous pouvez mettre à jour les propriétés de cette entité via une requête HTTP PATCH, PUT ou MERGE. Pour plus d’informations sur ces opérations, consultez [PATCH/PUT/MERGE](/openspecs/windows_protocols/ms-odata/59d5abd3-7b12-490a-a0e2-9d9324b91893).
 
 L’exemple de code suivant montre comment mettre à jour la propriété Name sur une entité Asset.
 
-    MERGE https://media.windows.net/API/Assets('nb:cid:UUID:80782407-3f87-4e60-a43e-5e4454232f60') HTTP/1.1
-    Content-Type: application/json;odata=verbose
-    Accept: application/json;odata=verbose
-    DataServiceVersion: 3.0
-    MaxDataServiceVersion: 3.0
-    x-ms-version: 2.19
-    Authorization: Bearer <ENCODED JWT TOKEN>
-    Host: media.windows.net
-    Content-Length: 21
-    Expect: 100-continue
+```console
+MERGE https://media.windows.net/API/Assets('nb:cid:UUID:80782407-3f87-4e60-a43e-5e4454232f60') HTTP/1.1
+Content-Type: application/json;odata=verbose
+Accept: application/json;odata=verbose
+DataServiceVersion: 3.0
+MaxDataServiceVersion: 3.0
+x-ms-version: 2.19
+Authorization: Bearer <ENCODED JWT TOKEN>
+Host: media.windows.net
+Content-Length: 21
+Expect: 100-continue
 
-    {"Name" : "NewName" }
+{"Name" : "NewName" }
+```
 
 ## <a name="deleting-entities"></a>Suppression des entités
 Les entités peuvent être supprimées dans Media Services à l’aide d’une requête HTTP DELETE. En fonction de l’entité, l’ordre dans lequel vous supprimez les entités peut être important. Par exemple, les entités telles que Assets nécessitent que vous annuliez (ou supprimiez) tous les localisateurs qui font référence à cet Asset particulier avant de supprimer l’Asset.
 
 L’exemple suivant montre comment supprimer un localisateur qui était utilisé pour charger un fichier dans le stockage d’objets blob.
 
-    DELETE https://media.windows.net/API/Locators('nb:lid:UUID:76dcc8e8-4230-463d-97b0-ce25c41b5c8d') HTTP/1.1
-    Content-Type: application/json;odata=verbose
-    Accept: application/json;odata=verbose
-    DataServiceVersion: 3.0
-    MaxDataServiceVersion: 3.0
-    x-ms-version: 2.19
-    Authorization: Bearer <ENCODED JWT TOKEN>
-    Host: media.windows.net
-    Content-Length: 0
+```console
+DELETE https://media.windows.net/API/Locators('nb:lid:UUID:76dcc8e8-4230-463d-97b0-ce25c41b5c8d') HTTP/1.1
+Content-Type: application/json;odata=verbose
+Accept: application/json;odata=verbose
+DataServiceVersion: 3.0
+MaxDataServiceVersion: 3.0
+x-ms-version: 2.19
+Authorization: Bearer <ENCODED JWT TOKEN>
+Host: media.windows.net
+Content-Length: 0
+```
 
 ## <a name="media-services-learning-paths"></a>Parcours d’apprentissage de Media Services
 [!INCLUDE [media-services-learning-paths-include](../../../includes/media-services-learning-paths-include.md)]
 
 ## <a name="provide-feedback"></a>Fournir des commentaires
 [!INCLUDE [media-services-user-voice-include](../../../includes/media-services-user-voice-include.md)]
-

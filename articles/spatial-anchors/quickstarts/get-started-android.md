@@ -1,19 +1,19 @@
 ---
 title: 'Démarrage rapide : Créer une application Android'
 description: Dans ce démarrage rapide, vous allez apprendre à générer une application Android à l’aide de Spatial Anchors.
-author: craigktreasure
-manager: vriveras
+author: msftradford
+manager: MehranAzimi-msft
 services: azure-spatial-anchors
-ms.author: crtreasu
-ms.date: 02/24/2019
+ms.author: parkerra
+ms.date: 11/20/2020
 ms.topic: quickstart
 ms.service: azure-spatial-anchors
-ms.openlocfilehash: 0501c8bb1d71c6cff6033fc937cda019c8890056
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: b7be4e257fc884c655fe380f69b08797a907fbbb
+ms.sourcegitcommit: b8eba4e733ace4eb6d33cc2c59456f550218b234
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "75376458"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "96022647"
 ---
 # <a name="quickstart-create-an-android-app-with-azure-spatial-anchors"></a>Démarrage rapide : Créer une application Android avec Azure Spatial Anchors
 
@@ -86,6 +86,8 @@ Localisez le champ `SpatialAnchorsAccountKey` et remplacez `Set me` par la clé 
 
 Localisez le champ `SpatialAnchorsAccountId` et remplacez `Set me` par l’identificateur du compte.
 
+Recherchez le champ `SpatialAnchorsAccountDomain` et remplacez `Set me` par le domaine du compte.
+
 # <a name="ndk"></a>[NDK](#tab/openproject-ndk)
 
 Ouvrez `Android/NDK/app/src/main/cpp/AzureSpatialAnchorsApplication.cpp`.
@@ -93,6 +95,8 @@ Ouvrez `Android/NDK/app/src/main/cpp/AzureSpatialAnchorsApplication.cpp`.
 Localisez le champ `SpatialAnchorsAccountKey` et remplacez `Set me` par la clé du compte.
 
 Localisez le champ `SpatialAnchorsAccountId` et remplacez `Set me` par l’identificateur du compte.
+
+Recherchez le champ `SpatialAnchorsAccountDomain` et remplacez `Set me` par le domaine du compte.
 
 ---
 

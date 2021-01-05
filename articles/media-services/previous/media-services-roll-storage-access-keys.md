@@ -15,18 +15,20 @@ ms.topic: article
 ms.date: 03/20/2019
 ms.author: juliako
 ms.reviewer: milanga;cenkdin
-ms.openlocfilehash: 2a0d1c5af572c88dc11bed950b46706f0a2f081f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c68bedb37722fb6a8b7ad9dccdeaaaa4fab9d020
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75981959"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89264128"
 ---
-# <a name="update-media-services-after-rolling-storage-access-keys"></a>Mettre à jour Media Services après la substitution de clés d’accès de stockage 
+# <a name="update-media-services-after-rolling-storage-access-keys"></a>Mettre à jour Media Services après la substitution de clés d’accès de stockage
+
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
 
 Quand vous créez un compte Azure Media Services (AMS), vous êtes également invité à sélectionner un compte de stockage Azure qui est utilisé pour stocker votre contenu multimédia. Vous pouvez ajouter plusieurs comptes de stockage à votre compte Media Services. Cet article explique comment orchestrer la rotation des clés de stockage. Elle montre également comment ajouter des comptes de stockage à un compte multimédia. 
 
-Pour effectuer les actions décrites dans cet article, vous devez utiliser des [API Azure Resource Manager](/rest/api/media/operations/azure-media-services-rest-api-reference) et [Powershell](https://docs.microsoft.com/powershell/module/az.media).  Pour plus d’informations, consultez [Guide pratique pour gérer les ressources Azure avec PowerShell et Resource Manager](../../azure-resource-manager/management/manage-resource-groups-powershell.md).
+Pour effectuer les actions décrites dans cet article, vous devez utiliser des [API Azure Resource Manager](/rest/api/media/operations/azure-media-services-rest-api-reference) et [Powershell](/powershell/module/az.media).  Pour plus d’informations, consultez [Guide pratique pour gérer les ressources Azure avec PowerShell et Resource Manager](../../azure-resource-manager/management/manage-resource-groups-powershell.md).
 
 [!INCLUDE [updated-for-az](../../../includes/updated-for-az.md)]
 
@@ -49,7 +51,7 @@ Media Services dépend d'une clé de stockage qui lui est fournie. Plus précis�
  
     L’exemple suivant montre comment synchroniser des clés avec des comptes de stockage.
   
-         Sync-AzMediaServiceStorageKeys -ResourceGroupName $resourceGroupName -AccountName $mediaAccountName -StorageAccountId $storageAccountId
+    `Sync-AzMediaServiceStorageKeys -ResourceGroupName $resourceGroupName -AccountName $mediaAccountName -StorageAccountId $storageAccountId`
   
  3. Attendez environ une heure. Vérifiez que les scénarios de streaming fonctionnent.
  4. Modifiez la clé secondaire du compte de stockage par le biais de l’applet de commande Powershell ou du portail Azure.
@@ -60,18 +62,19 @@ Media Services dépend d'une clé de stockage qui lui est fournie. Plus précis�
 
 L’exemple suivant montre comment obtenir le compte de stockage et le synchroniser avec le compte AMS.
 
-    $regionName = "West US"
-    $resourceGroupName = "SkyMedia-USWest-App"
-    $mediaAccountName = "sky"
-    $storageAccountName = "skystorage"
-    $storageAccountId = "/subscriptions/$subscriptionId/resourceGroups/$resourceGroupName/providers/Microsoft.Storage/storageAccounts/$storageAccountName"
+```console
+$regionName = "West US"
+$resourceGroupName = "SkyMedia-USWest-App"
+$mediaAccountName = "sky"
+$storageAccountName = "skystorage"
+$storageAccountId = "/subscriptions/$subscriptionId/resourceGroups/$resourceGroupName/providers/Microsoft.Storage/storageAccounts/$storageAccountName"
 
-    Sync-AzMediaServiceStorageKeys -ResourceGroupName $resourceGroupName -AccountName $mediaAccountName -StorageAccountId $storageAccountId
-
+Sync-AzMediaServiceStorageKeys -ResourceGroupName $resourceGroupName -AccountName $mediaAccountName -StorageAccountId $storageAccountId
+```
  
 ## <a name="steps-to-add-storage-accounts-to-your-ams-account"></a>Étapes à suivre pour ajouter des comptes de stockage à votre compte AMS
 
-L’article suivante montre comment ajouter des comptes de stockage à votre compte AMS : [Associez plusieurs comptes de stockage à un compte Media Services](meda-services-managing-multiple-storage-accounts.md).
+L’article suivante montre comment ajouter des comptes de stockage à votre compte AMS : [Associez plusieurs comptes de stockage à un compte Media Services](./media-services-managing-multiple-storage-accounts.md).
 
 ## <a name="media-services-learning-paths"></a>Parcours d’apprentissage de Media Services
 [!INCLUDE [media-services-learning-paths-include](../../../includes/media-services-learning-paths-include.md)]

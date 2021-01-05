@@ -3,13 +3,13 @@ title: Démarrage rapide - Envoyer des événements à Event Grid
 description: Dans ce guide de démarrage rapide, vous activez les événements Event Grid pour votre registre de conteneurs, puis vous envoyez des événements push et delete pour l’image de conteneur à un exemple d’application.
 ms.topic: article
 ms.date: 08/23/2018
-ms.custom: seodec18
-ms.openlocfilehash: dbeba56820a520e3435eeb0c5c8dbc5aae981241
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: seodec18, devx-track-azurecli
+ms.openlocfilehash: 2d13dd0ec5e50086e674b215d93917d6173d5af9
+ms.sourcegitcommit: b6267bc931ef1a4bd33d67ba76895e14b9d0c661
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78403227"
+ms.lasthandoff: 12/19/2020
+ms.locfileid: "97694392"
 ---
 # <a name="quickstart-send-events-from-private-container-registry-to-event-grid"></a>Démarrage rapide : Envoyer des événements depuis le registre de conteneurs privé à Event Grid
 
@@ -19,11 +19,11 @@ Après avoir terminé les étapes décrites dans cet article, les événements e
 
 ![Navigateur web affichant l’exemple d’application web avec trois événements reçus][sample-app-01]
 
-Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit][azure-account] avant de commencer.
+[!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
 
-[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../includes/azure-cli-prepare-your-environment.md)]
 
-Les commandes CLI de cet article sont mises en forme pour le shell **Bash**. Si vous utilisez un autre shell, comme PowerShell ou l’invite de commandes, il peut être nécessaire d’ajuster en conséquence les caractères de continuation de ligne ou les lignes d’affectation des variables. Cet article utilise des variables pour réduire le nombre de modifications nécessaires des commandes.
+- Les commandes CLI de cet article sont mises en forme pour le shell **Bash**. Si vous utilisez un autre shell, comme PowerShell ou l’invite de commandes, il peut être nécessaire d’ajuster en conséquence les caractères de continuation de ligne ou les lignes d’affectation des variables. Cet article utilise des variables pour réduire le nombre de modifications nécessaires des commandes.
 
 ## <a name="create-a-resource-group"></a>Créer un groupe de ressources
 
@@ -35,7 +35,7 @@ RESOURCE_GROUP_NAME=myResourceGroup
 az group create --name $RESOURCE_GROUP_NAME --location eastus
 ```
 
-## <a name="create-a-container-registry"></a>Créer un registre de conteneur
+## <a name="create-a-container-registry"></a>Créer un registre de conteneurs
 
 Ensuite, déployez un registre de conteneurs dans le groupe de ressources avec les commandes suivantes. Avant d’exécuter la commande [az acr create][az-acr-create], définissez `ACR_NAME` avec un nom pour votre registre. Le nom du registre doit être unique dans Azure, il doit comporter entre 5 et 50 caractères alphanumériques.
 
@@ -78,7 +78,7 @@ Pour déployer l’exemple d’application, définissez `SITE_NAME` avec un nom 
 ```azurecli-interactive
 SITE_NAME=<your-site-name>
 
-az group deployment create \
+az deployment group create \
     --resource-group $RESOURCE_GROUP_NAME \
     --template-uri "https://raw.githubusercontent.com/Azure-Samples/azure-event-grid-viewer/master/azuredeploy.json" \
     --parameters siteName=$SITE_NAME hostingPlanName=$SITE_NAME-plan
@@ -179,7 +179,7 @@ L’étiquette « v1 » de l’image que vous avez générée doit apparaître d
 
 ### <a name="delete-the-image"></a>Supprimer l’image
 
-À présent, générez un événement `ImageDeleted` en supprimant l’image avec la commande [az acr repository delete][az-acr-repository-delete] :
+À présent, générez un événement `ImageDeleted` en supprimant l’image avec la commande [az acr repository delete][az-acr-repository-delete] :
 
 ```azurecli-interactive
 az acr repository delete --name $ACR_NAME --image myimage:v1
@@ -200,13 +200,13 @@ La capture d’écran suivante montre l’exemple d’application avec les trois
 
 ![Navigateur web montrant l’exemple d’application avec des événements ImagePushed et ImageDeleted][sample-app-03]
 
-Félicitations ! Si vous voyez les événements `ImagePushed` et `ImageDeleted`, c’est que votre registre envoie des événements à Event Grid, qui à son tour transfère ces événements à votre point de terminaison d’application web.
+Félicitations ! Si vous voyez les événements `ImagePushed` et `ImageDeleted`, c’est que votre registre envoie des événements à Event Grid, qui à son tour transfère ces événements à votre point de terminaison d’application web.
 
 ## <a name="clean-up-resources"></a>Nettoyer les ressources
 
 Une fois que vous en avez terminé avec les ressources créées dans ce guide de démarrage rapide, vous pouvez les supprimer toutes avec la commande Azure CLI suivante. Quand vous supprimez un groupe de ressources, toutes les ressources qu’il contient sont supprimées de façon définitive.
 
-**AVERTISSEMENT** : Cette action est irréversible. Vérifiez bien que vous n’avez plus besoin des ressources du groupe avant d’exécuter la commande.
+**AVERTISSEMENT** : cette action est irréversible. Vérifiez bien que vous n’avez plus besoin des ressources du groupe avant d’exécuter la commande.
 
 ```azurecli-interactive
 az group delete --name $RESOURCE_GROUP_NAME

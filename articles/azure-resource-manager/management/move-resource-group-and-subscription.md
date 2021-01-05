@@ -2,13 +2,14 @@
 title: Déplacer des ressources vers un nouvel abonnement ou un nouveau groupe de ressources
 description: Utilisez Azure Resource Manager ou une API REST pour déplacer des ressources vers un nouveau groupe de ressources ou abonnement.
 ms.topic: conceptual
-ms.date: 03/02/2020
-ms.openlocfilehash: ffb5f8be81d3628084d127db404ab994d4d5b938
-ms.sourcegitcommit: d597800237783fc384875123ba47aab5671ceb88
+ms.date: 09/15/2020
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: cd05fe045532ee1b1f1fb88e502d786daabf9365
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/03/2020
-ms.locfileid: "80631503"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91319552"
 ---
 # <a name="move-resources-to-a-new-resource-group-or-subscription"></a>Déplacer des ressources vers un nouveau groupe de ressource ou un nouvel abonnement
 
@@ -26,12 +27,17 @@ Plusieurs étapes importantes doivent être effectuées avant de déplacer une r
 
 1. Certains services ont des limitations ou des exigences spécifiques lors du déplacement des ressources. Si vous déplacez l’un des services suivants, consultez d’abord ces conseils.
 
+   * Si vous utilisez Azure Stack Hub, vous ne pouvez pas déplacer de ressources entre des groupes.
    * [Conseils pour le déplacement d’App Services](./move-limitations/app-service-move-limitations.md)
    * [Conseils pour le déplacement de DevOps Services](/azure/devops/organizations/billing/change-azure-subscription?toc=/azure/azure-resource-manager/toc.json)
    * [Conseils pour le déplacement de modèles de déploiement classique](./move-limitations/classic-model-move-limitations.md) : Calcul classique, Stockage classique, Réseaux virtuels classiques et services Cloud
    * [Aide pour le déplacement du réseau](./move-limitations/networking-move-limitations.md)
    * [Conseils pour le déplacement de Recovery Services](../../backup/backup-azure-move-recovery-services-vault.md?toc=/azure/azure-resource-manager/toc.json)
    * [Conseils pour le déplacement de machines virtuelles](./move-limitations/virtual-machines-move-limitations.md)
+
+1. Si vous déplacez une ressource à laquelle un rôle Azure est affecté directement (ou est affecté à une ressource enfant de cette ressource), l’attribution de rôle n’est pas déplacée et devient orpheline. Après le déplacement, vous devez recréer l’attribution de rôle. Finalement, l’attribution de rôle orpheline sera automatiquement supprimée, mais il est recommandé de supprimer l’attribution de rôle avant de déplacer la ressource.
+
+    Pour plus d’informations sur la gestion des attributions de rôles, consultez [Répertorier les attributions de rôle](../../role-based-access-control/role-assignments-list-portal.md#list-role-assignments-at-a-scope) et [Ajouter ou supprimer des attributions de rôle](../../role-based-access-control/role-assignments-portal.md).
 
 1. Les abonnements source et de destination doivent être actifs. Si vous rencontrez des problèmes lors de l’activation d’un compte qui a été désactivé, [créez une demande de support Azure](../../azure-portal/supportability/how-to-create-azure-support-request.md). Sélectionnez **Gestion des abonnements** comme type de problème.
 
@@ -53,7 +59,7 @@ Plusieurs étapes importantes doivent être effectuées avant de déplacer une r
 
    Si les ID client pour les abonnements source et de destination ne sont pas identiques, utilisez les méthodes suivantes pour rapprocher les ID client :
 
-   * [Transfert de la propriété d’un abonnement Azure à un autre compte](../../billing/billing-subscription-transfer.md)
+   * [Transfert de la propriété d’un abonnement Azure à un autre compte](../../cost-management-billing/manage/billing-subscription-transfer.md)
    * [Associer ou ajouter un abonnement Azure à Azure Active Directory](../../active-directory/fundamentals/active-directory-how-subscriptions-associated-directory.md)
 
 1. L’abonnement de destination doit être inscrit pour le fournisseur de la ressource déplacée. Sinon, vous recevez une erreur indiquant que **l’abonnement n’est pas inscrit pour un type de ressource**. Vous pouvez rencontrer cette erreur lors du déplacement d’une ressource vers un nouvel abonnement qui n’a jamais été utilisé avec ce type de ressource.
@@ -93,7 +99,7 @@ Plusieurs étapes importantes doivent être effectuées avant de déplacer une r
 
 1. **Pour un déplacement entre des abonnements, la ressource et ses ressources dépendantes doivent se trouver dans le même groupe de ressources et être déplacées ensemble.** Par exemple, une machine virtuelle avec des disques managés nécessite le déplacement simultané de la machine virtuelle, des disques managés ainsi que des autres ressources dépendantes.
 
-   Si vous déplacez une ressource vers un nouvel abonnement, vérifiez si la ressource a des ressources dépendantes et si elles se trouvent dans le même groupe de ressources. Si les ressources ne se trouvent pas dans le même groupe de ressources, vérifiez si elles peuvent y être consolidées. Dans ce cas, mettez toutes ces ressources dans le même groupe de ressources à l’aide d’une opération de déplacement entre les groupes de ressources.
+   Si vous déplacez une ressource vers un nouvel abonnement, vérifiez si la ressource a des ressources dépendantes et si elles se trouvent dans le même groupe de ressources. Si les ressources ne se trouvent pas dans le même groupe de ressources, vérifiez si elles peuvent y être combinées. Dans ce cas, mettez toutes ces ressources dans le même groupe de ressources à l’aide d’une opération de déplacement entre les groupes de ressources.
 
    Pour plus d’informations, consultez [Scénario de déplacement entre des abonnements](#scenario-for-move-across-subscriptions).
 
@@ -164,23 +170,37 @@ Pendant l’exécution de l’opération, vous continuez à recevoir le code d�
 
 ## <a name="use-the-portal"></a>Utiliser le portail
 
-Pour déplacer des ressources, sélectionnez le groupe de ressources qui les contient, puis sélectionnez le bouton **Déplacer**.
+Pour déplacer des ressources, sélectionnez le groupe de ressources qui contient ces ressources.
 
-![Déplacer des ressources](./media/move-resource-group-and-subscription/select-move.png)
+Lorsque vous affichez le groupe de ressources, l’option Déplacer est désactivée.
+
+:::image type="content" source="./media/move-resource-group-and-subscription/move-first-view.png" alt-text="option Déplacer désactivée":::
+
+Pour activer l’option Déplacer, sélectionnez les ressources que vous souhaitez déplacer. Pour sélectionner toutes les ressources, activez la case à cocher en haut de la liste. Ou sélectionnez les ressources individuellement. Après avoir sélectionné les ressources, l’option Déplacer est activée.
+
+:::image type="content" source="./media/move-resource-group-and-subscription/select-resources.png" alt-text="option Déplacer désactivée":::
+
+Sélectionnez le bouton **Déplacer**.
+
+:::image type="content" source="./media/move-resource-group-and-subscription/move-options.png" alt-text="option Déplacer désactivée":::
+
+Ce bouton vous donne trois options :
+
+* Déplacer vers un nouveau groupe de ressources.
+* Accéder à un nouvel abonnement.
+* Déplacez dans une nouvelle région. Pour modifier des régions, consultez [Déplacer des ressources entre les régions (à partir du groupe de ressources)](../../resource-mover/move-region-within-resource-group.md?toc=/azure/azure-resource-manager/management/toc.json).
 
 Indiquez si vous déplacez les ressources vers un nouveau groupe de ressources ou vers un nouvel abonnement.
 
-Sélectionnez les ressources à déplacer et le groupe de ressources de destination. Confirmez que vous devez mettre à jour les scripts de ces ressources et sélectionnez **OK**. Si vous avez sélectionné l’icône Modifier l’abonnement à l’étape précédente, vous devez également sélectionner l’abonnement de destination.
+Sélectionnez le groupe de ressources de destination. Confirmez que vous devez mettre à jour les scripts de ces ressources et sélectionnez **OK**. Si vous avez choisi de passer à un nouvel abonnement, vous devez également sélectionner l’abonnement de destination.
 
-![Sélectionner la destination](./media/move-resource-group-and-subscription/select-destination.png)
+:::image type="content" source="./media/move-resource-group-and-subscription/move-destination.png" alt-text="option Déplacer désactivée":::
 
-Dans **Notifications**, vous voyez que l’opération de déplacement est en cours d’exécution.
+Après avoir vérifié que les ressources peuvent être déplacées, vous voyez une notification indiquant que l’opération de déplacement est en cours d’exécution.
 
-![afficher l’état du déplacement](./media/move-resource-group-and-subscription/show-status.png)
+:::image type="content" source="./media/move-resource-group-and-subscription/move-notification.png" alt-text="option Déplacer désactivée":::
 
 Lorsque l’opération est terminée, vous êtes informé du résultat.
-
-![afficher les résultats du déplacement](./media/move-resource-group-and-subscription/show-result.png)
 
 Si vous recevez une erreur, consultez [Résoudre les problèmes liés au déplacement de ressources vers un nouveau groupe de ressource ou un nouvel abonnement](troubleshoot-move.md).
 
@@ -200,7 +220,7 @@ Si vous recevez une erreur, consultez [Résoudre les problèmes liés au déplac
 
 ## <a name="use-azure-cli"></a>Utiliser l’interface de ligne de commande Microsoft Azure
 
-Pour déplacer des ressources existantes vers un autre groupe de ressources ou un autre abonnement, exécutez la commande [az resource move](/cli/azure/resource?view=azure-cli-latest#az-resource-move) . Fournissez les ID des ressources à déplacer. L’exemple suivant vous indique comment déplacer plusieurs ressources vers un nouveau groupe de ressources. Dans le paramètre `--ids`, spécifiez une liste séparée par des espaces des ID des ressources à déplacer.
+Pour déplacer des ressources existantes vers un autre groupe de ressources ou un autre abonnement, exécutez la commande [az resource move](/cli/azure/resource#az-resource-move) . Fournissez les ID des ressources à déplacer. L’exemple suivant vous indique comment déplacer plusieurs ressources vers un nouveau groupe de ressources. Dans le paramètre `--ids`, spécifiez une liste séparée par des espaces des ID des ressources à déplacer.
 
 ```azurecli
 webapp=$(az resource show -g OldRG -n ExampleSite --resource-type "Microsoft.Web/sites" --query id --output tsv)
@@ -235,15 +255,15 @@ Si vous recevez une erreur, consultez [Résoudre les problèmes liés au déplac
 
 **Question : Mon opération de déplacement de ressources, qui prend généralement quelques minutes, s’exécute depuis presque une heure. Y a-t-il un problème ?**
 
-Le déplacement d’une ressource est une opération complexe qui a des phases différentes. Elle peut impliquer davantage que le fournisseur de ressources de la ressource que vous essayez de déplacer. En raison des dépendances entre les fournisseurs de ressources, Azure Resource Manager accorde à l’opération 4 heures pour se terminer. Ce laps de temps donne aux fournisseurs de ressources la possibilité de récupérer des problèmes temporaires. Si votre demande de déplacement se situe dans le délai de 4 heures, l’opération continue de s’exécuter et peut encore aboutir. Les groupes de ressources sources et de destination sont verrouillés pendant ce temps afin d’éviter les problèmes de cohérence.
+Le déplacement d’une ressource est une opération complexe qui a des phases différentes. Elle peut impliquer davantage que le fournisseur de ressources de la ressource que vous essayez de déplacer. En raison des dépendances entre les fournisseurs de ressources, Azure Resource Manager accorde à l’opération 4 heures pour se terminer. Ce laps de temps donne aux fournisseurs de ressources la possibilité de récupérer des problèmes temporaires. Si votre demande de déplacement se situe dans le délai de quatre heures, l’opération continue de s’exécuter et peut encore aboutir. Les groupes de ressources sources et de destination sont verrouillés pendant ce temps afin d’éviter les problèmes de cohérence.
 
-**Question : Pourquoi mon groupe de ressources est-il verrouillé pendant 4 heures pendant le déplacement des ressources ?**
+**Question : Pourquoi mon groupe de ressources est-il verrouillé pendant quatre heures pendant le déplacement des ressources ?**
 
-Le délai de 4 heures correspond à la durée maximale autorisée pour le déplacement des ressources. Pour empêcher les ressources déplacées d’être modifiées, les groupes de ressources sources et de destination sont verrouillés pendant la durée du déplacement des ressources.
+Une demande de déplacement est autorisée à s’exécuter un maximum de quatre heures. Pour empêcher les ressources déplacées d’être modifiées, les groupes de ressources sources et de destination sont verrouillés pendant la durée du déplacement des ressources.
 
-Une demande de déplacement comporte deux phases. Dans la première phase, la ressource est déplacée. Dans la deuxième phase, des notifications sont envoyées à d’autres fournisseurs de ressources qui dépendent de la ressource déplacée. Un groupe de ressources peut être verrouillé durant l’intégralité du délai de 4 heures lorsqu’un fournisseur de ressources échoue dans l’une ou l’autre phase. Pendant le temps imparti, Resource Manager retente l’étape qui a échoué.
+Une demande de déplacement comporte deux phases. Dans la première phase, la ressource est déplacée. Dans la deuxième phase, des notifications sont envoyées à d’autres fournisseurs de ressources qui dépendent de la ressource déplacée. Un groupe de ressources peut être verrouillé durant l’intégralité du délai de quatre heures lorsqu’un fournisseur de ressources échoue dans l’une ou l’autre phase. Pendant le temps imparti, Resource Manager retente l’étape qui a échoué.
 
-Si une ressource ne peut pas être déplacée dans le délai de 4 heures, Resource Manager déverrouille les deux groupes de ressources. Les ressources qui ont été déplacées se trouvent dans le groupe de ressources de destination. Les ressources qui n’ont pas pu être déplacées sont conservées dans le groupe de ressources source.
+Si une ressource ne peut pas être déplacée dans le délai de quatre heures, Resource Manager déverrouille les deux groupes de ressources. Les ressources qui ont été déplacées se trouvent dans le groupe de ressources de destination. Les ressources qui n’ont pas pu être déplacées sont conservées dans le groupe de ressources source.
 
 **Question : Quelles sont les implications des groupes de ressources sources et de destination verrouillés pendant le déplacement des ressources ?**
 

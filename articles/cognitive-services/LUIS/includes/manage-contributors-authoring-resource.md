@@ -1,27 +1,25 @@
 ---
-title: Fichier Include
-description: Fichier Include
+title: Fichier include
+description: Fichier include
 services: cognitive-services
-author: diberry
 manager: nitinme
-ms.custom: include file
+ms.custom: seodec18
 ms.service: cognitive-services
 ms.date: 02/14/2020
 ms.subservice: language-understanding
 ms.topic: include
-ms.author: diberry
-ms.openlocfilehash: 192d3d1a7bd792779b068a9c0c7ac34c7bee1c80
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 74509b161c4c20a4d7681b9803332434e47f3242
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80117174"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91536038"
 ---
 Si vos applications doivent être créées par d’autres personnes, vous devez ajouter leurs adresses e-mail associée dans la ressource de création du portail Azure.
 
-Si vous êtes le **propriétaire ou l’administrateur de votre abonnement Azure**, vous pouvez ajouter un contributeur à la ressource.
+Si vous êtes propriétaire ou administrateur de votre abonnement Azure, vous pouvez ajouter un contributeur à la ressource.
 
-Si vous n’êtes **ni le propriétaire ni l’administrateur de votre abonnement Azure**, votre compte doit disposer d’autorisations `Microsoft.Authorization/roleAssignments/write`.
+Si vous n’êtes ni propriétaire ni administrateur de votre abonnement Azure, votre compte Azure doit disposer d’autorisations `Microsoft.Authorization/roleAssignments/write`.
 
 Si vous rencontrez des problèmes avec cette attribution de rôle, consultez :
 

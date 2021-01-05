@@ -4,12 +4,12 @@ description: Le suivi des problèmes de mise à l’échelle automatique Azure u
 ms.topic: conceptual
 ms.date: 11/4/2019
 ms.subservice: autoscale
-ms.openlocfilehash: 9780cf88070110c4efc13c477d65307aa3985fe5
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: a29b5d11a6ea06af9d5b6a8b5120c6f0caa6601e
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75751335"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90979049"
 ---
 # <a name="troubleshooting-azure-autoscale"></a>Résolution des problèmes de mise à l’échelle automatique Azure
  
@@ -47,7 +47,7 @@ Nous disposons d’un paramètre de mise à l’échelle automatique simple pour
 
 Passons en revue les métriques du service de mise à l’échelle automatique.
  
-![Exemple de pourcentage d’UC d’un groupe de machines virtuelles identiques](media/autoscale-troubleshoot/autoscale-vmss-CPU-ex-full-1.png)
+![Capture d’écran montrant un exemple de pourcentage d’UC de groupe de machines virtuelles identiques.](media/autoscale-troubleshoot/autoscale-vmss-CPU-ex-full-1.png)
 
 ![Exemple de pourcentage d’UC d’un groupe de machines virtuelles identiques](media/autoscale-troubleshoot/autoscale-vmss-CPU-ex-full-2.png)
 
@@ -72,7 +72,7 @@ Si la valeur de **Flux sortants par instance** est supérieure à 10, le service
 
 Dans ce cas, la valeur de métrique observée du moteur de mise à l’échelle automatique est calculée en tant que valeur métrique réelle divisée par le nombre d’instances. Si la valeur de métrique observée est inférieure au seuil, aucune action de montée en charge n’est initiée. 
  
-![Exemple de graphiques de métriques de mise à l’échelle automatique d’un groupe de machines virtuelles identiques](media/autoscale-troubleshoot/autoscale-vmss-metric-chart-ex-1.png)
+![Capture d’écran montrant la page des flux sortants moyens avec un exemple de graphiques de métriques de mise à l’échelle automatique de groupe de machines virtuelles identiques.](media/autoscale-troubleshoot/autoscale-vmss-metric-chart-ex-1.png)
 
 ![Exemple de graphiques de métriques de mise à l’échelle automatique d’un groupe de machines virtuelles identiques](media/autoscale-troubleshoot/autoscale-vmss-metric-chart-ex-2.png)
 

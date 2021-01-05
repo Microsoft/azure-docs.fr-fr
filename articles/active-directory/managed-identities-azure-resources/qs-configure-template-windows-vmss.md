@@ -3,47 +3,47 @@ title: Configurer le modèle pour utiliser des identités managées sur les grou
 description: Instructions détaillées pour configurer des identités managées pour ressources Azure sur un groupe de machines virtuelles identiques en utilisant un modèle Azure Resource Manager.
 services: active-directory
 documentationcenter: ''
-author: MarkusVi
+author: barclayn
 manager: daveba
 editor: ''
 ms.service: active-directory
 ms.subservice: msi
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: quickstart
 ms.tgt_pltfrm: na
 ms.workload: identity
-ms.date: 02/20/2018
-ms.author: markvi
+ms.date: 12/15/2020
+ms.author: barclayn
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 2d5e324ea20b2ea82fac5b5132893d3558bd3b41
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 377bbb9ce111f3cf2daf8426e128186711c30e5f
+ms.sourcegitcommit: d2d1c90ec5218b93abb80b8f3ed49dcf4327f7f4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77425559"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97587449"
 ---
 # <a name="configure-managed-identities-for-azure-resources-on-an-azure-virtual-machine-scale-using-a-template"></a>Configurer des identités managées pour ressources Azure sur un groupe de machines virtuelles identiques Azure en utilisant un modèle
 
 [!INCLUDE [preview-notice](../../../includes/active-directory-msi-preview-notice.md)]
 
-Les identités managées pour ressources Azure fournissent des services Azure avec une identité managée automatiquement dans Azure Active Directory. Vous pouvez utiliser cette identité pour vous authentifier sur n’importe quel service prenant en charge l’authentification Azure AD, sans avoir d’informations d’identification dans votre code.
+Les identités managées pour ressources Azure fournissent automatiquement aux services Azure une identité managée dans Azure Active Directory. Vous pouvez utiliser cette identité pour vous authentifier sur n’importe quel service prenant en charge l’authentification Azure AD, sans avoir d’informations d’identification dans votre code.
 
 Dans cet article, vous allez découvrir comment effectuer les opérations d’identités managées pour ressources Azure suivantes sur un groupe de machines virtuelles identiques Azure, à l’aide du modèle de déploiement Azure Resource Manager :
 - Activer et désactiver l’identité managée affectée par le système sur un groupe de machines virtuelles identiques Azure
 - Ajouter et supprimer une identité managée affectée par l’utilisateur sur un groupe de machines virtuelles identiques Azure
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
-- Si vous n’êtes pas familiarisé avec les identités managées pour ressources Azure, consultez la [section Vue d’ensemble](overview.md). **Veillez à consulter la [différence entre les identités managées affectées par le système et celles affectées par l’utilisateur](overview.md#how-does-the-managed-identities-for-azure-resources-work)** .
+- Si vous n’êtes pas familiarisé avec les identités managées pour ressources Azure, consultez la [section Vue d’ensemble](overview.md). **Veillez à consulter la [différence entre les identités managées affectées par le système et celles affectées par l’utilisateur](overview.md#managed-identity-types)** .
 - Si vous n’avez pas encore de compte Azure, [inscrivez-vous à un essai gratuit](https://azure.microsoft.com/free/) avant de continuer.
-- Pour effectuer les opérations de gestion dans cet article, votre compte doit disposer de ces affectations de contrôle d'accès basé sur les rôles Azure :
+- Pour effectuer les opérations de gestion dans cet article, votre compte doit disposer de ces affectations de contrôle d’accès basé sur les rôles Azure :
 
     > [!NOTE]
     > Aucune attribution de rôle d'annuaire Azure AD supplémentaire n’est requise.
 
-    - [Contributeur de machine virtuelle](/azure/role-based-access-control/built-in-roles#virtual-machine-contributor) pour créer un groupe de machines virtuelles identiques, puis activer ou supprimer l’identité managée affectée par le système et/ou par l’utilisateur à partir d’un groupe de machines virtuelles identiques.
-    - [Contributeur d’identité managée](/azure/role-based-access-control/built-in-roles#managed-identity-contributor) pour créer une identité managée affectée par l’utilisateur.
-    - [Opérateur d’identité managée](/azure/role-based-access-control/built-in-roles#managed-identity-operator) pour attribuer et supprimer une identité managée affectée par l’utilisateur dans un groupe de machines virtuelles identiques.
+    - [Contributeur de machine virtuelle](../../role-based-access-control/built-in-roles.md#virtual-machine-contributor) pour créer un groupe de machines virtuelles identiques, puis activer ou supprimer l’identité managée affectée par le système et/ou par l’utilisateur à partir d’un groupe de machines virtuelles identiques.
+    - [Contributeur d’identité managée](../../role-based-access-control/built-in-roles.md#managed-identity-contributor) pour créer une identité managée affectée par l’utilisateur.
+    - [Opérateur d’identité managée](../../role-based-access-control/built-in-roles.md#managed-identity-operator) pour attribuer et supprimer une identité managée affectée par l’utilisateur dans un groupe de machines virtuelles identiques.
 
 ## <a name="azure-resource-manager-templates"></a>Modèles Microsoft Azure Resource Manager
 
@@ -51,7 +51,7 @@ Comme pour le portail Azure et le script, les modèles [Azure Resource Manager](
 
    - Utiliser un [modèle personnalisé à partir de Place de marché Azure](../../azure-resource-manager/templates/deploy-portal.md#deploy-resources-from-custom-template), lequel vous permet de créer un modèle à partir de zéro, ou à partir d’un modèle commun existant ou d’un [modèle de démarrage rapide](https://azure.microsoft.com/documentation/templates/).
    - Dériver à partir d’un groupe de ressources existant, en exportant un modèle à partir du [déploiement d’origine](../../azure-resource-manager/templates/export-template-portal.md), ou à partir de l’[état actuel du déploiement](../../azure-resource-manager/templates/export-template-portal.md).
-   - Utilisation d’un [éditeur local JSON (VS Code, par exemple)](../../azure-resource-manager/resource-manager-create-first-template.md), puis téléchargement/déploiement à l’aide de PowerShell ou Azure CLI.
+   - Utilisation d’un [éditeur local JSON (VS Code, par exemple)](../../azure-resource-manager/templates/quickstart-create-templates-use-the-portal.md), puis téléchargement/déploiement à l’aide de PowerShell ou Azure CLI.
    - Utilisez le [projet de groupe de ressources Azure](../../azure-resource-manager/templates/create-visual-studio-deployment-project.md) de Visual Studio pour créer et déployer un modèle.  
 
 Quelle que soit l’option choisie, la syntaxe de modèle est identique lors du déploiement initial et lors du redéploiement. L’activation d’identités managées pour ressources Azure s’effectue de la même manière sur une machine virtuelle nouvelle ou existante. De plus, par défaut, Azure Resource Manager effectue une [mise à jour incrémentielle](../../azure-resource-manager/templates/deployment-modes.md) au niveau des déploiements.
@@ -310,13 +310,13 @@ Si vous disposez d’un groupe de machines virtuelles identiques qui n’a plus 
 
    Pour supprimer une seule identité managée assignée par l’utilisateur d’un groupe de machines virtuelles identiques, supprimez-la du dictionnaire `userAssignedIdentities`.
 
-   Si vous disposez d’une identité affectée par le système, conservez-la dans la valeur `type` sous la valeur `identity`.
+   Si vous disposez d’une identité affectée par le système, conservez-la dans la valeur `type`, sous la valeur `identity`.
 
    **API Microsoft.Compute/virtualMachineScaleSets version du 01/12/2017**
 
    Pour supprimer une seule identité managée affectée par l’utilisateur dans un groupe de machines virtuelles identiques, supprimez-la du tableau `identityIds`.
 
-   Si vous disposez d’une identité managée affectée par le système, conservez-la dans la valeur `type` sous la valeur `identity`.
+   Si vous disposez d’une identité managée affectée par le système, conservez-la dans la valeur `type`, sous la valeur `identity`.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

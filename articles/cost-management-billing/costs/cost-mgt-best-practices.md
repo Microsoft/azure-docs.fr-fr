@@ -3,17 +3,18 @@ title: Optimiser votre investissement dans le cloud avec Azure Cost Management
 description: Cet article vous aide à tirer le meilleur parti de vos investissements dans le cloud, à réduire vos coûts et à évaluer vos postes de dépenses.
 author: bandersmsft
 ms.author: banders
-ms.date: 05/04/2020
+ms.date: 05/27/2020
 ms.topic: conceptual
 ms.service: cost-management-billing
+ms.subservice: cost-management
 ms.reviewer: adwise
 ms.custom: seodec18
-ms.openlocfilehash: 759c69544c083e95cbd5198eecf9f7bb0e882aa8
-ms.sourcegitcommit: e0330ef620103256d39ca1426f09dd5bb39cd075
+ms.openlocfilehash: 4dd22427038bc7c4052ee714c3ec3ce45d7a1837
+ms.sourcegitcommit: 33368ca1684106cb0e215e3280b828b54f7e73e8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82791610"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92132820"
 ---
 # <a name="how-to-optimize-your-cloud-investment-with-azure-cost-management"></a>Guide pratique pour optimiser votre investissement dans le cloud avec Azure Cost Management
 
@@ -125,20 +126,45 @@ Pour plus d’informations, consultez la [calculatrice de prix Azure](https://az
 
 Azure Migrate est un service qui évalue les charges de travail actuelles de votre organisation dans les centres de données locaux. Il vous donne un insight de ce que vous pourriez attendre d’une solution de remplacement Azure. Tout d’abord, Migrate analyse vos machines locales pour déterminer si la migration est possible. Ensuite, il recommande un dimensionnement des machines virtuelles dans Azure pour optimiser les performances. Enfin, il crée également une estimation de coût pour une solution basée sur Azure.
 
-Pour plus d’informations, consultez [Azure Migrate](https://docs.microsoft.com/azure/migrate/migrate-services-overview).
+Pour plus d’informations, consultez [Azure Migrate](../../migrate/migrate-services-overview.md).
 
 ## <a name="analyze-and-manage-your-costs"></a>Analyser et gérer les coûts
 
 Restez informé de la façon dont les coûts de votre organisation évoluent au fil du temps. Utilisez les techniques suivantes pour comprendre et gérer vos dépenses correctement.
 
-### <a name="organize-and-tag-your-resources"></a>Organiser et étiqueter vos ressources
+### <a name="organize-resources-to-maximize-cost-insights-and-accountability"></a>Organiser les ressources pour optimiser les insights et la responsabilité
 
-Organisez vos ressources avec le coût à l’esprit. Quand vous créez des groupes de ressources et des abonnements, pensez aux équipes responsables des coûts associés. Assurez-vous que vos rapports tiennent compte de votre organisation. Les abonnements et les groupes de ressources constituent de bonnes bases pour organiser et affecter les dépenses au sein de votre organisation. Les étiquettes fournissent un bon moyen pour affecter les coûts. Vous pouvez utiliser les étiquettes en guise de filtre. Vous pouvez également les utiliser pour effectuer des regroupements quand vous analysez les données et examinez les coûts. Les clients titulaires d’un Contrat Entreprise peuvent aussi créer des services et y placer des abonnements. Dans Azure, l’organisation en fonction des coûts vous aide à confier aux personnes adéquates de votre entreprise la responsabilité de réduire les dépenses de leur équipe.
+Une structure organisationnelle bien planifiée pour vos hiérarchies des ressources et de facturation Azure vous aide à mieux comprendre et contrôler les coûts à mesure que vous créez votre infrastructure cloud. Regardez la vidéo [Configuration de hiérarchies d’entités](https://www.youtube.com/watch?v=n3TLRaYJ1NY) pour mieux comprendre les outils organisationnels disponibles et la manière d’en tirer profit. Pour regarder d’autres vidéos, consultez la [chaîne YouTube relative à Cost Management](https://www.youtube.com/c/AzureCostManagement).
 
-Regardez la vidéo [Comment examiner les stratégies de balises avec Azure Cost Management](https://www.youtube.com/watch?v=nHQYcYGKuyw) pour comprendre les outils dont vous disposez pour appliquer un balisage des ressources scalable dans votre organisation. Pour regarder d’autres vidéos, consultez la [chaîne YouTube relative à Cost Management](https://www.youtube.com/c/AzureCostManagement).
+>[!VIDEO https://www.youtube.com/embed/n3TLRaYJ1NY]
+
+À mesure que vous évaluez et créez une hiérarchie répondant à vos besoins, posez-vous les questions suivantes.
+
+*Quelle hiérarchie de facturation est à ma disposition et quelles sont les différentes portées que je peux utiliser ?*
+
+Identifiez l’organisation de la facturation pour votre organisation en déterminant le type de votre offre Azure. Les portées disponibles pour chaque organisation de facturation Azure sont détaillées dans [Comprendre et utiliser les portées](understand-work-scopes.md).
+
+*Si j’ai plusieurs équipes, comment dois-je organiser mes abonnements et groupes de ressources ?*
+
+La création d’un abonnement ou d’un groupe de ressources pour chaque équipe est une pratique courante. Elle peut vous aider à différencier les coûts et à encourager les équipes à être responsables. Toutefois, les coûts sont liés à l’abonnement ou au groupe de ressources.
+
+Si vous avez déjà des équipes avec plusieurs abonnements, envisagez de regrouper les abonnements en groupes d’administration pour analyser les coûts de manière groupée. Les groupes d’administration, abonnements et groupes de ressources font tous partie de la hiérarchie RBAC Azure. Utilisez-les de manière collective pour le contrôle d'accès dans vos équipes.
+
+Les ressources peuvent être réparties sur plusieurs portées, en particulier si elles sont partagées par plusieurs équipes ou charges de travail. Envisagez d’identifier les ressources avec des étiquettes. Les étiquettes sont davantage détaillées dans la section suivante.
+
+*Ai-je des environnements de développement et de production ?*
+
+Envisagez de créer des abonnements dev/test pour vos environnements de développement afin de tirer parti des réductions de prix. Si les charges de travail sont réparties sur plusieurs équipes ou portées Azure, envisagez d’utiliser des étiquettes pour les identifier.
+
+### <a name="tag-shared-resources"></a>Identifiez les ressources partagées
+
+Les étiquettes représentent une manière pratique de comprendre les coûts répartis entre plusieurs équipes et portées Azure. Par exemple, vous pouvez avoir une ressource, telle qu’un serveur de messagerie utilisé par plusieurs équipes. Vous pouvez ajouter une ressource partagée, telle que le serveur de messagerie, à un abonnement dédié aux ressources partagées ou l’ajouter à un abonnement existant. Si vous l’ajoutez à un abonnement existant, il est possible que le propriétaire de l’abonnement ne souhaite pas que ses coûts s’appliquent à son équipe chaque mois. Pour cet exemple, vous pouvez utiliser une étiquette pour identifier les ressource comme partagées.
+
+De même, il est possible que vous ayez des environnements ou applications web, par exemple de test ou de production, qui utilisent des ressources de plusieurs abonnements en possession de différentes équipes. Pour mieux comprendre le coût total des charges de travail, identifiez les ressources qu’elles utilisent. Lorsque les étiquettes sont correctement appliquées, elles peuvent servir à filtrer l’analyse des coûts pour mieux comprendre les tendances.
+
+Une fois l’identification des ressources planifiée, vous pouvez configurer une stratégie Azure pour appliquer l’identification des ressources. Regardez la vidéo [Comment examiner les stratégies d’identification avec Azure Cost Management](https://www.youtube.com/watch?v=nHQYcYGKuyw) pour comprendre les outils dont vous disposez pour appliquer une identification des ressources évolutive. Pour regarder d’autres vidéos, consultez la [chaîne YouTube relative à Cost Management](https://www.youtube.com/c/AzureCostManagement).
 
 >[!VIDEO https://www.youtube.com/embed/nHQYcYGKuyw]
-
 
 ### <a name="use-cost-analysis"></a>Utiliser l’analyse des coûts
 

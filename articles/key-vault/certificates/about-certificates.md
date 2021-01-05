@@ -10,12 +10,12 @@ ms.subservice: certificates
 ms.topic: overview
 ms.date: 09/04/2019
 ms.author: mbaldwin
-ms.openlocfilehash: 5e014634ecb251f05710de16daee30d72dae619e
-ms.sourcegitcommit: acb82fc770128234f2e9222939826e3ade3a2a28
+ms.openlocfilehash: 66f077028b9f9f7a7644a318d4447eeaaab19e98
+ms.sourcegitcommit: 03c0a713f602e671b278f5a6101c54c75d87658d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81685910"
+ms.lasthandoff: 11/19/2020
+ms.locfileid: "94919928"
 ---
 # <a name="about-azure-key-vault-certificates"></a>À propos des certificats Azure Key Vault
 
@@ -44,7 +44,17 @@ Lorsqu’un certificat Key Vault est créé, il peut être récupéré dans le s
 
 La clé adressable est plus pertinente avec des certificats KV non exportables. Les opérations de la clé KV adressable sont mappées à partir du champ *keyusage* de la stratégie de certificat KV utilisée pour créer le certificat KV.  
 
-Deux types de clés sont pris en charge, *RSA* ou *RSA HSM*, avec les certificats. Exportable est autorisé avec RSA uniquement, il n’est pas pris en charge par RSA HSM.  
+Type de paire de clés pris en charge pour les certificats
+
+ - Types de clés pris en charge : RSA, RSA-HSM, EC, EC-HSM, oct (listés [ici](/rest/api/keyvault/createcertificate/createcertificate#jsonwebkeytype)) : « Exportable » est autorisé seulement avec RSA et EC. Les clés HSM sont non exportables.
+
+|Type de clé|À propos de|Sécurité|
+|--|--|--|
+|**RSA**| clé RSA « protégée par logiciel »|FIPS 140-2 niveau 1|
+|**RSA-HSM**| Clé RSA « protégée par HSM » (référence SKU Premium uniquement)|HSM FIPS 140-2 niveau 2|
+|**EC**| clé Elliptic Curve « protégée par logiciel »|FIPS 140-2 niveau 1|
+|**EC-HSM**| Clé à courbe elliptique « protégée par HSM » (référence SKU Premium uniquement)|HSM FIPS 140-2 niveau 2|
+|||
 
 ## <a name="certificate-attributes-and-tags"></a>Attributs et balises de certificat
 
@@ -81,10 +91,11 @@ Une stratégie de certificat contient des informations sur la création et la ge
 
 Quand un certificat Key Vault est créé de zéro, une stratégie doit être fournie. La stratégie spécifie comment créer cette version du certificat Key Vault ou la prochaine version. Lorsqu’une stratégie a été définie, des opérations de création successives ne sont pas nécessaires pour les prochaines versions. Il n’existe qu’une seule instance d’une stratégie pour toutes les versions d’un certificat Key Vault.  
 
-Globalement, une stratégie de certificat contient les informations suivantes :  
+Globalement, une stratégie de certificat contient les informations suivantes (les définitions correspondantes se trouvent [ici](/powershell/module/az.keyvault/set-azkeyvaultcertificatepolicy?view=azps-4.4.0)) :  
 
 -   Propriétés du certificat X.509 : contient le nom du sujet, les autres noms du sujet et d’autres propriétés utilisées pour créer une demande de certificat X.509.  
--   Propriétés des clés : contient les champs type de clé, longueur de clé, exportable et réutiliser la clé. Ces champs indiquent au coffre de clés comment générer une clé.  
+-   Propriétés des clés : contient les champs type de clé, longueur de clé, exportable et ReuseKeyOnRenewal. Ces champs indiquent au coffre de clés comment générer une clé. 
+     - Types de clés pris en charge : RSA, RSA-HSM, EC, EC-HSM, Oct (répertorié [ici](/rest/api/keyvault/createcertificate/createcertificate#jsonwebkeytype)) 
 -   Propriétés du secret : propriétés du secret comme le type de contenu de secret adressable pour générer la valeur du secret, pour récupérer le certificat en tant que secret.  
 -   Actions de la durée de vie : actions de la durée de vie du certificat KV. Chaque action de la durée de vie contient :  
 
@@ -131,7 +142,7 @@ Avant de pouvoir créer un émetteur de certificat dans un coffre de clés, les 
 
     -   Fournit la configuration à utiliser pour créer un objet émetteur du fournisseur dans le coffre de clés  
 
-Pour plus d’informations sur la création d’objets Émetteur à partir du portail Certificats, consultez le [blog de certificats Key Vault](https://aka.ms/kvcertsblog)  
+Pour plus d’informations sur la création d’objets Émetteur à partir du portail Certificats, consultez le [blog de certificats Key Vault](/archive/blogs/kv/manage-certificates-via-azure-key-vault)  
 
 Key Vault permet de créer plusieurs objets émetteurs avec une configuration de fournisseur de l’émetteur différente. Lorsqu’un objet émetteur est créé, son nom peut être référencé dans une ou plusieurs stratégies de certificat. Le référencement de l’objet émetteur indique à Key Vault d’utiliser la configuration telle que spécifiée dans l’objet émetteur lors de la demande du certificat x509 à partir du fournisseur d’autorité de certification lors de la création ou du renouvellement du certificat.  
 
@@ -139,42 +150,11 @@ Les objets émetteur sont créés dans le coffre et ne peuvent être utilisés q
 
 ## <a name="certificate-contacts"></a>Contacts du certificat
 
-Les contacts du certificat contiennent des informations de contact pour l’envoi de notifications déclenchées par des événements de durée de vie de certificat. Les informations de contact sont partagées par tous les certificats dans le coffre de clés. Une notification est envoyée à tous les contacts spécifiés pour un événement pour n’importe quel certificat dans le coffre de clés.  
-
-Si la stratégie d’un certificat est définie sur le renouvellement automatique, une notification est alors envoyée pour les événements suivants.  
-
-- Avant le renouvellement du certificat
-- Après le renouvellement du certificat, indiquant si le certificat a été renouvelé, ou si une erreur s’est produite, nécessitant un renouvellement manuel du certificat.  
-
-  Quand la stratégie d’un certificat est définie pour un renouvellement manuel (e-mail uniquement), une notification est envoyée lorsqu’il est temps de renouveler le certificat.  
+Les contacts du certificat contiennent des informations de contact pour l’envoi de notifications déclenchées par des événements de durée de vie de certificat. Les informations de contact sont partagées par tous les certificats dans le coffre de clés. Une notification est envoyée à tous les contacts spécifiés pour un événement pour n’importe quel certificat dans le coffre de clés. Pour obtenir des informations sur la façon de définir un contact de certificat, reportez-vous [ici](overview-renew-certificate.md#steps-to-set-certificate-notifications).  
 
 ## <a name="certificate-access-control"></a>Contrôle d’accès aux certificats
 
- Le contrôle d’accès pour les certificats est géré par Key Vault et fourni par le coffre de clés qui contient ces certificats. La stratégie de contrôle d’accès pour les certificats est différente des stratégies de contrôle d’accès pour les clés et les secrets dans un même coffre de clés. Les utilisateurs peuvent créer un ou plusieurs coffres pour stocker les certificats afin de maintenir une segmentation et une gestion des certificats appropriées au scénario.  
-
- Les autorisations suivantes peuvent être utilisées, par principal, dans l’entrée de contrôle d’accès aux secrets sur un coffre de clés, et reflètent précisément les opérations autorisées sur un objet secret :  
-
-- Autorisations pour les opérations de gestion des certificats
-  - *get* : obtenir la version actuelle ou n’importe quelle version d’un certificat 
-  - *list* : lister les certificats actuels ou les versions d’un certificat  
-  - *update* : mettre à jour un certificat
-  - *create* : créer un certificat Key Vault
-  - *import* : importer les éléments d’un certificat dans un certificat Key Vault
-  - *delete* : supprimer un certificat, sa stratégie et toutes ses versions  
-  - *recover* : récupérer un certificat supprimé
-  - *backup* : sauvegarder un certificat dans un coffre de clés
-  - *restore* : restaurer un certificat sauvegardé sur un coffre de clés
-  - *managecontacts* : gérer les contacts du certificat Key Vault  
-  - *manageissuers* : gérer les autorités/émetteurs du certificat Key Vault
-  - *getissuers* : obtenir les autorités/émetteurs d’un certificat
-  - *listissuers* : lister les autorités/émetteurs d’un certificat  
-  - *setissuers* : créer ou mettre à jour les autorités/émetteurs d’un certificat Key Vault  
-  - *deleteissuers* : supprimer les autorités/émetteurs d’un certificat Key Vault  
- 
-- Autorisations pour les opérations privilégiées
-  - *purge* : effacer (supprimer définitivement) un certificat supprimé
-
-Pour plus d’informations, voir [Informations de référence sur les opérations liées aux certificats dans l’API REST Key Vault](/rest/api/keyvault). Pour plus d’informations sur l’établissement d’autorisations, consultez [Coffres : créer ou mettre à jour](/rest/api/keyvault/vaults/createorupdate) et [Coffres : mettre à jour la stratégie d’accès](/rest/api/keyvault/vaults/updateaccesspolicy).
+ Le contrôle d’accès pour les certificats est géré par Key Vault et fourni par le coffre de clés qui contient ces certificats. La stratégie de contrôle d’accès pour les certificats est différente des stratégies de contrôle d’accès pour les clés et les secrets dans un même coffre de clés. Les utilisateurs peuvent créer un ou plusieurs coffres pour stocker les certificats afin de maintenir une segmentation et une gestion des certificats appropriées au scénario.  Pour plus d’informations sur le contrôle d’accès aux certificats, reportez-vous [ici](certificate-access-control.md).
 
 ## <a name="next-steps"></a>Étapes suivantes
 

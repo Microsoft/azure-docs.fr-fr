@@ -2,25 +2,21 @@
 title: 'Tutoriel : Configurer RFPIO pour l’approvisionnement automatique d’utilisateurs avec Azure Active Directory | Microsoft Docs'
 description: Découvrez comment configurer Azure Active Directory pour approvisionner et retirer automatiquement des comptes utilisateur sur RFPIO.
 services: active-directory
-documentationcenter: ''
 author: zchia
 writer: zchia
-manager: beatrizd
-ms.assetid: 54419db4-47d5-4fb4-ab74-7b0b28afb11b
+manager: CelesteDG
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: article
+ms.topic: tutorial
 ms.date: 07/26/2019
 ms.author: zhchia
-ms.openlocfilehash: 6ae423305b39c1335b5db1cd893d5f817be1929b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: ff859e7d77fd19cd006cf45a6faa737297fdb9a1
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77060862"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96349637"
 ---
 # <a name="tutorial-configure-rfpio-for-automatic-user-provisioning"></a>Tutoriel : Configurer RFPIO pour l’approvisionnement automatique d’utilisateurs
 
@@ -70,11 +66,11 @@ Avant de configurer RFPIO pour l’approvisionnement automatique d’utilisateur
 
 4.  Assurez-vous que l’**Attribution automatique des utilisateurs** est activée. Cliquez sur **GÉNÉRER LE JETON D’API SCIM**.
 
-    ![Créer le jeton RFPIO](media/rfpio-provisioning-tutorial/generate.png)
+    ![Capture d’écran de la section SCIM avec l’option GÉNÉRER LE JETON D’API SCIM en évidence.](media/rfpio-provisioning-tutorial/generate.png)
 
 5.  Enregistrez le **jeton d’API SCIM**, car ce jeton ne sera pas affiché à nouveau pour des raisons de sécurité. Vous devrez entrer cette valeur dans le champ **Jeton secret** dans l’onglet Approvisionnement de votre application RFPIO dans le portail Microsoft Azure.
 
-    ![Créer le jeton RFPIO](media/rfpio-provisioning-tutorial/auth.png)
+    ![Capture d’écran de la section SCIM avec la boîte de dialogue d’avertissement qui s’affiche lorsque vous sélectionnez ENVOYER.](media/rfpio-provisioning-tutorial/auth.png)
 
 ## <a name="add-rfpio-from-the-gallery"></a>Ajout de RFPIO depuis la galerie
 
@@ -103,7 +99,7 @@ Pour configurer RFPIO pour le provisionnement automatique d’utilisateurs avec 
 Cette section vous guide tout au long des étapes de configuration du service d’approvisionnement d’Azure AD pour créer, mettre à jour et désactiver des utilisateurs et/ou des groupes dans RFPIO en fonction des attributions d’utilisateurs et/ou de groupes dans Azure AD.
 
 > [!TIP]
-> Vous pouvez également choisir d’activer l’authentification unique basée sur SAML pour RFPIO en suivant les instructions fournies dans le [tutoriel sur l’authentification unique pour RFPIO](rfpio-tutorial.md). L’authentification unique peut être configurée indépendamment de l’attribution automatique d’utilisateurs, bien que ces deux fonctionnalités se complètent.
+> Vous pouvez aussi choisir d’activer l’authentification unique basée sur SAML pour RFPIO en suivant les instructions fournies dans le [tutoriel sur l’authentification unique pour RFPIO](rfpio-tutorial.md). L’authentification unique peut être configurée indépendamment de l’attribution automatique d’utilisateurs, bien que ces deux fonctionnalités se complètent.
 
 ### <a name="to-configure-automatic-user-provisioning-for-rfpio-in-azure-ad"></a>Pour configurer le provisionnement automatique d’utilisateurs pour RFPIO dans Azure AD :
 
@@ -117,11 +113,11 @@ Cette section vous guide tout au long des étapes de configuration du service d�
 
 3. Sélectionnez l’onglet **Approvisionnement**.
 
-    ![Onglet Approvisionnement](common/provisioning.png)
+    ![Capture d’écran des options Gérer avec l’option Provisionnement en évidence.](common/provisioning.png)
 
 4. Définissez le **Mode d’approvisionnement** sur **Automatique**.
 
-    ![Onglet Approvisionnement](common/provisioning-automatic.png)
+    ![Capture d’écran de la liste déroulante Mode de provisionnement avec l’option Automatique en évidence.](common/provisioning-automatic.png)
 
 5. Dans la section **Informations d’identification de l’administrateur**, entrez `https://<RFPIO tenant instance>.rfpio.com/rfpserver/scim/v2 ` dans **URL de locataire**. Exemple de valeur : `https://Azure-test1.rfpio.com/rfpserver/scim/v2`. Saisissez la valeur de **Jeton d’API SCIM** récupérée précédemment dans **Jeton secret**. Cliquez sur **Tester la connexion** pour vérifier qu’Azure AD peut se connecter à RFPIO. Si la connexion échoue, vérifiez que votre compte RFPIO dispose des autorisations d’administrateur et réessayez.
 

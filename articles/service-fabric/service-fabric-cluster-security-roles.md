@@ -4,10 +4,10 @@ description: Cet article décrit les deux rôles clients et les autorisations fo
 ms.topic: conceptual
 ms.date: 2/23/2018
 ms.openlocfilehash: abca19e686d39338fcaa2e0b0c8126913135170b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "75451895"
 ---
 # <a name="role-based-access-control-for-service-fabric-clients"></a>Contrôle d’accès en fonction du rôle pour les clients de Service Fabric

@@ -3,16 +3,16 @@ title: Utiliser le Générateur d’images Azure avec une galerie d’images pou
 description: Créer des versions d'images Azure Shared Gallery à l'aide d'Azure Image Builder et d'Azure PowerShell.
 author: cynthn
 ms.author: cynthn
-ms.date: 01/14/2020
+ms.date: 05/05/2020
 ms.topic: how-to
 ms.service: virtual-machines-windows
 ms.subservice: imaging
-ms.openlocfilehash: 48eff11facf0f1432534d61f003f61e6755caf33
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 96603d27f53161c72c9e81bb7b84fdc6ab5d1ca2
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81869516"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91320062"
 ---
 # <a name="preview-create-a-windows-image-and-distribute-it-to-a-shared-image-gallery"></a>Aperçu : Créer une image Windows et la distribuer sur une bibliothèque d’images partagées 
 
@@ -22,9 +22,9 @@ Nous utiliserons un modèle .json.pour configurer l’image. Le fichier .json ut
 
 Pour distribuer l’image à une galerie d’images partagées, le modèle utilise [sharedImage](../linux/image-builder-json.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json#distribute-sharedimage) comme valeur de la section `distribute` du modèle.
 
-Azure Image Builder exécute automatiquement sysprep pour généraliser l'image. Il s'agit d'une commande générique sysprep, que vous pouvez [écraser](https://github.com/danielsollondon/azvmimagebuilder/blob/master/troubleshootingaib.md#vms-created-from-aib-images-do-not-create-successfully) si nécessaire. 
+Azure Image Builder exécute automatiquement sysprep pour généraliser l'image. Il s'agit d'une commande générique sysprep, que vous pouvez [écraser](../linux/image-builder-troubleshoot.md#vms-created-from-aib-images-do-not-create-successfully) si nécessaire. 
 
-Tenez compte du nombre de personnalisations que vous effectuez. Vous pouvez exécuter la commande Sysprep jusqu'à 8 fois sur une même image Windows. Après avoir exécuté Sysprep 8 fois, vous devrez recréer votre image Windows. Pour plus d'informations, consultez [Nombre d'exécutions maximum de Sysprep](https://docs.microsoft.com/windows-hardware/manufacture/desktop/sysprep--generalize--a-windows-installation#limits-on-how-many-times-you-can-run-sysprep). 
+Tenez compte du nombre de personnalisations que vous effectuez. Vous pouvez exécuter la commande Sysprep jusqu'à 8 fois sur une même image Windows. Après avoir exécuté Sysprep 8 fois, vous devrez recréer votre image Windows. Pour plus d'informations, consultez [Nombre d'exécutions maximum de Sysprep](/windows-hardware/manufacture/desktop/sysprep--generalize--a-windows-installation#limits-on-how-many-times-you-can-run-sysprep). 
 
 > [!IMPORTANT]
 > Le Générateur d’images Azure est actuellement en préversion publique.
@@ -89,24 +89,58 @@ $imageTemplateName="helloImageTemplateWin02ps"
 # Distribution properties object name (runOutput).
 # This gives you the properties of the managed image on completion.
 $runOutputName="winclientR01"
-```
 
-
-
-## <a name="create-the-resource-group"></a>Créer le groupe de ressources
-
-Créez un groupe de ressources et accordez à Azure Image Builder l'autorisation de créer des ressources dans ce groupe de ressources.
-
-```powershell
+# Create a resource group for Image Template and Shared Image Gallery
 New-AzResourceGroup `
    -Name $imageResourceGroup `
    -Location $location
-New-AzRoleAssignment `
-   -ObjectId ef511139-6170-438e-a6e1-763dc31bdf74 `
-   -Scope /subscriptions/$subscriptionID/resourceGroups/$imageResourceGroup `
-   -RoleDefinitionName Contributor
 ```
 
+
+## <a name="create-a-user-assigned-identity-and-set-permissions-on-the-resource-group"></a>Créer une identité affectée par l’utilisateur et définir des autorisations sur le groupe de ressources
+Image Builder utilise l’[identité managée affectée par l’utilisateur](../../active-directory/managed-identities-azure-resources/how-to-manage-ua-identity-powershell.md) fournie pour injecter l’image dans Azure Shared Image Gallery (SIG). Dans cet exemple, vous allez créer une définition de rôle Azure qui dispose des actions granulaires pour distribuer l’image à la galerie SIG. La définition de rôle sera ensuite attribuée à l’identité managée affectée par l’utilisateur.
+
+```powershell
+# setup role def names, these need to be unique
+$timeInt=$(get-date -UFormat "%s")
+$imageRoleDefName="Azure Image Builder Image Def"+$timeInt
+$identityName="aibIdentity"+$timeInt
+
+## Add AZ PS module to support AzUserAssignedIdentity
+Install-Module -Name Az.ManagedServiceIdentity
+
+# create identity
+New-AzUserAssignedIdentity -ResourceGroupName $imageResourceGroup -Name $identityName
+
+$identityNameResourceId=$(Get-AzUserAssignedIdentity -ResourceGroupName $imageResourceGroup -Name $identityName).Id
+$identityNamePrincipalId=$(Get-AzUserAssignedIdentity -ResourceGroupName $imageResourceGroup -Name $identityName).PrincipalId
+```
+
+
+### <a name="assign-permissions-for-identity-to-distribute-images"></a>Attribuer des autorisations d’identité pour distribuer des images
+
+Cette commande permet de télécharger un modèle de définition de rôle Azure et de mettre à jour le modèle avec les paramètres spécifiés précédemment.
+
+```powershell
+$aibRoleImageCreationUrl="https://raw.githubusercontent.com/danielsollondon/azvmimagebuilder/master/solutions/12_Creating_AIB_Security_Roles/aibRoleImageCreation.json"
+$aibRoleImageCreationPath = "aibRoleImageCreation.json"
+
+# download config
+Invoke-WebRequest -Uri $aibRoleImageCreationUrl -OutFile $aibRoleImageCreationPath -UseBasicParsing
+
+((Get-Content -path $aibRoleImageCreationPath -Raw) -replace '<subscriptionID>',$subscriptionID) | Set-Content -Path $aibRoleImageCreationPath
+((Get-Content -path $aibRoleImageCreationPath -Raw) -replace '<rgName>', $imageResourceGroup) | Set-Content -Path $aibRoleImageCreationPath
+((Get-Content -path $aibRoleImageCreationPath -Raw) -replace 'Azure Image Builder Service Image Creation Role', $imageRoleDefName) | Set-Content -Path $aibRoleImageCreationPath
+
+# create role definition
+New-AzRoleDefinition -InputFile  ./aibRoleImageCreation.json
+
+# grant role definition to image builder service principal
+New-AzRoleAssignment -ObjectId $identityNamePrincipalId -RoleDefinitionName $imageRoleDefName -Scope "/subscriptions/$subscriptionID/resourceGroups/$imageResourceGroup"
+
+### NOTE: If you see this error: 'New-AzRoleDefinition: Role definition limit exceeded. No more role definitions can be created.' See this article to resolve:
+https://docs.microsoft.com/azure/role-based-access-control/troubleshooting
+```
 
 
 ## <a name="create-the-shared-image-gallery"></a>Créer la galerie Shared Image Gallery
@@ -173,7 +207,7 @@ Invoke-WebRequest `
    -replace '<region1>',$location | Set-Content -Path $templateFilePath
 (Get-Content -path $templateFilePath -Raw ) `
    -replace '<region2>',$replRegion2 | Set-Content -Path $templateFilePath
-
+((Get-Content -path $templateFilePath -Raw) -replace '<imgBuilderId>',$identityNameResourceId) | Set-Content -Path $templateFilePath
 ```
 
 
@@ -185,7 +219,7 @@ Votre modèle doit être envoyé au service. Cela permettra de télécharger tou
 New-AzResourceGroupDeployment `
    -ResourceGroupName $imageResourceGroup `
    -TemplateFile $templateFilePath `
-   -api-version "2019-05-01-preview" `
+   -apiversion "2019-05-01-preview" `
    -imageTemplateName $imageTemplateName `
    -svclocation $location
 ```
@@ -282,6 +316,24 @@ Supprimez le modèle d'image.
 
 ```powerShell
 Remove-AzResource -ResourceId $resTemplateId.ResourceId -Force
+```
+
+Supprimer une attribution de rôle
+
+```powerShell
+Remove-AzRoleAssignment -ObjectId $identityNamePrincipalId -RoleDefinitionName $imageRoleDefName -Scope "/subscriptions/$subscriptionID/resourceGroups/$imageResourceGroup"
+```
+
+Supprimer des définitions
+
+```powerShell
+Remove-AzRoleDefinition -Name "$identityNamePrincipalId" -Force -Scope "/subscriptions/$subscriptionID/resourceGroups/$imageResourceGroup"
+```
+
+Supprimer une identité
+
+```powerShell
+Remove-AzUserAssignedIdentity -ResourceGroupName $imageResourceGroup -Name $identityName -Force
 ```
 
 Supprimez le groupe de ressources.

@@ -12,12 +12,13 @@ ms.devlang: Java
 ms.topic: article
 ms.date: 11/25/2014
 ms.author: gwallace
-ms.openlocfilehash: 18e93ce18ed746612996399dc1aeb258abd26165
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-java
+ms.openlocfilehash: 5e44ae3280d3ca0f8d5052be10d0955ba342352f
+ms.sourcegitcommit: ad677fdb81f1a2a83ce72fa4f8a3a871f712599f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "69637221"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97652872"
 ---
 # <a name="how-to-use-twilio-for-voice-and-sms-capabilities-in-java"></a>Utilisation de Twilio pour les fonctionnalités vocales et de SMS dans Java
 Ce guide présente l'exécution de tâches de programmation courantes avec le service API Twilio sur Azure. Les scénarios abordés comprennent notamment les appels téléphoniques et l'envoi de SMS. Pour plus d'informations sur Twilio et sur l'utilisation des fonctionnalités vocales et de SMS de vos applications, consultez la section [Étapes suivantes](#NextSteps) .
@@ -98,8 +99,8 @@ Pour les fichiers sources JSP (Java Server Page) :
     import="com.twilio.rest.api.*"
     import="com.twilio.type.*"
     import="com.twilio.twiml.*"
- ```
- 
+```
+
 Selon les packages ou classes Twilio que vous voulez utiliser, vos instructions **import** peuvent être différentes.
 
 ## <a name="how-to-make-an-outgoing-call"></a><a id="howto_make_call"></a>Procédure : passer un appel sortant
@@ -216,9 +217,9 @@ Maintenant que vous avez appris les bases du service Twilio, consultez ces liens
 
 [twilio_java]: https://github.com/twilio/twilio-java
 [twilio_api_service]: https://api.twilio.com
-[add_ca_cert]: java-add-certificate-ca-store.md
+[add_ca_cert]: /azure/developer/java/sdk/java-sdk-add-certificate-ca-store
 [howto_phonecall_java]: partner-twilio-java-phone-call-example.md
-[misc_role_config_settings]: https://msdn.microsoft.com/library/windowsazure/hh690945.aspx
+[misc_role_config_settings]: /previous-versions/azure/hh690945(v=azure.100)
 [twimlet_message_url]: https://twimlets.com/message
 [twimlet_message_url_hello_world]: https://twimlets.com/message?Message%5B0%5D=Hello%20World%21
 [twilio_rest_making_calls]: https://www.twilio.com/docs/api/rest/making-calls

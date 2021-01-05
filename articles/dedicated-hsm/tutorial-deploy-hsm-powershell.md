@@ -8,17 +8,17 @@ manager: rkarlin
 editor: ''
 ms.service: key-vault
 ms.topic: tutorial
-ms.custom: mvc, seodec18
+ms.custom: mvc, seodec18, devx-track-azurepowershell
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 11/11/2019
-ms.author: mbaldwin
-ms.openlocfilehash: c1a847a315a264591c0d003ff691d9938c2bf0f5
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.date: 07/14/2020
+ms.author: johndaw
+ms.openlocfilehash: ee431df89128a516e3a1cabeb43b5cbe9e356dae
+ms.sourcegitcommit: dd45ae4fc54f8267cda2ddf4a92ccd123464d411
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "79474422"
+ms.lasthandoff: 10/29/2020
+ms.locfileid: "92927853"
 ---
 # <a name="tutorial--deploying-hsms-into-an-existing-virtual-network-using-powershell"></a>Tutoriel : Déploiement de modules HSM sur un réseau virtuel existant à l’aide de PowerShell
 
@@ -40,7 +40,7 @@ Ce tutoriel concerne l’intégration d’une paire de modules de sécurité mat
 
 ## <a name="prerequisites"></a>Prérequis
 
-Le service HSM dédié d’Azure n’est pas disponible dans le portail Azure. Par conséquent, toutes les interactions avec le service se font via la ligne de commande ou PowerShell. Ce tutoriel utilise PowerShell dans Azure Cloud Shell. Si vous débutez avec PowerShell, suivez les instructions fournies ici : [Prise en main d’Azure PowerShell](https://docs.microsoft.com/powershell/azure/get-started-azureps).
+Le service HSM dédié d’Azure n’est pas disponible dans le portail Azure. Par conséquent, toutes les interactions avec le service se font via la ligne de commande ou PowerShell. Ce tutoriel utilise PowerShell dans Azure Cloud Shell. Si vous débutez avec PowerShell, suivez les instructions fournies ici : [Prise en main d’Azure PowerShell](/powershell/azure/get-started-azureps).
 
 Il est supposé que :
 
@@ -62,13 +62,7 @@ Comme mentionné plus haut, toute activité de provisionnement nécessite que le
 Get-AzProviderFeature -ProviderNamespace Microsoft.HardwareSecurityModules -FeatureName AzureDedicatedHsm
 ```
 
-La commande suivante vérifie les fonctionnalités réseau qui sont nécessaires au service HSM dédié.
-
-```powershell
-Get-AzProviderFeature -ProviderNamespace Microsoft.Network -FeatureName AllowBaremetalServers
-```
-
-Pour continuer, vous devez attendre que les deux commandes retournent l’état « Registered » (Inscrit), comme indiqué ci-dessous.  Si vous avez besoin de vous inscrire à ce service, contactez votre responsable de compte Microsoft.
+Pour continuer, vous devez attendre que la commande retourne l’état « Registered » (Inscrit) comme indiqué ci-dessous.  Si vous n’êtes pas inscrit à ce service, contactez votre responsable de compte Microsoft.
 
 ![État de l’abonnement](media/tutorial-deploy-hsm-powershell/subscription-status.png)
 
@@ -190,7 +184,7 @@ L’exécution de cette commande prend environ 20 minutes. L’option « -verb
 
 ![état du provisionnement](media/tutorial-deploy-hsm-powershell/progress-status.png)
 
-Lorsque l'opération a abouti, ce qui est indiqué par « provisioningState » : « Succeeded », vous pouvez vous connecter à la machine virtuelle existante et utiliser SSH pour garantir la disponibilité de l'appareil HSM.
+Lorsque l’exécution est terminée (ce qui est indiqué par "provisioningState": "Succeeded"), vous pouvez vous connecter à la machine virtuelle existante et utiliser SSH pour garantir la disponibilité du module HSM.
 
 ## <a name="verifying-the-deployment"></a>Vérification du déploiement
 
@@ -217,7 +211,7 @@ L’outil SSH est utilisé pour la connexion à la machine virtuelle. La comman
 `ssh adminuser@hsmlinuxvm.westus.cloudapp.azure.com`
 
 Le mot de passe à utiliser est celui du fichier de paramètres.
-Une fois connecté à la machine virtuelle Linux, vous pouvez vous connecter au module HSM à l’aide de l’adresse IP privée fournie dans le portail pour la ressource \<préfixe>hsm_vnic.
+Une fois connecté à la machine virtuelle Linux, vous pouvez vous connecter au module HSM à l’aide de l’adresse IP privée fournie dans le portail pour la ressource \<prefix>hsm_vnic.
 
 ```powershell
 
@@ -239,7 +233,7 @@ Lorsque vous êtes connecté au module HSM à l’aide de ssh, exécutez la com
 
 La sortie doit ressembler à ceci :
 
-![état du provisionnement](media/tutorial-deploy-hsm-powershell/output.png)
+![Capture d’écran montrant la sortie de la commande hsm show.](media/tutorial-deploy-hsm-powershell/output.png)
 
 À ce stade, vous avez alloué toutes les ressources pour un déploiement haute disponibilité à deux HSM, et vous avez vérifié que l’accès était possible et que l’état était opérationnel. Toute configuration ou tests supplémentaires doivent être effectués au niveau du module HSM. Pour cela, vous devez suivre les instructions du chapitre 7 du guide d’administration Gemalto Luna Network HSM 7 pour initialiser le module HSM et créer des partitions. L’ensemble des logiciels et de la documentation peuvent être téléchargés directement sur le site Gemalto une fois que vous vous êtes inscrit dans le portail de support client Gemalto et que vous disposez d’un ID client. Téléchargez le logiciel client version 7.2 pour obtenir tous les composants nécessaires.
 

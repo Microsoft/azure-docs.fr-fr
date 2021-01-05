@@ -8,12 +8,12 @@ ms.topic: include
 ms.date: 04/17/2018
 ms.author: wesmc
 ms.custom: include file
-ms.openlocfilehash: 39bff26baea622e6c0ed524ca68c3c8bae4e770d
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: e5cfc9beb5473917a76f822862ce3d61675d6493
+ms.sourcegitcommit: 0ce1ccdb34ad60321a647c691b0cff3b9d7a39c8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "76021278"
+ms.lasthandoff: 11/05/2020
+ms.locfileid: "93406653"
 ---
 1. Pour créer une ressource SignalR Service Azure, commencez par vous connecter au [portail Azure](https://portal.azure.com). En haut à gauche de la page, sélectionnez **+ Créer une ressource**. Dans la zone de texte **Rechercher dans la Place de marché**, entrez **SignalR Service**.
 
@@ -30,10 +30,12 @@ ms.locfileid: "76021278"
     | Niveau tarifaire | *Gratuit* | Actuellement, les options **Gratuit** et **Standard** sont disponibles. |
     | Épingler au tableau de bord | ✔ | Cochez cette case pour épingler la ressource au tableau de bord afin de pouvoir la retrouver plus facilement. |
 
-4. Sélectionnez **Create** (Créer). Le déploiement peut prendre quelques minutes.
+4. Sélectionnez **Revoir + créer**. Attendez que la validation se termine. 
 
-5. Au terme du déploiement, sélectionnez **Clés** sous **PARAMÈTRES**. Copiez votre chaîne de connexion pour la clé primaire. Vous utiliserez cette chaîne ultérieurement pour configurer votre application de manière à utiliser la ressource Azure SignalR Service.
+5. Sélectionnez **Create** (Créer). Le déploiement peut prendre quelques minutes.
+
+6. Au terme du déploiement, sélectionnez **Clés** sous **PARAMÈTRES**. Copiez votre chaîne de connexion pour la clé primaire. Vous utiliserez cette chaîne ultérieurement pour configurer votre application de manière à utiliser la ressource Azure SignalR Service.
 
     La chaîne de connexion suit ce format :
     
-        Endpoint=<service_endpoint>;AccessKey=<access_key>;
+    `Endpoint=<service_endpoint>;AccessKey=<access_key>;`

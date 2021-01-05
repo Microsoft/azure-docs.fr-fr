@@ -8,12 +8,12 @@ ms.topic: conceptual
 ms.service: iot-dps
 ms.custom: iot-p0-scenario, iot-devices-deviceOEM
 ms.reviewer: nberdy
-ms.openlocfilehash: 3854f353e4ea0b78c0162681e0b89d37419105d8
-ms.sourcegitcommit: c5661c5cab5f6f13b19ce5203ac2159883b30c0e
+ms.openlocfilehash: 788738082cbf9995fb2f7282bc3f574903275528
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/01/2020
-ms.locfileid: "80529520"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90527205"
 ---
 # <a name="security-practices-for-azure-iot-device-manufacturers"></a>Pratiques de sécurité pour les fabricants d’appareils Azure IoT
 À l’heure où de plus en plus de fabricants mettent en production des appareils IoT, il est utile d’identifier des conseils en lien avec les pratiques courantes. Cet article résume les pratiques de sécurité recommandées à prendre en compte lorsque vous fabriquez des appareils destinés à une utilisation avec le service d’approvisionnement d’appareils Azure IoT.  
@@ -182,7 +182,7 @@ Un appareil peut séjourner dans un entrepôt pendant de 6 à 12 mois avant so
 #### <a name="step-5-device-is-installed-into-the-location"></a>Étape 5 : L’appareil est installé à son emplacement
 Une fois que l’appareil arrive à son emplacement final, il passe par le processus d’approvisionnement automatique du service d’approvisionnement des appareils.
 
-Pour plus d’informations, consultez les [concepts d’approvisionnement automatique](concepts-auto-provisioning.md) et l’[attestation de module de plateforme sécurisée](concepts-tpm-attestation.md). 
+Pour plus d’informations, consultez [Approvisionnement](about-iot-dps.md#provisioning-process) et [Attestation de module de plateforme sécurisée](concepts-tpm-attestation.md). 
 
 ## <a name="resources"></a>Ressources
 

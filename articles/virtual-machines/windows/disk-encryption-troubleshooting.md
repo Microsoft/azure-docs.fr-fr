@@ -4,16 +4,16 @@ description: Cet article contient des conseils de dépannage concernant Microsof
 author: msmbaldwin
 ms.service: virtual-machines-windows
 ms.subservice: security
-ms.topic: article
+ms.topic: troubleshooting
 ms.author: mbaldwin
 ms.date: 08/06/2019
 ms.custom: seodec18
-ms.openlocfilehash: 11c1e0bf10725173a2a341addf4c3f845bbb7fba
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 45c64261b60d88557e63cb8f9af922fd7aa71ad4
+ms.sourcegitcommit: d103a93e7ef2dde1298f04e307920378a87e982a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82085686"
+ms.lasthandoff: 10/13/2020
+ms.locfileid: "91977899"
 ---
 # <a name="azure-disk-encryption-troubleshooting-guide"></a>Guide de rési=olution des problèmes Azure Disk Encryption
 
@@ -25,8 +25,6 @@ Avant d’effectuer l’une des étapes ci-dessous, vérifiez que les machines v
 - [Exigences de stratégies de groupe](disk-encryption-overview.md#group-policy-requirements)
 - [Exigences liées au stockage des clés de chiffrement](disk-encryption-overview.md#encryption-key-storage-requirements)
 
- 
-
 ## <a name="troubleshooting-azure-disk-encryption-behind-a-firewall"></a>Résolution des problèmes Azure Disk Encryption derrière un pare-feu
 
 Lorsque la connectivité est limitée par un pare-feu, une exigence de proxy ou des paramètres de groupe de sécurité réseau (NSG), cela peut interrompre la capacité de l’extension à effectuer les tâches nécessaires. Cette interruption peut entraîner les messages d’état de type « État de l’extension non disponible sur la machine virtuelle ». Dans les scénarios prévus, le processus de chiffrement échoue. Les sections qui suivent décrivent certains problèmes courants au niveau du pare-feu qui valent la peine d’être examinés.
@@ -36,7 +34,7 @@ Les paramètres de groupe de sécurité réseau appliqués doivent permettre au 
 
 ### <a name="azure-key-vault-behind-a-firewall"></a>Azure Key Vault derrière un pare-feu
 
-Lorsque le chiffrement est activé avec des [informations d’identification Azure AD](disk-encryption-windows-aad.md#), la machine virtuelle cible doit autoriser la connectivité aux points de terminaison Azure Active Directory et à ceux de Key Vault. Les points de terminaison d’authentification Azure Active Directory actuels sont gérés dans les sections 56 et 59 de la documentation [URL et plages d’adresses IP Office 365](https://docs.microsoft.com/office365/enterprise/urls-and-ip-address-ranges). Des instructions relatives à Key Vault sont fournies dans la documentation sur l’[accès à Azure Key Vault derrière un pare-feu](../../key-vault/general/access-behind-firewall.md).
+Lorsque le chiffrement est activé avec des [informations d’identification Azure AD](disk-encryption-windows-aad.md#), la machine virtuelle cible doit autoriser la connectivité aux points de terminaison Azure Active Directory et à ceux de Key Vault. Les points de terminaison d’authentification Azure Active Directory actuels sont gérés dans les sections 56 et 59 de la documentation [URL et plages d’adresses IP Microsoft 365](/microsoft-365/enterprise/urls-and-ip-address-ranges). Des instructions relatives à Key Vault sont fournies dans la documentation sur l’[accès à Azure Key Vault derrière un pare-feu](../../key-vault/general/access-behind-firewall.md).
 
 ### <a name="azure-instance-metadata-service"></a>Service de métadonnées d’instance Azure 
 La machine virtuelle doit pouvoir accéder au point de terminaison [Azure Instance Metadata Service](../windows/instance-metadata-service.md) qui utilise une adresse IP non routable bien connue (`169.254.169.254`), accessible uniquement à partir de la machine virtuelle.  Les configurations de proxy qui modifient le trafic HTTP local à cette adresse (par exemple, en ajoutant un en-tête X-Forwarded-For) ne sont pas prises en charge.
@@ -78,15 +76,19 @@ DISKPART> list vol
 
 ## <a name="troubleshooting-encryption-status"></a>Résolution des problèmes de l’état du chiffrement 
 
-Le portail peut afficher un disque sous forme chiffrée, même après qu’il a été déchiffré au sein de la machine virtuelle.  Cela peut se produire lorsque des commandes de bas niveau sont utilisées pour déchiffrer directement le disque à partir de la machine virtuelle, au lieu des commandes de gestion Azure Disk Encryption de niveau supérieur.  Les commandes de niveau supérieur déchiffrent le disque à partir de la machine virtuelle. Toutefois, en dehors de la machine virtuelle, elles mettent aussi à jour les paramètres importants de chiffrement et d’extension au niveau de la plateforme, qui sont associés à la machine virtuelle.  S’ils ne sont pas alignés, la plateforme ne sera pas en mesure de rapporter l’état de chiffrement ou de configurer la machine virtuelle.   
+Le portail peut afficher un disque sous forme chiffrée, même après qu’il a été déchiffré au sein de la machine virtuelle.  Cela peut se produire lorsque des commandes de bas niveau sont utilisées pour déchiffrer directement le disque à partir de la machine virtuelle, au lieu des commandes de gestion Azure Disk Encryption de niveau supérieur.  Les commandes de niveau supérieur déchiffrent le disque à partir de la machine virtuelle. Toutefois, en dehors de la machine virtuelle, elles mettent aussi à jour les paramètres importants de chiffrement et d’extension au niveau de la plateforme, qui sont associés à la machine virtuelle.  S’ils ne sont pas alignés, la plateforme ne sera pas en mesure de rapporter l’état de chiffrement ou de configurer la machine virtuelle.
 
 Pour désactiver Azure Disk Encryption avec PowerShell, utilisez [Disable-AzVMDiskEncryption](/powershell/module/az.compute/disable-azvmdiskencryption), puis [Remove-AzVMDiskEncryptionExtension](/powershell/module/az.compute/remove-azvmdiskencryptionextension). L’exécution de Remove-AzVMDiskEncryptionExtension en avant la désactivation du chiffrement échouera.
 
 Pour désactiver Azure Disk Encryption avec l’interface CLI, utilisez [az vm encryption disable](/cli/azure/vm/encryption). 
 
+## 
+
+
+
 ## <a name="next-steps"></a>Étapes suivantes
 
 Ce document vous a fait découvrir certains problèmes couramment rencontrés dans Azure Disk Encryption et en a décrit la résolution. Pour plus d’informations sur ce service et ses fonctionnalités, consultez les articles suivants :
 
-- [Appliquer le chiffrement de disque dans Azure Security Center](../../security-center/security-center-apply-disk-encryption.md)
+- [Appliquer le chiffrement de disque dans Azure Security Center](../../security-center/asset-inventory.md)
 - [Chiffrement des données au repos Azure](../../security/fundamentals/encryption-atrest.md)

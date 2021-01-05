@@ -9,10 +9,10 @@ ms.date: 07/15/2019
 ms.author: tamram
 ms.custom: include file
 ms.openlocfilehash: 39b61c78cbd0333183c80234256d6041a109d846
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "68249915"
 ---
 L’ID de ressource Azure AD indique l’audience pour laquelle un jeton émis peut être utilisé pour fournir l’accès à une ressource Azure. Dans le cas du stockage Azure, l’ID de ressource peut être spécifique à un seul compte de stockage ou s’appliquer à n’importe quel compte de stockage. Le tableau suivant décrit les valeurs que vous pouvez fournir pour l’ID de la ressource :

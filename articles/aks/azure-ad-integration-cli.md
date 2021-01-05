@@ -1,27 +1,33 @@
 ---
-title: Intégrer Azure Active Directory dans Azure Kubernetes Service
-description: Découvrez comment utiliser Azure CLI pour créer un cluster Azure Kubernetes Service (AKS) compatible avec Azure Active Directory
+title: Intégrer Azure Active Directory à Azure Kubernetes Service (hérité)
+description: Découvrez comment utiliser Azure CLI pour créer un cluster Azure Kubernetes Service (AKS) compatible avec Azure Active Directory (hérité)
 services: container-service
+author: TomGeske
 ms.topic: article
-ms.date: 04/16/2019
-ms.openlocfilehash: dba6590daf5c64dd1e53663e71a0cc27941b1470
-ms.sourcegitcommit: 31236e3de7f1933be246d1bfeb9a517644eacd61
+ms.date: 07/20/2020
+ms.author: thomasge
+ms.openlocfilehash: 4aa63493bb14db69821ac04db1d2c5a846de7dbe
+ms.sourcegitcommit: c157b830430f9937a7fa7a3a6666dcb66caa338b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82779941"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94682466"
 ---
-# <a name="integrate-azure-active-directory-with-azure-kubernetes-service-using-the-azure-cli"></a>Intégrer Azure Active Directory avec Azure Kubernetes Service à l’aide d’Azure AD
+# <a name="integrate-azure-active-directory-with-azure-kubernetes-service-using-the-azure-cli-legacy"></a>Intégrer Azure Active Directory à Azure Kubernetes Service à l’aide d’Azure CLI (hérité)
 
-Azure Kubernetes Service (AKS) peut être configuré pour utiliser Azure Active Directory (AD) pour l’authentification utilisateur. Dans cette configuration, vous vous connectez à un cluster AKS en utilisant un jeton d’authentification Azure AD. Les opérateurs de cluster peuvent également configurer le contrôle d’accès en fonction du rôle (RBAC) Kubernetes basé sur une identité utilisateur ou l’appartenance à un groupe de répertoires.
+Azure Kubernetes Service (AKS) peut être configuré pour utiliser Azure Active Directory (AD) pour l’authentification utilisateur. Dans cette configuration, vous vous connectez à un cluster AKS en utilisant un jeton d’authentification Azure AD. Les opérateurs de cluster peuvent également configurer le contrôle d’accès en fonction du rôle Kubernetes (Kubernetes RBAC) basé sur une identité utilisateur ou l’appartenance à un groupe de répertoires.
 
-Cet article explique comment créer les composants d’Azure AD requis, puis déployer un cluster compatible Azure AD et créer un rôle RBAC de base dans le cluster AKS. Vous pouvez également [effectuer ces étapes à l’aide du portail Azure][azure-ad-portal].
+Cet article explique comment créer les composants Azure AD requis, puis déployer un cluster compatible Azure AD et créer un rôle Kubernetes de base dans le cluster AKS.
 
 Pour l’exemple de script complet utilisé dans cet article, voir [Exemples Azure CLI – Intégration d’AKS avec Azure AD][complete-script].
 
-Les limites suivantes s'appliquent :
+> [!Important]
+> AKS propose une nouvelle expérience [Azure AD gérée par AKS][managed-aad] améliorée qui ne nécessite pas que vous gériez le serveur ou l’application cliente. Si vous souhaitez effectuer une migration, suivez les instructions [ici][managed-aad-migrate].
 
-- Azure AD ne peut être activé que quand vous créez un nouveau cluster prenant en charge RBAC. Vous ne pouvez pas activer Azure AD sur un cluster AKS existant.
+## <a name="the-following-limitations-apply"></a>Les limites suivantes s'appliquent :
+
+- Azure AD peut uniquement être activé sur un cluster sur lequel Kubernetes RBAC est activé.
+- L’intégration héritée d’Azure AD ne peut être activée que lors de la création du cluster.
 
 ## <a name="before-you-begin"></a>Avant de commencer
 
@@ -74,7 +80,7 @@ serverApplicationSecret=$(az ad sp credential reset \
     --query password -o tsv)
 ```
 
-Azure AD a besoin d’autorisations pour effectuer les actions suivantes :
+Le principal de service Azure AD a besoin d’autorisations pour effectuer les actions suivantes :
 
 * Lire les données du répertoire
 * Connecter et lire le profil utilisateur
@@ -158,9 +164,9 @@ Enfin, obtenez les informations d’identification d’administrateur du cluster
 az aks get-credentials --resource-group myResourceGroup --name $aksname --admin
 ```
 
-## <a name="create-rbac-binding"></a>Créer une liaison RBAC
+## <a name="create-kubernetes-rbac-binding"></a>Créer une liaison Kubernetes RBAC
 
-Avant de pouvoir utiliser un compte Azure Active Directory avec le cluster AKS, une liaison de rôle ou une liaison de rôle de cluster doit être créée. Les *rôles*définissent les permissions à accorder, et les *liaisons*les appliquent aux utilisateurs souhaités. Ces affectations peuvent s’appliquer à un espace de noms donné ou à l’ensemble du cluster. Pour plus d’informations, consultez [Utilisation de l’autorisation RBAC][rbac-authorization].
+Avant de pouvoir utiliser un compte Azure Active Directory avec le cluster AKS, une liaison de rôle ou une liaison de rôle de cluster doit être créée. Les *rôles* définissent les permissions à accorder, et les *liaisons* les appliquent aux utilisateurs souhaités. Ces affectations peuvent s’appliquer à un espace de noms donné ou à l’ensemble du cluster. Pour plus d’informations, consultez [Utilisation de l’autorisation Kubernetes RBAC][rbac-authorization].
 
 Obtenez le nom d’utilisateur principal (UPN) de l’utilisateur actuellement connecté à l’aide de la commande [az ad signed-in-user show][az-ad-signed-in-user-show]. Ce compte d’utilisateur est activé pour l’intégration d’Azure AD à l’étape suivante.
 
@@ -169,7 +175,7 @@ az ad signed-in-user show --query userPrincipalName -o tsv
 ```
 
 > [!IMPORTANT]
-> Si l’utilisateur pour lequel vous accordez la liaison RBAC figure dans le même locataire Azure AD, attribuez les autorisations en fonction du *userPrincipalName*. Si l’utilisateur se trouve dans un autre locataire Azure AD, recherchez et utilisez plutôt la propriété *objectId*.
+> Si l’utilisateur pour lequel vous accordez la liaison Kubernetes RBAC figure dans le même locataire Azure AD, attribuez les autorisations en fonction d’*userPrincipalName*. Si l’utilisateur se trouve dans un autre locataire Azure AD, recherchez et utilisez plutôt la propriété *objectId*.
 
 Créez un manifeste YAML nommé `basic-azure-ad-binding.yaml`, et collez le contenu suivant. Sur la dernière ligne, remplacez *userPrincipalName_or_objectId* par l’UPN ou l’ID d’objet retournés par la commande précédente :
 
@@ -245,7 +251,7 @@ error: You must be logged in to the server (Unauthorized)
 
 Pour obtenir le script complet contenant les commandes présentées dans cet article, voir le [script d’intégration Azure AD dans le référentiel d’exemples AKS][complete-script].
 
-Pour utiliser des utilisateurs et des groupes Azure AD afin de contrôler l’accès aux ressources de cluster, voir [contrôler l’accès aux ressources de cluster à l’aide d’un contrôle d’accès en fonction du rôle et d’identités Azure AD dans AKS][azure-ad-rbac].
+Pour utiliser des utilisateurs et des groupes Azure AD pour le contrôle d’accès à des ressources de cluster, consultez [Contrôler l’accès aux ressources de cluster à l’aide du contrôle d’accès en fonction du rôle Kubernetes et d’identités Azure AD dans AKS][azure-ad-rbac].
 
 Pour plus d’informations sur la sécurisation des clusters Kubernetes, consultez [Options d’accès et d’identité pour Azure Kubernetes Service (AKS)][rbac-authorization].
 
@@ -261,7 +267,7 @@ Pour découvrir les meilleures pratiques de contrôle des identités et des ress
 [az-aks-create]: /cli/azure/aks?view=azure-cli-latest#az-aks-create
 [az-aks-get-credentials]: /cli/azure/aks?view=azure-cli-latest#az-aks-get-credentials
 [az-group-create]: /cli/azure/group#az-group-create
-[open-id-connect]:../active-directory/develop/v2-protocols-oidc.md
+[open-id-connect]: ../active-directory/develop/v2-protocols-oidc.md
 [az-ad-user-show]: /cli/azure/ad/user#az-ad-user-show
 [az-ad-app-create]: /cli/azure/ad/app#az-ad-app-create
 [az-ad-app-update]: /cli/azure/ad/app#az-ad-app-update
@@ -273,9 +279,10 @@ Pour découvrir les meilleures pratiques de contrôle des identités et des ress
 [az-group-create]: /cli/azure/group#az-group-create
 [az-account-show]: /cli/azure/account#az-account-show
 [az-ad-signed-in-user-show]: /cli/azure/ad/signed-in-user#az-ad-signed-in-user-show
-[azure-ad-portal]: azure-ad-integration.md
 [install-azure-cli]: /cli/azure/install-azure-cli
 [az-ad-sp-credential-reset]: /cli/azure/ad/sp/credential#az-ad-sp-credential-reset
-[rbac-authorization]: concepts-identity.md#role-based-access-controls-rbac
+[rbac-authorization]: concepts-identity.md#kubernetes-role-based-access-control-kubernetes-rbac
 [operator-best-practices-identity]: operator-best-practices-identity.md
 [azure-ad-rbac]: azure-ad-rbac.md
+[managed-aad]: managed-aad.md
+[managed-aad-migrate]: managed-aad.md#upgrading-to-aks-managed-azure-ad-integration

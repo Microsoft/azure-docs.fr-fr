@@ -3,17 +3,17 @@ title: 'Tutoriel : Créer une application de suivi de la qualité de l’eau av
 description: 'Tutoriel : Découvrez comment créer une application de suivi de la qualité de l’eau à l’aide de modèles d’application Azure IoT Central.'
 author: miriambrus
 ms.author: miriamb
-ms.date: 11/12/2019
+ms.date: 12/11/2020
 ms.topic: tutorial
 ms.service: iot-central
 services: iot-central
 manager: abjork
-ms.openlocfilehash: 77ec999d63175f63c1de6e31fdb3f72c963d228c
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 6e8f9b8b33d391c4e13c6076a8589d336455d8c0
+ms.sourcegitcommit: d2d1c90ec5218b93abb80b8f3ed49dcf4327f7f4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82024470"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97590220"
 ---
 # <a name="tutorial-create-a-water-quality-monitoring-application-in-azure-iot-central"></a>Tutoriel : Créer une application de suivi de la qualité de l’eau dans Azure IoT Central
 
@@ -188,7 +188,7 @@ Sous l’onglet **Devices** (Appareils), sélectionnez **+ New** (Nouveau) pour 
 
 ## <a name="explore-and-configure-rules"></a>Explorer et configurer les règles
 
-Dans Azure IoT Central, vous pouvez créer des règles pour superviser automatiquement les données de télémétrie des appareils. Ces règles déclenchent une action lorsque l’une de leurs conditions est remplie. L’une des actions possibles consiste à envoyer des e-mails de notification. D’autres actions possibles incluent une action Microsoft Flow ou webhook pour envoyer des données à d’autres services.
+Dans Azure IoT Central, vous pouvez créer des règles pour superviser automatiquement les données de télémétrie des appareils. Ces règles déclenchent une action lorsque l’une de leurs conditions est remplie. L’une des actions possibles consiste à envoyer des e-mails de notification. D’autres actions possibles incluent une action Power Automate ou webhook pour envoyer des données à d’autres services.
 
 L’application de suivi de la qualité de l’eau que vous avez créée comporte deux règles préconfigurées.
 
@@ -256,4 +256,7 @@ Si vous ne pensez pas continuer à utiliser cette application, supprimez l’app
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* Découvrez plus en détail les [concepts du suivi de la qualité de l’eau](./concepts-waterqualitymonitoring-architecture.md).
+* En savoir plus sur 
+
+> [!div class="nextstepaction"]
+> [concepts du suivi de la qualité de l’eau](./concepts-waterqualitymonitoring-architecture.md).

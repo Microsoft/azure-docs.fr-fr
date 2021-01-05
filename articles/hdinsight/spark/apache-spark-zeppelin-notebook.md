@@ -5,15 +5,15 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
+ms.topic: how-to
 ms.custom: hdinsightactive,seoapr2020
 ms.date: 04/23/2020
-ms.openlocfilehash: 931114a56d774c506b0b33fe4f4fc39e564c06c7
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: a692f4dd86d110f7f0a91a862a7b16ac28345de5
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82195092"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86084526"
 ---
 # <a name="use-apache-zeppelin-notebooks-with-apache-spark-cluster-on-azure-hdinsight"></a>Utiliser des blocs-notes Apache Zeppelin avec un cluster Apache Spark sur HDInsight
 
@@ -141,7 +141,9 @@ Dans cet article, vous allez apprendre à utiliser le package [spark-csv](https:
 
     c. Concaténez les trois valeurs séparées par deux-points ( **:** ).
 
-        com.databricks:spark-csv_2.10:1.4.0
+    ```
+    com.databricks:spark-csv_2.10:1.4.0
+    ```
 
 ## <a name="where-are-the-zeppelin-notebooks-saved"></a>Où les blocs-notes Zeppelin sont-ils enregistrés ?
 

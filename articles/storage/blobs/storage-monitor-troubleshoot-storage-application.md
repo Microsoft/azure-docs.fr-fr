@@ -8,12 +8,12 @@ ms.topic: tutorial
 ms.date: 07/20/2018
 ms.author: normesta
 ms.reviewer: fryu
-ms.openlocfilehash: 8554a78112d197ef8174ac9d18147d301745165e
-ms.sourcegitcommit: fdec8e8bdbddcce5b7a0c4ffc6842154220c8b90
+ms.openlocfilehash: 6c1d9b813db15900521968865c1036d53ad53f41
+ms.sourcegitcommit: c95e2d89a5a3cf5e2983ffcc206f056a7992df7d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83652163"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95544783"
 ---
 # <a name="monitor-and-troubleshoot-a-cloud-storage-application"></a>Surveiller et résoudre les problèmes d’une application de stockage cloud
 
@@ -43,7 +43,7 @@ Sous les **paramètres de Diagnostics (classique)** , définissez l’**État** 
 
 Quand vous avez terminé, cliquez sur **Enregistrer**
 
-![Volet Diagnostics](media/storage-monitor-troubleshoot-storage-application/enable-diagnostics.png)
+![Capture d’écran qui met en évidence la section qui contient les paramètres de configuration permettant d’activer la journalisation et les métriques.](media/storage-monitor-troubleshoot-storage-application/enable-diagnostics.png)
 
 ## <a name="enable-alerts"></a>Activer les alertes
 
@@ -83,11 +83,11 @@ L’illustration suivante représente un exemple d’alerte basée sur l’éche
 
 Les journaux d’activité de stockage stockent des données dans un ensemble d’objets blob dans un conteneur d’objets blob nommé **$logs** dans votre compte de stockage. Ce conteneur n’apparaît pas si vous répertoriez tous les conteneurs d’objets blob de votre compte, mais vous pouvez voir son contenu si vous y accédez directement.
 
-Dans ce scénario, vous utilisez [Microsoft Message Analyzer](https://technet.microsoft.com/library/jj649776.aspx) pour interagir avec votre compte de stockage Azure.
+Dans ce scénario, vous utilisez [Microsoft Message Analyzer](/message-analyzer/microsoft-message-analyzer-operating-guide) pour interagir avec votre compte de stockage Azure.
 
 ### <a name="download-microsoft-message-analyzer"></a>Télécharger Microsoft Message Analyzer
 
-Téléchargez [Microsoft Message Analyzer](https://docs.microsoft.com/message-analyzer/installing-and-upgrading-message-analyzer) et installez l’application.
+Téléchargez [Microsoft Message Analyzer](/message-analyzer/installing-and-upgrading-message-analyzer) et installez l’application.
 
 Lancez l’application et choisissez **Fichier** > **Ouvrir** > **À partir d’autres sources de fichiers**.
 
@@ -97,7 +97,7 @@ Dans la boîte de dialogue **Sélecteur de fichiers**, sélectionnez **+ Ajouter
 
 Une fois que vous êtes connecté, développez les conteneurs dans l’arborescence de stockage pour afficher les objets blob de journal. Sélectionnez le dernier journal et cliquez sur **OK**.
 
-![Boîte de dialogue Microsoft Message Analyzer - Ajouter une connexion de stockage Azure](media/storage-monitor-troubleshoot-storage-application/figure4.png)
+![Capture d’écran qui montre Microsoft Message Analyzer et met en évidence le fichier journal sélectionné.](media/storage-monitor-troubleshoot-storage-application/figure4.png)
 
 Dans la boîte de dialogue **Nouvelle session**, cliquez sur **Démarrer** pour afficher le journal.
 

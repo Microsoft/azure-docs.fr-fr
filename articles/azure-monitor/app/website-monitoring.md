@@ -2,14 +2,14 @@
 title: 'Démarrage rapide : Superviser des sites web avec Azure Monitor Application Insights'
 description: Dans ce guide de démarrage rapide, vous allez découvrir comment configurer la supervision de site web côté client/navigateur avec Azure Monitor Application Insights.
 ms.topic: quickstart
-ms.date: 07/15/2019
+ms.date: 08/19/2020
 ms.custom: mvc
-ms.openlocfilehash: b47f3ce1ebed12d14dffd68e87dd013bb86218ea
-ms.sourcegitcommit: c8a0fbfa74ef7d1fd4d5b2f88521c5b619eb25f8
+ms.openlocfilehash: 959beeac004c71fb4593740d3c1685771638e40c
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82801635"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "88611328"
 ---
 # <a name="quickstart-start-monitoring-your-website-with-azure-monitor-application-insights"></a>Démarrage rapide : Commencez à superviser votre site web avec Azure Monitor Application Insights
 
@@ -30,7 +30,7 @@ Application Insights permet de recueillir les données de télémétrie à parti
 1. Sélectionnez **Créer une ressource** > **Outils de gestion** > **Application Insights**.
 
    > [!NOTE]
-   >Si c’est la première fois que vous créez une ressource Application Insights, consultez [Créer une ressource Application Insights](https://docs.microsoft.com/azure/azure-monitor/app/create-new-resource).
+   >Si c’est la première fois que vous créez une ressource Application Insights, consultez [Créer une ressource Application Insights](./create-new-resource.md).
 1. Quand une boîte de configuration s’affiche, utilisez le tableau suivant pour renseigner les champs d’entrée :
 
     | Paramètres        | Valeur           | Description  |
@@ -66,16 +66,21 @@ Application Insights permet de recueillir les données de télémétrie à parti
 
 1. Ajoutez le script suivant à votre fichier ``hello_world.html`` avant la balise de fermeture ``</head>`` :
 
-   ```javascript
-   <script type="text/javascript">
-      var sdkInstance="appInsightsSDK";window[sdkInstance]="appInsights";var aiName=window[sdkInstance],aisdk=window[aiName]||function(e){function n(e){t[e]=function(){var n=arguments;t.queue.push(function(){t[e].apply(t,n)})}}var t={config:e};t.initialize=!0;var i=document,a=window;setTimeout(function(){var n=i.createElement("script");n.src=e.url||"https://az416426.vo.msecnd.net/scripts/b/ai.2.min.js",i.getElementsByTagName("script")[0].parentNode.appendChild(n)});try{t.cookie=i.cookie}catch(e){}t.queue=[],t.version=2;for(var r=["Event","PageView","Exception","Trace","DependencyData","Metric","PageViewPerformance"];r.length;)n("track"+r.pop());n("startTrackPage"),n("stopTrackPage");var s="Track"+r[0];if(n("start"+s),n("stop"+s),n("setAuthenticatedUserContext"),n("clearAuthenticatedUserContext"),n("flush"),!(!0===e.disableExceptionTracking||e.extensionConfig&&e.extensionConfig.ApplicationInsightsAnalytics&&!0===e.extensionConfig.ApplicationInsightsAnalytics.disableExceptionTracking)){n("_"+(r="onerror"));var o=a[r];a[r]=function(e,n,i,a,s){var c=o&&o(e,n,i,a,s);return!0!==c&&t["_"+r]({message:e,url:n,lineNumber:i,columnNumber:a,error:s}),c},e.autoExceptionInstrumented=!0}return t}(
-      {
-         instrumentationKey:"INSTRUMENTATION_KEY"
-      }
-      );window[aiName]=aisdk,aisdk.queue&&0===aisdk.queue.length&&aisdk.trackPageView({});
-   </script>
-   ```
-
+    ```javascript
+    <script type="text/javascript">
+    !function(T,l,y){var S=T.location,u="script",k="instrumentationKey",D="ingestionendpoint",C="disableExceptionTracking",E="ai.device.",I="toLowerCase",b="crossOrigin",w="POST",e="appInsightsSDK",t=y.name||"appInsights";(y.name||T[e])&&(T[e]=t);var n=T[t]||function(d){var g=!1,f=!1,m={initialize:!0,queue:[],sv:"4",version:2,config:d};function v(e,t){var n={},a="Browser";return n[E+"id"]=a[I](),n[E+"type"]=a,n["ai.operation.name"]=S&&S.pathname||"_unknown_",n["ai.internal.sdkVersion"]="javascript:snippet_"+(m.sv||m.version),{time:function(){var e=new Date;function t(e){var t=""+e;return 1===t.length&&(t="0"+t),t}return e.getUTCFullYear()+"-"+t(1+e.getUTCMonth())+"-"+t(e.getUTCDate())+"T"+t(e.getUTCHours())+":"+t(e.getUTCMinutes())+":"+t(e.getUTCSeconds())+"."+((e.getUTCMilliseconds()/1e3).toFixed(3)+"").slice(2,5)+"Z"}(),iKey:e,name:"Microsoft.ApplicationInsights."+e.replace(/-/g,"")+"."+t,sampleRate:100,tags:n,data:{baseData:{ver:2}}}}var h=d.url||y.src;if(h){function a(e){var t,n,a,i,r,o,s,c,p,l,u;g=!0,m.queue=[],f||(f=!0,t=h,s=function(){var e={},t=d.connectionString;if(t)for(var n=t.split(";"),a=0;a<n.length;a++){var i=n[a].split("=");2===i.length&&(e[i[0][I]()]=i[1])}if(!e[D]){var r=e.endpointsuffix,o=r?e.location:null;e[D]="https://"+(o?o+".":"")+"dc."+(r||"services.visualstudio.com")}return e}(),c=s[k]||d[k]||"",p=s[D],l=p?p+"/v2/track":config.endpointUrl,(u=[]).push((n="SDK LOAD Failure: Failed to load Application Insights SDK script (See stack for details)",a=t,i=l,(o=(r=v(c,"Exception")).data).baseType="ExceptionData",o.baseData.exceptions=[{typeName:"SDKLoadFailed",message:n.replace(/\./g,"-"),hasFullStack:!1,stack:n+"\nSnippet failed to load ["+a+"] -- Telemetry is disabled\nHelp Link: https://go.microsoft.com/fwlink/?linkid=2128109\nHost: "+(S&&S.pathname||"_unknown_")+"\nEndpoint: "+i,parsedStack:[]}],r)),u.push(function(e,t,n,a){var i=v(c,"Message"),r=i.data;r.baseType="MessageData";var o=r.baseData;return o.message='AI (Internal): 99 message:"'+("SDK LOAD Failure: Failed to load Application Insights SDK script (See stack for details) ("+n+")").replace(/\"/g,"")+'"',o.properties={endpoint:a},i}(0,0,t,l)),function(e,t){if(JSON){var n=T.fetch;if(n&&!y.useXhr)n(t,{method:w,body:JSON.stringify(e),mode:"cors"});else if(XMLHttpRequest){var a=new XMLHttpRequest;a.open(w,t),a.setRequestHeader("Content-type","application/json"),a.send(JSON.stringify(e))}}}(u,l))}function i(e,t){f||setTimeout(function(){!t&&m.core||a()},500)}var e=function(){var n=l.createElement(u);n.src=h;var e=y[b];return!e&&""!==e||"undefined"==n[b]||(n[b]=e),n.onload=i,n.onerror=a,n.onreadystatechange=function(e,t){"loaded"!==n.readyState&&"complete"!==n.readyState||i(0,t)},n}();y.ld<0?l.getElementsByTagName("head")[0].appendChild(e):setTimeout(function(){l.getElementsByTagName(u)[0].parentNode.appendChild(e)},y.ld||0)}try{m.cookie=l.cookie}catch(p){}function t(e){for(;e.length;)!function(t){m[t]=function(){var e=arguments;g||m.queue.push(function(){m[t].apply(m,e)})}}(e.pop())}var n="track",r="TrackPage",o="TrackEvent";t([n+"Event",n+"PageView",n+"Exception",n+"Trace",n+"DependencyData",n+"Metric",n+"PageViewPerformance","start"+r,"stop"+r,"start"+o,"stop"+o,"addTelemetryInitializer","setAuthenticatedUserContext","clearAuthenticatedUserContext","flush"]),m.SeverityLevel={Verbose:0,Information:1,Warning:2,Error:3,Critical:4};var s=(d.extensionConfig||{}).ApplicationInsightsAnalytics||{};if(!0!==d[C]&&!0!==s[C]){method="onerror",t(["_"+method]);var c=T[method];T[method]=function(e,t,n,a,i){var r=c&&c(e,t,n,a,i);return!0!==r&&m["_"+method]({message:e,url:t,lineNumber:n,columnNumber:a,error:i}),r},d.autoExceptionInstrumented=!0}return m}(y.cfg);(T[t]=n).queue&&0===n.queue.length&&n.trackPageView({})}(window,document,{
+    src: "https://az416426.vo.msecnd.net/scripts/b/ai.2.min.js", // The SDK URL Source
+    //name: "appInsights", // Global SDK Instance name defaults to "appInsights" when not supplied
+    //ld: 0, // Defines the load delay (in ms) before attempting to load the sdk. -1 = block page load and add to head. (default) = 0ms load after timeout,
+    //useXhr: 1, // Use XHR instead of fetch to report failures (if available),
+    //crossOrigin: "anonymous", // When supplied this will add the provided value as the cross origin attribute on the script tag 
+    cfg: { // Application Insights Configuration
+        instrumentationKey: "YOUR_INSTRUMENTATION_KEY_GOES_HERE"
+        /* ...Other Configuration Options... */
+    }});
+    </script>
+    ```
+    
 1. Modifiez ``hello_world.html`` et ajoutez votre clé d’instrumentation.
 
 1. Ouvrez ``hello_world.html`` dans une session de navigateur locale. Cette action crée une seule vue de page. Vous pouvez actualiser votre navigateur pour générer plusieurs vues de page de test.
@@ -105,19 +110,19 @@ Application Insights permet de recueillir les données de télémétrie à parti
 
    ![Graphique analytique des demandes d’utilisateur au cours d’une période donnée](./media/website-monitoring/analytics-query.png)
 
-1. Revenez à la page **Vue d’ensemble**. Sous l’en-tête **Examiner**, sélectionnez **Navigateur**, puis **Performances**.  Les métriques portant sur les performances de votre site web apparaissent. Il existe une vue correspondante dédiée à l’analyse des échecs et des exceptions dans votre site web. Vous pouvez sélectionner **Exemples** pour accéder aux [détails de transactions de bout en bout](../../azure-monitor/app/transaction-diagnostics.md).
+1. Revenez à la page **Vue d’ensemble**. Sous l’en-tête **Examiner**, sélectionnez **Navigateur**, puis **Performances**.  Les métriques portant sur les performances de votre site web apparaissent. Il existe une vue correspondante dédiée à l’analyse des échecs et des exceptions dans votre site web. Vous pouvez sélectionner **Exemples** pour accéder aux [détails de transactions de bout en bout](./transaction-diagnostics.md).
 
    ![Graphique des métriques de serveur](./media/website-monitoring/browser-performance.png)
 
-1. Dans le menu Application Insights principal, sous l’en-tête **Utilisation**, sélectionnez [**Utilisateurs**](../../azure-monitor/app/usage-segmentation.md) pour commencer à explorer les [outils d’analytique du comportement des utilisateurs](../../azure-monitor/app/usage-overview.md). Étant donné que nous testons à partir d’une seule machine, nous ne voyons les données que d’un seul utilisateur. Pour un site web actif, la distribution des utilisateurs peut se présenter comme suit :
+1. Dans le menu Application Insights principal, sous l’en-tête **Utilisation**, sélectionnez [**Utilisateurs**](./usage-segmentation.md) pour commencer à explorer les [outils d’analytique du comportement des utilisateurs](./usage-overview.md). Étant donné que nous testons à partir d’une seule machine, nous ne voyons les données que d’un seul utilisateur. Pour un site web actif, la distribution des utilisateurs peut se présenter comme suit :
 
      ![Graphique de l’utilisateur](./media/website-monitoring/usage-users.png)
 
-1. Pour un site web plus complexe avec plusieurs pages, vous pouvez utiliser l’outil [**Flux d’utilisateurs**](../../azure-monitor/app/usage-flows.md) pour effectuer le suivi du chemin emprunté par les visiteurs dans les différentes parties de votre site web.
+1. Pour un site web plus complexe avec plusieurs pages, vous pouvez utiliser l’outil [**Flux d’utilisateurs**](./usage-flows.md) pour effectuer le suivi du chemin emprunté par les visiteurs dans les différentes parties de votre site web.
 
    ![Visualisation des flux d’utilisateurs](./media/website-monitoring/user-flows.png)
 
-Pour en savoir plus les configurations plus complexes pour la supervision des sites web, consultez la [Documentation de référence de l’API du kit SDK JavaScript](https://github.com/Microsoft/ApplicationInsights-JS/blob/master/API-reference.md).
+Pour en savoir plus les configurations plus complexes pour la supervision des sites web, consultez la [Documentation de référence de l’API du kit SDK JavaScript](./javascript.md).
 
 ## <a name="clean-up-resources"></a>Nettoyer les ressources
 
@@ -132,4 +137,5 @@ Si vous souhaitez continuer à utiliser d’autres guides de démarrage rapide o
 ## <a name="next-steps"></a>Étapes suivantes
 
 > [!div class="nextstepaction"]
-> [Rechercher et diagnostiquer des problèmes de performances](https://docs.microsoft.com/azure/application-insights/app-insights-analytics)
+> [Rechercher et diagnostiquer des problèmes de performances](../log-query/log-query-overview.md)
+

@@ -1,26 +1,24 @@
 ---
-title: Se connecter à Windows Virtual Desktop à partir d’iOS – Azure
-description: Guide pratique pour se connecter à Windows Virtual Desktop à l’aide du client iOS.
-services: virtual-desktop
-author: heidilohr
-ms.service: virtual-desktop
-ms.topic: conceptual
+title: Se connecter à Windows Virtual Desktop (classique) à partir d’iOS – Azure
+description: Explique comment se connecter à Windows Virtual Desktop (classique) à l’aide du client iOS.
+author: Heidilohr
+ms.topic: how-to
 ms.date: 03/30/2020
 ms.author: helohr
 manager: lizross
-ms.openlocfilehash: 80bbb90c46376d29c1f4f8b0701cf4059db32246
-ms.sourcegitcommit: 50ef5c2798da04cf746181fbfa3253fca366feaa
+ms.openlocfilehash: c7efedadbba196223db2ad5700035e27d37fb414
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82614138"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88008455"
 ---
-# <a name="connect-with-the-ios-client"></a>Se connecter avec le client iOS
+# <a name="connect-to-windows-virtual-desktop-classic-with-the-ios-client"></a>Se connecter à Windows Virtual Desktop (classique) avec le client iOS
 
 > S’applique à : iOS 13.0 ou ultérieur. Compatible avec iPhone, iPad et iPod touch.
 
 >[!IMPORTANT]
->Ce contenu s’applique à la version Automne 2019 qui ne prend pas en charge les objets Azure Resource Manager Windows Virtual Desktop. Si vous essayez de gérer les objets Azure Resource Manager Windows Virtual Desktop introduits dans la mise à jour Printemps 2020, consultez [cet article](../connect-ios.md).
+>Ce contenu s’applique à Windows Virtual Desktop (classique), qui ne prend pas en charge les objets Windows Virtual Desktop Azure Resource Manager. Si vous essayez de gérer des objets Windows Virtual Desktop Azure Resource Manager, consultez [cet article](../connect-ios.md).
 
 Vous pouvez accéder aux ressources Windows Virtual Desktop à partir de votre appareil iOS avec notre client téléchargeable. Ce guide vous explique comment configurer le client iOS.
 

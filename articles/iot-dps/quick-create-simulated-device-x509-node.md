@@ -1,5 +1,5 @@
 ---
-title: Provisionner un appareil X.509 simulé auprès du service Azure IoT Hub à l’aide de Node.js
+title: Démarrage rapide – Provisionner un appareil X.509 simulé auprès d’Azure IoT Hub à l’aide de Node.js
 description: Créez et provisionnez un appareil X.509 simulé à l’aide du SDK d’appareil Node.js pour le service Azure IoT Hub Device Provisioning (DPS). Ce guide de démarrage rapide utilise des inscriptions individuelles.
 author: wesmc7777
 ms.author: wesmc
@@ -8,13 +8,13 @@ ms.topic: quickstart
 ms.service: iot-dps
 services: iot-dps
 ms.devlang: nodejs
-ms.custom: mvc
-ms.openlocfilehash: 746f4adbf616f95c21874d7c1c48881f88c38d34
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.custom: mvc, devx-track-js
+ms.openlocfilehash: fe5279725a3d01001b44074eca8656e88d778cab
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "77605410"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94968160"
 ---
 # <a name="quickstart-create-and-provision-an-x509-simulated-device-using-nodejs-device-sdk-for-iot-hub-device-provisioning-service"></a>Démarrage rapide : Créer et provisionner un appareil X.509 simulé à l’aide du Kit de développement logiciel Azure IoT device SDK pour Node.js pour le service IoT Hub Device Provisioning
 
@@ -24,7 +24,7 @@ Dans ce guide de démarrage rapide, vous allez créer un appareil X.509 simulé 
 
 ## <a name="prerequisites"></a>Prérequis
 
-- Examen des [concepts de provisionnement automatique](concepts-auto-provisioning.md).
+- Connaissance des concepts liés au [provisionnement](about-iot-dps.md#provisioning-process).
 - Exécution des étapes décrites dans [Configurer le service IoT Hub Device Provisioning avec le portail Azure](./quick-setup-auto-provision.md).
 - Compte Azure avec un abonnement actif. [Créez-en un gratuitement](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio).
 - [Node.js v4.0+](https://nodejs.org).
@@ -76,7 +76,7 @@ Cet article présente les inscriptions individuelles.
     npm install
     ```
 
-3. Créez un certificat X.509 _feuille_ en exécutant le script à l’aide de votre _nom-certificat_. Le nom commun du certificat feuille devient alors [l’ID d’inscription](https://docs.microsoft.com/azure/iot-dps/concepts-device#registration-id). Veillez donc à utiliser uniquement des caractères alphanumériques minuscules et des traits d’union.
+3. Créez un certificat X.509 _feuille_ en exécutant le script à l’aide de votre _nom-certificat_. Le nom commun du certificat feuille devient alors [l’ID d’inscription](./concepts-service.md#registration-id). Veillez donc à utiliser uniquement des caractères alphanumériques minuscules et des traits d’union.
 
     ```cmd/sh
     node create_test_cert.js device {certificate-name}
@@ -101,9 +101,9 @@ Cet article présente les inscriptions individuelles.
 
 ## <a name="simulate-the-device"></a>Simuler l’appareil
 
-Le [Kit de développement logiciel (SDK) Azure IoT Hub Node.js Device SDK](https://github.com/Azure/azure-iot-sdk-node) permet de simuler facilement un appareil. Pour plus d’informations, consultez l’article [Concepts de l’appareil](https://docs.microsoft.com/azure/iot-dps/concepts-device).
+Le [Kit de développement logiciel (SDK) Azure IoT Hub Node.js Device SDK](https://github.com/Azure/azure-iot-sdk-node) permet de simuler facilement un appareil. Pour plus d’informations, consultez l’article [Concepts de l’appareil](./concepts-service.md).
 
-1. Dans le portail Azure, sélectionnez le panneau **Vue d’ensemble** du service Device Provisioning et notez les valeurs **_Point de terminaison d’appareil global_** et **_Étendue de l’ID_** .
+1. Dans le portail Azure, sélectionnez le panneau **Vue d’ensemble** du service Device Provisioning et notez les valeurs **_Point de terminaison d’appareil global_** et **_Étendue de l’ID_**.
 
     ![Extraction des informations de point de terminaison du service Device Provisioning à partir du panneau du Portail](./media/quick-create-simulated-device-x509-node/extract-dps-endpoints.png) 
 
@@ -133,7 +133,7 @@ Le [Kit de développement logiciel (SDK) Azure IoT Hub Node.js Device SDK](https
     node register_x509.js
     ```   
 
-6. Dans le portail, accédez au hub IoT lié à votre service de provisionnement et ouvrez le panneau **Appareils IoT**. En cas de réussite du provisionnement de l’appareil X.509 simulé auprès du hub, son ID d’appareil s’affiche sur le panneau **Appareils IoT**, avec un *ÉTAT***activé**. Notez que vous devrez peut-être appuyer sur le bouton **Actualiser** dans la partie supérieure si vous avez déjà ouvert le panneau avant d’exécuter l’exemple d’application de l’appareil. 
+6. Dans le portail, accédez au hub IoT lié à votre service de provisionnement et ouvrez le panneau **Appareils IoT**. En cas de réussite du provisionnement de l’appareil X.509 simulé auprès du hub, son ID d’appareil s’affiche sur le panneau **Appareils IoT**, avec un *ÉTAT* **activé**. Notez que vous devrez peut-être appuyer sur le bouton **Actualiser** dans la partie supérieure si vous avez déjà ouvert le panneau avant d’exécuter l’exemple d’application de l’appareil. 
 
     ![L’appareil est inscrit avec le hub IoT](./media/quick-create-simulated-device-x509-node/hubregistration.png) 
 

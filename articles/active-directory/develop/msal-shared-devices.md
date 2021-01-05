@@ -13,21 +13,19 @@ ms.date: 03/31/2020
 ms.author: brandwe
 ms.reviewer: brandwe
 ms.custom: aaddev
-ms.openlocfilehash: 514782d62f117af5bfff4a5d2b3354c4e263eece
-ms.sourcegitcommit: 980c3d827cc0f25b94b1eb93fd3d9041f3593036
+ms.openlocfilehash: 3cd7074467332f89d4d6c60830be34f4e2a638c1
+ms.sourcegitcommit: 04fb3a2b272d4bbc43de5b4dbceda9d4c9701310
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/02/2020
-ms.locfileid: "80576712"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94562081"
 ---
 # <a name="overview-of-shared-device-mode"></a>Vue d’ensemble du mode d’appareil partagé
 
 Le mode d’appareil partagé est une fonctionnalité Azure Active Directory qui vous permet de créer des applications prenant en charge les travailleurs en première ligne et d’activer le mode d’appareil partagé sur les appareils déployés pour ceux-ci.
 
-> [!NOTE]
-> Cette fonctionnalité est en préversion publique.
-> Cette préversion est fournie sans contrat de niveau de service et n’est pas recommandée pour les charges de travail de production. Certaines fonctionnalités peuvent être limitées ou non prises en charge.
-> Pour plus d’informations, consultez [Conditions d’Utilisation Supplémentaires relatives aux Évaluations Microsoft Azure](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
+>[!IMPORTANT]
+> Cette fonctionnalité [!INCLUDE [PREVIEW BOILERPLATE](../../../includes/active-directory-develop-preview.md)]
 
 ## <a name="what-are-firstline-workers"></a>Que sont les travailleurs en première ligne ?
 

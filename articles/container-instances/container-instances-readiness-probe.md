@@ -2,13 +2,13 @@
 title: Configurer la probe readiness sur l’instance de conteneur
 description: Découvrez comment configurer une sonde afin que les conteneurs dans Azure Container Instances ne reçoivent des demandes que quand ils sont prêts
 ms.topic: article
-ms.date: 01/30/2020
-ms.openlocfilehash: 64bb4a3e429ce820835abbf8e235600e592f7868
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 07/02/2020
+ms.openlocfilehash: 3e89086d66f284df35e36dc8f1d68bb09264843f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76935677"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86169661"
 ---
 # <a name="configure-readiness-probes"></a>Configurer les probe readiness
 
@@ -26,7 +26,7 @@ Azure Container Instances prend également en charge les [sondes probe liveness]
 Par exemple, créez un fichier `readiness-probe.yaml` avec l’extrait de code suivant qui comprend une sonde probe readiness. Ce fichier définit un groupe de conteneurs qui se compose d’un conteneur exécutant une petite application web. L’application est déployée à partir de l’image `mcr.microsoft.com/azuredocs/aci-helloworld` publique. Cette application conteneurisée est également illustrée dans [Déployer une instance de conteneur dans Azure à l’aide d’Azure CLI](container-instances-quickstart.md) ainsi que dans d'autres démarrages rapides.
 
 ```yaml
-apiVersion: 2018-10-01
+apiVersion: 2019-12-01
 location: eastus
 name: readinesstest
 properties:

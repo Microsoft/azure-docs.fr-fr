@@ -14,12 +14,12 @@ ms.topic: sample
 ms.date: 03/19/2018
 ms.author: atsenthi
 ms.custom: mvc
-ms.openlocfilehash: b7f229162ed745408121d898f5af516d22a0c039
-ms.sourcegitcommit: 7d8158fcdcc25107dfda98a355bf4ee6343c0f5c
+ms.openlocfilehash: bcf619e2251f5c1b641190549da45f721835ce0e
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/09/2020
-ms.locfileid: "80984927"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87076154"
 ---
 # <a name="update-the-admin-username-and-password-of-the-vms-in-a-cluster"></a>Mettre à jour le nom d’utilisateur et le mot de passe administrateur des machines virtuelles dans un cluster
 
@@ -27,7 +27,7 @@ Chaque [type de nœud](../service-fabric-cluster-nodetypes.md) d’un cluster Se
 
 [!INCLUDE [updated-for-az](../../../includes/updated-for-az.md)]
 
-Si nécessaire, installez Azure PowerShell à l’aide des instructions figurant dans le [Guide Azure PowerShell](/powershell/azure/overview). 
+Si nécessaire, installez Azure PowerShell à l’aide des instructions figurant dans le [Guide Azure PowerShell](/powershell/azure/). 
 
 ## <a name="sample-script"></a>Exemple de script
 
@@ -49,6 +49,6 @@ Par exemple, un type de nœud unique avec cinq nœuds dispose de 45 à 60 min
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour plus d’informations sur le module Azure PowerShell, consultez [Documentation Azure PowerShell](/powershell/azure/overview).
+Pour plus d’informations sur le module Azure PowerShell, consultez [Documentation Azure PowerShell](/powershell/azure/).
 
 Vous trouverez des exemples supplémentaires de scripts Azure PowerShell pour Azure Service Fabric sur la page [Azure PowerShell Samples](../service-fabric-powershell-samples.md) (Exemples Azure PowerShell).

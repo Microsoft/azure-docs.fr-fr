@@ -1,104 +1,72 @@
 ---
-title: Clouds et régions dans lesquels Azure Media Services v3 est disponible
+title: Disponibilité des clouds et des régions Azure Media Services v3
 description: Cet article traite des clouds Azure et régions dans lesquels Azure Media Services v3 est disponible.
 services: media-services
-documentationcenter: ''
-author: Juliako
+author: IngridAtMicrosoft
 manager: femila
-editor: ''
 ms.service: media-services
-ms.workload: ''
-ms.topic: article
-ms.date: 01/21/2020
-ms.author: juliako
-ms.openlocfilehash: 1257bf4dfb0d5b2c4995cac760290f97293a0c0f
-ms.sourcegitcommit: e040ab443f10e975954d41def759b1e9d96cdade
+ms.topic: reference
+ms.date: 10/28/2020
+ms.author: inhenkel
+ms.openlocfilehash: 20c025cfabf6ed3cedd838f8be964bec06ad595e
+ms.sourcegitcommit: 80034a1819072f45c1772940953fef06d92fefc8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/29/2020
-ms.locfileid: "80382968"
+ms.lasthandoff: 11/03/2020
+ms.locfileid: "93242526"
 ---
-# <a name="clouds-and-regions-in-which-azure-media-services-v3-exists"></a>Clouds et régions dans lesquels Azure Media Services v3 existe
+# <a name="azure-media-services-v3-clouds-and-regions-availability"></a>Disponibilité des clouds et des régions Azure Media Services v3
 
-Azure Media Services v3 est disponible via le manifeste Azure Resource Manager dans Azure global, Azure Government, Azure Germany, Azure China 21Vianet. Cela étant, toutes les fonctionnalités de Media Services ne sont pas disponibles dans l'ensemble des clouds Azure. Ce document présente la disponibilité des principaux composants Media Services v3.
+[!INCLUDE [media services api v3 logo](./includes/v3-hr.md)]
 
-## <a name="feature-availability-in-azure-clouds"></a>Disponibilité des fonctionnalités dans les clouds Azure
+Azure Media Services v3 est disponible via Azure Resource Manager. Cela étant, toutes les fonctionnalités de Media Services ne sont pas disponibles dans l'ensemble des clouds Azure. Ce document présente la disponibilité des principaux composants Media Services v3. Les tableaux suivants indiquent les fonctionnalités de Media Services disponibles dans chaque région.  
 
-| Fonctionnalité|Régions Azure à l'échelle internationale | Azure Government|Azure Germany|Azure China 21Vianet|
-| --- | --- | --- | --- | --- |
-| [Azure EventGrid](reacting-to-media-services-events.md) | Disponible | Non disponible | Non disponible | Non disponible |
-| [VideoAnalyzerPreset](analyzing-video-audio-files-concept.md) |  Disponible | Non disponible | Non disponible | Non disponible |
-| [AudioAnalyzerPreset](analyzing-video-audio-files-concept.md) |  Disponible | Non disponible | Non disponible | Non disponible |
-| [StandardEncoderPreset](encoding-concept.md) | Disponible | Disponible | Disponible | Disponible |
-| [LiveEvents](live-streaming-overview.md) | Disponible | Disponible | Disponible | Disponible |
-| [StreamingEndpoints](streaming-endpoint-concept.md) | Disponible | Disponible | Disponible | Disponible |
+[!INCLUDE [reference-feature-availability-us](./includes/regions-availability-table-key.md)]
+
+Utilisez la navigation à droite pour trouver la région qui vous intéresse.
+
+<!-- US and US Gov -->
+[!INCLUDE [reference-feature-availability-us](./includes/reference-feature-availability-us.md)]
+[!INCLUDE [reference-feature-availability-usgov](./includes/reference-feature-availability-usgov.md)]
+<!-- Africa -->
+[!INCLUDE [reference-feature-availability-africa](./includes/reference-feature-availability-africa.md)]
+<!-- APAC -->
+[!INCLUDE [reference-feature-availability-apac](./includes/reference-feature-availability-apac.md)]
+<!-- Australia -->
+[!INCLUDE [reference-feature-availability-australia](./includes/reference-feature-availability-australia.md)]
+<!-- Brazil -->
+[!INCLUDE [reference-feature-availability-brazil](./includes/reference-feature-availability-brazil.md)]
+<!-- Canada -->
+[!INCLUDE [reference-feature-availability-canada](./includes/reference-feature-availability-canada.md)]
+<!-- China -->
+[!INCLUDE [reference-feature-availability-china](./includes/reference-feature-availability-china.md)]
+<!-- Europe -->
+[!INCLUDE [reference-feature-availability-europe](./includes/reference-feature-availability-europe.md)]
+<!-- Germany -->
+[!INCLUDE [reference-feature-availability-germany](./includes/reference-feature-availability-germany.md)]
+<!-- India -->
+[!INCLUDE [reference-feature-availability-india](./includes/reference-feature-availability-india.md)]
+<!-- Japan -->
+[!INCLUDE [reference-feature-availability-japan](./includes/reference-feature-availability-japan.md)]
+<!-- Korea -->
+[!INCLUDE [reference-feature-availability-korea](./includes/reference-feature-availability-korea.md)]
+<!-- Norway -->
+[!INCLUDE [reference-feature-availability-norway](./includes/reference-feature-availability-norway.md)]
+<!-- Switzerland -->
+[!INCLUDE [reference-feature-availability-switzerland](./includes/reference-feature-availability-switzerland.md)]
+<!-- UAE -->
+[!INCLUDE [reference-feature-availability-uae](./includes/reference-feature-availability-uae.md)]
+<!-- UK -->
+[!INCLUDE [reference-feature-availability-uk](./includes/reference-feature-availability-uk.md)]
 
 ## <a name="regionsgeographieslocations"></a>Régions/zones géographiques/emplacements
 
 [Régions dans lesquelles le service Azure Media Services est déployé](https://azure.microsoft.com/global-infrastructure/services/?products=media-services)
 
-### <a name="region-code-name"></a>Nom de code de la région
-
-S'il vous faut fournir le paramètre **location**, vous devez fournir le nom de code de la région comme valeur **location**. Pour obtenir le nom de code de la région dans laquelle se trouve votre compte et vers laquelle votre appel doit être routé, vous pouvez exécuter la ligne suivante dans l’[interface de ligne de commande Azure](https://docs.microsoft.com/cli/azure/?view=azure-cli-latest).
-
-```azurecli-interactive
-az account list-locations
-```
-
-Une fois que vous avez exécuté la ligne ci-dessus, vous obtenez une liste de toutes les régions Azure. Accédez à la région Azure qui présente la valeur *displayName* que vous recherchez et utilisez sa valeur *name* pour le paramètre **location**.
-
-Par exemple, pour la région Azure USA Ouest 2 affichée ci-dessous, vous allez utiliser « westus2 » pour le paramètre **location**.
-
-```json
-   {
-      "displayName": "West US 2",
-      "id": "/subscriptions/00000000-23da-4fce-b59c-f6fb9513eeeb/locations/westus2",
-      "latitude": "47.233",
-      "longitude": "-119.852",
-      "name": "westus2",
-      "subscriptionId": null
-    }
-```
-
-## <a name="endpoints"></a>Points de terminaison  
-
-Il est important de connaître les points de terminaison suivants lors de la connexion à des comptes Media Services à partir de différents clouds Azure nationaux.
-
-### <a name="global-azure"></a>Azure global
-
-|Points de terminaison||
-| --- | --- |
-| Azure Resource Manager |  `https://management.azure.com/` |
-| Authentification | `https://login.microsoftonline.com/` |
-| Audience du jeton | `https://management.core.windows.net/` |
-
-### <a name="azure-government"></a>Azure Government
-
-|Points de terminaison||
-| --- | --- |
-| Azure Resource Manager |  `https://management.usgovcloudapi.net/` |
-| Authentification | `https://login.microsoftonline.us/` |
-| Audience du jeton | `https://management.core.usgovcloudapi.net/` |
-
-### <a name="azure-germany"></a>Azure Germany
-
-| Points de terminaison ||
-| --- | --- |  
-| Azure Resource Manager | `https://management.cloudapi.de/` |
-| Authentification | `https://login.microsoftonline.de/` |
-| Audience du jeton | `https://management.core.cloudapi.de/`|
-
-### <a name="azure-china-21vianet"></a>Azure China 21Vianet
-
-|Points de terminaison||
-| --- | --- |
-| Azure Resource Manager | `https://management.chinacloudapi.cn/` |
-| Authentification | `https://login.chinacloudapi.cn/` |
-| Audience du jeton |  `https://management.core.chinacloudapi.cn/` |
-
 ## <a name="see-also"></a>Voir aussi
 
 * [Régions Azure](https://azure.microsoft.com/global-infrastructure/regions/)
+* [Points de terminaison et noms de code régionaux](azure-regions-code-names.md)
 * [Zones géographiques Azure](https://azure.microsoft.com/global-infrastructure/geographies/)
 * [Emplacements Azure](https://azure.microsoft.com/global-infrastructure/locations/)
 

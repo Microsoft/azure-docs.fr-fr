@@ -1,6 +1,6 @@
 ---
 title: Réseau de production Azure
-description: Cet article fournit une description générale du réseau de production Azure.
+description: Découvrez le réseau de production Azure. Consultez les méthodes d’accès à la sécurité et les mécanismes de protection pour établir une connexion au réseau.
 services: security
 documentationcenter: na
 author: TerryLanfear
@@ -15,12 +15,12 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 06/28/2018
 ms.author: terrylan
-ms.openlocfilehash: 7c0748e4ff1531649274834cb1e602c228f102e8
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 724c2ee2d74ca9cab11280e92faac71c2cb2218e
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "68726693"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87543807"
 ---
 # <a name="the-azure-production-network"></a>Réseau de production Azure
 Les utilisateurs du réseau de production Azure peuvent être des clients externes qui accèdent à leurs propres applications Azure ou des membres du personnel interne de support Azure qui gèrent le réseau de production. Cet article décrit les méthodes d’accès de sécurité et les mécanismes de protection pour l’établissement de connexions au réseau de production Azure.

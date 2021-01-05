@@ -4,16 +4,17 @@ description: Découvrez comment créer des tâches d’exportation dans le Porta
 author: alkohli
 services: storage
 ms.service: storage
-ms.topic: article
-ms.date: 03/12/2020
+ms.topic: how-to
+ms.date: 10/29/2020
 ms.author: alkohli
 ms.subservice: common
-ms.openlocfilehash: a5afa6439caa6b7c1572447e3b212f3357bf296a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-azurepowershell, devx-track-azurecli
+ms.openlocfilehash: e2e25f2fb806cb6e88745ffdfefe3dd82c0e9a6d
+ms.sourcegitcommit: 4295037553d1e407edeb719a3699f0567ebf4293
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80282509"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96326538"
 ---
 # <a name="use-the-azure-importexport-service-to-export-data-from-azure-blob-storage"></a>Utilisation du service Azure Import/Export pour exporter des données à partir du Stockage Blob Azure
 
@@ -32,14 +33,16 @@ Vous devez respecter les consignes suivantes :
   - Générez un numéro de suivi pour le travail d’exportation.
   - Chaque travail doit avoir un numéro de suivi distinct. Plusieurs travaux portant le même numéro de suivi ne sont pas pris en charge.
   - Si vous n’avez pas de compte de transporteur, accédez à :
-    - [Créer un compte FedEX](https://www.fedex.com/en-us/create-account.html), ou
+    - [Créer un compte FedEx](https://www.fedex.com/en-us/create-account.html), ou
     - [Créer un compte DHL](http://www.dhl-usa.com/en/express/shipping/open_account.html).
 
 ## <a name="step-1-create-an-export-job"></a>Étape 1 : Création d’une tâche d’exportation
 
+### <a name="portal"></a>[Portail](#tab/azure-portal)
+
 Effectuez les étapes suivantes pour créer une tâche d’exportation dans le Portail Azure.
 
-1. Connectez-vous sur https://portal.azure.com/.
+1. Connectez-vous sur <https://portal.azure.com/>.
 2. Accédez à **Tous les services > Stockage > Tâches d’importation/exportation**.
 
     ![Accéder à Tâches d’importation/exportation](./media/storage-import-export-data-from-blobs/export-from-blob1.png)
@@ -76,7 +79,7 @@ Effectuez les étapes suivantes pour créer une tâche d’exportation dans le P
 
     - Vous pouvez effectuer l’exportation à partir du fichier de liste d’objets blob.
 
-        ![Exporter à partir d’un fichier de liste d’objets blob](./media/storage-import-export-data-from-blobs/export-from-blob6.png)  
+        ![Exporter à partir d’un fichier de liste d’objets blob](./media/storage-import-export-data-from-blobs/export-from-blob6.png)
 
    > [!NOTE]
    > Si l’objet blob à exporter est utilisé pendant la copie de données, le service Azure Import/Export prend un instantané de l’objet blob, puis copie cet instantané.
@@ -85,7 +88,7 @@ Effectuez les étapes suivantes pour créer une tâche d’exportation dans le P
 
     - Sélectionnez le transporteur dans la liste déroulante. Si vous souhaitez utiliser un autre transporteur que FedEx/DHL, choisissez une option existante dans la liste déroulante. Contactez l’équipe des opérations Azure Data Box à l’adresse `adbops@microsoft.com` pour lui indiquer le nom du transporteur auquel vous envisagez de faire appel.
     - Entrez un numéro de compte de transporteur valide que vous avez créé pour ce transporteur. Microsoft utilise ce compte pour renvoyer les lecteurs une fois la tâche d’exportation terminée.
-    - Indiquez le nom d’un contact, le numéro de téléphone, l’e-mail, l’adresse, la ville, le code postal, l’état/la province et le pays/la région, puis vérifiez que ces informations sont complètes et valides.
+    - Indiquez le nom, le numéro de téléphone, l'e-mail, l'adresse, la ville, le code postal, l'état/la province et le pays/la région d'un contact, puis vérifiez que ces informations sont complètes et valides.
 
         > [!TIP]
         > Au lieu de spécifier une adresse de messagerie pour un seul utilisateur, fournissez une adresse de groupe. Cela garantit que vous recevrez des notifications même si un administrateur s’en va.
@@ -99,6 +102,170 @@ Effectuez les étapes suivantes pour créer une tâche d’exportation dans le P
         > Envoyer toujours les disques au centre de données indiqué dans le portail Azure. Si les disques ne sont pas expédiés au centre de données approprié, le travail ne sera pas exécuté.
 
     - Cliquez sur **OK** pour créer la tâche d’exportation.
+
+### <a name="azure-cli"></a>[Azure CLI](#tab/azure-cli)
+
+Suivez les étapes ci-dessous pour créer une tâche d’exportation dans le portail Azure.
+
+[!INCLUDE [azure-cli-prepare-your-environment-h3.md](../../../includes/azure-cli-prepare-your-environment-h3.md)]
+
+### <a name="create-a-job"></a>Créer un travail
+
+1. Utilisez la commande [az extension add](/cli/azure/extension#az_extension_add) pour ajouter l’extension [az import-export](/cli/azure/ext/import-export/import-export) :
+
+    ```azurecli
+    az extension add --name import-export
+    ```
+
+1. Pour obtenir la liste des emplacements depuis lesquels vous pouvez recevoir des disques, utilisez la commande [az import-export location list](/cli/azure/ext/import-export/import-export/location#ext_import_export_az_import_export_location_list) :
+
+    ```azurecli
+    az import-export location list
+    ```
+
+1. Exécutez la commande [az import-export create](/cli/azure/ext/import-export/import-export#ext_import_export_az_import_export_create) pour créer un travail d’exportation utilisant votre compte de stockage existant :
+
+    ```azurecli
+    az import-export create \
+        --resource-group myierg \
+        --name Myexportjob1 \
+        --location "West US" \
+        --backup-drive-manifest true \
+        --diagnostics-path waimportexport \
+        --export blob-path=/ \
+        --type Export \
+        --log-level Verbose \
+        --shipping-information recipient-name="Microsoft Azure Import/Export Service" \
+            street-address1="3020 Coronado" city="Santa Clara" state-or-province=CA postal-code=98054 \
+            country-or-region=USA phone=4083527600 \
+        --return-address recipient-name="Gus Poland" street-address1="1020 Enterprise way" \
+            city=Sunnyvale country-or-region=USA state-or-province=CA postal-code=94089 \
+            email=gus@contoso.com phone=4085555555" \
+        --storage-account myssdocsstorage
+    ```
+
+    > [!TIP]
+    > Au lieu de spécifier une adresse de messagerie pour un seul utilisateur, fournissez une adresse de groupe. Cela garantit que vous recevrez des notifications même si un administrateur s’en va.
+
+   Ce travail exporte tous les objets blob dans votre compte de stockage. Vous pouvez spécifier un objet blob à exporter en remplaçant cette valeur par **--export** :
+
+    ```azurecli
+    --export blob-path=$root/logo.bmp
+    ```
+
+   Cette valeur de paramètre exporte l’objet blob nommé *logo.bmp* dans le conteneur racine.
+
+   Vous pouvez également sélectionner tous les objets blob d’un conteneur à l’aide d’un préfixe. Remplacez cette valeur pour **--export** :
+
+    ```azurecli
+    blob-path-prefix=/myiecontainer
+    ```
+
+   Pour plus d’informations, consultez [Exemples de chemins d’objets blob valides](#examples-of-valid-blob-paths).
+
+   > [!NOTE]
+   > Si l’objet blob à exporter est utilisé pendant la copie de données, le service Azure Import/Export prend un instantané de l’objet blob, puis copie cet instantané.
+
+1. Utilisez la commande [az import-export list](/cli/azure/ext/import-export/import-export#ext_import_export_az_import_export_list) pour afficher toutes les tâches du groupe de ressources myierg :
+
+    ```azurecli
+    az import-export list --resource-group myierg
+    ```
+
+1. Pour mettre à jour votre travail ou l’annuler, exécutez la commande [az import-export update](/cli/azure/ext/import-export/import-export#ext_import_export_az_import_export_update) :
+
+    ```azurecli
+    az import-export update --resource-group myierg --name MyIEjob1 --cancel-requested true
+    ```
+
+### <a name="azure-powershell"></a>[Azure PowerShell](#tab/azure-powershell)
+
+Exécutez les étapes suivantes pour créer une tâche d’exportation dans Azure PowerShell.
+
+[!INCLUDE [azure-powershell-requirements-h3.md](../../../includes/azure-powershell-requirements-h3.md)]
+
+> [!IMPORTANT]
+> Tant que le module PowerShell **Az.ImportExport** est en préversion, vous devez l’installer séparément à l’aide de la cmdlet `Install-Module`. Une fois que ce module PowerShell sera en disponibilité générale, il fera partie intégrante des versions futures du module Az PowerShell et sera disponible par défaut dans Azure Cloud Shell.
+
+```azurepowershell-interactive
+Install-Module -Name Az.ImportExport
+```
+
+### <a name="create-a-job"></a>Créer un travail
+
+1. Pour obtenir la liste des emplacements à partir desquels vous pouvez recevoir des disques, utilisez la cmdlet [Get-AzImportExportLocation](/powershell/module/az.importexport/get-azimportexportlocation) :
+
+   ```azurepowershell-interactive
+   Get-AzImportExportLocation
+   ```
+
+1. Exécutez l’exemple [New-AzImportExport](/powershell/module/az.importexport/new-azimportexport) suivant pour créer une tâche d’exportation utilisant votre compte de stockage existant :
+
+   ```azurepowershell-interactive
+   $Params = @{
+      ResourceGroupName = 'myierg'
+      Name = 'Myexportjob1'
+      Location = 'westus'
+      BackupDriveManifest = $true
+      DiagnosticsPath = 'waimportexport'
+      ExportBlobListblobPath = '\'
+      JobType = 'Export'
+      LogLevel = 'Verbose'
+      ShippingInformationRecipientName = 'Microsoft Azure Import/Export Service'
+      ShippingInformationStreetAddress1 = '3020 Coronado'
+      ShippingInformationCity = 'Santa Clara'
+      ShippingInformationStateOrProvince = 'CA'
+      ShippingInformationPostalCode = '98054'
+      ShippingInformationCountryOrRegion = 'USA'
+      ShippingInformationPhone = '4083527600'
+      ReturnAddressRecipientName = 'Gus Poland'
+      ReturnAddressStreetAddress1 = '1020 Enterprise way'
+      ReturnAddressCity = 'Sunnyvale'
+      ReturnAddressStateOrProvince = 'CA'
+      ReturnAddressPostalCode = '94089'
+      ReturnAddressCountryOrRegion = 'USA'
+      ReturnAddressPhone = '4085555555'
+      ReturnAddressEmail = 'gus@contoso.com'
+      StorageAccountId = '/subscriptions/<SubscriptionId>/resourceGroups/myierg/providers/Microsoft.Storage/storageAccounts/myssdocsstorage'
+   }
+   New-AzImportExport @Params
+   ```
+
+    > [!TIP]
+    > Au lieu de spécifier une adresse de messagerie pour un seul utilisateur, fournissez une adresse de groupe. Cela garantit que vous recevrez des notifications même si un administrateur s’en va.
+
+   Ce travail exporte tous les objets blob dans votre compte de stockage. Vous pouvez spécifier un blob à exporter en remplaçant cette valeur par **-ExportBlobListblobPath** :
+
+   ```azurepowershell-interactive
+   -ExportBlobListblobPath $root\logo.bmp
+   ```
+
+   Cette valeur de paramètre exporte l’objet blob nommé *logo.bmp* dans le conteneur racine.
+
+   Vous pouvez également sélectionner tous les objets blob d’un conteneur à l’aide d’un préfixe. Remplacez cette valeur par **-ExportBlobListblobPath** :
+
+   ```azurepowershell-interactive
+   -ExportBlobListblobPath '/myiecontainer'
+   ```
+
+   Pour plus d’informations, consultez [Exemples de chemins d’objets blob valides](#examples-of-valid-blob-paths).
+
+   > [!NOTE]
+   > Si l’objet blob à exporter est utilisé pendant la copie de données, le service Azure Import/Export prend un instantané de l’objet blob, puis copie cet instantané.
+
+1. Utilisez la cmdlet [Get-AzImportExport](/powershell/module/az.importexport/get-azimportexport) pour afficher toutes les tâches du groupe de ressources myierg :
+
+   ```azurepowershell-interactive
+   Get-AzImportExport -ResourceGroupName myierg
+   ```
+
+1. Pour mettre à jour votre travail ou l’annuler, exécutez la cmdlet [Update-AzImportExport](/powershell/module/az.importexport/update-azimportexport) :
+
+   ```azurepowershell-interactive
+   Update-AzImportExport -Name MyIEjob1 -ResourceGroupName myierg -CancelRequested
+   ```
+
+---
 
 <!--## (Optional) Step 2: -->
 
@@ -119,7 +286,7 @@ Quand le tableau de bord indique que la tâche a été effectuée, les disques v
 1. Une fois que vous avez reçu les disques contenant les données exportées, vous devez obtenir les clés BitLocker pour les déverrouiller. Accédez à la tâche d’exportation dans le Portail Azure. Cliquez sur l’onglet **Import/Export**.
 2. Dans la liste, sélectionnez votre tâche d’exportation, puis cliquez sur celle-ci. Accédez à **Chiffrement**, puis copiez les clés.
 
-   ![Afficher les clés BitLocker pour une tâche d'exportation](./media/storage-import-export-service/export-job-bitlocker-keys-02.png)
+   ![Afficher les clés BitLocker pour une tâche d'exportation](./media/storage-import-export-data-from-blobs/export-from-blob-7.png)
 
 3. Utilisez les clés BitLocker pour déverrouiller les disques.
 
@@ -127,11 +294,13 @@ L’exportation est effectuée.
 
 ## <a name="step-5-unlock-the-disks"></a>Étape 5 : Déverrouiller les disques
 
-Si vous utilisez la version 1.4.0.300 de l’outil WAImportExport, utilisez la commande suivante pour déverrouiller le lecteur :
+Utilisez la commande suivante pour déverrouiller le disque :
 
-    `WAImportExport Unlock /externalKey:<BitLocker key (base 64 string) copied from journal (*.jrn*) file>`  
+   `WAImportExport Unlock /bk:<BitLocker key (base 64 string) copied from Encryption blade in Azure portal> /driveLetter:<Drive letter>`
 
-Si vous utilisez des versions antérieures de l’outil, utilisez la boîte de dialogue BitLocker pour déverrouiller le lecteur.
+Voici un exemple de ces données en entrée.
+
+   `WAImportExport.exe Unlock /bk:CAAcwBoAG8AdQBsAGQAIABiAGUAIABoAGkAZABkAGUAbgA= /driveLetter:e`
 
 À ce stade, vous pouvez supprimer la tâche ou la conserver. Les tâches sont automatiquement supprimées au bout de 90 jours.
 
@@ -143,22 +312,22 @@ Cette étape *facultative* vous permet de déterminer le nombre de disques néce
 2. Décompressez le package dans le dossier par défaut : `waimportexportv1`. Par exemple : `C:\WaImportExportV1`.
 3. Ouvrez une fenêtre PowerShell ou de ligne de commande avec des privilèges d’administrateur. Pour accéder au répertoire du dossier décompressé, exécutez la commande suivante :
 
-    `cd C:\WaImportExportV1`
+   `cd C:\WaImportExportV1`
 
 4. Pour vérifier le nombre de disques nécessaires pour les objets blob sélectionnés, exécutez la commande suivante :
 
-    `WAImportExport.exe PreviewExport /sn:<Storage account name> /sk:<Storage account key> /ExportBlobListFile:<Path to XML blob list file> /DriveSize:<Size of drives used>`
+   `WAImportExport.exe PreviewExport /sn:<Storage account name> /sk:<Storage account key> /ExportBlobListFile:<Path to XML blob list file> /DriveSize:<Size of drives used>`
 
     Les paramètres sont décrits dans le tableau suivant :
 
-    |Paramètre de ligne de commande|Description|  
-    |--------------------------|-----------------|  
-    |**/logdir:**|facultatif. Répertoire du journal. Les fichiers journaux détaillés sont écrits dans ce répertoire. Si ce paramètre n’est pas spécifié, le répertoire actif est utilisé en tant que répertoire de journaux.|  
-    |**/sn:**|Obligatoire. Nom du compte de stockage du travail d’exportation.|  
-    |**/sk:**|Obligatoire uniquement si aucun jeton SAP de conteneur n’est spécifié. Clé du compte de stockage du travail d’exportation.|  
-    |**/csas:**|Obligatoire uniquement si aucune clé de compte de stockage n’est spécifiée. SAP du conteneur pour lister les objets blob à exporter dans le travail d’exportation.|  
-    |**/ExportBlobListFile:**|Obligatoire. Chemin d’accès au fichier XML contenant la liste des chemins d’accès ou des préfixes de chemin d’accès aux objets blob à exporter. Format du fichier utilisé dans l’élément `BlobListBlobPath` dans l’opération [Put Job](/rest/api/storageimportexport/jobs) de l’API REST du service Import/Export.|  
-    |**/DriveSize:**|Obligatoire. Taille des disques à utiliser pour une tâche d’exportation, *par exemple*, 500 Go, 1,5 To.|  
+    |Paramètre de ligne de commande|Description|
+    |--------------------------|-----------------|
+    |**/logdir:**|facultatif. Répertoire du journal. Les fichiers journaux détaillés sont écrits dans ce répertoire. Si ce paramètre n’est pas spécifié, le répertoire actif est utilisé en tant que répertoire de journaux.|
+    |**/sn:**|Obligatoire. Nom du compte de stockage du travail d’exportation.|
+    |**/sk:**|Obligatoire uniquement si aucun jeton SAP de conteneur n’est spécifié. Clé du compte de stockage du travail d’exportation.|
+    |**/csas:**|Obligatoire uniquement si aucune clé de compte de stockage n’est spécifiée. SAP du conteneur pour lister les objets blob à exporter dans le travail d’exportation.|
+    |**/ExportBlobListFile:**|Obligatoire. Chemin d’accès au fichier XML contenant la liste des chemins d’accès ou des préfixes de chemin d’accès aux objets blob à exporter. Format du fichier utilisé dans l’élément `BlobListBlobPath` dans l’opération [Put Job](/rest/api/storageimportexport/jobs) de l’API REST du service Import/Export.|
+    |**/DriveSize:**|Obligatoire. Taille des disques à utiliser pour une tâche d’exportation, *par exemple*, 500 Go, 1,5 To.|
 
     Consultez un [exemple de commande PreviewExport](#example-of-previewexport-command).
 
@@ -166,38 +335,38 @@ Cette étape *facultative* vous permet de déterminer le nombre de disques néce
 
 ### <a name="example-of-previewexport-command"></a>Exemple de commande PreviewExport
 
-L’exemple suivant illustre la commande `PreviewExport` :  
+L’exemple suivant illustre la commande `PreviewExport` :
 
 ```powershell
     WAImportExport.exe PreviewExport /sn:bobmediaaccount /sk:VkGbrUqBWLYJ6zg1m29VOTrxpBgdNOlp+kp0C9MEdx3GELxmBw4hK94f7KysbbeKLDksg7VoN1W/a5UuM2zNgQ== /ExportBlobListFile:C:\WAImportExport\mybloblist.xml /DriveSize:500GB
-```  
-
-Le fichier de liste d’objets blob à exporter peut contenir des noms et des préfixes d’objets blob, comme l’illustre ce code :  
-
-```xml
-<?xml version="1.0" encoding="utf-8"?>  
-<BlobList>  
-<BlobPath>pictures/animals/koala.jpg</BlobPath>  
-<BlobPathPrefix>/vhds/</BlobPathPrefix>  
-<BlobPathPrefix>/movies/</BlobPathPrefix>  
-</BlobList>  
 ```
 
-L’outil Azure Import/Export liste tous les objets blob à exporter et calcule leur répartition sur des lecteurs de la taille spécifiée, en prenant en compte les éventuelles surcharges nécessaires, puis évalue le nombre de disques requis pour contenir les objets blob et les informations sur l’utilisation des lecteurs.  
+Le fichier de liste d’objets blob à exporter peut contenir des noms et des préfixes d’objets blob, comme l’illustre ce code :
 
-Voici un exemple de sortie, les journaux d’activité d’information étant omis :  
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<BlobList>
+<BlobPath>pictures/animals/koala.jpg</BlobPath>
+<BlobPathPrefix>/vhds/</BlobPathPrefix>
+<BlobPathPrefix>/movies/</BlobPathPrefix>
+</BlobList>
+```
+
+L’outil Azure Import/Export liste tous les objets blob à exporter et calcule leur répartition sur des lecteurs de la taille spécifiée, en prenant en compte les éventuelles surcharges nécessaires, puis évalue le nombre de disques requis pour contenir les objets blob et les informations sur l’utilisation des lecteurs.
+
+Voici un exemple de sortie, les journaux d’activité d’information étant omis :
 
 ```powershell
-Number of unique blob paths/prefixes:   3  
-Number of duplicate blob paths/prefixes:        0  
-Number of nonexistent blob paths/prefixes:      1  
+Number of unique blob paths/prefixes:   3
+Number of duplicate blob paths/prefixes:        0
+Number of nonexistent blob paths/prefixes:      1
 
-Drive size:     500.00 GB  
-Number of blobs that can be exported:   6  
-Number of blobs that cannot be exported:        2  
-Number of drives needed:        3  
-        Drive #1:       blobs = 1, occupied space = 454.74 GB  
-        Drive #2:       blobs = 3, occupied space = 441.37 GB  
+Drive size:     500.00 GB
+Number of blobs that can be exported:   6
+Number of blobs that cannot be exported:        2
+Number of drives needed:        3
+        Drive #1:       blobs = 1, occupied space = 454.74 GB
+        Drive #2:       blobs = 3, occupied space = 441.37 GB
         Drive #3:       blobs = 2, occupied space = 131.28 GB
 ```
 

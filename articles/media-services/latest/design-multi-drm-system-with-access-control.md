@@ -10,18 +10,20 @@ ms.service: media-services
 ms.workload: media
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
-ms.date: 12/21/2018
+ms.topic: conceptual
+ms.date: 08/31/2020
 ms.author: willzhan
 ms.custom: seodec18
-ms.openlocfilehash: fbc6d6fa8f9a3b424eaec1f04a61b5ca24fe14fc
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 58edf1e0257cf9de8d8f3a3b56f295dcaf1f6cbf
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77161781"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89298196"
 ---
-# <a name="design-of-a-multi-drm-content-protection-system-with-access-control"></a>Concevoir un système de protection de contenu multi-DRM avec contrôle d’accès 
+# <a name="design-of-a-multi-drm-content-protection-system-with-access-control"></a>Concevoir un système de protection de contenu multi-DRM avec contrôle d’accès
+
+[!INCLUDE [media services api v3 logo](./includes/v3-hr.md)]
 
 Il est assez complexe de concevoir et développer un sous-système de gestion des droits numériques (DRM) pour une solution OTT (Over-The-Top) ou de diffusion en continu en ligne. Les opérateurs/fournisseurs de vidéo en ligne ont l’habitude d’externaliser cette tâche à des fournisseurs de services DRM spécialisés. L’objectif de ce document est de présenter une conception et une implémentation de référence pour un sous-système DRM de bout en bout dans une solution OTT ou de diffusion en continu en ligne.
 
@@ -214,7 +216,7 @@ Pour plus d’informations, consultez la page [JWT token authentication in Azure
 Pour plus d’informations sur Azure AD :
 
 * Vous pouvez trouver des informations pour les développeurs dans le [Guide du développeur Azure Active Directory](../../active-directory/develop/v2-overview.md).
-* Vous pouvez trouver des informations pour l’administrateur dans la rubrique [Administration de votre annuaire Azure AD](../../active-directory/fundamentals/active-directory-administer.md).
+* Vous pouvez trouver des informations pour l’administrateur dans la rubrique [Administration de votre annuaire Azure AD](../../active-directory/fundamentals/active-directory-whatis.md).
 
 ### <a name="some-issues-in-implementation"></a>Problèmes de mise en œuvre
 
@@ -222,8 +224,10 @@ Utilisez les informations de dépannage suivantes pour résoudre vos éventuels 
 
 * L’URL de l’émetteur doit se terminer par « / ». L’audience doit être l’ID client de l’application de lecteur. Ajoutez également « / » à la fin de l’URL de l’émetteur.
 
-        <add key="ida:audience" value="[Application Client ID GUID]" />
-        <add key="ida:issuer" value="https://sts.windows.net/[AAD Tenant ID]/" />
+    ```xml
+    <add key="ida:audience" value="[Application Client ID GUID]" />
+    <add key="ida:issuer" value="https://sts.windows.net/[AAD Tenant ID]/" />
+    ```
 
     Dans le [Décodeur JWT](http://jwt.calebb.net/), **aud** et **iss** apparaissent comme suit dans le jeton JWT :
 
@@ -235,11 +239,15 @@ Utilisez les informations de dépannage suivantes pour résoudre vos éventuels 
 
 * Utilisez le bon émetteur lorsque vous configurez la protection CENC dynamique.
 
-        <add key="ida:issuer" value="https://sts.windows.net/[AAD Tenant ID]/"/>
+    ```xml
+    <add key="ida:issuer" value="https://sts.windows.net/[AAD Tenant ID]/"/>
+    ```
 
     Ce paramètre ne fonctionne pas :
 
-        <add key="ida:issuer" value="https://willzhanad.onmicrosoft.com/" />
+    ```xml
+    <add key="ida:issuer" value="https://willzhanad.onmicrosoft.com/" />
+    ```
 
     Le GUID est l’ID du locataire Azure AD. Vous trouverez le GUID dans le menu contextuel **Points de terminaison** du portail Azure.
 
@@ -249,7 +257,7 @@ Utilisez les informations de dépannage suivantes pour résoudre vos éventuels 
 
 * Définissez le TokenType approprié lorsque vous créez des conditions de restriction.
 
-        objTokenRestrictionTemplate.TokenType = TokenType.JWT;
+    `objTokenRestrictionTemplate.TokenType = TokenType.JWT;`
 
     Puisque vous ajoutez la prise en charge de JWT (Azure AD) en plus des SWT (ACS), la valeur par défaut de TokenType est TokenType.JWT. Si vous utilisez SWT/ACS, vous devez définir le jeton sur TokenType.SWT.
 

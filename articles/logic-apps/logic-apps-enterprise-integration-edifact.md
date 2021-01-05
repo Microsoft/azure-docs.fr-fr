@@ -8,12 +8,12 @@ ms.author: divswa
 ms.reviewer: jonfan, estfan, logicappspm
 ms.topic: article
 ms.date: 04/22/2020
-ms.openlocfilehash: c9d80ccac311b02d8734663d99a37804f8280771
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: b0df55e59bd519a816c4022f2434edfcd4460780
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82115531"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96006521"
 ---
 # <a name="exchange-edifact-messages-for-b2b-enterprise-integration-in-azure-logic-apps-with-enterprise-integration-pack"></a>Échanger des messages EDIFACT dans le cadre d’une intégration d’entreprise B2B dans Azure Logic Apps avec Enterprise Integration Pack
 
@@ -247,11 +247,11 @@ Une nouvelle ligne de validation est automatiquement ajoutée dès que la ligne 
 
 2.  Vous pouvez également afficher vos contrats dans la vue d’ensemble de votre compte d’intégration. Dans le menu de votre compte d’intégration, choisissez **Vue d’ensemble**, puis sélectionnez la mosaïque **Contrats**. 
 
-    ![Choisissez la mosaïque « Contrats »](./media/logic-apps-enterprise-integration-edifact/edifact-4.png)   
+    ![Capture d’écran montrant la vignette Contrats.](./media/logic-apps-enterprise-integration-edifact/edifact-4.png)   
 
 ## <a name="connector-reference"></a>Référence de connecteur
 
-Pour plus d’informations techniques sur ce connecteur, notamment au sujet des actions et des limites décrites dans le fichier Swagger du connecteur, consultez la [page de référence du connecteur](https://docs.microsoft.com/connectors/edifact/).
+Pour plus d’informations techniques sur ce connecteur, notamment au sujet des actions et des limites décrites dans le fichier Swagger du connecteur, consultez la [page de référence du connecteur](/connectors/edifact/).
 
 > [!NOTE]
 > Pour les applications logiques utilisées dans un [environnement de service d’intégration (ISE)](../logic-apps/connect-virtual-network-vnet-isolated-environment-overview.md), la version de ce connecteur avec l’étiquette ISE applique les [limites de messages B2B de l’ISE](../logic-apps/logic-apps-limits-and-config.md#b2b-protocol-limits).

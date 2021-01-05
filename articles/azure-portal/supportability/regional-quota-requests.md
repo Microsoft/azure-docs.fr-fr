@@ -4,15 +4,14 @@ description: Guide pratique pour demander une augmentation de la limite de quota
 author: sowmyavenkat86
 ms.author: svenkat
 ms.date: 01/27/2020
-ms.topic: article
-ms.service: azure-supportability
+ms.topic: how-to
 ms.assetid: ce37c848-ddd9-46ab-978e-6a1445728a3b
-ms.openlocfilehash: 9236989f7bbb4695db24f86a2a049f5bb58f302a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: eadf740c6b5caccbf678a1238f993d4ec0b34095
+ms.sourcegitcommit: ad83be10e9e910fd4853965661c5edc7bb7b1f7c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76843682"
+ms.lasthandoff: 12/06/2020
+ms.locfileid: "96745415"
 ---
 # <a name="standard-quota-increase-limits-by-region"></a>Quota standard : augmenter les limites par région
 

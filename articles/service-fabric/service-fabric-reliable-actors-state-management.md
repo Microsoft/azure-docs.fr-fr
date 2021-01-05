@@ -1,16 +1,15 @@
 ---
 title: Gestion des états de Reliable Actors
 description: Décrit la manière dont l’état de Reliable Actors est géré, conservé et répliqué pour garantir une haute disponibilité.
-author: vturecek
 ms.topic: conceptual
 ms.date: 11/02/2017
-ms.author: vturecek
-ms.openlocfilehash: 9962d4333e458243670d1005ad2ccfbc0bb7c92a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: badfc490f26b71881e7970c2c0be3472abfec25a
+ms.sourcegitcommit: 16c7fd8fe944ece07b6cf42a9c0e82b057900662
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75348916"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96575599"
 ---
 # <a name="reliable-actors-state-management"></a>Gestion des états de Reliable Actors
 Reliable Actors désignent des objets monothread capables d’encapsuler la logique et l’état. Étant donné que les acteurs s’exécutent sur Reliable Services, ils peuvent conserver leur état de façon fiable à l’aide des mêmes mécanismes de persistance et de réplication. De cette façon, les acteurs ne perdent pas leur état après des incidents, après une réactivation consécutive à un nettoyage de la mémoire, ou encore après leur déplacement entre des nœuds d’un cluster dans le cadre d’un équilibrage des ressources ou de mises à niveau.
@@ -114,7 +113,7 @@ Ceci est essentiel pour les performances et l’utilisation des ressources de vo
 ### <a name="correctly-manage-the-actors-life-cycle"></a>Gérer correctement le cycle de vie de l’acteur
 Vous devez disposer d’une stratégie claire pour la gestion de la taille de l’état dans chaque partition d’un service d’acteur. Votre service d’acteur doit avoir un nombre fixe d’acteurs et les réutiliser aussi souvent que possible. Si vous créez sans cesse des acteurs, vous devez les supprimer une fois qu’ils ont terminé leur travail. L’infrastructure des acteurs stocke des métadonnées sur chaque acteur existant. La suppression de tous les états d’un acteur ne supprime pas les métadonnées associées. Vous devez supprimer l’acteur (voir [Suppression des acteurs et de leur état](service-fabric-reliable-actors-lifecycle.md#manually-deleting-actors-and-their-state)) pour supprimer toutes les informations stockées dans le système. Au titre de vérification supplémentaire, vous devez interroger le service d’acteur (voir [Énumération des acteurs](service-fabric-reliable-actors-enumerate.md)) de temps à autre pour vous assurer que le nombre d’acteurs s’inscrit dans la plage attendue.
  
-Si la taille du fichier de base de données d’un service d’acteur augmente au-delà de la taille attendue, suivez les recommandations ci-dessus. Si malgré cela vous avez toujours des problèmes de taille de fichier de base de données, vous devez [ouvrir un ticket de support](service-fabric-support.md) auprès de l’équipe de produit pour obtenir de l’aide.
+Si la taille du fichier de base de données d’un service d’acteur augmente au-delà de la taille attendue, suivez les recommandations ci-dessus. Si vous suivez ces recommandations et que vous rencontrez toujours des problèmes de taille de fichier de base de données, vous devez [ouvrir un ticket de support](service-fabric-support.md) auprès de l'équipe produit pour obtenir de l'aide.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

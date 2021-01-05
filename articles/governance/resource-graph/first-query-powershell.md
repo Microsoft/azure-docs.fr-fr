@@ -1,14 +1,14 @@
 ---
 title: 'Démarrage rapide : Votre première requête PowerShell'
 description: Dans ce guide de démarrage rapide, vous suivez les étapes pour activer le module Resource Graph pour Azure PowerShell et vous exécutez votre première requête.
-ms.date: 11/21/2019
+ms.date: 10/14/2020
 ms.topic: quickstart
-ms.openlocfilehash: dd96324671f46f98d5b6c8bae1839a5b02d38b23
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: b810f4af319d3a5212d35e3387ab35b9fa40aafa
+ms.sourcegitcommit: 1b47921ae4298e7992c856b82cb8263470e9e6f9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "79215627"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92057431"
 ---
 # <a name="quickstart-run-your-first-resource-graph-query-using-azure-powershell"></a>Démarrage rapide : Exécuter votre première requête Resource Graph à l’aide d’Azure PowerShell
 
@@ -54,7 +54,7 @@ Le module Resource Graph pour PowerShell est **Az.ResourceGraph**.
 
 ## <a name="run-your-first-resource-graph-query"></a>Exécuter votre première requête Resource Graph
 
-Une fois le module Azure PowerShell ajouté à l’environnement de votre choix, vous pouvez exécuter une requête Resource Graph simple. La requête retourne les cinq premières ressources Azure avec le nom (**name**) et le **type** de chaque ressource.
+Une fois le module Azure PowerShell ajouté à l’environnement de votre choix, vous pouvez exécuter une requête Resource Graph simple. La requête retourne les cinq premières ressources Azure avec le nom (**Name**) et le **Type** de chaque ressource.
 
 1. Exécutez votre première requête Azure Resource Graph à l’aide de l’applet de commande `Search-AzGraph` :
 
@@ -76,7 +76,7 @@ Une fois le module Azure PowerShell ajouté à l’environnement de votre choix,
    ```
 
    > [!NOTE]
-   > Comme précédemment, l’exécution répétée de cette requête peut produire un ensemble différent de ressources. L’ordre des commandes de requête est important. Dans cet exemple, `order by` vient après `limit`. Cela signifie que les résultats de la requête sont d’abord limités avant d’être triés.
+   > Comme précédemment, l’exécution répétée de cette requête peut produire un ensemble différent de ressources. L’ordre des commandes de requête est important. Dans cet exemple, `order by` vient après `limit`. Cet ordre de commande limite d’abord les résultats de la requête, puis les classe.
 
 1. Mettez à jour la requête pour d’abord trier (`order by`) les résultats en fonction de la propriété **name**, puis les limiter (`limit`) aux cinq premiers :
 
@@ -85,7 +85,7 @@ Une fois le module Azure PowerShell ajouté à l’environnement de votre choix,
    Search-AzGraph -Query 'Resources | project name, type | order by name asc | limit 5'
    ```
 
-Si votre environnement ne change pas et que vous exécutez plusieurs fois la requête finale, les résultats retournés sont cohérents et conformes aux attentes. En effet, ils sont classés en fonction de la propriété **name** et limités aux cinq premiers.
+Si votre environnement ne change pas et si vous exécutez plusieurs fois la requête finale, les résultats retournés sont cohérents et classés en fonction de la propriété **Name**, mais toujours limités aux cinq premiers.
 
 > [!NOTE]
 > Si la requête ne retourne aucun résultat à partir d’un abonnement auquel vous avez déjà accès, notez que l’applet de commande `Search-AzGraph` porte par défaut sur les abonnements du contexte par défaut. Pour voir la liste des ID d’abonnement qui font partie du contexte par défaut, exécutez `(Get-AzContext).Account.ExtendedProperties.Subscriptions`. Si vous souhaitez effectuer une recherche sur tous les abonnements auxquels vous avez accès, vous pouvez définir PSDefaultParameterValues pour l’applet de commande `Search-AzGraph` en exécutant `$PSDefaultParameterValues=@{"Search-AzGraph:Subscription"= $(Get-AzSubscription).ID}`.

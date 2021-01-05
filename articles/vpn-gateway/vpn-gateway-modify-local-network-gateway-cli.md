@@ -4,15 +4,15 @@ description: Cet article vous guide tout au long du processus de modification de
 services: vpn-gateway
 author: cherylmc
 ms.service: vpn-gateway
-ms.topic: article
-ms.date: 11/29/2017
+ms.topic: how-to
+ms.date: 09/02/2020
 ms.author: cherylmc
-ms.openlocfilehash: bc051a7e0a19dc54431266cfa5f37131868bdc07
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: aadb2107cd009ac58cf8edb12853b10a5a0e3677
+ms.sourcegitcommit: 8e7316bd4c4991de62ea485adca30065e5b86c67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75864041"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94659996"
 ---
 # <a name="modify-local-network-gateway-settings-using-the-azure-cli"></a>Modifier les paramètres de la passerelle du réseau local à l’aide d’Azure CLI
 
@@ -27,7 +27,7 @@ Parfois, les paramètres de la passerelle de réseau local AddressPrefix ou Gate
 
 ## <a name="before-you-begin"></a><a name="before"></a>Avant de commencer
 
-Installez la dernière version des commandes CLI (version 2.0 ou ultérieure). Pour plus d’informations sur l’installation des commandes CLI, consultez l’article [Installer l’interface de ligne de commande Azure](https://docs.microsoft.com/cli/azure/install-azure-cli).
+Installez la dernière version des commandes CLI (version 2.0 ou ultérieure). Pour plus d’informations sur l’installation des commandes CLI, consultez l’article [Installer l’interface de ligne de commande Azure](/cli/azure/install-azure-cli).
 
 [!INCLUDE [CLI-login](../../includes/vpn-gateway-cli-login-include.md)]
 
@@ -42,4 +42,3 @@ Installez la dernière version des commandes CLI (version 2.0 ou ultérieure). 
 ## <a name="next-steps"></a>Étapes suivantes
 
 Vous pouvez vérifier votre connexion à la passerelle. Consultez [Vérifier la connexion à une passerelle](vpn-gateway-verify-connection-resource-manager.md).
-

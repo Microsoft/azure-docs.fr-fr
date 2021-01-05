@@ -6,15 +6,15 @@ ms.service: iot-hub
 services: iot-hub
 ms.devlang: csharp
 ms.topic: quickstart
-ms.custom: mvc
+ms.custom: mvc, devx-track-azurecli
 ms.date: 03/14/2019
 ms.author: robinsh
-ms.openlocfilehash: 97551ac63066f7064c16a001d9ce1f6bc31465ec
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: adf0f42b34a4bd7e5df2d2994408dbc175c5e01b
+ms.sourcegitcommit: 0a9df8ec14ab332d939b49f7b72dea217c8b3e1e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "80586586"
+ms.lasthandoff: 11/18/2020
+ms.locfileid: "94831920"
 ---
 # <a name="quickstart-enable-ssh-and-rdp-over-an-iot-hub-device-stream-by-using-a-c-proxy-application-preview"></a>Démarrage rapide : Activer SSH et RDP sur un flux d’appareil IoT Hub à l’aide d’une application de proxy C# (préversion)
 
@@ -43,9 +43,7 @@ La figure suivante illustre la manière dont les applications de proxy locales d
 > [!NOTE]
 > Le trafic SSH envoyé sur un flux d’appareil est traité par tunnel par le biais d’un point de terminaison de streaming du hub IoT, plutôt que directement entre le service et l’appareil. Pour plus d’informations, consultez les [avantages de l’utilisation des flux d’appareil Iot Hub](iot-hub-device-streams-overview.md#benefits).
 
-[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
-
-Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
+[!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -58,28 +56,21 @@ Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://az
 
 * Les deux exemples d’applications que vous exécutez dans ce guide de démarrage rapide sont écrits en C#. Votre machine de développement doit disposer du SDK .NET Core 2.1.0 ou version ultérieure.
 
-  Vous pouvez télécharger le [Kit SDK .NET Core pour plusieurs plateformes sur .NET](https://www.microsoft.com/net/download/all).
+    Vous pouvez télécharger le [Kit SDK .NET Core pour plusieurs plateformes sur .NET](https://www.microsoft.com/net/download/all).
 
-* Vérifiez la version actuelle de C# sur votre machine de développement à l’aide de la commande suivante :
+    Vérifiez la version actuelle de C# sur votre machine de développement à l’aide de la commande suivante :
 
     ```
     dotnet --version
     ```
 
-* Exécutez la commande suivante afin d’ajouter l’extension Azure IoT pour Azure CLI à votre instance Cloud Shell. L’extension IoT ajoute des commandes IoT Hub, IoT Edge et IoT Device Provisioning Service (DPS) à Azure CLI.
-
-   ```azurecli-interactive
-   az extension add --name azure-iot
-   ```
-
-   ```azurecli-interactive
-   az extension add --name azure-iot
-   ```
-[!INCLUDE [iot-hub-cli-version-info](../../includes/iot-hub-cli-version-info.md)]
-
 * [Téléchargez les exemples C# Azure IoT](https://github.com/Azure-Samples/azure-iot-samples-csharp/archive/master.zip) et extrayez l’archive ZIP.
 
 * Un compte d’utilisateur valide et des informations d’identification sur l’appareil (Windows ou Linux) utilisé pour authentifier l’utilisateur.
+
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../includes/azure-cli-prepare-your-environment-no-header.md)]
+
+[!INCLUDE [iot-hub-cli-version-info](../../includes/iot-hub-cli-version-info.md)]
 
 ## <a name="create-an-iot-hub"></a>Créer un hub IoT
 

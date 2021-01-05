@@ -10,12 +10,12 @@ ms.service: cloud-services
 ms.topic: article
 ms.date: 06/20/2016
 ms.author: timlt
-ms.openlocfilehash: 482fcf7d100a90d9527f510382c5dafb4f67adfa
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 67830f8c00d9f74f62883e0714ffe1c2bbbd6903
+ms.sourcegitcommit: a92fbc09b859941ed64128db6ff72b7a7bcec6ab
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "72439071"
+ms.lasthandoff: 10/15/2020
+ms.locfileid: "92075618"
 ---
 # <a name="managing-azure-cloud-services-using-azure-automation"></a>Gestion d'Azure Cloud Services à l'aide d'Azure Automation
 Ce guide vous présente le service Azure Automation et la manière de l'utiliser pour gérer plus simplement vos services de cloud computing Azure.
@@ -39,4 +39,4 @@ Voici quelques exemples qui utilisent Azure Automation pour gérer Azure Cloud S
 Maintenant que vous avez appris les bases d'Azure Automation et la manière de l'utiliser pour gérer les services de cloud computing Azure, cliquez sur ces liens pour en savoir plus sur Azure Automation.
 
 * [Vue d’ensemble de Microsoft Azure Automation](../automation/automation-intro.md)
-* [Mon premier Runbook](../automation/automation-first-runbook-graphical.md)
+* [Mon premier Runbook](../automation/learn/automation-tutorial-runbook-graphical.md)

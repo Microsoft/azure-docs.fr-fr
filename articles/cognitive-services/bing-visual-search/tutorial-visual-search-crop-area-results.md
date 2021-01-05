@@ -10,14 +10,20 @@ ms.subservice: bing-visual-search
 ms.topic: tutorial
 ms.date: 03/31/2019
 ms.author: aahi
-ms.openlocfilehash: 4778a4089c7374c1ac6a9312064dcfb1e0325b63
-ms.sourcegitcommit: efefce53f1b75e5d90e27d3fd3719e146983a780
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 0ad73d7086a2066517c24a8b10a7f54503535942
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/01/2020
-ms.locfileid: "80478500"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96490293"
 ---
 # <a name="tutorial-crop-an-image-with-the-bing-visual-search-sdk-for-c"></a>Tutoriel : Rogner une image avec le SDK Recherche visuelle Bing pour C#
+
+> [!WARNING]
+> Les API Recherche Bing passent de Cognitive Services aux services de recherche Bing. À compter du **30 octobre 2020**, toutes les nouvelles instances de Recherche Bing doivent être provisionnées en suivant le processus documenté [ici](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Les API Recherche Bing provisionnées à l’aide de Cognitive Services seront prises en charge les trois prochaines années ou jusqu’à la fin de votre Contrat Entreprise, selon la première éventualité.
+> Pour obtenir des instructions de migration, consultez [Services de recherche Bing](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
 
 Le SDK Recherche visuelle Bing vous permet de rogner une image avant de rechercher des images en ligne similaires. Cette application rogne une seule personne à partir d’une image contenant plusieurs personnes, puis retourne les résultats de recherche contenant des images similaires disponibles en ligne.
 
@@ -81,8 +87,8 @@ Console.WriteLine("\r\n" + "ActionType: " + i.ActionType + " -> WebSearchUrl: " 
 
 L’application complète retourne :
 
-|ActionType  |URL  | |
-|---------|---------|---------|
+|ActionType  |URL  |
+|---------|---------|
 |PagesIncluding WebSearchURL     |         |
 |MoreSizes WebSearchURL     |         |  
 |VisualSearch WebSearchURL    |         |
@@ -113,4 +119,4 @@ L’obtention des URL des images réelles nécessite un cast qui lit un `ActionT
 > [Créer une application web monopage de recherche visuelle](tutorial-bing-visual-search-single-page-app.md)
 
 ## <a name="see-also"></a>Voir aussi
-> [Qu’est-ce que l’API Recherche visuelle Bing ?](https://docs.microsoft.com/azure/cognitive-services/bing-visual-search/overview)
+> [Qu’est-ce que l’API Recherche visuelle Bing ?](./overview.md)

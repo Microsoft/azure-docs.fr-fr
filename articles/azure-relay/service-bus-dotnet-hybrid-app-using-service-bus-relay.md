@@ -1,25 +1,15 @@
 ---
 title: Application hybride Azure Windows Communication Foundation (WCF) Relay locale/cloud (.NET) | Microsoft Docs
 description: Découvrir comment exposer un service WCF local sur une application web dans le cloud à l’aide d’Azure Relay
-services: service-bus-relay
-documentationcenter: .net
-author: spelluru
-manager: timlt
-editor: ''
-ms.assetid: 9ed02f7c-ebfb-4f39-9c97-b7dc15bcb4c1
-ms.service: service-bus-relay
-ms.workload: tbd
-ms.tgt_pltfrm: na
-ms.devlang: dotnet
 ms.topic: conceptual
-ms.date: 09/12/2019
-ms.author: spelluru
-ms.openlocfilehash: b86d535e4cbc275b3ee777d7c70146f7711c502c
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.custom: devx-track-csharp
+ms.date: 06/23/2020
+ms.openlocfilehash: 22b582634b623b39545eca225c8df0130606c2bb
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83204512"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90983892"
 ---
 # <a name="expose-an-on-premises-wcf-service-to-a-web-application-in-the-cloud-by-using-azure-relay"></a>Exposer un service WCF local sur une application web dans le cloud à l’aide d’Azure Relay
 
@@ -255,7 +245,7 @@ Dans cette section, vous générez une application ASP.NET simple qui affiche de
     ![Spécifier l’authentification][18]
 
 1. De retour dans **Créer une application web ASP.NET**, sélectionnez **Créer** pour créer l’application MVC.
-1. Configurez les ressources Azure d’une nouvelle application web. Suivez les étapes décrites dans [Publier votre application web](../app-service/app-service-web-get-started-dotnet-framework.md#launch-the-publish-wizard). Ensuite, revenez à ce didacticiel et passez à l’étape suivante.
+1. Configurez les ressources Azure d’une nouvelle application web. Suivez les étapes décrites dans [Publier votre application web](../app-service/quickstart-dotnet-framework.md#launch-the-publish-wizard). Ensuite, revenez à ce didacticiel et passez à l’étape suivante.
 1. Dans l’**Explorateur de solutions**, cliquez avec le bouton droit sur **Modèles** et sélectionnez **Ajouter** > **une classe**.
 1. Nommez la classe *Product.cs*, puis sélectionnez **Ajouter**.
 
@@ -354,7 +344,7 @@ Exécutez l'application afin de vérifier qu'elle fonctionne.
 
 Votre application doit s’exécuter dans un navigateur :
 
-![Application web][21]
+![Capture d’écran montrant un exemple de l’application s’exécutant dans un navigateur avec l’URL en surbrillance.][21]
 
 ## <a name="put-the-pieces-together"></a>Assemblage des éléments
 

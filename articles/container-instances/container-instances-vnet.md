@@ -2,14 +2,14 @@
 title: Déployer un groupe de conteneurs sur un réseau virtuel Azure
 description: Découvrez comment déployer un groupe de conteneurs sur un réseau virtuel Azure nouveau ou existant en utilisant l’interface de ligne de commande Azure.
 ms.topic: article
-ms.date: 04/29/2020
-ms.author: danlep
-ms.openlocfilehash: 7e54690efc7955eaaa88ca87a6f7a086dd3e19a4
-ms.sourcegitcommit: b9d4b8ace55818fcb8e3aa58d193c03c7f6aa4f1
+ms.date: 07/02/2020
+ms.custom: devx-track-js, devx-track-azurecli
+ms.openlocfilehash: 02cf514e6c19387e3a9e2f1c78b65f346fff764e
+ms.sourcegitcommit: 8c7f47cc301ca07e7901d95b5fb81f08e6577550
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82583639"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92746894"
 ---
 # <a name="deploy-container-instances-into-an-azure-virtual-network"></a>Déployer des instance de conteneur dans un réseau virtuel Azure
 
@@ -40,7 +40,7 @@ Une fois que vous avez déployé votre premier groupe de conteneurs avec cette m
 
 ### <a name="example"></a> Exemple
 
-La commande [az container create][az-container-create] suivante spécifie les paramètres pour un nouveau réseau virtuel et un nouveau sous-réseau. Fournissez le nom d’un groupe de ressources créé dans une région où des déploiements de groupe de conteneurs dans un réseau virtuel sont [disponibles](container-instances-region-availability.md#availability---virtual-network-deployment). Cette commande déploie le conteneur Microsoft [aci-helloworld][aci-helloworld] public qui exécute un petit serveur web Node.js qui gère une page web statique. Dans la section suivante, vous allez déployer un deuxième groupe de conteneurs dans le même sous-réseau et tester la communication entre les deux instances de conteneur.
+La commande [az container create][az-container-create] suivante spécifie les paramètres pour un nouveau réseau virtuel et un nouveau sous-réseau. Fournissez le nom d’un groupe de ressources créé dans une région où des déploiements de groupe de conteneurs dans un réseau virtuel sont [disponibles](container-instances-region-availability.md). Cette commande déploie le conteneur Microsoft [aci-helloworld][aci-helloworld] public qui exécute un petit serveur web Node.js qui gère une page web statique. Dans la section suivante, vous allez déployer un deuxième groupe de conteneurs dans le même sous-réseau et tester la communication entre les deux instances de conteneur.
 
 ```azurecli
 az container create \
@@ -83,7 +83,7 @@ La sortie affiche l’adresse IP du groupe de conteneurs dans le sous-réseau pr
 10.0.0.4
 ```
 
-Maintenant, attribuez à `CONTAINER_GROUP_IP` l’adresse IP que vous avez récupérée avec la commande `az container show` et exécutez la commande suivante `az container create`. Ce deuxième conteneur, *commchecker*, utilise une image Linux Alpine et exécute `wget` sur l’adresse IP du sous-réseau privé du premier groupe de conteneurs.
+Maintenant, attribuez à `CONTAINER_GROUP_IP` l’adresse IP que vous avez récupérée avec la commande `az container show` et exécutez la commande suivante `az container create`. Ce deuxième conteneur, *commchecker* , utilise une image Linux Alpine et exécute `wget` sur l’adresse IP du sous-réseau privé du premier groupe de conteneurs.
 
 ```azurecli
 CONTAINER_GROUP_IP=<container-group-IP-address>
@@ -139,10 +139,10 @@ Exemple de sortie :
 /subscriptions/<Subscription ID>/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkProfiles/aci-network-profile-aci-vnet-aci-subnet
 ```
 
-Une fois que vous avez l’ID du profil réseau, copiez le fichier YAML suivant dans un nouveau fichier nommé *vnet-deploy-aci.yaml*. Sous `networkProfile`, remplacez la valeur `id` par l’ID que vous venez de récupérer, puis enregistrez le fichier. Ce fichier YAML crée un groupe de conteneurs nommé *appcontaineryaml* dans votre réseau virtuel.
+Une fois que vous avez l’ID du profil réseau, copiez le fichier YAML suivant dans un nouveau fichier nommé *vnet-deploy-aci.yaml* . Sous `networkProfile`, remplacez la valeur `id` par l’ID que vous venez de récupérer, puis enregistrez le fichier. Ce fichier YAML crée un groupe de conteneurs nommé *appcontaineryaml* dans votre réseau virtuel.
 
 ```YAML
-apiVersion: '2018-10-01'
+apiVersion: '2019-12-01'
 location: westus
 name: appcontaineryaml
 properties:
@@ -204,7 +204,7 @@ Cette fonctionnalité nécessite pour le moment plusieurs commandes supplémenta
 Avant d’exécuter le script, attribuez à la variable `RES_GROUP` le nom du groupe de ressources contenant le réseau virtuel et le sous-réseau à supprimer. Mettez à jour le nom du réseau virtuel si vous n’avez pas utilisé le nom `aci-vnet` suggéré précédemment. Le script est mis en forme pour l’interpréteur de commandes Bash. Si vous préférez un autre interpréteur de commandes, PowerShell ou l’invite de commande, vous devrez ajuster les variables et les accesseurs en conséquence.
 
 > [!WARNING]
-> Ce script supprime les ressources ! Le réseau virtuel et tous les sous-réseaux qu’il contient sont supprimés. Assurez-vous de n’avoir plus besoin *des* ressources du réseau virtuel, y compris des sous-réseaux qu’il contient, avant d’exécuter ce script. Une fois supprimées, **ces ressources sont irrécupérables**.
+> Ce script supprime les ressources ! Le réseau virtuel et tous les sous-réseaux qu’il contient sont supprimés. Assurez-vous de n’avoir plus besoin *des* ressources du réseau virtuel, y compris des sous-réseaux qu’il contient, avant d’exécuter ce script. Une fois supprimées, **ces ressources sont irrécupérables** .
 
 ```azurecli
 # Replace <my-resource-group> with the name of your resource group

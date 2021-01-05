@@ -5,14 +5,14 @@ services: application-gateway
 author: vhorne
 ms.service: application-gateway
 ms.topic: conceptual
-ms.date: 04/07/2020
+ms.date: 09/25/2020
 ms.author: victorh
-ms.openlocfilehash: f021eed959ef88a1ef3671e1d0ace8080710c92a
-ms.sourcegitcommit: 98e79b359c4c6df2d8f9a47e0dbe93f3158be629
+ms.openlocfilehash: ba9f42bc932a37e1052f17db2ae00413e0769d59
+ms.sourcegitcommit: d95cab0514dd0956c13b9d64d98fdae2bc3569a0
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "80810236"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91355735"
 ---
 # <a name="azure-application-gateway-features"></a>Fonctionnalités Azure Application Gateway
 
@@ -35,7 +35,7 @@ Application Gateway propose les fonctionnalités suivantes :
 - [Trafic Websocket et HTTP/2](#websocket-and-http2-traffic)
 - [Drainage des connexion](#connection-draining)
 - [Pages d’erreur personnalisées](#custom-error-pages)
-- [Réécriture des en-têtes HTTP](#rewrite-http-headers)
+- [Réécrire les en-têtes et les URL HTTP](#rewrite-http-headers-and-url)
 - [Dimensionnement](#sizing)
 
 ## <a name="secure-sockets-layer-ssltls-termination"></a>Terminaison Secure Sockets Layer (SSL/TLS)
@@ -83,13 +83,13 @@ Pour plus d’informations, consultez [Présentation du routage basé sur le che
 
 ## <a name="multiple-site-hosting"></a>Hébergement de plusieurs sites
 
-L’hébergement de plusieurs sites vous permet de configurer plusieurs sites web sur la même instance de passerelle d’application. Cette fonctionnalité vous permet de configurer une topologie plus efficace pour vos déploiements en ajoutant jusqu’à 100 sites web à une instance d’Application Gateway (pour des performances optimales). Chaque site web peut être dirigé vers son propre pool. Par exemple, la passerelle d’application peut traiter le trafic pour `contoso.com` et `fabrikam.com` à partir de deux pools de serveurs appelés ContosoServerPool et FabrikamServerPool.
+Avec Application Gateway, vous pouvez configurer le routage en fonction d’un nom d’hôte ou de domaine pour plusieurs applications web sur la même passerelle d’application. Vous pouvez ainsi configurer une topologie plus efficace pour vos déploiements en ajoutant plus de 100 sites web à une même passerelle d’application. Chaque site web peut être dirigé vers son propre pool principal. Par exemple, trois domaines (contoso.com, fabrikam.com et adatum.com) pointent vers l’adresse IP de la passerelle d’application. Vous créez trois écouteurs multisites, et vous configurez les paramètres de port et de protocole de chaque écouteur. 
 
-Les requêtes adressées à `http://contoso.com` sont acheminées vers ContosoServerPool, tandis que les requêtes adressées à `http://fabrikam.com` sont acheminées vers FabrikamServerPool.
+Les requêtes adressées à `http://contoso.com` sont acheminées vers ContosoServerPool, les requêtes adressées à `http://fabrikam.com` sont acheminées vers FabrikamServerPool, et ainsi de suite.
 
-De même, deux sous-domaines du même domaine parent peuvent également être hébergés sur le même déploiement de passerelle d’application. Par exemple, les sous-domaines `http://blog.contoso.com` et `http://app.contoso.com` peuvent être hébergés sur un déploiement de passerelle d’application unique.
+De même, deux sous-domaines du même domaine parent peuvent également être hébergés sur le même déploiement de passerelle d’application. Par exemple, les sous-domaines `http://blog.contoso.com` et `http://app.contoso.com` peuvent être hébergés sur un déploiement de passerelle d’application unique. Pour plus d’informations, consultez [Hébergement de plusieurs sites Application Gateway](multiple-site-overview.md).
 
-Pour plus d’informations, consultez [Hébergement de plusieurs sites Application Gateway](multiple-site-overview.md).
+Vous pouvez également définir des noms d’hôtes avec caractères génériques dans un écouteur multisite et jusqu’à cinq noms d’hôtes par écouteur. Pour plus d’informations, consultez [Noms d’hôtes comportant des caractères génériques dans l’écouteur (préversion)](multiple-site-overview.md#wildcard-host-names-in-listener-preview).
 
 ## <a name="redirection"></a>Redirection
 
@@ -117,13 +117,13 @@ Application Gateway prend en charge les protocoles WebSocket et HTTP/2 de maniè
 
 Les protocoles WebSocket et HTTP/2 permettent une communication en duplex intégral entre le serveur et le client via une connexion TCP de longue durée. Cela assure une communication plus interactive entre le serveur web et le client, qui peut être bidirectionnelle sans nécessiter d’interrogations, comme c’est le cas pour les implémentations basées sur le protocole HTTP. Ces protocoles engendrent une faible surcharge, contrairement à HTTP, et peuvent réutiliser la même connexion TCP pour plusieurs requêtes/réponses, ce qui entraîne une utilisation plus efficace des ressources. Ces protocoles sont conçus pour fonctionner sur les ports HTTP traditionnels (80 et 443).
 
-Pour plus d’informations, consultez [Prise en charge de WebSocket](application-gateway-websocket.md) et [Prise en charge de HTTP/2](configuration-overview.md#http2-support).
+Pour plus d’informations, consultez [Prise en charge de WebSocket](application-gateway-websocket.md) et [Prise en charge de HTTP/2](configuration-listeners.md#http2-support).
 
 ## <a name="connection-draining"></a>Vidage des connexions
 
 Le vidage des connexions permet d’éliminer délicatement les membres du pool principal lors des mises à jour planifiées de maintenance. Ce paramètre est activé via le paramètre du http principal et peut s’appliquer à tous les membres d’un pool principal pendant la création de règles. Une fois activée, Application Gateway s’assure que toutes les instances de désinscription d’un pool back-end ne reçoivent aucune nouvelle requête tout en permettant aux requêtes existantes de se terminer dans un délai défini. Cela s’applique à la fois aux instances back-end explicitement supprimées du pool back-end par une modification de configuration utilisateur et aux instances backend signalées comme n’étant pas saines d’après les résultats des sondes d’intégrité. La seule exception concerne les demandes liées à la désinscription des instances, qui ont été désinscrites explicitement, en raison d’une affinité de session gérée par la passerelle et qui continuent d’être transmises par proxy aux instances de désinscription.
 
-Pour plus d’informations, consultez [Présentation de la configuration d’Application Gateway](configuration-overview.md#connection-draining).
+Pour plus d’informations, consultez [Présentation de la configuration d’Application Gateway](configuration-http-settings.md#connection-draining).
 
 ## <a name="custom-error-pages"></a>Pages d’erreur personnalisées
 
@@ -131,7 +131,7 @@ Application Gateway vous permet de créer des pages d’erreur personnalisées a
 
 Pour plus d’informations, voir [Erreurs personnalisées](custom-error.md).
 
-## <a name="rewrite-http-headers"></a>Réécrire les en-têtes HTTP
+## <a name="rewrite-http-headers-and-url"></a>Réécrire les en-têtes et les URL HTTP
 
 Les en-têtes HTTP permettent au client et au serveur de passer des informations supplémentaires dans la requête ou la réponse. La réécriture de ces en-têtes HTTP vous permet d’accomplir plusieurs tâches importantes, comme :
 
@@ -139,15 +139,17 @@ Les en-têtes HTTP permettent au client et au serveur de passer des information
 - La suppression de champs d’en-tête de réponse qui peuvent comprendre des informations sensibles
 - La suppression des informations de port dans les en-têtes X-Forwarded-For
 
-Application Gateway permet d’ajouter, de supprimer et de mettre à jour les en-têtes de requête et de réponse HTTP pendant le déplacement des paquets de requête et de réponse entre le pool client et le pool back-end. Il permet également d’ajouter des conditions de sorte que les en-têtes spécifiés soient réécrits uniquement lorsque certaines conditions sont remplies.
+Application Gateway et la référence SKU WAF v2permettent d’ajouter, de supprimer et de mettre à jour les en-têtes de requête et de réponse HTTP pendant le déplacement des paquets de requête et de réponse entre les pools de clients et de back-ends. Vous pouvez également réécrire des URL, des paramètres de chaîne de requête et un nom d’hôte. Avec la réécriture d’URL et le routage d’URL basé sur le chemin, vous pouvez choisir de router les requêtes vers l’un des pools de back-ends sur la base du chemin d’origine ou du chemin réécrit, à l’aide de l’option de réévaluation du mappage de chemin. 
 
-Pour plus d’informations, consultez [Réécrire les en-têtes HTTP](rewrite-http-headers.md).
+Cela vous permet également d’ajouter des conditions afin que les en-têtes ou URL spécifiés soient réécrits uniquement lorsque certaines conditions sont remplies. Ces conditions sont basées sur les informations de requête et de réponse.
+
+Pour plus d’informations, consultez [Réécrire les en-têtes et les URL HTTP](rewrite-http-headers-url.md).
 
 ## <a name="sizing"></a>Dimensionnement
 
-Application Gateway Standard_v2 peut être configuré dans le cadre de déploiements avec mise à l’échelle automatique ou de taille fixe. Cette référence SKU n’offre pas de tailles d’instance différentes. Pour plus d’informations sur les performances et les tarifs de v2, consultez [Mise à l’échelle automatique de la référence SKU v2](application-gateway-autoscaling-zone-redundant.md#pricing).
+Application Gateway Standard_v2 peut être configuré dans le cadre de déploiements avec mise à l’échelle automatique ou de taille fixe. La référence SKU v2 ne propose pas différentes tailles d’instance. Pour plus d’informations sur les performances et les tarifs de v2, consultez [Mise à l’échelle automatique de V2](application-gateway-autoscaling-zone-redundant.md) et [Compréhension de la tarification](understanding-pricing.md).
 
-Application Gateway Standard est actuellement disponible en 3 tailles : **Petit**, **Moyen** et **Grand**. Les instances de petite taille sont conçues pour les scénarios de développement et de test.
+Application Gateway Standard (v1) est disponible en trois tailles : **Petit**, **Moyen** et **Grand**. Les instances de petite taille sont conçues pour les scénarios de développement et de test.
 
 Pour obtenir la liste complète des limites de la passerelle Application Gateway, consultez la page [Application Gateway limits](../azure-resource-manager/management/azure-subscription-service-limits.md?toc=%2fazure%2fapplication-gateway%2ftoc.json#application-gateway-limits) (Limites de la passerelle Application Gateway).
 

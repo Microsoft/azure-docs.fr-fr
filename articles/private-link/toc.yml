@@ -1,4 +1,4 @@
-- name: Documentation sur Liaison privée Azure
+- name: Documentation Private Link
   href: index.yml
 - name: Vue d’ensemble
   items:
@@ -12,12 +12,35 @@
       href: create-private-endpoint-powershell.md
     - name: Créer un point de terminaison privé - Azure CLI
       href: create-private-endpoint-cli.md
+    - name: Créer un point de terminaison privé - Modèle ARM
+      displayName: Resource Manager
+      href: create-private-endpoint-template.md
     - name: Créer un service Private Link - Portail
       href: create-private-link-service-portal.md
     - name: Créer un service Private Link - PowerShell
       href: create-private-link-service-powershell.md
     - name: Créer un service Private Link - Azure CLI
       href: create-private-link-service-cli.md
+    - name: Créer un service Private Link - Modèle ARM
+      displayName: Resource Manager
+      href: create-private-link-service-template.md
+  expanded: true
+- name: Tutoriels
+  items:
+    - name: Se connecter à un compte de stockage
+      href: tutorial-private-endpoint-storage-portal.md
+    - name: Se connecter à un compte Cosmos DB
+      href: tutorial-private-endpoint-cosmosdb-portal.md
+    - name: Se connecter à une application web
+      href: tutorial-private-endpoint-webapp-portal.md
+    - name: SQL
+      items:
+        - name: Se connecter à un serveur SQL - Portail
+          href: tutorial-private-endpoint-sql-portal.md
+        - name: Se connecter à un serveur SQL - PowerShell
+          href: tutorial-private-endpoint-sql-powershell.md
+        - name: Se connecter à un serveur SQL - Azure CLI
+          href: tutorial-private-endpoint-sql-cli.md
 - name: Concepts
   items:
     - name: Point de terminaison privé
@@ -26,20 +49,20 @@
       href: private-link-service-overview.md
     - name: Intégration DNS avec des points de terminaison privés
       href: private-endpoint-dns.md
+    - name: Sécurité
+      items:
+        - name: Base de référence de la sécurité
+          href: security-baseline.md
 - name: Procédures
   items:
-    - name: Se connecter en privé à un compte de stockage
-      href: create-private-endpoint-storage-portal.md
-    - name: Se connecter en privé à un compte Cosmos DB
-      href: create-private-endpoint-cosmosdb-portal.md
-    - name: Se connecter en privé à une application web
-      href: create-private-endpoint-webapp-portal.md
     - name: Désactiver les stratégies réseau pour un point de terminaison privé
       href: disable-private-endpoint-network-policy.md
     - name: Désactiver les stratégies réseau pour un service Liaison privée
       href: disable-private-link-service-network-policy.md
     - name: Gérer les points de terminaison privés
       href: manage-private-endpoint.md
+    - name: Inspecter le trafic avec le Pare-feu Azure
+      href: inspect-traffic-with-azure-firewall.md
     - name: Dépanner
       items:
         - name: Résoudre les problèmes de connectivité aux points de terminaison privés
@@ -57,7 +80,7 @@
     - name: Java
       href: /java/api/
     - name: Node.js
-      href: 'https://docs.microsoft.com/javascript/azure#azure-sdk'
+      href: /javascript/azure#azure-sdk
     - name: Python
       href: 'https://azure.microsoft.com/develop/python/'
     - name: REST
@@ -75,7 +98,7 @@
     - name: Blog sur la mise en réseau
       href: 'https://azure.microsoft.com/blog/topics/networking'
     - name: Page de questions Microsoft Q&A sur les réseaux
-      href: 'https://docs.microsoft.com/answers/topics/azure-virtual-network.html'
+      href: /answers/topics/azure-virtual-network.html
     - name: Commentaires sur les réseaux
       href: 'https://feedback.azure.com/forums/217313-networking?category_id=77469'
     - name: Tarifs

@@ -3,7 +3,7 @@ title: Gérer l’accès des utilisateurs avec les révisions d’accès - Azure
 description: Découvrez comment gérer les accès utilisateurs en tant qu’appartenance à un groupe ou en tant qu’affectation à une application avec les révisions d’accès Azure Active Directory
 services: active-directory
 documentationcenter: ''
-author: msaburnley
+author: ajburnle
 manager: daveba
 editor: markwahl-msft
 ms.service: active-directory
@@ -16,12 +16,12 @@ ms.date: 06/21/2018
 ms.author: ajburnle
 ms.reviewer: mwahl
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 2c307b349144974a4d38f937feeebb98f369d047
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: cc12b4cb7e97a0808405baebc64ca83cdb742bf1
+ms.sourcegitcommit: e2dc549424fb2c10fcbb92b499b960677d67a8dd
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75932416"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94696946"
 ---
 # <a name="manage-user-access-with-azure-ad-access-reviews"></a>Gérer les accès des utilisateurs avec les révisions d’accès Azure AD
 
@@ -44,7 +44,7 @@ Vous pouvez avoir un ou plusieurs utilisateurs comme réviseurs dans une révisi
 
 2. Décidez si vous souhaitez que chaque utilisateur révise son propre accès, ou si vous voulez qu’un ou plusieurs utilisateurs révisent l’accès de tout le monde.
 
-3. En tant qu’administrateur général ou administrateur de compte d’utilisateur, accédez à la [page Gouvernance des identités](https://portal.azure.com/#blade/Microsoft_AAD_ERM/DashboardBlade/).
+3. Avec l’un des rôles suivants : administrateur général, administrateur d’utilisateurs ou (préversion) propriétaire du groupe de sécurité M365 ou AAD du groupe à réviser, accédez à la [page Gouvernance des identités](https://portal.azure.com/#blade/Microsoft_AAD_ERM/DashboardBlade/).
 
 4. Créer la révision d’accès. Pour plus d’informations, consultez [Créer une révision d’accès de groupes ou d’applications](create-access-review.md).
 

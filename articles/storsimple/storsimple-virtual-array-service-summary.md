@@ -9,17 +9,17 @@ editor: ''
 ms.assetid: 8a2b9a84-b0e6-48b9-b366-d16f004241a5
 ms.service: storsimple
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 11/21/2016
 ms.author: manuaery
-ms.openlocfilehash: 9c05bddaeb3c34400db1ec75c624ef00a85d9444
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 31220a8f8b012e08d46195b60a26be9cfc261be5
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "64720710"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85514518"
 ---
 # <a name="use-the-service-summary-blade-for-storsimple-device-manager-connected-to-storsimple-virtual-array"></a>Utiliser le panneau de synthèse des services pour StorSimple Device Manager connecté à StorSimple Virtual Array
 ## <a name="overview"></a>Vue d’ensemble

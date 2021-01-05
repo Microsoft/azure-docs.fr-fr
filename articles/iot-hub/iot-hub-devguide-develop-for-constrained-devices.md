@@ -10,12 +10,12 @@ ms.author: robinsh
 ms.custom:
 - amqp
 - mqtt
-ms.openlocfilehash: 9010ff582f05e81e17e280e20f180ceccf0e746f
-ms.sourcegitcommit: ffc6e4f37233a82fcb14deca0c47f67a7d79ce5c
+ms.openlocfilehash: 5a43eb2537ebc09ffcb524a4426d7a8c9bec560b
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81733202"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96500000"
 ---
 # <a name="develop-for-constrained-devices-using-azure-iot-c-sdk"></a>Développer pour des appareils limités avec le kit SDK Azure IoT C
 
@@ -30,7 +30,10 @@ Le SDK C est disponible sous forme de package depuis apt-get, NuGet et MBED. Pou
 
 Générez le kit SDK C pour les appareils limités.
 
-### <a name="prerequisites"></a>Conditions préalables requises
+> [!NOTE]
+> Le kit SDK Embedded C est une alternative pour les appareils avec contraintes qui prend en charge l’approche BYON (Bring Your Own Network). Les développeurs IoT ont la liberté d’apporter le client MQTT, le protocole TLS et le socket de leur choix pour créer une solution d’appareil. [En savoir plus sur le kit SDK Embedded C](https://github.com/Azure/azure-sdk-for-c/tree/master/sdk/docs/iot).
+
+### <a name="prerequisites"></a>Prérequis
 
 Suivez ce [guide de configuration du SDK C](https://github.com/Azure/azure-iot-sdk-c/blob/master/doc/devbox_setup.md) pour préparer votre environnement de développement à la génération du SDK C. Avant de passer à l’étape de génération avec cmake, vous pouvez appeler des indicateurs de cmake pour supprimer des fonctionnalités inutilisées.
 

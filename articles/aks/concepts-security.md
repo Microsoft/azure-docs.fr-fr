@@ -2,14 +2,16 @@
 title: 'Concepts : sécurité dans AKS (Azure Kubernetes Service)'
 description: Découvrez la sécurité dans AKS (Azure Kubernetes Service), notamment la communication entre les maîtres et les nœuds, les stratégies réseau et les secrets Kubernetes.
 services: container-service
+author: mlearned
 ms.topic: conceptual
-ms.date: 03/01/2019
-ms.openlocfilehash: 1960d18396f47b3dbdd51a50ec4241be5ebe4ff1
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.date: 07/01/2020
+ms.author: mlearned
+ms.openlocfilehash: 1adf8370f55a0f6131eb4140c58fa4618e08127b
+ms.sourcegitcommit: c157b830430f9937a7fa7a3a6666dcb66caa338b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82206627"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94686019"
 ---
 # <a name="security-concepts-for-applications-and-clusters-in-azure-kubernetes-service-aks"></a>Concepts de sécurité pour les applications et les clusters dans AKS (Azure Kubernetes Service)
 
@@ -17,17 +19,24 @@ Pour protéger vos données clientes quand vous exécutez des charges de travail
 
 Cet article présente les concepts fondamentaux qui sécurisent vos applications dans AKS :
 
-- [Sécurité des composants maîtres](#master-security)
-- [Sécurité des nœuds](#node-security)
-- [Mise à niveau des clusters](#cluster-upgrades)
-- [Sécurité du réseau](#network-security)
-- [Secrets Kubernetes](#kubernetes-secrets)
+- [Concepts de sécurité pour les applications et les clusters dans AKS (Azure Kubernetes Service)](#security-concepts-for-applications-and-clusters-in-azure-kubernetes-service-aks)
+  - [Sécurité du maître](#master-security)
+  - [Sécurité des nœuds](#node-security)
+    - [Isolation du calcul](#compute-isolation)
+  - [Mise à niveau des clusters](#cluster-upgrades)
+    - [Isolation et drainage](#cordon-and-drain)
+  - [Sécurité du réseau](#network-security)
+    - [Groupes de sécurité réseau Azure](#azure-network-security-groups)
+  - [Secrets Kubernetes](#kubernetes-secrets)
+  - [Étapes suivantes](#next-steps)
 
 ## <a name="master-security"></a>Sécurité du maître
 
 Dans AKS, les composants maîtres Kubernetes font partie du service managé fourni par Microsoft. Chaque cluster AKS a son propre maître Kubernetes dédié monolocataire pour fournir le serveur d’API, le planificateur, etc. Ce maître est managé et maintenu par Microsoft.
 
-Par défaut, le serveur d’API Kubernetes utilise une adresse IP publique avec un nom de domaine complet (FQDN). Vous pouvez contrôler l’accès au serveur d’API avec des contrôles d’accès en fonction du rôle Kubernetes et Azure Active Directory. Pour plus d’informations, consultez [Intégration d’Azure AD à AKS][aks-aad].
+Par défaut, le serveur d’API Kubernetes utilise une adresse IP publique avec un nom de domaine complet (FQDN). Vous pouvez limiter l’accès au point de terminaison du serveur d’API à l’aide de [plages d’adresses IP autorisées][authorized-ip-ranges]. Vous pouvez également créer un [cluster entièrement privé][private-clusters] pour limiter l’accès du serveur d’API à votre réseau virtuel.
+
+Vous pouvez contrôler l’accès au serveur d’API avec des contrôles d’accès en fonction du rôle Kubernetes (RBAC Kubernetes) et le RBAC Azure. Pour plus d’informations, consultez [Intégration d’Azure AD à AKS][aks-aad].
 
 ## <a name="node-security"></a>Sécurité des nœuds
 
@@ -41,7 +50,14 @@ Les nœuds sont déployés sur un sous-réseau de réseau virtuel privé, sans a
 
 Pour fournir le stockage, les nœuds utilisent Azure Disques managés. Pour la plupart des tailles de nœud de machine virtuelle, il s’agit de disques Premium assortis de disques SSD hautes performances. Les données stockées sur les disques managés sont automatiquement chiffrées au repos au sein de la plateforme Azure. Pour améliorer la redondance, ces disques sont également répliqués de manière sécurisée au sein du centre de données Azure.
 
-Les environnements Kubernetes, dans AKS ou ailleurs, ne sont pas encore totalement sûrs pour une utilisation multi-locataire hostile. Des fonctionnalités de sécurité supplémentaires, telles que les *stratégies de sécurité Pod*, et des contrôles d’accès en fonction du rôle (RBAC) plus détaillés pour les nœuds rendent les attaques plus difficiles. Mais lors de l’exécution de charges de travail multi-locataires hostiles, seul un hyperviseur garantira véritablement la sécurité. Le domaine de sécurité de Kubernetes devient le cluster, et non un nœud individuel. Pour ces types de charges de travail multi-locataires hostiles, vous devez utiliser des clusters physiquement isolés. Pour plus d’informations sur les méthodes d’isolation des charges de travail, consultez [Meilleures pratiques relatives à l’isolation de clusters dans AKS][cluster-isolation],
+Les environnements Kubernetes, dans AKS ou ailleurs, ne sont pas encore totalement sûrs pour une utilisation multi-locataire hostile. Des fonctionnalités de sécurité supplémentaires comme des *stratégies de sécurité Pod*, ainsi qu’un contrôle d’accès en fonction du rôle Kubernetes (RBAC Kubernetes) plus détaillé pour les nœuds rendent les attaques plus difficiles. Mais lors de l’exécution de charges de travail multi-locataires hostiles, seul un hyperviseur garantira véritablement la sécurité. Le domaine de sécurité de Kubernetes devient le cluster, et non un nœud individuel. Pour ces types de charges de travail multi-locataires hostiles, vous devez utiliser des clusters physiquement isolés. Pour plus d’informations sur les méthodes d’isolation des charges de travail, consultez [Meilleures pratiques relatives à l’isolation de clusters dans AKS][cluster-isolation].
+
+### <a name="compute-isolation"></a>Isolation du calcul
+
+ Pour des raisons de conformité ou d’exigences réglementaires, certaines charges de travail peuvent nécessiter un niveau d’isolation élevé par rapport aux autres charges de travail client. Pour ces charges de travail, Azure fournit des [machines virtuelles isolées](../virtual-machines/isolation.md), qui peuvent être utilisées en tant que nœuds d’agent dans un cluster AKS. Ces machines virtuelles sont isolées dans un type de matériel spécifique et dédiées à un client unique. 
+
+ Pour utiliser ces machines virtuelles isolées avec un cluster AKS, sélectionnez l’une des tailles de machines virtuelles isolées répertoriées [ici](../virtual-machines/isolation.md) comme **taille de nœud** lors de la création d’un cluster AKS ou de l’ajout d’un pool de nœuds.
+
 
 ## <a name="cluster-upgrades"></a>Mise à niveau des clusters
 
@@ -66,11 +82,19 @@ Pour la connectivité et la sécurité avec les réseaux locaux, vous pouvez dé
 
 Pour filtrer le flux du trafic dans les réseaux virtuels, Azure utilise des règles de groupe de sécurité réseau. Ces règles définissent les plages d’adresses IP source et de destination, les ports et les protocoles qui se voient autoriser ou refuser l’accès aux ressources. Des règles par défaut sont créées pour autoriser le trafic TLS vers le serveur d’API Kubernetes. Quand vous créez des services avec des équilibreurs de charge, des mappages de ports ou des routes d’entrée, AKS modifie automatiquement le groupe de sécurité réseau afin que le trafic transite de manière appropriée.
 
+Dans les cas où vous fournissez votre propre sous-réseau pour votre cluster AKS et que vous souhaitez modifier le flux du trafic, ne modifiez pas le groupe de sécurité réseau de niveau sous-réseau géré par AKS. Vous pouvez créer des groupes de sécurité réseau de niveau sous-réseau supplémentaires pour modifier le flux du trafic, à condition qu’ils n’interfèrent pas avec le trafic nécessaire à la gestion du cluster, par exemple l’accès à l’équilibreur de charge, la communication avec le plan de contrôle et la [sortie][aks-limit-egress-traffic].
+
+### <a name="kubernetes-network-policy"></a>Stratégie de réseau Kubernetes
+
+Pour limiter le trafic réseau entre les pods de votre cluster, AKS propose la prise en charge de [stratégies de réseau Kubernetes][network-policy]. Les stratégies de réseau vous permettent de choisir d’autoriser ou de refuser des chemins d’accès réseau spécifiques au sein du cluster en fonction des espaces de noms et des sélecteurs d’étiquettes.
+
 ## <a name="kubernetes-secrets"></a>Secrets Kubernetes
 
 Un *secret* Kubernetes permet d’injecter des données sensibles dans des pods, telles que les clés ou les informations d’identification d’accès. Tout d’abord, vous créez un secret à l’aide de l’API Kubernetes. Quand vous définissez votre pod ou déploiement, un secret spécifique peut être demandé. Les secrets sont fournis uniquement aux nœuds dont un pod planifié a besoin d’un secret. En outre, le secret est stocké dans un volume *tmpfs*, au lieu d’être écrit sur le disque. Quand le dernier pod sur un nœud qui requiert un secret est supprimé, ce dernier est supprimé du volume tmpfs du nœud. Les secrets sont stockés dans un espace de noms donné et ne sont accessibles qu’aux pods se trouvant dans cet espace de noms.
 
 L’utilisation de secrets réduit la quantité d’informations sensibles définies dans le manifeste YAML des pods ou services. Au lieu de cela, vous demandez le secret stocké sur le serveur d’API Kubernetes dans le cadre de votre manifeste YAML. Ainsi, l’accès au secret n’est accordé qu’au pod concerné. Remarque : les fichiers manifeste secrets bruts contiennent les données secrètes au format base64 (consultez la [documentation officielle][secret-risks] pour plus d’informations). Ce fichier doit donc être considéré comme des informations sensibles et ne doit jamais être validé dans le contrôle de code source.
+
+Les secrets Kubernetes sont stockés dans etcd, un magasin de clés-valeurs distribué. Le magasin etcd est entièrement managé par AKS et [les données sont chiffrées au repos sur la plateforme Azure][encryption-atrest]. 
 
 ## <a name="next-steps"></a>Étapes suivantes
 
@@ -90,17 +114,22 @@ Pour plus d’informations sur les concepts fondamentaux de Kubernetes et d’AK
 [kured]: https://github.com/weaveworks/kured
 [kubernetes-network-policies]: https://kubernetes.io/docs/concepts/services-networking/network-policies/
 [secret-risks]: https://kubernetes.io/docs/concepts/configuration/secret/#risks
+[encryption-atrest]: ../security/fundamentals/encryption-atrest.md
 
 <!-- LINKS - Internal -->
 [aks-daemonsets]: concepts-clusters-workloads.md#daemonsets
 [aks-upgrade-cluster]: upgrade-cluster.md
-[aks-aad]: azure-ad-integration.md
+[aks-aad]: ./managed-aad.md
 [aks-concepts-clusters-workloads]: concepts-clusters-workloads.md
 [aks-concepts-identity]: concepts-identity.md
 [aks-concepts-scale]: concepts-scale.md
 [aks-concepts-storage]: concepts-storage.md
 [aks-concepts-network]: concepts-network.md
+[aks-limit-egress-traffic]: limit-egress-traffic.md
 [cluster-isolation]: operator-best-practices-cluster-isolation.md
 [operator-best-practices-cluster-security]: operator-best-practices-cluster-security.md
 [developer-best-practices-pod-security]:developer-best-practices-pod-security.md
 [nodepool-upgrade]: use-multiple-node-pools.md#upgrade-a-node-pool
+[authorized-ip-ranges]: api-server-authorized-ip-ranges.md
+[private-clusters]: private-clusters.md
+[network-policy]: use-network-policies.md

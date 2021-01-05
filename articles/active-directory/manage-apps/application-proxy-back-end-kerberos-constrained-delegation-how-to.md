@@ -2,26 +2,21 @@
 title: Détecter un problème de délégation Kerberos contrainte - Proxy d’application
 description: Résolution des problèmes de configuration de la délégation Kerberos contrainte pour le proxy d’application
 services: active-directory
-documentationcenter: ''
-author: msmimart
-manager: CelesteDG
-ms.assetid: ''
+author: kenwith
+manager: celestedg
 ms.service: active-directory
 ms.subservice: app-mgmt
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: conceptual
+ms.topic: troubleshooting
 ms.date: 04/23/2019
-ms.author: mimart
-ms.reviewer: asteen
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: c5e866f61409960447e17ecb50b035eabd53dc38
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: kenwith
+ms.reviewer: asteen, japere
+ms.openlocfilehash: c28e79c9a6f8c489a97d360c4fe142d431b5ab5d
+ms.sourcegitcommit: 8e7316bd4c4991de62ea485adca30065e5b86c67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74275693"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94656545"
 ---
 # <a name="troubleshoot-kerberos-constrained-delegation-configurations-for-application-proxy"></a>Résolution des problèmes de configuration de la délégation Kerberos contrainte pour le proxy d’application
 
@@ -56,7 +51,7 @@ Les connecteurs doivent être positionnés le plus près possible de leurs cible
 
 Quels sont les signes d'un problème de KCD ? Différents signes peuvent révéler un échec de l'authentification unique KCD. Les premiers signes d'un problème apparaissent dans le navigateur.
 
-![Exemple : Erreur de configuration incorrecte de KCD](./media/application-proxy-back-end-kerberos-constrained-delegation-how-to/graphic1.png)
+![Capture d’écran montrant un exemple d’erreur de configuration incorrecte de KCD, avec l’erreur « Incorrect Kerberos constrained delegation... » mise en évidence.](./media/application-proxy-back-end-kerberos-constrained-delegation-how-to/graphic1.png)
 
 ![Exemple : Échec dû à des autorisations manquantes](./media/application-proxy-back-end-kerberos-constrained-delegation-how-to/graphic2.png)
 
@@ -95,7 +90,7 @@ Les entrées correspondantes du journal des événements apparaissent en tant qu
 1. Utilisez un enregistrement **A** dans votre DNS interne pour l’adresse de l’application, et non un enregistrement **CName**.
 1. Vérifiez de nouveau que l’hôte de connecteur dispose des droits nécessaires à la délégation au SPN du compte cible désigné. Vérifiez de nouveau que l'option **Utiliser tout protocole d’authentification** est sélectionnée. Pour plus d’informations, consultez [l’article consacré à la configuration de l’authentification unique](application-proxy-configure-single-sign-on-with-kcd.md).
 1. Vérifiez qu’il n'existe qu'une seule instance du SPN dans Azure AD. Entrez `setspn -x` à partir d’une invite de commandes sur un hôte membre de domaine.
-1. Vérifiez qu’une stratégie de domaine limitant la [taille maximale des jetons Kerberos émis](https://blogs.technet.microsoft.com/askds/2012/09/12/maxtokensize-and-windows-8-and-windows-server-2012/) est appliquée. En cas de taille excessive, cette stratégie empêche le connecteur d'obtenir un jeton.
+1. Vérifiez qu’une stratégie de domaine limitant la [taille maximale des jetons Kerberos émis](/archive/blogs/askds/maxtokensize-and-windows-8-and-windows-server-2012) est appliquée. En cas de taille excessive, cette stratégie empêche le connecteur d'obtenir un jeton.
 
 Pour obtenir d’autres informations de base sur les problèmes rencontrés, l’étape suivante consiste à assurer un suivi réseau capturant les échanges entre l’hôte de connecteur et une délégation KDC du domaine. Pour plus d’informations, consultez le [document consacré à la résolution approfondie des problèmes](https://aka.ms/proxytshootpaper).
 
@@ -165,7 +160,7 @@ Si le problème persiste, contactez le support technique Microsoft. Émettez un 
 
 ## <a name="other-scenarios"></a>Autres scénarios
 
-- Le proxy d’application Azure demande un ticket Kerberos avant d’envoyer sa demande à une application. Certaines applications tierces n’aiment pas cette méthode d’authentification. Ces applications préfèrent les négociations plus conventionnelles. La première demande est anonyme, ce qui permet à l’application de répondre avec les types d’authentification qu’elle prend en charge via une erreur 401.
+- Le proxy d’application Azure demande un ticket Kerberos avant d’envoyer sa demande à une application. Certaines applications tierces n’aiment pas cette méthode d’authentification. Ces applications préfèrent les négociations plus conventionnelles. La première demande est anonyme, ce qui permet à l’application de répondre avec les types d’authentification qu’elle prend en charge via une erreur 401. Ce type de négociation Kerberos peut être activé à l’aide des étapes décrites dans ce document : [Délégation contrainte Kerberos pour l’authentification unique](application-proxy-configure-single-sign-on-with-kcd.md).
 - L'authentification à tronçons multiples est couramment utilisée dans les scénarios où une application est hiérarchisée, avec un serveur principal et un serveur frontal requérant tous les deux une authentification, comme SQL Server Reporting Services. Pour configurer le scénario à tronçons multiples, consultez l’article de support [La délégation Kerberos contrainte peut nécessiter une transition de protocole dans les scénarios à tronçons multiples](https://support.microsoft.com/help/2005838/kerberos-constrained-delegation-may-require-protocol-transition-in-mul).
 
 ## <a name="next-steps"></a>Étapes suivantes

@@ -4,28 +4,28 @@ description: Créer un compte Azure Cosmos avec des points de terminaison de ser
 author: markjbrown
 ms.author: mjbrown
 ms.service: cosmos-db
-ms.subservice: cosmosdb-sql
 ms.topic: sample
-ms.date: 9/25/2019
-ms.openlocfilehash: ff700739e2f8c6330ea151dbe489332acea3238c
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.date: 07/29/2020
+ms.openlocfilehash: 09dce9658dc602e68d87f7b989301f6934efbce9
+ms.sourcegitcommit: 04fb3a2b272d4bbc43de5b4dbceda9d4c9701310
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "71274906"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94563067"
 ---
 # <a name="create-an-azure-cosmos-account-with-virtual-network-service-endpoints-using-azure-cli"></a>Créer un compte Azure Cosmos avec des points de terminaison de service de réseau virtuel avec Azure CLI
+[!INCLUDE[appliesto-all-apis](../../../includes/appliesto-all-apis.md)]
 
-[!INCLUDE [cloud-shell-try-it.md](../../../../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../../../../includes/azure-cli-prepare-your-environment.md)]
 
-Si vous choisissez d’installer et d’utiliser localement l’interface de ligne de commande, cette rubrique vous impose d’exécuter Azure CLI version 2.0.73 ou ultérieure. Exécutez `az --version` pour trouver la version. Si vous devez installer ou mettre à niveau, voir [Installer Azure CLI](/cli/azure/install-azure-cli).
+- Cet article nécessite la version 2.9.1 ou ultérieure d’Azure CLI. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée.
 
 ## <a name="sample-script"></a>Exemple de script
 
-Cet exemple crée un réseau virtuel avec un sous-réseau front-end et back-end et active des points de terminaison de service pour `Microsoft.AzureCosmosDB`. Il récupère ensuite l’ID de ressource pour ce sous-réseau et l’applique au compte Azure Cosmos et active des points de terminaison de service pour le compte.
+Cet exemple crée un réseau virtuel avec un sous-réseau front-end et back-end et active des points de terminaison de service pour `Microsoft.AzureCosmosDB`. Il récupère ensuite l’ID de ressource pour ce sous-réseau, l’applique au compte Azure Cosmos et active des points de terminaison de service pour le compte.
 
 > [!NOTE]
-> Cet exemple illustre l’utilisation d’un compte d’API SQL (Core). Pour utiliser cet exemple pour d’autres API, appliquez les paramètres `enable-virtual-network` et `virtual-network-rules` du script ci-dessous au script propre à votre API.
+> Cet exemple illustre l’utilisation d’un compte d’API Core (SQL). Pour utiliser cet exemple pour d’autres API, appliquez les paramètres `enable-virtual-network` et `virtual-network-rules` du script ci-dessous au script propre à votre API.
 
 [!code-azurecli-interactive[main](../../../../../cli_scripts/cosmosdb/common/service-endpoints.sh "Create an Azure Cosmos account with service endpoints.")]
 

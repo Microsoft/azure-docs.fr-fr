@@ -7,12 +7,13 @@ ms.service: static-web-apps
 ms.topic: tutorial
 ms.date: 05/08/2020
 ms.author: aapowell
-ms.openlocfilehash: 14706b623c6973c09b499e4fcd905e3eed430898
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.custom: devx-track-js
+ms.openlocfilehash: e24a2a19eb39e2c6c7612631ad98f95cb4c5b9ef
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83593377"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91250162"
 ---
 # <a name="tutorial-publish-a-gatsby-site-to-azure-static-web-apps-preview"></a>Tutoriel : Publier un site Gatsby dans Azure Static Web Apps Preview
 
@@ -51,7 +52,7 @@ Créez une application Gatsby à l’aide de l’interface de ligne de commande 
    cd static-web-app
    ```
 
-1. Initialisez un référentiel git.
+1. Initialiser un dépôt Git
 
    ```bash
    git init
@@ -81,13 +82,13 @@ Vous devez avoir un référentiel sur GitHub pour créer une ressource Azure Sta
 
 Les étapes suivantes vous montrent comment créer une application Static Web Apps et la déployer dans un environnement de production.
 
-### <a name="create-the-application"></a>Créer l'application
+### <a name="create-the-application"></a>Création de l'application
 
-1. Accédez au [portail Azure](https://portal.azure.com).
+1. Accéder au [portail Azure](https://portal.azure.com)
 1. Cliquez sur **Create a Resource** (Créer une ressource).
 1. Recherchez **Static Web Apps**.
-1. Cliquez sur **Static Web Apps (Preview)** (Static Web Apps (préversion)).
-1. Cliquez sur **Create** (Créer).
+1. Cliquez sur **Static Web Apps (Preview)** (Static Web Apps (préversion))
+1. Cliquez sur **Créer**
 
    :::image type="content" source="./media/publish-gatsby/create-in-portal.png" alt-text="Création d’une application Static Web Apps (préversion) dans le portail":::
 
@@ -95,13 +96,13 @@ Les étapes suivantes vous montrent comment créer une application Static Web Ap
 
 1. Dans _Groupe de ressources_, sélectionnez **Nouveau**. Dans _New resource group name_ (Nom du nouveau groupe de ressources), entrez **gatsby-static-web-app**, puis sélectionnez **OK**.
 
-1. Indiquez ensuite un nom unique pour votre application dans la zone **Name** (Nom). Les caractères valides sont `a-z`, `A-Z`, `0-9` et `-`. Cette valeur est utilisée comme préfixe d’URL pour votre application Static Web App au format `https://<YOUR_APP_NAME>.azurestaticapps.net`.
+1. Ensuite, entrez un nom pour votre application dans la zone **Nom**. Les caractères valides sont `a-z`, `A-Z`, `0-9` et `-`.
 
 1. Dans _Region_ (Région), sélectionnez une région disponible proche de vous.
 
 1. Pour _SKU_, sélectionnez **Free** (Gratuit).
 
-   :::image type="content" source="./media/publish-gatsby/basic-app-details.png" alt-text="Champs renseignés":::
+   :::image type="content" source="./media/publish-gatsby/basic-app-details.png" alt-text="Création d’une application Static Web Apps (préversion) dans le portail":::
 
 1. Cliquez sur le bouton **Sign in with GitHub** (Se connecter avec GitHub).
 
@@ -111,7 +112,7 @@ Les étapes suivantes vous montrent comment créer une application Static Web Ap
 
 1. Pour _Branch_ (Branche), sélectionnez **master** (principale).
 
-   :::image type="content" source="./media/publish-gatsby/completed-github-info.png" alt-text="Champs GitHub renseignés":::
+   :::image type="content" source="./media/publish-gatsby/completed-github-info.png" alt-text="Création d’une application Static Web Apps (préversion) dans le portail":::
 
 ### <a name="build"></a>Build
 
@@ -125,7 +126,7 @@ Vous ajoutez ensuite les paramètres de configuration utilisés par le processus
 
    Il n’est pas nécessaire de fournir une valeur pour _API location_ (Emplacement de l’API), puisque vous ne déployez pas d’API pour le moment.
 
-   :::image type="content" source="./media/publish-gatsby/build-details.png" alt-text="Paramètres de génération":::
+   :::image type="content" source="./media/publish-gatsby/build-details.png" alt-text="Création d’une application Static Web Apps (préversion) dans le portail":::
 
 ### <a name="review-and-create"></a>Examiner et créer
 
@@ -137,7 +138,7 @@ Vous ajoutez ensuite les paramètres de configuration utilisés par le processus
 
 1. Sur l’écran de la ressource, cliquez sur le lien _URL_ pour ouvrir l’application que vous avez déployée. Vous devrez peut-être patienter une ou deux minutes, le temps que l’action GitHub soit terminée.
 
-   :::image type="content" source="./media/publish-gatsby/deployed-app.png" alt-text="Application déployée":::
+   :::image type="content" source="./media/publish-gatsby/deployed-app.png" alt-text="Création d’une application Static Web Apps (préversion) dans le portail":::
 
 ## <a name="clean-up-resources"></a>Nettoyer les ressources
 

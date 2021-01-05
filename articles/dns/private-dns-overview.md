@@ -7,12 +7,12 @@ ms.service: dns
 ms.topic: overview
 ms.date: 6/12/2019
 ms.author: rohink
-ms.openlocfilehash: 97b266398b3ea46d09b04524dad34922f21b1a95
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: 540c4d6f2dde64cef9b5795d635ac6259bfc69c3
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "76939283"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "87985629"
 ---
 # <a name="what-is-azure-private-dns"></a>Qu’est-ce qu’Azure Private DNS ?
 
@@ -62,7 +62,7 @@ Azure DNS présente les limites suivantes :
 * Un réseau virtuel ne peut être lié qu’à une seule zone privée si l’inscription automatique des enregistrements DNS de machine virtuelle est activée. Vous pouvez toutefois lier plusieurs réseaux virtuels à une seule zone DNS.
 * Un DNS inversé ne fonctionne que pour un espace d’adressage IP privé sur le réseau virtuel lié
 * Un DNS inversé pour une adresse IP privée pour un réseau virtuel lié retourne *internal.cloudapp.net* comme suffixe par défaut pour la machine virtuelle. Pour les réseaux virtuels liés à une zone privée avec l’inscription automatique activée, un DNS inversé pour une adresse IP privée retourne deux noms de domaine complets : l’un avec le suffixe par défaut *internal.cloudapp.net* et l’autre avec le suffixe de la zone privée.
-* Le transfert conditionnel n’est actuellement pas pris en charge en mode natif. Pour activer la résolution entre réseaux Azure et locaux. Consultez [Résolution de noms pour les machines virtuelles et les instances de rôle](../virtual-network/virtual-networks-name-resolution-for-vms-and-role-instances.md).
+* Le transfert conditionnel n’est actuellement pas pris en charge en mode natif. Pour activer la résolution entre des réseaux Azure et locaux, consultez [Résolution de noms pour les machines virtuelles et les instances de rôle](../virtual-network/virtual-networks-name-resolution-for-vms-and-role-instances.md).
  
 ## <a name="pricing"></a>Tarifs
 

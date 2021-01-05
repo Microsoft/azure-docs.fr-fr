@@ -2,25 +2,25 @@
 title: Comprendre et résoudre les problèmes CORS de proxy d’application Azure AD
 description: Fournit des informations sur CORS dans le proxy d’application Azure AD et la manière d’identifier et de résoudre les problèmes CORS.
 services: active-directory
-author: jeevanbisht
-manager: mtillman
+author: kenwith
+manager: celestedg
 ms.service: active-directory
 ms.subservice: app-mgmt
 ms.workload: identity
-ms.topic: conceptual
+ms.topic: troubleshooting
 ms.date: 05/23/2019
-ms.author: celested
+ms.author: kenwith
 ms.reviewer: japere
-ms.openlocfilehash: c49535ad11139ac5145d4f283374bf9cc6d71f52
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 8836295e9f54260c4e9ff6c1da333ef2a86d58fb
+ms.sourcegitcommit: 8e7316bd4c4991de62ea485adca30065e5b86c67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "72025787"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94651853"
 ---
 # <a name="understand-and-solve-azure-active-directory-application-proxy-cors-issues"></a>Comprendre et résoudre les problèmes CORS dans le proxy d’application Azure Active Directory
 
-Le [partage de ressources cross-origin (CORS)](https://www.w3.org/TR/cors/) peut présenter parfois des difficultés pour les applications et les API que vous publiez via le proxy d’application Azure Active Directory. Cet article traite des problèmes CORS du proxy d’application Azure AD et des solutions à ces problèmes.
+Le [partage de ressources cross-origin (CORS)](https://www.w3.org/TR/cors/) peut présenter parfois des difficultés pour les applications et les API que vous publiez via le proxy d’application Azure Active Directory. Cet article traite des problèmes CORS du proxy d’application Azure AD et des solutions à ces problèmes.
 
 La sécurité du navigateur empêche généralement une page web d’adresser des demandes AJAX à un autre domaine. Cette restriction est appelée *stratégie de même origine* et empêche un site malveillant de lire des données sensibles à partir d’un autre site. Toutefois, vous souhaitez parfois laisser d’autres sites appeler votre API web. CORS est une norme W3C qui permet à un serveur d’assouplir la stratégie de même origine et d’autoriser certaines demandes cross-origin tout en en rejetant d’autres.
 
@@ -66,7 +66,7 @@ Vous pouvez résoudre le problème CORS précédent de plusieurs façons différ
 
 ### <a name="option-1-set-up-a-custom-domain"></a>Option 1 : Configurer un domaine personnalisé
 
-Utilisez un [domaine personnalisé](https://docs.microsoft.com/azure/active-directory/active-directory-application-proxy-custom-domains) de proxy d’application Azure AD pour publier à partir de la même origine sans avoir à apporter de modifications aux origines, au code ni aux en-têtes de l’application. 
+Utilisez un [domaine personnalisé](./application-proxy-configure-custom-domain.md) de proxy d’application Azure AD pour publier à partir de la même origine sans avoir à apporter de modifications aux origines, au code ni aux en-têtes de l’application. 
 
 ### <a name="option-2-publish-the-parent-directory"></a>Option n°2 : Publier le répertoire parent
 
@@ -117,4 +117,4 @@ Certains problèmes CORS ne peuvent pas être résolus ; par exemple, lorsque v
 ## <a name="see-also"></a>Voir aussi
 - [Tutoriel : Ajouter une application locale pour un accès à distance via le proxy d’application d’Azure Active Directory](application-proxy-add-on-premises-application.md) 
 - [Planifier un déploiement du proxy d’application Azure AD](application-proxy-deployment-plan.md) 
-- [Accès à distance aux applications locales via le proxy d’application Azure Active Directory](application-proxy.md) 
+- [Accès à distance aux applications locales via le proxy d’application Azure Active Directory](application-proxy.md)

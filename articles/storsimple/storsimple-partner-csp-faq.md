@@ -14,12 +14,12 @@ ms.tgt_pltfrm: NA
 ms.workload: TBD
 ms.date: 02/08/2017
 ms.author: alkohli
-ms.openlocfilehash: eaf22773e581f0b7557a64917e183573039d1cef
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 36b96581d98465b860b630fe2f9a8aa64cf0f64f
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77116168"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94964930"
 ---
 # <a name="storsimple-for-cloud-solutions-provider-program-frequently-asked-questions"></a>StorSimple pour le programme des fournisseurs de solutions cloud : Forum Aux Questions (FAQ)
 
@@ -40,10 +40,10 @@ Les questions/réponses sont organisées en plusieurs catégories :
 
 Pour plus d’informations, consultez [StorSimple série 8000](https://www.microsoft.com/en-us/server-cloud/products/storsimple/). 
 
-### <a name="is-storsimple-a-usage-based-or-based-on-seat-licenses-like-office-365-and-enterprise-mobility-suite-ems"></a>StorSimple utilise-t-il des licences à l’utilisation ou en fonction du nombre d’utilisateurs, comme Office 365 et Enterprise Mobility Suite ?
+### <a name="is-storsimple-a-usage-based-or-based-on-seat-licenses-like-microsoft-365-and-enterprise-mobility-suite-ems"></a>StorSimple utilise-t-il des licences à l’utilisation ou en fonction du nombre d’utilisateurs, comme Microsoft 365 et Enterprise Mobility Suite ?
 StorSimple est un service basé sur l’utilisation. Les clients qui s’équipent de StorSimple Virtual Array via le programme des fournisseurs de solutions cloud paient leurs utilisations de Virtual Array et d’Azure, facturées séparément. 
 
-### <a name="is-the-storsimple-business-model-similar-to-that-of-other-services-such-as-the-office-365-and-the-enterprise-mobility-suite"></a>Le modèle d’entreprise StorSimple est-il similaire à celui d’autres services, comme Office 365 et Enterprise Mobility Suite ? 
+### <a name="is-the-storsimple-business-model-similar-to-that-of-other-services-such-as-the-microsoft-365-and-the-enterprise-mobility-suite"></a>Le modèle d’entreprise StorSimple est-il similaire à celui d’autres services, comme Microsoft 365 et Enterprise Mobility Suite ? 
 Oui. Le modèle est un programme de remise en gros, à l’instar d’autres services basés sur l’utilisation dans Azure. La remise en gros accordée pour StorSimple est similaire à celle octroyée pour d’autres services Azure. Ce modèle offre à nos partenaires du programme la possibilité d’accroître leurs ventes et de simuler la consommation d’Azure via StorSimple Virtual Array.  
 
 ### <a name="which-storsimple-skus-are-available-at-launch"></a>Quelles sont les références StorSimple disponibles au lancement ?
@@ -59,11 +59,11 @@ StorSimple Virtual Array pour le programme des fournisseurs de solutions cloud e
 Il existe plusieurs solutions :
 
 - Les partenaires peuvent revendre StorSimple Virtual Array. 
-- Les partenaires peuvent offrir des solutions développées autour de StorSimple et d’autres services Azure ou d’un logiciel tiers. Pour plus d’informations, examinez quelques [solutions potentielles relatives à StorSimple](https://aka.ms/storsimple-build-solutions).
+- Les partenaires peuvent offrir des solutions développées autour de StorSimple et d’autres services Azure ou d’un logiciel tiers. Pour plus d’informations, examinez quelques [solutions potentielles relatives à StorSimple](./storsimple-disaster-recovery-using-azure-site-recovery.md).
 - Ils peuvent également découvrir de nouveaux modèles d’entreprise, en fournissant des services gérés.
 
 ### <a name="what-are-the-incentives-available-for-storsimple-csp-partners-do-i-qualify-for-any-csp-program-incentives"></a>Quelles sont les primes disponibles pour les partenaires du programme des fournisseurs de solutions cloud StorSimple ? Suis-je éligible à une prime du programme des fournisseurs de solutions cloud ?
-Pour plus d'informations sur les primes, accédez à la [page descriptive des primes du programme des fournisseurs de solutions cloud](https://partner.microsoft.com/en-US/cloud-solution-provider/program-details).
+Pour plus d'informations sur les primes, accédez à la [page descriptive des primes du programme des fournisseurs de solutions cloud](https://partner.microsoft.com/cloud-solution-provider/program-details).
 
 
 ## <a name="deploy-and-manage-storsimple-as-a-partner"></a>Déployer et gérer StorSimple en tant que partenaire

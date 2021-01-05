@@ -1,19 +1,19 @@
 ---
 title: 'Démarrage rapide : Créer une application iOS Unity'
 description: Dans ce guide de démarrage rapide, vous allez apprendre à générer une application iOS avec Unity en utilisant Spatial Anchors.
-author: craigktreasure
-manager: vriveras
+author: msftradford
+manager: MehranAzimi-msft
 services: azure-spatial-anchors
-ms.author: crtreasu
-ms.date: 02/24/2019
+ms.author: parkerra
+ms.date: 11/20/2020
 ms.topic: quickstart
 ms.service: azure-spatial-anchors
-ms.openlocfilehash: 37a82c4001dd42a4cfbbb9dabec29f28359afd75
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: b278ac6c824b1583e90cfc9152264f61357dd228
+ms.sourcegitcommit: b8eba4e733ace4eb6d33cc2c59456f550218b234
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "79215527"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "95971524"
 ---
 # <a name="quickstart-create-a-unity-ios-app-with-azure-spatial-anchors"></a>Démarrage rapide : Créer une application iOS Unity avec Azure Spatial Anchors
 
@@ -34,7 +34,7 @@ Vous découvrirez comment effectuer les actions suivantes :
 
 Pour suivre ce guide de démarrage rapide, veillez à avoir :
 
-- Un ordinateur macOS doté de <a href="https://unity3d.com/get-unity/download" target="_blank">Unity 2019.1 ou 2019.2</a> et des dernières versions de <a href="https://geo.itunes.apple.com/us/app/xcode/id497799835?mt=12" target="_blank">Xcode</a> et <a href="https://cocoapods.org" target="_blank">CocoaPods</a>.
+- Un ordinateur macOS avec <a href="https://unity3d.com/get-unity/download" target="_blank">Unity 2019.4 (LTS)</a>, la dernière version de <a href="https://geo.itunes.apple.com/us/app/xcode/id497799835?mt=12" target="_blank">Xcode</a> installée.
 - Git installé via HomeBrew. Entrez la commande suivante sur une seule ligne du Terminal : `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`. Puis exécutez `brew install git` et `brew install git-lfs`.
 - Un appareil iOS <a href="https://developer.apple.com/documentation/arkit/verifying_device_support_and_user_permission" target="_blank">compatible ARKit</a> prêt pour le développement.
 
@@ -48,13 +48,7 @@ Pour suivre ce guide de démarrage rapide, veillez à avoir :
 
 [!INCLUDE [iOS Unity Build Settings](../../../includes/spatial-anchors-unity-ios-build-settings.md)]
 
-## <a name="configure-account-identifier-and-key"></a>Configurer l’identificateur et la clé du compte
-
-Dans le volet **Project**, accédez à `Assets/AzureSpatialAnchors.Examples/Scenes` et ouvrez le fichier de scène `AzureSpatialAnchorsBasicDemo.unity`.
-
 [!INCLUDE [Configure Unity Scene](../../../includes/spatial-anchors-unity-configure-scene.md)]
-
-Enregistrez la scène en sélectionnant **File** -> **Save**.
 
 ## <a name="export-the-xcode-project"></a>Exporter le projet Xcode
 
@@ -62,7 +56,11 @@ Enregistrez la scène en sélectionnant **File** -> **Save**.
 
 [!INCLUDE [Configure Xcode](../../../includes/spatial-anchors-unity-ios-xcode.md)]
 
-Suivez les instructions dans l’application pour placer et rappeler une ancre.
+Dans l’application, sélectionnez **BasicDemo** à l’aide des flèches, puis appuyez sur le bouton **Go!** pour exécuter la démo. Suivez les instructions dans l’application pour placer et rappeler une ancre.
+
+![Capture d’écran 1](./media/get-started-unity-ios/screenshot-1.jpg)
+![Capture d’écran 2](./media/get-started-unity-ios/screenshot-2.jpg)
+![Capture d’écran 3](./media/get-started-unity-ios/screenshot-3.jpg)
 
 Lorsque vous avez terminé, arrêtez l’application en appuyant sur **Stop** dans Xcode.
 
@@ -72,23 +70,12 @@ Lorsque vous avez terminé, arrêtez l’application en appuyant sur **Stop** da
 
 Pendant l’exécution de l’application, si vous ne voyez pas de caméra en arrière-plan (au lieu de cela, l’arrière-plan est vide, bleu ou présente d’autres textures), vous devez probablement réimporter les ressources dans Unity. Arrêtez l’application. Dans le menu supérieur d’Unity, choisissez **Assets -> Re-import all**. Ensuite, exécutez de nouveau l’application.
 
-### <a name="cocoapods-issues-on-macos-catalina-1015"></a>Problèmes relatifs à CocoaPods sur macOS Catalina (10.15)
-
-Si vous avez récemment effectué une mise à jour vers macOS Catalina (10.15) en ayant déjà installé CocoaPods, ce dernier risque de passer en état défectueux et de configurer incorrectement vos pods et fichiers de projet `.xcworkspace`. Pour résoudre ce problème, vous devez réinstaller CocoaPods en exécutant les commandes suivantes :
-
-```shell
-brew update
-brew install cocoapods --build-from-source
-brew link --overwrite cocoapods
-```
-
-### <a name="unity-20193"></a>Unity 2019.3
-
-En raison de changements cassants, Unity 2019.3 n’est pas pris en charge pour le moment. Utilisez Unity 2019.1 ou 2019.2.
-
 [!INCLUDE [Clean-up section](../../../includes/clean-up-section-portal.md)]
 
 [!INCLUDE [Next steps](../../../includes/spatial-anchors-quickstarts-nextsteps.md)]
 
 > [!div class="nextstepaction"]
 > [Tutoriel : Partager Spatial Anchors sur des appareils](../tutorials/tutorial-share-anchors-across-devices.md)
+
+> [!div class="nextstepaction"]
+> [Guide pratique pour configurer Azure Spatial Anchors dans un projet Unity](../how-tos/setup-unity-project.md)

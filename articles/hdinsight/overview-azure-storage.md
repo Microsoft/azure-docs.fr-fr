@@ -8,12 +8,12 @@ ms.service: hdinsight
 ms.topic: conceptual
 ms.custom: seoapr2020
 ms.date: 04/21/2020
-ms.openlocfilehash: fc0af331dc6cb604847be9173c836e0b46ca40ef
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 40e1fdae5cdb1ec806e67dcacc70510a63093a82
+ms.sourcegitcommit: d767156543e16e816fc8a0c3777f033d649ffd3c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82195177"
+ms.lasthandoff: 10/26/2020
+ms.locfileid: "92539460"
 ---
 # <a name="azure-storage-overview-in-hdinsight"></a>Vue d’ensemble de Stockage Azure dans HDInsight
 
@@ -21,7 +21,7 @@ Stockage Azure est une solution de stockage à la fois robuste et polyvalente qu
 
 Nous vous recommandons d’utiliser des conteneurs de stockage distincts pour votre stockage de clusters par défaut et vos données d’entreprise. La séparation consiste à isoler les journaux HDInsight et les fichiers temporaires de vos propres données d’entreprise. Nous recommandons également de supprimer le conteneur d’objets blob par défaut, qui contient les journaux des applications et système, après chaque utilisation pour réduire le coût de stockage. Assurez-vous de récupérer les journaux d’activité avant de supprimer le conteneur.
 
-Si vous choisissez de sécuriser votre compte de stockage à l’aide des restrictions de **pare-feu et réseaux virtuels** paramétrées sur **Réseaux sélectionnés**, veillez à activer l’exception **Autoriser les services approuvés de Microsoft…** L’exception vise à permettre à HDInsight d’accéder à votre compte de stockage.
+Si vous choisissez de sécuriser votre compte de stockage à l’aide des restrictions de **pare-feu et réseaux virtuels** paramétrées sur **Réseaux sélectionnés** , veillez à activer l’exception **Autoriser les services approuvés de Microsoft…** L’exception vise à permettre à HDInsight d’accéder à votre compte de stockage.
 
 ## <a name="hdinsight-storage-architecture"></a>Architecture de stockage HDInsight
 
@@ -31,11 +31,11 @@ Le schéma suivant résume l’architecture HDInsight de Stockage Azure :
 
 HDInsight permet d'accéder au système de fichiers distribués (DFS) connecté localement aux nœuds de calcul. Vous pouvez accéder à ce système de fichiers en utilisant l'URI complet, par exemple :
 
-    hdfs://<namenodehost>/<path>
+`hdfs://<namenodehost>/<path>`
 
 Grâce à HDInsight, vous pouvez également accéder aux données dans Stockage Azure. La syntaxe est la suivante :
 
-    wasb://<containername>@<accountname>.blob.core.windows.net/<path>
+`wasb://<containername>@<accountname>.blob.core.windows.net/<path>`
 
 Voici quelques points à prendre en compte quand vous utilisez un compte Stockage Azure avec des clusters HDInsight :
 
@@ -44,7 +44,7 @@ Voici quelques points à prendre en compte quand vous utilisez un compte Stockag
 * **Conteneurs publics ou blobs publics dans les comptes de stockage qui ne sont pas connectés à un cluster :** vous avez l’autorisation d’accès en lecture seule aux blobs dans les conteneurs.
   
   > [!NOTE]  
-  > Les conteneurs publics vous permettent d’obtenir une liste de tous les objets blob disponibles dans ce conteneur, ainsi que ses métadonnées. Vous pouvez accéder aux objets blob d'un objet blob public uniquement si vous connaissez leur URL exacte. Pour plus d’informations, consultez [Gestion de l’accès en lecture anonyme aux conteneurs et aux objets blob](../storage/blobs/storage-manage-access-to-resources.md).
+  > Les conteneurs publics vous permettent d’obtenir une liste de tous les objets blob disponibles dans ce conteneur, ainsi que ses métadonnées. Vous pouvez accéder aux objets blob d'un objet blob public uniquement si vous connaissez leur URL exacte. Pour plus d’informations, consultez [Gestion de l’accès en lecture anonyme aux conteneurs et aux objets blob](../storage/blobs/anonymous-read-access-configure.md).
 
 * **Conteneurs privés dans des comptes de stockage qui ne sont pas connectés à un cluster :** vous ne pouvez pas accéder aux blobs se trouvant dans les conteneurs, sauf si vous définissez le compte de stockage quand vous envoyez des travaux WebHCat.
 

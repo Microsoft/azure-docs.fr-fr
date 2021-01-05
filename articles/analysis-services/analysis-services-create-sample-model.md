@@ -1,18 +1,18 @@
 ---
 title: Tutoriel - Ajouter un exemple de modèle - Azure Analysis Services | Microsoft Docs
-description: Dans cette leçon de didacticiel, découvrez comment ajouter un exemple de modèle dans Azure Analysis Services.
+description: Dans ce tutoriel, découvrez comment ajouter un exemple de modèle dans Azure Analysis Services.
 author: minewiskan
 ms.service: azure-analysis-services
 ms.topic: tutorial
-ms.date: 05/19/2020
+ms.date: 08/31/2020
 ms.author: owend
 ms.reviewer: minewiskan
-ms.openlocfilehash: 88ed58ea1eea80b4b890c31260fc65153377eaaa
-ms.sourcegitcommit: 595cde417684e3672e36f09fd4691fb6aa739733
+ms.openlocfilehash: f882a40940a5c7202e9cf1f5c8b8927f008f4a39
+ms.sourcegitcommit: 2c586a0fbec6968205f3dc2af20e89e01f1b74b5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83697505"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92013608"
 ---
 # <a name="tutorial-add-a-sample-model-from-the-portal"></a>Didacticiel : ajouter un exemple de modèle à partir du portail
 
@@ -24,13 +24,13 @@ Dans ce didacticiel, vous ajoutez un exemple de base de données de modèle tabu
 
 Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
-## <a name="before-you-begin"></a>Avant de commencer
+## <a name="prerequisites"></a>Prérequis
 
 Pour suivre ce didacticiel, vous avez besoin des éléments suivants :
 
 - Un serveur Azure Analysis Services. Pour en savoir plus, consultez [Créer un serveur - Portail](analysis-services-create-server.md).
 - Des autorisations d’administrateur du serveur
-- [SQL Server Management Studio](https://docs.microsoft.com/sql/ssms/download-sql-server-management-studio-ssms)
+- [SQL Server Management Studio](/sql/ssms/download-sql-server-management-studio-ssms)
 
 
 ## <a name="sign-in-to-the-azure-portal"></a>Connectez-vous au portail Azure.
@@ -45,7 +45,7 @@ Connectez-vous au [portail](https://portal.azure.com/).
 
 2. Dans **Nouveau modèle** > **Choisir une source de données**, vérifiez que l’option **Exemple de données** est sélectionnée, puis cliquez sur **Ajouter**.
 
-    ![Sélectionner un exemple de données](./media/analysis-services-create-sample-model/aas-create-sample-data.png)
+    ![Sélectionner un nouveau modèle](./media/analysis-services-create-sample-model/aas-create-sample-data.png)
 
 3. Dans **Vue d’ensemble**, vérifiez que l’exemple de modèle `adventureworks` est ajouté.
 
@@ -74,5 +74,3 @@ Dans ce didacticiel, vous avez appris comment ajouter un exemple de modèle de b
 
 > [!div class="nextstepaction"]
 > [Didacticiel : configurer les rôles d’utilisateur et d’administrateur de serveur](tutorials/analysis-services-tutorial-roles.md)
-
-

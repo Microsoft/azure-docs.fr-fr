@@ -11,12 +11,12 @@ metadata:
   ms.author: mbaldwin
   manager: rkarlin
   ms.date: 09/19/2019
-  ms.openlocfilehash: 5be853f9e1f9778eb767aa93497c546cb35fa0df
-  ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+  ms.openlocfilehash: 080cf9d8b7816b28f299396de2fe147fc2f9b27e
+  ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 04/16/2020
-  ms.locfileid: "81422402"
+  ms.lasthandoff: 10/09/2020
+  ms.locfileid: "89378880"
 landingContent:
 - title: À propos d’Azure Key Vault
   linkLists:
@@ -24,12 +24,14 @@ landingContent:
     links:
     - text: Qu'est-ce qu'Azure Key Vault ?
       url: overview.md
+    - text: Informations importantes sur la suppression réversible
+      url: soft-delete-change.md
   - linkListType: concept
     links:
     - text: Concepts de base
       url: basic-concepts.md
     - text: Suppression réversible
-      url: overview-soft-delete.md
+      url: soft-delete-overview.md
     - text: Limitation
       url: overview-throttling.md
 - title: Tutoriels
@@ -38,10 +40,10 @@ landingContent:
     links:
     - text: Key Vault à partir d’une application web
       url: tutorial-net-create-vault-azure-web-app.md
-    - text: Key Vault avec une machine virtuelle Windows Azure
-      url: tutorial-net-windows-virtual-machine.md
-    - text: Key Vault avec Python - Windows
-      url: tutorial-python-windows-virtual-machine.md
+    - text: Key Vault avec une machine virtuelle dans .NET
+      url: tutorial-net-virtual-machine.md
+    - text: Key Vault avec une machine virtuelle dans Python
+      url: tutorial-python-virtual-machine.md
 - title: Sécurité
   linkLists:
   - linkListType: overview
@@ -52,14 +54,34 @@ landingContent:
       url: security-recommendations.md
     - text: Base de référence de la sécurité
       url: security-baseline.md
+  - linkListType: how-to-guide
+    links:
+    - text: S’authentifier auprès de Key Vault
+      url: authentication.md
+    - text: Affecter une stratégie d’accès (CLI)
+      url: assign-access-policy-CLI.md
+    - text: Affecter une stratégie d’accès (PowerShell)
+      url: assign-access-policy-powershell.md
+    - text: Affecter une stratégie d’accès (portail)
+      url: assign-access-policy-portal.md
   - linkListType: tutorial
     links:
     - text: Utiliser une liaison privée
       url: private-link-service.md
-    - text: Utiliser une identité managée
-      url: managed-identity.md
-    - text: Utiliser une stratégie d’accès
-      url: group-permissions-for-apps.md
+- title: Bibliothèques clientes
+  linkLists:
+  - linkListType: reference
+    links:
+    - text: Bibliothèques de client pour Azure Key Vault
+      url: client-libraries.md
+    - text: Bibliothèque de client .NET
+      url: /dotnet/api/overview/azure/key-vault?view=azure-dotnet
+    - text: Bibliothèque de client Python
+      url: /python/api/overview/azure/key-vault-index?view=azure-python
+    - text: Bibliothèque de client Java
+      url: https://azure.github.io/azure-sdk-for-java/keyvault.html
+    - text: Bibliothèque de client Node.js
+      url: /javascript/api/overview/azure/key-vault-index?view=azure-node-latest
 - title: Microsoft Learn
   linkLists:
   - linkListType: learn

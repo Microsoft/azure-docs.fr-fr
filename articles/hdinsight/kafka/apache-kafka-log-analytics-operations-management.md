@@ -5,15 +5,15 @@ author: hrasheed-msft
 ms.author: hrasheed
 ms.reviewer: jasonh
 ms.service: hdinsight
-ms.topic: conceptual
+ms.topic: how-to
 ms.custom: hdinsightactive
 ms.date: 02/17/2020
-ms.openlocfilehash: 3f8ff3cbc24f6e3a7e0eccf1b18e01941c9584b9
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 5128ac7608dfce08471f7a7f97ed28a7971e62b2
+ms.sourcegitcommit: d767156543e16e816fc8a0c3777f033d649ffd3c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77471178"
+ms.lasthandoff: 10/26/2020
+ms.locfileid: "92534445"
 ---
 # <a name="analyze-logs-for-apache-kafka-on-hdinsight"></a>Analyser les journaux d’activité pour Apache Kafka sur HDInsight
 
@@ -50,7 +50,7 @@ Les étapes permettant d’activer les journaux Azure Monitor pour HDInsight son
 
 1. Dans le [portail Azure](https://portal.azure.com), sélectionnez votre espace de travail Log Analytics.
 
-2. Dans le menu de gauche, sous **Général**, sélectionnez **Journaux d’activité**. À ce stade, vous pouvez rechercher les données collectées par Kafka. Entrez une requête dans la fenêtre de requête, puis sélectionnez **Exécuter**. Voici quelques exemples de recherches :
+2. Dans le menu de gauche, sous **Général** , sélectionnez **Journaux d’activité** . À ce stade, vous pouvez rechercher les données collectées par Kafka. Entrez une requête dans la fenêtre de requête, puis sélectionnez **Exécuter** . Voici quelques exemples de recherches :
 
 * Utilisation du disque :
 
@@ -104,7 +104,7 @@ Les étapes permettant d’activer les journaux Azure Monitor pour HDInsight son
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour plus d’informations sur Azure Monitor, consultez [Vue d’ensemble d’Azure Monitor](../../log-analytics/log-analytics-get-started.md) et [Interroger les journaux Azure Monitor pour surveiller les clusters HDInsight](../hdinsight-hadoop-oms-log-analytics-use-queries.md).
+Pour plus d’informations sur Azure Monitor, consultez [Vue d’ensemble d’Azure Monitor](../../azure-monitor/overview.md) et [Interroger les journaux Azure Monitor pour surveiller les clusters HDInsight](../hdinsight-hadoop-oms-log-analytics-use-queries.md).
 
 Pour plus d’informations sur l’utilisation d’Apache Kafka, consultez les documents suivants :
 

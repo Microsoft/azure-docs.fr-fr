@@ -5,24 +5,24 @@ description: Apprenez à exporter ou supprimer votre espace de travail avec Azur
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: core
-ms.topic: conceptual
 ms.reviewer: jmartens
 author: lobrien
 ms.author: laobri
 ms.date: 04/24/2020
-ms.custom: seodec18
-ms.openlocfilehash: 50234eb356314039b8023f0442207ae0b762676e
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.topic: conceptual
+ms.custom: how-to
+ms.openlocfilehash: 82e128ffdc215a084110a68170ac12accd8fca0e
+ms.sourcegitcommit: 96918333d87f4029d4d6af7ac44635c833abb3da
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82191632"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93308129"
 ---
 # <a name="export-or-delete-your-machine-learning-service-workspace-data"></a>Exporter ou supprimer vos données d’espace de travail Machine Learning
 
-[!INCLUDE [applies-to-skus](../../includes/aml-applies-to-basic-enterprise-sku.md)]
 
-Dans Azure Machine Learning, vous pouvez exporter ou supprimer des données de votre espace de travail avec l’API REST authentifiée. Cet article vous explique comment procéder.
+
+Dans Azure Machine Learning, vous pouvez exporter ou supprimer les données de votre espace de travail à l’aide du kit SDK Python ou de l’interface graphique du portail. Cet article décrit ces deux options.
 
 [!INCLUDE [GDPR-related guidance](../../includes/gdpr-dsr-and-stp-note.md)]
 
@@ -30,225 +30,61 @@ Dans Azure Machine Learning, vous pouvez exporter ou supprimer des données de v
 
 ## <a name="control-your-workspace-data"></a>Contrôler les données de votre espace de travail
 
-Les données intégrées au produit stockées par Azure Machine Learning sont disponibles pour l’exportation et la suppression par le biais d’Azure Machine Learning Studio, de l’interface CLI, du kit SDK et des API REST authentifiées. Les données de télémétrie sont accessibles via le portail de confidentialité Azure. 
+Les données intégrées au produit, stockées par Azure Machine Learning, sont disponibles pour exportation et suppression. Vous pouvez les exporter et les supprimer à l’aide d’Azure Machine Learning Studio, de l’interface CLI et du kit SDK. Les données de télémétrie sont accessibles via le portail de confidentialité Azure. 
 
-Dans Azure Machine Learning, les données personnelles comprennent les informations utilisateur des documents sur l’historique des exécutions et les enregistrements de télémétrie de certaines interactions de l’utilisateur avec le service.
+Dans Azure Machine Learning, les données personnelles se composent d’informations utilisateur dans des documents d’historique des exécutions. 
 
-## <a name="delete-workspace-data-with-the-rest-api"></a>Supprimer des données de l’espace de travail avec l’API REST
+## <a name="delete-high-level-resources-using-the-portal"></a>Supprimer des ressources de haut niveau à l’aide du portail
 
-Pour supprimer des données, vous pouvez effectuer les appels d’API suivants avec le verbe HTTP DELETE. Ils sont autorisés, car la demande contient un en-tête `Authorization: Bearer <arm-token>`, où `<arm-token>` est le jeton d’accès AAD du point de terminaison `https://management.core.windows.net/`.  
+Lorsque vous créez un espace de travail, Azure crée un certain nombre de ressources au sein du groupe de ressources :
 
-Pour savoir comment obtenir ce jeton et appeler des points de terminaison Azure, consultez [Utiliser REST pour gérer des ressources ML](how-to-manage-rest.md) et la [documentation de l’API REST Azure](https://docs.microsoft.com/rest/api/azure/).  
+- L’espace de travail lui-même
+- Un compte de stockage
+- Un registre de conteneurs
+- Une instance Application Insights
+- Un coffre de clés
 
-Dans les exemples suivants, remplacez le texte de {} par les noms d’instance qui déterminent la ressource associée.
+Il est possible de supprimer ces ressources en les sélectionnant dans la liste et en choisissant **Supprimer**. 
 
-### <a name="delete-an-entire-workspace"></a>Supprimer tout un espace de travail
+:::image type="content" source="media/how-to-export-delete-data/delete-resource-group-resources.png" alt-text="Capture d’écran du portail, avec l’icône Supprimer mise en évidence":::
 
-Cet appel permet de supprimer tout un espace de travail.  
-> [!WARNING]
-> Toutes les informations seront supprimées et l’espace de travail ne sera plus utilisable.
+Les documents d’historique des exécutions, qui peuvent contenir des informations utilisateur personnelles, sont stockés dans le compte de stockage dans le stockage d’objets blob, dans les sous-dossiers de `/azureml`. Vous pouvez télécharger et supprimer ces données à partir du portail.
 
-    https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}?api-version=2019-11-01
+:::image type="content" source="media/how-to-export-delete-data/storage-account-folders.png" alt-text="Capture d’écran du répertoire azureml dans le compte de stockage, dans le portail":::
 
-### <a name="delete-models"></a>Supprimer des modèles
+## <a name="export-and-delete-machine-learning-resources-using-azure-machine-learning-studio"></a>Exporter et supprimer des ressources Machine Learning à l’aide d’Azure Machine Learning Studio
 
-Cet appel permet d’obtenir la liste des modèles et leurs ID :
+Azure Machine Learning Studio fournit une vue unifiée de vos ressources Machine Learning, telles que les notebooks, les jeux de données, les modèles et les expériences. Azure Machine Learning Studio met l’accent sur la conservation d’un enregistrement de vos données et de vos expériences. Les ressources de calcul telles que les pipelines et autres peuvent être supprimées à l’aide du navigateur. Pour ces ressources, accédez à la ressource en question et choisissez **Supprimer**. 
 
-    https://{location}.modelmanagement.azureml.net/api/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspace}/models?api-version=2019-11-01
+Les jeux de données peuvent être désinscrits et les expériences peuvent être archivées, mais ces opérations ne suppriment pas les données. Pour supprimer entièrement les données, les jeux de données et les données d’exécution doivent être supprimés au niveau du stockage. La suppression au niveau du stockage s’effectue à l’aide du portail, comme décrit précédemment.
 
-Vous pouvez supprimer les modèles individuels avec :
+Vous pouvez télécharger des artefacts d’entraînement à partir d’exécutions expérimentales à l’aide de Studio. Choisissez l’ **expérience** et l’ **exécution** qui vous intéressent. Choisissez **Sortie + journaux** et accédez aux artefacts spécifiques que vous souhaitez télécharger. Choisissez **...** et **Télécharger**.
 
-    https://{location}.modelmanagement.azureml.net/api/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspace}/models/{id}?api-version=2019-11-01
+Vous pouvez télécharger un modèle inscrit en accédant au **modèle** souhaité et en choisissant **Télécharger**. 
 
-### <a name="delete-assets"></a>Supprimer des ressources
+:::image type="contents" source="media/how-to-export-delete-data/model-download.png" alt-text="Capture d’écran de la page de modèle Studio avec l’option Télécharger mise en évidence":::
 
-Cet appel permet d’obtenir la liste des ressources et leurs ID :
+## <a name="export-and-delete-resources-using-the-python-sdk"></a>Exporter et supprimer des ressources à l’aide du kit SDK Python
 
-    https://{location}.modelmanagement.azureml.net/api/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspace}/assets?api-version=2019-11-01
+Vous pouvez télécharger les sorties d’une exécution particulière avec : 
 
-Vous pouvez supprimer les ressources individuelles avec :
+```python
+# Retrieved from Azure Machine Learning web UI
+run_id = 'aaaaaaaa-bbbb-cccc-dddd-0123456789AB'
+experiment = ws.experiments['my-experiment']
+run = next(run for run in ex.get_runs() if run.id == run_id)
+metrics_output_port = run.get_pipeline_output('metrics_output')
+model_output_port = run.get_pipeline_output('model_output')
 
-    https://{location}.modelmanagement.azureml.net/api/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspace}/assets/{id}?api-version=2019-11-01
+metrics_output_port.download('.', show_progress=True)
+model_output_port.download('.', show_progress=True)
+```
 
-### <a name="delete-images"></a>Supprimer des images
+Les ressources Machine Learning suivantes peuvent être supprimées à l’aide du kit SDK Python : 
 
-Cet appel permet d’obtenir la liste des images et leurs ID :
-
-    https://{location}.modelmanagement.azureml.net/api/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspace}/images?api-version=2019-11-01
-
-Vous pouvez supprimer les images individuelles avec :
-
-    https://{location}.modelmanagement.azureml.net/api/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspace}/images/{id}?api-version=2019-11-01
-
-### <a name="delete-services"></a>Supprimer des services
-
-Cet appel permet d’obtenir la liste des services et leurs ID :
-
-    https://{location}.modelmanagement.azureml.net/api/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspace}/services?api-version=2019-11-01
-
-Vous pouvez supprimer les services individuels avec :
-
-    https://{location}.modelmanagement.azureml.net/api/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspace}/services/{id}?api-version=2019-11-01
-
-## <a name="export-service-data-with-the-rest-api"></a>Exportation des données de service avec l’API REST
-
-Pour exporter des données, vous pouvez effectuer les appels d’API suivants avec le verbe HTTP GET. Ils sont autorisés car la requête contient un en-tête `Authorization: Bearer <arm-token>`, où `<arm-token>` est le jeton d’accès AAD du point de terminaison `https://management.core.windows.net/`.  
-
-Pour savoir comment obtenir ce jeton et appeler des points de terminaison Azure, consultez [Utiliser REST pour gérer des ressources ML](how-to-manage-rest.md) et la [documentation de l’API REST Azure](https://docs.microsoft.com/rest/api/azure/).   
-
-Dans les exemples suivants, remplacez le texte de {} par les noms d’instance qui déterminent la ressource associée.
-
-### <a name="export-workspace-information"></a>Exporter les informations de l’espace de travail
-
-Cet appel permet d’obtenir la liste de tous les espaces de travail :
-
-    https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces?api-version=2019-11-01
-
-Vous pouvez obtenir des informations sur un espace de travail individuel avec :
-
-    https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}?api-version=2019-11-01
-
-### <a name="export-compute-information"></a>Exporter les informations de calcul
-
-Vous pouvez obtenir toutes les cibles de calcul attachées à un espace de travail avec :
-
-    https://management.azure.com/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes?api-version=2019-11-01
-
-Vous pouvez obtenir des informations sur une seule cible de calcul avec :
-
-    https://management.azure.com/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}?api-version=2019-11-01
-
-### <a name="export-run-history-data"></a>Exportation des données d’historique d’exécution
-
-Cet appel permet d’obtenir la liste de toutes les expérimentations et leurs informations :
-
-    https://{location}.experiments.azureml.net/history/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/experiments 
-
-Vous pouvez obtenir toutes les exécutions d’une expérimentation spécifique avec :
-
-    https://{location}.experiments.azureml.net/history/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/experiments/{experimentName}/runs 
-
-Vous pouvez obtenir les éléments de l’historique des exécutions avec :
-
-    https://{location}.experiments.azureml.net/history/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/experiments/{experimentName}/runs/{runId} 
-
-Vous pouvez obtenir toutes les métriques d’exécution pour une expérimentation avec :
-
-    https://{location}.experiments.azureml.net/history/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/experiments/{experimentName}/metrics 
-
-Vous pouvez obtenir une seule métrique d’exécution avec :
-
-    https://{location}.experiments.azureml.net/history/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/experiments/{experimentName}/metrics/{metricId}
-
-### <a name="export-artifacts"></a>Exportation des artefacts
-
-Cet appel permet d’obtenir la liste des artefacts et leurs noms :
-
-    https://{location}.experiments.azureml.net/artifact/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/artifacts/origins/ExperimentRun/containers/{runId}
-
-### <a name="export-notifications"></a>Exportation des notifications
-
-Cet appel permet d’obtenir la liste des tâches stockées :
-
-    https://{location}.experiments.azureml.net/notification/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/tasks
-
-Vous pouvez obtenir des notifications pour une seule tâche avec :
-
-    https://{location}.experiments.azureml.net/notification/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}tasks/{taskId}
-
-### <a name="export-data-stores"></a>Exporter des banques de données
-
-Cet appel permet d’obtenir la liste des banques de données :
-
-    https://{location}.experiments.azureml.net/datastore/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datastores
-
-Vous pouvez obtenir des banques de données individuelles avec :
-
-    https://{location}.experiments.azureml.net/datastore/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datastores/{name}
-
-### <a name="export-models"></a>Exporter des modèles
-
-Cet appel permet d’obtenir la liste des modèles et leurs ID :
-
-    https://{location}.modelmanagement.azureml.net/api/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspace}/models?api-version=2019-11-01
-
-Vous pouvez obtenir les modèles individuels avec :
-
-    https://{location}.modelmanagement.azureml.net/api/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspace}/models/{id}?api-version=2019-11-01
-
-### <a name="export-assets"></a>Exporter des ressources
-
-Cet appel permet d’obtenir la liste des ressources et leurs ID :
-
-    https://{location}.modelmanagement.azureml.net/api/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspace}/assets?api-version=2019-11-01
-
-Vous pouvez obtenir des ressources individuelles avec :
-
-    https://{location}.modelmanagement.azureml.net/api/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspace}/assets/{id}?api-version=2019-11-01
-
-### <a name="export-images"></a>Exporter des images
-
-Cet appel permet d’obtenir la liste des images et leurs ID :
-
-    https://{location}.modelmanagement.azureml.net/api/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspace}/images?api-version=2019-11-01
-
-Vous pouvez obtenir des images individuelles avec :
-
-    https://{location}.modelmanagement.azureml.net/api/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspace}/images/{id}?api-version=2019-11-01
-
-### <a name="export-services"></a>Exporter des services
-
-Cet appel permet d’obtenir la liste des services et leurs ID :
-
-    https://{location}.modelmanagement.azureml.net/api/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspace}/services?api-version=2019-11-01
-
-Vous pouvez obtenir les manifestes individuels avec :
-
-    https://{location}.modelmanagement.azureml.net/api/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspace}/services/{id}?api-version=2019-11-01
-
-### <a name="export-pipeline-experiments"></a>Exporter des expérimentations de pipeline
-
-Vous pouvez obtenir des expérimentations individuelles avec :
-
-    https://{location}.aether.ms/api/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/Experiments/{experimentId}
-
-### <a name="export-pipeline-graphs"></a>Exporter des graphes de pipeline
-
-Vous pouvez obtenir des graphes individuels avec :
-
-    https://{location}.aether.ms/api/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/Graphs/{graphId}
-
-### <a name="export-pipeline-modules"></a>Exporter des modules de pipeline
-
-Vous pouvez obtenir des modules avec :
-
-    https://{location}.aether.ms/api/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/Modules/{id}
-
-### <a name="export-pipeline-templates"></a>Exporter des modèles de pipeline
-
-Vous pouvez obtenir des modèles avec :
-
-    https://{location}.aether.ms/api/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/Templates/{templateId}
-
-### <a name="export-pipeline-data-sources"></a>Exporter des sources de données de pipeline
-
-Vous pouvez obtenir des sources de données avec :
-
-    https://{location}.aether.ms/api/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/DataSources/{id}
-
-## <a name="delete-assets-in-the-designer"></a>Supprimer des ressources dans le concepteur
-
-Dans le concepteur où vous avez créé votre expérimentation, supprimez des ressources individuelles :
-
-1. Accéder au concepteur
-
-    ![Supprimer des ressources](./media/how-to-export-delete-data/delete-experiment.png)
-
-1. Dans la liste, sélectionnez le brouillon de pipeline individuel à supprimer.
-
-1. Sélectionnez **Supprimer**.
-
-### <a name="delete-datasets-in-the-designer"></a>Supprimer des jeux de données dans le concepteur
-
-Pour supprimer des jeux de données dans le concepteur, utilisez le portail Azure ou l’Explorateur Stockage pour accéder aux comptes de stockage connectés et y supprimer les jeux de données. La désinscription de jeux de données dans le concepteur supprime seulement le point de référence dans le stockage.
-
+| Type | Appel de fonction | Notes | 
+| --- | --- | --- |
+| `Workspace` | [`delete`](/python/api/azureml-core/azureml.core.workspace.workspace?preserve-view=true&view=azure-ml-py#&preserve-view=truedelete-delete-dependent-resources-false--no-wait-false-) | Utilisez `delete-dependent-resources` pour effectuer une suppression en cascade |
+| `Model` | [`delete`](/python/api/azureml-core/azureml.core.model%28class%29?preserve-view=true&view=azure-ml-py#&preserve-view=truedelete--) | | 
+| `ComputeTarget` | [`delete`](/python/api/azureml-core/azureml.core.computetarget?preserve-view=true&view=azure-ml-py#&preserve-view=truedelete--) | |
+| `WebService` | [`delete`](/python/api/azureml-core/azureml.core.webservice%28class%29?preserve-view=true&view=azure-ml-py) | |

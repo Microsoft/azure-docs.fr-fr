@@ -3,24 +3,24 @@ title: Se connecter à Azure Event Hubs
 description: Créer des tâches et des flux de travail automatisés qui surveillent et gèrent les événements à l’aide d’Azure Event Hubs et d’Azure Logic Apps
 services: logic-apps
 ms.suite: integration
-ms.reviewer: klam, logicappspm
+ms.reviewer: logicappspm
 ms.topic: conceptual
 ms.date: 04/23/2019
 tags: connectors
-ms.openlocfilehash: 32fa54ef0d8eccaf8745ee37cb028d4f3c6d73eb
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 198a5da63ed90937c53f7f12f3559f15100e8f19
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79225873"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88031342"
 ---
 # <a name="monitor-receive-and-send-events-with-azure-event-hubs-and-azure-logic-apps"></a>Surveillez, recevez et envoyez des événements avec Azure Event Hubs et Azure Logic Apps
 
-Cet article explique comment vous pouvez surveiller et gérer les événements envoyés à [Azure Event Hubs](../event-hubs/event-hubs-what-is-event-hubs.md) depuis une application logique à l’aide du connecteur Azure Event Hubs. De cette façon, vous pouvez créer des applications logiques qui automatisent les tâches et les flux de travail pour vérifier, envoyer et recevoir des événements à partir de votre hub d’événements. Pour obtenir des informations techniques spécifiques aux connecteurs, consultez la [documentation de référence du connecteur Azure Event Hubs](https://docs.microsoft.com/connectors/eventhubs/)</a>.
+Cet article explique comment vous pouvez surveiller et gérer les événements envoyés à [Azure Event Hubs](../event-hubs/event-hubs-about.md) depuis une application logique à l’aide du connecteur Azure Event Hubs. De cette façon, vous pouvez créer des applications logiques qui automatisent les tâches et les flux de travail pour vérifier, envoyer et recevoir des événements à partir de votre hub d’événements. Pour obtenir des informations techniques spécifiques aux connecteurs, consultez la [documentation de référence du connecteur Azure Event Hubs](/connectors/eventhubs/)</a>.
 
 ## <a name="prerequisites"></a>Prérequis
 
-* Un abonnement Azure. Si vous n’avez pas d’abonnement Azure, [inscrivez-vous pour bénéficier d’un compte Azure gratuit](https://azure.microsoft.com/free/). 
+* Un compte et un abonnement Azure. Si vous n’avez pas d’abonnement Azure, [inscrivez-vous pour bénéficier d’un compte Azure gratuit](https://azure.microsoft.com/free/). 
 
 * Un [espace de noms Azure Event Hubs et un hub d’événements](../event-hubs/event-hubs-create.md)
 
@@ -62,6 +62,9 @@ Dans Azure Logic Apps, chaque application logique doit démarrer avec un [décle
 
 Cet exemple montre comment vous pouvez démarrer un flux de travail d’application logique lorsque de nouveaux événements sont envoyés à votre hub d’événements. 
 
+> [!NOTE]
+> Tous les déclencheurs Event Hub sont des déclencheurs *d’interrogation longue*, ce qui signifie que le déclencheur traite tous les événements, puis attend 30 secondes par partition le temps qu’un plus grand nombre d’événements s’affichent dans votre Event Hub. Par conséquent, si le déclencheur est configuré avec quatre partitions, ce délai peut prendre jusqu’à deux minutes avant que le déclencheur ne termine d’interroger toutes les partitions. Si aucun événement n’est reçu dans ce délai, l’exécution du déclencheur est ignorée. Dans le cas contraire, le déclencheur poursuit la lecture des événements jusqu’à ce que votre hub d’événements soit vide. La prochaine interrogation de déclencheur est basée sur l’intervalle de récurrence que vous spécifiez dans les propriétés du déclencheur.
+
 1. Dans le portail Azure ou Visual Studio, créez une application logique vide, qui ouvre le Concepteur d'applications logiques. Cet exemple utilise le portail Azure.
 
 1. Dans la zone de recherche, entrez « hubs d’événements » en tant que filtre. Dans la liste des déclencheurs, sélectionnez ce déclencheur : **When events are available in Event Hub (Lorsque les événements sont disponibles dans un hub Event Hubs) - Event Hubs**
@@ -100,11 +103,6 @@ Cet exemple montre comment vous pouvez démarrer un flux de travail d’applicat
 1. Continuez maintenant à ajouter une ou plusieurs actions à votre application logique pour les tâches à effectuer avec les résultats du déclencheur. 
 
    Par exemple, pour filtrer les événements basés sur une valeur spécifique, telle qu’une catégorie, vous pouvez ajouter une condition pour que l’action **Envoyer un événement** envoie uniquement les événements qui répondent à votre condition. 
-
-> [!NOTE]
-> Tous les déclencheurs Event Hub sont des déclencheurs *d’interrogation longue*, ce qui signifie que lorsqu’un déclencheur est activé, il traite tous les événements, puis attend 30 secondes le temps qu’un plus grand nombre d’événements s’affichent dans votre hub d’événements.
-> Si aucun événement n’est reçu dans les 30 secondes, l’exécution du déclencheur est ignorée. Dans le cas contraire, le déclencheur poursuit la lecture des événements jusqu’à ce que votre hub d’événements soit vide.
-> La prochaine interrogation de déclencheur est basée sur l’intervalle de récurrence que vous spécifiez dans les propriétés du déclencheur.
 
 <a name="add-action"></a>
 
@@ -165,7 +163,7 @@ Dans la liste des actions, sélectionnez cette action : **Envoyer un événemen
    Pour entrer manuellement la chaîne de connexion, sélectionnez **Entrer manuellement les informations de connexion**. 
    Découvrez [comment trouver votre chaîne de connexion](#permissions-connection-string).
 
-2. Sélectionnez la stratégie Event Hubs à utiliser, si elle n’est pas déjà sélectionnée. Cliquez sur **Créer**.
+2. Sélectionnez la stratégie Event Hubs à utiliser, si elle n’est pas déjà sélectionnée. Choisissez **Créer**.
 
    ![Créer une connexion de hub d’événements, partie 2](./media/connectors-create-api-azure-event-hubs/create-event-hubs-connection-2.png)
 
@@ -173,7 +171,7 @@ Dans la liste des actions, sélectionnez cette action : **Envoyer un événemen
 
 ## <a name="connector-reference"></a>Référence de connecteur
 
-Pour plus d’informations techniques, telles que les déclencheurs, actions et limites, comme décrit dans le fichier Swagger du connecteur, consultez la [page de référence du connecteur](https://docs.microsoft.com/connectors/eventhubs/).
+Pour plus d’informations techniques, telles que les déclencheurs, actions et limites, comme décrit dans le fichier Swagger du connecteur, consultez la [page de référence du connecteur](/connectors/eventhubs/).
 
 > [!NOTE]
 > Pour les applications logiques utilisées dans un [environnement de service d’intégration (ISE)](../logic-apps/connect-virtual-network-vnet-isolated-environment-overview.md), la version de ce connecteur avec l’étiquette ISE applique les [limites de messages de l’ISE](../logic-apps/logic-apps-limits-and-config.md#message-size-limits) à la place.

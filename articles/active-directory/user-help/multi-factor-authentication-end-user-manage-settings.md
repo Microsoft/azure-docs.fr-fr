@@ -10,14 +10,14 @@ ms.workload: identity
 ms.service: active-directory
 ms.subservice: user-help
 ms.topic: end-user-help
-ms.date: 02/20/2020
+ms.date: 07/06/2020
 ms.author: curtand
-ms.openlocfilehash: c9304f4a958360d01d404d9b510feb5659e5436d
-ms.sourcegitcommit: 493b27fbfd7917c3823a1e4c313d07331d1b732f
+ms.openlocfilehash: e0a6c566e8e0dfb77b5899f735020d0f1facf3d1
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83746747"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88798378"
 ---
 # <a name="change-your-two-factor-verification-method-and-settings"></a>Modifier la méthode et les paramètres de vérification à deux facteurs
 
@@ -31,10 +31,10 @@ Une fois que vous avez configuré vos méthodes de vérification de sécurité p
 
 ## <a name="using-the-additional-security-verification-page"></a>Utilisation de la page Vérification de sécurité supplémentaire
 
-Si votre organisation vous a fourni des étapes spécifiques expliquant comment activer et gérer la vérification en deux étapes, vous devez d’abord suivre ces instructions. Dans le cas contraire, vous pouvez accéder aux paramètres de méthode de vérification de sécurité à partir de la page [Vérification de sécurité supplémentaire](https://docs.microsoft.com/azure/active-directory/user-help/multi-factor-authentication-end-user-first-time).
+Si votre organisation vous a fourni des étapes spécifiques expliquant comment activer et gérer la vérification en deux étapes, vous devez d’abord suivre ces instructions. Dans le cas contraire, vous pouvez accéder aux paramètres de méthode de vérification de sécurité à partir de la page [Vérification de sécurité supplémentaire](./multi-factor-authentication-end-user-first-time.md).
 
 >[!Note]
->Si ce que vous voyez à l’écran ne correspond pas à ce qui est abordé dans cet article, cela signifie que votre administrateur a activé l’expérience **Informations de sécurité (préversion)** ou que votre organisation dispose d’un portail personnalisé. Pour en savoir plus sur la nouvelle expérience Informations de sécurité, consultez [Vue d’ensemble des informations de sécurité (préversion)](user-help-security-info-overview.md). Pour plus d’informations sur le portail personnalisé de votre organisation, vous devez contacter le support technique de votre organisation.
+>Si ce que vous voyez à l’écran ne correspond pas à ce qui est abordé dans cet article, cela signifie que votre administrateur a activé l’expérience **Informations de sécurité (préversion)** ou que votre organisation dispose d’un portail personnalisé. Pour en savoir plus sur la nouvelle expérience Informations de sécurité, consultez [Vue d’ensemble des informations de sécurité (préversion)](./security-info-setup-signin.md). Pour plus d’informations sur le portail personnalisé de votre organisation, vous devez contacter le support technique de votre organisation.
 
 ### <a name="to-get-to-the-additional-security-verification-page"></a>Pour accéder à la page Vérification de sécurité supplémentaire
 
@@ -88,7 +88,7 @@ Vous pouvez ajouter de nouveaux numéros de téléphone ou mettre à jour des nu
 
 1. Dans la section **Comment aimeriez-vous répondre ?** de la page **Vérification de sécurité supplémentaire**, mettez à jour les informations de numéro de téléphone de votre **Téléphone d’authentification** (votre appareil mobile principal) et de votre **Téléphone de bureau**.
 
-1. Cochez la case en regard de l’option **Téléphone d’authentification secondaire**, puis tapez un numéro de téléphone secondaire où vous pouvez recevoir des SMS ou des appels téléphoniques si vous ne pouvez pas accéder à votre appareil principal.
+1. Cochez la case à côté de l’option **Téléphone d’authentification secondaire**, puis tapez un numéro de téléphone secondaire auquel vous pouvez recevoir des appels téléphoniques si vous ne pouvez pas accéder à votre appareil principal.
 
 1. Sélectionnez **Enregistrer**.
 

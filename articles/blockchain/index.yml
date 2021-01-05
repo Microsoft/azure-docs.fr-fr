@@ -11,12 +11,12 @@ metadata:
   author: PatAltimore
   ms.author: patricka
   ms.date: 10/23/2019
-  ms.openlocfilehash: a0e43171e70923cfb3af551391204f118be01970
-  ms.sourcegitcommit: 253d4c7ab41e4eb11cd9995190cd5536fcec5a3c
+  ms.openlocfilehash: 123d84cc29c1dce85cccf8c1bbb089bfbbbf7bf3
+  ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 03/25/2020
-  ms.locfileid: "75932662"
+  ms.lasthandoff: 10/09/2020
+  ms.locfileid: "87007660"
 productDirectory:
   items:
   - title: Service Azure Blockchain
@@ -32,13 +32,6 @@ productDirectory:
     - url: ./workbench/overview.md
       text: Qu’est-ce qu’Azure Blockchain Workbench ?
     - url: ./workbench/index.yml
-      text: En savoir plus >
-  - title: Azure Blockchain Tokens
-    imageSrc: ./media/index/blockchain-tokens.svg
-    links:
-    - url: ./tokens/overview.md
-      text: Qu’est-ce qu’Azure Blockchain Tokens ?
-    - url: ./tokens/index.yml
       text: En savoir plus >
 conceptualContent:
   title: Bien démarrer
@@ -71,17 +64,6 @@ conceptualContent:
     - url: https://channel9.msdn.com/Shows/Blocktalk/Building-your-first-Azure-Blockchain-Workbench-application
       itemType: video
       text: Regarder comment créer une application pour la première fois
-  - title: Créer et gérer des jetons
-    links:
-    - url: ./tokens/templates.md
-      itemType: concept
-      text: Définir votre jeton avec un modèle prédéfini
-    - url: ./tokens/account-management.md
-      itemType: concept
-      text: Gérer des jetons avec Azure Blockchain Tokens
-    - url: https://aka.ms/ABTokensPartI
-      itemType: video
-      text: Regarder une présentation d’Azure Blockchain Tokens
   - title: Publier des données de blockchain avec Blockchain Data Manager
     links:
     - url: ./service/data-manager.md
@@ -111,7 +93,7 @@ additionalContent:
       url: https://marketplace.visualstudio.com/items?itemName=azblockchain.azure-blockchain
     - title: Connecteur Ethereum Blockchain
       summary: Utilisez Azure Logic Apps, Microsoft Flow et Microsoft PowerApps pour effectuer des actions de contrat intelligentes telles que l’envoi de transactions, la lecture de l’état du contrat et le déclenchement de flux après des mises à jour de contrat.
-      url: https://docs.microsoft.com/connectors/blockchainethereum/
+      url: /connectors/blockchainethereum/
     - title: Exemples de code
       summary: Dépôt GitHub avec des exemples de code pour vous aider à bien démarrer.
       url: https://github.com/Azure-Samples/blockchain

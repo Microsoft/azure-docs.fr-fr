@@ -5,12 +5,12 @@ author: florianborn71
 ms.author: flborn
 ms.date: 02/04/2020
 ms.topic: how-to
-ms.openlocfilehash: 38116efc9e87eca8e2514a0a84045a69b8d42326
-ms.sourcegitcommit: d187fe0143d7dbaf8d775150453bd3c188087411
+ms.openlocfilehash: 889a70005f1cbabaad525147b4661ea04886138a
+ms.sourcegitcommit: 6109f1d9f0acd8e5d1c1775bc9aa7c61ca076c45
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/08/2020
-ms.locfileid: "80887042"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94445606"
 ---
 # <a name="use-the-model-conversion-rest-api"></a>Utiliser l’API REST de conversion de modèle
 
@@ -53,6 +53,8 @@ Retourne l’ID de la conversion en cours dans un document JSON. Le nom de champ
 
 #### <a name="request-body"></a>Corps de la demande
 
+> [!NOTE]
+> Tout ce qui se trouve sous `input.folderPath` sera récupéré pour effectuer la conversion sur Azure. Si `input.folderPath` n’est pas spécifié, tout le contenu du conteneur est récupéré. Tous les blobs et dossiers récupérés doivent avoir [un nom de fichier Windows valide](/windows/win32/fileio/naming-a-file#naming-conventions).
 
 ```json
 {
@@ -79,7 +81,7 @@ Si votre compte ARR n’est pas lié à votre compte de stockage, cette interfac
 |-----------|:-----------|
 | /v1/accounts/**accountID**/conversions/createWithSharedAccessSignature | POST |
 
-Retourne l’ID de la conversion en cours dans un document JSON. Le nom de champ est « conversionId ».
+Retourne l’ID de la conversion en cours dans un document JSON. Le nom du champ est `conversionId`.
 
 #### <a name="request-body"></a>Corps de la demande
 
@@ -88,6 +90,8 @@ Le corps de la demande est le même que dans l’appel de création REST ci-dess
 > [!NOTE]
 > Ces jetons d’URI SAP sont les chaînes de requête, non l’URI complet. 
 
+> [!NOTE]
+> Tout ce qui se trouve sous `input.folderPath` sera récupéré pour effectuer la conversion sur Azure. Si `input.folderPath` n’est pas spécifié, tout le contenu du conteneur est récupéré. Tous les blobs et dossiers récupérés doivent avoir [un nom de fichier Windows valide](/windows/win32/fileio/naming-a-file#naming-conventions).
 
 ```json
 {
@@ -120,11 +124,27 @@ Vous pouvez interroger l’état d’une conversion en cours démarrée avec l�
 
 Retourne un document JSON avec un champ « status » qui peut avoir les valeurs suivantes :
 
+- « Created »
 - « Running »
 - « Success »
 - « Failure »
 
 Si l’état est « Failure » (échec), il y a un champ « error » supplémentaire avec un sous-champ « message » contenant les informations sur l’erreur. Des journaux supplémentaires sont chargés sur votre conteneur de sortie.
+
+## <a name="list-conversions"></a>Lister les conversions
+
+Pour obtenir la liste de toutes les conversions d’un compte, utilisez l’interface :
+
+| Point de terminaison | Méthode |
+|-----------|:-----------|
+| /v1/accounts/**accountID**/conversions?skiptoken=**skipToken** | GET |
+
+| Paramètre | Obligatoire |
+|-----------|:-----------|
+| accountID | Oui |
+| skiptoken | Non |
+
+Retourne un document json qui contient un tableau des conversions et leurs détails. Cette requête retourne un maximum de 50 conversions à la fois. S’il y a plus de conversions à récupérer, la réponse contient une propriété **nextLink** contenant le skipToken interrogeable pour récupérer le jeu suivant de résultats.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

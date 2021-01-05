@@ -5,15 +5,16 @@ author: bandersmsft
 ms.reviewer: judupont
 tags: billing
 ms.service: cost-management-billing
+ms.subservice: billing
 ms.topic: tutorial
-ms.date: 02/13/2020
+ms.date: 12/02/2020
 ms.author: banders
-ms.openlocfilehash: 21579c7c3acd726ac8958768238631333cf63c39
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: b5de81f5eaf76c16c1ea8fc78075c4567c77aeee
+ms.sourcegitcommit: 5b93010b69895f146b5afd637a42f17d780c165b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "79237562"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96531975"
 ---
 # <a name="tutorial-review-your-microsoft-customer-agreement-invoice"></a>Tutoriel : Consulter votre facture Contrat client Microsoft
 
@@ -46,13 +47,15 @@ Vérifiez le type de contrat pour déterminer si vous avez accès au compte de f
 
 Dans le portail Azure, tapez *gestion des coûts + facturation* dans la zone de recherche, puis sélectionnez **Gestion des coûts + facturation**.
 
-![Capture d’écran montrant une recherche relative à la gestion des coûts et à la facturation sur le portail Microsoft Azure](./media/review-customer-agreement-bill/billing-search-cost-management-billing.png)
+![Capture d’écran montrant la recherche de « gestion des coûts + facturation » dans le Portail Azure.](./media/review-customer-agreement-bill/billing-search-cost-management-billing.png)
 
 Si vous avez accès à une seule étendue de facturation, sélectionnez **Propriétés** dans la partie gauche. Vous avez accès au compte de facturation d’un contrat client Microsoft si le type de compte de facturation est **Contrat client Microsoft**.
 
 ![Capture d’écran montrant la page de propriétés d’un Contrat client Microsoft](./media/review-customer-agreement-bill/billing-mca-property.png)
 
 Si vous avez accès à plusieurs étendues de facturation, vérifiez le type indiqué dans la colonne du compte de facturation. Vous avez accès à un compte de facturation d’un contrat client Microsoft si le type de compte de facturation de l’une des étendues est **Contrat client Microsoft**.
+
+Dans la page des étendues de facturation, sélectionnez **Étendue de facturation**, puis sélectionnez le compte de facturation, qui sera utilisé pour payer l’utilisation des abonnements. Le compte de facturation doit être de type **Contrat client Microsoft**.
 
 ![Capture d’écran montrant un Contrat client Microsoft dans la page listant les comptes de facturation](./media/review-customer-agreement-bill/billing-mca-in-the-list.png)
 
@@ -105,7 +108,7 @@ Sélectionnez l’onglet **Résumé** en haut de l’écran.
 
 La section Frais affiche le mois en cours et les frais du mois dernier.
 
-![Capture d’écran montrant une recherche relative à la gestion des coûts et à la facturation sur le portail Microsoft Azure](./media/review-customer-agreement-bill/mca-billing-profile-summary.png)
+![Capture d’écran illustrant le résumé d’un profil de facturation.](./media/review-customer-agreement-bill/mca-billing-profile-summary.png)
 
 Les frais du mois en cours sont des frais en attente. Ils seront facturés lors de la génération de la facture à la fin du mois. Si la facture du mois dernier n’est pas encore générée, les frais du mois dernier sont également en attente et seront reportés sur votre prochaine facture.
 
@@ -137,7 +140,7 @@ Sur le côté gauche de la page, sélectionnez **Tous les abonnements**.
 
 La page Abonnements Azure affiche les frais actuels et ceux du mois dernier pour chaque abonnement dans le profil de facturation. Les frais du mois en cours sont des frais en attente. Ils seront facturés lors de la génération de la facture à la fin du mois. Si la facture du mois dernier n’est pas encore générée, les frais du mois dernier sont également en attente.
 
-![Capture d’écran montrant la liste des abonnements Azure pour le profil de facturation](./media/review-customer-agreement-bill/mca-billing-profile-subscriptions-list.png)
+![Capture d’écran montrant les abonnements avec les frais en cumul mensuel à ce jour et les frais du mois précédent.](./media/review-customer-agreement-bill/mca-billing-profile-subscriptions-list.png)
 
 ## <a name="analyze-your-azure-usage-charges"></a>Analyser vos frais d’utilisation Azure
 
@@ -145,7 +148,7 @@ Utilisez le fichier CSV Utilisation et frais Azure pour analyser vos frais en fo
 
 ### <a name="download-your-invoice-and-usage-details"></a>Télécharger les détails de facturation et d’utilisation
 
-En fonction de votre type d’accès, vous devrez peut-être sélectionner un compte de facturation ou un profil de facturation dans Gestion des coûts + facturation. Dans le menu de gauche, sélectionnez **Factures** sous **Facturation**. Dans la grille des factures, recherchez la ligne de la facture que vous souhaitez télécharger. Cliquez sur le symbole de téléchargement ou sur les points de suspension (...) à la fin de la ligne. Dans la zone **Télécharger**, téléchargez le fichier de détails d’utilisation et la facture.
+En fonction de votre type d’accès, vous devrez peut-être sélectionner un compte de facturation ou un profil de facturation dans Gestion des coûts + facturation. Dans le menu de gauche, sélectionnez **Factures** sous **Facturation**. Dans la grille des factures, recherchez la ligne de la facture que vous souhaitez télécharger. Sélectionnez le symbole de téléchargement ou les points de suspension (...) à la fin de la ligne. Dans la zone **Télécharger**, téléchargez le fichier de détails d’utilisation et la facture.
 
 ### <a name="view-detailed-usage-by-invoice-section"></a>Afficher l’utilisation détaillée par section de la facture
 
@@ -171,7 +174,7 @@ Vous pouvez filtrer le fichier CSV Utilisation et frais Azure pour rapprocher le
 
 L’image suivante montre la liste des abonnements dans le portail Microsoft Azure.
 
-![Capture d’écran montrant la liste des abonnements Azure pour le profil de facturation](./media/review-customer-agreement-bill/mca-billing-profile-subscriptions-list-highlighted.png)
+![Capture d’écran montrant la liste des abonnements dans le Portail Azure avec un abonnement encadré.](./media/review-customer-agreement-bill/mca-billing-profile-subscriptions-list-highlighted.png)
 
 Filtre la colonne **subscriptionName** dans le fichier CSV Utilisation et frais Azure pour **WA_Subscription** afin d’afficher les frais d’utilisation détaillés pour WA_Subscription.
 

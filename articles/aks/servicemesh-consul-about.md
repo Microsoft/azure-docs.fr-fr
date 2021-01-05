@@ -5,12 +5,12 @@ author: paulbouwer
 ms.topic: article
 ms.date: 10/09/2019
 ms.author: pabouwer
-ms.openlocfilehash: c518985b360fa3264bd5ac1e3fe76d61b2810b9b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 77cb6a693c5a73d0498b0acf9bc4ad8cc9f8f32f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77594207"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "83774002"
 ---
 # <a name="consul"></a>Consul
 
@@ -93,6 +93,7 @@ La documentation suivante décrit comment installer Consul sur AKS (Azure Kubern
 
 Vous pouvez également explorer plus en détail les fonctionnalités et l’architecture de Consul :
 
+- [Didacticiels de prise en main de Consul][consul-getting-started]
 - [Fonctionnalités de Consul][consul-features]
 - [Architecture de Consul][consul-architecture]
 - [Consul - Fonctionnement de Connect][consul-how-connect-works]
@@ -104,6 +105,7 @@ Vous pouvez également explorer plus en détail les fonctionnalités et l’arch
 [consul-sidecar]: https://www.consul.io/docs/connect/proxies.html
 [consul-how-connect-works]: https://www.consul.io/docs/connect/connect-internals.html
 [consul-principles]: https://www.consul.io/
+[consul-getting-started]:https://learn.hashicorp.com/consul?track=gs-consul-service-mesh#gs-consul-service-mesh
 
 [envoy-proxy]: https://www.envoyproxy.io/
 [grafana]: https://grafana.com/

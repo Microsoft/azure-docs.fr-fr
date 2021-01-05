@@ -3,12 +3,12 @@ title: FAQ Azure Resource Health
 description: Vue d’ensemble d’Azure Resource Health
 ms.topic: conceptual
 ms.date: 01/29/2019
-ms.openlocfilehash: 7459a29dca01dc186d75b4545f89068569975607
-ms.sourcegitcommit: 7d8158fcdcc25107dfda98a355bf4ee6343c0f5c
+ms.openlocfilehash: a5ad8867b110039e4dcc34b20c8a61fccfd39eaf
+ms.sourcegitcommit: 3ea45bbda81be0a869274353e7f6a99e4b83afe2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/09/2020
-ms.locfileid: "80985029"
+ms.lasthandoff: 12/10/2020
+ms.locfileid: "97032862"
 ---
 # <a name="azure-resource-health-faq"></a>FAQ Azure Resource Health
 Découvrez les réponses aux questions courantes sur Azure Resource Health.
@@ -46,13 +46,12 @@ Oui, lorsqu’une ressource n’est pas disponible, Resource Health identifie l�
 Sur le portail, les actions initiées par l’utilisateur sont affichées à l’aide d’une icône de notification bleue, tandis que les événements planifiés et non planifiés sont affichés à l’aide d’une icône d’avertissement rouge. Pour plus d’informations, voir [Vue d’ensemble d’Azure Resource Health](Resource-health-overview.md).  
 
 ## <a name="can-i-integrate-resource-health-with-my-monitoring-tools"></a>Puis-je intégrer Resource Health à mes outils d’analyse ?
-Resource Health propose un [support (préversion)](resource-health-alert-arm-template-guide.md) pour les alertes basées sur le journal d'activité. Les alertes du journal d'activité utilisent des [groupes d'actions](https://docs.microsoft.com/azure/azure-monitor/platform/action-groups) pour avertir les utilisateurs qu'une alerte a été déclenchée. Les groupes d'actions prennent en charge différents canaux de notification (e-mail, SMS, webhook, actions de gestion des services informatiques, etc.).
+Resource Health [prend en charge](resource-health-alert-arm-template-guide.md) les alertes basées sur le journal d’activité. Les alertes du journal d'activité utilisent des [groupes d'actions](../azure-monitor/platform/action-groups.md) pour avertir les utilisateurs qu'une alerte a été déclenchée. Les groupes d'actions prennent en charge différents canaux de notification (e-mail, SMS, webhook, actions de gestion des services informatiques, etc.).
 
 ## <a name="where-do-i-find-resource-health"></a>Où trouver Resource Health ?
 Une fois connecté au portail Azure, vous pouvez accéder à Resource Health de plusieurs manières :
 - Accédez à votre ressource. Dans le volet de navigation de gauche, sélectionnez **Resource Health**.
 - Accédez au panneau Azure Service Health.  Dans le volet de navigation de gauche, sélectionnez **Resource Health**.
-- Sélectionnez le point d’interrogation dans le coin supérieur droit du portail, puis choisissez **Aide + Support** pour ouvrir le panneau **Aide et support**. Lorsque le panneau s’ouvre, sélectionnez **Resource Health**
 
 Vous pouvez également utiliser l’API Resource Health pour obtenir des informations sur l’intégrité de vos ressources.
 
@@ -69,8 +68,6 @@ Resource Health est disponible dans toutes les zones géographiques Azure.
 Les informations fournies par Resource Health sont plus précises que celles de l’état d’Azure ou du tableau de bord Service Health.
 
 Tandis que [l’état d’Azure](https://status.azure.com) et le tableau de bord Service Health vous informent des problèmes de service affectant un large éventail de clients (par exemple, une région Azure), Resource Health expose des événements plus granulaires qui ne concernent que la ressource spécifique. Par exemple, si un hôte redémarre inopinément, Resource Health n’avertit que les clients dont les machines virtuelles étaient exécutées sur cet hôte.
-
-Il est important de noter que pour pouvoir vous fournir une visibilité complète des événements ayant un impact sur vos ressources, Resource Health expose également des événements publiés dans le tableau de bord Service Health.
 
 ## <a name="do-i-need-to-activate-resource-health-for-each-resource"></a>Dois-je activer Resource Health pour chaque ressource ?
 Non, les informations d’intégrité sont disponibles pour tous les types de ressources disponibles via Resource Health. 

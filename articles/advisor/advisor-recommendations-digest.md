@@ -4,12 +4,12 @@ description: Obtenir une synthèse périodique de vos recommandations actives
 ms.topic: article
 ms.date: 03/16/2020
 ms.author: sagupt
-ms.openlocfilehash: 98f1bfd42a486e005cd1e777a83f5b615a7c8304
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: e446fca11e029e28e44ada884efd071f3142514c
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79503917"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86518077"
 ---
 # <a name="configure-periodic-summary-for-recommendations"></a>Configurer une synthèse périodique des recommandations
 
@@ -21,7 +21,7 @@ Les **synthèses de recommandations** Advisor offrent un moyen simple et proacti
 L’expérience de création d’une **synthèse de recommandations** vous aidera à configurer la synthèse. Vous pouvez sélectionner les paramètres ci-dessous pour les configurations :
 1. Catégorie : Il existe des catégories de recommandations telles que les coûts, la haute disponibilité, les performances et l’excellence opérationnelle. Cette fonctionnalité n’est pas encore disponible pour les recommandations de sécurité.
 2. Fréquence des synthèses : La fréquence des notifications de synthèse peut être hebdomadaire, bihebdomadaire ou mensuelle.
-3. Groupe d’actions : Vous pouvez sélectionner un groupe d’actions existant ou en créer un. Pour plus d’informations sur les groupes d’actions, consultez [Créer et gérer des groupes d’actions](https://docs.microsoft.com/azure/azure-monitor/platform/action-groups).
+3. Groupe d’actions : Vous pouvez sélectionner un groupe d’actions existant ou en créer un. Pour plus d’informations sur les groupes d’actions, consultez [Créer et gérer des groupes d’actions](../azure-monitor/platform/action-groups.md).
 4. Langue de la synthèse
 5. Nom de la synthèse des recommandations : Vous pouvez utiliser une chaîne au nom explicite pour mieux suivre et superviser les synthèses.
 
@@ -44,7 +44,7 @@ Voici les étapes à suivre pour créer une **synthèse de recommandations** :
 
    ![Fournir des entrées pour la synthèse des recommandations - Conditions](./media/digest-2.png)
 
-* **Étape 5 :** Dans la section **Groupe d’actions**, sélectionnez un **groupe d’actions** pour la synthèse. Pour plus d’informations, consultez [Créer et gérer des groupes d’actions](https://docs.microsoft.com/azure/azure-monitor/platform/action-groups).
+* **Étape 5 :** Dans la section **Groupe d’actions**, sélectionnez un **groupe d’actions** pour la synthèse. Pour plus d’informations, consultez [Créer et gérer des groupes d’actions](../azure-monitor/platform/action-groups.md).
 
    ![Fournir des entrées pour la synthèse des recommandations - Groupe d’actions](./media/digest-3.png)
 
@@ -60,4 +60,4 @@ Pour plus d’informations sur les recommandations d’Advisor, consultez :
 * [Recommandations du conseiller en matière de performances](advisor-performance-recommendations.md)
 * [Recommandations du conseiller en matière de sécurité](advisor-security-recommendations.md)
 * [Recommandations d’excellence opérationnelle Advisor](advisor-operational-excellence-recommendations.md)
-* [API REST Advisor](https://docs.microsoft.com/rest/api/advisor/)
+* [API REST Advisor](/rest/api/advisor/)

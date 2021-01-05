@@ -11,13 +11,13 @@ ms.workload: identity
 ms.date: 09/08/2019
 ms.author: jmprieur
 ms.reviewer: saeeda
-ms.custom: aaddev
-ms.openlocfilehash: 1a57173311278c5e3e0304aeb12d4d6999379eb5
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp, aaddev
+ms.openlocfilehash: 7fa13a328a55b0e9eaa546e70bf0711f4f011cf1
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79230641"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96173428"
 ---
 # <a name="use-microsoft-authenticator-or-intune-company-portal-on-xamarin-applications"></a>Utiliser Microsoft Authenticator ou le Portail d’entreprise Intune sur des applications Xamarin
 
@@ -27,15 +27,19 @@ Sur Android et iOS, des répartiteurs tels que Microsoft Authenticator et le Por
 - **Identification de l’appareil** : le répartiteur accède au certificat de l’appareil. Ce certificat est créé sur l’appareil quand celui-ci est joint à l’espace de travail.
 - **Vérification de l’identification de l’application** : quand une application appelle le répartiteur, elle transmet son URL de redirection. Le répartiteur vérifie alors l’URL.
 
-Pour activer l’une de ces fonctionnalités, utilisez le paramètre `WithBroker()` lorsque vous appelez la méthode `PublicClientApplicationBuilder.CreateApplication`. Par défaut, le paramètre `.WithBroker()` est défini sur true. 
+Pour activer l’une de ces fonctionnalités, utilisez le paramètre `WithBroker()` lorsque vous appelez la méthode `PublicClientApplicationBuilder.CreateApplication`. Par défaut, le paramètre `.WithBroker()` est défini sur true.
 
-Aidez-vous également des instructions fournies dans les sections suivantes afin de configurer l’authentification répartie pour des applications [iOS](#brokered-authentication-for-ios) ou [Android](#brokered-authentication-for-android).
+La configuration de l’authentification répartie dans la bibliothèque d’authentification Microsoft pour .NET (MSAL.NET) varie selon la plateforme :
+
+* [Applications iOS](#brokered-authentication-for-ios)
+* [Applications Android](#brokered-authentication-for-android)
 
 ## <a name="brokered-authentication-for-ios"></a>Authentification répartie pour iOS
 
-Effectuez ces étapes pour permettre à votre application Xamarin.iOS de communiquer avec l’application [Microsoft Authenticator](https://itunes.apple.com/us/app/microsoft-authenticator/id983156458).
+Suivez les étapes ci-dessous pour permettre à votre application Xamarin.iOS de communiquer avec l’application [Microsoft Authenticator](https://itunes.apple.com/us/app/microsoft-authenticator/id983156458). Si vous ciblez iOS 13, vous pouvez vous renseigner sur le [changement cassant d’API d’Apple](./msal-net-xamarin-ios-considerations.md).
 
 ### <a name="step-1-enable-broker-support"></a>Étape 1 : Activer la prise en charge du répartiteur
+
 Vous devez activer la prise en charge du répartiteur pour chaque instance de `PublicClientApplication`. La prise en charge est désactivée par défaut. Si vous créez `PublicClientApplication` avec `PublicClientApplicationBuilder`, utilisez le paramètre `WithBroker()` comme dans l’exemple suivant. Par défaut, le paramètre `WithBroker()` est défini sur true.
 
 ```csharp
@@ -53,7 +57,6 @@ Pour activer l’accès au trousseau, vous devez avoir défini un groupe d’acc
 ```csharp
 var builder = PublicClientApplicationBuilder
      .Create(ClientId)
-      
      .WithIosKeychainSecurityGroup("com.microsoft.adalcache")
      .Build();
 ```
@@ -61,10 +64,11 @@ var builder = PublicClientApplicationBuilder
 Pour plus d'informations, consultez [Activer l’accès au trousseau](msal-net-xamarin-ios-considerations.md#enable-keychain-access).
 
 ### <a name="step-3-update-appdelegate-to-handle-the-callback"></a>Étape 3 : Mettre à jour AppDelegate pour gérer le rappel
-Lorsque Microsoft Authentication Library for .NET (MSAL.NET) appelle le répartiteur, ce dernier rappelle votre application à l’aide de la méthode `OpenUrl` de la classe `AppDelegate`. Comme MSAL attend la réponse du répartiteur, votre application doit coopérer pour rappeler MSAL.NET. Pour permettre cette coopération, mettez à jour le fichier `AppDelegate.cs` pour remplacer la méthode suivante.
+
+Quand MSAL.NET appelle le répartiteur, ce dernier rappelle votre application via la méthode `OpenUrl` de la classe `AppDelegate`. Comme MSAL attend la réponse du répartiteur, votre application doit coopérer pour rappeler MSAL.NET. Pour permettre cette coopération, mettez à jour le fichier *AppDelegate.cs* pour remplacer la méthode suivante.
 
 ```csharp
-public override bool OpenUrl(UIApplication app, NSUrl url, 
+public override bool OpenUrl(UIApplication app, NSUrl url,
                              string sourceApplication,
                              NSObject annotation)
 {
@@ -73,35 +77,37 @@ public override bool OpenUrl(UIApplication app, NSUrl url,
       AuthenticationContinuationHelper.SetBrokerContinuationEventArgs(url);
       return true;
     }
-    
+
     else if (!AuthenticationContinuationHelper.SetAuthenticationContinuationEventArgs(url))
-    {                
-         return false;                  
+    {
+         return false;
     }
-    
-    return true;     
-}            
+
+    return true;
+}
 ```
 
 Cette méthode est appelée à chaque démarrage de l’application. Elle permet de traiter la réponse du répartiteur et d’accomplir le processus d’authentification lancé par MSAL.NET.
 
 ### <a name="step-4-set-uiviewcontroller"></a>Étape 4 : Définir UIViewController()
-Toujours dans le fichier `AppDelegate.cs`, vous devez définir une fenêtre d’objet. Normalement, pour Xamarin iOS, vous n’êtes pas tenu de définir cette fenêtre. Toutefois, vous avez besoin d’une fenêtre d’objet pour envoyer des demandes au répartiteur et recevoir ses réponses. 
 
-Pour configurer la fenêtre d’objet : 
-1. Dans le fichier `AppDelegate.cs`, définissez `App.RootViewController` sur un nouveau `UIViewController()`. Cette affectation garantit que l’appel au répartiteur comprend `UIViewController`. Si ce paramètre n’est pas correctement affecté, vous risquez de recevoir cette erreur :
+Toujours dans le fichier *AppDelegate.cs*, vous devez définir une fenêtre d’objet. Vous n’avez généralement pas besoin de définir la fenêtre d’objet pour Xamarin iOS, mais vous avez besoin d’une fenêtre d’objet pour envoyer des réponses au répartiteur et recevoir des réponses.
+
+Pour configurer la fenêtre d’objet :
+
+1. Dans le fichier *AppDelegate.cs*, définissez `App.RootViewController` sur un nouveau `UIViewController()`. Cette affectation garantit que l’appel au répartiteur comprend `UIViewController`. Si ce paramètre n’est pas correctement affecté, vous risquez de recevoir cette erreur :
 
       `"uiviewcontroller_required_for_ios_broker":"UIViewController is null, so MSAL.NET cannot invoke the iOS broker. See https://aka.ms/msal-net-ios-broker"`
 
 1. Dans l’appel `AcquireTokenInteractive`, utilisez `.WithParentActivityOrWindow(App.RootViewController)`, puis passez la référence à la fenêtre d’objet que vous allez utiliser.
 
-    Dans `App.cs` :
+    Dans *App.cs* :
 
     ```csharp
        public static object RootViewController { get; set; }
     ```
 
-    Dans `AppDelegate.cs` :
+    Dans *AppDelegate.cs* :
 
     ```csharp
        LoadApplication(new App());
@@ -117,9 +123,10 @@ Pour configurer la fenêtre d’objet :
     ```
 
 ### <a name="step-5-register-a-url-scheme"></a>Étape 5 : Inscrire un schéma d’URL
-MSAL.NET utilise des URL pour appeler le répartiteur, avant de retourner la réponse du répartiteur à votre application. Pour effectuer l’aller-retour, inscrivez un schéma d’URL pour votre application dans le fichier `Info.plist`.
 
-Le nom `CFBundleURLSchemes` doit inclure le préfixe `msauth.`, suivi de `CFBundleURLName`. 
+MSAL.NET utilise des URL pour appeler le répartiteur, avant de retourner la réponse du répartiteur à votre application. Pour effectuer l’aller-retour, inscrivez un schéma d’URL pour votre application dans le fichier *Info.plist*.
+
+Le nom `CFBundleURLSchemes` doit inclure le préfixe `msauth.`, suivi de `CFBundleURLName`.
 
 Dans le schéma d’URL, `BundleId` identifie de manière unique l’application : `$"msauth.(BundleId)"`. Par conséquent, si `BundleId` est `com.yourcompany.xforms`, le schéma d’URL est `msauth.com.yourcompany.xforms`.
 
@@ -144,9 +151,9 @@ Dans le schéma d’URL, `BundleId` identifie de manière unique l’application
 
 ### <a name="step-6-add-the-broker-identifier-to-the-lsapplicationqueriesschemes-section"></a>Étape 6 : Ajouter l’identificateur du répartiteur à la section LSApplicationQueriesSchemes
 
-MSAL utilise `–canOpenURL:` pour vérifier si le répartiteur est installé sur l’appareil. Dans iOS 9, Apple a verrouillé les schémas qu’une application peut interroger. 
+MSAL utilise `–canOpenURL:` pour vérifier si le répartiteur est installé sur l’appareil. Dans iOS 9, Apple a verrouillé les schémas qu’une application peut interroger.
 
-Ajoutez `msauthv2` à la section `LSApplicationQueriesSchemes` du fichier `Info.plist`, comme dans l’exemple suivant :
+Ajoutez `msauthv2` à la section `LSApplicationQueriesSchemes` du fichier *Info.plist*, comme dans l’exemple suivant :
 
 ```XML
 <key>LSApplicationQueriesSchemes</key>
@@ -156,7 +163,7 @@ Ajoutez `msauthv2` à la section `LSApplicationQueriesSchemes` du fichier `Info.
     </array>
 ```
 
-### <a name="step-7-register-your-redirect-uri-in-the-application-portal"></a>Étape 7 : Inscrire votre URI de redirection dans le portail d’applications
+### <a name="step-7-add-a-redirect-uri-to-your-app-registration"></a>Étape 7 : Ajouter un URI de redirection à l’inscription de votre application
 
 Si vous utilisez le répartiteur, votre URI de redirection doit remplir une exigence supplémentaire. Le format de l'URI de redirection _doit_ être le suivant :
 
@@ -167,59 +174,46 @@ $"msauth.{BundleId}://auth"
 Voici un exemple :
 
 ```csharp
-public static string redirectUriOnIos = "msauth.com.yourcompany.XForms://auth"; 
+public static string redirectUriOnIos = "msauth.com.yourcompany.XForms://auth";
 ```
 
-Vous remarquerez que l’URI de redirection correspond au nom `CFBundleURLSchemes` que vous avez indiqué dans le fichier `Info.plist`.
+Vous remarquerez que l’URI de redirection correspond au nom `CFBundleURLSchemes` que vous avez indiqué dans le fichier *Info.plist*.
 
-### <a name="step-8-make-sure-the-redirect-uri-is-registered-with-your-app"></a>Étape 8 : Vérifier que l’URI de redirection est inscrit avec votre application
+Ajoutez l’URI de redirection à l’inscription de l’application dans le [portail Azure](https://portal.azure.com). Pour générer un URI de redirection correctement mis en forme, utilisez les **inscriptions d’applications** dans le portail Azure pour générer l’URI de redirection répartie à partir de l’ID d’offre groupée.
 
-L’URI de redirection doit être inscrit dans le [portail d’inscription d’application](https://portal.azure.com) comme URI de redirection valide pour votre application. 
+**Pour générer l’URI de redirection :**
 
-Le portail d’inscription d’application offre une nouvelle expérience conçue pour vous aider à calculer l’URI de réponse du répartiteur à partir de l’ID de bundle. 
+1. Connectez-vous au [portail Azure](https://portal.azure.com).
+1. Sélectionnez **Azure Active Directory** > **Inscriptions d’applications** > votre application inscrite.
+1. Sélectionnez **Authentification** > **Ajouter une plateforme** > **iOS / macOS**.
+1. Entrez votre ID d’offre groupée, puis sélectionnez **Configurer**.
 
-Pour calculer l’URI de redirection :
+    Copiez l’URI de redirection généré qui apparaît dans la zone de texte **URI de redirection** à inclure dans votre code :
 
-1. Dans le portail d’inscription d’application, choisissez **Authentification** > **Essayer la nouvelle expérience**.
-
-   ![Essayer la nouvelle expérience d’inscription d’application](media/msal-net-use-brokers-with-xamarin-apps/60799285-2d031b00-a173-11e9-9d28-ac07a7ae894a.png)
-
-1. Sélectionnez **Ajouter une plateforme**.
-
-   ![Ajouter une plateforme](media/msal-net-use-brokers-with-xamarin-apps/60799366-4c01ad00-a173-11e9-934f-f02e26c9429e.png)
-
-1. Lorsque la liste des plateformes est prise en charge, sélectionnez **iOS**.
-
-   ![Configurer iOS](media/msal-net-use-brokers-with-xamarin-apps/60799411-60de4080-a173-11e9-9dcc-d39a45826d42.png)
-
-1. Entrez votre ID d’offre groupée comme demandé, puis sélectionnez **Configurer**.
-
-   ![Entrer l’ID de bundle](media/msal-net-use-brokers-with-xamarin-apps/60799477-7eaba580-a173-11e9-9f8b-431f5b09344e.png)
-
-Quand vous avez terminé ces étapes, l’URI de redirection est automatiquement calculé.
-
-![Copier URI de redirection](media/msal-net-use-brokers-with-xamarin-apps/60799538-9e42ce00-a173-11e9-860a-015a1840fd19.png)
+    :::image type="content" source="media/msal-net-use-brokers-with-xamarin-apps/portal-01-ios-platform-settings.png" alt-text="Paramètres de plateforme iOS avec URI de redirection généré dans le portail Azure":::
+1. Sélectionnez **Terminé** pour terminer la génération de l’URI de redirection.
 
 ## <a name="brokered-authentication-for-android"></a>Authentification répartie pour Android
 
 ### <a name="step-1-enable-broker-support"></a>Étape 1 : Activer la prise en charge du répartiteur
 
-La prise en charge du répartiteur est activée pour chaque application cliente publique (PublicClientApplication). Elle est désactivée par défaut. Utilisez le paramètre `WithBroker()` (défini sur true par défaut) lors de la création de `IPublicClientApplication` via `PublicClientApplicationBuilder`.
+La prise en charge du répartiteur est activée par `PublicClientApplication`. Elle est désactivée par défaut. Utilisez le paramètre `WithBroker()` (défini sur true par défaut) lors de la création de `IPublicClientApplication` via `PublicClientApplicationBuilder`.
 
-```CSharp
+```csharp
 var app = PublicClientApplicationBuilder
                 .Create(ClientId)
                 .WithBroker()
-                .WithRedirectUri(redirectUriOnAndroid) //(see step 4 below)
+                .WithRedirectUri(redirectUriOnAndroid) // See step #4
                 .Build();
 ```
 
 ### <a name="step-2-update-appdelegate-to-handle-the-callback"></a>Étape 2 : Mettre à jour AppDelegate pour gérer le rappel
 
-Quand MSAL.NET appelle le répartiteur, celui-ci rappelle votre application avec la méthode OnActivityResult(). Étant donné que MSAL attend la réponse du répartiteur, votre application doit router le résultat vers MSAL.NET.
-Pour router le résultat vers `SetAuthenticationContinuationEventArgs(int requestCode, Result resultCode, Intent data)`, vous pouvez remplacer la méthode OnActivityResult() comme indiqué ci-dessous.
+Quand MSAL.NET appelle le répartiteur, ce dernier rappelle à son tour votre application avec la méthode `OnActivityResult()`. Étant donné que MSAL attend la réponse du répartiteur, votre application doit router le résultat vers MSAL.NET.
 
-```CSharp
+Routez le résultat vers la méthode `SetAuthenticationContinuationEventArgs(int requestCode, Result resultCode, Intent data)` en substituant la méthode `OnActivityResult()` comme indiqué ici :
+
+```csharp
 protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
 {
    base.OnActivityResult(requestCode, resultCode, data);
@@ -231,43 +225,37 @@ Cette méthode est appelée chaque fois que l’application de répartiteur est 
 
 ### <a name="step-3-set-an-activity"></a>Étape 3 : Définir une activité
 
-Pour que l’authentification répartie fonctionne, vous devez définir une activité afin que MSAL puisse envoyer et recevoir la réponse du répartiteur.
+Pour activer l’authentification répartie, définissez une activité afin que MSAL puisse envoyer la réponse au répartiteur et recevoir sa réponse. Pour ce faire, fournissez l’activité (généralement, `MainActivity`) à `WithParentActivityOrWindow(object parent)`, l’objet parent.
 
-Pour cela, vous devez fournir l’activité (généralement MainActivity) à `WithParentActivityOrWindow(object parent)` en tant qu’objet parent. 
+Par exemple, dans l’appel à `AcquireTokenInteractive()` :
 
-**Par exemple :**
-
-Dans l’appel d’acquisition de jeton :
-
-```CSharp
+```csharp
 result = await app.AcquireTokenInteractive(scopes)
              .WithParentActivityOrWindow((Activity)context))
              .ExecuteAsync();
 ```
 
-### <a name="step-4-register-your-redirecturi-in-the-application-portal"></a>Étape 4 : Inscrire votre RedirectUri sur le portail d’application
+### <a name="step-4-add-a-redirect-uri-to-your-app-registration"></a>Étape 4 : Ajouter un URI de redirection à l’inscription de votre application
 
-MSAL utilise des URL pour appeler le répartiteur, avant de retourner à votre application. Pour effectuer l’aller-retour, vous devez inscrire un schéma d’URL pour votre application. Cet URI de redirection doit être inscrit dans le portail d’inscription des applications Azure AD en tant qu’URI de redirection valide pour votre application.
+MSAL utilise des URL pour appeler le répartiteur, avant de retourner à votre application. Pour effectuer cet aller-retour, vous devez inscrire un **URI de redirection** pour votre application à l’aide du [portail Azure](https://portal.azure.com).
 
-
-L’URI de redirection dont vous avez besoin pour votre application dépend du certificat qui a été utilisé pour signer l’APK.
+Le format de l’URI de redirection pour votre application dépend du certificat utilisé pour signer l’APK. Par exemple :
 
 ```
-Example: msauth://com.microsoft.xforms.testApp/hgbUYHVBYUTvuvT&Y6tr554365466=
+msauth://com.microsoft.xforms.testApp/hgbUYHVBYUTvuvT&Y6tr554365466=
 ```
 
-La dernière partie de l’URI (`hgbUYHVBYUTvuvT&Y6tr554365466=`) correspond à la signature utilisée pour l’APK, encodée au format base64.
-Toutefois, pendant la phase de développement de votre application dans Visual Studio, si vous déboguez votre code sans signer l’APK avec un certificat, Visual Studio le signera automatiquement à des fins de débogage. De cette façon, l’APK reçoit une signature unique pour l’ordinateur sur lequel il est créé. Par conséquent, chaque fois que vous créez votre application sur un autre ordinateur, vous devez mettre à jour l’URI de redirection dans le code de l’application et dans l’inscription de l’application sur le portail Azure afin de vous authentifier auprès de MSAL. 
+La dernière partie de l’URI, `hgbUYHVBYUTvuvT&Y6tr554365466=`, correspond à la version encodée au format Base64 de la signature utilisée pour l’APK. Lors du développement de votre application dans Visual Studio, si vous déboguez votre code sans signer l’APK avec un certificat spécifique, Visual Studio signe l’APK pour vous à des fins de débogage. Lorsque Visual Studio signe l’APK pour vous de cette manière, il lui donne une signature unique pour l’ordinateur sur lequel il est basé. Par conséquent, chaque fois que vous créez votre application sur un autre ordinateur, vous devez mettre à jour l’URI de redirection dans le code de l’application et dans l’inscription de l’application sur le portail Azure afin de vous authentifier auprès de MSAL.
 
-Lors du débogage, vous pouvez rencontrer une exception MSAL (ou un message du journal) indiquant que l’URI de redirection fourni est incorrect. **Cette exception vous fournira également l’URI de redirection que vous devez utiliser** sur l’ordinateur où vous effectuez le débogage. Pour le moment, vous pouvez utiliser cet URI de redirection pour poursuivre le développement.
+Lors du débogage, vous pouvez rencontrer une exception MSAL (ou un message du journal) indiquant que l’URI de redirection fourni est incorrect. **Le message d’exception ou de journal indique également l’URI de redirection que vous devez utiliser** avec l’ordinateur sur lequel vous effectuez le débogage. Vous pouvez utiliser l’URI de redirection fourni pour poursuivre le développement de votre application à condition de mettre à jour l’URI de redirection dans le code et d’ajouter l’URI de redirection fourni à l’inscription de l’application dans le portail Azure.
 
-Une fois que vous êtes prêt à finaliser votre code, mettez à jour l’URI de redirection dans le code et dans l’inscription de l’application sur le portail Azure afin d’utiliser la signature du certificat avec lequel vous allez signer l’APK.
+Une fois que vous êtes prêt à finaliser votre code, mettez à jour l’URI de redirection dans le code et l’inscription de l’application dans le portail Azure afin d’utiliser la signature du certificat avec laquelle vous signez l’APK.
 
-Dans la pratique, cela signifie que vous devez inscrire un URI de redirection pour chaque membre de l’équipe, ainsi qu’un URI de redirection pour la version signée de production de l’APK.
+Dans la pratique, cela signifie que vous devez envisager d’ajouter un URI de redirection pour chaque membre de votre équipe de développement, *plus* un URI de redirection pour la version signée de production de l’APK.
 
-Vous pouvez également calculer cette signature vous-même, à l’aide d’une méthode similaire à celle de MSAL : 
+Vous pouvez calculer cette signature vous-même, d’une façon similaire à celle utilisée par MSAL :
 
-```CSharp
+```csharp
    private string GetRedirectUriForBroker()
    {
       string packageName = Application.Context.PackageName;
@@ -299,11 +287,79 @@ Vous pouvez également calculer cette signature vous-même, à l’aide d’une 
    }
 ```
 
-Vous avez également la possibilité d’acquérir la signature de votre package à l’aide du keytool avec les commandes suivantes :
+Vous avez également la possibilité d’acquérir la signature pour votre package en utilisant **keytool** avec les commandes suivantes :
 
-Pour Windows : `keytool.exe -list -v -keystore "%LocalAppData%\Xamarin\Mono for Android\debug.keystore" -alias androiddebugkey -storepass android -keypass android`
+* Windows :
+    ```console
+    keytool.exe -list -v -keystore "%LocalAppData%\Xamarin\Mono for Android\debug.keystore" -alias androiddebugkey -storepass android -keypass android
+    ````
+* macOS :
+    ```console
+    keytool -exportcert -alias androiddebugkey -keystore ~/.android/debug.keystore | openssl sha1 -binary | openssl base64
+    ````
 
-Pour Mac : `keytool -exportcert -alias androiddebugkey -keystore ~/.android/debug.keystore | openssl sha1 -binary | openssl base64`
+### <a name="step-5-optional-fall-back-to-the-system-browser"></a>Étape 5 (facultatif) : Revenir au navigateur système
+
+Si MSAL est configuré pour utiliser le répartiteur mais que celui-ci n’est pas installé, MSAL revient à l’utilisation d’une vue web (un navigateur). MSAL essaie de s’authentifier à l’aide du navigateur système par défaut sur l’appareil, ce qui échoue car l’URI de redirection est configuré pour le répartiteur et que le navigateur système ne sait pas comment l’utiliser pour revenir à MSAL. Pour éviter cet échec, vous pouvez configurer un *filtre d’intention* avec l’URI de redirection du répartiteur que vous avez utilisé à l’étape 4.
+
+Modifiez le manifeste de votre application pour ajouter ce filtre d’intention :
+
+```xml
+<!-- NOTE the SLASH (required) that prefixes the signature value in the path attribute.
+     The signature value is the Base64-encoded signature discussed above. -->
+<intent-filter>
+      <data android:scheme="msauth"
+                    android:host="Package Name"
+                    android:path="/Package Signature"/>
+```
+
+Par exemple, si vous avez un URI de redirection `msauth://com.microsoft.xforms.testApp/hgbUYHVBYUTvuvT&Y6tr554365466=`, votre manifeste doit ressembler à l’extrait de code XML suivant.
+
+La barre oblique (`/`) devant la signature dans la valeur `android:path` est **requise**.
+
+```xml
+<!-- NOTE the SLASH (required) that prefixes the signature value in the path attribute.
+     The signature value is the Base64-encoded signature discussed above. -->
+<intent-filter>
+      <data android:scheme="msauth"
+                    android:host="com.microsoft.xforms.testApp"
+                    android:path="/hgbUYHVBYUTvuvT&Y6tr554365466="/>
+```
+
+Comme alternative, vous pouvez configurer MSAL pour revenir au navigateur incorporé, qui ne repose pas sur un URI de redirection :
+
+```csharp
+.WithUseEmbeddedWebUi(true)
+```
+
+## <a name="troubleshooting-tips-for-android-brokered-authentication"></a>Conseils de dépannage pour l’authentification répartie Android
+
+Voici quelques conseils pour éviter les problèmes quand vous implémentez l’authentification répartie sur Android :
+
+- **Redirect URI** (URI de redirection) – Ajoutez un URI de redirection à l’inscription de votre application dans le [portail Azure](https://portal.azure.com/). Un URI de redirection manquant ou incorrect est un problème rencontré couramment par les développeurs.
+- **Broker version** (Version du répartiteur) – Installez la version minimale requise des applications de répartiteur. L’une de ces deux applications peut être utilisée pour l’authentification répartie sur Android.
+  - [Portail d’entreprise Intune](https://play.google.com/store/apps/details?id=com.microsoft.windowsintune.companyportal) (version 5.0.4689.0 ou ultérieure)
+  - [Microsoft Authenticator](https://play.google.com/store/apps/details?id=com.azure.authenticator) (version 6.2001.0140 ou ultérieure).
+- **Broker precedence** (Priorité du répartiteur) – MSAL communique avec le *premier répartiteur installé* sur l’appareil lorsque plusieurs répartiteurs sont installés.
+
+    Exemple : Si vous commencez par installer Microsoft Authenticator, puis installez le portail d’entreprise Intune, l’authentification répartie se produit *uniquement* sur Microsoft Authenticator.
+- **Logs** (Journaux) – Si vous rencontrez un problème avec l’authentification répartie, l’affichage des journaux du répartiteur peut vous aider à diagnostiquer la cause.
+  - Affichez les journaux de Microsoft Authenticator :
+
+    1. Sélectionnez le bouton de menu en haut à droite de l’application.
+    1. Sélectionnez **Aide** > **Envoyer des journaux** > **Afficher les journaux**.
+    1. Sélectionnez **Copier tout** pour copier les journaux du répartiteur dans le presse-papiers de l’appareil.
+
+    La meilleure façon de déboguer ces journaux consiste à les envoyer par courrier électronique à vous-même et à les afficher sur votre ordinateur de développement. Il peut s’avérer plus facile d’analyser les journaux sur votre ordinateur plutôt que sur l’appareil lui-même. Vous pouvez également utiliser un éditeur de test sur Android pour enregistrer les journaux dans un fichier texte, puis utiliser un câble USB pour copier le fichier sur un ordinateur.
+
+  - Affichez les journaux du portail d’entreprise Intune :
+
+    1. Sélectionnez le bouton de menu en haut à gauche de l’application.
+    1. Sélectionnez **Paramètres** > **Données de diagnostic**.
+    1. Sélectionnez **Copier les journaux** pour copier les journaux du répartiteur vers la carte SD de l’appareil.
+    1. Connectez l’appareil à un ordinateur à l’aide d’un câble USB pour afficher les journaux sur votre ordinateur de développement.
+
+    Une fois que vous avez les journaux, vous pouvez les rechercher pour vos tentatives d’authentification via l’ID de corrélation. L’ID de corrélation est attaché à chaque demande d’authentification. Pour rechercher les erreurs retournées par le point de terminaison d’authentification de la plateforme d’identité Microsoft, recherchez `AADSTS`.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

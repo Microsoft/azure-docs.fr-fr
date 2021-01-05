@@ -9,12 +9,12 @@ ms.topic: tutorial
 ms.custom: mvc
 ms.date: 03/08/2019
 ms.author: troyhop
-ms.openlocfilehash: 09a6920e0d3a50da1bdacbf2bc7a80396c885897
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: e0d7310c4863c8dd431b991a2c249f2d8e257aeb
+ms.sourcegitcommit: 48cb2b7d4022a85175309cf3573e72c4e67288f5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "61448556"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96852351"
 ---
 # <a name="tutorial-create-and-run-an-iot-device-simulation"></a>Didacticiel : Créer et exécuter une simulation d’appareil IoT
 
@@ -34,15 +34,7 @@ Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://az
 
 Pour suivre ce tutoriel, vous avez besoin d’une instance déployée de la simulation d’appareil dans votre abonnement Azure.
 
-Si vous n’avez pas encore déployé la Simulation d’appareil, vous devez terminer le guide de démarrage rapide [Déployer et exécuter une simulation d’appareil IoT dans Azure](quickstart-device-simulation-deploy.md).
-
-## <a name="open-device-simulation"></a>Ouvrir la Simulation d’appareil
-
-Pour exécuter la Simulation d’appareil dans votre navigateur, accédez d’abord aux [Accélérateurs de solution Microsoft Azure IoT](https://www.azureiotsolutions.com). 
-
-Vous pouvez être invité à vous connecter les informations d’identification de votre abonnement Azure.
-
-Cliquez ensuite sur l’option **Launch** (Lancer) de la vignette de la simulation d’appareil que vous avez déployée à l’aide du [guide de démarrage rapide](quickstart-device-simulation-deploy.md).
+Si vous n’avez pas encore déployé la simulation d’appareil, consultez [Déploiement de la simulation d’appareil](https://github.com/Azure/device-simulation-dotnet/blob/master/README.md) sur GitHub.
 
 ## <a name="view-simulations"></a>Afficher les simulations
 

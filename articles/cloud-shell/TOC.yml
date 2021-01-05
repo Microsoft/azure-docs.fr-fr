@@ -13,13 +13,19 @@
     - name: Ansible
       items:
         - name: Exécuter un playbook Ansible
-          href: /azure/ansible/ansible-run-playbook-in-cloudshell?toc=/azure/cloud-shell/toc.json&bc=/azure/bread/toc.json
+          href: /azure/developer/ansible/getting-started-cloud-shell?bc=%2fazure%2fbread%2ftoc.json&toc=%2fazure%2fcloud-shell%2ftoc.json
         - name: Gérer vos inventaires dynamiques Azure
-          href: /azure/ansible/ansible-manage-azure-dynamic-inventories?toc=/azure/cloud-shell/toc.json&bc=/azure/bread/toc.json
+          href: /azure/developer/ansible/dynamic-inventory-configure?bc=%2fazure%2fbread%2ftoc.json&toc=%2fazure%2fcloud-shell%2ftoc.json
     - name: Terraform
       items:
         - name: Créer un plan d’exécution
           href: example-terraform-bash.md
+- name: Concepts
+  items:
+    - name: Sécurité
+      items:
+        - name: Base de référence de la sécurité
+          href: security-baseline.md
 - name: Guides pratiques
   items:
     - name: PowerShell Cloud Shell pour les utilisateurs Windows
@@ -32,6 +38,8 @@
       href: msi-authorization.md
     - name: Incorporer Cloud Shell
       href: embed-cloud-shell.md
+    - name: Cloud Shell dans le réseau virtuel Azure
+      href: private-vnet.md
 - name: Utiliser l’éditeur Cloud Shell
   href: using-cloud-shell-editor.md
 - name: Résolution des problèmes et limitations

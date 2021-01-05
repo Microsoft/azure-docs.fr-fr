@@ -9,7 +9,7 @@ editor: ''
 ms.assetid: 2c3db9a8-50fa-475a-97d8-f31082af6593
 ms.service: active-directory
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: identity
 ms.subservice: report-monitor
@@ -17,12 +17,12 @@ ms.date: 04/18/2019
 ms.author: markvi
 ms.reviewer: dhanyahk
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 7d0ef55f6f5117ffa77052118155afea716125a4
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 85e6a66f4520f12278266203211e1d1ae224c97f
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81639727"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96180453"
 ---
 # <a name="integrate-azure-ad-logs-with-azure-monitor-logs"></a>Intégrer des journaux d’activité Azure AD aux journaux d’activité Azure Monitor
 
@@ -46,6 +46,7 @@ Vous pouvez acheminer les journaux d’activité d’audit et authentifier des j
 
 * **Journaux d’audit**: Le [rapport d’activité des journaux d’audit](concept-audit-logs.md) vous permet de consulter l’historique de toutes les tâches effectuées dans votre locataire.
 * **Journaux d’activité de connexion** : Le [rapport d’activité de connexion](concept-sign-ins.md) vous permet d’identifier qui a effectué les tâches consignées dans les journaux d’audit.
+* **Journaux de provisionnement** : les [journaux de provisionnement](../app-provisioning/application-provisioning-log-analytics.md) vous permettent de savoir quels utilisateurs ont été créés, mis à jour et supprimés dans toutes vos applications tierces. 
 
 > [!NOTE]
 > Les journaux d’activité d’audit et de connexions associés à B2C ne sont pas pris en charge pour le moment.
@@ -58,7 +59,7 @@ Pour utiliser cette fonctionnalité, vous avez besoin des éléments suivants :
 * Un abonnement Azure. Si vous n’en avez pas, vous pouvez demander un [essai gratuit](https://azure.microsoft.com/free/).
 * Un locataire Azure AD.
 * Utilisateur considéré comme *administrateur général* ou *administrateur de la sécurité* pour un locataire Azure AD.
-* Espace de travail Log Analytics dans votre abonnement Azure. Découvrez comment [créer un espace de travail Log Analytics](https://docs.microsoft.com/azure/log-analytics/log-analytics-quick-create-workspace).
+* Espace de travail Log Analytics dans votre abonnement Azure. Découvrez comment [créer un espace de travail Log Analytics](../../azure-monitor/learn/quick-create-workspace.md).
 
 ## <a name="licensing-requirements"></a>Exigences en termes de licence
 

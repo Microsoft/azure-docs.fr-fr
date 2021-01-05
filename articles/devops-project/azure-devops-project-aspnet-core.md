@@ -14,13 +14,13 @@ ms.tgt_pltfrm: na
 ms.topic: quickstart
 ms.date: 03/24/2020
 ms.author: mlearned
-ms.custom: mvc
-ms.openlocfilehash: 3f0d937737cb261fb81dc4cdad3579ee593b5981
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.custom: devx-track-csharp, mvc
+ms.openlocfilehash: 63d3ac356e4f2c1d17e1511227f5089b7ff4266f
+ms.sourcegitcommit: d2d1c90ec5218b93abb80b8f3ed49dcf4327f7f4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82233298"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97589155"
 ---
 # <a name="create-a-cicd-pipeline-for-net-with-azure-devops-starter"></a>Créer un pipeline CI/CD pour .NET avec Azure DevOps Starter
 
@@ -66,9 +66,9 @@ Azure DevOps Starter crée un pipeline CI/CD dans Azure DevOps. Vous pouvez cré
 
 DevOps Starter a créé un dépôt Git dans Azure Repos ou dans GitHub. Pour voir le dépôt et modifier le code dans votre application, suivez les étapes ci-dessous :
 
-1. À gauche du tableau de bord DevOps Starter, sélectionnez le lien correspondant à votre branche **master**. Ce lien ouvre une vue sur le référentiel Git récemment créé.
+1. À gauche du tableau de bord DevOps Starter, sélectionnez le lien correspondant à votre branche **principale**. Ce lien ouvre une vue sur le référentiel Git récemment créé.
 
-2. Dans les prochaines étapes, vous allez utiliser le navigateur web pour effectuer des modifications de code directement dans la branche **maîtresse** et les valider. Vous pouvez également cloner votre référentiel Git dans votre IDE favori en sélectionnant **Cloner** dans la partie supérieure droite de la page du référentiel. 
+2. Dans les prochaines étapes, vous allez utiliser le navigateur web pour effectuer des modifications de code directement dans la branche **principale** et les valider. Vous pouvez également cloner votre référentiel Git dans votre IDE favori en sélectionnant **Cloner** dans la partie supérieure droite de la page du référentiel. 
 
 3. Sur la gauche, parcourez la structure de fichiers de l’application jusqu’à **Application/aspnet-core-dotnet-core/Pages/Index.cshtml**.
 
@@ -133,7 +133,7 @@ Quand vous n’en avez plus besoin, vous pouvez supprimer Azure App Service et l
 Pour plus d’informations sur la modification des pipelines de build et de mise en production dans le but de répondre aux besoins de votre équipe, consultez ce tutoriel :
 
 > [!div class="nextstepaction"]
-> [Personnaliser le processus CD](https://docs.microsoft.com/azure/devops/pipelines/release/define-multistage-release-process?view=vsts)
+> [Personnaliser le processus CD](/azure/devops/pipelines/release/define-multistage-release-process?view=vsts)
 
 ## <a name="videos"></a>Videos
 

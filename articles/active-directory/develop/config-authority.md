@@ -13,12 +13,12 @@ ms.date: 08/28/2019
 ms.author: marsma
 ms.reviewer: oldalton
 ms.custom: aaddev
-ms.openlocfilehash: 4810de772e44be22ee5bd4a9fb6ef0ef756e62f4
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: d8a176fff0da932d0fafd40b9ab895b635acc5f6
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77085209"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96169441"
 ---
 # <a name="how-to-configure-msal-for-ios-and-macos-to-use-different-identity-providers"></a>Procédure : configurer MSAL pour iOS et macOS afin d’utiliser différents fournisseurs d’identité
 
@@ -29,7 +29,7 @@ Cet article montre comment configurer votre application MSAL (Microsoft Authenti
 `MSALPublicClientApplication` est configuré avec `https://login.microsoftonline.com/common` comme URL d’autorité par défaut, laquelle convient à la plupart des scénarios Azure Active Directory (AAD). À moins d’implémenter des scénarios avancés tels que des clouds nationaux ou d’utiliser B2C, vous n’aurez pas besoin de la changer.
 
 > [!NOTE]
-> L’authentification moderne avec les services de fédération Active Directory (AD FS) comme fournisseur d’identité n’est pas prise en charge (voir [Scénarios ADFS pour les développeurs](https://docs.microsoft.com/windows-server/identity/ad-fs/overview/ad-fs-openid-connect-oauth-flows-scenarios) pour plus d’informations). AD FS est pris en charge par le biais de la fédération.
+> L’authentification moderne avec les services de fédération Active Directory (AD FS) comme fournisseur d’identité n’est pas prise en charge (voir [Scénarios ADFS pour les développeurs](/windows-server/identity/ad-fs/overview/ad-fs-openid-connect-oauth-flows-scenarios) pour plus d’informations). AD FS est pris en charge par le biais de la fédération.
 
 ## <a name="change-the-default-authority"></a>Changer l’autorité par défaut
 

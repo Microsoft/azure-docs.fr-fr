@@ -1,5 +1,5 @@
 ---
-title: 'Démarrage rapide : Essayer Content Moderator sur le web - Content Moderator'
+title: 'Démarrage rapide : Essayer Content Moderator sur le web'
 titleSuffix: Azure Cognitive Services
 description: Dans ce guide de démarrage rapide, vous allez utiliser l’outil de révision Content Moderator pour tester les fonctionnalités de base de Content Moderator sans avoir à écrire du code.
 services: cognitive-services
@@ -8,18 +8,20 @@ manager: nitinme
 ms.service: cognitive-services
 ms.subservice: content-moderator
 ms.topic: quickstart
-ms.date: 03/13/2020
+ms.date: 09/29/2020
 ms.author: pafarley
-ms.openlocfilehash: 666b70ba8b632cb2cadf20de384e3e615acb2b3d
-ms.sourcegitcommit: 9ee0cbaf3a67f9c7442b79f5ae2e97a4dfc8227b
+ms.custom: cog-serv-seo-aug-2020
+keywords: content moderator, modération du contenu
+ms.openlocfilehash: c026c42fe3c7a7f3f0d6b80e3123904077c104cf
+ms.sourcegitcommit: 80c1056113a9d65b6db69c06ca79fa531b9e3a00
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "79203555"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96905211"
 ---
 # <a name="quickstart-try-content-moderator-on-the-web"></a>Démarrage rapide : Essayer Content Moderator sur le web
 
-Dans ce guide de démarrage rapide, vous allez utiliser l’outil de révision Content Moderator pour tester les fonctionnalités de base de Content Moderator sans avoir à écrire du code. Si vous souhaitez intégrer ce service dans votre application plus rapidement, consultez les autres démarrages rapides dans la section [Étapes suivantes](#next-steps).
+Dans ce guide de démarrage rapide, vous allez utiliser l’outil de révision Content Moderator pour tester les fonctionnalités de base de Content Moderator sans avoir à écrire du code. Si vous souhaitez intégrer ce service plus rapidement dans votre application de modération du contenu, consultez les autres démarrages rapides dans la section [Étapes suivantes](#next-steps).
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -32,7 +34,7 @@ L’outil de révision Content Moderator est un outil web qui permet aux révise
 
 ## <a name="create-a-review-team"></a>Créer une équipe de révision
 
-Ensuite, créez une équipe de révision. Dans un scénario professionnel, il s’agit du groupe de personnes qui vérifiera manuellement les décisions de modération du service. Pour créer une équipe, vous devez sélectionner une **Région** et spécifier un **Nom d’équipe** et un **ID d’équipe**. Si vous souhaitez intégrer des collègues dans l’équipe, entrez leurs adresses e-mail ici.
+Ensuite, créez une équipe de révision. Dans un scénario réel, cette équipe correspond au groupe de personnes qui vérifient manuellement les décisions de modération du service. Pour créer une équipe, vous devez sélectionner une **Région** et spécifier un **Nom d’équipe** et un **ID d’équipe**. Si vous souhaitez intégrer des collègues dans l’équipe, entrez leurs adresses e-mail ici.
 
 > [!NOTE]
 > **Nom de l’équipe** est un nom convivial pour votre équipe de revue. Il s’agit du nom affiché dans le portail Azure. L’**ID de l’équipe** est utilisé pour identifier l’équipe de revue par programmation.
@@ -40,31 +42,35 @@ Ensuite, créez une équipe de révision. Dans un scénario professionnel, il s�
 > [!div class="mx-imgBorder"]
 > ![Inviter un membre d’équipe](images/create-team.png)
 
-Si vous choisissez de chiffrer les données à l’aide d’une clé gérée par le client (CMK), vous êtes invité à fournir l’**ID de ressource** de votre ressource Content Moderator dans le niveau tarifaire E0. La ressource que vous fournissez doit être nouvelle. 
+Si vous choisissez de chiffrer les données à l’aide d’une clé gérée par le client (CMK), vous êtes invité à fournir l’**ID de ressource** de votre ressource Content Moderator dans le niveau tarifaire E0. La ressource que vous fournissez doit être unique pour cette équipe. 
 
 > [!div class="mx-imgBorder"]
 > ![Inviter un membre de l’équipe avec une clé CMK](images/create-team-cmk.png)
-
-Si vous essayez de réutiliser une ressource Content Moderator, cet avertissement s’affiche : 
-
-> [!div class="mx-imgBorder"]
-> ![Échec de la clé CMK](images/create-team-cmk-fail.png)
 
 ## <a name="upload-sample-content"></a>Charger un contenu exemple
 
 Vous êtes maintenant prêt à charger un contenu exemple. Sélectionnez **Essayer > Image**, **Essayer > Texte** ou **Essayer > Vidéo**.
 
-![Modération - Essayer image ou texte](images/tryimagesortext.png)
+> [!div class="mx-imgBorder"]
+> ![Modération - Essayer image ou texte](images/tryimagesortext.png)
 
-Envoyez votre contenu en modération. En interne, l’outil de révision appelle les API de modération et analyse votre contenu. Une fois l’analyse terminée, un message vous informe que des résultats sont en attente de révision.
+Envoyez votre contenu en modération. Vous pouvez utiliser l’exemple de contenu de texte suivant :
 
-![Modérer les fichiers](images/submitted.png)
+```
+Is this a grabage email abcdef@abcd.com, phone: 4255550111, IP: 255.255.255.255, 1234 Main Boulevard, Panapolis WA 96555.
+Crap is the profanity here. Is this information PII? phone 4255550111
+```
+
+En interne, l’outil de révision appelle les API de modération et analyse votre contenu. Une fois l’analyse terminée, un message vous informe que des résultats sont en attente de révision.
+
+> [!div class="mx-imgBorder"]
+> ![Modérer les fichiers](images/submitted.png)
 
 ## <a name="review-moderation-tags"></a>Vérifier les balises de modération
 
-Passez en revue les balises de modération appliquées. Vous voyez les balises qui ont été appliquées à votre contenu et le score dans chaque catégorie. Pour en savoir plus sur ce qu'indiquent les différentes balises de contenu, consultez [Image](image-moderation-api.md), [Texte](text-moderation-api.md) et [Vidéo](video-moderation-api.md).
+Passez en revue les balises de modération appliquées. Vous voyez les balises qui ont été appliquées à votre contenu et le score dans chaque catégorie. Pour en savoir plus sur ce qu’indiquent les différentes balises de contenu, consultez les articles de modération [Image](image-moderation-api.md), [Texte](text-moderation-api.md) et [Vidéo](video-moderation-api.md).
 
-![Passer en revue les résultats](images/reviewresults_text.png)
+<!-- ![Review results](images/reviewresults_text.png) -->
 
 Dans un projet, vous ou votre équipe de révision pouvez modifier ces balises ou, au besoin, en ajouter d’autres. Vous allez valider ces modifications en cliquant sur le bouton **Suivant**. Lorsque votre application appelle les API de modération, le contenu balisé est mis en file d’attente ici, où il attend la révision des personnes chargées de cette tâche. Cette approche vous permet de réviser rapidement d’importants volumes de contenu.
 
@@ -82,6 +88,6 @@ Vous pouvez également passer aux étapes suivantes pour apprendre à utiliser l
 ## <a name="next-steps"></a>Étapes suivantes
 
 Découvrez comment utiliser les API de modération dans votre application.
-- Implémentez la modération d’images. Utilisez la [console d’API](try-image-api.md) ou suivez le [guide de démarrage rapide du SDK .NET](dotnet-sdk-quickstart.md) pour analyser des images et détecter tout contenu potentiellement pour adultes ou choquant à l’aide d’étiquettes, d’indices de confiance et d’autres informations extraites.
-- Implémentez la modération de texte. Utilisez la [console d’API](try-text-api.md) ou le [guide de démarrage rapide du SDK .NET](dotnet-sdk-quickstart.md) pour rechercher dans un texte des termes vulgaires, du texte indésirable (fonctionnalité de classification de texte assistée par ordinateur, en préversion) et des données personnelles.
+- Implémentez la modération d’images. Utilisez la [console d’API](try-image-api.md) ou suivez le [guide de démarrage rapide de la bibliothèque de client ou de l’API REST](client-libraries.md) pour analyser rapidement des images et détecter tout contenu potentiellement pour adultes à l’aide d’étiquettes, d’indices de confiance et d’autres informations extraites.
+- Implémentez la modération de texte. Utilisez la [console d’API](try-text-api.md) ou suivez le [guide de démarrage rapide de la bibliothèque de client ou de l’API REST](client-libraries.md) pour analyser du contenu textuel afin de voir s’il contient des termes vulgaires, une classification de texte indésirable assistée par ordinateur (préversion) et des données à caractère personnel.
 - Implémentez la modération de vidéo. Suivez le [guide de modération vidéo pour C# ](video-moderation-api.md) afin d'analyser des vidéos et détecter tout contenu potentiellement pour adultes et choquant. 

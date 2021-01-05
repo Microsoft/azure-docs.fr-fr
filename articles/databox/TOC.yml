@@ -1,5 +1,5 @@
 - name: Documentation Azure Data Box - Transfert hors connexion
-  href: /azure/databox
+  href: ./index.yml
   items:
     - name: Data Box
       items:
@@ -11,33 +11,59 @@
           expanded: true
           items:
             - name: Configuration - Portail Azure
-              href: data-box-quickstart-portal.md
+              items:
+                - name: Pour l’importation
+                  href: data-box-quickstart-portal.md
+                - name: Pour l’exportation
+                  href: data-box-quickstart-export.md
         - name: Tutoriels
           items:
-            - name: 1 - Commander
-              href: data-box-deploy-ordered.md
-            - name: 2 - Configurer
-              href: data-box-deploy-set-up.md
-            - name: 3 - Connecter et copier
+            - name: Importer des données dans Azure
               items:
-                - name: Via SMB
-                  href: data-box-deploy-copy-data.md
-                - name: Via NFS
-                  href: data-box-deploy-copy-data-via-nfs.md
-                - name: Via REST
-                  href: data-box-deploy-copy-data-via-rest.md
-                - name: Via le service de copie de données
-                  href: data-box-deploy-copy-data-via-copy-service.md
-                - name: Vers des disques managés
-                  href: data-box-deploy-copy-data-from-vhds.md
-            - name: '4 - Renvoyer, télécharger, vérifier'
-              href: data-box-deploy-picked-up.md
+                - name: 1 - Commander
+                  href: data-box-deploy-ordered.md
+                - name: 2 - Configurer
+                  href: data-box-deploy-set-up.md
+                - name: 3 - Connecter et copier
+                  items:
+                    - name: Via SMB
+                      href: data-box-deploy-copy-data.md
+                    - name: Via NFS
+                      href: data-box-deploy-copy-data-via-nfs.md
+                    - name: Via REST
+                      href: data-box-deploy-copy-data-via-rest.md
+                    - name: Via le service de copie de données
+                      href: data-box-deploy-copy-data-via-copy-service.md
+                    - name: Vers des disques managés
+                      href: data-box-deploy-copy-data-from-vhds.md
+                - name: '4 - Renvoyer, télécharger, vérifier'
+                  href: data-box-deploy-picked-up.md
+            - name: Exporter des données à partir d’Azure
+              items:
+                - name: 1 - Commander
+                  href: data-box-deploy-export-ordered.md
+                - name: 2 - Configurer
+                  href: data-box-deploy-set-up.md
+                - name: 3 - Connecter et copier
+                  items:
+                    - name: Via SMB
+                      href: data-box-deploy-export-copy-data.md
+                    - name: Via NFS
+                      href: data-box-deploy-export-copy-data-via-nfs.md
+                - name: 4 - Retourner
+                  href: data-box-deploy-export-picked-up.md
         - name: Concepts
           items:
             - name: Lire les consignes de sécurité
               href: data-box-safety.md
             - name: Examiner le suivi et la journalisation
-              href: data-box-logs.md
+              items:
+                - name: Pour les commandes d’importation
+                  href: data-box-logs.md
+                - name: Pour les commandes d’exportation
+                  href: data-box-export-logs.md
+            - name: Afficher les journaux d’audit
+              href: data-box-audit-logs.md
             - name: Examiner les conditions requises
               items:
                 - name: Pour Data Box
@@ -46,8 +72,14 @@
                   href: data-box-system-requirements-rest.md
             - name: Comprendre les limites
               href: data-box-limits.md
-            - name: Vérifier la sécurité
-              href: data-box-security.md
+            - name: Sécurité
+              items:
+                - name: Base de référence de la sécurité
+                  href: security-baseline.md
+                - name: Vérifier la sécurité
+                  href: data-box-security.md
+            - name: Transférer les listes ACL et les métadonnées
+              href: data-box-file-acls-preservation.md
             - name: Questions fréquentes (FAQ)
               href: data-box-faq.md
         - name: Procédures
@@ -58,8 +90,12 @@
               href: data-box-local-web-ui-admin.md
             - name: Utiliser l’expédition autogérée
               href: data-box-portal-customer-managed-shipping.md
+            - name: Apportez vos propres certificats
+              href: data-box-bring-your-own-certificates.md
             - name: Activer une clé gérée par le client
               href: data-box-customer-managed-encryption-key-portal.md
+            - name: Utiliser Customer Lockbox
+              href: data-box-customer-lockbox.md
             - name: Déplacer des données vers un niveau blob
               href: data-box-how-to-set-data-tier.md
             - name: Câblage de l’appareil
@@ -69,7 +105,7 @@
             - name: Migrer
               items:
                 - name: Vers SharePoint Online
-                  href: 'https://docs.microsoft.com/sharepointmigration/how-to-migrate-file-share-content-to-spo-using-azuredatabox?context=/azure/databox/context/context'
+                  href: /sharepointmigration/how-to-migrate-file-share-content-to-spo-using-azuredatabox?context=%2fazure%2fdatabox%2fcontext%2fcontext
                 - name: Vers Azure File Sync
                   href: ../storage/files/storage-sync-offline-data-transfer.md?toc=/azure/databox/toc.json&bc=/azure/databox/breadcrumb/toc.json
                 - name: À partir du magasin HDFS
@@ -93,6 +129,7 @@
           items:
             - name: Configuration - Portail Azure
               href: data-box-disk-quickstart-portal.md
+              displayName: 'Azure CLI, az databox job create, create Data Box job'
         - name: Tutoriels
           items:
             - name: 1 - Commander
@@ -143,6 +180,7 @@
           items:
             - name: Configuration - Portail Azure
               href: data-box-heavy-quickstart-portal.md
+              displayName: 'Azure CLI, az databox job create, create Data Box job'
         - name: Tutoriels
           items:
             - name: 1 - Commander
@@ -195,11 +233,19 @@
                   href: ../storage/files/storage-sync-offline-data-transfer.md?toc=/azure/databox/toc.json&bc=/azure/databox/breadcrumb/toc.json
                 - name: À partir du magasin HDFS
                   href: ../storage/blobs/data-lake-storage-migrate-on-premises-hdfs-cluster.md?toc=/azure/databox/toc.json&bc=/azure/databox/breadcrumb/toc.json
+    - name: Informations de référence
+      items:
+        - name: Azure CLI
+          href: /cli/azure/ext/databox/databox
+        - name: Azure PowerShell
+          href: /powershell/module/az.databox
+        - name: API .NET
+          href: /dotnet/api/overview/azure/databox/management
     - name: Ressources
       items:
         - name: Produit Data Box
           href: 'https://azure.microsoft.com/services/storage/databox/data/'
         - name: Tarification Data Box
-          href: 'https://azure.microsoft.com/pricing/details/storage/databox/'
+          href: 'https://azure.microsoft.com/pricing/details/databox/'
         - name: Tarification Data Box Disk
-          href: 'https://azure.microsoft.com/pricing/details/storage/databox/disk/'
+          href: 'https://azure.microsoft.com/pricing/details/databox/disk/'

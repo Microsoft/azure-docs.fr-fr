@@ -9,15 +9,15 @@ ms.service: key-vault
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 02/05/2020
 ms.author: mbaldwin
-ms.openlocfilehash: 89e3bf95a6b048e5e97cfb151ef9302b70eac1c9
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 6a0767b077886337331f24b15715247006f3fe2c
+ms.sourcegitcommit: 230d5656b525a2c6a6717525b68a10135c568d67
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77048564"
+ms.lasthandoff: 11/19/2020
+ms.locfileid: "94888893"
 ---
 # <a name="azure-dedicated-hsm-deployment-architecture"></a>Architecture de déploiement Azure Dedicated HSM
 
@@ -27,28 +27,9 @@ Un HSM dédié Azure permet le stockage de clés de chiffrement dans Azure. Il s
 * ont besoin d’un accès exclusif au HSM ;
 * doivent contrôler complètement leurs appareils.
 
-Les HSM sont répartis entre les centres de données de Microsoft et peuvent être facilement approvisionnés en tant que paire d’appareils comme base d’une solution hautement disponible. Ils peuvent également être déployés dans différentes régions pour obtenir une solution résiliente d’urgence. Le service HSM dédié est actuellement disponible dans les régions suivantes :
+Les HSM sont répartis entre les centres de données de Microsoft et peuvent être facilement approvisionnés en tant que paire d’appareils comme base d’une solution hautement disponible. Ils peuvent également être déployés dans différentes régions pour obtenir une solution résiliente d’urgence. Pour savoir dans quelles régions Dedicated HSM est actuellement disponible, consultez la [page Produits par région](https://azure.microsoft.com/global-infrastructure/services/?products=azure-dedicated-hsm). 
 
-* USA Est
-* USA Est 2
-* USA Ouest
-* États-Unis - partie centrale méridionale
-* Asie Sud-Est
-* Asie Est
-* Inde Centre
-* Sud de l’Inde
-* Japon Est
-* OuJapon Est
-* Europe Nord
-* Europe Ouest
-* Sud du Royaume-Uni
-* Ouest du Royaume-Uni
-* Centre du Canada
-* Est du Canada
-* Australie Est
-* Sud-Australie Est
-
-Chacune de ces régions a des racks HSM déployés dans deux centres de données indépendants ou dans au moins deux zones de disponibilité indépendantes. L’Asie Sud-Est a trois zones de disponibilité et USA Est 2 en a deux. Huit régions au total en Europe, en Asie et aux États-Unis proposent le service HSM dédié. Pour plus d’informations sur les régions Azure, consultez les [informations sur les régions Azure](https://azure.microsoft.com/global-infrastructure/regions/).
+Chacune de ces régions dispose de racks HSM déployés dans deux centres de données indépendants ou dans au moins deux zones de disponibilité indépendantes. Par exemple, la région Asie Sud-Est compte trois zones de disponibilité tandis que la région USA Est 2 en compte deux. Au total, huit régions d'Europe, d'Asie et des États-Unis proposent le service Dedicated HSM, et ce nombre évolue à mesure que nous ajoutons de nouveaux racks HSM dans de nouvelles régions. Pour plus d’informations sur les régions Azure, consultez les [informations sur les régions Azure](https://azure.microsoft.com/global-infrastructure/regions/).
 L’emplacement/la latence, une haute disponibilité et la prise en charge d’autres applications distribuées font partie des facteurs de conception pour une solution HSM dédié.
 
 ## <a name="device-location"></a>Emplacement de l’appareil
@@ -57,7 +38,7 @@ L’emplacement optimal de l’appareil HSM est le plus près possible des appli
 
 ## <a name="high-availability"></a>Haute disponibilité
 
-Pour obtenir une haute disponibilité, un client doit utiliser deux appareils HSM dans une région, ceux-ci étant configurés comme une paire de haute disponibilité à l’aide de logiciels Gemalto. Ce type de déploiement garantit la disponibilité des clés si un seul appareil rencontre un problème empêchant le traitement des opérations de clé. Il réduit également considérablement les risques lors d’une maintenance de réparation/de correction comme le remplacement de l’alimentation électrique. Lors d’une conception, il est important de tenir compte de tous les types de défaillances au niveau régional. Des défaillances au niveau régional peuvent survenir en cas de catastrophes naturelles telles que des ouragans, des inondations ou des tremblements de terre. Ces types d’événements doivent être atténués en approvisionnant les appareils HSM dans une autre région. Les appareils déployés dans une autre région peuvent être couplés via la configuration du logiciel Gemalto. Ceci signifie que le déploiement minimal pour une solution à haute disponibilité et résiliente après sinistre est de quatre appareils HSM dans deux régions. La redondance locale et la redondance entre les régions peuvent être utilisées comme ligne de base pour ajouter d’autres déploiements d’appareils HSM afin de prendre en charge la latence, la capacité, ou bien pour satisfaire à d’autres exigences spécifiques à l’application.
+Pour profiter de la haute disponibilité, un client doit utiliser deux appareils HSM dans une région, ceux-ci étant configurés comme une paire à haute disponibilité à l'aide du logiciel Thanles. Ce type de déploiement garantit la disponibilité des clés si un seul appareil rencontre un problème empêchant le traitement des opérations de clé. Il réduit également considérablement les risques lors d’une maintenance de réparation/de correction comme le remplacement de l’alimentation électrique. Lors d’une conception, il est important de tenir compte de tous les types de défaillances au niveau régional. Des défaillances au niveau régional peuvent survenir en cas de catastrophes naturelles telles que des ouragans, des inondations ou des tremblements de terre. Ces types d’événements doivent être atténués en approvisionnant les appareils HSM dans une autre région. Les appareils déployés dans une autre région peuvent être couplés via la configuration du logiciel Thales. Ceci signifie que le déploiement minimal pour une solution à haute disponibilité et résiliente après sinistre est de quatre appareils HSM dans deux régions. La redondance locale et la redondance entre les régions peuvent être utilisées comme ligne de base pour ajouter d’autres déploiements d’appareils HSM afin de prendre en charge la latence, la capacité, ou bien pour satisfaire à d’autres exigences spécifiques à l’application.
 
 ## <a name="distributed-application-support"></a>Prise en charge des applications distribuées
 
@@ -65,7 +46,7 @@ Les appareils HSM dédié sont généralement déployés pour prendre en charge 
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Une fois que l’architecture de déploiement est déterminée, la plupart des activités de configuration pour implémenter cette architecture seront fournies par Gemalto. Ceci inclut la configuration de l’appareil ainsi que les scénarios d’intégration des applications. Pour plus d’informations, utilisez le portail de [support client de Gemalto](https://supportportal.gemalto.com/csm/) et téléchargez les guides d’administration et de configuration. Le site du partenaire Microsoft met à votre disposition tout un éventail de guides d’intégration.
+Une fois l'architecture de déploiement déterminée, la plupart des activités de configuration permettant d'implémenter cette architecture seront fournies par Thales. Ceci inclut la configuration de l’appareil ainsi que les scénarios d’intégration des applications. Pour plus d'informations, utilisez le portail de [support client de Thales](https://supportportal.gemalto.com/csm/) et téléchargez les guides d'administration et de configuration. Le site du partenaire Microsoft met à votre disposition tout un éventail de guides d’intégration.
 Il est recommandé de bien comprendre tous les concepts clés du service, comme la haute disponibilité et la sécurité, par exemple, avant le provisionnement des appareils ou la conception ou bien le déploiement des applications.
 Quelques rubriques conceptuelles supplémentaires :
 

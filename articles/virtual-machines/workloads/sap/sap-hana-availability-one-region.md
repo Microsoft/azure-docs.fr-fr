@@ -9,27 +9,28 @@ editor: ''
 tags: azure-resource-manager
 keywords: ''
 ms.service: virtual-machines-linux
+ms.subservice: workloads
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
 ms.date: 07/27/2018
 ms.author: juergent
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: ef7161e653ec582708f242b67c643d960d75e27f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: e522e358a1b76cea08dac550b33d7a2dfa7d926d
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78255476"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94950225"
 ---
 # <a name="sap-hana-availability-within-one-azure-region"></a>Disponibilité de SAP HANA au sein d’une région Azure
-Cet article décrit plusieurs scénarios de disponibilité au sein d’une région Azure. Azure dispose de plusieurs régions, réparties à travers le monde. Pour obtenir la liste des régions Azure, voir [Régions Azure](https://azure.microsoft.com/regions/). Pour le déploiement de SAP HANA sur des machines virtuelles au sein d’une région Azure, Microsoft offre le déploiement d’une machine virtuelle unique avec une instance HANA. Pour une disponibilité accrue, vous pouvez déployer deux machines virtuelles avec deux instances HANA au sein d’un [groupe à haute disponibilité Azure](https://docs.microsoft.com/azure/virtual-machines/windows/tutorial-availability-sets) qui utilise la réplication de système HANA pour des raisons de disponibilité. 
+Cet article décrit plusieurs scénarios de disponibilité au sein d’une région Azure. Azure dispose de plusieurs régions, réparties à travers le monde. Pour obtenir la liste des régions Azure, voir [Régions Azure](https://azure.microsoft.com/regions/). Pour le déploiement de SAP HANA sur des machines virtuelles au sein d’une région Azure, Microsoft offre le déploiement d’une machine virtuelle unique avec une instance HANA. Pour une disponibilité accrue, vous pouvez déployer deux machines virtuelles avec deux instances HANA au sein d’un [groupe à haute disponibilité Azure](../../windows/tutorial-availability-sets.md) qui utilise la réplication de système HANA pour des raisons de disponibilité. 
 
-Actuellement, Azure offre les [Zones de disponibilité Azure](https://docs.microsoft.com/azure/availability-zones/az-overview). Cet article ne décrit pas en détail les zones de disponibilité. Toutefois, nous incluons une présentation générale sur l’utilisation des groupes à haute disponibilité par rapport aux zones de disponibilité.
+Actuellement, Azure offre les [Zones de disponibilité Azure](../../../availability-zones/az-overview.md). Cet article ne décrit pas en détail les zones de disponibilité. Toutefois, nous incluons une présentation générale sur l’utilisation des groupes à haute disponibilité par rapport aux zones de disponibilité.
 
 Les régions Azure proposant des zones de disponibilité disposent de plusieurs centres de données. Les centres de données sont indépendants de la fourniture de la source d’alimentation, du refroidissement et du réseau. Nous offrons différentes zones au sein d’une seule région Azure pour déployer des applications sur deux ou trois des zones de disponibilité offertes. Si les problèmes d’alimentation et de réseau n’affectent qu’une seule infrastructure de zone de disponibilité Azure, le déploiement de votre application au sein d’une région Azure devrait toujours opérationnel. Une capacité réduite peut se produire. Par exemple, des machines virtuelles dans une zone peuvent être perdues, mais les machines virtuelles dans les deux autres zones seront toujours en exécution. 
  
-Un groupe à haute disponibilité Azure est une fonctionnalité de regroupement logique qui aide à assurer que les ressources de machine virtuelle que vous y incluez sont isolées les unes des autres lors de leur déploiement dans un centre de données Azure. Azure veille à ce que les machines virtuelles que vous placez dans un groupe à haute disponibilité s’exécutent sur plusieurs serveurs physiques, racks de calcul, unités de stockage et commutateurs réseau. Dans certaines documentations Azure, cette configuration est considérée comme des placements dans différents [Mise à jour et domaines d’erreur](https://docs.microsoft.com/azure/virtual-machines/windows/manage-availability). En règle générale, ces placements se trouvent dans un centre de données Azure. En imaginant que les problèmes d’alimentation et de réseau affectent le centre de données que vous déployez, toutes vos capacités dans une région Azure seraient aussi affectées.
+Un groupe à haute disponibilité Azure est une fonctionnalité de regroupement logique qui aide à assurer que les ressources de machine virtuelle que vous y incluez sont isolées les unes des autres lors de leur déploiement dans un centre de données Azure. Azure veille à ce que les machines virtuelles que vous placez dans un groupe à haute disponibilité s’exécutent sur plusieurs serveurs physiques, racks de calcul, unités de stockage et commutateurs réseau. Dans certaines documentations Azure, cette configuration est considérée comme des placements dans différents [Mise à jour et domaines d’erreur](../../manage-availability.md). En règle générale, ces placements se trouvent dans un centre de données Azure. En imaginant que les problèmes d’alimentation et de réseau affectent le centre de données que vous déployez, toutes vos capacités dans une région Azure seraient aussi affectées.
 
 Le placement des centres de données représentant les zones de disponibilité Azure est un compromis entre une latence réseau entre des services déployés dans différentes zones et une distance spécifique entre des centres de données. Idéalement, les catastrophes naturelles n’affectent pas l’alimentation, le réseau et l’infrastructure de toutes vos zones de disponibilité dans cette région. Toutefois, comme nous l’avons déjà vu avec des catastrophes naturelles d’envergure, les zones de disponibilité peuvent ne pas fournir autant de disponibilité que vous le souhaitez au sein d’une région. Pensez à l’ouragan Maria qui a touché l’ile de Porto Rico le 20 septembre 2017. L’ouragan a entrainé une coupure de courant de la quasi-totalité de cette ile de 145 kilomètres.
 
@@ -78,11 +79,11 @@ L’une des configurations les plus rudimentaires consiste à utiliser des sauve
 
 L’architecture ressemble à ceci :
 
-![Diagramme de deux machines virtuelles avec réplication de stockage](./media/sap-hana-availability-one-region/two_vm_storage_replication.PNG) 
+![Diagramme de l’architecture de deux machines virtuelles avec réplication du stockage](./media/sap-hana-availability-one-region/two_vm_storage_replication.PNG) 
 
 Cette configuration n’est pas bien adaptée à la réalisation de bons temps d’objectif de point de récupération (RPO) et d’objectif de délai de récupération (RTO). Les temps de RTO, plus particulièrement, souffriraient en raison du besoin de restaurer entièrement toute la base de données à l’aide des sauvegardes copiées. Toutefois, cette configuration est utile pour récupérer d’une suppression de données involontaire sur les instances principales. Avec cette configuration, vous êtes en mesure de restaurer à un certain point dans le temps, d’extraire les données et d’importer les données supprimées dans votre instance principale en tout temps. Ainsi, il est peut-être logique d’utiliser une méthode de copie de sauvegarde avec d’autres fonctionnalités de haute disponibilité. 
 
-Pendant la copie des sauvegardes, vous serez peut-être en mesure d’utiliser une machine virtuelle plus petite autre que la machine virtuelle principale qui exécute l’instance SAP HANA. Gardez à l’esprit que vous pouvez attacher un plus petit nombre de disques durs virtuels sur les machines virtuelles plus petites. Pour plus d’information sur les limites des types de machines virtuelles individuelles, consultez [Tailles des machines virtuelles Linux dans Azure](https://docs.microsoft.com/azure/virtual-machines/linux/sizes).
+Pendant la copie des sauvegardes, vous serez peut-être en mesure d’utiliser une machine virtuelle plus petite autre que la machine virtuelle principale qui exécute l’instance SAP HANA. Gardez à l’esprit que vous pouvez attacher un plus petit nombre de disques durs virtuels sur les machines virtuelles plus petites. Pour plus d’information sur les limites des types de machines virtuelles individuelles, consultez [Tailles des machines virtuelles Linux dans Azure](../../sizes.md).
 
 ### <a name="sap-hana-system-replication-without-automatic-failover"></a>Réplication de système SAP HANA sans basculement automatique
 
@@ -108,7 +109,7 @@ Dans ce scénario, les données répliquées vers l’instance HANA dans la deux
 
 ### <a name="sap-hana-system-replication-with-automatic-failover"></a>Réplication de système SAP HANA avec basculement automatique
 
-Dans la configuration de disponibilité standard et la plus courante au sein d’une région Azure, deux machines virtuelles Azure exécutant SLES Linux disposent d’un cluster de basculement défini. Le cluster SLES Linux est basé sur l’infrastructure [Pacemaker](/azure/virtual-machines/workloads/sap/high-availability-guide-suse-pacemaker), conjointement avec un appareil [STONITH](/azure/virtual-machines/workloads/sap/high-availability-guide-suse-pacemaker#create-azure-fence-agent-stonith-device). 
+Dans la configuration de disponibilité standard et la plus courante au sein d’une région Azure, deux machines virtuelles Azure exécutant SLES Linux disposent d’un cluster de basculement défini. Le cluster SLES Linux est basé sur l’infrastructure [Pacemaker](./high-availability-guide-suse-pacemaker.md), conjointement avec un appareil [STONITH](./high-availability-guide-suse-pacemaker.md#create-azure-fence-agent-stonith-device). 
 
 Côté SAP HANA, le mode de réplication utilisé est synchronisé et un basculement automatique est configuré. Dans la deuxième machine virtuelle, l’instance SAP HANA agit comme un nœud de serveur de secours. Le nœud de serveur de secours reçoit un flux de données synchrone d’enregistrements de modification depuis l’instance de SAP HANA principale. Tandis que les transactions sont acceptées par l’application au nœud HANA principal, ce dernier attend la confirmation de réception de l’enregistrement de la part du nœud SAP HANA secondaire avant de confirmer la réception à l’application. SAP HANA dispose de deux modes de réplication synchrone différents. Pour en savoir plus et pour connaître les différences entre les deux modes de réplication synchrone, consultez l’article SAP [Modes de réplication pour la réplication de système SAP HANA](https://help.sap.com/viewer/6b94445c94ae495c83a19646e7c3fd56/2.0.02/en-US/c039a1a5b8824ecfa754b55e0caffc01.html).
 
@@ -127,5 +128,4 @@ Pour obtenir des instructions sur la mise en place de ces configurations dans Az
 
 Pour plus d’informations sur la disponibilité SAP HANA dans l’ensemble des régions Azure, consultez :
 
-- [Disponibilité de SAP HANA dans l’ensemble des régions Azure](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/sap-hana-availability-across-regions) 
-
+- [Disponibilité de SAP HANA dans l’ensemble des régions Azure](./sap-hana-availability-across-regions.md)

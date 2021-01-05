@@ -8,13 +8,13 @@ ms.service: virtual-machine-scale-sets
 ms.subservice: cli
 ms.date: 03/27/2018
 ms.reviewer: jushiman
-ms.custom: mimckitt
-ms.openlocfilehash: 2e284032cfc6723fb56454376edafa6d99ae7e0a
-ms.sourcegitcommit: 595cde417684e3672e36f09fd4691fb6aa739733
+ms.custom: mimckitt, devx-track-azurecli
+ms.openlocfilehash: 78569459de9d6a632f256d25ffb0870e36ce4a79
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83699699"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87499685"
 ---
 # <a name="install-applications-into-a-virtual-machine-scale-set-with-the-azure-cli"></a>Installer des applications dans un groupe de machines virtuelles identiques avec Azure CLI
 Ce script crée un groupe de machines virtuelles identiques exécutant Ubuntu et utilisant l’extension de script personnalisé pour installer une application web de base. Une fois que vous avez exécuté le script, vous pouvez accéder à l’application web via un navigateur web.
@@ -46,4 +46,4 @@ Ce script utilise les commandes suivantes pour créer un groupe de ressources, u
 | [az group delete](/cli/azure/ad/group) | Supprime un groupe de ressources, y compris toutes les ressources imbriquées. |
 
 ## <a name="next-steps"></a>Étapes suivantes
-Pour plus d’informations sur l’interface Azure CLI, consultez la [documentation relative à l’interface Azure CLI](https://docs.microsoft.com/cli/azure/overview).
+Pour plus d’informations sur l’interface Azure CLI, consultez la [documentation relative à l’interface Azure CLI](/cli/azure/overview).

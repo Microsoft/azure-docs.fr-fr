@@ -6,25 +6,25 @@ ms.service: security
 ms.topic: conceptual
 ms.date: 04/10/2020
 ms.author: mbaldwin
-ms.custom: security-benchmark
-ms.openlocfilehash: 7cb99ee9f52a26bd432a506ddc3ea4c9b13275b5
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.custom: subject-security-benchmark
+ms.openlocfilehash: 7d116010d5e6fea5e1ba8a66431b874194506283
+ms.sourcegitcommit: 0a9df8ec14ab332d939b49f7b72dea217c8b3e1e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82185113"
+ms.lasthandoff: 11/18/2020
+ms.locfileid: "94843449"
 ---
 # <a name="azure-security-baseline-for-key-vault"></a>Ligne de base de sécurité Azure pour Key Vault
 
 La ligne de base de sécurité Azure pour Key Vault contient des recommandations qui vous aideront à améliorer la situation de sécurité de votre déploiement.
 
-La base de référence pour ce service est tirée du [benchmark de sécurité Azure version 1.0](https://docs.microsoft.com/azure/security/benchmarks/overview), qui fournit des recommandations sur la façon de sécuriser vos solutions cloud sur Azure en suivant nos conseils sur les bonnes pratiques.
+La base de référence pour ce service est tirée du [benchmark de sécurité Azure version 1.0](../../security/benchmarks/overview.md), qui fournit des recommandations sur la façon de sécuriser vos solutions cloud sur Azure en suivant nos conseils sur les bonnes pratiques.
 
-Pour plus d’informations, consultez [Vue d’ensemble des lignes de base de sécurité Azure](https://docs.microsoft.com/azure/security/benchmarks/security-baselines-overview).
+Pour plus d’informations, consultez [Vue d’ensemble des lignes de base de sécurité Azure](../../security/benchmarks/security-baselines-overview.md).
 
 ## <a name="network-security"></a>Sécurité réseau
 
-*Pour plus d’informations, consultez [Contrôle de sécurité : sécurité réseau](https://docs.microsoft.com/azure/security/benchmarks/security-control-network-security).*
+*Pour plus d’informations, consultez [Contrôle de sécurité : sécurité réseau](../../security/benchmarks/security-control-network-security.md).*
 
 ### <a name="11-protect-resources-using-network-security-groups-or-azure-firewall-on-your-virtual-network"></a>1.1 : Protéger les ressources à l'aide de groupes de sécurité réseau ou du Pare-feu Azure sur votre réseau virtuel
 
@@ -189,7 +189,7 @@ https://docs.microsoft.com/azure/azure-monitor/platform/alerts-activity-log
 
 ## <a name="logging-and-monitoring"></a>Journalisation et supervision
 
-*Pour plus d’informations, consultez [Contrôle de sécurité : journalisation et supervision](https://docs.microsoft.com/azure/security/benchmarks/security-control-logging-monitoring).*
+*Pour plus d’informations, consultez [Contrôle de sécurité : journalisation et supervision](../../security/benchmarks/security-control-logging-monitoring.md).*
 
 ### <a name="21-use-approved-time-synchronization-sources"></a>2.1 : Utiliser des sources de synchronisation date/heure approuvées
 
@@ -235,7 +235,7 @@ https://docs.microsoft.com/azure/key-vault/key-vault-logging
 **Conseils** : Non applicable. Cette recommandation a trait aux ressources de calcul.
 
 
-**Supervision Azure Security Center** : Non applicable
+**Supervision d’Azure Security Center** : Non applicable
 
 **Responsabilité** : Non applicable
 
@@ -315,13 +315,13 @@ https://docs.microsoft.com/azure/azure-monitor/learn/tutorial-response
 **Conseils** : Non applicable. Cette recommandation a trait aux ressources de calcul.
 
 
-**Supervision Azure Security Center** : Non applicable
+**Supervision d’Azure Security Center** : Non applicable
 
 **Responsabilité** : Non applicable
 
 ## <a name="identity-and-access-control"></a>Contrôle des accès et des identités
 
-*Pour plus d’informations, consultez [Contrôle de sécurité : contrôle des accès et des identités](https://docs.microsoft.com/azure/security/benchmarks/security-control-identity-access-control).*
+*Pour plus d’informations, consultez [Contrôle de sécurité : contrôle des accès et des identités](../../security/benchmarks/security-control-identity-access-control.md).*
 
 ### <a name="31-maintain-an-inventory-of-administrative-accounts"></a>3.1 : Tenir un inventaire des comptes d’administration
 
@@ -344,7 +344,7 @@ https://docs.microsoft.com/azure/key-vault/key-vault-secure-your-key-vault
 
 ### <a name="32-change-default-passwords-where-applicable"></a>3.2 : Modifier les mots de passe par défaut lorsque cela est possible
 
-**Conseils** : Non applicable. Azure Key Vault n’intègre pas le concept de mots de passe par défaut, car l’authentification est assurée par Active Directory et sécurisée avec le contrôle d’accès en fonction du rôle.
+**Conseils** : Non applicable. Azure Key Vault n’intègre pas le concept de mots de passe par défaut, car l’authentification est assurée par Active Directory et sécurisée avec le contrôle d’accès en fonction du rôle Azure (Azure RBAC).
 
 
 **Supervision d’Azure Security Center** : Non applicable
@@ -382,7 +382,7 @@ https://docs.microsoft.com/azure/key-vault/service-to-service-authentication
 
 **Conseils** : Activez Azure Active Directory Multi-Factor Authentication et suivez Azure Security Center les recommandations relatives à la gestion des identités et des accès (actuellement en préversion) pour protéger vos ressources Event Hub.
 
-Planification d’un déploiement d’Azure Multi-Factor Authentication basé sur le cloud :
+Planifier un déploiement informatique d'Azure AD Multi-Factor Authentication :
 
 https://docs.microsoft.com/azure/active-directory/authentication/howto-mfa-getstarted
 
@@ -397,11 +397,11 @@ https://docs.microsoft.com/azure/security-center/security-center-identity-access
 
 ### <a name="36-use-dedicated-machines-privileged-access-workstations-for-all-administrative-tasks"></a>3.6 : Utiliser des ordinateurs dédiés (stations de travail avec accès privilégié) pour toutes les tâches administratives
 
-**Conseils** : Utilisez une station de travail disposant d’un accès privilégié avec le service Azure Multi-Factor Authentication (MFA) configuré pour se connecter aux ressources Key Vault activées et les configurer. 
+**Conseils** : Utilisez une station de travail à accès privilégié sur laquelle le service Azure AD Multi-Factor Authentication (MFA) est configuré pour vous connecter aux ressources Key Vault activées et les configurer. 
 
 Stations de travail disposant d’un accès privilégié : https://docs.microsoft.com/windows-server/identity/securing-privileged-access/privileged-access-workstations 
 
-Planification d’un déploiement d’Azure Multi-Factor Authentication basé sur le cloud : https://docs.microsoft.com/azure/active-directory/authentication/howto-mfa-getstarted
+Planifier un déploiement informatique d'Azure AD Multi-Factor Authentication : https://docs.microsoft.com/azure/active-directory/authentication/howto-mfa-getstarted
 
 
 
@@ -411,7 +411,7 @@ Planification d’un déploiement d’Azure Multi-Factor Authentication basé su
 
 ### <a name="37-log-and-alert-on-suspicious-activity-from-administrative-accounts"></a>3.7 : Journaliser et générer des alertes en cas d’activités suspectes depuis les comptes d’administration
 
-**Conseils** : Utilisez Azure Active Directory Privileged Identity Management pour générer des journaux et des alertes lorsque des activités suspectes ou potentiellement dangereuses se produisent dans l’environnement. Utilisez les détections de risque AAD pour afficher les alertes et rapports sur les comportements à risque des utilisateurs. Pour une journalisation complémentaire, envoyez les alertes de détection des risques d’Azure Security Center à Azure Monitor et configurez des alertes/notifications personnalisées à l’aide de groupes d’actions.
+**Aide** : Utilisez Azure Active Directory (Azure AD) Privileged Identity Management (PIM) pour générer des journaux et des alertes quand des activités suspectes ou potentiellement dangereuses se produisent dans l’environnement. Utilisez les détections de risque Azure AD pour visualiser les alertes et des rapports sur les comportements à risque des utilisateurs. Pour une journalisation complémentaire, envoyez les alertes de détection des risques d’Azure Security Center à Azure Monitor et configurez des alertes/notifications personnalisées à l’aide de groupes d’actions.
 
 Activez la protection avancée contre les menaces pour Azure Key Vault de façon à générer des alertes en cas d’activité suspecte.
 
@@ -445,7 +445,7 @@ Présentation de la condition d’emplacement dans l’accès conditionnel Azure
 
 ### <a name="39-use-azure-active-directory"></a>3.9 : Utiliser Azure Active Directory
 
-**Conseils** : Utilisez Azure Active Directory (AAD) comme système central d’authentification et d’autorisation pour des ressources Azure telles que Key Vault. Cela permet au mécanisme de contrôle d’accès en fonction du rôle (RBAC) d’administrer les ressources sensibles.
+**Aide** : Utilisez Azure Active Directory (Azure AD) comme système central d’authentification et d’autorisation pour des ressources Azure telles que Key Vault. Ainsi, le mécanisme de contrôle d’accès en fonction du rôle Azure (Azure RBAC) est applicable aux ressources administratives sensibles.
 
  
 
@@ -460,7 +460,7 @@ https://docs.microsoft.com/azure/active-directory/fundamentals/active-directory-
 
 ### <a name="310-regularly-review-and-reconcile-user-access"></a>3.10 : Examiner et rapprocher régulièrement l’accès utilisateur
 
-**Conseils** : Examinez les journaux Azure Active Directory (AAD) pour découvrir des comptes obsolètes avec des rôles d’administrateur Azure Key Vault. Utilisez également des révisions d’accès AAD pour gérer efficacement les appartenances aux groupes, les accès à des applications d’entreprise susceptibles d’être utilisées pour accéder à Azure Key Vault et les attributions de rôles. Il convient d’examiner régulièrement les accès des utilisateurs, par exemple, tous les 90 jours, pour vérifier que seuls les utilisateurs appropriés sont autorisés à accéder.
+**Aide** : Examinez les journaux Azure Active Directory (Azure AD) pour découvrir les comptes obsolètes disposant de rôles d’administrateur Azure Key Vault. Utilisez également des révisions d’accès Azure AD pour gérer efficacement les appartenances aux groupes, les accès à des applications métier susceptibles d’être utilisées pour accéder à Azure Key Vault et les attributions de rôles. Il convient d’examiner régulièrement les accès des utilisateurs, par exemple, tous les 90 jours, pour vérifier que seuls les utilisateurs appropriés sont autorisés à accéder.
 
 Documentation sur les rapports et la supervision d’Azure Active Directory :
 
@@ -518,7 +518,7 @@ Services et scénarios pris en charge généralement disponibles : https://docs
 
 ## <a name="data-protection"></a>Protection des données
 
-*Pour plus d’informations, consultez [Contrôle de sécurité : protection des données](https://docs.microsoft.com/azure/security/benchmarks/security-control-data-protection).*
+*Pour plus d’informations, consultez [Contrôle de sécurité : protection des données](../../security/benchmarks/security-control-data-protection.md).*
 
 ### <a name="41-maintain-an-inventory-of-sensitive-information"></a>4.1 : Conserver un inventaire des informations sensibles
 
@@ -566,7 +566,9 @@ Journalisation d’Azure Key Vault : https://docs.microsoft.com/azure/key-vault
 
 ### <a name="44-encrypt-all-sensitive-information-in-transit"></a>4.4 : Chiffrer toutes les informations sensibles en transit
 
-**Conseils** : Tout le trafic vers Azure Key Vault pour l’authentification, la gestion et l’accès au plan de données passe par le port HTTPS: 443. Il peut cependant arriver que du trafic transite occasionnellement via le port HTTP 80 pour la liste de révocation de certificats. 
+**Conseils** : Tout le trafic vers Azure Key Vault pour l’authentification, la gestion et l’accès au plan de données passe par le port HTTPS: 443. Il peut cependant arriver que du trafic transite occasionnellement via le port HTTP 80 pour la liste de révocation de certificats. Azure Key Vault continue à autoriser la réception des données TLS 1.1 et TLS 1.0. Vous pouvez limiter les données au protocole TLS 1.2 en configurant côté client.
+
+
 
 Accédez à Azure Key Vault derrière un pare-feu : https://docs.microsoft.com/azure/key-vault/key-vault-access-behind-firewall
 
@@ -621,7 +623,7 @@ https://docs.microsoft.com/azure/security/fundamentals/protection-customer-data
 
 Documents associés :
 
-- [Modèle de chiffrement et table de gestion des clés](https://docs.microsoft.com/azure/security/fundamentals/encryption-atrest#encryption-model-and-key-management-table)
+- [Modèle de chiffrement et table de gestion des clés](../../security/fundamentals/encryption-atrest.md)
 
 
 **Supervision d’Azure Security Center** : Non applicable
@@ -644,7 +646,7 @@ https://docs.microsoft.com/azure/azure-monitor/insights/azure-key-vault
 
 ## <a name="vulnerability-management"></a>Gestion des vulnérabilités
 
-*Pour plus d’informations, consultez [Contrôle de sécurité : Gestion des vulnérabilités](https://docs.microsoft.com/azure/security/benchmarks/security-control-vulnerability-management).*
+*Pour plus d’informations, consultez [Contrôle de sécurité : Gestion des vulnérabilités](../../security/benchmarks/security-control-vulnerability-management.md).*
 
 ### <a name="51-run-automated-vulnerability-scanning-tools"></a>5.1 : Exécuter les outils d’analyse des vulnérabilités automatisés
 
@@ -668,7 +670,7 @@ https://docs.microsoft.com/azure/azure-monitor/insights/azure-key-vault
 **Conseils** : Non applicable. Cette recommandation a trait aux ressources de calcul.
 
 
-**Supervision Azure Security Center** : Non applicable
+**Supervision d’Azure Security Center** : Non applicable
 
 **Responsabilité** : Non applicable
 
@@ -695,7 +697,7 @@ https://docs.microsoft.com/azure/security-center/security-center-secure-score
 
 ## <a name="inventory-and-asset-management"></a>Gestion des stocks et des ressources
 
-*Pour plus d’informations, consultez [Contrôle de sécurité : Gestion des stocks et des ressources](https://docs.microsoft.com/azure/security/benchmarks/security-control-inventory-asset-management).*
+*Pour plus d’informations, consultez [Contrôle de sécurité : Gestion des stocks et des ressources](../../security/benchmarks/security-control-inventory-asset-management.md).*
 
 ### <a name="61-use-azure-asset-discovery"></a>6.1 : Utiliser la découverte de ressources Azure
 
@@ -709,7 +711,7 @@ Obtenir les abonnements auxquels le compte actuel peut accéder :
 
 https://docs.microsoft.com/powershell/module/az.accounts/get-azsubscription?view=azps-3.0.0
 
-Qu’est-ce que le contrôle d’accès en fonction du rôle (RBAC) pour les ressources Azure ?
+Qu’est-ce que le contrôle d’accès en fonction du rôle Azure (RBAC Azure) ?
 
 https://docs.microsoft.com/azure/role-based-access-control/overview
 
@@ -752,7 +754,7 @@ Utilisez des étiquettes pour organiser vos ressources Azure : https://docs.mic
 
 **Conseils** : Établissez la liste des ressources Azure et des logiciels approuvés pour vos ressources de calcul
 
-**Supervision Azure Security Center** : Non applicable
+**Supervision d’Azure Security Center** : Non applicable
 
 **Responsabilité** : Non applicable
 
@@ -781,7 +783,7 @@ Démarrage rapide : Exécuter votre première requête Resource Graph à l’ai
 **Conseils** : Non applicable. Cette recommandation a trait aux ressources de calcul.
 
 
-**Supervision Azure Security Center** : Non applicable
+**Supervision d’Azure Security Center** : Non applicable
 
 **Responsabilité** : Non applicable
 
@@ -799,7 +801,7 @@ Démarrage rapide : Exécuter votre première requête Resource Graph à l’ai
 **Conseils** : Non applicable. Cette recommandation a trait aux ressources de calcul.
 
 
-**Supervision Azure Security Center** : Non applicable
+**Supervision d’Azure Security Center** : Non applicable
 
 **Responsabilité** : Non applicable
 
@@ -826,7 +828,7 @@ Exemples Azure Policy : https://docs.microsoft.com/azure/governance/policy/samp
 **Conseils** : Non applicable. Cette recommandation a trait aux ressources de calcul.
 
 
-**Supervision Azure Security Center** : Non applicable
+**Supervision d’Azure Security Center** : Non applicable
 
 **Responsabilité** : Non applicable
 
@@ -848,7 +850,7 @@ https://docs.microsoft.com/azure/role-based-access-control/conditional-access-az
 **Conseils** : Non applicable. Cette recommandation a trait aux ressources de calcul.
 
 
-**Supervision Azure Security Center** : Non applicable
+**Supervision d’Azure Security Center** : Non applicable
 
 **Responsabilité** : Non applicable
 
@@ -863,7 +865,7 @@ https://docs.microsoft.com/azure/role-based-access-control/conditional-access-az
 
 ## <a name="secure-configuration"></a>Configuration sécurisée
 
-*Pour plus d’informations, consultez [Contrôle de sécurité : Configuration sécurisée](https://docs.microsoft.com/azure/security/benchmarks/security-control-secure-configuration).*
+*Pour plus d’informations, consultez [Contrôle de sécurité : Configuration sécurisée](../../security/benchmarks/security-control-secure-configuration.md).*
 
 ### <a name="71-establish-secure-configurations-for-all-azure-resources"></a>7.1 : Établir des configurations sécurisées pour toutes les ressources Azure
 
@@ -899,7 +901,7 @@ https://docs.microsoft.com/azure/governance/policy/tutorials/create-and-manage
 **Conseils** : Non applicable. Cette recommandation a trait aux ressources de calcul.
 
 
-**Supervision Azure Security Center** : Non applicable
+**Supervision d’Azure Security Center** : Non applicable
 
 **Responsabilité** : Non applicable
 
@@ -926,7 +928,7 @@ https://docs.microsoft.com/azure/governance/policy/concepts/effects
 **Conseils** : Non applicable. Cette recommandation a trait aux ressources de calcul.
 
 
-**Supervision Azure Security Center** : Non applicable
+**Supervision d’Azure Security Center** : Non applicable
 
 **Responsabilité** : Non applicable
 
@@ -942,7 +944,7 @@ Documentation Azure Repos
 
 https://docs.microsoft.com/azure/devops/repos/index?view=azure-devops
 
-**Supervision Azure Security Center** : Non applicable
+**Supervision d’Azure Security Center** : Non applicable
 
 **Responsabilité** : Customer
 
@@ -951,7 +953,7 @@ https://docs.microsoft.com/azure/devops/repos/index?view=azure-devops
 **Conseils** : Non applicable. Cette recommandation a trait aux ressources de calcul.
 
 
-**Supervision Azure Security Center** : Non applicable
+**Supervision d’Azure Security Center** : Non applicable
 
 **Responsabilité** : Non applicable
 
@@ -972,7 +974,7 @@ https://docs.microsoft.com/azure/governance/policy/tutorials/create-and-manage
 **Conseils** : Non applicable. Cette recommandation a trait aux ressources de calcul.
 
 
-**Supervision Azure Security Center** : Non applicable
+**Supervision d’Azure Security Center** : Non applicable
 
 **Responsabilité** : Non applicable
 
@@ -1009,11 +1011,15 @@ https://docs.microsoft.com/azure/azure-app-configuration/howto-integrate-azure-m
 
 Pour créer un coffre de clés :
 
-https://docs.microsoft.com/azure/key-vault/quick-create-portal
+https://docs.microsoft.com/azure/key-vault/general/quick-create-portal
 
-Fournir une authentification Key Vault avec une identité managée : 
+Comment s’authentifier auprès de Key Vault :
 
-https://docs.microsoft.com/azure/key-vault/managed-identity
+https://docs.microsoft.com/azure/key-vault/general/authentication
+
+Comment attribuer une stratégie d’accès Key Vault :
+
+https://docs.microsoft.com/azure/key-vault/general/assign-access-policy-portal
 
 **Supervision d’Azure Security Center** : Oui
 
@@ -1025,16 +1031,13 @@ https://docs.microsoft.com/azure/key-vault/managed-identity
 
   
 
-Intégration aux identités managées Azure : 
+* [Intégration aux identités managées Azure](../../azure-app-configuration/howto-integrate-azure-managed-service-identity.md)
 
-https://docs.microsoft.com/azure/azure-app-configuration/howto-integrate-azure-managed-service-identity  
+* [Créer un coffre de clés](quick-create-portal.md)
 
-Pour créer un coffre de clés : 
+* [Comment s’authentifier auprès de Key Vault](authentication.md)
 
-https://docs.microsoft.com/azure/key-vault/quick-create-portal    
-
-Fournir une authentification Key Vault avec une identité managée :  
-https://docs.microsoft.com/azure/key-vault/managed-identity
+* [Comment attribuer une stratégie d’accès Key Vault](assign-access-policy-portal.md)
 
 **Supervision d’Azure Security Center** : Non applicable
 
@@ -1046,20 +1049,20 @@ https://docs.microsoft.com/azure/key-vault/managed-identity
   
  Configuration de Credential Scanner : https://secdevtools.azurewebsites.net/helpcredscan.html
 
-**Supervision Azure Security Center** : Non applicable
+**Supervision d’Azure Security Center** : Non applicable
 
 **Responsabilité** : Customer
 
 ## <a name="malware-defense"></a>Défense contre les programmes malveillants
 
-*Pour plus d’informations, consultez [Contrôle de sécurité : Défense contre les programmes malveillants](https://docs.microsoft.com/azure/security/benchmarks/security-control-malware-defense).*
+*Pour plus d’informations, consultez [Contrôle de sécurité : Défense contre les programmes malveillants](../../security/benchmarks/security-control-malware-defense.md).*
 
 ### <a name="81-use-centrally-managed-anti-malware-software"></a>8.1 : Utiliser un logiciel anti-programme malveillant géré de manière centralisée
 
 **Conseils** : Non applicable. Cette recommandation a trait aux ressources de calcul. Microsoft gère les logiciels anti-programme malveillant pour la plateforme sous-jacente.
 
 
-**Supervision Azure Security Center** : Non applicable
+**Supervision d’Azure Security Center** : Non applicable
 
 **Responsabilité** : Non applicable
 
@@ -1071,7 +1074,7 @@ Pré-analysez tout contenu chargé ou envoyé à des ressources Azure autres que
 
 Comprendre Microsoft Antimalware pour Azure Cloud Services et les machines virtuelles : https://docs.microsoft.com/azure/security/fundamentals/antimalware
 
-**Supervision Azure Security Center** : Non applicable
+**Supervision d’Azure Security Center** : Non applicable
 
 **Responsabilité** : Customer
 
@@ -1080,13 +1083,13 @@ Comprendre Microsoft Antimalware pour Azure Cloud Services et les machines virtu
 **Conseils** : Non applicable. Cette recommandation a trait aux ressources de calcul. Microsoft gère les logiciels anti-programme malveillant pour la plateforme sous-jacente.
 
 
-**Supervision Azure Security Center** : Non applicable
+**Supervision d’Azure Security Center** : Non applicable
 
 **Responsabilité** : Non applicable
 
 ## <a name="data-recovery"></a>Récupération des données
 
-*Pour plus d’informations, consultez [Contrôle de sécurité : récupération de données](https://docs.microsoft.com/azure/security/benchmarks/security-control-data-recovery).*
+*Pour plus d’informations, consultez [Contrôle de sécurité : récupération de données](../../security/benchmarks/security-control-data-recovery.md).*
 
 ### <a name="91-ensure-regular-automated-back-ups"></a>9.1 : garantir des sauvegardes automatisées régulières
 
@@ -1187,7 +1190,7 @@ https://docs.microsoft.com/azure/key-vault/key-vault-soft-delete-powershell
 
 ## <a name="incident-response"></a>Réponse aux incidents
 
-*Pour plus d’informations, consultez [Contrôle de sécurité : réponse aux incidents](https://docs.microsoft.com/azure/security/benchmarks/security-control-incident-response).*
+*Pour plus d’informations, consultez [Contrôle de sécurité : réponse aux incidents](../../security/benchmarks/security-control-incident-response.md).*
 
 ### <a name="101-create-an-incident-response-guide"></a>10.1 : Créer un guide de réponse aux incidents
 
@@ -1282,7 +1285,7 @@ https://docs.microsoft.com/azure/security-center/workflow-automation
 
 ## <a name="penetration-tests-and-red-team-exercises"></a>Tests d’intrusion et exercices Red Team
 
-*Pour plus d’informations, consultez [Contrôle de sécurité : tests d’intrusion et exercices Red Team](https://docs.microsoft.com/azure/security/benchmarks/security-control-penetration-tests-red-team-exercises).*
+*Pour plus d’informations, consultez [Contrôle de sécurité : tests d’intrusion et exercices Red Team](../../security/benchmarks/security-control-penetration-tests-red-team-exercises.md).*
 
 ### <a name="111-conduct-regular-penetration-testing-of-your-azure-resources-and-ensure-remediation-of-all-critical-security-findings-within-60-days"></a>11.1 : Procédez régulièrement à des tests d’intrusion de vos ressources Azure et veillez à résoudre tous les problèmes de sécurité critiques détectés dans un délai de 60 jours
 
@@ -1302,5 +1305,5 @@ https://gallery.technet.microsoft.com/Cloud-Red-Teaming-b837392e
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- Consultez le [benchmark de sécurité Azure](https://docs.microsoft.com/azure/security/benchmarks/overview)
-- Apprenez-en davantage sur les [Bases de référence de la sécurité Azure](https://docs.microsoft.com/azure/security/benchmarks/security-baselines-overview)
+- Consultez le [benchmark de sécurité Azure](../../security/benchmarks/overview.md)
+- Apprenez-en davantage sur les [Bases de référence de la sécurité Azure](../../security/benchmarks/security-baselines-overview.md)

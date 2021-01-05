@@ -3,15 +3,15 @@ title: Authentification de service à service – Data Lake Storage Gen1 – Azu
 description: Découvrez comment procéder à une authentification de service à service auprès de Data Lake Storage Gen1 en utilisant Azure Active Directory.
 author: twooley
 ms.service: data-lake-store
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 05/29/2018
 ms.author: twooley
-ms.openlocfilehash: 74ad40eb7f7483bb010cf8eb002776893c50a256
-ms.sourcegitcommit: 366e95d58d5311ca4b62e6d0b2b47549e06a0d6d
+ms.openlocfilehash: 9dc195f98310e63cbde06885effe86ea3c239249
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82688198"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91576096"
 ---
 # <a name="service-to-service-authentication-with-azure-data-lake-storage-gen1-using-azure-active-directory"></a>Authentification de service à service auprès d’Azure Data Lake Storage Gen1 en utilisant Azure Active Directory
 > [!div class="op_single_selector"]
@@ -43,9 +43,9 @@ Si vous suivez les instructions du lien précédent, veillez à sélectionner le
 ## <a name="step-2-get-application-id-authentication-key-and-tenant-id"></a>Étape 2 : Obtenir un ID d’application, une clé d’authentification et un ID de locataire
 Quand vous vous connectez par programmation, vous avez besoin de l’ID de votre application. Si l’application s’exécute sous ses propres informations d’identification, vous avez également besoin d’une clé d’authentification.
 
-* Pour obtenir des instructions afin de récupérer l’ID de l’application et la clé d’authentification (également appelée clé secrète client), consultez la page [Obtenir la clé d’authentification et l’ID d’une application](../active-directory/develop/howto-create-service-principal-portal.md#get-values-for-signing-in).
+* Pour obtenir des instructions afin de récupérer l’ID de l’application et la clé d’authentification (également appelée clé secrète client), consultez la page [Obtenir la clé d’authentification et l’ID d’une application](../active-directory/develop/howto-create-service-principal-portal.md#get-tenant-and-app-id-values-for-signing-in).
 
-* Pour obtenir des instructions afin de récupérer l’ID du locataire, consultez [Obtenir l’ID du locataire](../active-directory/develop/howto-create-service-principal-portal.md#get-values-for-signing-in).
+* Pour obtenir des instructions afin de récupérer l’ID du locataire, consultez [Obtenir l’ID du locataire](../active-directory/develop/howto-create-service-principal-portal.md#get-tenant-and-app-id-values-for-signing-in).
 
 ## <a name="step-3-assign-the-azure-ad-application-to-the-azure-data-lake-storage-gen1-account-file-or-folder"></a>Étape 3 : Affecter l’application Azure AD au dossier ou fichier de compte Azure Data Lake Storage Gen1
 
@@ -65,12 +65,12 @@ Quand vous vous connectez par programmation, vous avez besoin de l’ID de votre
     ![Ajouter un groupe](./media/data-lake-store-authenticate-using-active-directory/adl.acl.3.png "Ajouter un groupe")
 6. Cliquez sur **Sélectionner des autorisations**, sélectionnez les autorisations et indiquez si vous souhaitez attribuer les autorisations en tant qu’ACL par défaut et/ou d’accès. Cliquez sur **OK**.
    
-    ![Affectation d’autorisations au groupe](./media/data-lake-store-authenticate-using-active-directory/adl.acl.4.png "Affecter des autorisations à un groupe")
+    ![Screenshot of the Add Custom Access blade with the Select Permissions option called out and the Select Permissions blade with the OK option called out.](./media/data-lake-store-authenticate-using-active-directory/adl.acl.4.png "Affecter des autorisations à un groupe")
    
     Pour plus d’informations sur les autorisations dans Data Lake Storage Gen1 et sur les ACL par défaut ou d’accès, consultez [Contrôle d’accès dans Data Lake Storage Gen1](data-lake-store-access-control.md).
 7. Dans le panneau **Ajouter un accès personnalisé**, cliquez sur **OK**. Le groupe récemment ajouté, avec les autorisations associées, est répertorié dans le panneau **Accès**.
    
-    ![Affectation d’autorisations au groupe](./media/data-lake-store-authenticate-using-active-directory/adl.acl.5.png "Affecter des autorisations à un groupe")
+    ![Screenshot of the Access blade with the newly added group called out in the Custom Access section.](./media/data-lake-store-authenticate-using-active-directory/adl.acl.5.png "Affecter des autorisations à un groupe")
 
 > [!NOTE]
 > Si vous comptez limiter votre application Azure Active Directory à un dossier spécifique, vous devez également donner à cette même application Azure Active Directory l’autorisation **Exécuter** à la racine pour permettre la création du fichier via le Kit de développement logiciel (SDK) .NET.
@@ -88,11 +88,11 @@ Quand vous vous connectez par programmation, vous avez besoin de l’ID de votre
 
 3. En haut du panneau Inscriptions des applications, cliquez sur **Points de terminaison**.
 
-    ![Point de terminaison du jeton OAuth](./media/data-lake-store-authenticate-using-active-directory/oauth-token-endpoint.png "Point de terminaison du jeton OAuth")
+    ![Screenshot of Active Directory with the App registrations option and the Endpoints option called out.](./media/data-lake-store-authenticate-using-active-directory/oauth-token-endpoint.png "Point de terminaison du jeton OAuth")
 
 4. Dans la liste des points de terminaison, copiez le point de terminaison de jeton OAuth 2.0.
 
-    ![Point de terminaison du jeton OAuth](./media/data-lake-store-authenticate-using-active-directory/oauth-token-endpoint-1.png "Point de terminaison du jeton OAuth")   
+    ![Screenshot of the Endpoints blade with the O AUTH 2 point O TOKEN ENDPOINT copy icon called out.](./media/data-lake-store-authenticate-using-active-directory/oauth-token-endpoint-1.png "Point de terminaison du jeton OAuth")   
 
 ## <a name="next-steps"></a>Étapes suivantes
 Dans cet article, vous avez créé une application web Azure AD et recueilli les informations nécessaires dans les applications clientes que vous créez à l’aide du SDK .NET, Java, Python, API REST, etc. Vous pouvez à présent passer aux articles suivants qui traitent de l’utilisation de l’application native Azure AD, d’abord pour vous authentifier auprès de Data Lake Storage Gen1, et ensuite pour effectuer d’autres opérations sur le magasin.

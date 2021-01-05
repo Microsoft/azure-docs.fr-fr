@@ -3,12 +3,12 @@ title: Prise en main d’Azure Advisor
 description: Prise en main du conseiller Azure.
 ms.topic: article
 ms.date: 02/01/2019
-ms.openlocfilehash: 8c2699030b1a6d428ddc2a4db40a66003824cf10
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: e91049077502a6c0eedf0a4f979c073690c214da
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79229669"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85117860"
 ---
 # <a name="get-started-with-azure-advisor"></a>Prise en main d’Azure Advisor
 
@@ -27,7 +27,7 @@ Découvrez comment accéder à Advisor à l’aide du portail Azure, obtenir des
 
 1. Le tableau de bord Advisor présente un résumé de vos recommandations pour tous les abonnements sélectionnés.  Vous pouvez choisir les abonnements pour lesquels afficher les recommandations à l’aide de la liste déroulante de filtrage des abonnements.
 
-1. Pour obtenir des recommandations pour une catégorie spécifique, cliquez sur l’onglet **Haute disponibilité**, **Sécurité**, **Performances** ou **Coût**. 
+1. Pour obtenir des recommandations pour une catégorie spécifique, cliquez sur un des onglets : **Fiabilité**, **Sécurité**, **Performances** ou **Coût**. 
 
    ![Tableau de bord du conseiller Azure](./media/advisor-overview/advisor-dashboard.png)
 
@@ -124,7 +124,8 @@ L’option de téléchargement conserve les filtres que vous avez appliqués au 
 Pour en savoir plus sur Advisor, consultez les ressources suivantes :
 
 - [Présentation du conseiller Azure](advisor-overview.md)
-- [Recommandations du conseiller en matière de haute disponibilité](advisor-high-availability-recommendations.md)
+- [Recommandations d’Advisor en matière de fiabilité](advisor-high-availability-recommendations.md)
 - [Recommandations du conseiller en matière de sécurité](advisor-security-recommendations.md)
 - [Recommandations du conseiller en matière de performances](advisor-performance-recommendations.md)
-- [Recommandations du conseiller en matière de coûts](advisor-performance-recommendations.md)
+- [Recommandations du conseiller en matière de coûts](advisor-cost-recommendations.md)
+- [Recommandations d’excellence opérationnelle Advisor](advisor-operational-excellence-recommendations.md)

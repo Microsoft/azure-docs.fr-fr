@@ -1,6 +1,6 @@
 ---
 title: Supprimer un cloud privé Azure VMware Solution by CloudSimple
-description: Explique comment supprimer un cloud privé CloudSimple.
+description: Découvrez comment supprimer un cloud privé CloudSimple. Lorsque vous supprimez un cloud privé, tous ses clusters sont supprimés.
 author: sharaths-cs
 ms.author: b-shsury
 ms.date: 08/06/2019
@@ -8,12 +8,12 @@ ms.topic: article
 ms.service: azure-vmware-cloudsimple
 ms.reviewer: cynthn
 manager: dikamath
-ms.openlocfilehash: 6bc3e7030c500ea2d6072a1cce0f0b3d9fc62801
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 11fda35f5b236a4930b3d90eb7e3a62ea60207cf
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77024753"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88142228"
 ---
 # <a name="delete-a-cloudsimple-private-cloud"></a>Supprimer un cloud privé CloudSimple
 

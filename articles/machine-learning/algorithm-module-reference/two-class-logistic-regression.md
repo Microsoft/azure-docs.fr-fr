@@ -1,7 +1,7 @@
 ---
 title: 'Régression logistique à deux classes : Informations de référence sur les modules'
 titleSuffix: Azure Machine Learning
-description: Découvrez comment utiliser le module de régression logistique à deux classes dans Azure Machine Learning pour créer un modèle de régression logistique utilisable pour prédire seulement deux résultats.
+description: Découvrez comment utiliser le module Régression logistique à deux classes dans Azure Machine Learning pour créer un classifieur binaire.
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: core
@@ -9,16 +9,16 @@ ms.topic: reference
 author: likebupt
 ms.author: keli19
 ms.date: 04/22/2020
-ms.openlocfilehash: d746b942f624fc83515ba29b0a092c2e592f1f25
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 2e29a666f4d478e11986f834cff94d9743223f22
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82137618"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96012644"
 ---
 # <a name="two-class-logistic-regression-module"></a>Module de régression logistique à deux classes
 
-Cet article décrit un module dans le concepteur Azure Machine Learning (version préliminaire).
+Cet article décrit un module dans le concepteur Azure Machine Learning.
 
 Utilisez ce module pour créer un modèle de régression logistique qui peut être utilisé pour prédire seulement deux résultats. 
 
@@ -58,7 +58,7 @@ Par exemple, la colonne d’étiquette peut être [Voté], avec les valeurs poss
      Cet algorithme prend en charge une combinaison linéaire de valeurs de régularisation L1 et L2 : autrement dit, si <code>x = L1</code> et <code>y = L2</code>, <code>ax + by = c</code> définit l’étendue linéaire des termes du contrat de régularisation.  
   
     > [!NOTE]
-    >  Vous souhaitez en savoir plus sur la régularisation L1 et L2 ? L’article suivant explore les différences entre les régularisations L1 et L2 et comment elles influent sur l’ajustement du modèle, avec des exemples de code pour les modèles de régression logistique et de réseau neuronal :  [Régularisations L1 et L2 pour l’apprentissage automatique](https://msdn.microsoft.com/magazine/dn904675.aspx)  
+    >  Vous souhaitez en savoir plus sur la régularisation L1 et L2 ? L’article suivant explore les différences entre les régularisations L1 et L2 et comment elles influent sur l’ajustement du modèle, avec des exemples de code pour les modèles de régression logistique et de réseau neuronal :  [Régularisations L1 et L2 pour l’apprentissage automatique](/archive/msdn-magazine/2015/february/test-run-l1-and-l2-regularization-for-machine-learning)  
     >
     > Différentes combinaisons linéaires de termes L1 et L2 ont été imaginées pour les modèles de régression logistique : par exemple, [régularisation de réseau élastique](https://wikipedia.org/wiki/Elastic_net_regularization). Nous vous suggérons de faire référence à ces combinaisons pour définir une combinaison linéaire est efficace dans votre modèle.
       
@@ -97,4 +97,4 @@ Une fois l’apprentissage terminé :
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Consultez [l’ensemble des modules disponibles](module-reference.md) pour Azure Machine Learning. 
+Consultez [l’ensemble des modules disponibles](module-reference.md) pour Azure Machine Learning.

@@ -1,19 +1,17 @@
 ---
 title: Configurer Jenkins pour une application Java sur Service Fabric dans Azure
 description: Dans ce tutoriel, découvrez comment configurer l’intégration continue à l’aide de Jenkins pour déployer une application Java Service Fabric.
-author: suhuruli
 ms.topic: tutorial
 ms.date: 08/27/2018
-ms.author: suhuruli
-ms.custom: mvc
-ms.openlocfilehash: 74c412ad4c62a5821890aa5602b521f3f63da925
-ms.sourcegitcommit: 3abadafcff7f28a83a3462b7630ee3d1e3189a0e
+ms.custom: mvc, devx-track-java
+ms.openlocfilehash: 4e29104f0586a8e18afb7a640903c57ce988b692
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82594761"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91531970"
 ---
-# <a name="tutorial-configure-a-jenkins-environment-to-enable-cicd-for-a-java-application-on-service-fabric"></a>Tutoriel : Configurer un environnement Jenkins pour activer l’intégration/le déploiement continus pour une application Java sur Service Fabric
+# <a name="tutorial-configure-a-jenkins-environment-to-enable-cicd-for-a-java-application-on-service-fabric"></a>Tutoriel : Configurer un environnement Jenkins pour activer l’intégration/le déploiement continus (CI/CD) pour une application Java sur Service Fabric
 
 Ce tutoriel est la cinquième partie de la série. Il vous explique comment utiliser Jenkins pour déployer des mises à niveau pour votre application. Dans ce didacticiel, le plug-in Jenkins Service Fabric est utilisé en association avec un référentiel GitHub hébergeant l’application Voting pour déployer l’application vers un cluster.
 
@@ -31,7 +29,7 @@ Cette série de tutoriels vous montre comment effectuer les opérations suivante
 > * [Configurer la surveillance et les diagnostics pour l’application](service-fabric-tutorial-java-elk.md)
 > * Configurer l’intégration continue/le déploiement continu
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 * Installer Git sur votre ordinateur local à partir de [la page de téléchargements de Git](https://git-scm.com/downloads). Pour plus d’informations sur Git, consultez la [documentation Git](https://git-scm.com/docs).
 * Avoir une connaissance pratique de [Jenkins](https://jenkins.io/).
@@ -109,7 +107,7 @@ Vous pouvez configurer Jenkins à l’intérieur ou en dehors d’un cluster Ser
 
     Vous pouvez également donner des informations supplémentaires pour déployer l’application. Consultez la capture d’écran ci-dessous pour avoir une idée des informations de l’application :
 
-    ![Action de génération Jenkins de Service Fabric](./media/service-fabric-tutorial-java-jenkins/sfjenkins.png)
+    ![Boîte de dialogue Actions post-build avec des options de déploiement de projet Service Fabric supplémentaires](./media/service-fabric-tutorial-java-jenkins/sfjenkins.png)
 
     > [!NOTE]
     > Le cluster ici peut être identique à celui qui héberge l’application de conteneur Jenkins dans le cas où vous utilisez Service Fabric pour déployer l’image de conteneur Jenkins.
@@ -178,7 +176,7 @@ Vous pouvez configurer Jenkins à l’intérieur ou en dehors d’un cluster Ser
 
     ![Mise à niveau en cours](./media/service-fabric-tutorial-create-java-app/upgradejava.png)
 
-1. Si vous accédez à **http://\<Host-IP>:8080** l’application Voting avec toutes ses fonctionnalités est maintenant opérationnelle.
+1. Si vous accédez à **http://\<Host-IP>:8080**, l’application Voting avec toutes ses fonctionnalités est maintenant opérationnelle.
 
     ![Application Voting en local](./media/service-fabric-tutorial-java-jenkins/votingv2.png)
 

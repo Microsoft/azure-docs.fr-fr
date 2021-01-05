@@ -9,16 +9,16 @@ ms.service: cognitive-search
 ms.devlang: dotnet
 ms.topic: conceptual
 ms.date: 11/04/2019
-ms.openlocfilehash: bb0cd191ba7e5939c55d11b484ed7a2c422f8c6d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 7f0e994cd41fc55824cf347a51ccfed25589a310
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "72793037"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91539535"
 ---
 # <a name="upgrade-to-azure-search-net-sdk-version-5"></a>Effectuer une mise à niveau vers la version 5 du SDK .NET Recherche Azure
 
-Si vous utilisez la version 4.0-preview ou une version antérieure du [SDK .NET Recherche Azure](https://aka.ms/search-sdk), cet article vous aidera à mettre à niveau votre application pour utiliser la version 5.
+Si vous utilisez la version 4.0-preview ou une version antérieure du [SDK .NET](/dotnet/api/overview/azure/search), cet article vous aidera à mettre à niveau votre application pour utiliser la version 5.
 
 Pour avoir un aperçu général du kit de développement logiciel et avoir des exemples, voir [Comment utiliser Azure Search à partir d’une application .NET](search-howto-dotnet-sdk.md).
 
@@ -35,7 +35,7 @@ La version 5 du SDK .NET Recherche Azure contient des modifications par rapport 
 La version 5 du SDK .NET Recherche Azure cible la dernière version en disponibilité générale de l’API REST Recherche Azure, spécifiquement 2017-11-11. Cela permet d’utiliser de nouvelles fonctionnalités de Recherche Azure à partir d’une application .NET, notamment les suivantes :
 
 * [Synonymes](search-synonyms.md).
-* Vous pouvez à présent accéder par programmation aux avertissements dans l’historique de l’exécution d’un indexeur (voir la propriété `Warning` d’`IndexerExecutionResult` dans les [informations de référence sur .NET](https://docs.microsoft.com/dotnet/api/microsoft.azure.search.models.indexerexecutionresult?view=azure-dotnet) pour plus d’informations).
+* Vous pouvez à présent accéder par programmation aux avertissements dans l’historique de l’exécution d’un indexeur (voir la propriété `Warning` d’`IndexerExecutionResult` dans les [informations de référence sur .NET](/dotnet/api/microsoft.azure.search.models.indexerexecutionresult) pour plus d’informations).
 * Prise en charge de .NET Core 2.
 * La nouvelle structure des packages vous permet de n’utiliser que les parties du SDK dont vous avez besoin (voir [Modifications notables dans la version 5](#ListOfChanges) pour plus d’informations).
 
@@ -48,7 +48,9 @@ Une fois que NuGet a téléchargé les nouveaux packages et leurs dépendances, 
 
 Si la compilation échoue, vous devriez voir une erreur de ce type :
 
-    The name 'SuggesterSearchMode' does not exist in the current context
+```output
+The name 'SuggesterSearchMode' does not exist in the current context
+```
 
 L’étape suivante consiste à corriger cette erreur de build. Pour plus d’informations sur la cause de l’erreur et les possibilités de correction, consultez [Modifications notables dans la version 5](#ListOfChanges).
 
@@ -66,10 +68,10 @@ Une fois que vous avez résolu les erreurs de build ou les avertissements sur la
 
 La modification notable la plus importante dans la version 5 est que l’assembly `Microsoft.Azure.Search` et son contenu ont été divisés en quatre assemblys distincts qui sont désormais distribués sous la forme de quatre packages NuGet distincts :
 
- - `Microsoft.Azure.Search` : il s’agit d’un méta-package qui inclut tous les autres packages Recherche Azure en tant que dépendances. Si vous effectuez une mise à niveau à partir d’une version antérieure du SDK, la mise à niveau de ce package et sa regénération devraient suffire pour commencer à utiliser la nouvelle version.
- - `Microsoft.Azure.Search.Data` : utilisez ce package si vous développez une application .NET à l’aide de Recherche Azure et que vous devez uniquement interroger ou mettre à jour des documents dans vos index. Si vous devez également créer ou mettre à jour des index, des cartes de synonymes ou d’autres ressources de niveau service, utilisez le package `Microsoft.Azure.Search` à la place.
- - `Microsoft.Azure.Search.Service` : utilisez ce package si vous développez un processus d’automatisation en .NET pour gérer les index Recherche Azure, cartes de synonymes, indexeurs, sources de données ou autres ressources de niveau service. Si vous devez uniquement interroger ou mettre à jour des documents dans vos index, utilisez le package `Microsoft.Azure.Search.Data` à la place. Si vous avez besoin de toutes les fonctionnalités de Recherche Azure, utilisez le package `Microsoft.Azure.Search` à la place.
- - `Microsoft.Azure.Search.Common` : types courants requis par les bibliothèques .NET de Recherche Azure. Vous ne devriez pas avoir besoin d’utiliser ce package directement dans votre application ; il est uniquement destiné à être utilisé en tant que dépendance.
+ - `Microsoft.Azure.Search`: Il s’agit d’un méta-package qui inclut tous les autres packages Recherche Azure en tant que dépendances. Si vous effectuez une mise à niveau à partir d’une version antérieure du SDK, la mise à niveau de ce package et sa regénération devraient suffire pour commencer à utiliser la nouvelle version.
+ - `Microsoft.Azure.Search.Data`: Utilisez ce package si vous développez une application .NET à l’aide de Recherche Azure et que vous devez uniquement interroger ou mettre à jour des documents dans vos index. Si vous devez également créer ou mettre à jour des index, des cartes de synonymes ou d’autres ressources de niveau service, utilisez le package `Microsoft.Azure.Search` à la place.
+ - `Microsoft.Azure.Search.Service`: Utilisez ce package si vous développez un processus d’automatisation en .NET pour gérer les index Recherche Azure, cartes de synonymes, indexeurs, sources de données ou autres ressources de niveau service. Si vous devez uniquement interroger ou mettre à jour des documents dans vos index, utilisez le package `Microsoft.Azure.Search.Data` à la place. Si vous avez besoin de toutes les fonctionnalités de Recherche Azure, utilisez le package `Microsoft.Azure.Search` à la place.
+ - `Microsoft.Azure.Search.Common`: Types courants requis par les bibliothèques .NET de Recherche Azure. Vous ne devriez pas avoir besoin d’utiliser ce package directement dans votre application ; il est uniquement destiné à être utilisé en tant que dépendance.
  
 Cette modification marque techniquement une rupture, car plusieurs types ont été déplacés entre les assemblys. C’est pourquoi il est indispensable de regénérer votre application pour effectuer une mise à niveau vers la version 5 du SDK.
 

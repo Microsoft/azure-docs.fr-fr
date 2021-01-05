@@ -10,12 +10,12 @@ ms.subservice: text-analytics
 ms.topic: article
 ms.date: 02/27/2019
 ms.author: aahi
-ms.openlocfilehash: fd70fe14d3765fb7c21b92f62b4d73564176baa2
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 197d28b2ac3d94b6639a6611b2919bdeb2b182e2
+ms.sourcegitcommit: 6a902230296a78da21fbc68c365698709c579093
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78201065"
+ms.lasthandoff: 11/05/2020
+ms.locfileid: "93359899"
 ---
 # <a name="extract-information-in-excel-using-text-analytics-and-power-automate"></a>Extraire des informations dans Excel avec Analyse de texte et Power Automate 
 
@@ -31,13 +31,13 @@ Ce didacticiel vous montre comment effectuer les opérations suivantes :
 > * Extraire le texte d’Excel et l’envoyer à l’API Analyse de texte 
 > * Utiliser les informations de l’API pour mettre à jour une feuille Excel.
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
-- Un compte Microsoft Azure [Démarrez un essai gratuit](https://azure.microsoft.com/free/) ou [connectez-vous](https://portal.azure.com/).
+- Un compte Microsoft Azure [Créez un compte gratuit](https://azure.microsoft.com/free/cognitive-services/) ou [connectez-vous](https://portal.azure.com/).
 - Ressource Analyse de texte. Si vous n’en avez pas, vous pouvez [en créer une dans le portail Azure](https://ms.portal.azure.com/#create/Microsoft.CognitiveServicesTextAnalytics) et utiliser le niveau gratuit pour suivre ce tutoriel.
 - [Clé et point de terminaison](../../cognitive-services-apis-create-account.md#get-the-keys-for-your-resource) générés automatiquement pendant l’inscription.
 - Feuille de calcul contenant les problèmes des locataires. Des exemples de données sont fournis sur GitHub
-- Office 365, avec OneDrive Entreprise.
+- Microsoft 365, avec OneDrive Entreprise.
 
 ## <a name="add-the-excel-file-to-onedrive-for-business"></a>Ajouter le fichier Excel à OneDrive Entreprise
 
@@ -76,9 +76,9 @@ Créez des variables représentant les informations qui seront ajoutées au fich
 
 Ajoutez les informations suivantes aux variables que vous avez créées. Elles représentent les colonnes du fichier Excel. Si des variables sont réduites, vous pouvez cliquer dessus pour les développer.
 
-| Action |Name   | Type | Valeur |
+| Action |Nom   | Type | Valeur |
 |---------|---------|---|---|
-| Initialiser la variable | var_person | String | Person |
+| Initialiser la variable | var_person | String | Personne |
 | Initialiser la variable 2 | var_phone | String | Numéro_téléphone |
 | Initialiser la variable 3 | var_plumbing | String | plomberie |
 | Initialiser la variable 4 | var_other | String | Autres | 
@@ -96,7 +96,7 @@ Cliquez sur **Nouvelle étape** et tapez **Excel**, puis sélectionnez **Lister 
 Ajoutez le fichier Excel au flux en renseignant les champs de cette action. Ce tutoriel nécessite que le fichier soit chargé sur OneDrive Entreprise.
 
 > [!div class="mx-imgBorder"] 
-> :::image type="content" source="../media/tutorials/excel/list-excel-rows-options.png" alt-text="ajouter des lignes Excel.":::
+> :::image type="content" source="../media/tutorials/excel/list-excel-rows-options.png" alt-text="remplir des lignes Excel":::
 
 Cliquez sur **Nouvelle étape** et ajoutez une action **Appliquer à chacun**.
 
@@ -110,7 +110,7 @@ Cliquez sur **Sélectionnez un résultat à partir des étapes précédentes**. 
 
 ## <a name="send-a-request-to-the-text-analytics-api"></a>Envoyer une demande à l’API Analyse de texte
 
-Si vous ne l’avez pas déjà fait, vous devez créer une [ressource Analyse de texte](https://ms.portal.azure.com/#create/Microsoft.CognitiveServicesTextAnalytics) dans le portail Azure.
+Si ce n’est déjà fait, vous devez créer une [ressource Analyse de texte](https://ms.portal.azure.com/#create/Microsoft.CognitiveServicesTextAnalytics) dans le portail Azure.
 
 ### <a name="create-a-text-analytics-connection"></a>Créer une connexion à la ressource Analyse de texte
 
@@ -135,12 +135,12 @@ Dans votre flux, entrez les informations suivantes pour créer une connexion à 
 Une fois la connexion créée, recherchez **Analyse de texte** et sélectionnez **Entités**. Cela permet d’extraire des informations de la colonne de description du problème.
 
 > [!div class="mx-imgBorder"] 
-> :::image type="content" source="../media/tutorials/excel/extract-info.png" alt-text="Ajouter les informations d’identification Analyse de texte à votre flux.":::
+> :::image type="content" source="../media/tutorials/excel/extract-info.png" alt-text="Ajoutez des entités Analyse de texte.":::
 
-Cliquez dans le champ **Texte** et sélectionnez **Description** dans la fenêtre de contenu dynamique qui s’affiche. Entrez `en` pour Langue. (Cliquez sur Afficher les options avancées si vous ne voyez pas Langue)
+Cliquez dans le champ **Texte** et sélectionnez **Description** dans la fenêtre de contenu dynamique qui s’affiche. Entrez `en` pour Langue. (Cliquez sur Afficher les options avancées si vous ne voyez pas l’option Langue)
 
 > [!div class="mx-imgBorder"] 
-> :::image type="content" source="../media/tutorials/excel/description-from-dynamic-content.png" alt-text="Ajouter les informations d’identification Analyse de texte à votre flux.":::
+> :::image type="content" source="../media/tutorials/excel/description-from-dynamic-content.png" alt-text="Ajoutez des paramètres Analyse de texte.":::
 
 
 ## <a name="extract-the-person-name"></a>Extraire le nom de la personne
@@ -148,49 +148,49 @@ Cliquez dans le champ **Texte** et sélectionnez **Description** dans la fenêtr
 Nous allons ensuite trouver le type d’entité de la personne dans la sortie Analyse de texte. Dans **Appliquer à chacun**, cliquez sur **Ajouter une action**, puis créez une autre action **Appliquer à chacun**. Cliquez dans la zone de texte et sélectionnez **Entités** dans la fenêtre de contenu dynamique qui s’affiche.
 
 > [!div class="mx-imgBorder"] 
-> :::image type="content" source="../media/tutorials/excel/add-apply-action-2.png" alt-text="Ajouter les informations d’identification Analyse de texte à votre flux.":::
+> :::image type="content" source="../media/tutorials/excel/add-apply-action-2.png" alt-text="Ajouter des informations d’identification Analyse de texte à votre flux. 2":::
 
 Dans l’action **Appliquer à chacun 2** nouvellement créée, cliquez sur **Ajouter une action**, puis ajoutez un contrôle **Condition**.
 
 > [!div class="mx-imgBorder"] 
-> :::image type="content" source="../media/tutorials/excel/create-condition.png" alt-text="Ajouter les informations d’identification Analyse de texte à votre flux.":::
+> :::image type="content" source="../media/tutorials/excel/create-condition.png" alt-text="Ajouter des informations d’identification Analyse de texte à votre flux. 3":::
 
 Dans la fenêtre Condition, cliquez sur la première zone de texte. Dans la fenêtre de contenu dynamique, recherchez **Type des entités** et sélectionnez cette option.
 
 > [!div class="mx-imgBorder"] 
-> :::image type="content" source="../media/tutorials/excel/choose-entities-value.png" alt-text="Ajouter les informations d’identification Analyse de texte à votre flux.":::
+> :::image type="content" source="../media/tutorials/excel/choose-entities-value.png" alt-text="Ajouter des informations d’identification Analyse de texte à votre flux. 4":::
 
 Vérifiez que la seconde zone a la valeur **est égal à**. Sélectionnez ensuite la troisième zone, puis recherchez `var_person` dans la fenêtre de contenu dynamique. 
 
 > [!div class="mx-imgBorder"] 
-> :::image type="content" source="../media/tutorials/excel/choose-variable-value.png" alt-text="Ajouter les informations d’identification Analyse de texte à votre flux.":::
+> :::image type="content" source="../media/tutorials/excel/choose-variable-value.png" alt-text="Ajouter des informations d’identification Analyse de texte à votre flux. 5":::
 
 Dans la condition **Si Oui**, tapez Excel, puis sélectionnez **Mettre à jour une ligne**.
 
 > [!div class="mx-imgBorder"] 
-> :::image type="content" source="../media/tutorials/excel/yes-column-action.png" alt-text="Ajouter les informations d’identification Analyse de texte à votre flux.":::
+> :::image type="content" source="../media/tutorials/excel/yes-column-action.png" alt-text="Ajouter des informations d’identification Analyse de texte à votre flux. 6":::
 
 Entrez les informations Excel, puis mettez à jour les champs **Colonne clé**, **Valeur de la clé** et **PersonName**. Cela permet d’ajouter le nom détecté par l’API à la feuille Excel. 
 
 > [!div class="mx-imgBorder"] 
-> :::image type="content" source="../media/tutorials/excel/yes-column-action-options.png" alt-text="Ajouter les informations d’identification Analyse de texte à votre flux.":::
+> :::image type="content" source="../media/tutorials/excel/yes-column-action-options.png" alt-text="Ajouter des informations d’identification Analyse de texte à votre flux. 7":::
 
 ## <a name="get-the-phone-number"></a>Obtenir le numéro de téléphone
 
 Réduisez l’action **Appliquer à chacun 2** en cliquant sur le nom. Ajoutez ensuite une autre action **Appliquer à chacun**, comme précédemment. Elle sera nommée **Appliquer à chacun 3**. Sélectionnez la zone de texte et ajoutez **Entités** comme sortie pour cette action. 
 
 > [!div class="mx-imgBorder"] 
-> :::image type="content" source="../media/tutorials/excel/add-apply-action-3.png" alt-text="Ajouter les informations d’identification Analyse de texte à votre flux.":::
+> :::image type="content" source="../media/tutorials/excel/add-apply-action-3.png" alt-text="Ajouter des informations d’identification Analyse de texte à votre flux. 8":::
 
 Dans **Appliquer à chacun 3**, ajoutez un contrôle **Condition**. Il sera nommé **Condition 2**. Dans la première zone de texte, recherchez et ajoutez **Type des entités** à partir de la fenêtre de contenu dynamique. Vérifiez que la zone centrale a la valeur **est égal à**. Ensuite, dans la zone de texte de droite, entrez `var_phone`. 
 
 > [!div class="mx-imgBorder"] 
-> :::image type="content" source="../media/tutorials/excel/condition-2-options.png" alt-text="Ajouter les informations d’identification Analyse de texte à votre flux.":::
+> :::image type="content" source="../media/tutorials/excel/condition-2-options.png" alt-text="Ajouter des informations d’identification Analyse de texte à votre flux. 9":::
 
 Dans la condition **Si Oui**, ajoutez une action **Mettre à jour une ligne**. Entrez ensuite les informations comme ci-dessus pour la colonne des numéros de téléphone de la feuille Excel. Cela permet d’ajouter le numéro de téléphone détecté par l’API à la feuille Excel. 
 
 > [!div class="mx-imgBorder"] 
-> :::image type="content" source="../media/tutorials/excel/condition-2-yes-column.png" alt-text="Ajouter les informations d’identification Analyse de texte à votre flux.":::
+> :::image type="content" source="../media/tutorials/excel/condition-2-yes-column.png" alt-text="Ajouter des informations d’identification Analyse de texte à votre flux. 10":::
 
 
 ## <a name="get-the-plumbing-issues"></a>Obtenir les problèmes de plomberie
@@ -198,15 +198,15 @@ Dans la condition **Si Oui**, ajoutez une action **Mettre à jour une ligne**. E
 Réduisez **Appliquer à chacun 3** en cliquant sur le nom. Créez ensuite une autre action **Appliquer à chacun** dans l’action parente. Sélectionnez la zone de texte et ajoutez **Entités** comme sortie pour cette action à partir de la fenêtre de contenu dynamique. 
 
 > [!div class="mx-imgBorder"] 
-> :::image type="content" source="../media/tutorials/excel/add-apply-action-4.png" alt-text="Ajouter les informations d’identification Analyse de texte à votre flux.":::
+> :::image type="content" source="../media/tutorials/excel/add-apply-action-4.png" alt-text="Ajouter des informations d’identification Analyse de texte à votre flux. 11":::
 
 
-Le flux vérifie ensuite si la description du problème à partir de la ligne du tableau Excel contient le mot « plomberie ». Si c’est le cas, il ajoute « plomberie » dans la colonne IssueType. Sinon, nous allons entrer « autres ».
+Le flux vérifie ensuite si la description du problème à partir de la ligne du tableau Excel contient le mot « plomberie ». Si c’est le cas, il ajoute « plomberie » dans la colonne IssueType. Sinon, nous allons entrer « autre ».
 
 Dans l’action **Appliquer à chacun 4**, ajoutez un contrôle **Condition**. Il sera nommé **Condition 3**. Dans la première zone de texte, recherchez et ajoutez **Description** à partir du fichier Excel en utilisant la fenêtre de contenu dynamique. Vérifiez que la zone centrale indique **contient**. Ensuite, dans la zone de texte de droite, recherchez et sélectionnez `var_plumbing`. 
 
 > [!div class="mx-imgBorder"] 
-> :::image type="content" source="../media/tutorials/excel/condition-3-options.png" alt-text="Ajouter les informations d’identification Analyse de texte à votre flux.":::
+> :::image type="content" source="../media/tutorials/excel/condition-3-options.png" alt-text="Ajouter des informations d’identification Analyse de texte à votre flux. 12":::
 
 
 Dans la condition **Si Oui**, cliquez sur **Ajouter une action**, puis sélectionnez **Mettre à jour une ligne**. Entrez ensuite les informations comme précédemment. Dans la colonne IssueType, sélectionnez `var_plumbing`. Cela permet d’appliquer une étiquette « plomberie » à la ligne.
@@ -214,7 +214,7 @@ Dans la condition **Si Oui**, cliquez sur **Ajouter une action**, puis sélectio
 Dans la condition **Si Non**, cliquez sur **Ajouter une action**, puis sélectionnez **Mettre à jour une ligne**. Entrez ensuite les informations comme précédemment. Dans la colonne IssueType, sélectionnez `var_other`. Cela permet d’appliquer une étiquette « autres » à la ligne.
 
 > [!div class="mx-imgBorder"] 
-> :::image type="content" source="../media/tutorials/excel/plumbing-issue-condition.png" alt-text="Ajouter les informations d’identification Analyse de texte à votre flux.":::
+> :::image type="content" source="../media/tutorials/excel/plumbing-issue-condition.png" alt-text="Ajouter des informations d’identification Analyse de texte à votre flux. 13":::
 
 ## <a name="test-the-workflow"></a>Tester le flux de travail
 

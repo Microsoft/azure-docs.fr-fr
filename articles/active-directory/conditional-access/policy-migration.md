@@ -11,12 +11,12 @@ author: MicrosoftGuyJFlo
 manager: daveba
 ms.reviewer: calebb
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 33b1f76dd1489e00115d0f805add8d754038df84
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: d1811d5b9ae4d3e34b48e1cdc156438f2bad98d1
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77185909"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90601652"
 ---
 # <a name="conditional-access-classic-policy-migration"></a>Migration des stratégies classiques d’accès conditionnel
 
@@ -73,9 +73,9 @@ Les aspects suivants sont importants dans le contexte d’une consolidation de s
    - Combiner plusieurs conditions si votre scénario l’exige. 
    - Sélectionner plusieurs exigences d’octroi en tant que contrôle d’accès et les combiner avec un opérateur logique *OR* (nécessitent un des contrôles sélectionnés) ou avec un opérateur logique *AND* (nécessitent tous les contrôles sélectionnés).
 
-### <a name="office-365-exchange-online"></a>Office 365 Exchange Online
+### <a name="exchange-online"></a>Exchange Online
 
-Si vous souhaitez migrer des stratégies classiques pour **Office 365 Exchange Online** qui incluent **Exchange Active Sync** comme condition d’applications clientes, vous ne pourrez peut-être pas les consolider en une nouvelle stratégie. 
+Si vous souhaitez migrer des stratégies classiques pour **Exchange Online** qui incluent **Exchange Active Sync** comme condition d’applications clientes, vous ne pourrez peut-être pas les consolider en une nouvelle stratégie. 
 
 C’est, par exemple, le cas si vous souhaitez prendre en charge tous les types d’applications clientes. Dans une nouvelle stratégie qui a **Exchange Active Sync** comme condition d’applications clientes, vous ne pouvez pas sélectionner d’autres applications clientes.
 
@@ -89,7 +89,7 @@ Si vous avez une nouvelle stratégie pour laquelle **Exchange Active Sync** est 
 
 ![Conditions d’accès conditionnel](./media/policy-migration/16.png)
  
-Les stratégies classiques basées sur une application pour Office 365 Exchange Online qui incluent **Exchange Active Sync** comme condition d’applications clientes autorisent les plateformes d’appareils **prises en charge** et **non prises en charge**. Bien que vous ne puissiez pas configurer de plateformes d’appareils individuelles dans une nouvelle stratégie connexe, vous pouvez limiter la prise en charge aux [plateformes d’appareils prises en charge](concept-conditional-access-conditions.md#device-platforms). 
+Les stratégies classiques basées sur une application pour Exchange Online qui incluent **Exchange Active Sync** comme condition d’applications clientes autorisent les plateformes d’appareils **prises en charge** et **non prises en charge**. Bien que vous ne puissiez pas configurer de plateformes d’appareils individuelles dans une nouvelle stratégie connexe, vous pouvez limiter la prise en charge aux [plateformes d’appareils prises en charge](concept-conditional-access-conditions.md#device-platforms). 
 
 ![Sélection d’Exchange ActiveSync pour l’accès conditionnel](./media/policy-migration/65.png)
 

@@ -1,236 +1,256 @@
 ---
-title: Démarrage rapide - Gérer les points de terminaison privés dans Azure
-description: Découvrez dans ce guide de démarrage rapide comment créer un point de terminaison privé avec le portail Azure
+title: Démarrage rapide – Créer un point de terminaison privé en utilisant le portail Azure
+description: Découvrez dans ce guide de démarrage rapide comment créer un point de terminaison privé avec le portail Azure.
 services: private-link
-author: malopMSFT
+author: asudbring
 ms.service: private-link
 ms.topic: quickstart
-ms.date: 09/16/2019
+ms.date: 10/20/2020
 ms.author: allensu
-ms.openlocfilehash: 1bdc089bb89a732e329bf7d3ffd3d5b5c09ba408
-ms.sourcegitcommit: 0450ed87a7e01bbe38b3a3aea2a21881f34f34dd
+ms.openlocfilehash: 395912ae70c5a01bd7de9a80cf8a507dd516028e
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/03/2020
-ms.locfileid: "80637246"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96018067"
 ---
-# <a name="quickstart-create-a-private-endpoint-using-azure-portal"></a>Démarrage rapide : Créer un point de terminaison privé au moyen du portail Azure
+# <a name="quickstart-create-a-private-endpoint-using-the-azure-portal"></a>Démarrage rapide : Créer un point de terminaison privé en utilisant le portail Azure
 
-Private Endpoint est le composant fondamental de Private Link dans Azure. Il permet à des ressources Azure, comme des machines virtuelles, de communiquer en privé avec des ressources Private Link. Dans ce guide de démarrage rapide, vous allez découvrir comment créer une machine virtuelle sur un réseau virtuel Azure, un serveur SQL Database avec un point de terminaison privé Azure à l’aide du portail Azure. Ensuite, vous pouvez accéder de façon sécurisée au serveur SQL Database à partir de la machine virtuelle.
+Démarrez avec Azure Private Link en utilisant un point de terminaison privé pour vous connecter en toute sécurité à une application web Azure.
 
-Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
+Dans ce guide de démarrage rapide, vous allez créer un point de terminaison privé pour une application web Azure et déployer une machine virtuelle pour tester la connexion privée.  
 
+Des points de terminaison privés peuvent être créés pour différents types de services Azure, tels qu’Azure SQL et Stockage Azure.
+
+## <a name="prerequisites"></a>Prérequis
+
+* Compte Azure avec un abonnement actif. [Créez un compte gratuitement](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
+* Une application web Azure avec un **niveau PremiumV2** ou un plan App Service supérieur déployé dans votre abonnement Azure.  
+    * Pour plus d’informations et pour obtenir un exemple, consultez [Démarrage rapide : Créer une application web ASP.NET Core dans Azure](../app-service/quickstart-dotnetcore.md). 
+    * Pour obtenir un tutoriel détaillé sur la création d’une application web et d’un point de terminaison, consultez [Tutoriel : Se connecter à une application web à l’aide d’Azure Private Endpoint](tutorial-private-endpoint-webapp-portal.md).
 
 ## <a name="sign-in-to-azure"></a>Connexion à Azure
 
 Connectez-vous au portail Azure sur https://portal.azure.com.
 
-## <a name="create-a-vm"></a>Créer une machine virtuelle
-Dans cette section, vous allez créer un réseau virtuel et le sous-réseau pour héberger la machine virtuelle qui est utilisée pour accéder à votre ressource de liaison privée (un serveur SQL dans Azure pour cet exemple).
+## <a name="create-a-virtual-network-and-bastion-host"></a>Créer un réseau virtuel et un hôte bastion
 
-## <a name="virtual-network-and-parameters"></a>Réseau virtuel et paramètres
+Dans cette section, vous allez créer un réseau virtuel, un sous-réseau et un hôte bastion. 
 
-Dans cette section, vous allez créer un réseau virtuel et le sous-réseau pour héberger la machine virtuelle qui est utilisée pour accéder à votre ressource de liaison privée.
+L’hôte bastion sera utilisé pour se connecter de façon sécurisée à la machine virtuelle afin de tester le point de terminaison privé.
 
-Dans les étapes figurant dans cette section, vous devez remplacer les paramètres suivants par les informations ci-dessous :
+1. En haut à gauche de l’écran, sélectionnez **Créer une ressource > Réseau > Réseau virtuel**, ou recherchez **Réseau virtuel** à partir de la zone de recherche.
 
-| Paramètre                   | Valeur                |
-|-----------------------------|----------------------|
-| **\<nom_groupe_ressource>**  | myResourceGroup |
-| **\<nom_réseau_virtuel>** | myVirtualNetwork          |
-| **\<nom_région>**          | Centre-USA Ouest    |
-| **\<espace_d’adressage_IPv4>**   | 10.1.0.0/16          |
-| **\<nom_sous-réseau>**          | mySubnet        |
-| **\<plage_adresses_sous-réseau>** | 10.1.0.0/24          |
+2. Dans **Créer un réseau virtuel**, entrez ou sélectionnez les informations suivantes sous l’onglet **Général** :
 
-[!INCLUDE [virtual-networks-create-new](../../includes/virtual-networks-create-new.md)]
+    | **Paramètre**          | **Valeur**                                                           |
+    |------------------|-----------------------------------------------------------------|
+    | **Détails du projet**  |                                                                 |
+    | Abonnement     | Sélectionner votre abonnement Azure                                  |
+    | Groupe de ressources   | Sélectionnez **CreatePrivateEndpointQS-rg** |
+    | **Détails de l’instance** |                                                                 |
+    | Nom             | Entrez **myVNet**                                    |
+    | Région           | Sélectionnez **Europe Ouest**.|
 
-### <a name="create-virtual-machine"></a>Créer une machine virtuelle
+3. Sélectionnez l’onglet **Adresses IP**, ou sélectionnez le bouton **Suivant : Adresses IP** au bas de la page.
 
-1. En haut à gauche de l’écran du portail Azure, sélectionnez **Créer une ressource** > **Calcul** > **Machine virtuelle**.
+4. Sous l’onglet **Adresses IP**, entrez les informations suivantes :
 
-1. Dans **Créer une machine virtuelle - Notions de base**, entrez ou sélectionnez ces informations :
+    | Paramètre            | Valeur                      |
+    |--------------------|----------------------------|
+    | Espace d’adressage IPv4 | Entrez **10.1.0.0/16** |
 
-    | Paramètre | Valeur |
-    | ------- | ----- |
-    | **DÉTAILS DU PROJET** | |
-    | Abonnement | Sélectionnez votre abonnement. |
-    | Resource group | Sélectionnez **myResourceGroup**. Vous avez créé cela dans la section précédente.  |
-    | **DÉTAILS DE L’INSTANCE** |  |
-    | Nom de la machine virtuelle | Entrez *myVm*. |
-    | Région | Sélectionnez **WestCentralUS**. |
-    | Options de disponibilité | Conservez la valeur par défaut **Aucune redondance d’infrastructure nécessaire**. |
-    | Image | Sélectionnez **Windows Server 2019 Datacenter**. |
-    | Taille | Conservez la valeur par défaut **Standard DS1 v2**. |
-    | **COMPTE ADMINISTRATEUR** |  |
-    | Nom d’utilisateur | Entrez un nom d’utilisateur de votre choix. |
-    | Mot de passe | Entrez un mot de passe de votre choix. Le mot de passe doit contenir au moins 12 caractères et satisfaire aux [exigences de complexité définies](../virtual-machines/windows/faq.md?toc=%2fazure%2fvirtual-network%2ftoc.json#what-are-the-password-requirements-when-creating-a-vm).|
-    | Confirmer le mot de passe | Retapez le mot de passe. |
-    | **RÈGLES DES PORTS D’ENTRÉE** |  |
-    | Aucun port d’entrée public | Conservez la valeur par défaut **Aucun**. |
-    | **ÉCONOMISEZ DE L’ARGENT** |  |
-    | Vous disposez déjà d’une licence Windows ? | Conservez la valeur par défaut **Non**. |
-    |||
+5. Sous **Nom de sous-réseau**, sélectionnez le mot **par défaut**.
 
-1. Sélectionnez **Suivant : Disques**.
+6. Dans **Modifier le sous-réseau**, entrez les informations suivantes :
 
-1. Dans **Créer une machine virtuelle - Disks**, conservez les valeurs par défaut et sélectionnez **Suivant : Mise en réseau**.
+    | Paramètre            | Valeur                      |
+    |--------------------|----------------------------|
+    | Nom du sous-réseau | Entrez **mySubnet** |
+    | Plage d’adresses de sous-réseau | Entrez **10.1.0.0/24** |
 
-1. Dans **Créer une machine virtuelle - Mise en réseau**, sélectionnez ces informations :
+7. Sélectionnez **Enregistrer**.
 
-    | Paramètre | Valeur |
-    | ------- | ----- |
-    | Réseau virtuel | Conservez la valeur par défaut, **MyVirtualNetwork**.  |
-    | Espace d’adressage | Conservez la valeur par défaut, **10.1.0.0/24**.|
-    | Subnet | Conservez la valeur par défaut, **mySubnet (10.1.0.0/24)** .|
-    | Adresse IP publique | Conservez la valeur par défaut **(new) myVm-ip**. |
-    | Aucun port d’entrée public | Sélectionnez **Autoriser les ports sélectionnés**. |
-    | Sélectionner des ports d’entrée | Sélectionnez **HTTP** et **RDP**.|
-    |||
+8. Sélectionnez l'onglet **Sécurité** .
+
+9. Sous **BastionHost**, sélectionnez **Activer**. Entrez les informations suivantes :
+
+    | Paramètre            | Valeur                      |
+    |--------------------|----------------------------|
+    | Nom du bastion | Entrez **myBastionHost** |
+    | Espace d’adressage AzureBastionSubnet | Entrez **10.1.1.0/24** |
+    | Adresse IP publique | Sélectionnez **Créer nouveau**. </br> Pour **Nom**, entrez **myBastionIP**. </br> Sélectionnez **OK**. |
 
 
-1. Sélectionnez **Revoir + créer**. Vous êtes redirigé vers la page **Vérifier + créer** où Azure valide votre configuration.
+8. Sélectionnez l’onglet **Vérifier + créer**, ou sélectionnez le bouton **Vérifier + créer**.
 
-1. Lorsque le message **Validation passed** (Validation réussie) apparaît, sélectionnez **Créer**.
+9. Sélectionnez **Create** (Créer).
 
-## <a name="create-a-sql-database-server"></a>Créer un serveur de base de données SQL
-Dans cette section, vous allez créer un serveur de base de données SQL dans Azure. 
+## <a name="create-a-virtual-machine"></a>Création d'une machine virtuelle
 
-1. En haut à gauche de l’écran du portail Azure, sélectionnez **Créer une ressource** > **Bases de données** > **Base de données SQL**.
+Dans cette section, vous allez créer une machine virtuelle qui sera utilisée pour tester le point de terminaison privé.
 
-1. Dans **Créer une base de données SQL - Concepts de base**, entrez ou sélectionnez les informations suivantes :
+1. En haut à gauche de l’écran du portail Azure, sélectionnez **Créer une ressource** > **Calcul** > **Machine virtuelle**, ou recherchez **Machine virtuelle** dans la zone de recherche.
+   
+2. Dans **Créer une machine virtuelle**, tapez ou sélectionnez les valeurs sous l’onglet **De base** :
 
-    | Paramètre | Valeur |
-    | ------- | ----- |
-    | **Détails de la base de données** | |
-    | Abonnement | Sélectionnez votre abonnement. |
-    | Resource group | Sélectionnez **myResourceGroup**. Vous avez créé cela dans la section précédente.|
-    | **DÉTAILS DE L’INSTANCE** |  |
-    | Nom de la base de données  | Entrez *mydatabase*. Si ce nom est utilisé, créez un nom unique. |
-    |||
-5. Dans **Serveur**, sélectionnez **Créer**. 
-6. Dans **Nouveau serveur**, entrez ou sélectionnez les informations suivantes :
+    | Paramètre | Valeur                                          |
+    |-----------------------|----------------------------------|
+    | **Détails du projet** |  |
+    | Abonnement | Sélectionner votre abonnement Azure |
+    | Groupe de ressources | Sélectionnez **CreatePrivateEndpointQS-rg** |
+    | **Détails de l’instance** |  |
+    | Nom de la machine virtuelle | Entrez **myVM**. |
+    | Région | Sélectionnez **Europe Ouest**. |
+    | Options de disponibilité | Sélectionnez **Aucune redondance d’infrastructure requise**. |
+    | Image | Sélectionnez **Windows Server 2019 Datacenter - Gen1** |
+    | Instance Azure Spot | Sélectionnez **Non** |
+    | Taille | Choisissez la taille de la machine virtuelle ou acceptez le paramètre par défaut |
+    | **Compte administrateur** |  |
+    | Nom d’utilisateur | Entrez un nom d’utilisateur |
+    | Mot de passe | Entrez un mot de passe |
+    | Confirmer le mot de passe | Entrez à nouveau le mot de passe |
+
+3. Sélectionnez l'onglet **Mise en réseau** ou choisissez **Suivant : Disques**, puis **Suivant : Mise en réseau**.
+  
+4. Sous l’onglet Réseau, sélectionnez ou entrez :
 
     | Paramètre | Valeur |
-    | ------- | ----- |
-    |Nom du serveur  | Entrez *myserver*. Si ce nom est utilisé, créez un nom unique.|
-    | Connexion d’administrateur serveur| Entrez le nom d’un administrateur de votre choix. |
-    | Mot de passe | Entrez un mot de passe de votre choix. Le mot de passe doit contenir au moins 8 caractères et satisfaire aux exigences définies. |
-    | Emplacement | Sélectionnez une région Azure dans laquelle vous souhaitez que votre serveur SQL Server réside. |
-    
-7. Sélectionnez **OK**. 
-8. Sélectionnez **Revoir + créer**. Vous êtes redirigé vers la page **Vérifier + créer** où Azure valide votre configuration. 
-9. Quand le message Validation réussie s’affiche, sélectionnez **Créer**. 
-10. Quand le message Validation réussie s’affiche, sélectionnez Créer. 
+    |-|-|
+    | **Interface réseau** |  |
+    | Réseau virtuel | **myVNet** |
+    | Subnet | **mySubnet** |
+    | Adresse IP publique | Sélectionnez **Aucun**. |
+    | Groupe de sécurité réseau de la carte réseau | **De base**|
+    | Aucun port d’entrée public | Sélectionnez **Aucun**. |
+   
+5. Sélectionnez **Revoir + créer**. 
+  
+6. Passez en revue les paramètres, puis sélectionnez **Créer**.
 
-## <a name="create-a-private-endpoint"></a>Créer un Private Endpoint
+## <a name="create-a-private-endpoint"></a>Créer un point de terminaison privé
 
-Dans cette section, vous allez créer un serveur SQL Server et lui ajouter un point de terminaison privé. 
+Dans cette section, vous allez créer un point de terminaison privé pour l’application web que vous avez créée dans la section des prérequis.
 
-1. En haut à gauche de l’écran du portail Azure, sélectionnez **Créer une ressource** > **Mise en réseau** > **Centre de liaisons privées (préversion)** .
-2. Dans **Centre de liaisons privées - Vue d’ensemble**, dans l’option permettant de **générer une connexion privée à un service**, sélectionnez **Démarrer**.
-1. Dans **Créer un point de terminaison privé (préversion) - Concepts de base**, entrez ou sélectionnez les informations suivantes :
+1. En haut à gauche de l’écran du portail, sélectionnez **Créer une ressource** > **Mise en réseau** > **Liaison privée** ou entrez **Liaison privée** dans la zone de recherche.
+
+2. Sélectionnez **Create** (Créer).
+
+3. Dans **Centre de liaisons privées**, sélectionnez **Points de terminaison privés** dans le menu de gauche.
+
+4. Dans **Points de terminaison privés**, sélectionnez **+ Ajouter**.
+
+5. Sous l’onglet **Général** de **Créer un point de terminaison privé**, entrez ou sélectionnez les informations suivantes :
 
     | Paramètre | Valeur |
     | ------- | ----- |
     | **Détails du projet** | |
     | Abonnement | Sélectionnez votre abonnement. |
-    | Resource group | Sélectionnez **myResourceGroup**. Vous avez créé cela dans la section précédente.|
-    | **DÉTAILS DE L’INSTANCE** |  |
-    | Nom | Entrez *myPrivateEndpoint*. Si ce nom est utilisé, créez un nom unique. |
-    |Région|Sélectionnez **WestCentralUS**.|
-    |||
-5. Sélectionnez **Suivant : Ressource**.
-6. Dans **Créer un point de terminaison privé - Ressource**, entrez ou sélectionnez les informations suivantes :
+    | Resource group | Sélectionnez **CreatePrivateEndpointQS-rg**. Vous avez créé ce groupe de ressources dans la section précédente.|
+    | **Détails de l’instance** |  |
+    | Nom  | Entrez **myPrivateEndpoint**. |
+    | Région | Sélectionnez **Europe Ouest**. |
+
+6. Sélectionnez l’onglet **Ressource** ou le bouton **Suivant : Ressource** en bas de la page.
+    
+7. Dans **Ressource**, entrez ou sélectionnez ces informations :
 
     | Paramètre | Valeur |
     | ------- | ----- |
-    |Méthode de connexion  | Sélectionnez Se connecter à une ressource Azure dans mon répertoire.|
-    | Abonnement| Sélectionnez votre abonnement. |
-    | Type de ressource | Sélectionnez **Microsoft.Sql/servers**. |
-    | Ressource |Sélectionnez *myServer*|
-    |Sous-ressource cible |Sélectionnez *sqlServer*|
-    |||
-7. Sélectionnez **Suivant : Configuration**.
-8. Dans **Créer un point de terminaison privé (préversion) - Configuration**, entrez ou sélectionnez les informations suivantes :
+    | Méthode de connexion | Sélectionnez **Se connecter à une ressource Azure dans mon répertoire**. |
+    | Abonnement | Sélectionnez votre abonnement. |
+    | Type de ressource | Sélectionnez **Microsoft.Web/sites**. |
+    | Ressource | Sélectionnez **\<your-web-app-name>**. </br> Sélectionnez le nom de l’application web que vous avez créée dans les prérequis. |
+    | Sous-ressource cible | Sélectionnez les **sites**. |
+
+8. Sélectionnez l’onglet **Configuration** ou le bouton **Suivant : Configuration** en bas de l’écran.
+
+9. Dans **Configuration**, entrez ou sélectionnez les informations suivantes :
 
     | Paramètre | Valeur |
     | ------- | ----- |
-    |**MISE EN RÉSEAU**| |
-    | Réseau virtuel| Sélectionnez *MyVirtualNetwork*. |
-    | Subnet | Sélectionnez *mySubnet*. |
-    |**INTÉGRATION À DNS PRIVÉ**||
-    |Intégrer à une zone DNS privée |Sélectionnez **Oui**. |
-    |Zone DNS privée |Sélectionnez *(New)privatelink.database.windows.net* |
-    |||
+    | **Mise en réseau** |  |
+    | Réseau virtuel | Sélectionnez **myVNet**. |
+    | Subnet | Sélectionnez **mySubnet**. |
+    | **Intégration à un DNS privé** |  |
+    | Intégrer à une zone DNS privée | Conservez la valeur par défaut **Oui**. |
+    | Abonnement | Sélectionnez votre abonnement. |
+    | Zones DNS privées | Conservez la valeur par défaut de **(Nouveau) privatelink.azurewebsites.net**.
+    
 
-1. Sélectionnez **Revoir + créer**. Vous êtes redirigé vers la page **Vérifier + créer** où Azure valide votre configuration. 
-2. Lorsque le message **Validation passed** (Validation réussie) apparaît, sélectionnez **Créer**. 
- 
-## <a name="connect-to-a-vm-using-remote-desktop-rdp"></a>Se connecter à une machine virtuelle à l’aide du Bureau à distance (RDP)
+13. Sélectionnez **Revoir + créer**.
 
+14. Sélectionnez **Create** (Créer).
 
-Après avoir créé **myVm**, connectez-vous à cette machine virtuelle à partir d’Internet comme suit : 
+## <a name="test-connectivity-to-private-endpoint"></a>Tester la connectivité au point de terminaison privé
 
-1. Dans la barre de recherche du portail, entrez *myVm*.
+Dans cette section, vous allez utiliser la machine virtuelle que vous avez créée à l’étape précédente pour vous connecter à l’application web via le point de terminaison privé.
 
-1. Sélectionnez le bouton **Connexion**. Après avoir sélectionné le bouton **Connecter**, **Se connecter à la machine virtuelle** s’ouvre.
+1. Dans le volet de navigation de gauche, sélectionnez **Groupes de ressources**.
 
-1. Sélectionnez **Télécharger le fichier RDP**. Azure crée un fichier de protocole RDP (Remote Desktop Protocol) ( *.rdp*) et le télécharge sur votre ordinateur.
+2. Sélectionnez **CreatePrivateEndpointQS-rg**.
 
-1. Ouvrez le fichier *downloaded.rdp*.
+3. Sélectionnez **myVM**.
 
-    1. Si vous y êtes invité, sélectionnez **Connexion**.
+4. Dans la page de vue d’ensemble pour **myVM**, sélectionnez **Se connecter**, puis **Bastion**.
 
-    1. Entrez le nom d’utilisateur et le mot de passe spécifiés lors de la création de la machine virtuelle.
+5. Sélectionnez le bouton bleu **Utiliser le bastion**.
 
-        > [!NOTE]
-        > Vous devrez peut-être sélectionner **Plus de choix** > **Utiliser un autre compte**, pour spécifier les informations d’identification que vous avez entrées lorsque vous avez créé la machine virtuelle.
+6. Entrez le nom d’utilisateur et le mot de passe que vous avez utilisés lors de la création de la machine virtuelle.
 
-1. Sélectionnez **OK**.
+7. Ouvrez Windows PowerShell sur le serveur après vous être connecté.
 
-1. Un avertissement de certificat peut s’afficher pendant le processus de connexion. Si vous recevez un avertissement de certificat, sélectionnez **Oui** ou **Continuer**.
+8. Entrez `nslookup <your-webapp-name>.azurewebsites.net`. Remplacez **\<your-webapp-name>** par le nom de l’application web que vous avez créée dans les étapes précédentes.  Vous recevez un message similaire à ce qui est montré ci-dessous :
 
-1. Une fois que le bureau de la machine virtuelle s’affiche, réduisez-le pour revenir à votre poste de travail local.  
-
-## <a name="access-the-sql-database-server-privately-from-the-vm"></a>Accéder au serveur de base de données SQL en privé à partir de la machine virtuelle
-
-1. Dans le Bureau à distance de *myVM*, ouvrez PowerShell.
-
-2. Entrez `nslookup myserver.database.windows.net`. 
-
-    Vous recevez un message similaire à celui ci :
-    ```azurepowershell
+    ```powershell
     Server:  UnKnown
     Address:  168.63.129.16
+
     Non-authoritative answer:
-    Name:    myserver.privatelink.database.windows.net
-    Address:  10.0.0.5
-    Aliases:   myserver.database.windows.net
+    Name:    mywebapp8675.privatelink.azurewebsites.net
+    Address:  10.1.0.5
+    Aliases:  mywebapp8675.azurewebsites.net
     ```
-3. Installez [SQL Server Management Studio](https://docs.microsoft.com/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-2017).
 
-4. Dans **Se connecter au serveur**, entrez ou sélectionnez les informations suivantes :
+    Une adresse IP privée **10.1.0.5** est retournée pour le nom de l’application web.  Cette adresse se trouve dans le sous-réseau du réseau virtuel que vous avez créé précédemment.
 
-    | Paramètre | Valeur |
-    | ------- | ----- |
-    | Type de serveur| Sélectionnez **Moteur de base de données**.|
-    | Nom du serveur| Sélectionnez *myserver.database.windows.net*. |
-    | Nom d'utilisateur | Entrez le nom d’utilisateur au format username@servername qui est fourni lors de la création du serveur SQL. |
-    |Mot de passe |Entrez le mot de passe fourni lors de la création du serveur SQL. |
-    |Se souvenir du mot de passe|Sélectionnez **Oui**.|
-    |||
-1. Sélectionnez **Connecter**.
-2. Parcourez les bases de données dans le menu de gauche.
-3. (Facultatif) Créez ou interrogez des données dans mydatabase.
-4. Fermez la connexion Bureau à distance sur *myVm*. 
+11. Dans la connexion bastion à **myVM**, ouvrez Internet Explorer.
 
-## <a name="clean-up-resources"></a>Nettoyer les ressources 
-Lorsque vous avez fini d’utiliser le point de terminaison privé, le serveur SQL et la machine virtuelle, supprimez le groupe de ressources et toutes les ressources qu’il contient : 
-1. Entrez *myResourceGroup* dans la zone **Recherche** en haut du portail, puis sélectionnez *myResourceGroup* dans les résultats de la recherche. 
-2. Sélectionnez **Supprimer le groupe de ressources**. 
-3. Entrez myResourceGroup dans **TAPER LE NOM DU GROUPE DE RESSOURCES**, puis sélectionnez **Supprimer**.
+12. Entrez l’URL de votre application web : **https://\<your-webapp-name>.azurewebsites.net**.
+
+13. Vous recevrez la page d’application web par défaut si votre application n’a pas été déployée :
+
+    :::image type="content" source="./media/create-private-endpoint-portal/web-app-default-page.png" alt-text="Page d’application web par défaut." border="true":::
+
+18. Fermez la connexion à **myVM**.
+
+## <a name="clean-up-resources"></a>Nettoyer les ressources
+
+Si vous ne comptez pas continuer à utiliser cette application, supprimez le réseau virtuel, la machine virtuelle et l’application web en effectuant les étapes suivantes :
+
+1. Dans le menu de gauche, sélectionnez **Groupes de ressources**.
+
+2. Sélectionnez **CreatePrivateEndpointQS-rg**.
+
+3. Sélectionnez **Supprimer le groupe de ressources**.
+
+4. Entrez **CreatePrivateEndpointQS-rg** dans **ENTREZ LE NOM DU GROUPE DE RESSOURCES**.
+
+5. Sélectionnez **Supprimer**.
+
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Dans ce guide de démarrage rapide, vous avez créé une machine virtuelle sur un réseau virtuel, un serveur SQL Database et un point de terminaison privé pour un accès privé. Vous vous êtes connecté à une machine virtuelle à partir d’Internet et avez communiqué de façon sécurisée avec le serveur de base de données SQL via une liaison privée. Pour plus d’informations sur les points de terminaison privés, consultez [Qu’est-ce qu’Azure Private Endpoint ?](private-endpoint-overview.md).
+Dans le cadre de ce guide de démarrage rapide, vous avez créé les éléments suivants :
+
+* Un réseau virtuel et un hôte bastion.
+* Une machine virtuelle.
+* Un point de terminaison privé pour une application web Azure.
+
+Vous avez utilisé la machine virtuelle pour tester la connectivité de façon sécurisée à l’application web via le point de terminaison privé.
+
+
+
+Pour plus d’informations sur les services qui prennent en charge un point de terminaison privé, consultez :
+> [!div class="nextstepaction"]
+> [Disponibilité des liaisons privées](private-link-overview.md#availability)

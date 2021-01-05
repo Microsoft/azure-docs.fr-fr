@@ -1,27 +1,26 @@
 ---
-title: Fournir du contenu aux clients | Microsoft Docs
+title: Distribution de contenu aux clients
 description: Cette rubrique donne une vue d’ensemble de ce qu’implique la distribution de votre contenu avec Azure Media Services.
 services: media-services
-documentationcenter: ''
 author: Juliako
 manager: femila
-editor: ''
 ms.assetid: 89ede54a-6a9c-4814-9858-dcfbb5f4fed5
 ms.service: media-services
 ms.workload: media
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
 ms.date: 03/18/2019
 ms.author: juliako
-ms.openlocfilehash: c8d32a6434db0fad18b9fe7c2d6e2117795eb651
-ms.sourcegitcommit: efefce53f1b75e5d90e27d3fd3719e146983a780
+ms.openlocfilehash: 363bb5389eda8336d04b1ff457f8246e89a042d8
+ms.sourcegitcommit: 2c586a0fbec6968205f3dc2af20e89e01f1b74b5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/01/2020
-ms.locfileid: "80476739"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92014385"
 ---
 # <a name="deliver-content-to-customers"></a>Fournir du contenu aux clients
+
+[!INCLUDE [media services api v2 logo](./includes/v2-hr.md)]
+
 Quand vous distribuez votre contenu de diffusion en continu ou de vidéo à la demande aux clients, votre objectif est de fournir une vidéo de haute qualité à divers appareils dans différentes conditions de réseau.
 
 Pour atteindre cet objectif, vous pouvez :
@@ -55,7 +54,7 @@ Vous pouvez définir des filtres pour vos éléments multimédias avec Media Ser
 
 Pour plus d’informations, consultez [Filtres et manifestes dynamiques](media-services-dynamic-manifest-overview.md).
 
-## <a name="locators"></a><a id="locators"/>Localisateurs
+## <a name="locators"></a><a name="locators"></a>Localisateurs
 Pour fournir aux utilisateurs une URL pouvant être utilisée pour diffuser en continu ou télécharger votre contenu, vous devez d’abord publier votre élément multimédia en créant un localisateur. Un localisateur fournit un point d’entrée pour accéder aux fichiers contenus dans une ressource. Media Services prend en charge deux types de localisateurs :
 
 * Localisateurs OnDemandOrigin. Ils sont utilisés pour diffuser du contenu multimédia (par exemple, MPEG-DASH, HLS ou Smooth Streaming) ou télécharger progressivement des fichiers.
@@ -70,9 +69,9 @@ Les localisateurs ont une date d’expiration. Le portail Azure définit une dat
 > 
 > 
 
-Pour mettre à jour la date d’expiration d’un localisateur, utilisez les API [REST](https://docs.microsoft.com/rest/api/media/operations/locator#update_a_locator) ou [.NET](https://go.microsoft.com/fwlink/?LinkID=533259). Notez que lorsque vous mettez à jour la date d’expiration d’un localisateur SAS, l’URL est modifiée.
+Pour mettre à jour la date d’expiration d’un localisateur, utilisez les API [REST](/rest/api/media/operations/locator#update_a_locator) ou [.NET](/dotnet/api/microsoft.windowsazure.mediaservices.client.ilocator). Notez que lorsque vous mettez à jour la date d’expiration d’un localisateur SAS, l’URL est modifiée.
 
-Les localisateurs ne sont pas conçus pour gérer le contrôle d’accès par utilisateur. Vous pouvez accorder différents droits d’accès aux utilisateurs en utilisant les solutions de gestion des droits numériques (DRM). Pour plus d’informations, consultez la page [Sécurisation des médias](https://msdn.microsoft.com/library/azure/dn282272.aspx).
+Les localisateurs ne sont pas conçus pour gérer le contrôle d’accès par utilisateur. Vous pouvez accorder différents droits d’accès aux utilisateurs en utilisant les solutions de gestion des droits numériques (DRM). Pour plus d’informations, consultez la page [Sécurisation des médias](/previous-versions/azure/dn282272(v=azure.100)).
 
 Lorsque vous créez un localisateur, il peut y avoir un délai de 30 secondes dû au processus de stockage et de propagation requis dans Azure Storage.
 
@@ -87,7 +86,7 @@ Pour fournir aux utilisateurs des URL de diffusion en continu, vous devez d’ab
 
 Vous ne pouvez transmettre en continu avec le protocole TLS que si le point de terminaison de streaming à partir duquel vous distribuez votre contenu a été créé après le 10 septembre 2014. Si vos URL de diffusion sont basées sur des points de terminaison créés après le 10 septembre 2014, l’URL contient « streaming.mediaservices.windows.net ». Les URL de diffusion qui contiennent « origin.mediaservices.windows.net » (ancien format) ne sont pas compatibles avec le protocole TLS. Si votre URL suit l’ancien format et que vous souhaitez être en mesure de diffuser via le protocole TLS, créez un point de terminaison de diffusion en continu. Utilisez des URL basées sur le nouveau point de terminaison de streaming pour diffuser en continu votre contenu via le protocole TLS.
 
-## <a name="streaming-url-formats"></a><a id="URLs"/>Formats d’URL de streaming
+## <a name="streaming-url-formats"></a><a name="URLs"></a>Formats d’URL de streaming
 
 ### <a name="mpeg-dash-format"></a>Format MPEG-DASH
 {nom du point de terminaison de diffusion en continu-nom du compte media services}.streaming.mediaservices.windows.net/{ID_de_localisateur}/{nom_de_fichier}.ISM/Manifest(format=mpd-time-csf)
@@ -123,14 +122,14 @@ Par défaut, le manifeste Smooth Streaming contient la balise de répétition (r
 
 {nom du point de terminaison de diffusion en continu-nom du compte media services}.streaming.mediaservices.windows.net/{ID_de_localisateur}/{nom_de_fichier}.ISM/Manifest(format=fmp4-v20)
 
-    http://testendpoint-testaccount.streaming.mediaservices.windows.net/fecebb23-46f6-490d-8b70-203e86b0df58/BigBuckBunny.ism/Manifest(format=fmp4-v20)
+`http://testendpoint-testaccount.streaming.mediaservices.windows.net/fecebb23-46f6-490d-8b70-203e86b0df58/BigBuckBunny.ism/Manifest(format=fmp4-v20)`
 
 ## <a name="progressive-download"></a>Téléchargement progressif
 Avec le téléchargement progressif, vous pouvez commencer la lecture multimédia avant que l’intégralité du fichier ait été téléchargée. Vous ne pouvez pas télécharger progressivement des fichiers .ism* (.ismv, .isma, .ismt ou .ismc).
 
 Pour télécharger progressivement du contenu, utilisez le type de localisateur OnDemandOrigin. L’exemple suivant illustre l’URL basée sur le type de localisateur OnDemandOrigin :
 
-    http://amstest1.streaming.mediaservices.windows.net/3c5fe676-199c-4620-9b03-ba014900f214/BigBuckBunny_H264_650kbps_AAC_und_ch2_96kbps.mp4
+`http://amstest1.streaming.mediaservices.windows.net/3c5fe676-199c-4620-9b03-ba014900f214/BigBuckBunny_H264_650kbps_AAC_und_ch2_96kbps.mp4`
 
 Vous devez déchiffrer les ressources à chiffrement de stockage que vous souhaitez diffuser en continu à partir du service d’origine pour permettre le téléchargement progressif.
 
@@ -139,7 +138,7 @@ Pour télécharger votre contenu sur un appareil client, vous devez créer un lo
 
 L’exemple suivant illustre l’URL basée sur le localisateur SAP :
 
-    https://test001.blob.core.windows.net/asset-ca7a4c3f-9eb5-4fd8-a898-459cb17761bd/BigBuckBunny.mp4?sv=2012-02-12&se=2014-05-03T01%3A23%3A50Z&sr=c&si=7c093e7c-7dab-45b4-beb4-2bfdff764bb5&sig=msEHP90c6JHXEOtTyIWqD7xio91GtVg0UIzjdpFscHk%3D
+`https://test001.blob.core.windows.net/asset-ca7a4c3f-9eb5-4fd8-a898-459cb17761bd/BigBuckBunny.mp4?sv=2012-02-12&se=2014-05-03T01%3A23%3A50Z&sr=c&si=7c093e7c-7dab-45b4-beb4-2bfdff764bb5&sig=msEHP90c6JHXEOtTyIWqD7xio91GtVg0UIzjdpFscHk%3D`
 
 Les considérations suivantes s'appliquent :
 
@@ -157,27 +156,30 @@ Un point de terminaison de streaming représente un service de diffusion en cont
 ### <a name="changes-to-smooth-streaming-manifest-version"></a>Modifications apportées à la version du manifeste Smooth Streaming
 Avant la version de service de juillet 2016, lorsque des éléments multimédias générés par Media Encoder Standard, Media Encoder Premium Workflow ou, précédemment, Azure Media Encoder étaient diffusés en continu à l’aide de l’empaquetage dynamique, le manifeste Smooth Streaming retourné devait être conforme à la version 2.0. Dans la version 2.0, les durées de fragments n’utilisent pas ce que l’on appelle les balises de répétition (« r »). Par exemple :
 
-
-    <?xml version="1.0" encoding="UTF-8"?>
-    <SmoothStreamingMedia MajorVersion="2" MinorVersion="0" Duration="8000" TimeScale="1000">
-        <StreamIndex Chunks="4" Type="video" Url="QualityLevels({bitrate})/Fragments(video={start time})" QualityLevels="3" Subtype="" Name="video" TimeScale="1000">
-            <QualityLevel Index="0" Bitrate="1000000" FourCC="AVC1" MaxWidth="640" MaxHeight="360" CodecPrivateData="00000001674D4029965201405FF2E02A100000030010000003032E0A000F42400040167F18E3050007A12000200B3F8C70ED0B16890000000168EB7352" />
-            <c t="0" d="2000" n="0" />
-            <c d="2000" />
-            <c d="2000" />
-            <c d="2000" />
-        </StreamIndex>
-    </SmoothStreamingMedia>
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<SmoothStreamingMedia MajorVersion="2" MinorVersion="0" Duration="8000" TimeScale="1000">
+    <StreamIndex Chunks="4" Type="video" Url="QualityLevels({bitrate})/Fragments(video={start time})" QualityLevels="3" Subtype="" Name="video" TimeScale="1000">
+        <QualityLevel Index="0" Bitrate="1000000" FourCC="AVC1" MaxWidth="640" MaxHeight="360" CodecPrivateData="00000001674D4029965201405FF2E02A100000030010000003032E0A000F42400040167F18E3050007A12000200B3F8C70ED0B16890000000168EB7352" />
+        <c t="0" d="2000" n="0" />
+        <c d="2000" />
+        <c d="2000" />
+        <c d="2000" />
+    </StreamIndex>
+</SmoothStreamingMedia>
+```
 
 Dans la version de service de juillet 2016, le manifeste Smooth Streaming généré est conforme à la version 2.2, avec des durées de fragments utilisant des balises de répétition. Par exemple :
 
-    <?xml version="1.0" encoding="UTF-8"?>
-    <SmoothStreamingMedia MajorVersion="2" MinorVersion="2" Duration="8000" TimeScale="1000">
-        <StreamIndex Chunks="4" Type="video" Url="QualityLevels({bitrate})/Fragments(video={start time})" QualityLevels="3" Subtype="" Name="video" TimeScale="1000">
-            <QualityLevel Index="0" Bitrate="1000000" FourCC="AVC1" MaxWidth="640" MaxHeight="360" CodecPrivateData="00000001674D4029965201405FF2E02A100000030010000003032E0A000F42400040167F18E3050007A12000200B3F8C70ED0B16890000000168EB7352" />
-            <c t="0" d="2000" r="4" />
-        </StreamIndex>
-    </SmoothStreamingMedia>
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<SmoothStreamingMedia MajorVersion="2" MinorVersion="2" Duration="8000" TimeScale="1000">
+    <StreamIndex Chunks="4" Type="video" Url="QualityLevels({bitrate})/Fragments(video={start time})" QualityLevels="3" Subtype="" Name="video" TimeScale="1000">
+        <QualityLevel Index="0" Bitrate="1000000" FourCC="AVC1" MaxWidth="640" MaxHeight="360" CodecPrivateData="00000001674D4029965201405FF2E02A100000030010000003032E0A000F42400040167F18E3050007A12000200B3F8C70ED0B16890000000168EB7352" />
+        <c t="0" d="2000" r="4" />
+    </StreamIndex>
+</SmoothStreamingMedia>
+```
 
 Certains clients Smooth Streaming hérités peuvent ne pas prendre en charge les balises de répétition et ne parviendront pas à charger le manifeste. Pour résoudre ce problème, vous pouvez utiliser le paramètre de format de manifeste hérité **(format=fmp4-v20)** ou mettre à jour votre client vers la dernière version qui prend en charge les balises de répétition. Pour plus d’informations, consultez [Smooth Streaming 2.0](media-services-deliver-content-overview.md#fmp4_v20).
 
@@ -189,4 +191,3 @@ Certains clients Smooth Streaming hérités peuvent ne pas prendre en charge les
 
 ## <a name="related-topics"></a>Rubriques connexes
 [Mettre à jour les localisateurs de Media Services après le déploiement des clés de stockage](media-services-roll-storage-access-keys.md)
-

@@ -1,14 +1,16 @@
 ---
 title: Types d’URL pris en charge pour l’importation – QnA Maker
 description: Découvrez comment les types d’URL sont utilisés pour importer et créer des paires de Q/R.
+ms.service: cognitive-services
+ms.subservice: qna-maker
 ms.topic: reference
 ms.date: 01/02/2020
-ms.openlocfilehash: c6c6c7ba19fe7be54733f45997134fddb56a6ba0
-ms.sourcegitcommit: 6397c1774a1358c79138976071989287f4a81a83
+ms.openlocfilehash: 8bf50c1ea81cdf5246c47646d1a55926fe7d58d6
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "80804314"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91776695"
 ---
 # <a name="urls-supported-for-importing-documents"></a>URL prises en charge pour l’importation de documents
 

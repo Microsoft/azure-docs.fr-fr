@@ -4,11 +4,11 @@ description: Cet article aborde certains problèmes courants relatifs à la mise
 ms.topic: conceptual
 ms.date: 2/23/2018
 ms.openlocfilehash: d462f2c2482e0fbb4d252967754a9675ed362674
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75377920"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96009345"
 ---
 # <a name="troubleshoot-application-upgrades"></a>Résoudre les problèmes de mise à niveau d'application
 
@@ -80,7 +80,7 @@ La commande **Get-ServiceFabricNode** peut être utilisée pour vérifier que ce
 
 Un paramètre *UpgradePhase* ayant pour valeur *PreUpgradeSafetyCheck* indique des problèmes pendant la préparation du domaine de mise à niveau avant son exécution proprement dite. Dans ce cas, les problèmes les plus courants sont des erreurs de service dans le cadre de la fermeture ou de la rétrogradation à partir des chemins de code principaux.
 
-Le paramètre **UpgradeState** a actuellement la valeur*RollingBackCompleted*, de sorte que la mise à niveau initiale doit avoir été effectuée à l’aide d’une opération **FailureAction** de restauration, laquelle a automatiquement annulé la mise à niveau lors de l’échec. Si la mise à niveau initiale a été effectuée à l’aide d’une opération **FailureAction**manuelle, la mise à niveau serait maintenant dans un état suspendu afin d’autoriser le débogage en direct de l’application.
+Le paramètre **UpgradeState** a actuellement la valeur *RollingBackCompleted*, de sorte que la mise à niveau initiale doit avoir été effectuée à l’aide d’une opération **FailureAction** de restauration, laquelle a automatiquement annulé la mise à niveau lors de l’échec. Si la mise à niveau initiale a été effectuée à l’aide d’une opération **FailureAction** manuelle, la mise à niveau serait maintenant dans un état suspendu afin d’autoriser le débogage en direct de l’application.
 
 Dans de rares cas, le champ **UpgradeDomainProgressAtFailure** peut être vide si la mise à niveau globale expire au moment où le système termine tout le travail pour le domaine de mise à niveau actuel. Si cela se produit, essayez d’augmenter les valeurs des paramètres de mise à niveau **UpgradeTimeout** et **UpgradeDomainTimeout** et retentez la mise à niveau.
 
@@ -148,7 +148,7 @@ La mise à niveau a été suspendue suite à son échec, avec la spécification 
 
 ### <a name="recover-from-a-suspended-upgrade"></a>Récupérer à partir d'une mise à niveau suspendue
 
-Avec une opération **FailureAction**de restauration, aucune récupération n’est nécessaire étant donné que la mise à niveau est automatiquement restaurée en cas d’échec. Si une opération **FailureAction**manuelle est définie, plusieurs options de récupération existent :
+Avec une opération **FailureAction** de restauration, aucune récupération n’est nécessaire étant donné que la mise à niveau est automatiquement restaurée en cas d’échec. Si une opération **FailureAction** manuelle est définie, plusieurs options de récupération existent :
 
 1.  Déclencher une restauration
 2. Exécuter manuellement le reste de la mise à niveau

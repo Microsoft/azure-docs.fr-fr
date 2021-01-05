@@ -1,6 +1,6 @@
 ---
 title: Optimiser Azure CDN pour le type de distribution de contenu
-description: Optimiser Azure CDN pour le type de distribution de contenu
+description: Découvrez comment Azure Content Delivery Network peut optimiser la distribution en fonction du type de contenu. Les meilleures pratiques d’optimisation améliorent les performances et le déchargement de l’origin.
 services: cdn
 documentationcenter: ''
 author: asudbring
@@ -11,15 +11,15 @@ ms.service: azure-cdn
 ms.workload: tbd
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.date: 03/25/2019
 ms.author: allensu
-ms.openlocfilehash: 473636dc95d96ea348a42ec0f1090029bf3a7728
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 7c7e4ff05307452da67c37b23bf492db8855e2ef
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81260437"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96004498"
 ---
 # <a name="optimize-azure-cdn-for-the-type-of-content-delivery"></a>Optimiser Azure CDN pour le type de distribution de contenu
 
@@ -39,7 +39,7 @@ Les profils **Azure CDN Standard fourni par Microsoft** prennent en charge les o
 * [Livraison web générale](#general-web-delivery). Cette optimisation est également utilisée pour le streaming de contenu multimédia et le téléchargement de fichiers volumineux.
 
 > [!NOTE]
-> L’accélération de site dynamique à partir de Microsoft est proposée par le biais d’[Azure Front Door Service](https://docs.microsoft.com/azure/frontdoor/front-door-overview).
+> L’accélération de site dynamique à partir de Microsoft est proposée par le biais d’[Azure Front Door Service](../frontdoor/front-door-overview.md).
 
 Les profils **Azure CDN Standard fourni par Verizon** et **Azure CDN Premium fourni par Verizon** prennent en charge les optimisations suivantes :
 
@@ -124,13 +124,10 @@ Pour plus d’informations sur l’optimisation des fichiers volumineux, consult
  L’accélération de site dynamique est disponible pour les profils **Azure CDN Standard fourni par Akamai**, **Azure CDN Standard fourni par Verizon** et **Azure CDN Premium fourni par Verizon**. Cette optimisation implique des frais supplémentaires d’utilisation. Pour plus d’informations, consultez [Tarification Content Delivery Network](https://azure.microsoft.com/pricing/details/cdn/).
 
 > [!NOTE]
-> L’accélération de site dynamique à partir de Microsoft est proposée par le biais d’[Azure Front Door Service](https://docs.microsoft.com/azure/frontdoor/front-door-overview), service [anycast](https://en.wikipedia.org/wiki/Anycast) global tirant parti du réseau mondial privé de Microsoft pour fournir vos charges de travail d’application.
+> L’accélération de site dynamique à partir de Microsoft est proposée par le biais d’[Azure Front Door Service](../frontdoor/front-door-overview.md), service [anycast](https://en.wikipedia.org/wiki/Anycast) global tirant parti du réseau mondial privé de Microsoft pour fournir vos charges de travail d’application.
 
 L’accélération de site dynamique inclut diverses techniques bénéfiques pour la latence et les performances du contenu dynamique. Ces techniques incluent l’optimisation d’itinéraire et de réseau, l’optimisation TCP, et bien plus. 
 
 Vous pouvez utiliser cette optimisation pour accélérer une application web incluant de nombreuses réponses qui ne peuvent pas être mises en cache. Les résultats de recherche, les transactions de validation ou les données en temps réel en sont des exemples. Vous pouvez continuer d’utiliser les fonctionnalités de mise en cache Azure CDN essentielles pour les données statiques. 
 
 Pour plus d’informations sur l’accélération de site dynamique, consultez [Accélération de site dynamique](cdn-dynamic-site-acceleration.md).
-
-
-

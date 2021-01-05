@@ -1,18 +1,18 @@
 ---
 title: 'Tutoriel : Gérer les requêtes dans le portail Azure'
 description: Dans ce tutoriel, vous créez une requête Resource Graph et vous la partagez avec d’autres personnes dans le portail Azure.
-ms.date: 05/20/2020
+ms.date: 10/14/2020
 ms.topic: tutorial
-ms.openlocfilehash: e63a92a4570a0713ed65e1090e4d77d25fb10f95
-ms.sourcegitcommit: fdec8e8bdbddcce5b7a0c4ffc6842154220c8b90
+ms.openlocfilehash: 98d4c7d0493686a45bdfef9d85823432cb637a66
+ms.sourcegitcommit: 1b47921ae4298e7992c856b82cb8263470e9e6f9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83637761"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92057924"
 ---
 # <a name="tutorial-create-and-share-an-azure-resource-graph-query-in-the-azure-portal"></a>Tutoriel : Créer et partager une requête Azure Resource Graph sur le portail Azure
 
-L'Explorateur Azure Resource Graph vous permet d'enregistrer vos requêtes Resource Graph directement sur le portail Azure. Il existe deux types de requêtes : les requêtes _privées_ et les requêtes _partagées_. Une requête privée est enregistrée dans les paramètres de votre portail Azure. Une requête partagée, quant à elle, est une ressource Resource Manager qui peut être gérée avec des contrôles d'accès en fonction du rôle (RBAC) et protégée à l'aide de verrous de ressources. Les deux types de requêtes sont chiffrées au repos.
+L'Explorateur Azure Resource Graph vous permet d'enregistrer vos requêtes Resource Graph directement sur le portail Azure. Il existe deux types de requêtes : les requêtes _privées_ et les requêtes _partagées_. Une requête privée est enregistrée dans les paramètres de votre portail Azure. Une requête partagée, quant à elle, est une ressource Azure Resource Manager qui peut être gérée avec un contrôle d’accès en fonction du rôle Azure (Azure RBAC) et protégée à l’aide de verrous de ressources. Les deux types de requêtes sont chiffrées au repos.
 
 L'enregistrement de requêtes sur le portail Azure vous fait gagner du temps puisqu'il vous évite de devoir rechercher vos requêtes favorites ou couramment utilisées. Lorsque vous partagez des requêtes, vous aidez votre équipe à atteindre des objectifs de cohérence et d'efficacité par la répétition.
 
@@ -44,8 +44,7 @@ Les requêtes privées ne sont accessibles et visibles que par le compte qui les
 
    Sélectionnez **Exécuter la requête** pour afficher les résultats de la requête dans le volet inférieur.
 
-   Pour plus d'informations sur cette requête, consultez [Exemples - Nombre de machines virtuelles par type de système d'exploitation](../samples/starter.md#count-virtual-machines-by-os-type).
-
+   Pour plus d'informations sur cette requête, consultez [Exemples - Nombre de machines virtuelles par type de système d'exploitation](../samples/starter.md#count-os).
 
 1. Sélectionnez **Enregistrer** ou **Enregistrer sous**, entrez **Nombre de machines virtuelles par système d'exploitation**, conservez le type **Requête privée**, puis sélectionnez **Enregistrer** en bas du volet **Enregistrer la requête**. Le titre de l'onglet change : **Requête 1** est remplacé par **Nombre de machines virtuelles par système d'exploitation**.
 
@@ -61,8 +60,7 @@ Les requêtes privées ne sont accessibles et visibles que par le compte qui les
 
 ## <a name="create-a-shared-query"></a>Créer une requête partagée
 
-Contrairement à une requête privée, une requête partagée est une ressource Resource Manager. Cela signifie que la requête est enregistrée dans un groupe de ressources, qu'elle peut être gérée et contrôlée à l'aide du contrôle RBAC, et qu'elle peut même être protégée à l'aide de verrous de ressources. Comme il s'agit d'une ressource, toute personne disposant des autorisations appropriées peut la voir et l'utiliser.
-Pour créer une requête partagée, procédez comme suit :
+Contrairement à une requête privée, une requête partagée est une ressource Resource Manager. Cela signifie que la requête est enregistrée dans un groupe de ressources, qu'elle peut être gérée et contrôlée à l'aide du contrôle Azure RBAC, et qu'elle peut même être protégée à l'aide de verrous de ressources. Comme il s'agit d'une ressource, toute personne disposant des autorisations appropriées peut la voir et l'utiliser. Pour créer une requête partagée, procédez comme suit :
 
 1. Dans le menu du portail, sélectionnez **Tous les services** ou utilisez la zone de recherche Azure située en haut de toutes les pages pour rechercher et sélectionner l'**Explorateur Resource Graph**.
 
@@ -76,12 +74,11 @@ Pour créer une requête partagée, procédez comme suit :
     
    Sélectionnez **Exécuter la requête** pour afficher les résultats de la requête dans le volet inférieur.
 
-   Pour plus d'informations sur cette requête, consultez [Exemples - Nombre de machines virtuelles par type de système d'exploitation](../samples/starter.md#count-virtual-machines-by-os-type).
+   Pour plus d'informations sur cette requête, consultez [Exemples - Nombre de machines virtuelles par type de système d'exploitation](../samples/starter.md#count-os).
 
 1. Sélectionnez **Enregistrer** ou **Enregistrer sous**.
 
-   
-   ![Enregistrer la nouvelle requête à l'aide du bouton Enregistrer](../media/create-share-query/save-shared-query-buttons.png)
+   :::image type="content" source="../media/create-share-query/save-shared-query-buttons.png" alt-text="Enregistrer la nouvelle requête à l’aide du bouton Enregistrer" border="false":::
 
 1. Dans le volet **Enregistrer la requête**, entrez le nom **Nombre de machines virtuelles par système d'exploitation**.
 
@@ -91,7 +88,7 @@ Pour créer une requête partagée, procédez comme suit :
 
 1. Sélectionnez **Enregistrer** en bas du volet **Enregistrer la requête**. Le titre de l'onglet change : **Requête 1** est remplacé par **Nombre de machines virtuelles par système d'exploitation**. La première fois que le groupe de ressources **resource-graph-queries** est utilisé, l'enregistrement peut prendre un certain temps car le groupe de ressources est en cours de création.
    
-   ![Enregistrer la nouvelle requête en tant que requête partagée](../media/create-share-query/save-shared-query-window.png)
+   :::image type="content" source="../media/create-share-query/save-shared-query-window.png" alt-text="Enregistrer la nouvelle requête à l’aide du bouton Enregistrer" border="false":::
 
    > [!NOTE] 
    > Vous pouvez décocher la case **Publier dans le groupe de ressources resource-graph-queries** si vous souhaitez fournir le nom d'un groupe de ressources existant pour l'enregistrement de la requête partagée. L'utilisation du groupe de ressources nommé par défaut pour les requêtes facilite la découverte des requêtes partagées et permet de mieux comprendre la raison d'être de ce groupe de ressources. Vous pouvez toutefois choisir de sélectionner un groupe de ressources existant pour des raisons de sécurité, en fonction des autorisations existantes.
@@ -100,7 +97,7 @@ Pour créer une requête partagée, procédez comme suit :
 
 1. Sélectionnez **Ouvrir une requête**. Vérifiez que le type est défini sur **Requête partagée** et que la combinaison **Abonnement**/**Groupe de ressources** correspond à l'emplacement où vous avez enregistré la requête. L'élément **Nombre de machines virtuelles par système d'exploitation** enregistré apparaît désormais dans la liste **Nom de la requête**. Sélectionnez le lien titre de la requête enregistrée pour le charger dans un nouvel onglet portant le nom de cette requête. Comme il s'agit d'une requête partagée, une icône apparaît dans l'onglet situé en regard du titre pour indiquer qu'elle est partagée.
 
-   ![Afficher la requête partagée avec l'icône](../media/create-share-query/show-saved-shared-query.png)
+   :::image type="content" source="../media/create-share-query/show-saved-shared-query.png" alt-text="Enregistrer la nouvelle requête à l’aide du bouton Enregistrer" border="false":::
 
    > [!NOTE] 
    > Lorsqu'une requête enregistrée est ouverte et que l'onglet affiche son nom, le bouton **Enregistrer** la met à jour avec les modifications apportées. Pour créer une nouvelle requête enregistrée, sélectionnez **Enregistrer sous** et procédez comme si vous enregistriez une nouvelle requête.
@@ -109,7 +106,7 @@ Pour créer une requête partagée, procédez comme suit :
 
 Dans la mesure où une requête partagée est une ressource Resource Manager, différentes méthodes sont disponibles pour y accéder :
 
-- À partir de l'Explorateur Resource Graph, sélectionnez **Ouvrir une requête** et définissez le type sur **Requête partagée**.
+- À partir de l’Explorateur Resource Graph. Sélectionnez **Ouvrir une requête** et définissez le type sur **Requête partagée**.
 - À partir de la page Requêtes Resource Graph du portail.
 - À partir du groupe de ressources dans lequel la requête partagée a été enregistrée.
 - Par le biais d'une requête adressée à Resource Graph.
@@ -137,9 +134,13 @@ Resources
 | project name, properties.timeModified, properties.query
 ```
 
+## <a name="run-a-shared-query"></a>Exécuter une requête partagée
+
+Une requête partagée de graphe de ressource peut être exécutée avec la syntaxe `{{shared-query-uri}}` (préversion). Pour plus d’informations, consultez [Syntaxe de requête partagée](../concepts/query-language.md#shared-query-syntax).
+
 ## <a name="delete-a-shared-query"></a>Supprimer une requête partagée
 
-Si une requête partagée n'a plus aucune utilité, n'hésitez pas à la supprimer. En supprimant une requête partagée, vous supprimez la ressource Resource Manager correspondante. Tous les tableaux de bord sur lesquels le graphique de résultats était épinglé affichent désormais un message d'erreur. Lorsque ce message d'erreur apparaît, utilisez le bouton **Supprimer du tableau de bord** pour nettoyer votre tableau de bord.
+Si une requête partagée n'a plus aucune utilité, n'hésitez pas à la supprimer. En supprimant une requête partagée, vous supprimez la ressource Resource Manager correspondante. Tous les tableaux de bord sur lesquels le graphique de résultats était épinglé affichent désormais un message d'erreur. Quand ce message d’erreur s’affiche, utilisez le bouton **Supprimer du tableau de bord** pour effacer le contenu de votre tableau de bord.
 
 Vous pouvez supprimer une requête partagée via les interfaces suivantes :
 - Page Requêtes Resource Graph

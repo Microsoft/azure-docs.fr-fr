@@ -1,25 +1,24 @@
 ---
 title: Attachement d’application MSIX Windows Virtual Desktop - Azure
 description: Comment configurer l’attachement d’application MSIX pour Windows Virtual Desktop.
-services: virtual-desktop
 author: Heidilohr
-ms.service: virtual-desktop
-ms.topic: conceptual
-ms.date: 12/14/2019
+ms.topic: how-to
+ms.date: 06/16/2020
 ms.author: helohr
 manager: lizross
-ms.openlocfilehash: ec69a9906eabb4ce56f79b1b88c2b5f2440f84b1
-ms.sourcegitcommit: 50ef5c2798da04cf746181fbfa3253fca366feaa
+ms.openlocfilehash: 3b02be8f35ff33f758aebe03c89287c51c9ffef7
+ms.sourcegitcommit: d2222681e14700bdd65baef97de223fa91c22c55
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82612467"
+ms.lasthandoff: 10/07/2020
+ms.locfileid: "91816330"
 ---
 # <a name="set-up-msix-app-attach"></a>Configurer l’attachement d’application MSIX
 
 > [!IMPORTANT]
 > L’application MSIX est actuellement disponible en préversion publique.
-> Cette préversion est fournie sans contrat de niveau de service, c’est pourquoi nous déconseillons son utilisation pour les charges de travail de production. Certaines fonctionnalités peuvent être limitées ou non prises en charge. Pour plus d’informations, consultez [Conditions d’Utilisation Supplémentaires relatives aux Évaluations Microsoft Azure](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
+> Cette préversion est fournie sans contrat de niveau de service, c’est pourquoi nous déconseillons son utilisation pour les charges de travail de production. Certaines fonctionnalités peuvent être limitées ou non prises en charge.
+> Pour plus d’informations, consultez [Conditions d’Utilisation Supplémentaires relatives aux Évaluations Microsoft Azure](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
 
 Cette rubrique vous guide tout au long de la configuration de l’attachement d’application MSIX dans un environnement Windows Virtual Desktop.
 
@@ -28,31 +27,50 @@ Cette rubrique vous guide tout au long de la configuration de l’attachement d�
 Avant de commencer, voici ce dont vous avez besoin pour configurer l’attachement d’application MSIX :
 
 - Accès au portail Windows Insider pour obtenir la version de Windows 10 avec prise en charge des API d’attachement d’application MSIX.
-- Un déploiement Windows Virtual Desktop opérationnel. Pour plus d’informations, consultez [Créer un locataire dans Windows Virtual Desktop](./virtual-desktop-fall-2019/tenant-setup-azure-active-directory.md).
-- MSIX Packaging Tool
-- Un partage réseau dans votre déploiement Windows Virtual Desktop où le package MSIX sera stocké
+- Un déploiement Windows Virtual Desktop opérationnel. Pour apprendre à déployer Windows Virtual Desktop (classique), consultez [Création d’un locataire dans Windows Virtual Desktop](./virtual-desktop-fall-2019/tenant-setup-azure-active-directory.md). Pour apprendre à déployer Windows Virtual Desktop avec intégration Azure Resource Manager, consultez [Création d’un pool d’hôtes avec le Portail Azure](./create-host-pools-azure-marketplace.md).
+- Outil de d’empaquetage MSIX.
+- Partage réseau dans votre déploiement Windows Virtual Desktop où le package MSIX sera stocké.
 
 ## <a name="get-the-os-image"></a>Obtenir l’image du système d’exploitation
 
-Tout d’abord, vous devez obtenir l’image du système d’exploitation que vous utiliserez pour l’application MSIX. Pour obtenir l’image du système d’exploitation :
+Tout d’abord, vous devez obtenir l’image du système d’exploitation. Vous pouvez obtenir l’image du système d’exploitation via le Portail Azure. Toutefois, si vous êtes membre du programme Windows Insider, vous avez la possibilité d’utiliser le portail Windows Insider à la place.
+
+### <a name="get-the-os-image-from-the-azure-portal"></a>Obtenir l’image du système d’exploitation à partir du portail Azure
+
+Pour obtenir l’image du système d’exploitation à partir du portail Azure :
+
+1. Ouvrez le [portail Azure](https://portal.azure.com) et connectez-vous.
+
+2. Accédez à **Créer une machine virtuelle**.
+
+3. Dans l’onglet **De base**, sélectionnez **Windows 10 Entreprise multisession, version 2004**.
+
+4. Suivez les autres instructions pour terminer la création de la machine virtuelle.
+
+     >[!NOTE]
+     >Vous pouvez utiliser cette machine virtuelle pour tester directement l’attachement de l’application MSIX. Pour en savoir plus, consultez directement [Générer un package VHD ou VHDX pour MSIX](#generate-a-vhd-or-vhdx-package-for-msix). Sinon, poursuivez la lecture de cette section.
+
+### <a name="get-the-os-image-from-the-windows-insider-portal"></a>Obtenir l’image du système d’exploitation à partir du portail Windows Insider
+
+Pour récupérer l’image du système d’exploitation à partir du portail Windows Insider :
 
 1. Ouvrez le [portail Windows Insider](https://www.microsoft.com/software-download/windowsinsiderpreviewadvanced?wa=wsignin1.0) et connectez-vous.
 
      >[!NOTE]
      >Vous devez être membre du programme Windows Insider pour accéder au portail Windows Insider. Pour en savoir plus sur le programme Windows Insider, consultez notre [Documentation sur Windows Insider](/windows-insider/at-home/).
 
-2. Faites défiler jusqu’à la section **Sélectionner l’édition** et sélectionnez **Windows 10 Insider Preview Enterprise (FAST) – Build 19035** ou version ultérieure.
+2. Faites défiler jusqu’à la section **Sélectionner l’édition** et sélectionnez **Windows 10 Insider Preview Enterprise (FAST) – Build 19041** ou version ultérieure.
 
 3. Sélectionnez **Confirmer**, sélectionnez la langue que vous souhaitez utiliser, puis sélectionnez **Confirmer**.
-    
+
      >[!NOTE]
      >À l’heure actuelle, l’anglais est la seule langue qui a été testée avec la fonctionnalité. Vous pouvez sélectionner d’autres langues, mais elles risquent de ne pas s’afficher comme prévu.
-    
+
 4. Une fois le lien de téléchargement généré, sélectionnez le **Téléchargement 64 bits** et enregistrez le fichier sur votre disque dur local.
 
-## <a name="prepare-the-vhd-image-for-azure"></a>Préparer l’image de disque dur virtuel pour Azure 
+## <a name="prepare-the-vhd-image-for-azure"></a>Préparer l’image de disque dur virtuel pour Azure
 
-Avant de commencer, vous devez créer une image de disque dur virtuel principale. Si vous n’avez pas encore créé votre image de disque dur virtuel principale, accédez à [Préparer et personnaliser une image de disque dur virtuel principale](set-up-customize-master-image.md) et suivez les instructions qui s’y trouvent. 
+Ensuite, vous devez créer une image de disque dur virtuel maître. Si vous n’avez pas encore créé votre image de disque dur virtuel principale, accédez à [Préparer et personnaliser une image de disque dur virtuel principale](set-up-customize-master-image.md) et suivez les instructions qui s’y trouvent.
 
 Une fois que vous avez créé votre image de disque dur virtuel principale, vous devez désactiver les mises à jour automatiques pour les applications d’attachement d’application MSIX. Pour désactiver les mises à jour automatiques, vous devez exécuter les commandes suivantes dans une invite de commandes avec élévation de privilèges :
 
@@ -74,11 +92,19 @@ rem Disable Windows Update:
 sc config wuauserv start=disabled
 ```
 
+Une fois que vous avez désactivé les mises à jour automatiques, vous devez activer Hyper-V parce que vous allez utiliser la commande Mount-VHD pour l’indexation et la commande Dismount-VHD pour le retrait.
+
+```powershell
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All
+```
+>[!NOTE]
+>Cette modification va nécessiter le redémarrage de la machine virtuelle.
+
 Ensuite, préparez le disque dur virtuel de la machine virtuelle pour Azure et chargez le disque dur virtuel résultant sur Azure. Pour en savoir plus, consultez [Préparer et personnaliser une image VHD principale](set-up-customize-master-image.md).
 
 Une fois que vous avez téléchargé le disque dur virtuel dans Azure, créez un pool d’ordinateurs hôtes basé sur cette nouvelle image en suivant les instructions du didacticiel [Créer un pool d’hôtes en utilisant la Place de marché Azure](create-host-pools-azure-marketplace.md).
 
-## <a name="prepare-the-application-for-msix-app-attach"></a>Préparer l’application pour l’attachement d’application MSIX 
+## <a name="prepare-the-application-for-msix-app-attach"></a>Préparer l’application pour l’attachement d’application MSIX
 
 Si vous disposez déjà d’un package MSIX, passez directement à la [Configurer l’infrastructure Windows Virtual Desktop](#configure-windows-virtual-desktop-infrastructure). Si vous souhaitez tester des applications héritées, suivez les instructions de [Créer un package MSIX à partir d’un programme d’installation de bureau](/windows/msix/packaging-tool/create-app-package-msi-vm/) pour convertir l’application héritée en package MSIX.
 
@@ -161,7 +187,7 @@ Avant de commencer, assurez-vous que votre partage réseau répond à la configu
 - Le partage est compatible avec SMB.
 - Les machines virtuelles qui font partie du pool hôte de session disposent d’autorisations NTFS sur le partage.
 
-### <a name="set-up-an-msix-app-attach-share"></a>Configurer un partage d’attachement d’application MSIX 
+### <a name="set-up-an-msix-app-attach-share"></a>Configurer un partage d’attachement d’application MSIX
 
 Dans votre environnement Windows Virtual Desktop, créez un partage réseau et déplacez-y le package.
 
@@ -174,12 +200,12 @@ Si votre application utilise un certificat qui n’est pas approuvé publiquemen
 
 1. Cliquez avec le bouton droit sur le package et sélectionnez **Propriétés**.
 2. Dans la fenêtre qui s’affiche, sélectionnez l’onglet **Signatures numériques**. Il ne doit y avoir qu’un seul élément dans la liste de l’onglet, comme illustré dans l’image suivante. Sélectionnez cet élément pour le mettre en surbrillance, puis sélectionnez **Détails**.
-3. Lorsque la fenêtre Détails de la signature numérique s'affiche, sélectionnez l'onglet **Général**, puis **Installer le certificat**.
+3. Lorsque la fenêtre Détails de la signature numérique s’affiche, sélectionnez l’onglet **Général**, **Afficher le certificat**, puis **Installer le certificat**.
 4. Quand le programme d’installation s’ouvre, sélectionnez **Machine locale** comme emplacement de stockage, puis sélectionnez **Suivant**.
 5. Si le programme d’installation vous demande si vous souhaitez autoriser l’application à apporter des modifications à votre appareil, sélectionnez **Oui**.
 6. Sélectionnez **Placer tous les certificats dans le magasin suivant**, puis sélectionnez **Parcourir**.
 7. Lorsque la fenêtre Sélectionner un magasin de certificats s’affiche, sélectionnez **Personnes autorisées**, puis sélectionnez **OK**.
-8. Sélectionnez **Terminer**.
+8. Sélectionnez **Suivant** et **Terminer**.
 
 ## <a name="prepare-powershell-scripts-for-msix-app-attach"></a>Préparer les scripts PowerShell pour l’attachement de l’application MSIX
 
@@ -192,7 +218,7 @@ L’attachement d’application MSIX comprend quatre phases distinctes qui doive
 
 Chaque phase crée un script PowerShell. Des exemples de scripts pour chaque phase sont disponibles [ici](https://github.com/Azure/RDS-Templates/tree/master/msix-app-attach).
 
-### <a name="stage-the-powershell-script"></a>Stocker le script PowerShell
+### <a name="stage-powershell-script"></a>Indexer un script PowerShell
 
 Avant de mettre à jour les scripts PowerShell, vérifiez que vous disposez du GUID de volume dans le disque dur virtuel. Pour récupérer le GUID du volume :
 
@@ -236,88 +262,48 @@ Avant de mettre à jour les scripts PowerShell, vérifiez que vous disposez du G
     #MSIX app attach staging sample
 
     #region variables
-
     $vhdSrc="<path to vhd>"
-
     $packageName = "<package name>"
-
     $parentFolder = "<package parent folder>"
-
     $parentFolder = "\" + $parentFolder + "\"
-
     $volumeGuid = "<vol guid>"
-
     $msixJunction = "C:\temp\AppAttach\"
-
     #endregion
 
     #region mountvhd
-
     try
-
     {
-
-    Mount-Diskimage -ImagePath $vhdSrc -NoDriveLetter -Access ReadOnly
-
-    Write-Host ("Mounting of " + $vhdSrc + " was completed!") -BackgroundColor Green
-
+          Mount-Diskimage -ImagePath $vhdSrc -NoDriveLetter -Access ReadOnly
+          Write-Host ("Mounting of " + $vhdSrc + " was completed!") -BackgroundColor Green
     }
-
     catch
-
     {
-
-    Write-Host ("Mounting of " + $vhdSrc + " has failed!") -BackgroundColor Red
-
+          Write-Host ("Mounting of " + $vhdSrc + " has failed!") -BackgroundColor Red
     }
-
     #endregion
 
     #region makelink
-
     $msixDest = "\\?\Volume{" + $volumeGuid + "}\"
-
     if (!(Test-Path $msixJunction))
-
     {
-
-    md $msixJunction
-
+         md $msixJunction
     }
 
     $msixJunction = $msixJunction + $packageName
-
     cmd.exe /c mklink /j $msixJunction $msixDest
-
     #endregion
 
     #region stage
-
-    [Windows.Management.Deployment.PackageManager,Windows.Management.Deployment,ContentType=WindowsRuntime]
-    | Out-Null
-
+    [Windows.Management.Deployment.PackageManager,Windows.Management.Deployment,ContentType=WindowsRuntime] | Out-Null
     Add-Type -AssemblyName System.Runtime.WindowsRuntime
-
-    $asTask = ([System.WindowsRuntimeSystemExtensions].GetMethods() | Where {
-    $_.ToString() -eq 'System.Threading.Tasks.Task`1[TResult]
-    AsTask[TResult,TProgress](Windows.Foundation.IAsyncOperationWithProgress`2[TResult,TProgress])'})[0]
-
-    $asTaskAsyncOperation =
-    $asTask.MakeGenericMethod([Windows.Management.Deployment.DeploymentResult],
-    [Windows.Management.Deployment.DeploymentProgress])
-
+    $asTask = ([System.WindowsRuntimeSystemExtensions].GetMethods() | Where { $_.ToString() -eq 'System.Threading.Tasks.Task`1[TResult] AsTask[TResult,TProgress](Windows.Foundation.IAsyncOperationWithProgress`2[TResult,TProgress])'})[0]
+    $asTaskAsyncOperation = $asTask.MakeGenericMethod([Windows.Management.Deployment.DeploymentResult], [Windows.Management.Deployment.DeploymentProgress])
     $packageManager = [Windows.Management.Deployment.PackageManager]::new()
-
     $path = $msixJunction + $parentFolder + $packageName # needed if we do the pbisigned.vhd
-
     $path = ([System.Uri]$path).AbsoluteUri
-
     $asyncOperation = $packageManager.StagePackageAsync($path, $null, "StageInPlace")
-
     $task = $asTaskAsyncOperation.Invoke($null, @($asyncOperation))
-
     $task
-
     #endregion
     ```
 
@@ -329,17 +315,12 @@ Pour exécuter le script d’inscription, exécutez les applets de commande Powe
 #MSIX app attach registration sample
 
 #region variables
-
 $packageName = "<package name>"
-
 $path = "C:\Program Files\WindowsApps\" + $packageName + "\AppxManifest.xml"
-
 #endregion
 
 #region register
-
 Add-AppxPackage -Path $path -DisableDevelopmentMode -Register
-
 #endregion
 ```
 
@@ -351,41 +332,35 @@ Pour ce script, remplacez l'espace réservé de **$packageName** par le nom du p
 #MSIX app attach deregistration sample
 
 #region variables
-
 $packageName = "<package name>"
-
 #endregion
 
 #region deregister
-
 Remove-AppxPackage -PreserveRoamableApplicationData $packageName
-
 #endregion
 ```
 
 ### <a name="destage-powershell-script"></a>Retirer le script PowerShell
 
-Pour ce script, remplacez l'espace réservé de **$packageName** par le nom du package que vous testez.
+Pour ce script, remplacez l'espace réservé de **$packageName** par le nom du package que vous testez. Dans un déploiement de production, il serait préférable de l’exécuter à l’arrêt.
 
 ```powershell
 #MSIX app attach de staging sample
 
+$vhdSrc="<path to vhd>"
+
 #region variables
-
 $packageName = "<package name>"
-
-$msixJunction = "C:\temp\AppAttach\"
-
+$msixJunction = "C:\temp\AppAttach"
 #endregion
 
 #region deregister
-
 Remove-AppxPackage -AllUsers -Package $packageName
+Remove-Item "$msixJunction\$packageName" -Recurse -Force -Verbose
+#endregion
 
-cd $msixJunction
-
-rmdir $packageName -Force -Verbose
-
+#region Detach VHD
+Dismount-DiskImage -ImagePath $vhdSrc -Confirm:$false
 #endregion
 ```
 
@@ -402,17 +377,17 @@ Chacun de ces scripts automatiques exécute une phase des scripts d’attachemen
 
 ## <a name="use-packages-offline"></a>Utiliser des packages hors connexion
 
-Si vous utilisez des packages du [Microsoft Store pour Entreprises](https://businessstore.microsoft.com/) ou du [Microsoft Store pour l’Éducation](https://educationstore.microsoft.com/) au sein de votre réseau ou sur des appareils qui ne sont pas connectés à Internet, vous devez obtenir les licences de package à partir du Microsoft Store et les installer sur votre appareil pour exécuter l’application avec succès. Si votre appareil est en ligne et peut se connecter au Microsoft Store pour Entreprises, les licences requises devraient être téléchargées automatiquement, mais si vous êtes hors connexion, vous devez configurer les licences manuellement. 
+Si vous utilisez des packages du [Microsoft Store pour Entreprises](https://businessstore.microsoft.com/) ou du [Microsoft Store pour l’Éducation](https://educationstore.microsoft.com/) au sein de votre réseau ou sur des appareils qui ne sont pas connectés à Internet, vous devez obtenir les licences de package à partir du Microsoft Store et les installer sur votre appareil pour exécuter l’application avec succès. Si votre appareil est en ligne et peut se connecter au Microsoft Store pour Entreprises, les licences requises devraient être téléchargées automatiquement, mais si vous êtes hors connexion, vous devez configurer les licences manuellement.
 
-Pour installer les fichiers de licence, vous devez utiliser un script PowerShell qui appelle la classe MDM_EnterpriseModernAppManagement_StoreLicenses02_01 dans le fournisseur de pont WMI.  
+Pour installer les fichiers de licence, vous devez utiliser un script PowerShell qui appelle la classe MDM_EnterpriseModernAppManagement_StoreLicenses02_01 dans le fournisseur de pont WMI.
 
-Voici comment configurer les licences pour une utilisation hors connexion : 
+Voici comment configurer les licences pour une utilisation hors connexion :
 
 1. Téléchargez le package d’application, les licences et les frameworks requis à partir du Microsoft Store pour Entreprises. Vous avez besoin à la fois des fichiers de licence encodés et non codés. Vous trouverez des instructions de téléchargement détaillées [ici](/microsoft-store/distribute-offline-apps#download-an-offline-licensed-app).
 2. Mettez à jour les variables suivantes dans le script de l’étape 3 :
       1. `$contentID` est la valeur ContentID du fichier de licence non codé (.xml). Vous pouvez ouvrir le fichier de licence dans l’éditeur de texte de votre choix.
-      2. `$licenseBlob` est la chaîne entière pour l’objet Blob de licence dans le fichier de licence encodé (.bin). Vous pouvez ouvrir le fichier de licence encodé dans l’éditeur de texte de votre choix. 
-3. Exécutez le script suivant depuis une invite admin PowerShell ISE. Un bon emplacement pour effectuer l’installation de la licence est à la fin du [script de stockage](#stage-the-powershell-script) qui doit également être exécuté à partir d’une invite admin.
+      2. `$licenseBlob` est la chaîne entière pour l’objet Blob de licence dans le fichier de licence encodé (.bin). Vous pouvez ouvrir le fichier de licence encodé dans l’éditeur de texte de votre choix.
+3. Exécutez le script suivant depuis une invite admin PowerShell ISE. Un bon emplacement pour effectuer l’installation de la licence est à la fin du [script de stockage](#stage-powershell-script) qui doit également être exécuté à partir d’une invite admin.
 
 ```powershell
 $namespaceName = "root\cimv2\mdm\dmmap"
@@ -426,14 +401,14 @@ $contentID = "{'ContentID'_in_unencoded_license_file}"
 #TODO - Update $licenseBlob with the entire String in the encoded license file (.bin)
 $licenseBlob = "{Entire_String_in_encoded_license_file}"
 
-$session = New-CimSession 
+$session = New-CimSession
 
 #The final string passed into the AddLicenseMethod should be of the form <License Content="encoded license blob" />
-$licenseString = '<License Content='+ '"' + $licenseBlob +'"' + ' />' 
+$licenseString = '<License Content='+ '"' + $licenseBlob +'"' + ' />'
 
 $params = New-Object Microsoft.Management.Infrastructure.CimMethodParametersCollection
 $param = [Microsoft.Management.Infrastructure.CimMethodParameter]::Create("param",$licenseString ,"String", "In")
-$params.Add($param) 
+$params.Add($param)
 
 
 try
@@ -445,11 +420,11 @@ try
 catch [Exception]
 {
      write-host $_ | out-string
-}  
+}
 ```
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 Cette fonctionnalité n’est pas prise en charge actuellement, mais vous pouvez poser des questions à la communauté sur la [TechCommunity Windows Virtual Desktop](https://techcommunity.microsoft.com/t5/Windows-Virtual-Desktop/bd-p/WindowsVirtualDesktop).
 
-Vous pouvez également laisser vos commentaires sur Windows Virtual Desktop sur le [Concentrateur de commentaires Windows Virtual Desktop](https://aka.ms/MRSFeedbackHub), ou laisser vos commentaires pour l’application et l’outil d’empaquetage MSIX dans le [Concentrateur de commentaires sur l’attachement d’application MSIX](https://aka.ms/msixappattachfeedback) et le [Concentrateur de commentaires sur l’outil d’empaquetage MSIX](https://aka.ms/msixtoolfeedback).
+Vous pouvez également laisser vos commentaires sur Windows Virtual Desktop sur le [Hub de commentaires Windows Virtual Desktop](https://support.microsoft.com/help/4021566/windows-10-send-feedback-to-microsoft-with-feedback-hub-app).

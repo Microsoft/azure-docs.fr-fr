@@ -8,13 +8,13 @@ services: iot-hub
 ms.topic: tutorial
 ms.date: 03/25/2019
 ms.author: robinsh
-ms.custom: mvc
-ms.openlocfilehash: 68338c56419316e561bb072c1a0555e89d3de85b
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.custom: mvc, devx-track-azurepowershell
+ms.openlocfilehash: 92c30287e836ccadda915dab70a4d40e9c4e851a
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "74084433"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89073401"
 ---
 # <a name="tutorial-use-azure-powershell-to-configure-iot-hub-message-routing"></a>Tutoriel : Utiliser Azure PowerShell pour configurer le routage des messages IoT Hub
 

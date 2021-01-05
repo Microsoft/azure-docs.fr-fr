@@ -9,14 +9,14 @@ ms.service: active-directory
 ms.workload: identity
 ms.subservice: user-help
 ms.topic: end-user-help
-ms.date: 10/28/2019
+ms.date: 07/29/2020
 ms.author: curtand
-ms.openlocfilehash: 9badda1663947587b078c6bb808f4efdf2e10579
-ms.sourcegitcommit: 493b27fbfd7917c3823a1e4c313d07331d1b732f
+ms.openlocfilehash: 784ee418c3713cce53d7e99e30fd445e75d144da
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83735954"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88798208"
 ---
 # <a name="manage-your-connected-devices-from-the-devices-page"></a>Gérer vos appareils connectés à partir de la page Appareils
 
@@ -27,7 +27,7 @@ La page **Appareils** du portail **Mon compte** vous permet de gérer les appare
 - Désactiver les appareils que vous ne possédez plus, que vous avez perdus ou qui ont été volés.
 
 >[!Important]
->Cet article s’adresse aux utilisateurs qui tentent de mettre à jour les informations des appareils connectés à un compte professionnel ou scolaire. Si vous êtes administrateur et que vous recherchez des informations sur la gestion des appareils pour vos employés et d’autres utilisations, consultez la [documentation sur les identités des appareils](https://docs.microsoft.com/azure/active-directory/devices/index).
+>Cet article s’adresse aux utilisateurs qui tentent de mettre à jour les informations des appareils connectés à un compte professionnel ou scolaire. Si vous êtes administrateur et que vous recherchez des informations sur la gestion des appareils pour vos employés et d’autres utilisations, consultez la [documentation sur les identités des appareils](../devices/index.yml).
 
 ## <a name="view-your-connected-devices"></a>Afficher vos appareils connectés
 
@@ -68,13 +68,15 @@ Si votre accès à l’appareil est verrouillé ou si vous avez commis une erreu
 
 Après avoir affiché vos appareils connectés, vous pouvez :
 
-- Choisir d’afficher ou gérer vos [informations de sécurité](user-help-security-info-overview.md).
+- Choisir d’afficher ou gérer vos [informations de sécurité](./security-info-setup-signin.md).
 
 - Afficher et gérer vos [organisations](my-account-portal-organizations-page.md).
 
 - Afficher votre [activité de connexion](my-account-portal-sign-ins-page.md).
 
 - Afficher la façon dont votre organisation [utilise vos données relatives à la confidentialité](my-account-portal-privacy-page.md).
+
+- Modifier vos [paramètres du portail Mon compte](my-account-portal-settings.md)
 
 ## <a name="related-office-content"></a>Contenu Office associé
 

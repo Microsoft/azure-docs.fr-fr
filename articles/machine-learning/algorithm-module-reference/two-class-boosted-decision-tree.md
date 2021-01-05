@@ -1,30 +1,32 @@
 ---
 title: 'Arbre de décision optimisé à deux classes : Informations de référence sur les modules'
 titleSuffix: Azure Machine Learning
-description: Découvrez comment utiliser le module Arbre de décision optimisé à deux classes dans Azure Machine Learning pour créer un modèle Machine Learning basé sur l’algorithme d’arbres de décision optimisés.
+description: Découvrez comment utiliser le module Arbre de décision optimisé à deux classes dans le concepteur pour créer un classifieur binaire.
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: core
 ms.topic: reference
 author: likebupt
 ms.author: keli19
-ms.date: 04/22/2020
-ms.openlocfilehash: 0499d52a6fe3da7349d31748ca3b5add16369571
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.date: 08/24/2020
+ms.openlocfilehash: 810878956a89b6e7400be99692cf43925d1cd134
+ms.sourcegitcommit: 051908e18ce42b3b5d09822f8cfcac094e1f93c2
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82137652"
+ms.lasthandoff: 11/09/2020
+ms.locfileid: "94375908"
 ---
 # <a name="two-class-boosted-decision-tree-module"></a>Arbre de décision optimisé à deux classes
 
-Cet article décrit un module dans le concepteur Azure Machine Learning (version préliminaire).
+Cet article décrit un module dans le concepteur Azure Machine Learning.
 
 Ce module vous permet de créer un modèle Machine Learning reposant sur l’algorithme d’arbres de décision optimisés. 
 
-Un arbre de décision optimisé est une méthode d’apprentissage d’ensemble dans laquelle le second arbre corrige les erreurs du premier arbre, le troisième arbre corrige les erreurs du premier et du deuxième arbres, et ainsi de suite.  Les prédictions sont effectuées par l’ensemble d’arbres complet.
+Un arbre de décision optimisé est une méthode d’apprentissage d’ensemble dans laquelle le second arbre corrige les erreurs du premier arbre, le troisième arbre corrige les erreurs du premier et du deuxième arbres, et ainsi de suite. Les prédictions sont effectuées par l’ensemble d’arbres complet.
   
 En règle générale, lorsque les arbres de décision sont correctement configurés, ils représentent le moyen le plus simple d’obtenir des performances optimales sur un large éventail de tâches Machine Learning. Toutefois, ils constituent également l’un des apprentissages qui utilisent le plus de mémoire, et l’implémentation actuelle conserve toutes les données en mémoire. Par conséquent, un modèle d’arbre de décision optimisé n’est pas toujours en mesure de traiter des jeux de données volumineux qui peuvent être gérés par certains apprentissages linéaires.
+
+Ce module est basé sur l’algorithme LightGBM.
 
 ## <a name="how-to-configure"></a>Comment configurer
 
@@ -54,7 +56,7 @@ Vous pouvez effectuer l’apprentissage de ce type de modèle à l’aide de l�
   
 6.  Dans le champ **Number of trees constructed** (Nombre d’arbres construits), indiquez le nombre total d’arbres de décision à créer dans l’ensemble. En créant plusieurs arbres de décision, vous pouvez obtenir une meilleure couverture, mais cette opération augmente la durée d’apprentissage.
   
-     Cette valeur contrôle également le nombre d’arbres qui s’affichent dans la visualisation du modèle entraîné. Si vous souhaitez visualiser ou imprimer un arbre unique, définissez la valeur sur 1. Toutefois, lorsque vous procédez ainsi, un seul arbre est généré (l’arbre avec le jeu de paramètres initial), et aucune autre itération n’est effectuée.
+     Si vous définissez la valeur sur 1, un seul arbre est généré (l’arbre avec le jeu de paramètres initial), et aucune autre itération n’est effectuée.
   
 7.  Dans le champ **Random number seed** (Valeur de départ aléatoire), saisissez si vous le souhaitez un entier non négatif à utiliser comme valeur initiale aléatoire. La spécification d’une valeur de départ garantit la reproductibilité entre les exécutions qui présentent les mêmes données et paramètres.  
   
@@ -73,7 +75,7 @@ Vous pouvez effectuer l’apprentissage de ce type de modèle à l’aide de l�
     > 
     > Si vous transmettez un ensemble unique de valeurs de paramètre au module [Optimiser les hyperparamètres du modèle](tune-model-hyperparameters.md), quand il attend une plage de paramètres pour chaque paramètre, il ignore les valeurs et utilise les valeurs par défaut pour l’apprenant.  
     > 
-    > Si vous sélectionnez l’option **Plage de paramètres** et que vous entrez une valeur unique pour un paramètre, cette valeur unique que vous avez spécifiée est utilisée tout au long du balayage, même si d’autres paramètres changent dans une plage de valeurs.  
+    > Si vous sélectionnez l’option **Plage de paramètres** et que vous entrez une valeur unique pour un paramètre, cette valeur unique que vous avez spécifiée est utilisée tout au long du balayage, même si d’autres paramètres changent sur une plage de valeurs.  
    
 ## <a name="results"></a>Résultats
 

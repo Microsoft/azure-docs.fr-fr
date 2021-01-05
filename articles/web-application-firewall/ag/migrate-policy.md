@@ -7,16 +7,16 @@ author: vhorne
 ms.service: web-application-firewall
 ms.date: 04/16/2020
 ms.author: ant
-ms.openlocfilehash: fb3b922b753b9696aa26ea189597589ecc5772db
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 9b60075eb861fe598a05ba014a7def96bc815d06
+ms.sourcegitcommit: ad677fdb81f1a2a83ce72fa4f8a3a871f712599f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81536622"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97653008"
 ---
 # <a name="migrate-web-application-firewall-policies-using-azure-powershell"></a>Migrer les stratégies de pare-feu d’applications web à l’aide d’Azure PowerShell
 
-Ce script facilite le passage d’une configuration WAF ou d’une stratégie WAF de règles personnalisées uniquement à une stratégie WAF complète. Vous pouvez voir un avertissement dans le portail qui indique *Migrer vers une stratégie WAF* ou vouloir utiliser les nouvelles fonctionnalités WAF en préversion publique, telles que les règles personnalisées Geomatch, la stratégie WAF par site et par URI ou l’ensemble de règles d’atténuation des risques des bots. Pour utiliser l’une de ces fonctionnalités, vous avez besoin d’une stratégie WAF complète associée à votre passerelle d’application. 
+Ce script facilite le passage d’une configuration WAF ou d’une stratégie WAF de règles personnalisées uniquement à une stratégie WAF complète. Vous pouvez voir un avertissement dans le portail qui indique *Migrer vers une stratégie WAF* ou vous pouvez vouloir utiliser les nouvelles fonctionnalités WAF, telles que les règles personnalisées Geomatch (préversion), la stratégie WAF par site et la stratégie WAF par URI (préversion) ou l’ensemble de règles d’atténuation des risques des bots (préversion). Pour utiliser l’une de ces fonctionnalités, vous avez besoin d’une stratégie WAF complète associée à votre passerelle d’application. 
 
 Pour plus d’informations sur la création d’une stratégie WAF, consultez [Créer des stratégies de pare-feu d’applications web pour Application Gateway](create-waf-policy-ag.md). Pour plus d’informations sur la migration, consultez [Migrer vers une stratégie WAF](create-waf-policy-ag.md#migrate-to-waf-policy).
 
@@ -146,7 +146,7 @@ function createNewTopLevelWafPolicy ($subscriptionId, $resourceGroupName, $appli
                 if ($disabled.Rules.Count -gt 0) {
                     foreach ($rule in $disabled.Rules) {
                         $ruleOverride = New-AzApplicationGatewayFirewallPolicyManagedRuleOverride -RuleId $rule
-                        $_ = $rules.Add($ruleOverride)              
+                        $_ = $rules.Add($ruleOverride)
                     }
                 }
                 
@@ -157,7 +157,7 @@ function createNewTopLevelWafPolicy ($subscriptionId, $resourceGroupName, $appli
 
         $managedRuleSet = New-AzApplicationGatewayFirewallPolicyManagedRuleSet -RuleSetType $appgw.WebApplicationFirewallConfiguration.RuleSetType -RuleSetVersion $appgw.WebApplicationFirewallConfiguration.RuleSetVersion 
         if ($ruleGroupOverrides.Count -ne 0) {
-            $managedRuleSet = New-AzApplicationGatewayFirewallPolicyManagedRuleSet -RuleSetType $appgw.WebApplicationFirewallConfiguration.RuleSetType -RuleSetVersion $appgw.WebApplicationFirewallConfiguration.RuleSetVersion -RuleGroupOverride $ruleGroupOverrides 
+            $managedRuleSet = New-AzApplicationGatewayFirewallPolicyManagedRuleSet -RuleSetType $appgw.WebApplicationFirewallConfiguration.RuleSetType -RuleSetVersion $appgw.WebApplicationFirewallConfiguration.RuleSetVersion -RuleGroupOverride $ruleGroupOverrides
         }
     
         $exclusions = [System.Collections.ArrayList]@()  
@@ -165,7 +165,7 @@ function createNewTopLevelWafPolicy ($subscriptionId, $resourceGroupName, $appli
             foreach ($excl in $appgw.WebApplicationFirewallConfiguration.Exclusions) {
                 if ($excl.MatchVariable -and $excl.SelectorMatchOperator -and $excl.Selector) {
                     $exclusionEntry = New-AzApplicationGatewayFirewallPolicyExclusion -MatchVariable  $excl.MatchVariable -SelectorMatchOperator $excl.SelectorMatchOperator -Selector $excl.Selector
-                    $_ = $exclusions.Add($exclusionEntry)               
+                    $_ = $exclusions.Add($exclusionEntry)
                 }
             }
         }

@@ -14,12 +14,12 @@ ms.tgt_pltfrm: na
 ms.workload: tbd
 ms.date: 06/15/2018
 ms.author: v-six
-ms.openlocfilehash: a644e211cc933ca686f0bd6a13b0d2ba8ae20162
-ms.sourcegitcommit: fb23286d4769442631079c7ed5da1ed14afdd5fc
+ms.openlocfilehash: 0484eb919a9de11b64dcc3334c5a9a942d875ca6
+ms.sourcegitcommit: a92fbc09b859941ed64128db6ff72b7a7bcec6ab
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/10/2020
-ms.locfileid: "81114113"
+ms.lasthandoff: 10/15/2020
+ms.locfileid: "92075125"
 ---
 # <a name="common-issues-that-cause-roles-to-recycle"></a>Problèmes courants provoquant le recyclage des rôles
 Cet article examine certaines des causes courantes entraînant des problèmes de déploiement, et indique des conseils de dépannage pour vous aider à résoudre ces problèmes. Une instance de rôle qui ne démarre pas ou qui est recyclée entre les états Initialisation, Occupée et Arrêt indique un problème au niveau de l’application.
@@ -53,7 +53,9 @@ Pour vous assurer que votre paramètre `DiagnosticsConnectionString` est correct
   Par défaut, ce paramètre pointe vers le compte de stockage émulé, et vous devez donc modifier explicitement ce paramètre avant de déployer votre package d'application. Si vous ne modifiez pas ce paramètre, une exception est générée lorsque l'instance de rôle tente de démarrer le moniteur de diagnostic. L'instance de rôle risque alors d’être recyclée indéfiniment.
 * La chaîne de connexion est spécifiée au [format](../storage/common/storage-configure-connection-string.md) suivant. (Le protocole HTTPS doit être spécifié.) Remplacez *MyAccountName* par le nom de votre compte de stockage et *MyAccountKey* par votre clé d’accès :    
 
-        DefaultEndpointsProtocol=https;AccountName=MyAccountName;AccountKey=MyAccountKey
+```console
+DefaultEndpointsProtocol=https;AccountName=MyAccountName;AccountKey=MyAccountKey
+```
 
   Si vous développez votre application à l’aide d’outils Azure pour Microsoft Visual Studio, vous pouvez utiliser les pages de propriétés pour définir cette valeur.
 
@@ -61,11 +63,11 @@ Pour vous assurer que votre paramètre `DiagnosticsConnectionString` est correct
 Pour exécuter un rôle web sous TLS, vous devez vous assurer que votre certificat de gestion exporté inclut la clé privée. Si vous utilisez le *gestionnaire de certificats Windows* pour exporter le certificat, veillez à sélectionner **Oui** pour l’option **Exporter la clé privée**. Le certificat doit être exporté au format PFX, l’unique format actuellement pris en charge.
 
 ## <a name="next-steps"></a>Étapes suivantes
-Affichez plus d’ [articles de résolution des problèmes](https://azure.microsoft.com/documentation/articles/?tag=top-support-issue&product=cloud-services) liés aux services cloud.
+Affichez plus d’ [articles de résolution des problèmes](../index.yml?product=cloud-services&tag=top-support-issue) liés aux services cloud.
 
-Affichez d’autres scénarios de recyclage des rôles dans la [série du blog de Kevin Williamson](https://blogs.msdn.com/b/kwill/archive/2013/08/09/windows-azure-paas-compute-diagnostics-data.aspx).
+Affichez d’autres scénarios de recyclage des rôles dans la [série du blog de Kevin Williamson](/archive/blogs/kwill/windows-azure-paas-compute-diagnostics-data).
 
-[RoleEntryPoint]: https://msdn.microsoft.com/library/microsoft.windowsazure.serviceruntime.roleentrypoint.aspx
-[OnStart]: https://msdn.microsoft.com/library/microsoft.windowsazure.serviceruntime.roleentrypoint.onstart.aspx
-[OnStop]: https://msdn.microsoft.com/library/microsoft.windowsazure.serviceruntime.roleentrypoint.onstop.aspx
-[Exécuter]: https://msdn.microsoft.com/library/microsoft.windowsazure.serviceruntime.roleentrypoint.run.aspx
+[RoleEntryPoint]: /previous-versions/azure/reference/ee758619(v=azure.100)
+[OnStart]: /previous-versions/azure/reference/ee772851(v=azure.100)
+[OnStop]: /previous-versions/azure/reference/ee772844(v=azure.100)
+[Exécuter]: /previous-versions/azure/reference/ee772746(v=azure.100)

@@ -12,7 +12,7 @@
   items:
     - name: API REST
       items:
-        - name: 'Utilisation de C#'
+        - name: Utilisation de C#
           href: csharp.md
         - name: Utilisation de Java
           href: java.md
@@ -59,19 +59,19 @@
 - name: Informations de référence
   items:
     - name: API Recherche d’actualités Bing v7
-      href: 'https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-news-api-v7-reference'
+      href: /rest/api/cognitiveservices-bingsearch/bing-news-api-v7-reference
     - name: API Recherche d’actualités Bing v5
-      href: 'https://docs.microsoft.com/rest/api/cognitiveservices-bingsearch/bing-news-api-v5-reference'
+      href: /rest/api/cognitiveservices-bingsearch/bing-news-api-v5-reference
     - name: Kits SDK
       items:
         - name: .NET
-          href: 'https://docs.microsoft.com/dotnet/api/overview/azure/cognitiveservices/client/bingnewssearch?view=azure-dotnet'
+          href: /dotnet/api/overview/azure/cognitiveservices/bing-news-search-readme?view=azure-dotnet
         - name: Java
-          href: 'https://docs.microsoft.com/java/api/overview/azure/cognitiveservices/client/bingnewssearch?view=azure-java-stable'
+          href: /java/api/overview/azure/cognitiveservices/client/bingnewssearch?view=azure-java-stable
         - name: Python
-          href: 'https://docs.microsoft.com/python/api/overview/azure/cognitiveservices/newssearch?view=azure-python'
+          href: /python/api/azure-cognitiveservices-search-newssearch/?view=azure-python
         - name: Node.js
-          href: 'https://docs.microsoft.com/javascript/api/@azure/cognitiveservices-newssearch/?view=azure-node-latest'
+          href: /javascript/api/@azure/cognitiveservices-newssearch/?view=azure-node-latest
         - name: Go
           href: 'https://godoc.org/github.com/Azure/azure-sdk-for-go/services/cognitiveservices/v1.0/newssearch'
     - name: Conditions d’utilisation et d’affichage
@@ -92,7 +92,7 @@
     - name: Base de connaissances
       href: 'https://cognitive.uservoice.com/knowledgebase/topics/127875-bing-search-web-image-video-news-autosuggest'
     - name: Obtenir la clé API
-      href: 'https://azure.microsoft.com/try/cognitive-services/?api=bing-news-search-api'
+      href: 'https://azure.microsoft.com/free/cognitive-services'
     - name: "Essayez\_!"
       href: 'https://dev.cognitive.microsoft.com/docs/services/56b43f72cf5ff8098cef380a/operations/56f02400dbe2d91900c68553'
     - name: Points de terminaison Recherche d’actualités Bing
@@ -100,6 +100,6 @@
     - name: Support multilingue
       href: language-support.md
     - name: Analytique pour l’API Recherche d’actualités Bing
-      href: bing-news-stats.md
+      href: ../bing-web-search/bing-web-stats.md
     - name: Conformité
       href: 'https://azure.microsoft.com/support/legal/cognitive-services-compliance-and-privacy/'

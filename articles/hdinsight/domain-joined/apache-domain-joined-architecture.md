@@ -8,12 +8,12 @@ ms.service: hdinsight
 ms.topic: conceptual
 ms.custom: hdinsightactive
 ms.date: 03/11/2020
-ms.openlocfilehash: 452a3b04637126b40aca907178bebd6f74ec4481
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 86d951089e4247d9b959476c812b98e170d92bd8
+ms.sourcegitcommit: d767156543e16e816fc8a0c3777f033d649ffd3c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79365770"
+ms.lasthandoff: 10/26/2020
+ms.locfileid: "92547977"
 ---
 # <a name="use-enterprise-security-package-in-hdinsight"></a>Utiliser le pack Sécurité Entreprise dans HDInsight
 
@@ -57,7 +57,7 @@ Pour plus d’informations, consultez [Configurer des clusters HDInsight avec E
 
 Si vous disposez d’une instance Active Directory locale ou de configurations Active Directory plus complexes pour votre domaine, vous pouvez synchroniser ces identités sur Azure AD au moyen d’Azure AD Connect. Vous pouvez ensuite activer Azure AD DS sur ce locataire Active Directory.
 
-Kerberos s’appuyant sur les hachages de mot de passe, vous devez [activer la synchronisation du hachage de mot de passe sur Azure AD DS](../../active-directory-domain-services/active-directory-ds-getting-started-password-sync.md).
+Kerberos s’appuyant sur les hachages de mot de passe, vous devez [activer la synchronisation du hachage de mot de passe sur Azure AD DS](../../active-directory-domain-services/tutorial-create-instance.md).
 
 Si vous utilisez la fédération avec les services AD FS (Active Directory Federation Services), vous devez activer la synchronisation du hachage de mot de passe. (Pour connaître la configuration recommandée, consultez [cette vidéo](https://youtu.be/qQruArbu2Ew).) La synchronisation du hachage de mot de passe facilite la récupération d'urgence en cas de défaillance de votre infrastructure AD FS, et offre également une protection contre les fuites d'informations d'identification. Pour plus d’informations, consultez [Activer la synchronisation du hachage de mot de passe avec la synchronisation Azure AD Connect](../../active-directory/hybrid/how-to-connect-password-hash-synchronization.md).
 
@@ -65,7 +65,7 @@ L'utilisation exclusive du service Active Directory local ou d'Active Directory 
 
 Si vous rencontrez des problèmes d’authentification alors que la fédération est utilisée et que les hachages de mot de passe sont correctement synchronisés, vérifiez que l’authentification par mot de passe cloud est activée pour le principal de service PowerShell. Si ce n'est pas le cas, vous devez définir une [stratégie de découverte du domaine d'accueil](../../active-directory/manage-apps/configure-authentication-for-federated-users-portal.md) pour votre locataire Azure AD. Pour vérifier et définir la stratégie de découverte du domaine d'accueil :
 
-1. Installez le [module Azure AD PowerShell](https://docs.microsoft.com/powershell/azure/active-directory/install-adv2) en préversion.
+1. Installez le [module Azure AD PowerShell](/powershell/azure/active-directory/install-adv2) en préversion.
 
    ```powershell
    Install-Module AzureAD

@@ -11,12 +11,12 @@ ms.workload: integration
 ms.topic: article
 ms.date: 03/31/2020
 ms.author: apimpm
-ms.openlocfilehash: dacf1329d35117c65bcc48a82ac27a767ebd2b3b
-ms.sourcegitcommit: 67bddb15f90fb7e845ca739d16ad568cbc368c06
+ms.openlocfilehash: 0894203be4867e305c8e15467a2a867b9bfdc727
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82203180"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86506806"
 ---
 # <a name="configure-a-custom-domain-name"></a>Configuration d’un nom de domaine personnalisé
 
@@ -49,7 +49,7 @@ Pour effectuer les étapes décrites dans cet article, vous devez disposer des �
 
 ## <a name="use-the-azure-portal-to-set-a-custom-domain-name-for-your-self-hosted-gateway"></a>Utiliser le portail Azure pour définir un nom de domaine personnalisé pour votre passerelle auto-hébergée
 
-1. Sélectionnez les **Passerelles** sous **Paramètres**.
+1. Sélectionnez **Passerelles** sous **Déploiement et infrastructure**.
 2. Sélectionnez la passerelle auto-hébergée pour laquelle vous souhaitez configurer le nom de domaine.
 3. Sélectionnez **Noms d’hôtes** sous **Paramètres**.
 4. Sélectionnez **+ Ajouter**

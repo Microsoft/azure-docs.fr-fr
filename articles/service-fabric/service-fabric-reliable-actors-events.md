@@ -1,16 +1,15 @@
 ---
 title: Événements dans les acteurs Azure Service Fabric basés sur acteur
 description: En savoir plus sur les événements pour Service Fabric Reliable Actors, une manière efficace de communiquer entre l’acteur et le client.
-author: vturecek
 ms.topic: conceptual
 ms.date: 10/06/2017
-ms.author: amanbha
-ms.openlocfilehash: 73c149a0d0992fecd1acf633891057570285df64
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 591e3539715ba0873e44f56a93d05df6552bb1ef
+ms.sourcegitcommit: 16c7fd8fe944ece07b6cf42a9c0e82b057900662
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75639664"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96571366"
 ---
 # <a name="actor-events"></a>Événements d’acteurs
 Les événements d’acteur sont un moyen d’envoyer des notifications Meilleur effort de l’acteur aux clients. Les événements d’acteur sont conçus pour la communication acteur-client et ne doivent pas être utilisés pour la communication acteur-acteur.
@@ -102,7 +101,7 @@ event.gameScoreUpdated(Id.getUUIDId(), score);
 ## <a name="next-steps"></a>Étapes suivantes
 * [Réentrance des acteurs](service-fabric-reliable-actors-reentrancy.md)
 * [Diagnostics et surveillance des performances d’acteur](service-fabric-reliable-actors-diagnostics.md)
-* [Documentation de référence de l’API d’acteur](https://msdn.microsoft.com/library/azure/dn971626.aspx)
+* [Documentation de référence de l’API d’acteur](/previous-versions/azure/dn971626(v=azure.100))
 * [Exemple de code C#](https://github.com/Azure-Samples/service-fabric-dotnet-getting-started)
 * [Exemple de code C# .NET Core](https://github.com/Azure-Samples/service-fabric-dotnet-core-getting-started)
 * [Exemple de code Java](https://github.com/Azure-Samples/service-fabric-java-getting-started)

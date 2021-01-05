@@ -10,18 +10,18 @@ ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.subservice: pim
 ms.date: 11/08/2019
 ms.author: curtand
 ms.custom: pim
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 6affa2ecc8919dabeb6173622b525280ce96bcfe
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: e95eaa5b0e86a7470fc48edc23b2dbfb47e4b10c
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "73847025"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "84743726"
 ---
 # <a name="use-a-resource-dashboard-to-perform-an-access-review-in-privileged-identity-management"></a>Utiliser un tableau de bord de ressources pour effectuer une révision d’accès dans Privileged Identity Management
 

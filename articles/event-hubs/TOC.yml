@@ -10,6 +10,8 @@
       href: event-hubs-capture-overview.md
     - name: Event Hubs Dedicated
       href: event-hubs-dedicated-overview.md
+    - name: Azure Schema Registry dans Event Hubs (préversion)
+      href: schema-registry-overview.md
 - name: Démarrages rapides
   expanded: true
   items:
@@ -27,29 +29,25 @@
     - name: Envoyer et recevoir des événements
       items:
         - name: .NET (Azure.Messaging.EventHubs)
-          href: get-started-dotnet-standard-send-v2.md
+          href: event-hubs-dotnet-standard-getstarted-send.md
         - name: Java (azure-messaging-eventhubs)
-          href: get-started-java-send-v2.md
-        - name: "Python (azure-eventhub version\_5)"
-          href: get-started-python-send-v2.md
-        - name: "JavaScript (azure/event-hubs version\_5)"
-          href: get-started-node-send-v2.md
+          href: event-hubs-java-get-started-send.md
+        - name: Python (azure-eventhub)
+          href: event-hubs-python-get-started-send.md
+        - name: JavaScript (azure/event-hubs)
+          href: event-hubs-node-get-started-send.md
         - name: Go
           href: event-hubs-go-get-started-send.md
         - name: C (envoi uniquement)
           href: event-hubs-c-getstarted-send.md
         - name: Apache Storm (réception uniquement)
           href: event-hubs-storm-getstarted-receive.md
-    - name: Envoyer et recevoir des événements (versions/packages anciens)
+    - name: Envoyer et recevoir des événements (anciens paquets)
       items:
         - name: .NET (Microsoft.Azure.EventHubs)
-          href: event-hubs-dotnet-standard-getstarted-send.md
+          href: event-hubs-dotnet-standard-get-started-send-legacy.md
         - name: Java (azure-eventhubs)
-          href: event-hubs-java-get-started-send.md
-        - name: "Python (azure-eventhub version\_1)"
-          href: event-hubs-python-get-started-send.md
-        - name: "JavaScript (azure/event-hubs version\_2)"
-          href: event-hubs-node-get-started-send.md
+          href: event-hubs-java-get-started-send-legacy.md
         - name: .NET Framework (Microsoft.ServiceBus)
           href: event-hubs-dotnet-framework-getstarted-send.md
     - name: Capturer des événements
@@ -58,9 +56,7 @@
           href: event-hubs-capture-enable-through-portal.md
         - name: Utiliser un modèle Resource Manager pour activer Event Hubs Capture
           href: event-hubs-resource-manager-namespace-event-hub-enable-capture.md
-        - name: "Lire des données capturées avec Python (azure-eventhub version\_5)"
-          href: get-started-capture-python-v2.md
-        - name: "Lire des données capturées avec Python (azure-eventhub version\_1)"
+        - name: Lire les données capturées en utilisant Python
           href: event-hubs-capture-python.md
     - name: Diffuser en continu dans Event Hubs pour Kafka
       href: event-hubs-quickstart-kafka-enabled-event-hubs.md
@@ -70,20 +66,17 @@
   items:
     - name: Visualiser les anomalies de données sur les flux de données Event Hubs
       href: event-hubs-tutorial-visualize-anomalies.md
-    - name: Stocker les données capturées dans un entrepôt de données SQL
+    - name: Stocker des données capturées dans Azure Synapse Analytics
       href: store-captured-data-data-warehouse.md
     - name: Processus Apache Kafka pour les événements Event Hubs à l’aide de Stream Analytics
       href: event-hubs-kafka-stream-analytics.md
     - name: Diffuser en continu des données dans Azure Databricks à l’aide d’Event Hubs
-      href: ../azure-databricks/databricks-stream-from-eventhubs.md
+      href: /azure/databricks/scenarios/databricks-stream-from-eventhubs
       maintainContext: true
 - name: Exemples
   items:
     - name: Exemples de code
       href: event-hubs-samples.md
-    - name: Éléments intégrés Azure Policy
-      displayName: 'samples, policies, definitions'
-      href: ./policy-samples.md
 - name: Concepts
   items:
     - name: Terminologie Event Hubs
@@ -96,6 +89,22 @@
       href: event-hubs-availability-and-consistency.md
     - name: Extensibilité
       href: event-hubs-scalability.md
+    - name: Fédération
+      items:
+        - name: Fédération multi-site et multi-région
+          href: event-hubs-federation-overview.md
+        - name: Tâches et applications de réplication des événements
+          href: event-hubs-federation-replicator-functions.md
+        - name: Modèles de tâches de réplication des événements
+          href: event-hubs-federation-patterns.md
+        - name: Tâches de réplication configurées
+          href: event-hubs-federation-configuration.md
+        - name: Répliquer des événements entre hubs d’événements
+          href: 'https://github.com/Azure-Samples/azure-messaging-replication-dotnet/tree/main/functions/config/EventHubCopy'
+        - name: Envoyer des événements à Azure Service Bus
+          href: 'https://github.com/Azure-Samples/azure-messaging-replication-dotnet/tree/main/functions/config/EventHubCopyToServiceBus'
+        - name: Obtenir des événements depuis Azure Service Bus
+          href: 'https://github.com/Azure-Samples/azure-messaging-replication-dotnet/tree/main/functions/config/ServiceBusCopyToEventHub'
     - name: Géorécupération d’urgence
       items:
         - name: Géo-reprise d'activité après sinistre et géo-réplication
@@ -122,8 +131,9 @@
               href: authenticate-shared-access-signature.md
         - name: Sécurité du réseau
           href: network-security.md
-        - name: Contrôles de sécurité intégrés
-          href: event-hubs-security-controls.md
+        - name: Contrôles de sécurité par Azure Policy
+          displayName: 'regulatory, compliance, standards, domains'
+          href: ./security-controls-policy.md
         - name: Base de référence de la sécurité
           href: security-baseline.md
     - name: "Guide du protocole AMQP\_1.0"
@@ -131,8 +141,14 @@
       maintainContext: true
 - name: Guides pratiques
   items:
-    - name: Passer d’une région à l’autre
-      href: move-across-regions.md
+    - name: Créer un registre de schémas
+      href: create-schema-registry.md
+    - name: Déplacer
+      items:
+        - name: Déplacer un espace de noms vers une autre région
+          href: move-across-regions.md
+        - name: Déplacer un cluster dédié vers une autre région
+          href: move-cluster-across-regions.md
     - name: Ajouter dynamiquement des partitions
       href: dynamically-add-partitions.md
     - name: Utiliser le Stockage Blob comme magasin de points de contrôle sur Azure Stack Hub
@@ -151,9 +167,9 @@
               href: 'https://github.com/Azure/azure-sdk-for-net/blob/master/sdk/eventhub/Azure.Messaging.EventHubs/README.md'
             - name: Java (azure-messaging-eventhubs)
               href: 'https://github.com/Azure/azure-sdk-for-java/blob/master/sdk/eventhubs/azure-messaging-eventhubs/README.md'
-            - name: "Python (azure-eventhub version\_5)"
+            - name: Python (azure-eventhub)
               href: 'https://github.com/Azure/azure-sdk-for-python/blob/master/sdk/eventhub/azure-eventhub/README.md'
-            - name: "JavaScript (azure/event-hubs version\_5)"
+            - name: JavaScript (azure/event-hubs)
               href: 'https://github.com/Azure/azure-sdk-for-js/blob/master/sdk/eventhub/event-hubs/README.md'
             - name: .NET (Microsoft.Azure.EventHubs)
               href: event-hubs-programming-guide.md
@@ -185,6 +201,8 @@
           href: event-hubs-kafka-flink-tutorial.md
         - name: Intégrer Apache Kafka Connect à un hub (préversion)
           href: event-hubs-kafka-connect-tutorial.md
+        - name: Intégrer Apache Kafka Connect (préversion) avec Debezium
+          href: event-hubs-kafka-connect-debezium.md
         - name: Connecter Akka Streams à un hub d’événements
           href: event-hubs-kafka-akka-streams-tutorial.md
         - name: Questions fréquentes (FAQ) - Event Hubs pour Kafka
@@ -196,31 +214,39 @@
         - name: Configurer les journaux de diagnostic
           href: event-hubs-diagnostic-logs.md
         - name: Diffuser des données de diagnostics Azure en continu à l’aide d’Event Hubs
-          href: event-hubs-streaming-azure-diags-data.md
+          href: ../azure-monitor/platform/diagnostics-extension-stream-event-hubs.md
         - name: Mettre à l’échelle automatiquement les unités de débit
           href: event-hubs-auto-inflate.md
         - name: Bibliothèque de gestion des Event Hubs
           href: event-hubs-management-libraries.md
     - name: Sécuriser
       items:
-        - name: Configurer le pare-feu IP
+        - name: Autoriser l’accès depuis des adresses IP spécifiques
           href: event-hubs-ip-filtering.md
-        - name: Configurer des points de terminaison de service de réseau virtuel
+        - name: Autoriser l’accès depuis des réseaux virtuels spécifiques
           href: event-hubs-service-endpoints.md
-        - name: Configurer des points de terminaison privés
+        - name: Autoriser l’accès via des points de terminaison privés
           href: private-link-service.md
         - name: Configurer les clés gérées par le client
           href: configure-customer-managed-key.md
     - name: Dépanner
       items:
-        - name: Guide de résolution des problèmes
+        - name: Résoudre les problèmes de connectivité
           href: troubleshooting-guide.md
+        - name: Résoudre les problèmes d’authentification et d’autorisation
+          href: troubleshoot-authentication-authorization.md
+        - name: Guide de dépannage Kafka pour Event Hubs
+          href: apache-kafka-troubleshooting-guide.md
+        - name: EventHubsException
+          href: exceptions-dotnet.md
         - name: Exceptions .NET
           href: event-hubs-messaging-exceptions.md
         - name: Exceptions Resource Manager
           href: resource-manager-exceptions.md
 - name: Informations de référence
   items:
+    - name: Kits SDK
+      href: sdks.md
     - name: .NET
       items:
         - name: Bibliothèque cliente
@@ -242,9 +268,9 @@
             - name: Effectuer une migration d’azure-eventhubs vers azure-messaging-eventhubs
               href: 'https://github.com/Azure/azure-sdk-for-java/blob/master/sdk/eventhubs/azure-messaging-eventhubs/migration-guide.md'
             - name: azure-messaging-eventhubs (version la plus récente)
-              href: 'https://azuresdkdocs.blob.core.windows.net/$web/java/azure-messaging-eventhubs/5.0.0-beta.6/index.html'
+              href: /java/api/overview/azure/messaging-eventhubs-readme?view=azure-java-stable
             - name: azure-eventhubs (version héritée)
-              href: /java/api/overview/azure/eventhubs/client?view=azure-java-stable
+              href: /java/api/overview/azure/eventhubs/client?view=azure-java-legacy
         - name: Bibliothèque de gestion
           href: /java/api/com.microsoft.azure.management.eventhub?view=azure-java-stable
     - name: Python
@@ -271,12 +297,23 @@
               href: /javascript/api/@azure/event-hubs/?view=azure-node-legacy
         - name: Bibliothèque de gestion
           href: /javascript/api/@azure/arm-eventhub/?view=azure-node-latest
+    - name: Go
+      items:
+        - name: Bibliothèque cliente
+          href: 'https://pkg.go.dev/github.com/Azure/azure-event-hubs-go?tab=doc'
+        - name: Bibliothèque de gestion
+          href: 'https://pkg.go.dev/github.com/Azure/azure-sdk-for-go/services/eventhub/mgmt/2017-04-01/eventhub?tab=doc'
     - name: REST
       href: /rest/api/eventhub
     - name: Modèle Resource Manager
       href: /azure/templates/microsoft.eventhub/allversions
     - name: Quotas
       href: event-hubs-quotas.md
+    - name: Configurations Apache Kafka
+      href: apache-kafka-configurations.md
+    - name: Éléments intégrés Azure Policy
+      displayName: 'samples, policies, definitions'
+      href: ./policy-reference.md
 - name: Ressources
   items:
     - name: Développer vos compétences avec Microsoft Learn

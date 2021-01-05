@@ -9,18 +9,18 @@ editor: ''
 ms.assetid: 97ee25a1-0ec3-4883-9a0a-54b722598462
 ms.service: storsimple
 ms.devlang: NA
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: NA
 ms.workload: NA
 ms.date: 01/12/2018
 ms.author: alkohli
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: a7c469be4a1d8aba23857b1ba52ee829c126a431
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 12fcc9996697f3bbba35826d79bec238bfb0f8b3
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79232069"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95993011"
 ---
 # <a name="use-storsimple-device-manager-to-manage-alerts-for-the-storsimple-virtual-array"></a>Utiliser StorSimple Device Manager pour gérer les alertes liées au StorSimple Virtual Array
 
@@ -48,31 +48,31 @@ Après avoir activé la notification par e-mail pour un tableau virtuel, les mem
     ![Paramètres d’alerte](./media/storsimple-virtual-array-manage-alerts/alerts2.png)
 2. Le panneau **Paramètres** s’ouvre. Dans la section **Paramètres de l’appareil**, sélectionnez **Général**. Le panneau **Paramètres généraux** s’ouvre.
    
-    ![configuration des notifications des alertes](./media/storsimple-virtual-array-manage-alerts/alerts4.png)
+    ![Capture d’écran montrant le volet Paramètres de l’appareil avec la zone Paramètres d’alerte mise en évidence.](./media/storsimple-virtual-array-manage-alerts/alerts4.png)
 3. Dans le panneau **Paramètres généraux**, accédez à la section **Paramètres d’alerte** puis définissez les éléments suivants :
    
    1. Dans le champ **Activer la notification par e-mail**, sélectionnez **OUI**.
    2. Dans le champ **Envoyer un e-mail aux administrateurs du service**, sélectionnez **OUI** si vous voulez que l’administrateur et tous les coadministrateurs de service reçoivent les notifications d’alerte.
    3. Dans le champ **Destinataires d’e-mail supplémentaires**, entrez les adresses e-mail de tous les autres destinataires qui doivent recevoir les notifications d’alerte. Entrez les noms au format *personne\@lieu.com*. Utilisez des points-virgules pour séparer les adresses e-mail. Vous pouvez configurer un maximum de 20 adresses e-mail par appareil virtuel.
       
-       ![configuration des notifications des alertes](./media/storsimple-virtual-array-manage-alerts/alerts6.png)
+       ![Capture d’écran montrant les détails des Paramètres d’alerte avec les paramètres décrits dans cette étape.](./media/storsimple-virtual-array-manage-alerts/alerts6.png)
    4. Pour envoyer un test de notification par e-mail, cliquez sur **Envoyer un e-mail de test**. Le service StorSimple Device Manager affiche des messages d’état lorsqu’il transfère la notification de test.
       
-       ![E-mail de notification de test des alertes envoyé](./media/storsimple-virtual-array-manage-alerts/alerts7.png)
+       ![Capture d’écran montrant une boîte de dialogue d’informations sur la vérification de l’e-mail de test.](./media/storsimple-virtual-array-manage-alerts/alerts7.png)
       
       > [!NOTE]
       > Si le message de notification de test ne peut pas être envoyé, le service StorSimple Device Manager affiche un message approprié. Cliquez sur **OK**, attendez quelques minutes, puis réessayez d'envoyer votre message de notification de test.
       >
       >
-   5. En bas de la page, cliquez sur **Enregistrer** pour enregistrer votre configuration. Cliquez sur **Oui**lorsque vous êtes invité à confirmer l’opération.
+   5. En bas de la page, cliquez sur **Enregistrer** pour enregistrer votre configuration. Cliquez sur **Oui** lorsque vous êtes invité à confirmer l’opération.
       
-      ![E-mail de notification de test des alertes envoyé](./media/storsimple-virtual-array-manage-alerts/alerts10.png)
+      ![Capture d’écran montrant le volet des paramètres avec le bouton Enregistrer sélectionné.](./media/storsimple-virtual-array-manage-alerts/alerts10.png)
 
 ## <a name="common-alert-conditions"></a>Conditions d’alerte courantes
 
 Votre StorSimple Virtual Array génère des alertes en réponse à différentes conditions. Les éléments suivants constituent les types de conditions d’alerte les plus courants :
 
-* **Problèmes de connectivité** : ces alertes se produisent lorsque des difficultés surviennent dans le transfert de données. Des problèmes de communication peuvent survenir pendant le transfert des données vers et depuis le compte de stockage Azure ou en raison d’une absence de connectivité entre les appareils virtuels et le service StorSimple Device Manager. Les problèmes de communication sont les plus difficiles à résoudre, car il existe de nombreux points de défaillance. Avant toute chose, vous devez toujours vérifier que la connectivité au réseau et l'accès à Internet sont disponibles avant d’aller plus loin dans la résolution des problèmes. Pour plus d’informations sur les ports et les paramètres du pare-feu, consultez la page [Configuration système requise pour StorSimple Virtual Array](storsimple-ova-system-requirements.md). Pour obtenir de l’aide sur la résolution des problèmes, consultez la section [Dépannage avec l’applet de commande Test-Connection](storsimple-troubleshoot-deployment.md).
+* **Problèmes de connectivité** : ces alertes se produisent lorsque des difficultés surviennent dans le transfert de données. Des problèmes de communication peuvent survenir pendant le transfert des données vers et depuis le compte de stockage Azure ou en raison d’une absence de connectivité entre les appareils virtuels et le service StorSimple Device Manager. Les problèmes de communication sont les plus difficiles à résoudre, car il existe de nombreux points de défaillance. Avant toute chose, vous devez toujours vérifier que la connectivité au réseau et l'accès à Internet sont disponibles avant d’aller plus loin dans la résolution des problèmes. Pour plus d’informations sur les ports et les paramètres du pare-feu, consultez la page [Configuration système requise pour StorSimple Virtual Array](storsimple-ova-system-requirements.md). Pour obtenir de l’aide sur la résolution des problèmes, consultez la section [Dépannage avec l’applet de commande Test-Connection](./storsimple-8000-troubleshoot-deployment.md).
 * **Problèmes de performances** : ces alertes sont dues aux performances de votre système qui ne sont pas optimales, notamment lorsqu’il est soumis à des conditions de surcharge.
 
 De plus, vous pouvez afficher les alertes liées à la sécurité, aux mises à jour ou aux tâches qui ont échoué.

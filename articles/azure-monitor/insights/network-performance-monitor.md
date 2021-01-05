@@ -6,12 +6,12 @@ ms.topic: conceptual
 author: vinynigam
 ms.author: vinigam
 ms.date: 02/20/2018
-ms.openlocfilehash: 9660e87f3ee4e1c1c6a270f14928fdd111664e66
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 1bb2b7ca22896ed279c8aac215109b7f7bc7854c
+ms.sourcegitcommit: 0ce1ccdb34ad60321a647c691b0cff3b9d7a39c8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79480876"
+ms.lasthandoff: 11/05/2020
+ms.locfileid: "93394269"
 ---
 # <a name="network-performance-monitor-solution-in-azure"></a>Solution Network Performance Monitor dans Azure
 
@@ -28,17 +28,19 @@ Network Performance Monitor offre trois fonctionnalités générales :
 
 * [Moniteur de connectivité de service](network-performance-monitor-service-connectivity.md) : vous permet d’analyser la connectivité entre vos utilisateurs et les services qui vous intéressent, de déterminer l’infrastructure présente dans le chemin et d’identifier l’emplacement des goulots d’étranglement. Découvrez les pannes avant vos utilisateurs et déterminez l’emplacement exact des problèmes sur votre chemin d’accès réseau. 
 
-    Cette fonctionnalité vous permet d’effectuer des tests HTTP, HTTPS, TCP et ICMP afin d’analyser, en temps quasi réel ou dans le temps, la disponibilité et le temps de réponse de votre service. Vous pouvez également analyser la contribution du réseau en perte de paquets et en latence. Avec un mappage de topologie réseau, vous pouvez isoler les ralentissements du réseau. Vous pouvez identifier les points problématiques sur le chemin d’accès réseau entre le nœud et le service, avec les données de latence sur chaque tronçon. Au moyen de tests intégrés, analysez la connectivité réseau vers Office 365 et Dynamics CRM sans aucune configuration préalable. Avec cette fonctionnalité, vous pouvez analyser la connectivité réseau vers n’importe quel point de terminaison compatible TCP, comme des sites web, des applications SaaS, des applications PaaS et des bases de données SQL.
+    Cette fonctionnalité vous permet d’effectuer des tests HTTP, HTTPS, TCP et ICMP afin d’analyser, en temps quasi réel ou dans le temps, la disponibilité et le temps de réponse de votre service. Vous pouvez également analyser la contribution du réseau en perte de paquets et en latence. Avec un mappage de topologie réseau, vous pouvez isoler les ralentissements du réseau. Vous pouvez identifier les points problématiques sur le chemin d’accès réseau entre le nœud et le service, avec les données de latence sur chaque tronçon. Au moyen de tests intégrés, analysez la connectivité réseau vers Microsoft 365 et Dynamics CRM sans aucune configuration préalable. Avec cette fonctionnalité, vous pouvez analyser la connectivité réseau vers n’importe quel point de terminaison compatible TCP, comme des sites web, des applications SaaS, des applications PaaS et des bases de données SQL.
 
 * [Moniteur ExpressRoute](network-performance-monitor-expressroute.md) : analysez la connectivité de bout en bout et les performances entre vos filiales et Azure, le tout sur Azure ExpressRoute.  
 
-Plus d’informations sur les différentes fonctionnalités de prise en charge par [Network Performance Monitor](https://docs.microsoft.com/azure/networking/network-monitoring-overview) sont disponibles en ligne.
+Plus d’informations sur les différentes fonctionnalités de prise en charge par [Network Performance Monitor](../../networking/network-monitoring-overview.md) sont disponibles en ligne.
  
 ## <a name="supported-regions"></a>Régions prises en charge
 NPM permet d’analyser la connectivité entre les réseaux et les applications dans n’importe quelle partie du monde, à partir d’un espace de travail hébergé dans une des régions suivantes :
 * Europe Nord
 * Europe Ouest
+* Suisse Nord
 * France Centre
+* Afrique du Sud Nord
 * Centre du Canada
 * USA Ouest
 * Centre-USA Ouest
@@ -58,17 +60,21 @@ NPM permet d’analyser la connectivité entre les réseaux et les applications 
 * Centre de la Corée
 * Inde centrale
 * Virginie du gouvernement des États-Unis
+* US Government Arizona
 * Chine orientale 2
 
 
-La liste des régions prises en charge pour le Moniteur ExpressRoute est disponible dans la [documentation](https://docs.microsoft.com/azure/expressroute/how-to-npm?utm_swu=8117).
+La liste des régions prises en charge pour le Moniteur ExpressRoute est disponible dans la [documentation](../../expressroute/how-to-npm.md?utm_swu=8117).
 
 
 ## <a name="set-up-and-configure"></a>Installer et configurer
 
+> [!NOTE]
+> Vous pouvez également voir l’agent Log Analytics appelé Microsoft Monitoring Agent (MMA) ou agent Linux OMS.
+
 ### <a name="install-and-configure-agents"></a>Installer et configurer des agents 
 
-Utilisez les procédures de base d’installation des agents décrites dans [Connecter des ordinateurs Windows à Azure Monitor](../platform/agent-windows.md) et [Connecter Operations Manager à Azure Monitor](../platform/om-agents.md).
+Utilisez les procédures de base d’installation des agents décrites dans [Connecter des ordinateurs Windows à Azure Monitor](../platform/agent-windows.md), [Connecter des ordinateurs Linux à Azure Monitor (préversion)](../../virtual-machines/extensions/oms-linux.md) et [Connecter Operations Manager à Azure Monitor](../platform/om-agents.md).
 
 ### <a name="where-to-install-the-agents"></a>Où installer les agents 
 
@@ -76,27 +82,33 @@ Utilisez les procédures de base d’installation des agents décrites dans [Con
 
     Pour analyser un lien réseau, installez des agents sur les deux points de terminaison de cette dernière. Si vous n’êtes pas certain de la topologie de votre réseau, installez les agents sur des serveurs présentant des charges de travail critiques entre lesquels vous souhaitez analyser les performances réseau. Par exemple, si vous souhaitez analyser la connexion réseau entre un serveur web et un serveur exécutant SQL Server, installez un agent sur les deux serveurs. Les agents surveillent la connectivité (liens) réseau entre les hôtes et non les hôtes proprement dits. 
 
-* **Moniteur de connectivité de service** : installez un agent Log Analytics sur chaque nœud à partir duquel vous souhaitez analyser la connectivité réseau au point de terminaison de service. Par exemple, si vous souhaitez analyser la connectivité réseau à Office 365 à partir de vos sites Office étiquetés O1, O2 et O3. Installez l’agent Log Analytics sur au moins un nœud dans O1, O2 et O3. 
+* **Moniteur de connectivité de service** : installez un agent Log Analytics sur chaque nœud à partir duquel vous souhaitez analyser la connectivité réseau au point de terminaison de service. Par exemple, si vous souhaitez analyser la connectivité réseau à Microsoft 365 à partir de vos sites Office étiquetés O1, O2 et O3. Installez l’agent Log Analytics sur au moins un nœud dans O1, O2 et O3. 
 
-* **Moniteur ExpressRoute** : installez au moins un agent Log Analytics dans votre réseau virtuel Azure. De plus, installez au moins un agent dans votre sous-réseau local, connecté via le peering privé ExpressRoute.  
+* **Moniteur ExpressRoute**  : Installez au moins un agent Log Analytics dans votre réseau virtuel Azure. De plus, installez au moins un agent dans votre sous-réseau local, connecté via le peering privé ExpressRoute.  
 
 ### <a name="configure-log-analytics-agents-for-monitoring"></a>Configurer des agents Log Analytics pour la surveillance 
 
 Network Performance Monitor utilise des transactions synthétiques pour analyser les performances réseau entre les agents sources et cibles. Vous pouvez choisir une analyse effectuée par le biais du protocole TCP et ICMP dans les fonctionnalités de l’Analyseur de performances et du Moniteur de connectivité de service. Seul le protocole TCP est disponible comme protocole d’analyse pour le Moniteur ExpressRoute. Vérifiez que le pare-feu autorise les communications entre les agents Log Analytics utilisés pour l’analyse sur le protocole que vous avez choisi. 
 
-* **Protocole TCP** : si vous choisissez le protocole TCP pour l’analyse, ouvrez le port du pare-feu sur les agents utilisés pour Network Performance Monitor et le Moniteur ExpressRoute afin de vous assurer que les agents peuvent se connecter entre eux. Pour ouvrir le port, exécutez le script PowerShell [EnableRules.ps1](https://aka.ms/npmpowershellscript) sans paramètre dans une fenêtre PowerShell avec des privilèges d’administrateur.
+* **Protocole TCP**  : si vous choisissez le protocole TCP pour l’analyse, ouvrez le port du pare-feu sur les agents utilisés pour Network Performance Monitor et le Moniteur ExpressRoute afin de vous assurer que les agents peuvent se connecter entre eux. Pour les ordinateurs Windows, pour ouvrir le port, exécutez le script PowerShell [EnableRules.ps1](https://aka.ms/npmpowershellscript) sans paramètre dans une fenêtre PowerShell avec des privilèges Administrateur.
+Pour les ordinateurs Linux, les numéros de port à utiliser doivent être modifiés manuellement. 
+* Suivez ce chemin : /var/opt/microsoft/omsagent/npm_state. 
+* Ouvrez le fichier : npmdregistry.
+* Modifiez la valeur du numéro de port ```“PortNumber:<port of your choice>”```.
 
-    Le script crée des clés de Registre requises par la solution. Il crée également des règles de pare-feu Windows pour autoriser les agents à créer des connexions TCP entre eux. Les clés de Registre créées par le script spécifient également s’il faut enregistrer les journaux d’activité de débogage et le chemin d’accès des fichiers journaux. Le script définit également le port TCP de l’agent utilisé pour la communication. Les valeurs de ces clés sont définies automatiquement par le script. Ne modifiez pas manuellement ces clés. Le port ouvert par défaut est 8084. Vous pouvez utiliser un port personnalisé en ajoutant le paramètre portNumber au script. Utilisez le même port sur tous les ordinateurs exécutant le script. 
+ Notez que les numéros de port utilisés doivent être identiques pour tous les agents utilisés dans un espace de travail. 
 
-    >[!NOTE]
-    > Le script configure uniquement le pare-feu Windows en local. Si vous avez un pare-feu réseau, assurez-vous qu’il autorise le trafic destiné au port TCP que Network Performance Monitor utilise.
+Le script crée des clés de Registre requises par la solution. Il crée également des règles de pare-feu Windows pour autoriser les agents à créer des connexions TCP entre eux. Les clés de Registre créées par le script spécifient également s’il faut enregistrer les journaux d’activité de débogage et le chemin d’accès des fichiers journaux. Le script définit également le port TCP de l’agent utilisé pour la communication. Les valeurs de ces clés sont définies automatiquement par le script. Ne modifiez pas manuellement ces clés. Le port ouvert par défaut est 8084. Vous pouvez utiliser un port personnalisé en ajoutant le paramètre portNumber au script. Utilisez le même port sur tous les ordinateurs exécutant le script. 
 
-    >[!NOTE]
-    > Vous n’avez pas besoin d’exécuter le script PowerShell [EnableRules.ps1](https://aka.ms/npmpowershellscript ) pour le Moniteur de connectivité de service.
+   >[!NOTE]
+   > Le script configure uniquement le pare-feu Windows en local. Si vous avez un pare-feu réseau, assurez-vous qu’il autorise le trafic destiné au port TCP que Network Performance Monitor utilise.
+
+   >[!NOTE]
+   > Vous n’avez pas besoin d’exécuter le script PowerShell [EnableRules.ps1](https://aka.ms/npmpowershellscript ) pour le Moniteur de connectivité de service.
 
     
 
-* **Protocole ICMP** : si vous choisissez le protocole ICMP pour l’analyse, activez les règles de pare-feu suivantes afin d’utiliser le protocole ICMP de manière fiable :
+* **Protocole ICMP**  : Si vous choisissez le protocole ICMP pour la supervision, activez les règles de pare-feu suivantes afin d’utiliser le protocole ICMP de manière fiable :
     
    ```
    netsh advfirewall firewall add rule name="NPMDICMPV4Echo" protocol="icmpv4:8,any" dir=in action=allow 
@@ -110,23 +122,23 @@ Network Performance Monitor utilise des transactions synthétiques pour analyser
 
 ### <a name="configure-the-solution"></a>Configuration de la solution 
 
-1. Ajoutez la solution Network Performance Monitor à votre espace de travail à partir de la [Place de marché Azure](https://azuremarketplace.microsoft.com/marketplace/apps/Microsoft.NetworkMonitoringOMS?tab=Overview). Vous pouvez également procéder comme décrit dans [Ajouter des solutions Azure Monitor à partir de la Galerie Solutions](../../azure-monitor/insights/solutions.md). 
+1. Ajoutez la solution Network Performance Monitor à votre espace de travail à partir de la [Place de marché Azure](https://azuremarketplace.microsoft.com/marketplace/apps/Microsoft.NetworkMonitoringOMS?tab=Overview). Vous pouvez également procéder comme décrit dans [Ajouter des solutions Azure Monitor à partir de la Galerie Solutions](./solutions.md). 
 2. Ouvrez votre espace de travail Log Analytics et cliquez sur la mosaïque **Vue d’ensemble**. 
 3. Sélectionnez la mosaïque **Network Performance Monitor** avec le message *La solution nécessite une configuration supplémentaire*.
 
    ![Vignette Analyseur de performances réseau](media/network-performance-monitor/npm-config.png)
 
-4. Dans la page **Installation**, vous pouvez installer des agents Log Analytics et les configurer à des fins d’analyse dans la vue **Paramètres communs**. Comme expliqué précédemment, si vous avez installé et configuré des agents Log Analytics, sélectionnez la vue **Installation** pour configurer la fonctionnalité que vous souhaitez utiliser. 
+4. Dans la page **Installation** , vous pouvez installer des agents Log Analytics et les configurer à des fins d’analyse dans la vue **Paramètres communs**. Comme expliqué précédemment, si vous avez installé et configuré des agents Log Analytics, sélectionnez la vue **Installation** pour configurer la fonctionnalité que vous souhaitez utiliser. 
 
-   **Analyseur de performances** : choisissez le protocole qui sera utilisé pour les transactions synthétiques dans la règle Analyseur de performances **Par défaut**, puis sélectionnez **Enregistrer et continuer**. Cette sélection de protocole ne conserve que la règle par défaut générée par le système. Vous devez choisir le protocole chaque fois que vous créez une règle de l’Analyseur de performances explicitement. Vous pouvez toujours passer aux paramètres de règle **Par défaut** dans l’onglet **Analyseur de performances** (qui apparaît une fois que vous avez terminé la configuration du jour 0) et modifier le protocole ultérieurement. Si vous n’êtes pas intéressé par la fonctionnalité de l'Analyseur de performances, vous pouvez désactiver la règle par défaut dans les paramètres de règle **Par défaut** de l’onglet **Analyseur de performances**.
+   **Analyseur de performances**  : Choisissez le protocole qui sera utilisé pour les transactions synthétiques dans la règle **Par défaut** de l’analyseur de performances, puis sélectionnez **Enregistrer et continuer**. Cette sélection de protocole ne conserve que la règle par défaut générée par le système. Vous devez choisir le protocole chaque fois que vous créez une règle de l’Analyseur de performances explicitement. Vous pouvez toujours passer aux paramètres de règle **Par défaut** dans l’onglet **Analyseur de performances** (qui apparaît une fois que vous avez terminé la configuration du jour 0) et modifier le protocole ultérieurement. Si vous n’êtes pas intéressé par la fonctionnalité de l'Analyseur de performances, vous pouvez désactiver la règle par défaut dans les paramètres de règle **Par défaut** de l’onglet **Analyseur de performances**.
 
    ![Affichage Analyseur de performances](media/network-performance-monitor/npm-synthetic-transactions.png)
     
-   **Moniteur de connectivité de service** : cette fonctionnalité fournit des tests préconfigurés intégrés afin d’analyser la connectivité réseau à Office 365 et Dynamics 365 à partir de vos agents. Choisissez les services Office 365 et Dynamics 365 que vous souhaitez analyser en cochant les cases à côté d’eux. Pour sélectionnez les agents à partir desquels vous souhaitez effectuer une analyse, cliquez sur **Ajouter des agents**. Si vous ne souhaitez pas utiliser cette fonctionnalité ou la configurer ultérieurement, ne choisissez aucune option et sélectionnez **Enregistrer et continuer**.
+   **Moniteur de connectivité de service**  : Cette fonctionnalité fournit des tests intégrés préconfigurés permettant d’analyser la connectivité réseau à Microsoft 365 et à Dynamics 365 à partir de vos agents. Choisissez les services Microsoft 365 et Dynamics 365 que vous souhaitez analyser en cochant les cases à côté d’eux. Pour sélectionnez les agents à partir desquels vous souhaitez effectuer une analyse, cliquez sur **Ajouter des agents**. Si vous ne souhaitez pas utiliser cette fonctionnalité ou la configurer ultérieurement, ne choisissez aucune option et sélectionnez **Enregistrer et continuer**.
 
    ![Vue Moniteur de connectivité de service](media/network-performance-monitor/npm-service-endpoint-monitor.png)
 
-   **Moniteur ExpressRoute** : sélectionnez **Détecter maintenant** pour détecter tous les peerings privés ExpressRoute connectés aux réseaux virtuels dans l’abonnement Azure lié à cet espace de travail Azure Log Analytics. 
+   **Moniteur ExpressRoute**  : sélectionnez **Détecter maintenant** pour détecter tous les peerings privés ExpressRoute connectés aux réseaux virtuels dans l’abonnement Azure lié à cet espace de travail Azure Log Analytics. 
 
    ![Affichage Moniteur ExpressRoute](media/network-performance-monitor/npm-express-route.png)
 
@@ -194,15 +206,15 @@ Une fois la solution Network Performance Monitor activée, la mosaïque de la so
 
 ### <a name="network-performance-monitor-dashboard"></a>Tableau de bord de l’Analyseur de performances réseau 
 
-* **Principaux événements d’intégrité du réseau** : cette page fournit une liste des alertes et des événements d’intégrité les plus récents du système, ainsi que le temps qui s’est écoulé depuis l’activation de l’événement. Un événement ou une alerte d’intégrité apparaît chaque fois que la valeur de la métrique choisie (perte, latence, temps de réponse ou utilisation de la bande passante) pour la règle de surveillance dépasse le seuil fixé. 
+* **Principaux événements d’intégrité du réseau**  : cette page fournit une liste des alertes et des événements d’intégrité les plus récents du système, ainsi que le temps qui s’est écoulé depuis l’activation de l’événement. Un événement ou une alerte d’intégrité apparaît chaque fois que la valeur de la métrique choisie (perte, latence, temps de réponse ou utilisation de la bande passante) pour la règle de surveillance dépasse le seuil fixé. 
 
-* **Moniteur d’ExpressRoute** : cette page fournit des résumés d’intégrité pour plusieurs connexions de peering ExpressRoute analysées par la solution. La mosaïque **Topologie** indique le nombre de chemins d’accès réseau par le biais des circuits ExpressRoute analysés dans votre réseau. Sélectionnez cette mosaïque pour accéder à l’affichage **Topologie**.
+* **Moniteur ExpressRoute**  : Cette page fournit des récapitulatifs d’intégrité pour plusieurs connexions de peering ExpressRoute supervisées par la solution. La mosaïque **Topologie** indique le nombre de chemins d’accès réseau par le biais des circuits ExpressRoute analysés dans votre réseau. Sélectionnez cette mosaïque pour accéder à l’affichage **Topologie**.
 
-* **Moniteur de connectivité de service** : cette page fournit des récapitulatifs d’intégrité pour les différents tests que vous avez créés. La mosaïque **Topologie** indique le nombre de points de terminaison analysés. Sélectionnez cette mosaïque pour accéder à l’affichage **Topologie**.
+* **Moniteur de connectivité de service**  : Cette page fournit des récapitulatifs sur l’intégrité des différents tests que vous avez créés. La mosaïque **Topologie** indique le nombre de points de terminaison analysés. Sélectionnez cette mosaïque pour accéder à l’affichage **Topologie**.
 
-* **Analyseur de performances** : cette page fournit des résumés d’intégrité pour les liens **Réseau** et les liens **Sous-réseau** analysés par la solution. La mosaïque **Topologie** indique le nombre de chemins d’accès réseau analysés dans votre réseau. Sélectionnez cette mosaïque pour accéder à l’affichage **Topologie**. 
+* **Analyseur de performances**  : Cette page fournit des récapitulatifs d’intégrité pour les liens **Réseau** et **Sous-réseau** que la solution supervise. La mosaïque **Topologie** indique le nombre de chemins d’accès réseau analysés dans votre réseau. Sélectionnez cette mosaïque pour accéder à l’affichage **Topologie**. 
 
-* **Requêtes courantes** : cette page contient une série de requêtes de recherche qui permettent d’extraire directement des données d’analyse du réseau brutes. Vous pouvez utiliser ces requêtes comme point de départ pour créer vos propres requêtes de génération de rapports personnalisés. 
+* **Requêtes courantes**  : Cette page contient une série de requêtes de recherche qui permettent d’extraire directement des données brutes de supervision du réseau. Vous pouvez utiliser ces requêtes comme point de départ pour créer vos propres requêtes de génération de rapports personnalisés. 
 
    ![Tableau de bord de l’Analyseur de performances réseau](media/network-performance-monitor/npm-dashboard.png)
 
@@ -256,9 +268,9 @@ Toutes les données présentées sous forme graphique via le tableau de bord Net
 
 ## <a name="alerts"></a>Alertes
 
-Network Performance Monitor utilise les fonctionnalités d’alerte [d’Azure Monitor](https://docs.microsoft.com/azure/monitoring-and-diagnostics/monitoring-overview-unified-alerts).
+Network Performance Monitor utilise les fonctionnalités d’alerte [d’Azure Monitor](../platform/alerts-overview.md).
 
-Cela signifie que toutes les notifications sont gérées à l’aide de [groupes d’actions](https://docs.microsoft.com/azure/monitoring-and-diagnostics/monitoring-action-groups).  
+Cela signifie que toutes les notifications sont gérées à l’aide de [groupes d’actions](../platform/action-groups.md).  
 
 Si vous êtes un utilisateur NPM créant une alerte via Log Analytics : 
 1. Un lien permettant de vous rediriger vers le portail Azure s’affiche. Cliquez dessus pour accéder au portail.
@@ -269,7 +281,7 @@ Si vous êtes un utilisateur NPM créant une alerte via Log Analytics :
 Si vous êtes un utilisateur NPM créant une alerte via le portail Azure :  
 1. Vous pouvez choisir d’entrer votre adresse e-mail directement ou vous pouvez choisir de créer des alertes via des groupes d’actions.
 2. Si vous choisissez d’entrer votre adresse e-mail directement, un groupe d’actions nommé **NPM Email ActionGroup** est créé auquel l’ID d’e-mail est ajouté.
-3. Si vous choisissez d’utiliser des groupes d’actions, vous devez sélectionner un groupe d’actions précédemment créé. Pour découvrir comment créer un groupe d’actions, cliquez [ici](https://docs.microsoft.com/azure/monitoring-and-diagnostics/monitoring-action-groups#create-an-action-group-by-using-the-azure-portal). 
+3. Si vous choisissez d’utiliser des groupes d’actions, vous devez sélectionner un groupe d’actions précédemment créé. Pour découvrir comment créer un groupe d’actions, cliquez [ici](../platform/action-groups.md#create-an-action-group-by-using-the-azure-portal). 
 4. Une fois que l’alerte a été créée, vous pouvez utiliser le lien de gestion des alertes pour la gérer. 
 
 Chaque fois que vous créez une alerte, NPM crée une règle d’alerte de journal basée sur des requêtes dans Azure Monitor. Cette requête est déclenchée toutes les 5 minutes par défaut. Azure Monitor ne facture pas les 250 premières règles d’alerte de journal créées. Toute alerte dépassant la limite des 250 règles d’alerte de journal est facturée sur la base des [prix des alertes indiqués dans la page des tarifs d’Azure Monitor](https://azure.microsoft.com/pricing/details/monitor/).
@@ -282,9 +294,10 @@ Les informations sur les tarifs sont disponibles [en ligne](network-performance-
 
 ## <a name="provide-feedback"></a>Fournir des commentaires 
 
-* **UserVoice :** vous pouvez publier vos idées concernant les fonctionnalités de Network Performance Monitor que vous aimeriez voir améliorer. Visitez la [page UserVoice](https://feedback.azure.com/forums/267889-log-analytics/category/188146-network-monitoring). 
+* **UserVoice**  : Vous pouvez poster vos idées concernant les fonctionnalités Network Performance Monitor que vous aimeriez voir améliorer. Visitez la [page UserVoice](https://feedback.azure.com/forums/267889-log-analytics/category/188146-network-monitoring). 
 
-* **Rejoignez notre cohorte :** nous sommes toujours ravis d’accueillir de nouveaux clients dans notre cohorte. Dans ce cadre, vous pouvez accéder en avant-première aux nouvelles fonctionnalités et avoir l’opportunité de nous aider à améliorer Network Performance Monitor. Si vous souhaitez y participer, répondez à cette [enquête rapide](https://aka.ms/npmcohort). 
+* **Rejoignez notre cohorte**  : Nous sommes toujours ravis d’accueillir de nouveaux clients dans notre cohorte. Dans ce cadre, vous pouvez accéder en avant-première aux nouvelles fonctionnalités et avoir l’opportunité de nous aider à améliorer Network Performance Monitor. Si vous souhaitez y participer, répondez à cette [enquête rapide](https://aka.ms/npmcohort). 
 
 ## <a name="next-steps"></a>Étapes suivantes 
 En savoir plus sur [Analyseur de performances](network-performance-monitor-performance-monitor.md), [Moniteur de connectivité de service](network-performance-monitor-performance-monitor.md) et [Moniteur ExpressRoute](network-performance-monitor-expressroute.md) 
+

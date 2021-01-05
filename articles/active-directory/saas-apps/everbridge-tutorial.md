@@ -2,25 +2,21 @@
 title: 'Tutoriel : Intégration d’Azure Active Directory à EverBridge | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et Everbridge.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: 58d7cd22-98c0-4606-9ce5-8bdb22ee8b3e
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 04/18/2019
 ms.author: jeedes
-ms.openlocfilehash: 60463a00c6864bed7b3a18e816ef0143d3573782
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 732362ef7099e93697320d8e47180c1207e8cb32
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "67103253"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95995894"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-everbridge"></a>Tutoriel : Intégration d’Azure Active Directory à EverBridge
 
@@ -30,7 +26,7 @@ Lorsque vous intégrez EverBridge à Azure AD, vous pouvez :
 * Contrôler qui a accès à EverBridge dans Azure AD.
 * Permettre aux utilisateurs de se connecter automatiquement à EverBridge avec leur compte Azure AD. Ce contrôle d’accès porte le nom d’authentification unique (SSO).
 * Gérer vos comptes à partir d’un emplacement centralisé à l’aide du portail Azure.
-Pour plus d’informations sur l’intégration d’applications SaaS (software as a service) à Azure AD, consultez la page [Qu’est-ce que l’accès aux applications et l’authentification unique à Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour plus d’informations sur l’intégration d’applications SaaS (software as a service) à Azure AD, consultez la page [Qu’est-ce que l’accès aux applications et l’authentification unique à Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
 ## <a name="prerequisites"></a>Prérequis
@@ -232,11 +228,10 @@ Dans cette section, vous allez créer l’utilisateur de test appelé Britta Sim
 
 Testez la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Quand vous cliquez sur la vignette EverBridge dans le volet d’accès, vous devez être connecté automatiquement au compte EverBridge pour lequel vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Quand vous cliquez sur la vignette EverBridge dans le volet d’accès, vous devez être connecté automatiquement au compte EverBridge pour lequel vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
-
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

@@ -8,24 +8,24 @@ ms.reviewer: sahenry
 ms.service: active-directory
 ms.workload: identity
 ms.subservice: user-help
-ms.topic: conceptual
-ms.date: 01/15/2020
+ms.topic: end-user-help
+ms.date: 09/10/2020
 ms.author: curtand
-ms.openlocfilehash: 3ed79be318319009aabb1b1ef0c42c4021bbbabe
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c47d573dab3e72a956f6f0b9d09a1dafadf0225c
+ms.sourcegitcommit: d2222681e14700bdd65baef97de223fa91c22c55
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77062657"
+ms.lasthandoff: 10/07/2020
+ms.locfileid: "91827766"
 ---
 # <a name="reset-your-work-or-school-password-using-security-info"></a>Réinitialiser votre mot de passe professionnel ou scolaire avec des informations de sécurité
 
-Si vous avez oublié votre mot de passe professionnel ou scolaire, que votre organisation ne vous en a jamais envoyé un ou que votre compte a été verrouillé, vous pouvez utiliser vos informations de sécurité et votre appareil mobile pour le réinitialiser. Votre administrateur doit activer cette fonctionnalité pour vous permettre de configurer vos informations et réinitialiser votre propre mot de passe.
+Si vous avez oublié votre mot de passe professionnel ou scolaire, que votre organisation ne vous en a jamais envoyé un ou que votre compte a été verrouillé, vous pouvez utiliser vos informations de sécurité et votre appareil mobile pour le réinitialiser. Votre administrateur doit activer cette fonctionnalité pour vous permettre de configurer vos informations et [réinitialiser votre propre mot de passe](./active-directory-passwords-reset-register.md).
 
-Si vous connaissez votre mot de passe mais que vous voulez le changer, consultez les sections [Comment modifier votre mot de passe](https://docs.microsoft.com/azure/active-directory/user-help/active-directory-passwords-update-your-own-password#how-to-change-your-password) de cet article.
+Si vous connaissez votre mot de passe et que vous voulez le changer, consultez les étapes dans [Comment modifier votre mot de passe](#how-to-change-your-password) de cet article.
 
 >[!Important]
->Cet article s’adresse aux utilisateurs qui tentent de réinitialiser un mot de passe inconnu ou oublié d’un compte professionnel ou scolaire. Si vous êtes administrateur et que vous recherchez des informations sur la façon d’activer la réinitialisation de mot de passe en libre-service pour vos employés ou d’autres utilisateurs, consultez [Déployer la réinitialisation de mot de passe en libre-service Azure AD et autres articles](https://docs.microsoft.com/azure/active-directory/authentication/howto-sspr-deployment).
+>Cet article s’adresse aux utilisateurs qui tentent de réinitialiser un mot de passe inconnu ou oublié d’un compte professionnel ou scolaire. Si vous êtes administrateur et que vous recherchez des informations sur la façon d’activer la réinitialisation de mot de passe en libre-service pour vos employés ou d’autres utilisateurs, consultez [Déployer la réinitialisation de mot de passe en libre-service Azure AD et autres articles](../authentication/howto-sspr-deployment.md).
 
 ## <a name="how-to-reset-or-unlock-your-password-for-a-work-or-school-account"></a>Comment réinitialiser ou déverrouiller le mot de passe d’un compte professionnel ou scolaire
 
@@ -69,7 +69,7 @@ Vous n’avez peut-être pas accès à votre compte Azure Active Directory (Azur
 
     3. Saisissez et confirmez votre nouveau mot de passe, puis sélectionnez **Terminer**.
 
-- **Réinitialiser votre mot de passe par téléphone.** Envoie un SMS au numéro de téléphone précédemment configuré dans les informations de sécurité. Si votre administrateur a activé la fonctionnalité Informations de sécurité, vous trouverez plus d’informations sur la configuration d’un numéro de téléphone dans l’article [Set up security info to use a phone call (preview)](security-info-setup-phone-number.md) (Configurer les informations de sécurité pour utiliser l’appel téléphonique [préversion]). Si vous n’utilisez pas encore les informations de sécurité, vous trouverez plus d’informations sur la configuration de l’appel téléphonique dans l’article [Configurer mon compte pour la vérification en deux étapes](multi-factor-authentication-end-user-first-time.md).
+- **Réinitialiser votre mot de passe par téléphone.** Passe un appel vocal automatique au numéro de téléphone précédemment configuré dans les informations de sécurité. Si votre administrateur a activé la fonctionnalité Informations de sécurité, vous trouverez plus d’informations sur la configuration d’un numéro de téléphone dans l’article [Set up security info to use a phone call (preview)](security-info-setup-phone-number.md) (Configurer les informations de sécurité pour utiliser l’appel téléphonique [préversion]). Si vous n’utilisez pas encore les informations de sécurité, vous trouverez plus d’informations sur la configuration de l’appel téléphonique dans l’article [Configurer mon compte pour la vérification en deux étapes](multi-factor-authentication-end-user-first-time.md).
 
     1. Sélectionnez **Effectuer un appel sur mon téléphone portable**, saisissez votre numéro de téléphone, puis sélectionnez **Appeler**.
 
@@ -103,11 +103,11 @@ Vous n’avez peut-être pas accès à votre compte Azure Active Directory (Azur
 
      Si vous ne pouvez toujours pas accéder à votre compte, contactez l’administrateur de votre organisation pour obtenir de l’aide.
 
-Après la réinitialisation du mot de passe, vous recevrez peut-être un courrier de confirmation provenant d’un compte tel que « Microsoft de la part de \<*votre entreprise*> ». Si vous recevez un e-mail de ce type sans avoir récemment réinitialisé votre mot de passe, contactez immédiatement l’administrateur de votre organisation.
+Après la réinitialisation du mot de passe, vous pouvez recevoir un e-mail de confirmation provenant d’un compte tel que « Microsoft de la part de \<*your_organization*> ». Si vous recevez un e-mail de ce type sans avoir récemment réinitialisé votre mot de passe, contactez immédiatement l’administrateur de votre organisation.
 
 ## <a name="how-to-change-your-password"></a>Comment modifier votre mot de passe
 
-Si vous souhaitez simplement modifier votre mot de passe, vous pouvez le faire via le portail Office 365, le volet d’accès Azure ou la page de connexion Windows 10.
+Si vous souhaitez simplement modifier votre mot de passe, vous pouvez le faire par le biais du portail Office 365, du portail Mes applications ou de la page de connexion Windows 10.
 
 ### <a name="to-change-your-password-using-the-office-365-portal"></a>Pour modifier votre mot de passe à partir du portail Office 365
 
@@ -121,11 +121,11 @@ Utilisez cette méthode si vous avez l’habitude d’accéder à vos applicatio
 
 4. Saisissez votre ancien mot de passe, créez un nouveau mot de passe et confirmez-le, puis cliquez sur **Soumettre**.
 
-### <a name="to-change-your-password-from-the-azure-access-panel"></a>Pour modifier votre mot de passe à partir du volet d’accès Azure
+### <a name="to-change-your-password-from-the-my-apps-portal"></a>Pour modifier votre mot de passe à partir du portail Mes applications
 
-Utilisez cette méthode si vous avez l’habitude d’accéder à vos applications à partir du volet d’accès Azure (MyApps) :
+Appliquez cette méthode si vous avez l’habitude d’accéder à vos applications à partir du portail Mes applications :
 
-1. Connectez-vous au [volet d’accès Azure](https://myapps.microsoft.com/) en utilisant votre mot de passe existant.
+1. Connectez-vous au [portail Mes applications](https://myapps.microsoft.com/) en utilisant votre mot de passe existant.
 
 2. Sélectionnez votre profil en haut à droite de la fenêtre, puis sélectionnez **Profil**.
 
@@ -164,6 +164,6 @@ Voici quelques cas d'erreur courants et leurs solutions :
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- Découvrez les informations de sécurité avec l’article [Security info (preview) overview](user-help-security-info-overview.md) (Vue d’ensemble des informations de sécurité [préversion]).
+- Découvrez les informations de sécurité avec l’article [Security info (preview) overview](./security-info-setup-signin.md) (Vue d’ensemble des informations de sécurité [préversion]).
 
 - Si vous tentez de récupérer un compte personnel comme Xbox, hotmail.com ou outlook.com, essayez les suggestions fournies dans l’article [Quand vous ne pouvez pas vous connecter à votre compte Microsoft](https://support.microsoft.com/help/12429/microsoft-account-sign-in-cant).

@@ -2,18 +2,18 @@
 title: 'Tutoriel : Router du trafic vers des points de terminaison pondérés - Azure Traffic Manager'
 description: Ce didacticiel explique comment acheminer le trafic vers des points de terminaison pondérés à l’aide de Traffic Manager.
 services: traffic-manager
-author: rohinkoul
+author: duongau
 Customer intent: As an IT Admin, I want to distribute traffic based on the weight assigned to a website endpoint so that I can control the user traffic to a given website.
 ms.service: traffic-manager
 ms.topic: tutorial
-ms.date: 10/15/2018
-ms.author: rohink
-ms.openlocfilehash: a4738b2e36786cd627f53af3e36bd8f1e3fbc375
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.date: 10/19/2020
+ms.author: duau
+ms.openlocfilehash: 55c316a370b9e44e906e48b4716201384567c9c2
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "76939480"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96003784"
 ---
 # <a name="tutorial-control-traffic-routing-with-weighted-endpoints-by-using-traffic-manager"></a>Tutoriel : Contrôler le routage du trafic avec des points de terminaison pondérés à l’aide de Traffic Manager
 
@@ -201,11 +201,13 @@ Dans cette section, vous pouvez voir Traffic Manager en action.
 
 7. Répétez les étapes 1 à 6 sur la machine virtuelle myVMWestEurope pour voir la réponse du site web pondéré.
 
-## <a name="delete-the-traffic-manager-profile"></a>Supprimer le profil Traffic Manager
+## <a name="clean-up-resources"></a>Nettoyer les ressources
 
 Quand vous n’avez plus besoin des groupes de ressources que vous avez créés dans ce didacticiel, vous pouvez les supprimer. Pour ce faire, sélectionnez le groupe de ressources (**ResourceGroupTM1** ou **ResourceGroupTM2**), puis **Supprimer**.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
+Pour plus d’informations sur les méthodes de routage, consultez :
+
 > [!div class="nextstepaction"]
-> [Acheminer le trafic vers des points de terminaison spécifiques en fonction de l’emplacement géographique de l’utilisateur](traffic-manager-configure-geographic-routing-method.md)
+> [Méthode de routage du trafic](traffic-manager-routing-methods.md)

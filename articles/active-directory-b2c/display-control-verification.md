@@ -11,12 +11,12 @@ ms.topic: reference
 ms.date: 12/10/2019
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: ff2a8ad05e26ea31fc8100d4000171313881f4e1
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: bd90be6d93dc5ca399ac87daba0ca44fa7e88ff8
+ms.sourcegitcommit: 6ab718e1be2767db2605eeebe974ee9e2c07022b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78188781"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94532492"
 ---
 # <a name="verification-display-control"></a>Contrôle d’affichage de vérification
 
@@ -33,8 +33,6 @@ Le contrôle d’affichage de vérification comporte deux étapes (actions) :
 1. Après l’envoi du code, l’utilisateur lit le message, saisit le code de vérification dans le contrôle fourni par le contrôle d’affichage, puis sélectionne **Vérifier le code**. En sélectionnant **Vérifier le code**, l’action **VerifyCode** est exécutée pour vérifier le code associé à l’adresse. Si l’utilisateur sélectionne **Envoyer un nouveau code**, la première action est exécutée à nouveau.
 
     ![Exemple de page pour l’action de vérification du code](media/display-control-verification/display-control-verification-email-action-02.png)
-
-[!INCLUDE [b2c-public-preview-feature](../../includes/active-directory-b2c-public-preview.md)]
 
 ## <a name="verificationcontrol-required-elements"></a>Éléments VerificationControl requis
 
@@ -53,7 +51,7 @@ Dans l’exemple ci-dessous, une zone de texte **e-mail** est affichée sur la p
 
 L’utilisateur entre ensuite la valeur **verificationCode** puis sélectionne **VerifyCode** pour déclencher l'action **VerifyCode** dans le back end. Si toutes les validations sont confirmées, le processus **VerificationControl** est considéré comme terminé et l’utilisateur peut passer à l’étape suivante.
 
-```XML
+```xml
 <DisplayControl Id="emailVerificationControl" UserInterfaceControlType="VerificationControl">
   <DisplayClaims>
     <DisplayClaim ClaimTypeReferenceId="email"  Required="true" />

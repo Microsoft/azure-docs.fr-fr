@@ -3,7 +3,7 @@ title: Documentation Personalizer
 summary: Apprenez à utiliser Personalizer pour permettre à votre application de choisir la meilleure expérience à montrer à vos utilisateurs, en apprenant de leur comportement en temps réel.
 metadata:
   ms.topic: landing-page
-  ms.date: 05/01/2020
+  ms.date: 06/11/2020
   ms.author: nitinme
   author: nitinme
   ms.service: cognitive-services
@@ -12,12 +12,12 @@ metadata:
   title: Documentation Personalizer
   titleSuffix: Azure Cognitive Services
   description: Azure Personalizer est un service d’API cloud qui vous permet de choisir la meilleure expérience à montrer à vos utilisateurs, en apprenant de leur comportement en temps réel.
-  ms.openlocfilehash: ef18921e9211bb1a3659fffc84bde922d500d0b0
-  ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+  ms.openlocfilehash: f4d263e551360b326fbe849e4cb62347e8125849
+  ms.sourcegitcommit: 22da82c32accf97a82919bf50b9901668dc55c97
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 05/19/2020
-  ms.locfileid: "83586318"
+  ms.lasthandoff: 11/08/2020
+  ms.locfileid: "94368132"
 landingContent:
 - title: À propos de Personalizer
   linkLists:
@@ -45,6 +45,12 @@ landingContent:
       url: concepts-features.md
     - text: Guide pratique pour calculer une récompense
       url: concept-rewards.md
+  - linkListType: tutorial
+    links:
+    - text: Utiliser Personalizer dans une application web .NET
+      url: tutorial-use-personalizer-web-app.md
+    - text: Utiliser Personalizer avec un fichier Azure Notebooks
+      url: tutorial-use-azure-notebook-generate-loop-data.md
   - linkListType: how-to-guide
     links:
     - text: Guide pratique pour créer et configurer Personalizer
@@ -52,27 +58,27 @@ landingContent:
   - linkListType: quickstart
     links:
     - text: Utiliser le kit de développement logiciel (SDK)
-      url: sdk-learning-loop.md
+      url: ./quickstart-personalizer-sdk.md
 - title: Développement avec Personalizer
   linkLists:
   - linkListType: get-started
     links:
     - text: Développer une boucle Personalizer avec .NET
-      url: sdk-learning-loop.md?pivots=programming-language-csharp
+      url: ./quickstart-personalizer-sdk.md?pivots=programming-language-csharp
     - text: Package NuGet
       url: https://www.nuget.org/packages/Microsoft.Azure.CognitiveServices.Personalizer/0.8.0-preview
     - text: Documentation de référence sur NuGet
-      url: https://docs.microsoft.com/dotnet/api/microsoft.azure.cognitiveservices.personalizer?view=azure-dotnet-preview&viewFallbackFrom=azure-dotnet
+      url: /dotnet/api/microsoft.azure.cognitiveservices.personalizer?view=azure-dotnet-preview&viewFallbackFrom=azure-dotnet
   - linkListType: get-started
     links:
     - text: Développer une boucle Personalizer avec Node.js
-      url: sdk-learning-loop.md?pivots=programming-language-javascript
+      url: ./quickstart-personalizer-sdk.md?pivots=programming-language-javascript
     - text: Package NPM
       url: https://www.npmjs.com/package/@azure/cognitiveservices-personalizer/v/1.0.0
   - linkListType: get-started
     links:
     - text: Développer une boucle Personalizer avec Python
-      url: sdk-learning-loop.md?pivots=programming-language-python
+      url: ./quickstart-personalizer-sdk.md?pivots=programming-language-python
     - text: Package Pypi
       url: https://pypi.org/project/azure-cognitiveservices-personalizer/
   - linkListType: get-started
@@ -117,9 +123,7 @@ landingContent:
   linkLists:
   - linkListType: reference
     links:
+    - text: Options d’aide et de support
+      url: ../cognitive-services-support-options.md?context=/azure/cognitive-services/personalizer/context/context
     - text: Dépannage
       url: troubleshooting.md
-    - text: Poser des questions sur Stack Overflow
-      url: https://stackoverflow.com/questions/tagged/personalizer
-    - text: Influencer le service avec UserVoice
-      url: https://cognitive.uservoice.com/forums/921562-personalizer

@@ -11,14 +11,14 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 05/18/2020
+ms.date: 12/02/2020
 ms.author: mnayak
-ms.openlocfilehash: 0ae06a1c3d486b5d5998b4c6d050d86f50910a0a
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.openlocfilehash: c1c2c5f27143be7fc10269c948bee9d5465d565a
+ms.sourcegitcommit: 5b93010b69895f146b5afd637a42f17d780c165b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83595548"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96530440"
 ---
 # <a name="what-is-routing-preference-preview"></a>Qu’est-ce qu’une préférence de routage (préversion) ?
 
@@ -70,25 +70,13 @@ Pour le stockage, les points de terminaison principaux utilisent toujours le **r
 * Azure Data Lake
 
 ## <a name="pricing"></a>Tarifs
-La différence de prix entre les deux options est reflétée dans la tarification du transfert de données de sortie Internet. Le prix du transfert de données via le **réseau Microsoft mondial** est identique au prix de sortie Internet actuel. Pour accéder aux dernières informations sur la tarification, visitez la [page sur les tarifs de bande passante Azure](https://azure.microsoft.com/pricing/details/bandwidth/). Le routage via l’**Internet public** est facturé comme indiqué dans le tableau ci-dessous :
-
-| Région source de sortie | 0-5 Go/mois | 5 Go-10 To/mois | 10-50 To/mois | 50-150 To/mois | 150-500 To/mois |
-| --- | --- | --- | --- | --- | --- |
-| Zone 1 | 0 USD/Go | 0,085 USD/Go | 0,065 USD/Go | 0,06 USD/Go | 0,04 USD/Go |
-| Zone 2 | 0 USD/Go | 0,11 USD/Go | 0,075 USD/Go | 0,07 USD/Go | 0,06 USD/Go  |
-
-Pour obtenir un volume mensuel supérieur à 500 To, [contactez-nous](https://azure.microsoft.com/overview/sales-number/).
-* Zone 1 : Australie Centrale, Australie Centre 2, Canada Centre, Canada Est, Europe Nord, Europe Ouest, France Centre, France Sud, Allemagne Nord (public), Allemagne Centre-Ouest (public), Norvège Est, Norvège Ouest, Suisse Nord, Suisse Ouest, Royaume-Uni Sud, Royaume-Uni Ouest, USA Centre, USA Est, USA Est 2, USA Centre Nord, USA Centre Sud, USA Ouest, USA Ouest 2 et USA Centre-Ouest.
-
-* Zone 2 : Asie Est, Asie Sud-Est, Australie Est, Australie Sud-Est, Inde Centre, Inde Sud, Inde Ouest, Japon Est, Japon Ouest, Corée Centre et Corée Sud.
-
-* Zone 3 : Brésil Sud, Afrique du Sud Nord, Afrique du Sud Ouest, Émirats arabes unis Centre et Émirats arabes unis Nord.
+La différence de prix entre les deux options est reflétée dans la tarification du transfert de données de sortie Internet. Le prix du transfert de données via le **réseau Microsoft mondial** est identique au prix de sortie Internet actuel. Pour accéder aux dernières informations sur la tarification, visitez la [page sur les tarifs de bande passante Azure](https://azure.microsoft.com/pricing/details/bandwidth/). 
 
 ## <a name="availability"></a>Disponibilité
 
 La prise en charge de préférence de routage est disponible dans les régions suivantes pour des services tels que les machines virtuelles et l’équilibreur de charge accessible via Internet qui utilisent une adresse IP publique pour la sortie Internet : Europe Nord, Europe Ouest, France Sud, Royaume-Uni Sud, USA Est, USA Centre Nord, USA Centre Sud, USA Ouest, USA Centre-Ouest, Asie Sud-Est, Allemagne Centre-Ouest, Suisse Ouest, Japon Est et Japon Ouest.
 
-La prise en charge de préférence de routage pour le compte de stockage est disponible dans les régions Azure suivantes : France Sud, USA Centre Nord et USA Centre-Ouest.
+La prise en charge de préférence de routage pour le compte de stockage est disponible dans les régions Azure suivantes : USA Centre Nord, USA Centre-Ouest, USA Centre Sud, USA Est, USA Ouest, Europe Nord, France Sud, Allemagne Centre-Ouest, Suisse Ouest, Asie Sud-Est, Japon Est et Japon Ouest.
 ## <a name="limitations"></a>Limites
 
 * La préférence de routage est compatible uniquement avec la référence (SKU) standard d’adresse IP publique. La référence (SKU) de base d’adresse IP publique n’est pas prise en charge.

@@ -12,10 +12,10 @@ ms.reviewer: douglasl
 ms.custom: seo-lt-2019
 ms.date: 08/01/2018
 ms.openlocfilehash: 4620ef5b6a72afbe86b0ace33328a769eab31e5e
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
+ms.lasthandoff: 10/09/2020
 ms.locfileid: "81418267"
 ---
 # <a name="copy-data-from-amazon-marketplace-web-service-using-azure-data-factory"></a>Copie de données du service web Amazon Marketplace à l’aide d’Azure Data Factory

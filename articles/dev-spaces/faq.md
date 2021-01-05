@@ -5,20 +5,22 @@ ms.date: 01/28/2020
 ms.topic: conceptual
 description: Obtenez des réponses aux questions les plus fréquemment posées sur Azure Dev Spaces.
 keywords: 'Docker, Kubernetes, Azure, AKS, Azure Kubernetes Service, conteneurs, Helm, service Mesh, routage du service Mesh, kubectl, k8s '
-ms.openlocfilehash: b5a380f20640b9bc328aa30289ff7f915cc0b73c
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: e83bed86714e4b92c63f4e7b7eb55df7a2a7eaff
+ms.sourcegitcommit: 65db02799b1f685e7eaa7e0ecf38f03866c33ad1
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81414308"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96548832"
 ---
 # <a name="frequently-asked-questions-about-azure-dev-spaces"></a>Forum aux questions sur Azure Dev Spaces
+
+[!INCLUDE [Azure Dev Spaces deprecation](../../includes/dev-spaces-deprecation.md)]
 
 Cet article répond aux questions fréquemment posées sur Azure Dev Spaces.
 
 ## <a name="what-versions-of-kubernetes-are-supported-for-azure-dev-spaces"></a>Quelles sont les versions de Kubernetes prises en charge pour Azure Dev Spaces ?
 
-Actuellement, Azure Dev Spaces prend en charge toutes les [versions à disponibilité générale de Kubernetes dans AKS][aks-supported-k8s].
+Azure Dev Spaces accepte [toutes les versions de Kubernetes en disponibilité générale prises en charge à l’heure actuelle dans AKS jusqu’à la version 1.18][aks-supported-k8s]. La version 1.19 et les versions ultérieures de Kubernetes sur AKS utilisent comme runtime de conteneur ContainerD, qui ne fonctionne pas avec Azure Dev Spaces.
 
 ## <a name="which-azure-regions-currently-provide-azure-dev-spaces"></a>Quelles régions Azure proposent actuellement Azure Dev Spaces ?
 
@@ -38,12 +40,9 @@ Lorsque vous utilisez votre propre fichier Dockerfile ou graphique Helm, les lim
 * Si vous modifiez quoi que ce soit avec entrée, vous pouvez également mettre à jour votre graphique Helm pour utiliser la solution d'entrée fournie par Azure Dev Spaces.
 * Si vous souhaitez utiliser les [fonctionnalités de routage fournies par Azure Dev Spaces][dev-spaces-routing], tous les services d'un projet individuel doivent tenir dans un seul espace de noms Kubernetes et être déployés sous une dénomination simple, par exemple *service-a*. Dans les graphiques Helm standard, cette mise à jour de la dénomination peut être effectuée en spécifiant une valeur pour la propriété *fullnameOverride*.
 
-Pour comparer votre propre fichier Dockerfile ou graphique Helm à une version existante qui fonctionne avec Azure Dev Spaces, passez en revue les fichiers générés dans le [guide de démarrage rapide][quickstart-cli].
-
-
 ## <a name="can-i-modify-the-files-generated-by-azure-dev-spaces"></a>Puis-je modifier les fichiers générés par Azure Dev Spaces ?
 
-Oui, vous pouvez modifier le fichier *azds.yaml*, le fichier Dockerfile et le graphique Helm[ générés par Azure Dev Spaces lors de la préparation de votre projet][dev-spaces-prep]. La modification de ces fichiers modifie la façon dont le projet est généré et exécuté.
+Oui, vous pouvez modifier le fichier *azds.yaml*, le fichier Dockerfile et le graphique Helm [ générés par Azure Dev Spaces lors de la préparation de votre projet][dev-spaces-prep]. La modification de ces fichiers modifie la façon dont le projet est généré et exécuté.
 
 ## <a name="can-i-use-azure-dev-spaces-without-a-public-ip-address"></a>Puis-je utiliser Azure Dev Spaces sans adresse IP publique ?
 
@@ -73,9 +72,9 @@ Oui. Vous pouvez utiliser Azure Dev Spaces sur des clusters AKS avec les [plages
 
 Oui, vous pouvez utiliser Azure Dev Spaces sur des clusters AKS avec le [trafic de sortie restreint pour les nœuds de cluster][aks-restrict-egress-traffic] activé une fois que les noms de domaine complets appropriés ont été autorisés. Pour plus d’informations sur l’utilisation de clusters AKS avec un trafic de sortie restreint pour les nœuds de cluster activé avec Azure Dev Spaces sont disponibles [ici](configure-networking.md#ingress-and-egress-network-traffic-requirements).
 
-## <a name="can-i-use-azure-dev-spaces-on-rbac-enabled-aks-clusters"></a>Puis-je utiliser Azure Dev Spaces sur des clusters AKS compatibles avec RBAC ?
+## <a name="can-i-use-azure-dev-spaces-on-kubernetes-rbac-enabled-aks-clusters"></a>Puis-je utiliser Azure Dev Spaces sur des clusters AKS compatibles avec RBAC Kubernetes ?
 
-Oui, vous pouvez utiliser Azure Dev Spaces sur des clusters AKS compatibles ou non avec RBAC.
+Oui, vous pouvez utiliser Azure Dev Spaces sur des clusters AKS avec ou sans le contrôle d’accès en fonction du rôle Kubernetes (RBAC Kubernetes) activé.
 
 ## <a name="what-happens-when-i-enable-ingress-for-project-in-visual-studio"></a>Que se passe-t-il lorsque j’active l’entrée pour le projet dans Visual Studio ?
 
@@ -99,13 +98,12 @@ Dans Visual Studio, il est possible de configurer des solutions .NET Core à des
 
 [aks-auth-range]: ../aks/api-server-authorized-ip-ranges.md
 [aks-auth-range-create]: ../aks/api-server-authorized-ip-ranges.md#create-an-aks-cluster-with-api-server-authorized-ip-ranges-enabled
-[aks-auth-range-ranges]: https://github.com/Azure/dev-spaces/tree/master/public-ips
 [aks-auth-range-update]: ../aks/api-server-authorized-ip-ranges.md#update-a-clusters-api-server-authorized-ip-ranges
 [aks-migration]: ../aks/aks-migration.md
 [aks-pod-managed-id]: ../aks/developer-best-practices-pod-security.md#use-pod-managed-identities
 [aks-pod-managed-id-uninstall]: https://github.com/Azure/aad-pod-identity#uninstall-notes
 [aks-restrict-egress-traffic]: ../aks/limit-egress-traffic.md
-[aks-supported-k8s]: ../aks/supported-kubernetes-versions.md#list-currently-supported-versions
+[aks-supported-k8s]: ../aks/supported-kubernetes-versions.md#azure-portal-and-cli-versions
 [bike-sharing]: https://github.com/Azure/dev-spaces/tree/master/samples/BikeSharingApp
 [dev-spaces-pod-managed-id-steps]: troubleshooting.md#error-no-azureassignedidentity-found-for-podazdsazds-webhook-deployment-id-in-assigned-state
 [dev-spaces-prep]: how-dev-spaces-works-prep.md
@@ -116,7 +114,6 @@ Dans Visual Studio, il est possible de configurer des solutions .NET Core à des
 [ingress-https-traefik]: how-to/ingress-https-traefik.md#configure-the-traefik-ingress-controller-to-use-https
 [istio]: https://istio.io/
 [linkerd]: https://linkerd.io/
-[quickstart-cli]: quickstart-cli.md
 [supported-regions]: https://azure.microsoft.com/global-infrastructure/services/?products=kubernetes-service
 [vs-code-multi-root-workspaces]: https://code.visualstudio.com/docs/editor/multi-root-workspaces
 [windows-containers]: how-to/run-dev-spaces-windows-containers.md

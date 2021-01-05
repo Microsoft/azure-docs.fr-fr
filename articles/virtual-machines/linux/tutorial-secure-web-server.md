@@ -13,13 +13,13 @@ ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
 ms.date: 04/30/2018
 ms.author: cynthn
-ms.custom: mvc
-ms.openlocfilehash: ac581b45f3aefe7a386f25c978bfc09adda4e39f
-ms.sourcegitcommit: b55d7c87dc645d8e5eb1e8f05f5afa38d7574846
+ms.custom: mvc, devx-track-azurecli
+ms.openlocfilehash: 4a790c51cd0caa2c81275e7eafdd663f2f2f0116
+ms.sourcegitcommit: 8c7f47cc301ca07e7901d95b5fb81f08e6577550
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81460475"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92740205"
 ---
 # <a name="tutorial-secure-a-web-server-on-a-linux-virtual-machine-in-azure-with-tlsssl-certificates-stored-in-key-vault"></a>Tutoriel : Sécuriser un serveur web sur une machine virtuelle Linux dans Azure avec des certificats TLS/SSL stockés dans Key Vault
 Pour sécuriser les serveurs web, vous pouvez utiliser un certificat TLS (Transport Layer Security), anciennement SSL (Secure Sockets Layer), et chiffrer ainsi le trafic web. Ces certificats TLS/SSL peuvent être stockés dans Azure Key Vault et autoriser des déploiements sécurisés de certificats sur des machines virtuelles Linux dans Azure. Ce didacticiel vous montre comment effectuer les opérations suivantes :
@@ -30,7 +30,7 @@ Pour sécuriser les serveurs web, vous pouvez utiliser un certificat TLS (Transp
 > * Créer une machine virtuelle et installer le serveur web NGINX
 > * Injecter le certificat dans la machine virtuelle et configurer NGINX à l’aide d’une liaison TLS
 
-Ce tutoriel utilise l’interface CLI disponible dans [Azure Cloud Shell](https://docs.microsoft.com/azure/cloud-shell/overview), qui est constamment mise à jour vers la dernière version. Pour ouvrir Cloud Shell, sélectionnez **Essayer** en haut d’un bloc de code.
+Ce tutoriel utilise l’interface CLI disponible dans [Azure Cloud Shell](../../cloud-shell/overview.md), qui est constamment mise à jour vers la dernière version. Pour ouvrir Cloud Shell, sélectionnez **Essayer** en haut d’un bloc de code.
 
 Si vous choisissez d’installer et d’utiliser l’interface de ligne de commande localement, ce didacticiel nécessite que vous exécutiez Azure CLI version 2.0.30 ou ultérieure. Exécutez `az --version` pour trouver la version. Si vous devez installer ou mettre à niveau, voir [Installer Azure CLI]( /cli/azure/install-azure-cli).
 
@@ -42,13 +42,13 @@ Au lieu d’utiliser une image de machine virtuelle personnalisée qui inclut de
 
 
 ## <a name="create-an-azure-key-vault"></a>Créer un Azure Key Vault
-Avant de créer un coffre de clés et des certificats, créez un groupe de ressources avec [az group create](/cli/azure/group). L’exemple suivant crée un groupe de ressources nommé *myResourceGroupSecureWeb* à l’emplacement *eastus* :
+Avant de créer un coffre de clés et des certificats, créez un groupe de ressources avec [az group create](/cli/azure/group). L’exemple suivant crée un groupe de ressources nommé *myResourceGroupSecureWeb* à l’emplacement *eastus*  :
 
 ```azurecli-interactive 
 az group create --name myResourceGroupSecureWeb --location eastus
 ```
 
-Ensuite, créez un coffre de clés avec la commande [az keyvault create](/cli/azure/keyvault) et activez son utilisation lors du déploiement d’une machine virtuelle. Chaque Key Vault requiert un nom unique en minuscules. Remplacez *\<mykeyvault>* dans l’exemple suivant par le nom unique de votre propre coffre de clés :
+Ensuite, créez un coffre de clés avec la commande [az keyvault create](/cli/azure/keyvault) et activez son utilisation lors du déploiement d’une machine virtuelle. Chaque Key Vault requiert un nom unique en minuscules. Remplacez *\<mykeyvault>* dans l’exemple suivant par le nom unique de votre propre Key Vault :
 
 ```azurecli-interactive 
 keyvault_name=<mykeyvault>
@@ -135,7 +135,7 @@ az vm open-port \
 
 
 ### <a name="test-the-secure-web-app"></a>Tester l’application web sécurisée
-Vous pouvez maintenant ouvrir un navigateur web et entrer *https:\/\/\<adresse_IP_publique>* dans la barre d’adresse. Indiquez votre propre adresse IP publique à partir du processus de création de la machine virtuelle. Acceptez l’avertissement de sécurité si vous avez utilisé un certificat auto-signé :
+Vous pouvez maintenant ouvrir un navigateur web et entrer *https:\/\/\<publicIpAddress>* dans la barre d’adresse. Indiquez votre propre adresse IP publique à partir du processus de création de la machine virtuelle. Acceptez l’avertissement de sécurité si vous avez utilisé un certificat auto-signé :
 
 ![Accepter l’avertissement de sécurité du navigateur web](./media/tutorial-secure-web-server/browser-warning.png)
 

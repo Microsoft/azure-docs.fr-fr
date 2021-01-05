@@ -3,18 +3,18 @@ title: Gérer les bases de données SAP HANA sauvegardées sur des machines virt
 description: Dans cet article, découvrez les tâches courantes de gestion et de supervision des bases de données SAP HANA qui s’exécutent sur des machines virtuelles Azure.
 ms.topic: conceptual
 ms.date: 11/12/2019
-ms.openlocfilehash: 89fd7f23163d301817e767771257d9bc6f4ed526
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 4c8dc80c7b48217e40d5325b75752e21174ecaae
+ms.sourcegitcommit: 6a770fc07237f02bea8cc463f3d8cc5c246d7c65
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79480060"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95811947"
 ---
 # <a name="manage-and-monitor-backed-up-sap-hana-databases"></a>Gérer et superviser des bases de données SAP HANA sauvegardées
 
-Cet article décrit les tâches courantes de gestion et de supervision des bases de données SAP HANA s’exécutant sur une machine virtuelle Azure et sauvegardées dans un coffre Recovery Services par le service [Sauvegarde Azure](https://docs.microsoft.com/azure/backup/backup-overview). Vous apprendrez à superviser des travaux et des alertes, déclencher une sauvegarde à la demande, modifier des stratégies, arrêter et reprendre la protection de la base de données, ainsi que désinscrire une machine virtuelle des sauvegardes.
+Cet article décrit les tâches courantes de gestion et de supervision des bases de données SAP HANA s’exécutant sur une machine virtuelle Azure et sauvegardées dans un coffre Recovery Services par le service [Sauvegarde Azure](./backup-overview.md). Vous apprendrez à superviser des travaux et des alertes, déclencher une sauvegarde à la demande, modifier des stratégies, arrêter et reprendre la protection de la base de données, ainsi que désinscrire une machine virtuelle des sauvegardes.
 
-Si vous n’avez pas encore configuré de sauvegardes pour vos bases de données SAP HANA, consultez [Sauvegarder des bases de données SAP HANA sur des machines virtuelles Azure](https://docs.microsoft.com/azure/backup/backup-azure-sap-hana-database).
+Si vous n’avez pas encore configuré de sauvegardes pour vos bases de données SAP HANA, consultez [Sauvegarder des bases de données SAP HANA sur des machines virtuelles Azure](./backup-azure-sap-hana-database.md).
 
 ## <a name="monitor-manual-backup-jobs-in-the-portal"></a>Surveiller les travaux de sauvegarde manuelles sur le portail
 
@@ -26,7 +26,7 @@ Les travaux que vous voyez sur ce portail incluent les opérations de découvert
 
 ![Liste des travaux de sauvegarde](./media/sap-hana-db-manage/backup-jobs-list.png)
 
-Pour en savoir plus sur la supervision, consultez [Supervision dans le Portail Azure](https://docs.microsoft.com/azure/backup/backup-azure-monitoring-built-in-monitor) et [Supervision à l’aide d’Azure Monitor](https://docs.microsoft.com/azure/backup/backup-azure-monitoring-use-azuremonitor).
+Pour en savoir plus sur la supervision, consultez [Supervision dans le Portail Azure](./backup-azure-monitoring-built-in-monitor.md) et [Supervision à l’aide d’Azure Monitor](./backup-azure-monitoring-use-azuremonitor.md).
 
 ## <a name="view-backup-alerts"></a>Afficher les alertes de sauvegarde
 
@@ -41,7 +41,7 @@ Les alertes sont un moyen simple de superviser les sauvegardes des bases de donn
 
   ![Liste des alertes de sauvegarde](./media/sap-hana-db-manage/backup-alerts-list.png)
 
-* Cliquez sur les alertes pour afficher plus de détails :
+* Sélectionnez les alertes pour afficher plus de détails :
 
   ![Détails de l’alerte](./media/sap-hana-db-manage/alert-details.png)
 
@@ -51,7 +51,7 @@ Aujourd’hui, Sauvegarde Azure permet d’envoyer des alertes par e-mail. Ces a
 * Consolidées au niveau de la base de données par code d’erreur.
 * Envoyées uniquement pour le premier échec de sauvegarde d’une base de données.
 
-Pour en savoir plus sur la supervision, consultez [Supervision dans le Portail Azure](https://docs.microsoft.com/azure/backup/backup-azure-monitoring-built-in-monitor) et [Supervision à l’aide d’Azure Monitor](https://docs.microsoft.com/azure/backup/backup-azure-monitoring-use-azuremonitor).
+Pour en savoir plus sur la supervision, consultez [Supervision dans le Portail Azure](./backup-azure-monitoring-built-in-monitor.md) et [Supervision à l’aide d’Azure Monitor](./backup-azure-monitoring-use-azuremonitor.md).
 
 ## <a name="management-operations"></a>Opérations de gestion
 
@@ -61,35 +61,64 @@ Sauvegarde Azure simplifie la gestion d’une base de données SAP HANA sauvegar
 
 Les sauvegardes s’exécutent conformément à la planification de la stratégie. Vous pouvez exécuter une sauvegarde à la demande en procédant comme suit :
 
-1. Dans le menu du coffre, cliquez sur **Éléments de sauvegarde**.
-2. Dans **Éléments de sauvegarde**, sélectionnez la machine virtuelle exécutant la base de données SAP HANA, puis cliquez sur **Sauvegarder maintenant**.
-3. Dans **Sauvegarder maintenant**, utilisez le contrôle de calendrier pour sélectionner le dernier jour de rétention du point de récupération. Cliquez ensuite sur **OK**.
+1. Dans le menu du coffre, sélectionnez **Éléments de sauvegarde**.
+2. Dans **Éléments de sauvegarde**, sélectionnez la machine virtuelle exécutant la base de données SAP HANA, puis **Sauvegarder maintenant**.
+3. Dans **Sauvegarder maintenant**, choisissez le type de sauvegarde que vous souhaitez effectuer. Sélectionnez ensuite **OK**. Cette sauvegarde sera conservée en fonction de la stratégie associée à cet élément de sauvegarde.
 4. Surveiller les notifications du portail. Vous pouvez surveiller la progression du travail dans le tableau de bord du coffre > **Travaux de sauvegarde** > **En cours d’exécution**. Selon la taille de votre base de données, la création de la sauvegarde initiale peut prendre un certain temps.
+
+Par défaut, la période de rétention des sauvegardes à la demande est de 45 jours.
 
 ### <a name="hana-native-client-integration"></a>Intégration du client natif HANA
 
-Désormais, les sauvegardes complètes à la demande déclenchées à partir d’un client natif HANA s’affichent en tant que sauvegardes complètes dans la page **Éléments de sauvegarde** .
+#### <a name="backup"></a>Sauvegarde
+
+Les sauvegardes à la demande déclenchées à partir d’un des clients natifs HANA (pour **Backint**) s’affichent dans la liste de sauvegardes sur la page **Éléments de sauvegarde**.
 
 ![Dernières sauvegardes exécutées](./media/sap-hana-db-manage/last-backups.png)
 
-Ces sauvegardes complètes ad hoc figurent aussi dans la liste des points de restauration pour la restauration.
+Vous pouvez également [surveiller ces sauvegardes](#monitor-manual-backup-jobs-in-the-portal) dans la page **Travaux de sauvegarde**.
+
+Ces sauvegardes complètes figurent aussi dans la liste des points de restauration pour restauration.
 
 ![Liste des points de restauration](./media/sap-hana-db-manage/list-restore-points.png)
 
-### <a name="run-sap-hana-native-client-backup-on-a-database-with-azure-backup-enabled"></a>Exécuter une sauvegarde de client natif SAP HANA sur une base de données pour laquelle la sauvegarde Azure est activée
+#### <a name="restore"></a>Restaurer
+
+Les restaurations déclenchées à partir de clients HANA natifs (à l’aide de **Nackint**) pour restaurer sur la même machine peuvent être [surveillées](#monitor-manual-backup-jobs-in-the-portal) à partir de la page **Travaux de sauvegarde**.
+
+### <a name="run-sap-hana-native-client-backup-to-local-disk-on-a-database-with-azure-backup-enabled"></a>Exécuter une sauvegarde de client natif SAP HANA sur le disque local d’une base de données avec Sauvegarde Azure activé
 
 Si vous souhaitez sauvegarder localement (à l’aide de HANA Studio/Cockpit) une base de données qui est sauvegardée par Sauvegarde Azure, procédez comme suit :
 
 1. Attendez la fin de toute sauvegarde complète ou de fichier journal de la base de données. Vérifiez l’état dans SAP HANA Studio/Cockpit.
-2. Désactivez les sauvegardes de fichiers journaux, puis définissez le catalogue de sauvegarde sur le système de fichiers pour la base de données appropriée.
-3. Pour ce faire, double-cliquez sur **systemdb** > **Configuration (Configuration)**  > **Select Database (Sélectionner la base de données)**  > **Filter (Log) (Filtrer [journal])** .
-4. Définissez **enable_auto_log_backup** sur **No (Non)** .
-5. Définissez **log_backup_using_backint** sur **False (Faux)** .
-6. Effectuez une sauvegarde complète à la demande de la base de données.
-7. Attendez la fin de la sauvegarde complète et de la sauvegarde du catalogue.
-8. Rétablissez les paramètres précédents sur les valeurs pour Azure :
-   * Définissez **enable_auto_log_backup** sur **Yes (Oui)** .
-   * Définissez **log_backup_using_backint** sur **True (Vrai)** .
+2. pour la base de données pertinente
+    1. Annulez les paramètres backint. Pour ce faire, double-cliquez sur **systemdb** > **Configuration (Configuration)**  > **Select Database (Sélectionner la base de données)**  > **Filter (Log) (Filtrer [journal])** .
+        * enable_auto_log_backup : Non
+        * log_backup_using_backint : False
+        * catalog_backup_using_backint:False
+3. Effectuez une sauvegarde complète à la demande de la base de données.
+4. Inversez ensuite les étapes. Pour la même base de données pertinente mentionnée ci-dessus,
+    1. réactivez les paramètres backint
+        1. catalog_backup_using_backint:True
+        1. log_backup_using_backint : True
+        1. enable_auto_log_backup : Oui
+
+### <a name="manage-or-clean-up-the-hana-catalog-for-a-database-with-azure-backup-enabled"></a>Gérer ou nettoyer le catalogue HANA pour une base de données avec Sauvegarde Azure activé
+
+Si vous souhaitez modifier ou nettoyer le catalogue de sauvegarde, procédez comme suit :
+
+1. Attendez la fin de toute sauvegarde complète ou de fichier journal de la base de données. Vérifiez l’état dans SAP HANA Studio/Cockpit.
+2. pour la base de données pertinente
+    1. Annulez les paramètres backint. Pour ce faire, double-cliquez sur **systemdb** > **Configuration (Configuration)**  > **Select Database (Sélectionner la base de données)**  > **Filter (Log) (Filtrer [journal])** .
+        * enable_auto_log_backup : Non
+        * log_backup_using_backint : False
+        * catalog_backup_using_backint:False
+3. Modifiez le catalogue et supprimez les entrées les plus anciennes.
+4. Inversez ensuite les étapes. Pour la même base de données pertinente mentionnée ci-dessus,
+    1. réactivez les paramètres backint
+        1. catalog_backup_using_backint:True
+        1. log_backup_using_backint : True
+        1. enable_auto_log_backup : Oui
 
 ### <a name="change-policy"></a>Changer la stratégie
 
@@ -104,11 +133,11 @@ Vous pouvez changer la stratégie sous-jacente d’un élément de sauvegarde SA
   ![Choisir SAP HANA dans les machines virtuelles Azure](./media/sap-hana-db-manage/sap-hana-in-azure-vm.png)
 
 * Choisissez l’élément de sauvegarde dont vous souhaitez changer la stratégie sous-jacente.
-* Cliquez sur la stratégie de sauvegarde existante.
+* Sélectionnez la stratégie de sauvegarde existante.
 
   ![Sélectionnez une stratégie de sauvegarde existante.](./media/sap-hana-db-manage/existing-backup-policy.png)
 
-* Changez la stratégie en choisissant dans la liste. [Créez une nouvelle stratégie de sauvegarde](https://docs.microsoft.com/azure/backup/backup-azure-sap-hana-database#create-a-backup-policy) si nécessaire.
+* Changez la stratégie en choisissant dans la liste. [Créez une nouvelle stratégie de sauvegarde](./backup-azure-sap-hana-database.md#create-a-backup-policy) si nécessaire.
 
   ![Choisir la stratégie dans la liste déroulante](./media/sap-hana-db-manage/choose-backup-policy.png)
 
@@ -163,7 +192,7 @@ Vous pouvez arrêter la protection d’une base de données SAP HANA de deux man
 
 Si vous choisissez de conserver les points de récupération, gardez à l’esprit les considérations suivantes :
 
-* Tous les points de récupération resteront intacts, toutes les opérations de nettoyage s’arrêteront à l’arrêt de la protection avec données conservées.
+* Tous les points de récupération resteront intacts et toutes les opérations de nettoyage s’arrêteront à l’arrêt de la protection avec données conservées.
 * Vous serez facturé pour l’instance protégée et le stockage utilisé. Pour plus d’informations, voir [Tarification Sauvegarde Azure](https://azure.microsoft.com/pricing/details/backup/).
 * Si vous supprimez une source de données sans arrêter les sauvegardes, les nouvelles sauvegardes échouent.
 
@@ -190,7 +219,7 @@ Pour arrêter la protection de la base de données :
 
 ### <a name="resume-protection-for-an-sap-hana-database"></a>Reprendre la protection d’une base de données SAP HANA
 
-Lorsque vous arrêtez la protection de la base de données SAP HANA, si vous sélectionnez l’option **Conserver les données de sauvegarde**, vous pourrez reprendre la protection ultérieurement. Si vous ne conservez pas les données sauvegardées, vous ne pourrez pas reprendre la protection.
+Lorsque vous arrêtez la protection de la base de données SAP HANA, si vous sélectionnez l’option **Conserver les données de sauvegarde**, vous pourrez reprendre la protection ultérieurement. Si vous ne conservez pas les données de sauvegarde, vous ne pourrez pas réactiver la protection.
 
 Pour reprendre la protection d’une base de données SAP HANA :
 
@@ -200,13 +229,17 @@ Pour reprendre la protection d’une base de données SAP HANA :
 
 * Dans le menu **Stratégie de sauvegarde**, sélectionnez une stratégie, puis sélectionnez **Enregistrer**.
 
-### <a name="upgrading-from-sap-hana-10-to-20"></a>Mise à niveau de SAP HANA 1.0 vers 2.0
+### <a name="upgrading-from-sdc-to-mdc"></a>Mise à niveau de SDC vers MDC
 
-Découvrez comment continuer la sauvegarde d’une base de données SAP HANA [après la mise à niveau de SAP HANA 1.0 vers 2.0](backup-azure-sap-hana-database-troubleshoot.md#upgrading-from-sap-hana-10-to-20).
+Découvrez comment continuer la sauvegarde d’une base de données SAP HANA [après la mise à niveau de SDC vers MDC](backup-azure-sap-hana-database-troubleshoot.md#sdc-to-mdc-upgrade-with-a-change-in-sid).
 
-### <a name="upgrading-without-a-sid-change"></a>Mise à niveau sans modification du SID
+### <a name="upgrading-from-sdc-to-mdc-without-a-sid-change"></a>Mise à niveau de SDC à MDC sans modification du SID
 
-Découvrez comment continuer la sauvegarde d’une base de données SAP HANA dont [le SID n’a pas été modifié après la mise à niveau](backup-azure-sap-hana-database-troubleshoot.md#upgrading-without-an-sid-change).
+Découvrez comment continuer la sauvegarde d’une base de données SAP HANA dont [le SID n’a pas été modifié après la mise à niveau de SDC vers MDC](backup-azure-sap-hana-database-troubleshoot.md#sdc-to-mdc-upgrade-with-no-change-in-sid).
+
+### <a name="upgrading-to-a-new-version-in-either-sdc-or-mdc"></a>Mise à niveau vers une nouvelle version dans SDC ou MDC
+
+Découvrez comment continuer la sauvegarde d’une base de données SAP HANA dont [la version est mise à niveau](backup-azure-sap-hana-database-troubleshoot.md#sdc-version-upgrade-or-mdc-version-upgrade-on-the-same-vm).
 
 ### <a name="unregister-an-sap-hana-instance"></a>Désinscrire une instance SAP HANA
 
@@ -234,4 +267,4 @@ Utilisez cette option avec prudence, car une fois déclenchée sur une machine v
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* Découvrez comment [résoudre les problèmes courants lors de la sauvegarde de bases de données SAP HANA](https://docs.microsoft.com/azure/backup/backup-azure-sap-hana-database-troubleshoot).
+* Découvrez comment [résoudre les problèmes courants lors de la sauvegarde de bases de données SAP HANA](./backup-azure-sap-hana-database-troubleshoot.md).

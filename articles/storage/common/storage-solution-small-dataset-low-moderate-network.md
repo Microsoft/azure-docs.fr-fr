@@ -5,15 +5,15 @@ services: storage
 author: alkohli
 ms.service: storage
 ms.subservice: blobs
-ms.topic: article
+ms.topic: conceptual
 ms.date: 12/05/2018
 ms.author: alkohli
-ms.openlocfilehash: 3e6f4f3eb312f0d4d96a008c0944a9608d0bf4a7
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f59d1e297ba4d7607d7abd07a78da4784f55d20f
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "60397275"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96023225"
 ---
 # <a name="data-transfer-for-small-datasets-with-low-to-moderate-network-bandwidth"></a>Transférer de petits jeux de données avec une bande passante réseau faible ou modérée
  
@@ -63,6 +63,5 @@ Le tableau suivant résume les différences entre les principales fonctionnalit�
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- Apprenez à [transférer des données avec l’Explorateur Stockage Azure](https://docs.microsoft.com/azure/machine-learning/team-data-science-process/move-data-to-azure-blob-using-azure-storage-explorer).
-- [Transférer des données avec AzCopy](https://docs.microsoft.com/azure/storage/common/storage-use-azcopy-v10)
-
+- Apprenez à [transférer des données avec l’Explorateur Stockage Azure](../../machine-learning/team-data-science-process/move-data-to-azure-blob-using-azure-storage-explorer.md).
+- [Transférer des données avec AzCopy](./storage-use-azcopy-v10.md)

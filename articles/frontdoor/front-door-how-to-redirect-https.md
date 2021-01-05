@@ -2,110 +2,82 @@
 title: Créer une porte d’entrée avec redirection de HTTP vers HTTPS à l’aide du portail Microsoft Azure
 description: Apprenez à créer une porte d’entrée avec redirection du trafic de HTTP vers HTTPS à l’aide du portail Microsoft Azure.
 services: front-door
-author: sharad4u
+author: duongau
 ms.service: frontdoor
-ms.topic: article
-ms.date: 5/21/2019
-ms.author: sharadag
-ms.openlocfilehash: f1b8c033a3ec230d60c30f6168de8ce013a80ac6
-ms.sourcegitcommit: 2d7910337e66bbf4bd8ad47390c625f13551510b
+ms.topic: how-to
+ms.date: 09/30/2020
+ms.author: duau
+ms.openlocfilehash: 19908b3cba63bc76a205097ef8d16e612d58503b
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/08/2020
-ms.locfileid: "80877998"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91626636"
 ---
 # <a name="create-a-front-door-with-http-to-https-redirection-using-the-azure-portal"></a>Créer une porte d’entrée avec redirection de HTTP vers HTTPS à l’aide du portail Microsoft Azure
 
-Vous pouvez utiliser le portail Azure pour créer une [porte d’entrée](front-door-overview.md) avec un certificat pour la terminaison TLS. Une règle d’acheminement est utilisée pour rediriger le trafic HTTP vers HTTPS.
-
-Dans cet article, vous apprendrez comment :
-
-> [!div class="checklist"]
-> * Créer une porte d’entrée avec une ressource d’application web existante
-> * Ajouter un domaine personnalisé à l’aide d’un certificat TLS/SSL 
-> * Configurer la redirection HTTPS sur le domaine personnalisé
-
-Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer.
+Vous pouvez utiliser le portail Azure afin de [créer une instance Front Door](quickstart-create-front-door.md) avec un certificat pour la terminaison TLS. Une règle d’acheminement est utilisée pour rediriger le trafic HTTP vers HTTPS.
 
 ## <a name="create-a-front-door-with-an-existing-web-app-resource"></a>Créer une porte d’entrée avec une ressource d’application web existante
 
 1. Connectez-vous au portail Azure sur [https://portal.azure.com](https://portal.azure.com).
-2. Cliquez sur  **Créer une ressource** dans le coin supérieur gauche du portail Azure.
-3. Recherchez la **porte d’entrée** à l’aide de la barre de recherche. Après avoir trouvé le type de ressource, cliquez sur **Créer**.
-4. Choisissez un abonnement, puis utilisez un groupe de ressources existant ou créez-en un. Notez que l’emplacement demandé dans l’interface utilisateur est pour le groupe de ressources uniquement. Votre configuration de porte d’entrée va être déployée sur l’ensemble des [emplacements POP d’Azure Front Door](front-door-faq.md#what-are-the-pop-locations-for-azure-front-door).
 
-    ![Configurer les paramètres de base pour la nouvelle porte d’entrée](./media/front-door-url-redirect/front-door-create-basics.png)
+1. Sélectionnez  **Créer une ressource** dans le coin supérieur gauche du portail Azure.
 
-5. Cliquez sur **Suivant** pour accéder à l’onglet de configuration. La configuration de la porte d’entrée se déroule en trois étapes : l’ajout d’un hôte frontend par défaut, l’ajout de back ends dans un pool de back ends et la création de règles d’acheminement pour mapper le comportement d’acheminement à l’hôte frontend. 
+1. Recherchez **Front Door** à l’aide de la barre de recherche. Après avoir trouvé le type de ressource, sélectionnez **Créer**.
 
-     ![Concepteur de configuration de porte d’entrée](./media/front-door-url-redirect/front-door-designer.png)
+1. Choisissez un *abonnement*, puis utilisez un groupe de ressources existant ou créez-en un. Sélectionnez **Suivant** pour accéder à l’onglet de configuration.
 
-6. Cliquez sur l’icône « **+** » sur les _hôtes frontend_ pour créer un hôte frontend. Entrez un nom global unique pour l’hôte frontend par défaut de votre porte d’entrée (`\<**name**\>.azurefd.net`). Cliquez sur **Ajouter** pour passer à l’étape suivante.
+    > [!NOTE]
+    > L’emplacement demandé dans l’interface utilisateur est pour le groupe de ressources uniquement. Votre configuration de porte d’entrée va être déployée sur l’ensemble des [emplacements POP d’Azure Front Door](front-door-faq.md#what-are-the-pop-locations-for-azure-front-door).
 
-     ![Ajouter un hôte frontend](./media/front-door-url-redirect/front-door-create-fehost.png)
+    :::image type="content" source="./media/front-door-url-redirect/front-door-create-basics.png" alt-text="Configurer les paramètres de base pour la nouvelle porte d’entrée":::
 
-7. Cliquez sur l’icône « **+** » sur les _pools de back ends_ pour créer un pool de back ends. Fournissez un nom pour le pool de back ends, puis cliquez sur « **Ajouter un back end** ».
-8. Sélectionnez le type d’hôte back end en tant que _service d’application_. Sélectionnez l’abonnement dans lequel votre application web est hébergée, puis sélectionnez l’application web spécifique dans la liste déroulante pour **Nom de l’hôte back end**.
-9. Cliquez sur **Ajouter** pour enregistrer le back end et cliquez de nouveau sur **Ajouter** pour enregistrer la configuration du pool de back ends.   ![Ajouter un back end dans un pool de back ends](./media/front-door-url-redirect/front-door-create-backendpool.png)
+1. La configuration de la porte d’entrée se déroule en trois étapes : l’ajout d’un hôte frontend par défaut, l’ajout de back ends dans un pool de back ends et la création de règles d’acheminement pour mapper le comportement d’acheminement à l’hôte frontend. Sélectionnez l’icône « **+**  » sur les _Hôtes front-end_ pour créer un hôte front-end.
 
-10. Cliquez sur l’icône « **+** » sur les _règles d’acheminement_ pour créer un itinéraire. Fournissez un nom pour l’itinéraire, par exemple « HttpToHttpsRedirect », puis définissez le champ _Accepted Protocols_ (Protocoles acceptés) sur **« HTTP uniquement »** . Vérifiez que _l’hôte frontend_ approprié est sélectionné.  
-11. Dans la section _Détails de la route_, définissez le _type de route_ sur **Rediriger** ; vérifiez que le _type de redirection_ est défini sur **Trouvé (302)** et que _Protocole de redirection_ est défini sur **HTTPS uniquement**. 
-12. Cliquez sur Ajouter pour enregistrer la règle d’acheminement pour la redirection HTTP vers HTTPS.
-     ![Ajouter un itinéraire de redirection HTTP vers HTTPS](./media/front-door-url-redirect/front-door-redirect-config-example.png)
-13. Ajoutez une autre règle d’acheminement pour gérer le trafic HTTPS. Cliquez sur le signe « **+** » sur les _règles de routage_ et fournissez un nom pour l’itinéraire, par exemple « DefaultForwardingRoute », puis définissez le champ _Accepted Protocols_ (Protocoles acceptés) sur **« HTTPS uniquement »** . Vérifiez que _l’hôte frontend_ approprié est sélectionné.
-14. Dans la section Détails de la route, définissez le _type de route_ sur **Transférer** ; vérifiez que le pool de back ends approprié est sélectionné et que le _protocole de transfert_ est défini sur **HTTPS uniquement**. 
-15. Cliquez sur Ajouter pour enregistrer la règle d’acheminement pour le transfert de requêtes.
-     ![Ajouter un itinéraire de transfert pour le trafic HTTPS](./media/front-door-url-redirect/front-door-forward-route-example.png)
-16. Cliquez sur **Vérifier + créer**, puis sur **Créer** pour créer votre profil de porte d’entrée. Accédez à la ressource après sa création.
+    :::image type="content" source="./media/front-door-url-redirect/front-door-designer.png" alt-text="Configurer les paramètres de base pour la nouvelle porte d’entrée":::
 
-## <a name="add-a-custom-domain-to-your-front-door-and-enable-https-on-it"></a>Ajouter un domaine personnalisé à votre porte d’entrée et activer HTTPS dessus
-Les étapes suivantes illustrent comment vous pouvez ajouter un domaine personnalisé sur une ressource de porte d’entrée existante, puis activer la redirection HTTP vers HTTPS sur celle-ci. 
+1. Entrez un nom global unique destiné à votre hôte front-end par défaut pour votre instance Front Door. Sélectionnez **Ajouter** pour passer à l’étape suivante.
 
-### <a name="add-a-custom-domain"></a>Ajouter un domaine personnalisé
+    :::image type="content" source="./media/front-door-url-redirect/front-door-create-frontend-host.png" alt-text="Configurer les paramètres de base pour la nouvelle porte d’entrée":::
 
-Dans cet exemple, vous ajoutez un enregistrement CNAME pour le sous-domaine `www` (`www.contosonews.com`, par exemple).
+### <a name="create-backend-pool"></a>Créer un pool de back-ends
 
-#### <a name="create-the-cname-record"></a>Créer un enregistrement CNAME
+1. Cliquez sur l’icône « **+**  » dans _Pools de back-ends_ pour créer un pool de back-ends. Fournissez un nom pour le pool, puis sélectionnez « **Ajouter un back-end** ».
 
-Ajoutez un enregistrement CNAME pour mapper un sous-domaine à votre hôte frontend de porte d’entrée par défaut (`<name>.azurefd.net`, où `<name>` est le nom du profil de votre porte d’entrée).
+    :::image type="content" source="./media/front-door-url-redirect/front-door-designer-backend-pool.png" alt-text="Configurer les paramètres de base pour la nouvelle porte d’entrée":::
 
-Pour l’exemple de domaine `www.contoso.com`, ajoutez un enregistrement CNAME qui mappe le nom `www` à `<name>.azurefd.net`.
+1. Sélectionnez le type d’hôte back end en tant que _service d’application_. Sélectionnez l’abonnement dans lequel votre application web est hébergée, puis sélectionnez l’application web spécifique dans la liste déroulante pour **Nom de l’hôte back end**.
 
-Après avoir ajouté l’enregistrement CNAME, la page d’enregistrements DNS ressemble à l’exemple suivant :
+    :::image type="content" source="./media/front-door-url-redirect/front-door-create-backend-pool.png" alt-text="Configurer les paramètres de base pour la nouvelle porte d’entrée":::
 
-![Domaine personnalisé CNAME sur la porte d’entrée](./media/front-door-url-redirect/front-door-dns-cname.png)
+1. Sélectionnez **Ajouter** pour enregistrer le back-end et sélectionnez de nouveau **Ajouter** pour enregistrer la configuration du pool de back-ends. 
 
-#### <a name="onboard-the-custom-domain-on-your-front-door"></a>Intégrer le domaine personnalisé à votre Front Door
+## <a name="create-http-to-https-redirect-rule"></a>Ajouter une règle de redirection HTTP vers HTTPS
 
-1. Dans l’onglet du concepteur de Front Door, cliquez sur l’icône « + » dans la section des hôtes frontend pour ajouter un nouveau domaine personnalisé. 
-2. Entrez le nom DNS personnalisé complet dans le champ de nom d’hôte personnalisé, par exemple `www.contosonews.com`. 
-3. Une fois le mappage CNAME du domaine à votre Front Door validé, cliquez sur **Ajouter** pour ajouter le domaine personnalisé.
-4. Cliquez sur **Enregistrer** pour envoyer les modifications.
+1. Sélectionnez l’icône « **+**  » dans *Règles de routage* pour créer une route. Fournissez un nom pour la route, par exemple « HttpToHttpsRedirect », puis définissez le champ *Protocole accepté* sur **« HTTP uniquement »** . Vérifiez que la sélection des *Front-ends/domaines* est appropriée.  
 
-![Menu Domaines personnalisés](./media/front-door-url-redirect/front-door-add-custom-domain.png)
+    :::image type="content" source="./media/front-door-url-redirect/front-door-designer-routing-rule.png" alt-text="Configurer les paramètres de base pour la nouvelle porte d’entrée":::
 
-### <a name="enable-https-on-your-custom-domain"></a>Activer HTTPS sur votre domaine personnalisé
+1. Sous la section *Détails de la route*, définissez le *Type de route* sur **Rediriger**. Assurez-vous que le *Type de redirection* est défini sur **Trouvé (302)** , et le *Protocole de redirection* sur **HTTPS uniquement**. 
 
-1. Cliquez sur le domaine personnalisé qui a été ajouté puis, sous la section **HTTPS sur un domaine personnalisé**, modifiez l’état sur **Activé**.
-2. Vous pouvez laisser le **type de gestion de certificats** défini sur _Porte d’entrée managée_ pour le certificat gratuit conservé, géré et avec rotation automatique par la porte d’entrée. Vous pouvez également choisir d’utiliser votre propre certificat TLS/SSL personnalisé stocké avec Azure Key Vault. Ce didacticiel part du principe que le certificat géré de porte d’entrée est utilisé.
-![Activation de HTTPS pour un domaine personnalisé](./media/front-door-url-redirect/front-door-custom-domain-https.png)
+    :::image type="content" source="./media/front-door-url-redirect/front-door-redirect-config-example.png" alt-text="Configurer les paramètres de base pour la nouvelle porte d’entrée":::
 
-3. Cliquez sur **Mettre à jour** pour enregistrer la sélection, puis cliquez sur **Enregistrer**.
-4. Après quelques minutes, cliquez sur **Actualiser**, puis cliquez une nouvelle fois sur le domaine personnalisé pour voir la progression de l’approvisionnement de certificats. 
+1. Sélectionnez **Ajouter** pour enregistrer la règle de routage de la redirection HTTP vers HTTPS.
 
-> [!WARNING]
-> L’activation de HTTPS pour un domaine personnalisé peut prendre plusieurs minutes, et dépend également de la validation de la propriété de domaine si l’enregistrement CNAME n’est pas mappé directement à votre hôte de porte d’entrée `<name>.azurefd.net`. Découvrez plus en détail [comment activer le protocole HTTPS pour un domaine personnalisé](./front-door-custom-domain-https.md).
+## <a name="create-forwarding-rule"></a>Créer une règle de transfert
 
-## <a name="configure-the-routing-rules-for-the-custom-domain"></a>Configurer les règles d’acheminement pour le domaine personnalisé
+1. Ajoutez une autre règle de routage pour gérer le trafic HTTPS. Sélectionnez le signe « **+**  » dans *Règles de routage* et fournissez un nom pour la route, par exemple « DefaultForwardingRoute ». Définissez ensuite le champ *Protocoles acceptés* sur **HTTPS uniquement**. Vérifiez que la sélection des *Front-ends/domaines* est appropriée.
 
-1. Cliquez sur la règle d’acheminement de redirection créée précédemment.
-2. Cliquez sur la liste déroulante des hôtes frontend et sélectionnez votre domaine personnalisé pour appliquer également cet itinéraire à votre domaine.
-3. Cliquez sur **Update**.
-4. Effectuez la même opération pour l’autre règle d’acheminement, autrement dit, pour votre itinéraire de transfert pour ajouter le domaine personnalisé.
-5. Cliquez sur **Enregistrer** pour envoyer les modifications.
+1. Dans la section Détails de la route, définissez le *Type de route* sur **Transférer**. Assurez-vous que le pool de back-ends approprié est sélectionné, et que le *Protocole de transfert* est défini sur **HTTPS uniquement**. 
+
+    :::image type="content" source="./media/front-door-url-redirect/front-door-forward-route-example.png" alt-text="Configurer les paramètres de base pour la nouvelle porte d’entrée" border="false":::
+
+1. Sélectionnez **Ajouter** pour enregistrer la règle de routage du transfert de requêtes.
+
+1. Cliquez sur **Vérifier + créer**, puis sur **Créer** pour créer votre profil Front Door. Accédez à la ressource après sa création.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- Découvrez comment [créer une porte d’entrée](quickstart-create-front-door.md).
 - Découvrez [comment fonctionne Front Door](front-door-routing-architecture.md).
 - Découvrez plus en détail la [redirection d’URL sur la porte d’entrée](front-door-url-redirect.md).

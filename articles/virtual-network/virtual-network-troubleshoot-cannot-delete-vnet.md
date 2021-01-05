@@ -14,12 +14,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 10/31/2018
 ms.author: genli
-ms.openlocfilehash: 2a64f42c8672972939bb2870ba40876e5cc8d855
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.openlocfilehash: 27372207df66b4198bd9c785ecc099fa88cbe548
+ms.sourcegitcommit: 2a8a53e5438596f99537f7279619258e9ecb357a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83591945"
+ms.lasthandoff: 11/06/2020
+ms.locfileid: "94335692"
 ---
 # <a name="troubleshooting-failed-to-delete-a-virtual-network-in-azure"></a>Résolution des problèmes : Échec de la suppression d’un réseau virtuel dans Azure
 
@@ -31,10 +31,11 @@ Vous rencontrez peut-être des erreurs lors de vos tentatives de suppression de 
 
 1. [Vérifiez si une passerelle de réseau virtuel s’exécute dans le réseau virtuel](#check-whether-a-virtual-network-gateway-is-running-in-the-virtual-network).
 2. [Vérifiez si une passerelle d’application s’exécute dans le réseau virtuel](#check-whether-an-application-gateway-is-running-in-the-virtual-network).
-3. [Vérifiez si Azure Active Directory Domain Services est activé dans le réseau virtuel](#check-whether-azure-active-directory-domain-service-is-enabled-in-the-virtual-network).
-4. [Vérifiez si le réseau virtuel est connecté à d’autres ressources](#check-whether-the-virtual-network-is-connected-to-other-resource).
-5. [Vérifiez si une machine virtuelle s’exécute toujours dans le réseau virtuel](#check-whether-a-virtual-machine-is-still-running-in-the-virtual-network).
-6. [Vérifiez si le réseau virtuel est bloqué en cours de migration](#check-whether-the-virtual-network-is-stuck-in-migration).
+3. [Vérifiez si des instances de conteneur Azure existent toujours dans le réseau virtuel](#check-whether-azure-container-instances-still-exist-in-the-virtual-network).
+4. [Vérifiez si Azure Active Directory Domain Services est activé dans le réseau virtuel](#check-whether-azure-active-directory-domain-service-is-enabled-in-the-virtual-network).
+5. [Vérifiez si le réseau virtuel est connecté à d’autres ressources](#check-whether-the-virtual-network-is-connected-to-other-resource).
+6. [Vérifiez si une machine virtuelle s’exécute toujours dans le réseau virtuel](#check-whether-a-virtual-machine-is-still-running-in-the-virtual-network).
+7. [Vérifiez si le réseau virtuel est bloqué en cours de migration](#check-whether-the-virtual-network-is-stuck-in-migration).
 
 ## <a name="troubleshooting-steps"></a>Étapes de dépannage
 
@@ -48,7 +49,7 @@ Pour les réseaux virtuels classiques, accédez à la **Vue d’ensemble** du r�
 
 Pour les réseaux virtuels, accédez à la page **Vue d’ensemble** du réseau virtuel. Recherchez la passerelle de réseau virtuel dans les **Appareils connectés**.
 
-![Vérifier l’appareil connecté](media/virtual-network-troubleshoot-cannot-delete-vnet/vnet-gateway.png)
+![Capture d’écran de la liste des appareils connectés pour un réseau virtuel dans Portail Azure. La passerelle de réseau virtuel est mise en évidence dans la liste.](media/virtual-network-troubleshoot-cannot-delete-vnet/vnet-gateway.png)
 
 Avant de pouvoir supprimer la passerelle, supprimez d’abord les objets de **connexion** de la passerelle. 
 
@@ -56,15 +57,28 @@ Avant de pouvoir supprimer la passerelle, supprimez d’abord les objets de **co
 
 Accédez à la page **Vue d’ensemble** du réseau virtuel. Vérifiez les **Appareils connectés** dans la passerelle d’application.
 
-![Vérifier l’appareil connecté](media/virtual-network-troubleshoot-cannot-delete-vnet/app-gateway.png)
+![Capture d’écran de la liste des appareils connectés pour un réseau virtuel dans Portail Azure. La passerelle applicative est mise en évidence dans la liste.](media/virtual-network-troubleshoot-cannot-delete-vnet/app-gateway.png)
 
 S’il existe une passerelle d’application, vous devez la supprimer avant de pouvoir supprimer le réseau virtuel.
+
+### <a name="check-whether-azure-container-instances-still-exist-in-the-virtual-network"></a>Vérifier si des instances de conteneur Azure existent toujours dans le réseau virtuel
+
+1. Dans le portail Azure, accédez à la page **Vue d’ensemble** du groupe de ressources.
+1. Dans l’en-tête de la liste des ressources du groupe de ressources, sélectionnez **Afficher les types masqués**. Le type de profil réseau est masqué par défaut dans le portail Azure.
+1. Sélectionnez le profil réseau associé aux groupes de conteneurs.
+1. Sélectionnez **Supprimer**.
+
+   ![Capture d’écran de la liste des profils réseau masqués.](media/virtual-network-troubleshoot-cannot-delete-vnet/container-instances.png)
+
+1. Supprimez de nouveau le sous-réseau ou le réseau virtuel.
+
+Si ces étapes ne résolvent pas le problème, utilisez ces commandes [Azure CLI](https://docs.microsoft.com/azure/container-instances/container-instances-vnet#clean-up-resources) pour nettoyer les ressources. 
 
 ### <a name="check-whether-azure-active-directory-domain-service-is-enabled-in-the-virtual-network"></a>Vérifier si Azure Active Directory Domain Services est activé dans le réseau virtuel
 
 Si Active Directory Domain Services est activé et connecté au réseau virtuel, vous ne pouvez pas supprimer ce dernier. 
 
-![Vérifier l’appareil connecté](media/virtual-network-troubleshoot-cannot-delete-vnet/enable-domain-services.png)
+![Capture d’écran de l’écran Azure AD Domain Services dans Portail Azure. Le champ Disponible dans le réseau virtuel/sous-réseau est mis en évidence.](media/virtual-network-troubleshoot-cannot-delete-vnet/enable-domain-services.png)
 
 Pour désactiver le service, consultez la page [Désactiver Azure Active Directory Domain Services à l’aide du Portail Azure](../active-directory-domain-services/delete-aadds.md).
 
@@ -88,7 +102,9 @@ Vérifiez qu’aucune machine virtuelle ne s’exécute dans le réseau virtuel.
 
 Si le réseau virtuel est bloqué dans un état de migration, il ne peut pas être supprimé. Exécutez la commande suivante pour annuler la migration, puis supprimez le réseau virtuel.
 
-    Move-AzureVirtualNetwork -VirtualNetworkName "Name" -Abort
+```azurepowershell
+Move-AzureVirtualNetwork -VirtualNetworkName "Name" -Abort
+```
 
 ## <a name="next-steps"></a>Étapes suivantes
 

@@ -7,12 +7,15 @@ services: iot-hub
 ms.topic: conceptual
 ms.date: 08/13/2018
 ms.author: asrastog
-ms.openlocfilehash: b76ef431e4c0ad63929378c1f48c6ab06776cb25
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom:
+- 'Role: Cloud Development'
+- 'Role: Data Analytics'
+ms.openlocfilehash: 83c290adea02915db1dc52bd359b4d3165611522
+ms.sourcegitcommit: d767156543e16e816fc8a0c3777f033d649ffd3c
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79233201"
+ms.lasthandoff: 10/26/2020
+ms.locfileid: "92547705"
 ---
 # <a name="iot-hub-message-routing-query-syntax"></a>Syntaxe des requêtes pour le routage des messages IoT Hub
 
@@ -20,7 +23,7 @@ Le routage de messages permet aux utilisateurs d’acheminer différents types d
 
 [!INCLUDE [iot-hub-basic](../../includes/iot-hub-basic-partial.md)]
 
-Le routage de messages vous permet d’interroger les propriétés et le corps d’un message, ainsi que les étiquettes et les propriétés d’un jumeau d’appareil. Si le corps du message n’est pas un fichier JSON, le routage de messages peut toujours acheminer le message, mais les requêtes ne sont pas applicables à ce corps de message.  Les requêtes sont décrites comme des expressions booléennes, où une valeur booléenne True fait réussir la requête qui achemine toutes les données entrantes, et où une valeur booléenne False fait échouer la requête qui n’achemine aucune donnée. Si l’expression prend la valeur Null ou Undefined, elle est considérée comme False et une erreur est générée dans les journaux de diagnostic en cas d’échec. La syntaxe des requêtes doit être correcte pour que l’itinéraire soit enregistré et évalué.  
+Le routage de messages vous permet d’interroger les propriétés et le corps d’un message, ainsi que les étiquettes et les propriétés d’un jumeau d’appareil. Si le corps du message n’est pas un fichier JSON, le routage de messages peut toujours acheminer le message, mais les requêtes ne sont pas applicables à ce corps de message.  Les requêtes sont décrites comme des expressions booléennes, où une valeur booléenne True fait réussir la requête qui achemine toutes les données entrantes, et où une valeur booléenne False fait échouer la requête qui n’achemine aucune donnée. Si l’expression prend la valeur Null ou Undefined, elle est considérée comme False et une erreur est générée dans les [journaux de ressources des routes](monitor-iot-hub-reference.md#routes) d’IoT Hub en cas d’échec. La syntaxe des requêtes doit être correcte pour que l’itinéraire soit enregistré et évalué.  
 
 ## <a name="message-routing-query-based-on-message-properties"></a>Requête de routage de messages en fonction des propriétés de message 
 
@@ -56,9 +59,10 @@ Les propriétés système permettent d’identifier le contenu et la source des 
 | contentEncoding | string | L’utilisateur spécifie le type d’encodage du message. Les valeurs autorisées sont UTF-8, UTF-16, UTF-32 si la valeur contentType est définie sur application/JSON. |
 | iothub-connection-device-id | string | Cette valeur est définie par IoT Hub et identifie l’ID de l’appareil. Pour interroger, utilisez `$connectionDeviceId`. |
 | iothub-enqueuedtime | string | Cette valeur est définie par IoT Hub et représente l’heure (UTC) réelle de la mise en file d’attente du message. Pour interroger, utilisez `enqueuedTime`. |
-| iothub-interface-name | string | Cette valeur est définie par l’utilisateur et représente le nom de l’interface du jumeau numérique qui implémente le message de télémétrie. Pour interroger, utilisez `$interfaceName`. Cette fonctionnalité fait partie de la [préversion publique d’IoT Plug-and-Play](../iot-pnp/overview-iot-plug-and-play.md). |
+| dt-dataschema | string |  Cette valeur est définie par IoT Hub sur les messages appareil-à-cloud. Elle contient l’ID du modèle d’appareil défini dans la connexion de l’appareil. Pour interroger, utilisez `$dt-dataschema`. |
+| dt-subject | string | Nom du composant qui envoie les messages appareil-à-cloud. Pour interroger, utilisez `$dt-subject`. |
 
-Comme expliqué dans l’article [Messages IoT Hub](iot-hub-devguide-messages-construct.md), il existe des propriétés système supplémentaires dans un message. En plus de **contentType**, **contentEncoding** et **enqueuedTime**, les propriétés **connectionDeviceId** et **connectionModuleId** peuvent également être interrogées.
+Comme expliqué dans l’article [Messages IoT Hub](iot-hub-devguide-messages-construct.md), il existe des propriétés système supplémentaires dans un message. Outre les propriétés indiquées dans le tableau précédent, vous pouvez également interroger **connectionDeviceId** et **connectionModuleId**.
 
 ### <a name="application-properties"></a>Propriétés de l’application
 

@@ -1,17 +1,17 @@
 ---
 title: Compatibilité des pilotes et outils - Azure Database pour MySQL
 description: Cet article décrit les pilotes MySQL et les outils de gestion compatibles avec Azure Database pour MySQL.
-author: ajlam
-ms.author: andrela
+author: savjani
+ms.author: pariks
 ms.service: mysql
 ms.topic: conceptual
 ms.date: 3/18/2020
-ms.openlocfilehash: e8917a0a5678c4c6b72352a0d4c1523bfea3c96d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f2ea7af0ec9c740c07cd3a5e4ebd88a9ad1a031d
+ms.sourcegitcommit: 6ab718e1be2767db2605eeebe974ee9e2c07022b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79537208"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94542641"
 ---
 # <a name="mysql-drivers-and-management-tools-compatible-with-azure-database-for-mysql"></a>Pilotes MySQL et outils de gestion compatibles avec Azure Database pour MySQL
 Cet article décrit les pilotes et outils de gestion compatibles avec Azure Database pour MySQL.
@@ -34,7 +34,7 @@ En termes de base de données MySQL, Azure Database pour MySQL utilise la versio
 | C | Connecteur MySQL/C (libmysqlclient) | https://dev.mysql.com/doc/refman/5.7/en/c-api-implementations.html | 6.0.2+ | | |
 | C | Connecteur MySQL/ODBC (myodbc) | https://github.com/mysql/mysql-connector-odbc | 3.51.29+ | | |
 | C++ | Connecteur MySQL/C++ | https://github.com/mysql/mysql-connector-cpp | 1.1.9+ | 1.1.3 et versions antérieures | | 
-| C++ | MySQL++| https://tangentsoft.net/mysql++ | 3.2.3+ | | |
+| C++ | MySQL++| https://github.com/tangentsoft/mysqlpp | 3.2.3+ | | |
 | Ruby | mysql2 | https://github.com/brianmario/mysql2 | 0.4.10+ | | |
 | R | RMySQL | https://github.com/rstats-db/RMySQL | 0.10.16+ | | |
 | Swift | mysql-swift | https://github.com/novi/mysql-swift | 0.7.2+ | | |
@@ -45,14 +45,14 @@ L’avantage de compatibilité s’étend également aux outils de gestion de ba
 
 |                                     | **MySQL Workbench 6.x et supérieur** | **Navicat 12** | **PHPMyAdmin 4.x et supérieur** |
 | :---------------------------------- | :----------------------------- | :------------- | :-------------------------|
-| Création, mise à jour, lecture, écriture, suppression | X | X | X |
-| Connexion SSL | X | X | X |
-| Saisie semi-automatique de la requête SQL | X | X |  |
-| Importation et exportation de données | X | X | X | 
-| Exportation dans plusieurs formats | X | X | X |
-| Sauvegarde et restauration |  | X |  |
-| Affichage des paramètres du serveur | X | X | X |
-| Affichage des connexions client | X | X | X |
+| **Création, mise à jour, lecture, écriture, suppression** | X | X | X |
+| **Connexion SSL** | X | X | X |
+| **Saisie semi-automatique de la requête SQL** | X | X |  |
+| **Importation et exportation de données** | X | X | X |
+| **Exportation dans plusieurs formats** | X | X | X |
+| **Sauvegarde et restauration** |  | X |  |
+| **Affichage des paramètres du serveur** | X | X | X |
+| **Affichage des connexions client** | X | X | X |
 
 ## <a name="next-steps"></a>Étapes suivantes
 

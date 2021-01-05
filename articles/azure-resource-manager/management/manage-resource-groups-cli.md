@@ -3,14 +3,15 @@ title: Gérer des groupes de ressources - Azure CLI
 description: Utilisez Azure CLI pour gérer vos groupes de ressources dans Azure Resource Manager. Montre comment créer, lister et supprimer des groupes de ressources.
 author: mumian
 ms.topic: conceptual
-ms.date: 02/11/2019
+ms.date: 09/01/2020
 ms.author: jgao
-ms.openlocfilehash: 7face572f545153ea92efbdb345bbaabda5dd126
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: 4a9a4ed4ebba7f6f2470bb9e7000a899ebc26323
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79226193"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96185808"
 ---
 # <a name="manage-azure-resource-manager-resource-groups-by-using-azure-cli"></a>Gérer des groupes de ressources Azure Resource Manager à l’aide d’Azure CLI
 
@@ -31,14 +32,10 @@ Le groupe de ressources stocke des métadonnées sur les ressources. Lorsque vou
 
 ## <a name="create-resource-groups"></a>Créer des groupes de ressources
 
-Le script CLI suivant crée un groupe de ressources, puis l’affiche.
+La commande CLI suivante crée un groupe de ressources.
 
 ```azurecli-interactive
-echo "Enter the Resource Group name:" &&
-read resourceGroupName &&
-echo "Enter the location (i.e. centralus):" &&
-read location &&
-az group create --name $resourceGroupName --location $location
+az group create --name demoResourceGroup --location westus
 ```
 
 ## <a name="list-resource-groups"></a>Répertorier les groupes de ressources
@@ -75,7 +72,7 @@ Voir [Déployer des ressources sur un groupe de ressources existant](manage-reso
 
 ## <a name="deploy-a-resource-group-and-resources"></a>Déployer un groupe de ressources et des ressources
 
-Vous pouvez créer un groupe de ressources et déployer des ressources sur ce groupe à l'aide d'un modèle Resource Manager. Pour plus d'informations, consultez [Créer un groupe de ressources et déployer des ressources](../templates/deploy-to-subscription.md#resource-group-and-resources).
+Vous pouvez créer un groupe de ressources et déployer des ressources sur ce groupe à l'aide d'un modèle Resource Manager. Pour plus d'informations, consultez [Créer un groupe de ressources et déployer des ressources](../templates/deploy-to-subscription.md#resource-groups).
 
 ## <a name="redeploy-when-deployment-fails"></a>Redéploiement en cas d’échec du déploiement
 
@@ -136,19 +133,19 @@ az group export --name $resourceGroupName
 
 Le script affiche le modèle sur la console.  Copiez le JSON et enregistrez-le dans un fichier.
 
-La fonctionnalité d’exportation de modèle ne prend pas en charge l’exportation des ressources Azure Data Factory. Pour en savoir plus sur la façon dont vous pouvez exporter des ressources Data Factory, consultez [Copier ou cloner une fabrique de données dans Azure Data Factory](https://aka.ms/exportTemplateViaAdf).
+La fonctionnalité d’exportation de modèle ne prend pas en charge l’exportation des ressources Azure Data Factory. Pour en savoir plus sur la façon dont vous pouvez exporter des ressources Data Factory, consultez [Copier ou cloner une fabrique de données dans Azure Data Factory](../../data-factory/copy-clone-data-factory.md).
 
-Pour exporter des ressources créées par le biais du modèle de déploiement classique, vous devez [les migrer vers le modèle de déploiement de Resource Manager](https://aka.ms/migrateclassicresourcetoarm).
+Pour exporter des ressources créées par le biais du modèle de déploiement classique, vous devez [les migrer vers le modèle de déploiement de Resource Manager](../../virtual-machines/migration-classic-resource-manager-overview.md).
 
 Pour plus d’informations, consultez [Export d’une ressource unique ou de plusieurs ressources vers un modèle dans le portail Azure](../templates/export-template-portal.md).
 
 ## <a name="manage-access-to-resource-groups"></a>Gérer l'accès aux groupes de ressources
 
-Le [contrôle d’accès en fonction du rôle (RBAC)](../../role-based-access-control/overview.md) est la façon dont vous gérez l’accès aux ressources dans Azure. Pour plus d’informations, consultez [Gérer l’accès à l’aide du contrôle RBAC et d’Azure CLI](../../role-based-access-control/role-assignments-cli.md).
+Le [contrôle d’accès en fonction du rôle Azure (Azure RBAC)](../../role-based-access-control/overview.md) vous permet de gérer l’accès aux ressources dans Azure. Pour plus d’informations, consultez [Ajouter ou supprimer des attributions de rôle Azure à l’aide d’Azure CLI](../../role-based-access-control/role-assignments-cli.md).
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 - Pour vous familiariser avec Azure Resource Manager, consultez [Vue d’ensemble d’Azure Resource Manager](overview.md).
 - Pour vous familiariser avec la syntaxe des modèles Resource Manager, consultez [Comprendre la structure et la syntaxe des modèles Azure Resource Manager](../templates/template-syntax.md).
-- Pour apprendre à développer des modèles, consultez les [tutoriels pas à pas](/azure/azure-resource-manager/).
+- Pour apprendre à développer des modèles, consultez les [tutoriels pas à pas](../index.yml).
 - Pour accéder aux schémas liés aux modèles Azure Resource Manager, consultez [Informations de référence sur les modèles](/azure/templates/).

@@ -5,23 +5,23 @@ services: notification-hubs
 documentationcenter: ''
 author: sethmanheim
 manager: femila
-editor: jwargo
-ms.assetid: 11d2131b-f683-47fd-a691-4cdfc696f62b
+editor: thsomasu
 ms.service: notification-hubs
 ms.workload: mobile
 ms.tgt_pltfrm: mobile-windows
 ms.devlang: multiple
 ms.topic: article
-ms.date: 09/30/2019
+ms.date: 09/14/2020
 ms.author: sethm
-ms.reviewer: jowargo
+ms.reviewer: thsomasu
 ms.lastreviewed: 10/02/2019
-ms.openlocfilehash: fc3cec348517244c8a7f54d2d3d17298c58e4262
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 3f8f9357fff4773467dd93046ece8533514eb444
+ms.sourcegitcommit: ce8eecb3e966c08ae368fafb69eaeb00e76da57e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80127043"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92313899"
 ---
 # <a name="send-cross-platform-notifications-with-azure-notification-hubs"></a>Envoi de notifications multiplateformes avec Azure Notification Hubs
 
@@ -37,7 +37,7 @@ Cet article montre comment exploiter les modèles pour envoyer une notification 
 
 ## <a name="send-cross-platform-notifications-using-templates"></a>Envoyer des notifications multiplateformes à l’aide de modèles
 
-Cette section utilise l’exemple de code que vous avez créé dans le tutoriel [Envoyer des notifications à des utilisateurs spécifiques à l’aide d’Azure Notification Hubs]. Vous pouvez télécharger l’exemple sur [GitHub](https://github.com/Azure/azure-notificationhubs-dotnet/tree/master/Samples/NotifyUsers).
+Cette section utilise l’exemple de code que vous avez créé dans le tutoriel [Envoyer des notifications à des utilisateurs spécifiques à l’aide d’Azure Notification Hubs]. Vous pouvez télécharger l’exemple complet sur [GitHub](https://github.com/Azure/azure-notificationhubs-dotnet/tree/master/Samples/NotifyUsers).
 
 Pour envoyer des notifications interplateformes en utilisant des modèles, procédez comme suit :
 
@@ -76,7 +76,7 @@ Pour envoyer des notifications interplateformes en utilisant des modèles, proc�
 
     Ce code permet d’appeler la méthode propre à la plateforme pour créer une inscription de modèle et non une inscription native. Sachant que les inscriptions de modèles sont dérivées d’inscriptions natives, vous n’avez pas besoin de modifier les inscriptions existantes.
 
-1. Dans **l’Explorateur de solutions**, dans le dossier **Contrôleurs**, ouvrez le fichier *NotificationsController.cs*. Remplacez la méthode `Post` par le code suivant :
+1. Dans **l’Explorateur de solutions**, dans le dossier **Contrôleurs**, ouvrez le fichier **NotificationsController.cs**. Remplacez la méthode `Post` par le code suivant :
 
     ```csharp
     public async Task<HttpResponseMessage> Post()
@@ -118,5 +118,5 @@ Maintenant que vous avez terminé ce didacticiel, vous trouverez des information
 [Use Notification Hubs to send breaking news]: notification-hubs-windows-notification-dotnet-push-xplat-segmented-wns.md
 [Azure Notification Hubs]: https://go.microsoft.com/fwlink/p/?LinkId=314257
 [Envoyer des notifications à des utilisateurs spécifiques à l’aide d’Azure Notification Hubs]: notification-hubs-aspnet-backend-windows-dotnet-wns-notification.md
-[Templates]: https://go.microsoft.com/fwlink/p/?LinkId=317339
-[Notification Hub How to for Windows Store]: https://msdn.microsoft.com/library/windowsazure/jj927172.aspx
+[Templates]: /previous-versions/azure/azure-services/jj927170(v=azure.100)
+[Notification Hub How to for Windows Store]: /previous-versions/azure/azure-services/jj927170(v=azure.100)

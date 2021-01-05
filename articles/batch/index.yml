@@ -8,13 +8,13 @@ metadata:
   ms.topic: landing-page
   author: JnHs
   ms.author: jenhayes
-  ms.date: 09/23/2019
-  ms.openlocfilehash: b07770c030c7265fb0dc95aa07e02cccaad41729
-  ms.sourcegitcommit: a9784a3fd208f19c8814fe22da9e70fcf1da9c93
+  ms.date: 10/09/2020
+  ms.openlocfilehash: 2b2f1a9dbf8c5621ff83dee9e600575c54e9de28
+  ms.sourcegitcommit: 50802bffd56155f3b01bfb4ed009b70045131750
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 05/22/2020
-  ms.locfileid: "83779025"
+  ms.lasthandoff: 10/09/2020
+  ms.locfileid: "91931731"
 landingContent:
 - title: À propos d’Azure Batch
   linkLists:
@@ -40,8 +40,12 @@ landingContent:
       url: quick-run-python.md
   - linkListType: concept
     links:
-    - text: Vue d’ensemble des workflows et des fonctionnalités pour les développeurs
+    - text: Vue d’ensemble des workflows et des fonctionnalités
       url: batch-service-workflow-features.md
+    - text: Travaux et tâches
+      url: jobs-and-tasks.md
+    - text: Nœuds et pools
+      url: nodes-and-pools.md
 - title: Guides pas à pas
   linkLists:
   - linkListType: tutorial
@@ -50,6 +54,8 @@ landingContent:
       url: tutorial-parallel-dotnet.md
     - text: Traitement parallèle de fichiers - Python
       url: tutorial-parallel-python.md
+    - text: Scripts Python avec Data Factory
+      url: tutorial-run-python-batch-azure-data-factory.md
     - text: OCR avec Batch et Functions
       url: tutorial-batch-functions.md
     - text: Rendu de scènes avec Arnold
@@ -65,11 +71,13 @@ landingContent:
     - text: Création d’un compte Batch
       url: batch-account-create-portal.md
     - text: Créer et gérer des pools
-      url: batch-custom-images.md
+      url: batch-sig-images.md
     - text: Exécuter des tâches simultanément
       url: batch-parallel-node-tasks.md
-    - text: Utilisation de packages d’application
+    - text: Utiliser des packages d’application
       url: batch-application-packages.md
+    - text: Exécuter des applications conteneur
+      url: batch-docker-container-workloads.md
   - linkListType: concept
     links:
     - text: Tailles des machines virtuelles prises en charge
@@ -83,16 +91,18 @@ landingContent:
   - linkListType: reference
     links:
     - text: Azure CLI
-      url: https://docs.microsoft.com/cli/azure/batch?view=azure-cli-latest
+      url: /cli/azure/batch
     - text: Azure PowerShell
-      url: https://docs.microsoft.com/powershell/module/az.batch/?view=azps-2.6.0
+      url: /powershell/module/az.batch/
     - text: .NET
-      url: https://docs.microsoft.com/dotnet/api/overview/azure/batch?view=azure-dotnet
+      url: /dotnet/api/overview/azure/batch
     - text: Java
-      url: https://docs.microsoft.com/java/api/overview/azure/batch?view=azure-java-stable
+      url: /java/api/overview/azure/batch
     - text: Node.js
-      url: https://docs.microsoft.com/javascript/api/overview/azure/batch?view=azure-node-latest
+      url: /javascript/api/overview/azure/batch
     - text: Python
-      url: https://docs.microsoft.com/python/api/overview/azure/batch?view=azure-python
+      url: /python/api/overview/azure/batch
     - text: REST
-      url: https://docs.microsoft.com/rest/api/batchservice/
+      url: /rest/api/batchservice/
+    - text: Cycle de vie des API Batch
+      url: /rest/api/batchservice/batch-api-status

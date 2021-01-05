@@ -11,12 +11,12 @@ ms.topic: article
 ms.date: 01/10/2020
 ms.author: tdsp
 ms.custom: seodec18, previous-author=deguhath, previous-ms.author=deguhath
-ms.openlocfilehash: c003145acd423fd96dd0ac6c054884024c2ce4a0
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: ac6055029b8fc7bbba11a8e3b789df3b6b1622e2
+ms.sourcegitcommit: 96918333d87f4029d4d6af7ac44635c833abb3da
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75864228"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93322759"
 ---
 # <a name="team-data-science-process-project-planning"></a>Planification des projets Team Data Science Process
 
@@ -30,7 +30,7 @@ Le cycle de vie expose les principales phases que les projets exécutent génér
 - Déploiement
 - Acceptation du client
 
-Pour obtenir une description de chacune de ces étapes, consultez [Cycle de vie du processus TDSP (Team Data Science Process)](https://docs.microsoft.com/azure/machine-learning/team-data-science-process/lifecycle).
+Pour obtenir une description de chacune de ces étapes, consultez [Cycle de vie du processus TDSP (Team Data Science Process)](./lifecycle.md).
 
  
 ## <a name="microsoft-project-template"></a>Modèle Microsoft Project
@@ -60,5 +60,4 @@ Utilisez ce [référentiel de modèles de projet](https://github.com/Azure/Azure
 
 [Développement agile de projets de science des données](agile-development.md) Ce document décrit un projet de science des données d’une manière systématique, collaborative et avec gestion de versions à l’aide de Team Data Science Process.
 
-Des procédures pas à pas illustrant toutes les étapes de **scénarios spécifiques** sont également fournies. L’article [Exemples de procédures pas à pas](walkthroughs.md) les liste et les décrit brièvement, en les accompagnant de liens. Ces procédures illustrent comment combiner des outils et services locaux ou cloud dans un flux de travail ou un pipeline pour créer une application intelligente. 
-
+Des procédures pas à pas illustrant toutes les étapes de **scénarios spécifiques** sont également fournies. L’article [Exemples de procédures pas à pas](walkthroughs.md) les liste et les décrit brièvement, en les accompagnant de liens. Ces procédures illustrent comment combiner des outils et services locaux ou cloud dans un flux de travail ou un pipeline pour créer une application intelligente.

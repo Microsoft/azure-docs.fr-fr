@@ -3,19 +3,20 @@ title: Rôles de facturation pour des Contrats clients Microsoft - Azure
 description: Découvrez-en plus sur les rôles de facturation des comptes de facturation Azure dans le cadre des Contrats client Microsoft.
 author: amberbhargava
 ms.service: cost-management-billing
-ms.topic: conceptual
-ms.date: 02/13/2020
+ms.subservice: billing
+ms.topic: how-to
+ms.date: 08/20/2020
 ms.author: banders
-ms.openlocfilehash: 1003e26fa670a804328d5e34def7c9d78eced9c0
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: f0ace05d6a4df65282bd56cca8e7895b0dc24edf
+ms.sourcegitcommit: 56cbd6d97cb52e61ceb6d3894abe1977713354d9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "79238038"
+ms.lasthandoff: 08/20/2020
+ms.locfileid: "88686545"
 ---
 # <a name="understand-microsoft-customer-agreement-administrative-roles-in-azure"></a>Présentation des rôles d'administrateur Azure dans le cadre des Contrats client Microsoft
 
-Pour gérer votre compte de facturation dans le cadre d'un Contrat client Microsoft, utilisez les rôles décrits dans les sections suivantes. Ces rôles s'ajoutent aux rôles intégrés dont Azure doit contrôler l'accès aux ressources. Pour plus d’informations, consultez [Rôles intégrés pour les ressources Azure](../../role-based-access-control/built-in-roles.md).
+Pour gérer votre compte de facturation dans le cadre d'un Contrat client Microsoft, utilisez les rôles décrits dans les sections suivantes. Ces rôles s'ajoutent aux rôles intégrés dont Azure doit contrôler l'accès aux ressources. Pour plus d’informations, voir [Rôles intégrés Azure](../../role-based-access-control/built-in-roles.md).
 
 Cet article s'applique à un compte de facturation associé à un contrat client Microsoft. Vérifiez que vous avez accès à un Contrat client Microsoft.
 
@@ -141,12 +142,12 @@ Les tableaux suivants indiquent le rôle dont vous avez besoin pour accomplir de
 
 ### <a name="manage-invoice-section-permissions-and-properties"></a>Gérer les autorisations et les propriétés des sections de facture
 
-|Tâches|Propriétaire de section de facture|Contributeur de section de facture|Lecteur de section de facture|Créateur de l'abonnement Azure|Propriétaire du compte de facturation|Collaborateur du compte de facturation|Lecteur du compte de facturation | |
-|---|---|---|---|---|---|---|---|---|
-|Afficher toutes les autorisations associées à la section de facture|✔|✔|✔|✔|✔|✔|✔| |
-|Autoriser d'autres utilisateurs à consulter et gérer la section de facture|✔|✘|✘|✘|✘|✘|✘| |
-|Afficher les propriétés de la section de facture|✔|✔|✔|✔|✔|✔|✔| |
-|Mettre à jour les propriétés de la section de facture|✔|✔|✘|✘|✘|✘|✘|✘|
+|Tâches|Propriétaire de section de facture|Contributeur de section de facture|Lecteur de section de facture|Créateur de l'abonnement Azure|Propriétaire du compte de facturation|Collaborateur du compte de facturation|Lecteur du compte de facturation |
+|---|---|---|---|---|---|---|---|
+|Afficher toutes les autorisations associées à la section de facture|✔|✔|✔|✔|✔|✔|✔|
+|Autoriser d'autres utilisateurs à consulter et gérer la section de facture|✔|✘|✘|✘|✘|✘|✘|
+|Afficher les propriétés de la section de facture|✔|✔|✔|✔|✔|✔|✔|
+|Mettre à jour les propriétés de la section de facture|✔|✔|✘|✘|✘|✘|✘|
 
 ### <a name="manage-products-for-invoice-section"></a>Gérer les produits associés à la section de facture
 

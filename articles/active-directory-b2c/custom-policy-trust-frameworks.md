@@ -1,127 +1,176 @@
 ---
-title: Référence - Infrastructures de confiance dans Azure Active Directory B2C | Microsoft Docs
+title: Vue d’ensemble de la stratégie personnalisée Azure AD B2C | Microsoft Docs
 description: Rubrique sur les stratégies personnalisées Azure Active Directory B2C et l’infrastructure d’expérience d’identité.
 services: active-directory-b2c
 author: msmimart
 manager: celestedg
 ms.service: active-directory
 ms.workload: identity
-ms.topic: conceptual
-ms.date: 08/04/2017
+ms.topic: reference
+ms.date: 12/14/2020
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: ffa25eec9c4b668f428d8e8b5a780a5fe4625a2c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: ed477a931ed63c0db378ff84f85544072492ef96
+ms.sourcegitcommit: ea17e3a6219f0f01330cf7610e54f033a394b459
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78188883"
+ms.lasthandoff: 12/14/2020
+ms.locfileid: "97387035"
 ---
-# <a name="define-trust-frameworks-with-azure-ad-b2c-identity-experience-framework"></a>Définir des infrastructures de confiance avec l’infrastructure d’expérience d’identité Azure AD B2C
+# <a name="azure-ad-b2c-custom-policy-overview"></a>Vue d’ensemble de la stratégie personnalisée Azure AD B2C
 
-Les stratégies personnalisées Azure Active Directory B2C (Azure AD B2C) qui utilisent l’infrastructure d’expérience d’identité fournissent un service centralisé à votre organisation. Ce service permet de réduire la complexité de la fédération des identités au sein d’une large communauté d’intérêts. La complexité est réduite à une seule relation d’approbation et à un seul échange de métadonnées.
+Les stratégies personnalisées sont des fichiers de configuration qui définissent le comportement de votre locataire Azure Active Directory B2C (Azure AD B2C). Les [flux d’utilisateurs](user-flow-overview.md) sont prédéfinis dans le portail Azure AD B2C pour les tâches d’identité les plus courantes. Les stratégies personnalisées peuvent être entièrement modifiées par un développeur d’identité pour effectuer de nombreuses tâches différentes.
 
-Les stratégies personnalisées Azure AD B2C utilisent l’infrastructure d’expérience d’identité pour vous permettre de répondre aux questions suivantes :
+Entièrement configurable et basée sur des stratégies, une stratégie personnalisée orchestre l’approbation entre entités dans des formats de protocoles standard tels que OpenID Connect, OAuth, SAML, ainsi que quelques protocoles non standard, par exemple des échanges de revendications entre systèmes basés sur une API REST. L’infrastructure crée des expériences conviviales en marque blanche.
 
-- Quelles stratégies de conformité, de sécurité, de confidentialité et de protection des données doivent être appliquées ?
-- Quels sont les contacts et les processus pour devenir un participant agréé ?
-- Quels sont les fournisseurs d’informations d’identité agréés (également appelés « fournisseurs de revendications ») et que proposent-ils ?
-- Quelles sont les parties de confiance agréées (et éventuellement, que nécessitent-elles) ?
-- Quelles sont les exigences techniques d’interopérabilité réseau pour les participants ?
-- Quelles sont les règles de « runtime » opérationnelles à appliquer pour échanger des informations d’identité numérique ?
+Une stratégie personnalisée est représentée par un ou plusieurs fichiers au format XML qui se font mutuellement référence dans une chaîne hiérarchique. Les éléments XML définissent le blocs de construction, l’interaction avec l’utilisateur et d’autres parties, ainsi que la logique métier. 
 
-Pour répondre à toutes ces questions, les stratégies personnalisées Azure AD B2C reposant sur l’infrastructure d’expérience d’identité utilisent la construction d’infrastructure de confiance. Décrivons cette construction et ce qu’elle offre.
+## <a name="custom-policy-starter-pack"></a>Pack de démarrage de stratégie personnalisée
 
-## <a name="understand-the-trust-framework-and-federation-management-foundation"></a>Présentation des concepts de base de l’infrastructure de confiance et de la gestion de fédération
+Le [pack de démarrage](custom-policy-get-started.md#get-the-starter-pack) de stratégie personnalisée Azure AD B2C est fourni avec plusieurs stratégies prédéfinies pour vous permettre de démarrer rapidement. Chacun de ces packs de démarrage contient le plus petit nombre possible de profils techniques et de parcours utilisateur nécessaires pour réaliser les scénarios décrits :
 
-L’infrastructure de confiance est une spécification écrite des stratégies d’identité, de sécurité, de confidentialité et de protection des données auxquelles doivent se conformer les membres d’une communauté d’intérêt.
+- **LocalAccounts** : vous permet d’utiliser uniquement des comptes locaux.
+- **SocialAccounts** : vous permet d’utiliser uniquement des comptes sociaux (ou fédérés).
+- **SocialAndLocalAccounts** : vous permet d’utiliser à la fois des comptes locaux et des comptes sociaux. La plupart de nos exemples font référence à cette stratégie.
+- **SocialAndLocalAccountsWithMFA** : active les options social, local et authentification multifacteur.
 
-L’identité fédérée fournit une base pour la protection de l’identité des utilisateurs sur Internet. En déléguant la gestion des identités à des tiers, l’identité numérique unique d’un utilisateur peut être réutilisée avec plusieurs parties de confiance.
+## <a name="understanding-the-basics"></a>Compréhension des concepts de base 
 
-La protection de l’identité en effet que les fournisseurs d’identité et d’attributs respectent certaines pratiques et stratégies opérationnelles, de sécurité et de confidentialité.  Si elles ne peuvent pas effectuer d’inspections directes, les parties de confiance doivent développer des relations d’approbation avec les fournisseurs d’identité et d’attributs avec lesquels elles choisissent de travailler.
+### <a name="claims"></a>Revendications
 
-Alors que le nombre de consommateurs et de fournisseurs d’informations d’identité numérique augmente, il est difficile de continuer à gérer ces relations d’approbation par paire, ou même de procéder à un échange par paire des métadonnées techniques nécessaires pour la connectivité réseau.  Les hubs de fédération n’ont pas réussi à résoudre totalement ces problèmes.
+Une revendication fournit un stockage temporaire de données lors d’une exécution de stratégie Azure AD B2C. Elle peut stocker des informations sur l’utilisateur, telles que son prénom, son nom ou toute autre revendication obtenue de l’utilisateur ou d’autres systèmes (échanges de revendications). Le [schéma de revendications](claimsschema.md) est l’endroit où vous déclarez vos revendications. 
 
-### <a name="what-a-trust-framework-specification-defines"></a>Ce qui est défini par une infrastructure de confiance
-Les infrastructures de confiance constituent l’élément central du modèle d’infrastructure de confiance Open Identity Exchange (OIX), où chaque communauté d’intérêt est régie par une spécification d’infrastructure de confiance particulière. Ce type de spécification TF définit :
+Quand la stratégie s’exécute, Azure AD B2C envoie et reçoit des revendications vers et depuis des parties internes et externes, puis envoie un sous-ensemble de ces revendications à votre application par partie de confiance dans le jeton. Les revendications sont utilisées comme suit : 
 
-- **Les métriques de sécurité et de confidentialité pour la communauté d’intérêts avec la définition de plusieurs éléments :**
-    - Les niveaux de garantie offerts/exigés par les participants, par exemple un ensemble ordonné d’évaluations de confiance relatives à l’authenticité des informations d’identité numérique.
-    - Les niveaux de protection offerts/exigés par les participants, par exemple un ensemble ordonné d’évaluations de confiance relatives à la protection des informations d’identité numérique gérées par les participants de la communauté d’intérêts.
+- Une revendication est enregistrée, lue ou mise à jour par rapport à l’objet utilisateur de l’annuaire.
+- Une revendication est reçue d’un fournisseur d’identité externe.
+- Les revendications sont envoyées ou reçues à l’aide d’un service d’API REST personnalisée.
+- Les données sont collectées en tant que revendications de l’utilisateur lors de l’inscription ou de la modification des flux de profil.
 
-- **La description des informations d’identité numérique offertes/exigées par les participants**.
+### <a name="manipulating-your-claims"></a>Manipulation de vos revendications
 
-- **Les stratégies techniques pour la production et la consommation des informations d’identité numérique, qui serviront à calculer les niveaux de garantie et de protection. Ces stratégies écrites incluent généralement les catégories de stratégies suivantes :**
-    - Stratégies de vérification de l’identité, par exemple : *quel est le niveau de vérification des informations d’identité d’une personne ?*
-    - Stratégies de sécurité, par exemple : *quel est le niveau de protection de la confidentialité et de l’intégrité des informations ?*
-    - Stratégies de confidentialité, par exemple : *quel contrôle un utilisateur a-t-il sur ses données personnelles ?*
-    - Stratégies de survie, par exemple : *Si un fournisseur cesse son activité, comment fonctionne la continuité et la protection des informations d’identification personnelle ?*
+Les [transformations de revendications](claimstransformations.md) sont des fonctions prédéfinies utilisables pour convertir une revendication donnée en une autre, évaluer une revendication ou définir une valeur de revendication. Par exemple, l’ajout d’un élément à une collection de chaînes, la modification de la casse d’une chaîne ou l’évaluation d’une revendication de données et d’heure. Une transformation de revendications spécifie une méthode de transformation. 
 
-- **Les profils techniques pour la production et la consommation des informations d’identité numérique. Ces profils incluent :**
-    - Des interfaces d’étendue pour lesquelles des informations d’identité numérique sont accessibles à un niveau de garantie spécifié.
-    - Des exigences techniques d’interopérabilité réseau.
+### <a name="customize-and-localize-your-ui"></a>Personnaliser et localiser votre interface utilisateur
 
-- **Les descriptions des différents rôles pouvant être attribués aux participants de la communauté, et les qualifications nécessaires pour remplir ces rôles.**
+Lorsque vous souhaitez collecter des informations de vos utilisateurs en présentant une page dans leur navigateur web, utilisez le [profil technique autodéclaré](self-asserted-technical-profile.md). Vous pouvez modifier votre profil technique autodéclaré pour [ajouter des revendications et personnaliser l’entrée utilisateur](custom-policy-configure-user-input.md).
 
-Par conséquent, une spécification TF détermine comment les informations d’identité sont échangées entre les participants de la communauté d’intérêt : les parties de confiance, les fournisseurs d’identité et d’attributs, et les vérificateurs d’attributs.
+Pour [personnaliser l’interface utilisateur](customize-ui-with-html.md) pour votre profil technique autodéclaré, vous spécifiez une URL dans l’élément [définition de contenu](contentdefinitions.md) avec du contenu HTML personnalisé. Dans le profil technique autodéclaré, vous pointez sur cet ID de définition de contenu.
 
-Une spécification d’infrastructure de confiance est constituée d’un ou plusieurs documents qui servent de référence pour la gouvernance de la communauté d’intérêts qui régule l’assertion et la consommation des informations d’identité numérique au sein de la communauté. Il s’agit d’un ensemble documenté de stratégies et de procédures, conçues pour établir la confiance dans les identités numériques utilisées pour les transactions en ligne entre les différents membres d’une communauté d’intérêts.
+Pour personnaliser des chaînes spécifiques d’une langue, utilisez l’élément [localisation](localization.md). Une définition de contenu peut contenir une référence [localisation](localization.md) qui spécifie une liste de ressources localisées à charger. Azure AD B2C fusionne des éléments d’interface utilisateur avec le contenu HTML chargé à partir de votre URL, puis affiche la page à l’utilisateur. 
 
-En d’autres termes, une spécification d’infrastructure de confiance définit les règles pour la création d’un écosystème d’identités fédéré viable pour une communauté.
+## <a name="relying-party-policy-overview"></a>Vue d’ensemble d’une stratégie de partie de confiance.
 
-Il existe actuellement un large consensus sur les avantages d’une telle approche. Il ne fait aucun doute que les spécifications d’infrastructure de confiance facilitent le développement d’écosystèmes d’identité numérique avec des caractéristiques de sécurité, de garantie et de confidentialité vérifiables, ce qui signifie qu’ils peuvent être réutilisés à travers plusieurs communautés d’intérêts.
+Une application par partie de confiance, appelée fournisseur de services dans le protocole SAML, appelle la [stratégie de partie de confiance](relyingparty.md) pour exécuter un parcours utilisateur spécifique. La stratégie de partie de confiance spécifie le parcours utilisateur à exécuter, ainsi que la liste des revendications que le jeton inclut. 
 
-C’est pourquoi les stratégies personnalisées Azure AD B2C reposant sur l’infrastructure d’expérience d’identité utilisent la spécification comme base de leur représentation des données, afin qu’une infrastructure de confiance puisse faciliter l’interopérabilité.
+![Diagramme indiquant le workflow d’exécution de la stratégie](./media/custom-policy-trust-frameworks/custom-policy-execution.png)
 
-Les stratégies personnalisées Azure AD B2C qui tirent parti de l’infrastructure d’expérience d’identité représentent une spécification d’infrastructure de confiance comme un mélange de données lisibles par les humains et d’autres lisibles par un ordinateur. Certaines sections de ce modèle (en général, les sections qui sont les plus orientées vers la gouvernance) sont représentées en tant que références à une documentation publiée sur les politiques de sécurité et de confidentialité, ainsi que sur les procédures associées (le cas échéant). D’autres sections décrivent en détail les règles de métadonnées et d’exécution de configuration qui facilitent l’automatisation des opérations.
+Toutes les applications par partie de confiance qui utilisent la même stratégie reçoivent les mêmes revendications de jeton, et l’utilisateur passe par le même parcours utilisateur.
 
-## <a name="understand-trust-framework-policies"></a>Présentation des stratégies d’infrastructure de confiance
+### <a name="user-journeys"></a>Parcours utilisateur
 
-En termes d’implémentation, la spécification d’infrastructure de confiance se compose d’un ensemble de stratégies qui permettent de contrôler totalement les comportements et les expériences d’identité.  Les stratégies personnalisées Azure AD B2C reposant sur l’infrastructure d’expérience d’identité vous permettent de créer votre propre spécification d’infrastructure de confiance via ces stratégies déclaratives qui peuvent définir et configurer :
+Un [parcours utilisateur](userjourneys.md) vous permet de définir la logique métier avec un chemin que l’utilisateur doit suivre pour accéder à votre application. L’utilisateur est conduit à travers le parcours utilisateur pour récupérer les revendications à présenter à votre application. Chaque parcours utilisateur est construit à partir d’une séquence d’[étapes d’orchestration](userjourneys.md#orchestrationsteps). Un utilisateur doit atteindre la dernière étape pour acquérir un jeton. 
 
-- La ou les références de document définissant l’écosystème d’identités fédéré de la communauté associée à la spécification d’infrastructure de confiance. Il s’agit de liens vers la documentation TF. Les règles de « runtime » opérationnel (prédéfinies), ou les parcours utilisateur qui automatisent et/ou contrôlent l’échange et l’utilisation de revendications. Ces parcours utilisateur sont associés à un niveau de garantie (et de protection). Une stratégie peut donc avoir des parcours utilisateur avec différents niveaux de garantie (et de protection).
+La section suivante décrit comment ajouter des étapes d’orchestration à la stratégie de [pack de démarrage de compte social et local](https://github.com/Azure-Samples/active-directory-b2c-custom-policy-starterpack/tree/master/SocialAndLocalAccounts). Voici un exemple d’appel d’API REST qui a été ajouté.
 
-- Les fournisseurs d’identité et d’attributs, ou fournisseurs de revendications, de la communauté d’intérêt et les profils techniques qu’ils prennent en charge, ainsi que leur agrément de niveau de garantie/protection (hors bande) respectif.
+![Parcours utilisateur personnalisé](media/custom-policy-trust-frameworks/user-journey-flow.png)
 
-- L’intégration à des vérificateurs d’attributs ou des fournisseurs de revendications.
 
-- Les parties de confiance de la communauté (par inférence).
+### <a name="orchestration-steps"></a>Étapes d’orchestration
 
-- Les métadonnées pour établir des communications réseau entre les participants. Ces métadonnées, ainsi que les profils techniques, sont utilisées pendant une transaction pour analyser l’interopérabilité réseau entre la partie de confiance et les autres participants de la communauté.
+Une étape d’orchestration fait référence à une méthode qui implémente son rôle ou sa fonctionnalité prévus. Cette méthode est appelée [profil technique](technicalprofiles.md). Lorsque votre parcours utilisateur a besoin d’une création de branche pour mieux représenter la logique métier, l’étape d’orchestration fait référence à un [sous-parcours](subjourneys.md). Un sous-parcours contient son propre ensemble d’étapes d’orchestration.
 
-- Conversion de protocole, le cas échéant (par exemple SAML 2.0, OAuth2, WS-Federation et OpenID Connect).
+Un utilisateur doit atteindre la dernière étape d’orchestration dans le parcours utilisateur pour acquérir un jeton. Toutefois, il se peut que des utilisateurs n’aient pas besoin de parcourir toutes les étapes d’orchestration. Des étapes d’orchestration peuvent être exécutées de manière conditionnelle, en fonction de [conditions préalables](userjourneys.md#preconditions) définies dans l’étape d’orchestration. 
 
-- Les exigences d’authentification.
+Une fois qu’étape d’orchestration a été accomplie, Azure AD B2C stocke les revendications générées dans le **conteneur de revendications**. Les revendications figurant dans le conteneur de revendications peuvent être utilisées par toutes les autres étapes d’orchestration dans le parcours utilisateur.
 
-- L’orchestration multifacteur, le cas échéant.
+Le diagramme suivant montre comment les étapes d’orchestration du parcours utilisateur peuvent accéder au conteneur de revendications.
 
-- Un schéma partagé pour toutes les revendications disponibles et des mappages aux participants d’une communauté d’intérêts.
+![Parcours utilisateur Azure AD B2C](media/custom-policy-trust-frameworks/user-journey-diagram.png)
 
-- Toutes les transformations de revendications, ainsi que la réduction possible des données dans ce contexte, pour soutenir l’échange et l’utilisation des revendications.
+### <a name="technical-profile"></a>Profil technique
 
-- La liaison et le chiffrement.
+Un profil technique fournit une interface pour communiquer avec différents types de parties. Un parcours utilisateur combine des profils techniques appelants via des étapes d’orchestration pour définir votre logique métier.
 
-- Le stockage des revendications.
+Tous les types de profils techniques partagent le même concept. Vous envoyez des revendications d’entrée, exécutez une transformation de revendications et communiquez avec la partie configurée. Une fois le processus terminé, le profil technique retourne les revendications de sortie au conteneur de revendications. Pour plus d’informations, consultez [Vue d’ensemble des profils techniques](technicalprofiles.md).
 
-### <a name="understand-claims"></a>Présentation des revendications
+### <a name="validation-technical-profile"></a>Profil technique de validation
 
-> [!NOTE]
-> Nous faisons collectivement référence à tous les types possibles d’informations d’identité qui peuvent être échangées en tant que « revendications » : les revendications concernant les informations d’authentification d’un utilisateur, la vérification d’identité, le périphérique de communication, l’emplacement physique, les attributs d’identification personnelle, etc.
->
-> Nous utilisons le terme « revendications » au lieu d’« d’attributs », car, dans les transactions en ligne, ces artefacts de données ne sont pas des faits directement vérifiables par la partie de confiance. Il s’agit plutôt d’assertions, ou de revendications, à propos de faits pour lesquels la partie de confiance doit développer une confiance suffisante pour accorder la transaction demandée de l’utilisateur final.
->
-> Nous utilisons aussi le terme « revendications » parce que les stratégies personnalisées Azure AD B2C qui utilisent l’infrastructure d’expérience d’identité sont conçues pour simplifier l’échange de tous types d’informations d’identité numériques de manière cohérente, que le protocole sous-jacent soit ou non défini pour l’authentification des utilisateurs ou la récupération des attributs.  De même, nous utilisons le terme « fournisseurs de revendications » pour désigner collectivement les fournisseurs d’identité, les fournisseurs d’attributs et les vérificateurs d’attributs quand nous ne voulons pas faire la distinction entre leurs fonctions respectives.
+Quand un utilisateur interagit avec l’interface utilisateur, vous pouvez valider les données collectées. Pour interagir avec l’utilisateur, vous devez utiliser un [profil technique autodéclaré](self-asserted-technical-profile.md).
 
-Par conséquent, elles déterminent comment les informations d’identité sont échangées entre une partie de confiance, les fournisseurs d’identité et d’attributs, et les vérificateurs d’attributs. Elles spécifient les fournisseurs d’identité et d’attributs requis pour l’authentification d’une partie de confiance. Elles doivent être considérées comme un langage spécifique à un domaine, autrement dit un langage informatique spécialisé dans un domaine d’application spécifique avec de l’héritage, des instructions *if* et du polymorphisme.
+Pour valider l’entrée utilisateur, un [profil technique de validation](validation-technical-profile.md) est appelé à partir du profil technique autodéclaré. 
 
-Ces stratégies constituent la partie lisible par un ordinateur de la construction d’infrastructure de confiance dans les stratégies personnalisées d’Azure AD B2C tirant parti de l’infrastructure d’expérience d’identité. Elles comprennent tous les détails opérationnels, notamment les métadonnées et les profils techniques des fournisseurs de revendications, les définitions de schéma des revendications, les fonctions de transformation des revendications et les parcours utilisateur qui sont renseignés pour faciliter l’orchestration et l’automatisation opérationnelles.
+Un profil technique de validation est une méthode permettant d’appeler un profil technique non interactif. Dans ce cas, le profil technique peut retourner des revendications de sortie ou un message d’erreur. Le message d’erreur s’affiche à l’utilisateur, permettant à celui-ci de réessayer.
 
-Elles sont supposées être des *documents dynamiques*, car il est probable que leur contenu changera au fil du temps quant aux participants actifs déclarés dans les stratégies. Il est également possible que les termes et conditions pour être participant changent.
+Le diagramme suivant illustre la façon dont Azure AD B2C utilise un profil technique de validation pour valider les informations d’identification de l’utilisateur.
 
-La configuration et la gestion de la fédération sont grandement simplifiées en épargnant aux parties de confiance la reconfiguration permanente de la connectivité et de l’approbation lors de l’arrivée ou du départ des différents fournisseurs/vérificateurs de revendications de la communauté représentée par l’ensemble de stratégies.
+![Diagramme de profil technique de validation](media/custom-policy-trust-frameworks/validation-technical-profile.png)
 
-L’interopérabilité est un autre défi important. D’autres fournisseurs/vérificateurs de revendications doivent être intégrés, car il est peu probable que les parties de confiance prennent en charge tous les protocoles nécessaires. Les stratégies personnalisées Azure AD B2C résolvent ce problème en prenant en charge les protocoles standard et en appliquant des parcours utilisateur spécifiques pour transposer les demandes quand les parties de confiance et les fournisseurs d’attributs ne prennent pas en charge le même protocole.
+## <a name="inheritance-model"></a>Modèle d’héritage
 
-Les parcours utilisateur incluent les profils et les métadonnées des protocoles qui sont utilisés pour analyser l’interopérabilité réseau entre la partie de confiance et les autres participants. Il existe également des règles de runtime opérationnelles qui seront appliquées aux messages de demande/réponse des échanges d’informations d’identité afin de garantir la conformité avec les stratégies publiées dans le cadre de la spécification d’infrastructure de confiance. L’idée de parcours utilisateur est fondamentale pour la personnalisation de l’expérience utilisateur. Elle apporte également un éclairage sur la façon dont le système fonctionne au niveau du protocole.
+Chaque pack de démarrage comprend les fichiers suivants :
 
-Sur cette base, les portails et applications par partie de confiance peuvent, selon leur contexte, appeler des stratégies personnalisées Azure AD B2C reposant sur l’infrastructure d’expérience d’identité en passant le nom d’une stratégie spécifique afin d’obtenir le comportement et l’échange d’informations attendus sans risque ni complication.
+- Fichier **de base** contenant la plupart des définitions. Pour faciliter la résolution des problèmes et la maintenance à long terme de vos stratégies, il est recommandé d’éviter autant que possible de modifier ce fichier.
+- Fichier d’**extensions** contenant les modifications de configuration propres à votre locataire. Ce fichier de stratégie est dérivé du fichier de base. Utilisez-le pour ajouter de nouvelles fonctionnalités ou remplacer des fonctionnalités existantes. Par exemple, utilisez-le pour fédérer avec de nouveaux fournisseurs d’identité.
+- Fichier de **partie de confiance** qui est le fichier centré sur une tâche unique, qui est appelé directement par une application par partie de confiance, telle que vos applications web, mobiles ou de bureau. Chaque tâche, telle que l’inscription, la connexion, la réinitialisation de mot de passe ou la modification du profil, nécessite son propre fichier de stratégie de partie de confiance. Ce fichier de stratégie est dérivé du fichier d’extensions.
+
+Le modèle d’héritage est le suivant :
+
+- La stratégie enfant peut hériter, à tous les niveaux, de la stratégie parente et l’étendre en ajoutant de nouveaux éléments.
+- Pour des scénarios plus complexes, vous pouvez ajouter des niveaux d’héritage (jusqu’à 5).
+- Vous pouvez ajouter des stratégies de partie de confiance. Par exemple, supprimer mon compte, modifier un numéro de téléphone ou une stratégie de partie de confiance SAML, et bien plus encore.
+
+Le diagramme suivant montre la relation entre les fichiers de stratégie et les applications par partie de confiance.
+
+![Diagramme indiquant le modèle d’héritage de stratégie d’infrastructure de confiance](media/custom-policy-trust-frameworks/policies.png)
+
+
+## <a name="guidance-and-best-practices"></a>Aide et bonnes pratiques
+
+### <a name="best-practices"></a>Meilleures pratiques
+
+Au sein d’une stratégie personnalisée Azure AD B2C, vous pouvez intégrer votre propre logique métier pour créer les expériences utilisateur dont vous avez besoin et étendre les fonctionnalités du service. Nous proposons un ensemble de meilleures pratiques et de recommandations pour commencer.
+
+- Créez votre logique dans la **stratégie d’extension** ou la **stratégie de partie de confiance**. Vous pouvez ajouter de nouveaux éléments qui remplaceront la stratégie de base en référençant le même ID. Cela vous permettra d’effectuer un scale-out de votre projet tout en facilitant la mise à niveau de la stratégie de base par la suite si Microsoft met en production de nouveaux packs de démarrage.
+- Dans la **stratégie de base**, nous vous recommandons vivement d’éviter d’apporter des modifications.  Si nécessaire, formulez des commentaires sur l’emplacement des modifications.
+- Lorsque vous remplacez un élément, tel que des métadonnées de profil technique, évitez de copier le profil technique entier à partir de la stratégie de base. Au lieu de cela, copiez uniquement la section requise de l’élément. Pour obtenir un exemple illustrant la manière d’apporter la modification, consultez [Désactiver la vérification par e-mail](custom-policy-disable-email-verification.md).
+- Pour réduire la duplication des profils techniques, où les principales fonctionnalités sont partagées, utilisez une [inclusion de profil technique](technicalprofiles.md#include-technical-profile).
+- Évitez d’écrire dans l’annuaire Azure AD lors de la connexion, ce qui peut entraîner des problèmes de limitation.
+- Si votre stratégie a des dépendances externes, telles qu’une API REST, assurez-vous qu’elles sont hautement disponibles.
+- Pour améliorer l’expérience utilisateur, assurez-vous que vos modèles HTML personnalisés sont déployés globalement en utilisant une [distribution de contenu en ligne](https://docs.microsoft.com/azure/cdn/). Azure Content Delivery Network (CDN) vous permet de réduire les temps de chargement, d’économiser de la bande passante et d’accélérer la réactivité.
+- Si vous souhaitez apporter une modification au parcours utilisateur. Copiez l’intégralité du parcours utilisateur de la stratégie de base vers la stratégie d’extension. Fournissez un ID de parcours utilisateur unique pour le parcours utilisateur que vous avez copié. Ensuite, dans la [stratégie de partie de confiance](relyingparty.md), modifiez l’élément [parcours utilisateur par défaut](relyingparty.md#defaultuserjourney) pour pointer vers le nouveau parcours utilisateur.
+
+## <a name="troubleshooting"></a>Résolution des problèmes
+
+Lorsque vous développez avec des stratégies Azure AD B2C, vous pouvez rencontrer des erreurs ou des exceptions lors de l’exécution de votre parcours utilisateur. Vous pouvez examiner les problèmes à l’aide d’Application Insights.
+
+- Intégrez Application Insights avec Azure AD B2C pour [diagnostiquer les exceptions](troubleshoot-with-application-insights.md).
+- L’[extension Azure AD B2C pour VS code](https://marketplace.visualstudio.com/items?itemName=AzureADB2CTools.aadb2c) peut vous aider à [visualiser les journaux](https://github.com/azure-ad-b2c/vscode-extension/blob/master/src/help/app-insights.md) en fonction d’un nom et d’une heure de stratégie.
+- L’erreur la plus courante lors de la configuration des stratégies personnalisées concerne la mise en forme du code XML. Utilisez une [validation de schéma XML](troubleshoot-custom-policies.md) pour identifier des erreurs avant de charger votre fichier XML.
+
+## <a name="continuous-integration"></a>Intégration continue
+
+En utilisant un pipeline d’intégration continue et livraison continue (CI/CD) que vous configurez dans Azure Pipelines, vous pouvez [inclure vos stratégies personnalisées Azure AD B2C dans la livraison de vos logiciels](deploy-custom-policies-devops.md) et l’automatisation du contrôle de leur code. Lorsque vous déployez dans différents environnements Azure AD B2C, par exemple de dev, de test et de production, nous vous recommandons de supprimer les processus manuels et d’effectuer des tests automatisés à l’aide d’Azure Pipelines.
+
+## <a name="prepare-your-environment"></a>Préparation de votre environnement
+
+Vous commencez avec une stratégie personnalisée Azure AD B2C :
+
+1. [Créer un client Azure AD B2C](tutorial-create-tenant.md)
+1. [Inscrivez une application web](tutorial-register-applications.md) à l’aide du portail Azure. Vous serez ainsi en mesure de tester votre stratégie.
+1. Ajoutez les [clés de stratégie](custom-policy-get-started.md#add-signing-and-encryption-keys) nécessaires et [inscrivez les applications Identity Experience Framework](custom-policy-get-started.md#register-identity-experience-framework-applications).
+1. [Procurez-vous le pack de démarrage de stratégie Azure AD B2C](custom-policy-get-started.md#get-the-starter-pack) et chargez-le sur votre locataire. 
+1. Après avoir chargé le pack de démarrage, [testez votre stratégie d’inscription ou de connexion](custom-policy-get-started.md#test-the-custom-policy).
+1. Nous vous recommandons de télécharger et d’installer [Visual Studio Code](https://code.visualstudio.com/) (VS Code). Visual Studio Code est un éditeur de code source simple mais puissant. Il s’exécute sur votre poste de travail et est disponible en version Windows, macOS et Linux. VS Code vous permet de modifier les fichiers XML de votre stratégie personnalisée Azure AD B2C.
+1. Pour naviguer rapidement dans les stratégies personnalisées Azure AD B2C, nous vous recommandons d’installer l’[extension Azure AD B2C pour VS Code](https://marketplace.visualstudio.com/items?itemName=AzureADB2CTools.aadb2c).
+ 
+## <a name="next-steps"></a>Étapes suivantes
+
+Après avoir configuré et testé votre stratégie de Azure AD B2C, vous pouvez commencer à la personnaliser. Pour savoir comment procéder, consultez les articles suivants :
+
+- [Ajouter des revendications et personnaliser l’entrée utilisateur](custom-policy-configure-user-input.md) dans des stratégies personnalisées. Découvrez comment définir une revendication, ajouter une revendication à l’interface utilisateur en personnalisant certains profils techniques du pack de démarrage.
+- [Personnaliser l’interface utilisateur](customize-ui-with-html.md) de votre application à l’aide d’une stratégie personnalisée. Découvrez comment créer votre propre contenu HTML et personnaliser la définition du contenu.
+- [Localiser l’interface utilisateur](custom-policy-localization.md) de votre application à l’aide d’une stratégie personnalisée. Apprenez à configurer la liste des langues prises en charge et fournir des étiquettes spécifiques de la langue en ajoutant l’élément ressources localisées.
+- Lors du développement et du test de votre stratégie, vous pouvez [désactiver la vérification par e-mail](custom-policy-disable-email-verification.md). Découvrez comment remplacer les métadonnées d’un profil technique.
+- [Configurez la connexion avec un compte Google](identity-provider-google-custom.md) en utilisant des stratégies personnalisées. Découvrez comment créer un fournisseur de revendications avec un profil technique OAuth2. Ensuite, personnalisez le parcours utilisateur pour inclure l’option de connexion Google.
+- Pour diagnostiquer des problèmes liés à vos stratégies personnalisées, vous pouvez [Collecter les journaux Azure Active Directory B2C avec Application Insights](troubleshoot-with-application-insights.md). Découvrez comment ajouter de nouveaux profils techniques et configurer votre stratégie de partie de confiance.

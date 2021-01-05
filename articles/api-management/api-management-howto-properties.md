@@ -1,6 +1,6 @@
 ---
 title: Guide pratique pour utiliser des valeurs nommées dans les stratégies Gestion des API Azure
-description: Découvrez comment utiliser des valeurs nommées dans les stratégies Gestion des API Azure.
+description: Découvrez comment utiliser des valeurs nommées dans les stratégies Gestion des API Azure. Les valeurs nommées peuvent contenir des chaînes littérales et des expressions de stratégie.
 services: api-management
 documentationcenter: ''
 author: vladvino
@@ -12,12 +12,12 @@ ms.tgt_pltfrm: na
 ms.topic: article
 ms.date: 01/08/2020
 ms.author: apimpm
-ms.openlocfilehash: dc8ca7296658f4113d86765f230ca0158727255f
-ms.sourcegitcommit: fdec8e8bdbddcce5b7a0c4ffc6842154220c8b90
+ms.openlocfilehash: 3f317276ae92e6121d519553b7883677dab89705
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83649199"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87852189"
 ---
 # <a name="how-to-use-named-values-in-azure-api-management-policies"></a>Guide pratique pour utiliser des valeurs nommées dans les stratégies Gestion des API Azure
 
@@ -34,7 +34,7 @@ Chaque instance du service Gestion des API possède une collection de paires cl�
 
 ![Valeurs nommées](./media/api-management-howto-properties/named-values.png)
 
-Les valeurs nommées peuvent contenir des chaînes littérales et des [expressions de stratégie](/azure/api-management/api-management-policy-expressions). Par exemple, la valeur de `Expression` est une expression de stratégie qui retourne une chaîne contenant la date et l’heure actuelles. La valeur nommée `Credential` est marquée en tant que secret. Par défaut, cette valeur n’est donc pas affichée.
+Les valeurs nommées peuvent contenir des chaînes littérales et des [expressions de stratégie](./api-management-policy-expressions.md). Par exemple, la valeur de `Expression` est une expression de stratégie qui retourne une chaîne contenant la date et l’heure actuelles. La valeur nommée `Credential` est marquée en tant que secret. Par défaut, cette valeur n’est donc pas affichée.
 
 | Nom       | Valeur                      | Secret | Balises          |
 | ---------- | -------------------------- | ------ | ------------- |
@@ -110,8 +110,8 @@ Alors que les valeurs nommées peuvent contenir des expressions de stratégie, e
 
 -   En savoir plus sur l’utilisation des stratégies
     -   [Stratégies dans Gestion des API](api-management-howto-policies.md)
-    -   [Référence de stratégie](/azure/api-management/api-management-policies)
-    -   [Expressions de stratégie](/azure/api-management/api-management-policy-expressions)
+    -   [Référence de stratégie](./api-management-policies.md)
+    -   [Expressions de stratégie](./api-management-policy-expressions.md)
 
 [api-management-send-results]: ./media/api-management-howto-properties/api-management-send-results.png
 [api-management-properties-filter]: ./media/api-management-howto-properties/api-management-properties-filter.png

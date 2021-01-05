@@ -6,15 +6,15 @@ ms.service: iot-hub
 services: iot-hub
 ms.devlang: nodejs
 ms.topic: quickstart
-ms.custom: mvc
+ms.custom: mvc, devx-track-js, devx-track-azurecli
 ms.date: 03/14/2019
 ms.author: robinsh
-ms.openlocfilehash: c372a0a09fd3143f570aa4b316c9191e617c69e2
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: f32882dcb423c6f42a21a242a7e628ef6acda006
+ms.sourcegitcommit: 80c1056113a9d65b6db69c06ca79fa531b9e3a00
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "78675456"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96902134"
 ---
 # <a name="quickstart-enable-ssh-and-rdp-over-an-iot-hub-device-stream-by-using-a-nodejs-proxy-application-preview"></a>Démarrage rapide : Activer SSH et RDP sur un flux d’appareil IoT Hub à l’aide d’une application de proxy Node.js (préversion)
 
@@ -30,13 +30,15 @@ Dans ce guide de démarrage rapide, vous activez le trafic SSH (Secure Shell) et
 
 * [Node.js 10+](https://nodejs.org).
 
+    Vous pouvez vérifier la version actuelle de Node.js sur votre machine de développement en utilisant la commande suivante :
+
+    ```cmd/sh
+    node --version
+    ```
+
 * [Un exemple de projet Node.js](https://github.com/Azure-Samples/azure-iot-samples-node/archive/streams-preview.zip).
 
-Vous pouvez vérifier la version actuelle de Node.js sur votre machine de développement en utilisant la commande suivante :
-
-```cmd/sh
-node --version
-```
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../includes/azure-cli-prepare-your-environment-no-header.md)]
 
 Microsoft Azure IoT Hub prend actuellement en charge les flux d’appareil en tant que [fonctionnalité d’évaluation](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
 
@@ -47,8 +49,6 @@ Microsoft Azure IoT Hub prend actuellement en charge les flux d’appareil en ta
 > * EUAP USA Centre
 > * Europe Nord
 > * Asie Sud-Est
-  
-[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
 
 ### <a name="add-azure-iot-extension"></a>Ajouter une extension Azure IoT
 
@@ -88,7 +88,7 @@ Un appareil doit être inscrit dans votre hub IoT pour pouvoir se connecter. Dan
    > Remplacez l’espace réservé *YourIoTHubName* par le nom que vous avez choisi pour votre hub IoT.
 
     ```azurecli-interactive
-    az iot hub show-connection-string --policy-name service --name {YourIoTHubName} --output table
+    az iot hub connection-string show --policy-name service --hub-name {YourIoTHubName} --output table
     ```
 
    Notez la chaîne de connexion de service retournée ; vous en aurez besoin plus loin dans ce guide de démarrage rapide. Cela ressemble à l’exemple suivant :

@@ -5,16 +5,16 @@ services: data-factory
 author: linda33wj
 ms.service: data-factory
 ms.topic: troubleshooting
-ms.date: 01/09/2020
+ms.date: 12/09/2020
 ms.author: jingwang
 ms.reviewer: craigg
 ms.custom: has-adal-ref
-ms.openlocfilehash: 50f76d9b4f3061e6e9a1e4a0b510146dbded422a
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.openlocfilehash: a7a81a742922d45be965c7f73e3cb910d0ef989a
+ms.sourcegitcommit: 6172a6ae13d7062a0a5e00ff411fd363b5c38597
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83199006"
+ms.lasthandoff: 12/11/2020
+ms.locfileid: "97109286"
 ---
 # <a name="troubleshoot-azure-data-factory-connectors"></a>Résoudre les problèmes liés aux connecteurs dans Azure Data Factory
 
@@ -22,7 +22,6 @@ ms.locfileid: "83199006"
 
 Cet article présente des méthodes couramment employées pour résoudre les problèmes liés aux connecteurs dans Azure Data Factory.
   
-
 ## <a name="azure-blob-storage"></a>Stockage Blob Azure
 
 ### <a name="error-code--azurebloboperationfailed"></a>Code d’erreur :  AzureBlobOperationFailed
@@ -47,6 +46,15 @@ Cet article présente des méthodes couramment employées pour résoudre les pro
 ### <a name="error-code--azurestorageoperationfailedconcurrentwrite"></a>Code d’erreur :  AzureStorageOperationFailedConcurrentWrite
 
 - **Message** : `Error occurred when trying to upload a file. It's possible because you have multiple concurrent copy activities runs writing to the same file '%name;'. Check your ADF configuration.`
+
+
+### <a name="invalid-property-during-copy-activity"></a>Propriété non valide durant l’activité de copie
+
+- **Message** : `Copy activity <Activity Name> has an invalid "source" property. The source type is not compatible with the dataset <Dataset Name> and its linked service <Linked Service Name>. Please verify your input against.`
+
+- **Cause** : Le type défini dans le jeu de données n’est pas cohérent avec le type de source/récepteur défini dans l’activité de copie.
+
+- **Résolution** : Modifiez la définition JSON du jeu de données ou du pipeline pour rendre les types cohérents et réexécutez le déploiement.
 
 
 ## <a name="azure-cosmos-db"></a>Azure Cosmos DB
@@ -157,12 +165,53 @@ Cet article présente des méthodes couramment employées pour résoudre les pro
 - **Message** : `Error occurred when trying to upload a file. It's possible because you have multiple concurrent copy activities runs writing to the same file '%name;'. Check your ADF configuration.`
 
 
-### <a name="error-code--adlsgen2timeouterror"></a>Code d’erreur :  AdlsGen2TimeoutError
+### <a name="error-code-adlsgen2timeouterror"></a>Code d’erreur : AdlsGen2TimeoutError
 
 - **Message** : `Request to ADLS Gen2 account '%account;' met timeout error. It is mostly caused by the poor network between the Self-hosted IR machine and the ADLS Gen2 account. Check the network to resolve such error.`
 
 
+### <a name="request-to-adls-gen2-account-met-timeout-error"></a>La demande au compte ADLS Gen2 a rencontré une erreur d’expiration de délai
+
+- **Message** : Code d’erreur = `UserErrorFailedBlobFSOperation`, Message d’erreur = `BlobFS operation failed for: A task was canceled`.
+
+- **Cause** : Le problème est dû à une erreur d’expiration du délai du récepteur ADLS Gen2, ce qui se produit essentiellement sur la machine de l’IR auto-hébergé.
+
+- **Recommandation** : 
+
+    1. Placez votre machine de l’IR auto-hébergé et le compte ADLS Gen2 cible dans la même région, si possible. Cela peut éviter une erreur d’expiration de délai aléatoire et améliorer les performances.
+
+    1. Vérifiez s’il existe un paramètre de réseau spécial comme ExpressRoute et assurez-vous que le réseau dispose d’une bande passante suffisante. Il est recommandé de réduire le paramètre des tâches simultanées de l’IR auto-hébergé quand la bande passante globale est faible, ce qui peut éviter la concurrence des ressources réseau entre les différentes tâches simultanées.
+
+    1. Utilisez une taille de bloc plus petite pour la copie non binaire afin d’atténuer les effets d’une telle erreur d’expiration de délai si la taille de fichier est modérée ou petite. Consultez [Stockage Blob – Put Block](https://docs.microsoft.com/rest/api/storageservices/put-block).
+
+       Pour spécifier la taille de bloc personnalisée, vous pouvez modifier la propriété dans l’éditeur .json :
+    ```
+    "sink": {
+        "type": "DelimitedTextSink",
+        "storeSettings": {
+            "type": "AzureBlobFSWriteSettings",
+            "blockSizeInMB": 8
+        }
+    }
+    ```
+
+
 ## <a name="azure-data-lake-storage-gen1"></a>Azure Data Lake Storage Gen1
+
+### <a name="error-message-the-underlying-connection-was-closed-could-not-establish-trust-relationship-for-the-ssltls-secure-channel"></a>Message d’erreur : Le serveur a clos la connexion sous-jacente : Impossible d’établir une relation de confiance pour le canal sécurisé SSL/TLS.
+
+- **Symptômes** : L’activité de copie échoue avec l’erreur suivante : 
+
+    ```
+    Message: Failure happened on 'Sink' side. ErrorCode=UserErrorFailedFileOperation,'Type=Microsoft.DataTransfer.Common.Shared.HybridDeliveryException,Message=Upload file failed at path STAGING/PLANT/INDIARENEWABLE/LiveData/2020/01/14\\20200114-0701-oem_gibtvl_mannur_data_10min.csv.,Source=Microsoft.DataTransfer.ClientLibrary,''Type=System.Net.WebException,Message=The underlying connection was closed: Could not establish trust relationship for the SSL/TLS secure channel.,Source=System,''Type=System.Security.Authentication.AuthenticationException,Message=The remote certificate is invalid according to the validation procedure.,Source=System,'.
+    ```
+
+- **Cause** : La validation du certificat a échoué lors de la négociation TLS.
+
+- **Résolution** : Solution de contournement : Utilisez la copie intermédiaire afin d’ignorer la validation TLS pour ADLS Gen1. Vous devez reproduire ce problème et collecter la trace netmon, puis demander à votre équipe réseau de vérifier la configuration du réseau local.
+
+    ![Résoudre les problèmes liés à ADLS Gen1](./media/connector-troubleshoot-guide/adls-troubleshoot.png)
+
 
 ### <a name="error-message-the-remote-server-returned-an-error-403-forbidden"></a>Message d’erreur : Le serveur distant a retourné une erreur : (403) Interdit
 
@@ -191,7 +240,7 @@ Cet article présente des méthodes couramment employées pour résoudre les pro
 - **Résolution** : Réexécutez l’activité de copie au bout de quelques minutes.
                   
 
-## <a name="azure-sql-data-warehouseazure-sql-databasesql-server"></a>Azure SQL Data Warehouse/Azure SQL Database/SQL Server
+## <a name="azure-synapse-analyticsazure-sql-databasesql-server"></a>Azure Synapse Analytics/Azure SQL Database/SQL Server
 
 ### <a name="error-code--sqlfailedtoconnect"></a>Code d’erreur :  SqlFailedToConnect
 
@@ -203,7 +252,7 @@ Cet article présente des méthodes couramment employées pour résoudre les pro
 
 - **Cause** : Si le message d’erreur contient « Le client avec l’adresse IP "…" n’est pas autorisé à accéder au serveur » et que vous essayez de vous connecter à Azure SQL Database, cela est généralement causé par un problème de pare-feu Azure SQL Database.
 
-- **Recommandation** :  Dans Configuration du pare-feu Azure SQL Server, activez l’option « Autoriser les services et les ressources Azure à accéder à ce serveur ». Doc de référence : https://docs.microsoft.com/azure/sql-database/sql-database-firewall-configure.
+- **Recommandation** :  Dans la configuration du pare-feu du serveur SQL logique, activez l’option « Autoriser les services et les ressources Azure à accéder à ce serveur ». Doc de référence : https://docs.microsoft.com/azure/sql-database/sql-database-firewall-configure.
 
 
 ### <a name="error-code--sqloperationfailed"></a>Code d’erreur :  SqlOperationFailed
@@ -212,8 +261,9 @@ Cet article présente des méthodes couramment employées pour résoudre les pro
 
 - **Cause** : Si le message d’erreur contient « SqlException »,SQL Database génère l’erreur indiquant qu’une opération spécifique a échoué.
 
-- **Recommandation** :  Si l’erreur SQL n’est pas claire, essayez de modifier la base de données au niveau de compatibilité « 150 » le plus récent. Cela peut lever des erreurs SQL de dernière version. Reportez-vous au document détaillé : https://docs.microsoft.com/sql/t-sql/statements/alter-database-transact-sql-compatibility-level?view=sql-server-ver15#backwardCompat.
-        Pour détecter des problèmes SQL, effectuez une recherche par code d’erreur SQL dans ce document de référence pour plus d’informations : https://docs.microsoft.com/sql/relational-databases/errors-events/database-engine-events-and-errors. Si vous avez besoin d’aide supplémentaire, contactez le support Azure SQL.
+- **Recommandation** :  Si l’erreur SQL n’est pas claire, essayez de modifier la base de données au niveau de compatibilité « 150 » le plus récent. Cela peut lever des erreurs SQL de dernière version. Reportez-vous au [document détaillé](/sql/t-sql/statements/alter-database-transact-sql-compatibility-level#backwardCompat).
+
+    Pour détecter des problèmes SQL, effectuez une recherche par code d’erreur SQL dans ce document de référence pour plus d’informations : https://docs.microsoft.com/sql/relational-databases/errors-events/database-engine-events-and-errors. Si vous avez besoin d’aide supplémentaire, contactez le support Azure SQL.
 
 - **Cause** : Si le message d’erreur contient « PdwManagedToNativeInteropException », cela est généralement dû à une incompatibilité entre les tailles de colonne source et récepteur.
 
@@ -222,6 +272,7 @@ Cet article présente des méthodes couramment employées pour résoudre les pro
 - **Cause** : Si le message d’erreur contient « InvalidOperationException », cela est généralement dû à des données d’entrée non valides.
 
 - **Recommandation** :  Pour identifier la ligne qui rencontre le problème, activez la fonctionnalité de tolérance de panne sur l’activité de copie, qui peut rediriger la ou les lignes problématiques vers le stockage pour une investigation plus poussée. Doc de référence : https://docs.microsoft.com/azure/data-factory/copy-activity-fault-tolerance.
+
 
 
 ### <a name="error-code--sqlunauthorizedaccess"></a>Code d’erreur :  SqlUnauthorizedAccess
@@ -239,7 +290,7 @@ Cet article présente des méthodes couramment employées pour résoudre les pro
 
 - **Cause** : Il peut s’agir d’une défaillance temporaire de SQL Database.
 
-- **Recommandation** :  Réessayez de mettre à jour la chaîne de connexion de service lié avec une plus grande valeur de délai d’attente de connexion.
+- **Recommandation** :  Réessayez de mettre à jour la chaîne de connexion de service lié avec une valeur de délai d’attente de connexion plus importante.
 
 
 ### <a name="error-code--sqlautocreatetabletypemapfailed"></a>Code d’erreur :  SqlAutoCreateTableTypeMapFailed
@@ -302,7 +353,7 @@ Cet article présente des méthodes couramment employées pour résoudre les pro
 
 - **Cause** : Il peut s’agir d’une défaillance temporaire de SQL Database.
 
-- **Recommandation** :  Veuillez réessayer. Si le problème persiste, contactez le support Azure SQL.
+- **Recommandation** :  Réessayez. Si le problème persiste, contactez le support Azure SQL.
 
 
 ### <a name="error-code--sqlbatchwritetransactionfailed"></a>Code d’erreur :  SqlBatchWriteTransactionFailed
@@ -333,7 +384,7 @@ Cet article présente des méthodes couramment employées pour résoudre les pro
 
 - **Cause** : La connexion SQL est fermée par SQL Database lorsque le nombre d’exécutions simultanées est élevé et que le serveur termine la connexion.
 
-- **Recommandation** :  Le serveur distant a fermé la connexion SQL. Veuillez réessayer. Si le problème persiste, contactez le support Azure SQL.
+- **Recommandation** :  Le serveur distant a fermé la connexion SQL. Reprise Si le problème persiste, contactez le support Azure SQL.
 
 
 ### <a name="error-code--sqlcreatetablefailedunsupportedtype"></a>Code d’erreur :  SqlCreateTableFailedUnsupportedType
@@ -343,38 +394,40 @@ Cet article présente des méthodes couramment employées pour résoudre les pro
 
 ### <a name="error-message-conversion-failed-when-converting-from-a-character-string-to-uniqueidentifier"></a>Message d’erreur : Échec lors de la conversion d’une chaîne de caractères en valeur de type uniqueidentifier
 
-- **Symptômes** : Lorsque vous copiez des données à partir d’une source de données tabulaire (telle que SQL Server) dans Azure SQL Data Warehouse à l’aide de la copie intermédiaire et de PolyBase, vous rencontrez l’erreur suivante :
+- **Symptômes** : Lorsque vous copiez des données d’une source de données tabulaire (telle que SQL Server) vers Azure Synapse Analytics à l’aide de la copie intermédiaire et de PolyBase, vous rencontrez l’erreur suivante :
 
     ```
     ErrorCode=FailedDbOperation,Type=Microsoft.DataTransfer.Common.Shared.HybridDeliveryException,
-    Message=Error happened when loading data into SQL Data Warehouse.,
+    Message=Error happened when loading data into Azure Synapse Analytics.,
     Source=Microsoft.DataTransfer.ClientLibrary,Type=System.Data.SqlClient.SqlException,
     Message=Conversion failed when converting from a character string to uniqueidentifier...
     ```
 
-- **Cause** : Azure SQL Data Warehouse PolyBase ne peut pas convertir une chaîne vide en GUID.
+- **Cause** : Azure Synapse Analytics PolyBase ne peut pas convertir une chaîne vide en GUID.
 
 - **Résolution** : Dans le récepteur de l’activité de copie, sous les paramètres de Polybase, affectez la valeur false à « **Utiliser l’option de type par défaut** ».
 
+
 ### <a name="error-message-expected-data-type-decimalxx-offending-value"></a>Message d’erreur : Type de données attendu : DECIMAL(x,x), valeur incriminée
 
-- **Symptômes** : Lorsque vous copiez des données à partir d’une source de données tabulaire (telle que SQL Server) dans SQL Data Warehouse à l’aide de la copie intermédiaire et de PolyBase, vous rencontrez l’erreur suivante :
+- **Symptômes** : Lorsque vous copiez des données d’une source de données tabulaire (telle que SQL Server) vers Azure Synapse Analytics à l’aide de la copie intermédiaire et de PolyBase, vous rencontrez l’erreur suivante :
 
     ```
     ErrorCode=FailedDbOperation,Type=Microsoft.DataTransfer.Common.Shared.HybridDeliveryException,
-    Message=Error happened when loading data into SQL Data Warehouse.,
+    Message=Error happened when loading data into Azure Synapse Analytics.,
     Source=Microsoft.DataTransfer.ClientLibrary,Type=System.Data.SqlClient.SqlException,
     Message=Query aborted-- the maximum reject threshold (0 rows) was reached while reading from an external source: 1 rows rejected out of total 415 rows processed. (/file_name.txt) 
     Column ordinal: 18, Expected data type: DECIMAL(x,x), Offending value:..
     ```
 
-- **Cause** : Azure SQL Data Warehouse Polybase ne peut pas insérer une chaîne vide (valeur null) dans une colonne décimale.
+- **Cause** : Azure Synapse Analytics Polybase ne peut pas insérer une chaîne vide (valeur Null) dans une colonne décimale.
 
 - **Résolution** : Dans le récepteur de l’activité de copie, sous les paramètres de Polybase, affectez la valeur false à « **Utiliser l’option de type par défaut** ».
 
-### <a name="error-message-java-exception-messagehdfsbridgecreaterecordreader"></a>Message d’erreur : Message d’exception Java : HdfsBridge::CreateRecordReader
 
-- **Symptômes** : Vous copiez des données dans Azure SQL Data Warehouse à l’aide de PolyBase et vous rencontrez l’erreur suivante :
+### <a name="error-message-java-exception-message-hdfsbridgecreaterecordreader"></a>Message d’erreur : Message d’exception Java : HdfsBridge::CreateRecordReader
+
+- **Symptômes** : Vous copiez des données dans Azure Synapse Analytics à l’aide de PolyBase et vous rencontrez l’erreur suivante :
 
     ```
     Message=110802;An internal DMS error occurred that caused this operation to fail. 
@@ -383,7 +436,7 @@ Cet article présente des méthodes couramment employées pour résoudre les pro
     Java exception message:HdfsBridge::CreateRecordReader - Unexpected error encountered creating the record reader.: Error [HdfsBridge::CreateRecordReader - Unexpected error encountered creating the record reader.] occurred while accessing external file.....
     ```
 
-- **Cause** : La cause possible est que le schéma (largeur totale de colonne) est trop grand (plus de 1 Mo). Vérifiez le schéma de la table SQL Data Warehouse cible en ajoutant la taille de toutes les colonnes :
+- **Cause** : La cause possible est que le schéma (largeur totale de colonne) est trop grand (plus de 1 Mo). Vérifiez le schéma de la table Azure Synapse Analytics cible en ajoutant la taille de toutes les colonnes :
 
     - Int -> 4 octets
     - Bigint -> 8 octets
@@ -405,18 +458,71 @@ Cet article présente des méthodes couramment employées pour résoudre les pro
 
 - Ou utilisez l’approche d’insertion en bloc en désactivant Polybase
 
+
 ### <a name="error-message-the-condition-specified-using-http-conditional-headers-is-not-met"></a>Message d’erreur : La condition spécifiée avec un ou plusieurs en-têtes conditionnels HTTP n’est pas remplie
 
-- **Symptômes** : Vous utilisez la requête SQL pour extraire des données d’Azure SQL Data Warehouse et vous pouvez rencontrez l’erreur suivante :
+- **Symptômes** : Vous utilisez la requête SQL pour extraire des données d’Azure Synapse Analytics et vous pouvez rencontrez l’erreur suivante :
 
     ```
     ...StorageException: The condition specified using HTTP conditional header(s) is not met...
     ```
 
-- **Cause** : Azure SQL Data Warehouse a rencontré un problème en interrogeant la table externe dans le stockage Azure.
+- **Cause** : Azure Synapse Analytics a rencontré un problème en interrogeant la table externe dans Stockage Azure.
 
-- **Résolution** : Exécutez la même requête dans SSMS et vérifiez si vous voyez le même résultat. Si c’est le cas, ouvrez un ticket de support pour Azure SQL Data Warehouse et indiquez votre nom de base de données et de serveur SQL Data Warehouse à des fins de dépannage.
+- **Résolution** : Exécutez la même requête dans SSMS et vérifiez si vous voyez le même résultat. Si c’est le cas, ouvrez un ticket de support pour Azure Synapse Analytics et indiquez le nom de votre base de données et de votre serveur Azure Synapse Analytics à des fins de dépannage.
             
+
+### <a name="low-performance-when-load-data-into-azure-sql"></a>Faible niveau de performance pendant le chargement de données dans Azure SQL
+
+- **Symptômes** : La copie de données dans Azure SQL devient lente.
+
+- **Cause** : La cause racine du problème est principalement provoquée par le goulot d’étranglement du côté d’Azure SQL. Voici quelques causes possibles :
+
+    1. Le niveau Azure DB n’est pas suffisamment élevé.
+
+    1. L’utilisation de DTU Azure DB est proche de 100 %. Vous pouvez [superviser le niveau de performance](https://docs.microsoft.com/azure/azure-sql/database/monitor-tune-overview) et envisager une mise à niveau pour le niveau de base de données.
+
+    1. Les index ne sont pas bien définis. Supprimez tous les index avant le chargement des données, puis recréez-les une fois le chargement terminé.
+
+    1. La valeur de WriteBatchSize n’est pas suffisante pour la taille de ligne de schéma. Essayez d’attribuer une valeur supérieure à la propriété pour résoudre le problème.
+
+    1. Une procédure stockée est utilisée à la place de l’insertion en bloc, ce qui est censé amoindrir le niveau de performance. 
+
+- **Résolution** : Reportez-vous au guide de résolution des problèmes (TSG) relatif aux [performances de l’activité de copie](https://docs.microsoft.com/azure/data-factory/copy-activity-performance-troubleshooting)
+
+
+### <a name="performance-tier-is-low-and-leads-to-copy-failure"></a>Le niveau de performance est faible et entraîne un échec de la copie
+
+- **Symptômes** : Le message d’erreur ci-dessous s’est affiché pendant la copie des données dans Azure SQL : `Database operation failed. Error message from database execution : ExecuteNonQuery requires an open and available Connection. The connection's current state is closed.`
+
+- **Cause** : Azure SQL s1 étant utilisé, les limites d’E/S sont atteintes en pareil cas.
+
+- **Résolution** : Mettez à niveau le niveau de performance d’Azure SQL pour corriger le problème. 
+
+
+### <a name="sql-table-cannot-be-found"></a>Table SQL introuvable 
+
+- **Symptômes** : Une erreur s’est produite pendant la copie des données de Hybrid vers la table SQL Server locale : `Cannot find the object "dbo.Contoso" because it does not exist or you do not have permissions.`
+
+- **Cause** : Le compte SQL actuel ne dispose pas d’autorisations suffisantes pour exécuter les demandes émises par SqlBulkCopy.WriteToServer (.NET).
+
+- **Résolution** : Passez à un compte SQL dotée de privilèges supérieurs.
+
+
+### <a name="string-or-binary-data-would-be-truncated"></a>Les données de type chaîne ou binaire sont tronquées
+
+- **Symptômes** : Une erreur s’est produite pendant la copie de données dans une table SQL Server Azure/locale : 
+
+- **Cause** : La définition du schéma de table Cx Sql présente une ou plusieurs colonnes dont la longueur est inférieure à celle attendue.
+
+- **Résolution** : Essayez les étapes suivantes pour corriger le problème :
+
+    1. Appliquez la [tolérance de panne](https://docs.microsoft.com/azure/data-factory/copy-activity-fault-tolerance), en particulier « redirectIncompatibleRowSettings », pour identifier les lignes qui présentent le problème.
+
+    1. Examinez bien les données redirigées par rapport à la longueur de colonne du schéma de table SQL pour déterminer la ou les colonnes qui doivent être mises à jour.
+
+    1. Mettez à jour le schéma de table en conséquence.
+
 
 ## <a name="delimited-text-format"></a>Format de texte délimité
 
@@ -424,7 +530,7 @@ Cet article présente des méthodes couramment employées pour résoudre les pro
 
 - **Message** : `The name of column index %index; is empty. Make sure column name is properly specified in the header row.`
 
-- **Cause** : Quand vous définissez « firstRowAsHeader » dans l’activité, la première ligne est utilisée comme nom de colonne. Cette erreur signifie que la première ligne contient une valeur vide. Par exemple : « ColumnA,,ColumnB ».
+- **Cause** : Quand vous définissez « firstRowAsHeader » dans l’activité, la première ligne est utilisée comme nom de colonne. Cette erreur signifie que la première ligne contient une valeur vide. Exemple : « ColonneA, ColonneB ».
 
 - **Recommandation** :  Vérifiez la première ligne et corrigez la valeur s’il s’agit d’une valeur vide.
 
@@ -437,7 +543,7 @@ Cet article présente des méthodes couramment employées pour résoudre les pro
 
 - **Recommandation** :  Récupérez le nombre de lignes dans le message d’erreur, vérifiez la colonne de la ligne et corrigez les données.
 
-- **Cause** : Si le nombre de colonnes attendu est « 1 » dans le message d’erreur, vous avez peut-être spécifié des paramètres de compression ou de mise en forme incorrects, ce qui a provoqué l’analyse incorrecte de vos fichiers par ADF.
+- **Cause** : Si le nombre de colonnes attendu est « 1 » dans le message d’erreur, vous avez peut-être spécifié des paramètres de compression ou de format incorrects. Par conséquent, ADF a mal analysé vos fichiers.
 
 - **Recommandation** :  Vérifiez les paramètres de mise en forme pour vous assurer qu’ils correspondent à vos fichiers sources.
 
@@ -472,6 +578,52 @@ Cet article présente des méthodes couramment employées pour résoudre les pro
 
 - **Recommandation** :  Exécutez à nouveau le pipeline. Si l’échec persiste, essayez de réduire le parallélisme. Si le problème n’est toujours pas résolu, contactez le support Dynamics.
 
+
+### <a name="columns-are-missing-when-previewingimporting-schema"></a>Il manque des colonnes au moment de prévisualiser/importer le schéma
+
+- **Symptômes** : Certaines colonnes sont manquantes au moment d’importer le schéma ou de prévisualiser les données. Message d’erreur : `The valid structure information (column name and type) are required for Dynamics source.`
+
+- **Cause** : Ce problème est avant tout lié à la conception. En effet, ADF ne peut pas afficher les colonnes dont les 10 premiers enregistrements n’ont pas de valeur. Vérifiez que les colonnes que vous avez ajoutées présentent le bon format. 
+
+- **Recommandation** : Ajoutez manuellement les colonnes sous l’onglet de mappage.
+
+
+## <a name="excel-format"></a>Format Excel
+
+### <a name="timeout-or-slow-performance-when-parsing-large-excel-file"></a>Expiration du délai ou baisse du niveau de performance lors de l’analyse d’un fichier Excel volumineux
+
+- **Symptômes** :
+
+    1. Lorsque vous créez un jeu de données Excel et importez un schéma à partir de feuilles de calcul de connexion/du magasin, d’aperçu de données, de liste ou d’actualisation, le délai d’attente peut expirer si la taille du fichier Excel est importante.
+
+    1. Lorsque vous utilisez l’activité de copie pour copier des données à partir d’un fichier Excel volumineux (> = 100 Mo) dans un autre magasin de données, vous pouvez rencontrer une baisse du niveau de performance ou une erreur de type OOM (mémoire insuffisante).
+
+- **Cause** : 
+
+    1. Pour les opérations comme l’importation de feuilles de calcul de schéma, d’aperçu de données et de liste dans un jeu de données Excel, le délai d’expiration est statique et fixé à 100 secondes. Pour un fichier Excel volumineux, ces opérations peuvent ne pas se terminer dans ce délai.
+
+    2. L’activité de copie ADF lit l’intégralité du fichier Excel en mémoire, puis localise la feuille de calcul et les cellules spécifiées pour lire les données. Ce comportement est dû à l’utilisation du Kit de développement logiciel (SDK) sous-jacent.
+
+- **Résolution** : 
+
+    1. Pour importer un schéma, vous pouvez générer un exemple de fichier plus petit représentant un sous-ensemble du fichier d’origine, puis choisir « import schema from sample file » (importer le schéma à partir d’un exemple de fichier) au lieu de « import schema from connection/store » (importer le schéma à partir d’une connexion/d’un magasin).
+
+    2. Pour lister une feuille de calcul, dans la liste déroulante de la feuille de calcul, vous pouvez cliquer sur « Modifier » et entrer à la place le nom/index de la feuille.
+
+    3. Pour copier un fichier Excel volumineux (> 100 Mo) dans un autre magasin, vous pouvez utiliser le flux de données source Excel qui prend en charge diffusion en continu et offre de meilleures performances.
+
+
+## <a name="hdinsight"></a>HDInsight
+
+### <a name="ssl-error-when-adf-linked-service-using-hdinsight-esp-cluster"></a>Erreur SSL pendant que le service lié ADF utilisait le cluster ESP HDInsight
+
+- **Message** : `Failed to connect to HDInsight cluster: 'ERROR [HY000] [Microsoft][DriverSupport] (1100) SSL certificate verification failed because the certificate is missing or incorrect.`
+
+- **Cause** : Le problème est très probablement lié au magasin de confiance système.
+
+- **Résolution** : Vous pouvez accéder au chemin **Microsoft Integration Runtime\4.0\Shared\ODBC Drivers\Microsoft Hive ODBC Driver\lib** et ouvrir DriverConfiguration64.exe pour modifier le paramètre.
+
+    ![Décocher Utiliser le magasin de confiance système](./media/connector-troubleshoot-guide/system-trust-store-setting.png)
 
 
 ## <a name="json-format"></a>Format JSON
@@ -511,6 +663,20 @@ Cet article présente des méthodes couramment employées pour résoudre les pro
 - **Message** : `Error occurred when deserializing source JSON file '%fileName;'. The JSON format doesn't allow mixed arrays and objects.`
 
 
+## <a name="oracle"></a>Oracle
+
+### <a name="error-code-argumentoutofrangeexception"></a>Code d’erreur : ArgumentOutOfRangeException
+
+- **Message** : `Hour, Minute, and Second parameters describe an un-representable DateTime.`
+
+- **Cause** : Dans ADF, les valeurs DateTime sont prises en charge dans la plage comprise entre 0001-01-01 00:00:00 et 9999-12-31 23:59:59. Cependant, Oracle prend en charge une plage plus étendue de valeurs DateTime (comme les siècles av. J-C ou mn/s > 59), ce qui entraîne une défaillance dans ADF.
+
+- **Recommandation** : 
+
+    Exécutez `select dump(<column name>)` pour vérifier si la valeur dans Oracle est comprise dans la plage d’ADF. 
+
+    Si vous souhaitez connaître la séquence d’octets dans le résultat, consultez https://stackoverflow.com/questions/13568193/how-are-dates-stored-in-oracle.
+
 
 ## <a name="parquet-format"></a>Format Parquet
 
@@ -520,7 +686,7 @@ Cet article présente des méthodes couramment employées pour résoudre les pro
 
 - **Cause** : Lorsque le message d’erreur contient « java.lang.OutOfMemory », « Java heap space » et « doubleCapacity », il s’agit généralement d’un problème de gestion de la mémoire dans l’ancienne version du runtime d’intégration.
 
-- **Recommandation** :  Si vous utilisez des runtimes d’intégration auto-hébergés et que la version est antérieure à 3.20.7159.1, suggérez une mise à niveau vers la version la plus récente.
+- **Recommandation** :  Si vous utilisez le runtime d’intégration auto-hébergé et que la version est antérieure à 3.20.7159.1, il est recommandé de procéder à une mise à niveau vers la version la plus récente.
 
 - **Cause** : Lorsque le message d’erreur contient « java.lang.OutOfMemory », le runtime d’intégration ne dispose pas de suffisamment de ressources pour traiter le ou les fichiers.
 
@@ -528,12 +694,12 @@ Cet article présente des méthodes couramment employées pour résoudre les pro
 
 - **Cause** : Quand le message d’erreur contient « NullPointerReference », il peut s’agir d’une erreur temporaire.
 
-- **Recommandation** :  Veuillez réessayer. Si le problème persiste, contactez le support.
+- **Recommandation** :  Réessayez. Si le problème persiste, contactez le support.
 
 
 ### <a name="error-code--parquetinvalidfile"></a>Code d’erreur :  ParquetInvalidFile
 
-- **Message** : `File is not a valid parquet file.`
+- **Message** : `File is not a valid Parquet file.`
 
 - **Cause** : Problème de fichier Parquet.
 
@@ -609,12 +775,12 @@ Cet article présente des méthodes couramment employées pour résoudre les pro
 
 - **Cause** : Valeur de données au-delà de la limitation
 
-- **Recommandation** :  Veuillez réessayer. Si le problème persiste, contactez-nous.
+- **Recommandation** :  Réessayez. Si le problème persiste, contactez-nous.
 
 
 ### <a name="error-code--parquetunsupportedinterpretation"></a>Code d’erreur :  ParquetUnsupportedInterpretation
 
-- **Message** : `The given interpretation '%interpretation;' of parquet format is not supported.`
+- **Message** : `The given interpretation '%interpretation;' of Parquet format is not supported.`
 
 - **Cause** : Scénario non pris en charge
 
@@ -629,6 +795,176 @@ Cet article présente des méthodes couramment employées pour résoudre les pro
 
 - **Recommandation** :  Supprimez « CompressionType » dans la charge utile.
 
+
+### <a name="error-code--usererrorjniexception"></a>Code d’erreur :  UserErrorJniException
+
+- **Message** : `Cannot create JVM: JNI return code [-6][JNI call failed: Invalid arguments.]`
+
+- **Cause** : La machine virtuelle Java ne peut pas être créée, car des arguments (globaux) non conformes sont définis.
+
+- **Recommandation** :  Connectez-vous à la machine qui héberge **chaque nœud** de votre IR auto-hébergé. Vérifiez si la variable système est correctement définie comme suit : `_JAVA_OPTIONS "-Xms256m -Xmx16g" with memory bigger than 8 G`. Redémarrez tous les nœuds IR, puis réexécutez le pipeline.
+
+
+### <a name="arithmetic-overflow"></a>Dépassement arithmétique
+
+- **Symptômes** : Un message d’erreur s’est produit pendant la copie de fichiers Parquet : `Message = Arithmetic Overflow., Source = Microsoft.DataTransfer.Common`
+
+- **Cause** : Pour l’heure, seules les décimales d’une précision < = 38 et une longueur de la partie entière < = 20 sont prises en charge lors de la copie de fichiers d’Oracle vers Parquet. 
+
+- **Résolution** : Pour contourner ce problème, vous pouvez convertir les colonnes en VARCHAR2.
+
+
+### <a name="no-enum-constant"></a>Absence de constante enum
+
+- **Symptômes** : Un message d’erreur s’est affiché pendant la copie des données au format Paquet : `java.lang.IllegalArgumentException:field ended by &apos;;&apos;` ou `java.lang.IllegalArgumentException:No enum constant org.apache.parquet.schema.OriginalType.test`.
+
+- **Cause** : 
+
+    Le problème peut être dû à la présence d’espaces blancs ou de caractères non pris en charge (comme ,;{}()\n\t=) dans le nom de colonne, car Parquet ne prend pas en charge un tel format. 
+
+    Par exemple, le nom de colonne *contoso(test)* analyse le type entre crochets dans le [code](https://github.com/apache/parquet-mr/blob/master/parquet-column/src/main/java/org/apache/parquet/schema/MessageTypeParser.java) `Tokenizer st = new Tokenizer(schemaString, " ;{}()\n\t");`. L’erreur est déclenchée, car il n’existe pas de type « test ».
+
+    Vous pouvez vérifier les types pris en charge [ici](https://github.com/apache/parquet-mr/blob/master/parquet-column/src/main/java/org/apache/parquet/schema/OriginalType.java).
+
+- **Résolution** : 
+
+    1. Vérifiez si le nom de colonne récepteur contient des espaces blancs.
+
+    1. Vérifiez si la première ligne contenant des espaces blancs sert de nom de colonne.
+
+    1. Vérifiez si le type OriginalType est pris en charge ou non. Essayez d’éviter ces caractères spéciaux `,;{}()\n\t=`. 
+
+
+## <a name="rest"></a>REST
+
+### <a name="unexpected-network-response-from-rest-connector"></a>Réponse réseau inattendue du connecteur REST
+
+- **Symptômes** : Le point de terminaison reçoit parfois une réponse inattendue (400/401/403/500) du connecteur REST.
+
+- **Cause** : Le connecteur source REST utilise l’URL et la méthode/l’en-tête/le corps HTTP du service/du jeu de données/de la copie source comme paramètres lors de la construction d’une requête HTTP. Le problème est probablement dû à des erreurs dans un ou plusieurs paramètres spécifiés.
+
+- **Résolution** : 
+    - Utilisez 'curl' dans la fenêtre cmd pour vérifier si le paramètre est la cause ou non (les en-têtes **Accept** et **User-Agent** doivent toujours être inclus) :
+        ```
+        curl -i -X <HTTP method> -H <HTTP header1> -H <HTTP header2> -H "Accept: application/json" -H "User-Agent: azure-data-factory/2.0" -d '<HTTP body>' <URL>
+        ```
+      Si la commande retourne la même réponse inattendue, corrigez les paramètres ci-dessus en utilisant 'curl' jusqu’à obtenir la réponse attendue. 
+
+      Vous pouvez également utiliser 'curl --help' pour exécuter des options plus avancées de la commande.
+
+    - Si seul le connecteur REST ADF renvoie une réponse inattendue, contactez le support technique de Microsoft pour poursuivre la résolution des problèmes.
+    
+    - Notez que 'curl' peut ne pas convenir pour reproduire le problème de validation du certificat SSL. Dans certains scénarios, la commande 'curl' a été exécutée avec succès sans rencontrer de problème de validation de certificat SSL. Toutefois, lorsque la même URL est exécutée dans le navigateur, aucun certificat SSL n’est réellement renvoyé dans le premier emplacement pour permettre au client d’établir une relation de confiance avec le serveur.
+
+      Les outils comme **Postman** et **Fiddler** sont recommandés dans le cas ci-dessus.
+
+
+## <a name="sftp"></a>SFTP
+
+### <a name="invalid-sftp-credential-provided-for-sshpublickey-authentication-type"></a>Informations d’identification SFTP non valides fournies pour le type d’authentification « SSHPublicKey »
+
+- **Symptômes** : L’authentification par clé publique SSH est utilisée alors que des informations d’identification SFTP non valides sont fournies pour le type d’authentification « SshPublicKey ».
+
+- **Cause** : Les raisons possibles à l’origine de cette erreur sont au nombre de trois :
+
+    1. Le contenu de la clé privée est extrait d’AKV ou du SDK, mais il n’est pas correctement encodé.
+
+    1. Le format de contenu de clé choisi est incorrect.
+
+    1. Contenu de clé privée ou informations d’identification non valides.
+
+- **Résolution** : 
+
+    1. Pour la **cause 1** :
+
+       Si le contenu de la clé privée provient d’AKV et que le fichier de clé d’origine peut fonctionner si le client le charge directement dans le service lié SFTP
+
+       Consultez https://docs.microsoft.com/azure/data-factory/connector-sftp#using-ssh-public-key-authentication, le contenu de privateKey est un contenu de clé privée SSH encodé en base64.
+
+       Encodez **l’intégralité du contenu du fichier de clé privée d’origine** avec un encodage en base64 et stockez la chaîne encodée dans AKV. Le fichier de clé privée d’origine est celui qui peut fonctionner dans le service lié SFTP si vous cliquez sur Charger à partir d’un fichier.
+
+       Voici quelques exemples utilisés pour générer la chaîne :
+
+       - Utilisation de code C# :
+       ```
+       byte[] keyContentBytes = File.ReadAllBytes(Private Key Path);
+       string keyContent = Convert.ToBase64String(keyContentBytes, Base64FormattingOptions.None);
+       ```
+
+       - Utilisation de code Python :
+       ```
+       import base64
+       rfd = open(r'{Private Key Path}', 'rb')
+       keyContent = rfd.read()
+       rfd.close()
+       print base64.b64encode(Key Content)
+       ```
+
+       - Utilisation d’un outil de conversion en base64 tiers
+
+         Des outils tels que https://www.base64encode.org/ sont recommandés.
+
+    1. Pour la **cause 2** :
+
+       Si la clé privée SSH au format PKCS#8 est utilisée
+
+       La clé privée SSH au format PKCS#8 (commençant par « -----BEGIN ENCRYPTED PRIVATE KEY----- ») n’est actuellement pas prise en charge pour l’accès au serveur SFTP dans ADF. 
+
+       Exécutez les commandes ci-dessous pour convertir la clé au format de clé SSH classique (commençant par « ------BEGIN RSA PRIVATE KEY----- ») :
+
+       ```
+       openssl pkcs8 -in pkcs8_format_key_file -out traditional_format_key_file
+       chmod 600 traditional_format_key_file
+       ssh-keygen -f traditional_format_key_file -p
+       ```
+    1. Pour la **cause 3** :
+
+       Servez-vous d’un outil comme WinSCP pour vérifier si votre fichier de clé ou mot de passe est correct.
+
+
+### <a name="incorrect-linked-service-type-is-used"></a>Le type de service lié utilisé est incorrect
+
+- **Symptômes** : Le serveur FTP/SFTP n’est pas accessible.
+
+- **Cause** : Le type de service lié utilisé est incorrect pour le serveur FTP ou SFTP. Tel est le cas si le service lié FTP est utilisé pour se connecter à un serveur SFTP ou inversement.
+
+- **Résolution** : Vérifiez le port du serveur cible. Par défaut, FTP utilise le port 21 et SFTP le port 22.
+
+
+### <a name="sftp-copy-activity-failed"></a>Échec de l’activité de copie SFTP
+
+- **Symptômes** : Code d’erreur : UserErrorInvalidColumnMappingColumnNotFound. Message d’erreur : `Column &apos;AccMngr&apos; specified in column mapping cannot be found in source data.`
+
+- **Cause** : La source ne comporte pas de colonne nommée « AccMngr ».
+
+- **Résolution** : Vérifiez la façon dont votre jeu de données est configuré en mappant la colonne du jeu de données de destination afin de confirmer la présence d’une colonne « AccMngr ».
+
+
+### <a name="sftp-server-connection-throttling"></a>Limitation de la connexion du serveur SFTP
+
+- **Symptômes** : La réponse du serveur ne contient pas d’identification de protocole SSH et la copie a échoué.
+
+- **Cause** : ADF crée plusieurs connexions pour opérer des téléchargements parallèles à partir du serveur SFTP et atteint parfois la limitation du serveur SFTP. Dans la pratique, l’erreur retournée une fois la limitation atteinte varie d’un serveur à un autre.
+
+- **Résolution** : 
+
+    Définissez le nombre maximal de connexions simultanées du jeu de données SFTP sur 1, puis réexécutez la copie. Si elle aboutit, cela est le signe que la limitation est en cause.
+
+    Si vous souhaitez promouvoir le faible débit, contactez l’administrateur SFTP pour augmenter le nombre limite de connexions simultanées ou ajoutez les adresses IP ci-dessous à la liste verte :
+
+    - Si vous utilisez l’IR managé, ajoutez les [plages d’adresses IP du centre de données Azure](https://www.microsoft.com/download/details.aspx?id=41653).
+      Vous pouvez aussi installer l’IR auto-hébergé si vous ne voulez pas ajouter une longue plage d’adresses IP dans la liste verte du serveur SFTP.
+
+    - Si vous utilisez l’IR auto-hébergé, ajoutez l’adresse IP de la machine qui a installé SHIR à la liste verte.
+
+
+### <a name="error-code-sftprenameoperationfail"></a>Code d’erreur : SftpRenameOperationFail
+
+- **Symptômes** : Le pipeline n’a pas pu copier les données de l’objet blob vers SFTP avec l’erreur suivante : `Operation on target Copy_5xe failed: Failure happened on 'Sink' side. ErrorCode=SftpRenameOperationFail,Type=Microsoft.DataTransfer.Common.Shared.HybridDeliveryException`.
+
+- **Cause** : L’option useTempFileRename était définie sur True au moment où la copie des données s’est produite. Cela permet au processus d’utiliser des fichiers temporaires. L’erreur se déclenche si un ou plusieurs fichiers temporaires ont été supprimés avant la copie de l’ensemble des données.
+
+- **Résolution** : Définissez l’option useTempFileName sur False.
 
 
 ## <a name="general-copy-activity-error"></a>Erreur générale de l’activité de copie
@@ -678,7 +1014,6 @@ Si vous avez besoin d’une aide supplémentaire, essayez les ressources suivant
 *  [Blog Data Factory](https://azure.microsoft.com/blog/tag/azure-data-factory/)
 *  [Demandes de fonctionnalités Data Factory](https://feedback.azure.com/forums/270578-data-factory)
 *  [Vidéos Azure](https://azure.microsoft.com/resources/videos/index/?sort=newest&services=data-factory)
-*  [Forum MSDN](https://social.msdn.microsoft.com/Forums/home?sort=relevancedesc&brandIgnore=True&searchTerm=data+factory)
+*  [Page de questions Microsoft Q&R](/answers/topics/azure-data-factory.html)
 *  [Forum Stack Overflow pour Data Factory](https://stackoverflow.com/questions/tagged/azure-data-factory)
 *  [Informations Twitter sur Data Factory](https://twitter.com/hashtag/DataFactory)
-            

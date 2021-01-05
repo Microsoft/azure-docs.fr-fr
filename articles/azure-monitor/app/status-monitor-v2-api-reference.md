@@ -5,12 +5,12 @@ ms.topic: conceptual
 author: TimothyMothra
 ms.author: tilee
 ms.date: 04/23/2019
-ms.openlocfilehash: 02762c4b3af735eb0b4c19aaf450b2b3a416a2be
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 2f814c54aeca8a337f786beb8da1b98accbeef7e
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81733634"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87318995"
 ---
 # <a name="azure-monitor-application-insights-agent-api-reference"></a>Informations de référence sur l’API de l’agent Azure Monitor Application Insights
 
@@ -119,7 +119,7 @@ Vous pouvez créer un script d’installation unique pour plusieurs ordinateurs 
 - **MachineFilter** est une expression régulière C# obligatoire associée au nom de la machine virtuelle ou de l’ordinateur.
     - ’.*’ effectue la correspondance avec tous les éléments
     - ’ComputerName’ effectue la correspondance avec les ordinateurs présentant le nom exact spécifié uniquement.
-- **AppFilter** est une expression C# régulière obligatoire du nom du site IIS. Vous pouvez obtenir la liste des sites sur votre serveur en exécutant la commande [get-iissite](https://docs.microsoft.com/powershell/module/iisadministration/get-iissite).
+- **AppFilter** est une expression C# régulière obligatoire du nom du site IIS. Vous pouvez obtenir la liste des sites sur votre serveur en exécutant la commande [get-iissite](/powershell/module/iisadministration/get-iissite).
     - ’.*’ effectue la correspondance avec tous les éléments
     - « SiteName » correspond uniquement au site IIS portant le nom exact spécifié.
 - **InstrumentationKey** est requis pour activer la surveillance des applications qui correspondent aux deux filtres précédents.
@@ -135,7 +135,7 @@ Le moteur d’instrumentation ajoute une surcharge et est désactivé par défau
 **Facultatif.** Utilisez cette instruction switch pour accepter la licence et la déclaration de confidentialité dans les installations sans affichage.
 
 #### <a name="-ignoresharedconfig"></a>-IgnoreSharedConfig
-Lorsque vous avez un cluster de serveurs web, il se peut que vous utilisiez une [configuration partagée](https://docs.microsoft.com/iis/web-hosting/configuring-servers-in-the-windows-web-platform/shared-configuration_211).
+Lorsque vous avez un cluster de serveurs web, il se peut que vous utilisiez une [configuration partagée](/iis/web-hosting/configuring-servers-in-the-windows-web-platform/shared-configuration_211).
 HttpModule ne peut pas être injecté dans cette configuration partagée.
 Ce script échoue avec le message indiquant que des étapes d’installation supplémentaires sont requises.
 Utilisez ce commutateur pour ignorer cette vérification et poursuivre l’installation des prérequis. Pour plus d’informations, consultez [known conflict-with-iis-shared-configuration](status-monitor-v2-troubleshoot.md#conflict-with-iis-shared-configuration)
@@ -447,8 +447,8 @@ Il télécharge également des outils externes pour déterminer si les DLL sont 
 
 Si ce processus échoue pour une raison quelconque, vous pouvez exécuter ces commandes manuellement :
 - iisreset.exe /status
-- [handle64.exe](https://docs.microsoft.com/sysinternals/downloads/handle) -p w3wp | findstr /I "InstrumentationEngine AI. ApplicationInsights"
-- [listdlls64.exe](https://docs.microsoft.com/sysinternals/downloads/listdlls) w3wp | findstr /I "InstrumentationEngine AI ApplicationInsights"
+- [handle64.exe](/sysinternals/downloads/handle) -p w3wp | findstr /I "InstrumentationEngine AI. ApplicationInsights"
+- [listdlls64.exe](/sysinternals/downloads/listdlls) w3wp | findstr /I "InstrumentationEngine AI ApplicationInsights"
 
 
 #### <a name="-force"></a>-Force
@@ -552,7 +552,7 @@ C:\Program Files\WindowsPowerShell\Modules\Az.ApplicationMonitor\content\applica
 
 ## <a name="start-applicationinsightsmonitoringtrace"></a>Start-ApplicationInsightsMonitoringTrace
 
-Collecte des [événements ETW](https://docs.microsoft.com/windows/desktop/etw/event-tracing-portal) à partir du runtime joint sans code. Cette cmdlet est une alternative à l’exécution de [PerfView](https://github.com/microsoft/perfview).
+Collecte des [événements ETW](/windows/desktop/etw/event-tracing-portal) à partir du runtime joint sans code. Cette cmdlet est une alternative à l’exécution de [PerfView](https://github.com/microsoft/perfview).
 
 Les événements collectés seront imprimés dans la console en temps réel et enregistrés dans un fichier ETL. Vous pouvez ouvrir le fichier ETL de sortie avec [PerfView](https://github.com/microsoft/perfview) pour un examen approfondi.
 
@@ -637,21 +637,16 @@ Timeout Reached. Stopping...
 ## <a name="next-steps"></a>Étapes suivantes
 
   Affichez vos données de télémétrie :
- - [Explorez les métriques](../../azure-monitor/app/metrics-explorer.md) pour surveiller les performances et l’utilisation.
-- [Effectuez des recherches dans les événements et les journaux](../../azure-monitor/app/diagnostic-search.md) pour diagnostiquer les problèmes.
-- Utilisez la fonctionnalité [Analytics](../../azure-monitor/app/analytics.md) pour des requêtes plus élaborées.
-- [Créez des tableaux de bord](../../azure-monitor/app/overview-dashboard.md).
+ - [Explorez les métriques](../platform/metrics-charts.md) pour surveiller les performances et l’utilisation.
+- [Effectuez des recherches dans les événements et les journaux](./diagnostic-search.md) pour diagnostiquer les problèmes.
+- Utilisez la fonctionnalité [Analytics](../log-query/log-query-overview.md) pour des requêtes plus élaborées.
+- [Créez des tableaux de bord](./overview-dashboard.md).
  
  Ajoutez des données de télémétrie :
  - [Créez des tests web](monitor-web-app-availability.md) pour vous assurer que votre site reste actif.
-- [Ajoutez la télémétrie de client web](../../azure-monitor/app/javascript.md) pour afficher les exceptions à partir du code de la page web et activer le suivi des appels.
-- [Ajoutez le kit de développement logiciel (SDK) Application Insights à votre code](../../azure-monitor/app/asp-net.md) afin de pouvoir insérer un suivi et journaliser les appels.
+- [Ajoutez la télémétrie de client web](./javascript.md) pour afficher les exceptions à partir du code de la page web et activer le suivi des appels.
+- [Ajoutez le kit de développement logiciel (SDK) Application Insights à votre code](./asp-net.md) afin de pouvoir insérer un suivi et journaliser les appels.
  
  En faire plus avec Application Insights Agent :
  - Utilisez notre guide pour [résoudre les problèmes](status-monitor-v2-troubleshoot.md) d’Application Insights Agent.
-
-
-
-
-
 

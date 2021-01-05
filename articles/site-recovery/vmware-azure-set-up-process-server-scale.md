@@ -7,12 +7,12 @@ ms.service: site-recovery
 ms.topic: conceptual
 ms.date: 4/23/2019
 ms.author: ramamill
-ms.openlocfilehash: 1b6084b4e93f3dc17f633f1b8496f9c26e7f576f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 40f912122e6ffb9cccbd32a747f6f0d46fd6c330
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79228905"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96019132"
 ---
 # <a name="scale-with-additional-process-servers"></a>Mettre à l’échelle avec d’autres serveurs de processus
 
@@ -52,7 +52,7 @@ La configuration requise pour le serveur de traitement supplémentaire est résu
 Téléchargez le fichier d’installation pour le serveur de processus comme suit :
 
 1. Connectez-vous au portail Azure et accédez à votre coffre Recovery Services.
-2. Ouvrez **Infrastructure Site Recovery** > **VMWare et machines physiques** > **Serveurs de configuration** (sous Pour VMware et machines physiques).
+2. Ouvrez **Infrastructure Site Recovery** > **VMware et machines physiques** > **Serveurs de configuration** (sous Pour VMware et machines physiques).
 3. Sélectionnez le serveur de configuration pour explorer les détails du serveur. Cliquez ensuite sur **+ Serveur de processus**.
 4. Dans **Ajouter un serveur de processus** >  **Indique où vous souhaitez déployer votre serveur de processus**, sélectionnez **Déployer un serveur de traitement de montée en puissance parallèle local**.
 
@@ -74,7 +74,7 @@ Procédez à l’installation comme suit. Après avoir configuré le serveur, vo
 Installez en exécutant la commande suivante :
 
 ```
-UnifiedSetup.exe [/ServerMode <CS/PS>] [/InstallDrive <DriveLetter>] [/MySQLCredsFilePath <MySQL credentials file path>] [/VaultCredsFilePath <Vault credentials file path>] [/EnvType <VMWare/NonVMWare>] [/PSIP <IP address to be used for data transfer] [/CSIP <IP address of CS to be registered with>] [/PassphraseFilePath <Passphrase file path>]
+UnifiedSetup.exe [/ServerMode <CS/PS>] [/InstallDrive <DriveLetter>] [/MySQLCredsFilePath <MySQL credentials file path>] [/VaultCredsFilePath <Vault credentials file path>] [/EnvType <VMware/NonVMware>] [/PSIP <IP address to be used for data transfer] [/CSIP <IP address of CS to be registered with>] [/PassphraseFilePath <Passphrase file path>]
 ```
 
 Avec les paramètres de ligne de commande suivants :
@@ -86,7 +86,7 @@ Par exemple :
 ```
 MicrosoftAzureSiteRecoveryUnifiedSetup.exe /q /x:C:\Temp\Extracted
 cd C:\Temp\Extracted
-UNIFIEDSETUP.EXE /AcceptThirdpartyEULA /servermode "PS" /InstallLocation "D:\" /EnvType "VMWare" /CSIP "10.150.24.119" /PassphraseFilePath "C:\Users\Administrator\Desktop\Passphrase.txt" /DataTransferSecurePort 443
+UNIFIEDSETUP.EXE /AcceptThirdpartyEULA /servermode "PS" /InstallLocation "D:\" /EnvType "VMware" /CSIP "10.150.24.119" /PassphraseFilePath "C:\Users\Administrator\Desktop\Passphrase.txt" /DataTransferSecurePort 443
 ```
 ### <a name="create-a-proxy-settings-file"></a>Créer un fichier de paramètres de proxy
 

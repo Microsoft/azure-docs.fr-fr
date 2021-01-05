@@ -17,12 +17,12 @@ ms.date: 03/23/2020
 ms.author: sethm
 ms.reviewer: thsomasu
 ms.lastreviewed: 04/30/2019
-ms.openlocfilehash: f5b59d1669d89c73b93199d1f833da149003d399
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: b8ac964c62ac4b30e9280e4ae921297ba860d7c2
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "80159334"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "86529928"
 ---
 # <a name="what-is-azure-notification-hubs"></a>Présentation d’Azure Notification Hubs
 
@@ -48,7 +48,7 @@ Pour plus d’informations sur les notifications Push des plateformes les plus p
 
 - [Android](https://developer.android.com/guide/topics/ui/notifiers/notifications.html)
 - [iOS](https://developer.apple.com/notifications/)
-- [Windows](https://msdn.microsoft.com/library/windows/apps/hh779725.aspx)
+- [Windows](/previous-versions/windows/apps/hh779725(v=win.10))
 
 ## <a name="how-do-push-notifications-work"></a>Comment les notifications Push fonctionnent-elles ?
 
@@ -120,16 +120,16 @@ Commencez à créer et à utiliser un hub de notification en suivant le [Tutorie
 
 [How customers are using Notification Hubs]: https://azure.microsoft.com/services/notification-hubs
 [Notification Hubs tutorials and guides]: https://azure.microsoft.com/documentation/services/notification-hubs
-[iOS]: https://azure.microsoft.com/documentation/articles/notification-hubs-ios-get-started
-[Android]: https://azure.microsoft.com/documentation/articles/notification-hubs-android-get-started
-[Windows Universal]: https://azure.microsoft.com/documentation/articles/notification-hubs-windows-store-dotnet-get-started
-[Windows Phone]: https://azure.microsoft.com/documentation/articles/notification-hubs-windows-phone-get-started
-[Kindle]: https://azure.microsoft.com/documentation/articles/notification-hubs-kindle-get-started
-[Xamarin.iOS]: https://azure.microsoft.com/documentation/articles/partner-xamarin-notification-hubs-ios-get-started
-[Xamarin.Android]: https://azure.microsoft.com/documentation/articles/partner-xamarin-notification-hubs-android-get-started
-[Microsoft.WindowsAzure.Messaging.NotificationHub]: https://msdn.microsoft.com/library/microsoft.windowsazure.messaging.notificationhub.aspx
-[Microsoft.ServiceBus.Notifications]: https://msdn.microsoft.com/library/microsoft.servicebus.notifications.aspx
-[App Service Mobile Apps]: https://azure.microsoft.com/documentation/articles/app-service-mobile-value-prop/
+[iOS]: ./notification-hubs-push-notification-fixer.md
+[Android]: ./notification-hubs-android-push-notification-google-gcm-get-started.md
+[Windows Universal]: ./notification-hubs-windows-store-dotnet-get-started-wns-push-notification.md
+[Windows Phone]: ./notification-hubs-windows-mobile-push-notifications-mpns.md
+[Kindle]: ./notification-hubs-android-push-notification-google-fcm-get-started.md
+[Xamarin.iOS]: ./xamarin-notification-hubs-ios-push-notification-apns-get-started.md
+[Xamarin.Android]: ./xamarin-notification-hubs-push-notifications-android-gcm.md
+[Microsoft.WindowsAzure.Messaging.NotificationHub]: /previous-versions/azure/reference/dn339221(v=azure.100)
+[Microsoft.ServiceBus.Notifications]: /previous-versions/azure/
+[App Service Mobile Apps]: /previous-versions/azure/app-service-mobile/app-service-mobile-value-prop
 [templates]: notification-hubs-templates-cross-platform-push-messages.md
 [Azure portal]: https://portal.azure.com
 [tags]: (https://msdn.microsoft.com/library/azure/dn530749.aspx)

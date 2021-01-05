@@ -1,6 +1,6 @@
 ---
 title: Stratégies avancées de la Gestion des API Azure | Microsoft Docs
-description: Découvrez les stratégies avancées disponibles dans la Gestion des API Azure.
+description: Découvrez les stratégies avancées disponibles dans la Gestion des API Azure. Consultez des exemples et affichez des ressources disponibles supplémentaires.
 services: api-management
 documentationcenter: ''
 author: vladvino
@@ -10,22 +10,22 @@ ms.service: api-management
 ms.workload: mobile
 ms.tgt_pltfrm: na
 ms.topic: article
-ms.date: 01/10/2020
+ms.date: 11/13/2020
 ms.author: apimpm
-ms.openlocfilehash: 388f05c2af1516a0477392f37763a0480c7ad413
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 3a37cde79cef59eaf9c3ef130bfbae9cff958bd7
+ms.sourcegitcommit: fec60094b829270387c104cc6c21257826fccc54
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82128834"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96919438"
 ---
 # <a name="api-management-advanced-policies"></a>Stratégies avancées de la Gestion des API
 
-Cette rubrique est une ressource de référence au sujet des stratégies Gestion des API suivantes. Pour plus d'informations sur l'ajout et la configuration des stratégies, consultez la page [Stratégies dans Gestion des API](https://go.microsoft.com/fwlink/?LinkID=398186).
+Cette rubrique est une ressource de référence au sujet des stratégies Gestion des API suivantes. Pour plus d'informations sur l'ajout et la configuration des stratégies, consultez la page [Stratégies dans Gestion des API](./api-management-policies.md).
 
 ## <a name="advanced-policies"></a><a name="AdvancedPolicies"></a> Stratégies avancées
 
--   [Control flow](api-management-advanced-policies.md#choose) : applique de manière conditionnelle les instructions de stratégie en fonction des résultats de l’évaluation des [expressions](api-management-policy-expressions.md) booléennes.
+-   [Control flow](api-management-advanced-policies.md#choose) : applique de manière conditionnelle les instructions des stratégies en fonction des résultats de l’évaluation des [expressions](api-management-policy-expressions.md) booléennes.
 -   [Forward request](#ForwardRequest) : transfère la demande vers le service principal.
 -   [Limit concurrency](#LimitConcurrency) : empêche les stratégies incluses d’exécuter plus de requêtes simultanées que le nombre spécifié.
 -   [Log to Event Hub](#log-to-eventhub) : envoie des messages au format spécifié à un Event Hub défini par une entité Enregistreur d’événements.
@@ -38,7 +38,7 @@ Cette rubrique est une ressource de référence au sujet des stratégies Gestion
 -   [Set request method](#SetRequestMethod) : permet de modifier la méthode HTTP d’une demande.
 -   [Set status code](#SetStatus) : permet de donner la valeur spécifiée au code d’état HTTP.
 -   [Set variable](api-management-advanced-policies.md#set-variable) : conserve une valeur dans une variable de [contexte](api-management-policy-expressions.md#ContextVariables) nommée pour permettre d’y accéder ultérieurement.
--   [Trace](#Trace) : ajoute des traces personnalisées à la sortie [API Inspector](https://azure.microsoft.com/documentation/articles/api-management-howto-api-inspector/), aux données de télémétrie Application Insights et aux journaux de ressources.
+-   [Trace](#Trace) : ajoute des traces personnalisées à la sortie [API Inspector](./api-management-howto-api-inspector.md), aux données de télémétrie Application Insights et aux journaux de ressources.
 -   [Wait](#Wait) : attend l’exécution des stratégies [Send request](api-management-advanced-policies.md#SendRequest), [Get value from cache](api-management-caching-policies.md#GetFromCacheByKey) ou [Control flow](api-management-advanced-policies.md#choose) pour continuer.
 
 ## <a name="control-flow"></a><a name="choose"></a> Control flow
@@ -67,7 +67,7 @@ La stratégie de flux de contrôle doit contenir au moins un élément `<when/>`
 
 #### <a name="example"></a><a name="ChooseExample"></a> Exemple
 
-L’exemple suivant montre une stratégie [set-variable](api-management-advanced-policies.md#set-variable) ainsi que deux stratégies de contrôle de flux.
+L'exemple suivant présente une stratégie [set-variable](api-management-advanced-policies.md#set-variable) et deux stratégies de flux de contrôle.
 
 La stratégie set variable se trouve dans la section inbound et crée une variable de [contexte](api-management-policy-expressions.md#ContextVariables)`isMobile` booléenne qui a la valeur true si l’en-tête de demande `User-Agent` contient le texte `iPad` ou `iPhone`.
 
@@ -78,7 +78,7 @@ La deuxième stratégie de flux de contrôle se trouve dans la section outbound 
 ```xml
 <policies>
     <inbound>
-        <set-variable name="isMobile" value="@(context.Request.Headers["User-Agent"].Contains("iPad") || context.Request.Headers["User-Agent"].Contains("iPhone"))" />
+        <set-variable name="isMobile" value="@(context.Request.Headers.GetValueOrDefault("User-Agent","").Contains("iPad") || context.Request.Headers.GetValueOrDefault("User-Agent","").Contains("iPhone"))" />
         <base />
         <choose>
             <when condition="@(context.Variables.GetValueOrDefault<bool>("isMobile"))">
@@ -104,7 +104,7 @@ La deuxième stratégie de flux de contrôle se trouve dans la section outbound 
 </policies>
 ```
 
-#### <a name="example"></a> Exemple
+#### <a name="example"></a>Exemple
 
 Cet exemple montre comment effectuer un filtrage du contenu en supprimant des éléments de données de la réponse reçue du service principal en cas d’utilisation du produit `Starter`. Pour une démonstration de la configuration et de l’utilisation de cette stratégie, consultez [Cloud Cover Episode 177: More API Management Features with Vlad Vinogradsky](https://azure.microsoft.com/documentation/videos/episode-177-more-api-management-features-with-vlad-vinogradsky/) (Cloud Cover, épisode 177 : Plus de fonctionnalités de la Gestion des API avec Vlad Vinogradsky) et rendez-vous directement à 34 min 30 s. Commencez à 31 min 50 s pour voir une présentation de [l’API The Dark Sky Forecast](https://developer.forecast.io/) utilisée pour cette démonstration.
 
@@ -130,7 +130,7 @@ Cet exemple montre comment effectuer un filtrage du contenu en supprimant des é
 | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
 | choose    | Élément racine.                                                                                                                                                                                                                                                             | Oui      |
 | when      | Condition à utiliser pour les parties `if` ou `ifelse` de la stratégie `choose`. Si la stratégie `choose` possède plusieurs sections `when`, elles sont évaluées de façon séquentielle. Une fois la `condition` d’un élément when évaluée à `true`, aucune autre condition `when` n’est évaluée. | Oui      |
-| otherwise | Contient l’extrait de stratégie à utiliser si aucune des conditions `when` n’est évaluée à `true`.                                                                                                                                                                               | Non        |
+| otherwise | Contient l’extrait de stratégie à utiliser si aucune des conditions `when` n’est évaluée à `true`.                                                                                                                                                                               | Non       |
 
 ### <a name="attributes"></a>Attributs
 
@@ -140,7 +140,7 @@ Cet exemple montre comment effectuer un filtrage du contenu en supprimant des é
 
 ### <a name="usage"></a><a name="ChooseUsage"></a> Utilisation
 
-Cette stratégie peut être utilisée dans les [sections](https://azure.microsoft.com/documentation/articles/api-management-howto-policies/#sections) et [étendues](https://azure.microsoft.com/documentation/articles/api-management-howto-policies/#scopes) de stratégie suivantes.
+Cette stratégie peut être utilisée dans les [sections](./api-management-howto-policies.md#sections) et [étendues](./api-management-howto-policies.md#scopes) de stratégie suivantes.
 
 -   **Sections de la stratégie :** inbound, outbound, backend, on-error
 
@@ -148,7 +148,7 @@ Cette stratégie peut être utilisée dans les [sections](https://azure.microsof
 
 ## <a name="forward-request"></a><a name="ForwardRequest"></a> Forward request
 
-La stratégie `forward-request` transfère la demande entrante au service principal spécifié dans le [contexte](api-management-policy-expressions.md#ContextVariables) de la demande. L’URL du service back-end est spécifiée dans les [paramètres](https://azure.microsoft.com/documentation/articles/api-management-howto-create-apis/#configure-api-settings) de l’API et peut être modifiée à l’aide de la stratégie [set backend service](api-management-transformation-policies.md).
+La stratégie `forward-request` transfère la demande entrante au service principal spécifié dans le [contexte](api-management-policy-expressions.md#ContextVariables) de la demande. L’URL du service back-end est spécifiée dans les [paramètres](./import-and-publish.md) de l’API et peut être modifiée à l’aide de la stratégie [set backend service](api-management-transformation-policies.md).
 
 > [!NOTE]
 > En cas de suppression cette stratégie, la demande n’est pas transférée au service principal et les stratégies de la section outbound sont évaluées immédiatement après la réussite des stratégies de la section inbound.
@@ -156,12 +156,12 @@ La stratégie `forward-request` transfère la demande entrante au service princi
 ### <a name="policy-statement"></a>Instruction de la stratégie
 
 ```xml
-<forward-request timeout="time in seconds" follow-redirects="false | true" buffer-request-body="false | true" fail-on-error-status-code="false | true"/>
+<forward-request timeout="time in seconds" follow-redirects="false | true" buffer-request-body="false | true" buffer-response="true | false" fail-on-error-status-code="false | true"/>
 ```
 
 ### <a name="examples"></a>Exemples
 
-#### <a name="example"></a> Exemple
+#### <a name="example"></a>Exemple
 
 La stratégie au niveau de l’API suivante transfère toutes les demandes d’API au service back-end avec un délai d’expiration de 60 secondes.
 
@@ -181,7 +181,7 @@ La stratégie au niveau de l’API suivante transfère toutes les demandes d’A
 
 ```
 
-#### <a name="example"></a> Exemple
+#### <a name="example"></a>Exemple
 
 Cette stratégie au niveau de l’opération utilise l’élément `base` pour hériter de la stratégie backend de l’étendue au niveau de l’API parente.
 
@@ -201,7 +201,7 @@ Cette stratégie au niveau de l’opération utilise l’élément `base` pour h
 
 ```
 
-#### <a name="example"></a> Exemple
+#### <a name="example"></a>Exemple
 
 Cette stratégie au niveau de l’opération transfère explicitement toutes les demandes au service principal avec un délai d’expiration de 120 secondes et n’hérite pas de la stratégie principale au niveau de l’API parente. Si le service principal répond avec un code d’état d’erreur compris entre 400 et 599, la section [on-error](api-management-error-handling-policies.md) sera déclenchée.
 
@@ -222,7 +222,7 @@ Cette stratégie au niveau de l’opération transfère explicitement toutes les
 
 ```
 
-#### <a name="example"></a> Exemple
+#### <a name="example"></a>Exemple
 
 Cette stratégie au niveau de l’opération ne transmet pas de demandes au service principal.
 
@@ -252,14 +252,15 @@ Cette stratégie au niveau de l’opération ne transmet pas de demandes au serv
 
 | Attribut                                     | Description                                                                                                                                                                                                                                                                                                    | Obligatoire | Default |
 | --------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------- |
-| timeout="integer"                             | Durée, en secondes, de l’attente du retour des en-têtes de réponse HTTP par le service back-end avant de déclencher une erreur de délai d’expiration. La valeur minimale est 0 seconde. Il est possible que les valeurs supérieures à 240 secondes ne soient pas prises en compte, car l’infrastructure réseau sous-jacente peut supprimer des connexions inactives après ce délai. | Non        | None    |
-| follow-redirects="false &#124; true"          | Indique si les redirections à partir du service principal sont suivies par la passerelle ou renvoyées à l’appelant.                                                                                                                                                                                                    | Non        | false   |
-| buffer-request-body="false &#124; true"       | Quand la valeur est « true », la demande est mise en mémoire tampon et sera réutilisée lors d’une [nouvelle tentative](api-management-advanced-policies.md#Retry).                                                                                                                                                                                               | Non        | false   |
-| fail-on-error-status-code="false &#124; true" | Quand la valeur est true, la section [on-error](api-management-error-handling-policies.md) est déclenchée pour les codes de réponse dans la plage comprise entre 400 et 599.                                                                                                                                                                      | Non        | false   |
+| timeout="integer"                             | Durée, en secondes, de l’attente du retour des en-têtes de réponse HTTP par le service back-end avant de déclencher une erreur de délai d’expiration. La valeur minimale est 0 seconde. Il est possible que les valeurs supérieures à 240 secondes ne soient pas prises en compte, car l’infrastructure réseau sous-jacente peut supprimer des connexions inactives après ce délai. | Non       | None    |
+| follow-redirects="false &#124; true"          | Indique si les redirections à partir du service principal sont suivies par la passerelle ou renvoyées à l’appelant.                                                                                                                                                                                                    | Non       | false   |
+| buffer-request-body="false &#124; true"       | Quand la valeur est « true », la demande est mise en mémoire tampon et sera réutilisée lors d’une [nouvelle tentative](api-management-advanced-policies.md#Retry).                                                                                                                                                                                               | Non       | false   |
+| buffer-response="false &#124; true" | Affecte le traitement des réponses mémorisées en bloc. Quand la valeur est « false », chaque bloc reçu du back-end est immédiatement retourné à l’appelant. Quand la valeur est définie sur « true », les blocs sont mis en mémoire tampon (8 ko, sauf si la fin du flux est détectée) puis retournés à l’appelant. | Non | true |
+| fail-on-error-status-code="false &#124; true" | Quand la valeur est true, la section [on-error](api-management-error-handling-policies.md) est déclenchée pour les codes de réponse dans la plage comprise entre 400 et 599.                                                                                                                                                                      | Non       | false   |
 
 ### <a name="usage"></a>Usage
 
-Cette stratégie peut être utilisée dans les [sections](https://azure.microsoft.com/documentation/articles/api-management-howto-policies/#sections) et [étendues](https://azure.microsoft.com/documentation/articles/api-management-howto-policies/#scopes) de stratégie suivantes.
+Cette stratégie peut être utilisée dans les [sections](./api-management-howto-policies.md#sections) et [étendues](./api-management-howto-policies.md#scopes) de stratégie suivantes.
 
 -   **Sections de la stratégie :** backend
 -   **Étendues de la stratégie :** toutes les étendues
@@ -278,7 +279,7 @@ La stratégie `limit-concurrency` empêche les stratégies incluses d’exécute
 
 ### <a name="examples"></a>Exemples
 
-#### <a name="example"></a> Exemple
+#### <a name="example"></a>Exemple
 
 L’exemple suivant montre comment limiter le nombre de requêtes transmises à un serveur principal en fonction de la valeur d’une variable contextuelle.
 
@@ -288,7 +289,7 @@ L’exemple suivant montre comment limiter le nombre de requêtes transmises à 
   <backend>
     <limit-concurrency key="@((string)context.Variables["connectionId"])" max-count="3">
       <forward-request timeout="120"/>
-    <limit-concurrency/>
+    </limit-concurrency>
   </backend>
   <outbound>…</outbound>
 </policies>
@@ -304,12 +305,12 @@ L’exemple suivant montre comment limiter le nombre de requêtes transmises à 
 
 | Attribut | Description                                                                                        | Obligatoire | Default |
 | --------- | -------------------------------------------------------------------------------------------------- | -------- | ------- |
-| key       | Une chaîne. Expression autorisée. Spécifie l’étendue de la simultanéité. Peut être partagée par plusieurs stratégies. | Oui      | N/A     |
+| key       | Chaîne. Expression autorisée. Spécifie l’étendue de la simultanéité. Peut être partagée par plusieurs stratégies. | Oui      | N/A     |
 | max-count | Entier. Spécifie le nombre maximal de requêtes autorisées à entrer dans la stratégie.           | Oui      | N/A     |
 
 ### <a name="usage"></a>Usage
 
-Cette stratégie peut être utilisée dans les [sections](https://azure.microsoft.com/documentation/articles/api-management-howto-policies/#sections) et [étendues](https://azure.microsoft.com/documentation/articles/api-management-howto-policies/#scopes) de stratégie suivantes.
+Cette stratégie peut être utilisée dans les [sections](./api-management-howto-policies.md#sections) et [étendues](./api-management-howto-policies.md#scopes) de stratégie suivantes.
 
 -   **Sections de la stratégie :** inbound, outbound, backend, on-error
 
@@ -320,7 +321,7 @@ Cette stratégie peut être utilisée dans les [sections](https://azure.microsof
 La stratégie `log-to-eventhub` envoie des messages au format spécifié à un Event Hub défini par une entité Enregistreur d’événements. Comme son nom l’indique, la stratégie est utilisée pour enregistrer certaines informations sur le contexte de la réponse ou de la demande à des fins d’analyse en ligne ou hors ligne.
 
 > [!NOTE]
-> Vous trouverez un guide de configuration étape par étape d’un Event Hub et des événements de journalisation à la page [Guide pratique de l’enregistrement d’événements de la Gestion des API avec Azure Event Hubs](https://azure.microsoft.com/documentation/articles/api-management-howto-log-event-hubs/).
+> Vous trouverez un guide de configuration étape par étape d’un Event Hub et des événements de journalisation à la page [Guide pratique de l’enregistrement d’événements de la Gestion des API avec Azure Event Hubs](./api-management-howto-log-event-hubs.md).
 
 ### <a name="policy-statement"></a>Instruction de la stratégie
 
@@ -331,7 +332,7 @@ La stratégie `log-to-eventhub` envoie des messages au format spécifié à un E
 
 ```
 
-### <a name="example"></a> Exemple
+### <a name="example"></a>Exemple
 
 Toute chaîne peut être utilisée comme valeur à consigner dans Event Hubs. Dans cet exemple, la date et l’heure, le nom de service de déploiement, l’ID de la demande, l’adresse IP et le nom de l’opération de tous les appels entrants sont consignés dans l’Enregistreur d’événements Event Hub avec l’ID `contoso-logger`
 
@@ -363,7 +364,7 @@ Toute chaîne peut être utilisée comme valeur à consigner dans Event Hubs. Da
 
 ### <a name="usage"></a>Usage
 
-Cette stratégie peut être utilisée dans les [sections](https://azure.microsoft.com/documentation/articles/api-management-howto-policies/#sections) et [étendues](https://azure.microsoft.com/documentation/articles/api-management-howto-policies/#scopes) de stratégie suivantes.
+Cette stratégie peut être utilisée dans les [sections](./api-management-howto-policies.md#sections) et [étendues](./api-management-howto-policies.md#scopes) de stratégie suivantes.
 
 -   **Sections de la stratégie :** inbound, outbound, backend, on-error
 
@@ -402,12 +403,12 @@ status code and media type. If no example or schema found, the content is empty.
 
 | Attribut    | Description                                                                                           | Obligatoire | Default |
 | ------------ | ----------------------------------------------------------------------------------------------------- | -------- | ------- |
-| status-code  | Spécifie le code d’état de réponse et permet de sélectionner l’exemple ou le schéma correspondant.                 | Non        | 200     |
-| content-type | Spécifie la valeur d’état de réponse `Content-Type` et permet de sélectionner l’exemple ou le schéma correspondant. | Non        | None    |
+| status-code  | Spécifie le code d’état de réponse et permet de sélectionner l’exemple ou le schéma correspondant.                 | Non       | 200     |
+| content-type | Spécifie la valeur d’état de réponse `Content-Type` et permet de sélectionner l’exemple ou le schéma correspondant. | Non       | None    |
 
 ### <a name="usage"></a>Usage
 
-Cette stratégie peut être utilisée dans les [sections](https://azure.microsoft.com/documentation/articles/api-management-howto-policies/#sections) et [étendues](https://azure.microsoft.com/documentation/articles/api-management-howto-policies/#scopes) de stratégie suivantes.
+Cette stratégie peut être utilisée dans les [sections](./api-management-howto-policies.md#sections) et [étendues](./api-management-howto-policies.md#scopes) de stratégie suivantes.
 
 -   **Sections de la stratégie :** inbound, outbound, on-error
 
@@ -433,7 +434,7 @@ La stratégie `retry` exécute ses stratégies enfants une fois, puis retente le
 
 ```
 
-### <a name="example"></a> Exemple
+### <a name="example"></a>Exemple
 
 Dans l’exemple suivant, le transfert de la demande est retenté jusqu’à dix fois suivant un algorithme de nouvelles tentatives exponentiel. Étant donné que `first-fast-retry` a la valeur false, toutes les nouvelles tentatives sont soumises à l’algorithme de nouvelles tentatives exponentiel.
 
@@ -464,9 +465,9 @@ Dans l’exemple suivant, le transfert de la demande est retenté jusqu’à dix
 | condition        | [Expression](api-management-policy-expressions.md) ou littéral booléen spécifiant si les nouvelles tentatives doivent être arrêtées (`false`) ou poursuivies (`true`).      | Oui      | N/A     |
 | count            | Nombre positif spécifiant le nombre maximal de nouvelles tentatives à effectuer.                                                                                | Oui      | N/A     |
 | interval         | Nombre positif en secondes spécifiant le délai d’attente entre les tentatives.                                                                 | Oui      | N/A     |
-| max-interval     | Nombre positif en secondes spécifiant le délai d’attente maximal entre les tentatives. Il est utilisé pour implémenter un algorithme de nouvelles tentatives exponentiel. | Non        | N/A     |
-| delta            | Nombre positif en secondes spécifiant l’incrément du délai d’attente. Il est utilisé pour implémenter les algorithmes de nouvelles tentatives linéaires et exponentiels.             | Non        | N/A     |
-| first-fast-retry | S’il a la valeur `true`, la première des nouvelles tentatives est effectuée immédiatement.                                                                                  | Non        | `false` |
+| max-interval     | Nombre positif en secondes spécifiant le délai d’attente maximal entre les tentatives. Il est utilisé pour implémenter un algorithme de nouvelles tentatives exponentiel. | Non       | N/A     |
+| delta            | Nombre positif en secondes spécifiant l’incrément du délai d’attente. Il est utilisé pour implémenter les algorithmes de nouvelles tentatives linéaires et exponentiels.             | Non       | N/A     |
+| first-fast-retry | S’il a la valeur `true`, la première des nouvelles tentatives est effectuée immédiatement.                                                                                  | Non       | `false` |
 
 > [!NOTE]
 > Lorsque seul `interval` est spécifié, les nouvelles tentatives sont effectuées à intervalles **fixes**.
@@ -475,7 +476,7 @@ Dans l’exemple suivant, le transfert de la demande est retenté jusqu’à dix
 
 ### <a name="usage"></a>Usage
 
-Cette stratégie peut être utilisée dans les [sections](https://azure.microsoft.com/documentation/articles/api-management-howto-policies/#sections) et [étendues](https://azure.microsoft.com/documentation/articles/api-management-howto-policies/#scopes) de stratégie suivantes. Notez que des restrictions d’utilisation des stratégies enfants seront héritées par cette stratégie.
+Cette stratégie peut être utilisée dans les [sections](./api-management-howto-policies.md#sections) et [étendues](./api-management-howto-policies.md#scopes) de stratégie suivantes. Notez que des restrictions d’utilisation des stratégies enfants seront héritées par cette stratégie.
 
 -   **Sections de la stratégie :** inbound, outbound, backend, on-error
 
@@ -496,7 +497,7 @@ La stratégie `return-response` abandonne l’exécution du pipeline et renvoie 
 
 ```
 
-### <a name="example"></a> Exemple
+### <a name="example"></a>Exemple
 
 ```xml
 <return-response>
@@ -513,9 +514,9 @@ La stratégie `return-response` abandonne l’exécution du pipeline et renvoie 
 | Élément         | Description                                                                               | Obligatoire |
 | --------------- | ----------------------------------------------------------------------------------------- | -------- |
 | return-response | Élément racine.                                                                             | Oui      |
-| set-header      | Instruction de stratégie [set-header](api-management-transformation-policies.md#SetHTTPheader). | Non        |
-| set-body        | Instruction de stratégie [set-body](api-management-transformation-policies.md#SetBody).         | Non        |
-| set-status      | Instruction de stratégie [set-status](api-management-advanced-policies.md#SetStatus).           | Non        |
+| set-header      | Instruction de stratégie [set-header](api-management-transformation-policies.md#SetHTTPheader). | Non       |
+| set-body        | Instruction de stratégie [set-body](api-management-transformation-policies.md#SetBody).         | Non       |
+| set-status      | Instruction de stratégie [set-status](api-management-advanced-policies.md#SetStatus).           | Non       |
 
 ### <a name="attributes"></a>Attributs
 
@@ -525,7 +526,7 @@ La stratégie `return-response` abandonne l’exécution du pipeline et renvoie 
 
 ### <a name="usage"></a>Usage
 
-Cette stratégie peut être utilisée dans les [sections](https://azure.microsoft.com/documentation/articles/api-management-howto-policies/#sections) et [étendues](https://azure.microsoft.com/documentation/articles/api-management-howto-policies/#scopes) de stratégie suivantes.
+Cette stratégie peut être utilisée dans les [sections](./api-management-howto-policies.md#sections) et [étendues](./api-management-howto-policies.md#scopes) de stratégie suivantes.
 
 -   **Sections de la stratégie :** inbound, outbound, backend, on-error
 
@@ -548,9 +549,9 @@ La stratégie `send-one-way-request` envoie une demande à l’URL indiquée san
 
 ```
 
-### <a name="example"></a> Exemple
+### <a name="example"></a>Exemple
 
-Cet exemple de stratégie montre un exemple d’utilisation de la stratégie `send-one-way-request` pour envoyer un message à une salle de conversation Slack si le code de la réponse HTTP est supérieur ou égal à 500. Pour plus d’informations sur cet exemple, consultez la page [Utilisation de services externes à partir du service Gestion des API Azure](https://azure.microsoft.com/documentation/articles/api-management-sample-send-request/).
+Cet exemple de stratégie montre un exemple d’utilisation de la stratégie `send-one-way-request` pour envoyer un message à une salle de conversation Slack si le code de la réponse HTTP est supérieur ou égal à 500. Pour plus d’informations sur cet exemple, consultez la page [Utilisation de services externes à partir du service Gestion des API Azure](./api-management-sample-send-request.md).
 
 ```xml
 <choose>
@@ -585,21 +586,21 @@ Cet exemple de stratégie montre un exemple d’utilisation de la stratégie `se
 | send-one-way-request       | Élément racine.                                                                                               | Oui                             |
 | url                        | URL de la demande.                                                                                     | Non si mode=copy ; sinon, oui. |
 | method                     | Méthode HTTP de la demande.                                                                            | Non si mode=copy ; sinon, oui. |
-| en-tête                     | En-tête de demande. Utilisez un élément d’en-tête pour chaque en-tête de demande.                                  | Non                               |
-| body                       | Corps de la demande.                                                                                           | Non                               |
-| authentication-certificate | [Certificat à utiliser pour l’authentification du client](api-management-authentication-policies.md#ClientCertificate) | Non                               |
+| en-tête                     | En-tête de demande. Utilisez un élément d’en-tête pour chaque en-tête de demande.                                  | Non                              |
+| body                       | Corps de la demande.                                                                                           | Non                              |
+| authentication-certificate | [Certificat à utiliser pour l’authentification du client](api-management-authentication-policies.md#ClientCertificate) | Non                              |
 
 ### <a name="attributes"></a>Attributs
 
 | Attribut     | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Obligatoire | Default  |
 | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------- |
-| mode="string" | Détermine s’il s’agit d’une nouvelle demande ou d’une copie de la demande actuelle. En mode outbound, mode=copy n’initialise pas le corps de la demande.                                                                                                                                                                                                                                                                                                                                                                                                                                                                | Non        | Nouveau      |
+| mode="string" | Détermine s’il s’agit d’une nouvelle demande ou d’une copie de la demande actuelle. En mode outbound, mode=copy n’initialise pas le corps de la demande.                                                                                                                                                                                                                                                                                                                                                                                                                                                                | Non       | Nouveau      |
 | name          | Spécifie le nom de l’en-tête à définir.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Oui      | N/A      |
-| exists-action | Spécifie l’action à entreprendre lorsque l’en-tête est déjà spécifié. Cet attribut doit avoir une des valeurs suivantes.<br /><br /> - override : remplace la valeur de l’en-tête actuel.<br />- skip : ne remplace pas la valeur de l’en-tête actuel.<br />- append : ajoute la valeur à celle de l’en-tête actuel.<br />- delete : supprime l’en-tête de la demande.<br /><br /> S’il a la valeur `override`, l’inscription de plusieurs entrées portant le même nom fait que l’en-tête est défini selon toutes les entrées (qui figurent plusieurs fois) ; seules les valeurs listées seront définies dans le résultat. | Non        | override |
+| exists-action | Spécifie l’action à entreprendre lorsque l’en-tête est déjà spécifié. Cet attribut doit avoir une des valeurs suivantes.<br /><br /> - override : remplace la valeur de l’en-tête actuel.<br />- skip : ne remplace pas la valeur de l’en-tête actuel.<br />- append : ajoute la valeur à celle de l’en-tête actuel.<br />- delete : supprime l’en-tête de la demande.<br /><br /> S’il a la valeur `override`, l’inscription de plusieurs entrées portant le même nom fait que l’en-tête est défini selon toutes les entrées (qui figurent plusieurs fois) ; seules les valeurs listées seront définies dans le résultat. | Non       | override |
 
 ### <a name="usage"></a>Usage
 
-Cette stratégie peut être utilisée dans les [sections](https://azure.microsoft.com/documentation/articles/api-management-howto-policies/#sections) et [étendues](https://azure.microsoft.com/documentation/articles/api-management-howto-policies/#scopes) de stratégie suivantes.
+Cette stratégie peut être utilisée dans les [sections](./api-management-howto-policies.md#sections) et [étendues](./api-management-howto-policies.md#scopes) de stratégie suivantes.
 
 -   **Sections de la stratégie :** inbound, outbound, backend, on-error
 
@@ -623,9 +624,9 @@ La stratégie `send-request` envoie la demande fournie à l’URL spécifiée, s
 
 ```
 
-### <a name="example"></a> Exemple
+### <a name="example"></a>Exemple
 
-Cet exemple montre un moyen de vérifier un jeton de référence avec un serveur d’autorisation. Pour plus d’informations sur cet exemple, consultez la page [Utilisation de services externes à partir du service Gestion des API Azure](https://azure.microsoft.com/documentation/articles/api-management-sample-send-request/).
+Cet exemple montre un moyen de vérifier un jeton de référence avec un serveur d’autorisation. Pour plus d’informations sur cet exemple, consultez la page [Utilisation de services externes à partir du service Gestion des API Azure](./api-management-sample-send-request.md).
 
 ```xml
 <inbound>
@@ -669,24 +670,24 @@ Cet exemple montre un moyen de vérifier un jeton de référence avec un serveur
 | send-request               | Élément racine.                                                                                               | Oui                             |
 | url                        | URL de la demande.                                                                                     | Non si mode=copy ; sinon, oui. |
 | method                     | Méthode HTTP de la demande.                                                                            | Non si mode=copy ; sinon, oui. |
-| en-tête                     | En-tête de demande. Utilisez un élément d’en-tête pour chaque en-tête de demande.                                  | Non                               |
-| body                       | Corps de la demande.                                                                                           | Non                               |
-| authentication-certificate | [Certificat à utiliser pour l’authentification du client](api-management-authentication-policies.md#ClientCertificate) | Non                               |
+| en-tête                     | En-tête de demande. Utilisez un élément d’en-tête pour chaque en-tête de demande.                                  | Non                              |
+| body                       | Corps de la demande.                                                                                           | Non                              |
+| authentication-certificate | [Certificat à utiliser pour l’authentification du client](api-management-authentication-policies.md#ClientCertificate) | Non                              |
 
 ### <a name="attributes"></a>Attributs
 
 | Attribut                       | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Obligatoire | Default  |
 | ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------- |
-| mode="string"                   | Détermine s’il s’agit d’une nouvelle demande ou d’une copie de la demande actuelle. En mode outbound, mode=copy n’initialise pas le corps de la demande.                                                                                                                                                                                                                                                                                                                                                                                                                                                                | Non        | Nouveau      |
+| mode="string"                   | Détermine s’il s’agit d’une nouvelle demande ou d’une copie de la demande actuelle. En mode outbound, mode=copy n’initialise pas le corps de la demande.                                                                                                                                                                                                                                                                                                                                                                                                                                                                | Non       | Nouveau      |
 | response-variable-name="string" | Nom de la variable contextuelle qui recevra un objet Response. Si la variable n’existe pas, elle est créée après l’exécution réussie de la stratégie, et devient accessible par le biais de la collection [`context.Variable`](api-management-policy-expressions.md#ContextVariables).                                                                                                                                                                                                                                                                                                                          | Oui      | N/A      |
-| timeout="integer"               | Délai d’expiration en secondes avant l’échec de l’appel à l’URL.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | Non        | 60       |
-| ignore-error                    | S’il a la valeur true et que la demande aboutit à une erreur :<br /><br /> - Si response-variable-name a été spécifié, il contiendra une valeur Null.<br />- Si response-variable-name n’est pas spécifié, context.Request ne sera pas mis à jour.                                                                                                                                                                                                                                                                                                                                                                                   | Non        | false    |
+| timeout="integer"               | Délai d’expiration en secondes avant l’échec de l’appel à l’URL.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | Non       | 60       |
+| ignore-error                    | S’il a la valeur true et que la demande aboutit à une erreur :<br /><br /> - Si response-variable-name a été spécifié, il contiendra une valeur Null.<br />- Si response-variable-name n’est pas spécifié, context.Request ne sera pas mis à jour.                                                                                                                                                                                                                                                                                                                                                                                   | Non       | false    |
 | name                            | Spécifie le nom de l’en-tête à définir.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Oui      | N/A      |
-| exists-action                   | Spécifie l’action à entreprendre lorsque l’en-tête est déjà spécifié. Cet attribut doit avoir une des valeurs suivantes.<br /><br /> - override : remplace la valeur de l’en-tête actuel.<br />- skip : ne remplace pas la valeur de l’en-tête actuel.<br />- append : ajoute la valeur à celle de l’en-tête actuel.<br />- delete : supprime l’en-tête de la demande.<br /><br /> S’il a la valeur `override`, l’inscription de plusieurs entrées portant le même nom fait que l’en-tête est défini selon toutes les entrées (qui figurent plusieurs fois) ; seules les valeurs listées seront définies dans le résultat. | Non        | override |
+| exists-action                   | Spécifie l’action à entreprendre lorsque l’en-tête est déjà spécifié. Cet attribut doit avoir une des valeurs suivantes.<br /><br /> - override : remplace la valeur de l’en-tête actuel.<br />- skip : ne remplace pas la valeur de l’en-tête actuel.<br />- append : ajoute la valeur à celle de l’en-tête actuel.<br />- delete : supprime l’en-tête de la demande.<br /><br /> S’il a la valeur `override`, l’inscription de plusieurs entrées portant le même nom fait que l’en-tête est défini selon toutes les entrées (qui figurent plusieurs fois) ; seules les valeurs listées seront définies dans le résultat. | Non       | override |
 
 ### <a name="usage"></a>Usage
 
-Cette stratégie peut être utilisée dans les [sections](https://azure.microsoft.com/documentation/articles/api-management-howto-policies/#sections) et [étendues](https://azure.microsoft.com/documentation/articles/api-management-howto-policies/#scopes) de stratégie suivantes.
+Cette stratégie peut être utilisée dans les [sections](./api-management-howto-policies.md#sections) et [étendues](./api-management-howto-policies.md#scopes) de stratégie suivantes.
 
 -   **Sections de la stratégie :** inbound, outbound, backend, on-error
 
@@ -703,7 +704,7 @@ La stratégie `proxy` vous permet de router les demandes transférées aux back-
 
 ```
 
-### <a name="example"></a> Exemple
+### <a name="example"></a>Exemple
 
 Notez l’utilisation de [propriétés](api-management-howto-properties.md) en tant que valeurs du nom d’utilisateur et du mot de passe pour éviter de stocker des informations sensibles dans le document de stratégie.
 
@@ -723,12 +724,12 @@ Notez l’utilisation de [propriétés](api-management-howto-properties.md) en t
 | Attribut         | Description                                            | Obligatoire | Default |
 | ----------------- | ------------------------------------------------------ | -------- | ------- |
 | url="chaîne"      | URL du proxy sous la forme http://host:port.             | Oui      | N/A     |
-| username="chaîne" | Nom d’utilisateur à utiliser pour l’authentification auprès du proxy. | Non        | N/A     |
-| password="chaîne" | Mot de passe à utiliser pour l’authentification auprès du proxy. | Non        | N/A     |
+| username="chaîne" | Nom d’utilisateur à utiliser pour l’authentification auprès du proxy. | Non       | N/A     |
+| password="chaîne" | Mot de passe à utiliser pour l’authentification auprès du proxy. | Non       | N/A     |
 
 ### <a name="usage"></a>Usage
 
-Cette stratégie peut être utilisée dans les [sections](https://azure.microsoft.com/documentation/articles/api-management-howto-policies/#sections) et [étendues](https://azure.microsoft.com/documentation/articles/api-management-howto-policies/#scopes) de stratégie suivantes.
+Cette stratégie peut être utilisée dans les [sections](./api-management-howto-policies.md#sections) et [étendues](./api-management-howto-policies.md#scopes) de stratégie suivantes.
 
 -   **Sections de la stratégie :** inbound
 
@@ -745,9 +746,9 @@ La stratégie `set-method` permet de modifier la méthode d’une requête HTTP.
 
 ```
 
-### <a name="example"></a> Exemple
+### <a name="example"></a>Exemple
 
-Cet exemple de stratégie, qui utilise la stratégie `set-method`, montre un exemple d’envoi d’un message à une salle de conversation Slack si le code de la réponse HTTP est supérieur ou égal à 500. Pour plus d’informations sur cet exemple, consultez la page [Utilisation de services externes à partir du service Gestion des API Azure](https://azure.microsoft.com/documentation/articles/api-management-sample-send-request/).
+Cet exemple de stratégie, qui utilise la stratégie `set-method`, montre un exemple d’envoi d’un message à une salle de conversation Slack si le code de la réponse HTTP est supérieur ou égal à 500. Pour plus d’informations sur cet exemple, consultez la page [Utilisation de services externes à partir du service Gestion des API Azure](./api-management-sample-send-request.md).
 
 ```xml
 <choose>
@@ -783,7 +784,7 @@ Cet exemple de stratégie, qui utilise la stratégie `set-method`, montre un exe
 
 ### <a name="usage"></a>Usage
 
-Cette stratégie peut être utilisée dans les [sections](https://azure.microsoft.com/documentation/articles/api-management-howto-policies/#sections) et [étendues](https://azure.microsoft.com/documentation/articles/api-management-howto-policies/#scopes) de stratégie suivantes.
+Cette stratégie peut être utilisée dans les [sections](./api-management-howto-policies.md#sections) et [étendues](./api-management-howto-policies.md#scopes) de stratégie suivantes.
 
 -   **Sections de la stratégie :** inbound, on-error
 
@@ -800,9 +801,9 @@ La stratégie `set-status` permet de donner la valeur spécifiée au code d’é
 
 ```
 
-### <a name="example"></a> Exemple
+### <a name="example"></a>Exemple
 
-Cet exemple montre comment renvoyer une réponse 401 si le jeton d’autorisation n’est pas valide. Pour plus d’informations, consultez la page [Utiliser des services externes à partir du service Gestion des API Azure](https://azure.microsoft.com/documentation/articles/api-management-sample-send-request/).
+Cet exemple montre comment renvoyer une réponse 401 si le jeton d’autorisation n’est pas valide. Pour plus d’informations, consultez la page [Utiliser des services externes à partir du service Gestion des API Azure](./api-management-sample-send-request.md).
 
 ```xml
 <choose>
@@ -833,7 +834,7 @@ Cet exemple montre comment renvoyer une réponse 401 si le jeton d’autorisatio
 
 ### <a name="usage"></a>Usage
 
-Cette stratégie peut être utilisée dans les [sections](https://azure.microsoft.com/documentation/articles/api-management-howto-policies/#sections) et [étendues](https://azure.microsoft.com/documentation/articles/api-management-howto-policies/#scopes) de stratégie suivantes.
+Cette stratégie peut être utilisée dans les [sections](./api-management-howto-policies.md#sections) et [étendues](./api-management-howto-policies.md#scopes) de stratégie suivantes.
 
 -   **Sections de la stratégie :** outbound, backend, on-error
 -   **Étendues de la stratégie :** toutes les étendues
@@ -850,10 +851,10 @@ La stratégie `set-variable` déclare une variable de [contexte](api-management-
 
 ### <a name="example"></a><a name="set-variableExample"></a> Exemple
 
-L’exemple suivant montre une stratégie set variable dans la section inbound. Cette stratégie set variable crée une variable de [contexte](api-management-policy-expressions.md#ContextVariables)`isMobile` booléenne qui a la valeur true si l’en-tête de demande `User-Agent` contient le texte `iPad` ou `iPhone`.
+L’exemple suivant montre une stratégie set variable dans la section inbound. Cette stratégie de variable définie crée une variable `isMobile` booléenne [définie](api-management-policy-expressions.md#ContextVariables) sur true si l'en-tête de demande `User-Agent` contient le texte `iPad` ou `iPhone`.
 
 ```xml
-<set-variable name="IsMobile" value="@(context.Request.Headers["User-Agent"].Contains("iPad") || context.Request.Headers["User-Agent"].Contains("iPhone"))" />
+<set-variable name="IsMobile" value="@(context.Request.Headers.GetValueOrDefault("User-Agent","").Contains("iPad") || context.Request.Headers.GetValueOrDefault("User-Agent","").Contains("iPhone"))" />
 ```
 
 ### <a name="elements"></a>Éléments
@@ -871,7 +872,7 @@ L’exemple suivant montre une stratégie set variable dans la section inbound. 
 
 ### <a name="usage"></a>Usage
 
-Cette stratégie peut être utilisée dans les [sections](https://azure.microsoft.com/documentation/articles/api-management-howto-policies/#sections) et [étendues](https://azure.microsoft.com/documentation/articles/api-management-howto-policies/#scopes) de stratégie suivantes.
+Cette stratégie peut être utilisée dans les [sections](./api-management-howto-policies.md#sections) et [étendues](./api-management-howto-policies.md#scopes) de stratégie suivantes.
 
 -   **Sections de la stratégie :** inbound, outbound, backend, on-error
 -   **Étendues de la stratégie :** toutes les étendues
@@ -916,9 +917,9 @@ Les expressions utilisées dans la stratégie `set-variable` doivent renvoyer un
 
 La stratégie `trace` ajoute une trace personnalisée à la sortie API Inspector, aux données de télémétrie Application Insights et/ou aux journaux de ressources.
 
--   La stratégie ajoute une trace personnalisée à la sortie [API Inspector](https://azure.microsoft.com/documentation/articles/api-management-howto-api-inspector/) quand le suivi est déclenché, c.-à-d. que l’en-tête de demande `Ocp-Apim-Trace` est présent et a la valeur true et que l’en-tête de requête `Ocp-Apim-Subscription-Key` est présent et contient une clé valide qui autorise le suivi.
--   La stratégie crée des données de télémétrie [Trace](https://docs.microsoft.com/azure/azure-monitor/app/data-model-trace-telemetry) dans Application Insights, quand l’intégration à [Application Insights](https://docs.microsoft.com/azure/api-management/api-management-howto-app-insights) est activée et que le niveau `severity` spécifié dans la stratégie est supérieur ou égal au niveau `verbosity` spécifié dans le paramètre du diagnostic.
--   La stratégie ajoute une propriété dans l’entrée du journal quand les [journaux de ressources](https://docs.microsoft.com/azure/api-management/api-management-howto-use-azure-monitor#diagnostic-logs) sont activés et que le niveau de gravité spécifié dans la stratégie est supérieur ou égal au niveau de verbosité spécifié dans le paramètre du diagnostic.
+-   La stratégie ajoute une trace personnalisée à la sortie [API Inspector](./api-management-howto-api-inspector.md) quand le suivi est déclenché, c.-à-d. que l’en-tête de demande `Ocp-Apim-Trace` est présent et a la valeur true et que l’en-tête de requête `Ocp-Apim-Subscription-Key` est présent et contient une clé valide qui autorise le suivi.
+-   La stratégie crée des données de télémétrie [Trace](../azure-monitor/app/data-model-trace-telemetry.md) dans Application Insights, quand l’intégration à [Application Insights](./api-management-howto-app-insights.md) est activée et que le niveau `severity` spécifié dans la stratégie est supérieur ou égal au niveau `verbosity` spécifié dans le paramètre du diagnostic.
+-   La stratégie ajoute une propriété dans l’entrée du journal quand les [journaux de ressources](./api-management-howto-use-azure-monitor.md#activity-logs) sont activés et que le niveau de gravité spécifié dans la stratégie est supérieur ou égal au niveau de verbosité spécifié dans le paramètre du diagnostic.
 
 ### <a name="policy-statement"></a>Instruction de la stratégie
 
@@ -946,20 +947,20 @@ La stratégie `trace` ajoute une trace personnalisée à la sortie API Inspector
 | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
 | trace    | Élément racine.                                                                                                                                        | Oui      |
 | message  | Chaîne ou expression à journaliser.                                                                                                                 | Oui      |
-| metadata | Ajoute une propriété personnalisée aux données de télémétrie [Trace](https://docs.microsoft.com/azure/azure-monitor/app/data-model-trace-telemetry) Application Insights. | Non        |
+| metadata | Ajoute une propriété personnalisée aux données de télémétrie [Trace](../azure-monitor/app/data-model-trace-telemetry.md) Application Insights. | Non       |
 
 ### <a name="attributes"></a>Attributs
 
 | Attribut | Description                                                                                                               | Obligatoire | Default |
 | --------- | ------------------------------------------------------------------------------------------------------------------------- | -------- | ------- |
 | source    | Littéral chaîne significatif pour la visionneuse de trace, qui spécifie la source du message.                                   | Oui      | N/A     |
-| severity  | Spécifie le niveau de gravité de la trace. Les valeurs autorisées sont `verbose`, `information` et `error` (de la plus petite à la plus élevée). | Non        | Commentaires |
+| severity  | Spécifie le niveau de gravité de la trace. Les valeurs autorisées sont `verbose`, `information` et `error` (de la plus petite à la plus élevée). | Non       | Commentaires |
 | name      | Nom de la propriété.                                                                                                     | Oui      | N/A     |
 | value     | Valeur de la propriété.                                                                                                    | Oui      | N/A     |
 
 ### <a name="usage"></a>Usage
 
-Cette stratégie peut être utilisée dans les [sections](https://azure.microsoft.com/documentation/articles/api-management-howto-policies/#sections) et [étendues](https://azure.microsoft.com/documentation/articles/api-management-howto-policies/#scopes) de stratégie suivantes.
+Cette stratégie peut être utilisée dans les [sections](./api-management-howto-policies.md#sections) et [étendues](./api-management-howto-policies.md#scopes) de stratégie suivantes.
 
 -   **Sections de la stratégie :** inbound, outbound, backend, on-error
 
@@ -979,7 +980,7 @@ La stratégie `wait` exécute ses stratégies enfants immédiates en parallèle 
 
 ```
 
-### <a name="example"></a> Exemple
+### <a name="example"></a>Exemple
 
 Dans l’exemple suivant, deux stratégies `choose` sont les stratégies enfants immédiates de la stratégie `wait`. Ces deux stratégies `choose` s’exécutent en parallèle. Chaque stratégie `choose` essaie de récupérer une valeur en cache. En cas d’échec de cache, un service principal est appelé pour fournir la valeur. Dans cet exemple, la stratégie `wait` ne se termine pas tant que toutes ses stratégies enfants immédiates ne sont pas terminées, car l’attribut `for` a la valeur `all`. Dans cet exemple, les variables de contexte (`execute-branch-one`, `value-one`, `execute-branch-two` et `value-two`) sont déclarées hors de l’étendue de cet exemple de stratégie.
 
@@ -1025,11 +1026,11 @@ Dans l’exemple suivant, deux stratégies `choose` sont les stratégies enfants
 
 | Attribut | Description                                                                                                                                                                                                                                                                                                                                                                                                            | Obligatoire | Default |
 | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------- |
-| for       | Détermine si la stratégie `wait` attend la fin de toutes les stratégies enfants immédiates ou d’une seule. Les valeurs autorisées sont les suivantes :<br /><br /> - `all` : attend la fin de toutes les stratégies enfants immédiates.<br />- any : attend la fin d’une stratégie enfant immédiate. Une fois la première stratégie enfant immédiate terminée, la stratégie `wait` se termine et l’exécution de toutes les autres stratégies enfants immédiates est arrêtée. | Non        | all     |
+| for       | Détermine si la stratégie `wait` attend la fin de toutes les stratégies enfants immédiates ou d’une seule. Les valeurs autorisées sont les suivantes :<br /><br /> - `all` : attend la fin de toutes les stratégies enfants immédiates.<br />- any : attend la fin d’une stratégie enfant immédiate. Une fois la première stratégie enfant immédiate terminée, la stratégie `wait` se termine et l’exécution de toutes les autres stratégies enfants immédiates est arrêtée. | Non       | all     |
 
 ### <a name="usage"></a>Usage
 
-Cette stratégie peut être utilisée dans les [sections](https://azure.microsoft.com/documentation/articles/api-management-howto-policies/#sections) et [étendues](https://azure.microsoft.com/documentation/articles/api-management-howto-policies/#scopes) de stratégie suivantes.
+Cette stratégie peut être utilisée dans les [sections](./api-management-howto-policies.md#sections) et [étendues](./api-management-howto-policies.md#scopes) de stratégie suivantes.
 
 -   **Sections de la stratégie :** inbound, outbound, backend
 -   **Étendues de la stratégie :** toutes les étendues
@@ -1040,5 +1041,5 @@ Pour plus d’informations sur l’utilisation de stratégies, consultez les pag
 
 -   [Stratégies dans Gestion des API](api-management-howto-policies.md)
 -   [Expressions de stratégie](api-management-policy-expressions.md)
--   [Référence de stratégie](api-management-policy-reference.md) pour obtenir la liste complète des instructions et des paramètres de stratégie
--   [Exemples de stratégie](policy-samples.md)
+-   [Référence de stratégie](./api-management-policies.md) pour obtenir la liste complète des instructions et des paramètres de stratégie
+-   [Exemples de stratégie](./policy-reference.md)

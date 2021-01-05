@@ -10,14 +10,19 @@ ms.subservice: bing-autosuggest
 ms.topic: conceptual
 ms.date: 02/20/2019
 ms.author: scottwhi
-ms.openlocfilehash: 6fe2e78501024983544b399762fb936d86e5c9d5
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 90946b10bbc7717aa12566c4a25686f8471fb6e7
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "60547334"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96353355"
 ---
 # <a name="language-and-region-support-for-the-bing-autosuggest-api"></a>Langues et régions prises en charge par l’API Suggestion automatique Bing
+
+> [!WARNING]
+> Les API Recherche Bing passent de Cognitive Services aux services de recherche Bing. À compter du **30 octobre 2020**, toutes les nouvelles instances de Recherche Bing doivent être provisionnées en suivant le processus documenté [ici](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Les API Recherche Bing provisionnées à l’aide de Cognitive Services seront prises en charge les trois prochaines années ou jusqu’à la fin de votre Contrat Entreprise, selon la première éventualité.
+> Pour obtenir des instructions de migration, consultez [Services de recherche Bing](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
 
 Vous trouverez ci-dessous la liste des langues prises en charge par l’API Suggestion automatique Bing.
 
@@ -66,5 +71,5 @@ Vous trouverez ci-dessous la liste des langues prises en charge par l’API Sugg
 
 ## <a name="see-also"></a>Voir aussi
 
-- [Page de documentation Azure Cognitive Services](https://docs.microsoft.com/azure/cognitive-services/)
+- [Page de documentation Azure Cognitive Services](../index.yml)
 - [Page de produits Azure Cognitive Services](https://azure.microsoft.com/services/cognitive-services/)

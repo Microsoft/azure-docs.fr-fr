@@ -2,17 +2,17 @@
 title: Composants de passerelle d’application
 description: Cet article fournit des informations sur les différents composants d’une passerelle d’application.
 services: application-gateway
-author: abshamsft
+author: surajmb
 ms.service: application-gateway
-ms.topic: article
-ms.date: 02/20/2019
-ms.author: absha
-ms.openlocfilehash: 90b3c3fd18bc9211c731ccf16dd646a64a4a1116
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.topic: conceptual
+ms.date: 08/21/2020
+ms.author: surmb
+ms.openlocfilehash: ebd06b0b78ee511dce535ff4220df03087fb6906
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80133088"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88723314"
 ---
 # <a name="application-gateway-components"></a>Composants de passerelle d’application
 
@@ -69,13 +69,13 @@ Il existe deux types d’écouteur :
 
 - **De base**. Ce type d’écouteur écoute un seul site de domaine, où il a un seul mappage DNS à l’adresse IP de la passerelle d’application. Cette configuration d’écouteur est obligatoire quand vous hébergez un seul site derrière une passerelle d’application.
 
-- **Multisite**. Cette configuration d’écouteur est obligatoire quand vous configurez plusieurs applications web sur la même instance de passerelle d’application. Elle vous permet de configurer une topologie plus efficace pour vos déploiements en ajoutant jusqu’à 100 sites web à une passerelle d’application. Chaque site web peut être dirigé vers son propre pool principal. Par exemple, trois sous-domaines, abc.contoso.com, xyz.contoso.com et pqr.contoso.com, pointent vers l’adresse IP de la passerelle d’application. Vous créez trois écouteurs multisites, et vous configurez les paramètres de port et de protocole de chaque écouteur.
+- **Multisite**. Cette configuration d’écouteur est requise lorsque vous souhaitez configurer le routage en fonction d’un nom d’hôte ou de domaine pour plusieurs applications web sur la même passerelle d’application. Vous pouvez ainsi configurer une topologie plus efficace pour vos déploiements en ajoutant plus de 100 sites web à une même passerelle d’application. Chaque site web peut être dirigé vers son propre pool principal. Par exemple, trois domaines (contoso.com, fabrikam.com et adatum.com) pointent vers l’adresse IP de la passerelle d’application. Vous créez trois [écouteurs multisites](multiple-site-overview.md) et configurez les paramètres de port et de protocole de chaque écouteur. 
 
-    Pour plus d’informations, consultez [Hébergement de plusieurs sites](application-gateway-web-app-overview.md).
+    Vous pouvez également définir des noms d’hôtes avec caractères génériques dans un écouteur multisite et jusqu’à cinq noms d’hôtes par écouteur. Pour plus d’informations, consultez [Noms d’hôtes avec caractères génériques dans l’écouteur (préversion)](multiple-site-overview.md#wildcard-host-names-in-listener-preview).
 
-Après avoir créé un écouteur, vous devez l’associer à une règle de routage de requête. Cette règle détermine la manière dont la requête reçue sur l’écouteur doit être routée vers le back-end.
+    Pour plus d’informations sur la configuration d’un écouteur multisite, consultez [Hébergement de plusieurs sites dans Application Gateway à l’aide du portail Azure](create-multiple-sites-portal.md).
 
-Application Gateway traite les écouteurs dans l’[ordre indiqué](configuration-overview.md#order-of-processing-listeners).
+Après avoir créé un écouteur, vous devez l’associer à une règle de routage de requête. Cette règle détermine la manière dont la requête reçue sur l’écouteur doit être routée vers le back-end. La règle d’acheminement des requêtes contient également le pool principal vers lequel les acheminer et le paramètre HTTP dans lequel le port principal, le protocole, etc. sont mentionnés.
 
 ## <a name="request-routing-rules"></a>Règles de routage des requêtes
 
@@ -99,13 +99,13 @@ Vous pouvez choisir si la cible de redirection doit être un autre écouteur (ce
 
 Pour plus d’informations, consultez [Rediriger le trafic vers votre passerelle d’application](redirect-overview.md).
 
-### <a name="rewrite-http-headers"></a>Réécrire les en-têtes HTTP
+### <a name="rewrite-http-headers-and-url"></a>Réécrire les en-têtes et les URL HTTP
 
-À l’aide des règles de routage des requêtes, vous pouvez ajouter, supprimer ou mettre à jour les en-têtes de requête et de réponse HTTP(S) quand les paquets de requête et de réponse se déplacent entre les pools client et back-end via la passerelle d’application.
+En utilisant des règles de réécriture, vous pouvez ajouter, supprimer ou mettre à jour les en-têtes de requête et de réponse HTTP(S) ainsi que les paramètres du chemin URL et de la chaîne de requête lorsque les paquets de requête et de réponse se déplacent entre le client et des pools principaux via la passerelle d’application.
 
-Vous pouvez affecter aux en-têtes des valeurs statiques ou d’autres en-têtes et variables de serveur. Cela facilite les cas d’usage importants, tels que l’extraction d’adresses IP des clients, la suppression d’informations sensibles relatives au back-end, le renforcement de la sécurité, etc.
+Vous pouvez régler les en-têtes et les paramètres d’URL sur des valeurs statiques ou d’autres en-têtes et variables de serveur. Cela facilite les cas d’usage importants, tels que l’extraction d’adresses IP des clients, la suppression d’informations sensibles relatives au back-end, le renforcement de la sécurité, etc.
 
-Pour plus d’informations, consultez [Réécrire les en-têtes HTTP sur votre passerelle d’application](rewrite-http-headers.md).
+Pour plus d’informations, consultez [Réécrire les en-têtes et URL HTTP sur votre passerelle d’application](rewrite-http-headers-url.md).
 
 ## <a name="http-settings"></a>Paramètres HTTP
 
@@ -144,7 +144,7 @@ Vous pouvez créer différents pools de back-ends pour différents types de requ
 
 Par défaut, une passerelle d’application supervise l’intégrité de toutes les ressources de son pool de back-ends et supprime automatiquement les ressources non saines. Elle supervise ensuite les instances non saines et les rajoute au pool de back-ends sain, une fois qu’elles sont disponibles et qu’elles répondent aux sondes d’intégrité.
 
-En plus d’utiliser la surveillance par sonde d’intégrité par défaut, vous pouvez aussi personnaliser la sonde d’intégrité pour répondre aux exigences de votre application. Les sondes personnalisées permettent un contrôle plus précis de la supervision de l’intégrité. Quand vous utilisez des sondes personnalisées, vous pouvez configurer l’intervalle des sondes, l’URL et le chemin à tester ainsi que le nombre d’échecs de réponses à accepter avant de marquer l’instance de pool de back-ends comme étant non saine. Nous vous recommandons de configurer des sondes personnalisées pour superviser l’intégrité de chaque pool de back-ends.
+En plus d’utiliser la surveillance par sonde d’intégrité par défaut, vous pouvez aussi personnaliser la sonde d’intégrité pour répondre aux exigences de votre application. Les sondes personnalisées permettent un contrôle plus précis de la supervision de l’intégrité. En utilisant des sondes personnalisées, vous pouvez personnaliser le nom d’hôte, le chemin d’URL, l’intervalle d’analyse (probe), le nombre de réponses en échec autorisé avant que l’instance du pool de back-ends soit marquée comme non saine, les codes d’état et la correspondance du corps de la réponse, etc. Nous vous recommandons de configurer des sondes personnalisées pour superviser l’intégrité de chaque pool de back-ends.
 
 Pour plus d’informations, consultez [Superviser l’intégrité de votre passerelle d’application](../application-gateway/application-gateway-probe-overview.md).
 

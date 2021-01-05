@@ -9,12 +9,12 @@ metadata:
   author: ggailey777
   ms.author: azfundocs
   ms.date: 10/04/2019
-  ms.openlocfilehash: f0f47c8d997a3d02ad3bae1bc4634f4c7ad2155c
-  ms.sourcegitcommit: 253d4c7ab41e4eb11cd9995190cd5536fcec5a3c
+  ms.openlocfilehash: 1feb34dd87f61dc04365afeeca0eec7b8b511480
+  ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 03/25/2020
-  ms.locfileid: "72529684"
+  ms.lasthandoff: 10/09/2020
+  ms.locfileid: "85193241"
 landingContent:
 - title: À propos de Durable Functions
   linkLists:
@@ -40,6 +40,8 @@ landingContent:
       url: durable-functions-create-first-csharp.md
     - text: Créer votre première fonction (JavaScript)
       url: quickstart-js-vscode.md
+    - text: Créer votre première fonction (Python)
+      url: quickstart-python-vscode.md
   - linkListType: learn
     links:
     - text: Créer un workflow serverless de longue durée

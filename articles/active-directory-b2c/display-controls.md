@@ -8,15 +8,15 @@ manager: celestedg
 ms.service: active-directory
 ms.workload: identity
 ms.topic: reference
-ms.date: 12/10/2019
+ms.date: 12/11/2020
 ms.author: mimart
 ms.subservice: B2C
-ms.openlocfilehash: 4998fb19e42e123edd57bfcf10931d594ac4cb44
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 441a77823c77305e567e9e1436715bc51ca48c11
+ms.sourcegitcommit: ea17e3a6219f0f01330cf7610e54f033a394b459
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78188730"
+ms.lasthandoff: 12/14/2020
+ms.locfileid: "97387052"
 ---
 # <a name="display-controls"></a>Contrôles d’affichage
 
@@ -28,13 +28,11 @@ L’image suivante illustre une page d’inscription auto-déclarée avec deux c
 
 ![Exemple de contrôle d’affichage rendu](media/display-controls/display-control-email.png)
 
-[!INCLUDE [b2c-public-preview-feature](../../includes/active-directory-b2c-public-preview.md)]
-
 ## <a name="prerequisites"></a>Conditions préalables requises
 
  Dans la section [Métadonnées](self-asserted-technical-profile.md#metadata) d’un [profil technique auto-déclaré](self-asserted-technical-profile.md), dans la propriété [ContentDefinition](contentdefinitions.md) référencée, `DataUri` doit être défini sur le contrat de pages version 2.0.0 ou ultérieure. Par exemple :
 
-```XML
+```xml
 <ContentDefinition Id="api.selfasserted">
   <LoadUri>~/tenant/default/selfAsserted.cshtml</LoadUri>
   <RecoveryUri>~/common/default_page_error.html</RecoveryUri>
@@ -55,9 +53,9 @@ L’élément **DisplayControl** contient les éléments suivants :
 
 | Élément | Occurrences | Description |
 | ------- | ----------- | ----------- |
-| InputClaims | 0:1 | Les **InputClaims** sont utilisés pour préremplir la valeur des revendications à collecter auprès de l’utilisateur. |
-| DisplayClaims | 0:1 | Les **DisplayClaims** sont utilisés pour représenter les revendications à collecter auprès de l’utilisateur. |
-| OutputClaims | 0:1 | Les **OutputClaims** sont utilisés pour représenter les revendications à enregistrer temporairement pour ce **DisplayControl**. |
+| InputClaims | 0:1 | Les **InputClaims** sont utilisés pour préremplir la valeur des revendications à collecter auprès de l’utilisateur. Pour plus d’informations, consultez l’élément [InputClaims](technicalprofiles.md#input-claims). |
+| DisplayClaims | 0:1 | Les **DisplayClaims** sont utilisés pour représenter les revendications à collecter auprès de l’utilisateur. Pour plus d’informations, consultez l’élément [DisplayClaim](technicalprofiles.md#displayclaim).|
+| OutputClaims | 0:1 | Les **OutputClaims** sont utilisés pour représenter les revendications à enregistrer temporairement pour ce **DisplayControl**. Pour plus d’informations, consultez l’élément [OutputClaims](technicalprofiles.md#output-claims).|
 | Actions | 0:1 | Les **Actions** sont utilisées pour répertorier les profils techniques de validation à appeler pour les actions de l’utilisateur qui se produisent au niveau du serveur frontal. |
 
 ### <a name="input-claims"></a>Revendications d’entrée
@@ -66,7 +64,7 @@ Dans un contrôle d’affichage, vous pouvez utiliser des éléments **InputClai
 
 L’exemple suivant préremplit l’adresse e-mail à vérifier avec l’adresse déjà présente.
 
-```XML
+```xml
 <DisplayControl Id="emailControl" UserInterfaceControlType="VerificationControl">
   <InputClaims>
     <InputClaim ClaimTypeReferenceId="emailAddress" />
@@ -82,7 +80,7 @@ Comme les **revendications d’affichage** définies dans un [profil technique a
 
 Certaines revendications d’affichage sont requises pour certains types de contrôle d’affichage. Par exemple, **VerificationCode** est requis pour le contrôle d’affichage de type **VerificationControl**. Utilisez l’attribut **ControlClaimType** pour spécifier le DisplayClaim désigné pour la revendication requise. Par exemple :
 
-```XML
+```xml
 <DisplayClaim ClaimTypeReferenceId="otpCode" ControlClaimType="VerificationCode" Required="true" />
 ```
 
@@ -98,9 +96,92 @@ Les **Actions** d’un contrôle d’affichage sont des procédures qui se produ
 
 Une action définit une liste de **profils techniques de validation**. Ceux-ci sont utilisés pour valider tout ou partie des revendications d’affichage du contrôle d’affichage. Le profil technique de validation valide l’entrée d’utilisateur et peut retourner une erreur à l’utilisateur. Vous pouvez utiliser **ContinueOnError**, **ContinueOnSuccess** et **Preconditions** dans l’action de contrôle d’affichage de la même manière que dans les [profils techniques de validation](validation-technical-profile.md) d’un profil technique auto-déclaré.
 
-L’exemple suivant envoie un code dans un courrier électronique ou un SMS en fonction de la sélection de l’utilisateur de la revendication **mfaType**.
+#### <a name="actions"></a>Actions
 
-```XML
+L’élément **Actions** contient l’élément suivant :
+
+| Élément | Occurrences | Description |
+| ------- | ----------- | ----------- |
+| Action | 1:n | Liste des actions à exécuter. |
+
+#### <a name="action"></a>Action
+
+L’élément **Action** contient l’attribut suivant :
+
+| Attribut | Obligatoire | Description |
+| --------- | -------- | ----------- |
+| Id | Oui | Type d’opération. Valeurs possibles : `SendCode` ou `VerifyCode`. La valeur `SendCode` envoie un code à l’utilisateur. Cette action peut contenir deux profils techniques de validation : un pour générer un code, et un autre pour l’envoyer. La valeur `VerifyCode` vérifie le code que l’utilisateur a tapé dans la zone de texte d’entrée. |
+
+L’élément **Action** contient l’élément suivant :
+
+| Élément | Occurrences | Description |
+| ------- | ----------- | ----------- |
+| ValidationClaimsExchange | 1:1 | Identificateur des profils techniques utilisés pour valider la totalité ou certaines des revendications d’affichage du profil technique de référencement. Toutes les revendications d’entrée du profil technique référencé doivent apparaître dans les revendications d’affichage du profil technique de référencement. |
+
+#### <a name="validationclaimsexchange"></a>ValidationClaimsExchange
+
+L’élément **ValidationClaimsExchange** contient l’élément suivant :
+
+| Élément | Occurrences | Description |
+| ------- | ----------- | ----------- |
+| ValidationTechnicalProfile | 1:n | Un profil technique pour valider toutes ou certaines des revendications d’affichage du profil technique de référencement. |
+
+L’élément **ValidationTechnicalProfile** contient l’attribut suivant :
+
+| Attribut | Obligatoire | Description |
+| --------- | -------- | ----------- |
+| ReferenceId | Oui | L’identificateur d’un profil technique déjà défini dans la stratégie ou dans la stratégie parente. |
+|ContinueOnError|Non| Indique si la validation des profils techniques de validation suivants doit se poursuivre si ce profil technique de validation génère une erreur. Valeurs possibles : `true` ou `false` (par défaut, arrête le traitement des profils de validation suivants et renvoie une erreur). |
+|ContinueOnSuccess | Non | Indique si la validation des profils de validation suivants doit se poursuivre si ce profil technique de validation réussit. Valeurs possibles : `true` ou `false`. La valeur par défaut est `true`, ce qui signifie que le traitement des profils de validation suivants continue. |
+
+L’élément **ValidationTechnicalProfile** contient l’élément suivant :
+
+| Élément | Occurrences | Description |
+| ------- | ----------- | ----------- |
+| Preconditions | 0:1 | Une liste de conditions préalables qui doivent être satisfaites pour que le profil technique de validation puisse s’exécuter. |
+
+L’élément **Precondition** contient les attributs suivants :
+
+| Attribut | Obligatoire | Description |
+| --------- | -------- | ----------- |
+| `Type` | Oui | Le type de vérification ou de requête à exécuter pour la condition préalable. Valeurs possibles : `ClaimsExist` ou `ClaimEquals`. `ClaimsExist` spécifie que les actions doivent être exécutées si les revendications spécifiées existent dans le jeu de revendications actuel de l’utilisateur. `ClaimEquals` spécifie que les actions doivent être exécutées si la revendication spécifiée existe et que sa valeur est égale à la valeur spécifiée. |
+| `ExecuteActionsIf` | Oui | Indique si les actions de la condition préalable doivent être effectuées si le test est true ou false. |
+
+L’élément **Precondition** contient les éléments suivants :
+
+| Élément | Occurrences | Description |
+| ------- | ----------- | ----------- |
+| Valeur | 1:n | Les données qui sont utilisées par la vérification. Si le type de cette vérification est `ClaimsExist`, ce champ spécifie un ClaimTypeReferenceId à rechercher. Si le type de la vérification est `ClaimEquals`, ce champ spécifie un ClaimTypeReferenceId à rechercher. Spécifie la valeur à vérifier dans un autre élément de valeur.|
+| Action | 1:1 | L’action à entreprendre si la vérification de condition préalable dans une étape d’orchestration a la valeur true. La valeur de l’**Action** est définie sur `SkipThisValidationTechnicalProfile`, ce qui indique que le profil technique de validation associé ne doit pas être exécuté. |
+
+L’exemple suivant envoie et vérifie l’adresse de messagerie à l’aide du [profil technique Azure AD SSPR](aad-sspr-technical-profile.md).
+
+```xml
+<DisplayControl Id="emailVerificationControl" UserInterfaceControlType="VerificationControl">
+  <InputClaims></InputClaims>
+  <DisplayClaims>
+    <DisplayClaim ClaimTypeReferenceId="email" Required="true" />
+    <DisplayClaim ClaimTypeReferenceId="verificationCode" ControlClaimType="VerificationCode" Required="true" />
+  </DisplayClaims>
+  <OutputClaims></OutputClaims>
+  <Actions>
+    <Action Id="SendCode">
+      <ValidationClaimsExchange>
+        <ValidationClaimsExchangeTechnicalProfile TechnicalProfileReferenceId="AadSspr-SendCode" />
+      </ValidationClaimsExchange>
+    </Action>
+    <Action Id="VerifyCode">
+      <ValidationClaimsExchange>
+        <ValidationClaimsExchangeTechnicalProfile TechnicalProfileReferenceId="AadSspr-VerifyCode" />
+      </ValidationClaimsExchange>
+    </Action>
+  </Actions>
+</DisplayControl>
+```
+
+L’exemple suivant envoie un code dans un courrier électronique ou un SMS en fonction de la sélection de l’utilisateur de la revendication **mfaType** avec des conditions préalables.
+
+```xml
 <Action Id="SendCode">
   <ValidationClaimsExchange>
     <ValidationClaimsExchangeTechnicalProfile TechnicalProfileReferenceId="AzureMfa-SendSms">
@@ -131,7 +212,7 @@ Les contrôles d’affichage sont référencés dans les [revendications d’aff
 
 Par exemple :
 
-```XML
+```xml
 <TechnicalProfile Id="SelfAsserted-ProfileUpdate">
   ...
   <DisplayClaims>
@@ -141,3 +222,10 @@ Par exemple :
     <DisplayClaim ClaimTypeReferenceId="givenName" Required="true" />
     <DisplayClaim ClaimTypeReferenceId="surName" Required="true" />
 ```
+
+## <a name="next-steps"></a>Étapes suivantes
+
+Pour obtenir des exemples d’utilisation du contrôle d’affichage, consultez : 
+
+- [Vérification des e-mails personnalisée avec Mailjet](custom-email-mailjet.md)
+- [Vérification des e-mails personnalisée avec SendGrid](custom-email-sendgrid.md)

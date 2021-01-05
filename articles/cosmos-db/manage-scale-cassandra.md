@@ -3,23 +3,25 @@ title: Mise à l’échelle élastique avec l’API Cassandra dans Azure Cosmos 
 description: En savoir plus sur les options disponibles pour mettre à l’échelle un compte d’API Cassandra Azure Cosmos DB et leurs avantages et inconvénients
 author: TheovanKraay
 ms.service: cosmos-db
+ms.subservice: cosmosdb-cassandra
 ms.topic: conceptual
-ms.date: 01/13/2020
+ms.date: 07/29/2020
 ms.author: thvankra
-ms.openlocfilehash: 8f84d611ecdf3fc0f86273498753e550315cd878
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.openlocfilehash: aad2e80598146be7b45a8a7b8a02cfe050163102
+ms.sourcegitcommit: fa90cd55e341c8201e3789df4cd8bd6fe7c809a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83586182"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93340955"
 ---
 # <a name="elastically-scale-an-azure-cosmos-db-cassandra-api-account"></a>Mettre à l’échelle de manière élastique un compte d’API Cassandra Azure Cosmos DB
+[!INCLUDE[appliesto-cassandra-api](includes/appliesto-cassandra-api.md)]
 
 Il existe diverses options pour explorer la nature élastique de l’API d’Azure Cosmos DB pour Cassandra. Pour comprendre comment mettre à l’échelle efficacement dans Azure Cosmos DB, il est important de comprendre comment approvisionner la quantité appropriée d’unités de requête (RU/s) pour tenir compte des exigences de performances de votre système. Pour en savoir plus sur les unités de requête, consultez l’article relatif aux [unités de requête](request-units.md). 
 
-Pour l'API Cassandra, vous pouvez récupérer les frais de l'unité de requête pour les requêtes individuelles en utilisant les [SDK .NET et Java](https://docs.microsoft.com/azure/cosmos-db/find-request-unit-charge#cassandra-api). Cette méthode est utile pour déterminer la quantité d’unités de requête que vous devrez provisionner dans le service.
+Pour l'API Cassandra, vous pouvez récupérer les frais de l'unité de requête pour les requêtes individuelles en utilisant les [SDK .NET et Java](./find-request-unit-charge-cassandra.md). Cette méthode est utile pour déterminer la quantité d’unités de requête que vous devrez provisionner dans le service.
 
-![Les opérations de base de données consomment des unités de requête](./media/request-units/request-units.png)
+:::image type="content" source="./media/request-units/request-units.png" alt-text="Les opérations de base de données consomment des unités de requête" border="false":::
 
 ## <a name="handling-rate-limiting-429-errors"></a>Gestion de la limitation du débit (erreurs 429)
 
@@ -46,7 +48,7 @@ L’avantage de cette méthode est qu’il s’agit d’une méthode clé en mai
 
 ## <a name="use-the-control-plane"></a><a id="use-control-plane"></a>Utiliser le plan de contrôle
 
-L’API d’Azure Cosmos DB pour Cassandra offre la possibilité d’ajuster le débit par programmation à l’aide de nos diverses fonctionnalités de plan de contrôle. Pour obtenir des conseils et des exemples, consultez les articles relatifs à [Azure Resource Manager](manage-cassandra-with-resource-manager.md), [PowerShell](powershell-samples-cassandra.md) et [Azure CLI](cli-samples-cassandra.md).
+L’API d’Azure Cosmos DB pour Cassandra offre la possibilité d’ajuster le débit par programmation à l’aide de nos diverses fonctionnalités de plan de contrôle. Pour obtenir des conseils et des exemples, consultez les articles relatifs à [Azure Resource Manager](./templates-samples-cassandra.md), [PowerShell](powershell-samples.md) et [Azure CLI](cli-samples.md).
 
 L’avantage de cette méthode est que vous pouvez automatiser l’augmentation ou la diminution des ressources en fonction d’une minuterie pour tenir compte des pics d’activité ou des périodes de faible activité. Jetez un coup d’œil à notre exemple [ici](https://github.com/Azure-Samples/azure-cosmos-throughput-scheduler) pour savoir comment y parvenir à l’aide d’Azure Functions et de PowerShell.
 
@@ -62,7 +64,7 @@ L’avantage de cette approche est qu’elle vous permet de répondre aux besoin
 
 En plus de la façon standard (manuelle) ou par programmation d’approvisionner le débit, vous pouvez également configurer des conteneurs Azure Cosmos avec le débit approvisionné en mode de mise à l’échelle automatique. La mise à l’échelle automatique s’adapte automatiquement et instantanément à vos besoins en matière de consommation dans les limites RU spécifiées, sans compromettre les SLA. Pour en savoir plus, consultez l’article [Créer des conteneurs et des bases de données Azure Cosmos en mise à l’échelle automatique](provision-throughput-autoscale.md).
 
-L’avantage de cette approche est qu’il s’agit du moyen le plus simple de gérer les besoins de mise à l’échelle dans votre système. Elle garantit de ne pas appliquer de limitation du débit **dans les plages RU configurées**. L’inconvénient est que, si les besoins en matière de mise à l’échelle dans votre système sont prévisibles, la mise à l’échelle automatique peut être un moyen plus onéreux de gérer vos besoins de mise à l’échelle que d’utiliser les approches du plan de contrôle ou du Kit de développement logiciel (SDK) mentionnées ci-dessus.
+L’avantage de cette approche est qu’il s’agit du moyen le plus simple de gérer les besoins de mise à l’échelle dans votre système. Elle n’appliquera pas de limitation du débit **dans les plages RU configurées**. L’inconvénient est que, si les besoins en matière de mise à l’échelle dans votre système sont prévisibles, la mise à l’échelle automatique peut être un moyen plus onéreux de gérer vos besoins de mise à l’échelle que d’utiliser les approches du plan de contrôle ou du Kit de développement logiciel (SDK) mentionnées ci-dessus.
 
 Pour définir ou modifier le débit maximal (unités de requête) pour la mise à l’échelle automatique à l’aide de CQL, utilisez la commande suivante (en remplaçant l’espace de noms/le nom de la table en conséquence) :
 

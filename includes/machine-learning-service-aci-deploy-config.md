@@ -4,14 +4,14 @@ ms.service: machine-learning
 ms.topic: include
 ms.date: 03/16/2020
 ms.author: larryfr
-ms.openlocfilehash: 4f13c171c5fafb13875f5f87d4eb3d6013f0ff30
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 190da8fc98f3a03499188ab173f058d15cd2dafe
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79486038"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96028273"
 ---
-Les entrées dans le document `deploymentconfig.json` correspondent aux paramètres pour [AciWebservice.deploy_configuration](https://docs.microsoft.com/python/api/azureml-core/azureml.core.webservice.aci.aciservicedeploymentconfiguration?view=azure-ml-py). Le tableau suivant décrit le mappage entre les entités dans le document JSON et les paramètres de la méthode :
+Les entrées dans le document `deploymentconfig.json` correspondent aux paramètres pour [AciWebservice.deploy_configuration](/python/api/azureml-core/azureml.core.webservice.aci.aciservicedeploymentconfiguration?view=azure-ml-py). Le tableau suivant décrit le mappage entre les entités dans le document JSON et les paramètres de la méthode :
 
 | Entité JSON | Paramètre de méthode | Description |
 | ----- | ----- | ----- |

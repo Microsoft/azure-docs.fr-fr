@@ -8,14 +8,16 @@ ms.topic: conceptual
 description: Utilisez un référentiel Helm privé dans un espace Azure Dev.
 keywords: Docker, Kubernetes, Azure, AKS, Azure Container Service, conteneurs, Helm
 manager: gwallace
-ms.openlocfilehash: c8f0e463bc78d278d8162f8389664dbb46a83301
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 7c5f28595df2e552fd48033b44e4e1f0ea4ec306
+ms.sourcegitcommit: d103a93e7ef2dde1298f04e307920378a87e982a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80240466"
+ms.lasthandoff: 10/13/2020
+ms.locfileid: "91960335"
 ---
 # <a name="use-a-private-helm-repository-in-azure-dev-spaces"></a>Utiliser un référentiel Helm privé dans Azure Dev Spaces
+
+[!INCLUDE [Azure Dev Spaces deprecation](../../../includes/dev-spaces-deprecation.md)]
 
 [Helm][helm] est un gestionnaire de package pour Kubernetes. Helm utilise un format [chart][helm-chart] pour empaqueter les dépendances. Les graphiques Helm sont stockés dans un référentiel, qui peut être public ou privé. Azure Dev Spaces récupère uniquement les graphiques Helm auprès des référentiels publics lors de l’exécution de votre application. Dans les cas où le référentiel Helm est privé ou Azure Dev Spaces ne peut pas y accéder, vous pouvez ajouter un graphique à partir de ce référentiel directement à votre application. L’ajout du graphique permet à Azure Dev Spaces d’exécuter votre application sans avoir à accéder au référentiel Helm privé.
 

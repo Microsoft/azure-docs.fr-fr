@@ -8,12 +8,12 @@ ms.workload: infrastructure
 ms.date: 12/05/2018
 ms.author: cynthn
 ms.custom: mvc
-ms.openlocfilehash: 3e44236f74a5448c540c58ba730d65b412d48bd0
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 1c53194bd345c18ac582acd538f1e8f8e1e34d54
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82101703"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87027850"
 ---
 # <a name="tutorial-install-the-sql-iis-net-stack-in-a-windows-vm-with-azure-powershell"></a>Tutoriel : Installer la pile SQL, IIS, .NET dans une machine virtuelle Windows avec Azure PowerShell
 
@@ -33,7 +33,7 @@ Pour ouvrir Cloud Shell, sélectionnez simplement **Essayer** en haut à droite 
 
 ## <a name="create-an-iis-vm"></a>Créer une machine virtuelle IIS 
 
-Dans cet exemple, nous utilisons l’applet de commande [New-AzVM](https://docs.microsoft.com/powershell/module/az.compute/new-azvm) de PowerShell Cloud Shell pour créer rapidement une machine virtuelle Windows Server 2016, puis installer IIS et le .NET Framework. Les machines virtuelles IIS et SQL partagent un groupe de ressources et le réseau virtuel. Nous allons donc créer des variables pour ces noms.
+Dans cet exemple, nous utilisons l’applet de commande [New-AzVM](/powershell/module/az.compute/new-azvm) de PowerShell Cloud Shell pour créer rapidement une machine virtuelle Windows Server 2016, puis installer IIS et le .NET Framework. Les machines virtuelles IIS et SQL partagent un groupe de ressources et le réseau virtuel. Nous allons donc créer des variables pour ces noms.
 
 
 ```azurepowershell-interactive
@@ -52,7 +52,7 @@ New-AzVm `
     -OpenPorts 80,3389 
 ```
 
-Installez IIS et le .NET Framework avec l’extension de script personnalisé à l’aide de l’applet de commande [Set-AzVMExtension](https://docs.microsoft.com/powershell/module/az.compute/set-azvmextension).
+Installez IIS et le .NET Framework avec l’extension de script personnalisé à l’aide de l’applet de commande [Set-AzVMExtension](/powershell/module/az.compute/set-azvmextension).
 
 ```azurepowershell-interactive
 Set-AzVMExtension `
@@ -76,7 +76,7 @@ $vNet = Get-AzVirtualNetwork `
    -ResourceGroupName $resourceGroup
 ```
 
-Créez une configuration pour le sous-réseau en utilisant [Add-AzVirtualNetworkSubnetConfig](https://docs.microsoft.com/powershell/module/az.network/add-azvirtualnetworksubnetconfig).
+Créez une configuration pour le sous-réseau en utilisant [Add-AzVirtualNetworkSubnetConfig](/powershell/module/az.network/add-azvirtualnetworksubnetconfig).
 
 
 ```azurepowershell-interactive
@@ -87,7 +87,7 @@ Add-AzVirtualNetworkSubnetConfig `
    -ServiceEndpoint Microsoft.Sql
 ```
 
-Mettre à jour le réseau virtuel avec les informations du nouveau sous-réseau en utilisant [Set-AzVirtualNetwork](https://docs.microsoft.com/powershell/module/az.network/set-azvirtualnetwork)
+Mettre à jour le réseau virtuel avec les informations du nouveau sous-réseau en utilisant [Set-AzVirtualNetwork](/powershell/module/az.network/set-azvirtualnetwork)
    
 ```azurepowershell-interactive   
 $vNet | Set-AzVirtualNetwork
@@ -111,7 +111,7 @@ New-AzVm `
     -OpenPorts 3389,1401 
 ```
 
-Utilisez [Set-AzVMSqlServerExtension](https://docs.microsoft.com/powershell/module/az.compute/set-azvmsqlserverextension) pour ajouter l’[extension SQL Server](https://docs.microsoft.com/azure/virtual-machines/windows/sql/virtual-machines-windows-sql-server-agent-extension) à la machine virtuelle SQL.
+Utilisez [Set-AzVMSqlServerExtension](/powershell/module/az.compute/set-azvmsqlserverextension) pour ajouter l’[extension SQL Server](../../azure-sql/virtual-machines/windows/sql-server-iaas-agent-extension-automate-management.md) à la machine virtuelle SQL.
 
 ```azurepowershell-interactive
 Set-AzVMSqlServerExtension `
@@ -135,4 +135,3 @@ Passez au tutoriel suivant pour savoir comment sécuriser un serveur web IIS ave
 
 > [!div class="nextstepaction"]
 > [Sécuriser un serveur web IIS à l’aide de certificats TLS/SSL](tutorial-secure-web-server.md)
-

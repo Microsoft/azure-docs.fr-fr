@@ -3,20 +3,20 @@ title: 'Tutoriel Data Factory : Premier pipeline de données '
 description: Ce didacticiel Azure Data Factory vous montre comment créer et planifier une fabrique de données qui traite les données à l’aide du script Hive sur un cluster Hadoop.
 services: data-factory
 documentationcenter: ''
-author: djpmsft
-ms.author: daperlov
+author: dcstwh
+ms.author: weetok
 manager: jroth
 ms.reviewer: maghan
 ms.service: data-factory
 ms.workload: data-services
 ms.topic: conceptual
 ms.date: 01/22/2018
-ms.openlocfilehash: 80644ed2d655544fa176a7be92aec3c01aa3bf14
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: a79872c11d76a74932fe232fa3f7818edc58ffcc
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75966069"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96496209"
 ---
 # <a name="tutorial-build-your-first-pipeline-to-transform-data-using-hadoop-cluster"></a>Tutoriel : Générer votre premier pipeline pour transformer les données à l’aide du cluster Hadoop
 > [!div class="op_single_selector"]
@@ -46,7 +46,7 @@ Dans ce tutoriel, vous effectuerez les étapes suivantes :
 3. Créer des **services liés**. Vous créez un service lié pour lier un magasin de données ou un service de calcul à la fabrique de données. Un magasin de données comme Azure Storage conserve les données d’entrée/de sortie d’activités dans le pipeline. Un service de calcul comme un cluster HDInsight Hadoop traite/transforme des données.
 
     Dans ce tutoriel, vous allez créer deux services liés : **Stockage Azure** et **HDInsight Azure**. Le service lié du stockage Azure relie un compte de stockage Azure qui contient les données d’entrée/de sortie de la fabrique de données. Le service lié Azure HDInsight relie un cluster Azure HDInsight qui est utilisé pour transformer les données de la fabrique de données.
-3. Créer des **jeux de données**d’entrée et de sortie. Un jeu de données d’entrée représente l’entrée d’une activité dans le pipeline, tandis qu’un jeu de données de sortie représente la sortie de l’activité.
+3. Créer des **jeux de données** d’entrée et de sortie. Un jeu de données d’entrée représente l’entrée d’une activité dans le pipeline, tandis qu’un jeu de données de sortie représente la sortie de l’activité.
 
     Dans ce didacticiel, les jeux de données d’entrée et de sortie indiquent des emplacements de données d’entrée et de sortie dans le stockage Blob Azure. Le service lié du stockage Azure indique quel compte de stockage Azure est utilisé. Un jeu de données d’entrée spécifie l’emplacement des fichiers d’entrée, tandis qu’un jeu de données de sortie indique l’emplacement des fichiers de sortie.
 

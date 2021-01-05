@@ -1,20 +1,15 @@
 ---
 title: Créer des rubriques et des files d’attente Azure Service Bus partitionnées | Microsoft Docs
 description: Décrit comment partitionner des files d’attente et des rubriques Service Bus à l’aide de plusieurs courtiers de messages.
-services: service-bus-messaging
-author: axisc
-manager: timlt
-editor: spelluru
-ms.service: service-bus-messaging
 ms.topic: article
-ms.date: 02/06/2020
-ms.author: aschhab
-ms.openlocfilehash: 671368993acb43c0d55eca73119effa934e3cff8
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 06/23/2020
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 8fd845ba24fd96ad6de566a7f55b25bd7129074d
+ms.sourcegitcommit: 1756a8a1485c290c46cc40bc869702b8c8454016
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79230073"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96930430"
 ---
 # <a name="partitioned-queues-and-topics"></a>Files d’attente et rubriques partitionnées
 
@@ -31,13 +26,17 @@ Chaque file d’attente ou rubrique partitionnée est constituée de plusieurs p
 
 Lorsqu’un client souhaite recevoir un message à partir d’une file d’attente partitionnée ou d’un abonnement à une rubrique partitionnée, Service Bus interroge toutes les partitions à la recherche de messages, puis retourne au destinataire le premier message qui est obtenu à partir de l’une des banques de messagerie. Service Bus place les autres messages en cache pour les retourner quand il reçoit d'autres requêtes de réception. Un client destinataire n’est pas conscient de ce partitionnement ; le comportement côté client d’une file d’attente ou d’une rubrique partitionnée (par exemple, lecture, exécution, report, rebut, préchargement) est identique à celui d’une entité ordinaire.
 
+L’opération de lecture sur une entité non partitionnée renvoie toujours le message le plus ancien, mais pas sur une entité partitionnée. Au lieu de cela, elle renvoie le message le plus ancien dans l’une des partitions dont le courtier de messages a répondu en premier. Rien ne garantit que le message retourné est le plus ancien sur toutes les partitions. 
+
 Il n’existe aucun coût supplémentaire lors de l’envoi d’un message à, ou lors de la réception d’un message depuis, une file d’attente ou une rubrique partitionnée.
+>[!NOTE]
+> L’opération de lecture retourne le plus ancien message de la partition en fonction de son SequenceNumber. Pour les entités partitionnées, le numéro de séquence est déterminé par rapport à la partition. Pour plus d’informations, consultez [Timestamps et séquencement de message](../service-bus-messaging/message-sequencing.md).
 
 ## <a name="enable-partitioning"></a>Activation du partitionnement
 
 Pour utiliser des rubriques et des files d’attente partitionnées avec Azure Service Bus, utilisez le Kit de développement logiciel (SDK) Microsoft Azure version 2.2 ou version ultérieure, ou spécifiez `api-version=2013-10` ou une version ultérieure dans vos requêtes HTTP.
 
-### <a name="standard"></a>standard
+### <a name="standard"></a>Standard
 
 Dans le niveau de messagerie Standard, vous pouvez créer des files d’attente et des rubriques Service Bus avec des tailles de 1, 2, 3, 4 ou 5 Go (la valeur par défaut est 1 Go). Si le partitionnement est activé, Service Bus crée 16 copies (16 partitions) de l’entité, chacune de la même taille spécifiée. Par conséquent, si vous créez une file d’attente de 5 Go, avec 16 partitions, la taille maximale de la file d’attente est (5 \* 16) = 80 Go. Vous pouvez voir la taille maximale de votre file d’attente ou rubrique partitionnée en examinant son entrée sur le [portail Azure][Azure portal], dans le panneau **Aperçu** de cette entité.
 
@@ -95,8 +94,8 @@ using (TransactionScope ts = new TransactionScope(committableTransaction))
 {
     Message msg = new Message("This is a message");
     msg.PartitionKey = "myPartitionKey";
-    messageSender.SendAsync(msg); 
-    ts.CompleteAsync();
+    await messageSender.SendAsync(msg); 
+    await ts.CompleteAsync();
 }
 committableTransaction.Commit();
 ```
@@ -115,8 +114,8 @@ using (TransactionScope ts = new TransactionScope(committableTransaction))
 {
     Message msg = new Message("This is a message");
     msg.SessionId = "mySession";
-    messageSender.SendAsync(msg); 
-    ts.CompleteAsync();
+    await messageSender.SendAsync(msg); 
+    await ts.CompleteAsync();
 }
 committableTransaction.Commit();
 ```
@@ -153,4 +152,4 @@ Pour en savoir plus sur les concepts fondamentaux de la spécification de la mes
 [QueueDescription.EnablePartitioning]: /dotnet/api/microsoft.servicebus.messaging.queuedescription.enablepartitioning
 [TopicDescription.EnablePartitioning]: /dotnet/api/microsoft.servicebus.messaging.topicdescription.enablepartitioning
 [QueueDescription.ForwardTo]: /dotnet/api/microsoft.servicebus.messaging.queuedescription.forwardto
-[AMQP 1.0 support for Service Bus partitioned queues and topics]: service-bus-partitioned-queues-and-topics-amqp-overview.md
+[AMQP 1.0 support for Service Bus partitioned queues and topics]: ./service-bus-amqp-protocol-guide.md

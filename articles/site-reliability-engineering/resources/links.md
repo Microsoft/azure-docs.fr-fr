@@ -2,17 +2,17 @@
 title: Synthèses et collections de liens sur l’ingénierie de fiabilité des sites (SRE) | Microsoft Docs
 description: Développez vos connaissances de l’ingénierie de fiabilité des sites avec les ressources suivantes
 author: dnblankedelman
-manager: efreeman
+manager: ScottCa
 ms.service: site-reliability-engineering
 ms.topic: article
-ms.date: 02/18/2020
+ms.date: 09/14/2020
 ms.author: dnb
-ms.openlocfilehash: a891b580b5cb62d111e5d8a6980f4f547345deb6
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: becbc3e59663c1898cc4e635f61f63d54360a6f5
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79471249"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90086536"
 ---
 # <a name="sources-for-site-reliability-engineering-information"></a>Sources d’informations sur l’ingénierie de fiabilité des sites
 

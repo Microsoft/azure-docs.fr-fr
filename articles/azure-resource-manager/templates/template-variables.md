@@ -1,20 +1,22 @@
 ---
 title: Variables dans les modèles
-description: Explique comment définir des variables dans un modèle Azure Resource Manager.
+description: Explique comment définir des variables dans un modèle Azure Resource Manager (ARM).
 ms.topic: conceptual
-ms.date: 09/05/2019
-ms.openlocfilehash: cf135959d30702ea58b7a1d4fdd82625a39245d2
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 11/24/2020
+ms.openlocfilehash: 5d9b58d63e96656c45d3494d24099bbeadc46b11
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75476163"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96353457"
 ---
-# <a name="variables-in-azure-resource-manager-template"></a>Variables dans un modèle Azure Resource Manager
+# <a name="variables-in-arm-template"></a>Variables dans un modèle ARM
 
-Cet article explique comment définir et utiliser des variables dans votre modèle Azure Resource Manager. Vous utilisez des variables pour simplifier votre modèle. Au lieu de répéter des expressions complexes tout au long de votre modèle, vous définissez une variable qui contient l’expression complexe. Ensuite, vous référencez cette variable en fonction des besoins dans votre modèle.
+Cet article explique comment définir et utiliser des variables dans un modèle Azure Resource Manager (ARM). Vous utilisez des variables pour simplifier votre modèle. Au lieu de répéter des expressions complexes tout au long de votre modèle, vous définissez une variable qui contient l’expression complexe. Ensuite, vous référencez cette variable en fonction des besoins dans votre modèle.
 
 Resource Manager résout les variables avant de démarrer les opérations de déploiement. Chaque fois que la variable est utilisée dans le modèle, Resource Manager la remplace par la valeur résolue.
+
+Le format de chaque variable doit correspondre à l’un des [types de données](template-syntax.md#data-types).
 
 ## <a name="define-variable"></a>Définir une variable
 
@@ -93,5 +95,5 @@ Les exemples suivants illustrent des scénarios d’utilisation de variables.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* Pour en savoir plus sur les propriétés disponibles pour les variables, consultez [Comprendre la structure et la syntaxe des modèles Azure Resource Manager](template-syntax.md).
+* Pour plus d’informations sur les propriétés disponibles pour les variables, consultez [Présentation de la structure et de la syntaxe des modèles ARM](template-syntax.md).
 * Pour obtenir des recommandations sur la création de variables, consultez [Bonnes pratiques - Variables](template-best-practices.md#variables).

@@ -6,12 +6,13 @@ ms.author: inhenkel
 ms.service: media-services
 ms.topic: overview
 ms.date: 04/20/2020
-ms.openlocfilehash: 64414d3ec31e8763b7c576af93374bf514141fd4
-ms.sourcegitcommit: acb82fc770128234f2e9222939826e3ade3a2a28
+ms.custom: devx-track-js
+ms.openlocfilehash: 83f144c06c23f3ab5507e3561be4a12350e20a42
+ms.sourcegitcommit: eb6bef1274b9e6390c7a77ff69bf6a3b94e827fc
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81727516"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "91329684"
 ---
 # <a name="protected-content"></a>Contenu protégé #
 

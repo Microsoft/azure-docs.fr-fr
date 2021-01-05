@@ -9,16 +9,16 @@ ms.reviewer: douglasl
 ms.service: data-factory
 ms.workload: data-services
 ms.topic: quickstart
-ms.date: 02/25/2020
+ms.date: 12/14/2020
 ms.author: jingwang
-ms.openlocfilehash: f7a70454e395f5f9d39266e0777749e1fcbef68e
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 76a490ed28f940620db7835c4cec145740f48503
+ms.sourcegitcommit: 63d0621404375d4ac64055f1df4177dfad3d6de6
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "81419355"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97509017"
 ---
-# <a name="quickstart-create-a-data-factory-by-using-the-azure-data-factory-ui"></a>Démarrage rapide : Créer une fabrique de données à l’aide de l’interface utilisateur d’Azure Data Factory
+# <a name="quickstart-create-a-data-factory-by-using-the-azure-data-factory-ui"></a>Démarrage rapide : Créer une fabrique de données à l’aide de l’interface utilisateur d’Azure Data Factory 
 
 > [!div class="op_single_selector" title1="Sélectionnez la version du service Data Factory que vous utilisez :"]
 > * [Version 1](v1/data-factory-copy-data-from-azure-blob-storage-to-sql-database.md)
@@ -26,10 +26,10 @@ ms.locfileid: "81419355"
 
 [!INCLUDE[appliesto-adf-xxx-md](includes/appliesto-adf-xxx-md.md)]
 
-Ce guide de démarrage rapide explique comment utiliser l’interface utilisateur d’Azure Data Factory pour créer et surveiller une fabrique de données. Le pipeline que vous créez dans cette fabrique de données *copie* les données d’un dossier vers un autre dossier dans un stockage Blob Azure. Pour suivre un tutoriel sur la *transformation* des données à l’aide d’Azure Data Factory, consultez le [Tutoriel : Transformer des données à l’aide de Spark](tutorial-transform-data-spark-portal.md).
+Ce guide de démarrage rapide explique comment utiliser l’interface utilisateur d’Azure Data Factory pour créer et surveiller une fabrique de données. Le pipeline que vous créez dans cette fabrique de données *copie* les données d’un dossier vers un autre dossier dans un stockage Blob Azure. Pour *transformer* des données à l’aide d’Azure Data Factory, consultez [Flux de données de mappage](concepts-data-flow-overview.md) et [Flux de wrangling data (préversion)](wrangling-data-flow-overview.md).
 
 > [!NOTE]
-> Si vous débutez avec Azure Data Factory, consultez [Présentation d’Azure Data Factory](data-factory-introduction.md) avant de commencer ce guide de démarrage rapide. 
+> Si vous débutez avec Azure Data Factory, consultez [Présentation d’Azure Data Factory](introduction.md) avant de commencer ce guide de démarrage rapide. 
 
 [!INCLUDE [data-factory-quickstart-prerequisites](../../includes/data-factory-quickstart-prerequisites.md)] 
 
@@ -42,46 +42,50 @@ Regardez cette vidéo pour comprendre l’interface de fabrique de Data Factory 
 1. Lancez le navigateur web **Microsoft Edge** ou **Google Chrome**. L’interface utilisateur de Data Factory n’est actuellement prise en charge que par les navigateurs web Microsoft Edge et Google Chrome.
 1. Accédez au [portail Azure](https://portal.azure.com). 
 1. Dans le menu du Portail Azure, sélectionnez **Créer une ressource**.
-   
-   ![Sélectionner Créer une ressource depuis le menu du portail Azure](./media/doc-common-process/create-a-resource.png)
-1. Sélectionnez **Analytics**, puis sélectionnez **Data Factory**. 
+1. Sélectionnez **Intégration**, puis **Data Factory**. 
    
    ![Sélection Data Factory dans le volet « Nouveau »](./media/doc-common-process/new-azure-data-factory-menu.png)
-1. Dans la page **Nouvelle fabrique de données**, entrez **ADFTutorialDataFactory** comme **nom**. 
+1. Dans la page **Créer une fabrique de données**, sous l’onglet **De base**, sélectionnez l’**Abonnement** Azure dans lequel vous voulez créer la fabrique de données.
+1. Pour **Groupe de ressources**, réalisez l’une des opérations suivantes :
+
+    a. Sélectionnez un groupe de ressources existant dans la liste déroulante.
+
+    b. Sélectionnez **Créer**, puis entrez le nom d’un nouveau groupe de ressources.
+    
+    Pour plus d’informations sur les groupes de ressources, consultez [Utilisation des groupes de ressources pour gérer vos ressources Azure](../azure-resource-manager/management/overview.md). 
+
+1. Pour **Région**, sélectionnez l’emplacement de la fabrique de données.
+
+   La liste n’affiche que les emplacements pris en charge par Data Factory et où vos métadonnées Azure Data Factory sont stockées. Les magasins de données associés (tels que Stockage Azure et Azure SQL Database) et les services de calcul (comme Azure HDInsight) utilisés par Data Factory peuvent s’exécuter dans d’autres régions.
  
+1. Pour **Nom**, entrez **ADFTutorialDataFactory**.
    Le nom de la fabrique de données Azure doit être un nom *global unique*. Si l’erreur suivante s’affiche, changez le nom de la fabrique de données (par exemple, **&lt;votrenom&gt;ADFTutorialDataFactory**), puis tentez de la recréer. Consultez l’article [Data Factory - Règles d’affectation des noms](naming-rules.md) pour en savoir plus sur les règles d’affectation des noms d’artefacts Data Factory.
   
    ![Erreur quand le nom n’est pas disponible](./media/doc-common-process/name-not-available-error.png)
-1. Pour **Abonnement**, sélectionnez l’abonnement Azure dans lequel vous voulez créer la fabrique de données. 
-1. Pour **Groupe de ressources**, réalisez l’une des opérations suivantes :
-     
-   - Sélectionnez **Utiliser l’existant**, puis sélectionnez un groupe de ressources existant dans la liste. 
-   - Sélectionnez **Créer**, puis entrez le nom d’un groupe de ressources.   
-         
-   Pour plus d’informations sur les groupes de ressources, consultez [Utilisation des groupes de ressources pour gérer vos ressources Azure](../azure-resource-manager/management/overview.md).  
+
 1. Pour **Version**, sélectionnez **V2**.
-1. Pour **Emplacement**, sélectionnez l’emplacement de la fabrique de données.
 
-   La liste n’affiche que les emplacements pris en charge par Data Factory et où vos métadonnées Azure Data Factory sont stockées. Les magasins de données associés (tels que Stockage Azure et Azure SQL Database) et les services de calcul (comme Azure HDInsight) utilisés par Data Factory peuvent s’exécuter dans d’autres régions.
+1. Sélectionnez **Suivant : Configuration Git**, puis cochez la case **Configurer Git plus tard**.
 
-1. Sélectionnez **Create** (Créer). Une fois la ressource créée, sélectionnez **Accéder à la ressource** pour ouvrir la page **Data Factory**. 
+1. Sélectionnez **Vérifier + créer**, puis sélectionnez **Créer** une fois la validation passée. Une fois la ressource créée, sélectionnez **Accéder à la ressource** pour ouvrir la page **Data Factory**. 
 
-1. Sélectionnez la vignette **Créer et surveiller** pour démarrer l’application d’interface utilisateur (IU) d’Azure Data Factory dans un onglet séparé.
+1. Sélectionnez la vignette **Créer et surveiller** pour démarrer l’application d’interface utilisateur (IU) d’Azure Data Factory dans un autre onglet du navigateur.
    
    ![Page d’accueil de la fabrique de données, avec la vignette « Créer et surveiller »](./media/doc-common-process/data-factory-home-page.png)
    
    > [!NOTE]
    > Si vous constatez que le navigateur web est bloqué à l’étape « Autorisation », décochez la case **Bloquer les cookies et les données de site tiers**. Sinon, gardez-la cochée, créez une exception pour **login.microsoftonline.com**, puis réessayez d’ouvrir l’application.
    
-1. Dans la page **Prise en main**, basculez vers l’onglet **Auteur** dans le volet gauche. 
-
-    ![Page « Prise en main »](./media/doc-common-process/get-started-page-author-button.png)
 
 ## <a name="create-a-linked-service"></a>Créer un service lié
 Dans cette procédure, vous créez un service lié qui associe votre compte de Stockage Azure à la fabrique de données. Le service lié comporte les informations de connexion utilisées par le service Data Factory lors de l’exécution pour s’y connecter.
 
-1. Sélectionnez **Connexions**, puis cliquez sur le bouton **Nouveau** dans la barre d’outils (le bouton **Connexions** se trouve au bas de la colonne de gauche sous **Ressources Factory**). 
+1. Sur la page de l’interface utilisateur Azure Data Factory, ouvrez l’onglet [**Gérer**](./author-management-hub.md) dans le volet gauche.
 
+1. Dans la page Services liés, sélectionnez **+ Nouveau** pour créer un service lié.
+
+   ![Nouveau service lié](./media/doc-common-process/new-linked-service.png)
+   
 1. Dans la page **Nouveau service lié**, sélectionnez **Stockage Blob Azure**, puis cliquez sur **Continuer**. 
 
 1. Dans la page New Linked Service (Azure Blob Storage) (Nouveau service lié (Stockage Blob Azure)), procédez comme suit : 
@@ -94,7 +98,7 @@ Dans cette procédure, vous créez un service lié qui associe votre compte de S
 
    d. Sélectionnez **Créer** pour enregistrer le service lié. 
 
-      ![Nouveau service lié](./media/quickstart-create-data-factory-portal/linked-service.png)
+      ![Service lié](./media/quickstart-create-data-factory-portal/linked-service.png)
 
 
 ## <a name="create-datasets"></a>Créez les jeux de données
@@ -105,10 +109,13 @@ Le jeu de données d’entrée représente les données sources dans le dossier 
 Le jeu de données de sortie représente les données qui sont copiées vers la destination. Dans la définition du jeu de données de sortie, vous spécifiez le conteneur d’objets Blob (**adftutorial**), le dossier (**output**) et le fichier dans lequel les données sont copiées. Chaque exécution d’un pipeline possède un ID unique associé. Vous pouvez accéder à cet ID à l’aide de la variable système **RunId**. Le nom du fichier de sortie est évalué dynamiquement en fonction de l’ID d’exécution du pipeline.   
 
 Dans les paramètres du service lié, vous avez spécifié le compte de Stockage Azure qui contient les données sources. Dans les paramètres de jeu de données source, vous spécifiez où se trouvent exactement les données sources (conteneur d’objets Blob, dossier et fichier). Dans les paramètres de jeu de données récepteur, vous spécifiez où les données sont copiées (conteneur d’objets Blob, dossier et fichier). 
- 
+
+1. Sélectionnez l’onglet **Créer** dans le volet gauche.
+
 1. Cliquez sur le bouton **+** (plus), puis sélectionnez **Jeu de données**.
 
    ![Menu pour la création d’un jeu de données](./media/quickstart-create-data-factory-portal/new-dataset-menu.png)
+
 1. Dans la page **Nouveau jeu de données**, sélectionnez **Stockage Blob Azure**, puis **Continuer**. 
 
 1. Dans la page **Sélectionner le format**, choisissez le type de format de vos données, puis sélectionnez **Continuer**. Dans ce cas, sélectionnez **Binaire** lorsque la copie s’effectue en l’état sans analyser le contenu.
@@ -143,21 +150,24 @@ Dans les paramètres du service lié, vous avez spécifié le compte de Stockage
     f. Sélectionnez **OK**.   
 
     ![Définir les propriétés pour OutputDataset](./media/quickstart-create-data-factory-portal/set-properties-for-outputdataset.png)
+
 ## <a name="create-a-pipeline"></a>Créer un pipeline 
 Dans cette procédure, vous créez et validez un pipeline avec une activité de copie qui utilise les jeux de données d’entrée et de sortie. L’activité de copie copie les données du fichier que vous avez spécifié dans les paramètres du jeu de données d’entrée dans le fichier que vous avez spécifié dans les paramètres du jeu de données de sortie. Si le jeu de données d’entrée ne spécifie qu’un dossier (et pas le nom de fichier), l’activité de copie copie tous les fichiers dans le dossier source vers la destination. 
 
 1. Cliquez sur le bouton **+** (plus), puis sélectionnez **Pipeline**. 
 
-1. Dans l’onglet **Général**, spécifiez **CopyPipeline** pour le **Nom**. 
+1. Dans le panneau Général, sous **Propriétés**, spécifiez **CopyPipeline** comme **Nom**. Réduisez ensuite le panneau en cliquant sur l’icône Propriétés dans le coin supérieur droit.
 
 1. Dans la boîte à outils **Activités**, développez **Move & Transform** (Déplacer et transformer). Faites glisser l’activité **Copier des données** depuis la boîte à outils **Activités** vers la surface du concepteur de pipeline. Vous pouvez également rechercher des activités dans la boîte à outils **Activités**. Spécifiez **CopyFromBlobToBlob** pour le **Nom**.
+
    ![Création d’une activité de copie de données](./media/quickstart-create-data-factory-portal/copy-activity.png)
 
 1. Basculez vers l’onglet **Source** dans les paramètres de l’activité de copie et sélectionnez **InputDataset** pour le **Jeu de données source**.
 
 1. Basculez vers l’onglet **Récepteur** dans les paramètres de l’activité de copie et sélectionnez **OutputDataset** pour le **Jeu de données récepteur**.
 
-1. Pour valider les paramètres du pipeline, cliquez sur **Valider** sur la barre d’outils pour le pipeline au-dessus du canevas. Vérifiez que le pipeline a été validé avec succès. Pour fermer la sortie de validation, sélectionnez le bouton **>>** (flèche droite). 
+1. Pour valider les paramètres du pipeline, cliquez sur **Valider** sur la barre d’outils pour le pipeline au-dessus du canevas. Vérifiez que le pipeline a été validé avec succès. Pour fermer la sortie de validation, sélectionnez le bouton Validation dans le coin supérieur droit. 
+
    ![Valider un pipeline](./media/quickstart-create-data-factory-portal/pipeline-validate.png)
 
 ## <a name="debug-the-pipeline"></a>Déboguer le pipeline
@@ -175,9 +185,10 @@ Dans cette étape, vous déboguez le pipeline avant de le déployer vers Data Fa
 Dans cette procédure, vous déployez des entités (services liés, jeux de données, pipelines) vers Azure Data Factory. Vous déclenchez ensuite manuellement une exécution du pipeline. 
 
 1. Avant de déclencher un pipeline, vous devez publier des entités dans Data Factory. Pour les publier, sélectionnez **Publier tout** dans la partie supérieure. 
+
     ![Publier tout](./media/quickstart-create-data-factory-portal/publish-all.png)
 
-1. Pour déclencher le pipeline manuellement, sélectionnez **Ajouter un déclencheur** dans la barre d’outils du pipeline, puis sélectionnez **Déclencher maintenant**. Dans la page **Exécution du pipeline**, sélectionnez **Terminer**.
+1. Pour déclencher le pipeline manuellement, sélectionnez **Ajouter un déclencheur** dans la barre d’outils du pipeline, puis sélectionnez **Déclencher maintenant**. Dans la page **Exécution de pipeline**, sélectionnez **OK**.
 
 ## <a name="monitor-the-pipeline"></a>Surveiller le pipeline
 
@@ -221,4 +232,4 @@ Cette procédure est facultative dans ce didacticiel. Vous pouvez créer un *dé
 1. Vérifiez qu’un fichier de sortie est créé pour chaque exécution du pipeline jusqu’à la date/heure de fin spécifiée dans le dossier de **sortie**. 
 
 ## <a name="next-steps"></a>Étapes suivantes
-Dans cet exemple, le pipeline copie les données d’un emplacement vers un autre dans un stockage Blob Azure. Pour en savoir plus sur l’utilisation de Data Factory dans d’autres scénarios, consultez les [didacticiels](tutorial-copy-data-portal.md). 
+Dans cet exemple, le pipeline copie les données d’un emplacement vers un autre dans un stockage Blob Azure. Pour en savoir plus sur l’utilisation de Data Factory dans d’autres scénarios, consultez les [didacticiels](tutorial-copy-data-portal.md).

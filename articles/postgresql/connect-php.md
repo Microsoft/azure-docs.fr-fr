@@ -1,21 +1,22 @@
 ---
-title: Se connecter avec PHP – Azure Database pour PostgreSQL – Serveur unique
+title: 'Démarrage rapide : Se connecter avec PHP – Azure Database pour PostgreSQL – Serveur unique'
 description: Ce démarrage rapide fournit un exemple de code PHP que vous pouvez utiliser pour vous connecter et interroger des données à partir d’Azure Database pour PostgreSQL (serveur unique).
-author: rachel-msft
-ms.author: raagyema
+author: mksuni
+ms.author: sumuth
 ms.service: postgresql
 ms.custom: mvc
 ms.devlang: php
 ms.topic: quickstart
 ms.date: 2/28/2018
-ms.openlocfilehash: 6e453201eb499f65ee7f3b8c17cbf0e5127182b0
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: 4e82c8402584f694cb32bb37ae3e6eae9366eaf7
+ms.sourcegitcommit: fa90cd55e341c8201e3789df4cd8bd6fe7c809a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "74766376"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93341431"
 ---
-# <a name="azure-database-for-postgresql---single-server-use-php-to-connect-and-query-data"></a>Azure Database pour PostgreSQL (serveur unique) : Utiliser PHP pour se connecter et interroger des données
+# <a name="quickstart-use-php-to-connect-and-query-data-in-azure-database-for-postgresql---single-server"></a>Démarrage rapide : Utiliser PHP afin de se connecter à Azure Database pour PostgreSQL et d’interroger les données – Serveur unique
+
 Ce guide de démarrage rapide vous explique comment vous connecter à une base de données Azure pour PostgreSQL en utilisant une application [PHP](https://secure.php.net/manual/intro-whatis.php). Il détaille l’utilisation d’instructions SQL pour interroger la base de données, la mettre à jour, y insérer des données ou en supprimer. Cet article suppose que vous connaissez les bases du développement via PHP, et que vous ne savez pas utiliser Azure Database pour PostgreSQL.
 
 ## <a name="prerequisites"></a>Prérequis
@@ -46,13 +47,13 @@ Installez PHP sur votre serveur, ou créez une [application web](../app-service
 Obtenez les informations de connexion requises pour vous connecter à la base de données Azure pour PostgreSQL. Vous devez disposer du nom de serveur complet et des informations d’identification.
 
 1. Connectez-vous au [portail Azure](https://portal.azure.com/).
-2. Dans le menu de gauche du portail Azure, cliquez sur **Toutes les ressources**, puis recherchez le serveur que vous venez de créer, par exemple **mydemoserver**.
+2. Dans le menu de gauche du portail Azure, cliquez sur **Toutes les ressources** , puis recherchez le serveur que vous venez de créer, par exemple **mydemoserver**.
 3. Cliquez sur le nom du serveur.
 4. Dans le panneau **Vue d’ensemble** du serveur, notez le **nom du serveur** et le **nom de connexion de l’administrateur du serveur**. Si vous oubliez votre mot de passe, vous pouvez également le réinitialiser dans ce panneau.
- ![Nom du serveur Azure Database pour PostgreSQL](./media/connect-php/1-connection-string.png)
+ :::image type="content" source="./media/connect-php/1-connection-string.png" alt-text="Nom du serveur Azure Database pour PostgreSQL":::
 
 ## <a name="connect-and-create-a-table"></a>Se connecter et créer une table
-Utilisez le code suivant pour vous connecter et créer une table à l’aide de l’instruction **CREATE TABLE**, suivie des instructions SQL **INSERT INTO** pour ajouter des lignes à la table.
+Utilisez le code suivant pour vous connecter et créer une table à l’aide de l’instruction **CREATE TABLE** , suivie des instructions SQL **INSERT INTO** pour ajouter des lignes à la table.
 
 Le code appelle la méthode [pg_connect()](https://secure.php.net/manual/en/function.pg-connect.php) pour se connecter à la base de données Azure pour PostgreSQL. Ensuite, il appelle la méthode [pg_query()](https://secure.php.net/manual/en/function.pg-query.php) plusieurs fois pour exécuter plusieurs commandes, et la méthode [pg_last_error()](https://secure.php.net/manual/en/function.pg-last-error.php) pour vérifier les détails, si une erreur s’est produite à chaque fois. Enfin, il appelle la méthode [pg_close()](https://secure.php.net/manual/en/function.pg-close.php) pour fermer la connexion.
 
@@ -213,6 +214,16 @@ Remplacez les paramètres `$host`, `$database`, `$user` et `$password` par vos p
     // Closing connection
     pg_close($connection);
 ?>
+```
+
+## <a name="clean-up-resources"></a>Nettoyer les ressources
+
+Pour nettoyer toutes les ressources utilisées dans le cadre de ce guide de démarrage rapide, supprimez le groupe de ressources à l’aide de la commande suivante :
+
+```azurecli
+az group delete \
+    --name $AZ_RESOURCE_GROUP \
+    --yes
 ```
 
 ## <a name="next-steps"></a>Étapes suivantes

@@ -8,23 +8,23 @@ ms.service: cognitive-services
 ms.topic: include
 ms.date: 03/12/2020
 ms.author: aahi
-ms.openlocfilehash: 858e6b9e0e40ab988a4cdf04b31580c1ca28d40a
-ms.sourcegitcommit: 9ee0cbaf3a67f9c7442b79f5ae2e97a4dfc8227b
+ms.custom: devx-track-js
+ms.openlocfilehash: 3760213c7f469dfe89599c0f01afe98168efde2d
+ms.sourcegitcommit: 5dbea4631b46d9dde345f14a9b601d980df84897
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "79503524"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91376826"
 ---
 Utilisez ce guide de démarrage rapide pour démarrer une recherche d’actualités avec la bibliothèque de client Recherche d’actualités Bing pour JavaScript. Si l’outil Recherche d’actualités Bing dispose d’une API REST compatible avec la plupart des langages de programmation, la bibliothèque de client offre quant à elle un moyen facile d’intégrer le service à vos applications. Le code source de cet exemple est disponible sur [GitHub](https://github.com/Azure-Samples/cognitive-services-node-sdk-samples/blob/master/Samples/newsSearch.js).
 
 ## <a name="prerequisites"></a>Prérequis
 
-* [Node.JS](https://nodejs.org/en/)
-
-Pour configurer une application console à l’aide de la bibliothèque de client Recherche d’actualités Bing
-1. Exécutez `npm install ms-rest-azure` dans votre environnement de développement.
-2. Exécutez `npm install azure-cognitiveservices-newssearch` dans votre environnement de développement.
-
+* La dernière version de [Node.js](https://nodejs.org/en/download/).
+* Le [SDK Recherche d’actualités Bing pour JavaScript](https://www.npmjs.com/package/@azure/cognitiveservices-newssearch)
+     *  Pour l’installer, exécutez `npm install @azure/cognitiveservices-newssearch`
+* La classe `CognitiveServicesCredentials` du package `@azure/ms-rest-azure-js` pour authentifier le client.
+     * Pour l’installer, exécutez `npm install @azure/ms-rest-azure-js`
 
 [!INCLUDE [cognitive-services-bing-news-search-signup-requirements](~/includes/cognitive-services-bing-news-search-signup-requirements.md)]
 
@@ -33,7 +33,7 @@ Pour configurer une application console à l’aide de la bibliothèque de clien
 1. Créez une instance de `CognitiveServicesCredentials`. Créez des variables pour votre clé d’abonnement et un terme de recherche.
 
     ```javascript
-    const CognitiveServicesCredentials = require('ms-rest-azure').CognitiveServicesCredentials;
+    const CognitiveServicesCredentials = require('@azure/ms-rest-azure-js').CognitiveServicesCredentials;
     let credentials = new CognitiveServicesCredentials('YOUR-ACCESS-KEY');
     let search_term = 'Winter Olympics'
     ```
@@ -41,7 +41,7 @@ Pour configurer une application console à l’aide de la bibliothèque de clien
 2. Instanciez le client :
     
     ```javascript
-    const NewsSearchAPIClient = require('azure-cognitiveservices-newssearch');
+    const NewsSearchAPIClient = require('@azure/cognitiveservices-newssearch');
     let client = new NewsSearchAPIClient(credentials);
     ```
 

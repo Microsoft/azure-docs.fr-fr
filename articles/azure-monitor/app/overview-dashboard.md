@@ -3,12 +3,12 @@ title: Tableau de bord de vue d’ensemble d’Azure Application Insights | Micr
 description: Analysez les applications avec des fonctionnalités Azure Application Insights et de tableau de bord de vue d’ensemble.
 ms.topic: conceptual
 ms.date: 06/03/2019
-ms.openlocfilehash: e5188972d9058b85a9765c7d33f6209b37245d7e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 1b0708fa70d3a3ecb406f1d974bb1f2b47e55b40
+ms.sourcegitcommit: 2ba6303e1ac24287762caea9cd1603848331dd7a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77669894"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97504098"
 ---
 # <a name="application-insights-overview-dashboard"></a>Tableau de bord de vue d’ensemble d’Application Insights
 
@@ -36,7 +36,7 @@ Le tableau de bord de l’application tire parti de la technologie de tableau de
 
 Pour accéder au tableau de bord par défaut, sélectionnez _Tableau de bord de l’application_ dans le coin supérieur gauche.
 
-![Vue du tableau de bord](./media/overview-dashboard/app-insights-overview-dashboard-05.png)
+![Capture d'écran sur laquelle le bouton Tableau de bord d'application est en surbrillance.](./media/overview-dashboard/app-insights-overview-dashboard-05.png)
 
 Lors du premier accès au tableau de bord, cette action lance une vue par défaut :
 
@@ -53,10 +53,11 @@ Pour revenir à l’expérience de vue d’ensemble, sélectionnez simplement :
 
 ## <a name="troubleshooting"></a>Dépannage
 
-Si vous sélectionnez **Configurer les paramètres de vignette** et définissez un intervalle de temps personnalisé dépassant 31 jours, votre tableau de bord n’affichera pas au-delà de 31 jours de données, même avec la conservation de données par défaut de 90 jours. Il n’existe actuellement aucun moyen de contourner ce comportement.
+Il existe actuellement une limite de 30 jours de données pour les données affichées dans un tableau de bord. Si vous sélectionnez un filtre de temps au-delà de 30 jours ou si vous sélectionnez **Configurer les paramètres de vignette** et définissez un intervalle de temps personnalisé dépassant 30 jours, votre tableau de bord n’affichera pas plus de 30 jours de données, même avec la conservation des données par défaut de 90 jours. Il n’existe actuellement aucun moyen de contourner ce comportement.
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-- [Entonnoirs](../../azure-monitor/app/usage-funnels.md)
-- [Rétention](../../azure-monitor/app/usage-retention.md)
-- [Flux d’utilisateurs](../../azure-monitor/app/usage-flows.md)
+- [Entonnoirs](./usage-funnels.md)
+- [Rétention](./usage-retention.md)
+- [Flux d’utilisateurs](./usage-flows.md)
+

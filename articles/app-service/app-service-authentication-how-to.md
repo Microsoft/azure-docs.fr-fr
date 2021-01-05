@@ -1,15 +1,15 @@
 ---
-title: Utilisation avancée de l’authentification/autorisation
+title: Utilisation avancée de l’authentification et de l’autorisation
 description: Apprenez à personnaliser les paramètres d’authentification et d’autorisation dans App Service pour différents scénarios et à obtenir des revendications d’utilisateur et des jetons distincts.
 ms.topic: article
-ms.date: 10/24/2019
-ms.custom: seodec18
-ms.openlocfilehash: d57b196bf95ebdf31bc459ad4b9d718fd32ca495
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 07/08/2020
+ms.custom: seodec18, devx-track-azurecli
+ms.openlocfilehash: 85fd7fdba4c62f4837a419af44c83f7e46cb9e39
+ms.sourcegitcommit: c4246c2b986c6f53b20b94d4e75ccc49ec768a9a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79236193"
+ms.lasthandoff: 12/04/2020
+ms.locfileid: "96601779"
 ---
 # <a name="advanced-usage-of-authentication-and-authorization-in-azure-app-service"></a>Utilisation avancée des paramètres d’authentification et d’autorisation dans Azure App Service
 
@@ -17,13 +17,14 @@ Cet article vous explique comment personnaliser les [paramètres d’authentific
 
 Pour commencer rapidement, consultez l’un des didacticiels suivants :
 
-* [Didacticiel : authentifier et autoriser les utilisateurs de bout en bout dans Azure App Service (Windows)](app-service-web-tutorial-auth-aad.md)
-* [Didacticiel : authentifier et autoriser les utilisateurs de bout en bout dans Azure App Service pour Linux](containers/tutorial-auth-aad.md)
+* [Tutoriel : Authentifier et autoriser des utilisateurs de bout en bout dans Azure App Service](tutorial-auth-aad.md)
 * [Comment configurer votre application pour utiliser une connexion Azure Active Directory](configure-authentication-provider-aad.md)
 * [Comment configurer votre application pour utiliser une connexion Facebook](configure-authentication-provider-facebook.md)
 * [Comment configurer votre application pour utiliser une connexion Google](configure-authentication-provider-google.md)
 * [Comment configurer votre application pour utiliser une connexion par compte Microsoft](configure-authentication-provider-microsoft.md)
 * [Comment configurer votre application pour utiliser une connexion Twitter](configure-authentication-provider-twitter.md)
+* [Guide pratique pour configurer une application de sorte qu’elle se connecte avec un fournisseur OpenID Connect (préversion)](configure-authentication-provider-openid-connect.md)
+* [Configurer votre application pour se connecter à l’aide d’Apple (préversion)](configure-authentication-provider-apple.md)
 
 ## <a name="use-multiple-sign-in-providers"></a>Utiliser plusieurs fournisseurs de connexion
 
@@ -35,19 +36,20 @@ Sous **Mesure à prendre quand une demande n’est pas authentifiée**, sélecti
 
 Dans la page de connexion, la barre de navigation ou tout autre emplacement de votre application, ajoutez un lien de connexion pour chacun des fournisseurs que vous avez activés (`/.auth/login/<provider>`). Par exemple :
 
-```HTML
+```html
 <a href="/.auth/login/aad">Log in with Azure AD</a>
 <a href="/.auth/login/microsoftaccount">Log in with Microsoft Account</a>
 <a href="/.auth/login/facebook">Log in with Facebook</a>
 <a href="/.auth/login/google">Log in with Google</a>
 <a href="/.auth/login/twitter">Log in with Twitter</a>
+<a href="/.auth/login/apple">Log in with Apple</a>
 ```
 
 Lorsque l’utilisateur clique sur l’un des liens, la page de connexion respective s’ouvre pour que l’utilisateur se connecte.
 
 Pour rediriger l’utilisateur post-connexion vers une URL personnalisée, utilisez le paramètre de chaîne de requête `post_login_redirect_url` (à ne pas confondre avec l’URI de redirection de votre configuration de fournisseur d’identité). Par exemple, pour diriger l’utilisateur vers `/Home/Index` après sa connexion, utilisez le code HTML suivant :
 
-```HTML
+```html
 <a href="/.auth/login/<provider>?post_login_redirect_url=/Home/Index">Log in</a>
 ```
 
@@ -103,7 +105,7 @@ Les utilisateurs peuvent initier une déconnexion en envoyant une requête `GET`
 
 Voici un lien de déconnexion simple dans une page web :
 
-```HTML
+```html
 <a href="/.auth/logout">Sign out</a>
 ```
 
@@ -146,7 +148,7 @@ App Service transmet des revendications d’utilisateur à votre application au 
 
 Tout code, quels que soient le langage ou l’infrastructure utilisés, peut trouver les informations qu’il recherche dans ces en-têtes. Dans le cas d’applications ASP.NET 4.6, le paramètre **ClaimsPrincipal** est automatiquement défini sur les valeurs appropriées. Toutefois, ASP.NET Core ne fournit pas d’intergiciel d’authentification qui s’intègre aux revendications d’utilisateur App Service. Pour une solution de contournement, consultez [MaximeRouiller.Azure.AppService.EasyAuth](https://github.com/MaximRouiller/MaximeRouiller.Azure.AppService.EasyAuth).
 
-Votre application peut également obtenir des détails supplémentaires sur l’utilisateur authentifié en appelant `/.auth/me`. Les Kits de développement logiciel (SDK) serveur de Mobile Apps offrent des méthodes d’assistance permettant de manipuler ces données. Pour plus d’informations, consultez [Comment utiliser le Kit de développement logiciel Node.js dans Azure Mobile Apps](../app-service-mobile/app-service-mobile-node-backend-how-to-use-server-sdk.md#howto-tables-getidentity), et [Utiliser le Kit de développement logiciel (SDK) de serveur principal .NET pour Azure Mobile Apps](../app-service-mobile/app-service-mobile-dotnet-backend-how-to-use-server-sdk.md#user-info).
+Si le [magasin de jetons](overview-authentication-authorization.md#token-store) est activé pour votre application, vous pouvez également obtenir des informations supplémentaires sur l’utilisateur authentifié en appelant `/.auth/me`. Les Kits de développement logiciel (SDK) serveur de Mobile Apps offrent des méthodes d’assistance permettant de manipuler ces données. Pour plus d’informations, consultez [Comment utiliser le Kit de développement logiciel Node.js dans Azure Mobile Apps](/previous-versions/azure/app-service-mobile/app-service-mobile-node-backend-how-to-use-server-sdk#howto-tables-getidentity), et [Utiliser le Kit de développement logiciel (SDK) de serveur principal .NET pour Azure Mobile Apps](/previous-versions/azure/app-service-mobile/app-service-mobile-dotnet-backend-how-to-use-server-sdk#user-info).
 
 ## <a name="retrieve-tokens-in-app-code"></a>Récupérer des jetons dans le code d’application
 
@@ -161,24 +163,24 @@ Votre application peut également obtenir des détails supplémentaires sur l’
 | Twitter | `X-MS-TOKEN-TWITTER-ACCESS-TOKEN` <br/> `X-MS-TOKEN-TWITTER-ACCESS-TOKEN-SECRET` |
 |||
 
-À partir de votre code client (par exemple, une application mobile ou un navigateur JavaScript), envoyez une requête `GET` HTTP à `/.auth/me`. La réponse JSON retournée contient les jetons spécifiques au fournisseur.
+À partir de votre code client (par exemple, une application mobile ou un navigateur JavaScript), envoyez une requête `GET` HTTP à `/.auth/me` (le [magasin de jetons](overview-authentication-authorization.md#token-store) doit être activé). La réponse JSON retournée contient les jetons spécifiques au fournisseur.
 
 > [!NOTE]
 > Les jetons d’accès permettent d’accéder aux ressources du fournisseur. Ils ne s’affichent donc que si vous configurez votre fournisseur avec une clé secrète client. Pour savoir comment obtenir des jetons d’actualisation, consultez Actualiser des jetons d’accès.
 
 ## <a name="refresh-identity-provider-tokens"></a>Actualiser des jetons de fournisseur d’identité
 
-Lorsque le jeton d'accès de votre fournisseur (et non le [jeton de session](#extend-session-token-expiration-grace-period)) expire, vous devez réauthentifier l’utilisateur avant de réutiliser ce jeton. Vous pouvez éviter l’expiration du jeton en effectuant un appel `GET` au point de terminaison `/.auth/refresh` de votre application. Lorsqu’il est appelé, App Service actualise automatiquement les jetons d’accès dans le magasin de jetons pour l’utilisateur authentifié. Les demandes de jeton suivantes effectuées via le code de votre application permettent d’obtenir les jetons actualisés. Toutefois, pour que l’actualisation des jetons soit effective, le magasin de jetons doit contenir les [jetons d’actualisation](https://auth0.com/learn/refresh-tokens/) pour votre fournisseur. La procédure pour obtenir des jetons d’actualisation est fournie par chaque fournisseur. La liste suivante en fournit toutefois un bref résumé :
+Lorsque le jeton d'accès de votre fournisseur (et non le [jeton de session](#extend-session-token-expiration-grace-period)) expire, vous devez réauthentifier l’utilisateur avant de réutiliser ce jeton. Vous pouvez éviter l’expiration du jeton en effectuant un appel `GET` au point de terminaison `/.auth/refresh` de votre application. Lorsqu’il est appelé, App Service actualise automatiquement les jetons d’accès dans le [magasin de jetons](overview-authentication-authorization.md#token-store) pour l’utilisateur authentifié. Les demandes de jeton suivantes effectuées via le code de votre application permettent d’obtenir les jetons actualisés. Toutefois, pour que l’actualisation des jetons soit effective, le magasin de jetons doit contenir les [jetons d’actualisation](https://auth0.com/learn/refresh-tokens/) pour votre fournisseur. La procédure pour obtenir des jetons d’actualisation est fournie par chaque fournisseur. La liste suivante en fournit toutefois un bref résumé :
 
-- **Google** : ajouter un paramètre de chaîne de requête `access_type=offline` à votre appel d’API `/.auth/login/google`. Si vous utilisez le kit de développement logiciel Mobile Apps, vous pouvez ajouter le paramètre à l’une des surcharges `LogicAsync` (voir [Google Refresh Tokens](https://developers.google.com/identity/protocols/OpenIDConnect#refresh-tokens) (Jetons d’actualisation Google)).
-- **Facebook** : ne fournit pas de jetons d’actualisation. Les jetons de longue durée expirent au bout de 60 jours (voir [Facebook Expiration and Extension of Access Tokens](https://developers.facebook.com/docs/facebook-login/access-tokens/expiration-and-extension) (Expiration et prolongation des jetons d’accès Facebook)).
-- **Twitter** : les jetons d’accès n’expirent pas (voir [Twitter OAuth FAQ](https://developer.twitter.com/en/docs/basics/authentication/FAQ) (FAQ sur l’authentification OAuth Twitter)).
-- **Compte Microsoft** : au moment de [configurer les paramètres d’authentification de compte Microsoft](configure-authentication-provider-microsoft.md), sélectionnez l’étendue `wl.offline_access`.
-- **Azure Active Directory** : dans [https://resources.azure.com](https://resources.azure.com), procédez comme suit :
+- **Google** : ajouter un paramètre de chaîne de requête `access_type=offline` à votre appel d’API `/.auth/login/google`. Si vous utilisez le kit de développement logiciel Mobile Apps, vous pouvez ajouter le paramètre à l’une des surcharges `LogicAsync` (voir [Google Refresh Tokens](https://developers.google.com/identity/protocols/OpenIDConnect#refresh-tokens) (Jetons d’actualisation Google)).
+- **Facebook** : ne fournit pas de jetons d’actualisation. Les jetons de longue durée expirent au bout de 60 jours (voir [Facebook Expiration and Extension of Access Tokens](https://developers.facebook.com/docs/facebook-login/access-tokens/expiration-and-extension) (Expiration et prolongation des jetons d’accès Facebook)).
+- **Twitter** : les jetons d’accès n’expirent pas (voir les [questions fréquentes sur Twitter OAuth](https://developer.twitter.com/en/docs/authentication/faq)).
+- **Compte Microsoft** : au moment de [configurer les paramètres d’authentification de compte Microsoft](configure-authentication-provider-microsoft.md), sélectionnez l’étendue `wl.offline_access`.
+- **Azure Active Directory** : Dans [https://resources.azure.com](https://resources.azure.com), effectuez les étapes suivantes :
     1. En haut de la page, sélectionnez **Lecture/écriture**.
-    2. Dans le navigateur de gauche, accédez à **abonnements** >  **_\<subscription\_name_**  > **resourceGroups** >  **_\<resource\_group\_name>_**  > **fournisseurs** > **Microsoft.Web** > **sites** >  **_\<app\_name>_**  > **config** > **authsettings**. 
+    2. Dans le navigateur de gauche, accédez à **subscriptions** > ** _\<subscription\_name_** > **resourceGroups** > **_ \<resource\_group\_name> _** > **providers** > **Microsoft.Web** > **sites** > **_ \<app\_name>_** > **config** > **authsettings**. 
     3. Cliquez sur **Modifier**.
-    4. Modifiez la propriété suivante. Remplacez la valeur _\<app\_id>_ par l’ID d’application Azure Active Directory du service auquel vous souhaitez accéder.
+    4. Modifiez la propriété suivante. Remplacez la valeur _\<app\_id>_ par l’ID d’application Azure Active Directory du service auquel vous voulez accéder.
 
         ```json
         "additionalLoginParams": ["response_type=code id_token", "resource=<app_id>"]
@@ -190,7 +192,7 @@ Une fois que votre fournisseur est configuré, vous pouvez [rechercher le jeton 
 
 Pour actualiser votre jeton d’accès à tout moment, il vous suffit d’appeler `/.auth/refresh` dans n’importe quel langage. L’extrait de code suivant utilise jQuery pour actualiser vos jetons d’accès à partir d’un client JavaScript.
 
-```JavaScript
+```javascript
 function refreshTokens() {
   let refreshUrl = "/.auth/refresh";
   $.ajax(refreshUrl) .done(function() {
@@ -223,7 +225,7 @@ az webapp auth update --resource-group <group_name> --name <app_name> --token-re
 
 Les options Compte Microsoft et Azure Active Directory permettent de se connecter à partir de multiples domaines. Par exemple, l’option Compte Microsoft prend en charge les comptes _outlook.com_, _live.com_ et _hotmail.com_. Azure Active Directory prend en charge un nombre illimité de domaines personnalisés pour les comptes de connexion. Toutefois, vous pouvez accélérer l’accès de vos utilisateurs directement à votre propre page de connexion Azure AD (par exemple, `contoso.com`). Pour suggérer le nom de domaine des comptes de connexion, procédez comme suit.
 
-Dans [https://resources.azure.com](https://resources.azure.com), accédez à **abonnements** >  **_\< subscription\_ name_**  > **resourceGroups** >  **_\< resource\_ group\_ name>_**  > **fournisseurs** > **Microsoft.Web** > **sites** >  **_\< app\_ name>_**  > **config** > **authsettings**. 
+Dans [https://resources.azure.com](https://resources.azure.com), accédez à **subscriptions**> ** _\<subscription\_name_** > **resourceGroups** > **_ \<resource\_group\_name> _** > **providers** > **Microsoft.Web** > **sites** > **_ \<app\_name> _** > **config** > **authsettings**. 
 
 Cliquez sur **Modifier**, modifiez la propriété suivante, puis cliquez sur **Put**. Veillez à remplacer la valeur _\<domain\_name>_ par le domaine souhaité.
 
@@ -278,8 +280,274 @@ Le fournisseur d’identité peut fournir un autorisation clé en main. Par exem
 
 Si l’un des autres niveaux ne fournit pas l’autorisation dont vous avez besoin, ou si votre plateforme ou fournisseur d’identité ne sont pas pris en charge, vous devez écrire du code personnalisé afin d’autoriser les utilisateurs en fonction de leurs [revendications](#access-user-claims).
 
+## <a name="configure-using-a-file-preview"></a><a name="config-file"> </a>Configuration à l’aide d’un fichier (préversion)
+
+Vos paramètres d’authentification peuvent éventuellement être configurés à l’aide d’un fichier fourni par votre déploiement. Certaines fonctionnalités en préversion de l’authentification/autorisation App Service l’exigent.
+
+> [!IMPORTANT]
+> N’oubliez pas que la charge utile de votre application et, par conséquent, ce fichier peuvent passer d’un environnement à un autre, comme avec les [emplacements](./deploy-staging-slots.md). Si vous souhaitez épingler une inscription d’application différente pour chaque emplacement, ce qui est probablement le cas, continuez à appliquer la méthode de configuration standard au lieu d’utiliser le fichier de configuration.
+
+### <a name="enabling-file-based-configuration"></a>Activation de la configuration à l’aide d’un fichier
+
+> [!CAUTION]
+> Lors de la préversion, le fait d’activer la configuration à l’aide d’un fichier a pour effet de désactiver la gestion de la fonctionnalité d’authentification/autorisation App Service de l’application par le biais de certains clients, comme le Portail Azure, Azure CLI et Azure PowerShell.
+
+1. Créez un fichier JSON pour votre configuration à la racine de votre projet (déployé sur D:\home\site\wwwroot dans votre application web/de fonction). Renseignez la configuration de votre choix suivant les [informations de référence de la configuration à l’aide d’un fichier](#configuration-file-reference). Si vous modifiez une configuration Azure Resource Manager existante, veillez à traduire les propriétés capturées dans la collection `authsettings` dans votre fichier de configuration.
+
+2. Modifiez la configuration existante, capturée dans les API [Azure Resource Manager](../azure-resource-manager/management/overview.md) sous `Microsoft.Web/sites/<siteName>/config/authsettings`. Pour cela, vous pouvez utiliser un [modèle Azure Resource Manager](../azure-resource-manager/templates/overview.md) ou un outil comme [Azure Resource Explorer](https://resources.azure.com/). Au sein de la collection authsettings, vous devez définir trois propriétés (et éventuellement en supprimer d’autres) :
+
+    1.  Définissez `enabled` sur « true ».
+    2.  Définissez `isAuthFromFile` sur « true ».
+    3.  Définissez `authFilePath` sur le nom du fichier (par exemple, « auth.json »).
+
+> [!NOTE]
+> Le format de `authFilePath` varie d’une plateforme à l’autre. Sur Windows, les chemins d’accès relatifs et absolus sont pris en charge. Les chemins d’accès relatifs sont recommandés. Pour Linux, seuls des chemins d’accès absolus sont actuellement pris en charge. Par conséquent, la valeur du paramètre doit être « /Home/site/wwwroot/auth.JSON » ou une valeur similaire.
+
+Une fois cette mise à jour de la configuration effectuée, le contenu du fichier permet de définir le comportement de l’authentification/autorisation App Service pour ce site. Si vous souhaitez un jour revenir à la configuration Azure Resource Manager, réaffectez à `isAuthFromFile` la valeur « false ».
+
+### <a name="configuration-file-reference"></a>Informations de référence sur le fichier de configuration
+
+Tous les secrets auquel le fichier de configuration fait référence doivent être stockés en tant que [paramètres d’application](./configure-common.md#configure-app-settings). Vous pouvez donner le nom de votre choix aux paramètres. Veillez simplement à ce que les références du fichier de configuration utilisent les mêmes clés.
+
+Voici toutes les configuration possibles dans le fichier :
+
+```json
+{
+    "platform": {
+        "enabled": <true|false>
+    },
+    "globalValidation": {
+        "unauthenticatedClientAction": "RedirectToLoginPage|AllowAnonymous|Return401|Return403",
+        "redirectToProvider": "<default provider alias>",
+        "excludedPaths": [
+            "/path1",
+            "/path2"
+        ]
+    },
+    "httpSettings": {
+        "requireHttps": <true|false>,
+        "routes": {
+            "apiPrefix": "<api prefix>"
+        },
+        "forwardProxy": {
+            "convention": "NoProxy|Standard|Custom",
+            "customHostHeaderName": "<host header value>",
+            "customProtoHeaderName": "<proto header value>"
+        }
+    },
+    "login": {
+        "routes": {
+            "logoutEndpoint": "<logout endpoint>"
+        },
+        "tokenStore": {
+            "enabled": <true|false>,
+            "tokenRefreshExtensionHours": "<double>",
+            "fileSystem": {
+                "directory": "<directory to store the tokens in if using a file system token store (default)>"
+            },
+            "azureBlobStorage": {
+                "sasUrlSettingName": "<app setting name containing the sas url for the Azure Blob Storage if opting to use that for a token store>"
+            }
+        },
+        "preserveUrlFragmentsForLogins": <true|false>,
+        "allowedExternalRedirectUrls": [
+            "https://uri1.azurewebsites.net/",
+            "https://uri2.azurewebsites.net/",
+            "url_scheme_of_your_app://easyauth.callback"
+        ],
+        "cookieExpiration": {
+            "convention": "FixedTime|IdentityDerived",
+            "timeToExpiration": "<timespan>"
+        },
+        "nonce": {
+            "validateNonce": <true|false>,
+            "nonceExpirationInterval": "<timespan>"
+        }
+    },
+    "identityProviders": {
+        "azureActiveDirectory": {
+            "enabled": <true|false>,
+            "registration": {
+                "openIdIssuer": "<issuer url>",
+                "clientId": "<app id>",
+                "clientSecretSettingName": "APP_SETTING_CONTAINING_AAD_SECRET",
+            },
+            "login": {
+                "loginParameters": [
+                    "paramName1=value1",
+                    "paramName2=value2"
+                ]
+            },
+            "validation": {
+                "allowedAudiences": [
+                    "audience1",
+                    "audience2"
+                ]
+            }
+        },
+        "facebook": {
+            "enabled": <true|false>,
+            "registration": {
+                "appId": "<app id>",
+                "appSecretSettingName": "APP_SETTING_CONTAINING_FACEBOOK_SECRET"
+            },
+            "graphApiVersion": "v3.3",
+            "login": {
+                "scopes": [
+                    "public_profile",
+                    "email"
+                ]
+            },
+        },
+        "gitHub": {
+            "enabled": <true|false>,
+            "registration": {
+                "clientId": "<client id>",
+                "clientSecretSettingName": "APP_SETTING_CONTAINING_GITHUB_SECRET"
+            },
+            "login": {
+                "scopes": [
+                    "profile",
+                    "email"
+                ]
+            }
+        },
+        "google": {
+            "enabled": true,
+            "registration": {
+                "clientId": "<client id>",
+                "clientSecretSettingName": "APP_SETTING_CONTAINING_GOOGLE_SECRET"
+            },
+            "login": {
+                "scopes": [
+                    "profile",
+                    "email"
+                ]
+            },
+            "validation": {
+                "allowedAudiences": [
+                    "audience1",
+                    "audience2"
+                ]
+            }
+        },
+        "twitter": {
+            "enabled": <true|false>,
+            "registration": {
+                "consumerKey": "<consumer key>",
+                "consumerSecretSettingName": "APP_SETTING_CONTAINING TWITTER_CONSUMER_SECRET"
+            }
+        },
+        "apple": {
+            "enabled": <true|false>,
+            "registration": {
+                "clientId": "<client id>",
+                "clientSecretSettingName": "APP_SETTING_CONTAINING_APPLE_SECRET"
+            },
+            "login": {
+                "scopes": [
+                    "profile",
+                    "email"
+                ]
+            }
+        },
+        "openIdConnectProviders": {
+            "<providerName>": {
+                "enabled": <true|false>,
+                "registration": {
+                    "clientId": "<client id>",
+                    "clientCredential": {
+                        "clientSecretSettingName": "<name of app setting containing client secret>"
+                    },
+                    "openIdConnectConfiguration": {
+                        "authorizationEndpoint": "<url specifying authorization endpoint>",
+                        "tokenEndpoint": "<url specifying token endpoint>",
+                        "issuer": "<url specifying issuer>",
+                        "certificationUri": "<url specifying jwks endpoint>",
+                        "wellKnownOpenIdConfiguration": "<url specifying .well-known/open-id-configuration endpoint - if this property is set, the other properties of this object are ignored, and authorizationEndpoint, tokenEndpoint, issuer, and certificationUri are set to the corresponding values listed at this endpoint>"
+                    }
+                },
+                "login": {
+                    "nameClaimType": "<name of claim containing name>",
+                    "scopes": [
+                        "openid",
+                        "profile",
+                        "email"
+                    ],
+                    "loginParameterNames": [
+                        "paramName1=value1",
+                        "paramName2=value2"
+                    ],
+                }
+            },
+            //...
+        }
+    }
+}
+```
+
+## <a name="pin-your-app-to-a-specific-authentication-runtime-version"></a>Épingler votre application à une version spécifique du runtime d’authentification
+
+Lorsque vous activez l’authentification/l’autorisation, l’intergiciel (middleware) de la plateforme est injecté dans votre pipeline de requêtes HTTP, comme décrit dans la [vue d’ensemble des fonctionnalités](overview-authentication-authorization.md#how-it-works). Cet intergiciel (middleware) de plateforme est régulièrement mis à jour avec de nouvelles fonctionnalités et des améliorations dans le cadre des mises à jour de routine de la plateforme. Par défaut, votre application web ou de fonction s’exécutera sur la dernière version de cet intergiciel (middleware) de plateforme. Ces mises à jour automatiques sont toujours à compatibilité descendante. Toutefois, dans les rares cas où cette mise à jour automatique introduit un problème de runtime pour votre application web ou de fonction, vous pouvez revenir temporairement à la version précédente de l’intergiciel (middleware). Cet article explique comment épingler temporairement une application à une version spécifique de l’intergiciel (middleware) d’authentification.
+
+### <a name="automatic-and-manual-version-updates"></a>Mises à jour de versions automatiques et manuelles 
+
+Vous pouvez épingler votre application à une version spécifique de l’intergiciel (middleware) de plateforme en définissant un paramètre `runtimeVersion` pour l’application. Votre application s’exécute toujours sur la version la plus récente, sauf si vous choisissez de la réépingler explicitement à une version spécifique. Plusieurs versions sont prises en charge à la fois. Si vous épinglez votre application à une version non valide qui n’est plus prise en charge, votre application utilisera la version la plus récente à la place. Pour toujours exécuter la version la plus récente, définissez `runtimeVersion` sur ~1. 
+
+### <a name="view-and-update-the-current-runtime-version"></a>Afficher et mettre à jour la version actuelle du runtime
+
+Vous pouvez modifier la version du runtime utilisée par votre application. La nouvelle version du runtime doit prendre effet après le redémarrage de l’application. 
+
+#### <a name="view-the-current-runtime-version"></a>Afficher la version actuelle du runtime
+
+Vous pouvez afficher la version actuelle de l’intergiciel (middleware) d’authentification de la plateforme à l’aide d’Azure CLI ou via l’un des points de terminaison HTTP de la version intégrés dans votre application.
+
+##### <a name="from-the-azure-cli"></a>Dans Azure CLI
+
+À l’aide d’Azure CLI, affichez la version actuelle de l’intergiciel (middleware) avec la commande [az webapp auth show](/cli/azure/webapp/auth?view=azure-cli-latest&preserve-view=true#az-webapp-auth-show).
+
+```azurecli-interactive
+az webapp auth show --name <my_app_name> \
+--resource-group <my_resource_group>
+```
+
+Dans ce code, remplacez `<my_app_name>` par le nom de votre application. Remplacez également `<my_resource_group>` par le nom du groupe de ressources de votre application.
+
+Le champ `runtimeVersion` est affiché dans la sortie de l’interface CLI. Il ressemble à l’exemple de sortie suivant, qui a été tronqué pour une meilleure lisibilité : 
+```output
+{
+  "additionalLoginParams": null,
+  "allowedAudiences": null,
+    ...
+  "runtimeVersion": "1.3.2",
+    ...
+}
+```
+
+##### <a name="from-the-version-endpoint"></a>À partir du point de terminaison de version
+
+Vous pouvez également atteindre le point de terminaison /.auth/version sur une application pour afficher la version actuelle de l’intergiciel (middleware) sur laquelle l’application s’exécute. Cela ressemble à l’exemple de sortie suivant :
+```output
+{
+"version": "1.3.2"
+}
+```
+
+#### <a name="update-the-current-runtime-version"></a>Mettre à jour la version actuelle du runtime
+
+À l’aide d’Azure CLI, vous pouvez mettre à jour le paramètre `runtimeVersion` dans l’application avec la commande [az webapp auth update](/cli/azure/webapp/auth?view=azure-cli-latest&preserve-view=true#az-webapp-auth-update).
+
+```azurecli-interactive
+az webapp auth update --name <my_app_name> \
+--resource-group <my_resource_group> \
+--runtime-version <version>
+```
+
+Remplacez `<my_app_name>` par le nom de votre application. Remplacez également `<my_resource_group>` par le nom du groupe de ressources de votre application. Par ailleurs, remplacez `<version>` par une version valide du runtime 1.x ou `~1` pour la version la plus récente. Vous trouverez les notes de publication sur les différentes versions du runtime [ici] (https://github.com/Azure/app-service-announcements) pour déterminer la version sur laquelle épingler.
+
+Vous pouvez exécuter cette commande à partir de [Azure Cloud Shell](../cloud-shell/overview.md) en choisissant **Essayer** dans l’exemple de code qui précède. Vous pouvez également utiliser [Azure CLI en local](/cli/azure/install-azure-cli) pour exécuter cette commande après avoir lancé la commande [az login](/cli/azure/reference-index#az-login) pour vous connecter.
+
 ## <a name="next-steps"></a>Étapes suivantes
 
 > [!div class="nextstepaction"]
-> [Didacticiel : Authentifier et autoriser des utilisateurs de bout en bout (Windows)](app-service-web-tutorial-auth-aad.md)
-> [Didacticiel : Authentifier et autoriser des utilisateurs de bout en bout (Linux)](containers/tutorial-auth-aad.md)
+> [Tutoriel : Authentifier et autoriser des utilisateurs de bout en bout](tutorial-auth-aad.md)

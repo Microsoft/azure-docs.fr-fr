@@ -9,7 +9,7 @@ editor: ''
 ms.assetid: b37bef0d-982e-4e28-86b2-6c61ca524ae1
 ms.service: active-directory
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: identity
 ms.subservice: report-monitor
@@ -17,12 +17,12 @@ ms.date: 04/19/2019
 ms.author: markvi
 ms.reviewer: dhanyahk
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: f03b146331069371106c1857f2acc68b566d3c5d
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: fc7bcab04da005fd0d46d18e7b708dcb1c9d58e5
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82129229"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89230515"
 ---
 # <a name="integrate-azure-active-directory-logs-with-arcsight-using-azure-monitor"></a>Intégrer des journaux d’activité Azure Active Directory à ArcSight à l’aide d’Azure Monitor
 
@@ -33,7 +33,7 @@ Dans cet article, vous allez apprendre à router les journaux d’activité Azur
 ## <a name="prerequisites"></a>Prérequis
 
 Pour utiliser cette fonctionnalité, vous avez besoin des éléments suivants :
-* Un hub d’événements Azure contenant les journaux d’activité d’Azure AD. Découvrez comment [diffuser en continu vos journaux d’activité sur un hub d’événements](quickstart-azure-monitor-stream-logs-to-event-hub.md). 
+* Un hub d’événements Azure contenant les journaux d’activité d’Azure AD. Découvrez comment [diffuser en continu vos journaux d’activité sur un hub d’événements](./tutorial-azure-monitor-stream-logs-to-event-hub.md). 
 * Une instance configurée d’ArcSight Syslog NG Daemon SmartConnector (SmartConnector) ou ArcSight Load Balancer. Si les événements sont envoyés à ArcSight Load Balancer, ils sont ensuite envoyés SmartConnector par l’équilibreur de charge.
 
 Téléchargez et ouvrez le [guide de configuration d’ArcSight SmartConnector pour l’Event Hub Azure Monitor](https://community.microfocus.com/t5/ArcSight-Connectors/SmartConnector-for-Microsoft-Azure-Monitor-Event-Hub/ta-p/1671292). Ce guide décrit les étapes à suivre pour installer et configurer ArcSight SmartConnector pour Azure Monitor. 

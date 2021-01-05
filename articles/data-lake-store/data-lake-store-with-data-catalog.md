@@ -3,18 +3,18 @@ title: Intégrer Data Lake Storage Gen1 avec Azure Data Catalog
 description: Découvrez comment inscrire des données d’Azure Data Lake Storage Gen1 dans Azure Data Catalog pour les rendre détectables dans votre organisation.
 author: twooley
 ms.service: data-lake-store
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 05/29/2018
 ms.author: twooley
-ms.openlocfilehash: 66191a52c6ef1f3d19afd2a47356487b07e9eff4
-ms.sourcegitcommit: 366e95d58d5311ca4b62e6d0b2b47549e06a0d6d
+ms.openlocfilehash: 02544489816f5711ca6e599c2bce03737c747934
+ms.sourcegitcommit: ae6e7057a00d95ed7b828fc8846e3a6281859d40
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82692337"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92106618"
 ---
 # <a name="register-data-from-azure-data-lake-storage-gen1-in-azure-data-catalog"></a>Inscrire des données Data Lake Storage Gen1 dans Azure Data Catalog
-Dans cet article, vous allez découvrir comment intégrer Azure Data Lake Storage Gen1 à Azure Data Catalog pour rendre vos données détectables au sein d’une organisation en l’intégrant à Data Catalog. Pour plus d’informations sur le catalogage des données, consultez [Azure Data Catalog](../data-catalog/data-catalog-what-is-data-catalog.md). Pour comprendre les scénarios dans lesquels vous pouvez utiliser Data Catalog, consultez [Scénarios courants d’Azure Data Catalog](../data-catalog/data-catalog-common-scenarios.md).
+Dans cet article, vous allez découvrir comment intégrer Azure Data Lake Storage Gen1 à Azure Data Catalog pour rendre vos données détectables au sein d’une organisation en l’intégrant à Data Catalog. Pour plus d’informations sur le catalogage des données, consultez [Azure Data Catalog](../data-catalog/overview.md). Pour comprendre les scénarios dans lesquels vous pouvez utiliser Data Catalog, consultez [Scénarios courants d’Azure Data Catalog](../data-catalog/data-catalog-common-scenarios.md).
 
 ## <a name="prerequisites"></a>Prérequis
 Avant de commencer ce didacticiel, vous devez disposer des éléments suivants :
@@ -52,12 +52,12 @@ Avant de commencer ce didacticiel, vous devez disposer des éléments suivants 
 
     c. La zone **Objets à référencer** répertorie les fichiers et dossiers à référencer dans Azure Data Catalog.
 
-    ![Affichage de la structure de données](./media/data-lake-store-with-data-catalog/view-data-structure.png "Afficher la structure des données")
+    ![Capture d’écran de la boîte de dialogue Microsoft Azure Data Catalog - compte de stockage.](./media/data-lake-store-with-data-catalog/view-data-structure.png "Afficher la structure des données")
 1. Pour ce didacticiel, vous devez référencer tous les fichiers du répertoire. Pour cela, cliquez sur le bouton (![déplacer des objets](./media/data-lake-store-with-data-catalog/move-objects.png "Déplacement d’objets")) pour déplacer tous les fichiers dans la zone **Objets à référencer** .
 
     Comme les données sont référencées dans un catalogue de données au niveau de l’organisation, il est recommandé d’ajouter des métadonnées que vous pouvez utiliser ultérieurement pour localiser rapidement les données. Par exemple, vous pouvez ajouter une adresse de messagerie pour le propriétaire des données (par exemple une personne qui charge les données) ou ajouter une étiquette pour identifier les données. La capture d’écran ci-dessous montre une étiquette que nous ajoutons aux données.
 
-    ![Affichage de la structure de données](./media/data-lake-store-with-data-catalog/view-selected-data-structure.png "Afficher la structure des données")
+    ![Capture d’écran de la boîte de dialogue Microsoft Azure Data Catalog - compte de stockage avec la balise ajoutée aux données reprises.](./media/data-lake-store-with-data-catalog/view-selected-data-structure.png "Afficher la structure des données")
 
     Cliquez sur **S'inscrire**.
 1. La capture d’écran suivante montre que les données sont référencées avec succès dans le catalogue de données.

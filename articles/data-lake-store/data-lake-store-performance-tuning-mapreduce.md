@@ -1,17 +1,17 @@
 ---
 title: Optimisation des performances d’Azure Data Lake Storage Gen1 - MapReduce
-description: Recommandations en matière d’optimisation des performances d’Azure Data Lake Storage Gen1 MapReduce
-author: stewu
+description: Découvrez l’optimisation des performances pour MapReduce dans Azure Data Lake Storage Gen1, notamment les paramètres, l’aide, un exemple de calcul et les limitations.
+author: twooley
 ms.service: data-lake-store
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 12/19/2016
-ms.author: stewu
-ms.openlocfilehash: a645049665bc1d51efa94a879b9d2e4e5529282f
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: twooley
+ms.openlocfilehash: 2549413241e422fb1e0e5e1f079c287e0b7cf005
+ms.sourcegitcommit: a4533b9d3d4cd6bb6faf92dd91c2c3e1f98ab86a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "73904586"
+ms.lasthandoff: 12/22/2020
+ms.locfileid: "97723726"
 ---
 # <a name="performance-tuning-guidance-for-mapreduce-on-hdinsight-and-azure-data-lake-storage-gen1"></a>Recommandations en matière d’optimisation des performances pour MapReduce sur HDInsight et Azure Data Lake Storage Gen1
 
@@ -20,8 +20,8 @@ ms.locfileid: "73904586"
 * **Un abonnement Azure**. Consultez la page [Obtention d’un essai gratuit d’Azure](https://azure.microsoft.com/pricing/free-trial/).
 * **Un compte Azure Data Lake Storage Gen1**. Pour savoir comment en créer un, voir [Prise en main d’Azure Data Lake Storage Gen1](data-lake-store-get-started-portal.md).
 * **Cluster Azure HDInsight** avec accès à un compte Data Lake Storage Gen1. Voir [Créer un cluster HDInsight avec Data Lake Storage Gen1](data-lake-store-hdinsight-hadoop-use-portal.md). Veillez à activer le Bureau à distance pour le cluster.
-* **Utilisation de MapReduce sur HDInsight**. Pour plus d’informations, consultez [Utilisation de MapReduce sur Hadoop sur HDInsight](https://docs.microsoft.com/azure/hdinsight/hdinsight-use-mapreduce)
-* **Passez en revue les recommandations en matière d’optimisation des performances pour Data Lake Storage Gen1**. Pour des concepts généraux sur les performances, consultez [Recommandations en matière d’optimisation des performances de Data Lake Storage Gen1](https://docs.microsoft.com/azure/data-lake-store/data-lake-store-performance-tuning-guidance)
+* **Utilisation de MapReduce sur HDInsight**. Pour plus d’informations, consultez [Utilisation de MapReduce sur Hadoop sur HDInsight](../hdinsight/hadoop/hdinsight-use-mapreduce.md)
+* **Passez en revue les recommandations en matière d’optimisation des performances pour Data Lake Storage Gen1**. Pour des concepts généraux sur les performances, consultez [Recommandations en matière d’optimisation des performances de Data Lake Storage Gen1](./data-lake-store-performance-tuning-guidance.md)
 
 ## <a name="parameters"></a>Paramètres
 

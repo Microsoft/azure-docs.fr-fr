@@ -7,12 +7,12 @@ ms.topic: article
 ms.date: 06/13/2017
 ms.author: ccompy
 ms.custom: seodec18
-ms.openlocfilehash: 6c4838e3226b91cbb5d6f86b83266a986418c120
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: c953c31792b8d01199d409cbd91124138a6ebb15
+ms.sourcegitcommit: dd45ae4fc54f8267cda2ddf4a92ccd123464d411
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75430509"
+ms.lasthandoff: 10/29/2020
+ms.locfileid: "92927445"
 ---
 # <a name="create-an-external-app-service-environment"></a>Créer un environnement App Service externe
 
@@ -61,7 +61,7 @@ Pour créer un environnement App Service en même temps que le plan App Service 
 
 1. Dans le [portail Azure](https://portal.azure.com/), sélectionnez **Créer une ressource** > **Web + Mobile** > **Application web**.
 
-    ![Création d’une application web][1]
+    ![Capture d’écran du portail Azure montrant l’option Web + Mobile sélectionnée dans Place de marché Azure et l’écran de création d’une nouvelle application web ouvert à droite.][1]
 
 2. Sélectionnez votre abonnement. L’application et l’environnement App Service sont créés dans les mêmes abonnements.
 
@@ -71,25 +71,25 @@ Pour créer un environnement App Service en même temps que le plan App Service 
 
 5. Cliquez sur le plan App Service, puis sélectionnez **Créer un nouveau**. Les applications web Linux et les applications web Windows ne peuvent pas se trouver dans le même plan App Service, mais elles peuvent être dans le même environnement ASE. 
 
-    ![Nouveau plan App Service][2]
+    ![Capture d’écran du portail Azure montrant le volet Application web, le volet Plan App Service et le volet Nouveau plan App Service ouverts.][2]
 
-6. Dans la liste déroulante **Emplacement**, sélectionnez la région où vous souhaitez créer l’environnement App Service. Si vous sélectionnez un environnement App Service existant, aucun environnement App Service n’est créé. Le plan App Service est créé dans l’environnement App Service que vous avez sélectionné. 
+6. Dans la liste déroulante **Emplacement** , sélectionnez la région où vous souhaitez créer l’environnement App Service. Si vous sélectionnez un environnement App Service existant, aucun environnement App Service n’est créé. Le plan App Service est créé dans l’environnement App Service que vous avez sélectionné. 
 
-7. Sélectionnez **Niveau tarifaire**, puis choisissez l’une des références SKU de tarification **Isolé**. Si vous choisissez une carte de référence SKU **Isolé** et un emplacement autre qu’un environnement App Service, un nouvel environnement App Service est créé à cet emplacement. Pour démarrer le processus de création d’un environnement App Service, cliquez sur **Sélectionner**. La référence SKU **Isolé** n’est disponible qu’avec un environnement App Service. Vous ne pouvez pas utiliser une autre référence SKU de tarification dans un environnement App Service qui n’est pas **Isolé**. 
+7. Sélectionnez **Niveau tarifaire** , puis choisissez l’une des références SKU de tarification **Isolé**. Si vous choisissez une carte de référence SKU **Isolé** et un emplacement autre qu’un environnement App Service, un nouvel environnement App Service est créé à cet emplacement. Pour démarrer le processus de création d’un environnement App Service, cliquez sur **Sélectionner**. La référence SKU **Isolé** n’est disponible qu’avec un environnement App Service. Vous ne pouvez pas utiliser une autre référence SKU de tarification dans un environnement App Service qui n’est pas **Isolé**. 
 
     ![Sélection du niveau tarifaire][3]
 
-8. Indiquez le nom de votre ASE. Ce nom est utilisé dans le nom adressable de vos applications. Si le nom de l’environnement App Service est _appsvcenvdemo_, le nom du domaine est *.appsvcenvdemo.p.azurewebsites.net*. Si vous créez une application nommée *mytestapp*, elle est adressable à l’adresse mytestapp.appsvcenvdemo.p.azurewebsites.net. Vous ne pouvez pas utiliser d’espace blanc dans le nom. Si vous utilisez des majuscules dans le nom, le nom de domaine correspond à la version complète de ce nom en minuscules.
+8. Indiquez le nom de votre ASE. Ce nom est utilisé dans le nom adressable de vos applications. Si le nom de l’environnement App Service est _appsvcenvdemo_ , le nom du domaine est *.appsvcenvdemo.p.azurewebsites.net*. Si vous créez une application nommée *mytestapp* , elle est adressable à l’adresse mytestapp.appsvcenvdemo.p.azurewebsites.net. Vous ne pouvez pas utiliser d’espace blanc dans le nom. Si vous utilisez des majuscules dans le nom, le nom de domaine correspond à la version complète de ce nom en minuscules.
 
     ![Nom du nouveau plan App Service][4]
 
-9. Spécifiez les informations concernant votre réseau virtuel Azure. Choisissez **Créer un nouveau** ou **Sélectionner**. L’option permettant de sélectionner un réseau virtuel existant est disponible uniquement si un réseau virtuel se trouve dans la région sélectionnée. Si vous sélectionnez **Créer un nouveau**, entrez un nom pour le réseau virtuel. Un nouveau réseau virtuel Resource Manager portant ce nom est alors créé. Il utilise l’espace d’adressage `192.168.250.0/23` dans la région sélectionnée. Si vous choisissez **Sélectionner**, vous devez :
+9. Spécifiez les informations concernant votre réseau virtuel Azure. Choisissez **Créer un nouveau** ou **Sélectionner**. L’option permettant de sélectionner un réseau virtuel existant est disponible uniquement si un réseau virtuel se trouve dans la région sélectionnée. Si vous sélectionnez **Créer un nouveau** , entrez un nom pour le réseau virtuel. Un nouveau réseau virtuel Resource Manager portant ce nom est alors créé. Il utilise l’espace d’adressage `192.168.250.0/23` dans la région sélectionnée. Si vous choisissez **Sélectionner** , vous devez :
 
     a. Sélectionner le bloc d’adresses du réseau virtuel, si vous en avez plusieurs
 
     b. Entrer un nom pour le nouveau sous-réseau
 
-    c. Sélectionner la taille du sous-réseau. *Veillez à définir une taille de sous-réseau suffisamment grande pour s’adapter à toute future croissance de votre environnement App Service.* Nous recommandons `/24`, qui comprend 128 adresses et peut gérer un environnement App Service de taille maximale. Par exemple, `/28` est déconseillé, car 16 adresses seulement sont disponibles. L’infrastructure utilise au moins 7 adresses et Azure Networking 5 autres. Dans un sous-réseau `/28`, vous vous retrouvez avec une mise à l’échelle maximale de 4 instances de plan App Service pour un ASE externe et uniquement 3 instances de plan App Service pour un ASE ILB.
+    c. Sélectionner la taille du sous-réseau. *Veillez à définir une taille de sous-réseau suffisamment grande pour s’adapter à toute future croissance de votre environnement App Service.* Nous vous recommandons d’utiliser `/24`, qui comprend 256 adresses et peut gérer un environnement ASE de taille maximale. Par exemple, `/28` est déconseillé, car 16 adresses seulement sont disponibles. L’infrastructure utilise au moins 7 adresses et Azure Networking 5 autres. Dans un sous-réseau `/28`, vous vous retrouvez avec une mise à l’échelle maximale de 4 instances de plan App Service pour un ASE externe et uniquement 3 instances de plan App Service pour un ASE ILB.
 
     d. Sélectionner la plage IP du sous-réseau
 
@@ -99,7 +99,7 @@ Pour créer un environnement App Service en même temps que le plan App Service 
 
 1. Dans le [portail Azure](https://portal.azure.com/), cliquez sur **Créer une ressource** > **Web + Mobile** > **Web App pour conteneurs.** 
 
-    ![Création d’une application web][7]
+    ![Capture d’écran du portail Azure montrant l’option Web + Mobile sélectionnée dans Place de marché Azure et le volet Web App pour conteneurs ouvert à droite.][7]
 
 1. Sélectionnez votre abonnement. L’application et l’environnement App Service sont créés dans les mêmes abonnements.
 
@@ -107,19 +107,19 @@ Pour créer un environnement App Service en même temps que le plan App Service 
 
 1. Cliquez sur le plan App Service, puis sélectionnez **Créer un nouveau**. Les applications web Linux et les applications web Windows ne peuvent pas se trouver dans le même plan App Service, mais elles peuvent être dans le même environnement ASE. 
 
-    ![Nouveau plan App Service][8]
+    ![Capture d’écran du portail Azure montrant le volet Web App pour conteneurs, le volet Plan App Service et le volet Nouveau plan App Service ouverts.][8]
 
-1. Dans la liste déroulante **Emplacement**, sélectionnez la région où vous souhaitez créer l’environnement App Service. Si vous sélectionnez un environnement App Service existant, aucun environnement App Service n’est créé. Le plan App Service est créé dans l’environnement App Service que vous avez sélectionné. 
+1. Dans la liste déroulante **Emplacement** , sélectionnez la région où vous souhaitez créer l’environnement App Service. Si vous sélectionnez un environnement App Service existant, aucun environnement App Service n’est créé. Le plan App Service est créé dans l’environnement App Service que vous avez sélectionné. 
 
-1. Sélectionnez **Niveau tarifaire**, puis choisissez l’une des références SKU de tarification **Isolé**. Si vous choisissez une carte de référence SKU **Isolé** et un emplacement autre qu’un environnement App Service, un nouvel environnement App Service est créé à cet emplacement. Pour démarrer le processus de création d’un environnement App Service, cliquez sur **Sélectionner**. La référence SKU **Isolé** n’est disponible qu’avec un environnement App Service. Vous ne pouvez pas utiliser une autre référence SKU de tarification dans un environnement App Service qui n’est pas **Isolé**. 
+1. Sélectionnez **Niveau tarifaire** , puis choisissez l’une des références SKU de tarification **Isolé**. Si vous choisissez une carte de référence SKU **Isolé** et un emplacement autre qu’un environnement App Service, un nouvel environnement App Service est créé à cet emplacement. Pour démarrer le processus de création d’un environnement App Service, cliquez sur **Sélectionner**. La référence SKU **Isolé** n’est disponible qu’avec un environnement App Service. Vous ne pouvez pas utiliser une autre référence SKU de tarification dans un environnement App Service qui n’est pas **Isolé**. 
 
     ![Sélection du niveau tarifaire][3]
 
-1. Indiquez le nom de votre ASE. Ce nom est utilisé dans le nom adressable de vos applications. Si le nom de l’environnement App Service est _appsvcenvdemo_, le nom du domaine est *.appsvcenvdemo.p.azurewebsites.net*. Si vous créez une application nommée *mytestapp*, elle est adressable à l’adresse mytestapp.appsvcenvdemo.p.azurewebsites.net. Vous ne pouvez pas utiliser d’espace blanc dans le nom. Si vous utilisez des majuscules dans le nom, le nom de domaine correspond à la version complète de ce nom en minuscules.
+1. Indiquez le nom de votre ASE. Ce nom est utilisé dans le nom adressable de vos applications. Si le nom de l’environnement App Service est _appsvcenvdemo_ , le nom du domaine est *.appsvcenvdemo.p.azurewebsites.net*. Si vous créez une application nommée *mytestapp* , elle est adressable à l’adresse mytestapp.appsvcenvdemo.p.azurewebsites.net. Vous ne pouvez pas utiliser d’espace blanc dans le nom. Si vous utilisez des majuscules dans le nom, le nom de domaine correspond à la version complète de ce nom en minuscules.
 
     ![Nom du nouveau plan App Service][4]
 
-1. Spécifiez les informations concernant votre réseau virtuel Azure. Choisissez **Créer un nouveau** ou **Sélectionner**. L’option permettant de sélectionner un réseau virtuel existant est disponible uniquement si un réseau virtuel se trouve dans la région sélectionnée. Si vous sélectionnez **Créer un nouveau**, entrez un nom pour le réseau virtuel. Un nouveau réseau virtuel Resource Manager portant ce nom est alors créé. Il utilise l’espace d’adressage `192.168.250.0/23` dans la région sélectionnée. Si vous choisissez **Sélectionner**, vous devez :
+1. Spécifiez les informations concernant votre réseau virtuel Azure. Choisissez **Créer un nouveau** ou **Sélectionner**. L’option permettant de sélectionner un réseau virtuel existant est disponible uniquement si un réseau virtuel se trouve dans la région sélectionnée. Si vous sélectionnez **Créer un nouveau** , entrez un nom pour le réseau virtuel. Un nouveau réseau virtuel Resource Manager portant ce nom est alors créé. Il utilise l’espace d’adressage `192.168.250.0/23` dans la région sélectionnée. Si vous choisissez **Sélectionner** , vous devez :
 
     a. Sélectionner le bloc d’adresses du réseau virtuel, si vous en avez plusieurs
 
@@ -143,7 +143,7 @@ Lorsque vous créez un environnement App Service autonome, celui-ci est vide. M�
 
 1. Recherchez **App Service Environment** dans la Place de marché Azure, ou sélectionnez **Créer une ressource** > **Web + Mobile** > **App Service Environment**. 
 
-1. Entrez le nom de votre environnement App Service. Ce nom est utilisé pour les applications créées dans l’environnement App Service. Si le nom est *mynewdemoase*, le nom du sous-domaine est *.mynewdemoase.p.azurewebsites.net*. Si vous créez une application nommée *mytestapp*,celle-ci est adressable à l’adresse mytestapp.mynewdemoase.p.azurewebsites.net. Vous ne pouvez pas utiliser d’espace blanc dans le nom. Si vous utilisez des majuscules dans le nom, le nom de domaine correspond à la version complète de ce nom en minuscules. Si vous utilisez un équilibreur de charge interne (ILB), le nom de votre environnement App Service n’est pas utilisé dans votre sous-domaine, mais il est explicitement indiqué lors de la création de l’environnement App Service.
+1. Entrez le nom de votre environnement App Service. Ce nom est utilisé pour les applications créées dans l’environnement App Service. Si le nom est *mynewdemoase* , le nom du sous-domaine est *.mynewdemoase.p.azurewebsites.net*. Si vous créez une application nommée *mytestapp* ,celle-ci est adressable à l’adresse mytestapp.mynewdemoase.p.azurewebsites.net. Vous ne pouvez pas utiliser d’espace blanc dans le nom. Si vous utilisez des majuscules dans le nom, le nom de domaine correspond à la version complète de ce nom en minuscules. Si vous utilisez un équilibreur de charge interne (ILB), le nom de votre environnement App Service n’est pas utilisé dans votre sous-domaine, mais il est explicitement indiqué lors de la création de l’environnement App Service.
 
     ![Attribution d’un nom à l’environnement App Service][5]
 
@@ -159,9 +159,9 @@ Lorsque vous créez un environnement App Service autonome, celui-ci est vide. M�
     
     * Le nouveau réseau virtuel se voit affecter la plage d’adresses 192.168.250.0/23 et un sous-réseau nommé default. Le sous-réseau reçoit la plage d’adresses 192.168.250.0/24. Vous pouvez uniquement sélectionner un réseau virtuel Resource Manager. La sélection du **type d’adresse IP virtuelle** détermine si votre environnement App Service est accessible directement à partir d’Internet (externe) ou s’il utilise un équilibreur de charge interne (ILB). Pour plus d’informations, consultez [Créer et utiliser un équilibreur de charge interne avec un environnement Azure App Service Environment][MakeILBASE]. 
 
-      * Si vous sélectionnez un **Type d’adresse IP virtuelle** **Externe**, vous pouvez choisir le nombre d’adresses IP externes avec lesquelles est créé le système, en vue d’une utilisation du protocole SSL basé sur IP. 
+      * Si vous sélectionnez un **Type d’adresse IP virtuelle** **Externe** , vous pouvez choisir le nombre d’adresses IP externes avec lesquelles est créé le système, en vue d’une utilisation du protocole SSL basé sur IP. 
     
-      * Si vous sélectionnez un **Type d’adresse IP virtuelle** **Interne**, vous devez spécifier le domaine que votre environnement App Service utilise. Vous pouvez déployer un environnement App Service dans un réseau virtuel qui utilise des plages d’adresses publiques ou privées. Pour utiliser un réseau virtuel avec une plage d’adresses publiques, vous devez créer le réseau virtuel à l’avance. 
+      * Si vous sélectionnez un **Type d’adresse IP virtuelle** **Interne** , vous devez spécifier le domaine que votre environnement App Service utilise. Vous pouvez déployer un environnement App Service dans un réseau virtuel qui utilise des plages d’adresses publiques ou privées. Pour utiliser un réseau virtuel avec une plage d’adresses publiques, vous devez créer le réseau virtuel à l’avance. 
     
     * Si vous sélectionnez un réseau virtuel existant, un nouveau sous-réseau est créé en même temps que l’environnement App Service. *Vous ne pouvez pas utiliser un sous-réseau créé au préalable dans le portail. Si vous utilisez un modèle Resource Manager, vous pouvez créer un environnement App Service avec un sous-réseau existant.* Pour créer un environnement App Service à partir d’un modèle, consultez [Créer un environnement ASE à partir d’un modèle][MakeASEfromTemplate].
 
@@ -192,11 +192,11 @@ Pour plus d’informations sur ASEv1, consultez [Présentation d’App Service E
 [ASENetwork]: ./network-info.md
 [UsingASE]: ./using-an-ase.md
 [UDRs]: ../../virtual-network/virtual-networks-udr-overview.md
-[NSGs]: ../../virtual-network/security-overview.md
+[NSGs]: ../../virtual-network/network-security-groups-overview.md
 [ConfigureASEv1]: app-service-web-configure-an-app-service-environment.md
 [ASEv1Intro]: app-service-app-service-environment-intro.md
 [webapps]: ../overview.md
-[mobileapps]: ../../app-service-mobile/app-service-mobile-value-prop.md
+[mobileapps]: /previous-versions/azure/app-service-mobile/app-service-mobile-value-prop
 [Functions]: ../../azure-functions/index.yml
 [Pricing]: https://azure.microsoft.com/pricing/details/app-service/
 [ARMOverview]: ../../azure-resource-manager/management/overview.md

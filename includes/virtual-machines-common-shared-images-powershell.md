@@ -8,18 +8,18 @@ ms.topic: include
 ms.date: 03/18/2020
 ms.author: cynthn
 ms.custom: include file
-ms.openlocfilehash: 10c2b447a3f174afe93f56084827756d24d982cc
-ms.sourcegitcommit: e0330ef620103256d39ca1426f09dd5bb39cd075
+ms.openlocfilehash: 807cbd283cf7971bf4256451028ffa16a0911266
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82792188"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96027814"
 ---
 ## <a name="create-an-image-gallery"></a>Créer une galerie d’images 
 
 Une galerie d’images est la ressource principale utilisée pour activer le partage d’image. Les caractères autorisés pour le nom de galerie sont les lettres majuscules ou minuscules, les chiffres et les points. Le nom de galerie ne peut pas contenir de tirets. Les noms de galerie doivent être uniques dans votre abonnement. 
 
-Créez une galerie d’images à l’aide de [New-AzureRmGallery](https://docs.microsoft.com/powershell/module/az.compute/new-azgallery). L’exemple suivant crée une galerie nommée *myGallery* dans le groupe de ressources *myGalleryRG*.
+Créez une galerie d’images à l’aide de [New-AzureRmGallery](/powershell/module/az.compute/new-azgallery). L’exemple suivant crée une galerie nommée *myGallery* dans le groupe de ressources *myGalleryRG*.
 
 ```azurepowershell-interactive
 $resourceGroup = New-AzResourceGroup `
@@ -49,4 +49,3 @@ New-AzRoleAssignment `
    -ResourceGroupName $resourceGroup.ResourceGroupName
 
 ```
-

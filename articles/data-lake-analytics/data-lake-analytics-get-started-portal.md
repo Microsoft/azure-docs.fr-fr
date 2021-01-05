@@ -2,18 +2,15 @@
 title: Créer et interroger des comptes Azure Data Lake Analytics - Portail Azure
 description: Utilisez le portail Azure pour créer un compte Azure Data Lake Analytics et envoyer un travail U-SQL.
 ms.service: data-lake-analytics
-author: saveenr
-ms.author: saveenr
-ms.reviewer: jasonwhowell
-ms.assetid: b1584d16-e0d2-4019-ad1f-f04be8c5b430
+ms.reviewer: jasonh
 ms.topic: conceptual
 ms.date: 03/21/2017
-ms.openlocfilehash: 46da3750e4d0ac78c5fd9df91ae37670e541302d
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 6e51c6848476147073626119689407ebc02c036d
+ms.sourcegitcommit: 8d8deb9a406165de5050522681b782fb2917762d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "71315759"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92220956"
 ---
 # <a name="get-started-with-azure-data-lake-analytics-using-the-azure-portal"></a>Prise en main d’Azure Data Lake Analytics à l’aide du portail Azure
 [!INCLUDE [get-started-selector](../../includes/data-lake-analytics-selector-get-started.md)]
@@ -44,7 +41,7 @@ Avant de commencer ce didacticiel, vous devez disposer d’un **abonnement Azure
 
 Le texte suivant est un script U-SQL très simple. Il ne fait que définir un petit jeu de données dans le script puis de l’écrire dans le Data Lake Storage Gen1 par défaut comme un fichier appelé `/data.csv`.
 
-```
+```usql
 @a  = 
     SELECT * FROM 
         (VALUES

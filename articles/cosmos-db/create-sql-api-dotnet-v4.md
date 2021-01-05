@@ -1,33 +1,36 @@
 ---
 title: Gérer les ressources de l’API SQL Azure Cosmos DB à l’aide du Kit de développement logiciel (SDK) .NET V4
 description: Démarrage rapide de génération d’une application console à l’aide du Kit de développement logiciel (SDK) .NET V4 pour gérer les ressources du compte de l’API SQL Azure Cosmos DB.
-author: ealsur
-ms.author: maquaran
+author: anfeldma-ms
+ms.author: anfeldma
 ms.service: cosmos-db
 ms.subservice: cosmosdb-sql
 ms.devlang: dotnet
 ms.topic: quickstart
-ms.date: 01/10/2020
-ms.openlocfilehash: b69d67a5c4fc1d907f676cf4e400f9fa7df2653b
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.date: 09/22/2020
+ms.custom: devx-track-dotnet
+ms.openlocfilehash: 224a1b67ff0282c216763229593fcfed81d7567b
+ms.sourcegitcommit: 3bdeb546890a740384a8ef383cf915e84bd7e91e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "77585932"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93090101"
 ---
 # <a name="quickstart-build-a-console-app-using-the-net-v4-sdk-to-manage-azure-cosmos-db-sql-api-account-resources"></a>Démarrage rapide : Générer une application console à l’aide du Kit de développement logiciel (SDK) .NET V4 pour gérer les ressources du compte de l’API SQL Azure Cosmos DB.
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
 
 > [!div class="op_single_selector"]
 > * [.NET V3](create-sql-api-dotnet.md)
 > * [.NET V4](create-sql-api-dotnet-V4.md)
-> * [Java](create-sql-api-java.md)
+> * [Kit SDK Java v4](create-sql-api-java.md)
+> * [Spring Data v3](create-sql-api-spring-data.md)
 > * [Node.JS](create-sql-api-nodejs.md)
 > * [Python](create-sql-api-python.md)
 > * [Xamarin](create-sql-api-xamarin-dotnet.md)
 
 Commencez à utiliser la bibliothèque de client de l’API SQL Azure Cosmos DB pour .NET. Suivez les étapes décrites dans ce document pour installer le package .NET V4 (Azure.Cosmos), générer une application et essayer l’exemple de code pour les opérations CRUD de base sur les données stockées dans Azure Cosmos DB. 
 
-Azure Cosmos DB est le service de base de données multi-modèle de Microsoft distribué à l’échelle mondiale. Vous pouvez utiliser Azure Cosmos DB pour créer et interroger rapidement des bases de données de clés/valeurs, de documents et de graphiques. Utilisez la bibliothèque de client de l’API SQL Azure Cosmos DB pour .NET afin d’effectuer les opérations suivantes :
+Azure Cosmos DB est la base de données NoSQL rapide de Microsoft avec des API ouvertes pour toute échelle. Vous pouvez utiliser Azure Cosmos DB pour créer et interroger rapidement des bases de données de clés/valeurs, de documents et de graphiques. Utilisez la bibliothèque de client de l’API SQL Azure Cosmos DB pour .NET afin d’effectuer les opérations suivantes :
 
 * Créer une base de données et un conteneur Azure Cosmos
 * Ajouter des exemples de données au conteneur
@@ -53,7 +56,7 @@ Si vous disposez de votre propre abonnement Azure ou si vous avez créé un abon
 
 Vous pouvez utiliser Azure Cloud Shell pour créer le compte Azure Cosmos. Azure Cloud Shell est un interpréteur de commandes interactif, authentifié et accessible par navigateur qui permet de gérer les ressources Azure. Il vous donne la possibilité de choisir l'expérience d'interpréteur de commandes la plus adaptée à votre façon de travailler, qu'il s'agisse de Bash ou de PowerShell. Pour ce guide de démarrage rapide, choisissez le mode **Bash**. Azure Cloud Shell nécessite également un compte de stockage. Vous pouvez en créer un quand vous y êtes invité.
 
-Sélectionnez le bouton **Essayer** en regard du code suivant, choisissez le mode **Bash**, sélectionnez **Créer un compte de stockage**, puis connectez-vous à Cloud Shell. Ensuite, copiez et collez le code suivant dans Azure Cloud Shell, puis exécutez-le. Le nom du compte Azure Cosmos doit être globalement unique. Veillez à mettre à jour la valeur `mysqlapicosmosdb` avant d’exécuter la commande.
+Sélectionnez le bouton **Essayer** en regard du code suivant, choisissez le mode **Bash** , sélectionnez **Créer un compte de stockage** , puis connectez-vous à Cloud Shell. Ensuite, copiez et collez le code suivant dans Azure Cloud Shell, puis exécutez-le. Le nom du compte Azure Cosmos doit être globalement unique. Veillez à mettre à jour la valeur `mysqlapicosmosdb` avant d’exécuter la commande.
 
 ```azurecli-interactive
 
@@ -69,7 +72,7 @@ az group create \
     --name $resourceGroupName \
     --location $location
 
-# Create a SQL API Cosmos DB account with session consistency and multi-master enabled
+# Create a SQL API Cosmos DB account with session consistency and multi-region writes enabled
 az cosmosdb create \
     --resource-group $resourceGroupName \
     --name $accountName \
@@ -126,7 +129,7 @@ L’exemple d’application doit s’authentifier auprès de votre compte Azure 
 
 1. Accédez à votre compte Azure Cosmos.
 
-1. Ouvrez le volet **Clés** et copiez l’**URI** et la **CLÉ PRIMAIRE** de votre compte. Vous allez ajouter les valeur d’URI et de clés à une variable d’environnement à l’étape suivante.
+1. Ouvrez le volet **Clés** et copiez l’ **URI** et la **CLÉ PRIMAIRE** de votre compte. Vous allez ajouter les valeur d’URI et de clés à une variable d’environnement à l’étape suivante.
 
 ## <a name="object-model"></a><a id="object-model"></a>Modèle objet
 
@@ -137,7 +140,7 @@ Avant de commencer à générer l’application, examinons la hiérarchie des re
 * Containers 
 * Éléments
 
-Pour en savoir plus sur la hiérarchie des différentes entités, voir [Utilisation de bases de données, conteneurs et éléments dans Azure Cosmos DB](databases-containers-items.md). Vous allez utiliser les classes .NET suivantes pour interagir avec ces ressources :
+Pour en savoir plus sur la hiérarchie des différentes entités, voir [Utilisation de bases de données, conteneurs et éléments dans Azure Cosmos DB](account-databases-containers-items.md). Vous allez utiliser les classes .NET suivantes pour interagir avec ces ressources :
 
 * CosmosClient : cette classe fournit une représentation logique côté client pour le service Azure Cosmos DB. Ce client est utilisé pour configurer et exécuter des requêtes sur le service.
 * CreateDatabaseIfNotExistsAsync : cette méthode obtient ou, si nécessaire, crée une ressource de base de données en tant qu’opération asynchrone. 

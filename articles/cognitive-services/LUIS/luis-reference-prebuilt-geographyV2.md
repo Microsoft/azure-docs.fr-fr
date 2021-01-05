@@ -3,20 +3,18 @@ title: Entité prédéfinie geographyV2 - LUIS
 titleSuffix: Azure Cognitive Services
 description: Cet article contient des informations sur l’entité prédéfinie geographyV2 dans Language Understanding (LUIS).
 services: cognitive-services
-author: diberry
 manager: nitinme
 ms.custom: seodec18
 ms.service: cognitive-services
 ms.subservice: language-understanding
 ms.topic: reference
 ms.date: 10/04/2019
-ms.author: diberry
-ms.openlocfilehash: b2b2b0781abce59628660b669f43110bf91b15e6
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: ad6fd62178ec8e987e1e3b6e05cc961bbe15e377
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78273494"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91541955"
 ---
 # <a name="geographyv2-prebuilt-entity-for-a-luis-app"></a>Entité prédéfinie geographyV2 pour une application LUIS
 L’entité prédéfinie geographyV2 détecte les emplacements géographiques. Étant donné que cette entité est déjà entraînée, vous n’avez pas besoin d’ajouter d’exemples d’énoncés contenant geographyV2 aux intentions de l’application. L’entité geographyV2 est prise en charge pour la [culture](luis-reference-prebuilt-entities.md) Anglais.

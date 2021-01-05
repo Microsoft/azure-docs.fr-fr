@@ -8,14 +8,14 @@ editor: ''
 ms.service: data-factory
 ms.workload: data-services
 ms.topic: conceptual
-ms.date: 01/16/2020
+ms.date: 07/06/2020
 ms.author: jingwang
-ms.openlocfilehash: d47450f3252074d3bae8df97766bf8858fca5972
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 819f84eeb7540050fb001111690fb6d2ba484b2a
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81416594"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96452314"
 ---
 # <a name="managed-identity-for-data-factory"></a>Identité managée pour Data Factory
 
@@ -32,7 +32,7 @@ Lors de la création d’une fabrique de données, une identité managée est cr
 L’identité managée pour Data Factory bénéficie des fonctionnalités suivantes :
 
 - [Stocker des informations d’identification dans Azure Key Vault](store-credentials-in-key-vault.md), pour laquelle l’identité managée de fabrique de données est utilisée pour l’authentification auprès d’Azure Key Vault.
-- Connecteurs, notamment [Stockage Blob Azure](connector-azure-blob-storage.md), [Azure Data Lake Storage Gen1](connector-azure-data-lake-store.md), [Azure Data Lake Storage Gen2](connector-azure-data-lake-storage.md), [Azure SQL Database](connector-azure-sql-database.md) et [Azure SQL Data Warehouse](connector-azure-sql-data-warehouse.md).
+- Connecteurs, notamment [Stockage Blob Azure](connector-azure-blob-storage.md), [Azure Data Lake Storage Gen1](connector-azure-data-lake-store.md), [Azure Data Lake Storage Gen2](connector-azure-data-lake-storage.md), [Azure SQL Database](connector-azure-sql-database.md) et [Azure Synapse Analytics](connector-azure-sql-data-warehouse.md).
 - [Activité web](control-flow-web-activity.md).
 
 ## <a name="generate-managed-identity"></a>Générer une identité managée
@@ -57,7 +57,7 @@ Si vous constatez que votre fabrique de données n’est pas associée à une id
 
 ### <a name="generate-managed-identity-using-powershell"></a>Générer l’identité managée à l’aide de PowerShell
 
-Appelez la commande **Set-AzDataFactoryV2** à nouveau, vous verrez alors les champs « identity » qui viennent d’être générés :
+Appelez la commande **Set-AzDataFactoryV2**, vous verrez alors les champs « identity » qui viennent d’être générés :
 
 ```powershell
 PS C:\WINDOWS\system32> Set-AzDataFactoryV2 -ResourceGroupName <resourceGroupName> -Name <dataFactoryName> -Location <region>
@@ -79,7 +79,7 @@ Appelez ensuite l’API avec la section« identity » dans le corps de la requ
 PATCH https://management.azure.com/subscriptions/<subsID>/resourceGroups/<resourceGroupName>/providers/Microsoft.DataFactory/factories/<data factory name>?api-version=2018-06-01
 ```
 
-**Corps de la requête** : ajoutez "identity": { "type": "SystemAssigned" }.
+**Corps de la requête** : add "identity": { "type": "SystemAssigned" }.
 
 ```json
 {
@@ -117,7 +117,7 @@ PATCH https://management.azure.com/subscriptions/<subsID>/resourceGroups/<resour
 
 ### <a name="generate-managed-identity-using-an-azure-resource-manager-template"></a>Générer l’identité managée avec un modèle Azure Resource Manager
 
-**Modèle** : ajouter "identity": { "type": "SystemAssigned" }.
+**Modèle** : add "identity": { "type": "SystemAssigned" }.
 
 ```json
 {
@@ -191,10 +191,65 @@ Id                    : 765ad4ab-XXXX-XXXX-XXXX-51ed985819dc
 Type                  : ServicePrincipal
 ```
 
+### <a name="retrieve-managed-identity-using-rest-api"></a>Récupérer l’identité managée à l’aide d’API REST
+
+L'ID de principal et l'ID de locataire de l'identité managée seront renvoyés lorsque vous aurez obtenu une fabrique de données spécifique, comme illustré ci-dessous.
+
+Appeler l’API ci-dessous dans la requête :
+
+```
+GET https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}?api-version=2018-06-01
+```
+
+**Réponse**: Vous obtiendrez une réponse comme indiqué dans l’exemple ci-dessous. La section « identité » est remplie en conséquence.
+
+```json
+{
+    "name":"<dataFactoryName>",
+    "identity":{
+        "type":"SystemAssigned",
+        "principalId":"554cff9e-XXXX-XXXX-XXXX-90c7d9ff2ead",
+        "tenantId":"72f988bf-XXXX-XXXX-XXXX-2d7cd011db47"
+    },
+    "id":"/subscriptions/<subscriptionId>/resourceGroups/<resourceGroupName>/providers/Microsoft.DataFactory/factories/<dataFactoryName>",
+    "type":"Microsoft.DataFactory/factories",
+    "properties":{
+        "provisioningState":"Succeeded",
+        "createTime":"2020-02-12T02:22:50.2384387Z",
+        "version":"2018-06-01",
+        "factoryStatistics":{
+            "totalResourceCount":0,
+            "maxAllowedResourceCount":0,
+            "factorySizeInGbUnits":0,
+            "maxAllowedFactorySizeInGbUnits":0
+        }
+    },
+    "eTag":"\"03006b40-XXXX-XXXX-XXXX-5e43617a0000\"",
+    "location":"<region>",
+    "tags":{
+
+    }
+}
+```
+
+> [!TIP] 
+> Pour récupérer l’identité managée à partir d’un modèle ARM, ajoutez une section **sorties** dans le JSON ARM :
+
+```json
+{
+    "outputs":{
+        "managedIdentityObjectId":{
+            "type":"string",
+            "value":"[reference(resourceId('Microsoft.DataFactory/factories', parameters('<dataFactoryName>')), '2018-06-01', 'Full').identity.principalId]"
+        }
+    }
+}
+```
+
 ## <a name="next-steps"></a>Étapes suivantes
-Consultez les rubriques suivantes qui expliquent quand et comment utiliser l’identité managée de fabrique de données :
+Consultez les rubriques suivantes qui expliquent quand et comment utiliser l’identité managée de fabrique de données :
 
 - [Stocker des informations d’identification dans Azure Key Vault](store-credentials-in-key-vault.md)
 - [Copier des données vers ou depuis Azure Data Lake Storage Gen1 à l’aide d’Azure Data Factory](connector-azure-data-lake-store.md)
 
-Pour plus d’informations sur les identités managées des ressources Azure, sur lesquelles l’identité managée de fabrique de données est basée, consultez [Que sont les identités managées pour les ressources Azure ?](/azure/active-directory/managed-identities-azure-resources/overview). 
+Pour plus d’informations sur les identités managées des ressources Azure, sur lesquelles l’identité managée de fabrique de données est basée, consultez [Que sont les identités managées pour les ressources Azure ?](../active-directory/managed-identities-azure-resources/overview.md).

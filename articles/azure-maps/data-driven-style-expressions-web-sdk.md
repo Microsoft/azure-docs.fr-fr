@@ -1,6 +1,6 @@
 ---
 title: Expressions de style basées sur les données dans le SDK web Azure Maps | Microsoft Azure Maps
-description: Dans cet article, vous découvrirez comment utiliser des expressions de style basées sur les données dans le Kit de développement logiciel (SDK) web Microsoft Azure Maps.
+description: En savoir plus sur les expressions de style basées sur les données. Découvrez comment utiliser ces expressions dans le Kit de développement logiciel (SDK) web Azure Maps pour ajuster les styles dans les cartes.
 author: rbrundritt
 ms.author: richbrun
 ms.date: 4/4/2019
@@ -8,13 +8,13 @@ ms.topic: conceptual
 ms.service: azure-maps
 services: azure-maps
 manager: cpendleton
-ms.custom: codepen
-ms.openlocfilehash: d6009a655adcc26ebef31588eff2332a05f3a001
-ms.sourcegitcommit: 6397c1774a1358c79138976071989287f4a81a83
+ms.custom: codepen, devx-track-js
+ms.openlocfilehash: 8f27f7532d074428fafe74e4a453628f5c61d2b8
+ms.sourcegitcommit: 4064234b1b4be79c411ef677569f29ae73e78731
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "80804722"
+ms.lasthandoff: 10/28/2020
+ms.locfileid: "92895968"
 ---
 # <a name="data-driven-style-expressions-web-sdk"></a>Expressions de style basé sur les données (SDK web)
 
@@ -72,7 +72,12 @@ Tous les exemples de ce document utilisent la fonctionnalité suivante pour illu
         "subTitle": "Building 40", 
         "temperature": 72,
         "title": "Cafeteria", 
-        "zoneColor": "red"
+        "zoneColor": "red",
+        "abcArray": ['a', 'b', 'c'],
+        "array2d": [['a', 'b'], ['x', 'y']],
+        "_style": {
+            "fillColor": 'red'
+        }
     }
 }
 ```
@@ -93,6 +98,8 @@ Les expressions de données permettent d’accéder aux données de propriété 
 | `['length', string | array]` | nombre | Obtient la longueur d’une chaîne ou d’un tableau. |
 | `['in', boolean | string | number, array]` | boolean | Détermine si un élément existe dans un tableau |
 | `['in', substring, string]` | boolean | Détermine si une sous-chaîne existe dans une chaîne |
+| `['index-of', boolean | string | number, array | string]`<br/><br/>`['index-of', boolean | string | number, array | string, number]` | nombre | Retourne la première position à laquelle un élément se trouve dans un tableau ou à laquelle une sous-chaîne se trouve dans une chaîne, ou `-1` si l’entrée est introuvable. Accepte un index facultatif à partir duquel commencer la recherche. |
+| `['slice', array | string, number]`<br/><br/>`['slice', array | string, number, number]` | `string` \| tableau | Retourne un élément d’un tableau ou une sous-chaîne d’une chaîne à partir d’un index de début spécifié, ou entre un index de début et un index de fin, s’il est défini. La valeur renvoyée comprend l’index de début, mais pas l’index de fin. |
 
 **Exemples**
 
@@ -136,6 +143,37 @@ var layer = new atlas.layer.BubbleLayer(datasource, null, {
 ```
 
 De même, le contour des polygones s’affichera dans les couches de lignes. Pour désactiver ce comportement dans une couche de lignes, ajoutez un filtre qui autorise uniquement les fonctionnalités `LineString` et `MultiLineString`.  
+
+Voici quelques exemples supplémentaires d’utilisation des expressions de données :
+
+```javascript
+//Get item [2] from an array "properties.abcArray[1]" = "c"
+['at', 2, ['get', 'abcArray']]
+
+//Get item [0][1] from a 2D array "properties.array2d[0][1]" = "b"
+['at', 1, ['at', 0, ['get', 'array2d']]]
+
+//Check to see if a value is in an array "properties.abcArray.indexOf('a') !== -1" = true
+['in', 'a', ['get', 'abcArray']]
+
+//Gets the index of the value 'b' in an array "properties.abcArray.indexOf('b')" = 1
+['index-of', 'b', ['get', 'abcArray']]
+
+//Get the length of an array "properties.abcArray.length" = 3
+['length', ['get', 'abcArray']]
+
+//Get the value of a subproperty "properties._style.fillColor" = "red"
+['get', 'fillColor', ['get', '_style']]
+
+//Check that "fillColor" exists as a subproperty of "_style".
+['has', 'fillColor', ['get', '_style']]
+
+//Slice an array starting at index 2 "properties.abcArray.slice(2)" = ['c']
+['slice', ['get', 'abcArray'], 2]
+
+//Slice a string from index 0 to index 4 "properties.entityType.slice(0, 4)" = 'rest'
+['slice', ['get', 'entityType'], 0, 4]
+```
 
 ## <a name="math-expressions"></a>Expressions mathématiques
 
@@ -198,8 +236,8 @@ Lors de la comparaison de valeurs, la comparaison est strictement typée. Les va
 
 | Expression | Type de retour | Description |
 |------------|-------------|-------------|
-| `['! ', boolean]` | boolean | Négation logique. Retourne `true` si l’entrée est `false`, et `false` si l’entrée est `true`. |
-| `['!= ', value, value]` | boolean | Retourne `true` si les valeurs d’entrée ne sont pas égales ; `false` dans le cas contraire. |
+| `['!', boolean]` | boolean | Négation logique. Retourne `true` si l’entrée est `false`, et `false` si l’entrée est `true`. |
+| `['!=', value, value]` | boolean | Retourne `true` si les valeurs d’entrée ne sont pas égales ; `false` dans le cas contraire. |
 | `['<', value, value]` | boolean | Retourne `true` si la première entrée est strictement inférieure à la deuxième ; `false` dans le cas contraire. Les arguments doivent obligatoirement être tous les deux des chaînes ou des nombres. |
 | `['<=', value, value]` | boolean | Retourne `true` si la première entrée est inférieure ou égale à la deuxième ; `false` dans le cas contraire. Les arguments doivent obligatoirement être tous les deux des chaînes ou des nombres. |
 | `['==', value, value]` | boolean | Retourne `true` si les valeurs d’entrée sont égales ; `false` dans le cas contraire. Les arguments doivent obligatoirement être tous les deux des chaînes ou des nombres. |
@@ -410,7 +448,7 @@ Les expressions du type fournissent des outils permettant de tester et de conver
 | `['typeof', value]` | string | Retourne une chaîne décrivant le type de la valeur donnée. |
 
 > [!TIP]
-> Si un message d’erreur semblable à `Expression name must be a string, but found number instead. If you wanted a literal array, use ["literal", [...]].` s’affiche dans la console du navigateur, alors cela signifie qu’il existe, quelque part dans votre code, une expression comportant un tableau qui n’a pas de chaîne pour sa première valeur. Si vous voulez que l’expression retourne un tableau, wrappez le tableau avec l’expression `literal`. L’exemple suivant définit l’option d’icône `offset` d’une couche de symboles, qui doit être un tableau contenant deux nombres, à l’aide d’une expression `match` permettant de choisir entre deux valeurs de décalage en fonction de la valeur de la propriété `entityType` de la fonctionnalité de point.
+> Si un message d’erreur semblable à `Expression name must be a string, but found number instead. If you wanted a literal array, use ["literal", [...]].` s’affiche dans la console du navigateur, cela signifie qu’il existe quelque part dans votre code une expression comportant un tableau qui n’a pas de chaîne pour sa première valeur. Si vous voulez que l’expression retourne un tableau, wrappez le tableau avec l’expression `literal`. L’exemple suivant définit l’option d’icône `offset` d’une couche de symboles, qui doit être un tableau contenant deux nombres, à l’aide d’une expression `match` permettant de choisir entre deux valeurs de décalage en fonction de la valeur de la propriété `entityType` de la fonctionnalité de point.
 >
 > ```javascript
 > var layer = new atlas.layer.SymbolLayer(datasource, null, {
@@ -437,13 +475,13 @@ Les expressions de couleur simplifient la création et la manipulation de valeur
 
 | Expression | Type de retour | Description |
 |------------|-------------|-------------|
-| `['rgb', number, number, number]` | color | Crée une valeur de couleur à partir des composants *red*, *green* et *blue* dont les valeurs doivent être comprises entre `0` et `255`, et d’un composant alpha ayant la valeur `1`. Si l’un des composants est hors limites, l’expression est une erreur. |
-| `['rgba', number, number, number, number]` | color | Crée une valeur de couleur à partir des composants *red*, *green*, *blue* dont les valeurs doivent être comprises entre `0` et `255`, et d’un composant alpha dont la valeur est comprise entre `0` et `1`. Si l’un des composants est hors limites, l’expression est une erreur. |
-| `['to-rgba']` | \[nombre, nombre, nombre, nombre\] | Retourne un tableau à quatre éléments contenant les composants *red*, *green*, *blue* et *alpha* de la couleur d’entrée, dans cet ordre. |
+| `['rgb', number, number, number]` | color | Crée une valeur de couleur à partir des composants *red* , *green* et *blue* dont les valeurs doivent être comprises entre `0` et `255`, et d’un composant alpha ayant la valeur `1`. Si l’un des composants est hors limites, l’expression est une erreur. |
+| `['rgba', number, number, number, number]` | color | Crée une valeur de couleur à partir des composants *red* , *green* , *blue* dont les valeurs doivent être comprises entre `0` et `255`, et d’un composant alpha dont la valeur est comprise entre `0` et `1`. Si l’un des composants est hors limites, l’expression est une erreur. |
+| `['to-rgba']` | \[nombre, nombre, nombre, nombre\] | Retourne un tableau à quatre éléments contenant les composants *red* , *green* , *blue* et *alpha* de la couleur d’entrée, dans cet ordre. |
 
 **Exemple**
 
-L’exemple suivant crée une valeur de couleur RVB qui a une valeur *red* égale à `255` et des valeurs *green* et *blue* calculées en multipliant `2.5` par la valeur de la propriété `temperature`. Quand la température change, la couleur est remplacée par différentes nuances de rouge (*red*).
+L’exemple suivant crée une valeur de couleur RVB qui a une valeur *red* égale à `255` et des valeurs *green* et *blue* calculées en multipliant `2.5` par la valeur de la propriété `temperature`. Quand la température change, la couleur est remplacée par différentes nuances de rouge ( *red* ).
 
 ```javascript
 var layer = new atlas.layer.BubbleLayer(datasource, null, {
@@ -609,7 +647,7 @@ Expressions spéciales qui s’appliquent uniquement à des couches spécifiques
 
 ### <a name="heat-map-density-expression"></a>Expression de densité de carte thermique
 
-Une expression de densité de carte thermique, qui est définie sous la forme `['heatmap-density']`, récupère la valeur de densité de carte thermique pour chaque pixel d’une couche de carte thermique. Cette valeur est un nombre compris entre `0` et `1`. Elle est utilisée en combinaison avec une expression `interpolation` ou `step` pour définir le dégradé de couleurs utilisé pour mettre en couleur la carte thermique. Cette expression peut uniquement être utilisée dans l’[option color](https://docs.microsoft.com/javascript/api/azure-maps-control/atlas.heatmaplayeroptions?view=azure-iot-typescript-latest#color) de la couche de carte thermique.
+Une expression de densité de carte thermique, qui est définie sous la forme `['heatmap-density']`, récupère la valeur de densité de carte thermique pour chaque pixel d’une couche de carte thermique. Cette valeur est un nombre compris entre `0` et `1`. Elle est utilisée en combinaison avec une expression `interpolation` ou `step` pour définir le dégradé de couleurs utilisé pour mettre en couleur la carte thermique. Cette expression peut uniquement être utilisée dans l’[option color](/javascript/api/azure-maps-control/atlas.heatmaplayeroptions#color) de la couche de carte thermique.
 
 > [!TIP]
 > La couleur à l’index 0 dans une expression d’interpolation ou la couleur par défaut d’une expression d’étape définit la couleur des zones où il n’existe aucune donnée. La couleur à l’index 0 peut être utilisée pour définir une couleur d’arrière-plan. La plupart des utilisateurs préfèrent définir cette valeur sur une couleur noire transparente ou semi-transparente.
@@ -653,7 +691,7 @@ Pour plus d’informations, consultez la documentation [Ajouter une couche de ca
 
 ### <a name="line-progress-expression"></a>Expression de progression des lignes
 
-Une expression de progression des lignes, qui est définie sous la forme `['line-progress']`, récupère la progression le long d’une ligne avec dégradé dans une couche de lignes. Cette valeur est un nombre compris entre 0 et 1. Elle est utilisée en association avec une expression `interpolation` ou `step`. Cette expression peut uniquement être utilisée avec l’[option strokeGradient]( https://docs.microsoft.com/javascript/api/azure-maps-control/atlas.linelayeroptions?view=azure-iot-typescript-latest#strokegradient) de la couche de lignes. 
+Une expression de progression des lignes, qui est définie sous la forme `['line-progress']`, récupère la progression le long d’une ligne avec dégradé dans une couche de lignes. Cette valeur est un nombre compris entre 0 et 1. Elle est utilisée en association avec une expression `interpolation` ou `step`. Cette expression peut uniquement être utilisée avec l’[option strokeGradient]( https://docs.microsoft.com/javascript/api/azure-maps-control/atlas.linelayeroptions#strokegradient) de la couche de lignes. 
 
 > [!NOTE]
 > L’option `strokeGradient` de la couche de lignes exige que l’option `lineMetrics` de la source de données soit définie sur `true`.
@@ -779,7 +817,7 @@ var layer = new atlas.layer.SymbolLayer(datasource, null, {
         textField: [
             'number-format', 
             ['get', 'revenue'], 
-            { ‘currency’: 'USD' }
+            { ‘currency': 'USD' }
         ],
 
         offset: [0, 0.75]
@@ -916,16 +954,16 @@ Pour obtenir plus d’exemples de code qui implémentent des expressions, consul
 En savoir plus sur les options de couche qui prennent en charge des expressions :
 
 > [!div class="nextstepaction"] 
-> [BubbleLayerOptions](https://docs.microsoft.com/javascript/api/azure-maps-control/atlas.bubblelayeroptions?view=azure-iot-typescript-latest)
+> [BubbleLayerOptions](/javascript/api/azure-maps-control/atlas.bubblelayeroptions)
 
 > [!div class="nextstepaction"] 
-> [HeatMapLayerOptions](https://docs.microsoft.com/javascript/api/azure-maps-control/atlas.heatmaplayeroptions?view=azure-iot-typescript-latest)
+> [HeatMapLayerOptions](/javascript/api/azure-maps-control/atlas.heatmaplayeroptions)
 
 > [!div class="nextstepaction"] 
-> [LineLayerOptions](https://docs.microsoft.com/javascript/api/azure-maps-control/atlas.linelayeroptions?view=azure-iot-typescript-latest)
+> [LineLayerOptions](/javascript/api/azure-maps-control/atlas.linelayeroptions)
 
 > [!div class="nextstepaction"] 
-> [PolygonLayerOptions](https://docs.microsoft.com/javascript/api/azure-maps-control/atlas.polygonlayeroptions?view=azure-iot-typescript-latest)
+> [PolygonLayerOptions](/javascript/api/azure-maps-control/atlas.polygonlayeroptions)
 
 > [!div class="nextstepaction"] 
-> [SymbolLayerOptions](https://docs.microsoft.com/javascript/api/azure-maps-control/atlas.symbollayeroptions?view=azure-iot-typescript-latest) 
+> [SymbolLayerOptions](/javascript/api/azure-maps-control/atlas.symbollayeroptions)

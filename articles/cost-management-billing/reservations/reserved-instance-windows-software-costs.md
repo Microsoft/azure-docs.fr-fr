@@ -5,15 +5,16 @@ author: yashesvi
 ms.reviewer: yashar
 tags: billing
 ms.service: cost-management-billing
+ms.subservice: reservations
 ms.topic: conceptual
 ms.date: 02/13/2020
 ms.author: banders
-ms.openlocfilehash: 3480f60b354de94f604dab1ea1f16d3b0ad59379
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 625c40ea17cf20449f1be241a1605a80bf6a73f1
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "77199345"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96352998"
 ---
 # <a name="software-costs-not-included-with-azure-reserved-vm-instances"></a>Coûts des logiciels non inclus dans les instances Azure Reserved VM Instances
 
@@ -66,7 +67,7 @@ Vous pouvez obtenir le coût de chacun de ces compteurs via l’API Azure RateCa
 Pour plus d’informations sur les réservations pour Azure, consultez les articles suivants :
 
 - [Qu’est-ce qu’une réservation Azure ?](save-compute-costs-reservations.md)
-- [Prépayer des machines virtuelles avec des instances de machines virtuelles réservées Azure](../../virtual-machines/windows/prepay-reserved-vm-instances.md)
+- [Prépayer des machines virtuelles avec des instances de machines virtuelles réservées Azure](../../virtual-machines/prepay-reserved-vm-instances.md)
 - [Gérer les réservations pour Azure](manage-reserved-vm-instance.md)
 - [Comprendre comment la remise de réservation est appliquée](../manage/understand-vm-reservation-charges.md)
 - [Comprendre l’utilisation d’une réservation pour votre abonnement avec paiement à l’utilisation](understand-reserved-instance-usage.md)

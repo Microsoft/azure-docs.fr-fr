@@ -3,17 +3,19 @@ title: Interrogation de données géospatiales avec Azure Cosmos DB
 description: Interrogation de données spatiales avec Azure Cosmos DB
 author: timsander1
 ms.service: cosmos-db
+ms.subservice: cosmosdb-sql
 ms.topic: conceptual
 ms.date: 02/20/2020
 ms.author: tisande
-ms.openlocfilehash: 08b12bd9d35aaa61c79d35a55068983cdc0f1b83
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: bb9a0351b6f1de47f3687995c65060a23bdb2874
+ms.sourcegitcommit: fa90cd55e341c8201e3789df4cd8bd6fe7c809a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77566458"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93336110"
 ---
 # <a name="querying-geospatial-data-with-azure-cosmos-db"></a>Interrogation de données géospatiales avec Azure Cosmos DB
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
 
 Cet article explique comment interroger des données géospatiales dans Azure Cosmos DB avec SQL et LINQ. Le stockage des données géospatiales et leur accès sont actuellement pris en charge par les comptes d’API SQL Azure Cosmos DB uniquement. Azure Cosmos DB prend en charge les fonctions intégrées Open Geospatial Consortium (OGC) suivantes pour les requêtes géospatiales. Pour plus d’informations sur l’ensemble complet de fonctions intégrées dans le langage SQL, consultez [Fonctions système de requête dans Azure Cosmos DB](sql-query-system-functions.md).
 
@@ -36,7 +38,7 @@ Les fonctions spatiales peuvent être utilisées pour effectuer des requêtes de
 ```sql
     SELECT f.id
     FROM Families f
-    WHERE ST_DISTANCE(f.location, {'type': 'Point', 'coordinates':[31.9, -4.8]}) < 30000
+    WHERE ST_DISTANCE(f.location, {"type": "Point", "coordinates":[31.9, -4.8]}) < 30000
 ```
 
 **Résultats**
@@ -59,8 +61,8 @@ Les arguments de polygone dans `ST_WITHIN` ne peuvent contenir qu’un seul cerc
     SELECT *
     FROM Families f
     WHERE ST_WITHIN(f.location, {
-        'type':'Polygon',
-        'coordinates': [[[31.8, -5], [32, -5], [32, -4.7], [31.8, -4.7], [31.8, -5]]]
+        "type":"Polygon",
+        "coordinates": [[[31.8, -5], [32, -5], [32, -4.7], [31.8, -4.7], [31.8, -5]]]
     })
 ```
 
@@ -84,7 +86,7 @@ Azure Cosmos DB prend également en charge les requêtes inversées. Vous pouvez
 ```sql
     SELECT *
     FROM Areas a
-    WHERE ST_WITHIN({'type': 'Point', 'coordinates':[31.9, -4.8]}, a.location)
+    WHERE ST_WITHIN({"type": "Point", "coordinates":[31.9, -4.8]}, a.location)
 ```
 
 **Résultats**

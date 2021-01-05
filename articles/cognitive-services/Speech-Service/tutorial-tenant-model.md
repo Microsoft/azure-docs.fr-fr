@@ -1,30 +1,31 @@
 ---
 title: Créer un modèle de locataire (préversion) – Service Speech
 titleSuffix: Azure Cognitive Services
-description: Générez automatiquement un modèle de locataire sécurisé et compatible (Custom Speech avec données Office 365) qui utilise vos données Office 365 pour fournir une reconnaissance vocale optimale pour les termes propres à votre organisation.
+description: Générez automatiquement un modèle de locataire sécurisé et compatible (Custom Speech avec données Microsoft 365) qui utilise vos données Microsoft 365 pour fournir une reconnaissance vocale optimale pour les termes propres à votre organisation.
 services: cognitive-services
 author: erhopf
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: speech-service
 ms.topic: tutorial
-ms.date: 02/10/2020
+ms.date: 06/25/2020
 ms.author: erhopf
-ms.openlocfilehash: a83ed5c9cec994c1bc4cadd5cf6208c159823658
-ms.sourcegitcommit: 9ee0cbaf3a67f9c7442b79f5ae2e97a4dfc8227b
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 48cde51ee9941f705aa848d121c419a8f0c9ad1a
+ms.sourcegitcommit: 10d00006fec1f4b69289ce18fdd0452c3458eca5
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77469015"
+ms.lasthandoff: 11/21/2020
+ms.locfileid: "95013710"
 ---
 # <a name="tutorial-create-a-tenant-model-preview"></a>Tutoriel : Créer un modèle de locataire (préversion)
 
-Tenant Model (Custom Speech avec données Office 365) est un service d’activation pour les clients d’entreprise Office 365 qui génère automatiquement un modèle de reconnaissance vocale personnalisé à partir des données Office 365 de votre organisation. Le modèle est optimisé pour les termes techniques, le jargon et les noms de personnes, le tout d’une manière sécurisée et conforme.
+Tenant Model (Custom Speech avec données Microsoft 365) est un service d’activation pour les clients d’entreprise Microsoft 365 qui génère automatiquement un modèle de reconnaissance vocale personnalisé à partir des données Microsoft 365 de votre organisation. Le modèle est optimisé pour les termes techniques, le jargon et les noms de personnes, le tout d’une manière sécurisée et conforme.
 
 > [!IMPORTANT]
-> Si votre organisation s’inscrit via le service Tenant Model, il se peut que le service Speech accède au modèle de langage de votre organisation. Un modèle est généré à partir d’e-mails et de documents de groupe public Office 365 qui peuvent être consultés par quiconque au sein de votre organisation. L’administrateur Office 365 de votre organisation peut activer ou désactiver l’utilisation du modèle de langage à l’échelle de l’organisation à partir du portail d’administration Office 365.
+> Si votre organisation s’inscrit via le service Tenant Model, il se peut que le service Speech accède au modèle de langage de votre organisation. Un modèle est généré à partir d’e-mails et de documents de groupe public Microsoft 365 qui peuvent être consultés par quiconque au sein de votre organisation. L’administrateur de votre organisation peut activer ou désactiver l’utilisation du modèle de langage à l’échelle de l’organisation à partir du portail d’administration.
 
-Ce didacticiel vous montre comment effectuer les opérations suivantes :
+Dans ce tutoriel, vous allez apprendre à :
 
 > [!div class="checklist"]
 > * S’inscrire à Tenant Model à partir du centre d’administration Microsoft 365
@@ -35,7 +36,7 @@ Ce didacticiel vous montre comment effectuer les opérations suivantes :
 
 ## <a name="enroll-in-the-tenant-model-service"></a>S’inscrire au service Tenant Model
 
-Avant de pouvoir déployer votre modèle de locataire, vous devez vous être inscrit au service Tenant Model. L’inscription s’effectue dans le centre d’administration Microsoft 365 et ne peut être réalisée que par votre administrateur Microsoft 365.
+Avant de pouvoir déployer votre modèle de locataire, vous devez vous être inscrit au service Tenant Model. L’inscription s’effectue dans le centre d’administration Microsoft 365 et ne peut être réalisée que par votre administrateur.
 
 1. Connectez-vous au [centre d’administration Microsoft 365](https://admin.microsoft.com).
 
@@ -68,7 +69,7 @@ Pour utiliser votre modèle de locataire avec le kit SDK Speech, vous avez besoi
 
 ## <a name="create-a-language-model"></a>Créer un modèle de langage
 
-Dès lors que votre administrateur a activé Tenant Model pour votre organisation, vous pouvez créer un modèle de langage basé sur vos données Office 365.
+Dès lors que votre administrateur a activé Tenant Model pour votre organisation, vous pouvez créer un modèle de langage basé sur vos données Microsoft 365.
 
 1. Connectez-vous à [Speech Studio](https://speech.microsoft.com/).
 1. En haut à droite, sélectionnez **Settings** (icône d’engrenage), puis sélectionnez **Tenant Model settings** (Paramètres Tenant Model).
@@ -78,7 +79,7 @@ Dès lors que votre administrateur a activé Tenant Model pour votre organisatio
    Speech Studio affiche un message qui vous indique si vous êtes apte à créer un modèle de locataire.
 
    > [!NOTE]
-   > Les clients d’entreprise Office 365 d’Amérique du Nord sont éligibles à la création d’un modèle de locataire (anglais). Si vous êtes un client Customer Lockbox (CLB), Customer Key (CK) ou Office 365 Government, cette fonctionnalité n’est pas disponible. Pour déterminer si vous êtes un client Customer Lockbox ou Customer Key, consultez :
+   > Les clients d’entreprise d’Amérique du Nord sont éligibles à la création d’un modèle de locataire (anglais). Si vous êtes un client Customer Lockbox (CLB), Customer Key (CK) ou Office 365 Government, cette fonctionnalité n’est pas disponible. Pour déterminer si vous êtes un client Customer Lockbox ou Customer Key, consultez :
    > * [Customer Lockbox](/microsoft-365/compliance/customer-lockbox-requests)
    > * [Customer Key](/microsoft-365/compliance/customer-key-overview)
    > * [Office 365 Government](https://www.microsoft.com/microsoft-365/government)
@@ -104,7 +105,7 @@ Une fois que l’instance de votre modèle de locataire est prête, déployez-la
 
 Maintenant que vous avez déployé votre modèle, vous pouvez l’utiliser avec le Kit de développement logiciel (SDK) Speech. Dans cette section, vous allez utiliser un exemple de code pour appeler le service Speech en utilisant l’authentification Azure Active Directory (Azure AD).
 
-Examinons le code que vous utiliserez pour appeler le Kit de développement logiciel (SDK) Speech dans C#. Dans cet exemple, vous allez procéder à une reconnaissance vocale en utilisant votre modèle de locataire. Ce guide suppose que votre plateforme est déjà configurée. Si vous avez besoin d’aide pour la configuration, consultez [Démarrage rapide : Reconnaissance vocale, C# (.NET Core)](quickstarts/speech-to-text-from-microphone.md?pivots=programming-language-csharp&tabs=dotnetcore).
+Examinons le code que vous utiliserez pour appeler le Kit de développement logiciel (SDK) Speech dans C#. Dans cet exemple, vous allez procéder à une reconnaissance vocale en utilisant votre modèle de locataire. Ce guide suppose que votre plateforme est déjà configurée. Si vous avez besoin d’aide pour la configuration, consultez [Démarrage rapide : Reconnaissance vocale, C# (.NET Core)](./get-started-speech-to-text.md?pivots=programming-language-csharp&tabs=dotnetcore).
 
 Copiez ce code dans votre projet :
 
@@ -301,7 +302,7 @@ Vous devez ensuite regénérer et exécuter le projet à partir de la ligne de c
    dotnet TenantLMSample.dll --Username=<Username> --Password=<Password> --SubscriptionKey=<Subscription-Key> --EndpointUri=<Endpoint-Uri>
    ```
 
-Dans ce tutoriel, vous avez découvert comment utiliser des données Office 365 pour créer un modèle de reconnaissance vocale personnalisé, le déployer et l’utiliser avec le kit SDK Speech.
+Dans ce tutoriel, vous avez découvert comment utiliser des données Microsoft 365 pour créer un modèle de reconnaissance vocale personnalisé, le déployer et l’utiliser avec le kit SDK Speech.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

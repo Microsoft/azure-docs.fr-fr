@@ -1,24 +1,24 @@
 ---
-title: Utiliser le kit de développement logiciel (SDK) de runbook graphique Azure Automation
-description: Cet article explique comment utiliser le kit de développement logiciel (SDK) de runbook graphique Azure Automation.
+title: Utiliser le kit de développement logiciel (SDK) de runbook graphique Azure Automation (préversion)
+description: Cet article explique comment utiliser le kit de développement logiciel (SDK) de runbook graphique Azure Automation (préversion).
 services: automation
 ms.subservice: process-automation
 ms.date: 07/20/2018
 ms.topic: conceptual
-ms.openlocfilehash: 886ce03b6e107d871879ff40bdc5de9ceb97c7c3
-ms.sourcegitcommit: 366e95d58d5311ca4b62e6d0b2b47549e06a0d6d
+ms.openlocfilehash: 969e60cd08a65adb1dd731aa7c6c3f9872e288fd
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82690736"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "83835034"
 ---
-# <a name="use-the-azure-automation-graphical-runbook-sdk"></a>Utiliser le kit de développement logiciel (SDK) de runbook graphique Azure Automation
+# <a name="use-the-azure-automation-graphical-runbook-sdk-preview"></a>Utiliser le kit de développement logiciel (SDK) de runbook graphique Azure Automation (préversion)
 
 Les [runbooks graphiques](automation-graphical-authoring-intro.md) aident à gérer la complexité du code Windows PowerShell ou PowerShell Workflow sous-jacent. Le kit de développement logiciel (SDK) de création graphique Microsoft Azure Automation permet aux développeurs de créer et de modifier des runbooks graphiques pour les utiliser avec Azure Automation. Cet article décrit les étapes de base de la création d'un runbook graphique à partir de votre code.
 
 ## <a name="prerequisites"></a>Prérequis
 
-Importez le package `Orchestrator.GraphRunbook.Model.dll` dans votre projet.
+Importez le package `Orchestrator.GraphRunbook.Model.dll` en téléchargeant le [kit de développement logiciel (SDK)](https://www.microsoft.com/download/details.aspx?id=50734).
 
 ## <a name="create-a-runbook-object-instance"></a>Créer une instance d’objet de runbook
 
@@ -141,4 +141,4 @@ Le format sérialisé est susceptible de changer dans les prochaines versions de
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour en savoir plus sur les runbooks graphiques dans Azure Automation, consultez [Introduction à la création de graphiques](automation-graphical-authoring-intro.md).
+Pour plus d’informations, consultez [Créer des runbooks graphiques dans Azure Automation](automation-graphical-authoring-intro.md).

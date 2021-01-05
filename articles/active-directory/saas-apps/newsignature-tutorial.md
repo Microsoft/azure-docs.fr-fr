@@ -2,26 +2,21 @@
 title: 'Didacticiel : Intégration d’Azure Active Directory à Cloud Management Portal for Microsoft Azure | Microsoft Docs'
 description: Découvrez comment configurer l’authentification unique entre Azure Active Directory et Cloud Management Portal for Microsoft Azure.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: mtillman
-ms.reviewer: barbkess
-ms.assetid: 4ea9f47c-25ca-42b0-a878-9e7aa6f34973
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 01/22/2019
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: e73a1f80e9fbca66bd58c65c45b299950315309d
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 950744e0b8b2f722d801c911d6fd2c9112f035ec
+ms.sourcegitcommit: 59f506857abb1ed3328fda34d37800b55159c91d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "73161255"
+ms.lasthandoff: 10/24/2020
+ms.locfileid: "92522493"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-cloud-management-portal-for-microsoft-azure"></a>Didacticiel : Intégration d’Azure Active Directory à Cloud Management Portal for Microsoft Azure
 
@@ -32,7 +27,7 @@ L’intégration du portail de gestion cloud de Microsoft Azure avec Azure AD vo
 * Vous pouvez autoriser les utilisateurs à se connecter automatiquement à Cloud Management Portal for Microsoft Azure (par le biais de l’authentification unique) avec leur compte Azure AD.
 * Vous pouvez gérer vos comptes dans un emplacement central : le portail Azure
 
-Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
 ## <a name="prerequisites"></a>Conditions préalables requises
@@ -58,7 +53,7 @@ Pour configurer l’intégration de Cloud Management Portal for Microsoft Azure 
 
     ![Bouton Azure Active Directory](common/select-azuread.png)
 
-2. Accédez à **Applications d’entreprise**, puis sélectionnez l’option **Toutes les applications**.
+2. Accédez à **Applications d’entreprise** , puis sélectionnez l’option **Toutes les applications**.
 
     ![Panneau Applications d’entreprise](common/enterprise-applications.png)
 
@@ -66,7 +61,7 @@ Pour configurer l’intégration de Cloud Management Portal for Microsoft Azure 
 
     ![Bouton Nouvelle application](common/add-new-app.png)
 
-4. Dans la zone de recherche, tapez **Cloud Management Portal for Microsoft Azure**, sélectionnez **Cloud Management Portal for Microsoft Azure** dans le volet de résultats, puis cliquez sur le bouton **Ajouter** pour ajouter l’application.
+4. Dans la zone de recherche, tapez **Cloud Management Portal for Microsoft Azure** , sélectionnez **Cloud Management Portal for Microsoft Azure** dans le volet de résultats, puis cliquez sur le bouton **Ajouter** pour ajouter l’application.
 
      ![Cloud Management Portal for Microsoft Azure dans la liste des résultats](common/search-new-app.png)
 
@@ -90,52 +85,52 @@ Dans cette section, vous activez l’authentification unique Azure AD dans le po
 
 Pour configurer l’authentification unique Azure AD avec Cloud Management Portal for Microsoft Azure, effectuez les étapes suivantes :
 
-1. Dans le [portail Azure](https://portal.azure.com/), dans la page d’intégration de l’application **Cloud Management Portal for Microsoft Azure**, sélectionnez **Authentification unique**.
+1. Dans le [portail Azure](https://portal.azure.com/), dans la page d’intégration de l’application **Cloud Management Portal for Microsoft Azure** , sélectionnez **Authentification unique**.
 
     ![Lien Configurer l’authentification unique](common/select-sso.png)
 
-2. Dans la boîte de dialogue **Sélectionner une méthode d’authentification unique**, sélectionnez le mode **SAML/WS-Fed** afin d’activer l’authentification unique.
+2. Dans la boîte de dialogue **Sélectionner une méthode d’authentification unique** , sélectionnez le mode **SAML/WS-Fed** afin d’activer l’authentification unique.
 
     ![Mode de sélection de l’authentification unique](common/select-saml-option.png)
 
-3. Dans la page **Configurer l’authentification unique avec SAML**, cliquez sur l’icône **Modifier** pour ouvrir la boîte de dialogue **Configuration SAML de base**.
+3. Dans la page **Configurer l’authentification unique avec SAML** , cliquez sur l’icône **Modifier** pour ouvrir la boîte de dialogue **Configuration SAML de base**.
 
     ![Modifier la configuration SAML de base](common/edit-urls.png)
 
-4. Dans la section **Configuration SAML de base**, effectuez les étapes suivantes :
+4. Dans la section **Configuration SAML de base** , effectuez les étapes suivantes :
 
     ![Informations sur l’authentification unique Domaine et URL Cloud Management Portal for Microsoft Azure](common/sp-identifier-reply.png)
 
-    a. Dans la zone de texte **URL d’authentification**, tapez une URL au format suivant :
+    a. Dans la zone de texte **URL d’authentification** , tapez une URL au format suivant :
 
-    | |
-    |--|
-    | `https://portal.newsignature.com/<instancename>` |   
-    | `https://portal.igcm.com/<instancename>` |
+    ```http
+    https://portal.newsignature.com/<instancename>
+    https://portal.igcm.com/<instancename>
+    ```
 
-    b. Dans la zone de texte **Identificateur**, tapez une URL au format suivant :
+    b. Dans la zone de texte **Identificateur** , tapez une URL au format suivant :
 
-    | |
-    |--|
-    | `https://<subdomain>.igcm.com` |
-    | `https://<subdomain>.newsignature.com` |
+    ```http
+    https://<subdomain>.igcm.com
+    https://<subdomain>.newsignature.com
+    ```
 
-    c. Dans la zone de texte **URL de réponse**, tapez une URL au format suivant :
+    c. Dans la zone de texte **URL de réponse** , tapez une URL au format suivant :
 
-    | |
-    |--|
-    | `https://<subdomain>.igcm.com/<instancename>` |
-    | `https://<subdomain>.newsignature.com` |
-    | `https://<subdomain>.newsignature.com/<instancename>` |
+    ```http
+    https://<subdomain>.igcm.com/<instancename>
+    https://<subdomain>.newsignature.com
+    https://<subdomain>.newsignature.com/<instancename>
+    ```
 
     > [!NOTE]
     > Il ne s’agit pas de valeurs réelles. Mettez à jour ces valeurs avec l’URL de connexion, l’identificateur et l’URL de réponse réels. Pour obtenir ces valeurs, contactez [l’équipe du support client Cloud Management Portal for Microsoft Azure](mailto:jczernuszka@newsignature.com). Vous pouvez également consulter les modèles figurant à la section **Configuration SAML de base** dans le portail Azure.
 
-5. Dans la page **Configurer l’authentification unique avec SAML**, dans la section **Certificat de signature SAML**, cliquez sur **Télécharger** pour télécharger le **Certificat (Base64)** en fonction des options définies par rapport à vos besoins, puis enregistrez-le sur votre ordinateur.
+5. Dans la page **Configurer l’authentification unique avec SAML** , dans la section **Certificat de signature SAML** , cliquez sur **Télécharger** pour télécharger le **Certificat (Base64)** en fonction des options définies par rapport à vos besoins, puis enregistrez-le sur votre ordinateur.
 
     ![Lien Téléchargement de certificat](common/certificatebase64.png)
 
-6. Dans la section **Configurer Cloud Management Portal for Microsoft Azure**, copiez la ou les URL appropriées en fonction de vos besoins.
+6. Dans la section **Configurer Cloud Management Portal for Microsoft Azure** , copiez la ou les URL appropriées en fonction de vos besoins.
 
     ![Copier les URL de configuration](common/copy-configuration-urls.png)
 
@@ -147,13 +142,13 @@ Pour configurer l’authentification unique Azure AD avec Cloud Management Port
 
 ### <a name="configure-cloud-management-portal-for-microsoft-azure-single-sign-on"></a>Configurer l’authentification unique Cloud Management Portal for Microsoft Azure
 
-Pour configurer l’authentification unique côté **Cloud Management Portal for Microsoft Azure**, vous devez envoyer le **Certificat (Base64)** téléchargé et les URL appropriées copiées à partir du portail Azure à l’[équipe du support technique Cloud Management Portal for Microsoft Azure](mailto:jczernuszka@newsignature.com). Celles-ci configurent ensuite ce paramètre pour que la connexion SSO SAML soit définie correctement des deux côtés.
+Pour configurer l’authentification unique côté **Cloud Management Portal for Microsoft Azure** , vous devez envoyer le **Certificat (Base64)** téléchargé et les URL appropriées copiées à partir du portail Azure à l’ [équipe du support technique Cloud Management Portal for Microsoft Azure](mailto:jczernuszka@newsignature.com). Celles-ci configurent ensuite ce paramètre pour que la connexion SSO SAML soit définie correctement des deux côtés.
 
 ### <a name="create-an-azure-ad-test-user"></a>Créer un utilisateur de test Azure AD 
 
 L’objectif de cette section est de créer un utilisateur de test appelé Britta Simon dans le portail Azure.
 
-1. Dans le volet gauche du portail Azure, sélectionnez **Azure Active Directory**, sélectionnez **Utilisateurs**, puis sélectionnez **Tous les utilisateurs**.
+1. Dans le volet gauche du portail Azure, sélectionnez **Azure Active Directory** , sélectionnez **Utilisateurs** , puis sélectionnez **Tous les utilisateurs**.
 
     ![Liens « Utilisateurs et groupes » et « Tous les utilisateurs »](common/users.png)
 
@@ -165,12 +160,12 @@ L’objectif de cette section est de créer un utilisateur de test appelé Britt
 
     ![Boîte de dialogue Utilisateur](common/user-properties.png)
 
-    a. Dans le champ **Nom**, entrez **BrittaSimon**.
+    a. Dans le champ **Nom** , entrez **BrittaSimon**.
   
-    b. Dans le champ **Nom d’utilisateur**, tapez **brittasimon\@domainedevotreentreprise.extension**.  
+    b. Dans le champ **Nom d’utilisateur** , tapez **brittasimon\@domainedevotreentreprise.extension**.  
     Par exemple : BrittaSimon@contoso.com
 
-    c. Cochez la case **Afficher le mot de passe**, puis notez la valeur affichée dans le champ Mot de passe.
+    c. Cochez la case **Afficher le mot de passe** , puis notez la valeur affichée dans le champ Mot de passe.
 
     d. Cliquez sur **Créer**.
 
@@ -178,7 +173,7 @@ L’objectif de cette section est de créer un utilisateur de test appelé Britt
 
 Dans cette section, vous allez autoriser Britta Simon à utiliser l’authentification unique Azure en lui accordant l’accès à Cloud Management Portal for Microsoft Azure.
 
-1. Dans le portail Azure, sélectionnez **Applications d’entreprise**, **Toutes les applications**, puis **Cloud Management Portal for Microsoft Azure**.
+1. Dans le portail Azure, sélectionnez **Applications d’entreprise** , **Toutes les applications** , puis **Cloud Management Portal for Microsoft Azure**.
 
     ![Panneau Applications d’entreprise](common/enterprise-applications.png)
 
@@ -190,31 +185,30 @@ Dans cette section, vous allez autoriser Britta Simon à utiliser l’authentifi
 
     ![Lien « Utilisateurs et groupes »](common/users-groups-blade.png)
 
-4. Cliquez sur le bouton **Ajouter un utilisateur**, puis sélectionnez **Utilisateurs et groupes** dans la boîte de dialogue **Ajouter une attribution**.
+4. Cliquez sur le bouton **Ajouter un utilisateur** , puis sélectionnez **Utilisateurs et groupes** dans la boîte de dialogue **Ajouter une attribution**.
 
     ![Volet Ajouter une attribution](common/add-assign-user.png)
 
-5. Dans la boîte de dialogue **Utilisateurs et groupes**, sélectionnez **Britta Simon** dans la liste Utilisateurs, puis cliquez sur le bouton **Sélectionner** en bas de l’écran.
+5. Dans la boîte de dialogue **Utilisateurs et groupes** , sélectionnez **Britta Simon** dans la liste Utilisateurs, puis cliquez sur le bouton **Sélectionner** en bas de l’écran.
 
-6. Si vous attendez une valeur de rôle dans l’assertion SAML, dans la boîte de dialogue **Sélectionner un rôle**, sélectionnez le rôle approprié pour l’utilisateur dans la liste, puis cliquez sur le bouton **Sélectionner** en bas de l’écran.
+6. Si vous attendez une valeur de rôle dans l’assertion SAML, dans la boîte de dialogue **Sélectionner un rôle** , sélectionnez le rôle approprié pour l’utilisateur dans la liste, puis cliquez sur le bouton **Sélectionner** en bas de l’écran.
 
-7. Dans la boîte de dialogue **Ajouter une attribution**, cliquez sur le bouton **Attribuer**.
+7. Dans la boîte de dialogue **Ajouter une attribution** , cliquez sur le bouton **Attribuer**.
 
 ### <a name="create-cloud-management-portal-for-microsoft-azure-test-user"></a>Créer un utilisateur de test Cloud Management Portal for Microsoft Azure
 
-Dans cette section, vous allez créer un utilisateur appelé Britta Simon dans Cloud Management Portal for Microsoft Azure. Collaborez avec l’ [équipe du support technique Cloud Management Portal for Microsoft Azure](mailto:jczernuszka@newsignature.com) pour ajouter les utilisateurs à la plateforme Cloud Management Portal for Microsoft Azure. Les utilisateurs doivent être créés et activés avant que vous utilisiez l’authentification unique.
+Dans cette section, vous allez créer un utilisateur appelé Britta Simon dans Cloud Management Portal for Microsoft Azure. Rapprochez-vous de l’[équipe de support Cloud Management Portal for Microsoft Azure](mailto:jczernuszka@newsignature.com) pour ajouter les utilisateurs dans la plateforme Cloud Management Portal for Microsoft Azure. Les utilisateurs doivent être créés et activés avant que vous utilisiez l’authentification unique.
 
 ### <a name="test-single-sign-on"></a>Tester l’authentification unique 
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Quand vous cliquez sur la vignette Cloud Management Portal for Microsoft Azure dans le volet d’accès, vous devez être connecté automatiquement à l’application Cloud Management Portal for Microsoft Azure pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Quand vous cliquez sur la vignette Cloud Management Portal for Microsoft Azure dans le volet d’accès, vous devez être connecté automatiquement à l’application Cloud Management Portal for Microsoft Azure pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
-
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

@@ -1,25 +1,14 @@
 ---
 title: Paramètres de port d’Azure Relay | Microsoft Docs
 description: Cet article comprend un tableau qui décrit la configuration requise pour les valeurs de port d’Azure Relay.
-services: service-bus-relay
-documentationcenter: na
-author: spelluru
-manager: timlt
-editor: ''
-ms.assetid: ''
-ms.service: service-bus-relay
-ms.devlang: na
 ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: na
-ms.date: 01/21/2020
-ms.author: spelluru
-ms.openlocfilehash: 532e3c297c42ea16b1f462a01699fc2fd71c6cce
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.date: 06/23/2020
+ms.openlocfilehash: 97640debe81041ff7e2b082c6a9ac606d6088664
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83204564"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85314266"
 ---
 # <a name="azure-relay-port-settings"></a>Paramètres de port d’Azure Relay
 

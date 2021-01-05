@@ -4,13 +4,18 @@
   items:
     - name: "Qu’est-ce qu’Azure Front Door\_?"
       href: front-door-overview.md
-    - name: Nouveautés d’Azure Front Door
-      href: front-door-whats-new.md
 - name: Démarrages rapides
   expanded: true
   items:
-    - name: Créer une Front Door
+    - name: Créer une porte d’entrée - Portail
       href: quickstart-create-front-door.md
+    - name: Créer une porte d’entrée - PowerShell
+      href: quickstart-create-front-door-powershell.md
+    - name: Créer une porte d’entrée - CLI
+      href: quickstart-create-front-door-cli.md
+    - name: Créer une porte d’entrée - Modèle ARM
+      displayName: Resource Manager
+      href: quickstart-create-front-door-template.md
 - name: Tutoriels
   items:
     - name: Ajouter un domaine personnalisé à votre Front Door
@@ -21,6 +26,8 @@
       href: front-door-tutorial-geo-filtering.md
     - name: Configurer un moteur de règles
       href: front-door-tutorial-rules-engine.md
+    - name: Ajouter des en-têtes de sécurité avec le moteur de règles
+      href: front-door-security-headers.md
     - name: Pare-feu d’applications web et Front Door
       href: front-door-waf.md
 - name: Exemples
@@ -29,10 +36,16 @@
       href: front-door-quickstart-template-samples.md
 - name: Concepts
   items:
+    - name: Sécurité
+      items:
+        - name: Base de référence de la sécurité
+          href: security-baseline.md
     - name: Pools de serveurs principaux et de serveur principal
       href: front-door-backend-pool.md
     - name: Mise en cache avec Front Door
       href: front-door-caching.md
+    - name: Protection DDoS
+      href: front-door-ddos.md
     - name: Questions fréquentes (FAQ) sur Front Door
       href: front-door-faq.md
     - name: Filtrage géographique

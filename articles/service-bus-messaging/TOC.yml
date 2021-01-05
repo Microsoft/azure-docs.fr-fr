@@ -7,6 +7,8 @@
     - name: Comparer les services de messagerie
       href: ../event-grid/compare-messaging-services.md
       maintainContext: true
+    - name: "Utiliser Service Bus avec Java Message Service (JMS)\_2.0 (préversion)"
+      href: how-to-use-java-message-service-20.md
 - name: Démarrages rapides
   items:
     - name: Files d’attente Service Bus
@@ -24,57 +26,68 @@
               href: service-bus-resource-manager-namespace-queue.md
         - name: Envoyer et recevoir des messages
           items:
-            - name: .NET
+            - name: .NET (Azure.Messaging.ServiceBus)
               href: service-bus-dotnet-get-started-with-queues.md
-            - name: Java
+            - name: Java (azure-messaging-servicebus)
               href: service-bus-java-how-to-use-queues.md
-            - name: Node.js
-              href: service-bus-nodejs-how-to-use-queues-new-package.md
+            - name: Python (azure-servicebus)
+              href: service-bus-python-how-to-use-queues.md
+            - name: JavaScript (@azure/service-bus)
+              href: service-bus-nodejs-how-to-use-queues.md
             - name: PHP
               href: service-bus-php-how-to-use-queues.md
-            - name: Python
-              href: service-bus-python-how-to-use-queues.md
             - name: Ruby
               href: service-bus-ruby-how-to-use-queues.md
+        - name: Envoyer et recevoir des messages (versions/packages anciens)
+          items:
+            - name: .NET (Microsoft.Azure.ServiceBus)
+              href: service-bus-dotnet-get-started-with-queues-legacy.md
+            - name: Java (azure-servicebus)
+              href: service-bus-java-how-to-use-queues-legacy.md
     - name: Rubriques et abonnements Service Bus
       items:
         - name: Créer des rubriques et des abonnements
           items:
             - name: Portail Azure
               href: service-bus-quickstart-topics-subscriptions-portal.md
+            - name: Azure CLI
+              href: service-bus-tutorial-topics-subscriptions-cli.md
             - name: Modèle ARM
               href: service-bus-resource-manager-namespace-topic.md
         - name: Publier et s’abonner à des messages
           items:
-            - name: .NET
+            - name: .NET (Azure.Messaging.ServiceBus)
               href: service-bus-dotnet-how-to-use-topics-subscriptions.md
-            - name: Java
+            - name: Java (azure-messaging-servicebus)
               href: service-bus-java-how-to-use-topics-subscriptions.md
-            - name: Node.js
-              href: service-bus-nodejs-how-to-use-topics-subscriptions-new-package.md
+            - name: Python (azure-servicebus)
+              href: service-bus-python-how-to-use-topics-subscriptions.md
+            - name: JavaScript (@azure/service-bus)
+              href: service-bus-nodejs-how-to-use-topics-subscriptions.md
             - name: PHP
               href: service-bus-php-how-to-use-topics-subscriptions.md
-            - name: Python
-              href: service-bus-python-how-to-use-topics-subscriptions.md
             - name: Ruby
               href: service-bus-ruby-how-to-use-topics-subscriptions.md
+        - name: Publier et s’abonner à des messages (versions/packages anciens)
+          items:
+            - name: .NET (Microsoft.Azure.ServiceBus)
+              href: service-bus-dotnet-how-to-use-topics-subscriptions-legacy.md
+            - name: Java (azure-servicebus)
+              href: service-bus-java-how-to-use-topics-subscriptions-legacy.md
 - name: Tutoriels
   items:
-    - name: Mettre à jour l’inventaire - PowerShell
-      href: service-bus-tutorial-topics-subscriptions-powershell.md
-    - name: Mettre à jour l’inventaire - Portail
+    - name: Mettre à jour l’inventaire
       href: service-bus-tutorial-topics-subscriptions-portal.md
-    - name: Mettre à jour l’inventaire - CLI
-      href: service-bus-tutorial-topics-subscriptions-cli.md
-    - name: Répondre à des événements via Event Grid
-      href: service-bus-to-event-grid-integration-example.md
+    - name: Gérer les événements Service Bus via Event Grid
+      items:
+        - name: Azure Logic Apps
+          href: service-bus-to-event-grid-integration-example.md
+        - name: Azure Functions
+          href: service-bus-to-event-grid-integration-function.md
 - name: Exemples
   items:
     - name: Exemples Service Bus
       href: service-bus-samples.md
-    - name: Éléments intégrés Azure Policy
-      displayName: 'samples, policies, definitions'
-      href: ./policy-samples.md
 - name: Concepts
   items:
     - name: Premium-Messaging
@@ -83,6 +96,22 @@
       href: service-bus-azure-and-service-bus-queues-compared-contrasted.md
     - name: Optimiser les performances
       href: service-bus-performance-improvements.md
+    - name: Fédération
+      items:
+        - name: Réplication des messages et fédération interrégionale
+          href: service-bus-federation-overview.md
+        - name: Tâches et applications de réplication des messages
+          href: service-bus-federation-replicator-functions.md
+        - name: Modèles de tâches de réplication des messages
+          href: service-bus-federation-patterns.md
+        - name: Tâches de réplication configurées
+          href: service-bus-federation-configuration.md
+        - name: Répliquer des événements entre des entités Service Bus
+          href: 'https://github.com/Azure-Samples/azure-messaging-replication-dotnet/tree/main/functions/config/ServiceBusCopy'
+        - name: Répliquer des messages sur des hubs d’événements
+          href: 'https://github.com/Azure-Samples/azure-messaging-replication-dotnet/tree/main/functions/config/ServiceBusCopyToEventHub'
+        - name: Obtenir des messages depuis des hubs d’événements
+          href: 'https://github.com/Azure-Samples/azure-messaging-replication-dotnet/tree/main/functions/config/EventHubCopyToServiceBus'
     - name: Récupération d’urgence et géo-réplication
       href: service-bus-geo-dr.md
     - name: Messagerie asynchrone et haute disponibilité
@@ -93,6 +122,8 @@
       href: service-bus-throttling.md
     - name: Sécurité
       items:
+        - name: Base de référence de la sécurité
+          href: security-baseline.md
         - name: Authentification et autorisation
           href: service-bus-authentication-and-authorization.md
           items:
@@ -108,12 +139,15 @@
                   href: service-bus-managed-service-identity.md
                 - name: Authentifier à partir d’une application
                   href: authenticate-application.md
-        - name: Contrôles de sécurité intégrés
-          href: service-bus-messaging-security-controls.md
+        - name: Contrôles de sécurité par Azure Policy
+          displayName: 'regulatory, compliance, standards, domains'
+          href: ./security-controls-policy.md
         - name: Sécurité du réseau
           href: network-security.md
 - name: Guides pratiques
   items:
+    - name: Passer d’une région à l’autre
+      href: move-across-regions.md
     - name: Migrer des API Azure Service Manager (Classic) vers des API Resource Manager
       href: deprecate-service-bus-management.md
     - name: Créer un espace de noms
@@ -124,6 +158,8 @@
           items:
             - name: 'Files d’attente, rubriques et abonnements'
               href: service-bus-queues-topics-subscriptions.md
+            - name: "Entités Java message service (JMS)\_2.0 (préversion)"
+              href: java-message-service-20-entities.md
             - name: 'Messages, charges utiles et sérialisation'
               href: service-bus-messages-payloads.md
             - name: 'Transferts, verrouillages et règlement des messages'
@@ -178,10 +214,14 @@
           href: service-bus-end-to-end-tracing.md
         - name: Créer une application Service Bus à plusieurs niveaux
           href: service-bus-dotnet-multi-tier-app-using-service-bus-queues.md
-        - name: Envoyer et recevoir des messages à partir de files d’attente (azure-sb hérité)
-          href: service-bus-nodejs-how-to-use-queues.md
-        - name: Publier et s’abonner à des messages (azure-sb hérité)
-          href: service-bus-nodejs-how-to-use-topics-subscriptions.md
+    - name: Migrer
+      items:
+        - name: Migrer d’ActiveMQ vers Azure Service Bus
+          href: migrate-jms-activemq-to-servicebus.md
+    - name: Integrate
+      items:
+        - name: Intégrer à RabbitMQ
+          href: service-bus-integrate-with-rabbitmq.md
     - name: Gérer
       items:
         - name: Mettre à jour automatiquement les unités de messagerie
@@ -209,11 +249,11 @@
               href: service-bus-resource-manager-namespace-topic-with-rule.md
     - name: Sécuriser
       items:
-        - name: Configurer des pare-feu
+        - name: Autoriser l’accès depuis des adresses IP spécifiques
           href: service-bus-ip-filtering.md
-        - name: Configurer des points de terminaison de service de réseau virtuel
+        - name: Autoriser l’accès depuis des réseaux virtuels spécifiques
           href: service-bus-service-endpoints.md
-        - name: Configurer des points de terminaison privés
+        - name: Autoriser l’accès via des points de terminaison privés
           href: private-link-service.md
         - name: Configurer les clés gérées par le client
           href: configure-customer-managed-key.md
@@ -229,16 +269,38 @@
   items:
     - name: .NET
       items:
-        - name: Microsoft.ServiceBus.Messaging (.NET Framework)
-          href: /dotnet/api/microsoft.servicebus.messaging
+        - name: Migrer de Microsoft.Azure.ServiceBus vers Azure.Messaging.ServiceBus
+          href: 'https://github.com/Azure/azure-sdk-for-net/blob/master/sdk/servicebus/Azure.Messaging.ServiceBus/MigrationGuide.md'
+        - name: Azure.Messaging.ServiceBus (.NET Standard - dernière version)
+          href: /dotnet/api/azure.messaging.servicebus
         - name: Microsoft.Azure.ServiceBus (.NET Standard)
           href: /dotnet/api/microsoft.azure.servicebus
+        - name: Microsoft.ServiceBus.Messaging (.NET Framework)
+          href: /dotnet/api/microsoft.servicebus.messaging
     - name: Java
-      href: /java/api/overview/azure/servicebus
+      items:
+        - name: Migrer d’azure-servicebus vers azure-messaging-servicebus
+          href: 'https://github.com/Azure/azure-sdk-for-java/blob/master/sdk/servicebus/azure-messaging-servicebus/migration-guide.md'
+        - name: azure-messaging-servicebus (dernière version)
+          href: /java/api/overview/azure/servicebus?view=azure-java-preview
+        - name: azure-servicebus
+          href: /java/api/overview/azure/servicebus
     - name: Python
-      href: /python/api/overview/azure/servicebus?view=azure-python
-    - name: Node.js
-      href: /javascript/api/overview/azure/service-bus
+      items:
+        - name: "Migrer azure-servicebus de la version\_0.50 à la version\_7"
+          href: 'https://github.com/Azure/azure-sdk-for-python/blob/master/sdk/servicebus/azure-servicebus/migration_guide.md'
+        - name: "azure-servicebus version\_7"
+          href: /python/api/overview/azure/servicebus?view=azure-python-preview
+        - name: "azure-servicebus version\_0.50"
+          href: /python/api/overview/azure/servicebus
+    - name: JavaScript
+      items:
+        - name: "Migrer de la version\_1 à la version\_7"
+          href: 'https://github.com/Azure/azure-sdk-for-js/blob/master/sdk/servicebus/service-bus/migrationguide.md'
+        - name: "azure/service-bus version\_7"
+          href: /javascript/api/overview/azure/service-bus?view=azure-node--preview
+        - name: "azure/service-bus version\_1"
+          href: /javascript/api/overview/azure/service-bus?view=azure-node-latest
     - name: PHP
       href: 'https://github.com/Azure/azure-sdk-for-php'
     - name: Ruby
@@ -253,10 +315,13 @@
       href: /azure/templates/microsoft.servicebus/allversions
     - name: Quotas
       href: service-bus-quotas.md
-    - name: Syntaxe SQLFilter
+    - name: Syntaxe de filtre SQL pour les règles d’abonnement
       href: service-bus-messaging-sql-filter.md
-    - name: Syntaxe SQLRuleAction
+    - name: Syntaxe d’action SQL pour les règles d’abonnement
       href: service-bus-messaging-sql-rule-action.md
+    - name: Éléments intégrés Azure Policy
+      displayName: 'samples, policies, definitions'
+      href: ./policy-reference.md
 - name: Ressources
   items:
     - name: Questions fréquentes (FAQ)
@@ -266,9 +331,9 @@
     - name: Feuille de route Azure
       href: 'https://azure.microsoft.com/roadmap/?category=enterprise-integration'
     - name: Blog
-      href: 'https://blogs.msdn.microsoft.com/servicebus/'
+      href: /archive/blogs/servicebus/
     - name: Page de questions Microsoft Q&A
-      href: 'https://docs.microsoft.com/answers/topics/azure-service-bus.html'
+      href: /answers/topics/azure-service-bus.html
     - name: Tarifs
       href: 'https://azure.microsoft.com/pricing/details/service-bus/'
     - name: Calculatrice de prix
@@ -281,5 +346,5 @@
       href: 'https://azure.microsoft.com/updates/?product=service-bus'
     - name: Stack Overflow
       href: 'https://stackoverflow.com/questions/tagged/azureservicebus'
-    - name: Videos
+    - name: Vidéos
       href: 'https://azure.microsoft.com/documentation/videos/index/?services=service-bus'

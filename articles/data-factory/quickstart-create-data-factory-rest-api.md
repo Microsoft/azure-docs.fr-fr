@@ -1,6 +1,6 @@
 ---
 title: Créer une fabrique de données Azure en utilisant l’API REST
-description: Créez une fabrique de données Azure pour copier les données d’un emplacement dans le stockage Blob Azure vers un autre emplacement.
+description: Créez un pipeline Azure Data Factory pour copier les données d’un emplacement dans le stockage Blob Azure vers un autre emplacement.
 services: data-factory
 documentationcenter: ''
 author: linda33wj
@@ -13,12 +13,12 @@ ms.devlang: rest-api
 ms.topic: quickstart
 ms.date: 06/10/2019
 ms.author: jingwang
-ms.openlocfilehash: b50217a3a8aeda03996183bf1dc82a0be1f485ae
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: 48928c5c4f3a2787e8f00e4084daacf6a64f1ea7
+ms.sourcegitcommit: 6a350f39e2f04500ecb7235f5d88682eb4910ae8
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "81419100"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96461567"
 ---
 # <a name="quickstart-create-an-azure-data-factory-and-pipeline-by-using-the-rest-api"></a>Démarrage rapide : Créer une fabrique de données Azure et un pipeline à l’aide de l’API REST
 
@@ -28,7 +28,7 @@ ms.locfileid: "81419100"
 
 [!INCLUDE[appliesto-adf-xxx-md](includes/appliesto-adf-xxx-md.md)]
 
-Azure Data Factory est un service d’intégration de données basé sur le cloud qui vous permet de créer des flux de travail orientés données dans le cloud pour orchestrer et automatiser le déplacement et la transformation des données. Grâce à Azure Data Factory, vous pouvez créer et planifier des flux de travail orientés données (appelés pipelines) capables d’ingérer des données provenant de différents magasins de données, de traiter/transformer les données à l’aide de services de calcul comme Azure HDInsight Hadoop, Spark, Azure Data Lake Analytics et Azure Machine Learning, et de publier des données de sortie dans des magasins de données tels qu’Azure SQL Data Warehouse pour que des applications décisionnelles (BI) puissent les utiliser.
+Azure Data Factory est un service d’intégration de données basé sur le cloud qui vous permet de créer des flux de travail orientés données dans le cloud pour orchestrer et automatiser le déplacement et la transformation des données. Avec Azure Data Factory, vous pouvez créer et planifier des workflows orientés données (appelés pipelines) capables d’ingérer des données provenant de différents magasins de données, de traiter/transformer les données à l’aide de services de calcul comme Azure HDInsight Hadoop, Spark, Azure Data Lake Analytics et Azure Machine Learning, et de publier des données de sortie dans des magasins de données comme Azure Synapse Analytics pour que des applications décisionnelles (BI) puissent les utiliser.
 
 Ce guide de démarrage rapide explique comment utiliser l’API REST pour créer une fabrique de données Azure. Le pipeline dans cette fabrique de données copie les données d’un emplacement vers un autre emplacement dans un stockage Blob Azure.
 
@@ -42,7 +42,7 @@ Si vous n’avez pas d’abonnement Azure, créez un compte [gratuit](https://az
 * **Compte Stockage Azure**. Vous utilisez le stockage Blob comme magasins de données **source** et **récepteur**. Si vous n’avez pas de compte de stockage Azure, consultez l’article [Créer un compte de stockage](../storage/common/storage-account-create.md) pour découvrir comment en créer un.
 * Créez un **conteneur d’objets blob** dans le stockage Blob, créez un **dossier** d’entrée dans le conteneur et chargez des fichiers sur le dossier. Vous pouvez utiliser des outils tels que l’[Explorateur Stockage Azure](https://azure.microsoft.com/features/storage-explorer/) pour vous connecter au stockage Blob Azure, créer un conteneur d’objets blob, charger le fichier d’entrée et vérifier le fichier de sortie.
 * Installez **Azure PowerShell**. Suivez les instructions de la page [Installation et configuration d’Azure PowerShell](/powershell/azure/install-Az-ps). Ce guide de démarrage rapide utilise PowerShell pour appeler les API REST.
-* **Créez une application dans Azure Active Directory** en suivant [cette instruction](../active-directory/develop/howto-create-service-principal-portal.md#create-an-azure-active-directory-application). Notez les valeurs suivantes à utiliser au cours des prochaines étapes : **ID d’application**, **clientSecrets** et **ID de locataire**. Affectez l’application au rôle « **Contributeur**  ».
+* **Créez une application dans Azure Active Directory** en suivant [cette instruction](../active-directory/develop/howto-create-service-principal-portal.md#register-an-application-with-azure-ad-and-create-a-service-principal). Notez les valeurs suivantes à utiliser au cours des prochaines étapes : **ID d’application**, **clientSecrets** et **ID de locataire**. Affectez l’application au rôle « **Contributeur**  ».
 
 ## <a name="set-global-variables"></a>Définir des variables globales
 
@@ -83,7 +83,7 @@ Exécutez les commandes suivantes pour vous authentifier auprès d’AAD (Azure 
 $AuthContext = [Microsoft.IdentityModel.Clients.ActiveDirectory.AuthenticationContext]"https://login.microsoftonline.com/${tenantId}"
 $cred = New-Object -TypeName Microsoft.IdentityModel.Clients.ActiveDirectory.ClientCredential -ArgumentList ($appId, $clientSecrets)
 $result = $AuthContext.AcquireTokenAsync("https://management.core.windows.net/", $cred).GetAwaiter().GetResult()
-$authHeader = @{
+$authHeader = @{
 'Content-Type'='application/json'
 'Accept'='application/json'
 'Authorization'=$result.CreateAuthorizationHeader()
@@ -98,7 +98,7 @@ Exécutez les commandes suivantes pour créer une fabrique de données :
 $request = "https://management.azure.com/subscriptions/${subscriptionId}/resourceGroups/${resourceGroupName}/providers/Microsoft.DataFactory/factories/${factoryName}?api-version=${apiVersion}"
 $body = @"
 {
-    "name": "$dataFactoryName",
+    "name": "$factoryName",
     "location": "East US",
     "properties": {},
     "identity": {

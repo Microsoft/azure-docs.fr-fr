@@ -1,7 +1,7 @@
 ---
 title: 'Tutoriel sur la classification d’images : Déployer des modèles'
 titleSuffix: Azure Machine Learning
-description: Ce tutoriel, qui est le deuxième d’une série de deux, montre comment utiliser Azure Machine Learning pour déployer un modèle de classification d’images avec scikit-learn dans un notebook Jupyter Python.
+description: Ce tutoriel montre comment utiliser Azure Machine Learning pour déployer un modèle de classification d’images avec scikit-learn dans un notebook Jupyter Python.
 services: machine-learning
 ms.service: machine-learning
 ms.subservice: core
@@ -10,15 +10,15 @@ author: sdgilley
 ms.author: sgilley
 ms.date: 03/18/2020
 ms.custom: seodec18
-ms.openlocfilehash: 5d064b0953d8d6e9089dcfa765ff29bb97088f34
-ms.sourcegitcommit: c8a0fbfa74ef7d1fd4d5b2f88521c5b619eb25f8
+ms.openlocfilehash: ee6529f36c302cba1dc7b5a4b53aaf96ce58e4a5
+ms.sourcegitcommit: 6ab718e1be2767db2605eeebe974ee9e2c07022b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82801108"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94532781"
 ---
 # <a name="tutorial-deploy-an-image-classification-model-in-azure-container-instances"></a>Tutoriel : Déployer un modèle de classification d’images dans Azure Container Instances
-[!INCLUDE [applies-to-skus](../../includes/aml-applies-to-basic-enterprise-sku.md)]
+
 
 Ce tutoriel est le **deuxième d’une série de deux**. Dans le [tutoriel précédent](tutorial-train-models-with-aml.md), vous avez entraîné des modèles Machine Learning, puis vous avez inscrit un modèle dans votre espace de travail sur le cloud.  Vous êtes maintenant prêt à déployer le modèle en tant que service web. Un service web est une image, dans le cas présent une image Docker. Elle encapsule la logique de scoring et le modèle proprement dit. 
 
@@ -235,18 +235,19 @@ print('Overall accuracy:', np.average(y_hat == y_test))
 
 La sortie montre la matrice de confusion :
 
-    [[ 960    0    1    2    1    5    6    3    1    1]
-     [   0 1112    3    1    0    1    5    1   12    0]
-     [   9    8  920   20   10    4   10   11   37    3]
-     [   4    0   17  921    2   21    4   12   20    9]
-     [   1    2    5    3  915    0   10    2    6   38]
-     [  10    2    0   41   10  770   17    7   28    7]
-     [   9    3    7    2    6   20  907    1    3    0]
-     [   2    7   22    5    8    1    1  950    5   27]
-     [  10   15    5   21   15   27    7   11  851   12]
-     [   7    8    2   13   32   13    0   24   12  898]]
-    Overall accuracy: 0.9204
-   
+```output
+[[ 960    0    1    2    1    5    6    3    1    1]
+ [   0 1112    3    1    0    1    5    1   12    0]
+ [   9    8  920   20   10    4   10   11   37    3]
+ [   4    0   17  921    2   21    4   12   20    9]
+ [   1    2    5    3  915    0   10    2    6   38]
+ [  10    2    0   41   10  770   17    7   28    7]
+ [   9    3    7    2    6   20  907    1    3    0]
+ [   2    7   22    5    8    1    1  950    5   27]
+ [  10   15    5   21   15   27    7   11  851   12]
+ [   7    8    2   13   32   13    0   24   12  898]]
+Overall accuracy: 0.9204
+```
 
 Utilisez `matplotlib` pour afficher la matrice de confusion sous forme de graphe. Dans ce graphe, l’axe X représente les valeurs réelles, et l’axe Y représente les valeurs prédites. La couleur dans chaque grille représente le taux d’erreur. Plus la couleur est claire, plus le taux d’erreurs est élevé. Par exemple, beaucoup de 5 sont incorrectement classifiés en 3. Par conséquent, vous voyez une grille claire en (5,3).
 
@@ -357,6 +358,6 @@ service.delete()
 
 + Découvrez toutes les [options de déploiement d’Azure Machine Learning](how-to-deploy-and-where.md).
 + Découvrez comment [créer des clients pour le service web](how-to-consume-web-service.md).
-+  [Effectuez des prédictions sur de grandes quantités de données](how-to-use-parallel-run-step.md) de façon asynchrone.
++  [Effectuez des prédictions sur de grandes quantités de données](./tutorial-pipeline-batch-scoring-classification.md) de façon asynchrone.
 + Supervisez vos modèles Azure Machine Learning avec [Application Insights](how-to-enable-app-insights.md).
-+ Suivez le tutoriel [Sélection automatique d’un algorithme](tutorial-auto-train-models.md). 
++ Suivez le tutoriel [Sélection automatique d’un algorithme](tutorial-auto-train-models.md).

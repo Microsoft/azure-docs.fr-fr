@@ -3,19 +3,19 @@ title: Exporter votre modèle sur votre mobile - Service Vision personnalisée
 titleSuffix: Azure Cognitive Services
 description: Cet article explique comment exporter votre modèle pour l'utiliser lors de la création d'applications mobiles ou pour l'exécuter localement à des fins de classification en temps réel.
 services: cognitive-services
-author: anrothMSFT
+author: PatrickFarley
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: custom-vision
 ms.topic: conceptual
 ms.date: 03/21/2019
-ms.author: anroth
-ms.openlocfilehash: f734f4f1a11f57b759615e7a9ce2cd2f7f8028fb
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: pafarley
+ms.openlocfilehash: be28a10f8a96d21d64d08cfacee4543c065168ae
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "73718955"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85391755"
 ---
 # <a name="export-your-model-for-use-with-mobile-devices"></a>Exporter votre modèle pour l’utiliser avec des appareils mobiles
 

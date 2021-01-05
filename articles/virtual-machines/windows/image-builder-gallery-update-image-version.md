@@ -1,19 +1,19 @@
 ---
 title: Créer une nouvelle version de l’image à partir d’une version existante à l’aide du Générateur d’images Azure (préversion)
-description: Créez une nouvelle version d’image de machine virtuelle à partir d’une version existante à l’aide du Générateur d’images Azure.
+description: Créez une nouvelle version de l'image d'une machine virtuelle à partir d'une version existante à l'aide d'Azure VM Image Builder dans Windows.
 author: cynthn
 ms.author: cynthn
-ms.date: 05/02/2019
+ms.date: 05/05/2020
 ms.topic: how-to
 ms.service: virtual-machines-windows
-ms.openlocfilehash: 766e7d5c4151000a582bcf07d80b89af3b7d8a65
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 7515e0a39d1cf0da74d2a23457443e96716b4275
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81869535"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91335950"
 ---
-# <a name="preview-create-a-new-vm-image-version-from-an-existing-image-version-using-azure-image-builder"></a>Aperçu : Créer une nouvelle version d’image de machine virtuelle à partir d’une version existante à l’aide du Générateur d’images Azure
+# <a name="preview-create-a-new-vm-image-version-from-an-existing-image-version-using-azure-image-builder-in-windows"></a>Aperçu : Créer une nouvelle version d’image de machine virtuelle à partir d’une version existante à l’aide d’Azure VM Image Builder dans Windows
 
 Cet article explique comment récupérer une version existante d’une image dans une [Bibliothèque d’images partagées](shared-image-galleries.md), la mettre à jour et la publier sous la forme d’une nouvelle version dans la bibliothèque.
 
@@ -40,16 +40,18 @@ Vérifiez votre inscription.
 
 ```azurecli-interactive
 az provider show -n Microsoft.VirtualMachineImages | grep registrationState
-az provider show -n Microsoft.Storage | grep registrationState
+az provider show -n Microsoft.KeyVault | grep registrationState
 az provider show -n Microsoft.Compute | grep registrationState
+az provider show -n Microsoft.Storage | grep registrationState
 ```
 
 Si elle n’est pas inscrite, exécutez la commande suivante :
 
 ```azurecli-interactive
 az provider register -n Microsoft.VirtualMachineImages
-az provider register -n Microsoft.Storage
 az provider register -n Microsoft.Compute
+az provider register -n Microsoft.KeyVault
+az provider register -n Microsoft.Storage
 ```
 
 
@@ -93,16 +95,15 @@ sigDefImgVersionId=$(az sig image-version list \
    --subscription $subscriptionID --query [].'id' -o json | grep 0. | tr -d '"' | tr -d '[:space:]')
 ```
 
-
-Si vous avez déjà votre propre bibliothèque d’images partagées et que vous n’avez pas suivi l’exemple précédent, affectez au Générateur d’images les autorisations nécessaires pour accéder au groupe de ressources et donc à la bibliothèque.
-
+## <a name="create-a-user-assigned-identity-and-set-permissions-on-the-resource-group"></a>Créer une identité affectée par l’utilisateur et définir des autorisations sur le groupe de ressources
+Comme vous avez défini l’identité de l’utilisateur dans l’exemple précédent, vous devez simplement lui attribuer l’ID de ressource, puis il sera ajouté au modèle.
 
 ```azurecli-interactive
-az role assignment create \
-    --assignee cf32a0cc-373c-47c9-9156-0db11f6a6dfc \
-    --role Contributor \
-    --scope /subscriptions/$subscriptionID/resourceGroups/$sigResourceGroup
+#get identity used previously
+imgBuilderId=$(az identity list -g $sigResourceGroup --query "[?contains(name, 'aibBuiUserId')].id" -o tsv)
 ```
+
+Si vous avez déjà votre propre bibliothèque d’images partagées et que vous n’avez pas suivi l’exemple précédent, affectez au Générateur d’images les autorisations nécessaires pour accéder au groupe de ressources et donc à la bibliothèque. Passez en revue les étapes de l’exemple [Créer une image et la distribuer à une Shared Image Gallery](image-builder-gallery.md).
 
 
 ## <a name="modify-helloimage-example"></a>Modifier l’exemple helloImage
@@ -121,6 +122,7 @@ sed -i -e "s%<sigDefImgVersionId>%$sigDefImgVersionId%g" helloImageTemplateforSI
 sed -i -e "s/<region1>/$location/g" helloImageTemplateforSIGfromWinSIG.json
 sed -i -e "s/<region2>/$additionalregion/g" helloImageTemplateforSIGfromWinSIG.json
 sed -i -e "s/<runOutputName>/$runOutputName/g" helloImageTemplateforSIGfromWinSIG.json
+sed -i -e "s%<imgBuilderId>%$imgBuilderId%g" helloImageTemplateforSIGfromWinSIG.json
 ```
 
 ## <a name="create-the-image"></a>Création de l’image

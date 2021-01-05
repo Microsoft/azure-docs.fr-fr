@@ -14,11 +14,11 @@ ms.date: 01/22/2020
 ms.author: kumud
 ms.custom: ''
 ms.openlocfilehash: e95441aab6c8ce7de37ba5f6b08d5f7d54e13347
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "77201296"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96017914"
 ---
 # <a name="tutorial-connect-virtual-networks-with-virtual-network-peering-using-the-azure-portal"></a>Tutoriel : Connecter des réseaux virtuels à l’aide du peering de réseaux virtuels en utilisant le portail Azure
 
@@ -138,7 +138,7 @@ La création des machines virtuelles peut prendre plusieurs minutes. Attendez qu
 
 3. Pour vous connecter à la machine virtuelle, ouvrez le fichier RDP téléchargé. Si vous y êtes invité, sélectionnez **Connexion**.
 4. Entrez le nom d’utilisateur et le mot de passe spécifiés lors de la création de la machine virtuelle (il se peut que vous deviez choisir **Plus de choix**, puis **Utiliser un compte différent** pour spécifier les informations d’identification que vous avez entrées lors de la création de la machine virtuelle), puis sélectionnez **OK**.
-5. Un avertissement de certificat peut s’afficher pendant le processus de connexion. Sélectionnez**Oui** pour poursuivre le processus de connexion.
+5. Un avertissement de certificat peut s’afficher pendant le processus de connexion. Sélectionnez **Oui** pour poursuivre le processus de connexion.
 6. Dans une étape ultérieure, un test ping sera utilisé pour communiquer avec la machine virtuelle *myVm2* depuis la machine virtuelle *myVm1*. Le test ping utilise le protocole ICMP, qui est interdit par le Pare-feu Windows par défaut. Sur la machine virtuelle *myVm1*, autorisez ICMP à travers le pare-feu Windows afin de pouvoir effectuer un test ping pour cette machine virtuelle à partir de *myVm2* lors d’une étape ultérieure, en utilisant PowerShell :
 
     ```powershell

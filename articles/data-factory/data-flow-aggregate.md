@@ -7,13 +7,13 @@ ms.reviewer: daperlov
 ms.service: data-factory
 ms.topic: conceptual
 ms.custom: seo-lt-2019
-ms.date: 03/24/2020
-ms.openlocfilehash: 871f2b49e2dce9d762ef8a54923da04b0f24e4be
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.date: 09/14/2020
+ms.openlocfilehash: 71f5488b1f689e8892155b013730bcbb3c8e0e35
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81606532"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90531919"
 ---
 # <a name="aggregate-transformation-in-mapping-data-flow"></a>Transformation d’agrégation dans le flux de données de mappage
 
@@ -29,17 +29,18 @@ Sélectionnez une colonne existante ou créez une colonne calculée à utiliser 
 
 Un groupe par clause est facultatif dans une transformation d’agrégation.
 
-## <a name="aggregate-column"></a>Colonne d’agrégation 
+## <a name="aggregate-columns"></a>Colonnes d’agrégation
 
-Accédez à l’onglet **Agrégations** pour créer des expressions d’agrégation. Vous pouvez soit remplacer une colonne existante par une agrégation, soit créer un nouveau champ avec un nouveau nom. L’expression d’agrégation est entrée dans la zone de droite en regard du sélecteur de nom de colonne. Pour modifier l’expression, cliquez sur la zone de texte pour ouvrir le Générateur d’expressions. Pour ajouter des agrégations supplémentaires, pointez sur une expression existante et cliquez sur l’icône plus pour créer une colonne d’agrégation ou un [modèle de colonne](concepts-data-flow-column-pattern.md).
+Accédez à l’onglet **Agrégations** pour créer des expressions d’agrégation. Vous pouvez soit remplacer une colonne existante par une agrégation, soit créer un nouveau champ avec un nouveau nom. L’expression d’agrégation est entrée dans la zone de droite en regard du sélecteur de nom de colonne. Pour modifier l’expression, cliquez sur la zone de texte pour ouvrir le Générateur d’expressions. Pour ajouter des colonnes d’agrégation, cliquez sur **Ajouter** au-dessus de la liste des colonnes ou de l’icône « plus » en regard d’une colonne d’agrégation existante. Choisissez **Ajouter une colonne** ou **Ajouter un modèle de colonne**. Chaque expression d’agrégation doit contenir au moins une fonction d’agrégation.
 
-Chaque expression d’agrégation doit contenir au moins une fonction d’agrégation.
-
-![Paramètres d’agrégation de transformation d’agrégation](media/data-flow/agg2.png "Paramètres d’agrégation de transformation d’agrégation")
-
+![Paramètres d’agrégation](media/data-flow/aggregate-columns.png "Paramètres d’agrégation")
 
 > [!NOTE]
 > En mode Débogage, le Générateur d’expressions ne peut pas produire d’aperçus de données avec des fonctions d’agrégation. Pour afficher des aperçus de données pour les transformations d’agrégation, fermez le Générateur d’expressions et affichez les données via l’onglet Aperçu des données.
+
+### <a name="column-patterns"></a>Modèles de colonne
+
+Utilisez des [modèles de colonne](concepts-data-flow-column-pattern.md) pour appliquer la même agrégation à un ensemble de colonnes. Cela est utile si vous souhaitez conserver de nombreuses colonnes du schéma d’entrée, car elles sont supprimées par défaut. Utilisez une méthode heuristique telle que `first()` pour conserver les colonnes d’entrée à l’aide de l’agrégation.
 
 ## <a name="reconnect-rows-and-columns"></a>Reconnecter les lignes et les colonnes
 

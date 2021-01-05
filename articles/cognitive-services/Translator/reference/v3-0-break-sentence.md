@@ -8,14 +8,14 @@ manager: nitinme
 ms.service: cognitive-services
 ms.subservice: translator-text
 ms.topic: reference
-ms.date: 01/21/2020
+ms.date: 08/06/2020
 ms.author: swmachan
-ms.openlocfilehash: 01a5404100da6c669da4513ac9fd08c959df220e
-ms.sourcegitcommit: bb0afd0df5563cc53f76a642fd8fc709e366568b
+ms.openlocfilehash: 27069cf38da2567a3af3ed0fb65baead43665186
+ms.sourcegitcommit: 22da82c32accf97a82919bf50b9901668dc55c97
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83588630"
+ms.lasthandoff: 11/08/2020
+ms.locfileid: "94369475"
 ---
 # <a name="translator-30-breaksentence"></a>Translator 3.0 : BreakSentence
 
@@ -43,7 +43,7 @@ Les en-têtes de demande sont les suivants :
 
 | headers | Description |
 | ------- | ----------- |
-| En-tête(s) d’authentification <img width=200/>  | **En-tête de demande obligatoire**.<br/>Voir les <a href="https://docs.microsoft.com/azure/cognitive-services/translator/reference/v3-0-reference#authentication">options disponibles pour l’authentification</a>. |
+| En-tête(s) d’authentification <img width=200/>  | **En-tête de demande obligatoire**.<br/>Voir les <a href="/azure/cognitive-services/translator/reference/v3-0-reference#authentication">options disponibles pour l’authentification</a>. |
 | Content-Type | **En-tête de demande obligatoire**.<br/>Spécifie le type de contenu de la charge utile. Les valeurs possibles sont les suivantes : `application/json`. |
 | Content-Length    | **En-tête de demande obligatoire**.<br/>Longueur du corps de la demande.  | 
 | X-ClientTraceId   | **Facultatif**.<br/>GUID généré par le client pour identifier de façon unique la demande. Vous pouvez omettre cet en-tête si vous incluez l’ID de trace dans la chaîne de requête à l’aide d’un paramètre de requête nommé `ClientTraceId`.  | 
@@ -61,7 +61,7 @@ Le corps de la demande est un tableau JSON. Chaque élément du tableau est un o
 Les limites suivantes s'appliquent :
 
 * Le tableau ne peut pas compter plus de 100 éléments.
-* La valeur texte d’un élément de tableau ne peut pas dépasser 10 000 caractères, espaces compris.
+* La valeur texte d’un élément de tableau ne peut pas dépasser 50 000 caractères, espaces comprises.
 * L’intégralité du texte inclus dans la demande ne peut pas dépasser 50 000 caractères, espaces compris.
 * Si le paramètre de requête `language` est spécifié, tous les éléments du tableau doivent être dans la même langue. Sinon, la détection automatique de la langue est appliquée indépendamment à chaque élément du tableau.
 
@@ -141,7 +141,7 @@ Voici les codes d’état HTTP qu’une demande peut retourner.
   </tr>
 </table> 
 
-Si une erreur se produit, la requête renvoie également une réponse d'erreur JSON. Le code d’erreur est un nombre à 6 chiffres qui combine le code d’état HTTP à 3 chiffres et un nombre à 3 chiffres qui sert à catégoriser plus précisément l’erreur. Vous trouverez les codes d’erreur les plus courants sur la [page Référence de Translator v3](https://docs.microsoft.com/azure/cognitive-services/translator/reference/v3-0-reference#errors). 
+Si une erreur se produit, la requête renvoie également une réponse d'erreur JSON. Le code d’erreur est un nombre à 6 chiffres qui combine le code d’état HTTP à 3 chiffres et un nombre à 3 chiffres qui sert à catégoriser plus précisément l’erreur. Vous trouverez les codes d’erreur les plus courants sur la [page Référence de Translator v3](./v3-0-reference.md#errors). 
 
 ## <a name="examples"></a>Exemples
 
@@ -150,4 +150,3 @@ L’exemple suivant montre comment obtenir les limites d’une phrase unique. La
 ```curl
 curl -X POST "https://api.cognitive.microsofttranslator.com/breaksentence?api-version=3.0" -H "Ocp-Apim-Subscription-Key: <client-secret>" -H "Content-Type: application/json" -d "[{'Text':'How are you? I am fine. What did you do today?'}]"
 ```
-

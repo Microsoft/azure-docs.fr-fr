@@ -6,16 +6,16 @@ services: virtual-network
 author: KumudD
 manager: mtillman
 ms.service: virtual-network
-ms.topic: article
+ms.topic: how-to
 ms.workload: infrastructure-services
 ms.date: 06/04/2018
 ms.author: kumud
-ms.openlocfilehash: cfc1b933abbbc3736145ff3c6a600f48260538d2
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 221f7577b3181b1535ab9f544073dac4d031fe66
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82133824"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89319438"
 ---
 # <a name="resource-logging-for-a-network-security-group"></a>Journalisation des ressources pour un groupe de sécurité réseau
 
@@ -24,7 +24,7 @@ Un groupe de sécurité réseau (NSG) comprend les règles qui autorisent ou ref
 Quand vous activez la journalisation pour un groupe de sécurité réseau, vous pouvez collecter les types suivants d’informations sur le journal de ressources :
 
 * **Événement :** les entrées sont enregistrées pour lesquelles des règles NSG sont appliquées aux machines virtuelles, en fonction de l’adresse MAC.
-* **Compteur de règles :** contient les entrées correspondant au nombre de fois où chaque règle NSG a été appliquée pour refuser ou autoriser le trafic. L’état de ces règles est collecté toutes les 60 secondes.
+* **Compteur de règles :** contient les entrées correspondant au nombre de fois où chaque règle NSG a été appliquée pour refuser ou autoriser le trafic. L’état de ces règles est collecté toutes les 300 secondes.
 
 Les journaux de ressources ne sont disponibles que pour les groupes de sécurité réseau déployés via le modèle de déploiement Azure Resource Manager. Vous ne pouvez pas activer la journalisation des ressources pour les groupes de sécurité réseau déployés via le modèle de déploiement classique. Pour mieux comprendre ces deux modèles, consultez [Présentation des modèles de déploiement Azure](../resource-manager-deployment-model.md?toc=%2fazure%2fvirtual-network%2ftoc.json).
 

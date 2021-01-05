@@ -5,11 +5,11 @@ ms.topic: include
 ms.date: 02/19/2020
 ms.author: cynthn
 ms.openlocfilehash: 7e70b8c789dbabb9075cd9d69c44bbfed916f153
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "77911784"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96002552"
 ---
 > [!IMPORTANT]
 > Les machines virtuelles classiques seront mises hors service le 1er mars 2023.

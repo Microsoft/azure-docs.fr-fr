@@ -1,19 +1,19 @@
 ---
 title: 'Démarrage rapide : Créer une application Android Unity'
 description: Dans ce démarrage rapide, vous allez apprendre à générer une application Android avec Unity en utilisant Spatial Anchors.
-author: craigktreasure
-manager: vriveras
+author: msftradford
+manager: MehranAzimi-msft
 services: azure-spatial-anchors
-ms.author: crtreasu
-ms.date: 02/24/2019
+ms.author: parkerra
+ms.date: 11/20/2020
 ms.topic: quickstart
 ms.service: azure-spatial-anchors
-ms.openlocfilehash: 7acff7f0249cdedcebd367fc315be92cafb9ab78
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: 3c17eadfad71f58b4557f8115a0d1d3de392b4b9
+ms.sourcegitcommit: b8eba4e733ace4eb6d33cc2c59456f550218b234
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "77615445"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "96015126"
 ---
 # <a name="quickstart-create-a-unity-android-app-with-azure-spatial-anchors"></a>Démarrage rapide : Créer une application Android Unity avec Azure Spatial Anchors
 
@@ -34,11 +34,11 @@ Vous découvrirez comment effectuer les actions suivantes :
 
 Pour suivre ce guide de démarrage rapide, veillez à avoir :
 
-- Un ordinateur Windows ou macOS doté de <a href="https://unity3d.com/get-unity/download" target="_blank">Unity 2019.1 ou 2019.2</a> avec les modules Android Build Support et Android SDK & NDK Tools.
+- Une machine Windows ou macOS avec <a href="https://unity3d.com/get-unity/download" target="_blank">Unity 2019.4 (LTS)</a>, avec les modules **Android Build Support** avec **Android SDK & NDK Tools** et **OpenJDK**.
   - Si vous exécutez Windows, vous avez aussi besoin de <a href="https://git-scm.com/download/win" target="_blank">Git pour Windows</a> et <a href="https://git-lfs.github.com/">Git LFS</a>.
   - Si vous exécutez macOS, installez Git via HomeBrew. Entrez la commande suivante sur une seule ligne du Terminal : `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`. Puis exécutez `brew install git` et `brew install git-lfs`.
 - Un appareil Android <a href="https://developer.android.com/studio/debug/dev-options" target="_blank">prêt pour le développement</a> et <a href="https://developers.google.com/ar/discover/supported-devices" target="_blank">compatible ARCore</a>.
-  - Des pilotes d’appareils supplémentaires peuvent être nécessaires pour que votre ordinateur puisse communiquer avec votre appareil Android. Cliquez [ici](https://developer.android.com/studio/run/device.html) pour obtenir des informations et instructions supplémentaires.
+  - Des pilotes d’appareils supplémentaires peuvent être nécessaires pour que votre ordinateur puisse communiquer avec votre appareil Android. Vous pouvez obtenir des informations et des instructions supplémentaires [ici](https://developer.android.com/studio/run/device.html).
 
 [!INCLUDE [Create Spatial Anchors resource](../../../includes/spatial-anchors-get-started-create-resource.md)]
 
@@ -50,19 +50,19 @@ Pour suivre ce guide de démarrage rapide, veillez à avoir :
 
 [!INCLUDE [Android Unity Build Settings](../../../includes/spatial-anchors-unity-android-build-settings.md)]
 
-## <a name="configure-account-identifier-and-key"></a>Configurer l’identificateur et la clé du compte
-
-Dans le volet **Project**, accédez à `Assets/AzureSpatialAnchors.Examples/Scenes` et ouvrez le fichier de scène `AzureSpatialAnchorsBasicDemo.unity`.
-
 [!INCLUDE [Configure Unity Scene](../../../includes/spatial-anchors-unity-configure-scene.md)]
-
-Enregistrez la scène en sélectionnant **File** -> **Save**.
 
 ## <a name="export-the-android-studio-project"></a>Exporter le projet Android Studio
 
 [!INCLUDE [Export Unity Project](../../../includes/spatial-anchors-unity-export-project-snip.md)]
 
-Sélectionnez votre appareil dans **Appareil d’exécution**, puis cliquez sur **Générer et exécuter**. Vous êtes ensuite invité à enregistrer in fichier `.apk` dont vous pouvez choisir le nom.
+Sélectionnez votre appareil dans **Appareil d’exécution**, puis sélectionnez **Générer et exécuter**. Vous êtes ensuite invité à enregistrer in fichier `.apk`, auquel vous pouvez donner n’importe quel nom.
+
+Dans l’application, sélectionnez **BasicDemo** à l’aide des flèches, puis appuyez sur le bouton **Go!** pour exécuter la démo. Suivez les instructions pour placer et rappeler une ancre.
+
+![Capture d’écran 1](./media/get-started-unity-android/screenshot-1.jpg)
+![Capture d’écran 2](./media/get-started-unity-android/screenshot-2.jpg)
+![Capture d’écran 3](./media/get-started-unity-android/screenshot-3.jpg)
 
 Suivez les instructions dans l’application pour placer et rappeler une ancre.
 
@@ -70,11 +70,7 @@ Suivez les instructions dans l’application pour placer et rappeler une ancre.
 
 ### <a name="rendering-issues"></a>Problèmes de rendu
 
-Pendant l’exécution de l’application, si vous ne voyez pas de caméra en arrière-plan (au lieu de cela, l’arrière-plan est vide, bleu ou présente d’autres textures), vous devez probablement réimporter les ressources dans Unity. Arrêtez l’application. Dans le menu supérieur d’Unity, choisissez **Assets -> Reimport all**. Ensuite, exécutez de nouveau l’application.
-
-### <a name="unity-20193"></a>Unity 2019.3
-
-En raison de changements cassants, Unity 2019.3 n’est pas pris en charge pour le moment. Utilisez Unity 2019.1 ou 2019.2.
+Pendant l’exécution de l’application, si vous ne voyez pas de caméra en arrière-plan (par exemple, vous voyez au lieu de cela un arrière-plan blanc, bleu ou d’une autre texture), vous devez probablement réimporter les ressources dans Unity. Arrêtez l’application. Dans le menu supérieur d’Unity, choisissez **Assets -> Reimport all**. Ensuite, exécutez de nouveau l’application.
 
 [!INCLUDE [Clean-up section](../../../includes/clean-up-section-portal.md)]
 
@@ -82,3 +78,6 @@ En raison de changements cassants, Unity 2019.3 n’est pas pris en charge pour
 
 > [!div class="nextstepaction"]
 > [Tutoriel : Partager Spatial Anchors sur des appareils](../tutorials/tutorial-share-anchors-across-devices.md)
+
+> [!div class="nextstepaction"]
+> [Guide pratique pour configurer Azure Spatial Anchors dans un projet Unity](../how-tos/setup-unity-project.md)

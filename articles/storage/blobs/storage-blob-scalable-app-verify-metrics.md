@@ -7,12 +7,12 @@ ms.topic: tutorial
 ms.date: 02/20/2018
 ms.author: rogarana
 ms.subservice: blobs
-ms.openlocfilehash: cfc3c445595bec046de4256a57d566067fe3d29e
-ms.sourcegitcommit: 366e95d58d5311ca4b62e6d0b2b47549e06a0d6d
+ms.openlocfilehash: 708a2369e5ba21f47f3d3fea509654b0385363f7
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82692439"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95912312"
 ---
 # <a name="verify-throughput-and-latency-metrics-for-a-storage-account"></a>Vérifier les métriques de débit et de latence d’un compte de stockage
 
@@ -24,7 +24,7 @@ Dans ce quatrième volet, vous apprenez à :
 > * Configurer des graphiques dans le portail Azure
 > * Vérifier les métriques de débit et de latence
 
-Les [métriques de stockage Azure](../common/monitor-storage.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json) utilisent Azure Monitor pour fournir une vue unifiée des performances et de la disponibilité de votre compte de stockage.
+Les [métriques de stockage Azure](./monitor-blob-storage.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json) utilisent Azure Monitor pour fournir une vue unifiée des performances et de la disponibilité de votre compte de stockage.
 
 ## <a name="configure-metrics"></a>Configurer les métriques
 
@@ -52,7 +52,7 @@ Vous pouvez affecter plusieurs métriques à un graphique. Mais dans ce cas, vou
 
 ## <a name="dimensions"></a>Dimensions
 
-Les [dimensions](../common/monitor-storage-reference.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json#metrics-dimensions) permettent d’examiner plus en détail les graphiques et d’obtenir de plus amples informations. Chaque métrique a des dimensions différentes. **Nom de l’API** est l’une des dimensions disponibles. Cette dimension découpe le graphique par appel d’API. La première image ci-dessous montre un exemple de graphique représentant le nombre total de transactions pour un compte de stockage. La deuxième image montre le même graphique, mais avec la dimension Nom de l’API sélectionnée. Comme vous pouvez le voir, chaque transaction est répertoriée. Vous obtenez ainsi plus de détails sur le nombre d’appels effectués par nom d’API.
+Les [dimensions](./monitor-blob-storage-reference.md?toc=%2fazure%2fstorage%2fblobs%2ftoc.json#metrics-dimensions) permettent d’examiner plus en détail les graphiques et d’obtenir de plus amples informations. Chaque métrique a des dimensions différentes. **Nom de l’API** est l’une des dimensions disponibles. Cette dimension découpe le graphique par appel d’API. La première image ci-dessous montre un exemple de graphique représentant le nombre total de transactions pour un compte de stockage. La deuxième image montre le même graphique, mais avec la dimension Nom de l’API sélectionnée. Comme vous pouvez le voir, chaque transaction est répertoriée. Vous obtenez ainsi plus de détails sur le nombre d’appels effectués par nom d’API.
 
 ![Métriques de compte de stockage - transactions sans dimension](./media/storage-blob-scalable-app-verify-metrics/transactionsnodimensions.png)
 

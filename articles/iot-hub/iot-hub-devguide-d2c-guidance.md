@@ -11,12 +11,14 @@ ms.date: 01/29/2018
 ms.custom:
 - amqp
 - mqtt
-ms.openlocfilehash: b984ee7ed662bf089e7bcb6fc7e948fb61ed1209
-ms.sourcegitcommit: ffc6e4f37233a82fcb14deca0c47f67a7d79ce5c
+- 'Role: Cloud Development'
+- 'Role: IoT Device'
+ms.openlocfilehash: dd4f4ad7f84ebc1f5e254843e7afa4aa0f3f224f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81733211"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87319131"
 ---
 # <a name="device-to-cloud-communications-guidance"></a>Recommandations sur les communications appareil-à-cloud
 
@@ -32,7 +34,7 @@ Lors de l’envoi d’informations de l’application d’appareil au serveur pr
 
 Voici une comparaison détaillée des différentes options de communication appareil-à-cloud.
 
-|  | Messages appareil-à-cloud | Propriétés signalées du jumeau d’appareil | Chargements de fichiers |
+| Factor | Messages appareil-à-cloud | Propriétés signalées du jumeau d’appareil | Chargements de fichiers |
 | ---- | ------- | ---------- | ---- |
 | Scénario | Télémétrie et alertes de série chronologique. Par exemple, les lots de données de capteur de 256 Ko envoyés toutes les 5 minutes. | Capacités et conditions disponibles. Par exemple, le mode de connectivité d’appareil actuel, tel que réseau mobile ou Wi-Fi. Synchronisation des workflows de longue durée, comme les mises à jour logicielles et de la configuration. | Fichiers multimédias. Lots de télémétrie volumineux (généralement compressés). |
 | Stockage et récupération | Stockage temporaire par IoT Hub, jusqu’à 7 jours. Lecture uniquement séquentielle. | Stockage par IoT Hub dans le jumeau d’appareil. Récupérables à l’aide du [langage de requête IoT Hub](iot-hub-devguide-query-language.md). | Stockées dans le compte de stockage Azure fourni par l’utilisateur. |

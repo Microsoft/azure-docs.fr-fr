@@ -1,6 +1,6 @@
 ---
-title: Fichier Include
-description: Fichier Include
+title: Fichier include
+description: Fichier include
 author: robinsh
 ms.service: iot-hub
 services: iot-hub
@@ -9,11 +9,11 @@ ms.date: 08/07/2019
 ms.author: robinsh
 ms.custom: include file
 ms.openlocfilehash: 3386cb51a8a728576f6615002d6154d89ca662c1
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "68883750"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "95993248"
 ---
 <!-- This tells how to get the connection string for the registryReadWrite shared access policy of your IoT hub -->
 

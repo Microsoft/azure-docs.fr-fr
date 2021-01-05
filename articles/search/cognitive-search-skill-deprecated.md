@@ -8,12 +8,12 @@ ms.author: luisca
 ms.service: cognitive-search
 ms.topic: conceptual
 ms.date: 11/04/2019
-ms.openlocfilehash: 5f3587e4398be28cbaa2372be720258196bb48ff
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 85f3b9862bd8155c1a4b11860dc82d92a2f9e810
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "72792033"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88936093"
 ---
 # <a name="deprecated-cognitive-skills-in-azure-cognitive-search"></a>Compétences cognitives déconseillées dans Recherche cognitive Azure
 
@@ -38,7 +38,7 @@ Ce document décrit les compétences cognitives qui sont considérées comme dé
 
 Utilisez [Microsoft.Skills.Text.EntityRecognitionSkill](cognitive-search-skill-entity-recognition.md) à la place. Il fournit la plupart des fonctionnalités de NamedEntityRecognitionSkill à un meilleur niveau de qualité. Il détient également des informations plus riches dans ses champs de sortie complexes.
 
-Pour migrer vers la [compétence de reconnaissance des entités](cognitive-search-skill-entity-recognition.md), vous devrez apporter une ou plusieurs des modifications suivantes à votre définition de compétence. Vous pouvez mettre à jour la définition de compétence à l’aide de l’[API de mise à jour de compétences](https://docs.microsoft.com/rest/api/searchservice/update-skillset).
+Pour migrer vers la [compétence de reconnaissance des entités](cognitive-search-skill-entity-recognition.md), vous devrez apporter une ou plusieurs des modifications suivantes à votre définition de compétence. Vous pouvez mettre à jour la définition de compétence à l’aide de l’[API de mise à jour de compétences](/rest/api/searchservice/update-skillset).
 
 > [!NOTE]
 > actuellement, le score de confiance comme concept n’est pas pris en charge. Le paramètre `minimumPrecision` existe sur `EntityRecognitionSkill` pour une utilisation ultérieure et la compatibilité descendante.

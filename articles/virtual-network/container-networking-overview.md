@@ -1,6 +1,6 @@
 ---
 title: Mise en réseau de conteneurs avec le réseau virtuel Azure | Microsoft Docs
-description: Découvrez comment activer des conteneurs pour qu’ils utilisent un réseau virtuel Azure.
+description: En savoir plus sur le plug-in d’interface réseau de conteneur de réseau virtuel Azure et sur l’activation des conteneurs pour utiliser un réseau virtuel Azure.
 services: virtual-network
 documentationcenter: na
 author: aanandr
@@ -10,18 +10,18 @@ tags: azure-resource-manager
 ms.assetid: ''
 ms.service: virtual-network
 ms.devlang: na
-ms.topic: overview
+ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 9/18/2018
 ms.author: aanandr
 ms.custom: ''
-ms.openlocfilehash: bdd364c097552d3a1b52073af97d33db70d78556
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.openlocfilehash: bd86b2ec803b2327d3daa2d4274f13328fec8c27
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "75647439"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87283212"
 ---
 # <a name="enable-containers-to-use-azure-virtual-network-capabilities"></a>Permettre aux conteneurs d’utiliser les fonctionnalités du réseau virtuel Azure
 

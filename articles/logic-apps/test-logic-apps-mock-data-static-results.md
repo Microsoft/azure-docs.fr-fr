@@ -8,12 +8,12 @@ ms.author: klam
 ms.reviewer: estfan, logicappspm
 ms.topic: article
 ms.date: 05/13/2019
-ms.openlocfilehash: b71aae91f4a065b70537a300aa0bd7016edfd4b4
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 711d753203aeaeba50cea692053a37fcab2e9c7b
+ms.sourcegitcommit: daab0491bbc05c43035a3693a96a451845ff193b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74790282"
+ms.lasthandoff: 10/29/2020
+ms.locfileid: "93027701"
 ---
 # <a name="test-logic-apps-with-mock-data-by-setting-up-static-results"></a>Tester des applications logiques avec des données fictives en configurant des résultats statiques
 
@@ -37,7 +37,7 @@ Par exemple, si vous avez configuré des résultats statiques pour l’action d�
 
 1. Procédez comme suit pour l’action pour laquelle vous souhaitez configurer des résultats statiques : 
 
-   1. En haut à droite de l’action, choisissez le bouton représentant des points de suspension ( *...* ), puis sélectionnez **Résultat statique**, par exemple :
+   1. En haut à droite de l’action, choisissez le bouton représentant des points de suspension ( *...* ), puis sélectionnez **Résultat statique** , par exemple :
 
       ![Sélectionner « Résultat statique » > « Activer le résultat statique »](./media/test-logic-apps-mock-data-static-results/select-static-result.png)
 
@@ -56,7 +56,7 @@ Par exemple, si vous avez configuré des résultats statiques pour l’action d�
 
       Pour entrer des données fictives au format JavaScript Objet Notation (JSON), choisissez **Basculer en mode JSON** (![choisissez « Basculer en mode JSON »](./media/test-logic-apps-mock-data-static-results/switch-to-json-mode-button.png)).
 
-   1. Pour les propriétés facultatives, ouvrez la liste **Sélectionner des champs facultatifs**, puis sélectionnez les propriétés que vous souhaitez simuler.
+   1. Pour les propriétés facultatives, ouvrez la liste **Sélectionner des champs facultatifs** , puis sélectionnez les propriétés que vous souhaitez simuler.
 
       ![Sélectionner des propriétés facultatives](./media/test-logic-apps-mock-data-static-results/optional-properties.png)
 
@@ -78,7 +78,7 @@ Si votre application logique a une exécution précédente avec des sorties, vou
 
 1. Dans le menu de votre application logique, sélectionnez **Vue d’ensemble**.
 
-1. Dans la section **Historique des exécutions**, sélectionnez l’application logique souhaitée.
+1. Dans la section **Historique des exécutions** , sélectionnez l’application logique souhaitée.
 
 1. Dans le flux de travail de votre application logique, recherchez et développez l’action qui a les sorties souhaitées.
 
@@ -112,9 +112,9 @@ L’historique des exécutions de votre application logique identifie les exécu
 
 1. Dans le menu de votre application logique, sélectionnez **Vue d’ensemble**. 
 
-1. Dans le volet droit, sous **Historique des exécutions**, recherchez la colonne **Résultats statiques**. 
+1. Dans le volet droit, sous **Historique des exécutions** , recherchez la colonne **Résultats statiques**. 
 
-   Toute exécution qui inclut des actions avec des résultats a la colonne **Résultats statiques** définie sur **Activée**, par exemple :
+   Toute exécution qui inclut des actions avec des résultats a la colonne **Résultats statiques** définie sur **Activée** , par exemple :
 
    ![Historique des exécutions - colonne de résultats statiques](./media/test-logic-apps-mock-data-static-results/run-history.png)
 
@@ -130,11 +130,11 @@ La désactivation des résultats statiques ne supprime pas les valeurs de votre 
 
 1. Recherchez l’action pour laquelle vous souhaitez désactiver les sorties statiques. En haut à droite de l’action, cliquez sur l’icône de bécher test (![Icône pour résultats statiques](./media/test-logic-apps-mock-data-static-results/static-results-test-beaker-icon.png)).
 
-   ![Désactiver les résultats statiques](./media/test-logic-apps-mock-data-static-results/disable-static-results.png)
+   ![Capture d’écran montrant une action HTTP dans laquelle vous pouvez sélectionner l’icône en forme de bécher de laboratoire.](./media/test-logic-apps-mock-data-static-results/disable-static-results.png)
 
 1. Choisissez **Désactiver le résultat statique** > **Terminé**.
 
-   ![Désactiver les résultats statiques](./media/test-logic-apps-mock-data-static-results/disable-static-results-button.png)
+   ![Capture d’écran montrant l’option Désactiver le résultat statique que vous pouvez sélectionner.](./media/test-logic-apps-mock-data-static-results/disable-static-results-button.png)
 
 ## <a name="reference"></a>Informations de référence
 

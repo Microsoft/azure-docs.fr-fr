@@ -2,20 +2,20 @@
 title: Méthodes de routage du trafic Azure Traffic Manager
 description: Cet article va vous aider à comprendre les différentes méthodes de routage du trafic utilisées par Traffic Manager.
 services: traffic-manager
-author: rohinkoul
+author: duongau
 ms.service: traffic-manager
 ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 09/17/2018
-ms.author: rohink
-ms.openlocfilehash: 4a035506943eeffa2c3fc4fec27c47da4136683b
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.author: duau
+ms.openlocfilehash: 3cf493beab6dfe1767ae35ea36732dc364e29736
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79226985"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89401654"
 ---
 # <a name="traffic-manager-routing-methods"></a>Méthodes de routage de Traffic Manager
 

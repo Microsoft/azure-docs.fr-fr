@@ -3,17 +3,19 @@ title: Clause GROUP BY dans Azure Cosmos DB
 description: Découvrez la clause GROUP BY pour Azure Cosmos DB.
 author: timsander1
 ms.service: cosmos-db
+ms.subservice: cosmosdb-sql
 ms.topic: conceptual
 ms.date: 05/19/2020
 ms.author: tisande
-ms.openlocfilehash: b602b56d37cec0e23d31318f6675d031bdd6bcdb
-ms.sourcegitcommit: 595cde417684e3672e36f09fd4691fb6aa739733
+ms.openlocfilehash: d9cafc100ddd4b553577c447e82334e6ee7d1b6d
+ms.sourcegitcommit: 65db02799b1f685e7eaa7e0ecf38f03866c33ad1
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83700992"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96545416"
 ---
 # <a name="group-by-clause-in-azure-cosmos-db"></a>Clause GROUP BY dans Azure Cosmos DB
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
 
 La clause GROUP BY divise les résultats de la requête en fonction des valeurs d’une ou plusieurs propriétés spécifiées.
 
@@ -39,7 +41,7 @@ La clause GROUP BY divise les résultats de la requête en fonction des valeurs 
 
 ## <a name="remarks"></a>Notes
   
-  Quand une requête utilise une clause GROUP BY, la clause SELECT ne peut contenir que le sous-ensemble de propriétés et de fonctions système incluses dans la clause GROUP BY. Les [fonctions système d’agrégation](sql-query-aggregates.md) font exception. Elles peuvent apparaître dans la clause SELECT sans être incluses dans la clause GROUP BY. Par ailleurs, vous pouvez toujours inclure des valeurs littérales dans la clause SELECT.
+  Quand une requête utilise une clause GROUP BY, la clause SELECT ne peut contenir que le sous-ensemble de propriétés et de fonctions système incluses dans la clause GROUP BY. Les [fonctions d’agrégation](sql-query-aggregate-functions.md) font exception. Elles peuvent apparaître dans la clause SELECT sans être incluses dans la clause GROUP BY. Par ailleurs, vous pouvez toujours inclure des valeurs littérales dans la clause SELECT.
 
   La clause GROUP BY doit être placée après les clauses SELECT, FROM et WHERE et avant la clause OFFSET LIMIT. Vous ne pouvez pas utiliser la clause GROUP BY avec une clause ORDER BY pour le moment, mais cela est prévu.
 
@@ -190,4 +192,4 @@ Les résultats sont :
 
 - [Bien démarrer](sql-query-getting-started.md)
 - [Clause SELECT](sql-query-select.md)
-- [Fonctions d’agrégation](sql-query-aggregates.md)
+- [Fonctions d’agrégation](sql-query-aggregate-functions.md)

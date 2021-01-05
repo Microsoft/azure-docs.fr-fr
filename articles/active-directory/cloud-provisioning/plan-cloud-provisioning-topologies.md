@@ -1,6 +1,6 @@
 ---
 title: Topologies et scénarios pris en charge par le provisionnement cloud Azure AD Connect
-description: Cette rubrique décrit les prérequis et la configuration matérielle requise pour le provisionnement cloud.
+description: Découvrez les diverses topologies Azure Active Directory (Azure AD) et locales qui utilisent le provisionnement cloud Azure AD Connect.
 services: active-directory
 author: billmath
 manager: daveba
@@ -11,12 +11,12 @@ ms.date: 02/26/2020
 ms.subservice: hybrid
 ms.author: billmath
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 386af46bbee623d37bc914d2ee9130c914c6c885
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 172e836a212f9ce097c2c4e392a7386a510c2c6b
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77620874"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91266290"
 ---
 # <a name="azure-ad-connect-cloud-provisioning-supported-topologies-and-scenarios"></a>Topologies et scénarios pris en charge par le provisionnement cloud Azure AD Connect
 Cet article décrit diverses topologies Azure Active Directory (Azure AD) et locales qui utilisent le provisionnement cloud Azure AD Connect. Cet article contient uniquement des configurations et des scénarios pris en charge.
@@ -34,7 +34,7 @@ La liste suivante regroupe les informations à garder à l’esprit lors du choi
 - Vous ne pouvez pas changer l’attribut utilisé pour l’ancre source.
 
 ## <a name="single-forest-single-azure-ad-tenant"></a>Une seule forêt, un seul client Azure AD
-![Topologie pour une forêt unique et un locataire unique](media/plan-cloud-provisioning-topologies/single-forest.png)
+![Diagramme montrant la topologie pour une seule forêt et un seul locataire.](media/plan-cloud-provisioning-topologies/single-forest.png)
 
 La topologie la plus simple est une forêt locale unique, avec un ou plusieurs domaines, et un locataire Azure AD unique.  Pour obtenir un exemple de ce scénario, consultez le [Tutoriel : Une seule forêt avec un seul locataire Azure AD](tutorial-single-forest.md)
 
@@ -45,7 +45,7 @@ La topologie la plus simple est une forêt locale unique, avec un ou plusieurs d
 Une topologie courante est constituée de plusieurs forêts Active Directory, avec un ou plusieurs domaines, et un seul locataire Azure AD.  
 
 ## <a name="existing-forest-with-azure-ad-connect-new-forest-with-cloud-provisioning"></a>Forêt existante avec Azure AD Connect, nouvelle forêt avec le provisionnement cloud
-![Topologie pour une forêt unique et un locataire unique](media/plan-cloud-provisioning-topologies/existing-forest-new-forest.png)
+![Diagramme montrant la topologie pour une forêt existante et une nouvelle forêt.](media/plan-cloud-provisioning-topologies/existing-forest-new-forest.png)
 
 Ce scénario est similaire au scénario à plusieurs forêts, à ceci près qu’il implique un environnement Azure AD Connect existant, auquel est apportée ensuite une nouvelle forêt à l’aide du provisionnement cloud Azure AD Connect.  Pour obtenir un exemple de ce scénario, consultez le [Tutoriel : Une forêt existante avec un seul locataire Azure AD](tutorial-existing-forest.md)
 

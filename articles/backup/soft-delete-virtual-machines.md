@@ -3,12 +3,13 @@ title: Suppression réversible pour les machines virtuelles
 description: Découvrez comment la suppression réversible pour les machines virtuelles rend les sauvegardes plus sécurisées.
 ms.topic: conceptual
 ms.date: 04/30/2020
-ms.openlocfilehash: ba00b235ea70bcc2dabbd5a91a3f7003f9bbed49
-ms.sourcegitcommit: 3beb067d5dc3d8895971b1bc18304e004b8a19b3
+ms.custom: references_regions
+ms.openlocfilehash: a8b70d4c8240d096c19e5a8d7449921557b8896c
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82761422"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "89022239"
 ---
 # <a name="soft-delete-for-virtual-machines"></a>Suppression réversible pour les machines virtuelles
 
@@ -37,7 +38,7 @@ La suppression réversible est prise en charge dans les régions USA Centre-Oues
    ![Capture d’écran du portail Azure, machine virtuelle dans l’état de suppression réversible](./media/backup-azure-security-feature-cloud/vm-soft-delete.png)
 
    > [!NOTE]
-   > Si des éléments de sauvegarde supprimés de manière réversible sont présents dans le coffre, celui-ci ne peut pas être supprimé à ce moment-là. Essayez de supprimer le coffre une fois que les éléments de sauvegarde ont été supprimés définitivement et qu’il ne contient plus d’élément dans l’état de suppression réversible.
+   > Si des éléments de sauvegarde supprimés de manière réversible sont présents dans le coffre, celui-ci ne peut pas être supprimé à ce moment-là. Essayez de supprimer le coffre une fois que les éléments de sauvegarde ont été supprimés définitivement et qu’il ne contient plus d’éléments en état de suppression réversible.
 
 4. Pour restaurer la machine virtuelle supprimée de manière réversible, vous devez d’abord annuler sa suppression. Pour ce faire, choisissez la machine virtuelle supprimée de manière réversible, puis sélectionnez l’option **Annuler la suppression**.
 
@@ -61,13 +62,13 @@ La suppression réversible est prise en charge dans les régions USA Centre-Oues
 ## <a name="soft-delete-for-vms-using-azure-powershell"></a>Suppression réversible pour les machines virtuelles à l’aide d’Azure PowerShell
 
 > [!IMPORTANT]
-> La version Az.RecoveryServices minimale requise pour utiliser la suppression réversible avec Azure PowerShell est la version 2.2.0. Utilisez ```Install-Module -Name Az.RecoveryServices -Force``` pour récupérer la version la plus récente.
+> La version minimale d’Az.RecoveryServices qui permet d’utiliser la suppression réversible à l’aide d’Azure PowerShell est la version 2.2.0. Utilisez ```Install-Module -Name Az.RecoveryServices -Force``` pour récupérer la version la plus récente.
 
 Comme indiqué ci-dessus pour le Portail Azure, la séquence d’étapes est la même quand vous utilisez Azure PowerShell.
 
 ### <a name="delete-the-backup-item-using-azure-powershell"></a>Supprimer l’élément de sauvegarde à l’aide d’Azure PowerShell
 
-Supprimez l’élément de sauvegarde en utilisant l’applet de commande PS [Disable-AzRecoveryServicesBackupProtection](https://docs.microsoft.com/powershell/module/az.recoveryservices/Disable-AzRecoveryServicesBackupProtection?view=azps-1.5.0).
+Supprimez l’élément de sauvegarde en utilisant l’applet de commande PowerShell [Disable-AzRecoveryServicesBackupProtection](/powershell/module/az.recoveryservices/disable-azrecoveryservicesbackupprotection).
 
 ```powershell
 Disable-AzRecoveryServicesBackupProtection -Item $myBkpItem -RemoveRecoveryPoints -VaultId $myVaultID -Force
@@ -81,7 +82,7 @@ La valeur « DeleteState » de l’élément de sauvegarde passe de « NotDel
 
 ### <a name="undoing-the-deletion-operation-using-azure-powershell"></a>Annulation de l’opération de suppression à l’aide d’Azure PowerShell
 
-Tout d’abord, récupérez l’élément de sauvegarde approprié qui est dans l’état de suppression réversible (c’est-à-dire sur le point d’être supprimé).
+Tout d’abord, récupérez l’élément de sauvegarde approprié qui est en état de suppression réversible (c’est-à-dire, sur le point d’être supprimé).
 
 ```powershell
 
@@ -94,7 +95,7 @@ VM;iaasvmcontainerv2;selfhostrg;AppVM1    AzureVM             iaasvmcontainerv2;
 $myBkpItem = Get-AzRecoveryServicesBackupItem -BackupManagementType AzureVM -WorkloadType AzureVM -VaultId $myVaultID -Name AppVM1
 ```
 
-Ensuite, effectuez l’opération d’annulation de suppression en utilisant l’applet de commande PS [Undo-AzRecoveryServicesBackupItemDeletion](https://docs.microsoft.com/powershell/module/az.recoveryservices/undo-azrecoveryservicesbackupitemdeletion?view=azps-3.1.0).
+Ensuite, effectuez l’opération d’annulation de suppression en utilisant l’applet de commande PowerShell [Undo-AzRecoveryServicesBackupItemDeletion](/powershell/module/az.recoveryservices/undo-azrecoveryservicesbackupitemdeletion).
 
 ```powershell
 Undo-AzRecoveryServicesBackupItemDeletion -Item $myBKpItem -VaultId $myVaultID -Force
@@ -104,12 +105,12 @@ WorkloadName     Operation            Status               StartTime            
 AppVM1           Undelete             Completed            12/5/2019 12:47:28 PM     12/5/2019 12:47:40 PM     65311982-3755-46b5-8e53-c82ea4f0d2a2
 ```
 
-La valeur « DeleteState » de l’élément de sauvegarde est rétablie sur « NotDeleted ». Mais la protection est toujours arrêtée. [Reprenez la sauvegarde](https://docs.microsoft.com/azure/backup/backup-azure-vms-automation#change-policy-for-backup-items) pour réactiver la protection.
+La valeur « DeleteState » de l’élément de sauvegarde est rétablie sur « NotDeleted ». Mais la protection est toujours arrêtée. [Reprenez la sauvegarde](./backup-azure-vms-automation.md#change-policy-for-backup-items) pour réactiver la protection.
 
 ## <a name="soft-delete-for-vms-using-rest-api"></a>Suppression réversible pour les machines virtuelles avec l'API REST
 
 - Supprimez les sauvegardes à l’aide de l’API REST comme indiqué [ici](backup-azure-arm-userestapi-backupazurevms.md#stop-protection-and-delete-data).
-- Si l’utilisateur souhaite annuler ces opérations de suppression, reportez-vous aux étapes mentionnées [ici](backup-azure-arm-userestapi-backupazurevms.md#undo-the-stop-protection-and-delete-data).
+- Si vous souhaitez annuler ces opérations de suppression, reportez-vous aux étapes mentionnées [ici](backup-azure-arm-userestapi-backupazurevms.md#undo-the-deletion).
 
 ## <a name="how-to-disable-soft-delete"></a>Guide pratique pour désactiver la suppression réversible
 

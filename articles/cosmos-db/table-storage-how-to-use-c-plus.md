@@ -1,6 +1,6 @@
 ---
 title: Utiliser le Stockage Table Azure et l’API Table Azure Cosmos DB avec C++
-description: Stockez des données structurées dans le cloud à l’aide du stockage de tables Azure ou de l’API Table d’Azure Cosmos DB.
+description: Stockez des données structurées dans le cloud à l’aide du Stockage Table Azure ou de l’API Table Azure Cosmos DB avec C++.
 ms.service: cosmos-db
 ms.subservice: cosmosdb-table
 ms.devlang: cpp
@@ -8,14 +8,15 @@ ms.topic: sample
 ms.date: 10/07/2019
 author: sakash279
 ms.author: akshanka
-ms.openlocfilehash: e6d61e329ba91f53b11ace4d258b35950e188dcb
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 79b58b76954cf15289e85dbf763b7a399897635d
+ms.sourcegitcommit: b4880683d23f5c91e9901eac22ea31f50a0f116f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "76771219"
+ms.lasthandoff: 11/11/2020
+ms.locfileid: "94489877"
 ---
 # <a name="how-to-use-azure-table-storage-and-azure-cosmos-db-table-api-with-c"></a>Procédure d’utilisation du Stockage Table Azure et de l’API de Table Azure Cosmos DB avec C++
+[!INCLUDE[appliesto-table-api](includes/appliesto-table-api.md)]
 
 [!INCLUDE [storage-selector-table-include](../../includes/storage-selector-table-include.md)]
 [!INCLUDE [storage-table-applies-to-storagetable-and-cosmos](../../includes/storage-table-applies-to-storagetable-and-cosmos.md)]
@@ -78,7 +79,7 @@ Cet exemple montre comment déclarer un champ statique pour qu’il contienne la
 const utility::string_t storage_connection_string(U("DefaultEndpointsProtocol=https;AccountName=<your_storage_account>;AccountKey=<your_storage_account_key>"));
 ```
 
-Utilisez le nom de votre compte de stockage pour `<your_storage_account>`. Pour <your_storage_account_key>, utilisez la clé d’accès associée au compte de stockage listé dans le [portail Azure](https://portal.azure.com). Pour plus d’informations sur les comptes de stockage et les clés d’accès, consultez [Créer un compte de stockage](../storage/common/storage-create-storage-account.md).
+Utilisez le nom de votre compte de stockage pour `<your_storage_account>`. Pour <your_storage_account_key>, utilisez la clé d’accès associée au compte de stockage listé dans le [portail Azure](https://portal.azure.com). Pour plus d’informations sur les comptes de stockage et les clés d’accès, consultez [Créer un compte de stockage](../storage/common/storage-account-create.md).
 
 ### <a name="set-up-an-azure-cosmos-db-connection-string"></a>Configurer une chaîne de connexion Azure Cosmos DB
 
@@ -94,7 +95,7 @@ Utilisez le nom de votre compte Azure Cosmos DB pour `<your_cosmos_db_account>`.
 Pour tester votre application sur votre ordinateur Windows local, vous pouvez utiliser l’émulateur de stockage Azure installé avec le [Kit de développement logiciel (SDK) Azure](https://azure.microsoft.com/downloads/). L’émulateur de stockage est un utilitaire qui simule les services Azure d’objet blob, de file d’attente et de table disponibles sur votre ordinateur de développement local. L’exemple suivant montre comment déclarer un champ statique pour qu’il contienne une chaîne de connexion vers votre émulateur de stockage local :  
 
 ```cpp
-// Define the connection string with Azure storage emulator.
+// Define the connection string with Azure Storage Emulator.
 const utility::string_t storage_connection_string(U("UseDevelopmentStorage=true;"));  
 ```
 
@@ -138,7 +139,7 @@ table.create_if_not_exists();
 
 ### <a name="add-an-entity-to-a-table"></a>Ajout d'une entité à une table
 
-Pour ajouter une entité à une table, créez un objet `table_entity` et transmettez-le à `table_operation::insert_entity`. Le code suivant utilise le prénom du client en tant que clé de ligne et son nom de famille en tant que clé de partition. Ensemble, les clés de partition et de ligne d’une entité identifient l’entité de façon unique dans la table. Les requêtes d'entités dont les clés de partition sont identiques sont plus rapides que celles d'entités dont les clés de partition sont différentes. L’utilisation de différentes clés de partition permet une plus grande scalabilité des opérations parallèles. Pour plus d’informations, consultez [Liste de contrôle des performances et de l’extensibilité de Microsoft Azure Storage](../storage/common/storage-performance-checklist.md).
+Pour ajouter une entité à une table, créez un objet `table_entity` et transmettez-le à `table_operation::insert_entity`. Le code suivant utilise le prénom du client en tant que clé de ligne et son nom de famille en tant que clé de partition. Ensemble, les clés de partition et de ligne d’une entité identifient l’entité de façon unique dans la table. Les requêtes d'entités dont les clés de partition sont identiques sont plus rapides que celles d'entités dont les clés de partition sont différentes. L’utilisation de différentes clés de partition permet une plus grande scalabilité des opérations parallèles. Pour plus d’informations, consultez [Liste de contrôle des performances et de l’extensibilité de Microsoft Azure Storage](../storage/blobs/storage-performance-checklist.md).
 
 Le code suivant crée une instance de la classe `table_entity` avec des données clientes à stocker. Le code appelle ensuite `table_operation::insert_entity` pour créer un objet `table_operation` afin d’insérer une entité dans une table et d’y associer la nouvelle entité de table. Enfin, le code appelle la méthode `execute` sur l’objet `cloud_table`. Le nouvel objet `table_operation` envoie une demande au service de Table pour insérer la nouvelle entité de client dans la table `people`.  
 
@@ -499,10 +500,10 @@ else
 
 ## <a name="troubleshooting"></a>Dépannage
 
-Pour Visual Studio Community Edition, si votre projet obtient des erreurs de build en raison des fichiers include *storage_account.h* et *table.h*, supprimez le commutateur du compilateur **/permissive-**  :
+Pour Visual Studio Community Edition, si votre projet obtient des erreurs de build en raison des fichiers include *storage_account.h* et *table.h* , supprimez le commutateur du compilateur **/permissive-**  :
 
-1. Dans **Explorateur de solutions**, cliquez avec le bouton de droite sur votre projet et sélectionnez **Propriétés**.
-1. Dans la boîte de dialogue **Pages de propriétés**, développez **Propriétés de configuration**, développez **C/C++** , puis sélectionnez **Langage**.
+1. Dans **Explorateur de solutions** , cliquez avec le bouton de droite sur votre projet et sélectionnez **Propriétés**.
+1. Dans la boîte de dialogue **Pages de propriétés** , développez **Propriétés de configuration** , développez **C/C++** , puis sélectionnez **Langage**.
 1. Définissez **Mode de conformité** sur **Non**.
 
 ## <a name="next-steps"></a>Étapes suivantes

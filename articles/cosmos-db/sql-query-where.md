@@ -3,17 +3,19 @@ title: Clause WHERE dans Azure Cosmos DB
 description: Découvrez la clause SQL WHERE pour Azure Cosmos DB
 author: timsander1
 ms.service: cosmos-db
+ms.subservice: cosmosdb-sql
 ms.topic: conceptual
 ms.date: 03/06/2020
 ms.author: tisande
-ms.openlocfilehash: 483a0533eafc81ef8698d260a753062ae074f6d4
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 5620a9fb95fb52a487095afd75d5f30c82a8bce1
+ms.sourcegitcommit: fa90cd55e341c8201e3789df4cd8bd6fe7c809a3
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "78898771"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93341465"
 ---
 # <a name="where-clause-in-azure-cosmos-db"></a>Clause WHERE dans Azure Cosmos DB
+[!INCLUDE[appliesto-sql-api](includes/appliesto-sql-api.md)]
 
 La clause WHERE facultative (`WHERE <filter_condition>`) spécifie la ou les conditions que les éléments JSON sources doivent remplir pour que la requête les inclue dans les résultats. Un élément JSON doit évaluer les conditions spécifiées comme étant égales à `true` pour être pris en considération pour le résultat. La couche d’index utilise la clause WHERE pour identifier le plus petit sous-ensemble d’éléments sources pouvant appartenir au résultat.
   
@@ -105,7 +107,7 @@ Vous pouvez également utiliser les opérateurs unaires +,-, ~ et NOT dans les r
     WHERE (-c.grade = -5)  -- matching grades == 5
 ```
 
-Vous pouvez également utiliser des références de propriété dans les requêtes. Par exemple, `SELECT * FROM Families f WHERE f.isRegistered` retourne l’élément JSON contenant la propriété `isRegistered` dont la valeur est égale à `true`. Toute autre valeur, telle que `false`, `null`, `Undefined`, `<number>`, `<string>`, `<object>` ou `<array>`, exclut l’élément du résultat.
+Vous pouvez également utiliser des références de propriété dans les requêtes. Par exemple, `SELECT * FROM Families f WHERE f.isRegistered` retourne l’élément JSON contenant la propriété `isRegistered` dont la valeur est égale à `true`. Toute autre valeur, telle que `false`, `null`, `Undefined`, `<number>`, `<string>`, `<object>` ou `<array>`, exclut l’élément du résultat. En outre, vous pouvez utiliser la fonction de vérification de type `IS_DEFINED` pour effectuer des requêtes en fonction de la présence ou de l’absence d’une propriété JSON donnée. Par exemple, `SELECT * FROM Families f WHERE NOT IS_DEFINED(f.isRegistered)` retourne un élément JSON qui n’a pas de valeur pour `isRegistered`.
 
 ## <a name="next-steps"></a>Étapes suivantes
 

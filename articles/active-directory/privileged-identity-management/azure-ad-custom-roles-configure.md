@@ -9,19 +9,19 @@ ms.assetid: ''
 ms.service: active-directory
 ms.subservice: pim
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: identity
 ms.date: 08/06/2019
 ms.author: curtand
 ms.custom: pim
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 3f087ffe824a198c578f076857cca7fdf0f0a60c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: fb23e60539c704dac457ab6e8706ec0cfe350ed9
+ms.sourcegitcommit: 0a9df8ec14ab332d939b49f7b72dea217c8b3e1e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77498681"
+ms.lasthandoff: 11/18/2020
+ms.locfileid: "94835320"
 ---
 # <a name="configure-azure-ad-custom-roles-in-privileged-identity-management"></a>Configurer des rôles personnalisés Azure AD dans Privileged Identity Management
 
@@ -30,7 +30,7 @@ Un administrateur de rôle privilégié peut modifier les paramètres de rôle q
 > [!NOTE]
 > Les rôles personnalisés Azure AD ne sont pas intégrés aux rôles d’annuaire intégrés au cours de la préversion. Une fois la fonctionnalité mise à la disposition générale, la gestion des rôles se déroule dans l’expérience des rôles intégrés. Si vous voyez la bannière suivante, ces rôles doivent être gérés [dans l’expérience des rôles intégrés](pim-how-to-activate-role.md) et cet article ne s’applique pas :
 >
-> [![](media/pim-how-to-add-role-to-user/pim-new-version.png "Select Azure AD > Privileged Identity Management")](media/pim-how-to-add-role-to-user/pim-new-version.png#lightbox)
+> [![Sélectionnez Azure AD > Privileged Identity Management](media/pim-how-to-add-role-to-user/pim-new-version.png)](media/pim-how-to-add-role-to-user/pim-new-version.png#lightbox)
 
 ## <a name="open-role-settings"></a>Ouvrir les paramètres de rôle
 
@@ -44,7 +44,7 @@ Suivez ces étapes pour ouvrir les paramètres d’un rôle Azure AD.
 1. Sélectionnez **Paramètre** pour ouvrir la page **Paramètres**. Sélectionnez le rôle des paramètres que vous souhaitez configurer.
 1. Sélectionnez **Modifier** pour ouvrir la page **Paramètres de rôle**.
 
-    ![Ouvrir le rôle personnalisé Azure AD pour modifier les paramètres](./media/azure-ad-custom-roles-configure/edit-settings.png)
+    ![Capture d'écran représentant la page « Détails des paramètres de rôle », sur laquelle l'action « Modifier » est sélectionnée.](./media/azure-ad-custom-roles-configure/edit-settings.png)
 
 ## <a name="role-settings"></a>Paramètres de rôle
 
@@ -64,9 +64,9 @@ Vous pouvez également choisir l’une de ces options de durée d’attribution 
 - **Autoriser une attribution active permanente** : les administrateurs peuvent attribuer une appartenance active permanente.
 - **Faire expirer les attributions actives après** : les administrateurs peuvent exiger que toutes les attributions actives aient une date de début et une date de fin spécifiées.
 
-### <a name="require-azure-multi-factor-authentication"></a>Exiger l’utilisation d’Azure Multi-Factor Authentication
+### <a name="require-azure-ad-multi-factor-authentication"></a>Demander l’authentification multifacteur Azure AD
 
-Privileged Identity Management permet également l’implémentation facultative d’Azure Multi-Factor Authentication dans deux scénarios distincts.
+Privileged Identity Management permet également l’implémentation facultative d’Azure AD Multi-Factor Authentication dans deux scénarios distincts.
 
 - **Exiger Azure Multi-Factor Authentication lors de l’attribution active**
 
@@ -74,7 +74,7 @@ Privileged Identity Management permet également l’implémentation facultative
 
 - **Exiger Azure Multi-Factor Authentication lors de l’attribution active**
 
-  Vous pouvez exiger des utilisateurs éligibles à un rôle qu’ils s’inscrivent à Azure Multi-Factor Authentication pour effectuer leur activation. Ce processus garantit, avec une certitude raisonnable, que l’utilisateur demandant l’activation est bien celui qu’il prétend être. L’activation de cette option permet de protéger les rôles critiques au cas où le compte d’utilisateur serait compromis. Pour exiger d’un membre éligible qu’il exécute Azure Multi-Factor Authentication avant l’activation, cochez la case **Exiger Azure Multi-Factor Authentication lors de l’attribution active**.
+  Vous pouvez exiger des utilisateurs éligibles dotés d’un rôle qu’ils s’inscrivent à Azure AD Multi-Factor Authentication pour effectuer leur activation. Ce processus garantit, avec une certitude raisonnable, que l’utilisateur demandant l’activation est bien celui qu’il prétend être. L’activation de cette option permet de protéger les rôles critiques au cas où le compte d’utilisateur serait compromis. Pour exiger d’un membre éligible qu’il exécute Azure AD Multi-Factor Authentication avant l’activation, cochez la case **Exiger Multi-Factor Authentication lors de l’activation**.
 
 Pour plus d’informations, consultez [Authentification multifacteur et Privileged Identity Management](pim-how-to-require-mfa.md).
 
@@ -103,4 +103,4 @@ Si vous souhaitez exiger l’approbation pour activer un rôle, suivez ces étap
 - [Activer un rôle personnalisé Azure AD](azure-ad-custom-roles-activate.md)
 - [Attribuer un rôle personnalisé Azure AD](azure-ad-custom-roles-assign.md)
 - [Supprimer ou mettre à jour une attribution de rôle personnalisé Azure AD](azure-ad-custom-roles-update-remove.md)
-- [Définitions de rôles dans Azure AD](../users-groups-roles/directory-assign-admin-roles.md)
+- [Définitions de rôles dans Azure AD](../roles/permissions-reference.md)

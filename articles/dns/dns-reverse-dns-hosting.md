@@ -3,16 +3,16 @@ title: Héberger des zones de recherche DNS inversées dans Azure DNS
 description: Découvrez comment utiliser Azure DNS pour héberger les zones de recherche inversées DNS pour vos plages d’adresses IP
 author: rohinkoul
 ms.service: dns
-ms.topic: conceptual
+ms.topic: how-to
 ms.workload: infrastructure-services
 ms.date: 05/29/2017
 ms.author: rohink
-ms.openlocfilehash: 78fc3428274be5e1998abe9189bea996f15e278c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 6a0aebc727233cdd838f3e1bf8eeb5cd247b9836
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79454259"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96014021"
 ---
 # <a name="host-reverse-dns-lookup-zones-in-azure-dns"></a>Héberger des zones de recherche DNS inversées dans Azure DNS
 
@@ -48,7 +48,7 @@ Le nom d’une zone de recherche inversée IPv4 est basé sur la plage d’adres
 
 L’exemple suivant montre comment créer une zone DNS inversée de « Classe C » nommée `2.0.192.in-addr.arpa` dans Azure DNS via le portail Azure :
 
- ![Volet « Créer une zone DNS » avec cases renseignées](./media/dns-reverse-dns-hosting/figure2.png)
+ ![Capture d’écran montrant comment créer une zone DNS inversée de classe C nommée 2.0.192.in-addr.arpa dans Azure DNS via le portail Azure.](./media/dns-reverse-dns-hosting/figure2.png)
 
 Sous **Emplacement du groupe de ressources**, définissez l’emplacement du groupe de ressources. Cela n’a aucun effet sur la zone DNS. L’emplacement de la zone DNS est toujours « global » et n’est pas affiché.
 
@@ -117,7 +117,7 @@ L’exemple suivant vous guide tout au long du processus de création d’un enr
 
 1. En haut du panneau **Zone DNS**, sélectionnez **+ Jeu d’enregistrements** pour ouvrir le panneau **Ajouter un jeu d’enregistrements**.
 
-   ![Bouton de création d’un jeu d’enregistrement](./media/dns-reverse-dns-hosting/figure4.png)
+   ![Capture d’écran du panneau Zone DNS avec une flèche pointant sur le bouton + jeu d’enregistrements.](./media/dns-reverse-dns-hosting/figure4.png)
 
 1. Le nom du jeu d’enregistrements d’un enregistrement PTR doit correspondre à la fin de l’adresse IPv4 dans l’ordre inverse. 
 
@@ -162,7 +162,7 @@ L’exemple suivant vous guide tout au long du processus de création d’un nou
 4. Dans le champ **NOM DE DOMAINE**, entrez le nom de domaine complet (FQDN) de la ressource utilisant l’adresse IP.
 5. Sélectionnez **OK** en bas du panneau pour créer l’enregistrement DNS.
 
-![Panneau Ajouter un jeu d’enregistrement avec cases renseignées](./media/dns-reverse-dns-hosting/figure7.png)
+![Capture d’écran montrant le panneau « Ajouter un jeu d’enregistrements » avec une flèche pointant sur la valeur dans le champ Type.](./media/dns-reverse-dns-hosting/figure7.png)
 
 Les exemples suivants montrent comment effectuer cette tâche à l’aide de PowerShell et Azure CLI.
 

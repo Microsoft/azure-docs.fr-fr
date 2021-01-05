@@ -2,26 +2,21 @@
 title: "Tutoriel : Intégration d'Azure Active Directory à Zscaler Internet Access Administrator | Microsoft Docs"
 description: Apprenez à configurer l'authentification unique entre Azure Active Directory et Zscaler Internet Access Administrator.
 services: active-directory
-documentationCenter: na
 author: jeevansd
-manager: daveba
-ms.reviewer: barbkess
-ms.assetid: ea555097-bf62-45dd-9b45-b75c50324a69
+manager: CelesteDG
+ms.reviewer: celested
 ms.service: active-directory
 ms.subservice: saas-app-tutorial
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: tutorial
 ms.date: 01/17/2019
 ms.author: jeedes
-ms.collection: M365-identity-device-management
-ms.openlocfilehash: a149527c6e00972991bf0b18e6f7c599799a0c91
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: d74057e32b6f16bdb6dae3d96ac46c5cc93571aa
+ms.sourcegitcommit: e15c0bc8c63ab3b696e9e32999ef0abc694c7c41
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "73161026"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97609103"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-zscaler-internet-access-administrator"></a>Tutoriel : Intégration d'Azure Active Directory à Zscaler Internet Access Administrator
 
@@ -32,7 +27,7 @@ L'intégration de Zscaler Internet Access Administrator à Azure AD vous offre l
 * Vous pouvez autoriser vos utilisateurs à se connecter automatiquement à Zscaler Internet Access Administrator (via l'authentification unique) avec leur compte Azure AD.
 * Vous pouvez gérer vos comptes dans un emplacement central : le portail Azure
 
-Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis).
+Pour en savoir plus sur l’intégration des applications SaaS avec Azure AD, consultez [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md).
 Si vous ne disposez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
 ## <a name="prerequisites"></a>Prérequis
@@ -41,6 +36,9 @@ Pour configurer l'intégration d'Azure AD à Zscaler Internet Access Administrat
 
 * Un abonnement Azure AD Si vous n’avez pas d’environnement Azure AD, vous pouvez obtenir un essai d’un mois [ici](https://azure.microsoft.com/pricing/free-trial/).
 * Abonnement Zscaler Internet Access Administrator
+
+> [!NOTE]
+> Cette intégration peut également être utilisée à partir de l’environnement cloud US Government Azure AD. Cette application est disponible dans la Galerie d’applications cloud US Government Azure AD et peut être configurée de la même façon que dans le cloud public.
 
 ## <a name="scenario-description"></a>Description du scénario
 
@@ -108,8 +106,8 @@ Pour configurer l'authentification unique d'Azure AD auprès de Zscaler Internet
 
     a. Dans la zone de texte **Identificateur**, entrez une URL répondant à vos besoins :
 
-    | |
-    |--|
+    | Identificateur |
+    |------------|
     | `https://admin.zscaler.net` |
     | `https://admin.zscalerone.net` |
     | `https://admin.zscalertwo.net` |
@@ -119,8 +117,8 @@ Pour configurer l'authentification unique d'Azure AD auprès de Zscaler Internet
 
     b. Dans la zone de texte **URL de réponse**, entrez une URL répondant à vos besoins :
 
-    | |
-    |--|
+    | URL de réponse |
+    |-----------|
     | `https://admin.zscaler.net/adminsso.do` |
     | `https://admin.zscalerone.net/adminsso.do` |
     | `https://admin.zscalertwo.net/adminsso.do` |
@@ -136,13 +134,13 @@ Pour configurer l'authentification unique d'Azure AD auprès de Zscaler Internet
 
     | Nom  | Attribut source  |
     | ---------| ------------ |
-    | Role     | user.assignedroles |
+    | Role | user.assignedroles |
 
     a. Cliquez sur le bouton **Ajouter une nouvelle revendication** pour ouvrir la boîte de dialogue **Gérer les revendications des utilisateurs**.
 
-    ![image](./common/new-save-attribute.png)
+    ![Capture d’écran montrant User claims avec l’option permettant d’ajouter une nouvelle revendication.](./common/new-save-attribute.png)
     
-    ![image](./common/new-attribute-details.png)
+    ![Capture d’écran montrant la boîte de dialogue Manage user claims où vous pouvez entrer les valeurs décrites.](./common/new-attribute-details.png)
 
     b. Dans la liste **Attribut de la source**, sélectionnez la valeur de l’attribut.
 
@@ -151,7 +149,7 @@ Pour configurer l'authentification unique d'Azure AD auprès de Zscaler Internet
     d. Cliquez sur **Enregistrer**.
 
     > [!NOTE]
-    > Cliquez [ici](https://docs.microsoft.com/azure/active-directory/active-directory-enterprise-app-role-management) pour savoir comment configurer un rôle dans Azure AD.
+    > Cliquez [ici](../develop/active-directory-enterprise-app-role-management.md) pour savoir comment configurer un rôle dans Azure AD.
 
 7. Dans la page **Configurer l’authentification unique avec SAML**, dans la section **Certificat de signature SAML**, cliquez sur **Télécharger** pour télécharger le **Certificat (Base64)** en fonction des options définies par rapport à vos besoins, puis enregistrez-le sur votre ordinateur.
 
@@ -173,7 +171,7 @@ Pour configurer l'authentification unique d'Azure AD auprès de Zscaler Internet
 
 2. Accédez à **Administration > Administrator Management**, effectuez les étapes suivantes, puis cliquez sur Save :
 
-    ![Administration](./media/zscaler-internet-access-administrator-tutorial/AdminSSO.png "Administration")
+    ![Capture d’écran montrant Administrator Management avec les options permettant d’activer l’authentification SAML, de charger un certificat SSL et de spécifier un émetteur.](./media/zscaler-internet-access-administrator-tutorial/AdminSSO.png "Administration")
 
     a. Cliquez sur **Enable SAML Authentication**.
 
@@ -183,7 +181,7 @@ Pour configurer l'authentification unique d'Azure AD auprès de Zscaler Internet
 
 3. Dans l’UI de l’administrateur, effectuez les étapes suivantes :
 
-    ![Administration](./media/zscaler-internet-access-administrator-tutorial/ic800207.png)
+    ![Capture d’écran montrant l’IU d’administration où vous pouvez effectuer les étapes.](./media/zscaler-internet-access-administrator-tutorial/ic800207.png)
 
     a. Passez la souris sur le menu **Activation** en bas à gauche.
 
@@ -251,12 +249,12 @@ https://help.zscaler.com/zia/adding-admins
 
 Dans cette section, vous allez tester la configuration de l’authentification unique Azure AD à l’aide du volet d’accès.
 
-Quand vous cliquez sur la vignette Zscaler Internet Access Administrator du panneau d’accès, vous devez être automatiquement connecté à l’UI d’administrateur Zscaler Internet Access pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](https://docs.microsoft.com/azure/active-directory/active-directory-saas-access-panel-introduction).
+Quand vous cliquez sur la vignette Zscaler Internet Access Administrator du panneau d’accès, vous devez être automatiquement connecté à l’UI d’administrateur Zscaler Internet Access pour laquelle vous avez configuré l’authentification unique. Pour plus d’informations sur le panneau d’accès, consultez [Présentation du panneau d’accès](../user-help/my-apps-portal-end-user-access.md).
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-saas-tutorial-list)
+- [Liste de didacticiels sur l’intégration d’applications SaaS avec Azure Active Directory](./tutorial-list.md)
 
-- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/active-directory-appssoaccess-whatis)
+- [Qu’est-ce que l’accès aux applications et l’authentification unique avec Azure Active Directory ?](../manage-apps/what-is-single-sign-on.md)
 
-- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](https://docs.microsoft.com/azure/active-directory/conditional-access/overview)
+- [Qu’est-ce que l’accès conditionnel dans Azure Active Directory ?](../conditional-access/overview.md)

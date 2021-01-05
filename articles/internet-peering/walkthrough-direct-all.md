@@ -5,15 +5,15 @@ description: Procédure pas à pas pour le peering direct
 services: internet-peering
 author: prmitiki
 ms.service: internet-peering
-ms.topic: article
-ms.date: 11/27/2019
+ms.topic: how-to
+ms.date: 12/15/2020
 ms.author: prmitiki
-ms.openlocfilehash: d88fcfc4d3e073bf544f2ca0f4d01dbe305b45da
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 6a1fa7f582511a2089bab2694f9f5ec47634ff54
+ms.sourcegitcommit: d2d1c90ec5218b93abb80b8f3ed49dcf4327f7f4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75774036"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97592379"
 ---
 # <a name="direct-peering-walkthrough"></a>Procédure pas à pas pour le peering direct
 

@@ -1,29 +1,32 @@
 ---
-title: Couverture du géocodage | Microsoft Azure Maps
-description: Le processus de conversion de l’adresse de l’emplacement en coordonnées de latitude et longitude est appelé géocodage. Dans cet article, vous allez découvrir les régions bénéficiant de la couverture du géocodage dans Microsoft Azure Maps.
-author: philmea
-ms.author: philmea
-ms.date: 12/31/2019
+title: Couverture du géocodage dans le service de recherche de Microsoft Azure Maps
+description: Découvrez les régions couvertes par la recherche Azure Maps. Les catégories de géocodage incluent les points d’adresse, les numéros de maison, le niveau de rue, le niveau de ville et les points d’intérêt.
+author: anastasia-ms
+ms.author: v-stharr
+ms.date: 07/28/2019
 ms.topic: conceptual
 ms.service: azure-maps
 services: azure-maps
-manager: timlt
-ms.openlocfilehash: 9836bd35b16c4c308b7c9d096b104c0cec68a34c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+manager: philmea
+ms.openlocfilehash: 3cf27319fa84ff5d693e74e90664b7a86f4d934a
+ms.sourcegitcommit: 4064234b1b4be79c411ef677569f29ae73e78731
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80335648"
+ms.lasthandoff: 10/28/2020
+ms.locfileid: "92897209"
 ---
 # <a name="azure-maps-geocoding-coverage"></a>Couverture de géocodage Azure Maps
 
-Lorsque vous recherchez un emplacement avec Azure Maps, le service de recherche, par exemple [Get Search Address](https://docs.microsoft.com/rest/api/maps/search/getsearchaddress) (Obtenir l’adresse de recherche), utilise vos termes de recherche et retourne les coordonnées de latitude et longitude. Ce processus est désigné sous le terme de « géocodage ». Toutefois, Azure Maps n’a pas le même niveau d’information et de précision pour tous les pays et régions. Utilisez cet article pour déterminer quels types d’emplacements vous pouvez rechercher de manière fiable dans chaque région. 
+Le [service de recherche](/rest/api/maps/search) de Azure Maps prend en charge le géocodage, ce qui signifie que votre demande d’API peut comporter des termes recherchés, tels qu’une adresse ou le nom d’un emplacement, et retourne le résultat sous la forme de coordonnées de latitude et de longitude. Par exemple, l’[API Get Search Address](/rest/api/maps/search/getsearchaddress) d’Azure Maps reçoit des requêtes contenant des informations d’emplacement, et retourne les résultats sous la forme de coordonnées de latitude et de longitude.
+
+Toutefois, le [service Search](/rest/api/maps/search) d’Azure Maps n’a pas le même niveau d’information et de précision pour tous les pays et régions. Utilisez cet article pour déterminer quels types d’emplacements vous pouvez rechercher de manière fiable dans chaque région.
 
 La possibilité de géocoder dans un pays/une région dépend de la couverture de données de route et de la précision du service de géocodage. Les catégorisations suivantes permettent de spécifier le niveau de prise en charge du géocodage dans chaque pays/région.
-* **Points d’adresse** : Les données d’adresses peuvent être résolues en coordonnées latitude/longitude dans la parcelle de l’adresse (limite de propriété). Ils sont parfois désignés comme ayant une précision « rooftop » (maximale). Il s’agit du niveau de précision le plus haut disponible pour les adresses. 
-* **Numéros de résidence** : Les adresses sont interpolées en coordonnées latitude/longitude dans la rue.
-* **Niveau de rue** : Les adresses sont résolues en coordonnées latitude/longitude de la rue qui contient l’adresse. Le numéro de résidence ne peut pas être traité.
-* **Niveau de ville** : Les noms de ville sont pris en charge.
+
+* **Points d’adresse**  : les données d’adresses peuvent être résolues en coordonnées de latitude/longitude à l’intérieur de la parcelle de l’adresse (limite de propriété). Les points d’adresse sont souvent qualifiés de « Rooftop », ce qui correspond au niveau de précision le plus élevé disponible pour les adresses.
+* **Numéros de résidence**  : Les adresses sont interpolées en coordonnées latitude/longitude dans la rue.
+* **Niveau de rue**  : Les adresses sont résolues en coordonnées latitude/longitude de la rue qui contient l’adresse. Le numéro de résidence ne peut pas être traité.
+* **Niveau de ville**  : Les noms de ville sont pris en charge.
 
 ## <a name="americas"></a>Amérique
 
@@ -214,7 +217,6 @@ La possibilité de géocoder dans un pays/une région dépend de la couverture d
 | Ouzbékistan                                          |                 |                |              |      ✓     |          ✓         |
 | État de la Cité du Vatican                                        |                 |                |       ✓      |      ✓     |          ✓         |
 
-
 ## <a name="middle-east-and-africa"></a>Moyen-Orient et Afrique
 
 | Pays/région                                      | Points d’adresse |Numéros de résidence | Niveau de rue | Niveau ville | Points d’intérêt |
@@ -295,11 +297,8 @@ La possibilité de géocoder dans un pays/une région dépend de la couverture d
 | Zambie                                              |                 |                |       ✓      |      ✓     |          ✓         |
 | Zimbabwe                                            |                 |                |       ✓      |      ✓     |          ✓         |
 
-
-
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour plus d’informations sur le géocodage Azure Maps, consultez les pages de référence sur la [recherche](https://docs.microsoft.com/rest/api/maps/search).
-
-Découvrez les [zones de couverture pour les services de trafic Maps](traffic-coverage.md). 
-
+Apprenez-en davantage sur le géocodage d’Azure Maps :
+> [!div class="nextstepaction"]
+> [Service de recherche d’Azure Maps](/rest/api/maps/search)

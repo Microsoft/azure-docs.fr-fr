@@ -5,14 +5,14 @@ author: jimzim
 ms.author: jzim
 ms.service: container-service
 ms.topic: overview
-ms.date: 04/24/2020
+ms.date: 11/13/2020
 ms.custom: mvc
-ms.openlocfilehash: a3bdc3673474b778aa7c1003e48e215bac6d05bf
-ms.sourcegitcommit: 1895459d1c8a592f03326fcb037007b86e2fd22f
+ms.openlocfilehash: 1bf3141876ee56ee1361f19a67689ca3b2f4f89a
+ms.sourcegitcommit: c157b830430f9937a7fa7a3a6666dcb66caa338b
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82628518"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94685288"
 ---
 # <a name="azure-red-hat-openshift"></a>Azure Red Hat OpenShift
 
@@ -28,11 +28,15 @@ Pour commencer, suivez le tutoriel [Créer un cluster Azure Red Hat OpenShift](t
 
 ## <a name="access-security-and-monitoring"></a>Accès, sécurité et surveillance
 
-Pour améliorer la sécurité et la gestion, Azure Red Hat OpenShift vous permet d’intégrer Azure Active Directory (Azure AD) et d’utiliser le contrôle d’accès en fonction du rôle Kubernetes (RBAC). Vous pouvez également superviser l’intégrité de votre cluster et de vos ressources.
+Pour améliorer la sécurité et la gestion, Azure Red Hat OpenShift vous permet d’intégrer Azure Active Directory (Azure AD) et d’utiliser le contrôle d’accès en fonction du rôle Kubernetes (contrôle RBAC Kubernetes). Vous pouvez également superviser l’intégrité de votre cluster et de vos ressources.
 
 ## <a name="cluster-and-node"></a>Cluster et nœud
 
 Les nœuds Azure Red Hat OpenShift s’exécutent sur des machines virtuelles Azure. Vous pouvez connecter le stockage à des nœuds et des pods et mettre à niveau les composants du cluster.
+
+## <a name="service-level-agreement"></a>Contrat de niveau de service
+
+Azure Red Hat OpenShift offre un contrat de niveau de service pour garantir que le service sera disponible au moins 99,95 % du temps. Pour plus d’informations sur le contrat de niveau de service, consultez [SLA pour Azure Red Hat OpenShift](https://azure.microsoft.com/en-au/support/legal/sla/openshift/v1_0/).
 
 ## <a name="next-steps"></a>Étapes suivantes
 

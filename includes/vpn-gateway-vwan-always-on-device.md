@@ -8,12 +8,12 @@ ms.topic: include
 ms.date: 03/12/2020
 ms.author: cherylmc
 ms.custom: include file
-ms.openlocfilehash: feaf72de1d2c578d2b2d0df9e86ec0fbe0b49445
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 34e841a5f17d589c4fbef54a4a8674a99ac6c640
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79371730"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96026053"
 ---
 Les conditions suivantes doivent être remplies afin d’établir un tunnel d’appareil :
 
@@ -22,13 +22,13 @@ Les conditions suivantes doivent être remplies afin d’établir un tunnel d’
 * Un seul tunnel d’appareil peut être configuré par appareil.
 
 1. Installez des certificats clients sur le client Windows 10 comme indiqué dans cet [article sur les clients VPN point à site](../articles/vpn-gateway/point-to-site-how-to-vpn-client-install-azure-cert.md). Le certificat doit se trouver dans le magasin de l’ordinateur local.
-1. Créez un profil VPN et configurez un tunnel d’appareil dans le contexte du compte SYSTÈME LOCAL en suivant [ces instructions](https://docs.microsoft.com/windows-server/remote/remote-access/vpn/vpn-device-tunnel-config#vpn-device-tunnel-configuration).
+1. Créez un profil VPN et configurez un tunnel d’appareil dans le contexte du compte SYSTÈME LOCAL en suivant [ces instructions](/windows-server/remote/remote-access/vpn/vpn-device-tunnel-config#vpn-device-tunnel-configuration).
 
 ### <a name="configuration-example-for-device-tunnel"></a>Exemple de configuration pour le tunnel d’appareil
 
 Après avoir configuré la passerelle de réseau virtuel et installé le certificat client dans le magasin de l’ordinateur local sur le client Windows 10, utilisez les exemples suivants pour configurer un tunnel d’appareil client :
 
-1. Copiez le texte suivant et enregistrez-le sous le nom ***devicecert.ps1***.
+1. Copiez le texte suivant et enregistrez-le sous le nom ***devicecert.ps1** _.
 
    ```
    Param(
@@ -80,7 +80,7 @@ Après avoir configuré la passerelle de réseau virtuel et installé le certifi
    $Message = "Complete."
    Write-Host "$Message"
    ```
-1. Copiez le texte suivant et enregistrez-le sous le nom ***VPNProfile.xml*** dans le même dossier que **devicecert.ps1**. Modifiez le texte suivant pour correspondre à votre environnement.
+1. Copiez le texte suivant et enregistrez-le sous le nom _*_VPNProfile.xml_*_ dans le même dossier que _*devicecert.ps1**. Modifiez le texte suivant pour correspondre à votre environnement.
 
    * `<Servers>azuregateway-1234-56-78dc.cloudapp.net</Servers> <= Can be found in the VpnSettings.xml in the downloaded profile zip file`
    * `<Address>192.168.3.5</Address> <= IP of resource in the vnet or the vnet address space`
@@ -115,7 +115,7 @@ Après avoir configuré la passerelle de réseau virtuel et installé le certifi
    <RegisterDNS>true</RegisterDNS>
    </VPNProfile>
    ```
-1. Téléchargez **PsExec** de [Sysinternals](https://docs.microsoft.com/sysinternals/downloads/psexec) et extrayez les fichiers dans **C:\PSTools**.
+1. Téléchargez **PsExec** de [Sysinternals](/sysinternals/downloads/psexec) et extrayez les fichiers dans **C:\PSTools**.
 1. À partir d’une invite de commandes d’administration, lancez PowerShell en exécutant :
 
    ```
@@ -123,18 +123,18 @@ Après avoir configuré la passerelle de réseau virtuel et installé le certifi
    PsExec64.exe Powershell for 64-bit Windows
    ```
 
-   ![powershell](./media/vpn-gateway-vwan-always-on-device/powershell.png)
+   ![La capture d’écran affiche une fenêtre d’invite de commandes avec une commande pour démarrer la version 64 bits de PowerShell.](./media/vpn-gateway-vwan-always-on-device/powershell.png)
 1. Dans PowerShell, accédez au dossier où **devicecert.ps1** et **VPNProfile.xml** se trouvent, et exécutez la commande suivante :
 
    ```powershell
    .\devicecert.ps1 .\VPNProfile.xml MachineCertTest
    ```
    
-   ![MachineCertTest](./media/vpn-gateway-vwan-always-on-device/machinecerttest.png)
+   ![La capture d’écran présente une fenêtre PowerShell qui a exécuté MachineCertTest à l’aide du script devicesert.](./media/vpn-gateway-vwan-always-on-device/machinecerttest.png)
 1. Exécutez **rasphone**.
 
-   ![rasphone](./media/vpn-gateway-vwan-always-on-device/rasphone.png)
+   ![La capture d’écran affiche une boîte de dialogue Exécuter avec la commande rasphone sélectionnée.](./media/vpn-gateway-vwan-always-on-device/rasphone.png)
 1. Recherchez l’entrée **MachineCertTest**, puis cliquez sur **Se connecter**.
 
-   ![Se connecter](./media/vpn-gateway-vwan-always-on-device/connect.png)
+   ![La capture d’écran affiche une boîte de dialogue Connexions réseau avec la commande MachineCertTest sélectionnée et un bouton de connexion.](./media/vpn-gateway-vwan-always-on-device/connect.png)
 1. Si la connexion réussit, redémarrez l’ordinateur. Le tunnel se connectera automatiquement.

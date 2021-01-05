@@ -7,17 +7,17 @@ documentationcenter: na
 author: damendo
 ms.service: network-watcher
 ms.devlang: na
-ms.topic: article
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 02/22/2017
 ms.author: damendo
-ms.openlocfilehash: 73f1efc512bf031021791da8cc55bc4e7d98a812
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: b3aa963c4da7802a9db714f25e7b544b3a132d4b
+ms.sourcegitcommit: cd9754373576d6767c06baccfd500ae88ea733e4
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76840773"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "94948644"
 ---
 # <a name="analyze-your-virtual-machine-security-with-security-group-view-using-azure-cli"></a>Analyser la sécurité de votre machine virtuelle par le biais de la vue Groupe de sécurité dans l’interface de ligne de commande Azure
 
@@ -25,6 +25,10 @@ ms.locfileid: "76840773"
 > - [PowerShell](network-watcher-security-group-view-powershell.md)
 > - [Azure CLI](network-watcher-security-group-view-cli.md)
 > - [REST API](network-watcher-security-group-view-rest.md)
+
+> [!NOTE]
+> L’API d’affichage des groupes de sécurité n’est plus entretenue et sera bientôt déconseillée. Utilisez la [fonction Règles de sécurité en vigueur](./network-watcher-security-group-view-overview.md), qui offre les mêmes fonctionnalités.
+
 
 La vue Groupe de sécurité renvoie des règles de sécurité de réseau configurées et efficaces, appliquées à une machine virtuelle. Cette fonctionnalité permet d’auditer et de diagnostiquer les groupes de sécurité réseau ainsi que les règles configurées sur une machine virtuelle afin de garantir l’autorisation ou le refus appropriés du trafic. Dans cet article, nous vous montrons comment récupérer des règles de sécurité configurées et efficaces pour une machine virtuelle à l’aide de l’interface de ligne de commande Azure
 

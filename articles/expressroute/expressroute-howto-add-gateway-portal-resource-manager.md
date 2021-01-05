@@ -1,33 +1,36 @@
 ---
-title: 'Azure ExpressRoute : Ajouter une passerelle à un réseau virtuel : portail'
-description: Cet article vous explique comment ajouter une passerelle de réseau virtuel à un réseau virtuel Resource Manager déjà créé pour ExpressRoute à l’aide du Portail Azure.
+title: 'Tutoriel : Azure ExpressRoute – Ajouter une passerelle à un réseau virtuel (portail Azure)'
+description: Ce didacticiel vous guide tout au long de l’ajout d’une passerelle de réseau virtuel à un réseau virtuel pour ExpressRoute à l’aide du portail Azure.
 services: expressroute
-author: cherylmc
+author: duongau
 ms.service: expressroute
-ms.topic: article
-ms.date: 12/06/2018
-ms.author: cherylmc
+ms.topic: tutorial
+ms.date: 10/05/2020
+ms.author: duau
 ms.custom: seodec18
-ms.openlocfilehash: 87b656f0ef999b3b15a89476f5cba4c4fcfc2b1e
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 843d0b8cfd75e8cbdf45ac535cc9486aa42442d6
+ms.sourcegitcommit: 9826fb9575dcc1d49f16dd8c7794c7b471bd3109
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79231269"
+ms.lasthandoff: 11/14/2020
+ms.locfileid: "91761787"
 ---
-# <a name="configure-a-virtual-network-gateway-for-expressroute-using-the-azure-portal"></a>Configurer une passerelle de réseau virtuel pour ExpressRoute à l’aide du portail Azure
+# <a name="tutorial-configure-a-virtual-network-gateway-for-expressroute-using-the-azure-portal"></a>Tutoriel : Configurer une passerelle de réseau virtuel pour ExpressRoute à l’aide du portail Azure
 > [!div class="op_single_selector"]
 > * [Resource Manager - Portail Azure](expressroute-howto-add-gateway-portal-resource-manager.md)
 > * [Resource Manager - PowerShell](expressroute-howto-add-gateway-resource-manager.md)
 > * [Classic - PowerShell](expressroute-howto-add-gateway-classic.md)
 > * [Vidéo - portail Azure](https://azure.microsoft.com/documentation/videos/azure-expressroute-how-to-create-a-vpn-gateway-for-your-virtual-network)
 > 
-> 
 
-Cet article détaille la procédure requise pour ajouter une passerelle de réseau virtuel pour un réseau virtuel existant. Cet article vous montre les étapes nécessaires pour ajouter, redimensionner et supprimer une passerelle de réseau virtuel pour un réseau virtuel existant. Les étapes de cette configuration sont spécifiquement adaptées aux réseaux virtuels qui ont été créés à l’aide du modèle de déploiement Resource Manager qui sera utilisé dans une configuration ExpressRoute. Pour plus d’informations sur les passerelles de réseau virtuel et les paramètres de configuration de passerelle pour ExpressRoute, consultez [À propos des passerelles de réseau virtuel pour ExpressRoute](expressroute-about-virtual-network-gateways.md). 
+Ce tutoriel vous guide dans la procédure d’ajout de passerelle de réseau virtuel pour un réseau virtuel existant. Cet article vous montre les étapes nécessaires pour ajouter, redimensionner et supprimer une passerelle de réseau virtuel pour un réseau virtuel existant. Les étapes de cette configuration sont spécifiquement adaptées aux réseaux virtuels qui ont été créés à l’aide du modèle de déploiement Resource Manager qui sera utilisé dans une configuration ExpressRoute. Pour plus d’informations sur les passerelles de réseau virtuel et les paramètres de configuration de passerelle pour ExpressRoute, consultez [À propos des passerelles de réseau virtuel pour ExpressRoute](expressroute-about-virtual-network-gateways.md). 
 
+Dans ce tutoriel, vous allez apprendre à :
+> [!div class="checklist"]
+> - créez un sous-réseau de passerelle ;
+> - créer une passerelle de réseau virtuel.
 
-## <a name="before-beginning"></a>Avant tout chose
+## <a name="prerequisites"></a>Prérequis
 
 Les étapes de cette tâche utilisent un réseau virtuel basé sur les valeurs figurant dans la liste de référence de configuration suivante. Nous utilisons cette liste dans notre exemple de procédure. Vous pouvez copier la liste et l’utiliser en tant que référence, en remplaçant les valeurs par les vôtres.
 
@@ -39,7 +42,7 @@ Les étapes de cette tâche utilisent un réseau virtuel basé sur les valeurs f
     * Espace d’adressage du sous-réseau : « 192.168.1.0/24 »
 * Groupe de ressources : « TestRG »
 * Emplacement = « USA Est »
-* Nom du sous-réseau de passerelle : « GatewaySubnet » Vous devez toujours nommer un sous-réseau de passerelle *GatewaySubnet*.
+* Nom de sous-réseau de passerelle : « GatewaySubnet » Vous devez toujours nommer un sous-réseau de passerelle *GatewaySubnet*.
     * Espace d'adressage du sous-réseau de passerelle : « 192.168.200.0/26 »
 * Nom de la passerelle : « ERGW »
 * Nom d’adresse IP publique de passerelle = « MyERGWVIP »
@@ -50,33 +53,44 @@ Vous pouvez afficher une [vidéo](https://azure.microsoft.com/documentation/vide
 ## <a name="create-the-gateway-subnet"></a>Créer le sous-réseau de passerelle
 
 1. Dans le [portail](https://portal.azure.com), accédez au réseau virtuel Resource Manager pour lequel vous souhaitez créer une passerelle de réseau virtuel.
-2. Dans la section**Paramètres** du panneau de votre réseau virtuel, cliquez sur **Sous-réseaux** pour développer le panneau Sous-réseaux.
-3. Dans le panneau **Sous-réseaux**, cliquez sur **+Sous-réseau de passerelle** pour ouvrir le panneau **Ajouter un sous-réseau**. 
+1. Dans la section **Paramètres** de votre réseau virtuel, sélectionnez **Sous-réseaux** pour développer les paramètres du Sous-réseau.
+1. Dans les paramètres **Sous-réseaux**, sélectionnez **+ Sous-réseau de la passerelle** pour ajouter un sous-réseau de passerelle. 
    
-    ![Ajouter le sous-réseau de passerelle](./media/expressroute-howto-add-gateway-portal-resource-manager/addgwsubnet.png "Ajouter le sous-réseau de passerelle")
+    :::image type="content" source="./media/expressroute-howto-add-gateway-portal-resource-manager/add-gateway-subnet.png" alt-text="Ajouter le sous-réseau de passerelle":::
 
+1. Le **Nom** de votre sous-réseau est automatiquement rempli avec la valeur « GatewaySubnet ». Cette valeur est nécessaire pour qu’Azure puisse reconnaître le sous-réseau en tant que sous-réseau de passerelle. Ajustez les valeurs de **Plage d’adresses** renseignées automatiquement pour qu’elles correspondent à la configuration requise. Nous vous recommandons de créer un sous-réseau de passerelle avec /27 ou plus (/26, /25, etc.). Ensuite, sélectionnez **OK** pour enregistrer les valeurs et créer le sous-réseau de passerelle.
 
-4. Le **Nom** de votre sous-réseau est automatiquement rempli avec la valeur « GatewaySubnet ». Cette valeur est nécessaire pour qu’Azure puisse reconnaître le sous-réseau en tant que sous-réseau de passerelle. Ajustez les valeurs de **plage d’adresses** renseignées automatiquement pour qu’elles correspondent à la configuration requise. Nous vous recommandons de créer un sous-réseau de passerelle avec /27 ou plus (/26, /25, etc.). Puis, cliquez sur **OK** pour enregistrer les valeurs et créer le sous-réseau de passerelle.
-
-    ![Ajout du sous-réseau](./media/expressroute-howto-add-gateway-portal-resource-manager/addsubnetgw.png "Ajout du sous-réseau")
+    :::image type="content" source="./media/expressroute-howto-add-gateway-portal-resource-manager/add-subnet-gateway.png" alt-text="Ajout du sous-réseau":::
 
 ## <a name="create-the-virtual-network-gateway"></a>Créer la passerelle de réseau virtuel
 
-1. Dans le portail, sur le côté gauche, cliquez sur **+** , puis tapez « Passerelle de réseau virtuel » dans la recherche. Recherchez **passerelle de réseau virtuel** dans la zone de recherche et cliquez sur l’entrée. Dans le panneau **Passerelle de réseau virtuel**, cliquez sur **Créer** en bas du panneau. Cette opération ouvre le panneau **Créer une passerelle de réseau virtuel**.
-2. Dans le panneau **Créer une passerelle réseau virtuel**, renseignez les valeurs pour votre passerelle de réseau virtuel.
+1. Dans le portail, sur le côté gauche, sélectionnez **Créer une ressource**, puis entrez « Passerelle de réseau virtuel » dans la zone de recherche. Recherchez **passerelle de réseau virtuel** dans les résultats de la recherche et sélectionnez l’entrée. Dans la page **Passerelle de réseau virtuel**, sélectionnez **Créer**.
+1. Dans la page **Créer une passerelle de réseau virtuel**, entrez ou sélectionnez les paramètres suivants :
 
-    ![Créer les champs du panneau de la passerelle de réseau virtuel](./media/expressroute-howto-add-gateway-portal-resource-manager/gw.png "Créer les champs du panneau de la passerelle de réseau virtuel")
-3. **Name** : Nommez votre passerelle. Cela ne revient pas au même que de nommer un sous-réseau de passerelle. Il s’agit du nom de l’objet de passerelle que vous créez.
-4. **Type de passerelle** : Sélectionnez **ExpressRoute**.
-5. **SKU** : Sélectionnez la référence SKU de la passerelle dans la liste déroulante.
-6. **Emplacement** : Renseignez le champ **Emplacement** de manière à ce qu’il pointe vers l’emplacement où se trouve votre réseau virtuel. Si l’emplacement ne pointe pas vers la région où se trouve votre réseau virtuel, le réseau virtuel n’apparaît pas dans la liste déroulante « Choisir un réseau virtuel ».
-7. Choisissez le réseau virtuel auquel vous souhaitez ajouter cette passerelle. Cliquez sur **Réseau virtuel** pour ouvrir le panneau **Choisir un réseau virtuel**. Sélectionnez le réseau virtuel. Si vous ne voyez pas votre réseau virtuel, assurez-vous que le champ **Emplacement** pointe sur la région dans laquelle se trouve votre réseau virtuel.
-9. Définissez une adresse IP publique. Cliquez sur **l’adresse IP publique** pour ouvrir le panneau **Choisir une adresse IP publique**. Cliquez sur **Créer** pour ouvrir le panneau **Créer une adresse IP publique**. Donnez à un nom à votre adresse IP publique. Ce panneau crée un objet d’adresse IP publique à laquelle une adresse IP publique sera être affectée dynamiquement. Cliquez sur **OK** pour enregistrer vos modifications à ce panneau.
-10. **Abonnement**: Vérifiez que l’abonnement approprié est sélectionné.
-11. **Groupe de ressources** : Ce paramètre est déterminé par le réseau virtuel que vous sélectionnez.
-12. Ne changez pas **l’emplacement** après avoir spécifié les paramètres ci-dessus.
-13. Vérifiez les paramètres. Si vous souhaitez que votre passerelle apparaisse sur le tableau de bord, vous pouvez sélectionner **Épingler au tableau de bord** en bas du panneau.
-14. Cliquez sur **Créer** pour créer la passerelle. Les paramètres sont validés et la passerelle se déploie. La création d’une passerelle de réseau virtuel peut prendre jusqu’à 45 minutes.
+    | Paramètre | Valeur |
+    | --------| ----- |
+    | Abonnement | Vérifiez que l’abonnement approprié est sélectionné. |
+    | Groupe de ressources | Le groupe de ressources est choisi automatiquement une fois que vous avez sélectionné le réseau virtuel. | 
+    | Nom | Nommez votre passerelle. Cela ne revient pas au même que de nommer un sous-réseau de passerelle. Il s’agit du nom de l’objet passerelle que vous créez.|
+    | Région | Modifiez le champ **Région** de manière à ce qu’il pointe vers l’emplacement où se trouve votre réseau virtuel. Si l’emplacement ne pointe pas vers la région où se trouve votre réseau virtuel, le réseau virtuel n’apparaît pas dans la liste déroulante « Choisir un réseau virtuel ». |
+    | Type de passerelle | Sélectionnez **ExpressRoute**.|
+    | SKU | Sélectionnez la référence SKU de la passerelle dans la liste déroulante. |
+    | Réseau virtuel | Sélectionnez *TestVNet*. |
+    | Adresse IP publique | Sélectionnez **Créer nouveau**.|
+    | Nom de l’adresse IP publique | Fournissez un nom pour l’adresse IP publique. |
+
+1. Sélectionnez **Vérifier + créer**, puis **Créer** pour commencer à créer la passerelle. Les paramètres sont validés et la passerelle se déploie. La création d’une passerelle de réseau virtuel peut prendre jusqu’à 45 minutes.
+
+    :::image type="content" source="./media/expressroute-howto-add-gateway-portal-resource-manager/gateway.png" alt-text="Champs de la page Créer une passerelle de réseau virtuel":::
+
+## <a name="clean-up-resources"></a>Nettoyer les ressources
+
+Si vous n’avez plus besoin de la passerelle ExpressRoute, localisez-la dans le groupe de ressources de réseau virtuel, puis sélectionnez **Supprimer**. Vérifiez que la passerelle n’est pas connectée à un circuit.
+
+:::image type="content" source="./media/expressroute-howto-add-gateway-portal-resource-manager/delete-gateway.png" alt-text="Supprimer une passerelle de réseau virtuel":::
 
 ## <a name="next-steps"></a>Étapes suivantes
-Une fois que vous avez créé la passerelle de réseau virtuel, vous pouvez lier votre réseau virtuel à un circuit ExpressRoute. Consultez [Liaison d’un réseau virtuel à un circuit ExpressRoute](expressroute-howto-linkvnet-portal-resource-manager.md).
+Une fois que vous avez créé la passerelle de réseau virtuel, vous pouvez lier votre réseau virtuel à un circuit ExpressRoute. 
+
+> [!div class="nextstepaction"]
+> [Lier un réseau virtuel à un circuit ExpressRoute](expressroute-howto-linkvnet-portal-resource-manager.md)

@@ -1,9 +1,9 @@
 ---
 title: Diffuser en continu des fichiers vidéo avec Azure Media Services - .NET | Microsoft Docs
-description: Suivez les étapes de tutoriel pour créer un compte Azure Media Services, encoder un fichier et le diffuser en continu sur Lecteur multimédia Azure.
+description: Suivez les étapes de ce tutoriel utiliser .NET afin de créer un compte Azure Media Services, encoder un fichier et le streamer vers le Lecteur multimédia Azure.
 services: media-services
 documentationcenter: ''
-author: Juliako
+author: IngridAtMicrosoft
 manager: femila
 editor: ''
 keywords: azure media services, diffuser en continu
@@ -11,16 +11,18 @@ ms.service: media-services
 ms.workload: media
 ms.topic: tutorial
 ms.custom: mvc
-ms.date: 08/19/2019
-ms.author: juliako
-ms.openlocfilehash: df4092ecc3f7d075f1a2821854cdb668ee2cebe5
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.date: 08/31/2020
+ms.author: inhenkel
+ms.openlocfilehash: 530089b9c6b9544201b0f07368cac3d1a695a4f8
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "77191225"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91268687"
 ---
 # <a name="tutorial-encode-a-remote-file-based-on-url-and-stream-the-video---net"></a>Tutoriel : Encoder un fichier distant basé sur une URL et diffuser la vidéo en continu - .NET
+
+[!INCLUDE [media services api v3 logo](./includes/v3-hr.md)]
 
 Ce tutoriel vous montre combien il est facile de coder et de lancer la diffusion en continu de vidéos sur une grande variété de navigateurs et d’appareils à l’aide d’Azure Media Services. Un contenu d’entrée peut être spécifié à l’aide d’URL HTTPS, d’URL SAP ou de chemins d’accès aux fichiers situés dans le Stockage Blob Azure.
 Dans cette rubrique, l’exemple encode du contenu que vous mettez à disposition via une URL HTTPS. Notez qu’AMS v3 ne prend pas en charge l’encodage de transfert mémorisé en bloc sur les URL HTTPS.
@@ -34,8 +36,8 @@ Dans cette rubrique, l’exemple encode du contenu que vous mettez à dispositio
 ## <a name="prerequisites"></a>Prérequis
 
 - Si vous n’avez pas Visual Studio, vous pouvez obtenir [Visual Studio Community 2017](https://www.visualstudio.com/thank-you-downloading-visual-studio/?sku=Community&rel=15).
-- [Créer un compte Media Services](create-account-cli-how-to.md).<br/>Veillez à mémoriser les valeurs que vous avez utilisées pour le nom du groupe de ressources et le nom du compte Media Services.
-- Suivez les étapes décrites dans [Accéder à l’API Azure Media Services avec Azure CLI](access-api-cli-how-to.md) et enregistrez les informations d’identification. Vous en aurez besoin pour accéder à l’API.
+- [Créer un compte Media Services](./create-account-howto.md).<br/>Veillez à mémoriser les valeurs que vous avez utilisées pour le nom du groupe de ressources et le nom du compte Media Services.
+- Suivez les étapes décrites dans [Accéder à l’API Azure Media Services avec Azure CLI](./access-api-howto.md) et enregistrez les informations d’identification. Vous en aurez besoin pour accéder à l’API.
 
 ## <a name="download-and-configure-the-sample"></a>Télécharger et configurer l’exemple
 
@@ -47,7 +49,7 @@ Clonez un référentiel GitHub qui contient l’exemple .NET de diffusion en con
 
 L’exemple se trouve dans le dossier [EncodeAndStreamFiles](https://github.com/Azure-Samples/media-services-v3-dotnet-quickstarts/tree/master/AMSV3Quickstarts/EncodeAndStreamFiles).
 
-Ouvrez [appsettings.json](https://github.com/Azure-Samples/media-services-v3-dotnet-quickstarts/blob/master/AMSV3Quickstarts/EncodeAndStreamFiles/appsettings.json) dans votre projet téléchargé. Remplacez les valeurs par les informations d’identification que vous avez obtenues en [accédant aux API](access-api-cli-how-to.md).
+Ouvrez [appsettings.json](https://github.com/Azure-Samples/media-services-v3-dotnet-quickstarts/blob/master/AMSV3Quickstarts/EncodeAndStreamFiles/appsettings.json) dans votre projet téléchargé. Remplacez les valeurs par les informations d’identification que vous avez obtenues en [accédant aux API](./access-api-howto.md).
 
 L’exemple effectue les actions suivantes :
 
@@ -68,7 +70,7 @@ Lorsque vous exécutez l’application, les URL qui peuvent être utilisées pou
 1. Appuyez sur Ctrl + F5 pour exécuter l’application *EncodeAndStreamFiles*.
 2. Choisissez le protocole **HLS** d’Apple (se termine par *manifest(format=m3u8-aapl)* ), puis copiez l’URL de diffusion en continu à partir de la console.
 
-![Output](./media/stream-files-tutorial-with-api/output.png)
+![Capture d’écran de la sortie de l’application EncodeAndStreamFiles dans Visual Studio montrant trois URL de streaming à utiliser dans le Lecteur multimédia Azure.](./media/stream-files-tutorial-with-api/output.png)
 
 Le [code source](https://github.com/Azure-Samples/media-services-v3-dotnet-quickstarts/blob/master/AMSV3Quickstarts/EncodeAndStreamFiles/Program.cs) de l’exemple montre comment l’URL est construite. Pour générer cette URL, vous devez concaténer le nom d’hôte du point de terminaison de streaming et le chemin d’accès au localisateur de diffusion en continu.  
 
@@ -105,7 +107,7 @@ Le tutoriel [Charger, encoder et diffuser en continu des fichiers](stream-files-
 
 ### <a name="job-error-codes"></a>Codes d’erreur des tâches
 
-Consultez [Codes d’erreur](https://docs.microsoft.com/rest/api/media/jobs/get#joberrorcode).
+Consultez [Codes d’erreur](/rest/api/media/jobs/get#joberrorcode).
 
 ## <a name="multithreading"></a>Multithreading
 

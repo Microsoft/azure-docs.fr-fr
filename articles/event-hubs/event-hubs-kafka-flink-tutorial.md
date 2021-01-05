@@ -1,25 +1,18 @@
 ---
 title: Utiliser Apache Flink pour Apache Kafka - Azure Event Hubs | Microsoft Docs
 description: Cet article fournit des informations sur la connexion d’Apache Flink à un hub d’événements Azure
-services: event-hubs
-documentationcenter: ''
-author: ShubhaVijayasarathy
-manager: timlt
-ms.service: event-hubs
 ms.topic: how-to
-ms.date: 04/02/2020
-ms.author: shvija
-ms.openlocfilehash: 2e5a2924cdc00c1cc057d71c40645085df4bae6a
-ms.sourcegitcommit: d597800237783fc384875123ba47aab5671ceb88
+ms.date: 06/23/2020
+ms.openlocfilehash: 1d382270248e95b1b973f57f67ebf81160f03a16
+ms.sourcegitcommit: 28c5fdc3828316f45f7c20fc4de4b2c05a1c5548
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/03/2020
-ms.locfileid: "80632808"
+ms.lasthandoff: 10/22/2020
+ms.locfileid: "92369503"
 ---
 # <a name="use-apache-flink-with-azure-event-hubs-for-apache-kafka"></a>Utilisation d’Apache Flink avec Azure Event Hubs pour Apache Kafka
-Ce tutoriel vous montre comment connecter Apache Flink à un Event Hub sans modifier vos protocoles clients ni exécuter vos propres clusters. Azure Event Hubs prend en charge [Apache Kafka version 1.0.](https://kafka.apache.org/10/documentation.html).
+Ce tutoriel vous montre comment connecter Apache Flink à un Event Hub sans modifier vos protocoles clients ni exécuter vos propres clusters. Pour plus d'informations sur la prise en charge par Event Hubs du protocole consommateur Apache Kafka, consultez [Event Hubs pour Apache Kafka](event-hubs-for-kafka-ecosystem-overview.md).
 
-Un des principaux avantages de l’utilisation d’Apache Kafka est l’écosystème d’infrastructures auquel il peut se connecter. Les Event Hubs associent la flexibilité de Kafka à l’évolutivité, à la cohérence et à la prise en charge de l’écosystème Azure.
 
 Dans ce tutoriel, vous allez apprendre à :
 > [!div class="checklist"]
@@ -37,7 +30,7 @@ Pour suivre ce tutoriel, vérifiez que les conditions préalables ci-dessous son
 
 * Lisez l’article [Event Hubs pour Apache Kafka](event-hubs-for-kafka-ecosystem-overview.md). 
 * Un abonnement Azure. Si vous n’en avez pas, créez un [compte gratuit](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio) avant de commencer.
-* [Java Development Kit (JDK) 1.7+](https://aka.ms/azure-jdks)
+* [Java Development Kit (JDK) 1.7+](/azure/developer/java/fundamentals/java-jdk-long-term-support)
     * Sur Ubuntu, exécutez `apt-get install default-jdk` pour installer le JDK.
     * Veillez à définir la variable d’environnement JAVA_HOME pour qu’elle pointe vers le dossier dans lequel le JDK est installé.
 * [Téléchargé](https://maven.apache.org/download.cgi) et [installé](https://maven.apache.org/install.html) une archive binaire Maven.
@@ -78,6 +71,9 @@ sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule require
    password="{YOUR.EVENTHUBS.CONNECTION.STRING}";
 ```
 
+> [!IMPORTANT]
+> Remplacez `{YOUR.EVENTHUBS.CONNECTION.STRING}` par la chaîne de connexion de votre espace de noms Event Hubs. Pour savoir comment obtenir la chaîne de connexion, consultez [Obtenir une chaîne de connexion Event Hubs](event-hubs-get-connection-string.md). Voici un exemple de configuration : `sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required username="$ConnectionString" password="Endpoint=sb://mynamespace.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=XXXXXXXXXXXXXXXX";`
+
 ### <a name="run-producer-from-the-command-line"></a>Exécuter le producteur depuis la ligne de commande
 
 Pour exécuter le producteur depuis la ligne de commande, générez le fichier JAR, puis exécutez depuis Maven (ou générez le fichier JAR avec Maven, puis exécutez dans Java en ajoutant le ou les fichiers JAR Kafka au paramètre classpath) :
@@ -108,6 +104,10 @@ sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule require
    username="$ConnectionString" \
    password="{YOUR.EVENTHUBS.CONNECTION.STRING}";
 ```
+
+> [!IMPORTANT]
+> Remplacez `{YOUR.EVENTHUBS.CONNECTION.STRING}` par la chaîne de connexion de votre espace de noms Event Hubs. Pour savoir comment obtenir la chaîne de connexion, consultez [Obtenir une chaîne de connexion Event Hubs](event-hubs-get-connection-string.md). Voici un exemple de configuration : `sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required username="$ConnectionString" password="Endpoint=sb://mynamespace.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=XXXXXXXXXXXXXXXX";`
+
 
 ### <a name="run-consumer-from-the-command-line"></a>Exécuter le contrôle serveur consommateur depuis la ligne de commande
 

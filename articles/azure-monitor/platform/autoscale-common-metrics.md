@@ -4,12 +4,12 @@ description: Découvrez les métriques utilisées pour la mise à l’échelle a
 ms.topic: conceptual
 ms.date: 12/6/2016
 ms.subservice: autoscale
-ms.openlocfilehash: 2c335168683212337876c963a7cfdb441d0ac69a
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: e1a77fc1b40faca0a339c5e1aaceb71dec8de8bd
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "76845565"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96004634"
 ---
 # <a name="azure-monitor-autoscaling-common-metrics"></a>Métriques courantes pour la mise à l’échelle automatique d’Azure Monitor
 
@@ -17,7 +17,7 @@ ms.locfileid: "76845565"
 
 La fonction de mise à l’échelle automatique d’Azure Monitor vous permet de diminuer ou d’augmenter la taille des instances en fonction des données de télémétrie (métriques). Ce document décrit les métriques courantes que vous pouvez utiliser. Dans le portail Azure, vous pouvez choisir les métriques de la ressource à mettre à l’échelle. Toutefois, vous pouvez également choisir des métriques à partir d’une autre ressource à mettre à l’échelle.
 
-La mise à l’échelle automatique Azure Monitor s’applique uniquement aux [groupes de machines virtuelles identiques](https://azure.microsoft.com/services/virtual-machine-scale-sets/), aux [services cloud](https://azure.microsoft.com/services/cloud-services/), à [App Service - Web Apps](https://azure.microsoft.com/services/app-service/web/) et aux [services de gestion des API](https://docs.microsoft.com/azure/api-management/api-management-key-concepts). Les autres services Azure utilisent des méthodes de mise à l’échelle différentes.
+La mise à l’échelle automatique Azure Monitor s’applique uniquement aux [groupes de machines virtuelles identiques](https://azure.microsoft.com/services/virtual-machine-scale-sets/), aux [services cloud](https://azure.microsoft.com/services/cloud-services/), à [App Service - Web Apps](https://azure.microsoft.com/services/app-service/web/) et aux [services de gestion des API](../../api-management/api-management-key-concepts.md). Les autres services Azure utilisent des méthodes de mise à l’échelle différentes.
 
 ## <a name="compute-metrics-for-resource-manager-based-vms"></a>Calcul des métriques pour les machines virtuelles basées sur Resource Manager
 Par défaut, les machines virtuelles et jeux de mise à l’échelle de machine virtuelle basés sur Resource Manager émettent des métriques de base (niveau hôte). En outre, lorsque vous configurez la collecte de données de diagnostic pour une machine virtuelle ou des jeux de mise à l’échelle de machine virtuelle Azure, l’extension de diagnostic Azure émet également les compteurs de performances du système d’exploitation invité (communément appelés « Métriques de système d’exploitation invité »).  Vous utilisez toutes ces métriques dans les règles de mise à l’échelle automatique.
@@ -33,8 +33,8 @@ Si l’un des deux cas ci-dessus s’applique, consultez la page [Utiliser Power
 ### <a name="host-metrics-for-resource-manager-based-windows-and-linux-vms"></a>Métriques de l’hôte pour les machines virtuelles Windows et Linux basées sur Resource Manager
 Les métriques de niveau hôte suivantes sont émies par défaut pour les machines virtuelles et jeux de mise à l’échelle de machine virtuelle Azure dans les instances Windows et Linux. Ces métriques décrivent votre machine virtuelle Azure, mais sont collectées à partir de l’hôte de la machine Virtuelle Azure plutôt que via l’agent installé sur la machine virtuelle invitée. Vous pouvez utiliser ces métriques dans les règles de mise à l’échelle automatique.
 
-- [Métriques de l’hôte pour les machines virtuelles Windows et Linux basées sur Resource Manager](../../azure-monitor/platform/metrics-supported.md#microsoftcomputevirtualmachines)
-- [Métriques de l’hôte pour les jeux de mise à l’échelle de machine virtuelle Windows et Linux basées sur Resource Manager](../../azure-monitor/platform/metrics-supported.md#microsoftcomputevirtualmachinescalesets)
+- [Métriques de l’hôte pour les machines virtuelles Windows et Linux basées sur Resource Manager](./metrics-supported.md#microsoftcomputevirtualmachines)
+- [Métriques de l’hôte pour les jeux de mise à l’échelle de machine virtuelle Windows et Linux basées sur Resource Manager](./metrics-supported.md#microsoftcomputevirtualmachinescalesets)
 
 ### <a name="guest-os-metrics-for-resource-manager-based-windows-vms"></a>Métriques de système d’exploitation invité pour les machines virtuelles Windows basées sur Resource Manager
 Lorsque vous créez une machine virtuelle dans Azure, les diagnostics sont effectués grâce à l’extension Diagnostics. L’extension de diagnostics émet un ensemble de métriques extraites de la machine virtuelle. Cela signifie que vous pouvez automatiser la mise à l’échelle des métriques qui ne sont pas émises par défaut.

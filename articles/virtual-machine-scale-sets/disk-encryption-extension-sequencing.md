@@ -1,6 +1,6 @@
 ---
 title: Azure Disk Encryption et séquencement d’extensions de groupes de machines virtuelles identiques Azure
-description: Cet article fournit des instructions sur l’activation Microsoft Azure Disk Encryption pour les machines virtuelles IaaS Linux.
+description: Dans cet article, découvrez comment activer Microsoft Azure Disk Encryption pour les machines virtuelles IaaS Linux.
 author: ju-shim
 ms.author: jushiman
 ms.topic: how-to
@@ -9,12 +9,12 @@ ms.subservice: disks
 ms.date: 10/10/2019
 ms.reviewer: mimckitt
 ms.custom: mimckitt
-ms.openlocfilehash: 1c93359486379ecfc8bf6df1f29978ba369f551a
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.openlocfilehash: 1aff05e51bcbc99f33325efb905ade819ae22e02
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83117255"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90988024"
 ---
 # <a name="use-azure-disk-encryption-with-virtual-machine-scale-set-extension-sequencing"></a>Utiliser Azure Disk Encryption avec un séquencement d’extensions de groupes de machines virtuelles identiques
 

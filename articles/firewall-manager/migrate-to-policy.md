@@ -1,22 +1,20 @@
 ---
-title: Migrer des configurations de pare-feu Azure vers une stratégie de pare-feu Azure (préversion) à l’aide de PowerShell
-description: Découvrez comment migrer des configurations Pare-feu Azure vers une stratégie Pare-feu Azure (préversion)
+title: Migrer des configurations du Pare-feu Azure vers une stratégie de Pare-feu Azure à l’aide de PowerShell
+description: Découvrez comment migrer des configurations du Pare-feu Azure vers une stratégie de Pare-feu Azure
 author: vhorne
 ms.service: firewall-manager
 services: firewall-manager
-ms.topic: conceptual
-ms.date: 02/18/2020
+ms.topic: how-to
+ms.date: 06/30/2020
 ms.author: victorh
-ms.openlocfilehash: 498863c98f308a9fd9b47f80328d572187475901
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: a9dadc875e5e6d35a78930b4a02c48e9cbb6f6ba
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77443106"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85601324"
 ---
-# <a name="migrate-azure-firewall-configurations-to-azure-firewall-policy-preview-using-powershell"></a>Migrer des configurations de pare-feu Azure vers une stratégie de pare-feu Azure (préversion) à l’aide de PowerShell
-
-[!INCLUDE [Preview](../../includes/firewall-manager-preview-notice.md)]
+# <a name="migrate-azure-firewall-configurations-to-azure-firewall-policy-using-powershell"></a>Migrer des configurations du Pare-feu Azure vers une stratégie de Pare-feu Azure à l’aide de PowerShell
 
 Vous pouvez utiliser un script Azure PowerShell pour migrer des configurations Pare-feu Azure existantes vers une ressource de stratégie Pare-feu Azure. Vous pouvez ensuite utiliser Azure Firewall Manager pour déployer la stratégie.
 
@@ -161,4 +159,4 @@ If ($azfw.NatRuleCollections.Count -gt 0) {
 ```
 ## <a name="next-steps"></a>Étapes suivantes
 
-Découvrir le déploiement d’Azure Firewall Manager : [vue d’ensemble du déploiement d’Azure Firewall Manager Preview](deployment-overview.md).
+Découvrir le déploiement d’Azure Firewall Manager : [Vue d’ensemble du déploiement d’Azure Firewall Manager](deployment-overview.md).

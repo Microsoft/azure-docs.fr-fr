@@ -1,23 +1,24 @@
 ---
 title: Ajouter des contrôles à une carte | Microsoft Azure Maps
 description: Comment ajouter un contrôle de zoom, un contrôle de tonalité, un contrôle de rotation et un sélecteur de styles à une carte dans Microsoft Azure Maps.
-author: philmea
-ms.author: philmea
+author: anastasia-ms
+ms.author: v-stharr
 ms.date: 07/29/2019
 ms.topic: conceptual
 ms.service: azure-maps
 services: azure-maps
 manager: timlt
-ms.openlocfilehash: 094dc9fd01ec71f378a173a2b4fa64cc672d7c97
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-js
+ms.openlocfilehash: 2a225d4ea19cccea114e47cc61a8055d28e8cd99
+ms.sourcegitcommit: 4064234b1b4be79c411ef677569f29ae73e78731
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "80334564"
+ms.lasthandoff: 10/28/2020
+ms.locfileid: "92895288"
 ---
 # <a name="add-controls-to-a-map"></a>Ajouter des commandes à une carte
 
-Cet article décrit comment ajouter des contrôles à une carte. Vous allez également apprendre à créer une carte avec tous les contrôles et un [sélecteur de styles](https://docs.microsoft.com/azure/azure-maps/choose-map-style).
+Cet article décrit comment ajouter des contrôles à une carte. Vous allez également apprendre à créer une carte avec tous les contrôles et un [sélecteur de styles](./choose-map-style.md).
 
 ## <a name="add-zoom-control"></a>Ajouter un contrôle de zoom
 
@@ -34,7 +35,7 @@ Vous trouverez ci-dessous l’exemple de code d’exécution complet de la fonct
 
 <br/>
 
-<iframe height='500' scrolling='no' title='Ajout d’un contrôle de zoom' src='//codepen.io/azuremaps/embed/WKOQyN/?height=265&theme-id=0&default-tab=js,result&embed-version=2&editable=true' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>Consultez la section <a href='https://codepen.io/azuremaps/pen/WKOQyN/'>Ajout d’un contrôle de zoom</a> par Azure Maps (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) sur <a href='https://codepen.io'>CodePen</a>.
+<iframe height='500' scrolling='no' title='Ajout d’un contrôle de zoom' src='//codepen.io/azuremaps/embed/WKOQyN/?height=265&theme-id=0&default-tab=js,result&embed-version=2&editable=true' frameborder='no' loading="lazy" allowtransparency='true' allowfullscreen='true' style='width: 100%;'>Consultez la section <a href='https://codepen.io/azuremaps/pen/WKOQyN/'>Ajout d’un contrôle de zoom</a> par Azure Maps (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) sur <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 
 ## <a name="add-pitch-control"></a>Ajouter un contrôle de tonalité
@@ -52,7 +53,7 @@ Vous trouverez ci-dessous l’exemple de code d’exécution complet de la fonct
 
 <br/>
 
-<iframe height='500' scrolling='no' title='Ajout d’un contrôle de tonalité' src='//codepen.io/azuremaps/embed/xJrwaP/?height=265&theme-id=0&default-tab=js,result&embed-version=2&editable=true' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>Consultez la section <a href='https://codepen.io/azuremaps/pen/xJrwaP/'>Ajout d’un contrôle de tonalité</a> par Azure Maps (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) sur <a href='https://codepen.io'>CodePen</a>.
+<iframe height='500' scrolling='no' title='Ajout d’un contrôle de tonalité' src='//codepen.io/azuremaps/embed/xJrwaP/?height=265&theme-id=0&default-tab=js,result&embed-version=2&editable=true' frameborder='no' loading="lazy" allowtransparency='true' allowfullscreen='true' style='width: 100%;'>Consultez la section <a href='https://codepen.io/azuremaps/pen/xJrwaP/'>Ajout d’un contrôle de tonalité</a> par Azure Maps (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) sur <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 
 ## <a name="add-compass-control"></a>Ajouter un contrôle de boussole
@@ -70,7 +71,7 @@ Vous trouverez ci-dessous l’exemple de code d’exécution complet de la fonct
 
 <br/>
 
-<iframe height='500' scrolling='no' title='Ajout d’un contrôle de rotation' src='//codepen.io/azuremaps/embed/GBEoRb/?height=265&theme-id=0&default-tab=js,result&embed-version=2&editable=true' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>Consultez la section <a href='https://codepen.io/azuremaps/pen/GBEoRb/'>Ajout d’un contrôle de rotation</a> par Azure Maps (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) sur <a href='https://codepen.io'>CodePen</a>.
+<iframe height='500' scrolling='no' title='Ajout d’un contrôle de rotation' src='//codepen.io/azuremaps/embed/GBEoRb/?height=265&theme-id=0&default-tab=js,result&embed-version=2&editable=true' frameborder='no' loading="lazy" allowtransparency='true' allowfullscreen='true' style='width: 100%;'>Consultez la section <a href='https://codepen.io/azuremaps/pen/GBEoRb/'>Ajout d’un contrôle de rotation</a> par Azure Maps (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) sur <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 
 ## <a name="a-map-with-all-controls"></a>Une carte avec tous les contrôles
@@ -92,7 +93,7 @@ L’exemple de code suivant ajoute les contrôles de zoom, de boussole, de pas e
 
 <br/>
 
-<iframe height='500' scrolling='no' title='Une carte avec tous les contrôles' src='//codepen.io/azuremaps/embed/qyjbOM/?height=265&theme-id=0&default-tab=js,result&embed-version=2&editable=true' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>Consultez la section <a href='https://codepen.io/azuremaps/pen/qyjbOM/'>Une carte avec tous les contrôles</a> par Azure Maps (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) sur <a href='https://codepen.io'>CodePen</a>.
+<iframe height='500' scrolling='no' title='Une carte avec tous les contrôles' src='//codepen.io/azuremaps/embed/qyjbOM/?height=265&theme-id=0&default-tab=js,result&embed-version=2&editable=true' frameborder='no' loading="lazy" allowtransparency='true' allowfullscreen='true' style='width: 100%;'>Consultez la section <a href='https://codepen.io/azuremaps/pen/qyjbOM/'>Une carte avec tous les contrôles</a> par Azure Maps (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) sur <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 
 Le contrôle de sélecteur de styles est défini par la classe [StyleControl](/javascript/api/azure-maps-control/atlas.control.stylecontrol). Pour plus d’informations sur l’utilisation du contrôle de sélecteur de styles, consultez [choisir un style de carte](choose-map-style.md).
@@ -103,7 +104,7 @@ Voici un outil permettant de tester les différentes options de personnalisation
 
 <br/>
 
-<iframe height="700" style="width: 100%;" scrolling="no" title="Options de contrôle de navigation" src="//codepen.io/azuremaps/embed/LwBZMx/?height=700&theme-id=0&default-tab=result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+<iframe height="700" style="width: 100%;" scrolling="no" title="Options de contrôle de navigation" src="//codepen.io/azuremaps/embed/LwBZMx/?height=700&theme-id=0&default-tab=result" frameborder='no' loading="lazy" allowtransparency="true" allowfullscreen="true">
 Consultez l’extrait de code <a href='https://codepen.io/azuremaps/pen/LwBZMx/'>Navigation control options</a> Azure Maps (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) sur <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 
@@ -141,4 +142,3 @@ Pour voir des codes complets, consultez les articles suivants :
 
 > [!div class="nextstepaction"]
 > [Ajouter une couche de bulles](map-add-bubble-layer.md)
-

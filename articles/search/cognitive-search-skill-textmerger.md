@@ -7,13 +7,13 @@ author: luiscabrer
 ms.author: luisca
 ms.service: cognitive-search
 ms.topic: conceptual
-ms.date: 11/04/2019
-ms.openlocfilehash: 98ea416305f080850d85498f74693eb2d45b0944
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 06/17/2020
+ms.openlocfilehash: b364655f26c6ac29c14d387d69d7b4277d6aeb86
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77162342"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88924637"
 ---
 #   <a name="text-merge-cognitive-skill"></a>Compétence cognitive Fusion de texte
 
@@ -31,8 +31,8 @@ Les paramètres respectent la casse.
 
 | Nom du paramètre     | Description |
 |--------------------|-------------|
-| insertPreTag  | Chaîne à inclure avant chaque insertion. La valeur par défaut est `" "`. Pour omettre l’espace, choisissez la valeur `""`.  |
-| insertPostTag | Chaîne à inclure après chaque insertion. La valeur par défaut est `" "`. Pour omettre l’espace, choisissez la valeur `""`.  |
+| `insertPreTag`    | Chaîne à inclure avant chaque insertion. La valeur par défaut est `" "`. Pour omettre l’espace, choisissez la valeur `""`.  |
+| `insertPostTag`   | Chaîne à inclure après chaque insertion. La valeur par défaut est `" "`. Pour omettre l’espace, choisissez la valeur `""`.  |
 
 
 ##  <a name="sample-input"></a>Exemple d’entrée
@@ -75,7 +75,7 @@ Cet exemple montre la sortie de l’entrée précédente, à supposer que *inser
 
 La fusion de texte permet notamment de fusionner la représentation textuelle d’images (texte issu d’une compétence OCR ou légende d’une image) dans le champ de contenu d’un document. 
 
-L’exemple de compétences suivant utilise la reconnaissance optique des caractères pour extraire du texte à partir d’images incorporées dans le document. Ensuite, il crée un champ *merged_text* qui contiendra le texte avant et après reconnaissance de chaque image. Vous trouverez plus d'informations sur la reconnaissance optique des caractères [ici](https://docs.microsoft.com/azure/search/cognitive-search-skill-ocr).
+L’exemple de compétences suivant utilise la reconnaissance optique des caractères pour extraire du texte à partir d’images incorporées dans le document. Ensuite, il crée un champ *merged_text* qui contiendra le texte avant et après reconnaissance de chaque image. Vous trouverez plus d'informations sur la reconnaissance optique des caractères [ici](./cognitive-search-skill-ocr.md).
 
 ```json
 {
@@ -108,18 +108,22 @@ L’exemple de compétences suivant utilise la reconnaissance optique des caract
       "insertPostTag": " ",
       "inputs": [
         {
-          "name":"text", "source": "/document/content"
+          "name":"text", 
+          "source": "/document/content"
         },
         {
-          "name": "itemsToInsert", "source": "/document/normalized_images/*/text"
+          "name": "itemsToInsert", 
+          "source": "/document/normalized_images/*/text"
         },
         {
-          "name":"offsets", "source": "/document/normalized_images/*/contentOffset" 
+          "name":"offsets", 
+          "source": "/document/normalized_images/*/contentOffset" 
         }
       ],
       "outputs": [
         {
-          "name": "mergedText", "targetName" : "merged_text"
+          "name": "mergedText", 
+          "targetName" : "merged_text"
         }
       ]
     }
@@ -144,4 +148,4 @@ L’exemple ci-dessus suppose l’existence d’un champ normalized-images. Pour
 
 + [Compétences prédéfinies](cognitive-search-predefined-skills.md)
 + [Guide pratique pour définir un ensemble de compétences](cognitive-search-defining-skillset.md)
-+ [Créer un indexeur (REST)](https://docs.microsoft.com/rest/api/searchservice/create-indexer)
++ [Créer un indexeur (REST)](/rest/api/searchservice/create-indexer)

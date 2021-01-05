@@ -10,12 +10,12 @@ ms.service: virtual-machines
 ms.topic: troubleshooting
 ms.date: 10/31/2018
 ms.author: delhan
-ms.openlocfilehash: fe2427d008b49daa6222ca981994f0dc2fbea355
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: fbf8c1987a66cad6d9d9bc9dab829af4b42a224e
+ms.sourcegitcommit: d103a93e7ef2dde1298f04e307920378a87e982a
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79476584"
+ms.lasthandoff: 10/13/2020
+ms.locfileid: "91971555"
 ---
 # <a name="how-to-use-boot-diagnostics-to-troubleshoot-virtual-machines-in-azure"></a>Comment utiliser les diagnostics de démarrage pour résoudre les problèmes des machines virtuelles dans Azure
 
@@ -52,7 +52,7 @@ Sous l’onglet **Gestion**, dans la section **Supervision**, vérifiez que l’
 ![Créer une machine virtuelle](./media/virtual-machines-common-boot-diagnostics/enable-boot-diagnostics-vm.png)
 
 > [!NOTE]
-> La fonctionnalité Diagnostics de démarrage ne prend pas en charge le compte de stockage Premium. Si vous utilisez le compte de stockage Premium pour la fonctionnalité Diagnostics de démarrage, vous pouvez recevoir l’erreur StorageAccountTypeNotSupported lorsque vous démarrez la machine virtuelle.
+> La fonctionnalité Diagnostics de démarrage ne prend pas en charge les types de comptes Stockage Premium ou Stockage redondant interzone. Si vous utilisez le compte de stockage Premium pour la fonctionnalité Diagnostics de démarrage, vous pouvez recevoir l’erreur StorageAccountTypeNotSupported lorsque vous démarrez la machine virtuelle.
 >
 
 ### <a name="deploying-from-an-azure-resource-manager-template"></a>Déploiement à l’aide d’un modèle Azure Resource Manager
@@ -92,9 +92,6 @@ Pour activer la fonctionnalité Diagnostics de démarrage sur une machine virtue
 
     ![Mettre à jour une machine virtuelle existante](./media/virtual-machines-common-boot-diagnostics/enable-for-existing-vm.png)
 
-Vous devez redémarrer la machine virtuelle pour appliquer le changement.
-
 ### <a name="enable-boot-diagnostics-using-the-azure-cli"></a>Activer les diagnostics de démarrage à l’aide d’Azure CLI
 
-Vous pouvez utiliser Azure CLI pour activer les diagnostics de démarrage sur une machine virtuelle Azure existante. Pour plus d’informations, consultez [az vm boot-diagnostics](
-https://docs.microsoft.com/cli/azure/vm/boot-diagnostics?view=azure-cli-latest).
+Vous pouvez utiliser Azure CLI pour activer les diagnostics de démarrage sur une machine virtuelle Azure existante. Pour plus d’informations, consultez [az vm boot-diagnostics](/cli/azure/vm/boot-diagnostics?view=azure-cli-latest).

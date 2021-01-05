@@ -1,53 +1,60 @@
 ---
 title: Utiliser l’API Table Azure Cosmos DB et le Stockage Table Azure avec Python
-description: Stockez des données structurées dans le cloud à l’aide du stockage de tables Azure ou de l’API Table d’Azure Cosmos DB.
+description: Stockez des données structurées dans le cloud à l’aide du Stockage Table Azure ou de l’API Table Azure Cosmos DB avec Python.
 ms.service: cosmos-db
 ms.subservice: cosmosdb-table
 ms.devlang: python
 ms.topic: sample
-ms.date: 04/05/2018
+ms.date: 07/23/2020
 author: sakash279
 ms.author: akshanka
 ms.reviewer: sngun
-ms.openlocfilehash: b3a6f4397ca1b8c56f06f6d967804c94096ee308
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.custom: devx-track-python
+ms.openlocfilehash: 341615bf8fe231eafa606411948ad014399b8261
+ms.sourcegitcommit: 3bdeb546890a740384a8ef383cf915e84bd7e91e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "76770989"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93079544"
 ---
 # <a name="get-started-with-azure-table-storage-and-the-azure-cosmos-db-table-api-using-python"></a>Prise en main du stockage de tables Azure et de l’API Table d’Azure Cosmos DB avec Python
+[!INCLUDE[appliesto-table-api](includes/appliesto-table-api.md)]
 
 [!INCLUDE [storage-selector-table-include](../../includes/storage-selector-table-include.md)]
 [!INCLUDE [storage-table-applies-to-storagetable-and-cosmos](../../includes/storage-table-applies-to-storagetable-and-cosmos.md)]
 
-Le Stockage Table Azure et Azure Cosmos DB sont des services qui stockent des données NoSQL structurées dans le cloud, en fournissant une conception sans schéma à un magasin de clés/attributs. Comme le stockage de tables et Azure Cosmos DB sont sans schéma, il est aisé d’adapter vos données en fonction des besoins de votre application. L’accès au stockage de tables et aux données de l’API de table est rapide et économique pour de nombreux types d’applications, et généralement moins coûteux que le SQL traditionnel pour des volumes de données similaires.
+Le Stockage Table Azure et Azure Cosmos DB sont des services qui stockent des données NoSQL structurées dans le cloud en fournissant une conception sans schéma à un magasin de clés/attributs. Comme le stockage de tables et Azure Cosmos DB sont sans schéma, il est aisé d’adapter vos données en fonction des besoins de votre application. L’accès au stockage de tables et aux données de l’API de table est rapide et économique pour de nombreux types d’applications et généralement moins coûteux que le SQL traditionnel pour des volumes de données similaires.
 
-Vous pouvez utiliser le stockage de tables ou Azure Cosmos DB pour stocker des jeux de données flexibles, comme des données utilisateur pour des applications web, des carnets d’adresses, des informations sur les appareils ou d’autres types de métadonnées requis par votre service. Vous pouvez stocker un nombre quelconque d'entités dans une table, et un compte de stockage peut contenir un nombre quelconque de tables, jusqu'à la limite de capacité du compte de stockage.
+Vous pouvez utiliser le Stockage Table ou Azure Cosmos DB pour stocker des jeux de données flexibles comme des données utilisateur pour des applications web, des carnets d’adresses, des informations sur les appareils ou d’autres types de métadonnées requis par votre service. Vous pouvez stocker un nombre quelconque d'entités dans une table, et un compte de stockage peut contenir un nombre quelconque de tables, jusqu'à la limite de capacité du compte de stockage.
 
 ### <a name="about-this-sample"></a>À propos de cet exemple
+
 Cet exemple montre comment utiliser le [Kit de développement logiciel (SDK) de table Azure Cosmos DB pour Python](https://pypi.python.org/pypi/azure-cosmosdb-table/) dans les scénarios de stockage de tables Azure courants. Le nom du Kit de développement logiciel (SDK) indique qu’il doit être utilisé avec Azure Cosmos DB, mais il fonctionne avec Azure Cosmos DB et avec le stockage de tables Azure, chaque service possédant un point de terminaison unique. Ces scénarios sont explorés à l’aide d’exemples Python qui montrent comment :
+
 * créer et supprimer des tables ;
 * Insérer et interroger des entités
 * Modifier des entités
 
-Pendant que vous étudiez les scénarios de cet exemple, vous pouvez vous référer à la [Référence du kit de développement logiciel (SDK) Azure Cosmos DB pour l’API Python](https://docs.microsoft.com/python/api/overview/azure/cosmosdb?view=azure-python).
+Pendant que vous étudiez les scénarios de cet exemple, vous pouvez vous référer à la [Référence du kit de développement logiciel (SDK) Azure Cosmos DB pour l’API Python](/python/api/overview/azure/cosmosdb?preserve-view=true&view=azure-python).
 
 ## <a name="prerequisites"></a>Conditions préalables requises
 
 Vous aurez besoin des éléments suivants pour suivre cet exemple :
 
-- [Python](https://www.python.org/downloads/) 2.7, 3.3, 3.4, 3.5 ou 3.6
-- [Kit de développement logiciel (SDK) du service Table d’Azure Cosmos DB pour Python](https://pypi.python.org/pypi/azure-cosmosdb-table/). Ce kit de développement logiciel (SDK) se connecte à la fois avec l’API Table Azure Cosmos DB et le Stockage Table Azure.
-- [Compte de stockage Azure](../storage/common/storage-account-create.md) ou [Azure Cosmos DB](https://azure.microsoft.com/try/cosmosdb/)
+* [Python](https://www.python.org/downloads/) 2.7, 3.3, 3.4, 3.5 ou 3.6
+* [Kit de développement logiciel (SDK) du service Table d’Azure Cosmos DB pour Python](https://pypi.python.org/pypi/azure-cosmosdb-table/). Ce kit de développement logiciel (SDK) se connecte à la fois avec l’API Table Azure Cosmos DB et le Stockage Table Azure.
+* [Compte de stockage Azure](../storage/common/storage-account-create.md) ou [Azure Cosmos DB](https://azure.microsoft.com/try/cosmosdb/)
 
 ## <a name="create-an-azure-service-account"></a>Créer un compte de service Azure
+
 [!INCLUDE [cosmos-db-create-azure-service-account](../../includes/cosmos-db-create-azure-service-account.md)]
 
-### <a name="create-an-azure-storage-account"></a>Créer un compte de stockage Azure
+**Créer un compte de stockage Azure**
+
 [!INCLUDE [cosmos-db-create-storage-account](../../includes/cosmos-db-create-storage-account.md)]
 
-### <a name="create-an-azure-cosmos-db-table-api-account"></a>Créer un compte d’API de table Azure Cosmos DB
+**Créer un compte d’API Table Azure Cosmos DB**
+
 [!INCLUDE [cosmos-db-create-tableapi-account](../../includes/cosmos-db-create-tableapi-account.md)]
 
 ## <a name="install-the-azure-cosmos-db-table-sdk-for-python"></a>Installer le Kit de développement logiciel (SDK) de table Azure Cosmos DB pour Python
@@ -198,7 +205,7 @@ for task in tasks:
 
 ## <a name="query-a-subset-of-entity-properties"></a>Interrogation d'un sous-ensemble de propriétés d'entité
 
-Vous pouvez également restreindre les propriétés renvoyées pour chaque entité dans une requête. Cette technique, nommée *projection*, réduit la consommation de bande passante et peut améliorer les performances des requêtes, notamment pour les entités volumineuses ou les jeux de résultats. Utilisez le paramètre **select** et transmettez le nom des propriétés à renvoyer au client.
+Vous pouvez également restreindre les propriétés renvoyées pour chaque entité dans une requête. Cette technique, nommée *projection* , réduit la consommation de bande passante et peut améliorer les performances des requêtes, notamment pour les entités volumineuses ou les jeux de résultats. Utilisez le paramètre **select** et transmettez le nom des propriétés à renvoyer au client.
 
 La requête contenue dans le code suivant ne renvoie que la description des entités de la table.
 
@@ -230,22 +237,23 @@ table_service.delete_table('tasktable')
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* [FAQ - Développer avec l’API Table](https://docs.microsoft.com/azure/cosmos-db/faq)
-* [Référence du kit de développement logiciel (SDK) Azure Cosmos DB pour l’API Python](https://docs.microsoft.com/python/api/overview/azure/cosmosdb?view=azure-python)
+* [FAQ - Développer avec l’API Table](./faq.md)
+* [Référence du kit de développement logiciel (SDK) Azure Cosmos DB pour l’API Python](/python/api/overview/azure/cosmosdb?preserve-view=true&view=azure-python)
 * [Centre de développement Python](https://azure.microsoft.com/develop/python/)
 * [Microsoft Azure Storage Explorer](../vs-azure-tools-storage-manage-with-storage-explorer.md) : une application gratuite et multiplateforme de Microsoft qui vous permet d’exploiter visuellement les données de stockage Azure sur Windows, macOS et Linux.
-* [Utilisation de Python dans Visual Studio (Windows)](https://docs.microsoft.com/visualstudio/python/overview-of-python-tools-for-visual-studio)
+* [Utilisation de Python dans Visual Studio (Windows)](/visualstudio/python/overview-of-python-tools-for-visual-studio)
 
 
-[py_commit_batch]: https://docs.microsoft.com/python/api/azure-cosmosdb-table/azure.cosmosdb.table.tableservice.tableservice?view=azure-python
-[py_create_table]: https://docs.microsoft.com/python/api/azure-cosmosdb-table/azure.cosmosdb.table.tableservice.tableservice?view=azure-python
-[py_delete_entity]: https://docs.microsoft.com/python/api/azure-cosmosdb-table/azure.cosmosdb.table.tableservice.tableservice?view=azure-python
-[py_get_entity]: https://docs.microsoft.com/python/api/azure-cosmosdb-table/azure.cosmosdb.table.tableservice.tableservice?view=azure-python
-[py_insert_entity]: https://docs.microsoft.com/python/api/azure-cosmosdb-table/azure.cosmosdb.table.tableservice.tableservice?view=azure-python
-[py_insert_or_replace_entity]: https://docs.microsoft.com/python/api/azure-cosmosdb-table/azure.cosmosdb.table.tableservice.tableservice?view=azure-python
-[py_Entity]: https://docs.microsoft.com/python/api/azure-cosmosdb-table/azure.cosmosdb.table.models.entity?view=azure-python
-[py_merge_entity]: https://docs.microsoft.com/python/api/azure-cosmosdb-table/azure.cosmosdb.table.tableservice.tableservice?view=azure-python
-[py_update_entity]: https://docs.microsoft.com/python/api/azure-cosmosdb-table/azure.cosmosdb.table.tableservice.tableservice?view=azure-python
-[py_delete_table]: https://docs.microsoft.com/python/api/azure-cosmosdb-table/azure.cosmosdb.table.tableservice.tableservice?view=azure-python
-[py_TableService]: https://docs.microsoft.com/python/api/azure-cosmosdb-table/azure.cosmosdb.table.tableservice.tableservice?view=azure-python
-[py_TableBatch]: https://docs.microsoft.com/python/api/azure-cosmosdb-table/azure.cosmosdb.table.tableservice.tableservice?view=azure-python
+
+[py_commit_batch]: /python/api/azure-cosmosdb-table/azure.cosmosdb.table.tableservice.tableservice?preserve-view=true&view=azure-python
+[py_create_table]: /python/api/azure-cosmosdb-table/azure.cosmosdb.table.tableservice.tableservice?preserve-view=true&view=azure-python
+[py_delete_entity]: /python/api/azure-cosmosdb-table/azure.cosmosdb.table.tableservice.tableservice?preserve-view=true&view=azure-python
+[py_get_entity]: /python/api/azure-cosmosdb-table/azure.cosmosdb.table.tableservice.tableservice?preserve-view=true&view=azure-python
+[py_insert_entity]: /python/api/azure-cosmosdb-table/azure.cosmosdb.table.tableservice.tableservice?preserve-view=true&view=azure-python
+[py_insert_or_replace_entity]: /python/api/azure-cosmosdb-table/azure.cosmosdb.table.tableservice.tableservice?preserve-view=true&view=azure-python
+[py_Entity]: /python/api/azure-cosmosdb-table/azure.cosmosdb.table.models.entity?preserve-view=true&view=azure-python
+[py_merge_entity]: /python/api/azure-cosmosdb-table/azure.cosmosdb.table.tableservice.tableservice?preserve-view=true&view=azure-python
+[py_update_entity]: /python/api/azure-cosmosdb-table/azure.cosmosdb.table.tableservice.tableservice?preserve-view=true&view=azure-python
+[py_delete_table]: /python/api/azure-cosmosdb-table/azure.cosmosdb.table.tableservice.tableservice?preserve-view=true&view=azure-python
+[py_TableService]: /python/api/azure-cosmosdb-table/azure.cosmosdb.table.tableservice.tableservice?preserve-view=true&view=azure-python
+[py_TableBatch]: https://docs.microsoft.com/python/api/azure-cosmosdb-table/azure.cosmosdb.table.tableservice.tableservice?view=azure-python&preserve-view=true

@@ -11,14 +11,20 @@ ms.subservice: bing-entity-search
 ms.topic: quickstart
 ms.date: 03/06/2020
 ms.author: aahi
-ms.openlocfilehash: 206d3514e231fdedc6c13592da0c51d2f93bbe84
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.custom: devx-track-python, devx-track-js, devx-track-csharp
+ms.openlocfilehash: 1258f696973e9b213a038869445e7426f92e6af2
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "79136590"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96351501"
 ---
 # <a name="quickstart-use-the-bing-entity-search-client-library"></a>Démarrage rapide : Utiliser la bibliothèque de client Recherche d’entités Bing
+
+> [!WARNING]
+> Les API Recherche Bing passent de Cognitive Services aux services de recherche Bing. À compter du **30 octobre 2020**, toutes les nouvelles instances de Recherche Bing doivent être provisionnées en suivant le processus documenté [ici](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
+> Les API Recherche Bing provisionnées à l’aide de Cognitive Services seront prises en charge les trois prochaines années ou jusqu’à la fin de votre Contrat Entreprise, selon la première éventualité.
+> Pour obtenir des instructions de migration, consultez [Services de recherche Bing](/bing/search-apis/bing-web-search/create-bing-search-service-resource).
 
 ::: zone pivot="programming-language-csharp"
 

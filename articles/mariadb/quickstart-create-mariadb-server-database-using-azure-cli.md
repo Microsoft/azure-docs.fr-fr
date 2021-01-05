@@ -1,29 +1,29 @@
 ---
 title: 'Démarrage rapide : Créer un serveur – Azure CLI – Azure Database for MariaDB'
 description: Ce guide de démarrage rapide explique comment utiliser l’interface CLI Azure pour créer un serveur Azure Database for MariaDB dans un groupe de ressources Azure.
-author: ajlam
-ms.author: andrela
+author: savjani
+ms.author: pariks
 ms.service: mariadb
 ms.devlang: azurecli
 ms.topic: quickstart
 ms.date: 3/18/2020
-ms.custom: mvc
-ms.openlocfilehash: f83af794a179634b9b6b7adedd329ea6f4a7b8d0
-ms.sourcegitcommit: c2065e6f0ee0919d36554116432241760de43ec8
+ms.custom: mvc, devx-track-azurecli
+ms.openlocfilehash: 3279150d0cb7b287f0a78581094a51356033596c
+ms.sourcegitcommit: 5e5a0abe60803704cf8afd407784a1c9469e545f
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "79536460"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96435737"
 ---
-# <a name="create-an-azure-database-for-mariadb-server-by-using-the-azure-cli"></a>Créer un serveur Azure Database for MariaDB à l’aide d’Azure CLI
+# <a name="quickstart-create-an-azure-database-for-mariadb-server-by-using-the-azure-cli"></a>Démarrage rapide : Créer un serveur Azure Database for MariaDB à l’aide d’Azure CLI
 
 Vous pouvez utiliser Azure CLI pour créer et gérer des ressources Azure à partir de la ligne de commande ou dans des scripts. Ce guide de démarrage rapide explique comment utiliser l’interface Azure CLI pour créer en quelque cinq minutes un serveur Azure Database for MariaDB dans un groupe de ressources Azure.
 
 Si vous n’avez pas d’abonnement Azure, créez un compte [gratuit](https://azure.microsoft.com/free/) avant de commencer.
 
-[!INCLUDE [cloud-shell-try-it](../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](../../includes/azure-cli-prepare-your-environment.md)]
 
-Si vous installez et utilisez CLI en local, pour ce démarrage rapide, vous devez exécuter Azure CLI version 2.0 ou supérieure. Exécutez `az --version` pour trouver la version. Si vous devez installer ou mettre à niveau l’interface CLI, consultez l’article [Installation d’Azure CLI 2.0]( /cli/azure/install-azure-cli).
+- Cet article nécessite la version 2.0 ou ultérieure d’Azure CLI. Si vous utilisez Azure Cloud Shell, la version la plus récente est déjà installée.
 
 Si vous avez plusieurs abonnements, choisissez celui dans lequel se trouve la ressource ou celui pour lequel vous êtes facturé. Pour sélectionner un ID d’abonnement dans votre compte, utilisez la commande [az account set](/cli/azure/account#az-account-set) :
 
@@ -33,7 +33,7 @@ az account set --subscription 00000000-0000-0000-0000-000000000000
 
 ## <a name="create-a-resource-group"></a>Créer un groupe de ressources
 
-Créez un [groupe de ressources Azure](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-overview) avec la commande [az group create](/cli/azure/group#az-group-create). Un groupe de ressources est un conteneur logique dans lequel les ressources Azure sont déployées et gérées en tant que groupe.
+Créez un [groupe de ressources Azure](../azure-resource-manager/management/overview.md) avec la commande [az group create](/cli/azure/group#az-group-create). Un groupe de ressources est un conteneur logique dans lequel les ressources Azure sont déployées et gérées en tant que groupe.
 
 L’exemple suivant crée un groupe de ressources nommé `myresourcegroup` à l’emplacement `westus` :
 
@@ -240,4 +240,4 @@ az mariadb server delete --resource-group myresourcegroup --name mydemoserver
 ## <a name="next-steps"></a>Étapes suivantes
 
 > [!div class="nextstepaction"]
-> [Concevoir une base de données MariaDB avec Azure CLI](./tutorial-design-database-cli.md)
+> [Concevoir une base de données MariaDB avec Azure CLI](tutorial-design-database-cli.md)

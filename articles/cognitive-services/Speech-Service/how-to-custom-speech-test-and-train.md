@@ -10,16 +10,35 @@ ms.subservice: speech-service
 ms.topic: conceptual
 ms.date: 03/27/2020
 ms.author: trbye
-ms.openlocfilehash: 78857709447f99895c36f23d8760f44f8468ba7c
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.openlocfilehash: a5457dc94082f089d3adf02c9614d05d2c5db244
+ms.sourcegitcommit: d60976768dec91724d94430fb6fc9498fdc1db37
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "81402143"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96484003"
 ---
 # <a name="prepare-data-for-custom-speech"></a>Préparer des données pour Custom Speech
 
-Lors du test de la précision de la reconnaissance vocale Microsoft ou de l’apprentissage de vos modèles personnalisés, vous aurez besoin de données audio et texte. Dans cette page, nous nous intéressons aux types de données, à la façon dont ils sont utilisés et à leur gestion.
+Lors du test de la précision de la reconnaissance vocale Microsoft ou de l’apprentissage de vos modèles personnalisés, vous aurez besoin de données audio et texte. Dans cette page, nous abordons les types de données requis par un modèle Custom Speech.
+
+## <a name="data-diversity"></a>Diversité des données
+
+Le texte et l’audio utilisés pour tester et entraîner un modèle personnalisé doivent inclure des échantillons issus d’un ensemble diversifié de haut-parleurs et de scénarios que votre modèle doit reconnaître.
+Tenez compte des facteurs suivants lors de la collecte de données pour le test et l’entraînement de modèles personnalisés :
+
+* Vos données texte et audio doivent couvrir les types d’instructions verbales que vos utilisateurs prononceront lorsqu’ils interagiront avec votre modèle. Par exemple, un modèle chargé d’élever et d’abaisser la température nécessite un entraînement sur des instructions possibles permettant de demander de telles modifications.
+* Vos données doivent inclure toutes les variantes de langage que votre modèle doit reconnaître. De nombreux facteurs peuvent faire varier l’audio, y compris les accents, les dialectes, le mélange de langues, l’âge, le sexe, la hauteur de la voix, le degré de stress et l’heure de la journée.
+* Vous devez inclure des échantillons provenant de différents environnements (en intérieur, en extérieur, avec bruits de route) où votre modèle sera utilisé.
+* Le contenu audio doit être collecté à l’aide des périphériques matériels que le système de production utilisera. Si votre modèle doit identifier la parole enregistrée sur des appareils d’enregistrement de diverses qualités, les données audio que vous fournissez pour entraîner votre modèle doivent également être caractéristiques de ces différents scénarios.
+* Vous pouvez ajouter ultérieurement des données à votre modèle, mais veillez à utiliser un jeu de données diversifié et représentatif des besoins de votre projet.
+* L’insertion de données qui *ne figurent pas* dans les besoins de reconnaissance de modèle personnalisé peut nuire à la qualité globale de la reconnaissance. N’insérez donc pas de données dont votre modèle n’a pas besoin pour transcrire.
+
+Un modèle entraîné dans le cadre d’un sous-ensemble de scénarios ne peut fonctionner correctement que dans ces scénarios. Choisissez soigneusement les données qui représentent l’étendue complète des scénarios que votre modèle personnalisé doit reconnaître.
+
+> [!TIP]
+> Commencez avec de petits ensembles d’exemples de données correspondant à la langue et à l’acoustique que votre modèle rencontrera.
+> Par exemple, enregistrez un petit échantillon représentatif du contenu audio sur le même matériel et dans le même environnement acoustique que votre modèle rencontrera dans les scénarios de production.
+> De petits jeux de données représentatifs peuvent exposer des problèmes avant que vous ayez investi dans la collecte de jeux de données beaucoup plus volumineux à des fins d’entraînement.
 
 ## <a name="data-types"></a>Types de données
 
@@ -27,7 +46,7 @@ Ce tableau liste les types de données acceptés, les cas d’utilisation pour c
 
 | Type de données | Utilisé pour le test | Quantité recommandée | Utilisé pour l’entraînement | Quantité recommandée |
 |-----------|-----------------|----------|-------------------|----------|
-| [Audio](#audio-data-for-testing) | Oui<br>Utilisé pour l’inspection visuelle | 5 fichiers audio et plus | Non | n/a |
+| [Audio](#audio-data-for-testing) | Oui<br>Utilisé pour l’inspection visuelle | 5 fichiers audio et plus | Non | N/A |
 | [Transcriptions audio + étiquetées à la main](#audio--human-labeled-transcript-data-for-testingtraining) | Oui<br>Utilisé pour évaluer la précision | 0,5 - 5 heures d’audio | Oui | 1 -1 000 heures d’audio |
 | [Texte associé](#related-text-data-for-training) | Non | n/a | Oui | 1 – 200 Mo de texte associé |
 
@@ -40,7 +59,7 @@ Les fichiers doivent être regroupées par type dans un jeu de données et charg
 
 Pour télécharger vos données, accédez au <a href="https://speech.microsoft.com/customspeech" target="_blank">portail Custom Speech <span class="docon docon-navigate-external x-hidden-focus"></span></a>. Dans le portail, cliquez sur **Upload data** (Charger des données) pour lancer l’Assistant et créer votre premier jeu de données. Vous êtes alors invité à sélectionner un type de données vocales pour votre jeu de données avant d’être autorisé à charger vos données.
 
-![Sélectionner du contenu audio à partir du portail Speech](./media/custom-speech/custom-speech-select-audio.png)
+![Capture d’écran mettant en évidence l’option Chargement audio dans le portail Speech.](./media/custom-speech/custom-speech-select-audio.png)
 
 Chaque jeu de données que vous chargez doit respecter les exigences associé au type de données choisi. Vos données doivent être correctement mises en forme avant d’être chargées. Des données correctement mises en forme garantissent un traitement précis par le service Custom Speech. Les exigences sont listées dans les sections suivantes.
 
@@ -63,7 +82,7 @@ Servez-vous de ce tableau pour vérifier que le format de vos fichiers audio con
 | Longueur maximale par fichier audio | 2 heures               |
 | Format d’échantillonnage            | PCM, 16 bits           |
 | Format d’archive           | .zip                  |
-| Taille d’archive maximale     | 2 Go                  |
+| Taille d’archive maximale     | 2 Go                  |
 
 [!INCLUDE [supported-audio-formats](includes/supported-audio-formats.md)]
 
@@ -81,6 +100,8 @@ Utilisez <a href="http://sox.sourceforge.net" target="_blank" rel="noopener">SoX
 
 Pour mesurer la précision de la reconnaissance vocale de Microsoft pendant le traitement de vos fichiers audio, vous devez fournir des transcriptions étiquetées à la main (mot par mot) pour effectuer la comparaison. Si la transcription étiquetée à la main prend souvent beaucoup de temps, elle est nécessaire pour évaluer la précision et entraîner le modèle pour vos cas d’usage. Gardez à l’esprit que les améliorations de la reconnaissance seront proportionnelles à la qualité des données fournies. C’est pourquoi il est important de charger uniquement des transcriptions de grande qualité.
 
+Les fichiers audio peuvent avoir un silence au début et à la fin de l’enregistrement. Si possible, incluez au moins une demi-seconde de silence avant et après Speech dans chaque exemple de fichier. Bien que les données audio avec un faible volume d’enregistrement ou un bruit d’arrière-plan perturbateur ne soient pas utiles, elles ne doivent pas nuire à votre modèle personnalisé. Envisagez toujours de mettre à niveau vos micro et votre matériel de traitement du signal avant de rassembler les échantillons audio.
+
 | Propriété                 | Valeur                               |
 |--------------------------|-------------------------------------|
 | Format de fichier              | RIFF (WAV)                          |
@@ -89,7 +110,7 @@ Pour mesurer la précision de la reconnaissance vocale de Microsoft pendant le t
 | Longueur maximale par fichier audio | 2 heures (test) /60 s (entraînement) |
 | Format d’échantillonnage            | PCM, 16 bits                         |
 | Format d’archive           | .zip                                |
-| Taille maximale de zip         | 2 Go                                |
+| Taille maximale de zip         | 2 Go                                |
 
 [!INCLUDE [supported-audio-formats](includes/supported-audio-formats.md)]
 
@@ -183,4 +204,4 @@ Utilisez le tableau suivant pour vérifier que votre fichier de données associ�
 * [Inspecter les données](how-to-custom-speech-inspect-data.md)
 * [Évaluer les données](how-to-custom-speech-evaluate-data.md)
 * [Entraîner un modèle](how-to-custom-speech-train-model.md)
-* [Déployer un modèle](how-to-custom-speech-deploy-model.md)
+* [Déployer un modèle](./how-to-custom-speech-train-model.md)

@@ -1,6 +1,6 @@
 ---
 title: Créer un réseau virtuel pour les applications multiniveaux - Exemple de script Azure PowerShell
-description: Exemple de script Azure PowerShell - Créer un réseau pour les applications multiniveau.
+description: Créer un réseau pour les applications multiniveau - Exemple de script Azure PowerShell.
 services: virtual-network
 documentationcenter: virtual-network
 author: KumudD
@@ -15,12 +15,13 @@ ms.tgt_pltfrm: ''
 ms.workload: infrastructure
 ms.date: 12/13/2018
 ms.author: kumud
-ms.openlocfilehash: 32140429d96d73100c4bd5a2ae274e508a15b7a8
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.custom: devx-track-azurepowershell
+ms.openlocfilehash: 51cafb0a344c5b6226b3b033d8c60327eaf2c05f
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "74091322"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91267939"
 ---
 # <a name="create-a-network-for-multi-tier-applications-script-sample"></a>Créer un réseau pour des exemples de script d’applications multiniveau
 
@@ -65,6 +66,6 @@ Ce script utilise les commandes suivantes pour créer un groupe de ressources, u
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour plus d’informations sur Azure PowerShell, consultez la [documentation Azure PowerShell](/powershell/azure/overview).
+Pour plus d’informations sur Azure PowerShell, consultez la [documentation Azure PowerShell](/powershell/azure/).
 
 Vous trouverez des exemples supplémentaires de scripts PowerShell pour réseau virtuel dans [Exemples PowerShell pour réseau virtuel](../powershell-samples.md).

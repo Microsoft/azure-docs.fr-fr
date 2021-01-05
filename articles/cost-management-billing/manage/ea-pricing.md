@@ -5,16 +5,17 @@ author: bandersmsft
 ms.reviewer: amberb
 tags: billing
 ms.service: cost-management-billing
+ms.subservice: enterprise
 ms.topic: conceptual
-ms.date: 02/14/2020
+ms.date: 08/20/2020
 ms.author: banders
 ms.custom: seodec18
-ms.openlocfilehash: 1dd0dfad0c68e18ae272d5d94fedd67d24be9ae1
-ms.sourcegitcommit: 0947111b263015136bca0e6ec5a8c570b3f700ff
+ms.openlocfilehash: 63e648681a63daafe1eaeb1d2e8e5a6cd607aa70
+ms.sourcegitcommit: 3792cf7efc12e357f0e3b65638ea7673651db6e1
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "77200776"
+ms.lasthandoff: 09/29/2020
+ms.locfileid: "91446331"
 ---
 # <a name="view-and-download-your-organizations-azure-pricing"></a>Afficher et télécharger les tarifs Azure de votre organisation
 
@@ -27,17 +28,17 @@ Selon les stratégies définies pour votre organisation par l’administrateur d
 1. En tant qu’administrateur d’entreprise, connectez-vous au [Portail Azure](https://portal.azure.com/).
 1. Recherchez *Gestion des coûts + facturation*.
 
-   ![Capture d’écran montrant la recherche dans le portail Azure](./media/ea-pricing/portal-cm-billing-search.png)
+   ![Capture d’écran montrant une recherche dans le Portail Azure.](./media/ea-pricing/portal-cm-billing-search.png)
 
 1. Sous le compte de facturation, sélectionnez **Utilisation + frais**.
 
    ![Capture d’écran montrant l’utilisation et les frais sous Facturation](./media/ea-pricing/ea-pricing-usage-charges-nav.png)
 
-1. Sélectionnez ![Capture d’écran montrant la recherche sur le portail Azure](./media/ea-pricing/download-icon.png) **Télécharger** pour le mois correspondant.
+1. Sélectionnez l’![icône de téléchargement](./media/ea-pricing/download-icon.png). **Télécharger** pour le mois.
 
 1. Sous **Grille tarifaire**, sélectionnez **Télécharger le fichier CSV**.
 
-   ![Capture d’écran montrant le bouton de téléchargement de fichier csv de la grille tarifaire](./media/ea-pricing/download-ea-price-sheet.png)
+   ![Capture d’écran illustrant l’option Télécharger l’utilisation et les frais.](./media/ea-pricing/download-ea-price-sheet.png)
 
 ## <a name="download-pricing-for-an-mca-or-mpa-account"></a>Télécharger les tarifs pour un compte MCA ou MPA
 
@@ -78,7 +79,7 @@ Vous pouvez également utiliser les tarifs de votre organisation pour estimer le
 1. Sous **Programmes et offre** > **Programme de licence**, sélectionnez **Contrat Entreprise**.
 1. Sous **Programmes et offre** > **Contrat sélectionné**, sélectionnez **Aucune sélection**.
 
-    ![Capture d’écran montrant le bouton de téléchargement de fichier csv de la grille tarifaire](./media/ea-pricing/ea-pricing-calculator-estimate.png)
+    ![Capture d’écran montrant les programmes et offres disponibles.](./media/ea-pricing/ea-pricing-calculator-estimate.png)
 
 1. Choisissez l’organisation.
 1. Sélectionnez **Appliquer**.
@@ -99,7 +100,7 @@ Si vous êtes client EA, consultez :
 
 Si vous avez un Contrat client Microsoft, consultez :
 
-- [Comprendre les termes de votre grille tarifaire pour un Contrat client Microsoft](mca-understand-pricesheet.md)
+- [Comprendre les conditions de votre grille tarifaire pour un Contrat client Microsoft](mca-understand-pricesheet.md)
 - [Afficher et télécharger votre facture Microsoft Azure](../understand/download-azure-invoice.md)
 - [Afficher et télécharger votre utilisation et vos frais Microsoft Azure](../understand/download-azure-daily-usage.md)
 - [Afficher et télécharger les documents fiscaux pour votre profil de facturation](../understand/mca-download-tax-document.md)

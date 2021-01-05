@@ -7,7 +7,7 @@ author: curtand
 manager: daveba
 ms.service: active-directory
 ms.devlang: na
-ms.topic: conceptual
+ms.topic: how-to
 ms.tgt_pltfrm: na
 ms.workload: identity
 ms.subservice: pim
@@ -15,12 +15,12 @@ ms.date: 11/08/2019
 ms.author: curtand
 ms.custom: pim
 ms.collection: M365-identity-device-management
-ms.openlocfilehash: 2efcf77d65fa2f9e203ed805cd7d78b9802ee3aa
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: f4e2e18f3bb9d1c972d805a60493897d605921e4
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74021935"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96010637"
 ---
 # <a name="invite-guest-users-and-assign-azure-resource-roles-in-privileged-identity-management"></a>Inviter des utilisateurs invités et attribuer des rôles de ressources Azure dans Privileged Identity Management
 
@@ -45,7 +45,7 @@ Voici quelques exemples où vous pourriez convier des invités à votre organisa
 
 ## <a name="how-does-collaboration-using-b2b-guests-work"></a>Comment fonctionne la collaboration avec des invités B2B ?
 
-Lorsque vous utilisez une collaboration B2B, vous pouvez inviter un utilisateur externe à votre organisation en tant qu’invité. L’invité peut être géré en tant qu’utilisateur dans votre organisation, mais il doit être authentifié dans son organisation d’origine et non dans votre organisation Azure AD. Cela signifie que si l’invité n’a plus accès à son organisation d’origine, il n’a également plus accès à votre organisation. Par exemple, si l’invité quitte son organisation, il perd automatiquement l’accès à toutes les ressources que vous avez partagées avec lui dans Azure AD sans que vous ayez rien à faire. Pour plus d’informations sur B2B Collaboration, consultez [Présentation de l’accès utilisateur invité dans Azure Active Directory B2B](../b2b/what-is-b2b.md).
+Lorsque vous utilisez une collaboration B2B, vous pouvez inviter un utilisateur externe à votre organisation en tant qu’invité. L’invité peut être géré en tant qu’utilisateur dans votre organisation, mais il doit être authentifié dans son organisation d’origine et non dans votre organisation Azure AD. Cela signifie que si l’invité n’a plus accès à son organisation d’origine, il n’a également plus accès à votre organisation. Par exemple, si l’invité quitte son organisation, il perd automatiquement l’accès à toutes les ressources que vous avez partagées avec lui dans Azure AD sans que vous ayez rien à faire. Pour plus d’informations sur B2B Collaboration, consultez [Présentation de l’accès utilisateur invité dans Azure Active Directory B2B](../external-identities/what-is-b2b.md).
 
 ![Diagramme montrant comment un utilisateur invité est authentifié dans son annuaire d’origine](./media/pim-resource-roles-external-users/b2b-external-user.png)
 
@@ -67,7 +67,7 @@ Pour vous assurer que vous pouvez convier des invités dans votre organisation, 
 
 Privileged Identity Management vous permet de convier un invité et de le rendre éligible à un rôle de ressource Azure.
 
-1. Connectez-vous au [portail Azure](https://portal.azure.com/) avec un utilisateur membre du rôle [Administrateur de rôle privilégié](../users-groups-roles/directory-assign-admin-roles.md#privileged-role-administrator) ou [Administrateur d’utilisateurs](../users-groups-roles/directory-assign-admin-roles.md#user-administrator).
+1. Connectez-vous au [portail Azure](https://portal.azure.com/) avec un utilisateur membre du rôle [Administrateur de rôle privilégié](../roles/permissions-reference.md#privileged-role-administrator) ou [Administrateur d’utilisateurs](../roles/permissions-reference.md#user-administrator).
 
 1. Ouvrez **Azure AD Privileged Identity Management**.
 
@@ -166,4 +166,4 @@ Vous pouvez afficher des journaux d’audit pour effectuer le suivi de l’activ
 ## <a name="next-steps"></a>Étapes suivantes
 
 - [Attribuer des rôles d’administrateur Azure AD dans Privileged Identity Management](pim-how-to-add-role-to-user.md)
-- [Présentation de l’accès utilisateur invité dans Azure AD B2B Collaboration](../b2b/what-is-b2b.md)
+- [Présentation de l’accès utilisateur invité dans Azure AD B2B Collaboration](../external-identities/what-is-b2b.md)

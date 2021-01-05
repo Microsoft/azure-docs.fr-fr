@@ -1,21 +1,16 @@
 ---
 title: 'Tutoriel : Intégration à Power Virtual Agents – QnA Maker'
-titleSuffix: Azure Cognitive Services
 description: Dans ce tutoriel, améliorez la qualité de votre base de connaissances avec l’apprentissage actif. Examinez, acceptez ou refusez, ou ajoutez sans supprimer ou changer les questions existantes.
-services: cognitive-services
-author: diberry
-manager: nitinme
 ms.service: cognitive-services
 ms.subservice: qna-maker
 ms.topic: tutorial
-ms.date: 03/11/2020
-ms.author: diberry
-ms.openlocfilehash: 4557dee995c8a01067f7e6ad0e79bb7115b6ecdb
-ms.sourcegitcommit: b80aafd2c71d7366838811e92bd234ddbab507b6
+ms.date: 11/09/2020
+ms.openlocfilehash: 3801bb44fed6bf24788957c41de77c89b3025ae8
+ms.sourcegitcommit: 9eda79ea41c60d58a4ceab63d424d6866b38b82d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81402809"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96351110"
 ---
 # <a name="tutorial-add-your-knowledge-base-to-power-virtual-agents"></a>Tutoriel : Ajouter votre base de connaissances à Power Virtual Agents
 Créez et étendez un bot [Power Virtual Agents](https://powervirtualagents.microsoft.com/) pour fournir des réponses à partir de votre base de connaissances.
@@ -57,14 +52,15 @@ Voici une vue d’ensemble des étapes permettant de connecter un agent dans Pow
     * Créez une rubrique d’agent.
     * Appelez une action (du flux Power Automate).
 * Sur le portail [Power Automate](https://us.flow.microsoft.com/) :
-    * Créez un flux avec un connecteur à [GenerateAnswer de QnA Maker](https://docs.microsoft.com/connectors/cognitiveservicesqnamaker/).
+    * Recherchez le modèle _Generate answer using QnA Maker_ (Générer une réponse à l’aide de QnA Maker).
+    * Utilisez le modèle pour configurer le flux afin qu’il utilise le modèle [Générer une réponse de QnA Maker](/connectors/cognitiveservicesqnamaker/).
         * Informations sur la base de connaissances publiée QnA Maker :
             * ID de base de connaissances
             * Hôte du point de terminaison de ressource QnA Maker
             * Clé du point de terminaison de ressource QnA Maker
         * Entrée – Requête utilisateur
         * Sortie – Réponse de la base de connaissances
-    * Créez une solution et ajoutez le flux.
+    * Créez une solution et ajoutez le flux, ou ajoutez un flux à une solution existante.
 * Revenez à Power Virtual Agents :
     * sélectionnez la sortie de la solution sous forme de message pour une rubrique.
 
@@ -82,16 +78,17 @@ Voici une vue d’ensemble des étapes permettant de connecter un agent dans Pow
 ## <a name="create-an-agent-in-power-virtual-agents"></a>Créer un agent dans Power Virtual Agents
 
 1. [Connectez-vous à Power Virtual Agents](https://go.microsoft.com/fwlink/?LinkId=2108000&clcid=0x409). Utilisez votre compte de messagerie scolaire ou professionnel.
+
 1. S’il s’agit de votre premier bot, vous accédez à la page **Home** (Accueil) de l’agent. Si ce n’est pas votre premier bot, sélectionnez le bot dans la zone supérieure droite de la page, puis sélectionnez **+ New Bot** (Nouveau bot).
 
     > [!div class="mx-imgBorder"]
     > ![Capture d’écran de la page d’accueil de Power Virtual Agents](../media/how-to-integrate-power-virtual-agent/power-virtual-agent-home.png)
 
-1. Entrez les paramètres de la base de données que vous avez publiée et qui se trouvent dans la page **Settings** (Paramètres) du portail [QnA Maker](https://www.qnamaker.ai/).
-
 ## <a name="topics-provided-in-the-bot"></a>Rubriques fournies dans le bot
 
 L’agent de sert de la collection de rubriques pour répondre aux questions relevant de votre domaine. Dans ce tutoriel, l’agent propose de nombreuses rubriques, réparties en rubriques utilisateur et rubriques système.
+
+Sélectionnez **Topics** (Rubriques) dans le volet de navigation gauche pour afficher les rubriques fournies par le bot.
 
 > [!div class="mx-imgBorder"]
 > ![Capture d’écran des rubriques fournies dans l’agent](../media/how-to-integrate-power-virtual-agent/power-virtual-agent-topics-provided.png)
@@ -124,80 +121,43 @@ Cette section vise à créer le flux de conversation de la rubrique de secours.
 
 1. La nouvelle action de secours peut déjà comporter des éléments de flux de conversation. Supprimez l’élément **Escalate** (Réaffecter) en sélectionnant le menu **Options**.
 
-    > [!div class="mx-imgBorder"]
-    > ![Capture d’écran de la rubrique de secours de Power Virtual Agents](../media/how-to-integrate-power-virtual-agent/power-virtual-agent-fallback-topic-delete-escalate.png)
+    :::image type="content" source="../media/how-to-integrate-power-virtual-agent/delete-escalate-action-using-option-menu.png" alt-text="Capture d’écran partielle du flux de conversation, avec l’option de suppression mise en surbrillance.":::
 
-1. Sélectionnez le connecteur **+** en dessous de la zone **Message**, puis sélectionnez **Call an action** (Appeler une action).
+1. Sélectionnez le connecteur **+** pointant vers la zone **Message**, puis sélectionnez **Call an action** (Appeler une action).
 
-    > [!div class="mx-imgBorder"]
-    > ![Capture d’écran de l’option d’appel d’une action](../media/how-to-integrate-power-virtual-agent/create-new-item-call-an-action.png)
+    :::image type="content" source="../media/how-to-integrate-power-virtual-agent/create-new-item-call-an-action.png" alt-text="Capture d’écran partielle de l’option d’appel d’une action":::
 
 1. Sélectionnez **Create a flow** (Créer un flux). Le processus vous amène au portail Power Automate.
 
     > [!div class="mx-imgBorder"]
     > ![Capture d’écran de l’option de création d’un flux](../media/how-to-integrate-power-virtual-agent/create-a-flow.png)
 
+
+    Power Automate ouvre un nouveau modèle. Vous n’allez pas utiliser ce nouveau modèle.
+
+    :::image type="content" source="../media/how-to-integrate-power-virtual-agent/power-automate-flow-initial-template.png" alt-text="Capture d’écran partielle de Power Automate avec le nouveau modèle de flux.":::
+
 ## <a name="create-a-power-automate-flow-to-connect-to-your-knowledge-base"></a>Créer un flux Power Automate à connecter à votre base de connaissances
+
+> [!NOTE]
+> Le modèle Power Automate ne prend pas en charge les points de terminaison QnA Maker managé (préversion). Pour ajouter une base de connaissances QnA Maker managé (préversion) à Power Automate, vous devez ignorer cette étape et y ajouter manuellement les points de terminaison. 
 
 La procédure suivante crée un flux Power Automate qui effectue les opérations suivantes :
 * Il intercepte le texte utilisateur entrant et l’envoie à QnA Maker.
-* Il affecte la meilleure réponse de QnA Maker à une variable, puis envoie en retour la variable (meilleure réponse) à votre agent.
+* Il retourne la meilleure réponse à votre agent.
 
-1. Dans **Power Automate**, le modèle de flux (**Flow Template**) démarre automatiquement. Dans l’élément de flux **Power Virtual Agents**, sélectionnez **Edit** (Modifier) pour configurer la variable d’entrée de l’agent vers votre base de connaissances. La variable d’entrée textuelle est la question soumise sous forme de texte par l’utilisateur depuis l’agent.
+1. Dans **Power Automate**, sélectionnez **Modèles** dans le volet de navigation gauche. Si vous êtes invité à quitter la page du navigateur, acceptez la valeur Leave (Quitter).
 
-    > [!div class="mx-imgBorder"]
-    > ![Capture d’écran de l’option Power Automate permettant de configurer votre variable d’entrée en tant que chaîne de texte](../media/how-to-integrate-power-virtual-agent/power-automate-configure-input-variable.png)
+1. Dans la page Modèles, recherchez le modèle **Generate answer using QnA Maker (Générer une réponse à l’aide de QnA Maker)** , puis sélectionnez le modèle. Ce modèle comporte toutes les étapes nécessaires pour appeler QnA Maker avec vos paramètres de base de connaissances et retourner la meilleure réponse.
 
-1. Ajoutez une entrée textuelle et nommez la variable `InputText`, avec `IncomingUserQuestion` en guise de description. Ce nom permet de distinguer le texte d’entrée du texte de sortie que vous créerez par la suite.
+1. Dans le nouvel écran du flux QnA Maker, sélectionnez **Continuer**.
 
-    > [!div class="mx-imgBorder"]
-    > ![Capture d’écran de l’option Power Automate permettant de configurer le nom et la description de la variable d’entrée](../media/how-to-integrate-power-virtual-agent/power-automate-configure-input-variable-name-and-description.png)
+    :::image type="content" source="../media/how-to-integrate-power-virtual-agent/power-automate-qna-flow-template-continue.png" alt-text="Capture d’écran partielle du flux du modèle QnA Maker, avec le bouton Continuer mis en surbrillance.":::
 
-1. Sélectionnez le connecteur **+** en dessous de la zone **Power Virtual Agents** pour insérer une nouvelle étape dans le flux (avant **Return value(s) to Power Virtual Agent**). Ensuite, sélectionnez **Add an action** (Ajouter une action).
+1. Activez la zone d’action **Generate Answer (Générer une réponse)** et renseignez vos paramètres QnA Maker provenant de la section précédente intitulée [Créer et publier une base de connaissances](#create-and-publish-a-knowledge-base). Votre **hôte de service** dans l’image suivante fait référence à votre **hôte** de base de connaissances et est au format `https://YOUR-RESOURCE-NAME.azurewebsites.net/qnamaker`.
 
-1. Effectuez une recherche sur `Qna` pour trouver les actions **QnA Maker**, puis sélectionnez **Generate answer** (Générer une réponse).
 
-    > [!div class="mx-imgBorder"]
-    > ![Capture d’écran de l’option permettant de générer une réponse](../media/how-to-integrate-power-virtual-agent/generate-answer-action-selected.png)
-
-    Les paramètres de connexion obligatoires pour QnA Maker apparaissent dans les paramètres d’action et de question de l’agent.
-
-    > [!div class="mx-imgBorder"]
-    > ![Capture d’écran des paramètres de connexion obligatoires](../media/how-to-integrate-power-virtual-agent/generate-answer-knowledge-base-settings.png)
-
-1. Configurez l’action avec l’ID de votre base de connaissances, l’hôte du point de terminaison et la clé du point de terminaison. Ces valeurs se trouvent dans la page **Settings** (Paramètres) de votre base de données, sur le portail QnA Maker.
-
-    > [!div class="mx-imgBorder"]
-    > ![Capture d’écran des paramètres de la base de connaissances publiée](../media/how-to-integrate-power-virtual-agent/published-knowledge-base-settings.png)
-
-1. Pour configurer la **Question**, cochez la case, puis sélectionnez le texte d’entrée (`InputText`) dans la liste.
-
-1. Pour insérer une nouvelle étape dans le flux, sélectionnez le connecteur **+** en dessous de la zone de l’action **Generate answer** (Générer une réponse). Ensuite, sélectionnez **Add an action** (Ajouter une action).
-
-1. Pour ajouter une variable destinée à intercepter le texte de réponse retourné par `GenerateAnswer`, recherchez l’action `Initialize variable` et sélectionnez-la.
-
-    Nommez la variable `OutgoingQnAAnswer`, puis sélectionnez le type **String** (Chaîne). Ne définissez pas **Value** (Valeur).
-
-    > [!div class="mx-imgBorder"]
-    > ![Capture d’écran de l’initialisation de la variable de sortie](../media/how-to-integrate-power-virtual-agent/initialize-output-variable-for-qna-answer.png)
-
-1. Pour insérer une nouvelle étape dans le flux, sélectionnez le connecteur **+** en dessous de la zone de l’action **Initialize variable** (Initialiser la variable). Ensuite, sélectionnez **Add an action** (Ajouter une action).
-
-1. Pour définir l’ensemble de la réponse de la base de connaissances sur la variable, recherchez l’action `Apply to each` et sélectionnez-la. Sélectionnez `GenerateAnswer` `answers`.
-
-1. Pour retourner uniquement la meilleure réponse, dans la même zone **Apply to each** (Appliquer à tout), sélectionnez **Add an action** (Ajouter une action). Recherchez et sélectionnez **Set variable** (Définir la variable).
-
-    Dans la zone **Set variable** (Définir la variable), sélectionnez la zone de texte **Name** (Nom), puis sélectionnez **OutgoingQnAAnswer** dans la liste.
-
-    Sélectionnez la zone de texte **Value** (Valeur), puis sélectionnez **Answers Answer** dans la liste.
-
-    > [!div class="mx-imgBorder"]
-    > ![Capture d’écran de la définition du nom et de la valeur de la variable](../media/how-to-integrate-power-virtual-agent/power-automate-flow-apply-to-each-set-variable.png)
-
-1. Pour retourner la variable (et sa valeur), sélectionnez l’élément de flux **Return value(s) to Power Virtual Agent** (Retourner les valeurs à l’agent Power Virtual Agent). Ensuite, sélectionnez **Edit** (Modifier) > **Add an output** (Ajouter une sortie). Sélectionnez le type de sortie **Text** (Texte), puis entrez le titre (**Title**) de `FinalAnswer`. Sélectionnez la zone de texte **Value** (Valeur), puis sélectionnez la variable `OutgoingQnAAnswer`.
-
-    > [!div class="mx-imgBorder"]
-    > ![Capture d’écran de la définition de la valeur de retour](../media/how-to-integrate-power-virtual-agent/power-automate-flow-return-value.png)
+    :::image type="content" source="../media/how-to-integrate-power-virtual-agent/power-virtual-agent-fill-in-generate-answer-settings.png" alt-text="Capture d’écran partielle du flux du modèle QnA Maker, avec Generate answer (Preview) mis en évidence.":::
 
 1. Sélectionnez **Enregistrer** pour enregistrer le flux.
 
@@ -223,32 +183,31 @@ Pour que l’agent puisse trouver le flux et s’y connecter, il convient d’in
 
 1. Dans la solution, sélectionnez **+ Add existing** (Ajouter existant), puis sélectionnez **Flow** (Flux) dans la liste.
 
-1. Recherchez votre flux, puis sélectionnez **Add** (Ajouter) pour terminer le processus. Si les flux sont nombreux, examinez la colonne **Modified** (Modifié) pour trouver le flux le plus récent.
+1. Recherchez votre flux dans la liste **Outside solutions (Solutions extérieures)** , puis sélectionnez **Add (Ajouter)** pour terminer le processus. Si les flux sont nombreux, examinez la colonne **Modified** (Modifié) pour trouver le flux le plus récent.
 
 ## <a name="add-your-solutions-flow-to-power-virtual-agents"></a>Ajouter le flux de votre solution à Power Virtual Agents
 
 1. Revenez à l’onglet du navigateur où figure votre agent dans Power Virtual Agents. Le canevas de création doit encore être ouvert.
 
-1. Pour insérer une nouvelle étape dans le flux, sous la zone d’action **Message**, sélectionnez le connecteur **+** . Ensuite, sélectionnez **Call an action** (Appeler une action).
+1. Pour insérer une nouvelle étape dans le flux, au-dessus de la zone d’action **Message**, sélectionnez le connecteur **+** . Ensuite, sélectionnez **Call an action** (Appeler une action).
 
-1. Dans la nouvelle action, sélectionnez la valeur d’entrée de **UnrecognizedTriggerPhrase**. Le texte passe alors de l’agent au flux.
+1. Dans la fenêtre contextuelle **Flux**, sélectionnez le nouveau flux nommé **Generate answers using QnA Maker knowledge base** (Générer des réponses à l’aide de la base de connaissances QnA Maker). La nouvelle action apparaît dans le flux.
 
-    > [!div class="mx-imgBorder"]
-    > ![Capture d’écran de l’option Power Virtual Agents permettant de sélectionner une expression déclenchante non reconnue](../media/how-to-integrate-power-virtual-agent/power-virtual-agent-select-unrecognized-trigger-phrase.png)
+    :::image type="content" source="../media/how-to-integrate-power-virtual-agent/power-virtual-agent-flow-after-adding-action.png" alt-text="Capture d’écran partielle du canevas de conversation de la rubrique Power Virtual Agents, après ajout du flux QnA Maker.":::
 
-1. Pour insérer une nouvelle étape dans le flux, sous la zone **Action**, sélectionnez le connecteur **+** . Ensuite, sélectionnez **Show a message** (Afficher un message).
+1. Pour définir correctement la variable d’entrée sur l’action QnA Maker, sélectionnez **Select a variable (Sélectionner une variable)** , puis sélectionnez **bot.UnrecognizedTriggerPhrase**.
 
-1. Entrez le texte du message, `Your answer is:`. Sélectionnez `FinalAnswer` en tant que variable contextuelle en utilisant la fonction de la barre d’outils sur place.
+    :::image type="content" source="../media/how-to-integrate-power-virtual-agent/power-virtual-agent-selection-action-input.png" alt-text="Capture d’écran partielle du canevas de conversation de la rubrique Power Virtual Agents, avec sélection de la variable d’entrée.":::
 
-    > [!div class="mx-imgBorder"]
-    > ![Capture d’écran de l’option Power Virtual Agents permettant d’entrer le texte du message](../media/how-to-integrate-power-virtual-agent/power-virtual-agent-topic-authoring-canvas-show-message-final-answer.png)
+
+1. Pour définir correctement la variable de sortie sur l’action QnA Maker, dans l’action **Message**, sélectionnez **UnrecognizedTriggerPhrase**, sélectionnez l’icône pour insérer la variable `{x}`, puis sélectionnez **FinalAnswer**.
 
 1. Dans la barre d’outils contextuelle, sélectionnez **Save** (Enregistrer) pour enregistrer les détails du canevas de création pour la rubrique.
 
 Voici à quoi ressemble le canevas final de l’agent.
 
 > [!div class="mx-imgBorder"]
-> ![Capture d’écran du canevas final de l’agent](../media/how-to-integrate-power-virtual-agent/power-virtual-agent-topic-authoring-canvas-full-flow.png)
+> ![Capture d’écran montrant le canevas final de l’agent avec les sections Trigger Phrases (Expressions de déclenchement), Action et Message.](../media/how-to-integrate-power-virtual-agent/power-virtual-agent-topic-authoring-canvas-full-flow.png)
 
 ## <a name="test-the-agent"></a>Tester l’agent
 
@@ -263,10 +222,9 @@ Voici à quoi ressemble le canevas final de l’agent.
     |3|Oui|En réponse à `Did that answer your question?`|
     |4|Excellent|En réponse à `Please rate your experience.`|
     |5|Oui|En réponse à `Can I help with anything else?`|
-    |6|Qu’est-ce qu’une base de connaissances ?|Cette question déclenche une action de secours, qui envoie le texte à votre base de connaissances pour obtenir une réponse. La réponse est ensuite affichée. |
+    |6|Comment améliorer les performances de débit pour les prédictions de requête ?|Cette question déclenche une action de secours, qui envoie le texte à votre base de connaissances pour obtenir une réponse. La réponse est ensuite affichée. Les coches vertes pour les actions individuelles indiquent la réussite de chaque action.|
 
-> [!div class="mx-imgBorder"]
-> ![Capture d’écran du canevas final de l’agent](../media/how-to-integrate-power-virtual-agent/power-virtual-agent-test-tracked.png)
+    :::image type="content" source="../media/how-to-integrate-power-virtual-agent/power-virtual-agent-test-tracked.png" alt-text="Capture d’écran du bot de conversation avec le canevas qui indique des coches vertes pour les actions réussies.":::
 
 ## <a name="publish-your-bot"></a>Publier votre bot
 
@@ -276,7 +234,7 @@ Pour rendre l’agent accessible à tous les membres de votre école ou organisa
 
 1. Essayez votre bot sur le site web de démonstration (recherchez le lien sous **Publish**).
 
-    Une nouvelle page web s’ouvre avec votre bot. Posez la même question de test au bot : `What is a knowledge base?`
+    Une nouvelle page web s’ouvre avec votre bot. Posez la même question de test au bot : `How can I improve the throughput performance for query predictions?`
 
     > [!div class="mx-imgBorder"]
     > ![Capture d’écran du canevas final de l’agent](../media/how-to-integrate-power-virtual-agent/demo-chat-bot.png)
@@ -300,6 +258,6 @@ Quand vous en avez fini avec la base de connaissances, supprimez les ressources 
 [Obtenir une analyse de votre base de connaissances](../How-To/get-analytics-knowledge-base.md)
 
 Pour en savoir plus :
-* [Power Virtual Agents](https://docs.microsoft.com/power-virtual-agents/)
-* [Power Automate](https://docs.microsoft.com/power-automate/)
-* [Connecteur QnA Maker](https://us.flow.microsoft.com/connectors/shared_cognitiveservicesqnamaker/qna-maker/) et [paramètres du connecteur](https://docs.microsoft.com/connectors/cognitiveservicesqnamaker/)
+* [Power Virtual Agents](/power-virtual-agents/)
+* [Power Automate](/power-automate/)
+* [Connecteur QnA Maker](https://us.flow.microsoft.com/connectors/shared_cognitiveservicesqnamaker/qna-maker/) et [paramètres du connecteur](/connectors/cognitiveservicesqnamaker/)

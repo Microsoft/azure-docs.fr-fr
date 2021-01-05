@@ -9,24 +9,24 @@ ms.subservice: autoscale
 ms.date: 04/26/2019
 ms.reviewer: avverma
 ms.custom: avverma
-ms.openlocfilehash: aa004cc3ad6c02937ae3c3c8bdb1d5ebd225f434
-ms.sourcegitcommit: a8ee9717531050115916dfe427f84bd531a92341
+ms.openlocfilehash: 549f8fbc1e3acf435011f223faeb5b8240f0c55d
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83124803"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87080418"
 ---
 # <a name="autoscale-using-guest-metrics-in-a-linux-scale-set-template"></a>Mise à l’échelle automatique en utilisant des mesures invitées dans un modèle de groupe identique Linux
 
 Il existe deux grands types de mesures dans Azure, collectées à partir des machines virtuelles et des groupes identiques : les mesures d’hôte et invitées. En général, si vous utilisez des mesures de processeur, de disque et de réseau standard, les mesures d’hôte sont bien adaptées. Si, en revanche, vous avez besoin d’un éventail plus large de mesures, alors les mesures invitées conviennent mieux.
 
-Les mesures d’hôte ne requièrent aucune configuration supplémentaire, car elles sont collectées par la machine virtuelle hôte, tandis que les mesures invitées nécessitent d’installer [l’extension Diagnostics Azure pour Windows](../virtual-machines/windows/extensions-diagnostics-template.md) ou [l’extension Diagnostics Azure pour Linux](../virtual-machines/linux/diagnostic-extension.md) sur la machine virtuelle invitée. L’utilisation des mesures invitées à la place des mesures hôtes est courante, car les premières sont plus variées que les dernières. Les mesures de consommation de la mémoire, notamment, ne sont disponibles que via les mesures invitées. Les mesures hôtes prises en charge sont répertoriées [ici](../azure-monitor/platform/metrics-supported.md), et les mesures invitées couramment utilisées [ici](../azure-monitor/platform/autoscale-common-metrics.md). Cet article explique comment modifier le [modèle de groupe identique viable de base](virtual-machine-scale-sets-mvss-start.md) pour qu’il utilise des règles de mise à l’échelle automatique en fonction des mesures invitées des groupes identiques Linux.
+Les mesures d’hôte ne requièrent aucune configuration supplémentaire, car elles sont collectées par la machine virtuelle hôte, tandis que les mesures invitées nécessitent d’installer [l’extension Diagnostics Azure pour Windows](../virtual-machines/extensions/diagnostics-template.md) ou [l’extension Diagnostics Azure pour Linux](../virtual-machines/extensions/diagnostics-linux.md) sur la machine virtuelle invitée. L’utilisation des mesures invitées à la place des mesures hôtes est courante, car les premières sont plus variées que les dernières. Les mesures de consommation de la mémoire, notamment, ne sont disponibles que via les mesures invitées. Les mesures hôtes prises en charge sont répertoriées [ici](../azure-monitor/platform/metrics-supported.md), et les mesures invitées couramment utilisées [ici](../azure-monitor/platform/autoscale-common-metrics.md). Cet article explique comment modifier le [modèle de groupe identique viable de base](virtual-machine-scale-sets-mvss-start.md) pour qu’il utilise des règles de mise à l’échelle automatique en fonction des mesures invitées des groupes identiques Linux.
 
 ## <a name="change-the-template-definition"></a>Modifier la définition du modèle
 
 Dans un [article précédent](virtual-machine-scale-sets-mvss-start.md), nous avions créé un modèle de groupe identique de base. Nous allons maintenant utiliser ce modèle antérieur et le modifier pour créer un modèle qui déploie un groupe identique Linux avec une mise à l’échelle automatique basée sur des mesures invitées.
 
-Ajoutez tout d’abord les paramètres de `storageAccountName` et `storageAccountSasToken`. L’agent de diagnostics stocke les données métriques dans une [table](../cosmos-db/table-storage-how-to-use-dotnet.md) de ce compte de stockage. À compter de la version 3.0 de l’agent de diagnostic Linux, l’utilisation d’une clé d’accès de stockage n’est plus prise en charge. Utilisez plutôt un [jeton SAP](../storage/common/storage-dotnet-shared-access-signature-part-1.md).
+Ajoutez tout d’abord les paramètres de `storageAccountName` et `storageAccountSasToken`. L’agent de diagnostics stocke les données métriques dans une [table](../cosmos-db/tutorial-develop-table-dotnet.md) de ce compte de stockage. À compter de la version 3.0 de l’agent de diagnostic Linux, l’utilisation d’une clé d’accès de stockage n’est plus prise en charge. Utilisez plutôt un [jeton SAP](../storage/common/storage-sas-overview.md).
 
 ```diff
      },
@@ -42,7 +42,7 @@ Ajoutez tout d’abord les paramètres de `storageAccountName` et `storageAccoun
    },
 ```
 
-Ensuite, modifiez le groupe identique `extensionProfile` pour y inclure l’extension Diagnostics. Dans cette configuration, spécifiez l’ID de ressource du groupe identique à partir duquel collecter les métriques, ainsi que le compte de stockage et le jeton SAP à utiliser pour les stocker. Indiquez la fréquence d’agrégation des métriques (dans ce cas, chaque minute) et les métriques à suivre (dans ce cas, le pourcentage de mémoire utilisée). Pour plus d’informations sur cette configuration et les mesures autres que le pourcentage de mémoire utilisée, consultez [cette documentation](../virtual-machines/linux/diagnostic-extension.md).
+Ensuite, modifiez le groupe identique `extensionProfile` pour y inclure l’extension Diagnostics. Dans cette configuration, spécifiez l’ID de ressource du groupe identique à partir duquel collecter les métriques, ainsi que le compte de stockage et le jeton SAP à utiliser pour les stocker. Indiquez la fréquence d’agrégation des métriques (dans ce cas, chaque minute) et les métriques à suivre (dans ce cas, le pourcentage de mémoire utilisée). Pour plus d’informations sur cette configuration et les mesures autres que le pourcentage de mémoire utilisée, consultez [cette documentation](../virtual-machines/extensions/diagnostics-linux.md).
 
 ```diff
                  }

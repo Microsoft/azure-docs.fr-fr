@@ -4,12 +4,12 @@ ms.service: storsimple
 ms.topic: include
 ms.date: 10/26/2018
 ms.author: alkohli
-ms.openlocfilehash: c10482029e6cfce7063d205161fed54030919c48
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: a01f91a81629800d3f03b907c65f05433b6163e6
+ms.sourcegitcommit: 6a902230296a78da21fbc68c365698709c579093
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "67177121"
+ms.lasthandoff: 11/05/2020
+ms.locfileid: "93375828"
 ---
 #### <a name="to-stop-and-start-a-cloud-appliance"></a>Pour arrêter et démarrer une appliance cloud
 
@@ -18,19 +18,19 @@ ms.locfileid: "67177121"
 
 2. Dans la barre de commandes, cliquez sur **Arrêter**.
 
-    ![Machine virtuelle StorSimple Cloud Appliance](./media/storsimple-8000-stop-restart-cloud-appliance/sca-stop-restart2.png)
+    ![Machine virtuelle StorSimple Cloud Appliance 2](./media/storsimple-8000-stop-restart-cloud-appliance/sca-stop-restart2.png)
 
-3. Cliquez sur **Oui**lorsque vous êtes invité à confirmer l’opération.
+3. Cliquez sur **Oui** lorsque vous êtes invité à confirmer l’opération.
 
-    ![Machine virtuelle StorSimple Cloud Appliance](./media/storsimple-8000-stop-restart-cloud-appliance/sca-stop-restart3.png)
+    ![Machine virtuelle StorSimple Cloud Appliance 3](./media/storsimple-8000-stop-restart-cloud-appliance/sca-stop-restart3.png)
 
 4. Lorsque vous arrêtez une machine virtuelle, celle-ci est désallouée. Lorsque de l’arrêt de l’appliance cloud, son état est **Désallocation**. Une fois l’appliance cloud arrêtée, son état devient **Arrêté (désalloué)** .
 
-    ![Machine virtuelle StorSimple Cloud Appliance](./media/storsimple-8000-stop-restart-cloud-appliance/sca-stop-restart4.png)
+    ![Machine virtuelle StorSimple Cloud Appliance 4](./media/storsimple-8000-stop-restart-cloud-appliance/sca-stop-restart4.png)
 
 5. Une fois la machine virtuelle arrêtée, cliquez sur **Démarrer** (le bouton devient disponible) pour la démarrer. Une fois l’appliance cloud démarrée, son état devient **Démarré**.
 
-    ![Machine virtuelle StorSimple Cloud Appliance](./media/storsimple-8000-stop-restart-cloud-appliance/sca-stop-restart5.png)
+    ![Machine virtuelle StorSimple Cloud Appliance 5](./media/storsimple-8000-stop-restart-cloud-appliance/sca-stop-restart5.png)
 
 Utilisez les applets de commande suivantes pour arrêter et démarrer une appliance cloud.
 
@@ -42,7 +42,7 @@ Utilisez les applets de commande suivantes pour arrêter et démarrer une applia
 
 Pour redémarrer une appliance cloud, accédez à la machine virtuelle de votre appliance cloud. Dans la barre de commandes, cliquez sur **Redémarrer**. Quand vous y êtes invité, confirmez le redémarrage. Lorsque l’appliance cloud est prête à être utilisée, son état devient **En cours d’exécution**.
 
-![Machine virtuelle StorSimple Cloud Appliance](./media/storsimple-8000-stop-restart-cloud-appliance/sca-stop-restart6.png)
+![Machine virtuelle StorSimple Cloud Appliance 6](./media/storsimple-8000-stop-restart-cloud-appliance/sca-stop-restart6.png)
 
 Utilisez les applets de commande suivantes pour redémarrer une appliance cloud.
 

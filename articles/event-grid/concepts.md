@@ -1,18 +1,14 @@
 ---
 title: Concept d’Azure Event Grid
 description: Détaille Azure Event Grid et ses concepts. Définit plusieurs composants clés de Event Grid.
-services: event-grid
-author: spelluru
-ms.service: event-grid
 ms.topic: conceptual
-ms.date: 08/03/2018
-ms.author: spelluru
-ms.openlocfilehash: 348d82f704b89b97e11a09b8f88e92831901b3bf
-ms.sourcegitcommit: d6e4eebf663df8adf8efe07deabdc3586616d1e4
+ms.date: 10/29/2020
+ms.openlocfilehash: 6cfb8b3aaf16a0080b9864ce5198b8a7232e8bc8
+ms.sourcegitcommit: 3bdeb546890a740384a8ef383cf915e84bd7e91e
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81393461"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93075107"
 ---
 # <a name="concepts-in-azure-event-grid"></a>Concepts utilisés dans Azure Event Grid
 
@@ -41,11 +37,11 @@ Pour plus d’informations sur l’implémentation d’une source Event Grid pri
 
 La rubrique Event Grid fournit un point de terminaison où la source envoie les événements. L’éditeur crée la rubrique Event Grid et décide si une source d’événements a besoin d’une ou plusieurs rubriques. Une rubrique est utilisée pour une collection d’événements connexes. Pour répondre à certains types d’événements, les abonnés décident des rubriques auxquelles ils souhaitent s’abonner.
 
-Les rubriques système sont des rubriques intégrées fournies par les services Azure. Vous ne voyez pas les rubriques système dans votre abonnement Azure car l’éditeur en est propriétaire, mais vous pouvez vous y abonner. Pour vous abonner, vous fournissez des informations sur la ressource à partir de laquelle vous souhaitez recevoir des événements. Tant que vous avez accès à la ressource, vous pouvez vous abonner à ses événements.
+Les **rubriques système** sont des rubriques intégrées fournies par des services Azure, tels que Stockage Azure, Azure Event Hubs et Azure Service Bus. Vous pouvez créer des rubriques système dans votre abonnement Azure et vous y abonner. Pour plus d’informations, consultez [Vue d’ensemble des rubriques système](system-topics.md). 
 
-Les rubriques personnalisées sont des rubriques tierces et applicatives. Quand vous créez une rubrique personnalisée ou que l’accès à une rubrique personnalisée vous est accordé, celle-ci est visible dans votre abonnement.
+Les **rubriques personnalisées** sont des rubriques tierces et applicatives. Quand vous créez une rubrique personnalisée ou que l’accès à une rubrique personnalisée vous est accordé, celle-ci est visible dans votre abonnement. Pour plus d’informations, consultez [Rubriques personnalisées](custom-topics.md). Lorsque vous concevez votre application, vous pouvez choisir le nombre de rubriques à créer. Pour les solutions volumineuses, créez une rubrique personnalisée pour chaque catégorie d’événements associés. Par exemple, envisagez une application qui envoie des événements liés à la modification de comptes d’utilisateur et au traitement de commandes. Il est peu probable qu’un gestionnaire d’événements accepte les deux catégories d’événements. Créez deux rubriques personnalisées et laissez les gestionnaires d’événements s’abonner à celle qui les intéresse. Pour les solutions de petite taille, vous pouvez à la place envoyer tous les événements à une seule rubrique. Les abonnés à des événements peuvent filtrer les types d’événements qu’ils souhaitent.
 
-Lorsque vous concevez votre application, vous pouvez choisir le nombre de rubriques à créer. Pour les solutions volumineuses, créez une rubrique personnalisée pour chaque catégorie d’événements associés. Par exemple, envisagez une application qui envoie des événements liés à la modification de comptes d’utilisateur et au traitement de commandes. Il est peu probable qu’un gestionnaire d’événements accepte les deux catégories d’événements. Créez deux rubriques personnalisées et laissez les gestionnaires d’événements s’abonner à celle qui les intéresse. Pour les solutions de petite taille, vous pouvez à la place envoyer tous les événements à une seule rubrique. Les abonnés à des événements peuvent filtrer les types d’événements qu’ils souhaitent.
+Il existe un autre type de rubrique : **la rubrique de partenaire**. La fonctionnalité [Événements de partenaire](partner-events-overview.md) permet à un fournisseur SaaS tiers de publier des événements depuis ses services, pour les mettre à la disposition des consommateurs qui peuvent s’abonner à ces événements. Le fournisseur SaaS expose un type de rubrique, une **rubrique de partenaire** , que les abonnés utilisent pour consommer des événements. Elle fournit également un nouveau modèle de publication-abonnement clair, en séparant les préoccupations et la propriété des ressources qui sont utilisées par les éditeurs d’événements et les abonnés.
 
 ## <a name="event-subscriptions"></a>Abonnements à des événements
 

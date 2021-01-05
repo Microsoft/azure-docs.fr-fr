@@ -1,18 +1,18 @@
 ---
 title: Choisir les colonnes de distribution – Hyperscale (Citus) – Azure Database pour PostgreSQL
-description: Découvrez comment choisir les colonnes de distribution dans les scénarios Hyperscale courants dans Azure Database pour PostgreSQL.
+description: Découvrez comment choisir des colonnes de distribution dans des scénarios courants dans Azure Database pour PostgreSQL – Hyperscale (Citus).
 author: jonels-msft
 ms.author: jonels
 ms.service: postgresql
 ms.subservice: hyperscale-citus
 ms.topic: conceptual
 ms.date: 05/06/2019
-ms.openlocfilehash: 8ced9767d81affceef851820ee587f4f3dd24deb
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 129eff8c954c0c5469d3607e6ae16ce3202630ed
+ms.sourcegitcommit: 50802bffd56155f3b01bfb4ed009b70045131750
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "74975667"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91929334"
 ---
 # <a name="choose-distribution-columns-in-azure-database-for-postgresql--hyperscale-citus"></a>Choisir les colonnes de distribution dans Azure Database pour PostgreSQL – Hyperscale (Citus)
 
@@ -71,8 +71,6 @@ L’erreur la plus fréquente lors de la modélisation des informations de séri
 
 -   **Ne choisissez pas un horodatage comme colonne de distribution.** Choisissez une colonne de distribution différente. Dans une application mutualisée, utilisez l’ID de locataire ou, dans une application en temps réel, l’ID d’entité.
 -   **Utilisez le partitionnement de table PostgreSQL pour les données temporelles à la place.** Utilisez le partitionnement de table pour diviser une table volumineuse de données chronologiques en plusieurs tables héritées contenant chacune différentes plages de temps. La distribution d’une table partitionnée Postgres dans Hyperscale (Citus) crée des partitions pour les tables héritées.
-
-Lisez le [didacticiel sur les séries chronologiques](https://aka.ms/hyperscale-tutorial-timeseries) pour obtenir un exemple de création de ce type d’application.
 
 ## <a name="next-steps"></a>Étapes suivantes
 - Découvrez comment la [colocation](concepts-hyperscale-colocation.md) entre les requêtes distribuées permettent d’exécuter rapidement les requêtes.

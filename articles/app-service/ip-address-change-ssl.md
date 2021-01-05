@@ -5,11 +5,11 @@ ms.topic: article
 ms.date: 06/28/2018
 ms.custom: seodec18
 ms.openlocfilehash: dcfe11bcab25f6267a557de5faf7befab467bc29
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "81535721"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96020957"
 ---
 # <a name="how-to-prepare-for-an-ssl-ip-address-change"></a>Comment se préparer à un changement d’adresse IP SSL
 

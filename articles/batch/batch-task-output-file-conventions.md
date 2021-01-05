@@ -1,15 +1,15 @@
 ---
-title: Conserver les données de sortie dans Stockage Azure avec la bibliothèque File Conventions .NET - Azure Batch
+title: Conserver les données de sortie dans Stockage Azure avec la bibliothèque File Conventions .NET
 description: Apprenez à utiliser la bibliothèque File Conventions d’Azure Batch pour conserver les sorties de travaux et de tâches dans Stockage Azure et les afficher dans le portail Azure.
-ms.topic: article
+ms.topic: how-to
 ms.date: 11/14/2018
-ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: 2d7988ef4339280bd729cc1acaa1b7fb2c33b6b9
-ms.sourcegitcommit: 58faa9fcbd62f3ac37ff0a65ab9357a01051a64f
+ms.custom: H1Hack27Feb2017, devx-track-csharp
+ms.openlocfilehash: 1a45eed421dd8d734fcef0dd452df1d4a65fd053
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82232698"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88936960"
 ---
 # <a name="persist-job-and-task-data-to-azure-storage-with-the-batch-file-conventions-library-for-net"></a>Conserver le résultat d’un travail et d’une tâche dans Azure Storage avec la bibliothèque File Conventions Batch pour .NET
 
@@ -55,7 +55,7 @@ Pour conserver les données de sortie dans Azure Storage à l’aide de la bibli
 
 Pour conserver les données de sortie de travail et de tâche avec la bibliothèque File Conventions, créez un conteneur dans Azure Storage, puis enregistrez la sortie dans le conteneur. Utilisez la [bibliothèque du client Azure Storage pour .NET](https://www.nuget.org/packages/WindowsAzure.Storage) dans le code de tâche pour charger la sortie de tâche dans le conteneur.
 
-Pour en savoir plus sur les conteneurs et les objets blob dans Azure Storage, consultez l’article [Prise en main du stockage d’objets blob Azure à l’aide de .NET](../storage/blobs/storage-dotnet-how-to-use-blobs.md).
+Pour en savoir plus sur les conteneurs et les objets blob dans Azure Storage, consultez l’article [Prise en main du stockage d’objets blob Azure à l’aide de .NET](../storage/blobs/storage-quickstart-blobs-dotnet.md).
 
 > [!WARNING]
 > Toutes les sorties de travail et de tâche conservées avec la bibliothèque File Conventions sont stockées dans le même conteneur. Si de nombreuses tâches tentent de conserver des fichiers en même temps, des limitations de stockage Azure peuvent être appliquées. Pour plus d’informations sur les limitations, consultez [Liste de contrôle des performances et de la scalabilité pour le stockage Blob](../storage/blobs/storage-performance-checklist.md).
@@ -208,7 +208,7 @@ L’exemple de projet [PersistOutputs][github_persistoutputs] est l’un des [ex
 
 ### <a name="get-the-batch-file-conventions-library-for-net"></a>Obtenir la bibliothèque Batch File Conventions pour .NET
 
-La bibliothèque Batch File Conventions pour .NET est disponible sur [NuGet][nuget_package]. La bibliothèque développe les classes [CloudJob][net_cloudjob] et [CloudTask][net_cloudtask] avec de nouvelles méthodes. Consultez également la [documentation de référence](https://docs.microsoft.com/dotnet/api/microsoft.azure.batch.conventions.files) pour la bibliothèque File Conventions.
+La bibliothèque Batch File Conventions pour .NET est disponible sur [NuGet][nuget_package]. La bibliothèque développe les classes [CloudJob][net_cloudjob] et [CloudTask][net_cloudtask] avec de nouvelles méthodes. Consultez également la [documentation de référence](/dotnet/api/microsoft.azure.batch.conventions.files) pour la bibliothèque File Conventions.
 
 Le [code source][github_file_conventions] de la bibliothèque File Conventions est disponible sur GitHub dans le Kit de développement logiciel (SDK) Microsoft Azure pour le référentiel .NET. 
 
@@ -222,20 +222,20 @@ Le [code source][github_file_conventions] de la bibliothèque File Conventions e
 [github_file_conventions_readme]: https://github.com/Azure/azure-sdk-for-net/blob/master/sdk/batch/Microsoft.Azure.Batch.Conventions.Files/README.md
 [github_persistoutputs]: https://github.com/Azure/azure-batch-samples/tree/master/CSharp/ArticleProjects/PersistOutputs
 [github_samples]: https://github.com/Azure/azure-batch-samples
-[net_batchclient]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.batchclient.aspx
-[net_cloudjob]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.cloudjob.aspx
-[net_cloudstorageaccount]: https://docs.microsoft.com/java/api/com.microsoft.azure.storage.cloudstorageaccount
-[net_cloudtask]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.cloudtask.aspx
+[net_batchclient]: /dotnet/api/microsoft.azure.batch.batchclient
+[net_cloudjob]: /dotnet/api/microsoft.azure.batch.cloudjob
+[net_cloudstorageaccount]: /java/api/com.microsoft.azure.storage.cloudstorageaccount
+[net_cloudtask]: /dotnet/api/microsoft.azure.batch.cloudtask
 [net_fileconventions_readme]: https://github.com/Azure/azure-sdk-for-net/blob/master/sdk/batch/Microsoft.Azure.Batch.Conventions.Files/README.md
-[net_joboutputkind]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.conventions.files.joboutputkind.aspx
-[net_joboutputstorage]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.conventions.files.joboutputstorage.aspx
-[net_joboutputstorage_saveasync]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.conventions.files.joboutputstorage.saveasync.aspx
-[net_msdn]: https://msdn.microsoft.com/library/azure/mt348682.aspx
-[net_prepareoutputasync]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.conventions.files.cloudjobextensions.prepareoutputstorageasync.aspx
-[net_saveasync]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.conventions.files.taskoutputstorage.saveasync.aspx
-[net_savetrackedasync]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.conventions.files.taskoutputstorage.savetrackedasync.aspx
-[net_taskoutputkind]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.conventions.files.taskoutputkind.aspx
-[net_taskoutputstorage]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.conventions.files.taskoutputstorage.aspx
+[net_joboutputkind]: /dotnet/api/microsoft.azure.batch.conventions.files.joboutputkind
+[net_joboutputstorage]: /dotnet/api/microsoft.azure.batch.conventions.files.joboutputstorage
+[net_joboutputstorage_saveasync]: /dotnet/api/microsoft.azure.batch.conventions.files.joboutputstorage.saveasync
+[net_msdn]: /dotnet/api/microsoft.azure.batch
+[net_prepareoutputasync]: /dotnet/api/microsoft.azure.batch.conventions.files.cloudjobextensions.prepareoutputstorageasync
+[net_saveasync]: /dotnet/api/microsoft.azure.batch.conventions.files.taskoutputstorage.saveasync
+[net_savetrackedasync]: /dotnet/api/microsoft.azure.batch.conventions.files.taskoutputstorage.savetrackedasync
+[net_taskoutputkind]: /dotnet/api/microsoft.azure.batch.conventions.files.taskoutputkind
+[net_taskoutputstorage]: /dotnet/api/microsoft.azure.batch.conventions.files.taskoutputstorage
 [nuget_manager]: https://docs.nuget.org/consume/installing-nuget
 [nuget_package]: https://www.nuget.org/packages/Microsoft.Azure.Batch.Conventions.Files
 [portal]: https://portal.azure.com

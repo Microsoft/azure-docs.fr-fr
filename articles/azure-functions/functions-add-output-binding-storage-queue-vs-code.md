@@ -3,19 +3,20 @@ title: Connecter Azure Functions à Stockage Azure avec Visual Studio Code
 description: Découvrez comment connecter Azure Functions à une file d’attente Stockage Azure en ajoutant une liaison de sortie à votre projet Visual Studio Code.
 ms.date: 02/07/2020
 ms.topic: quickstart
+ms.custom: devx-track-python, devx-track-js
 zone_pivot_groups: programming-languages-set-functions
-ms.openlocfilehash: c32f98fc1b3de98592f8e7ceb43c17aa8a9049f7
-ms.sourcegitcommit: b129186667a696134d3b93363f8f92d175d51475
+ms.openlocfilehash: 1729e0b27dd50519359cf6a39bfa81ba7b3b41e9
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80673438"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96185145"
 ---
 # <a name="connect-azure-functions-to-azure-storage-using-visual-studio-code"></a>Connecter Azure Functions à Stockage Azure avec Visual Studio Code
 
 [!INCLUDE [functions-add-storage-binding-intro](../../includes/functions-add-storage-binding-intro.md)]
 
-Cet article vous montre comment utiliser Visual Studio Code pour connecter la fonction que vous avez créée dans l’[article du guide de démarrage rapide précédent](functions-create-first-function-vs-code.md) à Stockage Azure. La liaison de sortie que vous ajoutez à cette fonction écrit des données provenant de la requête HTTP dans un message au sein de la file d’attente de Stockage File d’attente Azure. 
+Cet article vous montre comment utiliser Visual Studio Code pour connecter le stockage Azure à la fonction que vous avez créée dans le guide de démarrage rapide précédent. La liaison de sortie que vous ajoutez à cette fonction écrit des données provenant de la requête HTTP dans un message au sein de la file d’attente de Stockage File d’attente Azure. 
 
 La plupart des liaisons requièrent une chaîne de connexion stockée que Functions utilise pour accéder au service lié. Pour simplifier, vous utilisez le compte de stockage que vous avez créé avec votre application de fonction. La connexion à ce compte est déjà stockée dans un paramètre d’application nommé `AzureWebJobsStorage`.  
 
@@ -28,16 +29,33 @@ Avant de commencer cet article, vous devez satisfaire aux conditions suivantes 
 * Installez l’[Explorateur Stockage Azure](https://storageexplorer.com/). L’Explorateur Stockage est un outil que vous allez utiliser pour examiner les messages en file d’attente générés par votre liaison de sortie. L’Explorateur Stockage est pris en charge sur les systèmes d’exploitation macOS, Windows et Linux.
 
 ::: zone pivot="programming-language-csharp"
-* Installez les [outils CLI .NET Core](https://docs.microsoft.com/dotnet/core/tools/?tabs=netcore2x).
+* Installez les [outils CLI .NET Core](/dotnet/core/tools/?tabs=netcore2x).
 ::: zone-end
 
-* Suivez les étapes de la [partie 1 du guide de démarrage rapide de Visual Studio Code](functions-create-first-function-vs-code.md). 
+::: zone pivot="programming-language-csharp"  
+* Suivez les étapes de la [partie 1 du guide de démarrage rapide de Visual Studio Code](create-first-function-vs-code-csharp.md). 
+::: zone-end  
+::: zone pivot="programming-language-javascript"  
+* Suivez les étapes de la [partie 1 du guide de démarrage rapide de Visual Studio Code](create-first-function-vs-code-node.md). 
+::: zone-end   
+::: zone pivot="programming-language-java"  
+* Suivez les étapes de la [partie 1 du guide de démarrage rapide de Visual Studio Code](create-first-function-vs-code-java.md). 
+::: zone-end   
+::: zone pivot="programming-language-typescript"  
+* Suivez les étapes de la [partie 1 du guide de démarrage rapide de Visual Studio Code](create-first-function-vs-code-typescript.md). 
+::: zone-end   
+::: zone pivot="programming-language-python"  
+* Suivez les étapes de la [partie 1 du guide de démarrage rapide de Visual Studio Code](create-first-function-vs-code-python.md). 
+::: zone-end   
+::: zone pivot="programming-language-powershell"  
+* Suivez les étapes de la [partie 1 du guide de démarrage rapide de Visual Studio Code](create-first-function-vs-code-powershell.md). 
+::: zone-end   
 
 Cet article suppose que vous êtes déjà connecté à votre abonnement Azure à partir de Visual Studio Code. Vous pouvez vous connecter en exécutant `Azure: Sign In` à partir de la palette de commandes. 
 
 ## <a name="download-the-function-app-settings"></a>Télécharger les paramètres de l’application de fonction
 
-Dans l’[article du guide de démarrage rapide précédent](functions-create-first-function-vs-code.md), vous avez créé une application de fonction dans Azure ainsi que le compte de stockage nécessaire. La chaîne de connexion pour ce compte est stockée de manière sécurisée dans les paramètres d’application au sein d’Azure. Dans cet article, vous allez écrire des messages dans une file d’attente de stockage au sein du même compte. Pour vous connecter à votre compte de stockage lors de l’exécution de la fonction localement, vous devez télécharger les paramètres de l’application dans le fichier local.settings.json. 
+Dans l’[article du guide de démarrage rapide précédent](./create-first-function-vs-code-csharp.md), vous avez créé une application de fonction dans Azure ainsi que le compte de stockage nécessaire. La chaîne de connexion pour ce compte est stockée de manière sécurisée dans les paramètres d’application au sein d’Azure. Dans cet article, vous allez écrire des messages dans une file d’attente de stockage au sein du même compte. Pour vous connecter à votre compte de stockage lors de l’exécution de la fonction localement, vous devez télécharger les paramètres de l’application dans le fichier local.settings.json. 
 
 1. Appuyez sur F1 pour ouvrir la palette de commandes, puis recherchez et exécutez la commande `Azure Functions: Download Remote Settings....`. 
 
@@ -56,7 +74,7 @@ Comme vous utilisez une liaison de sortie de Stockage File d’attente, vous dev
 
 Votre projet a été configuré pour utiliser des [bundles d’extension](functions-bindings-register.md#extension-bundles), et installe automatiquement un ensemble prédéfini de packages d’extension. 
 
-Un bundle d’extension est activé dans le fichier host.json, à la racine du projet, et se présente de la façon suivante :
+L’utilisation des bundles d’extension est activée dans le fichier host.json, à la racine du projet, et se présente de la façon suivante :
 
 :::code language="json" source="~/functions-quickstart-java/functions-add-output-binding-storage-queue/host.json":::
 
@@ -67,7 +85,7 @@ Un bundle d’extension est activé dans le fichier host.json, à la racine du p
 À l’exception des déclencheurs HTTP et de minuterie, les liaisons sont implémentées sous la forme de packages d’extension. Exécutez la commande [dotnet add package](/dotnet/core/tools/dotnet-add-package) suivante dans la fenêtre de terminal pour ajouter le package d’extension de Stockage à votre projet.
 
 ```bash
-dotnet add package Microsoft.Azure.WebJobs.Extensions.Storage --version 3.0.4
+dotnet add package Microsoft.Azure.WebJobs.Extensions.Storage
 ```
 
 ::: zone-end
@@ -200,37 +218,46 @@ Une fois connecté à votre compte, vous voyez tous les abonnements Azure associ
 
 ## <a name="clean-up-resources"></a>Nettoyer les ressources
 
-*Ressources* dans Azure fait référence aux applications de fonction, fonctions, comptes de stockage, etc. Elles sont rassemblées en *groupes de ressources*, et vous pouvez supprimer tous les éléments d’un groupe en supprimant le groupe.
+Dans Azure, le terme *ressources* fait référence aux applications de fonction, fonctions, comptes de stockage, et ainsi de suite. Elles sont rassemblées en *groupes de ressources*, et vous pouvez supprimer tous les éléments d’un groupe en supprimant le groupe.
 
 Vous avez créé des ressources pour effectuer ces démarrages rapides. Vous pouvez être facturé pour ces ressources, en fonction de [l’état de votre compte](https://azure.microsoft.com/account/) et de la [tarification du service](https://azure.microsoft.com/pricing/). Si vous n’avez plus besoin des ressources, voici comment les supprimer :
 
-[!INCLUDE [functions-cleanup-resources-vs-code.md](../../includes/functions-cleanup-resources-vs-code.md)]
+[!INCLUDE [functions-cleanup-resources-vs-code-inner.md](../../includes/functions-cleanup-resources-vs-code-inner.md)]
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 Vous avez mis à jour votre fonction déclenchée via HTTP pour écrire des données dans une file d’attente de stockage. Pour en savoir plus sur le développement de fonctions à l’aide de Visual Studio Code, consultez maintenant ces articles :
 
 + [Développer des fonctions Azure Functions à l’aide de Visual Studio Code](functions-develop-vs-code.md)
+
++ [Déclencheurs et liaisons Azure Functions](functions-triggers-bindings.md)
 ::: zone pivot="programming-language-csharp"  
 + [Exemples de projets Functions complets en C#](/samples/browse/?products=azure-functions&languages=csharp).
+
 + [Informations de référence pour les développeurs C# sur Azure Functions](functions-dotnet-class-library.md)  
 ::: zone-end 
 ::: zone pivot="programming-language-javascript"  
 + [Exemples de projets Functions complets en JavaScript](/samples/browse/?products=azure-functions&languages=javascript).
+
 + [Guide des développeurs JavaScript sur Azure Functions](functions-reference-node.md)  
+::: zone-end  
+::: zone pivot="programming-language-java"  
++ [Exemples de projets Functions complets en Java](/samples/browse/?products=azure-functions&languages=java).
+
++ [Guide des développeurs Java sur Azure Functions](functions-reference-java.md)  
 ::: zone-end  
 ::: zone pivot="programming-language-typescript"  
 + [Exemples de projets Functions complets en TypeScript](/samples/browse/?products=azure-functions&languages=typescript).
+
 + [Guide du développeur TypeScript sur Azure Functions](functions-reference-node.md#typescript)  
 ::: zone-end  
 ::: zone pivot="programming-language-python"  
 + [Exemples de projets Functions complets en Python](/samples/browse/?products=azure-functions&languages=python)
+
 + [Guide du développeur Python sur Azure Functions](functions-reference-python.md)  
 ::: zone-end  
 ::: zone pivot="programming-language-powershell"  
 + [Exemples de projets Functions complets dans PowerShell](/samples/browse/?products=azure-functions&languages=azurepowershell).
+
 + [Guide du développeur PowerShell sur Azure Functions](functions-reference-powershell.md) 
 ::: zone-end
-+ [Déclencheurs et liaisons Azure Functions](functions-triggers-bindings.md)
-+ [Page de tarification de Functions](https://azure.microsoft.com/pricing/details/functions/)
-+ Article [Estimation des coûts d’un plan Consommation](functions-consumption-costs.md)

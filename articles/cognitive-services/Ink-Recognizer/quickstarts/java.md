@@ -1,23 +1,26 @@
 ---
 title: 'Démarrage rapide : Reconnaître l’encre numérique avec l’API REST Ink Recognizer et Java'
 titleSuffix: Azure Cognitive Services
-description: Utilisez l’API Ink Recognizer pour commencer la reconnaissance des traits d’encre numérique dans ce guide de démarrage rapide.
+description: Utilisez l’API Ink Recognizer et Java pour commencer la reconnaissance des traits d’encre numérique dans ce guide de démarrage rapide.
 services: cognitive-services
 author: aahill
 manager: nitinme
 ms.service: cognitive-services
 ms.subservice: ink-recognizer
 ms.topic: quickstart
-ms.date: 12/17/2019
+ms.date: 08/24/2020
 ms.author: aahi
-ms.openlocfilehash: d2cd4e56477ea39587ce318538c9ddd84c51b03b
-ms.sourcegitcommit: 34a6fa5fc66b1cfdfbf8178ef5cdb151c97c721c
+ms.custom: devx-track-java
+ms.openlocfilehash: dea46a07a7357be6079c52634be8ea2ff79cc8f3
+ms.sourcegitcommit: 22da82c32accf97a82919bf50b9901668dc55c97
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "75448118"
+ms.lasthandoff: 11/08/2020
+ms.locfileid: "94369118"
 ---
 # <a name="quickstart-recognize-digital-ink-with-the-ink-recognizer-rest-api-and-java"></a>Démarrage rapide : Reconnaître l’encre numérique avec l’API REST Ink Recognizer et Java
+
+[!INCLUDE [ink-recognizer-deprecation](../includes/deprecation-note.md)]
 
 Utilisez ce guide de démarrage rapide pour commencer à appliquer l’API Ink Recognizer aux traits d’encre numérique. Cette application Java envoie une requête d’API contenant des données de trait d’encre au format JSON, puis obtient la réponse.
 
@@ -91,7 +94,7 @@ Exécutez l'application. Une réponse correcte est retournée au format JSON. Vo
 ## <a name="next-steps"></a>Étapes suivantes
 
 > [!div class="nextstepaction"]
-> [Référence d’API REST](https://go.microsoft.com/fwlink/?linkid=2089907)
+> [Référence d’API REST](/rest/api/cognitiveservices/inkrecognizer/inkrecognizer)
 
 
 Pour observer le fonctionnement de l’API Ink Recognizer dans une application d’écriture manuscrite numérique, examinez les exemples d’applications suivants sur GitHub :

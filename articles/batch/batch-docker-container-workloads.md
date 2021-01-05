@@ -2,20 +2,20 @@
 title: Charges de travail de conteneur
 description: Découvrez comment exécuter et mettre à l’échelle des applications à partir d’images conteneur sur Azure Batch. Créez un pool de nœuds de calcul prenant en charge l’exécution de tâches de conteneur.
 ms.topic: how-to
-ms.date: 05/20/2020
-ms.custom: seodec18
-ms.openlocfilehash: b1310af2797e43659ac8859e74d1be8bdbab3c98
-ms.sourcegitcommit: 6fd8dbeee587fd7633571dfea46424f3c7e65169
+ms.date: 10/06/2020
+ms.custom: seodec18, devx-track-csharp
+ms.openlocfilehash: 9d8776ba8e683cd14c766fead1e7238a6c24d000
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83726721"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91843445"
 ---
 # <a name="run-container-applications-on-azure-batch"></a>Exécuter des applications de conteneur sur Azure Batch
 
 Azure Batch vous permet d’exécuter et de mettre à l’échelle de nombreux travaux informatiques par lots sur Azure. Les tâches Batch peuvent être exécutées directement sur des machines virtuelles (nœuds) dans un pool Batch, mais vous pouvez également configurer un pool Batch pour exécuter des tâches dans des conteneurs compatibles Docker sur les nœuds. Cet article vous montre comment créer un pool de nœuds de calcul prenant en charge les tâches en cours d’exécution du conteneur, puis exécuter des tâches du conteneur dans le pool.
 
-Vous devez être familiarisé avec les concepts de conteneur et savoir comment créer un pool et une tâche Batch. Les exemples de code utilisent les Kits de développement logiciel (SDK) .NET Batch et Python. Vous pouvez également utiliser d’autres kits de développement logiciel (SDK) et outils Batch, notamment le portail Azure, pour créer des pools Batch pour conteneur et pour exécuter des tâches du conteneur.
+Les exemples de code repris ici utilisent les Kits de développement logiciel (SDK) .NET Batch et Python. Vous pouvez également utiliser d’autres kits de développement logiciel (SDK) et outils Batch, notamment le portail Azure, pour créer des pools Batch pour conteneur et pour exécuter des tâches du conteneur.
 
 ## <a name="why-use-containers"></a>Pourquoi utiliser des conteneurs ?
 
@@ -23,26 +23,28 @@ L’utilisation de conteneurs permet de lancer simplement des tâches par lot sa
 
 ## <a name="prerequisites"></a>Conditions préalables requises
 
-* **Versions du SDK** : le SDK prend en charge des images conteneur dans les versions suivantes :
-    * API REST (version : 6.0 du 01/09/2017)
-    * Kit de développement logiciel Batch .NET SDK (version 8.0.0)
-    * Kit de développement logiciel Batch Python (version 4.0)
-    * Kit de développement logiciel Batch Java (version 3.0)
-    * Kit de développement logiciel Batch Node.js (version 3.0)
+Vous devez être familiarisé avec les concepts de conteneur et savoir comment créer un pool et une tâche Batch.
 
-* **Comptes** : sur votre abonnement Azure, vous devez créer un compte Batch et, éventuellement, un compte de stockage Azure.
+- **Versions du SDK** : le SDK prend en charge des images conteneur dans les versions suivantes :
+  - API REST (version : 6.0 du 01/09/2017)
+  - Kit de développement logiciel Batch .NET SDK (version 8.0.0)
+  - Kit de développement logiciel Batch Python (version 4.0)
+  - Kit de développement logiciel Batch Java (version 3.0)
+  - Kit de développement logiciel Batch Node.js (version 3.0)
 
-* **Une image de machine virtuelle prise en charge** : les conteneurs sont uniquement pris en charge dans les pools créés lors de la configuration des machines virtuelles à partir d’images détaillées dans la section « Images de machines virtuelles prises en charge ». Si vous fournissez une image personnalisée, consultez les considérations présentées dans la section suivante et la configuration requise dans [Utiliser une image personnalisée managée pour créer un pool de machines virtuelles](batch-custom-images.md).
+- **Comptes** : sur votre abonnement Azure, vous devez créer un compte Batch et, éventuellement, un compte de stockage Azure.
 
-### <a name="limitations"></a>Limites
+- **Une image de machine virtuelle prise en charge** : les conteneurs sont uniquement pris en charge dans les pools créés lors de la configuration des machines virtuelles à partir d’images détaillées dans la section « Images de machines virtuelles prises en charge ». Si vous fournissez une image personnalisée, consultez les considérations présentées dans la section suivante et la configuration requise dans [Utiliser une image personnalisée managée pour créer un pool de machines virtuelles](batch-custom-images.md).
 
-* Batch prend en charge RDMA uniquement pour les conteneurs exécutés sur les pools Linux.
+Gardez à l’esprit les limitations suivantes :
 
-* Pour les charges de travail de conteneur Windows, il est recommandé de choisir une taille de machine virtuelle multicœur pour votre pool
+- Batch prend en charge RDMA uniquement pour les conteneurs exécutés sur les pools Linux.
+
+- Pour les charges de travail de conteneur Windows, nous vous recommandons de choisir une taille de machine virtuelle multicœur pour votre pool.
 
 ## <a name="supported-virtual-machine-images"></a>Images de machines virtuelles prises en charge
 
-Utilisez une des images Windows ou Linux prises en charge suivantes afin de créer un pool de nœuds de calcul de machines virtuelles pour les charges de travail du conteneur. Pour plus d’informations sur les images de la Place de marché qui sont compatibles avec Batch, consultez la [liste des images de machine virtuelle](batch-linux-nodes.md#list-of-virtual-machine-images).
+Utilisez une des images Windows ou Linux prises en charge suivantes afin de créer un pool de nœuds de calcul de machines virtuelles pour les charges de travail du conteneur. Pour plus d’informations sur les images de Place de marché qui sont compatibles avec Batch, consultez la [liste des images de machine virtuelle](batch-linux-nodes.md#list-of-virtual-machine-images).
 
 ### <a name="windows-support"></a>Prise en charge de Windows
 
@@ -68,11 +70,11 @@ Pour les charges de travail de conteneur Linux, Batch prend en charge les images
 
 Ces images sont uniquement prises en charge dans le cadre d’une utilisation avec les pools Azure Batch et sont adaptées à une exécution dans le conteneur Docker. Elles offrent :
 
-* Un runtime de conteneur [Moby](https://github.com/moby/moby) compatible avec Docker préinstallé
+- Un runtime de conteneur [Moby](https://github.com/moby/moby) compatible avec Docker préinstallé
 
-* Des pilotes GPU NVIDIA et un runtime de conteneur NVIDIA préinstallés pour simplifier le déploiement sur les machines virtuelles Azure N-series
+- Des pilotes GPU NVIDIA et un runtime de conteneur NVIDIA préinstallés pour simplifier le déploiement sur les machines virtuelles Azure N-series
 
-* Une image préinstallée ou préconfigurée avec la prise en charge des tailles de machine virtuelle InfiniBand RDMA pour les images avec le suffixe `-rdma`. Ces images ne prennent pas en charge les tailles de machine virtuelle SR-IOV IB/RDMA.
+- Une image préinstallée ou préconfigurée avec la prise en charge des tailles de machine virtuelle InfiniBand RDMA pour les images avec le suffixe `-rdma`. Ces images ne prennent pas en charge les tailles de machine virtuelle SR-IOV IB/RDMA.
 
 Vous pouvez également créer des images personnalisées à partir de machines virtuelles exécutant Docker sur l’une des distributions Linux compatibles avec Batch. Si vous souhaitez fournir votre propre image Linux personnalisée, consultez les instructions dans [Utiliser une image personnalisée managée pour créer un pool de machines virtuelles](batch-custom-images.md).
 
@@ -80,10 +82,9 @@ Pour la prise en charge de Docker sur une image personnalisée, installez [Docke
 
 Remarques supplémentaires relatives à l’utilisation d’une image personnalisée Linux :
 
-* Pour tirer parti des performances du GPU de tailles Azure N-series lors de l’utilisation d’une image personnalisée, préinstallez des pilotes NVIDIA. En outre, vous devez installer l’utilitaire moteur Docker pour GPU NVIDIA, [NVIDIA Docker](https://github.com/NVIDIA/nvidia-docker).
+- Pour tirer parti des performances du GPU de tailles Azure N-series lors de l’utilisation d’une image personnalisée, préinstallez des pilotes NVIDIA. En outre, vous devez installer l’utilitaire moteur Docker pour GPU NVIDIA, [NVIDIA Docker](https://github.com/NVIDIA/nvidia-docker).
 
-* Pour accéder au réseau RDMA Azure, utilisez une taille de machine virtuelle prenant en charge RDMA. Les pilotes RDMA nécessaires sont installés dans les images CentOS HPC et Ubuntu prises en charge par Batch. Une configuration supplémentaire peut être nécessaire pour exécuter des charges de travail MPI. Voir [Utiliser des instances compatibles RDMA ou GPU dans les pools Batch](batch-pool-compute-intensive-sizes.md).
-
+- Pour accéder au réseau RDMA Azure, utilisez une taille de machine virtuelle prenant en charge RDMA. Les pilotes RDMA nécessaires sont installés dans les images CentOS HPC et Ubuntu prises en charge par Batch. Une configuration supplémentaire peut être nécessaire pour exécuter des charges de travail MPI. Voir [Utiliser des instances compatibles RDMA ou GPU dans les pools Batch](batch-pool-compute-intensive-sizes.md).
 
 ## <a name="container-configuration-for-batch-pool"></a>Configuration du conteneur pour le pool Batch
 
@@ -93,11 +94,9 @@ Vous pouvez créer un pool pour conteneurs avec ou sans images conteneur préré
 
 L’avantage de la prérécupération d’images conteneur est que, lors de la première exécution des tâches, ces dernières ne doivent pas attendre que l’image conteneur soit téléchargée. La configuration du conteneur extrait des images conteneur vers les machines virtuelles une fois le pool créé. Les tâches exécutées sur le pool peuvent ensuite référencer la liste des images et des options d’exécution du conteneur.
 
-
 ### <a name="pool-without-prefetched-container-images"></a>Pool sans images conteneur prérécupérées
 
-Pour configurer un pool pour conteneurs sans images conteneur prérécupérées, définissez des objets `ContainerConfiguration` et `VirtualMachineConfiguration`, comme indiqué dans l’exemple Python suivant. Cet exemple utilise le serveur Ubuntu pour l’image de pools de conteneur Azure Batch dans la Place de marché.
-
+Pour configurer un pool pour conteneurs sans images conteneur prérécupérées, définissez des objets `ContainerConfiguration` et `VirtualMachineConfiguration`, comme indiqué dans les exemples suivants. Ces exemples utilisent le serveur Ubuntu pour l’image de pools de conteneur Azure Batch dans Place de marché.
 
 ```python
 image_ref_to_use = batch.models.ImageReference(
@@ -123,6 +122,29 @@ new_pool = batch.models.PoolAddParameter(
 ...
 ```
 
+```csharp
+ImageReference imageReference = new ImageReference(
+    publisher: "microsoft-azure-batch",
+    offer: "ubuntu-server-container",
+    sku: "16-04-lts",
+    version: "latest");
+
+// Specify container configuration. This is required even though there are no prefetched images.
+ContainerConfiguration containerConfig = new ContainerConfiguration();
+
+// VM configuration
+VirtualMachineConfiguration virtualMachineConfiguration = new VirtualMachineConfiguration(
+    imageReference: imageReference,
+    nodeAgentSkuId: "batch.node.ubuntu 16.04");
+virtualMachineConfiguration.ContainerConfiguration = containerConfig;
+
+// Create pool
+CloudPool pool = batchClient.PoolOperations.CreatePool(
+    poolId: poolId,
+    targetDedicatedComputeNodes: 1,
+    virtualMachineSize: "STANDARD_D1_V2",
+    virtualMachineConfiguration: virtualMachineConfiguration);
+```
 
 ### <a name="prefetch-images-for-container-configuration"></a>Prérécupérer des images pour la configuration du conteneur
 
@@ -154,7 +176,6 @@ new_pool = batch.models.PoolAddParameter(
     target_dedicated_nodes=1)
 ...
 ```
-
 
 L’exemple C# suivant suppose que vous souhaitez prérécupérer une image TensorFlow sur le [Hub Docker](https://hub.docker.com). Cet exemple inclut une tâche de démarrage qui s’exécute dans l’hôte de la machine virtuelle sur les nœuds du pool. Vous pouvez lancer une tâche de démarrage dans l’hôte, par exemple, pour monter un serveur de fichiers accessible à partir des conteneurs.
 
@@ -196,10 +217,37 @@ pool.StartTask = startTaskContainer;
 ...
 ```
 
-
 ### <a name="prefetch-images-from-a-private-container-registry"></a>Prérécupérer des images à partir d’un registre de conteneurs privé
 
-Vous pouvez également prérécupérer des images conteneur en vous authentifiant sur un serveur de registres de conteneurs privé. Dans l’exemple suivant, les objets `ContainerConfiguration` et `VirtualMachineConfiguration` prérécupèrent une image TensorFlow privée dans un registre de conteneurs Azure privé. La référence d’image est la même que dans l’exemple précédent.
+Vous pouvez également prérécupérer des images conteneur en vous authentifiant sur un serveur de registres de conteneurs privé. Dans les exemples suivants, les objets `ContainerConfiguration` et `VirtualMachineConfiguration` prérécupèrent une image TensorFlow privée dans un registre de conteneurs Azure privé. La référence d’image est la même que dans l’exemple précédent.
+
+```python
+image_ref_to_use = batch.models.ImageReference(
+        publisher='microsoft-azure-batch',
+        offer='ubuntu-server-container',
+        sku='16-04-lts',
+        version='latest')
+
+# Specify a container registry
+container_registry = batch.models.ContainerRegistry(
+        registry_server="myRegistry.azurecr.io",
+        user_name="myUsername",
+        password="myPassword")
+
+# Create container configuration, prefetching Docker images from the container registry
+container_conf = batch.models.ContainerConfiguration(
+        container_image_names = ["myRegistry.azurecr.io/samples/myImage"],
+        container_registries =[container_registry])
+
+new_pool = batch.models.PoolAddParameter(
+            id="myPool",
+            virtual_machine_configuration=batch.models.VirtualMachineConfiguration(
+                image_reference=image_ref_to_use,
+                container_configuration=container_conf,
+                node_agent_sku_id='batch.node.ubuntu 16.04'),
+            vm_size='STANDARD_D1_V2',
+            target_dedicated_nodes=1)
+```
 
 ```csharp
 // Specify a container registry
@@ -233,9 +281,15 @@ CloudPool pool = batchClient.PoolOperations.CreatePool(
 
 Pour exécuter une tâche de conteneur sur un pool prenant en charge les conteneurs, spécifiez des paramètres propres aux conteneurs. Il s’agit notamment de l’image à utiliser, du registre et des options d’exécution des conteneurs.
 
-* Utilisez la propriété `ContainerSettings` des classes de tâches pour configurer les paramètres spécifiques au conteneur. Ces paramètres sont définis par la classe [TaskContainerSettings](/dotnet/api/microsoft.azure.batch.taskcontainersettings). Notez que l’option de conteneur `--rm` ne nécessite pas d’option `--runtime` supplémentaire, car elle est prise en charge par Batch.
+- Utilisez la propriété `ContainerSettings` des classes de tâches pour configurer les paramètres spécifiques au conteneur. Ces paramètres sont définis par la classe [TaskContainerSettings](/dotnet/api/microsoft.azure.batch.taskcontainersettings). Notez que l’option de conteneur `--rm` ne nécessite pas d’option `--runtime` supplémentaire, car elle est prise en charge par Batch.
 
-* Si vous exécutez des tâches sur des images conteneur, la [tâche de cloud](/dotnet/api/microsoft.azure.batch.cloudtask) et la [tâche du gestionnaire de travaux](/dotnet/api/microsoft.azure.batch.cloudjob.jobmanagertask) nécessitent des paramètres de conteneur. Toutefois, la [tâche de démarrage](/dotnet/api/microsoft.azure.batch.starttask), la [tâche de préparation du travail](/dotnet/api/microsoft.azure.batch.cloudjob.jobpreparationtask) et la [tâche de mise en production du travail](/dotnet/api/microsoft.azure.batch.cloudjob.jobreleasetask) ne nécessitent pas de paramètres de conteneur (autrement dit, elles peuvent s’exécuter dans un contexte de conteneur ou directement sur le nœud).
+- Si vous exécutez des tâches sur des images conteneur, la [tâche de cloud](/dotnet/api/microsoft.azure.batch.cloudtask) et la [tâche du gestionnaire de travaux](/dotnet/api/microsoft.azure.batch.cloudjob.jobmanagertask) nécessitent des paramètres de conteneur. Toutefois, la [tâche de démarrage](/dotnet/api/microsoft.azure.batch.starttask), la [tâche de préparation du travail](/dotnet/api/microsoft.azure.batch.cloudjob.jobpreparationtask) et la [tâche de mise en production du travail](/dotnet/api/microsoft.azure.batch.cloudjob.jobreleasetask) ne nécessitent pas de paramètres de conteneur (autrement dit, elles peuvent s’exécuter dans un contexte de conteneur ou directement sur le nœud).
+
+- Pour Windows, les tâches doivent être exécutées avec [ElevationLevel](/rest/api/batchservice/task/add#elevationlevel) défini sur `admin`. 
+
+- Pour Linux, Batch mappera l’autorisation utilisateur/groupe au conteneur. Si l’accès à un dossier au sein du conteneur nécessite une autorisation d’administrateur, vous devrez peut-être exécuter la tâche en tant qu’étendue de pool avec le niveau d’élévation administrateur. Cela permet de s’assurer que Batch exécute la tâche en tant que racine dans le contexte du conteneur. Dans le cas contraire, un utilisateur non administrateur n’aura peut-être pas accès à ces dossiers.
+
+- Pour les pools de conteneurs avec un matériel compatible GPU, Batch active automatiquement le GPU pour les tâches de conteneur. Vous ne devez donc pas inclure l’argument `–gpus` .
 
 ### <a name="container-task-command-line"></a>Ligne de commande de la tâche de conteneur
 
@@ -245,9 +299,9 @@ Comme pour les autres tâches Batch, vous définissez une ligne de commande pour
 
 Si l’image conteneur d’une tâche Batch est configurée avec un script [ENTRYPOINT](https://docs.docker.com/engine/reference/builder/#exec-form-entrypoint-example), vous pouvez définir votre ligne de commande pour qu’elle utilise la valeur par défaut ENTRYPOINT ou la remplacer :
 
-* Pour utiliser la valeur par défaut ENTRYPOINT de l’image conteneur, définissez la ligne de commande de la tâche sur la chaîne vide `""`.
+- Pour utiliser la valeur par défaut ENTRYPOINT de l’image conteneur, définissez la ligne de commande de la tâche sur la chaîne vide `""`.
 
-* Pour remplacer la valeur par défaut ENTRYPOINT ou si l’image n’a pas de point d’entrée, définissez une ligne de commande appropriée pour le conteneur, par exemple, `/app/myapp` ou `/bin/sh -c python myscript.py`.
+- Pour remplacer la valeur par défaut ENTRYPOINT ou si l’image n’a pas de point d’entrée, définissez une ligne de commande appropriée pour le conteneur, par exemple, `/app/myapp` ou `/bin/sh -c python myscript.py`.
 
 Les options [ContainerRunOptions](/dotnet/api/microsoft.azure.batch.taskcontainersettings.containerrunoptions) facultatives sont des arguments supplémentaires que vous fournissez à la commande `docker create` que Batch utilise pour créer et exécuter le conteneur. Par exemple, afin de définir un répertoire de travail pour le conteneur, définissez l’option `--workdir <directory>`. Consultez les informations de référence de [docker create](https://docs.docker.com/engine/reference/commandline/create/) pour connaître les autres options.
 
@@ -257,9 +311,9 @@ Une tâche de conteneur Batch s’exécute dans un répertoire de travail du con
 
 Pour une tâche de conteneur Batch :
 
-* Tous les répertoires sous `AZ_BATCH_NODE_ROOT_DIR` sur le nœud hôte (la racine des répertoires Azure Batch) sont mappés de façon récursive dans le conteneur
-* Toutes les variables d’environnement de la tâche sont mappées dans le conteneur.
-* Le répertoire de travail de tâche `AZ_BATCH_TASK_WORKING_DIR` sur le nœud est défini de la même façon que pour une tâche normale et mappé dans le conteneur.
+- Tous les répertoires sous `AZ_BATCH_NODE_ROOT_DIR` sur le nœud hôte (la racine des répertoires Azure Batch) sont mappés de façon récursive dans le conteneur
+- Toutes les variables d’environnement de la tâche sont mappées dans le conteneur.
+- Le répertoire de travail de tâche `AZ_BATCH_TASK_WORKING_DIR` sur le nœud est défini de la même façon que pour une tâche normale et mappé dans le conteneur.
 
 Ces mappages vous permettent d’utiliser les tâches de conteneur quasiment comme des tâches non-conteneur. Par exemple, vous pouvez installer des applications à l’aide de packages d’application, accéder aux fichiers de ressources du Stockage Azure, utiliser les paramètres d’environnement de tâche et conserver les fichiers de sortie de tâche une fois le conteneur arrêté.
 
@@ -269,9 +323,8 @@ Si votre tâche de conteneur ne s’exécute pas comme prévu, vous pouvez avoir
 
 Si nécessaire, ajustez les paramètres de la tâche de conteneur en fonction de l’image :
 
-* Spécifiez un chemin absolu dans la ligne de commande de tâche. Si la valeur par défaut ENTRYPOINT de l’image est utilisée pour la ligne de commande de tâche, vérifiez qu’un chemin absolu est défini.
-
-* Dans les options d’exécution du conteneur de la tâche, changez le répertoire de travail pour qu’il corresponde à WORKDIR dans l’image. Par exemple, définissez `--workdir /app`.
+- Spécifiez un chemin absolu dans la ligne de commande de tâche. Si la valeur par défaut ENTRYPOINT de l’image est utilisée pour la ligne de commande de tâche, vérifiez qu’un chemin absolu est défini.
+- Dans les options d’exécution du conteneur de la tâche, changez le répertoire de travail pour qu’il corresponde à WORKDIR dans l’image. Par exemple, définissez `--workdir /app`.
 
 ## <a name="container-task-examples"></a>Exemples de tâche de conteneur
 
@@ -308,10 +361,7 @@ containerTask.ContainerSettings = cmdContainerSettings;
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* Consultez également la boîte à outils [Batch Shipyard](https://github.com/Azure/batch-shipyard) pour faciliter le déploiement de charges de travail de conteneur sur Azure Batch par le biais de [recettes Shipyard](https://github.com/Azure/batch-shipyard/tree/master/recipes).
-
-* Pour plus d’informations sur l’installation et l’utilisation de Docker CE sur Linux, consultez la documentation [Docker](https://docs.docker.com/engine/installation/).
-
-* Pour en savoir plus sur l’utilisation d’images personnalisées, consultez [Utiliser une image personnalisée managée pour créer un pool de machines virtuelles](batch-custom-images.md).
-
-* En savoir plus sur le [projet Moby](https://mobyproject.org/), une infrastructure pour la création de systèmes basés sur le conteneur.
+- Pour faciliter le déploiement de charges de travail de conteneur sur Azure Batch par le biais de [recettes Shipyard](https://github.com/Azure/batch-shipyard/tree/master/recipes), consultez également la boîte à outils [Batch Shipyard](https://github.com/Azure/batch-shipyard).
+- Pour plus d’informations sur l’installation et l’utilisation de Docker CE sur Linux, consultez la documentation [Docker](https://docs.docker.com/engine/installation/).
+- Découvrez comment [utiliser une image personnalisée managée pour créer un pool de machines virtuelles](batch-custom-images.md).
+- En savoir plus sur le [projet Moby](https://mobyproject.org/), une infrastructure pour la création de systèmes basés sur le conteneur.

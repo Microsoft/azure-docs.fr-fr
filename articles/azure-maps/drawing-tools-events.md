@@ -1,5 +1,5 @@
 ---
-title: Ajouter une barre d’outils de dessin à une carte | Microsoft Azure Maps
+title: Événements de l’outil de dessin | Microsoft Azure Maps
 description: Dans cet article, vous allez apprendre à ajouter une barre d’outils de dessin à une carte à l’aide du kit SDK web Microsoft Azure Maps
 author: rbrundritt
 ms.author: richbrun
@@ -8,12 +8,12 @@ ms.topic: conceptual
 ms.service: azure-maps
 services: azure-maps
 manager: cpendle
-ms.openlocfilehash: d8509af7829910bdda8bba3d63553e83626fe784
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 6abe0ed88adbdf8263aa27d340fb2fff156d98e6
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "80804671"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "90089341"
 ---
 # <a name="drawing-tool-events"></a>Événements des outils de dessin
 
@@ -31,7 +31,7 @@ Le code suivant illustre le fonctionnement des événements du module Outils de 
 
 <br/>
 
-<iframe height="500" style="width: 100%;" scrolling="no" title="Événements des outils de dessin" src="https://codepen.io/azuremaps/embed/dyPMRWo?height=500&theme-id=default&default-tab=js,result&editable=true" frameborder="no" allowtransparency="true" allowfullscreen="true">
+<iframe height="500" style="width: 100%;" scrolling="no" title="Événements des outils de dessin" src="https://codepen.io/azuremaps/embed/dyPMRWo?height=500&theme-id=default&default-tab=js,result&editable=true" frameborder='no' loading="lazy" allowtransparency="true" allowfullscreen="true">
 Consultez l’extrait de code <a href='https://codepen.io/azuremaps/pen/dyPMRWo'>Événements des outils de dessin</a> d’Azure Maps (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) sur <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 
@@ -47,7 +47,7 @@ Ce code montre comment superviser un événement de dessin de formes par un util
 
 <br/>
 
-<iframe height="500" style="width: 100%;" scrolling="no" title="Sélectionner des données dans la zone polygonale dessinée" src="https://codepen.io/azuremaps/embed/XWJdeja?height=500&theme-id=default&default-tab=result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+<iframe height="500" style="width: 100%;" scrolling="no" title="Sélectionner des données dans la zone polygonale dessinée" src="https://codepen.io/azuremaps/embed/XWJdeja?height=500&theme-id=default&default-tab=result" frameborder='no' loading="lazy" allowtransparency="true" allowfullscreen="true">
 Consultez l’extrait de code <a href='https://codepen.io/azuremaps/pen/XWJdeja'>Sélectionner des données dans une zone polygonale dessinée</a> d’Azure Maps (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) sur <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 
@@ -59,7 +59,7 @@ Ce code recherche des points d’intérêt à l’intérieur de la zone d’une 
 
 <br/>
 
-<iframe height="500" style="width: 100%;" scrolling="no" title="Dessiner une zone polygonale et effectuer une recherche" src="https://codepen.io/azuremaps/embed/eYmZGNv?height=500&theme-id=default&default-tab=js,result&editable=true" frameborder="no" allowtransparency="true" allowfullscreen="true">
+<iframe height="500" style="width: 100%;" scrolling="no" title="Dessiner une zone polygonale et effectuer une recherche" src="https://codepen.io/azuremaps/embed/eYmZGNv?height=500&theme-id=default&default-tab=js,result&editable=true" frameborder='no' loading="lazy" allowtransparency="true" allowfullscreen="true">
 Consultez l’extrait de code <a href='https://codepen.io/azuremaps/pen/eYmZGNv'>Dessiner et effectuer une recherche dans une zone polygonale dessinée</a> d’Azure Maps (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) sur <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 
@@ -71,7 +71,7 @@ Le code ci-dessous montre comment utiliser les événements de dessin pour crée
 
 <br/>
 
-<iframe height="500" style="width: 100%;" scrolling="no" title="Outil de mesure" src="https://codepen.io/azuremaps/embed/RwNaZXe?height=500&theme-id=default&default-tab=js,result&editable=true" frameborder="no" allowtransparency="true" allowfullscreen="true">
+<iframe height="500" style="width: 100%;" scrolling="no" title="Outil de mesure" src="https://codepen.io/azuremaps/embed/RwNaZXe?height=500&theme-id=default&default-tab=js,result&editable=true" frameborder='no' loading="lazy" allowtransparency="true" allowfullscreen="true">
 Consultez l’extrait de code <a href='https://codepen.io/azuremaps/pen/RwNaZXe'>Outil de mesure</a> d’Azure Maps (<a href='https://codepen.io/azuremaps'>@azuremaps</a>) sur <a href='https://codepen.io'>CodePen</a>.
 </iframe>
 

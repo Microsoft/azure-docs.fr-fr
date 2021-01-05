@@ -2,14 +2,14 @@
 title: 'Concepts : mise en réseau dans AKS (Azure Kubernetes Service)'
 description: Découvrez la mise en réseau dans AKS (Azure Kubernetes Service), notamment la mise en réseau kubenet et Azure CNI, les contrôleurs d’entrée, les équilibreurs de charge et les adresses IP statiques.
 ms.topic: conceptual
-ms.date: 02/28/2019
+ms.date: 06/11/2020
 ms.custom: fasttrack-edit
-ms.openlocfilehash: 51773a46b77cb1e9a89b9c85a5f62c4a6b7af3be
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: edb195fae2e05a1f746c10482576f7e0b1bff7c9
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82146058"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88243902"
 ---
 # <a name="network-concepts-for-applications-in-azure-kubernetes-service-aks"></a>Concepts de réseau pour les applications dans AKS (Azure Kubernetes Service)
 
@@ -73,6 +73,8 @@ Pour plus d’informations, consultez [Configurer une mise en réseau kubenet po
 
 Avec Azure CNI, chaque pod reçoit une adresse IP du sous-réseau et est accessible directement. Ces adresses IP doivent être uniques dans votre espace réseau et doivent être planifiées à l’avance. Chaque nœud possède un paramètre de configuration pour le nombre maximal de pods qu’il prend en charge. Le nombre équivalent d’adresses IP par nœud est alors réservé à l’avance pour ce nœud. Cette approche nécessite davantage de planification. Sinon, elle peut conduire à l’épuisement des adresses IP ou à la nécessité de régénérer les clusters dans un sous-réseau plus vaste à mesure que vos demandes d’applications augmentent.
 
+Contrairement à kubenet, le trafic vers les points de terminaison dans le même réseau virtuel ne fait pas l’objet d’une traduction d’adresses réseau (NAT) vers l’adresse IP principale du nœud. L’adresse source pour le trafic à l’intérieur du réseau virtuel est l’adresse IP du pod. Le trafic externe au réseau virtuel continue de faire l’objet d’une traduction d’adresses réseau (NAT) vers l’adresse IP principale du nœud.
+
 Les nœuds utilisent le plug-in Kubernetes [Azure CNI (Container Networking Interface)][cni-networking].
 
 ![Diagramme représentant 2 nœuds avec des ponts les reliant chacun à un réseau virtuel Azure][advanced-networking-diagram]
@@ -105,7 +107,7 @@ Les différences de comportement suivantes existent entre kubenet et Azure CNI :
 | Exposer des services Kubernetes à l’aide d’un service d’équilibreur de charge, App Gateway ou d’un contrôleur d’entrée | Prise en charge | Prise en charge |
 | Azure DNS et zones privées par défaut                                                          | Prise en charge | Prise en charge |
 
-En ce qui concerne DNS, avec les plug-ins kubenet et Azure CNI, DNS est proposé par CoreDNS, un ensemble de démons s’exécutant dans AKS. Pour plus d’informations concernant CoreDNS sur Kubernetes, consultez [Personnalisation du service DNS](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/). CoreDNS est configuré par défaut pour transférer les domaines inconnus vers les serveurs DNS du nœud, autrement dit, vers la fonctionnalité DNS du Réseau virtuel Azure sur lequel le cluster AKS est déployé. Par conséquent, Azure DNS Private Zones fonctionne pour les pods s’exécutant dans AKS.
+En ce qui concerne DNS, avec les plug-ins kubenet et Azure CNI, DNS est offert par CoreDNS, un déploiement s’exécutant dans AKS avec son propre autoscaler. Pour plus d’informations concernant CoreDNS sur Kubernetes, consultez [Personnalisation du service DNS](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/). CoreDNS est configuré par défaut pour transférer les domaines inconnus vers les serveurs DNS du nœud, autrement dit, vers la fonctionnalité DNS du Réseau virtuel Azure sur lequel le cluster AKS est déployé. Par conséquent, Azure DNS Private Zones fonctionne pour les pods s’exécutant dans AKS.
 
 ### <a name="support-scope-between-network-models"></a>Étendue du support entre des modèles de réseaux
 
@@ -128,6 +130,8 @@ Les *contrôleurs d’entrée* fonctionnent au niveau de la couche 7 ; ils peu
 ![Diagramme montrant le flux de trafic d’entrée dans un cluster AKS][aks-ingress]
 
 Dans AKS, vous pouvez créer une ressource d’entrée à l’aide de NGINX, ou d’un outil similaire, ou utiliser la fonctionnalité de routage d’application HTTP AKS. Quand vous activez le routage d’application HTTP pour un cluster AKS, la plateforme Azure crée le contrôleur d’entrée et un contrôleur *DNS externe*. Quand des ressources d’entrée sont créées dans Kubernetes, les enregistrements DNS A requis sont créés dans une zone DNS propre au cluster. Pour plus d’informations, consultez [Déployer le routage d’applications HTTP][aks-http-routing].
+
+Le module complémentaire AGIC (Application Gateway Ingress Controller) permet aux clients d’AKS d’utiliser l’équilibreur de charge L7 Application Gateway natif d’Azure pour exposer un logiciel cloud sur Internet. AGIC surveille le cluster Kubernetes sur lequel il est hébergé et met à jour en permanence une Application Gateway, afin que les services sélectionnés soient exposés à Internet. Pour en savoir plus sur le module complémentaire AGIC pour AKS, consultez [Présentation d’Application Gateway Ingress Controller][agic-overview]
 
 Une autre fonctionnalité d’entrée courante est l’arrêt SSL/TLS. Sur les grandes applications web accessibles via HTTPS, l’arrêt TLS peut être géré par la ressource d’entrée plutôt que dans l’application proprement dite. Pour fournir la configuration et la génération automatiques de la certification TLS, vous pouvez configurer la ressource d’entrée pour utiliser des fournisseurs tels que Let's Encrypt. Pour plus d’informations sur la configuration d’un contrôleur d’entrée NGINX avec Let’s Encrypt, consultez [Entrée et TLS][aks-ingress-tls].
 
@@ -172,7 +176,7 @@ Pour plus d’informations sur les concepts fondamentaux de Kubernetes et d’AK
 
 <!-- LINKS - Internal -->
 [aks-http-routing]: http-application-routing.md
-[aks-ingress-tls]: ingress.md
+[aks-ingress-tls]: ./ingress-tls.md
 [aks-configure-kubenet-networking]: configure-kubenet.md
 [aks-configure-advanced-networking]: configure-azure-cni.md
 [aks-concepts-clusters-workloads]: concepts-clusters-workloads.md
@@ -180,6 +184,7 @@ Pour plus d’informations sur les concepts fondamentaux de Kubernetes et d’AK
 [aks-concepts-scale]: concepts-scale.md
 [aks-concepts-storage]: concepts-storage.md
 [aks-concepts-identity]: concepts-identity.md
+[agic-overview]: ../application-gateway/ingress-controller-overview.md
 [use-network-policies]: use-network-policies.md
 [operator-best-practices-network]: operator-best-practices-network.md
 [support-policies]: support-policies.md

@@ -1,27 +1,22 @@
 ---
-title: Accéder au portail managé des développeurs et le personnaliser – Gestion des API Azure | Microsoft Docs
-description: Découvrez comment utiliser la version managée du portail des développeurs dans la Gestion des API.
+title: Tutoriel – Accéder au portail des développeurs et le personnaliser – Gestion des API Azure | Microsoft Docs
+description: Suivez ce tutoriel pour savoir comment personnaliser le portail des développeurs Gestion des API, un site web généré automatiquement et entièrement personnalisable à l’aide de la documentation de vos API.
 services: api-management
-documentationcenter: API Management
 author: mikebudzynski
-manager: cfowler
-editor: ''
 ms.service: api-management
-ms.workload: mobile
-ms.tgt_pltfrm: na
-ms.topic: article
-ms.date: 03/05/2020
+ms.topic: tutorial
+ms.date: 11/16/2020
 ms.author: apimpm
-ms.openlocfilehash: af7c995c11322a538dd9e27a905f1ddbc723e8ab
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 90544fbafe7393630c3f3fbc694ae367eccb7f90
+ms.sourcegitcommit: a43a59e44c14d349d597c3d2fd2bc779989c71d7
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79224889"
+ms.lasthandoff: 11/25/2020
+ms.locfileid: "96012973"
 ---
-# <a name="access-and-customize-developer-portal"></a>Accéder au portail des développeurs et le personnaliser
+# <a name="tutorial-access-and-customize-the-developer-portal"></a>Tutoriel : Accéder et personnaliser le portail des développeurs
 
-Le portail des développeurs est un site web généré automatiquement et entièrement personnalisable avec la documentation de vos API. C’est là que les consommateurs d’API peuvent découvrir vos API, apprendre à les utiliser et y demander l’accès.
+Le *portail des développeurs* est un site web généré automatiquement et entièrement personnalisable avec la documentation de vos API. C’est là que les consommateurs d’API peuvent découvrir vos API, apprendre à les utiliser et y demander l’accès.
 
 Dans ce tutoriel, vous allez apprendre à :
 
@@ -34,7 +29,7 @@ Dans ce tutoriel, vous allez apprendre à :
 
 Pour plus d’informations sur le portail des développeurs, voir la [Vue d’ensemble du portail des développeurs Gestion des API Azure](api-management-howto-developer-portal.md).
 
-![Portail des développeurs Gestion des API – Mode Administrateur](media/api-management-howto-developer-portal-customize/cover.png)
+:::image type="content" source="media/api-management-howto-developer-portal-customize/cover.png" alt-text="Portail des développeurs Gestion des API – Mode Administrateur" border="false":::
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -47,44 +42,47 @@ Pour plus d’informations sur le portail des développeurs, voir la [Vue d’en
 
 Suivez les étapes ci-dessous pour accéder à la version managée du portail.
 
-1. Accédez à votre instance du service Gestion des API dans le Portail Microsoft Azure.
-1. Cliquez sur le bouton **Portail des développeurs** dans la barre de navigation supérieure. Un nouvel onglet de navigateur s’ouvre, en affichant une version d’administration du portail.
+1. Dans le [portail Azure](https://portal.azure.com), accédez à votre instance APIM.
+1. Sélectionnez le bouton **Portail des développeurs** dans la barre de navigation supérieure. Un nouvel onglet de navigateur s’ouvre, en affichant une version d’administration du portail.
 
 ## <a name="understand-the-portals-administrative-interface"></a>Comprendre l’interface d’administration du portail
 
 ### <a name="default-content"></a>Contenu par défaut 
 
-Si vous accédez au portail pour la première fois, le contenu par défaut est automatiquement configuré en arrière-plan. Il a été conçu pour présenter les fonctionnalités du portail et réduire le degré de personnalisation nécessaire du portail. Pour plus d’informations sur le contenu du portail, voir la [Vue d’ensemble du portail des développeurs Gestion des API Azure](api-management-howto-developer-portal.md).
+Si vous accédez au portail pour la première fois, le contenu par défaut est automatiquement provisionné en arrière-plan. Il a été conçu pour présenter les fonctionnalités du portail et réduire les personnalisations nécessaires à la particularisation de votre portail. Pour plus d’informations sur le contenu du portail, voir la [Vue d’ensemble du portail des développeurs Gestion des API Azure](api-management-howto-developer-portal.md).
 
 ### <a name="visual-editor"></a>Éditeur visuel
 
-Il est possible de personnaliser le contenu du portail avec l’éditeur visuel. Les sections de menu de gauche permettent de créer ou de modifier des pages, des médias, des dispositions, des menus, des styles ou des paramètres de site web. Les éléments de menu du bas permettent de basculer entre les fenêtres d’affichage (par exemple, mobile ou ordinateur de bureau), d’afficher les éléments du portail visibles par les utilisateurs authentifiés et anonymes, et d’enregistrer ou d’annuler des actions.
-
-Vous pouvez ajouter des lignes à une page en cliquant sur une icône bleue accompagnée d’un signe plus. Pour ajouter des widgets (par exemple, du texte, des images ou une liste d’API), appuyez sur une icône grise accompagnée d’un signe plus. Vous pouvez réorganiser les éléments d’une page avec l’interaction de type glisser-déplacer. 
+Il est possible de personnaliser le contenu du portail avec l’éditeur visuel. 
+* Les sections de menu de gauche permettent de créer ou de modifier des pages, des médias, des dispositions, des menus, des styles ou des paramètres de site web. 
+* Les éléments de menu du bas permettent de basculer entre les fenêtres d’affichage (par exemple, mobile ou ordinateur de bureau), d’afficher les éléments du portail visibles par les utilisateurs authentifiés et anonymes, et d’enregistrer ou d’annuler des actions.
+* Ajoutez des lignes à une page en cliquant sur une icône bleue dotée d’un signe plus. 
+* Pour ajouter des widgets (par exemple, du texte, des images ou une liste d’API), appuyez sur une icône grise accompagnée d’un signe plus.
+* Réorganisez les éléments d’une page avec l’interaction de type glisser-déplacer. 
 
 ### <a name="layouts-and-pages"></a>Dispositions et pages
 
-![Pages et dispositions](media/api-management-howto-developer-portal-customize/pages-layouts.png)
+:::image type="content" source="media/api-management-howto-developer-portal-customize/pages-layouts.png" alt-text="Pages et dispositions" border="false":::
 
 Les dispositions définissent la façon dont s’affichent les pages. Par exemple, dans le contenu par défaut, il existe deux dispositions : l’une s’applique à la page d’accueil et l’autre à toutes les autres pages.
 
-Pour appliquer une disposition à une page, faites correspondre son modèle d’URL à son URL. Par exemple, la disposition associée au modèle d’URL `/wiki/*` s’appliquera à chacune des pages dont l’URL comporte le segment `/wiki/` : `/wiki/getting-started`, `/wiki/styles`, etc.
+Pour appliquer une disposition à une page, faites correspondre son modèle d’URL à son URL. Par exemple, une disposition associée au modèle d’URL `/wiki/*` s’appliquera à chacune des pages dont l’URL comporte le segment `/wiki/` : `/wiki/getting-started`, `/wiki/styles`, etc.
 
-Dans l’image ci-dessus, le contenu appartenant à la disposition est marqué en bleu, tandis que la page est marquée en rouge. Les sections de menu sont marquées de la même manière.
+Dans l’image précédente, le contenu appartenant à la disposition est marqué en bleu, tandis que la page est marquée en rouge. Les sections de menu sont marquées de la même manière.
 
 ### <a name="styling-guide"></a>Guide de style
 
-![Guide de style](media/api-management-howto-developer-portal-customize/styling-guide.png)
+:::image type="content" source="media/api-management-howto-developer-portal-customize/styling-guide.png" alt-text="Guide de style" border="false":::
 
 Le guide de style est un panneau destiné aux concepteurs. Il permet de contrôler et de styliser tous les éléments visuels du portail. Le style est hiérarchique : de nombreux éléments héritent des propriétés d’autres éléments. Par exemple, les éléments de type bouton utilisent des couleurs du texte et de l’arrière-plan. Pour modifier la couleur d’un bouton, il faut modifier la variante de couleur d’origine.
 
-Pour modifier une variante, cliquez dessus et sélectionnez l’icône de pinceau qui apparaît au-dessus. Une fois que vous avez effectué les modifications dans la fenêtre contextuelle, fermez-la.
+Pour modifier une variante, sélectionnez-la, puis sélectionnez l’icône de crayon qui apparaît au-dessus. Après avoir effectué les modifications dans la fenêtre contextuelle, fermez-la.
 
 ### <a name="save-button"></a>Bouton Enregistrer
 
-![Bouton Enregistrer](media/api-management-howto-developer-portal-customize/save-button.png)
+:::image type="content" source="media/api-management-howto-developer-portal-customize/save-button.png" alt-text="Bouton Enregistrer" border="false":::
 
-Chaque fois que vous apportez une modification au portail, vous devez l’enregistrer manuellement en appuyant sur le bouton **Enregistrer** dans le menu du bas. Le contenu modifié est alors automatiquement chargé dans votre service Gestion des API.
+Chaque fois que vous apportez une modification au portail, vous devez l’enregistrer manuellement en sélectionnant le bouton **Enregistrer** dans le menu du bas, ou en appuyant sur [Ctrl]+[S]. Le contenu modifié est alors automatiquement chargé dans votre service Gestion des API.
 
 ## <a name="customize-the-portals-content"></a>Personnaliser le contenu du portail
 
@@ -95,7 +93,7 @@ Avant de mettre le portail à la disposition des visiteurs, il est préférable 
 
 ### <a name="home-page"></a>page d'accueil
 
-La page **d’Accueil** par défaut comporte du contenu factice. Vous pouvez soit supprimer la totalité des sections comportant du contenu, soit conserver la structure et ajuster les éléments un par un. Remplacez le texte et les images générés par les vôtres en veillant à ce que les liens pointent vers les emplacements souhaités.
+La page d’**Accueil** par défaut comporte du contenu d’espace réservé. Vous pouvez soit supprimer des sections entières comportant ce contenu, soit conserver la structure et ajuster les éléments un par un. Remplacez le texte et les images générés par les vôtres en veillant à ce que les liens pointent vers les emplacements souhaités.
 
 ### <a name="layouts"></a>Mises en forme
 
@@ -107,31 +105,44 @@ Même si vous n’avez pas besoin de modifier les styles, vous pouvez éventuell
 
 ### <a name="customization-example"></a>Exemple de personnalisation
 
-Dans la vidéo ci-dessous, nous expliquons comment modifier le contenu du portail, personnaliser l’aspect du site web et publier les modifications.
+Dans la vidéo suivante, nous expliquons comment modifier le contenu du portail, personnaliser l’aspect du site web et publier les modifications.
 
 > [!VIDEO https://www.youtube.com/embed/5mMtUSmfUlw]
 
-## <a name="publish-the-portal"></a><a name="publish"> </a>Publier le portail
+## <a name="publish-the-portal"></a><a name="publish"></a>Publier le portail
 
-Pour que votre portail et ses dernières modifications soient accessibles aux visiteurs, vous devez le publier.
+Pour que votre portail et ses dernières modifications soient accessibles aux visiteurs, vous devez le *publier*. Vous pouvez publier le portail dans l’interface d’administration du portail ou à partir du portail Azure.
 
-1. Veillez à enregistrer vos modifications en cliquant sur l’icône **Enregistrer**.
-1. Cliquez sur **Publier le site web** dans la section **Opérations** du menu. Cette opération peut prendre quelques minutes.  
-    ![Publier le portail](media/api-management-howto-developer-portal-customize/publish-portal.png)
+### <a name="publish-from-the-administrative-interface"></a>Publier à partir de l’interface d’administration
+
+1. Veillez à enregistrer vos modifications en sélectionnant l’icône **Enregistrer**.
+1. Dans la section **Opérations** du menu, sélectionnez **Publier le site web**. Cette opération peut prendre quelques minutes.  
+
+    :::image type="content" source="media/api-management-howto-developer-portal-customize/publish-portal.png" alt-text="Publier le portail" border="false":::
+
+### <a name="publish-from-the-azure-portal"></a>Publier à partir du portail Azure
+
+1. Dans le [portail Azure](https://portal.azure.com), accédez à votre instance APIM.
+1. Dans le menu de gauche, sous **Portail des développeurs**, sélectionnez **Vue d’ensemble du portail**.
+1. Dans la fenêtre **Vue d’ensemble du portail**, sélectionnez **Publier**.
+
+    :::image type="content" source="media/api-management-howto-developer-portal-customize/pubish-portal-azure-portal.png" alt-text="Publier le portail depuis le portail Azure":::
 
 > [!NOTE]
-> Le portail doit être republié après que la configuration du service Gestion des API ait été modifiée, comme l'attribution d'un domaine personnalisé, la mise à jour des fournisseurs d'identité, le paramétrage de la délégation, la spécification des conditions de connexion et de produit, et plus encore.
+> Le portail doit être publié de nouveau après des modifications de configuration du service Gestion des API. Par exemple, vous publiez de nouveau le portail après l’attribution d’un domaine personnalisé, la mise à jour des fournisseurs d’identité, la définition de la délégation ou la spécification de la connexion et des conditions d’utilisation du produit.
+
 
 ## <a name="visit-the-published-portal"></a>Consulter le portail publié
 
-Une fois publié, le portail est accessible à la même URL que le panneau d’administration, par exemple `https://contoso-api.developer.azure-api.net`. Affichez-le dans une session de navigateur distincte (mode de navigation incognito ou privée) en tant que visiteur externe.
+Une fois publié, le portail est accessible à la même URL que le panneau d’administration, par exemple `https://contoso-api.developer.azure-api.net`. Affichez-le dans une session de navigateur distincte (par le biais du mode de navigation incognito ou privée) en tant que visiteur externe.
 
 ## <a name="apply-the-cors-policy-on-apis"></a>Appliquer la stratégie CORS sur les API
 
-Vous devez activer CORS (cross-origin resource sharing) sur vos API pour permettre aux visiteurs de votre portail de tester les API via la console interactive intégrée. Pour plus d’informations, consultez [cet article de la documentation](api-management-howto-developer-portal.md#cors).
+Pour permettre aux visiteurs de votre portail de tester les API via la console interactive intégrée, activez CORS (cross-origin resource sharing) sur vos API. Pour plus d’informations, consultez [Vue d’ensemble du portail des développeurs Gestion des API Azure](api-management-howto-developer-portal.md#cors).
 
 ## <a name="next-steps"></a>Étapes suivantes
 
 Pour plus d’informations sur le portail des développeurs :
 
 - [Vue d’ensemble du portail des développeurs Gestion des API Azure](api-management-howto-developer-portal.md)
+- [Migrer vers le nouveau portail des développeurs](developer-portal-deprecated-migration.md) à partir du portail hérité déprécié.

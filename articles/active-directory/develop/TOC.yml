@@ -1,30 +1,26 @@
 - name: Documentation sur la plateforme d’identités Microsoft
   href: index.yml
 - name: Vue d’ensemble
-  items:
-    - name: "Qu’est-ce que la plateforme d’identités Microsoft\_?"
-      href: v2-overview.md
-    - name: Évolution de la plateforme d’identités Microsoft
-      href: about-microsoft-identity-platform.md
-- name: Démarrages rapides
   expanded: true
   items:
-    - name: Configurer un locataire
-      href: quickstart-create-new-tenant.md
-    - name: Configurer une application
+    - name: Présentation de la plateforme d’identités Microsoft
+      href: v2-overview.md
+    - name: Nouveautés dans la documentation
+      href: whats-new-docs.md
+- name: Démarrages rapides
+  items:
+    - name: Préparer pour le développement
       items:
-        - name: Inscription d’une application
+        - name: "Obtenir un client Azure\_AD"
+          href: quickstart-create-new-tenant.md
+        - name: Inscrire une application ou une API web
           href: quickstart-register-app.md
-        - name: Configurer l’application pour l’accès aux API web
-          href: quickstart-configure-app-access-web-apis.md
-        - name: Configurer l’application pour l’exposition des API web
+        - name: Exposer des étendues dans une inscription d’API web
           href: quickstart-configure-app-expose-web-apis.md
-        - name: Modifier les comptes pris en charge par une application
-          href: quickstart-modify-supported-accounts.md
-        - name: Supprimer une application
-          href: quickstart-remove-app.md
-    - name: Applications monopages
-      displayName: SPA
+        - name: Accorder une autorisation délimitée à une API web
+          displayName: 'permissions, scp, scp claims'
+          href: quickstart-configure-app-access-web-apis.md
+    - name: Application monopage (SPA)
       items:
         - name: Angular
           href: quickstart-v2-angular.md
@@ -32,26 +28,29 @@
           href: quickstart-v2-javascript-auth-code.md
         - name: JavaScript - Flux implicite
           href: quickstart-v2-javascript.md
-    - name: les applications web
+    - name: "Application\_web"
       items:
         - name: ASP.NET
           href: quickstart-v2-aspnet-webapp.md
-        - name: ASP.NET Core
+        - name: ASP.NET Core (connecter les utilisateurs)
           href: quickstart-v2-aspnet-core-webapp.md
-        - name: NodeJS
-          href: quickstart-v2-nodejs-webapp.md
+        - name: ASP.NET Core (appeler Microsoft Graph)
+          href: quickstart-v2-aspnet-core-webapp-calls-graph.md
+        - name: Node.js - MSAL | Préversion
+          href: quickstart-v2-nodejs-webapp-msal.md
+        - name: Node.js - Passport.js
           displayName: OIDC
         - name: Java
           href: quickstart-v2-java-webapp.md
         - name: Python
           href: quickstart-v2-python-webapp.md
-    - name: "API\_Web"
+    - name: API Web
       items:
         - name: ASP.NET
           href: quickstart-v2-dotnet-native-aspnet.md
         - name: ASP.NET Core
-          href: 'https://azure.microsoft.com/resources/samples/active-directory-dotnet-native-aspnetcore-v2'
-    - name: Applications de bureau et mobiles
+          href: quickstart-v2-aspnet-core-web-api.md
+    - name: Mobile et bureau
       items:
         - name: Android
           href: quickstart-v2-android.md
@@ -62,7 +61,7 @@
           href: quickstart-v2-uwp.md
         - name: Windows Desktop .NET
           href: quickstart-v2-windows-desktop.md
-    - name: Applications démon
+    - name: Démon ou service back-end
       items:
         - name: Console .NET Core (démon)
           href: quickstart-v2-netcore-daemon.md
@@ -70,20 +69,23 @@
           href: quickstart-v2-python-daemon.md
 - name: Tutoriels
   items:
-    - name: Applications monopages
-      displayName: SPA
+    - name: Application monopage (SPA)
       items:
         - name: Angular
           href: tutorial-v2-angular.md
+        - name: WebAssembly Blazor
+          href: tutorial-blazor-webassembly.md
         - name: JavaScript - Flux de code d’authentification
           href: tutorial-v2-javascript-auth-code.md
         - name: JavaScript - Flux implicite
           href: tutorial-v2-javascript-spa.md
-    - name: les applications web
+    - name: "Application\_web"
       items:
         - name: ASP.NET
           href: tutorial-v2-asp-webapp.md
-    - name: Applications de bureau et mobiles
+        - name: Serveur Blazor
+          href: tutorial-blazor-server.md
+    - name: Mobile et bureau
       items:
         - name: Android
           href: tutorial-v2-android.md
@@ -96,7 +98,7 @@
           href: tutorial-v2-windows-desktop.md
         - name: Utiliser le mode d’appareil partagé dans votre application Android
           href: tutorial-v2-shared-device-mode.md
-    - name: Applications démon
+    - name: Démon ou service back-end
       items:
         - name: Application web démon ASP.NET
           href: tutorial-v2-aspnet-daemon-web-app.md
@@ -114,18 +116,37 @@
           href: security-tokens.md
         - name: Modèle d'application
           href: application-model.md
-        - name: Flux de connexion des applications
-          href: app-sign-in-flow.md
-    - name: Flux d’authentification et scénarios d’application
+    - name: Bibliothèques d’authentification
+      displayName: 'msal, microsoft.identity.web'
+      items:
+        - name: Bibliothèque d’authentification Microsoft (MSAL)
+          href: msal-overview.md
+        - name: Bibliothèque Microsoft Identity Web
+          href: microsoft-identity-web.md
+          displayName: 'auth, library, .NET Core, msal'
+    - name: Scénarios d’application et flux d’authentification
       displayName: Auth flows
       href: authentication-flows-app-scenarios.md
+    - name: Applications et principaux de service
+      href: app-objects-and-service-principals.md
     - name: Bonnes pratiques pour la plateforme d’identité
       href: identity-platform-integration-checklist.md
-    - name: Scénarios d’application
+    - name: Autorisations et consentement
+      displayName: Scopes
+      href: v2-permissions-and-consent.md
+    - name: Accès conditionnel
+      href: v2-conditional-access-dev-guide.md
+    - name: Provisionnement automatique des utilisateurs (SCIM)
+      href: ../app-provisioning/user-provisioning.md?toc=/azure/active-directory/develop/toc.json&bc=/azure/active-directory/develop/breadcrumb/toc.json
+- name: Procédures
+  items:
+    - name: Scénario d’intégration de votre application
       displayName: App scenarios
       items:
         - name: Audience de connexion
           href: v2-supported-account-types.md
+        - name: Flux de connexion des applications
+          href: app-sign-in-flow.md
         - name: Application monopage
           displayName: SPA
           items:
@@ -258,110 +279,10 @@
               href: scenario-mobile-call-api.md
             - name: Passer en production
               href: scenario-mobile-production.md
-    - name: Bibliothèque d’authentification Microsoft (MSAL)
+    - name: Utiliser Microsoft Authentication Library
+      displayName: MSAL
       items:
-        - name: Vue d’ensemble
-          href: msal-overview.md
-        - name: .NET
-          displayName: 'xamarin, ASP.NET Core'
-          items:
-            - name: Initialiser des applications
-              href: msal-net-initializing-client-applications.md
-            - name: Assertions de client
-              href: msal-net-client-assertions.md
-            - name: Intégrer avec Azure AD B2C
-              href: msal-net-aad-b2c-considerations.md
-            - name: Intégration avec ADFS
-              href: msal-net-adfs-support.md
-            - name: Migrer vers MSAL.NET
-              href: msal-net-migration.md
-            - name: Migrer des applications Xamarin avec des répartiteurs vers MSAL.NET
-              href: msal-net-migration-ios-broker.md
-            - name: Considérations sur le navigateur web
-              href: msal-net-web-browsers.md
-            - name: Gérer les erreurs et exceptions
-              href: msal-handling-exceptions.md?tabs=dotnet
-            - name: Journalisation
-              href: msal-logging.md?tabs=dotnet
-        - name: Android
-          items:
-            - name: Comptes et profils de locataire
-              href: accounts-overview.md
-            - name: Agents d’autorisation
-              href: authorization-agents.md
-            - name: Authentification répartie
-              href: brokered-auth.md
-            - name: Intégrer avec Azure AD B2C
-              href: msal-android-b2c.md
-            - name: Migrer vers MSAL.Android
-              href: migrate-android-adal-msal.md
-            - name: Mode d’appareil partagé
-              href: msal-android-shared-devices.md
-              displayName: 'firstline worker, frontline worker, flw'
-            - name: Applications clientes publiques monocomptes et multicomptes
-              href: single-multi-account.md
-            - name: Journalisation
-              href: msal-logging.md?tabs=android
-        - name: iOS et macOS
-          items:
-            - name: Intégrer avec Azure AD B2C
-              href: 'config-authority.md#b2c'
-            - name: Migrer vers MSAL.iOS / macOS
-              href: migrate-objc-adal-msal.md
-            - name: Mode d’appareil partagé pour les appareils iOS
-              href: msal-ios-shared-devices.md
-              displayName: 'firstline worker, frontline worker, flw'
-            - name: Authentification unique entre les applications MSAL
-              href: single-sign-on-macos-ios.md
-            - name: Authentification unique entre les applications ADAL et MSAL
-              href: sso-between-adal-msal-apps-macos-ios.md
-            - name: "Résoudre les problèmes SSL (MSAL\_iOS/macOS)"
-              href: ssl-issues.md
-            - name: Gérer les erreurs et exceptions
-              href: msal-handling-exceptions.md?tabs=iosmacos
-            - name: Journalisation
-              href: msal-logging.md?tabs=swift
-        - name: Java
-          items:
-            - name: Migrer vers MSAL pour Java
-              href: migrate-adal-msal-java.md
-            - name: Prise en charge ADFS dans MSAL pour Java
-              href: msal-java-adfs-support.md
-            - name: Gérer les erreurs et exceptions
-              href: msal-handling-exceptions.md?tabs=java
-            - name: Journalisation
-              href: msal-logging.md?tabs=java
-        - name: JavaScript et Node.js
-          items:
-            - name: Initialiser des applications - JavaScript
-              href: msal-js-initializing-client-applications.md
-            - name: Intégrer avec Azure AD B2C
-              href: msal-b2c-overview.md
-            - name: Migrer vers MSAL.js
-              href: msal-compare-msal-js-and-adal-js.md
-            - name: Authentification unique avec MSAL.js
-              href: msal-js-sso.md
-            - name: Considérations - IE
-              href: msal-js-use-ie-browser.md
-            - name: Problèmes connus - Internet Explorer et Microsoft Edge
-              href: msal-js-known-issues-ie-edge-browsers.md
-            - name: Problèmes connus - Safari
-              href: msal-js-known-issues-safari-browser.md
-            - name: Gérer les erreurs et exceptions
-              href: msal-handling-exceptions.md?tabs=javascript
-            - name: Journalisation
-              href: msal-logging.md?tabs=javascript
-        - name: Python
-          items:
-            - name: Migrer vers MSAL Python
-              href: migrate-python-adal-msal.md
-            - name: Prise en charge ADFS dans MSAL pour Python
-              href: msal-python-adfs-support.md
-            - name: Gérer les erreurs et exceptions
-              href: msal-handling-exceptions.md?tabs=python
-            - name: Journalisation
-              href: msal-logging.md?tabs=python
-        - Name: Toutes les plateformes
+        - name: Toutes les plateformes
           items:
             - name: Flux d’authentification pris en charge
               href: msal-authentication-flows.md
@@ -376,12 +297,259 @@
               displayName: 'shared device mode, firstline worker, frontline worker, flw'
             - name: Gérer les changements de cookie SameSite dans le navigateur Chrome
               href: howto-handle-samesite-cookie-changes-chrome-browser.md
+            - name: Étendues pour une API web acceptant des jetons v1.0
+              href: msal-v1-app-scopes.md
+            - name: Migrer des applications d’ADAL vers MSAL
+              href: msal-migration.md
+              displayName: migration
+            - name: Clouds nationaux et MSAL
+              href: msal-national-cloud.md
+              displayName: 'china, germany, gov, 21vianet'
+        - name: MSAL.NET
+          displayName: 'xamarin, ASP.NET Core'
+          items:
+            - name: Initialiser des applications
+              href: msal-net-initializing-client-applications.md
+            - name: Assertions de client
+              href: msal-net-client-assertions.md
+            - name: Intégrer avec Azure AD B2C
+              href: msal-net-aad-b2c-considerations.md
+            - name: Intégration avec ADFS
+              href: msal-net-adfs-support.md
+            - name: Migrer vers MSAL.NET
+              href: msal-net-migration.md
+            - name: Migrer une application Xamarin Android utilisant un répartiteur vers MSAL.NET
+              href: msal-net-migration-android-broker.md
+            - name: Migrer une application Xamarin iOS utilisant un répartiteur vers MSAL.NET
+              href: msal-net-migration-ios-broker.md
+            - name: Considérations sur le navigateur web
+              href: msal-net-web-browsers.md
+            - name: Gérer les erreurs et les exceptions dans MSAL.NET
+              href: msal-error-handling-dotnet.md
+              displayName: 'handling, catch'
+            - name: Journalisation dans MSAL.NET
+              href: msal-logging.md?tabs=dotnet
+            - name: Acquérir un jeton à partir du cache
+              href: msal-net-acquire-token-silently.md
+            - name: Sérialisation de cache de jeton
+              href: msal-net-token-cache-serialization.md
+            - name: Effacer le cache de jeton
+              href: msal-net-clear-token-cache.md
+            - name: Instancier une application cliente publique
+              href: msal-net-instantiate-public-client-config-options.md
+            - name: Instancier un client confidentiel avec des options
+              href: msal-net-instantiate-confidential-client-config-options.md
+            - name: Obtenir le consentement de plusieurs ressources
+              href: msal-net-user-gets-consent-for-multiple-resources.md
+            - name: Fournir votre propre HttpClient
+              href: msal-net-provide-httpclient.md
+        - name: MSAL.js (JavaScript et Node.js)
+          items:
+            - name: Éviter les rechargements de page
+              href: msal-js-avoid-page-reloads.md
+            - name: Passer un état personnalisé dans les demandes d’authentification
+              href: msal-js-pass-custom-state-authentication-request.md
+            - name: Comportement d’invite
+              href: msal-js-prompt-behavior.md
+            - name: Migrer une SPA d’un flux de code implicite vers un flux de code d’authentification
+              href: migrate-spa-implicit-to-auth-code.md
+              displayName: 'authorization, single-page app, 2.0'
+            - name: Initialiser des applications - JavaScript
+              href: msal-js-initializing-client-applications.md
+            - name: Intégrer avec Azure AD B2C
+              href: msal-b2c-overview.md
+            - name: Migrer vers MSAL.js
+              href: msal-compare-msal-js-and-adal-js.md
+            - name: Authentification unique avec MSAL.js
+              href: msal-js-sso.md
+            - name: Considérations - IE
+              href: msal-js-use-ie-browser.md
+            - name: Problèmes connus - Internet Explorer et Microsoft Edge
+              href: msal-js-known-issues-ie-edge-browsers.md
+            - name: Gérer les erreurs et les exceptions dans MSAL.js
+              href: msal-error-handling-js.md
+              displayName: 'handling, catch'
+            - name: Journalisation dans MSAL.js
+              href: msal-logging.md?tabs=javascript
+        - name: MSAL pour iOS et macOS
+          items:
+            - name: Différences MSAL pour iOS et macOS
+              href: msal-differences-ios-macos.md
+            - name: Configurer le trousseau
+              href: howto-v2-keychain-objc.md
+            - name: Personnaliser les navigateurs et les vues web
+              href: customize-webviews.md
+            - name: Demander des revendications personnalisées
+              href: request-custom-claims.md
+            - name: Configuration de l’URI de redirection
+              href: redirect-uris-ios.md
+            - name: Intégrer avec Azure AD B2C
+              href: config-authority.md#b2c
+            - name: Migrer vers MSAL.iOS / macOS
+              href: migrate-objc-adal-msal.md
+            - name: Mode d’appareil partagé pour les appareils iOS
+              href: msal-ios-shared-devices.md
+              displayName: 'firstline worker, frontline worker, flw'
+            - name: Authentification unique entre les applications MSAL
+              href: single-sign-on-macos-ios.md
+            - name: Authentification unique entre les applications ADAL et MSAL
+              href: sso-between-adal-msal-apps-macos-ios.md
+            - name: "Résoudre les problèmes SSL (MSAL\_iOS/macOS)"
+              href: ssl-issues.md
+            - name: Gérer les erreurs et les exceptions dans MSAL pour iOS/macOS
+              href: msal-error-handling-ios.md
+              displayName: 'handling, catch'
+            - name: Journalisation dans MSAL pour iOS/macOS
+              href: msal-logging.md?tabs=swift
+        - name: MSAL pour Python
+          items:
+            - name: Sérialisation de cache de jeton personnalisée
+              href: msal-python-token-cache-serialization.md
+            - name: Migrer vers MSAL Python
+              href: migrate-python-adal-msal.md
+            - name: Prise en charge ADFS dans MSAL pour Python
+              href: msal-python-adfs-support.md
+            - name: Gérer les erreurs et les exceptions dans MSAL pour Python
+              href: msal-error-handling-python.md
+              displayName: 'handling, catch'
+            - name: Journalisation dans MSAL pour Python
+              href: msal-logging.md?tabs=python
+        - name: MSAL pour Java
+          items:
+            - name: Sérialisation de cache de jeton personnalisée
+              href: msal-java-token-cache-serialization.md
+            - name: Obtenir et supprimer des comptes dans le cache de jeton
+              href: msal-java-get-remove-accounts-token-cache.md
+            - name: Migrer vers MSAL pour Java
+              href: migrate-adal-msal-java.md
+            - name: Prise en charge ADFS dans MSAL pour Java
+              href: msal-java-adfs-support.md
+            - name: Gérer les erreurs et les exceptions dans MSAL pour Java
+              href: msal-error-handling-java.md
+              displayName: 'handling, catch'
+            - name: Journalisation dans MSAL pour Java
+              href: msal-logging.md?tabs=java
+        - name: MSAL pour Android
+          items:
+            - name: Comptes et profils de locataire
+              href: accounts-overview.md
+            - name: SSO avec MSAL Android
+              href: msal-android-single-sign-on.md
+            - name: Intégrer avec Azure AD B2C
+              href: msal-android-b2c.md
+            - name: Migrer vers MSAL.Android
+              href: migrate-android-adal-msal.md
+            - name: Mode d’appareil partagé
+              href: msal-android-shared-devices.md
+              displayName: 'firstline worker, frontline worker, flw'
+            - name: Applications clientes publiques monocomptes et multicomptes
+              href: single-multi-account.md
+            - name: Gérer les erreurs et les exceptions dans MSAL pour Android
+              href: msal-android-handling-exceptions.md
+              displayName: 'android, mobile, handling, catch'
+            - name: Journalisation dans MSAL pour Android
+              href: msal-logging.md?tabs=android
+    - name: Personnaliser des jetons et des revendications
+      items:
+        - name: Configurer une revendication de rôle
+          href: active-directory-enterprise-app-role-management.md
+        - name: Personnaliser des revendications avec le portail Azure
+          href: active-directory-saml-claims-customization.md
+        - name: Personnaliser des revendications avec PowerShell
+          href: active-directory-claims-mapping.md
+        - name: Configurer des revendications facultatives
+          href: active-directory-optional-claims.md
+        - name: Utiliser des attributs d’extension de schéma d’annuaire dans les revendications
+          href: active-directory-schema-extensions.md
+        - name: Configurer les durées de vie des jetons
+          href: configure-token-lifetimes.md
+        - name: Utiliser des API d’évaluation continue de l’accès
+          href: app-resilience-continuous-access-evaluation.md
+          displayName: cae
+    - name: Gérer les restrictions de cookie de navigateur
+      items:
+        - name: Gérer ITP dans Safari
+          href: reference-third-party-cookies-spas.md
+        - name: Gérer les changements de cookie SameSite dans Chrome
+          href: howto-handle-samesite-cookie-changes-chrome-browser.md
+    - name: Authentifier les applications et les services
+      items:
+        - name: Créer un principal de service avec Azure PowerShell
+          href: howto-authenticate-service-principal-powershell.md
+        - name: Création d’un principal de service à l’aide du portail Azure
+          href: howto-create-service-principal-portal.md
+    - name: Accepter les connexions de plusieurs locataires
+      items:
+        - name: Modifier les comptes pris en charge par une application
+          href: quickstart-modify-supported-accounts.md
+        - name: Activer les connexions multilocataires
+          href: howto-convert-app-to-be-multi-tenant.md
+        - name: Configurer le domaine du serveur de publication
+          displayName: 'verified domain, verified publisher domain'
+          href: howto-configure-publisher-domain.md
+    - name: Autoriser l’accès aux applications et aux ressources
+      items:
+        - name: Limiter votre application à un ensemble d’utilisateurs
+          href: howto-restrict-your-app-to-a-set-of-users.md
+        - name: Ajouter des rôles d’application dans votre application
+          href: howto-add-app-roles-in-azure-ad-apps.md
+    - name: Utiliser l’API Microsoft Graph
+      href: microsoft-graph-intro.md
+    - name: Mettre une application sur le marché
+      items:
+        - name: Suivre les instructions de personnalisation
+          displayName: Add branding
+          href: howto-add-branding-in-azure-ad-apps.md
+        - name: Configurer les conditions d’utilisation du service et la déclaration de confidentialité
+          href: howto-add-terms-of-service-privacy-statement.md
+        - name: Configurer la vérification de l’éditeur pour votre application
+          items:
+            - name: "Marquer votre application avec la mention «\_éditeur vérifié\_»"
+              href: mark-app-as-publisher-verified.md
+            - name: Résoudre les problèmes de vérification de l’éditeur
+              href: troubleshoot-publisher-verification.md
+        - name: Publier sur AppSource
+          href: v2-howto-get-appsource-certified.md
+        - name: Publier sur la galerie Azure AD App
+          href: v2-howto-app-gallery-listing.md
+        - name: "Publier sur le tableau de bord vendeur Office\_365"
+          href: /office/dev/store/use-the-seller-dashboard-to-submit-to-the-office-store
+    - name: Interroger Azure SQL Data Warehouse (sqlcmd) (Visual Studio)
+      items:
+        - name: Utiliser le service connecté Active Directory
+          href: vs-active-directory-add-connected-service.md
+        - name: Prise en main des projets .NET MVC
+          href: vs-active-directory-dotnet-getting-started.md
+        - name: Qu’est-il arrivé à mon projet .NET MVC ?
+          href: vs-active-directory-dotnet-what-happened.md
+        - name: Prise en main des projets WebAPI
+          href: vs-active-directory-webapi-getting-started.md
+        - name: Qu’est-il arrivé à mon projet WebAPI ?
+          href: vs-active-directory-webapi-what-happened.md
+        - name: Diagnostiquer les erreurs pendant l’authentification
+          href: vs-active-directory-error.md
+    - name: Supprimer un enregistrement d’application
+      href: quickstart-remove-app.md
+- name: Informations de référence
+  items:
+    - name: Glossaire
+      href: developer-glossary.md
+    - name: Configuration de l’application
+      displayName: App configuration
+      items:
+        - name: Comment et pourquoi les applications sont ajoutées à Azure AD
+          href: active-directory-how-applications-are-added.md
+        - name: Limitations et restrictions des URL de réponse/URI de redirection
+          href: reply-url.md
+        - name: Différences de validation par types de comptes pris en charge
+          href: supported-accounts-validation.md
+        - name: Application monolocataire et application multilocataire
+          href: single-and-multi-tenant-apps.md
+        - name: Vérification de l’éditeur
+          href: publisher-verification-overview.md
     - name: Protocoles d’authentification
       displayName: Auth protocol
       items:
-        - name: "Types d’applications et OAuth\_2.0"
-          displayName: 'App types, OAuth'
-          href: v2-app-types.md
         - name: "Protocoles OAuth\_2.0 et OpenID\_Connect"
           items:
             - name: "OAuth\_2.0 et OpenID Connect"
@@ -402,14 +570,18 @@
             - name: "Octroi des informations de mot de passe du propriétaire de la ressource OAuth\_2.0"
               displayName: ROPC
               href: v2-oauth-ropc.md
-            - name: "Flux d’assertion du porteur SAML OAuth\_2.0"
-              href: v2-saml-bearer-assertion.md
             - name: Substitution de la clé de signature
               href: active-directory-signing-key-rollover.md
+            - name: Scénarios d’échange de jetons
+              href: scenario-token-exchange-saml-oauth.md
             - name: Jetons d’ID
               href: id-tokens.md
             - name: Jetons d’accès
               href: access-tokens.md
+            - name: Configurer les durées de vie des jetons
+              href: active-directory-configurable-token-lifetimes.md
+            - name: Point de terminaison UserInfo
+              href: userinfo.md
             - name: Informations d’identification de certificat
               href: active-directory-certificate-credentials.md
         - name: "Protocole SAML\_2.0"
@@ -423,169 +595,9 @@
               href: active-directory-saml-protocol-reference.md
             - name: Jetons SAML
               href: reference-saml-tokens.md
-    - name: Configuration de l’application
-      displayName: App configuration
-      items:
-        - name: Applications et principaux de service
-          displayName: 'Apps, service principals'
-          href: app-objects-and-service-principals.md
-        - name: Comment et pourquoi les applications sont ajoutées à Azure AD
-          href: active-directory-how-applications-are-added.md
-        - name: Limitations et restrictions des URL de réponse/URI de redirection
-          href: reply-url.md
-        - name: Différences de validation par types de comptes pris en charge
-          href: supported-accounts-validation.md
-        - name: Application monolocataire et application multilocataire
-          href: single-and-multi-tenant-apps.md
-        - name: Vérification de l’éditeur (préversion)
-          href: publisher-verification-overview.md
-    - name: Autorisations et consentement
-      displayName: Scopes
-      items:
-        - name: Types d’autorisation et de consentement
-          href: v2-permissions-and-consent.md
-        - name: Framework de consentement
-          href: consent-framework.md
-        - name: Consentement de l’administrateur
-          href: v2-admin-consent.md
-        - name: Expériences du consentement d’application
-          displayName: App consent experiences
-          href: application-consent-experience.md
-    - name: Accès conditionnel
-      href: v2-conditional-access-dev-guide.md
-    - name: Clouds nationaux
-      items:
-        - name: Vue d’ensemble
-          href: authentication-national-cloud.md
-        - name: Authentification
-          href: msal-national-cloud.md
-    - name: Provisionnement automatique des utilisateurs (SCIM)
-      items:
-        - name: "Qu’est-ce que le provisionnement utilisateur automatique\_?"
-          href: /azure/active-directory/app-provisioning/user-provisioning
-        - name: Développer et intégrer un point de terminaison SCIM
-          href: /azure/active-directory/app-provisioning/use-scim-to-provision-users-and-groups
-        - name: Scénarios courants de provisionnement
-          href: /azure/active-directory/app-provisioning/scim-graph-scenarios
-        - name: Automatiser la configuration avec MS Graph
-          href: /azure/active-directory/app-provisioning/application-provisioning-configure-api
-- name: Guides pratiques
-  items:
-    - name: Authentification
-      items:
-        - name: Configurer une revendication de rôle
-          href: active-directory-enterprise-app-role-management.md
-        - name: Personnaliser des revendications - Portail
-          href: active-directory-saml-claims-customization.md
-        - name: Personnaliser des revendications - PowerShell
-          href: active-directory-claims-mapping.md
-        - name: Configurer des revendications facultatives
-          href: active-directory-optional-claims.md
-        - name: Configurer les durées de vie des jetons
-          href: active-directory-configurable-token-lifetimes.md
-        - name: Gérer les changements de cookie SameSite dans le navigateur Chrome
-          href: howto-handle-samesite-cookie-changes-chrome-browser.md
-        - name: Gérer ITP dans Safari
-          href: reference-third-party-cookies-spas.md
-    - name: Configuration de l’application
-      displayName: App configuration
-      items:
-        - name: Guide de formation sur l’inscription d’applications dans le portail Azure
-          href: app-registrations-training-guide-for-app-registrations-legacy-users.md
-        - name: Expérience d’inscription d’applications dans le portail Azure
-          href: app-registration-portal-training-guide.md
-        - name: Convertir une application monolocataire en application multilocataire
-          href: howto-convert-app-to-be-multi-tenant.md
-        - name: Créer un principal du service
-          items:
-            - name: Utilisation de Microsoft Azure PowerShell
-              href: howto-authenticate-service-principal-powershell.md
-            - name: Utilisation du portail Azure
-              href: howto-create-service-principal-portal.md
-        - name: Limiter votre application à un ensemble d’utilisateurs
-          href: howto-restrict-your-app-to-a-set-of-users.md
-        - name: Ajouter des rôles d’application dans votre application
-          href: howto-add-app-roles-in-azure-ad-apps.md
-        - name: Suivre les instructions de personnalisation
-          displayName: Add branding
-          href: howto-add-branding-in-azure-ad-apps.md
-        - name: Configurer le domaine d'éditeur
-          href: howto-configure-publisher-domain.md
-        - name: Configurer les conditions d’utilisation du service et la déclaration de confidentialité
-          href: howto-add-terms-of-service-privacy-statement.md
-        - name: Configurer la vérification de l’éditeur pour votre application
-          items:
-            - name: Marquer votre application comme vérifiée par l’éditeur (préversion)
-              href: mark-app-as-publisher-verified.md
-            - name: Résoudre les problèmes de vérification de l’éditeur (préversion)
-              href: troubleshoot-publisher-verification.md
-    - name: Utiliser Microsoft Authentication Library
-      displayName: MSAL
-      items:
-        - name: MSAL.NET
-          items:
-            - name: Acquérir un jeton à partir du cache
-              href: msal-net-acquire-token-silently.md
-            - name: Sérialisation de cache de jeton
-              href: msal-net-token-cache-serialization.md
-            - name: Effacer le cache de jeton
-              href: msal-net-clear-token-cache.md
-            - name: Instancier une application cliente publique
-              href: msal-net-instantiate-public-client-config-options.md
-            - name: Instancier un client confidentiel avec des options
-              href: msal-net-instantiate-confidential-client-config-options.md
-            - name: Obtenir le consentement de plusieurs ressources
-              href: msal-net-user-gets-consent-for-multiple-resources.md
-            - name: Fournir votre propre HttpClient
-              href: msal-net-provide-httpclient.md
-        - name: MSAL.js
-          items:
-            - name: Éviter les rechargements de page
-              href: msal-js-avoid-page-reloads.md
-            - name: Passer un état personnalisé dans les demandes d’authentification
-              href: msal-js-pass-custom-state-authentication-request.md
-            - name: Comportement d’invite
-              href: msal-js-prompt-behavior.md
-        - name: MSAL pour iOS et macOS
-          items:
-            - name: Différences MSAL pour iOS et macOS
-              href: msal-differences-ios-macos.md
-            - name: Configurer le trousseau
-              href: howto-v2-keychain-objc.md
-            - name: Personnaliser les navigateurs et les vues web
-              href: customize-webviews.md
-            - name: Demander des revendications personnalisées
-              href: request-custom-claims.md
-            - name: Configuration de l’URI de redirection
-              href: redirect-uris-ios.md
-        - name: MSAL pour Python
-          items:
-            - name: Sérialisation de cache de jeton personnalisée
-              href: msal-python-token-cache-serialization.md
-        - name: MSAL pour Java
-          items:
-            - name: Sérialisation de cache de jeton personnalisée
-              href: msal-java-token-cache-serialization.md
-            - name: Obtenir et supprimer des comptes dans le cache de jeton
-              href: msal-java-get-remove-accounts-token-cache.md
-    - name: Utiliser l’API Microsoft Graph
-      href: microsoft-graph-intro.md
-    - name: Interroger Azure SQL Data Warehouse (sqlcmd) (Visual Studio)
-      items:
-        - name: Utiliser le service connecté Active Directory
-          href: vs-active-directory-add-connected-service.md
-        - name: Prise en main des projets .NET MVC
-          href: vs-active-directory-dotnet-getting-started.md
-        - name: Qu’est-il arrivé à mon projet .NET MVC ?
-          href: vs-active-directory-dotnet-what-happened.md
-        - name: Prise en main des projets WebAPI
-          href: vs-active-directory-webapi-getting-started.md
-        - name: Qu’est-il arrivé à mon projet WebAPI ?
-          href: vs-active-directory-webapi-what-happened.md
-        - name: Diagnostiquer les erreurs pendant l’authentification
-          href: vs-active-directory-error.md
-- name: Informations de référence
-  items:
+    - name: "Types d’applications et OAuth\_2.0"
+      displayName: 'App types, OAuth'
+      href: v2-app-types.md
     - name: Manifeste d’application
       href: reference-app-manifest.md
       displayName: app manifest
@@ -595,20 +607,70 @@
       displayName: 'MSAL, auth library, SDK'
       href: reference-v2-libraries.md
     - name: API d’identité et d’accès dans Microsoft Graph
-      href: 'https://docs.microsoft.com/graph/api/resources/azure-ad-overview'
+      href: /graph/api/resources/azure-ad-overview
     - name: Codes d’erreur d’authentification et d’autorisation
       displayName: AADSTS
       href: reference-aadsts-error-codes.md
     - name: Changements cassants
       href: reference-breaking-changes.md
+    - name: Authentification unique (SSO) pour mobile
+      href: mobile-sso-support-overview.md
+      displayName: 'android, ios'
+    - name: Autorisations et consentement
+      displayName: Scopes
+      items:
+        - name: Framework de consentement
+          href: consent-framework.md
+        - name: Consentement de l’administrateur
+          href: v2-admin-consent.md
+        - name: Expériences du consentement d’application
+          displayName: App consent experiences
+          href: application-consent-experience.md
+    - name: Points de terminaison d’authentification de cloud national
+      href: authentication-national-cloud.md
+      displayName: 'china, germany, gov, 21vianet'
+    - name: Provisionnement automatique des utilisateurs (SCIM)
+      items:
+        - name: Développer et intégrer un point de terminaison SCIM
+          href: ../app-provisioning/use-scim-to-provision-users-and-groups.md?toc=/azure/active-directory/develop/toc.json&bc=/azure/active-directory/develop/breadcrumb/toc.json
+        - name: Scénarios courants de provisionnement
+          href: ../app-provisioning/scim-graph-scenarios.md?toc=/azure/active-directory/develop/toc.json&bc=/azure/active-directory/develop/breadcrumb/toc.json
+        - name: Automatiser la configuration avec MS Graph
+          href: ../app-provisioning/application-provisioning-configure-api.md?toc=/azure/active-directory/develop/toc.json&bc=/azure/active-directory/develop/breadcrumb/toc.json
 - name: Ressources
   items:
-    - name: Glossaire
-      href: developer-glossary.md
     - name: Vidéos
       href: identity-videos.md
     - name: Blog développeur sur la plateforme d’identités Microsoft
       href: 'https://developer.microsoft.com/en-us/identity/blogs/'
+    - name: Articles d’aide sur le portail Azure
+      items:
+        - name: Valeurs par défaut de la durée de vie des jetons pour une application personnalisée
+          href: registration-config-change-token-lifetime-how-to.md
+        - name: Découvrir des points de terminaison
+          href: registration-config-how-to.md
+        - name: Sélectionner les autorisations pour une API donnée
+          href: perms-for-given-api.md
+        - name: Protocoles d’authentification
+          href: active-directory-authentication-protocols.md
+        - name: Différences entre les autorisations déléguées et d’application
+          href: delegated-and-app-perms.md
+        - name: Fonctionnement du consentement d’application
+          href: consent-framework-links.md
+        - name: Rechercher une API spécifique requise pour une application personnalisée
+          href: api-find-an-api-how-to.md
+        - name: Informations de référence sur l’inscription des applications
+          href: active-directory-v2-registration-portal.md
+        - name: Champs d’inscription du portail Azure pour les applications personnalisées
+          href: registration-config-specific-application-property-how-to.md
+        - name: Configurer une nouvelle application multilocataire
+          href: setup-multi-tenant-app.md
+        - name: Ajouter une application mutualisée dans la galerie d’applications Azure AD
+          href: registration-config-multi-tenant-application-add-to-gallery-how-to.md
+        - name: "Intégration avec Azure\_Active\_Directory"
+          href: active-directory-how-to-integrate.md
+        - name: Configurer l’authentification unique pour une application
+          href: registration-config-sso-how-to.md
     - name: Blog Azure AD
       href: 'https://cloudblogs.microsoft.com/enterprisemobility/?product=azure-active-directory'
     - name: Feuille de route Azure
@@ -616,7 +678,7 @@
     - name: Essayez Se connecter avec Microsoft
       href: 'https://azure.microsoft.com/develop/identity/signin/'
     - name: Identités gérées pour les ressources Azure
-      href: 'https://docs.microsoft.com/azure/active-directory/managed-service-identity/overview'
+      href: ../managed-identities-azure-resources/overview.md
     - name: Obtenir de l’aide
       displayName: 'support, help options'
       href: developer-support-help-options.md

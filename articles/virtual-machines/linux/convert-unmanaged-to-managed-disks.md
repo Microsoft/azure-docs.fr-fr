@@ -3,25 +3,25 @@ title: Convertir une machine virtuelle Linux pour transformer les disques non m
 description: Découvrez comment convertir une machine virtuelle Linux pour transformer les disques non managés en disques managés à l’aide d’Azure CLI.
 author: roygara
 ms.service: virtual-machines-linux
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 12/15/2017
 ms.author: rogarana
 ms.subservice: disks
-ms.openlocfilehash: 2774dcbd5fc5b01627b965c2c02d870412c8bf77
-ms.sourcegitcommit: 849bb1729b89d075eed579aa36395bf4d29f3bd9
+ms.openlocfilehash: 89035d26e05ca4b93dc271f02fef1afea24b0f20
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "78969690"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "88815332"
 ---
 # <a name="convert-a-linux-virtual-machine-from-unmanaged-disks-to-managed-disks"></a>Convertir les disques non managés d’une machine virtuelle Linux en disques managés
 
-Si vos machines virtuelles Linux existantes utilisent des disques non managés, vous pouvez les convertir pour qu’elles utilisent [Azure Disques managés](../linux/managed-disks-overview.md). Ce processus convertit le disque du système d’exploitation ainsi que tous les autres disques de données attachés.
+Si vos machines virtuelles Linux existantes utilisent des disques non managés, vous pouvez les convertir pour qu’elles utilisent [Azure Disques managés](../managed-disks-overview.md). Ce processus convertit le disque du système d’exploitation ainsi que tous les autres disques de données attachés.
 
 Cet article explique comment convertir des machines virtuelles avec Azure CLI. Si vous devez installer ou mettre à niveau l’interface, consultez [Installer Azure CLI](/cli/azure/install-azure-cli). 
 
 ## <a name="before-you-begin"></a>Avant de commencer
-* Consultez les [questions fréquentes (FAQ) sur la migration vers la fonctionnalité Disques managés](faq-for-disks.md#migrate-to-managed-disks).
+* Consultez les [questions fréquentes (FAQ) sur la migration vers la fonctionnalité Disques managés](../faq-for-disks.md#migrate-to-managed-disks).
 
 [!INCLUDE [virtual-machines-common-convert-disks-considerations](../../../includes/virtual-machines-common-convert-disks-considerations.md)]
 
@@ -104,4 +104,4 @@ Lorsque la migration est terminée, la machine virtuelle est arrêtée, puis red
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-Pour plus d’informations sur les options de stockage, voir la page [Vue d’ensemble d’Azure Disques managés](../windows/managed-disks-overview.md).
+Pour plus d’informations sur les options de stockage, voir la page [Vue d’ensemble d’Azure Disques managés](../managed-disks-overview.md).

@@ -2,31 +2,29 @@
 title: Accès à distance aux applications locales – Proxy d’application Azure Active Directory
 description: Le proxy d’application Azure Active Directory offre un accès à distance sécurisé pour les applications web. Après une authentification unique à Azure AD, les utilisateurs peuvent accéder aux applications cloud et locales par le biais d’une URL externe ou un portail d’applications interne. Par exemple, Application Proxy peut fournir un accès à distance et une authentification unique aux applications Bureau à distance, SharePoint, Teams, Tableau, Qlik et aux applications métier (LOB).
 services: active-directory
-author: msmimart
-manager: CelesteDG
+author: kenwith
+manager: celestedg
 ms.service: active-directory
 ms.subservice: app-mgmt
 ms.workload: identity
 ms.topic: conceptual
-ms.date: 05/09/2019
-ms.author: mimart
+ms.date: 07/14/2020
+ms.author: kenwith
 ms.reviewer: japere
-ms.collection: M365-identity-device-management
-ms.custom: has-adal-ref
-ms.openlocfilehash: 24e18f5b1766f0dde5e677ac40d24edd5597a20d
-ms.sourcegitcommit: 50ef5c2798da04cf746181fbfa3253fca366feaa
+ms.openlocfilehash: 9d620342d53bdae0b3a520000f6d240eb0e28d15
+ms.sourcegitcommit: d22a86a1329be8fd1913ce4d1bfbd2a125b2bcae
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82609950"
+ms.lasthandoff: 11/26/2020
+ms.locfileid: "96180590"
 ---
-# <a name="remote-access-to-on-premises-applications-through-azure-active-directorys-application-proxy"></a>Accès à distance aux applications locales via le service Proxy d’application Azure Active Directory
+# <a name="remote-access-to-on-premises-applications-through-azure-ad-application-proxy"></a>Accès à distance aux applications locales par le bais du service Proxy d'application Azure AD
 
 Le proxy d’application Azure Active Directory offre un accès à distance sécurisé pour les applications web. Après une authentification unique à Azure AD, les utilisateurs peuvent accéder aux applications cloud et locales par le biais d’une URL externe ou un portail d’applications interne. Par exemple, Application Proxy peut fournir un accès à distance et une authentification unique aux applications Bureau à distance, SharePoint, Teams, Tableau, Qlik et aux applications métier (LOB).
 
 Le Proxy d’application Azure AD est :
 
-- **Simple à utiliser**. Les utilisateurs peuvent accéder aux applications locales de la même manière qu’ils accèdent à O365 et à d’autres applications SaaS intégrées à Azure AD. Vous n’avez pas besoin de modifier ou de mettre à jour vos applications pour qu’elles fonctionnent avec le Proxy d’application.
+- **Simple à utiliser**. Les utilisateurs peuvent accéder aux applications locales de la même manière qu’ils accèdent aux applications Microsoft 365 et aux autres applications SaaS intégrées à Azure AD. Vous n’avez pas besoin de modifier ou de mettre à jour vos applications pour qu’elles fonctionnent avec le Proxy d’application.
 
 - **Sécurisé**. Les applications locales peuvent utiliser les contrôles d’autorisation et les analyses de sécurité d’Azure. Par exemple, les applications locales peuvent utiliser l’accès conditionnel et la vérification en deux étapes. Proxy d’application ne vous oblige à ouvrir les connexions entrantes par le biais de votre pare-feu.
 
@@ -38,12 +36,12 @@ Le Proxy d’application est une fonctionnalité d’Azure AD qui permet aux uti
 Proxy d’application fonctionne avec les ressources suivantes :
 
 * Applications web qui utilisent [l’authentification Windows intégrée](application-proxy-configure-single-sign-on-with-kcd.md) pour l’authentification
-* Applications web qui utilisent l’accès [basé sur un en-tête](application-proxy-configure-single-sign-on-with-ping-access.md) ou sur un formulaire
+* Applications web qui utilisent l’accès [basé sur un en-tête](./application-proxy-configure-single-sign-on-with-headers.md) ou sur un formulaire
 * API web que vous voulez exposer aux applications enrichies sur différents appareils
 * Applications hébergées derrière une [passerelle Bureau à distance](application-proxy-integrate-with-remote-desktop-services.md)
-* Applications clientes complètes intégrées à Active Directory Authentication Library (ADAL)
+* Applications clientes complètes intégrées à la bibliothèque d’authentification Microsoft (MSAL)
 
-Proxy d’application prend en charge l’authentification unique. Pour plus d’informations sur les méthodes prises en charge, consultez [Choix d’une méthode d’authentification unique](what-is-single-sign-on.md#choosing-a-single-sign-on-method).
+Proxy d’application prend en charge l’authentification unique. Pour plus d’informations sur les méthodes prises en charge, consultez [Choix d’une méthode d’authentification unique](sso-options.md#choosing-a-single-sign-on-method).
 
 Le proxy d’application est l’outil recommandé pour permettre aux utilisateurs distants d’accéder aux ressources internes. Proxy d’application remplace la nécessité d’un VPN ou d’un proxy inversé. Il n’est pas destiné aux utilisateurs internes sur le réseau d’entreprise.  Ces utilisateurs qui utilisent inutilement le proxy d’application peuvent ralentir les performances de manière inattendue et indésirable.
 
@@ -60,6 +58,11 @@ Le diagramme suivant montre comment Azure AD et Application Proxy fonctionnent e
 5. Le connecteur envoie la requête à l’application locale.
 6. La réponse est envoyée à l’utilisateur par le biais du connecteur et du service Proxy d’application.
 
+> [!NOTE]
+> Comme la plupart des agents hybrides Azure AD, le connecteur Proxy d’application ne nécessite pas l’ouverture de connexions entrantes via votre pare-feu. Le trafic utilisateur à l’étape 3 se termine au niveau du service de proxy d’application (dans Azure AD). Le connecteur Proxy d’application (local) est responsable du reste de la communication.
+>
+
+
 | Composant | Description |
 | --------- | ----------- |
 | Point de terminaison  | Le point de terminaison est une URL ou un [portail d’utilisateurs finaux](end-user-experiences.md). Les utilisateurs peuvent accéder à des applications en dehors de votre réseau au moyen d’une URL externe. Les utilisateurs au sein de votre réseau peuvent accéder à l’application par le biais d’une URL ou d’un portail d’utilisateurs finaux. Lorsque les utilisateurs passent par l’un de ces points de terminaison, ils s’authentifient dans Azure AD, puis sont acheminés via le connecteur vers l’application locale.|
@@ -71,5 +74,3 @@ Le diagramme suivant montre comment Azure AD et Application Proxy fonctionnent e
 
 ## <a name="next-steps"></a>Étapes suivantes
 Pour commencer à utiliser Proxy d’application, consultez [Tutoriel : Ajouter des applications locales pour un accès à distance via le service Proxy d’application](application-proxy-add-on-premises-application.md).
-
-Pour les dernières nouvelles et mises à jour, consultez le site [Application Proxy blog](https://blogs.technet.com/b/applicationproxyblog/)

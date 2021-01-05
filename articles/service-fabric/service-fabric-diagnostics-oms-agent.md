@@ -5,12 +5,12 @@ author: srrengar
 ms.topic: conceptual
 ms.date: 04/16/2018
 ms.author: srrengar
-ms.openlocfilehash: c3c1bf511f3313e7408d6ce90b73de60bd1309f7
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: b91a8a8742a5bdc9454ebcbd8894889084a12a79
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "79366743"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "86258678"
 ---
 # <a name="performance-monitoring-with-azure-monitor-logs"></a>Analyse des performances avec les journaux Azure Monitor
 
@@ -23,7 +23,7 @@ Cet article explique comment ajouter l’agent Log Analytics à un cluster sous 
 
 ## <a name="add-the-agent-extension-via-azure-cli"></a>Ajouter l’extension d’agent via Azure CLI
 
-La meilleure façon d’ajouter l’agent Log Analytics à un cluster est d’utiliser les API des groupes de machines virtuelles identiques avec Azure CLI. Si vous n’avez pas encore configuré Azure CLI, accédez au portail Azure, puis ouvrez une instance [Cloud Shell](../cloud-shell/overview.md) ou [installez Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli).
+La meilleure façon d’ajouter l’agent Log Analytics à un cluster est d’utiliser les API des groupes de machines virtuelles identiques avec Azure CLI. Si vous n’avez pas encore configuré Azure CLI, accédez au portail Azure, puis ouvrez une instance [Cloud Shell](../cloud-shell/overview.md) ou [installez Azure CLI](/cli/azure/install-azure-cli).
 
 1. Lorsque votre instance de Cloud Shell est demandée, veillez à vous trouver dans le même abonnement que votre ressource. Utilisez la commande `az account show` pour vérifier que la valeur « name » correspond à celle de l’abonnement de votre cluster.
 
@@ -67,13 +67,13 @@ Vous pouvez télécharger et modifier ces modèles pour déployer un cluster qui
 
 Maintenant que vous avez ajouté l’agent Log Analytics, accédez au portail Log Analytics pour choisir les compteurs de performances à collecter.
 
-1. Dans le portail Azure, accédez au groupe de ressources dans lequel vous avez créé la solution Service Fabric Analytics. Sélectionnez **ServiceFabric\<nomEspaceDeTravailLogAnalytics\>** .
+1. Dans le portail Azure, accédez au groupe de ressources dans lequel vous avez créé la solution Service Fabric Analytics. Sélectionnez **ServiceFabric\<nameOfLog AnalyticsWorkspace\>** .
 
 2. Cliquez sur **Log Analytics**.
 
 3. Cliquez sur **Paramètres avancés**.
 
-4. Cliquez sur **Données**, puis sur **Compteurs de performances Windows ou Linux**. Une liste des compteurs par défaut que vous pouvez choisir d’activer s’affiche, et vous pouvez également définir l’intervalle de collecte. En outre, vous pouvez ajouter [d’autres compteurs de performances](service-fabric-diagnostics-event-generation-perf.md) à collecter. Le format approprié est référencé dans cet [article](https://msdn.microsoft.com/library/windows/desktop/aa373193(v=vs.85).aspx).
+4. Cliquez sur **Données**, puis sur **Compteurs de performances Windows ou Linux**. Une liste des compteurs par défaut que vous pouvez choisir d’activer s’affiche, et vous pouvez également définir l’intervalle de collecte. En outre, vous pouvez ajouter [d’autres compteurs de performances](service-fabric-diagnostics-event-generation-perf.md) à collecter. Le format approprié est référencé dans cet [article](/windows/win32/perfctrs/specifying-a-counter-path).
 
 5. Cliquez sur **Enregistrer**, puis sur **OK**.
 
@@ -92,5 +92,5 @@ Maintenant que vous avez ajouté l’agent Log Analytics, accédez au portail Lo
 ## <a name="next-steps"></a>Étapes suivantes
 
 * Collectez les [compteurs de performances](service-fabric-diagnostics-event-generation-perf.md) dont vous avez besoin. Pour configurer l’agent Log Analytics de façon à collecter certains compteurs de performances, voir [Configurer les sources de données](../azure-monitor/platform/agent-data-sources.md#configuring-data-sources).
-* Configurez les journaux Azure Monitor de façon à paramétrer [l’alerte automatisée](../log-analytics/log-analytics-alerts.md) pour faciliter la détection et les diagnostics.
+* Configurez les journaux Azure Monitor de façon à paramétrer [l’alerte automatisée](../azure-monitor/platform/alerts-overview.md) pour faciliter la détection et les diagnostics.
 * En guise d’alternative, vous pouvez collecter des compteurs de performances via [l’extension Diagnostics Azure et les envoyer à Application Insights](service-fabric-diagnostics-event-aggregation-wad.md#add-the-application-insights-sink-to-the-resource-manager-template)

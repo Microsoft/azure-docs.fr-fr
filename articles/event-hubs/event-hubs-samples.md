@@ -1,29 +1,18 @@
 ---
 title: Exemples - Azure Event Hubs | Microsoft Docs
 description: Cet article fournit une liste d’exemples pour Azure Event Hubs qui se trouvent sur GitHub.
-services: event-hubs
-documentationcenter: na
-author: ShubhaVijayasarathy
-manager: timlt
-editor: ''
-ms.assetid: ''
-ms.service: event-hubs
-ms.custom: seodec18
-ms.devlang: na
 ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: na
-ms.date: 01/15/2020
-ms.author: shvija
-ms.openlocfilehash: da950c2219d3faf679953690d207372b64913ba8
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.date: 06/23/2020
+ms.custom: devx-track-azurecli
+ms.openlocfilehash: 2e0f8026683302f6b54924625b132e79cb194bad
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "77162056"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "87499418"
 ---
 # <a name="git-repositories-with-samples-for-azure-event-hubs"></a>Référentiels Git avec des exemples pour Azure Event Hubs 
-Vous trouverez des exemples Event Hubs sur [GitHub](https://github.com/Azure/azure-event-hubs/tree/master/samples). Ces exemples présentent les fonctionnalités clés [d’Azure Event Hubs](/azure/event-hubs/). Cette article attribue une catégorie et décrit les exemples disponibles, avec des liens vers chacun d’eux.
+Vous trouverez des exemples Event Hubs sur [GitHub](https://github.com/Azure/azure-event-hubs/tree/master/samples). Ces exemples présentent les fonctionnalités clés [d’Azure Event Hubs](./index.yml). Cette article attribue une catégorie et décrit les exemples disponibles, avec des liens vers chacun d’eux.
 
 ## <a name="net-samples"></a>Exemples relatifs à .NET
 
@@ -69,6 +58,6 @@ Vous trouverez des exemples pour les Event Hubs de la fonctionnalité Apache Kaf
 ## <a name="next-steps"></a>Étapes suivantes
 Pour plus d’informations sur les hubs d’événements, consultez les articles suivants :
 
-- [Vue d’ensemble d’Event Hubs](event-hubs-what-is-event-hubs.md)
+- [Vue d’ensemble d’Event Hubs](./event-hubs-about.md)
 - [Fonctionnalités Event Hubs](event-hubs-features.md)
 - [FAQ sur les hubs d’événements](event-hubs-faq.md)

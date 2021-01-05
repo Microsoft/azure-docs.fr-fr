@@ -3,15 +3,15 @@ title: Copier des données de blobs Stockage Azure vers Data Lake Storage Gen1
 description: Utiliser l’outil AdlCopy pour copier des données d’objets blob de Stockage Azure vers Azure Data Lake Storage Gen1
 author: twooley
 ms.service: data-lake-store
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 05/29/2018
 ms.author: twooley
-ms.openlocfilehash: ad408df140be49da2e50ef810285dd850e9da6a1
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: 84ee65b05af4393f49696875bda41df39e283d5d
+ms.sourcegitcommit: 829d951d5c90442a38012daaf77e86046018e5b9
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/27/2020
-ms.locfileid: "75638865"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "85980087"
 ---
 # <a name="copy-data-from-azure-storage-blobs-to-azure-data-lake-storage-gen1"></a>Copier des données d’objets blob de Stockage Azure vers Azure Data Lake Storage Gen1
 
@@ -45,7 +45,9 @@ Avant de commencer cet article, vous devez disposer des éléments suivants :
 
 L’outil AdlCopy utilise la syntaxe suivante.
 
-    AdlCopy /Source <Blob or Data Lake Storage Gen1 source> /Dest <Data Lake Storage Gen1 destination> /SourceKey <Key for Blob account> /Account <Data Lake Analytics account> /Units <Number of Analytics units> /Pattern
+```console
+AdlCopy /Source <Blob or Data Lake Storage Gen1 source> /Dest <Data Lake Storage Gen1 destination> /SourceKey <Key for Blob account> /Account <Data Lake Analytics account> /Units <Number of Analytics units> /Pattern
+```
 
 Les paramètres de la syntaxe sont décrits ci-après :
 
@@ -63,30 +65,40 @@ Les paramètres de la syntaxe sont décrits ci-après :
 1. Ouvrez une invite de commandes et accédez au répertoire où vous avez installé AdlCopy, généralement `%HOMEPATH%\Documents\adlcopy`.
 1. Exécutez la commande suivante pour copier un objet blob spécifique du conteneur source vers un dossier Azure Data Lake Storage Gen1 :
 
-        AdlCopy /source https://<source_account>.blob.core.windows.net/<source_container>/<blob name> /dest swebhdfs://<dest_adlsg1_account>.azuredatalakestore.net/<dest_folder>/ /sourcekey <storage_account_key_for_storage_container>
+    ```console
+    AdlCopy /source https://<source_account>.blob.core.windows.net/<source_container>/<blob name> /dest swebhdfs://<dest_adlsg1_account>.azuredatalakestore.net/<dest_folder>/ /sourcekey <storage_account_key_for_storage_container>
+    ```
 
     Par exemple :
 
-        AdlCopy /source https://mystorage.blob.core.windows.net/mycluster/HdiSamples/HdiSamples/WebsiteLogSampleData/SampleLog/909f2b.log /dest swebhdfs://mydatalakestorage.azuredatalakestore.net/mynewfolder/ /sourcekey uJUfvD6cEvhfLoBae2yyQf8t9/BpbWZ4XoYj4kAS5Jf40pZaMNf0q6a8yqTxktwVgRED4vPHeh/50iS9atS5LQ==
+    ```console
+    AdlCopy /source https://mystorage.blob.core.windows.net/mycluster/HdiSamples/HdiSamples/WebsiteLogSampleData/SampleLog/909f2b.log /dest swebhdfs://mydatalakestorage.azuredatalakestore.net/mynewfolder/ /sourcekey uJUfvD6cEvhfLoBae2yyQf8t9/BpbWZ4XoYj4kAS5Jf40pZaMNf0q6a8yqTxktwVgRED4vPHeh/50iS9atS5LQ==
+    ```
 
     >[!NOTE]
     >La syntaxe ci-dessus spécifie le fichier à copier vers un dossier dans le compte Data Lake Storage Gen1. L’outil de AdlCopy crée un dossier si le nom de dossier spécifié n’existe pas.
 
     Vous êtes invité à entrer les informations d’identification de l’abonnement Azure sous lequel vous disposez d’un compte Azure Data Lake Storage Gen1. Vous devez voir une sortie similaire à ce qui suit :
 
-        Initializing Copy.
-        Copy Started.
-        100% data copied.
-        Finishing Copy.
-        Copy Completed. 1 file copied.
+    ```output
+    Initializing Copy.
+    Copy Started.
+    100% data copied.
+    Finishing Copy.
+    Copy Completed. 1 file copied.
+    ```
 
 1. Vous pouvez également copier tous les objets blob d’un conteneur donné vers le compte Azure Data Lake Storage Gen1 à l’aide de la commande suivante :
 
-        AdlCopy /source https://<source_account>.blob.core.windows.net/<source_container>/ /dest swebhdfs://<dest_adlsg1_account>.azuredatalakestore.net/<dest_folder>/ /sourcekey <storage_account_key_for_storage_container>        
+    ```console
+    AdlCopy /source https://<source_account>.blob.core.windows.net/<source_container>/ /dest swebhdfs://<dest_adlsg1_account>.azuredatalakestore.net/<dest_folder>/ /sourcekey <storage_account_key_for_storage_container>  
+    ```      
 
     Par exemple :
 
-        AdlCopy /Source https://mystorage.blob.core.windows.net/mycluster/example/data/gutenberg/ /dest adl://mydatalakestorage.azuredatalakestore.net/mynewfolder/ /sourcekey uJUfvD6cEvhfLoBae2yyQf8t9/BpbWZ4XoYj4kAS5Jf40pZaMNf0q6a8yqTxktwVgRED4vPHeh/50iS9atS5LQ==
+    ```console
+    AdlCopy /Source https://mystorage.blob.core.windows.net/mycluster/example/data/gutenberg/ /dest adl://mydatalakestorage.azuredatalakestore.net/mynewfolder/ /sourcekey uJUfvD6cEvhfLoBae2yyQf8t9/BpbWZ4XoYj4kAS5Jf40pZaMNf0q6a8yqTxktwVgRED4vPHeh/50iS9atS5LQ==
+    ```
 
 ### <a name="performance-considerations"></a>Considérations relatives aux performances
 
@@ -99,11 +111,15 @@ Vous pouvez également utiliser AdlCopy pour copier des données entre deux Azur
 1. Ouvrez une invite de commandes et accédez au répertoire où vous avez installé AdlCopy, généralement `%HOMEPATH%\Documents\adlcopy`.
 1. Exécutez la commande suivante pour copier un fichier spécifique d’un compte Data Lake Storage Gen1 vers un autre.
 
-        AdlCopy /Source adl://<source_adlsg1_account>.azuredatalakestore.net/<path_to_file> /dest adl://<dest_adlsg1_account>.azuredatalakestore.net/<path>/
+    ```console
+    AdlCopy /Source adl://<source_adlsg1_account>.azuredatalakestore.net/<path_to_file> /dest adl://<dest_adlsg1_account>.azuredatalakestore.net/<path>/
+    ```
 
     Par exemple :
 
-        AdlCopy /Source adl://mydatastorage.azuredatalakestore.net/mynewfolder/909f2b.log /dest adl://mynewdatalakestorage.azuredatalakestore.net/mynewfolder/
+    ```console
+    AdlCopy /Source adl://mydatastorage.azuredatalakestore.net/mynewfolder/909f2b.log /dest adl://mynewdatalakestorage.azuredatalakestore.net/mynewfolder/
+    ```
 
    > [!NOTE]
    > La syntaxe ci-dessus spécifie le fichier à copier vers un dossier dans le compte Data Lake Storage Gen1 de destination. L’outil de AdlCopy crée un dossier si le nom de dossier spécifié n’existe pas.
@@ -112,14 +128,18 @@ Vous pouvez également utiliser AdlCopy pour copier des données entre deux Azur
 
     Vous êtes invité à entrer les informations d’identification de l’abonnement Azure sous lequel vous disposez d’un compte Azure Data Lake Storage Gen1. Vous devez voir une sortie similaire à ce qui suit :
 
-        Initializing Copy.
-        Copy Started.|
-        100% data copied.
-        Finishing Copy.
-        Copy Completed. 1 file copied.
+    ```output
+    Initializing Copy.
+    Copy Started.|
+    100% data copied.
+    Finishing Copy.
+    Copy Completed. 1 file copied.
+    ```
 1. La commande suivante copie tous les fichiers depuis un dossier spécifique dans le compte Data Lake Storage Gen1 source vers un dossier dans le compte Data Lake Storage Gen1 de destination.
 
-        AdlCopy /Source adl://mydatastorage.azuredatalakestore.net/mynewfolder/ /dest adl://mynewdatalakestorage.azuredatalakestore.net/mynewfolder/
+    ```console
+    AdlCopy /Source adl://mydatastorage.azuredatalakestore.net/mynewfolder/ /dest adl://mynewdatalakestorage.azuredatalakestore.net/mynewfolder/
+    ```
 
 ### <a name="performance-considerations"></a>Considérations relatives aux performances
 
@@ -138,15 +158,21 @@ Pour utiliser votre compte Data Lake Analytics avec AdlCopy pour copier des donn
 
 Exécutez la commande suivante pour copier à partir d’un objet blob Azure Storage vers un compte Data Lake Storage Gen1 l’aide du compte Data Lake Analytics :
 
-    AdlCopy /source https://<source_account>.blob.core.windows.net/<source_container>/<blob name> /dest swebhdfs://<dest_adlsg1_account>.azuredatalakestore.net/<dest_folder>/ /sourcekey <storage_account_key_for_storage_container> /Account <data_lake_analytics_account> /Units <number_of_data_lake_analytics_units_to_be_used>
+```console
+AdlCopy /source https://<source_account>.blob.core.windows.net/<source_container>/<blob name> /dest swebhdfs://<dest_adlsg1_account>.azuredatalakestore.net/<dest_folder>/ /sourcekey <storage_account_key_for_storage_container> /Account <data_lake_analytics_account> /Units <number_of_data_lake_analytics_units_to_be_used>
+```
 
 Par exemple :
 
-    AdlCopy /Source https://mystorage.blob.core.windows.net/mycluster/example/data/gutenberg/ /dest swebhdfs://mydatalakestorage.azuredatalakestore.net/mynewfolder/ /sourcekey uJUfvD6cEvhfLoBae2yyQf8t9/BpbWZ4XoYj4kAS5Jf40pZaMNf0q6a8yqTxktwVgRED4vPHeh/50iS9atS5LQ== /Account mydatalakeanalyticaccount /Units 2
+```console
+AdlCopy /Source https://mystorage.blob.core.windows.net/mycluster/example/data/gutenberg/ /dest swebhdfs://mydatalakestorage.azuredatalakestore.net/mynewfolder/ /sourcekey uJUfvD6cEvhfLoBae2yyQf8t9/BpbWZ4XoYj4kAS5Jf40pZaMNf0q6a8yqTxktwVgRED4vPHeh/50iS9atS5LQ== /Account mydatalakeanalyticaccount /Units 2
+```
 
 De même, exécutez la commande ci-après pour copier tous les fichiers à partir d’un dossier spécifique du compte Data Lake Storage Gen1 source vers un dossier du compte Data Lake Storage Gen1 de destination à l’aide du compte Data Lake Analytics :
 
-    AdlCopy /Source adl://mysourcedatalakestorage.azuredatalakestore.net/mynewfolder/ /dest adl://mydestdatastorage.azuredatalakestore.net/mynewfolder/ /Account mydatalakeanalyticaccount /Units 2
+```console
+AdlCopy /Source adl://mysourcedatalakestorage.azuredatalakestore.net/mynewfolder/ /dest adl://mydestdatastorage.azuredatalakestore.net/mynewfolder/ /Account mydatalakeanalyticaccount /Units 2
+```
 
 ### <a name="performance-considerations"></a>Considérations relatives aux performances
 
@@ -159,11 +185,15 @@ Dans cette section, vous apprenez à utiliser AdlCopy pour copier des données d
 1. Ouvrez une invite de commandes et accédez au répertoire où vous avez installé AdlCopy, généralement `%HOMEPATH%\Documents\adlcopy`.
 1. Exécutez la commande suivante pour copier tous les fichiers portant l’extension *.csv à partir d’un objet blob spécifique du conteneur source vers un dossier Data Lake Storage Gen1 :
 
-        AdlCopy /source https://<source_account>.blob.core.windows.net/<source_container>/<blob name> /dest swebhdfs://<dest_adlsg1_account>.azuredatalakestore.net/<dest_folder>/ /sourcekey <storage_account_key_for_storage_container> /Pattern *.csv
+    ```console
+    AdlCopy /source https://<source_account>.blob.core.windows.net/<source_container>/<blob name> /dest swebhdfs://<dest_adlsg1_account>.azuredatalakestore.net/<dest_folder>/ /sourcekey <storage_account_key_for_storage_container> /Pattern *.csv
+    ```
 
     Par exemple :
 
-        AdlCopy /source https://mystorage.blob.core.windows.net/mycluster/HdiSamples/HdiSamples/FoodInspectionData/ /dest adl://mydatalakestorage.azuredatalakestore.net/mynewfolder/ /sourcekey uJUfvD6cEvhfLoBae2yyQf8t9/BpbWZ4XoYj4kAS5Jf40pZaMNf0q6a8yqTxktwVgRED4vPHeh/50iS9atS5LQ== /Pattern *.csv
+    ```console
+    AdlCopy /source https://mystorage.blob.core.windows.net/mycluster/HdiSamples/HdiSamples/FoodInspectionData/ /dest adl://mydatalakestorage.azuredatalakestore.net/mynewfolder/ /sourcekey uJUfvD6cEvhfLoBae2yyQf8t9/BpbWZ4XoYj4kAS5Jf40pZaMNf0q6a8yqTxktwVgRED4vPHeh/50iS9atS5LQ== /Pattern *.csv
+    ```
 
 ## <a name="billing"></a>Facturation
 

@@ -1,6 +1,6 @@
 ---
 title: Démarrage rapide - Créer une machine virtuelle Azure VMware sur un cloud privé - Azure VMware Solutions by CloudSimple
-description: Explique comment créer une machine virtuelle Azure VMware sur un cloud privé CloudSimple
+description: Découvrez comment créer une machine virtuelle VMware sur un cloud privé CloudSimple. Accédez au portail CloudSimple s’effectue à partir du Portail Azure.
 author: sharaths-cs
 ms.author: b-shsury
 ms.date: 08/16/2019
@@ -8,12 +8,12 @@ ms.topic: article
 ms.service: azure-vmware-cloudsimple
 ms.reviewer: cynthn
 manager: dikamath
-ms.openlocfilehash: 4ac818cfd267b781366c0e32c9f93cc885dff99c
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.openlocfilehash: fd67a5a7f1bf665333e06c66f73c7f18727a3e12
+ms.sourcegitcommit: 6906980890a8321dec78dd174e6a7eb5f5fcc029
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "77566146"
+ms.lasthandoff: 10/22/2020
+ms.locfileid: "92427762"
 ---
 # <a name="create-vmware-virtual-machines-on-your-private-cloud"></a>Créer des machines virtuelles VMware sur votre cloud privé
 
@@ -28,7 +28,7 @@ Connectez-vous au portail Azure sur [https://portal.azure.com](https://portal.az
 1. Sélectionnez **Tous les services**.
 2. Recherchez **Services CloudSimple**.
 3. Sélectionnez le service CloudSimple où vous voulez créer votre cloud privé.
-4. Depuis la page **Vue d’ensemble**, cliquez sur **Accéder au portail CloudSimple** pour ouvrir un nouvel onglet de navigateur pour le portail CloudSimple.  Si vous y êtes invité, connectez-vous avec vos informations d’identification Azure.  
+4. Depuis la page **Vue d’ensemble** , cliquez sur **Accéder au portail CloudSimple** pour ouvrir un nouvel onglet de navigateur pour le portail CloudSimple.  Si vous y êtes invité, connectez-vous avec vos informations d’identification Azure.  
 
     ![Lancer le portail CloudSimple](media/launch-cloudsimple-portal.png)
 
@@ -36,7 +36,7 @@ Connectez-vous au portail Azure sur [https://portal.azure.com](https://portal.az
 
 Vous pouvez maintenant lancer vCenter pour configurer des stratégies et des machines virtuelles.
 
-Pour accéder à vCenter, démarrez depuis le portail CloudSimple. Sur la page d’accueil, sous **Tâches courantes**, cliquez sur **Lancer le client vSphere**.  Sélectionnez le cloud privé, puis cliquez sur **Lancer le client vSphere** sur le cloud privé.
+Pour accéder à vCenter, démarrez depuis le portail CloudSimple. Sur la page d’accueil, sous **Tâches courantes** , cliquez sur **Lancer le client vSphere**.  Sélectionnez le cloud privé, puis cliquez sur **Lancer le client vSphere** sur le cloud privé.
 
    ![Lancer le client vSphere](media/launch-vcenter-from-cloudsimple-portal.png)
 
@@ -46,7 +46,7 @@ Pour accéder à vCenter, démarrez depuis le portail CloudSimple. Sur la page d
   > Pour le chargement des fichiers ISO, utilisez le client HTML5 vSphere.  L’utilisation d’un client Flash peut entraîner une erreur.
 
 1. Récupérez le fichier ISO ou le modèle vSphere à charger sur vCenter pour créer une machine virtuelle et la mettre à disposition sur votre système local.
-2. Dans vCenter, cliquez sur l'icône **Disque** et sélectionnez **vsanDatastore**. Cliquez sur **Fichiers**, puis sur **Nouveau dossier**.
+2. Dans vCenter, cliquez sur l'icône **Disque** et sélectionnez **vsanDatastore**. Cliquez sur **Fichiers** , puis sur **Nouveau dossier**.
     ![ISO vCenter](media/vciso00.png)
 
 3. Créez un dossier intitulé « ISO et modèles ».
@@ -57,38 +57,38 @@ Pour accéder à vCenter, démarrez depuis le portail CloudSimple. Sur la page d
 
 1. Dans vCenter, cliquez sur l'icône **Hôtes et clusters**.
 
-2. Cliquez avec le bouton droit de la souris sur **Charge de travail**, puis sélectionnez **Nouvelle machine virtuelle**.
-    ![Nouvelle machine virtuelle](media/vcvm01.png)
+2. Cliquez avec le bouton droit de la souris sur **Charge de travail** , puis sélectionnez **Nouvelle machine virtuelle**.
+    ![Capture d’écran mettant en évidence l’option de menu Nouvelle machine virtuelle.](media/vcvm01.png)
 
-3. Sélectionnez **Créer une machine virtuelle**, puis cliquez sur **Suivant**.
-    ![Nouvelle machine virtuelle](media/vcvm02.png)
+3. Sélectionnez **Créer une machine virtuelle** , puis cliquez sur **Suivant**.
+    ![Capture d’écran mettant en évidence l’option Créer une machine virtuelle.](media/vcvm02.png)
 
 4. Nommez la machine, sélectionnez l’emplacement **Workload VM’s** (Machines virtuelles de charge de travail), puis cliquez sur **Suivant**.
-    ![Nouvelle machine virtuelle](media/vcvm03.png)
+    ![Capture d’écran mettant en évidence l’option Machines virtuelles de charge de travail.](media/vcvm03.png)
 
-5. Sélectionnez la ressource de calcul **Charge de travail**, puis cliquez sur **Suivant**.
-    ![Nouvelle machine virtuelle](media/vcvm04.png)
+5. Sélectionnez la ressource de calcul **Charge de travail** , puis cliquez sur **Suivant**.
+    ![Capture d’écran mettant en évidence la ressource Calcul de charge de travail.](media/vcvm04.png)
 
-6. Sélectionnez **vsanDatastore**, puis cliquez sur **Suivant**.
-    ![Nouvelle machine virtuelle](media/vcvm05.png)
+6. Sélectionnez **vsanDatastore** , puis cliquez sur **Suivant**.
+    ![Capture d’écran mettant en évidence l’option vsanDatastore.](media/vcvm05.png)
 
 7. Conservez la sélection de compatibilité ESXi 6.5 par défaut, puis cliquez sur **Suivant**.
-    ![Nouvelle machine virtuelle](media/vcvm06.png)
+    ![Capture d’écran mettant en évidence l’option de compatibilité ESXi 6.5 sélectionnée.](media/vcvm06.png)
 
 8. Sélectionnez le système d’exploitation invité correspondant à l’ISO de la machine virtuelle que vous créez, puis cliquez sur **Suivant**.
-    ![Nouvelle machine virtuelle](media/vcvm07.png)
+    ![Capture d’écran montrant comment sélectionner le système d’exploitation invité de l’ISO pour la machine virtuelle.](media/vcvm07.png)
 
 9. Sélectionnez les options de disque dur et de réseau. Sélectionnez **Datastore ISO file** (Fichier ISO de magasin de données) comme nouveau lecteur CD/DVD.  Si vous souhaitez autoriser le trafic de l’adresse IP publique vers cette machine virtuelle, sélectionnez le réseau **vm-1**.
-    ![Nouvelle machine virtuelle](media/vcvm08.png)
+    ![Capture d’écran mettant en évidence l’endroit où sélectionner le fichier ISO du magasin de données.](media/vcvm08.png)
 
 10. Une fenêtre de sélection s'ouvre. Sélectionnez le fichier que vous avez chargé précédemment dans le dossier des fichiers ISO et des modèles, puis cliquez sur **OK**.
     ![Nouvelle machine virtuelle](media/vcvm10.png)
 
 11. Vérifiez les paramètres, puis cliquez sur **OK** pour créer la machine virtuelle.
-    ![Nouvelle machine virtuelle](media/vcvm11.png)
+    ![Capture d’écran montrant l’endroit où passer en revue les paramètres.](media/vcvm11.png)
 
 La machine virtuelle est désormais ajoutée aux ressources de calcul de la charge de travail et est prête à l’emploi. 
-![Nouvelle machine virtuelle](media/vcvm12.png)
+![Capture d’écran montrant la machine virtuelle ajoutée aux ressources de calcul de la charge de travail.](media/vcvm12.png)
 
 L'installation de base est maintenant terminée. Vous pouvez commencer à utiliser votre cloud privé de la même manière que vous utilisez votre infrastructure de machines virtuelles locale.
 
@@ -102,7 +102,7 @@ CloudSimple affecte un compte d’utilisateur vCenter par défaut ayant le nom d
 
 Les applications et charges de travail exécutées dans un environnement de cloud privé nécessitent une résolution de nom et des services DHCP pour la recherche et l’attribution d’adresses IP. Une infrastructure DHCP et DNS appropriée est nécessaire pour fournir ces services. Vous pouvez configurer une machine virtuelle dans vCenter pour fournir ces services dans votre environnement de cloud privé.
 
-Prérequis
+Conditions préalables requises
 
 * Un groupe de ports distribués avec un réseau VLAN configuré
 
@@ -122,9 +122,9 @@ Linux offre différents packages pour la configuration de serveurs DNS.  Voici u
 
 Ces rubriques Microsoft expliquent comment configurer un serveur Windows en tant que serveur DNS et en tant que serveur DHCP.
 
-[Serveur Windows en tant que serveur DNS](https://docs.microsoft.com/windows-server/networking/dns/dns-top)
+[Serveur Windows en tant que serveur DNS](/windows-server/networking/dns/dns-top)
 
-[Serveur Windows en tant que serveur DHCP](https://docs.microsoft.com/windows-server/networking/technologies/dhcp/dhcp-top)
+[Serveur Windows en tant que serveur DHCP](/windows-server/networking/technologies/dhcp/dhcp-top)
 
 ## <a name="customize-networking-configuration-optional"></a>Personnaliser la configuration réseau (facultatif)
 

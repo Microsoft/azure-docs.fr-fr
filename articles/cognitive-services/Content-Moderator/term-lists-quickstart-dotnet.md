@@ -10,12 +10,13 @@ ms.subservice: content-moderator
 ms.topic: conceptual
 ms.date: 10/24/2019
 ms.author: pafarley
-ms.openlocfilehash: 68da335875752d326ee718cade3d501623c70b49
-ms.sourcegitcommit: 2ec4b3d0bad7dc0071400c2a2264399e4fe34897
+ms.custom: devx-track-csharp
+ms.openlocfilehash: 93d90232fb530a6c14c40558fc6a9974a1da42de
+ms.sourcegitcommit: 693df7d78dfd5393a28bf1508e3e7487e2132293
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/28/2020
-ms.locfileid: "72935956"
+ms.lasthandoff: 10/28/2020
+ms.locfileid: "92900928"
 ---
 # <a name="check-text-against-a-custom-term-list-in-c"></a>Vérifier du texte par rapport à une liste de termes personnalisée en C#
 
@@ -32,7 +33,7 @@ Cet article fournit des informations et des exemples de code qui vont vous aider
 - Modifier les informations d’une liste.
 - Actualiser l’index afin que les changements apportés à la liste soient inclus dans une nouvelle analyse.
 
-Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) avant de commencer. 
+Si vous n’avez pas d’abonnement Azure, créez un [compte gratuit](https://azure.microsoft.com/free/cognitive-services/) avant de commencer. 
 
 ## <a name="sign-up-for-content-moderator-services"></a>S’inscrire aux services Content Moderator
 
@@ -42,7 +43,7 @@ Avant de pouvoir utiliser les services Content Moderator sur l’API REST ou le 
 
 1. Ajoutez un nouveau projet **Console app (.NET Framework)** à votre solution.
 
-1. Nommez le projet **TermLists**. Sélectionnez ce projet comme unique projet de démarrage de la solution.
+1. Nommez le projet **TermLists** . Sélectionnez ce projet comme unique projet de démarrage de la solution.
 
 ### <a name="install-required-packages"></a>Installer les packages nécessaires
 
@@ -133,10 +134,10 @@ private const double latencyDelay = 0.5;
 
 ## <a name="create-a-term-list"></a>Créer une liste de termes
 
-Vous créez une liste de termes avec **ContentModeratorClient.ListManagementTermLists.Create**. Le premier paramètre de **Create** est une chaîne qui contient un type MIME, qui doit être « application/json ». Pour plus d’informations, consultez les [informations de référence sur l’API](https://westus2.dev.cognitive.microsoft.com/docs/services/57cf755e3f9b070c105bd2c2/operations/57cf755e3f9b070868a1f67f). Le deuxième paramètre est un objet **Body** qui contient un nom et une description de la nouvelle liste de termes.
+Vous créez une liste de termes avec **ContentModeratorClient.ListManagementTermLists.Create** . Le premier paramètre de **Create** est une chaîne qui contient un type MIME, qui doit être « application/json ». Pour plus d’informations, consultez les [informations de référence sur l’API](https://westus2.dev.cognitive.microsoft.com/docs/services/57cf755e3f9b070c105bd2c2/operations/57cf755e3f9b070868a1f67f). Le deuxième paramètre est un objet **Body** qui contient un nom et une description de la nouvelle liste de termes.
 
 > [!NOTE]
-> Il existe une limite maximale de **5 listes de termes**, chaque liste ne devant **pas dépasser 10 000 termes**.
+> Il existe une limite maximale de **5 listes de termes** , chaque liste ne devant **pas dépasser 10 000 termes** .
 
 Ajoutez la définition de méthode suivante à la classe Program de l’espace de noms TermLists.
 
@@ -171,7 +172,7 @@ static string CreateTermList (ContentModeratorClient client)
 
 ## <a name="update-term-list-name-and-description"></a>Mettre à jour le nom et la description d’une liste de termes
 
-Mettez à jour les informations d’une liste de termes avec **ContentModeratorClient.ListManagementTermLists.Update**. Le premier paramètre d’**Update** est l’ID de la liste de termes. Le deuxième paramètre est un type MIME, qui doit être « application/json ». Pour plus d’informations, consultez les [informations de référence sur l’API](https://westus2.dev.cognitive.microsoft.com/docs/services/57cf755e3f9b070c105bd2c2/operations/57cf755e3f9b070868a1f685). Le troisième paramètre est un objet **Body** qui contient le nouveau nom et la nouvelle description.
+Mettez à jour les informations d’une liste de termes avec **ContentModeratorClient.ListManagementTermLists.Update** . Le premier paramètre d’ **Update** est l’ID de la liste de termes. Le deuxième paramètre est un type MIME, qui doit être « application/json ». Pour plus d’informations, consultez les [informations de référence sur l’API](https://westus2.dev.cognitive.microsoft.com/docs/services/57cf755e3f9b070c105bd2c2/operations/57cf755e3f9b070868a1f685). Le troisième paramètre est un objet **Body** qui contient le nouveau nom et la nouvelle description.
 
 Ajoutez la définition de méthode suivante à la classe Program de l’espace de noms TermLists.
 
@@ -238,7 +239,7 @@ static void GetAllTerms(ContentModeratorClient client, string list_id)
 
 Après avoir apporté des changements à une liste de termes, actualisez son index de recherche pour inclure ces changements la prochaine fois que vous utilisez la liste de termes pour passer le texte au crible. Ce fonctionnement est semblable à celui d’un moteur de recherche sur votre bureau (s’il est activé) ou d’un moteur de recherche web qui actualise en permanence son index pour inclure les nouveaux fichiers ou les nouvelles pages.
 
-Actualisez un index de recherche de liste de termes avec **ContentModeratorClient.ListManagementTermLists.RefreshIndexMethod**.
+Actualisez un index de recherche de liste de termes avec **ContentModeratorClient.ListManagementTermLists.RefreshIndexMethod** .
 
 Ajoutez la définition de méthode suivante à la classe Program de l’espace de noms TermLists.
 
@@ -258,7 +259,7 @@ static void RefreshSearchIndex (ContentModeratorClient client, string list_id)
 
 ## <a name="screen-text-using-a-term-list"></a>Passer au crible du texte à l’aide d’une liste de termes
 
-Passez au crible du texte à l’aide d’une liste de termes avec **ContentModeratorClient.TextModeration.ScreenText**, qui prend les paramètres suivants.
+Passez au crible du texte à l’aide d’une liste de termes avec **ContentModeratorClient.TextModeration.ScreenText** , qui prend les paramètres suivants.
 
 - La langue des termes de la liste.
 - Un type MIME, qui peut être « text/html », « text/xml », « text/markdown » ou « text/plain ».
@@ -269,7 +270,7 @@ Passez au crible du texte à l’aide d’une liste de termes avec **ContentMode
 
 Pour plus d’informations, consultez les [informations de référence sur l’API](https://westus2.dev.cognitive.microsoft.com/docs/services/57cf753a3f9b070c105bd2c1/operations/57cf753a3f9b070868a1f66f).
 
-**ScreenText** retourne un objet **Screen**, qui a une propriété **Terms** listant tous les termes détectés par Content Moderator lors du passage au crible du texte. Notez que si Content Moderator n’a détecté aucun terme lors du passage au crible du texte, la propriété **Terms** a la valeur **null**.
+**ScreenText** retourne un objet **Screen** , qui a une propriété **Terms** listant tous les termes détectés par Content Moderator lors du passage au crible du texte. Notez que si Content Moderator n’a détecté aucun terme lors du passage au crible du texte, la propriété **Terms** a la valeur **null** .
 
 Ajoutez la définition de méthode suivante à la classe Program de l’espace de noms TermLists.
 
@@ -295,7 +296,7 @@ static void ScreenText (ContentModeratorClient client, string list_id, string te
             Console.WriteLine(String.Format("Found term: \"{0}\" from list ID {1} at index {2}.", term.Term, term.ListId, term.Index));
         }
     }
-    read.Sleep(throttleRate);
+    Thread.Sleep(throttleRate);
 }
 ```
 
@@ -303,9 +304,9 @@ static void ScreenText (ContentModeratorClient client, string list_id, string te
 
 La suppression d’un terme ou d’une liste est simple. Utilisez le SDK pour effectuer les tâches suivantes :
 
-- Supprimer un terme. (**ContentModeratorClient.ListManagementTerm.DeleteTerm**)
-- Supprimer tous les termes d’une liste sans supprimer la liste. (**ContentModeratorClient.ListManagementTerm.DeleteAllTerms**)
-- Supprimer une liste et tout son contenu. (**ContentModeratorClient.ListManagementTermLists.Delete**)
+- Supprimer un terme. ( **ContentModeratorClient.ListManagementTerm.DeleteTerm** )
+- Supprimer tous les termes d’une liste sans supprimer la liste. ( **ContentModeratorClient.ListManagementTerm.DeleteAllTerms** )
+- Supprimer une liste et tout son contenu. ( **ContentModeratorClient.ListManagementTermLists.Delete** )
 
 ### <a name="delete-a-term"></a>Supprimer un terme
 
@@ -364,7 +365,7 @@ static void DeleteTermList (ContentModeratorClient client, string list_id)
 
 ## <a name="compose-the-main-method"></a>Composer la méthode Main
 
-Ajoutez la définition de méthode **Main** à la classe **Program** de l’espace de noms **TermLists**. Pour finir, fermez la classe **Program** et l’espace de noms **TermLists**.
+Ajoutez la définition de méthode **Main** à la classe **Program** de l’espace de noms **TermLists** . Pour finir, fermez la classe **Program** et l’espace de noms **TermLists** .
 
 ```csharp
 static void Main(string[] args)

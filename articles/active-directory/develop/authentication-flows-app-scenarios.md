@@ -12,12 +12,12 @@ ms.workload: identity
 ms.date: 03/03/2020
 ms.author: jmprieur
 ms.custom: aaddev, identityplatformtop40, scenarios:getting-started
-ms.openlocfilehash: d6cb8cf4b97ed3882d41a4eb179f11bf05f42118
-ms.sourcegitcommit: 3abadafcff7f28a83a3462b7630ee3d1e3189a0e
+ms.openlocfilehash: 383bdaebaa8a1795a9bfddb7da23e172aea111a0
+ms.sourcegitcommit: d6e92295e1f161a547da33999ad66c94cf334563
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82593163"
+ms.lasthandoff: 12/07/2020
+ms.locfileid: "96762932"
 ---
 # <a name="authentication-flows-and-application-scenarios"></a>Flux d’authentification et scénarios d’applications
 
@@ -93,13 +93,13 @@ Les applications utilisent les différents flux d’authentification pour connec
 
 ### <a name="single-page-application"></a>Application monopage
 
-De nombreuses applications web modernes sont créées en tant qu’applications monopages côté client. Ces applications utilisent JavaScript ou un framework comme Angular, Vue.js ou React.js. Ces applications s’exécutent dans un navigateur web.
+De nombreuses applications web modernes sont créées en tant qu’applications monopages côté client. Ces applications utilisent JavaScript ou un framework comme Angular, Vue ou React. Ces applications s’exécutent dans un navigateur web.
 
-Les applications monopages se différencient des applications web traditionnelles côté serveur au niveau des caractéristiques d’authentification. Avec la plateforme d’identités Microsoft, les applications monopages peuvent connecter des utilisateurs et obtenir des jetons pour accéder à des services back-end ou à des API web.
+Les applications monopages se différencient des applications web traditionnelles côté serveur au niveau des caractéristiques d’authentification. Avec la plateforme d’identités Microsoft, les applications monopages peuvent connecter des utilisateurs et obtenir des jetons pour accéder à des services back-end ou à des API web. La plateforme d’identité Microsoft propose deux types d'autorisation pour les applications JavaScript : 
 
-![Une application monopage](media/scenarios/spa-app.svg)
-
-Pour plus d’informations, consultez [Applications monopages](scenario-spa-overview.md).
+| MSAL.js (2.x) | MSAL.js (1.x) |
+|---|---|
+| ![Une autorisation pour application monopage](media/scenarios/spa-app-auth.svg) | ![Une application monopage implicite](media/scenarios/spa-app.svg) |
 
 ### <a name="web-app-that-signs-in-a-user"></a>Application web qui connecte un utilisateur
 
@@ -109,7 +109,7 @@ Pour protéger une application web qui connecte un utilisateur :
 
 - Si vous développez en .NET, vous utilisez ASP.NET ou ASP.NET Core avec le middleware OpenID Connect ASP.NET. La protection d’une ressource implique la validation du jeton de sécurité, qui est effectuée par les [extensions IdentityModel pour .NET](https://github.com/AzureAD/azure-activedirectory-identitymodel-extensions-for-dotnet/wiki), et non par les bibliothèques MSAL.
 
-- Si vous développez en Node.js, vous utilisez Passport.js.
+- Si vous développez en Node.js, vous utilisez [Passport.js](https://github.com/AzureAD/passport-azure-ad).
 
 Pour plus d’informations, consultez [Application web qui connecte les utilisateurs](scenario-web-app-sign-user-overview.md).
 
@@ -154,9 +154,9 @@ Certains scénarios, comme ceux qui impliquent un accès conditionnel lié à l�
 Pour plus d’informations, consultez [Application mobile qui appelle des API web](scenario-mobile-overview.md).
 
 > [!NOTE]
-> Vous pouvez appliquer des stratégies de protection des applications à votre application mobile qui utilise MSAL.iOS, MSAL.Android ou MSAL.NET sur Xamarin. Par exemple, les stratégies peuvent empêcher un utilisateur de copier du texte protégé. L’application mobile est gérée par Intune et reconnue par Intune en tant qu’application gérée. Pour plus d’informations, consultez l’article [Présentation du Microsoft Intune App SDK](https://docs.microsoft.com/intune/app-sdk).
+> Vous pouvez appliquer des stratégies de protection des applications à votre application mobile qui utilise MSAL.iOS, MSAL.Android ou MSAL.NET sur Xamarin. Par exemple, les stratégies peuvent empêcher un utilisateur de copier du texte protégé. L’application mobile est gérée par Intune et reconnue par Intune en tant qu’application gérée. Pour plus d’informations, consultez l’article [Présentation du Microsoft Intune App SDK](/intune/app-sdk).
 >
-> Le [SDK d’application Intune](https://docs.microsoft.com/intune/app-sdk-get-started) est distinct des bibliothèques MSAL et interagit avec Azure AD de façon autonome.
+> Le [SDK d’application Intune](/intune/app-sdk-get-started) est distinct des bibliothèques MSAL et interagit avec Azure AD de façon autonome.
 
 ### <a name="protected-web-api"></a>API web protégée
 
@@ -196,7 +196,14 @@ Les scénarios qui impliquent l’acquisition de jetons sont également mappés 
  </thead>
  <tbody>
   <tr>
-   <td><a href="scenario-spa-overview.md"><img alt="Single-Page App" src="media/scenarios/spa-app.svg"></a></td>
+   <td><a href="scenario-spa-overview.md"><img alt="Single-Page App with Auth code" src="media/scenarios/spa-app-auth.svg"></a></td>
+   <td><a href="scenario-spa-overview.md">Application à page unique</a></td>
+   <td><a href="v2-oauth2-auth-code-flow.md">Code d’autorisation</a> avec PKCE</td>
+   <td>Comptes professionnels ou scolaires, comptes personnels et Azure Active Directory B2C (Azure AD B2C)</td>
+ </tr>
+
+  <tr>
+   <td><a href="scenario-spa-overview.md"><img alt="Single-Page App with Implicit" src="media/scenarios/spa-app.svg"></a></td>
    <td><a href="scenario-spa-overview.md">Application à page unique</a></td>
    <td><a href="v2-oauth2-implicit-grant-flow.md">Implicite</a></td>
    <td>Comptes professionnels ou scolaires, comptes personnels et Azure Active Directory B2C (Azure AD B2C)</td>
@@ -210,7 +217,7 @@ Les scénarios qui impliquent l’acquisition de jetons sont également mappés 
  </tr>
 
   <tr>
-   <td><a href="scenario-web-app-call-api-overview.md"><img alt="Web app that signs in users" src="media/scenarios/web-app.svg"></a></td>
+   <td><a href="scenario-web-app-call-api-overview.md"><img alt="Web app that calls web APIs" src="media/scenarios/web-app.svg"></a></td>
    <td><a href="scenario-web-app-call-api-overview.md">Application web qui appelle des API web</a></td>
    <td><a href="v2-oauth2-auth-code-flow.md">Code d’autorisation</a></td>
    <td>Comptes professionnels ou scolaires, comptes personnels et Azure AD B2C</td>
@@ -236,7 +243,7 @@ Les scénarios qui impliquent l’acquisition de jetons sont également mappés 
   <tr>
    <td><a href="scenario-desktop-acquire-token.md#command-line-tool-without-a-web-browser"><img alt="Browserless application" src="media/scenarios/device-code-flow-app.svg"></a></td>
    <td><a href="v2-oauth2-device-code.md">Code d’appareil</a></td>
-   <td>Comptes professionnels ou scolaires</td>
+   <td>Comptes professionnels ou scolaires, comptes personnels et Azure AD B2C</td>
  </tr>
 
  <tr>
@@ -293,7 +300,8 @@ Dans la colonne Windows du tableau suivant, chaque fois que .NET Core est mentio
 
 |Scénario  | Windows | Linux | Mac | iOS | Android
 |--|--|--|--|--|--|--|
-| [Application à page unique](scenario-spa-overview.md) <br/>[![Application monopage](media/scenarios/spa-app.svg)](scenario-spa-overview.md) | ![MSAL.js](media/sample-v2-code/small_logo_js.png)<br/>MSAL.js | ![MSAL.js](media/sample-v2-code/small_logo_js.png)<br/>MSAL.js | ![MSAL.js](media/sample-v2-code/small_logo_js.png)<br/>MSAL.js | ![MSAL.js](media/sample-v2-code/small_logo_js.png) MSAL.js | ![MSAL.js](media/sample-v2-code/small_logo_js.png)<br/>MSAL.js
+| [Application à page unique](scenario-spa-overview.md) <br/>[![Autorisation d’application monopage](media/scenarios/spa-app-auth.svg)](scenario-spa-overview.md) | ![MSAL.js](media/sample-v2-code/small_logo_js.png)<br/>MSAL.js | ![MSAL.js](media/sample-v2-code/small_logo_js.png)<br/>MSAL.js | ![MSAL.js](media/sample-v2-code/small_logo_js.png)<br/>MSAL.js | ![MSAL.js](media/sample-v2-code/small_logo_js.png) MSAL.js | ![MSAL.js](media/sample-v2-code/small_logo_js.png)<br/>MSAL.js
+| [Application à page unique](scenario-spa-overview.md) <br/>[![Application monopage implicite](media/scenarios/spa-app.svg)](scenario-spa-overview.md) | ![MSAL.js](media/sample-v2-code/small_logo_js.png)<br/>MSAL.js | ![MSAL.js](media/sample-v2-code/small_logo_js.png)<br/>MSAL.js | ![MSAL.js](media/sample-v2-code/small_logo_js.png)<br/>MSAL.js | ![MSAL.js](media/sample-v2-code/small_logo_js.png) MSAL.js | ![MSAL.js](media/sample-v2-code/small_logo_js.png)<br/>MSAL.js
 | [Application web qui connecte les utilisateurs](scenario-web-app-sign-user-overview.md) <br/>[![Application web qui connecte les utilisateurs](media/scenarios/scenario-webapp-signs-in-users.svg)](scenario-web-app-sign-user-overview.md) | ![ASP.NET Core](media/sample-v2-code/small_logo_NETcore.png)<br/>ASP.NET Core | ![ASP.NET Core](media/sample-v2-code/small_logo_NETcore.png)<br/>ASP.NET Core | ![ASP.NET Core](media/sample-v2-code/small_logo_NETcore.png)<br/>ASP.NET Core
 | [Application web qui appelle des API web](scenario-web-app-call-api-overview.md) <br/> <br/>[![Application web qui appelle des API web](media/scenarios/web-app.svg)](scenario-web-app-call-api-overview.md) | ![ASP.NET Core](media/sample-v2-code/small_logo_NETcore.png)<br/>ASP.NET Core + MSAL.NET ![MSAL Java](media/sample-v2-code/small_logo_java.png) <br/>MSAL Java<br/>![MSAL Python](media/sample-v2-code/small_logo_python.png)<br/>Flask + MSAL Python| ![ASP.NET Core](media/sample-v2-code/small_logo_NETcore.png)<br/>ASP.NET Core + MSAL.NET ![MSAL Java](media/sample-v2-code/small_logo_java.png)<br/>MSAL Java<br/>![MSAL Python](media/sample-v2-code/small_logo_python.png)<br/>Flask + MSAL Python| ![ASP.NET Core](media/sample-v2-code/small_logo_NETcore.png)<br/>ASP.NET Core + MSAL.NET ![MSAL Java](media/sample-v2-code/small_logo_java.png)<br/>MSAL Java<br/> ![MSAL Python](media/sample-v2-code/small_logo_python.png)<br/>Flask + MSAL Python
 | [Application de bureau qui appelle des API web](scenario-desktop-overview.md) <br/> <br/>[![Application de bureau qui appelle des API web](media/scenarios/desktop-app.svg)](scenario-desktop-overview.md) ![Flux de code de l’appareil](media/scenarios/device-code-flow-app.svg) | ![.NET Core](media/sample-v2-code/small_logo_NETcore.png)MSAL.NET ![MSAL Java](media/sample-v2-code/small_logo_java.png)<br/>MSAL Java<br/> ![MSAL Python](media/sample-v2-code/small_logo_python.png)<br/>MSAL Python| ![.NET Core](media/sample-v2-code/small_logo_NETcore.png)MSAL.NET ![MSAL Java](media/sample-v2-code/small_logo_java.png)<br/>MSAL Java<br/>![MSAL Python](media/sample-v2-code/small_logo_python.png)<br/>MSAL Python| ![.NET Core](media/sample-v2-code/small_logo_NETcore.png)MSAL.NET ![MSAL Java](media/sample-v2-code/small_logo_java.png)<br/>MSAL Java<br/>![MSAL Python](media/sample-v2-code/small_logo_python.png)<br/>MSAL Python <br/> ![iOS / Objective C ou swift](media/sample-v2-code/small_logo_iOS.png) MSAL.objc |
@@ -305,5 +313,5 @@ Pour plus d’informations, consultez [Prise en charge Microsoft des bibliothèq
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-* En savoir plus sur les [notions de base de l’authentification](authentication-scenarios.md) et les [jetons d’accès dans la plateforme d’identités Microsoft](access-tokens.md)
+* En savoir plus sur les [notions de base de l’authentification](./authentication-vs-authorization.md) et les [jetons d’accès dans la plateforme d’identités Microsoft](access-tokens.md)
 * En savoir plus sur la [sécurisation de l’accès aux applications IoT](/azure/architecture/example-scenario/iot-aad/iot-aad)
