@@ -17,7 +17,6 @@ ms.locfileid: "108211450"
 ---
 | Ressource |  Limite |
 | --- | --- |
-| Hubs Virtual WAN par région | 1  |
 | Hubs Virtual WAN par WAN virtuel |Régions Azure |
 | Connexions VPN (branches) par hub | 1 000 |
 | Débit agrégé par passerelle VPN de site à site Virtual WAN | 20 Gbits/s |
